@@ -46,7 +46,7 @@ def test_age_from_birth():
         personne_de_reference = dict(birth = datetime.date(year - 40, 1, 1)),
         ).new_simulation(debug = True)
     assert_equal(simulation.calculate('age'), 40)
-    assert_equal(simulation.calculate('agem'), 40 * 12)
+#    assert_equal(simulation.calculate('agem'), 40 * 12)
 
 
 #def test_agem_from_age():

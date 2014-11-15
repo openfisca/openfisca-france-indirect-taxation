@@ -23,17 +23,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import collections
-import datetime
 import itertools
 import os
 
 import numpy as np
-from numpy.core.defchararray import startswith
 
 from openfisca_core import conv
-from openfisca_core.columns import AgeCol, BoolCol, FloatCol, IntCol, reference_input_variable
-from openfisca_core.formulas import (alternative_function, AlternativeFormulaColumn, dated_function, DatedFormulaColumn,
-    EntityToPersonColumn, PersonToEntityColumn, make_reference_formula_decorator, SimpleFormulaColumn)
+from openfisca_core.columns import AgeCol, DateCol, FloatCol, IntCol, reference_input_variable
+from openfisca_core.formulas import (make_reference_formula_decorator, SimpleFormulaColumn)
 from openfisca_core.scenarios import AbstractScenario
 from openfisca_core.taxbenefitsystems import AbstractTaxBenefitSystem
 
@@ -72,6 +69,9 @@ class Scenario(AbstractScenario):
                 menage['conjoint'] = id
             else:
                 menage.setdefault('enfants', []).append(id)
+
+        print menage
+        print individus
         conv.check(self.make_json_or_python_to_attributes())(dict(
             axes = axes,
             period = period,
@@ -132,11 +132,7 @@ class Scenario(AbstractScenario):
                                                     conv.default([]),
                                                     ),
                                                 conjoint = conv.pipe(
-#                                                    conv.test_isinstance(dict),
-#                                                    conv.uniform_sequence(
-#                                                        conv.test_isinstance((basestring, int)),
-#                                                        drop_none_items = True,
-#                                                        ),
+                                                    conv.test_isinstance(basestring, int),
                                                     conv.default(None),
                                                     ),
                                                 enfants = conv.pipe(
@@ -147,14 +143,10 @@ class Scenario(AbstractScenario):
                                                         ),
                                                     conv.default([]),
                                                     ),
-#                                                personne_de_reference = conv.pipe(
-#                                                    conv.test_isinstance(dict),
-#                                                    conv.uniform_sequence(
-#                                                        conv.test_isinstance((basestring, int)),
-#                                                        drop_none_items = True,
-#                                                        ),
-#                                                    conv.default(None),
-#                                                    ),
+                                                personne_de_reference = conv.pipe(
+                                                    conv.test_isinstance(basestring, int),
+                                                    conv.default(None),
+                                                    ),
                                                 ).iteritems(),
                                             (
                                                 (column.name, column.json_to_python)
@@ -184,25 +176,25 @@ class Scenario(AbstractScenario):
                                     ),
                                 ),
                             conv.test_isinstance(dict),
-#                            conv.uniform_mapping(
-#                                conv.pipe(
-#                                    conv.test_isinstance((basestring, int)),
-#                                    conv.not_none,
-#                                    ),
-#                                conv.pipe(
-#                                    conv.test_isinstance(dict),
-#                                    conv.struct(
-#                                        dict(
-#                                            (column.name, column.json_to_python)
-#                                            for column in column_by_name.itervalues()
-#                                            if column.entity == 'ind' and column.name not in (
-#                                                'idmen', 'quimen')
-#                                            ),
-#                                        drop_none_values = True,
-#                                        ),
-#                                    ),
-#                                drop_none_values = True,
-#                                ),
+                            conv.uniform_mapping(
+                                conv.pipe(
+                                    conv.test_isinstance((basestring, int)),
+                                    conv.not_none,
+                                    ),
+                                conv.pipe(
+                                    conv.test_isinstance(dict),
+                                    conv.struct(
+                                        dict(
+                                            (column.name, column.json_to_python)
+                                            for column in column_by_name.itervalues()
+                                            if column.entity == 'ind' and column.name not in (
+                                                'idmen', 'quimen')
+                                            ),
+                                        drop_none_values = True,
+                                        ),
+                                    ),
+                                drop_none_values = True,
+                                ),
                             conv.empty_to_none,
                             conv.not_none,
                             ),
@@ -211,6 +203,9 @@ class Scenario(AbstractScenario):
                 )(value, state = state)
             if error is not None:
                 return test_case, error
+
+            print "end of first step"
+            print test_case
 
             # Second validation step
             menages_individus_id = list(test_case['individus'].iterkeys())
@@ -221,9 +216,9 @@ class Scenario(AbstractScenario):
                         conv.struct(
                             dict(
                                 autres = conv.uniform_sequence(conv.test_in_pop(menages_individus_id)),
-                                conjoint = conv.uniform_sequence(conv.test_in_pop(menages_individus_id)),
+                                conjoint = conv.test_in_pop(menages_individus_id),
                                 enfants = conv.uniform_sequence(conv.test_in_pop(menages_individus_id)),
-                                personne_de_reference = conv.uniform_sequence(conv.test_in_pop(menages_individus_id)),
+                                personne_de_reference = conv.test_in_pop(menages_individus_id),
                                 ),
                             default = conv.noop,
                             ),
@@ -273,8 +268,9 @@ def init_country():
 
 
 reference_input_variable(
-    column = IntCol,
+    column = DateCol,
     entity_class = Individus,
+    is_permanent = True,
     label = "Date de naissance",
     name = 'birth',
     )
@@ -284,7 +280,7 @@ reference_input_variable(
     entity_class = Individus,
     is_permanent = True,
     label = u"Identifiant du ménage",
-    name = 'id_menage',
+    name = 'idmen',
     )
 
 
@@ -293,7 +289,7 @@ reference_input_variable(
     entity_class = Individus,
     is_permanent = True,
     label = u"Rôle dans le ménage",
-    name = 'role_dans_menage',
+    name = 'quimen',
     )
 
 
@@ -317,6 +313,7 @@ class age(SimpleFormulaColumn):
     entity_class = Individus
     label = u"Revenu disponible de l'individu"
 
+    @staticmethod
     def function(birth, period):
         return (np.datetime64(period.date) - birth).astype('timedelta64[Y]')
 
