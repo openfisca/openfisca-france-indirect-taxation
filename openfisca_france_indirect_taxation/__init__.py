@@ -306,7 +306,7 @@ reference_formula = make_reference_formula_decorator(entity_class_by_symbol = en
 class age(SimpleFormulaColumn):
     column = AgeCol
     entity_class = Individus
-    label = u"Revenu disponible de l'individu"
+    label = u"Age de l'individu"
 
     @staticmethod
     def function(birth, period):
