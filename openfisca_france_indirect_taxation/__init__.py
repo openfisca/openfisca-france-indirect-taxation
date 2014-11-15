@@ -70,8 +70,6 @@ class Scenario(AbstractScenario):
             else:
                 menage.setdefault('enfants', []).append(id)
 
-        print menage
-        print individus
         conv.check(self.make_json_or_python_to_attributes())(dict(
             axes = axes,
             period = period,
@@ -203,9 +201,6 @@ class Scenario(AbstractScenario):
                 )(value, state = state)
             if error is not None:
                 return test_case, error
-
-            print "end of first step"
-            print test_case
 
             # Second validation step
             menages_individus_id = list(test_case['individus'].iterkeys())
