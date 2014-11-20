@@ -308,8 +308,7 @@ class age(SimpleFormulaColumn):
     entity_class = Individus
     label = u"Age de l'individu"
 
-    @staticmethod
-    def function(birth, period):
+    def function(self, birth, period):
         return (np.datetime64(period.date) - birth).astype('timedelta64[Y]')
 
     def get_output_period(self, period):
