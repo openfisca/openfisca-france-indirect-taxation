@@ -23,25 +23,40 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import datetime
-
-from nose.tools import assert_equal
-
-from . import base
+from openfisca_core.columns import DateCol, FloatCol, IntCol, reference_input_variable
+from ..entities import Individus
 
 
-def test_age_from_birth():
-    year = 2013
-    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
-        period = year,
-        personne_de_reference = dict(birth = datetime.date(year - 40, 1, 1)),
-        ).new_simulation(debug = True)
-    assert_equal(simulation.calculate('age'), 40)
+reference_input_variable(
+    column = DateCol,
+    entity_class = Individus,
+    is_permanent = True,
+    label = "Date de naissance",
+    name = 'birth',
+    )
 
 
-if __name__ == '__main__':
-    import logging
-    import sys
+reference_input_variable(
+    column = IntCol,
+    entity_class = Individus,
+    is_permanent = True,
+    label = u"Identifiant du ménage",
+    name = 'idmen',
+    )
 
-    logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
-    test_age_from_birth()
+
+reference_input_variable(
+    column = IntCol,
+    entity_class = Individus,
+    is_permanent = True,
+    label = u"Rôle dans le ménage",
+    name = 'quimen',
+    )
+
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Individus,
+    label = "Salaire brut",
+    name = 'salaire_brut',
+    )

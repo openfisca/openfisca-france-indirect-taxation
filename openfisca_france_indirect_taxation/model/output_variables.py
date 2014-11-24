@@ -23,25 +23,26 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import datetime
-
-from nose.tools import assert_equal
-
-from . import base
+from openfisca_core.columns import AgeCol
+from ..entities import Individus
 
 
-def test_age_from_birth():
-    year = 2013
-    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
-        period = year,
-        personne_de_reference = dict(birth = datetime.date(year - 40, 1, 1)),
-        ).new_simulation(debug = True)
-    assert_equal(simulation.calculate('age'), 40)
+from openfisca_core.formulas import SimpleFormulaColumn
 
 
-if __name__ == '__main__':
-    import logging
-    import sys
+from openfisca_france_indirect_taxation import reference_formula
 
-    logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
-    test_age_from_birth()
+import numpy as np
+
+
+@reference_formula
+class age(SimpleFormulaColumn):
+    column = AgeCol
+    entity_class = Individus
+    label = u"Age de l'individu"
+
+    def function(self, birth, period):
+        return (np.datetime64(period.date) - birth).astype('timedelta64[Y]')
+
+    def get_output_period(self, period):
+        return period.start.period(u'year').offset('first-of')

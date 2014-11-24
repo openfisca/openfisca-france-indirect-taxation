@@ -25,15 +25,12 @@
 
 import os
 
-import numpy as np
 
-
-from openfisca_core.columns import AgeCol, DateCol, FloatCol, IntCol, reference_input_variable
-from openfisca_core.formulas import (make_reference_formula_decorator, SimpleFormulaColumn)
+from openfisca_core.formulas import make_reference_formula_decorator
 from openfisca_core.taxbenefitsystems import AbstractTaxBenefitSystem
 
 from .scenarios import Scenario
-from .entities import entity_class_by_symbol, Menages, Individus
+from .entities import entity_class_by_symbol
 
 COUNTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 CURRENCY = u"€"
@@ -51,63 +48,9 @@ def init_country():
     # Define class attributes after class declaration to avoid "name is not defined" exceptions.
     TaxBenefitSystem.Scenario = Scenario
 
-    from .model import input_variables
-    from .model import model
-
+    from model import input_variables
+    from model import output_variables
     return TaxBenefitSystem
 
 
-# Input variables
-
-
-reference_input_variable(
-    column = DateCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = "Date de naissance",
-    name = 'birth',
-    )
-
-reference_input_variable(
-    column = IntCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = u"Identifiant du ménage",
-    name = 'idmen',
-    )
-
-
-reference_input_variable(
-    column = IntCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = u"Rôle dans le ménage",
-    name = 'quimen',
-    )
-
-
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Individus,
-    label = "Salaire brut",
-    name = 'salaire_brut',
-    )
-
-
-# Calculated variables
-
-
 reference_formula = make_reference_formula_decorator(entity_class_by_symbol = entity_class_by_symbol)
-
-
-@reference_formula
-class age(SimpleFormulaColumn):
-    column = AgeCol
-    entity_class = Individus
-    label = u"Age de l'individu"
-
-    def function(self, birth, period):
-        return (np.datetime64(period.date) - birth).astype('timedelta64[Y]')
-
-    def get_output_period(self, period):
-        return period.start.period(u'year').offset('first-of')
