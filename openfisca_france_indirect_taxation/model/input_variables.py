@@ -24,7 +24,7 @@
 
 
 from openfisca_core.columns import DateCol, FloatCol, IntCol, reference_input_variable
-from ..entities import Individus
+from ..entities import Individus, Menages
 
 
 reference_input_variable(
@@ -41,7 +41,7 @@ reference_input_variable(
     entity_class = Individus,
     is_permanent = True,
     label = u"Identifiant du ménage",
-    name = 'idmen',
+    name = 'ident_men',
     )
 
 
@@ -51,6 +51,15 @@ reference_input_variable(
     is_permanent = True,
     label = u"Rôle dans le ménage",
     name = 'quimen',
+    )
+
+
+reference_input_variable(
+    column = IntCol,
+    entity_class = Menages,
+    is_permanent = True,
+    label = u"Pondération du ménage",
+    name = 'pondmen',
     )
 
 
