@@ -23,7 +23,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from openfisca_core.columns import DateCol, FloatCol, IntCol, reference_input_variable
+from openfisca_core.columns import DateCol, EnumCol, FloatCol, IntCol, reference_input_variable
 from ..entities import Individus, Menages
 
 
@@ -41,7 +41,7 @@ reference_input_variable(
     entity_class = Individus,
     is_permanent = True,
     label = u"Identifiant du ménage",
-    name = 'ident_men',
+    name = 'idmen',
     )
 
 
@@ -68,4 +68,12 @@ reference_input_variable(
     entity_class = Individus,
     label = "Salaire brut",
     name = 'salaire_brut',
+    )
+
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Individus,
+    label = "Consommation soumis à une TVA à taux plein",
+    name = 'consommation_tva_taux_plein',
     )

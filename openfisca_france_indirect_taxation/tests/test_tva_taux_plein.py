@@ -23,9 +23,30 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-def montant_tva(taux, depense):
-    """
-    Calcule le montant de tva sur un volume de dépense payé pour le taux adéquat
-    """
-    return depense*taux/(1+taux)
+import datetime
 
+from nose.tools import assert_equal
+
+from openfisca_core.tools import assert_near
+from openfisca_france_indirect_taxation.tests import base
+
+
+def test_tva_taux_plein():
+    year = 2013
+    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
+        period = year,
+        personne_de_reference = dict(
+            birth = datetime.date(year - 40, 1, 1),
+            consommation_tva_taux_plein = 100,
+            ),
+        ).new_simulation(debug = True)
+
+    assert_equal(simulation.calculate('consommation_tva_taux_plein'), 100)
+    assert_near(simulation.calculate('montant_tva_taux_plein'), 16.38, .01)
+
+if __name__ == '__main__':
+    import logging
+    import sys
+
+    logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
+    test_tva_taux_plein()

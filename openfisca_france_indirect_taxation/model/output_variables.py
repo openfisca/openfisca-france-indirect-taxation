@@ -23,17 +23,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from openfisca_core.columns import AgeCol
-from ..entities import Individus
-
-
-from openfisca_core.formulas import SimpleFormulaColumn
-
-
-from openfisca_france_indirect_taxation import reference_formula
-
 import numpy as np
 
+
+from openfisca_core.columns import AgeCol, FloatCol
+from openfisca_core.formulas import SimpleFormulaColumn
+from ..entities import Individus
+from openfisca_france_indirect_taxation import reference_formula
+
+from openfisca_france_indirect_taxation.model.tva import montant_tva
+from openfisca_france_indirect_taxation.param.param import P_tva_taux_plein
 
 @reference_formula
 class age(SimpleFormulaColumn):
@@ -46,3 +45,16 @@ class age(SimpleFormulaColumn):
 
     def get_output_period(self, period):
         return period.start.period(u'year').offset('first-of')
+
+
+@reference_formula
+class montant_tva_taux_plein(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Individus
+    label = u"Montant de la TVA acquitée à taux plein"
+
+    def function(self, consommation_tva_taux_plein):
+        return montant_tva(P_tva_taux_plein, consommation_tva_taux_plein)
+
+    def get_output_period(self, period):
+        return period
