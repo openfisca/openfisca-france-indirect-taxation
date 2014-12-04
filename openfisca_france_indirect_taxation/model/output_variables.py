@@ -33,6 +33,10 @@ from openfisca_france_indirect_taxation import reference_formula
 
 from openfisca_france_indirect_taxation.model.tva import montant_tva
 from openfisca_france_indirect_taxation.param.param import P_tva_taux_plein
+from openfisca_france_indirect_taxation.param.param import P_tva_taux_intermediaire
+from openfisca_france_indirect_taxation.param.param import P_tva_taux_reduit
+from openfisca_france_indirect_taxation.param.param import P_tva_taux_super_reduit
+
 
 @reference_formula
 class age(SimpleFormulaColumn):
@@ -55,6 +59,44 @@ class montant_tva_taux_plein(SimpleFormulaColumn):
 
     def function(self, consommation_tva_taux_plein):
         return montant_tva(P_tva_taux_plein, consommation_tva_taux_plein)
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class montant_tva_taux_intermediaire(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Individus
+    label = u"Montant de la TVA acquitée à taux intermediaire"
+
+    def function(self, consommation_tva_taux_intermediaire):
+        return montant_tva(P_tva_taux_intermediaire, consommation_tva_taux_intermediaire)
+
+    def get_output_period(self, period):
+        return period
+
+@reference_formula
+class montant_tva_taux_reduit(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Individus
+    label = u"Montant de la TVA acquitée à taux reduit"
+
+    def function(self, consommation_tva_taux_reduit):
+        return montant_tva(P_tva_taux_reduit, consommation_tva_taux_reduit)
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class montant_tva_taux_super_reduit(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Individus
+    label = u"Montant de la TVA acquitée à taux super reduit"
+
+    def function(self, consommation_tva_taux_super_reduit):
+        return montant_tva(P_tva_taux_super_reduit, consommation_tva_taux_super_reduit)
 
     def get_output_period(self, period):
         return period
