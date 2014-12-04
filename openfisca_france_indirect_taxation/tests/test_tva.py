@@ -44,13 +44,6 @@ def test_tva_taux_plein():
     assert_equal(simulation.calculate('consommation_tva_taux_plein'), 100)
     assert_near(simulation.calculate('montant_tva_taux_plein'), 16.38, .01)
 
-if __name__ == '__main__':
-    import logging
-    import sys
-
-    logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
-    test_tva_taux_plein()
-
 
 def test_tva_taux_intermediaire():
     year = 2013
@@ -65,15 +58,8 @@ def test_tva_taux_intermediaire():
     assert_equal(simulation.calculate('consommation_tva_taux_intermediaire'), 100)
     assert_near(simulation.calculate('montant_tva_taux_intermediaire'), 16.38, .01)
 
-if __name__ == '__main__':
-    import logging
-    import sys
 
-    logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
-    test_tva_taux_intermediaire()
-
-
-def test_tva_reduit():
+def test_tva_taux_reduit():
     year = 2013
     simulation = base.tax_benefit_system.new_scenario().init_single_entity(
         period = year,
@@ -86,12 +72,6 @@ def test_tva_reduit():
     assert_equal(simulation.calculate('consommation_tva_taux_reduit'), 100)
     assert_near(simulation.calculate('montant_tva_taux_reduit'), 16.38, .01)
 
-if __name__ == '__main__':
-    import logging
-    import sys
-
-    logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
-    test_tva_taux_reduit()
 
 def test_tva_taux_super_reduit():
     year = 2013
@@ -103,7 +83,7 @@ def test_tva_taux_super_reduit():
             ),
         ).new_simulation(debug = True)
 
-    assert_equal(simulation.calculate('consommation_tva_taux__super_reduit'), 100)
+    assert_equal(simulation.calculate('consommation_tva_taux_super_reduit'), 100)
     assert_near(simulation.calculate('montant_tva_taux_super_reduit'), 16.38, .01)
 
 if __name__ == '__main__':
@@ -111,4 +91,7 @@ if __name__ == '__main__':
     import sys
 
     logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
-    test_tva_taux__super_reduit()
+    test_tva_taux_plein()
+    test_tva_taux_reduit()
+    test_tva_taux_intermediaire()
+    test_tva_taux_super_reduit()

@@ -31,7 +31,7 @@ reference_input_variable(
     column = DateCol,
     entity_class = Individus,
     is_permanent = True,
-    label = "Date de naissance",
+    label = u"Date de naissance",
     name = 'birth',
     )
 
@@ -66,14 +66,35 @@ reference_input_variable(
 reference_input_variable(
     column = FloatCol,
     entity_class = Individus,
-    label = "Salaire brut",
+    label = u"Salaire brut",
     name = 'salaire_brut',
     )
-
 
 reference_input_variable(
     column = FloatCol,
     entity_class = Individus,
-    label = "Consommation soumis à une TVA à taux plein",
+    label = u"Consommation soumis à une TVA à taux intermédiaire",
+    name = 'consommation_tva_taux_intermediaire',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Individus,
+    label = u"Consommation soumis à une TVA à taux plein",
     name = 'consommation_tva_taux_plein',
     )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Individus,
+    label = u"Consommation soumis à une TVA à taux réduit",
+    name = 'consommation_tva_taux_reduit',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Individus,
+    label = u"Consommation soumis à une TVA à taux super réduit",
+    name = 'consommation_tva_taux_super_reduit',
+    )
+
