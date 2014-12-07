@@ -42,7 +42,7 @@ def test_tva_taux_plein():
         ).new_simulation(debug = True)
 
     assert_equal(simulation.calculate('consommation_tva_taux_plein'), 100)
-    assert_near(simulation.calculate('montant_tva_taux_plein'), 16.38, .01)
+    assert_near(simulation.calculate('montant_tva_taux_plein'), 100*(0.196)/(1+0.196), .01)
 
 
 def test_tva_taux_intermediaire():
@@ -56,7 +56,7 @@ def test_tva_taux_intermediaire():
         ).new_simulation(debug = True)
 
     assert_equal(simulation.calculate('consommation_tva_taux_intermediaire'), 100)
-    assert_near(simulation.calculate('montant_tva_taux_intermediaire'), 6.54, .01)
+    assert_near(simulation.calculate('montant_tva_taux_intermediaire'), 100*(0.07)/(1+0.07), .01)
 
 
 def test_tva_taux_reduit():
@@ -70,7 +70,7 @@ def test_tva_taux_reduit():
         ).new_simulation(debug = True)
 
     assert_equal(simulation.calculate('consommation_tva_taux_reduit'), 100)
-    assert_near(simulation.calculate('montant_tva_taux_reduit'), 5.21, .01)
+    assert_near(simulation.calculate('montant_tva_taux_reduit'), 100*(0.055)/(1+0.055), .01)
 
 
 def test_tva_taux_super_reduit():
@@ -84,7 +84,7 @@ def test_tva_taux_super_reduit():
         ).new_simulation(debug = True)
 
     assert_equal(simulation.calculate('consommation_tva_taux_super_reduit'), 100)
-    assert_near(simulation.calculate('montant_tva_taux_super_reduit'), 2.06, .01)
+    assert_near(simulation.calculate('montant_tva_taux_super_reduit'), 100*(0.021)/(1+0.021), .01)
 
 if __name__ == '__main__':
     import logging
