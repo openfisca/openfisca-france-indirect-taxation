@@ -42,7 +42,7 @@ def test_droit_d_accise_alcool_0211():
         ).new_simulation(debug = True)
 
     assert_equal(simulation.calculate('consommation_alcool_0211'), 100)
-    assert_near(simulation.calculate('montant_droit_d_accise_alcool_0211'), 100*(1.73)/(1+1.73), .01)
+    assert_near(simulation.calculate('montant_droit_d_accise_alcool_0211'), 100*(1.734)/(1+1.734), .01)
 
 
 def test_droit_d_accise_alcool_0212():
@@ -56,7 +56,7 @@ def test_droit_d_accise_alcool_0212():
         ).new_simulation(debug = True)
 
     assert_equal(simulation.calculate('consommation_alcool_0212'), 100)
-    assert_near(simulation.calculate('montant_droit_d_accise_alcool_0212'), 100*(0.02)/(1+0.02), .01)
+    assert_near(simulation.calculate('montant_droit_d_accise_alcool_0212'), 100*(0.015)/(1+0.015), .01)
 
 
 def test_droit_d_accise_alcool_0213():
@@ -70,7 +70,7 @@ def test_droit_d_accise_alcool_0213():
         ).new_simulation(debug = True)
 
     assert_equal(simulation.calculate('consommation_alcool_0213'), 100)
-    assert_near(simulation.calculate('montant_droit_d_accise_alcool_0213'), 100*(0.41)/(1+0.41), .01)
+    assert_near(simulation.calculate('montant_droit_d_accise_alcool_0213'), 100*(0.411)/(1+0.411), .01)
 
 
 if __name__ == '__main__':
