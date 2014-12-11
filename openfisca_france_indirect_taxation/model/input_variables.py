@@ -98,3 +98,23 @@ reference_input_variable(
     name = 'consommation_tva_taux_super_reduit',
     )
 
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Individus,
+    label = u"Consommation droit d'accise alcool 0211",
+    name = 'consommation_alcool_0211',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Individus,
+    label = u"Consommation droit d'accise alcool 0212",
+    name = 'consommation_alcool_0212',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Individus,
+    label = u"Consommation droit d'accise alcool 0213",
+    name = 'consommation_alcool_0213',
+    )
