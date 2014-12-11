@@ -32,10 +32,14 @@ from ..entities import Individus
 from openfisca_france_indirect_taxation import reference_formula
 
 from openfisca_france_indirect_taxation.model.tva import montant_tva
+from openfisca_france_indirect_taxation.model.droit_d_accise_alcool import montant_droit_d_accise_alcool
 from openfisca_france_indirect_taxation.param.param import P_tva_taux_plein
 from openfisca_france_indirect_taxation.param.param import P_tva_taux_intermediaire
 from openfisca_france_indirect_taxation.param.param import P_tva_taux_reduit
 from openfisca_france_indirect_taxation.param.param import P_tva_taux_super_reduit
+from openfisca_france_indirect_taxation.param.param import P_alcool_0211
+from openfisca_france_indirect_taxation.param.param import P_alcool_0212
+from openfisca_france_indirect_taxation.param.param import P_alcool_0213
 
 
 @reference_formula
@@ -76,6 +80,7 @@ class montant_tva_taux_intermediaire(SimpleFormulaColumn):
     def get_output_period(self, period):
         return period
 
+
 @reference_formula
 class montant_tva_taux_reduit(SimpleFormulaColumn):
     column = FloatCol
@@ -97,6 +102,44 @@ class montant_tva_taux_super_reduit(SimpleFormulaColumn):
 
     def function(self, consommation_tva_taux_super_reduit):
         return montant_tva(P_tva_taux_super_reduit, consommation_tva_taux_super_reduit)
+
+    def get_output_period(self, period):
+        return period
+
+@reference_formula
+class montant_droit_d_accise_alcool_0211(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Individus
+    label = u"Montant des droits d'accises sur les alcools poste 0211"
+
+    def function(self, consommation_alcool_0211):
+        return montant_droit_d_accise_alcool(P_alcool_0211, consommation_alcool_0211)
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class montant_droit_d_accise_alcool_0212(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Individus
+    label = u"Montant des droits d'accises sur les alcools poste 0212"
+
+    def function(self, consommation_alcool_0212):
+        return montant_droit_d_accise_alcool(P_alcool_0212, consommation_alcool_0212)
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class montant_droit_d_accise_alcool_0213(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Individus
+    label = u"Montant des droits d'accises sur les alcools poste 0213"
+
+    def function(self, consommation_alcool_0213):
+        return montant_droit_d_accise_alcool(P_alcool_0213, consommation_alcool_0213)
 
     def get_output_period(self, period):
         return period
