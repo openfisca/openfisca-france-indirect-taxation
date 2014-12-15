@@ -28,18 +28,15 @@ import numpy as np
 
 from openfisca_core.columns import AgeCol, FloatCol
 from openfisca_core.formulas import SimpleFormulaColumn
-from ..entities import Individus
+from ..entities import Individus, Menages
 from openfisca_france_indirect_taxation import reference_formula
 
 from openfisca_france_indirect_taxation.model.tva import montant_tva
 from openfisca_france_indirect_taxation.model.droit_d_accise_alcool import montant_droit_d_accise_alcool
-from openfisca_france_indirect_taxation.param.param import P_tva_taux_plein
-from openfisca_france_indirect_taxation.param.param import P_tva_taux_intermediaire
-from openfisca_france_indirect_taxation.param.param import P_tva_taux_reduit
-from openfisca_france_indirect_taxation.param.param import P_tva_taux_super_reduit
-from openfisca_france_indirect_taxation.param.param import P_alcool_0211
-from openfisca_france_indirect_taxation.param.param import P_alcool_0212
-from openfisca_france_indirect_taxation.param.param import P_alcool_0213
+from openfisca_france_indirect_taxation.param.param import (
+    P_tva_taux_plein, P_tva_taux_intermediaire, P_tva_taux_reduit,
+    P_tva_taux_super_reduit, P_alcool_0211, P_alcool_0212, P_alcool_0213
+    )
 
 
 @reference_formula
@@ -52,13 +49,88 @@ class age(SimpleFormulaColumn):
         return (np.datetime64(period.date) - birth).astype('timedelta64[Y]')
 
     def get_output_period(self, period):
-        return period.start.period(u'year').offset('first-of')
+        return period
 
+
+@reference_formula
+class consommation_tva_taux_intermediaire(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Consommation soumis à une TVA à taux intermédiaire"
+
+    def function(self, categorie_fiscale_4):
+        return categorie_fiscale_4
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class consommation_tva_taux_plein(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Consommation soumis à une TVA à taux plein"
+
+    def function(self, categorie_fiscale_3, categorie_fiscale_11):
+        return categorie_fiscale_3 + categorie_fiscale_11
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class consommation_tva_taux_reduit(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Consommation soumis à une TVA à taux réduit"
+
+    def function(self, categorie_fiscale_1):
+        return categorie_fiscale_1
+
+    def get_output_period(self, period):
+        return period
+
+
+@reference_formula
+class consommation_tva_taux_super_reduit(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Consommation soumis à une TVA à taux super réduit"
+
+    def function(self, categorie_fiscale_2):
+        return categorie_fiscale_2
+
+    def get_output_period(self, period):
+        return period
+
+#reference_input_variable(
+#    column = FloatCol,
+#    entity_class = Individus,
+#    label = u"Consommation droit d'accise alcool 0211",
+#    name = 'consommation_alcool_0211',
+#    )
+#
+#reference_input_variable(
+#    column = FloatCol,
+#    entity_class = Individus,
+#    label = u"Consommation droit d'accise alcool 0212",
+#    name = 'consommation_alcool_0212',
+#    )
+#
+#reference_input_variable(
+#    column = FloatCol,
+#    entity_class = Individus,
+#    label = u"Consommation droit d'accise alcool 0213",
+#    name = 'consommation_alcool_0213',
+#    )
+#
+#
+#
 
 @reference_formula
 class montant_tva_taux_plein(SimpleFormulaColumn):
     column = FloatCol
-    entity_class = Individus
+    entity_class = Menages
     label = u"Montant de la TVA acquitée à taux plein"
 
     def function(self, consommation_tva_taux_plein):
@@ -71,7 +143,7 @@ class montant_tva_taux_plein(SimpleFormulaColumn):
 @reference_formula
 class montant_tva_taux_intermediaire(SimpleFormulaColumn):
     column = FloatCol
-    entity_class = Individus
+    entity_class = Menages
     label = u"Montant de la TVA acquitée à taux intermediaire"
 
     def function(self, consommation_tva_taux_intermediaire):
@@ -84,7 +156,7 @@ class montant_tva_taux_intermediaire(SimpleFormulaColumn):
 @reference_formula
 class montant_tva_taux_reduit(SimpleFormulaColumn):
     column = FloatCol
-    entity_class = Individus
+    entity_class = Menages
     label = u"Montant de la TVA acquitée à taux reduit"
 
     def function(self, consommation_tva_taux_reduit):
@@ -97,7 +169,7 @@ class montant_tva_taux_reduit(SimpleFormulaColumn):
 @reference_formula
 class montant_tva_taux_super_reduit(SimpleFormulaColumn):
     column = FloatCol
-    entity_class = Individus
+    entity_class = Menages
     label = u"Montant de la TVA acquitée à taux super reduit"
 
     def function(self, consommation_tva_taux_super_reduit):
@@ -106,10 +178,11 @@ class montant_tva_taux_super_reduit(SimpleFormulaColumn):
     def get_output_period(self, period):
         return period
 
+
 @reference_formula
 class montant_droit_d_accise_alcool_0211(SimpleFormulaColumn):
     column = FloatCol
-    entity_class = Individus
+    entity_class = Menages
     label = u"Montant des droits d'accises sur les alcools poste 0211"
 
     def function(self, consommation_alcool_0211):
@@ -122,7 +195,7 @@ class montant_droit_d_accise_alcool_0211(SimpleFormulaColumn):
 @reference_formula
 class montant_droit_d_accise_alcool_0212(SimpleFormulaColumn):
     column = FloatCol
-    entity_class = Individus
+    entity_class = Menages
     label = u"Montant des droits d'accises sur les alcools poste 0212"
 
     def function(self, consommation_alcool_0212):
@@ -135,7 +208,7 @@ class montant_droit_d_accise_alcool_0212(SimpleFormulaColumn):
 @reference_formula
 class montant_droit_d_accise_alcool_0213(SimpleFormulaColumn):
     column = FloatCol
-    entity_class = Individus
+    entity_class = Menages
     label = u"Montant des droits d'accises sur les alcools poste 0213"
 
     def function(self, consommation_alcool_0213):

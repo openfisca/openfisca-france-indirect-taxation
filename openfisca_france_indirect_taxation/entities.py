@@ -41,13 +41,13 @@ class Individus(entities.AbstractEntity):
 
 class Menages(entities.AbstractEntity):
     column_by_name = collections.OrderedDict()
-    index_for_person_variable_name = 'idmen'
+    index_for_person_variable_name = 'ident_men'
     key_plural = 'menages'
     key_singular = 'menage'
     label = u'Logement principal'
     max_cardinality_by_role_key = {'conjoint': 1, 'personne_de_reference': 1}
     name_key = 'nom_menage'
-    role_for_person_variable_name = 'quimen'
+    role_for_person_variable_name = 'role_menage'
     roles_key = ['personne_de_reference', 'conjoint', 'enfants', 'autres']
     label_by_role_key = {
         'autres': u'Autres',

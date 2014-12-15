@@ -23,7 +23,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from openfisca_core.columns import DateCol, EnumCol, FloatCol, IntCol, reference_input_variable
+from openfisca_core.columns import DateCol, FloatCol, IntCol, reference_input_variable
 from ..entities import Individus, Menages
 
 
@@ -36,12 +36,41 @@ reference_input_variable(
     )
 
 
+for categorie_fiscale_index in range(18):
+    reference_input_variable(
+        column = FloatCol,
+        entity_class = Menages,
+        label = u"catégorie fiscale {}".format(categorie_fiscale_index),
+        name = 'categorie_fiscale_{}'.format(categorie_fiscale_index),
+        )
+
 reference_input_variable(
-    column = IntCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = u"Identifiant du ménage",
-    name = 'idmen',
+    column = FloatCol,
+    entity_class = Menages,
+    label = u"Consommation droit d'accise alcool 0211",
+    name = 'consommation_alcool_0211',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Menages,
+    label = u"Consommation droit d'accise alcool 0212",
+    name = 'consommation_alcool_0212',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Menages,
+    label = u"Consommation droit d'accise alcool 0213",
+    name = 'consommation_alcool_0213',
+    )
+
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Menages,
+    label = u"Décile de niveau de vie (revenu/unité de consommation",
+    name = 'decuc',
     )
 
 
@@ -49,8 +78,8 @@ reference_input_variable(
     column = IntCol,
     entity_class = Individus,
     is_permanent = True,
-    label = u"Rôle dans le ménage",
-    name = 'quimen',
+    label = u"Identifiant du ménage",
+    name = 'ident_men',
     )
 
 
@@ -64,57 +93,27 @@ reference_input_variable(
 
 
 reference_input_variable(
-    column = FloatCol,
+    column = IntCol,
     entity_class = Individus,
-    label = u"Salaire brut",
-    name = 'salaire_brut',
+    is_permanent = True,
+    label = u"Revenu total du ménage",
+    name = 'revtot',
     )
 
 reference_input_variable(
-    column = FloatCol,
+    column = IntCol,
     entity_class = Individus,
-    label = u"Consommation soumis à une TVA à taux intermédiaire",
-    name = 'consommation_tva_taux_intermediaire',
+    is_permanent = True,
+    label = u"Revenu total par unité de consommation du ménage",
+    name = 'revtotuc',
     )
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Individus,
-    label = u"Consommation soumis à une TVA à taux plein",
-    name = 'consommation_tva_taux_plein',
-    )
 
 reference_input_variable(
-    column = FloatCol,
+    column = IntCol,
     entity_class = Individus,
-    label = u"Consommation soumis à une TVA à taux réduit",
-    name = 'consommation_tva_taux_reduit',
+    is_permanent = True,
+    label = u"Rôle dans le ménage",
+    name = 'role_menage',
     )
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Individus,
-    label = u"Consommation soumis à une TVA à taux super réduit",
-    name = 'consommation_tva_taux_super_reduit',
-    )
-
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Individus,
-    label = u"Consommation droit d'accise alcool 0211",
-    name = 'consommation_alcool_0211',
-    )
-
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Individus,
-    label = u"Consommation droit d'accise alcool 0212",
-    name = 'consommation_alcool_0212',
-    )
-
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Individus,
-    label = u"Consommation droit d'accise alcool 0213",
-    name = 'consommation_alcool_0213',
-    )
