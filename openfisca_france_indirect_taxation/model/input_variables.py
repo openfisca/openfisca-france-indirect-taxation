@@ -75,7 +75,7 @@ reference_input_variable(
 
 
 reference_input_variable(
-    column = IntCol,
+    column = FloatCol,
     entity_class = Individus,
     is_permanent = True,
     label = u"Identifiant du ménage",
