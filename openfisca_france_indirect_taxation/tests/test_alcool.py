@@ -31,46 +31,31 @@ from openfisca_core.tools import assert_near
 from openfisca_france_indirect_taxation.tests import base
 
 
-def test_droit_d_accise_alcool_0211():
-    year = 2010
+def test_droit_d_accise_alcool():
+    year = 2013
     simulation = base.tax_benefit_system.new_scenario().init_single_entity(
         period = year,
         personne_de_reference = dict(
             birth = datetime.date(year - 40, 1, 1),
+            ),
+        menage = dict(
             consommation_alcool_0211 = 100,
-            ),
-        ).new_simulation(debug = True)
-
-    assert_equal(simulation.calculate('consommation_alcool_0211'), 100)
-    assert_near(simulation.calculate('montant_droit_d_accise_alcool_0211'), 100*(1.734)/(1+1.734), .01)
-
-
-def test_droit_d_accise_alcool_0212():
-    year = 2010
-    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
-        period = year,
-        personne_de_reference = dict(
-            birth = datetime.date(year - 40, 1, 1),
             consommation_alcool_0212 = 100,
-            ),
-        ).new_simulation(debug = True)
-
-    assert_equal(simulation.calculate('consommation_alcool_0212'), 100)
-    assert_near(simulation.calculate('montant_droit_d_accise_alcool_0212'), 100*(0.015)/(1+0.015), .01)
-
-
-def test_droit_d_accise_alcool_0213():
-    year = 2010
-    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
-        period = year,
-        personne_de_reference = dict(
-            birth = datetime.date(year - 40, 1, 1),
             consommation_alcool_0213 = 100,
+
             ),
         ).new_simulation(debug = True)
 
-    assert_equal(simulation.calculate('consommation_alcool_0213'), 100)
-    assert_near(simulation.calculate('montant_droit_d_accise_alcool_0213'), 100*(0.411)/(1+0.411), .01)
+    alcool_list = ["0211", "0212", "0123"]
+    consommations = [
+        "consommation_alcool_{}".format(taux) for taux in alcool_list]
+
+    for consommation in consommations:
+        assert_equal(simulation.calculate(consommation), 100)
+
+    assert_near(simulation.calculate('montant_droit_d_accise_alcool_0211'), 100 * 1.734 / (1 + 1.734), .01)
+    assert_near(simulation.calculate('montant_droit_d_accise_alcool_0212'), 100 * 0.015 / (1 + 0.015), .01)
+    assert_near(simulation.calculate('montant_droit_d_accise_alcool_0213'), 100 * 0.411 / (1 + 0.411), .01)
 
 
 if __name__ == '__main__':
@@ -78,6 +63,4 @@ if __name__ == '__main__':
     import sys
 
     logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
-    test_droit_d_accise_alcool_0211()
-    test_droit_d_accise_alcool_0212()
-    test_droit_d_accise_alcool_0213()
+    test_droit_d_accise_alcool()

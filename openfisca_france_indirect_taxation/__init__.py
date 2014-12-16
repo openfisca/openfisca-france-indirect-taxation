@@ -29,8 +29,9 @@ import os
 from openfisca_core.formulas import make_reference_formula_decorator
 from openfisca_core.taxbenefitsystems import AbstractTaxBenefitSystem
 
-from .scenarios import Scenario
 from .entities import entity_class_by_symbol
+from .param.param import legislation_json
+from .scenarios import Scenario
 
 COUNTRY_DIR = os.path.dirname(os.path.abspath(__file__))
 CURRENCY = u"€"
@@ -44,6 +45,7 @@ def init_country():
             entity_class.key_plural: entity_class
             for entity_class in entity_class_by_symbol.itervalues()
             }
+        legislation_json = legislation_json
 
     # Define class attributes after class declaration to avoid "name is not defined" exceptions.
     TaxBenefitSystem.Scenario = Scenario

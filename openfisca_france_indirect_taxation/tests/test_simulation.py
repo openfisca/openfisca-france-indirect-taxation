@@ -75,3 +75,5 @@ if __name__ == '__main__':
 
     df = test_survey_simulation()
     print df
+    print df.columns
+    print df.describe()

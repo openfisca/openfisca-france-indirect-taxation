@@ -23,9 +23,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-def montant_tva(taux, depense):
-    """
-    Calcule le montant de tva sur un volume de dépense payé pour le taux adéquat
-    """
-    return depense*taux/(1+taux)
+def tax_from_expense_including_tax(expense = None, tax_rate = None):
+    """Compute the tax amount form the expense including tax"""
+    return expense * tax_rate / (1 + tax_rate)
 

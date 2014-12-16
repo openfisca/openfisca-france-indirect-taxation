@@ -31,67 +31,37 @@ from openfisca_core.tools import assert_near
 from openfisca_france_indirect_taxation.tests import base
 
 
-def test_tva_taux_plein():
+def test_tva():
     year = 2013
     simulation = base.tax_benefit_system.new_scenario().init_single_entity(
         period = year,
         personne_de_reference = dict(
             birth = datetime.date(year - 40, 1, 1),
-            consommation_tva_taux_plein = 100,
             ),
-        ).new_simulation(debug = True)
-
-    assert_equal(simulation.calculate('consommation_tva_taux_plein'), 100)
-    assert_near(simulation.calculate('montant_tva_taux_plein'), 100*(0.196)/(1+0.196), .01)
-
-
-def test_tva_taux_intermediaire():
-    year = 2013
-    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
-        period = year,
-        personne_de_reference = dict(
-            birth = datetime.date(year - 40, 1, 1),
+        menage = dict(
             consommation_tva_taux_intermediaire = 100,
-            ),
-        ).new_simulation(debug = True)
-
-    assert_equal(simulation.calculate('consommation_tva_taux_intermediaire'), 100)
-    assert_near(simulation.calculate('montant_tva_taux_intermediaire'), 100*(0.07)/(1+0.07), .01)
-
-
-def test_tva_taux_reduit():
-    year = 2013
-    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
-        period = year,
-        personne_de_reference = dict(
-            birth = datetime.date(year - 40, 1, 1),
+            consommation_tva_taux_plein = 100,
             consommation_tva_taux_reduit = 100,
-            ),
-        ).new_simulation(debug = True)
-
-    assert_equal(simulation.calculate('consommation_tva_taux_reduit'), 100)
-    assert_near(simulation.calculate('montant_tva_taux_reduit'), 100*(0.055)/(1+0.055), .01)
-
-
-def test_tva_taux_super_reduit():
-    year = 2013
-    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
-        period = year,
-        personne_de_reference = dict(
-            birth = datetime.date(year - 40, 1, 1),
             consommation_tva_taux_super_reduit = 100,
             ),
         ).new_simulation(debug = True)
 
-    assert_equal(simulation.calculate('consommation_tva_taux_super_reduit'), 100)
-    assert_near(simulation.calculate('montant_tva_taux_super_reduit'), 100*(0.021)/(1+0.021), .01)
+    rate_list = ["taux_plein", "taux_intermediaire", "taux_reduit", "taux_super_reduit"]
+    consommations = [
+        "consommation_tva_{}".format(taux) for taux in rate_list]
+
+    for consommation in consommations:
+        assert_equal(simulation.calculate(consommation), 100)
+
+    assert_near(simulation.calculate('montant_tva_taux_plein'), 100 * 0.196 / (1 + 0.196), .01)
+    assert_near(simulation.calculate('montant_tva_taux_intermediaire'), 100 * 0.07 / (1 + 0.07), .01)
+    assert_near(simulation.calculate('montant_tva_taux_reduit'), 100 * 0.055 / (1 + 0.055), .01)
+    assert_near(simulation.calculate('montant_tva_taux_super_reduit'), 100 * 0.021 / (1 + 0.021), .01)
+
 
 if __name__ == '__main__':
     import logging
     import sys
 
     logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
-    test_tva_taux_plein()
-    test_tva_taux_reduit()
-    test_tva_taux_intermediaire()
-    test_tva_taux_super_reduit()
+    test_tva()

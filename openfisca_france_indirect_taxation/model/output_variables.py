@@ -25,17 +25,18 @@
 
 import numpy as np
 
-
+from openfisca_core.accessors import law
 from openfisca_core.columns import AgeCol, FloatCol
 from openfisca_core.formulas import SimpleFormulaColumn
 from ..entities import Individus, Menages
-from openfisca_france_indirect_taxation import reference_formula
+from .. import reference_formula
 
-from openfisca_france_indirect_taxation.model.tva import montant_tva
+from openfisca_france_indirect_taxation.model.tva import tax_from_expense_including_tax
 from openfisca_france_indirect_taxation.model.droit_d_accise_alcool import montant_droit_d_accise_alcool
 from openfisca_france_indirect_taxation.param.param import (
-    P_tva_taux_plein, P_tva_taux_intermediaire, P_tva_taux_reduit,
-    P_tva_taux_super_reduit, P_alcool_0211, P_alcool_0212, P_alcool_0213
+    # P_tva_taux_plein, P_tva_taux_intermediaire, P_tva_taux_reduit,
+    # P_tva_taux_super_reduit,
+    P_alcool_0211, P_alcool_0212, P_alcool_0213
     )
 
 
@@ -123,9 +124,7 @@ class consommation_tva_taux_super_reduit(SimpleFormulaColumn):
 #    label = u"Consommation droit d'accise alcool 0213",
 #    name = 'consommation_alcool_0213',
 #    )
-#
-#
-#
+
 
 @reference_formula
 class montant_tva_taux_plein(SimpleFormulaColumn):
@@ -133,8 +132,8 @@ class montant_tva_taux_plein(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux plein"
 
-    def function(self, consommation_tva_taux_plein):
-        return montant_tva(P_tva_taux_plein, consommation_tva_taux_plein)
+    def function(self, consommation_tva_taux_plein, taux = law.imposition_indirecte.tva.taux_plein):
+        return tax_from_expense_including_tax(consommation_tva_taux_plein, taux)
 
     def get_output_period(self, period):
         return period
@@ -146,8 +145,8 @@ class montant_tva_taux_intermediaire(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux intermediaire"
 
-    def function(self, consommation_tva_taux_intermediaire):
-        return montant_tva(P_tva_taux_intermediaire, consommation_tva_taux_intermediaire)
+    def function(self, consommation_tva_taux_intermediaire, taux = law.imposition_indirecte.tva.taux_intermediaire):
+        return tax_from_expense_including_tax(consommation_tva_taux_intermediaire, taux)
 
     def get_output_period(self, period):
         return period
@@ -159,8 +158,8 @@ class montant_tva_taux_reduit(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux reduit"
 
-    def function(self, consommation_tva_taux_reduit):
-        return montant_tva(P_tva_taux_reduit, consommation_tva_taux_reduit)
+    def function(self, consommation_tva_taux_reduit, taux = law.imposition_indirecte.tva.taux_reduit):
+        return tax_from_expense_including_tax(consommation_tva_taux_reduit, taux)
 
     def get_output_period(self, period):
         return period
@@ -172,8 +171,8 @@ class montant_tva_taux_super_reduit(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux super reduit"
 
-    def function(self, consommation_tva_taux_super_reduit):
-        return montant_tva(P_tva_taux_super_reduit, consommation_tva_taux_super_reduit)
+    def function(self, consommation_tva_taux_super_reduit, taux = law.imposition_indirecte.tva.taux_super_reduit):
+        return tax_from_expense_including_tax(consommation_tva_taux_super_reduit, taux)
 
     def get_output_period(self, period):
         return period
