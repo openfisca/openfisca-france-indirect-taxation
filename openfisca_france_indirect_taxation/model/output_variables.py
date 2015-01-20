@@ -46,11 +46,9 @@ class age(SimpleFormulaColumn):
     entity_class = Individus
     label = u"Age de l'individu"
 
-    def function(self, birth, period):
-        return (np.datetime64(period.date) - birth).astype('timedelta64[Y]')
-
-    def get_output_period(self, period):
-        return period
+    def function(self, simulation, period):
+        birth = simulation.calculate('birth', period)
+        return period, (np.datetime64(period.date) - birth).astype('timedelta64[Y]')
 
 
 @reference_formula
@@ -59,11 +57,9 @@ class consommation_tva_taux_intermediaire(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Consommation soumis à une TVA à taux intermédiaire"
 
-    def function(self, categorie_fiscale_4):
-        return categorie_fiscale_4
-
-    def get_output_period(self, period):
-        return period
+    def function(self, simulation, period):
+        categorie_fiscale_4 = simulation.calculate('categorie_fiscale_4', period)
+        return period, categorie_fiscale_4
 
 
 @reference_formula
@@ -72,11 +68,10 @@ class consommation_tva_taux_plein(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Consommation soumis à une TVA à taux plein"
 
-    def function(self, categorie_fiscale_3, categorie_fiscale_11):
-        return categorie_fiscale_3 + categorie_fiscale_11
-
-    def get_output_period(self, period):
-        return period
+    def function(self, simulation, period):
+        categorie_fiscale_3 = simulation.calculate('categorie_fiscale_11', period)
+        categorie_fiscale_11 = simulation.calculate('categorie_fiscale_11', period)
+        return period, categorie_fiscale_3 + categorie_fiscale_11
 
 
 @reference_formula
@@ -85,11 +80,9 @@ class consommation_tva_taux_reduit(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Consommation soumis à une TVA à taux réduit"
 
-    def function(self, categorie_fiscale_1):
-        return categorie_fiscale_1
-
-    def get_output_period(self, period):
-        return period
+    def function(self, simulation, period):
+        categorie_fiscale_1 = simulation.calculate('categorie_fiscale_1', period)
+        return period, categorie_fiscale_1
 
 
 @reference_formula
@@ -98,11 +91,10 @@ class consommation_tva_taux_super_reduit(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Consommation soumis à une TVA à taux super réduit"
 
-    def function(self, categorie_fiscale_2):
-        return categorie_fiscale_2
+    def function(self, simulation, period):
+        categorie_fiscale_2 = simulation.calculate('categorie_fiscale_2', period)
+        return period, categorie_fiscale_2
 
-    def get_output_period(self, period):
-        return period
 
 #reference_input_variable(
 #    column = FloatCol,
@@ -132,11 +124,10 @@ class montant_tva_taux_plein(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux plein"
 
-    def function(self, consommation_tva_taux_plein, taux = law.imposition_indirecte.tva.taux_plein):
-        return tax_from_expense_including_tax(consommation_tva_taux_plein, taux)
-
-    def get_output_period(self, period):
-        return period
+    def function(self, simulation, period):
+        consommation_tva_taux_plein = simulation.calculate('consommation_tva_taux_plein', period)
+        taux = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        return period, tax_from_expense_including_tax(consommation_tva_taux_plein, taux)
 
 
 @reference_formula
@@ -145,11 +136,10 @@ class montant_tva_taux_intermediaire(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux intermediaire"
 
-    def function(self, consommation_tva_taux_intermediaire, taux = law.imposition_indirecte.tva.taux_intermediaire):
-        return tax_from_expense_including_tax(consommation_tva_taux_intermediaire, taux)
-
-    def get_output_period(self, period):
-        return period
+    def function(self, simulation, period):
+        consommation_tva_taux_intermediaire = simulation.calculate('consommation_tva_taux_intermediaire')
+        taux = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
+        return period, tax_from_expense_including_tax(consommation_tva_taux_intermediaire, taux)
 
 
 @reference_formula
@@ -158,11 +148,10 @@ class montant_tva_taux_reduit(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux reduit"
 
-    def function(self, consommation_tva_taux_reduit, taux = law.imposition_indirecte.tva.taux_reduit):
-        return tax_from_expense_including_tax(consommation_tva_taux_reduit, taux)
-
-    def get_output_period(self, period):
-        return period
+    def function(self, simulation, period):
+        consommation_tva_taux_reduit = simulation.calculate('consommation_tva_taux_reduit', period)
+        taux = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_reduit
+        return period, tax_from_expense_including_tax(consommation_tva_taux_reduit, taux)
 
 
 @reference_formula
@@ -171,11 +160,10 @@ class montant_tva_taux_super_reduit(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux super reduit"
 
-    def function(self, consommation_tva_taux_super_reduit, taux = law.imposition_indirecte.tva.taux_super_reduit):
-        return tax_from_expense_including_tax(consommation_tva_taux_super_reduit, taux)
-
-    def get_output_period(self, period):
-        return period
+    def function(self, simulation, period):
+        consommation_tva_taux_super_reduit = simulation.calculate('consommation_tva_taux_super_reduit', period)
+        taux = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_super_reduit
+        return period, tax_from_expense_including_tax(consommation_tva_taux_super_reduit, taux)
 
 
 @reference_formula
@@ -184,11 +172,9 @@ class montant_droit_d_accise_alcool_0211(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Montant des droits d'accises sur les alcools poste 0211"
 
-    def function(self, consommation_alcool_0211):
-        return montant_droit_d_accise_alcool(P_alcool_0211, consommation_alcool_0211)
-
-    def get_output_period(self, period):
-        return period
+    def function(self, simulation, period):
+        consommation_alcool_0211 = simulation.calculate('consommation_alcool_0211', period)
+        return period, montant_droit_d_accise_alcool(P_alcool_0211, consommation_alcool_0211)
 
 
 @reference_formula
@@ -197,11 +183,9 @@ class montant_droit_d_accise_alcool_0212(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Montant des droits d'accises sur les alcools poste 0212"
 
-    def function(self, consommation_alcool_0212):
-        return montant_droit_d_accise_alcool(P_alcool_0212, consommation_alcool_0212)
-
-    def get_output_period(self, period):
-        return period
+    def function(self, simulation, period):
+        consommation_alcool_0212 = simulation.calculate('consommation_alcool_0212', period)
+        return period, montant_droit_d_accise_alcool(P_alcool_0212, consommation_alcool_0212)
 
 
 @reference_formula
@@ -210,8 +194,6 @@ class montant_droit_d_accise_alcool_0213(SimpleFormulaColumn):
     entity_class = Menages
     label = u"Montant des droits d'accises sur les alcools poste 0213"
 
-    def function(self, consommation_alcool_0213):
-        return montant_droit_d_accise_alcool(P_alcool_0213, consommation_alcool_0213)
-
-    def get_output_period(self, period):
-        return period
+    def function(self, simulation, period):
+        consommation_alcool_0213 = simulation.calculate('consommation_alcool_0213', period)
+        return period, montant_droit_d_accise_alcool(P_alcool_0213, consommation_alcool_0213)

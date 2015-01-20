@@ -46,7 +46,7 @@ def test_droit_d_accise_alcool():
             ),
         ).new_simulation(debug = True)
 
-    alcool_list = ["0211", "0212", "0123"]
+    alcool_list = ["0211", "0212", "0213"]
     consommations = [
         "consommation_alcool_{}".format(taux) for taux in alcool_list]
 
