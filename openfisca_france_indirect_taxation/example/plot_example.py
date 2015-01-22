@@ -54,19 +54,23 @@ def simulate_df(year = 2005):
         year = year,
         )
     simulation = survey_scenario.new_simulation()
-    simulation.calculate('montant_tva_taux_plein')
 
     return DataFrame(
         dict([
             (name, simulation.calculate(name)) for name in [
                 'montant_tva_taux_plein',
+                'consommation_tva_taux_plein',
+                'categorie_fiscale_11',
                 'montant_tva_taux_intermediaire',
+                'consommation_tva_taux_intermediaire',
                 'montant_tva_taux_reduit',
                 'montant_tva_taux_super_reduit',
+                'montant_tva_total',
                 'ident_men',
                 'pondmen',
                 'decuc',
-                'age'
+                'age',
+                'revtot'
                 ]
             ])
         )
@@ -86,7 +90,7 @@ def collapse(dataframe, groupe, var):
     grouped = dataframe.groupby([groupe])
     var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x,var =var))
     return var_weighted_grouped
-    
+
 def df_weighted_average_grouped(dataframe, groupe, varlist):
     '''
     Agrège les résultats de weighted_average_grouped() en une unique dataframe pour la liste de variable 'varlist'.
@@ -108,11 +112,13 @@ if __name__ == '__main__':
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df()
-    Wconcat= df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = ['montant_tva_taux_plein','montant_tva_taux_intermediaire'])
-    
+    Wconcat= df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = ['montant_tva_total','revtot'])
+    df_to_plot = Wconcat['montant_tva_total']/Wconcat['revtot']
+
+
     # Plot du graphe avec matplotlib
     plt.figure();
-    Wconcat.plot(kind='bar', stacked=True); plt.axhline(0, color='k')
+    df_to_plot.plot(kind='bar', stacked=True); plt.axhline(0, color='k')
 
 
     ## Autres exemples :

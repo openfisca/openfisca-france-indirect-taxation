@@ -62,6 +62,7 @@ class consommation_tva_taux_intermediaire(SimpleFormulaColumn):
         return period, categorie_fiscale_4
 
 
+
 @reference_formula
 class consommation_tva_taux_plein(SimpleFormulaColumn):
     column = FloatCol
@@ -69,7 +70,7 @@ class consommation_tva_taux_plein(SimpleFormulaColumn):
     label = u"Consommation soumis à une TVA à taux plein"
 
     def function(self, simulation, period):
-        categorie_fiscale_3 = simulation.calculate('categorie_fiscale_11', period)
+        categorie_fiscale_3 = simulation.calculate('categorie_fiscale_3', period)
         categorie_fiscale_11 = simulation.calculate('categorie_fiscale_11', period)
         return period, categorie_fiscale_3 + categorie_fiscale_11
 
@@ -117,7 +118,6 @@ class consommation_tva_taux_super_reduit(SimpleFormulaColumn):
 #    name = 'consommation_alcool_0213',
 #    )
 
-
 @reference_formula
 class montant_tva_taux_plein(SimpleFormulaColumn):
     column = FloatCol
@@ -164,6 +164,20 @@ class montant_tva_taux_super_reduit(SimpleFormulaColumn):
         consommation_tva_taux_super_reduit = simulation.calculate('consommation_tva_taux_super_reduit', period)
         taux = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_super_reduit
         return period, tax_from_expense_including_tax(consommation_tva_taux_super_reduit, taux)
+
+
+@reference_formula
+class montant_tva_total(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Montant de la TVA acquitée"
+
+    def function(self, simulation, period):
+        montant_tva_taux_super_reduit = simulation.calculate('montant_tva_taux_super_reduit', period)
+        montant_tva_taux_reduit = simulation.calculate('montant_tva_taux_reduit', period)
+        montant_tva_taux_intermediaire = simulation.calculate('montant_tva_taux_intermediaire', period)
+        montant_tva_taux_plein = simulation.calculate('montant_tva_taux_plein', period)
+        return period, montant_tva_taux_super_reduit+ montant_tva_taux_reduit+ montant_tva_taux_intermediaire+montant_tva_taux_plein
 
 
 @reference_formula
