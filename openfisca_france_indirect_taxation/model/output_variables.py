@@ -82,8 +82,8 @@ class consommation_tva_taux_reduit(SimpleFormulaColumn):
     label = u"Consommation soumis à une TVA à taux réduit"
 
     def function(self, simulation, period):
-        categorie_fiscale_1 = simulation.calculate('categorie_fiscale_1', period)
-        return period, categorie_fiscale_1
+        categorie_fiscale_2 = simulation.calculate('categorie_fiscale_2', period)
+        return period, categorie_fiscale_2
 
 
 @reference_formula
@@ -93,8 +93,8 @@ class consommation_tva_taux_super_reduit(SimpleFormulaColumn):
     label = u"Consommation soumis à une TVA à taux super réduit"
 
     def function(self, simulation, period):
-        categorie_fiscale_2 = simulation.calculate('categorie_fiscale_2', period)
-        return period, categorie_fiscale_2
+        categorie_fiscale_1 = simulation.calculate('categorie_fiscale_1', period)
+        return period, categorie_fiscale_1
 
 
 #reference_input_variable(

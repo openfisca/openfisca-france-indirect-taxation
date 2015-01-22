@@ -119,6 +119,7 @@ if __name__ == '__main__':
     # Plot du graphe avec matplotlib
     plt.figure();
     df_to_plot.plot(kind='bar', stacked=True); plt.axhline(0, color='k')
+    Wconcat.plot(kind='bar', stacked=True); plt.axhline(0, color='k')
 
 
     ## Autres exemples :
