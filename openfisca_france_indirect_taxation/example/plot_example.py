@@ -47,6 +47,7 @@ def simulate_df(year = 2005):
     '''
     input_data_frame = get_input_data_frame(year)
     TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
+
     tax_benefit_system = TaxBenefitSystem()
     survey_scenario = SurveyScenario().init_from_data_frame(
         input_data_frame = input_data_frame,

@@ -26,7 +26,7 @@
 import logging
 
 
-from openfisca_france_data.surveys import AbstractSurveyScenario
+from openfisca_survey_manager.scenarios import AbstractSurveyScenario
 
 log = logging.getLogger(__name__)
 
