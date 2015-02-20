@@ -71,7 +71,9 @@ def simulate_df(year = 2005):
                 'pondmen',
                 'decuc',
                 'age',
-                'revtot'
+                'revtot',
+                'rev_disponible',
+                'ocde10'
                 ]
             ])
         )
