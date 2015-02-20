@@ -211,3 +211,15 @@ class montant_droit_d_accise_alcool_0213(SimpleFormulaColumn):
     def function(self, simulation, period):
         consommation_alcool_0213 = simulation.calculate('consommation_alcool_0213', period)
         return period, montant_droit_d_accise_alcool(P_alcool_0213, consommation_alcool_0213)
+
+
+@reference_formula
+class niveau_de_vie(SimpleFormulaColumn): 
+    column = FloatCol
+    entity_class = Menages
+    label = u"Revenus disponibles divisés par ocde10 soit le nombre d'unités de consommation du ménage"
+    
+    def function(self, simulation, period):
+        rev_disponible = simulation.calculate('rev_disponible',period)
+        ocde10 = simulation.calculate('ocde10',period)
+        return period, rev_disponible/ocde10

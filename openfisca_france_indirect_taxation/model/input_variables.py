@@ -45,6 +45,14 @@ for categorie_fiscale_index in range(18):
         name = 'categorie_fiscale_{}'.format(categorie_fiscale_index),
         )
 
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Menages,
+    label = u"unités de consommation",
+    name = 'ocde10',
+    )
+
 reference_input_variable(
     column = FloatCol,
     entity_class = Menages,
@@ -92,6 +100,13 @@ reference_input_variable(
     name = 'pondmen',
     )
 
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Individus,
+    is_permanent = True,
+    label = u"Revenu disponible du ménage",
+    name = 'rev_disponible',
+    )
 
 reference_input_variable(
     column = IntCol,
