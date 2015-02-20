@@ -23,7 +23,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from openfisca_core.columns import DateCol, FloatCol, IntCol, reference_input_variable
+from openfisca_core.columns import DateCol, FloatCol, IntCol
+from openfisca_core.formulas import reference_input_variable
 from ..entities import Individus, Menages
 
 
