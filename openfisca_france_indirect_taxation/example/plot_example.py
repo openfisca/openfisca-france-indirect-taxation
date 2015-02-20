@@ -73,7 +73,8 @@ def simulate_df(year = 2005):
                 'age',
                 'revtot',
                 'rev_disponible',
-                'ocde10'
+                'ocde10',
+                'niveau_de_vie'
                 ]
             ])
         )
