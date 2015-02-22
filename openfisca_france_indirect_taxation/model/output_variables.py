@@ -25,6 +25,7 @@
 
 import numpy as np
 
+
 from openfisca_core.accessors import law
 from openfisca_core.columns import AgeCol, FloatCol
 from openfisca_core.formulas import SimpleFormulaColumn
@@ -223,3 +224,6 @@ class niveau_de_vie(SimpleFormulaColumn):
         rev_disponible = simulation.calculate('rev_disponible',period)
         ocde10 = simulation.calculate('ocde10',period)
         return period, rev_disponible/ocde10
+        
+
+        
