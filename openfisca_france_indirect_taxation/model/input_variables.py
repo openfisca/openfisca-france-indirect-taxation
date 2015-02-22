@@ -45,6 +45,12 @@ for categorie_fiscale_index in range(18):
         name = 'categorie_fiscale_{}'.format(categorie_fiscale_index),
         )
 
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Menages,
+    label = u"dépenses en 2005 par poste coicop agrégé selon la CN ; grosposte",
+    name = 'depenses_by_grosposte',
+    )
 
 reference_input_variable(
     column = FloatCol,
