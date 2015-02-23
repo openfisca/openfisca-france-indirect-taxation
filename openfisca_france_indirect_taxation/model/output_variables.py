@@ -96,6 +96,19 @@ class consommation_tva_taux_super_reduit(SimpleFormulaColumn):
     def function(self, simulation, period):
         categorie_fiscale_1 = simulation.calculate('categorie_fiscale_1', period)
         return period, categorie_fiscale_1
+        
+@reference_formula
+class consommation_totale(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Consommation totale du ménage"
+
+    def function(self, simulation, period):
+        consommation_tva_taux_super_reduit = simulation.calculate('consommation_tva_taux_super_reduit', period)
+        consommation_tva_taux_reduit = simulation.calculate('consommation_tva_taux_reduit', period)
+        consommation_tva_taux_intermediaire = simulation.calculate('consommation_tva_taux_intermediaire', period)
+        consommation_tva_taux_plein = simulation.calculate('consommation_tva_taux_plein', period)
+        return period, consommation_tva_taux_super_reduit + consommation_tva_taux_reduit + consommation_tva_taux_intermediaire + consommation_tva_taux_plein
 
 
 #reference_input_variable(

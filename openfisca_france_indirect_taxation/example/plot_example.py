@@ -74,7 +74,8 @@ def simulate_df(year = 2005):
                 'revtot',
                 'rev_disponible',
                 'ocde10',
-                'niveau_de_vie'
+                'niveau_de_vie',
+                'consommation_totale'
                 ]
             ])
         )
@@ -138,3 +139,16 @@ if __name__ == '__main__':
                                            'SDmontant_tva_taux_pleine': 'std'},
                     'montant_tva_taux_reduit': { 'Mmontant_tva_taux_reduit' : 'mean',}
                                           } )
+         
+    ## Graphique des taux d'effort sur la part du revenu consommé par décile de niveau de vie 
+                                 
+    # Constition d'une base de données agrégée par décile (= collapse en stata)
+    df = simulate_df()
+    Wconcat= df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = ['montant_tva_total','consommation_totale'])
+    df_to_plot = Wconcat['montant_tva_total']/Wconcat['consommation_totale']
+
+     # Plot du graphe avec matplotlib
+    plt.figure();
+    df_to_plot.plot(kind='bar', stacked=True); plt.axhline(0, color='k')
+   
+    
