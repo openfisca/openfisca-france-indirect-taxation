@@ -138,4 +138,3 @@ reference_input_variable(
     label = u"Rôle dans le ménage",
     name = 'role_menage',
     )
-

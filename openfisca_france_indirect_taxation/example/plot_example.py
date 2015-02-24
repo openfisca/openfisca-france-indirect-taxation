@@ -23,8 +23,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from pandas import DataFrame, concat
 import matplotlib.pyplot as plt
+import pandas
 
 import openfisca_france_indirect_taxation
 from openfisca_survey_manager.surveys import SurveyCollection
@@ -56,7 +56,7 @@ def simulate_df(year = 2005):
         )
     simulation = survey_scenario.new_simulation()
 
-    return DataFrame(
+    return pandas.DataFrame(
         dict([
             (name, simulation.calculate(name)) for name in [
                 'montant_tva_taux_plein',
@@ -80,6 +80,7 @@ def simulate_df(year = 2005):
             ])
         )
 
+
 def wavg(groupe, var):
     '''
     Fonction qui calcule la moyenne pondérée par groupe d'une variable
@@ -88,22 +89,24 @@ def wavg(groupe, var):
     w = groupe['pondmen']
     return (d * w).sum() / w.sum()
 
+
 def collapse(dataframe, groupe, var):
     '''
     Pour une variable, fonction qui calcule la moyenne pondérée au sein de chaque groupe.
     '''
     grouped = dataframe.groupby([groupe])
-    var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x,var =var))
+    var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x, var = var))
     return var_weighted_grouped
+
 
 def df_weighted_average_grouped(dataframe, groupe, varlist):
     '''
     Agrège les résultats de weighted_average_grouped() en une unique dataframe pour la liste de variable 'varlist'.
     '''
-    return DataFrame(
+    return pandas.DataFrame(
         dict([
-            (var,collapse(dataframe, groupe, var)) for var in varlist
-        ])
+            (var, collapse(dataframe, groupe, var)) for var in varlist
+            ])
         )
 
 
@@ -113,42 +116,56 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    ## Exemple : graphe par décile de revenu par uc du montant moyen (avec pondéréation) de tva aux taux plein et intermédiaires.
+    # Exemple: graphe par décile de revenu par uc du montant moyen (avec pondéréation)
+    # de tva aux taux plein et intermédiaires.
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df()
-    Wconcat= df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = ['montant_tva_total','revtot'])
-    df_to_plot = Wconcat['montant_tva_total']/Wconcat['revtot']
-
+    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = ['montant_tva_total', 'revtot'])
+    df_to_plot = Wconcat['montant_tva_total'] / Wconcat['revtot']
 
     # Plot du graphe avec matplotlib
-    plt.figure();
-    df_to_plot.plot(kind='bar', stacked=True); plt.axhline(0, color='k')
-    Wconcat.plot(kind='bar', stacked=True); plt.axhline(0, color='k')
+    plt.figure()
+    df_to_plot.plot(kind = 'bar', stacked = True)
+    plt.axhline(0, color = 'k')
+    Wconcat.plot(kind = 'bar', stacked = True)
+    plt.axhline(0, color = 'k')
 
-
-    ## Autres exemples :
+    # Autres exemples:
 
     # Construction d'une base aggrégée selon les déciles. Attention : pas de pondération
     df_grouped_by_decuc = df.groupby(['decuc']).mean()
-    df_grouped_by_decuc =df_grouped_by_decuc[['montant_tva_taux_plein','montant_tva_taux_intermediaire','montant_tva_taux_reduit','montant_tva_taux_super_reduit',]]
+    df_grouped_by_decuc = df_grouped_by_decuc[[
+        'montant_tva_taux_plein',
+        'montant_tva_taux_intermediaire',
+        'montant_tva_taux_reduit',
+        'montant_tva_taux_super_reduit',
+        ]]
 
     # Une autre solution pour construire une base aggrégée selon les déciles. Attention : pas de pondération
-    dfG = df.groupby(['decuc'], as_index=False)
-    dfG = dfG.agg( { 'montant_tva_taux_plein' : { 'Meanmontant_tva_taux_plein':  'mean',
-                                           'SDmontant_tva_taux_pleine': 'std'},
-                    'montant_tva_taux_reduit': { 'Mmontant_tva_taux_reduit' : 'mean',}
-                                          } )
-         
-    ## Graphique des taux d'effort sur la part du revenu consommé par décile de niveau de vie 
-                                 
+    dfG = df.groupby(['decuc'], as_index = False)
+    dfG = dfG.agg({
+        'montant_tva_taux_plein': {
+            'Meanmontant_tva_taux_plein': 'mean',
+            'SDmontant_tva_taux_pleine': 'std'
+            },
+        'montant_tva_taux_reduit': {
+            'Mmontant_tva_taux_reduit': 'mean',
+            }
+        })
+
+    # Graphique des taux d'effort sur la part du revenu consommé par décile de niveau de vie
+
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df()
-    Wconcat= df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = ['montant_tva_total','consommation_totale'])
-    df_to_plot = Wconcat['montant_tva_total']/Wconcat['consommation_totale']
+    Wconcat = df_weighted_average_grouped(
+        dataframe = df,
+        groupe = 'decuc',
+        varlist = ['montant_tva_total', 'consommation_totale']
+        )
+    df_to_plot = Wconcat['montant_tva_total'] / Wconcat['consommation_totale']
 
-     # Plot du graphe avec matplotlib
-    plt.figure();
-    df_to_plot.plot(kind='bar', stacked=True); plt.axhline(0, color='k')
-   
-    
+    # Plot du graphe avec matplotlib
+    plt.figure()
+    df_to_plot.plot(kind = 'bar', stacked = True)
+    plt.axhline(0, color = 'k')

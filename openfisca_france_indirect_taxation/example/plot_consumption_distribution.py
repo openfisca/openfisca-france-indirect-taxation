@@ -79,6 +79,7 @@ def simulate_df(year = 2005):
             ])
         )
 
+
 def wavg(groupe, var):
     '''
     Fonction qui calcule la moyenne pondérée par groupe d'une variable
@@ -87,13 +88,15 @@ def wavg(groupe, var):
     w = groupe['pondmen']
     return (d * w).sum() / w.sum()
 
+
 def collapse(dataframe, groupe, var):
     '''
     Pour une variable, fonction qui calcule la moyenne pondérée au sein de chaque groupe.
     '''
     grouped = dataframe.groupby([groupe])
-    var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x,var =var))
+    var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x, var = var))
     return var_weighted_grouped
+
 
 def df_weighted_average_grouped(dataframe, groupe, varlist):
     '''
@@ -101,8 +104,8 @@ def df_weighted_average_grouped(dataframe, groupe, varlist):
     '''
     return DataFrame(
         dict([
-            (var,collapse(dataframe, groupe, var)) for var in varlist
-        ])
+            (var, collapse(dataframe, groupe, var)) for var in varlist
+            ])
         )
 
 if __name__ == '__main__':
@@ -111,18 +114,16 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    ## Exemple : graphe par décile de revenu par uc de la ventilation de la consommation selon les postes agrégés de la CN
+    # Exemple: graphe par décile de revenu par uc de la ventilation de la consommation selon les postes agrégés de la CN
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df()
-    Wconcat= df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = ['depenses_by_grosposte')
+    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = ['depenses_by_grosposte'])
     df_to_plot = Wconcat['depenses_by_grosposte']
 
-
     # Plot du graphe avec matplotlib
-    plt.figure();
-    df_to_plot.plot(kind='bar', stacked=True); plt.axhline(0, color='k')
-    Wconcat.plot(kind='bar', stacked=True); plt.axhline(0, color='k')
-
-
-
+    plt.figure()
+    df_to_plot.plot(kind = 'bar', stacked = True)
+    plt.axhline(0, color = 'k')
+    Wconcat.plot(kind = 'bar', stacked = True)
+    plt.axhline(0, color = 'k')

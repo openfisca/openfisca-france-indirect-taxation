@@ -26,7 +26,6 @@
 import numpy as np
 
 
-from openfisca_core.accessors import law
 from openfisca_core.columns import AgeCol, FloatCol
 from openfisca_core.formulas import SimpleFormulaColumn
 from ..entities import Individus, Menages
@@ -63,7 +62,6 @@ class consommation_tva_taux_intermediaire(SimpleFormulaColumn):
         return period, categorie_fiscale_4
 
 
-
 @reference_formula
 class consommation_tva_taux_plein(SimpleFormulaColumn):
     column = FloatCol
@@ -96,7 +94,8 @@ class consommation_tva_taux_super_reduit(SimpleFormulaColumn):
     def function(self, simulation, period):
         categorie_fiscale_1 = simulation.calculate('categorie_fiscale_1', period)
         return period, categorie_fiscale_1
-        
+
+
 @reference_formula
 class consommation_totale(SimpleFormulaColumn):
     column = FloatCol
@@ -108,29 +107,35 @@ class consommation_totale(SimpleFormulaColumn):
         consommation_tva_taux_reduit = simulation.calculate('consommation_tva_taux_reduit', period)
         consommation_tva_taux_intermediaire = simulation.calculate('consommation_tva_taux_intermediaire', period)
         consommation_tva_taux_plein = simulation.calculate('consommation_tva_taux_plein', period)
-        return period, consommation_tva_taux_super_reduit + consommation_tva_taux_reduit + consommation_tva_taux_intermediaire + consommation_tva_taux_plein
+        return period, (
+            consommation_tva_taux_super_reduit +
+            consommation_tva_taux_reduit +
+            consommation_tva_taux_intermediaire +
+            consommation_tva_taux_plein
+            )
 
+    # reference_input_variable(
+    #    column = FloatCol,
+    #    entity_class = Individus,
+    #    label = u"Consommation droit d'accise alcool 0211",
+    #    name = 'consommation_alcool_0211',
+    #    )
+    #
+    #
+    # reference_input_variable(
+    #    column = FloatCol,
+    #    entity_class = Individus,
+    #    label = u"Consommation droit d'accise alcool 0212",
+    #    name = 'consommation_alcool_0212',
+    #    )
+    #
+    # reference_input_variable(
+    #    column = FloatCol,
+    #    entity_class = Individus,
+    #    label = u"Consommation droit d'accise alcool 0213",
+    #    name = 'consommation_alcool_0213',
+    #    )
 
-#reference_input_variable(
-#    column = FloatCol,
-#    entity_class = Individus,
-#    label = u"Consommation droit d'accise alcool 0211",
-#    name = 'consommation_alcool_0211',
-#    )
-#
-#reference_input_variable(
-#    column = FloatCol,
-#    entity_class = Individus,
-#    label = u"Consommation droit d'accise alcool 0212",
-#    name = 'consommation_alcool_0212',
-#    )
-#
-#reference_input_variable(
-#    column = FloatCol,
-#    entity_class = Individus,
-#    label = u"Consommation droit d'accise alcool 0213",
-#    name = 'consommation_alcool_0213',
-#    )
 
 @reference_formula
 class montant_tva_taux_plein(SimpleFormulaColumn):
@@ -191,7 +196,12 @@ class montant_tva_total(SimpleFormulaColumn):
         montant_tva_taux_reduit = simulation.calculate('montant_tva_taux_reduit', period)
         montant_tva_taux_intermediaire = simulation.calculate('montant_tva_taux_intermediaire', period)
         montant_tva_taux_plein = simulation.calculate('montant_tva_taux_plein', period)
-        return period, montant_tva_taux_super_reduit+ montant_tva_taux_reduit+ montant_tva_taux_intermediaire+montant_tva_taux_plein
+        return period, (
+            montant_tva_taux_super_reduit +
+            montant_tva_taux_reduit +
+            montant_tva_taux_intermediaire +
+            montant_tva_taux_plein
+            )
 
 
 @reference_formula
@@ -228,15 +238,12 @@ class montant_droit_d_accise_alcool_0213(SimpleFormulaColumn):
 
 
 @reference_formula
-class niveau_de_vie(SimpleFormulaColumn): 
+class niveau_de_vie(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
     label = u"Revenus disponibles divisés par ocde10 soit le nombre d'unités de consommation du ménage"
-    
-    def function(self, simulation, period):
-        rev_disponible = simulation.calculate('rev_disponible',period)
-        ocde10 = simulation.calculate('ocde10',period)
-        return period, rev_disponible/ocde10
-        
 
-        
+    def function(self, simulation, period):
+        rev_disponible = simulation.calculate('rev_disponible', period)
+        ocde10 = simulation.calculate('ocde10', period)
+        return period, rev_disponible / ocde10
