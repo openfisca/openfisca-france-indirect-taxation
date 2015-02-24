@@ -55,7 +55,10 @@ setup(
     url = 'https://github.com/openfisca/openfisca-france-indirect-taxation',
 
     data_files = [
-        ('share/locale/fr/LC_MESSAGES', ['openfisca_france_indirect_taxation/i18n/fr/LC_MESSAGES/openfisca-france-indirect-taxation.mo']),
+        (
+            'share/locale/fr/LC_MESSAGES',
+            ['openfisca_france_indirect_taxation/i18n/fr/LC_MESSAGES/openfisca-france-indirect-taxation.mo']
+            ),
         ],
     extras_require = dict(
         tests = [

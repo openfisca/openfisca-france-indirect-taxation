@@ -26,4 +26,3 @@
 def tax_from_expense_including_tax(expense = None, tax_rate = None):
     """Compute the tax amount form the expense including tax"""
     return expense * tax_rate / (1 + tax_rate)
-

@@ -27,5 +27,4 @@ def montant_droit_d_accise_alcool(taux, depense):
     """
     Calcule le montant de droit d'accise sur un volume de dépense payé pour le poste adéquat
     """
-    return depense*taux/(1+taux)
-
+    return depense * taux / (1 + taux)
