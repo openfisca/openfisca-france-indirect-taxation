@@ -23,10 +23,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from openfisca_core.columns import DateCol, FloatCol, IntCol
-from openfisca_core.formulas import reference_input_variable
-from ..entities import Individus, Menages
-
+from .base import *  # noqa analysis:ignore
 
 reference_input_variable(
     column = DateCol,
@@ -84,7 +81,7 @@ reference_input_variable(
 reference_input_variable(
     column = FloatCol,
     entity_class = Menages,
-    label = u"Décile de niveau de vie (revenu/unité de consommation",
+    label = u"Décile de niveau de vie (revenu/unité de consommation)",
     name = 'decuc',
     )
 
