@@ -23,13 +23,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import numpy as np
+from . base import *  # noq analysis:ignore
+import numpy
 
-
-from openfisca_core.columns import AgeCol, FloatCol
-from openfisca_core.formulas import SimpleFormulaColumn
-from ..entities import Individus, Menages
-from .. import reference_formula
 
 from openfisca_france_indirect_taxation.model.tva import tax_from_expense_including_tax
 from openfisca_france_indirect_taxation.model.droit_d_accise_alcool import montant_droit_d_accise_alcool
@@ -48,7 +44,7 @@ class age(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         birth = simulation.calculate('birth', period)
-        return period, (np.datetime64(period.date) - birth).astype('timedelta64[Y]')
+        return period, (numpy.datetime64(period.date) - birth).astype('timedelta64[Y]')
 
 
 @reference_formula
@@ -135,6 +131,38 @@ class consommation_totale(SimpleFormulaColumn):
     #    label = u"Consommation droit d'accise alcool 0213",
     #    name = 'consommation_alcool_0213',
     #    )
+
+
+@reference_formula
+class decile(SimpleFormulaColumn):
+    column = EnumCol(
+        enum = Enum([
+            u"Hors champ"
+            u"1er décile",
+            u"2nd décile",
+            u"3e décile",
+            u"4e décile",
+            u"5e décile",
+            u"6e décile",
+            u"7e décile",
+            u"8e décile",
+            u"9e décile",
+            u"10e décile"
+            ])
+        )
+
+    entity_class = Menages
+    label = u"Décile de niveau de vie"
+
+    def function(self, simulation, period):
+        niveau_de_vie = simulation.calculate('niveau_de_vie', period)
+        pondmen = simulation.calculate('pondmen', period)
+        labels = numpy.arange(1, 11)
+        method = 2
+        decile, values = mark_weighted_percentiles(niveau_de_vie, labels, pondmen, method, return_quantiles = True)
+        del values
+        return period, decile
+
 
 
 @reference_formula

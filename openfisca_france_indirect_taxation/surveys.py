@@ -33,18 +33,6 @@ log = logging.getLogger(__name__)
 
 class SurveyScenario(AbstractSurveyScenario):
 
-    def init_from_data_frame(self, input_data_frame = None, tax_benefit_system = None, year = None):
-        assert input_data_frame is not None
-        self.input_data_frame = input_data_frame
-        assert tax_benefit_system is not None
-        self.tax_benefit_system = tax_benefit_system
-#        survey_tax_benefit_system = adapt_to_survey(tax_benefit_system)
-        self.tax_benefit_system = tax_benefit_system
-        assert year is not None
-        self.year = year
-
-        return self
-
     def initialize_weights(self):
-        self.weight_column_name_by_entity_symbol['men'] = 'wprm'
-        self.weight_column_name_by_entity_symbol['ind'] = 'weight_ind'
+        self.weight_column_name_by_entity_key_plural['menages'] = 'pondmen'
+        # self.weight_column_name_by_entity__key_plural['individus'] = 'weight_ind'
