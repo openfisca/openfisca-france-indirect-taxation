@@ -25,8 +25,9 @@
 
 from openfisca_core.columns import AgeCol, DateCol, FloatCol, IntCol, EnumCol
 from openfisca_core.enumerations import Enum
-from openfisca_core.formulas import make_reference_formula_decorator, reference_input_variable, SimpleFormulaColumn
-
+from openfisca_core.formulas import (
+    make_reference_formula_decorator, dated_function, DatedFormulaColumn, reference_input_variable, SimpleFormulaColumn
+    )
 from openfisca_france_data.statshelpers import mark_weighted_percentiles
 
 
@@ -36,6 +37,8 @@ from ..entities import entity_class_by_symbol, Individus, Menages
 __all__ = [
     'AgeCol',
     'DateCol',
+    'DatedFormulaColumn',
+    'dated_function',
     'Enum',
     'EnumCol',
     'FloatCol',
