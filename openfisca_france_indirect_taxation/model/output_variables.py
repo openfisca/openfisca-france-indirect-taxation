@@ -22,9 +22,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import datetime
+import numpy
 
 from . base import *  # noq analysis:ignore
-import numpy
 
 
 from openfisca_france_indirect_taxation.model.tva import tax_from_expense_including_tax
@@ -164,7 +165,6 @@ class decile(SimpleFormulaColumn):
         return period, decile
 
 
-
 @reference_formula
 class montant_tva_taux_plein(SimpleFormulaColumn):
     column = FloatCol
@@ -178,11 +178,12 @@ class montant_tva_taux_plein(SimpleFormulaColumn):
 
 
 @reference_formula
-class montant_tva_taux_intermediaire(SimpleFormulaColumn):
+class montant_tva_taux_intermediaire(DatedFormulaColumn):
     column = FloatCol
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux intermediaire"
 
+    @dated_function(start = datetime.date(2012, 1, 1))
     def function(self, simulation, period):
         consommation_tva_taux_intermediaire = simulation.calculate('consommation_tva_taux_intermediaire')
         taux = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire

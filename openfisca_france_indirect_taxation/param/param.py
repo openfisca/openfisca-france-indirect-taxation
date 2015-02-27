@@ -86,7 +86,7 @@ legislation_json = {
 # Pour 2013 les données proviennent de la commission européenne "Excise Duty Table"
 #                                        {'start': u'2013-01-01', 'stop': u'2013-12-31', 'value': 118 },
 #TO DO trouver les droits 2014           {'start': u'2014-01-01', 'stop': u'2014-12-31', 'value':  },
-#                                        
+#
                                         ],
                                     },
                                 },
