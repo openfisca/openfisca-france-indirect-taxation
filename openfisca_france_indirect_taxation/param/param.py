@@ -33,14 +33,15 @@ legislation_json = {
                             "description": "Taux plein",
                             "format": "float",
                             "values": [
-                                {'start': u'2000-01-01', 'stop': u'2014-12-31', 'value': .196}
+                                {'start': u'2000-01-01', 'stop': u'2013-12-31', 'value': .196},
+                                {'start': u'2014-01-01', 'stop': u'2015-12-31', 'value': .2},
                                 ],
                             },
                         "taux_intermediaire": {
                             "@type": "Parameter",
                             "description": "Taux intermédiaire",
                             "format": "float",
-                            "values": [{'start': u'2000-01-01', 'stop': u'2014-12-31', 'value': .07}],
+                            "values": [{'start': u'2012-01-01', 'stop': u'2014-12-31', 'value': .07}],
                             },
                         "taux_reduit": {
                             "@type": "Parameter",
@@ -53,6 +54,112 @@ legislation_json = {
                             "description": "Taux super réduit",
                             "format": "float",
                             "values": [{'start': u'2000-01-01', 'stop': u'2014-12-31', 'value': .021}],
+                            },
+                        },
+                    },
+                "alcool": {
+                    "@type": "Node",
+                    "description": "alcools",
+                    "children": {
+                        "vin": {
+                            "@type": "Node",
+                            "description": "Pour calculer le taux de taxation implicite sur la bière",
+                            "children": {
+                                "droit_cn_vin": {
+                                    "@type": "Parameter",
+                                    "description": "Masse droit vin selon comptabilité nationale",
+                                    "format": "float",
+                                    "values": [
+#                                        {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 127},
+#                                        {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 127},
+#                                        {'start': u'2002-01-01', 'stop': u'2002-12-31', 'value': 127},
+#                                        {'start': u'2003-01-01', 'stop': u'2003-12-31', 'value': 127},
+#                                        {'start': u'2004-01-01', 'stop': u'2004-12-31', 'value': 125},
+#                                        {'start': u'2005-01-01', 'stop': u'2005-12-31', 'value': 117},
+#                                        {'start': u'2006-01-01', 'stop': u'2006-12-31', 'value': 119},
+#                                        {'start': u'2007-01-01', 'stop': u'2007-12-31', 'value': 117},
+#                                        {'start': u'2008-01-01', 'stop': u'2008-12-31', 'value': 114},
+#                                        {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 117},
+#                                        {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 119},
+#                                        {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 118},
+#                                        {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 120},
+# Pour 2013 les données proviennent de la commission européenne "Excise Duty Table"
+#                                        {'start': u'2013-01-01', 'stop': u'2013-12-31', 'value': 118 },
+#TO DO trouver les droits 2014           {'start': u'2014-01-01', 'stop': u'2014-12-31', 'value':  },
+#                                        
+                                        ],
+                                    },
+                                },
+                            },
+                        "biere": {
+                            "@type": "Node",
+                            "description": "Masse droit bière selon comptabilité nationale",
+                            "children": {
+                                "droit_cn_biere": {
+                                    "@type": "Parameter",
+                                    "description": "Masse droit bière selon comptabilité nationale",
+                                    "format": "float",
+                                    "values": [
+#                                        {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 359}
+#                                        {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 364},
+#                                        {'start': u'2002-01-01', 'stop': u'2002-12-31', 'value': 361},
+#                                        {'start': u'2003-01-01', 'stop': u'2003-12-31', 'value': 370},
+#                                        {'start': u'2004-01-01', 'stop': u'2004-12-31', 'value': 378},
+#                                        {'start': u'2005-01-01', 'stop': u'2005-12-31', 'value': 364},
+#                                        {'start': u'2006-01-01', 'stop': u'2006-12-31', 'value': 396},
+#                                        {'start': u'2007-01-01', 'stop': u'2007-12-31', 'value': 382},
+#                                        {'start': u'2008-01-01', 'stop': u'2008-12-31', 'value': 375},
+#                                        {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 376},
+#                                        {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 375},
+#                                        {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 375},
+#                                        {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 375},
+# Pour 2013 les données proviennent de la commission européenne "Excise Duty Table"
+#                                        {'start': u'2013-01-01', 'stop': u'2013-12-31', 'value': 670 },
+# TO DO trouver les droits 2014          {'start': u'2014-01-01', 'stop': u'2014-12-31', 'value':  },
+                                        ],
+                                    },
+                                "conso_cn_biere": {
+                                    "@type": "Parameter",
+                                    "description": "Masse droit alcools selon comptabilité nationale",
+                                    "format": "float",
+                                    "values": [
+                                        {'start': u'2005-01-01', 'stop': u'2009-12-31', 'value': .021},
+                                        {'start': u'2009-01-01', 'stop': u'2010-12-31', 'value': .021},
+                                        {'start': u'2010-01-01', 'stop': u'2011-12-31', 'value': .021},
+                                        {'start': u'2011-01-01', 'stop': u'2012-12-31', 'value': .021},
+                                        {'start': u'2012-01-01', 'stop': u'2013-12-31', 'value': .021},
+                                        {'start': u'2013-01-01', 'stop': u'2014-12-31', 'value': .021},
+                                        {'start': u'2014-01-01', 'stop': u'2015-12-31', 'value': .021}
+                                        ],
+                                    },
+                                },
+                            },
+                        }
+                    },
+                "tabac": {
+                    "@type": "Node",
+                    "description": "Pour calculer le taux de taxation implicite sur la bière",
+                    "children": {
+                        "cigarettes": {
+                            "@type": "Parameter",
+                            "description": "Taux de taxation cigarettes",
+                            "format": "float",
+                            "values": [
+                                {'start': u'2004-05-01', 'stop': u'2010-12-31', 'value': .64},
+                                {'start': u'2010-01-01', 'stop': u'2013-01-06', 'value': .6425},
+                                {'start': u'2013-01-07', 'stop': u'2015-12-31', 'value': .647}
+                                ],
+                            },
+                        "cigares": {
+                            "@type": "Parameter",
+                            "description": "Masse droit bière selon comptabilité nationale",
+                            "format": "float",
+                            "values": [
+                                #TODO:
+                                {'start': u'2004-05-01', 'stop': u'2010-12-31', 'value': .64},
+                                {'start': u'2010-01-01', 'stop': u'2013-01-06', 'value': .6425},
+                                {'start': u'2013-01-07', 'stop': u'2015-12-31', 'value': .647},
+                                ],
                             },
                         },
                     },
