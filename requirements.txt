@@ -1,2 +1,3 @@
 -e git+https://github.com/openfisca/openfisca-core.git#egg=OpenFisca-Core
+-e git+https://github.com/openfisca/openfisca-core.git#egg=OpenFisca-France-Data
 -e .
