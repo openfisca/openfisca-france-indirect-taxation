@@ -72,9 +72,6 @@ setup(
         'OpenFisca-Core >= 0.4dev',
         'scipy >= 0.12',
         ],
-    message_extractors = {'openfisca_france_indirect_taxation': [
-        ('**.py', 'python', None),
-        ]},
     packages = find_packages(),
     test_suite = 'nose.collector',
     zip_safe = False,
