@@ -40,7 +40,7 @@ def get_input_data_frame(year):
     return input_data_frame
 
 
-def simulate_df(year = 2005):
+def simulate_df(var_to_be_simulated, year = 2005):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
@@ -54,28 +54,10 @@ def simulate_df(year = 2005):
         year = year,
         )
     simulation = survey_scenario.new_simulation()
-
     return DataFrame(
         dict([
-            (name, simulation.calculate(name)) for name in [
-                'montant_tva_taux_plein',
-                'consommation_tva_taux_plein',
-                'categorie_fiscale_11',
-                'montant_tva_taux_intermediaire',
-                'consommation_tva_taux_intermediaire',
-                'montant_tva_taux_reduit',
-                'montant_tva_taux_super_reduit',
-                'montant_tva_total',
-                'ident_men',
-                'pondmen',
-                'decuc',
-                'age',
-                'revtot',
-                'rev_disponible',
-                'ocde10',
-                'niveau_de_vie',
-                'depenses_by_grosposte'
-                ]
+            (name, simulation.calculate(name)) for name in var_to_be_simulated
+
             ])
         )
 
@@ -114,16 +96,41 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    # Exemple: graphe par décile de revenu par uc de la ventilation de la consommation selon les postes agrégés de la CN
+# Exemple: graphe par décile de revenu par uc de la ventilation de la consommation selon les postes agrégés de la CN
+    # Lite des coicop agrégées en 12 postes
+    list_coicop12 = []
+    for coicop12_index in range(1, 13):
+        list_coicop12.append('coicop12_{}'.format(coicop12_index))
+    # Liste des variables que l'on veut simuler
+    var_to_be_simulated = [
+        'ident_men',
+        'pondmen',
+        'decuc',
+        'age',
+        'decile',
+        'revtot',
+        'rev_disponible',
+        'ocde10',
+        'niveau_de_vie',
+        ]
+    # Merge des deux listes
+    var_to_be_simulated += list_coicop12
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df = simulate_df()
-    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = ['depenses_by_grosposte'])
-    df_to_plot = Wconcat['depenses_by_grosposte']
+    df = simulate_df(var_to_be_simulated = var_to_be_simulated)
+    var_to_concat = list_coicop12 + ['rev_disponible']
+    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_concat)
 
-    # Plot du graphe avec matplotlib
-    plt.figure()
-    df_to_plot.plot(kind = 'bar', stacked = True)
+    # Construction des parts
+    list_part_coicop12 = []
+    for i in range(1, 13):
+        Wconcat['part_coicop12_{}'.format(i)] = Wconcat['coicop12_{}'.format(i)] / Wconcat['rev_disponible']
+        'list_part_coicop12_{}'.format(i)
+        list_part_coicop12.append('part_coicop12_{}'.format(i))
+
+    df_to_graph = Wconcat[list_part_coicop12]
+
+    df_to_graph.plot(kind = 'bar', stacked = True)
     plt.axhline(0, color = 'k')
-    Wconcat.plot(kind = 'bar', stacked = True)
-    plt.axhline(0, color = 'k')
+    #TODO: analyser, changer les déciles de revenus en déciles de consommation
+    # faire un truc plus joli, mettres labels...

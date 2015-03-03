@@ -33,6 +33,13 @@ reference_input_variable(
     name = 'birth',
     )
 
+for coicop12_index in range(1,13):
+    reference_input_variable(
+        column = FloatCol,
+        entity_class = Menages,
+        label = u"Poste coicop {} de la nomenclature aggrégée à 12 niveaux".format(coicop12_index),
+        name = 'coicop12_{}'.format(coicop12_index),
+        )
 
 for categorie_fiscale_index in range(18):
     reference_input_variable(
@@ -41,13 +48,6 @@ for categorie_fiscale_index in range(18):
         label = u"catégorie fiscale {}".format(categorie_fiscale_index),
         name = 'categorie_fiscale_{}'.format(categorie_fiscale_index),
         )
-
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"dépenses en 2005 par poste coicop agrégé selon la CN ; grosposte",
-    name = 'depenses_by_grosposte',
-    )
 
 reference_input_variable(
     column = FloatCol,
