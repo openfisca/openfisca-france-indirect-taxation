@@ -116,7 +116,7 @@ class consommation_biere(SimpleFormulaColumn):
 
 
 @reference_formula
-class consommation_alccols_forts(SimpleFormulaColumn):
+class consommation_alcools_forts(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation d'alcools forts"
@@ -308,8 +308,10 @@ class montant_droit_d_accise_vin(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         consommation_vin = simulation.calculate('consommation_vin', period)
-        taux = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.vin
-        return period, montant_droit_d_accise_alcool(consommation_vin, taux)
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.vin.droit_cn_vin
+        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.vin.masse_conso_cn_vin
+        return period, montant_droit_d_accise_alcool(consommation_vin, droit_cn, consommation_cn, taux_plein_tva)
 
 
 @reference_formula
@@ -320,8 +322,10 @@ class montant_droit_d_accise_biere(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         consommation_biere = simulation.calculate('consommation_biere', period)
-        taux = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.biere
-        return period, montant_droit_d_accise_alcool(consommation_biere, taux)
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.vin.droit_cn_biere
+        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.vin.masse_conso_cn_biere
+        return period, montant_droit_d_accise_alcool(consommation_biere, droit_cn, consommation_cn, taux_plein_tva)
 
 
 @reference_formula
@@ -332,8 +336,10 @@ class montant_droit_d_accise_alcools_forts(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         consommation_alcools_forts = simulation.calculate('consommation_alcools_forts', period)
-        taux = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.alcools_forts
-        return period, montant_droit_d_accise_alcool(consommation_alcools_forts, taux)
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.vin.droit_cn_alcools
+        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.vin.masse_conso_cn_alcools
+        return period, montant_droit_d_accise_alcool(consommation_alcools_forts, droit_cn, consommation_cn, taux_plein_tva)
 
 
 @reference_formula
