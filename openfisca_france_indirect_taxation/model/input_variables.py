@@ -56,27 +56,6 @@ reference_input_variable(
     name = 'ocde10',
     )
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"Consommation droit d'accise alcool 0211",
-    name = 'consommation_alcool_0211',
-    )
-
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"Consommation droit d'accise alcool 0212",
-    name = 'consommation_alcool_0212',
-    )
-
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"Consommation droit d'accise alcool 0213",
-    name = 'consommation_alcool_0213',
-    )
-
 
 reference_input_variable(
     column = FloatCol,

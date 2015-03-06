@@ -94,6 +94,73 @@ class consommation_tva_taux_super_reduit(SimpleFormulaColumn):
 
 
 @reference_formula
+class consommation_vin(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Consommation de vin"
+
+    def function(self, simulation, period):
+        categorie_fiscale_12 = simulation.calculate('categorie_fiscale_12', period)
+        return period, categorie_fiscale_12
+
+
+@reference_formula
+class consommation_biere(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Consommation de bière"
+
+    def function(self, simulation, period):
+        categorie_fiscale_13 = simulation.calculate('categorie_fiscale_13', period)
+        return period, categorie_fiscale_13
+
+
+@reference_formula
+class consommation_alccols_forts(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Consommation d'alcools forts"
+
+    def function(self, simulation, period):
+        categorie_fiscale_10 = simulation.calculate('categorie_fiscale_10', period)
+        return period, categorie_fiscale_10
+
+
+@reference_formula
+class consommation_cigarette(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Consommation de cigarettes"
+
+    def function(self, simulation, period):
+        categorie_fiscale_7 = simulation.calculate('categorie_fiscale_7', period)
+        return period, categorie_fiscale_7
+
+
+@reference_formula
+class consommation_cigares(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Consommation de cigares"
+
+    def function(self, simulation, period):
+        categorie_fiscale_8 = simulation.calculate('categorie_fiscale_8', period)
+        return period, categorie_fiscale_8
+
+
+@reference_formula
+class consommation_tabac_a_rouler(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Consommation de tabac à rouler"
+
+    def function(self, simulation, period):
+        categorie_fiscale_9 = simulation.calculate('categorie_fiscale_9', period)
+        return period, categorie_fiscale_9
+
+
+
+@reference_formula
 class consommation_totale(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
@@ -234,36 +301,75 @@ class montant_tva_total(SimpleFormulaColumn):
 
 
 @reference_formula
-class montant_droit_d_accise_alcool_0211(SimpleFormulaColumn):
+class montant_droit_d_accise_vin(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
-    label = u"Montant des droits d'accises sur les alcools poste 0211"
+    label = u"Montant des droits d'accises sur le vin"
 
     def function(self, simulation, period):
-        consommation_alcool_0211 = simulation.calculate('consommation_alcool_0211', period)
-        return period, montant_droit_d_accise_alcool(P_alcool_0211, consommation_alcool_0211)
+        consommation_vin = simulation.calculate('consommation_vin', period)
+        taux = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.vin
+        return period, montant_droit_d_accise_alcool(consommation_vin, taux)
 
 
 @reference_formula
-class montant_droit_d_accise_alcool_0212(SimpleFormulaColumn):
+class montant_droit_d_accise_biere(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
-    label = u"Montant des droits d'accises sur les alcools poste 0212"
+    label = u"Montant des droits d'accises sur la bière"
 
     def function(self, simulation, period):
-        consommation_alcool_0212 = simulation.calculate('consommation_alcool_0212', period)
-        return period, montant_droit_d_accise_alcool(P_alcool_0212, consommation_alcool_0212)
+        consommation_biere = simulation.calculate('consommation_biere', period)
+        taux = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.biere
+        return period, montant_droit_d_accise_alcool(consommation_biere, taux)
 
 
 @reference_formula
-class montant_droit_d_accise_alcool_0213(SimpleFormulaColumn):
+class montant_droit_d_accise_alcools_forts(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
-    label = u"Montant des droits d'accises sur les alcools poste 0213"
+    label = u"Montant des droits d'accises sur les alcools forts"
 
     def function(self, simulation, period):
-        consommation_alcool_0213 = simulation.calculate('consommation_alcool_0213', period)
-        return period, montant_droit_d_accise_alcool(P_alcool_0213, consommation_alcool_0213)
+        consommation_alcools_forts = simulation.calculate('consommation_alcools_forts', period)
+        taux = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.alcools_forts
+        return period, montant_droit_d_accise_alcool(consommation_alcools_forts, taux)
+
+
+@reference_formula
+class montant_droit_d_accise_cigarette(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Montant des droits d'accises sur les cigarettes"
+
+    def function(self, simulation, period):
+        consommation_cigarette = simulation.calculate('consommation_cigarette', period)
+        taux = simulation.legislation_at(period.start).imposition_indirecte.tabac.cigarettes
+        return period, montant_droit_d_accise_alcool(consommation_cigarette, taux)
+
+
+@reference_formula
+class montant_droit_d_accise_cigares(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Montant des droits d'accises sur les cigares"
+
+    def function(self, simulation, period):
+        consommation_cigares = simulation.calculate('consommation_cigares', period)
+        taux = simulation.legislation_at(period.start).imposition_indirecte.tabac.cigares
+        return period, montant_droit_d_accise_alcool(consommation_cigares, taux)
+
+
+@reference_formula
+class montant_droit_d_accise_tabac_a_rouler(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Montant des droits d'accises sur le tabac à rouler"
+
+    def function(self, simulation, period):
+        consommation_tabac_a_rouler = simulation.calculate('consommation_tabac_a_rouler', period)
+        taux = simulation.legislation_at(period.start).imposition_indirecte.tabac.ADETERMINER
+        return period, montant_droit_d_accise_alcool(consommation_tabac_a_rouler, taux)
 
 
 @reference_formula
