@@ -290,7 +290,7 @@ legislation_json = {
                                     "format": "float",
                                     "values": [
                                         #TODO:
-                                        #{'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 127},
+                                        {'start': u'2000-01-01', 'stop': u'2014-12-31', 'value': 11002},
                                         ],
                                     },
                                 },
@@ -299,9 +299,9 @@ legislation_json = {
                             "@type": "Node",
                             "description": "Pour calculer le taux de taxation implicite sur la bière",
                             "children": {
-                                "droit_cn_vin": {
+                                "droit_cn_biere": {
                                     "@type": "Parameter",
-                                    "description": "Masse droit vin selon comptabilité nationale",
+                                    "description": "Masse droit biere selon comptabilité nationale",
                                     "format": "float",
                                     "values": [
                                         {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 127},

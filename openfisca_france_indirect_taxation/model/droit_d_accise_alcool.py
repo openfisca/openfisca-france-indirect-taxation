@@ -23,8 +23,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-def montant_droit_d_accise_alcool(taux, depense):
+def montant_droit_d_accise_alcool(depense, droit_cn, consommation_cn, taux_plein_tva):
     """
     Calcule le montant de droit d'accise sur un volume de dépense payé pour le poste adéquat
     """
-    return depense * taux / (1 + taux)
+    return depense * ((1+taux_plein_tva)*droit_cn)/(consommation_cn-(1+taux_plein_tva)*droit_cn)
+
+    # (1+taux plein tva)*droit/((consocn-(1+tauxplein)(droit)))  * depense
