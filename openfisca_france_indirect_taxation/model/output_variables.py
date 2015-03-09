@@ -372,9 +372,11 @@ class montant_droit_d_accise_cigarette(SimpleFormulaColumn):#TODO:
     def function(self, simulation, period):
         consommation_cigarette = simulation.calculate('consommation_cigarette', period)
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.
-        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.
-       return period, montant_droit_d_accise(consommation_cigarette, droit_cn, consommation_cn, taux_plein_tva)
+#        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.
+#        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.
+        droit_cn = 0
+        consommation_cn = 0
+        return period, montant_droit_d_accise(consommation_cigarette, droit_cn, consommation_cn, taux_plein_tva)
 
 
 @reference_formula
@@ -386,8 +388,10 @@ class montant_droit_d_accise_cigares(SimpleFormulaColumn):#TODO:
     def function(self, simulation, period):
         consommation_cigares = simulation.calculate('consommation_cigares', period)
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.
-        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.
+#        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.
+#        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.
+        droit_cn = 0
+        consommation_cn = 0
         return period, montant_droit_d_accise(consommation_cigares, droit_cn, consommation_cn, taux_plein_tva)
 
 
@@ -400,8 +404,10 @@ class montant_droit_d_accise_tabac_a_rouler(SimpleFormulaColumn):#TODO:
     def function(self, simulation, period):
         consommation_tabac_a_rouler = simulation.calculate('consommation_tabac_a_rouler', period)
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.
-        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.
+#        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.
+#        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.
+        droit_cn = 0
+        consommation_cn = 0
         return period, montant_droit_d_accise(consommation_tabac_a_rouler, droit_cn, consommation_cn, taux_plein_tva)
 
 
