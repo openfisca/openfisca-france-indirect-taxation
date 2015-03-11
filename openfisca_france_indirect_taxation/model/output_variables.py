@@ -28,14 +28,13 @@ import numpy
 from . base import *  # noq analysis:ignore
 
 
-from openfisca_france_indirect_taxation.model.tva import tax_from_expense_including_tax
-from openfisca_france_indirect_taxation.model.droit_d_accise import montant_droit_d_accise
-from openfisca_france_indirect_taxation.param.param import (
+from openfisca_france_indirect_taxation.param.param import ( # noq analysis:ignore
     # P_tva_taux_plein, P_tva_taux_intermediaire, P_tva_taux_reduit,
     # P_tva_taux_super_reduit,
     P_alcool_0211, P_alcool_0212, P_alcool_0213
     )
-#TODO: supprimer les P_alcool ?
+# TODO: supprimer les P_alcool ?
+
 
 @reference_formula
 class age(SimpleFormulaColumn):
@@ -455,7 +454,7 @@ class montant_tipp(SimpleFormulaColumn):
 
     def function(self, simulation, period):
 
-        return period,#TODO:
+        return period,  # TODO:
 
 
 @reference_formula

@@ -46,12 +46,27 @@ __all__ = [
     'IntCol',
     'mark_weighted_percentiles',
     'Menages',
+    'montant_droit_d_accise',
     'reference_formula',
     'reference_input_variable',
     'SimpleFormulaColumn',
+    'tax_from_expense_including_tax',
     ]
 
 
 # Functions and decorators
 
 reference_formula = make_reference_formula_decorator(entity_class_by_symbol = entity_class_by_symbol)
+
+
+def montant_droit_d_accise(depense, droit_cn, consommation_cn, taux_plein_tva):
+    """
+    Calcule le montant de droit d'accise sur un volume de dépense payé pour le poste adéquat
+    """
+    return depense * ((1 + taux_plein_tva) * droit_cn) / (consommation_cn - (1 + taux_plein_tva) * droit_cn)
+
+
+def tax_from_expense_including_tax(expense = None, tax_rate = None):
+    """Compute the tax amount form the expense including tax"""
+    return expense * tax_rate / (1 + tax_rate)
+
