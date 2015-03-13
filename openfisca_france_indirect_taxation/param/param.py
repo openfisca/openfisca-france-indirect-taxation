@@ -42,7 +42,7 @@ legislation_json = {
                             "description": "Taux intermédiaire",
                             "format": "float",
                             "values": [
-                                {'start': u'200-01-01', 'stop': u'2012-12-31', 'value': 0},
+                                {'start': u'2000-01-01', 'stop': u'2012-12-31', 'value': 0},
                                 {'start': u'2012-01-01', 'stop': u'2014-12-31', 'value': .07},
                                 {'start': u'2014-01-01', 'stop': u'2015-12-31', 'value': .1}
                                 ],
@@ -202,7 +202,8 @@ legislation_json = {
                             "format": "float",
                             "values": [
                                 {'start': u'2000-01-01', 'stop': u'2002-12-31', 'value': 38.9},
-                                {'start': u'2003-01-01', 'stop': u'2006-12-31', 'value': 39.19},
+                                {'start': u'2003-01-01', 'stop': u'2003-12-31', 'value': 39.19},
+                                {'start': u'2004-01-01', 'stop': u'2006-12-31', 'value': 41.69},
                                 {'start': u'2007-01-01', 'stop': u'2010-12-31', 'value': 42.84},
                                 {'start': u'2011-01-01', 'stop': u'2014-12-31', 'value': 44.19},
                                 ],
@@ -332,7 +333,7 @@ legislation_json = {
                                         {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 2111},
                                         {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 2150},
                                         {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 2225},
-                                        #TODO: trouver les droits apres 2012
+                                        #TODO: Problème pour les alcools forts chiffres différents entre les deux bases excel !
                                         ],
                                     },
                                 "masse_conso_cn_alcools": {
@@ -340,7 +341,19 @@ legislation_json = {
                                     "description": "Masse droit alcool selon comptabilité nationale",
                                     "format": "float",
                                     "values": [
-#                                        {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 1872},
+                                        {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 4486},
+                                        {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 4616},
+                                        {'start': u'2002-01-01', 'stop': u'2002-12-31', 'value': 4781},
+                                        {'start': u'2003-01-01', 'stop': u'2003-12-31', 'value': 4762},
+                                        {'start': u'2004-01-01', 'stop': u'2004-12-31', 'value': 4789},
+                                        {'start': u'2005-01-01', 'stop': u'2005-12-31', 'value': 4790},
+                                        {'start': u'2006-01-01', 'stop': u'2006-12-31', 'value': 4894},
+                                        {'start': u'2007-01-01', 'stop': u'2007-12-31', 'value': 4913},
+                                        {'start': u'2008-01-01', 'stop': u'2008-12-31', 'value': 4920},
+                                        {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 5041},
+                                        {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 5155},
+                                        {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': },
+                                        {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': },  
                                         ],
                                     },
                                 },
@@ -349,32 +362,147 @@ legislation_json = {
                     },
                 "tabac": {
                     "@type": "Node",
-                    "description": "Pour calculer le taux de taxation implicite sur le tabac",
+                    "description": "tabac",
                     "children": {
                         "cigarettes": {
-                            "@type": "Parameter",
-                            "description": "Taux de taxation cigarettes",
-                            "format": "float",
-                            "values": [
-                                {'start': u'2000-01-01', 'stop': u'2000-03-31', 'value': 0.5830},
-                                {'start': u'2000-04-01', 'stop': u'2003-08-31', 'value': 0.5899},
-                                {'start': u'2003-09-01', 'stop': u'2004-04-30', 'value': 0.62},
-                                {'start': u'2004-04-30', 'stop': u'2010-12-31', 'value': 0.64}
-                                {'start': u'2011-01-01', 'stop': u'2013-06-30', 'value': 0.6425}
-#                               {'start': u'2013-07-01', 'stop': u'', 'value':}
-                                ],
+                            "@type": "Node",
+                            "description": "Pour calculer le taux de taxation implicite sur les cigarettes",
+                            "children": {
+                                "Taux normal cigarette": {
+                                    "@type": "Parameter",
+                                    "description": "Taux normal cigarette",
+                                    "format": "float",
+                                    "values": [
+                                        {'start': u'2000-01-01', 'stop': u'2000-03-31', 'value': 0.5830},
+                                        {'start': u'2000-04-01', 'stop': u'2003-08-31', 'value': 0.5899},
+                                        {'start': u'2003-09-01', 'stop': u'2004-04-30', 'value': 0.62},
+                                        {'start': u'2004-05-01', 'stop': u'2010-12-31', 'value': 0.64}
+                                        {'start': u'2011-01-01', 'stop': u'2013-06-30', 'value': 0.6425}
+                                        {'start': u'2013-07-01', 'stop': u'2014-12-31', 'value': 0.647}
+                                        ],
+                                    },
+                                "Taux normal cigarette": {
+                                "@type": "Parameter",
+                                "description": "Taux specifique cigarette",
+                                "format": "float",
+                                "values": [
+                                        {'start': u'2000-01-01', 'stop': u'2004-01-04', 'value': 0.05},
+                                        {'start': u'2004-01-05', 'stop': u'2010-12-31', 'value': 0.075},
+                                        {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 0.09},
+                                        {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 0.12}, 
+                                        {'start': u'2013-01-01', 'stop': u'2013-06-30', 'value': 0.125},
+                                        {'start': u'2013-07-01', 'stop': u'2014-12-31', 'value': 0.15},
+                                        ],
+                                    },
+                                },
                             },
-#                            Continuer sur le tabac
+                        "Tabac à rouler": {
+                            "@type": "Node",
+                            "description": "Pour calculer le taux de taxation implicite sur le tabac à rouler",
+                            "children": {
+                                "Taux normal tabac à rouler": {
+                                    "@type": "Parameter",
+                                    "description": "Taux normal tabac à rouler",
+                                    "format": "float",
+                                    "values": [
+                                        {'start': u'2000-01-01', 'stop': u'2000-03-31', 'value': 0.51},
+                                        {'start': u'2000-04-01', 'stop': u'2004-01-04', 'value': 0.5169},
+                                        {'start': u'2004-01-05', 'stop': u'2012-12-31', 'value': 0.5857},
+                                        {'start': u'2013-01-01', 'stop': u'2013-06-30', 'value': 0.6}
+                                        {'start': u'2013-07-01', 'stop': u'2014-12-31', 'value': 0.62} 
+                                        ],
+                                    },
+                                "Taux specifique tabac à rouler": {
+                                "@type": "Parameter",
+                                "description": "Taux specifique tabac à rouler",
+                                "format": "float",
+                                "values": [
+                                        {'start': u'2000-01-01', 'stop': u'2012-12-31', 'value': 0},
+                                        {'start': u'2013-12-01', 'stop': u'2014-12-31', 'value': 0.3},
+                                        ],
+                                    },
+                                },
+                            },
                         "cigares": {
-                            "@type": "Parameter",
-                            "description": "Masse droit bière selon comptabilité nationale",
-                            "format": "float",
-                            "values": [
-                                #TODO:
-                                {'start': u'2004-05-01', 'stop': u'2010-12-31', 'value': },
-                                {'start': u'2010-01-01', 'stop': u'2013-01-06', 'value': },
-                                {'start': u'2013-01-07', 'stop': u'2015-12-31', 'value': },
-                                ],
+                            "@type": "Node",
+                            "description": "Pour calculer le taux de taxation implicite sur les cigares",
+                            "children": {                        
+                                "Taux normal cigare": {
+                                    "@type": "Parameter",
+                                    "description": "Taux normaux de taxation cigares",
+                                    "format": "float",
+                                    "values": [
+                                        {'start': u'2000-01-01', 'stop': u'2000-03-31', 'value': 0.2886},
+                                        {'start': u'2000-04-01', 'stop': u'2001-01-07', 'value': 0.2955},
+                                        {'start': u'2001-01-08', 'stop': u'2001-12-31', 'value': 0.25},
+                                        {'start': u'2001-12-31', 'stop': u'2004-01-04', 'value': 0.2}
+                                        {'start': u'2004-01-05', 'stop': u'2012-03-14', 'value': 0.2757}
+                                        {'start': u'2012-03-15', 'stop': u'2012-08-17', 'value': 0.2716}
+                                        {'start': u'2012-08-17', 'stop': u'2012-12-31', 'value': 0.2757}
+                                        {'start': u'2013-01-01', 'stop': u'2014-12-31', 'value': 0.28 }
+                                        ]
+                                    },
+                                    
+                                "Taux specifique cigare": {
+                                    "@type": "Parameter",
+                                    "description": "Taux specifique de taxation cigares",
+                                    "format": "float",
+                                    "values": [
+                                        {'start': u'2000-01-01', 'stop': u'2012-12-31', 'value': 0},
+                                        {'start': u'2013-01-01', 'stop': u'2014-12-31', 'value': 0.05},
+                                        ]
+                                    },
+                                }           
+                            },
+                        
+                        
+                "Contribution solidarité avion": {
+                    "@type": "Node",
+                    "description": "Taxe sur les billets d'avions",
+                    "children": {
+                        "Taxe sur les billets d'avions": {
+                            "@type": "Node",
+                            "description": "Pour calculer le taux de taxation implicite sur les billets d'avions",
+                            "children": {
+                                "Consommation billets d'avions": {
+                                    "@type": "Parameter",
+                                    "description": "Consommation billets d'avions",
+                                    "format": "float",
+                                    "values": [        
+                                        {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 5024},
+                                        {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 5187},
+                                        {'start': u'2002-01-01', 'stop': u'2002-12-31', 'value': 5422},
+                                        {'start': u'2003-01-01', 'stop': u'2003-12-31', 'value': 5543},
+                                        {'start': u'2004-01-01', 'stop': u'2004-12-31', 'value': 6122},
+                                        {'start': u'2005-01-01', 'stop': u'2005-12-31', 'value': 6658},
+                                        {'start': u'2006-01-01', 'stop': u'2006-12-31', 'value': 7355},
+                                        {'start': u'2007-01-01', 'stop': u'2007-12-31', 'value': 7853},
+                                        {'start': u'2008-01-01', 'stop': u'2008-12-31', 'value': 8609},
+                                        {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 8734},
+                                        {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 8618},
+                                        {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 9130},
+                                        {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 9490},
+                                        {'start': u'2013-01-01', 'stop': u'2013-12-31', 'value': 9605},
+#                                       {'start': u'2014-01-01', 'stop': u'2014-12-31', 'value': },
+                                        ]
+                                    },
+                                "Recette de la contribution sur billets d'avions": {
+                                    "@type": "Parameter",
+                                    "description": "Revenu de la contribution",
+                                    "format": "float",
+                                    "values": [
+                                        {'start': u'2006-01-01', 'stop': u'2006-12-31', 'value': 45},
+                                        {'start': u'2007-01-01', 'stop': u'2007-12-31', 'value': 164},
+                                        {'start': u'2008-01-01', 'stop': u'2008-12-31', 'value': 173},
+                                        {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 162},
+                                        {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 163},
+                                        {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 175},
+                                        {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 175},
+                                        {'start': u'2013-01-01', 'stop': u'2013-12-31', 'value': 175},
+#                                       {'start': u'2014-01-01', 'stop': u'2014-12-31', 'value': },
+                                        ]
+                                    },
+                                },
                             },
                         },
                     },
