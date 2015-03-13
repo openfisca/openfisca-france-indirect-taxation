@@ -348,7 +348,7 @@ legislation_json = {
                                     },
                                 "masse_conso_cn_alcools": {
                                     "@type": "Parameter",
-                                    "description": "Masse droit alcool selon comptabilité nationale",
+                                    "description": "Masse consommation alcool selon comptabilité nationale",
                                     "format": "float",
                                     "values": [
                                         {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 4486},
@@ -362,8 +362,8 @@ legislation_json = {
                                         {'start': u'2008-01-01', 'stop': u'2008-12-31', 'value': 4920},
                                         {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 5041},
                                         {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 5155},
-                                        {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': },
-                                        {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': },
+#                                       {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': },
+#                                       {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': },
                                         ],
                                     },
                                 },
@@ -386,9 +386,9 @@ legislation_json = {
                                         {'start': u'2000-01-01', 'stop': u'2000-03-31', 'value': 0.5830},
                                         {'start': u'2000-04-01', 'stop': u'2003-08-31', 'value': 0.5899},
                                         {'start': u'2003-09-01', 'stop': u'2004-04-30', 'value': 0.62},
-                                        {'start': u'2004-05-01', 'stop': u'2010-12-31', 'value': 0.64}
-                                        {'start': u'2011-01-01', 'stop': u'2013-06-30', 'value': 0.6425}
-                                        {'start': u'2013-07-01', 'stop': u'2014-12-31', 'value': 0.647}
+                                        {'start': u'2004-05-01', 'stop': u'2010-12-31', 'value': 0.64},
+                                        {'start': u'2011-01-01', 'stop': u'2013-06-30', 'value': 0.6425},
+                                        {'start': u'2013-07-01', 'stop': u'2014-12-31', 'value': 0.647},
                                         ],
                                     },
                                 "Taux normal cigarette": {
@@ -418,8 +418,8 @@ legislation_json = {
                                         {'start': u'2000-01-01', 'stop': u'2000-03-31', 'value': 0.51},
                                         {'start': u'2000-04-01', 'stop': u'2004-01-04', 'value': 0.5169},
                                         {'start': u'2004-01-05', 'stop': u'2012-12-31', 'value': 0.5857},
-                                        {'start': u'2013-01-01', 'stop': u'2013-06-30', 'value': 0.6}
-                                        {'start': u'2013-07-01', 'stop': u'2014-12-31', 'value': 0.62}
+                                        {'start': u'2013-01-01', 'stop': u'2013-06-30', 'value': 0.6},
+                                        {'start': u'2013-07-01', 'stop': u'2014-12-31', 'value': 0.62},
                                         ],
                                     },
                                 "Taux specifique tabac à rouler": {
@@ -445,11 +445,11 @@ legislation_json = {
                                         {'start': u'2000-01-01', 'stop': u'2000-03-31', 'value': 0.2886},
                                         {'start': u'2000-04-01', 'stop': u'2001-01-07', 'value': 0.2955},
                                         {'start': u'2001-01-08', 'stop': u'2001-12-31', 'value': 0.25},
-                                        {'start': u'2001-12-31', 'stop': u'2004-01-04', 'value': 0.2}
-                                        {'start': u'2004-01-05', 'stop': u'2012-03-14', 'value': 0.2757}
-                                        {'start': u'2012-03-15', 'stop': u'2012-08-17', 'value': 0.2716}
-                                        {'start': u'2012-08-17', 'stop': u'2012-12-31', 'value': 0.2757}
-                                        {'start': u'2013-01-01', 'stop': u'2014-12-31', 'value': 0.28 }
+                                        {'start': u'2001-12-31', 'stop': u'2004-01-04', 'value': 0.2},
+                                        {'start': u'2004-01-05', 'stop': u'2012-03-14', 'value': 0.2757},
+                                        {'start': u'2012-03-15', 'stop': u'2012-08-17', 'value': 0.2716},
+                                        {'start': u'2012-08-17', 'stop': u'2012-12-31', 'value': 0.2757},
+                                        {'start': u'2013-01-01', 'stop': u'2014-12-31', 'value': 0.28 },
                                         ]
                                     },
 
@@ -464,8 +464,8 @@ legislation_json = {
                                     },
                                 }
                             },
-
-
+                        },
+                    },
                 "Contribution solidarité avion": {
                     "@type": "Node",
                     "description": "Taxe sur les billets d'avions",
@@ -501,14 +501,13 @@ legislation_json = {
                                     "description": "Revenu de la contribution",
                                     "format": "float",
                                     "values": [
+                                        {'start': u'2000-01-01', 'stop': u'2005-12-31', 'value': 0},
                                         {'start': u'2006-01-01', 'stop': u'2006-12-31', 'value': 45},
                                         {'start': u'2007-01-01', 'stop': u'2007-12-31', 'value': 164},
                                         {'start': u'2008-01-01', 'stop': u'2008-12-31', 'value': 173},
                                         {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 162},
                                         {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 163},
-                                        {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 175},
-                                        {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 175},
-                                        {'start': u'2013-01-01', 'stop': u'2013-12-31', 'value': 175},
+                                        {'start': u'2011-01-01', 'stop': u'2013-12-31', 'value': 175},
 #                                       {'start': u'2014-01-01', 'stop': u'2014-12-31', 'value': },
                                         ]
                                     },
@@ -519,4 +518,4 @@ legislation_json = {
                 },
             },
         },
-    }
+    },
