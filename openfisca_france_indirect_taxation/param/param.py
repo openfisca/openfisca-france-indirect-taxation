@@ -544,4 +544,4 @@ legislation_json = {
                 },
             },
         },
-    },
+    }
