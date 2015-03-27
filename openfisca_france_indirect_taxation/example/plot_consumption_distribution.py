@@ -26,15 +26,17 @@ from pandas import DataFrame
 import matplotlib.pyplot as plt
 
 import openfisca_france_indirect_taxation
-from openfisca_survey_manager.surveys import SurveyCollection
+from openfisca_survey_manager.survey_collections import SurveyCollection
 
 
+from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
 def get_input_data_frame(year):
-    openfisca_survey_collection = SurveyCollection.load(collection = "openfisca_indirect_taxation")
-    openfisca_survey = openfisca_survey_collection.surveys["openfisca_indirect_taxation_data_{}".format(year)]
+    openfisca_survey_collection = SurveyCollection.load(
+        collection = "openfisca_indirect_taxation", config_files_directory = config_files_directory)
+    openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
     input_data_frame = openfisca_survey.get_values(table = "input")
     input_data_frame.reset_index(inplace = True)
     return input_data_frame
