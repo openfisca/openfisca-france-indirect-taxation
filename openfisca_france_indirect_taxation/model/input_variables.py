@@ -33,7 +33,7 @@ reference_input_variable(
     name = 'birth',
     )
 
-for coicop12_index in range(1,13):
+for coicop12_index in range(1, 13):
     reference_input_variable(
         column = FloatCol,
         entity_class = Menages,
