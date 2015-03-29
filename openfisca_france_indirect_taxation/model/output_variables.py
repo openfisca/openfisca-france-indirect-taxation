@@ -220,6 +220,40 @@ class consommation_totale(SimpleFormulaColumn):
             consommation_tva_taux_plein
             )
 
+@reference_formula
+class somme_coicop12(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Somme des postes coicop12"
+
+    def function(self, simulation, period):
+        coicop12_1 = simulation.calculate('coicop12_1', period)
+        coicop12_2 = simulation.calculate('coicop12_2', period)
+        coicop12_3 = simulation.calculate('coicop12_3', period)
+        coicop12_4 = simulation.calculate('coicop12_4', period)
+        coicop12_5 = simulation.calculate('coicop12_5', period)
+        coicop12_6 = simulation.calculate('coicop12_6', period)
+        coicop12_7 = simulation.calculate('coicop12_7', period)
+        coicop12_8 = simulation.calculate('coicop12_8', period)
+        coicop12_9 = simulation.calculate('coicop12_9', period)
+        coicop12_10 = simulation.calculate('coicop12_10', period)
+        coicop12_11 = simulation.calculate('coicop12_11', period)
+        coicop12_12 = simulation.calculate('coicop12_12', period)
+        return period, (
+            coicop12_1 +
+            coicop12_2 +
+            coicop12_3 +
+            coicop12_4 +
+            coicop12_5 +
+            coicop12_6 +
+            coicop12_7 +
+            coicop12_8 +
+            coicop12_9 +
+            coicop12_10 +
+            coicop12_11 +
+            coicop12_12
+            )
+
 
 @reference_formula
 class decile(SimpleFormulaColumn):

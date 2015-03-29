@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Sun Mar 29 15:43:49 2015
+
+@author: germainmarchand
+"""
+
+# -*- coding: utf-8 -*-
 
 
 # OpenFisca -- A versatile microsimulation software
@@ -112,7 +119,7 @@ if __name__ == '__main__':
         'age',
         'decile',
         'revtot',
-        'consommation_totale',
+        'somme_coicop12',
         'ocde10',
         'niveau_de_vie',
         ]
@@ -121,13 +128,13 @@ if __name__ == '__main__':
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df(var_to_be_simulated = var_to_be_simulated)
-    var_to_concat = list_coicop12 + ['consommation_totale']
+    var_to_concat = list_coicop12 + ['somme_coicop12']
     Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_concat)
 
     # Construction des parts
     list_part_coicop12 = []
     for i in range(1, 13):
-        Wconcat['part_coicop12_{}'.format(i)] = Wconcat['coicop12_{}'.format(i)] / Wconcat['consommation_totale']
+        Wconcat['part_coicop12_{}'.format(i)] = Wconcat['coicop12_{}'.format(i)] / Wconcat['somme_coicop12']
         'list_part_coicop12_{}'.format(i)
         list_part_coicop12.append('part_coicop12_{}'.format(i))
 
@@ -135,5 +142,10 @@ if __name__ == '__main__':
 
     df_to_graph.plot(kind = 'bar', stacked = True)
     plt.axhline(0, color = 'k')
+
+    # Supprimer la légende du graphique
+    ax=plt.subplot(111)
+    ax.legend_.remove()
+    plt.show()
     #TODO: analyser, changer les déciles de revenus en déciles de consommation
     # faire un truc plus joli, mettres labels...
