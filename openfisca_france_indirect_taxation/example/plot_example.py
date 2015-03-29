@@ -27,7 +27,7 @@ import matplotlib.pyplot as plt
 import pandas
 
 import openfisca_france_indirect_taxation
-from openfisca_survey_manager.survey_collections import SurveyCollection
+from openfisca_survey_manager.surveys import SurveyCollection
 
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
