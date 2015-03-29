@@ -397,7 +397,7 @@ class montant_droit_d_accise_alcools_forts(SimpleFormulaColumn):
 
 
 @reference_formula
-class montant_droit_d_accise_cigarette(SimpleFormulaColumn):#TODO:
+class montant_droit_d_accise_cigarette(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des droits d'accises sur les cigarettes"
@@ -405,15 +405,13 @@ class montant_droit_d_accise_cigarette(SimpleFormulaColumn):#TODO:
     def function(self, simulation, period):
         consommation_cigarette = simulation.calculate('consommation_cigarette', period)
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-#        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.
-#        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.
-        droit_cn = 0
-        consommation_cn = 0
+        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.taux_normal_cigarette
+        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.taux_specifique_cigarette
         return period, montant_droit_d_accise(consommation_cigarette, droit_cn, consommation_cn, taux_plein_tva)
 
 
 @reference_formula
-class montant_droit_d_accise_cigares(SimpleFormulaColumn):#TODO:
+class montant_droit_d_accise_cigares(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des droits d'accises sur les cigares"
@@ -421,15 +419,13 @@ class montant_droit_d_accise_cigares(SimpleFormulaColumn):#TODO:
     def function(self, simulation, period):
         consommation_cigares = simulation.calculate('consommation_cigares', period)
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-#        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.
-#        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.
-        droit_cn = 0
-        consommation_cn = 0
+        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.taux_normal_cigar
+        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.taux_specifique_cigare
         return period, montant_droit_d_accise(consommation_cigares, droit_cn, consommation_cn, taux_plein_tva)
 
 
 @reference_formula
-class montant_droit_d_accise_tabac_a_rouler(SimpleFormulaColumn):#TODO:
+class montant_droit_d_accise_tabac_a_rouler(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des droits d'accises sur le tabac à rouler"
@@ -437,10 +433,8 @@ class montant_droit_d_accise_tabac_a_rouler(SimpleFormulaColumn):#TODO:
     def function(self, simulation, period):
         consommation_tabac_a_rouler = simulation.calculate('consommation_tabac_a_rouler', period)
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-#        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.
-#        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.
-        droit_cn = 0
-        consommation_cn = 0
+        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.taux_normal_tabac_a_rouler
+        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.taux_specifique_tabac_a_rouler
         return period, montant_droit_d_accise(consommation_tabac_a_rouler, droit_cn, consommation_cn, taux_plein_tva)
 
 

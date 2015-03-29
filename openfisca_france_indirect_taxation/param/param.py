@@ -418,7 +418,7 @@ legislation_json = {
                                         {'start': u'2013-07-01', 'stop': u'2014-12-31', 'value': 0.647},
                                         ],
                                     },
-                                "Taux normal cigarette": {
+                                "taux_specifique_cigarette": {
                                     "@type": "Parameter",
                                     "description": "Taux specifique cigarette",
                                     "format": "float",
