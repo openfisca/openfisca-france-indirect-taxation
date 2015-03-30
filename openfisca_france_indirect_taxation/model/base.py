@@ -28,7 +28,7 @@ from openfisca_core.enumerations import Enum
 from openfisca_core.formulas import (
     make_reference_formula_decorator, dated_function, DatedFormulaColumn, reference_input_variable, SimpleFormulaColumn
     )
-from openfisca_survey_manager.statshelpers import mark_weighted_percentiles
+from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
 
 
 from ..entities import entity_class_by_symbol, Individus, Menages
@@ -51,6 +51,7 @@ __all__ = [
     'reference_input_variable',
     'SimpleFormulaColumn',
     'tax_from_expense_including_tax',
+    'weighted_quantiles',
     ]
 
 

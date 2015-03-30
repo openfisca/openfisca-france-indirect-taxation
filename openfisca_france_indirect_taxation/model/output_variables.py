@@ -25,6 +25,7 @@
 import datetime
 import numpy
 
+
 from . base import *  # noq analysis:ignore
 
 
@@ -220,6 +221,7 @@ class consommation_totale(SimpleFormulaColumn):
             consommation_tva_taux_plein
             )
 
+
 @reference_formula
 class somme_coicop12(SimpleFormulaColumn):
     column = FloatCol
@@ -256,6 +258,33 @@ class somme_coicop12(SimpleFormulaColumn):
 
 
 @reference_formula
+class somme_coicop12_conso(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Somme des postes coicop12 de 1 à 8"
+
+    def function(self, simulation, period):
+        coicop12_1 = simulation.calculate('coicop12_1', period)
+        coicop12_2 = simulation.calculate('coicop12_2', period)
+        coicop12_3 = simulation.calculate('coicop12_3', period)
+        coicop12_4 = simulation.calculate('coicop12_4', period)
+        coicop12_5 = simulation.calculate('coicop12_5', period)
+        coicop12_6 = simulation.calculate('coicop12_6', period)
+        coicop12_7 = simulation.calculate('coicop12_7', period)
+        coicop12_8 = simulation.calculate('coicop12_8', period)
+        return period, (
+            coicop12_1 +
+            coicop12_2 +
+            coicop12_3 +
+            coicop12_4 +
+            coicop12_5 +
+            coicop12_6 +
+            coicop12_7 +
+            coicop12_8
+            )
+
+
+@reference_formula
 class decile(SimpleFormulaColumn):
     column = EnumCol(
         enum = Enum([
@@ -280,9 +309,10 @@ class decile(SimpleFormulaColumn):
         niveau_de_vie = simulation.calculate('niveau_de_vie', period)
         pondmen = simulation.calculate('pondmen', period)
         labels = numpy.arange(1, 11)
-        method = 2
-        decile, values = mark_weighted_percentiles(niveau_de_vie, labels, pondmen, method, return_quantiles = True)
-        del values
+        # Alternative method
+        # method = 2
+        # decile, values = mark_weighted_percentiles(niveau_de_vie, labels, pondmen, method, return_quantiles = True)
+        decile, values = weighted_quantiles(niveau_de_vie, labels, pondmen, return_quantiles = True)
         return period, decile
 
 

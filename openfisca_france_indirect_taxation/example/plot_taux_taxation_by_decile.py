@@ -29,6 +29,10 @@ Created on Tue Mar  3 10:08:25 2015
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+from __future__ import division
+
+
 from openfisca_france_indirect_taxation.example.plot_consumption_distribution \
     import df_weighted_average_grouped, simulate_df
 
