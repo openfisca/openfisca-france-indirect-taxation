@@ -32,6 +32,7 @@ Created on Tue Mar  3 10:08:25 2015
 from openfisca_france_indirect_taxation.example.plot_consumption_distribution \
     import df_weighted_average_grouped, simulate_df
 
+import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
     import logging
