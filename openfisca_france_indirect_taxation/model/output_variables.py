@@ -220,6 +220,7 @@ class consommation_totale(SimpleFormulaColumn):
             consommation_tva_taux_plein
             )
 
+
 @reference_formula
 class somme_coicop12(SimpleFormulaColumn):
     column = FloatCol
@@ -252,6 +253,33 @@ class somme_coicop12(SimpleFormulaColumn):
             coicop12_10 +
             coicop12_11 +
             coicop12_12
+            )
+
+
+@reference_formula
+class somme_coicop12_conso(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Somme des postes coicop12 de 1 à 8"
+
+    def function(self, simulation, period):
+        coicop12_1 = simulation.calculate('coicop12_1', period)
+        coicop12_2 = simulation.calculate('coicop12_2', period)
+        coicop12_3 = simulation.calculate('coicop12_3', period)
+        coicop12_4 = simulation.calculate('coicop12_4', period)
+        coicop12_5 = simulation.calculate('coicop12_5', period)
+        coicop12_6 = simulation.calculate('coicop12_6', period)
+        coicop12_7 = simulation.calculate('coicop12_7', period)
+        coicop12_8 = simulation.calculate('coicop12_8', period)
+        return period, (
+            coicop12_1 +
+            coicop12_2 +
+            coicop12_3 +
+            coicop12_4 +
+            coicop12_5 +
+            coicop12_6 +
+            coicop12_7 +
+            coicop12_8
             )
 
 
