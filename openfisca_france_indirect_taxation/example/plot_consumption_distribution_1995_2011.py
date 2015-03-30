@@ -109,7 +109,7 @@ if __name__ == '__main__':
 # Exemple: graphe par décile de revenu par uc de la ventilation de la consommation selon les postes agrégés de la CN
     # Lite des coicop agrégées en 12 postes
     list_coicop12 = []
-    for coicop12_index in range(1, 13):
+    for coicop12_index in range(1, 9):
         list_coicop12.append('coicop12_{}'.format(coicop12_index))
     # Liste des variables que l'on veut simuler
     var_to_be_simulated = [
@@ -119,7 +119,7 @@ if __name__ == '__main__':
         'age',
         'decile',
         'revtot',
-        'somme_coicop12',
+        'somme_coicop12_conso',
         'ocde10',
         'niveau_de_vie',
         ]
@@ -128,13 +128,13 @@ if __name__ == '__main__':
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df(var_to_be_simulated = var_to_be_simulated)
-    var_to_concat = list_coicop12 + ['somme_coicop12']
+    var_to_concat = list_coicop12 + ['somme_coicop12_conso']
     Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_concat)
 
     # Construction des parts
     list_part_coicop12 = []
-    for i in range(1, 13):
-        Wconcat['part_coicop12_{}'.format(i)] = Wconcat['coicop12_{}'.format(i)] / Wconcat['somme_coicop12']
+    for i in range(1, 9):
+        Wconcat['part_coicop12_{}'.format(i)] = Wconcat['coicop12_{}'.format(i)] / Wconcat['somme_coicop12_conso']
         'list_part_coicop12_{}'.format(i)
         list_part_coicop12.append('part_coicop12_{}'.format(i))
 
