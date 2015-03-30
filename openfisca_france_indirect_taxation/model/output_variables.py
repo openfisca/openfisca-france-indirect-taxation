@@ -25,6 +25,7 @@
 import datetime
 import numpy
 
+
 from . base import *  # noq analysis:ignore
 
 
@@ -308,9 +309,10 @@ class decile(SimpleFormulaColumn):
         niveau_de_vie = simulation.calculate('niveau_de_vie', period)
         pondmen = simulation.calculate('pondmen', period)
         labels = numpy.arange(1, 11)
-        method = 2
-        decile, values = mark_weighted_percentiles(niveau_de_vie, labels, pondmen, method, return_quantiles = True)
-        del values
+        # Alternative method
+        # method = 2
+        # decile, values = mark_weighted_percentiles(niveau_de_vie, labels, pondmen, method, return_quantiles = True)
+        decile, values = weighted_quantiles(niveau_de_vie, labels, pondmen, return_quantiles = True)
         return period, decile
 
 
