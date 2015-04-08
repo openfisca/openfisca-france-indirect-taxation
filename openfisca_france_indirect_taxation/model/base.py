@@ -62,7 +62,7 @@ reference_formula = make_reference_formula_decorator(entity_class_by_symbol = en
 
 def montant_droit_d_accise(depense, droit_cn, consommation_cn, taux_plein_tva):
     """
-    Calcule le montant de droit d'accise sur un volume de dépense payé pour le poste adéquat
+    Calcule le montant de droit d'accise sur un volume de dépense payé pour le poste adéquat. 
     """
     return depense * ((1 + taux_plein_tva) * droit_cn) / (consommation_cn - (1 + taux_plein_tva) * droit_cn)
 
@@ -70,4 +70,24 @@ def montant_droit_d_accise(depense, droit_cn, consommation_cn, taux_plein_tva):
 def tax_from_expense_including_tax(expense = None, tax_rate = None):
     """Compute the tax amount form the expense including tax"""
     return expense * tax_rate / (1 + tax_rate)
+    
+def taux_implicite_tipp_essence(tipp_super9598, prix_ttc_super95, prix_ttc_super98, taux_plein_tva):
+    """Calcule le taux implicite sur l'essence"""
+    return (tipp_super9598*(1+taux_plein_tva))/(((prix_ttc_super95+prix_ttc_super98)/2)-(tipp_super9598)*(1+taux_plein_tva))
+    
+def taux_implicite_tipp_gazole(tipp_gazole, taux_plein_tva, prix_ttc_gazole, taux_plein_tva):
+    """Calcule le taux implicite sur le gazole"""
+    return (tipp_gazole*(1+taux_plein_tva))/(((prix_ttc_gazole)-(tipp_gazole)*(1+taux_plein_tva))
+ 
+def taux_implicite_vin(droit_cn_vin, taux_plein_tva, masse_conso_cn_vin):
+    """Calcule le taux implicite pour le vin"""
+    return((droit_cn_vin*(1+taux_plein_tva))/(masse_conso_cn_vin-droit_cn_vin*(1+taux_plein_tva)))
+    
+def taux_implicite_biere(droit_cn_biere, taux_plein_tva, masse_conso_cn_biere):
+    """Calcule le taux implicite pour la biere"""
+    return((droit_cn_biere*(1+taux_plein_tva))/(masse_conso_cn_biere-droit_cn_biere*(1+taux_plein_tva)))
 
+#TODO: Créer le taux implicite pour alcool 
+#def taux_implicite_alcool():
+#return()
+     
