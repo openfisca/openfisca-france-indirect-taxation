@@ -354,7 +354,7 @@ legislation_json = {
                             "children": {
                                 "droit_cn_alcools": {
                                     "@type": "Parameter",
-                                    "description": "Masse droit alcool selon comptabilité nationale",
+                                    "description": "Masse droit alcool selon comptabilité nationale sans droits sur les produits intermediaires et cotisation spéciale alcool fort",
                                     "format": "float",
                                     "values": [
                                         {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 1872},
@@ -373,6 +373,28 @@ legislation_json = {
                                         # TODO: Problème pour les alcools forts chiffres différents entre les deux bases excel !
                                         ],
                                     },
+                                "droit_cn_alcools_total": {
+                                    "@type": "Parameter",
+                                    "description": u"Masse droit alcool selon comptabilité nationale avec les différents droits",
+                                    "format": "float",
+                                    "values": [
+                                        {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 2416},
+                                        {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 2514},
+                                        {'start': u'2002-01-01', 'stop': u'2002-12-31', 'value': 2503},
+                                        {'start': u'2003-01-01', 'stop': u'2003-12-31', 'value': 2453},
+                                        {'start': u'2004-01-01', 'stop': u'2004-12-31', 'value': 2409},
+                                        {'start': u'2005-01-01', 'stop': u'2005-12-31', 'value': 2352},
+                                        {'start': u'2006-01-01', 'stop': u'2006-12-31', 'value': 2477},
+                                        {'start': u'2007-01-01', 'stop': u'2007-12-31', 'value': 2516},
+                                        {'start': u'2008-01-01', 'stop': u'2008-12-31', 'value': 2528},
+                                        {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 2629},
+                                        {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 2734},
+                                        {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 3078},
+                                        {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 2718},
+                                        {'start': u'2013-01-01', 'stop': u'2013-12-31', 'value': 3022},
+                                        # {'start': u'2014-01-01', 'stop': u'2014-12-31', 'value': },
+                                        ],
+                                    },
                                 "masse_conso_cn_alcools": {
                                     "@type": "Parameter",
                                     "description": u"Masse consommation alcool selon comptabilité nationale",
@@ -389,8 +411,10 @@ legislation_json = {
                                         {'start': u'2008-01-01', 'stop': u'2008-12-31', 'value': 4920},
                                         {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 5041},
                                         {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 5155},
-                                        # {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': },
-                                        # {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': },
+#TODO: Probleme les chiffres du drive ne correspondent pas aux chiffres sur la consommation alcool de Meslin et Dauvergne
+#                                        {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': },
+#                                        {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': },
+#                                        {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': },
                                         ],
                                     },
                                 },

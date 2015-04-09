@@ -87,9 +87,9 @@ def taux_implicite_biere(droit_cn_biere, taux_plein_tva, masse_conso_cn_biere):
     """Calcule le taux implicite pour la biere"""
     return droit_cn_biere * (1 + taux_plein_tva) / (masse_conso_cn_biere - droit_cn_biere * (1 + taux_plein_tva))
 
-# TODO: Créer le taux implicite pour alcool
-# def taux_implicite_alcool():
-# return()
+def taux_implicite_alcool(droit_cn_alcools_total, taux_plein_tva, masse_conso_cn_alcools):
+    """Calcule le taux implicite pour l'alcool"""
+    return droit_cn_alcools_total * (1 + taux_plein_tva) / (masse_conso_cn_alcools - droit_cn_alcools_total * (1 + taux_plein_tva))
 
 
 def tax_from_expense_including_tax(expense = None, tax_rate = None):
