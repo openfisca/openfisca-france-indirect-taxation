@@ -22,6 +22,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import division
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 
@@ -81,6 +82,7 @@ def collapse(dataframe, groupe, var):
     var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x, var = var))
     return var_weighted_grouped
 
+    df_grouped = collapse(df, 'decile', ['montant_tva_taux_plein'])
 
 def df_weighted_average_grouped(dataframe, groupe, varlist):
     '''
