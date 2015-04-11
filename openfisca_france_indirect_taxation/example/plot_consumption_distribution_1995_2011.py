@@ -31,6 +31,8 @@ Created on Sun Mar 29 15:43:49 2015
 
 from pandas import DataFrame
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import numpy as np
 
 import openfisca_france_indirect_taxation
 from openfisca_survey_manager.survey_collections import SurveyCollection
@@ -38,6 +40,7 @@ from openfisca_survey_manager.survey_collections import SurveyCollection
 
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
+
 
 
 def get_input_data_frame(year):
@@ -145,7 +148,10 @@ if __name__ == '__main__':
 
     # Supprimer la légende du graphique
     ax=plt.subplot(111)
-    ax.legend_.remove()
+
+
+    #ax.legend_.remove()
+    ax.legend(bbox_to_anchor=(1.4,1.0), labels = ['','','coicop1','coicop2','coicop3','coicop4','coicop5','coicop6','coicop7','coicop8'])
     plt.show()
     #TODO: analyser, changer les déciles de revenus en déciles de consommation
     # faire un truc plus joli, mettres labels...
