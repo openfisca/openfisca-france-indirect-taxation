@@ -42,7 +42,6 @@ from openfisca_france_data import default_config_files_directory as config_files
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
-
 def get_input_data_frame(year):
     openfisca_survey_collection = SurveyCollection.load(
         collection = "openfisca_indirect_taxation", config_files_directory = config_files_directory)
@@ -108,9 +107,9 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-
-# Exemple: graphe par décile de revenu par uc de la ventilation de la consommation selon les postes agrégés de la CN
-    # Lite des coicop agrégées en 12 postes
+    # Exemple: graphe par décile de revenu par uc de la ventilation de la consommation
+    # selon les postes agrégés de la CN
+    # Liste des coicop agrégées en 12 postes
     list_coicop12 = []
     for coicop12_index in range(1, 9):
         list_coicop12.append('coicop12_{}'.format(coicop12_index))
@@ -147,11 +146,11 @@ if __name__ == '__main__':
     plt.axhline(0, color = 'k')
 
     # Supprimer la légende du graphique
-    ax=plt.subplot(111)
-
-
-    #ax.legend_.remove()
-    ax.legend(bbox_to_anchor=(1.4,1.0), labels = ['','','coicop1','coicop2','coicop3','coicop4','coicop5','coicop6','coicop7','coicop8'])
+    ax = plt.subplot(111)
+    ax.legend(
+        bbox_to_anchor = (1.4, 1.0),
+        labels = ['', '', 'coicop1', 'coicop2', 'coicop3', 'coicop4', 'coicop5', 'coicop6', 'coicop7', 'coicop8']
+        )
     plt.show()
-    #TODO: analyser, changer les déciles de revenus en déciles de consommation
+    # TODO: analyser, changer les déciles de revenus en déciles de consommation
     # faire un truc plus joli, mettres labels...
