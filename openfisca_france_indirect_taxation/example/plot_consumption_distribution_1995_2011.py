@@ -29,9 +29,11 @@ Created on Sun Mar 29 15:43:49 2015
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import division
+
 from pandas import DataFrame
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
+import matplotlib.ticker as ticker #TODO: axes en pourcentage
 import numpy as np
 
 import openfisca_france_indirect_taxation
@@ -131,7 +133,7 @@ if __name__ == '__main__':
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df(var_to_be_simulated = var_to_be_simulated)
     var_to_concat = list_coicop12 + ['somme_coicop12_conso']
-    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_concat)
+    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = var_to_concat)
 
     # Construction des parts
     list_part_coicop12 = []
@@ -150,7 +152,7 @@ if __name__ == '__main__':
     ax.legend(
         bbox_to_anchor = (1.4, 1.0),
         labels = ['', '', 'coicop1', 'coicop2', 'coicop3', 'coicop4', 'coicop5', 'coicop6', 'coicop7', 'coicop8']
-        )
+        ) #TODO: supprimer la légende pour les lignes pointillées et continues
     plt.show()
     # TODO: analyser, changer les déciles de revenus en déciles de consommation
     # faire un truc plus joli, mettres labels...

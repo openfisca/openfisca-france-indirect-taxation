@@ -29,6 +29,8 @@ Created on Sun Mar 29 15:43:49 2015
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from __future__ import division
+
 from pandas import DataFrame, concat
 import matplotlib.pyplot as plt
 
