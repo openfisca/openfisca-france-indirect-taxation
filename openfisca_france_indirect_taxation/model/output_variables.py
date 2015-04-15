@@ -22,6 +22,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+from __future__ import division
+
+
 import datetime
 import numpy
 
@@ -312,6 +316,7 @@ class decile(SimpleFormulaColumn):
         # Alternative method
         # method = 2
         # decile, values = mark_weighted_percentiles(niveau_de_vie, labels, pondmen, method, return_quantiles = True)
+        print 'coucou'
         decile, values = weighted_quantiles(niveau_de_vie, labels, pondmen, return_quantiles = True)
         return period, decile
 

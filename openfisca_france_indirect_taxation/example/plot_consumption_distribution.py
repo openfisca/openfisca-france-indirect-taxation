@@ -124,7 +124,7 @@ if __name__ == '__main__':
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df(var_to_be_simulated = var_to_be_simulated)
     var_to_concat = list_coicop12 + ['consommation_totale']
-    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_concat)
+    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = var_to_concat)
 
     # Construction des parts
     list_part_coicop12 = []
