@@ -142,17 +142,25 @@ if __name__ == '__main__':
         'list_part_coicop12_{}'.format(i)
         list_part_coicop12.append('part_coicop12_{}'.format(i))
 
-    df_to_graph = Wconcat[list_part_coicop12]
+    df_to_graph = Wconcat[list_part_coicop12].copy()
+    print len(df_to_graph.columns)
+    df_to_graph.columns = ['coicop1', 'coicop2', 'coicop3', 'coicop4', 'coicop5', 'coicop6', 'coicop7', 'coicop8']
 
-    df_to_graph.plot(kind = 'bar', stacked = True)
+    axes = df_to_graph.plot(
+        kind = 'bar',
+        stacked = True,
+        )
     plt.axhline(0, color = 'k')
+    def percent_formatter(x, pos = 0):
+        return '%1.0f%%' % (100 * x)
+        # TODO utiliser format et corriger également ici
+        # https://github.com/openfisca/openfisca-matplotlib/blob/master/openfisca_matplotlib/graphs.py#L123
+    axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
 
     # Supprimer la légende du graphique
-    ax = plt.subplot(111)
-    ax.legend(
-        bbox_to_anchor = (1.4, 1.0),
-        labels = ['', '', 'coicop1', 'coicop2', 'coicop3', 'coicop4', 'coicop5', 'coicop6', 'coicop7', 'coicop8']
-        ) #TODO: supprimer la légende pour les lignes pointillées et continues
-    plt.show()
+#    axes.legend(
+#        bbox_to_anchor = (1.4, 1.0),
+#        ) # TODO: supprimer la légende pour les lignes pointillées et continues
+#    plt.show()
     # TODO: analyser, changer les déciles de revenus en déciles de consommation
     # faire un truc plus joli, mettres labels...
