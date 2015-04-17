@@ -316,7 +316,6 @@ class decile(SimpleFormulaColumn):
         # Alternative method
         # method = 2
         # decile, values = mark_weighted_percentiles(niveau_de_vie, labels, pondmen, method, return_quantiles = True)
-        print 'coucou'
         decile, values = weighted_quantiles(niveau_de_vie, labels, pondmen, return_quantiles = True)
         return period, decile
 
@@ -530,3 +529,4 @@ class niveau_de_vie(SimpleFormulaColumn):
         rev_disponible = simulation.calculate('rev_disponible', period)
         ocde10 = simulation.calculate('ocde10', period)
         return period, rev_disponible / ocde10
+
