@@ -33,12 +33,11 @@ from __future__ import division
 
 from pandas import DataFrame
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker #TODO: axes en pourcentage
+import matplotlib.ticker as ticker
 import numpy as np
 
 import openfisca_france_indirect_taxation
 from openfisca_survey_manager.survey_collections import SurveyCollection
-
 
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -126,6 +125,7 @@ if __name__ == '__main__':
         'somme_coicop12_conso',
         'ocde10',
         'niveau_de_vie',
+        'rev_disponible'
         ]
     # Merge des deux listes
     var_to_be_simulated += list_coicop12
@@ -133,7 +133,7 @@ if __name__ == '__main__':
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df(var_to_be_simulated = var_to_be_simulated)
     var_to_concat = list_coicop12 + ['somme_coicop12_conso']
-    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = var_to_concat)
+    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_concat)
 
     # Construction des parts
     list_part_coicop12 = []
@@ -143,12 +143,30 @@ if __name__ == '__main__':
         list_part_coicop12.append('part_coicop12_{}'.format(i))
 
     df_to_graph = Wconcat[list_part_coicop12].copy()
-    print len(df_to_graph.columns)
-    df_to_graph.columns = ['coicop1', 'coicop2', 'coicop3', 'coicop4', 'coicop5', 'coicop6', 'coicop7', 'coicop8']
+    #print len(df_to_graph.columns)
+    df_to_graph.columns = ['Alimentaire', 'Alcool + Tabac', 'Habits', 'Logement', 'Meubles', u'Santé', 'Transport', 'Communication']
+
+#TODO: vérifier si les postes COICOP12 sont bien les suivants (en particulier les 8 premiers)
+# RAPPEL : 12 postes CN et COICOP
+#    01 Produits alimentaires et boissons non alcoolisées
+#    02 Boissons alcoolisées et tabac
+#    03 Articles d'habillement et chaussures
+#    04 Logement, eau, gaz, électricité et autres combustibles
+#    05 Meubles, articles de ménage et entretien courant de l'habitation
+#    06 Santé
+#    07 Transports
+#    08 Communication
+#    09 Loisir et culture
+#    10 Education
+#    11 Hotels, cafés, restaurants
+#    12 Biens et services divers
+
+
 
     axes = df_to_graph.plot(
         kind = 'bar',
         stacked = True,
+        color = ['#800000','g','#660066','#1414ff','#ffce49','#383838','#f6546a','#229cdc']
         )
     plt.axhline(0, color = 'k')
     def percent_formatter(x, pos = 0):
@@ -158,9 +176,9 @@ if __name__ == '__main__':
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
 
     # Supprimer la légende du graphique
-#    axes.legend(
-#        bbox_to_anchor = (1.4, 1.0),
-#        ) # TODO: supprimer la légende pour les lignes pointillées et continues
-#    plt.show()
+    axes.legend(
+        bbox_to_anchor = (1.4, 1.0),
+        ) # TODO: supprimer la légende pour les lignes pointillées et continues
+    plt.show()
     # TODO: analyser, changer les déciles de revenus en déciles de consommation
     # faire un truc plus joli, mettres labels...

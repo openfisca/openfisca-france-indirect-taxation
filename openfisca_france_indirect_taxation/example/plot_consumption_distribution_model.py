@@ -210,7 +210,11 @@ if __name__ == '__main__':
 
     df_to_graph = concat([Wconcat2005[list_part_coicop12_2005], Wconcat2006[list_part_coicop12_2006], Wconcat2007[list_part_coicop12_2007], Wconcat2008[list_part_coicop12_2008], Wconcat2009[list_part_coicop12_2009], Wconcat2010[list_part_coicop12_2010]])
 
-    df_to_graph.plot(kind = 'bar', stacked = True)
+    axes = df_to_graph.plot(
+        kind = 'bar',
+        stacked = True,
+        color = ['#800000','g','#660066','#1414ff','#ffce49','#383838','#f6546a','#229cdc']
+        )
     plt.axhline(0, color = 'k')
 
     # Supprimer la légende du graphique
