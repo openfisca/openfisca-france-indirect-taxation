@@ -34,7 +34,6 @@ from __future__ import division
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-import numpy as np
 
 import openfisca_france_indirect_taxation
 from openfisca_survey_manager.survey_collections import SurveyCollection
@@ -143,10 +142,10 @@ if __name__ == '__main__':
         list_part_coicop12.append('part_coicop12_{}'.format(i))
 
     df_to_graph = Wconcat[list_part_coicop12].copy()
-    #print len(df_to_graph.columns)
-    df_to_graph.columns = ['Alimentaire', 'Alcool + Tabac', 'Habits', 'Logement', 'Meubles', u'Santé', 'Transport', 'Communication']
-
-#TODO: vérifier si les postes COICOP12 sont bien les suivants (en particulier les 8 premiers)
+    df_to_graph.columns = [
+        'Alimentaire', 'Alcool + Tabac', 'Habits', 'Logement', 'Meubles', u'Santé', 'Transport', 'Communication'
+        ]
+# TODO: vérifier si les postes COICOP12 sont bien les suivants (en particulier les 8 premiers)
 # RAPPEL : 12 postes CN et COICOP
 #    01 Produits alimentaires et boissons non alcoolisées
 #    02 Boissons alcoolisées et tabac
@@ -161,14 +160,13 @@ if __name__ == '__main__':
 #    11 Hotels, cafés, restaurants
 #    12 Biens et services divers
 
-
-
     axes = df_to_graph.plot(
         kind = 'bar',
         stacked = True,
-        color = ['#800000','g','#660066','#1414ff','#ffce49','#383838','#f6546a','#229cdc']
+        color = ['#800000', 'g', '#660066', '#1414ff', '#ffce49', '#383838', '#f6546a', '#229cdc']
         )
     plt.axhline(0, color = 'k')
+
     def percent_formatter(x, pos = 0):
         return '%1.0f%%' % (100 * x)
         # TODO utiliser format et corriger également ici
