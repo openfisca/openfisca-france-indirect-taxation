@@ -82,6 +82,7 @@ reference_input_variable(
     name = 'pondmen',
     )
 
+
 reference_input_variable(
     column = FloatCol,
     entity_class = Individus,
@@ -90,6 +91,7 @@ reference_input_variable(
     name = 'rev_disponible',
     )
 
+
 reference_input_variable(
     column = IntCol,
     entity_class = Individus,
@@ -97,6 +99,7 @@ reference_input_variable(
     label = u"Revenu total du ménage",
     name = 'revtot',
     )
+
 
 reference_input_variable(
     column = IntCol,
