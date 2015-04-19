@@ -34,7 +34,6 @@ from __future__ import division
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-import numpy as np
 
 import openfisca_france_indirect_taxation
 from openfisca_survey_manager.survey_collections import SurveyCollection
@@ -161,24 +160,22 @@ if __name__ == '__main__':
 #    11 Hotels, cafés, restaurants
 #    12 Biens et services divers
 
-
-
     axes = df_to_graph.plot(
         kind = 'bar',
         stacked = True,
         color = ['#800000','g','#660066','#1414ff','#ffce49','#383838','#f6546a','#229cdc']
         )
-    plt.axhline(0, color = 'k')
+
+#    plt.axhline(0, color = 'k')
+
     def percent_formatter(x, pos = 0):
         return '%1.0f%%' % (100 * x)
         # TODO utiliser format et corriger également ici
         # https://github.com/openfisca/openfisca-matplotlib/blob/master/openfisca_matplotlib/graphs.py#L123
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
 
-    # Supprimer la légende du graphique
+    # Déclarer la légende du graphique
     axes.legend(
         bbox_to_anchor = (1.4, 1.0),
-        ) # TODO: supprimer la légende pour les lignes pointillées et continues
+        )
     plt.show()
-    # TODO: analyser, changer les déciles de revenus en déciles de consommation
-    # faire un truc plus joli, mettres labels...
