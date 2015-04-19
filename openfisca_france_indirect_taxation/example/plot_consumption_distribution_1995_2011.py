@@ -47,11 +47,15 @@ def get_input_data_frame(year):
         collection = "openfisca_indirect_taxation", config_files_directory = config_files_directory)
     openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
     input_data_frame = openfisca_survey.get_values(table = "input")
-    input_data_frame.reset_index(inplace = True)
+    try:
+        input_data_frame.reset_index(inplace = True)
+    except ValueError, e:
+        print "ignoring reset_index because \n" + str(e)
+
     return input_data_frame
 
 
-def simulate_df(var_to_be_simulated, year = 2005):
+def simulate_df(var_to_be_simulated, year = 2004):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
