@@ -52,10 +52,23 @@ for categorie_fiscale_index in range(18):
 reference_input_variable(
     column = FloatCol,
     entity_class = Menages,
+    label = u"numéro de la vague d'interrogation du ménage",
+    name = 'vag',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Menages,
     label = u"unités de consommation",
     name = 'ocde10',
     )
 
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Menages,
+    label = u"type du ménage",
+    name = 'typmen',
+    )
 
 reference_input_variable(
     column = FloatCol,
