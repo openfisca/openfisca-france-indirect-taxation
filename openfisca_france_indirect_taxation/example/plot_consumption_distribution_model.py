@@ -119,7 +119,7 @@ if __name__ == '__main__':
 # Exemple: graphe par décile de revenu par uc de la ventilation de la consommation selon les postes agrégés de la CN
     # Lite des coicop agrégées en 12 postes
     list_coicop12 = []
-    for coicop12_index in range(1, 9):
+    for coicop12_index in range(1, 13):
         list_coicop12.append('coicop12_{}'.format(coicop12_index))
     # Liste des variables que l'on veut simuler
     var_to_be_simulated = [
@@ -129,7 +129,7 @@ if __name__ == '__main__':
         'age',
         'decile',
         'revtot',
-        'somme_coicop12_conso',
+        'somme_coicop12',
         'ocde10',
         'niveau_de_vie',
         ]
@@ -140,75 +140,56 @@ if __name__ == '__main__':
     df2005 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2005)
     annee = df2005.apply(lambda row: 2005, axis = 1)
     df2005["year"] = annee
-    df2006 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2006)
-    annee = df2006.apply(lambda row: 2006, axis = 1)
-    df2006["year"] = annee
-    df2007 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2007)
-    annee = df2007.apply(lambda row: 2007, axis = 1)
-    df2007["year"] = annee
-    df2008 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2008)
-    annee = df2008.apply(lambda row: 2008, axis = 1)
-    df2008["year"] = annee
-    df2009 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2009)
-    annee = df2009.apply(lambda row: 2009, axis = 1)
-    df2009["year"] = annee
-    df2010 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2010)
-    annee = df2010.apply(lambda row: 2010, axis = 1)
-    df2010["year"] = annee
-    var_to_concat = list_coicop12 + ['somme_coicop12_conso']
 
+    df2000 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
+    annee = df2000.apply(lambda row: 2000, axis = 1)
+    df2000["year"] = annee
+
+    df1995 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 1995)
+    annee = df1995.apply(lambda row: 1995, axis = 1)
+    df1995["year"] = annee
+
+    df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
+    annee = df2011.apply(lambda row: 2011, axis = 1)
+    df2011["year"] = annee
+
+    var_to_concat = list_coicop12 + ['somme_coicop12']
+
+    Wconcat1995 = df_weighted_average_grouped(dataframe = df1995, groupe = 'year', varlist = var_to_concat)
+    Wconcat2000 = df_weighted_average_grouped(dataframe = df2000, groupe = 'year', varlist = var_to_concat)
     Wconcat2005 = df_weighted_average_grouped(dataframe = df2005, groupe = 'year', varlist = var_to_concat)
-    Wconcat2006 = df_weighted_average_grouped(dataframe = df2006, groupe = 'year', varlist = var_to_concat)
-    Wconcat2007 = df_weighted_average_grouped(dataframe = df2007, groupe = 'year', varlist = var_to_concat)
-    Wconcat2008 = df_weighted_average_grouped(dataframe = df2008, groupe = 'year', varlist = var_to_concat)
-    Wconcat2009 = df_weighted_average_grouped(dataframe = df2009, groupe = 'year', varlist = var_to_concat)
-    Wconcat2010 = df_weighted_average_grouped(dataframe = df2010, groupe = 'year', varlist = var_to_concat)
+    Wconcat2011 = df_weighted_average_grouped(dataframe = df2011, groupe = 'year', varlist = var_to_concat)
+
+     # Construction des parts pour 1995
+    list_part_coicop12_1995 = []
+    for i in range(1, 13):
+        Wconcat1995['part_coicop12_{}'.format(i)] = Wconcat1995['coicop12_{}'.format(i)] / Wconcat1995['somme_coicop12']
+        'list_part_coicop12_{}_1995'.format(i)
+        list_part_coicop12_1995.append('part_coicop12_{}'.format(i))
+
+    # Construction des parts pour 2000
+    list_part_coicop12_2000 = []
+    for i in range(1, 13):
+        Wconcat2000['part_coicop12_{}'.format(i)] = Wconcat2000['coicop12_{}'.format(i)] / Wconcat2000['somme_coicop12']
+        'list_part_coicop12_{}_2000'.format(i)
+        list_part_coicop12_2000.append('part_coicop12_{}'.format(i))
 
     # Construction des parts pour 2005
     list_part_coicop12_2005 = []
-    for i in range(1, 9):
-        Wconcat2005['part_coicop12_{}'.format(i)] = Wconcat2005['coicop12_{}'.format(i)] / Wconcat2005['somme_coicop12_conso']
+    for i in range(1, 13):
+        Wconcat2005['part_coicop12_{}'.format(i)] = Wconcat2005['coicop12_{}'.format(i)] / Wconcat2005['somme_coicop12']
         'list_part_coicop12_{}_2005'.format(i)
         list_part_coicop12_2005.append('part_coicop12_{}'.format(i))
 
-    # Construction des parts pour 2006
-    list_part_coicop12_2006 = []
-    for i in range(1, 9):
-        Wconcat2006['part_coicop12_{}'.format(i)] = Wconcat2006['coicop12_{}'.format(i)] / Wconcat2006['somme_coicop12_conso']
-        'list_part_coicop12_{}_2006'.format(i)
-        list_part_coicop12_2006.append('part_coicop12_{}'.format(i))
-
-    # Construction des parts pour 2007
-    list_part_coicop12_2007 = []
-    for i in range(1, 9):
-        Wconcat2007['part_coicop12_{}'.format(i)] = Wconcat2007['coicop12_{}'.format(i)] / Wconcat2007['somme_coicop12_conso']
-        'list_part_coicop12_{}_2007'.format(i)
-        list_part_coicop12_2007.append('part_coicop12_{}'.format(i))
-
-    # Construction des parts pour 2008
-    list_part_coicop12_2008 = []
-    for i in range(1, 9):
-        Wconcat2008['part_coicop12_{}'.format(i)] = Wconcat2008['coicop12_{}'.format(i)] / Wconcat2008['somme_coicop12_conso']
-        'list_part_coicop12_{}_2008'.format(i)
-        list_part_coicop12_2008.append('part_coicop12_{}'.format(i))
-
-    # Construction des parts pour 2009
-    list_part_coicop12_2009 = []
-    for i in range(1, 9):
-        Wconcat2009['part_coicop12_{}'.format(i)] = Wconcat2009['coicop12_{}'.format(i)] / Wconcat2009['somme_coicop12_conso']
-        'list_part_coicop12_{}_2009'.format(i)
-        list_part_coicop12_2009.append('part_coicop12_{}'.format(i))
-
-    # Construction des parts pour 2010
-    list_part_coicop12_2010 = []
-    for i in range(1, 9):
-        Wconcat2010['part_coicop12_{}'.format(i)] = Wconcat2010['coicop12_{}'.format(i)] / Wconcat2010['somme_coicop12_conso']
-        'list_part_coicop12_{}_2010'.format(i)
-        list_part_coicop12_2010.append('part_coicop12_{}'.format(i))
+    # Construction des parts pour 2011
+    list_part_coicop12_2011 = []
+    for i in range(1, 13):
+        Wconcat2011['part_coicop12_{}'.format(i)] = Wconcat2011['coicop12_{}'.format(i)] / Wconcat2011['somme_coicop12']
+        'list_part_coicop12_{}_2011'.format(i)
+        list_part_coicop12_2011.append('part_coicop12_{}'.format(i))
 
 
-
-    df_to_graph = concat([Wconcat2005[list_part_coicop12_2005], Wconcat2006[list_part_coicop12_2006], Wconcat2007[list_part_coicop12_2007], Wconcat2008[list_part_coicop12_2008], Wconcat2009[list_part_coicop12_2009], Wconcat2010[list_part_coicop12_2010]])
+    df_to_graph = concat([Wconcat1995[list_part_coicop12_1995], Wconcat2000[list_part_coicop12_2000], Wconcat2005[list_part_coicop12_2005], Wconcat2011[list_part_coicop12_2011]])
 
     axes = df_to_graph.plot(
         kind = 'bar',
