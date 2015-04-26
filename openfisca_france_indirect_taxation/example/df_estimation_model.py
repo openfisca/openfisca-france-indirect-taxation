@@ -26,6 +26,10 @@ Created on Sat Apr 25 17:00:01 2015
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import os
+import logging
+import numpy
+import pandas
 
 from __future__ import division
 
@@ -38,6 +42,7 @@ from openfisca_survey_manager.survey_collections import SurveyCollection
 
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
+from openfisca_france_data.temporary import TemporaryStore
 
 
 def get_input_data_frame(year):
@@ -49,7 +54,7 @@ def get_input_data_frame(year):
     return input_data_frame
 
 
-def simulate_df(var_to_be_simulated, year = 1995):
+def simulate_df(var_to_be_simulated, year = 2000):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
@@ -111,7 +116,48 @@ if __name__ == '__main__':
 
     df['depenses_tot'] = df['somme_coicop12']
     del df['somme_coicop12']
+    df['ident_men'] = df['ident_men'].astype('int')
     df.set_index('ident_men', inplace = True)
+
+    # on crée une data frame pour calculer les parts budgétaires
+    #depenses = temporary_store["depenses_{}".format(year)]
+    # incorporation de la variable depenses_tot
+    df_part_budg = depenses
+    df_dep_tot = df
+    var_list_alpha = ['depenses_tot']
+    df_dep_tot = df_dep_tot[var_list_alpha]
+    df_part_budg = df_part_budg.merge(df_dep_tot, left_index = True, right_index = True)
+
+
+    # calcul les parts budgétaires:
+    var_list = [column for column in df_part_budg.columns if column.startswith('0') or column.startswith('1') or column.startswith('dep')]
+    df_part_budg = df_part_budg[var_list]
+    var_list_1 = [column for column in df_part_budg.columns if column.startswith('0') or column.startswith('1')]
+    df_part_budg['depenses_tot'] = df_part_budg['depenses_tot'].astype('float')
+
+    for var in var_list_1:
+        df_part_budg[var] = df_part_budg[var].astype('float')
+
+    for var in var_list_1:
+        try:
+            df_part_budg[var] = df_part_budg[var]/df_part_budg['depenses_tot']
+        except:
+            df_part_budg[var]
+
+    #on enlève les variables commençant par 9 car elles correspondent à des impôts etc.
+    var_to_keep = [column for column in df_part_budg.columns if column.startswith('0') or column.startswith('1')]
+    df_part_budg = df_part_budg[var_to_keep]
+
+    #on renomme les variables car ce sont maintenant des parts budgétaires
+    var_list_bis = [column for column in df_part_budg.columns if column.startswith('0') or column.startswith('1')]
+    for var in var_list_bis:
+        df_part_budg['pb_{}'.format(var)] = df_part_budg[var]
+
+    for var in var_list_bis:
+        del df_part_budg[var]
+
+    df = df.merge(df_part_budg, left_index = True, right_index = True)
+
 
     df_1995 = df
     df_1995.to_stata('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\data_frame_estimation_model\df_1995.dta')
