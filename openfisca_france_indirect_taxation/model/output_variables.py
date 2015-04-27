@@ -441,7 +441,7 @@ class montant_droit_d_accise_cigarette(SimpleFormulaColumn):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         droit_cn = simulation.legislation_at(period.start).imposition_indirecte.tabac.cigarettes.taux_normal_cigarette
         consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.tabac.cigarettes.taux_specifique_cigarette
-        return period, montant_droit_d_accise(consommation_cigarette, droit_cn, consommation_cn, taux_plein_tva)
+        return period, - montant_droit_d_accise(consommation_cigarette, droit_cn, consommation_cn, taux_plein_tva)
 
 
 @reference_formula
@@ -455,7 +455,7 @@ class montant_droit_d_accise_cigares(SimpleFormulaColumn):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         droit_cn = simulation.legislation_at(period.start).imposition_indirecte.tabac.cigares.taux_normal_cigare
         consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.tabac.cigares.taux_specifique_cigare
-        return period, montant_droit_d_accise(consommation_cigares, droit_cn, consommation_cn, taux_plein_tva)
+        return period, - montant_droit_d_accise(consommation_cigares, droit_cn, consommation_cn, taux_plein_tva)
 
 
 @reference_formula
@@ -469,7 +469,7 @@ class montant_droit_d_accise_tabac_a_rouler(SimpleFormulaColumn):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         droit_cn = simulation.legislation_at(period.start).imposition_indirecte.tabac.tabac_a_rouler.taux_normal_tabac_a_rouler
         consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.tabac.tabac_a_rouler.taux_specifique_tabac_a_rouler
-        return period, montant_droit_d_accise(consommation_tabac_a_rouler, droit_cn, consommation_cn, taux_plein_tva)
+        return period, - montant_droit_d_accise(consommation_tabac_a_rouler, droit_cn, consommation_cn, taux_plein_tva)
 
 
 @reference_formula

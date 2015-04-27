@@ -117,10 +117,21 @@ if __name__ == '__main__':
         'somme_coicop12_conso',
         'ocde10',
         'niveau_de_vie',
-        'revtot',
+        'revtot' ,
         'rev_disponible',
         'rev_disp_loyerimput',
-        'montant_total_taxes_indirectes'
+        'montant_total_taxes_indirectes' # ,
+#        'montant_tva_total',
+#        'montant_droit_d_accise_vin',
+#        'montant_droit_d_accise_biere',
+#        'montant_droit_d_accise_alcools_forts',
+#        'montant_droit_d_accise_cigarette',
+#        'montant_droit_d_accise_cigares',
+#        'montant_droit_d_accise_tabac_a_rouler',
+#        'montant_taxe_assurance_transport',
+#        'montant_taxe_assurance_sante',
+#        'montant_taxe_autres_assurances',
+#        'montant_tipp'
         ]
 
 
