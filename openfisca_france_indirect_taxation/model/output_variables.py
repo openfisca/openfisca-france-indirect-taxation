@@ -508,18 +508,6 @@ class montant_taxe_autres_assurances(SimpleFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_autres_assurances, taux)
 
 
-@reference_formula
-class pourcentage_vehicule_essence(SimpleFormulaColumn):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Pourcentage de véhicules essence dans le ménage"
-
-    def function(self, simulation, period):
-        veh_essence = simulation.calculate('veh_essence', period)
-        veh_tot = simulation.calculate('veh_tot', period)
-
-
-        return period, veh_essence/veh_tot
 
 # pour calculer les montants de TIPP payés par les ménages, on fait deux hypothèses extrèmement fortes :
 # -les dépenses de carburant des ménages peuvent être équitablement réparties également entre les diférents véhicules. En

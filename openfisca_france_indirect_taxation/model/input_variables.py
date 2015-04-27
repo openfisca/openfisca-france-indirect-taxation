@@ -161,3 +161,11 @@ reference_input_variable(
     label = u"Nombre de véhicules diesel dans le ménage",
     name = 'veh_diesel',
     )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Menages,
+    is_permanent = True,
+    label = u"Pourcentage de véhicules essence dans le ménage",
+    name = 'pourcentage_vehicule_essence',
+    )

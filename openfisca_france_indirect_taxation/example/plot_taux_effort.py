@@ -139,6 +139,8 @@ if __name__ == '__main__':
 # 1 calcul taux d'effort sur le revenu total
      # Constition d'une base de données agrégée par décile (= collapse en stata)
     df1 = simulate_df(var_to_be_simulated = var_to_be_simulated)
+    if year == 2011:
+        df1.decile[df.decuc == 10 ] = 10
     varlist = ['revtot','montant_total_taxes_indirectes']
     Wconcat1 = df_weighted_average_grouped(dataframe = df1, groupe = 'decile', varlist = varlist)
 
@@ -155,6 +157,8 @@ if __name__ == '__main__':
 # 2 calcul taux d'effort sur le revenu disponible
      # Constition d'une base de données agrégée par décile (= collapse en stata)
     df2 = simulate_df(var_to_be_simulated = var_to_be_simulated)
+    if year == 2011:
+        df2.decile[df.decuc == 10 ] = 10
     varlist = ['rev_disponible','montant_total_taxes_indirectes']
     Wconcat2 = df_weighted_average_grouped(dataframe = df2, groupe = 'decile', varlist = varlist)
 
@@ -171,6 +175,8 @@ if __name__ == '__main__':
 # 3 calcul taux d'effort sur le revenu disponible
      # Constition d'une base de données agrégée par décile (= collapse en stata)
     df3 = simulate_df(var_to_be_simulated = var_to_be_simulated)
+    if year == 2011:
+        df3.decile[df.decuc == 10 ] = 10
     varlist = ['rev_disp_loyerimput','montant_total_taxes_indirectes']
     Wconcat3 = df_weighted_average_grouped(dataframe = df3, groupe = 'decile', varlist = varlist)
 
