@@ -131,9 +131,9 @@ if __name__ == '__main__':
     # Merge des deux listes
     var_to_be_simulated += list_coicop12
 
-    year = 2011
+    year = 2005
     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df = simulate_df(var_to_be_simulated = var_to_be_simulated, year)
+    df = simulate_df(var_to_be_simulated, year)
     if year == 2011:
         df.decile[df.decuc == 10 ] = 10
 
