@@ -292,7 +292,7 @@ class somme_coicop12_conso(SimpleFormulaColumn):
 class decile(SimpleFormulaColumn):
     column = EnumCol(
         enum = Enum([
-            u"Hors champ"
+            u"Hors champ",
             u"1er décile",
             u"2nd décile",
             u"3e décile",
