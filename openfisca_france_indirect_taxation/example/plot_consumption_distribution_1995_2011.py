@@ -51,7 +51,7 @@ def get_input_data_frame(year):
     return input_data_frame
 
 
-def simulate_df(var_to_be_simulated, year = 2005):
+def simulate_df(var_to_be_simulated, year = 2011):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
@@ -131,6 +131,8 @@ if __name__ == '__main__':
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df(var_to_be_simulated = var_to_be_simulated)
+    df.decile[df.decuc == 10 ] = 10
+
     var_to_concat = list_coicop12 + ['somme_coicop12_conso']
     Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_concat)
 
