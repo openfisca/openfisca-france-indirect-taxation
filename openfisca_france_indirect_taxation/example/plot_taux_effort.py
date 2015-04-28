@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Mar 29 15:43:49 2015
-
-@author: germainmarchand
-"""
-
-# -*- coding: utf-8 -*-
 
 
 # OpenFisca -- A versatile microsimulation software
@@ -51,12 +44,10 @@ def get_input_data_frame(year):
     return input_data_frame
 
 
-def simulate_df(var_to_be_simulated, year = None):
+def simulate_df(var_to_be_simulated, year = 2011):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
-    assert year is not None
-
     input_data_frame = get_input_data_frame(year)
     TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
 
@@ -103,86 +94,98 @@ def df_weighted_average_grouped(dataframe, groupe, varlist):
             ])
         )
 
+
+# On va dans ce fichier créer les graphiques permettant de voir les taux d'effort selon trois définition du revenu:
+# - revenu total
+# - revenu disponible
+# - revenu disponible et loyer imputé
+
 if __name__ == '__main__':
     import logging
     log = logging.getLogger(__name__)
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    # Exemple: graphe par décile de revenu par uc de la ventilation de la consommation
-    # selon les postes agrégés de la CN
-    # Liste des coicop agrégées en 12 postes
-    list_coicop12 = []
-    for coicop12_index in range(1, 9):
-        list_coicop12.append('coicop12_{}'.format(coicop12_index))
+
     # Liste des variables que l'on veut simuler
     var_to_be_simulated = [
         'ident_men',
         'pondmen',
         'decuc',
-        'age',
         'decile',
         'revtot',
         'somme_coicop12_conso',
         'ocde10',
         'niveau_de_vie',
-        'rev_disponible'
+        'revtot' ,
+        'rev_disponible',
+        'rev_disp_loyerimput',
+        'montant_total_taxes_indirectes' # ,
+#        'montant_tva_total',
+#        'montant_droit_d_accise_vin',
+#        'montant_droit_d_accise_biere',
+#        'montant_droit_d_accise_alcools_forts',
+#        'montant_droit_d_accise_cigarette',
+#        'montant_droit_d_accise_cigares',
+#        'montant_droit_d_accise_tabac_a_rouler',
+#        'montant_taxe_assurance_transport',
+#        'montant_taxe_assurance_sante',
+#        'montant_taxe_autres_assurances',
+#        'montant_tipp'
         ]
-    # Merge des deux listes
-    var_to_be_simulated += list_coicop12
 
-    year = 2005
-    # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df = simulate_df(var_to_be_simulated, year)
+
+
+# 1 calcul taux d'effort sur le revenu total
+     # Constition d'une base de données agrégée par décile (= collapse en stata)
+    df1 = simulate_df(var_to_be_simulated = var_to_be_simulated)
     if year == 2011:
-        df.decile[df.decuc == 10 ] = 10
+        df1.decile[df.decuc == 10 ] = 10
+    varlist = ['revtot','montant_total_taxes_indirectes']
+    Wconcat1 = df_weighted_average_grouped(dataframe = df1, groupe = 'decile', varlist = varlist)
 
-    var_to_concat = list_coicop12 + ['somme_coicop12_conso']
-    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_concat)
+    # Example
+    Wconcat1['taux_d_effort'] = Wconcat1['montant_total_taxes_indirectes'] / Wconcat1['revtot']
 
-    # Construction des parts
-    list_part_coicop12 = []
-    for i in range(1, 9):
-        Wconcat['part_coicop12_{}'.format(i)] = Wconcat['coicop12_{}'.format(i)] / Wconcat['somme_coicop12_conso']
-        'list_part_coicop12_{}'.format(i)
-        list_part_coicop12.append('part_coicop12_{}'.format(i))
 
-    df_to_graph = Wconcat[list_part_coicop12].copy()
-    df_to_graph.columns = [
-        'Alimentaire', 'Alcool + Tabac', 'Habits', 'Logement', 'Meubles', u'Santé', 'Transport', 'Communication'
-        ]
-# TODO: vérifier si les postes COICOP12 sont bien les suivants (en particulier les 8 premiers)
-# RAPPEL : 12 postes CN et COICOP
-#    01 Produits alimentaires et boissons non alcoolisées
-#    02 Boissons alcoolisées et tabac
-#    03 Articles d'habillement et chaussures
-#    04 Logement, eau, gaz, électricité et autres combustibles
-#    05 Meubles, articles de ménage et entretien courant de l'habitation
-#    06 Santé
-#    07 Transports
-#    08 Communication
-#    09 Loisir et culture
-#    10 Education
-#    11 Hotels, cafés, restaurants
-#    12 Biens et services divers
+    df_to_graph = Wconcat1['taux_d_effort']
 
-    axes = df_to_graph.plot(
-        kind = 'bar',
-        stacked = True,
-        color = ['#800000', 'g', '#660066', '#1414ff', '#ffce49', '#383838', '#f6546a', '#229cdc']
-        )
+    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
+    df_to_graph.plot(kind = 'bar', stacked = True)
     plt.axhline(0, color = 'k')
 
-    def percent_formatter(x, pos = 0):
-        return '%1.0f%%' % (100 * x)
-        # TODO utiliser format et corriger également ici
-        # https://github.com/openfisca/openfisca-matplotlib/blob/master/openfisca_matplotlib/graphs.py#L123
-    axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
+# 2 calcul taux d'effort sur le revenu disponible
+     # Constition d'une base de données agrégée par décile (= collapse en stata)
+    df2 = simulate_df(var_to_be_simulated = var_to_be_simulated)
+    if year == 2011:
+        df2.decile[df.decuc == 10 ] = 10
+    varlist = ['rev_disponible','montant_total_taxes_indirectes']
+    Wconcat2 = df_weighted_average_grouped(dataframe = df2, groupe = 'decile', varlist = varlist)
 
-    # Supprimer la légende du graphique
-    axes.legend(
-        bbox_to_anchor = (1.4, 1.0),
-        ) # TODO: supprimer la légende pour les lignes pointillées et continues
-    plt.show()
-    # TODO: analyser, changer les déciles de revenus en déciles de consommation
-    # faire un truc plus joli, mettres labels...
+    # Example
+    Wconcat2['taux_d_effort'] = Wconcat2['montant_total_taxes_indirectes'] / Wconcat2['rev_disponible']
+
+
+    df_to_graph = Wconcat2['taux_d_effort']
+
+    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
+    df_to_graph.plot(kind = 'bar', stacked = True)
+    plt.axhline(0, color = 'k')
+
+# 3 calcul taux d'effort sur le revenu disponible
+     # Constition d'une base de données agrégée par décile (= collapse en stata)
+    df3 = simulate_df(var_to_be_simulated = var_to_be_simulated)
+    if year == 2011:
+        df3.decile[df.decuc == 10 ] = 10
+    varlist = ['rev_disp_loyerimput','montant_total_taxes_indirectes']
+    Wconcat3 = df_weighted_average_grouped(dataframe = df3, groupe = 'decile', varlist = varlist)
+
+    # Example
+    Wconcat3['taux_d_effort'] = Wconcat3['montant_total_taxes_indirectes'] / Wconcat3['rev_disp_loyerimput']
+
+
+    df_to_graph = Wconcat3['taux_d_effort']
+
+    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
+    df_to_graph.plot(kind = 'bar', stacked = True)
+    plt.axhline(0, color = 'k')

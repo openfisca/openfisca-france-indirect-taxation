@@ -52,7 +52,7 @@ def get_input_data_frame(year):
     return input_data_frame
 
 
-def simulate_df(var_to_be_simulated, year = 2000):
+def simulate_df(var_to_be_simulated, year = 2011):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
@@ -91,13 +91,19 @@ if __name__ == '__main__':
         'somme_coicop12',
         'ocde10',
         'vag',
-        'typmen'
+        'typmen',
+        'decuc',
+        'rev_disponible',
+        'niveau_de_vie'
         ]
     # Merge des deux listes
     var_to_be_simulated += list_coicop12
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df(var_to_be_simulated = var_to_be_simulated)
+    if year == 2011:
+        df.decile[df.decuc == 10 ] = 10
+
 
     # Construction des parts
     list_part_coicop12 = []
@@ -112,51 +118,27 @@ if __name__ == '__main__':
 
     df['depenses_tot'] = df['somme_coicop12']
     del df['somme_coicop12']
-    df['ident_men'] = df['ident_men'].astype('int')
-    df.set_index('ident_men', inplace = True)
+    var_list = [column for column in input_data_frame.columns if column.startswith('0') or column.startswith('1')]
+    data_merge = input_data_frame[var_list]
+    df = df.merge(data_merge, left_index = True, right_index = True)
+    for var in var_list:
+        df[var] = df[var]/df['depenses_tot']
+    for var in var_list:
+        df['pb_{}'.format(var)] = df[var]
+    for var in var_list:
+        del df[var]
+    df = df[(df.typmen > 0)]
+    df['vag'] = df['vag'].astype(int)
 
-    # on crée une data frame pour calculer les parts budgétaires
-    #depenses = temporary_store["depenses_{}".format(year)]
-    # incorporation de la variable depenses_tot
-    df_part_budg = depenses
-    df_dep_tot = df
-    var_list_alpha = ['depenses_tot']
-    df_dep_tot = df_dep_tot[var_list_alpha]
-    df_part_budg = df_part_budg.merge(df_dep_tot, left_index = True, right_index = True)
+    df['ident_men'] = df['ident_men'].astype(int)
+    df['typmen'] = df['typmen'].astype(int)
+    var_list_ = [column for column in df.columns if column.startswith('w') or column.startswith('pb')]
+    for var in var_list_:
+         df[var] = df[var].astype(float)
 
+    #♥df['decile_bis']= weighted_quantiles('niveau_de_vie', 'labels', 'pondmen', return_quantiles = True)
 
-    # calcul les parts budgétaires:
-    var_list = [column for column in df_part_budg.columns if column.startswith('0') or column.startswith('1') or column.startswith('dep')]
-    df_part_budg = df_part_budg[var_list]
-    var_list_1 = [column for column in df_part_budg.columns if column.startswith('0') or column.startswith('1')]
-    df_part_budg['depenses_tot'] = df_part_budg['depenses_tot'].astype('float')
-
-    for var in var_list_1:
-        df_part_budg[var] = df_part_budg[var].astype('float')
-
-    for var in var_list_1:
-        try:
-            df_part_budg[var] = df_part_budg[var]/df_part_budg['depenses_tot']
-        except:
-            df_part_budg[var]
-
-    #on enlève les variables commençant par 9 car elles correspondent à des impôts etc.
-    var_to_keep = [column for column in df_part_budg.columns if column.startswith('0') or column.startswith('1')]
-    df_part_budg = df_part_budg[var_to_keep]
-
-    #on renomme les variables car ce sont maintenant des parts budgétaires
-    var_list_bis = [column for column in df_part_budg.columns if column.startswith('0') or column.startswith('1')]
-    for var in var_list_bis:
-        df_part_budg['pb_{}'.format(var)] = df_part_budg[var]
-
-    for var in var_list_bis:
-        del df_part_budg[var]
-
-    df = df.merge(df_part_budg, left_index = True, right_index = True)
-
-
-    df_1995 = df
-    df_1995.to_stata('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\data_frame_estimation_model\df_1995.dta')
-
+    df_2011 = df
+    df_2011.to_stata('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\data_frame_estimation_model_\df_2011.dta')
 
 

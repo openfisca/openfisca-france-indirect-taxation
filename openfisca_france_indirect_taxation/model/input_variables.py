@@ -104,6 +104,13 @@ reference_input_variable(
     name = 'rev_disponible',
     )
 
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Individus,
+    is_permanent = True,
+    label = u"Revenu disponible du ménage auquel on ajoute le loyer imputé",
+    name = 'rev_disp_loyerimput',
+    )
 
 reference_input_variable(
     column = IntCol,
@@ -129,4 +136,36 @@ reference_input_variable(
     is_permanent = True,
     label = u"Rôle dans le ménage",
     name = 'role_menage',
+    )
+
+reference_input_variable(
+    column = IntCol,
+    entity_class = Menages,
+    is_permanent = True,
+    label = u"Nombre de véhicules total dans le ménage",
+    name = 'veh_tot',
+    )
+
+reference_input_variable(
+    column = IntCol,
+    entity_class = Menages,
+    is_permanent = True,
+    label = u"Nombre de véhicules essence dans le ménage",
+    name = 'veh_essence',
+    )
+
+reference_input_variable(
+    column = IntCol,
+    entity_class = Menages,
+    is_permanent = True,
+    label = u"Nombre de véhicules diesel dans le ménage",
+    name = 'veh_diesel',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Menages,
+    is_permanent = True,
+    label = u"Pourcentage de véhicules essence dans le ménage",
+    name = 'pourcentage_vehicule_essence',
     )
