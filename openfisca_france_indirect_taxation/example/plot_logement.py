@@ -128,9 +128,9 @@ if __name__ == '__main__':
     var_to_be_simulated += list_coicop12
 
 
-#    df2005 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2005)
-#    annee = df2005.apply(lambda row: 2005, axis = 1)
-#    df2005["year"] = annee
+    df2005 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2005)
+    annee = df2005.apply(lambda row: 2005, axis = 1)
+    df2005["year"] = annee
 
     df2000 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
     annee = df2000.apply(lambda row: 2000, axis = 1)
@@ -140,16 +140,16 @@ if __name__ == '__main__':
     annee = df1995.apply(lambda row: 1995, axis = 1)
     df1995["year"] = annee
 
-#    df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
-#    annee = df2011.apply(lambda row: 2011, axis = 1)
-#    df2011["year"] = annee
+    df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
+    annee = df2011.apply(lambda row: 2011, axis = 1)
+    df2011["year"] = annee
 
     var_to_concat = list_coicop12 + ['rev_disponible','somme_coicop12']
 
     Wconcat1995 = df_weighted_average_grouped(dataframe = df1995, groupe = 'year', varlist = var_to_concat)
     Wconcat2000 = df_weighted_average_grouped(dataframe = df2000, groupe = 'year', varlist = var_to_concat)
-#    Wconcat2005 = df_weighted_average_grouped(dataframe = df2005, groupe = 'year', varlist = var_to_concat)
-#    Wconcat2011 = df_weighted_average_grouped(dataframe = df2011, groupe = 'year', varlist = var_to_concat)
+    Wconcat2005 = df_weighted_average_grouped(dataframe = df2005, groupe = 'year', varlist = var_to_concat)
+    Wconcat2011 = df_weighted_average_grouped(dataframe = df2011, groupe = 'year', varlist = var_to_concat)
 
     list_part_coicop12_1995 = []
     Wconcat1995['part_coicop12_{}'.format(4)] = Wconcat1995['coicop12_{}'.format(4)] / Wconcat1995['rev_disponible']
@@ -161,18 +161,18 @@ if __name__ == '__main__':
     'list_part_coicop12_{}_2000'.format(4)
     list_part_coicop12_2000.append('part_coicop12_{}'.format(4))
 
-#    list_part_coicop12_2005 = []
-#    Wconcat2005['part_coicop12_{}'.format(4)] = Wconcat2005['coicop12_{}'.format(4)] / Wconcat2005['rev_disponible']
-#    'list_part_coicop12_{}_2005'.format(4)
-#    list_part_coicop12_2005.append('part_coicop12_{}'.format(4))
-#
-#    list_part_coicop12_2011 = []
-#    Wconcat2011['part_coicop12_{}'.format(4)] = Wconcat2011['coicop12_{}'.format(4)] / Wconcat2011['rev_disponible']
-#    'list_part_coicop12_{}_2011'.format(4)
-#    list_part_coicop12_2011.append('part_coicop12_{}'.format(4))
+    list_part_coicop12_2005 = []
+    Wconcat2005['part_coicop12_{}'.format(4)] = Wconcat2005['coicop12_{}'.format(4)] / Wconcat2005['rev_disponible']
+    'list_part_coicop12_{}_2005'.format(4)
+    list_part_coicop12_2005.append('part_coicop12_{}'.format(4))
+
+    list_part_coicop12_2011 = []
+    Wconcat2011['part_coicop12_{}'.format(4)] = Wconcat2011['coicop12_{}'.format(4)] / Wconcat2011['rev_disponible']
+    'list_part_coicop12_{}_2011'.format(4)
+    list_part_coicop12_2011.append('part_coicop12_{}'.format(4))
 
 
-    df_to_graph = concat([Wconcat1995[list_part_coicop12_1995], Wconcat2000[list_part_coicop12_2000]])#, Wconcat2005[list_part_coicop12_2005], Wconcat2011[list_part_coicop12_2011]])
+    df_to_graph = concat([Wconcat1995[list_part_coicop12_1995], Wconcat2000[list_part_coicop12_2000], Wconcat2005[list_part_coicop12_2005], Wconcat2011[list_part_coicop12_2011]])
 
     df_to_graph.columns = [
         u'Logement, eau, gaz et électricté'
@@ -196,4 +196,4 @@ if __name__ == '__main__':
         )
 
     plt.show()
-    plt.savefig('C:/Users/Etienne/Documents/data/graphe2.eps', format='eps', dpi=1000)
+    plt.savefig('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\graphe_logement.eps', format='eps', dpi=1000)

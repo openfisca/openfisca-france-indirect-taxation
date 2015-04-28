@@ -198,4 +198,4 @@ if __name__ == '__main__':
         )
 
     plt.show()
-    plt.savefig('C:/Users/Etienne/Documents/data/graphe5.eps', format='eps', dpi=1000)
+    plt.savefig('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\graphe_taxes_indirectes_total.eps', format='eps', dpi=1000)
