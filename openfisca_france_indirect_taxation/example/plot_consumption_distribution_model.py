@@ -33,6 +33,8 @@ from __future__ import division
 
 from pandas import DataFrame, concat
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+
 
 import openfisca_france_indirect_taxation
 from openfisca_survey_manager.survey_collections import SurveyCollection
@@ -137,9 +139,9 @@ if __name__ == '__main__':
     var_to_be_simulated += list_coicop12
 
 
-    df2005 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2005)
-    annee = df2005.apply(lambda row: 2005, axis = 1)
-    df2005["year"] = annee
+#    df2005 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2005)
+#    annee = df2005.apply(lambda row: 2005, axis = 1)
+#    df2005["year"] = annee
 
     df2000 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
     annee = df2000.apply(lambda row: 2000, axis = 1)
@@ -149,16 +151,16 @@ if __name__ == '__main__':
     annee = df1995.apply(lambda row: 1995, axis = 1)
     df1995["year"] = annee
 
-    df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
-    annee = df2011.apply(lambda row: 2011, axis = 1)
-    df2011["year"] = annee
+#    df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
+#    annee = df2011.apply(lambda row: 2011, axis = 1)
+#    df2011["year"] = annee
 
     var_to_concat = list_coicop12 + ['somme_coicop12']
 
     Wconcat1995 = df_weighted_average_grouped(dataframe = df1995, groupe = 'year', varlist = var_to_concat)
     Wconcat2000 = df_weighted_average_grouped(dataframe = df2000, groupe = 'year', varlist = var_to_concat)
-    Wconcat2005 = df_weighted_average_grouped(dataframe = df2005, groupe = 'year', varlist = var_to_concat)
-    Wconcat2011 = df_weighted_average_grouped(dataframe = df2011, groupe = 'year', varlist = var_to_concat)
+#    Wconcat2005 = df_weighted_average_grouped(dataframe = df2005, groupe = 'year', varlist = var_to_concat)
+#    Wconcat2011 = df_weighted_average_grouped(dataframe = df2011, groupe = 'year', varlist = var_to_concat)
 
      # Construction des parts pour 1995
     list_part_coicop12_1995 = []
@@ -174,31 +176,65 @@ if __name__ == '__main__':
         'list_part_coicop12_{}_2000'.format(i)
         list_part_coicop12_2000.append('part_coicop12_{}'.format(i))
 
-    # Construction des parts pour 2005
-    list_part_coicop12_2005 = []
-    for i in range(1, 13):
-        Wconcat2005['part_coicop12_{}'.format(i)] = Wconcat2005['coicop12_{}'.format(i)] / Wconcat2005['somme_coicop12']
-        'list_part_coicop12_{}_2005'.format(i)
-        list_part_coicop12_2005.append('part_coicop12_{}'.format(i))
+#    # Construction des parts pour 2005
+#    list_part_coicop12_2005 = []
+#    for i in range(1, 13):
+#        Wconcat2005['part_coicop12_{}'.format(i)] = Wconcat2005['coicop12_{}'.format(i)] / Wconcat2005['somme_coicop12']
+#        'list_part_coicop12_{}_2005'.format(i)
+#        list_part_coicop12_2005.append('part_coicop12_{}'.format(i))
+#
+#    # Construction des parts pour 2011
+#    list_part_coicop12_2011 = []
+#    for i in range(1, 13):
+#        Wconcat2011['part_coicop12_{}'.format(i)] = Wconcat2011['coicop12_{}'.format(i)] / Wconcat2011['somme_coicop12']
+#        'list_part_coicop12_{}_2011'.format(i)
+#        list_part_coicop12_2011.append('part_coicop12_{}'.format(i))
 
-    # Construction des parts pour 2011
-    list_part_coicop12_2011 = []
-    for i in range(1, 13):
-        Wconcat2011['part_coicop12_{}'.format(i)] = Wconcat2011['coicop12_{}'.format(i)] / Wconcat2011['somme_coicop12']
-        'list_part_coicop12_{}_2011'.format(i)
-        list_part_coicop12_2011.append('part_coicop12_{}'.format(i))
+
+    df_to_graph = concat([Wconcat1995[list_part_coicop12_1995], Wconcat2000[list_part_coicop12_2000]])#, Wconcat2005[list_part_coicop12_2005], Wconcat2011[list_part_coicop12_2011]])
+
+    df_to_graph.columns = [
+        'Alimentaire', 'Alcool + Tabac', 'Habits', 'Logement', 'Meubles', u'Santé', 'Transport', 'Communication', 'Loisirs', 'Education', 'Hotels', 'Divers'
+        ]
+# TODO: vérifier si les postes COICOP12 sont bien les suivants (en particulier les 8 premiers)
+# RAPPEL : 12 postes CN et COICOP
+#    01 Produits alimentaires et boissons non alcoolisées
+#    02 Boissons alcoolisées et tabac
+#    03 Articles d'habillement et chaussures
+#    04 Logement, eau, gaz, électricité et autres combustibles
+#    05 Meubles, articles de ménage et entretien courant de l'habitation
+#    06 Santé
+#    07 Transports
+#    08 Communication
+#    09 Loisir et culture
+#    10 Education
+#    11 Hotels, cafés, restaurants
+#    12 Biens et services divers
 
 
-    df_to_graph = concat([Wconcat1995[list_part_coicop12_1995], Wconcat2000[list_part_coicop12_2000], Wconcat2005[list_part_coicop12_2005], Wconcat2011[list_part_coicop12_2011]])
+
 
     axes = df_to_graph.plot(
         kind = 'bar',
         stacked = True,
-        color = ['#800000','g','#660066','#1414ff','#ffce49','#383838','#f6546a','#229cdc']
+        color = ['#FF0000','#006600','#660066','#0000FF','#FFFF00','#999966','#FF6699','#00FFFF','#CC3300','#990033','#3366CC','#000000']
         )
     plt.axhline(0, color = 'k')
 
+    def percent_formatter(x, pos = 0):
+        return '%1.0f%%' % (100 * x)
+        # TODO utiliser format et corriger également ici
+        # https://github.com/openfisca/openfisca-matplotlib/blob/master/openfisca_matplotlib/graphs.py#L123
+    axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
+    axes.set_xticklabels( ['1995','2000'], rotation=0 ) ;
     # Supprimer la légende du graphique
-    ax=plt.subplot(111)
-    ax.legend_.remove()
+    axes.legend(
+        bbox_to_anchor = (1.4, 1.05),
+        ) # TODO: supprimer la légende pour les lignes pointillées et continues
     plt.show()
+    plt.savefig('C:/Users/Etienne/Documents/data/graphe1.eps', format='eps', dpi=1000)
+
+#    # Supprimer la légende du graphique
+#    ax=plt.subplot(111)
+#    ax.legend_.remove()
+#    plt.show()
