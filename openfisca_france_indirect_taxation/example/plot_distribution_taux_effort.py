@@ -44,7 +44,7 @@ def get_input_data_frame(year):
     return input_data_frame
 
 
-def simulate_df(var_to_be_simulated, year = 2011):
+def simulate_df(var_to_be_simulated, year = 2005):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
@@ -120,73 +120,51 @@ if __name__ == '__main__':
         'revtot' ,
         'rev_disponible',
         'rev_disp_loyerimput',
-        'montant_total_taxes_indirectes' # ,
-#        'montant_tva_total',
-#        'montant_droit_d_accise_vin',
-#        'montant_droit_d_accise_biere',
-#        'montant_droit_d_accise_alcools_forts',
-#        'montant_droit_d_accise_cigarette',
-#        'montant_droit_d_accise_cigares',
-#        'montant_droit_d_accise_tabac_a_rouler',
-#        'montant_taxe_assurance_transport',
-#        'montant_taxe_assurance_sante',
-#        'montant_taxe_autres_assurances',
-#        'montant_tipp'
+        'montant_tva_total',
+        'montant_droit_d_accise_alcool',
+        'montant_droit_d_accise_tabac',
+        'montant_taxe_assurance',
+        'montant_tipp'
         ]
 
 
 
-# 1 calcul taux d'effort sur le revenu total
+# Taux d'effort par rapport au revenu disponible des ménages en 2005, par taxe indirecte
+# et par décile de revenu disponible
+
      # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df1 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
+    df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2005)
+
     if year == 2011:
-        df1.decile[df1.decuc == 10 ] = 10
-    varlist = ['revtot','montant_total_taxes_indirectes']
-    Wconcat1 = df_weighted_average_grouped(dataframe = df1, groupe = 'decile', varlist = varlist)
+        df.decile[df.decuc == 10 ] = 10
+
+    varlist = ['rev_disponible','montant_tva_total', 'montant_droit_d_accise_alcool', 'montant_droit_d_accise_tabac', 'montant_taxe_assurance', 'montant_tipp']
+    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
 
     # Example
-    Wconcat1['taux_d_effort'] = Wconcat1['montant_total_taxes_indirectes'] / Wconcat1['revtot']
+    list_taux_d_effort = []
+    Wconcat['taux_d_effort_tva'] = Wconcat['montant_tva_total'] / Wconcat['rev_disponible']
+    list_taux_d_effort.append('taux_d_effort_tva')
 
+    Wconcat['taux_d_effort_alcool'] = Wconcat['montant_droit_d_accise_alcool'] / Wconcat['rev_disponible']
+    list_taux_d_effort.append('taux_d_effort_alcool')
 
-    df_to_graph = Wconcat1['taux_d_effort']
+    Wconcat['taux_d_effort_tabac'] = Wconcat['montant_droit_d_accise_tabac'] / Wconcat['rev_disponible']
+    list_taux_d_effort.append('taux_d_effort_tabac')
 
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
+    Wconcat['taux_d_effort_assurance'] = Wconcat['montant_taxe_assurance'] / Wconcat['rev_disponible']
+    list_taux_d_effort.append('taux_d_effort_assurance')
+
+    Wconcat['taux_d_effort_tipp'] = Wconcat['montant_tipp'] / Wconcat['rev_disponible']
+    list_taux_d_effort.append('taux_d_effort_tipp')
+
+    df_to_graph = Wconcat[list_taux_d_effort].copy()
+    df_to_graph.columns = ['taux_d_effort_tva', 'taux_d_effort_alcool', 'taux_d_effort_tabac', 'taux_d_effort_assurance', 'taux_d_effort_tipp']
+
+    axes = df_to_graph.plot(
+        kind = 'bar',
+        stacked = True,
+        )
     plt.axhline(0, color = 'k')
 
-# 2 calcul taux d'effort sur le revenu disponible
-     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df2 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
-    if year == 2011:
-        df2.decile[df2.decuc == 10 ] = 10
-    varlist = ['rev_disponible','montant_total_taxes_indirectes']
-    df2.rev_disponible = df2.rev_disponible * 1.33
-    Wconcat2 = df_weighted_average_grouped(dataframe = df2, groupe = 'decile', varlist = varlist)
 
-    # Example
-    Wconcat2['taux_d_effort'] = Wconcat2['montant_total_taxes_indirectes'] / Wconcat2['rev_disponible']
-
-
-    df_to_graph = Wconcat2['taux_d_effort']
-
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
-    plt.axhline(0, color = 'k')
-
-# 3 calcul taux d'effort sur le revenu disponible
-     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df3 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
-    if year == 2011:
-        df3.decile[df3.decuc == 10 ] = 10
-    varlist = ['rev_disp_loyerimput','montant_total_taxes_indirectes']
-    Wconcat3 = df_weighted_average_grouped(dataframe = df3, groupe = 'decile', varlist = varlist)
-
-    # Example
-    Wconcat3['taux_d_effort'] = Wconcat3['montant_total_taxes_indirectes'] / Wconcat3['rev_disp_loyerimput']
-
-
-    df_to_graph = Wconcat3['taux_d_effort']
-
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
-    plt.axhline(0, color = 'k')
