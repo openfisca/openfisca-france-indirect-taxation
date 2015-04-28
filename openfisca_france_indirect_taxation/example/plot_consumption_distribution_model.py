@@ -154,6 +154,8 @@ if __name__ == '__main__':
     df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
     annee = df2011.apply(lambda row: 2011, axis = 1)
     df2011["year"] = annee
+    if year == 2011:
+        df2011.decile[df2011.decuc == 10 ] = 10
 
     var_to_concat = list_coicop12 + ['somme_coicop12']
 

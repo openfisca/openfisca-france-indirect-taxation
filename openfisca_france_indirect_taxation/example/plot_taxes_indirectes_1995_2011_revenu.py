@@ -200,6 +200,8 @@ if __name__ == '__main__':
 
 
     df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
+    if year == 2011:
+        df2011.decile[df2011.decuc == 10 ] = 10
     Wconcat2011 = df_weighted_average_grouped(dataframe = df2011, groupe = 'decile', varlist = varlist)
 
     Wconcat2011['montant_taxe_{}'.format(1)] = Wconcat2011['montant_tva_total']
@@ -243,4 +245,4 @@ if __name__ == '__main__':
         )
 
     plt.show()
-    plt.savefig('C:/Users/Etienne/Documents/data/graphe5.eps', format='eps', dpi=1000)
+    plt.savefig('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\graphe_revenu.eps', format='eps', dpi=1000)

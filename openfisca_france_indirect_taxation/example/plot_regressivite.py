@@ -146,6 +146,8 @@ if __name__ == '__main__':
 
 
     df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
+    if year == 2011:
+        df.decile[df.decuc == 10 ] = 10
     Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
 
     Wconcat['montant_taxe_{}'.format(1)] = Wconcat['montant_tva_total']
