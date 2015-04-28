@@ -36,7 +36,6 @@ from __future__ import division
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-
 import openfisca_france_indirect_taxation
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
@@ -105,6 +104,8 @@ if __name__ == '__main__':
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df(var_to_be_simulated = var_to_be_simulated)
+    if year == 2011:
+        df.decile[df.decuc == 10 ] = 10
 
 
     # Construction des parts
