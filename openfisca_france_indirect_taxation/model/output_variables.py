@@ -605,9 +605,41 @@ class montant_total_taxes_indirectes(SimpleFormulaColumn):
             montant_droit_d_accise_tabac_a_rouler +
             montant_taxe_assurance_transport +
             montant_taxe_assurance_sante +
-            montant_taxe_autres_assurances  +
+            montant_taxe_autres_assurances +
             montant_tipp
             )
+
+
+@reference_formula
+class montant_total_taxes_indirectes_sans_tva(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Montant total de taxes indirectes payées sans compter la TVA"
+
+    def function(self, simulation, period):
+        montant_droit_d_accise_vin = simulation.calculate('montant_droit_d_accise_vin', period)
+        montant_droit_d_accise_biere = simulation.calculate('montant_droit_d_accise_biere', period)
+        montant_droit_d_accise_alcools_forts = simulation.calculate('montant_droit_d_accise_alcools_forts', period)
+        montant_droit_d_accise_cigarette = simulation.calculate('montant_droit_d_accise_cigarette', period)
+        montant_droit_d_accise_cigares = simulation.calculate('montant_droit_d_accise_cigares', period)
+        montant_droit_d_accise_tabac_a_rouler = simulation.calculate('montant_droit_d_accise_tabac_a_rouler', period)
+        montant_taxe_assurance_transport = simulation.calculate('montant_taxe_assurance_transport', period)
+        montant_taxe_assurance_sante = simulation.calculate('montant_taxe_assurance_sante', period)
+        montant_taxe_autres_assurances = simulation.calculate('montant_taxe_autres_assurances', period)
+        montant_tipp = simulation.calculate('montant_tipp', period)
+        return period,  (
+            montant_droit_d_accise_vin +
+            montant_droit_d_accise_biere +
+            montant_droit_d_accise_alcools_forts +
+            montant_droit_d_accise_cigarette +
+            montant_droit_d_accise_cigares +
+            montant_droit_d_accise_tabac_a_rouler +
+            montant_taxe_assurance_transport +
+            montant_taxe_assurance_sante +
+            montant_taxe_autres_assurances +
+            montant_tipp
+            )
+
 
 @reference_formula
 class niveau_de_vie(SimpleFormulaColumn):
