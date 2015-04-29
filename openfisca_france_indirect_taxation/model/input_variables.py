@@ -98,7 +98,7 @@ reference_input_variable(
 
 reference_input_variable(
     column = FloatCol,
-    entity_class = Individus,
+    entity_class = Menages,
     is_permanent = True,
     label = u"Revenu disponible du ménage",
     name = 'rev_disponible',

@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Tue Apr 28 15:42:16 2015
 
+@author: Etienne
+"""
 
 # OpenFisca -- A versatile microsimulation software
 # By: OpenFisca Team <contact@openfisca.fr>
@@ -24,12 +28,14 @@
 
 from __future__ import division
 
-from pandas import DataFrame
+from pandas import DataFrame, concat
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
+
 import openfisca_france_indirect_taxation
 from openfisca_survey_manager.survey_collections import SurveyCollection
+
 
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -44,7 +50,7 @@ def get_input_data_frame(year):
     return input_data_frame
 
 
-def simulate_df(var_to_be_simulated, year = 2011):
+def simulate_df(var_to_be_simulated, year):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
@@ -94,12 +100,6 @@ def df_weighted_average_grouped(dataframe, groupe, varlist):
             ])
         )
 
-
-# On va dans ce fichier créer les graphiques permettant de voir les taux d'effort selon trois définition du revenu:
-# - revenu total
-# - revenu disponible
-# - revenu disponible et loyer imputé
-
 if __name__ == '__main__':
     import logging
     log = logging.getLogger(__name__)
@@ -107,86 +107,93 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
 
+    # Lite des coicop agrégées en 12 postes
+    list_coicop12 = []
+    for coicop12_index in range(1, 13):
+        list_coicop12.append('coicop12_{}'.format(coicop12_index))
     # Liste des variables que l'on veut simuler
     var_to_be_simulated = [
         'ident_men',
         'pondmen',
         'decuc',
+        'age',
         'decile',
         'revtot',
-        'somme_coicop12_conso',
+        'somme_coicop12',
         'ocde10',
         'niveau_de_vie',
-        'revtot' ,
-        'rev_disponible',
-        'rev_disp_loyerimput',
-        'montant_total_taxes_indirectes' # ,
-#        'montant_tva_total',
-#        'montant_droit_d_accise_vin',
-#        'montant_droit_d_accise_biere',
-#        'montant_droit_d_accise_alcools_forts',
-#        'montant_droit_d_accise_cigarette',
-#        'montant_droit_d_accise_cigares',
-#        'montant_droit_d_accise_tabac_a_rouler',
-#        'montant_taxe_assurance_transport',
-#        'montant_taxe_assurance_sante',
-#        'montant_taxe_autres_assurances',
-#        'montant_tipp'
+        'rev_disponible'
+        ]
+    # Merge des deux listes
+    var_to_be_simulated += list_coicop12
+
+
+#    df2005 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2005)
+#    annee = df2005.apply(lambda row: 2005, axis = 1)
+#    df2005["year"] = annee
+
+    df2000 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
+    annee = df2000.apply(lambda row: 2000, axis = 1)
+    df2000["year"] = annee
+
+    df1995 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 1995)
+    annee = df1995.apply(lambda row: 1995, axis = 1)
+    df1995["year"] = annee
+
+#    df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
+#    annee = df2011.apply(lambda row: 2011, axis = 1)
+#    df2011["year"] = annee
+
+    var_to_concat = list_coicop12 + ['rev_disponible','somme_coicop12']
+
+    Wconcat1995 = df_weighted_average_grouped(dataframe = df1995, groupe = 'year', varlist = var_to_concat)
+    Wconcat2000 = df_weighted_average_grouped(dataframe = df2000, groupe = 'year', varlist = var_to_concat)
+#    Wconcat2005 = df_weighted_average_grouped(dataframe = df2005, groupe = 'year', varlist = var_to_concat)
+#    Wconcat2011 = df_weighted_average_grouped(dataframe = df2011, groupe = 'year', varlist = var_to_concat)
+
+    list_part_coicop12_1995 = []
+    Wconcat1995['part_coicop12_{}'.format(4)] = Wconcat1995['coicop12_{}'.format(4)] / Wconcat1995['rev_disponible']
+    'list_part_coicop12_{}_1995'.format(4)
+    list_part_coicop12_1995.append('part_coicop12_{}'.format(4))
+
+    list_part_coicop12_2000 = []
+    Wconcat2000['part_coicop12_{}'.format(4)] = Wconcat2000['coicop12_{}'.format(4)] / Wconcat2000['rev_disponible']
+    'list_part_coicop12_{}_2000'.format(4)
+    list_part_coicop12_2000.append('part_coicop12_{}'.format(4))
+
+#    list_part_coicop12_2005 = []
+#    Wconcat2005['part_coicop12_{}'.format(4)] = Wconcat2005['coicop12_{}'.format(4)] / Wconcat2005['rev_disponible']
+#    'list_part_coicop12_{}_2005'.format(4)
+#    list_part_coicop12_2005.append('part_coicop12_{}'.format(4))
+#
+#    list_part_coicop12_2011 = []
+#    Wconcat2011['part_coicop12_{}'.format(4)] = Wconcat2011['coicop12_{}'.format(4)] / Wconcat2011['rev_disponible']
+#    'list_part_coicop12_{}_2011'.format(4)
+#    list_part_coicop12_2011.append('part_coicop12_{}'.format(4))
+
+
+    df_to_graph = concat([Wconcat1995[list_part_coicop12_1995], Wconcat2000[list_part_coicop12_2000]])#, Wconcat2005[list_part_coicop12_2005], Wconcat2011[list_part_coicop12_2011]])
+
+    df_to_graph.columns = [
+        u'Logement, eau, gaz et électricté'
         ]
 
-
-
-# 1 calcul taux d'effort sur le revenu total
-     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df1 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
-    if year == 2011:
-        df1.decile[df1.decuc == 10 ] = 10
-    varlist = ['revtot','montant_total_taxes_indirectes']
-    Wconcat1 = df_weighted_average_grouped(dataframe = df1, groupe = 'decile', varlist = varlist)
-
-    # Example
-    Wconcat1['taux_d_effort'] = Wconcat1['montant_total_taxes_indirectes'] / Wconcat1['revtot']
-
-
-    df_to_graph = Wconcat1['taux_d_effort']
-
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
+    axes = df_to_graph.plot(
+        kind = 'bar',
+        stacked = True,
+        color = ['#0000FF']
+        )
     plt.axhline(0, color = 'k')
 
-# 2 calcul taux d'effort sur le revenu disponible
-     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df2 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
-    if year == 2011:
-        df2.decile[df2.decuc == 10 ] = 10
-    varlist = ['rev_disponible','montant_total_taxes_indirectes']
-    df2.rev_disponible = df2.rev_disponible * 1.33
-    Wconcat2 = df_weighted_average_grouped(dataframe = df2, groupe = 'decile', varlist = varlist)
+    def percent_formatter(x, pos = 0):
+        return '%1.0f%%' % (100 * x)
 
-    # Example
-    Wconcat2['taux_d_effort'] = Wconcat2['montant_total_taxes_indirectes'] / Wconcat2['rev_disponible']
+    axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
+    axes.set_xticklabels( ['1995', '2000', '2005', '2011'], rotation=0 ) ;
 
+    axes.legend(
+        bbox_to_anchor = (0.85, 1.15),
+        )
 
-    df_to_graph = Wconcat2['taux_d_effort']
-
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
-    plt.axhline(0, color = 'k')
-
-# 3 calcul taux d'effort sur le revenu disponible
-     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df3 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
-    if year == 2011:
-        df3.decile[df3.decuc == 10 ] = 10
-    varlist = ['rev_disp_loyerimput','montant_total_taxes_indirectes']
-    Wconcat3 = df_weighted_average_grouped(dataframe = df3, groupe = 'decile', varlist = varlist)
-
-    # Example
-    Wconcat3['taux_d_effort'] = Wconcat3['montant_total_taxes_indirectes'] / Wconcat3['rev_disp_loyerimput']
-
-
-    df_to_graph = Wconcat3['taux_d_effort']
-
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
-    plt.axhline(0, color = 'k')
+    plt.show()
+    plt.savefig('C:/Users/Etienne/Documents/data/graphe2.eps', format='eps', dpi=1000)

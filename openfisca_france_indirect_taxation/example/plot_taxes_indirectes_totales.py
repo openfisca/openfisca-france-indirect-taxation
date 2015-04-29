@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Tue Apr 28 18:24:45 2015
 
+@author: Etienne
+"""
 
 # OpenFisca -- A versatile microsimulation software
 # By: OpenFisca Team <contact@openfisca.fr>
@@ -22,14 +26,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 from __future__ import division
 
-from pandas import DataFrame
+from pandas import DataFrame, concat
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
+
 import openfisca_france_indirect_taxation
 from openfisca_survey_manager.survey_collections import SurveyCollection
+
 
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -44,7 +51,7 @@ def get_input_data_frame(year):
     return input_data_frame
 
 
-def simulate_df(var_to_be_simulated, year = 2011):
+def simulate_df(var_to_be_simulated, year):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
@@ -95,11 +102,6 @@ def df_weighted_average_grouped(dataframe, groupe, varlist):
         )
 
 
-# On va dans ce fichier créer les graphiques permettant de voir les taux d'effort selon trois définition du revenu:
-# - revenu total
-# - revenu disponible
-# - revenu disponible et loyer imputé
-
 if __name__ == '__main__':
     import logging
     log = logging.getLogger(__name__)
@@ -107,86 +109,93 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
 
-    # Liste des variables que l'on veut simuler
+    list_coicop12 = []
+    for coicop12_index in range(1, 13):
+        list_coicop12.append('coicop12_{}'.format(coicop12_index))
+
     var_to_be_simulated = [
-        'ident_men',
-        'pondmen',
         'decuc',
+        'age',
+        'montant_tva_total',
+        'montant_tipp',
+        'montant_droit_d_accise_vin',
+        'montant_droit_d_accise_biere',
+        'montant_droit_d_accise_alcools_forts',
+        'montant_droit_d_accise_cigarette',
+        'montant_droit_d_accise_cigares',
+        'montant_droit_d_accise_tabac_a_rouler',
+        'montant_taxe_assurance_transport',
+        'montant_taxe_assurance_sante',
+        'montant_taxe_autres_assurances',
         'decile',
         'revtot',
-        'somme_coicop12_conso',
-        'ocde10',
-        'niveau_de_vie',
-        'revtot' ,
         'rev_disponible',
-        'rev_disp_loyerimput',
-        'montant_total_taxes_indirectes' # ,
-#        'montant_tva_total',
-#        'montant_droit_d_accise_vin',
-#        'montant_droit_d_accise_biere',
-#        'montant_droit_d_accise_alcools_forts',
-#        'montant_droit_d_accise_cigarette',
-#        'montant_droit_d_accise_cigares',
-#        'montant_droit_d_accise_tabac_a_rouler',
-#        'montant_taxe_assurance_transport',
-#        'montant_taxe_assurance_sante',
-#        'montant_taxe_autres_assurances',
-#        'montant_tipp'
+        'ident_men',
+        'pondmen',
+        'somme_coicop12'
         ]
 
+    var_to_be_simulated += list_coicop12
 
 
-# 1 calcul taux d'effort sur le revenu total
-     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df1 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
-    if year == 2011:
-        df1.decile[df1.decuc == 10 ] = 10
-    varlist = ['revtot','montant_total_taxes_indirectes']
-    Wconcat1 = df_weighted_average_grouped(dataframe = df1, groupe = 'decile', varlist = varlist)
+    varlist = ['rev_disponible',
+               'montant_tva_total',
+               'montant_tipp',
+               'montant_droit_d_accise_vin',
+               'montant_droit_d_accise_biere',
+               'montant_droit_d_accise_alcools_forts',
+               'montant_droit_d_accise_cigarette',
+               'montant_droit_d_accise_cigares',
+               'montant_droit_d_accise_tabac_a_rouler',
+               'montant_taxe_assurance_transport',
+               'montant_taxe_assurance_sante',
+               'montant_taxe_autres_assurances',
+               'somme_coicop12'
+              ]
 
-    # Example
-    Wconcat1['taux_d_effort'] = Wconcat1['montant_total_taxes_indirectes'] / Wconcat1['revtot']
+
+    varlist += list_coicop12
 
 
-    df_to_graph = Wconcat1['taux_d_effort']
+    df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 1995)
+    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
 
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
+    Wconcat['montant_taxe_{}'.format(1)] = Wconcat['montant_tva_total']
+    Wconcat['montant_taxe_{}'.format(2)] = Wconcat['montant_tipp']
+    Wconcat['montant_taxe_{}'.format(3)] = Wconcat['montant_taxe_assurance_sante'] + Wconcat['montant_taxe_assurance_transport'] + Wconcat['montant_taxe_autres_assurances']
+    Wconcat['montant_taxe_{}'.format(4)] = Wconcat['montant_droit_d_accise_vin'] + Wconcat['montant_droit_d_accise_biere']  +Wconcat['montant_droit_d_accise_alcools_forts']
+    Wconcat['montant_taxe_{}'.format(5)] = Wconcat['montant_droit_d_accise_cigares'] + Wconcat['montant_droit_d_accise_cigarette'] + Wconcat['montant_droit_d_accise_tabac_a_rouler']
+
+    Wconcat['montant_total'] = (Wconcat['montant_taxe_{}'.format(1)] + Wconcat['montant_taxe_{}'.format(2)] + Wconcat['montant_taxe_{}'.format(3)] + Wconcat['montant_taxe_{}'.format(4)] + Wconcat['montant_taxe_{}'.format(5)])
+
+    Wconcat['sur_rev_disponible'] = Wconcat['montant_total'] / Wconcat['rev_disponible']
+
+    Wconcat['sur_conso_hors_loyer'] = Wconcat['montant_total'] / (Wconcat['somme_coicop12'] - Wconcat['coicop12_{}'.format(4)])
+
+
+    df_to_graph = Wconcat['sur_rev_disponible']
+    df_to_graph_2 = Wconcat['sur_conso_hors_loyer']
+
+    axes = df_to_graph.plot(
+        stacked = True
+        )
+    axes = df_to_graph_2.plot(
+        stacked = True
+        )
     plt.axhline(0, color = 'k')
 
-# 2 calcul taux d'effort sur le revenu disponible
-     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df2 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
-    if year == 2011:
-        df2.decile[df2.decuc == 10 ] = 10
-    varlist = ['rev_disponible','montant_total_taxes_indirectes']
-    df2.rev_disponible = df2.rev_disponible * 1.33
-    Wconcat2 = df_weighted_average_grouped(dataframe = df2, groupe = 'decile', varlist = varlist)
 
-    # Example
-    Wconcat2['taux_d_effort'] = Wconcat2['montant_total_taxes_indirectes'] / Wconcat2['rev_disponible']
+    def percent_formatter(x, pos = 0):
+        return '%1.0f%%' % (100 * x)
+
+    axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
+    axes.set_xticklabels( ['1','2','3','4','5','6','7','8','9','10'], rotation=0 )
 
 
-    df_to_graph = Wconcat2['taux_d_effort']
+    axes.legend(
+        labels = ['sur revenu disponible', 'sur consommation hors loyer'],
+        bbox_to_anchor = (1, 1),
+        )
 
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
-    plt.axhline(0, color = 'k')
-
-# 3 calcul taux d'effort sur le revenu disponible
-     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df3 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
-    if year == 2011:
-        df3.decile[df3.decuc == 10 ] = 10
-    varlist = ['rev_disp_loyerimput','montant_total_taxes_indirectes']
-    Wconcat3 = df_weighted_average_grouped(dataframe = df3, groupe = 'decile', varlist = varlist)
-
-    # Example
-    Wconcat3['taux_d_effort'] = Wconcat3['montant_total_taxes_indirectes'] / Wconcat3['rev_disp_loyerimput']
-
-
-    df_to_graph = Wconcat3['taux_d_effort']
-
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
-    plt.axhline(0, color = 'k')
+    plt.show()
+    plt.savefig('C:/Users/Etienne/Documents/data/graphe5.eps', format='eps', dpi=1000)
