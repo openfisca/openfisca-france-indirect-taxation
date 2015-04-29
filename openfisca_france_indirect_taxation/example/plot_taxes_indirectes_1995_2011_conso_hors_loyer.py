@@ -167,7 +167,7 @@ if __name__ == '__main__':
     Wconcat1995['montant_taxe_{}'.format(5)] = Wconcat1995['montant_droit_d_accise_cigares'] + Wconcat1995['montant_droit_d_accise_cigarette'] + Wconcat1995['montant_droit_d_accise_tabac_a_rouler']
 
     Wconcat1995['montant_total'] = (Wconcat1995['montant_taxe_{}'.format(1)] + Wconcat1995['montant_taxe_{}'.format(2)] + Wconcat1995['montant_taxe_{}'.format(3)] + Wconcat1995['montant_taxe_{}'.format(4)] + Wconcat1995['montant_taxe_{}'.format(5)])
-    Wconcat1995['1995'] = Wconcat1995['montant_total'] / (Wconcat['somme_coicop12'] - Wconcat['coicop12_{}'.format(4)])
+    Wconcat1995['1995'] = Wconcat1995['montant_total'] / (Wconcat1995['somme_coicop12'] - Wconcat1995['coicop12_{}'.format(4)])
 
     df_to_graph_1995 = Wconcat1995['1995']
 
@@ -182,7 +182,7 @@ if __name__ == '__main__':
     Wconcat2000['montant_taxe_{}'.format(5)] = Wconcat2000['montant_droit_d_accise_cigares'] + Wconcat2000['montant_droit_d_accise_cigarette'] + Wconcat2000['montant_droit_d_accise_tabac_a_rouler']
 
     Wconcat2000['montant_total'] = (Wconcat2000['montant_taxe_{}'.format(1)] + Wconcat2000['montant_taxe_{}'.format(2)] + Wconcat2000['montant_taxe_{}'.format(3)] + Wconcat2000['montant_taxe_{}'.format(4)] + Wconcat2000['montant_taxe_{}'.format(5)])
-    Wconcat2000['2000'] = Wconcat2000['montant_total'] / (Wconcat['somme_coicop12'] - Wconcat['coicop12_{}'.format(4)])
+    Wconcat2000['2000'] = Wconcat2000['montant_total'] / (Wconcat2000['somme_coicop12'] - Wconcat2000['coicop12_{}'.format(4)])
 
     df_to_graph_2000 = Wconcat2000['2000']
 
@@ -197,7 +197,7 @@ if __name__ == '__main__':
 #    Wconcat2005['montant_taxe_{}'.format(5)] = Wconcat2005['montant_droit_d_accise_cigares'] + Wconcat2005['montant_droit_d_accise_cigarette'] + Wconcat2005['montant_droit_d_accise_tabac_a_rouler']
 #
 #    Wconcat2005['montant_total'] = (Wconcat2005['montant_taxe_{}'.format(1)] + Wconcat2005['montant_taxe_{}'.format(2)] + Wconcat2005['montant_taxe_{}'.format(3)] + Wconcat2005['montant_taxe_{}'.format(4)] + Wconcat2005['montant_taxe_{}'.format(5)])
-#    Wconcat2005['2005'] = Wconcat2005['montant_total'] / (Wconcat['somme_coicop12'] - Wconcat['coicop12_{}'.format(4)])
+#    Wconcat2005['2005'] = Wconcat2005['montant_total'] / (Wconcat2005['somme_coicop12'] - Wconcat2005['coicop12_{}'.format(4)])
 
 #    df_to_graph_2005 = Wconcat2005['2005']
 #
@@ -212,7 +212,7 @@ if __name__ == '__main__':
 #    Wconcat2011['montant_taxe_{}'.format(5)] = Wconcat2011['montant_droit_d_accise_cigares'] + Wconcat2011['montant_droit_d_accise_cigarette'] + Wconcat2011['montant_droit_d_accise_tabac_a_rouler']
 #
 #    Wconcat2011['montant_total'] = (Wconcat2011['montant_taxe_{}'.format(1)] + Wconcat2011['montant_taxe_{}'.format(2)] + Wconcat2011['montant_taxe_{}'.format(3)] + Wconcat2011['montant_taxe_{}'.format(4)] + Wconcat2011['montant_taxe_{}'.format(5)])
-#    Wconcat2011['2011'] = Wconcat2011['montant_total'] / (Wconcat['somme_coicop12'] - Wconcat['coicop12_{}'.format(4)])
+#    Wconcat2011['2011'] = Wconcat2011['montant_total'] / (Wconcat2011['somme_coicop12'] - Wconcat2011['coicop12_{}'.format(4)])
 
 #    df_to_graph_2011 = Wconcat2011['2011']
 
