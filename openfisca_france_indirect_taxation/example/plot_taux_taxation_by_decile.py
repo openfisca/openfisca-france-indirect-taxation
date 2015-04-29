@@ -64,6 +64,8 @@ if __name__ == '__main__':
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df(var_to_be_simulated = var_to_be_simulated)
+    if year == 2011:
+        df.decile[df.decuc == 10 ] = 10
     varlist = ['rev_disponible', 'montant_tva_taux_super_reduit',
                'montant_tva_taux_reduit', 'montant_tva_taux_plein', 'montant_tva_taux_intermediaire'
                ]
@@ -80,3 +82,4 @@ if __name__ == '__main__':
     # Graphe par décile de revenu par uc de la ventilation des taux de taxation
     df_to_graph.plot(kind = 'bar', stacked = True)
     plt.axhline(0, color = 'k')
+
