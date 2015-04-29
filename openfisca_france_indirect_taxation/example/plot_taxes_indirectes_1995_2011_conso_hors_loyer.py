@@ -197,6 +197,7 @@ if __name__ == '__main__':
 #    Wconcat2005['montant_taxe_{}'.format(5)] = Wconcat2005['montant_droit_d_accise_cigares'] + Wconcat2005['montant_droit_d_accise_cigarette'] + Wconcat2005['montant_droit_d_accise_tabac_a_rouler']
 #
 #    Wconcat2005['montant_total'] = (Wconcat2005['montant_taxe_{}'.format(1)] + Wconcat2005['montant_taxe_{}'.format(2)] + Wconcat2005['montant_taxe_{}'.format(3)] + Wconcat2005['montant_taxe_{}'.format(4)] + Wconcat2005['montant_taxe_{}'.format(5)])
+<<<<<<< HEAD
 #    Wconcat2005['2005'] = Wconcat2005['montant_total'] / (Wconcat['somme_coicop12'] - Wconcat['coicop12_{}'.format(4)])
 #
 #    df_to_graph_2005 = Wconcat2005['2005']
@@ -211,6 +212,8 @@ if __name__ == '__main__':
 #    Wconcat2005['montant_taxe_{}'.format(5)] = Wconcat2005['montant_droit_d_accise_cigares'] + Wconcat2005['montant_droit_d_accise_cigarette'] + Wconcat2005['montant_droit_d_accise_tabac_a_rouler']
 #
 #    Wconcat2005['montant_total'] = (Wconcat2005['montant_taxe_{}'.format(1)] + Wconcat2005['montant_taxe_{}'.format(2)] + Wconcat2005['montant_taxe_{}'.format(3)] + Wconcat2005['montant_taxe_{}'.format(4)] + Wconcat2005['montant_taxe_{}'.format(5)])
+=======
+>>>>>>> 28350cc06cd801d7c6cfd366d7f36cb8383f8002
 #    Wconcat2005['2005'] = Wconcat2005['montant_total'] / (Wconcat2005['somme_coicop12'] - Wconcat2005['coicop12_{}'.format(4)])
 
 #    df_to_graph_2005 = Wconcat2005['2005']
@@ -227,6 +230,7 @@ if __name__ == '__main__':
 #
 #    Wconcat2011['montant_total'] = (Wconcat2011['montant_taxe_{}'.format(1)] + Wconcat2011['montant_taxe_{}'.format(2)] + Wconcat2011['montant_taxe_{}'.format(3)] + Wconcat2011['montant_taxe_{}'.format(4)] + Wconcat2011['montant_taxe_{}'.format(5)])
 #    Wconcat2011['2011'] = Wconcat2011['montant_total'] / (Wconcat2011['somme_coicop12'] - Wconcat2011['coicop12_{}'.format(4)])
+<<<<<<< HEAD
 
 
 
@@ -240,6 +244,8 @@ if __name__ == '__main__':
     Wconcat2011['montant_taxe_{}'.format(3)] = Wconcat2011['montant_taxe_assurance_sante'] + Wconcat2011['montant_taxe_assurance_transport'] + Wconcat2011['montant_taxe_autres_assurances']
     Wconcat2011['montant_taxe_{}'.format(4)] = Wconcat2011['montant_droit_d_accise_vin'] + Wconcat2011['montant_droit_d_accise_biere']  +Wconcat2011['montant_droit_d_accise_alcools_forts']
     Wconcat2011['montant_taxe_{}'.format(5)] = Wconcat2011['montant_droit_d_accise_cigares'] + Wconcat2011['montant_droit_d_accise_cigarette'] + Wconcat2011['montant_droit_d_accise_tabac_a_rouler']
+=======
+>>>>>>> 28350cc06cd801d7c6cfd366d7f36cb8383f8002
 
     Wconcat2011['montant_total'] = (Wconcat2011['montant_taxe_{}'.format(1)] + Wconcat2011['montant_taxe_{}'.format(2)] + Wconcat2011['montant_taxe_{}'.format(3)] + Wconcat2011['montant_taxe_{}'.format(4)] + Wconcat2011['montant_taxe_{}'.format(5)])
     Wconcat2011['2011'] = Wconcat2011['montant_total'] / (Wconcat['somme_coicop12'] - Wconcat['coicop12_{}'.format(4)])
