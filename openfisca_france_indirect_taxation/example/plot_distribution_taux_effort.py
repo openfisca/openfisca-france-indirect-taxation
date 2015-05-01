@@ -128,12 +128,12 @@ if __name__ == '__main__':
         ]
 
 
-
+    year = 2011
 # Taux d'effort par rapport au revenu disponible des ménages en 2005, par taxe indirecte
 # et par décile de revenu disponible
 
      # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2005)
+    df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
 
     if year == 2011:
         df.decile[df.decuc == 10 ] = 10
@@ -159,12 +159,19 @@ if __name__ == '__main__':
     list_taux_d_effort.append('taux_d_effort_tipp')
 
     df_to_graph = Wconcat[list_taux_d_effort].copy()
-    df_to_graph.columns = ['taux_d_effort_tva', 'taux_d_effort_alcool', 'taux_d_effort_tabac', 'taux_d_effort_assurance', 'taux_d_effort_tipp']
+    df_to_graph.columns = ['TVA', 'Taxes sur les Alcools', 'Taxes sur le tabac', 'Taxes sur les assurances', 'TICPE']
 
     axes = df_to_graph.plot(
         kind = 'bar',
         stacked = True,
         )
     plt.axhline(0, color = 'k')
+    def percent_formatter(x, pos = 0):
+        return '%1.0f%%' % (100 * x)
+    axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
+    axes.set_xticklabels( ['1','2','3', '4', '5', '6', '7', '8', '9', '10'], rotation=0 )
 
+    axes.legend(
+        bbox_to_anchor = (1.6, 1.0),
+        )
 

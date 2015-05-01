@@ -151,7 +151,7 @@ if __name__ == '__main__':
 
     df_to_graph = Wconcat[list_part_coicop12].copy()
     df_to_graph.columns = [
-        'Alimentaire', 'Alcool + Tabac', 'Habits', 'Logement', 'Meubles', u'Santé', 'Transport', 'Communication', 'Loisir & culture', 'Education', 'Hotel & restaurant', 'Bien & service divers'
+        'Alimentaire', 'Alcool + Tabac', 'Habits', 'Logement', 'Meubles', u'Santé', 'Transport', 'Communication', 'Loisir & culture', 'Education', u'Hôtel & restaurant', 'Bien & services divers'
         ]
 
 # TODO: vérifier si les postes COICOP12 sont bien les suivants (en particulier les 8 premiers)
@@ -182,6 +182,7 @@ if __name__ == '__main__':
         # TODO utiliser format et corriger également ici
         # https://github.com/openfisca/openfisca-matplotlib/blob/master/openfisca_matplotlib/graphs.py#L123
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
+    axes.set_xticklabels( ['1','2','3', '4', '5', '6', '7', '8', '9', '10'], rotation=0 )
 
     # Supprimer la légende du graphique
     axes.legend(
