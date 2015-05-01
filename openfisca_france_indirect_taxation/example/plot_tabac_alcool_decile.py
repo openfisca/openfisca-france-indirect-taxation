@@ -31,7 +31,7 @@ Created on Sun Mar 29 15:43:49 2015
 
 from __future__ import division
 
-from pandas import DataFrame
+from pandas import DataFrame, concat
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
@@ -126,7 +126,13 @@ if __name__ == '__main__':
         'ocde10',
         'niveau_de_vie',
         'rev_disponible',
-              ]
+        'consommation_cigarette',
+        'consommation_cigares',
+        'consommation_tabac_a_rouler',
+        'consommation_alcools_forts',
+        'consommation_vin',
+        'consommation_biere'
+        ]
     # Merge des deux listes
     var_to_be_simulated += list_coicop12
 
@@ -137,16 +143,18 @@ if __name__ == '__main__':
         df.decile[df.decuc == 10 ] = 10
 
     var_to_concat = list_coicop12 + ['rev_disponible']
-    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_concat)
+    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_be_simulated)
 
-    Wconcat['part_coicop12_2'] = Wconcat['coicop12_2'] / Wconcat['rev_disponible']
+    list_alcool_tabac = []
+    Wconcat['part_alcool'] = (Wconcat['consommation_alcools_forts'] + Wconcat['consommation_vin'] + Wconcat['consommation_biere'])/ Wconcat['rev_disponible']
+    list_alcool_tabac.append('part_alcool')
+    Wconcat['part_tabac'] = (Wconcat['consommation_cigarette'] + Wconcat['consommation_cigares'] + Wconcat['consommation_tabac_a_rouler']) / Wconcat['rev_disponible']
+    list_alcool_tabac.append('part_tabac')
 
-    list_part_coicop12 =['part_coicop12_2']
-
-
-    df_to_graph = Wconcat[list_part_coicop12].copy()
+    df_to_graph = Wconcat[list_alcool_tabac].copy()
     df_to_graph.columns = [
-        'Alcool + Tabac',
+        'Alcool',
+        'Tabac'
         ]
 
 # TODO: vérifier si les postes COICOP12 sont bien les suivants (en particulier les 8 premiers)
@@ -167,7 +175,7 @@ if __name__ == '__main__':
     axes = df_to_graph.plot(
         kind = 'bar',
         stacked = True,
-        color = ['#006600']
+        color = ['#006600', '#FF0000']
 
         )
     plt.axhline(0, color = 'k')
@@ -177,6 +185,8 @@ if __name__ == '__main__':
         # TODO utiliser format et corriger également ici
         # https://github.com/openfisca/openfisca-matplotlib/blob/master/openfisca_matplotlib/graphs.py#L123
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
+    axes.set_xticklabels( ['1','2','3', '4', '5', '6', '7', '8', '9', '10'], rotation=0 )
+
 
     # Supprimer la légende du graphique
     axes.legend(
