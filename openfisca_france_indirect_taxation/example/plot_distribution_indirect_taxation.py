@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 28 18:24:45 2015
 
-@author: Etienne
-"""
 
 # OpenFisca -- A versatile microsimulation software
 # By: OpenFisca Team <contact@openfisca.fr>
@@ -26,17 +22,14 @@ Created on Tue Apr 28 18:24:45 2015
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 from __future__ import division
 
-from pandas import DataFrame, concat
+from pandas import DataFrame
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
-
 import openfisca_france_indirect_taxation
 from openfisca_survey_manager.survey_collections import SurveyCollection
-
 
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -51,7 +44,7 @@ def get_input_data_frame(year):
     return input_data_frame
 
 
-def simulate_df(var_to_be_simulated, year):
+def simulate_df(var_to_be_simulated, year = 2005):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
@@ -102,6 +95,11 @@ def df_weighted_average_grouped(dataframe, groupe, varlist):
         )
 
 
+# On va dans ce fichier créer les graphiques permettant de voir les taux d'effort selon trois définition du revenu:
+# - revenu total
+# - revenu disponible
+# - revenu disponible et loyer imputé
+
 if __name__ == '__main__':
     import logging
     log = logging.getLogger(__name__)
@@ -109,96 +107,72 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
 
-    list_coicop12 = []
-    for coicop12_index in range(1, 13):
-        list_coicop12.append('coicop12_{}'.format(coicop12_index))
-
+    # Liste des variables que l'on veut simuler
     var_to_be_simulated = [
-        'decuc',
-        'age',
-        'montant_tva_total',
-        'montant_tipp',
-        'montant_droit_d_accise_vin',
-        'montant_droit_d_accise_biere',
-        'montant_droit_d_accise_alcools_forts',
-        'montant_droit_d_accise_cigarette',
-        'montant_droit_d_accise_cigares',
-        'montant_droit_d_accise_tabac_a_rouler',
-        'montant_taxe_assurance_transport',
-        'montant_taxe_assurance_sante',
-        'montant_taxe_autres_assurances',
-        'decile',
-        'revtot',
-        'rev_disponible',
         'ident_men',
         'pondmen',
-        'somme_coicop12'
+        'decuc',
+        'decile',
+        'revtot',
+        'somme_coicop12_conso',
+        'ocde10',
+        'niveau_de_vie',
+        'revtot' ,
+        'rev_disponible',
+        'rev_disp_loyerimput',
+        'montant_tva_total',
+        'montant_droit_d_accise_alcool',
+        'montant_droit_d_accise_tabac',
+        'montant_taxe_assurance',
+        'montant_tipp',
+        'montant_total_taxes_indirectes'
         ]
 
-    var_to_be_simulated += list_coicop12
 
+# Taux d'effort par rapport au revenu disponible des ménages en 2005, par taxe indirecte
+# et par décile de revenu disponible
 
-    varlist = ['rev_disponible',
-               'montant_tva_total',
-               'montant_tipp',
-               'montant_droit_d_accise_vin',
-               'montant_droit_d_accise_biere',
-               'montant_droit_d_accise_alcools_forts',
-               'montant_droit_d_accise_cigarette',
-               'montant_droit_d_accise_cigares',
-               'montant_droit_d_accise_tabac_a_rouler',
-               'montant_taxe_assurance_transport',
-               'montant_taxe_assurance_sante',
-               'montant_taxe_autres_assurances',
-               'somme_coicop12'
-              ]
-
-
-    varlist += list_coicop12
-
-
+     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
+
     if year == 2011:
         df.decile[df.decuc == 10 ] = 10
+
+    varlist = ['montant_total_taxes_indirectes','montant_tva_total', 'montant_droit_d_accise_alcool', 'montant_droit_d_accise_tabac', 'montant_taxe_assurance', 'montant_tipp']
     Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
 
-    Wconcat['montant_taxe_{}'.format(1)] = Wconcat['montant_tva_total']
-    Wconcat['montant_taxe_{}'.format(2)] = Wconcat['montant_tipp']
-    Wconcat['montant_taxe_{}'.format(3)] = Wconcat['montant_taxe_assurance_sante'] + Wconcat['montant_taxe_assurance_transport'] + Wconcat['montant_taxe_autres_assurances']
-    Wconcat['montant_taxe_{}'.format(4)] = Wconcat['montant_droit_d_accise_vin'] + Wconcat['montant_droit_d_accise_biere']  +Wconcat['montant_droit_d_accise_alcools_forts']
-    Wconcat['montant_taxe_{}'.format(5)] = Wconcat['montant_droit_d_accise_cigares'] + Wconcat['montant_droit_d_accise_cigarette'] + Wconcat['montant_droit_d_accise_tabac_a_rouler']
+    # Example
+    list_part = []
+    Wconcat['part_tva'] = Wconcat['montant_tva_total'] / Wconcat['montant_total_taxes_indirectes']
+    list_part.append('part_tva')
 
-    Wconcat['montant_total'] = (Wconcat['montant_taxe_{}'.format(1)] + Wconcat['montant_taxe_{}'.format(2)] + Wconcat['montant_taxe_{}'.format(3)] + Wconcat['montant_taxe_{}'.format(4)] + Wconcat['montant_taxe_{}'.format(5)])
+    Wconcat['part_tipp'] = Wconcat['montant_tipp'] / Wconcat['montant_total_taxes_indirectes']
+    list_part.append('part_tipp')
 
-    Wconcat['sur_rev_disponible'] = Wconcat['montant_total'] / Wconcat['rev_disponible']
-    #TODO: la conso hors loyer ne se calcule pas en enlevant le poste coicop logement mais en enlevant les loyers réellement payés
-    Wconcat['sur_conso_hors_loyer'] = Wconcat['montant_total'] / (Wconcat['somme_coicop12'] - Wconcat['coicop12_{}'.format(4)])
+    Wconcat['part_alcool'] = Wconcat['montant_droit_d_accise_alcool'] / Wconcat['montant_total_taxes_indirectes']
+    list_part.append('part_alcool')
+
+    Wconcat['part_tabac'] = Wconcat['montant_droit_d_accise_tabac'] / Wconcat['montant_total_taxes_indirectes']
+    list_part.append('part_tabac')
+
+    Wconcat['part_assurance'] = Wconcat['montant_taxe_assurance'] / Wconcat['montant_total_taxes_indirectes']
+    list_part.append('part_assurance')
 
 
-    df_to_graph = Wconcat['sur_rev_disponible']
-    df_to_graph_2 = Wconcat['sur_conso_hors_loyer']
+
+    df_to_graph = Wconcat[list_part].copy()
+    df_to_graph.columns = ['TVA', 'TICPE', 'Alcool', 'Tabac', 'Assurances']
 
     axes = df_to_graph.plot(
-        stacked = True
+        kind = 'bar',
+        stacked = True,
         )
-    axes = df_to_graph_2.plot(
-        stacked = True
+    axes.legend(
+        bbox_to_anchor = (1.6, 1.0),
         )
     plt.axhline(0, color = 'k')
-
-
     def percent_formatter(x, pos = 0):
         return '%1.0f%%' % (100 * x)
-
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-    axes.set_xticklabels( ['1','2','3','4','5','6','7','8','9','10'], rotation=0 )
+    axes.set_xticklabels( ['1','2','3', '4', '5', '6', '7', '8', '9', '10'], rotation=0 )
 
-
-    axes.legend(
-        labels = ['sur revenu disponible', 'sur consommation hors loyer'],
-        bbox_to_anchor = (1.6, 1),
-        )
-
-
-    plt.show()
-    plt.savefig('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\graphe_taxes_indirectes_total.eps', format='eps', dpi=1000)

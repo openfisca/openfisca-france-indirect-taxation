@@ -105,6 +105,7 @@ if __name__ == '__main__':
         df.decile[df.decuc == 10 ] = 10
 
 
+
     # Construction des parts
     list_part_coicop12 = []
     for i in range(1, 13):

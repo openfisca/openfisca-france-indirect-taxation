@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 28 18:57:00 2015
 
-@author: Etienne
-"""
 
 # OpenFisca -- A versatile microsimulation software
 # By: OpenFisca Team <contact@openfisca.fr>
@@ -116,19 +112,7 @@ if __name__ == '__main__':
     var_to_be_simulated = [
         'decuc',
         'age',
-        'montant_tva_total',
-        'montant_tipp',
-        'montant_droit_d_accise_vin',
-        'montant_droit_d_accise_biere',
-        'montant_droit_d_accise_alcools_forts',
-        'montant_droit_d_accise_cigarette',
-        'montant_droit_d_accise_cigares',
-        'montant_droit_d_accise_tabac_a_rouler',
-        'montant_taxe_assurance_transport',
-        'montant_taxe_assurance_sante',
-        'montant_taxe_autres_assurances',
         'decile',
-        'revtot',
         'rev_disponible',
         'ident_men',
         'pondmen',
@@ -139,17 +123,6 @@ if __name__ == '__main__':
 
 
     varlist = ['rev_disponible',
-               'montant_tva_total',
-               'montant_tipp',
-               'montant_droit_d_accise_vin',
-               'montant_droit_d_accise_biere',
-               'montant_droit_d_accise_alcools_forts',
-               'montant_droit_d_accise_cigarette',
-               'montant_droit_d_accise_cigares',
-               'montant_droit_d_accise_tabac_a_rouler',
-               'montant_taxe_assurance_transport',
-               'montant_taxe_assurance_sante',
-               'montant_taxe_autres_assurances',
                'somme_coicop12'
               ]
 
@@ -159,6 +132,7 @@ if __name__ == '__main__':
 
     df1995 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 1995)
     Wconcat1995 = df_weighted_average_grouped(dataframe = df1995, groupe = 'decile', varlist = varlist)
+    Wconcat1995['épargne']=Wconcat1995['rev_disponible'] - Wconcat1995['somme_coicop12']
 
     Wconcat1995['montant_taxe_{}'.format(1)] = Wconcat1995['montant_tva_total']
     Wconcat1995['montant_taxe_{}'.format(2)] = Wconcat1995['montant_tipp']
@@ -200,9 +174,7 @@ if __name__ == '__main__':
 
 
     df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
-    df2011.decile[df2011.decuc == 10 ] = 10
     Wconcat2011 = df_weighted_average_grouped(dataframe = df2011, groupe = 'decile', varlist = varlist)
-
 
     Wconcat2011['montant_taxe_{}'.format(1)] = Wconcat2011['montant_tva_total']
     Wconcat2011['montant_taxe_{}'.format(2)] = Wconcat2011['montant_tipp']
@@ -245,4 +217,3 @@ if __name__ == '__main__':
         )
 
     plt.show()
-    plt.savefig('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\graphe_revenu.eps', format='eps', dpi=1000)

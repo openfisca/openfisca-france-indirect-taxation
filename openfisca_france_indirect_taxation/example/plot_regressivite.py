@@ -146,6 +146,8 @@ if __name__ == '__main__':
 
 
     df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
+    if year == 2011:
+        df.decile[df.decuc == 10 ] = 10
     Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
 
     Wconcat['montant_taxe_{}'.format(1)] = Wconcat['montant_tva_total']
@@ -189,4 +191,4 @@ if __name__ == '__main__':
         )
 
     plt.show()
-    plt.savefig('C:/Users/Etienne/Documents/data/graphe4.eps', format='eps', dpi=1000)
+    plt.savefig('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\graphe_regressivité.eps', format='eps', dpi=1000)
