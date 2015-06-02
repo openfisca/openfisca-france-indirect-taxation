@@ -50,6 +50,13 @@ for categorie_fiscale_index in range(18):
         )
 
 reference_input_variable(
+        column = FloatCol,
+        entity_class = Menages,
+        label = u"Quantité de diesel consommée (en hecto-litres)",
+        name = 'diesel_quantite',
+        )
+
+reference_input_variable(
     column = FloatCol,
     entity_class = Menages,
     label = u"numéro de la vague d'interrogation du ménage",

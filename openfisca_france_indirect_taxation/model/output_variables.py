@@ -650,3 +650,19 @@ class niveau_de_vie(SimpleFormulaColumn):
         ocde10 = simulation.calculate('ocde10', period)
         return period, rev_disponible / ocde10
 
+
+@reference_formula
+class ticpe_diesel(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Taxe intérieur sur la consommation des produits énergétiques (diesel)"
+
+    def function(self, simulation, period):
+        
+        diesel_quantite = simulation.calculate('diesel_quantite', period)
+        # accise_ticpe_diesel = simulation.legislation_at(period.start).ticpe.diesel
+        accise_ticpe_diesel = 45.67 # €/ hl
+        return period, accise_ticpe_diesel * diesel_quantite
+        
+
+    
