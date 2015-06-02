@@ -559,15 +559,13 @@ class montant_tipp(SimpleFormulaColumn):
 
         prix_ttc_gazole = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.prix_ttc_gazole
 
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-
         taux_implicite_super9598 = tipp_super9598 * (1 + taux_plein_tva) / (prix_ttc_super9598 -  tipp_super9598 * (1 + taux_plein_tva))
         taux_implicite_diesel = tipp_gazole * (1 + taux_plein_tva) / (prix_ttc_gazole -  tipp_gazole * (1 + taux_plein_tva))
 
         taux_implicite_tipp = taux_implicite_diesel * (1 - pourcentage_vehicule_essence) + taux_implicite_super9598 * pourcentage_vehicule_essence
 
-
         return period,  tax_from_expense_including_tax(consommation_tipp_ht, taux_implicite_tipp)
+
 
 @reference_formula
 class montant_total_taxes_indirectes(SimpleFormulaColumn):
