@@ -33,14 +33,6 @@ import numpy
 from . base import *  # noq analysis:ignore
 
 
-from openfisca_france_indirect_taxation.param.param import ( # noq analysis:ignore
-    # P_tva_taux_plein, P_tva_taux_intermediaire, P_tva_taux_reduit,
-    # P_tva_taux_super_reduit,
-    P_alcool_0211, P_alcool_0212, P_alcool_0213
-    )
-# TODO: supprimer les P_alcool ?
-
-
 @reference_formula
 class age(SimpleFormulaColumn):
     column = AgeCol
@@ -651,4 +643,3 @@ class niveau_de_vie(SimpleFormulaColumn):
         rev_disponible = simulation.calculate('rev_disponible', period)
         ocde10 = simulation.calculate('ocde10', period)
         return period, rev_disponible / ocde10
-

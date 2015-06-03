@@ -75,7 +75,8 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    df = test_survey_simulation()
-    print df
-    print df.columns
-    print df.describe()
+    for year in [2000, 2005, 2011]:
+        df = test_survey_simulation(year)
+        print df
+        print df.columns
+        print df.describe()

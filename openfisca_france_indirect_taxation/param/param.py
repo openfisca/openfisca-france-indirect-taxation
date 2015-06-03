@@ -1,19 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Avant le 1e janvier 2014
-
-# tva :
-P_tva_taux_plein = 0.196
-P_tva_taux_intermediaire = 0.07
-P_tva_taux_reduit = 0.055
-P_tva_taux_super_reduit = 0.021
-
-# Pour l'année 2010
-
-P_alcool_0211 = 1.734
-P_alcool_0212 = 0.015
-P_alcool_0213 = 0.411
-
 
 legislation_json = {
     "start": u'2000-01-01',
@@ -153,7 +139,7 @@ legislation_json = {
                                 {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 58.69},
                                 {'start': u'1996-01-01', 'stop': u'1996-12-31', 'value': 65.33},
                                 {'start': u'1997-01-01', 'stop': u'1997-12-31', 'value': 67.64},
-                                {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 64.239}, 
+                                {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 64.239},
                                 {'start': u'1999-01-01', 'stop': u'1999-12-31', 'value': 68.9985},
                                 {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 84.68271802},
                                 {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 79.60183423},
@@ -178,7 +164,7 @@ legislation_json = {
                                 {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 85.7},
                                 {'start': u'1996-01-01', 'stop': u'1996-12-31', 'value': 90.91},
                                 {'start': u'1997-01-01', 'stop': u'1997-12-31', 'value': 94.1098},
-                                {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 91.8586}, 
+                                {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 91.8586},
                                 {'start': u'1999-01-01', 'stop': u'1999-12-31', 'value': 95.5},
                                 {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 109.1731165},
                                 {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 103.2881858},
@@ -203,7 +189,7 @@ legislation_json = {
                                 {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 86.31},
                                 {'start': u'1996-01-01', 'stop': u'1996-12-31', 'value': 91.71},
                                 {'start': u'1997-01-01', 'stop': u'1997-12-31', 'value': 95.034},
-                                {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 92.3176}, 
+                                {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 92.3176},
                                 {'start': u'1999-01-01', 'stop': u'1999-12-31', 'value': 96.36062},
                                 {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 110.9293672},
                                 {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 105.7028769},
@@ -278,7 +264,7 @@ legislation_json = {
                                         {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 129},
                                         {'start': u'1996-01-01', 'stop': u'1996-12-31', 'value': 130},
                                         {'start': u'1997-01-01', 'stop': u'1997-12-31', 'value': 129},
-                                        {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 132}, 
+                                        {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 132},
                                         {'start': u'1999-01-01', 'stop': u'1999-12-31', 'value': 133},
                                         {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 127},
                                         {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 127},
@@ -305,8 +291,8 @@ legislation_json = {
                                         {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 7191},
                                         {'start': u'1996-01-01', 'stop': u'1996-12-31', 'value': 7419},
                                         {'start': u'1997-01-01', 'stop': u'1997-12-31', 'value': 7636},
-                                        {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 8025}, 
-                                        {'start': u'1999-01-01', 'stop': u'1999-12-31', 'value': 8451},                                       
+                                        {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 8025},
+                                        {'start': u'1999-01-01', 'stop': u'1999-12-31', 'value': 8451},
                                         {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 8854},
                                         {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 9168},
                                         {'start': u'2002-01-01', 'stop': u'2002-12-31', 'value': 9476},
@@ -338,7 +324,7 @@ legislation_json = {
                                         {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 361},
                                         {'start': u'1996-01-01', 'stop': u'1996-12-31', 'value': 366},
                                         {'start': u'1997-01-01', 'stop': u'1997-12-31', 'value': 364},
-                                        {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 365}, 
+                                        {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 365},
                                         {'start': u'1999-01-01', 'stop': u'1999-12-31', 'value': 380},
                                         {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 359},
                                         {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 364},
@@ -365,7 +351,7 @@ legislation_json = {
                                         {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 2111},
                                         {'start': u'1996-01-01', 'stop': u'1996-12-31', 'value': 2144},
                                         {'start': u'1997-01-01', 'stop': u'1997-12-31', 'value': 2186},
-                                        {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 2291}, 
+                                        {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 2291},
                                         {'start': u'1999-01-01', 'stop': u'1999-12-31', 'value': 2334},
                                         {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 2290},
                                         {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 2327},
@@ -419,7 +405,7 @@ legislation_json = {
                                         {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 2337},
                                         {'start': u'1996-01-01', 'stop': u'1996-12-31', 'value': 2350},
                                         {'start': u'1997-01-01', 'stop': u'1997-12-31', 'value': 2366},
-                                        {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 2369}, 
+                                        {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 2369},
                                         {'start': u'1999-01-01', 'stop': u'1999-12-31', 'value': 2385},
                                         {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 2416},
                                         {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 2514},
@@ -446,7 +432,7 @@ legislation_json = {
                                         {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 4893},
                                         {'start': u'1996-01-01', 'stop': u'1996-12-31', 'value': 5075},
                                         {'start': u'1997-01-01', 'stop': u'1997-12-31', 'value': 5065},
-                                        {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 5123}, 
+                                        {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 5123},
                                         {'start': u'1999-01-01', 'stop': u'1999-12-31', 'value': 5234},
                                         {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 5558},
                                         {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 5721},
@@ -481,7 +467,7 @@ legislation_json = {
                                     "description": "Taux normal cigarette",
                                     "format": "float",
                                     "values": [
-                                        {'start': u'1993-05-24', 'stop': u'1995-07-31', 'value': 0.587}, 
+                                        {'start': u'1993-05-24', 'stop': u'1995-07-31', 'value': 0.587},
                                         {'start': u'1995-08-01', 'stop': u'2000-03-31', 'value': 0.583},
                                         {'start': u'2000-04-01', 'stop': u'2003-08-31', 'value': 0.5899},
                                         {'start': u'2003-09-01', 'stop': u'2004-04-30', 'value': 0.62},
@@ -495,7 +481,7 @@ legislation_json = {
                                     "description": "Taux specifique cigarette",
                                     "format": "float",
                                     "values": [
-                                        {'start': u'1995-01-01', 'stop': u'2004-30-04', 'value': 0.05}, 
+                                        {'start': u'1995-01-01', 'stop': u'2004-30-04', 'value': 0.05},
                                         {'start': u'2004-01-05', 'stop': u'2010-12-31', 'value': 0.075},
                                         {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 0.09},
                                         {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 0.12},
@@ -514,7 +500,7 @@ legislation_json = {
                                     "description": "Taux normal tabac à rouler",
                                     "format": "float",
                                     "values": [
-                                        {'start': u'1993-05-24', 'stop': u'1995-07-31', 'value': 0.514}, 
+                                        {'start': u'1993-05-24', 'stop': u'1995-07-31', 'value': 0.514},
                                         {'start': u'1995-08-01', 'stop': u'2000-03-31', 'value': 0.51},
                                         {'start': u'2000-04-01', 'stop': u'2004-01-04', 'value': 0.5169},
                                         {'start': u'2004-01-05', 'stop': u'2012-12-31', 'value': 0.5857},
@@ -542,7 +528,7 @@ legislation_json = {
                                     "description": "Taux normaux de taxation cigares",
                                     "format": "float",
                                     "values": [
-                                        {'start': u'1993-05-24', 'stop': u'1995-07-31', 'value': 0.2926}, 
+                                        {'start': u'1993-05-24', 'stop': u'1995-07-31', 'value': 0.2926},
                                         {'start': u'1995-08-01', 'stop': u'2000-03-31', 'value': 0.2886},
                                         {'start': u'2000-04-01', 'stop': u'2001-01-07', 'value': 0.2955},
                                         {'start': u'2001-01-08', 'stop': u'2001-12-31', 'value': 0.25},
