@@ -60,7 +60,7 @@ if __name__ == '__main__':
     var_to_be_simulated = [
         'ident_men',
         'pondmen',
-        'decile',
+        'niveau_vie_decile',
         'revtot',
         'somme_coicop12',
         'ocde10',
@@ -76,7 +76,7 @@ if __name__ == '__main__':
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
     if year == 2011:
-        df.decile[df.decuc == 10 ] = 10
+        df.niveau_vie_decile[df.decuc == 10 ] = 10
 
 
 
@@ -111,9 +111,7 @@ if __name__ == '__main__':
     for var in var_list_:
          df[var] = df[var].astype(float)
 
-    #♥df['decile_bis']= weighted_quantiles('niveau_de_vie', 'labels', 'pondmen', return_quantiles = True)
+    #♥df['niveau_vie_decile_bis']= weighted_quantiles('niveau_de_vie', 'labels', 'pondmen', return_quantiles = True)
 
     df_2011 = df
     df_2011.to_stata('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\data_frame_estimation_model_\df_2011.dta')
-
-

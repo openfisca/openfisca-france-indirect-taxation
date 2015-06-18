@@ -64,7 +64,7 @@ if __name__ == '__main__':
         'pondmen',
         'decuc',
         'age',
-        'decile',
+        'niveau_vie_decile',
         'revtot',
         'somme_coicop12',
         'ocde10',
@@ -79,7 +79,7 @@ if __name__ == '__main__':
         annee = simulation_data_frame.apply(lambda row: year, axis = 1)
         simulation_data_frame["year"] = annee
         if year == 2011:
-            simulation_data_frame.decile[simulation_data_frame.decuc == 10] = 10
+            simulation_data_frame.niveau_vie_decile[simulation_data_frame.decuc == 10] = 10
         var_to_concat = list_coicop12 + ['somme_coicop12']
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame, groupe = 'year', varlist = var_to_concat)
 

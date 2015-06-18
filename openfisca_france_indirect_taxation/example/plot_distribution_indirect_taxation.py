@@ -52,7 +52,7 @@ if __name__ == '__main__':
         'ident_men',
         'pondmen',
         'decuc',
-        'decile',
+        'niveau_vie_decile',
         'revtot',
         'somme_coicop12_conso',
         'ocde10',
@@ -77,11 +77,11 @@ if __name__ == '__main__':
 
     for year in [2000, 2005, 2011]:
         if year == 2011:
-            df.decile[df.decuc == 10] = 10
+            df.niveau_vie_decile[df.decuc == 10] = 10
 
         varlist = ['montant_total_taxes_indirectes', 'montant_tva_total', 'montant_droit_d_accise_alcool',
                    'montant_droit_d_accise_tabac', 'montant_taxe_assurance', 'montant_tipp']
-        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
+        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = varlist)
 
         # Example
         list_part = []

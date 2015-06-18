@@ -63,7 +63,7 @@ if __name__ == '__main__':
         'montant_taxe_assurance_transport',
         'montant_taxe_assurance_sante',
         'montant_taxe_autres_assurances',
-        'decile',
+        'niveau_vie_decile',
         'revtot',
         'rev_disponible',
         'ident_men',
@@ -73,8 +73,8 @@ if __name__ == '__main__':
     for year in [2000, 2005, 2011]:
         df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
         if year == 2011:
-            df.decile[df.decuc == 10 ] = 10
-        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_be_simulated)
+            df.niveau_vie_decile[df.decuc == 10 ] = 10
+        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = var_to_be_simulated)
 
         Wconcat['montant_taxe_1'] = Wconcat['montant_tva_total']
         Wconcat['montant_taxe_2'] = Wconcat['montant_tipp']

@@ -61,7 +61,7 @@ if __name__ == '__main__':
         'pondmen',
         'decuc',
         'age',
-        'decile',
+        'niveau_vie_decile',
         'revtot',
         'ocde10',
         'niveau_de_vie',
@@ -80,10 +80,10 @@ if __name__ == '__main__':
         # Constition d'une base de données agrégée par décile (= collapse en stata)
         df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
         if year == 2011:
-            df.decile[df.decuc == 10] = 10
+            df.niveau_vie_decile[df.decuc == 10] = 10
 
         var_to_concat = list_coicop12 + ['rev_disponible']
-        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_be_simulated)
+        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = var_to_be_simulated)
 
         list_alcool_tabac = []
         Wconcat['part_alcool'] = (Wconcat['consommation_alcools_forts'] + Wconcat['consommation_vin'] + Wconcat['consommation_biere']) / Wconcat['rev_disponible']

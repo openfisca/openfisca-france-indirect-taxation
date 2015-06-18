@@ -56,7 +56,7 @@ if __name__ == '__main__':
         'pondmen',
         'decuc',
         'age',
-        'decile',
+        'niveau_vie_decile',
         'revtot',
         'ocde10',
         'niveau_de_vie',
@@ -69,14 +69,14 @@ if __name__ == '__main__':
         # Constition d'une base de données agrégée par décile (= collapse en stata)
         df = simulate_df(var_to_be_simulated, year)
         if year == 2011:
-            df.decile[df.decuc == 10] = 10
+            df.niveau_vie_decile[df.decuc == 10] = 10
         list_part_coicop12 = []
         df['depenses_tot'] = 0
         for i in range(1, 13):
             df['depenses_tot'] += df['coicop12_{}'.format(i)]
 
         var_to_concat = list_coicop12 + ['depenses_tot']
-        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_concat)
+        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = var_to_concat)
 
         for i in range(1, 13):
             Wconcat['part_coicop12_{}'.format(i)] = Wconcat['coicop12_{}'.format(i)] / Wconcat['depenses_tot']
@@ -122,7 +122,7 @@ if __name__ == '__main__':
             bbox_to_anchor = (1.6, 1.0),
             ) # TODO: supprimer la légende pour les lignes pointillées et continues
     plt.show()
-        # plt.savefig('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\graphe_ventilation_consommation_decile.eps', format='eps', dpi=1000)
+        # plt.savefig('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\graphe_ventilation_consommation_niveau_vie_decile.eps', format='eps', dpi=1000)
 
         # TODO: analyser, changer les déciles de revenus en déciles de consommation
         # faire un truc plus joli, mettres labels...

@@ -54,7 +54,7 @@ if __name__ == '__main__':
         'montant_tva_taux_reduit',
         'montant_tva_taux_super_reduit',
         'montant_tva_total',
-        'decile',
+        'niveau_vie_decile',
         'revtot',
         'rev_disponible',
         'ident_men',
@@ -65,11 +65,11 @@ if __name__ == '__main__':
     for year in [2000, 2005, 2011]:
         df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
         if year == 2011:
-            df.decile[df.decuc == 10] = 10
+            df.niveau_vie_decile[df.decuc == 10] = 10
         varlist = ['rev_disponible', 'montant_tva_taux_super_reduit',
                    'montant_tva_taux_reduit', 'montant_tva_taux_plein', 'montant_tva_taux_intermediaire'
                    ]
-        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
+        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = varlist)
 
         # Example
         Wconcat['part_tva_tx_super_reduit'] = Wconcat['montant_tva_taux_super_reduit'] / Wconcat['rev_disponible']

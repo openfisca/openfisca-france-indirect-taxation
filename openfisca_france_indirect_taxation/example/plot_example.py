@@ -76,7 +76,7 @@ def simulate_df(year = 2005):
                 'ocde10',
                 'niveau_de_vie',
                 'consommation_totale',
-                'decile',
+                'niveau_vie_decile',
                 ]
             ])
         )
