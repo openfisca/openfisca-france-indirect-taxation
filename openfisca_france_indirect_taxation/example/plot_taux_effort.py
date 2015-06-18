@@ -97,7 +97,7 @@ if __name__ == '__main__':
         axes1.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
 
         axes1.legend(
-            bbox_to_anchor = (1.80, 0.95),
+            bbox_to_anchor = (1.90, 0.95),
             )
 
     plt.show()

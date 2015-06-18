@@ -54,7 +54,7 @@ if __name__ == '__main__':
         'pondmen',
         'decuc',
         'age',
-        'decile',
+        'niveau_vie_decile',
         'revtot',
         'consommation_totale',
         'ocde10',
@@ -67,7 +67,7 @@ if __name__ == '__main__':
     for year in [2000, 2005, 2011]:
         df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
         var_to_concat = list_coicop12 + ['consommation_totale']
-        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = var_to_concat)
+        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = var_to_concat)
 
         # Construction des parts
         list_part_coicop12 = []
@@ -78,7 +78,14 @@ if __name__ == '__main__':
 
         df_to_graph = Wconcat[list_part_coicop12]
 
-        df_to_graph.plot(kind = 'bar', stacked = True)
+        axes = df_to_graph.plot(kind = 'bar', stacked = True)
         plt.axhline(0, color = 'k')
+
+        axes.legend(
+            bbox_to_anchor = (1.5, 1),
+            )
+
+    plt.show()
+
     #TODO: analyser, changer les déciles de revenus en déciles de consommation
     # faire un truc plus joli, mettres labels...

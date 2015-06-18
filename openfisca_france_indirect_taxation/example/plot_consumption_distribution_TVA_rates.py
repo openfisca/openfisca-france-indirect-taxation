@@ -39,7 +39,7 @@ if __name__ == '__main__':
         'pondmen',
         'decuc',
         'age',
-        'decile',
+        'niveau_vie_decile',
         'montant_tva_taux_plein',
         'montant_tva_taux_intermediaire',
         'montant_tva_taux_reduit',
@@ -54,11 +54,11 @@ if __name__ == '__main__':
     var_to_be_simulated += list_coicop12
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    for year in [2000]:
+    for year in [2000, 2005, 2011]:
         df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
         var_to_concat = ['montant_tva_taux_plein', 'montant_tva_taux_intermediaire', 'montant_tva_taux_reduit',
                          'montant_tva_taux_super_reduit', 'montant_tva_total']
-        aggregates_data_frame = df_weighted_average_grouped(dataframe = df, groupe = 'decuc', varlist = var_to_concat)
+        aggregates_data_frame = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = var_to_concat)
 
         list_part_TVA = []
         aggregates_data_frame['part_tva_taux_plein'] = aggregates_data_frame['montant_tva_taux_plein'] / aggregates_data_frame['montant_tva_total']
@@ -85,9 +85,9 @@ if __name__ == '__main__':
         axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
 
         # Supprimer la légende du graphique
-    #    axes.legend(
-    #        bbox_to_anchor = (1.4, 1.0),
-    #        ) # TODO: supprimer la légende pour les lignes pointillées et continues
+        axes.legend(
+            bbox_to_anchor = (1.4, 1.0),
+                    ) # TODO: supprimer la légende pour les lignes pointillées et continues
     #    plt.show()
         # TODO: analyser, changer les déciles de revenus en déciles de consommation
         # faire un truc plus joli, mettres labels...
