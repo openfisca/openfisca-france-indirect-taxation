@@ -289,7 +289,7 @@ class somme_coicop12_conso(SimpleFormulaColumn):
 
 
 @reference_formula
-class decile(SimpleFormulaColumn):
+class niveau_vie_decile(SimpleFormulaColumn):
     column = EnumCol(
         enum = Enum([
             u"Hors champ",
@@ -315,9 +315,9 @@ class decile(SimpleFormulaColumn):
         labels = numpy.arange(1, 11)
         # Alternative method
         # method = 2
-        # decile, values = mark_weighted_percentiles(niveau_de_vie, labels, pondmen, method, return_quantiles = True)
-        decile, values = weighted_quantiles(niveau_de_vie, labels, pondmen, return_quantiles = True)
-        return period, decile
+        # niveau_vie_decile, values = mark_weighted_percentiles(niveau_de_vie, labels, pondmen, method, return_quantiles = True)
+        niveau_vie_decile, values = weighted_quantiles(niveau_de_vie, labels, pondmen, return_quantiles = True)
+        return period, niveau_vie_decile
 
 
 @reference_formula
@@ -650,7 +650,6 @@ class niveau_de_vie(SimpleFormulaColumn):
         ocde10 = simulation.calculate('ocde10', period)
         return period, rev_disponible / ocde10
 
-
 @reference_formula
 class ticpe_diesel(SimpleFormulaColumn):
     column = FloatCol
@@ -705,7 +704,7 @@ class ticpe_supercarburants(SimpleFormulaColumn):
 #        #Attention, besoin d'ajuster en pondérant, données pour supercarburants et non super98
 #        super98_quantite = simulation.calculate('super98_quantite', period)
 #        # accise_ticpe_super98 = simulation.legislation_at(period.start).ticpe.super98
-#        accise_ticpe_super98 = 62.41 # € / hl
+#        accise_ticpe_super98 = 62.41 # ��� / hl
 #        return period, accise_ticpe_super98 * super98_quantite
 #
 #@referene_formula
