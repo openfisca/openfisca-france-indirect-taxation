@@ -108,8 +108,6 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-
-
     list_coicop12 = []
     for coicop12_index in range(1, 13):
         list_coicop12.append('coicop12_{}'.format(coicop12_index))
@@ -130,34 +128,29 @@ if __name__ == '__main__':
 
     var_to_be_simulated += list_coicop12
 
-
-    df1995 = simulate_df(var_to_be_simulated =  var_to_be_simulated, year = 1995)
+    df1995 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 1995)
     Wconcat1995 = df_weighted_average_grouped(dataframe = df1995, groupe = 'decile', varlist = var_to_be_simulated)
 
     Wconcat1995['1995'] = Wconcat1995['coicop12_{}'.format(4)] / Wconcat1995['somme_coicop12']
     df_to_graph_1995 = Wconcat1995['1995']
 
-
-    df2000 = simulate_df(var_to_be_simulated =  var_to_be_simulated, year = 2000)
+    df2000 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
     Wconcat2000 = df_weighted_average_grouped(dataframe = df2000, groupe = 'decile', varlist = var_to_be_simulated)
 
     Wconcat2000['2000'] = Wconcat2000['coicop12_{}'.format(4)] / Wconcat2000['somme_coicop12']
     df_to_graph_2000 = Wconcat2000['2000']
 
-
-    df2005 = simulate_df(var_to_be_simulated =  var_to_be_simulated, year = 2005)
+    df2005 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2005)
     Wconcat2005 = df_weighted_average_grouped(dataframe = df2005, groupe = 'decile', varlist = var_to_be_simulated)
 
     Wconcat2005['2005'] = Wconcat2005['coicop12_{}'.format(4)] / Wconcat2005['somme_coicop12']
     df_to_graph_2005 = Wconcat2005['2005']
 
-
-    df2011 = simulate_df(var_to_be_simulated =  var_to_be_simulated, year = 2011)
+    df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
     Wconcat2011 = df_weighted_average_grouped(dataframe = df2011, groupe = 'decile', varlist = var_to_be_simulated)
 
     Wconcat2011['2011'] = Wconcat2011['coicop12_{}'.format(4)] / Wconcat2011['somme_coicop12']
     df_to_graph_2011 = Wconcat2011['2011']
-
 
     axes = df_to_graph_1995.plot(
         stacked = True
@@ -172,16 +165,13 @@ if __name__ == '__main__':
         stacked = True
         )
 
-
     plt.axhline(0, color = 'k')
-
 
     def percent_formatter(x, pos = 0):
         return '%1.0f%%' % (100 * x)
 
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-    axes.set_xticklabels( ['1','2','3','4','5','6','7','8','9','10'], rotation=0 )
-
+    axes.set_xticklabels(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], rotation=0)
 
     axes.legend(
         bbox_to_anchor = (1, 1)

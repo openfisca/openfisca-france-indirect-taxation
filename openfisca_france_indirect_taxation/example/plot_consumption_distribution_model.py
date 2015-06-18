@@ -138,7 +138,6 @@ if __name__ == '__main__':
     # Merge des deux listes
     var_to_be_simulated += list_coicop12
 
-
     df2005 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2005)
     annee = df2005.apply(lambda row: 2005, axis = 1)
     df2005["year"] = annee
@@ -147,29 +146,17 @@ if __name__ == '__main__':
     annee = df2000.apply(lambda row: 2000, axis = 1)
     df2000["year"] = annee
 
-    df1995 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 1995)
-    annee = df1995.apply(lambda row: 1995, axis = 1)
-    df1995["year"] = annee
-
     df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
     annee = df2011.apply(lambda row: 2011, axis = 1)
     df2011["year"] = annee
     if year == 2011:
-        df2011.decile[df2011.decuc == 10 ] = 10
+        df2011.decile[df2011.decuc == 10] = 10
 
     var_to_concat = list_coicop12 + ['somme_coicop12']
 
-    Wconcat1995 = df_weighted_average_grouped(dataframe = df1995, groupe = 'year', varlist = var_to_concat)
     Wconcat2000 = df_weighted_average_grouped(dataframe = df2000, groupe = 'year', varlist = var_to_concat)
     Wconcat2005 = df_weighted_average_grouped(dataframe = df2005, groupe = 'year', varlist = var_to_concat)
     Wconcat2011 = df_weighted_average_grouped(dataframe = df2011, groupe = 'year', varlist = var_to_concat)
-
-     # Construction des parts pour 1995
-    list_part_coicop12_1995 = []
-    for i in range(1, 13):
-        Wconcat1995['part_coicop12_{}'.format(i)] = Wconcat1995['coicop12_{}'.format(i)] / Wconcat1995['somme_coicop12']
-        'list_part_coicop12_{}_1995'.format(i)
-        list_part_coicop12_1995.append('part_coicop12_{}'.format(i))
 
     # Construction des parts pour 2000
     list_part_coicop12_2000 = []
@@ -192,11 +179,11 @@ if __name__ == '__main__':
         'list_part_coicop12_{}_2011'.format(i)
         list_part_coicop12_2011.append('part_coicop12_{}'.format(i))
 
-
-    df_to_graph = concat([Wconcat1995[list_part_coicop12_1995], Wconcat2000[list_part_coicop12_2000], Wconcat2005[list_part_coicop12_2005], Wconcat2011[list_part_coicop12_2011]])
+    df_to_graph = concat([Wconcat2000[list_part_coicop12_2000], Wconcat2005[list_part_coicop12_2005], Wconcat2011[list_part_coicop12_2011]])
 
     df_to_graph.columns = [
-        'Alimentaire', 'Alcool + Tabac', 'Habits', 'Logement', 'Meubles', u'Santé', 'Transport', 'Communication', 'Loisirs', 'Education', 'Hotels', 'Divers'
+        'Alimentaire', 'Alcool + Tabac', 'Habits', 'Logement', 'Meubles', u'Santé',
+        'Transport', 'Communication', 'Loisirs', 'Education', 'Hotels', 'Divers'
         ]
 # TODO: vérifier si les postes COICOP12 sont bien les suivants (en particulier les 8 premiers)
 # RAPPEL : 12 postes CN et COICOP
@@ -213,13 +200,11 @@ if __name__ == '__main__':
 #    11 Hotels, cafés, restaurants
 #    12 Biens et services divers
 
-
-
-
     axes = df_to_graph.plot(
         kind = 'bar',
         stacked = True,
-        color = ['#FF0000','#006600','#660066','#0000FF','#FFFF00','#999966','#FF6699','#00FFFF','#CC3300','#990033','#3366CC','#000000']
+        color = ['#FF0000', '#006600', '#660066', '#0000FF', '#FFFF00', '#999966', '#FF6699', '#00FFFF',
+                 '#CC3300', '#990033', '#3366CC', '#000000']
         )
     plt.axhline(0, color = 'k')
 
@@ -228,13 +213,12 @@ if __name__ == '__main__':
         # TODO utiliser format et corriger également ici
         # https://github.com/openfisca/openfisca-matplotlib/blob/master/openfisca_matplotlib/graphs.py#L123
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-    axes.set_xticklabels( ['1995','2000','2005', '2011'], rotation=0 ) ;
+    axes.set_xticklabels(['1995', '2000', '2005', '2011'], rotation=0);
     # Supprimer la légende du graphique
     axes.legend(
         bbox_to_anchor = (1.4, 1.05),
         ) # TODO: supprimer la légende pour les lignes pointillées et continues
     plt.show()
-    plt.savefig('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\graphe1.eps', format='eps', dpi=1000)
 
 #    # Supprimer la légende du graphique
 #    ax=plt.subplot(111)

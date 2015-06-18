@@ -106,7 +106,6 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-
     # Lite des coicop agrégées en 12 postes
     list_coicop12 = []
     for coicop12_index in range(1, 13):
@@ -127,7 +126,6 @@ if __name__ == '__main__':
     # Merge des deux listes
     var_to_be_simulated += list_coicop12
 
-
     df2005 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2005)
     annee = df2005.apply(lambda row: 2005, axis = 1)
     df2005["year"] = annee
@@ -142,11 +140,11 @@ if __name__ == '__main__':
 
     df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
     if year == 2011:
-        df2011.decile[df2011.decuc == 10 ] = 10
+        df2011.decile[df2011.decuc == 10] = 10
     annee = df2011.apply(lambda row: 2011, axis = 1)
     df2011["year"] = annee
 
-    var_to_concat = list_coicop12 + ['rev_disponible','somme_coicop12']
+    var_to_concat = list_coicop12 + ['rev_disponible', 'somme_coicop12']
 
     Wconcat1995 = df_weighted_average_grouped(dataframe = df1995, groupe = 'year', varlist = var_to_concat)
     Wconcat2000 = df_weighted_average_grouped(dataframe = df2000, groupe = 'year', varlist = var_to_concat)
@@ -173,8 +171,8 @@ if __name__ == '__main__':
     'list_part_coicop12_{}_2011'.format(4)
     list_part_coicop12_2011.append('part_coicop12_{}'.format(4))
 
-
-    df_to_graph = concat([Wconcat1995[list_part_coicop12_1995], Wconcat2000[list_part_coicop12_2000], Wconcat2005[list_part_coicop12_2005], Wconcat2011[list_part_coicop12_2011]])
+    df_to_graph = concat([Wconcat1995[list_part_coicop12_1995], Wconcat2000[list_part_coicop12_2000],
+                          Wconcat2005[list_part_coicop12_2005], Wconcat2011[list_part_coicop12_2011]])
 
     df_to_graph.columns = [
         u'Logement, eau, gaz et électricté'
@@ -191,7 +189,7 @@ if __name__ == '__main__':
         return '%1.0f%%' % (100 * x)
 
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-    axes.set_xticklabels( ['1995', '2000', '2005', '2011'], rotation=0 ) ;
+    axes.set_xticklabels(['1995', '2000', '2005', '2011'], rotation=0);
 
     axes.legend(
         bbox_to_anchor = (0.85, 1.15),

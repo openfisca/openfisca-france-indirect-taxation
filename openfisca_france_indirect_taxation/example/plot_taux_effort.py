@@ -33,66 +33,8 @@ from openfisca_survey_manager.survey_collections import SurveyCollection
 
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, percent_formatter
 
-
-def get_input_data_frame(year):
-    openfisca_survey_collection = SurveyCollection.load(
-        collection = "openfisca_indirect_taxation", config_files_directory = config_files_directory)
-    openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
-    input_data_frame = openfisca_survey.get_values(table = "input")
-    input_data_frame.reset_index(inplace = True)
-    return input_data_frame
-
-
-def simulate_df(var_to_be_simulated, year = 2011):
-    '''
-    Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
-    '''
-    input_data_frame = get_input_data_frame(year)
-    TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
-
-    tax_benefit_system = TaxBenefitSystem()
-    survey_scenario = SurveyScenario().init_from_data_frame(
-        input_data_frame = input_data_frame,
-        tax_benefit_system = tax_benefit_system,
-        year = year,
-        )
-    simulation = survey_scenario.new_simulation()
-    return DataFrame(
-        dict([
-            (name, simulation.calculate(name)) for name in var_to_be_simulated
-
-            ])
-        )
-
-
-def wavg(groupe, var):
-    '''
-    Fonction qui calcule la moyenne pondérée par groupe d'une variable
-    '''
-    d = groupe[var]
-    w = groupe['pondmen']
-    return (d * w).sum() / w.sum()
-
-
-def collapse(dataframe, groupe, var):
-    '''
-    Pour une variable, fonction qui calcule la moyenne pondérée au sein de chaque groupe.
-    '''
-    grouped = dataframe.groupby([groupe])
-    var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x, var = var))
-    return var_weighted_grouped
-
-
-def df_weighted_average_grouped(dataframe, groupe, varlist):
-    '''
-    Agrège les résultats de weighted_average_grouped() en une unique dataframe pour la liste de variable 'varlist'.
-    '''
-    return DataFrame(
-        dict([
-            (var, collapse(dataframe, groupe, var)) for var in varlist
-            ])
-        )
 
 
 # On va dans ce fichier créer les graphiques permettant de voir les taux d'effort selon trois définition du revenu:
@@ -134,59 +76,31 @@ if __name__ == '__main__':
 #        'montant_tipp'
         ]
 
-
-
 # 1 calcul taux d'effort sur le revenu total
-     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df1 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
-    if year == 2011:
-        df1.decile[df1.decuc == 10 ] = 10
-    varlist = ['revtot','montant_total_taxes_indirectes']
-    Wconcat1 = df_weighted_average_grouped(dataframe = df1, groupe = 'decile', varlist = varlist)
+    # Constition d'une base de données agrégée par décile (= collapse en stata)
+    for year in [2000, 2005, 2011]:
+        df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+        if year == 2011:
+            df1.decile[df1.decuc == 10] = 10
+        varlist = ['revtot', 'montant_total_taxes_indirectes', 'rev_disponible', 'rev_disp_loyerimput']
+        Wconcat1 = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
+        Wconcat1['taux_d_effort'] = Wconcat1['montant_total_taxes_indirectes'] / Wconcat1['revtot']
+        df_to_graph1 = Wconcat1['taux_d_effort']
 
-    # Example
-    Wconcat1['taux_d_effort'] = Wconcat1['montant_total_taxes_indirectes'] / Wconcat1['revtot']
+        df.rev_disponible = df.rev_disponible * 1.33
+        Wconcat2 = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
+        Wconcat2['taux_d_effort'] = Wconcat2['montant_total_taxes_indirectes'] / Wconcat2['rev_disponible']
+        df_to_graph2 = Wconcat2['taux_d_effort']
 
+        Wconcat3 = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
+        Wconcat3['taux_d_effort'] = Wconcat3['montant_total_taxes_indirectes'] / Wconcat3['rev_disp_loyerimput']
+        df_to_graph3 = Wconcat3['taux_d_effort']
 
-    df_to_graph = Wconcat1['taux_d_effort']
+        df_to_graph1.plot(kind = 'bar', stacked = True)
+        plt.axhline(0, color = 'k')
 
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
-    plt.axhline(0, color = 'k')
+        df_to_graph2.plot(kind = 'bar', stacked = True)
+        plt.axhline(0, color = 'k')
 
-# 2 calcul taux d'effort sur le revenu disponible
-     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df2 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
-    if year == 2011:
-        df2.decile[df2.decuc == 10 ] = 10
-    varlist = ['rev_disponible','montant_total_taxes_indirectes']
-    df2.rev_disponible = df2.rev_disponible * 1.33
-    Wconcat2 = df_weighted_average_grouped(dataframe = df2, groupe = 'decile', varlist = varlist)
-
-    # Example
-    Wconcat2['taux_d_effort'] = Wconcat2['montant_total_taxes_indirectes'] / Wconcat2['rev_disponible']
-
-
-    df_to_graph = Wconcat2['taux_d_effort']
-
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
-    plt.axhline(0, color = 'k')
-
-# 3 calcul taux d'effort sur le revenu disponible
-     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df3 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
-    if year == 2011:
-        df3.decile[df3.decuc == 10 ] = 10
-    varlist = ['rev_disp_loyerimput','montant_total_taxes_indirectes']
-    Wconcat3 = df_weighted_average_grouped(dataframe = df3, groupe = 'decile', varlist = varlist)
-
-    # Example
-    Wconcat3['taux_d_effort'] = Wconcat3['montant_total_taxes_indirectes'] / Wconcat3['rev_disp_loyerimput']
-
-
-    df_to_graph = Wconcat3['taux_d_effort']
-
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
-    plt.axhline(0, color = 'k')
+        df_to_graph3.plot(kind = 'bar', stacked = True)
+        plt.axhline(0, color = 'k')

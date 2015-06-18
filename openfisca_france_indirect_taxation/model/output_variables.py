@@ -489,7 +489,7 @@ class montant_droit_d_accise_tabac(SimpleFormulaColumn):
         montant_droit_d_accise_cigarette = simulation.calculate('montant_droit_d_accise_cigarette', period)
         montant_droit_d_accise_cigares = simulation.calculate('montant_droit_d_accise_cigares', period)
         montant_droit_d_accise_tabac_a_rouler = simulation.calculate('montant_droit_d_accise_tabac_a_rouler', period)
-        return period,  montant_droit_d_accise_cigarette + montant_droit_d_accise_cigares + montant_droit_d_accise_tabac_a_rouler
+        return period, montant_droit_d_accise_cigarette + montant_droit_d_accise_cigares + montant_droit_d_accise_tabac_a_rouler
 
 
 @reference_formula
@@ -567,12 +567,12 @@ class montant_tipp(SimpleFormulaColumn):
 
         prix_ttc_gazole = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.prix_ttc_gazole
 
-        taux_implicite_super9598 = tipp_super9598 * (1 + taux_plein_tva) / (prix_ttc_super9598 -  tipp_super9598 * (1 + taux_plein_tva))
-        taux_implicite_diesel = tipp_gazole * (1 + taux_plein_tva) / (prix_ttc_gazole -  tipp_gazole * (1 + taux_plein_tva))
+        taux_implicite_super9598 = tipp_super9598 * (1 + taux_plein_tva) / (prix_ttc_super9598 - tipp_super9598 * (1 + taux_plein_tva))
+        taux_implicite_diesel = tipp_gazole * (1 + taux_plein_tva) / (prix_ttc_gazole - tipp_gazole * (1 + taux_plein_tva))
 
         taux_implicite_tipp = taux_implicite_diesel * (1 - pourcentage_vehicule_essence) + taux_implicite_super9598 * pourcentage_vehicule_essence
 
-        return period,  tax_from_expense_including_tax(consommation_tipp_ht, taux_implicite_tipp)
+        return period, tax_from_expense_including_tax(consommation_tipp_ht, taux_implicite_tipp)
 
 
 @reference_formula
@@ -593,7 +593,7 @@ class montant_total_taxes_indirectes(SimpleFormulaColumn):
         montant_taxe_assurance_sante = simulation.calculate('montant_taxe_assurance_sante', period)
         montant_taxe_autres_assurances = simulation.calculate('montant_taxe_autres_assurances', period)
         montant_tipp = simulation.calculate('montant_tipp', period)
-        return period,  (
+        return period, (
             montant_tva_total +
             montant_droit_d_accise_vin +
             montant_droit_d_accise_biere +
@@ -625,7 +625,7 @@ class montant_total_taxes_indirectes_sans_tva(SimpleFormulaColumn):
         montant_taxe_assurance_sante = simulation.calculate('montant_taxe_assurance_sante', period)
         montant_taxe_autres_assurances = simulation.calculate('montant_taxe_autres_assurances', period)
         montant_tipp = simulation.calculate('montant_tipp', period)
-        return period,  (
+        return period, (
             montant_droit_d_accise_vin +
             montant_droit_d_accise_biere +
             montant_droit_d_accise_alcools_forts +
@@ -658,11 +658,67 @@ class ticpe_diesel(SimpleFormulaColumn):
     label = u"Taxe intérieur sur la consommation des produits énergétiques (diesel)"
 
     def function(self, simulation, period):
-        
+
         diesel_quantite = simulation.calculate('diesel_quantite', period)
         # accise_ticpe_diesel = simulation.legislation_at(period.start).ticpe.diesel
-        accise_ticpe_diesel = 45.67 # €/ hl
+        # 46.82 = accise nationale / le consommateur paie davantage
+        accise_ticpe_diesel = 46.82  # €/ hl
         return period, accise_ticpe_diesel * diesel_quantite
-        
 
-    
+
+@reference_formula
+class ticpe_supercarburants(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Taxe intérieur sur la consommation des produits énergétiques (supercarburants)"
+
+    def function(self, simulation, period):
+
+        supercarburants_quantite = simulation.calculate('supercarburants_quantite', period)
+        # accise_ticpe_supercarburants = simulation.legislation_at(period.start).ticpe.supercarburants
+        accise_ticpe_supercarburants = 62.41  # € / hl
+        return period, accise_ticpe_supercarburants * supercarburants_quantite
+
+
+#@referene_formula
+#class ticpe_super95 (SimpleFormulaColumn):
+#    column = FloatCol
+#    entity_class = Menages
+#    label = u"Taxe intérieur sur la consommation des produits énergétiques (supercarburant : super95)"
+#
+#    def function(self, simulation, period):
+#
+#        #Attention, besoin d'ajuster en pondérant, données pour supercarburants et non super95
+#        super95_quantite = simulation.calculate('super95_quantite', period)
+#        # accise_ticpe_super95 = simulation.legislation_at(period.start).ticpe.super95
+#        accise_ticpe_super95 = 62.41 # € / hl
+#        return period, accise_ticpe_super95 * super95_quantite
+#
+#@referene_formula
+#class ticpe_super98 (SimpleFormulaColumn):
+#    column = FloatCol
+#    entity_class = Menages
+#    label = u"Taxe intérieur sur la consommation des produits énergétiques (supercarburant : super98)"
+#
+#    def function(self, simulation, period):
+#
+#        #Attention, besoin d'ajuster en pondérant, données pour supercarburants et non super98
+#        super98_quantite = simulation.calculate('super98_quantite', period)
+#        # accise_ticpe_super98 = simulation.legislation_at(period.start).ticpe.super98
+#        accise_ticpe_super98 = 62.41 # € / hl
+#        return period, accise_ticpe_super98 * super98_quantite
+#
+#@referene_formula
+#class ticpe_superE10 (SimpleFormulaColumn):
+#    column = FloatCol
+#    entity_class = Menages
+#    label = u"Taxe intérieur sur la consommation des produits énergétiques (supercarburant - superE10)"
+#
+#    def function(self, simulation, period):
+#
+#        #Attention, besoin d'ajuster en pondérant, données pour supercarburants et non superE10
+#        superE10_quantite = simulation.calculate('superE10_quantite', period)
+#        # accise_ticpe_superE10 = simulation.legislation_at(period.start).ticpe.superE10
+#        accise_ticpe_superE10 = 62.41 # € / hl
+#        return period, accise_ticpe_superE10 * superE10_quantite
+#

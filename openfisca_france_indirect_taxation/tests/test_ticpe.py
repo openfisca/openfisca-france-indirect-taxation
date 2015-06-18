@@ -29,7 +29,7 @@ from openfisca_core.tools import assert_near
 from openfisca_france_indirect_taxation.tests import base
 
 
-def test_ticpe():
+def test_ticpe_diesel():
     year = 2015
     simulation = base.tax_benefit_system.new_scenario().init_single_entity(
         period = year,
@@ -41,9 +41,67 @@ def test_ticpe():
             ),
         ).new_simulation(debug = True)
 
+    assert_near(simulation.calculate('ticpe_diesel'), 100 * 46.82, .01)
 
-    assert_near(simulation.calculate('ticpe_diesel'), 100 * 45.67, .01)
 
+def test_ticpe_supercarburants():
+    year = 2015
+    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
+        period = year,
+        personne_de_reference = dict(
+            birth = datetime.date(year - 40, 1, 1),
+            ),
+        menage = dict(
+            supercarburants_quantite = 100,
+            ),
+        ).new_simulation(debug = True)
+
+    assert_near(simulation.calculate('ticpe_supercarburants'), 100 * 62.41, .01)
+
+# def test_ticpe_super95():
+#    year = 2015
+#    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
+#        period = year,
+#        personne_de_reference = dict(
+#            birth = datetime.date(year - 40, 1, 1),
+#            ),
+#        menage = dict(
+#            super95_quantite = 100,
+#            ),
+#        ).new_simulation(debug = True)
+#
+#
+#    assert_near(simulation.calculate('ticpe_super95'), 100 * 62.41, .01)'''
+#
+# def test_ticpe_super98():
+#    year = 2015
+#    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
+#        period = year,
+#        personne_de_reference = dict(
+#            birth = datetime.date(year - 40, 1, 1),
+#            ),
+#        menage = dict(
+#            super98_quantite = 100,
+#            ),
+#        ).new_simulation(debug = True)
+#
+#
+#    assert_near(simulation.calculate('ticpe_super98'), 100 * 62.41, .01)
+#
+#
+# def test_ticpe_superE10():
+#    year = 2015
+#    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
+#        period = year,
+#        personne_de_reference = dict(
+#            birth = datetime.date(year - 40, 1, 1),
+#            ),
+#        menage = dict(
+#            superE10_quantite = 100,
+#            ),
+#        ).new_simulation(debug = True)
+#
+#    assert_near(simulation.calculate('ticpe_superE10'), 100 * 62.41, .01)
 
 if __name__ == '__main__':
     import logging

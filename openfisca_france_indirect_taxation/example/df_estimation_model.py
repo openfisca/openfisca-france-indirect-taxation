@@ -26,12 +26,12 @@ Created on Sat Apr 25 17:00:01 2015
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+from __future__ import division
+
 import os
 import logging
 import numpy
 import pandas
-
-from __future__ import division
 
 from pandas import DataFrame
 import matplotlib.pyplot as plt
@@ -42,37 +42,8 @@ from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_data.temporary import TemporaryStore
+from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame, simulate_df
 
-
-def get_input_data_frame(year):
-    openfisca_survey_collection = SurveyCollection.load(
-        collection = "openfisca_indirect_taxation", config_files_directory = config_files_directory)
-    openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
-    input_data_frame = openfisca_survey.get_values(table = "input")
-    input_data_frame.reset_index(inplace = True)
-    return input_data_frame
-
-
-def simulate_df(var_to_be_simulated, year = 2011):
-    '''
-    Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
-    '''
-    input_data_frame = get_input_data_frame(year)
-    TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
-
-    tax_benefit_system = TaxBenefitSystem()
-    survey_scenario = SurveyScenario().init_from_data_frame(
-        input_data_frame = input_data_frame,
-        tax_benefit_system = tax_benefit_system,
-        year = year,
-        )
-    simulation = survey_scenario.new_simulation()
-    return DataFrame(
-        dict([
-            (name, simulation.calculate(name)) for name in var_to_be_simulated
-
-            ])
-        )
 
 
 if __name__ == '__main__':
@@ -103,7 +74,7 @@ if __name__ == '__main__':
     var_to_be_simulated += list_coicop12
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df = simulate_df(var_to_be_simulated = var_to_be_simulated)
+    df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
     if year == 2011:
         df.decile[df.decuc == 10 ] = 10
 

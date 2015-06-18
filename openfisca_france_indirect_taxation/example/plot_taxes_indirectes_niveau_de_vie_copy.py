@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr 28 17:36:56 2015
+Created on Wed Apr 29 10:39:46 2015
 
 @author: Etienne
 """
@@ -42,7 +42,6 @@ from openfisca_france_data import default_config_files_directory as config_files
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, percent_formatter
 
-
 if __name__ == '__main__':
     import logging
     log = logging.getLogger(__name__)
@@ -68,23 +67,22 @@ if __name__ == '__main__':
         'rev_disponible',
         'ident_men',
         'pondmen',
+        'niveau_de_vie'
         ]
 
     for year in [2000, 2005, 2011]:
         df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
-        if year == 2011:
-            df.decile[df.decuc == 10 ] = 10
         Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_be_simulated)
 
-        Wconcat['montant_taxe_1'] = Wconcat['montant_tva_total']
-        Wconcat['montant_taxe_2'] = Wconcat['montant_tipp']
-        Wconcat['montant_taxe_3'] = Wconcat['montant_taxe_assurance_sante'] + Wconcat['montant_taxe_assurance_transport'] + Wconcat['montant_taxe_autres_assurances']
-        Wconcat['montant_taxe_4'] = Wconcat['montant_droit_d_accise_vin'] + Wconcat['montant_droit_d_accise_biere'] + Wconcat['montant_droit_d_accise_alcools_forts']
-        Wconcat['montant_taxe_5'] = Wconcat['montant_droit_d_accise_cigares'] + Wconcat['montant_droit_d_accise_cigarette'] + Wconcat['montant_droit_d_accise_tabac_a_rouler']
+        Wconcat['montant_taxe_{}'.format(1)] = Wconcat['montant_tva_total']
+        Wconcat['montant_taxe_{}'.format(2)] = Wconcat['montant_tipp']
+        Wconcat['montant_taxe_{}'.format(3)] = Wconcat['montant_taxe_assurance_sante'] + Wconcat['montant_taxe_assurance_transport'] + Wconcat['montant_taxe_autres_assurances']
+        Wconcat['montant_taxe_{}'.format(4)] = Wconcat['montant_droit_d_accise_vin'] + Wconcat['montant_droit_d_accise_biere'] + Wconcat['montant_droit_d_accise_alcools_forts']
+        Wconcat['montant_taxe_{}'.format(5)] = Wconcat['montant_droit_d_accise_cigares'] + Wconcat['montant_droit_d_accise_cigarette'] + Wconcat['montant_droit_d_accise_tabac_a_rouler']
 
         list_part_taxes = []
         for i in range(1, 6):
-            Wconcat['part_taxe_{}'.format(i)] = Wconcat['montant_taxe_{}'.format(i)] / Wconcat['rev_disponible']
+            Wconcat['part_taxe_{}'.format(i)] = Wconcat['montant_taxe_{}'.format(i)] / Wconcat['niveau_de_vie']
             'list_part_taxes_{}'.format(i)
             list_part_taxes.append('part_taxe_{}'.format(i))
 

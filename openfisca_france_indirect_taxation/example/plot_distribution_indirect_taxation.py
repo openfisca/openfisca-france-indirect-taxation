@@ -33,66 +33,7 @@ from openfisca_survey_manager.survey_collections import SurveyCollection
 
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-
-
-def get_input_data_frame(year):
-    openfisca_survey_collection = SurveyCollection.load(
-        collection = "openfisca_indirect_taxation", config_files_directory = config_files_directory)
-    openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
-    input_data_frame = openfisca_survey.get_values(table = "input")
-    input_data_frame.reset_index(inplace = True)
-    return input_data_frame
-
-
-def simulate_df(var_to_be_simulated, year = 2005):
-    '''
-    Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
-    '''
-    input_data_frame = get_input_data_frame(year)
-    TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
-
-    tax_benefit_system = TaxBenefitSystem()
-    survey_scenario = SurveyScenario().init_from_data_frame(
-        input_data_frame = input_data_frame,
-        tax_benefit_system = tax_benefit_system,
-        year = year,
-        )
-    simulation = survey_scenario.new_simulation()
-    return DataFrame(
-        dict([
-            (name, simulation.calculate(name)) for name in var_to_be_simulated
-
-            ])
-        )
-
-
-def wavg(groupe, var):
-    '''
-    Fonction qui calcule la moyenne pondérée par groupe d'une variable
-    '''
-    d = groupe[var]
-    w = groupe['pondmen']
-    return (d * w).sum() / w.sum()
-
-
-def collapse(dataframe, groupe, var):
-    '''
-    Pour une variable, fonction qui calcule la moyenne pondérée au sein de chaque groupe.
-    '''
-    grouped = dataframe.groupby([groupe])
-    var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x, var = var))
-    return var_weighted_grouped
-
-
-def df_weighted_average_grouped(dataframe, groupe, varlist):
-    '''
-    Agrège les résultats de weighted_average_grouped() en une unique dataframe pour la liste de variable 'varlist'.
-    '''
-    return DataFrame(
-        dict([
-            (var, collapse(dataframe, groupe, var)) for var in varlist
-            ])
-        )
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, percent_formatter
 
 
 # On va dans ce fichier créer les graphiques permettant de voir les taux d'effort selon trois définition du revenu:
@@ -106,7 +47,6 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-
     # Liste des variables que l'on veut simuler
     var_to_be_simulated = [
         'ident_men',
@@ -117,7 +57,7 @@ if __name__ == '__main__':
         'somme_coicop12_conso',
         'ocde10',
         'niveau_de_vie',
-        'revtot' ,
+        'revtot',
         'rev_disponible',
         'rev_disp_loyerimput',
         'montant_tva_total',
@@ -132,47 +72,45 @@ if __name__ == '__main__':
 # Taux d'effort par rapport au revenu disponible des ménages en 2005, par taxe indirecte
 # et par décile de revenu disponible
 
-     # Constition d'une base de données agrégée par décile (= collapse en stata)
+    # Constition d'une base de données agrégée par décile (= collapse en stata)
     df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
 
-    if year == 2011:
-        df.decile[df.decuc == 10 ] = 10
+    for year in [2000, 2005, 2011]:
+        if year == 2011:
+            df.decile[df.decuc == 10] = 10
 
-    varlist = ['montant_total_taxes_indirectes','montant_tva_total', 'montant_droit_d_accise_alcool', 'montant_droit_d_accise_tabac', 'montant_taxe_assurance', 'montant_tipp']
-    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
+        varlist = ['montant_total_taxes_indirectes', 'montant_tva_total', 'montant_droit_d_accise_alcool',
+                   'montant_droit_d_accise_tabac', 'montant_taxe_assurance', 'montant_tipp']
+        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
 
-    # Example
-    list_part = []
-    Wconcat['part_tva'] = Wconcat['montant_tva_total'] / Wconcat['montant_total_taxes_indirectes']
-    list_part.append('part_tva')
+        # Example
+        list_part = []
+        Wconcat['part_tva'] = Wconcat['montant_tva_total'] / Wconcat['montant_total_taxes_indirectes']
+        list_part.append('part_tva')
 
-    Wconcat['part_tipp'] = Wconcat['montant_tipp'] / Wconcat['montant_total_taxes_indirectes']
-    list_part.append('part_tipp')
+        Wconcat['part_tipp'] = Wconcat['montant_tipp'] / Wconcat['montant_total_taxes_indirectes']
+        list_part.append('part_tipp')
 
-    Wconcat['part_alcool'] = Wconcat['montant_droit_d_accise_alcool'] / Wconcat['montant_total_taxes_indirectes']
-    list_part.append('part_alcool')
+        Wconcat['part_alcool'] = Wconcat['montant_droit_d_accise_alcool'] / Wconcat['montant_total_taxes_indirectes']
+        list_part.append('part_alcool')
 
-    Wconcat['part_tabac'] = Wconcat['montant_droit_d_accise_tabac'] / Wconcat['montant_total_taxes_indirectes']
-    list_part.append('part_tabac')
+        Wconcat['part_tabac'] = Wconcat['montant_droit_d_accise_tabac'] / Wconcat['montant_total_taxes_indirectes']
+        list_part.append('part_tabac')
 
-    Wconcat['part_assurance'] = Wconcat['montant_taxe_assurance'] / Wconcat['montant_total_taxes_indirectes']
-    list_part.append('part_assurance')
+        Wconcat['part_assurance'] = Wconcat['montant_taxe_assurance'] / Wconcat['montant_total_taxes_indirectes']
+        list_part.append('part_assurance')
 
+        df_to_graph = Wconcat[list_part].copy()
+        df_to_graph.columns = ['TVA', 'TICPE', 'Alcool', 'Tabac', 'Assurances']
 
+        axes = df_to_graph.plot(
+            kind = 'bar',
+            stacked = True,
+            )
+        axes.legend(
+            bbox_to_anchor = (1.6, 1.0),
+            )
+        plt.axhline(0, color = 'k')
 
-    df_to_graph = Wconcat[list_part].copy()
-    df_to_graph.columns = ['TVA', 'TICPE', 'Alcool', 'Tabac', 'Assurances']
-
-    axes = df_to_graph.plot(
-        kind = 'bar',
-        stacked = True,
-        )
-    axes.legend(
-        bbox_to_anchor = (1.6, 1.0),
-        )
-    plt.axhline(0, color = 'k')
-    def percent_formatter(x, pos = 0):
-        return '%1.0f%%' % (100 * x)
-    axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-    axes.set_xticklabels( ['1','2','3', '4', '5', '6', '7', '8', '9', '10'], rotation=0 )
-
+        axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
+        axes.set_xticklabels(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], rotation=0)

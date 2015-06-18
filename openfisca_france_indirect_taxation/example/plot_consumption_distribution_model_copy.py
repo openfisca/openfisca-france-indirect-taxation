@@ -31,10 +31,11 @@ Created on Sun Mar 29 15:43:49 2015
 
 from __future__ import division
 
+from pandas import DataFrame, concat
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, percent_formatter
 
 # Le but est ici de voir l'évolution de la distribution selon les 8 postes agrégés
 # des coicop12 qui nous intéressent de 2005 à 2010
@@ -69,7 +70,6 @@ if __name__ == '__main__':
         'ocde10',
         'niveau_de_vie',
         ]
-    print var_to_be_simulated[4]
     # Merge des deux listes
     var_to_be_simulated += list_coicop12
 
@@ -79,10 +79,10 @@ if __name__ == '__main__':
         annee = simulation_data_frame.apply(lambda row: year, axis = 1)
         simulation_data_frame["year"] = annee
         if year == 2011:
-            df2011.decile[df2011.decuc == 10] = 10
+            simulation_data_frame.decile[simulation_data_frame.decuc == 10] = 10
         var_to_concat = list_coicop12 + ['somme_coicop12']
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame, groupe = 'year', varlist = var_to_concat)
-        # Construction des parts pour 2000
+
         list_part_coicop12 = []
         for i in range(1, 13):
             aggregates_data_frame['part_coicop12_{}'.format(i)] = aggregates_data_frame['coicop12_{}'.format(i)] / aggregates_data_frame['somme_coicop12']
@@ -94,20 +94,6 @@ if __name__ == '__main__':
             'Alimentaire', 'Alcool + Tabac', 'Habits', 'Logement', 'Meubles', u'Santé',
             'Transport', 'Communication', 'Loisirs', 'Education', 'Hotels', 'Divers'
             ]
-# TODO: vérifier si les postes COICOP12 sont bien les suivants (en particulier les 8 premiers)
-# RAPPEL : 12 postes CN et COICOP
-#    01 Produits alimentaires et boissons non alcoolisées
-#    02 Boissons alcoolisées et tabac
-#    03 Articles d'habillement et chaussures
-#    04 Logement, eau, gaz, électricité et autres combustibles
-#    05 Meubles, articles de ménage et entretien courant de l'habitation
-#    06 Santé
-#    07 Transports
-#    08 Communication
-#    09 Loisir et culture
-#    10 Education
-#    11 Hotels, cafés, restaurants
-#    12 Biens et services divers
 
         axes = df_to_graph.plot(
             kind = 'bar',
@@ -117,8 +103,6 @@ if __name__ == '__main__':
             )
         plt.axhline(0, color = 'k')
 
-        def percent_formatter(x, pos = 0):
-            return '%1.0f%%' % (100 * x)
             # TODO utiliser format et corriger également ici
             # https://github.com/openfisca/openfisca-matplotlib/blob/master/openfisca_matplotlib/graphs.py#L123
         axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))

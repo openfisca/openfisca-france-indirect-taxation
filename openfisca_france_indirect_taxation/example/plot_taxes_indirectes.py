@@ -40,72 +40,14 @@ from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, percent_formatter
 
-def get_input_data_frame(year):
-    openfisca_survey_collection = SurveyCollection.load(
-        collection = "openfisca_indirect_taxation", config_files_directory = config_files_directory)
-    openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
-    input_data_frame = openfisca_survey.get_values(table = "input")
-    input_data_frame.reset_index(inplace = True)
-    return input_data_frame
-
-
-def simulate_df(var_to_be_simulated, year):
-    '''
-    Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
-    '''
-    input_data_frame = get_input_data_frame(year)
-    TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
-
-    tax_benefit_system = TaxBenefitSystem()
-    survey_scenario = SurveyScenario().init_from_data_frame(
-        input_data_frame = input_data_frame,
-        tax_benefit_system = tax_benefit_system,
-        year = year,
-        )
-    simulation = survey_scenario.new_simulation()
-    return DataFrame(
-        dict([
-            (name, simulation.calculate(name)) for name in var_to_be_simulated
-
-            ])
-        )
-
-
-def wavg(groupe, var):
-    '''
-    Fonction qui calcule la moyenne pondérée par groupe d'une variable
-    '''
-    d = groupe[var]
-    w = groupe['pondmen']
-    return (d * w).sum() / w.sum()
-
-
-def collapse(dataframe, groupe, var):
-    '''
-    Pour une variable, fonction qui calcule la moyenne pondérée au sein de chaque groupe.
-    '''
-    grouped = dataframe.groupby([groupe])
-    var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x, var = var))
-    return var_weighted_grouped
-
-
-def df_weighted_average_grouped(dataframe, groupe, varlist):
-    '''
-    Agrège les résultats de weighted_average_grouped() en une unique dataframe pour la liste de variable 'varlist'.
-    '''
-    return DataFrame(
-        dict([
-            (var, collapse(dataframe, groupe, var)) for var in varlist
-            ])
-        )
 
 if __name__ == '__main__':
     import logging
     log = logging.getLogger(__name__)
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-
 
     var_to_be_simulated = [
         'ident_men',
@@ -132,7 +74,6 @@ if __name__ == '__main__':
         'montant_total_taxes_indirectes_sans_tva'
         ]
 
-
     df1995 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 1995)
     annee = df1995.apply(lambda row: 1995, axis = 1)
     df1995["year"] = annee
@@ -147,7 +88,7 @@ if __name__ == '__main__':
 
     df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
     if year == 2011:
-        df2011.decile[df2011.decuc == 10 ] = 10
+        df2011.decile[df2011.decuc == 10] = 10
     annee = df2011.apply(lambda row: 2011, axis = 1)
     df2011["year"] = annee
 
@@ -157,7 +98,6 @@ if __name__ == '__main__':
     Wconcat2000 = df_weighted_average_grouped(dataframe = df2000, groupe = 'year', varlist = var_to_concat)
     Wconcat2005 = df_weighted_average_grouped(dataframe = df2005, groupe = 'year', varlist = var_to_concat)
     Wconcat2011 = df_weighted_average_grouped(dataframe = df2011, groupe = 'year', varlist = var_to_concat)
-
 
     Wconcat1995['taxe_{}'.format(1)] = Wconcat1995['montant_droit_d_accise_vin']
     Wconcat1995['taxe_{}'.format(2)] = Wconcat1995['montant_droit_d_accise_biere']
@@ -207,13 +147,11 @@ if __name__ == '__main__':
     Wconcat2011['taxe_{}'.format(10)] = Wconcat2011['montant_tipp']
     Wconcat2011['taxe_{}'.format(11)] = Wconcat2011['montant_tva_total']
 
-
     list_taxes_1995 = []
     for i in range(1, 12):
         Wconcat1995['part_{}'.format(i)] = Wconcat1995['taxe_{}'.format(i)] / Wconcat1995['montant_total_taxes_indirectes']
         'list_taxes_{}_1995'.format(i)
         list_taxes_1995.append('part_{}'.format(i))
-
 
     list_taxes_2000 = []
     for i in range(1, 12):
@@ -221,13 +159,11 @@ if __name__ == '__main__':
         'list_taxes_{}_2000'.format(i)
         list_taxes_2000.append('part_{}'.format(i))
 
-
     list_taxes_2005 = []
     for i in range(1, 12):
         Wconcat2005['part_{}'.format(i)] = Wconcat2005['taxe_{}'.format(i)] / Wconcat2005['montant_total_taxes_indirectes']
         'list_taxes_{}_2005'.format(i)
         list_taxes_2005.append('part_{}'.format(i))
-
 
     list_taxes_2011 = []
     for i in range(1, 12):
@@ -235,25 +171,21 @@ if __name__ == '__main__':
         'list_taxes_{}_2011'.format(i)
         list_taxes_2011.append('part_{}'.format(i))
 
-
     df_to_graph = concat([Wconcat1995[list_taxes_1995], Wconcat2000[list_taxes_2000], Wconcat2005[list_taxes_2005], Wconcat2011[list_taxes_2011]])
 
-    df_to_graph.columns = [
-        'Vin', u'Bière', 'Alcools forts', 'Cigarettes', 'Cigares', u'Tabac à rouler', 'Assurance transport', u'Assurance santé', 'Autres assurances', 'TIPP', 'TVA'
-        ]
+    df_to_graph.columns = ['Vin', u'Bière', 'Alcools forts', 'Cigarettes', 'Cigares', u'Tabac à rouler',
+        'Assurance transport', u'Assurance santé', 'Autres assurances', 'TIPP', 'TVA']
 
     axes = df_to_graph.plot(
         kind = 'bar',
         stacked = True,
-        color = ['#FF0000','#006600','#000000','#0000FF','#FFFF00','#999966','#FF6699','#00FFFF','#CC3300','#990033','#3366CC']
+        color = ['#FF0000', '#006600', '#000000', '#0000FF', '#FFFF00', '#999966', '#FF6699', '#00FFFF', '#CC3300',
+                 '#990033', '#3366CC']
         )
     plt.axhline(0, color = 'k')
 
-    def percent_formatter(x, pos = 0):
-        return '%1.0f%%' % (100 * x)
-
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-    axes.set_xticklabels( ['1995','2000', '2005', '2011'], rotation=0 ) ;
+    axes.set_xticklabels(['1995', '2000', '2005', '2011'], rotation=0);
 
     axes.legend(
         bbox_to_anchor = (1.5, 1),

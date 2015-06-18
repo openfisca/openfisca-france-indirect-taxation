@@ -78,3 +78,7 @@ def df_weighted_average_grouped(dataframe, groupe, varlist):
             (var, collapse(dataframe, groupe, var)) for var in varlist
             ])
         )
+
+
+def percent_formatter(x, pos = 0):
+    return '%1.0f%%' % (100 * x)

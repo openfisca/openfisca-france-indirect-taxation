@@ -10,8 +10,7 @@ from __future__ import division
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df
-from openfisca_france_indirect_taxation.example.utils_example import df_weighted_average_grouped
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, percent_formatter
 
 
 if __name__ == '__main__':
@@ -66,9 +65,6 @@ if __name__ == '__main__':
             )
 
         plt.axhline(0, color = 'k')
-
-        def percent_formatter(x, pos = 0):
-            return '%1.0f%%' % (100 * x)
 
         axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
         axes.set_xticklabels(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], rotation=0)

@@ -40,7 +40,7 @@ from openfisca_survey_manager.survey_collections import SurveyCollection
 
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-
+from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame, simulate_df, wavg, collapse, df_weighted_average_grouped
 
 def get_input_data_frame(year):
     openfisca_survey_collection = SurveyCollection.load(
@@ -108,7 +108,6 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-
     var_to_be_simulated = [
         'decuc',
         'age',
@@ -144,8 +143,7 @@ if __name__ == '__main__':
                'montant_taxe_assurance_transport',
                'montant_taxe_assurance_sante',
                'montant_taxe_autres_assurances'
-              ]
-
+               ]
 
     df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
     Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
@@ -153,9 +151,8 @@ if __name__ == '__main__':
     Wconcat['montant_taxe_{}'.format(1)] = Wconcat['montant_tva_total']
     Wconcat['montant_taxe_{}'.format(2)] = Wconcat['montant_tipp']
     Wconcat['montant_taxe_{}'.format(3)] = Wconcat['montant_taxe_assurance_sante'] + Wconcat['montant_taxe_assurance_transport'] + Wconcat['montant_taxe_autres_assurances']
-    Wconcat['montant_taxe_{}'.format(4)] = Wconcat['montant_droit_d_accise_vin'] + Wconcat['montant_droit_d_accise_biere']  +Wconcat['montant_droit_d_accise_alcools_forts']
+    Wconcat['montant_taxe_{}'.format(4)] = Wconcat['montant_droit_d_accise_vin'] + Wconcat['montant_droit_d_accise_biere'] + Wconcat['montant_droit_d_accise_alcools_forts']
     Wconcat['montant_taxe_{}'.format(5)] = Wconcat['montant_droit_d_accise_cigares'] + Wconcat['montant_droit_d_accise_cigarette'] + Wconcat['montant_droit_d_accise_tabac_a_rouler']
-
 
     list_part_taxes = []
     for i in range(1, 6):
@@ -166,25 +163,22 @@ if __name__ == '__main__':
     df_to_graph = Wconcat[list_part_taxes]
 
     df_to_graph.columns = [
-        'TVA', 'TIPP','Assurances','Alcools','Tabac'
+        'TVA', 'TIPP', 'Assurances', 'Alcools', 'Tabac'
         ]
-
 
     axes = df_to_graph.plot(
         kind = 'bar',
         stacked = True,
-        color = ['#0000FF','#FF0000','#006600','#CC3300','#3366CC']
+        color = ['#0000FF', '#FF0000', '#006600', '#CC3300', '#3366CC']
         )
 
     plt.axhline(0, color = 'k')
-
 
     def percent_formatter(x, pos = 0):
         return '%1.0f%%' % (100 * x)
 
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-    axes.set_xticklabels( ['1','2','3','4','5','6','7','8','9','10'], rotation=0 )
-
+    axes.set_xticklabels(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], rotation=0)
 
     axes.legend(
         bbox_to_anchor = (1.3, 1),

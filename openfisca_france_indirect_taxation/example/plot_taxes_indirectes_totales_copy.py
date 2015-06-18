@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr 28 19:10:49 2015
+Created on Tue Apr 28 18:24:45 2015
 
 @author: Etienne
 """
@@ -29,11 +29,18 @@ Created on Tue Apr 28 19:10:49 2015
 
 from __future__ import division
 
+from pandas import DataFrame, concat
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, percent_formatter
 
+import openfisca_france_indirect_taxation
+from openfisca_survey_manager.survey_collections import SurveyCollection
+
+
+from openfisca_france_data import default_config_files_directory as config_files_directory
+from openfisca_france_indirect_taxation.surveys import SurveyScenario
+from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame, simulate_df, wavg, collapse, df_weighted_average_grouped, percent_formatter
 
 if __name__ == '__main__':
     import logging
@@ -69,32 +76,40 @@ if __name__ == '__main__':
 
     var_to_be_simulated += list_coicop12
 
-    p = dict()
     for year in [2000, 2005, 2011]:
-        simulation_data_frame = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
-        aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame, groupe = 'decile', varlist = var_to_be_simulated)
-        aggregates_data_frame['montant_taxe_1'] = aggregates_data_frame['montant_tva_total']
-        aggregates_data_frame['montant_taxe_2'] = aggregates_data_frame['montant_tipp']
-        aggregates_data_frame['montant_taxe_3'] = aggregates_data_frame['montant_taxe_assurance_sante'] + aggregates_data_frame['montant_taxe_assurance_transport'] + aggregates_data_frame['montant_taxe_autres_assurances']
-        aggregates_data_frame['montant_taxe_4'] = aggregates_data_frame['montant_droit_d_accise_vin'] + aggregates_data_frame['montant_droit_d_accise_biere'] + aggregates_data_frame['montant_droit_d_accise_alcools_forts']
-        aggregates_data_frame['montant_taxe_5'] = aggregates_data_frame['montant_droit_d_accise_cigares'] + aggregates_data_frame['montant_droit_d_accise_cigarette'] + aggregates_data_frame['montant_droit_d_accise_tabac_a_rouler']
+        df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+        if year == 2011:
+            df.decile[df.decuc == 10] = 10
+        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = var_to_be_simulated)
 
-        aggregates_data_frame['montant_total'] = (aggregates_data_frame['montant_taxe_{}'.format(1)] + aggregates_data_frame['montant_taxe_{}'.format(2)] + aggregates_data_frame['montant_taxe_{}'.format(3)] + aggregates_data_frame['montant_taxe_{}'.format(4)] + aggregates_data_frame['montant_taxe_{}'.format(5)])
-        aggregates_data_frame['{}'.format(year)] = aggregates_data_frame['montant_total'] / (aggregates_data_frame['somme_coicop12'] - aggregates_data_frame['coicop12_{}'.format(4)])
-        p['{}'.format(year)] = aggregates_data_frame['{}'.format(year)]
+        Wconcat['montant_taxe_1'] = Wconcat['montant_tva_total']
+        Wconcat['montant_taxe_2'] = Wconcat['montant_tipp']
+        Wconcat['montant_taxe_3'] = Wconcat['montant_taxe_assurance_sante'] + Wconcat['montant_taxe_assurance_transport'] + Wconcat['montant_taxe_autres_assurances']
+        Wconcat['montant_taxe_4'] = Wconcat['montant_droit_d_accise_vin'] + Wconcat['montant_droit_d_accise_biere'] + Wconcat['montant_droit_d_accise_alcools_forts']
+        Wconcat['montant_taxe_5'] = Wconcat['montant_droit_d_accise_cigares'] + Wconcat['montant_droit_d_accise_cigarette'] + Wconcat['montant_droit_d_accise_tabac_a_rouler']
 
+        Wconcat['montant_total'] = (Wconcat['montant_taxe_{}'.format(1)] + Wconcat['montant_taxe_{}'.format(2)] + Wconcat['montant_taxe_{}'.format(3)] + Wconcat['montant_taxe_{}'.format(4)] + Wconcat['montant_taxe_{}'.format(5)])
 
-        axes = p['{}'.format(year)].plot(
+        Wconcat['sur_rev_disponible'] = Wconcat['montant_total'] / Wconcat['rev_disponible']
+        #TODO: la conso hors loyer ne se calcule pas en enlevant le poste coicop logement mais en enlevant les loyers réellement payés
+        Wconcat['sur_conso_hors_loyer'] = Wconcat['montant_total'] / (Wconcat['somme_coicop12'] - Wconcat['coicop12_{}'.format(4)])
+
+        df_to_graph = Wconcat['sur_rev_disponible']
+        df_to_graph_2 = Wconcat['sur_conso_hors_loyer']
+
+        axes = df_to_graph.plot(
             stacked = True
             )
-
+        axes = df_to_graph_2.plot(
+            stacked = True
+            )
         plt.axhline(0, color = 'k')
 
         axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
         axes.set_xticklabels(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], rotation=0)
 
         axes.legend(
-            bbox_to_anchor = (1, 1),
+            bbox_to_anchor = (1.6, 1),
             )
 
     plt.show()

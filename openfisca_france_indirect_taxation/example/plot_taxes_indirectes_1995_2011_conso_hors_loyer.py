@@ -108,7 +108,6 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-
     list_coicop12 = []
     for coicop12_index in range(1, 13):
         list_coicop12.append('coicop12_{}'.format(coicop12_index))
@@ -137,7 +136,6 @@ if __name__ == '__main__':
 
     var_to_be_simulated += list_coicop12
 
-
     varlist = ['rev_disponible',
                'montant_tva_total',
                'montant_tipp',
@@ -151,26 +149,9 @@ if __name__ == '__main__':
                'montant_taxe_assurance_sante',
                'montant_taxe_autres_assurances',
                'somme_coicop12'
-              ]
-
+               ]
 
     varlist += list_coicop12
-
-
-    df1995 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 1995)
-    Wconcat1995 = df_weighted_average_grouped(dataframe = df1995, groupe = 'decile', varlist = varlist)
-
-    Wconcat1995['montant_taxe_{}'.format(1)] = Wconcat1995['montant_tva_total']
-    Wconcat1995['montant_taxe_{}'.format(2)] = Wconcat1995['montant_tipp']
-    Wconcat1995['montant_taxe_{}'.format(3)] = Wconcat1995['montant_taxe_assurance_sante'] + Wconcat1995['montant_taxe_assurance_transport'] + Wconcat1995['montant_taxe_autres_assurances']
-    Wconcat1995['montant_taxe_{}'.format(4)] = Wconcat1995['montant_droit_d_accise_vin'] + Wconcat1995['montant_droit_d_accise_biere']  +Wconcat1995['montant_droit_d_accise_alcools_forts']
-    Wconcat1995['montant_taxe_{}'.format(5)] = Wconcat1995['montant_droit_d_accise_cigares'] + Wconcat1995['montant_droit_d_accise_cigarette'] + Wconcat1995['montant_droit_d_accise_tabac_a_rouler']
-
-    Wconcat1995['montant_total'] = (Wconcat1995['montant_taxe_{}'.format(1)] + Wconcat1995['montant_taxe_{}'.format(2)] + Wconcat1995['montant_taxe_{}'.format(3)] + Wconcat1995['montant_taxe_{}'.format(4)] + Wconcat1995['montant_taxe_{}'.format(5)])
-    Wconcat1995['1995'] = Wconcat1995['montant_total'] / (Wconcat1995['somme_coicop12'] - Wconcat1995['coicop12_{}'.format(4)])
-
-    df_to_graph_1995 = Wconcat1995['1995']
-
 
     df2000 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2000)
     Wconcat2000 = df_weighted_average_grouped(dataframe = df2000, groupe = 'decile', varlist = varlist)
@@ -178,7 +159,7 @@ if __name__ == '__main__':
     Wconcat2000['montant_taxe_{}'.format(1)] = Wconcat2000['montant_tva_total']
     Wconcat2000['montant_taxe_{}'.format(2)] = Wconcat2000['montant_tipp']
     Wconcat2000['montant_taxe_{}'.format(3)] = Wconcat2000['montant_taxe_assurance_sante'] + Wconcat2000['montant_taxe_assurance_transport'] + Wconcat2000['montant_taxe_autres_assurances']
-    Wconcat2000['montant_taxe_{}'.format(4)] = Wconcat2000['montant_droit_d_accise_vin'] + Wconcat2000['montant_droit_d_accise_biere']  +Wconcat2000['montant_droit_d_accise_alcools_forts']
+    Wconcat2000['montant_taxe_{}'.format(4)] = Wconcat2000['montant_droit_d_accise_vin'] + Wconcat2000['montant_droit_d_accise_biere'] + Wconcat2000['montant_droit_d_accise_alcools_forts']
     Wconcat2000['montant_taxe_{}'.format(5)] = Wconcat2000['montant_droit_d_accise_cigares'] + Wconcat2000['montant_droit_d_accise_cigarette'] + Wconcat2000['montant_droit_d_accise_tabac_a_rouler']
 
     Wconcat2000['montant_total'] = (Wconcat2000['montant_taxe_{}'.format(1)] + Wconcat2000['montant_taxe_{}'.format(2)] + Wconcat2000['montant_taxe_{}'.format(3)] + Wconcat2000['montant_taxe_{}'.format(4)] + Wconcat2000['montant_taxe_{}'.format(5)])
@@ -186,14 +167,13 @@ if __name__ == '__main__':
 
     df_to_graph_2000 = Wconcat2000['2000']
 
-
     df2005 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2005)
     Wconcat2005 = df_weighted_average_grouped(dataframe = df2005, groupe = 'decile', varlist = varlist)
 
     Wconcat2005['montant_taxe_{}'.format(1)] = Wconcat2005['montant_tva_total']
     Wconcat2005['montant_taxe_{}'.format(2)] = Wconcat2005['montant_tipp']
     Wconcat2005['montant_taxe_{}'.format(3)] = Wconcat2005['montant_taxe_assurance_sante'] + Wconcat2005['montant_taxe_assurance_transport'] + Wconcat2005['montant_taxe_autres_assurances']
-    Wconcat2005['montant_taxe_{}'.format(4)] = Wconcat2005['montant_droit_d_accise_vin'] + Wconcat2005['montant_droit_d_accise_biere']  +Wconcat2005['montant_droit_d_accise_alcools_forts']
+    Wconcat2005['montant_taxe_{}'.format(4)] = Wconcat2005['montant_droit_d_accise_vin'] + Wconcat2005['montant_droit_d_accise_biere'] + Wconcat2005['montant_droit_d_accise_alcools_forts']
     Wconcat2005['montant_taxe_{}'.format(5)] = Wconcat2005['montant_droit_d_accise_cigares'] + Wconcat2005['montant_droit_d_accise_cigarette'] + Wconcat2005['montant_droit_d_accise_tabac_a_rouler']
 
     Wconcat2005['montant_total'] = (Wconcat2005['montant_taxe_{}'.format(1)] + Wconcat2005['montant_taxe_{}'.format(2)] + Wconcat2005['montant_taxe_{}'.format(3)] + Wconcat2005['montant_taxe_{}'.format(4)] + Wconcat2005['montant_taxe_{}'.format(5)])
@@ -202,28 +182,27 @@ if __name__ == '__main__':
 
     df_to_graph_2005 = Wconcat2005['2005']
 
-
     df2011 = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
     if year == 2011:
-        df2011.decile[df2011.decuc == 10 ] = 10
+        df2011.decile[df2011.decuc == 10] = 10
     Wconcat2011 = df_weighted_average_grouped(dataframe = df2011, groupe = 'decile', varlist = varlist)
 
     Wconcat2011['montant_taxe_{}'.format(1)] = Wconcat2011['montant_tva_total']
     Wconcat2011['montant_taxe_{}'.format(2)] = Wconcat2011['montant_tipp']
     Wconcat2011['montant_taxe_{}'.format(3)] = Wconcat2011['montant_taxe_assurance_sante'] + Wconcat2011['montant_taxe_assurance_transport'] + Wconcat2011['montant_taxe_autres_assurances']
-    Wconcat2011['montant_taxe_{}'.format(4)] = Wconcat2011['montant_droit_d_accise_vin'] + Wconcat2011['montant_droit_d_accise_biere']  +Wconcat2011['montant_droit_d_accise_alcools_forts']
+    Wconcat2011['montant_taxe_{}'.format(4)] = Wconcat2011['montant_droit_d_accise_vin'] + Wconcat2011['montant_droit_d_accise_biere'] + Wconcat2011['montant_droit_d_accise_alcools_forts']
     Wconcat2011['montant_taxe_{}'.format(5)] = Wconcat2011['montant_droit_d_accise_cigares'] + Wconcat2011['montant_droit_d_accise_cigarette'] + Wconcat2011['montant_droit_d_accise_tabac_a_rouler']
-
 
     Wconcat2011['montant_total'] = (Wconcat2011['montant_taxe_{}'.format(1)] + Wconcat2011['montant_taxe_{}'.format(2)] + Wconcat2011['montant_taxe_{}'.format(3)] + Wconcat2011['montant_taxe_{}'.format(4)] + Wconcat2011['montant_taxe_{}'.format(5)])
     Wconcat2011['2011'] = Wconcat2011['montant_total'] / (Wconcat2011['somme_coicop12'] - Wconcat2011['coicop12_{}'.format(4)])
 
+    print Wconcat2000.shape
+    print Wconcat2005.shape
+    print Wconcat2011.shape
+    print Wconcat2011
+
     df_to_graph_2011 = Wconcat2011['2011']
 
-
-    axes = df_to_graph_1995.plot(
-        stacked = True
-        )
     axes = df_to_graph_2000.plot(
         stacked = True
         )
@@ -234,21 +213,16 @@ if __name__ == '__main__':
         stacked = True
         )
 
-
-
     plt.axhline(0, color = 'k')
-
 
     def percent_formatter(x, pos = 0):
         return '%1.0f%%' % (100 * x)
 
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-    axes.set_xticklabels( ['1','2','3','4','5','6','7','8','9','10'], rotation=0 )
-
+    axes.set_xticklabels(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], rotation=0)
 
     axes.legend(
         bbox_to_anchor = (1, 1),
         )
 
     plt.show()
-    plt.savefig('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\graphe_conso_hors_loyer.eps', format='eps', dpi=1000)
