@@ -76,6 +76,3 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
     df = test_survey_simulation()
-    print df
-    print df.columns
-    print df.describe()
