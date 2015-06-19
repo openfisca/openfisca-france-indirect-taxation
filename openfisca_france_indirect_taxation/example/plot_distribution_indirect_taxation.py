@@ -24,16 +24,8 @@
 
 from __future__ import division
 
-from pandas import DataFrame
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-
-import openfisca_france_indirect_taxation
-from openfisca_survey_manager.survey_collections import SurveyCollection
-
-from openfisca_france_data import default_config_files_directory as config_files_directory
-from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, percent_formatter
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
+    graph_builder_bar
 
 
 # On va dans ce fichier créer les graphiques permettant de voir les taux d'effort selon trois définition du revenu:
@@ -49,17 +41,10 @@ if __name__ == '__main__':
 
     # Liste des variables que l'on veut simuler
     var_to_be_simulated = [
-        'ident_men',
         'pondmen',
         'decuc',
         'niveau_vie_decile',
-        'revtot',
         'somme_coicop12_conso',
-        'ocde10',
-        'niveau_de_vie',
-        'revtot',
-        'rev_disponible',
-        'rev_disp_loyerimput',
         'montant_tva_total',
         'montant_droit_d_accise_alcool',
         'montant_droit_d_accise_tabac',
@@ -73,9 +58,8 @@ if __name__ == '__main__':
 # et par décile de revenu disponible
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = 2011)
-
     for year in [2000, 2005, 2011]:
+        df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
         if year == 2011:
             df.niveau_vie_decile[df.decuc == 10] = 10
 
@@ -103,14 +87,4 @@ if __name__ == '__main__':
         df_to_graph = Wconcat[list_part].copy()
         df_to_graph.columns = ['TVA', 'TICPE', 'Alcool', 'Tabac', 'Assurances']
 
-        axes = df_to_graph.plot(
-            kind = 'bar',
-            stacked = True,
-            )
-        axes.legend(
-            bbox_to_anchor = (1.6, 1.0),
-            )
-        plt.axhline(0, color = 'k')
-
-        axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-        axes.set_xticklabels(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], rotation=0)
+        graph_builder_bar(df_to_graph)

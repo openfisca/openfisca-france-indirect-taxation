@@ -28,18 +28,10 @@ Created on Tue Apr 28 16:25:34 2015
 
 from __future__ import division
 
-from pandas import DataFrame, concat
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
+from pandas import concat
 
-
-import openfisca_france_indirect_taxation
-from openfisca_survey_manager.survey_collections import SurveyCollection
-
-
-from openfisca_france_data import default_config_files_directory as config_files_directory
-from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, percent_formatter
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
+    graph_builder_bar
 
 
 if __name__ == '__main__':
@@ -49,15 +41,9 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
     var_to_be_simulated = [
-        'ident_men',
         'pondmen',
         'decuc',
-        'age',
         'niveau_vie_decile',
-        'revtot',
-        'somme_coicop12',
-        'ocde10',
-        'niveau_de_vie',
         'montant_droit_d_accise_vin',
         'montant_droit_d_accise_biere',
         'montant_droit_d_accise_alcools_forts',
@@ -73,8 +59,8 @@ if __name__ == '__main__':
         'montant_total_taxes_indirectes_sans_tva'
         ]
 
-
     p = dict()
+    df_to_graph = None
     for year in [2000, 2005, 2011]:
         simulation_data_frame = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
         annee = simulation_data_frame.apply(lambda row: year, axis = 1)
@@ -83,7 +69,8 @@ if __name__ == '__main__':
             simulation_data_frame.niveau_vie_decile[simulation_data_frame.decuc == 10] = 10
 
         var_to_concat = var_to_be_simulated
-        aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame, groupe = 'year', varlist = var_to_concat)
+        aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame,
+            groupe = 'year', varlist = var_to_concat)
 
         aggregates_data_frame['taxe_1'] = aggregates_data_frame['montant_droit_d_accise_vin']
         aggregates_data_frame['taxe_2'] = aggregates_data_frame['montant_droit_d_accise_biere']
@@ -99,28 +86,15 @@ if __name__ == '__main__':
 
         list_taxes = []
         for i in range(1, 12):
-            aggregates_data_frame['part_{}'.format(i).format(year)] = aggregates_data_frame['taxe_{}'.format(i)] / aggregates_data_frame['montant_total_taxes_indirectes']
+            aggregates_data_frame['part_{}'.format(i).format(year)] = \
+                aggregates_data_frame['taxe_{}'.format(i)] / aggregates_data_frame['montant_total_taxes_indirectes']
             'list_taxes_{}'.format(i)
             list_taxes.append('part_{}'.format(i))
 
-        df_to_graph = concat([aggregates_data_frame[list_taxes]])
+        appendable = aggregates_data_frame[list_taxes]
+        if df_to_graph is not None:
+            df_to_graph = concat([df_to_graph, appendable])
+        else:
+            df_to_graph = appendable
 
-        df_to_graph.columns = ['Vin', u'Bière', 'Alcools forts', 'Cigarettes', 'Cigares', u'Tabac à rouler',
-            'Assurance transport', u'Assurance santé', 'Autres assurances', 'TIPP', 'TVA']
-
-        axes = df_to_graph.plot(
-            kind = 'bar',
-            stacked = True,
-            color = ['#FF0000', '#006600', '#000000', '#0000FF', '#FFFF00', '#999966', '#FF6699', '#00FFFF', '#CC3300',
-                     '#990033', '#3366CC']
-            )
-        plt.axhline(0, color = 'k')
-
-        axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-        axes.set_xticklabels(['2000', '2005', '2011'], rotation=0);
-
-        axes.legend(
-            bbox_to_anchor = (1.5, 1),
-            )
-
-    plt.show()
+    graph_builder_bar(df_to_graph)

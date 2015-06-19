@@ -29,18 +29,8 @@ Created on Wed Apr 29 10:39:46 2015
 
 from __future__ import division
 
-from pandas import DataFrame, concat
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-
-
-import openfisca_france_indirect_taxation
-from openfisca_survey_manager.survey_collections import SurveyCollection
-
-
-from openfisca_france_data import default_config_files_directory as config_files_directory
-from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, percent_formatter
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
+    graph_builder_bar
 
 if __name__ == '__main__':
     import logging
@@ -50,7 +40,6 @@ if __name__ == '__main__':
 
     var_to_be_simulated = [
         'decuc',
-        'age',
         'montant_tva_total',
         'montant_tipp',
         'montant_droit_d_accise_vin',
@@ -63,22 +52,32 @@ if __name__ == '__main__':
         'montant_taxe_assurance_sante',
         'montant_taxe_autres_assurances',
         'niveau_vie_decile',
-        'revtot',
-        'rev_disponible',
-        'ident_men',
         'pondmen',
         'niveau_de_vie'
         ]
 
     for year in [2000, 2005, 2011]:
         df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
-        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = var_to_be_simulated)
+        Wconcat = df_weighted_average_grouped(dataframe = df,
+            groupe = 'niveau_vie_decile', varlist = var_to_be_simulated)
 
         Wconcat['montant_taxe_{}'.format(1)] = Wconcat['montant_tva_total']
         Wconcat['montant_taxe_{}'.format(2)] = Wconcat['montant_tipp']
-        Wconcat['montant_taxe_{}'.format(3)] = Wconcat['montant_taxe_assurance_sante'] + Wconcat['montant_taxe_assurance_transport'] + Wconcat['montant_taxe_autres_assurances']
-        Wconcat['montant_taxe_{}'.format(4)] = Wconcat['montant_droit_d_accise_vin'] + Wconcat['montant_droit_d_accise_biere'] + Wconcat['montant_droit_d_accise_alcools_forts']
-        Wconcat['montant_taxe_{}'.format(5)] = Wconcat['montant_droit_d_accise_cigares'] + Wconcat['montant_droit_d_accise_cigarette'] + Wconcat['montant_droit_d_accise_tabac_a_rouler']
+        Wconcat['montant_taxe_{}'.format(3)] = (
+            Wconcat['montant_taxe_assurance_sante'] +
+            Wconcat['montant_taxe_assurance_transport'] +
+            Wconcat['montant_taxe_autres_assurances']
+            )
+        Wconcat['montant_taxe_{}'.format(4)] = (
+            Wconcat['montant_droit_d_accise_vin'] +
+            Wconcat['montant_droit_d_accise_biere'] +
+            Wconcat['montant_droit_d_accise_alcools_forts']
+        )
+        Wconcat['montant_taxe_{}'.format(5)] = (
+            Wconcat['montant_droit_d_accise_cigares'] +
+            Wconcat['montant_droit_d_accise_cigarette'] +
+            Wconcat['montant_droit_d_accise_tabac_a_rouler']
+        )
 
         list_part_taxes = []
         for i in range(1, 6):
@@ -92,19 +91,4 @@ if __name__ == '__main__':
             'TVA', 'TIPP', 'Assurances', 'Alcools', 'Tabac'
             ]
 
-        axes = df_to_graph.plot(
-            kind = 'bar',
-            stacked = True,
-            color = ['#0000FF', '#FF0000', '#006600', '#CC3300', '#3366CC']
-            )
-
-        plt.axhline(0, color = 'k')
-
-        axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-        axes.set_xticklabels(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], rotation=0)
-
-        axes.legend(
-            bbox_to_anchor = (1.3, 1),
-            )
-
-    plt.show()
+        graph_builder_bar(df_to_graph)

@@ -28,18 +28,10 @@ Created on Tue Apr 28 15:42:16 2015
 
 from __future__ import division
 
-from pandas import DataFrame, concat
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
+from pandas import concat
 
-
-import openfisca_france_indirect_taxation
-from openfisca_survey_manager.survey_collections import SurveyCollection
-
-
-from openfisca_france_data import default_config_files_directory as config_files_directory
-from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, percent_formatter
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
+    graph_builder_bar
 
 
 if __name__ == '__main__':
@@ -54,21 +46,17 @@ if __name__ == '__main__':
         list_coicop12.append('coicop12_{}'.format(coicop12_index))
     # Liste des variables que l'on veut simuler
     var_to_be_simulated = [
-        'ident_men',
         'pondmen',
         'decuc',
-        'age',
         'niveau_vie_decile',
-        'revtot',
         'somme_coicop12',
-        'ocde10',
-        'niveau_de_vie',
         'rev_disponible'
         ]
     # Merge des deux listes
     var_to_be_simulated += list_coicop12
 
     p = dict()
+    df_to_graph = None
     for year in [2000, 2005, 2011]:
         simulation_data_frame = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
         annee = simulation_data_frame.apply(lambda row: year, axis = 1)
@@ -77,30 +65,17 @@ if __name__ == '__main__':
             simulation_data_frame.niveau_vie_decile[simulation_data_frame.decuc == 10] = 10
 
         var_to_concat = list_coicop12 + ['rev_disponible', 'somme_coicop12']
-        aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame, groupe = 'year', varlist = var_to_concat)
+        aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame,
+            groupe = 'year', varlist = var_to_concat)
 
         list_part_coicop12 = []
-        aggregates_data_frame['part_coicop12_4'] = aggregates_data_frame['coicop12_4'] / aggregates_data_frame['rev_disponible']
-        'list_part_coicop12_4'
+        aggregates_data_frame['part_coicop12_4'] = \
+            aggregates_data_frame['coicop12_4'] / aggregates_data_frame['rev_disponible']
         list_part_coicop12.append('part_coicop12_4')
-        df_to_graph = concat([aggregates_data_frame[list_part_coicop12]])
+        appendable = aggregates_data_frame[list_part_coicop12]
+        if df_to_graph is not None:
+            df_to_graph = concat([df_to_graph, appendable])
+        else:
+            df_to_graph = appendable
 
-        df_to_graph.columns = [
-            u'Logement, eau, gaz et électricté'
-            ]
-
-        axes = df_to_graph.plot(
-            kind = 'bar',
-            stacked = True,
-            color = ['#0000FF']
-            )
-        plt.axhline(0, color = 'k')
-
-        axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-        axes.set_xticklabels(['2000', '2005', '2011'], rotation=0);
-
-        axes.legend(
-            bbox_to_anchor = (0.85, 1.15),
-            )
-
-    plt.show()
+    graph_builder_bar(df_to_graph)

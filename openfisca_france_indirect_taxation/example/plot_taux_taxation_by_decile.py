@@ -34,9 +34,7 @@ from __future__ import division
 
 
 from openfisca_france_indirect_taxation.example.plot_consumption_distribution \
-    import df_weighted_average_grouped, simulate_df
-
-import matplotlib.pyplot as plt
+    import df_weighted_average_grouped, simulate_df, graph_builder_bar
 
 if __name__ == '__main__':
     import logging
@@ -47,17 +45,13 @@ if __name__ == '__main__':
     var_to_be_simulated = [
         # Variable de déciles par uc originelle de l'enquête
         'decuc',
-        # Nouvelle variable de déciles calculée dans input.py
-        'age',
         'montant_tva_taux_plein',
         'montant_tva_taux_intermediaire',
         'montant_tva_taux_reduit',
         'montant_tva_taux_super_reduit',
         'montant_tva_total',
         'niveau_vie_decile',
-        'revtot',
         'rev_disponible',
-        'ident_men',
         'pondmen',
         ]
 
@@ -81,5 +75,4 @@ if __name__ == '__main__':
                                'part_tva_tx_intermediaire']]
 
         # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-        df_to_graph.plot(kind = 'bar', stacked = True)
-        plt.axhline(0, color = 'k')
+        graph_builder_bar(df_to_graph)

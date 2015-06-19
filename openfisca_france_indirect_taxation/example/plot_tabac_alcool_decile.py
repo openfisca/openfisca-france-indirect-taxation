@@ -31,16 +31,8 @@ Created on Sun Mar 29 15:43:49 2015
 
 from __future__ import division
 
-from pandas import DataFrame, concat
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-
-import openfisca_france_indirect_taxation
-from openfisca_survey_manager.survey_collections import SurveyCollection
-
-from openfisca_france_data import default_config_files_directory as config_files_directory
-from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, percent_formatter
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
+    graph_builder_bar
 
 
 if __name__ == '__main__':
@@ -57,13 +49,10 @@ if __name__ == '__main__':
 #        list_coicop12.append('coicop12_{}'.format(coicop12_index))
     # Liste des variables que l'on veut simuler
     var_to_be_simulated = [
-        'ident_men',
         'pondmen',
         'decuc',
-        'age',
         'niveau_vie_decile',
         'revtot',
-        'ocde10',
         'niveau_de_vie',
         'rev_disponible',
         'consommation_cigarette',
@@ -83,12 +72,16 @@ if __name__ == '__main__':
             df.niveau_vie_decile[df.decuc == 10] = 10
 
         var_to_concat = list_coicop12 + ['rev_disponible']
-        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = var_to_be_simulated)
-
+        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile',
+            varlist = var_to_be_simulated)
         list_alcool_tabac = []
-        Wconcat['part_alcool'] = (Wconcat['consommation_alcools_forts'] + Wconcat['consommation_vin'] + Wconcat['consommation_biere']) / Wconcat['rev_disponible']
+        Wconcat['part_alcool'] = \
+            (Wconcat['consommation_alcools_forts'] + Wconcat['consommation_vin'] + Wconcat['consommation_biere']) \
+            / Wconcat['rev_disponible']
         list_alcool_tabac.append('part_alcool')
-        Wconcat['part_tabac'] = (Wconcat['consommation_cigarette'] + Wconcat['consommation_cigares'] + Wconcat['consommation_tabac_a_rouler']) / Wconcat['rev_disponible']
+        Wconcat['part_tabac'] = \
+            (Wconcat['consommation_cigarette'] + Wconcat['consommation_cigares'] +
+            Wconcat['consommation_tabac_a_rouler']) / Wconcat['rev_disponible']
         list_alcool_tabac.append('part_tabac')
 
         df_to_graph = Wconcat[list_alcool_tabac].copy()
@@ -96,23 +89,4 @@ if __name__ == '__main__':
             'Alcool',
             'Tabac'
             ]
-
-        axes = df_to_graph.plot(
-            kind = 'bar',
-            stacked = True,
-            color = ['#006600', '#FF0000']
-
-            )
-        plt.axhline(0, color = 'k')
-
-            # TODO utiliser format et corriger également ici
-            # https://github.com/openfisca/openfisca-matplotlib/blob/master/openfisca_matplotlib/graphs.py#L123
-        axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-        axes.set_xticklabels(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], rotation=0)
-
-        # Supprimer la légende du graphique
-        axes.legend(
-            bbox_to_anchor = (1.5, 1.0),
-            ) # TODO: supprimer la légende pour les lignes pointillées et continues
-    plt.show()
-
+        graph_builder_bar(df_to_graph)
