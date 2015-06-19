@@ -7,7 +7,7 @@ Created on Mon Jun 15 16:19:14 2015
 
 from __future__ import division
 
-from pandas import DataFrame, concat
+from pandas import DataFrame
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
@@ -82,3 +82,30 @@ def df_weighted_average_grouped(dataframe, groupe, varlist):
 
 def percent_formatter(x, pos = 0):
     return '%1.0f%%' % (100 * x)
+
+
+def graph_builder_bar(graph):
+    axes = graph.plot(
+        kind = 'bar',
+        stacked = True,
+        color = ['#FF0000', '#0000FF', '#006600', '#660066', '#FFFF00', '#999966', '#FF6699', '#00FFFF',
+                 '#CC3300', '#990033', '#3366CC', '#000000']
+        )
+    plt.axhline(0, color = 'k')
+    axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
+    axes.legend(
+        bbox_to_anchor = (1.5, 1.05),
+        )
+    return plt.show()
+
+
+def graph_builder_line(graph):
+    axes = graph.plot(
+        stacked = True
+        )
+    plt.axhline(0, color = 'k')
+    axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
+    axes.legend(
+        bbox_to_anchor = (1, 1),
+        )
+    return plt.show()
