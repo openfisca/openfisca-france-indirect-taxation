@@ -53,10 +53,10 @@ def test_tva():
     for consommation in consommations:
         assert_equal(simulation.calculate(consommation), 100)
 
-    assert_near(simulation.calculate('montant_tva_taux_plein'), 100 * 0.196 / (1 + 0.196), .01)
-    assert_near(simulation.calculate('montant_tva_taux_intermediaire'), 100 * 0.07 / (1 + 0.07), .01)
-    assert_near(simulation.calculate('montant_tva_taux_reduit'), 100 * 0.055 / (1 + 0.055), .01)
-    assert_near(simulation.calculate('montant_tva_taux_super_reduit'), 100 * 0.021 / (1 + 0.021), .01)
+    assert_near(simulation.calculate('tva_taux_plein'), 100 * 0.196 / (1 + 0.196), .01)
+    assert_near(simulation.calculate('tva_taux_intermediaire'), 100 * 0.07 / (1 + 0.07), .01)
+    assert_near(simulation.calculate('tva_taux_reduit'), 100 * 0.055 / (1 + 0.055), .01)
+    assert_near(simulation.calculate('tva_taux_super_reduit'), 100 * 0.021 / (1 + 0.021), .01)
 
 
 if __name__ == '__main__':
