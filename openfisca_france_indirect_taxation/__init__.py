@@ -50,8 +50,7 @@ def init_country():
     # Define class attributes after class declaration to avoid "name is not defined" exceptions.
     TaxBenefitSystem.Scenario = Scenario
 
-    from model import input_variables  # noqa analysis:ignore
-    from model import output_variables  # noqa analysis:ignore
+    from .model import model  # noqa analysis:ignore
     return TaxBenefitSystem
 
 
