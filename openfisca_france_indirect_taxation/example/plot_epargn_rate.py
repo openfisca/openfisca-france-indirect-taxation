@@ -27,17 +27,17 @@ if __name__ == '__main__':
         'niveau_vie_decile',
         'rev_disponible',
         'pondmen',
-        'montant_tva_total',
-        'montant_tipp',
-        'montant_taxe_assurance_sante',
-        'montant_droit_d_accise_vin',
-        'montant_droit_d_accise_cigares',
-        'montant_taxe_assurance_transport',
-        'montant_taxe_autres_assurances',
-        'montant_droit_d_accise_biere',
-        'montant_droit_d_accise_alcools_forts',
-        'montant_droit_d_accise_cigarette',
-        'montant_droit_d_accise_tabac_a_rouler',
+        'tva_total',
+        'tipp',
+        'taxe_assurance_sante',
+        'droit_d_accise_vin',
+        'droit_d_accise_cigares',
+        'taxe_assurance_transport',
+        'taxe_autres_assurances',
+        'droit_d_accise_biere',
+        'droit_d_accise_alcools_forts',
+        'droit_d_accise_cigarette',
+        'droit_d_accise_tabac_a_rouler',
         ]
 
     var_to_be_simulated += list_coicop12
@@ -48,36 +48,36 @@ if __name__ == '__main__':
         simulation_data_frame = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame,
             groupe = 'niveau_vie_decile', varlist = var_to_be_simulated)
-        aggregates_data_frame['montant_taxe_1'] = aggregates_data_frame['montant_tva_total']
-        aggregates_data_frame['montant_taxe_2'] = aggregates_data_frame['montant_tipp']
-        aggregates_data_frame['montant_taxe_3'] = (
-            aggregates_data_frame['montant_taxe_assurance_sante'] +
-            aggregates_data_frame['montant_taxe_assurance_transport'] +
-            aggregates_data_frame['montant_taxe_autres_assurances']
+        aggregates_data_frame['taxe_1'] = aggregates_data_frame['tva_total']
+        aggregates_data_frame['taxe_2'] = aggregates_data_frame['tipp']
+        aggregates_data_frame['taxe_3'] = (
+            aggregates_data_frame['taxe_assurance_sante'] +
+            aggregates_data_frame['taxe_assurance_transport'] +
+            aggregates_data_frame['taxe_autres_assurances']
             )
-        aggregates_data_frame['montant_taxe_4'] = (
-            aggregates_data_frame['montant_droit_d_accise_vin'] +
-            aggregates_data_frame['montant_droit_d_accise_biere'] +
-            aggregates_data_frame['montant_droit_d_accise_alcools_forts']
+        aggregates_data_frame['taxe_4'] = (
+            aggregates_data_frame['droit_d_accise_vin'] +
+            aggregates_data_frame['droit_d_accise_biere'] +
+            aggregates_data_frame['droit_d_accise_alcools_forts']
             )
-        aggregates_data_frame['montant_taxe_5'] = (
-            aggregates_data_frame['montant_droit_d_accise_cigares'] +
-            aggregates_data_frame['montant_droit_d_accise_cigarette'] +
-            aggregates_data_frame['montant_droit_d_accise_tabac_a_rouler']
+        aggregates_data_frame['taxe_5'] = (
+            aggregates_data_frame['droit_d_accise_cigares'] +
+            aggregates_data_frame['droit_d_accise_cigarette'] +
+            aggregates_data_frame['droit_d_accise_tabac_a_rouler']
             )
-        aggregates_data_frame['montant_total'] = (
-            aggregates_data_frame['montant_taxe_{}'.format(1)] +
-            aggregates_data_frame['montant_taxe_{}'.format(2)] +
-            aggregates_data_frame['montant_taxe_{}'.format(3)] +
-            aggregates_data_frame['montant_taxe_{}'.format(4)] +
-            aggregates_data_frame['montant_taxe_{}'.format(5)]
+        aggregates_data_frame['total'] = (
+            aggregates_data_frame['taxe_{}'.format(1)] +
+            aggregates_data_frame['taxe_{}'.format(2)] +
+            aggregates_data_frame['taxe_{}'.format(3)] +
+            aggregates_data_frame['taxe_{}'.format(4)] +
+            aggregates_data_frame['taxe_{}'.format(5)]
             )
         aggregates_data_frame['{}'.format(year)] = \
-            aggregates_data_frame['montant_total'] / aggregates_data_frame['rev_disponible']
+            aggregates_data_frame['total'] / aggregates_data_frame['rev_disponible']
 
         p['{}'.format(year)] = aggregates_data_frame['{}'.format(year)]
         if df_to_graph is not None:
-            df_to_graph = concat([df_to_graph, p['{}'.format(year)]])
+            df_to_graph = concat([df_to_graph, p['{}'.format(year)]], axis = 1)
         else:
             df_to_graph = p['{}'.format(year)]
 

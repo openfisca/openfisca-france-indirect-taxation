@@ -43,14 +43,14 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
     var_to_be_simulated = [
-        'montant_tva_taux_plein',
+        'tva_taux_plein',
         'consommation_tva_taux_plein',
         'categorie_fiscale_11',
-        'montant_tva_taux_intermediaire',
+        'tva_taux_intermediaire',
         'consommation_tva_taux_intermediaire',
-        'montant_tva_taux_reduit',
-        'montant_tva_taux_super_reduit',
-        'montant_tva_total',
+        'tva_taux_reduit',
+        'tva_taux_super_reduit',
+        'tva_total',
         'ident_men',
         'pondmen',
         'decuc',
@@ -67,8 +67,8 @@ if __name__ == '__main__':
     for year in [2000, 2005, 2011]:
         # Constition d'une base de données agrégée par décile (= collapse en stata)
         df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
-        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'cs8pr', varlist = ['montant_tva_total', 'revtot'])
-        df_to_plot = Wconcat['montant_tva_total'] / Wconcat['revtot']
+        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'cs8pr', varlist = ['tva_total', 'revtot'])
+        df_to_plot = Wconcat['tva_total'] / Wconcat['revtot']
 
         # Plot du graphe avec matplotlib
         plt.figure();

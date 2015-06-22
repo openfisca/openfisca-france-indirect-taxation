@@ -49,7 +49,7 @@ if __name__ == '__main__':
         'somme_coicop12_conso',
         'rev_disponible',
         'rev_disp_loyerimput',
-        'montant_total_taxes_indirectes'
+        'total_taxes_indirectes'
         ]
 
 # 1 calcul taux d'effort sur le revenu total
@@ -62,35 +62,35 @@ if __name__ == '__main__':
         df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
         if year == 2011:
             df.niveau_vie_decile[df.decuc == 10] = 10
-        varlist = ['revtot', 'montant_total_taxes_indirectes', 'rev_disponible', 'rev_disp_loyerimput']
+        varlist = ['revtot', 'total_taxes_indirectes', 'rev_disponible', 'rev_disp_loyerimput']
         Wconcat1 = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = varlist)
         Wconcat1['taux_d_effort_revtot_{}'.format(year)] = \
-            Wconcat1['montant_total_taxes_indirectes'] / Wconcat1['revtot']
+            Wconcat1['total_taxes_indirectes'] / Wconcat1['revtot']
         appendable1 = Wconcat1['taux_d_effort_revtot_{}'.format(year)]
 
         df.rev_disponible = df.rev_disponible * 1.33
         Wconcat2 = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = varlist)
         Wconcat2['taux_d_effort_rev_disponible_{}'.format(year)] = \
-            Wconcat2['montant_total_taxes_indirectes'] / Wconcat2['rev_disponible']
+            Wconcat2['total_taxes_indirectes'] / Wconcat2['rev_disponible']
         appendable2 = Wconcat2['taux_d_effort_rev_disponible_{}'.format(year)]
 
         Wconcat3 = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = varlist)
         Wconcat3['taux_d_effort_rev_disp_loyerimput_{}'.format(year)] = \
-            Wconcat3['montant_total_taxes_indirectes'] / Wconcat3['rev_disp_loyerimput']
+            Wconcat3['total_taxes_indirectes'] / Wconcat3['rev_disp_loyerimput']
         appendable3 = Wconcat3['taux_d_effort_rev_disp_loyerimput_{}'.format(year)]
 
         if df_to_graph1 is not None:
-            df_to_graph1 = concat([df_to_graph1, appendable1])
+            df_to_graph1 = concat([df_to_graph1, appendable1], axis = 1)
         else:
             df_to_graph1 = appendable1
 
         if df_to_graph2 is not None:
-            df_to_graph2 = concat([df_to_graph2, appendable2])
+            df_to_graph2 = concat([df_to_graph2, appendable2], axis = 1)
         else:
             df_to_graph2 = appendable2
 
         if df_to_graph3 is not None:
-            df_to_graph3 = concat([df_to_graph3, appendable3])
+            df_to_graph3 = concat([df_to_graph3, appendable3], axis = 1)
         else:
             df_to_graph3 = appendable3
 

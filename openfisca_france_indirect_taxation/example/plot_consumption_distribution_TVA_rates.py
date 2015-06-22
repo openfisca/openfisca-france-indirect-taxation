@@ -28,11 +28,11 @@ if __name__ == '__main__':
         'pondmen',
         'decuc',
         'niveau_vie_decile',
-        'montant_tva_taux_plein',
-        'montant_tva_taux_intermediaire',
-        'montant_tva_taux_reduit',
-        'montant_tva_taux_super_reduit',
-        'montant_tva_total',
+        'tva_taux_plein',
+        'tva_taux_intermediaire',
+        'tva_taux_reduit',
+        'tva_taux_super_reduit',
+        'tva_total',
         'revtot',
         'somme_coicop12_conso',
         'ocde10',
@@ -43,23 +43,23 @@ if __name__ == '__main__':
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     for year in [2000, 2005, 2011]:
         df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
-        var_to_concat = ['montant_tva_taux_plein', 'montant_tva_taux_intermediaire', 'montant_tva_taux_reduit',
-                         'montant_tva_taux_super_reduit', 'montant_tva_total']
+        var_to_concat = ['tva_taux_plein', 'tva_taux_intermediaire', 'tva_taux_reduit',
+                         'tva_taux_super_reduit', 'tva_total']
         aggregates_data_frame = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile',
             varlist = var_to_concat)
 
         list_part_TVA = []
         aggregates_data_frame['part_tva_taux_plein'] = \
-            aggregates_data_frame['montant_tva_taux_plein'] / aggregates_data_frame['montant_tva_total']
+            aggregates_data_frame['tva_taux_plein'] / aggregates_data_frame['tva_total']
         list_part_TVA.append('part_tva_taux_plein')
         aggregates_data_frame['part_tva_taux_intermediaire'] = \
-            aggregates_data_frame['montant_tva_taux_intermediaire'] / aggregates_data_frame['montant_tva_total']
+            aggregates_data_frame['tva_taux_intermediaire'] / aggregates_data_frame['tva_total']
         list_part_TVA.append('part_tva_taux_intermediaire')
         aggregates_data_frame['part_tva_taux_reduit'] = \
-            aggregates_data_frame['montant_tva_taux_reduit'] / aggregates_data_frame['montant_tva_total']
+            aggregates_data_frame['tva_taux_reduit'] / aggregates_data_frame['tva_total']
         list_part_TVA.append('part_tva_taux_reduit')
         aggregates_data_frame['part_tva_taux_super_reduit'] = \
-            aggregates_data_frame['montant_tva_taux_super_reduit'] / aggregates_data_frame['montant_tva_total']
+            aggregates_data_frame['tva_taux_super_reduit'] / aggregates_data_frame['tva_total']
         list_part_TVA.append('part_tva_taux_super_reduit')
 
         df_to_graph = aggregates_data_frame[list_part_TVA].copy()

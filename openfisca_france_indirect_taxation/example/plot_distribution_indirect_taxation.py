@@ -45,12 +45,12 @@ if __name__ == '__main__':
         'decuc',
         'niveau_vie_decile',
         'somme_coicop12_conso',
-        'montant_tva_total',
-        'montant_droit_d_accise_alcool',
-        'montant_droit_d_accise_tabac',
-        'montant_taxe_assurance',
-        'montant_tipp',
-        'montant_total_taxes_indirectes'
+        'tva_total',
+        'droit_d_accise_alcool',
+        'droit_d_accise_tabac',
+        'taxe_assurance',
+        'tipp',
+        'total_taxes_indirectes'
         ]
 
 
@@ -63,25 +63,25 @@ if __name__ == '__main__':
         if year == 2011:
             df.niveau_vie_decile[df.decuc == 10] = 10
 
-        varlist = ['montant_total_taxes_indirectes', 'montant_tva_total', 'montant_droit_d_accise_alcool',
-                   'montant_droit_d_accise_tabac', 'montant_taxe_assurance', 'montant_tipp']
+        varlist = ['total_taxes_indirectes', 'tva_total', 'droit_d_accise_alcool',
+                   'droit_d_accise_tabac', 'taxe_assurance', 'tipp']
         Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = varlist)
 
         # Example
         list_part = []
-        Wconcat['part_tva'] = Wconcat['montant_tva_total'] / Wconcat['montant_total_taxes_indirectes']
+        Wconcat['part_tva'] = Wconcat['tva_total'] / Wconcat['total_taxes_indirectes']
         list_part.append('part_tva')
 
-        Wconcat['part_tipp'] = Wconcat['montant_tipp'] / Wconcat['montant_total_taxes_indirectes']
+        Wconcat['part_tipp'] = Wconcat['tipp'] / Wconcat['total_taxes_indirectes']
         list_part.append('part_tipp')
 
-        Wconcat['part_alcool'] = Wconcat['montant_droit_d_accise_alcool'] / Wconcat['montant_total_taxes_indirectes']
+        Wconcat['part_alcool'] = Wconcat['droit_d_accise_alcool'] / Wconcat['total_taxes_indirectes']
         list_part.append('part_alcool')
 
-        Wconcat['part_tabac'] = Wconcat['montant_droit_d_accise_tabac'] / Wconcat['montant_total_taxes_indirectes']
+        Wconcat['part_tabac'] = Wconcat['droit_d_accise_tabac'] / Wconcat['total_taxes_indirectes']
         list_part.append('part_tabac')
 
-        Wconcat['part_assurance'] = Wconcat['montant_taxe_assurance'] / Wconcat['montant_total_taxes_indirectes']
+        Wconcat['part_assurance'] = Wconcat['taxe_assurance'] / Wconcat['total_taxes_indirectes']
         list_part.append('part_assurance')
 
         df_to_graph = Wconcat[list_part].copy()

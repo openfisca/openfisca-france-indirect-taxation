@@ -41,17 +41,17 @@ if __name__ == '__main__':
 
     var_to_be_simulated = [
         'decuc',
-        'montant_tva_total',
-        'montant_tipp',
-        'montant_droit_d_accise_vin',
-        'montant_droit_d_accise_biere',
-        'montant_droit_d_accise_alcools_forts',
-        'montant_droit_d_accise_cigarette',
-        'montant_droit_d_accise_cigares',
-        'montant_droit_d_accise_tabac_a_rouler',
-        'montant_taxe_assurance_transport',
-        'montant_taxe_assurance_sante',
-        'montant_taxe_autres_assurances',
+        'tva_total',
+        'tipp',
+        'droit_d_accise_vin',
+        'droit_d_accise_biere',
+        'droit_d_accise_alcools_forts',
+        'droit_d_accise_cigarette',
+        'droit_d_accise_cigares',
+        'droit_d_accise_tabac_a_rouler',
+        'taxe_assurance_transport',
+        'taxe_assurance_sante',
+        'taxe_autres_assurances',
         'niveau_vie_decile',
         'rev_disponible',
         'pondmen',
@@ -64,27 +64,27 @@ if __name__ == '__main__':
         Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile',
             varlist = var_to_be_simulated)
 
-        Wconcat['montant_taxe_1'] = Wconcat['montant_tva_total']
-        Wconcat['montant_taxe_2'] = Wconcat['montant_tipp']
-        Wconcat['montant_taxe_3'] = (
-            Wconcat['montant_taxe_assurance_sante'] +
-            Wconcat['montant_taxe_assurance_transport'] +
-            Wconcat['montant_taxe_autres_assurances']
+        Wconcat['taxe_1'] = Wconcat['tva_total']
+        Wconcat['taxe_2'] = Wconcat['tipp']
+        Wconcat['taxe_3'] = (
+            Wconcat['taxe_assurance_sante'] +
+            Wconcat['taxe_assurance_transport'] +
+            Wconcat['taxe_autres_assurances']
             )
-        Wconcat['montant_taxe_4'] = (
-            Wconcat['montant_droit_d_accise_vin'] +
-            Wconcat['montant_droit_d_accise_biere'] +
-            Wconcat['montant_droit_d_accise_alcools_forts']
+        Wconcat['taxe_4'] = (
+            Wconcat['droit_d_accise_vin'] +
+            Wconcat['droit_d_accise_biere'] +
+            Wconcat['droit_d_accise_alcools_forts']
             )
-        Wconcat['montant_taxe_5'] = (
-            Wconcat['montant_droit_d_accise_cigares'] +
-            Wconcat['montant_droit_d_accise_cigarette'] +
-            Wconcat['montant_droit_d_accise_tabac_a_rouler']
+        Wconcat['taxe_5'] = (
+            Wconcat['droit_d_accise_cigares'] +
+            Wconcat['droit_d_accise_cigarette'] +
+            Wconcat['droit_d_accise_tabac_a_rouler']
             )
 
         list_part_taxes = []
         for i in range(1, 6):
-            Wconcat['part_taxe_{}'.format(i)] = Wconcat['montant_taxe_{}'.format(i)] / Wconcat['rev_disponible']
+            Wconcat['part_taxe_{}'.format(i)] = Wconcat['taxe_{}'.format(i)] / Wconcat['rev_disponible']
             'list_part_taxes_{}'.format(i)
             list_part_taxes.append('part_taxe_{}'.format(i))
 

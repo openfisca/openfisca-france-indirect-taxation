@@ -63,7 +63,7 @@ if __name__ == '__main__':
         aggregates_data_frame[year] = aggregates_data_frame['coicop12_4'] / aggregates_data_frame['somme_coicop12']
         appendable = aggregates_data_frame[year]
         if df_to_graph is not None:
-            df_to_graph = concat([df_to_graph, appendable])
+            df_to_graph = concat([df_to_graph, appendable], axis = 1)
         else:
             df_to_graph = appendable
 
