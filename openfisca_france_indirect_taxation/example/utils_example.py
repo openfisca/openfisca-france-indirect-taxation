@@ -101,7 +101,6 @@ def graph_builder_bar(graph):
 
 def graph_builder_line(graph):
     axes = graph.plot(
-        stacked = True
         )
     plt.axhline(0, color = 'k')
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
