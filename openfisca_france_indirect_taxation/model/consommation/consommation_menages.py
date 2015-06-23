@@ -28,12 +28,13 @@ from __future__ import division
 from ..base import *  # noq analysis:ignore
 
 
-from openfisca_france_indirect_taxation.param.param import ( # noq analysis:ignore
-    # P_tva_taux_plein, P_tva_taux_intermediaire, P_tva_taux_reduit,
-    # P_tva_taux_super_reduit,
-    P_alcool_0211, P_alcool_0212, P_alcool_0213
-    )
-
+for categorie_fiscale_index in range(18):
+    reference_input_variable(
+        column = FloatCol,
+        entity_class = Menages,
+        label = u"catégorie fiscale {}".format(categorie_fiscale_index),
+        name = 'categorie_fiscale_{}'.format(categorie_fiscale_index),
+        )
 
 for coicop12_index in range(1, 13):
     reference_input_variable(
