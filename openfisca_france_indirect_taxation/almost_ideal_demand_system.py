@@ -27,8 +27,7 @@ indice_prix_mensuel_98_2015 = pandas.read_csv(os.path.join(directory_path, "indi
 
 # We build a dataframe :
 
-aggregates_data_frame = get_input_data_frame(2005)
-print aggregates_data_frame['decuc'].mean()
+aggregates_data_frame = get_input_data_frame(2000)
 aggregates_data_frame['depenses_tot'] = 0
 for i in range(1, 13):
     aggregates_data_frame['depenses_tot'] += aggregates_data_frame['coicop12_{}'.format(i)]
@@ -270,7 +269,7 @@ grouped = grouped.aggregate(np.sum)
 grouped.index.name = 'id'
 grouped = grouped.reset_index()
 
-df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['vag']]
+df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['vag'] + ['revtot'] + ['typmen']]
 df_info_menage.index.name = 'ident_men'
 df_info_menage.reset_index(inplace = True)
 df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
@@ -298,7 +297,7 @@ data_frame['indice_prix_pondere'] = data_frame['indice_prix_pondere'].astype(flo
 data_frame['ln_prix_coicop'] = data_frame['ln_prix_coicop'].astype(float)
 data_frame.loc[data_frame['indice_prix_pondere'] == 0, 'indice_prix_pondere'] = \
     data_frame.loc[data_frame['indice_prix_pondere'] == 0, 'ln_prix_coicop']
-data_frame = data_frame.drop(['ln_prix_coicop', 'vag', 'indice_prix_produit'], axis = 1)
+data_frame = data_frame.drop(['ln_prix_coicop', 'indice_prix_produit'], axis = 1)
 
 # Reshape the dataframe to have the price index of each coicop as a variable
 
@@ -332,7 +331,7 @@ data_frame['ln_depenses_reelles'] = data_frame['ln_depenses_reelles'] - data_fra
 
 # Build the regression
 
-for i in range(1, 13):
+for i in range(1, 2):
     small_df = data_frame[data_frame['numero_coicop'] == i]
     mod = smf.ols(formula='wi ~ ln_p1 + ln_p2 + ln_p3 + ln_p4 + ln_p5 + ln_p6 + ln_p7 + ln_p8 + ln_p9 + \
         ln_p10 + ln_p11 + ln_p12 + ln_depenses_reelles', data = small_df)
