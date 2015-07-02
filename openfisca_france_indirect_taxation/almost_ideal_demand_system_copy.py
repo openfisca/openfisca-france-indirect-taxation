@@ -19,7 +19,17 @@ import os
 from ConfigParser import SafeConfigParser
 from openfisca_france_data import default_config_files_directory as config_files_directory
 
-# We want top obtain prices from the Excel file:
+
+def calcul_elasticite_depense():
+    return (results.params.ln_depenses_reelles / small_df['wi'].mean()) + 1
+
+
+def calcul_elasticite_prix_compensee():
+    return ((results.params['ln_p{}'.format(i)] - results.params.ln_depenses_reelles * (small_df['wi'].mean() -
+    results.params.ln_depenses_reelles * small_df['ln_depenses_reelles'].mean())) / small_df['wi'].mean()) - 1
+
+
+# We want to obtain prices from the Excel file:
 
 parser = SafeConfigParser()
 config_local_ini = os.path.join(config_files_directory, 'config_local.ini')
@@ -32,12 +42,10 @@ directory_path = os.path.normpath(
 indice_prix_mensuel_98_2015 = pandas.read_csv(os.path.join(directory_path, "indice_prix_mensuel_98_2015.csv"),
     sep =';', decimal = ',')
 
-# We build a dataframe :
-
-
 indice_prix_mensuel_98_2015 = indice_prix_mensuel_98_2015.astype(str)
 
 # Fixation des indices de prix non renseignés par l'Insee :
+
 indice_prix_mensuel_98_2015['_1411'] = indice_prix_mensuel_98_2015['_1000']
 indice_prix_mensuel_98_2015['_2201'] = indice_prix_mensuel_98_2015['_2200']
 indice_prix_mensuel_98_2015['_2202'] = indice_prix_mensuel_98_2015['_2200']
@@ -279,7 +287,7 @@ for year in [2000, 2005, 2011]:
     grouped.index.name = 'id'
     grouped = grouped.reset_index()
 
-    df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['vag']]
+    df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['vag'] + ['typmen'] + ['revtot']]
     df_info_menage.index.name = 'ident_men'
     df_info_menage.reset_index(inplace = True)
     df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
@@ -293,8 +301,9 @@ for year in [2000, 2005, 2011]:
     data_frame['wi'] = data_frame['depense_par_coicop'] / data_frame['depenses_tot']
     data_frame = data_frame.astype(str)
 
-    # Those who don't consume in coicop_i have a price index of 0 for this coicop.
+    # By construction, those who don't consume in coicop_i have a price index of 0 for this coicop.
     # We replace it with the price index of the whole coicop at the same vag.
+
     data_frame['indice_prix_produit'] = data_frame['vag'] + data_frame['numero_coicop'] + '000'
 
     df2['prix'] = df2['prix'].astype(float)
@@ -307,7 +316,7 @@ for year in [2000, 2005, 2011]:
     data_frame['ln_prix_coicop'] = data_frame['ln_prix_coicop'].astype(float)
     data_frame.loc[data_frame['indice_prix_pondere'] == 0, 'indice_prix_pondere'] = \
         data_frame.loc[data_frame['indice_prix_pondere'] == 0, 'ln_prix_coicop']
-    data_frame = data_frame.drop(['ln_prix_coicop', 'vag', 'indice_prix_produit'], axis = 1)
+    data_frame = data_frame.drop(['ln_prix_coicop', 'indice_prix_produit'], axis = 1)
 
     # Reshape the dataframe to have the price index of each coicop as a variable
 
@@ -320,7 +329,7 @@ for year in [2000, 2005, 2011]:
     for i in range(1, 13):
         data_frame.rename(columns = {'{}'.format(i): 'ln_p{}'.format(i)}, inplace = True)
 
-    # Construct a linear approximation of the global price index P
+    # Construct a linear approximation of the global price index ln_P
 
     df_indice_prix_global = data_frame[['ident_men'] + ['wi'] + ['indice_prix_pondere']]
     df_indice_prix_global = df_indice_prix_global.astype(float)
@@ -346,24 +355,21 @@ for year in [2000, 2005, 2011]:
 
 # Build the regression and compute elasticities
 
-
-def calcul_elasticite_depense():
-    return (results.params.ln_depenses_reelles / small_df['wi'].mean()) + 1
-
-
-def calcul_elasticite_prix_compensee():
-    return ((results.params['ln_p{}'.format(i)] - results.params.ln_depenses_reelles * (small_df['wi'].mean() -
-    results.params.ln_depenses_reelles * small_df['ln_depenses_reelles'].mean())) / small_df['wi'].mean()) - 1
-
-
+elasticite_depense = dict()
+elasticite_prix = dict()
+elasticite_prix_bis = dict()
 for i in range(1, 13):
     small_df = data_frame_for_reg[data_frame_for_reg['numero_coicop'] == i]
     results = smf.ols(formula = 'wi ~ ln_p1 + ln_p2 + ln_p3 + ln_p4 + ln_p5 + ln_p6 + ln_p7 + ln_p8 + ln_p9 + \
-        ln_p10 + ln_p11 + ln_p12 + ln_depenses_reelles', data = small_df).fit()
+        ln_p10 + ln_p11 + ln_p12 + ln_depenses_reelles + vag + typmen', data = small_df).fit()
     print '---------------------------'
     print 'Estimation w{}'.format(i)
     print results.summary()
-    print small_df['wi'].mean()
-    print small_df['ln_depenses_reelles'].mean()
-    print 'Elasticite depense :', calcul_elasticite_depense()
-    print 'Elasticite prix compensee :', calcul_elasticite_prix_compensee()
+    elasticite_depense['ed_{}'.format(i)] = calcul_elasticite_depense()
+    elasticite_prix['ep_{}'.format(i)] = calcul_elasticite_prix_compensee()
+print 'Elasticite depense :'
+for element in elasticite_depense.items():
+    print element
+print 'Elasticite prix :'
+for element in elasticite_prix.items():
+    print element
