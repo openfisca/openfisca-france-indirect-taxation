@@ -80,10 +80,14 @@ indice_prix_mensuel_98_2015['_12620'] = indice_prix_mensuel_98_2015['_12610']
 indice_prix_mensuel_98_2015['_12910'] = indice_prix_mensuel_98_2015['_12000']
 
 indice_prix_mensuel_98_2015['date'] = indice_prix_mensuel_98_2015[u'Annee'] + '_' + indice_prix_mensuel_98_2015[u'Mois']
+indice_prix_mensuel_98_2015[[u'Annee'] + [u'Mois']] = indice_prix_mensuel_98_2015[[u'Annee'] + [u'Mois']].astype(float)
+indice_prix_mensuel_98_2015['temps'] = \
+    ((indice_prix_mensuel_98_2015[u'Annee'] - 1998) * 12) + indice_prix_mensuel_98_2015[u'Mois']
 del indice_prix_mensuel_98_2015[u'Annee']
+indice_prix_mensuel_98_2015['mois'] = indice_prix_mensuel_98_2015[u'Mois'].copy()
 del indice_prix_mensuel_98_2015[u'Mois']
-produits = list(indice_prix_mensuel_98_2015.columns[:-1])
-df2 = pd.melt(indice_prix_mensuel_98_2015, id_vars = ['date'], value_vars=produits,
+produits = list(indice_prix_mensuel_98_2015.columns[:-3])
+df2 = pd.melt(indice_prix_mensuel_98_2015, id_vars = ['date', 'temps', 'mois'], value_vars=produits,
     value_name = 'prix', var_name = 'bien')
 df2.bien = df2.bien.str.split('_').str[1]
 
@@ -212,7 +216,7 @@ df2 = df2.drop_duplicates(cols='indice_prix_produit', take_last=True)
 # Now that we have our price indexes, we construct a dataframe with the rest of the information
 
 data_frame_for_reg = None
-for year in [2000, 2005, 2011]:
+for year in [2011]:
     aggregates_data_frame = get_input_data_frame(year)
     aggregates_data_frame['depenses_tot'] = 0
     for i in range(1, 13):
@@ -227,16 +231,21 @@ for year in [2000, 2005, 2011]:
     df = pd.melt(data, id_vars = ['vag', 'ident_men'], value_vars=produits,
         value_name = 'depense_bien', var_name = 'bien')
 
-    df2 = df2[['indice_prix_produit'] + ['prix']]
+    df2 = df2[['indice_prix_produit'] + ['prix'] + ['temps'] + ['mois']]
 
     df['vag'] = df['vag'].astype(str)
     df['indice_prix_produit'] = df['vag'] + '_' + df['bien']
     df['indice_prix_produit'] = df['indice_prix_produit'].str.replace('_0', '')
     df['indice_prix_produit'] = df['indice_prix_produit'].str.replace('_', '')
     df['coicop_12_numero'] = df['bien'].str[:2]
-    df = df[['ident_men'] + ['coicop_12_numero'] + ['indice_prix_produit'] + ['depense_bien']]
+    df = df[['ident_men'] + ['coicop_12_numero'] + ['indice_prix_produit'] + ['depense_bien'] + ['vag']]
 
     df = pd.merge(df, df2, on = 'indice_prix_produit')
+    df_temps = df[['vag'] + ['temps'] + ['mois']]
+    df_temps['mois'] = df_temps['mois'].astype(float)
+    df_temps['mois2'] = df_temps['mois'] ** 2
+    df_temps = df_temps.drop_duplicates(cols='vag', take_last=True)
+    df_temps = df_temps.astype(float)
 
     # Construct the price index by coicop:
 
@@ -290,7 +299,13 @@ for year in [2000, 2005, 2011]:
     simulation_data_frame.reset_index(inplace = True)
     simulation_data_frame['ident_men'] = simulation_data_frame['ident_men'].astype(str)
 
-    df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['vag'] + ['typmen'] + ['revtot']]
+    df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['vag'] + ['typmen'] + ['revtot'] +
+        ['02201'] + ['02202'] + ['02203']]
+    df_info_menage['fumeur'] = 0
+    df_info_menage[['02201'] + ['02202'] + ['02203']] = df_info_menage[['02201'] + ['02202'] + ['02203']].astype(float)
+    df_info_menage['consommation_tabac'] = df_info_menage['02201'] + df_info_menage['02202'] + df_info_menage['02203']
+    df_info_menage['fumeur'] = 1 * (df_info_menage['consommation_tabac'] > 0)
+    df_info_menage.drop(['consommation_tabac', '02201', '02202', '02203'], inplace = True, axis = 1)
     df_info_menage.index.name = 'ident_men'
     df_info_menage.reset_index(inplace = True)
     df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
@@ -351,6 +366,8 @@ for year in [2000, 2005, 2011]:
     data_frame['ln_depenses_reelles'] = np.log(data_frame['depenses_reelles'])
     del data_frame['depenses_reelles']
     data_frame['ln_depenses_reelles'] = data_frame['ln_depenses_reelles'] - data_frame['ln_P']
+
+    data_frame = pd.merge(data_frame, df_temps, on = 'vag')
 
     if data_frame_for_reg is not None:
         data_frame_for_reg = pd.concat([data_frame_for_reg, data_frame])
