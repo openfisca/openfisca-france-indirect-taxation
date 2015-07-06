@@ -216,7 +216,7 @@ df2 = df2.drop_duplicates(cols='indice_prix_produit', take_last=True)
 # Now that we have our price indexes, we construct a dataframe with the rest of the information
 
 data_frame_for_reg = None
-for year in [2011]:
+for year in [2000, 2005, 2011]:
     aggregates_data_frame = get_input_data_frame(year)
     aggregates_data_frame['depenses_tot'] = 0
     produits = [column for column in aggregates_data_frame.columns if column.isdigit()]
@@ -229,7 +229,7 @@ for year in [2011]:
     df = pd.melt(data, id_vars = ['ident_men', 'vag', 'depenses_tot'], value_vars = produits,
         value_name = 'depense_bien', var_name = 'bien')
 
-    df2 = df2[['indice_prix_produit'] + ['prix'] + ['temps'] + ['mois']]
+    df3 = df2[['indice_prix_produit'] + ['prix'] + ['temps'] + ['mois']]
 
     df['vag'] = df['vag'].astype(str)
     df['indice_prix_produit'] = df['vag'] + '_' + df['bien']
@@ -249,13 +249,12 @@ for year in [2011]:
 
     df = df[['ident_men'] + ['numero_categ'] + ['indice_prix_produit'] + ['depense_bien'] + ['vag']]
 
-    df = pd.merge(df, df2, on = 'indice_prix_produit')
+    df = pd.merge(df, df3, on = 'indice_prix_produit')
     df_temps = df[['vag'] + ['temps'] + ['mois']]
     df_temps['mois'] = df_temps['mois'].astype(float)
     df_temps['mois2'] = df_temps['mois'] ** 2
     df_temps = df_temps.drop_duplicates(cols='vag', take_last=True)
     df_temps = df_temps.astype(float)
-
 
     # Construct the price index by category:
 
@@ -340,3 +339,78 @@ for year in [2011]:
         )
     data_frame['wi'] = data_frame['depense_par_categ'] / data_frame['depenses_tot']
     data_frame = data_frame.astype(str)
+
+    # By construction, those who don't consume in coicop_i have a price index of 0 for this coicop.
+    # We replace it with the price index of the whole coicop at the same vag.
+
+    df_prix_categ = indice_prix_mensuel_98_2015[['_1000'] + ['_2000'] + ['_3000'] + ['_4000'] + ['_5000'] + ['_6000'] +
+        ['_7000'] + ['_8000'] + ['_9000'] + ['_10000'] + ['_11000'] + ['_12000'] + ['temps'] + ['date']]
+    df_prix_categ
+    df_prix_categ['vag'] = df_prix_categ['date'].map(date_to_vag)
+    df_prix_categ.dropna(inplace = True)
+    del df_prix_categ['date']
+    df_prix_categ = df_prix_categ.astype(float)
+    df_prix_categ['1'] = df_prix_categ['_1000']
+    df_prix_categ['2'] = df_prix_categ['_2000']
+    df_prix_categ['3'] = (df_prix_categ['_3000'] + df_prix_categ['_5000']) / 2
+    df_prix_categ['4'] = df_prix_categ['_4000']
+    df_prix_categ['5'] = (df_prix_categ['_6000'] + df_prix_categ['_10000']) / 2
+    df_prix_categ['6'] = df_prix_categ['_7000']
+    df_prix_categ['7'] = df_prix_categ['_9000']
+    df_prix_categ['8'] = df_prix_categ['_11000']
+    df_prix_categ['9'] = (df_prix_categ['_8000'] + df_prix_categ['_12000']) / 2
+    df_prix_categ = df_prix_categ[['1'] + ['2'] + ['3'] + ['4'] + ['5'] + ['6'] + ['7'] + ['8'] + ['9'] + ['vag']]
+    df_prix_categ = pd.melt(df_prix_categ, id_vars = ['vag'], value_name = 'prix_categ')
+    df_prix_categ['vag'] = df_prix_categ['vag'].astype(int)
+    df_prix_categ['vag'] = df_prix_categ['vag'].astype(str)
+    df_prix_categ['indice_prix_produit'] = df_prix_categ['vag'] + '_' + df_prix_categ['variable']
+    df_prix_categ['ln_prix_categ'] = np.log(df_prix_categ['prix_categ'])
+    del df_prix_categ['prix_categ']
+    df_prix_categ = df_prix_categ[['indice_prix_produit'] + ['ln_prix_categ']]
+    df_prix_categ = df_prix_categ.drop_duplicates(cols = 'indice_prix_produit', take_last = True)
+
+    data_frame['indice_prix_produit'] = data_frame['vag'] + '_' + data_frame['numero_categ']
+
+    data_frame = pd.merge(data_frame, df_prix_categ, on = 'indice_prix_produit')
+
+    data_frame['indice_prix_pondere'] = data_frame['indice_prix_pondere'].astype(float)
+    data_frame.loc[data_frame['indice_prix_pondere'] == 0, 'indice_prix_pondere'] = \
+        data_frame.loc[data_frame['indice_prix_pondere'] == 0, 'ln_prix_categ']
+    data_frame = data_frame.drop(['ln_prix_categ', 'indice_prix_produit'], axis = 1)
+
+    # Reshape the dataframe to have the price index of each coicop as a variable
+
+    data_frame_prix = data_frame[['numero_categ'] + ['ident_men'] + ['indice_prix_pondere']]
+    data_frame_prix.index.name = 'ident_men'
+    data_frame_prix = pd.pivot_table(data_frame_prix, index='ident_men', columns='numero_categ',
+        values='indice_prix_pondere')
+    data_frame_prix.reset_index(inplace = True)
+    data_frame = pd.merge(data_frame, data_frame_prix, on = 'ident_men')
+    for i in range(1, 10):
+        data_frame.rename(columns = {'{}'.format(i): 'ln_p{}'.format(i)}, inplace = True)
+
+    # Construct a linear approximation of the global price index ln_P (hence LA-AIDS) :
+
+    df_indice_prix_global = data_frame[['ident_men'] + ['wi'] + ['indice_prix_pondere']]
+    df_indice_prix_global = df_indice_prix_global.astype(float)
+    df_indice_prix_global['ln_P'] = \
+        df_indice_prix_global['wi'] * df_indice_prix_global['indice_prix_pondere']
+    df_indice_prix_global = df_indice_prix_global['ln_P'].groupby(df_indice_prix_global['ident_men'])
+    df_indice_prix_global = df_indice_prix_global.aggregate(np.sum)
+    df_indice_prix_global.index.name = 'ident_men'
+    df_indice_prix_global = df_indice_prix_global.reset_index()
+    del data_frame['id']
+    data_frame = data_frame.astype(float)
+
+    data_frame = pd.merge(data_frame, df_indice_prix_global, on = 'ident_men')
+    data_frame['depenses_reelles'] = data_frame['depenses_tot'] / data_frame['ocde10']
+    data_frame['ln_depenses_reelles'] = np.log(data_frame['depenses_reelles'])
+    del data_frame['depenses_reelles']
+    data_frame['ln_depenses_reelles'] = data_frame['ln_depenses_reelles'] - data_frame['ln_P']
+
+    data_frame = pd.merge(data_frame, df_temps, on = 'vag')
+
+    if data_frame_for_reg is not None:
+        data_frame_for_reg = pd.concat([data_frame_for_reg, data_frame])
+    else:
+        data_frame_for_reg = data_frame
