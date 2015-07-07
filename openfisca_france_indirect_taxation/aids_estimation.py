@@ -36,12 +36,3 @@ for i in range(1, 13):
     elasticite_depense['ed_{}'.format(i)] = calcul_elasticite_depense()
     elasticite_prix['ep_{}'.format(i)] = calcul_elasticite_prix_compensee()
     r_2['r2_{}'.format(i)] = results.rsquared
-print 'Elasticite depense :'
-for element in elasticite_depense.items():
-    print element
-print 'Elasticite prix :'
-for element in elasticite_prix.items():
-    print element
-print 'R2 :'
-for element in r_2.items():
-    print element

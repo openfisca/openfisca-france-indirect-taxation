@@ -24,24 +24,14 @@ def calcul_elasticite_prix_compensee():
 elasticite_depense = dict()
 elasticite_prix = dict()
 r_2 = dict()
-for i in range(1, 13):
+for i in range(1, 10):
     small_df = data_frame_for_reg[data_frame_for_reg['numero_categ'] == i]
     small_df = small_df[small_df['depense_par_categ'] > 0]
     results = smf.ols(formula = 'wi ~ ln_p1 + ln_p2 + ln_p3 + ln_p4 + ln_p5 + ln_p6 + ln_p7 + ln_p8 + ln_p9 + \
-        ln_depenses_reelles + vag + typmen + niveau_vie_decile + \
-        fumeur', data = small_df).fit()
+        ln_depenses_reelles + fumeur + typmen', data = small_df).fit()
     print '---------------------------'
     print 'Estimation w{}'.format(i)
     print results.summary()
     elasticite_depense['ed_{}'.format(i)] = calcul_elasticite_depense()
     elasticite_prix['ep_{}'.format(i)] = calcul_elasticite_prix_compensee()
     r_2['r2_{}'.format(i)] = results.rsquared
-print 'Elasticite depense :'
-for element in elasticite_depense.items():
-    print element
-print 'Elasticite prix :'
-for element in elasticite_prix.items():
-    print element
-print 'R2 :'
-for element in r_2.items():
-    print element
