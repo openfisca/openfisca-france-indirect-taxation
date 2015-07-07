@@ -26,9 +26,9 @@ elasticite_prix = dict()
 r_2 = dict()
 for i in range(1, 10):
     small_df = data_frame_for_reg[data_frame_for_reg['numero_categ'] == i]
-    small_df = small_df[small_df['depense_par_categ'] > 0]
+    small_df = small_df[small_df['depense_par_categ'] > 0]  # On estime uniquement la marge intensive et non extensive.
     results = smf.ols(formula = 'wi ~ ln_p1 + ln_p2 + ln_p3 + ln_p4 + ln_p5 + ln_p6 + ln_p7 + ln_p8 + ln_p9 + \
-        ln_depenses_reelles + fumeur + typmen', data = small_df).fit()
+        ln_depenses_reelles + fumeur + typmen + temps + temps2 + mois + mois2', data = small_df).fit()
     print '---------------------------'
     print 'Estimation w{}'.format(i)
     print results.summary()
