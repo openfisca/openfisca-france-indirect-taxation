@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 from pandas import concat
 
-from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame, simulate_df
+from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame
 from openfisca_france_indirect_taxation.aids_price_index_builder import indice_prix_mensuel_98_2015, df2, date_to_vag
 
 # Now that we have our price indexes, we construct a dataframe with the rest of the information
@@ -65,6 +65,7 @@ for year in [2000, 2005, 2011]:
     df_temps = df[['vag'] + ['temps'] + ['mois']]
     df_temps['mois'] = df_temps['mois'].astype(float)
     df_temps['mois2'] = df_temps['mois'] ** 2
+    df_temps['temps2'] = df_temps['temps'] ** 2
     df_temps = df_temps.drop_duplicates(cols='vag', take_last=True)
     df_temps = df_temps.astype(float)
 
@@ -121,15 +122,7 @@ for year in [2000, 2005, 2011]:
     grouped = grouped.aggregate(np.sum)
     grouped.index.name = 'id'
     grouped = grouped.reset_index()
-
-    # Import information about households, including niveau_vie_decile
-    # (To do: Obviously there are mistakes in its computation, check why).
-
-    var_to_be_simulated = ['niveau_vie_decile']
-    simulation_data_frame = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
-    simulation_data_frame.index.name = 'ident_men'
-    simulation_data_frame.reset_index(inplace = True)
-    simulation_data_frame['ident_men'] = simulation_data_frame['ident_men'].astype(str)
+    # Import information about households
 
     df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['vag'] + ['typmen'] + ['revtot'] +
         ['02201'] + ['02202'] + ['02203']]
@@ -141,7 +134,6 @@ for year in [2000, 2005, 2011]:
     df_info_menage.index.name = 'ident_men'
     df_info_menage.reset_index(inplace = True)
     df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
-    df_info_menage = pd.merge(df_info_menage, simulation_data_frame, on = 'ident_men')
 
     data_frame = pd.merge(df_depense_categ, df_info_menage, on = 'ident_men')
 
@@ -150,7 +142,7 @@ for year in [2000, 2005, 2011]:
         data_frame[['depenses_tot'] + ['depense_par_categ']].astype(float)
         )
     data_frame['wi'] = data_frame['depense_par_categ'] / data_frame['depenses_tot']
-    data_frame = data_frame.astype(str)
+    data_frame[['vag'] + ['numero_categ']] = data_frame[['vag'] + ['numero_categ']].astype(str)
 
     # By construction, those who don't consume in coicop_i have a price index of 0 for this coicop.
     # We replace it with the price index of the whole coicop at the same vag.
@@ -221,6 +213,9 @@ for year in [2000, 2005, 2011]:
     data_frame['ln_depenses_reelles'] = data_frame['ln_depenses_reelles'] - data_frame['ln_P']
 
     data_frame = pd.merge(data_frame, df_temps, on = 'vag')
+
+    data_frame['decile'] = pd.qcut(data_frame['ln_depenses_reelles'], 10, labels = False)
+    data_frame['decile'] += 1
 
     if data_frame_for_reg is not None:
         data_frame_for_reg = pd.concat([data_frame_for_reg, data_frame])
