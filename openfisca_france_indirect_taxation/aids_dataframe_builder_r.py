@@ -17,7 +17,7 @@ from openfisca_france_indirect_taxation.aids_price_index_builder import indice_p
 # Now that we have our price indexes, we construct a dataframe with the rest of the information
 
 data_frame_for_reg = None
-for year in [2005]:
+for year in [2000, 2005, 2011]:
     aggregates_data_frame = get_input_data_frame(year)
     aggregates_data_frame['depenses_tot'] = 0
     produits = [column for column in aggregates_data_frame.columns if column.isdigit()]
@@ -211,6 +211,8 @@ for year in [2005]:
     data_frame = pd.merge(data_frame, data_frame2, on = 'ident_men')
     data_frame = data_frame.drop_duplicates(cols = 'ident_men', take_last = True)
     data_frame.drop(['depense_par_categ', 'depenses_tot', 'indice_prix_pondere', 'wi'], inplace = True, axis = 1)
+
+    data_frame.to_csv('data_frame_r_{}.csv'.format(year), sep = ',')
 
     if data_frame_for_reg is not None:
         data_frame_for_reg = pd.concat([data_frame_for_reg, data_frame])
