@@ -12,8 +12,8 @@ import numpy as np
 from pandas import concat
 
 from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame
-from openfisca_france_indirect_taxation.aids_price_index_builder import indice_prix_mensuel_98_2015, \
-    df_indice_prix_produit, date_to_vag
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
+    indice_prix_mensuel_98_2015, df_indice_prix_produit, date_to_vag
 
 # Now that we have our price indexes, we construct a dataframe with the rest of the information
 
@@ -191,11 +191,11 @@ for year in [2000, 2005, 2011]:
     del data_frame['id']
     data_frame = data_frame.astype(float)
 
-    data_frame['depenses_reelles'] = data_frame['depenses_tot'] / data_frame['ocde10']
+    data_frame['depenses_par_uc'] = data_frame['depenses_tot'] / data_frame['ocde10']
 
     data_frame = pd.merge(data_frame, df_temps, on = 'vag')
 
-    data_frame['decile'] = pd.qcut(data_frame['depenses_reelles'], 10, labels = False)
+    data_frame['decile'] = pd.qcut(data_frame['depenses_par_uc'], 10, labels = False)
     data_frame['decile'] += 1
 
     # Pivot the table to get one row per person.
@@ -204,13 +204,28 @@ for year in [2000, 2005, 2011]:
     data_frame['numero_categ'] = data_frame['numero_categ'].astype(str)
     data_frame2 = pd.pivot_table(data_frame, index = 'ident_men', columns = 'numero_categ',
         values = 'wi')
+    data_frame3 = pd.pivot_table(data_frame, index = 'ident_men', columns = 'numero_categ',
+        values = 'depense_par_categ')
     for i in range(1, 10):
         data_frame2.rename(columns = {'{}'.format(i): 'w{}'.format(i)}, inplace = True)
+        data_frame3.rename(columns = {'{}'.format(i): 'part_depenses_tot_{}'.format(i)}, inplace = True)
     data_frame2.index.name = 'ident_men'
     data_frame2 = data_frame2.reset_index()
+
+    data_frame3.index.name = 'ident_men'
+    data_frame3 = data_frame3.reset_index()
     data_frame = pd.merge(data_frame, data_frame2, on = 'ident_men')
     data_frame = data_frame.drop_duplicates(cols = 'ident_men', take_last = True)
-    data_frame.drop(['depense_par_categ', 'depenses_tot', 'indice_prix_pondere', 'wi'], inplace = True, axis = 1)
+    data_frame.drop(['indice_prix_pondere', 'wi'], inplace = True, axis = 1)
+
+    data_frame = pd.merge(data_frame, data_frame3, on = 'ident_men')
+    data_frame = data_frame.drop_duplicates(cols = 'ident_men', take_last = True)
+    data_frame.drop(['depense_par_categ'])
+    for i in range(1, 10):
+        data_frame['part_depenses_tot_{}'.format(i)] = (
+            data_frame['part_depenses_tot_{}'.format(i)] / sum(data_frame['part_depenses_tot_{}'.format(i)]))
+
+    data_frame['part_depenses_tot'] = data_frame['depenses_tot'] / sum(data_frame['depenses_tot'])
 
     # Dummies for seasonality : mi = 1 iff mois = i
 
@@ -232,6 +247,6 @@ for year in [2000, 2005, 2011]:
     else:
         data_frame_for_reg = data_frame
 
-data_frame_for_reg.to_csv('data_frame_for_r.csv', sep = ',')
+data_frame_for_reg.to_csv('data_frame_for_stata.csv', sep = ',')
 small_df = data_frame_for_reg[data_frame_for_reg['ident_men'] < 1000]
 small_df.to_csv('small_df_quaids.csv', sep = ',')
