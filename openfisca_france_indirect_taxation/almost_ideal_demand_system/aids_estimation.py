@@ -9,16 +9,16 @@ from __future__ import division
 
 import statsmodels.formula.api as smf
 
-from openfisca_france_indirect_taxation.aids_dataframe_builder import data_frame_for_reg
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_dataframe_builder import data_frame_for_reg
 
 
 def calcul_elasticite_depense():
-    return (results.params.ln_depenses_reelles / small_df['wi'].mean()) + 1
+    return (results.params.ln_depenses_par_uc / small_df['wi'].mean()) + 1
 
 
 def calcul_elasticite_prix_compensee():
-    return ((results.params['ln_p{}'.format(i)] - results.params.ln_depenses_reelles * (small_df['wi'].mean() -
-    results.params.ln_depenses_reelles * small_df['ln_depenses_reelles'].mean())) / small_df['wi'].mean()) - 1
+    return ((results.params['ln_p{}'.format(i)] - results.params.ln_depenses_par_uc * (small_df['wi'].mean() -
+    results.params.ln_depenses_par_uc * small_df['ln_depenses_par_uc'].mean())) / small_df['wi'].mean()) - 1
 
 
 elasticite_depense = dict()
@@ -28,7 +28,7 @@ for i in range(1, 13):
     small_df = data_frame_for_reg[data_frame_for_reg['numero_coicop'] == i]
     small_df = small_df[small_df['depense_par_coicop'] > 0]
     results = smf.ols(formula = 'wi ~ ln_p1 + ln_p2 + ln_p3 + ln_p4 + ln_p5 + ln_p6 + ln_p7 + ln_p8 + ln_p9 + \
-        ln_p10 + ln_p11 + ln_p12 + ln_depenses_reelles + vag + typmen + niveau_vie_decile + \
+        ln_p10 + ln_p11 + ln_p12 + ln_depenses_par_uc + vag + typmen + niveau_vie_decile + \
         fumeur', data = small_df).fit()
     print '---------------------------'
     print 'Estimation w{}'.format(i)

@@ -12,7 +12,8 @@ import numpy as np
 from pandas import concat
 
 from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame
-from openfisca_france_indirect_taxation.aids_price_index_builder import df_indice_prix_produit
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
+    df_indice_prix_produit
 
 
 # Now that we have our price indexes, we construct a dataframe with the rest of the information
@@ -143,7 +144,7 @@ for year in [2000, 2005, 2011]:
     del data_frame['id']
     data_frame = data_frame.astype(float)
 
-    data_frame['depenses_reelles'] = data_frame['depenses_tot'] / data_frame['ocde10']
+    data_frame['depenses_par_uc'] = data_frame['depenses_tot'] / data_frame['ocde10']
 
     data_frame = pd.merge(data_frame, df_temps, on = 'vag')
 
@@ -169,7 +170,7 @@ for year in [2000, 2005, 2011]:
     else:
         data_frame_for_reg = data_frame
 
-data_frame_for_reg.to_csv('data_frame_for_r_by_coicop.csv', sep = ',')
+data_frame_for_reg.to_csv('data_frame_for_stata_by_coicop.csv', sep = ',')
 data_frame_for_reg['somme_wi'] = 0
 for i in range(1, 13):
     data_frame_for_reg['somme_wi'] += data_frame_for_reg['w{}'.format(i)]
