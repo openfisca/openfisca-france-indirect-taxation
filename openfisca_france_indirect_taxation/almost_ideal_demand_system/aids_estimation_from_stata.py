@@ -10,7 +10,7 @@ import pandas as pd
 # Import data_frame_for_pandas to get the results of the estimation run on Stata.
 
 data_frame_for_pandas = \
-    pd.DataFrame.from_csv('data_frame_for_pandas.csv',
+    pd.DataFrame.from_csv('data_frame_for_pandas_2005.csv',
         sep = ',')
 
 data_frame_for_pandas.fillna(0, inplace=True)
