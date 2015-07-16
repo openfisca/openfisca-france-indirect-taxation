@@ -7,8 +7,8 @@ Created on Thu Jul 09 18:41:37 2015
 
 import pandas as pd
 
-from openfisca_france_indirect_taxation.aids_dataframe_builder_categ import aggregates_data_frame, df, \
-    produits, data_frame_for_reg, year, df_indice_prix_produit, df_to_merge
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_dataframe_builder_categ import \
+    aggregates_data_frame, df, produits, data_frame_for_reg, year, df_indice_prix_produit, df_to_merge
 
 
 """ Check if depenses_tot is equal to the sum of all expenses """
@@ -104,3 +104,12 @@ data_frame_for_reg['somme_mi'] = 0
 for i in range(1, 13):
     data_frame_for_reg['somme_mi'] += data_frame_for_reg['m{}'.format(i)]
 assert (data_frame_for_reg['somme_mi'] == 1).any(), 'The monthly dummies do not sum to 1'
+
+
+""" | """
+
+assert 0.999 < sum(data_frame_for_reg['part_depenses_tot']) < 1.001, \
+    "The sum of the weights is not equal to 1 for depenses_tot"
+for i in range(1, 10):
+    assert 0.999 < sum(data_frame_for_reg['part_depenses_tot_{}'.format(i)]) < 1.001, \
+        "The sum of the weights is not equal to 1 for some depenses_tot_i"

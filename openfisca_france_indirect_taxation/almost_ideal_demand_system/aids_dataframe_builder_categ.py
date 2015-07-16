@@ -220,12 +220,6 @@ for year in [2000, 2005, 2011]:
 
     data_frame = pd.merge(data_frame, data_frame3, on = 'ident_men')
     data_frame = data_frame.drop_duplicates(cols = 'ident_men', take_last = True)
-    data_frame.drop(['depense_par_categ'])
-    for i in range(1, 10):
-        data_frame['part_depenses_tot_{}'.format(i)] = (
-            data_frame['part_depenses_tot_{}'.format(i)] / sum(data_frame['part_depenses_tot_{}'.format(i)]))
-
-    data_frame['part_depenses_tot'] = data_frame['depenses_tot'] / sum(data_frame['depenses_tot'])
 
     # Dummies for seasonality : mi = 1 iff mois = i
 
@@ -246,6 +240,13 @@ for year in [2000, 2005, 2011]:
         data_frame_for_reg = pd.concat([data_frame_for_reg, data_frame])
     else:
         data_frame_for_reg = data_frame
+
+for i in range(1, 10):
+    data_frame_for_reg['part_depenses_tot_{}'.format(i)] = (
+        data_frame_for_reg['part_depenses_tot_{}'.format(i)] / sum(data_frame_for_reg['part_depenses_tot_{}'.format(i)])
+        )
+
+data_frame_for_reg['part_depenses_tot'] = data_frame_for_reg['depenses_tot'] / sum(data_frame_for_reg['depenses_tot'])
 
 data_frame_for_reg.to_csv('data_frame_for_stata.csv', sep = ',')
 small_df = data_frame_for_reg[data_frame_for_reg['ident_men'] < 1000]
