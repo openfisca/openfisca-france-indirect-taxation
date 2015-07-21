@@ -50,18 +50,28 @@ for year in [2011]:
     assert data['check_depenses_carbu'].min() > -0.0001, 'The sum of diesel and super is lower than the total'
     del data['check_depenses_carbu']
 
-    # comment traiter le cas des véhicules dont on ne connait pas le type de carburant ? Mettre la moyenne ?
-
     small_data = data[data['veh_tot'] > 0]
     small_data = small_data[small_data['veh_essence'] == 0]
     small_data = small_data[small_data['veh_diesel'] == 0]
     print small_data.shape
     del small_data
 
-    # Given what people spend and the level of excise taxes, what are the expected tax revenues.
+    prix_carburants = prix_carburants_90_14[prix_carburants_90_14.index == year]
+    prix_diesel_ttc = prix_carburants[prix_carburants['carburant'] == 'diesel_ttc']
+    prix_diesel_ttc = prix_diesel_ttc.iat[0, 1]
+    prix_super_95_ttc = prix_carburants[prix_carburants['carburant'] == 'super_95_ttc']
+    prix_super_95_ttc = prix_super_95_ttc.iat[0, 1]
+    prix_super_98_ttc = prix_carburants[prix_carburants['carburant'] == 'super_98_ttc']
+    prix_super_98_ttc = prix_super_98_ttc.iat[0, 1]
+    prix_super_95_e10_ttc = prix_carburants[prix_carburants['carburant'] == 'super_95_e10_ttc']
+    prix_super_95_e10_ttc = prix_super_95_e10_ttc.iat[0, 1]
+    prix_super_plombe_ttc = prix_carburants[prix_carburants['carburant'] == 'super_plombe_ttc']
+    prix_super_plombe_ttc = prix_super_plombe_ttc.iat[0, 1]
+    prix_gplc_ttc = prix_carburants[prix_carburants['carburant'] == 'gplc_ttc']
+    prix_gplc_ttc = prix_gplc_ttc.iat[0, 1]
 
-    taux_implicite_ticpe_diesel = taux_implicite(0.4284, 0.2, 1.335)
-    taux_implicite_ticpe_super = taux_implicite(0.6069, 0.2, 1.50)
+    taux_implicite_ticpe_diesel = taux_implicite(0.4284, 0.196, prix_diesel_ttc)
+    taux_implicite_ticpe_super = taux_implicite(0.6069, 0.196, prix_super_95_ttc)
 
     data['depenses_ticpe_diesel'] = tax_from_expense_including_tax(data['depenses_diesel'], taux_implicite_ticpe_diesel)
     data['depenses_ticpe_super'] = tax_from_expense_including_tax(data['depenses_super'], taux_implicite_ticpe_super)
@@ -70,5 +80,3 @@ for year in [2011]:
 
     # NB: il faut aussi pondérer selon la consommation de 95, 98, d'E85 et d'E10.
     # NB: l'accise est la même pour 95, 98 et E10, beaucoup plus basse pour E85, mais < 1% de la conso de super.
-
-
