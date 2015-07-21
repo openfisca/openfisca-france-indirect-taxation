@@ -61,7 +61,7 @@ reference_formula = make_reference_formula_decorator(entity_class_by_symbol = en
 
 
 def taux_implicite(accise, tva, prix_ttc):
-    """Calcule le taux implicite sur l'essence"""
+    """Calcule le taux implicite sur les carburants"""
     return (accise * (1 + tva)) / (prix_ttc - accise * (1 + tva))
 
 
