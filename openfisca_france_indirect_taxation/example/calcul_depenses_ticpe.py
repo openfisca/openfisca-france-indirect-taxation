@@ -10,14 +10,15 @@ from __future__ import division
 from openfisca_france_indirect_taxation.model.base import tax_from_expense_including_tax, taux_implicite
 from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame
 from ipp_macro_series_parser.agregats_transports.transports_cleaner import *
-from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_carburants_90_14
+from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_carburants_90_14, \
+    prix_mensuel_carburants_90_15
 
 
 # Quotient: how much more diesel car owners consume compare to super car owners.
 # pourcentage_parc_i: g2_1
 # pourcentage_conso_i: g_3a
 
-for year in [2011]:
+for year in [2000]:
     aggregates_data_frame = get_input_data_frame(year)
 
     g2_1.columns = g2_1.columns.astype(str)
@@ -31,7 +32,8 @@ for year in [2011]:
     conso_moyenne_vp_diesel = conso_totale_vp_diesel / taille_parc_diesel
     conso_moyenne_vp_super = conso_totale_vp_super / taille_parc_super
 
-    data = aggregates_data_frame[['07220'] + ['veh_diesel'] + ['veh_essence'] + ['veh_tot']]
+    data = aggregates_data_frame[['ident_men'] + ['pondmen'] + ['07220'] + ['vag'] + ['veh_diesel'] +
+        ['veh_essence'] + ['veh_tot']]
     data = data.astype(float)
     data.rename(columns = {'07220': 'depenses_carburants'}, inplace = True)
 
@@ -78,5 +80,20 @@ for year in [2011]:
     data['depenses_ticpe'] = data['depenses_ticpe_diesel'] + data['depenses_ticpe_super']
     data['part_ticpe_depenses'] = data['depenses_ticpe'] / data['depenses_carburants']
 
+    data['quantite_diesel'] = data['depenses_diesel'] / prix_diesel_ttc
+    data['quantite_super'] = data['depenses_super'] / prix_super_95_ttc
+    data['quantite_carburants'] = data['quantite_diesel'] + data['quantite_super']
+    data['quantite_carburants_inflate'] = data['quantite_carburants'] * data['pondmen']
+    print data['quantite_carburants_inflate'].sum()
+
     # NB: il faut aussi pondérer selon la consommation de 95, 98, d'E85 et d'E10.
     # NB: l'accise est la même pour 95, 98 et E10, beaucoup plus basse pour E85, mais < 1% de la conso de super.
+
+    data['depenses_ticpe_inflate'] = data['depenses_ticpe'] * data['pondmen']
+    print data['depenses_ticpe_inflate'].sum()
+    data['depenses_carburants_inflate'] = data['depenses_carburants'] * data['pondmen']
+    print data['depenses_carburants_inflate'].sum()
+
+    data['check'] = 0
+    data.loc[data['depenses_ticpe'] > 0, 'check'] = 1
+    print data['check'].mean()
