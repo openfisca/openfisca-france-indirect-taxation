@@ -6,28 +6,33 @@ Created on Thu Jul 23 17:26:44 2015
 """
 
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-import pandas as pd
-import numpy as np
 
-from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_mensuel_carburants_90_15, \
-    prix_annuel_carburants_90_14
-
-from openfisca_france_indirect_taxation.example.utils_example import graph_builder_bar, graph_builder_line, percent_formatter
+from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_mensuel_carburants_90_15
 
 
 def graph_builder_prix_carburants(data_frame):
     axes = data_frame.plot()
     plt.axhline(0, color = 'k')
-    axes.xaxis(data_frame['annee'])
+    # axes.xaxis(data_frame['annee'])
     axes.legend(
-        bbox_to_anchor = (1, 1),
+        bbox_to_anchor = (1, 1.2),
         )
     return plt.show()
 
+prix_mensuel_carburants_90_15 = prix_mensuel_carburants_90_15.set_index('annee')
+prix_mensuel_diesel = prix_mensuel_carburants_90_15[['diesel_ht'] + ['diesel_ttc']]
+prix_mensuel_super_95 = prix_mensuel_carburants_90_15[['super_95_ht'] + ['super_95_ttc']]
 
-prix_mensuel_carburants_90_15.plot(x='annee', y='diesel_ht')
+graph_builder_prix_carburants(prix_mensuel_super_95)
+graph_builder_prix_carburants(prix_mensuel_diesel)
 
-data_frame_to_be_plotted = prix_mensuel_carburants_90_15[['diesel_ht'] + ['diesel_ttc'] + ['annee']]
+prix_mensuel_diesel['taux_implicite_ticpe_diesel'] = (
+    (prix_mensuel_diesel['diesel_ttc'] - prix_mensuel_diesel['diesel_ht']) / prix_mensuel_diesel['diesel_ht']
+    )
+prix_mensuel_super_95['taux_implicite_ticpe_super_95'] = (
+    (prix_mensuel_super_95['super_95_ttc'] - prix_mensuel_super_95['super_95_ht']) /
+    prix_mensuel_super_95['super_95_ht']
+    )
 
-graph_builder_prix_carburants(data_frame_to_be_plotted)
+graph_builder_prix_carburants(prix_mensuel_diesel['taux_implicite_ticpe_diesel'])
+graph_builder_prix_carburants(prix_mensuel_super_95['taux_implicite_ticpe_super_95'])
