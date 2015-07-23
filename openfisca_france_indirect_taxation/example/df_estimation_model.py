@@ -26,32 +26,25 @@ Created on Sat Apr 25 17:00:01 2015
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
 from __future__ import division
 
-import os
+
 import logging
-import numpy
-import pandas
+
 
 from pandas import DataFrame
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
-import openfisca_france_indirect_taxation
-from openfisca_survey_manager.survey_collections import SurveyCollection
 
-from openfisca_france_data import default_config_files_directory as config_files_directory
-from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_data.temporary import TemporaryStore
 from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame, simulate_df
 
 
 
 if __name__ == '__main__':
-    import logging
     log = logging.getLogger(__name__)
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-
 
     list_coicop12 = []
     for coicop12_index in range(1, 13):
