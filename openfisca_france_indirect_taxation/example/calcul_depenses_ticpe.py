@@ -10,15 +10,14 @@ from __future__ import division
 from openfisca_france_indirect_taxation.model.base import tax_from_expense_including_tax, taux_implicite
 from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame
 from ipp_macro_series_parser.agregats_transports.transports_cleaner import *
-from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_carburants_90_14, \
-    prix_mensuel_carburants_90_15
+from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_carburants_90_14
 
 
 # Quotient: how much more diesel car owners consume compare to super car owners.
 # pourcentage_parc_i: g2_1
 # pourcentage_conso_i: g_3a
 
-for year in [2000]:
+for year in [2011]:
     aggregates_data_frame = get_input_data_frame(year)
 
     g2_1.columns = g2_1.columns.astype(str)

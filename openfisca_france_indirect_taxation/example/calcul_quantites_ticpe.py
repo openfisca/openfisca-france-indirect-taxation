@@ -7,17 +7,21 @@ Created on Thu Jul 23 10:16:54 2015
 
 from __future__ import division
 
+import pandas as pd
+
 from openfisca_france_indirect_taxation.model.base import tax_from_expense_including_tax, taux_implicite
 from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame
-from ipp_macro_series_parser.agregats_transports.transports_cleaner import *
+from ipp_macro_series_parser.agregats_transports.transports_cleaner import g2_1, g_3a
 from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_mensuel_carburants_90_15
 
 
 # pourcentage_parc_i: g2_1
 # pourcentage_conso_i: g_3a
 
-for year in [2005]:
+for year in [2011]:
     aggregates_data_frame = get_input_data_frame(year)
+
+    # Get scalar values from aggregates:
 
     g2_1.columns = g2_1.columns.astype(str)
     g_3a.columns = g_3a.columns.astype(str)
@@ -29,6 +33,8 @@ for year in [2005]:
 
     conso_moyenne_vp_diesel = conso_totale_vp_diesel / taille_parc_diesel
     conso_moyenne_vp_super = conso_totale_vp_super / taille_parc_super
+
+    # Get the dataframe:
 
     data = aggregates_data_frame[['ident_men'] + ['pondmen'] + ['07220'] + ['vag'] + ['veh_diesel'] +
         ['veh_essence'] + ['veh_tot']]
@@ -54,12 +60,16 @@ for year in [2005]:
         data['depenses_carburants'] * (conso_totale_vp_super / (conso_totale_vp_diesel + conso_totale_vp_super))
     del data['diff']
 
+    # Match expenses with prices to compute quantities:
+
     prix_mensuel_carburants_90_15_small = prix_mensuel_carburants_90_15[['vag'] + ['diesel_ttc'] + ['super_95_ttc']]
     prix_mensuel_carburants_90_15_small = \
         prix_mensuel_carburants_90_15_small[prix_mensuel_carburants_90_15_small['vag'] > 0]
     prix_mensuel_carburants_90_15_small = \
         prix_mensuel_carburants_90_15_small.drop_duplicates(cols = 'vag', take_last = True)
     data = pd.merge(data, prix_mensuel_carburants_90_15_small, on = 'vag')
+
+    # Compute quantities and expenses in ticpe:
 
     data['taux_implicite_ticpe_diesel'] = taux_implicite(0.4284, 0.196, data['diesel_ttc'])
     data['taux_implicite_ticpe_super'] = taux_implicite(0.6069, 0.196, data['super_95_ttc'])
@@ -74,7 +84,7 @@ for year in [2005]:
     data['quantite_super'] = data['depenses_super'] / data['super_95_ttc']
     data['quantite_carburants'] = data['quantite_diesel'] + data['quantite_super']
 
-    # Doing some checks
+    # Asserts:
 
     data['check_depenses_carbu'] = (data['depenses_diesel'] + data['depenses_super']) - data['depenses_carburants']
     assert data['check_depenses_carbu'].max() < 0.0001, 'The sum of diesel and super is higher than the total'
@@ -87,6 +97,8 @@ for year in [2005]:
     assert len(small_df) == 0, 'Some people consume fuel but are missing in quantite_carburants_inflate'
     del small_df
 
+    # Summarize the results:
+
     agregats = dict()
     agregats['quantite_carburants_totale'] = (data['quantite_carburants'] * data['pondmen']).sum()
     agregats['quantite_diesel_totale'] = (data['quantite_diesel'] * data['pondmen']).sum()
@@ -98,5 +110,5 @@ for year in [2005]:
     agregats['depenses_ticpe_diesel'] = (data['depenses_ticpe_diesel'] * data['pondmen']).sum()
     agregats['depenses_ticpe_super'] = (data['depenses_ticpe_super'] * data['pondmen']).sum()
 
-    # NB: il faut aussi pondérer selon la consommation de 95, 98, d'E85 et d'E10.
+    # NB: il faut aussi pondérer selon la consommation de 95, 98, d'E85, d'E10 et de super plombe (important en 2000).
     # NB: l'accise est la même pour 95, 98 et E10, beaucoup plus basse pour E85, mais < 1% de la conso de super.
