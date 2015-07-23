@@ -19,11 +19,11 @@ facts = []
 for i in range(b):
     facts.append(a.pondmen[i])
 
-decile = []
+niveau_vie_decile = []
 for j in range(1, 11):
-    decile.append(numpy.percentile(facts, 10 * j))
+    niveau_vie_decile.append(numpy.percentile(facts, 10 * j))
 
-print decile
+print niveau_vie_decile
 
 figsize = (8, 6)
 matplotlib.pyplot.plot(facts, label = "courbe")

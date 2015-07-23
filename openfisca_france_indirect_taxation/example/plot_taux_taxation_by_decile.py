@@ -33,10 +33,8 @@ Created on Tue Mar  3 10:08:25 2015
 from __future__ import division
 
 
-from openfisca_france_indirect_taxation.example.plot_consumption_distribution \
-    import df_weighted_average_grouped, simulate_df
-
-import matplotlib.pyplot as plt
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
+    graph_builder_bar
 
 if __name__ == '__main__':
     import logging
@@ -44,42 +42,37 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-
     var_to_be_simulated = [
         # Variable de déciles par uc originelle de l'enquête
         'decuc',
-        # Nouvelle variable de déciles calculée dans input.py
-        'age',
-        'montant_tva_taux_plein',
-        'montant_tva_taux_intermediaire',
-        'montant_tva_taux_reduit',
-        'montant_tva_taux_super_reduit',
-        'montant_tva_total',
-        'decile',
-        'revtot',
+        'tva_taux_plein',
+        'tva_taux_intermediaire',
+        'tva_taux_reduit',
+        'tva_taux_super_reduit',
+        'tva_total',
+        'niveau_vie_decile',
         'rev_disponible',
-        'ident_men',
         'pondmen',
         ]
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df = simulate_df(var_to_be_simulated = var_to_be_simulated)
-    if year == 2011:
-        df.decile[df.decuc == 10 ] = 10
-    varlist = ['rev_disponible', 'montant_tva_taux_super_reduit',
-               'montant_tva_taux_reduit', 'montant_tva_taux_plein', 'montant_tva_taux_intermediaire'
-               ]
-    Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'decile', varlist = varlist)
+    for year in [2000, 2005, 2011]:
+        df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+        if year == 2011:
+            df.niveau_vie_decile[df.decuc == 10] = 10
+        varlist = ['rev_disponible', 'tva_taux_super_reduit',
+                   'tva_taux_reduit', 'tva_taux_plein', 'tva_taux_intermediaire'
+                   ]
+        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = varlist)
 
-    # Example
-    Wconcat['part_tva_tx_super_reduit'] = Wconcat['montant_tva_taux_super_reduit'] / Wconcat['rev_disponible']
-    Wconcat['part_tva_tx_reduit'] = Wconcat['montant_tva_taux_reduit'] / Wconcat['rev_disponible']
-    Wconcat['part_tva_tx_intermediaire'] = Wconcat['montant_tva_taux_intermediaire'] / Wconcat['rev_disponible']
-    Wconcat['part_tva_tx_plein'] = Wconcat['montant_tva_taux_plein'] / Wconcat['rev_disponible']
+        # Example
+        Wconcat['part_tva_tx_super_reduit'] = Wconcat['tva_taux_super_reduit'] / Wconcat['rev_disponible']
+        Wconcat['part_tva_tx_reduit'] = Wconcat['tva_taux_reduit'] / Wconcat['rev_disponible']
+        Wconcat['part_tva_tx_intermediaire'] = Wconcat['tva_taux_intermediaire'] / Wconcat['rev_disponible']
+        Wconcat['part_tva_tx_plein'] = Wconcat['tva_taux_plein'] / Wconcat['rev_disponible']
 
-    df_to_graph = Wconcat[['part_tva_tx_plein', 'part_tva_tx_super_reduit', 'part_tva_tx_reduit', 'part_tva_tx_intermediaire']]
+        df_to_graph = Wconcat[['part_tva_tx_plein', 'part_tva_tx_super_reduit', 'part_tva_tx_reduit',
+                               'part_tva_tx_intermediaire']]
 
-    # Graphe par décile de revenu par uc de la ventilation des taux de taxation
-    df_to_graph.plot(kind = 'bar', stacked = True)
-    plt.axhline(0, color = 'k')
-
+        # Graphe par décile de revenu par uc de la ventilation des taux de taxation
+        graph_builder_bar(df_to_graph)

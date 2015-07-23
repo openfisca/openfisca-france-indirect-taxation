@@ -52,15 +52,15 @@ def test_survey_simulation(year = 2005):
         year = year,
         )
     simulation = survey_scenario.new_simulation()
-    simulation.calculate('montant_tva_taux_plein')
+    simulation.calculate('tva_taux_plein')
 
     return DataFrame(
         dict([
             (name, simulation.calculate(name)) for name in [
-                'montant_tva_taux_plein',
-                'montant_tva_taux_intermediaire',
-                'montant_tva_taux_reduit',
-                'montant_tva_taux_super_reduit',
+                'tva_taux_plein',
+                'tva_taux_intermediaire',
+                'tva_taux_reduit',
+                'tva_taux_super_reduit',
                 'ident_men',
                 'pondmen',
                 'decuc',

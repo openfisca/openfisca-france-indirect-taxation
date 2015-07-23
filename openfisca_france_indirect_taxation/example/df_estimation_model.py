@@ -36,42 +36,9 @@ import logging
 
 from pandas import DataFrame
 
-import openfisca_france_indirect_taxation
-from openfisca_survey_manager.survey_collections import SurveyCollection
+from openfisca_france_data.temporary import TemporaryStore
+from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame, simulate_df
 
-from openfisca_france_data import default_config_files_directory as config_files_directory
-from openfisca_france_indirect_taxation.surveys import SurveyScenario
-
-
-def get_input_data_frame(year):
-    openfisca_survey_collection = SurveyCollection.load(
-        collection = "openfisca_indirect_taxation", config_files_directory = config_files_directory)
-    openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
-    input_data_frame = openfisca_survey.get_values(table = "input")
-    input_data_frame.reset_index(inplace = True)
-    return input_data_frame
-
-
-def simulate_df(var_to_be_simulated, year = 2011):
-    '''
-    Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
-    '''
-    input_data_frame = get_input_data_frame(year)
-    TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
-
-    tax_benefit_system = TaxBenefitSystem()
-    survey_scenario = SurveyScenario().init_from_data_frame(
-        input_data_frame = input_data_frame,
-        tax_benefit_system = tax_benefit_system,
-        year = year,
-        )
-    simulation = survey_scenario.new_simulation()
-    return DataFrame(
-        dict([
-            (name, simulation.calculate(name)) for name in var_to_be_simulated
-
-            ])
-        )
 
 
 if __name__ == '__main__':
@@ -86,7 +53,7 @@ if __name__ == '__main__':
     var_to_be_simulated = [
         'ident_men',
         'pondmen',
-        'decile',
+        'niveau_vie_decile',
         'revtot',
         'somme_coicop12',
         'ocde10',
@@ -100,9 +67,9 @@ if __name__ == '__main__':
     var_to_be_simulated += list_coicop12
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
-    df = simulate_df(var_to_be_simulated = var_to_be_simulated)
+    df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
     if year == 2011:
-        df.decile[df.decuc == 10 ] = 10
+        df.niveau_vie_decile[df.decuc == 10 ] = 10
 
 
 
@@ -137,9 +104,7 @@ if __name__ == '__main__':
     for var in var_list_:
          df[var] = df[var].astype(float)
 
-    #♥df['decile_bis']= weighted_quantiles('niveau_de_vie', 'labels', 'pondmen', return_quantiles = True)
+    #♥df['niveau_vie_decile_bis']= weighted_quantiles('niveau_de_vie', 'labels', 'pondmen', return_quantiles = True)
 
     df_2011 = df
     df_2011.to_stata('C:\Users\hadrien\Desktop\Travail\ENSAE\Statapp\data_frame_estimation_model_\df_2011.dta')
-
-

@@ -128,7 +128,7 @@ legislation_json = {
                     },
                 "prix_carburants": {
                     "@type": "Node",
-                    "description": "prix des carburants",
+                    "description": "prix des carburants en euros par hectolitre",
                     "children": {
                         "prix_ttc_gazole": {
                             "@type": "Parameter",
@@ -153,7 +153,9 @@ legislation_json = {
                                 {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 100.235},
                                 {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 114.6749057},
                                 {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 133.42},
-                                {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 150},
+                                {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 139.58},
+                                {'start': u'2013-01-01', 'stop': u'2013-12-31', 'value': 135.02},
+                                {'start': u'2014-01-01', 'stop': u'2014-12-31', 'value': 128.56},
                                 ],
                             },
                         "prix_ttc_super95": {
@@ -178,9 +180,36 @@ legislation_json = {
                                 {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 120.9205769},
                                 {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 134.6401887},
                                 {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 149.94},
+                                {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 156.58},
                                 #TODO: {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': },
                                 ],
                             },
+#                        Bien changer les prix et appliquer ceux de l'E10
+#                            "prix_ttc_superE10": {
+#                            "@type": "Parameter",
+#                            "description": "Prix ttc super95 ",
+#                            "format": "float",
+#                            "values": [
+#                                {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 85.7},
+#                                {'start': u'1996-01-01', 'stop': u'1996-12-31', 'value': 90.91},
+#                                {'start': u'1997-01-01', 'stop': u'1997-12-31', 'value': 94.1098},
+#                                {'start': u'1998-01-01', 'stop': u'1998-12-31', 'value': 91.8586},
+#                                {'start': u'1999-01-01', 'stop': u'1999-12-31', 'value': 95.5},
+#                                {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 109.1731165},
+#                                {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 103.2881858},
+#                                {'start': u'2002-01-01', 'stop': u'2002-12-31', 'value': 101.4594819},
+#                                {'start': u'2003-01-01', 'stop': u'2003-12-31', 'value': 101.6317308},
+#                                {'start': u'2004-01-01', 'stop': u'2004-12-31', 'value': 106.0273585},
+#                                {'start': u'2005-01-01', 'stop': u'2005-12-31', 'value': 116.5913462},
+#                                {'start': u'2006-01-01', 'stop': u'2006-12-31', 'value': 123.6817308},
+#                                {'start': u'2007-01-01', 'stop': u'2007-12-31', 'value': 127.6451923},
+#                                {'start': u'2008-01-01', 'stop': u'2008-12-31', 'value': 135.3755769},
+#                                {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 120.9205769},
+#                                {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 134.6401887},
+#                                {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 149.94},
+#                                #TODO: {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': },
+#                                ],
+#                            },
                         "prix_ttc_super98": {
                             "@type": "Parameter",
                             "description": "prix ttc super98",
@@ -248,6 +277,56 @@ legislation_json = {
                             },
                         },
                     },
+
+                "ticpe": {
+                    "@type": "Node",
+                    "description": "ticpe sur les différents produits énergetiques",
+                    "children": {
+                        "ticpe_supercarburants": {
+                            "@type": "Parameter",
+                            "description": "ticpe sur super95 super98 et superE10, incluant majorations des régions",
+                            "format": "float",
+                            "values": [
+                                {'start': u'1995-01-01', 'stop': u'2000-12-31', 'value': 58.63},
+                                {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 58.63},
+                                {'start': u'2002-01-01', 'stop': u'2002-12-31', 'value': 58.63},
+                                {'start': u'2003-01-01', 'stop': u'2003-12-31', 'value': 58.92},
+                                {'start': u'2004-01-01', 'stop': u'2004-12-31', 'value': 58.92},
+                                {'start': u'2005-01-01', 'stop': u'2005-12-31', 'value': 58.92},
+                                {'start': u'2006-01-01', 'stop': u'2006-12-31', 'value': 58.92},
+                                {'start': u'2007-01-01', 'stop': u'2007-12-31', 'value': 60.69},
+                                {'start': u'2008-01-01', 'stop': u'2008-12-31', 'value': 60.69},
+                                {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 60.69},
+                                {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 60.69},
+                                {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 61.42},
+                                {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 61.42},
+                                {'start': u'2013-01-01', 'stop': u'2013-12-31', 'value': 61.42},
+                                {'start': u'2014-01-01', 'stop': u'2014-12-31', 'value': 61.42},
+                                {'start': u'2015-01-01', 'stop': u'2015-12-31', 'value': 63.14},
+                                {'start': u'2016-01-01', 'stop': u'2016-12-31', 'value': 64.85},
+                                ],
+                            },
+                        "ticpe_gazole": {
+                            "@type": "Parameter",
+                            "description": "ticpe sur diesel, incluant majorations des régions ",
+                            "format": "float",
+                            "values": [
+                                {'start': u'1995-01-01', 'stop': u'2002-12-31', 'value': 38.9},
+                                {'start': u'2003-01-01', 'stop': u'2003-12-31', 'value': 39.19},
+                                {'start': u'2004-01-01', 'stop': u'2006-12-31', 'value': 41.69},
+                                {'start': u'2007-01-01', 'stop': u'2010-12-31', 'value': 42.84},
+                                {'start': u'2011-01-01', 'stop': u'2014-12-31', 'value': 44.19},
+                                {'start': u'2015-01-01', 'stop': u'2015-12-31', 'value': 48.17},
+                                {'start': u'2016-01-01', 'stop': u'2016-12-31', 'value': 50.16}
+                                ],
+                            },
+                        },
+                    },
+
+
+
+
+
                 "alcool_conso_et_vin": {
                     "@type": "Node",
                     "description": "alcools",
