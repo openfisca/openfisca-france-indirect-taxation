@@ -108,3 +108,13 @@ def graph_builder_line(graph):
         bbox_to_anchor = (1, 1),
         )
     return plt.show()
+
+
+def graph_builder_carburants(data_frame):
+    axes = data_frame.plot()
+    plt.axhline(0, color = 'k')
+    # axes.xaxis(data_frame['annee'])
+    axes.legend(
+        bbox_to_anchor = (1, 1.23),
+        )
+    return plt.show()
