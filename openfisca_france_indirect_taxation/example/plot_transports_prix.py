@@ -20,10 +20,10 @@ prix_mensuel_carburants_90_15['taux_implicite_ticpe_super_95'] = (
     )
 
 print 'Evolution du prix des carburants au cours du temps'
-graph_builder_carburants(prix_mensuel_carburants_90_15[['diesel_ht'] + ['diesel_ttc']])
-graph_builder_carburants(prix_mensuel_carburants_90_15[['super_95_ht'] + ['super_95_ttc']])
+graph_builder_carburants(prix_mensuel_carburants_90_15[['diesel_ht'] + ['diesel_ttc']], 'prix_diesel')
+graph_builder_carburants(prix_mensuel_carburants_90_15[['super_95_ht'] + ['super_95_ttc']], 'prix_essence')
 
 print 'Evolution du taux implicite de taxation des carburants au cours du temps'
 graph_builder_carburants(
-    prix_mensuel_carburants_90_15[['taux_implicite_ticpe_super_95'] + ['taux_implicite_ticpe_diesel']]
-    )
+    prix_mensuel_carburants_90_15[['taux_implicite_ticpe_super_95'] + ['taux_implicite_ticpe_diesel']],
+    'taux_implicite')

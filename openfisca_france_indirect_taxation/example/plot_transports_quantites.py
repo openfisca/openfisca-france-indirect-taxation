@@ -26,12 +26,12 @@ quantite_conso_vp.set_index(['categorie'], inplace = True)
 quantite_conso_vp = quantite_conso_vp.transpose()
 
 print 'Evolution de la taille du parc automobile au cours du temps'
-graph_builder_carburants(taille_parc_vp)
+graph_builder_carburants(taille_parc_vp, 'taille_parc_vp')
 
 print 'Evolution des quantités de carburants consommées par les voitures particulières françaises'
-graph_builder_carburants(quantite_conso_vp)
+graph_builder_carburants(quantite_conso_vp, 'quantite_conso_vp')
 
 print 'Evolution des recettes totales issues de la TICPE'
-graph_builder_carburants(recettes_ticpe)
+graph_builder_carburants(recettes_ticpe, 'recettes_totales_ticpe')
 
 # (pour avoir les recettes prélevées sur les ménages, parser les barèmes et multiplier les accises par les quantités)

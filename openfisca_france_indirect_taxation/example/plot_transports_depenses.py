@@ -32,11 +32,12 @@ depenses_menages_transports['part_transports_depenses_totales'] = (
     )
 
 print 'Evolution des dépenses des ménages en carburants'
-graph_builder_carburants(depenses_menages_transports[u'Dépenses carburants et lubrifiants'])
+graph_builder_carburants(depenses_menages_transports[u'Dépenses carburants et lubrifiants'],
+    'depenses_menages_carburants')
 
 print 'Evolution de la part des carburants et des transports dans les dépenses totales des ménages'
 graph_builder_carburants(
-    depenses_menages_transports[['part_carburants_depenses_totales'] + ['part_transports_depenses_totales']]
-    )
+    depenses_menages_transports[['part_carburants_depenses_totales'] + ['part_transports_depenses_totales']],
+    'part_transports_depenses_menages')
 
 # Evolution de la part de la TICPE dans les dépenses des ménages : besoin de parser les barèmes

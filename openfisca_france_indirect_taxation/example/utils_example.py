@@ -110,11 +110,12 @@ def graph_builder_line(graph):
     return plt.show()
 
 
-def graph_builder_carburants(data_frame):
+def graph_builder_carburants(data_frame, name):
     axes = data_frame.plot()
+    fig = axes.get_figure()
     plt.axhline(0, color = 'k')
     # axes.xaxis(data_frame['annee'])
     axes.legend(
         bbox_to_anchor = (1, 1.23),
         )
-    return plt.show()
+    return plt.show(), fig.savefig('C:/Users/thomas.douenne/Documents/data/graphs_transports/{}.png'.format(name))
