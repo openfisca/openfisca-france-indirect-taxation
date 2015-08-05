@@ -108,3 +108,26 @@ def graph_builder_line(graph):
         bbox_to_anchor = (1, 1),
         )
     return plt.show()
+
+
+def graph_builder_carburants(data_frame, name, legend1, legend2, color1, color2, color3):
+    axes = data_frame.plot(
+        color = [color1, color2, color3])
+    fig = axes.get_figure()
+    plt.axhline(0, color = 'k')
+    # axes.xaxis(data_frame['annee'])
+    axes.legend(
+        bbox_to_anchor = (legend1, legend2),
+        )
+    return plt.show(), fig.savefig('C:/Users/thomas.douenne/Documents/data/graphs_transports/{}.png'.format(name))
+
+
+def graph_builder_carburants_no_color(data_frame, name, legend1, legend2):
+    axes = data_frame.plot()
+    fig = axes.get_figure()
+    plt.axhline(0, color = 'k')
+    # axes.xaxis(data_frame['annee'])
+    axes.legend(
+        bbox_to_anchor = (legend1, legend2),
+        )
+    return plt.show(), fig.savefig('C:/Users/thomas.douenne/Documents/data/graphs_transports/{}.png'.format(name))
