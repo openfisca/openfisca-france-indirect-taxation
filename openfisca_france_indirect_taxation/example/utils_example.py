@@ -110,9 +110,9 @@ def graph_builder_line(graph):
     return plt.show()
 
 
-def graph_builder_carburants(data_frame, name, legend1, legend2, color1, color2, color3):
+def graph_builder_carburants(data_frame, name, legend1, legend2, color1, color2, color3, color4):
     axes = data_frame.plot(
-        color = [color1, color2, color3])
+        color = [color1, color2, color3, color4])
     fig = axes.get_figure()
     plt.axhline(0, color = 'k')
     # axes.xaxis(data_frame['annee'])
