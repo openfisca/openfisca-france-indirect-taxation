@@ -39,6 +39,6 @@ graph_builder_carburants_no_color(depenses_menages_transports[u'Dépenses carbur
 print 'Evolution de la part des carburants et des transports dans les dépenses totales des ménages'
 graph_builder_carburants(
     depenses_menages_transports[[u'part transports dépenses totales'] + [u'part carburants dépenses totales']],
-    'part transports depenses menages', 1, 0.65, 'midnightblue', 'turquoise', 'blue')
+    'part transports depenses menages', 1, 0.65, 'midnightblue', 'turquoise', 'blue', None)
 
 # Evolution de la part de la TICPE dans les dépenses des ménages : besoin de parser les barèmes
