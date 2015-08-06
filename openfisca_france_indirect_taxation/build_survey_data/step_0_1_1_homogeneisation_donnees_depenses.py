@@ -232,6 +232,18 @@ les deux premiers (entre 01 et 12) correspondent à ces postes agrégés de la C
         raise()
     return normalized_code
 
+##########################
+
+import pkg_resources
+
+
+default_config_files_directory = os.path.join(
+    pkg_resources.get_distribution('openfisca-france-indirect-taxation').location)
+print default_config_files_directory
+os.listdir(default_config_files_directory)
+
+##########################
+
 
 def get_transfert_data_frames(year = None):
     assert year is not None
@@ -247,7 +259,8 @@ def get_transfert_data_frames(year = None):
     parametres_fiscalite_file_path = os.path.join(directory_path, "Parametres fiscalite indirecte.xls")
     matrice_passage_data_frame = pandas.read_excel(matrice_passage_file_path)
     if year == 2011:
-        matrice_passage_data_frame['poste2011'] = matrice_passage_data_frame['poste2011'].apply(lambda x: int(x.replace('c', '').lstrip('0')))
+        matrice_passage_data_frame['poste2011'] = \
+            matrice_passage_data_frame['poste2011'].apply(lambda x: int(x.replace('c', '').lstrip('0')))
     parametres_fiscalite_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "categoriefiscale")
     selected_parametres_fiscalite_data_frame = \
         parametres_fiscalite_data_frame[parametres_fiscalite_data_frame.annee == year]
