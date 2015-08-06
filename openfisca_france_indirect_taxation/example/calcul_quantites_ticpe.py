@@ -13,12 +13,21 @@ from openfisca_france_indirect_taxation.model.base import tax_from_expense_inclu
 from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame
 from ipp_macro_series_parser.agregats_transports.transports_cleaner import g2_1, g_3a
 from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_mensuel_carburants_90_15
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import date_to_vag
 
+# Match prices with vag :
+
+prix_mensuel_carburants_90_15[['annee'] + ['mois']] = prix_mensuel_carburants_90_15[['annee'] + ['mois']].astype(str)
+prix_mensuel_carburants_90_15['date'] = \
+    prix_mensuel_carburants_90_15['annee'] + '_' + prix_mensuel_carburants_90_15['mois']
+
+prix_mensuel_carburants_90_15['vag'] = prix_mensuel_carburants_90_15['date'].map(date_to_vag)
+del prix_mensuel_carburants_90_15['date']
 
 # pourcentage_parc_i: g2_1
 # pourcentage_conso_i: g_3a
 
-for year in [2011]:
+for year in [2000]:
     aggregates_data_frame = get_input_data_frame(year)
 
     # Get scalar values from aggregates:
