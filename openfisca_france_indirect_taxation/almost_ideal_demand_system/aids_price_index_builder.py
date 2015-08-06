@@ -11,6 +11,7 @@ import pandas as pd
 import datetime as dt
 
 import os
+import pkg_resources
 from ConfigParser import SafeConfigParser
 from openfisca_france_data import default_config_files_directory as config_files_directory
 
@@ -33,11 +34,12 @@ config_local_ini = os.path.join(config_files_directory, 'config_local.ini')
 config_ini = os.path.join(config_files_directory, 'config.ini')
 parser.read([config_ini, config_local_ini])
 
-directory_path = os.path.normpath(
-    parser.get("openfisca_france_indirect_taxation", "assets")
+default_config_files_directory = os.path.join(
+    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+indice_prix_mensuel_98_2015 = pd.read_csv(
+    os.path.join(default_config_files_directory,
+    'openfisca_france_indirect_taxation\\assets\\indice_prix_mensuel_98_2015.csv'), sep =';', decimal = ','
     )
-indice_prix_mensuel_98_2015 = pd.read_csv(os.path.join(directory_path, "indice_prix_mensuel_98_2015.csv"),
-    sep =';', decimal = ',')
 
 indice_prix_mensuel_98_2015 = indice_prix_mensuel_98_2015.astype(str)
 

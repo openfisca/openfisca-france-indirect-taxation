@@ -33,7 +33,7 @@ import os
 import logging
 import pandas
 from ConfigParser import SafeConfigParser
-import numpy
+import pkg_resources
 
 from openfisca_france_data.temporary import temporary_store_decorator
 from openfisca_france_data import default_config_files_directory as config_files_directory
@@ -113,11 +113,16 @@ def get_transfert_data_frames(year = None):
     config_local_ini = os.path.join(config_files_directory, 'config_local.ini')
     config_ini = os.path.join(config_files_directory, 'config.ini')
     parser.read([config_ini, config_local_ini])
-    directory_path = os.path.normpath(
-        parser.get("openfisca_france_indirect_taxation", "assets")
+    default_config_files_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    matrice_passage_file_path = os.path.join(
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation\\assets\\Matrice passage {}-COICOP.xls'.format(year)
         )
-    matrice_passage_file_path = os.path.join(directory_path, "Matrice passage {}-COICOP.xls".format(year))
-    parametres_fiscalite_file_path = os.path.join(directory_path, "Parametres fiscalite indirecte.xls")
+    parametres_fiscalite_file_path = os.path.join(
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation\\assets\\Parametres fiscalite indirecte.xls'
+        )
     matrice_passage_data_frame = pandas.read_excel(matrice_passage_file_path)
     parametres_fiscalite_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "categoriefiscale")
     # print parametres_fiscalite_data_frame

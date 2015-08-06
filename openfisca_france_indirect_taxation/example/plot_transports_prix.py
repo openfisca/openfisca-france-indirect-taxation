@@ -8,7 +8,9 @@ Created on Thu Jul 23 17:26:44 2015
 from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_mensuel_carburants_90_15
 from openfisca_france_indirect_taxation.example.utils_example import graph_builder_carburants
 
-prix_mensuel_carburants_90_15 = prix_mensuel_carburants_90_15.set_index('annee')
+prix_mensuel_carburants_90_15[['annee'] + ['mois']] = prix_mensuel_carburants_90_15[['annee'] + ['mois']].astype(str)
+prix_mensuel_carburants_90_15['date'] = prix_mensuel_carburants_90_15['annee'] + '_' + prix_mensuel_carburants_90_15['mois']
+prix_mensuel_carburants_90_15 = prix_mensuel_carburants_90_15.set_index('date')
 
 prix_mensuel_carburants_90_15['taux_implicite_ticpe_diesel'] = (
     (prix_mensuel_carburants_90_15['diesel_ttc'] - prix_mensuel_carburants_90_15['diesel_ht']) /

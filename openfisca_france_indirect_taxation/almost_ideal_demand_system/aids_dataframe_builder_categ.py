@@ -19,7 +19,7 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_in
 
 data_frame_for_reg = None
 for year in [2000, 2005, 2011]:
-    aggregates_data_frame = get_input_data_frame(2011)
+    aggregates_data_frame = get_input_data_frame(year)
     aggregates_data_frame['depenses_tot'] = 0
     produits = [column for column in aggregates_data_frame.columns if column.isdigit()]
     aggregates_data_frame['depenses_tot'] = aggregates_data_frame[produits].sum(axis=1)
@@ -234,7 +234,7 @@ for year in [2000, 2005, 2011]:
         data_frame['d{}'.format(i)] = 1
         data_frame.loc[data_frame['w{}'.format(i)] == 0, 'd{}'.format(i)] = 0
 
-    data_frame.to_csv('data_frame_r_{}.csv'.format(year), sep = ',')
+    # data_frame.to_csv('data_frame_r_{}.csv'.format(year), sep = ',')
 
     if data_frame_for_reg is not None:
         data_frame_for_reg = pd.concat([data_frame_for_reg, data_frame])
@@ -248,6 +248,6 @@ for i in range(1, 10):
 
 data_frame_for_reg['part_depenses_tot'] = data_frame_for_reg['depenses_tot'] / sum(data_frame_for_reg['depenses_tot'])
 
-data_frame_for_reg.to_csv('data_frame_for_stata.csv', sep = ',')
+# data_frame_for_reg.to_csv('data_frame_for_stata.csv', sep = ',')
 small_df = data_frame_for_reg[data_frame_for_reg['ident_men'] < 1000]
-small_df.to_csv('small_df_quaids.csv', sep = ',')
+# small_df.to_csv('small_df_quaids.csv', sep = ',')

@@ -151,9 +151,9 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
         for variable in ['age{}'.format(i) for i in range(3, 14)] + ['agecj', 'agfinetu', 'agfinetu_cj', 'nenfhors']:
             data_frame.loc[data_frame[variable].isnull(), variable] = 0
     if year_data == 2011:
-        for var in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence', 'rev_disp_loyerimput',
-                    'rev_disponible', 'ratio_loyer_impute', 'loyer_impute', 'ratio_revenus']:
-            data_frame.loc[data_frame[var].isnull(), var] = 0
+        for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
+        'rev_disp_loyerimput', 'rev_disponible', 'ratio_loyer_impute', 'loyer_impute', 'ratio_revenus']:
+            data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
 
     data_frame.index.name = "ident_men"
     # TODO: Homogénéiser: soit faire en sorte que ident_men existe pour toutes les années
