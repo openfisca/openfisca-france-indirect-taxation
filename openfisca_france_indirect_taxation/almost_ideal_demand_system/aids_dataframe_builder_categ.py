@@ -19,7 +19,7 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_in
 
 data_frame_for_reg = None
 for year in [2000, 2005, 2011]:
-    aggregates_data_frame = get_input_data_frame(2011)
+    aggregates_data_frame = get_input_data_frame(year)
     aggregates_data_frame['depenses_tot'] = 0
     produits = [column for column in aggregates_data_frame.columns if column.isdigit()]
     aggregates_data_frame['depenses_tot'] = aggregates_data_frame[produits].sum(axis=1)
