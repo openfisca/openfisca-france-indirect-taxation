@@ -31,8 +31,6 @@ import os
 import logging
 import pkg_resources
 
-from ConfigParser import SafeConfigParser
-
 import pandas
 
 
@@ -133,16 +131,13 @@ def get_cn_data_frames(year_data = None, year_calage = None):
     if year_calage is None:
         year_calage = year_data
 
-    parser = SafeConfigParser()
-    config_local_ini = os.path.join(config_files_directory, 'config_local.ini')
-    config_ini = os.path.join(config_files_directory, 'config.ini')
-    parser.read([config_ini, config_local_ini])
-
     default_config_files_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parametres_fiscalite_file_path = os.path.join(
         default_config_files_directory,
-        'openfisca_france_indirect_taxation\\assets\\Parametres fiscalite indirecte.xls'
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'Parametres fiscalite indirecte.xls'
         )
 
     masses_cn_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "consommation_CN")
@@ -238,21 +233,19 @@ def build_revenus_cales(temporary_store = None, year_calage = None, year_data = 
     assert year_data is not None
 
     # Masses de calage provenant de la comptabilité nationale
-    parser = SafeConfigParser()
-    config_local_ini = os.path.join(config_files_directory, 'config_local.ini')
-    config_ini = os.path.join(config_files_directory, 'config.ini')
-    parser.read([config_ini, config_local_ini])
 
     default_config_files_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parametres_fiscalite_file_path = os.path.join(
         default_config_files_directory,
-        'openfisca_france_indirect_taxation\\assets\\Parametres fiscalite indirecte.xls'
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'Parametres fiscalite indirecte.xls',
         )
 
     masses_cn_revenus_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "revenus_CN")
 
-# ne pas oublier d'enlever l'accent à "loyers imputés" dans le document excel Parametres fiscalité indirecte
+    # Ne pas oublier d'enlever l'accent à "loyers imputés" dans le document excel Parametres fiscalité indirecte
 
     masses_cn_revenus_data_frame.rename(
         columns = {
