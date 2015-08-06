@@ -29,6 +29,7 @@ from __future__ import division
 
 import os
 import logging
+import pkg_resources
 
 from ConfigParser import SafeConfigParser
 
@@ -137,11 +138,13 @@ def get_cn_data_frames(year_data = None, year_calage = None):
     config_ini = os.path.join(config_files_directory, 'config.ini')
     parser.read([config_ini, config_local_ini])
 
-    directory_path = os.path.normpath(
-        parser.get("openfisca_france_indirect_taxation", "assets")
+    default_config_files_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    parametres_fiscalite_file_path = os.path.join(
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation\\assets\\Parametres fiscalite indirecte.xls'
         )
 
-    parametres_fiscalite_file_path = os.path.join(directory_path, "Parametres fiscalite indirecte.xls")
     masses_cn_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "consommation_CN")
     if year_data != year_calage:
         masses_cn_12postes_data_frame = masses_cn_data_frame.loc[:, ['Code', year_data, year_calage]]
@@ -240,11 +243,13 @@ def build_revenus_cales(temporary_store = None, year_calage = None, year_data = 
     config_ini = os.path.join(config_files_directory, 'config.ini')
     parser.read([config_ini, config_local_ini])
 
-    directory_path = os.path.normpath(
-        parser.get("openfisca_france_indirect_taxation", "assets")
+    default_config_files_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    parametres_fiscalite_file_path = os.path.join(
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation\\assets\\Parametres fiscalite indirecte.xls'
         )
 
-    parametres_fiscalite_file_path = os.path.join(directory_path, "Parametres fiscalite indirecte.xls")
     masses_cn_revenus_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "revenus_CN")
 
 # ne pas oublier d'enlever l'accent à "loyers imputés" dans le document excel Parametres fiscalité indirecte
