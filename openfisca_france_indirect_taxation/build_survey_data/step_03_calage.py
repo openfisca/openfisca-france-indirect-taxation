@@ -200,7 +200,7 @@ def build_depenses_calees(temporary_store = None, year_calage = None, year_data 
     depenses_calees = calage_viellissement_depenses(year_data, year_calage, depenses, masses)
     temporary_store['depenses_calees_{}'.format(year_calage)] = depenses_calees
 
-    # Deintion d'une fonction pratique
+    # Defintion d'une fonction pratique
     def select_gros_postes(coicop):
         try:
             coicop = unicode(coicop)

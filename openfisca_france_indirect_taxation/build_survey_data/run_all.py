@@ -88,8 +88,6 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
 
     temporary_store["menage_consumption_by_categorie_fiscale_{}".format(year_calage)] = categorie_fiscale_data_frame
 
-    temporary_store["menage_consumption_by_categorie_fiscale_{}".format(year_calage)] = categorie_fiscale_data_frame
-
     depenses_calees_by_grosposte = temporary_store["depenses_calees_by_grosposte_{}".format(year_calage)]
     depenses_calees_by_grosposte.index = depenses_calees_by_grosposte.index.astype(ident_men_dtype)
     depenses_calees = temporary_store["depenses_calees_{}".format(year_calage)]
@@ -116,8 +114,7 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
 
     temporary_store.close()
 
-    # Concaténation des résults de ces 4 étapes
-
+    # Concaténation des résultas de ces 4 étapes
     preprocessed_data_frame_by_name = dict(
         revenus = revenus,
         vehicule = vehicule,
