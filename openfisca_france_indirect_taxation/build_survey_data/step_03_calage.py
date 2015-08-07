@@ -104,8 +104,8 @@ def get_bdf_data_frames(temporary_store = None, year_data = None):
     assert year_data is not None
     assert temporary_store is not None
     '''
-    Fonction qui récupère les dépenses de budget des familles
-    et les agrège par poste (en tenant compte des poids respectifs des ménages)
+    Récupère les dépenses de budget des familles et les agrège par poste
+    (en tenant compte des poids respectifs des ménages)
     '''
     depenses_by_grosposte = temporary_store['depenses_by_grosposte_{}'.format(year_data)]
     grospostes_list = set(depenses_by_grosposte.columns)

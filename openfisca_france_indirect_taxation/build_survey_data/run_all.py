@@ -132,7 +132,7 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
             name, preprocessed_data_frame.index.dtype)
 
     data_frame = pandas.concat(
-        [revenus, vehicule, categorie_fiscale_data_frame, menage, depenses_calees, depenses_calees_by_grosposte],
+        preprocessed_data_frame_by_name.values(),
         axis = 1,
         )
 
