@@ -1,0 +1,49 @@
+Title: 'IPP tax and benefit tables: indirect taxation'
+Description: This file presents some parameters of French legislation in order to compute indirect taxation (mostly VAT rates
+  and tobacco excise tax at this stage). All legal references such as law and decrees are indicated as much as possible. These
+  tax parameters are used in TAXIPP, the IPP micro-simulation model. The first (hidden) lign of each worksheet of the file
+  indicates the names of the parameters used in TAXIPP.
+Table of Content:
+  I. Value added tax (VAT):
+    tx-tva: TVA rates (1968-2015)
+    tva-par-produit: TVA by product
+  II. Excises on tobacco:
+    taux-normaux-tabac: Tobacco usual rates
+    taux-specifique-tabac: Tobacco specific rates
+  III. Taxes and excises on energy products:
+    produits-energetiques-a: TICPE - Energy products a
+    produits-energetiques-b: TICPE - Energy products b
+    produits-energetiques-c: TICPE - Energy products c
+    produits-energetiques-d: TICPE - Energy products d
+    produits-energetiques-e: TICPE - Energy products e
+    tgap-carburants: Tax on polluting activities - fuel
+  IV. Excises on alcohol and other drinks:
+    alcools-fermentes: Fermented alcohols (wine, cider, etc.)
+    bieres: Biers
+    alcool-produits-intermediaires: Intermediary products (liquor wine, etc.)
+    autres-alcools: Other alcohols (specific rhums, etc.)
+    premix-contribution-secu: Premix (alcohol plus soda)
+    boissons-sucrees-energisantes: Energy drinks, sweet or sweetened beverages
+    alcool-cotisation-secu: Alcoholic beverage contribution on Social Security
+  V. Taxes on insurances:
+    tsca: Taxes on insurance contracts
+    fgao: Tax on guarantee fund for compulsory insurance
+Notes: |-
+  Quote this source:
+  Barèmes IPP: taxation indirecte, Institut des politiques publiques, Juillet 2015
+
+  Authors:
+  Roy Dauvergne, Thomas Douenne, Malka Guillot, Quentin Lafféter et Olivier Meslin
+
+  Contacts
+  malka.guillot@ipp.eu
+Source Data:
+  Producer: Institut des politiques publiques
+  Format: XLS
+  URL: http://www.ipp.eu/en/tools/ipp-tax-and-benefit-tables/
+Converter:
+  URL: https://git.framasoft.org/french-tax-and-benefit-tables/ipp-tax-and-benefit-tables-converters
+Generated Data:
+  Format: YAML
+  URL: https://git.framasoft.org/french-tax-and-benefit-tables/ipp-tax-and-benefit-tables-yaml-raw
+License: Open Licence <http://www.etalab.gouv.fr/licence-ouverte-open-licence>

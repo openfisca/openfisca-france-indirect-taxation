@@ -1,0 +1,52 @@
+Titre: Taxe sur les fonds de garantie des assurances obligatoires (FGAO)
+Titre court: FGAO
+Noms TaxIPP:
+  Contribution des assurés (en pourcentage des primes): fgao_contrib_assures
+  Cotisation des responsables d'accidents non-assurés (en pourcentage des indemnités restant à leur charge), taux normal: fgao_respo_accidents_non_assures_tx_normal
+  Cotisation des responsables d'accidents non-assurés (en pourcentage des indemnités restant à leur charge), taux réduit: fgao_respo_accidents_non_assures_tx_reduit
+  Contributions des entreprises d'assurances au titre du 1° de l'article R-421-27 *: fgao_contrib_assurances
+Valeurs:
+- Date d'effet: 2010-08-01
+  Contribution des assurés (en pourcentage des primes): 1.2 %
+  Cotisation des responsables d'accidents non-assurés (en pourcentage des indemnités restant à leur charge), taux normal: 10.0
+    %
+  Cotisation des responsables d'accidents non-assurés (en pourcentage des indemnités restant à leur charge), taux réduit: 5.0
+    %
+  Contributions des entreprises d'assurances au titre du 1° de l'article R-421-27 *: 1.0 %
+  Références législatives: Arrêté du 09/06/2010 fixant contribution FGAO
+  Parution au JO: '2010-07-08'
+- Date d'effet: 2008-01-01
+  Contribution des assurés (en pourcentage des primes): 0.6 %
+  Cotisation des responsables d'accidents non-assurés (en pourcentage des indemnités restant à leur charge), taux normal: 10.0
+    %
+  Cotisation des responsables d'accidents non-assurés (en pourcentage des indemnités restant à leur charge), taux réduit: 5.0
+    %
+  Contributions des entreprises d'assurances au titre du 1° de l'article R-421-27 *: 1.0 %
+  Références législatives: Arrêté du 07/11/2007 fixant contribution FGAO
+  Parution au JO: '2007-11-14'
+- Date d'effet: 2004-08-05
+  Contribution des assurés (en pourcentage des primes): 0.1 %
+  Cotisation des responsables d'accidents non-assurés (en pourcentage des indemnités restant à leur charge), taux normal: 10.0
+    %
+  Cotisation des responsables d'accidents non-assurés (en pourcentage des indemnités restant à leur charge), taux réduit: 5.0
+    %
+  Contributions des entreprises d'assurances au titre du 1° de l'article R-421-27 *: 1.0 %
+  Références législatives: Arrêté du 16/07/2004
+  Parution au JO: '2004-08-05'
+Description: |-
+  NB : données renseignées dans l'article A421-3 du code des assurances
+  * En % de la totalité des charges de la section relative aux opérations résultant de la défaillance d'entreprises d'assurance
+WARNINGS:
+  Valeurs:
+    0:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    1:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    2:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"

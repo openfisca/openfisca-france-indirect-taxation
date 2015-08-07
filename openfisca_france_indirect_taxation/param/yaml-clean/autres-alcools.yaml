@@ -1,0 +1,195 @@
+Titre: Autres alcools (rhum, bouilleurs de cru, etc.)
+Titre court: Autres alcools
+Noms TaxIPP:
+  Rhum des DOM: taxe_rhum_dom
+  Autres alcools: taxe_autres_alcools
+  Bouilleurs de cru t.q. définis art 317: taxe_bouilleurs_cru
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: taxe_ajout_vins
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: taxe_aperitifs_base_divers_alcools
+Valeurs:
+- Date d'effet: 2014-01-01
+  Rhum des DOM: 859.79 EUR
+  Autres alcools: 1718.61 EUR
+  Bouilleurs de cru t.q. définis art 317: 859.31 EUR
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+  Références législatives: Arrêté du 29/12/2013
+- Date d'effet: 2013-06-07
+  Rhum des DOM: 845.0 EUR
+  Autres alcools: 1689.05 EUR
+  Bouilleurs de cru t.q. définis art 317: 844.53 EUR
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+- Date d'effet: 2013-01-01
+  Rhum des DOM: 918.8 EUR
+  Autres alcools: 1689.05 EUR
+  Bouilleurs de cru t.q. définis art 317: 844.53 EUR
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+  Références législatives: Arrêté du 15/12/2012 (tarifs accises alcools 2013)
+  Parution au JO: '2012-12-23'
+- Date d'effet: 2012-05-01
+  Rhum des DOM: 903.0 EUR
+  Autres alcools: 1660.0 EUR
+  Bouilleurs de cru t.q. définis art 317: 830.0 EUR
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+  Références législatives: Loi 2012-354 du 14/03/2012 (LFR pour 2012)
+  Parution au JO: '2012-03-15'
+- Date d'effet: 2012-01-01
+  Rhum des DOM: 872.13 EUR
+  Autres alcools: 1660.0 EUR
+  Bouilleurs de cru t.q. définis art 317: 830.0 EUR
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+  Références législatives: Arrêté du 22/12/2011 (tarifs accises alcools 2012)
+  Parution au JO: '2011-12-30'
+- Date d'effet: 2011-12-23
+  Rhum des DOM: 859.24 EUR
+  Autres alcools: 1660.0 EUR
+  Bouilleurs de cru t.q. définis art 317: 830.0 EUR
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+  Références législatives: Loi 2011-1906 du 21/12/2011 (LFSS pour 2012)
+  Parution au JO: '2011-12-22'
+- Date d'effet: 2010-11-21
+  Rhum des DOM: 859.24 EUR
+  Autres alcools: 1514.47 EUR
+  Bouilleurs de cru t.q. définis art 317: 757.24 EUR
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+  Références législatives: Arrêté du 12/10/2010
+  Parution au JO: '2010-11-20'
+- Date d'effet: 2010-05-01
+  Rhum des DOM: 858.38 EUR
+  Autres alcools: 1512.96 EUR
+  Bouilleurs de cru t.q. définis art 317: 756.48 EUR
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+  Références législatives: Décret 2010-421 du 27/04/2010
+  Parution au JO: '2010-04-30'
+- Date d'effet: 2009-04-10
+  Rhum des DOM: 835.0 EUR
+  Autres alcools: 1471.75 EUR
+  Bouilleurs de cru t.q. définis art 317: 735.88 EUR
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+  Références législatives: Décret 2009-389 du 07/04/2009
+  Parution au JO: '2009-04-09'
+- Date d'effet: 2002-03-31
+  Rhum des DOM: 835.0 EUR
+  Autres alcools: 1450.0 EUR
+  Bouilleurs de cru t.q. définis art 317: 725.0 EUR
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+- Date d'effet: 1997-01-01
+  Rhum des DOM: 5474.0 FRF
+  Autres alcools: 9510.0 FRF
+  Bouilleurs de cru t.q. définis art 317: nc
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+  Références législatives: Loi 96-1160 du 27/12/1996 (LFSS pour 1997)
+  Parution au JO: '1996-12-29'
+- Date d'effet: 1993-08-18
+  Rhum des DOM: 5215.0 FRF
+  Autres alcools: 9060.0 FRF
+  Bouilleurs de cru t.q. définis art 317: nc
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+- Date d'effet: 1993-02-01
+  Rhum des DOM: 4495.0 FRF
+  Autres alcools: 7810.0 FRF
+  Bouilleurs de cru t.q. définis art 317: nc
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: nc
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: nc
+  Références législatives: Loi 92-1476 du 31/12/1992 (LFR pour 1992), art. 32
+  Parution au JO: '1993-01-04'
+- Date d'effet: 1987-02-01
+  Rhum des DOM: 4495.0 FRF
+  Autres alcools: 7810.0 FRF
+  Bouilleurs de cru t.q. définis art 317: nc
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: 2595.0 FRF
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: 6930.0 FRF
+- Date d'effet: 1982-01-01
+  Rhum des DOM: 4405.0 FRF
+  Autres alcools: 7655.0 FRF
+  Bouilleurs de cru t.q. définis art 317: nc
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: 2545.0 FRF
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: 6795.0 FRF
+  Références législatives: Loi 81-1160 du 30/12/1981 (LF pour 1982)
+  Parution au JO: '1981-12-31'
+- Date d'effet: 1981-02-01
+  Rhum des DOM: 4150.0 FRF
+  Autres alcools: 8220.0 FRF
+  Bouilleurs de cru t.q. définis art 317: nc
+  Quantités ajoutées pour la préparation des vins mousseux et des vins doux naturels mentionnés à l'article 417: 2395.0 FRF
+  Apéritifs à base de vin, cidre, poiré, vermouth, vins de liqueurs et assimilés: 6400.0 FRF
+  Références législatives: Loi 80-1094 du 30/12/1980 (LF pour 1981)
+  Parution au JO: '1980-12-31'
+Description: 'NB : données renseignées dans l''article 403 du code général des impôts'
+WARNINGS:
+  Valeurs:
+    0:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    1:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    2:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    3:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    4:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    5:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    6:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    7:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    8:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    9:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    10:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    11:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    12:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    13:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    14:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    15:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"

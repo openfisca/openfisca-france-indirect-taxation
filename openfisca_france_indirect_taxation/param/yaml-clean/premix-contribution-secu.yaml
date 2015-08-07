@@ -1,0 +1,41 @@
+Titre: Prémix (mélanges alcool et soda)
+Titre court: Prémix contribution sécu
+Noms TaxIPP:
+  Prémix (€ par décilitre d'alcool pur): taxe_premix_decil_pur
+  Prémix (€ par décilitre ): taxe_premix_decil_tot
+Valeurs:
+- Date d'effet: 2005-01-01
+  Prémix (€ par décilitre d'alcool pur): 11.0 EUR
+  Références législatives: Loi 2004-806 du 9/08/2004
+  Parution au JO: '1101-01-01'
+- Date d'effet: 2002-03-31
+  Prémix (€ par décilitre d'alcool pur): 5.5 EUR
+- Date d'effet: 1999-03-31
+  Prémix (€ par décilitre d'alcool pur): 36.4 FRF
+  Références législatives: Loi 98-1194 du 23/12/1998 (LFSS pour 1999)
+  Parution au JO: '2701-01-01'
+- Date d'effet: 1997-03-31
+  Prémix (€ par décilitre ): 1.5 FRF
+  Références législatives: Loi 96-1160 du 27/12/1996 (LFSS pour 1997)
+  Parution au JO: '2901-01-01'
+Description: |-
+  NB : données renseignées dans l'article 1613 bis du code général des impôts
+  Définition prémix : mélange pré-fait d'un alcool et d'une boisson non alcoolisée, le plus souvent un soda
+WARNINGS:
+  Valeurs:
+    0:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    1:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    2:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    3:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"

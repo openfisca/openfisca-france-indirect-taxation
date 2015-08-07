@@ -1,0 +1,197 @@
+Titre: Taxe spéciale sur les conventions d'assurance (TSCA)
+Titre court: TSCA
+Noms TaxIPP:
+  Assurances incendie pour les particuliers: taxe_assu_incendie_particuliers
+  Assurances incendie risques agricoles non exonérés: taxe_assu_incendie_agricole
+  Assurances incendie souscrites auprès des caisses départementales: taxe_assu_incendie_caisse_dep
+  Assurance pertes d'exploitations dues à incendie industrie etc.: taxe_assu_incendie_industrie
+  Contrats d'assurance maladie individuelles et collectives, "solidaires et responsables" (2 bis): taxe_assu_maladie_solidaire_responsable
+  Contrats d'assurance maladie individuelles et collectives, cas général (2 ter): taxe_assu_maladie_autres
+  Assurance bateaux de sport ou de plaisance: taxe_assu_bateaux_sport_plaisance
+  Assurance risques non exonérés navigation fluviale ou maritimes, tous types de risque navigation aérienne: taxe_assu_navig_fluviale_aerienne
+  Assurances vie et assimilées: taxe_assu_vie_et_assimiliees
+  Rente viagère sous conditions: taxe_rente_viagere_cond
+  Assurances de crédit à l'exportation: taxe_assu_credit_export
+  Contribution sécu assurances automobiles: contrib_secu_assu_auto
+  Assurance pour les véhicules terrestres à moteurs (pour les particuliers): taxe_assu_vtm_particuliers
+  Assurances de protection juridique art L127-1 code des assurances et L224-1 code de la mutualité: taxe_assu_protec_juridique
+  Assurance véhicules terrestres à moteur lourds, du L211-1 code des assurances: taxe_assu_vtm_lourds
+  Assurances véhicules terrestres à moteur L211-1 autres: taxe_assu_vtm_autres
+  Autres assurances: taxe_autres_assu
+Valeurs:
+- Date d'effet: 2016-01-01
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 7.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 7.0 %
+  Assurance bateaux de sport ou de plaisance: 19.0 %
+  Contribution sécu assurances automobiles: 15.0 %
+  Assurance pour les véhicules terrestres à moteurs (pour les particuliers): 18.0 %
+  Assurances de protection juridique art L127-1 code des assurances et L224-1 code de la mutualité: 11.6 %
+  Assurance véhicules terrestres à moteur lourds, du L211-1 code des assurances: 15.0 %
+  Assurances véhicules terrestres à moteur L211-1 autres: 33.0 %
+  Autres assurances: 9.0 %
+  Références législatives: Loi 2014-1554 du 22/12/2014 (LFSS pour 2015) - art. 22
+  Journal Officiel: '2014-12-24'
+- Date d'effet: 2015-01-01
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 7.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 7.0 %
+  Contrats d'assurance maladie individuelles et collectives, "solidaires et responsables" (2 bis): 7.0 %
+  Contrats d'assurance maladie individuelles et collectives, cas général (2 ter): 14.0 %
+  Assurance bateaux de sport ou de plaisance: 19.0 %
+  Contribution sécu assurances automobiles: 15.0 %
+  Assurance pour les véhicules terrestres à moteurs (pour les particuliers): 18.0 %
+  Assurances de protection juridique art L127-1 code des assurances et L224-1 code de la mutualité: 11.6 %
+  Autres assurances: 9.0 %
+  Références législatives: Loi 2014-1654 du 29/12/2014 (LF pour 2015)
+  Journal Officiel: '2014-12-30'
+- Date d'effet: 2014-01-01
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 7.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 7.0 %
+  Contrats d'assurance maladie individuelles et collectives, "solidaires et responsables" (2 bis): 7.0 %
+  Contrats d'assurance maladie individuelles et collectives, cas général (2 ter): 14.0 %
+  Assurance bateaux de sport ou de plaisance: 19.0 %
+  Contribution sécu assurances automobiles: 15.0 %
+  Assurance pour les véhicules terrestres à moteurs (pour les particuliers): 18.0 %
+  Autres assurances: 9.0 %
+  Références législatives: Loi 2013-1203 du 23/12/2013 (LFSS pour 2014) - art. 19
+  Journal Officiel: '2013-12-24'
+- Date d'effet: 2011-10-01
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 7.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 7.0 %
+  Contrats d'assurance maladie individuelles et collectives, "solidaires et responsables" (2 bis): 7.0 %
+  Contrats d'assurance maladie individuelles et collectives, cas général (2 ter): 9.0 %
+  Assurance bateaux de sport ou de plaisance: 19.0 %
+  Contribution sécu assurances automobiles: 15.0 %
+  Assurance pour les véhicules terrestres à moteurs (pour les particuliers): 18.0 %
+  Autres assurances: 9.0 %
+  Références législatives: Loi 2011-1117 du 19/09/2011 (LF rectificative pour 2011) - art. 9
+  Journal Officiel: '2011-09-20'
+- Date d'effet: 2011-01-01
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 7.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 7.0 %
+  Contrats d'assurance maladie individuelles et collectives, "solidaires et responsables" (2 bis): 3.5 %
+  Contrats d'assurance maladie individuelles et collectives, cas général (2 ter): 7.0 %
+  Assurance bateaux de sport ou de plaisance: 19.0 %
+  Contribution sécu assurances automobiles: 15.0 %
+  Assurance pour les véhicules terrestres à moteurs (pour les particuliers): 18.0 %
+  Autres assurances: 9.0 %
+  Références législatives: Loi 2010-1657 du 29/12/2010 (LF pour 2011) - art. 21
+  Journal Officiel: '2010-12-30'
+- Date d'effet: 2001-12-26
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 7.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 7.0 %
+  Contrats d'assurance maladie individuelles et collectives, "solidaires et responsables" (2 bis): 0.0 %
+  Contrats d'assurance maladie individuelles et collectives, cas général (2 ter): 7.0 %
+  Assurance bateaux de sport ou de plaisance: 19.0 %
+  Contribution sécu assurances automobiles: 15.0 %
+  Assurance pour les véhicules terrestres à moteurs (pour les particuliers): 18.0 %
+  Autres assurances: 9.0 %
+  Journal Officiel: nc
+- Date d'effet: 1994-09-02
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 7.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 7.0 %
+  Contrats d'assurance maladie individuelles et collectives, "solidaires et responsables" (2 bis): 0.0 %
+  Contrats d'assurance maladie individuelles et collectives, cas général (2 ter): 7.0 %
+  Assurance bateaux de sport ou de plaisance: 19.0 %
+  Assurance pour les véhicules terrestres à moteurs (pour les particuliers): 18.0 %
+  Autres assurances: 9.0 %
+  Références législatives: Loi 2001-1246 du 21/12/2001 (LFSS pour 2002)
+  Journal Officiel: '2001-12-26'
+- Date d'effet: 1990-12-30
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 7.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 7.0 %
+  Assurance bateaux de sport ou de plaisance: 19.0 %
+  Assurance pour les véhicules terrestres à moteurs (pour les particuliers): 18.0 %
+  Autres assurances: 9.0 %
+  Journal Officiel: nc
+- Date d'effet: 1989-12-30
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 7.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 7.0 %
+  Assurance bateaux de sport ou de plaisance: 19.0 %
+  Assurance pour les véhicules terrestres à moteurs (pour les particuliers): 7.0 %
+  Autres assurances: 9.0 %
+  Journal Officiel: nc
+- Date d'effet: 1989-01-01
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 7.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 7.0 %
+  Assurance bateaux de sport ou de plaisance: 19.0 %
+  Assurances vie et assimilées: 5.15 %
+  Rente viagère sous conditions: 2.4 %
+  Assurance pour les véhicules terrestres à moteurs (pour les particuliers): 7.0 %
+  Autres assurances: 9.0 %
+  Journal Officiel: nc
+- Date d'effet: 1983-12-30
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 18.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 8.75 %
+  Assurance bateaux de sport ou de plaisance: 19.0 %
+  Assurance risques non exonérés navigation fluviale ou maritimes, tous types de risque navigation aérienne: 4.6 %
+  Assurances vie et assimilées: 5.15 %
+  Rente viagère sous conditions: 2.4 %
+  Assurances de crédit à l'exportation: 0.25 %
+  Assurance pour les véhicules terrestres à moteurs (pour les particuliers): 18.0 %
+  Autres assurances: 9.0 %
+  Journal Officiel: nc
+- Date d'effet: 1980-12-31
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 18.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 8.75 %
+  Assurance bateaux de sport ou de plaisance: 12.0 %
+  Assurance risques non exonérés navigation fluviale ou maritimes, tous types de risque navigation aérienne: 4.8 %
+  Assurances vie et assimilées: 5.15 %
+  Rente viagère sous conditions: 2.4 %
+  Assurances de crédit à l'exportation: 0.25 %
+  Autres assurances: 9.0 %
+  Journal Officiel: nc
+- Date d'effet: 1979-07-01
+  Assurances incendie pour les particuliers: 30.0 %
+  Assurances incendie risques agricoles non exonérés: 18.0 %
+  Assurances incendie souscrites auprès des caisses départementales: 24.0 %
+  Assurance pertes d'exploitations dues à incendie industrie etc.: 8.75 %
+  Assurance bateaux de sport ou de plaisance: 8.75 %
+  Assurance risques non exonérés navigation fluviale ou maritimes, tous types de risque navigation aérienne: 4.8 %
+  Assurances vie et assimilées: 4.8 %
+  Rente viagère sous conditions: 2.4 %
+  Assurances de crédit à l'exportation: 0.25 %
+  Autres assurances: 9.0 %
+  Journal Officiel: nc
+Description: |-
+  Notes :
+  Déductions pour les véhicules de plus de 3,5 tonnes
+  Les assurances dépendance sont exonérées de la TSCA
+  NB : données renseignées dans l'article 1001 du code général des impôts, et L137-6 du code de la sécurité sociale
+ERRORS:
+  Valeurs:
+    0:
+      Journal Officiel: Value is neither a number nor an amount (with a unit)
+    1:
+      Journal Officiel: Value is neither a number nor an amount (with a unit)
+    2:
+      Journal Officiel: Value is neither a number nor an amount (with a unit)
+    3:
+      Journal Officiel: Value is neither a number nor an amount (with a unit)
+    4:
+      Journal Officiel: Value is neither a number nor an amount (with a unit)
+    6:
+      Journal Officiel: Value is neither a number nor an amount (with a unit)

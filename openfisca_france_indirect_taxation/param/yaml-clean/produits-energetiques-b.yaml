@@ -1,0 +1,453 @@
+Titre: TICPE - produits énergétiques b
+Titre court: Produits énergétiques b
+Noms TaxIPP:
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): ticpe_carbu_petrole_lampant_cond
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): ticpe_carbu_petrole_lampant
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): ticpe_carbu_petrole_lampant_autres
+  18 - autres huiles moyennes (hectolitre): ticpe_autres_huiles_moyennes
+  20 - gazole comme carburants sous conditions (hectolitre): ticpe_gazole_cond
+  21 - gazole, fioul domestique (hectolitre): ticpe_fioul_domestique
+Valeurs:
+- Date d'effet: 2016-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): nc
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 34.02 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): 62.74 EUR
+  15 - autres huiles légères (hectolitre): 62.35 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 9.48 EUR
+  16 - pétrole lampant, autre (hectolitre): 45.51 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): nc
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 34.02 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): 45.51 EUR
+  18 - autres huiles moyennes (hectolitre): 45.51 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 12.83 EUR
+  21 - gazole, fioul domestique (hectolitre): 9.63 EUR
+  Références législatives: Loi 2014-1654 du 29/12/2014 (LF pour 2015) - Article 36
+  Parution au JO: '2014-12-30'
+- Date d'effet: 2015-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): nc
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 32.11 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): 60.83 EUR
+  15 - autres huiles légères (hectolitre): 60.64 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 7.57 EUR
+  16 - pétrole lampant, autre (hectolitre): 43.6 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): nc
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 32.11 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): 43.6 EUR
+  18 - autres huiles moyennes (hectolitre): 43.6 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 10.84 EUR
+  21 - gazole, fioul domestique (hectolitre): 7.64 EUR
+  Références législatives: Loi 2014-1654 du 29/12/2014 (LF pour 2015) - Article 36
+  Parution au JO: '2014-12-30'
+- Date d'effet: 2014-04-01
+  13 - carburateurs type essence, sous conditions (hectolitre): nc
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 30.2 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): 58.92 EUR
+  15 - autres huiles légères (hectolitre): 58.92 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 5.66 EUR
+  16 - pétrole lampant, autre (hectolitre): 41.69 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): nc
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 30.2 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): 41.69 EUR
+  18 - autres huiles moyennes (hectolitre): 41.69 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 8.86 EUR
+  21 - gazole, fioul domestique (hectolitre): 5.66 EUR
+  Références législatives: Loi  2013-1278 du 29/12/2013 (LF pour 2014) - Article 32
+  Parution au JO: '2013-12-30'
+- Date d'effet: 2012-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 2.54 EUR
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 30.2 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): 58.92 EUR
+  15 - autres huiles légères (hectolitre): 58.92 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 5.66 EUR
+  16 - pétrole lampant, autre (hectolitre): 41.69 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 2.54 EUR
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 30.2 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): 41.69 EUR
+  18 - autres huiles moyennes (hectolitre): 41.69 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 7.2 EUR
+  21 - gazole, fioul domestique (hectolitre): 5.66 EUR
+  Références législatives: Loi  2011-1977 du 28/12/2011 (LF pour 2012) - Article 21
+  Parution au JO: '2011-12-29'
+- Date d'effet: 2011-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 2.54 EUR
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 30.2 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): 58.92 EUR
+  15 - autres huiles légères (hectolitre): 58.92 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 5.66 EUR
+  16 - pétrole lampant, autre (hectolitre): 41.69 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 2.54 EUR
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 30.2 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): 41.69 EUR
+  18 - autres huiles moyennes (hectolitre): 41.69 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 5.66 EUR
+  21 - gazole, fioul domestique (hectolitre): 5.66 EUR
+  Références législatives: Loi  2010-1657 du 29/12/2010 (LF pour 2011) - Article 138
+  Parution au JO: '2010-12-30'
+- Date d'effet: 2010-03-11
+  13 - carburateurs type essence, sous conditions (hectolitre): 2.54 EUR
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 30.2 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): 58.92 EUR
+  15 - autres huiles légères (hectolitre): 58.92 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 5.66 EUR
+  16 - pétrole lampant, autre (hectolitre): 41.69 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 2.54 EUR
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 30.2 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): 41.69 EUR
+  18 - autres huiles moyennes (hectolitre): 41.69 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 5.66 EUR
+  21 - gazole, fioul domestique (hectolitre): 5.66 EUR
+  Références législatives: Loi  2010-237 du 09/03/2010 (LFR pour 2010) - Articles 4 et 5
+  Parution au JO: '2010-03-10'
+- Date d'effet: 2010-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 2.54 EUR
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 30.2 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): 58.92 EUR
+  15 - autres huiles légères (hectolitre): 58.92 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 5.66 EUR
+  16 - pétrole lampant, autre (hectolitre): 41.69 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 2.54 EUR
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 30.2 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): 41.69 EUR
+  18 - autres huiles moyennes (hectolitre): 41.69 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 5.66 EUR
+  21 - gazole, fioul domestique (hectolitre): 5.66 EUR
+  Références législatives: Loi  2009-1674 du 30/12/2009 (LFR pour 2009) - Article 76
+  Parution au JO: '2009-12-31'
+- Date d'effet: 2009-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 2.54 EUR
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 30.2 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): 58.92 EUR
+  15 - autres huiles légères (hectolitre): 58.92 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 5.66 EUR
+  16 - pétrole lampant, autre (hectolitre): 41.69 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 2.54 EUR
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 30.2 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): 41.69 EUR
+  18 - autres huiles moyennes (hectolitre): 41.69 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 5.66 EUR
+  21 - gazole, fioul domestique (hectolitre): 5.66 EUR
+  Références législatives: Loi  2008-1443 du 30/12/2008 (LFR pour 2008)
+  Parution au JO: '2008-12-31'
+- Date d'effet: 2008-12-29
+  13 - carburateurs type essence, sous conditions (hectolitre): 2.54 EUR
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 30.2 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): 58.92 EUR
+  15 - autres huiles légères (hectolitre): 58.92 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 5.66 EUR
+  16 - pétrole lampant, autre (hectolitre): 41.69 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 2.54 EUR
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 30.2 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): 41.69 EUR
+  18 - autres huiles moyennes (hectolitre): 41.69 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 5.66 EUR
+  21 - gazole, fioul domestique (hectolitre): 5.66 EUR
+  Références législatives: Loi  2008-1425 du 27/12/2008 (LF pour 2009)  - Articles 16 et 17
+  Parution au JO: '2008-12-28'
+- Date d'effet: 2008-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 2.54 EUR
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 30.2 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): 58.92 EUR
+  15 - autres huiles légères (hectolitre): 58.92 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 5.66 EUR
+  16 - pétrole lampant, autre (hectolitre): 41.69 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 2.54 EUR
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 30.2 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): 41.69 EUR
+  18 - autres huiles moyennes (hectolitre): 41.69 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 5.66 EUR
+  21 - gazole, fioul domestique (hectolitre): 5.66 EUR
+  Références législatives: Loi  2007-1822 du 24/12/2007 (LF pour 2008)
+  Parution au JO: '2007-12-27'
+- Date d'effet: 2006-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 2.54 EUR
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 60.69 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): 60.69 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 5.66 EUR
+  16 - pétrole lampant, autre (hectolitre): 42.84 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 2.54 EUR
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 42.84 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): 42.84 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 5.66 EUR
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  2004-1484 du 30/12/2004 (LF pour 2005)
+  Parution au JO: '2004-12-31'
+- Date d'effet: 2004-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 2.54 EUR
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 58.92 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): 58.92 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 5.66 EUR
+  16 - pétrole lampant, autre (hectolitre): 41.69 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 2.54 EUR
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 41.69 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): 41.69 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 5.66 EUR
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  2003-1311 du 30/12/2003 (LF pour 2004)
+  Parution au JO: '2003-12-31'
+- Date d'effet: 2003-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 2.54 EUR
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 58.92 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): 58.92 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 5.66 EUR
+  16 - pétrole lampant, autre (hectolitre): 39.19 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 2.54 EUR
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 39.19 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): 39.19 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 5.66 EUR
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  2002-1575 du 30/12/2002 (LF pour 2003)
+  Parution au JO: '2002-12-31'
+- Date d'effet: 2002-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 2.25 EUR
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 58.63 EUR
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): 58.63 EUR
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 5.49 EUR
+  16 - pétrole lampant, autre (hectolitre): 38.9 EUR
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 2.25 EUR
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 38.9 EUR
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): 38.9 EUR
+  20 - gazole comme carburants sous conditions (hectolitre): 5.49 EUR
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  2001-1275 du 28/12/2001 (LF pour 2002)
+  Parution au JO: '2001-12-29'
+- Date d'effet: 2000-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 14.76 FRF
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 384.62 FRF
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): 384.62 FRF
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): 51.73 FRF
+  16 - pétrole lampant, autre (hectolitre): 255.18 FRF
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 14.76 FRF
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): 255.18 FRF
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): 255.18 FRF
+  20 - gazole comme carburants sous conditions (hectolitre): 51.73 FRF
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  99-1172 du 30/12/1999 (LF pour 2000)
+  Parution au JO: '1999-12-31'
+- Date d'effet: 1999-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 14.69 FRF
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 398.86 FRF
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): 398.86 FRF
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): nc
+  16 - pétrole lampant, autre (hectolitre): nc
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 14.69 FRF
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): nc
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): nc
+  20 - gazole comme carburants sous conditions (hectolitre): 51.47 FRF
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  98-1266 du 30/12/1998 (LF pour 1999)
+  Parution au JO: '1998-12-31'
+- Date d'effet: 1998-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 14.56 FRF
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 394.92 FRF
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): 394.92 FRF
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): nc
+  16 - pétrole lampant, autre (hectolitre): nc
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 14.56 FRF
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): nc
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): nc
+  20 - gazole comme carburants sous conditions (hectolitre): 51.01 FRF
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  97-1269 du 30/12/1997 (LF pour 1998)
+  Parution au JO: '1997-12-31'
+- Date d'effet: 1997-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 14.37 FRF
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 386.92 FRF
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): 386.92 FRF
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): nc
+  16 - pétrole lampant, autre (hectolitre): nc
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 14.37 FRF
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): nc
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): nc
+  20 - gazole comme carburants sous conditions (hectolitre): 50.36 FRF
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  96-1181 du 30/12/1996 (LF pour 1997)
+  Parution au JO: '1996-12-31'
+- Date d'effet: 1996-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 14.07 FRF
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 380.92 FRF
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): 380.92 FRF
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): nc
+  16 - pétrole lampant, autre (hectolitre): nc
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 14.07 FRF
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): nc
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): nc
+  20 - gazole comme carburants sous conditions (hectolitre): 49.32 FRF
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  95-1346 du 30/12/1995 (LF pour 1996)
+  Parution au JO: '1995-12-31'
+- Date d'effet: 1995-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 13.81 FRF
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 367.92 FRF
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): 367.92 FRF
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): nc
+  16 - pétrole lampant, autre (hectolitre): nc
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 13.81 FRF
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): nc
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): nc
+  20 - gazole comme carburants sous conditions (hectolitre): 48.4 FRF
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  94-1162 du 29/12/1994 (LF pour 1995)
+  Parution au JO: '1994-12-30'
+- Date d'effet: 1994-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 13.58 FRF
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 347.41 FRF
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): 347.41 FRF
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): nc
+  16 - pétrole lampant, autre (hectolitre): nc
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 13.58 FRF
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): nc
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): nc
+  20 - gazole comme carburants sous conditions (hectolitre): 47.59 FRF
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  93-1352 du 30/12/1993 (LF pour 1994)
+  Parution au JO: '1993-12-31'
+- Date d'effet: 1993-04-15
+  13 - carburateurs type essence, sous conditions (hectolitre): 12.22 FRF
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): 311.25 FRF
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): 311.25 FRF
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): nc
+  16 - pétrole lampant, autre (hectolitre): nc
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 12.22 FRF
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): nc
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): nc
+  20 - gazole comme carburants sous conditions (hectolitre): 42.85 FRF
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  92-1376 du 30/12/1992 (LF pour 1993)
+  Parution au JO: '1992-12-31'
+- Date d'effet: 1993-01-01
+  13 - carburateurs type essence, sous conditions (hectolitre): 11.97 FRF
+  13 bis - carburateurs type essence, carburants pour avion (hectolitre): nc
+  13 ter - carburateurs type essence, autres (hectolitre): nc
+  15 - autres huiles légères (hectolitre): nc
+  15 bis - pétrole lampant utilisé comme combustible (hectolitre): nc
+  16 - pétrole lampant, autre (hectolitre): nc
+  17 - carburéacteurs, type pétrole lampant , sous conditions (hectolitre): 11.97 FRF
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre): nc
+  17 ter - carburéacteurs, type pétrole lampant, autres (hectolitre): nc
+  18 - autres huiles moyennes (hectolitre): nc
+  20 - gazole comme carburants sous conditions (hectolitre): nc
+  21 - gazole, fioul domestique (hectolitre): nc
+  Références législatives: Loi  92-1376 du 30/12/1992 (LF pour 1993)
+  Parution au JO: '1992-12-31'
+Description: |-
+  NB : données renseignées dans l'article 265 du code des douanes
+  NB : les produits énergétiques sont rangés de a à e dans l'ordre de leur numérotation dans l'article 265 du code des douanes. Cette séparation en cinq onglets a pour seul objectif la lisibilité.
+  NB : en 2011 le nom de TIPP (taxe intérieure de consommation sur les produits pétroliers) change pour TICPE (taxe intérieure de consommation sur les produits énergétiques). L'objectif est de souligner le changement d'assiette récent qui incorpore désormais les biocarburants.
+WARNINGS:
+  Valeurs:
+    0:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    1:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    2:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    3:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    4:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    5:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    6:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    7:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    8:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    9:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    10:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    11:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    12:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    13:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    14:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    15:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    16:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    17:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    18:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    19:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    20:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    21:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    22:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"

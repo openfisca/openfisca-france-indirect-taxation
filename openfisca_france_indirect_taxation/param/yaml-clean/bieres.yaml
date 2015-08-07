@@ -1,0 +1,154 @@
+Titre: Bières
+Titre court: Bières
+Noms TaxIPP:
+  Bières moins de 2,8% vol. (€/degré/hl): taxe_bieres_inf_28
+  Bières plus de 2,8% vol. (€/degré/hl): taxe_biere_sup_28
+  Bières moins de 4,6% vol ou récipient entre 65cL et 1L: taxe_bieres_inf_46
+  Bières non comprises dans la mention précédente: taxe_autres_bieres
+  Petites brasseries < 10 000hl (€/degré/hl): taxe_brasserie_inf_10
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): taxe_brasserie_10_50
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): taxe_brasserie_50_200
+Valeurs:
+- Date d'effet: 2014-01-01
+  Bières moins de 2,8% vol. (€/degré/hl): 3.66 EUR
+  Bières plus de 2,8% vol. (€/degré/hl): 7.33 EUR
+  Petites brasseries < 10 000hl (€/degré/hl): 3.66 EUR
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): 3.66 EUR
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): 3.66 EUR
+  Références législatives: Décret 2014-549 du 26/05/2014
+  Parution au JO: '2014-05-29'
+- Date d'effet: 2012-12-19
+  Bières moins de 2,8% vol. (€/degré/hl): 3.6 EUR
+  Bières plus de 2,8% vol. (€/degré/hl): 7.2 EUR
+  Petites brasseries < 10 000hl (€/degré/hl): 3.6 EUR
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): 3.6 EUR
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): 3.6 EUR
+  Références législatives: Loi 2012-1404 du 17/12/2012 (LFSS pour 2013)
+  Parution au JO: '2012-12-18'
+- Date d'effet: 2012-01-01
+  Bières moins de 2,8% vol. (€/degré/hl): 1.38 EUR
+  Bières plus de 2,8% vol. (€/degré/hl): 2.75 EUR
+  Petites brasseries < 10 000hl (€/degré/hl): 1.38 EUR
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): 1.64 EUR
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): 2.07 EUR
+  Références législatives: Décret 2012-653 du 4/05/2012
+  Parution au JO: '2012-05-06'
+- Date d'effet: 2010-05-01
+  Bières moins de 2,8% vol. (€/degré/hl): 1.36 EUR
+  Bières plus de 2,8% vol. (€/degré/hl): 2.71 EUR
+  Petites brasseries < 10 000hl (€/degré/hl): 1.36 EUR
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): 1.62 EUR
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): 2.04 EUR
+  Références législatives: Décret 2010-421 du 27/04/2010
+  Parution au JO: '2010-04-30'
+- Date d'effet: 2009-04-10
+  Bières moins de 2,8% vol. (€/degré/hl): 1.32 EUR
+  Bières plus de 2,8% vol. (€/degré/hl): 2.64 EUR
+  Petites brasseries < 10 000hl (€/degré/hl): 1.32 EUR
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): 1.58 EUR
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): 1.98 EUR
+  Références législatives: Décret 2009-389 du 7/04/2009
+  Parution au JO: '2009-04-09'
+- Date d'effet: 2006-01-01
+  Bières moins de 2,8% vol. (€/degré/hl): 1.3 EUR
+  Bières plus de 2,8% vol. (€/degré/hl): 2.6 EUR
+  Petites brasseries < 10 000hl (€/degré/hl): 1.3 EUR
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): 1.56 EUR
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): 1.95 EUR
+- Date d'effet: 2002-03-31
+  Bières moins de 2,8% vol. (€/degré/hl): 1.3 EUR
+  Bières plus de 2,8% vol. (€/degré/hl): 2.6 EUR
+  Petites brasseries < 10 000hl (€/degré/hl): nc
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): nc
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): nc
+  Références législatives: Ordonnance 2000-916 du 19/09/2000
+  Parution au JO: '2000-09-22'
+- Date d'effet: 1997-01-01
+  Bières moins de 2,8% vol. (€/degré/hl): 8.5 FRF
+  Bières plus de 2,8% vol. (€/degré/hl): 17.0 FRF
+  Petites brasseries < 10 000hl (€/degré/hl): nc
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): nc
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): nc
+  Références législatives: Loi no 96-1160 du 27/12/1996 (LFSS pour 1997)
+  Parution au JO: '1996-12-29'
+- Date d'effet: 1993-01-01
+  Bières moins de 2,8% vol. (€/degré/hl): 6.25 FRF
+  Bières plus de 2,8% vol. (€/degré/hl): 12.5 FRF
+  Petites brasseries < 10 000hl (€/degré/hl): nc
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): nc
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): nc
+  Références législatives: Loi 92-1376 du 30/12/1992 (LF pour 1993)
+  Parution au JO: '1992-12-31'
+- Date d'effet: 1982-01-01
+  Bières moins de 4,6% vol ou récipient entre 65cL et 1L: 11.0 FRF
+  Bières non comprises dans la mention précédente: 19.5 FRF
+  Petites brasseries < 10 000hl (€/degré/hl): nc
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): nc
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): nc
+  Références législatives: Loi 81-1160 du 30/12/1981 (LF pour 1982)
+  Parution au JO: '1981-12-31'
+- Date d'effet: 1981-02-01
+  Bières moins de 4,6% vol ou récipient entre 65cL et 1L: 13.6 FRF
+  Bières non comprises dans la mention précédente: 24.0 FRF
+  Petites brasseries < 10 000hl (€/degré/hl): nc
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): nc
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): nc
+  Références législatives: Loi 80-1094 du 30/12/1980 (LF pour 1981)
+  Parution au JO: '1980-12-31'
+- Date d'effet: 1979-07-01
+  Bières moins de 4,6% vol ou récipient entre 65cL et 1L: 4.5 FRF
+  Bières non comprises dans la mention précédente: 8.0 FRF
+  Petites brasseries < 10 000hl (€/degré/hl): nc
+  10 000hl < petites brasseries < 50 000hl (€/degré/hl): nc
+  50 000hl < petites brasseries < 200 000hl (€/degré/hl): nc
+Description: 'NB : données renseignées dans l''article 520A du code général desimpôts'
+WARNINGS:
+  Valeurs:
+    0:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    1:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    2:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    3:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    4:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    5:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    6:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    7:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    8:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    9:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    10:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
+    11:
+      Date d'entrée en vigueur: Label "Date d'entrée en vigueur" should be renamed to "Date d'effet"
+      Référence législative: Label "Référence législative" should be renamed to "Références législatives"
+      Parution au JORF: Label "Parution au JORF" should be renamed to "Parution au JO"
