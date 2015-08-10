@@ -31,7 +31,7 @@ from ..base import *  # noqa analysis:ignore
 
 
 @reference_formula
-class montan_droit_d_accise_alcool(SimpleFormulaColumn):
+class droit_d_accise_alcool(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des droits d'accises sur l'alcool"
@@ -213,19 +213,19 @@ class ticpe_supercarburants(SimpleFormulaColumn):
 
 
 @reference_formula
-class tipp(SimpleFormulaColumn):
+class ticpe(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
-    label = u"Montant de la tipp"
+    label = u"Montant de la ticpe"
 
     def function(self, simulation, period):
         pourcentage_vehicule_essence = simulation.calculate('pourcentage_vehicule_essence', period)
-        consommation_tipp = simulation.calculate('consommation_tipp', period)
+        consommation_ticpe = simulation.calculate('consommation_ticpe', period)
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-        consommation_tipp_ht = consommation_tipp - tax_from_expense_including_tax(consommation_tipp, taux_plein_tva)
+        consommation_ticpe_ht = consommation_ticpe - tax_from_expense_including_tax(consommation_ticpe, taux_plein_tva)
 
-        tipp_super9598 = simulation.legislation_at(period.start).imposition_indirecte.tipp.tipp_super9598
-        tipp_gazole = simulation.legislation_at(period.start).imposition_indirecte.tipp.tipp_gazole
+        ticpe_super9598 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+        ticpe_gazole = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
 
         prix_ttc_super95 = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.prix_ttc_super95
         prix_ttc_super98 = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.prix_ttc_super98
@@ -233,12 +233,12 @@ class tipp(SimpleFormulaColumn):
 
         prix_ttc_gazole = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.prix_ttc_gazole
 
-        taux_implicite_super9598 = tipp_super9598 * (1 + taux_plein_tva) / (prix_ttc_super9598 - tipp_super9598 * (1 + taux_plein_tva))
-        taux_implicite_diesel = tipp_gazole * (1 + taux_plein_tva) / (prix_ttc_gazole - tipp_gazole * (1 + taux_plein_tva))
+        taux_implicite_super9598 = ticpe_super9598 * (1 + taux_plein_tva) / (prix_ttc_super9598 - ticpe_super9598 * (1 + taux_plein_tva))
+        taux_implicite_diesel = ticpe_gazole * (1 + taux_plein_tva) / (prix_ttc_gazole - ticpe_gazole * (1 + taux_plein_tva))
 
-        taux_implicite_tipp = taux_implicite_diesel * (1 - pourcentage_vehicule_essence) + taux_implicite_super9598 * pourcentage_vehicule_essence
+        taux_implicite_ticpe = taux_implicite_diesel * (1 - pourcentage_vehicule_essence) + taux_implicite_super9598 * pourcentage_vehicule_essence
 
-        return period, tax_from_expense_including_tax(consommation_tipp_ht, taux_implicite_tipp)
+        return period, tax_from_expense_including_tax(consommation_ticpe_ht, taux_implicite_ticpe)
 
 
 @reference_formula
@@ -258,7 +258,7 @@ class total_taxes_indirectes(SimpleFormulaColumn):
         taxe_assurance_transport = simulation.calculate('taxe_assurance_transport', period)
         taxe_assurance_sante = simulation.calculate('taxe_assurance_sante', period)
         taxe_autres_assurances = simulation.calculate('taxe_autres_assurances', period)
-        tipp = simulation.calculate('tipp', period)
+        ticpe = simulation.calculate('ticpe', period)
         return period, (
             tva_total +
             droit_d_accise_vin +
@@ -270,7 +270,7 @@ class total_taxes_indirectes(SimpleFormulaColumn):
             taxe_assurance_transport +
             taxe_assurance_sante +
             taxe_autres_assurances +
-            tipp
+            ticpe
             )
 
 
@@ -290,7 +290,7 @@ class total_taxes_indirectes_sans_tva(SimpleFormulaColumn):
         taxe_assurance_transport = simulation.calculate('taxe_assurance_transport', period)
         taxe_assurance_sante = simulation.calculate('taxe_assurance_sante', period)
         taxe_autres_assurances = simulation.calculate('taxe_autres_assurances', period)
-        tipp = simulation.calculate('tipp', period)
+        ticpe = simulation.calculate('ticpe', period)
         return period, (
             droit_d_accise_vin +
             droit_d_accise_biere +
@@ -301,7 +301,7 @@ class total_taxes_indirectes_sans_tva(SimpleFormulaColumn):
             taxe_assurance_transport +
             taxe_assurance_sante +
             taxe_autres_assurances +
-            tipp
+            ticpe
             )
 
 

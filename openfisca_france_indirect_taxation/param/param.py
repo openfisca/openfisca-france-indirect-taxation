@@ -237,13 +237,13 @@ legislation_json = {
                             },
                         },
                     },
-                "tipp": {
+                "ticpe": {
                     "@type": "Node",
-                    "description": "tipp sur les différents carburants",
+                    "description": "ticpe sur les différents carburants",
                     "children": {
-                        "tipp_super9598": {
+                        "ticpe_super9598": {
                             "@type": "Parameter",
-                            "description": "tipp sur super95 super98",
+                            "description": "ticpe sur super95 super98",
                             "format": "float",
                             "values": [
                                 {'start': u'1995-01-01', 'stop': u'2000-12-31', 'value': 58.63},
@@ -263,9 +263,9 @@ legislation_json = {
                                 {'start': u'2014-01-01', 'stop': u'2014-12-31', 'value': 61.42},
                                 ],
                             },
-                        "tipp_gazole": {
+                        "ticpe_gazole": {
                             "@type": "Parameter",
-                            "description": "tipp sur gazole ",
+                            "description": "ticpe sur gazole ",
                             "format": "float",
                             "values": [
                                 {'start': u'1995-01-01', 'stop': u'2002-12-31', 'value': 38.9},

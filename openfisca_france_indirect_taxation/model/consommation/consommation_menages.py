@@ -148,10 +148,10 @@ class consommation_tabac_a_rouler(SimpleFormulaColumn):
 
 
 @reference_formula
-class consommation_tipp(SimpleFormulaColumn):
+class consommation_ticpe(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
-    label = u"Consommation de tipp"
+    label = u"Consommation de ticpe"
 
     def function(self, simulation, period):
         categorie_fiscale_14 = simulation.calculate('categorie_fiscale_14', period)

@@ -245,8 +245,6 @@ def build_revenus_cales(temporary_store = None, year_calage = None, year_data = 
 
     masses_cn_revenus_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "revenus_CN")
 
-    # Ne pas oublier d'enlever l'accent à "loyers imputés" dans le document excel Parametres fiscalité indirecte
-
     masses_cn_revenus_data_frame.rename(
         columns = {
             'annee': 'year',
