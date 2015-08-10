@@ -24,7 +24,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-"""Merge YAML files of IPP tax and benefit tables with OpenFisca parameters to generate new parameters."""
+"""Build YAML files of IPP tax and benefit tables to generate an XML file of parameters."""
 
 
 import argparse
@@ -38,6 +38,8 @@ import xml.etree.ElementTree as etree
 from biryani import strings
 import yaml
 
+root_deb = "1990-01-01"
+root_fin = "2020-12-31"
 
 date_names = (
     # u"Age de départ (AAD=Age d'annulation de la décôte)",
@@ -99,44 +101,6 @@ def main():
     logging.basicConfig(level = logging.DEBUG if args.verbose else logging.WARNING, stream = sys.stdout)
 
     file_system_encoding = sys.getfilesystemencoding()
-
-    # original_element_tree = etree.parse(args.origin)
-    # original_root_element = original_element_tree.getroot()
-
-    # Apply translations to original parameters.
-    # with open(args.param_translations) as param_translations_file:
-    #     param_translations = yaml.load(param_translations_file)
-    # for old_path, new_path in param_translations.iteritems():
-    #     parent_element = None
-    #     element = original_root_element
-    #     for name in old_path.split('.'):
-    #         for child in element:
-    #             if child.get('code') == name:
-    #                 parent_element = element
-    #                 element = child
-    #                 break
-    #         else:
-    #             assert False, 'Path "{}" not found in "{}"'.format(old_path, args.origin)
-    #     parent_element.remove(element)
-    #     if new_path is not None:
-    #         parent_element = original_root_element
-    #         split_new_path = new_path.split('.')
-    #         for name in split_new_path[:-1]:
-    #             for child in parent_element:
-    #                 if child.get('code') == name:
-    #                     parent_element = child
-    #                     break
-    #             else:
-    #                 parent_element = etree.SubElement(parent_element, 'NODE', attrib = dict(
-    #                     code = name,
-    #                     ))
-    #         name = split_new_path[-1]
-    #         assert all(
-    #             child.get('code') != name
-    #             for child in parent_element
-    #             ), 'Path "{}" already exists in "{}"'.format(new_path, args.origin)
-    #         element.set('code', name)
-    #         parent_element.append(element)
 
     with open(args.ipp_translations) as ipp_translations_file:
         ipp_translations = yaml.load(ipp_translations_file)
@@ -303,36 +267,18 @@ def main():
                         value = value,
                         ))
 
+    tree = collections.OrderedDict(
+        [('imposition_indirecte', tree)]
+        )
     root_element = transform_node_to_element(u'root', tree)
-    # root_element.set('deb', original_root_element.get('deb'))
-    # root_element.set('fin', original_root_element.get('fin'))
-    # merge_elements(root_element, original_root_element)
+    root_element.set('deb', root_deb)
+    root_element.set('fin', root_fin)
     sort_elements(root_element)
     reindent(root_element)
-
     element_tree = etree.ElementTree(root_element)
     element_tree.write(args.target, encoding = 'utf-8')
 
     return 0
-
-
-def merge_elements(element, original_element, path = None):
-    if path is None:
-        path = []
-    else:
-        path = path[:]
-    path.append(element.get('code'))
-    assert element.tag == original_element.tag, 'At {}, IPP element "{}"" differs from original element "{}"'.format(
-        '.'.join(path), element.tag, original_element.tag)
-    if element.tag == 'NODE':
-        for original_child in original_element:
-            for child in element:
-                if child.get('code') == original_child.get('code'):
-                    merge_elements(child, original_child)
-                    break
-            else:
-                # A child with the same code as the original child doesn't exist yet.
-                element.append(original_child)
 
 
 def sort_elements(element):
@@ -504,7 +450,7 @@ def transform_node_to_element(name, node):
         return code_element if len(code_element) > 0 else None
 
 
-def transform_value_to_element(leaf):
+def transform_value_to_element(leaf, missing_fin = root_fin):
     value = leaf.get('value')
     if value is None:
         return None
@@ -517,6 +463,8 @@ def transform_value_to_element(leaf):
     stop = leaf.get('stop')
     if stop is not None:
         value_element.set('fin', stop.isoformat())
+    elif missing_fin is not None:
+        value_element.set('fin', missing_fin)
     return value_element
 
 
