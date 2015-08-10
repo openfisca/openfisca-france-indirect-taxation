@@ -1,0 +1,32 @@
+E
+======================================================================
+ERROR: openfisca_france_indirect_taxation.tests.test_tva.test_tva
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/nose/case.py", line 197, in runTest
+    self.test(*self.arg)
+  File "/home/benjello/openfisca/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/tests/test_tva.py", line 56, in test_tva
+    assert_near(simulation.calculate('tva_taux_plein'), 100 * 0.196 / (1 + 0.196), .01)
+  File "/home/benjello/openfisca/openfisca-core/openfisca_core/simulations.py", line 91, in calculate
+    requested_formulas_by_period = requested_formulas_by_period).array
+  File "/home/benjello/openfisca/openfisca-core/openfisca_core/simulations.py", line 172, in compute
+    accept_other_period = accept_other_period, requested_formulas_by_period = requested_formulas_by_period)
+  File "/home/benjello/openfisca/openfisca-core/openfisca_core/entities.py", line 75, in compute
+    requested_formulas_by_period = requested_formulas_by_period)
+  File "/home/benjello/openfisca/openfisca-core/openfisca_core/holders.py", line 160, in compute
+    requested_formulas_by_period = requested_formulas_by_period)
+  File "/home/benjello/openfisca/openfisca-core/openfisca_core/formulas.py", line 515, in compute
+    formula_result = self.base_function(simulation, period)
+  File "/home/benjello/openfisca/openfisca-core/openfisca_core/formulas.py", line 1384, in requested_period_default_value
+    return formula.function(simulation, period)
+  File "/home/benjello/openfisca/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/model/taxes_indirectes/montant_taxes_indirectes.py", line 329, in function
+    taux_plein = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+AttributeError: 'CompactNode' object has no attribute 'tva'
+-------------------- >> begin captured logging << --------------------
+openfisca_core.formulas: ERROR: An error occurred while calling formula tva_taux_plein@menages<2013> in module openfisca_france_indirect_taxation.model.taxes_indirectes.montant_taxes_indirectes
+--------------------- >> end captured logging << ---------------------
+
+----------------------------------------------------------------------
+Ran 1 test in 0.007s
+
+FAILED (errors=1)
