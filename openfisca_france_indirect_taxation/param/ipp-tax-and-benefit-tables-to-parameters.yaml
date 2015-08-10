@@ -1,2 +1,5 @@
-taux_de_tva:
-  RENAME: tva
+baremes-ipp-taxation-indirecte:
+  RENAME: imposition_indirecte
+  taux_de_tva:
+    RENAME: tva
+    taux_normal: taux_plein

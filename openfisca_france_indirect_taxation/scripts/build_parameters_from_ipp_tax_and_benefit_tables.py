@@ -32,6 +32,7 @@ import collections
 import datetime
 import logging
 import os
+import pkg_resources
 import sys
 import xml.etree.ElementTree as etree
 
@@ -41,6 +42,7 @@ import yaml
 root_deb = "1990-01-01"
 root_fin = "2020-12-31"
 
+app_name = os.path.splitext(os.path.basename(__file__))[0]
 date_names = (
     # u"Age de départ (AAD=Age d'annulation de la décôte)",
     u"Date",
@@ -48,12 +50,13 @@ date_names = (
     u"Date de perception du salaire",
     u"Date ISF",
     )
-log = logging.getLogger(__name__)
+log = logging.getLogger(app_name)
 note_names = (
     u"Notes",
     u"Notes bis",
     )
-parameters_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', 'param'))
+parameters_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'param'))
+
 reference_names = (
     u"Parution au JO",
     u"Références BOI",
@@ -95,7 +98,7 @@ def main():
     parser.add_argument('-s', '--source-dir', default = 'yaml-clean',
         help = 'path of source directory containing clean IPP YAML files')
     parser.add_argument('-t', '--target', default = os.path.join(parameters_dir, 'parameters.xml'),
-        help = 'path of generated YAML file containing the association between IPP fields with OpenFisca parameters')
+        help = 'path of generated YAML file containing the association of IPP fields with OpenFisca parameters')
     parser.add_argument('-v', '--verbose', action = 'store_true', default = False, help = "increase output verbosity")
     args = parser.parse_args()
     logging.basicConfig(level = logging.DEBUG if args.verbose else logging.WARNING, stream = sys.stdout)
@@ -104,9 +107,13 @@ def main():
 
     with open(args.ipp_translations) as ipp_translations_file:
         ipp_translations = yaml.load(ipp_translations_file)
+        ipp_translations = slugify_ipp_translations_keys(ipp_translations)
 
     tree = collections.OrderedDict()
     for source_dir_encoded, directories_name_encoded, filenames_encoded in os.walk(args.source_dir):
+        # We deal only with taxation indirecte
+        if not source_dir_encoded.endswith('taxation-indirecte'):
+            continue
         directories_name_encoded.sort()
         for filename_encoded in sorted(filenames_encoded):
             if not filename_encoded.endswith('.yaml'):
@@ -190,8 +197,11 @@ def main():
                     sub_tree = tree
                     translations = ipp_translations
                     translated_path = []
+                    print ipp_path
+                    print remaining_path
                     while remaining_path:
                         fragment = remaining_path.pop(0)
+                        fragment = slugify_ipp_translation_key(fragment)
                         type = None
                         if translations is not None:
                             translations = translations.get(fragment, fragment)
@@ -210,6 +220,7 @@ def main():
                         sub_path = [fragment] if isinstance(fragment, basestring) else fragment[:]
                         while sub_path:
                             fragment = sub_path.pop(0)
+                            fragment = slugify_ipp_translation_key(fragment)
                             translated_path.append(fragment)
                             if fragment == u'ASSIETTE':
                                 assert sub_tree.get('TYPE') == u'BAREME', str((translated_path, sub_path, sub_tree))
@@ -267,18 +278,33 @@ def main():
                         value = value,
                         ))
 
-    tree = collections.OrderedDict(
-        [('imposition_indirecte', tree)]
-        )
+    # tree = collections.OrderedDict(
+    #     [('imposition_indirecte', tree)]
+    #     )
     root_element = transform_node_to_element(u'root', tree)
     root_element.set('deb', root_deb)
     root_element.set('fin', root_fin)
     sort_elements(root_element)
     reindent(root_element)
+
     element_tree = etree.ElementTree(root_element)
     element_tree.write(args.target, encoding = 'utf-8')
 
     return 0
+
+
+def slugify_ipp_translation_key(key):
+    return key if key in ('RENAME', 'TYPE') else strings.slugify(key, separator = u'_')
+
+
+def slugify_ipp_translations_keys(ipp_translations):
+    return collections.OrderedDict(
+        (
+            slugify_ipp_translation_key(key),
+            slugify_ipp_translations_keys(value) if isinstance(value, dict) else value,
+            )
+        for key, value in ipp_translations.iteritems()
+        )
 
 
 def sort_elements(element):

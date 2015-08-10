@@ -140,24 +140,24 @@
     <NODE code="bieres">
       <CODE code="10_000hl_petites_brasseries_50_000hl_degre_hl" format="float" type="monetary">
         <VALUE deb="2014-01-01" fin="2020-12-31" valeur="3.66" />
-        <VALUE deb="2012-12-19" fin="2013-12-31" valeur="3.6" />
-        <VALUE deb="2012-01-01" fin="2012-12-18" valeur="1.64" />
+        <VALUE deb="2013-01-01" fin="2013-12-31" valeur="3.6" />
+        <VALUE deb="2012-01-01" fin="2012-12-31" valeur="1.64" />
         <VALUE deb="2010-05-01" fin="2011-12-31" valeur="1.62" />
         <VALUE deb="2009-04-10" fin="2010-04-30" valeur="1.58" />
         <VALUE deb="2006-01-01" fin="2009-04-09" valeur="1.56" />
       </CODE>
       <CODE code="50_000hl_petites_brasseries_200_000hl_degre_hl" format="float" type="monetary">
         <VALUE deb="2014-01-01" fin="2020-12-31" valeur="3.66" />
-        <VALUE deb="2012-12-19" fin="2013-12-31" valeur="3.6" />
-        <VALUE deb="2012-01-01" fin="2012-12-18" valeur="2.07" />
+        <VALUE deb="2013-01-01" fin="2013-12-31" valeur="3.6" />
+        <VALUE deb="2012-01-01" fin="2012-12-31" valeur="2.07" />
         <VALUE deb="2010-05-01" fin="2011-12-31" valeur="2.04" />
         <VALUE deb="2009-04-10" fin="2010-04-30" valeur="1.98" />
         <VALUE deb="2006-01-01" fin="2009-04-09" valeur="1.95" />
       </CODE>
       <CODE code="bieres_moins_de_2_8_vol_degre_hl" format="float" type="monetary">
         <VALUE deb="2014-01-01" fin="2020-12-31" valeur="3.66" />
-        <VALUE deb="2012-12-19" fin="2013-12-31" valeur="3.6" />
-        <VALUE deb="2012-01-01" fin="2012-12-18" valeur="1.38" />
+        <VALUE deb="2013-01-01" fin="2013-12-31" valeur="3.6" />
+        <VALUE deb="2012-01-01" fin="2012-12-31" valeur="1.38" />
         <VALUE deb="2010-05-01" fin="2011-12-31" valeur="1.36" />
         <VALUE deb="2009-04-10" fin="2010-04-30" valeur="1.32" />
         <VALUE deb="2002-03-31" fin="2009-04-09" valeur="1.3" />
@@ -176,8 +176,8 @@
       </CODE>
       <CODE code="bieres_plus_de_2_8_vol_degre_hl" format="float" type="monetary">
         <VALUE deb="2014-01-01" fin="2020-12-31" valeur="7.33" />
-        <VALUE deb="2012-12-19" fin="2013-12-31" valeur="7.2" />
-        <VALUE deb="2012-01-01" fin="2012-12-18" valeur="2.75" />
+        <VALUE deb="2013-01-01" fin="2013-12-31" valeur="7.2" />
+        <VALUE deb="2012-01-01" fin="2012-12-31" valeur="2.75" />
         <VALUE deb="2010-05-01" fin="2011-12-31" valeur="2.71" />
         <VALUE deb="2009-04-10" fin="2010-04-30" valeur="2.64" />
         <VALUE deb="2002-03-31" fin="2009-04-09" valeur="2.6" />
@@ -186,8 +186,8 @@
       </CODE>
       <CODE code="petites_brasseries_10_000hl_degre_hl" format="float" type="monetary">
         <VALUE deb="2014-01-01" fin="2020-12-31" valeur="3.66" />
-        <VALUE deb="2012-12-19" fin="2013-12-31" valeur="3.6" />
-        <VALUE deb="2012-01-01" fin="2012-12-18" valeur="1.38" />
+        <VALUE deb="2013-01-01" fin="2013-12-31" valeur="3.6" />
+        <VALUE deb="2012-01-01" fin="2012-12-31" valeur="1.38" />
         <VALUE deb="2010-05-01" fin="2011-12-31" valeur="1.36" />
         <VALUE deb="2009-04-10" fin="2010-04-30" valeur="1.32" />
         <VALUE deb="2006-01-01" fin="2009-04-09" valeur="1.3" />
@@ -449,54 +449,7 @@
       </CODE>
     </NODE>
     <NODE code="produits_energetiques_a">
-      <CODE code="10_huiles_legeres_et_preparation_essence_d_aviation_hectolitre" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="39.72" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="37.81" />
-        <VALUE deb="2008-01-01" fin="2014-12-31" valeur="35.9" />
-        <VALUE deb="2002-01-01" fin="2007-12-31" valeur="32.36" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="212.25" />
-        <VALUE deb="1999-01-01" fin="1999-12-31" valeur="211.19" />
-        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="209.31" />
-        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="206.82" />
-        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="202.37" />
-        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="198.6" />
-        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="195.28" />
-        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="175.82" />
-      </CODE>
-      <CODE code="11_bis_supercarburants_contenant_un_additif_hectolitre" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="67.39" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="65.68" />
-        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="63.96" />
-        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="63.67" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="417.68" />
-        <VALUE deb="1999-01-01" fin="1999-12-31" valeur="415.5" />
-        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="411.51" />
-        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="403.51" />
-        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="396.51" />
-        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="383.51" />
-        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="363" />
-        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="326.84" />
-      </CODE>
-      <CODE code="11_supercarburants_dont_sp95_et_sp98_hectolitre" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="64.12" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="62.41" />
-        <VALUE deb="2006-01-01" fin="2014-12-31" valeur="60.69" />
-        <VALUE deb="2003-01-01" fin="2005-12-31" valeur="58.92" />
-        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="58.63" />
-        <VALUE deb="1999-01-01" fin="2001-12-31" valeur="384.62" />
-        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="384.23" />
-        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="376.23" />
-        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="370.23" />
-        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="357.23" />
-        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="329.5" />
-        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="290.12" />
-      </CODE>
-      <CODE code="11_ter_supere10_hectolitre" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="64.12" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="62.41" />
-        <VALUE deb="2008-12-29" fin="2014-12-31" valeur="60.69" />
-      </CODE>
-      <CODE code="12_essence_normale_hectolitre" format="float" type="monetary">
+      <CODE code="essence_normale_hectolitre" format="float" type="monetary">
         <VALUE deb="1999-01-01" fin="1999-12-31" valeur="398.86" />
         <VALUE deb="1998-01-01" fin="1998-12-31" valeur="394.92" />
         <VALUE deb="1997-01-01" fin="1997-12-31" valeur="386.92" />
@@ -505,29 +458,7 @@
         <VALUE deb="1994-01-01" fin="1994-12-31" valeur="347.41" />
         <VALUE deb="1993-04-15" fin="1993-12-31" valeur="311.25" />
       </CODE>
-      <CODE code="1_goudrons_utilises_comme_combustibles_100kg" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="4.97" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="3.28" />
-        <VALUE deb="2014-04-01" fin="2014-12-31" valeur="1.58" />
-        <VALUE deb="2008-01-01" fin="2014-03-31" valeur="1.5" />
-        <VALUE deb="2002-01-01" fin="2007-12-31" valeur="1.22" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="8.03" />
-        <VALUE deb="1999-01-01" fin="1999-12-31" valeur="7.99" />
-        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="7.92" />
-        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="7.82" />
-        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="7.66" />
-        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="7.52" />
-        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="7.39" />
-        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="6.65" />
-      </CODE>
-      <CODE code="4_bis_white_spirit_utilise_comme_combustible_hectolitre" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="10.08" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="7.87" />
-        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="5.66" />
-        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="5.49" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="51.73" />
-      </CODE>
-      <CODE code="6_essences_speciales_utilisees_comme_carburants_et_combustibles_hectolitre" format="float" type="monetary">
+      <CODE code="essences_speciales_utilisees_comme_carburants_et_combustibles_hectolitre" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="62.35" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="60.64" />
         <VALUE deb="2008-01-01" fin="2014-12-31" valeur="58.92" />
@@ -542,6 +473,75 @@
         <VALUE deb="1995-01-01" fin="1995-12-31" valeur="367.92" />
         <VALUE deb="1994-01-01" fin="1994-12-31" valeur="347.41" />
         <VALUE deb="1993-04-15" fin="1993-12-31" valeur="311.25" />
+      </CODE>
+      <CODE code="goudrons_utilises_comme_combustibles_100kg" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="4.97" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="3.28" />
+        <VALUE deb="2014-04-01" fin="2014-12-31" valeur="1.58" />
+        <VALUE deb="2008-01-01" fin="2014-03-31" valeur="1.5" />
+        <VALUE deb="2002-01-01" fin="2007-12-31" valeur="1.22" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="8.03" />
+        <VALUE deb="1999-01-01" fin="1999-12-31" valeur="7.99" />
+        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="7.92" />
+        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="7.82" />
+        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="7.66" />
+        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="7.52" />
+        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="7.39" />
+        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="6.65" />
+      </CODE>
+      <CODE code="huiles_legeres_et_preparation_essence_d_aviation_hectolitre" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="39.72" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="37.81" />
+        <VALUE deb="2008-01-01" fin="2014-12-31" valeur="35.9" />
+        <VALUE deb="2002-01-01" fin="2007-12-31" valeur="32.36" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="212.25" />
+        <VALUE deb="1999-01-01" fin="1999-12-31" valeur="211.19" />
+        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="209.31" />
+        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="206.82" />
+        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="202.37" />
+        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="198.6" />
+        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="195.28" />
+        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="175.82" />
+      </CODE>
+      <CODE code="supercarburants_contenant_un_additif_hectolitre" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="67.39" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="65.68" />
+        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="63.96" />
+        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="63.67" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="417.68" />
+        <VALUE deb="1999-01-01" fin="1999-12-31" valeur="415.5" />
+        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="411.51" />
+        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="403.51" />
+        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="396.51" />
+        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="383.51" />
+        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="363" />
+        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="326.84" />
+      </CODE>
+      <CODE code="supercarburants_dont_sp95_et_sp98_hectolitre" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="64.12" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="62.41" />
+        <VALUE deb="2006-01-01" fin="2014-12-31" valeur="60.69" />
+        <VALUE deb="2003-01-01" fin="2005-12-31" valeur="58.92" />
+        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="58.63" />
+        <VALUE deb="1999-01-01" fin="2001-12-31" valeur="384.62" />
+        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="384.23" />
+        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="376.23" />
+        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="370.23" />
+        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="357.23" />
+        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="329.5" />
+        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="290.12" />
+      </CODE>
+      <CODE code="supere10_hectolitre" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="64.12" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="62.41" />
+        <VALUE deb="2008-12-29" fin="2014-12-31" valeur="60.69" />
+      </CODE>
+      <CODE code="white_spirit_utilise_comme_combustible_hectolitre" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="10.08" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="7.87" />
+        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="5.66" />
+        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="5.49" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="51.73" />
       </CODE>
     </NODE>
     <NODE code="produits_energetiques_b">
@@ -612,7 +612,22 @@
         <VALUE deb="2002-01-01" fin="2002-12-31" valeur="38.9" />
         <VALUE deb="2000-01-01" fin="2001-12-31" valeur="255.18" />
       </CODE>
-      <CODE code="17_bis_carbureacteurs_type_petrole_lampant_carburant_moteurs_d_avion_hectolitre" format="float" type="monetary">
+      <CODE code="autres_huiles_moyennes_hectolitre" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="45.51" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="43.6" />
+        <VALUE deb="2008-01-01" fin="2014-12-31" valeur="41.69" />
+        <VALUE deb="2006-01-01" fin="2007-12-31" valeur="42.84" />
+        <VALUE deb="2004-01-01" fin="2005-12-31" valeur="41.69" />
+        <VALUE deb="2003-01-01" fin="2003-12-31" valeur="39.19" />
+        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="38.9" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="255.18" />
+      </CODE>
+      <CODE code="carbureacteurs_type_petrole_lampant_autres_hectolitre" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="45.51" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="43.6" />
+        <VALUE deb="2008-01-01" fin="2014-12-31" valeur="41.69" />
+      </CODE>
+      <CODE code="carbureacteurs_type_petrole_lampant_carburant_moteurs_d_avion_hectolitre" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="34.02" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="32.11" />
         <VALUE deb="2008-01-01" fin="2014-12-31" valeur="30.2" />
@@ -622,7 +637,7 @@
         <VALUE deb="2002-01-01" fin="2002-12-31" valeur="38.9" />
         <VALUE deb="2000-01-01" fin="2001-12-31" valeur="255.18" />
       </CODE>
-      <CODE code="17_carbureacteurs_type_petrole_lampant_sous_conditions_hectolitre" format="float" type="monetary">
+      <CODE code="carbureacteurs_type_petrole_lampant_sous_conditions_hectolitre" format="float" type="monetary">
         <VALUE deb="2003-01-01" fin="2020-12-31" valeur="2.54" />
         <VALUE deb="2002-01-01" fin="2002-12-31" valeur="2.25" />
         <VALUE deb="2000-01-01" fin="2001-12-31" valeur="14.76" />
@@ -635,22 +650,7 @@
         <VALUE deb="1993-04-15" fin="1993-12-31" valeur="12.22" />
         <VALUE deb="1993-01-01" fin="1993-04-14" valeur="11.97" />
       </CODE>
-      <CODE code="17_ter_carbureacteurs_type_petrole_lampant_autres_hectolitre" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="45.51" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="43.6" />
-        <VALUE deb="2008-01-01" fin="2014-12-31" valeur="41.69" />
-      </CODE>
-      <CODE code="18_autres_huiles_moyennes_hectolitre" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="45.51" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="43.6" />
-        <VALUE deb="2008-01-01" fin="2014-12-31" valeur="41.69" />
-        <VALUE deb="2006-01-01" fin="2007-12-31" valeur="42.84" />
-        <VALUE deb="2004-01-01" fin="2005-12-31" valeur="41.69" />
-        <VALUE deb="2003-01-01" fin="2003-12-31" valeur="39.19" />
-        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="38.9" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="255.18" />
-      </CODE>
-      <CODE code="20_gazole_comme_carburants_sous_conditions_hectolitre" format="float" type="monetary">
+      <CODE code="gazole_comme_carburants_sous_conditions_hectolitre" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="12.83" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="10.84" />
         <VALUE deb="2014-04-01" fin="2014-12-31" valeur="8.86" />
@@ -666,14 +666,60 @@
         <VALUE deb="1994-01-01" fin="1994-12-31" valeur="47.59" />
         <VALUE deb="1993-04-15" fin="1993-12-31" valeur="42.85" />
       </CODE>
-      <CODE code="21_gazole_fioul_domestique_hectolitre" format="float" type="monetary">
+      <CODE code="gazole_fioul_domestique_hectolitre" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="9.63" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="7.64" />
         <VALUE deb="2008-01-01" fin="2014-12-31" valeur="5.66" />
       </CODE>
     </NODE>
     <NODE code="produits_energetiques_c">
-      <CODE code="22_gazole_autres_hectolitre" format="float" type="monetary">
+      <CODE code="butanes_liquefies_autres_100kg_nets" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="15.24" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="13" />
+        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="10.76" />
+        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="10.02" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="65.71" />
+      </CODE>
+      <CODE code="butanes_liquefies_sous_condition_100kg_nets" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="9.16" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="6.92" />
+        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="4.68" />
+        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="3.94" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="25.86" />
+      </CODE>
+      <CODE code="fioul_avec_point_d_eclair_inferieur_a_120_c_hectolitre" format="float" type="monetary">
+        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="38.9" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="255.18" />
+      </CODE>
+      <CODE code="fioul_lourd_100kg_net" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="6.88" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="4.53" />
+        <VALUE deb="2014-04-01" fin="2014-12-31" valeur="2.19" />
+        <VALUE deb="2003-01-01" fin="2014-03-31" valeur="1.85" />
+      </CODE>
+      <CODE code="fioul_lourd_bts_100kg" format="float" type="monetary">
+        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="1.68" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="11.01" />
+        <VALUE deb="1999-01-01" fin="1999-12-31" valeur="10.96" />
+        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="10.86" />
+        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="10.72" />
+        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="10.5" />
+        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="10.3" />
+        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="10.13" />
+        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="9.33" />
+      </CODE>
+      <CODE code="fioul_lourd_hts_100kg" format="float" type="monetary">
+        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="2.32" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="15.23" />
+        <VALUE deb="1999-01-01" fin="1999-12-31" valeur="15.15" />
+        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="15.01" />
+        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="14.82" />
+        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="14.52" />
+        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="14.25" />
+        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="14.01" />
+        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="12.9" />
+      </CODE>
+      <CODE code="gazole_autres_hectolitre" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="48.81" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="46.82" />
         <VALUE deb="2006-01-01" fin="2014-12-31" valeur="42.84" />
@@ -689,82 +735,32 @@
         <VALUE deb="1994-01-01" fin="1994-12-31" valeur="210.22" />
         <VALUE deb="1993-04-15" fin="1993-12-31" valeur="174.06" />
       </CODE>
-      <CODE code="24_fioul_lourd_100kg_net" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="6.88" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="4.53" />
-        <VALUE deb="2014-04-01" fin="2014-12-31" valeur="2.19" />
-        <VALUE deb="2003-01-01" fin="2014-03-31" valeur="1.85" />
-      </CODE>
-      <CODE code="26_fioul_avec_point_d_eclair_inferieur_a_120_c_hectolitre" format="float" type="monetary">
-        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="38.9" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="255.18" />
-      </CODE>
-      <CODE code="28_bis_fioul_lourd_bts_100kg" format="float" type="monetary">
-        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="1.68" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="11.01" />
-        <VALUE deb="1999-01-01" fin="1999-12-31" valeur="10.96" />
-        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="10.86" />
-        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="10.72" />
-        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="10.5" />
-        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="10.3" />
-        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="10.13" />
-        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="9.33" />
-      </CODE>
-      <CODE code="28_fioul_lourd_hts_100kg" format="float" type="monetary">
-        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="2.32" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="15.23" />
-        <VALUE deb="1999-01-01" fin="1999-12-31" valeur="15.15" />
-        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="15.01" />
-        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="14.82" />
-        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="14.52" />
-        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="14.25" />
-        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="14.01" />
-        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="12.9" />
-      </CODE>
-      <CODE code="30_bis_propane_utilise_comme_carburants_sous_conditions_100kg_nets" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="9.16" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="6.92" />
-        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="4.68" />
-        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="3.94" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="25.86" />
-      </CODE>
-      <CODE code="30_ter_propane_utilise_comme_carburants_autres_100kg_nets" format="float" type="monetary">
+      <CODE code="propane_utilise_comme_carburants_autres_100kg_nets" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="15.24" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="13" />
         <VALUE deb="2003-01-01" fin="2014-12-31" valeur="10.76" />
         <VALUE deb="2002-01-01" fin="2002-12-31" valeur="10.02" />
         <VALUE deb="2000-01-01" fin="2001-12-31" valeur="65.71" />
       </CODE>
-      <CODE code="31_bis_butanes_liquefies_sous_condition_100kg_nets" format="float" type="monetary">
+      <CODE code="propane_utilise_comme_carburants_sous_conditions_100kg_nets" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="9.16" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="6.92" />
         <VALUE deb="2003-01-01" fin="2014-12-31" valeur="4.68" />
         <VALUE deb="2002-01-01" fin="2002-12-31" valeur="3.94" />
         <VALUE deb="2000-01-01" fin="2001-12-31" valeur="25.86" />
-      </CODE>
-      <CODE code="31_ter_butanes_liquefies_autres_100kg_nets" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="15.24" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="13" />
-        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="10.76" />
-        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="10.02" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="65.71" />
       </CODE>
     </NODE>
     <NODE code="produits_energetiques_d">
-      <CODE code="33_bis_autres_gaz_de_petrole_liquefies_utilises_comme_carburants_sous_conditions_100kg" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="9.16" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="6.92" />
-        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="4.68" />
-        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="3.94" />
-        <VALUE deb="1998-01-01" fin="2001-12-31" valeur="25.86" />
-        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="25.53" />
-        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="25" />
-        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="24.53" />
-        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="24.12" />
-        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="54.55" />
-        <VALUE deb="1993-01-01" fin="1993-04-14" valeur="53.43" />
+      <CODE code="autres_gaz_de_petrole_et_autres_hydrocarbures_a_l_etat_gazeux_100m3" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="4.69" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="3.09" />
+        <VALUE deb="2014-04-01" fin="2014-12-31" valeur="1.49" />
+        <VALUE deb="2008-01-01" fin="2014-03-31" valeur="0" />
+        <VALUE deb="2003-01-01" fin="2007-12-31" valeur="8.47" />
+        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="8.38" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="55" />
       </CODE>
-      <CODE code="34_autres_gaz_de_petrole_liquefies_utilises_comme_carburants_autres_100kg" format="float" type="monetary">
+      <CODE code="autres_gaz_de_petrole_liquefies_utilises_comme_carburants_autres_100kg" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="15.24" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="13" />
         <VALUE deb="2003-01-01" fin="2014-12-31" valeur="10.76" />
@@ -778,13 +774,26 @@
         <VALUE deb="1993-04-15" fin="1993-12-31" valeur="217.49" />
         <VALUE deb="1993-01-01" fin="1993-04-14" valeur="216" />
       </CODE>
-      <CODE code="36_bis_gaz_naturel_a_l_etat_gazeux_utilise_sous_conditions_aux_moteurs_stationnaires_100m3" format="float" type="monetary">
+      <CODE code="autres_gaz_de_petrole_liquefies_utilises_comme_carburants_sous_conditions_100kg" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="9.16" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="6.92" />
+        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="4.68" />
+        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="3.94" />
+        <VALUE deb="1998-01-01" fin="2001-12-31" valeur="25.86" />
+        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="25.53" />
+        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="25" />
+        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="24.53" />
+        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="24.12" />
+        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="54.55" />
+        <VALUE deb="1993-01-01" fin="1993-04-14" valeur="53.43" />
+      </CODE>
+      <CODE code="gaz_naturel_a_l_etat_gazeux_utilise_sous_conditions_aux_moteurs_stationnaires_100m3" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="4.69" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="3.09" />
         <VALUE deb="2014-04-01" fin="2014-12-31" valeur="1.49" />
         <VALUE deb="2008-01-01" fin="2014-03-31" valeur="0" />
       </CODE>
-      <CODE code="36_gaz_naturel_a_l_etat_gazeux_utilises_comme_carburants_100m3" format="float" type="monetary">
+      <CODE code="gaz_naturel_a_l_etat_gazeux_utilises_comme_carburants_100m3" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="4.69" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="3.09" />
         <VALUE deb="2014-04-01" fin="2014-12-31" valeur="1.49" />
@@ -799,25 +808,9 @@
         <VALUE deb="1994-01-01" fin="1994-12-31" valeur="61.59" />
         <VALUE deb="1993-04-15" fin="1993-12-31" valeur="55.446" />
       </CODE>
-      <CODE code="38_bis_autres_gaz_de_petrole_et_autres_hydrocarbures_a_l_etat_gazeux_100m3" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="4.69" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="3.09" />
-        <VALUE deb="2014-04-01" fin="2014-12-31" valeur="1.49" />
-        <VALUE deb="2008-01-01" fin="2014-03-31" valeur="0" />
-        <VALUE deb="2003-01-01" fin="2007-12-31" valeur="8.47" />
-        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="8.38" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="55" />
-      </CODE>
     </NODE>
     <NODE code="produits_energetiques_e">
-      <CODE code="52_emulsion_d_eau_dans_du_gazole_sous_conditions_hectolitre" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="5.39" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="3.74" />
-        <VALUE deb="2008-01-01" fin="2014-12-31" valeur="2.1" />
-        <VALUE deb="2002-01-01" fin="2007-12-31" valeur="1.8" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="40.85" />
-      </CODE>
-      <CODE code="53_emulsion_d_eau_dans_du_gazole_autres_hectolitre" format="float" type="monetary">
+      <CODE code="emulsion_d_eau_dans_du_gazole_autres_hectolitre" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="32" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="30.35" />
         <VALUE deb="2010-03-11" fin="2014-12-31" valeur="28.71" />
@@ -827,7 +820,14 @@
         <VALUE deb="2002-01-01" fin="2007-12-31" valeur="24.54" />
         <VALUE deb="2000-01-01" fin="2001-12-31" valeur="198.95" />
       </CODE>
-      <CODE code="55_super_e_85_utilise_comme_carburant_hectolitre" format="float" type="monetary">
+      <CODE code="emulsion_d_eau_dans_du_gazole_sous_conditions_hectolitre" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="5.39" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="3.74" />
+        <VALUE deb="2008-01-01" fin="2014-12-31" valeur="2.1" />
+        <VALUE deb="2002-01-01" fin="2007-12-31" valeur="1.8" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="40.85" />
+      </CODE>
+      <CODE code="super_e_85_utilise_comme_carburant_hectolitre" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="7.96" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="12.62" />
         <VALUE deb="2014-04-01" fin="2014-12-31" valeur="12.4" />
@@ -835,47 +835,6 @@
         <VALUE deb="2010-01-01" fin="2010-12-31" valeur="20.69" />
         <VALUE deb="2009-01-01" fin="2009-12-31" valeur="23.24" />
         <VALUE deb="2008-01-01" fin="2008-12-31" valeur="28.33" />
-      </CODE>
-    </NODE>
-    <NODE code="taux_de_tva">
-      <CODE code="taux_intermediaire" format="percent">
-        <VALUE deb="2014-01-01" fin="2020-12-31" valeur="0.1" />
-        <VALUE deb="2012-01-01" fin="2013-12-31" valeur="0.07" />
-        <VALUE deb="1986-07-01" fin="2011-12-31" valeur="0.13" />
-        <VALUE deb="1970-01-01" fin="1986-06-30" valeur="0.176" />
-        <VALUE deb="1968-12-01" fin="1969-12-31" valeur="0.15" />
-      </CODE>
-      <CODE code="taux_majore" format="percent">
-        <VALUE deb="1990-09-13" fin="2020-12-31" valeur="0.22" />
-        <VALUE deb="1990-01-01" fin="1990-09-12" valeur="0.25" />
-        <VALUE deb="1989-01-01" fin="1989-12-31" valeur="0.28" />
-        <VALUE deb="1970-01-01" fin="1988-12-31" valeur="0.3333" />
-        <VALUE deb="1968-12-01" fin="1969-12-31" valeur="0.25" />
-      </CODE>
-      <CODE code="taux_normal" format="percent">
-        <VALUE deb="2014-01-01" fin="2020-12-31" valeur="0.2" />
-        <VALUE deb="2000-04-01" fin="2013-12-31" valeur="0.196" />
-        <VALUE deb="1995-08-01" fin="2000-03-31" valeur="0.206" />
-        <VALUE deb="1982-07-01" fin="1995-07-31" valeur="0.186" />
-        <VALUE deb="1977-01-01" fin="1982-06-30" valeur="0.176" />
-        <VALUE deb="1973-01-01" fin="1976-12-31" valeur="0.2" />
-        <VALUE deb="1970-01-01" fin="1972-12-31" valeur="0.23" />
-        <VALUE deb="1968-12-01" fin="1969-12-31" valeur="0.19" />
-      </CODE>
-      <CODE code="taux_normal_ou_majore_temporaire" format="percent">
-        <VALUE deb="1987-09-17" fin="2020-12-31" valeur="0.28" />
-      </CODE>
-      <CODE code="taux_particulier_super_reduit" format="percent">
-        <VALUE deb="1986-07-01" fin="2020-12-31" valeur="0.021" />
-      </CODE>
-      <CODE code="taux_reduit" format="percent">
-        <VALUE deb="1982-07-01" fin="2020-12-31" valeur="0.055" />
-        <VALUE deb="1973-01-01" fin="1982-06-30" valeur="0.07" />
-        <VALUE deb="1970-01-01" fin="1972-12-31" valeur="0.075" />
-        <VALUE deb="1968-12-01" fin="1969-12-31" valeur="0.07" />
-      </CODE>
-      <CODE code="taux_reduit_2" format="percent">
-        <VALUE deb="1982-07-01" fin="2020-12-31" valeur="0.07" />
       </CODE>
     </NODE>
     <NODE code="taux_normaux_tabac">
@@ -1032,22 +991,22 @@
     </NODE>
     <NODE code="tsca">
       <CODE code="assurance_bateaux_de_sport_ou_de_plaisance" format="percent">
-        <VALUE deb="1983-12-30" fin="2020-12-31" valeur="0.19" />
-        <VALUE deb="1980-12-31" fin="1983-12-29" valeur="0.12" />
-        <VALUE deb="1979-07-01" fin="1980-12-30" valeur="0.0875" />
+        <VALUE deb="1984-01-01" fin="2020-12-31" valeur="0.19" />
+        <VALUE deb="1981-01-01" fin="1983-12-31" valeur="0.12" />
+        <VALUE deb="1979-07-01" fin="1980-12-31" valeur="0.0875" />
       </CODE>
       <CODE code="assurance_pertes_d_exploitations_dues_a_incendie_industrie_etc" format="percent">
         <VALUE deb="1989-01-01" fin="2020-12-31" valeur="0.07" />
         <VALUE deb="1979-07-01" fin="1988-12-31" valeur="0.0875" />
       </CODE>
       <CODE code="assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers" format="percent">
-        <VALUE deb="1990-12-30" fin="2020-12-31" valeur="0.18" />
-        <VALUE deb="1989-01-01" fin="1990-12-29" valeur="0.07" />
-        <VALUE deb="1983-12-30" fin="1988-12-31" valeur="0.18" />
+        <VALUE deb="1991-01-01" fin="2020-12-31" valeur="0.18" />
+        <VALUE deb="1989-01-01" fin="1990-12-31" valeur="0.07" />
+        <VALUE deb="1984-01-01" fin="1988-12-31" valeur="0.18" />
       </CODE>
       <CODE code="assurance_risques_non_exoneres_navigation_fluviale_ou_maritimes_tous_types_de_risque_navigation_aerienne" format="percent">
-        <VALUE deb="1983-12-30" fin="1988-12-31" valeur="0.046" />
-        <VALUE deb="1979-07-01" fin="1983-12-29" valeur="0.048" />
+        <VALUE deb="1984-01-01" fin="1988-12-31" valeur="0.046" />
+        <VALUE deb="1979-07-01" fin="1983-12-31" valeur="0.048" />
       </CODE>
       <CODE code="assurance_vehicules_terrestres_a_moteur_lourds_du_l211_1_code_des_assurances" format="percent">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="0.15" />
@@ -1072,8 +1031,8 @@
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="0.33" />
       </CODE>
       <CODE code="assurances_vie_et_assimilees" format="percent">
-        <VALUE deb="1980-12-31" fin="1989-12-29" valeur="0.0515" />
-        <VALUE deb="1979-07-01" fin="1980-12-30" valeur="0.048" />
+        <VALUE deb="1981-01-01" fin="1989-12-31" valeur="0.0515" />
+        <VALUE deb="1979-07-01" fin="1980-12-31" valeur="0.048" />
       </CODE>
       <CODE code="autres_assurances" format="percent">
         <VALUE deb="1979-07-01" fin="2020-12-31" valeur="0.09" />
@@ -1089,18 +1048,51 @@
         <VALUE deb="1994-09-02" fin="2010-12-31" valeur="0" />
       </CODE>
       <CODE code="contribution_secu_assurances_automobiles" format="percent">
-        <VALUE deb="2001-12-26" fin="2020-12-31" valeur="0.15" />
-      </CODE>
-      <CODE code="journal_officiel">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="2014-12-24" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="2014-12-30" />
-        <VALUE deb="2014-01-01" fin="2014-12-31" valeur="2013-12-24" />
-        <VALUE deb="2011-10-01" fin="2013-12-31" valeur="2011-09-20" />
-        <VALUE deb="2011-01-01" fin="2011-09-30" valeur="2010-12-30" />
-        <VALUE deb="1994-09-02" fin="2010-12-31" valeur="2001-12-26" />
+        <VALUE deb="2002-01-01" fin="2020-12-31" valeur="0.15" />
       </CODE>
       <CODE code="rente_viagere_sous_conditions" format="percent">
-        <VALUE deb="1979-07-01" fin="1989-12-29" valeur="0.024" />
+        <VALUE deb="1979-07-01" fin="1989-12-31" valeur="0.024" />
+      </CODE>
+    </NODE>
+    <NODE code="tva">
+      <CODE code="taux_intermediaire" format="percent">
+        <VALUE deb="2014-01-01" fin="2020-12-31" valeur="0.1" />
+        <VALUE deb="2012-01-01" fin="2013-12-31" valeur="0.07" />
+        <VALUE deb="1986-07-01" fin="2011-12-31" valeur="0.13" />
+        <VALUE deb="1970-01-01" fin="1986-06-30" valeur="0.176" />
+        <VALUE deb="1968-12-01" fin="1969-12-31" valeur="0.15" />
+      </CODE>
+      <CODE code="taux_majore" format="percent">
+        <VALUE deb="1990-09-13" fin="2020-12-31" valeur="0.22" />
+        <VALUE deb="1990-01-01" fin="1990-09-12" valeur="0.25" />
+        <VALUE deb="1989-01-01" fin="1989-12-31" valeur="0.28" />
+        <VALUE deb="1970-01-01" fin="1988-12-31" valeur="0.3333" />
+        <VALUE deb="1968-12-01" fin="1969-12-31" valeur="0.25" />
+      </CODE>
+      <CODE code="taux_normal_ou_majore_temporaire" format="percent">
+        <VALUE deb="1987-09-17" fin="2020-12-31" valeur="0.28" />
+      </CODE>
+      <CODE code="taux_particulier_super_reduit" format="percent">
+        <VALUE deb="1986-07-01" fin="2020-12-31" valeur="0.021" />
+      </CODE>
+      <CODE code="taux_plein" format="percent">
+        <VALUE deb="2014-01-01" fin="2020-12-31" valeur="0.2" />
+        <VALUE deb="2000-04-01" fin="2013-12-31" valeur="0.196" />
+        <VALUE deb="1995-08-01" fin="2000-03-31" valeur="0.206" />
+        <VALUE deb="1982-07-01" fin="1995-07-31" valeur="0.186" />
+        <VALUE deb="1977-01-01" fin="1982-06-30" valeur="0.176" />
+        <VALUE deb="1972-01-01" fin="1976-12-31" valeur="0.2" />
+        <VALUE deb="1970-01-01" fin="1971-12-31" valeur="0.23" />
+        <VALUE deb="1968-12-01" fin="1969-12-31" valeur="0.19" />
+      </CODE>
+      <CODE code="taux_reduit" format="percent">
+        <VALUE deb="1982-07-01" fin="2020-12-31" valeur="0.055" />
+        <VALUE deb="1972-01-01" fin="1982-06-30" valeur="0.07" />
+        <VALUE deb="1970-01-01" fin="1971-12-31" valeur="0.075" />
+        <VALUE deb="1968-12-01" fin="1969-12-31" valeur="0.07" />
+      </CODE>
+      <CODE code="taux_reduit_2" format="percent">
+        <VALUE deb="1982-07-01" fin="2020-12-31" valeur="0.07" />
       </CODE>
     </NODE>
   </NODE>
