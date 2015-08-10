@@ -54,7 +54,7 @@ if __name__ == '__main__':
         'droit_d_accise_alcool',
         'droit_d_accise_tabac',
         'taxe_assurance',
-        'tipp'
+        'ticpe'
         ]
 
     for year in [2000, 2005, 2011]:
@@ -65,7 +65,7 @@ if __name__ == '__main__':
 
         varlist = ['somme_coicop12', 'rev_disp_loyerimput', 'rev_disponible', 'tva_total',
                    'droit_d_accise_alcool', 'droit_d_accise_tabac',
-                   'taxe_assurance', 'tipp']
+                   'taxe_assurance', 'ticpe']
         Wconcat_rev_disp = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = varlist)
         Wconcat_conso = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = varlist)
         Wconcat_rev_disp_loyerimput = df_weighted_average_grouped(dataframe = df,
@@ -85,9 +85,9 @@ if __name__ == '__main__':
         Wconcat_rev_disp['taux_d_effort_assurance'] = \
             Wconcat_rev_disp['taxe_assurance'] / Wconcat_rev_disp['rev_disponible']
         list_taux_d_effort_rev_disp.append('taux_d_effort_assurance')
-        Wconcat_rev_disp['taux_d_effort_tipp'] = \
-            Wconcat_rev_disp['tipp'] / Wconcat_rev_disp['rev_disponible']
-        list_taux_d_effort_rev_disp.append('taux_d_effort_tipp')
+        Wconcat_rev_disp['taux_d_effort_ticpe'] = \
+            Wconcat_rev_disp['ticpe'] / Wconcat_rev_disp['rev_disponible']
+        list_taux_d_effort_rev_disp.append('taux_d_effort_ticpe')
 
         list_taux_d_effort_conso = []
 
@@ -103,9 +103,9 @@ if __name__ == '__main__':
         Wconcat_conso['taux_d_effort_assurance'] = \
             Wconcat_conso['taxe_assurance'] / Wconcat_conso['somme_coicop12']
         list_taux_d_effort_conso.append('taux_d_effort_assurance')
-        Wconcat_conso['taux_d_effort_tipp'] = \
-            Wconcat_conso['tipp'] / Wconcat_conso['somme_coicop12']
-        list_taux_d_effort_conso.append('taux_d_effort_tipp')
+        Wconcat_conso['taux_d_effort_ticpe'] = \
+            Wconcat_conso['ticpe'] / Wconcat_conso['somme_coicop12']
+        list_taux_d_effort_conso.append('taux_d_effort_ticpe')
 
         list_taux_d_effort_rev_disp_loyerimput = []
 
@@ -125,9 +125,9 @@ if __name__ == '__main__':
         Wconcat_rev_disp_loyerimput['taux_d_effort_assurance'] = \
             Wconcat_rev_disp_loyerimput['taxe_assurance'] / Wconcat_rev_disp_loyerimput['rev_disp_loyerimput']
         list_taux_d_effort_rev_disp_loyerimput.append('taux_d_effort_assurance')
-        Wconcat_rev_disp_loyerimput['taux_d_effort_tipp'] = \
-            Wconcat_rev_disp_loyerimput['tipp'] / Wconcat_rev_disp_loyerimput['rev_disp_loyerimput']
-        list_taux_d_effort_rev_disp_loyerimput.append('taux_d_effort_tipp')
+        Wconcat_rev_disp_loyerimput['taux_d_effort_ticpe'] = \
+            Wconcat_rev_disp_loyerimput['ticpe'] / Wconcat_rev_disp_loyerimput['rev_disp_loyerimput']
+        list_taux_d_effort_rev_disp_loyerimput.append('taux_d_effort_ticpe')
 
         df_to_graph_rev_disp = Wconcat_rev_disp[list_taux_d_effort_rev_disp].copy()
         graph_builder_bar(df_to_graph_rev_disp)

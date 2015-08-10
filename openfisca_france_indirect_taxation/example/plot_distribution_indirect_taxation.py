@@ -49,7 +49,7 @@ if __name__ == '__main__':
         'droit_d_accise_alcool',
         'droit_d_accise_tabac',
         'taxe_assurance',
-        'tipp',
+        'ticpe',
         'total_taxes_indirectes'
         ]
 
@@ -64,7 +64,7 @@ if __name__ == '__main__':
             df.niveau_vie_decile[df.decuc == 10] = 10
 
         varlist = ['total_taxes_indirectes', 'tva_total', 'droit_d_accise_alcool',
-                   'droit_d_accise_tabac', 'taxe_assurance', 'tipp']
+                   'droit_d_accise_tabac', 'taxe_assurance', 'ticpe']
         Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = varlist)
 
         # Example
@@ -72,8 +72,8 @@ if __name__ == '__main__':
         Wconcat['part_tva'] = Wconcat['tva_total'] / Wconcat['total_taxes_indirectes']
         list_part.append('part_tva')
 
-        Wconcat['part_tipp'] = Wconcat['tipp'] / Wconcat['total_taxes_indirectes']
-        list_part.append('part_tipp')
+        Wconcat['part_ticpe'] = Wconcat['ticpe'] / Wconcat['total_taxes_indirectes']
+        list_part.append('part_ticpe')
 
         Wconcat['part_alcool'] = Wconcat['droit_d_accise_alcool'] / Wconcat['total_taxes_indirectes']
         list_part.append('part_alcool')

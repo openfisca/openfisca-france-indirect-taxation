@@ -53,7 +53,7 @@ if __name__ == '__main__':
         'taxe_assurance_transport',
         'taxe_assurance_sante',
         'taxe_autres_assurances',
-        'tipp',
+        'ticpe',
         'tva_total',
         'total_taxes_indirectes',
         'total_taxes_indirectes_sans_tva'
@@ -81,7 +81,7 @@ if __name__ == '__main__':
         aggregates_data_frame['taxe_7'] = aggregates_data_frame['taxe_assurance_transport']
         aggregates_data_frame['taxe_8'] = aggregates_data_frame['taxe_assurance_sante']
         aggregates_data_frame['taxe_9'] = aggregates_data_frame['taxe_autres_assurances']
-        aggregates_data_frame['taxe_10'] = aggregates_data_frame['tipp']
+        aggregates_data_frame['taxe_10'] = aggregates_data_frame['ticpe']
         aggregates_data_frame['taxe_11'] = aggregates_data_frame['tva_total']
 
         list_taxes = []

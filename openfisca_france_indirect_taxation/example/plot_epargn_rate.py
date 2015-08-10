@@ -53,7 +53,7 @@ if __name__ == '__main__':
         'rev_disponible',
         'pondmen',
         'tva_total',
-        'tipp',
+        'ticpe',
         'taxe_assurance_sante',
         'droit_d_accise_vin',
         'droit_d_accise_cigares',
@@ -74,7 +74,7 @@ if __name__ == '__main__':
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame,
             groupe = 'niveau_vie_decile', varlist = var_to_be_simulated)
         aggregates_data_frame['taxe_1'] = aggregates_data_frame['tva_total']
-        aggregates_data_frame['taxe_2'] = aggregates_data_frame['tipp']
+        aggregates_data_frame['taxe_2'] = aggregates_data_frame['ticpe']
         aggregates_data_frame['taxe_3'] = (
             aggregates_data_frame['taxe_assurance_sante'] +
             aggregates_data_frame['taxe_assurance_transport'] +
