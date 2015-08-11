@@ -32,6 +32,7 @@ from openfisca_core.taxbenefitsystems import XmlBasedTaxBenefitSystem
 from .entities import entity_class_by_symbol
 from .scenarios import Scenario
 from . import param
+from .param import preprocessing
 
 
 # TaxBenefitSystems
@@ -46,6 +47,8 @@ def init_country():
             os.path.dirname(os.path.abspath(param.__file__)),
             'parameters.xml'
             )
+        preprocess_legislation = staticmethod(preprocessing.preprocess_legislation)
+
 
     # Define class attributes after class declaration to avoid "name is not defined" exceptions.
     TaxBenefitSystem.Scenario = Scenario
