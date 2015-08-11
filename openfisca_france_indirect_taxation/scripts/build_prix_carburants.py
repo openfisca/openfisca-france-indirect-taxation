@@ -8,12 +8,13 @@ Created on Tue Aug 11 16:05:22 2015
 import sys
 
 
-def main(dataframe):
-    dataframe['Date'] = dataframe['Date'].astype(int)
-    dataframe = dataframe.set_index('Date')
+def main():
+    from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_annuel_carburants_90_14
+    prix_annuel_carburants_90_14['Date'] = prix_annuel_carburants_90_14['Date'].astype(int)
+    prix_annuel_carburants_90_14 = prix_annuel_carburants_90_14.set_index('Date')
     all_values = {}
     for element in ['diesel_ttc']:
-        prix_annuel_carburants = dataframe['{}'.format(element)]
+        prix_annuel_carburants = prix_annuel_carburants_90_14['{}'.format(element)]
         all_values['{}'.format(element)] = []
         prix_carbu = {
             "@type": "Node",
