@@ -44,6 +44,8 @@ def preprocess_legislation(legislation_json):
             'prix_annuel_carburants.csv'
             ), sep =';'
         )
+    prix_carburants['Date'] = prix_carburants['Date'].astype(int)
+    prix_carburants = prix_carburants.set_index('Date')
 
     all_values = {}
     for element in ['diesel_ht', 'diesel_ttc', 'super_95_ht', 'super_95_ttc', 'super_98_ht', 'super_98_ttc',
