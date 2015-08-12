@@ -8,7 +8,7 @@ Created on Tue Aug 11 16:05:22 2015
 import sys
 import pkg_resources
 import os
-import pandas as pd
+import csv
 
 
 def main():
@@ -16,7 +16,8 @@ def main():
     prix_annuel_carburants_90_14['Date'] = prix_annuel_carburants_90_14['Date'].astype(int)
     prix_annuel_carburants_90_14 = prix_annuel_carburants_90_14.set_index('Date')
     all_values = {}
-    for element in ['diesel_ttc']:
+    for element in ['diesel_ht', 'diesel_ttc', 'super_95_ht', 'super_95_ttc', 'super_98_ht', 'super_98_ttc',
+            'super_95_e10_ht', 'super_95_e10_ttc', 'gplc_ht', 'gplc_ttc', 'super_plombe_ht', 'super_plombe_ttc']:
         prix_annuel_carburants = prix_annuel_carburants_90_14['{}'.format(element)]
         all_values['{}'.format(element)] = []
         prix_carburants = {
@@ -42,10 +43,14 @@ def main():
             pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
             )
 
-        prix_annuel_carburants = pd.DataFrame(prix_carburants.items())
-        prix_annuel_carburants.to_csv(os.path.join(
-            assets_directory, 'openfisca_france_indirect_taxation', 'assets', 'prix_annuel_carburants.csv')
-            )
+        fieldnames = ['start', 'stop', 'value']
+        with open(os.path.join(
+                assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+                'prix_annuel_carburants_{}.csv'.format(element)), 'wb') as csvfile:
+            csvwriter = csv.DictWriter(csvfile, sep = ',', fieldnames, extrasaction = 'raise')
+            csvwriter.writerow(dict((fn, fn) for fn in fieldnames))
+            for row in prix_carburants['children'][element]['values']:
+                csvwriter.writerow(row)
 
 
 if __name__ == "__main__":
