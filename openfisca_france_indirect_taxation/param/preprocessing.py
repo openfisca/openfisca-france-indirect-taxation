@@ -30,6 +30,46 @@ def preprocess_legislation(legislation_json):
     '''
     Preprocess the legislation parameters to add prices and amounts from national accounts
     '''
+    import os
+    import pkg_resources
+    import pandas as pd
 
-    legislation_json['children']['imposition_indirecte']['children']['prix_carburants'] = prix_carburants_subtree
+    default_config_files_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    prix_carburants = pd.read_csv(
+        os.path.join(
+            default_config_files_directory,
+            'openfisca_france_indirect_taxation',
+            'assets',
+            'prix_annuel_carburants.csv'
+            ), sep =';'
+        )
+
+    all_values = {}
+    for element in ['diesel_ht', 'diesel_ttc', 'super_95_ht', 'super_95_ttc', 'super_98_ht', 'super_98_ttc',
+            'super_95_e10_ht', 'super_95_e10_ttc', 'gplc_ht', 'gplc_ttc', 'super_plombe_ht', 'super_plombe_ttc']:
+        prix_carburants = prix_carburants['{}'.format(element)]
+        all_values['{}'.format(element)] = []
+        prix_carburants = {
+            "@type": "Node",
+            "description": "prix des carburants en euros par hectolitre",
+            "children": {},
+            }
+        for year in range(1990, 2015):
+            values = dict()
+            values['start'] = u'{}-01-01'.format(year)
+            values['stop'] = u'{}-12-31'.format(year)
+            values['value'] = prix_carburants.loc[year] * 100
+            all_values[element].append(values)
+
+        prix_carburants['children'][element] = {
+            "@type": "Parameter",
+            "description": element.replace('_', ' '),
+            "format": "float",
+            "values": all_values[element]
+            }
+
+    legislation_json['children']['imposition_indirecte']['children']['prix_carburants'] = \
+        prix_carburants
+
     return legislation_json
