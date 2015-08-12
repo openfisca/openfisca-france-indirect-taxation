@@ -47,11 +47,10 @@ def main():
         with open(os.path.join(
                 assets_directory, 'openfisca_france_indirect_taxation', 'assets',
                 'prix_annuel_carburants_{}.csv'.format(element)), 'wb') as csvfile:
-            csvwriter = csv.DictWriter(csvfile, sep = ',', fieldnames, extrasaction = 'raise')
+            csvwriter = csv.DictWriter(csvfile, fieldnames, delimiter = ';', extrasaction = 'raise')
             csvwriter.writerow(dict((fn, fn) for fn in fieldnames))
             for row in prix_carburants['children'][element]['values']:
                 csvwriter.writerow(row)
-
 
 if __name__ == "__main__":
     sys.exit(main())
