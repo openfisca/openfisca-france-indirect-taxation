@@ -227,13 +227,13 @@ class ticpe(SimpleFormulaColumn):
         ticpe_super9598 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
         ticpe_gazole = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
 
-        prix_ttc_super95 = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.prix_ttc_super95
-        prix_ttc_super98 = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.prix_ttc_super98
-        prix_ttc_super9598 = (prix_ttc_super95 + prix_ttc_super98) / 2
+        super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+        super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
+        prix_super_ttc = (super_95_ttc + super_98_ttc) / 2
 
-        prix_ttc_gazole = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.prix_ttc_gazole
+        prix_ttc_gazole = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
 
-        taux_implicite_super9598 = ticpe_super9598 * (1 + taux_plein_tva) / (prix_ttc_super9598 - ticpe_super9598 * (1 + taux_plein_tva))
+        taux_implicite_super9598 = ticpe_super9598 * (1 + taux_plein_tva) / (prix_super_ttc - ticpe_super9598 * (1 + taux_plein_tva))
         taux_implicite_diesel = ticpe_gazole * (1 + taux_plein_tva) / (prix_ttc_gazole - ticpe_gazole * (1 + taux_plein_tva))
 
         taux_implicite_ticpe = taux_implicite_diesel * (1 - pourcentage_vehicule_essence) + taux_implicite_super9598 * pourcentage_vehicule_essence
