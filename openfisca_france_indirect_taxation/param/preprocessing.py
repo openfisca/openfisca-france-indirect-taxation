@@ -34,6 +34,8 @@ def preprocess_legislation(legislation_json):
     import pkg_resources
     import pandas as pd
 
+    # Add fuel prices to the tree
+
     default_config_files_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     prix_annuel_carburants = pd.read_csv(
@@ -71,6 +73,86 @@ def preprocess_legislation(legislation_json):
             "values": all_values[element]
             }
     legislation_json['children']['imposition_indirecte']['children']['prix_carburants'] = prix_carburants
+
+    # Add the number of vehicle in circulation to the tree
+
+    default_config_files_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    parc_annuel_moyen_vp = pd.read_csv(
+        os.path.join(
+            default_config_files_directory,
+            'openfisca_france_indirect_taxation',
+            'assets',
+            'parc_annuel_moyen_vp.csv'
+            ), sep =';'
+        )
+
+    parc_annuel_moyen_vp = parc_annuel_moyen_vp.set_index('Unnamed: 0')
+    values_parc = {}
+    parc_vp = {
+        "@type": "Node",
+        "description": "taille moyenne du parc automobile en France métropolitaine en milliers de véhicules",
+        "children": {},
+    }
+    for element in ['diesel', 'essence']:
+        taille_parc = parc_annuel_moyen_vp[element]
+        values_parc[element] = []
+        for year in range(1990, 2014):
+            values = dict()
+            values['start'] = u'{}-01-01'.format(year)
+            values['stop'] = u'{}-12-31'.format(year)
+            values['value'] = taille_parc.loc[year]
+            values_parc[element].append(values)
+
+        parc_vp['children'][element] = {
+            "@type": "Parameter",
+            "description": "nombre de véhicules particuliers immatriculés en France à motorisation " + element,
+            "format": "float",
+            "values": values_parc[element]
+        }
+
+        legislation_json['children']['imposition_indirecte']['children']['parc_vp'] = parc_vp
+
+    # Add the total quantity of fuel consumed per year to the tree
+
+    default_config_files_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    quantite_carbu_vp_france = pd.read_csv(
+        os.path.join(
+            default_config_files_directory,
+            'openfisca_france_indirect_taxation',
+            'assets',
+            'quantite_carbu_vp_france.csv'
+            ), sep =';'
+        )
+
+    quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('Unnamed: 0')
+    values_quantite = {}
+    quantite_carbu_vp = {
+        "@type": "Node",
+        "description": "quantite de carburants consommés en France métropolitaine",
+        "children": {},
+    }
+    for element in ['diesel', 'essence']:
+        quantite_carburants = quantite_carbu_vp_france[element]
+        values_quantite[element] = []
+        for year in range(1990, 2014):
+            values = dict()
+            values['start'] = u'{}-01-01'.format(year)
+            values['stop'] = u'{}-12-31'.format(year)
+            values['value'] = quantite_carburants.loc[year]
+            values_parc[element].append(values)
+
+        quantite_carbu_vp['children'][element] = {
+            "@type": "Parameter",
+            "description": "consommation totale de" + element + " en France",
+            "format": "float",
+            "values": values_quantite[element]
+        }
+
+        legislation_json['children']['imposition_indirecte']['children']['quantite_carbu_vp'] = quantite_carbu_vp
+
+    # Add data from comptabilite national about alcohol
 
     alcool_conso_et_vin = {
         "@type": "Node",
