@@ -141,7 +141,7 @@ def preprocess_legislation(legislation_json):
             values['start'] = u'{}-01-01'.format(year)
             values['stop'] = u'{}-12-31'.format(year)
             values['value'] = quantite_carburants.loc[year]
-            values_parc[element].append(values)
+            values_quantite[element].append(values)
 
         quantite_carbu_vp['children'][element] = {
             "@type": "Parameter",
