@@ -111,7 +111,7 @@ def main():
 
     tree = collections.OrderedDict()
     for source_dir_encoded, directories_name_encoded, filenames_encoded in os.walk(args.source_dir):
-        # We deal only with taxation indirecte
+        # We deal only with taxation indirecte
         if not source_dir_encoded.endswith('taxation-indirecte'):
             continue
         directories_name_encoded.sort()
@@ -197,8 +197,6 @@ def main():
                     sub_tree = tree
                     translations = ipp_translations
                     translated_path = []
-                    print ipp_path
-                    print remaining_path
                     while remaining_path:
                         fragment = remaining_path.pop(0)
                         fragment = slugify_ipp_translation_key(fragment)
