@@ -79,7 +79,8 @@ class taxe_assurance_sante(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         consommation_assurance_sante = simulation.calculate('consommation_assurance_sante', period)
-        taux = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.taux_assurances_sante
+        taux = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.contrats_d_assurance_maladie_individuelles_et_collectives_cas_general_2_ter
+        # To do: use datedformula and change the computation method when other taxes play a role.
         return period, tax_from_expense_including_tax(consommation_assurance_sante, taux)
 
 
