@@ -53,8 +53,10 @@ class droit_d_accise_alcools_forts(SimpleFormulaColumn):
     def function(self, simulation, period):
         consommation_alcools_forts = simulation.calculate('consommation_alcools_forts', period)
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-        droit_cn = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.alcools_forts.droit_cn_alcools_total
-        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.alcools_forts.masse_conso_cn_alcools
+        droit_cn = \
+            simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.alcools_forts.droit_cn_alcools_total
+        consommation_cn = \
+            simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.alcools_forts.masse_conso_cn_alcools
         return period, droit_d_accise(consommation_alcools_forts, droit_cn, consommation_cn, taux_plein_tva)
 
 
@@ -93,7 +95,8 @@ class taxe_assurance_transport(DatedFormulaColumn):
     @dated_function(start = date(1984, 1, 1), stop = date(2001, 12, 31))
     def function(self, simulation, period):
         consommation_assurance_transport = simulation.calculate('consommation_assurance_transport', period)
-        taux_assurance_vtm = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers
+        taux_assurance_vtm = \
+            simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers
         taux = taux_assurance_vtm
         return period, tax_from_expense_including_tax(consommation_assurance_transport, taux)
 
@@ -108,9 +111,12 @@ class taxe_assurance_transport(DatedFormulaColumn):
     @dated_function(start = date(2004, 8, 5), stop = date(2015, 12, 31))
     def function(self, simulation, period):
         consommation_assurance_transport = simulation.calculate('consommation_assurance_transport', period)
-        taux_assurance_vtm = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers
-        taux_contrib_secu_vtm = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.contribution_secu_assurances_automobiles
-        taux_contrib_fgao = simulation.legislation_at(period.start).imposition_indirecte.fgao.contribution_des_assures_en_pourcentage_des_primes
+        taux_assurance_vtm = \
+            simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers
+        taux_contrib_secu_vtm = \
+            simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.contribution_secu_assurances_automobiles
+        taux_contrib_fgao = \
+            simulation.legislation_at(period.start).imposition_indirecte.fgao.contribution_des_assures_en_pourcentage_des_primes
         taux = taux_assurance_vtm + taux_contrib_secu_vtm + taux_contrib_fgao
         return period, tax_from_expense_including_tax(consommation_assurance_transport, taux)
 
@@ -128,6 +134,61 @@ class taxe_autres_assurances(SimpleFormulaColumn):
 
 
 @reference_formula
+class depenses_diesel(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Construction par pondération des dépenses spécifiques au diesel"
+
+    def function(self, simulation, period):
+        conso_totale_vp_diesel = simulation.legislation_at(period.start).imposition_indirecte.quantite_carbu_vp.diesel
+        conso_totale_vp_essence = simulation.legislation_at(period.start).imposition_indirecte.quantite_carbu_vp.essence
+        taille_parc_diesel = simulation.legislation_at(period.start).imposition_indirecte.parc_vp.diesel
+        taille_parc_essence = simulation.legislation_at(period.start).imposition_indirecte.parc_vp.essence
+
+        conso_moyenne_vp_diesel = conso_totale_vp_diesel / taille_parc_diesel
+        conso_moyenne_vp_essence = conso_totale_vp_essence / taille_parc_essence
+
+        nombre_vehicules_diesel = simulation.calculate('veh_diesel', period)
+        nombre_vehicules_essence = simulation.calculate('veh_essence', period)
+        nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence
+
+        # to compute part_conso_diesel we need to avoid dividing by zero for those we do not have any vehicle
+        # Thus, we choose arbitrarily to divide it by 1, but this choice won't affect the result as long as it is not 0
+        denominateur = (
+            (nombre_vehicules_diesel * conso_moyenne_vp_diesel) + (nombre_vehicules_essence * conso_moyenne_vp_essence)
+            ) * (nombre_vehicules_total != 0) + 1 * (nombre_vehicules_total == 0)
+
+        part_conso_diesel = (nombre_vehicules_diesel * conso_moyenne_vp_diesel) / denominateur
+
+        # Get information about fuel consumption and use weights to compute expenses in ticpe
+        depenses_carburants = simulation.calculate('consommation_ticpe', period)
+
+        # part_conso_diesel makes everything explode when it is nan. nan * 0 = nan
+        depenses_diesel = depenses_carburants * (
+            (nombre_vehicules_total == 0) * (
+                conso_totale_vp_diesel / (conso_totale_vp_diesel + conso_totale_vp_essence)
+                ) +
+            (nombre_vehicules_total != 0) * part_conso_diesel
+            )
+
+        return period, depenses_diesel
+
+
+@reference_formula
+class depenses_essence(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Construction par pondération des dépenses spécifiques à l'essence"
+
+    def function(self, simulation, period):
+        depenses_carburants = simulation.calculate('consommation_ticpe', period)
+        depenses_diesel = simulation.calculate('depenses_diesel', period)
+        depenses_essence = depenses_carburants - depenses_diesel
+
+        return period, depenses_essence
+
+
+@reference_formula
 class droit_d_accise_biere(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
@@ -137,7 +198,8 @@ class droit_d_accise_biere(SimpleFormulaColumn):
         consommation_biere = simulation.calculate('consommation_biere', period)
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         droit_cn = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.biere.droit_cn_biere
-        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.biere.masse_conso_cn_biere
+        consommation_cn = \
+            simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.biere.masse_conso_cn_biere
         return period, droit_d_accise(consommation_biere, droit_cn, consommation_cn, taux_plein_tva)
 
 
@@ -161,7 +223,8 @@ class droit_d_accise_cigarette(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         consommation_cigarette = simulation.calculate('consommation_cigarette', period)
-        taux_normal_cigarette = simulation.legislation_at(period.start).imposition_indirecte.tabac.taux_normal.cigarettes
+        taux_normal_cigarette = \
+            simulation.legislation_at(period.start).imposition_indirecte.tabac.taux_normal.cigarettes
         return period, tax_from_expense_including_tax(consommation_cigarette, taux_normal_cigarette)
 
 
@@ -175,7 +238,8 @@ class droit_d_accise_vin(SimpleFormulaColumn):
         consommation_vin = simulation.calculate('consommation_vin', period)
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         droit_cn = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.vin.droit_cn_vin
-        consommation_cn = simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.vin.masse_conso_cn_vin
+        consommation_cn = \
+            simulation.legislation_at(period.start).imposition_indirecte.alcool_conso_et_vin.vin.masse_conso_cn_vin
         return period, droit_d_accise(consommation_vin, droit_cn, consommation_cn, taux_plein_tva)
 
 
@@ -200,33 +264,19 @@ class droit_d_accise_tabac_a_rouler(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         consommation_tabac_a_rouler = simulation.calculate('consommation_tabac_a_rouler', period)
-        taux_normal_tabac_a_rouler = simulation.legislation_at(period.start).imposition_indirecte.tabac.taux_normal.tabac_a_rouler
+        taux_normal_tabac_a_rouler = \
+            simulation.legislation_at(period.start).imposition_indirecte.tabac.taux_normal.tabac_a_rouler
         return period, tax_from_expense_including_tax(consommation_tabac_a_rouler, taux_normal_tabac_a_rouler)
 
 
 @reference_formula
-class ticpe_carburants(SimpleFormulaColumn):
+class ticpe_diesel(SimpleFormulaColumn):
     column = FloatCol
     entity_class = Menages
-    label = u"Montants de la Taxe Intérieur sur la Consommation des Produits Energétiques"
+    label = u"Calcul du montant de TICPE sur le diesel"
 
     def function(self, simulation, period):
-
-        # Get TVA at full rate
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-
-        # Get implied tax rate for super
-        accise_ticpe_super9598 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
-        super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
-        super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
-        # Need to use proxies to construct a weighted average
-        prix_sp_ttc = (super_95_ttc + super_98_ttc) / 2
-        taux_implicite_super9598 = (
-            (accise_ticpe_super9598 * (1 + taux_plein_tva)) /
-            (prix_sp_ttc - accise_ticpe_super9598 * (1 + taux_plein_tva))
-            )
-
-        # Get implied tax rate for diesel
         accise_ticpe_diesel = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
         prix_diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
         taux_implicite_diesel = (
@@ -234,45 +284,150 @@ class ticpe_carburants(SimpleFormulaColumn):
             (prix_diesel_ttc - accise_ticpe_diesel * (1 + taux_plein_tva))
             )
 
-        # Get weights to construct an approximation of consumption per type of fuel for each household
-        conso_totale_vp_diesel = simulation.legislation_at(period.start).imposition_indirecte.quantite_carbu_vp.diesel
-        conso_totale_vp_essence = simulation.legislation_at(period.start).imposition_indirecte.quantite_carbu_vp.essence
-        taille_parc_diesel = simulation.legislation_at(period.start).imposition_indirecte.parc_vp.diesel
-        taille_parc_essence = simulation.legislation_at(period.start).imposition_indirecte.parc_vp.essence
+        depenses_diesel = simulation.calculate('depenses_diesel', period)
+        depenses_diesel_htva = depenses_diesel - tax_from_expense_including_tax(depenses_diesel, taux_plein_tva)
+        montant_ticpe_diesel = tax_from_expense_including_tax(depenses_diesel_htva, taux_implicite_diesel)
 
-        conso_moyenne_vp_diesel = conso_totale_vp_diesel / taille_parc_diesel
-        conso_moyenne_vp_essence = conso_totale_vp_essence / taille_parc_essence
+        return period, montant_ticpe_diesel
 
-        nombre_vehicules_diesel = simulation.calculate('veh_diesel', period)
-        nombre_vehicules_essence = simulation.calculate('veh_essence', period)
 
-        # Those weights do not work, they do not sum to 1
-        part_conso_diesel = (
-            (nombre_vehicules_diesel * conso_moyenne_vp_diesel) /
-            ((nombre_vehicules_essence * conso_moyenne_vp_essence) +
-            (nombre_vehicules_diesel * conso_moyenne_vp_diesel))
+@reference_formula
+class ticpe_essence(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Calcul du montant de la TICPE sur toutes les essences cumulées"
+
+    def function(self, simulation, period):
+
+        ticpe_sp95 = simulation.calculate('ticpe_sp95', period)
+        ticpe_sp98 = simulation.calculate('ticpe_sp98', period)
+        try:
+            ticpe_super_plombe = simulation.calculate('ticpe_super_plombe', period)
+        except AttributeError:
+            ticpe_super_plombe = 0
+        try:
+            ticpe_sp_e10 = simulation.calculate('ticpe_sp_e10', period)
+        except AttributeError:
+            ticpe_sp_e10 = 0
+
+        ticpe_essence = (ticpe_sp95 + ticpe_sp98 + ticpe_super_plombe + ticpe_sp_e10)
+
+        return period, ticpe_essence
+
+
+@reference_formula
+class ticpe_sp95(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Calcul du montant de TICPE sur le sp_95"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        accise_ticpe_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+        super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+        taux_implicite_sp95 = (
+            (accise_ticpe_super95 * (1 + taux_plein_tva)) /
+            (super_95_ttc - accise_ticpe_super95 * (1 + taux_plein_tva))
             )
+        depenses_essence = simulation.calculate('depenses_essence', period)
+        part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
+        depenses_sp95 = depenses_essence * part_sp95
+        depenses_sp95_htva = depenses_sp95 - tax_from_expense_including_tax(depenses_sp95, taux_plein_tva)
+        montant_ticpe_sp95 = tax_from_expense_including_tax(depenses_sp95_htva, taux_implicite_sp95)
 
-        part_conso_essence = (
-            (nombre_vehicules_essence * conso_moyenne_vp_essence) /
-            ((nombre_vehicules_essence * conso_moyenne_vp_essence) +
-            (nombre_vehicules_diesel * conso_moyenne_vp_diesel))
+        return period, montant_ticpe_sp95
+
+
+@reference_formula
+class ticpe_sp98(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Calcul du montant de TICPE sur le sp_98"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        accise_ticpe_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+        super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
+        taux_implicite_sp98 = (
+            (accise_ticpe_super98 * (1 + taux_plein_tva)) /
+            (super_98_ttc - accise_ticpe_super98 * (1 + taux_plein_tva))
             )
+        depenses_essence = simulation.calculate('depenses_essence', period)
+        part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
+        depenses_sp98 = depenses_essence * part_sp98
+        depenses_sp98_htva = depenses_sp98 - tax_from_expense_including_tax(depenses_sp98, taux_plein_tva)
+        montant_ticpe_sp98 = tax_from_expense_including_tax(depenses_sp98_htva, taux_implicite_sp98)
 
-        # Get information about fuel consumption and use weights to compute expenses in ticpe
-        depenses_carburants = simulation.calculate('consommation_ticpe', period)
-        depenses_diesel = depenses_carburants * part_conso_diesel
-        depenses_diesel_ht = depenses_diesel - tax_from_expense_including_tax(depenses_diesel, taux_plein_tva)
-        depenses_essence = depenses_carburants * part_conso_essence
-        depenses_essence_ht = depenses_essence - tax_from_expense_including_tax(depenses_essence, taux_plein_tva)
+        return period, montant_ticpe_sp98
 
-        montant_ticpe_diesel = tax_from_expense_including_tax(depenses_diesel_ht, taux_implicite_diesel)
-        montant_ticpe_essence = tax_from_expense_including_tax(depenses_essence_ht, taux_implicite_super9598)
-        montant_ticpe_total = montant_ticpe_diesel + montant_ticpe_essence
 
-        # We also have to fill ticpe for those who do not have a car, and thus no weights.
+@reference_formula
+class ticpe_super_plombe(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Calcul du montant de la TICPE sur le super plombé"
 
-        return period, montant_ticpe_total
+    def function(self, simulation, period):
+        # Get TVA at full rate
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        accise_ticpe_super_plombe = \
+            simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_plombe
+        super_plombe_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
+        taux_implicite_super_plombe = (
+            (accise_ticpe_super_plombe * (1 + taux_plein_tva)) /
+            (super_plombe_ttc - accise_ticpe_super_plombe * (1 + taux_plein_tva))
+            )
+        depenses_essence = simulation.calculate('depenses_essence', period)
+        part_super_plombe = \
+            simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
+        depenses_super_plombe = depenses_essence * part_super_plombe
+        depenses_super_plombe_htva = \
+            depenses_super_plombe - tax_from_expense_including_tax(depenses_super_plombe, taux_plein_tva)
+        montant_ticpe_super_plombe = \
+            tax_from_expense_including_tax(depenses_super_plombe_htva, taux_implicite_super_plombe)
+
+        return period, montant_ticpe_super_plombe
+
+
+@reference_formula
+class ticpe_sp_e10(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Calcul du montant de la TICPE sur le SP E10"
+
+    def function(self, simulation, period):
+        # Get TVA at full rate
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        accise_ticpe_super_e10 = \
+            simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+        super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+        taux_implicite_sp_e10 = (
+            (accise_ticpe_super_e10 * (1 + taux_plein_tva)) /
+            (super_95_e10_ttc - accise_ticpe_super_e10 * (1 + taux_plein_tva))
+            )
+        depenses_essence = simulation.calculate('depenses_essence', period)
+        part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
+        depenses_sp_e10 = depenses_essence * part_sp_e10
+        depenses_sp_e10_htva = \
+            depenses_sp_e10 - tax_from_expense_including_tax(depenses_sp_e10, taux_plein_tva)
+        montant_ticpe_sp_e10 = \
+            tax_from_expense_including_tax(depenses_sp_e10_htva, taux_implicite_sp_e10)
+
+        return period, montant_ticpe_sp_e10
+
+
+@reference_formula
+class ticpe_totale(SimpleFormulaColumn):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Calcul du montant de la TICPE sur toutes les essences cumulées"
+
+    def function(self, simulation, period):
+        ticpe_essence = simulation.calculate('ticpe_essence', period)
+        ticpe_diesel = simulation.calculate('ticpe_diesel', period)
+        ticpe_totale = ticpe_diesel + ticpe_essence
+
+        return period, ticpe_totale
 
 
 @reference_formula
@@ -297,10 +452,14 @@ class ticpe(SimpleFormulaColumn):
 
         prix_diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
 
-        taux_implicite_super9598 = ticpe_super9598 * (1 + taux_plein_tva) / (prix_super_ttc - ticpe_super9598 * (1 + taux_plein_tva))
-        taux_implicite_diesel = ticpe_diesel * (1 + taux_plein_tva) / (prix_diesel_ttc - ticpe_diesel * (1 + taux_plein_tva))
+        taux_implicite_super9598 = \
+            ticpe_super9598 * (1 + taux_plein_tva) / (prix_super_ttc - ticpe_super9598 * (1 + taux_plein_tva))
+        taux_implicite_diesel = \
+            ticpe_diesel * (1 + taux_plein_tva) / (prix_diesel_ttc - ticpe_diesel * (1 + taux_plein_tva))
 
-        taux_implicite_ticpe = taux_implicite_diesel * (1 - pourcentage_vehicule_essence) + taux_implicite_super9598 * pourcentage_vehicule_essence
+        taux_implicite_ticpe = (taux_implicite_diesel * (1 - pourcentage_vehicule_essence) +
+            taux_implicite_super9598 * pourcentage_vehicule_essence
+            )
 
         return period, tax_from_expense_including_tax(consommation_ticpe_ht, taux_implicite_ticpe)
 
@@ -322,7 +481,7 @@ class total_taxes_indirectes(SimpleFormulaColumn):
         taxe_assurance_transport = simulation.calculate('taxe_assurance_transport', period)
         taxe_assurance_sante = simulation.calculate('taxe_assurance_sante', period)
         taxe_autres_assurances = simulation.calculate('taxe_autres_assurances', period)
-        ticpe = simulation.calculate('ticpe', period)
+        ticpe = simulation.calculate('ticpe_carburants', period)
         return period, (
             tva_total +
             droit_d_accise_vin +
@@ -354,7 +513,7 @@ class total_taxes_indirectes_sans_tva(SimpleFormulaColumn):
         taxe_assurance_transport = simulation.calculate('taxe_assurance_transport', period)
         taxe_assurance_sante = simulation.calculate('taxe_assurance_sante', period)
         taxe_autres_assurances = simulation.calculate('taxe_autres_assurances', period)
-        ticpe = simulation.calculate('ticpe', period)
+        ticpe = simulation.calculate('ticpe_carburants', period)
         return period, (
             droit_d_accise_vin +
             droit_d_accise_biere +
