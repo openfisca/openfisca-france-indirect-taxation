@@ -987,25 +987,6 @@
         <VALUE deb="2009-01-01" fin="2009-12-31" valeur="23.24" />
         <VALUE deb="2008-01-01" fin="2008-12-31" valeur="28.33" />
       </CODE>
-      <CODE code="supercarburants_contenant_un_additif_hectolitre" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="67.39" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="65.68" />
-        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="63.96" />
-        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="63.67" />
-        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="417.68" />
-        <VALUE deb="1999-01-01" fin="1999-12-31" valeur="415.5" />
-        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="411.51" />
-        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="403.51" />
-        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="396.51" />
-        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="383.51" />
-        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="363" />
-        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="326.84" />
-      </CODE>
-      <CODE code="supere10_hectolitre" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="64.12" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="62.41" />
-        <VALUE deb="2008-12-29" fin="2014-12-31" valeur="60.69" />
-      </CODE>
       <CODE code="ticpe_gazole" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="48.81" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="46.82" />
@@ -1035,6 +1016,25 @@
         <VALUE deb="1995-01-01" fin="1995-12-31" valeur="357.23" />
         <VALUE deb="1994-01-01" fin="1994-12-31" valeur="329.5" />
         <VALUE deb="1993-04-15" fin="1993-12-31" valeur="290.12" />
+      </CODE>
+      <CODE code="ticpe_super_e10" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="64.12" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="62.41" />
+        <VALUE deb="2008-12-29" fin="2014-12-31" valeur="60.69" />
+      </CODE>
+      <CODE code="ticpe_super_plombe" format="float" type="monetary">
+        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="67.39" />
+        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="65.68" />
+        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="63.96" />
+        <VALUE deb="2002-01-01" fin="2002-12-31" valeur="63.67" />
+        <VALUE deb="2000-01-01" fin="2001-12-31" valeur="417.68" />
+        <VALUE deb="1999-01-01" fin="1999-12-31" valeur="415.5" />
+        <VALUE deb="1998-01-01" fin="1998-12-31" valeur="411.51" />
+        <VALUE deb="1997-01-01" fin="1997-12-31" valeur="403.51" />
+        <VALUE deb="1996-01-01" fin="1996-12-31" valeur="396.51" />
+        <VALUE deb="1995-01-01" fin="1995-12-31" valeur="383.51" />
+        <VALUE deb="1994-01-01" fin="1994-12-31" valeur="363" />
+        <VALUE deb="1993-04-15" fin="1993-12-31" valeur="326.84" />
       </CODE>
       <CODE code="white_spirit_utilise_comme_combustible_hectolitre" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="10.08" />
