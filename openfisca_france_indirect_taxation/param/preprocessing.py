@@ -145,12 +145,74 @@ def preprocess_legislation(legislation_json):
 
         quantite_carbu_vp['children'][element] = {
             "@type": "Parameter",
-            "description": "consommation totale de" + element + " en France",
+            "description": "consommation totale de " + element + " en France",
             "format": "float",
             "values": values_quantite[element]
         }
 
         legislation_json['children']['imposition_indirecte']['children']['quantite_carbu_vp'] = quantite_carbu_vp
+
+    # Add the shares of each type of supercabrurant (SP95, SP98, E10, etc.) among supercarburants
+
+    default_config_files_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    part_des_types_de_supercarburants = pd.read_csv(
+        os.path.join(
+            default_config_files_directory,
+            'openfisca_france_indirect_taxation',
+            'assets',
+            'part_des_types_de_supercarburants.csv'
+            ), sep =';'
+        )
+
+    del part_des_types_de_supercarburants['Source']
+    part_des_types_de_supercarburants = \
+        part_des_types_de_supercarburants[part_des_types_de_supercarburants['annee'] > 0].copy()
+    part_des_types_de_supercarburants['annee'] = part_des_types_de_supercarburants['annee'].astype(int)
+    part_des_types_de_supercarburants = part_des_types_de_supercarburants.set_index('annee')
+
+    # delete share of e_85 because we have no data for its price
+    # When the sum of all shares is not one, need to multiply each share by the same coefficient
+    cols = part_des_types_de_supercarburants.columns
+    for element in cols:
+        part_des_types_de_supercarburants[element] = (
+            part_des_types_de_supercarburants[element] /
+            (part_des_types_de_supercarburants['somme'] - part_des_types_de_supercarburants['sp_e85'])
+            )
+    del part_des_types_de_supercarburants['sp_e85']
+    del part_des_types_de_supercarburants['somme']
+    cols = part_des_types_de_supercarburants.columns
+    part_des_types_de_supercarburants['somme'] = 0
+    for element in cols:
+        part_des_types_de_supercarburants['somme'] += part_des_types_de_supercarburants[element]
+    assert (part_des_types_de_supercarburants['somme'] == 1).any(), "The weighting of the shares did not work"
+
+
+    values_part_supercarburants = {}
+    part_type_supercaburant = {
+        "@type": "Node",
+        "description": "part de la consommation totale d'essence de chaque type supercarburant",
+        "children": {},
+    }
+    for element in ['super_plombe', 'sp_95', 'sp_98', 'sp_e10']:
+        part_par_carburant = part_des_types_de_supercarburants[element]
+        values_part_supercarburants[element] = []
+        for year in range(2000, 2015):
+            values = dict()
+            values['start'] = u'{}-01-01'.format(year)
+            values['stop'] = u'{}-12-31'.format(year)
+            values['value'] = part_par_carburant.loc[year]
+            values_part_supercarburants[element].append(values)
+
+        part_type_supercaburant['children'][element] = {
+            "@type": "Parameter",
+            "description": "part de " + element + " dans la consommation totale d'essences",
+            "format": "float",
+            "values": values_part_supercarburants[element]
+        }
+
+        legislation_json['children']['imposition_indirecte']['children']['part_type_supercarburants'] = \
+            part_type_supercaburant
 
     # Add data from comptabilite national about alcohol
 
