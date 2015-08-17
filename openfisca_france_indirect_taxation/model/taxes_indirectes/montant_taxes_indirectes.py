@@ -490,7 +490,7 @@ class total_taxes_indirectes(SimpleFormulaColumn):
         taxe_assurance_transport = simulation.calculate('taxe_assurance_transport', period)
         taxe_assurance_sante = simulation.calculate('taxe_assurance_sante', period)
         taxe_autres_assurances = simulation.calculate('taxe_autres_assurances', period)
-        ticpe = simulation.calculate('ticpe_carburants', period)
+        ticpe = simulation.calculate('ticpe_totale', period)
         return period, (
             tva_total +
             droit_d_accise_vin +
@@ -522,7 +522,7 @@ class total_taxes_indirectes_sans_tva(SimpleFormulaColumn):
         taxe_assurance_transport = simulation.calculate('taxe_assurance_transport', period)
         taxe_assurance_sante = simulation.calculate('taxe_assurance_sante', period)
         taxe_autres_assurances = simulation.calculate('taxe_autres_assurances', period)
-        ticpe = simulation.calculate('ticpe_carburants', period)
+        ticpe = simulation.calculate('ticpe_totale', period)
         return period, (
             droit_d_accise_vin +
             droit_d_accise_biere +

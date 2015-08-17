@@ -42,7 +42,7 @@ if __name__ == '__main__':
     var_to_be_simulated = [
         'decuc',
         'tva_total',
-        'ticpe',
+        'ticpe_totale',
         'droit_d_accise_vin',
         'droit_d_accise_biere',
         'droit_d_accise_alcools_forts',
@@ -65,7 +65,7 @@ if __name__ == '__main__':
             varlist = var_to_be_simulated)
 
         Wconcat['taxe_1'] = Wconcat['tva_total']
-        Wconcat['taxe_2'] = Wconcat['ticpe']
+        Wconcat['taxe_2'] = Wconcat['ticpe_totale']
         Wconcat['taxe_3'] = (
             Wconcat['taxe_assurance_sante'] +
             Wconcat['taxe_assurance_transport'] +
