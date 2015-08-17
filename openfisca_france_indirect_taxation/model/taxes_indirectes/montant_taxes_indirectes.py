@@ -93,7 +93,7 @@ class taxe_assurance_transport(DatedFormulaColumn):
     label = u"Montant des taxes sur l'assurance transport"
 
     @dated_function(start = date(1984, 1, 1), stop = date(2001, 12, 31))
-    def function(self, simulation, period):
+    def function_84_01(self, simulation, period):
         consommation_assurance_transport = simulation.calculate('consommation_assurance_transport', period)
         taux_assurance_vtm = \
             simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers
@@ -101,7 +101,7 @@ class taxe_assurance_transport(DatedFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_assurance_transport, taux)
 
     @dated_function(start = date(2002, 1, 1), stop = date(2004, 8, 4))
-    def function(self, simulation, period):
+    def function_02_04(self, simulation, period):
         consommation_assurance_transport = simulation.calculate('consommation_assurance_transport', period)
         taux_assurance_vtm = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers
         taux_contrib_secu_vtm = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.contribution_secu_assurances_automobiles
@@ -109,7 +109,7 @@ class taxe_assurance_transport(DatedFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_assurance_transport, taux)
 
     @dated_function(start = date(2004, 8, 5), stop = date(2015, 12, 31))
-    def function(self, simulation, period):
+    def function_04_15(self, simulation, period):
         consommation_assurance_transport = simulation.calculate('consommation_assurance_transport', period)
         taux_assurance_vtm = \
             simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers
@@ -292,26 +292,35 @@ class ticpe_diesel(SimpleFormulaColumn):
 
 
 @reference_formula
-class ticpe_essence(SimpleFormulaColumn):
+class ticpe_essence(DatedFormulaColumn):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de la TICPE sur toutes les essences cumulées"
 
-    def function(self, simulation, period):
+    @dated_function(start = date(1990, 1, 1), stop = date(2006, 12, 31))
+    def function_90_06(self, simulation, period):
 
         ticpe_sp95 = simulation.calculate('ticpe_sp95', period)
         ticpe_sp98 = simulation.calculate('ticpe_sp98', period)
-        try:
-            ticpe_super_plombe = simulation.calculate('ticpe_super_plombe', period)
-        except AttributeError:
-            ticpe_super_plombe = 0
-        try:
-            ticpe_sp_e10 = simulation.calculate('ticpe_sp_e10', period)
-        except AttributeError:
-            ticpe_sp_e10 = 0
+        ticpe_super_plombe = simulation.calculate('ticpe_super_plombe', period)
+        ticpe_essence = (ticpe_sp95 + ticpe_sp98 + ticpe_super_plombe)
+        return period, ticpe_essence
 
-        ticpe_essence = (ticpe_sp95 + ticpe_sp98 + ticpe_super_plombe + ticpe_sp_e10)
+    @dated_function(start = date(2007, 1, 1), stop = date(2008, 12, 31))
+    def function_07_08(self, simulation, period):
 
+        ticpe_sp95 = simulation.calculate('ticpe_sp95', period)
+        ticpe_sp98 = simulation.calculate('ticpe_sp98', period)
+        ticpe_essence = (ticpe_sp95 + ticpe_sp98)
+        return period, ticpe_essence
+
+    @dated_function(start = date(2009, 1, 1), stop = date(2015, 12, 31))
+    def function_09_15(self, simulation, period):
+
+        ticpe_sp95 = simulation.calculate('ticpe_sp95', period)
+        ticpe_sp98 = simulation.calculate('ticpe_sp98', period)
+        ticpe_sp_e10 = simulation.calculate('ticpe_sp_e10', period)
+        ticpe_essence = (ticpe_sp95 + ticpe_sp98 + ticpe_sp_e10)
         return period, ticpe_essence
 
 
