@@ -12,7 +12,7 @@ prix_mensuel_carburants_90_15[['annee'] + ['mois']] = prix_mensuel_carburants_90
 prix_mensuel_carburants_90_15['date'] = prix_mensuel_carburants_90_15['annee'] + '_' + prix_mensuel_carburants_90_15['mois']
 prix_mensuel_carburants_90_15 = prix_mensuel_carburants_90_15.set_index('date')
 
-prix_mensuel_carburants_90_15['taux_implicite_ticpe_diesel'] = (
+prix_mensuel_carburants_90_15['taux_implicite_diesel_ticpe'] = (
     (prix_mensuel_carburants_90_15['diesel_ttc'] - prix_mensuel_carburants_90_15['diesel_ht']) /
     prix_mensuel_carburants_90_15['diesel_ht']
     )
@@ -23,7 +23,7 @@ prix_mensuel_carburants_90_15['taux_implicite_ticpe_super_95'] = (
 
 prix_mensuel_carburants_90_15.rename(columns = {'diesel_ht': 'prix diesel ht', 'diesel_ttc': 'prix diesel ttc',
     'super_95_ht': 'prix SP95 ht', 'super_95_ttc': 'prix SP95 ttc',
-    'taux_implicite_ticpe_diesel': 'taux implicite diesel', 'taux_implicite_ticpe_super_95': 'taux implicite super 95'},
+    'taux_implicite_diesel_ticpe': 'taux implicite diesel', 'taux_implicite_ticpe_super_95': 'taux implicite super 95'},
     inplace = True)
 
 print 'Evolution du prix des carburants entre 1990 et 2015'

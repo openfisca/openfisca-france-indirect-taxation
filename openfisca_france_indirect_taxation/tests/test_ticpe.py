@@ -30,7 +30,7 @@ from openfisca_france_indirect_taxation.tests import base
 
 
 # If one spends 100 euros in fuel, and has only one diesel vehicle, how much ticpe will he pay in total?
-def test_ticpe_diesel():
+def test_diesel_ticpe():
     year = 2010
     simulation = base.tax_benefit_system.new_scenario().init_single_entity(
         period = year,
@@ -51,7 +51,7 @@ def test_ticpe_diesel():
 
 
 # If one has only one gasoline car in 2013 and spends 100 euros in fuel, how much ticpe will he pay in total?
-def test_ticpe_essence():
+def test_essence_ticpe():
     year = 2013
     simulation = base.tax_benefit_system.new_scenario().init_single_entity(
         period = year,
@@ -65,9 +65,9 @@ def test_ticpe_essence():
             ),
         ).new_simulation(debug = True)
     depenses_htva = 100 / (1.196)
-    depenses_sp95_htva = depenses_htva * 0.627 / 0.996
-    depenses_sp98_htva = depenses_htva * 0.188 / 0.996
-    depenses_sp_e10_hta = depenses_htva * 0.181 / 0.996
+    sp95_depenses_htva = depenses_htva * 0.627 / 0.996
+    sp98_depenses_htva = depenses_htva * 0.188 / 0.996
+    sp_e10_depenses_hta = depenses_htva * 0.181 / 0.996
     taux_implicite_95 = (0.6069 * 1.196) / (1.5367 - (0.6069 * 1.196))
     taux_implicite_98 = (0.6069 * 1.196) / (1.5943 - (0.6069 * 1.196))
     taux_implicite_e10 = (0.6069 * 1.196) / (1.51 - (0.6069 * 1.196))
@@ -75,8 +75,8 @@ def test_ticpe_essence():
     coefficient_98 = taux_implicite_98 / (1 + taux_implicite_98)
     coefficient_e10 = taux_implicite_e10 / (1 + taux_implicite_e10)
 
-    assert_near(simulation.calculate('ticpe_totale'), coefficient_95 * depenses_sp95_htva +
-        coefficient_98 * depenses_sp98_htva + coefficient_e10 * depenses_sp_e10_hta, .01)
+    assert_near(simulation.calculate('ticpe_totale'), coefficient_95 * sp95_depenses_htva +
+        coefficient_98 * sp98_depenses_htva + coefficient_e10 * sp_e10_depenses_hta, .01)
 
 
 # If one has 2 diesel and 1 gasoline car, and spends 100 euros in fuel, how much of it will go to diesel?
@@ -94,7 +94,7 @@ def test_depenses_carburants():
             ),
         ).new_simulation(debug = True)
 
-    assert_near(simulation.calculate('depenses_diesel'), 75.075, .01)
+    assert_near(simulation.calculate('diesel_depenses'), 75.075, .01)
 
 
 if __name__ == '__main__':

@@ -51,9 +51,9 @@ if __name__ == '__main__':
         'rev_disponible',
         'rev_disp_loyerimput',
         'tva_total',
-        'droit_d_accise_alcool',
-        'droit_d_accise_tabac',
-        'taxe_assurance',
+        'total_alcool_droit_d_accise',
+        'total_tabac_droit_d_accise',
+        'total_assurances_taxe',
         'ticpe'
         ]
 
@@ -64,8 +64,8 @@ if __name__ == '__main__':
             df.niveau_vie_decile[df.decuc == 10] = 10
 
         varlist = ['somme_coicop12', 'rev_disp_loyerimput', 'rev_disponible', 'tva_total',
-                   'droit_d_accise_alcool', 'droit_d_accise_tabac',
-                   'taxe_assurance', 'ticpe']
+                   'total_alcool_droit_d_accise', 'total_tabac_droit_d_accise',
+                   'total_assurances_taxe', 'ticpe']
         Wconcat_rev_disp = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = varlist)
         Wconcat_conso = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile', varlist = varlist)
         Wconcat_rev_disp_loyerimput = df_weighted_average_grouped(dataframe = df,
@@ -77,13 +77,13 @@ if __name__ == '__main__':
             Wconcat_rev_disp['tva_total'] / Wconcat_rev_disp['rev_disponible']
         list_taux_d_effort_rev_disp.append('taux_d_effort_tva')
         Wconcat_rev_disp['taux_d_effort_alcool'] = \
-            Wconcat_rev_disp['droit_d_accise_alcool'] / Wconcat_rev_disp['rev_disponible']
+            Wconcat_rev_disp['total_alcool_droit_d_accise'] / Wconcat_rev_disp['rev_disponible']
         list_taux_d_effort_rev_disp.append('taux_d_effort_alcool')
         Wconcat_rev_disp['taux_d_effort_tabac'] = \
-            Wconcat_rev_disp['droit_d_accise_tabac'] / Wconcat_rev_disp['rev_disponible']
+            Wconcat_rev_disp['total_tabac_droit_d_accise'] / Wconcat_rev_disp['rev_disponible']
         list_taux_d_effort_rev_disp.append('taux_d_effort_tabac')
         Wconcat_rev_disp['taux_d_effort_assurance'] = \
-            Wconcat_rev_disp['taxe_assurance'] / Wconcat_rev_disp['rev_disponible']
+            Wconcat_rev_disp['total_assurances_taxe'] / Wconcat_rev_disp['rev_disponible']
         list_taux_d_effort_rev_disp.append('taux_d_effort_assurance')
         Wconcat_rev_disp['taux_d_effort_ticpe'] = \
             Wconcat_rev_disp['ticpe'] / Wconcat_rev_disp['rev_disponible']
@@ -95,13 +95,13 @@ if __name__ == '__main__':
             Wconcat_conso['tva_total'] / Wconcat_conso['somme_coicop12']
         list_taux_d_effort_conso.append('taux_d_effort_tva')
         Wconcat_conso['taux_d_effort_alcool'] = \
-            Wconcat_conso['droit_d_accise_alcool'] / Wconcat_conso['somme_coicop12']
+            Wconcat_conso['total_alcool_droit_d_accise'] / Wconcat_conso['somme_coicop12']
         list_taux_d_effort_conso.append('taux_d_effort_alcool')
         Wconcat_conso['taux_d_effort_tabac'] = \
-            Wconcat_conso['droit_d_accise_tabac'] / Wconcat_conso['somme_coicop12']
+            Wconcat_conso['total_tabac_droit_d_accise'] / Wconcat_conso['somme_coicop12']
         list_taux_d_effort_conso.append('taux_d_effort_tabac')
         Wconcat_conso['taux_d_effort_assurance'] = \
-            Wconcat_conso['taxe_assurance'] / Wconcat_conso['somme_coicop12']
+            Wconcat_conso['total_assurances_taxe'] / Wconcat_conso['somme_coicop12']
         list_taux_d_effort_conso.append('taux_d_effort_assurance')
         Wconcat_conso['taux_d_effort_ticpe'] = \
             Wconcat_conso['ticpe'] / Wconcat_conso['somme_coicop12']
@@ -113,17 +113,17 @@ if __name__ == '__main__':
             Wconcat_rev_disp_loyerimput['tva_total'] / Wconcat_rev_disp_loyerimput['rev_disp_loyerimput']
         list_taux_d_effort_rev_disp_loyerimput.append('taux_d_effort_tva')
         Wconcat_rev_disp_loyerimput['taux_d_effort_alcool'] = (
-            Wconcat_rev_disp_loyerimput['droit_d_accise_alcool'] /
+            Wconcat_rev_disp_loyerimput['total_alcool_droit_d_accise'] /
             Wconcat_rev_disp_loyerimput['rev_disp_loyerimput']
             )
         list_taux_d_effort_rev_disp_loyerimput.append('taux_d_effort_alcool')
         Wconcat_rev_disp_loyerimput['taux_d_effort_tabac'] = (
-            Wconcat_rev_disp_loyerimput['droit_d_accise_tabac'] /
+            Wconcat_rev_disp_loyerimput['total_tabac_droit_d_accise'] /
             Wconcat_rev_disp_loyerimput['rev_disp_loyerimput']
             )
         list_taux_d_effort_rev_disp_loyerimput.append('taux_d_effort_tabac')
         Wconcat_rev_disp_loyerimput['taux_d_effort_assurance'] = \
-            Wconcat_rev_disp_loyerimput['taxe_assurance'] / Wconcat_rev_disp_loyerimput['rev_disp_loyerimput']
+            Wconcat_rev_disp_loyerimput['total_assurances_taxe'] / Wconcat_rev_disp_loyerimput['rev_disp_loyerimput']
         list_taux_d_effort_rev_disp_loyerimput.append('taux_d_effort_assurance')
         Wconcat_rev_disp_loyerimput['taux_d_effort_ticpe'] = \
             Wconcat_rev_disp_loyerimput['ticpe'] / Wconcat_rev_disp_loyerimput['rev_disp_loyerimput']

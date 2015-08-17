@@ -41,12 +41,12 @@ for year in [2011]:
     data['part_conso_super'] = (data['veh_essence'] * conso_moyenne_vp_super) / \
         ((data['veh_essence'] * conso_moyenne_vp_super) + (data['veh_diesel'] * conso_moyenne_vp_diesel))
 
-    data['depenses_diesel'] = data['depenses_carburants'] * data['part_conso_diesel']
+    data['diesel_depenses'] = data['depenses_carburants'] * data['part_conso_diesel']
     data['depenses_super'] = data['depenses_carburants'] * data['part_conso_super']
 
     # Some checks :
 
-    data['check_depenses_carbu'] = (data['depenses_diesel'] + data['depenses_super']) - data['depenses_carburants']
+    data['check_depenses_carbu'] = (data['diesel_depenses'] + data['depenses_super']) - data['depenses_carburants']
     assert data['check_depenses_carbu'].max() < 0.0001, 'The sum of diesel and super is higher than the total'
     assert data['check_depenses_carbu'].min() > -0.0001, 'The sum of diesel and super is lower than the total'
     del data['check_depenses_carbu']
@@ -71,15 +71,15 @@ for year in [2011]:
     prix_gplc_ttc = prix_carburants[prix_carburants['carburant'] == 'gplc_ttc']
     prix_gplc_ttc = prix_gplc_ttc.iat[0, 1]
 
-    taux_implicite_ticpe_diesel = taux_implicite(0.4284, 0.196, prix_diesel_ttc)
+    taux_implicite_diesel_ticpe = taux_implicite(0.4284, 0.196, prix_diesel_ttc)
     taux_implicite_ticpe_super = taux_implicite(0.6069, 0.196, prix_super_95_ttc)
 
-    data['depenses_ticpe_diesel'] = tax_from_expense_including_tax(data['depenses_diesel'], taux_implicite_ticpe_diesel)
+    data['depenses_diesel_ticpe'] = tax_from_expense_including_tax(data['diesel_depenses'], taux_implicite_diesel_ticpe)
     data['depenses_ticpe_super'] = tax_from_expense_including_tax(data['depenses_super'], taux_implicite_ticpe_super)
-    data['depenses_ticpe'] = data['depenses_ticpe_diesel'] + data['depenses_ticpe_super']
+    data['depenses_ticpe'] = data['depenses_diesel_ticpe'] + data['depenses_ticpe_super']
     data['part_ticpe_depenses'] = data['depenses_ticpe'] / data['depenses_carburants']
 
-    data['quantite_diesel'] = data['depenses_diesel'] / prix_diesel_ttc
+    data['quantite_diesel'] = data['diesel_depenses'] / prix_diesel_ttc
     data['quantite_super'] = data['depenses_super'] / prix_super_95_ttc
     data['quantite_carburants'] = data['quantite_diesel'] + data['quantite_super']
     data['quantite_carburants_inflate'] = data['quantite_carburants'] * data['pondmen']

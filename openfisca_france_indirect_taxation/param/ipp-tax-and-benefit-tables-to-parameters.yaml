@@ -11,7 +11,7 @@ baremes-ipp-taxation-indirecte:
   produits_energetiques_a:
     RENAME: ticpe
     supercarburants_dont_sp95_et_sp98_hectolitre: ticpe_super9598
-    supercarburants_contenant_un_additif_hectolitre: ticpe_super_plombe
+    supercarburants_contenant_un_additif_hectolitre: super_plombe_ticpe
     supere10_hectolitre: ticpe_super_e10
   produits_energetiques_b:
     RENAME: ticpe

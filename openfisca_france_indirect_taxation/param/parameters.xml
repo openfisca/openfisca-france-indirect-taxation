@@ -1022,7 +1022,7 @@
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="62.41" />
         <VALUE deb="2008-12-29" fin="2014-12-31" valeur="60.69" />
       </CODE>
-      <CODE code="ticpe_super_plombe" format="float" type="monetary">
+      <CODE code="super_plombe_ticpe" format="float" type="monetary">
         <VALUE deb="2016-01-01" fin="2020-12-31" valeur="67.39" />
         <VALUE deb="2015-01-01" fin="2015-12-31" valeur="65.68" />
         <VALUE deb="2003-01-01" fin="2014-12-31" valeur="63.96" />
