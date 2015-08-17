@@ -99,6 +99,19 @@ def graph_builder_bar(graph):
     return plt.show()
 
 
+def graph_builder_bar_list(graph):
+    axes = graph.plot(
+        kind = 'bar',
+        stacked = True,
+        color = ['#FF0000']
+        )
+    plt.axhline(0, color = 'k')
+    axes.legend(
+        bbox_to_anchor = (1.5, 1.05),
+        )
+    return plt.show()
+
+
 def graph_builder_line(graph):
     axes = graph.plot(
         )
