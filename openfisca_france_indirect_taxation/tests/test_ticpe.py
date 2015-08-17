@@ -29,83 +29,76 @@ from openfisca_core.tools import assert_near
 from openfisca_france_indirect_taxation.tests import base
 
 
+# If one spends 100 euros in fuel, and has only one diesel vehicle, how much ticpe will he pay in total?
 def test_ticpe_diesel():
-    year = 2015
+    year = 2010
     simulation = base.tax_benefit_system.new_scenario().init_single_entity(
         period = year,
         personne_de_reference = dict(
             birth = datetime.date(year - 40, 1, 1),
             ),
         menage = dict(
-            diesel_quantite = 100,
+            consommation_ticpe = 100,
+            veh_diesel = 1,
+            veh_essence = 0,
             ),
         ).new_simulation(debug = True)
+    depenses_htva = 100 / (1.196)
+    taux_implicite_diesel = (0.4284 * 1.196) / (1.14675 - (0.4284 * 1.196))
+    coefficient = taux_implicite_diesel / (1 + taux_implicite_diesel)
 
-    assert_near(simulation.calculate('ticpe_diesel'), 100 * 46.82, .01)
+    assert_near(simulation.calculate('ticpe_totale'), depenses_htva * coefficient, .01)
 
 
-def test_ticpe_supercarburants():
-    year = 2015
+# If one has only one gasoline car in 2013 and spends 100 euros in fuel, how much ticpe will he pay in total?
+def test_ticpe_essence():
+    year = 2013
     simulation = base.tax_benefit_system.new_scenario().init_single_entity(
         period = year,
         personne_de_reference = dict(
             birth = datetime.date(year - 40, 1, 1),
             ),
         menage = dict(
-            supercarburants_quantite = 100,
+            consommation_ticpe = 100,
+            veh_essence = 1,
+            veh_diesel = 0,
+            ),
+        ).new_simulation(debug = True)
+    depenses_htva = 100 / (1.196)
+    depenses_sp95_htva = depenses_htva * 0.627 / 0.996
+    depenses_sp98_htva = depenses_htva * 0.188 / 0.996
+    depenses_sp_e10_hta = depenses_htva * 0.181 / 0.996
+    taux_implicite_95 = (0.6069 * 1.196) / (1.5367 - (0.6069 * 1.196))
+    taux_implicite_98 = (0.6069 * 1.196) / (1.5943 - (0.6069 * 1.196))
+    taux_implicite_e10 = (0.6069 * 1.196) / (1.51 - (0.6069 * 1.196))
+    coefficient_95 = taux_implicite_95 / (1 + taux_implicite_95)
+    coefficient_98 = taux_implicite_98 / (1 + taux_implicite_98)
+    coefficient_e10 = taux_implicite_e10 / (1 + taux_implicite_e10)
+
+    assert_near(simulation.calculate('ticpe_totale'), coefficient_95 * depenses_sp95_htva +
+        coefficient_98 * depenses_sp98_htva + coefficient_e10 * depenses_sp_e10_hta, .01)
+
+
+# If one has 2 diesel and 1 gasoline car, and spends 100 euros in fuel, how much of it will go to diesel?
+def test_depenses_carburants():
+    year = 2006
+    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
+        period = year,
+        personne_de_reference = dict(
+            birth = datetime.date(year - 40, 1, 1),
+            ),
+        menage = dict(
+            consommation_ticpe = 100,
+            veh_diesel = 2,
+            veh_essence = 1,
             ),
         ).new_simulation(debug = True)
 
-    assert_near(simulation.calculate('ticpe_supercarburants'), 100 * 62.41, .01)
+    assert_near(simulation.calculate('depenses_diesel'), 75.075, .01)
 
-# def test_ticpe_super95():
-#    year = 2015
-#    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
-#        period = year,
-#        personne_de_reference = dict(
-#            birth = datetime.date(year - 40, 1, 1),
-#            ),
-#        menage = dict(
-#            super95_quantite = 100,
-#            ),
-#        ).new_simulation(debug = True)
-#
-#
-#    assert_near(simulation.calculate('ticpe_super95'), 100 * 62.41, .01)'''
-#
-# def test_ticpe_super98():
-#    year = 2015
-#    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
-#        period = year,
-#        personne_de_reference = dict(
-#            birth = datetime.date(year - 40, 1, 1),
-#            ),
-#        menage = dict(
-#            super98_quantite = 100,
-#            ),
-#        ).new_simulation(debug = True)
-#
-#
-#    assert_near(simulation.calculate('ticpe_super98'), 100 * 62.41, .01)
-#
-#
-# def test_ticpe_superE10():
-#    year = 2015
-#    simulation = base.tax_benefit_system.new_scenario().init_single_entity(
-#        period = year,
-#        personne_de_reference = dict(
-#            birth = datetime.date(year - 40, 1, 1),
-#            ),
-#        menage = dict(
-#            superE10_quantite = 100,
-#            ),
-#        ).new_simulation(debug = True)
-#
-#    assert_near(simulation.calculate('ticpe_superE10'), 100 * 62.41, .01)
 
 if __name__ == '__main__':
     import logging
     import sys
 
     logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
-    test_ticpe()
