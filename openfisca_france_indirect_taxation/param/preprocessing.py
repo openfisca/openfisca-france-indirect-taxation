@@ -54,8 +54,39 @@ def preprocess_legislation(legislation_json):
         "description": "prix des carburants en euros par hectolitre",
         "children": {},
         }
+    # For super_95_e10, we need to use the price of super_95 between 2009 and 2012 included,
+    # because we don't have the data. We use super_95 because it is very close and won't affect the results too much
+    prix_annuel = prix_annuel_carburants['super_95_e10_ttc']
+    all_values['super_95_e10_ttc'] = []
+    for year in range(1990, 2009):
+        values1 = dict()
+        values1['start'] = u'{}-01-01'.format(year)
+        values1['stop'] = u'{}-12-31'.format(year)
+        values1['value'] = prix_annuel.loc[year] * 100
+        all_values['super_95_e10_ttc'].append(values1)
+    prix_annuel = prix_annuel_carburants['super_95_ttc']
+    for year in range(2009, 2013):
+        values2 = dict()
+        values2['start'] = u'{}-01-01'.format(year)
+        values2['stop'] = u'{}-12-31'.format(year)
+        values2['value'] = prix_annuel.loc[year] * 100
+        all_values['super_95_e10_ttc'].append(values2)
+    prix_annuel = prix_annuel_carburants['super_95_e10_ttc']
+    for year in range(2013, 2015):
+        values3 = dict()
+        values3['start'] = u'{}-01-01'.format(year)
+        values3['stop'] = u'{}-12-31'.format(year)
+        values3['value'] = prix_annuel.loc[year] * 100
+        all_values['super_95_e10_ttc'].append(values3)
+
+    prix_carburants['children']['super_95_e10_ttc'] = {
+        "@type": "Parameter",
+        "description": 'super_95_e10_ttc'.replace('_', ' '),
+        "format": "float",
+        "values": all_values['super_95_e10_ttc']
+        }
     for element in ['diesel_ht', 'diesel_ttc', 'super_95_ht', 'super_95_ttc', 'super_98_ht', 'super_98_ttc',
-            'super_95_e10_ht', 'super_95_e10_ttc', 'gplc_ht', 'gplc_ttc', 'super_plombe_ht', 'super_plombe_ttc']:
+            'super_95_e10_ht', 'gplc_ht', 'gplc_ttc', 'super_plombe_ht', 'super_plombe_ttc']:
         assert element in prix_annuel_carburants.columns
         prix_annuel = prix_annuel_carburants[element]
         all_values[element] = []
@@ -72,6 +103,7 @@ def preprocess_legislation(legislation_json):
             "format": "float",
             "values": all_values[element]
             }
+
     legislation_json['children']['imposition_indirecte']['children']['prix_carburants'] = prix_carburants
 
     # Add the number of vehicle in circulation to the tree
