@@ -84,6 +84,7 @@ def percent_formatter(x, pos = 0):
     return '%1.0f%%' % (100 * x)
 
 
+# To choose color when doing graph, could put a list of colors in argument
 def graph_builder_bar(graph):
     axes = graph.plot(
         kind = 'bar',
@@ -93,6 +94,19 @@ def graph_builder_bar(graph):
         )
     plt.axhline(0, color = 'k')
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
+    axes.legend(
+        bbox_to_anchor = (1.5, 1.05),
+        )
+    return plt.show()
+
+
+def graph_builder_bar_list(graph):
+    axes = graph.plot(
+        kind = 'bar',
+        stacked = True,
+        color = ['#FF0000']
+        )
+    plt.axhline(0, color = 'k')
     axes.legend(
         bbox_to_anchor = (1.5, 1.05),
         )

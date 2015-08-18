@@ -42,16 +42,16 @@ if __name__ == '__main__':
     var_to_be_simulated = [
         'decuc',
         'tva_total',
-        'ticpe',
-        'droit_d_accise_vin',
-        'droit_d_accise_biere',
-        'droit_d_accise_alcools_forts',
-        'droit_d_accise_cigarette',
-        'droit_d_accise_cigares',
-        'droit_d_accise_tabac_a_rouler',
-        'taxe_assurance_transport',
-        'taxe_assurance_sante',
-        'taxe_autres_assurances',
+        'ticpe_totale',
+        'vin_droit_d_accise',
+        'biere_droit_d_accise',
+        'alcools_forts_droit_d_accise',
+        'cigarette_droit_d_accise',
+        'cigares_droit_d_accise',
+        'tabac_a_rouler_droit_d_accise',
+        'assurance_transport_taxe',
+        'assurance_sante_taxe',
+        'autres_assurances_taxe',
         'niveau_vie_decile',
         'rev_disponible',
         'pondmen',
@@ -65,21 +65,21 @@ if __name__ == '__main__':
             varlist = var_to_be_simulated)
 
         Wconcat['taxe_1'] = Wconcat['tva_total']
-        Wconcat['taxe_2'] = Wconcat['ticpe']
+        Wconcat['taxe_2'] = Wconcat['ticpe_totale']
         Wconcat['taxe_3'] = (
-            Wconcat['taxe_assurance_sante'] +
-            Wconcat['taxe_assurance_transport'] +
-            Wconcat['taxe_autres_assurances']
+            Wconcat['assurance_sante_taxe'] +
+            Wconcat['assurance_transport_taxe'] +
+            Wconcat['autres_assurances_taxe']
             )
         Wconcat['taxe_4'] = (
-            Wconcat['droit_d_accise_vin'] +
-            Wconcat['droit_d_accise_biere'] +
-            Wconcat['droit_d_accise_alcools_forts']
+            Wconcat['vin_droit_d_accise'] +
+            Wconcat['biere_droit_d_accise'] +
+            Wconcat['alcools_forts_droit_d_accise']
             )
         Wconcat['taxe_5'] = (
-            Wconcat['droit_d_accise_cigares'] +
-            Wconcat['droit_d_accise_cigarette'] +
-            Wconcat['droit_d_accise_tabac_a_rouler']
+            Wconcat['cigares_droit_d_accise'] +
+            Wconcat['cigarette_droit_d_accise'] +
+            Wconcat['tabac_a_rouler_droit_d_accise']
             )
 
         list_part_taxes = []
