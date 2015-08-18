@@ -44,7 +44,7 @@ def test_diesel_ticpe():
             ),
         ).new_simulation(debug = True)
     depenses_htva = 100 / (1.196)
-    taux_implicite_diesel = (0.4284 * 1.196) / (1.14675 - (0.4284 * 1.196))
+    taux_implicite_diesel = ((0.4284 + 0.0115) * 1.196) / (1.14675 - ((0.4284 + 0.0115) * 1.196))
     coefficient = taux_implicite_diesel / (1 + taux_implicite_diesel)
 
     assert_near(simulation.calculate('ticpe_totale'), depenses_htva * coefficient, .01)
@@ -68,9 +68,9 @@ def test_essence_ticpe():
     sp95_depenses_htva = depenses_htva * 0.627 / 0.996
     sp98_depenses_htva = depenses_htva * 0.188 / 0.996
     sp_e10_depenses_hta = depenses_htva * 0.181 / 0.996
-    taux_implicite_95 = (0.6069 * 1.196) / (1.5367 - (0.6069 * 1.196))
-    taux_implicite_98 = (0.6069 * 1.196) / (1.5943 - (0.6069 * 1.196))
-    taux_implicite_e10 = (0.6069 * 1.196) / (1.51 - (0.6069 * 1.196))
+    taux_implicite_95 = ((0.6069 + 0.025) * 1.196) / (1.5367 - ((0.6069 + 0.025) * 1.196))
+    taux_implicite_98 = ((0.6069 + 0.025) * 1.196) / (1.5943 - ((0.6069 + 0.025) * 1.196))
+    taux_implicite_e10 = ((0.6069 + 0.025) * 1.196) / (1.51 - ((0.6069 + 0.025) * 1.196))
     coefficient_95 = taux_implicite_95 / (1 + taux_implicite_95)
     coefficient_98 = taux_implicite_98 / (1 + taux_implicite_98)
     coefficient_e10 = taux_implicite_e10 / (1 + taux_implicite_e10)
