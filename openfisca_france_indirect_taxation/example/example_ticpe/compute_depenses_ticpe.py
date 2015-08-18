@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Aug 18 14:32:30 2015
+Created on Tue Aug 18 17:52:53 2015
 
 @author: thomas.douenne
 """
+
 
 from __future__ import division
 
 import numpy as np
 
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df
-from openfisca_france_indirect_taxation.model.get_dataframe_from_legislation.get_accises import \
-    get_accise_ticpe_majoree
 
 
 if __name__ == '__main__':
@@ -38,9 +37,9 @@ if __name__ == '__main__':
         'diesel_ticpe'
         ]
 
-    quantites_carburants_consommees = dict()
-    quantites_diesel_consommees = dict()
-    quantites_essence_consommees = dict()
+    depenses_ticpe_totales = dict()
+    depenses_ticpe_diesel = dict()
+    depenses_ticpe_essence = dict()
     for year in [2000, 2005, 2011]:
         try:
             data_simulation = simulate_df(var_to_be_simulated = var_to_be_simulated_with_e10, year = year)
@@ -59,24 +58,27 @@ if __name__ == '__main__':
             data_simulation['super_plombe_ticpe_ponderee'] = \
                 data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']
 
-        liste_carburants_accise = get_accise_ticpe_majoree()
-        value_accise_diesel = liste_carburants_accise['accise majoree diesel'].loc[u'{}'.format(year)] / 100
-        value_accise_sp = liste_carburants_accise['accise majoree sans plomb'].loc[u'{}'.format(year)] / 100
-        value_accise_super_plombe = \
-            liste_carburants_accise['accise majoree super plombe'].loc[u'{}'.format(year)] / 100
+        depenses_diesel_ticpe = data_simulation['diesel_ticpe_ponderee'].sum()
+        depenses_sp95_ticpe = data_simulation['sp95_ticpe_ponderee'].sum()
+        depenses_sp98_ticpe = data_simulation['sp98_ticpe_ponderee'].sum()
+        depenses_sp_e10_ticpe = data_simulation['sp_e10_ticpe_ponderee'].sum()
+        depenses_super_plombe_ticpe = data_simulation['super_plombe_ticpe_ponderee'].sum()
 
-        quantite_diesel = data_simulation['diesel_ticpe_ponderee'].sum() / (value_accise_diesel)
-        quantite_sans_plomb = (
-            data_simulation['sp95_ticpe_ponderee'].sum() + data_simulation['sp98_ticpe_ponderee'].sum() +
-            data_simulation['sp_e10_ticpe_ponderee'].sum()) / (value_accise_sp)
-        quantite_super_plombe = data_simulation['super_plombe_ticpe_ponderee'].sum() / (value_accise_super_plombe)
-
-        if quantite_super_plombe == np.nan:
-            quantite_essence = quantite_sans_plomb + quantite_super_plombe
+        if year < 2007:
+            depenses_essence_ticpe = (
+                depenses_sp95_ticpe +
+                depenses_sp98_ticpe +
+                depenses_sp_e10_ticpe +
+                depenses_super_plombe_ticpe
+                )
         else:
-            quantite_essence = quantite_sans_plomb
+            depenses_essence_ticpe = (
+                depenses_sp95_ticpe +
+                depenses_sp98_ticpe +
+                depenses_sp_e10_ticpe
+                )
 
-        quantite_carburants = quantite_diesel + quantite_essence
-        quantites_carburants_consommees['en milliers de m3 en {}'.format(year)] = quantite_carburants / 1000000
-        quantites_diesel_consommees['en milliers de m3 en {}'.format(year)] = quantite_diesel / 1000000
-        quantites_essence_consommees['en milliers de m3 en {}'.format(year)] = quantite_essence / 1000000
+        depenses_ticpe = depenses_diesel_ticpe + depenses_essence_ticpe
+        depenses_ticpe_totales['en millions d euros en {}'.format(year)] = depenses_ticpe / 1000000
+        depenses_ticpe_diesel['en millions d euros en {}'.format(year)] = depenses_diesel_ticpe / 1000000
+        depenses_ticpe_essence['en millions d euros en {}'.format(year)] = depenses_essence_ticpe / 1000000
