@@ -62,7 +62,15 @@ class diesel_ticpe(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-        accise_diesel_ticpe = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+
+        try:
+            majoration_ticpe_diesel = \
+                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
+            accise_diesel = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+            accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
+        except:
+            accise_diesel_ticpe = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+
         prix_diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
         taux_implicite_diesel = (
             (accise_diesel_ticpe * (1 + taux_plein_tva)) /
@@ -132,8 +140,16 @@ class sp_e10_ticpe(SimpleFormulaColumn):
     def function(self, simulation, period):
         # Get TVA at full rate
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-        accise_ticpe_super_e10 = \
-            simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+        try:
+            accise_super_e10 = \
+                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+            majoration_ticpe_super_e10 = \
+                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+            accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
+        except:
+            accise_super_e10 = \
+                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+
         super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
         taux_implicite_sp_e10 = (
             (accise_ticpe_super_e10 * (1 + taux_plein_tva)) /
@@ -158,7 +174,15 @@ class sp95_ticpe(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-        accise_ticpe_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+
+        try:
+            accise_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            majoration_ticpe_super95 = \
+                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+            accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
+        except:
+            accise_ticpe_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+
         super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
         taux_implicite_sp95 = (
             (accise_ticpe_super95 * (1 + taux_plein_tva)) /
@@ -181,7 +205,15 @@ class sp98_ticpe(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-        accise_ticpe_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+
+        try:
+            accise_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            majoration_ticpe_super98 = \
+                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+            accise_ticpe_super98 = accise_super98 + majoration_ticpe_super98
+        except:
+            accise_ticpe_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+
         super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
         taux_implicite_sp98 = (
             (accise_ticpe_super98 * (1 + taux_plein_tva)) /
