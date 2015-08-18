@@ -84,6 +84,7 @@ def percent_formatter(x, pos = 0):
     return '%1.0f%%' % (100 * x)
 
 
+# To choose color when doing graph, could put a list of colors in argument
 def graph_builder_bar(graph):
     axes = graph.plot(
         kind = 'bar',

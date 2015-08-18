@@ -34,8 +34,6 @@ if __name__ == '__main__':
         'ticpe_totale'
         ]
 
-# 1 calcul taux d'effort sur le revenu total
-    # Constition d'une base de données agrégée par décile (= collapse en stata)
     p = dict()
     part_ticpe_revtot = None
     part_ticpe_rev_disp_loyerimput = None

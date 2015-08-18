@@ -40,10 +40,8 @@ class diesel_depenses(SimpleFormulaColumn):
 
         part_conso_diesel = (nombre_vehicules_diesel * conso_moyenne_vp_diesel) / denominateur
 
-        # Get information about fuel consumption and use weights to compute expenses in ticpe
         depenses_carburants = simulation.calculate('consommation_ticpe', period)
 
-        # part_conso_diesel makes everything explode when it is nan. nan * 0 = nan
         diesel_depenses = depenses_carburants * (
             (nombre_vehicules_total == 0) * (
                 conso_totale_vp_diesel / (conso_totale_vp_diesel + conso_totale_vp_essence)
@@ -138,7 +136,6 @@ class sp_e10_ticpe(SimpleFormulaColumn):
     label = u"Calcul du montant de la TICPE sur le SP E10"
 
     def function(self, simulation, period):
-        # Get TVA at full rate
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         try:
             accise_super_e10 = \
@@ -235,7 +232,6 @@ class super_plombe_ticpe(SimpleFormulaColumn):
     label = u"Calcul du montant de la TICPE sur le super plombé"
 
     def function(self, simulation, period):
-        # Get TVA at full rate
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         accise_super_plombe_ticpe = \
             simulation.legislation_at(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
