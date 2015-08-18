@@ -456,4 +456,17 @@ def preprocess_legislation(legislation_json):
 
     legislation_json['children']['imposition_indirecte']['children']['alcool_conso_et_vin'] = alcool_conso_et_vin
 
+    # Make the change from francs to euros for excise taxes in ticpe
+    keys_ticpe = legislation_json['children']['imposition_indirecte']['children']['ticpe']['children'].keys()
+    for element in keys_ticpe:
+        get_values = \
+            legislation_json['children']['imposition_indirecte']['children']['ticpe']['children'][element]['values']
+        for each_value in get_values:
+            get_character = '{}'.format(each_value['start'])
+            year = int(get_character[:4])
+            if year < 2002:
+                each_value['value'] = each_value['value'] / 6.55957
+            else:
+                each_value['value'] = each_value['value']
+
     return legislation_json

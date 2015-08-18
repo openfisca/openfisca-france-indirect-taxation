@@ -33,9 +33,6 @@ def get_accises_carburants(liste_carburants):
             except:
                 df_accise['{}'.format(year)] = df_accise['{}'.format(year - 1)]
 
-        for year in range(1993, 2002):
-            df_accise['{}'.format(year)] = df_accise['{}'.format(year)] / 6.55957
-
         df_accise = df_accise.transpose()
         df_accise.rename(columns = {'value': 'accise ' + element.replace('_', ' ')}, inplace = True)
         df_accise = df_accise.sort_index()
