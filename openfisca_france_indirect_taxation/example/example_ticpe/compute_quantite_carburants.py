@@ -44,20 +44,18 @@ if __name__ == '__main__':
     for year in [2000, 2005, 2011]:
         try:
             data_simulation = simulate_df(var_to_be_simulated = var_to_be_simulated_with_e10, year = year)
-            data_simulation['diesel_ticpe_ponderee'] = data_simulation['diesel_ticpe'] * data_simulation['pondmen']
-            data_simulation['sp95_ticpe_ponderee'] = data_simulation['sp95_ticpe'] * data_simulation['pondmen']
-            data_simulation['sp98_ticpe_ponderee'] = data_simulation['sp98_ticpe'] * data_simulation['pondmen']
-            data_simulation['sp_e10_ticpe_ponderee'] = data_simulation['sp_e10_ticpe'] * data_simulation['pondmen']
-            data_simulation['super_plombe_ticpe_ponderee'] = \
-                data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']
+            diesel_ticpe_ponderee = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()
+            sp95_ticpe_ponderee = (data_simulation['sp95_ticpe'] * data_simulation['pondmen']).sum()
+            sp98_ticpe_ponderee = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()
+            super_plombe_ticpe_ponderee = (data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']).sum()
+            sp_e10_ticpe_ponderee = (data_simulation['sp_e10_ticpe'] * data_simulation['pondmen']).sum()
         except:
             data_simulation = simulate_df(var_to_be_simulated = var_to_be_simulated_without_e10, year = year)
-            data_simulation['diesel_ticpe_ponderee'] = data_simulation['diesel_ticpe'] * data_simulation['pondmen']
-            data_simulation['sp95_ticpe_ponderee'] = data_simulation['sp95_ticpe'] * data_simulation['pondmen']
-            data_simulation['sp98_ticpe_ponderee'] = data_simulation['sp98_ticpe'] * data_simulation['pondmen']
-            data_simulation['sp_e10_ticpe_ponderee'] = 0
-            data_simulation['super_plombe_ticpe_ponderee'] = \
-                data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']
+            diesel_ticpe_ponderee = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()
+            sp95_ticpe_ponderee = (data_simulation['sp95_ticpe'] * data_simulation['pondmen']).sum()
+            sp98_ticpe_ponderee = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()
+            super_plombe_ticpe_ponderee = (data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']).sum()
+            sp_e10_ticpe_ponderee = 0
 
         liste_carburants_accise = get_accise_ticpe_majoree()
         value_accise_diesel = liste_carburants_accise['accise majoree diesel'].loc[u'{}'.format(year)] / 100
@@ -65,11 +63,9 @@ if __name__ == '__main__':
         value_accise_super_plombe = \
             liste_carburants_accise['accise majoree super plombe'].loc[u'{}'.format(year)] / 100
 
-        quantite_diesel = data_simulation['diesel_ticpe_ponderee'].sum() / (value_accise_diesel)
-        quantite_sans_plomb = (
-            data_simulation['sp95_ticpe_ponderee'].sum() + data_simulation['sp98_ticpe_ponderee'].sum() +
-            data_simulation['sp_e10_ticpe_ponderee'].sum()) / (value_accise_sp)
-        quantite_super_plombe = data_simulation['super_plombe_ticpe_ponderee'].sum() / (value_accise_super_plombe)
+        quantite_diesel = diesel_ticpe_ponderee / (value_accise_diesel)
+        quantite_sans_plomb = (sp95_ticpe_ponderee + sp98_ticpe_ponderee + sp_e10_ticpe_ponderee) / (value_accise_sp)
+        quantite_super_plombe = super_plombe_ticpe_ponderee / (value_accise_super_plombe)
 
         if quantite_super_plombe == np.nan:
             quantite_essence = quantite_sans_plomb + quantite_super_plombe
