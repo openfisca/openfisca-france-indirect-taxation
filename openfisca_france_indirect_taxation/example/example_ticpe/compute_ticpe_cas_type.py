@@ -9,7 +9,7 @@ import datetime
 import pandas as pd
 
 from openfisca_france_indirect_taxation.tests import base
-from openfisca_france_indirect_taxation.example.utils_example import graph_builder_line
+from openfisca_france_indirect_taxation.example.utils_example import graph_builder_line_percent
 
 index = range(2002, 2014)
 columns = ['si une essence et une diesel', 'si seulement vehicules diesel', 'si seulement vehicules essence']
@@ -41,4 +41,4 @@ for element in columns:
         depenses_ticpe_pour_100_euros_carbu.loc[depenses_ticpe_pour_100_euros_carbu.index == year, element] = \
             simulation.calculate('ticpe_totale')
 
-graph_builder_line(depenses_ticpe_pour_100_euros_carbu)
+graph_builder_line_percent(depenses_ticpe_pour_100_euros_carbu)

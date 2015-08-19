@@ -35,7 +35,7 @@ from __future__ import division
 from pandas import concat
 
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
-    graph_builder_line
+    graph_builder_line_percent
 
 
 if __name__ == '__main__':
@@ -106,4 +106,4 @@ if __name__ == '__main__':
         else:
             df_to_graph = p['{}'.format(year)]
 
-    graph_builder_line(df_to_graph)
+    graph_builder_line_percent(df_to_graph)

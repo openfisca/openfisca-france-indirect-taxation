@@ -10,7 +10,7 @@ from __future__ import division
 from pandas import concat
 
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
-    graph_builder_line
+    graph_builder_line_percent
 
 # On va dans ce fichier créer les graphiques permettant de voir les taux d'effort selon trois définition du revenu:
 # - revenu total
@@ -85,6 +85,6 @@ if __name__ == '__main__':
         else:
             part_ticpe_depenses_totales = data_to_append_depenses_totales
 
-    graph_builder_line(part_ticpe_revtot)
-    graph_builder_line(part_ticpe_rev_disp_loyerimput)
-    graph_builder_line(part_ticpe_depenses_totales)
+    graph_builder_line_percent(part_ticpe_revtot)
+    graph_builder_line_percent(part_ticpe_rev_disp_loyerimput)
+    graph_builder_line_percent(part_ticpe_depenses_totales)

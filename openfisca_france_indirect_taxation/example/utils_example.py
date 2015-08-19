@@ -113,13 +113,23 @@ def graph_builder_bar_list(graph):
     return plt.show()
 
 
-def graph_builder_line(graph):
+def graph_builder_line_percent(graph):
     axes = graph.plot(
         )
     plt.axhline(0, color = 'k')
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
     axes.legend(
         bbox_to_anchor = (1, 1),
+        )
+    return plt.show()
+
+
+def graph_builder_line(graph):
+    axes = graph.plot(
+        )
+    plt.axhline(0, color = 'k')
+    axes.legend(
+        bbox_to_anchor = (1, 0.25),
         )
     return plt.show()
 
