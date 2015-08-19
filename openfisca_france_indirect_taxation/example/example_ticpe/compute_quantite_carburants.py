@@ -8,6 +8,9 @@ Created on Tue Aug 18 14:32:30 2015
 from __future__ import division
 
 import numpy as np
+import csv
+import pkg_resources
+import os
 
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df
 from openfisca_france_indirect_taxation.model.get_dataframe_from_legislation.get_accises import \
@@ -76,3 +79,22 @@ if __name__ == '__main__':
         quantites_carburants_consommees['en milliers de m3 en {}'.format(year)] = quantite_carburants / 1000000
         quantites_diesel_consommees['en milliers de m3 en {}'.format(year)] = quantite_diesel / 1000000
         quantites_essence_consommees['en milliers de m3 en {}'.format(year)] = quantite_essence / 1000000
+
+    assets_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
+        )
+
+    writer_carburants = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+        'quantites_carburants_consommees_bdf.csv'), 'wb'))
+    for key, value in quantites_carburants_consommees.items():
+        writer_carburants.writerow([key, value])
+
+    writer_diesel = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+        'quantites_diesel_consommees_bdf.csv'), 'wb'))
+    for key, value in quantites_diesel_consommees.items():
+        writer_diesel.writerow([key, value])
+
+    writer_essence = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+        'quantites_essence_consommees_bdf.csv'), 'wb'))
+    for key, value in quantites_essence_consommees.items():
+        writer_essence.writerow([key, value])
