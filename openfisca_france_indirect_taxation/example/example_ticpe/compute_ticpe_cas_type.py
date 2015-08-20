@@ -9,9 +9,13 @@ import datetime
 import pandas as pd
 
 from openfisca_france_indirect_taxation.tests import base
-from openfisca_france_indirect_taxation.example.utils_example import graph_builder_line_percent
+from openfisca_france_indirect_taxation.example.utils_example import graph_builder_line
 
-index = range(2002, 2014)
+"""Nous simulons les montants de ticpe payés par un ménage selon le type de véhicule dont il dispose
+Nous prenons un ménage dont les dépenses annuelles en carburants s'élèveraient à 1000 euros
+C'est en dessous de la moyenne de nos samples (plutôt autour de 1500)"""
+
+index = range(2000, 2014)
 columns = ['si une essence et une diesel', 'si seulement vehicules diesel', 'si seulement vehicules essence']
 depenses_ticpe_pour_100_euros_carbu = pd.DataFrame(index = index, columns = columns)
 
@@ -24,7 +28,7 @@ for element in columns:
         ess = 0
     else:
         ess = 1
-    for year in range(2002, 2014):
+    for year in range(2000, 2014):
         year = year
         simulation = base.tax_benefit_system.new_scenario().init_single_entity(
             period = year,
@@ -32,7 +36,7 @@ for element in columns:
                 birth = datetime.date(year - 40, 1, 1),
                 ),
             menage = dict(
-                consommation_ticpe = 500,
+                consommation_ticpe = 1000,
                 veh_essence = ess,
                 veh_diesel = dies,
                 ),
@@ -41,4 +45,4 @@ for element in columns:
         depenses_ticpe_pour_100_euros_carbu.loc[depenses_ticpe_pour_100_euros_carbu.index == year, element] = \
             simulation.calculate('ticpe_totale')
 
-graph_builder_line_percent(depenses_ticpe_pour_100_euros_carbu)
+graph_builder_line(depenses_ticpe_pour_100_euros_carbu)

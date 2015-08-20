@@ -6,7 +6,6 @@ Created on Wed Aug 19 15:18:46 2015
 """
 
 from __future__ import division
-import csv
 import pkg_resources
 import os
 import pandas as pd
