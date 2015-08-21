@@ -28,7 +28,7 @@ from __future__ import division
 
 from datetime import date
 
-from openfisca_france_indirect_taxation.model.base import *
+from ..base import *
 
 
 'categorie_fiscale: 0'
@@ -44,7 +44,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1112', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -52,7 +53,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1112', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -60,7 +62,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1112', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -68,7 +71,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1112', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -76,7 +80,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1112', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -84,7 +89,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1112', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -92,7 +98,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1112', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -100,7 +107,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1112', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -108,7 +116,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -116,7 +125,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -124,7 +134,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -132,7 +143,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -140,7 +152,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -148,7 +161,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -156,7 +170,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -164,7 +179,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -172,7 +188,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -180,7 +197,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -188,7 +206,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -196,7 +215,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -204,7 +224,8 @@ class categorie_fiscale_0(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_0 = 0
         for each_variable in ['230', '411', '412', '421', '422', '621', '622', '623', '630', '810', '943', '1010', '1020', '1030', '1040', '1050', '1220', '1261', '9901', '9902', '9911', '9912', '9913', '9914', '9915', '9921', '9922', '9923', '9931', '9932', '9941']:
-            bien_pour_categorie_fiscale_0 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_0 = simulation.calculate(element, period)
             categorie_fiscale_0 += bien_pour_categorie_fiscale_0
         return period, categorie_fiscale_0
 
@@ -221,7 +242,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -229,7 +251,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -237,7 +260,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -245,7 +269,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -253,7 +278,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -261,7 +287,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -269,7 +296,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -277,7 +305,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -285,7 +314,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -293,7 +323,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -301,7 +332,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -309,7 +341,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -317,7 +350,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -325,7 +359,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -333,7 +368,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -341,7 +377,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -349,7 +386,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -357,7 +395,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -365,7 +404,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -373,7 +413,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -381,7 +422,8 @@ class categorie_fiscale_1(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_1 = 0
         for each_variable in ['611', '952']:
-            bien_pour_categorie_fiscale_1 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_1 = simulation.calculate(element, period)
             categorie_fiscale_1 += bien_pour_categorie_fiscale_1
         return period, categorie_fiscale_1
 
@@ -398,7 +440,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '441', '442', '443', '613', '731', '732', '733', '734', '735', '941', '942', '951', '1120', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -406,7 +449,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '441', '442', '443', '613', '731', '732', '733', '734', '735', '941', '942', '951', '1120', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -414,7 +458,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '441', '442', '443', '613', '731', '732', '733', '734', '735', '941', '942', '951', '1120', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -422,7 +467,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '441', '442', '443', '613', '731', '732', '733', '734', '735', '941', '942', '951', '1120', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -430,7 +476,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '441', '442', '443', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '1120', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -438,7 +485,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '441', '442', '443', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '1120', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -446,7 +494,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '431', '432', '441', '442', '443', '562', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '1120', '1240', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -454,7 +503,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '431', '432', '441', '442', '443', '562', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '1120', '1240', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -462,7 +512,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '431', '432', '441', '442', '443', '562', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '1112', '1120', '1240', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -470,7 +521,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '431', '432', '441', '442', '443', '562', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '1112', '1120', '1240', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -478,7 +530,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '431', '432', '441', '442', '443', '562', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '1112', '1120', '1240', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -486,7 +539,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '431', '432', '441', '442', '443', '562', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '1112', '1120', '1240', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -494,7 +548,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '431', '432', '441', '442', '443', '562', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '1112', '1120', '1240', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -502,7 +557,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '431', '432', '441', '442', '443', '562', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '1112', '1120', '1240', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -510,7 +566,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '431', '432', '441', '442', '443', '562', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '1112', '1120', '1240', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -518,7 +575,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '431', '432', '441', '442', '443', '562', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '1112', '1120', '1240', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -526,7 +584,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '431', '432', '441', '442', '443', '562', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '11113', '1112', '1120', '1240', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -534,7 +593,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '431', '432', '441', '442', '443', '562', '613', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '11113', '1112', '1120', '1240', '9903', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -542,7 +602,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '613', '1112', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -550,7 +611,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '613', '1112', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -558,7 +620,8 @@ class categorie_fiscale_2(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_2 = 0
         for each_variable in ['111', '112', '113', '114', '115', '116', '117', '118', '119', '121', '122', '613', '1112', '9933']:
-            bien_pour_categorie_fiscale_2 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_2 = simulation.calculate(element, period)
             categorie_fiscale_2 += bien_pour_categorie_fiscale_2
         return period, categorie_fiscale_2
 
@@ -575,7 +638,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '431', '432', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '562', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11112', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1240', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -583,7 +647,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '431', '432', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '562', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11112', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1240', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -591,7 +656,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '431', '432', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '562', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11112', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1240', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -599,7 +665,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '431', '432', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '562', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11112', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1240', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -607,7 +674,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '431', '432', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '562', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1240', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -615,7 +683,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '431', '432', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '562', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1240', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -623,7 +692,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -631,7 +701,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -639,7 +710,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -647,7 +719,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -655,7 +728,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -663,7 +737,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -671,7 +746,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -679,7 +755,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -687,7 +764,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -695,7 +773,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11113', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -703,7 +782,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -711,7 +791,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -719,7 +800,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -727,7 +809,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -735,7 +818,8 @@ class categorie_fiscale_3(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_3 = 0
         for each_variable in ['1151', '1181', '311', '312', '313', '314', '321', '322', '444', '451', '4511', '452', '4522', '453', '454', '455', '511', '512', '513', '520', '531', '532', '533', '540', '551', '552', '561', '612', '711', '712', '713', '721', '723', '724', '736', '831', '832', '911', '912', '913', '914', '915', '921', '922', '923', '931', '932', '933', '934', '935', '953', '954', '960', '11114', '1211', '1212', '1213', '1231', '1232', '1262', '1270']:
-            bien_pour_categorie_fiscale_3 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_3 = simulation.calculate(element, period)
             categorie_fiscale_3 += bien_pour_categorie_fiscale_3
         return period, categorie_fiscale_3
 
@@ -748,155 +832,12 @@ class categorie_fiscale_4(DatedFormulaColumn):
     entity_class = Menages
     label = u"Categorie fiscale 4"
 
-    @dated_function(start = date(1994, 1, 1), stop = date(1994, 12, 31))
-    def function_1994(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(1995, 1, 1), stop = date(1995, 12, 31))
-    def function_1995(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(1996, 1, 1), stop = date(1996, 12, 31))
-    def function_1996(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(1997, 1, 1), stop = date(1997, 12, 31))
-    def function_1997(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(1998, 1, 1), stop = date(1998, 12, 31))
-    def function_1998(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(1999, 1, 1), stop = date(1999, 12, 31))
-    def function_1999(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(2000, 1, 1), stop = date(2000, 12, 31))
-    def function_2000(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(2001, 1, 1), stop = date(2001, 12, 31))
-    def function_2001(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(2002, 1, 1), stop = date(2002, 12, 31))
-    def function_2002(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(2003, 1, 1), stop = date(2003, 12, 31))
-    def function_2003(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(2004, 1, 1), stop = date(2004, 12, 31))
-    def function_2004(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(2005, 1, 1), stop = date(2005, 12, 31))
-    def function_2005(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(2006, 1, 1), stop = date(2006, 12, 31))
-    def function_2006(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(2007, 1, 1), stop = date(2007, 12, 31))
-    def function_2007(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(2008, 1, 1), stop = date(2008, 12, 31))
-    def function_2008(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(2009, 1, 1), stop = date(2009, 12, 31))
-    def function_2009(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(2010, 1, 1), stop = date(2010, 12, 31))
-    def function_2010(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
-    @dated_function(start = date(2011, 1, 1), stop = date(2011, 12, 31))
-    def function_2011(self, simulation, period):
-        categorie_fiscale_4 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
-            categorie_fiscale_4 += bien_pour_categorie_fiscale_4
-        return period, categorie_fiscale_4
-
     @dated_function(start = date(2012, 1, 1), stop = date(2012, 12, 31))
     def function_2012(self, simulation, period):
         categorie_fiscale_4 = 0
         for each_variable in ['431', '432', '441', '442', '443', '562', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '11113', '1120', '1240', '9903']:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_4 = simulation.calculate(element, period)
             categorie_fiscale_4 += bien_pour_categorie_fiscale_4
         return period, categorie_fiscale_4
 
@@ -904,7 +845,8 @@ class categorie_fiscale_4(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_4 = 0
         for each_variable in ['431', '432', '441', '442', '443', '562', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '11113', '1120', '1240', '9903']:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_4 = simulation.calculate(element, period)
             categorie_fiscale_4 += bien_pour_categorie_fiscale_4
         return period, categorie_fiscale_4
 
@@ -912,363 +854,10 @@ class categorie_fiscale_4(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_4 = 0
         for each_variable in ['431', '432', '441', '442', '443', '562', '731', '732', '733', '734', '735', '941', '942', '951', '11112', '11113', '1120', '1240', '9903']:
-            bien_pour_categorie_fiscale_4 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_4 = simulation.calculate(element, period)
             categorie_fiscale_4 += bien_pour_categorie_fiscale_4
         return period, categorie_fiscale_4
-
-'categorie_fiscale: 5'
-
-
-@reference_formula
-class categorie_fiscale_5(DatedFormulaColumn):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Categorie fiscale 5"
-
-    @dated_function(start = date(1994, 1, 1), stop = date(1994, 12, 31))
-    def function_1994(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(1995, 1, 1), stop = date(1995, 12, 31))
-    def function_1995(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(1996, 1, 1), stop = date(1996, 12, 31))
-    def function_1996(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(1997, 1, 1), stop = date(1997, 12, 31))
-    def function_1997(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(1998, 1, 1), stop = date(1998, 12, 31))
-    def function_1998(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(1999, 1, 1), stop = date(1999, 12, 31))
-    def function_1999(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2000, 1, 1), stop = date(2000, 12, 31))
-    def function_2000(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2001, 1, 1), stop = date(2001, 12, 31))
-    def function_2001(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2002, 1, 1), stop = date(2002, 12, 31))
-    def function_2002(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2003, 1, 1), stop = date(2003, 12, 31))
-    def function_2003(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2004, 1, 1), stop = date(2004, 12, 31))
-    def function_2004(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2005, 1, 1), stop = date(2005, 12, 31))
-    def function_2005(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2006, 1, 1), stop = date(2006, 12, 31))
-    def function_2006(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2007, 1, 1), stop = date(2007, 12, 31))
-    def function_2007(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2008, 1, 1), stop = date(2008, 12, 31))
-    def function_2008(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2009, 1, 1), stop = date(2009, 12, 31))
-    def function_2009(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2010, 1, 1), stop = date(2010, 12, 31))
-    def function_2010(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2011, 1, 1), stop = date(2011, 12, 31))
-    def function_2011(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2012, 1, 1), stop = date(2012, 12, 31))
-    def function_2012(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2013, 1, 1), stop = date(2013, 12, 31))
-    def function_2013(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-    @dated_function(start = date(2014, 1, 1), stop = date(2014, 12, 31))
-    def function_2014(self, simulation, period):
-        categorie_fiscale_5 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_5 = simulation.calculate(each_variable, period)
-            categorie_fiscale_5 += bien_pour_categorie_fiscale_5
-        return period, categorie_fiscale_5
-
-'categorie_fiscale: 6'
-
-
-@reference_formula
-class categorie_fiscale_6(DatedFormulaColumn):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Categorie fiscale 6"
-
-    @dated_function(start = date(1994, 1, 1), stop = date(1994, 12, 31))
-    def function_1994(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(1995, 1, 1), stop = date(1995, 12, 31))
-    def function_1995(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(1996, 1, 1), stop = date(1996, 12, 31))
-    def function_1996(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(1997, 1, 1), stop = date(1997, 12, 31))
-    def function_1997(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(1998, 1, 1), stop = date(1998, 12, 31))
-    def function_1998(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(1999, 1, 1), stop = date(1999, 12, 31))
-    def function_1999(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2000, 1, 1), stop = date(2000, 12, 31))
-    def function_2000(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2001, 1, 1), stop = date(2001, 12, 31))
-    def function_2001(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2002, 1, 1), stop = date(2002, 12, 31))
-    def function_2002(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2003, 1, 1), stop = date(2003, 12, 31))
-    def function_2003(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2004, 1, 1), stop = date(2004, 12, 31))
-    def function_2004(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2005, 1, 1), stop = date(2005, 12, 31))
-    def function_2005(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2006, 1, 1), stop = date(2006, 12, 31))
-    def function_2006(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2007, 1, 1), stop = date(2007, 12, 31))
-    def function_2007(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2008, 1, 1), stop = date(2008, 12, 31))
-    def function_2008(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2009, 1, 1), stop = date(2009, 12, 31))
-    def function_2009(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2010, 1, 1), stop = date(2010, 12, 31))
-    def function_2010(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2011, 1, 1), stop = date(2011, 12, 31))
-    def function_2011(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2012, 1, 1), stop = date(2012, 12, 31))
-    def function_2012(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2013, 1, 1), stop = date(2013, 12, 31))
-    def function_2013(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
-
-    @dated_function(start = date(2014, 1, 1), stop = date(2014, 12, 31))
-    def function_2014(self, simulation, period):
-        categorie_fiscale_6 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_6 = simulation.calculate(each_variable, period)
-            categorie_fiscale_6 += bien_pour_categorie_fiscale_6
-        return period, categorie_fiscale_6
 
 'categorie_fiscale: 7'
 
@@ -1283,7 +872,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1291,7 +881,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1299,7 +890,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1307,7 +899,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1315,7 +908,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1323,7 +917,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1331,7 +926,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1339,7 +935,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1347,7 +944,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1355,7 +953,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1363,7 +962,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1371,7 +971,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1379,7 +980,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1387,7 +989,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1395,7 +998,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1403,7 +1007,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1411,7 +1016,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1419,7 +1025,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1427,7 +1034,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1435,7 +1043,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1443,7 +1052,8 @@ class categorie_fiscale_7(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_7 = 0
         for each_variable in ['2201']:
-            bien_pour_categorie_fiscale_7 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_7 = simulation.calculate(element, period)
             categorie_fiscale_7 += bien_pour_categorie_fiscale_7
         return period, categorie_fiscale_7
 
@@ -1460,7 +1070,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1468,7 +1079,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1476,7 +1088,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1484,7 +1097,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1492,7 +1106,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1500,7 +1115,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1508,7 +1124,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1516,7 +1133,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1524,7 +1142,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1532,7 +1151,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1540,7 +1160,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1548,7 +1169,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1556,7 +1178,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1564,7 +1187,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1572,7 +1196,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1580,7 +1205,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1588,7 +1214,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1596,7 +1223,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1604,7 +1232,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1612,7 +1241,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1620,7 +1250,8 @@ class categorie_fiscale_8(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_8 = 0
         for each_variable in ['2202']:
-            bien_pour_categorie_fiscale_8 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_8 = simulation.calculate(element, period)
             categorie_fiscale_8 += bien_pour_categorie_fiscale_8
         return period, categorie_fiscale_8
 
@@ -1637,7 +1268,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1645,7 +1277,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1653,7 +1286,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1661,7 +1295,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1669,7 +1304,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1677,7 +1313,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1685,7 +1322,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1693,7 +1331,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1701,7 +1340,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1709,7 +1349,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1717,7 +1358,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1725,7 +1367,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1733,7 +1376,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1741,7 +1385,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1749,7 +1394,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1757,7 +1403,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1765,7 +1412,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1773,7 +1421,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1781,7 +1430,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1789,7 +1439,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1797,7 +1448,8 @@ class categorie_fiscale_9(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_9 = 0
         for each_variable in ['2203']:
-            bien_pour_categorie_fiscale_9 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_9 = simulation.calculate(element, period)
             categorie_fiscale_9 += bien_pour_categorie_fiscale_9
         return period, categorie_fiscale_9
 
@@ -1814,7 +1466,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1822,7 +1475,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1830,7 +1484,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1838,7 +1493,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1846,7 +1502,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1854,7 +1511,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1862,7 +1520,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1870,7 +1529,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1878,7 +1538,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1886,7 +1547,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1894,7 +1556,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1902,7 +1565,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1910,7 +1574,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1918,7 +1583,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1926,7 +1592,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1934,7 +1601,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1942,7 +1610,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1950,7 +1619,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1958,7 +1628,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1966,7 +1637,8 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
 
@@ -1974,186 +1646,10 @@ class categorie_fiscale_10(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_10 = 0
         for each_variable in ['211']:
-            bien_pour_categorie_fiscale_10 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_10 = simulation.calculate(element, period)
             categorie_fiscale_10 += bien_pour_categorie_fiscale_10
         return period, categorie_fiscale_10
-
-'categorie_fiscale: 11'
-
-
-@reference_formula
-class categorie_fiscale_11(DatedFormulaColumn):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Categorie fiscale 11"
-
-    @dated_function(start = date(1994, 1, 1), stop = date(1994, 12, 31))
-    def function_1994(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(1995, 1, 1), stop = date(1995, 12, 31))
-    def function_1995(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(1996, 1, 1), stop = date(1996, 12, 31))
-    def function_1996(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(1997, 1, 1), stop = date(1997, 12, 31))
-    def function_1997(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(1998, 1, 1), stop = date(1998, 12, 31))
-    def function_1998(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(1999, 1, 1), stop = date(1999, 12, 31))
-    def function_1999(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2000, 1, 1), stop = date(2000, 12, 31))
-    def function_2000(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2001, 1, 1), stop = date(2001, 12, 31))
-    def function_2001(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2002, 1, 1), stop = date(2002, 12, 31))
-    def function_2002(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2003, 1, 1), stop = date(2003, 12, 31))
-    def function_2003(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2004, 1, 1), stop = date(2004, 12, 31))
-    def function_2004(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2005, 1, 1), stop = date(2005, 12, 31))
-    def function_2005(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2006, 1, 1), stop = date(2006, 12, 31))
-    def function_2006(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2007, 1, 1), stop = date(2007, 12, 31))
-    def function_2007(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2008, 1, 1), stop = date(2008, 12, 31))
-    def function_2008(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2009, 1, 1), stop = date(2009, 12, 31))
-    def function_2009(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2010, 1, 1), stop = date(2010, 12, 31))
-    def function_2010(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2011, 1, 1), stop = date(2011, 12, 31))
-    def function_2011(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2012, 1, 1), stop = date(2012, 12, 31))
-    def function_2012(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2013, 1, 1), stop = date(2013, 12, 31))
-    def function_2013(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
-
-    @dated_function(start = date(2014, 1, 1), stop = date(2014, 12, 31))
-    def function_2014(self, simulation, period):
-        categorie_fiscale_11 = 0
-        for each_variable in []:
-            bien_pour_categorie_fiscale_11 = simulation.calculate(each_variable, period)
-            categorie_fiscale_11 += bien_pour_categorie_fiscale_11
-        return period, categorie_fiscale_11
 
 'categorie_fiscale: 12'
 
@@ -2168,7 +1664,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2176,7 +1673,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2184,7 +1682,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2192,7 +1691,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2200,7 +1700,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2208,7 +1709,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2216,7 +1718,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2224,7 +1727,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2232,7 +1736,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2240,7 +1745,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2248,7 +1754,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2256,7 +1763,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2264,7 +1772,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2272,7 +1781,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2280,7 +1790,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2288,7 +1799,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2296,7 +1808,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2304,7 +1817,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2312,7 +1826,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2320,7 +1835,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2328,7 +1844,8 @@ class categorie_fiscale_12(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_12 = 0
         for each_variable in ['212']:
-            bien_pour_categorie_fiscale_12 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_12 = simulation.calculate(element, period)
             categorie_fiscale_12 += bien_pour_categorie_fiscale_12
         return period, categorie_fiscale_12
 
@@ -2345,7 +1862,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2353,7 +1871,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2361,7 +1880,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2369,7 +1889,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2377,7 +1898,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2385,7 +1907,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2393,7 +1916,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2401,7 +1925,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2409,7 +1934,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2417,7 +1943,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2425,7 +1952,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2433,7 +1961,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2441,7 +1970,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2449,7 +1979,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2457,7 +1988,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2465,7 +1997,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2473,7 +2006,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2481,7 +2015,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2489,7 +2024,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2497,7 +2033,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2505,7 +2042,8 @@ class categorie_fiscale_13(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_13 = 0
         for each_variable in ['213']:
-            bien_pour_categorie_fiscale_13 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_13 = simulation.calculate(element, period)
             categorie_fiscale_13 += bien_pour_categorie_fiscale_13
         return period, categorie_fiscale_13
 
@@ -2522,7 +2060,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2530,7 +2069,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2538,7 +2078,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2546,7 +2087,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2554,7 +2096,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2562,7 +2105,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2570,7 +2114,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2578,7 +2123,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2586,7 +2132,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2594,7 +2141,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2602,7 +2150,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2610,7 +2159,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2618,7 +2168,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2626,7 +2177,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2634,7 +2186,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2642,7 +2195,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2650,7 +2204,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2658,7 +2213,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2666,7 +2222,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2674,7 +2231,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2682,7 +2240,8 @@ class categorie_fiscale_14(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_14 = 0
         for each_variable in ['722']:
-            bien_pour_categorie_fiscale_14 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_14 = simulation.calculate(element, period)
             categorie_fiscale_14 += bien_pour_categorie_fiscale_14
         return period, categorie_fiscale_14
 
@@ -2699,7 +2258,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2707,7 +2267,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2715,7 +2276,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2723,7 +2285,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2731,7 +2294,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2739,7 +2303,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2747,7 +2312,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2755,7 +2321,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2763,7 +2330,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2771,7 +2339,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2779,7 +2348,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2787,7 +2357,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2795,7 +2366,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2803,7 +2375,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2811,7 +2384,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2819,7 +2393,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2827,7 +2402,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2835,7 +2411,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2843,7 +2420,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2851,7 +2429,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2859,7 +2438,8 @@ class categorie_fiscale_15(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_15 = 0
         for each_variable in ['1254']:
-            bien_pour_categorie_fiscale_15 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_15 = simulation.calculate(element, period)
             categorie_fiscale_15 += bien_pour_categorie_fiscale_15
         return period, categorie_fiscale_15
 
@@ -2876,7 +2456,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2884,7 +2465,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2892,7 +2474,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2900,7 +2483,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2908,7 +2492,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2916,7 +2501,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2924,7 +2510,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2932,7 +2519,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2940,7 +2528,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2948,7 +2537,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2956,7 +2546,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2964,7 +2555,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2972,7 +2564,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2980,7 +2573,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2988,7 +2582,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -2996,7 +2591,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -3004,7 +2600,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -3012,7 +2609,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -3020,7 +2618,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -3028,7 +2627,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -3036,7 +2636,8 @@ class categorie_fiscale_16(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_16 = 0
         for each_variable in ['1253']:
-            bien_pour_categorie_fiscale_16 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_16 = simulation.calculate(element, period)
             categorie_fiscale_16 += bien_pour_categorie_fiscale_16
         return period, categorie_fiscale_16
 
@@ -3053,7 +2654,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_1994(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3061,7 +2663,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_1995(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3069,7 +2672,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_1996(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3077,7 +2681,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_1997(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3085,7 +2690,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_1998(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3093,7 +2699,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_1999(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3101,7 +2708,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2000(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3109,7 +2717,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2001(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3117,7 +2726,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2002(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3125,7 +2735,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2003(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3133,7 +2744,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2004(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3141,7 +2753,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2005(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3149,7 +2762,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2006(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3157,7 +2771,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2007(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3165,7 +2780,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2008(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3173,7 +2789,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2009(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3181,7 +2798,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2010(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3189,7 +2807,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2011(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3197,7 +2816,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2012(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3205,7 +2825,8 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2013(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
 
@@ -3213,6 +2834,7 @@ class categorie_fiscale_17(DatedFormulaColumn):
     def function_2014(self, simulation, period):
         categorie_fiscale_17 = 0
         for each_variable in ['1251', '1252', '1255']:
-            bien_pour_categorie_fiscale_17 = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_17 = simulation.calculate(element, period)
             categorie_fiscale_17 += bien_pour_categorie_fiscale_17
         return period, categorie_fiscale_17
