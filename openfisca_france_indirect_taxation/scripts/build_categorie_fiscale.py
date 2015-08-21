@@ -5,6 +5,9 @@ Created on Thu Aug 20 16:20:13 2015
 @author: thomas.douenne
 """
 
+import pkg_resources
+import os
+
 from openfisca_france_indirect_taxation.build_survey_data.step_04_homogeneisation_categories_fiscales import (
     get_parametres_fiscalite_data_frame)
 
@@ -16,7 +19,15 @@ selected_parametres_fiscalite_data_frame = \
 selected_parametres_fiscalite_data_frame.set_index('posteCOICOP', inplace = True)
 ensemble_postes_coicop = selected_parametres_fiscalite_data_frame.reset_index()
 
-script_categorie_fiscale = open('categorie_fiscale_generator.py', 'w')
+consommation_directory = os.path.join(
+    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
+    )
+
+script_categorie_fiscale = open(
+    os.path.join(consommation_directory, 'openfisca_france_indirect_taxation', 'model',
+    'consommation', 'categorie_fiscale_generator.py'), 'w'
+    )
+
 presentation_and_imports = '''
 # -*- coding: utf-8 -*-
 
@@ -51,8 +62,10 @@ from openfisca_france_indirect_taxation.model.base import *
 '''
 print >>script_categorie_fiscale, presentation_and_imports
 
+existing_categ = selected_parametres_fiscalite_data_frame['categoriefiscale'].drop_duplicates()
+existing_categ = sorted(existing_categ)
 
-for categorie_fiscale in range(18):
+for categorie_fiscale in existing_categ:
     definition_function = '''
 'categorie_fiscale: {0}'
 
@@ -73,15 +86,18 @@ class categorie_fiscale_{0}(DatedFormulaColumn):
             categorie_fiscale, ['posteCOICOP']].values
             ]
         variables = ', '.join(z)
+        not_empty = len(z) != 0
         function_itself = '''
     @dated_function(start = date({3}, 1, 1), stop = date({3}, 12, 31))
     def function_{3}(self, simulation, period):
         categorie_fiscale_{0} = 0
         for each_variable in {1}:
-            bien_pour_categorie_fiscale_{0} = simulation.calculate(each_variable, period)
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_{0} = simulation.calculate(element, period)
             categorie_fiscale_{0} += bien_pour_categorie_fiscale_{0}
         return period, categorie_fiscale_{0}'''.format(categorie_fiscale, z, variables, year)
 
-        print >>script_categorie_fiscale, function_itself
+        if not_empty is True:
+            print >>script_categorie_fiscale, function_itself
 
 script_categorie_fiscale.close()
