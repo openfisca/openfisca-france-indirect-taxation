@@ -37,7 +37,7 @@ import pandas
 from openfisca_france_data.temporary import temporary_store_decorator
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.build_survey_data.step_0_1_1_homogeneisation_donnees_depenses \
-    import normalize_coicop
+    import normalize_code_coicop
 from openfisca_france_indirect_taxation.build_survey_data.utils \
     import ident_men_dtype
 
@@ -51,7 +51,7 @@ def calage_viellissement_depenses(year_data, year_calage, depenses, masses):
     # print coicop_list
     coicop_list.remove('pondmen')
     for column in coicop_list:
-        coicop = normalize_coicop(column)
+        coicop = normalize_code_coicop(column)
         grosposte = int(coicop[0:2])
         # RAPPEL : 12 postes CN et COICOP
         #    01 Produits alimentaires et boissons non alcoolisées
@@ -99,6 +99,7 @@ def calcul_ratios_calage(year_data, year_calage, data_bdf, data_cn):
     masses['ratio_bdf{}_cn{}'.format(year_data, year_data)] = (
         1000000 * masses['consoCN_COICOP_{}'.format(year_data)] / masses['conso_bdf{}'.format(year_data)]
         )
+    print masses
     return masses
 
 
@@ -209,7 +210,7 @@ def build_depenses_calees(temporary_store = None, year_calage = None, year_data 
             coicop = unicode(coicop)
         except:
             coicop = coicop
-        normalized_coicop = normalize_coicop(coicop)
+        normalized_coicop = normalize_code_coicop(coicop)
         grosposte = normalized_coicop[0:2]
         return int(grosposte)
 
@@ -291,8 +292,8 @@ if __name__ == '__main__':
     import time
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
     deb = time.clock()
-    year_calage = 2005
-    year_data = 2005
+    year_calage = 2011
+    year_data = 2011
 
     build_depenses_calees(year_calage = year_calage, year_data = year_data)
     build_revenus_cales(year_calage = year_calage, year_data = year_data)

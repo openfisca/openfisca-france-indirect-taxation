@@ -53,12 +53,6 @@ from openfisca_france_indirect_taxation.build_survey_data.step_0_3_homogeneisati
 from openfisca_france_indirect_taxation.build_survey_data.step_0_4_homogeneisation_revenus_menages \
     import build_homogeneisation_revenus_menages
 
-from openfisca_france_indirect_taxation.build_survey_data.step_03_calage\
-    import build_depenses_calees, build_revenus_cales
-
-from openfisca_france_indirect_taxation.build_survey_data.step_04_homogeneisation_categories_fiscales\
-    import build_menage_consumption_by_categorie_fiscale
-
 from openfisca_france_data.temporary import TemporaryStore
 
 from openfisca_france_indirect_taxation.build_survey_data.utils \
@@ -80,18 +74,10 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
     build_depenses_homogenisees(year = year_data)
     build_imputation_loyers_proprietaires(year = year_data)
 
-    build_depenses_calees(year_calage = year_calage, year_data = year_data)
-    build_menage_consumption_by_categorie_fiscale(year_calage = year_calage, year_data = year_data)
-
-    categorie_fiscale_data_frame = temporary_store["menage_consumption_by_categorie_fiscale_{}".format(year_calage)]
-    categorie_fiscale_data_frame.index = categorie_fiscale_data_frame.index.astype(ident_men_dtype)
-
-    temporary_store["menage_consumption_by_categorie_fiscale_{}".format(year_calage)] = categorie_fiscale_data_frame
-
-    depenses_calees_by_grosposte = temporary_store["depenses_calees_by_grosposte_{}".format(year_calage)]
-    depenses_calees_by_grosposte.index = depenses_calees_by_grosposte.index.astype(ident_men_dtype)
-    depenses_calees = temporary_store["depenses_calees_{}".format(year_calage)]
-    depenses_calees.index = depenses_calees.index.astype(ident_men_dtype)
+    depenses = temporary_store["depenses_bdf_{}".format(year_calage)]
+    depenses.index = depenses.index.astype(ident_men_dtype)
+    depenses_by_grosposte = temporary_store["depenses_by_grosposte_{}".format(year_calage)]
+    depenses_by_grosposte.index = depenses_by_grosposte.index.astype(str)
 
     # Gestion des véhicules:
     build_homogeneisation_vehicules(year = year_data)
@@ -108,8 +94,7 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
 
     # Gestion des variables revenus:
     build_homogeneisation_revenus_menages(year = year_data)
-    build_revenus_cales(year_calage = year_calage, year_data = year_data)
-    revenus = temporary_store["revenus_cales_{}".format(year_calage)]
+    revenus = temporary_store["revenus_{}".format(year_calage)]
     revenus.index = revenus.index.astype(ident_men_dtype)
 
     temporary_store.close()
@@ -118,10 +103,9 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
     preprocessed_data_frame_by_name = dict(
         revenus = revenus,
         vehicule = vehicule,
-        categorie_fiscale_data_frame = categorie_fiscale_data_frame,
         menage = menage,
-        depenses_calees = depenses_calees,
-        depenses_calees_by_grosposte = depenses_calees_by_grosposte
+        depenses = depenses,
+        depenses_by_grosposte = depenses_by_grosposte
         )
 
     for name, preprocessed_data_frame in preprocessed_data_frame_by_name.iteritems():
@@ -143,8 +127,9 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
             data_frame.loc[data_frame[variable].isnull(), variable] = 0
     if year_data == 2011:
         for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
-        'rev_disp_loyerimput', 'rev_disponible', 'ratio_loyer_impute', 'loyer_impute', 'ratio_revenus']:
+        'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']:
             data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
+    # 'ratio_loyer_impute',  'ratio_revenus' To be added
 
     data_frame.index.name = "ident_men"
     # TODO: Homogénéiser: soit faire en sorte que ident_men existe pour toutes les années
@@ -195,5 +180,5 @@ def run(years_calage):
 if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    years_calage = [2005]  # [2000, 2005, 2011]
+    years_calage = [2000, 2005, 2011]
     run(years_calage)
