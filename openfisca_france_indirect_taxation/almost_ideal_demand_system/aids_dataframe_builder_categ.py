@@ -122,12 +122,16 @@ for year in [2000, 2005, 2011]:
     # Import information about households
 
     df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['vag'] + ['typmen'] + ['revtot'] +
-        ['02201'] + ['02202'] + ['02203']]
+        ['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']]
     df_info_menage['fumeur'] = 0
-    df_info_menage[['02201'] + ['02202'] + ['02203']] = df_info_menage[['02201'] + ['02202'] + ['02203']].astype(float)
-    df_info_menage['consommation_tabac'] = df_info_menage['02201'] + df_info_menage['02202'] + df_info_menage['02203']
+    df_info_menage[['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']] = \
+        df_info_menage[['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']].astype(float)
+    df_info_menage['consommation_tabac'] = (
+        df_info_menage['poste_coicop_2201'] + df_info_menage['poste_coicop_2202'] + df_info_menage['poste_coicop_2203']
+        )
     df_info_menage['fumeur'] = 1 * (df_info_menage['consommation_tabac'] > 0)
-    df_info_menage.drop(['consommation_tabac', '02201', '02202', '02203'], inplace = True, axis = 1)
+    df_info_menage.drop(['consommation_tabac', 'poste_coicop_2201', 'poste_coicop_2202', 'poste_coicop_2203'],
+        inplace = True, axis = 1)
     df_info_menage.index.name = 'ident_men'
     df_info_menage.reset_index(inplace = True)
     df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
