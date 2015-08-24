@@ -38,7 +38,7 @@ from openfisca_france_data.temporary import temporary_store_decorator
 from openfisca_france_data import default_config_files_directory as config_files_directory
 
 from openfisca_france_indirect_taxation.build_survey_data.step_0_1_1_homogeneisation_donnees_depenses \
-    import normalize_coicop
+    import normalize_poste_coicop
 
 from openfisca_france_indirect_taxation.build_survey_data.utils \
     import ident_men_dtype
@@ -58,7 +58,7 @@ def build_menage_consumption_by_categorie_fiscale(temporary_store = None, year_c
         get_transfert_data_frames(year = year_data)
 
     # Load data
-    coicop_data_frame = temporary_store['depenses_calees_{}'.format(year_calage)]
+    coicop_data_frame = temporary_store['depenses_bdf_{}'.format(year_calage)]
 
     # Grouping by categorie_fiscale
     selected_parametres_fiscalite_data_frame = \
@@ -66,11 +66,12 @@ def build_menage_consumption_by_categorie_fiscale(temporary_store = None, year_c
     selected_parametres_fiscalite_data_frame.set_index('posteCOICOP', inplace = True)
 
     # Normalisation des coicop de la feuille excel pour être cohérent avec depenses_calees
-    normalized_coicop = [
-        normalize_coicop(coicop)
+    normalized_poste_coicop = [
+        normalize_poste_coicop(coicop)
         for coicop in selected_parametres_fiscalite_data_frame.index
         ]
-    selected_parametres_fiscalite_data_frame.index = normalized_coicop
+    selected_parametres_fiscalite_data_frame.index = normalized_poste_coicop
+
     categorie_fiscale_by_coicop = selected_parametres_fiscalite_data_frame.to_dict()['categoriefiscale']
     for key in categorie_fiscale_by_coicop.keys():
         import math
