@@ -193,6 +193,16 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     temporary_store['depenses_by_grosposte_{}'.format(year)] = depenses_by_grosposte
 
 
+def normalize_poste_coicop(code):
+    try:
+        code = unicode(code)
+    except:
+        code = code
+        print code
+    normalized_code = 'poste_coicop_' + code
+    return normalized_code
+
+
 def normalize_coicop(code):
     '''Normalize_coicop est function d'harmonisation de la colonne d'entiers posteCOICOP de la table
 matrice_passage_data_frame en la transformant en une chaine de 5 caractères afin de pouvoir par la suite agréger les postes
