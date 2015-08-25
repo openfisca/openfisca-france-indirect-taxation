@@ -37,5 +37,5 @@ df_taux_implicite['taux_implicite_sp95'] = (
 
 df_taux_implicite = df_taux_implicite.dropna()
 
-graph_builder_bar_list(df_taux_implicite['taux_implicite_diesel'])
-graph_builder_bar_list(df_taux_implicite['taux_implicite_sp95'])
+graph_builder_bar_list(df_taux_implicite['taux_implicite_diesel'], 1, 1)
+graph_builder_bar_list(df_taux_implicite['taux_implicite_sp95'], 1, 1)

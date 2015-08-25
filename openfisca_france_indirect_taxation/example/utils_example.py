@@ -100,7 +100,7 @@ def graph_builder_bar(graph):
     return plt.show()
 
 
-def graph_builder_bar_list(graph):
+def graph_builder_bar_list(graph, a, b):
     axes = graph.plot(
         kind = 'bar',
         stacked = True,
@@ -108,7 +108,7 @@ def graph_builder_bar_list(graph):
         )
     plt.axhline(0, color = 'k')
     axes.legend(
-        bbox_to_anchor = (1.5, 1.05),
+        bbox_to_anchor = (a, b),
         )
     return plt.show()
 
