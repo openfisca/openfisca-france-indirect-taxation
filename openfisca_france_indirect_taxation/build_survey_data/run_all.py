@@ -136,12 +136,6 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
         axis = 1,
         )
 
-    nan_containing_variables = list(data_frame.isnull().any()[data_frame.isnull().any()].index)
-    nan_containing_variables_by_name = dict(
-        (name, list(set(nan_containing_variables).intersection(set(preprocessed_data_frame.columns))))
-        for name, preprocessed_data_frame in preprocessed_data_frame_by_name.iteritems()
-        )
-
     if year_data == 2005:
         for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence']:
             data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0

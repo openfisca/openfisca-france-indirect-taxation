@@ -28,14 +28,6 @@ from __future__ import division
 from ..base import *  # noq analysis:ignore
 
 
-for categorie_fiscale_index in range(18):
-    reference_input_variable(
-        column = FloatCol,
-        entity_class = Menages,
-        label = u"catégorie fiscale {}".format(categorie_fiscale_index),
-        name = 'categorie_fiscale_{}'.format(categorie_fiscale_index),
-        )
-
 for coicop12_index in range(1, 13):
     reference_input_variable(
         column = FloatCol,
@@ -196,7 +188,10 @@ class consommation_tva_taux_plein(SimpleFormulaColumn):
 
     def function(self, simulation, period):
         categorie_fiscale_3 = simulation.calculate('categorie_fiscale_3', period)
-        categorie_fiscale_11 = simulation.calculate('categorie_fiscale_11', period)
+        try:
+            categorie_fiscale_11 = simulation.calculate('categorie_fiscale_11', period)
+        except:
+            categorie_fiscale_11 = 0
         return period, categorie_fiscale_3 + categorie_fiscale_11
 
 

@@ -8,7 +8,9 @@ Created on Tue Aug 18 17:52:53 2015
 
 from __future__ import division
 
-import numpy as np
+import csv
+import pkg_resources
+import os
 
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df
 
@@ -74,3 +76,22 @@ if __name__ == '__main__':
         depenses_ticpe_totales['en millions d euros en {}'.format(year)] = depenses_ticpe / 1000000
         depenses_ticpe_diesel['en millions d euros en {}'.format(year)] = depenses_diesel_ticpe / 1000000
         depenses_ticpe_essence['en millions d euros en {}'.format(year)] = depenses_essence_ticpe / 1000000
+
+    assets_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
+        )
+
+    writer_carburants = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+        'depenses_ticpe_totales_bdf.csv'), 'wb'))
+    for key, value in depenses_ticpe_totales.items():
+        writer_carburants.writerow([key, value])
+
+    writer_diesel = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+        'depenses_ticpe_diesel_bdf.csv'), 'wb'))
+    for key, value in depenses_ticpe_diesel.items():
+        writer_diesel.writerow([key, value])
+
+    writer_essence = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+        'depenses_ticpe_essence_bdf.csv'), 'wb'))
+    for key, value in depenses_ticpe_essence.items():
+        writer_essence.writerow([key, value])
