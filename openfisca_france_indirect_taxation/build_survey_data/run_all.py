@@ -121,14 +121,14 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
         )
 
     if year_data == 2005:
-        for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence']:
-            data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
+        for variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence']:
+            data_frame.loc[data_frame[variable].isnull(), variable] = 0
         for variable in ['age{}'.format(i) for i in range(3, 14)] + ['agecj', 'agfinetu', 'agfinetu_cj', 'nenfhors']:
             data_frame.loc[data_frame[variable].isnull(), variable] = 0
     if year_data == 2011:
-        for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
+        for variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
         'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']:
-            data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
+            data_frame.loc[data_frame[variable].isnull(), variable] = 0
     # 'ratio_loyer_impute',  'ratio_revenus' To be added
 
     data_frame.index.name = "ident_men"

@@ -48,7 +48,6 @@ log = logging.getLogger(__name__)
 def calage_viellissement_depenses(year_data, year_calage, depenses, masses):
     depenses_calees = pandas.DataFrame()
     coicop_list = set(depenses.columns)
-    # print coicop_list
     coicop_list.remove('pondmen')
     for column in coicop_list:
         coicop = normalize_code_coicop(column)
@@ -67,8 +66,6 @@ def calage_viellissement_depenses(year_data, year_calage, depenses, masses):
         #    11 Hotels, cafés, restaurants
         #    12 Biens et services divers
         if grosposte != 99:
-            #  print 'grosposte: ', grosposte
-            #  print masses
             ratio_bdf_cn = masses.at[grosposte, 'ratio_bdf{}_cn{}'.format(year_data, year_data)]
             ratio_cn_cn = masses.at[grosposte, 'ratio_cn{}_cn{}'.format(year_data, year_calage)]
             depenses_calees[column] = depenses[column] * ratio_bdf_cn * ratio_cn_cn
@@ -99,7 +96,6 @@ def calcul_ratios_calage(year_data, year_calage, data_bdf, data_cn):
     masses['ratio_bdf{}_cn{}'.format(year_data, year_data)] = (
         1000000 * masses['consoCN_COICOP_{}'.format(year_data)] / masses['conso_bdf{}'.format(year_data)]
         )
-    print masses
     return masses
 
 
