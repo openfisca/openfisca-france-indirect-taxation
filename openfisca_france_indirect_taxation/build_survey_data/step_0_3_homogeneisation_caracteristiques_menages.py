@@ -581,6 +581,9 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
     if year == 2011:
         menage.set_index('ident_men', inplace = True)
+
+    # role_menage used to be added in step_04. I add it here instead since we don't run step_04.
+    menage['role_menage'] = 0
     temporary_store['donnes_socio_demog_{}'.format(year)] = menage
 
 
