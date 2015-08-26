@@ -28,7 +28,6 @@ from __future__ import division
 
 
 import os
-import logging
 import pkg_resources
 
 import pandas
@@ -37,9 +36,6 @@ from pandas import concat
 
 from openfisca_france_indirect_taxation.build_survey_data.utils \
     import ident_men_dtype
-
-
-log = logging.getLogger(__name__)
 
 
 def calage_viellissement_depenses(year_data, year_calage, depenses, masses):
@@ -75,10 +71,13 @@ def calage_viellissement_depenses(year_data, year_calage, depenses, masses):
 #    11 Hotels, cafés, restaurants
 #    12 Biens et services divers
         if grosposte != 99:
+            grosposte = 'coicop12_{}'.format(grosposte)
             ratio_bdf_cn = masses.at[grosposte, 'ratio_bdf{}_cn{}'.format(year_data, year_data)]
             ratio_cn_cn = masses.at[grosposte, 'ratio_cn{}_cn{}'.format(year_data, year_calage)]
             depenses_calees[column] = depenses[column] * ratio_bdf_cn * ratio_cn_cn
-            #  print 'Pour le grosposte {}, le ratio de calage de la base bdf {} sur la cn est {}, le ratio de calage sur la cn pour l\'annee {} est {}'.format(grosposte, year_data, ratio_bdf_cn, year_calage,ratio_cn_cn)
+            #  print 'Pour le grosposte {}, le ratio de calage de la base bdf {} sur la cn est {},
+            # le ratio de calage sur la cn pour l\'annee {} est {}'.format(grosposte, year_data, ratio_bdf_cn,
+            # year_calage,ratio_cn_cn)
     return depenses_calees
 
 
@@ -179,6 +178,10 @@ def get_cn_data_frames(year_data = None, year_calage = None):
                 },
             inplace = True,
             )
+    masses_cn_12postes_data_frame['poste'] = masses_cn_12postes_data_frame['poste'].astype(str)
+    for element in masses_cn_12postes_data_frame['poste']:
+        masses_cn_12postes_data_frame['poste'] = \
+            masses_cn_12postes_data_frame['poste'].replace(element, 'coicop12_{}'.format(element))
     masses_cn_12postes_data_frame.set_index('poste', inplace = True)
     return masses_cn_12postes_data_frame
 
@@ -208,7 +211,7 @@ def build_depenses_calees(depenses, year_calage = None, year_data = None):
     return depenses_calees
 
 
-def build_revenus_cales(year_calage = None, year_data = None):
+def build_revenus_cales(revenus, year_calage = None, year_data = None):
     assert year_calage is not None
     assert year_data is not None
 
@@ -236,7 +239,7 @@ def build_revenus_cales(year_calage = None, year_data = None):
 
     masses_cn_revenus_data_frame = masses_cn_revenus_data_frame[masses_cn_revenus_data_frame.year == year_calage]
 
-    revenus = temporary_store['revenus_{}'.format(year_data)]
+    revenus = revenus[['pondmen'] + ['loyer_impute'] + ['rev_disponible'] + ['rev_disp_loyerimput']]
     weighted_sum_revenus = (revenus.pondmen * revenus.rev_disponible).sum()
 
     revenus.loyer_impute = revenus.loyer_impute.astype(float)
@@ -256,22 +259,4 @@ def build_revenus_cales(year_calage = None, year_data = None):
     revenus_cales.loyer_impute = revenus_cales.loyer_impute * revenus_cales['ratio_loyer_impute']
     revenus_cales.rev_disp_loyerimput = revenus_cales.rev_disponible + revenus_cales.loyer_impute
 
-    temporary_store['revenus_cales_{}'.format(year_calage)] = revenus_cales
-
-# Vérification des résultats du calage :
-#    La différence du nombre de colonne vient du fait que l'on ne garde pas
-#    les postes 99... qui sont des dépenses en impôts, taxes, loyers...
-
-
-if __name__ == '__main__':
-    import sys
-    import time
-    logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    deb = time.clock()
-    year_calage = 2005
-    year_data = 2005
-
-    build_depenses_calees(year_calage = year_calage, year_data = year_data, depenses = depenses)
-    # build_revenus_cales(year_calage = year_calage, year_data = year_data)
-
-    log.info("step 03 calage duration is {}".format(time.clock() - deb))
+    return revenus_cales
