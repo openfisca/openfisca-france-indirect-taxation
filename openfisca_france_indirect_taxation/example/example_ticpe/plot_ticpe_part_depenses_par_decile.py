@@ -87,6 +87,6 @@ if __name__ == '__main__':
             else:
                 part_ticpe_depenses_totales = data_to_append_depenses_totales
 
-        graph_builder_line_percent(part_ticpe_revtot)
-        graph_builder_line_percent(part_ticpe_rev_disp_loyerimput)
-        graph_builder_line_percent(part_ticpe_depenses_totales)
+        graph_builder_line_percent(part_ticpe_revtot, 1, 0.35)
+        graph_builder_line_percent(part_ticpe_rev_disp_loyerimput, 1, 0.35)
+        graph_builder_line_percent(part_ticpe_depenses_totales, 1, 0.35)
