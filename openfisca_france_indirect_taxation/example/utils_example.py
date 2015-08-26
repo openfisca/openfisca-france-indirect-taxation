@@ -20,6 +20,9 @@ from openfisca_france_data import default_config_files_directory as config_files
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
+from openfisca_france_indirect_taxation.model.consommation.calage_bdf_cn import build_df_calee
+
+
 def get_input_data_frame(year):
     openfisca_survey_collection = SurveyCollection.load(
         collection = "openfisca_indirect_taxation", config_files_directory = config_files_directory)
@@ -39,6 +42,29 @@ def simulate_df(var_to_be_simulated, year):
     tax_benefit_system = TaxBenefitSystem()
     survey_scenario = SurveyScenario().init_from_data_frame(
         input_data_frame = input_data_frame,
+        tax_benefit_system = tax_benefit_system,
+        year = year,
+        )
+    simulation = survey_scenario.new_simulation()
+    return DataFrame(
+        dict([
+            (name, simulation.calculate(name)) for name in var_to_be_simulated
+
+            ])
+        )
+
+
+def simulate_df_calee_by_grosposte(var_to_be_simulated, year):
+    '''
+    Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
+    '''
+    input_data_frame = get_input_data_frame(year)
+    input_data_frame_calee = build_df_calee(input_data_frame, year, year)
+    TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
+
+    tax_benefit_system = TaxBenefitSystem()
+    survey_scenario = SurveyScenario().init_from_data_frame(
+        input_data_frame = input_data_frame_calee,
         tax_benefit_system = tax_benefit_system,
         year = year,
         )
