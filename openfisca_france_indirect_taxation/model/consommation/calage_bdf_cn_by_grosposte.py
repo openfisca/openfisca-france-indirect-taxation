@@ -50,10 +50,10 @@ def calage_viellissement_depenses(year_data, year_calage, depenses, masses):
                 grosposte = int(coicop[:1])
             elif len(coicop) == 5:
                 grosposte = int(coicop[:2])
-            elif coicop[:2] == '99':
-                grosposte = int(coicop[:2])
-            elif coicop in ['1151', '1181']:
+            elif coicop in ['1151', '1181', '1411', '9122', '9151', '9211', '9341']:
                 grosposte = int(coicop[:1])
+            elif coicop[:2] == '99' or coicop[:2] == '13':
+                grosposte = 99
             else:
                 grosposte = int(coicop[:2])
 #        print column, coicop, grosposte
@@ -186,10 +186,7 @@ def get_cn_data_frames(year_data = None, year_calage = None):
     return masses_cn_12postes_data_frame
 
 
-def build_depenses_calees(depenses, year_calage = None, year_data = None):
-    assert year_calage is not None
-    assert year_data is not None
-
+def build_depenses_calees(depenses, year_calage, year_data):
     # Masses de calage provenant de la comptabilité nationale
     masses_cn_12postes_data_frame = get_cn_data_frames(year_data = year_data, year_calage = year_calage)
     # Enquête agrégée au niveau des gros postes de COICOP (12)
@@ -211,12 +208,8 @@ def build_depenses_calees(depenses, year_calage = None, year_data = None):
     return depenses_calees
 
 
-def build_revenus_cales(revenus, year_calage = None, year_data = None):
-    assert year_calage is not None
-    assert year_data is not None
-
+def build_revenus_cales(revenus, year_calage, year_data):
     # Masses de calage provenant de la comptabilité nationale
-
     default_config_files_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parametres_fiscalite_file_path = os.path.join(
@@ -260,3 +253,17 @@ def build_revenus_cales(revenus, year_calage = None, year_data = None):
     revenus_cales.rev_disp_loyerimput = revenus_cales.rev_disponible + revenus_cales.loyer_impute
 
     return revenus_cales
+
+
+def build_df_calee(dataframe, year_calage = None, year_data = None):
+    assert year_data is not None
+    if year_calage is None:
+        year_calage = year_data
+    depenses_calees = build_depenses_calees(dataframe, year_calage, year_data)
+    revenus_cales = build_revenus_cales(dataframe, year_calage, year_data)
+    var_list = [variable for variable in dataframe.columns if variable[:5] != 'poste' and variable != 'loyer_impute' and
+        variable != 'rev_disponible' and variable != 'rev_disp_loyerimput']
+    autres_variables = dataframe[var_list]
+    dataframe_calee = concat([depenses_calees, revenus_cales, autres_variables], axis = 1)
+
+    return dataframe_calee
