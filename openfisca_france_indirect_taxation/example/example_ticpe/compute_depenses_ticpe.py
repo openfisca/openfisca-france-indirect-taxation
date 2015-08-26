@@ -12,7 +12,7 @@ import csv
 import pkg_resources
 import os
 
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_on_ticpe
 
 
 if __name__ == '__main__':
@@ -44,14 +44,14 @@ if __name__ == '__main__':
     depenses_ticpe_essence = dict()
     for year in [2000, 2005, 2011]:
         try:
-            data_simulation = simulate_df(var_to_be_simulated = var_to_be_simulated_with_e10, year = year)
+            data_simulation = simulate_df_calee_on_ticpe(var_to_be_simulated = var_to_be_simulated_with_e10, year = year)
             depenses_diesel_ticpe = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()
             depenses_sp95_ticpe = (data_simulation['sp95_ticpe'] * data_simulation['pondmen']).sum()
             depenses_sp98_ticpe = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()
             depenses_super_plombe_ticpe = (data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']).sum()
             depenses_sp_e10_ticpe = (data_simulation['sp_e10_ticpe'] * data_simulation['pondmen']).sum()
         except:
-            data_simulation = simulate_df(var_to_be_simulated = var_to_be_simulated_without_e10, year = year)
+            data_simulation = simulate_df_calee_on_ticpe(var_to_be_simulated = var_to_be_simulated_without_e10, year = year)
             depenses_diesel_ticpe = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()
             depenses_sp95_ticpe = (data_simulation['sp95_ticpe'] * data_simulation['pondmen']).sum()
             depenses_sp98_ticpe = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()

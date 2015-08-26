@@ -255,15 +255,46 @@ def build_revenus_cales(revenus, year_calage, year_data):
     return revenus_cales
 
 
-def build_df_calee(dataframe, year_calage = None, year_data = None):
+def build_df_calee_on_grospostes(dataframe, year_calage = None, year_data = None):
     assert year_data is not None
     if year_calage is None:
         year_calage = year_data
     depenses_calees = build_depenses_calees(dataframe, year_calage, year_data)
     revenus_cales = build_revenus_cales(dataframe, year_calage, year_data)
     var_list = [variable for variable in dataframe.columns if variable[:5] != 'poste' and variable != 'loyer_impute' and
-        variable != 'rev_disponible' and variable != 'rev_disp_loyerimput']
+        variable != 'rev_disponible' and variable != 'rev_disp_loyerimput' and variable != 'pondmen']
     autres_variables = dataframe[var_list]
     dataframe_calee = concat([depenses_calees, revenus_cales, autres_variables], axis = 1)
+
+    return dataframe_calee
+
+
+def build_df_calee_on_ticpe(dataframe, year_calage = None, year_data = None):
+    assert year_data is not None
+    if year_calage is None:
+        year_calage = year_data
+    dataframe_calee = build_df_calee_on_grospostes(dataframe, year_calage, year_data)
+
+    default_config_files_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    parametres_fiscalite_file_path = os.path.join(
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'Parametres fiscalite indirecte.xls'
+        )
+
+    masses_cn_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "consommation_CN")
+    if year_data != year_calage:
+        masses_cn_12postes_data_frame = masses_cn_data_frame.loc[:, ['Code', year_data, year_calage]]
+    else:
+        masses_cn_12postes_data_frame = masses_cn_data_frame.loc[:, ['Code', year_data]]
+
+    masses_ticpe_cn = \
+        int(masses_cn_12postes_data_frame[year_calage][masses_cn_12postes_data_frame['Code'] == '            07.2.2'].values)
+    masses_ticpe_bdf = (dataframe['poste_coicop_722'] * dataframe['pondmen']).sum() / 1000000
+    ratio_ticpe = masses_ticpe_cn / masses_ticpe_bdf
+    dataframe['poste_coicop_722'] = dataframe['poste_coicop_722'] * ratio_ticpe
+    dataframe_calee['poste_coicop_722'] = dataframe['poste_coicop_722']
 
     return dataframe_calee
