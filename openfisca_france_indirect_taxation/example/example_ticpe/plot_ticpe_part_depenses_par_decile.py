@@ -9,8 +9,8 @@ from __future__ import division
 
 from pandas import concat
 
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
-    graph_builder_line_percent
+from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_by_grosposte, \
+    df_weighted_average_grouped, graph_builder_line_percent
 
 
 if __name__ == '__main__':
@@ -36,7 +36,7 @@ if __name__ == '__main__':
         part_ticpe_rev_disp_loyerimput = None
         part_ticpe_depenses_totales = None
         for year in [2000, 2005, 2011]:
-            data_simulation = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+            data_simulation = simulate_df_calee_by_grosposte(var_to_be_simulated = var_to_be_simulated, year = year)
             if year == 2011:
                 data_simulation.niveau_vie_decile[data_simulation.decuc == 10] = 10
             varlist = [element, 'revtot', 'somme_coicop12_conso', 'rev_disp_loyerimput']
