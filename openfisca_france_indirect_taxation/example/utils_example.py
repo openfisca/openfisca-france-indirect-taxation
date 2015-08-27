@@ -20,7 +20,7 @@ from openfisca_france_data import default_config_files_directory as config_files
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
-from openfisca_france_indirect_taxation.model.consommation.calage_bdf_cn_by_grosposte import \
+from openfisca_france_indirect_taxation.example.calage_bdf_cn import \
     build_df_calee_on_grospostes, build_df_calee_on_ticpe
 
 
