@@ -181,7 +181,7 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         temporary_store["revenus_{}".format(year)] = rev_disp
 
     elif year == 2000:
-    # TODO: récupérer plutôt les variables qui viennent de la table dépenses (dans temporary_store)
+        # TODO: récupérer plutôt les variables qui viennent de la table dépenses (dans temporary_store)
         rev_disp = survey.get_values(
             table = "consomen",
             variables = ['c13141', 'c13111', 'c13121', 'c13131', 'pondmen', 'ident'],
@@ -261,8 +261,11 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         rev_disp.set_index('ident_men', inplace = True)
         menage.set_index('ident_men', inplace = True)
         menage.index = menage.index.astype('str')
-
+        rev_disp.index = rev_disp.index.astype('str')
+        assert menage.index.dtype == rev_disp.index.dtype, 'menage ({}) and revdisp ({}) dtypes differs'.format(
+            menage.index.dtype, rev_disp.index.dtype)
         revenus = pandas.concat([menage, rev_disp], axis = 1)
+        assert len(menage.index) == len(revenus.index)
         revenus.rename(
             columns = dict(
                 rev100_d = "act_indpt",
@@ -278,13 +281,11 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
                 ),
             inplace = True
             )
-
-        # * Ces pondérations (0.65 0.35) viennent de l'enquête BdF 1995 qui distingue taxe d'habitation et impôts fonciers. A partir de BdF 1995,
-        # * on a calculé que la taxe d'habitation représente en moyenne 65% des impôts locaux, et que les impôts fonciers en représentenr 35%.
+        # * Ces pondérations (0.65 0.35) viennent de l'enquête BdF 1995 qui distingue taxe d'habitation et impôts
+        #   fonciers. A partir de BdF 1995,
+        # * on a calculé que la taxe d'habitation représente en moyenne 65% des impôts locaux, et que les impôts
+        #   fonciers en représentenr 35%.
         # * On applique ces taux aux enquêtes 2000 et 2005.
-        # gen imphab= 0.65*(impot_res_ppal + impot_autres_res)
-        # gen impfon= 0.35*(impot_res_ppal + impot_autres_res)
-        # drop impot_autres_res impot_res_ppal
 
         revenus['imphab'] = 0.65 * (revenus.impot_res_ppal + revenus.impot_autres_res)
         revenus['impfon'] = 0.35 * (revenus.impot_res_ppal + revenus.impot_autres_res)
@@ -302,7 +303,13 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
             )
         temporary_store["loyers_imputes_{}".format(year)] = loyers_imputes
         loyers_imputes.index = loyers_imputes.index.astype('str')
-        assert set(revenus.index) == set(loyers_imputes.index), 'revenus and loyers_imputes indexes are not equal'
+        assert revenus.index.dtype == loyers_imputes.index.dtype
+        assert set(revenus.index) == set(loyers_imputes.index), '''revenus and loyers_imputes indexes are not equal.
+In revenus and not in loyers_imputes:
+{}
+In loyers_imputes and not in revenus:
+{}
+'''.format(set(revenus.index) - set(loyers_imputes.index), set(loyers_imputes.index) - set(revenus.index))
         revenus = revenus.merge(loyers_imputes, left_index = True, right_index = True)
         revenus['rev_disponible'] = revenus.revtot - revenus.impot_revenu - revenus.imphab
         revenus['rev_disponible'] = revenus['rev_disponible'] * (revenus['rev_disponible'] >= 0)
@@ -337,9 +344,6 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
                              'revindep', 'salaires'],
                 ).sort(columns = ['ident_me'])
 
-#      variables = ['ident_me', 'revtot', 'revact', 'revsoc', 'revpat', 'rev700', 'rev701', 'rev999',
-#                   'revindep', 'rev101_d', 'salaires', 'rev201'],
-
         rev_disp.index = rev_disp.index.astype(ident_men_dtype)
         menage.index = menage.index.astype(ident_men_dtype)
         rev_disp.set_index('ident_me', inplace = True)
@@ -350,7 +354,7 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         revenus.rename(
             columns = dict(
                 revindep = "act_indpt",
-#TODO: trouver ces revenus commentés dans bdf 2011
+                # TODO: trouver ces revenus commentés dans bdf 2011
                 # rev101_d = "autoverses",
                 salaires = "salaires",
                 # rev201_d = "autres_rev",
@@ -390,5 +394,4 @@ if __name__ == '__main__':
     deb = time.clock()
     year = 2011
     build_homogeneisation_revenus_menages(year = year)
-
     log.info("step_0_4_homogeneisation_revenus_menages duration is {}".format(time.clock() - deb))
