@@ -53,27 +53,30 @@ def calage_viellissement_depenses(year_data, year_calage, depenses, masses):
     for column in coicop_list:
         coicop = normalize_coicop(column)
         grosposte = int(coicop[0:2])
-#        print column, coicop, grosposte
-# RAPPEL : 12 postes CN et COICOP
-#    01 Produits alimentaires et boissons non alcoolisées
-#    02 Boissons alcoolisées et tabac
-#    03 Articles d'habillement et chaussures
-#    04 Logement, eau, gaz, électricité et autres combustibles
-#    05 Meubles, articles de ménage et entretien courant de l'habitation
-#    06 Santé
-#    07 Transports
-#    08 Communication
-#    09 Loisir et culture
-#    10 Education
-#    11 Hotels, cafés, restaurants
-#    12 Biens et services divers
+        # RAPPEL : 12 postes CN et COICOP
+        #    01 Produits alimentaires et boissons non alcoolisées
+        #    02 Boissons alcoolisées et tabac
+        #    03 Articles d'habillement et chaussures
+        #    04 Logement, eau, gaz, électricité et autres combustibles
+        #    05 Meubles, articles de ménage et entretien courant de l'habitation
+        #    06 Santé
+        #    07 Transports
+        #    08 Communication
+        #    09 Loisir et culture
+        #    10 Education
+        #    11 Hotels, cafés, restaurants
+        #    12 Biens et services divers
         if grosposte != 99:
             #  print 'grosposte: ', grosposte
             #  print masses
             ratio_bdf_cn = masses.at[grosposte, 'ratio_bdf{}_cn{}'.format(year_data, year_data)]
             ratio_cn_cn = masses.at[grosposte, 'ratio_cn{}_cn{}'.format(year_data, year_calage)]
             depenses_calees[column] = depenses[column] * ratio_bdf_cn * ratio_cn_cn
-            #  print 'Pour le grosposte {}, le ratio de calage de la base bdf {} sur la cn est {}, le ratio de calage sur la cn pour l\'annee {} est {}'.format(grosposte, year_data, ratio_bdf_cn, year_calage,ratio_cn_cn)
+            log.info('''Pour le grosposte {}, le ratio de calage de la base bdf {} sur la cn est {}.
+Le ratio de calage sur la cn pour l\'annee {} est {}'''.format(
+                    grosposte, year_data, ratio_bdf_cn, year_calage,ratio_cn_cn
+                    )
+                )
     return depenses_calees
 
 

@@ -63,7 +63,6 @@ def build_menage_consumption_by_categorie_fiscale(temporary_store = None, year_c
     # Grouping by categorie_fiscale
     selected_parametres_fiscalite_data_frame = \
         selected_parametres_fiscalite_data_frame[['posteCOICOP', 'categoriefiscale']]
-    # print selected_parametres_fiscalite_data_frame
     selected_parametres_fiscalite_data_frame.set_index('posteCOICOP', inplace = True)
 
     # Normalisation des coicop de la feuille excel pour être cohérent avec depenses_calees
@@ -81,16 +80,13 @@ def build_menage_consumption_by_categorie_fiscale(temporary_store = None, year_c
             categorie_fiscale_by_coicop[key] = 0
         assert type(categorie_fiscale_by_coicop[key]) == int
 
-    # print categorie_fiscale_by_coicop
     categorie_fiscale_labels = [
         categorie_fiscale_by_coicop.get(coicop)
         for coicop in coicop_data_frame.columns
         ]
     # TODO: gérer les catégorie fiscales "None" = dépenses énergétiques (4) & tabac (2)
-#    print categorie_fiscale_labels
     tuples = zip(categorie_fiscale_labels, coicop_data_frame.columns)
     coicop_data_frame.columns = pandas.MultiIndex.from_tuples(tuples, names=['categoriefiscale', 'coicop'])
-    # print coicop_data_frame.columns
 
     categorie_fiscale_data_frame = coicop_data_frame.groupby(level = 0, axis = 1).sum()
     rename_columns = dict(
@@ -101,7 +97,6 @@ def build_menage_consumption_by_categorie_fiscale(temporary_store = None, year_c
         inplace = True,
         )
     categorie_fiscale_data_frame['role_menage'] = 0
-#    categorie_fiscale_data_frame.reset_index(inplace = True)
     categorie_fiscale_data_frame.index = categorie_fiscale_data_frame.index.astype(ident_men_dtype)
     temporary_store["menage_consumption_by_categorie_fiscale_{}".format(year_calage)] = categorie_fiscale_data_frame
 
