@@ -27,4 +27,5 @@ Feel free to join the OpenFisca development team on [GitHub](https://github.com/
 contact@openfisca.fr
 
 
-Etienne Fontaine, Vincent Gollier, Hadrien Leclerc and Germain Marchand contributed to this project to fulfill their
+Etienne Fontaine, Vincent Gollier, Hadrien Leclerc and Germain Marchand contributed to this project to fulfill their applied statistics project at [ENSAE] (ensae.fr)
+Thomas Douenne worked on this project as an [IPP] (www.ipp.eu) intern
