@@ -221,11 +221,11 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         revenus['impfon'] = 0.35 * (revenus.impot_res_ppal + revenus.impot_autres_res)
 
         loyers_imputes = temporary_store["depenses_bdf_{}".format(year)]
-        variables = ["0421"]
+        variables = ["poste_coicop_421"]
         loyers_imputes = loyers_imputes[variables]
 
         loyers_imputes.rename(
-            columns = {"0421": "loyer_impute"},
+            columns = {"poste_coicop_421": "loyer_impute"},
             inplace = True,
             )
 
@@ -282,7 +282,7 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
             inplace = True
             )
         # * Ces pondérations (0.65 0.35) viennent de l'enquête BdF 1995 qui distingue taxe d'habitation et impôts
-        #   fonciers. A partir de BdF 1995,
+        #   fonciers. A partir de BdF 1995,
         # * on a calculé que la taxe d'habitation représente en moyenne 65% des impôts locaux, et que les impôts
         #   fonciers en représentenr 35%.
         # * On applique ces taux aux enquêtes 2000 et 2005.
@@ -295,10 +295,10 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         #    * Calculer le revenu disponible avec et sans le loyer imputé
 
         loyers_imputes = temporary_store["depenses_bdf_{}".format(year)]
-        variables = ["0421"]
+        variables = ["poste_coicop_421"]
         loyers_imputes = loyers_imputes[variables]
         loyers_imputes.rename(
-            columns = {"0421": "loyer_impute"},
+            columns = {"poste_coicop_421": "loyer_impute"},
             inplace = True,
             )
         temporary_store["loyers_imputes_{}".format(year)] = loyers_imputes
@@ -373,10 +373,10 @@ In loyers_imputes and not in revenus:
         del revenus['impot_res_ppal']
 
         loyers_imputes = temporary_store["depenses_bdf_{}".format(year)]
-        variables = ["0421"]
+        variables = ["poste_coicop_421"]
         loyers_imputes = loyers_imputes[variables]
         loyers_imputes.rename(
-            columns = {"0421": "loyer_impute"},
+            columns = {"poste_coicop_421": "loyer_impute"},
             inplace = True,
             )
         temporary_store["loyers_imputes_{}".format(year)] = loyers_imputes

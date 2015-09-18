@@ -159,7 +159,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.rename(
             columns = {
                 'ident': 'ident_men',
-                'rev81': '0421',
+                'rev81': 'poste_coicop_421',
                 'ident': 'ident_men',
                 'nbact': 'nactifs',
                 'nbenf1': 'nenfants',
