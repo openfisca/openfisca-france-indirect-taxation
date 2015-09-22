@@ -1,4 +1,4 @@
-# TAXIPP documentation
+# openfisca-france-indirect-taxation documentation
 
 > Note: this documentation is being written.
 
@@ -13,7 +13,7 @@ This documentation is built with the excellent [GitBook](https://github.com/Gitb
 
 It is written in [Markdown](http://help.gitbook.com/format/markdown.html)
 and the source is hosted on this GitHub repository:
-[ipp/taxipp](https://git.framasoft.org/ipp/taxipp).
+[openfisca/openfisca-france-indirect-taxation](https://github.com:openfisca/openfisca-france-indirect-taxation.git).
 
 ### Collaborative editing
 
@@ -32,7 +32,7 @@ accepted if relevant.
 If you'd like to build it by yourself, here are the steps.
 
 ```
-git clone git@git.framasoft.org:ipp/taxipp.git
+git clone git@github.com:openfisca/openfisca-france-indirect-taxation.git
 npm install
 ```
 
@@ -58,13 +58,13 @@ npm run publish
 Then on the server, the first time:
 
 ```bash
-git clone https://github.com/openfisca/openfisca-france-indirect-taxation.git --branch gitbook-static taxipp-gitbook-static
+git clone https://github.com/openfisca/openfisca-france-indirect-taxation.git --branch gitbook-static openfisca-france-indirect-taxation-gitbook-static
 ```
 
 The next times:
 
 ```bash
-cd taxipp-gitbook-static
+cd openfisca-france-indirect-taxation-gitbook-static
 git fetch
-git reset --hard origin/gitbook-static
+git reset --hard origin/openfisca-france-indirect-taxation-static
 ```
