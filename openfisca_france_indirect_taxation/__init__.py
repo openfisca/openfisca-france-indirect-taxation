@@ -27,25 +27,28 @@ import os
 
 
 from openfisca_core.formulas import make_reference_formula_decorator
-from openfisca_core.taxbenefitsystems import AbstractTaxBenefitSystem
+from openfisca_core.taxbenefitsystems import XmlBasedTaxBenefitSystem
 
 from .entities import entity_class_by_symbol
-from .param.param import legislation_json
 from .scenarios import Scenario
-
-COUNTRY_DIR = os.path.dirname(os.path.abspath(__file__))
-CURRENCY = u"€"
+from . import param
+from .param import preprocessing
 
 
 # TaxBenefitSystems
 
 def init_country():
-    class TaxBenefitSystem(AbstractTaxBenefitSystem):
+    class TaxBenefitSystem(XmlBasedTaxBenefitSystem):
         entity_class_by_key_plural = {
             entity_class.key_plural: entity_class
             for entity_class in entity_class_by_symbol.itervalues()
             }
-        legislation_json = legislation_json
+        legislation_xml_file_path = os.path.join(
+            os.path.dirname(os.path.abspath(param.__file__)),
+            'parameters.xml'
+            )
+        preprocess_legislation = staticmethod(preprocessing.preprocess_legislation)
+
 
     # Define class attributes after class declaration to avoid "name is not defined" exceptions.
     TaxBenefitSystem.Scenario = Scenario

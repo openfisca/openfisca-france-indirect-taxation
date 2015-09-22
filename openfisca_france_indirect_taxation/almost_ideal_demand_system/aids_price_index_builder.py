@@ -202,7 +202,7 @@ vagues = [
     ]
 
 df_indice_prix_produit['vag'] = df_indice_prix_produit['date'].map(date_to_vag)
-df_indice_prix_produit.dropna(inplace = True)
+df_indice_prix_produit = df_indice_prix_produit.dropna()
 df_indice_prix_produit['vag'] = df_indice_prix_produit['vag'].astype(str)
 df_indice_prix_produit['indice_prix_produit'] = df_indice_prix_produit['vag'] + '_' + df_indice_prix_produit['bien']
 df_indice_prix_produit['indice_prix_produit'] = df_indice_prix_produit['indice_prix_produit'].str.replace('.0_', '')

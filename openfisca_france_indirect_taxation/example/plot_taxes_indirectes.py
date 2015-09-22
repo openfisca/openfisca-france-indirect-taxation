@@ -44,16 +44,16 @@ if __name__ == '__main__':
         'pondmen',
         'decuc',
         'niveau_vie_decile',
-        'droit_d_accise_vin',
-        'droit_d_accise_biere',
-        'droit_d_accise_alcools_forts',
-        'droit_d_accise_cigarette',
-        'droit_d_accise_cigares',
-        'droit_d_accise_tabac_a_rouler',
-        'taxe_assurance_transport',
-        'taxe_assurance_sante',
-        'taxe_autres_assurances',
-        'tipp',
+        'vin_droit_d_accise',
+        'biere_droit_d_accise',
+        'alcools_forts_droit_d_accise',
+        'cigarette_droit_d_accise',
+        'cigares_droit_d_accise',
+        'tabac_a_rouler_droit_d_accise',
+        'assurance_transport_taxe',
+        'assurance_sante_taxe',
+        'autres_assurances_taxe',
+        'ticpe',
         'tva_total',
         'total_taxes_indirectes',
         'total_taxes_indirectes_sans_tva'
@@ -72,16 +72,16 @@ if __name__ == '__main__':
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame,
             groupe = 'year', varlist = var_to_concat)
 
-        aggregates_data_frame['taxe_1'] = aggregates_data_frame['droit_d_accise_vin']
-        aggregates_data_frame['taxe_2'] = aggregates_data_frame['droit_d_accise_biere']
-        aggregates_data_frame['taxe_3'] = aggregates_data_frame['droit_d_accise_alcools_forts']
-        aggregates_data_frame['taxe_4'] = aggregates_data_frame['droit_d_accise_cigarette']
-        aggregates_data_frame['taxe_5'] = aggregates_data_frame['droit_d_accise_cigares']
-        aggregates_data_frame['taxe_6'] = aggregates_data_frame['droit_d_accise_tabac_a_rouler']
-        aggregates_data_frame['taxe_7'] = aggregates_data_frame['taxe_assurance_transport']
-        aggregates_data_frame['taxe_8'] = aggregates_data_frame['taxe_assurance_sante']
-        aggregates_data_frame['taxe_9'] = aggregates_data_frame['taxe_autres_assurances']
-        aggregates_data_frame['taxe_10'] = aggregates_data_frame['tipp']
+        aggregates_data_frame['taxe_1'] = aggregates_data_frame['vin_droit_d_accise']
+        aggregates_data_frame['taxe_2'] = aggregates_data_frame['biere_droit_d_accise']
+        aggregates_data_frame['taxe_3'] = aggregates_data_frame['alcools_forts_droit_d_accise']
+        aggregates_data_frame['taxe_4'] = aggregates_data_frame['cigarette_droit_d_accise']
+        aggregates_data_frame['taxe_5'] = aggregates_data_frame['cigares_droit_d_accise']
+        aggregates_data_frame['taxe_6'] = aggregates_data_frame['tabac_a_rouler_droit_d_accise']
+        aggregates_data_frame['taxe_7'] = aggregates_data_frame['assurance_transport_taxe']
+        aggregates_data_frame['taxe_8'] = aggregates_data_frame['assurance_sante_taxe']
+        aggregates_data_frame['taxe_9'] = aggregates_data_frame['autres_assurances_taxe']
+        aggregates_data_frame['taxe_10'] = aggregates_data_frame['ticpe']
         aggregates_data_frame['taxe_11'] = aggregates_data_frame['tva_total']
 
         list_taxes = []

@@ -24,13 +24,21 @@
 
 
 from .caracteristiques_menages import (  # noqa analysis:ignore
-    autres_caracteristiques, demographie
+    autres_caracteristiques,
+    demographie,
     )
 from .consommation import (  # noqa analysis:ignore
     consommation_menages,
+    categorie_fiscale_generator,
+    poste_coicop_generator,
     )
 from .taxes_indirectes import (  # noqa analysis:ignore
-    montant_taxes_indirectes
+    montant_alcools,
+    montant_assurances,
+    montant_tabacs,
+    montant_ticpe,
+    montant_total_taxes_indirectes,
+    montant_tva,
     )
 from .revenus import (  # noqa analysis:ignore
     revenus_menages,

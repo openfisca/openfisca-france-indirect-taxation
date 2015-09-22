@@ -1,4 +1,4 @@
-IGNORE_OPT=--ignore-files='(test_simulation.py)'
+IGNORE_OPT=--ignore-files='(test_simulation.py|tests_aids_categ.py|test_carburants_builder.py)'
 TESTS_DIR=openfisca_france_indirect_taxation/tests
 
 all: flake8 test
@@ -19,7 +19,7 @@ flake8: clean-pyc
 	flake8
 
 test: check-syntax-errors
-	nosetests $(TESTS_DIR) $(IGNORE_OPT) --stop --with-doctest
+	nosetests $(TESTS_DIR) --stop --with-doctest
 
 test-ci: check-syntax-errors
 	nosetests $(TESTS_DIR) $(IGNORE_OPT) --with-doctest

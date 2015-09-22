@@ -37,7 +37,7 @@ import pandas
 from openfisca_france_data.temporary import temporary_store_decorator
 from openfisca_france_data import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.build_survey_data.step_0_1_1_homogeneisation_donnees_depenses \
-    import normalize_coicop
+    import normalize_code_coicop
 from openfisca_france_indirect_taxation.build_survey_data.utils \
     import ident_men_dtype
 
@@ -48,32 +48,32 @@ log = logging.getLogger(__name__)
 def calage_viellissement_depenses(year_data, year_calage, depenses, masses):
     depenses_calees = pandas.DataFrame()
     coicop_list = set(depenses.columns)
-    # print coicop_list
     coicop_list.remove('pondmen')
     for column in coicop_list:
-        coicop = normalize_coicop(column)
+        coicop = normalize_code_coicop(column)
         grosposte = int(coicop[0:2])
-#        print column, coicop, grosposte
-# RAPPEL : 12 postes CN et COICOP
-#    01 Produits alimentaires et boissons non alcoolisées
-#    02 Boissons alcoolisées et tabac
-#    03 Articles d'habillement et chaussures
-#    04 Logement, eau, gaz, électricité et autres combustibles
-#    05 Meubles, articles de ménage et entretien courant de l'habitation
-#    06 Santé
-#    07 Transports
-#    08 Communication
-#    09 Loisir et culture
-#    10 Education
-#    11 Hotels, cafés, restaurants
-#    12 Biens et services divers
+        # RAPPEL : 12 postes CN et COICOP
+        #    01 Produits alimentaires et boissons non alcoolisées
+        #    02 Boissons alcoolisées et tabac
+        #    03 Articles d'habillement et chaussures
+        #    04 Logement, eau, gaz, électricité et autres combustibles
+        #    05 Meubles, articles de ménage et entretien courant de l'habitation
+        #    06 Santé
+        #    07 Transports
+        #    08 Communication
+        #    09 Loisir et culture
+        #    10 Education
+        #    11 Hotels, cafés, restaurants
+        #    12 Biens et services divers
         if grosposte != 99:
-            #  print 'grosposte: ', grosposte
-            #  print masses
             ratio_bdf_cn = masses.at[grosposte, 'ratio_bdf{}_cn{}'.format(year_data, year_data)]
             ratio_cn_cn = masses.at[grosposte, 'ratio_cn{}_cn{}'.format(year_data, year_calage)]
             depenses_calees[column] = depenses[column] * ratio_bdf_cn * ratio_cn_cn
-            #  print 'Pour le grosposte {}, le ratio de calage de la base bdf {} sur la cn est {}, le ratio de calage sur la cn pour l\'annee {} est {}'.format(grosposte, year_data, ratio_bdf_cn, year_calage,ratio_cn_cn)
+            log.info('''Pour le grosposte {}, le ratio de calage de la base bdf {} sur la cn est {}.
+Le ratio de calage sur la cn pour l\'annee {} est {}'''.format(
+                    grosposte, year_data, ratio_bdf_cn, year_calage,ratio_cn_cn
+                    )
+                )
     return depenses_calees
 
 
@@ -96,6 +96,7 @@ def calcul_ratios_calage(year_data, year_calage, data_bdf, data_cn):
     masses['ratio_bdf{}_cn{}'.format(year_data, year_data)] = (
         1000000 * masses['consoCN_COICOP_{}'.format(year_data)] / masses['conso_bdf{}'.format(year_data)]
         )
+    print masses
     return masses
 
 
@@ -206,7 +207,7 @@ def build_depenses_calees(temporary_store = None, year_calage = None, year_data 
             coicop = unicode(coicop)
         except:
             coicop = coicop
-        normalized_coicop = normalize_coicop(coicop)
+        normalized_coicop = normalize_code_coicop(coicop)
         grosposte = normalized_coicop[0:2]
         return int(grosposte)
 
@@ -244,8 +245,6 @@ def build_revenus_cales(temporary_store = None, year_calage = None, year_data = 
         )
 
     masses_cn_revenus_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "revenus_CN")
-
-    # Ne pas oublier d'enlever l'accent à "loyers imputés" dans le document excel Parametres fiscalité indirecte
 
     masses_cn_revenus_data_frame.rename(
         columns = {
@@ -290,8 +289,8 @@ if __name__ == '__main__':
     import time
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
     deb = time.clock()
-    year_calage = 2005
-    year_data = 2005
+    year_calage = 2011
+    year_data = 2011
 
     build_depenses_calees(year_calage = year_calage, year_data = year_data)
     build_revenus_cales(year_calage = year_calage, year_data = year_data)

@@ -32,7 +32,7 @@ from __future__ import division
 from pandas import concat
 
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
-    graph_builder_line
+    graph_builder_line_percent
 
 
 if __name__ == '__main__':
@@ -48,16 +48,16 @@ if __name__ == '__main__':
     var_to_be_simulated = [
         'decuc',
         'tva_total',
-        'tipp',
-        'droit_d_accise_vin',
-        'droit_d_accise_biere',
-        'droit_d_accise_alcools_forts',
-        'droit_d_accise_cigarette',
-        'droit_d_accise_cigares',
-        'droit_d_accise_tabac_a_rouler',
-        'taxe_assurance_transport',
-        'taxe_assurance_sante',
-        'taxe_autres_assurances',
+        'ticpe',
+        'vin_droit_d_accise',
+        'biere_droit_d_accise',
+        'alcools_forts_droit_d_accise',
+        'cigarette_droit_d_accise',
+        'cigares_droit_d_accise',
+        'tabac_a_rouler_droit_d_accise',
+        'assurance_transport_taxe',
+        'assurance_sante_taxe',
+        'autres_assurances_taxe',
         'niveau_vie_decile',
         'pondmen',
         'somme_coicop12',
@@ -74,21 +74,21 @@ if __name__ == '__main__':
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame,
             groupe = 'niveau_vie_decile', varlist = var_to_be_simulated)
         aggregates_data_frame['taxe_1'] = aggregates_data_frame['tva_total']
-        aggregates_data_frame['taxe_2'] = aggregates_data_frame['tipp']
+        aggregates_data_frame['taxe_2'] = aggregates_data_frame['ticpe']
         aggregates_data_frame['taxe_3'] = (
-            aggregates_data_frame['taxe_assurance_sante'] +
-            aggregates_data_frame['taxe_assurance_transport'] +
-            aggregates_data_frame['taxe_autres_assurances']
+            aggregates_data_frame['assurance_sante_taxe'] +
+            aggregates_data_frame['assurance_transport_taxe'] +
+            aggregates_data_frame['autres_assurances_taxe']
             )
         aggregates_data_frame['taxe_4'] = (
-            aggregates_data_frame['droit_d_accise_vin'] +
-            aggregates_data_frame['droit_d_accise_biere'] +
-            aggregates_data_frame['droit_d_accise_alcools_forts']
+            aggregates_data_frame['vin_droit_d_accise'] +
+            aggregates_data_frame['biere_droit_d_accise'] +
+            aggregates_data_frame['alcools_forts_droit_d_accise']
             )
         aggregates_data_frame['taxe_5'] = (
-            aggregates_data_frame['droit_d_accise_cigares'] +
-            aggregates_data_frame['droit_d_accise_cigarette'] +
-            aggregates_data_frame['droit_d_accise_tabac_a_rouler']
+            aggregates_data_frame['cigares_droit_d_accise'] +
+            aggregates_data_frame['cigarette_droit_d_accise'] +
+            aggregates_data_frame['tabac_a_rouler_droit_d_accise']
             )
 
         aggregates_data_frame['total'] = (
@@ -114,5 +114,5 @@ if __name__ == '__main__':
         else:
             df_to_graph2 = appendable2
 
-    graph_builder_line(df_to_graph1)
-    graph_builder_line(df_to_graph2)
+    graph_builder_line_percent(df_to_graph1)
+    graph_builder_line_percent(df_to_graph2)

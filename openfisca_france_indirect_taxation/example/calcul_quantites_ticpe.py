@@ -55,15 +55,15 @@ for year in [2000]:
     data['part_conso_super'] = (data['veh_essence'] * conso_moyenne_vp_super) / \
         ((data['veh_essence'] * conso_moyenne_vp_super) + (data['veh_diesel'] * conso_moyenne_vp_diesel))
 
-    data['depenses_diesel'] = data['depenses_carburants'] * data['part_conso_diesel']
+    data['diesel_depenses'] = data['depenses_carburants'] * data['part_conso_diesel']
     data['depenses_super'] = data['depenses_carburants'] * data['part_conso_super']
 
     # For those for whom the type of the car is not filled: use the average consumption at the agregate level:
 
-    data['depenses_diesel'].fillna(0, inplace = True)
+    data['diesel_depenses'].fillna(0, inplace = True)
     data['depenses_super'].fillna(0, inplace = True)
-    data['diff'] = data['depenses_carburants'] - (data['depenses_diesel'] + data['depenses_super'])
-    data.loc[data['diff'] > 1, 'depenses_diesel'] = \
+    data['diff'] = data['depenses_carburants'] - (data['diesel_depenses'] + data['depenses_super'])
+    data.loc[data['diff'] > 1, 'diesel_depenses'] = \
         data['depenses_carburants'] * (conso_totale_vp_diesel / (conso_totale_vp_diesel + conso_totale_vp_super))
     data.loc[data['diff'] > 1, 'depenses_super'] = \
         data['depenses_carburants'] * (conso_totale_vp_super / (conso_totale_vp_diesel + conso_totale_vp_super))
@@ -80,22 +80,22 @@ for year in [2000]:
 
     # Compute quantities and expenses in ticpe:
 
-    data['taux_implicite_ticpe_diesel'] = taux_implicite(0.4284, 0.196, data['diesel_ttc'])
+    data['taux_implicite_diesel_ticpe'] = taux_implicite(0.4284, 0.196, data['diesel_ttc'])
     data['taux_implicite_ticpe_super'] = taux_implicite(0.6069, 0.196, data['super_95_ttc'])
 
-    data['depenses_ticpe_diesel'] = tax_from_expense_including_tax(data['depenses_diesel'],
-        data['taux_implicite_ticpe_diesel'])
+    data['depenses_diesel_ticpe'] = tax_from_expense_including_tax(data['diesel_depenses'],
+        data['taux_implicite_diesel_ticpe'])
     data['depenses_ticpe_super'] = tax_from_expense_including_tax(data['depenses_super'],
         data['taux_implicite_ticpe_super'])
-    data['depenses_ticpe'] = data['depenses_ticpe_diesel'] + data['depenses_ticpe_super']
+    data['depenses_ticpe'] = data['depenses_diesel_ticpe'] + data['depenses_ticpe_super']
 
-    data['quantite_diesel'] = data['depenses_diesel'] / data['diesel_ttc']
+    data['quantite_diesel'] = data['diesel_depenses'] / data['diesel_ttc']
     data['quantite_super'] = data['depenses_super'] / data['super_95_ttc']
     data['quantite_carburants'] = data['quantite_diesel'] + data['quantite_super']
 
     # Asserts:
 
-    data['check_depenses_carbu'] = (data['depenses_diesel'] + data['depenses_super']) - data['depenses_carburants']
+    data['check_depenses_carbu'] = (data['diesel_depenses'] + data['depenses_super']) - data['depenses_carburants']
     assert data['check_depenses_carbu'].max() < 0.0001, 'The sum of diesel and super is higher than the total'
     assert data['check_depenses_carbu'].min() > -0.0001, 'The sum of diesel and super is lower than the total'
     del data['check_depenses_carbu']
@@ -113,10 +113,10 @@ for year in [2000]:
     agregats['quantite_diesel_totale'] = (data['quantite_diesel'] * data['pondmen']).sum()
     agregats['quantite_super_totale'] = (data['quantite_super'] * data['pondmen']).sum()
     agregats['depenses_carburants_totale'] = (data['depenses_carburants'] * data['pondmen']).sum()
-    agregats['depenses_diesel_totale'] = (data['depenses_diesel'] * data['pondmen']).sum()
+    agregats['diesel_depenses_totale'] = (data['diesel_depenses'] * data['pondmen']).sum()
     agregats['depenses_super_totale'] = (data['depenses_super'] * data['pondmen']).sum()
     agregats['depenses_ticpe_totale'] = (data['depenses_ticpe'] * data['pondmen']).sum()
-    agregats['depenses_ticpe_diesel'] = (data['depenses_ticpe_diesel'] * data['pondmen']).sum()
+    agregats['depenses_diesel_ticpe'] = (data['depenses_diesel_ticpe'] * data['pondmen']).sum()
     agregats['depenses_ticpe_super'] = (data['depenses_ticpe_super'] * data['pondmen']).sum()
 
     # NB: il faut aussi pondérer selon la consommation de 95, 98, d'E85, d'E10 et de super plombe (important en 2000).

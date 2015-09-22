@@ -55,6 +55,27 @@ reference_input_variable(
 reference_input_variable(
     column = FloatCol,
     entity_class = Menages,
+    label = u"Situation du conjoint vis-à-vis du travail",
+    name = 'situacj',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Menages,
+    label = u"Situation de la personne de référence vis-à-vis du travail",
+    name = 'situapr',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Menages,
+    label = u"catégorie de la commune de résidence",
+    name = 'strate',
+    )
+
+reference_input_variable(
+    column = FloatCol,
+    entity_class = Menages,
     label = u"type du ménage",
     name = 'typmen',
     )
