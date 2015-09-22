@@ -34,8 +34,32 @@ reference_input_variable(
     column = DateCol,
     entity_class = Individus,
     is_permanent = True,
+    label = u"Age personne de référence",
+    name = 'agepr',
+    )
+
+reference_input_variable(
+    column = DateCol,
+    entity_class = Individus,
+    is_permanent = True,
     label = u"Date de naissance",
     name = 'birth',
+    )
+
+reference_input_variable(
+    column = IntCol,
+    entity_class = Individus,
+    is_permanent = True,
+    label = u"Nombre d'adultes dans le ménage",
+    name = 'nadultes',
+    )
+
+reference_input_variable(
+    column = IntCol,
+    entity_class = Individus,
+    is_permanent = True,
+    label = u"Nombre d'enfants dans le ménage",
+    name = 'nenfants',
     )
 
 reference_input_variable(
