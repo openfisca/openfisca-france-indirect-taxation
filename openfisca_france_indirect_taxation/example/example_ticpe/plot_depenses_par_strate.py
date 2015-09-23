@@ -11,7 +11,7 @@ from __future__ import division
 from pandas import concat
 
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_by_grosposte, \
-    df_weighted_average_grouped, graph_builder_bar
+    df_weighted_average_grouped, graph_builder_bar, save_dataframe_to_graph
 
 
 if __name__ == '__main__':
@@ -29,6 +29,7 @@ if __name__ == '__main__':
         'strate'
         ]
 
+    depenses_par_residence = None
     for element in ['consommation_ticpe', 'diesel_depenses', 'essence_depenses']:
         part_ticpe_revtot_strate = None
         for year in [2005]:
@@ -48,3 +49,10 @@ if __name__ == '__main__':
                 part_ticpe_revtot_strate = data_to_append_revtot
 
         graph_builder_bar(part_ticpe_revtot_strate)
+
+        if depenses_par_residence is not None:
+            depenses_par_residence = concat([depenses_par_residence, part_ticpe_revtot_strate], axis = 1)
+        else:
+            depenses_par_residence = part_ticpe_revtot_strate
+
+        save_dataframe_to_graph(depenses_par_residence, 'part_depenses_residence.csv'.format(element))

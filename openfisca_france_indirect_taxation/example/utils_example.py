@@ -10,6 +10,8 @@ from __future__ import division
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+import pkg_resources
+import os
 
 
 import openfisca_france_indirect_taxation
@@ -130,10 +132,6 @@ def df_weighted_average_grouped(dataframe, groupe, varlist):
         )
 
 
-def percent_formatter(x, pos = 0):
-    return '%1.0f%%' % (100 * x)
-
-
 # To choose color when doing graph, could put a list of colors in argument
 def graph_builder_bar(graph):
     axes = graph.plot(
@@ -205,3 +203,16 @@ def graph_builder_carburants_no_color(data_frame, name, legend1, legend2):
         bbox_to_anchor = (legend1, legend2),
         )
     return plt.show(), fig.savefig('C:/Users/thomas.douenne/Documents/data/graphs_transports/{}.png'.format(name))
+
+
+def percent_formatter(x, pos = 0):
+    return '%1.0f%%' % (100 * x)
+
+
+def save_dataframe_to_graph(dataframe, file_name):
+    return dataframe.to_csv('C:/Users/thomas.douenne/Documents/data/Stats_rapport/' + file_name, sep = ';')
+#    assets_directory = os.path.join(
+#        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
+#        )
+#    return dataframe.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+#        file_name), sep = ';')

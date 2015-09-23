@@ -10,7 +10,7 @@ from __future__ import division
 from pandas import concat
 
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_by_grosposte, \
-    df_weighted_average_grouped, graph_builder_line_percent
+    df_weighted_average_grouped, graph_builder_line_percent, save_dataframe_to_graph
 
 
 if __name__ == '__main__':
@@ -90,3 +90,6 @@ if __name__ == '__main__':
         graph_builder_line_percent(part_ticpe_revtot, 1, 0.35)
         graph_builder_line_percent(part_ticpe_rev_disp_loyerimput, 1, 0.35)
         graph_builder_line_percent(part_ticpe_depenses_totales, 1, 0.35)
+
+        save_dataframe_to_graph(
+            part_ticpe_rev_disp_loyerimput, 'part_{}_sur_rev_disployerimput.csv'.format(element))

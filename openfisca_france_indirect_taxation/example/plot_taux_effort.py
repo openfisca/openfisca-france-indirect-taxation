@@ -27,7 +27,7 @@ from __future__ import division
 from pandas import concat
 
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
-    graph_builder_line_percent
+    graph_builder_line_percent, save_dataframe_to_graph
 
 # On va dans ce fichier créer les graphiques permettant de voir les taux d'effort selon trois définition du revenu:
 # - revenu total
@@ -55,9 +55,9 @@ if __name__ == '__main__':
 # 1 calcul taux d'effort sur le revenu total
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     p = dict()
-    df_to_graph1 = None
-    df_to_graph2 = None
-    df_to_graph3 = None
+    df_taux_effort_revtot = None
+    df_taux_effort_rev_disponible = None
+    df_taux_effort_rev_disp_loyerimput = None
     for year in [2000, 2005, 2011]:
         df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
         if year == 2011:
@@ -79,21 +79,25 @@ if __name__ == '__main__':
             Wconcat3['total_taxes_indirectes'] / Wconcat3['rev_disp_loyerimput']
         appendable3 = Wconcat3['taux_d_effort_rev_disp_loyerimput_{}'.format(year)]
 
-        if df_to_graph1 is not None:
-            df_to_graph1 = concat([df_to_graph1, appendable1], axis = 1)
+        if df_taux_effort_revtot is not None:
+            df_taux_effort_revtot = concat([df_taux_effort_revtot, appendable1], axis = 1)
         else:
-            df_to_graph1 = appendable1
+            df_taux_effort_revtot = appendable1
 
-        if df_to_graph2 is not None:
-            df_to_graph2 = concat([df_to_graph2, appendable2], axis = 1)
+        if df_taux_effort_rev_disponible is not None:
+            df_taux_effort_rev_disponible = concat([df_taux_effort_rev_disponible, appendable2], axis = 1)
         else:
-            df_to_graph2 = appendable2
+            df_taux_effort_rev_disponible = appendable2
 
-        if df_to_graph3 is not None:
-            df_to_graph3 = concat([df_to_graph3, appendable3], axis = 1)
+        if df_taux_effort_rev_disp_loyerimput is not None:
+            df_taux_effort_rev_disp_loyerimput = concat([df_taux_effort_rev_disp_loyerimput, appendable3], axis = 1)
         else:
-            df_to_graph3 = appendable3
+            df_taux_effort_rev_disp_loyerimput = appendable3
 
-    graph_builder_line_percent(df_to_graph1)
-    graph_builder_line_percent(df_to_graph2)
-    graph_builder_line_percent(df_to_graph3)
+    graph_builder_line_percent(df_taux_effort_revtot, 1, 1)
+    graph_builder_line_percent(df_taux_effort_rev_disponible, 1, 1)
+    graph_builder_line_percent(df_taux_effort_rev_disp_loyerimput, 1, 1)
+
+    save_dataframe_to_graph(df_taux_effort_revtot, 'taux_d_effort_revtot.csv')
+    save_dataframe_to_graph(df_taux_effort_rev_disponible, 'taux_d_effort_rev_disponible.csv')
+    save_dataframe_to_graph(df_taux_effort_rev_disp_loyerimput, 'taux_d_effort_rev_disp_loyerimput.csv')
