@@ -29,6 +29,7 @@ if __name__ == '__main__':
         'nadultes',
         'situacj',
         'situapr',
+        'niveau_vie_decile'
         ]
 
     for year in [2005]:
@@ -53,6 +54,13 @@ if __name__ == '__main__':
     data_for_reg.loc[data_for_reg['strate'] == 3, 'grandes_villes'] = 1
     data_for_reg.loc[data_for_reg['strate'] == 4, 'agglo_paris'] = 1
 
+    deciles = ['decile_1', 'decile_2', 'decile_3', 'decile_4', 'decile_5', 'decile_6', 'decile_7', 'decile_8',
+               'decile_9', 'decile_10']
+
+    for decile in deciles:
+        data_for_reg[decile] = 0
+        number = decile.replace('decile_', '')
+        data_for_reg.loc[data_for_reg['niveau_vie_decile'] == int(number), decile] = 1
     # Situation vis-à-vis de l'emploi :
     # Travaille : emploi, stage, étudiant
     # Autres : chômeurs, retraités, personnes au foyer, autres
@@ -63,16 +71,25 @@ if __name__ == '__main__':
     data_for_reg.loc[data_for_reg['situapr'] < 4, 'pr_travaille'] = 1
     data_for_reg['travaille'] = data_for_reg['cj_travaille'] + data_for_reg['pr_travaille']
 
-    regression_total = smf.ols(formula = 'part_carburants ~ rev_disp_loyerimput + rev_disp_loyerimput_2 + rural + \
-        petite_villes + villes_moyennes + grandes_villes + nenfants + nadultes + travaille', data = data_for_reg).fit()
-    print regression_total.summary()
+    regression_carburants = smf.ols(formula = 'part_carburants ~ \
+        decile_1 + decile_2 + decile_3 + decile_4 + decile_5 + decile_6 + decile_7 + decile_8 + decile_9 + \
+        rural + petite_villes + grandes_villes + agglo_paris + \
+        nenfants + nadultes + travaille',
+        data = data_for_reg).fit()
+    print regression_carburants.summary()
 
-    regression_diesel = smf.ols(formula = 'part_diesel ~ rev_disp_loyerimput + rev_disp_loyerimput_2 + rural + \
-        petite_villes + villes_moyennes + grandes_villes + nenfants + nadultes + travaille', data = data_for_reg).fit()
+    regression_diesel = smf.ols(formula = 'part_diesel ~ \
+        decile_1 + decile_2 + decile_3 + decile_4 + decile_5 + decile_6 + decile_7 + decile_8 + decile_9 + \
+        rural + petite_villes + grandes_villes + agglo_paris + \
+        nenfants + nadultes + travaille',
+        data = data_for_reg).fit()
     print regression_diesel.summary()
 
-    regression_essence = smf.ols(formula = 'part_essence ~ rev_disp_loyerimput + rev_disp_loyerimput_2 + rural + \
-    petite_villes + villes_moyennes + grandes_villes + nenfants + nadultes + travaille', data = data_for_reg).fit()
+    regression_essence = smf.ols(formula = 'part_essence ~ \
+        decile_1 + decile_2 + decile_3 + decile_4 + decile_5 + decile_6 + decile_7 + decile_8 + decile_9 + \
+        rural + petite_villes + grandes_villes + agglo_paris + \
+        nenfants + nadultes + travaille',
+        data = data_for_reg).fit()
     print regression_essence.summary()
 
 # It is tempting to add a variable 'vehicule'. However, I think it is a case of bad control. It captures part
