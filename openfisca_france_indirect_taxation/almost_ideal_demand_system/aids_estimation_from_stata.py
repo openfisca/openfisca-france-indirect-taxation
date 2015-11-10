@@ -1,43 +1,52 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jul 15 19:04:58 2015
+Created on Mon Jun 29 12:27:47 2015
 
 @author: thomas.douenne
 """
 
 import pandas as pd
+import pkg_resources
+import os
 
-# Import data_frame_for_pandas to get the results of the estimation run on Stata.
-
-data_frame_for_pandas = \
-    pd.DataFrame.from_csv('data_frame_for_pandas_2005.csv',
-        sep = ',')
-
-data_frame_for_pandas.fillna(0, inplace=True)
-assert 0.999 < sum(data_frame_for_pandas['part_depenses_tot']) < 1.001, "the sum of the shares is not equal to 1"
-
-# Create a weighted average of each individual elasticity.
-
-for i in range(1, 10):
-    data_frame_for_pandas['el_{}'.format(i)] = \
-        data_frame_for_pandas['e_{}'.format(i)] * data_frame_for_pandas['part_depenses_tot']
-
+# Import data_quaids to get the results of the estimation run on Stata.
 resultats_elasticite_depenses = dict()
-for i in range(1, 10):
-    resultats_elasticite_depenses['el_{}'.format(i)] = sum(data_frame_for_pandas['el_{}'.format(i)])
-
-# Create a confidence interval at the 95% level for each elasticity.
-
 borne_inferieure_el_dep = dict()
 borne_superieure_el_dep = dict()
-for i in range(1, 10):
-    borne_superieure_el_dep['borne_sup_{}'.format(i)] = (
-        resultats_elasticite_depenses['el_{}'.format(i)] + 1.96 *
-        (data_frame_for_pandas['e_{}'.format(i)].describe()['std'] /
-        len(data_frame_for_pandas['e_{}'.format(i)]) ** 0.5)
-        )
-    borne_inferieure_el_dep['borne_inf_{}'.format(i)] = (
-        resultats_elasticite_depenses['el_{}'.format(i)] - 1.96 *
-        (data_frame_for_pandas['e_{}'.format(i)].describe()['std'] /
-        len(data_frame_for_pandas['e_{}'.format(i)]) ** 0.5)
-        )
+for year in [2000, 2005, 2011]:
+    default_config_files_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    data_quaids = pd.read_csv(
+        os.path.join(
+            default_config_files_directory,
+            'openfisca_france_indirect_taxation',
+            'almost_ideal_demand_system',
+            'data_quaids_{}.csv'.format(year)
+            ), sep =',')
+
+    # Compute a weighted average of the elasticity of each household
+    # weights are the share of the household in total consumption
+    data_quaids['part_depenses_tot'] = data_quaids['depenses_tot'] / sum(data_quaids['depenses_tot'])
+    data_quaids.fillna(0, inplace=True)
+    assert 0.999 < sum(data_quaids['part_depenses_tot']) < 1.001, "the sum of the shares is not equal to 1"
+
+    for i in range(1, 4):
+        data_quaids['el_{}'.format(i)] = \
+            data_quaids['mu_{}'.format(i)] * data_quaids['part_depenses_tot']
+
+    # Compute the estimation of the income elasticities of consumption
+    for i in range(1, 4):
+        resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] = sum(data_quaids['el_{}'.format(i)])
+
+    # Compute the 95% confidence interval for those elasticities
+    for i in range(1, 4):
+        borne_superieure_el_dep['borne_sup_{0}_{1}'.format(i, year)] = (
+            resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] + 1.96 *
+            (data_quaids['mu_{}'.format(i)].describe()['std'] /
+            len(data_quaids['mu_{}'.format(i)]) ** 0.5)
+            )
+        borne_inferieure_el_dep['borne_inf_{0}_{1}'.format(i, year)] = (
+            resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] - 1.96 *
+            (data_quaids['mu_{}'.format(i)].describe()['std'] /
+            len(data_quaids['mu_{}'.format(i)]) ** 0.5)
+            )

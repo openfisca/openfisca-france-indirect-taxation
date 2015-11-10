@@ -222,7 +222,7 @@ for year in [2000, 2005, 2011]:
     dataframe['depenses_par_uc'] = dataframe['depenses_tot'] / dataframe['ocde10']
 
     dataframe = dataframe[['ident_men'] + ['part_carbu'] + ['part_alime'] + ['part_autre'] + ['prix_carbu'] +
-        ['prix_alime'] + ['prix_autre'] + ['depenses_par_uc'] + ['typmen'] + ['fumeur']]
+        ['prix_alime'] + ['prix_autre'] + ['depenses_par_uc'] + ['depenses_tot'] + ['typmen'] + ['fumeur']]
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la
