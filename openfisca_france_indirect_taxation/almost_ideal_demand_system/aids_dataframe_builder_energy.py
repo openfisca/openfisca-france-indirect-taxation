@@ -20,16 +20,35 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_in
 
 # On commence par cinstruire une dataframe appelée data_conso rassemblant les informations sur les dépenses des ménages.
 data_frame_for_reg = None
-for year in [2011]:
+for year in [2000, 2005, 2011]:
     aggregates_data_frame = get_input_data_frame(year)
     aggregates_data_frame['somme_coicop'] = 0
     for i in range(1, 13):
         aggregates_data_frame['somme_coicop'] += aggregates_data_frame['coicop12_{}'.format(i)]
 
+    # Pour estimer QAIDS, on se concentre sur les biens non-durables.
+    # On élimine donc les biens durables de cette dataframe: 442 : redevance d'enlèvement des ordures, 711, 712, 713 :
+    # achat de véhicules, 911, 912, 9122, 913, 9151 : technologies high-tech, 9211, 921, 923: gros équipements loisirs,
+    # 941, 960 : voyages séjours et cadeaux, 10i0 : enseignement, 12.. : articles de soin et bijoux
+
+    biens_durables = ['poste_coicop_442', 'poste_coicop_711', 'poste_coicop_712', 'poste_coicop_713',
+        'poste_coicop_911', 'poste_coicop_912', 'poste_coicop_9122', 'poste_coicop_913', 'poste_coicop_9151',
+        'poste_coicop_9211', 'poste_coicop_921', 'poste_coicop_922', 'poste_coicop_923', 'poste_coicop_960',
+        'poste_coicop_941', 'poste_coicop_1010', 'poste_coicop_1015', 'poste_coicop_10152', 'poste_coicop_1020',
+        'poste_coicop_1040', 'poste_coicop_1050', 'poste_coicop_1212', 'poste_coicop_1231', 'poste_coicop_1240',
+        'poste_coicop_12411', 'poste_coicop_1270']
+
+    for bien in biens_durables:
+        try:
+            aggregates_data_frame = aggregates_data_frame.drop(bien, axis = 1)
+        except:
+            aggregates_data_frame = aggregates_data_frame
+
     produits_alimentaire = ['poste_coicop_111', 'poste_coicop_112', 'poste_coicop_113', 'poste_coicop_114',
                             'poste_coicop_115', 'poste_coicop_1151', 'poste_coicop_116', 'poste_coicop_117',
                             'poste_coicop_118', 'poste_coicop_1181', 'poste_coicop_119', 'poste_coicop_121',
                             'poste_coicop_122']
+
     produits = [column for column in aggregates_data_frame.columns if column[:13] == 'poste_coicop_']
     del column
 
@@ -50,9 +69,6 @@ for year in [2011]:
 
     data_conso = aggregates_data_frame[produits + ['vag'] + ['depenses_carbu'] + ['depenses_alime'] +
         ['depenses_autre']].copy()
-
-    # Pour estimer QAIDS, on se concentre sur les biens non-durables.
-    # On élimine donc les biens durables de cette dataframe.
 
     # On renverse la dataframe pour obtenir une ligne pour chaque article consommé par chaque personne
     data_conso.index.name = 'ident_men'
@@ -213,9 +229,9 @@ for year in [2011]:
     # nourriture ce n'est pas qu'ils n'en consomment pas, mais qu'ils n'en ont pas acheté sur la période (réserves, etc)
     dataframe = dataframe[dataframe['prix_alime'] != 0]
 
-data_frame_for_reg = dataframe.rename(columns = {'part_carbu': 'w1', 'part_alime': 'w2', 'part_autre': 'w3',
-    'prix_carbu': 'p1', 'prix_alime': 'p2', 'prix_autre': 'p3'})
-data_frame_for_reg.to_csv('data_frame_energy.csv', sep = ',')
+    data_frame_for_reg = dataframe.rename(columns = {'part_carbu': 'w1', 'part_alime': 'w2', 'part_autre': 'w3',
+        'prix_carbu': 'p1', 'prix_alime': 'p2', 'prix_autre': 'p3'})
+    data_frame_for_reg.to_csv('data_frame_energy_{}.csv'.format(year), sep = ',')
 
 
 # Must get rid of durable goods
