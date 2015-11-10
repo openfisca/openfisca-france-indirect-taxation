@@ -3,6 +3,8 @@
 Created on Mon Aug 17 18:06:45 2015
 
 @author: thomas.douenne
+
+TICPE: Taxe intérieure sur la consommation des produits énergétiques
 """
 
 from pandas import concat
