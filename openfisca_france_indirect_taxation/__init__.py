@@ -26,7 +26,7 @@
 import os
 
 
-from openfisca_core.formulas import make_reference_formula_decorator
+from openfisca_core.formulas import make_formula_decorator
 from openfisca_core.taxbenefitsystems import XmlBasedTaxBenefitSystem
 
 from .entities import entity_class_by_symbol
@@ -57,4 +57,4 @@ def init_country():
     return TaxBenefitSystem
 
 
-reference_formula = make_reference_formula_decorator(entity_class_by_symbol = entity_class_by_symbol)
+reference_formula = make_formula_decorator(entity_class_by_symbol = entity_class_by_symbol)
