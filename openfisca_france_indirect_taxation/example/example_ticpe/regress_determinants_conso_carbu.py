@@ -20,13 +20,10 @@ Created on Fri Nov 06 14:25:36 2015
 from __future__ import division
 
 import statsmodels.formula.api as smf
-import statsmodels
 import numpy as np
 import pandas as pd
 import pkg_resources
 import os
-
-from statsmodels.sandbox.regression import gmm
 
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_on_ticpe
 from openfisca_france_indirect_taxation.model.get_dataframe_from_legislation.get_accises import \
@@ -50,6 +47,7 @@ if __name__ == '__main__':
         'situacj',
         'situapr',
         'niveau_vie_decile',
+        'ocde10',
         'vag',
         'poste_coicop_411',
         'poste_coicop_412',
@@ -126,7 +124,7 @@ if __name__ == '__main__':
 
         data_households = data_households[['quantite_carbu'] + ['quantite_diesel'] + ['quantite_essence'] +
             ['diesel_ttc'] + ['super_95_ttc'] + ['rev_disponible'] + ['rural'] + ['petite_villes'] +
-            ['villes_moyennes'] + ['grandes_villes'] + ['agglo_paris'] + ['nenfants'] + ['nadultes'] +
+            ['villes_moyennes'] + ['grandes_villes'] + ['agglo_paris'] + ['nenfants'] + ['nadultes'] + ['ocde10'] +
             ['situapr'] + ['situacj'] + ['poste_coicop_411'] + ['poste_coicop_412'] + ['poste_coicop_421']
             ].astype(float)
 
@@ -146,21 +144,20 @@ if __name__ == '__main__':
         data_log['ln_super_95_ttc'] = np.log(data_log['super_95_ttc'])
         data_log['ln_rev_disponible'] = np.log(data_log['rev_disponible'])
         data_log = data_log[data_log['rev_disponible'] > 0]
-        data_log = data_log.drop(['quantite_carbu', 'diesel_ttc', 'super_95_ttc', 'rev_disponible'], axis = 1)
 
         reg_conso_carbu_log = smf.ols(formula = 'ln_quantite_carbu ~ \
             ln_diesel_ttc + ln_super_95_ttc + ln_rev_disponible + rural + petite_villes + grandes_villes + \
             agglo_paris + nenfants + nadultes + situacj + situapr',
             data = data_log).fit()
-        # print reg_conso_carbu_log.summary()
+        print reg_conso_carbu_log.summary()
 
         # We will now introduce an instrumental variable to correct for the endogeneity of expenditures.
 
         data_log['loyer'] = data_log['poste_coicop_411'] + data_log['poste_coicop_412'] + data_log['poste_coicop_421']
-
-        model = \
-            gmm.IV2SLS(data_log['ln_rev_disponible'], data_log['ln_quantite_carbu'], data_log['loyer']).fit()
-        print model.summary()
+        data_log.to_csv('data_regression.csv', sep = ',')
+        #model = \
+        #    gmm.IV2SLS(data_log['ln_rev_disponible'], data_log['ln_quantite_carbu'], data_log['loyer']).fit()
+        #print model.summary()
 
         # reg_gmm = statsmodels.sandbox.regression.gmm.IV2SLS('ln_rev_disponible', 'ln_quantite_carbu',
           #                                                  instrument='loyer')
