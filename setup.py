@@ -43,7 +43,7 @@ doc_lines = __doc__.split('\n')
 
 setup(
     name = 'OpenFisca-France-Indirect-Taxation',
-    version = '0.4dev',
+    version = '0.4.dev0',
 
     author = 'OpenFisca Team',
     author_email = 'contact@openfisca.fr',
