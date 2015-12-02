@@ -1,0 +1,3 @@
+recursive-include openfisca_france_indirect_taxation/param *
+recursive-include openfisca_france_indirect_taxation/scripts *
+recursive-include openfisca_france_indirect_taxation/tests/formulas *

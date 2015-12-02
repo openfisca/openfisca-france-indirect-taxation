@@ -54,17 +54,12 @@ setup(
     long_description = '\n'.join(doc_lines[2:]),
     url = 'https://github.com/openfisca/openfisca-france-indirect-taxation',
 
-    data_files = [
-        (
-            'share/locale/fr/LC_MESSAGES',
-            ['openfisca_france_indirect_taxation/i18n/fr/LC_MESSAGES/openfisca-france-indirect-taxation.mo']
-            ),
-        ],
     extras_require = dict(
         tests = [
             'pandas >= 0.13',
             ],
         ),
+    include_package_data = True,  # Will read MANIFEST.in
     install_requires = [
         'Babel >= 0.9.4',
         'Biryani[datetimeconv] >= 0.10.2dev',
@@ -74,5 +69,4 @@ setup(
         ],
     packages = find_packages(),
     test_suite = 'nose.collector',
-    zip_safe = False,
     )
