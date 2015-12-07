@@ -13,8 +13,7 @@ import datetime
 from ..base import *  # noqa analysis:ignore
 
 
-@reference_formula
-class tva_taux_intermediaire(DatedFormulaColumn):
+class tva_taux_intermediaire(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux intermediaire"
@@ -26,8 +25,7 @@ class tva_taux_intermediaire(DatedFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_tva_taux_intermediaire, taux_intermediaire)
 
 
-@reference_formula
-class tva_taux_plein(SimpleFormulaColumn):
+class tva_taux_plein(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux plein"
@@ -38,8 +36,7 @@ class tva_taux_plein(SimpleFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_tva_taux_plein, taux_plein)
 
 
-@reference_formula
-class tva_taux_reduit(SimpleFormulaColumn):
+class tva_taux_reduit(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux reduit"
@@ -50,8 +47,7 @@ class tva_taux_reduit(SimpleFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_tva_taux_reduit, taux_reduit)
 
 
-@reference_formula
-class tva_taux_super_reduit(SimpleFormulaColumn):
+class tva_taux_super_reduit(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant de la TVA acquitée à taux super reduit"
@@ -62,8 +58,7 @@ class tva_taux_super_reduit(SimpleFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_tva_taux_super_reduit, taux_super_reduit)
 
 
-@reference_formula
-class tva_total(SimpleFormulaColumn):
+class tva_total(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant de la TVA acquitée"

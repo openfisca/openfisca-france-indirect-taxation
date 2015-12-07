@@ -34,8 +34,7 @@ from ..base import *
 'categorie_fiscale: 0'
 
 
-@reference_formula
-class categorie_fiscale_0(DatedFormulaColumn):
+class categorie_fiscale_0(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 0"
@@ -232,8 +231,7 @@ class categorie_fiscale_0(DatedFormulaColumn):
 'categorie_fiscale: 1'
 
 
-@reference_formula
-class categorie_fiscale_1(DatedFormulaColumn):
+class categorie_fiscale_1(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 1"
@@ -430,8 +428,7 @@ class categorie_fiscale_1(DatedFormulaColumn):
 'categorie_fiscale: 2'
 
 
-@reference_formula
-class categorie_fiscale_2(DatedFormulaColumn):
+class categorie_fiscale_2(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 2"
@@ -628,8 +625,7 @@ class categorie_fiscale_2(DatedFormulaColumn):
 'categorie_fiscale: 3'
 
 
-@reference_formula
-class categorie_fiscale_3(DatedFormulaColumn):
+class categorie_fiscale_3(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 3"
@@ -826,8 +822,7 @@ class categorie_fiscale_3(DatedFormulaColumn):
 'categorie_fiscale: 4'
 
 
-@reference_formula
-class categorie_fiscale_4(DatedFormulaColumn):
+class categorie_fiscale_4(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 4"
@@ -862,8 +857,7 @@ class categorie_fiscale_4(DatedFormulaColumn):
 'categorie_fiscale: 7'
 
 
-@reference_formula
-class categorie_fiscale_7(DatedFormulaColumn):
+class categorie_fiscale_7(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 7"
@@ -1060,8 +1054,7 @@ class categorie_fiscale_7(DatedFormulaColumn):
 'categorie_fiscale: 8'
 
 
-@reference_formula
-class categorie_fiscale_8(DatedFormulaColumn):
+class categorie_fiscale_8(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 8"
@@ -1258,8 +1251,7 @@ class categorie_fiscale_8(DatedFormulaColumn):
 'categorie_fiscale: 9'
 
 
-@reference_formula
-class categorie_fiscale_9(DatedFormulaColumn):
+class categorie_fiscale_9(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 9"
@@ -1456,8 +1448,7 @@ class categorie_fiscale_9(DatedFormulaColumn):
 'categorie_fiscale: 10'
 
 
-@reference_formula
-class categorie_fiscale_10(DatedFormulaColumn):
+class categorie_fiscale_10(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 10"
@@ -1654,8 +1645,7 @@ class categorie_fiscale_10(DatedFormulaColumn):
 'categorie_fiscale: 12'
 
 
-@reference_formula
-class categorie_fiscale_12(DatedFormulaColumn):
+class categorie_fiscale_12(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 12"
@@ -1852,8 +1842,7 @@ class categorie_fiscale_12(DatedFormulaColumn):
 'categorie_fiscale: 13'
 
 
-@reference_formula
-class categorie_fiscale_13(DatedFormulaColumn):
+class categorie_fiscale_13(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 13"
@@ -2050,8 +2039,7 @@ class categorie_fiscale_13(DatedFormulaColumn):
 'categorie_fiscale: 14'
 
 
-@reference_formula
-class categorie_fiscale_14(DatedFormulaColumn):
+class categorie_fiscale_14(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 14"
@@ -2248,8 +2236,7 @@ class categorie_fiscale_14(DatedFormulaColumn):
 'categorie_fiscale: 15'
 
 
-@reference_formula
-class categorie_fiscale_15(DatedFormulaColumn):
+class categorie_fiscale_15(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 15"
@@ -2446,8 +2433,7 @@ class categorie_fiscale_15(DatedFormulaColumn):
 'categorie_fiscale: 16'
 
 
-@reference_formula
-class categorie_fiscale_16(DatedFormulaColumn):
+class categorie_fiscale_16(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 16"
@@ -2644,8 +2630,7 @@ class categorie_fiscale_16(DatedFormulaColumn):
 'categorie_fiscale: 17'
 
 
-@reference_formula
-class categorie_fiscale_17(DatedFormulaColumn):
+class categorie_fiscale_17(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale 17"

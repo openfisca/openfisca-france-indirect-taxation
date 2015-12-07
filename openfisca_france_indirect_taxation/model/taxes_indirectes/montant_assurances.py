@@ -13,8 +13,7 @@ from datetime import date
 from ..base import *  # noqa analysis:ignore
 
 
-@reference_formula
-class assurance_sante_taxe(SimpleFormulaColumn):
+class assurance_sante_taxe(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des taxes sur l'assurance santé"
@@ -26,8 +25,7 @@ class assurance_sante_taxe(SimpleFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_assurance_sante, taux)
 
 
-@reference_formula
-class assurance_transport_taxe(DatedFormulaColumn):
+class assurance_transport_taxe(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des taxes sur l'assurance transport"
@@ -61,8 +59,7 @@ class assurance_transport_taxe(DatedFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_assurance_transport, taux)
 
 
-@reference_formula
-class autres_assurances_taxe(SimpleFormulaColumn):
+class autres_assurances_taxe(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des taxes sur les autres assurances"
@@ -73,8 +70,7 @@ class autres_assurances_taxe(SimpleFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_autres_assurances, taux)
 
 
-@reference_formula
-class total_assurances_taxe(SimpleFormulaColumn):
+class total_assurances_taxe(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des taxes sur les assurances"

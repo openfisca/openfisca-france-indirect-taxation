@@ -25,19 +25,17 @@
 
 from openfisca_core.columns import AgeCol, DateCol, FloatCol, IntCol, EnumCol
 from openfisca_core.enumerations import Enum
-from openfisca_core.formulas import (
-    make_formula_decorator, dated_function, DatedFormulaColumn, reference_input_variable, SimpleFormulaColumn
-    )
+from openfisca_core.formulas import dated_function, DatedVariable, reference_input_variable, Variable
 from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
 
 
-from ..entities import entity_class_by_symbol, Individus, Menages
+from ..entities import Individus, Menages
 
 
 __all__ = [
     'AgeCol',
     'DateCol',
-    'DatedFormulaColumn',
+    'DatedVariable',
     'dated_function',
     'Enum',
     'EnumCol',
@@ -47,17 +45,14 @@ __all__ = [
     'mark_weighted_percentiles',
     'Menages',
     'droit_d_accise',
-    'reference_formula',
     'reference_input_variable',
-    'SimpleFormulaColumn',
+    'Variable',
     'tax_from_expense_including_tax',
     'weighted_quantiles',
     ]
 
 
-# Functions and decorators
-
-reference_formula = make_formula_decorator(entity_class_by_symbol = entity_class_by_symbol)
+# Functions
 
 
 def taux_implicite(accise, tva, prix_ttc):

@@ -11,8 +11,7 @@ from __future__ import division
 from ..base import *  # noqa analysis:ignore
 
 
-@reference_formula
-class cigares_droit_d_accise(SimpleFormulaColumn):
+class cigares_droit_d_accise(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des droits d'accises sur les cigares"
@@ -23,8 +22,7 @@ class cigares_droit_d_accise(SimpleFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_cigares, taux_normal_cigare)
 
 
-@reference_formula
-class cigarette_droit_d_accise(SimpleFormulaColumn):
+class cigarette_droit_d_accise(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des droits d'accises sur les cigarettes"
@@ -36,8 +34,7 @@ class cigarette_droit_d_accise(SimpleFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_cigarette, taux_normal_cigarette)
 
 
-@reference_formula
-class tabac_a_rouler_droit_d_accise(SimpleFormulaColumn):
+class tabac_a_rouler_droit_d_accise(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des droits d'accises sur le tabac à rouler"
@@ -49,8 +46,7 @@ class tabac_a_rouler_droit_d_accise(SimpleFormulaColumn):
         return period, tax_from_expense_including_tax(consommation_tabac_a_rouler, taux_normal_tabac_a_rouler)
 
 
-@reference_formula
-class total_tabac_droit_d_accise(SimpleFormulaColumn):
+class total_tabac_droit_d_accise(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des droits d'accises sur le tabac "

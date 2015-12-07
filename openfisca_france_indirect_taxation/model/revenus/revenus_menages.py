@@ -70,8 +70,7 @@ reference_input_variable(
     )
 
 
-@reference_formula
-class niveau_de_vie(SimpleFormulaColumn):
+class niveau_de_vie(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Revenus disponibles divisés par ocde10 soit le nombre d'unités de consommation du ménage"
@@ -82,8 +81,7 @@ class niveau_de_vie(SimpleFormulaColumn):
         return period, rev_disponible / ocde10
 
 
-@reference_formula
-class niveau_vie_decile(SimpleFormulaColumn):
+class niveau_vie_decile(Variable):
     column = EnumCol(
         enum = Enum([
             u"Hors champ",

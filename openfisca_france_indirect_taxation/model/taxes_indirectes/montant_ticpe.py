@@ -13,8 +13,7 @@ from datetime import date
 from ..base import *  # noqa analysis:ignore
 
 
-@reference_formula
-class diesel_depenses(SimpleFormulaColumn):
+class diesel_depenses(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Construction par pondération des dépenses spécifiques au diesel"
@@ -52,8 +51,7 @@ class diesel_depenses(SimpleFormulaColumn):
         return period, diesel_depenses
 
 
-@reference_formula
-class diesel_ticpe(SimpleFormulaColumn):
+class diesel_ticpe(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de TICPE sur le diesel"
@@ -82,8 +80,7 @@ class diesel_ticpe(SimpleFormulaColumn):
         return period, montant_diesel_ticpe
 
 
-@reference_formula
-class essence_depenses(SimpleFormulaColumn):
+class essence_depenses(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Construction par pondération des dépenses spécifiques à l'essence"
@@ -96,8 +93,7 @@ class essence_depenses(SimpleFormulaColumn):
         return period, essence_depenses
 
 
-@reference_formula
-class essence_ticpe(DatedFormulaColumn):
+class essence_ticpe(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de la TICPE sur toutes les essences cumulées"
@@ -129,8 +125,7 @@ class essence_ticpe(DatedFormulaColumn):
         return period, essence_ticpe
 
 
-@reference_formula
-class sp_e10_ticpe(SimpleFormulaColumn):
+class sp_e10_ticpe(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de la TICPE sur le SP E10"
@@ -163,8 +158,7 @@ class sp_e10_ticpe(SimpleFormulaColumn):
         return period, montant_sp_e10_ticpe
 
 
-@reference_formula
-class sp95_ticpe(SimpleFormulaColumn):
+class sp95_ticpe(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de TICPE sur le sp_95"
@@ -194,8 +188,7 @@ class sp95_ticpe(SimpleFormulaColumn):
         return period, montant_sp95_ticpe
 
 
-@reference_formula
-class sp98_ticpe(SimpleFormulaColumn):
+class sp98_ticpe(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de TICPE sur le sp_98"
@@ -225,8 +218,7 @@ class sp98_ticpe(SimpleFormulaColumn):
         return period, montant_sp98_ticpe
 
 
-@reference_formula
-class super_plombe_ticpe(SimpleFormulaColumn):
+class super_plombe_ticpe(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de la TICPE sur le super plombé"
@@ -252,8 +244,7 @@ class super_plombe_ticpe(SimpleFormulaColumn):
         return period, montant_super_plombe_ticpe
 
 
-@reference_formula
-class ticpe_totale(SimpleFormulaColumn):
+class ticpe_totale(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de la TICPE sur toutes les essences cumulées"

@@ -70,8 +70,7 @@ for categorie_fiscale in existing_categ:
 'categorie_fiscale: {0}'
 
 
-@reference_formula
-class categorie_fiscale_{0}(DatedFormulaColumn):
+class categorie_fiscale_{0}(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale {0}"'''.format(categorie_fiscale)

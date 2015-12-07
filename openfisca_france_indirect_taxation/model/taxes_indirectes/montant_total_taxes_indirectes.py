@@ -28,8 +28,7 @@ from __future__ import division
 from ..base import *  # noqa analysis:ignore
 
 
-@reference_formula
-class total_taxes_indirectes(SimpleFormulaColumn):
+class total_taxes_indirectes(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant total de taxes indirectes payées"
@@ -61,8 +60,7 @@ class total_taxes_indirectes(SimpleFormulaColumn):
             )
 
 
-@reference_formula
-class total_taxes_indirectes_sans_tva(SimpleFormulaColumn):
+class total_taxes_indirectes_sans_tva(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant total de taxes indirectes payées sans compter la TVA"

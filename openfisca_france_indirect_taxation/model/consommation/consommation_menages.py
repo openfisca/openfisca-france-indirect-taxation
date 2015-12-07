@@ -51,8 +51,7 @@ reference_input_variable(
     )
 
 
-@reference_formula
-class consommation_alcools_forts(SimpleFormulaColumn):
+class consommation_alcools_forts(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation d'alcools forts"
@@ -62,8 +61,7 @@ class consommation_alcools_forts(SimpleFormulaColumn):
         return period, categorie_fiscale_10
 
 
-@reference_formula
-class consommation_assurance_sante(SimpleFormulaColumn):
+class consommation_assurance_sante(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation d'assurance santé"
@@ -73,8 +71,7 @@ class consommation_assurance_sante(SimpleFormulaColumn):
         return period, categorie_fiscale_16
 
 
-@reference_formula
-class consommation_assurance_transport(SimpleFormulaColumn):
+class consommation_assurance_transport(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation d'assurance transport"
@@ -84,8 +81,7 @@ class consommation_assurance_transport(SimpleFormulaColumn):
         return period, categorie_fiscale_15
 
 
-@reference_formula
-class consommation_autres_assurances(SimpleFormulaColumn):
+class consommation_autres_assurances(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation d'autres assurances"
@@ -95,8 +91,7 @@ class consommation_autres_assurances(SimpleFormulaColumn):
         return period, categorie_fiscale_17
 
 
-@reference_formula
-class consommation_biere(SimpleFormulaColumn):
+class consommation_biere(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation de bière"
@@ -106,8 +101,7 @@ class consommation_biere(SimpleFormulaColumn):
         return period, categorie_fiscale_13
 
 
-@reference_formula
-class consommation_cigares(SimpleFormulaColumn):
+class consommation_cigares(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation de cigares"
@@ -117,8 +111,7 @@ class consommation_cigares(SimpleFormulaColumn):
         return period, categorie_fiscale_8
 
 
-@reference_formula
-class consommation_cigarette(SimpleFormulaColumn):
+class consommation_cigarette(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation de cigarettes"
@@ -128,8 +121,7 @@ class consommation_cigarette(SimpleFormulaColumn):
         return period, categorie_fiscale_7
 
 
-@reference_formula
-class consommation_tabac_a_rouler(SimpleFormulaColumn):
+class consommation_tabac_a_rouler(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation de tabac à rouler"
@@ -139,8 +131,7 @@ class consommation_tabac_a_rouler(SimpleFormulaColumn):
         return period, categorie_fiscale_9
 
 
-@reference_formula
-class consommation_ticpe(SimpleFormulaColumn):
+class consommation_ticpe(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation de ticpe"
@@ -150,8 +141,7 @@ class consommation_ticpe(SimpleFormulaColumn):
         return period, categorie_fiscale_14
 
 
-@reference_formula
-class consommation_totale(SimpleFormulaColumn):
+class consommation_totale(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation totale du ménage"
@@ -169,8 +159,7 @@ class consommation_totale(SimpleFormulaColumn):
             )
 
 
-@reference_formula
-class consommation_tva_taux_intermediaire(SimpleFormulaColumn):
+class consommation_tva_taux_intermediaire(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation soumis à une TVA à taux intermédiaire"
@@ -180,8 +169,7 @@ class consommation_tva_taux_intermediaire(SimpleFormulaColumn):
         return period, categorie_fiscale_4
 
 
-@reference_formula
-class consommation_tva_taux_plein(SimpleFormulaColumn):
+class consommation_tva_taux_plein(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation soumis à une TVA à taux plein"
@@ -195,8 +183,7 @@ class consommation_tva_taux_plein(SimpleFormulaColumn):
         return period, categorie_fiscale_3 + categorie_fiscale_11
 
 
-@reference_formula
-class consommation_tva_taux_reduit(SimpleFormulaColumn):
+class consommation_tva_taux_reduit(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation soumis à une TVA à taux réduit"
@@ -206,8 +193,7 @@ class consommation_tva_taux_reduit(SimpleFormulaColumn):
         return period, categorie_fiscale_2
 
 
-@reference_formula
-class consommation_tva_taux_super_reduit(SimpleFormulaColumn):
+class consommation_tva_taux_super_reduit(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation soumis à une TVA à taux super réduit"
@@ -217,8 +203,7 @@ class consommation_tva_taux_super_reduit(SimpleFormulaColumn):
         return period, categorie_fiscale_1
 
 
-@reference_formula
-class consommation_vin(SimpleFormulaColumn):
+class consommation_vin(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation de vin"
@@ -228,8 +213,7 @@ class consommation_vin(SimpleFormulaColumn):
         return period, categorie_fiscale_12
 
 
-@reference_formula
-class somme_coicop12(SimpleFormulaColumn):
+class somme_coicop12(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Somme des postes coicop12"
@@ -263,8 +247,7 @@ class somme_coicop12(SimpleFormulaColumn):
             )
 
 
-@reference_formula
-class somme_coicop12_conso(SimpleFormulaColumn):
+class somme_coicop12_conso(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Somme des postes coicop12 de 1 à 8"

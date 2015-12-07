@@ -11,8 +11,7 @@ from __future__ import division
 from ..base import *  # noqa analysis:ignore
 
 
-@reference_formula
-class alcools_forts_droit_d_accise(SimpleFormulaColumn):
+class alcools_forts_droit_d_accise(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des droits d'accises sur les alcools forts"
@@ -27,8 +26,7 @@ class alcools_forts_droit_d_accise(SimpleFormulaColumn):
         return period, droit_d_accise(consommation_alcools_forts, droit_cn, consommation_cn, taux_plein_tva)
 
 
-@reference_formula
-class biere_droit_d_accise(SimpleFormulaColumn):
+class biere_droit_d_accise(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des droits d'accises sur la bière"
@@ -42,8 +40,7 @@ class biere_droit_d_accise(SimpleFormulaColumn):
         return period, droit_d_accise(consommation_biere, droit_cn, consommation_cn, taux_plein_tva)
 
 
-@reference_formula
-class total_alcool_droit_d_accise(SimpleFormulaColumn):
+class total_alcool_droit_d_accise(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des droits d'accises sur l'alcool"
@@ -55,8 +52,7 @@ class total_alcool_droit_d_accise(SimpleFormulaColumn):
         return period, vin_droit_d_accise + biere_droit_d_accise + alcools_forts_droit_d_accise
 
 
-@reference_formula
-class vin_droit_d_accise(SimpleFormulaColumn):
+class vin_droit_d_accise(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Montant des droits d'accises sur le vin"

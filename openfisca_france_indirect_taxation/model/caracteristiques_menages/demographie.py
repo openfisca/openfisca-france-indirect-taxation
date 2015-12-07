@@ -71,8 +71,7 @@ reference_input_variable(
     )
 
 
-@reference_formula
-class age(SimpleFormulaColumn):
+class age(Variable):
     column = AgeCol
     entity_class = Individus
     label = u"Age de l'individu"
