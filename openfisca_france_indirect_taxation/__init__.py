@@ -52,9 +52,3 @@ def init_country():
 
     from .model import model  # noqa analysis:ignore
     return TaxBenefitSystem
-<<<<<<< HEAD
-=======
-
-
-reference_formula = make_formula_decorator(entity_class_by_symbol = entity_class_by_symbol)
->>>>>>> Follow function renaming
