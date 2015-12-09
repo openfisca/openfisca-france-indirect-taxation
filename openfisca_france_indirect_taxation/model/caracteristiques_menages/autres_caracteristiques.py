@@ -29,60 +29,51 @@ from __future__ import division
 from ..base import *  # noqa analysis:ignore
 
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = u"Identifiant du ménage",
-    name = 'ident_men',
-    )
+class ident_men(Variable):
+    column = FloatCol
+    entity_class = Individus
+    is_permanent = True
+    label = u"Identifiant du ménage"
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"unités de consommation",
-    name = 'ocde10',
-    )
 
-reference_input_variable(
-    column = IntCol,
-    entity_class = Menages,
-    is_permanent = True,
-    label = u"Pondération du ménage",
-    name = 'pondmen',
-    )
+class ocde10(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"unités de consommation"
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"Situation du conjoint vis-à-vis du travail",
-    name = 'situacj',
-    )
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"Situation de la personne de référence vis-à-vis du travail",
-    name = 'situapr',
-    )
+class pondmen(Variable):
+    column = IntCol
+    entity_class = Menages
+    is_permanent = True
+    label = u"Pondération du ménage"
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"catégorie de la commune de résidence",
-    name = 'strate',
-    )
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"type du ménage",
-    name = 'typmen',
-    )
+class situacj(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Situation du conjoint vis-à-vis du travail"
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"numéro de la vague d'interrogation du ménage",
-    name = 'vag',
-    )
+
+class situapr(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Situation de la personne de référence vis-à-vis du travail"
+
+
+class strate(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"catégorie de la commune de résidence"
+
+
+class typmen(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"type du ménage"
+
+
+class vag(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"numéro de la vague d'interrogation du ménage"

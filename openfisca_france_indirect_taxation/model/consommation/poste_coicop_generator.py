@@ -26,978 +26,700 @@
 
 from __future__ import division
 
-from ..base import *
-
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Pain et céréales",
-    name = u'poste_coicop_111'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Viande",
-    name = u'poste_coicop_112'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Poisson et fruits de mer",
-    name = u'poste_coicop_113'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Lait, fromage et œufs",
-    name = u'poste_coicop_114'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Huiles et graisses",
-    name = u'poste_coicop_115'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u">>> Margarines et autres graisses végétales",
-    name = u'poste_coicop_1151'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Fruits",
-    name = u'poste_coicop_116'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Légumes",
-    name = u'poste_coicop_117'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Sucre, confiture, miel, chocolat et confiserie",
-    name = u'poste_coicop_118'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u">>> Confiserie",
-    name = u'poste_coicop_1181'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Produits alimentaires non compris ailleurs",
-    name = u'poste_coicop_119'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Café, thé et cacao",
-    name = u'poste_coicop_121'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",
-    name = u'poste_coicop_122'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Alcools de bouche ",
-    name = u'poste_coicop_211'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Vin et boissons fermentées",
-    name = u'poste_coicop_212'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Bière",
-    name = u'poste_coicop_213'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u">>> Cigarettes",
-    name = u'poste_coicop_2201'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u">>> Cigares et cigarillos",
-    name = u'poste_coicop_2202'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u">>> Tabac sous d'autres formes",
-    name = u'poste_coicop_2203'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Stupéfiants",
-    name = u'poste_coicop_230'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Tissus pour habillement",
-    name = u'poste_coicop_311'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Vêtements",
-    name = u'poste_coicop_312'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Autres articles et accessoires d'habillement",
-    name = u'poste_coicop_313'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Nettoyage, réparation et location d'articles d'habillement",
-    name = u'poste_coicop_314'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Chaussures diverses",
-    name = u'poste_coicop_321'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Cordonnerie et location de chaussures",
-    name = u'poste_coicop_322'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Loyers effectivement payés par les locataires",
-    name = u'poste_coicop_411'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Autres loyers effectifs",
-    name = u'poste_coicop_412'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Loyers fictifs des propriétaires occupants",
-    name = u'poste_coicop_421'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Autres loyers fictifs",
-    name = u'poste_coicop_422'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Fournitures pour travaux d'entretien et de réparation des logements",
-    name = u'poste_coicop_431'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services concernant l'entretien et les réparations du logement",
-    name = u'poste_coicop_432'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Alimentation en eau",
-    name = u'poste_coicop_441'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Collecte des ordures ménagères",
-    name = u'poste_coicop_442'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Reprise des eaux usées",
-    name = u'poste_coicop_443'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Service divers liés au logement non compris ailleurs",
-    name = u'poste_coicop_444'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Electricité",
-    name = u'poste_coicop_451'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Facture EDF GDF non dissociables",
-    name = u'poste_coicop_4511'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Gaz",
-    name = u'poste_coicop_452'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Achat de butane, propane",
-    name = u'poste_coicop_4522'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Combustibles liquides",
-    name = u'poste_coicop_453'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Combustibles solides",
-    name = u'poste_coicop_454'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Energie thermique",
-    name = u'poste_coicop_455'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Meubles et articles d'ameublement",
-    name = u'poste_coicop_511'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Tapis et revêtements de sols divers",
-    name = u'poste_coicop_512'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",
-    name = u'poste_coicop_513'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Article de ménage en textiles",
-    name = u'poste_coicop_520'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Gros appareils ménagers, électriques ou non",
-    name = u'poste_coicop_531'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Petits appareils électroméangers",
-    name = u'poste_coicop_532'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Réparation d'appareils ménagers",
-    name = u'poste_coicop_533'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Verrerie, vaisselle et ustensiles de ménage",
-    name = u'poste_coicop_540'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Gros outillage et matériel",
-    name = u'poste_coicop_551'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Petit outillage et accessoires divers",
-    name = u'poste_coicop_552'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Biens d'équipement ménager non durables",
-    name = u'poste_coicop_561'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services domestiques et services ménagers",
-    name = u'poste_coicop_562'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Produits pharmaceutiques",
-    name = u'poste_coicop_611'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Produits médicaux divers",
-    name = u'poste_coicop_612'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Appareils et matériel thérapeutiques",
-    name = u'poste_coicop_613'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services médicaux",
-    name = u'poste_coicop_621'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services dentaires",
-    name = u'poste_coicop_622'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services paramédicaux",
-    name = u'poste_coicop_623'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services hospitaliers",
-    name = u'poste_coicop_630'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Voitures automobiles",
-    name = u'poste_coicop_711'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Motocycles",
-    name = u'poste_coicop_712'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Bicyclettes",
-    name = u'poste_coicop_713'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Pièces de rechange et accessoires pour véhicules de tourisme ",
-    name = u'poste_coicop_721'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Carburants et lubrifiants pour véhicules de tourisme",
-    name = u'poste_coicop_722'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Entretien et réparation de véhicules particuliers",
-    name = u'poste_coicop_723'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services divers liés aux véhicules particuliers",
-    name = u'poste_coicop_724'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Transport ferroviaire de passagers",
-    name = u'poste_coicop_731'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Transport routier de passagers",
-    name = u'poste_coicop_732'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Transport aérien de passagers",
-    name = u'poste_coicop_733'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Transport maritime et fluvial de passagers",
-    name = u'poste_coicop_734'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Transport combiné de passagers",
-    name = u'poste_coicop_735'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services de transport divers",
-    name = u'poste_coicop_736'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services postaux",
-    name = u'poste_coicop_810'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Matériel de téléphonie et de télécopie",
-    name = u'poste_coicop_831'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services de téléphonie et de télécopie",
-    name = u'poste_coicop_832'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",
-    name = u'poste_coicop_911'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Matériel photographique et cinématographique et appareils optiques",
-    name = u'poste_coicop_912'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Matériel de traitement de l'information",
-    name = u'poste_coicop_913'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Supports d'enregistrement",
-    name = u'poste_coicop_914'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Réparation de matériel audiovisuel, photographique et de traitement de l'information",
-    name = u'poste_coicop_915'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Biens durables pour loisirs de plein air",
-    name = u'poste_coicop_921'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Instruments de musique et biens durables destinés aux loisirs d'intérieur",
-    name = u'poste_coicop_922'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Entretien et réparation des autres biens durables à fonction récréatives et culturelles",
-    name = u'poste_coicop_923'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Jeux, jouets et passe-temps",
-    name = u'poste_coicop_931'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Articles de sport, matériel de camping et matériel pour activités de plein air",
-    name = u'poste_coicop_932'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Produits pour jardin, plantes et fleurs",
-    name = u'poste_coicop_933'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Animaux de compagnie et articles connexes",
-    name = u'poste_coicop_934'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services vétérinaires et autres services pour animaux de compagnie",
-    name = u'poste_coicop_935'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services récréatifs et sportifs",
-    name = u'poste_coicop_941'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services culturels",
-    name = u'poste_coicop_942'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Jeux de hasard",
-    name = u'poste_coicop_943'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Livre",
-    name = u'poste_coicop_951'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Journaux et publications périodiques",
-    name = u'poste_coicop_952'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Imprimés divers",
-    name = u'poste_coicop_953'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Papeterie et matériel de dessin",
-    name = u'poste_coicop_954'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Forfaits touristiques ",
-    name = u'poste_coicop_960'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Enseignement préélémentaire et primaire",
-    name = u'poste_coicop_1010'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Enseignement secondaire",
-    name = u'poste_coicop_1020'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Enseignement postsecondaire non supérieur",
-    name = u'poste_coicop_1030'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Enseignement supérieur",
-    name = u'poste_coicop_1040'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Enseignement non défini par niveau",
-    name = u'poste_coicop_1050'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u">>> Restauration à emporter",
-    name = u'poste_coicop_11112'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u">>> Restauration sur place",
-    name = u'poste_coicop_11113'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u">>> Consommation de boissons alcoolisées",
-    name = u'poste_coicop_11114'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Cantines",
-    name = u'poste_coicop_1112'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Services d'hébergement",
-    name = u'poste_coicop_1120'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Salons de coiffure et instituts de soins et de beauté",
-    name = u'poste_coicop_1211'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Appareils électriques pour soins corporels",
-    name = u'poste_coicop_1212'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Autres appareils, articles et produits pour soins corporels",
-    name = u'poste_coicop_1213'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Prostitution",
-    name = u'poste_coicop_1220'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Articles de bijouterie et horlogerie",
-    name = u'poste_coicop_1231'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Autres effets personnels",
-    name = u'poste_coicop_1232'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Protection sociale",
-    name = u'poste_coicop_1240'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Assurance vie",
-    name = u'poste_coicop_1251'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Assurance habitation",
-    name = u'poste_coicop_1252'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Assurance maladie",
-    name = u'poste_coicop_1253'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Assurance transports",
-    name = u'poste_coicop_1254'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Autres assurances",
-    name = u'poste_coicop_1255'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Coûts des services d'intermédiation financière indirectement mesurés",
-    name = u'poste_coicop_1261'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Autres services financiers non compris ailleurs",
-    name = u'poste_coicop_1262'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Autres services non compris ailleurs",
-    name = u'poste_coicop_1270'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"caution pour la location d'un logement",
-    name = u'poste_coicop_9901'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"achats de logements, garages, parkings, box et terrains",
-    name = u'poste_coicop_9902'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"Gros travaux d'entretien dans les logements",
-    name = u'poste_coicop_9903'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"impôts et taxes de la résidence principale",
-    name = u'poste_coicop_9911'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"impôts et taxes résidence secondaire ou autre logement",
-    name = u'poste_coicop_9912'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"impôts sur le revenu",
-    name = u'poste_coicop_9913'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"taxes automobile",
-    name = u'poste_coicop_9914'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"autres impôts et taxes",
-    name = u'poste_coicop_9915'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"remboursements de prêts résidence principale",
-    name = u'poste_coicop_9921'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"remboursements de prêts résidence secondaire ou autre logement",
-    name = u'poste_coicop_9922'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"autres remboursements de prêts",
-    name = u'poste_coicop_9923'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"argent donné au sein du ménage",
-    name = u'poste_coicop_9931'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne",
-    name = u'poste_coicop_9932'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"cadeaux offerts (argent ou bien) sai",
-    name = u'poste_coicop_9933'
-    )
-
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = u"prélèvements de l'employeur",
-    name = u'poste_coicop_9941'
-    )
+from openfisca_france_indirect_taxation.model.base import *
+
+
+class poste_coicop_111(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Pain et céréales"
+
+class poste_coicop_112(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Viande"
+
+class poste_coicop_113(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Poisson et fruits de mer"
+
+class poste_coicop_114(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Lait, fromage et œufs"
+
+class poste_coicop_115(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Huiles et graisses"
+
+class poste_coicop_1151(
+    column = FloatCol()
+    entity_class = Menages
+    label = u">>> Margarines et autres graisses végétales"
+
+class poste_coicop_116(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Fruits"
+
+class poste_coicop_117(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Légumes"
+
+class poste_coicop_118(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Sucre, confiture, miel, chocolat et confiserie"
+
+class poste_coicop_1181(
+    column = FloatCol()
+    entity_class = Menages
+    label = u">>> Confiserie"
+
+class poste_coicop_119(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Produits alimentaires non compris ailleurs"
+
+class poste_coicop_121(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Café, thé et cacao"
+
+class poste_coicop_122(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes"
+
+class poste_coicop_211(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Alcools de bouche "
+
+class poste_coicop_212(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Vin et boissons fermentées"
+
+class poste_coicop_213(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Bière"
+
+class poste_coicop_2201(
+    column = FloatCol()
+    entity_class = Menages
+    label = u">>> Cigarettes"
+
+class poste_coicop_2202(
+    column = FloatCol()
+    entity_class = Menages
+    label = u">>> Cigares et cigarillos"
+
+class poste_coicop_2203(
+    column = FloatCol()
+    entity_class = Menages
+    label = u">>> Tabac sous d'autres formes"
+
+class poste_coicop_230(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Stupéfiants"
+
+class poste_coicop_311(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Tissus pour habillement"
+
+class poste_coicop_312(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Vêtements"
+
+class poste_coicop_313(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Autres articles et accessoires d'habillement"
+
+class poste_coicop_314(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Nettoyage, réparation et location d'articles d'habillement"
+
+class poste_coicop_321(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Chaussures diverses"
+
+class poste_coicop_322(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Cordonnerie et location de chaussures"
+
+class poste_coicop_411(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Loyers effectivement payés par les locataires"
+
+class poste_coicop_412(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Autres loyers effectifs"
+
+class poste_coicop_421(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Loyers fictifs des propriétaires occupants"
+
+class poste_coicop_422(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Autres loyers fictifs"
+
+class poste_coicop_431(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Fournitures pour travaux d'entretien et de réparation des logements"
+
+class poste_coicop_432(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services concernant l'entretien et les réparations du logement"
+
+class poste_coicop_441(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Alimentation en eau"
+
+class poste_coicop_442(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Collecte des ordures ménagères"
+
+class poste_coicop_443(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Reprise des eaux usées"
+
+class poste_coicop_444(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Service divers liés au logement non compris ailleurs"
+
+class poste_coicop_451(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Electricité"
+
+class poste_coicop_4511(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Facture EDF GDF non dissociables"
+
+class poste_coicop_452(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Gaz"
+
+class poste_coicop_4522(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Achat de butane, propane"
+
+class poste_coicop_453(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Combustibles liquides"
+
+class poste_coicop_454(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Combustibles solides"
+
+class poste_coicop_455(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Energie thermique"
+
+class poste_coicop_511(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Meubles et articles d'ameublement"
+
+class poste_coicop_512(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Tapis et revêtements de sols divers"
+
+class poste_coicop_513(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol"
+
+class poste_coicop_520(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Article de ménage en textiles"
+
+class poste_coicop_531(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Gros appareils ménagers, électriques ou non"
+
+class poste_coicop_532(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Petits appareils électroméangers"
+
+class poste_coicop_533(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Réparation d'appareils ménagers"
+
+class poste_coicop_540(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Verrerie, vaisselle et ustensiles de ménage"
+
+class poste_coicop_551(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Gros outillage et matériel"
+
+class poste_coicop_552(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Petit outillage et accessoires divers"
+
+class poste_coicop_561(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Biens d'équipement ménager non durables"
+
+class poste_coicop_562(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services domestiques et services ménagers"
+
+class poste_coicop_611(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Produits pharmaceutiques"
+
+class poste_coicop_612(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Produits médicaux divers"
+
+class poste_coicop_613(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Appareils et matériel thérapeutiques"
+
+class poste_coicop_621(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services médicaux"
+
+class poste_coicop_622(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services dentaires"
+
+class poste_coicop_623(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services paramédicaux"
+
+class poste_coicop_630(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services hospitaliers"
+
+class poste_coicop_711(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Voitures automobiles"
+
+class poste_coicop_712(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Motocycles"
+
+class poste_coicop_713(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Bicyclettes"
+
+class poste_coicop_721(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Pièces de rechange et accessoires pour véhicules de tourisme "
+
+class poste_coicop_722(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Carburants et lubrifiants pour véhicules de tourisme"
+
+class poste_coicop_723(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Entretien et réparation de véhicules particuliers"
+
+class poste_coicop_724(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services divers liés aux véhicules particuliers"
+
+class poste_coicop_731(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Transport ferroviaire de passagers"
+
+class poste_coicop_732(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Transport routier de passagers"
+
+class poste_coicop_733(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Transport aérien de passagers"
+
+class poste_coicop_734(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Transport maritime et fluvial de passagers"
+
+class poste_coicop_735(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Transport combiné de passagers"
+
+class poste_coicop_736(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services de transport divers"
+
+class poste_coicop_810(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services postaux"
+
+class poste_coicop_831(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Matériel de téléphonie et de télécopie"
+
+class poste_coicop_832(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services de téléphonie et de télécopie"
+
+class poste_coicop_911(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Matériel de réception, d'enregistrement et de reproduction du son et de l'image"
+
+class poste_coicop_912(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Matériel photographique et cinématographique et appareils optiques"
+
+class poste_coicop_913(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Matériel de traitement de l'information"
+
+class poste_coicop_914(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Supports d'enregistrement"
+
+class poste_coicop_915(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Réparation de matériel audiovisuel, photographique et de traitement de l'information"
+
+class poste_coicop_921(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Biens durables pour loisirs de plein air"
+
+class poste_coicop_922(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Instruments de musique et biens durables destinés aux loisirs d'intérieur"
+
+class poste_coicop_923(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Entretien et réparation des autres biens durables à fonction récréatives et culturelles"
+
+class poste_coicop_931(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Jeux, jouets et passe-temps"
+
+class poste_coicop_932(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Articles de sport, matériel de camping et matériel pour activités de plein air"
+
+class poste_coicop_933(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Produits pour jardin, plantes et fleurs"
+
+class poste_coicop_934(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Animaux de compagnie et articles connexes"
+
+class poste_coicop_935(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services vétérinaires et autres services pour animaux de compagnie"
+
+class poste_coicop_941(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services récréatifs et sportifs"
+
+class poste_coicop_942(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services culturels"
+
+class poste_coicop_943(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Jeux de hasard"
+
+class poste_coicop_951(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Livre"
+
+class poste_coicop_952(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Journaux et publications périodiques"
+
+class poste_coicop_953(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Imprimés divers"
+
+class poste_coicop_954(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Papeterie et matériel de dessin"
+
+class poste_coicop_960(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Forfaits touristiques "
+
+class poste_coicop_1010(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Enseignement préélémentaire et primaire"
+
+class poste_coicop_1020(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Enseignement secondaire"
+
+class poste_coicop_1030(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Enseignement postsecondaire non supérieur"
+
+class poste_coicop_1040(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Enseignement supérieur"
+
+class poste_coicop_1050(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Enseignement non défini par niveau"
+
+class poste_coicop_11112(
+    column = FloatCol()
+    entity_class = Menages
+    label = u">>> Restauration à emporter"
+
+class poste_coicop_11113(
+    column = FloatCol()
+    entity_class = Menages
+    label = u">>> Restauration sur place"
+
+class poste_coicop_11114(
+    column = FloatCol()
+    entity_class = Menages
+    label = u">>> Consommation de boissons alcoolisées"
+
+class poste_coicop_1112(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Cantines"
+
+class poste_coicop_1120(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Services d'hébergement"
+
+class poste_coicop_1211(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Salons de coiffure et instituts de soins et de beauté"
+
+class poste_coicop_1212(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Appareils électriques pour soins corporels"
+
+class poste_coicop_1213(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Autres appareils, articles et produits pour soins corporels"
+
+class poste_coicop_1220(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Prostitution"
+
+class poste_coicop_1231(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Articles de bijouterie et horlogerie"
+
+class poste_coicop_1232(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Autres effets personnels"
+
+class poste_coicop_1240(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Protection sociale"
+
+class poste_coicop_1251(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Assurance vie"
+
+class poste_coicop_1252(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Assurance habitation"
+
+class poste_coicop_1253(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Assurance maladie"
+
+class poste_coicop_1254(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Assurance transports"
+
+class poste_coicop_1255(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Autres assurances"
+
+class poste_coicop_1261(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Coûts des services d'intermédiation financière indirectement mesurés"
+
+class poste_coicop_1262(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Autres services financiers non compris ailleurs"
+
+class poste_coicop_1270(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Autres services non compris ailleurs"
+
+class poste_coicop_9901(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"caution pour la location d'un logement"
+
+class poste_coicop_9902(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"achats de logements, garages, parkings, box et terrains"
+
+class poste_coicop_9903(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"Gros travaux d'entretien dans les logements"
+
+class poste_coicop_9911(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"impôts et taxes de la résidence principale"
+
+class poste_coicop_9912(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"impôts et taxes résidence secondaire ou autre logement"
+
+class poste_coicop_9913(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"impôts sur le revenu"
+
+class poste_coicop_9914(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"taxes automobile"
+
+class poste_coicop_9915(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"autres impôts et taxes"
+
+class poste_coicop_9921(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"remboursements de prêts résidence principale"
+
+class poste_coicop_9922(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"remboursements de prêts résidence secondaire ou autre logement"
+
+class poste_coicop_9923(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"autres remboursements de prêts"
+
+class poste_coicop_9931(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"argent donné au sein du ménage"
+
+class poste_coicop_9932(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne"
+
+class poste_coicop_9933(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"cadeaux offerts (argent ou bien) sai"
+
+class poste_coicop_9941(
+    column = FloatCol()
+    entity_class = Menages
+    label = u"prélèvements de l'employeur"

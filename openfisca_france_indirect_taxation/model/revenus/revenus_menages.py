@@ -30,44 +30,38 @@ import numpy
 from ..base import *  # noqa analysis:ignore
 
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"Décile de niveau de vie (revenu/unité de consommation)",
-    name = 'decuc',
-    )
+class decuc(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Décile de niveau de vie (revenu/unité de consommation)"
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = u"Revenu disponible du ménage auquel on ajoute le loyer imputé",
-    name = 'rev_disp_loyerimput',
-    )
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    is_permanent = True,
-    label = u"Revenu disponible du ménage",
-    name = 'rev_disponible',
-    )
+class rev_disp_loyerimput(Variable):
+    column = FloatCol
+    entity_class = Individus
+    is_permanent = True
+    label = u"Revenu disponible du ménage auquel on ajoute le loyer imputé"
 
-reference_input_variable(
-    column = IntCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = u"Revenu total du ménage",
-    name = 'revtot',
-    )
 
-reference_input_variable(
-    column = IntCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = u"Revenu total par unité de consommation du ménage",
-    name = 'revtotuc',
-    )
+class rev_disponible(Variable):
+    column = FloatCol
+    entity_class = Menages
+    is_permanent = True
+    label = u"Revenu disponible du ménage"
+
+
+class revtot(Variable):
+    column = IntCol
+    entity_class = Individus
+    is_permanent = True
+    label = u"Revenu total du ménage"
+
+
+class revtotuc(Variable):
+    column = IntCol
+    entity_class = Individus
+    is_permanent = True
+    label = u"Revenu total par unité de consommation du ménage"
 
 
 class niveau_de_vie(Variable):

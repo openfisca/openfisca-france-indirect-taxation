@@ -30,45 +30,40 @@ import numpy
 
 from ..base import *  # noqa analysis:ignore
 
-reference_input_variable(
-    column = DateCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = u"Age personne de référence",
-    name = 'agepr',
-    )
 
-reference_input_variable(
-    column = DateCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = u"Date de naissance",
-    name = 'birth',
-    )
+class agepr(Variable):
+    column = DateCol
+    entity_class = Individus
+    is_permanent = True
+    label = u"Age personne de référence"
 
-reference_input_variable(
-    column = IntCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = u"Nombre d'adultes dans le ménage",
-    name = 'nadultes',
-    )
 
-reference_input_variable(
-    column = IntCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = u"Nombre d'enfants dans le ménage",
-    name = 'nenfants',
-    )
+class birth(Variable):
+    column = DateCol
+    entity_class = Individus
+    is_permanent = True
+    label = u"Date de naissance"
 
-reference_input_variable(
-    column = IntCol,
-    entity_class = Individus,
-    is_permanent = True,
-    label = u"Rôle dans le ménage",
-    name = 'role_menage',
-    )
+
+class nadultes(Variable):
+    column = IntCol
+    entity_class = Individus
+    is_permanent = True
+    label = u"Nombre d'adultes dans le ménage"
+
+
+class nenfants(Variable):
+    column = IntCol
+    entity_class = Individus
+    is_permanent = True
+    label = u"Nombre d'enfants dans le ménage"
+
+
+class role_menage(Variable):
+    column = IntCol
+    entity_class = Individus
+    is_permanent = True
+    label = u"Rôle dans le ménage"
 
 
 class age(Variable):

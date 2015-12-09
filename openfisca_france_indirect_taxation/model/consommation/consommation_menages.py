@@ -29,26 +29,25 @@ from ..base import *  # noq analysis:ignore
 
 
 for coicop12_index in range(1, 13):
-    reference_input_variable(
+    name = 'coicop12_{}'.format(coicop12_index)
+    # Trick to create a class with a dynamic name.
+    type(name.encode('utf-8'), (Variable,), dict(
         column = FloatCol,
         entity_class = Menages,
         label = u"Poste coicop {} de la nomenclature aggrégée à 12 niveaux".format(coicop12_index),
-        name = 'coicop12_{}'.format(coicop12_index),
-        )
+        ))
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"Quantité de diesel consommée (en hecto-litres)",
-    name = 'diesel_quantite',
-    )
 
-reference_input_variable(
-    column = FloatCol,
-    entity_class = Menages,
-    label = u"Quantité de supercarburants (super 95, super98 et superE10) consommée (en hecto-litres)",
-    name = 'supercarburants_quantite',
-    )
+class diesel_quantite(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantité de diesel consommée (en hecto-litres)"
+
+
+class supercarburants_quantite(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantité de supercarburants (super 95, super98 et superE10) consommée (en hecto-litres)"
 
 
 class consommation_alcools_forts(Variable):

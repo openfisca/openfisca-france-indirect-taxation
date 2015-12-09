@@ -25,7 +25,7 @@
 
 from openfisca_core.columns import AgeCol, DateCol, FloatCol, IntCol, EnumCol
 from openfisca_core.enumerations import Enum
-from openfisca_core.formulas import dated_function, DatedVariable, reference_input_variable, Variable
+from openfisca_core.formulas import dated_function, DatedVariable, Variable
 from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
 
 
@@ -45,9 +45,8 @@ __all__ = [
     'mark_weighted_percentiles',
     'Menages',
     'droit_d_accise',
-    'reference_input_variable',
-    'Variable',
     'tax_from_expense_including_tax',
+    'Variable',
     'weighted_quantiles',
     ]
 

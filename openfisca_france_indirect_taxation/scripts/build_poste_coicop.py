@@ -72,12 +72,10 @@ for each_poste in z:
     label = 'u' + '"' + label + '"'
 
     def_poste_coicop = '''
-reference_input_variable(
-    column = FloatCol(),
-    entity_class = Menages,
-    label = {1},
-    name = u'poste_coicop_{0}'
-    )'''.format(each_poste, label)
+class poste_coicop_{0}(
+    column = FloatCol()
+    entity_class = Menages
+    label = {1}'''.format(each_poste, label)
     print >>script_poste_coicop, def_poste_coicop
 
 script_poste_coicop.close()
