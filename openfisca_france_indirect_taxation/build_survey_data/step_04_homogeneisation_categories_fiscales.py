@@ -38,7 +38,7 @@ from openfisca_france_data.temporary import temporary_store_decorator
 from openfisca_france_data import default_config_files_directory as config_files_directory
 
 from openfisca_france_indirect_taxation.build_survey_data.step_0_1_1_homogeneisation_donnees_depenses \
-    import normalize_poste_coicop
+    import normalize_code_coicop
 
 from openfisca_france_indirect_taxation.build_survey_data.utils \
     import ident_men_dtype
@@ -67,7 +67,7 @@ def build_menage_consumption_by_categorie_fiscale(temporary_store = None, year_c
 
     # Normalisation des coicop de la feuille excel pour être cohérent avec depenses_calees
     normalized_poste_coicop = [
-        normalize_poste_coicop(coicop)
+        normalize_code_coicop(coicop)
         for coicop in selected_parametres_fiscalite_data_frame.index
         ]
     selected_parametres_fiscalite_data_frame.index = normalized_poste_coicop
