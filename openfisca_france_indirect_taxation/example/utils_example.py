@@ -1,17 +1,11 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 15 16:19:14 2015
 
-@author: thomas.douenne
-"""
 
 from __future__ import division
 
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-import pkg_resources
-import os
 
 
 import openfisca_france_indirect_taxation
