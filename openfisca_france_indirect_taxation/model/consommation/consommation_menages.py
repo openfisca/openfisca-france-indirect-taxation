@@ -25,7 +25,7 @@
 from __future__ import division
 
 
-from ..base import *  # noq analysis:ignore
+from ..base import *  # noqa analysis:ignore
 
 
 for coicop12_index in range(1, 13):
