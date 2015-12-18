@@ -45,7 +45,7 @@ if __name__ == '__main__':
     for coicop12_index in range(1, 13):
         list_coicop12.append('coicop12_{}'.format(coicop12_index))
 
-    var_to_be_simulated = [
+    simulated_variables = [
         'decuc',
         'tva_total',
         'ticpe',
@@ -64,15 +64,15 @@ if __name__ == '__main__':
         'rev_disponible'
         ]
 
-    var_to_be_simulated += list_coicop12
+    simulated_variables += list_coicop12
 
     p = dict()
     df_to_graph1 = None
     df_to_graph2 = None
     for year in [2000, 2005, 2011]:
-        simulation_data_frame = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+        simulation_data_frame = simulate(simulated_variables = simulated_variables, year = year)
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame,
-            groupe = 'niveau_vie_decile', varlist = var_to_be_simulated)
+            groupe = 'niveau_vie_decile', varlist = simulated_variables)
         aggregates_data_frame['taxe_1'] = aggregates_data_frame['tva_total']
         aggregates_data_frame['taxe_2'] = aggregates_data_frame['ticpe']
         aggregates_data_frame['taxe_3'] = (

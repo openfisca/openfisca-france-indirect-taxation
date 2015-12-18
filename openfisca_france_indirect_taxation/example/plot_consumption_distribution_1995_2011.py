@@ -46,19 +46,19 @@ if __name__ == '__main__':
     for coicop12_index in range(1, 13):
         list_coicop12.append('coicop12_{}'.format(coicop12_index))
     # Liste des variables que l'on veut simuler
-    var_to_be_simulated = [
+    simulated_variables = [
         'pondmen',
         'decuc',
         'niveau_vie_decile',
         ]
     # Merge des deux listes
-    var_to_be_simulated += list_coicop12
+    simulated_variables += list_coicop12
 
     p = dict()
     df_to_graph = None
     for year in [2000, 2005, 2011]:
         # Constition d'une base de données agrégée par décile (= collapse en stata)
-        simulation_data_frame = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+        simulation_data_frame = simulate(simulated_variables = simulated_variables, year = year)
         if year == 2011:
             simulation_data_frame.niveau_vie_decile[simulation_data_frame.decuc == 10] = 10
         simulation_data_frame['depenses_tot'] = 0

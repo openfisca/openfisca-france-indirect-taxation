@@ -24,7 +24,7 @@ if __name__ == '__main__':
     for coicop12_index in range(1, 9):
         list_coicop12.append('coicop12_{}'.format(coicop12_index))
 
-    var_to_be_simulated = [
+    simulated_variables = [
         'pondmen',
         'decuc',
         'niveau_vie_decile',
@@ -38,11 +38,11 @@ if __name__ == '__main__':
         'ocde10',
         ]
 
-    var_to_be_simulated += list_coicop12
+    simulated_variables += list_coicop12
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     for year in [2000, 2005, 2011]:
-        df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+        df = simulate(simulated_variables = simulated_variables, year = year)
         var_to_concat = ['tva_taux_plein', 'tva_taux_intermediaire', 'tva_taux_reduit',
                          'tva_taux_super_reduit', 'tva_total']
         aggregates_data_frame = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile',

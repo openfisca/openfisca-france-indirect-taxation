@@ -48,7 +48,7 @@ if __name__ == '__main__':
 #    for coicop12_index in range(1, 13):
 #        list_coicop12.append('coicop12_{}'.format(coicop12_index))
     # Liste des variables que l'on veut simuler
-    var_to_be_simulated = [
+    simulated_variables = [
         'pondmen',
         'decuc',
         'niveau_vie_decile',
@@ -63,17 +63,17 @@ if __name__ == '__main__':
         'consommation_biere'
         ]
     # Merge des deux listes
-    var_to_be_simulated += list_coicop12
+    simulated_variables += list_coicop12
 
     for year in [2000, 2005, 2011]:
         # Constition d'une base de données agrégée par décile (= collapse en stata)
-        df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+        df = simulate(simulated_variables = simulated_variables, year = year)
         if year == 2011:
             df.niveau_vie_decile[df.decuc == 10] = 10
 
         var_to_concat = list_coicop12 + ['rev_disponible']
         Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile',
-            varlist = var_to_be_simulated)
+            varlist = simulated_variables)
         list_alcool_tabac = []
         Wconcat['part_alcool'] = \
             (Wconcat['consommation_alcools_forts'] + Wconcat['consommation_vin'] + Wconcat['consommation_biere']) \

@@ -38,7 +38,7 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    var_to_be_simulated = [
+    simulated_variables = [
         'decuc',
         'tva_total',
         'ticpe',
@@ -57,9 +57,9 @@ if __name__ == '__main__':
         ]
 
     for year in [2000, 2005, 2011]:
-        df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+        df = simulate(simulated_variables = simulated_variables, year = year)
         Wconcat = df_weighted_average_grouped(dataframe = df,
-            groupe = 'niveau_vie_decile', varlist = var_to_be_simulated)
+            groupe = 'niveau_vie_decile', varlist = simulated_variables)
 
         Wconcat['taxe_{}'.format(1)] = Wconcat['tva_total']
         Wconcat['taxe_{}'.format(2)] = Wconcat['ticpe']

@@ -20,7 +20,7 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
     # Liste des variables que l'on veut simuler
-    var_to_be_simulated = [
+    simulated_variables = [
         'pondmen',
         'diesel_depenses',
         'essence_depenses',
@@ -32,7 +32,7 @@ if __name__ == '__main__':
     depenses_diesel_totales = dict()
     depenses_essence_totales = dict()
     for year in [2000, 2005, 2011]:
-        data_simulation = simulate_df_calee_on_ticpe(var_to_be_simulated = var_to_be_simulated, year = year)
+        data_simulation = simulate_df_calee_on_ticpe(simulated_variables = simulated_variables, year = year)
         depenses_diesel = (data_simulation['diesel_depenses'] * data_simulation['pondmen']).sum()
         depenses_essence = (data_simulation['essence_depenses'] * data_simulation['pondmen']).sum()
         depenses_carburants = depenses_diesel + depenses_essence

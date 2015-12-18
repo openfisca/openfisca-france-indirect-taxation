@@ -19,7 +19,7 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    var_to_be_simulated = [
+    simulated_variables = [
         'pondmen',
         'decuc',
         'niveau_vie_decile',
@@ -39,7 +39,7 @@ if __name__ == '__main__':
     depenses_essence = None
 
     for year in [2000, 2005, 2011]:
-        data_simulation = simulate_df_calee_by_grosposte(var_to_be_simulated = var_to_be_simulated, year = year)
+        data_simulation = simulate_df_calee_by_grosposte(simulated_variables = simulated_variables, year = year)
         if year == 2011:
             data_simulation.niveau_vie_decile[data_simulation.decuc == 10] = 10
         varlist = ['ticpe_totale', 'diesel_ticpe', 'essence_ticpe', 'consommation_ticpe', 'diesel_depenses',

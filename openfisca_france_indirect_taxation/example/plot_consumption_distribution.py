@@ -42,17 +42,17 @@ if __name__ == '__main__':
         list_coicop12.append('coicop12_{}'.format(coicop12_index))
 
     # Liste des variables que l'on veut simuler
-    var_to_be_simulated = [
+    simulated_variables = [
         'niveau_vie_decile',
         'consommation_totale',
         'pondmen',
         ]
     # Merge des deux listes
-    var_to_be_simulated += list_coicop12
+    simulated_variables += list_coicop12
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     for year in [2000, 2005, 2011]:
-        simulation_data_frame = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+        simulation_data_frame = simulate(simulated_variables = simulated_variables, year = year)
         var_to_concat = list_coicop12 + ['consommation_totale']
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame,
             groupe = 'niveau_vie_decile', varlist = var_to_concat)

@@ -29,7 +29,7 @@ def get_input_data_frame(year):
     return input_data_frame
 
 
-def simulate_df(var_to_be_simulated, year):
+def simulate(simulated_variables, year):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
@@ -45,13 +45,13 @@ def simulate_df(var_to_be_simulated, year):
     simulation = survey_scenario.new_simulation()
     return DataFrame(
         dict([
-            (name, simulation.calculate(name)) for name in var_to_be_simulated
+            (name, simulation.calculate(name)) for name in simulated_variables
 
             ])
         )
 
 
-def simulate_df_calee_by_grosposte(var_to_be_simulated, year):
+def simulate_df_calee_by_grosposte(simulated_variables, year):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
@@ -68,13 +68,13 @@ def simulate_df_calee_by_grosposte(var_to_be_simulated, year):
     simulation = survey_scenario.new_simulation()
     return DataFrame(
         dict([
-            (name, simulation.calculate(name)) for name in var_to_be_simulated
+            (name, simulation.calculate(name)) for name in simulated_variables
 
             ])
         )
 
 
-def simulate_df_calee_on_ticpe(var_to_be_simulated, year):
+def simulate_df_calee_on_ticpe(simulated_variables, year):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
@@ -91,7 +91,7 @@ def simulate_df_calee_on_ticpe(var_to_be_simulated, year):
     simulation = survey_scenario.new_simulation()
     return DataFrame(
         dict([
-            (name, simulation.calculate(name)) for name in var_to_be_simulated
+            (name, simulation.calculate(name)) for name in simulated_variables
 
             ])
         )

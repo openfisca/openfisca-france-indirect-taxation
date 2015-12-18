@@ -20,7 +20,7 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    var_to_be_simulated = [
+    simulated_variables = [
         'pondmen',
         'revtot',
         'consommation_ticpe',
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     for element in ['consommation_ticpe', 'diesel_depenses', 'essence_depenses']:
         part_ticpe_revtot_strate = None
         for year in [2005]:
-            data_simulation = simulate_df_calee_by_grosposte(var_to_be_simulated = var_to_be_simulated, year = year)
+            data_simulation = simulate_df_calee_by_grosposte(simulated_variables = simulated_variables, year = year)
             varlist = [element, 'revtot']
             part_ticpe_revtot_wip = df_weighted_average_grouped(
                 dataframe = data_simulation, groupe = 'strate', varlist = varlist

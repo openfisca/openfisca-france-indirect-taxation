@@ -24,7 +24,7 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
     # Liste des variables que l'on veut simuler
-    var_to_be_simulated_with_e10 = [
+    simulated_variables_with_e10 = [
         'pondmen',
         'sp_e10_ticpe',
         'sp95_ticpe',
@@ -33,7 +33,7 @@ if __name__ == '__main__':
         'diesel_ticpe'
         ]
 
-    var_to_be_simulated_without_e10 = [
+    simulated_variables_without_e10 = [
         'pondmen',
         'sp95_ticpe',
         'sp98_ticpe',
@@ -46,14 +46,14 @@ if __name__ == '__main__':
     quantites_essence_consommees = dict()
     for year in [2000, 2005, 2011]:
         try:
-            data_simulation = simulate_df_calee_on_ticpe(var_to_be_simulated = var_to_be_simulated_with_e10, year = year)
+            data_simulation = simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_with_e10, year = year)
             diesel_ticpe_ponderee = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()
             sp95_ticpe_ponderee = (data_simulation['sp95_ticpe'] * data_simulation['pondmen']).sum()
             sp98_ticpe_ponderee = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()
             super_plombe_ticpe_ponderee = (data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']).sum()
             sp_e10_ticpe_ponderee = (data_simulation['sp_e10_ticpe'] * data_simulation['pondmen']).sum()
         except:
-            data_simulation = simulate_df_calee_on_ticpe(var_to_be_simulated = var_to_be_simulated_without_e10, year = year)
+            data_simulation = simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_without_e10, year = year)
             diesel_ticpe_ponderee = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()
             sp95_ticpe_ponderee = (data_simulation['sp95_ticpe'] * data_simulation['pondmen']).sum()
             sp98_ticpe_ponderee = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()

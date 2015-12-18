@@ -42,7 +42,7 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    var_to_be_simulated = [
+    simulated_variables = [
         'tva_taux_plein',
         'consommation_tva_taux_plein',
         'categorie_fiscale_11',
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     # Exemple : graphe par décile de revenu par uc de la ventilation de la consommation selon les postes agrégés de la CN
     for year in [2000, 2005, 2011]:
         # Constition d'une base de données agrégée par décile (= collapse en stata)
-        df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+        df = simulate(simulated_variables = simulated_variables, year = year)
         Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'cs8pr', varlist = ['tva_total', 'revtot'])
         df_to_plot = Wconcat['tva_total'] / Wconcat['revtot']
 

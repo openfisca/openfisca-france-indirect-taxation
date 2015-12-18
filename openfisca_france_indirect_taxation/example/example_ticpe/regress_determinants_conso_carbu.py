@@ -35,7 +35,7 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    var_to_be_simulated_without_e10 = [
+    simulated_variables_without_e10 = [
         'sp95_ticpe',
         'sp98_ticpe',
         'super_plombe_ticpe',
@@ -54,19 +54,19 @@ if __name__ == '__main__':
         'poste_coicop_421'
         ]
 
-    var_to_be_simulated_with_e10 = var_to_be_simulated_without_e10 + ['sp_e10_ticpe']
+    simulated_variables_with_e10 = simulated_variables_without_e10 + ['sp_e10_ticpe']
 
 # First, obtain the fuel consumption of each individual:
 
     for year in [2005]:
         try:
             data_simulation = \
-                simulate_df_calee_on_ticpe(var_to_be_simulated = var_to_be_simulated_with_e10, year = year)
+                simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_with_e10, year = year)
         except:
             data_simulation = \
-                simulate_df_calee_on_ticpe(var_to_be_simulated = var_to_be_simulated_without_e10, year = year)
+                simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_without_e10, year = year)
             data_simulation['sp_e10_ticpe'] = 0
-        del var_to_be_simulated_with_e10, var_to_be_simulated_without_e10
+        del simulated_variables_with_e10, simulated_variables_without_e10
 
         liste_carburants_accise = get_accise_ticpe_majoree()
         value_accise_diesel = liste_carburants_accise['accise majoree diesel'].loc[u'{}'.format(year)] / 100

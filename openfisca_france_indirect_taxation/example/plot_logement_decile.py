@@ -45,20 +45,20 @@ if __name__ == '__main__':
     for coicop12_index in range(1, 13):
         list_coicop12.append('coicop12_{}'.format(coicop12_index))
 
-    var_to_be_simulated = [
+    simulated_variables = [
         'pondmen',
         'niveau_vie_decile',
         'somme_coicop12',
         ]
 
-    var_to_be_simulated += list_coicop12
+    simulated_variables += list_coicop12
 
     p = dict()
     df_to_graph = None
     for year in [2000, 2005, 2011]:
-        simulation_data_frame = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+        simulation_data_frame = simulate(simulated_variables = simulated_variables, year = year)
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame,
-            groupe = 'niveau_vie_decile', varlist = var_to_be_simulated)
+            groupe = 'niveau_vie_decile', varlist = simulated_variables)
 
         aggregates_data_frame[year] = aggregates_data_frame['coicop12_4'] / aggregates_data_frame['somme_coicop12']
         appendable = aggregates_data_frame[year]

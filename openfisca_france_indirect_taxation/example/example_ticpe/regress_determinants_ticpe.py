@@ -17,7 +17,7 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    var_to_be_simulated = [
+    simulated_variables = [
         'pondmen',
         'revtot',
         'rev_disp_loyerimput',
@@ -33,7 +33,7 @@ if __name__ == '__main__':
         ]
 
     for year in [2005]:
-        data_for_reg = simulate_df_calee_by_grosposte(var_to_be_simulated = var_to_be_simulated, year = year)
+        data_for_reg = simulate_df_calee_by_grosposte(simulated_variables = simulated_variables, year = year)
 
     # In 2005 3 people consume fuel while their rev_disp_loyerimput is 0. Creates inf number in part_carburants
     data_for_reg = data_for_reg[data_for_reg['rev_disp_loyerimput'] > 0]

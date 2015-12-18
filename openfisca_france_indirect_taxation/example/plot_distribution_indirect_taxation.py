@@ -40,7 +40,7 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
     # Liste des variables que l'on veut simuler
-    var_to_be_simulated = [
+    simulated_variables = [
         'pondmen',
         'decuc',
         'niveau_vie_decile',
@@ -59,7 +59,7 @@ if __name__ == '__main__':
 
     # Constition d'une base de données agrégée par décile (= collapse en stata)
     for year in [2000, 2005, 2011]:
-        df = simulate_df(var_to_be_simulated = var_to_be_simulated, year = year)
+        df = simulate(simulated_variables = simulated_variables, year = year)
         if year == 2011:
             df.niveau_vie_decile[df.decuc == 10] = 10
 
