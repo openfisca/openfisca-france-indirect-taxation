@@ -29,7 +29,7 @@ from ..base import *  # noqa analysis:ignore
 
 
 for coicop12_index in range(1, 13):
-    name = 'coicop12_{}'.format(coicop12_index)
+    name = u'coicop12_{}'.format(coicop12_index)
     # Trick to create a class with a dynamic name.
     type(name.encode('utf-8'), (Variable,), dict(
         column = FloatCol,
