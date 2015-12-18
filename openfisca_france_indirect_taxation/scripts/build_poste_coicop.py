@@ -72,7 +72,7 @@ for each_poste in z:
     label = 'u' + '"' + label + '"'
 
     def_poste_coicop = '''
-class poste_coicop_{0}(
+class poste_coicop_{0}(Variable):
     column = FloatCol()
     entity_class = Menages
     label = {1}'''.format(each_poste, label)
