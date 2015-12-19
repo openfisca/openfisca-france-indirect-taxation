@@ -34,7 +34,7 @@ from __future__ import division
 
 from pandas import concat
 
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
+from openfisca_france_indirect_taxation.example.utils_example import simulate, df_weighted_average_grouped, \
     graph_builder_line_percent
 
 

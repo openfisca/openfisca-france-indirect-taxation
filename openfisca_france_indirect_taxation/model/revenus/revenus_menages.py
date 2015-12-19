@@ -38,7 +38,7 @@ class decuc(Variable):
 
 class rev_disp_loyerimput(Variable):
     column = FloatCol
-    entity_class = Individus
+    entity_class = Menages
     is_permanent = True
     label = u"Revenu disponible du ménage auquel on ajoute le loyer imputé"
 
@@ -52,14 +52,14 @@ class rev_disponible(Variable):
 
 class revtot(Variable):
     column = IntCol
-    entity_class = Individus
+    entity_class = Menages
     is_permanent = True
     label = u"Revenu total du ménage"
 
 
 class revtotuc(Variable):
     column = IntCol
-    entity_class = Individus
+    entity_class = Menages
     is_permanent = True
     label = u"Revenu total par unité de consommation du ménage"
 
@@ -91,7 +91,6 @@ class niveau_vie_decile(Variable):
             u"10e décile"
             ])
         )
-
     entity_class = Menages
     label = u"Décile de niveau de vie"
 

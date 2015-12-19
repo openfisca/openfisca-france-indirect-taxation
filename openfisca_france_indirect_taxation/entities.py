@@ -44,7 +44,7 @@ class Menages(entities.AbstractEntity):
     index_for_person_variable_name = 'ident_men'
     key_plural = 'menages'
     key_singular = 'menage'
-    label = u'Logement principal'
+    label = u'Ménage'
     max_cardinality_by_role_key = {'conjoint': 1, 'personne_de_reference': 1}
     name_key = 'nom_menage'
     role_for_person_variable_name = 'role_menage'

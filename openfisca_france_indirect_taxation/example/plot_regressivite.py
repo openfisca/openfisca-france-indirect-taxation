@@ -29,7 +29,7 @@ Created on Tue Apr 28 17:36:56 2015
 
 from __future__ import division
 
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df, df_weighted_average_grouped, \
+from openfisca_france_indirect_taxation.example.utils_example import simulate, df_weighted_average_grouped, \
     graph_builder_bar
 
 
