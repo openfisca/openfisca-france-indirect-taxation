@@ -23,7 +23,6 @@ if __name__ == '__main__':
                 survey_scenario.compute_pivot_table(values = [values], columns = ['niveau_vie_decile'])
                 ])
         df = pivot_table.T
-        df['depenses_tot'] = 0
         df['depenses_tot'] = df[['coicop12_{}'.format(i) for i in range(1, 13)]].sum(axis = 1)
 
         for i in range(1, 13):
