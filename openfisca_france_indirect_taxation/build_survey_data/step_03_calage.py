@@ -34,8 +34,8 @@ import pkg_resources
 import pandas
 
 
-from openfisca_france_data.temporary import temporary_store_decorator
-from openfisca_france_data import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.temporary import temporary_store_decorator
+from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.build_survey_data.step_0_1_1_homogeneisation_donnees_depenses \
     import normalize_code_coicop
 from openfisca_france_indirect_taxation.build_survey_data.utils \

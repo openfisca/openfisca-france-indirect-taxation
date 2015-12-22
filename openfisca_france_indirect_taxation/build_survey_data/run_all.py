@@ -34,7 +34,7 @@ import numpy
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.surveys import Survey
-from openfisca_france_data import default_config_files_directory as config_files_directory
+from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
 from openfisca_france_indirect_taxation.build_survey_data.utils \
     import find_nearest_inferior
@@ -53,7 +53,7 @@ from openfisca_france_indirect_taxation.build_survey_data.step_0_3_homogeneisati
 from openfisca_france_indirect_taxation.build_survey_data.step_0_4_homogeneisation_revenus_menages \
     import build_homogeneisation_revenus_menages
 
-from openfisca_france_data.temporary import TemporaryStore
+from openfisca_survey_manager.temporary import TemporaryStore
 
 from openfisca_france_indirect_taxation.build_survey_data.utils \
     import ident_men_dtype

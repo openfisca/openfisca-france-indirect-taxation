@@ -34,8 +34,8 @@ import pandas
 import pkg_resources
 
 
-from openfisca_france_data.temporary import temporary_store_decorator
-from openfisca_france_data import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.temporary import temporary_store_decorator
+from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
 

@@ -26,7 +26,7 @@
 from pandas import DataFrame
 
 import openfisca_france_indirect_taxation
-from openfisca_france_data import default_config_files_directory as config_files_directory
+from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
 

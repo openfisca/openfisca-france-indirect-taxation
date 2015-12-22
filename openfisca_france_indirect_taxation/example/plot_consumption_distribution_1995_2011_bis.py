@@ -4,6 +4,10 @@
 from __future__ import division
 
 import pandas
+import seaborn
+
+
+seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 from openfisca_france_indirect_taxation.example.utils_example import create_survey_scenario, graph_builder_bar
 

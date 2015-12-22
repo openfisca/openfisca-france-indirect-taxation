@@ -150,8 +150,8 @@ def graph_builder_bar(graph):
     axes = graph.plot(
         kind = 'bar',
         stacked = True,
-        color = ['#FF0000', '#0000FF', '#006600', '#660066', '#FFFF00', '#999966', '#FF6699', '#00FFFF',
-                 '#CC3300', '#990033', '#3366CC', '#000000']
+#        color = ['#FF0000', '#0000FF', '#006600', '#660066', '#FFFF00', '#999966', '#FF6699', '#00FFFF',
+#                 '#CC3300', '#990033', '#3366CC', '#000000']
         )
     plt.axhline(0, color = 'k')
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
