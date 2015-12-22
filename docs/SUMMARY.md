@@ -1,3 +1,4 @@
 ## Table of Contents
 
-* [Presentation](./presentation.md)
+* [Présentation](./presentation.md)
+* [Préparation des données] (./data.md)
