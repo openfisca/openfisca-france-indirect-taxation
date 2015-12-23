@@ -27,11 +27,76 @@ import logging
 
 
 from openfisca_survey_manager.scenarios import AbstractSurveyScenario
+from openfisca_france_indirect_taxation.tests import base
+
 
 log = logging.getLogger(__name__)
 
 
+def get_input_data_frame(year):
+    openfisca_survey_collection = SurveyCollection.load(
+        collection = "openfisca_indirect_taxation", config_files_directory = config_files_directory)
+    openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
+    input_data_frame = openfisca_survey.get_values(table = "input")
+    input_data_frame.reset_index(inplace = True)
+    return input_data_frame
+
+
 class SurveyScenario(AbstractSurveyScenario):
+    @classmethod
+    def create(calibration_kwargs = None, data_year = None, inflation_kwargs = None,
+            reference_tax_benefit_system = None, reform = None, reform_key = None, tax_benefit_system = None,
+            year = None):  # Add debug parameters debug, debug_all trace for simulation)
+        assert year is not None
+        if data_year is None:
+            data_year = year
+
+        assert not(
+            (reform is not None) and (reform_key is not None)
+            )
+
+        if reform_key is not None:
+            reform = base.get_cached_reform(
+                reform_key = reform_key,
+                tax_benefit_system = reference_tax_benefit_system or base.france_data_tax_benefit_system,
+                )
+
+        if reform is None:
+            assert reference_tax_benefit_system is None, "No need of reference_tax_benefit_system if no reform"
+            reference_tax_benefit_system = base.france_data_tax_benefit_system
+        else:
+            tax_benefit_system = reform
+            reference_tax_benefit_system = base.france_data_tax_benefit_system
+
+        if calibration_kwargs is not None:
+            print calibration_kwargs
+            assert set(calibration_kwargs.keys()).issubset(set(
+                ['target_margins_by_variable', 'parameters', 'total_population']))
+
+        if inflation_kwargs is not None:
+            assert set(inflation_kwargs.keys()).issubset(set(['inflator_by_variable', 'target_by_variable']))
+
+        input_data_frame = get_input_data_frame(data_year)
+
+        survey_scenario = SurveyScenario().init_from_data_frame(
+            input_data_frame = input_data_frame,
+            tax_benefit_system = tax_benefit_system,
+            reference_tax_benefit_system = reference_tax_benefit_system,
+            year = year,
+            )
+
+        survey_scenario.new_simulation()
+        if reform or reform_key:
+            survey_scenario.new_simulation(reference = True)
+
+        if calibration_kwargs:
+            survey_scenario.calibrate(**calibration_kwargs)
+
+        if inflation_kwargs:
+            survey_scenario.inflate(**inflation_kwargs)
+
+        return survey_scenario
+
 
     def initialize_weights(self):
         self.weight_column_name_by_entity_key_plural['menages'] = 'pondmen'
