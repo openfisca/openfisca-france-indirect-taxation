@@ -1,11 +1,17 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""
+Created on Thu Aug 20 16:20:13 2015
+
+@author: thomas.douenne
+"""
 
 import pkg_resources
 import os
 
-from openfisca_france_indirect_taxation.utils import get_parametres_fiscalite_data_frame
+from openfisca_france_indirect_taxation.build_survey_data.step_04_homogeneisation_categories_fiscales import (
+    get_parametres_fiscalite_data_frame)
 
 selected_parametres_fiscalite_data_frame = get_parametres_fiscalite_data_frame()
 
@@ -21,7 +27,7 @@ consommation_directory = os.path.join(
 
 script_categorie_fiscale = open(
     os.path.join(consommation_directory, 'openfisca_france_indirect_taxation', 'model',
-    'consommation', 'categorie_fiscale_generator2.py'), 'w'
+    'consommation', 'categorie_fiscale_generator.py'), 'w'
     )
 
 presentation_and_imports = '''
@@ -61,55 +67,38 @@ print >>script_categorie_fiscale, presentation_and_imports
 existing_categ = selected_parametres_fiscalite_data_frame['categoriefiscale'].drop_duplicates()
 existing_categ = sorted(existing_categ)
 
-
 for categorie_fiscale in existing_categ:
-    year_start = 1994
-    year_final_stop = 2014
-    variable_header = '''
+    definition_function = '''
+'categorie_fiscale: {0}'
+
+
 class categorie_fiscale_{0}(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Categorie fiscale {0}"'''.format(categorie_fiscale)
 
-    print >>script_categorie_fiscale, variable_header
+    print >>script_categorie_fiscale, definition_function
 
-    for year in range(year_start, year_final_stop + 1):
-        postes_coicop = sorted(
-            ensemble_postes_coicop.query(
-                'annee == @year and categoriefiscale == @categorie_fiscale'
-                )['posteCOICOP'].astype(str))
-        variables = ', '.join(postes_coicop)
+    for year in range(1994, 2015):
+        postes_coicop_par_annee = ensemble_postes_coicop[ensemble_postes_coicop['annee'] == year]
+        z = [
+            str(element[0]) for element in
+            postes_coicop_par_annee.loc[postes_coicop_par_annee.categoriefiscale ==
+            categorie_fiscale, ['posteCOICOP']].values
+            ]
+        variables = ', '.join(z)
+        not_empty = len(z) != 0
+        function_itself = '''
+    @dated_function(start = date({3}, 1, 1), stop = date({3}, 12, 31))
+    def function_{3}(self, simulation, period):
+        categorie_fiscale_{0} = 0
+        for each_variable in {1}:
+            element = 'poste_coicop_' + each_variable
+            bien_pour_categorie_fiscale_{0} = simulation.calculate(element, period)
+            categorie_fiscale_{0} += bien_pour_categorie_fiscale_{0}
+        return period, categorie_fiscale_{0}'''.format(categorie_fiscale, z, variables, year)
 
-        if year == year_start:
-            previous_variables = variables
-            previous_postes_coicop = postes_coicop
-            continue
-
-        if previous_postes_coicop == postes_coicop and year != year_final_stop:
-            print previous_postes_coicop
-            print postes_coicop
-            print previous_postes_coicop == postes_coicop
-            continue
-        else:
-            year_stop = year - 1 if year != year_final_stop else year_final_stop
-
-            dated_function = '''
-    @dated_function(start = date({year_start}, 1, 1), stop = date({year_stop}, 12, 31))
-    def function_{year_start}_{year_stop}(self, simulation, period):
-        categorie_fiscale_{categorie_fiscale} = 0
-        for poste in {postes_coicop}:
-            categorie_fiscale_{categorie_fiscale} += simulation.calculate('poste_coicop_' + poste, period)
-        return period, categorie_fiscale_{categorie_fiscale}
-'''.format(
-                categorie_fiscale = categorie_fiscale,
-                postes_coicop = previous_postes_coicop,
-                year_start = year_start,
-                year_stop = year_stop
-                )
-            year_start = year
-            if len(previous_postes_coicop) != 0:
-                print >>script_categorie_fiscale, dated_function
-
-        previous_postes_coicop = postes_coicop
+        if not_empty is True:
+            print >>script_categorie_fiscale, function_itself
 
 script_categorie_fiscale.close()
