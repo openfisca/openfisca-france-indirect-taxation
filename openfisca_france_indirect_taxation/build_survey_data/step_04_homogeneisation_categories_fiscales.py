@@ -27,16 +27,13 @@
 from __future__ import division
 
 
-import os
-
-
 import logging
 import pandas
-import pkg_resources
 
 from openfisca_survey_manager.temporary import temporary_store_decorator
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
+from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
 from openfisca_france_indirect_taxation.build_survey_data.step_0_1_1_homogeneisation_donnees_depenses \
     import normalize_code_coicop
 
@@ -100,40 +97,6 @@ def build_menage_consumption_by_categorie_fiscale(temporary_store = None, year_c
     categorie_fiscale_data_frame['role_menage'] = 0
     categorie_fiscale_data_frame.index = categorie_fiscale_data_frame.index.astype(ident_men_dtype)
     temporary_store["menage_consumption_by_categorie_fiscale_{}".format(year_calage)] = categorie_fiscale_data_frame
-
-
-def get_transfert_data_frames(year = None):
-    assert year is not None
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-    matrice_passage_file_path = os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
-        'Matrice passage {}-COICOP.xls'.format(year),
-        )
-    matrice_passage_data_frame = pandas.read_excel(matrice_passage_file_path)
-    selected_parametres_fiscalite_data_frame = get_parametres_fiscalite_data_frame(year = year)
-    return matrice_passage_data_frame, selected_parametres_fiscalite_data_frame
-
-
-def get_parametres_fiscalite_data_frame(year = None):
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-    parametres_fiscalite_file_path = os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
-        'Parametres fiscalite indirecte.xls',
-        )
-    parametres_fiscalite_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "categoriefiscale")
-    # print parametres_fiscalite_data_frame
-    if year:
-        selected_parametres_fiscalite_data_frame = \
-            parametres_fiscalite_data_frame[parametres_fiscalite_data_frame.annee == year].copy()
-        return selected_parametres_fiscalite_data_frame
-    else:
-        return parametres_fiscalite_data_frame
 
 
 if __name__ == '__main__':

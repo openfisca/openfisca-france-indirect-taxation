@@ -7,9 +7,10 @@ import pandas
 import seaborn
 
 
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+from openfisca_france_indirect_taxation.example.utils_example import graph_builder_bar
+from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
-from openfisca_france_indirect_taxation.example.utils_example import create_survey_scenario, graph_builder_bar
+seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 
 if __name__ == '__main__':
@@ -17,9 +18,7 @@ if __name__ == '__main__':
     # Liste des coicop agrégées en 12 postes
     simulated_variables = ['coicop12_{}'.format(coicop12_index) for coicop12_index in range(1, 13)]
     for year in [2000, 2005, 2011]:
-        # Constition d'une base de données agrégée par décile (= collapse en stata)
-        survey_scenario = create_survey_scenario(year)
-        simulation = survey_scenario.new_simulation()
+        survey_scenario = SurveyScenario.create(year = year)
         pivot_table = pandas.DataFrame()
         for values in simulated_variables:
             pivot_table = pandas.concat([

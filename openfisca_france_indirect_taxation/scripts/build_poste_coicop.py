@@ -1,17 +1,11 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-Created on Thu Aug 20 16:22:47 2015
-
-@author: thomas.douenne
-"""
 
 import pkg_resources
 import os
 
-from openfisca_france_indirect_taxation.build_survey_data.step_04_homogeneisation_categories_fiscales import (
-    get_parametres_fiscalite_data_frame)
+from openfisca_france_indirect_taxation.build_survey_data.utils import get_parametres_fiscalite_data_frame
 
 selected_parametres_fiscalite_data_frame = get_parametres_fiscalite_data_frame()
 
