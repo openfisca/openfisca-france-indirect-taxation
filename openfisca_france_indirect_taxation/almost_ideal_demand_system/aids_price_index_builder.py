@@ -39,6 +39,8 @@ indice_prix_mensuel_98_2015 = pd.read_csv(
         ), sep =';', decimal = ','
     )
 
+
+
 indice_prix_mensuel_98_2015 = indice_prix_mensuel_98_2015.astype(str)
 
 # On veut que les biens prennent les mêmes noms que ceux du modèle, i.e. poste_coicop_xyz
@@ -240,8 +242,8 @@ vagues = [
 
 df_indice_prix_produit['vag'] = df_indice_prix_produit['date'].map(date_to_vag)
 df_indice_prix_produit = df_indice_prix_produit.dropna()
-df_indice_prix_produit['vag'] = df_indice_prix_produit['vag'].astype(int) # delete the .0 after each number
+df_indice_prix_produit['vag'] = df_indice_prix_produit['vag'].astype(int)  # delete the .0 after each number
 df_indice_prix_produit['vag'] = df_indice_prix_produit['vag'].astype(str)
 df_indice_prix_produit['indice_prix_produit'] = df_indice_prix_produit['bien'] + '_' + df_indice_prix_produit['vag']
-df_indice_prix_produit = df_indice_prix_produit.drop_duplicates(cols='indice_prix_produit', take_last=True)
-
+df_indice_prix_produit = df_indice_prix_produit.drop_duplicates(
+    subset = ['indice_prix_produit'], keep = 'last')
