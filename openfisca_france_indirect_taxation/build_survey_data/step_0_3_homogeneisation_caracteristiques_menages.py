@@ -204,6 +204,8 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         menage.typmen = menage.typmen.astype('int')
 
+        # occupa : 1 si la personne travaille, 2 sinon. occupb : 1 si elle travaille effectivement, 2 si congé de
+        # longue durée (négligé ici). occupc : de 2 à 8 selon le statut si ne travaille pas (étudiant, retraité, etc.)
         menage["situacj"] = 0
         menage.situacj.loc[menage.occupacj == 1] = 1
         menage.situacj.loc[menage.occupccj == 3] = 3
@@ -216,13 +218,13 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         menage["situapr"] = 0
         menage.situapr.loc[menage.occupapr == 1] = 1
-        menage.situapr.loc[menage.occupapr == 3] = 3
-        menage.situapr.loc[menage.occupapr == 2] = 4
-        menage.situapr.loc[menage.occupapr == 5] = 5
-        menage.situapr.loc[menage.occupapr == 6] = 5
-        menage.situapr.loc[menage.occupapr == 7] = 6
-        menage.situapr.loc[menage.occupapr == 8] = 7
-        menage.situapr.loc[menage.occupapr == 4] = 8
+        menage.situapr.loc[menage.occupcpr == 3] = 3
+        menage.situapr.loc[menage.occupcpr == 2] = 4
+        menage.situapr.loc[menage.occupcpr == 5] = 5
+        menage.situapr.loc[menage.occupcpr == 6] = 5
+        menage.situapr.loc[menage.occupcpr == 7] = 6
+        menage.situapr.loc[menage.occupcpr == 8] = 7
+        menage.situapr.loc[menage.occupcpr == 4] = 8
 
         menage["natiocj"] = 0
         menage["natiopr"] = 0
@@ -236,6 +238,32 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage["typlog"] = 0
         menage.typlog.loc[menage.sitlog == 1] = 1
         menage.typlog.loc[menage.sitlog != 1] = 2
+
+        # Homogénéisation des diplômes, choix d'équivalence entre les diplômes
+        menage["dip14pr"] = 999999
+        menage.dip14pr.loc[menage.diegpr == 0] = 71
+        menage.dip14pr.loc[menage.diegpr == 2] = 70
+        menage.dip14pr.loc[menage.diegpr == 15] = 60
+        menage.dip14pr.loc[menage.diegpr == 18] = 60
+        menage.dip14pr.loc[menage.diegpr == 16] = 41
+        menage.dip14pr.loc[menage.diegpr == 17] = 41
+        menage.dip14pr.loc[menage.diegpr == 19] = 41
+
+        menage.dip14pr.loc[menage.dieppr == 23] = 50
+        menage.dip14pr.loc[menage.dieppr == 25] = 50
+        menage.dip14pr.loc[menage.dieppr == 27] = 50
+        menage.dip14pr.loc[menage.dieppr == 29] = 50
+        menage.dip14pr.loc[menage.dieppr == 34] = 43
+        menage.dip14pr.loc[menage.dieppr == 32] = 42
+        menage.dip14pr.loc[menage.dieppr == 36] = 42
+
+        menage.dip14pr.loc[menage.diespr == 41] = 30
+        menage.dip14pr.loc[menage.diespr == 42] = 31
+        menage.dip14pr.loc[menage.diespr == 43] = 31
+        menage.dip14pr.loc[menage.diespr == 44] = 33
+        menage.dip14pr.loc[menage.diespr == 46] = 20
+        menage.dip14pr.loc[menage.diespr == 48] = 12
+        menage.dip14pr.loc[menage.diespr == 47] = 10
 
         menage.set_index('ident_men', inplace = True)
 
@@ -540,7 +568,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
                 table = "MENAGE",
                 variables = [
                     'ident_me', 'pondmen', 'npers', 'nenfants', 'nactifs', 'sexepr', 'sexecj', 'dip14cj', 'dip14pr',
-                    'coeffuc', 'decuc1', 'typmen5'
+                    'coeffuc', 'decuc1', 'typmen5', 'cataeu', 'situapr', 'situacj', 'agepr', 'agecj'
                     ]
                 ).sort(columns = ['ident_me'])
         except:
@@ -548,7 +576,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
                 table = "menage",
                 variables = [
                     'ident_me', 'pondmen', 'npers', 'nenfants', 'nactifs', 'sexepr', 'sexecj', 'dip14cj', 'dip14pr',
-                    'coeffuc', 'decuc1', 'typmen5'
+                    'coeffuc', 'decuc1', 'typmen5', 'cataeu', 'situapr', 'situacj', 'agepr', 'agecj'
                     ]
                 ).sort(columns = ['ident_me'])
         menage.rename(
@@ -556,10 +584,12 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
                 'ident_me': 'ident_men',
                 'coeffuc': 'ocde10',
                 'typmen5': 'typmen',
-                'decuc1': 'decuc'
+                'decuc1': 'decuc',
+                'cataeu': 'strate'
                 },
             inplace = True,
             )
+        menage.agecj = menage.agecj.fillna(0)
         # ajout de la variable vag
         try:
             vague = survey.get_values(table = "DEPMEN")
@@ -577,7 +607,24 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.vag.loc[menage.vag_ == 4] = 26
         menage.vag.loc[menage.vag_ == 5] = 27
         menage.vag.loc[menage.vag_ == 6] = 28
+
         del menage['vag_']
+
+        # homogénéisation de la variable statut du logement qui prend des valeurs différentes pour 2011
+
+        stalog = survey.get_values(table = "DEPMEN", variables = ['stalog'])
+        stalog['stalog'] = stalog.stalog.astype('int').copy()
+        stalog['new_stalog'] = 0
+        stalog.loc[stalog.stalog == 2, 'new_stalog'] = 1
+        stalog.loc[stalog.stalog == 1, 'new_stalog'] = 2
+        stalog.loc[stalog.stalog == 4, 'new_stalog'] = 3
+        stalog.loc[stalog.stalog == 5, 'new_stalog'] = 4
+        stalog.loc[stalog.stalog.isin([3, 6]), 'new_stalog'] = 5
+        stalog.stalog = stalog.new_stalog.copy()
+        del stalog['new_stalog']
+
+        assert stalog.stalog.isin(range(1, 6)).all()
+        menage = menage.merge(stalog, left_index = True, right_index = True)
 
     if year == 2011:
         menage.set_index('ident_men', inplace = True)

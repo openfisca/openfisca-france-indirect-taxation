@@ -187,9 +187,14 @@ for year in [2000, 2005, 2011]:
     # Problème: ceux qui ne consomment pas de carbu ou d'alimentaire se voient affecter un indice de prix égal à 0.
 
     # On récupère les informations importantes sur les ménages
-    df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['depenses_carbu'] +
-        ['depenses_alime'] + ['depenses_autre'] + ['vag'] +
-        ['typmen'] + ['revtot'] + ['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']]
+    if year == 2005:
+        df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['depenses_carbu'] +
+            ['depenses_alime'] + ['depenses_autre'] + ['vag'] + ['strate'] +
+            ['typmen'] + ['revtot'] + ['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']]
+    else:
+        df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['depenses_carbu'] +
+            ['depenses_alime'] + ['depenses_autre'] + ['vag'] +
+            ['typmen'] + ['revtot'] + ['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']]
     df_info_menage['fumeur'] = 0
     df_info_menage[['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']] = \
         df_info_menage[['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']].astype(float)
@@ -221,8 +226,27 @@ for year in [2000, 2005, 2011]:
 
     dataframe['depenses_par_uc'] = dataframe['depenses_tot'] / dataframe['ocde10']
 
-    dataframe = dataframe[['ident_men'] + ['part_carbu'] + ['part_alime'] + ['part_autre'] + ['prix_carbu'] +
-        ['prix_alime'] + ['prix_autre'] + ['depenses_par_uc'] + ['depenses_tot'] + ['typmen'] + ['fumeur']]
+    # Pour 2005 on a les infos sur les strates dont on veut tirer profit
+    if year == 2005:
+        dataframe = dataframe[['ident_men'] + ['part_carbu'] + ['part_alime'] + ['part_autre'] + ['prix_carbu'] +
+            ['prix_alime'] + ['prix_autre'] + ['depenses_par_uc'] + ['depenses_tot'] + ['typmen'] + ['fumeur'] +
+            ['strate']]
+        dataframe['rural'] = 0
+        dataframe['petite_villes'] = 0
+        dataframe['villes_moyennes'] = 0
+        dataframe['grandes_villes'] = 0
+        dataframe['agglo_paris'] = 0
+
+        dataframe.loc[dataframe['strate'] == 0, 'rural'] = 1
+        dataframe.loc[dataframe['strate'] == 1, 'petite_villes'] = 1
+        dataframe.loc[dataframe['strate'] == 2, 'villes_moyennes'] = 1
+        dataframe.loc[dataframe['strate'] == 3, 'grandes_villes'] = 1
+        dataframe.loc[dataframe['strate'] == 4, 'agglo_paris'] = 1
+
+    else:
+        dataframe = dataframe[['ident_men'] + ['part_carbu'] + ['part_alime'] + ['part_autre'] + ['prix_carbu'] +
+            ['prix_alime'] + ['prix_autre'] + ['depenses_par_uc'] + ['depenses_tot'] + ['typmen'] + ['fumeur']]
+
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la

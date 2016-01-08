@@ -21,7 +21,7 @@ consommation_directory = os.path.join(
 
 script_categorie_fiscale = open(
     os.path.join(consommation_directory, 'openfisca_france_indirect_taxation', 'model',
-    'consommation', 'categorie_fiscale_generator2.py'), 'w'
+    'consommation', 'categorie_fiscale_generator.py'), 'w'
     )
 
 presentation_and_imports = '''
