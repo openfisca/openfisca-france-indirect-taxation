@@ -378,7 +378,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         individus.loc[individus.vag == 6, ['age']] = year + 1 - individus.anais
         # Garder toutes les personnes du ménage qui ne sont pas la personne de référence et le conjoint
         individus = individus[(individus.lienpref != 00) & (individus.lienpref != 01)].copy()
-        individus.sort(columns = ['ident_men', 'ident_ind'], inplace = True)
+        individus.sort_values(by = ['ident_men', 'ident_ind'], inplace = True)
 
         # Inspired by http://stackoverflow.com/questions/17228215/enumerate-each-row-for-each-group-in-a-dataframe
         def add_col_numero(data_frame):
@@ -570,7 +570,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
                     'ident_me', 'pondmen', 'npers', 'nenfants', 'nactifs', 'sexepr', 'sexecj', 'dip14cj', 'dip14pr',
                     'coeffuc', 'decuc1', 'typmen5', 'cataeu', 'situapr', 'situacj', 'agepr', 'agecj'
                     ]
-                ).sort(columns = ['ident_me'])
+                ).sort_values(by = ['ident_me'])
         except:
             menage = survey.get_values(
                 table = "menage",
@@ -578,7 +578,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
                     'ident_me', 'pondmen', 'npers', 'nenfants', 'nactifs', 'sexepr', 'sexecj', 'dip14cj', 'dip14pr',
                     'coeffuc', 'decuc1', 'typmen5', 'cataeu', 'situapr', 'situacj', 'agepr', 'agecj'
                     ]
-                ).sort(columns = ['ident_me'])
+                ).sort_values(by = ['ident_me'])
         menage.rename(
             columns = {
                 'ident_me': 'ident_men',

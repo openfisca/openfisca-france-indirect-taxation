@@ -56,7 +56,7 @@ setup(
 
     extras_require = dict(
         tests = [
-            'pandas >= 0.13',
+            'pandas >= 0.17',
             ],
         ),
     include_package_data = True,  # Will read MANIFEST.in
