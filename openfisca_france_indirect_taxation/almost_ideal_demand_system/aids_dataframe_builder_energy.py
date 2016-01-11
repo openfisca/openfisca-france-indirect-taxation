@@ -20,7 +20,7 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_in
 
 # On commence par cinstruire une dataframe appelée data_conso rassemblant les informations sur les dépenses des ménages.
 data_frame_for_reg = None
-for year in [2000, 2005, 2011]:
+for year in [2005]:
     aggregates_data_frame = get_input_data_frame(year)
     aggregates_data_frame['somme_coicop'] = 0
     for i in range(1, 13):
@@ -89,8 +89,10 @@ for year in [2000, 2005, 2011]:
     # La taille de df est réduite après le merge, ce qui signifie que certains biens de consommation ne sont matchés
     # avec aucun prix. Common nous indique quels sont ces biens. On peut vérifier que se sont des biens qui commencent
     # par 99. Leur présence est inutile pour l'estimation du QAIDS.
-    check = df['indice_prix_produit'].drop_duplicates('indice_prix_produit')
-    check2 = df_depenses_prix['indice_prix_produit'].drop_duplicates('indice_prix_produit')
+    check = df.drop_duplicates(subset = ['indice_prix_produit'], keep = 'last')
+    check = check['indice_prix_produit']
+    check2 = df_depenses_prix.drop_duplicates(subset = ['indice_prix_produit'], keep = 'last')
+    check2 = check2['indice_prix_produit']
     common_check = [x for x in check]
     common_check2 = [x for x in check2]
     common = [x for x in common_check if x not in common_check2]
@@ -184,17 +186,14 @@ for year in [2000, 2005, 2011]:
     df_prix_to_merge = pd.merge(df_prix_to_merge, grouped_autre[['ident_men'] + ['prix_autre']], on = 'ident_men')
     del grouped, grouped_alime, grouped_autre, grouped_carbu
 
-    # Problème: ceux qui ne consomment pas de carbu ou d'alimentaire se voient affecter un indice de prix égal à 0.
+    # Problème: ceux qui ne consomment pas de carbu ou d'alimentaire se voient affecter un indice de prix égal à 0. Ils
+    # sont traités plus bas.
 
-    # On récupère les informations importantes sur les ménages
-    if year == 2005:
-        df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['depenses_carbu'] +
-            ['depenses_alime'] + ['depenses_autre'] + ['vag'] + ['strate'] +
-            ['typmen'] + ['revtot'] + ['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']]
-    else:
-        df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['depenses_carbu'] +
-            ['depenses_alime'] + ['depenses_autre'] + ['vag'] +
-            ['typmen'] + ['revtot'] + ['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']]
+    # On récupère les informations importantes sur les ménages, dont les variables démographiques
+    df_info_menage = aggregates_data_frame[['agepr'] + ['depenses_alime'] + ['depenses_autre'] + ['depenses_carbu'] +
+        ['depenses_tot'] + ['dip14pr'] + ['nenfants'] + ['nactifs'] + ['ocde10'] + ['poste_coicop_2201'] +
+        ['poste_coicop_2202'] + ['poste_coicop_2203'] + ['revtot'] + ['situacj'] + ['situapr'] + ['stalog'] +
+        ['strate'] + ['typmen'] + ['vag']]
     df_info_menage['fumeur'] = 0
     df_info_menage[['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']] = \
         df_info_menage[['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']].astype(float)
@@ -226,32 +225,25 @@ for year in [2000, 2005, 2011]:
 
     dataframe['depenses_par_uc'] = dataframe['depenses_tot'] / dataframe['ocde10']
 
-    # Pour 2005 on a les infos sur les strates dont on veut tirer profit
-    if year == 2005:
-        dataframe = dataframe[['ident_men'] + ['part_carbu'] + ['part_alime'] + ['part_autre'] + ['prix_carbu'] +
-            ['prix_alime'] + ['prix_autre'] + ['depenses_par_uc'] + ['depenses_tot'] + ['typmen'] + ['fumeur'] +
-            ['strate']]
-        dataframe['rural'] = 0
-        dataframe['petite_villes'] = 0
-        dataframe['villes_moyennes'] = 0
-        dataframe['grandes_villes'] = 0
-        dataframe['agglo_paris'] = 0
-
-        dataframe.loc[dataframe['strate'] == 0, 'rural'] = 1
-        dataframe.loc[dataframe['strate'] == 1, 'petite_villes'] = 1
-        dataframe.loc[dataframe['strate'] == 2, 'villes_moyennes'] = 1
-        dataframe.loc[dataframe['strate'] == 3, 'grandes_villes'] = 1
-        dataframe.loc[dataframe['strate'] == 4, 'agglo_paris'] = 1
-
-    else:
-        dataframe = dataframe[['ident_men'] + ['part_carbu'] + ['part_alime'] + ['part_autre'] + ['prix_carbu'] +
-            ['prix_alime'] + ['prix_autre'] + ['depenses_par_uc'] + ['depenses_tot'] + ['typmen'] + ['fumeur']]
-
+    dataframe = dataframe[['ident_men'] + ['part_carbu'] + ['part_alime'] + ['part_autre'] + ['prix_carbu'] +
+        ['prix_alime'] + ['prix_autre'] + ['depenses_par_uc'] + ['depenses_tot'] + ['typmen'] + ['fumeur'] +
+        ['strate'] + ['dip14pr'] + ['agepr'] + ['situapr'] + ['situacj'] + ['stalog'] + ['nenfants'] + ['nactifs']
+        ]
+    dataframe['rural'] = 0
+    dataframe['petite_villes'] = 0
+    dataframe['villes_moyennes'] = 0
+    dataframe['grandes_villes'] = 0
+    dataframe['agglo_paris'] = 0
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la
     # nourriture ce n'est pas qu'ils n'en consomment pas, mais qu'ils n'en ont pas acheté sur la période (réserves, etc)
     dataframe = dataframe[dataframe['prix_alime'] != 0]
+
+    # On enlève les outliers, que l'on considère comme les individus dépensant plus de 25% de leur budget en carburants
+    # Cela correspond à 16 et 13 personnes pour 2000 et 2005 ce qui est négligeable, mais 153 i.e. 2% des consommateurs
+    # pour 2011 ce qui est assez important. Cette différence s'explique par la durée des enquêtes (1 semaine en 2011)
+    dataframe = dataframe[dataframe['part_carbu'] < 0.25]
 
     data_frame_for_reg = dataframe.rename(columns = {'part_carbu': 'w1', 'part_alime': 'w2', 'part_autre': 'w3',
         'prix_carbu': 'p1', 'prix_alime': 'p2', 'prix_autre': 'p3'})
