@@ -417,7 +417,8 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         # label var nenfhors "Nombre d'enfants vivant hors domicile"
         # label var nactifs  "Nombre d'actifs dans le ménage"
         # label var couplepr "Vie en couple de la personne de référence"
-        # label define typmen5 1 "Personne seule" 2 "Famille monoparentale" 3 "Couple sans enfant" 4 "Couple avec enfants" 5 "Autre type de ménage (complexe)"
+        # label define typmen5 1 "Personne seule" 2 "Famille monoparentale" 3 "Couple sans enfant"
+        #                      4 "Couple avec enfants" 5 "Autre type de ménage (complexe)"
         # label values typmen5 typmen5
         # label var typmen5 "Type de ménage (5 modalités)"
         # label var etamatri "Situation matrimoniale de la personne de référence"
@@ -590,16 +591,15 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             inplace = True,
             )
         menage.agecj = menage.agecj.fillna(0)
-        # ajout de la variable vag
+        # Ajout de la variable vag
         try:
             vague = survey.get_values(table = "DEPMEN")
         except:
             vague = survey.get_values(table = "depmen")
-        kept_variables = ['vag']
-        vague = vague[kept_variables]
+        vague = vague['vag'].copy()
         menage = menage.merge(vague, left_index = True, right_index = True)
-        # on met un numéro à chaque vague pour pouvoir faire un meilleur suivi des évolutions temporelles
-        # pour le modèle de demande
+        # On met un numéro à chaque vague pour pouvoir faire un meilleur suivi des évolutions temporelles pour
+        # le modèle de demande
         menage['vag_'] = menage['vag']
         menage.vag.loc[menage.vag_ == 1] = 23
         menage.vag.loc[menage.vag_ == 2] = 24
@@ -607,11 +607,9 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.vag.loc[menage.vag_ == 4] = 26
         menage.vag.loc[menage.vag_ == 5] = 27
         menage.vag.loc[menage.vag_ == 6] = 28
-
         del menage['vag_']
 
-        # homogénéisation de la variable statut du logement qui prend des valeurs différentes pour 2011
-
+        # Homogénéisation de la variable statut du logement qui prend des valeurs différentes pour 2011
         stalog = survey.get_values(table = "DEPMEN", variables = ['stalog'])
         stalog['stalog'] = stalog.stalog.astype('int').copy()
         stalog['new_stalog'] = 0

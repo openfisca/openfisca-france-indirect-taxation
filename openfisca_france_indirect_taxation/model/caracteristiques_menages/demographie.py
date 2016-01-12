@@ -32,7 +32,7 @@ from ..base import *  # noqa analysis:ignore
 
 
 class agepr(Variable):
-    column = DateCol
+    column = AgeCol
     entity_class = Individus
     is_permanent = True
     label = u"Age personne de référence"
