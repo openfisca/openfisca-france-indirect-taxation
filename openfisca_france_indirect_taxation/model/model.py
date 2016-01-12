@@ -29,7 +29,7 @@ from .caracteristiques_menages import (  # noqa analysis:ignore
     )
 from .consommation import (  # noqa analysis:ignore
     consommation_menages,
-    categorie_fiscale_generator,
+    categorie_fiscale_generator2,
     poste_coicop_generator,
     )
 from .taxes_indirectes import (  # noqa analysis:ignore
