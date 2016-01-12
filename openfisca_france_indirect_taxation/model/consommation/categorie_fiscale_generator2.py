@@ -38,17 +38,6 @@ from openfisca_france_indirect_taxation.utils import get_parametres_fiscalite_da
 
 categories_fiscales_data_frame = None
 
-def preload_categories_fiscales_data_frame():
-    global categories_fiscales_data_frame
-    if categories_fiscales_data_frame is None:
-        categories_fiscales_data_frame = get_parametres_fiscalite_data_frame()
-        categories_fiscales_data_frame = categories_fiscales_data_frame[
-            ['posteCOICOP', 'annee', 'categoriefiscale']
-            ].copy()
-
-
-preload_categories_fiscales_data_frame()
-
 
 def function_creator(postes_coicop, year_start = None, year_stop = None):
     start = date(year_start, 1, 1) if year_start is not None else None
@@ -109,3 +98,10 @@ for categorie_fiscale in existing_categ:
     del definitions_by_name
 
 
+def preload_categories_fiscales_data_frame():
+    global categories_fiscales_data_frame
+    if categories_fiscales_data_frame is None:
+        categories_fiscales_data_frame = get_parametres_fiscalite_data_frame()
+        categories_fiscales_data_frame = categories_fiscales_data_frame[
+            ['posteCOICOP', 'annee', 'categoriefiscale']
+            ].copy()

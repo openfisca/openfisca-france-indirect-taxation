@@ -49,11 +49,8 @@ def init_country():
 
         def prefill_cache(self):
             # Compute one "zone APL" variable, to pre-load CSV of "code INSEE commune" to "Zone APL".
-            # from .model.prestations import aides_logement
-            # aides_logement.preload_zone_apl()
-            # from .model.prelevements_obligatoires.prelevements_sociaux import taxes_salaires_main_oeuvre
-            # taxes_salaires_main_oeuvre.preload_taux_versement_transport()
-            pass
+            from .model.consommation import categorie_fiscale_generator2
+            categorie_fiscale_generator2.preload_categories_fiscales_data_frame()
 
     # Define class attributes after class declaration to avoid "name is not defined" exceptions.
     TaxBenefitSystem.Scenario = Scenario
@@ -61,3 +58,14 @@ def init_country():
     from .model import model  # noqa analysis:ignore
 
     return TaxBenefitSystem
+
+
+def init_tax_benefit_system():
+    """
+    Helper function which suits most of the time.
+
+    Use `init_country` if you need to get the `TaxBenefitSystem` class.
+    """
+    TaxBenefitSystem = init_country()
+    tax_benefit_system = TaxBenefitSystem()
+    return tax_benefit_system
