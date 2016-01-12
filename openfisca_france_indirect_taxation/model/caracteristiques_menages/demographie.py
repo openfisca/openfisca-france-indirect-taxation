@@ -31,6 +31,16 @@ import numpy
 from ..base import *  # noqa analysis:ignore
 
 
+class age(Variable):
+    column = AgeCol
+    entity_class = Individus
+    label = u"Age de l'individu"
+
+    def function(self, simulation, period):
+        birth = simulation.calculate('birth', period)
+        return period, (numpy.datetime64(period.date) - birth).astype('timedelta64[Y]')
+
+
 class agepr(Variable):
     column = AgeCol
     entity_class = Individus
@@ -64,13 +74,3 @@ class role_menage(Variable):
     entity_class = Individus
     is_permanent = True
     label = u"Rôle dans le ménage"
-
-
-class age(Variable):
-    column = AgeCol
-    entity_class = Individus
-    label = u"Age de l'individu"
-
-    def function(self, simulation, period):
-        birth = simulation.calculate('birth', period)
-        return period, (numpy.datetime64(period.date) - birth).astype('timedelta64[Y]')
