@@ -37,3 +37,4 @@ __all__ = [
 
 TaxBenefitSystem = init_country()
 tax_benefit_system = TaxBenefitSystem()
+tax_benefit_system.prefill_cache()
