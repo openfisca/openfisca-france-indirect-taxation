@@ -24,31 +24,17 @@ assets_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
     )
 
-depenses_ticpe_totales_bdf = pd.DataFrame.from_csv(os.path.join(assets_directory,
-        'openfisca_france_indirect_taxation', 'assets',
-        'depenses_ticpe_totales_bdf.csv'), sep = ',', header = -1)
-depenses_ticpe_totales_bdf.rename(columns = {1: 'total bdf'}, inplace = True)
-depenses_ticpe_totales_bdf.index = depenses_ticpe_totales_bdf.index.str.replace('en millions d euros en ', '')
-depenses_ticpe_totales_bdf = depenses_ticpe_totales_bdf.sort_index()
-depenses_ticpe_totales_bdf.index = depenses_ticpe_totales_bdf.index.astype(int)
-
-depenses_ticpe_diesel_bdf = pd.DataFrame.from_csv(os.path.join(assets_directory,
-        'openfisca_france_indirect_taxation', 'assets',
-        'depenses_ticpe_diesel_bdf.csv'), sep = ',', header = -1)
-depenses_ticpe_diesel_bdf.rename(columns = {1: 'diesel bdf'}, inplace = True)
-depenses_ticpe_diesel_bdf.index = depenses_ticpe_diesel_bdf.index.str.replace('en millions d euros en ', '')
-depenses_ticpe_diesel_bdf = depenses_ticpe_diesel_bdf.sort_index()
-depenses_ticpe_diesel_bdf.index = depenses_ticpe_diesel_bdf.index.astype(int)
-
-
-depenses_ticpe_essence_bdf = pd.DataFrame.from_csv(os.path.join(assets_directory,
-        'openfisca_france_indirect_taxation', 'assets',
-        'depenses_ticpe_essence_bdf.csv'), sep = ',', header = -1)
-depenses_ticpe_essence_bdf.rename(columns = {1: 'essence bdf'}, inplace = True)
-depenses_ticpe_essence_bdf.index = depenses_ticpe_essence_bdf.index.str.replace('en millions d euros en ', '')
-depenses_ticpe_essence_bdf = depenses_ticpe_essence_bdf.sort_index()
-depenses_ticpe_essence_bdf.index = depenses_ticpe_essence_bdf.index.astype(int)
-
+products = ['totales', 'essence', 'diesel']
+depenses_ticpe_bdf = pd.DataFrame()
+for element in products:
+    depenses_ticpe = pd.DataFrame.from_csv(os.path.join(assets_directory,
+            'openfisca_france_indirect_taxation', 'assets',
+            'depenses_ticpe_{}_bdf.csv'.format(element)), sep = ',', header = -1)
+    depenses_ticpe.rename(columns = {1: '{} bdf'.format(element)}, inplace = True)
+    depenses_ticpe.index = depenses_ticpe.index.str.replace('en millions d euros en ', '')
+    depenses_ticpe = depenses_ticpe.sort_index()
+    depenses_ticpe.index = depenses_ticpe.index.astype(int)
+    depenses_ticpe_bdf = concat([depenses_ticpe_bdf, depenses_ticpe], axis = 1)
 
 accises = get_accise_ticpe_majoree()
 accises.index = accises.index.astype(int)
@@ -90,12 +76,11 @@ recettes_ticpe_non_vp['recettes totales non vp'] = (
     recettes_ticpe_non_vp['recettes diesel'] + recettes_ticpe_non_vp['recettes essence'])
 
 recettes_ticpe_totale = concat([recettes_ticpe_non_vp[['recettes totales non vp'] +
-    ['recettes diesel'] + ['recettes essence']], depenses_ticpe_totales_bdf, depenses_ticpe_diesel_bdf,
-    depenses_ticpe_essence_bdf], axis = 1)
+    ['recettes diesel'] + ['recettes essence']], depenses_ticpe_bdf], axis = 1)
 
 recettes_ticpe_totale = recettes_ticpe_totale.dropna()
 recettes_ticpe_totale['recettes totales tous carburants'] = \
-    recettes_ticpe_totale['recettes totales non vp'] + recettes_ticpe_totale['total bdf']
+    recettes_ticpe_totale['recettes totales non vp'] + recettes_ticpe_totale['totales bdf']
 recettes_ticpe_totale['recettes totales diesel'] = \
     recettes_ticpe_totale['recettes diesel'] + recettes_ticpe_totale['diesel bdf']
 recettes_ticpe_totale['recettes totales essence'] = \

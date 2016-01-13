@@ -17,37 +17,18 @@ assets_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
     )
 
-depenses_transports_totales = pd.DataFrame.from_csv(os.path.join(assets_directory,
-        'openfisca_france_indirect_taxation', 'assets',
-        'depenses_transports_totales_bdf.csv'), sep = ',', header = -1)
-depenses_transports_totales.rename(columns = {1: 'transports bdf'}, inplace = True)
-depenses_transports_totales.index = depenses_transports_totales.index.str.replace('en ', '')
-depenses_transports_totales = depenses_transports_totales.sort_index()
+products = ['transports', 'carburants', 'essence', 'diesel']
+depenses_bdf = pd.DataFrame()
+for element in products:
+    depenses = pd.DataFrame.from_csv(os.path.join(assets_directory,
+            'openfisca_france_indirect_taxation', 'assets',
+            'depenses_{}_totales_bdf.csv').format(element), sep = ',', header = -1)
+    depenses.rename(columns = {1: '{} bdf'.format(element)}, inplace = True)
+    depenses.index = depenses.index.str.replace('en ', '')
+    depenses = depenses.sort_index()
+    depenses_bdf = concat([depenses, depenses_bdf], axis = 1)
 
-depenses_carburants_totales = pd.DataFrame.from_csv(os.path.join(assets_directory,
-        'openfisca_france_indirect_taxation', 'assets',
-        'depenses_carburants_totales_bdf.csv'), sep = ',', header = -1)
-depenses_carburants_totales.rename(columns = {1: 'carburants bdf'}, inplace = True)
-depenses_carburants_totales.index = depenses_carburants_totales.index.str.replace('en ', '')
-depenses_carburants_totales = depenses_carburants_totales.sort_index()
-
-depenses_diesel_totales = pd.DataFrame.from_csv(os.path.join(assets_directory,
-        'openfisca_france_indirect_taxation', 'assets',
-        'depenses_diesel_totales_bdf.csv'), sep = ',', header = -1)
-depenses_diesel_totales.rename(columns = {1: 'diesel bdf'}, inplace = True)
-depenses_diesel_totales.index = depenses_diesel_totales.index.str.replace('en ', '')
-depenses_diesel_totales = depenses_diesel_totales.sort_index()
-
-depenses_essence_totales = pd.DataFrame.from_csv(os.path.join(assets_directory,
-        'openfisca_france_indirect_taxation', 'assets',
-        'depenses_essence_totales_bdf.csv'), sep = ',', header = -1)
-depenses_essence_totales.rename(columns = {1: 'essence bdf'}, inplace = True)
-depenses_essence_totales.index = depenses_essence_totales.index.str.replace('en ', '')
-depenses_essence_totales = depenses_essence_totales.sort_index()
-
-comparaison_bdf_agregats = concat([depenses_transports_totales, depenses_carburants_totales, depenses_diesel_totales,
-    depenses_essence_totales], axis = 1)
-comparaison_bdf_agregats.index = comparaison_bdf_agregats.index.astype(int)
+depenses_bdf.index = depenses_bdf.index.astype(int)
 
 parametres_fiscalite_file_path = os.path.join(
     assets_directory,
@@ -65,7 +46,7 @@ masses_cn_transports = masses_cn_data_frame[masses_cn_data_frame['Fonction'] == 
 masses_cn_transports = masses_cn_transports.transpose()
 masses_cn_transports.rename(columns = {69: 'transports agregat'}, inplace = True)
 
-comparaison_bdf_agregats = concat([comparaison_bdf_agregats, masses_cn_carburants, masses_cn_transports], axis = 1)
+comparaison_bdf_agregats = concat([depenses_bdf, masses_cn_carburants, masses_cn_transports], axis = 1)
 comparaison_bdf_agregats = comparaison_bdf_agregats.dropna()
 
 graph_builder_line(comparaison_bdf_agregats[['carburants agregat'] + ['carburants bdf']])
