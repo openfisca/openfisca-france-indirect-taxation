@@ -38,18 +38,6 @@ for coicop12_index in range(1, 13):
         ))
 
 
-class diesel_quantite(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Quantité de diesel consommée (en hecto-litres)"
-
-
-class supercarburants_quantite(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Quantité de supercarburants (super 95, super98 et superE10) consommée (en hecto-litres)"
-
-
 class consommation_alcools_forts(Variable):
     column = FloatCol
     entity_class = Menages
@@ -212,6 +200,12 @@ class consommation_vin(Variable):
         return period, categorie_fiscale_12
 
 
+class diesel_quantite(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantité de diesel consommée (en hecto-litres)"
+
+
 class somme_coicop12(Variable):
     column = FloatCol
     entity_class = Menages
@@ -270,3 +264,9 @@ class somme_coicop12_conso(Variable):
             coicop12_7 +
             coicop12_8
             )
+
+
+class supercarburants_quantite(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantité de supercarburants (super 95, super98 et superE10) consommée (en hecto-litres)"
