@@ -26,18 +26,11 @@
 from ..base import *  # noqa analysis:ignore
 
 
-class veh_tot(Variable):
-    column = IntCol
+class pourcentage_vehicule_essence(Variable):
+    column = FloatCol
     entity_class = Menages
     is_permanent = True
-    label = u"Nombre de véhicules total dans le ménage"
-
-
-class veh_essence(Variable):
-    column = IntCol
-    entity_class = Menages
-    is_permanent = True
-    label = u"Nombre de véhicules essence dans le ménage"
+    label = u"Pourcentage de véhicules essence dans le ménage"
 
 
 class veh_diesel(Variable):
@@ -47,8 +40,15 @@ class veh_diesel(Variable):
     label = u"Nombre de véhicules diesel dans le ménage"
 
 
-class pourcentage_vehicule_essence(Variable):
-    column = FloatCol
+class veh_essence(Variable):
+    column = IntCol
     entity_class = Menages
     is_permanent = True
-    label = u"Pourcentage de véhicules essence dans le ménage"
+    label = u"Nombre de véhicules essence dans le ménage"
+
+
+class veh_tot(Variable):
+    column = IntCol
+    entity_class = Menages
+    is_permanent = True
+    label = u"Nombre de véhicules total dans le ménage"

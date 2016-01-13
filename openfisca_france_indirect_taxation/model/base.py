@@ -51,19 +51,16 @@ __all__ = [
     ]
 
 
-# Functions
-
-
-def taux_implicite(accise, tva, prix_ttc):
-    """Calcule le taux implicite sur les carburants"""
-    return (accise * (1 + tva)) / (prix_ttc - accise * (1 + tva))
-
-
 def droit_d_accise(depense, droit_cn, consommation_cn, taux_plein_tva):
     """
     Calcule le montant de droit d'accise sur un volume de dépense payé pour le poste adéquat.
     """
     return depense * ((1 + taux_plein_tva) * droit_cn) / (consommation_cn - (1 + taux_plein_tva) * droit_cn)
+
+
+def taux_implicite(accise, tva, prix_ttc):
+    """Calcule le taux implicite sur les carburants"""
+    return (accise * (1 + tva)) / (prix_ttc - accise * (1 + tva))
 
 
 def tax_from_expense_including_tax(expense = None, tax_rate = None):

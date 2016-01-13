@@ -10,9 +10,9 @@ TICPE: Taxe intérieure sur la consommation des produits énergétiques
 from pandas import concat
 
 from openfisca_france_indirect_taxation.example.utils_example import graph_builder_bar_list
-from openfisca_france_indirect_taxation.model.get_dataframe_from_legislation.get_accises import get_accises_carburants
-from openfisca_france_indirect_taxation.model.get_dataframe_from_legislation.get_tva import get_tva_taux_plein
-from openfisca_france_indirect_taxation.model.get_dataframe_from_legislation.get_prix_carburants import \
+from openfisca_france_indirect_taxation.get_dataframe_from_legislation.get_accises import get_accises_carburants
+from openfisca_france_indirect_taxation.get_dataframe_from_legislation.get_tva import get_tva_taux_plein
+from openfisca_france_indirect_taxation.get_dataframe_from_legislation.get_prix_carburants import \
     get_prix_carburants
 
 # Taux implicite du diesel:

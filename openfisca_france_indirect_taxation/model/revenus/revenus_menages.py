@@ -36,34 +36,6 @@ class decuc(Variable):
     label = u"Décile de niveau de vie (revenu/unité de consommation)"
 
 
-class rev_disp_loyerimput(Variable):
-    column = FloatCol
-    entity_class = Menages
-    is_permanent = True
-    label = u"Revenu disponible du ménage auquel on ajoute le loyer imputé"
-
-
-class rev_disponible(Variable):
-    column = FloatCol
-    entity_class = Menages
-    is_permanent = True
-    label = u"Revenu disponible du ménage"
-
-
-class revtot(Variable):
-    column = IntCol
-    entity_class = Menages
-    is_permanent = True
-    label = u"Revenu total du ménage"
-
-
-class revtotuc(Variable):
-    column = IntCol
-    entity_class = Menages
-    is_permanent = True
-    label = u"Revenu total par unité de consommation du ménage"
-
-
 class niveau_de_vie(Variable):
     column = FloatCol
     entity_class = Menages
@@ -100,6 +72,35 @@ class niveau_vie_decile(Variable):
         labels = numpy.arange(1, 11)
         # Alternative method
         # method = 2
-        # niveau_vie_decile, values = mark_weighted_percentiles(niveau_de_vie, labels, pondmen, method, return_quantiles = True)
+        # niveau_vie_decile, values = mark_weighted_percentiles(
+        # niveau_de_vie, labels, pondmen, method, return_quantiles = True)
         niveau_vie_decile, values = weighted_quantiles(niveau_de_vie, labels, pondmen, return_quantiles = True)
         return period, niveau_vie_decile
+
+
+class rev_disp_loyerimput(Variable):
+    column = FloatCol
+    entity_class = Menages
+    is_permanent = True
+    label = u"Revenu disponible du ménage auquel on ajoute le loyer imputé"
+
+
+class rev_disponible(Variable):
+    column = FloatCol
+    entity_class = Menages
+    is_permanent = True
+    label = u"Revenu disponible du ménage"
+
+
+class revtot(Variable):
+    column = IntCol
+    entity_class = Menages
+    is_permanent = True
+    label = u"Revenu total du ménage"
+
+
+class revtotuc(Variable):
+    column = IntCol
+    entity_class = Menages
+    is_permanent = True
+    label = u"Revenu total par unité de consommation du ménage"

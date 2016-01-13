@@ -54,7 +54,7 @@ for year in [2000, 2005, 2011]:
 
     for i in range(1, 4):
         data_quaids['el_uncomp_{}'.format(i)] = \
-            data_quaids['ce_{}_{}'.format(i,i)] * data_quaids['part_depenses_tot']
+            data_quaids['ce_{}_{}'.format(i, i)] * data_quaids['part_depenses_tot']
 
     # Compute the estimation of the income elasticities of consumption
     for i in range(1, 4):
