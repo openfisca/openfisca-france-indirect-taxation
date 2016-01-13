@@ -13,7 +13,7 @@ import os
 import pandas as pd
 
 from ipp_macro_series_parser.agregats_transports.transports_cleaner import g_3a
-from openfisca_france_indirect_taxation.model.get_dataframe_from_legislation.get_accises import \
+from openfisca_france_indirect_taxation.get_dataframe_from_legislation.get_accises import \
     get_accise_ticpe_majoree
 
 """Ici on applique aux quantités de carburants consommées par des véhicules autres que les ménages
