@@ -5,6 +5,7 @@ Created on Tue Aug 18 14:32:30 2015
 @author: thomas.douenne
 """
 
+# Import de modules généraux
 from __future__ import division
 
 import numpy as np
@@ -12,6 +13,7 @@ import csv
 import pkg_resources
 import os
 
+# Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_on_ticpe
 from openfisca_france_indirect_taxation.example.dataframes_from_legislation.get_accises import \
     get_accise_ticpe_majoree
@@ -41,19 +43,22 @@ if __name__ == '__main__':
         'diesel_ticpe'
         ]
 
+    # Calcul des montants agrégés des quantités de carburants consommées par les ménages, dont essence et diesel
     quantites_carburants_consommees = dict()
     quantites_diesel_consommees = dict()
     quantites_essence_consommees = dict()
     for year in [2000, 2005, 2011]:
         try:
-            data_simulation = simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_with_e10, year = year)
+            data_simulation = \
+                simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_with_e10, year = year)
             diesel_ticpe_ponderee = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()
             sp95_ticpe_ponderee = (data_simulation['sp95_ticpe'] * data_simulation['pondmen']).sum()
             sp98_ticpe_ponderee = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()
             super_plombe_ticpe_ponderee = (data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']).sum()
             sp_e10_ticpe_ponderee = (data_simulation['sp_e10_ticpe'] * data_simulation['pondmen']).sum()
         except:
-            data_simulation = simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_without_e10, year = year)
+            data_simulation = \
+                simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_without_e10, year = year)
             diesel_ticpe_ponderee = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()
             sp95_ticpe_ponderee = (data_simulation['sp95_ticpe'] * data_simulation['pondmen']).sum()
             sp98_ticpe_ponderee = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()
@@ -80,6 +85,7 @@ if __name__ == '__main__':
         quantites_diesel_consommees['en milliers de m3 en {}'.format(year)] = quantite_diesel / 1000000
         quantites_essence_consommees['en milliers de m3 en {}'.format(year)] = quantite_essence / 1000000
 
+    # Enregistrement des montants agrégées dans des fichiers csv
     assets_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
         )

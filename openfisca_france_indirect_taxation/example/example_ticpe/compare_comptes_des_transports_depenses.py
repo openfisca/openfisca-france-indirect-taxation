@@ -5,14 +5,22 @@ Created on Wed Aug 19 15:18:46 2015
 @author: thomas.douenne
 """
 
+# L'objectif des "compare" est d'évaluer la qualité des calages effectués. Ils comparent les dépenses ou quantités
+# agrégées de Budget des Familles après calage, avec celles de la comptabilité nationale.
+
+# Import de modules généraux
 from __future__ import division
+
 import pkg_resources
 import os
 import pandas as pd
 from pandas import concat
 
+# Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.example.utils_example import graph_builder_line
 
+# Import des fichiers csv donnant les montants agrégés des dépenses répertoriées dans les enquêtes BdF.
+# Ces montants sont calculés dans compute_depenses_carburants
 assets_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
     )
@@ -30,6 +38,7 @@ for element in products:
 
 depenses_bdf.index = depenses_bdf.index.astype(int)
 
+# Import des fichiers csv donnant les montants agrégés des mêmes postes de consommation d'après la comptabilité nationale
 parametres_fiscalite_file_path = os.path.join(
     assets_directory,
     'openfisca_france_indirect_taxation',
@@ -49,5 +58,6 @@ masses_cn_transports.rename(columns = {69: 'transports agregat'}, inplace = True
 comparaison_bdf_agregats = concat([depenses_bdf, masses_cn_carburants, masses_cn_transports], axis = 1)
 comparaison_bdf_agregats = comparaison_bdf_agregats.dropna()
 
+# Créer des graphiques pour comparer les consommations obtenues via Bdf vis-à-vis de la comptabilité nationale
 graph_builder_line(comparaison_bdf_agregats[['carburants agregat'] + ['carburants bdf']])
 graph_builder_line(comparaison_bdf_agregats[['transports agregat'] + ['transports bdf']])
