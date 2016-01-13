@@ -48,9 +48,11 @@ def init_country():
         preprocess_legislation = staticmethod(preprocessing.preprocess_legislation)
 
         def prefill_cache(self):
-            # Compute one "zone APL" variable, to pre-load CSV of "code INSEE commune" to "Zone APL".
+            # Define categorie_fiscale_* and poste_coicp_* variables
             from .model.consommation import categorie_fiscale_generator2
             categorie_fiscale_generator2.preload_categories_fiscales_data_frame()
+            from .model.consommation import poste_coicop_generator2
+            poste_coicop_generator2.preload_postes_coicop_data_frame()
 
     # Define class attributes after class declaration to avoid "name is not defined" exceptions.
     TaxBenefitSystem.Scenario = Scenario
