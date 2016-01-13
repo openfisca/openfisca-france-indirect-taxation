@@ -7,7 +7,7 @@ Created on Mon Aug 17 15:48:31 2015
 
 
 from openfisca_france_indirect_taxation.example.utils_example import graph_builder_bar_list
-from openfisca_france_indirect_taxation.get_dataframe_from_legislation.get_accises import \
+from openfisca_france_indirect_taxation.example.dataframes_from_legislation.get_accises import \
     get_accise_ticpe_majoree
 
 liste = ['ticpe_gazole', 'ticpe_super9598', 'super_plombe_ticpe']

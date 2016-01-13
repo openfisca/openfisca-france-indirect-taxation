@@ -13,7 +13,7 @@ import os
 import pandas as pd
 
 from ipp_macro_series_parser.agregats_transports.transports_cleaner import g_3a
-from openfisca_france_indirect_taxation.get_dataframe_from_legislation.get_accises import \
+from openfisca_france_indirect_taxation.example.dataframes_from_legislation.get_accises import \
     get_accise_ticpe_majoree
 
 """Ici on applique aux quantités de carburants consommées par des véhicules autres que les ménages
@@ -27,9 +27,14 @@ assets_directory = os.path.join(
 products = ['totales', 'essence', 'diesel']
 depenses_ticpe_bdf = pd.DataFrame()
 for element in products:
-    depenses_ticpe = pd.DataFrame.from_csv(os.path.join(assets_directory,
+    depenses_ticpe = pd.DataFrame.from_csv(
+        os.path.join(
+            assets_directory,
             'openfisca_france_indirect_taxation', 'assets',
-            'depenses_ticpe_{}_bdf.csv'.format(element)), sep = ',', header = -1)
+            'depenses_ticpe_{}_bdf.csv'.format(element)),
+        sep = ',',
+        header = -1
+        )
     depenses_ticpe.rename(columns = {1: '{} bdf'.format(element)}, inplace = True)
     depenses_ticpe.index = depenses_ticpe.index.str.replace('en millions d euros en ', '')
     depenses_ticpe = depenses_ticpe.sort_index()
