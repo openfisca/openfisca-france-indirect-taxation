@@ -7,7 +7,7 @@ from __future__ import division
 from datetime import date
 
 from openfisca_core.columns import FloatCol
-from openfisca_core.formulas import dated_function, DatedVariable
+from openfisca_core.formulas import Variable
 
 
 from openfisca_france_indirect_taxation.model.base import *
@@ -29,16 +29,17 @@ def generate_variables():
             extraction_condition,
             'description'].values.squeeze().tolist()
         # TODO deal with the year where there exists
+        print '==='
         print poste
-        print label
         class_name = u'poste_coicop_{}'.format(poste)
+        print class_name
+        print label
         # Trick to create a class with a dynamic name.
-        definitions_by_name = dict(
+        type(class_name.encode('utf-8'), (Variable,), dict(
             column = FloatCol,
             entity_class = Menages,
             label = label,
-            )
-        type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+            ))
 
 
 def preload_postes_coicop_data_frame():
@@ -47,7 +48,7 @@ def preload_postes_coicop_data_frame():
         postes_coicop_data_frame = get_parametres_fiscalite_data_frame()
         postes_coicop_data_frame = postes_coicop_data_frame[
             ['posteCOICOP', 'annee', 'description', 'categoriefiscale']].copy()
-        postes_coicop_data_frame.set_index('posteCOICOP', inplace = True)
-        postes_coicop_data_frame.reset_index(inplace = True)
+        # postes_coicop_data_frame.set_index('posteCOICOP', inplace = True)
+        # postes_coicop_data_frame.reset_index(inplace = True)
         postes_coicop_data_frame.drop_duplicates('posteCOICOP', keep = 'last', inplace = True)
         generate_variables()

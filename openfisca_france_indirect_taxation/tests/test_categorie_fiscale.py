@@ -62,5 +62,6 @@ def test_categorie_fiscale_0():
 if __name__ == '__main__':
     import logging
     import sys
-
+    test_categorie_fiscale_0()
+    test_categorie_fiscale_1()
     logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
