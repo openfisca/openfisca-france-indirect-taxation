@@ -53,6 +53,8 @@ def init_country():
             categorie_fiscale_generator2.preload_categories_fiscales_data_frame()
             from .model.consommation import poste_coicop_generator2
             poste_coicop_generator2.preload_postes_coicop_data_frame()
+            # Reindex columns since preload functions generate new columns.
+            self.index_columns()
 
     # Define class attributes after class declaration to avoid "name is not defined" exceptions.
     TaxBenefitSystem.Scenario = Scenario
