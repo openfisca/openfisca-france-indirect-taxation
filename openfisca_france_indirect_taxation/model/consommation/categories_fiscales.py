@@ -78,12 +78,10 @@ def generate_variables():
                 dated_func = function_creator(previous_postes_coicop, year_start = year_start, year_stop = year_stop)
                 dated_function_name = u"function_{year_start}_{year_stop}".format(
                     year_start = year_start, year_stop = year_stop)
-                print categorie_fiscale, u"function_{year_start}_{year_stop}".format(
-                    year_start = year_start, year_stop = year_stop)
+
                 if len(previous_postes_coicop) != 0:
                     functions_by_name[dated_function_name] = dated_func
-                    import inspect
-                    print inspect.getsource(dated_func)
+
                 year_start = year
 
             previous_postes_coicop = postes_coicop

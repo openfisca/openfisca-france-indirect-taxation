@@ -49,10 +49,10 @@ def init_country():
 
         def prefill_cache(self):
             # Define categorie_fiscale_* and poste_coicp_* variables
-            from .model.consommation import categorie_fiscale_generator2
-            categorie_fiscale_generator2.preload_categories_fiscales_data_frame()
-            from .model.consommation import poste_coicop_generator2
-            poste_coicop_generator2.preload_postes_coicop_data_frame()
+            from .model.consommation import categories_fiscales
+            categories_fiscales.preload_categories_fiscales_data_frame()
+            from .model.consommation import postes_coicop
+            postes_coicop.preload_postes_coicop_data_frame()
             # Reindex columns since preload functions generate new columns.
             self.index_columns()
 

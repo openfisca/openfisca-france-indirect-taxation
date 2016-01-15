@@ -137,7 +137,7 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
     try:
         data_frame.reset_index(inplace = True)
     except ValueError, e:
-        print "ignoring reset_index because \n" + str(e)
+        log.info('ignoring reset_index because \n" + str(e)')
 
     # Remove duplicated colums causing bug with HDFStore
     # according to https://github.com/pydata/pandas/issues/6240
@@ -173,9 +173,8 @@ def run(years_calage):
         start = time.time()
         run_all(year_calage, year_data_list)
         log.info("Finished {}".format(time.time() - start))
-        print "Base construite pour l'année {} à partir de l'enquête bdf {}".format(
-            year_calage, find_nearest_inferior(year_data_list, year_calage)
-            )
+        log.info("Base construite pour l'année {} à partir de l'enquête bdf {}".format(
+            year_calage, find_nearest_inferior(year_data_list, year_calage)))
 
 if __name__ == '__main__':
     import sys

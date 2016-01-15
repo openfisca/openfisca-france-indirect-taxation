@@ -41,8 +41,6 @@ def get_input_data_frame(year):
     input_data_frame.reset_index(inplace = True)
     return input_data_frame
 
-data = get_input_data_frame(2005)
-
 
 def test_survey_simulation(year = 2005):
     input_data_frame = get_input_data_frame(year)
