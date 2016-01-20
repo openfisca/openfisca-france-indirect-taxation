@@ -1,29 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014, 2015 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
 """Test YAML files."""
 
 
@@ -35,10 +12,11 @@ import logging
 import os
 
 import numpy as np
+import yaml
+
 from openfisca_core import conv, periods, scenarios
 from openfisca_core.tools import assert_near
-from openfisca_france_indirect_taxation.tests.base import tax_benefit_system
-import yaml
+from openfisca_france_indirect_taxation.tests import base
 
 
 log = logging.getLogger(__name__)
@@ -47,15 +25,11 @@ options_by_dir = collections.OrderedDict((
     (
         os.path.abspath(os.path.join(os.path.dirname(__file__), 'formulas')),
         dict(
-            accept_other_period = False,
+            calculate_output = False,
             default_absolute_error_margin = 0.005,
             ),
         ),
     ))
-
-tax_benefit_system_by_reform_name = {
-    None: tax_benefit_system,
-    }
 
 
 # YAML configuration
@@ -97,7 +71,8 @@ yaml.add_representer(unicode, lambda dumper, data: dumper.represent_scalar(u'tag
 # Functions
 
 
-def assert_near_any_period(value, target_value, absolute_error_margin = 0, message = '', relative_error_margin = None):
+def assert_near_calculate_output(value, target_value, absolute_error_margin = 0, message = '',
+        relative_error_margin = None):
     # Redefinition of assert_near that accepts to compare monthy values with yearly values.
     assert absolute_error_margin is not None or relative_error_margin is not None
     if isinstance(value, (list, tuple)):
@@ -134,7 +109,7 @@ def assert_near_any_period(value, target_value, absolute_error_margin = 0, messa
                     abs(target_value - value), abs(relative_error_margin * target_value))
 
 
-def check(name, period_str, test, force):
+def check(yaml_path, name, period_str, test, force):
     scenario = test['scenario']
     # scenario.suggest()
     simulation = scenario.new_simulation(debug = True)
@@ -163,7 +138,7 @@ def check(name, period_str, test, force):
                     )
 
 
-def check_any_period(name, period_str, test, force):
+def check_calculate_output(yaml_path, name, period_str, test, force):
     scenario = test['scenario']
     scenario.suggest()
     simulation = scenario.new_simulation(debug = True)
@@ -175,32 +150,21 @@ def check_any_period(name, period_str, test, force):
                 continue
             if isinstance(expected_value, dict):
                 for requested_period, expected_value_at_period in expected_value.iteritems():
-                    assert_near_any_period(
-                        simulation.calculate(variable_name, requested_period, accept_other_period = True),
+                    assert_near_calculate_output(
+                        simulation.calculate_output(variable_name, requested_period),
                         expected_value_at_period,
                         absolute_error_margin = test.get('absolute_error_margin'),
                         message = u'{}@{}: '.format(variable_name, requested_period),
                         relative_error_margin = test.get('relative_error_margin'),
                         )
             else:
-                assert_near_any_period(
-                    simulation.calculate(variable_name, accept_other_period = True),
+                assert_near_calculate_output(
+                    simulation.calculate_output(variable_name),
                     expected_value,
                     absolute_error_margin = test.get('absolute_error_margin'),
                     message = u'{}@{}: '.format(variable_name, period_str),
                     relative_error_margin = test.get('relative_error_margin'),
                     )
-
-
-def get_tax_benefit_system(reform_name):
-    reform = tax_benefit_system_by_reform_name.get(reform_name)
-    if reform is None:
-        assert reform_name == 'inversion_revenus', 'Unknown reform: {}'.format(reform_name)
-        from openfisca_france.reforms import inversion_revenus
-
-        reform = inversion_revenus.build_reform(tax_benefit_system)
-        tax_benefit_system_by_reform_name[reform_name] = reform
-    return reform
 
 
 def test(force = False, name_filter = None, options_by_path = None):
@@ -223,6 +187,13 @@ def test(force = False, name_filter = None, options_by_path = None):
                 ]
         else:
             yaml_paths = [path]
+
+        reform_keys = options.get('reforms')
+        tax_benefit_system_for_path = base.get_cached_composed_reform(
+            reform_keys = reform_keys,
+            tax_benefit_system = base.tax_benefit_system,
+            ) if reform_keys is not None else base.tax_benefit_system
+
         for yaml_path in yaml_paths:
             filename_core = os.path.splitext(os.path.basename(yaml_path))[0]
             with open(yaml_path) as yaml_file:
@@ -241,12 +212,15 @@ def test(force = False, name_filter = None, options_by_path = None):
                     default_flow_style = False, indent = 2, width = 120)))
 
             for test in tests:
-                test, error = scenarios.make_json_or_python_to_test(get_tax_benefit_system(options.get('reform')),
-                    default_absolute_error_margin = options['default_absolute_error_margin'])(test)
+                test, error = scenarios.make_json_or_python_to_test(
+                    tax_benefit_system = tax_benefit_system_for_path,
+                    default_absolute_error_margin = options['default_absolute_error_margin'],
+                    )(test)
                 if error is not None:
                     embedding_error = conv.embed_error(test, u'errors', error)
                     assert embedding_error is None, embedding_error
-                    raise ValueError("Error in test {}:\n{}".format(yaml_path, yaml.dump(test, allow_unicode = True,
+                    raise ValueError("Error in test {}:\n{}\nYaml test content: \n{}\n".format(
+                        yaml_path, error, yaml.dump(test, allow_unicode = True,
                         default_flow_style = False, indent = 2, width = 120)))
 
                 if not force and test.get(u'ignore', False):
@@ -255,8 +229,9 @@ def test(force = False, name_filter = None, options_by_path = None):
                         and name_filter not in (test.get('name', u'')) \
                         and name_filter not in (test.get('keywords', [])):
                     continue
-                checker = check_any_period if options['accept_other_period'] else check
-                yield checker, test.get('name') or filename_core, unicode(test['scenario'].period), test, force
+                checker = check_calculate_output if options['calculate_output'] else check
+                yield checker, yaml_path, test.get('name') or filename_core, unicode(test['scenario'].period), test, \
+                    force
 
 
 if __name__ == "__main__":
@@ -281,15 +256,15 @@ if __name__ == "__main__":
             options = options_by_dir.get(dir)
             if options is None:
                 options = dict(
-                    accept_other_period = False,
-                    default_absolute_error_margin = 0.02,
+                    calculate_output = False,
+                    default_absolute_error_margin = 0.005,
                     )
             options_by_path[path] = options
     else:
         options_by_path = None
 
     tests_found = False
-    for test_index, (function, name, period_str, test, force) in enumerate(
+    for test_index, (function, yaml_path, name, period_str, test, force) in enumerate(
             test(
                 force = args.force,
                 name_filter = args.name,
@@ -297,8 +272,9 @@ if __name__ == "__main__":
                 ),
             1):
         keywords = test.get('keywords', [])
-        title = "Test {}: {}{} - {}".format(
+        title = "Test {}: {} {}{} - {}".format(
             test_index,
+            yaml_path,
             u'[{}] '.format(u', '.join(keywords)).encode('utf-8') if keywords else '',
             name.encode('utf-8'),
             period_str,
@@ -306,7 +282,7 @@ if __name__ == "__main__":
         print("=" * len(title))
         print(title)
         print("=" * len(title))
-        function(name, period_str, test, force)
+        function(yaml_path, name, period_str, test, force)
         tests_found = True
     if not tests_found:
         print("No test found!")

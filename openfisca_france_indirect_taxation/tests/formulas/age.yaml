@@ -6,3 +6,9 @@
   period: "2014"
   output_variables:
     age: 44
+- name: "Âge d'après la date de naissance"
+  period: "2013"
+  input_variables:
+    birth: "1973-01-01"
+  output_variables:
+    age: 40
