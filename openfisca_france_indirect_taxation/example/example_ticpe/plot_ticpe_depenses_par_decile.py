@@ -5,6 +5,8 @@ Created on Thu Aug 20 10:37:09 2015
 @author: thomas.douenne
 """
 
+# Plot by deciles 1) the contribution to TICPE, 2) the expenditure in fuel
+
 from __future__ import division
 
 from pandas import concat
