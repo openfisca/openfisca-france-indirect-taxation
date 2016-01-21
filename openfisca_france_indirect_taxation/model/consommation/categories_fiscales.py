@@ -41,7 +41,7 @@ categories_fiscales_data_frame = None
 
 def function_creator(postes_coicop, year_start = None, year_stop = None):
     start = date(year_start, 1, 1) if year_start is not None else None
-    stop = date(year_stop, 1, 1) if year_stop is not None else None
+    stop = date(year_stop, 12, 31) if year_stop is not None else None
 
     @dated_function(start = start, stop = stop)
     def func(self, simulation, period):
