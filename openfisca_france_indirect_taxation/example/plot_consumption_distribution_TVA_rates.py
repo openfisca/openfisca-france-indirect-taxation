@@ -5,8 +5,13 @@ Created on Sun Apr 12 16:48:09 2015
 @author: germainmarchand
 """
 
+# Calcul des parts que représentent chaque type de TVA (taux plein, réduit, etc.) dans les dépenses totales en TVA
+# des ménages, selon leur décile de revenu.
+
+# Import de modules généraux
 from __future__ import division
 
+# Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.example.utils_example import simulate, df_weighted_average_grouped, \
     graph_builder_bar
 
@@ -16,9 +21,6 @@ if __name__ == '__main__':
     log = logging.getLogger(__name__)
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-
-    # Exemple: graphe par décile de revenu par uc de la ventilation de la consommation
-    # selon les postes agrégés de la CN
 
     list_coicop12 = []
     for coicop12_index in range(1, 9):
@@ -40,7 +42,7 @@ if __name__ == '__main__':
 
     simulated_variables += list_coicop12
 
-    # Constition d'une base de données agrégée par décile (= collapse en stata)
+    # Constition d'une base de données agrégée par décile
     for year in [2000, 2005, 2011]:
         df = simulate(simulated_variables = simulated_variables, year = year)
         var_to_concat = ['tva_taux_plein', 'tva_taux_intermediaire', 'tva_taux_reduit',

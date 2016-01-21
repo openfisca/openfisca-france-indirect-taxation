@@ -5,12 +5,15 @@ Created on Thu Aug 20 10:37:09 2015
 @author: thomas.douenne
 """
 
-# Plot by deciles 1) the contribution to TICPE, 2) the expenditure in fuel
+# Ce script a pour objectif de décrire pour chaque décile de revenu la consommation annuelle moyenne de carburants,
+# ainsi que les dépenses moyennes pour la TICPE
 
+# Import de modules généraux
 from __future__ import division
 
 from pandas import concat
 
+# Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_by_grosposte, \
     df_weighted_average_grouped, graph_builder_line, save_dataframe_to_graph
 
@@ -94,6 +97,7 @@ if __name__ == '__main__':
         else:
             depenses_essence = depenses['depenses essence {}'.format(year)]
 
+    # Production des graphiques
     graph_builder_line(depenses_ticpe_carburants)
     graph_builder_line(depenses_ticpe_diesel)
     graph_builder_line(depenses_ticpe_essence)
@@ -102,6 +106,7 @@ if __name__ == '__main__':
     graph_builder_line(depenses_diesel)
     graph_builder_line(depenses_essence)
 
+    # Enregistrement des dataframe en fichiers csv
     save_dataframe_to_graph(depenses_carburants, 'depenses_carburants_par_decile.csv')
     save_dataframe_to_graph(depenses_diesel, 'depenses_diesel_par_decile.csv')
     save_dataframe_to_graph(depenses_essence, 'depenses_essence_par_decile.csv')

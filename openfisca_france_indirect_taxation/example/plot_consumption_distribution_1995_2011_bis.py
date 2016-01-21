@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
 
+# Import de modules généraux
 from __future__ import division
 
 import pandas
 import seaborn
 
-
+# Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.example.utils_example import graph_builder_bar
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 

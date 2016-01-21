@@ -60,7 +60,6 @@ if __name__ == '__main__':
     # Liste des variables que l'on veut simuler
     simulated_variables = [
         'pondmen',
-        'decuc',
         'niveau_vie_decile',
         'somme_coicop12',
         ]
@@ -73,8 +72,6 @@ if __name__ == '__main__':
         simulation_data_frame = simulate(simulated_variables = simulated_variables, year = year)
         annee = simulation_data_frame.apply(lambda row: year, axis = 1)
         simulation_data_frame["year"] = annee
-        if year == 2011:
-            simulation_data_frame.niveau_vie_decile[simulation_data_frame.decuc == 10] = 10
         var_to_concat = list_coicop12 + ['somme_coicop12']
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame, groupe = 'year',
             varlist = var_to_concat)
