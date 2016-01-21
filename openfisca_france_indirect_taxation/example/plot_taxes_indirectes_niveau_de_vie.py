@@ -41,7 +41,7 @@ if __name__ == '__main__':
     simulated_variables = [
         'decuc',
         'tva_total',
-        'ticpe',
+        'ticpe_totale',
         'vin_droit_d_accise',
         'biere_droit_d_accise',
         'alcools_forts_droit_d_accise',
@@ -62,7 +62,7 @@ if __name__ == '__main__':
             groupe = 'niveau_vie_decile', varlist = simulated_variables)
 
         Wconcat['taxe_{}'.format(1)] = Wconcat['tva_total']
-        Wconcat['taxe_{}'.format(2)] = Wconcat['ticpe']
+        Wconcat['taxe_{}'.format(2)] = Wconcat['ticpe_totale']
         Wconcat['taxe_{}'.format(3)] = (
             Wconcat['assurance_sante_taxe'] +
             Wconcat['assurance_transport_taxe'] +
@@ -88,7 +88,7 @@ if __name__ == '__main__':
         df_to_graph = Wconcat[list_part_taxes]
 
         df_to_graph.columns = [
-            'TVA', 'ticpe', 'Assurances', 'Alcools', 'Tabac'
+            'TVA', 'ticpe_totale', 'Assurances', 'Alcools', 'Tabac'
             ]
 
         graph_builder_bar(df_to_graph)

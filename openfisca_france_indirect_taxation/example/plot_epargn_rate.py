@@ -53,7 +53,7 @@ if __name__ == '__main__':
         'rev_disponible',
         'pondmen',
         'tva_total',
-        'ticpe',
+        'ticpe_totale',
         'assurance_sante_taxe',
         'vin_droit_d_accise',
         'cigares_droit_d_accise',
@@ -69,12 +69,12 @@ if __name__ == '__main__':
 
     p = dict()
     df_to_graph = None
-    for year in [2000, 2005, 2011]:
+    for year in [2011]:
         simulation_data_frame = simulate(simulated_variables = simulated_variables, year = year)
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame,
             groupe = 'niveau_vie_decile', varlist = simulated_variables)
         aggregates_data_frame['taxe_1'] = aggregates_data_frame['tva_total']
-        aggregates_data_frame['taxe_2'] = aggregates_data_frame['ticpe']
+        aggregates_data_frame['taxe_2'] = aggregates_data_frame['ticpe_totale']
         aggregates_data_frame['taxe_3'] = (
             aggregates_data_frame['assurance_sante_taxe'] +
             aggregates_data_frame['assurance_transport_taxe'] +
@@ -106,4 +106,4 @@ if __name__ == '__main__':
         else:
             df_to_graph = p['{}'.format(year)]
 
-    graph_builder_line_percent(df_to_graph)
+    graph_builder_line_percent(df_to_graph, 1, 1)
