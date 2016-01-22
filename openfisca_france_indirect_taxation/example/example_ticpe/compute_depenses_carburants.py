@@ -5,11 +5,14 @@ Created on Tue Aug 18 18:33:36 2015
 @author: thomas.douenne
 """
 
+# Import de modules généraux
 from __future__ import division
+
 import csv
 import pkg_resources
 import os
 
+# Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_on_ticpe
 
 
@@ -27,6 +30,7 @@ if __name__ == '__main__':
         'coicop12_7'
         ]
 
+    # Calcul des dépenses agrégées des ménages dans les transports, dont les carburants, dont l'essence et le diesel
     depenses_transports_totales = dict()
     depenses_carburants_totales = dict()
     depenses_diesel_totales = dict()
@@ -43,6 +47,7 @@ if __name__ == '__main__':
         depenses_diesel_totales['en {}'.format(year)] = depenses_diesel / 1000000
         depenses_essence_totales['en {}'.format(year)] = depenses_essence / 1000000
 
+    # Enregistrement des dépenses agrégées dans des fichiers csv
     assets_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
         )

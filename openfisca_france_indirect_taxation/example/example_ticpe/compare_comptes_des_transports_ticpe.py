@@ -5,6 +5,10 @@ Created on Thu Aug 20 11:47:11 2015
 @author: thomas.douenne
 """
 
+# L'objectif des "compare" est d'évaluer la qualité des calages effectués. Ils comparent les dépenses ou quantités
+# agrégées de Budget des Familles après calage, avec celles de la comptabilité nationale.
+
+# Import de modules généraux
 from __future__ import division
 
 from pandas import concat
@@ -12,14 +16,18 @@ import pkg_resources
 import os
 import pandas as pd
 
+# Import de modules spécifiques à Openfisca
 from ipp_macro_series_parser.agregats_transports.transports_cleaner import g_3a
-from openfisca_france_indirect_taxation.example.dataframes_from_legislation.get_accises import \
+# Import de paramètres de la législation (montant des accises de la TICPE)
+from openfisca_france_indirect_taxation.get_dataframe_from_legislation.get_accises import \
     get_accise_ticpe_majoree
 
 """Ici on applique aux quantités de carburants consommées par des véhicules autres que les ménages
 la ticpe à taux plein. En réalité, un certain nombre d'exonération s'appliquent pour les professionels.
 On calcul donc simplement une borne supérieure des recettes engendrées"""
 
+# Import des fichiers csv donnant les montants agrégés des dépenses en TICPE d'après les enquêtes BdF.
+# Ces montants sont calculés dans compute_depenses_ticpe
 assets_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
     )

@@ -213,7 +213,7 @@ class somme_coicop12(Variable):
 
     def function(self, simulation, period):
         return period, sum(
-            simulation.calculate('coicop_{}'.format(idx), period)
+            simulation.calculate('coicop12_{}'.format(idx), period)
             for idx in xrange(1, 13)
             )
 
@@ -225,7 +225,7 @@ class somme_coicop12_conso(Variable):
 
     def function(self, simulation, period):
         return period, sum(
-            simulation.calculate('coicop_{}'.format(idx), period)
+            simulation.calculate('coicop12_{}'.format(idx), period)
             for idx in xrange(1, 9)
             )
 

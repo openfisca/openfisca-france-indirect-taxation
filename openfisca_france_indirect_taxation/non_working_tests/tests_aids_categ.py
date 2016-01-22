@@ -5,6 +5,8 @@ Created on Thu Jul 09 18:41:37 2015
 @author: thomas.douenne
 """
 
+# To do : change this test to fit with energy instead of categ
+
 import pandas as pd
 
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_dataframe_builder_categ import \

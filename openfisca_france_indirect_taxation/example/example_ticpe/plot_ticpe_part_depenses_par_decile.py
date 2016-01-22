@@ -5,10 +5,17 @@ Created on Tue Aug 18 10:41:21 2015
 @author: thomas.douenne
 """
 
+# L'objectif est d'exprimer pour chaque décile de revenu la part que représente les dépenses en TICPE sur l'ensemble
+# du revenu. Ce revenu prend trois définitions : le revenu total, le revenu disponible, ou l'ensemble des dépenses du
+# ménage. Ces calculs sont réalisés pour 2000, 2005 et 2011, et les parts spécifiques à l'essence et au diesel sont
+# spécifiées.
+
+# Import de modules généraux
 from __future__ import division
 
 from pandas import concat
 
+# Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_by_grosposte, \
     df_weighted_average_grouped, graph_builder_line_percent, save_dataframe_to_graph
 
@@ -31,6 +38,8 @@ if __name__ == '__main__':
         'essence_ticpe'
         ]
 
+    # Formation des bases de données, dépenses moyennes en TICPE par décile de revenu, que l'on divise ensuite par le
+    # revenu. Calcul effectué pour 2000, 2005 et 2011 pour l'ensemble des carburants, puis chacun séparément
     for element in ['ticpe_totale', 'diesel_ticpe', 'essence_ticpe']:
         part_ticpe_revtot = None
         part_ticpe_rev_disp_loyerimput = None
@@ -70,6 +79,7 @@ if __name__ == '__main__':
             data_to_append_depenses_totales = \
                 part_ticpe_depenses_totales_wip['part ' + element.replace('_', ' ') + ' depenses {}'.format(year)]
 
+            # Aggrégation des trois années pour chaque type de calcul
             if part_ticpe_revtot is not None:
                 part_ticpe_revtot = concat([part_ticpe_revtot, data_to_append_revtot], axis = 1)
             else:
@@ -87,9 +97,11 @@ if __name__ == '__main__':
             else:
                 part_ticpe_depenses_totales = data_to_append_depenses_totales
 
+        # Réalisation des gréphiques
         graph_builder_line_percent(part_ticpe_revtot, 1, 0.35)
         graph_builder_line_percent(part_ticpe_rev_disp_loyerimput, 1, 0.35)
         graph_builder_line_percent(part_ticpe_depenses_totales, 1, 0.35)
 
+        # Enregistrement des dataframe en fichiers csv
         save_dataframe_to_graph(
             part_ticpe_rev_disp_loyerimput, 'part_{}_sur_rev_disployerimput.csv'.format(element))

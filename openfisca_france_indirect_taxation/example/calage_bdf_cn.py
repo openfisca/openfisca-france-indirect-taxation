@@ -24,8 +24,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from __future__ import division
+# Ce script comprend plusieurs fonctions, dont le but est de caler les données Budget des Familles sur des agrégats.
+# L'agrégation des données BdF rendant des totaux différents de ceux de la comptabilité nationale, ces calages sont
+# importants pour restaurer les bonnes quantités. Plusieurs méthodes sont proposées.
 
+# Import de modules généraux
+from __future__ import division
 
 import os
 import pkg_resources
@@ -34,6 +38,7 @@ import pandas
 from pandas import concat
 
 
+# Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.build_survey_data.utils \
     import ident_men_dtype
 
