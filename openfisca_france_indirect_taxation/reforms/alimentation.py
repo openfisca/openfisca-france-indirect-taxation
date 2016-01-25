@@ -12,8 +12,8 @@ from ..model.prelevements_obligatoires.impot_revenu import charges_deductibles
 
 def build_reform(tax_benefit_system):
     Reform = reforms.make_reform(
-        key = 'trannoy_wasmer',
-        name = u'Loyer comme charge déductible (Trannoy-Wasmer)',
+        key = 'alimentation',
+        name = u"Réforme de l'imposition indirecte des biens alimentaires",
         reference = tax_benefit_system,
         )
 
