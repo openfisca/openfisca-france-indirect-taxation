@@ -33,12 +33,12 @@ from .consommation import (  # noqa analysis:ignore
     postes_coicop,
     )
 from .taxes_indirectes import (  # noqa analysis:ignore
-    montant_alcools,
-    montant_assurances,
-    montant_tabacs,
-    montant_ticpe,
-    montant_total_taxes_indirectes,
-    montant_tva,
+    alcools,
+    assurances,
+    tabacs,
+    ticpe,
+    total_taxes_indirectes,
+    tva,
     )
 from .revenus import (  # noqa analysis:ignore
     revenus_menages,
