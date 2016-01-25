@@ -1,0 +1,2920 @@
+,posteCOICOP,annee,description,categoriefiscale,supplementaire
+0,111,1994,Pain et céréales,2,0
+1,111,1995,Pain et céréales,2,0
+2,111,1996,Pain et céréales,2,0
+3,111,1997,Pain et céréales,2,0
+4,111,1998,Pain et céréales,2,0
+5,111,1999,Pain et céréales,2,0
+6,111,2000,Pain et céréales,2,0
+7,111,2001,Pain et céréales,2,0
+8,111,2002,Pain et céréales,2,0
+9,111,2003,Pain et céréales,2,0
+10,111,2004,Pain et céréales,2,0
+11,111,2005,Pain et céréales,2,0
+12,111,2006,Pain et céréales,2,0
+13,111,2007,Pain et céréales,2,0
+14,111,2008,Pain et céréales,2,0
+15,111,2009,Pain et céréales,2,0
+16,111,2010,Pain et céréales,2,0
+17,111,2011,Pain et céréales,2,0
+18,111,2012,Pain et céréales,2,0
+19,111,2013,Pain et céréales,2,0
+20,111,2014,Pain et céréales,2,0
+21,112,1994,Viande,2,0
+22,112,1995,Viande,2,0
+23,112,1996,Viande,2,0
+24,112,1997,Viande,2,0
+25,112,1998,Viande,2,0
+26,112,1999,Viande,2,0
+27,112,2000,Viande,2,0
+28,112,2001,Viande,2,0
+29,112,2002,Viande,2,0
+30,112,2003,Viande,2,0
+31,112,2004,Viande,2,0
+32,112,2005,Viande,2,0
+33,112,2006,Viande,2,0
+34,112,2007,Viande,2,0
+35,112,2008,Viande,2,0
+36,112,2009,Viande,2,0
+37,112,2010,Viande,2,0
+38,112,2011,Viande,2,0
+39,112,2012,Viande,2,0
+40,112,2013,Viande,2,0
+41,112,2014,Viande,2,0
+42,113,1994,Poisson et fruits de mer,2,0
+43,113,1995,Poisson et fruits de mer,2,0
+44,113,1996,Poisson et fruits de mer,2,0
+45,113,1997,Poisson et fruits de mer,2,0
+46,113,1998,Poisson et fruits de mer,2,0
+47,113,1999,Poisson et fruits de mer,2,0
+48,113,2000,Poisson et fruits de mer,2,0
+49,113,2001,Poisson et fruits de mer,2,0
+50,113,2002,Poisson et fruits de mer,2,0
+51,113,2003,Poisson et fruits de mer,2,0
+52,113,2004,Poisson et fruits de mer,2,0
+53,113,2005,Poisson et fruits de mer,2,0
+54,113,2006,Poisson et fruits de mer,2,0
+55,113,2007,Poisson et fruits de mer,2,0
+56,113,2008,Poisson et fruits de mer,2,0
+57,113,2009,Poisson et fruits de mer,2,0
+58,113,2010,Poisson et fruits de mer,2,0
+59,113,2011,Poisson et fruits de mer,2,0
+60,113,2012,Poisson et fruits de mer,2,0
+61,113,2013,Poisson et fruits de mer,2,0
+62,113,2014,Poisson et fruits de mer,2,0
+63,114,1994,"Lait, fromage et œufs",2,0
+64,114,1995,"Lait, fromage et œufs",2,0
+65,114,1996,"Lait, fromage et œufs",2,0
+66,114,1997,"Lait, fromage et œufs",2,0
+67,114,1998,"Lait, fromage et œufs",2,0
+68,114,1999,"Lait, fromage et œufs",2,0
+69,114,2000,"Lait, fromage et œufs",2,0
+70,114,2001,"Lait, fromage et œufs",2,0
+71,114,2002,"Lait, fromage et œufs",2,0
+72,114,2003,"Lait, fromage et œufs",2,0
+73,114,2004,"Lait, fromage et œufs",2,0
+74,114,2005,"Lait, fromage et œufs",2,0
+75,114,2006,"Lait, fromage et œufs",2,0
+76,114,2007,"Lait, fromage et œufs",2,0
+77,114,2008,"Lait, fromage et œufs",2,0
+78,114,2009,"Lait, fromage et œufs",2,0
+79,114,2010,"Lait, fromage et œufs",2,0
+80,114,2011,"Lait, fromage et œufs",2,0
+81,114,2012,"Lait, fromage et œufs",2,0
+82,114,2013,"Lait, fromage et œufs",2,0
+83,114,2014,"Lait, fromage et œufs",2,0
+84,115,1994,Huiles et graisses,2,0
+85,115,1995,Huiles et graisses,2,0
+86,115,1996,Huiles et graisses,2,0
+87,115,1997,Huiles et graisses,2,0
+88,115,1998,Huiles et graisses,2,0
+89,115,1999,Huiles et graisses,2,0
+90,115,2000,Huiles et graisses,2,0
+91,115,2001,Huiles et graisses,2,0
+92,115,2002,Huiles et graisses,2,0
+93,115,2003,Huiles et graisses,2,0
+94,115,2004,Huiles et graisses,2,0
+95,115,2005,Huiles et graisses,2,0
+96,115,2006,Huiles et graisses,2,0
+97,115,2007,Huiles et graisses,2,0
+98,115,2008,Huiles et graisses,2,0
+99,115,2009,Huiles et graisses,2,0
+100,115,2010,Huiles et graisses,2,0
+101,115,2011,Huiles et graisses,2,0
+102,115,2012,Huiles et graisses,2,0
+103,115,2013,Huiles et graisses,2,0
+104,115,2014,Huiles et graisses,2,0
+105,1151,1994,Margarines et autres graisses végétales,3,1
+106,1151,1995,Margarines et autres graisses végétales,3,1
+107,1151,1996,Margarines et autres graisses végétales,3,1
+108,1151,1997,Margarines et autres graisses végétales,3,1
+109,1151,1998,Margarines et autres graisses végétales,3,1
+110,1151,1999,Margarines et autres graisses végétales,3,1
+111,1151,2000,Margarines et autres graisses végétales,3,1
+112,1151,2001,Margarines et autres graisses végétales,3,1
+113,1151,2002,Margarines et autres graisses végétales,3,1
+114,1151,2003,Margarines et autres graisses végétales,3,1
+115,1151,2004,Margarines et autres graisses végétales,3,1
+116,1151,2005,Margarines et autres graisses végétales,3,1
+117,1151,2006,Margarines et autres graisses végétales,3,1
+118,1151,2007,Margarines et autres graisses végétales,3,1
+119,1151,2008,Margarines et autres graisses végétales,3,1
+120,1151,2009,Margarines et autres graisses végétales,3,1
+121,1151,2010,Margarines et autres graisses végétales,3,1
+122,1151,2011,Margarines et autres graisses végétales,3,1
+123,1151,2012,Margarines et autres graisses végétales,3,1
+124,1151,2013,Margarines et autres graisses végétales,3,1
+125,1151,2014,Margarines et autres graisses végétales,3,1
+126,116,1994,Fruits,2,0
+127,116,1995,Fruits,2,0
+128,116,1996,Fruits,2,0
+129,116,1997,Fruits,2,0
+130,116,1998,Fruits,2,0
+131,116,1999,Fruits,2,0
+132,116,2000,Fruits,2,0
+133,116,2001,Fruits,2,0
+134,116,2002,Fruits,2,0
+135,116,2003,Fruits,2,0
+136,116,2004,Fruits,2,0
+137,116,2005,Fruits,2,0
+138,116,2006,Fruits,2,0
+139,116,2007,Fruits,2,0
+140,116,2008,Fruits,2,0
+141,116,2009,Fruits,2,0
+142,116,2010,Fruits,2,0
+143,116,2011,Fruits,2,0
+144,116,2012,Fruits,2,0
+145,116,2013,Fruits,2,0
+146,116,2014,Fruits,2,0
+147,117,1994,Légumes,2,0
+148,117,1995,Légumes,2,0
+149,117,1996,Légumes,2,0
+150,117,1997,Légumes,2,0
+151,117,1998,Légumes,2,0
+152,117,1999,Légumes,2,0
+153,117,2000,Légumes,2,0
+154,117,2001,Légumes,2,0
+155,117,2002,Légumes,2,0
+156,117,2003,Légumes,2,0
+157,117,2004,Légumes,2,0
+158,117,2005,Légumes,2,0
+159,117,2006,Légumes,2,0
+160,117,2007,Légumes,2,0
+161,117,2008,Légumes,2,0
+162,117,2009,Légumes,2,0
+163,117,2010,Légumes,2,0
+164,117,2011,Légumes,2,0
+165,117,2012,Légumes,2,0
+166,117,2013,Légumes,2,0
+167,117,2014,Légumes,2,0
+168,118,1994,"Sucre, confiture, miel, chocolat et confiserie",2,0
+169,118,1995,"Sucre, confiture, miel, chocolat et confiserie",2,0
+170,118,1996,"Sucre, confiture, miel, chocolat et confiserie",2,0
+171,118,1997,"Sucre, confiture, miel, chocolat et confiserie",2,0
+172,118,1998,"Sucre, confiture, miel, chocolat et confiserie",2,0
+173,118,1999,"Sucre, confiture, miel, chocolat et confiserie",2,0
+174,118,2000,"Sucre, confiture, miel, chocolat et confiserie",2,0
+175,118,2001,"Sucre, confiture, miel, chocolat et confiserie",2,0
+176,118,2002,"Sucre, confiture, miel, chocolat et confiserie",2,0
+177,118,2003,"Sucre, confiture, miel, chocolat et confiserie",2,0
+178,118,2004,"Sucre, confiture, miel, chocolat et confiserie",2,0
+179,118,2005,"Sucre, confiture, miel, chocolat et confiserie",2,0
+180,118,2006,"Sucre, confiture, miel, chocolat et confiserie",2,0
+181,118,2007,"Sucre, confiture, miel, chocolat et confiserie",2,0
+182,118,2008,"Sucre, confiture, miel, chocolat et confiserie",2,0
+183,118,2009,"Sucre, confiture, miel, chocolat et confiserie",2,0
+184,118,2010,"Sucre, confiture, miel, chocolat et confiserie",2,0
+185,118,2011,"Sucre, confiture, miel, chocolat et confiserie",2,0
+186,118,2012,"Sucre, confiture, miel, chocolat et confiserie",2,0
+187,118,2013,"Sucre, confiture, miel, chocolat et confiserie",2,0
+188,118,2014,"Sucre, confiture, miel, chocolat et confiserie",2,0
+189,1181,1994,Confiserie,3,1
+190,1181,1995,Confiserie,3,1
+191,1181,1996,Confiserie,3,1
+192,1181,1997,Confiserie,3,1
+193,1181,1998,Confiserie,3,1
+194,1181,1999,Confiserie,3,1
+195,1181,2000,Confiserie,3,1
+196,1181,2001,Confiserie,3,1
+197,1181,2002,Confiserie,3,1
+198,1181,2003,Confiserie,3,1
+199,1181,2004,Confiserie,3,1
+200,1181,2005,Confiserie,3,1
+201,1181,2006,Confiserie,3,1
+202,1181,2007,Confiserie,3,1
+203,1181,2008,Confiserie,3,1
+204,1181,2009,Confiserie,3,1
+205,1181,2010,Confiserie,3,1
+206,1181,2011,Confiserie,3,1
+207,1181,2012,Confiserie,3,1
+208,1181,2013,Confiserie,3,1
+209,1181,2014,Confiserie,3,1
+210,119,1994,Produits alimentaires non compris ailleurs,2,0
+211,119,1995,Produits alimentaires non compris ailleurs,2,0
+212,119,1996,Produits alimentaires non compris ailleurs,2,0
+213,119,1997,Produits alimentaires non compris ailleurs,2,0
+214,119,1998,Produits alimentaires non compris ailleurs,2,0
+215,119,1999,Produits alimentaires non compris ailleurs,2,0
+216,119,2000,Produits alimentaires non compris ailleurs,2,0
+217,119,2001,Produits alimentaires non compris ailleurs,2,0
+218,119,2002,Produits alimentaires non compris ailleurs,2,0
+219,119,2003,Produits alimentaires non compris ailleurs,2,0
+220,119,2004,Produits alimentaires non compris ailleurs,2,0
+221,119,2005,Produits alimentaires non compris ailleurs,2,0
+222,119,2006,Produits alimentaires non compris ailleurs,2,0
+223,119,2007,Produits alimentaires non compris ailleurs,2,0
+224,119,2008,Produits alimentaires non compris ailleurs,2,0
+225,119,2009,Produits alimentaires non compris ailleurs,2,0
+226,119,2010,Produits alimentaires non compris ailleurs,2,0
+227,119,2011,Produits alimentaires non compris ailleurs,2,0
+228,119,2012,Produits alimentaires non compris ailleurs,2,0
+229,119,2013,Produits alimentaires non compris ailleurs,2,0
+230,119,2014,Produits alimentaires non compris ailleurs,2,0
+231,121,1994,"Café, thé et cacao",2,0
+232,121,1995,"Café, thé et cacao",2,0
+233,121,1996,"Café, thé et cacao",2,0
+234,121,1997,"Café, thé et cacao",2,0
+235,121,1998,"Café, thé et cacao",2,0
+236,121,1999,"Café, thé et cacao",2,0
+237,121,2000,"Café, thé et cacao",2,0
+238,121,2001,"Café, thé et cacao",2,0
+239,121,2002,"Café, thé et cacao",2,0
+240,121,2003,"Café, thé et cacao",2,0
+241,121,2004,"Café, thé et cacao",2,0
+242,121,2005,"Café, thé et cacao",2,0
+243,121,2006,"Café, thé et cacao",2,0
+244,121,2007,"Café, thé et cacao",2,0
+245,121,2008,"Café, thé et cacao",2,0
+246,121,2009,"Café, thé et cacao",2,0
+247,121,2010,"Café, thé et cacao",2,0
+248,121,2011,"Café, thé et cacao",2,0
+249,121,2012,"Café, thé et cacao",2,0
+250,121,2013,"Café, thé et cacao",2,0
+251,121,2014,"Café, thé et cacao",2,0
+252,122,1994,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+253,122,1995,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+254,122,1996,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+255,122,1997,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+256,122,1998,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+257,122,1999,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+258,122,2000,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+259,122,2001,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+260,122,2002,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+261,122,2003,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+262,122,2004,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+263,122,2005,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+264,122,2006,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+265,122,2007,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+266,122,2008,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+267,122,2009,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+268,122,2010,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+269,122,2011,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+270,122,2012,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+271,122,2013,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+272,122,2014,"Eaux minérales, boissons rafraîchissantes, jus de fruits et  de légumes",2,0
+273,211,1994,Alcools de bouche ,10,0
+274,211,1995,Alcools de bouche ,10,0
+275,211,1996,Alcools de bouche ,10,0
+276,211,1997,Alcools de bouche ,10,0
+277,211,1998,Alcools de bouche ,10,0
+278,211,1999,Alcools de bouche ,10,0
+279,211,2000,Alcools de bouche ,10,0
+280,211,2001,Alcools de bouche ,10,0
+281,211,2002,Alcools de bouche ,10,0
+282,211,2003,Alcools de bouche ,10,0
+283,211,2004,Alcools de bouche ,10,0
+284,211,2005,Alcools de bouche ,10,0
+285,211,2006,Alcools de bouche ,10,0
+286,211,2007,Alcools de bouche ,10,0
+287,211,2008,Alcools de bouche ,10,0
+288,211,2009,Alcools de bouche ,10,0
+289,211,2010,Alcools de bouche ,10,0
+290,211,2011,Alcools de bouche ,10,0
+291,211,2012,Alcools de bouche ,10,0
+292,211,2013,Alcools de bouche ,10,0
+293,211,2014,Alcools de bouche ,10,0
+294,212,1994,Vin et boissons fermentées,12,0
+295,212,1995,Vin et boissons fermentées,12,0
+296,212,1996,Vin et boissons fermentées,12,0
+297,212,1997,Vin et boissons fermentées,12,0
+298,212,1998,Vin et boissons fermentées,12,0
+299,212,1999,Vin et boissons fermentées,12,0
+300,212,2000,Vin et boissons fermentées,12,0
+301,212,2001,Vin et boissons fermentées,12,0
+302,212,2002,Vin et boissons fermentées,12,0
+303,212,2003,Vin et boissons fermentées,12,0
+304,212,2004,Vin et boissons fermentées,12,0
+305,212,2005,Vin et boissons fermentées,12,0
+306,212,2006,Vin et boissons fermentées,12,0
+307,212,2007,Vin et boissons fermentées,12,0
+308,212,2008,Vin et boissons fermentées,12,0
+309,212,2009,Vin et boissons fermentées,12,0
+310,212,2010,Vin et boissons fermentées,12,0
+311,212,2011,Vin et boissons fermentées,12,0
+312,212,2012,Vin et boissons fermentées,12,0
+313,212,2013,Vin et boissons fermentées,12,0
+314,212,2014,Vin et boissons fermentées,12,0
+315,213,1994,Bière,13,0
+316,213,1995,Bière,13,0
+317,213,1996,Bière,13,0
+318,213,1997,Bière,13,0
+319,213,1998,Bière,13,0
+320,213,1999,Bière,13,0
+321,213,2000,Bière,13,0
+322,213,2001,Bière,13,0
+323,213,2002,Bière,13,0
+324,213,2003,Bière,13,0
+325,213,2004,Bière,13,0
+326,213,2005,Bière,13,0
+327,213,2006,Bière,13,0
+328,213,2007,Bière,13,0
+329,213,2008,Bière,13,0
+330,213,2009,Bière,13,0
+331,213,2010,Bière,13,0
+332,213,2011,Bière,13,0
+333,213,2012,Bière,13,0
+334,213,2013,Bière,13,0
+335,213,2014,Bière,13,0
+336,2201,1994,Cigarettes,7,1
+337,2201,1995,Cigarettes,7,1
+338,2201,1996,Cigarettes,7,1
+339,2201,1997,Cigarettes,7,1
+340,2201,1998,Cigarettes,7,1
+341,2201,1999,Cigarettes,7,1
+342,2201,2000,Cigarettes,7,1
+343,2201,2001,Cigarettes,7,1
+344,2201,2002,Cigarettes,7,1
+345,2201,2003,Cigarettes,7,1
+346,2201,2004,Cigarettes,7,1
+347,2201,2005,Cigarettes,7,1
+348,2201,2006,Cigarettes,7,1
+349,2201,2007,Cigarettes,7,1
+350,2201,2008,Cigarettes,7,1
+351,2201,2009,Cigarettes,7,1
+352,2201,2010,Cigarettes,7,1
+353,2201,2011,Cigarettes,7,1
+354,2201,2012,Cigarettes,7,1
+355,2201,2013,Cigarettes,7,1
+356,2201,2014,Cigarettes,7,1
+357,2202,1994,Cigares et cigarillos,8,1
+358,2202,1995,Cigares et cigarillos,8,1
+359,2202,1996,Cigares et cigarillos,8,1
+360,2202,1997,Cigares et cigarillos,8,1
+361,2202,1998,Cigares et cigarillos,8,1
+362,2202,1999,Cigares et cigarillos,8,1
+363,2202,2000,Cigares et cigarillos,8,1
+364,2202,2001,Cigares et cigarillos,8,1
+365,2202,2002,Cigares et cigarillos,8,1
+366,2202,2003,Cigares et cigarillos,8,1
+367,2202,2004,Cigares et cigarillos,8,1
+368,2202,2005,Cigares et cigarillos,8,1
+369,2202,2006,Cigares et cigarillos,8,1
+370,2202,2007,Cigares et cigarillos,8,1
+371,2202,2008,Cigares et cigarillos,8,1
+372,2202,2009,Cigares et cigarillos,8,1
+373,2202,2010,Cigares et cigarillos,8,1
+374,2202,2011,Cigares et cigarillos,8,1
+375,2202,2012,Cigares et cigarillos,8,1
+376,2202,2013,Cigares et cigarillos,8,1
+377,2202,2014,Cigares et cigarillos,8,1
+378,2203,1994,Tabac sous d'autres formes,9,1
+379,2203,1995,Tabac sous d'autres formes,9,1
+380,2203,1996,Tabac sous d'autres formes,9,1
+381,2203,1997,Tabac sous d'autres formes,9,1
+382,2203,1998,Tabac sous d'autres formes,9,1
+383,2203,1999,Tabac sous d'autres formes,9,1
+384,2203,2000,Tabac sous d'autres formes,9,1
+385,2203,2001,Tabac sous d'autres formes,9,1
+386,2203,2002,Tabac sous d'autres formes,9,1
+387,2203,2003,Tabac sous d'autres formes,9,1
+388,2203,2004,Tabac sous d'autres formes,9,1
+389,2203,2005,Tabac sous d'autres formes,9,1
+390,2203,2006,Tabac sous d'autres formes,9,1
+391,2203,2007,Tabac sous d'autres formes,9,1
+392,2203,2008,Tabac sous d'autres formes,9,1
+393,2203,2009,Tabac sous d'autres formes,9,1
+394,2203,2010,Tabac sous d'autres formes,9,1
+395,2203,2011,Tabac sous d'autres formes,9,1
+396,2203,2012,Tabac sous d'autres formes,9,1
+397,2203,2013,Tabac sous d'autres formes,9,1
+398,2203,2014,Tabac sous d'autres formes,9,1
+399,230,1994,Stupéfiants,0,0
+400,230,1995,Stupéfiants,0,0
+401,230,1996,Stupéfiants,0,0
+402,230,1997,Stupéfiants,0,0
+403,230,1998,Stupéfiants,0,0
+404,230,1999,Stupéfiants,0,0
+405,230,2000,Stupéfiants,0,0
+406,230,2001,Stupéfiants,0,0
+407,230,2002,Stupéfiants,0,0
+408,230,2003,Stupéfiants,0,0
+409,230,2004,Stupéfiants,0,0
+410,230,2005,Stupéfiants,0,0
+411,230,2006,Stupéfiants,0,0
+412,230,2007,Stupéfiants,0,0
+413,230,2008,Stupéfiants,0,0
+414,230,2009,Stupéfiants,0,0
+415,230,2010,Stupéfiants,0,0
+416,230,2011,Stupéfiants,0,0
+417,230,2012,Stupéfiants,0,0
+418,230,2013,Stupéfiants,0,0
+419,230,2014,Stupéfiants,0,0
+420,311,1994,Tissus pour habillement,3,0
+421,311,1995,Tissus pour habillement,3,0
+422,311,1996,Tissus pour habillement,3,0
+423,311,1997,Tissus pour habillement,3,0
+424,311,1998,Tissus pour habillement,3,0
+425,311,1999,Tissus pour habillement,3,0
+426,311,2000,Tissus pour habillement,3,0
+427,311,2001,Tissus pour habillement,3,0
+428,311,2002,Tissus pour habillement,3,0
+429,311,2003,Tissus pour habillement,3,0
+430,311,2004,Tissus pour habillement,3,0
+431,311,2005,Tissus pour habillement,3,0
+432,311,2006,Tissus pour habillement,3,0
+433,311,2007,Tissus pour habillement,3,0
+434,311,2008,Tissus pour habillement,3,0
+435,311,2009,Tissus pour habillement,3,0
+436,311,2010,Tissus pour habillement,3,0
+437,311,2011,Tissus pour habillement,3,0
+438,311,2012,Tissus pour habillement,3,0
+439,311,2013,Tissus pour habillement,3,0
+440,311,2014,Tissus pour habillement,3,0
+441,312,1994,Vêtements,3,0
+442,312,1995,Vêtements,3,0
+443,312,1996,Vêtements,3,0
+444,312,1997,Vêtements,3,0
+445,312,1998,Vêtements,3,0
+446,312,1999,Vêtements,3,0
+447,312,2000,Vêtements,3,0
+448,312,2001,Vêtements,3,0
+449,312,2002,Vêtements,3,0
+450,312,2003,Vêtements,3,0
+451,312,2004,Vêtements,3,0
+452,312,2005,Vêtements,3,0
+453,312,2006,Vêtements,3,0
+454,312,2007,Vêtements,3,0
+455,312,2008,Vêtements,3,0
+456,312,2009,Vêtements,3,0
+457,312,2010,Vêtements,3,0
+458,312,2011,Vêtements,3,0
+459,312,2012,Vêtements,3,0
+460,312,2013,Vêtements,3,0
+461,312,2014,Vêtements,3,0
+462,313,1994,Autres articles et accessoires d'habillement,3,0
+463,313,1995,Autres articles et accessoires d'habillement,3,0
+464,313,1996,Autres articles et accessoires d'habillement,3,0
+465,313,1997,Autres articles et accessoires d'habillement,3,0
+466,313,1998,Autres articles et accessoires d'habillement,3,0
+467,313,1999,Autres articles et accessoires d'habillement,3,0
+468,313,2000,Autres articles et accessoires d'habillement,3,0
+469,313,2001,Autres articles et accessoires d'habillement,3,0
+470,313,2002,Autres articles et accessoires d'habillement,3,0
+471,313,2003,Autres articles et accessoires d'habillement,3,0
+472,313,2004,Autres articles et accessoires d'habillement,3,0
+473,313,2005,Autres articles et accessoires d'habillement,3,0
+474,313,2006,Autres articles et accessoires d'habillement,3,0
+475,313,2007,Autres articles et accessoires d'habillement,3,0
+476,313,2008,Autres articles et accessoires d'habillement,3,0
+477,313,2009,Autres articles et accessoires d'habillement,3,0
+478,313,2010,Autres articles et accessoires d'habillement,3,0
+479,313,2011,Autres articles et accessoires d'habillement,3,0
+480,313,2012,Autres articles et accessoires d'habillement,3,0
+481,313,2013,Autres articles et accessoires d'habillement,3,0
+482,313,2014,Autres articles et accessoires d'habillement,3,0
+483,314,1994,"Nettoyage, réparation et location d'articles d'habillement",3,0
+484,314,1995,"Nettoyage, réparation et location d'articles d'habillement",3,0
+485,314,1996,"Nettoyage, réparation et location d'articles d'habillement",3,0
+486,314,1997,"Nettoyage, réparation et location d'articles d'habillement",3,0
+487,314,1998,"Nettoyage, réparation et location d'articles d'habillement",3,0
+488,314,1999,"Nettoyage, réparation et location d'articles d'habillement",3,0
+489,314,2000,"Nettoyage, réparation et location d'articles d'habillement",3,0
+490,314,2001,"Nettoyage, réparation et location d'articles d'habillement",3,0
+491,314,2002,"Nettoyage, réparation et location d'articles d'habillement",3,0
+492,314,2003,"Nettoyage, réparation et location d'articles d'habillement",3,0
+493,314,2004,"Nettoyage, réparation et location d'articles d'habillement",3,0
+494,314,2005,"Nettoyage, réparation et location d'articles d'habillement",3,0
+495,314,2006,"Nettoyage, réparation et location d'articles d'habillement",3,0
+496,314,2007,"Nettoyage, réparation et location d'articles d'habillement",3,0
+497,314,2008,"Nettoyage, réparation et location d'articles d'habillement",3,0
+498,314,2009,"Nettoyage, réparation et location d'articles d'habillement",3,0
+499,314,2010,"Nettoyage, réparation et location d'articles d'habillement",3,0
+500,314,2011,"Nettoyage, réparation et location d'articles d'habillement",3,0
+501,314,2012,"Nettoyage, réparation et location d'articles d'habillement",3,0
+502,314,2013,"Nettoyage, réparation et location d'articles d'habillement",3,0
+503,314,2014,"Nettoyage, réparation et location d'articles d'habillement",3,0
+504,321,1994,Chaussures diverses,3,0
+505,321,1995,Chaussures diverses,3,0
+506,321,1996,Chaussures diverses,3,0
+507,321,1997,Chaussures diverses,3,0
+508,321,1998,Chaussures diverses,3,0
+509,321,1999,Chaussures diverses,3,0
+510,321,2000,Chaussures diverses,3,0
+511,321,2001,Chaussures diverses,3,0
+512,321,2002,Chaussures diverses,3,0
+513,321,2003,Chaussures diverses,3,0
+514,321,2004,Chaussures diverses,3,0
+515,321,2005,Chaussures diverses,3,0
+516,321,2006,Chaussures diverses,3,0
+517,321,2007,Chaussures diverses,3,0
+518,321,2008,Chaussures diverses,3,0
+519,321,2009,Chaussures diverses,3,0
+520,321,2010,Chaussures diverses,3,0
+521,321,2011,Chaussures diverses,3,0
+522,321,2012,Chaussures diverses,3,0
+523,321,2013,Chaussures diverses,3,0
+524,321,2014,Chaussures diverses,3,0
+525,322,1994,Cordonnerie et location de chaussures,3,0
+526,322,1995,Cordonnerie et location de chaussures,3,0
+527,322,1996,Cordonnerie et location de chaussures,3,0
+528,322,1997,Cordonnerie et location de chaussures,3,0
+529,322,1998,Cordonnerie et location de chaussures,3,0
+530,322,1999,Cordonnerie et location de chaussures,3,0
+531,322,2000,Cordonnerie et location de chaussures,3,0
+532,322,2001,Cordonnerie et location de chaussures,3,0
+533,322,2002,Cordonnerie et location de chaussures,3,0
+534,322,2003,Cordonnerie et location de chaussures,3,0
+535,322,2004,Cordonnerie et location de chaussures,3,0
+536,322,2005,Cordonnerie et location de chaussures,3,0
+537,322,2006,Cordonnerie et location de chaussures,3,0
+538,322,2007,Cordonnerie et location de chaussures,3,0
+539,322,2008,Cordonnerie et location de chaussures,3,0
+540,322,2009,Cordonnerie et location de chaussures,3,0
+541,322,2010,Cordonnerie et location de chaussures,3,0
+542,322,2011,Cordonnerie et location de chaussures,3,0
+543,322,2012,Cordonnerie et location de chaussures,3,0
+544,322,2013,Cordonnerie et location de chaussures,3,0
+545,322,2014,Cordonnerie et location de chaussures,3,0
+546,411,1994,Loyers effectivement payés par les locataires,0,0
+547,411,1995,Loyers effectivement payés par les locataires,0,0
+548,411,1996,Loyers effectivement payés par les locataires,0,0
+549,411,1997,Loyers effectivement payés par les locataires,0,0
+550,411,1998,Loyers effectivement payés par les locataires,0,0
+551,411,1999,Loyers effectivement payés par les locataires,0,0
+552,411,2000,Loyers effectivement payés par les locataires,0,0
+553,411,2001,Loyers effectivement payés par les locataires,0,0
+554,411,2002,Loyers effectivement payés par les locataires,0,0
+555,411,2003,Loyers effectivement payés par les locataires,0,0
+556,411,2004,Loyers effectivement payés par les locataires,0,0
+557,411,2005,Loyers effectivement payés par les locataires,0,0
+558,411,2006,Loyers effectivement payés par les locataires,0,0
+559,411,2007,Loyers effectivement payés par les locataires,0,0
+560,411,2008,Loyers effectivement payés par les locataires,0,0
+561,411,2009,Loyers effectivement payés par les locataires,0,0
+562,411,2010,Loyers effectivement payés par les locataires,0,0
+563,411,2011,Loyers effectivement payés par les locataires,0,0
+564,411,2012,Loyers effectivement payés par les locataires,0,0
+565,411,2013,Loyers effectivement payés par les locataires,0,0
+566,411,2014,Loyers effectivement payés par les locataires,0,0
+567,412,1994,Autres loyers effectifs,0,0
+568,412,1995,Autres loyers effectifs,0,0
+569,412,1996,Autres loyers effectifs,0,0
+570,412,1997,Autres loyers effectifs,0,0
+571,412,1998,Autres loyers effectifs,0,0
+572,412,1999,Autres loyers effectifs,0,0
+573,412,2000,Autres loyers effectifs,0,0
+574,412,2001,Autres loyers effectifs,0,0
+575,412,2002,Autres loyers effectifs,0,0
+576,412,2003,Autres loyers effectifs,0,0
+577,412,2004,Autres loyers effectifs,0,0
+578,412,2005,Autres loyers effectifs,0,0
+579,412,2006,Autres loyers effectifs,0,0
+580,412,2007,Autres loyers effectifs,0,0
+581,412,2008,Autres loyers effectifs,0,0
+582,412,2009,Autres loyers effectifs,0,0
+583,412,2010,Autres loyers effectifs,0,0
+584,412,2011,Autres loyers effectifs,0,0
+585,412,2012,Autres loyers effectifs,0,0
+586,412,2013,Autres loyers effectifs,0,0
+587,412,2014,Autres loyers effectifs,0,0
+588,421,1994,Loyers fictifs des propriétaires occupants,0,0
+589,421,1995,Loyers fictifs des propriétaires occupants,0,0
+590,421,1996,Loyers fictifs des propriétaires occupants,0,0
+591,421,1997,Loyers fictifs des propriétaires occupants,0,0
+592,421,1998,Loyers fictifs des propriétaires occupants,0,0
+593,421,1999,Loyers fictifs des propriétaires occupants,0,0
+594,421,2000,Loyers fictifs des propriétaires occupants,0,0
+595,421,2001,Loyers fictifs des propriétaires occupants,0,0
+596,421,2002,Loyers fictifs des propriétaires occupants,0,0
+597,421,2003,Loyers fictifs des propriétaires occupants,0,0
+598,421,2004,Loyers fictifs des propriétaires occupants,0,0
+599,421,2005,Loyers fictifs des propriétaires occupants,0,0
+600,421,2006,Loyers fictifs des propriétaires occupants,0,0
+601,421,2007,Loyers fictifs des propriétaires occupants,0,0
+602,421,2008,Loyers fictifs des propriétaires occupants,0,0
+603,421,2009,Loyers fictifs des propriétaires occupants,0,0
+604,421,2010,Loyers fictifs des propriétaires occupants,0,0
+605,421,2011,Loyers fictifs des propriétaires occupants,0,0
+606,421,2012,Loyers fictifs des propriétaires occupants,0,0
+607,421,2013,Loyers fictifs des propriétaires occupants,0,0
+608,421,2014,Loyers fictifs des propriétaires occupants,0,0
+609,422,1994,Autres loyers fictifs,0,0
+610,422,1995,Autres loyers fictifs,0,0
+611,422,1996,Autres loyers fictifs,0,0
+612,422,1997,Autres loyers fictifs,0,0
+613,422,1998,Autres loyers fictifs,0,0
+614,422,1999,Autres loyers fictifs,0,0
+615,422,2000,Autres loyers fictifs,0,0
+616,422,2001,Autres loyers fictifs,0,0
+617,422,2002,Autres loyers fictifs,0,0
+618,422,2003,Autres loyers fictifs,0,0
+619,422,2004,Autres loyers fictifs,0,0
+620,422,2005,Autres loyers fictifs,0,0
+621,422,2006,Autres loyers fictifs,0,0
+622,422,2007,Autres loyers fictifs,0,0
+623,422,2008,Autres loyers fictifs,0,0
+624,422,2009,Autres loyers fictifs,0,0
+625,422,2010,Autres loyers fictifs,0,0
+626,422,2011,Autres loyers fictifs,0,0
+627,422,2012,Autres loyers fictifs,0,0
+628,422,2013,Autres loyers fictifs,0,0
+629,422,2014,Autres loyers fictifs,0,0
+630,431,1994,Fournitures pour travaux d'entretien et de réparation des logements,3,0
+631,431,1995,Fournitures pour travaux d'entretien et de réparation des logements,3,0
+632,431,1996,Fournitures pour travaux d'entretien et de réparation des logements,3,0
+633,431,1997,Fournitures pour travaux d'entretien et de réparation des logements,3,0
+634,431,1998,Fournitures pour travaux d'entretien et de réparation des logements,3,0
+635,431,1999,Fournitures pour travaux d'entretien et de réparation des logements,3,0
+636,431,2000,Fournitures pour travaux d'entretien et de réparation des logements,2,0
+637,431,2001,Fournitures pour travaux d'entretien et de réparation des logements,2,0
+638,431,2002,Fournitures pour travaux d'entretien et de réparation des logements,2,0
+639,431,2003,Fournitures pour travaux d'entretien et de réparation des logements,2,0
+640,431,2004,Fournitures pour travaux d'entretien et de réparation des logements,2,0
+641,431,2005,Fournitures pour travaux d'entretien et de réparation des logements,2,0
+642,431,2006,Fournitures pour travaux d'entretien et de réparation des logements,2,0
+643,431,2007,Fournitures pour travaux d'entretien et de réparation des logements,2,0
+644,431,2008,Fournitures pour travaux d'entretien et de réparation des logements,2,0
+645,431,2009,Fournitures pour travaux d'entretien et de réparation des logements,2,0
+646,431,2010,Fournitures pour travaux d'entretien et de réparation des logements,2,0
+647,431,2011,Fournitures pour travaux d'entretien et de réparation des logements,2,0
+648,431,2012,Fournitures pour travaux d'entretien et de réparation des logements,4,0
+649,431,2013,Fournitures pour travaux d'entretien et de réparation des logements,4,0
+650,431,2014,Fournitures pour travaux d'entretien et de réparation des logements,4,0
+651,432,1994,Services concernant l'entretien et les réparations du logement,3,0
+652,432,1995,Services concernant l'entretien et les réparations du logement,3,0
+653,432,1996,Services concernant l'entretien et les réparations du logement,3,0
+654,432,1997,Services concernant l'entretien et les réparations du logement,3,0
+655,432,1998,Services concernant l'entretien et les réparations du logement,3,0
+656,432,1999,Services concernant l'entretien et les réparations du logement,3,0
+657,432,2000,Services concernant l'entretien et les réparations du logement,2,0
+658,432,2001,Services concernant l'entretien et les réparations du logement,2,0
+659,432,2002,Services concernant l'entretien et les réparations du logement,2,0
+660,432,2003,Services concernant l'entretien et les réparations du logement,2,0
+661,432,2004,Services concernant l'entretien et les réparations du logement,2,0
+662,432,2005,Services concernant l'entretien et les réparations du logement,2,0
+663,432,2006,Services concernant l'entretien et les réparations du logement,2,0
+664,432,2007,Services concernant l'entretien et les réparations du logement,2,0
+665,432,2008,Services concernant l'entretien et les réparations du logement,2,0
+666,432,2009,Services concernant l'entretien et les réparations du logement,2,0
+667,432,2010,Services concernant l'entretien et les réparations du logement,2,0
+668,432,2011,Services concernant l'entretien et les réparations du logement,2,0
+669,432,2012,Services concernant l'entretien et les réparations du logement,4,0
+670,432,2013,Services concernant l'entretien et les réparations du logement,4,0
+671,432,2014,Services concernant l'entretien et les réparations du logement,4,0
+672,441,1994,Alimentation en eau,2,0
+673,441,1995,Alimentation en eau,2,0
+674,441,1996,Alimentation en eau,2,0
+675,441,1997,Alimentation en eau,2,0
+676,441,1998,Alimentation en eau,2,0
+677,441,1999,Alimentation en eau,2,0
+678,441,2000,Alimentation en eau,2,0
+679,441,2001,Alimentation en eau,2,0
+680,441,2002,Alimentation en eau,2,0
+681,441,2003,Alimentation en eau,2,0
+682,441,2004,Alimentation en eau,2,0
+683,441,2005,Alimentation en eau,2,0
+684,441,2006,Alimentation en eau,2,0
+685,441,2007,Alimentation en eau,2,0
+686,441,2008,Alimentation en eau,2,0
+687,441,2009,Alimentation en eau,2,0
+688,441,2010,Alimentation en eau,2,0
+689,441,2011,Alimentation en eau,2,0
+690,441,2012,Alimentation en eau,4,0
+691,441,2013,Alimentation en eau,4,0
+692,441,2014,Alimentation en eau,4,0
+693,442,1994,Collecte des ordures ménagères,2,0
+694,442,1995,Collecte des ordures ménagères,2,0
+695,442,1996,Collecte des ordures ménagères,2,0
+696,442,1997,Collecte des ordures ménagères,2,0
+697,442,1998,Collecte des ordures ménagères,2,0
+698,442,1999,Collecte des ordures ménagères,2,0
+699,442,2000,Collecte des ordures ménagères,2,0
+700,442,2001,Collecte des ordures ménagères,2,0
+701,442,2002,Collecte des ordures ménagères,2,0
+702,442,2003,Collecte des ordures ménagères,2,0
+703,442,2004,Collecte des ordures ménagères,2,0
+704,442,2005,Collecte des ordures ménagères,2,0
+705,442,2006,Collecte des ordures ménagères,2,0
+706,442,2007,Collecte des ordures ménagères,2,0
+707,442,2008,Collecte des ordures ménagères,2,0
+708,442,2009,Collecte des ordures ménagères,2,0
+709,442,2010,Collecte des ordures ménagères,2,0
+710,442,2011,Collecte des ordures ménagères,2,0
+711,442,2012,Collecte des ordures ménagères,4,0
+712,442,2013,Collecte des ordures ménagères,4,0
+713,442,2014,Collecte des ordures ménagères,4,0
+714,443,1994,Reprise des eaux usées,2,0
+715,443,1995,Reprise des eaux usées,2,0
+716,443,1996,Reprise des eaux usées,2,0
+717,443,1997,Reprise des eaux usées,2,0
+718,443,1998,Reprise des eaux usées,2,0
+719,443,1999,Reprise des eaux usées,2,0
+720,443,2000,Reprise des eaux usées,2,0
+721,443,2001,Reprise des eaux usées,2,0
+722,443,2002,Reprise des eaux usées,2,0
+723,443,2003,Reprise des eaux usées,2,0
+724,443,2004,Reprise des eaux usées,2,0
+725,443,2005,Reprise des eaux usées,2,0
+726,443,2006,Reprise des eaux usées,2,0
+727,443,2007,Reprise des eaux usées,2,0
+728,443,2008,Reprise des eaux usées,2,0
+729,443,2009,Reprise des eaux usées,2,0
+730,443,2010,Reprise des eaux usées,2,0
+731,443,2011,Reprise des eaux usées,2,0
+732,443,2012,Reprise des eaux usées,4,0
+733,443,2013,Reprise des eaux usées,4,0
+734,443,2014,Reprise des eaux usées,4,0
+735,444,1994,Service divers liés au logement non compris ailleurs,3,0
+736,444,1995,Service divers liés au logement non compris ailleurs,3,0
+737,444,1996,Service divers liés au logement non compris ailleurs,3,0
+738,444,1997,Service divers liés au logement non compris ailleurs,3,0
+739,444,1998,Service divers liés au logement non compris ailleurs,3,0
+740,444,1999,Service divers liés au logement non compris ailleurs,3,0
+741,444,2000,Service divers liés au logement non compris ailleurs,3,0
+742,444,2001,Service divers liés au logement non compris ailleurs,3,0
+743,444,2002,Service divers liés au logement non compris ailleurs,3,0
+744,444,2003,Service divers liés au logement non compris ailleurs,3,0
+745,444,2004,Service divers liés au logement non compris ailleurs,3,0
+746,444,2005,Service divers liés au logement non compris ailleurs,3,0
+747,444,2006,Service divers liés au logement non compris ailleurs,3,0
+748,444,2007,Service divers liés au logement non compris ailleurs,3,0
+749,444,2008,Service divers liés au logement non compris ailleurs,3,0
+750,444,2009,Service divers liés au logement non compris ailleurs,3,0
+751,444,2010,Service divers liés au logement non compris ailleurs,3,0
+752,444,2011,Service divers liés au logement non compris ailleurs,3,0
+753,444,2012,Service divers liés au logement non compris ailleurs,3,0
+754,444,2013,Service divers liés au logement non compris ailleurs,3,0
+755,444,2014,Service divers liés au logement non compris ailleurs,3,0
+756,451,1994,Electricité,3,0
+757,451,1995,Electricité,3,0
+758,451,1996,Electricité,3,0
+759,451,1997,Electricité,3,0
+760,451,1998,Electricité,3,0
+761,451,1999,Electricité,3,0
+762,451,2000,Electricité,3,0
+763,451,2001,Electricité,3,0
+764,451,2002,Electricité,3,0
+765,451,2003,Electricité,3,0
+766,451,2004,Electricité,3,0
+767,451,2005,Electricité,3,0
+768,451,2006,Electricité,3,0
+769,451,2007,Electricité,3,0
+770,451,2008,Electricité,3,0
+771,451,2009,Electricité,3,0
+772,451,2010,Electricité,3,0
+773,451,2011,Electricité,3,0
+774,451,2012,Electricité,3,0
+775,451,2013,Electricité,3,0
+776,451,2014,Electricité,3,0
+777,4511,1994,Facture EDF GDF non dissociables,3,1
+778,4511,1995,Facture EDF GDF non dissociables,3,1
+779,4511,1996,Facture EDF GDF non dissociables,3,1
+780,4511,1997,Facture EDF GDF non dissociables,3,1
+781,4511,1998,Facture EDF GDF non dissociables,3,1
+782,4511,1999,Facture EDF GDF non dissociables,3,1
+783,4511,2000,Facture EDF GDF non dissociables,3,1
+784,4511,2001,Facture EDF GDF non dissociables,3,1
+785,4511,2002,Facture EDF GDF non dissociables,3,1
+786,4511,2003,Facture EDF GDF non dissociables,3,1
+787,4511,2004,Facture EDF GDF non dissociables,3,1
+788,4511,2005,Facture EDF GDF non dissociables,3,1
+789,4511,2006,Facture EDF GDF non dissociables,3,1
+790,4511,2007,Facture EDF GDF non dissociables,3,1
+791,4511,2008,Facture EDF GDF non dissociables,3,1
+792,4511,2009,Facture EDF GDF non dissociables,3,1
+793,4511,2010,Facture EDF GDF non dissociables,3,1
+794,4511,2011,Facture EDF GDF non dissociables,3,1
+795,4511,2012,Facture EDF GDF non dissociables,3,1
+796,4511,2013,Facture EDF GDF non dissociables,3,1
+797,4511,2014,Facture EDF GDF non dissociables,3,1
+798,452,1994,Gaz,3,0
+799,452,1995,Gaz,3,0
+800,452,1996,Gaz,3,0
+801,452,1997,Gaz,3,0
+802,452,1998,Gaz,3,0
+803,452,1999,Gaz,3,0
+804,452,2000,Gaz,3,0
+805,452,2001,Gaz,3,0
+806,452,2002,Gaz,3,0
+807,452,2003,Gaz,3,0
+808,452,2004,Gaz,3,0
+809,452,2005,Gaz,3,0
+810,452,2006,Gaz,3,0
+811,452,2007,Gaz,3,0
+812,452,2008,Gaz,3,0
+813,452,2009,Gaz,3,0
+814,452,2010,Gaz,3,0
+815,452,2011,Gaz,3,0
+816,452,2012,Gaz,3,0
+817,452,2013,Gaz,3,0
+818,452,2014,Gaz,3,0
+819,4522,1994,"Achat de butane, propane",3,1
+820,4522,1995,"Achat de butane, propane",3,1
+821,4522,1996,"Achat de butane, propane",3,1
+822,4522,1997,"Achat de butane, propane",3,1
+823,4522,1998,"Achat de butane, propane",3,1
+824,4522,1999,"Achat de butane, propane",3,1
+825,4522,2000,"Achat de butane, propane",3,1
+826,4522,2001,"Achat de butane, propane",3,1
+827,4522,2002,"Achat de butane, propane",3,1
+828,4522,2003,"Achat de butane, propane",3,1
+829,4522,2004,"Achat de butane, propane",3,1
+830,4522,2005,"Achat de butane, propane",3,1
+831,4522,2006,"Achat de butane, propane",3,1
+832,4522,2007,"Achat de butane, propane",3,1
+833,4522,2008,"Achat de butane, propane",3,1
+834,4522,2009,"Achat de butane, propane",3,1
+835,4522,2010,"Achat de butane, propane",3,1
+836,4522,2011,"Achat de butane, propane",3,1
+837,4522,2012,"Achat de butane, propane",3,1
+838,4522,2013,"Achat de butane, propane",3,1
+839,4522,2014,"Achat de butane, propane",3,1
+840,453,1994,Combustibles liquides,3,0
+841,453,1995,Combustibles liquides,3,0
+842,453,1996,Combustibles liquides,3,0
+843,453,1997,Combustibles liquides,3,0
+844,453,1998,Combustibles liquides,3,0
+845,453,1999,Combustibles liquides,3,0
+846,453,2000,Combustibles liquides,3,0
+847,453,2001,Combustibles liquides,3,0
+848,453,2002,Combustibles liquides,3,0
+849,453,2003,Combustibles liquides,3,0
+850,453,2004,Combustibles liquides,3,0
+851,453,2005,Combustibles liquides,3,0
+852,453,2006,Combustibles liquides,3,0
+853,453,2007,Combustibles liquides,3,0
+854,453,2008,Combustibles liquides,3,0
+855,453,2009,Combustibles liquides,3,0
+856,453,2010,Combustibles liquides,3,0
+857,453,2011,Combustibles liquides,3,0
+858,453,2012,Combustibles liquides,3,0
+859,453,2013,Combustibles liquides,3,0
+860,453,2014,Combustibles liquides,3,0
+861,454,1994,Combustibles solides,3,0
+862,454,1995,Combustibles solides,3,0
+863,454,1996,Combustibles solides,3,0
+864,454,1997,Combustibles solides,3,0
+865,454,1998,Combustibles solides,3,0
+866,454,1999,Combustibles solides,3,0
+867,454,2000,Combustibles solides,3,0
+868,454,2001,Combustibles solides,3,0
+869,454,2002,Combustibles solides,3,0
+870,454,2003,Combustibles solides,3,0
+871,454,2004,Combustibles solides,3,0
+872,454,2005,Combustibles solides,3,0
+873,454,2006,Combustibles solides,3,0
+874,454,2007,Combustibles solides,3,0
+875,454,2008,Combustibles solides,3,0
+876,454,2009,Combustibles solides,3,0
+877,454,2010,Combustibles solides,3,0
+878,454,2011,Combustibles solides,3,0
+879,454,2012,Combustibles solides,3,0
+880,454,2013,Combustibles solides,3,0
+881,454,2014,Combustibles solides,3,0
+882,455,1994,Energie thermique,3,0
+883,455,1995,Energie thermique,3,0
+884,455,1996,Energie thermique,3,0
+885,455,1997,Energie thermique,3,0
+886,455,1998,Energie thermique,3,0
+887,455,1999,Energie thermique,3,0
+888,455,2000,Energie thermique,3,0
+889,455,2001,Energie thermique,3,0
+890,455,2002,Energie thermique,3,0
+891,455,2003,Energie thermique,3,0
+892,455,2004,Energie thermique,3,0
+893,455,2005,Energie thermique,3,0
+894,455,2006,Energie thermique,3,0
+895,455,2007,Energie thermique,3,0
+896,455,2008,Energie thermique,3,0
+897,455,2009,Energie thermique,3,0
+898,455,2010,Energie thermique,3,0
+899,455,2011,Energie thermique,3,0
+900,455,2012,Energie thermique,3,0
+901,455,2013,Energie thermique,3,0
+902,455,2014,Energie thermique,3,0
+903,511,1994,Meubles et articles d'ameublement,3,0
+904,511,1995,Meubles et articles d'ameublement,3,0
+905,511,1996,Meubles et articles d'ameublement,3,0
+906,511,1997,Meubles et articles d'ameublement,3,0
+907,511,1998,Meubles et articles d'ameublement,3,0
+908,511,1999,Meubles et articles d'ameublement,3,0
+909,511,2000,Meubles et articles d'ameublement,3,0
+910,511,2001,Meubles et articles d'ameublement,3,0
+911,511,2002,Meubles et articles d'ameublement,3,0
+912,511,2003,Meubles et articles d'ameublement,3,0
+913,511,2004,Meubles et articles d'ameublement,3,0
+914,511,2005,Meubles et articles d'ameublement,3,0
+915,511,2006,Meubles et articles d'ameublement,3,0
+916,511,2007,Meubles et articles d'ameublement,3,0
+917,511,2008,Meubles et articles d'ameublement,3,0
+918,511,2009,Meubles et articles d'ameublement,3,0
+919,511,2010,Meubles et articles d'ameublement,3,0
+920,511,2011,Meubles et articles d'ameublement,3,0
+921,511,2012,Meubles et articles d'ameublement,3,0
+922,511,2013,Meubles et articles d'ameublement,3,0
+923,511,2014,Meubles et articles d'ameublement,3,0
+924,512,1994,Tapis et revêtements de sols divers,3,0
+925,512,1995,Tapis et revêtements de sols divers,3,0
+926,512,1996,Tapis et revêtements de sols divers,3,0
+927,512,1997,Tapis et revêtements de sols divers,3,0
+928,512,1998,Tapis et revêtements de sols divers,3,0
+929,512,1999,Tapis et revêtements de sols divers,3,0
+930,512,2000,Tapis et revêtements de sols divers,3,0
+931,512,2001,Tapis et revêtements de sols divers,3,0
+932,512,2002,Tapis et revêtements de sols divers,3,0
+933,512,2003,Tapis et revêtements de sols divers,3,0
+934,512,2004,Tapis et revêtements de sols divers,3,0
+935,512,2005,Tapis et revêtements de sols divers,3,0
+936,512,2006,Tapis et revêtements de sols divers,3,0
+937,512,2007,Tapis et revêtements de sols divers,3,0
+938,512,2008,Tapis et revêtements de sols divers,3,0
+939,512,2009,Tapis et revêtements de sols divers,3,0
+940,512,2010,Tapis et revêtements de sols divers,3,0
+941,512,2011,Tapis et revêtements de sols divers,3,0
+942,512,2012,Tapis et revêtements de sols divers,3,0
+943,512,2013,Tapis et revêtements de sols divers,3,0
+944,512,2014,Tapis et revêtements de sols divers,3,0
+945,513,1994,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+946,513,1995,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+947,513,1996,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+948,513,1997,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+949,513,1998,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+950,513,1999,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+951,513,2000,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+952,513,2001,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+953,513,2002,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+954,513,2003,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+955,513,2004,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+956,513,2005,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+957,513,2006,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+958,513,2007,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+959,513,2008,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+960,513,2009,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+961,513,2010,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+962,513,2011,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+963,513,2012,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+964,513,2013,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+965,513,2014,"Réparation de meubles, d'articles d'ameublement et de revêtements souples pour le sol",3,0
+966,520,1994,Article de ménage en textiles,3,0
+967,520,1995,Article de ménage en textiles,3,0
+968,520,1996,Article de ménage en textiles,3,0
+969,520,1997,Article de ménage en textiles,3,0
+970,520,1998,Article de ménage en textiles,3,0
+971,520,1999,Article de ménage en textiles,3,0
+972,520,2000,Article de ménage en textiles,3,0
+973,520,2001,Article de ménage en textiles,3,0
+974,520,2002,Article de ménage en textiles,3,0
+975,520,2003,Article de ménage en textiles,3,0
+976,520,2004,Article de ménage en textiles,3,0
+977,520,2005,Article de ménage en textiles,3,0
+978,520,2006,Article de ménage en textiles,3,0
+979,520,2007,Article de ménage en textiles,3,0
+980,520,2008,Article de ménage en textiles,3,0
+981,520,2009,Article de ménage en textiles,3,0
+982,520,2010,Article de ménage en textiles,3,0
+983,520,2011,Article de ménage en textiles,3,0
+984,520,2012,Article de ménage en textiles,3,0
+985,520,2013,Article de ménage en textiles,3,0
+986,520,2014,Article de ménage en textiles,3,0
+987,531,1994,"Gros appareils ménagers, électriques ou non",3,0
+988,531,1995,"Gros appareils ménagers, électriques ou non",3,0
+989,531,1996,"Gros appareils ménagers, électriques ou non",3,0
+990,531,1997,"Gros appareils ménagers, électriques ou non",3,0
+991,531,1998,"Gros appareils ménagers, électriques ou non",3,0
+992,531,1999,"Gros appareils ménagers, électriques ou non",3,0
+993,531,2000,"Gros appareils ménagers, électriques ou non",3,0
+994,531,2001,"Gros appareils ménagers, électriques ou non",3,0
+995,531,2002,"Gros appareils ménagers, électriques ou non",3,0
+996,531,2003,"Gros appareils ménagers, électriques ou non",3,0
+997,531,2004,"Gros appareils ménagers, électriques ou non",3,0
+998,531,2005,"Gros appareils ménagers, électriques ou non",3,0
+999,531,2006,"Gros appareils ménagers, électriques ou non",3,0
+1000,531,2007,"Gros appareils ménagers, électriques ou non",3,0
+1001,531,2008,"Gros appareils ménagers, électriques ou non",3,0
+1002,531,2009,"Gros appareils ménagers, électriques ou non",3,0
+1003,531,2010,"Gros appareils ménagers, électriques ou non",3,0
+1004,531,2011,"Gros appareils ménagers, électriques ou non",3,0
+1005,531,2012,"Gros appareils ménagers, électriques ou non",3,0
+1006,531,2013,"Gros appareils ménagers, électriques ou non",3,0
+1007,531,2014,"Gros appareils ménagers, électriques ou non",3,0
+1008,532,1994,Petits appareils électroméangers,3,0
+1009,532,1995,Petits appareils électroméangers,3,0
+1010,532,1996,Petits appareils électroméangers,3,0
+1011,532,1997,Petits appareils électroméangers,3,0
+1012,532,1998,Petits appareils électroméangers,3,0
+1013,532,1999,Petits appareils électroméangers,3,0
+1014,532,2000,Petits appareils électroméangers,3,0
+1015,532,2001,Petits appareils électroméangers,3,0
+1016,532,2002,Petits appareils électroméangers,3,0
+1017,532,2003,Petits appareils électroméangers,3,0
+1018,532,2004,Petits appareils électroméangers,3,0
+1019,532,2005,Petits appareils électroméangers,3,0
+1020,532,2006,Petits appareils électroméangers,3,0
+1021,532,2007,Petits appareils électroméangers,3,0
+1022,532,2008,Petits appareils électroméangers,3,0
+1023,532,2009,Petits appareils électroméangers,3,0
+1024,532,2010,Petits appareils électroméangers,3,0
+1025,532,2011,Petits appareils électroméangers,3,0
+1026,532,2012,Petits appareils électroméangers,3,0
+1027,532,2013,Petits appareils électroméangers,3,0
+1028,532,2014,Petits appareils électroméangers,3,0
+1029,533,1994,Réparation d'appareils ménagers,3,0
+1030,533,1995,Réparation d'appareils ménagers,3,0
+1031,533,1996,Réparation d'appareils ménagers,3,0
+1032,533,1997,Réparation d'appareils ménagers,3,0
+1033,533,1998,Réparation d'appareils ménagers,3,0
+1034,533,1999,Réparation d'appareils ménagers,3,0
+1035,533,2000,Réparation d'appareils ménagers,3,0
+1036,533,2001,Réparation d'appareils ménagers,3,0
+1037,533,2002,Réparation d'appareils ménagers,3,0
+1038,533,2003,Réparation d'appareils ménagers,3,0
+1039,533,2004,Réparation d'appareils ménagers,3,0
+1040,533,2005,Réparation d'appareils ménagers,3,0
+1041,533,2006,Réparation d'appareils ménagers,3,0
+1042,533,2007,Réparation d'appareils ménagers,3,0
+1043,533,2008,Réparation d'appareils ménagers,3,0
+1044,533,2009,Réparation d'appareils ménagers,3,0
+1045,533,2010,Réparation d'appareils ménagers,3,0
+1046,533,2011,Réparation d'appareils ménagers,3,0
+1047,533,2012,Réparation d'appareils ménagers,3,0
+1048,533,2013,Réparation d'appareils ménagers,3,0
+1049,533,2014,Réparation d'appareils ménagers,3,0
+1050,540,1994,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1051,540,1995,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1052,540,1996,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1053,540,1997,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1054,540,1998,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1055,540,1999,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1056,540,2000,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1057,540,2001,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1058,540,2002,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1059,540,2003,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1060,540,2004,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1061,540,2005,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1062,540,2006,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1063,540,2007,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1064,540,2008,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1065,540,2009,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1066,540,2010,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1067,540,2011,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1068,540,2012,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1069,540,2013,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1070,540,2014,"Verrerie, vaisselle et ustensiles de ménage",3,0
+1071,551,1994,Gros outillage et matériel,3,0
+1072,551,1995,Gros outillage et matériel,3,0
+1073,551,1996,Gros outillage et matériel,3,0
+1074,551,1997,Gros outillage et matériel,3,0
+1075,551,1998,Gros outillage et matériel,3,0
+1076,551,1999,Gros outillage et matériel,3,0
+1077,551,2000,Gros outillage et matériel,3,0
+1078,551,2001,Gros outillage et matériel,3,0
+1079,551,2002,Gros outillage et matériel,3,0
+1080,551,2003,Gros outillage et matériel,3,0
+1081,551,2004,Gros outillage et matériel,3,0
+1082,551,2005,Gros outillage et matériel,3,0
+1083,551,2006,Gros outillage et matériel,3,0
+1084,551,2007,Gros outillage et matériel,3,0
+1085,551,2008,Gros outillage et matériel,3,0
+1086,551,2009,Gros outillage et matériel,3,0
+1087,551,2010,Gros outillage et matériel,3,0
+1088,551,2011,Gros outillage et matériel,3,0
+1089,551,2012,Gros outillage et matériel,3,0
+1090,551,2013,Gros outillage et matériel,3,0
+1091,551,2014,Gros outillage et matériel,3,0
+1092,552,1994,Petit outillage et accessoires divers,3,0
+1093,552,1995,Petit outillage et accessoires divers,3,0
+1094,552,1996,Petit outillage et accessoires divers,3,0
+1095,552,1997,Petit outillage et accessoires divers,3,0
+1096,552,1998,Petit outillage et accessoires divers,3,0
+1097,552,1999,Petit outillage et accessoires divers,3,0
+1098,552,2000,Petit outillage et accessoires divers,3,0
+1099,552,2001,Petit outillage et accessoires divers,3,0
+1100,552,2002,Petit outillage et accessoires divers,3,0
+1101,552,2003,Petit outillage et accessoires divers,3,0
+1102,552,2004,Petit outillage et accessoires divers,3,0
+1103,552,2005,Petit outillage et accessoires divers,3,0
+1104,552,2006,Petit outillage et accessoires divers,3,0
+1105,552,2007,Petit outillage et accessoires divers,3,0
+1106,552,2008,Petit outillage et accessoires divers,3,0
+1107,552,2009,Petit outillage et accessoires divers,3,0
+1108,552,2010,Petit outillage et accessoires divers,3,0
+1109,552,2011,Petit outillage et accessoires divers,3,0
+1110,552,2012,Petit outillage et accessoires divers,3,0
+1111,552,2013,Petit outillage et accessoires divers,3,0
+1112,552,2014,Petit outillage et accessoires divers,3,0
+1113,561,1994,Biens d'équipement ménager non durables,3,0
+1114,561,1995,Biens d'équipement ménager non durables,3,0
+1115,561,1996,Biens d'équipement ménager non durables,3,0
+1116,561,1997,Biens d'équipement ménager non durables,3,0
+1117,561,1998,Biens d'équipement ménager non durables,3,0
+1118,561,1999,Biens d'équipement ménager non durables,3,0
+1119,561,2000,Biens d'équipement ménager non durables,3,0
+1120,561,2001,Biens d'équipement ménager non durables,3,0
+1121,561,2002,Biens d'équipement ménager non durables,3,0
+1122,561,2003,Biens d'équipement ménager non durables,3,0
+1123,561,2004,Biens d'équipement ménager non durables,3,0
+1124,561,2005,Biens d'équipement ménager non durables,3,0
+1125,561,2006,Biens d'équipement ménager non durables,3,0
+1126,561,2007,Biens d'équipement ménager non durables,3,0
+1127,561,2008,Biens d'équipement ménager non durables,3,0
+1128,561,2009,Biens d'équipement ménager non durables,3,0
+1129,561,2010,Biens d'équipement ménager non durables,3,0
+1130,561,2011,Biens d'équipement ménager non durables,3,0
+1131,561,2012,Biens d'équipement ménager non durables,3,0
+1132,561,2013,Biens d'équipement ménager non durables,3,0
+1133,561,2014,Biens d'équipement ménager non durables,3,0
+1134,562,1994,Services domestiques et services ménagers,3,0
+1135,562,1995,Services domestiques et services ménagers,3,0
+1136,562,1996,Services domestiques et services ménagers,3,0
+1137,562,1997,Services domestiques et services ménagers,3,0
+1138,562,1998,Services domestiques et services ménagers,3,0
+1139,562,1999,Services domestiques et services ménagers,3,0
+1140,562,2000,Services domestiques et services ménagers,2,0
+1141,562,2001,Services domestiques et services ménagers,2,0
+1142,562,2002,Services domestiques et services ménagers,2,0
+1143,562,2003,Services domestiques et services ménagers,2,0
+1144,562,2004,Services domestiques et services ménagers,2,0
+1145,562,2005,Services domestiques et services ménagers,2,0
+1146,562,2006,Services domestiques et services ménagers,2,0
+1147,562,2007,Services domestiques et services ménagers,2,0
+1148,562,2008,Services domestiques et services ménagers,2,0
+1149,562,2009,Services domestiques et services ménagers,2,0
+1150,562,2010,Services domestiques et services ménagers,2,0
+1151,562,2011,Services domestiques et services ménagers,2,0
+1152,562,2012,Services domestiques et services ménagers,4,0
+1153,562,2013,Services domestiques et services ménagers,4,0
+1154,562,2014,Services domestiques et services ménagers,4,0
+1155,611,1994,Produits pharmaceutiques,1,0
+1156,611,1995,Produits pharmaceutiques,1,0
+1157,611,1996,Produits pharmaceutiques,1,0
+1158,611,1997,Produits pharmaceutiques,1,0
+1159,611,1998,Produits pharmaceutiques,1,0
+1160,611,1999,Produits pharmaceutiques,1,0
+1161,611,2000,Produits pharmaceutiques,1,0
+1162,611,2001,Produits pharmaceutiques,1,0
+1163,611,2002,Produits pharmaceutiques,1,0
+1164,611,2003,Produits pharmaceutiques,1,0
+1165,611,2004,Produits pharmaceutiques,1,0
+1166,611,2005,Produits pharmaceutiques,1,0
+1167,611,2006,Produits pharmaceutiques,1,0
+1168,611,2007,Produits pharmaceutiques,1,0
+1169,611,2008,Produits pharmaceutiques,1,0
+1170,611,2009,Produits pharmaceutiques,1,0
+1171,611,2010,Produits pharmaceutiques,1,0
+1172,611,2011,Produits pharmaceutiques,1,0
+1173,611,2012,Produits pharmaceutiques,1,0
+1174,611,2013,Produits pharmaceutiques,1,0
+1175,611,2014,Produits pharmaceutiques,1,0
+1176,612,1994,Produits médicaux divers,3,0
+1177,612,1995,Produits médicaux divers,3,0
+1178,612,1996,Produits médicaux divers,3,0
+1179,612,1997,Produits médicaux divers,3,0
+1180,612,1998,Produits médicaux divers,3,0
+1181,612,1999,Produits médicaux divers,3,0
+1182,612,2000,Produits médicaux divers,3,0
+1183,612,2001,Produits médicaux divers,3,0
+1184,612,2002,Produits médicaux divers,3,0
+1185,612,2003,Produits médicaux divers,3,0
+1186,612,2004,Produits médicaux divers,3,0
+1187,612,2005,Produits médicaux divers,3,0
+1188,612,2006,Produits médicaux divers,3,0
+1189,612,2007,Produits médicaux divers,3,0
+1190,612,2008,Produits médicaux divers,3,0
+1191,612,2009,Produits médicaux divers,3,0
+1192,612,2010,Produits médicaux divers,3,0
+1193,612,2011,Produits médicaux divers,3,0
+1194,612,2012,Produits médicaux divers,3,0
+1195,612,2013,Produits médicaux divers,3,0
+1196,612,2014,Produits médicaux divers,3,0
+1197,613,1994,Appareils et matériel thérapeutiques,2,0
+1198,613,1995,Appareils et matériel thérapeutiques,2,0
+1199,613,1996,Appareils et matériel thérapeutiques,2,0
+1200,613,1997,Appareils et matériel thérapeutiques,2,0
+1201,613,1998,Appareils et matériel thérapeutiques,2,0
+1202,613,1999,Appareils et matériel thérapeutiques,2,0
+1203,613,2000,Appareils et matériel thérapeutiques,2,0
+1204,613,2001,Appareils et matériel thérapeutiques,2,0
+1205,613,2002,Appareils et matériel thérapeutiques,2,0
+1206,613,2003,Appareils et matériel thérapeutiques,2,0
+1207,613,2004,Appareils et matériel thérapeutiques,2,0
+1208,613,2005,Appareils et matériel thérapeutiques,2,0
+1209,613,2006,Appareils et matériel thérapeutiques,2,0
+1210,613,2007,Appareils et matériel thérapeutiques,2,0
+1211,613,2008,Appareils et matériel thérapeutiques,2,0
+1212,613,2009,Appareils et matériel thérapeutiques,2,0
+1213,613,2010,Appareils et matériel thérapeutiques,2,0
+1214,613,2011,Appareils et matériel thérapeutiques,2,0
+1215,613,2012,Appareils et matériel thérapeutiques,2,0
+1216,613,2013,Appareils et matériel thérapeutiques,2,0
+1217,613,2014,Appareils et matériel thérapeutiques,2,0
+1218,621,1994,Services médicaux,0,0
+1219,621,1995,Services médicaux,0,0
+1220,621,1996,Services médicaux,0,0
+1221,621,1997,Services médicaux,0,0
+1222,621,1998,Services médicaux,0,0
+1223,621,1999,Services médicaux,0,0
+1224,621,2000,Services médicaux,0,0
+1225,621,2001,Services médicaux,0,0
+1226,621,2002,Services médicaux,0,0
+1227,621,2003,Services médicaux,0,0
+1228,621,2004,Services médicaux,0,0
+1229,621,2005,Services médicaux,0,0
+1230,621,2006,Services médicaux,0,0
+1231,621,2007,Services médicaux,0,0
+1232,621,2008,Services médicaux,0,0
+1233,621,2009,Services médicaux,0,0
+1234,621,2010,Services médicaux,0,0
+1235,621,2011,Services médicaux,0,0
+1236,621,2012,Services médicaux,0,0
+1237,621,2013,Services médicaux,0,0
+1238,621,2014,Services médicaux,0,0
+1239,622,1994,Services dentaires,0,0
+1240,622,1995,Services dentaires,0,0
+1241,622,1996,Services dentaires,0,0
+1242,622,1997,Services dentaires,0,0
+1243,622,1998,Services dentaires,0,0
+1244,622,1999,Services dentaires,0,0
+1245,622,2000,Services dentaires,0,0
+1246,622,2001,Services dentaires,0,0
+1247,622,2002,Services dentaires,0,0
+1248,622,2003,Services dentaires,0,0
+1249,622,2004,Services dentaires,0,0
+1250,622,2005,Services dentaires,0,0
+1251,622,2006,Services dentaires,0,0
+1252,622,2007,Services dentaires,0,0
+1253,622,2008,Services dentaires,0,0
+1254,622,2009,Services dentaires,0,0
+1255,622,2010,Services dentaires,0,0
+1256,622,2011,Services dentaires,0,0
+1257,622,2012,Services dentaires,0,0
+1258,622,2013,Services dentaires,0,0
+1259,622,2014,Services dentaires,0,0
+1260,623,1994,Services paramédicaux,0,0
+1261,623,1995,Services paramédicaux,0,0
+1262,623,1996,Services paramédicaux,0,0
+1263,623,1997,Services paramédicaux,0,0
+1264,623,1998,Services paramédicaux,0,0
+1265,623,1999,Services paramédicaux,0,0
+1266,623,2000,Services paramédicaux,0,0
+1267,623,2001,Services paramédicaux,0,0
+1268,623,2002,Services paramédicaux,0,0
+1269,623,2003,Services paramédicaux,0,0
+1270,623,2004,Services paramédicaux,0,0
+1271,623,2005,Services paramédicaux,0,0
+1272,623,2006,Services paramédicaux,0,0
+1273,623,2007,Services paramédicaux,0,0
+1274,623,2008,Services paramédicaux,0,0
+1275,623,2009,Services paramédicaux,0,0
+1276,623,2010,Services paramédicaux,0,0
+1277,623,2011,Services paramédicaux,0,0
+1278,623,2012,Services paramédicaux,0,0
+1279,623,2013,Services paramédicaux,0,0
+1280,623,2014,Services paramédicaux,0,0
+1281,630,1994,Services hospitaliers,0,0
+1282,630,1995,Services hospitaliers,0,0
+1283,630,1996,Services hospitaliers,0,0
+1284,630,1997,Services hospitaliers,0,0
+1285,630,1998,Services hospitaliers,0,0
+1286,630,1999,Services hospitaliers,0,0
+1287,630,2000,Services hospitaliers,0,0
+1288,630,2001,Services hospitaliers,0,0
+1289,630,2002,Services hospitaliers,0,0
+1290,630,2003,Services hospitaliers,0,0
+1291,630,2004,Services hospitaliers,0,0
+1292,630,2005,Services hospitaliers,0,0
+1293,630,2006,Services hospitaliers,0,0
+1294,630,2007,Services hospitaliers,0,0
+1295,630,2008,Services hospitaliers,0,0
+1296,630,2009,Services hospitaliers,0,0
+1297,630,2010,Services hospitaliers,0,0
+1298,630,2011,Services hospitaliers,0,0
+1299,630,2012,Services hospitaliers,0,0
+1300,630,2013,Services hospitaliers,0,0
+1301,630,2014,Services hospitaliers,0,0
+1302,711,1994,Voitures automobiles,3,0
+1303,711,1995,Voitures automobiles,3,0
+1304,711,1996,Voitures automobiles,3,0
+1305,711,1997,Voitures automobiles,3,0
+1306,711,1998,Voitures automobiles,3,0
+1307,711,1999,Voitures automobiles,3,0
+1308,711,2000,Voitures automobiles,3,0
+1309,711,2001,Voitures automobiles,3,0
+1310,711,2002,Voitures automobiles,3,0
+1311,711,2003,Voitures automobiles,3,0
+1312,711,2004,Voitures automobiles,3,0
+1313,711,2005,Voitures automobiles,3,0
+1314,711,2006,Voitures automobiles,3,0
+1315,711,2007,Voitures automobiles,3,0
+1316,711,2008,Voitures automobiles,3,0
+1317,711,2009,Voitures automobiles,3,0
+1318,711,2010,Voitures automobiles,3,0
+1319,711,2011,Voitures automobiles,3,0
+1320,711,2012,Voitures automobiles,3,0
+1321,711,2013,Voitures automobiles,3,0
+1322,711,2014,Voitures automobiles,3,0
+1323,712,1994,Motocycles,3,0
+1324,712,1995,Motocycles,3,0
+1325,712,1996,Motocycles,3,0
+1326,712,1997,Motocycles,3,0
+1327,712,1998,Motocycles,3,0
+1328,712,1999,Motocycles,3,0
+1329,712,2000,Motocycles,3,0
+1330,712,2001,Motocycles,3,0
+1331,712,2002,Motocycles,3,0
+1332,712,2003,Motocycles,3,0
+1333,712,2004,Motocycles,3,0
+1334,712,2005,Motocycles,3,0
+1335,712,2006,Motocycles,3,0
+1336,712,2007,Motocycles,3,0
+1337,712,2008,Motocycles,3,0
+1338,712,2009,Motocycles,3,0
+1339,712,2010,Motocycles,3,0
+1340,712,2011,Motocycles,3,0
+1341,712,2012,Motocycles,3,0
+1342,712,2013,Motocycles,3,0
+1343,712,2014,Motocycles,3,0
+1344,713,1994,Bicyclettes,3,0
+1345,713,1995,Bicyclettes,3,0
+1346,713,1996,Bicyclettes,3,0
+1347,713,1997,Bicyclettes,3,0
+1348,713,1998,Bicyclettes,3,0
+1349,713,1999,Bicyclettes,3,0
+1350,713,2000,Bicyclettes,3,0
+1351,713,2001,Bicyclettes,3,0
+1352,713,2002,Bicyclettes,3,0
+1353,713,2003,Bicyclettes,3,0
+1354,713,2004,Bicyclettes,3,0
+1355,713,2005,Bicyclettes,3,0
+1356,713,2006,Bicyclettes,3,0
+1357,713,2007,Bicyclettes,3,0
+1358,713,2008,Bicyclettes,3,0
+1359,713,2009,Bicyclettes,3,0
+1360,713,2010,Bicyclettes,3,0
+1361,713,2011,Bicyclettes,3,0
+1362,713,2012,Bicyclettes,3,0
+1363,713,2013,Bicyclettes,3,0
+1364,713,2014,Bicyclettes,3,0
+1365,721,1994,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1366,721,1995,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1367,721,1996,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1368,721,1997,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1369,721,1998,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1370,721,1999,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1371,721,2000,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1372,721,2001,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1373,721,2002,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1374,721,2003,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1375,721,2004,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1376,721,2005,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1377,721,2006,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1378,721,2007,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1379,721,2008,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1380,721,2009,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1381,721,2010,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1382,721,2011,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1383,721,2012,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1384,721,2013,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1385,721,2014,Pièces de rechange et accessoires pour véhicules de tourisme ,3,0
+1386,722,1994,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1387,722,1995,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1388,722,1996,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1389,722,1997,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1390,722,1998,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1391,722,1999,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1392,722,2000,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1393,722,2001,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1394,722,2002,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1395,722,2003,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1396,722,2004,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1397,722,2005,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1398,722,2006,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1399,722,2007,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1400,722,2008,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1401,722,2009,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1402,722,2010,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1403,722,2011,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1404,722,2012,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1405,722,2013,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1406,722,2014,Carburants et lubrifiants pour véhicules de tourisme,14,0
+1407,723,1994,Entretien et réparation de véhicules particuliers,3,0
+1408,723,1995,Entretien et réparation de véhicules particuliers,3,0
+1409,723,1996,Entretien et réparation de véhicules particuliers,3,0
+1410,723,1997,Entretien et réparation de véhicules particuliers,3,0
+1411,723,1998,Entretien et réparation de véhicules particuliers,3,0
+1412,723,1999,Entretien et réparation de véhicules particuliers,3,0
+1413,723,2000,Entretien et réparation de véhicules particuliers,3,0
+1414,723,2001,Entretien et réparation de véhicules particuliers,3,0
+1415,723,2002,Entretien et réparation de véhicules particuliers,3,0
+1416,723,2003,Entretien et réparation de véhicules particuliers,3,0
+1417,723,2004,Entretien et réparation de véhicules particuliers,3,0
+1418,723,2005,Entretien et réparation de véhicules particuliers,3,0
+1419,723,2006,Entretien et réparation de véhicules particuliers,3,0
+1420,723,2007,Entretien et réparation de véhicules particuliers,3,0
+1421,723,2008,Entretien et réparation de véhicules particuliers,3,0
+1422,723,2009,Entretien et réparation de véhicules particuliers,3,0
+1423,723,2010,Entretien et réparation de véhicules particuliers,3,0
+1424,723,2011,Entretien et réparation de véhicules particuliers,3,0
+1425,723,2012,Entretien et réparation de véhicules particuliers,3,0
+1426,723,2013,Entretien et réparation de véhicules particuliers,3,0
+1427,723,2014,Entretien et réparation de véhicules particuliers,3,0
+1428,724,1994,Services divers liés aux véhicules particuliers,3,0
+1429,724,1995,Services divers liés aux véhicules particuliers,3,0
+1430,724,1996,Services divers liés aux véhicules particuliers,3,0
+1431,724,1997,Services divers liés aux véhicules particuliers,3,0
+1432,724,1998,Services divers liés aux véhicules particuliers,3,0
+1433,724,1999,Services divers liés aux véhicules particuliers,3,0
+1434,724,2000,Services divers liés aux véhicules particuliers,3,0
+1435,724,2001,Services divers liés aux véhicules particuliers,3,0
+1436,724,2002,Services divers liés aux véhicules particuliers,3,0
+1437,724,2003,Services divers liés aux véhicules particuliers,3,0
+1438,724,2004,Services divers liés aux véhicules particuliers,3,0
+1439,724,2005,Services divers liés aux véhicules particuliers,3,0
+1440,724,2006,Services divers liés aux véhicules particuliers,3,0
+1441,724,2007,Services divers liés aux véhicules particuliers,3,0
+1442,724,2008,Services divers liés aux véhicules particuliers,3,0
+1443,724,2009,Services divers liés aux véhicules particuliers,3,0
+1444,724,2010,Services divers liés aux véhicules particuliers,3,0
+1445,724,2011,Services divers liés aux véhicules particuliers,3,0
+1446,724,2012,Services divers liés aux véhicules particuliers,3,0
+1447,724,2013,Services divers liés aux véhicules particuliers,3,0
+1448,724,2014,Services divers liés aux véhicules particuliers,3,0
+1449,731,1994,Transport ferroviaire de passagers,2,0
+1450,731,1995,Transport ferroviaire de passagers,2,0
+1451,731,1996,Transport ferroviaire de passagers,2,0
+1452,731,1997,Transport ferroviaire de passagers,2,0
+1453,731,1998,Transport ferroviaire de passagers,2,0
+1454,731,1999,Transport ferroviaire de passagers,2,0
+1455,731,2000,Transport ferroviaire de passagers,2,0
+1456,731,2001,Transport ferroviaire de passagers,2,0
+1457,731,2002,Transport ferroviaire de passagers,2,0
+1458,731,2003,Transport ferroviaire de passagers,2,0
+1459,731,2004,Transport ferroviaire de passagers,2,0
+1460,731,2005,Transport ferroviaire de passagers,2,0
+1461,731,2006,Transport ferroviaire de passagers,2,0
+1462,731,2007,Transport ferroviaire de passagers,2,0
+1463,731,2008,Transport ferroviaire de passagers,2,0
+1464,731,2009,Transport ferroviaire de passagers,2,0
+1465,731,2010,Transport ferroviaire de passagers,2,0
+1466,731,2011,Transport ferroviaire de passagers,2,0
+1467,731,2012,Transport ferroviaire de passagers,4,0
+1468,731,2013,Transport ferroviaire de passagers,4,0
+1469,731,2014,Transport ferroviaire de passagers,4,0
+1470,732,1994,Transport routier de passagers,2,0
+1471,732,1995,Transport routier de passagers,2,0
+1472,732,1996,Transport routier de passagers,2,0
+1473,732,1997,Transport routier de passagers,2,0
+1474,732,1998,Transport routier de passagers,2,0
+1475,732,1999,Transport routier de passagers,2,0
+1476,732,2000,Transport routier de passagers,2,0
+1477,732,2001,Transport routier de passagers,2,0
+1478,732,2002,Transport routier de passagers,2,0
+1479,732,2003,Transport routier de passagers,2,0
+1480,732,2004,Transport routier de passagers,2,0
+1481,732,2005,Transport routier de passagers,2,0
+1482,732,2006,Transport routier de passagers,2,0
+1483,732,2007,Transport routier de passagers,2,0
+1484,732,2008,Transport routier de passagers,2,0
+1485,732,2009,Transport routier de passagers,2,0
+1486,732,2010,Transport routier de passagers,2,0
+1487,732,2011,Transport routier de passagers,2,0
+1488,732,2012,Transport routier de passagers,4,0
+1489,732,2013,Transport routier de passagers,4,0
+1490,732,2014,Transport routier de passagers,4,0
+1491,733,1994,Transport aérien de passagers,2,0
+1492,733,1995,Transport aérien de passagers,2,0
+1493,733,1996,Transport aérien de passagers,2,0
+1494,733,1997,Transport aérien de passagers,2,0
+1495,733,1998,Transport aérien de passagers,2,0
+1496,733,1999,Transport aérien de passagers,2,0
+1497,733,2000,Transport aérien de passagers,2,0
+1498,733,2001,Transport aérien de passagers,2,0
+1499,733,2002,Transport aérien de passagers,2,0
+1500,733,2003,Transport aérien de passagers,2,0
+1501,733,2004,Transport aérien de passagers,2,0
+1502,733,2005,Transport aérien de passagers,2,0
+1503,733,2006,Transport aérien de passagers,2,0
+1504,733,2007,Transport aérien de passagers,2,0
+1505,733,2008,Transport aérien de passagers,2,0
+1506,733,2009,Transport aérien de passagers,2,0
+1507,733,2010,Transport aérien de passagers,2,0
+1508,733,2011,Transport aérien de passagers,2,0
+1509,733,2012,Transport aérien de passagers,4,0
+1510,733,2013,Transport aérien de passagers,4,0
+1511,733,2014,Transport aérien de passagers,4,0
+1512,734,1994,Transport maritime et fluvial de passagers,2,0
+1513,734,1995,Transport maritime et fluvial de passagers,2,0
+1514,734,1996,Transport maritime et fluvial de passagers,2,0
+1515,734,1997,Transport maritime et fluvial de passagers,2,0
+1516,734,1998,Transport maritime et fluvial de passagers,2,0
+1517,734,1999,Transport maritime et fluvial de passagers,2,0
+1518,734,2000,Transport maritime et fluvial de passagers,2,0
+1519,734,2001,Transport maritime et fluvial de passagers,2,0
+1520,734,2002,Transport maritime et fluvial de passagers,2,0
+1521,734,2003,Transport maritime et fluvial de passagers,2,0
+1522,734,2004,Transport maritime et fluvial de passagers,2,0
+1523,734,2005,Transport maritime et fluvial de passagers,2,0
+1524,734,2006,Transport maritime et fluvial de passagers,2,0
+1525,734,2007,Transport maritime et fluvial de passagers,2,0
+1526,734,2008,Transport maritime et fluvial de passagers,2,0
+1527,734,2009,Transport maritime et fluvial de passagers,2,0
+1528,734,2010,Transport maritime et fluvial de passagers,2,0
+1529,734,2011,Transport maritime et fluvial de passagers,2,0
+1530,734,2012,Transport maritime et fluvial de passagers,4,0
+1531,734,2013,Transport maritime et fluvial de passagers,4,0
+1532,734,2014,Transport maritime et fluvial de passagers,4,0
+1533,735,1994,Transport combiné de passagers,2,0
+1534,735,1995,Transport combiné de passagers,2,0
+1535,735,1996,Transport combiné de passagers,2,0
+1536,735,1997,Transport combiné de passagers,2,0
+1537,735,1998,Transport combiné de passagers,2,0
+1538,735,1999,Transport combiné de passagers,2,0
+1539,735,2000,Transport combiné de passagers,2,0
+1540,735,2001,Transport combiné de passagers,2,0
+1541,735,2002,Transport combiné de passagers,2,0
+1542,735,2003,Transport combiné de passagers,2,0
+1543,735,2004,Transport combiné de passagers,2,0
+1544,735,2005,Transport combiné de passagers,2,0
+1545,735,2006,Transport combiné de passagers,2,0
+1546,735,2007,Transport combiné de passagers,2,0
+1547,735,2008,Transport combiné de passagers,2,0
+1548,735,2009,Transport combiné de passagers,2,0
+1549,735,2010,Transport combiné de passagers,2,0
+1550,735,2011,Transport combiné de passagers,2,0
+1551,735,2012,Transport combiné de passagers,4,0
+1552,735,2013,Transport combiné de passagers,4,0
+1553,735,2014,Transport combiné de passagers,4,0
+1554,736,1994,Services de transport divers,3,0
+1555,736,1995,Services de transport divers,3,0
+1556,736,1996,Services de transport divers,3,0
+1557,736,1997,Services de transport divers,3,0
+1558,736,1998,Services de transport divers,3,0
+1559,736,1999,Services de transport divers,3,0
+1560,736,2000,Services de transport divers,3,0
+1561,736,2001,Services de transport divers,3,0
+1562,736,2002,Services de transport divers,3,0
+1563,736,2003,Services de transport divers,3,0
+1564,736,2004,Services de transport divers,3,0
+1565,736,2005,Services de transport divers,3,0
+1566,736,2006,Services de transport divers,3,0
+1567,736,2007,Services de transport divers,3,0
+1568,736,2008,Services de transport divers,3,0
+1569,736,2009,Services de transport divers,3,0
+1570,736,2010,Services de transport divers,3,0
+1571,736,2011,Services de transport divers,3,0
+1572,736,2012,Services de transport divers,3,0
+1573,736,2013,Services de transport divers,3,0
+1574,736,2014,Services de transport divers,3,0
+1575,810,1994,Services postaux,0,0
+1576,810,1995,Services postaux,0,0
+1577,810,1996,Services postaux,0,0
+1578,810,1997,Services postaux,0,0
+1579,810,1998,Services postaux,0,0
+1580,810,1999,Services postaux,0,0
+1581,810,2000,Services postaux,0,0
+1582,810,2001,Services postaux,0,0
+1583,810,2002,Services postaux,0,0
+1584,810,2003,Services postaux,0,0
+1585,810,2004,Services postaux,0,0
+1586,810,2005,Services postaux,0,0
+1587,810,2006,Services postaux,0,0
+1588,810,2007,Services postaux,0,0
+1589,810,2008,Services postaux,0,0
+1590,810,2009,Services postaux,0,0
+1591,810,2010,Services postaux,0,0
+1592,810,2011,Services postaux,0,0
+1593,810,2012,Services postaux,0,0
+1594,810,2013,Services postaux,0,0
+1595,810,2014,Services postaux,0,0
+1596,831,1994,Matériel de téléphonie et de télécopie,3,0
+1597,831,1995,Matériel de téléphonie et de télécopie,3,0
+1598,831,1996,Matériel de téléphonie et de télécopie,3,0
+1599,831,1997,Matériel de téléphonie et de télécopie,3,0
+1600,831,1998,Matériel de téléphonie et de télécopie,3,0
+1601,831,1999,Matériel de téléphonie et de télécopie,3,0
+1602,831,2000,Matériel de téléphonie et de télécopie,3,0
+1603,831,2001,Matériel de téléphonie et de télécopie,3,0
+1604,831,2002,Matériel de téléphonie et de télécopie,3,0
+1605,831,2003,Matériel de téléphonie et de télécopie,3,0
+1606,831,2004,Matériel de téléphonie et de télécopie,3,0
+1607,831,2005,Matériel de téléphonie et de télécopie,3,0
+1608,831,2006,Matériel de téléphonie et de télécopie,3,0
+1609,831,2007,Matériel de téléphonie et de télécopie,3,0
+1610,831,2008,Matériel de téléphonie et de télécopie,3,0
+1611,831,2009,Matériel de téléphonie et de télécopie,3,0
+1612,831,2010,Matériel de téléphonie et de télécopie,3,0
+1613,831,2011,Matériel de téléphonie et de télécopie,3,0
+1614,831,2012,Matériel de téléphonie et de télécopie,3,0
+1615,831,2013,Matériel de téléphonie et de télécopie,3,0
+1616,831,2014,Matériel de téléphonie et de télécopie,3,0
+1617,832,1994,Services de téléphonie et de télécopie,3,0
+1618,832,1995,Services de téléphonie et de télécopie,3,0
+1619,832,1996,Services de téléphonie et de télécopie,3,0
+1620,832,1997,Services de téléphonie et de télécopie,3,0
+1621,832,1998,Services de téléphonie et de télécopie,3,0
+1622,832,1999,Services de téléphonie et de télécopie,3,0
+1623,832,2000,Services de téléphonie et de télécopie,3,0
+1624,832,2001,Services de téléphonie et de télécopie,3,0
+1625,832,2002,Services de téléphonie et de télécopie,3,0
+1626,832,2003,Services de téléphonie et de télécopie,3,0
+1627,832,2004,Services de téléphonie et de télécopie,3,0
+1628,832,2005,Services de téléphonie et de télécopie,3,0
+1629,832,2006,Services de téléphonie et de télécopie,3,0
+1630,832,2007,Services de téléphonie et de télécopie,3,0
+1631,832,2008,Services de téléphonie et de télécopie,3,0
+1632,832,2009,Services de téléphonie et de télécopie,3,0
+1633,832,2010,Services de téléphonie et de télécopie,3,0
+1634,832,2011,Services de téléphonie et de télécopie,3,0
+1635,832,2012,Services de téléphonie et de télécopie,3,0
+1636,832,2013,Services de téléphonie et de télécopie,3,0
+1637,832,2014,Services de téléphonie et de télécopie,3,0
+1638,911,1994,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1639,911,1995,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1640,911,1996,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1641,911,1997,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1642,911,1998,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1643,911,1999,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1644,911,2000,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1645,911,2001,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1646,911,2002,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1647,911,2003,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1648,911,2004,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1649,911,2005,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1650,911,2006,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1651,911,2007,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1652,911,2008,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1653,911,2009,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1654,911,2010,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1655,911,2011,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1656,911,2012,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1657,911,2013,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1658,911,2014,"Matériel de réception, d'enregistrement et de reproduction du son et de l'image",3,0
+1659,912,1994,Matériel photographique et cinématographique et appareils optiques,3,0
+1660,912,1995,Matériel photographique et cinématographique et appareils optiques,3,0
+1661,912,1996,Matériel photographique et cinématographique et appareils optiques,3,0
+1662,912,1997,Matériel photographique et cinématographique et appareils optiques,3,0
+1663,912,1998,Matériel photographique et cinématographique et appareils optiques,3,0
+1664,912,1999,Matériel photographique et cinématographique et appareils optiques,3,0
+1665,912,2000,Matériel photographique et cinématographique et appareils optiques,3,0
+1666,912,2001,Matériel photographique et cinématographique et appareils optiques,3,0
+1667,912,2002,Matériel photographique et cinématographique et appareils optiques,3,0
+1668,912,2003,Matériel photographique et cinématographique et appareils optiques,3,0
+1669,912,2004,Matériel photographique et cinématographique et appareils optiques,3,0
+1670,912,2005,Matériel photographique et cinématographique et appareils optiques,3,0
+1671,912,2006,Matériel photographique et cinématographique et appareils optiques,3,0
+1672,912,2007,Matériel photographique et cinématographique et appareils optiques,3,0
+1673,912,2008,Matériel photographique et cinématographique et appareils optiques,3,0
+1674,912,2009,Matériel photographique et cinématographique et appareils optiques,3,0
+1675,912,2010,Matériel photographique et cinématographique et appareils optiques,3,0
+1676,912,2011,Matériel photographique et cinématographique et appareils optiques,3,0
+1677,912,2012,Matériel photographique et cinématographique et appareils optiques,3,0
+1678,912,2013,Matériel photographique et cinématographique et appareils optiques,3,0
+1679,912,2014,Matériel photographique et cinématographique et appareils optiques,3,0
+1680,913,1994,Matériel de traitement de l'information,3,0
+1681,913,1995,Matériel de traitement de l'information,3,0
+1682,913,1996,Matériel de traitement de l'information,3,0
+1683,913,1997,Matériel de traitement de l'information,3,0
+1684,913,1998,Matériel de traitement de l'information,3,0
+1685,913,1999,Matériel de traitement de l'information,3,0
+1686,913,2000,Matériel de traitement de l'information,3,0
+1687,913,2001,Matériel de traitement de l'information,3,0
+1688,913,2002,Matériel de traitement de l'information,3,0
+1689,913,2003,Matériel de traitement de l'information,3,0
+1690,913,2004,Matériel de traitement de l'information,3,0
+1691,913,2005,Matériel de traitement de l'information,3,0
+1692,913,2006,Matériel de traitement de l'information,3,0
+1693,913,2007,Matériel de traitement de l'information,3,0
+1694,913,2008,Matériel de traitement de l'information,3,0
+1695,913,2009,Matériel de traitement de l'information,3,0
+1696,913,2010,Matériel de traitement de l'information,3,0
+1697,913,2011,Matériel de traitement de l'information,3,0
+1698,913,2012,Matériel de traitement de l'information,3,0
+1699,913,2013,Matériel de traitement de l'information,3,0
+1700,913,2014,Matériel de traitement de l'information,3,0
+1701,914,1994,Supports d'enregistrement,3,0
+1702,914,1995,Supports d'enregistrement,3,0
+1703,914,1996,Supports d'enregistrement,3,0
+1704,914,1997,Supports d'enregistrement,3,0
+1705,914,1998,Supports d'enregistrement,3,0
+1706,914,1999,Supports d'enregistrement,3,0
+1707,914,2000,Supports d'enregistrement,3,0
+1708,914,2001,Supports d'enregistrement,3,0
+1709,914,2002,Supports d'enregistrement,3,0
+1710,914,2003,Supports d'enregistrement,3,0
+1711,914,2004,Supports d'enregistrement,3,0
+1712,914,2005,Supports d'enregistrement,3,0
+1713,914,2006,Supports d'enregistrement,3,0
+1714,914,2007,Supports d'enregistrement,3,0
+1715,914,2008,Supports d'enregistrement,3,0
+1716,914,2009,Supports d'enregistrement,3,0
+1717,914,2010,Supports d'enregistrement,3,0
+1718,914,2011,Supports d'enregistrement,3,0
+1719,914,2012,Supports d'enregistrement,3,0
+1720,914,2013,Supports d'enregistrement,3,0
+1721,914,2014,Supports d'enregistrement,3,0
+1722,915,1994,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1723,915,1995,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1724,915,1996,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1725,915,1997,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1726,915,1998,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1727,915,1999,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1728,915,2000,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1729,915,2001,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1730,915,2002,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1731,915,2003,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1732,915,2004,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1733,915,2005,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1734,915,2006,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1735,915,2007,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1736,915,2008,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1737,915,2009,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1738,915,2010,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1739,915,2011,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1740,915,2012,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1741,915,2013,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1742,915,2014,"Réparation de matériel audiovisuel, photographique et de traitement de l'information",3,0
+1743,921,1994,Biens durables pour loisirs de plein air,3,0
+1744,921,1995,Biens durables pour loisirs de plein air,3,0
+1745,921,1996,Biens durables pour loisirs de plein air,3,0
+1746,921,1997,Biens durables pour loisirs de plein air,3,0
+1747,921,1998,Biens durables pour loisirs de plein air,3,0
+1748,921,1999,Biens durables pour loisirs de plein air,3,0
+1749,921,2000,Biens durables pour loisirs de plein air,3,0
+1750,921,2001,Biens durables pour loisirs de plein air,3,0
+1751,921,2002,Biens durables pour loisirs de plein air,3,0
+1752,921,2003,Biens durables pour loisirs de plein air,3,0
+1753,921,2004,Biens durables pour loisirs de plein air,3,0
+1754,921,2005,Biens durables pour loisirs de plein air,3,0
+1755,921,2006,Biens durables pour loisirs de plein air,3,0
+1756,921,2007,Biens durables pour loisirs de plein air,3,0
+1757,921,2008,Biens durables pour loisirs de plein air,3,0
+1758,921,2009,Biens durables pour loisirs de plein air,3,0
+1759,921,2010,Biens durables pour loisirs de plein air,3,0
+1760,921,2011,Biens durables pour loisirs de plein air,3,0
+1761,921,2012,Biens durables pour loisirs de plein air,3,0
+1762,921,2013,Biens durables pour loisirs de plein air,3,0
+1763,921,2014,Biens durables pour loisirs de plein air,3,0
+1764,922,1994,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1765,922,1995,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1766,922,1996,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1767,922,1997,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1768,922,1998,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1769,922,1999,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1770,922,2000,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1771,922,2001,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1772,922,2002,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1773,922,2003,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1774,922,2004,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1775,922,2005,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1776,922,2006,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1777,922,2007,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1778,922,2008,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1779,922,2009,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1780,922,2010,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1781,922,2011,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1782,922,2012,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1783,922,2013,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1784,922,2014,Instruments de musique et biens durables destinés aux loisirs d'intérieur,3,0
+1785,923,1994,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1786,923,1995,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1787,923,1996,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1788,923,1997,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1789,923,1998,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1790,923,1999,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1791,923,2000,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1792,923,2001,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1793,923,2002,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1794,923,2003,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1795,923,2004,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1796,923,2005,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1797,923,2006,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1798,923,2007,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1799,923,2008,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1800,923,2009,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1801,923,2010,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1802,923,2011,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1803,923,2012,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1804,923,2013,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1805,923,2014,Entretien et réparation des autres biens durables à fonction récréatives et culturelles,3,0
+1806,931,1994,"Jeux, jouets et passe-temps",3,0
+1807,931,1995,"Jeux, jouets et passe-temps",3,0
+1808,931,1996,"Jeux, jouets et passe-temps",3,0
+1809,931,1997,"Jeux, jouets et passe-temps",3,0
+1810,931,1998,"Jeux, jouets et passe-temps",3,0
+1811,931,1999,"Jeux, jouets et passe-temps",3,0
+1812,931,2000,"Jeux, jouets et passe-temps",3,0
+1813,931,2001,"Jeux, jouets et passe-temps",3,0
+1814,931,2002,"Jeux, jouets et passe-temps",3,0
+1815,931,2003,"Jeux, jouets et passe-temps",3,0
+1816,931,2004,"Jeux, jouets et passe-temps",3,0
+1817,931,2005,"Jeux, jouets et passe-temps",3,0
+1818,931,2006,"Jeux, jouets et passe-temps",3,0
+1819,931,2007,"Jeux, jouets et passe-temps",3,0
+1820,931,2008,"Jeux, jouets et passe-temps",3,0
+1821,931,2009,"Jeux, jouets et passe-temps",3,0
+1822,931,2010,"Jeux, jouets et passe-temps",3,0
+1823,931,2011,"Jeux, jouets et passe-temps",3,0
+1824,931,2012,"Jeux, jouets et passe-temps",3,0
+1825,931,2013,"Jeux, jouets et passe-temps",3,0
+1826,931,2014,"Jeux, jouets et passe-temps",3,0
+1827,932,1994,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1828,932,1995,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1829,932,1996,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1830,932,1997,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1831,932,1998,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1832,932,1999,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1833,932,2000,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1834,932,2001,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1835,932,2002,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1836,932,2003,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1837,932,2004,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1838,932,2005,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1839,932,2006,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1840,932,2007,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1841,932,2008,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1842,932,2009,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1843,932,2010,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1844,932,2011,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1845,932,2012,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1846,932,2013,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1847,932,2014,"Articles de sport, matériel de camping et matériel pour activités de plein air",3,0
+1848,933,1994,"Produits pour jardin, plantes et fleurs",3,0
+1849,933,1995,"Produits pour jardin, plantes et fleurs",3,0
+1850,933,1996,"Produits pour jardin, plantes et fleurs",3,0
+1851,933,1997,"Produits pour jardin, plantes et fleurs",3,0
+1852,933,1998,"Produits pour jardin, plantes et fleurs",3,0
+1853,933,1999,"Produits pour jardin, plantes et fleurs",3,0
+1854,933,2000,"Produits pour jardin, plantes et fleurs",3,0
+1855,933,2001,"Produits pour jardin, plantes et fleurs",3,0
+1856,933,2002,"Produits pour jardin, plantes et fleurs",3,0
+1857,933,2003,"Produits pour jardin, plantes et fleurs",3,0
+1858,933,2004,"Produits pour jardin, plantes et fleurs",3,0
+1859,933,2005,"Produits pour jardin, plantes et fleurs",3,0
+1860,933,2006,"Produits pour jardin, plantes et fleurs",3,0
+1861,933,2007,"Produits pour jardin, plantes et fleurs",3,0
+1862,933,2008,"Produits pour jardin, plantes et fleurs",3,0
+1863,933,2009,"Produits pour jardin, plantes et fleurs",3,0
+1864,933,2010,"Produits pour jardin, plantes et fleurs",3,0
+1865,933,2011,"Produits pour jardin, plantes et fleurs",3,0
+1866,933,2012,"Produits pour jardin, plantes et fleurs",3,0
+1867,933,2013,"Produits pour jardin, plantes et fleurs",3,0
+1868,933,2014,"Produits pour jardin, plantes et fleurs",3,0
+1869,934,1994,Animaux de compagnie et articles connexes,3,0
+1870,934,1995,Animaux de compagnie et articles connexes,3,0
+1871,934,1996,Animaux de compagnie et articles connexes,3,0
+1872,934,1997,Animaux de compagnie et articles connexes,3,0
+1873,934,1998,Animaux de compagnie et articles connexes,3,0
+1874,934,1999,Animaux de compagnie et articles connexes,3,0
+1875,934,2000,Animaux de compagnie et articles connexes,3,0
+1876,934,2001,Animaux de compagnie et articles connexes,3,0
+1877,934,2002,Animaux de compagnie et articles connexes,3,0
+1878,934,2003,Animaux de compagnie et articles connexes,3,0
+1879,934,2004,Animaux de compagnie et articles connexes,3,0
+1880,934,2005,Animaux de compagnie et articles connexes,3,0
+1881,934,2006,Animaux de compagnie et articles connexes,3,0
+1882,934,2007,Animaux de compagnie et articles connexes,3,0
+1883,934,2008,Animaux de compagnie et articles connexes,3,0
+1884,934,2009,Animaux de compagnie et articles connexes,3,0
+1885,934,2010,Animaux de compagnie et articles connexes,3,0
+1886,934,2011,Animaux de compagnie et articles connexes,3,0
+1887,934,2012,Animaux de compagnie et articles connexes,3,0
+1888,934,2013,Animaux de compagnie et articles connexes,3,0
+1889,934,2014,Animaux de compagnie et articles connexes,3,0
+1890,935,1994,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1891,935,1995,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1892,935,1996,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1893,935,1997,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1894,935,1998,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1895,935,1999,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1896,935,2000,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1897,935,2001,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1898,935,2002,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1899,935,2003,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1900,935,2004,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1901,935,2005,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1902,935,2006,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1903,935,2007,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1904,935,2008,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1905,935,2009,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1906,935,2010,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1907,935,2011,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1908,935,2012,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1909,935,2013,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1910,935,2014,Services vétérinaires et autres services pour animaux de compagnie,3,0
+1911,941,1994,Services récréatifs et sportifs,2,0
+1912,941,1995,Services récréatifs et sportifs,2,0
+1913,941,1996,Services récréatifs et sportifs,2,0
+1914,941,1997,Services récréatifs et sportifs,2,0
+1915,941,1998,Services récréatifs et sportifs,2,0
+1916,941,1999,Services récréatifs et sportifs,2,0
+1917,941,2000,Services récréatifs et sportifs,2,0
+1918,941,2001,Services récréatifs et sportifs,2,0
+1919,941,2002,Services récréatifs et sportifs,2,0
+1920,941,2003,Services récréatifs et sportifs,2,0
+1921,941,2004,Services récréatifs et sportifs,2,0
+1922,941,2005,Services récréatifs et sportifs,2,0
+1923,941,2006,Services récréatifs et sportifs,2,0
+1924,941,2007,Services récréatifs et sportifs,2,0
+1925,941,2008,Services récréatifs et sportifs,2,0
+1926,941,2009,Services récréatifs et sportifs,2,0
+1927,941,2010,Services récréatifs et sportifs,2,0
+1928,941,2011,Services récréatifs et sportifs,2,0
+1929,941,2012,Services récréatifs et sportifs,4,0
+1930,941,2013,Services récréatifs et sportifs,4,0
+1931,941,2014,Services récréatifs et sportifs,4,0
+1932,942,1994,Services culturels,2,0
+1933,942,1995,Services culturels,2,0
+1934,942,1996,Services culturels,2,0
+1935,942,1997,Services culturels,2,0
+1936,942,1998,Services culturels,2,0
+1937,942,1999,Services culturels,2,0
+1938,942,2000,Services culturels,2,0
+1939,942,2001,Services culturels,2,0
+1940,942,2002,Services culturels,2,0
+1941,942,2003,Services culturels,2,0
+1942,942,2004,Services culturels,2,0
+1943,942,2005,Services culturels,2,0
+1944,942,2006,Services culturels,2,0
+1945,942,2007,Services culturels,2,0
+1946,942,2008,Services culturels,2,0
+1947,942,2009,Services culturels,2,0
+1948,942,2010,Services culturels,2,0
+1949,942,2011,Services culturels,2,0
+1950,942,2012,Services culturels,4,0
+1951,942,2013,Services culturels,4,0
+1952,942,2014,Services culturels,4,0
+1953,943,1994,Jeux de hasard,0,0
+1954,943,1995,Jeux de hasard,0,0
+1955,943,1996,Jeux de hasard,0,0
+1956,943,1997,Jeux de hasard,0,0
+1957,943,1998,Jeux de hasard,0,0
+1958,943,1999,Jeux de hasard,0,0
+1959,943,2000,Jeux de hasard,0,0
+1960,943,2001,Jeux de hasard,0,0
+1961,943,2002,Jeux de hasard,0,0
+1962,943,2003,Jeux de hasard,0,0
+1963,943,2004,Jeux de hasard,0,0
+1964,943,2005,Jeux de hasard,0,0
+1965,943,2006,Jeux de hasard,0,0
+1966,943,2007,Jeux de hasard,0,0
+1967,943,2008,Jeux de hasard,0,0
+1968,943,2009,Jeux de hasard,0,0
+1969,943,2010,Jeux de hasard,0,0
+1970,943,2011,Jeux de hasard,0,0
+1971,943,2012,Jeux de hasard,0,0
+1972,943,2013,Jeux de hasard,0,0
+1973,943,2014,Jeux de hasard,0,0
+1974,951,1994,Livre,2,0
+1975,951,1995,Livre,2,0
+1976,951,1996,Livre,2,0
+1977,951,1997,Livre,2,0
+1978,951,1998,Livre,2,0
+1979,951,1999,Livre,2,0
+1980,951,2000,Livre,2,0
+1981,951,2001,Livre,2,0
+1982,951,2002,Livre,2,0
+1983,951,2003,Livre,2,0
+1984,951,2004,Livre,2,0
+1985,951,2005,Livre,2,0
+1986,951,2006,Livre,2,0
+1987,951,2007,Livre,2,0
+1988,951,2008,Livre,2,0
+1989,951,2009,Livre,2,0
+1990,951,2010,Livre,2,0
+1991,951,2011,Livre,2,0
+1992,951,2012,Livre,4,0
+1993,951,2013,Livre,4,0
+1994,951,2014,Livre,4,0
+1995,952,1994,Journaux et publications périodiques,1,0
+1996,952,1995,Journaux et publications périodiques,1,0
+1997,952,1996,Journaux et publications périodiques,1,0
+1998,952,1997,Journaux et publications périodiques,1,0
+1999,952,1998,Journaux et publications périodiques,1,0
+2000,952,1999,Journaux et publications périodiques,1,0
+2001,952,2000,Journaux et publications périodiques,1,0
+2002,952,2001,Journaux et publications périodiques,1,0
+2003,952,2002,Journaux et publications périodiques,1,0
+2004,952,2003,Journaux et publications périodiques,1,0
+2005,952,2004,Journaux et publications périodiques,1,0
+2006,952,2005,Journaux et publications périodiques,1,0
+2007,952,2006,Journaux et publications périodiques,1,0
+2008,952,2007,Journaux et publications périodiques,1,0
+2009,952,2008,Journaux et publications périodiques,1,0
+2010,952,2009,Journaux et publications périodiques,1,0
+2011,952,2010,Journaux et publications périodiques,1,0
+2012,952,2011,Journaux et publications périodiques,1,0
+2013,952,2012,Journaux et publications périodiques,1,0
+2014,952,2013,Journaux et publications périodiques,1,0
+2015,952,2014,Journaux et publications périodiques,1,0
+2016,953,1994,Imprimés divers,3,0
+2017,953,1995,Imprimés divers,3,0
+2018,953,1996,Imprimés divers,3,0
+2019,953,1997,Imprimés divers,3,0
+2020,953,1998,Imprimés divers,3,0
+2021,953,1999,Imprimés divers,3,0
+2022,953,2000,Imprimés divers,3,0
+2023,953,2001,Imprimés divers,3,0
+2024,953,2002,Imprimés divers,3,0
+2025,953,2003,Imprimés divers,3,0
+2026,953,2004,Imprimés divers,3,0
+2027,953,2005,Imprimés divers,3,0
+2028,953,2006,Imprimés divers,3,0
+2029,953,2007,Imprimés divers,3,0
+2030,953,2008,Imprimés divers,3,0
+2031,953,2009,Imprimés divers,3,0
+2032,953,2010,Imprimés divers,3,0
+2033,953,2011,Imprimés divers,3,0
+2034,953,2012,Imprimés divers,3,0
+2035,953,2013,Imprimés divers,3,0
+2036,953,2014,Imprimés divers,3,0
+2037,954,1994,Papeterie et matériel de dessin,3,0
+2038,954,1995,Papeterie et matériel de dessin,3,0
+2039,954,1996,Papeterie et matériel de dessin,3,0
+2040,954,1997,Papeterie et matériel de dessin,3,0
+2041,954,1998,Papeterie et matériel de dessin,3,0
+2042,954,1999,Papeterie et matériel de dessin,3,0
+2043,954,2000,Papeterie et matériel de dessin,3,0
+2044,954,2001,Papeterie et matériel de dessin,3,0
+2045,954,2002,Papeterie et matériel de dessin,3,0
+2046,954,2003,Papeterie et matériel de dessin,3,0
+2047,954,2004,Papeterie et matériel de dessin,3,0
+2048,954,2005,Papeterie et matériel de dessin,3,0
+2049,954,2006,Papeterie et matériel de dessin,3,0
+2050,954,2007,Papeterie et matériel de dessin,3,0
+2051,954,2008,Papeterie et matériel de dessin,3,0
+2052,954,2009,Papeterie et matériel de dessin,3,0
+2053,954,2010,Papeterie et matériel de dessin,3,0
+2054,954,2011,Papeterie et matériel de dessin,3,0
+2055,954,2012,Papeterie et matériel de dessin,3,0
+2056,954,2013,Papeterie et matériel de dessin,3,0
+2057,954,2014,Papeterie et matériel de dessin,3,0
+2058,960,1994,Forfaits touristiques ,3,0
+2059,960,1995,Forfaits touristiques ,3,0
+2060,960,1996,Forfaits touristiques ,3,0
+2061,960,1997,Forfaits touristiques ,3,0
+2062,960,1998,Forfaits touristiques ,3,0
+2063,960,1999,Forfaits touristiques ,3,0
+2064,960,2000,Forfaits touristiques ,3,0
+2065,960,2001,Forfaits touristiques ,3,0
+2066,960,2002,Forfaits touristiques ,3,0
+2067,960,2003,Forfaits touristiques ,3,0
+2068,960,2004,Forfaits touristiques ,3,0
+2069,960,2005,Forfaits touristiques ,3,0
+2070,960,2006,Forfaits touristiques ,3,0
+2071,960,2007,Forfaits touristiques ,3,0
+2072,960,2008,Forfaits touristiques ,3,0
+2073,960,2009,Forfaits touristiques ,3,0
+2074,960,2010,Forfaits touristiques ,3,0
+2075,960,2011,Forfaits touristiques ,3,0
+2076,960,2012,Forfaits touristiques ,3,0
+2077,960,2013,Forfaits touristiques ,3,0
+2078,960,2014,Forfaits touristiques ,3,0
+2079,1010,1994,Enseignement préélémentaire et primaire,0,0
+2080,1010,1995,Enseignement préélémentaire et primaire,0,0
+2081,1010,1996,Enseignement préélémentaire et primaire,0,0
+2082,1010,1997,Enseignement préélémentaire et primaire,0,0
+2083,1010,1998,Enseignement préélémentaire et primaire,0,0
+2084,1010,1999,Enseignement préélémentaire et primaire,0,0
+2085,1010,2000,Enseignement préélémentaire et primaire,0,0
+2086,1010,2001,Enseignement préélémentaire et primaire,0,0
+2087,1010,2002,Enseignement préélémentaire et primaire,0,0
+2088,1010,2003,Enseignement préélémentaire et primaire,0,0
+2089,1010,2004,Enseignement préélémentaire et primaire,0,0
+2090,1010,2005,Enseignement préélémentaire et primaire,0,0
+2091,1010,2006,Enseignement préélémentaire et primaire,0,0
+2092,1010,2007,Enseignement préélémentaire et primaire,0,0
+2093,1010,2008,Enseignement préélémentaire et primaire,0,0
+2094,1010,2009,Enseignement préélémentaire et primaire,0,0
+2095,1010,2010,Enseignement préélémentaire et primaire,0,0
+2096,1010,2011,Enseignement préélémentaire et primaire,0,0
+2097,1010,2012,Enseignement préélémentaire et primaire,0,0
+2098,1010,2013,Enseignement préélémentaire et primaire,0,0
+2099,1010,2014,Enseignement préélémentaire et primaire,0,0
+2100,1020,1994,Enseignement secondaire,0,0
+2101,1020,1995,Enseignement secondaire,0,0
+2102,1020,1996,Enseignement secondaire,0,0
+2103,1020,1997,Enseignement secondaire,0,0
+2104,1020,1998,Enseignement secondaire,0,0
+2105,1020,1999,Enseignement secondaire,0,0
+2106,1020,2000,Enseignement secondaire,0,0
+2107,1020,2001,Enseignement secondaire,0,0
+2108,1020,2002,Enseignement secondaire,0,0
+2109,1020,2003,Enseignement secondaire,0,0
+2110,1020,2004,Enseignement secondaire,0,0
+2111,1020,2005,Enseignement secondaire,0,0
+2112,1020,2006,Enseignement secondaire,0,0
+2113,1020,2007,Enseignement secondaire,0,0
+2114,1020,2008,Enseignement secondaire,0,0
+2115,1020,2009,Enseignement secondaire,0,0
+2116,1020,2010,Enseignement secondaire,0,0
+2117,1020,2011,Enseignement secondaire,0,0
+2118,1020,2012,Enseignement secondaire,0,0
+2119,1020,2013,Enseignement secondaire,0,0
+2120,1020,2014,Enseignement secondaire,0,0
+2121,1030,1994,Enseignement postsecondaire non supérieur,0,0
+2122,1030,1995,Enseignement postsecondaire non supérieur,0,0
+2123,1030,1996,Enseignement postsecondaire non supérieur,0,0
+2124,1030,1997,Enseignement postsecondaire non supérieur,0,0
+2125,1030,1998,Enseignement postsecondaire non supérieur,0,0
+2126,1030,1999,Enseignement postsecondaire non supérieur,0,0
+2127,1030,2000,Enseignement postsecondaire non supérieur,0,0
+2128,1030,2001,Enseignement postsecondaire non supérieur,0,0
+2129,1030,2002,Enseignement postsecondaire non supérieur,0,0
+2130,1030,2003,Enseignement postsecondaire non supérieur,0,0
+2131,1030,2004,Enseignement postsecondaire non supérieur,0,0
+2132,1030,2005,Enseignement postsecondaire non supérieur,0,0
+2133,1030,2006,Enseignement postsecondaire non supérieur,0,0
+2134,1030,2007,Enseignement postsecondaire non supérieur,0,0
+2135,1030,2008,Enseignement postsecondaire non supérieur,0,0
+2136,1030,2009,Enseignement postsecondaire non supérieur,0,0
+2137,1030,2010,Enseignement postsecondaire non supérieur,0,0
+2138,1030,2011,Enseignement postsecondaire non supérieur,0,0
+2139,1030,2012,Enseignement postsecondaire non supérieur,0,0
+2140,1030,2013,Enseignement postsecondaire non supérieur,0,0
+2141,1030,2014,Enseignement postsecondaire non supérieur,0,0
+2142,1040,1994,Enseignement supérieur,0,0
+2143,1040,1995,Enseignement supérieur,0,0
+2144,1040,1996,Enseignement supérieur,0,0
+2145,1040,1997,Enseignement supérieur,0,0
+2146,1040,1998,Enseignement supérieur,0,0
+2147,1040,1999,Enseignement supérieur,0,0
+2148,1040,2000,Enseignement supérieur,0,0
+2149,1040,2001,Enseignement supérieur,0,0
+2150,1040,2002,Enseignement supérieur,0,0
+2151,1040,2003,Enseignement supérieur,0,0
+2152,1040,2004,Enseignement supérieur,0,0
+2153,1040,2005,Enseignement supérieur,0,0
+2154,1040,2006,Enseignement supérieur,0,0
+2155,1040,2007,Enseignement supérieur,0,0
+2156,1040,2008,Enseignement supérieur,0,0
+2157,1040,2009,Enseignement supérieur,0,0
+2158,1040,2010,Enseignement supérieur,0,0
+2159,1040,2011,Enseignement supérieur,0,0
+2160,1040,2012,Enseignement supérieur,0,0
+2161,1040,2013,Enseignement supérieur,0,0
+2162,1040,2014,Enseignement supérieur,0,0
+2163,1050,1994,Enseignement non défini par niveau,0,0
+2164,1050,1995,Enseignement non défini par niveau,0,0
+2165,1050,1996,Enseignement non défini par niveau,0,0
+2166,1050,1997,Enseignement non défini par niveau,0,0
+2167,1050,1998,Enseignement non défini par niveau,0,0
+2168,1050,1999,Enseignement non défini par niveau,0,0
+2169,1050,2000,Enseignement non défini par niveau,0,0
+2170,1050,2001,Enseignement non défini par niveau,0,0
+2171,1050,2002,Enseignement non défini par niveau,0,0
+2172,1050,2003,Enseignement non défini par niveau,0,0
+2173,1050,2004,Enseignement non défini par niveau,0,0
+2174,1050,2005,Enseignement non défini par niveau,0,0
+2175,1050,2006,Enseignement non défini par niveau,0,0
+2176,1050,2007,Enseignement non défini par niveau,0,0
+2177,1050,2008,Enseignement non défini par niveau,0,0
+2178,1050,2009,Enseignement non défini par niveau,0,0
+2179,1050,2010,Enseignement non défini par niveau,0,0
+2180,1050,2011,Enseignement non défini par niveau,0,0
+2181,1050,2012,Enseignement non défini par niveau,0,0
+2182,1050,2013,Enseignement non défini par niveau,0,0
+2183,1050,2014,Enseignement non défini par niveau,0,0
+2184,11112,1994,Restauration à emporter,3,1
+2185,11112,1995,Restauration à emporter,3,1
+2186,11112,1996,Restauration à emporter,3,1
+2187,11112,1997,Restauration à emporter,3,1
+2188,11112,1998,Restauration à emporter,2,1
+2189,11112,1999,Restauration à emporter,2,1
+2190,11112,2000,Restauration à emporter,2,1
+2191,11112,2001,Restauration à emporter,2,1
+2192,11112,2002,Restauration à emporter,2,1
+2193,11112,2003,Restauration à emporter,2,1
+2194,11112,2004,Restauration à emporter,2,1
+2195,11112,2005,Restauration à emporter,2,1
+2196,11112,2006,Restauration à emporter,2,1
+2197,11112,2007,Restauration à emporter,2,1
+2198,11112,2008,Restauration à emporter,2,1
+2199,11112,2009,Restauration à emporter,2,1
+2200,11112,2010,Restauration à emporter,2,1
+2201,11112,2011,Restauration à emporter,2,1
+2202,11112,2012,Restauration à emporter,4,1
+2203,11112,2013,Restauration à emporter,4,1
+2204,11112,2014,Restauration à emporter,4,1
+2205,11113,1994,Restauration sur place,3,1
+2206,11113,1995,Restauration sur place,3,1
+2207,11113,1996,Restauration sur place,3,1
+2208,11113,1997,Restauration sur place,3,1
+2209,11113,1998,Restauration sur place,3,1
+2210,11113,1999,Restauration sur place,3,1
+2211,11113,2000,Restauration sur place,3,1
+2212,11113,2001,Restauration sur place,3,1
+2213,11113,2002,Restauration sur place,3,1
+2214,11113,2003,Restauration sur place,3,1
+2215,11113,2004,Restauration sur place,3,1
+2216,11113,2005,Restauration sur place,3,1
+2217,11113,2006,Restauration sur place,3,1
+2218,11113,2007,Restauration sur place,3,1
+2219,11113,2008,Restauration sur place,3,1
+2220,11113,2009,Restauration sur place,3,1
+2221,11113,2010,Restauration sur place,2,1
+2222,11113,2011,Restauration sur place,2,1
+2223,11113,2012,Restauration sur place,4,1
+2224,11113,2013,Restauration sur place,4,1
+2225,11113,2014,Restauration sur place,4,1
+2226,11114,1994,Consommation de boissons alcoolisées,3,1
+2227,11114,1995,Consommation de boissons alcoolisées,3,1
+2228,11114,1996,Consommation de boissons alcoolisées,3,1
+2229,11114,1997,Consommation de boissons alcoolisées,3,1
+2230,11114,1998,Consommation de boissons alcoolisées,3,1
+2231,11114,1999,Consommation de boissons alcoolisées,3,1
+2232,11114,2000,Consommation de boissons alcoolisées,3,1
+2233,11114,2001,Consommation de boissons alcoolisées,3,1
+2234,11114,2002,Consommation de boissons alcoolisées,3,1
+2235,11114,2003,Consommation de boissons alcoolisées,3,1
+2236,11114,2004,Consommation de boissons alcoolisées,3,1
+2237,11114,2005,Consommation de boissons alcoolisées,3,1
+2238,11114,2006,Consommation de boissons alcoolisées,3,1
+2239,11114,2007,Consommation de boissons alcoolisées,3,1
+2240,11114,2008,Consommation de boissons alcoolisées,3,1
+2241,11114,2009,Consommation de boissons alcoolisées,3,1
+2242,11114,2010,Consommation de boissons alcoolisées,3,1
+2243,11114,2011,Consommation de boissons alcoolisées,3,1
+2244,11114,2012,Consommation de boissons alcoolisées,3,1
+2245,11114,2013,Consommation de boissons alcoolisées,3,1
+2246,11114,2014,Consommation de boissons alcoolisées,3,1
+2247,1112,1994,Cantines,0,0
+2248,1112,1995,Cantines,0,0
+2249,1112,1996,Cantines,0,0
+2250,1112,1997,Cantines,0,0
+2251,1112,1998,Cantines,0,0
+2252,1112,1999,Cantines,0,0
+2253,1112,2000,Cantines,0,0
+2254,1112,2001,Cantines,0,0
+2255,1112,2002,Cantines,2,0
+2256,1112,2003,Cantines,2,0
+2257,1112,2004,Cantines,2,0
+2258,1112,2005,Cantines,2,0
+2259,1112,2006,Cantines,2,0
+2260,1112,2007,Cantines,2,0
+2261,1112,2008,Cantines,2,0
+2262,1112,2009,Cantines,2,0
+2263,1112,2010,Cantines,2,0
+2264,1112,2011,Cantines,2,0
+2265,1112,2012,Cantines,2,0
+2266,1112,2013,Cantines,2,0
+2267,1112,2014,Cantines,2,0
+2268,1120,1994,Services d'hébergement,2,0
+2269,1120,1995,Services d'hébergement,2,0
+2270,1120,1996,Services d'hébergement,2,0
+2271,1120,1997,Services d'hébergement,2,0
+2272,1120,1998,Services d'hébergement,2,0
+2273,1120,1999,Services d'hébergement,2,0
+2274,1120,2000,Services d'hébergement,2,0
+2275,1120,2001,Services d'hébergement,2,0
+2276,1120,2002,Services d'hébergement,2,0
+2277,1120,2003,Services d'hébergement,2,0
+2278,1120,2004,Services d'hébergement,2,0
+2279,1120,2005,Services d'hébergement,2,0
+2280,1120,2006,Services d'hébergement,2,0
+2281,1120,2007,Services d'hébergement,2,0
+2282,1120,2008,Services d'hébergement,2,0
+2283,1120,2009,Services d'hébergement,2,0
+2284,1120,2010,Services d'hébergement,2,0
+2285,1120,2011,Services d'hébergement,2,0
+2286,1120,2012,Services d'hébergement,4,0
+2287,1120,2013,Services d'hébergement,4,0
+2288,1120,2014,Services d'hébergement,4,0
+2289,1211,1994,Salons de coiffure et instituts de soins et de beauté,3,0
+2290,1211,1995,Salons de coiffure et instituts de soins et de beauté,3,0
+2291,1211,1996,Salons de coiffure et instituts de soins et de beauté,3,0
+2292,1211,1997,Salons de coiffure et instituts de soins et de beauté,3,0
+2293,1211,1998,Salons de coiffure et instituts de soins et de beauté,3,0
+2294,1211,1999,Salons de coiffure et instituts de soins et de beauté,3,0
+2295,1211,2000,Salons de coiffure et instituts de soins et de beauté,3,0
+2296,1211,2001,Salons de coiffure et instituts de soins et de beauté,3,0
+2297,1211,2002,Salons de coiffure et instituts de soins et de beauté,3,0
+2298,1211,2003,Salons de coiffure et instituts de soins et de beauté,3,0
+2299,1211,2004,Salons de coiffure et instituts de soins et de beauté,3,0
+2300,1211,2005,Salons de coiffure et instituts de soins et de beauté,3,0
+2301,1211,2006,Salons de coiffure et instituts de soins et de beauté,3,0
+2302,1211,2007,Salons de coiffure et instituts de soins et de beauté,3,0
+2303,1211,2008,Salons de coiffure et instituts de soins et de beauté,3,0
+2304,1211,2009,Salons de coiffure et instituts de soins et de beauté,3,0
+2305,1211,2010,Salons de coiffure et instituts de soins et de beauté,3,0
+2306,1211,2011,Salons de coiffure et instituts de soins et de beauté,3,0
+2307,1211,2012,Salons de coiffure et instituts de soins et de beauté,3,0
+2308,1211,2013,Salons de coiffure et instituts de soins et de beauté,3,0
+2309,1211,2014,Salons de coiffure et instituts de soins et de beauté,3,0
+2310,1212,1994,Appareils électriques pour soins corporels,3,0
+2311,1212,1995,Appareils électriques pour soins corporels,3,0
+2312,1212,1996,Appareils électriques pour soins corporels,3,0
+2313,1212,1997,Appareils électriques pour soins corporels,3,0
+2314,1212,1998,Appareils électriques pour soins corporels,3,0
+2315,1212,1999,Appareils électriques pour soins corporels,3,0
+2316,1212,2000,Appareils électriques pour soins corporels,3,0
+2317,1212,2001,Appareils électriques pour soins corporels,3,0
+2318,1212,2002,Appareils électriques pour soins corporels,3,0
+2319,1212,2003,Appareils électriques pour soins corporels,3,0
+2320,1212,2004,Appareils électriques pour soins corporels,3,0
+2321,1212,2005,Appareils électriques pour soins corporels,3,0
+2322,1212,2006,Appareils électriques pour soins corporels,3,0
+2323,1212,2007,Appareils électriques pour soins corporels,3,0
+2324,1212,2008,Appareils électriques pour soins corporels,3,0
+2325,1212,2009,Appareils électriques pour soins corporels,3,0
+2326,1212,2010,Appareils électriques pour soins corporels,3,0
+2327,1212,2011,Appareils électriques pour soins corporels,3,0
+2328,1212,2012,Appareils électriques pour soins corporels,3,0
+2329,1212,2013,Appareils électriques pour soins corporels,3,0
+2330,1212,2014,Appareils électriques pour soins corporels,3,0
+2331,1213,1994,"Autres appareils, articles et produits pour soins corporels",3,0
+2332,1213,1995,"Autres appareils, articles et produits pour soins corporels",3,0
+2333,1213,1996,"Autres appareils, articles et produits pour soins corporels",3,0
+2334,1213,1997,"Autres appareils, articles et produits pour soins corporels",3,0
+2335,1213,1998,"Autres appareils, articles et produits pour soins corporels",3,0
+2336,1213,1999,"Autres appareils, articles et produits pour soins corporels",3,0
+2337,1213,2000,"Autres appareils, articles et produits pour soins corporels",3,0
+2338,1213,2001,"Autres appareils, articles et produits pour soins corporels",3,0
+2339,1213,2002,"Autres appareils, articles et produits pour soins corporels",3,0
+2340,1213,2003,"Autres appareils, articles et produits pour soins corporels",3,0
+2341,1213,2004,"Autres appareils, articles et produits pour soins corporels",3,0
+2342,1213,2005,"Autres appareils, articles et produits pour soins corporels",3,0
+2343,1213,2006,"Autres appareils, articles et produits pour soins corporels",3,0
+2344,1213,2007,"Autres appareils, articles et produits pour soins corporels",3,0
+2345,1213,2008,"Autres appareils, articles et produits pour soins corporels",3,0
+2346,1213,2009,"Autres appareils, articles et produits pour soins corporels",3,0
+2347,1213,2010,"Autres appareils, articles et produits pour soins corporels",3,0
+2348,1213,2011,"Autres appareils, articles et produits pour soins corporels",3,0
+2349,1213,2012,"Autres appareils, articles et produits pour soins corporels",3,0
+2350,1213,2013,"Autres appareils, articles et produits pour soins corporels",3,0
+2351,1213,2014,"Autres appareils, articles et produits pour soins corporels",3,0
+2352,1220,1994,Prostitution,0,0
+2353,1220,1995,Prostitution,0,0
+2354,1220,1996,Prostitution,0,0
+2355,1220,1997,Prostitution,0,0
+2356,1220,1998,Prostitution,0,0
+2357,1220,1999,Prostitution,0,0
+2358,1220,2000,Prostitution,0,0
+2359,1220,2001,Prostitution,0,0
+2360,1220,2002,Prostitution,0,0
+2361,1220,2003,Prostitution,0,0
+2362,1220,2004,Prostitution,0,0
+2363,1220,2005,Prostitution,0,0
+2364,1220,2006,Prostitution,0,0
+2365,1220,2007,Prostitution,0,0
+2366,1220,2008,Prostitution,0,0
+2367,1220,2009,Prostitution,0,0
+2368,1220,2010,Prostitution,0,0
+2369,1220,2011,Prostitution,0,0
+2370,1220,2012,Prostitution,0,0
+2371,1220,2013,Prostitution,0,0
+2372,1220,2014,Prostitution,0,0
+2373,1231,1994,Articles de bijouterie et horlogerie,3,0
+2374,1231,1995,Articles de bijouterie et horlogerie,3,0
+2375,1231,1996,Articles de bijouterie et horlogerie,3,0
+2376,1231,1997,Articles de bijouterie et horlogerie,3,0
+2377,1231,1998,Articles de bijouterie et horlogerie,3,0
+2378,1231,1999,Articles de bijouterie et horlogerie,3,0
+2379,1231,2000,Articles de bijouterie et horlogerie,3,0
+2380,1231,2001,Articles de bijouterie et horlogerie,3,0
+2381,1231,2002,Articles de bijouterie et horlogerie,3,0
+2382,1231,2003,Articles de bijouterie et horlogerie,3,0
+2383,1231,2004,Articles de bijouterie et horlogerie,3,0
+2384,1231,2005,Articles de bijouterie et horlogerie,3,0
+2385,1231,2006,Articles de bijouterie et horlogerie,3,0
+2386,1231,2007,Articles de bijouterie et horlogerie,3,0
+2387,1231,2008,Articles de bijouterie et horlogerie,3,0
+2388,1231,2009,Articles de bijouterie et horlogerie,3,0
+2389,1231,2010,Articles de bijouterie et horlogerie,3,0
+2390,1231,2011,Articles de bijouterie et horlogerie,3,0
+2391,1231,2012,Articles de bijouterie et horlogerie,3,0
+2392,1231,2013,Articles de bijouterie et horlogerie,3,0
+2393,1231,2014,Articles de bijouterie et horlogerie,3,0
+2394,1232,1994,Autres effets personnels,3,0
+2395,1232,1995,Autres effets personnels,3,0
+2396,1232,1996,Autres effets personnels,3,0
+2397,1232,1997,Autres effets personnels,3,0
+2398,1232,1998,Autres effets personnels,3,0
+2399,1232,1999,Autres effets personnels,3,0
+2400,1232,2000,Autres effets personnels,3,0
+2401,1232,2001,Autres effets personnels,3,0
+2402,1232,2002,Autres effets personnels,3,0
+2403,1232,2003,Autres effets personnels,3,0
+2404,1232,2004,Autres effets personnels,3,0
+2405,1232,2005,Autres effets personnels,3,0
+2406,1232,2006,Autres effets personnels,3,0
+2407,1232,2007,Autres effets personnels,3,0
+2408,1232,2008,Autres effets personnels,3,0
+2409,1232,2009,Autres effets personnels,3,0
+2410,1232,2010,Autres effets personnels,3,0
+2411,1232,2011,Autres effets personnels,3,0
+2412,1232,2012,Autres effets personnels,3,0
+2413,1232,2013,Autres effets personnels,3,0
+2414,1232,2014,Autres effets personnels,3,0
+2415,1240,1994,Protection sociale,3,0
+2416,1240,1995,Protection sociale,3,0
+2417,1240,1996,Protection sociale,3,0
+2418,1240,1997,Protection sociale,3,0
+2419,1240,1998,Protection sociale,3,0
+2420,1240,1999,Protection sociale,3,0
+2421,1240,2000,Protection sociale,2,0
+2422,1240,2001,Protection sociale,2,0
+2423,1240,2002,Protection sociale,2,0
+2424,1240,2003,Protection sociale,2,0
+2425,1240,2004,Protection sociale,2,0
+2426,1240,2005,Protection sociale,2,0
+2427,1240,2006,Protection sociale,2,0
+2428,1240,2007,Protection sociale,2,0
+2429,1240,2008,Protection sociale,2,0
+2430,1240,2009,Protection sociale,2,0
+2431,1240,2010,Protection sociale,2,0
+2432,1240,2011,Protection sociale,2,0
+2433,1240,2012,Protection sociale,4,0
+2434,1240,2013,Protection sociale,4,0
+2435,1240,2014,Protection sociale,4,0
+2436,1251,1994,Assurance vie,17,0
+2437,1251,1995,Assurance vie,17,0
+2438,1251,1996,Assurance vie,17,0
+2439,1251,1997,Assurance vie,17,0
+2440,1251,1998,Assurance vie,17,0
+2441,1251,1999,Assurance vie,17,0
+2442,1251,2000,Assurance vie,17,0
+2443,1251,2001,Assurance vie,17,0
+2444,1251,2002,Assurance vie,17,0
+2445,1251,2003,Assurance vie,17,0
+2446,1251,2004,Assurance vie,17,0
+2447,1251,2005,Assurance vie,17,0
+2448,1251,2006,Assurance vie,17,0
+2449,1251,2007,Assurance vie,17,0
+2450,1251,2008,Assurance vie,17,0
+2451,1251,2009,Assurance vie,17,0
+2452,1251,2010,Assurance vie,17,0
+2453,1251,2011,Assurance vie,17,0
+2454,1251,2012,Assurance vie,17,0
+2455,1251,2013,Assurance vie,17,0
+2456,1251,2014,Assurance vie,17,0
+2457,1252,1994,Assurance habitation,17,0
+2458,1252,1995,Assurance habitation,17,0
+2459,1252,1996,Assurance habitation,17,0
+2460,1252,1997,Assurance habitation,17,0
+2461,1252,1998,Assurance habitation,17,0
+2462,1252,1999,Assurance habitation,17,0
+2463,1252,2000,Assurance habitation,17,0
+2464,1252,2001,Assurance habitation,17,0
+2465,1252,2002,Assurance habitation,17,0
+2466,1252,2003,Assurance habitation,17,0
+2467,1252,2004,Assurance habitation,17,0
+2468,1252,2005,Assurance habitation,17,0
+2469,1252,2006,Assurance habitation,17,0
+2470,1252,2007,Assurance habitation,17,0
+2471,1252,2008,Assurance habitation,17,0
+2472,1252,2009,Assurance habitation,17,0
+2473,1252,2010,Assurance habitation,17,0
+2474,1252,2011,Assurance habitation,17,0
+2475,1252,2012,Assurance habitation,17,0
+2476,1252,2013,Assurance habitation,17,0
+2477,1252,2014,Assurance habitation,17,0
+2478,1253,1994,Assurance maladie,16,0
+2479,1253,1995,Assurance maladie,16,0
+2480,1253,1996,Assurance maladie,16,0
+2481,1253,1997,Assurance maladie,16,0
+2482,1253,1998,Assurance maladie,16,0
+2483,1253,1999,Assurance maladie,16,0
+2484,1253,2000,Assurance maladie,16,0
+2485,1253,2001,Assurance maladie,16,0
+2486,1253,2002,Assurance maladie,16,0
+2487,1253,2003,Assurance maladie,16,0
+2488,1253,2004,Assurance maladie,16,0
+2489,1253,2005,Assurance maladie,16,0
+2490,1253,2006,Assurance maladie,16,0
+2491,1253,2007,Assurance maladie,16,0
+2492,1253,2008,Assurance maladie,16,0
+2493,1253,2009,Assurance maladie,16,0
+2494,1253,2010,Assurance maladie,16,0
+2495,1253,2011,Assurance maladie,16,0
+2496,1253,2012,Assurance maladie,16,0
+2497,1253,2013,Assurance maladie,16,0
+2498,1253,2014,Assurance maladie,16,0
+2499,1254,1994,Assurance transports,15,0
+2500,1254,1995,Assurance transports,15,0
+2501,1254,1996,Assurance transports,15,0
+2502,1254,1997,Assurance transports,15,0
+2503,1254,1998,Assurance transports,15,0
+2504,1254,1999,Assurance transports,15,0
+2505,1254,2000,Assurance transports,15,0
+2506,1254,2001,Assurance transports,15,0
+2507,1254,2002,Assurance transports,15,0
+2508,1254,2003,Assurance transports,15,0
+2509,1254,2004,Assurance transports,15,0
+2510,1254,2005,Assurance transports,15,0
+2511,1254,2006,Assurance transports,15,0
+2512,1254,2007,Assurance transports,15,0
+2513,1254,2008,Assurance transports,15,0
+2514,1254,2009,Assurance transports,15,0
+2515,1254,2010,Assurance transports,15,0
+2516,1254,2011,Assurance transports,15,0
+2517,1254,2012,Assurance transports,15,0
+2518,1254,2013,Assurance transports,15,0
+2519,1254,2014,Assurance transports,15,0
+2520,1255,1994,Autres assurances,17,0
+2521,1255,1995,Autres assurances,17,0
+2522,1255,1996,Autres assurances,17,0
+2523,1255,1997,Autres assurances,17,0
+2524,1255,1998,Autres assurances,17,0
+2525,1255,1999,Autres assurances,17,0
+2526,1255,2000,Autres assurances,17,0
+2527,1255,2001,Autres assurances,17,0
+2528,1255,2002,Autres assurances,17,0
+2529,1255,2003,Autres assurances,17,0
+2530,1255,2004,Autres assurances,17,0
+2531,1255,2005,Autres assurances,17,0
+2532,1255,2006,Autres assurances,17,0
+2533,1255,2007,Autres assurances,17,0
+2534,1255,2008,Autres assurances,17,0
+2535,1255,2009,Autres assurances,17,0
+2536,1255,2010,Autres assurances,17,0
+2537,1255,2011,Autres assurances,17,0
+2538,1255,2012,Autres assurances,17,0
+2539,1255,2013,Autres assurances,17,0
+2540,1255,2014,Autres assurances,17,0
+2541,1261,1994,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2542,1261,1995,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2543,1261,1996,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2544,1261,1997,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2545,1261,1998,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2546,1261,1999,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2547,1261,2000,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2548,1261,2001,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2549,1261,2002,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2550,1261,2003,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2551,1261,2004,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2552,1261,2005,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2553,1261,2006,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2554,1261,2007,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2555,1261,2008,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2556,1261,2009,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2557,1261,2010,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2558,1261,2011,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2559,1261,2012,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2560,1261,2013,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2561,1261,2014,Coûts des services d'intermédiation financière indirectement mesurés,0,0
+2562,1262,1994,Autres services financiers non compris ailleurs,3,0
+2563,1262,1995,Autres services financiers non compris ailleurs,3,0
+2564,1262,1996,Autres services financiers non compris ailleurs,3,0
+2565,1262,1997,Autres services financiers non compris ailleurs,3,0
+2566,1262,1998,Autres services financiers non compris ailleurs,3,0
+2567,1262,1999,Autres services financiers non compris ailleurs,3,0
+2568,1262,2000,Autres services financiers non compris ailleurs,3,0
+2569,1262,2001,Autres services financiers non compris ailleurs,3,0
+2570,1262,2002,Autres services financiers non compris ailleurs,3,0
+2571,1262,2003,Autres services financiers non compris ailleurs,3,0
+2572,1262,2004,Autres services financiers non compris ailleurs,3,0
+2573,1262,2005,Autres services financiers non compris ailleurs,3,0
+2574,1262,2006,Autres services financiers non compris ailleurs,3,0
+2575,1262,2007,Autres services financiers non compris ailleurs,3,0
+2576,1262,2008,Autres services financiers non compris ailleurs,3,0
+2577,1262,2009,Autres services financiers non compris ailleurs,3,0
+2578,1262,2010,Autres services financiers non compris ailleurs,3,0
+2579,1262,2011,Autres services financiers non compris ailleurs,3,0
+2580,1262,2012,Autres services financiers non compris ailleurs,3,0
+2581,1262,2013,Autres services financiers non compris ailleurs,3,0
+2582,1262,2014,Autres services financiers non compris ailleurs,3,0
+2583,1270,1994,Autres services non compris ailleurs,3,0
+2584,1270,1995,Autres services non compris ailleurs,3,0
+2585,1270,1996,Autres services non compris ailleurs,3,0
+2586,1270,1997,Autres services non compris ailleurs,3,0
+2587,1270,1998,Autres services non compris ailleurs,3,0
+2588,1270,1999,Autres services non compris ailleurs,3,0
+2589,1270,2000,Autres services non compris ailleurs,3,0
+2590,1270,2001,Autres services non compris ailleurs,3,0
+2591,1270,2002,Autres services non compris ailleurs,3,0
+2592,1270,2003,Autres services non compris ailleurs,3,0
+2593,1270,2004,Autres services non compris ailleurs,3,0
+2594,1270,2005,Autres services non compris ailleurs,3,0
+2595,1270,2006,Autres services non compris ailleurs,3,0
+2596,1270,2007,Autres services non compris ailleurs,3,0
+2597,1270,2008,Autres services non compris ailleurs,3,0
+2598,1270,2009,Autres services non compris ailleurs,3,0
+2599,1270,2010,Autres services non compris ailleurs,3,0
+2600,1270,2011,Autres services non compris ailleurs,3,0
+2601,1270,2012,Autres services non compris ailleurs,3,0
+2602,1270,2013,Autres services non compris ailleurs,3,0
+2603,1270,2014,Autres services non compris ailleurs,3,0
+2604,9901,1994,caution pour la location d'un logement,0,1
+2605,9901,1995,caution pour la location d'un logement,0,1
+2606,9901,1996,caution pour la location d'un logement,0,1
+2607,9901,1997,caution pour la location d'un logement,0,1
+2608,9901,1998,caution pour la location d'un logement,0,1
+2609,9901,1999,caution pour la location d'un logement,0,1
+2610,9901,2000,caution pour la location d'un logement,0,1
+2611,9901,2001,caution pour la location d'un logement,0,1
+2612,9901,2002,caution pour la location d'un logement,0,1
+2613,9901,2003,caution pour la location d'un logement,0,1
+2614,9901,2004,caution pour la location d'un logement,0,1
+2615,9901,2005,caution pour la location d'un logement,0,1
+2616,9901,2006,caution pour la location d'un logement,0,1
+2617,9901,2007,caution pour la location d'un logement,0,1
+2618,9901,2008,caution pour la location d'un logement,0,1
+2619,9901,2009,caution pour la location d'un logement,0,1
+2620,9901,2010,caution pour la location d'un logement,0,1
+2621,9901,2011,caution pour la location d'un logement,0,1
+2622,9901,2012,caution pour la location d'un logement,0,1
+2623,9901,2013,caution pour la location d'un logement,0,1
+2624,9901,2014,caution pour la location d'un logement,0,1
+2625,9902,1994,"achats de logements, garages, parkings, box et terrains",0,1
+2626,9902,1995,"achats de logements, garages, parkings, box et terrains",0,1
+2627,9902,1996,"achats de logements, garages, parkings, box et terrains",0,1
+2628,9902,1997,"achats de logements, garages, parkings, box et terrains",0,1
+2629,9902,1998,"achats de logements, garages, parkings, box et terrains",0,1
+2630,9902,1999,"achats de logements, garages, parkings, box et terrains",0,1
+2631,9902,2000,"achats de logements, garages, parkings, box et terrains",0,1
+2632,9902,2001,"achats de logements, garages, parkings, box et terrains",0,1
+2633,9902,2002,"achats de logements, garages, parkings, box et terrains",0,1
+2634,9902,2003,"achats de logements, garages, parkings, box et terrains",0,1
+2635,9902,2004,"achats de logements, garages, parkings, box et terrains",0,1
+2636,9902,2005,"achats de logements, garages, parkings, box et terrains",0,1
+2637,9902,2006,"achats de logements, garages, parkings, box et terrains",0,1
+2638,9902,2007,"achats de logements, garages, parkings, box et terrains",0,1
+2639,9902,2008,"achats de logements, garages, parkings, box et terrains",0,1
+2640,9902,2009,"achats de logements, garages, parkings, box et terrains",0,1
+2641,9902,2010,"achats de logements, garages, parkings, box et terrains",0,1
+2642,9902,2011,"achats de logements, garages, parkings, box et terrains",0,1
+2643,9902,2012,"achats de logements, garages, parkings, box et terrains",0,1
+2644,9902,2013,"achats de logements, garages, parkings, box et terrains",0,1
+2645,9902,2014,"achats de logements, garages, parkings, box et terrains",0,1
+2646,9903,1994,Gros travaux d'entretien dans les logements,2,1
+2647,9903,1995,Gros travaux d'entretien dans les logements,2,1
+2648,9903,1996,Gros travaux d'entretien dans les logements,2,1
+2649,9903,1997,Gros travaux d'entretien dans les logements,2,1
+2650,9903,1998,Gros travaux d'entretien dans les logements,2,1
+2651,9903,1999,Gros travaux d'entretien dans les logements,2,1
+2652,9903,2000,Gros travaux d'entretien dans les logements,2,1
+2653,9903,2001,Gros travaux d'entretien dans les logements,2,1
+2654,9903,2002,Gros travaux d'entretien dans les logements,2,1
+2655,9903,2003,Gros travaux d'entretien dans les logements,2,1
+2656,9903,2004,Gros travaux d'entretien dans les logements,2,1
+2657,9903,2005,Gros travaux d'entretien dans les logements,2,1
+2658,9903,2006,Gros travaux d'entretien dans les logements,2,1
+2659,9903,2007,Gros travaux d'entretien dans les logements,2,1
+2660,9903,2008,Gros travaux d'entretien dans les logements,2,1
+2661,9903,2009,Gros travaux d'entretien dans les logements,2,1
+2662,9903,2010,Gros travaux d'entretien dans les logements,2,1
+2663,9903,2011,Gros travaux d'entretien dans les logements,2,1
+2664,9903,2012,Gros travaux d'entretien dans les logements,4,1
+2665,9903,2013,Gros travaux d'entretien dans les logements,4,1
+2666,9903,2014,Gros travaux d'entretien dans les logements,4,1
+2667,9911,1994,impôts et taxes de la résidence principale,0,1
+2668,9911,1995,impôts et taxes de la résidence principale,0,1
+2669,9911,1996,impôts et taxes de la résidence principale,0,1
+2670,9911,1997,impôts et taxes de la résidence principale,0,1
+2671,9911,1998,impôts et taxes de la résidence principale,0,1
+2672,9911,1999,impôts et taxes de la résidence principale,0,1
+2673,9911,2000,impôts et taxes de la résidence principale,0,1
+2674,9911,2001,impôts et taxes de la résidence principale,0,1
+2675,9911,2002,impôts et taxes de la résidence principale,0,1
+2676,9911,2003,impôts et taxes de la résidence principale,0,1
+2677,9911,2004,impôts et taxes de la résidence principale,0,1
+2678,9911,2005,impôts et taxes de la résidence principale,0,1
+2679,9911,2006,impôts et taxes de la résidence principale,0,1
+2680,9911,2007,impôts et taxes de la résidence principale,0,1
+2681,9911,2008,impôts et taxes de la résidence principale,0,1
+2682,9911,2009,impôts et taxes de la résidence principale,0,1
+2683,9911,2010,impôts et taxes de la résidence principale,0,1
+2684,9911,2011,impôts et taxes de la résidence principale,0,1
+2685,9911,2012,impôts et taxes de la résidence principale,0,1
+2686,9911,2013,impôts et taxes de la résidence principale,0,1
+2687,9911,2014,impôts et taxes de la résidence principale,0,1
+2688,9912,1994,impôts et taxes résidence secondaire ou autre logement,0,1
+2689,9912,1995,impôts et taxes résidence secondaire ou autre logement,0,1
+2690,9912,1996,impôts et taxes résidence secondaire ou autre logement,0,1
+2691,9912,1997,impôts et taxes résidence secondaire ou autre logement,0,1
+2692,9912,1998,impôts et taxes résidence secondaire ou autre logement,0,1
+2693,9912,1999,impôts et taxes résidence secondaire ou autre logement,0,1
+2694,9912,2000,impôts et taxes résidence secondaire ou autre logement,0,1
+2695,9912,2001,impôts et taxes résidence secondaire ou autre logement,0,1
+2696,9912,2002,impôts et taxes résidence secondaire ou autre logement,0,1
+2697,9912,2003,impôts et taxes résidence secondaire ou autre logement,0,1
+2698,9912,2004,impôts et taxes résidence secondaire ou autre logement,0,1
+2699,9912,2005,impôts et taxes résidence secondaire ou autre logement,0,1
+2700,9912,2006,impôts et taxes résidence secondaire ou autre logement,0,1
+2701,9912,2007,impôts et taxes résidence secondaire ou autre logement,0,1
+2702,9912,2008,impôts et taxes résidence secondaire ou autre logement,0,1
+2703,9912,2009,impôts et taxes résidence secondaire ou autre logement,0,1
+2704,9912,2010,impôts et taxes résidence secondaire ou autre logement,0,1
+2705,9912,2011,impôts et taxes résidence secondaire ou autre logement,0,1
+2706,9912,2012,impôts et taxes résidence secondaire ou autre logement,0,1
+2707,9912,2013,impôts et taxes résidence secondaire ou autre logement,0,1
+2708,9912,2014,impôts et taxes résidence secondaire ou autre logement,0,1
+2709,9913,1994,impôts sur le revenu,0,1
+2710,9913,1995,impôts sur le revenu,0,1
+2711,9913,1996,impôts sur le revenu,0,1
+2712,9913,1997,impôts sur le revenu,0,1
+2713,9913,1998,impôts sur le revenu,0,1
+2714,9913,1999,impôts sur le revenu,0,1
+2715,9913,2000,impôts sur le revenu,0,1
+2716,9913,2001,impôts sur le revenu,0,1
+2717,9913,2002,impôts sur le revenu,0,1
+2718,9913,2003,impôts sur le revenu,0,1
+2719,9913,2004,impôts sur le revenu,0,1
+2720,9913,2005,impôts sur le revenu,0,1
+2721,9913,2006,impôts sur le revenu,0,1
+2722,9913,2007,impôts sur le revenu,0,1
+2723,9913,2008,impôts sur le revenu,0,1
+2724,9913,2009,impôts sur le revenu,0,1
+2725,9913,2010,impôts sur le revenu,0,1
+2726,9913,2011,impôts sur le revenu,0,1
+2727,9913,2012,impôts sur le revenu,0,1
+2728,9913,2013,impôts sur le revenu,0,1
+2729,9913,2014,impôts sur le revenu,0,1
+2730,9914,1994,taxes automobile,0,1
+2731,9914,1995,taxes automobile,0,1
+2732,9914,1996,taxes automobile,0,1
+2733,9914,1997,taxes automobile,0,1
+2734,9914,1998,taxes automobile,0,1
+2735,9914,1999,taxes automobile,0,1
+2736,9914,2000,taxes automobile,0,1
+2737,9914,2001,taxes automobile,0,1
+2738,9914,2002,taxes automobile,0,1
+2739,9914,2003,taxes automobile,0,1
+2740,9914,2004,taxes automobile,0,1
+2741,9914,2005,taxes automobile,0,1
+2742,9914,2006,taxes automobile,0,1
+2743,9914,2007,taxes automobile,0,1
+2744,9914,2008,taxes automobile,0,1
+2745,9914,2009,taxes automobile,0,1
+2746,9914,2010,taxes automobile,0,1
+2747,9914,2011,taxes automobile,0,1
+2748,9914,2012,taxes automobile,0,1
+2749,9914,2013,taxes automobile,0,1
+2750,9914,2014,taxes automobile,0,1
+2751,9915,1994,autres impôts et taxes,0,1
+2752,9915,1995,autres impôts et taxes,0,1
+2753,9915,1996,autres impôts et taxes,0,1
+2754,9915,1997,autres impôts et taxes,0,1
+2755,9915,1998,autres impôts et taxes,0,1
+2756,9915,1999,autres impôts et taxes,0,1
+2757,9915,2000,autres impôts et taxes,0,1
+2758,9915,2001,autres impôts et taxes,0,1
+2759,9915,2002,autres impôts et taxes,0,1
+2760,9915,2003,autres impôts et taxes,0,1
+2761,9915,2004,autres impôts et taxes,0,1
+2762,9915,2005,autres impôts et taxes,0,1
+2763,9915,2006,autres impôts et taxes,0,1
+2764,9915,2007,autres impôts et taxes,0,1
+2765,9915,2008,autres impôts et taxes,0,1
+2766,9915,2009,autres impôts et taxes,0,1
+2767,9915,2010,autres impôts et taxes,0,1
+2768,9915,2011,autres impôts et taxes,0,1
+2769,9915,2012,autres impôts et taxes,0,1
+2770,9915,2013,autres impôts et taxes,0,1
+2771,9915,2014,autres impôts et taxes,0,1
+2772,9921,1994,remboursements de prêts résidence principale,0,1
+2773,9921,1995,remboursements de prêts résidence principale,0,1
+2774,9921,1996,remboursements de prêts résidence principale,0,1
+2775,9921,1997,remboursements de prêts résidence principale,0,1
+2776,9921,1998,remboursements de prêts résidence principale,0,1
+2777,9921,1999,remboursements de prêts résidence principale,0,1
+2778,9921,2000,remboursements de prêts résidence principale,0,1
+2779,9921,2001,remboursements de prêts résidence principale,0,1
+2780,9921,2002,remboursements de prêts résidence principale,0,1
+2781,9921,2003,remboursements de prêts résidence principale,0,1
+2782,9921,2004,remboursements de prêts résidence principale,0,1
+2783,9921,2005,remboursements de prêts résidence principale,0,1
+2784,9921,2006,remboursements de prêts résidence principale,0,1
+2785,9921,2007,remboursements de prêts résidence principale,0,1
+2786,9921,2008,remboursements de prêts résidence principale,0,1
+2787,9921,2009,remboursements de prêts résidence principale,0,1
+2788,9921,2010,remboursements de prêts résidence principale,0,1
+2789,9921,2011,remboursements de prêts résidence principale,0,1
+2790,9921,2012,remboursements de prêts résidence principale,0,1
+2791,9921,2013,remboursements de prêts résidence principale,0,1
+2792,9921,2014,remboursements de prêts résidence principale,0,1
+2793,9922,1994,remboursements de prêts résidence secondaire ou autre logement,0,1
+2794,9922,1995,remboursements de prêts résidence secondaire ou autre logement,0,1
+2795,9922,1996,remboursements de prêts résidence secondaire ou autre logement,0,1
+2796,9922,1997,remboursements de prêts résidence secondaire ou autre logement,0,1
+2797,9922,1998,remboursements de prêts résidence secondaire ou autre logement,0,1
+2798,9922,1999,remboursements de prêts résidence secondaire ou autre logement,0,1
+2799,9922,2000,remboursements de prêts résidence secondaire ou autre logement,0,1
+2800,9922,2001,remboursements de prêts résidence secondaire ou autre logement,0,1
+2801,9922,2002,remboursements de prêts résidence secondaire ou autre logement,0,1
+2802,9922,2003,remboursements de prêts résidence secondaire ou autre logement,0,1
+2803,9922,2004,remboursements de prêts résidence secondaire ou autre logement,0,1
+2804,9922,2005,remboursements de prêts résidence secondaire ou autre logement,0,1
+2805,9922,2006,remboursements de prêts résidence secondaire ou autre logement,0,1
+2806,9922,2007,remboursements de prêts résidence secondaire ou autre logement,0,1
+2807,9922,2008,remboursements de prêts résidence secondaire ou autre logement,0,1
+2808,9922,2009,remboursements de prêts résidence secondaire ou autre logement,0,1
+2809,9922,2010,remboursements de prêts résidence secondaire ou autre logement,0,1
+2810,9922,2011,remboursements de prêts résidence secondaire ou autre logement,0,1
+2811,9922,2012,remboursements de prêts résidence secondaire ou autre logement,0,1
+2812,9922,2013,remboursements de prêts résidence secondaire ou autre logement,0,1
+2813,9922,2014,remboursements de prêts résidence secondaire ou autre logement,0,1
+2814,9923,1994,autres remboursements de prêts,0,1
+2815,9923,1995,autres remboursements de prêts,0,1
+2816,9923,1996,autres remboursements de prêts,0,1
+2817,9923,1997,autres remboursements de prêts,0,1
+2818,9923,1998,autres remboursements de prêts,0,1
+2819,9923,1999,autres remboursements de prêts,0,1
+2820,9923,2000,autres remboursements de prêts,0,1
+2821,9923,2001,autres remboursements de prêts,0,1
+2822,9923,2002,autres remboursements de prêts,0,1
+2823,9923,2003,autres remboursements de prêts,0,1
+2824,9923,2004,autres remboursements de prêts,0,1
+2825,9923,2005,autres remboursements de prêts,0,1
+2826,9923,2006,autres remboursements de prêts,0,1
+2827,9923,2007,autres remboursements de prêts,0,1
+2828,9923,2008,autres remboursements de prêts,0,1
+2829,9923,2009,autres remboursements de prêts,0,1
+2830,9923,2010,autres remboursements de prêts,0,1
+2831,9923,2011,autres remboursements de prêts,0,1
+2832,9923,2012,autres remboursements de prêts,0,1
+2833,9923,2013,autres remboursements de prêts,0,1
+2834,9923,2014,autres remboursements de prêts,0,1
+2835,9931,1994,argent donné au sein du ménage,0,1
+2836,9931,1995,argent donné au sein du ménage,0,1
+2837,9931,1996,argent donné au sein du ménage,0,1
+2838,9931,1997,argent donné au sein du ménage,0,1
+2839,9931,1998,argent donné au sein du ménage,0,1
+2840,9931,1999,argent donné au sein du ménage,0,1
+2841,9931,2000,argent donné au sein du ménage,0,1
+2842,9931,2001,argent donné au sein du ménage,0,1
+2843,9931,2002,argent donné au sein du ménage,0,1
+2844,9931,2003,argent donné au sein du ménage,0,1
+2845,9931,2004,argent donné au sein du ménage,0,1
+2846,9931,2005,argent donné au sein du ménage,0,1
+2847,9931,2006,argent donné au sein du ménage,0,1
+2848,9931,2007,argent donné au sein du ménage,0,1
+2849,9931,2008,argent donné au sein du ménage,0,1
+2850,9931,2009,argent donné au sein du ménage,0,1
+2851,9931,2010,argent donné au sein du ménage,0,1
+2852,9931,2011,argent donné au sein du ménage,0,1
+2853,9931,2012,argent donné au sein du ménage,0,1
+2854,9931,2013,argent donné au sein du ménage,0,1
+2855,9931,2014,argent donné au sein du ménage,0,1
+2856,9932,1994,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2857,9932,1995,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2858,9932,1996,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2859,9932,1997,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2860,9932,1998,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2861,9932,1999,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2862,9932,2000,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2863,9932,2001,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2864,9932,2002,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2865,9932,2003,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2866,9932,2004,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2867,9932,2005,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2868,9932,2006,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2869,9932,2007,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2870,9932,2008,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2871,9932,2009,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2872,9932,2010,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2873,9932,2011,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2874,9932,2012,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2875,9932,2013,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2876,9932,2014,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne,0,1
+2877,9933,1994,cadeaux offerts (argent ou bien) sai,2,1
+2878,9933,1995,cadeaux offerts (argent ou bien) sai,2,1
+2879,9933,1996,cadeaux offerts (argent ou bien) sai,2,1
+2880,9933,1997,cadeaux offerts (argent ou bien) sai,2,1
+2881,9933,1998,cadeaux offerts (argent ou bien) sai,2,1
+2882,9933,1999,cadeaux offerts (argent ou bien) sai,2,1
+2883,9933,2000,cadeaux offerts (argent ou bien) sai,2,1
+2884,9933,2001,cadeaux offerts (argent ou bien) sai,2,1
+2885,9933,2002,cadeaux offerts (argent ou bien) sai,2,1
+2886,9933,2003,cadeaux offerts (argent ou bien) sai,2,1
+2887,9933,2004,cadeaux offerts (argent ou bien) sai,2,1
+2888,9933,2005,cadeaux offerts (argent ou bien) sai,2,1
+2889,9933,2006,cadeaux offerts (argent ou bien) sai,2,1
+2890,9933,2007,cadeaux offerts (argent ou bien) sai,2,1
+2891,9933,2008,cadeaux offerts (argent ou bien) sai,2,1
+2892,9933,2009,cadeaux offerts (argent ou bien) sai,2,1
+2893,9933,2010,cadeaux offerts (argent ou bien) sai,2,1
+2894,9933,2011,cadeaux offerts (argent ou bien) sai,2,1
+2895,9933,2012,cadeaux offerts (argent ou bien) sai,2,1
+2896,9933,2013,cadeaux offerts (argent ou bien) sai,2,1
+2897,9933,2014,cadeaux offerts (argent ou bien) sai,2,1
+2898,9941,1994,prélèvements de l'employeur,0,1
+2899,9941,1995,prélèvements de l'employeur,0,1
+2900,9941,1996,prélèvements de l'employeur,0,1
+2901,9941,1997,prélèvements de l'employeur,0,1
+2902,9941,1998,prélèvements de l'employeur,0,1
+2903,9941,1999,prélèvements de l'employeur,0,1
+2904,9941,2000,prélèvements de l'employeur,0,1
+2905,9941,2001,prélèvements de l'employeur,0,1
+2906,9941,2002,prélèvements de l'employeur,0,1
+2907,9941,2003,prélèvements de l'employeur,0,1
+2908,9941,2004,prélèvements de l'employeur,0,1
+2909,9941,2005,prélèvements de l'employeur,0,1
+2910,9941,2006,prélèvements de l'employeur,0,1
+2911,9941,2007,prélèvements de l'employeur,0,1
+2912,9941,2008,prélèvements de l'employeur,0,1
+2913,9941,2009,prélèvements de l'employeur,0,1
+2914,9941,2010,prélèvements de l'employeur,0,1
+2915,9941,2011,prélèvements de l'employeur,0,1
+2916,9941,2012,prélèvements de l'employeur,0,1
+2917,9941,2013,prélèvements de l'employeur,0,1
+2918,9941,2014,prélèvements de l'employeur,0,1

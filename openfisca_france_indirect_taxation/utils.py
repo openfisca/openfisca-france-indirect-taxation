@@ -37,32 +37,49 @@ import pkg_resources
 log = logging.getLogger(__name__)
 
 
+assets_directory = os.path.join(
+    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+    'openfisca_france_indirect_taxation',
+    'assets',
+    )
+
+
 def get_transfert_data_frames(year = None):
     assert year is not None
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-    matrice_passage_file_path = os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
-        'Matrice passage {}-COICOP.xls'.format(year),
+    matrice_passage_csv_file_path = os.path.join(
+        assets_directory,
+        'Matrice passage {}-COICOP.csv'.format(year),
         )
-    matrice_passage_data_frame = pandas.read_excel(matrice_passage_file_path)
+    if os.path.exists(matrice_passage_csv_file_path):
+        matrice_passage_data_frame = pandas.read_csv(matrice_passage_csv_file_path)
+    else:
+        matrice_passage_xls_file_path = os.path.join(
+            assets_directory,
+            'Matrice passage {}-COICOP.xls'.format(year),
+            )
+        matrice_passage_data_frame = pandas.read_excel(matrice_passage_xls_file_path)
+        matrice_passage_data_frame.to_csv(matrice_passage_csv_file_path, encoding = 'utf-8')
+
     selected_parametres_fiscalite_data_frame = get_parametres_fiscalite_data_frame(year = year)
     return matrice_passage_data_frame, selected_parametres_fiscalite_data_frame
 
 
 def get_parametres_fiscalite_data_frame(year = None):
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-    parametres_fiscalite_file_path = os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
-        'Parametres fiscalite indirecte.xls',
+    parametres_fiscalite_csv_file_path = os.path.join(
+        assets_directory,
+        'Parametres fiscalite indirecte.csv',
         )
-    parametres_fiscalite_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "categoriefiscale")
-    # print parametres_fiscalite_data_frame
+    if os.path.exists(parametres_fiscalite_csv_file_path):
+        parametres_fiscalite_data_frame = pandas.read_csv(parametres_fiscalite_csv_file_path)
+    else:
+        parametres_fiscalite_xls_file_path = os.path.join(
+            assets_directory,
+            'Parametres fiscalite indirecte.xls',
+            )
+        parametres_fiscalite_data_frame = pandas.read_excel(parametres_fiscalite_xls_file_path,
+            sheetname = "categoriefiscale")
+        parametres_fiscalite_data_frame.to_csv(parametres_fiscalite_csv_file_path, encoding = 'utf-8')
+
     if year:
         selected_parametres_fiscalite_data_frame = \
             parametres_fiscalite_data_frame[parametres_fiscalite_data_frame.annee == year].copy()

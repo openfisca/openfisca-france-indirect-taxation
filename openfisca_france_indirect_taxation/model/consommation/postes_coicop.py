@@ -18,7 +18,7 @@ postes_coicop_data_frame = None
 
 
 def generate_variables():
-    postes_coicop_list = [str(element) for element in postes_coicop_data_frame.posteCOICOP.values]
+    postes_coicop_list = [element for element in postes_coicop_data_frame.posteCOICOP.values]
     for poste in postes_coicop_list:
         extraction_condition = postes_coicop_data_frame.posteCOICOP == int(poste)
         liste_annees = postes_coicop_data_frame.loc[
@@ -33,7 +33,7 @@ def generate_variables():
         type(class_name.encode('utf-8'), (Variable,), dict(
             column = FloatCol,
             entity_class = Menages,
-            label = label,
+            label = label.decode('utf-8'),
             ))
 
 
