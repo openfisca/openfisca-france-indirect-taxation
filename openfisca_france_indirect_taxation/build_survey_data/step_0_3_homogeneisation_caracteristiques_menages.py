@@ -631,7 +631,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage = menage.merge(vague, left_index = True, right_index = True)
         # On met un numéro à chaque vague pour pouvoir faire un meilleur suivi des évolutions temporelles pour
         # le modèle de demande
-        menage['vag_'] = menage['vag']
+        menage['vag_'] = menage['vag'].copy()
         menage.vag.loc[menage.vag_ == 1] = 23
         menage.vag.loc[menage.vag_ == 2] = 24
         menage.vag.loc[menage.vag_ == 3] = 25
@@ -655,7 +655,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage = menage.merge(stalog, left_index = True, right_index = True)
 
         # Recodage des catégories zeat
-        menage.zeat.loc[menage.zeat == 7] = 6
+        menage.loc[menage.zeat == 7, 'zeat'] = 6
         menage.zeat.loc[menage.zeat == 8] = 7
         menage.zeat.loc[menage.zeat == 9] = 8
         assert menage.zeat.isin(range(0, 9)).all()
