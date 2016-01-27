@@ -564,22 +564,16 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             assert variable in menage.columns, "{} is not a column of menage data frame".format(variable)
 
     if year == 2011:
+        variables = [
+            'ident_me', 'pondmen', 'npers', 'nenfants', 'nactifs', 'sexepr', 'sexecj', 'dip14cj', 'dip14pr',
+            'coeffuc', 'decuc1', 'typmen5', 'cataeu', 'situapr', 'situacj', 'agepr', 'agecj'
+            ]
+
         try:
-            menage = survey.get_values(
-                table = "MENAGE",
-                variables = [
-                    'ident_me', 'pondmen', 'npers', 'nenfants', 'nactifs', 'sexepr', 'sexecj', 'dip14cj', 'dip14pr',
-                    'coeffuc', 'decuc1', 'typmen5', 'cataeu', 'situapr', 'situacj', 'agepr', 'agecj'
-                    ]
-                ).sort_values(by = ['ident_me'])
+            menage = survey.get_values(table = "MENAGE", variables = variables)
         except:
-            menage = survey.get_values(
-                table = "menage",
-                variables = [
-                    'ident_me', 'pondmen', 'npers', 'nenfants', 'nactifs', 'sexepr', 'sexecj', 'dip14cj', 'dip14pr',
-                    'coeffuc', 'decuc1', 'typmen5', 'cataeu', 'situapr', 'situacj', 'agepr', 'agecj'
-                    ]
-                ).sort_values(by = ['ident_me'])
+            menage = survey.get_values(table = "menage", variables = variables)
+
         menage.rename(
             columns = {
                 'ident_me': 'ident_men',
@@ -590,13 +584,17 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
                 },
             inplace = True,
             )
+        del variables
         menage.agecj = menage.agecj.fillna(0)
         # Ajout de la variable vag
         try:
             vague = survey.get_values(table = "DEPMEN")
         except:
             vague = survey.get_values(table = "depmen")
-        vague = vague['vag'].copy()
+        vague.rename(columns = {'ident_me': 'ident_men'}, inplace = True)
+        vague = vague[['vag', 'ident_men']].copy()
+        menage.set_index('ident_men', inplace = True)
+        vague.set_index('ident_men', inplace = True)
         menage = menage.merge(vague, left_index = True, right_index = True)
         # On met un numéro à chaque vague pour pouvoir faire un meilleur suivi des évolutions temporelles pour
         # le modèle de demande
@@ -624,8 +622,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         assert stalog.stalog.isin(range(1, 6)).all()
         menage = menage.merge(stalog, left_index = True, right_index = True)
 
-    if year == 2011:
-        menage.set_index('ident_men', inplace = True)
 
     # role_menage used to be added in step_04. I add it here instead since we don't run step_04.
     menage['role_menage'] = 0
