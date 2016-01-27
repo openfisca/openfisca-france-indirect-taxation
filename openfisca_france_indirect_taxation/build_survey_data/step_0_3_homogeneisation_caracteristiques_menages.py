@@ -267,6 +267,13 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         menage.set_index('ident_men', inplace = True)
 
+        # Recodage des catégories zeat
+        menage.zeat.loc[menage.zeat == 7] = 6
+        menage.zeat.loc[menage.zeat == 8] = 7
+        menage.zeat.loc[menage.zeat == 9] = 8
+
+        assert menage.zeat.isin(range(1, 9)).all()
+
         individus = survey.get_values(
             table = "individus",
             variables = ['ident', 'matri', 'lien', 'anais']
@@ -335,6 +342,13 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.vag.loc[menage.vag_ == 5] = 21
         menage.vag.loc[menage.vag_ == 6] = 22
         del menage['vag_']
+
+        # Recodage des catégories zeat
+        menage.zeat.loc[menage.zeat == 7] = 6
+        menage.zeat.loc[menage.zeat == 8] = 7
+        menage.zeat.loc[menage.zeat == 9] = 8
+
+        assert menage.zeat.isin(range(1, 9)).all()
 
         stalog = survey.get_values(table = "depmen", variables = ['ident_men', 'stalog'])
         stalog['stalog'] = stalog.stalog.astype('int').copy()
@@ -565,8 +579,24 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
     if year == 2011:
         variables = [
-            'ident_me', 'pondmen', 'npers', 'nenfants', 'nactifs', 'sexepr', 'sexecj', 'dip14cj', 'dip14pr',
-            'coeffuc', 'decuc1', 'typmen5', 'cataeu', 'situapr', 'situacj', 'agepr', 'agecj'
+            'agecj',
+            'agepr',
+            'coeffuc',
+            'decuc1',
+            'ident_me',
+            'pondmen',
+            'npers',
+            'nenfants',
+            'nactifs',
+            'sexepr',
+            'sexecj',
+            'dip14cj',
+            'dip14pr',
+            'typmen5',
+            'cataeu',
+            'situapr',
+            'situacj',
+            'zeat',
             ]
 
         try:
@@ -588,17 +618,20 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.agecj = menage.agecj.fillna(0)
         # Ajout de la variable vag
         try:
-            vague = survey.get_values(table = "DEPMEN")
+            depmen = survey.get_values(table = "DEPMEN")
         except:
-            vague = survey.get_values(table = "depmen")
-        vague.rename(columns = {'ident_me': 'ident_men'}, inplace = True)
-        vague = vague[['vag', 'ident_men']].copy()
+            depmen = survey.get_values(table = "depmen")
+        depmen.rename(columns = {'ident_me': 'ident_men'}, inplace = True)
+        vague = depmen[['vag', 'ident_men']].copy()
+        stalog = depmen[['stalog', 'ident_men']].copy()
+        del depmen
+
         menage.set_index('ident_men', inplace = True)
         vague.set_index('ident_men', inplace = True)
         menage = menage.merge(vague, left_index = True, right_index = True)
         # On met un numéro à chaque vague pour pouvoir faire un meilleur suivi des évolutions temporelles pour
         # le modèle de demande
-        menage['vag_'] = menage['vag']
+        menage['vag_'] = menage['vag'].copy()
         menage.vag.loc[menage.vag_ == 1] = 23
         menage.vag.loc[menage.vag_ == 2] = 24
         menage.vag.loc[menage.vag_ == 3] = 25
@@ -608,7 +641,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         del menage['vag_']
 
         # Homogénéisation de la variable statut du logement qui prend des valeurs différentes pour 2011
-        stalog = survey.get_values(table = "DEPMEN", variables = ['stalog'])
         stalog['stalog'] = stalog.stalog.astype('int').copy()
         stalog['new_stalog'] = 0
         stalog.loc[stalog.stalog == 2, 'new_stalog'] = 1
@@ -618,12 +650,19 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         stalog.loc[stalog.stalog.isin([3, 6]), 'new_stalog'] = 5
         stalog.stalog = stalog.new_stalog.copy()
         del stalog['new_stalog']
-
         assert stalog.stalog.isin(range(1, 6)).all()
+        stalog.set_index('ident_men', inplace = True)
         menage = menage.merge(stalog, left_index = True, right_index = True)
 
+        # Recodage des catégories zeat
+        menage.loc[menage.zeat == 7, 'zeat'] = 6
+        menage.zeat.loc[menage.zeat == 8] = 7
+        menage.zeat.loc[menage.zeat == 9] = 8
+        assert menage.zeat.isin(range(0, 9)).all()
+        menage.index.name = 'ident_men'
 
-    # role_menage used to be added in step_04. I add it here instead since we don't run step_04.
+    #
+    assert menage.index.name == 'ident_men'
     menage['role_menage'] = 0
     temporary_store['donnes_socio_demog_{}'.format(year)] = menage
 

@@ -110,7 +110,8 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
 
     for name, preprocessed_data_frame in preprocessed_data_frame_by_name.iteritems():
         assert preprocessed_data_frame.index.name == 'ident_men', \
-            'Index is not labelled ident_men in data frame {}'.format(name)
+            'Index is labelled {} instead of ident_men in data frame {} for year {}'.format(
+                preprocessed_data_frame.index.name, name, year_data)
         assert len(preprocessed_data_frame) != 0, 'Empty data frame {}'.format(name)
         assert preprocessed_data_frame.index.dtype == numpy.dtype('O'), "index for {} is {}".format(
             name, preprocessed_data_frame.index.dtype)
@@ -134,6 +135,11 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
     data_frame.index.name = "ident_men"
     # TODO: Homogénéiser: soit faire en sorte que ident_men existe pour toutes les années
     # soit qu'elle soit en index pour toutes
+
+    # On ne garde que les ménages métropolitaines
+    if year_data == 2011:
+        data_frame = data_frame.query('zeat != 0')
+
     try:
         data_frame.reset_index(inplace = True)
     except ValueError, e:

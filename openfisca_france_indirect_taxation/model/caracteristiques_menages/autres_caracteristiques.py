@@ -77,3 +77,21 @@ class vag(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"numéro de la vague d'interrogation du ménage"
+
+
+class zeat(Variable):
+    column = EnumCol(
+        enum = Enum([
+            u"DOM",
+            u"Région parisienne",
+            u"Bassin parisien",
+            u"Nord",
+            u"Est",
+            u"Ouest",
+            u"Sud-Ouest",
+            u"Centre-Est",
+            u"Méditerrannée"], start = 0)
+    )
+    entity_class = Menages
+    label = u"Zone d'étude et d'aménagement du territoire"
+

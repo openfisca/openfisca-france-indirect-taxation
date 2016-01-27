@@ -1,0 +1,13 @@
+- name: "DOM"
+  period: "2011"
+  input_variables:
+    zeat: 0
+  output_variables:
+    zeat: 0
+
+- name: "Paris"
+  period: "2005"
+  input_variables:
+    zeat: 1
+  output_variables:
+    zeat: 1
