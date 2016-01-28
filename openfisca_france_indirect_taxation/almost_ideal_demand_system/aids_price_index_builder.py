@@ -35,6 +35,7 @@ indice_prix_mensuel_98_2015 = pd.read_csv(
         default_config_files_directory,
         'openfisca_france_indirect_taxation',
         'assets',
+        'prix',
         'indice_prix_mensuel_98_2015.csv'
         ), sep =';', decimal = ','
     )

@@ -48,6 +48,7 @@ def get_transfert_data_frames(year = None):
     assert year is not None
     matrice_passage_csv_file_path = os.path.join(
         assets_directory,
+        'legislation',
         'Matrice passage {}-COICOP.csv'.format(year),
         )
     if os.path.exists(matrice_passage_csv_file_path):
@@ -55,6 +56,7 @@ def get_transfert_data_frames(year = None):
     else:
         matrice_passage_xls_file_path = os.path.join(
             assets_directory,
+            'legislation',
             'Matrice passage {}-COICOP.xls'.format(year),
             )
         matrice_passage_data_frame = pandas.read_excel(matrice_passage_xls_file_path)
@@ -67,6 +69,7 @@ def get_transfert_data_frames(year = None):
 def get_parametres_fiscalite_data_frame(year = None):
     parametres_fiscalite_csv_file_path = os.path.join(
         assets_directory,
+        'legislation',
         'Parametres fiscalite indirecte.csv',
         )
     if os.path.exists(parametres_fiscalite_csv_file_path):
@@ -74,6 +77,7 @@ def get_parametres_fiscalite_data_frame(year = None):
     else:
         parametres_fiscalite_xls_file_path = os.path.join(
             assets_directory,
+            'legislation',
             'Parametres fiscalite indirecte.xls',
             )
         parametres_fiscalite_data_frame = pandas.read_excel(parametres_fiscalite_xls_file_path,

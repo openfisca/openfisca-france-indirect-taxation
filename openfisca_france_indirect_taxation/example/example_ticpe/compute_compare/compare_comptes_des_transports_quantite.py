@@ -15,9 +15,13 @@ import pkg_resources
 import os
 import pandas as pd
 from pandas import concat
+import seaborn
 
 # Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.example.utils_example import graph_builder_line
+
+# Import d'une nouvelle palette de couleurs
+seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 # Import des fichiers csv donnant les montants agrégés des quantités consommées répertoriées dans les enquêtes BdF.
 # Ces montants sont calculés dans compute_quantite_carburants
@@ -38,7 +42,7 @@ for element in produits:
 
 # Import des fichiers csv donnant les quantités agrégées d'après la comptabilité nationale.
 quantite_carbu_vp_france = pd.read_csv(os.path.join(assets_directory,
-        'openfisca_france_indirect_taxation', 'assets',
+        'openfisca_france_indirect_taxation', 'assets', 'quantites',
         'quantite_carbu_vp_france.csv'), sep = ';')
 quantite_carbu_vp_france['Unnamed: 0'] = quantite_carbu_vp_france['Unnamed: 0'].astype(str)
 quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('Unnamed: 0')

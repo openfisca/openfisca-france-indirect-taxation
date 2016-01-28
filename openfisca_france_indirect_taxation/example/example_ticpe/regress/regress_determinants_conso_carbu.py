@@ -113,6 +113,7 @@ if __name__ == '__main__':
                 default_config_files_directory,
                 'openfisca_france_indirect_taxation',
                 'assets',
+                'prix',
                 'prix_mensuel_carbu_match_to_vag.csv'
                 ), sep =';', decimal = ','
             )

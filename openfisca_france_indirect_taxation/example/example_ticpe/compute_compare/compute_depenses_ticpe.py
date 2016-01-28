@@ -88,16 +88,16 @@ if __name__ == '__main__':
         )
 
     writer_carburants = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'depenses_ticpe_totales_bdf.csv'), 'wb'))
+        'depenses', 'depenses_ticpe_totales_bdf.csv'), 'wb'))
     for key, value in depenses_ticpe_totales.items():
         writer_carburants.writerow([key, value])
 
     writer_diesel = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'depenses_ticpe_diesel_bdf.csv'), 'wb'))
+        'depenses', 'depenses_ticpe_diesel_bdf.csv'), 'wb'))
     for key, value in depenses_ticpe_diesel.items():
         writer_diesel.writerow([key, value])
 
     writer_essence = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'depenses_ticpe_essence_bdf.csv'), 'wb'))
+        'depenses', 'depenses_ticpe_essence_bdf.csv'), 'wb'))
     for key, value in depenses_ticpe_essence.items():
         writer_essence.writerow([key, value])

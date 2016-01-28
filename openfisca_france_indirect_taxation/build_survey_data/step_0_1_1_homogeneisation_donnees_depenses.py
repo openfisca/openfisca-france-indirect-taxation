@@ -265,12 +265,14 @@ def get_transfert_data_frames(year = None):
         default_config_files_directory,
         'openfisca_france_indirect_taxation',
         'assets',
+        'legislation',
         'Matrice passage {}-COICOP.xls'.format(year),
         )
     parametres_fiscalite_file_path = os.path.join(
         default_config_files_directory,
         'openfisca_france_indirect_taxation',
         'assets',
+        'legislation',
         'Parametres fiscalite indirecte.xls',
         )
     matrice_passage_data_frame = pandas.read_excel(matrice_passage_file_path)

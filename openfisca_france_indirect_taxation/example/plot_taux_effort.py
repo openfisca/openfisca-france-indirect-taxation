@@ -52,13 +52,13 @@ if __name__ == '__main__':
         'total_taxes_indirectes'
         ]
 
-# 1 calcul taux d'effort sur le revenu total
-    # Constition d'une base de données agrégée par décile (= collapse en stata)
+    # 1 calcul taux d'effort sur le revenu total
+    # Constition d'une base de données agrégée par décile
     p = dict()
     df_taux_effort_revtot = None
     df_taux_effort_rev_disponible = None
     df_taux_effort_rev_disp_loyerimput = None
-    for year in [2000, 2005, 2011]:
+    for year in [2000]:
         df = simulate(simulated_variables = simulated_variables, year = year)
         if year == 2011:
             df.niveau_vie_decile[df.decuc == 10] = 10

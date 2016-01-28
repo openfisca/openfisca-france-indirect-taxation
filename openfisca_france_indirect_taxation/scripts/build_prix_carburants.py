@@ -45,8 +45,8 @@ assets_directory = os.path.join(
     )
 
 prix_annuel_carburants_90_14.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'prix_annuel_carburants.csv'), sep = ';')
+    'prix', 'prix_annuel_carburants.csv'), sep = ';')
 prix_mensuel_carburants_90_15.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'prix_mensuel_carburants.csv'), sep = ';')
+    'prix', 'prix_mensuel_carburants.csv'), sep = ';')
 prix_mensuel_carbu_match_to_vag.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'prix_mensuel_carbu_match_to_vag.csv'), sep = ';')
+    'prix', 'prix_mensuel_carbu_match_to_vag.csv'), sep = ';')
