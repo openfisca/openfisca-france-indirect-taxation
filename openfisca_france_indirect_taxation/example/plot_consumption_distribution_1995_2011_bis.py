@@ -11,6 +11,7 @@ import seaborn
 from openfisca_france_indirect_taxation.example.utils_example import graph_builder_bar
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
+# Import d'une nouvelle palette de couleurs
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 
