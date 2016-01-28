@@ -15,8 +15,7 @@ import pandas
 from pandas import concat
 
 # Import de modules spécifiques à Openfisca
-from openfisca_france_indirect_taxation.build_survey_data.utils \
-    import ident_men_dtype
+from openfisca_france_indirect_taxation.build_survey_data.utils import ident_men_dtype
 
 
 log = logging.getLogger(__name__)
@@ -77,7 +76,7 @@ def get_cn_data_frames(year_data = None, year_calage = None):
     masses_cn_12postes_data_frame['code_unicode'] = masses_cn_12postes_data_frame.Code.astype(unicode)
     masses_cn_12postes_data_frame['len_code'] = masses_cn_12postes_data_frame['code_unicode'].apply(lambda x: len(x))
 
-#    On ne garde que les 12 postes sur lesquels on cale:
+    # On ne garde que les 12 postes sur lesquels on cale:
     masses_cn_12postes_data_frame = masses_cn_12postes_data_frame[masses_cn_12postes_data_frame['len_code'] == 6]
     masses_cn_12postes_data_frame['code'] = masses_cn_12postes_data_frame.Code.astype(int)
     masses_cn_12postes_data_frame = masses_cn_12postes_data_frame.drop(['len_code', 'code_unicode', 'Code'], 1)
@@ -123,7 +122,7 @@ def calcul_ratios_calage(year_data, year_calage, data_bdf, data_cn):
         masses['ratio_cn{}_cn{}'.format(year_data, year_calage)] = 1
 
     masses['ratio_bdf{}_cn{}'.format(year_data, year_data)] = (
-        1000000 * masses['consoCN_COICOP_{}'.format(year_data)] / masses['conso_bdf{}'.format(year_data)]
+        1e6 * masses['consoCN_COICOP_{}'.format(year_data)] / masses['conso_bdf{}'.format(year_data)]
         )
 
     return masses
@@ -137,7 +136,7 @@ def build_dict_ratios_calage():
         # Enquête agrégée au niveau des gros postes de COICOP (12)
         df_bdf_weighted_sum_by_grosposte = get_bdf_data_frames(depenses = depenses, year_data = year)
 
-            # Calcul des ratios de calage :
+        # Calcul des ratios de calage :
         masses = calcul_ratios_calage(
             year,
             year,
@@ -170,7 +169,7 @@ for year in [2000, 2005, 2011]:
     inflator_by_variable = masses['ratio_bdf{}_cn{}'.format(year, year)].to_dict()
     inflators_by_year['for_{}'.format(year)] = inflator_by_variable
 
-    target = get_cn_data_frames(year, year) * 1000000
+    target = get_cn_data_frames(year, year) * 1e6
     target_by_variable = target['consoCN_COICOP_{}'.format(year)].to_dict()
     del target_by_variable['coicop12_15']
     targets_by_year['for_{}'.format(year)] = target_by_variable

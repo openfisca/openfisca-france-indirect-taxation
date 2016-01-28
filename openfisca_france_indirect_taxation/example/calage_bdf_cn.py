@@ -39,8 +39,7 @@ import pandas
 from pandas import concat
 
 # Import de modules spécifiques à Openfisca
-from openfisca_france_indirect_taxation.build_survey_data.utils \
-    import ident_men_dtype
+from openfisca_france_indirect_taxation.build_survey_data.utils import ident_men_dtype
 
 
 log = logging.getLogger(__name__)
@@ -106,7 +105,7 @@ def calcul_ratios_calage(year_data, year_calage, data_bdf, data_cn):
         masses['ratio_cn{}_cn{}'.format(year_data, year_calage)] = 1
 
     masses['ratio_bdf{}_cn{}'.format(year_data, year_data)] = (
-        1000000 * masses['consoCN_COICOP_{}'.format(year_data)] / masses['conso_bdf{}'.format(year_data)]
+        1e6 * masses['consoCN_COICOP_{}'.format(year_data)] / masses['conso_bdf{}'.format(year_data)]
         )
     return masses
 
@@ -304,7 +303,7 @@ def build_df_calee_on_ticpe(dataframe, year_calage = None, year_data = None):
     masses_ticpe_cn = int(
         masses_cn_12postes_data_frame[year_calage][masses_cn_12postes_data_frame['Code'] == '            07.2.2'].values
         )
-    masses_ticpe_bdf = (dataframe['poste_coicop_722'] * dataframe['pondmen']).sum() / 1000000
+    masses_ticpe_bdf = (dataframe['poste_coicop_722'] * dataframe['pondmen']).sum() / 1e6
     ratio_ticpe = masses_ticpe_cn / masses_ticpe_bdf
     dataframe['poste_coicop_722'] = dataframe['poste_coicop_722'] * ratio_ticpe
     dataframe_calee['poste_coicop_722'] = dataframe['poste_coicop_722']
