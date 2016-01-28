@@ -47,6 +47,7 @@ parametres_fiscalite_file_path = os.path.join(
     assets_directory,
     'openfisca_france_indirect_taxation',
     'assets',
+    'legislation',
     'Parametres fiscalite indirecte.xls'
     )
 masses_cn_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheetname = "consommation_CN")

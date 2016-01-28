@@ -138,6 +138,7 @@ def get_cn_data_frames(year_data = None, year_calage = None):
         default_config_files_directory,
         'openfisca_france_indirect_taxation',
         'assets',
+        'legislation',
         'Parametres fiscalite indirecte.xls'
         )
 
@@ -241,6 +242,7 @@ def build_revenus_cales(temporary_store = None, year_calage = None, year_data = 
         default_config_files_directory,
         'openfisca_france_indirect_taxation',
         'assets',
+        'legislation',
         'Parametres fiscalite indirecte.xls',
         )
 
