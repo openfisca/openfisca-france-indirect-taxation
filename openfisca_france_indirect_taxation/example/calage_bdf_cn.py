@@ -31,16 +31,19 @@
 # Import de modules généraux
 from __future__ import division
 
+import logging
 import os
 import pkg_resources
 
 import pandas
 from pandas import concat
 
-
 # Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.build_survey_data.utils \
     import ident_men_dtype
+
+
+log = logging.getLogger(__name__)
 
 
 def calage_viellissement_depenses(year_data, year_calage, depenses, masses):
