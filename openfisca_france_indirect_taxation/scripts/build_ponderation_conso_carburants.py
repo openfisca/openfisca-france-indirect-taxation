@@ -35,7 +35,7 @@ assets_directory = os.path.join(
     )
 
 parc_annuel_moyen_vp.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'parc_annuel_moyen_vp.csv'), sep = ';')
+    'quantites', 'parc_annuel_moyen_vp.csv'), sep = ';')
 
 quantite_carbu_vp_france.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quantite_carbu_vp_france.csv'), sep = ';')
+    'quantites', 'quantite_carbu_vp_france.csv'), sep = ';')

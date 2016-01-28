@@ -91,16 +91,16 @@ if __name__ == '__main__':
         )
 
     writer_carburants = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'quantites_carburants_consommees_bdf.csv'), 'wb'))
+        'quantites', 'quantites_carburants_consommees_bdf.csv'), 'wb'))
     for key, value in quantites_carburants_consommees.items():
         writer_carburants.writerow([key, value])
 
     writer_diesel = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'quantites_diesel_consommees_bdf.csv'), 'wb'))
+        'quantites', 'quantites_diesel_consommees_bdf.csv'), 'wb'))
     for key, value in quantites_diesel_consommees.items():
         writer_diesel.writerow([key, value])
 
     writer_essence = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'quantites_essence_consommees_bdf.csv'), 'wb'))
+        'quantites', 'quantites_essence_consommees_bdf.csv'), 'wb'))
     for key, value in quantites_essence_consommees.items():
         writer_essence.writerow([key, value])

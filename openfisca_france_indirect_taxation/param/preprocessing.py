@@ -43,6 +43,7 @@ def preprocess_legislation(legislation_json):
             default_config_files_directory,
             'openfisca_france_indirect_taxation',
             'assets',
+            'prix',
             'prix_annuel_carburants.csv'
             ), sep =';'
         )
@@ -115,6 +116,7 @@ def preprocess_legislation(legislation_json):
             default_config_files_directory,
             'openfisca_france_indirect_taxation',
             'assets',
+            'quantites',
             'parc_annuel_moyen_vp.csv'
             ), sep =';'
         )
@@ -154,6 +156,7 @@ def preprocess_legislation(legislation_json):
             default_config_files_directory,
             'openfisca_france_indirect_taxation',
             'assets',
+            'quantites',
             'quantite_carbu_vp_france.csv'
             ), sep =';'
         )
