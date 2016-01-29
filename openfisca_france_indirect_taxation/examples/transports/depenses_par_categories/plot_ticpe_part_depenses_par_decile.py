@@ -16,7 +16,7 @@ from __future__ import division
 from pandas import concat
 
 # Import de modules spécifiques à Openfisca
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_by_grosposte, \
+from openfisca_france_indirect_taxation.examples.utils_example import simulate_df_calee_by_grosposte, \
     df_weighted_average_grouped, graph_builder_line_percent, save_dataframe_to_graph
 
 

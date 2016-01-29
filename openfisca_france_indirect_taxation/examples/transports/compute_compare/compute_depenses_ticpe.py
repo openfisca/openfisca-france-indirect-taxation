@@ -14,7 +14,7 @@ import pkg_resources
 import os
 
 # Import de modules spécifiques à Openfisca
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_on_ticpe
+from openfisca_france_indirect_taxation.examples.utils_example import simulate_df_calee_on_ticpe
 
 
 if __name__ == '__main__':

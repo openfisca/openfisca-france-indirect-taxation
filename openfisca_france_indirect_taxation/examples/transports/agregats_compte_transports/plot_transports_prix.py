@@ -7,7 +7,7 @@ Created on Thu Jul 23 17:26:44 2015
 
 # Import de modules spécifiques à Openfisca, et import des données de prix des carburants
 from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_mensuel_carburants_90_15
-from openfisca_france_indirect_taxation.example.utils_example import graph_builder_carburants
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_carburants
 
 # Utilisation de la date comme index
 prix_mensuel_carburants_90_15[['annee'] + ['mois']] = prix_mensuel_carburants_90_15[['annee'] + ['mois']].astype(str)

@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 from pandas import concat
 
-from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame
+from openfisca_france_indirect_taxation.examples.utils_example import get_input_data_frame
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
 

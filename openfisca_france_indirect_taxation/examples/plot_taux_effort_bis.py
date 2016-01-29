@@ -6,7 +6,7 @@ from __future__ import division
 import pandas
 import seaborn
 
-from openfisca_france_indirect_taxation.example.utils_example import (
+from openfisca_france_indirect_taxation.examples.utils_example import (
     create_survey_scenario,
     simulate,
     graph_builder_line_percent,

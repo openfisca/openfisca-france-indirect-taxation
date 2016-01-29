@@ -9,7 +9,7 @@ from __future__ import division
 
 import statsmodels.formula.api as smf
 
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_by_grosposte
+from openfisca_france_indirect_taxation.examples.utils_example import simulate_df_calee_by_grosposte
 
 if __name__ == '__main__':
     import logging

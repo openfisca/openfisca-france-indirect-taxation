@@ -33,7 +33,7 @@ from __future__ import division
 
 from pandas import concat
 
-from openfisca_france_indirect_taxation.example.utils_example import simulate, df_weighted_average_grouped, \
+from openfisca_france_indirect_taxation.examples.utils_example import simulate, df_weighted_average_grouped, \
     graph_builder_bar
 
 # Le but est ici de voir l'évolution de la distribution selon les 8 postes agrégés

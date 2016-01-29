@@ -11,7 +11,7 @@ Created on Fri Jul 24 09:46:35 2015
 
 # Import de fonctions spécifiques à Openfisca indirect taxation et de bases de données des Comptes des Transports
 from ipp_macro_series_parser.agregats_transports.transports_cleaner import a6_b, g2_1, g_3a
-from openfisca_france_indirect_taxation.example.utils_example import graph_builder_carburants, \
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_carburants, \
     graph_builder_carburants_no_color
 
 # Identification de la série des recettes de la TICPE

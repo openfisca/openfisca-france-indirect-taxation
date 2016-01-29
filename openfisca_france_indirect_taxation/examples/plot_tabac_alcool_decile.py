@@ -31,7 +31,7 @@ Created on Sun Mar 29 15:43:49 2015
 
 from __future__ import division
 
-from openfisca_france_indirect_taxation.example.utils_example import simulate, df_weighted_average_grouped, \
+from openfisca_france_indirect_taxation.examples.utils_example import simulate, df_weighted_average_grouped, \
     graph_builder_bar
 
 

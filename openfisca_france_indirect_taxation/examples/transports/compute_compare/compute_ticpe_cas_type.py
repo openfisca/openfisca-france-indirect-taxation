@@ -9,7 +9,7 @@ import datetime
 import pandas as pd
 
 from openfisca_france_indirect_taxation.tests import base
-from openfisca_france_indirect_taxation.example.utils_example import graph_builder_line, save_dataframe_to_graph
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line, save_dataframe_to_graph
 
 """Nous simulons les montants de ticpe payés par un ménage selon le type de véhicule dont il dispose
 Nous prenons un ménage dont les dépenses annuelles en carburants s'élèveraient à 1000 euros

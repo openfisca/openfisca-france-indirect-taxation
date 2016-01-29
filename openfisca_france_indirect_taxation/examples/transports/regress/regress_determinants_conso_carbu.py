@@ -25,8 +25,8 @@ import pandas as pd
 import pkg_resources
 import os
 
-from openfisca_france_indirect_taxation.example.utils_example import simulate_df_calee_on_ticpe
-from openfisca_france_indirect_taxation.example.dataframes_from_legislation.get_accises import \
+from openfisca_france_indirect_taxation.examples.utils_example import simulate_df_calee_on_ticpe
+from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get_accises import \
     get_accise_ticpe_majoree
 
 if __name__ == '__main__':

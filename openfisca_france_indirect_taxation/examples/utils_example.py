@@ -16,7 +16,7 @@ from openfisca_survey_manager import default_config_files_directory as config_fi
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
-from openfisca_france_indirect_taxation.example.calage_bdf_cn import \
+from openfisca_france_indirect_taxation.examples.calage_bdf_cn import \
     build_df_calee_on_grospostes, build_df_calee_on_ticpe
 
 

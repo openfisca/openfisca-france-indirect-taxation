@@ -10,7 +10,7 @@ Created on Fri Jul 24 11:07:05 2015
 
 # Import de fonctions spécifiques à Openfisca indirect taxation et de bases de données des Comptes des Transports
 from ipp_macro_series_parser.agregats_transports.transports_cleaner import a3_a
-from openfisca_france_indirect_taxation.example.utils_example import graph_builder_carburants, \
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_carburants, \
     graph_builder_carburants_no_color
 
 # Sélection des variables utilisées dans les graphiques
