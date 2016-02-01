@@ -179,8 +179,6 @@ def run(years_calage):
         start = time.time()
         run_all(year_calage, year_data_list)
         log.info("Finished {}".format(time.time() - start))
-        log.info("Base construite pour l'année {} à partir de l'enquête bdf {}".format(
-            year_calage, find_nearest_inferior(year_data_list, year_calage)))
 
 if __name__ == '__main__':
     import sys

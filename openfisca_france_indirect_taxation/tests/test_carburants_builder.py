@@ -10,7 +10,7 @@ from __future__ import division
 
 
 from openfisca_core.tools import assert_near
-from openfisca_france_indirect_taxation.example.utils_example import get_input_data_frame
+from openfisca_france_indirect_taxation.examples.utils_example import get_input_data_frame
 
 for year in [2000, 2005, 2011]:
     aggregates_data_frame = get_input_data_frame(year)
