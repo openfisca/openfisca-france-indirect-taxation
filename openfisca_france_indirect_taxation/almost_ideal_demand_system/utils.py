@@ -12,6 +12,56 @@ import pkg_resources
 import pandas as pd
 
 
+def add_area_dummy(dataframe):
+    areas = ['rural', 'villes_petites', 'villes_moyennes', 'villes_grandes', 'agglo_paris']
+    for area in areas:
+        dataframe[area] = 0
+    dataframe.loc[dataframe['strate'] == 0, 'rural'] = 1
+    dataframe.loc[dataframe['strate'] == 1, 'villes_petites'] = 1
+    dataframe.loc[dataframe['strate'] == 2, 'villes_moyennes'] = 1
+    dataframe.loc[dataframe['strate'] == 3, 'villes_grandes'] = 1
+    dataframe.loc[dataframe['strate'] == 4, 'agglo_paris'] = 1
+    del dataframe['strate']
+    return dataframe
+
+
+def add_stalog_dummy(dataframe):
+    stalog = ['proprietaire', 'accedant', 'locataire', 'sous_loc', 'loge_gratuit']
+    for statut in stalog:
+        dataframe[statut] = 0
+    dataframe.loc[dataframe['stalog'] == 1, 'proprietaire'] = 1
+    dataframe.loc[dataframe['stalog'] == 2, 'accedant'] = 1
+    dataframe.loc[dataframe['stalog'] == 3, 'locataire'] = 1
+    dataframe.loc[dataframe['stalog'] == 4, 'sous_loc'] = 1
+    dataframe.loc[dataframe['stalog'] == 5, 'loge_gratuit'] = 1
+    del dataframe['stalog']
+    return dataframe
+
+
+def add_vag_dummy(dataframe):
+    first_vag = dataframe['vag'].min()
+    last_vag = dataframe['vag'].max()
+    for vag in range(first_vag, last_vag + 1):
+        dataframe['vag_{}'.format(vag)] = 0
+        dataframe.loc[dataframe['vag'] == vag, 'vag_{}'.format(vag)] = 1
+    return dataframe
+
+
+def electricite_only(dataframe):
+    energie_logement_non_elec = ['poste_coicop_452', 'poste_coicop_4522', 'poste_coicop_453', 'poste_coicop_454',
+        'poste_coicop_455', 'poste_coicop_4552']
+    dataframe['sum'] = 0
+    for energie in energie_logement_non_elec:
+        try:
+            dataframe['sum'] += dataframe[energie]
+        except:
+            pass
+    dataframe['elect_only'] = 0
+    dataframe.loc[dataframe['sum'] == 0, 'elect_only'] = 1
+    del dataframe['sum']
+    return dataframe
+
+
 def indices_prix_carbus(year):
     default_config_files_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
@@ -41,27 +91,6 @@ def indices_prix_carbus(year):
     prix_carbu['indice_die'] = prix_carbu['indice_ess'] * (prix_carbu['diesel_ttc'] / prix_carbu['super_95_ttc'])
 
     return prix_carbu[['indice_ess'] + ['indice_die'] + ['vag']]
-
-
-def add_area_dummy(dataframe):
-    areas = ['rural', 'villes_petites', 'villes_moyennes', 'villes_grandes', 'agglo_paris']
-    for area in areas:
-        dataframe[area] = 0
-    dataframe.loc[dataframe['strate'] == 0, 'rural'] = 1
-    dataframe.loc[dataframe['strate'] == 1, 'villes_petites'] = 1
-    dataframe.loc[dataframe['strate'] == 2, 'villes_moyennes'] = 1
-    dataframe.loc[dataframe['strate'] == 3, 'villes_grandes'] = 1
-    dataframe.loc[dataframe['strate'] == 4, 'agglo_paris'] = 1
-    return dataframe
-
-
-def add_vag_dummy(dataframe):
-    first_vag = dataframe['vag'].min()
-    last_vag = dataframe['vag'].max()
-    for vag in range(first_vag, last_vag + 1):
-        dataframe['vag_{}'.format(vag)] = 0
-        dataframe.loc[dataframe['vag'] == vag, 'vag_{}'.format(vag)] = 1
-    return dataframe
 
 
 # On veut construire des indices de prix plus précis pour les carburants, en prenant en compte le type de voitures
