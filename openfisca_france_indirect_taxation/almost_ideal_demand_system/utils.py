@@ -65,15 +65,15 @@ def add_vag_dummy(dataframe):
 
 
 # On veut construire des indices de prix plus précis pour les carburants, en prenant en compte le type de voitures
-# dont disposent les ménages. On pondère utilise donc un indice de prix qui dépend de la part de véhicules essences
+# dont disposent les ménages. On pondère donc en utilisant un indice de prix qui dépend de la part de véhicules essences
 # de chaque ménage. On estime que si 1/2 véhicule est essence, on affecte pour 1/2 l'indice du prix de l'essence,
-# et sur 1/2 celui du diesel.
+# et sur 1/2 celui du diesel. On ne prend donc pas en compte les distances parcourus avec chaque véhicule.
 def price_carbu_pond(dataframe):
     dataframe['veh_tot'] = dataframe['veh_essence'] + dataframe['veh_diesel']
     dataframe['part_veh_essence'] = 0.5
     dispose_de_vehicule = dataframe['veh_tot'] != 0
     dataframe.loc[dispose_de_vehicule, 'part_veh_essence'] = \
-        dataframe.loc[dispose_de_vehicule, 'veh_essence']  / dataframe.loc[dispose_de_vehicule, 'veh_tot']
+        dataframe.loc[dispose_de_vehicule, 'veh_essence'] / dataframe.loc[dispose_de_vehicule, 'veh_tot']
     dataframe['prix_carbu'] = dataframe['prix_carbu'] * (dataframe['part_veh_essence'] * dataframe['indice_ess'] +
         (1 - dataframe['part_veh_essence']) * dataframe['indice_die'])
     return dataframe
