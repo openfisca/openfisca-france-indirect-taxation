@@ -10,21 +10,27 @@ from __future__ import division
 
 import pandas as pd
 import numpy as np
+import os
+import pkg_resources
 
 
 from openfisca_france_indirect_taxation.examples.utils_example import get_input_data_frame
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import \
-    add_area_dummy, add_vag_dummy, indices_prix_carbus, price_carbu_pond
+    add_area_dummy, add_stalog_dummy, add_vag_dummy, electricite_only, indices_prix_carbus, price_carbu_pond
 
+
+assets_directory = os.path.join(
+    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
+    )
 
 # On importe la dataframe qui recense les indices de prix. Notre objectif est de construire une nouvelle dataframe avec
 # le reste des informations, i.e. la consommation et autres variables pertinentes concernant les ménages.
 
 # On commence par cinstruire une dataframe appelée data_conso rassemblant les informations sur les dépenses des ménages.
 data_frame_for_reg = None
-for year in [2000]:
+for year in [2000, 2005, 2011]:
     aggregates_data_frame = get_input_data_frame(year)
 
     # Pour estimer QAIDS, on se concentre sur les biens non-durables.
@@ -167,11 +173,14 @@ for year in [2000]:
     # Problème: ceux qui ne consomment pas de carbu ou d'alimentaire se voient affecter un indice de prix égal à 0. Ils
     # sont traités plus bas.
 
+    # On crée une variable dummy pour savoir si le ménage ne consomme que de l'électricité ou aussi du gaz.
+    # Si seulement électricité, elle est égale à 1.
+    aggregates_data_frame = electricite_only(aggregates_data_frame)
     # On récupère les informations importantes sur les ménages, dont les variables démographiques
     df_info_menage = aggregates_data_frame[['agepr'] + ['depenses_alime'] + ['depenses_autre'] + ['depenses_carbu'] +
-        ['depenses_logem'] + ['depenses_tot'] + ['dip14pr'] + ['nenfants'] + ['nactifs'] + ['ocde10'] + ['revtot'] +
-        ['situacj'] + ['situapr'] + ['stalog'] + ['strate'] + ['typmen'] + ['vag'] + ['veh_diesel'] + ['veh_essence']
-        ].copy()
+        ['depenses_logem'] + ['depenses_tot'] + ['dip14pr'] + ['elect_only'] + ['nenfants'] + ['nactifs'] + ['ocde10'] +
+        ['revtot'] + ['situacj'] + ['situapr'] + ['stalog'] + ['strate'] + ['typmen'] + ['vag'] + ['veh_diesel'] +
+        ['veh_essence']].copy()
     df_info_menage.index.name = 'ident_men'
     df_info_menage.reset_index(inplace = True)
     df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
@@ -199,7 +208,7 @@ for year in [2000]:
     dataframe = dataframe[['ident_men'] + ['part_carbu'] + ['part_logem'] + ['part_alime'] + ['part_autre'] +
         ['prix_carbu'] + ['prix_logem'] + ['prix_alime'] + ['prix_autre'] + ['depenses_par_uc'] + ['depenses_tot'] +
         ['typmen'] + ['strate'] + ['dip14pr'] + ['agepr'] + ['situapr'] + ['situacj'] + ['stalog'] + ['nenfants'] +
-        ['nactifs'] + ['vag'] + ['veh_diesel'] + ['veh_essence']]
+        ['nactifs'] + ['vag'] + ['veh_diesel'] + ['veh_essence'] + ['elect_only']]
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la
@@ -217,12 +226,15 @@ for year in [2000]:
     dataframe = price_carbu_pond(dataframe)
 
     dataframe = add_area_dummy(dataframe)
+    dataframe = add_stalog_dummy(dataframe)
     dataframe = add_vag_dummy(dataframe)
 
     data_frame_for_reg = dataframe.rename(columns = {'part_carbu': 'w1', 'part_logem': 'w2', 'part_alime': 'w3',
         'part_autre': 'w4', 'prix_carbu': 'p1', 'prix_logem': 'p2', 'prix_alime': 'p3', 'prix_autre': 'p4'})
-    data_frame_for_reg.to_csv('data_frame_energy_{}.csv'.format(year), sep = ',')
+    data_frame_for_reg.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+    'quaids', 'data_frame_energy_{}.csv'.format(year)), sep = ',')
 
-# Must correct what is useless, improve demographics
-# Add tests
+# Must correct what is useless, improve demographics : dip14
+# dip14 : use only dip14pr (good proxy for dip14cj anyway), but change the nomenclature to have just 2 or 3 dummies
+# describing whether they attended college or not, etc.
 # Use more functions in utils
