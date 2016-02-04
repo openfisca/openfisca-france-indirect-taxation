@@ -1,46 +1,27 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Apr 28 17:36:56 2015
+Created on Thu Feb 04 11:28:12 2016
 
-@author: Etienne
+@author: thomas.douenne
 """
 
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
+# Import de modules généraux
 from __future__ import division
 
-from openfisca_france_indirect_taxation.examples.utils_example import simulate, df_weighted_average_grouped, \
-    graph_builder_bar
+import pandas
+import seaborn
+
+# Import de modules spécifiques à Openfisca
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar
+from openfisca_france_indirect_taxation.surveys import SurveyScenario
+
+# Import d'une nouvelle palette de couleurs
+seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 
 if __name__ == '__main__':
-    import logging
-    log = logging.getLogger(__name__)
-    import sys
-    logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
     simulated_variables = [
-        'decuc',
         'tva_total',
         'ticpe_totale',
         'vin_droit_d_accise',
@@ -52,42 +33,46 @@ if __name__ == '__main__':
         'assurance_transport_taxe',
         'assurance_sante_taxe',
         'autres_assurances_taxe',
-        'niveau_vie_decile',
         'rev_disponible',
-        'pondmen',
         ]
-
     for year in [2000, 2005, 2011]:
-        df = simulate(simulated_variables = simulated_variables, year = year)
-        if year == 2011:
-            df.niveau_vie_decile[df.decuc == 10] = 10
-        Wconcat = df_weighted_average_grouped(dataframe = df, groupe = 'niveau_vie_decile',
-            varlist = simulated_variables)
+        survey_scenario = SurveyScenario.create(year = year)
+        pivot_table = pandas.DataFrame()
+        for values in simulated_variables:
+            pivot_table = pandas.concat([
+                pivot_table,
+                survey_scenario.compute_pivot_table(values = [values], columns = ['niveau_vie_decile'])
+                ])
+        taxe_indirectes = pivot_table.T
 
-        Wconcat['taxe_1'] = Wconcat['tva_total']
-        Wconcat['taxe_2'] = Wconcat['ticpe_totale']
-        Wconcat['taxe_3'] = (
-            Wconcat['assurance_sante_taxe'] +
-            Wconcat['assurance_transport_taxe'] +
-            Wconcat['autres_assurances_taxe']
-            )
-        Wconcat['taxe_4'] = (
-            Wconcat['vin_droit_d_accise'] +
-            Wconcat['biere_droit_d_accise'] +
-            Wconcat['alcools_forts_droit_d_accise']
-            )
-        Wconcat['taxe_5'] = (
-            Wconcat['cigares_droit_d_accise'] +
-            Wconcat['cigarette_droit_d_accise'] +
-            Wconcat['tabac_a_rouler_droit_d_accise']
-            )
+        taxe_indirectes['TVA'] = taxe_indirectes['tva_total']
+        taxe_indirectes['TICPE'] = taxe_indirectes['ticpe_totale']
+        taxe_indirectes[u'Taxes alcools'] = (
+            taxe_indirectes['vin_droit_d_accise'] +
+            taxe_indirectes['biere_droit_d_accise'] +
+            taxe_indirectes['alcools_forts_droit_d_accise']
+            ).copy()
+        taxe_indirectes[u'Taxes assurances'] = (
+            taxe_indirectes['assurance_sante_taxe'] +
+            taxe_indirectes['assurance_transport_taxe'] +
+            taxe_indirectes['autres_assurances_taxe']
+            ).copy()
+        taxe_indirectes[u'Taxes tabacs'] = (
+            taxe_indirectes['cigarette_droit_d_accise'] +
+            taxe_indirectes['cigares_droit_d_accise'] +
+            taxe_indirectes['tabac_a_rouler_droit_d_accise']
+            ).copy()
 
         list_part_taxes = []
-        for i in range(1, 6):
-            Wconcat['part_taxe_{}'.format(i)] = Wconcat['taxe_{}'.format(i)] / Wconcat['rev_disponible']
-            'list_part_taxes_{}'.format(i)
-            list_part_taxes.append('part_taxe_{}'.format(i))
+        for taxe in ['TVA', 'TICPE', u'Taxes alcools', u'Taxes assurances', u'Taxes tabacs']:
+            taxe_indirectes[u'part ' + taxe] = (
+                taxe_indirectes[taxe] / taxe_indirectes['rev_disponible']
+                )
+            'list_part_taxes_{}'.format(taxe)
+            list_part_taxes.append(u'part ' + taxe)
 
-        df_to_graph = Wconcat[list_part_taxes]
+        df_to_graph = taxe_indirectes[list_part_taxes]
 
+        print '''Contributions aux taxes indirectes en part du revenu disponible,
+            par décile de revenu en {}'''.format(year)
         graph_builder_bar(df_to_graph)
