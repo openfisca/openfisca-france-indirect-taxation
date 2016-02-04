@@ -48,7 +48,7 @@ quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) noquadratic
 *matrix list r(expelas)
 estat expenditure mu*
 estat uncompensated ce*
-outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\data_quaids_2005.csv", delimiter(",") replace
+outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_2005.csv", delimiter(",") replace
 
 *2011:
 clear
