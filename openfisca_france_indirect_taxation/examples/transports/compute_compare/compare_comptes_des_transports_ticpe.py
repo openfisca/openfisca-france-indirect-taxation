@@ -19,7 +19,7 @@ import pandas as pd
 # Import de modules spécifiques à Openfisca
 from ipp_macro_series_parser.agregats_transports.transports_cleaner import g_3a
 # Import de paramètres de la législation (montant des accises de la TICPE)
-from openfisca_france_indirect_taxation.get_dataframe_from_legislation.get_accises import \
+from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get_accises import \
     get_accise_ticpe_majoree
 
 """Ici on applique aux quantités de carburants consommées par des véhicules autres que les ménages
@@ -38,7 +38,7 @@ for element in products:
     depenses_ticpe = pd.DataFrame.from_csv(
         os.path.join(
             assets_directory,
-            'openfisca_france_indirect_taxation', 'assets',
+            'openfisca_france_indirect_taxation', 'assets', 'depenses',
             'depenses_ticpe_{}_bdf.csv'.format(element)),
         sep = ',',
         header = -1
