@@ -67,4 +67,4 @@ if __name__ == '__main__':
         else:
             df_to_graph = appendable
 
-    graph_builder_line_percent(df_to_graph)
+    graph_builder_line_percent(df_to_graph, 1, 1)
