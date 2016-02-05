@@ -33,7 +33,7 @@ quantite_bdf = pd.DataFrame()
 produits = ['carburants', 'diesel', 'essence']
 for element in produits:
     quantite = pd.DataFrame.from_csv(os.path.join(assets_directory,
-            'openfisca_france_indirect_taxation', 'assets',
+            'openfisca_france_indirect_taxation', 'assets', 'quantites',
             'quantites_{}_consommees_bdf.csv'.format(element)), sep = ',', header = -1)
     quantite.rename(columns = {1: '{} bdf'.format(element)}, inplace = True)
     quantite.index = quantite.index.str.replace('en milliers de m3 en ', '')

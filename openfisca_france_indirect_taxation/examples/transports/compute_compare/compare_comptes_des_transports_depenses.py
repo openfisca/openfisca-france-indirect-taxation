@@ -33,7 +33,7 @@ products = ['transports', 'carburants', 'essence', 'diesel']
 depenses_bdf = pd.DataFrame()
 for element in products:
     depenses = pd.DataFrame.from_csv(os.path.join(assets_directory,
-            'openfisca_france_indirect_taxation', 'assets',
+            'openfisca_france_indirect_taxation', 'assets', 'depenses',
             'depenses_{}_totales_bdf.csv').format(element), sep = ',', header = -1)
     depenses.rename(columns = {1: '{} bdf'.format(element)}, inplace = True)
     depenses.index = depenses.index.str.replace('en ', '')

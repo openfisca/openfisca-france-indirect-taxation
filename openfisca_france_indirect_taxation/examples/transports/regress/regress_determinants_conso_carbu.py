@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
     simulated_variables_with_e10 = simulated_variables_without_e10 + ['sp_e10_ticpe']
 
-# First, obtain the fuel consumption of each individual:
+    # First, obtain the fuel consumption of each individual:
 
     for year in [2005]:
         try:
@@ -155,7 +155,8 @@ if __name__ == '__main__':
         # We will now introduce an instrumental variable to correct for the endogeneity of expenditures.
 
         data_log['loyer'] = data_log['poste_coicop_411'] + data_log['poste_coicop_412'] + data_log['poste_coicop_421']
-        data_log.to_csv('data_regression.csv', sep = ',')
+        data_log.to_csv(os.path.join(default_config_files_directory, 'openfisca_france_indirect_taxation', 'assets',
+            'quaids', 'data_regression.csv'), sep = ',')
         #model = \
         #    gmm.IV2SLS(data_log['ln_rev_disponible'], data_log['ln_quantite_carbu'], data_log['loyer']).fit()
         #print model.summary()

@@ -29,7 +29,7 @@ del quantite_conso_vp['index']
 taille_parc_vp = g2_1[g2_1['categorie'] == u'Voitures particulières']
 del taille_parc_vp['categorie']
 
-# Redefinition des indexs et transposition des dataframes
+# Redefinition des index et transposition des dataframes
 recettes_ticpe.set_index(['categorie'], inplace = True)
 recettes_ticpe = recettes_ticpe.transpose()
 taille_parc_vp.set_index(['index'], inplace = True)
