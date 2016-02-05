@@ -7,7 +7,7 @@ Created on Wed Feb 03 09:58:01 2016
 
 import pandas
 
-from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_dataframe_builder_energy_bis import \
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_dataframe_builder_energy import \
     aggregates_data_frame, df, df_depenses_prix, data_frame_for_reg
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
