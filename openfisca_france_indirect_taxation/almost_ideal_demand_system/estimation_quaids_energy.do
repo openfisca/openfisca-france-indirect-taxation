@@ -95,4 +95,33 @@ matrix list r(uncompelas)
 estat expenditure, atmeans
 matrix list r(expelas)
 
+*The three years taken together:
+clear
+insheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_frame_energy_all_years.csv", delimiter(",")
+replace w1 = . if w1 == 0
+quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) demographics(agepr nactifs nenfants vag_10 vag_11 vag_12 vag_13 vag_14 vag_15 vag_16 vag_17 vag_18 vag_19 vag_20 vag_21 vag_22 vag_23 vag_24 vag_25 vag_26 vag_27 vag_28 villes_petites villes_grandes agglo_paris proprietaire elect_only)
+*estat uncompensated, atmeans
+*matrix list r(uncompelas)
+*estat expenditure, atmeans
+*matrix list r(expelas)
+estat expenditure mu*
+estat uncompensated ce*
+outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_all.csv", delimiter(",") replace
+
+*If now we restrict our analysis to the fuel only, i.e. without including housing energy in a specific category:
+
+*The three years taken together:
+clear
+insheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_frame_carbu_all_years.csv", delimiter(",")
+replace w1 = . if w1 == 0
+quaids w1-w3, anot(5) prices(p1-p3) expenditure(depenses_par_uc) demographics(agepr nactifs nenfants vag_10 vag_11 vag_12 vag_13 vag_14 vag_15 vag_16 vag_17 vag_18 vag_19 vag_20 vag_21 vag_22 vag_23 vag_24 vag_25 vag_26 vag_27 vag_28 villes_petites villes_grandes agglo_paris)
+estat uncompensated, atmeans
+matrix list r(uncompelas)
+estat expenditure, atmeans
+matrix list r(expelas)
+estat expenditure mu*
+estat uncompensated ce*
+outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_carbu_all.csv", delimiter(",") replace
+
+
 *To compute bootstrap standard errors, add vce(bootstrap) at the end of the quaids line
