@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Aug 18 10:41:21 2015
+Created on Thu Jan 28 11:59:10 2016
 
 @author: thomas.douenne
 """
@@ -13,11 +13,16 @@ Created on Tue Aug 18 10:41:21 2015
 # Import de modules généraux
 from __future__ import division
 
+import pandas
+import seaborn
 from pandas import concat
 
 # Import de modules spécifiques à Openfisca
-from openfisca_france_indirect_taxation.examples.utils_example import simulate_df_calee_by_grosposte, \
-    df_weighted_average_grouped, graph_builder_line_percent, save_dataframe_to_graph
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line
+from openfisca_france_indirect_taxation.surveys import SurveyScenario
+
+# Import d'une nouvelle palette de couleurs
+seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 
 if __name__ == '__main__':
@@ -27,9 +32,6 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
     simulated_variables = [
-        'pondmen',
-        'decuc',
-        'niveau_vie_decile',
         'revtot',
         'somme_coicop12_conso',
         'rev_disp_loyerimput',
@@ -39,69 +41,48 @@ if __name__ == '__main__':
         ]
 
     # Formation des bases de données, dépenses moyennes en TICPE par décile de revenu, que l'on divise ensuite par le
-    # revenu. Calcul effectué pour 2000, 2005 et 2011 pour l'ensemble des carburants, puis chacun séparément
+    # revenu. On réalise une boucle dans une boucle, i.e. toutes les années pour chaque type de carburant.
     for element in ['ticpe_totale', 'diesel_ticpe', 'essence_ticpe']:
-        part_ticpe_revtot = None
-        part_ticpe_rev_disp_loyerimput = None
-        part_ticpe_depenses_totales = None
+        revtot = None
+        rev_disp_loyerimput = None
+        depenses = None
         for year in [2000, 2005, 2011]:
-            data_simulation = simulate_df_calee_by_grosposte(simulated_variables = simulated_variables, year = year)
-            if year == 2011:
-                data_simulation.niveau_vie_decile[data_simulation.decuc == 10] = 10
-            varlist = [element, 'revtot', 'somme_coicop12_conso', 'rev_disp_loyerimput']
-            part_ticpe_revtot_wip = df_weighted_average_grouped(
-                dataframe = data_simulation, groupe = 'niveau_vie_decile', varlist = varlist
-                )
-            part_ticpe_revtot_wip['part ' + element.replace('_', ' ') + ' revtot {}'.format(year)] = \
-                part_ticpe_revtot_wip[element] / part_ticpe_revtot_wip['revtot']
-            data_to_append_revtot = \
-                part_ticpe_revtot_wip['part ' + element.replace('_', ' ') + ' revtot {}'.format(year)]
+            survey_scenario = SurveyScenario.create(year = year)
+            pivot_table = pandas.DataFrame()
+            for values in simulated_variables:
+                pivot_table = pandas.concat([
+                    pivot_table,
+                    survey_scenario.compute_pivot_table(values = [values], columns = ['niveau_vie_decile'])
+                    ])
+            df = pivot_table.T
 
-            part_ticpe_rev_loyerimput_wip = df_weighted_average_grouped(
-                dataframe = data_simulation, groupe = 'niveau_vie_decile', varlist = varlist
-                )
-            part_ticpe_rev_loyerimput_wip[
-                'part ' + element.replace('_', ' ') + ' rev disp loyerimput {}'.format(year)] = (
-                part_ticpe_rev_loyerimput_wip[element] /
-                part_ticpe_rev_loyerimput_wip['rev_disp_loyerimput']
-                )
-            data_to_append_rev_loyerimput = \
-                part_ticpe_rev_loyerimput_wip[
-                    'part ' + element.replace('_', ' ') + ' rev disp loyerimput {}'.format(year)]
+            part_revtot = pandas.DataFrame()
+            part_revtot['part ' + element.replace('_', ' ') + ' revtot {}'.format(year)] = \
+                df[element] / df['revtot']
 
-            part_ticpe_depenses_totales_wip = df_weighted_average_grouped(
-                dataframe = data_simulation, groupe = 'niveau_vie_decile', varlist = varlist
-                )
-            part_ticpe_depenses_totales_wip['part ' + element.replace('_', ' ') + ' depenses {}'.format(year)] = (
-                part_ticpe_depenses_totales_wip[element] /
-                part_ticpe_depenses_totales_wip['somme_coicop12_conso']
-                )
-            data_to_append_depenses_totales = \
-                part_ticpe_depenses_totales_wip['part ' + element.replace('_', ' ') + ' depenses {}'.format(year)]
+            part_rev_loyerimput = pandas.DataFrame()
+            part_rev_loyerimput['part ' + element.replace('_', ' ') + ' rev disp loyerimput {}'.format(year)] = \
+                df[element] / df['rev_disp_loyerimput']
 
-            # Aggrégation des trois années pour chaque type de calcul
-            if part_ticpe_revtot is not None:
-                part_ticpe_revtot = concat([part_ticpe_revtot, data_to_append_revtot], axis = 1)
+            part_depenses = pandas.DataFrame()
+            part_depenses['part ' + element.replace('_', ' ') + ' depenses {}'.format(year)] = \
+                df[element] / df['somme_coicop12_conso']
+
+            if revtot is not None:
+                revtot = concat([revtot, part_revtot], axis = 1)
             else:
-                part_ticpe_revtot = data_to_append_revtot
+                revtot = part_revtot
 
-            if part_ticpe_rev_disp_loyerimput is not None:
-                part_ticpe_rev_disp_loyerimput = \
-                    concat([part_ticpe_rev_disp_loyerimput, data_to_append_rev_loyerimput], axis = 1)
+            if rev_disp_loyerimput is not None:
+                rev_disp_loyerimput = concat([rev_disp_loyerimput, part_rev_loyerimput], axis = 1)
             else:
-                part_ticpe_rev_disp_loyerimput = data_to_append_rev_loyerimput
+                rev_disp_loyerimput = part_rev_loyerimput
 
-            if part_ticpe_depenses_totales is not None:
-                part_ticpe_depenses_totales = \
-                    concat([part_ticpe_depenses_totales, data_to_append_depenses_totales], axis = 1)
+            if depenses is not None:
+                depenses = concat([depenses, part_depenses], axis = 1)
             else:
-                part_ticpe_depenses_totales = data_to_append_depenses_totales
+                depenses = part_depenses
 
-        # Réalisation des gréphiques
-        graph_builder_line_percent(part_ticpe_revtot, 1, 0.35)
-        graph_builder_line_percent(part_ticpe_rev_disp_loyerimput, 1, 0.35)
-        graph_builder_line_percent(part_ticpe_depenses_totales, 1, 0.35)
-
-        # Enregistrement des dataframe en fichiers csv
-        save_dataframe_to_graph(
-            part_ticpe_rev_disp_loyerimput, 'part_{}_sur_rev_disployerimput.csv'.format(element))
+        graph_builder_line(revtot)
+        graph_builder_line(rev_disp_loyerimput)
+        graph_builder_line(depenses)
