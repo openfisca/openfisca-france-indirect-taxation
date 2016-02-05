@@ -105,4 +105,5 @@ def price_carbu_pond(dataframe):
         dataframe.loc[dispose_de_vehicule, 'veh_essence'] / dataframe.loc[dispose_de_vehicule, 'veh_tot']
     dataframe['prix_carbu'] = dataframe['prix_carbu'] * (dataframe['part_veh_essence'] * dataframe['indice_ess'] +
         (1 - dataframe['part_veh_essence']) * dataframe['indice_die'])
+    del dataframe['indice_ess'], dataframe['indice_die']
     return dataframe

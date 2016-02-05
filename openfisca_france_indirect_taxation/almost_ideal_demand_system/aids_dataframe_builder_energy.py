@@ -30,6 +30,7 @@ assets_directory = os.path.join(
 
 # On commence par cinstruire une dataframe appelée data_conso rassemblant les informations sur les dépenses des ménages.
 data_frame_for_reg = None
+data_frame_all_years = pd.DataFrame()
 for year in [2000, 2005, 2011]:
     aggregates_data_frame = get_input_data_frame(year)
 
@@ -231,8 +232,15 @@ for year in [2000, 2005, 2011]:
 
     data_frame_for_reg = dataframe.rename(columns = {'part_carbu': 'w1', 'part_logem': 'w2', 'part_alime': 'w3',
         'part_autre': 'w4', 'prix_carbu': 'p1', 'prix_logem': 'p2', 'prix_alime': 'p3', 'prix_autre': 'p4'})
+
+    data_frame_all_years = pd.concat([data_frame_all_years, data_frame_for_reg])
+    data_frame_all_years.fillna(0, inplace = True)
+
     data_frame_for_reg.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
     'quaids', 'data_frame_energy_{}.csv'.format(year)), sep = ',')
+
+data_frame_all_years.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+    'quaids', 'data_frame_energy_all_years.csv'), sep = ',')
 
 # Must correct what is useless, improve demographics : dip14
 # dip14 : use only dip14pr (good proxy for dip14cj anyway), but change the nomenclature to have just 2 or 3 dummies
