@@ -1,0 +1,87 @@
+;label_classe;divisions;groupes;classes
+2;Pain et céréales;1;1;1
+3;Viande;1;1;2
+4;Poissons et crustacés;1;1;3
+5;Lait, fromage et œufs;1;1;4
+6;Huiles et graisses;1;1;5
+7;Fruits;1;1;6
+8;Légumes;1;1;7
+9;Sucre, confitures, chocolat, confiserie et produits glacés;1;1;8
+10;Sel, épices, sauces et produits alimentaires n.d.a.;1;1;9
+11;Café, thé et cacao;1;2;1
+12;Autres boissons non alcoolisées;1;2;2
+13;Alcools;2;1;1
+14;Vins, cidres et champagne;2;1;2
+15;Bières;2;1;3
+16;Tabac;2;2;1
+17;Tissus d'habillement;3;1;1
+18;Vêtements;3;1;2
+19;Autres articles vestimentaires et accessoires d'habillement;3;1;3
+20;Nettoyage, réparation et location de vêtements;3;1;4
+21;Chaussures y.c. réparation;3;2;1
+22;Loyers effectifs;4;1;1
+23;Produits pour l'entretien et la réparation courante du logement;4;3;1
+24;Services pour l'entretien et la réparation courante du logement;4;3;2
+25;Fourniture d'eau et autres services liés au logement;4;4;1
+26;Électricité;4;5;1
+27;Gaz;4;5;2
+28;Combustibles liquides;4;5;3
+29;Combustibles solides;4;5;4
+30;Eau chaude, vapeur et glace;4;5;5
+31;Meubles et articles d'ameublement;5;1;1
+32;Tapis et autres revêtements de sol;5;1;2
+33;Articles de ménage en textile;5;2;1
+34;Gros appareils ménagers électriques ou non;5;3;1
+35;Petits appareils électroménagers;5;3;2
+36;Réparation d'appareils ménagers;5;3;3
+37;Verrerie, vaisselle et ustensiles de ménage;5;4;1
+38;Outillage et autres matériels pour la maison et le jardin;5;5;1
+39;Articles de ménage non durables;5;6;1
+40;Services domestiques et autres services pour l'habitation;5;6;2
+41;Préparations et produits pharmaceutiques;6;1;1
+42;Service des médecins;6;2;1
+43;Service des dentistes;6;2;2
+44;Services paramédicaux;6;2;3
+45;Automobiles neuves et d'occasion;7;1;1
+46;Motos, cycles;7;1;2
+47;Pièces détachées et accessoires, hors montage, pour véhicules personnels;7;2;1
+48;Carburants et lubrifiants;7;2;2
+49;Entretien et réparation de véhicules personnels;7;2;3
+50;Autres services liés aux véhicules personnels;7;2;4
+51;Transports ferroviaires de voyageurs;7;3;1
+52;Transports routiers de voyageurs;7;3;2
+53;Transports aériens de voyageurs;7;3;3
+54;Transports combinés de voyageurs;7;3;5
+55;Autres achats de services de transport y.c. transports maritimes et fluviaux;7;3;6
+56;Services postaux;8;1;1
+57;Équipement et services de téléphone et de télécopie;8;1;2
+58;Équipements audio-visuels;9;1;1
+59;Équipements photo et cinéma, instruments d'optique;9;1;2
+60;Matériels de traitement de l'information y.c. micro-ordinateurs;9;1;3
+61;Supports d'enregistrements de l'image et du son;9;1;4
+62;Réparation de matériel audiovisuel, photographique et de traitement de l'information;9;1;5
+63;Autres biens durables importants pour les loisirs et la culture y.c. réparation;9;2;1
+64;Jeux et jouets;9;3;1
+65;Équipement de sport, de camping et de loisirs de plein air;9;3;2
+66;Horticulture;9;3;3
+67;Animaux d'agrément y c. services vétérinaires et autres services;9;3;4
+68;Services récréatifs;9;4;1
+69;Services culturels;9;4;2
+70;Livres;9;5;1
+71;Journaux et périodiques;9;5;2
+72;Imprimés divers, articles de papeterie et de dessin;9;5;3
+73;Voyages touristiques tout compris;9;6;1
+74;Services d'éducation;10;1;1
+75;Restauration et cafés;11;1;1
+76;Cantines;11;1;2
+77;Services d'hébergement;11;2;1
+78;Salons de coiffure et esthétique corporelle;12;1;1
+79;Appareils, autres articles et produits pour soins personnels;12;1;3
+80;Horlogerie, bijouterie, joaillerie;12;3;1
+81;Autres effets personnels;12;3;2
+82;Services de protection sociale;12;4;1
+83;Assurance habitation;12;5;2
+84;Assurance santé;12;5;3
+85;Assurance automobile;12;5;4
+86;Services financiers n.d.a.;12;6;1
+87;Autres services;12;7;1

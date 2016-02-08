@@ -1,0 +1,306 @@
+;code_coicop;label_poste;divisions;groupes;classes;sous_classes;postes
+2;01.1.1.1.1;Pain;1;1;1;1;1
+3;01.1.1.2.1;Pâtisserie fraîche;1;1;1;2;1
+4;01.1.1.2.2;Viennoiserie;1;1;1;2;2
+5;01.1.1.3.1;Biscottes, triscottes, pains durs;1;1;1;3;1
+6;01.1.1.3.2;Biscuits et gâteaux;1;1;1;3;2
+7;01.1.1.3.3;Pâtisserie de conservation;1;1;1;3;3
+8;01.1.1.4.1;Farines, semoules, céréales;1;1;1;4;1
+9;01.1.1.4.2;Pâtes alimentaires;1;1;1;4;2
+10;01.1.1.4.3;Riz;1;1;1;4;3
+11;01.1.1.4.4;Plats cuisinés à base de céréales;1;1;1;4;4
+12;01.1.2.1.1;Bœuf à rôtir;1;1;2;1;1
+13;01.1.2.1.2;Bœuf à braiser et bouillir;1;1;2;1;2
+14;01.1.2.1.3;Bœuf haché;1;1;2;1;3
+15;01.1.2.2.1;Veau à rôtir;1;1;2;2;1
+16;01.1.2.2.2;Veau à braiser et bouillir;1;1;2;2;2
+17;01.1.2.3.1;Agneau;1;1;2;3;1
+18;01.1.2.3.2;Cheval;1;1;2;3;2
+19;01.1.2.4.1;Porc frais, salé, fumé;1;1;2;4;1
+20;01.1.2.4.2;Jambon;1;1;2;4;2
+21;01.1.2.4.3;Pâté;1;1;2;4;3
+22;01.1.2.4.4;Saucisson;1;1;2;4;4
+23;01.1.2.4.5;Saucisse;1;1;2;4;5
+24;01.1.2.4.6;Autres charcuteries et conserves de viande;1;1;2;4;6
+25;01.1.2.5.1;Poulet;1;1;2;5;1
+26;01.1.2.5.2;Dinde;1;1;2;5;2
+27;01.1.2.5.3;Autres volailles;1;1;2;5;3
+28;01.1.2.6.1;Lapin, gibier;1;1;2;6;1
+29;01.1.2.6.2;Triperie;1;1;2;6;2
+30;01.1.2.6.3;Plats cuisinés à base de viande;1;1;2;6;3
+31;01.1.3.1.1;Poissons frais;1;1;3;1;1
+32;01.1.3.1.2;Crustacés et mollusques frais;1;1;3;1;2
+33;01.1.3.2.1;Poissons en conserves, surgelés, séchés, fumés;1;1;3;2;1
+34;01.1.3.2.2;Plats cuisinés à base de poisson;1;1;3;2;2
+35;01.1.4.1.1;Laits;1;1;4;1;1
+36;01.1.4.1.2;Crèmes fraîches;1;1;4;1;2
+37;01.1.4.2.1;Yaourts;1;1;4;2;1
+38;01.1.4.2.2;Desserts lactés frais;1;1;4;2;2
+39;01.1.4.3.1;Fromages frais;1;1;4;3;1
+40;01.1.4.3.2;Fromages à pâte molle et à pâte persillée;1;1;4;3;2
+41;01.1.4.3.3;Fromages à pâte pressée;1;1;4;3;3
+42;01.1.4.3.4;Fromages de chèvre;1;1;4;3;4
+43;01.1.4.3.5;Fromages fondus;1;1;4;3;5
+44;01.1.4.4.1;Œufs;1;1;4;4;1
+45;01.1.5.1.1;Beurres;1;1;5;1;1
+46;01.1.5.2.1;Huiles alimentaires;1;1;5;2;1
+47;01.1.5.2.2;Margarine végétale et autres graisses;1;1;5;2;2
+48;01.1.6.1.1;Fruits frais;1;1;6;1;1
+49;01.1.6.2.1;Fruits surgelés, appertisés ou secs;1;1;6;2;1
+50;01.1.7.1.1;Légumes frais;1;1;7;1;1
+51;01.1.7.2.1;Légumes surgelés, secs et en conserve;1;1;7;2;1
+52;01.1.7.2.2;Pommes de terre préparées;1;1;7;2;2
+53;01.1.7.2.3;Autres plats cuisinés à base de légumes;1;1;7;2;3
+54;01.1.8.1.1;Sucre;1;1;8;1;1
+55;01.1.8.1.2;Confitures, compotes et miel;1;1;8;1;2
+56;01.1.8.1.3;Confiseries à base de sucre;1;1;8;1;3
+57;01.1.8.2.1;Chocolat en tablettes;1;1;8;2;1
+58;01.1.8.2.2;Confiseries à base de chocolat;1;1;8;2;2
+59;01.1.8.3.1;Crèmes glacées, glaces et sorbets;1;1;8;3;1
+60;01.1.9.1.1;Sels, épices, condiments, vinaigres et sauces;1;1;9;1;1
+61;01.1.9.2.1;Aliments préparés pour bébés;1;1;9;2;1
+62;01.1.9.2.2;Produits diététiques;1;1;9;2;2
+63;01.1.9.3.1;Potages préparés;1;1;9;3;1
+64;01.1.9.3.2;Desserts et produits pour pâtisserie;1;1;9;3;2
+65;01.2.1.1.1;Chocolat en poudre;1;2;1;1;1
+66;01.2.1.2.1;Cafés en grains ou moulu;1;2;1;2;1
+67;01.2.1.2.2;Café soluble et succédanée de café;1;2;1;2;2
+68;01.2.1.3.1;Thés et infusions;1;2;1;3;1
+69;01.2.2.1.1;Eaux minérales et de source;1;2;2;1;1
+70;01.2.2.2.1;Jus de fruits et de légumes;1;2;2;2;1
+71;01.2.2.2.2;Boissons aux fruits non gazeuses, sodas, limonades;1;2;2;2;2
+72;01.2.2.2.3;Sirops et concentrés;1;2;2;2;3
+73;02.1.1.1.1;Apéritifs anisés à base d'alcool;2;1;1;1;1
+74;02.1.1.1.2;Whisky;2;1;1;1;2
+75;02.1.1.2.1;Eaux de vie;2;1;1;2;1
+76;02.1.1.2.2;Liqueurs;2;1;1;2;2
+77;02.1.2.1.1;Vins de consommation courante;2;1;2;1;1
+78;02.1.2.1.2;Vins supérieurs;2;1;2;1;2
+79;02.1.2.1.3;Vins doux naturels et apéritifs à base de vin;2;1;2;1;3
+80;02.1.2.2.1;Champagne et mousseux;2;1;2;2;1
+81;02.1.2.2.2;Cidres;2;1;2;2;2
+82;02.1.3.1.1;Bières;2;1;3;1;1
+83;02.2.1.1.1;Tabac;2;2;1;1;1
+84;03.1.1.1.1;Tissus d'habillement;3;1;1;1;1
+85;03.1.2.1.1;Manteaux, imper. et vêtements en peau pour hommes;3;1;2;1;1
+86;03.1.2.1.2;Costumes pour hommes;3;1;2;1;2
+87;03.1.2.1.3;Vestes pour hommes;3;1;2;1;3
+88;03.1.2.1.4;Pantalons pour hommes;3;1;2;1;4
+89;03.1.2.1.5;Vêtements de travail;3;1;2;1;5
+90;03.1.2.2.1;Manteaux, imper et vêtements en peau pour femmes;3;1;2;2;1
+91;03.1.2.2.2;Tailleurs et ensembles pour femmes;3;1;2;2;2
+92;03.1.2.2.3;Jupes;3;1;2;2;3
+93;03.1.2.2.4;Robes;3;1;2;2;4
+94;03.1.2.2.5;Pantalons pour femmes;3;1;2;2;5
+95;03.1.2.2.6;Vestes pour femmes;3;1;2;2;6
+96;03.1.2.3.1;Manteaux, imperméables et vestes pour enfants;3;1;2;3;1
+97;03.1.2.3.2;Pantalons pour enfants;3;1;2;3;2
+98;03.1.2.3.3;Jupes, robes et ensembles pour enfants;3;1;2;3;3
+99;03.1.2.4.1;Vêtements de sport ou de loisirs pour hommes et garçonnets;3;1;2;4;1
+100;03.1.2.4.2;Vêtements de sport ou de loisir pour femmes et fillettes;3;1;2;4;2
+101;03.1.2.5.1;Chemises pour hommes;3;1;2;5;1
+102;03.1.2.5.2;Sous-vêtements et vêtements de nuit pour hommes;3;1;2;5;2
+103;03.1.2.5.3;Chaussettes pour hommes;3;1;2;5;3
+104;03.1.2.5.4;Tricots et pull-overs pour hommes;3;1;2;5;4
+105;03.1.2.6.1;Chemisiers et tuniques pour femmes;3;1;2;6;1
+106;03.1.2.6.2;Lingerie, vêtements de nuit pour femmes;3;1;2;6;2
+107;03.1.2.6.3;Collants, bas et chaussettes pour femmes;3;1;2;6;3
+108;03.1.2.6.4;Tricots et pull-overs pour femmes;3;1;2;6;4
+109;03.1.2.7.1;Chemises, sous- vêtements et vêtements de nuit enfants;3;1;2;7;1
+110;03.1.2.7.2;Collants et chaussettes pour enfants;3;1;2;7;2
+111;03.1.2.7.3;Tricots et pull-overs pour enfants;3;1;2;7;3
+112;03.1.2.7.4;Layette;3;1;2;7;4
+113;03.1.3.1.1;Accessoires du vêtement et vêtements de travail;3;1;3;1;1
+114;03.1.3.1.2;Laines et mercerie;3;1;3;1;2
+115;03.1.4.1.1;Blanchissage et nettoyage de vêtements;3;1;4;1;1
+116;03.1.4.1.2;Réparations de vêtements;3;1;4;1;2
+117;03.2.1.1.1;Chaussures de ville pour hommes;3;2;1;1;1
+118;03.2.1.1.2;Chaussures de ville pour femmes;3;2;1;1;2
+119;03.2.1.1.3;Chaussures de ville pour enfants;3;2;1;1;3
+120;03.2.1.2.1;Chaussures de sport;3;2;1;2;1
+121;03.2.1.2.2;Autres articles chaussants;3;2;1;2;2
+122;03.2.1.2.3;Réparation de chaussures;3;2;1;2;3
+123;04.1.1.1.1;Loyers des résidences principales;4;1;1;1;1
+124;04.1.1.2.1;Loyers des résidences de vacances et gîtes ruraux;4;1;1;2;1
+125;04.3.1.1.1;Peintures, vernis et papiers peints;4;3;1;1;1
+126;04.3.1.1.2;Art. de quincaillerie, fournitures pour bricolage;4;3;1;1;2
+127;04.3.1.1.3;Articles en bois;4;3;1;1;3
+128;04.3.2.1.1;Pose de revêtement de sols et murs;4;3;2;1;1
+129;04.3.2.2.1;Services d'entretien du logement;4;3;2;2;1
+130;04.4.1.1.1;Distribution d'eau;4;4;1;1;1
+131;04.4.1.2.1;Enlèvement des ordures ménagères;4;4;1;2;1
+132;04.4.1.3.1;Service d'assainissement;4;4;1;3;1
+133;04.4.1.4.1;Ramonage, gardiennage et entretien des ascenseurs;4;4;1;4;1
+134;04.5.1.1.1;Électricité;4;5;1;1;1
+135;04.5.2.1.1;Gaz de ville;4;5;2;1;1
+136;04.5.2.2.1;Gaz liquéfiés;4;5;2;2;1
+137;04.5.3.1.1;Fiouls domestiques;4;5;3;1;1
+138;04.5.4.1.1;Autres combustibles solides;4;5;4;1;1
+139;04.5.5.1.1;Chauffage urbain;4;5;5;1;1
+140;05.1.1.1.1;Chambres d'enfants;5;1;1;1;1
+141;05.1.1.1.2;Chambres d'adultes;5;1;1;1;2
+142;05.1.1.1.3;Sommiers;5;1;1;1;3
+143;05.1.1.2.1;Étagères et éléments modulables;5;1;1;2;1
+144;05.1.1.2.2;Buffets, livings, bahuts, bibliothèques;5;1;1;2;2
+145;05.1.1.2.3;Tables et chaises de salle à manger;5;1;1;2;3
+146;05.1.1.3.1;Mobilier de cuisine et de salle de bains;5;1;1;3;1
+147;05.1.1.4.1;Fauteuils et canapés;5;1;1;4;1
+148;05.1.1.5.1;Luminaires;5;1;1;5;1
+149;05.1.1.5.2;Articles de décoration;5;1;1;5;2
+150;05.1.1.5.3;Meubles de jardin;5;1;1;5;3
+151;05.1.1.5.4;Réparation des meubles;5;1;1;5;4
+152;05.1.2.1.1;Tapis et autres revêtements de sol;5;1;2;1;1
+153;05.2.1.1.1;Linge de lit;5;2;1;1;1
+154;05.2.1.1.2;Couvertures et accessoires de literie;5;2;1;1;2
+155;05.2.1.1.3;Literie;5;2;1;1;3
+156;05.2.1.2.1;Tissus d'ameublement, voilages;5;2;1;2;1
+157;05.2.1.2.2;Linge de toilette et de table, torchons;5;2;1;2;2
+158;05.3.1.1.1;Lave-linge, sèche-linge;5;3;1;1;1
+159;05.3.1.1.2;Lave-vaisselle;5;3;1;1;2
+160;05.3.1.2.1;Appareils de cuisson;5;3;1;2;1
+161;05.3.1.3.1;Réfrigérateurs, congélateurs;5;3;1;3;1
+162;05.3.1.4.1;Aspirateurs et autres gros appareils ménagers;5;3;1;4;1
+163;05.3.1.4.2;Appareils de chauffage;5;3;1;4;2
+164;05.3.2.1.1; petits appareils électroménagers;5;3;2;1;1
+165;05.3.3.1.1;Réparation d'appareils ménagers;5;3;3;1;1
+166;05.4.1.1.1;Faïence et porcelaine;5;4;1;1;1
+167;05.4.1.1.2;Verrerie;5;4;1;1;2
+168;05.4.1.2.1;Couverts et autres ustensiles de cuisine en métal;5;4;1;2;1
+169;05.4.1.2.2;Orfèvrerie;5;4;1;2;2
+170;05.4.1.3.1;Autres ustensiles de ménage;5;4;1;3;1
+171;05.5.1.1.1;Outillage à moteur;5;5;1;1;1
+172;05.5.1.1.2;Piles;5;5;1;1;2
+173;05.5.1.1.3;Lampes et autres petits matériels électriques;5;5;1;1;3
+174;05.5.1.1.4;Outillage à main, ustensiles de jardin;5;5;1;1;4
+175;05.5.1.1.5;Autres petits matériels pour la maison;5;5;1;1;5
+176;05.6.1.1.1;Petits articles pour l'entretien du logement;5;6;1;1;1
+177;05.6.1.1.2;Petits articles de quincaillerie et de couture;5;6;1;1;2
+178;05.6.1.2.1;Savons de ménage et détergents;5;6;1;2;1
+179;05.6.1.2.2;Produits d'entretien de la maison;5;6;1;2;2
+180;05.6.2.1.1;Employé de maison;5;6;2;1;1
+181;05.6.2.2.1;Locations d'appareils de nettoyage et de bricolage;5;6;2;2;1
+182;05.6.2.2.2;Blanchissage et nettoyage d'articles textiles hors vêtements;5;6;2;2;2
+183;06.1.1.1.1;Produits pharmaceutiques;6;1;1;1;1
+184;06.1.1.2.1;Parapharmacie;6;1;1;2;1
+185;06.1.1.3.1;Optique médicale;6;1;1;3;1
+186;06.1.1.3.2;Appareils orthopédiques et prothèses;6;1;1;3;2
+187;06.2.1.1.1;Médecins;6;2;1;1;1
+188;06.2.2.1.1;Dentistes;6;2;2;1;1
+189;06.2.3.1.1;Analyses de laboratoire;6;2;3;1;1
+190;06.2.3.1.2;Auxiliaires médicaux;6;2;3;1;2
+191;06.2.3.1.3;Transports sanitaires;6;2;3;1;3
+192;06.2.3.1.4;Cures thermales privées;6;2;3;1;4
+193;07.1.1.1.1;Automobiles neuves;7;1;1;1;1
+194;07.1.1.2.1;Automobiles d'occasion;7;1;1;2;1
+195;07.1.2.1.1;Motocycles;7;1;2;1;1
+196;07.1.2.1.2;Cycles;7;1;2;1;2
+197;07.2.1.1.1;Pneumatiques;7;2;1;1;1
+198;07.2.1.2.1;Autres grosses pièces de rechange  pour véhicules;7;2;1;2;1
+199;07.2.1.2.2;Accessoires et petites pièces de rechange pour véhicules;7;2;1;2;2
+200;07.2.2.1.1;Supercarburants;7;2;2;1;1
+201;07.2.2.1.2;Gazole et gpl;7;2;2;1;2
+202;07.2.2.2.1;Lubrifiants;7;2;2;2;1
+203;07.2.3.1.1;Entretien de véhicules personnels;7;2;3;1;1
+204;07.2.3.2.1;Réparation de véhicules personnels (heure de m.o.);7;2;3;2;1
+205;07.2.3.2.2;Réparation de véhicules personnels (forfait pièces et m.o.);7;2;3;2;2
+206;07.2.4.1.1;Péages;7;2;4;1;1
+207;07.2.4.1.2;Parkings;7;2;4;1;2
+208;07.2.4.2.1;Auto-écoles;7;2;4;2;1
+209;07.2.4.2.2;Locations de véhicules privés;7;2;4;2;2
+210;07.2.4.2.3;Formalités administratives liées au véhicule personnel;7;2;4;2;3
+211;07.3.1.1.1;Transports ferroviaires de voyageurs;7;3;1;1;1
+212;07.3.2.1.1;Transports routiers interurbains de voyageurs;7;3;2;1;1
+213;07.3.2.1.2;Transports routiers urbains et suburbains de voyageurs;7;3;2;1;2
+214;07.3.2.2.1;Taxis;7;3;2;2;1
+215;07.3.3.1.1;Transports aériens de voyageurs;7;3;3;1;1
+216;07.3.5.1.1;Transports combinés urbains et suburbains de voyageurs;7;3;5;1;1
+217;07.3.6.1.1;Déménagement;7;3;6;1;1
+218;07.3.6.1.2;Transports maritimes et fluviaux;7;3;6;1;2
+219;08.1.1.1.1;Services postaux;8;1;1;1;1
+220;08.1.2.1.1;Poste téléphonique;8;1;2;1;1
+221;08.1.2.2.1;Services de télécommunications;8;1;2;2;1
+222;09.1.1.1.1;Matériel vidéo;9;1;1;1;1
+223;09.1.1.1.2;Téléviseurs;9;1;1;1;2
+224;09.1.1.1.3;Autres appareils électro-acoustiques;9;1;1;1;3
+225;09.1.2.1.1;Appareils de photo, inst. d'optique, d'observation;9;1;2;1;1
+226;09.1.2.1.2;Caméscope;9;1;2;1;2
+227;09.1.3.1.1;Matériel de traitement de l'info. yc micro-ordinateurs;9;1;3;1;1
+228;09.1.4.1.1;Disques et cassettes enregistrés;9;1;4;1;1
+229;09.1.4.1.2;Disquettes et cassettes vierges;9;1;4;1;2
+230;09.1.4.1.3;Produits photographiques;9;1;4;1;3
+231;09.1.5.1.1;Réparation d'appareils et d'accessoires récréatifs;9;1;5;1;1
+232;09.2.1.1.1;Caravanes;9;2;1;1;1
+233;09.2.1.1.2;Bateaux et accessoires;9;2;1;1;2
+234;09.2.1.1.3;Instruments de musique et autres articles pour les loisirs;9;2;1;1;3
+235;09.3.1.1.1;Jeux et jouets;9;3;1;1;1
+236;09.3.2.1.1;Articles de sport, armes et munitions;9;3;2;1;1
+237;09.3.2.1.2;Articles de camping;9;3;2;1;2
+238;09.3.3.1.1;Fleurs et plantes;9;3;3;1;1
+239;09.3.3.2.1;Plants et graines yc engrais;9;3;3;2;1
+240;09.3.3.2.2;Compositions  florales;9;3;3;2;2
+241;09.3.4.1.1;Aliments et produits d'hygiène pour animaux;9;3;4;1;1
+242;09.3.4.1.2;Achats d'animaux;9;3;4;1;2
+243;09.3.4.1.3;Soins pour animaux d'agrément;9;3;4;1;3
+244;09.4.1.1.1;Pratique d'un sport;9;4;1;1;1
+245;09.4.1.1.2;Assistance à des manifestations sportives;9;4;1;1;2
+246;09.4.1.1.3;Enseignement artistique et autres services récréatifs;9;4;1;1;3
+247;09.4.2.1.1;Cinémas;9;4;2;1;1
+248;09.4.2.2.1;Théâtres, concerts et music-halls;9;4;2;2;1
+249;09.4.2.2.2;Visite de monument ou musée;9;4;2;2;2
+250;09.4.2.3.1;Redevance et abonnements télévision;9;4;2;3;1
+251;09.4.2.4.1;Travaux photographiques;9;4;2;4;1
+252;09.4.2.4.2;Locations d'articles récréatifs;9;4;2;4;2
+253;09.5.1.1.1;Livres scolaires et parascolaires, dict., encyclo.;9;5;1;1;1
+254;09.5.1.1.2;Ouvrages de littérature générale;9;5;1;1;2
+255;09.5.1.1.3;Livres pour la jeunesse, livres pratiques et autres;9;5;1;1;3
+256;09.5.2.1.1;Journaux;9;5;2;1;1
+257;09.5.2.2.1;Revues;9;5;2;2;1
+258;09.5.3.1.1;Autres articles imprimés;9;5;3;1;1
+259;09.5.3.1.2;Articles de papeterie;9;5;3;1;2
+260;09.5.3.2.1;Stylos, crayons et encres;9;5;3;2;1
+261;09.5.3.2.2;Autres fournitures scolaires et de bureau;9;5;3;2;2
+262;09.6.1.1.1;Voyages organisés;9;6;1;1;1
+263;10.1.1.1.1;Secondaires à financement  privé;10;1;1;1;1
+264;10.1.1.1.2;Supérieurs à financement privé;10;1;1;1;2
+265;10.1.1.1.3;Cours par correspondance;10;1;1;1;3
+266;11.1.1.1.1;Repas traditionnel dans un restaurant;11;1;1;1;1
+267;11.1.1.1.2;Repas en libre service et restauration rapide;11;1;1;1;2
+268;11.1.1.2.1;Cafés et autres boiss. chaudes cons. dans les cafés;11;1;1;2;1
+269;11.1.1.2.2;Vin consommé dans les cafés;11;1;1;2;2
+270;11.1.1.2.3;Bière et cidre consommés dans les cafés;11;1;1;2;3
+271;11.1.1.2.4;Spiritueux consommés dans les cafés;11;1;1;2;4
+272;11.1.1.2.5;Boissons non alcoolisées cons. dans les cafés;11;1;1;2;5
+273;11.1.2.1.1;Repas dans un restaurant scolaire ou universitaire;11;1;2;1;1
+274;11.1.2.2.1;Repas dans un restaurant d'entreprise ou d'admin.;11;1;2;2;1
+275;11.2.1.1.1;Locations de chambres d'hôtel;11;2;1;1;1
+276;11.2.1.1.2;Pensions et demi-pensions dans les hôtels;11;2;1;1;2
+277;11.2.1.2.1;Frais d'internat scol., résidences univers., foyers;11;2;1;2;1
+278;11.2.1.3.1;Hébergements de vacances ou de loisirs;11;2;1;3;1
+279;11.2.1.3.2;Terrains de camping et auberges de jeunesse;11;2;1;3;2
+280;12.1.1.1.1;Coiffeurs pour hommes;12;1;1;1;1
+281;12.1.1.1.2;Coiffeurs pour femmes;12;1;1;1;2
+282;12.1.1.2.1;Autres services d'esthétique corporelle;12;1;1;2;1
+283;12.1.3.1.1;Parfums et eaux de toilette;12;1;3;1;1
+284;12.1.3.1.2;Produits de maquillage et de soin de la peau;12;1;3;1;2
+285;12.1.3.2.1;Savons, dentifrices et produits de toilette;12;1;3;2;1
+286;12.1.3.2.2;Shampooings et produits capillaires divers;12;1;3;2;2
+287;12.1.3.3.1;Autres articles de toilette;12;1;3;3;1
+288;12.1.3.3.2;Articles d'hygiène à base de papier;12;1;3;3;2
+289;12.1.3.3.3;Appareils de toilette électriques;12;1;3;3;3
+290;12.3.1.1.1;Horlogerie;12;3;1;1;1
+291;12.3.1.1.2;Bijouterie, joaillerie;12;3;1;1;2
+292;12.3.2.1.1;Maroquinerie et articles de voyage;12;3;2;1;1
+293;12.3.2.2.1;Articles de puériculture;12;3;2;2;1
+294;12.3.2.2.2;Articles pour fumeurs, articles divers;12;3;2;2;2
+295;12.3.2.2.3;Réparation horlogerie ou bijoux;12;3;2;2;3
+296;12.4.1.1.1;Crèches, assistantes maternelles;12;4;1;1;1
+297;12.4.1.2.1;Maisons de retraite et autres services pour personnes âgées;12;4;1;2;1
+298;12.4.1.3.1;Établissements pour adultes handicapés;12;4;1;3;1
+299;12.5.2.1.1;Assurance habitation;12;5;2;1;1
+300;12.5.3.1.1;Assurance santé complémentaire;12;5;3;1;1
+301;12.5.4.1.1;Assurance automobile;12;5;4;1;1
+302;12.6.1.1.1;Services financiers;12;6;1;1;1
+303;12.7.1.1.1;Services funéraires;12;7;1;1;1
+304;12.7.1.2.1;Formalités administratives;12;7;1;2;1
+305;12.7.1.2.2;Services juridiques;12;7;1;2;2
+306;12.7.1.2.3;Autres services aux ménages;12;7;1;2;3
