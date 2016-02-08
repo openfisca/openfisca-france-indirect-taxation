@@ -34,7 +34,7 @@ liste_produits.columns
 sous_codes = liste_produits.sous_code.dropna().tolist()
 postes = list()
 for sous_code in sous_codes:
-    postes.append(int(sous_code[0:4]))
+    postes.append(sous_code[0:4])
 
 
 taxe_by_categorie_fiscale_number = {
