@@ -81,7 +81,7 @@ def get_cn_aggregates(target_year = None):
 
 def get_inflators_bdf_to_cn(data_year):
     '''
-    Fonction qui calcule les ratios de calage (bdf sur cn pour année de données) et de vieillissement
+    Calcule les ratios de calage (bdf sur cn pour année de données)
     à partir des masses de comptabilité nationale et des masses de consommation de bdf.
     '''
     data_cn = get_cn_aggregates(data_year)
@@ -97,8 +97,7 @@ def get_inflators_bdf_to_cn(data_year):
 
 def get_inflators_cn_to_cn(target_year):
     '''
-    Fonction qui calcule les ratios de calage (bdf sur cn pour année de données) et de vieillissement
-    à partir des masses de comptabilité nationale et des masses de consommation de bdf.
+        Calcule l'inflateur de vieillissement à partir des masses de comptabilité nationale.
     '''
     data_year = find_nearest_inferior(data_years, target_year)
     data_year_cn_aggregates = get_cn_aggregates(data_year)['consoCN_COICOP_{}'.format(data_year)].to_dict()
@@ -126,10 +125,16 @@ def get_inflators(target_year):
     return ratio_by_variable
 
 
-inflators_by_year = dict()
-aggregates_by_year = dict()
-for target_year in range(2000, 2015):
-    inflators = get_inflators(target_year)
-    inflators_by_year[target_year] = inflators
-    aggregates = get_cn_aggregates(target_year)['consoCN_COICOP_{}'.format(target_year)].to_dict()
-    aggregates_by_year[target_year] = aggregates
+def get_inflators_by_year():
+    inflators_by_year = dict()
+    for target_year in range(2000, 2015):
+        inflators = get_inflators(target_year)
+        inflators_by_year[target_year] = inflators
+    return inflators_by_year
+
+
+def get_aggregates_by_year():
+    aggregates_by_year = dict()
+    for target_year in range(2000, 2015):
+        aggregates = get_cn_aggregates(target_year)['consoCN_COICOP_{}'.format(target_year)].to_dict()
+        aggregates_by_year[target_year] = aggregates
