@@ -19,7 +19,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import get_input_
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import \
-    add_area_dummy, add_stalog_dummy, add_vag_dummy, indices_prix_carbus, price_carbu_pond
+    add_area_dummy, add_vag_dummy, indices_prix_carbus, price_carbu_pond
 
 
 assets_directory = os.path.join(
