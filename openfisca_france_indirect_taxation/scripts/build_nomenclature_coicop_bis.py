@@ -19,7 +19,7 @@ legislation_directory = os.path.join(
 sub_levels = ['divisions', 'groupes', 'classes', 'sous_classes', 'postes']
 
 
-def build_nomenclature(level):
+def build_coicop_level_nomenclature(level):
     assert level in sub_levels
     data_frame = pd.DataFrame.from_csv(
         os.path.join(legislation_directory, 'nomenclature_coicop_source_by_{}.csv'.format(level)),
@@ -62,38 +62,51 @@ def build_nomenclature(level):
     return data_frame
 
 
-for index in range(len(sub_levels)-1):
-    level = sub_levels[index]
-    next_level = sub_levels[index + 1]
-    on = sub_levels[:index + 1]
-    if index == 0:
-        nomenclature_coicop = pd.merge(build_nomenclature(level), build_nomenclature(next_level), on = on,
-            left_index = False, right_index = False)
-    else:
-        nomenclature_coicop = pd.merge(nomenclature_coicop, build_nomenclature(next_level), on = on)
+def build_coicop_nomenclature():
+    for index in range(len(sub_levels) - 1):
+        level = sub_levels[index]
+        next_level = sub_levels[index + 1]
+        on = sub_levels[:index + 1]
+        print index, level, next_level
+        if index == 0:
+            coicop_nomenclature = pd.merge(
+                build_coicop_level_nomenclature(level), build_coicop_level_nomenclature(next_level),
+                on = on, left_index = False, right_index = False)
+        else:
+            coicop_nomenclature = pd.merge(coicop_nomenclature, build_coicop_level_nomenclature(next_level), on = on)
+
+    coicop_nomenclature = coicop_nomenclature[
+        ['code_coicop'] +
+        ['label_{}'.format(sub_level[:-1]) for sub_level in sub_levels] +
+        sub_levels
+        ].copy()
+
+    coicop_nomenclature.to_csv(
+        os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
+        sep = ';',
+        )
+    return coicop_nomenclature
 
 
-nomenclature_coicop = nomenclature_coicop[['code_coicop'] + ['label_division'] + ['label_groupe'] +
-    ['label_classe'] + ['label_sous_classe'] + ['label_poste'] + ['divisions'] + ['groupes'] + ['classes'] +
-    ['sous_classes'] + ['postes']].copy()
+def get_dominant_and_exceptions(division):
+    assert division in ['0{}'.format(i) for i in range(1, 10)] + [11, 12]  # TODO: fix this
+    parametres_fiscalite_file_path = os.path.join(legislation_directory, 'coicop_to_categorie_fiscale.csv')
+    parametres_fiscalite_data_frame = pd.read_csv(
+        parametres_fiscalite_file_path,
+        sep = ';',
+        converters = {'posteCOICOP': str}
+        )
+    parametres_fiscalite_data_frame['division'] = parametres_fiscalite_data_frame['posteCOICOP'].str[:2].copy()
 
+    division_dataframe = parametres_fiscalite_data_frame.query('division == @division')
+    dominant_fiscal_category = division_dataframe.categoriefiscale.value_counts().argmax()
+    exceptions_dataframe = division_dataframe.query('categoriefiscale != @dominant_fiscal_category')
 
-nomenclature_coicop.to_csv(
-    os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
-    sep = ';',
-    )
+    return dict(dominant_fiscal_category = dominant_fiscal_category, exceptions_dataframe = exceptions_dataframe)
 
-# On fait correspondre à chaque bien sa catégorie fiscale
-nomenclature_coicop['categorie_fiscale'] = 0
-nomenclature_coicop.loc[nomenclature_coicop['divisions'] == 1, 'categorie_fiscale'] = 2  # see exceptions
-nomenclature_coicop.loc[nomenclature_coicop['divisions'] == 3, 'categorie_fiscale'] = 3
-nomenclature_coicop.loc[nomenclature_coicop['divisions'] == 5, 'categorie_fiscale'] = 3  # see exceptions...
+# TODO:
+# - Get the correct poste coicop usinf desciption and nomenclature coicop
+# - Format exceptions as year_min, year_max, value. Should use http://stackoverflow.com/questions/26121668/slice-pandas-dataframe-in-groups-of-consecutive-values
+# - Deal with the postes that are not in nomenclature coicop (see TODO in get_domiant_and_exceptions)
+# - Try to find the legislative reference for the changes in fiscal category of products
 
-parametres_fiscalite_file_path = os.path.join(legislation_directory, 'coicop_to_categorie_fiscale.csv')
-parametres_fiscalite_data_frame = pd.read_csv(
-    parametres_fiscalite_file_path,
-    sep = ';',
-    converters = {'posteCOICOP': str}
-    )
-parametres_fiscalite_data_frame['posteCOICOP'] = parametres_fiscalite_data_frame['posteCOICOP'].astype(str)
-parametres_fiscalite_data_frame['divisions'] = parametres_fiscalite_data_frame['posteCOICOP'].str[:1].copy()
