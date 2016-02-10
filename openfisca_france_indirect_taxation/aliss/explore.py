@@ -6,14 +6,11 @@ import pandas
 import pkg_resources
 
 
-import biryani
-
-
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
 from openfisca_france_indirect_taxation.utils import get_parametres_fiscalite_data_frame
-
+from openfisca_france_indirect_taxation.scripts.build_coicop_nomenclature import build_coicop_nomenclature
 
 year = 2011
 aliss_survey_collection = SurveyCollection.load(
@@ -24,28 +21,37 @@ survey = aliss_survey_collection.get_survey('aliss_{}'.format(year))
 
 df = survey.get_values(table = 'Base_ALISS_2011')
 dirty_produits = df.souscode.unique()
-clean_by_dirty_produits = dict()
+code_coicop_by_dirty_produits = dict()
 
 for dirty_produit in dirty_produits:
-    clean_produit = '0' + '.'.join(dirty_produit[:4])
-    clean_by_dirty_produits[dirty_produit] = clean_produit
+    code_coicop = '0' + '.'.join(dirty_produit[:4])
+    code_coicop_by_dirty_produits[dirty_produit] = code_coicop
 
 clean_dirty_produits_data_frame = pandas.DataFrame()
-clean_dirty_produits_data_frame['dirty'] = clean_by_dirty_produits.keys()
-clean_dirty_produits_data_frame['clean'] = clean_by_dirty_produits.values()
+clean_dirty_produits_data_frame['dirty'] = code_coicop_by_dirty_produits.keys()
+clean_dirty_produits_data_frame['code_coicop'] = code_coicop_by_dirty_produits.values()
 
-print clean_by_dirty_produits
-
-import csv
-writer = csv.writer(open('dict2.csv', 'wb'))
-for key, value in clean_by_dirty_produits.items():
-   writer.writerow([key, value])
-
-f = pandas.DataFrame.from_records(data = clean_by_dirty_produits, columns = ['a', 'b'])
+print code_coicop_by_dirty_produits
+data_frame = clean_dirty_produits_data_frame
 
 
+def merge_with_coicop(data_frame):
+    coicop_nomenclature = build_coicop_nomenclature()
+    level = data_frame['code_coicop'].loc[0].count('.') + 1
+    print level
+    coicop_nomenclature['poste_coicop'] = coicop_nomenclature['code_coicop'].copy()
+    coicop_nomenclature['code_coicop'] = coicop_nomenclature['code_coicop'].str[:2 * level]
+    print coicop_nomenclature['code_coicop'][:5]
+    df = data_frame.merge(coicop_nomenclature, on = 'code_coicop', how = 'outer')
+    return df[[
+        u'label_division', u'label_groupe', u'label_classe', u'label_sous_classe', u'label_poste',
+        u'poste_coicop', u'code_coicop', u'dirty'
+        ]].sort_values(by = u'poste_coicop')
 
-.to_csv('test.csv')
+df = merge_with_coicop(data_frame)
+boum
+
+
 
 liste_produits_path = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,

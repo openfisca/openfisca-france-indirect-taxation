@@ -40,7 +40,7 @@ taxe_by_categorie_fiscale_number = {
     }
 
 
-def build_coicop_level_nomenclature(level):
+def build_coicop_level_nomenclature(level, keep_code = False):
     assert level in sub_levels
     data_frame = pd.read_csv(
         os.path.join(legislation_directory, 'nomenclature_coicop_source_by_{}.csv'.format(level)),
@@ -69,7 +69,7 @@ def build_coicop_level_nomenclature(level):
         if level == sub_level:
             stop = True
 
-    if level == 'postes':
+    if keep_code or level == 'postes':
         data_frame['code_coicop'] = data_frame['code_coicop'].str[1:].copy()
     else:
         del data_frame['code_coicop']
