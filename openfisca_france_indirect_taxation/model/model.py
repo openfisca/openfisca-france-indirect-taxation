@@ -31,6 +31,7 @@ from .consommation import (  # noqa analysis:ignore
     consommation_menages,
     categories_fiscales,
     postes_coicop,
+    reactions_comportementales,
     )
 from .taxes_indirectes import (  # noqa analysis:ignore
     alcools,
