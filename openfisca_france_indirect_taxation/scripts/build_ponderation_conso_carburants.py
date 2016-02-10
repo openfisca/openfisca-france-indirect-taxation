@@ -1,11 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-Created on Thu Aug 13 13:59:49 2015
-
-@author: thomas.douenne
-"""
 
 import pkg_resources
 import os

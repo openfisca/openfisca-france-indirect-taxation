@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
 import numpy as np
 import os
 import pandas as pd
 import pkg_resources
 
+
+import build_coicop_nomenclature
 
 legislation_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
@@ -39,109 +39,37 @@ taxe_by_categorie_fiscale_number = {
     }
 
 
-def build_coicop_level_nomenclature(level):
-    assert level in sub_levels
-    data_frame = pd.read_csv(
-        os.path.join(legislation_directory, 'nomenclature_coicop_source_by_{}.csv'.format(level)),
-        sep = ';',
-        header = -1,
-        )
-    data_frame.reset_index(inplace = True)
-    data_frame.rename(columns = {0: 'code_coicop', 1: 'label_{}'.format(level[:-1])}, inplace = True)
-    data_frame = data_frame.ix[2:].copy()
+def extract_informations_from_coicop_to_categorie_fiscale():
 
-    # Problème dû au fichier Excel, nous devons changer le contenu d'une case:
-    if level == 'sous_classes':
-        data_frame.loc[data_frame['code_coicop'] == "01.1.4.4", 'code_coicop'] = "'01.1.4.4"
+    def format_exceptions(exceptions):
+        grouped = exceptions.groupby(
+            by = [exceptions.annee - np.arange(exceptions.shape[0]), 'posteCOICOP', 'categoriefiscale']
+            )
+        for k, g in grouped:
+            print g.posteCOICOP.unique()[0], g.description.unique()[0], g.annee.min(), g.annee.max(), \
+                taxe_by_categorie_fiscale_number[int(g.categoriefiscale.unique())]
 
-    index, stop = 1, False
-    for sub_level in sub_levels:
-        if stop:
-            continue
-        if sub_level == 'divisions':
-            data_frame[sub_level] = data_frame['code_coicop'].str[index:index + 2].astype(int)
-            index = index + 3
-        else:
-            data_frame[sub_level] = data_frame['code_coicop'].str[index:index + 1].astype(int)
-            index = index + 2
+    def get_dominant_and_exceptions(division):
+        assert division in divisions
+        parametres_fiscalite_file_path = os.path.join(legislation_directory, 'coicop_to_categorie_fiscale.csv')
+        parametres_fiscalite_data_frame = pd.read_csv(
+            parametres_fiscalite_file_path,
+            sep = ';',
+            converters = {'posteCOICOP': unicode}
+            )
+        parametres_fiscalite_data_frame['division'] = parametres_fiscalite_data_frame['posteCOICOP'].str[:2].copy()
+        division_dataframe = parametres_fiscalite_data_frame.query('division == @division')
+        dominant_fiscal_category = division_dataframe.categoriefiscale.value_counts().argmax()
+        exceptions = division_dataframe.query('categoriefiscale != @dominant_fiscal_category')
+        return dominant_fiscal_category, exceptions
 
-        if level == sub_level:
-            stop = True
-
-    if level == 'postes':
-        data_frame['code_coicop'] = data_frame['code_coicop'].str[1:].copy()
-    else:
-        del data_frame['code_coicop']
-
-    data_frame.reset_index(inplace = True, drop = True)
-    data_frame.to_csv(
-        os.path.join(legislation_directory, 'nomenclature_coicop_by_{}.csv'.format(level)),
-        sep = ';',
-        )
-
-    return data_frame
-
-
-def build_coicop_nomenclature():
-    for index in range(len(sub_levels) - 1):
-        level = sub_levels[index]
-        next_level = sub_levels[index + 1]
-        on = sub_levels[:index + 1]
-        if index == 0:
-            coicop_nomenclature = pd.merge(
-                build_coicop_level_nomenclature(level), build_coicop_level_nomenclature(next_level),
-                on = on, left_index = False, right_index = False)
-        else:
-            coicop_nomenclature = pd.merge(coicop_nomenclature, build_coicop_level_nomenclature(next_level), on = on)
-
-    coicop_nomenclature = coicop_nomenclature[
-        ['code_coicop'] +
-        ['label_{}'.format(sub_level[:-1]) for sub_level in sub_levels] +
-        sub_levels
-        ].copy()
-
-    coicop_nomenclature['start'] = 0
-    coicop_nomenclature['stop'] = 0
-    coicop_nomenclature.to_csv(
-        os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
-        sep = ';',
-        )
-    return coicop_nomenclature.copy()
-
-
-def get_dominant_and_exceptions(division):
-    assert division in divisions
-    parametres_fiscalite_file_path = os.path.join(legislation_directory, 'coicop_to_categorie_fiscale.csv')
-    parametres_fiscalite_data_frame = pd.read_csv(
-        parametres_fiscalite_file_path,
-        sep = ';',
-        converters = {'posteCOICOP': unicode}
-        )
-    parametres_fiscalite_data_frame['division'] = parametres_fiscalite_data_frame['posteCOICOP'].str[:2].copy()
-
-    division_dataframe = parametres_fiscalite_data_frame.query('division == @division')
-    dominant_fiscal_category = division_dataframe.categoriefiscale.value_counts().argmax()
-    exceptions = division_dataframe.query('categoriefiscale != @dominant_fiscal_category')
-
-    return dominant_fiscal_category, exceptions
-
-
-def format_exceptions(exceptions):
-    grouped = exceptions.groupby(
-        by = [exceptions.annee - np.arange(exceptions.shape[0]), 'posteCOICOP', 'categoriefiscale']
-        )
-    for k, g in grouped:
-        # print g
-        print g.posteCOICOP.unique(), g.description.unique(), g.annee.min(), g.annee.max(), \
-            taxe_by_categorie_fiscale_number[int(g.categoriefiscale.unique())]
-
-
-for coicop_division in divisions:
-    dominant, exceptions = get_dominant_and_exceptions(coicop_division)
-    print coicop_division
-    print dominant
-    format_exceptions(exceptions)
-    print "  "
+    for coicop_division in divisions:
+        dominant, exceptions = get_dominant_and_exceptions(coicop_division)
+        print u'\nDivision: {}.\nCatégorie fiscale dominante: {}.\nExceptions:'.format(
+            coicop_division,
+            taxe_by_categorie_fiscale_number[dominant]
+            )
+        format_exceptions(exceptions),
 
 
 def apply_modification(coicop_nomenclature = None, value = None, categorie_fiscale = None, start = 1994, stop = 2014):
@@ -177,8 +105,8 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
     return coicop_nomenclature
 
 
-def add_categorie_fiscalae()
-    coicop_nomenclature = build_coicop_nomenclature()
+def build_coicop_nomenclature_with_fiscal_categories():
+    coicop_nomenclature = build_coicop_nomenclature.build_coicop_nomenclature()
 
     # 01 Produits alimentaires et boissons non alcoolisées
     # ils sont tous à taux réduit
@@ -249,7 +177,7 @@ def add_categorie_fiscalae()
     # TODO ajouter loyers fictifs
     # 05 Ameublement, équipement ménager et entretien courant de la maison
     ameublement = dict(
-        value= 5,
+        value = 5,
         categorie_fiscale = 'tva_taux_plein',
         )
     # sauf Services domestiques et autres services pour l'habitation
@@ -513,7 +441,6 @@ def add_categorie_fiscalae()
         categorie_fiscale = '',
         )
 
-
     for member in [
         # 01
         alimentation, margarine, confiserie,
@@ -540,7 +467,7 @@ def add_categorie_fiscalae()
         # 09
         loisirs_cuture, journaux_periodiques, livre, livre_reforme_2012, jeux_hasard,
         services_culturels, services_culturels_reforme_2012,
-        services_recreatifs_sportifs, services_culturels_reforme_2012,
+        services_recreatifs_sportifs, services_recreatifs_sportifs_reforme_2012,
         # 10 Education
         # 11 Hotellerie restauration
         hotellerie_restauration, cantines, service_hebergement,
@@ -551,8 +478,12 @@ def add_categorie_fiscalae()
         autres_biens_et_services, intermediation_financiere,
         autres_assurances, assurance_transports, assurance_vie, assurance_maladie, assurance_habitation,
         protection_sociale_reforme_2000, protection_sociale_reforme_2012,
-        ]:
+        prostitution]:
         coicop_nomenclature = apply_modification(coicop_nomenclature, **member)
 
-    return coicop_nomencalture
+    return coicop_nomenclature
 
+
+if __name__ == "__main__":
+    extract_informations_from_coicop_to_categorie_fiscale()
+    coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories()
