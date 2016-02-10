@@ -177,350 +177,382 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
     return coicop_nomenclature
 
 
-coicop_nomenclature = build_coicop_nomenclature()
+def add_categorie_fiscalae()
+    coicop_nomenclature = build_coicop_nomenclature()
 
-# 01 Produits alimentaires et boissons non alcoolisées
-# ils sont tous à taux réduit
-alimentation = dict(
-    value = 1,
-    categorie_fiscale = 'tva_taux_reduit'
-    )
-# sauf la margarine à taux plein
-margarine = dict(
-    value = '01.1.5.2.2',
-    categorie_fiscale = 'tva_taux_plein',
-    )
-# et les confiseries et le chocolat  # TODO check
-confiserie = dict(
-    value = ['01.1.8.1.3', '01.1.8.2.1', '01.1.8.2.2'],
-    categorie_fiscale = 'tva_taux_plein'
-    )
-# 02 Boissons alcoolisées et tabac
-# alccols forts
-alcools = dict(
-    value = '02.1.1',
-    categorie_fiscale = 'alcools_forts',
-    )
-# vins et boissons fermentées
-vin = dict(
-    value = '02.1.2',
-    categorie_fiscale = 'vin',
-    )
-# bière
-biere = dict(
-    value = '02.1.3',
-    categorie_fiscale = 'biere',
-    )
-# TODO: tabac
-# u'02202'] ['Cigares et cigarillos'] 1994 2014 cigares
-# [u'02201'] ['Cigarettes'] 1994 2014 cigarettes
-# TODO: Rajouter Stupéfiants sans taxe
-#
-# 03 Habillement et chaussures
-habillement = dict(
-    value = 3,
-    categorie_fiscale = 'tva_taux_plein'
-    )
+    # 01 Produits alimentaires et boissons non alcoolisées
+    # ils sont tous à taux réduit
+    alimentation = dict(
+        value = 1,
+        categorie_fiscale = 'tva_taux_reduit'
+        )
+    # sauf la margarine à taux plein
+    margarine = dict(
+        value = '01.1.5.2.2',
+        categorie_fiscale = 'tva_taux_plein',
+        )
+    # et les confiseries et le chocolat  # TODO check
+    confiserie = dict(
+        value = ['01.1.8.1.3', '01.1.8.2.1', '01.1.8.2.2'],
+        categorie_fiscale = 'tva_taux_plein'
+        )
+    # 02 Boissons alcoolisées et tabac
+    # alccols forts
+    alcools = dict(
+        value = '02.1.1',
+        categorie_fiscale = 'alcools_forts',
+        )
+    # vins et boissons fermentées
+    vin = dict(
+        value = '02.1.2',
+        categorie_fiscale = 'vin',
+        )
+    # bière
+    biere = dict(
+        value = '02.1.3',
+        categorie_fiscale = 'biere',
+        )
+    # TODO: tabac
+    # u'02202'] ['Cigares et cigarillos'] 1994 2014 cigares
+    # [u'02201'] ['Cigarettes'] 1994 2014 cigarettes
+    # TODO: Rajouter Stupéfiants sans taxe
+    #
+    # 03 Habillement et chaussures
+    habillement = dict(
+        value = 3,
+        categorie_fiscale = 'tva_taux_plein'
+        )
 
-# 04 Logement, eau, gaz, électricité et autres combustibles
-logement = dict(
-    value = 4,
-    categorie_fiscale = 'tva_taux_plein',
-    )
-# sauf distribution d'eau, enlèvement des ordures ménagères, assainissement, autres services liés au logement n.d.a.
-# qui sont au taux réduit de 1994 à 2011
-eau_ordures_assainissement = dict(
-    value = ['04.4.1.1.1', '04.4.1.2.1', '04.4.1.3.1'],
-    categorie_fiscale = 'tva_taux_reduit',
-    stop = '2011',
-    )
-# avant de passer au taux intermédiaire
-eau_ordures_assainissement_reforme_2012 = dict(
-    value = ['04.4.1.1.1', '04.4.1.2.1', '04.4.1.3.1'],
-    categorie_fiscale = 'tva_taux_intermediaire',
-    start = '2012',
-    )
-# et pas de taxation des loyers
-loyers = dict(
-    value = ['04.1.1.1.1', '04.1.1.2.1'],
-    categorie_fiscale = '',
-    )
-# TODO ajouter loyers fictifs
-# 05 Ameublement, équipement ménager et entretien courant de la maison
-ameublement = dict(
-    value= 5,
-    categorie_fiscale = 'tva_taux_plein',
-    )
-# sauf Services domestiques et autres services pour l'habitation
-services_domestiques = dict(
-    value = '05.6.2',
-    categorie_fiscale = 'tva_taux_reduit',
-    )
-# 06 Santé pas taxée
-sante = dict(
-    value = 6,
-    categorie_fiscale = '',
-    )
-# sauf pharmacie
-pharmacie = dict(
-    value = '06.1.1.1',
-    categorie_fiscale = 'tva_taux_super_reduit',
-    )
-# parapharmacie
-parapharmacie = dict(
-    value = '06.1.1.2',
-    categorie_fiscale = 'tva_taux_plein',
-    )
-# materiel therapeutique
-materiel_therapeutique = dict(
-    value = '06.1.1.3',
-    categorie_fiscale = 'tva_taux_reduit',
-    )
-# 07 Transports
-transports = dict(
-    value = 7,
-    categorie_fiscale = 'tva_taux_plein',
-    )
-# Transport combine de passagers change en 2012 #
-transport_combine_passagers = dict(
-    value = '07.3.5',
-    categorie_fiscale = 'tva_taux_reduit',
-    stop = 2011,
-    )
-transport_combine_passagers_reforme_2012 = dict(
-    value = '07.3.5',
-    categorie_fiscale = 'tva_taux_intermediaire',
-    start = 2012,
-    )
-# Transport maritime et fluvial de passagers change en 2011  Attention 07.3.4 dans enquête BDF
-transport_maritime = dict(
-    value = '07.3.6',
-    categorie_fiscale = 'tva_taux_reduit',
-    stop = 2011,
-    )
-transport_maritime_reforme_2012 = dict(
-    value = '07.3.6',
-    categorie_fiscale = 'tva_taux_intermediaire',
-    start = 2012,
-    )
-# Transport aérien de passagers change en 2012
-transport_aerien = dict(
-    value = '07.3.3',
-    categorie_fiscale = 'tva_taux_reduit',
-    stop = 2011,
-    )
-transport_aerien_reforme_2012 = dict(
-    value = '07.3.3',
-    categorie_fiscale = 'tva_taux_intermediaire',
-    start = 2012,
-    )
-# Transport routier de passagers 1994 2011 change en 2012
-transport_routier = dict(
-    value = '07.3.2',
-    categorie_fiscale = 'tva_taux_reduit',
-    stop = 2011,
-    )
-transport_routier_reforme_2012 = dict(
-    value = '07.3.2',
-    categorie_fiscale = 'tva_taux_intermediaire',
-    start = 2012,
-    )
-# Transport ferroviaire de passagers change en 2012
-transport_ferroviaire = dict(
-    value = '07.3.1',
-    categorie_fiscale = 'tva_taux_reduit',
-    stop = 2011,
-    )
-transport_ferroviaire_reforme_2012 = dict(
-    value = '07.3.1',
-    categorie_fiscale = 'tva_taux_intermediaire',
-    start = 2012,
-    )
-# Carburants et lubrifiants pour v\xe9hicules de tourisme 1994 2014
-carburants_lubrifiants = dict(
-    value = '07.2.2',
-    categorie_fiscale = 'ticpe',
-    )
-# 08 Communications
-communications = dict(
-    value = 8,
-    categorie_fiscale = 'tva_taux_plein',
-    )
-services_postaux = dict(
-    value = '08.1.1,1',
-    categorie_fiscale = '',
-    )
-# 09 Loisirs et cutures
-loisirs_cuture = dict(
-    value = 9,
-    categorie_fiscale = 'tva_taux_plein',
-    )
-# Journaux et publications périodiques']
-journaux_periodiques = dict(
-    value = '09.5.2',
-    categorie_fiscale = 'tva_taux_super_reduit',
-    )
-# Livre'
-livre = dict(
-    value = '09.5.1',
-    categorie_fiscale = 'tva_taux_reduit',
-    stop = 2011,
-    )
-livre_reforme_2012 = dict(
-    value = '09.5.1',
-    categorie_fiscale = 'tva_taux_intermediaire',
-    start = 2012,
-    )
-# Jeux de hasard TODO: trouver les jeux de hasard
-jeux_hasard = dict(
-    value = '09.4.3',
-    categorie_fiscale = '',
-    )
-# Services culturels
-services_culturels = dict(
-    value = '09.4.2',
-    categorie_fiscale = 'tva_taux_reduit',
-    stop = 2011,
-    )
-# Services culturels
-services_culturels_reforme_2012 = dict(
-    value = '09.4.2',
-    categorie_fiscale = 'tva_taux_intermediaire',
-    start = 2012,
-    )
-# Services récréatifs et sportifs
-services_recreatifs_sportifs = dict(
-    value = '09.4.1',
-    categorie_fiscale = 'tva_taux_reduit',
-    stop = 2011,
-    )
-services_recreatifs_sportifs_reforme_2012 = dict(
-    value = '09.4.1',
-    categorie_fiscale = 'tva_taux_intermediaire',
-    start = 2012,
-    )
-# 10 Education TODO: check and introduce     categorie_fiscale = '' if needed
-# Hotellerie restauration
-hotellerie_restauration = dict(
-    value = 11,
-    categorie_fiscale = 'tva_taux_reduit',
-    )
-# Cantines'] 1994
-cantines = dict(
-    value = '11.1.2',
-    categorie_fiscale = '',
-    )
-# Services d'hébergement 2012 2014
-service_hebergement = dict(
-    value = '11.2.1',  # TODO: check
-    categorie_fiscale = 'tva_taux_intermediaire',
-    start = 2012,
-    )
-# Consommation de boissons alcoolisées
-consommation_boissons_alcoolisees = dict(
-    value = ['11.1.1.2.2', '11.1.1.2.3', '11.1.1.2.4'],  # TODO check
-    categorie_fiscale = 'tva_taux_plein',
-    )
-# Restauration sur place 1994 2009
-restauration_sur_place = dict(
-    value = '11.1.1.1.1',
-    categorie_fiscale = 'tva_taux_plein',
-    stop = 2009,
-    )
-restauration_sur_place_reforme_2010 = dict(
-    value = '11.1.1.1.1',
-    categorie_fiscale = 'tva_taux_reduit',
-    start = 2010,
-    stop = 2011,
-    )
-# Restauration sur place 2012 2014
-restauration_sur_place_reforme_2012 = dict(
-    value = '11.1.1.1.1',
-    categorie_fiscale = 'tva_taux_intermediaire',
-    start = 2012,
-    )
-# Restauration à emporter 1994 1997
-restauration_a_emporter = dict(
-    value = '11.1.1.1.2',
-    categorie_fiscale = 'tva_taux_plein',
-    stop = 1997,
-    )
-# Restauration à emporter 2010 2011
-restauration_a_emporter_reforme_2010 = dict(
-    value = '11.1.1.1.2',
-    categorie_fiscale = 'tva_taux_reduit',
-    start = 1998,
-    stop = 2011,
-    )
-# Restauration à emporter 2012 2014
-restauration_a_emporter_reforme_2012 = dict(
-    value = '11.1.1.1.2',
-    categorie_fiscale = 'tva_taux_intermediaire',
-    start = 2012,
-    )
-
-
-for member in [
-    # 01
-    alimentation, margarine, confiserie,
-    # 02
-    alcools, vin, biere,
-    # 03
-    habillement,
-    # 04
-    logement, eau_ordures_assainissement, eau_ordures_assainissement_reforme_2012, loyers,
-    # 05
-    ameublement, services_domestiques,
-    # 06
-    sante, pharmacie, parapharmacie, materiel_therapeutique,
-    # 07
-    transports,
-    transport_combine_passagers, transport_combine_passagers_reforme_2012,
-    transport_maritime, transport_maritime_reforme_2012,
-    transport_aerien, transport_aerien_reforme_2012,
-    transport_routier, transport_routier_reforme_2012,
-    transport_ferroviaire, transport_ferroviaire_reforme_2012,
-    carburants_lubrifiants,
-    # 08
-    communications, services_postaux,
-    # 09
-    loisirs_cuture, journaux_periodiques, livre, livre_reforme_2012, jeux_hasard,
-    services_culturels, services_culturels_reforme_2012,
-    services_recreatifs_sportifs, services_culturels_reforme_2012,
-    # 10 Education
+    # 04 Logement, eau, gaz, électricité et autres combustibles
+    logement = dict(
+        value = 4,
+        categorie_fiscale = 'tva_taux_plein',
+        )
+    # sauf distribution d'eau, enlèvement des ordures ménagères, assainissement, autres services liés au logement n.d.a.
+    # qui sont au taux réduit de 1994 à 2011
+    eau_ordures_assainissement = dict(
+        value = ['04.4.1.1.1', '04.4.1.2.1', '04.4.1.3.1'],
+        categorie_fiscale = 'tva_taux_reduit',
+        stop = '2011',
+        )
+    # avant de passer au taux intermédiaire
+    eau_ordures_assainissement_reforme_2012 = dict(
+        value = ['04.4.1.1.1', '04.4.1.2.1', '04.4.1.3.1'],
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = '2012',
+        )
+    # et pas de taxation des loyers
+    loyers = dict(
+        value = ['04.1.1.1.1', '04.1.1.2.1'],
+        categorie_fiscale = '',
+        )
+    # TODO ajouter loyers fictifs
+    # 05 Ameublement, équipement ménager et entretien courant de la maison
+    ameublement = dict(
+        value= 5,
+        categorie_fiscale = 'tva_taux_plein',
+        )
+    # sauf Services domestiques et autres services pour l'habitation
+    services_domestiques = dict(
+        value = '05.6.2',
+        categorie_fiscale = 'tva_taux_reduit',
+        )
+    # 06 Santé pas taxée
+    sante = dict(
+        value = 6,
+        categorie_fiscale = '',
+        )
+    # sauf pharmacie
+    pharmacie = dict(
+        value = '06.1.1.1',
+        categorie_fiscale = 'tva_taux_super_reduit',
+        )
+    # parapharmacie
+    parapharmacie = dict(
+        value = '06.1.1.2',
+        categorie_fiscale = 'tva_taux_plein',
+        )
+    # materiel therapeutique
+    materiel_therapeutique = dict(
+        value = '06.1.1.3',
+        categorie_fiscale = 'tva_taux_reduit',
+        )
+    # 07 Transports
+    transports = dict(
+        value = 7,
+        categorie_fiscale = 'tva_taux_plein',
+        )
+    # Transport combine de passagers change en 2012 #
+    transport_combine_passagers = dict(
+        value = '07.3.5',
+        categorie_fiscale = 'tva_taux_reduit',
+        stop = 2011,
+        )
+    transport_combine_passagers_reforme_2012 = dict(
+        value = '07.3.5',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # Transport maritime et fluvial de passagers change en 2011  Attention 07.3.4 dans enquête BDF
+    transport_maritime = dict(
+        value = '07.3.6',
+        categorie_fiscale = 'tva_taux_reduit',
+        stop = 2011,
+        )
+    transport_maritime_reforme_2012 = dict(
+        value = '07.3.6',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # Transport aérien de passagers change en 2012
+    transport_aerien = dict(
+        value = '07.3.3',
+        categorie_fiscale = 'tva_taux_reduit',
+        stop = 2011,
+        )
+    transport_aerien_reforme_2012 = dict(
+        value = '07.3.3',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # Transport routier de passagers 1994 2011 change en 2012
+    transport_routier = dict(
+        value = '07.3.2',
+        categorie_fiscale = 'tva_taux_reduit',
+        stop = 2011,
+        )
+    transport_routier_reforme_2012 = dict(
+        value = '07.3.2',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # Transport ferroviaire de passagers change en 2012
+    transport_ferroviaire = dict(
+        value = '07.3.1',
+        categorie_fiscale = 'tva_taux_reduit',
+        stop = 2011,
+        )
+    transport_ferroviaire_reforme_2012 = dict(
+        value = '07.3.1',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # Carburants et lubrifiants pour véhicules de tourisme 1994 2014
+    carburants_lubrifiants = dict(
+        value = '07.2.2',
+        categorie_fiscale = 'ticpe',
+        )
+    # 08 Communications
+    communications = dict(
+        value = 8,
+        categorie_fiscale = 'tva_taux_plein',
+        )
+    services_postaux = dict(
+        value = '08.1.1,1',
+        categorie_fiscale = '',
+        )
+    # 09 Loisirs et cutures
+    loisirs_cuture = dict(
+        value = 9,
+        categorie_fiscale = 'tva_taux_plein',
+        )
+    # Journaux et publications périodiques']
+    journaux_periodiques = dict(
+        value = '09.5.2',
+        categorie_fiscale = 'tva_taux_super_reduit',
+        )
+    # Livre'
+    livre = dict(
+        value = '09.5.1',
+        categorie_fiscale = 'tva_taux_reduit',
+        stop = 2011,
+        )
+    livre_reforme_2012 = dict(
+        value = '09.5.1',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # Jeux de hasard TODO: trouver les jeux de hasard
+    jeux_hasard = dict(
+        value = '09.4.3',
+        categorie_fiscale = '',
+        )
+    # Services culturels
+    services_culturels = dict(
+        value = '09.4.2',
+        categorie_fiscale = 'tva_taux_reduit',
+        stop = 2011,
+        )
+    # Services culturels
+    services_culturels_reforme_2012 = dict(
+        value = '09.4.2',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # Services récréatifs et sportifs
+    services_recreatifs_sportifs = dict(
+        value = '09.4.1',
+        categorie_fiscale = 'tva_taux_reduit',
+        stop = 2011,
+        )
+    services_recreatifs_sportifs_reforme_2012 = dict(
+        value = '09.4.1',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # 10 Education TODO: check and introduce     categorie_fiscale = '' if needed
     # 11 Hotellerie restauration
-    hotellerie_restauration, cantines, service_hebergement,
-    consommation_boissons_alcoolisees,
-    restauration_sur_place, restauration_sur_place_reforme_2010, restauration_sur_place_reforme_2012,
-    restauration_a_emporter, restauration_a_emporter_reforme_2010, restauration_a_emporter_reforme_2012,
-    ]:
-    coicop_nomenclature = apply_modification(coicop_nomenclature, **member)
+    hotellerie_restauration = dict(
+        value = 11,
+        categorie_fiscale = 'tva_taux_reduit',
+        )
+    # Cantines'] 1994
+    cantines = dict(
+        value = '11.1.2',
+        categorie_fiscale = '',
+        )
+    # Services d'hébergement 2012 2014
+    service_hebergement = dict(
+        value = '11.2.1',  # TODO: check
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # Consommation de boissons alcoolisées
+    consommation_boissons_alcoolisees = dict(
+        value = ['11.1.1.2.2', '11.1.1.2.3', '11.1.1.2.4'],  # TODO check
+        categorie_fiscale = 'tva_taux_plein',
+        )
+    # Restauration sur place 1994 2009
+    restauration_sur_place = dict(
+        value = '11.1.1.1.1',
+        categorie_fiscale = 'tva_taux_plein',
+        stop = 2009,
+        )
+    restauration_sur_place_reforme_2010 = dict(
+        value = '11.1.1.1.1',
+        categorie_fiscale = 'tva_taux_reduit',
+        start = 2010,
+        stop = 2011,
+        )
+    # Restauration sur place 2012 2014
+    restauration_sur_place_reforme_2012 = dict(
+        value = '11.1.1.1.1',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # Restauration à emporter 1994 1997
+    restauration_a_emporter = dict(
+        value = '11.1.1.1.2',
+        categorie_fiscale = 'tva_taux_plein',
+        stop = 1997,
+        )
+    # Restauration à emporter 2010 2011
+    restauration_a_emporter_reforme_2010 = dict(
+        value = '11.1.1.1.2',
+        categorie_fiscale = 'tva_taux_reduit',
+        start = 1998,
+        stop = 2011,
+        )
+    # Restauration à emporter 2012 2014
+    restauration_a_emporter_reforme_2012 = dict(
+        value = '11.1.1.1.2',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # 12 Autres biens et services
+    autres_biens_et_services = dict(
+        value = 12,
+        categorie_fiscale = 'tva_taux_plein',
+        )
+    # Couts des services d'intermédiation financière indirectement mesurés
+    intermediation_financiere = dict(
+        value = '12.6.1',
+        categorie_fiscale = '',
+        )
+    # Autres assurances  # TODO
+    autres_assurances = dict(
+        value = '1255',
+        categorie_fiscale = 'autres_assurances',
+        )
+    # Assurance_transports
+    assurance_transports = dict(
+        value = '12.5.4',
+        categorie_fiscale = 'assurance_transport',
+        )
+    # Assurance maladie
+    assurance_maladie = dict(
+        value = '12.5.3',
+        categorie_fiscale = 'assurance_sante',
+        )
+    # Assurance habitation
+    assurance_habitation = dict(
+        value = '12.5.2',
+        categorie_fiscale = 'autres_assurances',
+        )
+    # Assurance vie  # TODO où sont les coicop 12.5.1
+    assurance_vie = dict(
+        value = '1251',
+        categorie_fiscale = 'autres_assurances',
+        )
+    # Protection sociale TODO: check tva_taux_plein avant 2000
+    protection_sociale_reforme_2000 = dict(
+        value = '12.4',
+        categorie_fiscale = 'tva_taux_reduit',
+        start = 2000,
+        stop = 2011,
+        )
+    # Protection sociale
+    protection_sociale_reforme_2012 = dict(
+        value = '12.4',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # Prostitution TODO check
+    prostitution = dict(
+        value = '1220',
+        categorie_fiscale = '',
+        )
 
 
-boum
+    for member in [
+        # 01
+        alimentation, margarine, confiserie,
+        # 02
+        alcools, vin, biere,
+        # 03
+        habillement,
+        # 04
+        logement, eau_ordures_assainissement, eau_ordures_assainissement_reforme_2012, loyers,
+        # 05
+        ameublement, services_domestiques,
+        # 06
+        sante, pharmacie, parapharmacie, materiel_therapeutique,
+        # 07
+        transports,
+        transport_combine_passagers, transport_combine_passagers_reforme_2012,
+        transport_maritime, transport_maritime_reforme_2012,
+        transport_aerien, transport_aerien_reforme_2012,
+        transport_routier, transport_routier_reforme_2012,
+        transport_ferroviaire, transport_ferroviaire_reforme_2012,
+        carburants_lubrifiants,
+        # 08
+        communications, services_postaux,
+        # 09
+        loisirs_cuture, journaux_periodiques, livre, livre_reforme_2012, jeux_hasard,
+        services_culturels, services_culturels_reforme_2012,
+        services_recreatifs_sportifs, services_culturels_reforme_2012,
+        # 10 Education
+        # 11 Hotellerie restauration
+        hotellerie_restauration, cantines, service_hebergement,
+        consommation_boissons_alcoolisees,
+        restauration_sur_place, restauration_sur_place_reforme_2010, restauration_sur_place_reforme_2012,
+        restauration_a_emporter, restauration_a_emporter_reforme_2010, restauration_a_emporter_reforme_2012,
+        # 12
+        autres_biens_et_services, intermediation_financiere,
+        autres_assurances, assurance_transports, assurance_vie, assurance_maladie, assurance_habitation,
+        protection_sociale_reforme_2000, protection_sociale_reforme_2012,
+        ]:
+        coicop_nomenclature = apply_modification(coicop_nomenclature, **member)
 
+    return coicop_nomencalture
 
-
-
-#
-#11
-#2
-#[u'1112'] ['Cantines'] 1994 2001
-#[u'1120'] ["Services d'h\xe9bergement"] 2012 2014 tva_taux_intermediaire
-#[u'11114'] ['Consommation de boissons alcoolis\xe9es'] 1994 2014 tva_taux_plein
-#[u'11113'] ['Restauration sur place'] 1994 2009 tva_taux_plein
-#[u'11113'] ['Restauration sur place'] 2012 2014 tva_taux_intermediaire
-#[u'11112'] ['Restauration \xe0 emporter'] 1994 1997 tva_taux_plein
-#[u'11112'] ['Restauration \xe0 emporter'] 2012 2014 tva_taux_intermediaire
-#
-#12
-#3
-#[u'1261'] [ "Co\xfbts des services d'interm\xe9diation financi\xe8re indirectement mesur\xe9s"] 1994 2014
-#[u'1255'] ['Autres assurances'] 1994 2014 autres_assurances
-#[u'1254'] ['Assurance transports'] 1994 2014 assurance_transport
-#[u'1253'] ['Assurance maladie'] 1994 2014 assurance_sante
-#[u'1252'] ['Assurance habitation'] 1994 2014 autres_assurances
-#[u'1251'] ['Assurance vie'] 1994 2014 autres_assurances
-#[u'1240'] ['Protection sociale'] 2000 2011 tva_taux_reduit
-#[u'1240'] ['Protection sociale'] 2012 2014 tva_taux_intermediaire
-#[u'1220'] ['Prostitution'] 1994 2014
