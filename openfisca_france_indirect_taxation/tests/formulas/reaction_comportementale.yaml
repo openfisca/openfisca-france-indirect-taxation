@@ -1,9 +1,7 @@
- - name: "Test réaction comportementale "
+ - name: u"Test réaction comportementale "
    period: "2013"
    input_variables:
      essence_depenses: 1000
-     reforme_essence: 0.30
-     super_95_ttc: 1.50
      carburants_elasticite_prix: -0.4
    output_variables:
-    essence_depenses_ajustees: 1000 * (1 + (0.4 * 0.3 / 1.5))
+     essence_depenses_ajustees: 1000 * (1 + (-0.4 * 30 / 153.67))  #  super_95_ttc = 153.673461538
