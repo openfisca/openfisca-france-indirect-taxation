@@ -38,7 +38,7 @@ def test_diesel_ticpe():
             birth = datetime.date(year - 40, 1, 1),
             ),
         menage = dict(
-            consommation_ticpe = 100,
+            depenses_carburants = 100,
             veh_diesel = 1,
             veh_essence = 0,
             ),
@@ -59,7 +59,7 @@ def test_essence_ticpe():
             birth = datetime.date(year - 40, 1, 1),
             ),
         menage = dict(
-            consommation_ticpe = 100,
+            depenses_carburants = 100,
             veh_essence = 1,
             veh_diesel = 0,
             ),
@@ -88,13 +88,13 @@ def test_depenses_carburants():
             birth = datetime.date(year - 40, 1, 1),
             ),
         menage = dict(
-            consommation_ticpe = 100,
+            depenses_carburants = 100,
             veh_diesel = 2,
             veh_essence = 1,
             ),
         ).new_simulation(debug = True)
 
-    assert_near(simulation.calculate('diesel_depenses'), 75.075, .01)
+    assert_near(simulation.calculate('depenses_diesel'), 75.075, .01)
 
 
 if __name__ == '__main__':

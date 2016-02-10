@@ -21,9 +21,9 @@ if __name__ == '__main__':
         'pondmen',
         'revtot',
         'rev_disp_loyerimput',
-        'consommation_ticpe',
-        'essence_depenses',
-        'diesel_depenses',
+        'depenses_carburants',
+        'depenses_essence',
+        'depenses_diesel',
         'strate',
         'nenfants',
         'nadultes',
@@ -38,9 +38,9 @@ if __name__ == '__main__':
     # In 2005 3 people consume fuel while their rev_disp_loyerimput is 0. Creates inf number in part_carburants
     data_for_reg = data_for_reg[data_for_reg['rev_disp_loyerimput'] > 0]
     data_for_reg['rev_disp_loyerimput_2'] = data_for_reg['rev_disp_loyerimput'] ** 2
-    data_for_reg['part_carburants'] = data_for_reg['consommation_ticpe'] / data_for_reg['rev_disp_loyerimput']
-    data_for_reg['part_diesel'] = data_for_reg['diesel_depenses'] / data_for_reg['rev_disp_loyerimput']
-    data_for_reg['part_essence'] = data_for_reg['essence_depenses'] / data_for_reg['rev_disp_loyerimput']
+    data_for_reg['part_carburants'] = data_for_reg['depenses_carburants'] / data_for_reg['rev_disp_loyerimput']
+    data_for_reg['part_diesel'] = data_for_reg['depenses_diesel'] / data_for_reg['rev_disp_loyerimput']
+    data_for_reg['part_essence'] = data_for_reg['depenses_essence'] / data_for_reg['rev_disp_loyerimput']
 
     data_for_reg['rural'] = 0
     data_for_reg['petite_villes'] = 0

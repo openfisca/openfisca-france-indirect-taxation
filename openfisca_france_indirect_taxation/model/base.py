@@ -59,10 +59,10 @@ def droit_d_accise(depense, droit_cn, consommation_cn, taux_plein_tva):
 
 
 def taux_implicite(accise, tva, prix_ttc):
-    """Calcule le taux implicite sur les carburants"""
+    """Calcule le taux implicite sur les carburants : pttc = pht * (1+ti) * (1+tva), ici on obtient ti"""
     return (accise * (1 + tva)) / (prix_ttc - accise * (1 + tva))
 
 
 def tax_from_expense_including_tax(expense = None, tax_rate = None):
-    """Compute the tax amount form the expense including tax"""
+    """Compute the tax amount form the expense including tax : si Dttc = (1+t) * Dht, ici on obtient t * Dht"""
     return expense * tax_rate / (1 + tax_rate)

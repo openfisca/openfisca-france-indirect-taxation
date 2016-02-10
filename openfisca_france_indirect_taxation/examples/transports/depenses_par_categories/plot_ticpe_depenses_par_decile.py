@@ -34,9 +34,9 @@ if __name__ == '__main__':
         'ticpe_totale',
         'diesel_ticpe',
         'essence_ticpe',
-        'consommation_ticpe',
-        'diesel_depenses',
-        'essence_depenses'
+        'depenses_carburants',
+        'depenses_diesel',
+        'depenses_essence'
         ]
 
     # Le but est de construire un graphique représentant les 3 années pour chaque variable. On fait donc une boucle
@@ -57,9 +57,9 @@ if __name__ == '__main__':
             df.rename(columns = {'ticpe_totale': 'ticpe totale {}'.format(year),
                 'diesel_ticpe': 'ticpe diesel {}'.format(year),
                 'essence_ticpe': 'ticpe essence {}'.format(year),
-                'consommation_ticpe': 'depenses carburants {}'.format(year),
-                'diesel_depenses': 'depenses diesel {}'.format(year),
-                'essence_depenses': 'depenses essence {}'.format(year)},
+                'depenses_carburants': 'depenses carburants {}'.format(year),
+                'depenses_diesel': 'depenses diesel {}'.format(year),
+                'depenses_essence': 'depenses essence {}'.format(year)},
                 inplace = True)
 
             if depenses is not None:

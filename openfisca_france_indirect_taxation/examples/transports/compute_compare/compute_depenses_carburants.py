@@ -25,8 +25,8 @@ if __name__ == '__main__':
     # Liste des variables que l'on veut simuler
     simulated_variables = [
         'pondmen',
-        'diesel_depenses',
-        'essence_depenses',
+        'depenses_diesel',
+        'depenses_essence',
         'coicop12_7'
         ]
 
@@ -37,8 +37,8 @@ if __name__ == '__main__':
     depenses_essence_totales = dict()
     for year in [2000, 2005, 2011]:
         data_simulation = simulate_df_calee_on_ticpe(simulated_variables = simulated_variables, year = year)
-        depenses_diesel = (data_simulation['diesel_depenses'] * data_simulation['pondmen']).sum()
-        depenses_essence = (data_simulation['essence_depenses'] * data_simulation['pondmen']).sum()
+        depenses_diesel = (data_simulation['depenses_diesel'] * data_simulation['pondmen']).sum()
+        depenses_essence = (data_simulation['depenses_essence'] * data_simulation['pondmen']).sum()
         depenses_carburants = depenses_diesel + depenses_essence
         depenses_transports = (data_simulation['coicop12_7'] * data_simulation['pondmen']).sum()
 
