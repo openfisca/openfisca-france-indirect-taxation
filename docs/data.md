@@ -1,3 +1,12 @@
+# Les différents types de données et leur articulation
+
+Afin de réaliser le modèle de microsimulation le plus adpaté aux besoins de l'utilisateur, il est nécessaire d'exploiter différents type de données:
+ - données micro issues d'enquêtes sur la consommation individuelle des ménages (enquête budget des familles de l'INSEE ou autre),
+ - informations tirées de la législation (taux de TVA, TICPE, _etc_.),
+ - données agrégées afin d'effectuer d'inflater en masse, de réaliser des calages (éventuellement sur marges) et ou de veillir les données microéconomiques.
+
+Il est nécessaire de pouvoir réaliser une correspondace entre les différents postes de consommation (et leurs divers agrégats)
+
 # Préparation des données
 
 ## Importation des données brutes
