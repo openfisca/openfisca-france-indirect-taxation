@@ -3,9 +3,11 @@
 
 from __future__ import division
 
+
 import os
 import pandas as pd
 import pkg_resources
+# import sys
 
 
 legislation_directory = os.path.join(
@@ -17,11 +19,30 @@ legislation_directory = os.path.join(
 
 
 sub_levels = ['divisions', 'groupes', 'classes', 'sous_classes', 'postes']
+divisions = ['0{}'.format(i) for i in range(1, 10)] + ['11', '12']  # TODO: fix this
+taxe_by_categorie_fiscale_number = {
+    0: '',
+    1: 'tva_taux_super_reduit',
+    2: 'tva_taux_reduit',
+    3: 'tva_taux_plein',
+    4: 'tva_taux_intermediaire',
+    7: 'cigarettes',
+    8: 'cigares',
+    9: 'tabac_a_rouler',
+    10: 'alcools_forts',
+    11: 'tva_taux_plein',
+    12: 'vin',
+    13: 'biere',
+    14: 'ticpe',
+    15: 'assurance_transport',
+    16: 'assurance_sante',
+    17: 'autres_assurances'
+    }
 
 
 def build_coicop_level_nomenclature(level):
     assert level in sub_levels
-    data_frame = pd.DataFrame.from_csv(
+    data_frame = pd.read_csv(
         os.path.join(legislation_directory, 'nomenclature_coicop_source_by_{}.csv'.format(level)),
         sep = ';',
         header = -1,
@@ -32,7 +53,7 @@ def build_coicop_level_nomenclature(level):
 
     # Problème dû au fichier Excel, nous devons changer le contenu d'une case:
     if level == 'sous_classes':
-        data_frame.loc[data_frame['code_coicop'] == '01.1.4.4', 'code_coicop'] = "'01.1.4.4"
+        data_frame.loc[data_frame['code_coicop'] == "01.1.4.4", 'code_coicop'] = "'01.1.4.4"
 
     index, stop = 1, False
     for sub_level in sub_levels:
@@ -67,7 +88,6 @@ def build_coicop_nomenclature():
         level = sub_levels[index]
         next_level = sub_levels[index + 1]
         on = sub_levels[:index + 1]
-        print index, level, next_level
         if index == 0:
             coicop_nomenclature = pd.merge(
                 build_coicop_level_nomenclature(level), build_coicop_level_nomenclature(next_level),
@@ -81,32 +101,19 @@ def build_coicop_nomenclature():
         sub_levels
         ].copy()
 
+    coicop_nomenclature['start'] = 0
+    coicop_nomenclature['stop'] = 0
     coicop_nomenclature.to_csv(
         os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
         sep = ';',
         )
-    return coicop_nomenclature
+    return coicop_nomenclature.copy()
 
 
-def get_dominant_and_exceptions(division):
-    assert division in ['0{}'.format(i) for i in range(1, 10)] + [11, 12]  # TODO: fix this
-    parametres_fiscalite_file_path = os.path.join(legislation_directory, 'coicop_to_categorie_fiscale.csv')
-    parametres_fiscalite_data_frame = pd.read_csv(
-        parametres_fiscalite_file_path,
-        sep = ';',
-        converters = {'posteCOICOP': str}
-        )
-    parametres_fiscalite_data_frame['division'] = parametres_fiscalite_data_frame['posteCOICOP'].str[:2].copy()
+# def main():
 
-    division_dataframe = parametres_fiscalite_data_frame.query('division == @division')
-    dominant_fiscal_category = division_dataframe.categoriefiscale.value_counts().argmax()
-    exceptions_dataframe = division_dataframe.query('categoriefiscale != @dominant_fiscal_category')
 
-    return dict(dominant_fiscal_category = dominant_fiscal_category, exceptions_dataframe = exceptions_dataframe)
-
-# TODO:
-# - Get the correct poste coicop usinf desciption and nomenclature coicop
-# - Format exceptions as year_min, year_max, value. Should use http://stackoverflow.com/questions/26121668/slice-pandas-dataframe-in-groups-of-consecutive-values
-# - Deal with the postes that are not in nomenclature coicop (see TODO in get_domiant_and_exceptions)
-# - Try to find the legislative reference for the changes in fiscal category of products
+if __name__ == "__main__":
+    # sys.exit(main())
+    coicop_nomenclature = build_coicop_nomenclature()
 

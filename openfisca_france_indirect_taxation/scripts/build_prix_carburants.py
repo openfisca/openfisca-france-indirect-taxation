@@ -9,7 +9,7 @@ Created on Tue Aug 11 16:05:22 2015
 
 import pkg_resources
 import os
-import numpy as np
+
 
 from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_annuel_carburants_90_14, \
     prix_mensuel_carburants_90_15
