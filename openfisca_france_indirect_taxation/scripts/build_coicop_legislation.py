@@ -329,6 +329,10 @@ def build_coicop_nomenclature_with_fiscal_categories():
         start = 2012,
         )
     # 10 Education TODO: check and introduce     categorie_fiscale = '' if needed
+    education = dict(
+        value = 10,
+        categorie_fiscale = '',
+        )
     # 11 Hotellerie restauration
     hotellerie_restauration = dict(
         value = 11,
@@ -469,6 +473,7 @@ def build_coicop_nomenclature_with_fiscal_categories():
         services_culturels, services_culturels_reforme_2012,
         services_recreatifs_sportifs, services_recreatifs_sportifs_reforme_2012,
         # 10 Education
+        education,
         # 11 Hotellerie restauration
         hotellerie_restauration, cantines, service_hebergement,
         consommation_boissons_alcoolisees,
@@ -484,6 +489,13 @@ def build_coicop_nomenclature_with_fiscal_categories():
     return coicop_nomenclature
 
 
+def test_coicop_legislation(coicop_nomenclature):
+    if coicop_nomenclature.categorie_fiscale.isnull().any():
+        print coicop_nomenclature.loc[coicop_nomenclature.categorie_fiscale.isnull()]
+
+
 if __name__ == "__main__":
     extract_informations_from_coicop_to_categorie_fiscale()
     coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories()
+    test_coicop_legislation(coicop_nomenclature)
+    # TODO créer des sous-catégories pour tabac

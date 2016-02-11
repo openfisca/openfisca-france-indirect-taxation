@@ -41,7 +41,6 @@ def merge_with_coicop(data_frame):
     print level
     coicop_nomenclature['poste_coicop'] = coicop_nomenclature['code_coicop'].copy()
     coicop_nomenclature['code_coicop'] = coicop_nomenclature['code_coicop'].str[:2 * level]
-    print coicop_nomenclature['code_coicop'][:5]
     df = data_frame.merge(coicop_nomenclature, on = 'code_coicop', how = 'outer')
     return df[[
         u'label_division', u'label_groupe', u'label_classe', u'label_sous_classe', u'label_poste',

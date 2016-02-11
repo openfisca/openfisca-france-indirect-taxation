@@ -40,7 +40,7 @@ taxe_by_categorie_fiscale_number = {
     }
 
 
-def build_coicop_level_nomenclature(level, keep_code = False):
+def build_coicop_level_nomenclature(level, keep_code = False, to_csv = False, decompose_coicop = False):
     assert level in sub_levels
     data_frame = pd.read_csv(
         os.path.join(legislation_directory, 'nomenclature_coicop_source_by_{}.csv'.format(level)),
@@ -55,19 +55,20 @@ def build_coicop_level_nomenclature(level, keep_code = False):
     if level == 'sous_classes':
         data_frame.loc[data_frame['code_coicop'] == "01.1.4.4", 'code_coicop'] = "'01.1.4.4"
 
-    index, stop = 1, False
-    for sub_level in sub_levels:
-        if stop:
-            continue
-        if sub_level == 'divisions':
-            data_frame[sub_level] = data_frame['code_coicop'].str[index:index + 2].astype(int)
-            index = index + 3
-        else:
-            data_frame[sub_level] = data_frame['code_coicop'].str[index:index + 1].astype(int)
-            index = index + 2
+    if decompose_coicop:
+        index, stop = 1, False
+        for sub_level in sub_levels:
+            if stop:
+                continue
+            if sub_level == 'divisions':
+                data_frame[sub_level] = data_frame['code_coicop'].str[index:index + 2].astype(int)
+                index = index + 3
+            else:
+                data_frame[sub_level] = data_frame['code_coicop'].str[index:index + 1].astype(int)
+                index = index + 2
 
-        if level == sub_level:
-            stop = True
+            if level == sub_level:
+                stop = True
 
     if keep_code or level == 'postes':
         data_frame['code_coicop'] = data_frame['code_coicop'].str[1:].copy()
@@ -75,15 +76,16 @@ def build_coicop_level_nomenclature(level, keep_code = False):
         del data_frame['code_coicop']
 
     data_frame.reset_index(inplace = True, drop = True)
-    data_frame.to_csv(
-        os.path.join(legislation_directory, 'nomenclature_coicop_by_{}.csv'.format(level)),
-        sep = ';',
-        )
+    if to_csv:
+        data_frame.to_csv(
+            os.path.join(legislation_directory, 'nomenclature_coicop_by_{}.csv'.format(level)),
+            sep = ';',
+            )
 
     return data_frame
 
 
-def build_coicop_nomenclature():
+def build_coicop_nomenclature(to_csv = True):
     for index in range(len(sub_levels) - 1):
         level = sub_levels[index]
         next_level = sub_levels[index + 1]
@@ -103,10 +105,11 @@ def build_coicop_nomenclature():
 
     coicop_nomenclature['start'] = 0
     coicop_nomenclature['stop'] = 0
-    coicop_nomenclature.to_csv(
-        os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
-        sep = ';',
-        )
+    if to_csv:
+        coicop_nomenclature.to_csv(
+            os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
+            sep = ';',
+            )
     return coicop_nomenclature.copy()
 
 
