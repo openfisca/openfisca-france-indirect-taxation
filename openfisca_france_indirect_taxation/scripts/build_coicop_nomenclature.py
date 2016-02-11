@@ -40,7 +40,7 @@ taxe_by_categorie_fiscale_number = {
     }
 
 
-def build_coicop_level_nomenclature(level, keep_code = False, to_csv = False, decompose_coicop = False):
+def build_coicop_level_nomenclature(level, keep_code = False, to_csv = False):
     assert level in sub_levels
     data_frame = pd.read_csv(
         os.path.join(legislation_directory, 'nomenclature_coicop_source_by_{}.csv'.format(level)),
@@ -55,20 +55,19 @@ def build_coicop_level_nomenclature(level, keep_code = False, to_csv = False, de
     if level == 'sous_classes':
         data_frame.loc[data_frame['code_coicop'] == "01.1.4.4", 'code_coicop'] = "'01.1.4.4"
 
-    if decompose_coicop:
-        index, stop = 1, False
-        for sub_level in sub_levels:
-            if stop:
-                continue
-            if sub_level == 'divisions':
-                data_frame[sub_level] = data_frame['code_coicop'].str[index:index + 2].astype(int)
-                index = index + 3
-            else:
-                data_frame[sub_level] = data_frame['code_coicop'].str[index:index + 1].astype(int)
-                index = index + 2
+    index, stop = 1, False
+    for sub_level in sub_levels:
+        if stop:
+            continue
+        if sub_level == 'divisions':
+            data_frame[sub_level] = data_frame['code_coicop'].str[index:index + 2].astype(int)
+            index = index + 3
+        else:
+            data_frame[sub_level] = data_frame['code_coicop'].str[index:index + 1].astype(int)
+            index = index + 2
 
-            if level == sub_level:
-                stop = True
+        if level == sub_level:
+            stop = True
 
     if keep_code or level == 'postes':
         data_frame['code_coicop'] = data_frame['code_coicop'].str[1:].copy()
@@ -103,14 +102,13 @@ def build_coicop_nomenclature(to_csv = True):
         sub_levels
         ].copy()
 
-    coicop_nomenclature['start'] = 0
-    coicop_nomenclature['stop'] = 0
     if to_csv:
         coicop_nomenclature.to_csv(
             os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
             sep = ';',
             )
-    return coicop_nomenclature.copy()
+    return coicop_nomenclature[[u'label_division', u'label_groupe', u'label_classe',
+       u'label_sous_classe', u'label_poste', u'code_coicop']].copy()
 
 
 # def main():
