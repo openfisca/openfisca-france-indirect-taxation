@@ -72,10 +72,11 @@ def extract_informations_from_coicop_to_categorie_fiscale():
         format_exceptions(exceptions),
 
 
-def apply_modification(coicop_nomenclature = None, value = None, categorie_fiscale = None, start = 1994, stop = 2014):
+def apply_modification(coicop_nomenclature = None, value = None, categorie_fiscale = None,
+        origin = None, start = 1994, stop = 2014):
     assert coicop_nomenclature is not None
 
-    categorie_fiscale in taxe_by_categorie_fiscale_number.values()
+    assert categorie_fiscale in taxe_by_categorie_fiscale_number.values()
 
     if isinstance(value, int):
         value_str = '0' + str(value) if value < 10 else str(value)
@@ -85,32 +86,50 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
     elif isinstance(value, list):
         selection = coicop_nomenclature.code_coicop.isin(value)
 
-    coicop_nomenclature.loc[selection, 'categorie_fiscale'] = categorie_fiscale
-    filled_start_stop = (
-        (coicop_nomenclature.loc[selection, 'start'].unique() != 0).any() or
-        (coicop_nomenclature.loc[selection, 'stop'].unique() != 0).any()
-        )
-    if filled_start_stop and (start != 1994 or stop != 2014):
-        coicop_copy = coicop_nomenclature.loc[selection].copy()
-        coicop_copy['start'] = start
-        coicop_copy['stop'] = stop
-        print coicop_copy
-        coicop_nomenclature = coicop_nomenclature.append(coicop_copy, ignore_index = True)
+    if selection.any():
+        coicop_nomenclature.loc[selection, 'categorie_fiscale'] = categorie_fiscale
+        filled_start_stop = (
+            (coicop_nomenclature.loc[selection, 'start'].unique() != 0).any() or
+            (coicop_nomenclature.loc[selection, 'stop'].unique() != 0).any()
+            )
+        if filled_start_stop and (start != 1994 or stop != 2014):
+            coicop_copy = coicop_nomenclature.loc[selection].copy()
+            coicop_copy['start'] = start
+            coicop_copy['stop'] = stop
+            coicop_nomenclature = coicop_nomenclature.append(coicop_copy)
+            coicop_nomenclature.reset_index(inplace = True, drop = True)
+            coicop_nomenclature.sort_values(by = 'code_coicop', inplace = True)
+        else:
+            coicop_nomenclature.loc[selection, 'start'] = 1994
+            coicop_nomenclature.loc[selection, 'stop'] = 2014
+
+
+    else:
+        addtional_row = pd.DataFrame(columns = coicop_nomenclature.columns)
+        additional_dict = {
+            'code_coicop': str(value),
+            'categorie_fiscale': categorie_fiscale,
+            'start': start,
+            'stop': stop,
+            }
+        for item, val in additional_dict.iteritems():
+            addtional_row[item] = [val]
+        coicop_nomenclature = coicop_nomenclature.append(addtional_row)
         coicop_nomenclature.reset_index(inplace = True, drop = True)
         coicop_nomenclature.sort_values(by = 'code_coicop', inplace = True)
-    else:
-        coicop_nomenclature.loc[selection, 'start'] = 1994
-        coicop_nomenclature.loc[selection, 'stop'] = 2014
 
-    print coicop_nomenclature.categorie_fiscale.value_counts()
+    # print coicop_nomenclature.categorie_fiscale.value_counts()
     return coicop_nomenclature
 
 
 def build_coicop_nomenclature_with_fiscal_categories():
     coicop_nomenclature = build_coicop_nomenclature.build_coicop_nomenclature()
+    # On  ajoute des colonnes
+    # période d'effet de la législation
     coicop_nomenclature['start'] = 0
     coicop_nomenclature['stop'] = 0
-
+    # origine de du poste
+    coicop_nomenclature['origin'] = 'COICOP INSEE'
     # 01 Produits alimentaires et boissons non alcoolisées
     # ils sont tous à taux réduit
     alimentation = dict(
@@ -492,13 +511,31 @@ def build_coicop_nomenclature_with_fiscal_categories():
     return coicop_nomenclature.copy()
 
 
+def get_categorie_fiscale(value):
+    coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories()
+    if isinstance(value, int):
+        value_str = '0' + str(value) if value < 10 else str(value)
+        selection = coicop_nomenclature.code_coicop.str[:2] == value_str
+    elif isinstance(value, str):
+        selection = coicop_nomenclature.code_coicop.str[:len(value)] == value
+    elif isinstance(value, list):
+        selection = coicop_nomenclature.code_coicop.isin(value)
+
+    categorie_fiscale = coicop_nomenclature.loc[selection, 'categorie_fiscale'].unique()
+    assert len(categorie_fiscale) == 1, 'Ther categorie fiscale is not unique. Candidates are: {}'.format(
+        categorie_fiscale)
+    return categorie_fiscale[0]
+
+
 def test_coicop_legislation(coicop_nomenclature):
     if coicop_nomenclature.categorie_fiscale.isnull().any():
         return coicop_nomenclature.loc[coicop_nomenclature.categorie_fiscale.isnull()]
 
 
 if __name__ == "__main__":
-    extract_informations_from_coicop_to_categorie_fiscale()
-    coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories()
-    print test_coicop_legislation(coicop_nomenclature)
+    # extract_informations_from_coicop_to_categorie_fiscale()
+    # coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories()
+    # print test_coicop_legislation(coicop_nomenclature)
     # TODO créer des sous-catégories pour tabac
+
+    print get_categorie_fiscale(1)
