@@ -74,11 +74,13 @@ def extract_informations_from_coicop_to_categorie_fiscale():
 
 def apply_modification(coicop_nomenclature = None, value = None, categorie_fiscale = None, start = 1994, stop = 2014):
     assert coicop_nomenclature is not None
+    coicop_nomenclature['start'] = 0
+    coicop_nomenclature['stop'] = 0
 
     categorie_fiscale in taxe_by_categorie_fiscale_number.values()
 
     if isinstance(value, int):
-        selection = coicop_nomenclature.divisions == value
+        selection = coicop_nomenclature.code_coicop.str[:len(str(value))] == value
     elif isinstance(value, str):
         selection = coicop_nomenclature.code_coicop.str[:len(value)] == value
     elif isinstance(value, list):
@@ -300,7 +302,7 @@ def build_coicop_nomenclature_with_fiscal_categories():
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
         )
-    # Jeux de hasard TODO: trouver les jeux de hasard
+    # Jeux de hasard TODO: trouver les jeux de hasard dans les coicop
     jeux_hasard = dict(
         value = '09.4.3',
         categorie_fiscale = '',
