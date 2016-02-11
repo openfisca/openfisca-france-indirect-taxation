@@ -74,13 +74,12 @@ def extract_informations_from_coicop_to_categorie_fiscale():
 
 def apply_modification(coicop_nomenclature = None, value = None, categorie_fiscale = None, start = 1994, stop = 2014):
     assert coicop_nomenclature is not None
-    coicop_nomenclature['start'] = 0
-    coicop_nomenclature['stop'] = 0
 
     categorie_fiscale in taxe_by_categorie_fiscale_number.values()
 
     if isinstance(value, int):
-        selection = coicop_nomenclature.code_coicop.str[:len(str(value))] == value
+        value_str = '0' + str(value) if value < 10 else str(value)
+        selection = coicop_nomenclature.code_coicop.str[:2] == value_str
     elif isinstance(value, str):
         selection = coicop_nomenclature.code_coicop.str[:len(value)] == value
     elif isinstance(value, list):
@@ -109,6 +108,8 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
 
 def build_coicop_nomenclature_with_fiscal_categories():
     coicop_nomenclature = build_coicop_nomenclature.build_coicop_nomenclature()
+    coicop_nomenclature['start'] = 0
+    coicop_nomenclature['stop'] = 0
 
     # 01 Produits alimentaires et boissons non alcoolisées
     # ils sont tous à taux réduit
@@ -488,16 +489,16 @@ def build_coicop_nomenclature_with_fiscal_categories():
         prostitution]:
         coicop_nomenclature = apply_modification(coicop_nomenclature, **member)
 
-    return coicop_nomenclature
+    return coicop_nomenclature.copy()
 
 
 def test_coicop_legislation(coicop_nomenclature):
     if coicop_nomenclature.categorie_fiscale.isnull().any():
-        print coicop_nomenclature.loc[coicop_nomenclature.categorie_fiscale.isnull()]
+        return coicop_nomenclature.loc[coicop_nomenclature.categorie_fiscale.isnull()]
 
 
 if __name__ == "__main__":
     extract_informations_from_coicop_to_categorie_fiscale()
     coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories()
-    test_coicop_legislation(coicop_nomenclature)
+    print test_coicop_legislation(coicop_nomenclature)
     # TODO créer des sous-catégories pour tabac
