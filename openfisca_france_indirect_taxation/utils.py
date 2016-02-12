@@ -62,8 +62,40 @@ def get_transfert_data_frames(year = None):
         matrice_passage_data_frame = pandas.read_excel(matrice_passage_xls_file_path)
         matrice_passage_data_frame.to_csv(matrice_passage_csv_file_path, encoding = 'utf-8')
 
+    if year == 2011:
+        matrice_passage_data_frame['poste2011'] = \
+            matrice_passage_data_frame['poste2011'].apply(lambda x: int(x.replace('c', '').lstrip('0')))
+
     selected_parametres_fiscalite_data_frame = get_parametres_fiscalite_data_frame(year = year)
     return matrice_passage_data_frame, selected_parametres_fiscalite_data_frame
+
+
+# def get_transfert_data_frames(year = None):
+#     assert year is not None
+#     default_config_files_directory = os.path.join(
+#         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+#     matrice_passage_file_path = os.path.join(
+#         default_config_files_directory,
+#         'openfisca_france_indirect_taxation',
+#         'assets',
+#         'legislation',
+#         'Matrice passage {}-COICOP.xls'.format(year),
+#         )
+#     parametres_fiscalite_file_path = os.path.join(
+#         default_config_files_directory,
+#         'openfisca_france_indirect_taxation',
+#         'assets',
+#         'legislation',
+#         'Parametres fiscalite indirecte.xls',
+#         )
+#     matrice_passage_data_frame = pandas.read_excel(matrice_passage_file_path)
+#     if year == 2011:
+#         matrice_passage_data_frame['poste2011'] = \
+#             matrice_passage_data_frame['poste2011'].apply(lambda x: int(x.replace('c', '').lstrip('0')))
+#     parametres_fiscalite_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "categoriefiscale")
+#     selected_parametres_fiscalite_data_frame = \
+#         parametres_fiscalite_data_frame[parametres_fiscalite_data_frame.annee == year]
+#     return matrice_passage_data_frame, selected_parametres_fiscalite_data_frame
 
 
 def get_parametres_fiscalite_data_frame(year = None):
