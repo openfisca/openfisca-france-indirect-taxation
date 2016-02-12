@@ -14,7 +14,19 @@ Pour que le modèle de microsimulation soit à la fois assez générique pour r�
 
 Comme les postes de consommation présents dans ces sources peuvent être plus ou moins agrégés, il est nécessaire de pouvoir réaliser une correspondance entre les différents postes de consommation issues des différentes, quelque soit leur niveaux d'agrégations.
 
-A cette fin, une [table pivot] (https://github.com/openfisca/openfisca-france-indirect-taxation/blob/master/openfisca_france_indirect_taxation/assets/legislation/nomenclature_coicop.csv) est construite à partir de la [nomenclature COICOP] (http://www.insee.fr/fr/methodes/default.asp?page=nomenclatures/coicop1998/coicop1998.htm). Elle est enrichie par des postes supplémentaire en cas de nécessité (finesse insuffisante comme pour le tabac par exemple, postes non présents comme stupéfiants et prostitution).  
+A cette fin, une [table pivot] (https://github.com/openfisca/openfisca-france-indirect-taxation/blob/master/openfisca_france_indirect_taxation/assets/legislation/nomenclature_coicop.csv) est construite à partir de la [nomenclature COICOP] (http://www.insee.fr/fr/methodes/default.asp?page=nomenclatures/coicop1998/coicop1998.htm). Elle est enrichie par des postes supplémentaire en cas de nécessité (finesse insuffisante comme pour le tabac par exemple, postes non présents comme stupéfiants et prostitution). 
+
+Elle est produite à partir de sources brutes par l'exécution du programme `build_coicop_nomenclautre`. 
+[TODO: à détailler, exemple d'exécution après mise en forme du script]
+
+Des tables de correspondance sont également réalisées entre cette table pivot et les informations législatives et les données d'enquète.
+
+### Table de correspondance entre la nomenclature COICOP enrichie et la législation
+
+Les taux d'imposition des différents produits sont renseignés dans une [table de correspondance] (https://github.com/openfisca/openfisca-france-indirect-taxation/blob/master/openfisca_france_indirect_taxation/assets/legislation/coicop_legislation.csv) construite à partir d'informations législatives.
+
+Elle est produite à partir de sources brutes par l'exécution du programme `build_coicop_legislation`. 
+[TODO: à détailler, exemple d'exécution après mise en forme du script]
 
 
 ## Importation des données d'enquêtes brutes 
