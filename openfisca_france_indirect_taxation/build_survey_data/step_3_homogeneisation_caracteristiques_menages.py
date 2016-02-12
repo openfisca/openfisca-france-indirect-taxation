@@ -675,4 +675,4 @@ if __name__ == '__main__':
     year = 2011
     build_homogeneisation_caracteristiques_sociales(year = year)
 
-    log.info("step_0_3_homogeneisation_caracteristiques_sociales {}".format(time.clock() - deb))
+    log.info("step_3_homogeneisation_caracteristiques_sociales {}".format(time.clock() - deb))

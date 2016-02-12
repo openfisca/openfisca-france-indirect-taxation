@@ -394,4 +394,4 @@ if __name__ == '__main__':
     deb = time.clock()
     year = 2011
     build_homogeneisation_revenus_menages(year = year)
-    log.info("step_0_4_homogeneisation_revenus_menages duration is {}".format(time.clock() - deb))
+    log.info("step_4_homogeneisation_revenus_menages duration is {}".format(time.clock() - deb))
