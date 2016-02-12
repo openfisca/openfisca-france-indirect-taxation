@@ -78,7 +78,6 @@ def build_coicop_level_nomenclature(level, keep_code = False, to_csv = False):
     if to_csv:
         data_frame.to_csv(
             os.path.join(legislation_directory, 'nomenclature_coicop_by_{}.csv'.format(level)),
-            sep = ';',
             )
 
     return data_frame
@@ -105,7 +104,6 @@ def build_coicop_nomenclature(to_csv = True):
     if to_csv:
         coicop_nomenclature.to_csv(
             os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
-            sep = ';',
             )
     return coicop_nomenclature[[u'label_division', u'label_groupe', u'label_classe',
        u'label_sous_classe', u'label_poste', u'code_coicop']].copy()
@@ -117,4 +115,3 @@ def build_coicop_nomenclature(to_csv = True):
 if __name__ == "__main__":
     # sys.exit(main())
     coicop_nomenclature = build_coicop_nomenclature()
-

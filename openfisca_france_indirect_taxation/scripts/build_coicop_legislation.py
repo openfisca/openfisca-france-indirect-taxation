@@ -54,7 +54,6 @@ def extract_informations_from_coicop_to_categorie_fiscale():
         parametres_fiscalite_file_path = os.path.join(legislation_directory, 'coicop_to_categorie_fiscale.csv')
         parametres_fiscalite_data_frame = pd.read_csv(
             parametres_fiscalite_file_path,
-            sep = ';',
             converters = {'posteCOICOP': unicode}
             )
         parametres_fiscalite_data_frame['division'] = parametres_fiscalite_data_frame['posteCOICOP'].str[:2].copy()
@@ -159,7 +158,7 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
     return coicop_nomenclature
 
 
-def build_coicop_nomenclature_with_fiscal_categories():
+def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     coicop_nomenclature = build_coicop_nomenclature.build_coicop_nomenclature()
     # On  ajoute des colonnes
     # période d'effet de la législation
@@ -545,7 +544,13 @@ def build_coicop_nomenclature_with_fiscal_categories():
         prostitution]:
         coicop_nomenclature = apply_modification(coicop_nomenclature, **member)
 
-    return coicop_nomenclature.copy()
+    coicop_legislation = coicop_nomenclature.copy()
+
+    if to_csv:
+        coicop_legislation.to_csv(os.path.join(
+            legislation_directory, 'coicop_legislation.csv'))
+
+    return coicop_legislation.copy()
 
 
 def get_categorie_fiscale(value, year = None):
@@ -559,7 +564,7 @@ def get_categorie_fiscale(value, year = None):
         selection = coicop_nomenclature.code_coicop.isin(value)
 
     if year is not None:
-        selection = selection & (coicop_nomenclature.start <= year) &  (year <= coicop_nomenclature.stop)
+        selection = selection & (coicop_nomenclature.start <= year) & (year <= coicop_nomenclature.stop)
 
     categorie_fiscale = coicop_nomenclature.loc[selection, 'categorie_fiscale'].unique()
     assert len(categorie_fiscale) == 1, 'Ther categorie fiscale is not unique. Candidates are: {}'.format(
@@ -574,7 +579,7 @@ def test_coicop_legislation(coicop_nomenclature):
 
 if __name__ == "__main__":
     # extract_informations_from_coicop_to_categorie_fiscale()
-    coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories()
+    coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories(to_csv = True)
     # print test_coicop_legislation(coicop_nomenclature)
     # TODO créer des sous-catégories pour tabac
 
