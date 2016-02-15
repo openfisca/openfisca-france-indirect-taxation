@@ -201,6 +201,12 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         value = '01.1.5.2.2',
         categorie_fiscale = 'tva_taux_plein',
         )
+    saindoux = dict(
+        value = '01.1.5.2.3',
+        categorie_fiscale = 'tva_taux_reduit',
+        label = "Saindoux autres graisses d'origine animale",
+        origin = 'TAXIPP',
+        )
     # et les confiseries et le chocolat à taux plein http://bofip.impots.gouv.fr/bofip/1438-PGP.html
     confiserie = dict(
         value = ['01.1.8.1.3', '01.1.8.2.1', '01.1.8.2.2'],
@@ -224,25 +230,25 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         )
     # tabac
     cigares = dict(
-        value = '02.2.1.1.1',
+        value = '02.2.1',
         categorie_fiscale = 'cigares',
         label = 'Cigares et cigarillos',
         origin = 'TAXIPP',
         )
     cigarettes = dict(
-        value = '02.2.1.1.2',
+        value = '02.2.2',
         categorie_fiscale = 'cigarettes',
         label = 'Cigarettes',
         origin = 'TAXIPP',
         )
     tabac_a_rouler = dict(
-        value = '02.2.1.1.3',
+        value = '02.2.3',
         categorie_fiscale = 'tabac_a_rouler',
         label = 'Tabac a rouler',  # TODO je n'arrive aps à mettre des accents
         origin = 'TAXIPP',
         )
     stupefiants = dict(
-        value = '02.2.1.1.4',
+        value = '02.3',
         categorie_fiscale = '',
         label = 'Stupefiants',
         origin = 'COICOP UN',
@@ -442,17 +448,6 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         value = 11,
         categorie_fiscale = 'tva_taux_reduit',
         )
-    # Cantines'] 1994
-    cantines = dict(
-        value = '11.1.2',
-        categorie_fiscale = '',
-        )
-    # Services d'hébergement 2012 2014
-    service_hebergement = dict(
-        value = '11.2.1',
-        categorie_fiscale = 'tva_taux_intermediaire',
-        start = 2012,
-        )
     # Consommation de boissons alcoolisées
     consommation_boissons_alcoolisees = dict(
         value = ['11.1.1.2.2', '11.1.1.2.3', '11.1.1.2.4'],
@@ -492,6 +487,17 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     # Restauration à emporter 2012 2014
     restauration_a_emporter_reforme_2012 = dict(
         value = '11.1.1.1.2',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+    # Cantines'] 1994
+    cantines = dict(
+        value = '11.1.2',
+        categorie_fiscale = '',
+        )
+    # Services d'hébergement 2012 2014
+    service_hebergement = dict(
+        value = '11.2.1',
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
         )
@@ -558,7 +564,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     for member in [
         # 01
         alimentation,
-        margarine, confiserie,
+        margarine, saindoux, confiserie,
         # 02
         alcools, vin, biere,
         cigares, cigarettes, tabac_a_rouler, stupefiants,
@@ -606,8 +612,12 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     return coicop_legislation.copy()
 
 
-def get_categorie_fiscale(value, year = None):
-    coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories()
+def get_categorie_fiscale(value, year = None, assertion_error = True):
+    coicop_nomenclature = pd.read_csv(
+        os.path.join(legislation_directory, 'coicop_legislation.csv'),
+        converters = {'posteCOICOP': unicode}
+        )
+    build_coicop_nomenclature_with_fiscal_categories()
     if isinstance(value, int):
         value_str = '0' + str(value) if value < 10 else str(value)
         selection = coicop_nomenclature.code_coicop.str[:2] == value_str
@@ -620,9 +630,12 @@ def get_categorie_fiscale(value, year = None):
         selection = selection & (coicop_nomenclature.start <= year) & (year <= coicop_nomenclature.stop)
 
     categorie_fiscale = coicop_nomenclature.loc[selection, 'categorie_fiscale'].unique()
-    assert len(categorie_fiscale) == 1, 'Ther categorie fiscale is not unique. Candidates are: {}'.format(
-        categorie_fiscale)
-    return categorie_fiscale[0]
+    if assertion_error:
+        assert len(categorie_fiscale) == 1, 'Ther categorie fiscale is not unique. Candidates are: {}'.format(
+            categorie_fiscale)
+        return categorie_fiscale[0]
+    else:
+        return categorie_fiscale
 
 
 def test_coicop_legislation():
