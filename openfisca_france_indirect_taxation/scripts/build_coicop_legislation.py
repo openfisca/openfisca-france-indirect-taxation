@@ -202,7 +202,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         value = '01.1.5.2.2',
         categorie_fiscale = 'tva_taux_plein',
         )
-    # et les confiseries et le chocolat  # TODO check
+    # et les confiseries et le chocolat à taux plein http://bofip.impots.gouv.fr/bofip/1438-PGP.html
     confiserie = dict(
         value = ['01.1.8.1.3', '01.1.8.2.1', '01.1.8.2.2'],
         categorie_fiscale = 'tva_taux_plein'
@@ -223,17 +223,31 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         value = '02.1.3',
         categorie_fiscale = 'biere',
         )
-    # TODO: tabac
-    # u'02202'] ['Cigares et cigarillos'] 1994 2014 cigares
-    # [u'02201'] ['Cigarettes'] 1994 2014 cigarettes
-    # TODO: Rajouter Stupéfiants sans taxe
+    # tabac
+    cigares = dict(
+        value = '02.2.1.1.1',
+        categorie_fiscale = 'cigares',
+        label = 'Cigares et cigarillos',
+        origin = 'TAXIPP',
+        )
     cigarettes = dict(
-        value = '02.2.1',
-        categorie_fiscale = 'tva_taux_plein',
+        value = '02.2.1.1.2',
+        categorie_fiscale = 'cigarettes',
         label = 'Cigarettes',
         origin = 'TAXIPP',
         )
-    #
+    tabac_a_rouler = dict(
+        value = '02.2.1.1.3',
+        categorie_fiscale = 'tabac_a_rouler',
+        label = u'Tabac à rouler',
+        origin = 'TAXIPP',
+        )
+    stupefiants = dict(
+        value = '02.2.1.1.4',
+        categorie_fiscale = '',
+        label = u'Stupéfiants',
+        origin = 'COICOP UN',
+        )
     # 03 Habillement et chaussures
     habillement = dict(
         value = 3,
@@ -389,12 +403,12 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
         )
-    # Jeux de hasard TODO: trouver les jeux de hasard dans les coicop
+    # Jeux de hasard
     jeux_hasard = dict(
         value = '09.4.3',
         categorie_fiscale = '',
-        origin = 'TAXIPP',
         label = 'Jeux de hasard',
+        origin = 'COICOP UN',
         )
     # Services culturels
     services_culturels = dict(
@@ -419,7 +433,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
         )
-    # 10 Education TODO: check and introduce     categorie_fiscale = '' if needed
+    # 10 Education
     education = dict(
         value = 10,
         categorie_fiscale = '',
@@ -436,14 +450,14 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         )
     # Services d'hébergement 2012 2014
     service_hebergement = dict(
-        value = '11.2.1',  # TODO: check
+        value = '11.2.1',
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
         )
     # Consommation de boissons alcoolisées
     consommation_boissons_alcoolisees = dict(
-        value = ['11.1.1.2.2', '11.1.1.2.3', '11.1.1.2.4'],  # TODO check
-        categorie_fiscale = 'tva_taux_plein',
+        value = ['11.1.1.2.2', '11.1.1.2.3', '11.1.1.2.4'],
+        categorie_fiscale = 'tva_taux_plein', # TODO sauf en corse à 10%
         )
     # Restauration sur place 1994 2009
     restauration_sur_place = dict(
@@ -492,9 +506,9 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         value = '12.6.1',
         categorie_fiscale = '',
         )
-    # Autres assurances  # TODO
+    # Autres assurances
     autres_assurances = dict(
-        value = '1255',
+        value = '12.5.5',
         categorie_fiscale = 'autres_assurances',
         label = 'Autres assurances',
         origin = 'TAXIPP',
@@ -514,9 +528,9 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         value = '12.5.2',
         categorie_fiscale = 'autres_assurances',
         )
-    # Assurance vie  # TODO où sont les coicop 12.5.1
+    # Assurance vie
     assurance_vie = dict(
-        value = '1251',
+        value = '12.5.1',
         categorie_fiscale = 'autres_assurances',
         label = 'Assurance vie',
         origin = 'TAXIPP',
@@ -534,12 +548,12 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
         )
-    # Prostitution TODO check
+    # Prostitution
     prostitution = dict(
-        value = '1220',
+        value = '12.2',
         categorie_fiscale = '',
-        origin = 'COICOP UN',
         label = 'Prostitution',
+        origin = 'COICOP UN',
         )
 
     for member in [
@@ -547,7 +561,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         alimentation, margarine, confiserie,
         # 02
         alcools, vin, biere,
-        cigarettes,
+	cigares, cigarettes, tabac_a_rouler, stupefiants,
         # 03
         habillement,
         # 04
