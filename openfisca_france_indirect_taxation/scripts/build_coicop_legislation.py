@@ -68,11 +68,28 @@ def extract_informations_from_coicop_to_categorie_fiscale():
             coicop_division,
             taxe_by_categorie_fiscale_number[dominant]
             )
-        format_exceptions(exceptions),
+        format_exceptions(exceptions)
+
+
+def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_code = None, label = None):
+    assert coicop_nomenclature  is not None
+    assert coicop_code is not None
+    assert label is not None
+    print coicop_code
+    known_levels = sub_levels[:len(coicop_code.split('.')) - 1]
+    coicop_sub_code = coicop_code[:len(coicop_code) - 2]
+    assert known_levels, 'No know levels for COICOP {}'.format(coicop_code)
+    labels_by_sub_level = coicop_nomenclature.loc[
+        coicop_nomenclature.code_coicop.str[:len(coicop_sub_code)] == coicop_sub_code,
+        ['label_{}'.format(level[:-1]) for level in known_levels]
+        ].drop_duplicates().dropna().to_dict(orient = 'records')[0]
+    modified_level = sub_levels[len(coicop_code.split('.')) - 1][:-1]
+    labels_by_sub_level['label_{}'.format(modified_level)] = label
+    return labels_by_sub_level
 
 
 def apply_modification(coicop_nomenclature = None, value = None, categorie_fiscale = None,
-        origin = None, start = 1994, stop = 2014):
+        origin = None, start = 1994, stop = 2014, label = ''):
     assert coicop_nomenclature is not None
     assert categorie_fiscale in taxe_by_categorie_fiscale_number.values()
     assert 1994 <= start < stop <= 2014, "Invalid start={} and/or stop={}".format(start, stop)
@@ -141,16 +158,24 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
                 coicop_nomenclature.sort_values(by = 'code_coicop', inplace = True)
 
     else:
-        addtional_row = pd.DataFrame(columns = coicop_nomenclature.columns)
+        print str(value)
+        assert origin is not None
+        assert label is not None
+        infra_labels = extract_infra_labels_from_coicop_code(coicop_nomenclature, str(value), label)
+        print infra_labels
+        additional_row = pd.DataFrame(columns = coicop_nomenclature.columns)
         additional_dict = {
             'code_coicop': str(value),
             'categorie_fiscale': categorie_fiscale,
             'start': start,
             'stop': stop,
+            'origin': origin
             }
+        additional_dict.update(infra_labels)
         for item, val in additional_dict.iteritems():
-            addtional_row[item] = [val]
-        coicop_nomenclature = coicop_nomenclature.append(addtional_row)
+            additional_row[item] = [val]
+        print additional_row
+        coicop_nomenclature = coicop_nomenclature.append(additional_row)
         coicop_nomenclature.reset_index(inplace = True, drop = True)
         coicop_nomenclature.sort_values(by = 'code_coicop', inplace = True)
 
@@ -202,12 +227,12 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     # u'02202'] ['Cigares et cigarillos'] 1994 2014 cigares
     # [u'02201'] ['Cigarettes'] 1994 2014 cigarettes
     # TODO: Rajouter Stupéfiants sans taxe
-    # cigarettes = dict(
-    #     value = '02.2.1',
-    #     categorie_fiscale = 'tva_taux_plein'
-    #     label = ''
-    #     origin = ''
-    #     )
+    cigarettes = dict(
+        value = '02.2.1',
+        categorie_fiscale = 'tva_taux_plein',
+        label = 'Cigarettes',
+        origin = 'TAXIPP',
+        )
     #
     # 03 Habillement et chaussures
     habillement = dict(
@@ -340,7 +365,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         categorie_fiscale = 'tva_taux_plein',
         )
     services_postaux = dict(
-        value = '08.1.1,1',
+        value = '08.1.1.1',
         categorie_fiscale = '',
         )
     # 09 Loisirs et cutures
@@ -368,6 +393,8 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     jeux_hasard = dict(
         value = '09.4.3',
         categorie_fiscale = '',
+        origin = 'TAXIPP',
+        label = 'Jeux de hasard',
         )
     # Services culturels
     services_culturels = dict(
@@ -469,6 +496,8 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     autres_assurances = dict(
         value = '1255',
         categorie_fiscale = 'autres_assurances',
+        label = 'Autres assurances',
+        origin = 'TAXIPP',
         )
     # Assurance_transports
     assurance_transports = dict(
@@ -489,6 +518,8 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     assurance_vie = dict(
         value = '1251',
         categorie_fiscale = 'autres_assurances',
+        label = 'Assurance vie',
+        origin = 'TAXIPP',
         )
     # Protection sociale TODO: check tva_taux_plein avant 2000
     protection_sociale_reforme_2000 = dict(
@@ -507,6 +538,8 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     prostitution = dict(
         value = '1220',
         categorie_fiscale = '',
+        origin = 'COICOP UN',
+        label = 'Prostitution',
         )
 
     for member in [
@@ -514,6 +547,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         alimentation, margarine, confiserie,
         # 02
         alcools, vin, biere,
+        cigarettes,
         # 03
         habillement,
         # 04
