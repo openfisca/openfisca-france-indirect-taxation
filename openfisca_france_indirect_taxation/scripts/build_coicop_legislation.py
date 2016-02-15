@@ -75,7 +75,6 @@ def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_cod
     assert coicop_nomenclature  is not None
     assert coicop_code is not None
     assert label is not None
-    print coicop_code
     known_levels = sub_levels[:len(coicop_code.split('.')) - 1]
     coicop_sub_code = coicop_code[:len(coicop_code) - 2]
     assert known_levels, 'No know levels for COICOP {}'.format(coicop_code)
@@ -83,6 +82,8 @@ def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_cod
         coicop_nomenclature.code_coicop.str[:len(coicop_sub_code)] == coicop_sub_code,
         ['label_{}'.format(level[:-1]) for level in known_levels]
         ].drop_duplicates().dropna().to_dict(orient = 'records')[0]
+    for key, value in labels_by_sub_level.iteritems():
+        labels_by_sub_level[key] = value
     modified_level = sub_levels[len(coicop_code.split('.')) - 1][:-1]
     labels_by_sub_level['label_{}'.format(modified_level)] = label
     return labels_by_sub_level
@@ -158,11 +159,9 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
                 coicop_nomenclature.sort_values(by = 'code_coicop', inplace = True)
 
     else:
-        print str(value)
         assert origin is not None
         assert label is not None
         infra_labels = extract_infra_labels_from_coicop_code(coicop_nomenclature, str(value), label)
-        print infra_labels
         additional_row = pd.DataFrame(columns = coicop_nomenclature.columns)
         additional_dict = {
             'code_coicop': str(value),
@@ -174,7 +173,7 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
         additional_dict.update(infra_labels)
         for item, val in additional_dict.iteritems():
             additional_row[item] = [val]
-        print additional_row
+
         coicop_nomenclature = coicop_nomenclature.append(additional_row)
         coicop_nomenclature.reset_index(inplace = True, drop = True)
         coicop_nomenclature.sort_values(by = 'code_coicop', inplace = True)
@@ -239,13 +238,13 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     tabac_a_rouler = dict(
         value = '02.2.1.1.3',
         categorie_fiscale = 'tabac_a_rouler',
-        label = u'Tabac à rouler',
+        label = 'Tabac a rouler',  # TODO je n'arrive aps à mettre des accents
         origin = 'TAXIPP',
         )
     stupefiants = dict(
         value = '02.2.1.1.4',
         categorie_fiscale = '',
-        label = u'Stupéfiants',
+        label = 'Stupefiants',
         origin = 'COICOP UN',
         )
     # 03 Habillement et chaussures
@@ -511,7 +510,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         value = '12.5.5',
         categorie_fiscale = 'autres_assurances',
         label = 'Autres assurances',
-        origin = 'TAXIPP',
+        origin = 'COICOP UN',
         )
     # Assurance_transports
     assurance_transports = dict(
@@ -533,7 +532,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         value = '12.5.1',
         categorie_fiscale = 'autres_assurances',
         label = 'Assurance vie',
-        origin = 'TAXIPP',
+        origin = 'COICOP UN',
         )
     # Protection sociale TODO: check tva_taux_plein avant 2000
     protection_sociale_reforme_2000 = dict(
@@ -558,10 +557,11 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
 
     for member in [
         # 01
-        alimentation, margarine, confiserie,
+        alimentation,
+        margarine, confiserie,
         # 02
         alcools, vin, biere,
-	cigares, cigarettes, tabac_a_rouler, stupefiants,
+        cigares, cigarettes, tabac_a_rouler, stupefiants,
         # 03
         habillement,
         # 04
@@ -599,11 +599,10 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         coicop_nomenclature = apply_modification(coicop_nomenclature, **member)
 
     coicop_legislation = coicop_nomenclature.copy()
-
     if to_csv:
-        coicop_legislation.to_csv(os.path.join(
-            legislation_directory, 'coicop_legislation.csv'))
-
+        coicop_legislation.to_csv(
+            os.path.join(legislation_directory, 'coicop_legislation.csv'),
+            )
     return coicop_legislation.copy()
 
 
@@ -626,7 +625,8 @@ def get_categorie_fiscale(value, year = None):
     return categorie_fiscale[0]
 
 
-def test_coicop_legislation(coicop_nomenclature):
+def test_coicop_legislation():
+    coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories(to_csv = True)
     if coicop_nomenclature.categorie_fiscale.isnull().any():
         return coicop_nomenclature.loc[coicop_nomenclature.categorie_fiscale.isnull()]
 

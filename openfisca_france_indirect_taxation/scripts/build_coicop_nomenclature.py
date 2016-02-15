@@ -105,8 +105,8 @@ def build_coicop_nomenclature(to_csv = True):
         coicop_nomenclature.to_csv(
             os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
             )
-    return coicop_nomenclature[[u'label_division', u'label_groupe', u'label_classe',
-       u'label_sous_classe', u'label_poste', u'code_coicop']].copy()
+    return coicop_nomenclature[['label_division', 'label_groupe', 'label_classe',
+       'label_sous_classe', 'label_poste', 'code_coicop']].copy()
 
 
 # def main():
