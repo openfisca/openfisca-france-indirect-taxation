@@ -202,6 +202,12 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     # u'02202'] ['Cigares et cigarillos'] 1994 2014 cigares
     # [u'02201'] ['Cigarettes'] 1994 2014 cigarettes
     # TODO: Rajouter Stupéfiants sans taxe
+    # cigarettes = dict(
+    #     value = '02.2.1',
+    #     categorie_fiscale = 'tva_taux_plein'
+    #     label = ''
+    #     origin = ''
+    #     )
     #
     # 03 Habillement et chaussures
     habillement = dict(
