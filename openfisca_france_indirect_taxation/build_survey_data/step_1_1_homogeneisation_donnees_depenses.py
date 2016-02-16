@@ -54,7 +54,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
         )
     survey = bdf_survey_collection.get_survey('budget_des_familles_{}'.format(year))
 
-    # HOMOGENEISATION DES BASES DE DONNEES DE DEPENSES
+    # Homogénéisation des bases de données de dépenses
 
     if year == 1995:
         socioscm = survey.get_values(table = "socioscm")

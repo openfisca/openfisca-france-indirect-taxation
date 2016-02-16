@@ -148,7 +148,7 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
                 coicop_copy_inf = coicop_nomenclature.loc[selection_bis].copy()
                 coicop_copy_inf['stop'] = start - 1
                 coicop_copy_sup = coicop_nomenclature.loc[selection_bis].copy()
-                coicop_copy_inf['start'] = stop + 1
+                coicop_copy_sup['start'] = stop + 1
 
                 coicop_nomenclature.loc[selection_bis, 'categorie_fiscale'] = categorie_fiscale
                 coicop_nomenclature.loc[selection_bis, 'start'] = start
@@ -506,10 +506,25 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         value = 12,
         categorie_fiscale = 'tva_taux_plein',
         )
-    # Couts des services d'intermédiation financière indirectement mesurés
-    intermediation_financiere = dict(
-        value = '12.6.1',
+    # Prostitution
+    prostitution = dict(
+        value = '12.2',
         categorie_fiscale = '',
+        label = 'Prostitution',
+        origin = 'COICOP UN',
+        )
+    # Protection sociale TODO: check tva_taux_plein avant 2000
+    protection_sociale_reforme_2000 = dict(
+        value = '12.4',
+        categorie_fiscale = 'tva_taux_reduit',
+        start = 2000,
+        stop = 2011,
+        )
+    # Protection sociale
+    protection_sociale_reforme_2012 = dict(
+        value = '12.4',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
         )
     # Autres assurances
     autres_assurances = dict(
@@ -540,25 +555,10 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         label = 'Assurance vie',
         origin = 'COICOP UN',
         )
-    # Protection sociale TODO: check tva_taux_plein avant 2000
-    protection_sociale_reforme_2000 = dict(
-        value = '12.4',
-        categorie_fiscale = 'tva_taux_reduit',
-        start = 2000,
-        stop = 2011,
-        )
-    # Protection sociale
-    protection_sociale_reforme_2012 = dict(
-        value = '12.4',
-        categorie_fiscale = 'tva_taux_intermediaire',
-        start = 2012,
-        )
-    # Prostitution
-    prostitution = dict(
-        value = '12.2',
+    # Couts des services d'intermédiation financière indirectement mesurés
+    intermediation_financiere = dict(
+        value = '12.6.1',
         categorie_fiscale = '',
-        label = 'Prostitution',
-        origin = 'COICOP UN',
         )
 
     for member in [
@@ -598,10 +598,12 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         restauration_sur_place, restauration_sur_place_reforme_2010, restauration_sur_place_reforme_2012,
         restauration_a_emporter, restauration_a_emporter_reforme_2010, restauration_a_emporter_reforme_2012,
         # 12
-        autres_biens_et_services, intermediation_financiere,
-        autres_assurances, assurance_transports, assurance_vie, assurance_maladie, assurance_habitation,
+        autres_biens_et_services,
         protection_sociale_reforme_2000, protection_sociale_reforme_2012,
-        prostitution]:
+        prostitution,
+        intermediation_financiere,
+        autres_assurances, assurance_transports, assurance_vie, assurance_maladie, assurance_habitation,
+        ]:
         coicop_nomenclature = apply_modification(coicop_nomenclature, **member)
 
     coicop_legislation = coicop_nomenclature.copy()
