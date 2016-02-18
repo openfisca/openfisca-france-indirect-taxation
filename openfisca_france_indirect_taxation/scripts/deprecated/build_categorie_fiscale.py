@@ -11,7 +11,6 @@ selected_parametres_fiscalite_data_frame = get_parametres_fiscalite_data_frame()
 
 selected_parametres_fiscalite_data_frame = \
     selected_parametres_fiscalite_data_frame[['posteCOICOP', 'annee', 'categoriefiscale']]
-# print selected_parametres_fiscalite_data_frame
 selected_parametres_fiscalite_data_frame.set_index('posteCOICOP', inplace = True)
 ensemble_postes_coicop = selected_parametres_fiscalite_data_frame.reset_index()
 

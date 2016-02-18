@@ -1,0 +1,236 @@
+,poste2005,posteCOICOP,label2005
+0,1111,111,riz sous toutes ses formes et produits à base de riz
+1,1112,111,pain et autres produits de boulangerie et de viennoiserie (y.c. biscuits et gate
+2,1113,111,pâtes alimentaires sous toutes leurs formes et plats à base de pâtes
+3,1114,111,"préparations telles que pâte à patisser, gateau industriel, tarte, tourte, quich"
+4,1115,111,"autres céréales et produits à base de céréales (y.c. farine, semoule, céréales p"
+5,1121,112,viande bovine fraîche ou surgelée
+6,1122,112,viande porcine fraîche ou surgelée
+7,1123,112,viande ovine ou caprine fraîche ou surgelée
+8,1124,112,viande de volaille fraîche ou surgelée
+9,1125,112,"viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé"
+10,1126,112,"conserve viande, produit de transformation des viandes, plat préparé à base de v"
+11,1127,112,"autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier)"
+12,1130,113,poissons frais ou s.a.i.
+13,1131,113,poissons surgelés ou congelés (hors poissons panés ou cuisinés)
+14,1132,113,"fruits de mer frais ou surgelés (y.c. cuits , nc cuisinés )"
+15,1133,113,"poissons et fruits de mer salés, fumés, séchés yc surgelé"
+16,1134,113,conserves de poisson et de fruits de mer ou produits de la transformation de poi
+17,1141,114,lait entier
+18,1142,114,"lait demi-écrémé, écrémé"
+19,1143,114,lait de conserve
+20,1144,114,"yaourts, fromage blanc et petits suisses y.c. de soja"
+21,1145,114,fromage et lait caillé
+22,1146,114,"autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisés"
+23,1147,114,oeufs
+24,1151,115,beurre
+25,1152,1151,margarine et autres graisses végétales
+26,1153,115,huiles alimentaires d'olives
+27,1154,115,"huiles alimentaires d'arachide, de tournesol, de maÏs, colza…"
+28,1155,115,saindoux et autres graisses d'origine animale
+29,1161,116,agrumes (frais ou congelés)
+30,1162,116,bananes fraiches
+31,1163,116,pommes
+32,1164,116,poires
+33,1165,116,fruits à noyaux (frais ou congelés)
+34,1166,116,baies (fraîches ou congelées)
+35,1167,116,"autres fruits, fruits tropicaux (frais ou congelés)"
+36,1168,116,fruits séchés
+37,1169,116,fruits au sirop et fruits surgelés
+38,1171,117,"légumes frais à feuilles et à tiges, herbes aromatiques (frais)"
+39,1172,117,choux (frais)
+40,1173,117,légumes frais cultivés pour leurs fruits
+41,1174,117,racines alimentaires fraiches et champignons frais
+42,1175,117,légumes secs
+43,1176,117,légumes surgelés (non cuisinés)
+44,1177,117,"légumes et plats à base de légume, en conserve (sans pommes de terre)"
+45,1178,117,"légumes préparés et plats à base de légumes, frais et surgelés"
+46,1179,117,"pomme de terre, autres tubercules, produits à base de pommes de terre et tubercu"
+47,1181,118,sucre
+48,1182,118,"confitures, marmelade, compote, gelées, purées et pâtes de fruits, miel"
+49,1183,118,chocolat
+50,1184,1181,"sucreries, bonbons et autres confiseries"
+51,1185,118,"crèmes glacées, sorbets, entremets glacés"
+52,1186,118,autres produits à base de sucre
+53,1191,119,sauces et condiments
+54,1192,119,sel et épices sèches
+55,1193,119,"levure , préparations pour desserts, soupes"
+56,1194,119,autres produits alimentaires
+57,1211,121,café
+58,1212,121,thé et plantes à infusion
+59,1213,121,cacao et chocolat en poudre
+60,1221,122,eaux minérales
+61,1222,122,boissons gazeuses
+62,1223,122,"jus de fruits et de légumes, sirops, boissons aromatisées"
+63,1224,122,jus de légumes
+64,1311,119,"autres dépenses d'alimentation : cérémonies, séjours hors domicile, personne viv"
+65,1312,119,autres dépenses d'alimentation : cadeau offert (à destination d'un autre ménage
+66,2111,211,spiritueux et liqueurs
+67,2121,212,vins et cidres
+68,2122,212,"autres apéritifs à base de vin, champagne et autres mousseux, saké et autres"
+69,2131,213,bière et boissons à base de bière
+70,2211,2201,cigarettes
+71,2212,2202,cigares et cigarillos
+72,2213,2203,tabac sous d'autres formes et produits connexes
+73,3111,311,tissus pour vêtements
+74,3121,312,"manteaux, imperméables, fourrures, veste, blouson, anorak…"
+75,3122,312,"costumes, tailleurs, complet, ensemble…"
+76,3123,312,"pantalons, robes et jupes, jeans, salopette, bermuda, calecons longs, short.."
+77,3124,312,"pull-over, chandail, cardigans, sweat shirt, sweat polaire…"
+78,3125,312,"tee shirt, chemises, chemisiers, polos, corsages, sous pulls, surchemises…"
+79,3126,312,"survêtements, shorts, coupe-vent (k.way), maillots de bain… et vêtement spéciaux"
+80,3127,312,"chaussettes, mi-bas, collants"
+81,3128,312,"sous-vêtements, pyjamas, chemises de nuit, robes de chambre…s.a.i."
+82,3131,313,accessoires du vetement et mercerie
+83,3141,314,"nettoyage, réparation et location de vêtements"
+84,3211,321,chaussures de ville et de travail y.c. boots s.a.i.
+85,3212,321,"chaussures de sport et de loisirs hors chaussures spéciales (ski, golf, foot…)"
+86,3213,321,"autres chaussures et articles chaussants (pantoufles, espadrilles, chaussures de"
+87,3214,321,"achat d'ustensiles des chaussures : lacets, talons, semelles, formes, embauchoir"
+88,3221,322,réparation et location de chaussures
+89,3311,312,"autres dépenses d'habillement : cérémonies, séjours hors domicile, personnes viv"
+90,3312,312,autres dépenses d'habillement : cadeau offert (à destination d'un autre ménage)
+91,4111,411,loyers et charges des locataires résidence principale
+92,4121,412,loyers et charges des locataires autres résidences
+93,4311,431,produits destinés aux travaux courants d'entretien et de réparation du logement 
+94,4321,432,services d'entretien et petites réparations dans le logement
+95,4411,442,enlèvement des ordures
+96,4431,441,"factures d'eau résidence principale, autre logement, dépendance, terrain"
+97,4441,444,charges collectives relatives au logement (payées isolément du loyer ou crédit)
+98,4500,4511,facture électicité + gaz (non dissociables)
+99,4511,451,facture d'électricité
+100,4521,452,facture de gaz
+101,4522,4522,"achats de butane, propane"
+102,4531,453,"combustibles liquides pour la résidence princiaple : fuel, mazout, pétrole"
+103,4532,453,combustibles liquides résidence secondaire ou autre logement
+104,4541,454,combustible solide pour la résidence principale
+105,4611,411,autres dépenses d'habitation : cadeau offert (à destination d'un autre ménage)
+106,5110,511,meubles informatiques
+107,5111,511,"mobilier de chambre (lit, armoire, commode, chevet, bureaux enfant, sommier) hor"
+108,5112,511,"mobilier de séjour (buffet, bahut, bibliothèque…)"
+109,5113,511,"mobilier de cuisine et de salle de bain y.c. éléments intégrés ou non, tabourets"
+110,5114,511,"tables, sièges, chaises hors cuisine et salle de bain"
+111,5115,511,"mobilier de jardin (balancelle, table, fauteuil, abri de jardin, portique…) et d"
+112,5116,511,"autres meubles, accessoires du mobilier (y.c. luminaires, décoration, équipement"
+113,5121,512,"tapis et autres revêtements de sol (lino,moquette…), pose et réparation de ces a"
+114,5211,520,"articles de literie (matelas, futon, oreiller, couette, couverture, drap, alèse…"
+115,5212,520,"autres articles de ménages en textile (tissu d'ameublement, voilages, linge de m"
+116,5311,531,"réfrigérateurs, congélateurs et réfrigérateurs-congélateurs, , cave à vin"
+117,5312,531,"lave linge, sèche linge et lave vaisselle"
+118,5313,531,gros appareils de cuisson
+119,5314,531,appareils de chauffage et de climatisation
+120,5315,531,appareils de nettoyage
+121,5316,531,machine à coudre et à tricoter
+122,5317,531,autres gros appareils ménagers
+123,5321,532,petit électroménager
+124,5331,533,réparation et entretien des appareils électroménagers
+125,5411,540,"verrerie et cristallerie, vaisselle, articles de ménage ou de toilette en faÏenc"
+126,5412,540,coutellerie et argenterie
+127,5413,540,ustensiles de cuisine et autres articles de ménage et reparation de ces articles
+128,5511,551,gros outillage de bricolage
+129,5512,551,gros outillage de jardinage
+130,5513,551,réparation du gros outillage
+131,5521,552,petit outillage et accessoires divers de bricolage yc reparation
+132,5522,552,"petit outillage et accessoires divers de jardinage, matériaux d'aménagement exté"
+133,5611,561,produits de nettoyage et d'entretien
+134,5612,561,"autres produits ménagers (articles en papier et plastique, brosserie, produits d"
+135,5621,562,"services domestiques (ménage, garde enfant, jardinage…)"
+136,5622,562,"autres services d'entretien pour le logement (blanchisserie, location appareils,"
+137,5712,532,autres dépenses en équipement : cadeau offert (à destination d'un autre ménage)
+138,6111,611,"produits pharmaceutiques à ingurgiter et traitants, compléments alimentaires, vi"
+139,6112,612,autres produits pharmaceutiques
+140,6113,613,"appareils et matériels thérapeutiques (lunettes, prothèses…)"
+141,6211,621,services médicaux
+142,6221,622,"dentiste, orthodonthie"
+143,6231,623,services des laboratoires d'analyse médicale et des cabinets de radiologie
+144,6232,623,"services des auxiliaires médicaux (infirmier, kiné, laboratoire…)"
+145,6233,623,"services extra hospitaliers (ambulance, location matériel)"
+146,6311,630,services et soins hospitaliers
+147,6412,611,autres dépenses de santé : cadeau offert (à destination d'un autre ménage)
+148,7111,711,achats d'automobiles neuves
+149,7112,711,achats d'automobiles occasion
+150,7121,712,achats de motocycles neufs et occasion
+151,7131,713,achats de cycles neufs et occasion
+152,7141,711,achats d'autres véhicules neufs et occasion
+153,7211,721,pièces détachées et accessoires (hors ceux installés par un professionnel)
+154,7221,722,"carburants, électricité,huiles,lubrifiants…"
+155,7231,723,"réparations, dépannages, révisions, lavage, entretien et controle technique"
+156,7241,724,"services de location d'un local, frais parking"
+157,7242,724,"autres services liés à l'utilisation de véhicules personnels (péages, auto école"
+158,7300,735,services combinés de transport de voyageurs
+159,7311,731,services de transports de voyageurs par chemin de fer
+160,7321,732,services de transports de voyageurs par route
+161,7331,733,services de transports de voyageurs par air
+162,7341,734,services de transport par mer et voies navigables intérieures
+163,7351,736,autres services de transport y.c. car scolaire
+164,7411,736,"autres dépenses de transport : cérémonie, séjours hors domicile, personnes vivan"
+165,7412,736,autres dépenses de transport : cadeau offert (à destination d'un autre ménage)
+166,8111,810,services postaux
+167,8121,831,"achats et réparation téléphones, télécopieurs et accessoires"
+168,8131,832,"services de téléphone, télégraphe et télécopie, internet, recharges tel"
+169,9111,911,appareils de réception d'enregistrement et de reproduction du son
+170,9112,911,"téléviseurs, home cinéma, magnétoscopes et lecteur dvd de salon"
+171,9121,912,equipement photographique et cinématographique et optique yc reparation
+172,9131,913,"micro-ordinateurs, matériels et accessoires informatiques, consommables"
+173,9141,914,supports vierges ou enregistrés pour l'image et le son
+174,9211,922,instruments de musique (non compris petits instruments et accessoires)
+175,9212,921,gros équipements liés aux sports et aux loisirs yc reparation
+176,9311,931,"jeux jouets et passe temps, petits instruments de musique"
+177,9312,932,"equipements de sport, de camping et de loisirs en plein air (pêche, chasse, uste"
+178,9321,933,horticulture
+179,9331,934,animaux d'agrément
+180,9411,941,"services sportifs et récréatifs (spectacles sportifs, participation loisirs, loc"
+181,9421,942,"cinémas, théâtres, salles de concert"
+182,9422,942,"musées, jardins zoologiques et similaires"
+183,9423,942,"services de télévision et de radiodiffusion (location, redevance, abonnement)"
+184,9424,942,"autres services de loisirs (animateurs, photographes, services pour animaux)"
+185,9431,943,"jeux de hasard (loto, flipper…)"
+186,9511,951,livres
+187,9521,952,journaux et périodiques
+188,9531,953,imprimés divers
+189,9541,954,articles de papeterie et de dessin
+190,9611,960,"voyages à forfait, week end, excursions… y.c. voyage scolaire"
+191,9711,941,"autres dépenses de loisirs : séjours hors domicile, personnes vivant hors du dom"
+192,9712,941,autres dépenses de loisirs : cadeau offert (à destination d'un autre ménage)
+193,10111,1010,enseignement maternel et primaire
+194,10121,1020,enseignement secondaire
+195,10131,1040,enseignement supérieur
+196,10141,1050,enseignement ne correspondant à aucun niveau particulier
+197,10152,1050,dépenses d'enseignement offertes en cadeau
+198,11111,11112,restaurants
+199,11112,11113,"cafés bars et assimilés (buffets, buvettes, salons de thé, restauration rapide…)"
+200,11121,1112,cantines
+201,11131,11112,"autres dépenses de restauration : séjours hors domicile, personnes vivant hors d"
+202,11132,11112,autres dépenses de restauration : cadeau offert (à destination d'un autre ménage
+203,11211,1120,services d'hébergement
+204,12111,1211,salons de coiffure et esthétique corporelle
+205,12121,1212,appareils électriques pour les soins personnels
+206,12122,1213,autres articles et produits pour les soins personnels
+207,12211,1231,"articles de bijouterie, de joaillerie et d'horlogerie"
+208,12221,1232,articles de voyage et autre contenants d'effets personnels
+209,12222,1232,autres effets personnels
+210,12311,1240,"services de protection sociale (assistante maternelle, crèche, maison de retrait"
+211,12411,1251,"assurances vie, décès"
+212,12421,1252,assurance liées au logement
+213,12431,1253,assurances liées à la santé
+214,12441,1254,assurances liées aux transports
+215,12451,1255,autres assurances
+216,12511,1261,services financiers
+217,12611,1270,autres services divers
+218,12612,9901,caution pour la location d'un logement
+219,12711,1270,autres dépenses occasionnées par une cérémonie
+220,13111,9911,impôts et taxes de la résidence principale
+221,13121,9912,impôts et taxes résidence secondaire ou autre logement
+222,13141,9913,impôts sur le revenu
+223,13151,9914,taxes automobile
+224,13161,9915,autres impôts et taxes
+225,13211,9903,gros travaux d'entretien et d'équipement dans la résidence principale
+226,13221,9903,gros travaux d'entretien et d'équipement résidence secondaire ou autre logement
+227,13311,9921,remboursements de prêts résidence principale
+228,13321,9922,remboursements de prêts résidence secondaire ou autre logement
+229,13331,9923,autres remboursements de prêts
+230,13411,9931,argent donné au sein du ménage
+231,13541,9932,aides et cadeaux en argent offerts par le ménage (à des membres de la famille ne
+232,13551,9933,cadeaux offerts (argent ou bien) sai
+233,13611,9941,prélèvements de l'employeur
+234,13711,9902,"achats de logements, garages, parkings, box et terrains"

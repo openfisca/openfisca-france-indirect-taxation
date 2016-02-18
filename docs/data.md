@@ -1,16 +1,32 @@
-# Les différents types de données et leur articulation
-
-Afin de réaliser le modèle de microsimulation le plus adpaté aux besoins de l'utilisateur, il est nécessaire d'exploiter différents type de données:
- - données micro issues d'enquêtes sur la consommation individuelle des ménages (enquête budget des familles de l'INSEE ou autre),
- - informations tirées de la législation (taux de TVA, TICPE, _etc_.),
- - données agrégées afin d'effectuer d'inflater en masse, de réaliser des calages (éventuellement sur marges) et ou de veillir les données microéconomiques.
-
-Les postes de consommation présents dans ces sources peuvent être plus ou moins agrégés. Il est nécessaire de pouvoir réaliser une correspondance entre les différents postes de consommation issues des différentes, quelque soit leur niveaux d'agrégations.
-A cette fin, une table pivot est construite à partir de la [nomenclature COICOP] (http://www.insee.fr/fr/methodes/default.asp?page=nomenclatures/coicop1998/coicop1998.htm). Elle est enrichie par des postes supplémentaire en cas de nécessité (finesse insuffisante comme pour le tabac par exemple, postes non présents comme stupéfiants et prostitution).  
-
 # Préparation des données 
 
-## Génération de la table de correspondance entre la nomenclature COICOP et la législation
+## Les différents types de données
+
+Plusieurs jeux de données de type, d'origine et aux fonctions diverses sont potentiellement mobilisées par le logiciel de microsimulation: 
+
+ - des données micro issues d'enquêtes sur la consommation individuelle des ménages (enquête budget des familles de l'INSEE ou autre),
+ - des informations tirées de la législation (taux de TVA, TICPE, _etc_.),
+ - des données agrégées afin d'effectuer d'inflater en masse, de réaliser des calages (éventuellement sur marges) et ou de veillir les données microéconomiques.
+
+## Génération des tables de correspondance entre les différents type de données
+
+Pour que le modèle de microsimulation soit à la fois assez générique pour répondre aux besoins divers des utilisateur et simple d'usage, il est nécessaire de pouvoir combiner efficacement les différents type de données et plus particulièrement celles concernant les postes de consommation qu'ils faut donc pouvoir repérer dans les différentes sources de données.
+
+Comme les postes de consommation présents dans ces sources peuvent être plus ou moins agrégés, il est nécessaire de pouvoir réaliser une correspondance entre les différents postes de consommation issues des différentes, quelque soit leur niveaux d'agrégations.
+
+A cette fin, une [table pivot] (https://github.com/openfisca/openfisca-france-indirect-taxation/blob/master/openfisca_france_indirect_taxation/assets/legislation/nomenclature_coicop.csv) est construite à partir de la [nomenclature COICOP] (http://www.insee.fr/fr/methodes/default.asp?page=nomenclatures/coicop1998/coicop1998.htm). Elle est enrichie par des postes supplémentaire en cas de nécessité (finesse insuffisante comme pour le tabac par exemple, postes non présents comme stupéfiants et prostitution). 
+
+Elle est produite à partir de sources brutes par l'exécution du programme `build_coicop_nomenclautre`. 
+[TODO: à détailler, exemple d'exécution après mise en forme du script]
+
+Des tables de correspondance sont également réalisées entre cette table pivot et les informations législatives et les données d'enquète.
+
+### Table de correspondance entre la nomenclature COICOP enrichie et la législation
+
+Les taux d'imposition des différents produits sont renseignés dans une [table de correspondance] (https://github.com/openfisca/openfisca-france-indirect-taxation/blob/master/openfisca_france_indirect_taxation/assets/legislation/coicop_legislation.csv) construite à partir d'informations législatives.
+
+Elle est produite à partir de sources brutes par l'exécution du programme `build_coicop_legislation`. 
+[TODO: à détailler, exemple d'exécution après mise en forme du script]
 
 
 ## Importation des données d'enquêtes brutes 

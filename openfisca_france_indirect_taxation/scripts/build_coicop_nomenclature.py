@@ -40,7 +40,7 @@ taxe_by_categorie_fiscale_number = {
     }
 
 
-def build_coicop_level_nomenclature(level):
+def build_coicop_level_nomenclature(level, keep_code = False, to_csv = False):
     assert level in sub_levels
     data_frame = pd.read_csv(
         os.path.join(legislation_directory, 'nomenclature_coicop_source_by_{}.csv'.format(level)),
@@ -69,21 +69,21 @@ def build_coicop_level_nomenclature(level):
         if level == sub_level:
             stop = True
 
-    if level == 'postes':
+    if keep_code or level == 'postes':
         data_frame['code_coicop'] = data_frame['code_coicop'].str[1:].copy()
     else:
         del data_frame['code_coicop']
 
     data_frame.reset_index(inplace = True, drop = True)
-    data_frame.to_csv(
-        os.path.join(legislation_directory, 'nomenclature_coicop_by_{}.csv'.format(level)),
-        sep = ';',
-        )
+    if to_csv:
+        data_frame.to_csv(
+            os.path.join(legislation_directory, 'nomenclature_coicop_by_{}.csv'.format(level)),
+            )
 
     return data_frame
 
 
-def build_coicop_nomenclature():
+def build_coicop_nomenclature(to_csv = True):
     for index in range(len(sub_levels) - 1):
         level = sub_levels[index]
         next_level = sub_levels[index + 1]
@@ -101,13 +101,12 @@ def build_coicop_nomenclature():
         sub_levels
         ].copy()
 
-    coicop_nomenclature['start'] = 0
-    coicop_nomenclature['stop'] = 0
-    coicop_nomenclature.to_csv(
-        os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
-        sep = ';',
-        )
-    return coicop_nomenclature.copy()
+    if to_csv:
+        coicop_nomenclature.to_csv(
+            os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
+            )
+    return coicop_nomenclature[['label_division', 'label_groupe', 'label_classe',
+       'label_sous_classe', 'label_poste', 'code_coicop']].copy()
 
 
 # def main():
@@ -116,4 +115,3 @@ def build_coicop_nomenclature():
 if __name__ == "__main__":
     # sys.exit(main())
     coicop_nomenclature = build_coicop_nomenclature()
-
