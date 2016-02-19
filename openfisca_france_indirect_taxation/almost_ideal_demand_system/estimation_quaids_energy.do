@@ -70,10 +70,13 @@ clear
 insheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_frame_energy_2000.csv", delimiter(",")
 replace w1 = . if w1 == 0
 quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) demographics(agepr nactifs nenfants vag_10 vag_11 vag_12 vag_13 vag_14 vag_15 vag_16 villes_petites villes_grandes agglo_paris proprietaire elect_only)
-estat uncompensated, atmeans
-matrix list r(uncompelas)
-estat expenditure, atmeans
-matrix list r(expelas)
+*estat uncompensated, atmeans
+*matrix list r(uncompelas)
+*estat expenditure, atmeans
+*matrix list r(expelas)
+estat expenditure elas_exp*
+estat uncompensated elas_price*
+outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_2000.csv", delimiter(",") replace
 
 *2005:
 clear
@@ -104,8 +107,8 @@ quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) demographics(ag
 *matrix list r(uncompelas)
 *estat expenditure, atmeans
 *matrix list r(expelas)
-estat expenditure mu*
-estat uncompensated ce*
+estat expenditure elas_exp*
+estat uncompensated elas_price*
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_all.csv", delimiter(",") replace
 
 *If now we restrict our analysis to the fuel only, i.e. without including housing energy in a specific category:
