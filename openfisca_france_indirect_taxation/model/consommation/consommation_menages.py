@@ -25,6 +25,8 @@
 from __future__ import division
 
 
+from datetime import date
+
 from ..base import *  # noqa analysis:ignore
 
 
@@ -38,7 +40,7 @@ for coicop12_index in range(1, 13):
         ))
 
 
-class consommation_alcools_forts(Variable):
+class depenses_alcools_forts(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation d'alcools forts"
@@ -48,7 +50,7 @@ class consommation_alcools_forts(Variable):
         return period, categorie_fiscale_10
 
 
-class consommation_assurance_sante(Variable):
+class depenses_assurance_sante(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation d'assurance santé"
@@ -58,7 +60,7 @@ class consommation_assurance_sante(Variable):
         return period, categorie_fiscale_16
 
 
-class consommation_assurance_transport(Variable):
+class depenses_assurance_transport(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation d'assurance transport"
@@ -68,7 +70,7 @@ class consommation_assurance_transport(Variable):
         return period, categorie_fiscale_15
 
 
-class consommation_autres_assurances(Variable):
+class depenses_autres_assurances(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation d'autres assurances"
@@ -78,7 +80,7 @@ class consommation_autres_assurances(Variable):
         return period, categorie_fiscale_17
 
 
-class consommation_biere(Variable):
+class depenses_biere(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation de bière"
@@ -88,7 +90,7 @@ class consommation_biere(Variable):
         return period, categorie_fiscale_13
 
 
-class consommation_cigares(Variable):
+class depenses_cigares(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation de cigares"
@@ -98,7 +100,7 @@ class consommation_cigares(Variable):
         return period, categorie_fiscale_8
 
 
-class consommation_cigarette(Variable):
+class depenses_cigarettes(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation de cigarettes"
@@ -108,7 +110,7 @@ class consommation_cigarette(Variable):
         return period, categorie_fiscale_7
 
 
-class consommation_tabac_a_rouler(Variable):
+class depenses_tabac_a_rouler(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation de tabac à rouler"
@@ -118,7 +120,7 @@ class consommation_tabac_a_rouler(Variable):
         return period, categorie_fiscale_9
 
 
-class consommation_ticpe(Variable):
+class depenses_carburants(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation de ticpe"
@@ -128,25 +130,258 @@ class consommation_ticpe(Variable):
         return period, categorie_fiscale_14
 
 
-class consommation_totale(Variable):
+class depenses_diesel_htva(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en diesel htva (mais incluant toujours la TICPE)"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        depenses_diesel = simulation.calculate('depenses_diesel', period)
+        depenses_diesel_htva = depenses_diesel - tax_from_expense_including_tax(depenses_diesel, taux_plein_tva)
+
+        return period, depenses_diesel_htva
+
+
+class depenses_diesel_ht(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en diesel ht (prix brut sans TVA ni TICPE)"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+
+        try:
+            majoration_ticpe_diesel = \
+                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
+            accise_diesel = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+            accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
+        except:
+            accise_diesel_ticpe = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+
+        prix_diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+        taux_implicite_diesel = (
+            (accise_diesel_ticpe * (1 + taux_plein_tva)) /
+            (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
+            )
+
+        depenses_diesel_htva = simulation.calculate('depenses_diesel_htva', period)
+        depenses_diesel_ht = \
+            depenses_diesel_htva - tax_from_expense_including_tax(depenses_diesel_htva, taux_implicite_diesel)
+
+        return period, depenses_diesel_ht
+
+
+class depenses_diesel_recalculees(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en diesel recalculées à partir du prix ht"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        depenses_diesel_ht = simulation.calculate('depenses_diesel_ht', period)
+
+        try:
+            majoration_ticpe_diesel = \
+                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
+            accise_diesel = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+            accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
+        except:
+            accise_diesel_ticpe = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+
+        prix_diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+        taux_implicite_diesel = (
+            (accise_diesel_ticpe * (1 + taux_plein_tva)) /
+            (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
+            )
+
+        depenses_diesel_recalculees = depenses_diesel_ht * (1 + taux_plein_tva) * (1 + taux_implicite_diesel)
+
+        return period, depenses_diesel_recalculees
+
+
+class depenses_sp_e10_ht(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en essence sans plomb e10 hors taxes (HT, i.e. sans TVA ni TICPE)"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        depenses_essence = simulation.calculate('depenses_essence', period)
+        part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
+        depenses_sp_e10 = depenses_essence * part_sp_e10
+        depenses_sp_e10_htva = depenses_sp_e10 - tax_from_expense_including_tax(depenses_sp_e10, taux_plein_tva)
+
+        try:
+            accise_super_e10 = \
+                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+            majoration_ticpe_super_e10 = \
+                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+            accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
+        except:
+            accise_super_e10 = \
+                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+
+        super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+        taux_implicite_sp_e10 = (
+            (accise_ticpe_super_e10 * (1 + taux_plein_tva)) /
+            (super_95_e10_ttc - accise_ticpe_super_e10 * (1 + taux_plein_tva))
+            )
+        depenses_sp_e10_ht = \
+            depenses_sp_e10_htva - tax_from_expense_including_tax(depenses_sp_e10_htva, taux_implicite_sp_e10)
+
+        return period, depenses_sp_e10_ht
+
+
+class depenses_sp_95_ht(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en essence sans plomb 95 hors taxes (HT, i.e. sans TVA ni TICPE)"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+
+        try:
+            accise_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            majoration_ticpe_super95 = \
+                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+            accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
+        except:
+            accise_ticpe_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+
+        super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+        taux_implicite_sp95 = (
+            (accise_ticpe_super95 * (1 + taux_plein_tva)) /
+            (super_95_ttc - accise_ticpe_super95 * (1 + taux_plein_tva))
+            )
+        depenses_essence = simulation.calculate('depenses_essence', period)
+        part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
+        depenses_sp_95 = depenses_essence * part_sp95
+        depenses_sp_95_htva = depenses_sp_95 - tax_from_expense_including_tax(depenses_sp_95, taux_plein_tva)
+        depenses_sp_95_ht = \
+            depenses_sp_95_htva - tax_from_expense_including_tax(depenses_sp_95_htva, taux_implicite_sp95)
+
+        return period, depenses_sp_95_ht
+
+
+class depenses_sp_98_ht(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en essence sans plomb 98 hors taxes (HT, i.e. sans TVA ni TICPE)"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+
+        try:
+            accise_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            majoration_ticpe_super98 = \
+                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+            accise_ticpe_super98 = accise_super98 + majoration_ticpe_super98
+        except:
+            accise_ticpe_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+
+        super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
+        taux_implicite_sp98 = (
+            (accise_ticpe_super98 * (1 + taux_plein_tva)) /
+            (super_98_ttc - accise_ticpe_super98 * (1 + taux_plein_tva))
+            )
+        depenses_essence = simulation.calculate('depenses_essence', period)
+        part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
+        depenses_sp_98 = depenses_essence * part_sp98
+        depenses_sp_98_htva = depenses_sp_98 - tax_from_expense_including_tax(depenses_sp_98, taux_plein_tva)
+        depenses_sp_98_ht = \
+            depenses_sp_98_htva - tax_from_expense_including_tax(depenses_sp_98_htva, taux_implicite_sp98)
+
+        return period, depenses_sp_98_ht
+
+
+class depenses_super_plombe_ht(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en essence super plombée hors taxes (HT, i.e. sans TVA ni TICPE)"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        accise_super_plombe_ticpe = \
+            simulation.legislation_at(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
+        super_plombe_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
+        taux_implicite_super_plombe = (
+            (accise_super_plombe_ticpe * (1 + taux_plein_tva)) /
+            (super_plombe_ttc - accise_super_plombe_ticpe * (1 + taux_plein_tva))
+            )
+        depenses_essence = simulation.calculate('depenses_essence', period)
+        part_super_plombe = \
+            simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
+        depenses_super_plombe = depenses_essence * part_super_plombe
+        depenses_super_plombe_htva = \
+            depenses_super_plombe - tax_from_expense_including_tax(depenses_super_plombe, taux_plein_tva)
+        depenses_super_plombe_ht = (depenses_super_plombe_htva -
+            tax_from_expense_including_tax(depenses_super_plombe_htva, taux_implicite_super_plombe))
+
+        return period, depenses_super_plombe_ht
+
+
+class depenses_essence_ht(DatedVariable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en essence hors taxes (HT, i.e. sans TVA ni TICPE)"
+
+    @dated_function(start = date(1990, 1, 1), stop = date(2006, 12, 31))
+    def function_90_06(self, simulation, period):
+        depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
+        depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
+        depenses_super_plombe_ht = simulation.calculate('depenses_super_plombe_ht', period)
+        depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht + depenses_super_plombe_ht)
+        return period, depenses_essence_ht
+
+    @dated_function(start = date(2007, 1, 1), stop = date(2008, 12, 31))
+    def function_07_08(self, simulation, period):
+        depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
+        depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
+        depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht)
+        return period, depenses_essence_ht
+
+    @dated_function(start = date(2009, 1, 1), stop = date(2015, 12, 31))
+    def function_09_15(self, simulation, period):
+        depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
+        depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
+        depenses_sp_e10_ht = simulation.calculate('depenses_sp_e10_ht', period)
+        depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht + depenses_sp_e10_ht)
+        return period, depenses_essence_ht
+
+
+class depenses_essence_recalculees(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en essence recalculées à partir du prix ht"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        depenses_sp_e10_ht = simulation.calculate('depenses_sp_e10_ht', period)
+        depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
+        depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
+        depenses_super_plombe_ht = simulation.calculate('depenses_super_plombe_ht', period)
+
+
+class depenses_totales(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation totale du ménage"
 
     def function(self, simulation, period):
-        consommation_tva_taux_super_reduit = simulation.calculate('consommation_tva_taux_super_reduit', period)
-        consommation_tva_taux_reduit = simulation.calculate('consommation_tva_taux_reduit', period)
-        consommation_tva_taux_intermediaire = simulation.calculate('consommation_tva_taux_intermediaire', period)
-        consommation_tva_taux_plein = simulation.calculate('consommation_tva_taux_plein', period)
+        depenses_tva_taux_super_reduit = simulation.calculate('depenses_tva_taux_super_reduit', period)
+        depenses_tva_taux_reduit = simulation.calculate('depenses_tva_taux_reduit', period)
+        depenses_tva_taux_intermediaire = simulation.calculate('depenses_tva_taux_intermediaire', period)
+        depenses_tva_taux_plein = simulation.calculate('depenses_tva_taux_plein', period)
         return period, (
-            consommation_tva_taux_super_reduit +
-            consommation_tva_taux_reduit +
-            consommation_tva_taux_intermediaire +
-            consommation_tva_taux_plein
+            depenses_tva_taux_super_reduit +
+            depenses_tva_taux_reduit +
+            depenses_tva_taux_intermediaire +
+            depenses_tva_taux_plein
             )
 
 
-class consommation_tva_taux_intermediaire(Variable):
+class depenses_tva_taux_intermediaire(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation soumis à une TVA à taux intermédiaire"
@@ -156,7 +391,7 @@ class consommation_tva_taux_intermediaire(Variable):
         return period, categorie_fiscale_4
 
 
-class consommation_tva_taux_plein(Variable):
+class depenses_tva_taux_plein(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation soumis à une TVA à taux plein"
@@ -170,7 +405,7 @@ class consommation_tva_taux_plein(Variable):
         return period, categorie_fiscale_3 + categorie_fiscale_11
 
 
-class consommation_tva_taux_reduit(Variable):
+class depenses_tva_taux_reduit(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation soumis à une TVA à taux réduit"
@@ -180,7 +415,7 @@ class consommation_tva_taux_reduit(Variable):
         return period, categorie_fiscale_2
 
 
-class consommation_tva_taux_super_reduit(Variable):
+class depenses_tva_taux_super_reduit(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation soumis à une TVA à taux super réduit"
@@ -190,7 +425,7 @@ class consommation_tva_taux_super_reduit(Variable):
         return period, categorie_fiscale_1
 
 
-class consommation_vin(Variable):
+class depenses_vin(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Consommation de vin"
@@ -200,10 +435,16 @@ class consommation_vin(Variable):
         return period, categorie_fiscale_12
 
 
-class diesel_quantite(Variable):
+class quantite_diesel(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Quantité de diesel consommée (en hecto-litres)"
+
+
+class quantite_supercarburants(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantité de supercarburants (super 95, super98 et superE10) consommée (en hecto-litres)"
 
 
 class somme_coicop12(Variable):
@@ -228,9 +469,3 @@ class somme_coicop12_conso(Variable):
             simulation.calculate('coicop12_{}'.format(idx), period)
             for idx in xrange(1, 9)
             )
-
-
-class supercarburants_quantite(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Quantité de supercarburants (super 95, super98 et superE10) consommée (en hecto-litres)"

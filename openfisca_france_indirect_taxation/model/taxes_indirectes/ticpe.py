@@ -13,7 +13,7 @@ from datetime import date
 from ..base import *  # noqa analysis:ignore
 
 
-class diesel_depenses(Variable):
+class depenses_diesel(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Construction par pondération des dépenses spécifiques au diesel"
@@ -39,16 +39,16 @@ class diesel_depenses(Variable):
 
         part_conso_diesel = (nombre_vehicules_diesel * conso_moyenne_vp_diesel) / denominateur
 
-        depenses_carburants = simulation.calculate('consommation_ticpe', period)
+        depenses_carburants = simulation.calculate('depenses_carburants', period)
 
-        diesel_depenses = depenses_carburants * (
+        depenses_diesel = depenses_carburants * (
             (nombre_vehicules_total == 0) * (
                 conso_totale_vp_diesel / (conso_totale_vp_diesel + conso_totale_vp_essence)
                 ) +
             (nombre_vehicules_total != 0) * part_conso_diesel
             )
 
-        return period, diesel_depenses
+        return period, depenses_diesel
 
 
 class diesel_ticpe(Variable):
@@ -73,24 +73,24 @@ class diesel_ticpe(Variable):
             (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
             )
 
-        diesel_depenses = simulation.calculate('diesel_depenses', period)
-        diesel_depenses_htva = diesel_depenses - tax_from_expense_including_tax(diesel_depenses, taux_plein_tva)
-        montant_diesel_ticpe = tax_from_expense_including_tax(diesel_depenses_htva, taux_implicite_diesel)
+        depenses_diesel = simulation.calculate('depenses_diesel', period)
+        depenses_diesel_htva = depenses_diesel - tax_from_expense_including_tax(depenses_diesel, taux_plein_tva)
+        montant_diesel_ticpe = tax_from_expense_including_tax(depenses_diesel_htva, taux_implicite_diesel)
 
         return period, montant_diesel_ticpe
 
 
-class essence_depenses(Variable):
+class depenses_essence(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Construction par pondération des dépenses spécifiques à l'essence"
 
     def function(self, simulation, period):
-        depenses_carburants = simulation.calculate('consommation_ticpe', period)
-        diesel_depenses = simulation.calculate('diesel_depenses', period)
-        essence_depenses = depenses_carburants - diesel_depenses
+        depenses_carburants = simulation.calculate('depenses_carburants', period)
+        depenses_diesel = simulation.calculate('depenses_diesel', period)
+        depenses_essence = depenses_carburants - depenses_diesel
 
-        return period, essence_depenses
+        return period, depenses_essence
 
 
 class essence_ticpe(DatedVariable):
@@ -147,9 +147,9 @@ class sp_e10_ticpe(Variable):
             (accise_ticpe_super_e10 * (1 + taux_plein_tva)) /
             (super_95_e10_ttc - accise_ticpe_super_e10 * (1 + taux_plein_tva))
             )
-        essence_depenses = simulation.calculate('essence_depenses', period)
+        depenses_essence = simulation.calculate('depenses_essence', period)
         part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
-        sp_e10_depenses = essence_depenses * part_sp_e10
+        sp_e10_depenses = depenses_essence * part_sp_e10
         sp_e10_depenses_htva = \
             sp_e10_depenses - tax_from_expense_including_tax(sp_e10_depenses, taux_plein_tva)
         montant_sp_e10_ticpe = \
@@ -179,9 +179,9 @@ class sp95_ticpe(Variable):
             (accise_ticpe_super95 * (1 + taux_plein_tva)) /
             (super_95_ttc - accise_ticpe_super95 * (1 + taux_plein_tva))
             )
-        essence_depenses = simulation.calculate('essence_depenses', period)
+        depenses_essence = simulation.calculate('depenses_essence', period)
         part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
-        sp95_depenses = essence_depenses * part_sp95
+        sp95_depenses = depenses_essence * part_sp95
         sp95_depenses_htva = sp95_depenses - tax_from_expense_including_tax(sp95_depenses, taux_plein_tva)
         montant_sp95_ticpe = tax_from_expense_including_tax(sp95_depenses_htva, taux_implicite_sp95)
 
@@ -209,9 +209,9 @@ class sp98_ticpe(Variable):
             (accise_ticpe_super98 * (1 + taux_plein_tva)) /
             (super_98_ttc - accise_ticpe_super98 * (1 + taux_plein_tva))
             )
-        essence_depenses = simulation.calculate('essence_depenses', period)
+        depenses_essence = simulation.calculate('depenses_essence', period)
         part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
-        sp98_depenses = essence_depenses * part_sp98
+        sp98_depenses = depenses_essence * part_sp98
         sp98_depenses_htva = sp98_depenses - tax_from_expense_including_tax(sp98_depenses, taux_plein_tva)
         montant_sp98_ticpe = tax_from_expense_including_tax(sp98_depenses_htva, taux_implicite_sp98)
 
@@ -232,10 +232,10 @@ class super_plombe_ticpe(Variable):
             (accise_super_plombe_ticpe * (1 + taux_plein_tva)) /
             (super_plombe_ttc - accise_super_plombe_ticpe * (1 + taux_plein_tva))
             )
-        essence_depenses = simulation.calculate('essence_depenses', period)
+        depenses_essence = simulation.calculate('depenses_essence', period)
         part_super_plombe = \
             simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
-        super_plombe_depenses = essence_depenses * part_super_plombe
+        super_plombe_depenses = depenses_essence * part_super_plombe
         super_plombe_depenses_htva = \
             super_plombe_depenses - tax_from_expense_including_tax(super_plombe_depenses, taux_plein_tva)
         montant_super_plombe_ticpe = \
@@ -247,7 +247,7 @@ class super_plombe_ticpe(Variable):
 class ticpe_totale(Variable):
     column = FloatCol
     entity_class = Menages
-    label = u"Calcul du montant de la TICPE sur toutes les essences cumulées"
+    label = u"Calcul du montant de la TICPE sur tous les carburants cumulés"
 
     def function(self, simulation, period):
         essence_ticpe = simulation.calculate('essence_ticpe', period)

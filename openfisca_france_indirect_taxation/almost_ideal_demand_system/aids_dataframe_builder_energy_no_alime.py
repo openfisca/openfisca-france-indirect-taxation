@@ -31,7 +31,7 @@ assets_directory = os.path.join(
 # On commence par cinstruire une dataframe appelée data_conso rassemblant les informations sur les dépenses des ménages.
 data_frame_for_reg = None
 data_frame_all_years = pd.DataFrame()
-for year in [2000, 2005, 2011]:
+for year in [2011]:
     aggregates_data_frame = get_input_data_frame(year)
 
     # Pour estimer QAIDS, on se concentre sur les biens non-durables.
@@ -76,16 +76,14 @@ for year in [2000, 2005, 2011]:
         aggregates_data_frame['depenses_tot'] - aggregates_data_frame['depenses_carbu'] -
         aggregates_data_frame['depenses_logem'])
 
-    data_conso = aggregates_data_frame[produits + ['vag'] + ['depenses_autre'] +
-        ['depenses_carbu'] + ['depenses_logem']].copy()
+    data_conso = aggregates_data_frame[produits + ['vag', 'ident_men', 'depenses_autre', 'depenses_carbu',
+        'depenses_logem']].copy()
 
     # On renverse la dataframe pour obtenir une ligne pour chaque article consommé par chaque personne
-    data_conso.index.name = 'ident_men'
-    data_conso.reset_index(inplace = True)
     df = pd.melt(data_conso, id_vars = ['vag', 'ident_men'], value_vars=produits,
         value_name = 'depense_bien', var_name = 'bien')
 
-    df_indice_prix_produit = df_indice_prix_produit[['indice_prix_produit'] + ['prix'] + ['temps'] + ['mois']]
+    df_indice_prix_produit = df_indice_prix_produit[['indice_prix_produit', 'prix', 'temps', 'mois']]
 
     df['vag'] = df['vag'].astype(str)
     df['indice_prix_produit'] = df['bien'] + '_' + df['vag']
@@ -103,18 +101,16 @@ for year in [2000, 2005, 2011]:
     del logem, produit
 
     # Construire les indices de prix pondérés pour les deux catégories
-    df_depenses_prix[['type_bien'] + ['ident_men']] = df_depenses_prix[['type_bien'] + ['ident_men']].astype(str)
+    df_depenses_prix[['type_bien', 'ident_men']] = df_depenses_prix[['type_bien', 'ident_men']].astype(str)
     df_depenses_prix['id'] = df_depenses_prix['type_bien'] + '_' + df_depenses_prix['ident_men']
 
     data_conso['ident_men'] = data_conso['ident_men'].astype(str)
     df_depenses_prix = pd.merge(
-        df_depenses_prix, data_conso[['depenses_autre'] + ['depenses_carbu'] +
-        ['depenses_logem'] + ['ident_men']], on = 'ident_men'
-        )
+        df_depenses_prix, data_conso[['depenses_autre', 'depenses_carbu', 'depenses_logem', 'ident_men']],
+        on = 'ident_men')
     del data_conso
-    df_depenses_prix[['depenses_autre'] + ['depense_bien'] + ['depenses_carbu'] +
-        ['depenses_logem'] + ['prix']] = df_depenses_prix[['depenses_autre'] +
-        ['depense_bien'] + ['depenses_carbu'] + ['depenses_logem'] + ['prix']].astype(float)
+    df_depenses_prix[['depenses_autre', 'depense_bien', 'depenses_carbu', 'depenses_logem', 'prix']] = \
+        df_depenses_prix[['depenses_autre', 'depense_bien', 'depenses_carbu', 'depenses_logem', 'prix']].astype(float)
 
     df_depenses_prix['part_bien_categorie'] = 0
     df_depenses_prix.loc[df_depenses_prix['type_bien'] == 'autre', 'part_bien_categorie'] = \
@@ -153,9 +149,9 @@ for year in [2000, 2005, 2011]:
     grouped_logem = grouped[grouped['categorie'] == 'logem'].copy()
     grouped_logem['ident_men'] = grouped_logem['id'].str[6:]
 
-    df_prix_to_merge = pd.merge(grouped_carbu[['ident_men'] + ['prix_carbu']], grouped_autre[['ident_men'] +
-        ['prix_autre']], on = 'ident_men')
-    df_prix_to_merge = pd.merge(df_prix_to_merge, grouped_logem[['ident_men'] + ['prix_logem']], on = 'ident_men')
+    df_prix_to_merge = pd.merge(grouped_carbu[['ident_men', 'prix_carbu']], grouped_autre[['ident_men', 'prix_autre']],
+        on = 'ident_men')
+    df_prix_to_merge = pd.merge(df_prix_to_merge, grouped_logem[['ident_men', 'prix_logem']], on = 'ident_men')
     del grouped, grouped_autre, grouped_carbu, grouped_logem
 
     # Problème: ceux qui ne consomment pas de carbu ou d'alimentaire se voient affecter un indice de prix égal à 0. Ils
@@ -165,10 +161,10 @@ for year in [2000, 2005, 2011]:
     # Si seulement électricité, elle est égale à 1.
     aggregates_data_frame = electricite_only(aggregates_data_frame)
     # On récupère les informations importantes sur les ménages, dont les variables démographiques
-    df_info_menage = aggregates_data_frame[['agepr'] + ['depenses_autre'] + ['depenses_carbu'] +
-        ['depenses_logem'] + ['depenses_tot'] + ['dip14pr'] + ['elect_only'] + ['nenfants'] + ['nactifs'] + ['ocde10'] +
-        ['revtot'] + ['situacj'] + ['situapr'] + ['stalog'] + ['strate'] + ['typmen'] + ['vag'] + ['veh_diesel'] +
-        ['veh_essence']].copy()
+    df_info_menage = aggregates_data_frame[['agepr', 'depenses_autre', 'depenses_carbu',
+        'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'ident_men', 'nenfants', 'nactifs', 'ocde10',
+        'revtot', 'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
+        'veh_essence']].copy()
     df_info_menage.index.name = 'ident_men'
     df_info_menage.reset_index(inplace = True)
     df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
@@ -184,7 +180,7 @@ for year in [2000, 2005, 2011]:
     # Pour ceux qui ne consomment pas de carburants, on leur associe le prix correspondant à leur vague d'enquête
     price_carbu = df_indice_prix_produit[df_indice_prix_produit['indice_prix_produit'].str[13:16] == '722'].copy()
     price_carbu['vag'] = price_carbu['indice_prix_produit'].str[17:].astype(int)
-    price_carbu = price_carbu[['vag'] + ['prix']]
+    price_carbu = price_carbu[['vag', 'prix']]
     price_carbu['prix'] = price_carbu['prix'].astype(float)
     dataframe = pd.merge(dataframe, price_carbu, on = 'vag')
     del price_carbu
@@ -192,10 +188,10 @@ for year in [2000, 2005, 2011]:
 
     dataframe['depenses_par_uc'] = dataframe['depenses_tot'] / dataframe['ocde10']
 
-    dataframe = dataframe[['ident_men'] + ['part_carbu'] + ['part_logem'] + ['part_autre'] +
-        ['prix_carbu'] + ['prix_logem'] + ['prix_autre'] + ['depenses_par_uc'] + ['depenses_tot'] +
-        ['typmen'] + ['strate'] + ['dip14pr'] + ['agepr'] + ['situapr'] + ['situacj'] + ['stalog'] + ['nenfants'] +
-        ['nactifs'] + ['vag'] + ['veh_diesel'] + ['veh_essence'] + ['elect_only']]
+    dataframe = dataframe[['ident_men', 'part_carbu', 'part_logem', 'part_autre',
+        'prix_carbu', 'prix_logem', 'prix_autre', 'depenses_par_uc', 'depenses_tot',
+        'typmen', 'strate', 'dip14pr', 'agepr', 'situapr', 'situacj', 'stalog', 'nenfants',
+        'nactifs', 'vag', 'veh_diesel', 'veh_essence', 'elect_only']]
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la

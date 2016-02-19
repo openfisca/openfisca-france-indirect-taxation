@@ -55,12 +55,12 @@ if __name__ == '__main__':
         'revtot',
         'niveau_de_vie',
         'rev_disponible',
-        'consommation_cigarette',
-        'consommation_cigares',
-        'consommation_tabac_a_rouler',
-        'consommation_alcools_forts',
-        'consommation_vin',
-        'consommation_biere'
+        'depenses_cigarettes',
+        'depenses_cigares',
+        'depenses_tabac_a_rouler',
+        'depenses_alcools_forts',
+        'depenses_vin',
+        'depenses_biere'
         ]
     # Merge des deux listes
     simulated_variables += list_coicop12
@@ -76,12 +76,12 @@ if __name__ == '__main__':
             varlist = simulated_variables)
         list_alcool_tabac = []
         Wconcat['part_alcool'] = \
-            (Wconcat['consommation_alcools_forts'] + Wconcat['consommation_vin'] + Wconcat['consommation_biere']) \
+            (Wconcat['depenses_alcools_forts'] + Wconcat['depenses_vin'] + Wconcat['depenses_biere']) \
             / Wconcat['rev_disponible']
         list_alcool_tabac.append('part_alcool')
         Wconcat['part_tabac'] = \
-            (Wconcat['consommation_cigarette'] + Wconcat['consommation_cigares'] +
-            Wconcat['consommation_tabac_a_rouler']) / Wconcat['rev_disponible']
+            (Wconcat['depenses_cigarettes'] + Wconcat['depenses_cigares'] +
+            Wconcat['depenses_tabac_a_rouler']) / Wconcat['rev_disponible']
         list_alcool_tabac.append('part_tabac')
 
         df_to_graph = Wconcat[list_alcool_tabac].copy()

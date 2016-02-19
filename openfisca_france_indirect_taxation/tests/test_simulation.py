@@ -66,7 +66,7 @@ def test_survey_simulation(year = 2005):
                 'decuc',
                 'poste_coicop_611',
                 'categorie_fiscale_7',
-                'consommation_ticpe',
+                'depenses_carburants',
                 ]
             ])
         )

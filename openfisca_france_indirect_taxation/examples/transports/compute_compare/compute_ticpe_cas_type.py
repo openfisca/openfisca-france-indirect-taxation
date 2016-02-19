@@ -36,7 +36,7 @@ for element in columns:
                 birth = datetime.date(year - 40, 1, 1),
                 ),
             menage = dict(
-                consommation_ticpe = 1000,
+                depenses_carburants = 1000,
                 veh_essence = ess,
                 veh_diesel = dies,
                 ),

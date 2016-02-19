@@ -25,7 +25,7 @@ seaborn.set_palette(seaborn.color_palette("Set2", 12))
 if __name__ == '__main__':
 
     # Sélection des variables utilisées pour la simulation
-    simulated_variables = ['consommation_ticpe', 'essence_depenses', 'diesel_depenses', 'revtot']
+    simulated_variables = ['depenses_carburants', 'depenses_essence', 'depenses_diesel', 'revtot']
     for year in [2000, 2005, 2011]:
         survey_scenario = SurveyScenario.create(year = year)
         pivot_table = pandas.DataFrame()
