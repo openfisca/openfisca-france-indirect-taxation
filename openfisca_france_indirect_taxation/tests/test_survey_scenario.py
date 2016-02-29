@@ -34,7 +34,6 @@ def test():
         )
     coicop12_1 = survey_scenario.simulation.calculate('coicop12_1')
     elasticite_1 = survey_scenario.simulation.calculate('elas_exp_1')
-    print elasticite_1
 
     pivot_table = pandas.DataFrame()
     for values in simulated_variables:
