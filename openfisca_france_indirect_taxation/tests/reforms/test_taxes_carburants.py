@@ -22,7 +22,7 @@ def test_taxes_carburants():
             ),
         menage = dict(
             depenses_essence = 1000,
-            carburants_elasticite_prix = 0,
+            elas_price_1_1 = -0.4,
             ),
         )
     reform_simulation = scenario.new_simulation(debug = True)
@@ -30,7 +30,7 @@ def test_taxes_carburants():
     reform_depenses_essence_ajustees = reform_simulation.calculate('depenses_essence_ajustees')
     assert_near(
         reform_depenses_essence_ajustees,
-        1000 * (1 + (1 + (0)) * 10 / 148.4583),
+        1000 * (1 + (1 + -.4) * 10 / 148.4583),
         absolute_error_margin = absolute_error_margin
         )
 
