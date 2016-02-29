@@ -27,14 +27,14 @@ def modify_legislation_json(reference_legislation_json_copy):
                 "description": u"Surcroît de prix de l'essence (en euros par hectolitres)",
                 "format": "float",
                 "unit": 'currency',
-                "values": [{'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 10}],
+                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 10}],
                 },
             "diesel": {
                 "@type": "Parameter",
                 "description": u"Surcroît de prix du diesel (en euros par hectolitres)",
                 "format": 'float',
                 "unit": 'currency',
-                "values": [{'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 10}],
+                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 30}],
                 },
             },
         }
