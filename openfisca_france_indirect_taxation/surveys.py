@@ -79,8 +79,6 @@ class SurveyScenario(AbstractSurveyScenario):
         input_data_frame = get_input_data_frame(data_year)
         if elasticities is not None:
             assert 'ident_men' in elasticities.columns
-            print input_data_frame.ident_men.dtype
-            print elasticities.dtypes
             input_data_frame['ident_men'] = input_data_frame.ident_men.astype(int)
             input_data_frame = input_data_frame.merge(elasticities, how = "left", on = 'ident_men')
             for col in elasticities.columns:
