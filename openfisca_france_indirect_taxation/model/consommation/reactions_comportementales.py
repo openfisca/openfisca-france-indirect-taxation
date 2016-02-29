@@ -25,7 +25,7 @@ class depenses_essence_ajustees(Variable):
     def function(self, simulation, period):
         depenses_essence = simulation.calculate('depenses_essence', period)
         super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
-        reforme_essence = 10
+        reforme_essence = simulation.legislation_at(period.start).taxes_carburants.essence
         # simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.reforme_essence
         carburants_elasticite_prix = simulation.calculate('elas_price_1_1')
         depenses_essence_ajustees = \
@@ -41,7 +41,7 @@ class depenses_diesel_ajustees(Variable):
     def function(self, simulation, period):
         depenses_diesel = simulation.calculate('depenses_diesel', period)
         diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
-        reforme_diesel = 30
+        reforme_diesel = simulation.legislation_at(period.start).taxes_carburants.diesel
         carburants_elasticite_prix = simulation.calculate('elas_price_1_1')
         depenses_essence_ajustees = \
             depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel / diesel_ttc)
