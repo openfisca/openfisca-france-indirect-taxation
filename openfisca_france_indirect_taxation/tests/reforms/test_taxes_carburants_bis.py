@@ -12,7 +12,7 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_bis import get_in
 
 def test_taxes_carburants_bis():
     year = 2011
-    inflators_by_year = get_inflators_by_year(rebuild = None)
+    inflators_by_year = get_inflators_by_year(rebuild = False)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
     elasticities = get_elasticities(year)
     survey_scenario = SurveyScenario.create(
