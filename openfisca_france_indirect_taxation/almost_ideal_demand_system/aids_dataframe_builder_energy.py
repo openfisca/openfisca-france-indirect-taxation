@@ -179,7 +179,7 @@ for year in [2000, 2005, 2011]:
     # On récupère les informations importantes sur les ménages, dont les variables démographiques
     df_info_menage = aggregates_data_frame[['agepr', 'depenses_alime', 'depenses_autre', 'depenses_carbu',
         'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'ident_men', 'nenfants', 'nactifs', 'ocde10',
-        'revtot', 'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
+        'revtot', 'situacj', 'situapr', 'sourcp', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
         'veh_essence']].copy()
     df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
     df_info_menage['part_alime'] = df_info_menage['depenses_alime'] / df_info_menage['depenses_tot']
@@ -206,7 +206,7 @@ for year in [2000, 2005, 2011]:
     dataframe = dataframe[['ident_men', 'part_carbu', 'part_logem', 'part_alime', 'part_autre',
         'prix_carbu', 'prix_logem', 'prix_alime', 'prix_autre', 'depenses_par_uc', 'depenses_tot',
         'typmen', 'strate', 'dip14pr', 'agepr', 'situapr', 'situacj', 'stalog', 'nenfants',
-        'nactifs', 'vag', 'veh_diesel', 'veh_essence', 'elect_only']]
+        'nactifs', 'vag', 'veh_diesel', 'veh_essence', 'elect_only', 'sourcp']]
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la
