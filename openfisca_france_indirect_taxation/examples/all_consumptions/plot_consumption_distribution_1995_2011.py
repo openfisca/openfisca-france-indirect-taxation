@@ -20,7 +20,7 @@ seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 if __name__ == '__main__':
 
-    inflators_by_year = get_inflators_by_year(rebuild = None)
+    inflators_by_year = get_inflators_by_year(rebuild = False)
     # Liste des coicop agrégées en 12 postes
     simulated_variables = ['coicop12_{}'.format(coicop12_index) for coicop12_index in range(1, 13)]
 

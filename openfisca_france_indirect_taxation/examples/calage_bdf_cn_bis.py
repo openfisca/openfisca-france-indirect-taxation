@@ -126,11 +126,11 @@ def get_inflators(target_year):
     return ratio_by_variable
 
 
-def get_inflators_by_year(rebuild = None):
+def get_inflators_by_year(rebuild = False):
     assets_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
         )
-    if rebuild is not None:
+    if rebuild is not False:
         inflators_by_year = dict()
         for target_year in range(2000, 2015):
             inflators = get_inflators(target_year)
