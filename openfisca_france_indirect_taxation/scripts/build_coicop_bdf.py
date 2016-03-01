@@ -7,7 +7,7 @@ import pandas
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
-from openfisca_france_indirect_taxation.scripts.build_coicop_nomenclature import build_coicop_nomenclature
+from openfisca_france_indirect_taxation.scripts.build_coicop_nomenclature import build_complete_coicop_nomenclature
 from openfisca_france_indirect_taxation.scripts.build_coicop_legislation import get_categorie_fiscale
 
 
@@ -68,7 +68,7 @@ def guess_coicop_from_bdf(year = 2011):
 
 
 def merge_with_coicop_nomenclature(data_frame):
-    coicop_nomenclature = build_coicop_nomenclature()
+    coicop_nomenclature = build_complete_coicop_nomenclature()
     # First pass on coicop level 5
     coicop_nomenclature['poste_coicop'] = coicop_nomenclature['code_coicop'].copy()
     df1 = coicop_nomenclature.merge(data_frame, on = 'code_coicop', how = 'left')
@@ -141,7 +141,7 @@ adjusted_coicop_by_original = {
     '01.1.3.4': '01.1.3.2.2',  # Conserves et plats préparés à base de produi...
     '01.1.4.1': '01.1.4.1.1',  # Lait entier
     '01.1.4.2': '01.1.4.1.1',  # Lait demi-écrémé, écrémé
-    # TODO lait de conserve
+    '01.1.4.3': '01.1.4.1.1',  # lait de conserve
     '01.1.4.4': '01.1.4.2.1',  # Yaourts, fromage blanc et petits suisses yc de soja
     '01.1.4.5': '01.1.4.3.1',  # Fromage et lait caillé]
     '01.1.4.6': '01.1.4.2.2',  # Autres produits laitiers (dessert à base de ...
@@ -183,7 +183,7 @@ adjusted_coicop_by_original = {
     '01.1.9.2': '01.1.9.1.1',  # sel et épices sèches
     '01.1.9.3': '01.1.9.3.2',  # levure , préparations pour desserts, soupes TODO verif soupe à remettre ailleurs
     '01.1.9.4': '01.1.8.1.1',  # autres produits alimentaires (aliments enfants, produits diététiques)
-    #TODO panier alimentaire
+    # TODO panier alimentaire
     '01.2.1.1': '01.2.1.2.1',  # café
     '01.2.1.2': '01.2.1.3.1',  # thé et plantes à infusion
     '01.2.1.3': '01.2.1.1.1',  # cacao et chocolat en poudre
@@ -204,12 +204,14 @@ adjusted_coicop_by_original = {
     '03.1.2.1': '03.1.2.1.1',  # vêtements pour homme
     '03.1.2.2': '03.1.2.2.1',  # vêtements pour femme
     '03.1.2.3': '03.1.2.3.1',  # vêtements pour enfants
-    '03.1.3.1': '03.1.3.1.1',  # TODO mercerie et  accessoire sont groupés dans bdf et pas dans coicop. Verif meme TVA
+    '03.1.3.1': '03.1.3.1.1',  # mercerie et  accessoire sont groupés dans bdf et pas dans coicop. TODO: Verif meme TVA
     '03.1.4.1': '03.1.4.1.1',  # Nettoyage, réparation et location de vêtements
     '03.2.1.1': '03.2.1.1.1',  # Chaussures pour homme
     '03.2.1.2': '03.2.1.1.2',  # chaussures pour femmes
     '03.2.1.3': '03.2.1.1.3',  # chaussures pour enfants
     '03.2.2.1': '03.2.1.2.3',  # Réparation de chaussures
+    '03.3.1.1': '03',          # Autres dépenses d'habillement : cérémonie, séjours hors domicile, personnes viva"
+    '03.3.1.2': '03',	        # "Autres dépenses d'habillement : cadeau offert (à destination d'un autre  ménage)"
     '04.1.1.1': '04.1.1.1.1',  # loyer en résidence principale
     '04.1.2.1': '04.1.1.2.1',  # loyer autres résidence
     '04.3.1.1': '04.3.1.1.1',  # Produits destinés aux travaux courants d’entretien et de réparation du logement
@@ -219,6 +221,7 @@ adjusted_coicop_by_original = {
     '04.4.3.1': '04.4.1.1.1',  # Factures d’eau résidence principale, autre logement, dépendance, terrain
     '04.4.4.1': '04.4.1.4.1',  # Charges collectives relatives au logement (payées isolément du loyer ou crédit)
     '04.5.1.1': '04.5.1.1.1',  # Facture d'électricité résidence principale, autre logement, garage, dépendance
+    '04.5.0.0': '04.5.1.1.1',  # Facture électricité + gaz (non dissociables)
     '04.5.2.1': '04.5.2.1.1',  # Facture de gaz résidence principale, autre logement
     '04.5.2.2': '04.5.2.2.1',  # Achats de butane, propane résidence principale, autre logement
     '04.5.3.1': '04.5.3.1.1',  # Combustibles liquides pour la résidence principale : fuel, mazout, pétrole
@@ -231,14 +234,15 @@ adjusted_coicop_by_original = {
     '05.1.1.5': '05.1.1.5.3',  # Mobilier de jardin (balancelle, table, fauteuil, abri de jardin, portique, etc.)
     '05.1.1.6': '05.1.1.5.1',  # Autres meubles, accessoires du mobilier (yc luminaires, décoration, équipement e
     '05.1.2.1': '05.1.2.1.1',  # Tapis et autres revêtements de sol (lino, moquette, etc.), pose et réparation de
+    '05.1.3.1': '05.1.1.5.4',  # Réparation de meubles
     '05.2.1.1': '05.2.1.1.3',  # Articles de literie (futons, oreillers, couettes, couvertures, draps, alèses, et
     '05.2.1.2': '05.2.1.2.1',  # Autres articles de ménage en textile (tissu d'ameublement, voilages, linge de ma
     '05.3.1.1': '05.3.1.3.1',  # Réfrigérateurs, congélateurs et caves à vin
     '05.3.1.2': '05.3.1.1.1',  # Lave linge, sèche linge et lave vaisselle
     '05.3.1.3': '05.3.1.2.1',  # Gros appareils de cuisson
     '05.3.1.4': '05.3.1.4.2',  # Appareils de chauffage et de climatisation et autres gros appareils électroménag
-    '05.1.3.1': '05.1.1.5.4',  # Réparation de meubles
     '05.3.1.5': '05.3.1.4.1',  # Appareils de nettoyage (aspirateur, nettoyeur vapeur etc.)
+    '05.3.1.6': '05.3.1.4.1',  # 'Machine à coudre et à tricoter'
     '05.3.1.7': '05.3.1.4.1',  # Autres gros appareils ménagers
     '05.3.2.1': '05.3.2.1.1',  # petit électroménager
     '05.3.3.1': '05.3.3.1.1',  # Réparation et entretien des appareils électroménagers
@@ -252,6 +256,8 @@ adjusted_coicop_by_original = {
     '05.6.1.1': '05.6.1.2.1',  # Produits de nettoyage et d’entretien (yc pour piscine)
     '05.6.2.1': '05.6.2.1.1',  # Services domestiques (ménage, garde enfant, jardinage, etc.)
     '05.6.2.2': '05.6.2.2.1',  # Autres services d’entretien pour le logement (blanchisserie, location appareils,
+    '05.7.1.1': '05',	        # Autres dépenses en équipement : personnes vivant hors du domicile au moins un jo
+    '05.7.1.2': '05',          # Autres dépenses en équipement : cadeau offert (à destination d'un autre ménage)
     '06.1.1.1': '06.1.1.1.1',  # Produits pharmaceutiques à ingurgiter et traitants, compléments alimentaires, vi
     '06.1.1.2': '06.1.1.2.1',  # Autres produits pharmaceutiques (parapharmacie, pansements, préservatifs, etc. )
     '06.1.1.3': '06.1.1.3.1',  # Appareils et matériels thérapeutiques (lunettes, prothèses, etc.) yc leur répara
@@ -328,8 +334,6 @@ adjust_bdf_coicop = {
     # '02.4.1.1':	'Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre'
     # '03.2.1.3':	'Chaussures pour enfant (3 à 13 ans)'
     # '03.2.2.1':	'Réparation et location de chaussures'
-    # '03.3.1.1':	"Autres dépenses d'habillement : cérémonie, séjours hors domicile, personnes viva"
-    # '03.3.1.2':	"Autres dépenses d'habillement : cadeau offert (à destination d'un autre  ménage)"
     # '04.1.2.1':	'Loyers (hors charges ou avec charges non isolables) des locataires autres réside'
     # '04.4.2.1':	"Services d'assainissement"
     # '04.4.3.1':	"Factures d'eau résidence principale, autre logement, dépendance, terrain"
@@ -341,7 +345,6 @@ adjust_bdf_coicop = {
     # '05.1.1.6':	'Autres meubles, accessoires du mobilier (yc luminaires, décoration, équipement e'
     # '05.1.3.1':	'Réparation de meubles'
     # '05.3.1.5':	'Appareils de nettoyage (aspirateur, nettoyeur vapeur etc.)'
-    # '05.3.1.6':	'Machine à coudre et à tricoter'
     # '05.3.1.7':	'Autres gros appareils ménagers'
     # '05.4.1.4':	'Réparation et entretien verrerie, vaisselle et autres ustensiles de cuisine'
     # '05.5.1.2':	'Gros outillage de jardinage'
@@ -349,8 +352,6 @@ adjust_bdf_coicop = {
     # '05.5.2.1':	'Petit outillage et accessoires divers de bricolage yc petit matériel électrique'
     # '05.5.2.2':	"Petit outillage et accessoires divers de jardinage, matériaux d'aménagement exté"
     # '05.5.2.3':	'Réparation des petits outillages'
-    # '05.7.1.1':	'Autres dépenses en équipement : personnes vivant hors du domicile au moins un jo'
-    # '05.7.1.2':	"Autres dépenses en équipement : cadeau offert (à destination d'un autre ménage)"
     # '06.2.3.2':	'Services des auxiliaires médicaux (infirmier, kiné, laboratoire, etc.)'
     # '06.2.3.3':	'Services extra hospitaliers (ambulance, location matériel)'
     # '06.3.1.1':	'Services et soins hospitaliers'

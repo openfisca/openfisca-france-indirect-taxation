@@ -83,7 +83,7 @@ def build_coicop_level_nomenclature(level, keep_code = False, to_csv = False):
     return data_frame
 
 
-def build_coicop_nomenclature(to_csv = True):
+def build_raw_coicop_nomenclature():
     for index in range(len(sub_levels) - 1):
         level = sub_levels[index]
         next_level = sub_levels[index + 1]
@@ -101,17 +101,48 @@ def build_coicop_nomenclature(to_csv = True):
         sub_levels
         ].copy()
 
-    if to_csv:
-        coicop_nomenclature.to_csv(
-            os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
-            )
     return coicop_nomenclature[['label_division', 'label_groupe', 'label_classe',
        'label_sous_classe', 'label_poste', 'code_coicop']].copy()
 
 
-# def main():
+def build_complete_coicop_nomenclature(to_csv = True):
+    coicop_nomenclature = build_raw_coicop_nomenclature()
+
+    items = [
+        ("Cigares et cigarillos", "02.2.1"),
+        ("Cigarettes", "02.2.2"),
+        ("Tabac sous d'autres formes et produits connexes", "02.2.3"),
+        ("Stupéfiants ", "02.3"),
+        ]
+
+    for label_poste, code_coicop in items:
+        label_division = "Boissons alcoolisées et tabac"
+        label_groupe = "Tabac"
+        label_classe = label_sous_classe = label_poste
+        data = dict(
+            label_division = [label_division],
+            label_groupe = [label_groupe],
+            label_classe = [label_classe],
+            label_sous_classe = [label_sous_classe],
+            label_poste = [label_poste],
+            code_coicop = [code_coicop],
+            )
+        coicop_nomenclature = coicop_nomenclature.append(
+            pd.DataFrame.from_dict(data, dtype = 'str'),
+            ignore_index = True
+            )
+        coicop_nomenclature.sort_values("code_coicop", inplace = True)
+
+    if to_csv:
+        coicop_nomenclature.to_csv(
+            os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
+            )
+
+    return coicop_nomenclature[['label_division', 'label_groupe', 'label_classe',
+       'label_sous_classe', 'label_poste', 'code_coicop']].copy()
 
 
 if __name__ == "__main__":
     # sys.exit(main())
-    coicop_nomenclature = build_coicop_nomenclature()
+    coicop_nomenclature = build_complete_coicop_nomenclature()
+    coicop_nomenclature.dtypes
