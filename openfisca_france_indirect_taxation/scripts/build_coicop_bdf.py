@@ -125,19 +125,34 @@ adjusted_coicop_by_original = {
     '01.1.1.1': '01.1.1.4.3',  # Riz sous toutes ses formes et produits Ã  base de riz
     '01.1.1.2': '01.1.1.1.1',  # Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gÃ¢teaux
     '01.1.1.3': '01.1.1.4.2',  # Pâtes alimentaires sous toutes leurs formes et plats à  base de pâtes
+    '01.1.1.4': '01.1.1.3.3',  # Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quich
     '01.1.1.5': '01.1.1.4.1',  # Autres céréales et produits à base de céréales]
+    '01.1.2.1': '01.1.2.1.1',  # Viande bovine fraîche ou surgelée
+    '01.1.2.2': '01.1.2.4.1',  # Viande porcine fraîche ou surgelée
+    '01.1.2.3': '01.1.2.3.1',  # Viande ovine ou caprine fraîche ou surgelée
+    '01.1.2.4': '01.1.2.5.1',  # Viande de volaille fraîche ou surgelée
+    '01.1.2.5': '01.1.2.4.2',  # Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, sa
+    '01.1.2.6': '01.1.2.6.3',  # Conserve de viande, produit de transformation des viandes, plat préparé de viand
     '01.1.2.7': '01.1.2.6.1',  # Autres viandes comestibles fraîches ou surge...
     '01.1.3.0': '01.1.3.1.1',  # Poissons frais
+    '01.1.3.1': '01.1.3.2.1',  # Poissons surgelés ou congelés (hors poissons panés ou cuisinés)
+    '01.1.3.2': '01.1.3.1.2',  # Fruits de mer frais ou surgelés (yc cuits, nc cuisinés ) TODO: frais et surgelé meme TVA
     '01.1.3.3': '01.1.3.2.1',  # Poissons et fruits de mer salés, fumés, séchés]
     '01.1.3.4': '01.1.3.2.2',  # Conserves et plats préparés à base de produi...
+    '01.1.4.1': '01.1.4.1.1',  # Lait entier
+    '01.1.4.2': '01.1.4.1.1',  # Lait demi-écrémé, écrémé
+    # TODO lait de conserve
+    '01.1.4.4': '01.1.4.2.1',  # Yaourts, fromage blanc et petits suisses yc de soja
     '01.1.4.5': '01.1.4.3.1',  # Fromage et lait caillé]
     '01.1.4.6': '01.1.4.2.2',  # Autres produits laitiers (dessert à base de ...
     '01.1.4.7': '01.1.4.4.1',  # Oeufs
+    '01.1.5.1': '01.1.5.1.1',  # Beurre
     '01.1.5.2': '01.1.5.2.2',  # Margarine
     '01.1.5.3': '01.1.5.2.1',  # Huiles alimentaires d'olive]
     '01.1.5.4': '01.1.5.2.1',  # Huiles alimentaires d'arachide, de tournesol...
     # On a rassemblé les deux les huiles alimentaires # TODO: peut-être faut-il séparer les huiles végétales
-    # '01.1.5.5'  [ saindoux et autres graisses d'origine animale]
+    '01.1.5.5': '01.1.5.2.2',  # saindoux et autres graisses d'origine animale
+    '01.1.6.1': '01.1.6.1.1',  # agrumes frais et surgelés
     '01.1.6.2': '01.1.6.1.1',  # bananes fraiches
     '01.1.6.3': '01.1.6.1.1',  # pommes
     '01.1.6.4': '01.1.6.1.1',  # poires
@@ -164,25 +179,152 @@ adjusted_coicop_by_original = {
     '01.1.8.5': '01.1.8.3.1',  # crèmes glacées, sorbets, entremets glacés]
     '01.1.8.6': '01.1.8.1.1',  # autres produits à base de sucre (fruits confits, pâtes à tartiner)
     # TODO: créer une nouvelle section ? pour 01.1.8.6
+    '01.1.9.1': '01.1.9.1.1',  # sauces et condiments
+    '01.1.9.2': '01.1.9.1.1',  # sel et épices sèches
+    '01.1.9.3': '01.1.9.3.2',  # levure , préparations pour desserts, soupes TODO verif soupe à remettre ailleurs
     '01.1.9.4': '01.1.8.1.1',  # autres produits alimentaires (aliments enfants, produits diététiques)
-    '01.2.1.1': '01.2.1.2',    # café
+    #TODO panier alimentaire
+    '01.2.1.1': '01.2.1.2.1',  # café
     '01.2.1.2': '01.2.1.3.1',  # thé et plantes à infusion
     '01.2.1.3': '01.2.1.1.1',  # cacao et chocolat en poudre
     '01.2.2.1': '01.2.2.1.1',  # eaux minérales
     '01.2.2.2': '01.2.2.2.2',  # boissons gazeuses
-    '01.2.2.3': '01.2.2.2',    # jus de fruits et de légumes, sirops, boisson...
+    '01.2.2.3': '01.2.2.2.3',  # jus de fruits et de légumes, sirops, boisson... TODO verif
     '01.2.2.4': '01.2.2.2.1',  # jus de légumes
+    '02.1.1.1': '02.1.1.1.1',  # spiritueux et liqueurs
+    '02.1.2.1': '02.1.2.1.1',  # vins et cidres
     '11.1.1.2': '11.1.1.1.2',  # Repas dans cafés, bar
+    '02.1.2.2': '02.1.2.2.1',  # autres apéritifs à base de vin, champagne et autres mousseux, saké et autres
+    '02.1.3.1': '02.1.3.1.1',  # bière et boissons à base de bière
+    '02.2.1.1': '02.2.1',      # Cigarettes
+    '02.2.1.2': '02.2.2',      # cigares et cigarillos
+    '02.2.1.3': '02.2.3',      # tabac sous d'autres formes et produits connexes
+    '02.3.1.1': '02.3',        # Stupéfiants
+    '03.1.1.1': '03.1.1.1.1',  # Tissus d'habillement
+    '03.1.2.1': '03.1.2.1.1',  # vêtements pour homme
+    '03.1.2.2': '03.1.2.2.1',  # vêtements pour femme
+    '03.1.2.3': '03.1.2.3.1',  # vêtements pour enfants
+    '03.1.3.1': '03.1.3.1.1',  # TODO mercerie et  accessoire sont groupés dans bdf et pas dans coicop. Verif meme TVA
+    '03.1.4.1': '03.1.4.1.1',  # Nettoyage, réparation et location de vêtements
+    '03.2.1.1': '03.2.1.1.1',  # Chaussures pour homme
+    '03.2.1.2': '03.2.1.1.2',  # chaussures pour femmes
+    '03.2.1.3': '03.2.1.1.3',  # chaussures pour enfants
+    '03.2.2.1': '03.2.1.2.3',  # Réparation de chaussures
+    '04.1.1.1': '04.1.1.1.1',  # loyer en résidence principale
+    '04.1.2.1': '04.1.1.2.1',  # loyer autres résidence
+    '04.3.1.1': '04.3.1.1.1',  # Produits destinés aux travaux courants d’entretien et de réparation du logement
+    '04.3.2.1': '04.3.2.2.1',  # Services d'entretien et petites réparation dans le logement (plombier, entretien)
+    '04.4.1.1': '04.4.1.2.1',  # Redevance d’enlèvement des ordures
+    '04.4.2.1': '04.4.1.3.1',  # Services d’assainissement
+    '04.4.3.1': '04.4.1.1.1',  # Factures d’eau résidence principale, autre logement, dépendance, terrain
+    '04.4.4.1': '04.4.1.4.1',  # Charges collectives relatives au logement (payées isolément du loyer ou crédit)
+    '04.5.1.1': '04.5.1.1.1',  # Facture d'électricité résidence principale, autre logement, garage, dépendance
+    '04.5.2.1': '04.5.2.1.1',  # Facture de gaz résidence principale, autre logement
+    '04.5.2.2': '04.5.2.2.1',  # Achats de butane, propane résidence principale, autre logement
+    '04.5.3.1': '04.5.3.1.1',  # Combustibles liquides pour la résidence principale : fuel, mazout, pétrole
+    '04.5.4.1': '04.5.4.1.1',  # Combustible solide résidence principale
+    '04.5.5.1': '04.5.5.1.1',  # Chauffage urbain (par vapeur)
+    '05.1.1.2': '05.1.1.2.2',  # Mobilier de séjour (buffet, bahut, bibliothèque, etc.)
+    '05.1.1.4': '05.1.1.2.3',  # Tables, sièges, chaises hors cuisine et salle de bain
+    '05.1.1.1': '05.1.1.1.2',  # Mobilier de chambre (lit, armoire, commode, chevet, bureau enfant, sommier) yc m
+    '05.1.1.3': '05.1.1.3.1',  # Mobilier de cuisine et de salle de bain yc éléments intégrés ou non, tabourets,
+    '05.1.1.5': '05.1.1.5.3',  # Mobilier de jardin (balancelle, table, fauteuil, abri de jardin, portique, etc.)
+    '05.1.1.6': '05.1.1.5.1',  # Autres meubles, accessoires du mobilier (yc luminaires, décoration, équipement e
+    '05.1.2.1': '05.1.2.1.1',  # Tapis et autres revêtements de sol (lino, moquette, etc.), pose et réparation de
+    '05.2.1.1': '05.2.1.1.3',  # Articles de literie (futons, oreillers, couettes, couvertures, draps, alèses, et
+    '05.2.1.2': '05.2.1.2.1',  # Autres articles de ménage en textile (tissu d'ameublement, voilages, linge de ma
+    '05.3.1.1': '05.3.1.3.1',  # Réfrigérateurs, congélateurs et caves à vin
+    '05.3.1.2': '05.3.1.1.1',  # Lave linge, sèche linge et lave vaisselle
+    '05.3.1.3': '05.3.1.2.1',  # Gros appareils de cuisson
+    '05.3.1.4': '05.3.1.4.2',  # Appareils de chauffage et de climatisation et autres gros appareils électroménag
+    '05.1.3.1': '05.1.1.5.4',  # Réparation de meubles
+    '05.3.1.5': '05.3.1.4.1',  # Appareils de nettoyage (aspirateur, nettoyeur vapeur etc.)
+    '05.3.1.7': '05.3.1.4.1',  # Autres gros appareils ménagers
+    '05.3.2.1': '05.3.2.1.1',  # petit électroménager
+    '05.3.3.1': '05.3.3.1.1',  # Réparation et entretien des appareils électroménagers
+    '05.4.1.1': '05.4.1.1.2',  # Verrerie et cristallerie, vaisselle, articles de ménage ou de toilette en faïenc
+    '05.4.1.2': '05.4.1.2.1',  # Coutellerie et argenterie
+    '05.4.1.3': '05.4.1.3.1',  # Ustensiles de cuisine et autres articles de ménage
+    '05.4.1.4': '05.3.3.1.1',  # Réparation et entretien verrerie, vaisselle et autres ustensiles de cuisine
+    '05.5.1.1': '05.5.1.1.1',  # Gros outillage de bricolage
+    '05.5.2.2': '05.5.1.1.4',  # Petit outillage et accessoires divers de jardinage, matériaux d'aménagement exté
+    '05.5.2.1': '05.5.1.1.5',  # Petit outillage et accessoires divers de bricolage yc petit matériel électrique
+    '05.6.1.1': '05.6.1.2.1',  # Produits de nettoyage et d’entretien (yc pour piscine)
+    '05.6.2.1': '05.6.2.1.1',  # Services domestiques (ménage, garde enfant, jardinage, etc.)
+    '05.6.2.2': '05.6.2.2.1',  # Autres services d’entretien pour le logement (blanchisserie, location appareils,
+    '06.1.1.1': '06.1.1.1.1',  # Produits pharmaceutiques à ingurgiter et traitants, compléments alimentaires, vi
+    '06.1.1.2': '06.1.1.2.1',  # Autres produits pharmaceutiques (parapharmacie, pansements, préservatifs, etc. )
+    '06.1.1.3': '06.1.1.3.1',  # Appareils et matériels thérapeutiques (lunettes, prothèses, etc.) yc leur répara
+    '06.2.1.1': '06.2.1.1.1',  # Consultations des médecins généralistes ou spécialistes hors hospitalisation
+    '06.2.2.1': '06.2.2.1.1',  # Dentiste, orthodontie
+    '06.2.3.1': '06.2.3.1.1',  # Services des laboratoires d’analyse médicale et des cabinets de radiologie
+    '06.2.3.2': '06.2.3.1.2',  # Services des auxiliaires médicaux (infirmier, kiné, laboratoire, etc.)
+    '06.2.3.3': '06.2.3.1.3',  # Services extra hospitaliers (ambulance, location matériel)
+    '07.1.1.1': '07.1.1.1.1',  # Achats d'automobiles neuves
+    '07.1.1.2': '07.1.1.2.1',  # Achats d'automobiles d'occasion
+    '07.1.2.1': '07.1.2.1.1',  # Motocycles
+    '07.1.3.1': '07.1.2.1.2',  # Achats de cycles neufs et occasion
+    '07.2.1.1': '07.2.1.1.1',  # Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux
+    '07.2.2.1': '07.2.2.1.1',  # Carburants, électricité, huiles, lubrifiants, etc. TODO: séparer les postes?
+    '07.2.3.1': '07.2.3.2.1',  # Réparations, dépannages, révisions, lavage, entretien et contrôle technique
+    '07.2.4.1': '07.2.4.1.2',  # Services de location d’un local, frais de parking
+    '07.2.4.2': '07.2.4.2.1',  # Autres services liés à l’utilisation de véhicules personnels (péages, auto école
+    '07.3.1.1': '07.3.1.1.1',  # Services de transports de voyageurs locaux (métro, tram) et SNCF longue distance
+    '07.3.2.1': '07.3.2.1.1',  # Services de transports de voyageurs par route yc car scolaire
+    '07.3.3.1': '07.3.3.1.1',  # Services de transports de voyageurs par air (yc transport de bagages et de véhic
+    '07.3.5.1': '07.3.5.1.1',  # Services combinés de transport de voyageurs carte navigo, tickets train + bus, e
+    '07.3.4.1': '07.3.6.1.2',  # Services de transport par mer et voies navigables intérieures (yc transport de b
+    '07.3.6.1': '07.3.6.1.1',  # Autres services de transport (yc déménagement)
+    '08.1.1.1': '08.1.1.1.1',  # Services postaux (yc timbres, enveloppes)
+    '08.1.2.1': '08.1.2.1.1',  # Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires
+    '08.1.3.1': '08.1.2.2.1',  # Services de téléphone et fax, internet, recharges téléphoniques
+    '09.1.1.1': '09.1.1.1.3',  # Appareils de réception, d’enregistrement et de reproduction du son
+    '09.1.1.2': '09.1.1.1.2',  # Téléviseurs, home cinéma, magnétoscopes, antennes, adapteur et lecteur DVD de sa
+    '09.1.2.1': '09.1.2.1.1',  # Equipement photographique et cinématographique (yc accessoires)
+    '09.1.2.2': '09.1.2.1.1',  # Instruments d'optique non médicale et divers électroacoustique (microscope, jume
+    '09.1.3.1': '09.1.3.1.1',  # Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces
+    '09.1.4.1': '09.1.4.1.1',  # Supports vierges ou enregistrés pour l’image et le son (yc téléchargement)
+    '09.1.5.1': '09.1.5.1.1',  # Réparation des équipements et accessoires audiovisuels photographiques et inform
+    '09.2.1.1': '09.2.1.1.1',  # Gros équipements pour les loisirs de plein air et les sports (caravanes, camping
+    '09.2.2.1': '09.2.1.1.3',  # Instruments de musique et accessoires
+    '09.3.1.1': '09.3.1.1.1',  # Jeux, jouets et passe temps yc jeux vidéos
+    '09.3.1.2': '09.3.2.1.1',  # Equipements de sport, de camping et de loisirs en plein air (pêche, chasse, uste
+    '09.3.3.1': '09.3.4.1.2',  # Animaux d’agrément, nourriture, produits et accessoires pour les animaux d’agrém
+    '09.3.4.1': '09.3.4.1.1',  # Aliments autres animaux (chèvre, volaille, cabri, cochon, etc.)
+    '09.4.1.1': '09.4.1.1.2',  # Services sportifs et récréatifs (spectacles sportifs, participation loisirs, loc
+    '09.4.2.1': '09.4.2.1.1',  # Cinémas, théâtres, salles de concert, cirques, foire
+    '09.4.2.2': '09.4.2.2.2',  # Musées, jardins zoologiques et similaires
+    '09.4.2.3': '09.4.2.3.1',  # Services de télévision et de radiodiffusion (location, redevance, abonnement)
+    '09.4.2.4': '09.4.2.4.1',  # Smartbox et autres services de loisirs (animateurs, photographes, services pour
+    '09.5.1.1': '09.5.1.1.2',  # Livres yc e-books
+    '09.5.2.1': '09.5.2.1.1',  # Journaux et périodiques yc par abonnement
+    '09.5.3.1': '09.5.3.1.1',  # Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, a
+    '09.5.4.1': '09.5.3.1.2',  # Articles de papeterie et de dessin (yc toner pour imprimante)
+    '09.6.1.1': '09.6.1.1.1',  # Voyages à forfait, week-end, excursions yc voyage scolaire
+    '10.1.2.1': '10.1.1.1.1',  # Enseignement secondaire (scolarité et inscription aux concours de niveau seconda
+    '10.1.3.1': '10.1.1.1.2',  # Enseignement supérieur et frais d’inscription aux concours des grandes écoles
+    '10.1.4.1': '10.1.1.1.3',  # Enseignement ne correspondant à aucun niveau particulier (cours particuliers, en
+    '11.1.1.1': '11.1.1.1.1',  # Repas pris dans un restaurant
+    '11.1.2.1': '11.1.2.1.1',  # Cantines scolaire et professionnelle
+    '11.2.1.1': '11.2.1.1.1',  # Services d’hébergement (hôtels, gîtes, campings, CROUS, internats)
+    '12.1.1.1': '12.1.1.1.1',  # Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, pier
+    '12.1.2.1': '12.1.3.3.3',  # Appareils électriques pour les soins personnels
+    '12.1.2.2': '12.1.3.2.1',  # Autres articles et produits pour les soins personnels (savon, produits de toilet
+    '12.3.1.1': '12.3.1.1.1',  # Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)
+    '12.3.2.1': '12.3.2.1.1',  # Articles de voyage et autres contenants d'effets personnels (maroquinerie, valis
+    '12.3.2.2': '12.3.2.2.2',  # Autres effets personnels (briquets, parapluies, lunettes de soleil, articles pou
+    '12.4.1.1': '12.4.1.1.1',  # Services de protection sociale (assistante maternelle, crèche, maison de retrait
+    '12.5.2.1': '12.5.2.1.1',  # Assurances liées au logement
+    '12.5.3.1': '12.5.3.1.1',  # Assurances liées à la santé
+    '12.5.4.1': '12.5.4.1.1',  # Assurances liées aux transports (yc assurance voyage)
+    '12.6.1.1': '12.6.1.1.1',  # Services financiers
+    '12.7.1.1': '12.7.1.1.1',  # Autres services (pompes funèbres, services juridiques, vestiaires, consignes, gr
+    '12.7.1.2': '12.7.1.2.1',  # Caution pour la location d'un logement
     }
 
 adjust_bdf_coicop = {
-    # '01.1.9.5':	'Panier alimentaire
     # '01.3.1.1':	"autres dépenses d'alimentation : cérémonies, séjours hors domicile, personne viv"
     # '01.3.1.2':	"autres dépenses d'alimentation : cadeau offert (à destination d'un autre ménage"
-    '02.2.1.1': '02.2.1',  # Cigarettes
-    '02.2.1.2': '02.2.2',  # cigares et cigarillos
-    '02.2.1.3': '02.2.3',  # tabac sous d'autres formes et produits connexes
-    '02.3.1.1': '02.3',    # Stupéfiants
     # '02.4.1.1':	'Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre'
     # '03.2.1.3':	'Chaussures pour enfant (3 à 13 ans)'
     # '03.2.2.1':	'Réparation et location de chaussures'
@@ -275,7 +417,8 @@ def adjust_coicop(data_frame):
             remaining_adjust_coicop[key] = value
     result = data_frame.copy()
     result.replace(to_replace = {'code_coicop': non_overlapping_adjust_coicop}, inplace = True)
-    result.replace(to_replace = {'code_coicop': remaining_adjust_coicop}, inplace = True)
+    if remaining_adjust_coicop:
+        result.replace(to_replace = {'code_coicop': remaining_adjust_coicop}, inplace = True)
     return result
 
 
