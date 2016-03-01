@@ -122,6 +122,8 @@ def test_coicop_to_legislation(data_frame, adjust_coicop, year):
 
 adjusted_coicop_by_original = {
 
+    '01.3.1.1': '01',          # autres dépenses d'alimentation : cérémonies, séjours hors domicile, personne viv
+    '01.3.1.2': '01',          # autres dépenses d'alimentation : cadeau offert (à destination d'un autre ménage
     '01.1.1.1': '01.1.1.4.3',  # Riz sous toutes ses formes et produits Ã  base de riz
     '01.1.1.2': '01.1.1.1.1',  # Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gÃ¢teaux
     '01.1.1.3': '01.1.1.4.2',  # Pâtes alimentaires sous toutes leurs formes et plats à  base de pâtes
@@ -227,6 +229,7 @@ adjusted_coicop_by_original = {
     '04.5.3.1': '04.5.3.1.1',  # Combustibles liquides pour la résidence principale : fuel, mazout, pétrole
     '04.5.4.1': '04.5.4.1.1',  # Combustible solide résidence principale
     '04.5.5.1': '04.5.5.1.1',  # Chauffage urbain (par vapeur)
+    '04.6.1.1': '04',          # autres dépenses d'habitation
     '05.1.1.2': '05.1.1.2.2',  # Mobilier de séjour (buffet, bahut, bibliothèque, etc.)
     '05.1.1.4': '05.1.1.2.3',  # Tables, sièges, chaises hors cuisine et salle de bain
     '05.1.1.1': '05.1.1.1.2',  # Mobilier de chambre (lit, armoire, commode, chevet, bureau enfant, sommier) yc m
@@ -258,6 +261,9 @@ adjusted_coicop_by_original = {
     '05.6.2.2': '05.6.2.2.1',  # Autres services d’entretien pour le logement (blanchisserie, location appareils,
     '05.7.1.1': '05',	        # Autres dépenses en équipement : personnes vivant hors du domicile au moins un jo
     '05.7.1.2': '05',          # Autres dépenses en équipement : cadeau offert (à destination d'un autre ménage)
+    '05.6.1.2': '05',          # Autres produits ménagers (articles papier et plastique, brosserie, produits dive
+    '06.4.1.1': '06',          # Autres dépenses de santé : personnes vivant hors du domicile au moins un jour pa
+    '06.4.1.2': '06',          # Autres dépenses de santé : cadeau offert (à destination d’un autre ménage)
     '06.1.1.1': '06.1.1.1.1',  # Produits pharmaceutiques à ingurgiter et traitants, compléments alimentaires, vi
     '06.1.1.2': '06.1.1.2.1',  # Autres produits pharmaceutiques (parapharmacie, pansements, préservatifs, etc. )
     '06.1.1.3': '06.1.1.3.1',  # Appareils et matériels thérapeutiques (lunettes, prothèses, etc.) yc leur répara
@@ -281,9 +287,13 @@ adjusted_coicop_by_original = {
     '07.3.5.1': '07.3.5.1.1',  # Services combinés de transport de voyageurs carte navigo, tickets train + bus, e
     '07.3.4.1': '07.3.6.1.2',  # Services de transport par mer et voies navigables intérieures (yc transport de b
     '07.3.6.1': '07.3.6.1.1',  # Autres services de transport (yc déménagement)
+    '07.1.4.1': '07',          # Achats d'autres véhicules neufs et occasion
+    '07.4.1.1': '07',          # Autres dépenses de transport : cérémonie, séjours hors domicile, personnes vivan
+    '07.4.1.2': '07',          # Autres dépenses de transport : cadeau offert (à destination d’un autre ménage)
     '08.1.1.1': '08.1.1.1.1',  # Services postaux (yc timbres, enveloppes)
     '08.1.2.1': '08.1.2.1.1',  # Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires
     '08.1.3.1': '08.1.2.2.1',  # Services de téléphone et fax, internet, recharges téléphoniques
+    '08.1.4.1': '08',          # Autres dépenses de communications  : cadeau offert (à destination d’un autre mén
     '09.1.1.1': '09.1.1.1.3',  # Appareils de réception, d’enregistrement et de reproduction du son
     '09.1.1.2': '09.1.1.1.2',  # Téléviseurs, home cinéma, magnétoscopes, antennes, adapteur et lecteur DVD de sa
     '09.1.2.1': '09.1.2.1.1',  # Equipement photographique et cinématographique (yc accessoires)
@@ -302,17 +312,25 @@ adjusted_coicop_by_original = {
     '09.4.2.2': '09.4.2.2.2',  # Musées, jardins zoologiques et similaires
     '09.4.2.3': '09.4.2.3.1',  # Services de télévision et de radiodiffusion (location, redevance, abonnement)
     '09.4.2.4': '09.4.2.4.1',  # Smartbox et autres services de loisirs (animateurs, photographes, services pour
+    '09.4.3.1': '09.4.3',      # Jeux de hasard
     '09.5.1.1': '09.5.1.1.2',  # Livres yc e-books
     '09.5.2.1': '09.5.2.1.1',  # Journaux et périodiques yc par abonnement
     '09.5.3.1': '09.5.3.1.1',  # Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, a
     '09.5.4.1': '09.5.3.1.2',  # Articles de papeterie et de dessin (yc toner pour imprimante)
     '09.6.1.1': '09.6.1.1.1',  # Voyages à forfait, week-end, excursions yc voyage scolaire
+    '09.7.1.1': '09',          # Autres dépenses des loisirs : séjours hors domicile, personnes vivant hors du do
+    '09.7.1.2': '09',          # Autres dépenses de loisirs et culture : cadeau offert (à destination d’un autre
+    '10.1.1.1': '10',          # Enseignement maternel et primaire (scolarité et cours d’alphabétisation)
     '10.1.2.1': '10.1.1.1.1',  # Enseignement secondaire (scolarité et inscription aux concours de niveau seconda
     '10.1.3.1': '10.1.1.1.2',  # Enseignement supérieur et frais d’inscription aux concours des grandes écoles
     '10.1.4.1': '10.1.1.1.3',  # Enseignement ne correspondant à aucun niveau particulier (cours particuliers, en
+    '10.1.5.1': '10',          # Autres dépenses d’enseignement : personnes vivant hors du domicile au moins un j
+    '10.1.5.2': '10',          # Autres dépenses d’enseignement : cadeau offert (à destination d’un autre ménage)
     '11.1.1.1': '11.1.1.1.1',  # Repas pris dans un restaurant
     '11.1.2.1': '11.1.2.1.1',  # Cantines scolaire et professionnelle
     '11.2.1.1': '11.2.1.1.1',  # Services d’hébergement (hôtels, gîtes, campings, CROUS, internats)
+    '11.1.3.1': '11',          # Autres dépenses de restauration : séjours hors domicile, personnes vivant hors d
+    '11.1.3.2': '11',          # Autres dépenses de restauration : cadeau offert (à destination d’un autre ménage
     '12.1.1.1': '12.1.1.1.1',  # Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, pier
     '12.1.2.1': '12.1.3.3.3',  # Appareils électriques pour les soins personnels
     '12.1.2.2': '12.1.3.2.1',  # Autres articles et produits pour les soins personnels (savon, produits de toilet
@@ -326,6 +344,8 @@ adjusted_coicop_by_original = {
     '12.6.1.1': '12.6.1.1.1',  # Services financiers
     '12.7.1.1': '12.7.1.1.1',  # Autres services (pompes funèbres, services juridiques, vestiaires, consignes, gr
     '12.7.1.2': '12.7.1.2.1',  # Caution pour la location d'un logement
+    '12.3.3.1': '12',          # Autres biens et services offerts (à des personnes extérieures au ménage)
+    '12.5.1.1': '12.5',        # Assurance vie décès
     }
 
 adjust_bdf_coicop = {
