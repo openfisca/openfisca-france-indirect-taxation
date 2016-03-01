@@ -10,6 +10,10 @@ from __future__ import division
 import os
 import pkg_resources
 import pandas as pd
+import numpy as np
+
+from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.survey_collections import SurveyCollection
 
 
 def add_area_dummy(dataframe):
@@ -107,3 +111,34 @@ def price_carbu_pond(dataframe):
         (1 - dataframe['part_veh_essence']) * dataframe['indice_die'])
     del dataframe['indice_ess'], dataframe['indice_die']
     return dataframe
+
+
+def price_carbu_from_quantities(dataframe, year):
+    bdf_survey_collection = SurveyCollection.load(
+        collection = 'budget_des_familles', config_files_directory = config_files_directory
+        )
+    survey = bdf_survey_collection.get_survey('budget_des_familles_{}'.format(year))
+
+    carnets = survey.get_values(table = 'CARNETS')
+    carnets_carbu = carnets[carnets['nomen5'] == 7221].copy()
+    carnets_carbu[['quantite', 'montant']] = carnets_carbu[['quantite', 'montant']].astype(float)
+
+    carnets_carbu = carnets_carbu.rename(columns = {'ident_me': 'ident_men'})
+    grouped = carnets_carbu.groupby(['ident_men']).sum()
+
+    grouped['prix_carbu_consommateur'] = grouped['montant'] / grouped['quantite']
+    carnets_carbu_select = grouped[grouped['prix_carbu_consommateur'] < 2].copy()
+    carnets_carbu_select = carnets_carbu_select[carnets_carbu_select['prix_carbu_consommateur'] > .8].copy()
+    carnets_carbu_select = carnets_carbu_select.reset_index()
+    carnets_carbu_select['ident_men'] = carnets_carbu_select['ident_men'].astype(str)
+
+    indice_prix_moyen = dataframe['prix_carbu'].mean()
+    prix_consommateur_moyen = carnets_carbu_select['prix_carbu_consommateur'].mean()
+    dataframe2 = (
+        pd.merge(dataframe, carnets_carbu_select[['ident_men', 'prix_carbu_consommateur']],
+        on = 'ident_men', how = 'left')
+        )
+    dataframe2.loc[dataframe2['prix_carbu_consommateur'] < 2, 'prix_carbu'] = \
+        dataframe2['prix_carbu_consommateur'] * indice_prix_moyen / prix_consommateur_moyen
+
+    return dataframe2

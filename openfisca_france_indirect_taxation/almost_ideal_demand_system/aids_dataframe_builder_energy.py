@@ -18,7 +18,8 @@ from openfisca_france_indirect_taxation.examples.utils_example import get_input_
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import \
-    add_area_dummy, add_stalog_dummy, add_vag_dummy, electricite_only, indices_prix_carbus, price_carbu_pond
+    add_area_dummy, add_stalog_dummy, add_vag_dummy, electricite_only, indices_prix_carbus, price_carbu_pond, \
+    price_carbu_from_quantities
 
 
 assets_directory = os.path.join(
@@ -218,9 +219,12 @@ for year in [2000, 2005, 2011]:
     # pour 2011 ce qui est assez important. Cette différence s'explique par la durée des enquêtes (1 semaine en 2011)
     dataframe = dataframe[dataframe['part_carbu'] < 0.25]
 
-    indices_prix_carburants = indices_prix_carbus(year)
-    dataframe = pd.merge(dataframe, indices_prix_carburants, on = 'vag')
-    dataframe = price_carbu_pond(dataframe)
+    if year == 2011:
+        dataframe = price_carbu_from_quantities(dataframe, 2011)
+    else:
+        indices_prix_carburants = indices_prix_carbus(year)
+        dataframe = pd.merge(dataframe, indices_prix_carburants, on = 'vag')
+        dataframe = price_carbu_pond(dataframe)
     dataframe['year'] = year
 
     dataframe = add_area_dummy(dataframe)
