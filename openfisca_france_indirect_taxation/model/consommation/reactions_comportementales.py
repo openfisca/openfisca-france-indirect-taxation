@@ -11,12 +11,6 @@ from __future__ import division
 from ..base import * # noqa analysis:ignore
 
 
-class carburants_elasticite_prix(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Elasticite prix carburants"
-
-
 class depenses_essence_ajustees(Variable):
     column = FloatCol
     entity_class = Menages
