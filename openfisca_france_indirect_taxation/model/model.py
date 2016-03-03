@@ -33,6 +33,7 @@ from .consommation import (  # noqa analysis:ignore
     postes_coicop,
     reactions_comportementales,
     elasticites,
+    quantites_energie,
     )
 from .taxes_indirectes import (  # noqa analysis:ignore
     alcools,
