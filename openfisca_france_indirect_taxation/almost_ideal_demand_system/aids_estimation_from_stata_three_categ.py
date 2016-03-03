@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Feb 05 16:11:09 2016
-
-@author: thomas.douenne
-"""
 
 import pandas as pd
 import pkg_resources

@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Aug 17 15:48:31 2015
-
-@author: thomas.douenne
-"""
 
 # L'objectif est de décrire l'évolution des montants des accises de la TICPE depuis 1993
 

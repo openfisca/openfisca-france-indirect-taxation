@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jul 24 11:07:05 2015
-
-@author: thomas.douenne
-"""
 
 # Ce script réalise des graphiques à partir des données des comptes des transports, i.e. nos agrégats de référence
 # pour les transports : dépenses totales des ménages en carburants, et part de ces dépenses dans leur consommation

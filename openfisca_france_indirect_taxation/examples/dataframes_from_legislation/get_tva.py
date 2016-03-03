@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Aug 17 18:20:34 2015
-
-@author: thomas.douenne
-"""
 
 import pandas as pd
 from pandas import concat

@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Sep 18 11:11:34 2015
-
-@author: thomas.douenne
-"""
 
 # L'objectif est de calculer, pour chaque zone de résidence "strate", les dépenses moyennes en carburants.
 # L'analyse peut être affinée afin de comparer les dépenses en diesel et en essence.

@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Aug 19 15:47:20 2015
-
-@author: thomas.douenne
-"""
 
 # L'objectif des "compare" est d'évaluer la qualité des calages effectués. Ils comparent les dépenses ou quantités
 # agrégées de Budget des Familles après calage, avec celles de la comptabilité nationale.
