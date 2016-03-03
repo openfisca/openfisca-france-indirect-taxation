@@ -522,3 +522,42 @@ class ticpe_totale_ajustee(Variable):
         ticpe_totale_ajustee = diesel_ticpe_ajustee + essence_ticpe_ajustee
 
         return period, ticpe_totale_ajustee
+
+
+class difference_ticpe_diesel_reforme(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence entre les contributions à la TICPE sur le diesel avant et après la réforme"
+
+    def function(self, simulation, period):
+        diesel_ticpe_ajustee = simulation.calculate('diesel_ticpe_ajustee', period)
+        diesel_ticpe = simulation.calculate('diesel_ticpe', period)
+        difference = diesel_ticpe_ajustee - diesel_ticpe
+
+        return period, difference
+
+
+class difference_ticpe_essence_reforme(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence entre les contributions à la TICPE sur l'essence avant et après la réforme"
+
+    def function(self, simulation, period):
+        essence_ticpe_ajustee = simulation.calculate('essence_ticpe_ajustee', period)
+        essence_ticpe = simulation.calculate('essence_ticpe', period)
+        difference = essence_ticpe_ajustee - essence_ticpe
+
+        return period, difference
+
+
+class difference_ticpe_totale_reforme(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence entre les contributions à la TICPE avant et après la réforme"
+
+    def function(self, simulation, period):
+        ticpe_totale_ajustee = simulation.calculate('ticpe_totale_ajustee', period)
+        ticpe_totale = simulation.calculate('ticpe_totale', period)
+        difference = ticpe_totale_ajustee - ticpe_totale
+
+        return period, difference
