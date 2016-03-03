@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Jul 09 18:41:37 2015
-
-@author: thomas.douenne
-"""
 
 # To do : change this test to fit with energy instead of categ
 

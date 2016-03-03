@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Apr 12 16:48:09 2015
-
-@author: germainmarchand
-"""
 
 # Calcul des parts que représentent chaque type de TVA (taux plein, réduit, etc.) dans les dépenses totales en TVA
 # des ménages, selon leur décile de revenu.

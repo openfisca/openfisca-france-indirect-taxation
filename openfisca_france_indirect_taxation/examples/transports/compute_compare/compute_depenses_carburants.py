@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Aug 18 18:33:36 2015
-
-@author: thomas.douenne
-"""
 
 # Import de modules généraux
 from __future__ import division

@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 06 14:25:36 2015
-
-@author: thomas.douenne
-"""
 
 # The aim of this module is to understand what determines the fuel consumption of households. We want to know what are
 # the determinant features, such as the effect of income or residence on fuel consumption. We could therefore try to

@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Aug 19 10:27:32 2015
-
-@author: thomas.douenne
-"""
 
 
 from __future__ import division
