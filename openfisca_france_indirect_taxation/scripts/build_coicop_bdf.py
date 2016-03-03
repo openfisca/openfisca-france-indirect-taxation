@@ -83,7 +83,6 @@ def merge_with_coicop_nomenclature(data_frame):
 
     result = df1.append(df2, ignore_index = True)
 
-    df3 = result.copy()
     result = result.loc[~(result.poste_coicop.duplicated(keep = False) & result.label.isnull())].copy()
 
     result = result.append(coicop_nomenclature.loc[
@@ -138,7 +137,8 @@ adjusted_coicop_by_original = {
     '01.1.2.7': '01.1.2.6.1',  # Autres viandes comestibles fraîches ou surge...
     '01.1.3.0': '01.1.3.1.1',  # Poissons frais
     '01.1.3.1': '01.1.3.2.1',  # Poissons surgelés ou congelés (hors poissons panés ou cuisinés)
-    '01.1.3.2': '01.1.3.1.2',  # Fruits de mer frais ou surgelés (yc cuits, nc cuisinés ) TODO: frais et surgelé meme TVA
+    '01.1.3.2': '01.1.3.1.2',  # Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )
+                               # TODO: frais et surgelé meme TVA
     '01.1.3.3': '01.1.3.2.1',  # Poissons et fruits de mer salés, fumés, séchés]
     '01.1.3.4': '01.1.3.2.2',  # Conserves et plats préparés à base de produi...
     '01.1.4.1': '01.1.4.1.1',  # Lait entier
