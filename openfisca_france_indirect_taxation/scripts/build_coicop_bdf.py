@@ -254,6 +254,7 @@ adjusted_coicop_by_original = {
     '05.4.1.3': '05.4.1.3.1',  # Ustensiles de cuisine et autres articles de ménage
     '05.4.1.4': '05.3.3.1.1',  # Réparation et entretien verrerie, vaisselle et autres ustensiles de cuisine
     '05.5.1.1': '05.5.1.1.1',  # Gros outillage de bricolage
+    '05.5.1.2': '05.5.1.1.1',  # 'Gros outillage de jardinage'
     '05.5.2.2': '05.5.1.1.4',  # Petit outillage et accessoires divers de jardinage, matériaux d'aménagement exté
     '05.5.2.1': '05.5.1.1.5',  # Petit outillage et accessoires divers de bricolage yc petit matériel électrique
     '05.6.1.1': '05.6.1.2.1',  # Produits de nettoyage et d’entretien (yc pour piscine)
@@ -261,7 +262,7 @@ adjusted_coicop_by_original = {
     '05.6.2.2': '05.6.2.2.1',  # Autres services d’entretien pour le logement (blanchisserie, location appareils,
     '05.7.1.1': '05',	        # Autres dépenses en équipement : personnes vivant hors du domicile au moins un jo
     '05.7.1.2': '05',          # Autres dépenses en équipement : cadeau offert (à destination d'un autre ménage)
-    '05.6.1.2': '05',          # Autres produits ménagers (articles papier et plastique, brosserie, produits dive
+    # '05.6.1.2': ,          # Autres produits ménagers (articles papier et plastique, brosserie, produits dive
     '06.4.1.1': '06',          # Autres dépenses de santé : personnes vivant hors du domicile au moins un jour pa
     '06.4.1.2': '06',          # Autres dépenses de santé : cadeau offert (à destination d’un autre ménage)
     '06.1.1.1': '06.1.1.1.1',  # Produits pharmaceutiques à ingurgiter et traitants, compléments alimentaires, vi

@@ -74,7 +74,6 @@ def compute_kantar_elasticities():
         assert len(extract.dm_f.unique()) == 1
         extract['budget_share_kf'] = extract.dm_k / extract.dm_f
         kantar_budget_share = kantar_budget_share.append(extract)
-        print len(kantar_elasticities)
 
     for age, revenus in itertools.product(aliss.age.unique(), aliss.revenus.unique()):
         print age, revenus
