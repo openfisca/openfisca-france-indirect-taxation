@@ -136,37 +136,6 @@ def get_inflators_by_year(rebuild = False):
             inflators = get_inflators(target_year)
             inflators_by_year[target_year] = inflators
 
-        for year in range(2000, 2015):
-            writer_inflators = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation',
-                'assets', 'inflateurs', 'inflators_by_year_{}.csv'.format(year)), 'wb'))
-            for key, value in inflators_by_year[year].items():
-                writer_inflators.writerow([key, value])
-
-        return inflators_by_year
-
-    else:
-        re_build_inflators = dict()
-        for year in range(2000, 2015):
-            inflators_from_csv = pandas.DataFrame.from_csv(os.path.join(assets_directory,
-                'openfisca_france_indirect_taxation', 'assets', 'inflateurs', 'inflators_by_year_{}.csv'.format(year)),
-                header = -1)
-            inflators_to_dict = pandas.DataFrame.to_dict(inflators_from_csv)
-            inflators = inflators_to_dict[1]
-            re_build_inflators[year] = inflators
-
-        return re_build_inflators
-
-
-def get_inflators_by_year_wip(rebuild = False):
-    assets_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-        )
-    if rebuild is not False:
-        inflators_by_year = dict()
-        for target_year in range(2000, 2015):
-            inflators = get_inflators(target_year)
-            inflators_by_year[target_year] = inflators
-
         writer_inflators = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation',
             'assets', 'inflateurs', 'inflators_by_year_wip.csv'), 'wb'))
         for year in range(2000, 2015):
@@ -180,9 +149,11 @@ def get_inflators_by_year_wip(rebuild = False):
         inflators_from_csv = pandas.DataFrame.from_csv(os.path.join(assets_directory,
             'openfisca_france_indirect_taxation', 'assets', 'inflateurs', 'inflators_by_year_wip.csv'),
             header = -1)
-        inflators_to_dict = pandas.DataFrame.to_dict(inflators_from_csv)
-        inflators = inflators_to_dict[1]
-        re_build_inflators[year] = inflators
+        for year in range(2000, 2015):
+            inflators_from_csv_by_year = inflators_from_csv[inflators_from_csv[2] == year]
+            inflators_to_dict = pandas.DataFrame.to_dict(inflators_from_csv_by_year)
+            inflators = inflators_to_dict[1]
+            re_build_inflators[year] = inflators
 
         return re_build_inflators
 
