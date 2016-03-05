@@ -146,7 +146,6 @@ def compute_kantar_elasticities(aliss):
         nomfs = nomf_cross_price_elasticity.index.unique()
 
         for f, fprime in itertools.product(nomfs, nomfs):
-            print '\n', age, revenus, f, fprime
             elasticity_ffprime = nomf_cross_price_elasticity.loc[f, fprime]
             elasticity_kkprime = pandas.DataFrame(
                 index = nomks_by_nomf[f],

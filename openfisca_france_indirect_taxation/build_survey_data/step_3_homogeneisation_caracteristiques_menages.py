@@ -42,7 +42,7 @@ log = logging.getLogger(__name__)
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year = None):
-    """HOMOGENEISATION DES CARACTERISTIQUES SOCIALES DES MENAGES """
+    u"""Homogénéisation des caractéristiques sociales des ménages """
 
     assert temporary_store is not None
     assert year is not None
@@ -62,7 +62,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             table = "socioscm",
             variables = kept_variables,
             )
-        # cette étape de ne garder que les données dont on est sûr de la qualité et de la véracité
+        # cette étape permet de ne garder que les données dont on est sûr de la qualité et de la véracité
         # exdep = 1 si les données sont bien remplies pour les dépenses du ménage
         # exrev = 1 si les données sont bien remplies pour les revenus du ménage
         menage = menage[(menage.exdep == 1) & (menage.exrev == 1)]
@@ -81,7 +81,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
                 },
             inplace = True,
             )
-        # la variable vag est utilisée dans les modèles QAIDS et AIDS afin de faire variezr le temps et d'attibuer
+        # la variable vag est utilisée dans les modèles QAIDS et AIDS comme variable temporelle afin d'attibuer
         # le bon prix mensuel
         menage.agecj = menage.agecj.fillna(0)
         menage.nenfhors = menage.nenfhors.fillna(0)
@@ -106,7 +106,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             menage[var_to_int] = menage[var_to_int].astype(int)
 
         #  Methode :
-        #  1. on clean les variables (i.e. renames + changement de format (astype(int)))
+        #  1. on nettoite les variables (i.e. changement de nom de format)
         #  2. Reformatage des variables (réattribution des catégories pour quelles soient identiques
         #     pour les différentes années)
 
@@ -158,14 +158,13 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             )
         menage.rename(
             columns = {
-                'ident': 'ident_men',
-                'rev81': 'poste_coicop_421',
+                'cohabpr': 'couplepr',
+                'hod_nb': 'nenfhors',
                 'ident': 'ident_men',
                 'nbact': 'nactifs',
                 'nbenf1': 'nenfants',
                 'nbpers': 'npers',
-                'hod_nb': 'nenfhors',
-                'cohabpr': 'couplepr',
+                'rev81': 'poste_coicop_421',
                 'typmen1': 'typmen'
                 },
             inplace = True,
