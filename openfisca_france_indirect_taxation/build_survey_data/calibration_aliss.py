@@ -103,7 +103,7 @@ def compute_kantar_elasticities(aliss):
         )
 
     # budget shares
-    budget_share_path = os.path.join(elasticities_path,'budget_share.csv')
+    budget_share_path = os.path.join(elasticities_path, 'budget_share.csv')
     if os.path.exists(budget_share_path):
         kantar_budget_share = pandas.read_csv(budget_share_path)
     else:
