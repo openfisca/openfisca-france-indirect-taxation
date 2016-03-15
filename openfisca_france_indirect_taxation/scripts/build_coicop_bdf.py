@@ -56,10 +56,12 @@ def guess_coicop_from_bdf(year = 2011):
         code_coicop = '0' + '.'.join(dirty_produit_str) \
             if len(dirty_produit_str) <= 4 \
             else dirty_produit_str[:2] + '.' + '.'.join(dirty_produit_str[2:])
+
+        code_bdf = 'c0' + dirty_produit_str if len(dirty_produit_str) <= 4 else 'c' + dirty_produit_str
         entries.append(dict(
             code_coicop = code_coicop,
             label = matrice_passage_data_frame.loc[selection, 'label'].unique()[0],
-            code_bdf = dirty_produit_str,
+            code_bdf = code_bdf,
             ))
 
     result = pandas.DataFrame(entries)
@@ -90,7 +92,7 @@ def merge_with_coicop_nomenclature(data_frame):
     result = result[[
         'label_division', 'label_groupe', 'label_classe', 'label_sous_classe', 'label_poste',
         'poste_coicop', 'code_coicop', 'label', 'code_bdf',
-        ]].sort_values(by = ['code_coicop'])
+        ]].sort_values(by = ['code_coicop', 'code_bdf'])
 
     return result
 
@@ -205,7 +207,7 @@ adjusted_coicop_by_original = {
     '03.1.2.1': '03.1.2.1.1',  # vêtements pour homme
     '03.1.2.2': '03.1.2.2.1',  # vêtements pour femme
     '03.1.2.3': '03.1.2.3.1',  # vêtements pour enfants
-    '03.1.3.1': '03.1.3.1.1',  # mercerie et  accessoire sont groupés dans bdf et pas dans coicop. TODO: Verif meme TVA
+    '03.1.3.1': '03.1.3.1.1',  # mercerie et  accessoire sont groupés dans bdf et pas dans coicop
     '03.1.4.1': '03.1.4.1.1',  # Nettoyage, réparation et location de vêtements
     '03.2.1.1': '03.2.1.1.1',  # Chaussures pour homme
     '03.2.1.2': '03.2.1.1.2',  # chaussures pour femmes
@@ -270,9 +272,9 @@ adjusted_coicop_by_original = {
     '06.2.3.1': '06.2.3.1.1',  # Services des laboratoires d’analyse médicale et des cabinets de radiologie
     '06.2.3.2': '06.2.3.1.2',  # Services des auxiliaires médicaux (infirmier, kiné, laboratoire, etc.)
     '06.2.3.3': '06.2.3.1.3',  # Services extra hospitaliers (ambulance, location matériel)
-    '06.3.1.1': '06.3',	        # Services et soins hospitaliers'
-    '06.4.1.1': '06.4',        # Autres dépenses de santé : personnes vivant hors du domicile au moins un jour pa
-    '06.4.1.2': '06.4',        # Autres dépenses de santé : cadeau offert (à destination d’un autre ménage)
+    '06.3.1.1': '06.3',	  # Services et soins hospitaliers'
+    '06.4.1.1': '06.4.1',      # Autres dépenses de santé : personnes vivant hors du domicile au moins un jour pa
+    '06.4.1.2': '06.4.2',      # Autres dépenses de santé : cadeau offert (à destination d’un autre ménage)
     '07.1.1.1': '07.1.1.1.1',  # Achats d'automobiles neuves
     '07.1.1.2': '07.1.1.2.1',  # Achats d'automobiles d'occasion
     '07.1.2.1': '07.1.2.1.1',  # Motocycles
@@ -453,8 +455,15 @@ def bdf(year = 2011):
     bdf_coicop = guess_coicop_from_bdf(year = year)
     bdf_coicop = adjust_coicop(bdf_coicop)
     data_frame = merge_with_coicop_nomenclature(bdf_coicop)
-    errors = None  # test_coicop_to_legislation(data_frame, adjust_coicop, year = year)
-    return errors, data_frame
+    duplicated_coicop = data_frame.loc[data_frame.code_coicop.dropna().duplicated()]
+    for code_coicop in duplicated_coicop.code_coicop.unique():
+        n = sum(data_frame.code_coicop == code_coicop)
+        alphabet = 'abcdefghijklmnopqrstuvwxyz'
+        enhanced_code_coicops = [code_coicop + '.' + alphabet[i] for i in range(n)]
+        data_frame.loc[data_frame.code_coicop == code_coicop, 'code_coicop'] = enhanced_code_coicops
+
+    # errors = None  # test_coicop_to_legislation(data_frame, adjust_coicop, year = year)
+    return data_frame # errors
 
 
 # TODO check notamment problème avec sucre confiseries
@@ -463,6 +472,7 @@ if __name__ == '__main__':
     bdf_coicop = guess_coicop_from_bdf(year = year)
     adjusted_bdf_coicop = adjust_coicop(bdf_coicop)
     data_frame = merge_with_coicop_nomenclature(adjusted_bdf_coicop)
+
 
 #   len(errors)
 #    df = pandas.DataFrame.from_records(errors).sort_values(by = 'code_coicop')

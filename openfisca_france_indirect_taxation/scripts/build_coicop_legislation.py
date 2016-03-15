@@ -72,7 +72,7 @@ def extract_informations_from_coicop_to_categorie_fiscale():
 
 
 def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_code = None, label = None):
-    assert coicop_nomenclature  is not None
+    assert coicop_nomenclature is not None
     assert coicop_code is not None
     assert label is not None
     known_levels = sub_levels[:len(coicop_code.split('.')) - 1]
@@ -182,8 +182,7 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
     return coicop_nomenclature
 
 
-def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
-    coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
+def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = False):
     # On  ajoute des colonnes
     # période d'effet de la législation
     coicop_nomenclature['start'] = 0
@@ -641,15 +640,20 @@ def get_categorie_fiscale(value, year = None, assertion_error = True):
 
 
 def test_coicop_legislation():
-    coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories(to_csv = True)
+    coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
+    coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = True)
     if coicop_nomenclature.categorie_fiscale.isnull().any():
         return coicop_nomenclature.loc[coicop_nomenclature.categorie_fiscale.isnull()]
 
 
 if __name__ == "__main__":
     # extract_informations_from_coicop_to_categorie_fiscale()
-    coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories(to_csv = True)
-    # print test_coicop_legislation(coicop_nomenclature)
-    # TODO créer des sous-catégories pour tabac
+    coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
+    coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = True)
+    test_coicop_legislation()
+
+    from build_coicop_bdf import bdf
+    bdf_coicop_nomenclature = bdf(year = 2011)
+    bdf_coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(bdf_coicop_nomenclature, to_csv = False)
 
     # print get_categorie_fiscale('11.1.1.1.1', year = 2010)

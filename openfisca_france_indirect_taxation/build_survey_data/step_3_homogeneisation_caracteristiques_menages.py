@@ -306,7 +306,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         activite_prof_variables += [column for column in menage.columns if column.startswith('cs42')]
         # logement
         logement_variables = ['htl', 'strate']
-        menage = menage[socio_demo_variables + activite_prof_variables + logement_variables]
+        menage = menage[socio_demo_variables + activite_prof_variables + logement_variables].copy()
         menage.rename(
             columns = {
                 # "agpr": "agepr",

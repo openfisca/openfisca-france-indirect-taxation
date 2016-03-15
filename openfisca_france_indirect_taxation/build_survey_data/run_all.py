@@ -180,8 +180,9 @@ def run(years_calage):
         run_all(year_calage, year_data_list)
         log.info("Finished {}".format(time.time() - start))
 
+
 if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    years_calage = [2000, 2005, 2011]
+    years_calage = [2011]  # [2000, 2005, 2011]
     run(years_calage)

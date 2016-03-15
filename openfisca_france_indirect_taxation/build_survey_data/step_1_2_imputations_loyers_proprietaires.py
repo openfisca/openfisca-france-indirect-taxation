@@ -44,7 +44,7 @@ log = logging.getLogger(__name__)
 
 
 # **************************************************************************************************************************
-# * Etape n° 0-1-2 : IMPUTATION DE LOYERS POUR LES MENAGES PROPRIETAIRES
+# * Etape n° 0-1-2 : imputation de loyers pour les ménages proprietaires
 # **************************************************************************************************************************
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
@@ -87,7 +87,6 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         imput00.rename(columns = {'04110': 'loyer_reel'}, inplace = True)
 
 #       * une indicatrice pour savoir si le loyer est connu et l'occupant est locataire
-
         imput00['observe'] = (imput00.loyer_reel > 0) & (imput00.stalog.isin([3, 4]))
         imput00['maison_appart'] = imput00.sitlog == 1
 
@@ -137,7 +136,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         loyers_imputes.rename(
             columns = {
                 'ident': 'ident_men',
-                'rev81': 'poste_coicop_421',
+                'rev81': '04.2.1',
                 },
             inplace = True,
             )
@@ -147,7 +146,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         loyers_imputes = survey.get_values(table = "menage")
         kept_variables = ['ident_men', 'rev801_d']
         loyers_imputes = loyers_imputes[kept_variables]
-        loyers_imputes.rename(columns = {'rev801_d': 'poste_coicop_421'}, inplace = True)
+        loyers_imputes.rename(columns = {'rev801_d': '04.2.1'}, inplace = True)
 
     if year == 2011:
         try:
@@ -157,8 +156,9 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
 
         kept_variables = ['ident_me', 'rev801']
         loyers_imputes = loyers_imputes[kept_variables]
-        loyers_imputes.rename(columns = {'rev801': 'poste_coicop_421', 'ident_me': 'ident_men'},
-                              inplace = True)
+        loyers_imputes.rename(
+            columns = {'rev801': '04.2.1', 'ident_me': 'ident_men'},
+            inplace = True)
 
     # Joindre à la table des dépenses par COICOP
     loyers_imputes.set_index('ident_men', inplace = True)
@@ -169,10 +169,6 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
     assert set(depenses.index) == set(loyers_imputes.index)
     assert len(set(depenses.columns).intersection(set(loyers_imputes.columns))) == 0
     depenses = depenses.merge(loyers_imputes, left_index = True, right_index = True)
-
-    # ****************************************************************************************************************
-    #  Etape n° 0-1-3 : SAUVER LES BASES DE DEPENSES HOMOGENEISEES DANS LE BON DOSSIER
-    # ****************************************************************************************************************
 
     # Save in temporary store
     temporary_store['depenses_bdf_{}'.format(year)] = depenses

@@ -28,8 +28,8 @@ from __future__ import division
 
 
 import logging
-import numpy
-import pandas
+# import numpy
+# import pandas
 
 
 from openfisca_survey_manager.temporary import temporary_store_decorator
@@ -37,7 +37,7 @@ from openfisca_survey_manager import default_config_files_directory as config_fi
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
 
-from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
+# from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
 
 
 log = logging.getLogger(__name__)
@@ -49,13 +49,13 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     assert temporary_store is not None
     assert year is not None
 
+    year = 2011
     bdf_survey_collection = SurveyCollection.load(
         collection = 'budget_des_familles', config_files_directory = config_files_directory
         )
     survey = bdf_survey_collection.get_survey('budget_des_familles_{}'.format(year))
 
     # Homogénéisation des bases de données de dépenses
-
     if year == 1995:
         socioscm = survey.get_values(table = "socioscm")
         poids = socioscm[['mena', 'ponderrd', 'exdep', 'exrev']]
@@ -139,123 +139,131 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     conso.drop('pondmen', axis = 1, inplace = True)
     conso.set_index('ident_men', inplace = True)
 
-    matrice_passage_data_frame, selected_parametres_fiscalite_data_frame = get_transfert_data_frames(year)
+    from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
+    # matrice_passage_data_frame, selected_parametres_fiscalite_data_frame = get_transfert_data_frames(year)
+    coicop_poste_bdf = bdf(year = year)[['code_bdf', 'code_coicop']].copy()
 
-    coicop_poste_bdf = matrice_passage_data_frame[['poste{}'.format(year), 'posteCOICOP']]
-    coicop_poste_bdf.set_index('poste{}'.format(year), inplace = True)
-    coicop_by_poste_bdf = coicop_poste_bdf.to_dict()['posteCOICOP']
-    del coicop_poste_bdf
+    assert not set(conso.columns).difference(set(coicop_poste_bdf.code_bdf))
+    assert not set(coicop_poste_bdf.code_bdf.dropna()).difference(set(conso.columns))
 
-    def reformat_consumption_column_coicop(coicop):
-        try:
-            return int(coicop.replace('c', '').lstrip('0'))
-        except:
-            return numpy.NaN
-    # cette étape permet d'harmoniser les df pour 1995 qui ne se présentent pas de la même façon
-    # que pour les trois autres années
-    if year == 1995:
-        coicop_labels = [
-            normalize_code_coicop(coicop_by_poste_bdf.get(poste_bdf))
-            for poste_bdf in conso.columns
-            ]
-    else:
-        coicop_labels = [
-            normalize_code_coicop(coicop_by_poste_bdf.get(reformat_consumption_column_coicop(poste_bdf)))
-            for poste_bdf in conso.columns
-            ]
-    tuples = zip(coicop_labels, conso.columns)
-    conso.columns = pandas.MultiIndex.from_tuples(tuples, names=['coicop', 'poste{}'.format(year)])
-    coicop_data_frame = conso.groupby(level = 0, axis = 1).sum()
+    coicop_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['code_coicop']
+    assert not set(coicop_by_poste_bdf.keys()).difference(set(conso.columns))
+    assert not set(set(conso.columns)).difference(coicop_by_poste_bdf.keys())
 
+
+#    def reformat_consumption_column_coicop(coicop):
+#        try:
+#            return int(coicop.replace('c', '').lstrip('0'))
+#        except:
+#            return numpy.NaN
+#
+#
+#    # cette étape permet d'harmoniser les df pour 1995 qui ne se présentent pas de la même façon
+#    # que pour les trois autres années
+#    if year == 1995:
+#        coicop_labels = [
+#            normalize_code_coicop(coicop_by_poste_bdf.get(poste_bdf))
+#            for poste_bdf in conso.columns
+#            ]
+#    else:
+#        coicop_labels = [
+#            normalize_code_coicop(coicop_by_poste_bdf.get(reformat_consumption_column_coicop(poste_bdf)))
+#            for poste_bdf in conso.columns
+#            ]
+
+#    tuples = zip(coicop_labels, conso.columns)
+#    conso.columns = pandas.MultiIndex.from_tuples(tuples, names=['coicop', 'poste{}'.format(year)])
+#    coicop_data_frame = conso.groupby(level = 0, axis = 1).sum()
+    coicop_data_frame = conso.rename(columns = coicop_by_poste_bdf)
     depenses = coicop_data_frame.merge(poids, left_index = True, right_index = True)
 
-    # Création de gros postes, les 12 postes sur lesquels le calage se fera
-    def select_gros_postes(coicop):
-        try:
-            coicop = unicode(coicop)
-        except:
-            coicop = coicop
-        normalized_coicop = normalize_code_coicop(coicop)
-        grosposte = normalized_coicop[0:2]
-        return int(grosposte)
-
-    grospostes = [
-        select_gros_postes(coicop)
-        for coicop in coicop_data_frame.columns
-        ]
-    tuples_gros_poste = zip(coicop_data_frame.columns, grospostes)
-    coicop_data_frame.columns = pandas.MultiIndex.from_tuples(tuples_gros_poste, names=['coicop', 'grosposte'])
-
-    depenses_by_grosposte = coicop_data_frame.groupby(level = 1, axis = 1).sum()
-    depenses_by_grosposte = depenses_by_grosposte.merge(poids, left_index = True, right_index = True)
-
-    # TODO : understand why it does not work: depenses.rename(columns = {u'0421': 'poste_coicop_421'}, inplace = True)
-
-    produits = [column for column in depenses.columns if column.isdigit()]
-    for code in produits:
-        if code[-1:] == '0':
-            depenses.rename(columns = {code: code[:-1]}, inplace = True)
-        else:
-            depenses.rename(columns = {code: code}, inplace = True)
-    produits = [column for column in depenses.columns if column.isdigit()]
-    for code in produits:
-        if code[0:1] == '0':
-            depenses.rename(columns = {code: code[1:]}, inplace = True)
-        else:
-            depenses.rename(columns = {code: code}, inplace = True)
-    produits = [column for column in depenses.columns if column.isdigit()]
-    for code in produits:
-        depenses.rename(columns = {code: 'poste_coicop_' + code}, inplace = True)
+#    # Création de gros postes, les 12 postes sur lesquels le calage se fera
+#    def select_gros_postes(coicop):
+#        try:
+#            coicop = unicode(coicop)
+#        except:
+#            coicop = coicop
+#        normalized_coicop = normalize_code_coicop(coicop)
+#        grosposte = normalized_coicop[0:2]
+#        return int(grosposte)
+#
+#    grospostes = [
+#        select_gros_postes(coicop)
+#        for coicop in coicop_data_frame.columns
+#        ]
+#    tuples_gros_poste = zip(coicop_data_frame.columns, grospostes)
+#    coicop_data_frame.columns = pandas.MultiIndex.from_tuples(tuples_gros_poste, names=['coicop', 'grosposte'])
+#
+#    depenses_by_grosposte = coicop_data_frame.groupby(level = 1, axis = 1).sum()
+#    depenses_by_grosposte = depenses_by_grosposte.merge(poids, left_index = True, right_index = True)
+#
+#    # TODO : understand why it does not work: depenses.rename(columns = {u'0421': 'poste_coicop_421'}, inplace = True)
+#
+#    produits = [column for column in depenses.columns if column.isdigit()]
+#    for code in produits:
+#        if code[-1:] == '0':
+#            depenses.rename(columns = {code: code[:-1]}, inplace = True)
+#        else:
+#            depenses.rename(columns = {code: code}, inplace = True)
+#    produits = [column for column in depenses.columns if column.isdigit()]
+#    for code in produits:
+#        if code[0:1] == '0':
+#            depenses.rename(columns = {code: code[1:]}, inplace = True)
+#        else:
+#            depenses.rename(columns = {code: code}, inplace = True)
+#    produits = [column for column in depenses.columns if column.isdigit()]
+#    for code in produits:
+#        depenses.rename(columns = {code: 'poste_coicop_' + code}, inplace = True)
 
     temporary_store['depenses_{}'.format(year)] = depenses
 
-    depenses_by_grosposte.columns = depenses_by_grosposte.columns.astype(str)
-    liste_grospostes = [column for column in depenses_by_grosposte.columns if column.isdigit()]
-    for grosposte in liste_grospostes:
-        depenses_by_grosposte.rename(columns = {grosposte: 'coicop12_' + grosposte}, inplace = True)
+#    depenses_by_grosposte.columns = depenses_by_grosposte.columns.astype(str)
+#    liste_grospostes = [column for column in depenses_by_grosposte.columns if column.isdigit()]
+#    for grosposte in liste_grospostes:
+#        depenses_by_grosposte.rename(columns = {grosposte: 'coicop12_' + grosposte}, inplace = True)
+#
+#    temporary_store['depenses_by_grosposte_{}'.format(year)] = depenses_by_grosposte
 
-    temporary_store['depenses_by_grosposte_{}'.format(year)] = depenses_by_grosposte
 
-
-def normalize_code_coicop(code):
-    '''Normalize_coicop est function d'harmonisation de la colonne d'entiers posteCOICOP de la table
-matrice_passage_data_frame en la transformant en une chaine de 5 caractères afin de pouvoir par la suite agréger les postes
-COICOP selon les 12 postes agrégés de la nomenclature de la comptabilité nationale. Chaque poste contient 5 caractères,
-les deux premiers (entre 01 et 12) correspondent à ces postes agrégés de la CN.
-
-    '''
-    # TODO: vérifier la formule !!!
-
-    try:
-        code = unicode(code)
-    except:
-        code = code
-    if len(code) == 3:
-        code_coicop = "0" + code + "0"  # "{0}{1}{0}".format(0, code)
-    elif len(code) == 4:
-        if not code.startswith("0") and not code.startswith("1") and not code.startswith("45") and not code.startswith("9"):
-            code_coicop = "0" + code
-            # 022.. = cigarettes et tabacs => on les range avec l'alcool (021.0)
-        elif code.startswith("0"):
-            code_coicop = code + "0"
-        elif code in ["1151", "1181", "4552", "4522", "4511", "9122", "9151", "9211", "9341", "1411"]:
-            # 1151 = Margarines et autres graisses végétales
-            # 1181 = Confiserie
-            # 04522 = Achat de butane, propane
-            # 04511 = Facture EDF GDF non dissociables
-            code_coicop = "0" + code
-        else:
-            # 99 = loyer, impots et taxes, cadeaux...
-            code_coicop = code + "0"
-    elif len(code) == 5:
-        if not code.startswith("13") and not code.startswith("44") and not code.startswith("51"):
-            code_coicop = code
-        else:
-            code_coicop = "99000"
-    else:
-        log.error("Problematic code {}".format(code))
-        raise()
-    return code_coicop
+#def normalize_code_coicop(code):
+#    '''Normalize_coicop est function d'harmonisation de la colonne d'entiers posteCOICOP de la table
+#matrice_passage_data_frame en la transformant en une chaine de 5 caractères afin de pouvoir par la suite agréger les postes
+#COICOP selon les 12 postes agrégés de la nomenclature de la comptabilité nationale. Chaque poste contient 5 caractères,
+#les deux premiers (entre 01 et 12) correspondent à ces postes agrégés de la CN.
+#
+#    '''
+#    # TODO: vérifier la formule !!!
+#
+#    try:
+#        code = unicode(code)
+#    except:
+#        code = code
+#    if len(code) == 3:
+#        code_coicop = "0" + code + "0"  # "{0}{1}{0}".format(0, code)
+#    elif len(code) == 4:
+#        if not code.startswith("0") and not code.startswith("1") and not code.startswith("45") and not code.startswith("9"):
+#            code_coicop = "0" + code
+#            # 022.. = cigarettes et tabacs => on les range avec l'alcool (021.0)
+#        elif code.startswith("0"):
+#            code_coicop = code + "0"
+#        elif code in ["1151", "1181", "4552", "4522", "4511", "9122", "9151", "9211", "9341", "1411"]:
+#            # 1151 = Margarines et autres graisses végétales
+#            # 1181 = Confiserie
+#            # 04522 = Achat de butane, propane
+#            # 04511 = Facture EDF GDF non dissociables
+#            code_coicop = "0" + code
+#        else:
+#            # 99 = loyer, impots et taxes, cadeaux...
+#            code_coicop = code + "0"
+#    elif len(code) == 5:
+#        if not code.startswith("13") and not code.startswith("44") and not code.startswith("51"):
+#            code_coicop = code
+#        else:
+#            code_coicop = "99000"
+#    else:
+#        log.error("Problematic code {}".format(code))
+#        raise()
+#    return code_coicop
 
 
 if __name__ == '__main__':
