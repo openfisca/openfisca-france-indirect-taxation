@@ -281,8 +281,8 @@ def main():
     #     [('imposition_indirecte', tree)]
     #     )
     root_element = transform_node_to_element(u'root', tree)
-    root_element.set('deb', root_deb)
-    root_element.set('fin', root_fin)
+    # root_element.set('deb', root_deb)
+    # root_element.set('fin', root_fin)
     sort_elements(root_element)
     reindent(root_element)
 
