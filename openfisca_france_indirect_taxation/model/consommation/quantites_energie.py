@@ -4,6 +4,7 @@ from __future__ import division
 
 
 from datetime import date
+import numpy
 
 from ..base import * # noqa analysis:ignore
 
@@ -225,3 +226,191 @@ class quantites_essence_ajustees(DatedVariable):
         quantites_sp_e10_ajustees = simulation.calculate('quantites_sp_e10_ajustees', period)
         quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees + quantites_sp_e10_ajustees)
         return period, quantites_essence_ajustees
+
+
+class quantites_electricite_3kva(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 3 kva"
+
+    def function(self, simulation, period):
+        tarif_fixe_elect = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_3_kva
+        depenses_elect = simulation.calculate('poste_coicop_451', period)
+        depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
+        prix_unitaire_elect = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_3_kva
+        quantite_elect = depenses_sans_part_fixe / prix_unitaire_elect
+
+        return period, quantite_elect
+
+
+class quantites_electricite_6kva(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 6 kva"
+
+    def function(self, simulation, period):
+        tarif_fixe_elect = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_6_kva
+        depenses_elect = simulation.calculate('poste_coicop_451', period)
+        depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
+        prix_unitaire_elect = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+        quantite_elect = depenses_sans_part_fixe / prix_unitaire_elect
+
+        return period, quantite_elect
+
+
+class quantites_electricite_9kva(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 9 kva"
+
+    def function(self, simulation, period):
+        tarif_fixe_elect = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_9_kva
+        depenses_elect = simulation.calculate('poste_coicop_451', period)
+        depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
+        prix_unitaire_elect = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+        quantite_elect = depenses_sans_part_fixe / prix_unitaire_elect
+
+        return period, quantite_elect
+
+
+class quantites_electricite_12kva(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 12 kva"
+
+    def function(self, simulation, period):
+        tarif_fixe_elect = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_12_kva
+        depenses_elect = simulation.calculate('poste_coicop_451', period)
+        depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
+        prix_unitaire_elect = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+        quantite_elect = depenses_sans_part_fixe / prix_unitaire_elect
+
+        return period, quantite_elect
+
+
+class quantites_electricite_15kva(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 15 kva"
+
+    def function(self, simulation, period):
+        tarif_fixe_elect = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
+        depenses_elect = simulation.calculate('poste_coicop_451', period)
+        depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
+        prix_unitaire_elect = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+        quantite_elect = depenses_sans_part_fixe / prix_unitaire_elect
+
+        return period, quantite_elect
+
+
+class quantites_electricite_18kva(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 18 kva"
+
+    def function(self, simulation, period):
+        tarif_fixe_elect = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_18_kva
+        depenses_elect = simulation.calculate('poste_coicop_451', period)
+        depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
+        prix_unitaire_elect = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+        quantite_elect = depenses_sans_part_fixe / prix_unitaire_elect
+
+        return period, quantite_elect
+
+
+class quantites_gaz_contrat_base(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat de base"
+
+    def function(self, simulation, period):
+        tarif_fixe_gaz = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.base_0_1000
+        depenses_gaz = simulation.calculate('poste_coicop_452', period)
+        depenses_sans_part_fixe = depenses_gaz - tarif_fixe_gaz
+        prix_unitaire_gaz = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_base_ttc
+        quantite_gaz = depenses_sans_part_fixe / prix_unitaire_gaz
+
+        return period, quantite_gaz
+
+
+class quantites_gaz_contrat_b0(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat b0"
+
+    def function(self, simulation, period):
+        tarif_fixe_gaz = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b0_1000_6000
+        depenses_gaz = simulation.calculate('poste_coicop_452', period)
+        depenses_sans_part_fixe = depenses_gaz - tarif_fixe_gaz
+        prix_unitaire_gaz = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b0_ttc
+        quantite_gaz = depenses_sans_part_fixe / prix_unitaire_gaz
+
+        return period, quantite_gaz
+
+
+class quantites_gaz_contrat_b1(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat b1"
+
+    def function(self, simulation, period):
+        tarif_fixe_gaz = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b1_6_30000
+        depenses_gaz = simulation.calculate('poste_coicop_452', period)
+        depenses_sans_part_fixe = depenses_gaz - tarif_fixe_gaz
+        prix_unitaire_gaz = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b1_ttc
+        quantite_gaz = depenses_sans_part_fixe / prix_unitaire_gaz
+
+        return period, quantite_gaz
+
+
+class quantites_gaz_contrat_b2i(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat b2i"
+
+    def function(self, simulation, period):
+        tarif_fixe_gaz = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b2i_30000
+        depenses_gaz = simulation.calculate('poste_coicop_452', period)
+        depenses_sans_part_fixe = depenses_gaz - tarif_fixe_gaz
+        prix_unitaire_gaz = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b2i_ttc
+        quantite_gaz = depenses_sans_part_fixe / prix_unitaire_gaz
+
+        return period, quantite_gaz
+
+
+class quantites_gaz_contrat_optimal(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au meilleur contrat"
+
+    def function(self, simulation, period):
+        quantite_base = simulation.calculate('quantites_gaz_contrat_base', period)
+        quantite_b0 = simulation.calculate('quantites_gaz_contrat_b0', period)
+        quantite_b1 = simulation.calculate('quantites_gaz_contrat_b1', period)
+        quantite_b2i = simulation.calculate('quantites_gaz_contrat_b2i', period)
+        quantite_optimale_base_b0 = numpy.maximum(quantite_base, quantite_b0)
+        quantite_optimale_base_b1 = numpy.maximum(quantite_optimale_base_b0, quantite_b1)
+        quantite_optimale_base_b2i = numpy.maximum(quantite_optimale_base_b1, quantite_b2i)
+        quantite_optimale = numpy.maximum(quantite_optimale_base_b2i, 0)
+
+        return period, quantite_optimale
