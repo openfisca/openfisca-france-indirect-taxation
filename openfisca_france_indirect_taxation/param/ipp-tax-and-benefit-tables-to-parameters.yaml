@@ -24,3 +24,5 @@ baremes-ipp-taxation-indirecte:
     RENAME: ticpe
   tsca:
     RENAME: taux_assurances
+baremes_ipp_tarification_energie_logement:
+  RENAME: tarification_energie_logement
