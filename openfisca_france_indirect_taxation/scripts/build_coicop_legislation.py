@@ -616,9 +616,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
 def get_categorie_fiscale(value, year = None, assertion_error = True):
     coicop_nomenclature = pd.read_csv(
         os.path.join(legislation_directory, 'coicop_legislation.csv'),
-        converters = {'posteCOICOP': unicode}
         )
-    build_coicop_nomenclature_with_fiscal_categories()
     if isinstance(value, int):
         value_str = '0' + str(value) if value < 10 else str(value)
         selection = coicop_nomenclature.code_coicop.str[:2] == value_str
@@ -646,6 +644,7 @@ def test_coicop_legislation():
         return coicop_nomenclature.loc[coicop_nomenclature.categorie_fiscale.isnull()]
 
 
+
 if __name__ == "__main__":
     # extract_informations_from_coicop_to_categorie_fiscale()
     coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
@@ -654,6 +653,6 @@ if __name__ == "__main__":
 
     from build_coicop_bdf import bdf
     bdf_coicop_nomenclature = bdf(year = 2011)
-    bdf_coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(bdf_coicop_nomenclature, to_csv = False)
+    bdf_coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(bdf_coicop_nomenclature, to_csv = True)
 
-    # print get_categorie_fiscale('11.1.1.1.1', year = 2010)
+    print get_categorie_fiscale('11.1.1.1.1', year = 2010)

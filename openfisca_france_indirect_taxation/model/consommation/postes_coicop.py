@@ -24,7 +24,7 @@ def generate_variables():
         liste_annees = postes_coicop_data_frame.loc[
             extraction_condition,
             'annee'].copy()
-        # assert liste_annees.shape == (21L,), "Some goods do not exist during certain years"
+        # assert liste_annees.shape == (21L,), "Some goods do not exist during certain years"
         label = postes_coicop_data_frame.loc[
             extraction_condition,
             'description'].values.squeeze().tolist()
@@ -45,3 +45,17 @@ def preload_postes_coicop_data_frame():
             ['posteCOICOP', 'annee', 'description', 'categoriefiscale']].copy()
         postes_coicop_data_frame.drop_duplicates('posteCOICOP', keep = 'last', inplace = True)
         generate_variables()
+
+
+def preload_new_postes_coicop_data_frame():
+    global postes_coicop_data_frame
+    if codes_coicop_data_frame is None:
+        codes_coicop_data_frame = pd.read_csv(
+            os.path.join(legislation_directory, 'coicop_legislation.csv'),
+            )
+        codes_coicop_data_frame = codes_coicop_data_frame.query('not (code_bdf != code_bdf)')[  # NaN removal
+            ['code_coicop', 'code_bdf', 'label']].copy()
+        codes_coicop_data_frame = codes_coicop_data_frame.loc[
+            codes_coicop_data_frame.code_coicop.str[:2].astype(int) <= 12
+            ].copy()
+        generate_new_variables()
