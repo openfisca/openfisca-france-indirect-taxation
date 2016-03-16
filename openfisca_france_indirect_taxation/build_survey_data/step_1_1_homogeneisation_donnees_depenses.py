@@ -146,35 +146,12 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     assert not set(conso.columns).difference(set(coicop_poste_bdf.code_bdf))
     assert not set(coicop_poste_bdf.code_bdf.dropna()).difference(set(conso.columns))
 
+    coicop_poste_bdf['formatted_poste'] = u'poste_' + coicop_poste_bdf.code_coicop.str.replace('.', u'_')
     coicop_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['code_coicop']
     assert not set(coicop_by_poste_bdf.keys()).difference(set(conso.columns))
     assert not set(set(conso.columns)).difference(coicop_by_poste_bdf.keys())
-
-
-#    def reformat_consumption_column_coicop(coicop):
-#        try:
-#            return int(coicop.replace('c', '').lstrip('0'))
-#        except:
-#            return numpy.NaN
-#
-#
-#    # cette étape permet d'harmoniser les df pour 1995 qui ne se présentent pas de la même façon
-#    # que pour les trois autres années
-#    if year == 1995:
-#        coicop_labels = [
-#            normalize_code_coicop(coicop_by_poste_bdf.get(poste_bdf))
-#            for poste_bdf in conso.columns
-#            ]
-#    else:
-#        coicop_labels = [
-#            normalize_code_coicop(coicop_by_poste_bdf.get(reformat_consumption_column_coicop(poste_bdf)))
-#            for poste_bdf in conso.columns
-#            ]
-
-#    tuples = zip(coicop_labels, conso.columns)
-#    conso.columns = pandas.MultiIndex.from_tuples(tuples, names=['coicop', 'poste{}'.format(year)])
-#    coicop_data_frame = conso.groupby(level = 0, axis = 1).sum()
-    coicop_data_frame = conso.rename(columns = coicop_by_poste_bdf)
+    formatted_poste_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['formatted_poste']
+    coicop_data_frame = conso.rename(columns = formatted_poste_by_poste_bdf)
     depenses = coicop_data_frame.merge(poids, left_index = True, right_index = True)
 
 #    # Création de gros postes, les 12 postes sur lesquels le calage se fera
@@ -223,7 +200,6 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
 #        depenses_by_grosposte.rename(columns = {grosposte: 'coicop12_' + grosposte}, inplace = True)
 #
 #    temporary_store['depenses_by_grosposte_{}'.format(year)] = depenses_by_grosposte
-
 
 #def normalize_code_coicop(code):
 #    '''Normalize_coicop est function d'harmonisation de la colonne d'entiers posteCOICOP de la table

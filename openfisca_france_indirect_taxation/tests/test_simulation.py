@@ -42,7 +42,8 @@ def get_input_data_frame(year):
     return input_data_frame
 
 
-def test_survey_simulation(year = 2005):
+def test_survey_simulation(year = None):
+    assert year is not None
     input_data_frame = get_input_data_frame(year)
     TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
     tax_benefit_system = TaxBenefitSystem()
@@ -64,7 +65,7 @@ def test_survey_simulation(year = 2005):
                 'ident_men',
                 'pondmen',
                 'decuc',
-                'poste_coicop_611',
+                'poste_coicop_01_1_1_1_1',
                 'categorie_fiscale_7',
                 'depenses_carburants',
                 ]
@@ -78,8 +79,8 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    for year in [2000, 2005, 2011]:
+    for year in [2011]:
         df = test_survey_simulation(year)
         print df
         print df.columns
-        print df.describe()
+        print df.poste_coicop_01_1_1_1_1.describe()

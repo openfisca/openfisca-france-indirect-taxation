@@ -33,10 +33,10 @@ from openfisca_core.formulas import dated_function, DatedVariable
 
 
 from openfisca_france_indirect_taxation.model.base import *
-from openfisca_france_indirect_taxation.utils import get_parametres_fiscalite_data_frame
 
 
 categories_fiscales_data_frame = None
+codes_coicop_data_frame = None
 
 
 def function_creator(postes_coicop, year_start = None, year_stop = None):
@@ -52,8 +52,10 @@ def function_creator(postes_coicop, year_start = None, year_stop = None):
 
 
 def generate_variables():
-    existing_categ = sorted(categories_fiscales_data_frame['categoriefiscale'].drop_duplicates())
-
+    assert '' in categories_fiscales_data_frame['categorie_fiscale']
+    existing_categ = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
+    print existing_categ
+    boum
     for categorie_fiscale in existing_categ:
         year_start = 1994
         year_final_stop = 2014
@@ -99,10 +101,14 @@ def generate_variables():
 
 
 def preload_categories_fiscales_data_frame():
+    global codes_coicop_data_frame
     global categories_fiscales_data_frame
-    if categories_fiscales_data_frame is None:
-        categories_fiscales_data_frame = get_parametres_fiscalite_data_frame()
-        categories_fiscales_data_frame = categories_fiscales_data_frame[
-            ['posteCOICOP', 'annee', 'categoriefiscale']
+    if codes_coicop_data_frame is None:
+        from openfisca_france_indirect_taxation.model.consommation.postes_coicop import codes_coicop_data_frame
+        categories_fiscales_data_frame = codes_coicop_data_frame[
+            ['code_coicop', 'code_bdf', 'categorie_fiscale']
             ].copy()
+        print categories_fiscales_data_frame.categorie_fiscale
+        print  categories_fiscales_data_frame.categorie_fiscale.unique()
+
         generate_variables()

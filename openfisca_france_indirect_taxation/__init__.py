@@ -48,11 +48,12 @@ def init_country():
         preprocess_legislation = staticmethod(preprocessing.preprocess_legislation)
 
         def prefill_cache(self):
-            # Define categorie_fiscale_* and poste_coicp_* variables
-            from .model.consommation import categories_fiscales
-            categories_fiscales.preload_categories_fiscales_data_frame()
+            # Define and poste_* and categorie fiscales variables
             from .model.consommation import postes_coicop
             postes_coicop.preload_postes_coicop_data_frame()
+            from .model.consommation import categories_fiscales
+            categories_fiscales.preload_categories_fiscales_data_frame()
+
             # Reindex columns since preload functions generate new columns.
             self.index_columns()
 
