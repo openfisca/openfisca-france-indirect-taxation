@@ -9,7 +9,7 @@ from ..base import * # noqa analysis:ignore
 class emissions_CO2_carburants_ajustees(Variable):
     column = FloatCol
     entity_class = Menages
-    label = u"Emissions de co2 des ménages via leur consommation de carburants après réforme, en kg par litres"
+    label = u"Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
 
     def function(self, simulation, period):
         quantites_diesel_ajustees = simulation.calculate('quantites_diesel_ajustees', period)
