@@ -129,9 +129,9 @@ def price_carbu_from_quantities(dataframe, year):
 
     indice_prix_moyen = dataframe['prix_carbu'].mean()
     prix_consommateur_moyen = carnets_carbu_select['prix_carbu_consommateur'].mean()
-    dataframe2 = (
-        pd.merge(dataframe, carnets_carbu_select[['ident_men', 'prix_carbu_consommateur']],
-        on = 'ident_men', how = 'left')
+    dataframe2 = pd.merge(
+        dataframe, carnets_carbu_select[['ident_men', 'prix_carbu_consommateur']],
+        on = 'ident_men', how = 'left'
         )
     dataframe2.loc[dataframe2['prix_carbu_consommateur'] < 2, 'prix_carbu'] = \
         dataframe2['prix_carbu_consommateur'] * indice_prix_moyen / prix_consommateur_moyen
