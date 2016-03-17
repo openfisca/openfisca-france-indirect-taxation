@@ -190,12 +190,12 @@ for year in [2011]:
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la
     # nourriture ce n'est pas qu'ils n'en consomment pas, mais qu'ils n'en ont pas acheté sur la période (réserves, etc)
-    dataframe = dataframe[dataframe['prix_logem'] != 0]
+    dataframe = dataframe.query('prix_logem != 0')
 
     # On enlève les outliers, que l'on considère comme les individus dépensant plus de 25% de leur budget en carburants
     # Cela correspond à 16 et 13 personnes pour 2000 et 2005 ce qui est négligeable, mais 153 i.e. 2% des consommateurs
     # pour 2011 ce qui est assez important. Cette différence s'explique par la durée des enquêtes (1 semaine en 2011)
-    dataframe = dataframe[dataframe['part_carbu'] < 0.25]
+    dataframe = dataframe.query('part_carbu < 0.25')
 
     indices_prix_carburants = indices_prix_carbus(year)
     dataframe = pd.merge(dataframe, indices_prix_carburants, on = 'vag')
