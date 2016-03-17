@@ -249,7 +249,7 @@ def preprocess_legislation(legislation_json):
         legislation_json['children']['imposition_indirecte']['children']['part_type_supercarburants'] = \
             part_type_supercaburant
 
-    # Add CO2 emissions from energy
+    # Add CO2 emissions from energy (Source : Ademe)
 
     emissions_CO2 = {
         "@type": "Node",
