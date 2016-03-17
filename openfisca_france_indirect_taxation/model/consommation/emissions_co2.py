@@ -21,23 +21,3 @@ class emissions_CO2_carburants(Variable):
         emissions = quantites_diesel * emissions_diesel + quantites_essence * emissions_essence  # Source : Ademe
 
         return period, emissions
-
-
-class emissions_CO2_carburants_ajustees(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Emissions de co2 des ménages via leur consommation de carburants après réforme, en kg par litres"
-
-    def function(self, simulation, period):
-        quantites_diesel_ajustees = simulation.calculate('quantites_diesel_ajustees', period)
-        quantites_essence_ajustees = simulation.calculate('quantites_essence_ajustees', period)
-        emissions_diesel = \
-            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
-        emissions_essence = \
-            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
-        emissions_ajustees = (
-            (quantites_diesel_ajustees * emissions_diesel) +
-            (quantites_essence_ajustees * emissions_essence)
-            )  # Source : Ademe
-
-        return period, emissions_ajustees

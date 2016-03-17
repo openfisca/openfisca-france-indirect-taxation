@@ -28,13 +28,20 @@ from .caracteristiques_menages import (  # noqa analysis:ignore
     demographie,
     )
 from .consommation import (  # noqa analysis:ignore
-    consommation_menages,
     categories_fiscales,
-    postes_coicop,
-    reactions_comportementales,
-    elasticites,
-    quantites_energie,
+    consommation_menages,
     emissions_co2,
+    postes_coicop,
+    quantites_energie,
+    )
+from reactions_comportementales_reforme import (  # noqa analysis:ignore
+    depenses_ajustees,
+    elasticites,
+    emissions_ajustees,
+    quantites_ajustees,
+    )
+from .revenus import (  # noqa analysis:ignore
+    revenus_menages,
     )
 from .taxes_indirectes import (  # noqa analysis:ignore
     alcools,
@@ -43,9 +50,6 @@ from .taxes_indirectes import (  # noqa analysis:ignore
     ticpe,
     total_taxes_indirectes,
     tva,
-    )
-from .revenus import (  # noqa analysis:ignore
-    revenus_menages,
     )
 from .vehicules import (  # noqa analysis:ignore
     vehicules_menages,
