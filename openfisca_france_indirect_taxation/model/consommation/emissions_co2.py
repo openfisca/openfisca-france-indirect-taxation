@@ -6,7 +6,7 @@ from __future__ import division
 from ..base import * # noqa analysis:ignore
 
 
-class emissions_co2_carburants(Variable):
+class emissions_CO2_carburants(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Emissions de co2 des ménages via leur consommation de carburants, en kg par litre de carburants"
@@ -19,7 +19,7 @@ class emissions_co2_carburants(Variable):
         return period, emissions
 
 
-class emissions_co2_carburants_ajustees(Variable):
+class emissions_CO2_carburants_ajustees(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Emissions de co2 des ménages via leur consommation de carburants après réforme, en kg par litres"
