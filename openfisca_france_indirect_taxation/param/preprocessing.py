@@ -249,6 +249,38 @@ def preprocess_legislation(legislation_json):
         legislation_json['children']['imposition_indirecte']['children']['part_type_supercarburants'] = \
             part_type_supercaburant
 
+    # Add CO2 emissions from gasoline
+
+    emissions_CO2 = {
+        "@type": "Node",
+        "description": u"émissions de CO2 des énergies",
+        "children": {},
+        }
+    emissions_CO2['children']['carburants'] = {
+        "@type": "Node",
+        "description": "émissions de CO2 des carburants",
+        "children": {
+            "CO2_diesel": {
+                "@type": "Parameter",
+                "description": u"émissions de CO2 du diesel en kg par litre",
+                "format": "float",
+                "values": [
+                    {'start': u'1990-01-01', 'stop': u'2015-12-31', 'value': 2.66},
+                    ],
+                },
+            "CO2_essence": {
+                "@type": "Parameter",
+                "description": u"émissions de CO2 du diesel en kg par litre",
+                "format": "float",
+                "values": [
+                    {'start': u'1990-01-01', 'stop': u'2015-12-31', 'value': 2.42},
+                    ],
+                },
+            },
+        }
+
+    legislation_json['children']['imposition_indirecte']['children']['emissions_CO2'] = emissions_CO2
+
     # Add data from comptabilite national about alcohol
 
     alcool_conso_et_vin = {

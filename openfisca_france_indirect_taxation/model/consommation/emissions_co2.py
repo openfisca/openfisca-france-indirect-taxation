@@ -14,7 +14,11 @@ class emissions_CO2_carburants(Variable):
     def function(self, simulation, period):
         quantites_diesel = simulation.calculate('quantites_diesel', period)
         quantites_essence = simulation.calculate('quantites_essence', period)
-        emissions = quantites_diesel * 2.66 + quantites_essence * 2.42  # Source : Ademe
+        emissions_diesel = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
+        emissions_essence = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
+        emissions = quantites_diesel * emissions_diesel + quantites_essence * emissions_essence  # Source : Ademe
 
         return period, emissions
 
@@ -27,6 +31,13 @@ class emissions_CO2_carburants_ajustees(Variable):
     def function(self, simulation, period):
         quantites_diesel_ajustees = simulation.calculate('quantites_diesel_ajustees', period)
         quantites_essence_ajustees = simulation.calculate('quantites_essence_ajustees', period)
-        emissions_ajustees = quantites_diesel_ajustees * 2.66 + quantites_essence_ajustees * 2.42  # Source : Ademe
+        emissions_diesel = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
+        emissions_essence = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
+        emissions_ajustees = (
+            (quantites_diesel_ajustees * emissions_diesel) +
+            (quantites_essence_ajustees * emissions_essence)
+            )  # Source : Ademe
 
         return period, emissions_ajustees
