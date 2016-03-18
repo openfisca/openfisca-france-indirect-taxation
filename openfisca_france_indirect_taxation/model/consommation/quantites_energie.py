@@ -301,3 +301,17 @@ class quantites_gaz_contrat_optimal(Variable):
         quantite_optimale = numpy.maximum(quantite_optimale_base_b2i, 0)
 
         return period, quantite_optimale
+
+
+class quantites_electricite_selon_compteur(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantité d'électricité (en kWh) consommée par les ménages d'après le compteur imputé"
+
+    def function(self, simulation, period):
+        depenses_electricite_variables = simulation.calculate('depenses_electricite_variables', period)
+        depenses_electricite_prix_unitaire = simulation.calculate('depenses_electricite_prix_unitaire', period)
+        quantites_electricite_selon_compteur = depenses_electricite_variables / depenses_electricite_prix_unitaire
+        quantites_electricite_selon_compteur = numpy.maximum(quantites_electricite_selon_compteur, 0)
+
+        return period, quantites_electricite_selon_compteur
