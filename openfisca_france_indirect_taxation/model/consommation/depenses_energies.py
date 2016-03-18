@@ -239,6 +239,37 @@ class depenses_super_plombe_ht(Variable):
         return period, depenses_super_plombe_ht
 
 
+class depenses_gaz_prix_unitaire(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Prix unitaire du gaz rencontré par les ménages"
+
+    def function(self, simulation, period):
+        quantite_base = simulation.calculate('quantites_gaz_contrat_base', period)
+        quantite_b0 = simulation.calculate('quantites_gaz_contrat_b0', period)
+        quantite_b1 = simulation.calculate('quantites_gaz_contrat_b1', period)
+        quantite_b2i = simulation.calculate('quantites_gaz_contrat_b2i', period)
+        quantite_optimale = simulation.calculate('quantites_gaz_contrat_optimal', period)
+
+        prix_unitaire_base = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_base_ttc
+        prix_unitaire_b0 = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b0_ttc
+        prix_unitaire_b1 = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b1_ttc
+        prix_unitaire_b2i = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b2i_ttc
+
+        prix_unitaire_optimal = (
+            (quantite_base == quantite_optimale) * prix_unitaire_base +
+            (quantite_b0 == quantite_optimale) * prix_unitaire_b0 +
+            (quantite_b1 == quantite_optimale) * prix_unitaire_b1 +
+            (quantite_b2i == quantite_optimale) * prix_unitaire_b2i
+            )
+
+        return period, prix_unitaire_optimal
+
+
 class depenses_gaz_tarif_fixe(Variable):
     column = FloatCol
     entity_class = Menages
