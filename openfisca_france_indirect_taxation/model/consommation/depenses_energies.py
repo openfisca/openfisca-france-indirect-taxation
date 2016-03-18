@@ -314,3 +314,16 @@ class depenses_gaz_variables(Variable):
         depenses_gaz_variables = numpy.maximum(depenses_gaz_variables, 0)
 
         return period, depenses_gaz_variables
+
+
+class depenses_electricite_percentile(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Classement par percentile des dépenses d'électricité"
+
+    def function(self, simulation, period):
+        depenses_electricite = simulation.calculate('poste_coicop_451', period)
+        depenses_electricite_rank = depenses_electricite.argsort().argsort()
+        depenses_electricite_percentile = depenses_electricite_rank / len(depenses_electricite_rank) * 100
+
+        return period, depenses_electricite_percentile
