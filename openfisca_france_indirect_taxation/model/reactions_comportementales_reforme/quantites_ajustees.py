@@ -41,6 +41,25 @@ class quantites_gaz_ajustees_taxe_carbone(Variable):
         return period, quantites_gaz_ajustees
 
 
+class quantites_electricite_ajustees_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantités d'électricité consommées après la réforme - taxe carbone"
+
+    def function(self, simulation, period):
+        depenses_electricite_ajustees_taxe_carbone = \
+            simulation.calculate('depenses_electricite_ajustees_taxe_carbone', period)
+        depenses_electricite_tarif_fixe = simulation.calculate('depenses_electricite_tarif_fixe', period)
+        depenses_electricite_ajustees_variables = \
+            depenses_electricite_ajustees_taxe_carbone - depenses_electricite_tarif_fixe
+
+        depenses_electricite_prix_unitaire = simulation.calculate('depenses_electricite_prix_unitaire', period)
+        reforme_electricite = simulation.legislation_at(period.start).taxe_carbone.electricite
+
+        quantites_electricite_ajustees = \
+            depenses_electricite_ajustees_variables / (depenses_electricite_prix_unitaire + reforme_electricite)
+
+        return period, quantites_electricite_ajustees
 
 
 class quantites_sp_e10_ajustees(Variable):

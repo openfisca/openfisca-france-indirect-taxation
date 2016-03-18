@@ -49,9 +49,29 @@ class depenses_gaz_ajustees_taxe_carbone(Variable):
         depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
         reforme_gaz = simulation.legislation_at(period.start).taxe_carbone.gaz
         gaz_elasticite_prix = simulation.calculate('elas_price_2_2')
-        depenses_gaz_ajustees_variable = \
+        depenses_gaz_ajustees_variables = \
             depenses_gaz_variables * (1 + (1 + gaz_elasticite_prix) * reforme_gaz / depenses_gaz_prix_unitaire)
         depenses_gaz_tarif_fixe = simulation.calculate('depenses_gaz_tarif_fixe', period)
-        depenses_gaz_ajustees = depenses_gaz_ajustees_variable + depenses_gaz_tarif_fixe
+        depenses_gaz_ajustees = depenses_gaz_ajustees_variables + depenses_gaz_tarif_fixe
 
         return period, depenses_gaz_ajustees
+
+
+class depenses_electricite_ajustees_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en électricité après réaction à la réforme - taxe carbone"
+
+    def function(self, simulation, period):
+        depenses_electricite_variables = simulation.calculate('depenses_electricite_variables', period)
+        depenses_electricite_prix_unitaire = simulation.calculate('depenses_electricite_prix_unitaire', period)
+        reforme_electricite = simulation.legislation_at(period.start).taxe_carbone.electricite
+        electricite_elasticite_prix = simulation.calculate('elas_price_2_2')
+        depenses_electricite_ajustees_variables = (
+            depenses_electricite_variables *
+            (1 + (1 + electricite_elasticite_prix) * reforme_electricite / depenses_electricite_prix_unitaire)
+            )
+        depenses_electricite_tarif_fixe = simulation.calculate('depenses_electricite_tarif_fixe', period)
+        depenses_electricite_ajustees = depenses_electricite_ajustees_variables + depenses_electricite_tarif_fixe
+
+        return period, depenses_electricite_ajustees
