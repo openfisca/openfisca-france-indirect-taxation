@@ -118,19 +118,6 @@ class depenses_essence_ht(DatedVariable):
         return period, depenses_essence_ht
 
 
-class depenses_essence_recalculees(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Dépenses en essence recalculées à partir du prix ht"
-
-    def function(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-        depenses_sp_e10_ht = simulation.calculate('depenses_sp_e10_ht', period)
-        depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
-        depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
-        depenses_super_plombe_ht = simulation.calculate('depenses_super_plombe_ht', period)
-
-
 class depenses_sp_e10_ht(Variable):
     column = FloatCol
     entity_class = Menages
@@ -252,13 +239,12 @@ class depenses_super_plombe_ht(Variable):
         return period, depenses_super_plombe_ht
 
 
-class depenses_variables_gaz(Variable):
+class depenses_gaz_tarif_fixe(Variable):
     column = FloatCol
     entity_class = Menages
-    label = u"Dépenses en gaz des ménages, hors coût fixe de l'abonnement"
+    label = u"Dépenses en gaz des ménages sur le coût fixe de l'abonnement"
 
     def function(self, simulation, period):
-        depenses_gaz = simulation.calculate('poste_coicop_452', period)
         quantite_base = simulation.calculate('quantites_gaz_contrat_base', period)
         quantite_b0 = simulation.calculate('quantites_gaz_contrat_b0', period)
         quantite_b1 = simulation.calculate('quantites_gaz_contrat_b1', period)
@@ -281,7 +267,19 @@ class depenses_variables_gaz(Variable):
             (quantite_b2i == quantite_optimale) * tarif_fixe_b2i
             )
 
-        depenses_variables_gaz = depenses_gaz - tarif_fixe_optimal
-        depenses_variables_gaz = numpy.maximum(depenses_variables_gaz, 0)
+        return period, tarif_fixe_optimal
 
-        return period, depenses_variables_gaz
+
+class depenses_gaz_variables(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en gaz des ménages, hors coût fixe de l'abonnement"
+
+    def function(self, simulation, period):
+        depenses_gaz = simulation.calculate('poste_coicop_452', period)
+        tarif_fixe = simulation.calculate('depenses_gaz_tarif_fixe', period)
+
+        depenses_gaz_variables = depenses_gaz - tarif_fixe
+        depenses_gaz_variables = numpy.maximum(depenses_gaz_variables, 0)
+
+        return period, depenses_gaz_variables
