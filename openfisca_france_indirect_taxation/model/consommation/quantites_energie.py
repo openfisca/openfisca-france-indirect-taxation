@@ -301,38 +301,3 @@ class quantites_gaz_contrat_optimal(Variable):
         quantite_optimale = numpy.maximum(quantite_optimale_base_b2i, 0)
 
         return period, quantite_optimale
-
-
-class depenses_variables_gaz(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Dépenses en gaz des ménages, hors coût fixe de l'abonnement"
-
-    def function(self, simulation, period):
-        depenses_gaz = simulation.calculate('poste_coicop_452', period)
-        quantite_base = simulation.calculate('quantites_gaz_contrat_base', period)
-        quantite_b0 = simulation.calculate('quantites_gaz_contrat_b0', period)
-        quantite_b1 = simulation.calculate('quantites_gaz_contrat_b1', period)
-        quantite_b2i = simulation.calculate('quantites_gaz_contrat_b2i', period)
-        quantite_optimale = simulation.calculate('quantites_gaz_contrat_optimal', period)
-
-        tarif_fixe_base = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.base_0_1000
-        tarif_fixe_b0 = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b0_1000_6000
-        tarif_fixe_b1 = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b1_6_30000
-        tarif_fixe_b2i = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b2i_30000
-
-        tarif_fixe_optimal = (
-            (quantite_base == quantite_optimale) * tarif_fixe_base +
-            (quantite_b0 == quantite_optimale) * tarif_fixe_b0 +
-            (quantite_b1 == quantite_optimale) * tarif_fixe_b1 +
-            (quantite_b2i == quantite_optimale) * tarif_fixe_b2i
-            )
-
-        depenses_variables_gaz = depenses_gaz - tarif_fixe_optimal
-        depenses_variables_gaz = numpy.maximum(depenses_variables_gaz, 0)
-
-        return period, depenses_variables_gaz
