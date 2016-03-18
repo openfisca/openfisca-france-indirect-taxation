@@ -327,3 +327,70 @@ class depenses_electricite_percentile(Variable):
         depenses_electricite_percentile = depenses_electricite_rank / len(depenses_electricite_rank) * 100
 
         return period, depenses_electricite_percentile
+
+
+class depenses_electricite_prix_unitaire(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Prix unitaire de l'électricité de chaque ménage, après affectation d'un compteur"
+
+    def function(self, simulation, period):
+        depenses_electricite_percentile = simulation.calculate('depenses_electricite_percentile', period)
+
+        # Note : les barèmes ne donnent que les prix unitaires pour 3 et 6 kva. Pour les puissances supérieures,
+        # les valeurs sont assez proches de celles du compteur 6kva que nous utilisons comme proxy.
+        prix_unitaire_3kva = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_3_kva
+        prix_unitaire_6kva = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+
+        prix_unitaire = (
+            (depenses_electricite_percentile < 4) * prix_unitaire_3kva +
+            (depenses_electricite_percentile < 4) * prix_unitaire_6kva
+            )
+
+        return period, prix_unitaire
+
+
+class depenses_electricite_tarif_fixe(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en électricité des ménages sur le coût fixe de l'abonnement, après affectation d'un compteur"
+
+    def function(self, simulation, period):
+        depenses_electricite_percentile = simulation.calculate('depenses_electricite_percentile', period)
+
+        tarif_fixe_3kva = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_3_kva
+        tarif_fixe_6kva = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_6_kva
+        tarif_fixe_9kva = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_9_kva
+        tarif_fixe_12kva = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_12_kva
+        tarif_fixe_15kva = \
+            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
+
+        tarif_fixe = (
+            (depenses_electricite_percentile < 4) * tarif_fixe_3kva +
+            (depenses_electricite_percentile > 4) * (depenses_electricite_percentile < 52) * tarif_fixe_6kva +
+            (depenses_electricite_percentile > 52) * (depenses_electricite_percentile < 78) * tarif_fixe_9kva +
+            (depenses_electricite_percentile > 78) * (depenses_electricite_percentile < 88) * tarif_fixe_12kva +
+            (depenses_electricite_percentile > 88) * tarif_fixe_15kva
+            )
+
+        return period, tarif_fixe
+
+
+class depenses_electricite_variables(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en électricité des ménages, hors coût fixe de l'abonnement"
+
+    def function(self, simulation, period):
+        depenses_electricite = simulation.calculate('poste_coicop_451', period)
+        depenses_electricite_tarif_fixe = simulation.calculate('depenses_electricite_tarif_fixe', period)
+        depenses_electricite_variables = depenses_electricite - depenses_electricite_tarif_fixe
+        depenses_electricite_variables = numpy.maximum(depenses_electricite_variables, 0)
+
+        return period, depenses_electricite_variables
