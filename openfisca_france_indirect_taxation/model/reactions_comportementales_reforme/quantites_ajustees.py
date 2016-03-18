@@ -23,6 +23,26 @@ class quantites_diesel_ajustees(Variable):
         return period, quantites_diesel_ajustees
 
 
+class quantites_gaz_ajustees_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantités de gaz consommées après la réforme - taxe carbone"
+
+    def function(self, simulation, period):
+        depenses_gaz_ajustees_taxe_carbone = simulation.calculate('depenses_gaz_ajustees_taxe_carbone', period)
+        depenses_gaz_tarif_fixe = simulation.calculate('depenses_gaz_tarif_fixe', period)
+        depenses_gaz_ajustees_variables = depenses_gaz_ajustees_taxe_carbone - depenses_gaz_tarif_fixe
+
+        depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
+        reforme_gaz = simulation.legislation_at(period.start).taxe_carbone.gaz
+
+        quantites_gaz_ajustees = depenses_gaz_ajustees_variables / (depenses_gaz_prix_unitaire + reforme_gaz)
+
+        return period, quantites_gaz_ajustees
+
+
+
+
 class quantites_sp_e10_ajustees(Variable):
     column = FloatCol
     entity_class = Menages
