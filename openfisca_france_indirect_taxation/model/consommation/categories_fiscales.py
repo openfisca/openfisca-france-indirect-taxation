@@ -28,6 +28,8 @@ from __future__ import division
 
 from datetime import date
 
+from biryani.strings import slugify
+
 from openfisca_core.columns import FloatCol
 from openfisca_core.formulas import dated_function, DatedVariable
 
@@ -45,17 +47,16 @@ def function_creator(postes_coicop, year_start = None, year_stop = None):
 
     @dated_function(start = start, stop = stop)
     def func(self, simulation, period):
-        return period, sum(simulation.calculate('poste_coicop_' + poste, period) for poste in postes_coicop)
+        return period, sum(simulation.calculate('poste_coicop_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop)
 
     func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
     return func
 
 
 def generate_variables():
-    assert '' in categories_fiscales_data_frame['categorie_fiscale']
     existing_categ = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
     print existing_categ
-    boum
+
     for categorie_fiscale in existing_categ:
         year_start = 1994
         year_final_stop = 2014
@@ -63,8 +64,8 @@ def generate_variables():
         for year in range(year_start, year_final_stop + 1):
             postes_coicop = sorted(
                 categories_fiscales_data_frame.query(
-                    'annee == @year and categoriefiscale == @categorie_fiscale'
-                    )['posteCOICOP'].astype(str))
+                    'start<= @year and stop <= @year and categorie_fiscale == @categorie_fiscale'
+                    )['code_coicop'].astype(str))
             variables = ', '.join(postes_coicop)
 
             if year == year_start:
@@ -80,6 +81,7 @@ def generate_variables():
                 dated_func = function_creator(previous_postes_coicop, year_start = year_start, year_stop = year_stop)
                 dated_function_name = u"function_{year_start}_{year_stop}".format(
                     year_start = year_start, year_stop = year_stop)
+                print categorie_fiscale, year_start, year_stop, postes_coicop
 
                 if len(previous_postes_coicop) != 0:
                     functions_by_name[dated_function_name] = dated_func
@@ -88,7 +90,9 @@ def generate_variables():
 
             previous_postes_coicop = postes_coicop
 
-        class_name = u'categorie_fiscale_{}'.format(categorie_fiscale)
+
+        class_name = u'depenses_{}'.format(categorie_fiscale)
+
         # Trick to create a class with a dynamic name.
         definitions_by_name = dict(
             column = FloatCol,
@@ -106,9 +110,7 @@ def preload_categories_fiscales_data_frame():
     if codes_coicop_data_frame is None:
         from openfisca_france_indirect_taxation.model.consommation.postes_coicop import codes_coicop_data_frame
         categories_fiscales_data_frame = codes_coicop_data_frame[
-            ['code_coicop', 'code_bdf', 'categorie_fiscale']
-            ].copy()
-        print categories_fiscales_data_frame.categorie_fiscale
-        print  categories_fiscales_data_frame.categorie_fiscale.unique()
+            ['code_coicop', 'code_bdf', 'categorie_fiscale', 'start', 'stop']
+            ].copy().fillna('')
 
         generate_variables()

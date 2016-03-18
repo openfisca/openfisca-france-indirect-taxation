@@ -66,7 +66,6 @@ def test_survey_simulation(year = None):
                 'pondmen',
                 'decuc',
                 'poste_coicop_01_1_1_1_1',
-                'categorie_fiscale_7',
                 'depenses_carburants',
                 ]
             ])

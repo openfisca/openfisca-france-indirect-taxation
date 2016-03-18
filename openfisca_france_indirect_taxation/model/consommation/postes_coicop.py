@@ -57,7 +57,7 @@ def preload_postes_coicop_data_frame():
             os.path.join(legislation_directory, 'coicop_legislation.csv'),
             )
         codes_coicop_data_frame = codes_coicop_data_frame.query('not (code_bdf != code_bdf)')[  # NaN removal
-            ['code_coicop', 'code_bdf', 'label', 'categorie_fiscale']].copy()
+            ['code_coicop', 'code_bdf', 'label', 'categorie_fiscale', 'start', 'stop']].copy()
         codes_coicop_data_frame = codes_coicop_data_frame.loc[
             codes_coicop_data_frame.code_coicop.str[:2].astype(int) <= 12
             ].copy()
