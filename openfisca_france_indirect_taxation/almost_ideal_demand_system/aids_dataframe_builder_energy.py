@@ -14,7 +14,7 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_in
     df_indice_prix_produit
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import \
     add_area_dummy, add_stalog_dummy, add_vag_dummy, electricite_only, indices_prix_carbus, price_carbu_pond, \
-    price_carbu_from_quantities
+    price_carbu_from_quantities, price_gaz_from_contracts
 
 
 assets_directory = os.path.join(
@@ -27,7 +27,7 @@ assets_directory = os.path.join(
 # On commence par cinstruire une dataframe appelée data_conso rassemblant les informations sur les dépenses des ménages.
 data_frame_for_reg = None
 data_frame_all_years = pd.DataFrame()
-for year in [2000, 2005, 2011]:
+for year in [2011]:
     aggregates_data_frame = get_input_data_frame(year)
 
     # Pour estimer QAIDS, on se concentre sur les biens non-durables.
@@ -133,6 +133,8 @@ for year in [2000, 2005, 2011]:
     # Les parts des biens dans leur catégorie permettent de construire des indices de prix pondérés (Cf. Lewbel)
     df_depenses_prix['indice_prix_pondere'] = 0
     df_depenses_prix['indice_prix_pondere'] = df_depenses_prix['part_bien_categorie'] * df_depenses_prix['prix']
+
+    bibi = price_gaz_from_contracts(df_depenses_prix, year)
 
     # grouped donne l'indice de prix pondéré pour chacune des deux catégories pour chaque individu
     # On met cette dataframe en forme pour avoir pour chaque individu l'indice de prix pour chaque catégorie

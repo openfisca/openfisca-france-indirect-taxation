@@ -11,6 +11,7 @@ from openfisca_survey_manager import default_config_files_directory as config_fi
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
 
+
 def add_area_dummy(dataframe):
     areas = ['rural', 'villes_petites', 'villes_moyennes', 'villes_grandes', 'agglo_paris']
     for area in areas:
@@ -135,5 +136,18 @@ def price_carbu_from_quantities(dataframe, year):
         )
     dataframe2.loc[dataframe2['prix_carbu_consommateur'] < 2, 'prix_carbu'] = \
         dataframe2['prix_carbu_consommateur'] * indice_prix_moyen / prix_consommateur_moyen
+
+    return dataframe2
+
+
+def price_gaz_from_contracts(dataframe, year):
+    assets_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
+        )
+    prix_contrats = pd.DataFrame.from_csv(os.path.join(assets_directory,
+        'openfisca_france_indirect_taxation', 'assets', 'prix',
+        'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)))
+    prix_contrats['ident_men'] = prix_contrats['ident_men'].astype(str)
+    dataframe2 = pd.merge(dataframe, prix_contrats, on = 'ident_men')
 
     return dataframe2
