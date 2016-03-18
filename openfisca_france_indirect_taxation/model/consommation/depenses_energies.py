@@ -346,7 +346,7 @@ class depenses_electricite_prix_unitaire(Variable):
 
         prix_unitaire = (
             (depenses_electricite_percentile < 4) * prix_unitaire_3kva +
-            (depenses_electricite_percentile < 4) * prix_unitaire_6kva
+            (depenses_electricite_percentile > 4) * prix_unitaire_6kva
             )
 
         return period, prix_unitaire
