@@ -1,13 +1,13 @@
- - name: "Catégorie fiscale 1 (TVA super réduit)"
+ - name: "Catégorie fiscale TVA super réduit"
    period: "2010"
    input_variables:
-     poste_coicop_611: 100
-     poste_coicop_952: 50
+     poste_06_1_1_1_1: 100
+     poste_09_5_2_1_1: 50
    output_variables:
-     categorie_fiscale_1: 150
- - name: "Catégorie fiscale 0 (Pas de taxe)"
+     depenses_tva_taux_super_reduit: 150
+ - name: "Catégorie fiscale : pas de taxe"
    period: "2010"
    input_variables:
-     poste_coicop_230: 100
+     poste_02_3: 100
    output_variables:
-     categorie_fiscale_0: 100
+     depenses_: 100

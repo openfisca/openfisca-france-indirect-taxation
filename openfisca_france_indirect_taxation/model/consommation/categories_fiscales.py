@@ -27,6 +27,7 @@
 from __future__ import division
 
 from datetime import date
+import logging
 
 from biryani.strings import slugify
 
@@ -35,6 +36,9 @@ from openfisca_core.formulas import dated_function, DatedVariable
 
 
 from openfisca_france_indirect_taxation.model.base import *
+
+
+log = logging.getLogger(__name__)
 
 
 categories_fiscales_data_frame = None
@@ -47,7 +51,7 @@ def function_creator(postes_coicop, year_start = None, year_stop = None):
 
     @dated_function(start = start, stop = stop)
     def func(self, simulation, period):
-        return period, sum(simulation.calculate('poste_coicop_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop)
+        return period, sum(simulation.calculate('poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop)
 
     func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
     return func
@@ -55,7 +59,6 @@ def function_creator(postes_coicop, year_start = None, year_stop = None):
 
 def generate_variables():
     existing_categ = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
-    print existing_categ
 
     for categorie_fiscale in existing_categ:
         year_start = 1994
@@ -64,10 +67,9 @@ def generate_variables():
         for year in range(year_start, year_final_stop + 1):
             postes_coicop = sorted(
                 categories_fiscales_data_frame.query(
-                    'start<= @year and stop <= @year and categorie_fiscale == @categorie_fiscale'
+                    'start <= @year and stop >= @year and categorie_fiscale == @categorie_fiscale'
                     )['code_coicop'].astype(str))
             variables = ', '.join(postes_coicop)
-
             if year == year_start:
                 previous_variables = variables
                 previous_postes_coicop = postes_coicop
@@ -81,7 +83,9 @@ def generate_variables():
                 dated_func = function_creator(previous_postes_coicop, year_start = year_start, year_stop = year_stop)
                 dated_function_name = u"function_{year_start}_{year_stop}".format(
                     year_start = year_start, year_stop = year_stop)
-                print categorie_fiscale, year_start, year_stop, postes_coicop
+                log.info(u'Creating fiscal category {} ({}-{}) assembling the following products'.format(
+                    categorie_fiscale, year_start, year_stop, postes_coicop
+                    ))
 
                 if len(previous_postes_coicop) != 0:
                     functions_by_name[dated_function_name] = dated_func
@@ -90,9 +94,7 @@ def generate_variables():
 
             previous_postes_coicop = postes_coicop
 
-
         class_name = u'depenses_{}'.format(categorie_fiscale)
-
         # Trick to create a class with a dynamic name.
         definitions_by_name = dict(
             column = FloatCol,

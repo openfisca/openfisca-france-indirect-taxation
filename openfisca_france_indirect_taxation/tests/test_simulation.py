@@ -42,8 +42,7 @@ def get_input_data_frame(year):
     return input_data_frame
 
 
-def test_survey_simulation(year = None):
-    assert year is not None
+def test_survey_simulation(year = 2011):
     input_data_frame = get_input_data_frame(year)
     TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
     tax_benefit_system = TaxBenefitSystem()
@@ -55,18 +54,20 @@ def test_survey_simulation(year = None):
     simulation = survey_scenario.new_simulation()
     simulation.calculate('tva_taux_plein')
 
-    return DataFrame(
+    return simulation, DataFrame(
         dict([
             (name, simulation.calculate(name)) for name in [
+                'ident_men',
+                'pondmen',
+                'decuc',
+                'poste_01_1_1_1_1',
+                'poste_11_1_1_1_1',
+                'depenses_ticpe',
+                'depenses_carburants',
                 'tva_taux_plein',
                 'tva_taux_intermediaire',
                 'tva_taux_reduit',
                 'tva_taux_super_reduit',
-                'ident_men',
-                'pondmen',
-                'decuc',
-                'poste_coicop_01_1_1_1_1',
-                'depenses_carburants',
                 ]
             ])
         )
@@ -79,7 +80,5 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
     for year in [2011]:
-        df = test_survey_simulation(year)
-        print df
-        print df.columns
-        print df.poste_coicop_01_1_1_1_1.describe()
+        simulation, df = test_survey_simulation(year)
+

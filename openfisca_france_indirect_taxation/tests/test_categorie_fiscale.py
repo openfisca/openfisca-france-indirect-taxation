@@ -49,10 +49,3 @@ def check_categorie_fiscale(member):
         computed_categorie_fiscale,
         member['categorie_fiscale']
         )
-
-
-def test_education():
-    for value in [10, '10']:
-        assert get_categorie_fiscale(value) == ''
-
-

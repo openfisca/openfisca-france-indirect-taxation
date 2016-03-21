@@ -1,4 +1,4 @@
-IGNORE_OPT=--ignore-files='(test_simulation.py|tests_aids_categ.py|test_carburants_builder.py)'
+IGNORE_OPT=--ignore-files='(tests_aids_categ.py|test_carburants_builder.py)'
 TESTS_DIR=openfisca_france_indirect_taxation/tests
 
 all: flake8 test
