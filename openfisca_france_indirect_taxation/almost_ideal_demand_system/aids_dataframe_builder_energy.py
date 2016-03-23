@@ -132,9 +132,8 @@ for year in [2011]:
 
     # Les parts des biens dans leur catégorie permettent de construire des indices de prix pondérés (Cf. Lewbel)
     df_depenses_prix['indice_prix_pondere'] = 0
+    df_depenses_prix = price_gaz_from_contracts(df_depenses_prix, year)
     df_depenses_prix['indice_prix_pondere'] = df_depenses_prix['part_bien_categorie'] * df_depenses_prix['prix']
-
-    bibi = price_gaz_from_contracts(df_depenses_prix, year)
 
     # grouped donne l'indice de prix pondéré pour chacune des deux catégories pour chaque individu
     # On met cette dataframe en forme pour avoir pour chaque individu l'indice de prix pour chaque catégorie

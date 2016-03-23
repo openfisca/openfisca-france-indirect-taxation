@@ -5,7 +5,6 @@ from __future__ import division
 import os
 import pkg_resources
 import pandas as pd
-import numpy as np
 
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_survey_manager.survey_collections import SurveyCollection
@@ -147,7 +146,14 @@ def price_gaz_from_contracts(dataframe, year):
     prix_contrats = pd.DataFrame.from_csv(os.path.join(assets_directory,
         'openfisca_france_indirect_taxation', 'assets', 'prix',
         'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)))
+    prix_contrats['ident_men'] = prix_contrats['ident_men'].astype(int)
     prix_contrats['ident_men'] = prix_contrats['ident_men'].astype(str)
-    dataframe2 = pd.merge(dataframe, prix_contrats, on = 'ident_men')
+    moyenne_prix_gaz = \
+        prix_contrats.query('depenses_gaz_prix_unitaire > 0').depenses_gaz_prix_unitaire.mean()
+    prix_contrats.loc[prix_contrats['depenses_gaz_prix_unitaire'] == 0, 'depenses_gaz_prix_unitaire'] = moyenne_prix_gaz
+    dataframe = pd.merge(dataframe, prix_contrats, on = 'ident_men')
+    dataframe.loc[dataframe['bien'] == 'poste_coicop_452', 'prix'] = (
+        dataframe['prix'] * dataframe['depenses_gaz_prix_unitaire'] / moyenne_prix_gaz
+        )
 
-    return dataframe2
+    return dataframe
