@@ -39,7 +39,7 @@ from .taxes_indirectes import (  # noqa analysis:ignore
     assurances,
     tabacs,
     ticpe,
-    total_taxes_indirectes,
+    taxes_indirectes_total,
     tva,
     )
 from .revenus import (  # noqa analysis:ignore

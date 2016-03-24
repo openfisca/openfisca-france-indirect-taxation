@@ -36,7 +36,7 @@ if __name__ == '__main__':
         'revtot',
         'rev_disponible',
         'somme_coicop12',
-        'total_taxes_indirectes'
+        'taxes_indirectes_total'
         ]
     for year in [2000, 2005, 2011]:
         survey_scenario = SurveyScenario.create(year = year)
@@ -68,7 +68,7 @@ if __name__ == '__main__':
 
         taxe_indirectes = taxe_indirectes.rename(columns = {'revtot': u'revenu total',
             'rev_disponible': u'revenu disponible', 'somme_coicop12': u'depenses totales',
-            'total_taxes_indirectes': u'toutes les taxes indirectes'})
+            'taxes_indirectes_total': u'toutes les taxes indirectes'})
         for revenu in [u'revenu total', u'revenu disponible', u'depenses totales', u'toutes les taxes indirectes']:
             list_part_taxes = []
             for taxe in ['TVA', 'TICPE', u'Taxes alcools', u'Taxes assurances', u'Taxes tabacs']:
