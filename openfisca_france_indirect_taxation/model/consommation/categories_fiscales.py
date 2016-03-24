@@ -51,14 +51,17 @@ def function_creator(postes_coicop, year_start = None, year_stop = None):
 
     @dated_function(start = start, stop = stop)
     def func(self, simulation, period):
-        return period, sum(simulation.calculate('poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop)
+        return period, sum(simulation.calculate(
+            'poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
+            )
 
     func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
     return func
 
 
-def generate_variables():
-    existing_categ = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
+def generate_variables(categories_fiscales = None, reform = False):
+    assert categories_fiscales is not None
+    existing_categ = sorted(categories_fiscales['categorie_fiscale'].drop_duplicates())
 
     for categorie_fiscale in existing_categ:
         year_start = 1994
@@ -66,7 +69,7 @@ def generate_variables():
         functions_by_name = dict()
         for year in range(year_start, year_final_stop + 1):
             postes_coicop = sorted(
-                categories_fiscales_data_frame.query(
+                categories_fiscales.query(
                     'start <= @year and stop >= @year and categorie_fiscale == @categorie_fiscale'
                     )['code_coicop'].astype(str))
             variables = ', '.join(postes_coicop)
@@ -96,11 +99,16 @@ def generate_variables():
 
         class_name = u'depenses_{}'.format(categorie_fiscale)
         # Trick to create a class with a dynamic name.
-        definitions_by_name = dict(
-            column = FloatCol,
-            entity_class = Menages,
-            label = u"Categorie fiscale {0}".format(categorie_fiscale),
-            )
+        if not reform:
+            definitions_by_name = dict(
+                column = FloatCol,
+                entity_class = Menages,
+                label = u"Categorie fiscale {0}".format(categorie_fiscale),
+                )
+        else:
+            definitions_by_name = dict(
+                reference = getattr(sys.modules[__name__], class_name.encode('utf-8'))
+                )
         definitions_by_name.update(functions_by_name)
         type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
         del definitions_by_name
@@ -115,4 +123,4 @@ def preload_categories_fiscales_data_frame():
             ['code_coicop', 'code_bdf', 'categorie_fiscale', 'start', 'stop']
             ].copy().fillna('')
 
-        generate_variables()
+        generate_variables(categories_fiscales = categories_fiscales_data_frame)
