@@ -183,7 +183,7 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
 
 
 def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
-    coicop_nomenclature = build_coicop_nomenclature.build_coicop_nomenclature()
+    coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
     # On  ajoute des colonnes
     # période d'effet de la législation
     coicop_nomenclature['start'] = 0
@@ -557,7 +557,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         )
     # Couts des services d'intermédiation financière indirectement mesurés
     intermediation_financiere = dict(
-        value = '12.6.1',
+        value = '12.6',
         categorie_fiscale = '',
         )
 
