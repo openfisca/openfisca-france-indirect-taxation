@@ -1,4 +1,4 @@
-<NODE code="root" deb="1990-01-01" fin="2020-12-31">
+<NODE code="root">
   <NODE code="imposition_indirecte">
     <NODE code="alcool_cotisation_secu">
       <CODE code="cotisation_securite_sociale_par_decilitre" format="float" type="monetary">
