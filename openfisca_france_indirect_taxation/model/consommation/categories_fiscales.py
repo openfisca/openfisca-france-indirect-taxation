@@ -28,6 +28,7 @@ from __future__ import division
 
 from datetime import date
 import logging
+import sys
 
 from biryani.strings import slugify
 
@@ -59,11 +60,17 @@ def function_creator(postes_coicop, year_start = None, year_stop = None):
     return func
 
 
-def generate_variables(categories_fiscales = None, reform = False):
+def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_system = None):
     assert categories_fiscales is not None
-    existing_categ = sorted(categories_fiscales['categorie_fiscale'].drop_duplicates())
+    existing_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
 
-    for categorie_fiscale in existing_categ:
+    if Reform:
+        removed_categories = set(existing_categories).difference(
+            set(categories_fiscales['categorie_fiscale'].drop_duplicates()))
+        print removed_categories
+        boum
+
+    for categorie_fiscale in existing_categories:
         year_start = 1994
         year_final_stop = 2014
         functions_by_name = dict()
@@ -86,9 +93,8 @@ def generate_variables(categories_fiscales = None, reform = False):
                 dated_func = function_creator(previous_postes_coicop, year_start = year_start, year_stop = year_stop)
                 dated_function_name = u"function_{year_start}_{year_stop}".format(
                     year_start = year_start, year_stop = year_stop)
-                log.info(u'Creating fiscal category {} ({}-{}) assembling the following products'.format(
-                    categorie_fiscale, year_start, year_stop, postes_coicop
-                    ))
+                log.info(u'Creating fiscal category {} ({}-{}) with the following products {}'.format(
+                    categorie_fiscale, year_start, year_stop, postes_coicop))
 
                 if len(previous_postes_coicop) != 0:
                     functions_by_name[dated_function_name] = dated_func
@@ -99,18 +105,23 @@ def generate_variables(categories_fiscales = None, reform = False):
 
         class_name = u'depenses_{}'.format(categorie_fiscale)
         # Trick to create a class with a dynamic name.
-        if not reform:
+        if not Reform:
             definitions_by_name = dict(
                 column = FloatCol,
                 entity_class = Menages,
                 label = u"Categorie fiscale {0}".format(categorie_fiscale),
                 )
+            definitions_by_name.update(functions_by_name)
+            type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
         else:
             definitions_by_name = dict(
-                reference = getattr(sys.modules[__name__], class_name.encode('utf-8'))
+                reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
                 )
-        definitions_by_name.update(functions_by_name)
-        type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+            if categorie_fiscale not in removed_categories:
+                definitions_by_name.update(functions_by_name)
+
+            type(class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
+
         del definitions_by_name
 
 

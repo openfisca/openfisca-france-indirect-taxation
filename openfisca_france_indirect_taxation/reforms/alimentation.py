@@ -2,20 +2,40 @@
 
 from __future__ import division
 
+
 from numpy import logical_not as not_, minimum as min_
 from openfisca_core import columns, reforms
 
 from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import generate_variables
 
+
 def build_reform(tax_benefit_system):
     Reform = reforms.make_reform(
-        key = 'alimentation',
+        key = 'reforme_alimentation',
         name = u"Réforme de l'imposition indirecte des biens alimentaires",
         reference = tax_benefit_system,
         )
+    from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import categories_fiscales_data_frame
+    print categories_fiscales_data_frame.query("categorie_fiscale == 'tva_taux_super_reduit'")
+    print categories_fiscales_data_frame.query("categorie_fiscale == 'vin'")
+    categories_fiscales = categories_fiscales_data_frame.copy()
+    categories_fiscales.loc[
+        (categories_fiscales.categorie_fiscale == 'tva_taux_super_reduit') & (
+            categories_fiscales.code_bdf.str.startswith('c06111')),
+        'categorie_fiscale'
+        ] = ''
+    categories_fiscales.loc[
+        categories_fiscales.categorie_fiscale == 'vin',
+        'categorie_fiscale'
+        ] = ''
+    print categories_fiscales.query("categorie_fiscale == 'tva_taux_super_reduit'")
+    print categories_fiscales.query("categorie_fiscale == 'vin'")
 
-    print categories_fiscales_data_frame
-    generate_variables(categories_fiscales = categories_fiscales_data_frame, reform = True)
+    generate_variables(
+        categories_fiscales = categories_fiscales,
+        Reform = Reform,
+        tax_benefit_system = tax_benefit_system,
+        )
 
     reform = Reform()
     # reform.modify_legislation_json(modifier_function = modify_legislation_json)
