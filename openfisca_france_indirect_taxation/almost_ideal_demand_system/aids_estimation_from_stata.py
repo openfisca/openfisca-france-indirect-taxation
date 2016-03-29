@@ -17,10 +17,11 @@ def get_elasticities(year):
             'openfisca_france_indirect_taxation',
             'assets',
             'quaids',
-            'data_quaids_all.csv'.format(year)
-            ), sep =',')
-    data_quaids = data_quaids.query('year == @year').astype('float32')
+            'data_aids_all.csv'.format(year)
+            ), sep =';')
+    data_quaids = data_quaids.query('year == @year')
     liste_elasticities = [column for column in data_quaids.columns if column[:4] == 'elas']
+    data_quaids[liste_elasticities] = data_quaids[liste_elasticities].astype('float32')
     dataframe = data_quaids[liste_elasticities + ['ident_men', 'year']].copy()
 
     dataframe = dataframe.fillna(0)
