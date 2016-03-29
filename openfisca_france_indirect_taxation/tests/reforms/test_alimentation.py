@@ -15,7 +15,7 @@ from openfisca_france_indirect_taxation.tests import base
 def test_reforme_alimentation():
     year = 2014
     reform = base.get_cached_reform(
-        reform_key = 'reforme_alimentation',
+        reform_key = 'test_reforme_alimentation',
         tax_benefit_system = base.tax_benefit_system,
         )
     scenario = reform.new_scenario().init_single_entity(

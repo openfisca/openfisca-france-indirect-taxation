@@ -69,7 +69,7 @@ class SurveyScenario(AbstractSurveyScenario):
             reference_tax_benefit_system = base.tax_benefit_system
 
         if calibration_kwargs is not None:
-            print calibration_kwargs
+            print(calibration_kwargs)
             assert set(calibration_kwargs.keys()).issubset(set(
                 ['target_margins_by_variable', 'parameters', 'total_population']))
 
@@ -79,8 +79,8 @@ class SurveyScenario(AbstractSurveyScenario):
         input_data_frame = get_input_data_frame(data_year)
         if elasticities is not None:
             assert 'ident_men' in elasticities.columns
-            print input_data_frame.ident_men.dtype
-            print elasticities.dtypes
+            print(input_data_frame.ident_men.dtype)
+            print(elasticities.dtypes)
             input_data_frame['ident_men'] = input_data_frame.ident_men.astype(int)
             input_data_frame = input_data_frame.merge(elasticities, how = "left", on = 'ident_men')
             for col in elasticities.columns:

@@ -49,7 +49,7 @@ tax_benefit_system.prefill_cache()
 
 build_reform_function_by_key = {
     # 'taxes_carburants': taxes_carburants.build_reform,
-    'reforme_alimentation': alimentation.build_reform,
+    'test_reforme_alimentation': alimentation.build_reform,
     }
 reform_by_full_key = {}
 

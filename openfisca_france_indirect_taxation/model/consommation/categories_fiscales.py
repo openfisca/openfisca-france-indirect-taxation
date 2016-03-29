@@ -28,7 +28,6 @@ from __future__ import division
 
 from datetime import date
 import logging
-import sys
 
 from biryani.strings import slugify
 
@@ -49,28 +48,33 @@ codes_coicop_data_frame = None
 def function_creator(postes_coicop, year_start = None, year_stop = None):
     start = date(year_start, 1, 1) if year_start is not None else None
     stop = date(year_stop, 12, 31) if year_stop is not None else None
+    if len(postes_coicop) != 0:
+        @dated_function(start = start, stop = stop)
+        def func(self, simulation, period):
+            return period, sum(simulation.calculate(
+                'poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
+                )
+        func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+        return func
 
-    @dated_function(start = start, stop = stop)
-    def func(self, simulation, period):
-        return period, sum(simulation.calculate(
-            'poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
-            )
+    else:  # To deal with Reform emptying some fiscal categories
+        @dated_function(start = start, stop = stop)
+        def func(self, simulation, period):
+            return period, self.zeros()
 
-    func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
-    return func
+        func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+        return func
 
 
 def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_system = None):
     assert categories_fiscales is not None
-    existing_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
-
+    original_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
+    removed_categories = set()
     if Reform:
-        removed_categories = set(existing_categories).difference(
+        removed_categories = set(original_categories).difference(
             set(categories_fiscales['categorie_fiscale'].drop_duplicates()))
-        print removed_categories
-        boum
 
-    for categorie_fiscale in existing_categories:
+    for categorie_fiscale in original_categories:
         year_start = 1994
         year_final_stop = 2014
         functions_by_name = dict()
@@ -79,9 +83,7 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
                 categories_fiscales.query(
                     'start <= @year and stop >= @year and categorie_fiscale == @categorie_fiscale'
                     )['code_coicop'].astype(str))
-            variables = ', '.join(postes_coicop)
             if year == year_start:
-                previous_variables = variables
                 previous_postes_coicop = postes_coicop
                 continue
 
@@ -97,6 +99,9 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
                     categorie_fiscale, year_start, year_stop, postes_coicop))
 
                 if len(previous_postes_coicop) != 0:
+                    functions_by_name[dated_function_name] = dated_func
+
+                if len(previous_postes_coicop) == 0 and categorie_fiscale in removed_categories:
                     functions_by_name[dated_function_name] = dated_func
 
                 year_start = year
@@ -117,9 +122,7 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
             definitions_by_name = dict(
                 reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
                 )
-            if categorie_fiscale not in removed_categories:
-                definitions_by_name.update(functions_by_name)
-
+            definitions_by_name.update(functions_by_name)
             type(class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
 
         del definitions_by_name
