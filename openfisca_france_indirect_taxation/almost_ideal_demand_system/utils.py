@@ -146,7 +146,6 @@ def price_gaz_from_contracts(dataframe, year):
     prix_contrats = pd.DataFrame.from_csv(os.path.join(assets_directory,
         'openfisca_france_indirect_taxation', 'assets', 'prix',
         'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)))
-    prix_contrats['ident_men'] = prix_contrats['ident_men'].astype(int)
     prix_contrats['ident_men'] = prix_contrats['ident_men'].astype(str)
     moyenne_prix_gaz = \
         prix_contrats.query('depenses_gaz_prix_unitaire > 0').depenses_gaz_prix_unitaire.mean()

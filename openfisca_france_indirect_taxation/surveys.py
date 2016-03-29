@@ -25,6 +25,7 @@
 
 import logging
 
+import numpy
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.scenarios import AbstractSurveyScenario
@@ -79,7 +80,7 @@ class SurveyScenario(AbstractSurveyScenario):
         input_data_frame = get_input_data_frame(data_year)
         if elasticities is not None:
             assert 'ident_men' in elasticities.columns
-            input_data_frame['ident_men'] = input_data_frame.ident_men.astype(int)
+            input_data_frame['ident_men'] = input_data_frame.ident_men.astype(numpy.int64)
             input_data_frame = input_data_frame.merge(elasticities, how = "left", on = 'ident_men')
             for col in elasticities.columns:
                 assert col in input_data_frame.columns

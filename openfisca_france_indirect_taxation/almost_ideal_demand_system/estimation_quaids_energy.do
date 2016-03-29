@@ -4,6 +4,7 @@ insheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirec
 quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) noquadratic
 estat expenditure mu*
 estat uncompensated ce*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_2000.csv", delimiter(",") replace
 
 *2005:
@@ -12,6 +13,7 @@ insheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirec
 quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) noquadratic
 estat expenditure mu*
 estat uncompensated ce*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\data_quaids_2005.csv", delimiter(",") replace
 
 *2011:
@@ -20,11 +22,13 @@ insheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirec
 quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) noquadratic
 estat expenditure mu*
 estat uncompensated ce*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_2011.csv", delimiter(",") replace
 
 *all years:
 clear
 insheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_frame_energy_all_years.csv", delimiter(",")
+tostring ident_men, replace format(%17.0g)
 replace w1 = . if w1 == 0
 quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) noquadratic
 *estat uncompensated, atmeans
@@ -33,7 +37,7 @@ quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) noquadratic
 *matrix list r(expelas)
 estat expenditure elas_exp*
 estat uncompensated elas_price*
-tostring ident_men, replace
+*tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_aids_all.csv", delimiter(";") replace
 
 
@@ -52,6 +56,7 @@ quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) noquadratic
 *matrix list r(expelas)
 estat expenditure mu*
 estat uncompensated ce*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_2000.csv", delimiter(",") replace
 
 *2005:
@@ -65,6 +70,7 @@ quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) noquadratic
 *matrix list r(expelas)
 estat expenditure mu*
 estat uncompensated ce*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_2005.csv", delimiter(",") replace
 
 *2011:
@@ -78,6 +84,7 @@ quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) noquadratic
 *matrix list r(expelas)
 estat expenditure mu*
 estat uncompensated ce*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_2011.csv", delimiter(",") replace
 
 *Still with selection, if we use demographics and the quadratic specification: we control for age, the number of persons in the household, the type of area, whether they own their house, and time fixed effects
@@ -93,6 +100,7 @@ quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) demographics(ag
 *matrix list r(expelas)
 estat expenditure elas_exp*
 estat uncompensated elas_price*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_2000.csv", delimiter(",") replace
 
 *2005:
@@ -103,6 +111,7 @@ quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) demographics(ag
 estat uncompensated, atmeans
 matrix list r(uncompelas)
 estat expenditure, atmeans
+tostring ident_men, replace
 matrix list r(expelas)
 
 *2011:
@@ -113,6 +122,7 @@ quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) demographics(ag
 estat uncompensated, atmeans
 matrix list r(uncompelas)
 estat expenditure, atmeans
+tostring ident_men, replace
 matrix list r(expelas)
 
 *The three years taken together:
@@ -126,6 +136,7 @@ quaids w1-w4, anot(5) prices(p1-p4) expenditure(depenses_par_uc) demographics(ag
 *matrix list r(expelas)
 estat expenditure elas_exp*
 estat uncompensated elas_price*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_all.csv", delimiter(",") replace
 
 *If now we restrict our analysis to the fuel only, i.e. without including housing energy in a specific category:
@@ -141,6 +152,7 @@ estat expenditure, atmeans
 matrix list r(expelas)
 estat expenditure mu*
 estat uncompensated ce*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_carbu_all.csv", delimiter(",") replace
 
 *If now we want to study fuel, housing energy and all the rest, i.e. without food, we specify the following models:
@@ -155,6 +167,7 @@ estat expenditure, atmeans
 matrix list r(expelas)
 estat expenditure mu*
 estat uncompensated ce*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_energy_no_alime_2000.csv", delimiter(",") replace
 
 clear
@@ -167,6 +180,7 @@ estat expenditure, atmeans
 matrix list r(expelas)
 estat expenditure mu*
 estat uncompensated ce*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_energy_no_alime_2005.csv", delimiter(",") replace
 
 clear
@@ -179,6 +193,7 @@ estat expenditure, atmeans
 matrix list r(expelas)
 estat expenditure mu*
 estat uncompensated ce*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_energy_no_alime_2011.csv", delimiter(",") replace
 
 clear
@@ -191,6 +206,7 @@ estat expenditure, atmeans
 matrix list r(expelas)
 estat expenditure mu*
 estat uncompensated ce*
+tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_energy_no_alime_all.csv", delimiter(",") replace
 
 
