@@ -64,6 +64,8 @@ def build_clean_aliss_data_frame():
 
 
 def compute_correction_coefficient():
+    year = 2011
+
     # Calculer les cales
     pass
 
