@@ -16,7 +16,7 @@ outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indire
 *If now we want to focus on those who do not consume only electricity: 
 
 clear
-insheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_frame_no_elect_only_all_years.csv", delimiter(",")
+insheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_frame_no_elect_only_no_alime_all_years.csv", delimiter(",")
 tostring ident_men, replace format(%17.0g)
 replace w1 = . if w1 == 0
 quaids w1-w3, anot(5) prices(p1-p3) expenditure(depenses_par_uc) demographics(agepr nactifs nenfants vag_10 vag_11 vag_12 vag_13 vag_14 vag_15 vag_16 vag_17 vag_18 vag_19 vag_20 vag_21 vag_22 vag_23 vag_24 vag_25 vag_26 vag_27 vag_28 villes_petites villes_grandes agglo_paris proprietaire)
@@ -27,7 +27,7 @@ quaids w1-w3, anot(5) prices(p1-p3) expenditure(depenses_par_uc) demographics(ag
 estat expenditure elas_exp*
 estat uncompensated elas_price*
 *tostring ident_men, replace
-outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_all_no_elect_only.csv", delimiter(",") replace
+outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_all_no_elect_only_no_alime.csv", delimiter(",") replace
 
 
 
