@@ -13,7 +13,8 @@ from openfisca_france_indirect_taxation.examples.utils_example import get_input_
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import \
-    add_area_dummy, add_stalog_dummy, add_vag_dummy, electricite_only, indices_prix_carbus, price_carbu_pond
+    add_area_dummy, add_stalog_dummy, add_vag_dummy, electricite_only, indices_prix_carbus, price_carbu_pond, \
+    price_carbu_from_quantities, price_energy_from_contracts
 
 
 assets_directory = os.path.join(
@@ -26,7 +27,7 @@ assets_directory = os.path.join(
 # On commence par cinstruire une dataframe appelée data_conso rassemblant les informations sur les dépenses des ménages.
 data_frame_for_reg = None
 data_frame_all_years = pd.DataFrame()
-for year in [2011]:
+for year in [2000, 2005, 2011]:
     aggregates_data_frame = get_input_data_frame(year)
 
     # Pour estimer QAIDS, on se concentre sur les biens non-durables.
@@ -119,6 +120,8 @@ for year in [2011]:
 
     # Les parts des biens dans leur catégorie permettent de construire des indices de prix pondérés (Cf. Lewbel)
     df_depenses_prix['indice_prix_pondere'] = 0
+    # On utilise les contrats imputés pour affiner les prix du gaz et de l'électricité
+    df_depenses_prix = price_energy_from_contracts(df_depenses_prix, year)
     df_depenses_prix['indice_prix_pondere'] = df_depenses_prix['part_bien_categorie'] * df_depenses_prix['prix']
 
     # grouped donne l'indice de prix pondéré pour chacune des deux catégories pour chaque individu
@@ -160,8 +163,6 @@ for year in [2011]:
         'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'ident_men', 'nenfants', 'nactifs', 'ocde10',
         'revtot', 'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
         'veh_essence']].copy()
-    df_info_menage.index.name = 'ident_men'
-    df_info_menage.reset_index(inplace = True)
     df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
     df_info_menage['part_autre'] = df_info_menage['depenses_autre'] / df_info_menage['depenses_tot']
     df_info_menage['part_carbu'] = df_info_menage['depenses_carbu'] / df_info_menage['depenses_tot']
@@ -197,9 +198,13 @@ for year in [2011]:
     # pour 2011 ce qui est assez important. Cette différence s'explique par la durée des enquêtes (1 semaine en 2011)
     dataframe = dataframe.query('part_carbu < 0.25')
 
-    indices_prix_carburants = indices_prix_carbus(year)
-    dataframe = pd.merge(dataframe, indices_prix_carburants, on = 'vag')
-    dataframe = price_carbu_pond(dataframe)
+    if year == 2011:
+        dataframe = price_carbu_from_quantities(dataframe, 2011)
+    else:
+        indices_prix_carburants = indices_prix_carbus(year)
+        dataframe = pd.merge(dataframe, indices_prix_carburants, on = 'vag')
+        dataframe = price_carbu_pond(dataframe)
+    dataframe['year'] = year
 
     dataframe = add_area_dummy(dataframe)
     dataframe = add_stalog_dummy(dataframe)
