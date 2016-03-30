@@ -22,7 +22,7 @@ simulated_variables = [
     'ident_men',
     ]
 
-for year in [2000]:
+for year in [2000, 2005, 2011]:
     elasticities = get_elasticities(year)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
