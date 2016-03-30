@@ -70,13 +70,13 @@ def indices_prix_carbus(year):
             'assets',
             'prix',
             'prix_mensuel_carbu_match_to_vag.csv'
-            ), sep =';', decimal = ','
+            ), sep =',', decimal = '.'
         )
     prix_carbu = prix_carbu[['diesel_ttc'] + ['super_95_ttc'] + ['vag']].astype(float)
 
     quantite_carbu_vp_france = pd.read_csv(os.path.join(default_config_files_directory,
             'openfisca_france_indirect_taxation', 'assets', 'quantites',
-            'quantite_carbu_vp_france.csv'), sep = ';')
+            'quantite_carbu_vp_france.csv'), sep = ',')
     quantite_carbu_vp_france.rename(columns = {'Unnamed: 0': 'annee'}, inplace = True)
 
     quantite_carbu_vp_france['part_conso_ess'] = \

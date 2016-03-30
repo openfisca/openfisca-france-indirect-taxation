@@ -197,7 +197,7 @@ def preprocess_legislation(legislation_json):
             'openfisca_france_indirect_taxation',
             'assets',
             'part_des_types_de_supercarburants.csv'
-            ), sep =','
+            ), sep =';'
         )
 
     del part_des_types_de_supercarburants['Source']
