@@ -37,7 +37,7 @@ def test():
     resultats_elasticite_uncomp = dict()
     borne_inferieure_el_dep = dict()
     borne_superieure_el_dep = dict()
-    for year in ['all']:
+    for year in ['all', 'all_no_elect_only']:
         default_config_files_directory = os.path.join(
             pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
         data_quaids = pd.read_csv(

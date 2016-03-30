@@ -222,6 +222,10 @@ for year in [2000, 2005, 2011]:
 data_frame_all_years.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
     'quaids', 'data_frame_energy_no_alime_all_years.csv'), sep = ',')
 
+data_frame_not_elect_only = data_frame_all_years.query('elect_only == 0')
+data_frame_not_elect_only.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+    'quaids', 'data_frame_no_elect_only_no_alime_all_years.csv'), sep = ',')
+
 # Must correct what is useless, improve demographics : dip14
 # dip14 : use only dip14pr (good proxy for dip14cj anyway), but change the nomenclature to have just 2 or 3 dummies
 # describing whether they attended college or not, etc.
