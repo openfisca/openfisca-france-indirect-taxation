@@ -59,6 +59,11 @@ class quantites_electricite_ajustees_taxe_carbone(Variable):
         quantites_electricite_ajustees = \
             depenses_electricite_ajustees_variables / (depenses_electricite_prix_unitaire + reforme_electricite)
 
+        quantites_electricite_avant_reforme = simulation.calculate('quantites_electricite_selon_compteur', period)
+        quantites_electricite_ajustees = (
+            quantites_electricite_ajustees * (quantites_electricite_avant_reforme > 0)
+            )
+
         return period, quantites_electricite_ajustees
 
 

@@ -5,6 +5,7 @@ from __future__ import division
 
 from ..base import * # noqa analysis:ignore
 
+import numpy
 
 class depenses_essence_ajustees(Variable):
     column = FloatCol
@@ -53,6 +54,8 @@ class depenses_gaz_ajustees_taxe_carbone(Variable):
             depenses_gaz_variables * (1 + (1 + gaz_elasticite_prix) * reforme_gaz / depenses_gaz_prix_unitaire)
         depenses_gaz_tarif_fixe = simulation.calculate('depenses_gaz_tarif_fixe', period)
         depenses_gaz_ajustees = depenses_gaz_ajustees_variables + depenses_gaz_tarif_fixe
+        depenses_gaz_ajustees[numpy.isnan(depenses_gaz_ajustees)] = 0
+        depenses_gaz_ajustees[numpy.isinf(depenses_gaz_ajustees)] = 0
 
         return period, depenses_gaz_ajustees
 
@@ -72,6 +75,14 @@ class depenses_electricite_ajustees_taxe_carbone(Variable):
             (1 + (1 + electricite_elasticite_prix) * reforme_electricite / depenses_electricite_prix_unitaire)
             )
         depenses_electricite_tarif_fixe = simulation.calculate('depenses_electricite_tarif_fixe', period)
+        min_tarif_fixe = depenses_electricite_tarif_fixe.min()
         depenses_electricite_ajustees = depenses_electricite_ajustees_variables + depenses_electricite_tarif_fixe
+
+        # We do not want to input the expenditure of the contract for those who consume nothing
+        poste_coicop_451 = simulation.calculate('poste_coicop_451', period)
+        depenses_electricite_ajustees = (
+            depenses_electricite_ajustees * (poste_coicop_451 > min_tarif_fixe) +
+            poste_coicop_451 * (poste_coicop_451 < min_tarif_fixe)
+            )
 
         return period, depenses_electricite_ajustees
