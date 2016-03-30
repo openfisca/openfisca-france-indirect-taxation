@@ -10,7 +10,6 @@ from openfisca_survey_manager import default_config_files_directory as config_fi
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
 
-
 def add_area_dummy(dataframe):
     areas = ['rural', 'villes_petites', 'villes_moyennes', 'villes_grandes', 'agglo_paris']
     for area in areas:
@@ -139,7 +138,7 @@ def price_carbu_from_quantities(dataframe, year):
     return dataframe2
 
 
-def price_gaz_from_contracts(dataframe, year):
+def price_energy_from_contracts(dataframe, year):
     assets_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
         )
@@ -149,10 +148,17 @@ def price_gaz_from_contracts(dataframe, year):
     prix_contrats['ident_men'] = prix_contrats['ident_men'].astype(str)
     moyenne_prix_gaz = \
         prix_contrats.query('depenses_gaz_prix_unitaire > 0').depenses_gaz_prix_unitaire.mean()
+    moyenne_prix_electricite = \
+        prix_contrats.query('depenses_electricite_prix_unitaire > 0').depenses_electricite_prix_unitaire.mean()
     prix_contrats.loc[prix_contrats['depenses_gaz_prix_unitaire'] == 0, 'depenses_gaz_prix_unitaire'] = moyenne_prix_gaz
+    prix_contrats.loc[prix_contrats['depenses_electricite_prix_unitaire'] == 0, 'depenses_electricite_prix_unitaire'] = \
+        moyenne_prix_electricite
     dataframe = pd.merge(dataframe, prix_contrats, on = 'ident_men')
     dataframe.loc[dataframe['bien'] == 'poste_coicop_452', 'prix'] = (
         dataframe['prix'] * dataframe['depenses_gaz_prix_unitaire'] / moyenne_prix_gaz
+        )
+    dataframe.loc[dataframe['bien'] == 'poste_coicop_451', 'prix'] = (
+        dataframe['prix'] * dataframe['depenses_electricite_prix_unitaire'] / moyenne_prix_electricite
         )
 
     return dataframe
