@@ -25,24 +25,14 @@
 
 from pandas import DataFrame
 
-import openfisca_france_indirect_taxation
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
-
-from openfisca_france_indirect_taxation.surveys import SurveyScenario
-
-
-def get_input_data_frame(year):
-    openfisca_survey_collection = SurveyCollection.load(
-        collection = "openfisca_indirect_taxation", config_files_directory = config_files_directory)
-    openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
-    input_data_frame = openfisca_survey.get_values(table = "input")
-    input_data_frame.reset_index(inplace = True)
-    return input_data_frame
+import openfisca_france_indirect_taxation
+from openfisca_france_indirect_taxation.surveys import SurveyScenario, get_input_data_frame
 
 
-def test_survey_simulation(year = 2011):
+def run_survey_simulation(year = None):
+    assert year is not None
     input_data_frame = get_input_data_frame(year)
     TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
     tax_benefit_system = TaxBenefitSystem()
@@ -73,12 +63,19 @@ def test_survey_simulation(year = 2011):
         )
 
 
+def test_survey_simulation():
+    for year in [2000, 2005, 2011]:
+        yield run_survey_simulation, year
+
+
 if __name__ == '__main__':
     import logging
     log = logging.getLogger(__name__)
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    for year in [2011]:
-        simulation, df = test_survey_simulation(year)
-
+    for year in [2000, 2005, 2011]:
+        df = run_survey_simulation(year)
+        print df
+        print df.columns
+        print df.describe()
