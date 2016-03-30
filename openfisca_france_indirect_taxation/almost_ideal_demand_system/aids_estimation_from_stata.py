@@ -17,8 +17,8 @@ def get_elasticities(year):
             'openfisca_france_indirect_taxation',
             'assets',
             'quaids',
-            'data_aids_all.csv'.format(year)
-            ), sep =';')
+            'data_quaids_all.csv'.format(year)
+            ), sep =',')
     data_quaids = data_quaids.query('year == @year')
     liste_elasticities = [column for column in data_quaids.columns if column[:4] == 'elas']
     data_quaids[liste_elasticities] = data_quaids[liste_elasticities].astype('float32')
@@ -37,7 +37,7 @@ def test():
     resultats_elasticite_uncomp = dict()
     borne_inferieure_el_dep = dict()
     borne_superieure_el_dep = dict()
-    for year in [2000]:
+    for year in ['all']:
         default_config_files_directory = os.path.join(
             pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
         data_quaids = pd.read_csv(

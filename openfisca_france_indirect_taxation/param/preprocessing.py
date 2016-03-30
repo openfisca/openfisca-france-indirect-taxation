@@ -45,7 +45,7 @@ def preprocess_legislation(legislation_json):
             'assets',
             'prix',
             'prix_annuel_carburants.csv'
-            ), sep =';'
+            ), sep =','
         )
     prix_annuel_carburants['Date'] = prix_annuel_carburants['Date'].astype(int)
     prix_annuel_carburants = prix_annuel_carburants.set_index('Date')
@@ -118,7 +118,7 @@ def preprocess_legislation(legislation_json):
             'assets',
             'quantites',
             'parc_annuel_moyen_vp.csv'
-            ), sep =';'
+            ), sep =','
         )
 
     parc_annuel_moyen_vp = parc_annuel_moyen_vp.set_index('Unnamed: 0')
@@ -158,7 +158,7 @@ def preprocess_legislation(legislation_json):
             'assets',
             'quantites',
             'quantite_carbu_vp_france.csv'
-            ), sep =';'
+            ), sep =','
         )
 
     quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('Unnamed: 0')
@@ -197,7 +197,7 @@ def preprocess_legislation(legislation_json):
             'openfisca_france_indirect_taxation',
             'assets',
             'part_des_types_de_supercarburants.csv'
-            ), sep =';'
+            ), sep =','
         )
 
     del part_des_types_de_supercarburants['Source']
