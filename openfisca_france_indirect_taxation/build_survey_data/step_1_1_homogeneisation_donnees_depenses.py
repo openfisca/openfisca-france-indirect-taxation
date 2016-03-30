@@ -140,7 +140,6 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     conso.set_index('ident_men', inplace = True)
 
     from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
-    # matrice_passage_data_frame, selected_parametres_fiscalite_data_frame = get_transfert_data_frames(year)
     coicop_poste_bdf = bdf(year = year)[['code_bdf', 'code_coicop']].copy()
 
     assert not set(conso.columns).difference(set(coicop_poste_bdf.code_bdf))

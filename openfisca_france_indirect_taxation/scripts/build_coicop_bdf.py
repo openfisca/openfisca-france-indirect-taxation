@@ -121,7 +121,6 @@ def test_coicop_to_legislation(data_frame, adjust_coicop, year):
 
 
 adjusted_coicop_by_original = {
-
     '01.1.1.1': '01.1.1.4.3',  # Riz sous toutes ses formes et produits Ã  base de riz
     '01.1.1.2': '01.1.1.1.1',  # Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gÃ¢teaux
     '01.1.1.3': '01.1.1.4.2',  # Pâtes alimentaires sous toutes leurs formes et plats à  base de pâtes

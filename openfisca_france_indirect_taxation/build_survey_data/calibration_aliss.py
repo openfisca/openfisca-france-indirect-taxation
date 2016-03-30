@@ -11,6 +11,8 @@ import pkg_resources
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_france_indirect_taxation.surveys import get_input_data_frame
+from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
 
 
 elasticities_path = os.path.join(
@@ -60,14 +62,49 @@ def build_clean_aliss_data_frame():
     assert aliss.age.isin(range(4)).all()
     assert aliss.revenus.isin(range(4)).all()
     del aliss['type']
+
+    aliss['poste_bdf'] = 'c0' + aliss.nomc.str[:4]
+    coicop_poste_bdf = bdf(year = year)[['code_bdf', 'code_coicop']].copy()
+    assert not set(aliss.poste_bdf).difference(set(coicop_poste_bdf.code_bdf))
+    coicop_poste_bdf['formatted_poste'] = u'poste_' + coicop_poste_bdf.code_coicop.str.replace('.', u'_')
+    formatted_poste_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['formatted_poste']
+    aliss['poste_coicop'] = aliss.poste_bdf.copy()
+    aliss.replace(to_replace = dict(poste_coicop = formatted_poste_by_poste_bdf), inplace = True)
+
     return aliss
 
 
 def compute_correction_coefficient():
     year = 2011
+    # aliss/kantar data
+    aliss = build_clean_aliss_data_frame()
+    kept_variables = ['age', 'dt_c', 'dt_k', 'nomk', 'poste_coicop', 'tpoids', 'revenus']
+    aliss = aliss[kept_variables].copy()
+    depenses_aliss = aliss.groupby(
+        ['age', 'revenus', 'poste_coicop']).apply(
+            lambda df: (df.tpoids * df.dt_c).sum()
+            ).reset_index()
+    depenses_aliss.rename({0: "depenses_kantar"}, inplace = True)
 
-    # Calculer les cales
-    pass
+    # BDF data
+    input_data_frame = get_input_data_frame(year)
+    input_data_frame.eval("age = 0 + (agepr > 30) + (agepr > 45) + (agepr > 60)")
+    input_data_frame.eval(
+        "revenus = 0 + (rev_disponible > 10000) + (rev_disponible  > 20000) + (rev_disponible  > 30000)"
+        )
+    assert input_data_frame.age.isin([0, 1, 2, 3, 4]).all()
+    assert input_data_frame.age.notnull().all()
+    kept_postes = list(aliss.poste_coicop.unique())
+    input_data_frame = input_data_frame[kept_postes + ['age', 'pondmen', 'revenus']].copy()
+    melted_input_data_frame = pandas.melt(input_data_frame,
+        id_vars= ['age', 'pondmen', 'revenus'], value_vars = kept_postes)
+    depenses_input = melted_input_data_frame.groupby(
+        ['age', 'revenus', 'variable']).apply(
+            lambda df: (df.pondmen * df.value).sum()
+            ).reset_index()
+    depenses_input.rename(columns = {"variable": "poste_coicop", 0: "depenses_bdf"}, inplace = True)
+
+    return depenses_aliss, depenses_input
 
 
 def compute_kantar_elasticities(aliss):
@@ -86,7 +123,7 @@ def compute_kantar_elasticities(aliss):
         '11 : Starchy foods': 'Starch',
         '12 : Processed fruits and vegetables': 'PFV',
         '13 : Beef': 'Beef',
-        '14 : Other meats': 'OM',
+        '14 : Other meats: ': 'OM',
         '15 : Cooked meats': 'CM',
         '16 : Animal-based foods high in fats': 'ABF',
         '17 : Cheese': 'Cheese',
@@ -168,5 +205,8 @@ def compute_kantar_elasticities(aliss):
 
 
 if __name__ == '__main__':
-    aliss = build_clean_aliss_data_frame()
-    kantar_elasticities = compute_kantar_elasticities(aliss)
+    # kantar_elasticities = compute_kantar_elasticities(aliss)
+    year = 2011
+    depenses_aliss, depenses_input = compute_correction_coefficient()
+
+    depenses = depenses_aliss.merge(depenses_input)
