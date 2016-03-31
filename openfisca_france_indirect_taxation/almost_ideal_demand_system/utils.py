@@ -19,7 +19,7 @@ def add_area_dummy(dataframe):
     dataframe.loc[dataframe['strate'] == 2, 'villes_moyennes'] = 1
     dataframe.loc[dataframe['strate'] == 3, 'villes_grandes'] = 1
     dataframe.loc[dataframe['strate'] == 4, 'agglo_paris'] = 1
-    del dataframe['strate']
+    #del dataframe['strate']
     return dataframe
 
 

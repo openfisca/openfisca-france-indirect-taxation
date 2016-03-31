@@ -277,10 +277,10 @@ class quantites_gaz_contrat_b2i(Variable):
         tarif_fixe_gaz = \
             simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b2i_30000
         depenses_gaz = simulation.calculate('poste_coicop_452', period)
-        depenses_sans_part_fixe = depenses_gaz - tarif_fixe_gaz
+        depenses_gaz_variables = depenses_gaz - tarif_fixe_gaz
         prix_unitaire_gaz = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b2i_ttc
-        quantite_gaz = depenses_sans_part_fixe / prix_unitaire_gaz
+        quantite_gaz = depenses_gaz_variables / prix_unitaire_gaz
 
         return period, quantite_gaz
 
