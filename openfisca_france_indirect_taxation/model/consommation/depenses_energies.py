@@ -264,7 +264,7 @@ class depenses_gaz_prix_unitaire(Variable):
             (quantite_base == quantite_optimale) * prix_unitaire_base +
             (quantite_b0 == quantite_optimale) * prix_unitaire_b0 +
             (quantite_b1 == quantite_optimale) * prix_unitaire_b1 +
-            (quantite_b2i == quantite_optimale) * prix_unitaire_b2i
+            (quantite_b2i == quantite_optimale) * (quantite_b1 != quantite_optimale) * prix_unitaire_b2i
             )
 
         return period, prix_unitaire_optimal
@@ -295,7 +295,7 @@ class depenses_gaz_tarif_fixe(Variable):
             (quantite_base == quantite_optimale) * tarif_fixe_base +
             (quantite_b0 == quantite_optimale) * tarif_fixe_b0 +
             (quantite_b1 == quantite_optimale) * tarif_fixe_b1 +
-            (quantite_b2i == quantite_optimale) * tarif_fixe_b2i
+            (quantite_b2i == quantite_optimale) * (quantite_b1 != quantite_optimale) * tarif_fixe_b2i
             )
 
         return period, tarif_fixe_optimal
