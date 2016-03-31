@@ -63,6 +63,12 @@ def build_clean_aliss_data_frame():
     assert aliss.revenus.isin(range(4)).all()
     del aliss['type']
 
+    return aliss
+
+
+def add_poste_coicop(aliss):
+    year = 2011
+    aliss = aliss.copy()
     aliss['poste_bdf'] = 'c0' + aliss.nomc.str[:4]
     coicop_poste_bdf = bdf(year = year)[['code_bdf', 'code_coicop']].copy()
     assert not set(aliss.poste_bdf).difference(set(coicop_poste_bdf.code_bdf))
@@ -70,14 +76,12 @@ def build_clean_aliss_data_frame():
     formatted_poste_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['formatted_poste']
     aliss['poste_coicop'] = aliss.poste_bdf.copy()
     aliss.replace(to_replace = dict(poste_coicop = formatted_poste_by_poste_bdf), inplace = True)
-
     return aliss
 
-
-def compute_correction_coefficient():
-    year = 2011
+def compute_expenses():
     # aliss/kantar data
     aliss = build_clean_aliss_data_frame()
+    aliss = add_poste_coicop(aliss)
     kept_variables = ['age', 'dt_c', 'dt_k', 'nomk', 'poste_coicop', 'tpoids', 'revenus']
     aliss = aliss[kept_variables].copy()
     depenses_aliss = aliss.groupby(
@@ -104,10 +108,23 @@ def compute_correction_coefficient():
             ).reset_index()
     depenses_input.rename(columns = {"variable": "poste_coicop", 0: "depenses_bdf"}, inplace = True)
 
-    return depenses_aliss, depenses_input
+    depenses = depenses_aliss.merge(depenses_input)
+
+    return depenses
 
 
-def compute_kantar_elasticities(aliss):
+def compute_kantar_elasticities(compute = False):
+    aliss = build_clean_aliss_data_frame()
+    kantar_cross_price_elasticities_path = os.path.join(
+        elasticities_path,
+        'kantar_cross_price_elasticities.csv',
+        )
+
+    if not compute:
+        if os.path.exists(kantar_cross_price_elasticities_path):
+          nomk_cross_price_elasticity = pandas.read_csv(kantar_cross_price_elasticities_path, index_col = 0)
+
+          return nomk_cross_price_elasticity
 
     nomf_by_dirty_nomf = {
         '1 : Juices': 'Juic',
@@ -123,7 +140,7 @@ def compute_kantar_elasticities(aliss):
         '11 : Starchy foods': 'Starch',
         '12 : Processed fruits and vegetables': 'PFV',
         '13 : Beef': 'Beef',
-        '14 : Other meats: ': 'OM',
+        '14 : Other meats': 'OM',
         '15 : Cooked meats': 'CM',
         '16 : Animal-based foods high in fats': 'ABF',
         '17 : Cheese': 'Cheese',
@@ -201,12 +218,52 @@ def compute_kantar_elasticities(aliss):
             elasticity_kkprime['revenus'] = revenus
             nomk_cross_price_elasticity = nomk_cross_price_elasticity.combine_first(elasticity_kkprime)
 
+    nomk_cross_price_elasticity.to_csv(kantar_cross_price_elasticities_path)
     return nomk_cross_price_elasticity
 
 
-if __name__ == '__main__':
-    # kantar_elasticities = compute_kantar_elasticities(aliss)
-    year = 2011
-    depenses_aliss, depenses_input = compute_correction_coefficient()
+def compute_expenses_coefficient():
+    coicop_poste_bdf = bdf(year = year)
 
-    depenses = depenses_aliss.merge(depenses_input)
+
+
+if __name__ == '__main__':
+
+    aliss_uncomplete = build_clean_aliss_data_frame()
+    aliss = add_poste_coicop(aliss_uncomplete)
+    aliss_extract = aliss[['nomk', 'poste_bdf', 'poste_coicop']].copy()
+    aliss_extract.drop_duplicates(inplace = True)
+    year = 2011
+
+    legislation_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'legislation',
+        )
+    codes_coicop_data_frame = pandas.read_csv(
+        os.path.join(legislation_directory, 'coicop_legislation.csv'),
+        )
+    legislation = codes_coicop_data_frame[['code_bdf', 'categorie_fiscale']].copy()
+    legislation.rename(columns = {'code_bdf': 'poste_bdf'}, inplace = True)
+    df = aliss_extract.merge(legislation)
+
+    taux_by_categorie_fiscale = {
+        'tva_taux_reduit': .055,
+        'tva_taux_plein': .196,
+#        'alcools_forts',
+#        'vin',
+#        'biere',
+        }
+
+    df['taux'] = df.categorie_fiscale.apply(lambda x: taux_by_categorie_fiscale.get(x, 0))
+    df['taux_reforme'] = df['taux'].copy()
+    df['elasticity_factor'] = (df.taux_reforme - df.taux) / ( 1 + df.taux)
+
+    kantar_elasticities = compute_kantar_elasticities()
+    assert sorted(kantar_elasticities.index.tolist()) == sorted(df.nomk)
+    age = 0
+    revenus = 0
+    matrix = kantar_elasticities.query('age == @age & revenus == @revenus').drop()
+    # depenses= compute_expenses()
+

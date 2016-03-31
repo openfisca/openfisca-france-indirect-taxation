@@ -472,7 +472,6 @@ if __name__ == '__main__':
     adjusted_bdf_coicop = adjust_coicop(bdf_coicop)
     data_frame = merge_with_coicop_nomenclature(adjusted_bdf_coicop)
 
-
 #   len(errors)
-#    df = pandas.DataFrame.from_records(errors).sort_values(by = 'code_coicop')
-#    print df[['code_coicop', 'products', 'categorie_fiscale']]
+#   df = pandas.DataFrame.from_records(errors).sort_values(by = 'code_coicop')
+#   print df[['code_coicop', 'products', 'categorie_fiscale']]
