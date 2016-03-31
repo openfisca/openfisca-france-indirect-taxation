@@ -82,7 +82,10 @@ def merge_with_coicop_nomenclature(data_frame):
     df2 = coicop_nomenclature.merge(remaining_data_frame, on = 'code_coicop', how = 'outer')
 
     result = df1.append(df2, ignore_index = True)
+<<<<<<< HEAD
 
+=======
+>>>>>>> openfisca/master
     result = result.loc[~(result.poste_coicop.duplicated(keep = False) & result.label.isnull())].copy()
 
     result = result.append(coicop_nomenclature.loc[
@@ -121,8 +124,6 @@ def test_coicop_to_legislation(data_frame, adjust_coicop, year):
 
 adjusted_coicop_by_original = {
 
-    '01.3.1.1': '01',          # autres dépenses d'alimentation : cérémonies, séjours hors domicile, personne viv
-    '01.3.1.2': '01',          # autres dépenses d'alimentation : cadeau offert (à destination d'un autre ménage
     '01.1.1.1': '01.1.1.4.3',  # Riz sous toutes ses formes et produits Ã  base de riz
     '01.1.1.2': '01.1.1.1.1',  # Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gÃ¢teaux
     '01.1.1.3': '01.1.1.4.2',  # Pâtes alimentaires sous toutes leurs formes et plats à  base de pâtes
@@ -137,10 +138,16 @@ adjusted_coicop_by_original = {
     '01.1.2.7': '01.1.2.6.1',  # Autres viandes comestibles fraîches ou surge...
     '01.1.3.0': '01.1.3.1.1',  # Poissons frais
     '01.1.3.1': '01.1.3.2.1',  # Poissons surgelés ou congelés (hors poissons panés ou cuisinés)
+<<<<<<< HEAD
     '01.1.3.2': '01.1.3.1.2',  # Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )
                                # TODO: frais et surgelé meme TVA
+=======
+    '01.1.3.2': '01.1.3.1.2',  # Fruits de mer frais ou surgelés (yc cuits, nc cuisinés ) TODO: frais et surg. meme TVA
+>>>>>>> openfisca/master
     '01.1.3.3': '01.1.3.2.1',  # Poissons et fruits de mer salés, fumés, séchés]
     '01.1.3.4': '01.1.3.2.2',  # Conserves et plats préparés à base de produi...
+    '01.3.1.1': '01.10.1',     # autres dépenses d'alimentation : cérémonies, séjours hors domicile, personne viv
+    '01.3.1.2': '01.10.2',     # autres dépenses d'alimentation : cadeau offert (à destination d'un autre ménage
     '01.1.4.1': '01.1.4.1.1',  # Lait entier
     '01.1.4.2': '01.1.4.1.1',  # Lait demi-écrémé, écrémé
     '01.1.4.3': '01.1.4.1.1',  # lait de conserve
@@ -202,6 +209,7 @@ adjusted_coicop_by_original = {
     '02.2.1.2': '02.2.2',      # cigares et cigarillos
     '02.2.1.3': '02.2.3',      # tabac sous d'autres formes et produits connexes
     '02.3.1.1': '02.3',        # Stupéfiants
+    '02.4.1.1': '02.4',        # Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre
     '03.1.1.1': '03.1.1.1.1',  # Tissus d'habillement
     '03.1.2.1': '03.1.2.1.1',  # vêtements pour homme
     '03.1.2.2': '03.1.2.2.1',  # vêtements pour femme
@@ -212,8 +220,8 @@ adjusted_coicop_by_original = {
     '03.2.1.2': '03.2.1.1.2',  # chaussures pour femmes
     '03.2.1.3': '03.2.1.1.3',  # chaussures pour enfants
     '03.2.2.1': '03.2.1.2.3',  # Réparation de chaussures
-    '03.3.1.1': '03',          # Autres dépenses d'habillement : cérémonie, séjours hors domicile, personnes viva"
-    '03.3.1.2': '03',	        # "Autres dépenses d'habillement : cadeau offert (à destination d'un autre  ménage)"
+    '03.3.1.1': '03.3.1',      # Autres dépenses d'habillement : cérémonie, séjours hors domicile, personnes viva"
+    '03.3.1.2': '03.3.2',	  # "Autres dépenses d'habillement : cadeau offert (à destination d'un autre  ménage)"
     '04.1.1.1': '04.1.1.1.1',  # loyer en résidence principale
     '04.1.2.1': '04.1.1.2.1',  # loyer autres résidence
     '04.3.1.1': '04.3.1.1.1',  # Produits destinés aux travaux courants d’entretien et de réparation du logement
@@ -229,7 +237,7 @@ adjusted_coicop_by_original = {
     '04.5.3.1': '04.5.3.1.1',  # Combustibles liquides pour la résidence principale : fuel, mazout, pétrole
     '04.5.4.1': '04.5.4.1.1',  # Combustible solide résidence principale
     '04.5.5.1': '04.5.5.1.1',  # Chauffage urbain (par vapeur)
-    '04.6.1.1': '04',          # autres dépenses d'habitation
+    '04.6.1.1': '04.6',        # autres dépenses d'habitation
     '05.1.1.2': '05.1.1.2.2',  # Mobilier de séjour (buffet, bahut, bibliothèque, etc.)
     '05.1.1.4': '05.1.1.2.3',  # Tables, sièges, chaises hors cuisine et salle de bain
     '05.1.1.1': '05.1.1.1.2',  # Mobilier de chambre (lit, armoire, commode, chevet, bureau enfant, sommier) yc m
@@ -260,11 +268,9 @@ adjusted_coicop_by_original = {
     '05.6.1.1': '05.6.1.2.1',  # Produits de nettoyage et d’entretien (yc pour piscine)
     '05.6.2.1': '05.6.2.1.1',  # Services domestiques (ménage, garde enfant, jardinage, etc.)
     '05.6.2.2': '05.6.2.2.1',  # Autres services d’entretien pour le logement (blanchisserie, location appareils,
-    '05.7.1.1': '05',	        # Autres dépenses en équipement : personnes vivant hors du domicile au moins un jo
-    '05.7.1.2': '05',          # Autres dépenses en équipement : cadeau offert (à destination d'un autre ménage)
-    # '05.6.1.2': ,          # Autres produits ménagers (articles papier et plastique, brosserie, produits dive
-    '06.4.1.1': '06',          # Autres dépenses de santé : personnes vivant hors du domicile au moins un jour pa
-    '06.4.1.2': '06',          # Autres dépenses de santé : cadeau offert (à destination d’un autre ménage)
+    '05.7.1.1': '05.7.1',      # Autres dépenses en équipement : personnes vivant hors du domicile au moins un jo
+    '05.7.1.2': '05.7.2',      # Autres dépenses en équipement : cadeau offert (à destination d'un autre ménage)
+    # '05.6.1.2': ,            # Autres produits ménagers (articles papier et plastique, brosserie, produits dive TODO
     '06.1.1.1': '06.1.1.1.1',  # Produits pharmaceutiques à ingurgiter et traitants, compléments alimentaires, vi
     '06.1.1.2': '06.1.1.2.1',  # Autres produits pharmaceutiques (parapharmacie, pansements, préservatifs, etc. )
     '06.1.1.3': '06.1.1.3.1',  # Appareils et matériels thérapeutiques (lunettes, prothèses, etc.) yc leur répara
@@ -273,6 +279,9 @@ adjusted_coicop_by_original = {
     '06.2.3.1': '06.2.3.1.1',  # Services des laboratoires d’analyse médicale et des cabinets de radiologie
     '06.2.3.2': '06.2.3.1.2',  # Services des auxiliaires médicaux (infirmier, kiné, laboratoire, etc.)
     '06.2.3.3': '06.2.3.1.3',  # Services extra hospitaliers (ambulance, location matériel)
+    '06.3.1.1': '06.3',	        # Services et soins hospitaliers'
+    '06.4.1.1': '06.4',        # Autres dépenses de santé : personnes vivant hors du domicile au moins un jour pa
+    '06.4.1.2': '06.4',        # Autres dépenses de santé : cadeau offert (à destination d’un autre ménage)
     '07.1.1.1': '07.1.1.1.1',  # Achats d'automobiles neuves
     '07.1.1.2': '07.1.1.2.1',  # Achats d'automobiles d'occasion
     '07.1.2.1': '07.1.2.1.1',  # Motocycles
@@ -288,13 +297,14 @@ adjusted_coicop_by_original = {
     '07.3.5.1': '07.3.5.1.1',  # Services combinés de transport de voyageurs carte navigo, tickets train + bus, e
     '07.3.4.1': '07.3.6.1.2',  # Services de transport par mer et voies navigables intérieures (yc transport de b
     '07.3.6.1': '07.3.6.1.1',  # Autres services de transport (yc déménagement)
-    '07.1.4.1': '07',          # Achats d'autres véhicules neufs et occasion
-    '07.4.1.1': '07',          # Autres dépenses de transport : cérémonie, séjours hors domicile, personnes vivan
-    '07.4.1.2': '07',          # Autres dépenses de transport : cadeau offert (à destination d’un autre ménage)
+    '07.1.4.1': '07.1.3',      # Achats d'autres véhicules neufs et occasion
+    '07.4.1.1': '07.4.1',      # Autres dépenses de transport : cérémonie, séjours hors domicile, personnes vivan
+    '07.4.1.2': '07.4.2',      # Autres dépenses de transport : cadeau offert (à destination d’un autre ménage)
     '08.1.1.1': '08.1.1.1.1',  # Services postaux (yc timbres, enveloppes)
     '08.1.2.1': '08.1.2.1.1',  # Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires
     '08.1.3.1': '08.1.2.2.1',  # Services de téléphone et fax, internet, recharges téléphoniques
-    '08.1.4.1': '08',          # Autres dépenses de communications  : cadeau offert (à destination d’un autre mén
+    # La nomenclature coicop chargée sur le site de l'INSEE ne suit pas celle de l'ONU
+    '08.1.4.1': '08.2',        # Autres dépenses de communications  : cadeau offert (à destination d’un autre mén
     '09.1.1.1': '09.1.1.1.3',  # Appareils de réception, d’enregistrement et de reproduction du son
     '09.1.1.2': '09.1.1.1.2',  # Téléviseurs, home cinéma, magnétoscopes, antennes, adapteur et lecteur DVD de sa
     '09.1.2.1': '09.1.2.1.1',  # Equipement photographique et cinématographique (yc accessoires)
@@ -319,114 +329,112 @@ adjusted_coicop_by_original = {
     '09.5.3.1': '09.5.3.1.1',  # Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, a
     '09.5.4.1': '09.5.3.1.2',  # Articles de papeterie et de dessin (yc toner pour imprimante)
     '09.6.1.1': '09.6.1.1.1',  # Voyages à forfait, week-end, excursions yc voyage scolaire
-    '09.7.1.1': '09',          # Autres dépenses des loisirs : séjours hors domicile, personnes vivant hors du do
-    '09.7.1.2': '09',          # Autres dépenses de loisirs et culture : cadeau offert (à destination d’un autre
-    '10.1.1.1': '10',          # Enseignement maternel et primaire (scolarité et cours d’alphabétisation)
-    '10.1.2.1': '10.1.1.1.1',  # Enseignement secondaire (scolarité et inscription aux concours de niveau seconda
-    '10.1.3.1': '10.1.1.1.2',  # Enseignement supérieur et frais d’inscription aux concours des grandes écoles
-    '10.1.4.1': '10.1.1.1.3',  # Enseignement ne correspondant à aucun niveau particulier (cours particuliers, en
-    '10.1.5.1': '10',          # Autres dépenses d’enseignement : personnes vivant hors du domicile au moins un j
-    '10.1.5.2': '10',          # Autres dépenses d’enseignement : cadeau offert (à destination d’un autre ménage)
+    '09.7.1.1': '09.7.1',      # Autres dépenses des loisirs : séjours hors domicile, personnes vivant hors du do
+    '09.7.1.2': '09.7.2',      # Autres dépenses de loisirs et culture : cadeau offert (à destination d’un autre
+    '10.1.1.1': '10.1',        # Enseignement maternel et primaire (scolarité et cours d’alphabétisation)
+    '10.1.2.1': '10.2',        # Enseignement secondaire (scolarité et inscription aux concours de niveau seconda
+    '10.1.3.1': '10.3',        # Enseignement supérieur et frais d’inscription aux concours des grandes écoles
+    '10.1.4.1': '10.4',        # Enseignement ne correspondant à aucun niveau particulier (cours particuliers, en
+    '10.1.5.1': '10.5.1',      # Autres dépenses d’enseignement : personnes vivant hors du domicile au moins un j
+    '10.1.5.2': '10.5.2',      # Autres dépenses d’enseignement : cadeau offert (à destination d’un autre ménage)
     '11.1.1.1': '11.1.1.1.1',  # Repas pris dans un restaurant
     '11.1.2.1': '11.1.2.1.1',  # Cantines scolaire et professionnelle
     '11.2.1.1': '11.2.1.1.1',  # Services d’hébergement (hôtels, gîtes, campings, CROUS, internats)
-    '11.1.3.1': '11',          # Autres dépenses de restauration : séjours hors domicile, personnes vivant hors d
-    '11.1.3.2': '11',          # Autres dépenses de restauration : cadeau offert (à destination d’un autre ménage
+    # '11.1.3.1': '11.1.3.1',    # Autres dépenses de restauration : séjours hors domicile, personnes vivant hors d
+    # '11.1.3.2': '11.1.3.2',    # Autres dépenses de restauration : cadeau offert (à destination d’un autre ménage
     '12.1.1.1': '12.1.1.1.1',  # Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, pier
     '12.1.2.1': '12.1.3.3.3',  # Appareils électriques pour les soins personnels
     '12.1.2.2': '12.1.3.2.1',  # Autres articles et produits pour les soins personnels (savon, produits de toilet
     '12.3.1.1': '12.3.1.1.1',  # Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)
     '12.3.2.1': '12.3.2.1.1',  # Articles de voyage et autres contenants d'effets personnels (maroquinerie, valis
     '12.3.2.2': '12.3.2.2.2',  # Autres effets personnels (briquets, parapluies, lunettes de soleil, articles pou
+    '12.3.3.1': '12.3.3.1.1',  # Autres biens et services offerts (à des personnes extérieures au ménage)
     '12.4.1.1': '12.4.1.1.1',  # Services de protection sociale (assistante maternelle, crèche, maison de retrait
+    '12.5.1.1': '12.5.1.1.1',  # Assurance vie décès
     '12.5.2.1': '12.5.2.1.1',  # Assurances liées au logement
     '12.5.3.1': '12.5.3.1.1',  # Assurances liées à la santé
     '12.5.4.1': '12.5.4.1.1',  # Assurances liées aux transports (yc assurance voyage)
+    '12.5.5.1': '12.5.5.1.1',  # Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, ob
     '12.6.1.1': '12.6.1.1.1',  # Services financiers
     '12.7.1.1': '12.7.1.1.1',  # Autres services (pompes funèbres, services juridiques, vestiaires, consignes, gr
     '12.7.1.2': '12.7.1.2.1',  # Caution pour la location d'un logement
-    '12.3.3.1': '12',          # Autres biens et services offerts (à des personnes extérieures au ménage)
-    '12.5.1.1': '12.5',        # Assurance vie décès
+    '12.8.1.1': '12.8.1',      # Autres dépenses occasionnées par une cérémonie
     }
 
-adjust_bdf_coicop = {
-    # '01.3.1.1':	"autres dépenses d'alimentation : cérémonies, séjours hors domicile, personne viv"
-    # '01.3.1.2':	"autres dépenses d'alimentation : cadeau offert (à destination d'un autre ménage"
-    # '02.4.1.1':	'Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre'
-    # '03.2.1.3':	'Chaussures pour enfant (3 à 13 ans)'
-    # '03.2.2.1':	'Réparation et location de chaussures'
-    # '04.1.2.1':	'Loyers (hors charges ou avec charges non isolables) des locataires autres réside'
-    # '04.4.2.1':	"Services d'assainissement"
-    # '04.4.3.1':	"Factures d'eau résidence principale, autre logement, dépendance, terrain"
-    # '04.4.4.1':	'Charges collectives relatives au logement (payées isolément du loyer ou crédit)'
-    # '04.5.0.0':	'Facture électricité + gaz (non dissociables)'
-    # '04.5.5.2':	'Glace'
-    # '04.6.1.1':	"Autres dépenses d'habitation : cadeau offert (à destination d'un autre ménage)""
-    # '05.1.1.0':	"Meubles informatiques"
-    # '05.1.1.6':	'Autres meubles, accessoires du mobilier (yc luminaires, décoration, équipement e'
-    # '05.1.3.1':	'Réparation de meubles'
-    # '05.3.1.5':	'Appareils de nettoyage (aspirateur, nettoyeur vapeur etc.)'
-    # '05.3.1.7':	'Autres gros appareils ménagers'
-    # '05.4.1.4':	'Réparation et entretien verrerie, vaisselle et autres ustensiles de cuisine'
-    # '05.5.1.2':	'Gros outillage de jardinage'
-    # '05.5.1.3':	'Réparation du gros outillage'
-    # '05.5.2.1':	'Petit outillage et accessoires divers de bricolage yc petit matériel électrique'
-    # '05.5.2.2':	"Petit outillage et accessoires divers de jardinage, matériaux d'aménagement exté"
-    # '05.5.2.3':	'Réparation des petits outillages'
-    # '06.2.3.2':	'Services des auxiliaires médicaux (infirmier, kiné, laboratoire, etc.)'
-    # '06.2.3.3':	'Services extra hospitaliers (ambulance, location matériel)'
-    # '06.3.1.1':	'Services et soins hospitaliers'
-    # '06.4.1.1':	"Autres dépenses de santé : personnes vivant hors du domicile au moins un jour pa"
-    # '06.4.1.2':	"Autres dépenses de santé : cadeau offert (à destination d'un autre ménage)"
-    # '07.1.3.1':	"Achats de cycles neufs et occasion"
-    # '07.1.4.1':	"Achats d'autres véhicules neufs et occasion
-    # '07.3.4.1':	"Services de transport par mer et voies navigables intérieures (yc transport de b"
-    # '07.4.1.1':	"Autres dépenses de transport : cérémonie, séjours hors domicile, personnes vivan"
-    # '07.4.1.2':	"Autres dépenses de transport : cadeau offert (à destination d'un autre ménage)"
-    # '08.1.3.1':	"Services de téléphone et fax, internet, recharges téléphoniques"
-    # '08.1.4.1':	"Autres dépenses de communications  : cadeau offert (à destination d'un autre mén"
-    # '09.1.1.2':	"Téléviseurs, home cinéma, magnétoscopes, antennes, adapteur et lecteur DVD de sa"
-    # '09.1.2.2':	"Instruments d'optique non médicale et divers électroacoustique (microscope, jume"
-    # '09.2.2.1':	'Instruments de musique et accessoires'
-    # '09.2.2.2':	"Gros équipements pour les loisirs d'intérieur (table de billard, de ping-pong, f"
-    # '09.2.3.1':	"Réparation et entretien de biens durables pour les loisirs, les sports et la cul"
-    # '09.3.1.2':	"Equipements de sport, de camping et de loisirs en plein air (pêche, chasse, uste"
-    # '09.4.3.1':	"Jeux de hasard (loto, tiercé, etc.)"
-    # '09.5.4.1':	"Articles de papeterie et de dessin (yc toner pour imprimante)"
-    # '09.7.1.1':	"Autres dépenses des loisirs : séjours hors domicile, personnes vivant hors du do"
-    # '09.7.1.2':	"Autres dépenses de loisirs et culture : cadeau offert (à destination d'un autre"
-    # '10.1.2.1':	"Enseignement secondaire (scolarité et inscription aux concours de niveau seconda"
-    # '10.1.3.1':	"Enseignement supérieur et frais d'inscription aux concours des grandes écoles"
-    # '10.1.4.1':	"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, en"
-    # '10.1.5.1':	"Autres dépenses d'enseignement : personnes vivant hors du domicile au moins un j"
-    # '10.1.5.2':	"Autres dépenses d'enseignement : cadeau offert (à destination d'un autre ménage)"
-    # '11.1.3.1':	"Autres dépenses de restauration : séjours hors domicile, personnes vivant hors d"
-    # '11.1.3.2':	"Autres dépenses de restauration : cadeau offert (à destination d'un autre ménage"
-    # '12.1.2.1':	"Appareils électriques pour les soins personnels"
-    # '12.1.2.2':	"Autres articles et produits pour les soins personnels (savon, produits de toilet"
-    # '12.3.3.1':	"Autres biens et services offerts (à des personnes extérieures au ménage)"
-    # '12.5.1.1':	"Assurances vie, décès"
-    # '12.5.5.1':	"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, ob"
-    # '12.8.1.1':	"Autres dépenses occasionnées par une cérémonie"
-    # '12.9.1.1':	"Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine"
-    # '13.1.1.1':	"Impôts et taxes de la résidence principale"
-    # '13.1.2.1':	"Impôts et taxes pour une résidence secondaire ou un autre logement"
-    # '13.1.4.1':	"Impôts sur le revenu"
-    # '13.1.5.1':	"Taxes automobiles (cartes grises, contraventions)"
-    # '13.1.6.1':	"Autres impôts et taxes (taxe foncière pour jardin ou autre, amendes, passeport),"
-    # '13.2.1.1':	"Remboursements de prêts pour la résidence principale (yc garage et dépendance)"
-    # '13.2.2.1':	"Remboursements des autres prêts immobiliers"
-    # '13.3.1.1':	"Aides et dons (occasionnels ou réguliers) en argent offerts par le ménage et pen"
-    # '13.4.1.1':	"Gros travaux pour la résidence principale yc matériaux de construction de gros oeuvre"
-    # '13.4.2.1':	"Gros travaux pour une résidence secondaire ou un autre logement yc matériaux de"
-    # '13.5.1.1':	"lRemboursements de crédits à a consommation (yc voiture, gros travaux, biens dur"
-    # '13.6.1.1':	"Prélèvements de l'employeur"
-    # '13.7.1.1':	"Achats de logements, garages, parkings, box et terrains"
-    # '13.7.2.2':	"Epargne salariale : achat d'actions de l'entreprise"
-    # '14.1.1.1':	"Allocations logement reçu par le ménage"
-    }
 
-adjusted_coicop_by_original.update(adjust_bdf_coicop)
+# '01.3.1.1':	"autres dépenses d'alimentation : cérémonies, séjours hors domicile, personne viv"
+# '01.3.1.2':	"autres dépenses d'alimentation : cadeau offert (à destination d'un autre ménage"
+# '03.2.1.3':	'Chaussures pour enfant (3 à 13 ans)'
+# '03.2.2.1':	'Réparation et location de chaussures'
+# '04.1.2.1':	'Loyers (hors charges ou avec charges non isolables) des locataires autres réside'
+# '04.4.2.1':	"Services d'assainissement"
+# '04.4.3.1':	"Factures d'eau résidence principale, autre logement, dépendance, terrain"
+# '04.4.4.1':	'Charges collectives relatives au logement (payées isolément du loyer ou crédit)'
+# '04.5.0.0':	'Facture électricité + gaz (non dissociables)'
+# '04.5.5.2':	'Glace'
+# '04.6.1.1':	"Autres dépenses d'habitation : cadeau offert (à destination d'un autre ménage)""
+# '05.1.1.0':	"Meubles informatiques"
+# '05.1.1.6':	'Autres meubles, accessoires du mobilier (yc luminaires, décoration, équipement e'
+# '05.1.3.1':	'Réparation de meubles'
+# '05.3.1.5':	'Appareils de nettoyage (aspirateur, nettoyeur vapeur etc.)'
+# '05.3.1.7':	'Autres gros appareils ménagers'
+# '05.4.1.4':	'Réparation et entretien verrerie, vaisselle et autres ustensiles de cuisine'
+# '05.5.1.2':	'Gros outillage de jardinage'
+# '05.5.1.3':	'Réparation du gros outillage'
+# '05.5.2.1':	'Petit outillage et accessoires divers de bricolage yc petit matériel électrique'
+# '05.5.2.2':	"Petit outillage et accessoires divers de jardinage, matériaux d'aménagement exté"
+# '05.5.2.3':	'Réparation des petits outillages'
+# '06.2.3.2':	'Services des auxiliaires médicaux (infirmier, kiné, laboratoire, etc.)'
+# '06.2.3.3':	'Services extra hospitaliers (ambulance, location matériel)'
+# '06.3.1.1':	'Services et soins hospitaliers'
+# '06.4.1.1':	"Autres dépenses de santé : personnes vivant hors du domicile au moins un jour pa"
+# '06.4.1.2':	"Autres dépenses de santé : cadeau offert (à destination d'un autre ménage)"
+# '07.1.3.1':	"Achats de cycles neufs et occasion"
+# '07.1.4.1':	"Achats d'autres véhicules neufs et occasion
+# '07.3.4.1':	"Services de transport par mer et voies navigables intérieures (yc transport de b"
+# '07.4.1.1':	"Autres dépenses de transport : cérémonie, séjours hors domicile, personnes vivan"
+# '07.4.1.2':	"Autres dépenses de transport : cadeau offert (à destination d'un autre ménage)"
+# '08.1.3.1':	"Services de téléphone et fax, internet, recharges téléphoniques"
+# '08.1.4.1':	"Autres dépenses de communications  : cadeau offert (à destination d'un autre mén"
+# '09.1.1.2':	"Téléviseurs, home cinéma, magnétoscopes, antennes, adapteur et lecteur DVD de sa"
+# '09.1.2.2':	"Instruments d'optique non médicale et divers électroacoustique (microscope, jume"
+# '09.2.2.1':	'Instruments de musique et accessoires'
+# '09.2.2.2':	"Gros équipements pour les loisirs d'intérieur (table de billard, de ping-pong, f"
+# '09.2.3.1':	"Réparation et entretien de biens durables pour les loisirs, les sports et la cul"
+# '09.3.1.2':	"Equipements de sport, de camping et de loisirs en plein air (pêche, chasse, uste"
+# '09.4.3.1':	"Jeux de hasard (loto, tiercé, etc.)"
+# '09.5.4.1':	"Articles de papeterie et de dessin (yc toner pour imprimante)"
+# '09.7.1.1':	"Autres dépenses des loisirs : séjours hors domicile, personnes vivant hors du do"
+# '09.7.1.2':	"Autres dépenses de loisirs et culture : cadeau offert (à destination d'un autre"
+# '10.1.2.1':	"Enseignement secondaire (scolarité et inscription aux concours de niveau seconda"
+# '10.1.3.1':	"Enseignement supérieur et frais d'inscription aux concours des grandes écoles"
+# '10.1.4.1':	"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, en"
+# '10.1.5.1':	"Autres dépenses d'enseignement : personnes vivant hors du domicile au moins un j"
+# '10.1.5.2':	"Autres dépenses d'enseignement : cadeau offert (à destination d'un autre ménage)"
+# '11.1.3.1':	"Autres dépenses de restauration : séjours hors domicile, personnes vivant hors d"
+# '11.1.3.2':	"Autres dépenses de restauration : cadeau offert (à destination d'un autre ménage"
+# '12.1.2.1':	"Appareils électriques pour les soins personnels"
+# '12.1.2.2':	"Autres articles et produits pour les soins personnels (savon, produits de toilet"
+# '12.3.3.1':	"Autres biens et services offerts (à des personnes extérieures au ménage)"
+# '12.5.1.1':	"Assurances vie, décès"
+# '12.5.5.1':	"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, ob"
+# '12.8.1.1':	"Autres dépenses occasionnées par une cérémonie"
+# '12.9.1.1':	"Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine"
+# '13.1.1.1':	"Impôts et taxes de la résidence principale"
+# '13.1.2.1':	"Impôts et taxes pour une résidence secondaire ou un autre logement"
+# '13.1.4.1':	"Impôts sur le revenu"
+# '13.1.5.1':	"Taxes automobiles (cartes grises, contraventions)"
+# '13.1.6.1':	"Autres impôts et taxes (taxe foncière pour jardin ou autre, amendes, passeport),"
+# '13.2.1.1':	"Remboursements de prêts pour la résidence principale (yc garage et dépendance)"
+# '13.2.2.1':	"Remboursements des autres prêts immobiliers"
+# '13.3.1.1':	"Aides et dons (occasionnels ou réguliers) en argent offerts par le ménage et pen"
+# '13.4.1.1':	"Gros travaux pour la résidence principale yc matériaux de construction de gros oeuvre"
+# '13.4.2.1':	"Gros travaux pour une résidence secondaire ou un autre logement yc matériaux de"
+# '13.5.1.1':	"lRemboursements de crédits à a consommation (yc voiture, gros travaux, biens dur"
+# '13.6.1.1':	"Prélèvements de l'employeur"
+# '13.7.1.1':	"Achats de logements, garages, parkings, box et terrains"
+# '13.7.2.2':	"Epargne salariale : achat d'actions de l'entreprise"
+# '14.1.1.1':	"Allocations logement reçu par le ménage"
 
 
 def adjust_coicop(data_frame):
@@ -460,12 +468,10 @@ def bdf(year = 2011):
 
 # TODO check notamment problème avec sucre confiseries
 if __name__ == '__main__':
-    # result = coicop_from_bdf(year = 2011)
-    # errors, data_frame = bdf()
     year = 2011
     bdf_coicop = guess_coicop_from_bdf(year = year)
-    bdf_coicop2 = adjust_coicop(bdf_coicop)
-    data_frame = merge_with_coicop_nomenclature(bdf_coicop2)
+    adjusted_bdf_coicop = adjust_coicop(bdf_coicop)
+    data_frame = merge_with_coicop_nomenclature(adjusted_bdf_coicop)
 
 #   len(errors)
 #    df = pandas.DataFrame.from_records(errors).sort_values(by = 'code_coicop')

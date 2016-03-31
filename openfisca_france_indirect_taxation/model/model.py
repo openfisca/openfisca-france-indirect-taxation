@@ -49,7 +49,7 @@ from .taxes_indirectes import (  # noqa analysis:ignore
     assurances,
     tabacs,
     ticpe,
-    total_taxes_indirectes,
+    totaux,
     tva,
     )
 from .vehicules import (  # noqa analysis:ignore

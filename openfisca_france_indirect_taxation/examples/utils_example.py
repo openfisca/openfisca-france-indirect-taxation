@@ -9,24 +9,15 @@ import matplotlib.ticker as ticker
 
 
 import openfisca_france_indirect_taxation
+from openfisca_france_indirect_taxation.surveys import get_input_data_frame
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
 
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn import \
     build_df_calee_on_grospostes, build_df_calee_on_ticpe
-
-
-def get_input_data_frame(year):
-    openfisca_survey_collection = SurveyCollection.load(
-        collection = "openfisca_indirect_taxation", config_files_directory = config_files_directory)
-    openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
-    input_data_frame = openfisca_survey.get_values(table = "input")
-    input_data_frame.reset_index(inplace = True)
-    return input_data_frame
 
 
 def create_survey_scenario(year = None):
