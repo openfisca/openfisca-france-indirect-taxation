@@ -8,8 +8,8 @@ quaids w1-w3, anot(5) prices(p1-p3) expenditure(depenses_par_uc) demographics(ag
 *matrix list r(uncompelas)
 *estat expenditure, atmeans
 *matrix list r(expelas)
-estat expenditure mu*
-estat uncompensated ce*
+estat expenditure elas_exp*
+estat uncompensated elas_price*
 tostring ident_men, replace
 outsheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_quaids_energy_no_alime_all.csv", delimiter(",") replace
 
