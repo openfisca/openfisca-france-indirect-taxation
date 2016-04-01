@@ -9,7 +9,7 @@ resultats_elasticite_depenses = dict()
 resultats_elasticite_uncomp = dict()
 borne_inferieure_el_dep = dict()
 borne_superieure_el_dep = dict()
-for year in ['all', 'all_no_elect_only_no_alime]:
+for year in ['energy_no_alime_all']:
     default_config_files_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     data_quaids = pd.read_csv(
