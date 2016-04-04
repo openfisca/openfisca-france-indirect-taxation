@@ -54,7 +54,7 @@ def build_clean_aliss_data_frame():
         ]
 
     for household_type, age, revenus in triplets:
-        print household_type, age, revenus
+        # print household_type, age, revenus
         selection = aliss.type.str.startswith(household_type)
         aliss.loc[selection, 'age'] = age
         aliss.loc[selection, 'revenus'] = revenus
@@ -112,7 +112,7 @@ def compute_expenses():
 
     return depenses
 
-
+1
 def compute_kantar_elasticities(compute = False):
     aliss = build_clean_aliss_data_frame()
     kantar_cross_price_elasticities_path = os.path.join(
@@ -189,12 +189,24 @@ def compute_kantar_elasticities(compute = False):
 
     nomks = aliss.nomk.unique()
 
+    iterables = [range(4), range(4), nomks]
+    index = pandas.MultiIndex.from_product(iterables, names=['age', 'revenus', 'nomk'])
     nomk_cross_price_elasticity = pandas.DataFrame(
-        index = nomks,
-        columns = list(nomks) + ['age', 'revenus'],
+        index = index,
+        columns = nomks,
         )
 
+    nomk_cross_price_elasticity.index
+
+    # TODO save by age, revenus
     for age, revenus in itertools.product(aliss.age.unique(), aliss.revenus.unique()):
+        print 'age ', age
+        print 'revenus ', revenus
+        print '----'
+        temp_nomk_cross_price_elasticity = pandas.DataFrame(
+            index = nomks,
+            columns = list(nomks),
+            )
 
         nomf_cross_price_elasticity = nomf_cross_price_elasticities.query(
             'age == @age & revenus == @revenus').set_index('product')
@@ -214,9 +226,16 @@ def compute_kantar_elasticities(compute = False):
             transposed_elasticity_kkprime = elasticity_kkprime.T
             transposed_elasticity_kkprime.loc[nomks_for_fprime] = budget_share * elasticity_ffprime
             elasticity_kkprime = transposed_elasticity_kkprime.T
-            elasticity_kkprime['age'] = age
-            elasticity_kkprime['revenus'] = revenus
-            nomk_cross_price_elasticity = nomk_cross_price_elasticity.combine_first(elasticity_kkprime)
+            temp_nomk_cross_price_elasticity = temp_nomk_cross_price_elasticity.combine_first(elasticity_kkprime)
+
+        temp_nomk_cross_price_elasticity['age'] = age
+        temp_nomk_cross_price_elasticity['revenus'] = revenus
+
+        nomk_cross_price_elasticity = nomk_cross_price_elasticity.merge(
+            temp_nomk_cross_price_elasticity, how = 'outer')
+        print "age = {} : \n {}".format(age, nomk_cross_price_elasticity.age.value_counts())
+        print "revenus = {} : \n {}".format(revenus, nomk_cross_price_elasticity.revenus.value_counts())
+
 
     nomk_cross_price_elasticity.to_csv(kantar_cross_price_elasticities_path)
     return nomk_cross_price_elasticity
@@ -261,9 +280,16 @@ if __name__ == '__main__':
     df['elasticity_factor'] = (df.taux_reforme - df.taux) / ( 1 + df.taux)
 
     kantar_elasticities = compute_kantar_elasticities()
-    assert sorted(kantar_elasticities.index.tolist()) == sorted(df.nomk)
-    age = 0
-    revenus = 0
-    matrix = kantar_elasticities.query('age == @age & revenus == @revenus').drop()
+    assert sorted(kantar_elasticities.age.value_counts().index) == sorted(range(4))
+    assert sorted(kantar_elasticities.revenus.value_counts().index) == sorted(range(4))
+
+    for age, revenus in itertools.product(kantar_elasticities.age.unique(), kantar_elasticities.revenus.unique()):
+        age = 0
+        revenus = 0
+        matrix = kantar_elasticities.query('age == @age & revenus == @revenus').drop(['age', 'revenus'], axis =1)
+        matrix.shape
+    assert sorted(matrix.index.tolist()) == sorted(df.nomk)
+
+    assert matrix.shape == (110, 110)
     # depenses= compute_expenses()
 
