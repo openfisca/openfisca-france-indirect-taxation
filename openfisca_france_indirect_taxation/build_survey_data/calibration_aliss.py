@@ -200,9 +200,6 @@ def compute_kantar_elasticities(compute = False):
 
     # TODO save by age, revenus
     for age, revenus in itertools.product(aliss.age.unique(), aliss.revenus.unique()):
-        print 'age ', age
-        print 'revenus ', revenus
-        print '----'
         temp_nomk_cross_price_elasticity = pandas.DataFrame(
             index = nomks,
             columns = list(nomks),
@@ -230,6 +227,8 @@ def compute_kantar_elasticities(compute = False):
 
         temp_nomk_cross_price_elasticity['age'] = age
         temp_nomk_cross_price_elasticity['revenus'] = revenus
+        temp_nomk_cross_price_elasticity.index.name = 'nomk'
+        temp_nomk_cross_price_elasticity = temp_nomk_cross_price_elasticity.reset_index()
 
         nomk_cross_price_elasticity = nomk_cross_price_elasticity.merge(
             temp_nomk_cross_price_elasticity, how = 'outer')
@@ -279,7 +278,7 @@ if __name__ == '__main__':
     df['taux_reforme'] = df['taux'].copy()
     df['elasticity_factor'] = (df.taux_reforme - df.taux) / ( 1 + df.taux)
 
-    kantar_elasticities = compute_kantar_elasticities()
+    kantar_elasticities = compute_kantar_elasticities(compute = True)
     assert sorted(kantar_elasticities.age.value_counts().index) == sorted(range(4))
     assert sorted(kantar_elasticities.revenus.value_counts().index) == sorted(range(4))
 
