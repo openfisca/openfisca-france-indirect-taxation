@@ -30,8 +30,8 @@ from ..base import *  # noqa analysis:ignore
 
 
 class ident_men(Variable):
-    column = FloatCol
-    entity_class = Individus
+    column = StrCol
+    entity_class = Menages
     is_permanent = True
     label = u"Identifiant du ménage"
 
