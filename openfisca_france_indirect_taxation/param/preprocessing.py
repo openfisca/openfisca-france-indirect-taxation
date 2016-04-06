@@ -45,7 +45,7 @@ def preprocess_legislation(legislation_json):
             'assets',
             'prix',
             'prix_annuel_carburants.csv'
-            ), sep =';'
+            ), sep =','
         )
     prix_annuel_carburants['Date'] = prix_annuel_carburants['Date'].astype(int)
     prix_annuel_carburants = prix_annuel_carburants.set_index('Date')
@@ -118,7 +118,7 @@ def preprocess_legislation(legislation_json):
             'assets',
             'quantites',
             'parc_annuel_moyen_vp.csv'
-            ), sep =';'
+            ), sep =','
         )
 
     parc_annuel_moyen_vp = parc_annuel_moyen_vp.set_index('Unnamed: 0')
@@ -158,7 +158,7 @@ def preprocess_legislation(legislation_json):
             'assets',
             'quantites',
             'quantite_carbu_vp_france.csv'
-            ), sep =';'
+            ), sep =','
         )
 
     quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('Unnamed: 0')
@@ -248,6 +248,61 @@ def preprocess_legislation(legislation_json):
 
         legislation_json['children']['imposition_indirecte']['children']['part_type_supercarburants'] = \
             part_type_supercaburant
+
+    # Add CO2 emissions from energy (Source : Ademe)
+
+    emissions_CO2 = {
+        "@type": "Node",
+        "description": u"émissions de CO2 des énergies",
+        "children": {},
+        }
+    emissions_CO2['children']['carburants'] = {
+        "@type": "Node",
+        "description": "émissions de CO2 des carburants",
+        "children": {
+            "CO2_diesel": {
+                "@type": "Parameter",
+                "description": u"émissions de CO2 du diesel en kg par litre",
+                "format": "float",
+                "values": [
+                    {'start': u'1990-01-01', 'stop': u'2015-12-31', 'value': 2.66},
+                    ],
+                },
+            "CO2_essence": {
+                "@type": "Parameter",
+                "description": u"émissions de CO2 du diesel en kg par litre",
+                "format": "float",
+                "values": [
+                    {'start': u'1990-01-01', 'stop': u'2015-12-31', 'value': 2.42},
+                    ],
+                },
+            },
+        }
+
+    emissions_CO2['children']['energie_logement'] = {
+        "@type": "Node",
+        "description": "émissions de CO2 de l'énergie dans le logement",
+        "children": {
+            "CO2_electricite": {
+                "@type": "Parameter",
+                "description": u"émissions de CO2 de l'électricité, en kg par kWh",
+                "format": "float",
+                "values": [
+                    {'start': u'1990-01-01', 'stop': u'2015-12-31', 'value': 0.09},
+                    ],
+                },
+            "CO2_gaz": {
+                "@type": "Parameter",
+                "description": u"émissions de CO2 du gaz, en kg par kWh",
+                "format": "float",
+                "values": [
+                    {'start': u'1990-01-01', 'stop': u'2015-12-31', 'value': 0.24},
+                    ],
+                },
+            },
+        }
+
+    legislation_json['children']['imposition_indirecte']['children']['emissions_CO2'] = emissions_CO2
 
     # Add data from comptabilite national about alcohol
 

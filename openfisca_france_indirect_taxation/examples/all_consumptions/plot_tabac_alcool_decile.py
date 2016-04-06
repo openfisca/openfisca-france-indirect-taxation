@@ -1,12 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Mar 29 15:43:49 2015
-
-@author: hadrien
-"""
-
-# -*- coding: utf-8 -*-
-
 
 # OpenFisca -- A versatile microsimulation software
 # By: OpenFisca Team <contact@openfisca.fr>

@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Jul 24 09:46:35 2015
-
-@author: thomas.douenne
-"""
 
 # Ce script réalise des graphiques à partir des données des comptes des transports, i.e. nos agrégats de référence
 # pour les transports : taille et composition du parc automobile, consommation des carburants, total des recettes

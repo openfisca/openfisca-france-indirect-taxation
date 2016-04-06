@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Aug 19 15:47:20 2015
-
-@author: thomas.douenne
-"""
 
 # L'objectif des "compare" est d'évaluer la qualité des calages effectués. Ils comparent les dépenses ou quantités
 # agrégées de Budget des Familles après calage, avec celles de la comptabilité nationale.
@@ -43,7 +38,7 @@ for element in produits:
 # Import des fichiers csv donnant les quantités agrégées d'après la comptabilité nationale.
 quantite_carbu_vp_france = pd.read_csv(os.path.join(assets_directory,
         'openfisca_france_indirect_taxation', 'assets', 'quantites',
-        'quantite_carbu_vp_france.csv'), sep = ';')
+        'quantite_carbu_vp_france.csv'), sep = ',')
 quantite_carbu_vp_france['Unnamed: 0'] = quantite_carbu_vp_france['Unnamed: 0'].astype(str)
 quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('Unnamed: 0')
 quantite_carbu_vp_france.rename(columns = {'essence': 'essence agregat'}, inplace = True)

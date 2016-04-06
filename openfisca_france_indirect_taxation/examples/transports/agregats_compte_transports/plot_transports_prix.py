@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Jul 23 17:26:44 2015
-
-@author: thomas.douenne
-"""
 
 # Import de modules spécifiques à Openfisca, et import des données de prix des carburants
 from ipp_macro_series_parser.agregats_transports.parser_cleaner_prix_carburants import prix_mensuel_carburants_90_15
