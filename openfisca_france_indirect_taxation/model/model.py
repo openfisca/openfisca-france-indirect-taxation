@@ -28,11 +28,21 @@ from .caracteristiques_menages import (  # noqa analysis:ignore
     demographie,
     )
 from .consommation import (  # noqa analysis:ignore
-    consommation_menages,
     categories_fiscales,
+    consommation_menages,
+    depenses_energies,
+    emissions_co2,
     postes_coicop,
-    reactions_comportementales,
+    quantites_energie,
+    )
+from reactions_comportementales_reforme import (  # noqa analysis:ignore
+    depenses_ajustees,
     elasticites,
+    emissions_ajustees,
+    quantites_ajustees,
+    )
+from .revenus import (  # noqa analysis:ignore
+    revenus_menages,
     )
 from .taxes_indirectes import (  # noqa analysis:ignore
     alcools,
