@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Feb 01 16:31:53 2016
-
-@author: thomas.douenne
-"""
 
 from __future__ import division
 
 import os
 import pkg_resources
 import pandas as pd
+
+from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.survey_collections import SurveyCollection
 
 
 def add_area_dummy(dataframe):
@@ -21,7 +19,7 @@ def add_area_dummy(dataframe):
     dataframe.loc[dataframe['strate'] == 2, 'villes_moyennes'] = 1
     dataframe.loc[dataframe['strate'] == 3, 'villes_grandes'] = 1
     dataframe.loc[dataframe['strate'] == 4, 'agglo_paris'] = 1
-    del dataframe['strate']
+    #del dataframe['strate']
     return dataframe
 
 
@@ -72,13 +70,13 @@ def indices_prix_carbus(year):
             'assets',
             'prix',
             'prix_mensuel_carbu_match_to_vag.csv'
-            ), sep =';', decimal = ','
+            ), sep =',', decimal = '.'
         )
     prix_carbu = prix_carbu[['diesel_ttc'] + ['super_95_ttc'] + ['vag']].astype(float)
 
     quantite_carbu_vp_france = pd.read_csv(os.path.join(default_config_files_directory,
             'openfisca_france_indirect_taxation', 'assets', 'quantites',
-            'quantite_carbu_vp_france.csv'), sep = ';')
+            'quantite_carbu_vp_france.csv'), sep = ',')
     quantite_carbu_vp_france.rename(columns = {'Unnamed: 0': 'annee'}, inplace = True)
 
     quantite_carbu_vp_france['part_conso_ess'] = \
@@ -106,4 +104,61 @@ def price_carbu_pond(dataframe):
     dataframe['prix_carbu'] = dataframe['prix_carbu'] * (dataframe['part_veh_essence'] * dataframe['indice_ess'] +
         (1 - dataframe['part_veh_essence']) * dataframe['indice_die'])
     del dataframe['indice_ess'], dataframe['indice_die']
+    return dataframe
+
+
+def price_carbu_from_quantities(dataframe, year):
+    bdf_survey_collection = SurveyCollection.load(
+        collection = 'budget_des_familles', config_files_directory = config_files_directory
+        )
+    survey = bdf_survey_collection.get_survey('budget_des_familles_{}'.format(year))
+
+    carnets = survey.get_values(table = 'CARNETS')
+    carnets_carbu = carnets[carnets['nomen5'] == 7221].copy()
+    carnets_carbu[['quantite', 'montant']] = carnets_carbu[['quantite', 'montant']].astype(float)
+
+    carnets_carbu = carnets_carbu.rename(columns = {'ident_me': 'ident_men'})
+    grouped = carnets_carbu.groupby(['ident_men']).sum()
+
+    grouped['prix_carbu_consommateur'] = grouped['montant'] / grouped['quantite']
+    carnets_carbu_select = grouped[grouped['prix_carbu_consommateur'] < 2].copy()
+    carnets_carbu_select = carnets_carbu_select[carnets_carbu_select['prix_carbu_consommateur'] > .8].copy()
+    carnets_carbu_select = carnets_carbu_select.reset_index()
+    carnets_carbu_select['ident_men'] = carnets_carbu_select['ident_men'].astype(str)
+
+    indice_prix_moyen = dataframe['prix_carbu'].mean()
+    prix_consommateur_moyen = carnets_carbu_select['prix_carbu_consommateur'].mean()
+    dataframe2 = pd.merge(
+        dataframe, carnets_carbu_select[['ident_men', 'prix_carbu_consommateur']],
+        on = 'ident_men', how = 'left'
+        )
+    dataframe2.loc[dataframe2['prix_carbu_consommateur'] < 2, 'prix_carbu'] = \
+        dataframe2['prix_carbu_consommateur'] * indice_prix_moyen / prix_consommateur_moyen
+
+    return dataframe2
+
+
+def price_energy_from_contracts(dataframe, year):
+    assets_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
+        )
+    prix_contrats = pd.DataFrame.from_csv(os.path.join(assets_directory,
+        'openfisca_france_indirect_taxation', 'assets', 'prix',
+        'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)))
+    prix_contrats['ident_men'] = prix_contrats['ident_men'].astype(str)
+    moyenne_prix_gaz = \
+        prix_contrats.query('depenses_gaz_prix_unitaire > 0').depenses_gaz_prix_unitaire.mean()
+    moyenne_prix_electricite = \
+        prix_contrats.query('depenses_electricite_prix_unitaire > 0').depenses_electricite_prix_unitaire.mean()
+    prix_contrats.loc[prix_contrats['depenses_gaz_prix_unitaire'] == 0, 'depenses_gaz_prix_unitaire'] = moyenne_prix_gaz
+    prix_contrats.loc[prix_contrats['depenses_electricite_prix_unitaire'] == 0, 'depenses_electricite_prix_unitaire'] = \
+        moyenne_prix_electricite
+    dataframe = pd.merge(dataframe, prix_contrats, on = 'ident_men')
+    dataframe.loc[dataframe['bien'] == 'poste_coicop_452', 'prix'] = (
+        dataframe['prix'] * dataframe['depenses_gaz_prix_unitaire'] / moyenne_prix_gaz
+        )
+    dataframe.loc[dataframe['bien'] == 'poste_coicop_451', 'prix'] = (
+        dataframe['prix'] * dataframe['depenses_electricite_prix_unitaire'] / moyenne_prix_electricite
+        )
+
     return dataframe

@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Feb 05 14:44:17 2016
-
-@author: thomas.douenne
-"""
 
 
 from __future__ import division
@@ -179,20 +174,19 @@ for year in [2000, 2005, 2011]:
 
     dataframe['depenses_par_uc'] = dataframe['depenses_tot'] / dataframe['ocde10']
 
-    dataframe = dataframe[['ident_men', 'part_carbu', 'part_alime', 'part_autre',
-        'prix_carbu', 'prix_alime', 'prix_autre', 'depenses_par_uc', 'depenses_tot',
-        'typmen', 'strate', 'dip14pr', 'agepr', 'situapr', 'situacj', 'stalog', 'nenfants',
-        'nactifs', 'vag', 'veh_diesel', 'veh_essence']]
+    dataframe = dataframe[['ident_men', 'part_carbu', 'part_alime', 'part_autre', 'prix_carbu', 'prix_alime',
+        'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'nactifs', 'nenfants','situacj',
+        'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel', 'veh_essence']]
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la
     # nourriture ce n'est pas qu'ils n'en consomment pas, mais qu'ils n'en ont pas acheté sur la période (réserves, etc)
-    dataframe = dataframe[dataframe['prix_alime'] != 0]
+    dataframe = dataframe.query('prix_alime != 0')
 
     # On enlève les outliers, que l'on considère comme les individus dépensant plus de 25% de leur budget en carburants
     # Cela correspond à 16 et 13 personnes pour 2000 et 2005 ce qui est négligeable, mais 153 i.e. 2% des consommateurs
     # pour 2011 ce qui est assez important. Cette différence s'explique par la durée des enquêtes (1 semaine en 2011)
-    dataframe = dataframe[dataframe['part_carbu'] < 0.25]
+    dataframe = dataframe.query('part_carbu < 0.25')
 
     indices_prix_carburants = indices_prix_carbus(year)
     dataframe = pd.merge(dataframe, indices_prix_carburants, on = 'vag')

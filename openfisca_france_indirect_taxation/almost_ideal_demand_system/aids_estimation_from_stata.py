@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jun 29 12:27:47 2015
-
-@author: thomas.douenne
-"""
-
 
 from __future__ import division
 
@@ -23,13 +17,16 @@ def get_elasticities(year):
             'openfisca_france_indirect_taxation',
             'assets',
             'quaids',
-            'data_quaids_all.csv'.format(year)
+            'data_quaids_energy_no_alime_all.csv'.format(year)
             ), sep =',')
-    data_quaids = data_quaids.query('year == @year').astype('float32')
+    data_quaids = data_quaids.query('year == @year').copy()
     liste_elasticities = [column for column in data_quaids.columns if column[:4] == 'elas']
+    data_quaids[liste_elasticities] = data_quaids[liste_elasticities].astype('float32')
     dataframe = data_quaids[liste_elasticities + ['ident_men', 'year']].copy()
 
     dataframe = dataframe.fillna(0)
+    # We block the elasticities of housing energy to some value found in the literature (see Clerc and Marcus, 2009)
+    dataframe['elas_price_2_2'] = -0.1
 
     assert not dataframe.ident_men.duplicated().any(), 'Some housholds are duplicated'
 
@@ -42,7 +39,7 @@ def test():
     resultats_elasticite_uncomp = dict()
     borne_inferieure_el_dep = dict()
     borne_superieure_el_dep = dict()
-    for year in [2000]:
+    for year in ['all', 'all_no_elect_only']:
         default_config_files_directory = os.path.join(
             pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
         data_quaids = pd.read_csv(
@@ -88,10 +85,11 @@ def test():
 
         # Compute the estimation of the uncompensated price elasticities of consumption
         for i in range(1, 5):
-            resultats_elasticite_uncomp['el_uncomp_{0}_{1}'.format(i, year)] = sum(data_quaids['el_uncomp_{}'.format(i)])
+            resultats_elasticite_uncomp['el_uncomp_{0}_{1}'.format(i, year)] = \
+                sum(data_quaids['el_uncomp_{}'.format(i)])
 
 
-if __name__ =="__main__":
+if __name__ == "__main__":
     year = 2011
     df = get_elasticities(year)
     print df.dtypes

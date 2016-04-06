@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Feb 03 09:58:01 2016
-
-@author: thomas.douenne
-"""
 
 import pandas
 
