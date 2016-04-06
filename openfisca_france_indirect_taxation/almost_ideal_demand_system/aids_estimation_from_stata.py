@@ -19,13 +19,13 @@ def get_elasticities(year):
             'quaids',
             'data_quaids_energy_no_alime_all.csv'.format(year)
             ), sep =',')
-    data_quaids = data_quaids.query('year == @year')
+    data_quaids = data_quaids.query('year == @year').copy()
     liste_elasticities = [column for column in data_quaids.columns if column[:4] == 'elas']
     data_quaids[liste_elasticities] = data_quaids[liste_elasticities].astype('float32')
     dataframe = data_quaids[liste_elasticities + ['ident_men', 'year']].copy()
 
     dataframe = dataframe.fillna(0)
-    # We block the elasticities of housing energy to some value found in the literature (Clerc and Marcus, 2009)
+    # We block the elasticities of housing energy to some value found in the literature (see Clerc and Marcus, 2009)
     dataframe['elas_price_2_2'] = -0.1
 
     assert not dataframe.ident_men.duplicated().any(), 'Some housholds are duplicated'
@@ -85,10 +85,11 @@ def test():
 
         # Compute the estimation of the uncompensated price elasticities of consumption
         for i in range(1, 5):
-            resultats_elasticite_uncomp['el_uncomp_{0}_{1}'.format(i, year)] = sum(data_quaids['el_uncomp_{}'.format(i)])
+            resultats_elasticite_uncomp['el_uncomp_{0}_{1}'.format(i, year)] = \
+                sum(data_quaids['el_uncomp_{}'.format(i)])
 
 
-if __name__ =="__main__":
+if __name__ == "__main__":
     year = 2011
     df = get_elasticities(year)
     print df.dtypes
