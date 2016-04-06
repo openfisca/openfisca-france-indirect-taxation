@@ -28,8 +28,10 @@ from openfisca_core.tools import assert_near
 
 from .. import init_country
 from ..reforms import (
-    # taxes_carburants
-    alimentation
+    alimentation,
+    contribution_climat_energie,
+    taxes_carburants,
+    taxe_carbone,
     )
 
 
@@ -48,8 +50,11 @@ tax_benefit_system = TaxBenefitSystem()
 tax_benefit_system.prefill_cache()
 
 build_reform_function_by_key = {
-    # 'taxes_carburants': taxes_carburants.build_reform,
+    'contribution_climat_energie': contribution_climat_energie.build_reform,
     'test_reforme_alimentation': alimentation.build_reform,
+    'taxes_carburants': taxes_carburants.build_reform,
+    'taxe_carbone': taxe_carbone.build_reform,
+
     }
 reform_by_full_key = {}
 

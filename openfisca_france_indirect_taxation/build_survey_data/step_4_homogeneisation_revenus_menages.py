@@ -373,10 +373,10 @@ In loyers_imputes and not in revenus:
         del revenus['impot_res_ppal']
 
         loyers_imputes = temporary_store["depenses_bdf_{}".format(year)]
-        variables = ["04.2.1"]  # loyers imputés
+        variables = ["poste_coicop_04_2_1"]  # loyers imputés
         loyers_imputes = loyers_imputes[variables].copy()
         loyers_imputes.rename(
-            columns = {"04.2.1": "loyer_impute"},
+            columns = {"poste_coicop_04_2_1": "loyer_impute"},
             inplace = True,
             )
         temporary_store["loyers_imputes_{}".format(year)] = loyers_imputes

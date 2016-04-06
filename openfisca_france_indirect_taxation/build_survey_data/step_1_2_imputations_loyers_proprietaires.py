@@ -136,7 +136,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         loyers_imputes.rename(
             columns = {
                 'ident': 'ident_men',
-                'rev81': '04.2.1',
+                'rev81': 'poste_coicop_04_2_1',
                 },
             inplace = True,
             )
@@ -146,7 +146,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         loyers_imputes = survey.get_values(table = "menage")
         kept_variables = ['ident_men', 'rev801_d']
         loyers_imputes = loyers_imputes[kept_variables]
-        loyers_imputes.rename(columns = {'rev801_d': '04.2.1'}, inplace = True)
+        loyers_imputes.rename(columns = {'rev801_d': 'poste_coicop_04_2_1'}, inplace = True)
 
     if year == 2011:
         try:
@@ -157,8 +157,9 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         kept_variables = ['ident_me', 'rev801']
         loyers_imputes = loyers_imputes[kept_variables]
         loyers_imputes.rename(
-            columns = {'rev801': '04.2.1', 'ident_me': 'ident_men'},
-            inplace = True)
+            columns = {'rev801': 'poste_coicop_04_2_1', 'ident_me': 'ident_men'},
+            inplace = True,
+	    )
 
     # Joindre à la table des dépenses par COICOP
     loyers_imputes.set_index('ident_men', inplace = True)

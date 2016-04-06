@@ -236,6 +236,7 @@ def compute_kantar_elasticities(compute = False):
         print "revenus = {} : \n {}".format(revenus, nomk_cross_price_elasticity.revenus.value_counts())
 
 
+    nomk_cross_price_elasticity.set_index(['age', 'revenus', 'nomk'])
     nomk_cross_price_elasticity.to_csv(kantar_cross_price_elasticities_path)
     return nomk_cross_price_elasticity
 

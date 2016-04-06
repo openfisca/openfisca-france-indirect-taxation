@@ -23,7 +23,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from openfisca_core.columns import AgeCol, DateCol, FloatCol, IntCol, EnumCol
+from openfisca_core.columns import AgeCol, DateCol, FloatCol, IntCol, EnumCol, StrCol
 from openfisca_core.enumerations import Enum
 from openfisca_core.formulas import dated_function, DatedVariable, Variable
 from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
