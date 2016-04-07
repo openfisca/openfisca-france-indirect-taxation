@@ -136,5 +136,4 @@ def preload_categories_fiscales_data_frame():
         categories_fiscales_data_frame = codes_coicop_data_frame[
             ['code_coicop', 'code_bdf', 'categorie_fiscale', 'start', 'stop']
             ].copy().fillna('')
-
         generate_variables(categories_fiscales = categories_fiscales_data_frame)

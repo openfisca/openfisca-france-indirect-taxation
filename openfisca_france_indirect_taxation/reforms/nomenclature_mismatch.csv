@@ -1,18 +1,18 @@
 nomf,nomc,categorie_fiscale,sante,environnement,mixte,tva_sociale
-10 : Plant-based foods high in sugar,1115 : Autres cÃ©rÃ©ales et produits Ã  base de cÃ©rÃ©ales,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+10 : Plant-based foods high in sugar,1115 : Autres céréales et produits à base de céréales,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
 10 : Plant-based foods high in sugar,1181 : sucre,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
-10 : Plant-based foods high in sugar,"1182 : confitures, compote, gelÃ©es, purÃ©es et pÃ¢tes de fruits, miel",tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+10 : Plant-based foods high in sugar,"1182 : confitures, compote, gelées, purées et pâtes de fruits, miel",tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
 10 : Plant-based foods high in sugar,1183 : chocolat,tva_taux_plein,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
 10 : Plant-based foods high in sugar,"1184 : sucreries, bonbons et autres confiseries",tva_taux_plein,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
 10 : Plant-based foods high in sugar,1213 : cacao et chocolat en poudre,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
 16 : Animal-based foods high in fats,1191 : sauces et condiments,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
 16 : Animal-based foods high in fats,1155 : saindoux et autres graisses d'origine animale,tva_taux_plein,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
 16 : Animal-based foods high in fats,1151 : Beurre,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
-16 : Animal-based foods high in fats,"1146 : Autres produits laitiers (dessert Ã  base de lait, crÃ¨me fraÃ®che, lait aromatisÃ©)",tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
-16 : Animal-based foods high in fats,"1125 : Viande sÃ©chÃ©e salÃ©e ou fumÃ©e, charcuterie et abats, frais ou surgelÃ©",tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+16 : Animal-based foods high in fats,"1146 : Autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisé)",tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+16 : Animal-based foods high in fats,"1125 : Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé",tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
 3 : Soft drinks,1222 : boissons gazeuses,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
-3 : Soft drinks,"1223 : jus de fruits et de lÃ©gumes, sirops, boissons aromatisÃ©es",tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
-3 : Soft drinks,2131 : biÃ¨re et boissons Ã  base de biÃ¨re,biere,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
-8 : Plant-based foods high in fats,1152 : Margarine et autres graisses vÃ©gÃ©tales,tva_taux_plein,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+3 : Soft drinks,"1223 : jus de fruits et de légumes, sirops, boissons aromatisées",tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+3 : Soft drinks,2131 : bière et boissons à base de bière,biere,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+8 : Plant-based foods high in fats,1152 : Margarine et autres graisses végétales,tva_taux_plein,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
 8 : Plant-based foods high in fats,1153 : Huiles alimentaires d'olive,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
-8 : Plant-based foods high in fats,"1154 : Huiles alimentaires d'arachide, de tournesol, de maÃ¯s, colza",tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+8 : Plant-based foods high in fats,"1154 : Huiles alimentaires d'arachide, de tournesol, de maïs, colza",tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
