@@ -103,7 +103,6 @@ class SurveyScenario(AbstractSurveyScenario):
             survey_scenario.calibrate(**calibration_kwargs)
 
         if inflation_kwargs:
-            print 'inflating using {}'.format(inflation_kwargs)
             survey_scenario.inflate(**inflation_kwargs)
 
         return survey_scenario

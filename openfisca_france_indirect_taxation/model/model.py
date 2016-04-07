@@ -31,6 +31,7 @@ from .consommation import (  # noqa analysis:ignore
     categories_fiscales,
     consommation_menages,
     depenses_energies,
+    depenses_inflatees,
     emissions_co2,
     postes_coicop,
     quantites_energie,
