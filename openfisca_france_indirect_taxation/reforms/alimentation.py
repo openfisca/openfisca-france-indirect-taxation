@@ -3,8 +3,7 @@
 from __future__ import division
 
 
-from numpy import logical_not as not_, minimum as min_
-from openfisca_core import columns, reforms
+from openfisca_core import reforms
 
 from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import generate_variables
 

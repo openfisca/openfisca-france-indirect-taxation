@@ -78,6 +78,7 @@ def add_poste_coicop(aliss):
     aliss.replace(to_replace = dict(poste_coicop = formatted_poste_by_poste_bdf), inplace = True)
     return aliss
 
+
 def compute_expenses():
     # aliss/kantar data
     aliss = build_clean_aliss_data_frame()
@@ -112,7 +113,7 @@ def compute_expenses():
 
     return depenses
 
-1
+
 def compute_kantar_elasticities(compute = False):
     aliss = build_clean_aliss_data_frame()
     kantar_cross_price_elasticities_path = os.path.join(
@@ -246,8 +247,7 @@ def compute_expenses_coefficient():
 
 
 
-if __name__ == '__main__':
-
+def wip():
     aliss_uncomplete = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss_uncomplete)
     aliss_extract = aliss[['nomk', 'poste_bdf', 'poste_coicop']].copy()
@@ -292,4 +292,38 @@ if __name__ == '__main__':
 
     assert matrix.shape == (110, 110)
     # depenses= compute_expenses()
+
+
+
+
+if __name__ == '__main__':
+
+    aliss_uncomplete = build_clean_aliss_data_frame()
+    aliss = add_poste_coicop(aliss_uncomplete)
+    aliss_extract = aliss[['nomf', 'nomk', 'nomc', 'poste_bdf', 'poste_coicop']].copy()
+    aliss_extract.drop_duplicates(inplace = True)
+    year = 2011
+
+    check = aliss_extract[['nomf', 'nomc']]
+    check.groupby(['nomc']).filter(
+        lambda x: x.nomf.nunique() > 1
+        )[''].unique()
+
+    legislation_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'legislation',
+        )
+    codes_coicop_data_frame = pandas.read_csv(
+        os.path.join(legislation_directory, 'coicop_legislation.csv'),
+        )
+    legislation = codes_coicop_data_frame[['code_bdf', 'categorie_fiscale']].copy()
+    legislation.rename(columns = {'code_bdf': 'poste_bdf'}, inplace = True)
+    df = aliss_extract.merge(legislation)
+    x = df.groupby(['nomf']).filter(
+        lambda x: x.categorie_fiscale.nunique() > 1
+        )[['nomf', 'poste_coicop', 'nomc', 'categorie_fiscale']].sort_values('nomf')
+
+    df.groupby(['nomf', 'poste_coicop', 'nomc'])['categorie_fiscale'].unique()
 

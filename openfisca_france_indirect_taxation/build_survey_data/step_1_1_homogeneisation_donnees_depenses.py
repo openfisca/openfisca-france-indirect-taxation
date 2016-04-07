@@ -133,7 +133,6 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
         del conso['ctot']
 
     # Grouping by coicop
-
     poids = conso[['ident_men', 'pondmen']].copy()
     poids.set_index('ident_men', inplace = True)
     conso.drop('pondmen', axis = 1, inplace = True)
@@ -152,93 +151,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     formatted_poste_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['formatted_poste']
     coicop_data_frame = conso.rename(columns = formatted_poste_by_poste_bdf)
     depenses = coicop_data_frame.merge(poids, left_index = True, right_index = True)
-
-#    # Création de gros postes, les 12 postes sur lesquels le calage se fera
-#    def select_gros_postes(coicop):    
-#        try:
-#            coicop = unicode(coicop)
-#        except:
-#            coicop = coicop
-#        normalized_coicop = normalize_code_coicop(coicop)
-#        grosposte = normalized_coicop[0:2]
-#        return int(grosposte)
-#
-#    grospostes = [
-#        select_gros_postes(coicop)
-#        for coicop in coicop_data_frame.columns
-#        ]
-#    tuples_gros_poste = zip(coicop_data_frame.columns, grospostes)
-#    coicop_data_frame.columns = pandas.MultiIndex.from_tuples(tuples_gros_poste, names=['coicop', 'grosposte'])
-#
-#    depenses_by_grosposte = coicop_data_frame.groupby(level = 1, axis = 1).sum()
-#    depenses_by_grosposte = depenses_by_grosposte.merge(poids, left_index = True, right_index = True)
-#
-#    # TODO : understand why it does not work: depenses.rename(columns = {u'0421': 'poste_coicop_421'}, inplace = True)
-#
-#    produits = [column for column in depenses.columns if column.isdigit()]
-#    for code in produits:
-#        if code[-1:] == '0':
-#            depenses.rename(columns = {code: code[:-1]}, inplace = True)
-#        else:
-#            depenses.rename(columns = {code: code}, inplace = True)
-#    produits = [column for column in depenses.columns if column.isdigit()]
-#    for code in produits:
-#        if code[0:1] == '0':
-#            depenses.rename(columns = {code: code[1:]}, inplace = True)
-#        else:
-#            depenses.rename(columns = {code: code}, inplace = True)
-#    produits = [column for column in depenses.columns if column.isdigit()]
-#    for code in produits:
-#        depenses.rename(columns = {code: 'poste_coicop_' + code}, inplace = True)
-
     temporary_store['depenses_{}'.format(year)] = depenses
-
-#    depenses_by_grosposte.columns = depenses_by_grosposte.columns.astype(str)
-#    liste_grospostes = [column for column in depenses_by_grosposte.columns if column.isdigit()]
-#    for grosposte in liste_grospostes:
-#        depenses_by_grosposte.rename(columns = {grosposte: 'coicop12_' + grosposte}, inplace = True)
-#
-#    temporary_store['depenses_by_grosposte_{}'.format(year)] = depenses_by_grosposte
-
-#def normalize_code_coicop(code):
-#    '''Normalize_coicop est function d'harmonisation de la colonne d'entiers posteCOICOP de la table
-#matrice_passage_data_frame en la transformant en une chaine de 5 caractères afin de pouvoir par la suite agréger les postes
-#COICOP selon les 12 postes agrégés de la nomenclature de la comptabilité nationale. Chaque poste contient 5 caractères,
-#les deux premiers (entre 01 et 12) correspondent à ces postes agrégés de la CN.
-#
-#    '''
-#    # TODO: vérifier la formule !!!
-#
-#    try:
-#        code = unicode(code)
-#    except:
-#        code = code
-#    if len(code) == 3:
-#        code_coicop = "0" + code + "0"  # "{0}{1}{0}".format(0, code)
-#    elif len(code) == 4:
-#        if not code.startswith("0") and not code.startswith("1") and not code.startswith("45") and not code.startswith("9"):
-#            code_coicop = "0" + code
-#            # 022.. = cigarettes et tabacs => on les range avec l'alcool (021.0)
-#        elif code.startswith("0"):
-#            code_coicop = code + "0"
-#        elif code in ["1151", "1181", "4552", "4522", "4511", "9122", "9151", "9211", "9341", "1411"]:
-#            # 1151 = Margarines et autres graisses végétales
-#            # 1181 = Confiserie
-#            # 04522 = Achat de butane, propane
-#            # 04511 = Facture EDF GDF non dissociables
-#            code_coicop = "0" + code
-#        else:
-#            # 99 = loyer, impots et taxes, cadeaux...
-#            code_coicop = code + "0"
-#    elif len(code) == 5:
-#        if not code.startswith("13") and not code.startswith("44") and not code.startswith("51"):
-#            code_coicop = code
-#        else:
-#            code_coicop = "99000"
-#    else:
-#        log.error("Problematic code {}".format(code))
-#        raise()
-#    return code_coicop
 
 
 if __name__ == '__main__':

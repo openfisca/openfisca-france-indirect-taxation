@@ -137,7 +137,8 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
 
     # On ne garde que les ménages métropolitaines
     if year_data == 2011:
-        data_frame = data_frame.query('zeat != 0')
+        # data_frame = data_frame.query('zeat != 0')
+        pass
 
     try:
         data_frame.reset_index(inplace = True)
