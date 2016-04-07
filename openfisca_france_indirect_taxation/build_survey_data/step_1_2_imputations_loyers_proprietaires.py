@@ -70,7 +70,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         imput00 = imput00[kept_variables]
         imput00.rename(columns = {'mena': 'ident_men'}, inplace = True)
 
-        #TODO: continue variable cleaning
+        # TODO: continue variable cleaning
         var_to_filnas = ['surfhab']
         for var_to_filna in var_to_filnas:
             imput00[var_to_filna] = imput00[var_to_filna].fillna(0)
@@ -119,7 +119,6 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         except:
             hotdeck = survey.get_values(table = 'hotdeck_result')
 
-
         imput00.reset_index(inplace = True)
         hotdeck.ident_men = hotdeck.ident_men.astype('int')
         imput00 = imput00.merge(hotdeck, on = 'ident_men')
@@ -155,11 +154,11 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
             loyers_imputes = survey.get_values(table = "menage")
 
         kept_variables = ['ident_me', 'rev801']
-        loyers_imputes = loyers_imputes[kept_variables]
+        loyers_imputes = loyers_imputes[kept_variables].copy()
         loyers_imputes.rename(
             columns = {'rev801': 'poste_coicop_04_2_1', 'ident_me': 'ident_men'},
-            inplace = True,
-	    )
+            inplace = True
+            )
 
     # Joindre à la table des dépenses par COICOP
     loyers_imputes.set_index('ident_men', inplace = True)

@@ -105,6 +105,7 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
         vehicule["pourcentage_vehicule_essence"] = 0
         vehicule.loc[vehicule.veh_tot != 0, 'pourcentage_vehicule_essence'] = vehicule.veh_essence / vehicule.veh_tot
         # Save in temporary store
+        vehicule.index = vehicule.index.astype(ident_men_dtype)
         temporary_store['automobile_{}'.format(year)] = vehicule
 
 if __name__ == '__main__':

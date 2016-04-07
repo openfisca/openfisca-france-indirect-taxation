@@ -5,6 +5,9 @@
      poste_09_5_2_1_1: 50
    output_variables:
      depenses_tva_taux_super_reduit: 150
+     poste_06: 100
+     poste_09: 50
+
  - name: "Catégorie fiscale : pas de taxe"
    period: "2010"
    input_variables:

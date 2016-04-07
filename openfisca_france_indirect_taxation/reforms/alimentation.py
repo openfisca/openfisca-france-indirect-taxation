@@ -16,8 +16,6 @@ def build_reform(tax_benefit_system):
         reference = tax_benefit_system,
         )
     from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import categories_fiscales_data_frame
-    print categories_fiscales_data_frame.query("categorie_fiscale == 'tva_taux_super_reduit'")
-    print categories_fiscales_data_frame.query("categorie_fiscale == 'vin'")
     categories_fiscales = categories_fiscales_data_frame.copy()
     categories_fiscales.loc[
         (categories_fiscales.categorie_fiscale == 'tva_taux_super_reduit') & (
@@ -28,8 +26,6 @@ def build_reform(tax_benefit_system):
         categories_fiscales.categorie_fiscale == 'vin',
         'categorie_fiscale'
         ] = ''
-    print categories_fiscales.query("categorie_fiscale == 'tva_taux_super_reduit'")
-    print categories_fiscales.query("categorie_fiscale == 'vin'")
 
     generate_variables(
         categories_fiscales = categories_fiscales,

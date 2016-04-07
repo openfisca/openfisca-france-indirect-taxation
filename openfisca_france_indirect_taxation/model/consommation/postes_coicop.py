@@ -50,6 +50,30 @@ def generate_variables():
             ))
 
 
+def generate_aggregated_variables():
+    from categories_fiscales import function_creator
+    codes_bdf = [element for element in codes_coicop_data_frame.code_bdf.unique()]
+    for num_prefix in ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]:
+        codes_coicop = codes_coicop_data_frame.loc[
+            codes_coicop_data_frame.code_coicop.str.startswith(num_prefix)
+            ]['code_coicop'].drop_duplicates().tolist()
+        class_name = u"poste_agrege_{}".format(num_prefix)
+        log.info(u'Creating variable {} with label {} using {}'.format(class_name, num_prefix, codes_coicop))
+
+        # Trick to create a class with a dynamic name.
+        dated_func = function_creator(codes_coicop)
+        functions_by_name = dict(fucntion = dated_func)
+        label = u"Poste agrégé {}".format(num_prefix)
+        definitions_by_name = dict(
+            column = FloatCol,
+            entity_class = Menages,
+            label = label,
+            )
+        definitions_by_name.update(functions_by_name)
+        type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+        del definitions_by_name
+
+
 def preload_postes_coicop_data_frame():
     global codes_coicop_data_frame
     if codes_coicop_data_frame is None:
@@ -62,3 +86,4 @@ def preload_postes_coicop_data_frame():
             codes_coicop_data_frame.code_coicop.str[:2].astype(int) <= 12
             ].copy()
         generate_variables()
+        generate_aggregated_variables()
