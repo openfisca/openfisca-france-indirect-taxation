@@ -1,0 +1,10 @@
+ - name: "Test différents taux de TVA "
+   period: "2013"
+   input_variables:
+     poste_06_1_1_1_1: 100  # tva_taux_super_reduit mais non imposé dans réforme
+     poste_09_5_2_1_1: 100  # tva_taux_super_reduit
+     poste_02_1_2_1_1: 100  # vin mais non imposé dans réforme (catégorie fiscale inexistante)
+
+   output_variables:
+     depenses_vin: 0
+     tva_taux_super_reduit: 100 * 0.021 / (1 + 0.021)

@@ -303,9 +303,9 @@ def build_df_calee_on_ticpe(dataframe, year_calage = None, year_data = None):
     masses_ticpe_cn = int(
         masses_cn_12postes_data_frame[year_calage][masses_cn_12postes_data_frame['Code'] == '            07.2.2'].values
         )
-    masses_ticpe_bdf = (dataframe['poste_coicop_722'] * dataframe['pondmen']).sum() / 1e6
+    masses_ticpe_bdf = (dataframe['poste_coicop_07_2_2_1_1'] * dataframe['pondmen']).sum() / 1e6
     ratio_ticpe = masses_ticpe_cn / masses_ticpe_bdf
-    dataframe['poste_coicop_722'] = dataframe['poste_coicop_722'] * ratio_ticpe
-    dataframe_calee['poste_coicop_722'] = dataframe['poste_coicop_722']
+    dataframe['poste_coicop_07_2_2_1_1'] = dataframe['poste_coicop_07_2_2_1_1'] * ratio_ticpe
+    dataframe_calee['poste_coicop_07_2_2_1_1'] = dataframe['poste_coicop_07_2_2_1_1']
 
     return dataframe_calee

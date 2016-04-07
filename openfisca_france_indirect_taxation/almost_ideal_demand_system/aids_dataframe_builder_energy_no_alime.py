@@ -54,7 +54,7 @@ for year in [2000, 2005, 2011]:
     produits = [column for column in aggregates_data_frame.columns if column[:13] == 'poste_coicop_']
     del column
 
-    aggregates_data_frame['depenses_carbu'] = aggregates_data_frame['poste_coicop_722']
+    aggregates_data_frame['depenses_carbu'] = aggregates_data_frame['poste_coicop_07_2_2_1_1']
 
     aggregates_data_frame['depenses_logem'] = 0
     for logem in energie_logement:
@@ -91,7 +91,7 @@ for year in [2000, 2005, 2011]:
     # df_depenses_prix contient les dépenses de consommation et les prix associés à ces dépenses.
     # Il faut maintenant construire les catégories de biens que l'on souhaite comparer.
     df_depenses_prix['type_bien'] = 'autre'
-    df_depenses_prix.loc[df_depenses_prix['bien'] == 'poste_coicop_722', 'type_bien'] = 'carbu'
+    df_depenses_prix.loc[df_depenses_prix['bien'] == 'poste_coicop_07_2_2_1_1', 'type_bien'] = 'carbu'
     for logem in energie_logement:
         df_depenses_prix.loc[df_depenses_prix['bien'] == logem, 'type_bien'] = 'logem'
     del logem, produit

@@ -57,7 +57,7 @@ for year in [2000, 2005, 2011]:
 
     aggregates_data_frame['depenses_alime'] = sum(aggregates_data_frame[alime] for alime in produits_alimentaire)
 
-    aggregates_data_frame['depenses_carbu'] = aggregates_data_frame['poste_coicop_722']
+    aggregates_data_frame['depenses_carbu'] = aggregates_data_frame['poste_coicop_07_2_2_1_1']
 
     aggregates_data_frame['depenses_tot'] = 0
     for produit in produits:
@@ -87,7 +87,7 @@ for year in [2000, 2005, 2011]:
     # df_depenses_prix contient les dépenses de consommation et les prix associés à ces dépenses.
     # Il faut maintenant construire les catégories de biens que l'on souhaite comparer.
     df_depenses_prix['type_bien'] = 'autre'
-    df_depenses_prix.loc[df_depenses_prix['bien'] == 'poste_coicop_722', 'type_bien'] = 'carbu'
+    df_depenses_prix.loc[df_depenses_prix['bien'] == 'poste_coicop_07_2_2_1_1', 'type_bien'] = 'carbu'
     for alime in produits_alimentaire:
         df_depenses_prix.loc[df_depenses_prix['bien'] == alime, 'type_bien'] = 'alime'
     del alime, produit

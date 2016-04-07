@@ -1,0 +1,367 @@
+F
+======================================================================
+FAIL: test_alimentation.test_reforme_alimentation
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/nose/case.py", line 197, in runTest
+    self.test(*self.arg)
+  File "/home/benjello/openfisca/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/tests/reforms/test_alimentation.py", line 33, in test_reforme_alimentation
+    absolute_error_margin = absolute_error_margin
+  File "/home/benjello/openfisca/openfisca-core/openfisca_core/tools.py", line 38, in assert_near
+    abs(target_value - value), absolute_error_margin)
+AssertionError: [ 2.0568068] differs from 2.1 with an absolute margin [ 0.0431931] > 0.01
+-------------------- >> begin captured stdout << ---------------------
+      code_coicop code_bdf       categorie_fiscale  start  stop
+0      01.1.1.1.1   c01112         tva_taux_reduit   1994  2014
+5      01.1.1.3.3   c01114         tva_taux_reduit   1994  2014
+6      01.1.1.4.1   c01115         tva_taux_reduit   1994  2014
+7      01.1.1.4.2   c01113         tva_taux_reduit   1994  2014
+8      01.1.1.4.3   c01111         tva_taux_reduit   1994  2014
+10     01.1.2.1.1   c01121         tva_taux_reduit   1994  2014
+15     01.1.2.3.1   c01123         tva_taux_reduit   1994  2014
+17     01.1.2.4.1   c01122         tva_taux_reduit   1994  2014
+18     01.1.2.4.2   c01125         tva_taux_reduit   1994  2014
+23     01.1.2.5.1   c01124         tva_taux_reduit   1994  2014
+26     01.1.2.6.1   c01127         tva_taux_reduit   1994  2014
+28     01.1.2.6.3   c01126         tva_taux_reduit   1994  2014
+29     01.1.3.1.1   c01130         tva_taux_reduit   1994  2014
+30     01.1.3.1.2   c01132         tva_taux_reduit   1994  2014
+31   01.1.3.2.1.a   c01131         tva_taux_reduit   1994  2014
+32   01.1.3.2.1.b   c01133         tva_taux_reduit   1994  2014
+33     01.1.3.2.2   c01134         tva_taux_reduit   1994  2014
+34   01.1.4.1.1.a   c01141         tva_taux_reduit   1994  2014
+35   01.1.4.1.1.b   c01142         tva_taux_reduit   1994  2014
+36   01.1.4.1.1.c   c01143         tva_taux_reduit   1994  2014
+38     01.1.4.2.1   c01144         tva_taux_reduit   1994  2014
+39     01.1.4.2.2   c01146         tva_taux_reduit   1994  2014
+40     01.1.4.3.1   c01145         tva_taux_reduit   1994  2014
+45     01.1.4.4.1   c01147         tva_taux_reduit   1994  2014
+46     01.1.5.1.1   c01151         tva_taux_reduit   1994  2014
+47   01.1.5.2.1.a   c01153         tva_taux_reduit   1994  2014
+48   01.1.5.2.1.b   c01154         tva_taux_reduit   1994  2014
+49   01.1.5.2.2.a   c01152          tva_taux_plein   1994  2014
+50   01.1.5.2.2.b   c01155          tva_taux_plein   1994  2014
+52   01.1.6.1.1.a   c01161         tva_taux_reduit   1994  2014
+..            ...      ...                     ...    ...   ...
+352    11.1.1.1.1   c11111         tva_taux_reduit   2010  2011
+353    11.1.1.1.1   c11111          tva_taux_plein   1994  2009
+354    11.1.1.1.2   c11112  tva_taux_intermediaire   2012  2014
+355    11.1.1.1.2   c11112         tva_taux_reduit   1998  2011
+356    11.1.1.1.2   c11112          tva_taux_plein   1994  1997
+362    11.1.2.1.1   c11121                           1994  2014
+364      11.1.3.1   c11131         tva_taux_reduit   1994  2014
+365      11.1.3.2   c11132         tva_taux_reduit   1994  2014
+366    11.2.1.1.1   c11211         tva_taux_reduit   1994  2011
+367    11.2.1.1.1   c11211  tva_taux_intermediaire   2012  2014
+376    12.1.1.1.1   c12111          tva_taux_plein   1994  2014
+381    12.1.3.2.1   c12122          tva_taux_plein   1994  2014
+385    12.1.3.3.3   c12121          tva_taux_plein   1994  2014
+387    12.3.1.1.1   c12311          tva_taux_plein   1994  2014
+389    12.3.2.1.1   c12321          tva_taux_plein   1994  2014
+391    12.3.2.2.2   c12322          tva_taux_plein   1994  2014
+393    12.3.3.1.1   c12331          tva_taux_plein   1994  2014
+394    12.4.1.1.1   c12411         tva_taux_reduit   2000  2011
+395    12.4.1.1.1   c12411  tva_taux_intermediaire   2012  2014
+396    12.4.1.1.1   c12411          tva_taux_plein   1994  1999
+403    12.5.1.1.1   c12511       autres_assurances   1994  2014
+404    12.5.2.1.1   c12521       autres_assurances   1994  2014
+405    12.5.3.1.1   c12531         assurance_sante   1994  2014
+406    12.5.4.1.1   c12541     assurance_transport   1994  2014
+407    12.5.5.1.1   c12551       autres_assurances   1994  2014
+408    12.6.1.1.1   c12611                           1994  2014
+409    12.7.1.1.1   c12711          tva_taux_plein   1994  2014
+410    12.7.1.2.1   c12712          tva_taux_plein   1994  2014
+413        12.8.1   c12811          tva_taux_plein   1994  2014
+414      12.9.1.1   c12911          tva_taux_plein   1994  2014
+
+[255 rows x 5 columns]
+
+--------------------- >> end captured stdout << ----------------------
+-------------------- >> begin captured logging << --------------------
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_1_1_1 with label Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_1_3_3 with label Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quich
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_1_4_1 with label Autres céréales et produits à base de céréales yc farine, semoule, céréales peti
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_1_4_2 with label Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_1_4_3 with label Riz sous toutes ses formes et produits à base de riz
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_2_1_1 with label Viande bovine fraîche ou surgelée
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_2_3_1 with label Viande ovine ou caprine fraîche ou surgelée
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_2_4_1 with label Viande porcine fraîche ou surgelée
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_2_4_2 with label Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, sa
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_2_5_1 with label Viande de volaille fraîche ou surgelée
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_2_6_1 with label Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc anim
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_2_6_3 with label Conserve de viande, produit de transformation des viandes, plat préparé de viand
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_3_1_1 with label Poissons frais
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_3_1_2 with label Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_3_2_1_a with label Poissons surgelés ou congelés (hors poissons panés ou cuisinés)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_3_2_1_b with label Poissons et fruits de mer salés, fumés, séchés yc surgelé
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_3_2_2 with label Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_4_1_1_a with label Lait entier
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_4_1_1_b with label Lait demi-écrémé, écrémé
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_4_1_1_c with label Lait de conserve
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_4_2_1 with label Yaourts, fromage blanc et petits suisses yc de soja
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_4_2_2 with label Autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisé)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_4_3_1 with label Fromage et lait caillé
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_4_4_1 with label Oeufs
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_5_1_1 with label Beurre
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_5_2_1_a with label Huiles alimentaires d'olive
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_5_2_1_b with label Huiles alimentaires d'arachide, de tournesol, de maïs, colza
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_5_2_2_a with label Margarine, allégés et autres graisses végétales
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_5_2_2_b with label saindoux et autres graisses d'origine animale
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_6_1_1_a with label agrumes (frais ou congelés)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_6_1_1_b with label bananes fraiches
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_6_1_1_c with label pommes
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_6_1_1_d with label poires
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_6_2_1_a with label fruits à noyaux (frais ou congelés)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_6_2_1_b with label baies (fraîches ou congelées)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_6_2_1_c with label autres fruits, fruits tropicaux (frais ou congelés)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_6_2_1_d with label fruits séchés
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_6_2_1_e with label fruits au sirop et fruits surgelés
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_7_1_1_a with label légumes frais à feuilles et à tiges, herbes aromatiques (frais)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_7_1_1_b with label choux (frais)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_7_1_1_c with label légumes frais cultivés pour leurs fruits
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_7_1_1_d with label racines alimentaires fraiches et champignons frais
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_7_2_1_a with label légumes secs
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_7_2_1_b with label légumes surgelés (non cuisinés)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_7_2_1_c with label légumes et plats à base de légume, en conserve (sans pommes de terre)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_7_2_2 with label pomme de terre, autres tubercules, produits à base de pommes de terre et tubercu
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_7_2_3 with label légumes préparés et plats à base de légumes, frais et surgelés
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_8_1_1_a with label sucre
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_8_1_1_b with label autres produits à base de sucre
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_8_1_1_c with label autres produits alimentaires
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_8_1_2 with label confitures, marmelade, compote, gelées, purées et pâtes de fruits, miel
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_8_1_3 with label sucreries, bonbons et autres confiseries
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_8_2_1 with label chocolat
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_8_3_1 with label crèmes glacées, sorbets, entremets glacés
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_9_1_1_a with label sauces et condiments
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_9_1_1_b with label sel et épices sèches
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_9_3_2 with label levure , préparations pour desserts, soupes
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_1_9_5 with label Panier alimentaire
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_10_1 with label autres dépenses d'alimentation : cérémonies, séjours hors domicile, personne viv
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_10_2 with label autres dépenses d'alimentation : cadeau offert (à destination d'un autre ménage
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_2_1_1_1 with label cacao et chocolat en poudre
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_2_1_2_1 with label café
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_2_1_3_1 with label thé et plantes à infusion
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_2_2_1_1 with label eaux minérales
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_2_2_2_1 with label jus de légumes
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_2_2_2_2 with label boissons gazeuses
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_01_2_2_2_3 with label jus de fruits et de légumes, sirops, boissons aromatisées
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_02_1_1_1_1 with label spiritueux et liqueurs
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_02_1_2_1_1 with label vins et cidres
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_02_1_2_2_1 with label autres apéritifs à base de vin, champagne et autres mousseux, saké et autres
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_02_1_3_1_1 with label bière et boissons à base de bière
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_02_2_1 with label cigarettes
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_02_2_2 with label cigares et cigarillos
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_02_2_3 with label tabac sous d'autres formes et produits connexes
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_02_3 with label Stupéfiants 
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_02_4 with label Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_03_1_1_1_1 with label Tissus pour vêtements
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_03_1_2_1_1 with label Vêtements pour homme
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_03_1_2_2_1 with label Vêtements pour femme
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_03_1_2_3_1 with label Vêtements pour enfant (3 à 13 ans)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_03_1_3_1_1 with label Accessoires du vêtement et mercerie
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_03_1_4_1_1 with label Nettoyage, réparation et location de vêtements
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_03_2_1_1_1 with label Chaussures pour homme
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_03_2_1_1_2 with label Chaussures pour femme
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_03_2_1_1_3 with label Chaussures pour enfant (3 à 13 ans)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_03_2_1_2_3 with label Réparation et location de chaussures
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_03_3_1 with label Autres dépenses d'habillement : cérémonie, séjours hors domicile, personnes viva
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_03_3_2 with label Autres dépenses d’habillement : cadeau offert (à destination d’un autre  ménage)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_1_1_1_1 with label Loyers (hors charges ou avec charges non isolables) des locataires résidence pri
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_1_1_2_1 with label Loyers (hors charges ou avec charges non isolables) des locataires autres réside
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_3_1_1_1 with label Produits destinés aux travaux courants d’entretien et de réparation du logement 
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_3_2_2_1 with label Services d'entretien et petites réparation dans le logement (plombier, entretien
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_4_1_1_1 with label Factures d’eau résidence principale, autre logement, dépendance, terrain
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_4_1_2_1 with label Redevance d’enlèvement des ordures
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_4_1_3_1 with label Services d’assainissement
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_4_1_4_1 with label Charges collectives relatives au logement (payées isolément du loyer ou crédit)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_5_1_1_1_a with label Facture électricité + gaz (non dissociables)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_5_1_1_1_b with label Facture d'électricité résidence principale, autre logement, garage, dépendance
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_5_2_1_1 with label Facture de gaz résidence principale, autre logement
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_5_2_2_1 with label Achats de butane, propane résidence principale, autre logement
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_5_3_1_1 with label Combustibles liquides pour la résidence principale : fuel, mazout, pétrole
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_5_4_1_1 with label Combustible solide résidence principale
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_5_5_1_1 with label Chauffage urbain (par vapeur)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_5_5_2 with label Glace
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_04_6 with label Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_1_1_0 with label Meubles informatiques
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_1_1_1_2 with label Mobilier de chambre (lit, armoire, commode, chevet, bureau enfant, sommier) yc m
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_1_1_2_2 with label Mobilier de séjour (buffet, bahut, bibliothèque, etc.)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_1_1_2_3 with label Tables, sièges, chaises hors cuisine et salle de bain
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_1_1_3_1 with label Mobilier de cuisine et de salle de bain yc éléments intégrés ou non, tabourets, 
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_1_1_5_1 with label Autres meubles, accessoires du mobilier (yc luminaires, décoration, équipement e
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_1_1_5_3 with label Mobilier de jardin (balancelle, table, fauteuil, abri de jardin, portique, etc.)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_1_1_5_4 with label Réparation de meubles
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_1_2_1_1 with label Tapis et autres revêtements de sol (lino, moquette, etc.), pose et réparation de
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_2_1_1_3 with label Articles de literie (futons, oreillers, couettes, couvertures, draps, alèses, et
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_2_1_2_1 with label Autres articles de ménage en textile (tissu d'ameublement, voilages, linge de ma
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_3_1_1_1 with label Lave linge, sèche linge et lave vaisselle
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_3_1_2_1 with label Gros appareils de cuisson
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_3_1_3_1 with label Réfrigérateurs, congélateurs et caves à vin
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_3_1_4_1_a with label Appareils de nettoyage (aspirateur, nettoyeur vapeur etc.)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_3_1_4_1_b with label Machine à coudre et à tricoter
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_3_1_4_1_c with label Autres gros appareils ménagers
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_3_1_4_2 with label Appareils de chauffage et de climatisation et autres gros appareils électroménag
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_3_2_1_1 with label Petit électroménager
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_3_3_1_1_a with label Réparation et entretien des appareils électroménagers
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_3_3_1_1_b with label Réparation et entretien verrerie, vaisselle et autres ustensiles de cuisine
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_4_1_1_2 with label Verrerie et cristallerie, vaisselle, articles de ménage ou de toilette en faïenc
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_4_1_2_1 with label Coutellerie et argenterie
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_4_1_3_1 with label Ustensiles de cuisine et autres articles de ménage
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_5_1_1_1_a with label Gros outillage de bricolage
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_5_1_1_1_b with label Gros outillage de jardinage
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_5_1_1_4 with label Petit outillage et accessoires divers de jardinage, matériaux d'aménagement exté
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_5_1_1_5 with label Petit outillage et accessoires divers de bricolage yc petit matériel électrique 
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_5_1_3 with label Réparation du gros outillage
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_5_2_3 with label Réparation des petits outillages
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_6_1_2 with label Autres produits ménagers (articles papier et plastique, brosserie, produits dive
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_6_1_2_1 with label Produits de nettoyage et d’entretien (yc pour piscine)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_6_2_1_1 with label Services domestiques (ménage, garde enfant, jardinage, etc.)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_6_2_2_1 with label Autres services d’entretien pour le logement (blanchisserie, location appareils,
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_7_1 with label Autres dépenses en équipement : personnes vivant hors du domicile au moins un jo
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_05_7_2 with label Autres dépenses en équipement : cadeau offert (à destination d’un autre ménage)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_06_1_1_1_1 with label Produits pharmaceutiques à ingurgiter et traitants, compléments alimentaires, vi
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_06_1_1_2_1 with label Autres produits pharmaceutiques (parapharmacie, pansements, préservatifs, etc. )
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_06_1_1_3_1 with label Appareils et matériels thérapeutiques (lunettes, prothèses, etc.) yc leur répara
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_06_2_1_1_1 with label Consultations des médecins généralistes ou spécialistes hors hospitalisation
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_06_2_2_1_1 with label Dentiste, orthodontie
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_06_2_3_1_1 with label Services des laboratoires d’analyse médicale et des cabinets de radiologie
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_06_2_3_1_2 with label Services des auxiliaires médicaux (infirmier, kiné, laboratoire, etc.)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_06_2_3_1_3 with label Services extra hospitaliers (ambulance, location matériel)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_06_3 with label Services et soins hospitaliers
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_06_4_1 with label Autres dépenses de santé : personnes vivant hors du domicile au moins un jour pa
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_06_4_2 with label Autres dépenses de santé : cadeau offert (à destination d’un autre ménage)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_1_1_1_1 with label Achats d'automobiles neuves
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_1_1_2_1 with label Achats d'automobiles d'occasion
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_1_2_1_1 with label Achats de motocycles neufs et occasion
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_1_2_1_2 with label Achats de cycles neufs et occasion
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_1_3 with label Achats d'autres véhicules neufs et occasion
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_2_1_1_1 with label Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux 
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_2_2_1_1 with label Carburants, électricité, huiles, lubrifiants, etc.
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_2_3_2_1 with label Réparations, dépannages, révisions, lavage, entretien et contrôle technique
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_2_4_1_2 with label Services de location d’un local, frais de parking
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_2_4_2_1 with label Autres services liés à l’utilisation de véhicules personnels (péages, auto école
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_3_1_1_1 with label Services de transports de voyageurs locaux (métro, tram) et SNCF longue distance
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_3_2_1_1 with label Services de transports de voyageurs par route yc car scolaire
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_3_3_1_1 with label Services de transports de voyageurs par air (yc transport de bagages et de véhic
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_3_5_1_1 with label Services combinés de transport de voyageurs carte navigo, tickets train + bus, e
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_3_6_1_1 with label Autres services de transport (yc déménagement)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_3_6_1_2 with label Services de transport par mer et voies navigables intérieures (yc transport de b
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_4_1 with label Autres dépenses de transport : cérémonie, séjours hors domicile, personnes vivan
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_07_4_2 with label Autres dépenses de transport : cadeau offert (à destination d’un autre ménage)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_08_1_1_1_1 with label Services postaux (yc timbres, enveloppes)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_08_1_2_1_1 with label Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_08_1_2_2_1 with label Services de téléphone et fax, internet, recharges téléphoniques
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_08_2 with label Autres dépenses de communications  : cadeau offert (à destination d’un autre mén
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_1_1_1_2 with label Téléviseurs, home cinéma, magnétoscopes, antennes, adapteur et lecteur DVD de sa
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_1_1_1_3 with label Appareils de réception, d’enregistrement et de reproduction du son
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_1_2_1_1_a with label Equipement photographique et cinématographique (yc accessoires)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_1_2_1_1_b with label Instruments d'optique non médicale et divers électroacoustique (microscope, jume
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_1_3_1_1 with label Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces 
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_1_4_1_1 with label Supports vierges ou enregistrés pour l’image et le son (yc téléchargement)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_1_5_1_1 with label Réparation des équipements et accessoires audiovisuels photographiques et inform
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_2_1_1_1 with label Gros équipements pour les loisirs de plein air et les sports (caravanes, camping
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_2_1_1_3 with label Instruments de musique et accessoires
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_2_2_2 with label Gros équipements pour les loisirs d’intérieur (table de billard, de ping-pong, f
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_2_3_1 with label Réparation et entretien de biens durables pour les loisirs, les sports et la cul
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_3_1_1_1 with label Jeux, jouets et passe temps yc jeux vidéos
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_3_2_1 with label Horticulture, accessoires et frais de livraison
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_3_2_1_1 with label Equipements de sport, de camping et de loisirs en plein air (pêche, chasse, uste
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_3_4_1_1 with label Aliments autres animaux (chèvre, volaille, cabri, cochon, etc.)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_3_4_1_2 with label Animaux d’agrément, nourriture, produits et accessoires pour les animaux d’agrém
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_4_1_1_2 with label Services sportifs et récréatifs (spectacles sportifs, participation loisirs, loc
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_4_2_1_1 with label Cinémas, théâtres, salles de concert, cirques, foire
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_4_2_2_2 with label Musées, jardins zoologiques et similaires
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_4_2_3_1 with label Services de télévision et de radiodiffusion (location, redevance, abonnement)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_4_2_4_1 with label Smartbox et autres services de loisirs (animateurs, photographes, services pour 
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_4_3 with label Jeux de hasard (loto, tiercé, etc.)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_5_1_1_2 with label Livres yc e-books
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_5_2_1_1 with label Journaux et périodiques yc par abonnement
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_5_3_1_1 with label Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, a
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_5_3_1_2 with label Articles de papeterie et de dessin (yc toner pour imprimante)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_6_1_1_1 with label Voyages à forfait, week-end, excursions yc voyage scolaire
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_7_1 with label Autres dépenses des loisirs : séjours hors domicile, personnes vivant hors du do
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_09_7_2 with label Autres dépenses de loisirs et culture : cadeau offert (à destination d’un autre 
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_10_1 with label Enseignement maternel et primaire (scolarité et cours d’alphabétisation)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_10_2 with label Enseignement secondaire (scolarité et inscription aux concours de niveau seconda
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_10_3 with label Enseignement supérieur et frais d’inscription aux concours des grandes écoles
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_10_4 with label Enseignement ne correspondant à aucun niveau particulier (cours particuliers, en
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_10_5_1 with label Autres dépenses d’enseignement : personnes vivant hors du domicile au moins un j
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_10_5_2 with label Autres dépenses d’enseignement : cadeau offert (à destination d’un autre ménage)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_11_1_1_1_1 with label Repas pris dans un restaurant
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_11_1_1_1_2 with label Repas pris dans un café, bar ou assimilé
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_11_1_2_1_1 with label Cantines scolaire et professionnelle
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_11_1_3_1 with label Autres dépenses de restauration : séjours hors domicile, personnes vivant hors d
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_11_1_3_2 with label Autres dépenses de restauration : cadeau offert (à destination d’un autre ménage
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_11_2_1_1_1 with label Services d’hébergement (hôtels, gîtes, campings, CROUS, internats)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_1_1_1_1 with label Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, pier
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_1_3_2_1 with label Autres articles et produits pour les soins personnels (savon, produits de toilet
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_1_3_3_3 with label Appareils électriques pour les soins personnels
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_3_1_1_1 with label Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_3_2_1_1 with label Articles de voyage et autres contenants d'effets personnels (maroquinerie, valis
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_3_2_2_2 with label Autres effets personnels (briquets, parapluies, lunettes de soleil, articles pou
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_3_3_1_1 with label Autres biens et services offerts (à des personnes extérieures au ménage)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_4_1_1_1 with label Services de protection sociale (assistante maternelle, crèche, maison de retrait
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_5_1_1_1 with label Assurances vie, décès
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_5_2_1_1 with label Assurances liées au logement
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_5_3_1_1 with label Assurances liées à la santé
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_5_4_1_1 with label Assurances liées aux transports (yc assurance voyage)
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_5_5_1_1 with label Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, ob
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_6_1_1_1 with label Services financiers
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_7_1_1_1 with label Autres services (pompes funèbres, services juridiques, vestiaires, consignes, gr
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_7_1_2_1 with label Caution pour la location d'un logement
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_8_1 with label Autres dépenses occasionnées par une cérémonie
+openfisca_france_indirect_taxation.model.consommation.postes_coicop: INFO: Creating variable poste_12_9_1_1 with label Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category  (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category alcools_forts (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category assurance_sante (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category assurance_transport (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category autres_assurances (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category biere (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category cigares (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category cigarettes (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tabac_a_rouler (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category ticpe (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_intermediaire (1994-2011) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_intermediaire (2012-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_plein (1994-1997) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_plein (1998-1999) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_plein (2000-2009) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_plein (2010-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_reduit (1994-1997) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_reduit (1998-1999) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_reduit (2000-2009) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_reduit (2010-2011) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_reduit (2012-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_super_reduit (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category vin (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category  (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category alcools_forts (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category assurance_sante (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category assurance_transport (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category autres_assurances (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category biere (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category cigares (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category cigarettes (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tabac_a_rouler (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category ticpe (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_intermediaire (1994-2011) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_intermediaire (2012-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_plein (1994-1997) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_plein (1998-1999) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_plein (2000-2009) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_plein (2010-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_reduit (1994-1997) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_reduit (1998-1999) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_reduit (2000-2009) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_reduit (2010-2011) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_reduit (2012-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category tva_taux_super_reduit (1994-2014) assembling the following products
+openfisca_france_indirect_taxation.model.consommation.categories_fiscales: INFO: Creating fiscal category vin (1994-2014) assembling the following products
+openfisca_core.formulas: INFO: <=> depenses_tva_taux_super_reduit@menages<2014>(poste_06_1_1_1_1@menages<2014>[100.0], poste_09_5_2_1_1@menages<2014>[0.0]) --> <2014>[100.0]
+openfisca_core.formulas: INFO: <=> tva_taux_super_reduit@menages<2014>(depenses_tva_taux_super_reduit@menages<2014>[100.0]) --> <2014>[2.05681]
+--------------------- >> end captured logging << ---------------------
+
+----------------------------------------------------------------------
+Ran 1 test in 0.630s
+
+FAILED (failures=1)

@@ -10,24 +10,24 @@ from openfisca_france_indirect_taxation.examples.utils_example import get_input_
 for year in [2000, 2005, 2011]:
     aggregates_data_frame = get_input_data_frame(year)
     if year == 2000:
-        df = aggregates_data_frame[['poste_coicop_722', 'coicop12_7', 'poste_coicop_711'] +
+        df = aggregates_data_frame[['poste_coicop_07_2_2_1_1', 'coicop12_7', 'poste_coicop_711'] +
             ['poste_coicop_712', 'poste_coicop_713', 'poste_coicop_721', 'poste_coicop_723'] +
             ['poste_coicop_724', 'poste_coicop_731', 'poste_coicop_732', 'poste_coicop_733'] +
             ['poste_coicop_734', 'poste_coicop_736']].copy()
         df['check'] = (
             df['poste_coicop_711'] + df['poste_coicop_712'] + df['poste_coicop_713'] + df['poste_coicop_721'] +
-            df['poste_coicop_722'] + df['poste_coicop_723'] + df['poste_coicop_724'] + df['poste_coicop_731'] +
+            df['poste_coicop_07_2_2_1_1'] + df['poste_coicop_723'] + df['poste_coicop_724'] + df['poste_coicop_731'] +
             df['poste_coicop_732'] + df['poste_coicop_733'] + df['poste_coicop_734'] + df['poste_coicop_736'] -
             df['coicop12_7']
             )
     else:
-        df = aggregates_data_frame[['poste_coicop_722', 'coicop12_7', 'poste_coicop_711'] +
+        df = aggregates_data_frame[['poste_coicop_07_2_2_1_1', 'coicop12_7', 'poste_coicop_711'] +
             ['poste_coicop_712', 'poste_coicop_735', 'poste_coicop_713', 'poste_coicop_721'] +
             ['poste_coicop_723', 'poste_coicop_724', 'poste_coicop_731', 'poste_coicop_732'] +
             ['poste_coicop_733', 'poste_coicop_734', 'poste_coicop_736']].copy()
         df['check'] = (
             df['poste_coicop_711'] + df['poste_coicop_712'] + df['poste_coicop_713'] + df['poste_coicop_721'] +
-            df['poste_coicop_722'] + df['poste_coicop_723'] + df['poste_coicop_724'] + df['poste_coicop_731'] +
+            df['poste_coicop_07_2_2_1_1'] + df['poste_coicop_723'] + df['poste_coicop_724'] + df['poste_coicop_731'] +
             df['poste_coicop_732'] + df['poste_coicop_733'] + df['poste_coicop_734'] + df['poste_coicop_736'] +
             df['poste_coicop_735'] - df['coicop12_7']
             )

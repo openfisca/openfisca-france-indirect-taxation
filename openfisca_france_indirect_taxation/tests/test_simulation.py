@@ -25,7 +25,6 @@
 
 from pandas import DataFrame
 
-from openfisca_survey_manager.survey_collections import SurveyCollection
 
 import openfisca_france_indirect_taxation
 from openfisca_france_indirect_taxation.surveys import SurveyScenario, get_input_data_frame
@@ -52,6 +51,7 @@ def run_survey_simulation(year = None):
                 'decuc',
                 'poste_01_1_1_1_1',
                 'poste_11_1_1_1_1',
+                'poste_07_2_2_1_1',
                 'depenses_ticpe',
                 'depenses_carburants',
                 'tva_taux_plein',
@@ -74,8 +74,8 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    for year in [2000, 2005, 2011]:
-        df = run_survey_simulation(year)
+    for year in [2011]:  # [2000, 2005, 2011]:
+        simulation, df = run_survey_simulation(year)
         print df
         print df.columns
         print df.describe()

@@ -23,11 +23,11 @@ log = logging.getLogger(__name__)
 
 options_by_dir = collections.OrderedDict((
     (
-        os.path.abspath(os.path.join(os.path.dirname(__file__), 'calculateur_impots')),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), 'reforms', 'test_reforme_alimentation')),
         dict(
             calculate_output = False,
             default_absolute_error_margin = 0.5,
-            reforms = ['test_alimentation'],
+            reforms = ['test_reforme_alimentation'],
             ),
         ),
     (
