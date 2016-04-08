@@ -10,7 +10,8 @@ import seaborn
 
 # Import de données des Comptes des Transports et modules spécifiques à Openfisca
 from ipp_macro_series_parser.agregats_transports.transports_cleaner import g2_1
-from openfisca_france_indirect_taxation.examples.utils_example import get_input_data_frame, graph_builder_line
+from openfisca_france_indirect_taxation.utils import get_input_data_frame
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line
 
 # Import d'une nouvelle palette de couleurs
 seaborn.set_palette(seaborn.color_palette("Set2", 12))

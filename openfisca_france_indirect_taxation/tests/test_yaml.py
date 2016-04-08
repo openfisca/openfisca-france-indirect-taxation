@@ -23,20 +23,37 @@ log = logging.getLogger(__name__)
 
 options_by_dir = collections.OrderedDict((
     (
-        os.path.abspath(os.path.join(os.path.dirname(__file__), 'reforms', 'test_reforme_alimentation')),
-        dict(
-            calculate_output = False,
-            default_absolute_error_margin = 0.5,
-            reforms = ['test_reforme_alimentation'],
-            ),
-        ),
-    (
         os.path.abspath(os.path.join(os.path.dirname(__file__), 'formulas')),
         dict(
             calculate_output = False,
             default_absolute_error_margin = 0.005,
             ),
         ),
+    (
+        os.path.abspath(os.path.join(os.path.dirname(__file__), 'reforms', 'aliss_environnement')),
+        dict(
+            calculate_output = False,
+            default_absolute_error_margin = 0.5,
+            reforms = ['aliss_environnement'],
+            ),
+        ),
+    (
+        os.path.abspath(os.path.join(os.path.dirname(__file__), 'reforms', 'aliss_sante')),
+        dict(
+            calculate_output = False,
+            default_absolute_error_margin = 0.5,
+            reforms = ['aliss_sante'],
+            ),
+        ),
+    (
+        os.path.abspath(os.path.join(os.path.dirname(__file__), 'reforms', 'aliss_tva_sociale')),
+        dict(
+            calculate_output = False,
+            default_absolute_error_margin = 0.5,
+            reforms = ['aliss_tva_sociale'],
+            ),
+        ),
+
     ))
 
 

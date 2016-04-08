@@ -11,7 +11,7 @@ import pkg_resources
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
-from openfisca_france_indirect_taxation.surveys import get_input_data_frame
+from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
 
 
@@ -326,4 +326,3 @@ if __name__ == '__main__':
         )[['nomf', 'poste_coicop', 'nomc', 'categorie_fiscale']].sort_values('nomf')
 
     df.groupby(['nomf', 'poste_coicop', 'nomc'])['categorie_fiscale'].unique()
-

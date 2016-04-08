@@ -68,11 +68,12 @@ def function_creator(postes_coicop, year_start = None, year_stop = None):
 
 def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_system = None):
     assert categories_fiscales is not None
-    original_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
+    reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
     removed_categories = set()
     if Reform:
-        removed_categories = set(original_categories).difference(
+        removed_categories = set(reference_categories).difference(
             set(categories_fiscales['categorie_fiscale'].drop_duplicates()))
+        Reform.categories_fiscales = categories_fiscales
 
     for categorie_fiscale in original_categories:
         year_start = 1994
@@ -134,6 +135,6 @@ def preload_categories_fiscales_data_frame():
     if codes_coicop_data_frame is None:
         from openfisca_france_indirect_taxation.model.consommation.postes_coicop import codes_coicop_data_frame
         categories_fiscales_data_frame = codes_coicop_data_frame[
-            ['code_coicop', 'code_bdf', 'categorie_fiscale', 'start', 'stop']
+            ['code_coicop', 'code_bdf', 'categorie_fiscale', 'start', 'stop', 'label']
             ].copy().fillna('')
         generate_variables(categories_fiscales = categories_fiscales_data_frame)

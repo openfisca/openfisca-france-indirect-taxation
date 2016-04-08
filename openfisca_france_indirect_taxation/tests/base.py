@@ -29,6 +29,7 @@ from openfisca_core.tools import assert_near
 from .. import init_country
 from ..reforms import (
     alimentation,
+    aliss,
     contribution_climat_energie,
     taxes_carburants,
     taxe_carbone,
@@ -50,6 +51,9 @@ tax_benefit_system = TaxBenefitSystem()
 tax_benefit_system.prefill_cache()
 
 build_reform_function_by_key = {
+    'aliss_environnement': aliss.build_reform_environnement,
+    'aliss_sante': aliss.build_reform_sante,
+    'aliss_tva_sociale': aliss.build_reform_tva_sociale,
     'contribution_climat_energie': contribution_climat_energie.build_reform,
     'test_reforme_alimentation': alimentation.build_reform,
     'taxes_carburants': taxes_carburants.build_reform,

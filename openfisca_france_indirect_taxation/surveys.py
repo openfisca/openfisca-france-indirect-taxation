@@ -28,18 +28,12 @@ import numpy
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.scenarios import AbstractSurveyScenario
-from openfisca_france_indirect_taxation.tests import base
 
 
 log = logging.getLogger(__name__)
 
 
-def get_input_data_frame(year):
-    openfisca_survey_collection = SurveyCollection.load(collection = "openfisca_indirect_taxation")
-    openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
-    input_data_frame = openfisca_survey.get_values(table = "input")
-    input_data_frame.reset_index(inplace = True)
-    return input_data_frame
+from openfisca_france_indirect_taxation.tests import base
 
 
 class SurveyScenario(AbstractSurveyScenario):

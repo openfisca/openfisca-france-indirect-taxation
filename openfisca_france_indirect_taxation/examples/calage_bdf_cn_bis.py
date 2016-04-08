@@ -11,7 +11,7 @@ import csv
 import pandas
 from pandas import concat
 
-from openfisca_france_indirect_taxation.examples.utils_example import get_input_data_frame
+from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation.build_survey_data.utils import find_nearest_inferior
 
 

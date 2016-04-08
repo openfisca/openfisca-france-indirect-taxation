@@ -10,7 +10,7 @@ import os
 import pkg_resources
 
 
-from openfisca_france_indirect_taxation.examples.utils_example import get_input_data_frame
+from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import \
