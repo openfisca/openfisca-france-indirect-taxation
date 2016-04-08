@@ -40,19 +40,24 @@ legislation_directory = os.path.join(
 codes_coicop_data_frame = pandas.read_csv(
     os.path.join(legislation_directory, 'coicop_legislation.csv'),
     )
-year = 2011
-legislation = codes_coicop_data_frame.query('start <= @year & @year <= stop')[['code_bdf', 'categorie_fiscale']].copy()
+# year = 2011
+# legislation = codes_coicop_data_frame.query('start <= @year & @year <= stop')[['code_bdf', 'categorie_fiscale']].copy()
+legislation = codes_coicop_data_frame[['code_bdf', 'categorie_fiscale']].copy()
 legislation.rename(columns = {'code_bdf': 'poste_bdf'}, inplace = True)
-aliss_extract_clean = aliss_extract.merge(legislation)
+aliss_legislation = aliss_extract.merge(legislation)
+aliss_legislation.rename(columns = {'poste_bdf': 'code_bdf'}, inplace = True)
+aliss_reform = aliss_legislation.merge(aliss_reform_data)
 
-aliss_extract_clean.rename(columns = {'poste_bdf': 'code_bdf'}, inplace = True)
-aliss_reform = aliss_extract_clean.merge(aliss_reform_data)
-aliss_reform.loc[aliss_reform.code_bdf.duplicated(keep = False)]
-mismatch = aliss_reform.groupby(['nomf']).filter(
-    lambda x: x.categorie_fiscale.nunique() > 1
-    )[['nomf', 'nomc', 'categorie_fiscale'] + reform_names].sort_values('nomf')
+mismatch = aliss_reform.groupby(['code_bdf']).filter(
+    lambda x: (
+        x.sante.nunique() > 1 or
+        x.environnement.nunique() > 1 or
+        x.tva_sociale.nunique() > 1
+        )).copy()
+
 mismatch.nomc = mismatch.nomc.str.decode('latin-1').str.encode('utf-8')
-mismatch.to_csv('nomenclature_mismatch.csv', index = False)
+mismatch.to_csv('reform_mismatch.csv', index = False)
+
 
 
 boum
@@ -65,7 +70,7 @@ def build_reform_sante(tax_benefit_system):
         )
     from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import categories_fiscales_data_frame
     aliss_reform.columns
-    categories_fiscales_reform = aliss_reform[['sante', 'code_bdf']].copy()
+    categories_fiscales_reform = aliss_reform[['sante', 'code_bdf']].drop_duplicates().copy()
 
     categories_fiscales_reform.rename(columns=({'sante': 'categorie_fiscale'}), inplace = True)
     categories_fiscales_reform.code_bdf.duplicated().sum()
