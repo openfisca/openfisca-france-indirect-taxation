@@ -5,12 +5,15 @@
      poste_09_5_2_1_1: 50
    output_variables:
      depenses_tva_taux_super_reduit: 150
-     poste_06: 100
-     poste_09: 50
+     depenses_ht_poste_06_1_1_1_1: 100 / (1 + .021)
+     depenses_ht_poste_09_5_2_1_1: 50 / (1 + .021)
+     poste_agrege_06: 100
+     poste_agrege_09: 50
 
  - name: "Catégorie fiscale : pas de taxe"
    period: "2010"
    input_variables:
      poste_02_3: 100
    output_variables:
-     depenses_: 100
+     depenses_ht_poste_02_3: 100
+     

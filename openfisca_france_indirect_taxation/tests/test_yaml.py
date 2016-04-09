@@ -136,7 +136,7 @@ def assert_near_calculate_output(value, target_value, absolute_error_margin = 0,
 
 def check(yaml_path, name, period_str, test, force):
     scenario = test['scenario']
-    # scenario.suggest()
+    # scenario.suggest()
     simulation = scenario.new_simulation(debug = True)
     output_variables = test.get(u'output_variables')
     if output_variables is not None:

@@ -28,12 +28,11 @@ import numpy
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.scenarios import AbstractSurveyScenario
+from openfisca_france_indirect_taxation.utils import get_input_data_frame
+from openfisca_france_indirect_taxation.tests import base
 
 
 log = logging.getLogger(__name__)
-
-
-from openfisca_france_indirect_taxation.tests import base
 
 
 class SurveyScenario(AbstractSurveyScenario):
@@ -100,7 +99,6 @@ class SurveyScenario(AbstractSurveyScenario):
             survey_scenario.inflate(**inflation_kwargs)
 
         return survey_scenario
-
 
     def initialize_weights(self):
         self.weight_column_name_by_entity_key_plural['menages'] = 'pondmen'

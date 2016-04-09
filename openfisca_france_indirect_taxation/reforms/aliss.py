@@ -8,7 +8,6 @@ import pandas
 import pkg_resources
 
 
-
 from openfisca_core import reforms
 
 from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import generate_variables

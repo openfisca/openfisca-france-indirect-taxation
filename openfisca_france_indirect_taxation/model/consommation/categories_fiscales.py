@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 
 
@@ -31,7 +30,6 @@ import logging
 
 from biryani.strings import slugify
 
-from openfisca_core.columns import FloatCol
 from openfisca_core.formulas import dated_function, DatedVariable
 
 
@@ -45,15 +43,20 @@ categories_fiscales_data_frame = None
 codes_coicop_data_frame = None
 
 
-def function_creator(postes_coicop, year_start = None, year_stop = None):
+def depenses_function_creator(postes_coicop, categorie_fiscale, year_start = None, year_stop = None):
     start = date(year_start, 1, 1) if year_start is not None else None
     stop = date(year_stop, 12, 31) if year_stop is not None else None
     if len(postes_coicop) != 0:
+
         @dated_function(start = start, stop = stop)
         def func(self, simulation, period):
+            if categorie_fiscale == '':  # pas de tva
+                taux = 0
+            else:
+                taux = simulation.legislation_at(period.start).imposition_indirecte.tva[categorie_fiscale[4:]]
             return period, sum(simulation.calculate(
                 'poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
-                )
+                ) / (1 + taux)
         func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
         return func
 
@@ -75,7 +78,7 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
             set(categories_fiscales['categorie_fiscale'].drop_duplicates()))
         Reform.categories_fiscales = categories_fiscales
 
-    for categorie_fiscale in original_categories:
+    for categorie_fiscale in reference_categories:
         year_start = 1994
         year_final_stop = 2014
         functions_by_name = dict()
@@ -93,7 +96,12 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
             else:
                 year_stop = year - 1 if year != year_final_stop else year_final_stop
 
-                dated_func = function_creator(previous_postes_coicop, year_start = year_start, year_stop = year_stop)
+                dated_func = depenses_function_creator(
+                    previous_postes_coicop,
+                    categorie_fiscale,
+                    year_start = year_start,
+                    year_stop = year_stop
+                    )
                 dated_function_name = u"function_{year_start}_{year_stop}".format(
                     year_start = year_start, year_stop = year_stop)
                 log.info(u'Creating fiscal category {} ({}-{}) with the following products {}'.format(
@@ -109,7 +117,7 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
 
             previous_postes_coicop = postes_coicop
 
-        class_name = u'depenses_{}'.format(categorie_fiscale)
+        class_name = u'depenses_ht_{}'.format(categorie_fiscale)
         # Trick to create a class with a dynamic name.
         if not Reform:
             definitions_by_name = dict(
@@ -130,11 +138,9 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
 
 
 def preload_categories_fiscales_data_frame():
+    from openfisca_france_indirect_taxation.model.consommation.postes_coicop import get_legislation_data_frames
     global codes_coicop_data_frame
     global categories_fiscales_data_frame
-    if codes_coicop_data_frame is None:
-        from openfisca_france_indirect_taxation.model.consommation.postes_coicop import codes_coicop_data_frame
-        categories_fiscales_data_frame = codes_coicop_data_frame[
-            ['code_coicop', 'code_bdf', 'categorie_fiscale', 'start', 'stop', 'label']
-            ].copy().fillna('')
+    if codes_coicop_data_frame is None or categories_fiscales_data_frame is None:
+        categories_fiscales_data_frame, codes_coicop_data_frame = get_legislation_data_frames()
         generate_variables(categories_fiscales = categories_fiscales_data_frame)
