@@ -1,4 +1,5 @@
  - name: u"Test réaction comportementale "
+   ignore: True
    period: "2013"
    input_variables:
      depenses_essence: 1000

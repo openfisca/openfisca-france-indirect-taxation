@@ -252,6 +252,12 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         label = 'Stupefiants',
         origin = 'COICOP UN',
         )
+    alcools_tabac_stupefiants_offerts = dict(
+        value = '02.4',
+        categorie_fiscale = '',
+        label = 'Alcools, tabcs et stupefiants offerts à un autre',
+        origin = 'TAXIPP',
+        )
     # 03 Habillement et chaussures
     habillement = dict(
         value = 3,
@@ -566,7 +572,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         margarine, saindoux, confiserie,
         # 02
         alcools, vin, biere,
-        cigares, cigarettes, tabac_a_rouler, stupefiants,
+        cigares, cigarettes, tabac_a_rouler, stupefiants, alcools_tabac_stupefiants_offerts,
         # 03
         habillement,
         # 04

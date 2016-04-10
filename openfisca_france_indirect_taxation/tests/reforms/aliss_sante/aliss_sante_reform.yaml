@@ -1,14 +1,22 @@
  - name: "Test différents taux de TVA "
    period: "2011"
    input_variables:
-     poste_01_1_4_1_1_a: 100  # Lait entier tva_taux_super_reduit devient taux_reduit
-     poste_01_1_4_3_1: 100    # Fromage et lait caillé tva_taux_super_reduit taux plein
+     poste_01_1_4_1_1_a: 100  # Lait entier tva_taux_reduit devient reste reduit
+     poste_01_1_4_3_1: 100    # Fromage et lait caillé tva_taux_reduit taux plein
    output_variables:
-     depenses_tva_taux_plein: 100
+     depenses_ht_poste_01_1_4_1_1_a: 100 / (1 + 0.055)
+     depenses_ht_poste_01_1_4_3_1: 100 / (1 + 0.055)
+     depenses_ht_tva_taux_plein: 100 / (1 + 0.055)
+     depenses_ht_tva_taux_intermediaire: 0
+     depenses_ht_tva_taux_reduit: 100 / (1 + 0.055)
+     depenses_ht_tva_taux_super_reduit: 0
+     #
+     depenses_tva_taux_plein: 100 * (1 + .196) / (1 + 0.055)
      depenses_tva_taux_intermediaire: 0
-     depenses_tva_taux_reduit: 100
+     depenses_tva_taux_reduit: 100 * (1 + .055) / (1 + 0.055)
      depenses_tva_taux_super_reduit: 0
-     tva_taux_plein: 100 * 0.2 / (1 + 0.2)
-     tva_taux_intermediaire: 0 * 0.1 / (1 + 0.1)
+     #
+     tva_taux_plein: 100 * 0.196 / (1 + 0.055)
+     tva_taux_intermediaire: 0
      tva_taux_reduit: 100 * 0.055 / (1 + 0.055)
-     tva_taux_super_reduit: 0 * 0.021 / (1 + 0.021)
+     tva_taux_super_reduit: 0

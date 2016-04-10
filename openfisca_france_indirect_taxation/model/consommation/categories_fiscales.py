@@ -43,22 +43,29 @@ categories_fiscales_data_frame = None
 codes_coicop_data_frame = None
 
 
-def depenses_function_creator(postes_coicop, categorie_fiscale, year_start = None, year_stop = None):
+def depenses_function_creator(postes_coicop, categorie_fiscale, year_start = None, year_stop = None,
+        depenses_type = None):
+    assert depenses_type is not None
     start = date(year_start, 1, 1) if year_start is not None else None
     stop = date(year_stop, 12, 31) if year_stop is not None else None
     if len(postes_coicop) != 0:
 
-        @dated_function(start = start, stop = stop)
-        def func(self, simulation, period):
-            if categorie_fiscale == '':  # pas de tva
-                taux = 0
-            else:
-                taux = simulation.legislation_at(period.start).imposition_indirecte.tva[categorie_fiscale[4:]]
-            return period, sum(simulation.calculate(
-                'poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
-                ) / (1 + taux)
-        func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
-        return func
+        if depenses_type == 'ht':
+            @dated_function(start = start, stop = stop)
+            def func(self, simulation, period):
+                return period, sum(simulation.calculate(
+                    'depenses_ht_poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
+                    )
+            func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+            return func
+        elif depenses_type == 'ttc':  # Does not work with reform ! Should update poste_
+            @dated_function(start = start, stop = stop)
+            def func(self, simulation, period):
+                return period, sum(simulation.calculate(
+                    'poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
+                    )
+            func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+            return func
 
     else:  # To deal with Reform emptying some fiscal categories
         @dated_function(start = start, stop = stop)
@@ -100,7 +107,8 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
                     previous_postes_coicop,
                     categorie_fiscale,
                     year_start = year_start,
-                    year_stop = year_stop
+                    year_stop = year_stop,
+                    depenses_type = 'ht',
                     )
                 dated_function_name = u"function_{year_start}_{year_stop}".format(
                     year_start = year_start, year_stop = year_stop)

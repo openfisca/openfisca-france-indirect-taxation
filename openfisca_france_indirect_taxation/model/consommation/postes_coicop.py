@@ -33,16 +33,26 @@ legislation_directory = os.path.join(
     )
 
 
-def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale, year_start = None, year_stop = None):
+def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None,
+        year_start = None, year_stop = None):
     start = date(year_start, 1, 1) if year_start is not None else None
     stop = date(year_stop, 12, 31) if year_stop is not None else None
+    assert categorie_fiscale is not None
 
     @dated_function(start = start, stop = stop)
-    def func(self, simulation, period):
+    def func(self, simulation, period, categorie_fiscale = categorie_fiscale):
         if categorie_fiscale == '':  # pas de tva
             taux = 0
         else:
-            taux = simulation.legislation_at(period.start).imposition_indirecte.tva[categorie_fiscale[4:]]
+            if categorie_fiscale in ['biere', 'vin', 'alcools_forts', 'cigares', 'cigarettes', 'tabac_a_rouler']:
+                categorie_fiscale = 'tva_taux_plein'
+            try:
+                taux = simulation.legislation_at(period.start).imposition_indirecte.tva[categorie_fiscale[4:]]
+            except Exception as e:
+                print categorie_fiscale
+                print e
+                raise
+
         return period, simulation.calculate('poste_' + slugify(poste_coicop, separator = u'_'), period) / (1 + taux)
 
     func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
@@ -72,11 +82,6 @@ def generate_depenses_ht_postes_variables(categories_fiscales = None, Reform = N
     assert categories_fiscales is not None
     reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
     removed_categories = set()
-    if Reform:
-        removed_categories = set(reference_categories).difference(
-            set(categories_fiscales['categorie_fiscale'].drop_duplicates()))
-        Reform.categories_fiscales = categories_fiscales
-
     functions_by_name_by_poste = dict()
     postes_coicop_all = set()
 
@@ -98,9 +103,21 @@ def generate_depenses_ht_postes_variables(categories_fiscales = None, Reform = N
                 year_stop = year - 1 if year != year_final_stop else year_final_stop
 
                 for poste_coicop in previous_postes_coicop:
-                    dated_func = depenses_ht_postes_function_creator(
-                        poste_coicop, categorie_fiscale, year_start = year_start, year_stop = year_stop
-                        )
+                    if not Reform:
+                        dated_func = depenses_ht_postes_function_creator(
+                            poste_coicop,
+                            categorie_fiscale = categorie_fiscale,
+                            year_start = year_start,
+                            year_stop = year_stop
+                            )
+                    else:
+                        dated_func = depenses_ht_postes_function_creator(
+                            poste_coicop,
+                            categorie_fiscale = reference_categorie_fiscale,
+                            year_start = year_start,
+                            year_stop = year_stop
+                            )
+
                     dated_function_name = u"function_{year_start}_{year_stop}".format(
                         year_start = year_start, year_stop = year_stop)
                     log.info(u'Creating fiscal category {} ({}-{}) with the following products {}'.format(
@@ -120,20 +137,13 @@ def generate_depenses_ht_postes_variables(categories_fiscales = None, Reform = N
     for poste, functions_by_name in functions_by_name_by_poste.iteritems():
         class_name = u'depenses_ht_poste_{}'.format(slugify(poste, separator = u'_'))
         # Trick to create a class with a dynamic name.
-        if not Reform:
-            definitions_by_name = dict(
-                column = FloatCol,
-                entity_class = Menages,
-                label = u"Dépenses hors taxe du poste_{0}".format(poste),
-                )
-            definitions_by_name.update(functions_by_name)
-            type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
-        else:
-            definitions_by_name = dict(
-                reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
-                )
-            definitions_by_name.update(functions_by_name)
-            type(class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
+        definitions_by_name = dict(
+            column = FloatCol,
+            entity_class = Menages,
+            label = u"Dépenses hors taxe du poste_{0}".format(poste),
+            )
+        definitions_by_name.update(functions_by_name)
+        type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
 
         del definitions_by_name
 
@@ -149,7 +159,7 @@ def generate_postes_agreges_variables():
         log.info(u'Creating variable {} with label {} using {}'.format(class_name, num_prefix, codes_coicop))
 
         # Trick to create a class with a dynamic name.
-        dated_func = depenses_function_creator(codes_coicop, '')
+        dated_func = depenses_function_creator(codes_coicop, '', depenses_type = 'ttc')
         functions_by_name = dict(fucntion = dated_func)
         label = u"Poste agrégé {}".format(num_prefix)
         definitions_by_name = dict(

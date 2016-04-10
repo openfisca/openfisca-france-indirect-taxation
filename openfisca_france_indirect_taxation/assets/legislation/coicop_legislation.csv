@@ -109,7 +109,7 @@
 107,Boissons alcoolisées et tabac,Tabac,Cigarettes,Cigarettes,Cigarettes,02.2.2,02.2.2,cigares et cigarillos,c02212,1994,2014,COICOP INSEE,cigarettes
 108,Boissons alcoolisées et tabac,Tabac,Tabac sous d'autres formes et produits connexes,Tabac sous d'autres formes et produits connexes,Tabac sous d'autres formes et produits connexes,02.2.3,02.2.3,tabac sous d'autres formes et produits connexes,c02213,1994,2014,COICOP INSEE,tabac_a_rouler
 109,Boissons alcoolisées et tabac,Tabac,Stupéfiants ,Stupéfiants ,Stupéfiants ,02.3,02.3,Stupéfiants ,c02311,1994,2014,COICOP INSEE,
-110,,,,,,,02.4,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre",c02411,0,0,COICOP INSEE,
+110,,,,,,,02.4,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre",c02411,1994,2014,COICOP INSEE,
 111,Habillement et chaussures,Habillement,Tissus d'habillement,Tissus d'habillement,Tissus d'habillement,03.1.1.1.1,03.1.1.1.1,Tissus pour vêtements,c03111,1994,2014,COICOP INSEE,tva_taux_plein
 112,Habillement et chaussures,Habillement,V�tements,V�tements de dessus pour hommes,"Manteaux, imper. et v�tements en peau pour hommes",03.1.2.1.1,03.1.2.1.1,Vêtements pour homme,c03121,1994,2014,COICOP INSEE,tva_taux_plein
 113,Habillement et chaussures,Habillement,V�tements,V�tements de dessus pour hommes,Costumes pour hommes,03.1.2.1.2,03.1.2.1.2,,,1994,2014,COICOP INSEE,tva_taux_plein

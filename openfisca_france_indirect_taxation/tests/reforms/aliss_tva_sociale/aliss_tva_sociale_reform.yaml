@@ -1,14 +1,24 @@
- - name: "Test différents taux de TVA "
-   period: "2011"
+ - name: "Réforme TVA sociale (taux intermédiaire pour tous les biens)"
+   period: "2014"  # La TVA taux intermédiare est de 10 % à cete date
    input_variables:
-     poste_01_1_4_1_1_a: 100  # Lait entier tva_taux_super_reduit
-     poste_01_1_4_3_1: 100    # Fromage et lait caillé tva_taux_super_reduit
+     poste_01_1_4_1_1_a: 100  # Lait entier tva_taux_reduit
+     poste_01_1_4_3_1: 100    # Fromage et lait caillé tva_taux_reduit
+     poste_09_5_1_1_2: 100    # Livres TVA taux intermédiaire avant et après réforme
    output_variables:
+     depenses_ht_poste_01_1_4_1_1_a: 100 / (1 + 0.055)
+     depenses_ht_poste_01_1_4_3_1: 100 / (1 + 0.055)
+     depenses_ht_poste_09_5_1_1_2: 100 / (1 + 0.1)
+     depenses_ht_tva_taux_plein: 0
+     depenses_ht_tva_taux_intermediaire: 200 / (1 + 0.055) + 100 / (1 + 0.1)
+     depenses_ht_tva_taux_reduit: 0
+     depenses_ht_tva_taux_super_reduit: 0
+     #
      depenses_tva_taux_plein: 0
-     depenses_tva_taux_intermediaire: 200
+     depenses_tva_taux_intermediaire: 200 * (1 + 0.1 ) / (1 + 0.055) + 100
      depenses_tva_taux_reduit: 0
      depenses_tva_taux_super_reduit: 0
-     tva_taux_plein: 0 * 0.2 / (1 + 0.2)
-     # tva_taux_intermediaire: 200 * 0.1 / (1 + 0.1)
-     tva_taux_reduit: 0 * 0.055 / (1 + 0.055)
-     tva_taux_super_reduit: 0 * 0.021 / (1 + 0.021)
+     #
+     tva_taux_plein: 0
+     tva_taux_intermediaire: 200 * 0.1 / (1 + 0.055) + 100 * 0.1
+     tva_taux_reduit: 0
+     tva_taux_super_reduit: 0
