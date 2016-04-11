@@ -10,6 +10,8 @@ import pkg_resources
 
 from openfisca_core import reforms
 
+from openfisca_france_indirect_taxation.model.base import get_legislation_data_frames
+
 from openfisca_france_indirect_taxation.model.consommation.postes_coicop import generate_postes_agreges_variables
 from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import generate_variables
 from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss import (
@@ -87,7 +89,6 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
         )
     reform_key = key[6:]
     aliss_reform = build_aliss_reform()
-    from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import categories_fiscales_data_frame
     categories_fiscales_reform = aliss_reform[[reform_key, 'code_bdf']].drop_duplicates().copy()
     reform_mismatch = categories_fiscales_reform.groupby(['code_bdf']).filter(
         lambda x: x[reform_key].nunique() > 1).copy().sort_values('code_bdf')
@@ -107,6 +108,7 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
 
     categories_fiscales_reform.rename(columns=({reform_key: 'categorie_fiscale'}), inplace = True)
     year = 2014
+    categories_fiscales_data_frame, _ = get_legislation_data_frames()
     categories_fiscales = categories_fiscales_data_frame.query('start <= @year & @year <= stop').copy()
     assert not categories_fiscales.empty
     assert not categories_fiscales.code_bdf.duplicated().any()
@@ -119,9 +121,6 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     assert not categories_fiscales.code_bdf.duplicated().any(), "there are {} duplicated".format(
         categories_fiscales.code_bdf.duplicated().sum())
 
-    # if key == 'aliss_tva_sociale':
-    #     boum
-
     generate_variables(
         categories_fiscales = categories_fiscales,
         Reform = Reform,
@@ -133,5 +132,4 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
         tax_benefit_system = tax_benefit_system,
         )
     reform = Reform()
-    # reform.modify_legislation_json(modifier_function = modify_legislation_json)
     return reform

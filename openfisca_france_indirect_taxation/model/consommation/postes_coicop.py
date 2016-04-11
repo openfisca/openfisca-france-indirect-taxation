@@ -5,9 +5,6 @@
 from __future__ import division
 
 from datetime import date
-import os
-import pandas as pd
-import pkg_resources
 import logging
 
 from biryani.strings import slugify
@@ -17,6 +14,7 @@ from openfisca_core.formulas import Variable
 
 
 from openfisca_france_indirect_taxation.model.base import *
+from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import depenses_function_creator
 
 
 log = logging.getLogger(__name__)
@@ -25,12 +23,6 @@ log = logging.getLogger(__name__)
 categories_fiscales_data_frame = None
 codes_coicop_data_frame = None
 
-legislation_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-    'openfisca_france_indirect_taxation',
-    'assets',
-    'legislation',
-    )
 
 
 def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None,
@@ -148,8 +140,8 @@ def generate_depenses_ht_postes_variables(categories_fiscales = None, Reform = N
         del definitions_by_name
 
 
-def generate_postes_agreges_variables(Reform = None, categories_fiscales = None, tax_benefit_system = None):
-    from categories_fiscales import depenses_function_creator
+def generate_postes_agreges_variables(categories_fiscales = None, Reform = None, tax_benefit_system = None):
+
     codes_bdf = [element for element in codes_coicop_data_frame.code_bdf.unique()]
     for num_prefix in ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]:
         codes_coicop = codes_coicop_data_frame.loc[
@@ -161,7 +153,7 @@ def generate_postes_agreges_variables(Reform = None, categories_fiscales = None,
         # Trick to create a class with a dynamic name.
         dated_func = depenses_function_creator(
             codes_coicop,
-            categories_fiscales,
+            categories_fiscales = categories_fiscales,
             Reform = Reform,
             depenses_type = 'ttc')
 
@@ -182,21 +174,6 @@ def generate_postes_agreges_variables(Reform = None, categories_fiscales = None,
         del definitions_by_name
 
 
-def get_legislation_data_frames():
-    codes_coicop_data_frame = pd.read_csv(
-        os.path.join(legislation_directory, 'coicop_legislation.csv'),
-        )
-    codes_coicop_data_frame = codes_coicop_data_frame.query('not (code_bdf != code_bdf)')[  # NaN removal
-        ['code_coicop', 'code_bdf', 'label', 'categorie_fiscale', 'start', 'stop']].copy()
-    codes_coicop_data_frame = codes_coicop_data_frame.loc[
-        codes_coicop_data_frame.code_coicop.str[:2].astype(int) <= 12
-        ].copy()
-    categories_fiscales_data_frame = codes_coicop_data_frame[
-        ['code_coicop', 'code_bdf', 'categorie_fiscale', 'start', 'stop', 'label']
-        ].copy().fillna('')
-    return categories_fiscales_data_frame, codes_coicop_data_frame
-
-
 def preload_postes_coicop_data_frame():
     global categories_fiscales_data_frame
     global codes_coicop_data_frame
@@ -204,4 +181,4 @@ def preload_postes_coicop_data_frame():
         categories_fiscales_data_frame, codes_coicop_data_frame = get_legislation_data_frames()
         generate_postes_variables()
         generate_postes_agreges_variables()
-        generate_depenses_ht_postes_variables(categories_fiscales = categories_fiscales_data_frame)
+        generate_depenses_ht_postes_variables(categories_fiscales = categories_fiscales_data_frame.copy())

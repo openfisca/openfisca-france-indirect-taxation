@@ -43,8 +43,8 @@ categories_fiscales_data_frame = None
 codes_coicop_data_frame = None
 
 
-def depenses_function_creator(postes_coicop, categories_fiscales, Reform = None, year_start = None, year_stop = None,
-        depenses_type = None):
+def depenses_function_creator(postes_coicop, categories_fiscales = None, Reform = None,
+        year_start = None, year_stop = None, depenses_type = None):
     assert depenses_type is not None
     start = date(year_start, 1, 1) if year_start is not None else None
     stop = date(year_stop, 12, 31) if year_stop is not None else None
@@ -58,8 +58,10 @@ def depenses_function_creator(postes_coicop, categories_fiscales, Reform = None,
                     )
             func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
             return func
+
         elif depenses_type == 'ttc':  # Does not work with reform ! Should update poste_
             if not Reform:
+
                 @dated_function(start = start, stop = stop)
                 def func(self, simulation, period):
                     return period, sum(simulation.calculate(
@@ -68,18 +70,34 @@ def depenses_function_creator(postes_coicop, categories_fiscales, Reform = None,
                 func.__name__ = "function_{year_start}_{year_stop}".format(
                     year_start = year_start, year_stop = year_stop)
                 return func
-            else:
+
+            elif Reform is not None and categories_fiscales is not None:
+
+                print categories_fiscales
+                categorie_fiscale_by_poste = dict(
+                    (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
+                    for poste in postes_coicop)
+                print categorie_fiscale_by_poste
+
                 @dated_function(start = start, stop = stop)
-                def func(self, simulation, period):
-                    return period, sum(simulation.calculate(
+                def func(self, simulation, period, categorie_fiscale_by_poste = categorie_fiscale_by_poste):
+                    print categorie_fiscale_by_poste
+                    poste_agrege = sum(simulation.calculate(
                         'depenses_ht_poste_' + slugify(poste, separator = u'_'), period
-                        ) * (1 + get_poste_categorie_fiscale(poste, categories_fiscales))
+                        ) * (
+                            1 + simulation.legislation_at(period.start).imposition_indirecte.tva[
+                                categorie_fiscale_by_poste[poste][4:]
+                                ]
+                            )
                         for poste in postes_coicop
                         )
+                    return period, poste_agrege
+
                 func.__name__ = "function_{year_start}_{year_stop}".format(
                     year_start = year_start, year_stop = year_stop)
                 return func
-
+            else:
+                raise
     else:  # To deal with Reform emptying some fiscal categories
         @dated_function(start = start, stop = stop)
         def func(self, simulation, period):
@@ -96,7 +114,6 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
     if Reform:
         removed_categories = set(reference_categories).difference(
             set(categories_fiscales['categorie_fiscale'].drop_duplicates()))
-        Reform.categories_fiscales = categories_fiscales
 
     for categorie_fiscale in reference_categories:
         year_start = 1994
@@ -159,22 +176,8 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
 
 
 def preload_categories_fiscales_data_frame():
-    from openfisca_france_indirect_taxation.model.consommation.postes_coicop import get_legislation_data_frames
     global codes_coicop_data_frame
     global categories_fiscales_data_frame
     if codes_coicop_data_frame is None or categories_fiscales_data_frame is None:
         categories_fiscales_data_frame, codes_coicop_data_frame = get_legislation_data_frames()
-        generate_variables(categories_fiscales = categories_fiscales_data_frame)
-
-
-def get_poste_categorie_fiscale(poste_coicop, categories_fiscales = None, start = 9999, stop = 0):
-    from openfisca_france_indirect_taxation.model.consommation.postes_coicop import get_legislation_data_frames
-    global categories_fiscales_data_frame
-    if categories_fiscales_data_frame is None:
-        categories_fiscales_data_frame, _ = get_legislation_data_frames()
-
-    categories_fiscales = categories_fiscales_data_frame.copy() if categories_fiscales is None else categories_fiscales
-    return categories_fiscales.query(
-        '(code_coicop == @poste_coicop) and (start <= @start) and (@stop <= stop)')[
-        'categorie_fiscale'
-        ].tolist()
+        generate_variables(categories_fiscales = categories_fiscales_data_frame.copy())
