@@ -19,6 +19,6 @@
      depenses_tva_taux_super_reduit: 0
      #
      tva_taux_plein: 0
-     tva_taux_intermediaire: 200 * 0.1 / (1 + 0.055) + 100 * 0.1
+     tva_taux_intermediaire: 200 * 0.1 / (1 + 0.055) + 100 / (1 + 0.1) * 0.1
      tva_taux_reduit: 0
      tva_taux_super_reduit: 0

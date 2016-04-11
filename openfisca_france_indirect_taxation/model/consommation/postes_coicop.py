@@ -148,7 +148,7 @@ def generate_depenses_ht_postes_variables(categories_fiscales = None, Reform = N
         del definitions_by_name
 
 
-def generate_postes_agreges_variables():
+def generate_postes_agreges_variables(Reform = None, categories_fiscales = None, tax_benefit_system = None):
     from categories_fiscales import depenses_function_creator
     codes_bdf = [element for element in codes_coicop_data_frame.code_bdf.unique()]
     for num_prefix in ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]:
@@ -159,14 +159,24 @@ def generate_postes_agreges_variables():
         log.info(u'Creating variable {} with label {} using {}'.format(class_name, num_prefix, codes_coicop))
 
         # Trick to create a class with a dynamic name.
-        dated_func = depenses_function_creator(codes_coicop, '', depenses_type = 'ttc')
+        dated_func = depenses_function_creator(
+            codes_coicop,
+            categories_fiscales,
+            Reform = Reform,
+            depenses_type = 'ttc')
+
         functions_by_name = dict(fucntion = dated_func)
         label = u"Poste agrégé {}".format(num_prefix)
-        definitions_by_name = dict(
-            column = FloatCol,
-            entity_class = Menages,
-            label = label,
-            )
+        if not Reform:
+            definitions_by_name = dict(
+                column = FloatCol,
+                entity_class = Menages,
+                label = label,
+                )
+        else:
+            definitions_by_name = dict(
+                reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
+                )
         definitions_by_name.update(functions_by_name)
         type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
         del definitions_by_name

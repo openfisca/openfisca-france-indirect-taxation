@@ -10,6 +10,7 @@ import pkg_resources
 
 from openfisca_core import reforms
 
+from openfisca_france_indirect_taxation.model.consommation.postes_coicop import generate_postes_agreges_variables
 from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import generate_variables
 from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss import (
     add_poste_coicop,
@@ -105,8 +106,9 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
         categories_fiscales_reform[reform_key] = categories_fiscales_reform[reform_key].astype(str)
 
     categories_fiscales_reform.rename(columns=({reform_key: 'categorie_fiscale'}), inplace = True)
-    year = 2011
+    year = 2014
     categories_fiscales = categories_fiscales_data_frame.query('start <= @year & @year <= stop').copy()
+    assert not categories_fiscales.empty
     assert not categories_fiscales.code_bdf.duplicated().any()
 
     categories_fiscales = categories_fiscales.set_index(['code_bdf'])
@@ -117,7 +119,15 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     assert not categories_fiscales.code_bdf.duplicated().any(), "there are {} duplicated".format(
         categories_fiscales.code_bdf.duplicated().sum())
 
+    # if key == 'aliss_tva_sociale':
+    #     boum
+
     generate_variables(
+        categories_fiscales = categories_fiscales,
+        Reform = Reform,
+        tax_benefit_system = tax_benefit_system,
+        )
+    generate_postes_agreges_variables(
         categories_fiscales = categories_fiscales,
         Reform = Reform,
         tax_benefit_system = tax_benefit_system,
