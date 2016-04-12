@@ -78,6 +78,13 @@ class niveau_vie_decile(Variable):
         return period, niveau_vie_decile
 
 
+class loyer_impute(Variable):
+    column = FloatCol
+    entity_class = Menages
+    is_permanent = True
+    label = u"Loyer imputé du ménage"
+
+
 class rev_disp_loyerimput(Variable):
     column = FloatCol
     entity_class = Menages
