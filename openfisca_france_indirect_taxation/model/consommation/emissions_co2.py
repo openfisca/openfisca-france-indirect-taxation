@@ -23,6 +23,20 @@ class emissions_CO2_carburants(Variable):
         return period, emissions
 
 
+class emissions_CO2_fioul_domestique(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Emissions de CO2 des ménages via leur consommation de fioul domestique, en kg de CO2"
+
+    def function(self, simulation, period):
+        quantites_fioul = simulation.calculate('quantites_fioul_domestique', period)
+        emissions_fioul = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_fioul_domestique
+        emissions = quantites_fioul * emissions_fioul
+
+        return period, emissions
+
+
 class emissions_CO2_gaz(Variable):
     column = FloatCol
     entity_class = Menages

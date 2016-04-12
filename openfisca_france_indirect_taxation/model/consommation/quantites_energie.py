@@ -315,3 +315,17 @@ class quantites_electricite_selon_compteur(Variable):
         quantites_electricite_selon_compteur = numpy.maximum(quantites_electricite_selon_compteur, 0)
 
         return period, quantites_electricite_selon_compteur
+
+
+class quantites_fioul_domestique(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Quantité de fuel domestique consommée par les ménages, en litres"
+
+    def function(self, simulation, period):
+        depenses_fioul = simulation.calculate('poste_coicop_453', period)
+        prix_fioul_ttc = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
+        quantites_fioul = depenses_fioul / prix_fioul_ttc
+
+        return period, quantites_fioul
