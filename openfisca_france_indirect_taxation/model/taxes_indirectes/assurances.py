@@ -15,7 +15,8 @@ class assurance_sante_taxe(Variable):
 
     def function(self, simulation, period):
         depenses_assurance_sante = simulation.calculate('depenses_assurance_sante', period)
-        taux = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.contrats_d_assurance_maladie_individuelles_et_collectives_cas_general_2_ter
+        taux = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances[
+            'contrats_d_assurance_maladie_individuelles_et_collectives_cas_general_2_ter']
         # To do: use datedformula and change the computation method when other taxes play a role.
         return period, tax_from_expense_including_tax(depenses_assurance_sante, taux)
 
@@ -29,15 +30,18 @@ class assurance_transport_taxe(DatedVariable):
     def function_84_01(self, simulation, period):
         depenses_assurance_transport = simulation.calculate('depenses_assurance_transport', period)
         taux_assurance_vtm = \
-            simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers
+            simulation.legislation_at(period.start).imposition_indirecte.taux_assurances[
+                'assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers']
         taux = taux_assurance_vtm
         return period, tax_from_expense_including_tax(depenses_assurance_transport, taux)
 
     @dated_function(start = date(2002, 1, 1), stop = date(2004, 8, 4))
     def function_02_04(self, simulation, period):
         depenses_assurance_transport = simulation.calculate('depenses_assurance_transport', period)
-        taux_assurance_vtm = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers
-        taux_contrib_secu_vtm = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances.contribution_secu_assurances_automobiles
+        taux_assurance_vtm = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances[
+            'assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers']
+        taux_contrib_secu_vtm = simulation.legislation_at(period.start).imposition_indirecte.taux_assurances[
+            'contribution_secu_assurances_automobiles']
         taux = taux_assurance_vtm + taux_contrib_secu_vtm
         return period, tax_from_expense_including_tax(depenses_assurance_transport, taux)
 

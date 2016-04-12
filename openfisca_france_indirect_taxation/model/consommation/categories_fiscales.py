@@ -43,74 +43,35 @@ categories_fiscales_data_frame = None
 codes_coicop_data_frame = None
 
 
-def depenses_function_creator(postes_coicop, categories_fiscales = None, Reform = None,
-        year_start = None, year_stop = None, depenses_type = None):
-    assert depenses_type is not None
+def depenses_function_creator(postes_coicop, categorie_fiscale = None, Reform = None,
+        year_start = None, year_stop = None):
     start = date(year_start, 1, 1) if year_start is not None else None
     stop = date(year_stop, 12, 31) if year_stop is not None else None
+
     if len(postes_coicop) != 0:
+        @dated_function(start = start, stop = stop)
+        def func(self, simulation, period):
+            return period, sum(simulation.calculate(
+                'depenses_ht_poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
+                )
+        func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+        return func
 
-        if depenses_type == 'ht':
-            @dated_function(start = start, stop = stop)
-            def func(self, simulation, period):
-                return period, sum(simulation.calculate(
-                    'depenses_ht_poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
-                    )
-            func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
-            return func
-
-        elif depenses_type == 'ttc':  # Does not work with reform ! Should update poste_
-            if not Reform:
-
-                @dated_function(start = start, stop = stop)
-                def func(self, simulation, period):
-                    return period, sum(simulation.calculate(
-                        'poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
-                        )
-                func.__name__ = "function_{year_start}_{year_stop}".format(
-                    year_start = year_start, year_stop = year_stop)
-                return func
-
-            elif Reform is not None and categories_fiscales is not None:
-
-                print categories_fiscales
-                categorie_fiscale_by_poste = dict(
-                    (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
-                    for poste in postes_coicop)
-                print categorie_fiscale_by_poste
-
-                @dated_function(start = start, stop = stop)
-                def func(self, simulation, period, categorie_fiscale_by_poste = categorie_fiscale_by_poste):
-                    print categorie_fiscale_by_poste
-                    poste_agrege = sum(simulation.calculate(
-                        'depenses_ht_poste_' + slugify(poste, separator = u'_'), period
-                        ) * (
-                            1 + simulation.legislation_at(period.start).imposition_indirecte.tva[
-                                categorie_fiscale_by_poste[poste][4:]
-                                ]
-                            )
-                        for poste in postes_coicop
-                        )
-                    return period, poste_agrege
-
-                func.__name__ = "function_{year_start}_{year_stop}".format(
-                    year_start = year_start, year_stop = year_stop)
-                return func
-            else:
-                raise
     else:  # To deal with Reform emptying some fiscal categories
+
         @dated_function(start = start, stop = stop)
         def func(self, simulation, period):
             return period, self.zeros()
 
-        func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
-        return func
+    func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+    return func
 
 
 def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_system = None):
     assert categories_fiscales is not None
     reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
     removed_categories = set()
+    completed_categories_fiscales = insert_tva(categories_fiscales)
     if Reform:
         removed_categories = set(reference_categories).difference(
             set(categories_fiscales['categorie_fiscale'].drop_duplicates()))
@@ -121,7 +82,7 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
         functions_by_name = dict()
         for year in range(year_start, year_final_stop + 1):
             postes_coicop = sorted(
-                categories_fiscales.query(
+                completed_categories_fiscales.query(
                     'start <= @year and stop >= @year and categorie_fiscale == @categorie_fiscale'
                     )['code_coicop'].astype(str))
             if year == year_start:
@@ -136,9 +97,9 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
                 dated_func = depenses_function_creator(
                     previous_postes_coicop,
                     categorie_fiscale,
+                    Reform = None,
                     year_start = year_start,
                     year_stop = year_stop,
-                    depenses_type = 'ht',
                     )
                 dated_function_name = u"function_{year_start}_{year_stop}".format(
                     year_start = year_start, year_stop = year_stop)

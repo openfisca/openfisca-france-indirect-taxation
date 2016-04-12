@@ -14,7 +14,6 @@ from openfisca_core.formulas import Variable
 
 
 from openfisca_france_indirect_taxation.model.base import *
-from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import depenses_function_creator
 
 
 log = logging.getLogger(__name__)
@@ -22,33 +21,6 @@ log = logging.getLogger(__name__)
 
 categories_fiscales_data_frame = None
 codes_coicop_data_frame = None
-
-
-
-def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None,
-        year_start = None, year_stop = None):
-    start = date(year_start, 1, 1) if year_start is not None else None
-    stop = date(year_stop, 12, 31) if year_stop is not None else None
-    assert categorie_fiscale is not None
-
-    @dated_function(start = start, stop = stop)
-    def func(self, simulation, period, categorie_fiscale = categorie_fiscale):
-        if categorie_fiscale == '':  # pas de tva
-            taux = 0
-        else:
-            if categorie_fiscale in ['biere', 'vin', 'alcools_forts', 'cigares', 'cigarettes', 'tabac_a_rouler']:
-                categorie_fiscale = 'tva_taux_plein'
-            try:
-                taux = simulation.legislation_at(period.start).imposition_indirecte.tva[categorie_fiscale[4:]]
-            except Exception as e:
-                print categorie_fiscale
-                print e
-                raise
-
-        return period, simulation.calculate('poste_' + slugify(poste_coicop, separator = u'_'), period) / (1 + taux)
-
-    func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
-    return func
 
 
 def generate_postes_variables():
@@ -151,11 +123,11 @@ def generate_postes_agreges_variables(categories_fiscales = None, Reform = None,
         log.info(u'Creating variable {} with label {} using {}'.format(class_name, num_prefix, codes_coicop))
 
         # Trick to create a class with a dynamic name.
-        dated_func = depenses_function_creator(
+        dated_func = depenses_postes_agreges_function_creator(
             codes_coicop,
             categories_fiscales = categories_fiscales,
             Reform = Reform,
-            depenses_type = 'ttc')
+            )
 
         functions_by_name = dict(fucntion = dated_func)
         label = u"Poste agrégé {}".format(num_prefix)

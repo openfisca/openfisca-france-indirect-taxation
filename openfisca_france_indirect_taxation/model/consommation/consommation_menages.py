@@ -49,6 +49,16 @@ class depenses_carburants(Variable):
         return period, simulation.calculate('depenses_ticpe', period)
 
 
+class depenses_ticpe(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Consommation de ticpe"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        return period, simulation.calculate('depenses_ht_ticpe', period) * (1 + taux_plein_tva)
+
+
 class depenses_essence_recalculees(Variable):
     column = FloatCol
     entity_class = Menages

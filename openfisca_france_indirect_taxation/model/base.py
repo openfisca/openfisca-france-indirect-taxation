@@ -23,9 +23,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+from datetime import date
 import os
 import pandas as pd
 import pkg_resources
+
+
+from biryani.strings import slugify
 
 
 from openfisca_core.columns import AgeCol, DateCol, FloatCol, IntCol, EnumCol, StrCol
@@ -42,6 +46,8 @@ __all__ = [
     'DateCol',
     'DatedVariable',
     'dated_function',
+    'depenses_postes_agreges_function_creator',
+    'depenses_ht_postes_function_creator',
     'droit_d_accise',
     'Enum',
     'EnumCol',
@@ -50,6 +56,7 @@ __all__ = [
     'get_poste_categorie_fiscale',
     'Individus',
     'IntCol',
+    'insert_tva',
     'mark_weighted_percentiles',
     'Menages',
     'StrCol',
@@ -74,6 +81,29 @@ def taux_implicite(accise, tva, prix_ttc):
 def tax_from_expense_including_tax(expense = None, tax_rate = None):
     """Compute the tax amount form the expense including tax : si Dttc = (1+t) * Dht, ici on obtient t * Dht"""
     return expense * tax_rate / (1 + tax_rate)
+
+
+def insert_tva(categories_fiscales):
+    categories_fiscales = categories_fiscales.copy()
+    tva_by_categorie_primaire = dict(
+        biere = 'tva_taux_plein',
+        vin = 'tva_taux_plein',
+        alcools_forts = 'tva_taux_plein',
+        cigares = '',
+        cigarettes = '',
+        tabac_a_rouler = '',
+        ticpe = 'tva_taux_plein',
+        assurance_transport = '',
+        assurance_sante = '',
+        autres_assurances = '',
+        )
+    extracts = pd.DataFrame()
+    for categorie_primaire, tva in tva_by_categorie_primaire.iteritems():
+        extract = categories_fiscales.query('categorie_fiscale == @categorie_primaire').copy()
+        extract['categorie_fiscale'] = tva
+        extracts = pd.concat([extracts, extract], ignore_index=True)
+
+    return pd.concat([extracts, categories_fiscales], ignore_index=True)
 
 
 def get_legislation_data_frames():
@@ -105,3 +135,72 @@ def get_poste_categorie_fiscale(poste_coicop, categories_fiscales = None, start 
         '(code_coicop == @poste_coicop) and (start <= @start) and (@stop <= stop)')[
         'categorie_fiscale'
         ].tolist()
+
+
+def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales = None, Reform = None,
+        year_start = None, year_stop = None):
+        start = date(year_start, 1, 1) if year_start is not None else None
+        stop = date(year_stop, 12, 31) if year_stop is not None else None
+        if len(postes_coicop) != 0:
+            if not Reform:
+                @dated_function(start = start, stop = stop)
+                def func(self, simulation, period):
+                    return period, sum(simulation.calculate(
+                        'poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
+                        )
+                func.__name__ = "function_{year_start}_{year_stop}".format(
+                    year_start = year_start, year_stop = year_stop)
+                return func
+
+            elif Reform is not None and categories_fiscales is not None:
+                print categories_fiscales[['code_coicop', 'categorie_fiscale']]
+                categorie_fiscale_by_poste = dict(
+                    (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
+                    for poste in postes_coicop)
+                print categorie_fiscale_by_poste
+
+                @dated_function(start = start, stop = stop)
+                def func(self, simulation, period, categorie_fiscale_by_poste = categorie_fiscale_by_poste):
+                    print categorie_fiscale_by_poste
+                    poste_agrege = sum(simulation.calculate(
+                        'depenses_ht_poste_' + slugify(poste, separator = u'_'), period
+                        ) * (
+                            1 + simulation.legislation_at(period.start).imposition_indirecte.tva[
+                                categorie_fiscale_by_poste[poste][4:]
+                                ]
+                            )
+                        for poste in postes_coicop
+                        )
+                    return period, poste_agrege
+
+                func.__name__ = "function_{year_start}_{year_stop}".format(
+                    year_start = year_start, year_stop = year_stop)
+                return func
+            else:
+                raise
+
+
+def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, year_start = None, year_stop = None):
+    start = date(year_start, 1, 1) if year_start is not None else None
+    stop = date(year_stop, 12, 31) if year_stop is not None else None
+    assert categorie_fiscale is not None
+
+    @dated_function(start = start, stop = stop)
+    def func(self, simulation, period, categorie_fiscale = categorie_fiscale):
+        if categorie_fiscale == '':  # pas de tva
+            taux = 0
+        else:
+            if categorie_fiscale in ['biere', 'vin', 'alcools_forts', 'cigares', 'cigarettes', 'tabac_a_rouler',
+                    'ticpe', 'assurance_transport', 'assurance_sante', 'autres_assurances']:
+                categorie_fiscale = 'tva_taux_plein'
+            try:
+                taux = simulation.legislation_at(period.start).imposition_indirecte.tva[categorie_fiscale[4:]]
+            except Exception as e:
+                print categorie_fiscale
+                print e
+                raise
+
+        return period, simulation.calculate('poste_' + slugify(poste_coicop, separator = u'_'), period) / (1 + taux)
+
+    func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+    return func
