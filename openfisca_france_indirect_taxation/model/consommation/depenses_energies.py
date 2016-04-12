@@ -394,3 +394,44 @@ class depenses_electricite_variables(Variable):
         depenses_electricite_variables = numpy.maximum(depenses_electricite_variables, 0)
 
         return period, depenses_electricite_variables
+
+
+class depenses_energies(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en énergie des ménages, carburants et logement"
+
+    def function(self, simulation, period):
+        depenses_electricite_gaz = simulation.calculate('poste_coicop_4511', period)
+        depenses_electricite = simulation.calculate('poste_coicop_451', period)
+        depenses_gaz = simulation.calculate('poste_coicop_452', period)
+        depenses_fioul = simulation.calculate('poste_coicop_453', period)
+        depenses_combustibles_solides = simulation.calculate('poste_coicop_454', period)
+        depenses_carburants = simulation.calculate('poste_coicop_722', period)
+
+        depenses_energies = (
+            depenses_electricite_gaz + depenses_electricite + depenses_gaz + depenses_fioul +
+            depenses_combustibles_solides + depenses_carburants
+            )
+
+        return period, depenses_energies
+
+
+class depenses_energies_logement(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses en énergie des ménages pour le logement"
+
+    def function(self, simulation, period):
+        depenses_electricite_gaz = simulation.calculate('poste_coicop_4511', period)
+        depenses_electricite = simulation.calculate('poste_coicop_451', period)
+        depenses_gaz = simulation.calculate('poste_coicop_452', period)
+        depenses_fioul = simulation.calculate('poste_coicop_453', period)
+        depenses_combustibles_solides = simulation.calculate('poste_coicop_454', period)
+
+        depenses_energies = (
+            depenses_electricite_gaz + depenses_electricite + depenses_gaz + depenses_fioul +
+            depenses_combustibles_solides
+            )
+
+        return period, depenses_energies
