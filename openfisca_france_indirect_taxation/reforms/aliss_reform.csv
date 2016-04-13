@@ -1,0 +1,96 @@
+nomf,nomc,code_bdf,categorie_fiscale,sante,environnement,mixte,tva_sociale
+9 : Plant-based dishes,1111 : Riz  et produits à base de riz,c01111,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+9 : Plant-based dishes,1113 : Pâtes et plats à base de pâtes,c01113,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+9 : Plant-based dishes,"1177 : légumes et plats à base de légume, en conserve (sans PDT)",c01177,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+9 : Plant-based dishes,"1178 : légumes préparés et plats à base de légumes, frais et surgelés",c01178,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+9 : Plant-based dishes,"1179 : pomme de terre, autres tubercules, produits à base de PDT",c01179,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+9 : Plant-based dishes,"1193 : levure , préparations pour desserts, soupes",c01193,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+11 : Starchy foods,1111 : Riz  et produits à base de riz,c01111,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+11 : Starchy foods,1112 : Pain/viennoiserie/biscuits/gâteaux,c01112,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+11 : Starchy foods,1113 : Pâtes et plats à base de pâtes,c01113,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+11 : Starchy foods,1115 : Autres céréales et produits à base de céréales,c01115,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+11 : Starchy foods,"1144 : Yaourts, fromage blanc",c01144,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+11 : Starchy foods,"1146 : Autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisé)",c01146,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+11 : Starchy foods,1173 : légumes frais cultivés pour leurs fruits,c01173,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+11 : Starchy foods,1175 : légumes secs,c01175,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+11 : Starchy foods,1176 : légumes surgelés (non cuisinés),c01176,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+11 : Starchy foods,"1177 : légumes et plats à base de légume, en conserve (sans PDT)",c01177,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+11 : Starchy foods,"1178 : légumes préparés et plats à base de légumes, frais et surgelés",c01178,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+11 : Starchy foods,"1179 : pomme de terre, autres tubercules, produits à base de PDT",c01179,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+20 : Prepared mixed meals,1111 : Riz  et produits à base de riz,c01111,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+20 : Prepared mixed meals,1112 : Pain/viennoiserie/biscuits/gâteaux,c01112,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+20 : Prepared mixed meals,1113 : Pâtes et plats à base de pâtes,c01113,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+20 : Prepared mixed meals,"1114 : Préparations telles que pâte à pâtisser, gâteau industriel, tarte, quiche",c01114,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+20 : Prepared mixed meals,"1126 : Conserve de viande, plat préparé de viandes",c01126,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+20 : Prepared mixed meals,1134 : Conserves et plats préparés à base de produits de mer,c01134,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+20 : Prepared mixed meals,"1178 : légumes préparés et plats à base de légumes, frais et surgelés",c01178,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+20 : Prepared mixed meals,"1179 : pomme de terre, autres tubercules, produits à base de PDT",c01179,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+20 : Prepared mixed meals,"1193 : levure , préparations pour desserts, soupes",c01193,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+20 : Prepared mixed meals,1194 : autres produits alimentaires,c01194,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+21 : Prepared desserts,1112 : Pain/viennoiserie/biscuits/gâteaux,c01112,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+21 : Prepared desserts,"1114 : Préparations telles que pâte à pâtisser, gâteau industriel, tarte, quiche",c01114,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+21 : Prepared desserts,1143 : Lait de conserve,c01143,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+21 : Prepared desserts,"1146 : Autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisé)",c01146,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+21 : Prepared desserts,"1185 : crèmes glacées, sorbets, entremets glacés",c01185,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+10 : Plant-based foods high in sugar,1115 : Autres céréales et produits à base de céréales,c01115,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+10 : Plant-based foods high in sugar,1181 : sucre,c01181,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+10 : Plant-based foods high in sugar,"1182 : confitures, compote, gelées, purées et pâtes de fruits, miel",c01182,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+10 : Plant-based foods high in sugar,1183 : chocolat,c01183,tva_taux_plein,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+10 : Plant-based foods high in sugar,"1184 : sucreries, bonbons et autres confiseries",c01184,tva_taux_plein,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+10 : Plant-based foods high in sugar,1213 : cacao et chocolat en poudre,c01213,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+13 : Beef,1121 : Viande bovine fraîche ou surgelée,c01121,tva_taux_reduit,tva_taux_intermediaire,tva_taux_plein,tva_taux_plein,tva_taux_intermediaire
+13 : Beef,"1126 : Conserve de viande, plat préparé de viandes",c01126,tva_taux_reduit,tva_taux_intermediaire,tva_taux_plein,tva_taux_plein,tva_taux_intermediaire
+14 : Other meats,1122 : Viande porcine fraîche ou surgelée,c01122,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire
+14 : Other meats,1123 : Viande ovine ou caprine fraîche ou surgelée,c01123,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire
+14 : Other meats,1124 : Viande de volaille fraîche ou surgelée,c01124,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire
+14 : Other meats,"1126 : Conserve de viande, plat préparé de viandes",c01126,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire
+14 : Other meats,1127 : Autres viandes comestibles fraîches ou surgelées,c01127,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire
+14 : Other meats,1147 : Oeufs,c01147,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire
+15 : Cooked meats,"1125 : Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé",c01125,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire,tva_taux_plein,tva_taux_intermediaire
+16 : Animal-based foods high in fats,"1125 : Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé",c01125,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+16 : Animal-based foods high in fats,"1146 : Autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisé)",c01146,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+16 : Animal-based foods high in fats,1151 : Beurre,c01151,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+16 : Animal-based foods high in fats,1155 : saindoux et autres graisses d'origine animale,c01155,tva_taux_plein,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+16 : Animal-based foods high in fats,1191 : sauces et condiments,c01191,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+18 : Fish and seafoods,1130 : Poissons frais,c01130,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire
+18 : Fish and seafoods,1131 : Poissons surgelés ou congelés ,c01131,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire
+18 : Fish and seafoods,1132 : Fruits de mer frais ou surgelés,c01132,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire
+18 : Fish and seafoods,"1133 : Poissons et fruits de mer salés, fumés, séchés",c01133,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire
+18 : Fish and seafoods,1134 : Conserves et plats préparés à base de produits de mer,c01134,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire,tva_taux_intermediaire
+19 : Dairy products,1141 : Lait entier,c01141,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+19 : Dairy products,"1142 : Lait demi-écrémé, écrémé",c01142,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+19 : Dairy products,1143 : Lait de conserve,c01143,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+19 : Dairy products,"1144 : Yaourts, fromage blanc",c01144,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+19 : Dairy products,1145 : Fromage et lait caillé,c01145,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+19 : Dairy products,"1146 : Autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisé)",c01146,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+17 : Cheese,"1144 : Yaourts, fromage blanc",c01144,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+17 : Cheese,1145 : Fromage et lait caillé,c01145,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+8 : Plant-based foods high in fats,1152 : Margarine et autres graisses végétales,c01152,tva_taux_plein,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+8 : Plant-based foods high in fats,1153 : Huiles alimentaires d'olive,c01153,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+8 : Plant-based foods high in fats,"1154 : Huiles alimentaires d'arachide, de tournesol, de maïs, colza",c01154,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+6 : Fresh fruits and vegetables,1161 : agrumes (frais ou congelés),c01161,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+6 : Fresh fruits and vegetables,1162 : bananes fraiches,c01162,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+6 : Fresh fruits and vegetables,1163 : pommes,c01163,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+6 : Fresh fruits and vegetables,1164 : poires,c01164,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+6 : Fresh fruits and vegetables,1165 : fruits à noyaux (frais ou congelés),c01165,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+6 : Fresh fruits and vegetables,1166 : baies (fraîches ou congelées),c01166,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+6 : Fresh fruits and vegetables,"1167 : autres fruits, fruits tropicaux (frais ou congelés)",c01167,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+6 : Fresh fruits and vegetables,"1171 : légumes frais à feuilles et à tiges, herbes aromatiques (frais)",c01171,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+6 : Fresh fruits and vegetables,1172 : choux (frais),c01172,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+6 : Fresh fruits and vegetables,1173 : légumes frais cultivés pour leurs fruits,c01173,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+6 : Fresh fruits and vegetables,1174 : racines alimentaires fraiches et champignons frais,c01174,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+12 : Processed fruits and vegetables,1168 : fruits séchés,c01168,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+12 : Processed fruits and vegetables,1169 : fruits au sirop et fruits surgelés,c01169,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+12 : Processed fruits and vegetables,"1171 : légumes frais à feuilles et à tiges, herbes aromatiques (frais)",c01171,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+12 : Processed fruits and vegetables,1176 : légumes surgelés (non cuisinés),c01176,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+12 : Processed fruits and vegetables,"1177 : légumes et plats à base de légume, en conserve (sans PDT)",c01177,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+12 : Processed fruits and vegetables,"1178 : légumes préparés et plats à base de légumes, frais et surgelés",c01178,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+12 : Processed fruits and vegetables,"1182 : confitures, compote, gelées, purées et pâtes de fruits, miel",c01182,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+12 : Processed fruits and vegetables,1191 : sauces et condiments,c01191,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+7 : Spices,1191 : sauces et condiments,c01191,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+7 : Spices,1192 : sel et épices sèches,c01192,tva_taux_reduit,tva_taux_intermediaire,tva_taux_reduit,tva_taux_intermediaire,tva_taux_intermediaire
+3 : Soft drinks,1222 : boissons gazeuses,c01222,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+3 : Soft drinks,"1223 : jus de fruits et de légumes, sirops, boissons aromatisées",c01223,tva_taux_reduit,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+3 : Soft drinks,2131 : bière et boissons à base de bière,c02131,biere,tva_taux_plein,tva_taux_reduit,tva_taux_plein,tva_taux_intermediaire
+1 : Juices,"1223 : jus de fruits et de légumes, sirops, boissons aromatisées",c01223,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire
+1 : Juices,1224 : jus de légumes,c01224,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_reduit,tva_taux_intermediaire

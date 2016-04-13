@@ -153,11 +153,11 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                 return func
 
             elif Reform is not None and categories_fiscales is not None:
-                # print categories_fiscales[['code_coicop', 'categorie_fiscale']]
+                # print categories_fiscales[['code_coicop', 'categorie_fiscale']]
                 categorie_fiscale_by_poste = dict(
                     (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
                     for poste in postes_coicop)
-                # print categorie_fiscale_by_poste
+                # print categorie_fiscale_by_poste
 
                 @dated_function(start = start, stop = stop)
                 def func(self, simulation, period, categorie_fiscale_by_poste = categorie_fiscale_by_poste):

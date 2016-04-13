@@ -129,7 +129,7 @@ def generate_postes_agreges_variables(categories_fiscales = None, Reform = None,
             Reform = Reform,
             )
 
-        functions_by_name = dict(fucntion = dated_func)
+        functions_by_name = dict(function = dated_func)
         label = u"Poste agrégé {}".format(num_prefix)
         if not Reform:
             definitions_by_name = dict(

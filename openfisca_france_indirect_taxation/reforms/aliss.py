@@ -20,15 +20,18 @@ from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss impo
     )
 
 
-def build_aliss_reform():
-    aliss_refom_path = os.path.join(
+def build_aliss_reform(rebuild = False):
+    aliss_refom_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
         'openfisca_france_indirect_taxation',
         'reforms',
-        'aliss_reform_data.csv',
         )
+    aliss_reform_path = os.path.join(aliss_refom_directory, 'aliss_reform.csv')
+    if os.path.exists(aliss_reform_path) and rebuild is False:
+        aliss_reform = pandas.read_csv(aliss_reform_path)
+        return aliss_reform
 
-    aliss_reform_data = pandas.read_csv(aliss_refom_path)
+    aliss_reform_data = pandas.read_csv(os.path.join(aliss_refom_directory, 'aliss_reform_unprocessed_data.csv'))
     aliss_uncomplete = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss_uncomplete)
     aliss_extract = aliss[['nomf', 'nomc', 'poste_bdf']].copy()
@@ -57,6 +60,8 @@ def build_aliss_reform():
 
     mismatch.nomc = mismatch.nomc.str.decode('latin-1').str.encode('utf-8')
     mismatch.to_csv('reform_mismatch.csv', index = False)
+    if rebuild:
+        aliss_reform.to_csv(aliss_reform_path, index = False)
 
     return aliss_reform
 
