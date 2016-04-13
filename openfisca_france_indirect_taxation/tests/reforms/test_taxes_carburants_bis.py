@@ -18,12 +18,12 @@ def test_taxes_carburants_bis():
         year = year,
         )
 
-    simulated_variables = ['depenses_essence_ajustees', 'depenses_essence', 'elas_price_1_1']
+    simulated_variables = ['depenses_essence_ajustees_taxes_carburants', 'depenses_essence', 'elas_price_1_1']
     df = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
-    df['menages']['depenses_essence_ajustees'] = df['menages']['depenses_essence_ajustees'].astype(float)
+    df['menages']['depenses_essence_ajustees_taxes_carburants'] = df['menages']['depenses_essence_ajustees_taxes_carburants'].astype(float)
     df['menages']['check'] = (
         df['menages']['depenses_essence'] * (1 + (1 + df['menages']['elas_price_1_1']) * 10 / 149.9535) -
-        df['menages']['depenses_essence_ajustees']
+        df['menages']['depenses_essence_ajustees_taxes_carburants']
         )
     absolute_error_margin = 0.01
     assert (df['menages']['check'] < absolute_error_margin).any()

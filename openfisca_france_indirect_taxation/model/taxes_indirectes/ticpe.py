@@ -100,9 +100,9 @@ class diesel_ticpe_ajustee(Variable):
             (prix_diesel_ttc_ajuste - accise_diesel_ticpe_ajustee * (1 + taux_plein_tva))
             )
 
-        depenses_diesel_ajustees = simulation.calculate('depenses_diesel_ajustees', period)
+        depenses_diesel_ajustees_taxes_carburants = simulation.calculate('depenses_diesel_ajustees_taxes_carburants', period)
         depenses_diesel_htva_ajustees = (
-            depenses_diesel_ajustees - tax_from_expense_including_tax(depenses_diesel_ajustees, taux_plein_tva)
+            depenses_diesel_ajustees_taxes_carburants - tax_from_expense_including_tax(depenses_diesel_ajustees_taxes_carburants, taux_plein_tva)
             )
         montant_diesel_ticpe_ajuste = (
             tax_from_expense_including_tax(depenses_diesel_htva_ajustees, taux_implicite_diesel_ajuste)
@@ -297,9 +297,9 @@ class sp_e10_ticpe_ajustee(Variable):
             (accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva)) /
             (super_95_e10_ttc_ajuste - accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
             )
-        depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees', period)
+        depenses_essence_ajustees_taxes_carburants = simulation.calculate('depenses_essence_ajustees_taxes_carburants', period)
         part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
-        sp_e10_depenses_ajustees = depenses_essence_ajustees * part_sp_e10
+        sp_e10_depenses_ajustees = depenses_essence_ajustees_taxes_carburants * part_sp_e10
         sp_e10_depenses_htva_ajustees = \
             sp_e10_depenses_ajustees - tax_from_expense_including_tax(sp_e10_depenses_ajustees, taux_plein_tva)
         montant_sp_e10_ticpe_ajuste = \
@@ -360,9 +360,9 @@ class sp95_ticpe_ajustee(Variable):
             (accise_ticpe_super95_ajustee * (1 + taux_plein_tva)) /
             (super_95_ttc_ajuste - accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
             )
-        depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees', period)
+        depenses_essence_ajustees_taxes_carburants = simulation.calculate('depenses_essence_ajustees_taxes_carburants', period)
         part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
-        depenses_sp_95_ajustees = depenses_essence_ajustees * part_sp95
+        depenses_sp_95_ajustees = depenses_essence_ajustees_taxes_carburants * part_sp95
         depenses_sp_95_htva_ajustees = (
             depenses_sp_95_ajustees - tax_from_expense_including_tax(depenses_sp_95_ajustees, taux_plein_tva)
             )
@@ -425,9 +425,9 @@ class sp98_ticpe_ajustee(Variable):
             (accise_ticpe_super98_ajustee * (1 + taux_plein_tva)) /
             (super_98_ttc_ajuste - accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
             )
-        depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees', period)
+        depenses_essence_ajustees_taxes_carburants = simulation.calculate('depenses_essence_ajustees_taxes_carburants', period)
         part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
-        depenses_sp_98_ajustees = depenses_essence_ajustees * part_sp98
+        depenses_sp_98_ajustees = depenses_essence_ajustees_taxes_carburants * part_sp98
         depenses_sp_98_htva_ajustees = (
             depenses_sp_98_ajustees - tax_from_expense_including_tax(depenses_sp_98_ajustees, taux_plein_tva)
             )
@@ -479,10 +479,10 @@ class super_plombe_ticpe_ajustee(Variable):
             (accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva)) /
             (super_plombe_ttc_ajuste - accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva))
             )
-        depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees', period)
+        depenses_essence_ajustees_taxes_carburants = simulation.calculate('depenses_essence_ajustees_taxes_carburants', period)
         part_super_plombe = \
             simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
-        depenses_super_plombe_ajustees = depenses_essence_ajustees * part_super_plombe
+        depenses_super_plombe_ajustees = depenses_essence_ajustees_taxes_carburants * part_super_plombe
         depenses_super_plombe_htva_ajustees = (
             depenses_super_plombe_ajustees -
             tax_from_expense_including_tax(depenses_super_plombe_ajustees, taux_plein_tva)

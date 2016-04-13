@@ -27,9 +27,9 @@ def test_taxes_carburants():
         )
     reform_simulation = scenario.new_simulation(debug = True)
     absolute_error_margin = 0.01
-    reform_depenses_essence_ajustees = reform_simulation.calculate('depenses_essence_ajustees')
+    reform_depenses_essence_ajustees_taxes_carburants = reform_simulation.calculate('depenses_essence_ajustees_taxes_carburants')
     assert_near(
-        reform_depenses_essence_ajustees,
+        reform_depenses_essence_ajustees_taxes_carburants,
         1000 * (1 + (1 + -.4) * 10 / 148.4583),
         absolute_error_margin = absolute_error_margin
         )
