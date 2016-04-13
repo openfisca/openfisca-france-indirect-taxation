@@ -158,12 +158,12 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                     (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
                     for poste in postes_coicop)
                 assert all(key == 'tva_taux_intermediaire' for key in categorie_fiscale_by_poste.keys())
-                print categorie_fiscale_by_poste
+                print 'a', categorie_fiscale_by_poste
 
                 @dated_function(start = start, stop = stop)
                 def func(self, simulation, period, categorie_fiscale_by_poste = categorie_fiscale_by_poste):
-                    print postes_coicop
-                    print categorie_fiscale_by_poste
+                    print 'b', postes_coicop
+                    print 'c', categorie_fiscale_by_poste
 
                     poste_agrege = sum(simulation.calculate(
                         'depenses_ht_poste_' + slugify(poste, separator = u'_'), period
