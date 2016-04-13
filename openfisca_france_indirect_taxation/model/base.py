@@ -89,9 +89,9 @@ def insert_tva(categories_fiscales):
         biere = 'tva_taux_plein',
         vin = 'tva_taux_plein',
         alcools_forts = 'tva_taux_plein',
-        cigares = '',
-        cigarettes = '',
-        tabac_a_rouler = '',
+        cigares = 'cigares',
+        cigarettes = 'cigarettes',
+        tabac_a_rouler = 'tabac_a_rouler',
         ticpe = 'tva_taux_plein',
         assurance_transport = '',
         assurance_sante = '',
@@ -157,7 +157,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                 categorie_fiscale_by_poste = dict(
                     (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
                     for poste in postes_coicop)
-                # print categorie_fiscale_by_poste
+                print categorie_fiscale_by_poste
 
                 @dated_function(start = start, stop = stop)
                 def func(self, simulation, period, categorie_fiscale_by_poste = categorie_fiscale_by_poste):

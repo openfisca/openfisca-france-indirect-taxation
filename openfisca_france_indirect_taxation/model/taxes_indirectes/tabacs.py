@@ -29,6 +29,33 @@ class cigarette_droit_d_accise(Variable):
         return period, tax_from_expense_including_tax(depenses_cigarettes, taux_normal_cigarette)
 
 
+class depenses_cigares(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses de cigares"
+
+    def function(self, simulation, period):
+        return period, simulation.calculate('poste_02_2_2', period)
+
+
+class depenses_cigarettes(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses de cigarettes"
+
+    def function(self, simulation, period):
+        return period, simulation.calculate('poste_02_2_1', period)
+
+
+class depenses_tabac_a_rouler(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Dépenses de tabac à rouler et autres tabacs"
+
+    def function(self, simulation, period):
+        return period, simulation.calculate('poste_02_2_3', period)
+
+
 class tabac_a_rouler_droit_d_accise(Variable):
     column = FloatCol
     entity_class = Menages

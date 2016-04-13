@@ -33,7 +33,6 @@ class depenses_alcools_forts(Variable):
         return period, depenses_ht_alcools_forts * (1 + taux_plein_tva)
 
 
-
 class biere_droit_d_accise(Variable):
     column = FloatCol
     entity_class = Menages
