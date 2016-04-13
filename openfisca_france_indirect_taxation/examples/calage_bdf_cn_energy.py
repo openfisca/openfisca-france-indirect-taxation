@@ -51,10 +51,11 @@ def get_cn_aggregates_energy(target_year = None):
         'openfisca_france_indirect_taxation',
         'assets',
         'legislation',
-        'Parametres fiscalite indirecte.xls'
+        'conso-eff-fonction.xls'
         )
 
-    masses_cn_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "consommation_CN")
+    masses_cn_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = u"M€cour")
+    masses_cn_data_frame.columns = masses_cn_data_frame.iloc[2]
     masses_cn_data_frame = masses_cn_data_frame.loc[:, ['Code', target_year]].copy()
 
     masses_cn_data_frame['poste'] = 0
@@ -77,6 +78,17 @@ def get_cn_aggregates_energy(target_year = None):
 
     masses_cn_energie.set_index('poste', inplace = True)
     masses_cn_energie = masses_cn_energie * 1e6
+
+    default_config_files_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    parametres_fiscalite_file_path = os.path.join(
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'legislation',
+        'Parametres fiscalite indirecte.xls'
+        )
+
 
     masses_cn_revenus_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "revenus_CN")
     masses_cn_revenus_data_frame.rename(
