@@ -30,7 +30,7 @@ from .. import init_country
 from ..reforms import (
     taxes_carburants,
     taxe_carbone,
-    contribution_climat_energie
+    contribution_climat_energie,
     )
 
 
