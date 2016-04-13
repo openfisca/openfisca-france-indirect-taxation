@@ -23,6 +23,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+import collections
 from datetime import date
 import os
 import pandas as pd
@@ -157,13 +158,25 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                 categorie_fiscale_by_poste = dict(
                     (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
                     for poste in postes_coicop)
-                assert all(key == 'tva_taux_intermediaire' for key in categorie_fiscale_by_poste.keys())
-                print 'a', categorie_fiscale_by_poste
+                for key, value in sorted(categorie_fiscale_by_poste.iteritems()):
+                    print 'a', key, value
+
+                if Reform.key == 'aliss_tva_sociale' and postes_coicop[0][:2] == '01':
+                    for key in ['01.1.1.1.1', '01.1.1.3.3']:
+                        assert categorie_fiscale_by_poste[key] == 'tva_taux_intermediaire', 'key: {} -> {}'.format(
+                            key, categorie_fiscale_by_poste[key]
+                            )
 
                 @dated_function(start = start, stop = stop)
                 def func(self, simulation, period, categorie_fiscale_by_poste = categorie_fiscale_by_poste):
-                    print 'b', postes_coicop
-                    print 'c', categorie_fiscale_by_poste
+                    print 'b', sorted(postes_coicop)
+                    for key, value in sorted(categorie_fiscale_by_poste.iteritems()):
+                        print 'c', key, value
+
+                    for key in ['01.1.1.1.1', '01.1.1.3.3']:
+                        assert categorie_fiscale_by_poste[key] == 'tva_taux_intermediaire', 'key: {} -> {}'.format(
+                            key, categorie_fiscale_by_poste[key]
+                            )
 
                     poste_agrege = sum(simulation.calculate(
                         'depenses_ht_poste_' + slugify(poste, separator = u'_'), period
