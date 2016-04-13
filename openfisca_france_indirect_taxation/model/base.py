@@ -157,6 +157,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                 categorie_fiscale_by_poste = dict(
                     (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
                     for poste in postes_coicop)
+                assert all(key == 'tva_taux_intermediaire' for key in categorie_fiscale_by_poste.keys())
                 print categorie_fiscale_by_poste
 
                 @dated_function(start = start, stop = stop)
