@@ -137,12 +137,15 @@ def generate_postes_agreges_variables(categories_fiscales = None, Reform = None,
                 entity_class = Menages,
                 label = label,
                 )
+            definitions_by_name.update(functions_by_name)
+            type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
         else:
             definitions_by_name = dict(
                 reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
                 )
-        definitions_by_name.update(functions_by_name)
-        type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+            definitions_by_name.update(functions_by_name)
+            type(class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
+
         del definitions_by_name
 
 

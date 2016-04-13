@@ -177,7 +177,6 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                         assert categorie_fiscale_by_poste[key] == 'tva_taux_intermediaire', 'key: {} -> {}'.format(
                             key, categorie_fiscale_by_poste[key]
                             )
-
                     poste_agrege = sum(simulation.calculate(
                         'depenses_ht_poste_' + slugify(poste, separator = u'_'), period
                         ) * (
