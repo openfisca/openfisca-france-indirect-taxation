@@ -126,11 +126,10 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     assert not categories_fiscales.code_bdf.duplicated().any(), "there are {} duplicated".format(
         categories_fiscales.code_bdf.duplicated().sum())
 
-    # if reform_key
-    print '========================================================'
-    print reform_key
-    print categories_fiscales.head()
-    print '--------'
+    # print '========================================================'
+    # print reform_key
+    # print categories_fiscales.head()
+    # print '--------'
     generate_variables(
         categories_fiscales = categories_fiscales,
         Reform = Reform,
