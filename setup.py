@@ -68,6 +68,7 @@ setup(
         'Biryani[datetimeconv] >= 0.10.2dev',
         'numpy',
         'OpenFisca-Core >= 0.4dev',
+        'PyYAML >= 3.10',
         ],
     packages = find_packages(),
     test_suite = 'nose.collector',
