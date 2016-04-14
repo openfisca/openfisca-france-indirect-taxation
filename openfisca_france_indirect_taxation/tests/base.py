@@ -30,7 +30,7 @@ from .. import init_country
 from ..reforms import (
     taxes_carburants,
     taxe_carbone,
-    contribution_climat_energie,
+    contribution_climat_energie_reforme,
     )
 
 
@@ -51,7 +51,7 @@ tax_benefit_system.prefill_cache()
 build_reform_function_by_key = {
     'taxes_carburants': taxes_carburants.build_reform,
     'taxe_carbone': taxe_carbone.build_reform,
-    'contribution_climat_energie': contribution_climat_energie.build_reform,
+    'contribution_climat_energie_reforme': contribution_climat_energie_reforme.build_reform,
     }
 reform_by_full_key = {}
 

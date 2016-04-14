@@ -8,7 +8,7 @@ from datetime import date
 from ..base import *  # noqa analysis:ignore
 
 
-class diesel_ticpe_ajustee(Variable):
+class diesel_ticpe_ajustee_taxes_carburants(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de TICPE sur le diesel après réforme"
@@ -44,7 +44,7 @@ class diesel_ticpe_ajustee(Variable):
         return period, montant_diesel_ticpe_ajuste
 
 
-class essence_ticpe_ajustee(DatedVariable):
+class essence_ticpe_ajustee_taxes_carburants(DatedVariable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
@@ -52,31 +52,31 @@ class essence_ticpe_ajustee(DatedVariable):
     @dated_function(start = date(1990, 1, 1), stop = date(2006, 12, 31))
     def function_90_06(self, simulation, period):
 
-        sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe_ajustee', period)
-        sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe_ajustee', period)
-        super_plombe_ticpe_ajustee = simulation.calculate('super_plombe_ticpe_ajustee', period)
+        sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe_ajustee_taxes_carburants', period)
+        sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe_ajustee_taxes_carburants', period)
+        super_plombe_ticpe_ajustee = simulation.calculate('super_plombe_ticpe_ajustee_taxes_carburants', period)
         essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + super_plombe_ticpe_ajustee)
         return period, essence_ticpe_ajustee
 
     @dated_function(start = date(2007, 1, 1), stop = date(2008, 12, 31))
     def function_07_08(self, simulation, period):
 
-        sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe_ajustee', period)
-        sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe_ajustee', period)
+        sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe_ajustee_taxes_carburants', period)
+        sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe_ajustee_taxes_carburants', period)
         essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee)
         return period, essence_ticpe_ajustee
 
     @dated_function(start = date(2009, 1, 1), stop = date(2015, 12, 31))
     def function_09_15(self, simulation, period):
 
-        sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe_ajustee', period)
-        sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe_ajustee', period)
-        sp_e10_ticpe_ajustee = simulation.calculate('sp_e10_ticpe_ajustee', period)
+        sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe_ajustee_taxes_carburants', period)
+        sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe_ajustee_taxes_carburants', period)
+        sp_e10_ticpe_ajustee = simulation.calculate('sp_e10_ticpe_ajustee_taxes_carburants', period)
         essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + sp_e10_ticpe_ajustee)
         return period, essence_ticpe_ajustee
 
 
-class sp_e10_ticpe_ajustee(Variable):
+class sp_e10_ticpe_ajustee_taxes_carburants(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de la TICPE sur le SP E10 après réforme"
@@ -112,7 +112,7 @@ class sp_e10_ticpe_ajustee(Variable):
         return period, montant_sp_e10_ticpe_ajuste
 
 
-class sp95_ticpe_ajustee(Variable):
+class sp95_ticpe_ajustee_taxes_carburants(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de TICPE sur le sp_95 après réforme"
@@ -149,7 +149,7 @@ class sp95_ticpe_ajustee(Variable):
         return period, montant_sp95_ticpe_ajuste
 
 
-class sp98_ticpe_ajustee(Variable):
+class sp98_ticpe_ajustee_taxes_carburants(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de TICPE sur le sp_98 après réforme"
@@ -186,7 +186,7 @@ class sp98_ticpe_ajustee(Variable):
         return period, montant_sp98_ticpe_ajuste
 
 
-class super_plombe_ticpe_ajustee(Variable):
+class super_plombe_ticpe_ajustee_taxes_carburants(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de la TICPE sur le super plombé après réforme"
@@ -218,52 +218,52 @@ class super_plombe_ticpe_ajustee(Variable):
         return period, montant_super_plombe_ticpe_ajuste
 
 
-class ticpe_totale_ajustee(Variable):
+class ticpe_totale_ajustee_taxes_carburants(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
 
     def function(self, simulation, period):
-        essence_ticpe_ajustee = simulation.calculate('essence_ticpe_ajustee', period)
-        diesel_ticpe_ajustee = simulation.calculate('diesel_ticpe_ajustee', period)
+        essence_ticpe_ajustee = simulation.calculate('essence_ticpe_ajustee_taxes_carburants', period)
+        diesel_ticpe_ajustee = simulation.calculate('diesel_ticpe_ajustee_taxes_carburants', period)
         ticpe_totale_ajustee = diesel_ticpe_ajustee + essence_ticpe_ajustee
 
         return period, ticpe_totale_ajustee
 
 
-class difference_ticpe_diesel_reforme(Variable):
+class difference_ticpe_diesel_taxes_carburants(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Différence entre les contributions à la TICPE sur le diesel avant et après la réforme"
 
     def function(self, simulation, period):
-        diesel_ticpe_ajustee = simulation.calculate('diesel_ticpe_ajustee', period)
+        diesel_ticpe_ajustee = simulation.calculate('diesel_ticpe_ajustee_taxes_carburants', period)
         diesel_ticpe = simulation.calculate('diesel_ticpe', period)
         difference = diesel_ticpe_ajustee - diesel_ticpe
 
         return period, difference
 
 
-class difference_ticpe_essence_reforme(Variable):
+class difference_ticpe_essence_taxes_carburants(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Différence entre les contributions à la TICPE sur l'essence avant et après la réforme"
 
     def function(self, simulation, period):
-        essence_ticpe_ajustee = simulation.calculate('essence_ticpe_ajustee', period)
+        essence_ticpe_ajustee = simulation.calculate('essence_ticpe_ajustee_taxes_carburants', period)
         essence_ticpe = simulation.calculate('essence_ticpe', period)
         difference = essence_ticpe_ajustee - essence_ticpe
 
         return period, difference
 
 
-class difference_ticpe_totale_reforme(Variable):
+class difference_ticpe_totale_taxes_carburants(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Différence entre les contributions à la TICPE avant et après la réforme"
 
     def function(self, simulation, period):
-        ticpe_totale_ajustee = simulation.calculate('ticpe_totale_ajustee', period)
+        ticpe_totale_ajustee = simulation.calculate('ticpe_totale_ajustee_taxes_carburants', period)
         ticpe_totale = simulation.calculate('ticpe_totale', period)
         difference = ticpe_totale_ajustee - ticpe_totale
 
