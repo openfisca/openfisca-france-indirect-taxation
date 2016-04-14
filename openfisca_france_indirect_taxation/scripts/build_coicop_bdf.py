@@ -3,9 +3,12 @@
 
 import pandas
 
+try:
+    from openfisca_survey_manager import default_config_files_directory as config_files_directory
+    from openfisca_survey_manager.survey_collections import SurveyCollection
+except ImportError:
+    SurveyCollection, config_files_directory = None, None
 
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
-from openfisca_survey_manager.survey_collections import SurveyCollection
 
 from openfisca_france_indirect_taxation.scripts.build_coicop_nomenclature import build_complete_coicop_nomenclature
 from openfisca_france_indirect_taxation.scripts.build_coicop_legislation import get_categorie_fiscale

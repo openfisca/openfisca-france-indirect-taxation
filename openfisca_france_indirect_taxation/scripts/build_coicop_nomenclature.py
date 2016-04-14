@@ -7,7 +7,6 @@ from __future__ import division
 import os
 import pandas as pd
 import pkg_resources
-# import sys
 
 
 legislation_directory = os.path.join(
