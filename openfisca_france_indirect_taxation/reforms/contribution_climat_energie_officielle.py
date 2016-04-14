@@ -7,7 +7,7 @@ from openfisca_core import reforms
 
 def build_reform(tax_benefit_system):
     Reform = reforms.make_reform(
-        key = 'contribution_climat_energie',
+        key = 'contribution_climat_energie_officielle',
         name = u"Réforme telle que prévue par la loi",
         reference = tax_benefit_system,
         )
@@ -25,8 +25,22 @@ def build_reform(tax_benefit_system):
 def modify_legislation_json(reference_legislation_json_copy):
     reform_legislation_subtree = {
         "@type": "Node",
-        "description": "contribution_climat_energie",
+        "description": "contribution_climat_energie_officielle",
         "children": {
+            "diesel": {
+                "@type": "Parameter",
+                "description": u"Surcroît de prix du diesel (en euros par hectolitres)",
+                "format": 'float',
+                "unit": 'currency',
+                "values": [
+                    {'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 1.862},
+                    {'start': u'2015-01-01', 'stop': '2015-12-31', 'value': 3.857},
+                    {'start': u'2016-01-01', 'stop': '2016-12-31', 'value': 5.852},
+                    {'start': u'2017-01-01', 'stop': '2017-12-31', 'value': 8.113},
+                    {'start': u'2018-01-01', 'stop': '2018-12-31', 'value': 10.374},
+                    {'start': u'2019-01-01', 'stop': '2019-12-31', 'value': 12.635},
+                    ],
+                },
             "essence": {
                 "@type": "Parameter",
                 "description": u"Surcroît de prix de l'essence (en euros par hectolitres)",
@@ -41,18 +55,18 @@ def modify_legislation_json(reference_legislation_json_copy):
                     {'start': u'2019-01-01', 'stop': '2019-12-31', 'value': 11.495},
                     ],
                 },
-            "diesel": {
+            "fioul_domestique": {
                 "@type": "Parameter",
-                "description": u"Surcroît de prix du diesel (en euros par hectolitres)",
-                "format": 'float',
+                "description": u"Surcroît de prix du fioul domestique (en euros par hectolitres)",
+                "format": "float",
                 "unit": 'currency',
                 "values": [
-                    {'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 1.862},
-                    {'start': u'2015-01-01', 'stop': '2015-12-31', 'value': 3.857},
-                    {'start': u'2016-01-01', 'stop': '2016-12-31', 'value': 5.852},
-                    {'start': u'2017-01-01', 'stop': '2017-12-31', 'value': 8.113},
-                    {'start': u'2018-01-01', 'stop': '2018-12-31', 'value': 10.374},
-                    {'start': u'2019-01-01', 'stop': '2019-12-31', 'value': 12.635},
+                    {'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 2.17},
+                    {'start': u'2015-01-01', 'stop': '2015-12-31', 'value': 4.495},
+                    {'start': u'2016-01-01', 'stop': '2016-12-31', 'value': 6.82},
+                    {'start': u'2017-01-01', 'stop': '2017-12-31', 'value': 9.455},
+                    {'start': u'2018-01-01', 'stop': '2018-12-31', 'value': 12.09},
+                    {'start': u'2019-01-01', 'stop': '2019-12-31', 'value': 14.725},
                     ],
                 },
             "gaz": {
@@ -72,5 +86,5 @@ def modify_legislation_json(reference_legislation_json_copy):
             },
         }
 
-    reference_legislation_json_copy['children']['contribution_climat_energie'] = reform_legislation_subtree
+    reference_legislation_json_copy['children']['contribution_climat_energie_officielle'] = reform_legislation_subtree
     return reference_legislation_json_copy

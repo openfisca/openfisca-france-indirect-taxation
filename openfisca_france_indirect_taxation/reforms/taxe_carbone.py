@@ -16,7 +16,7 @@ def build_reform(tax_benefit_system):
     reform.modify_legislation_json(modifier_function = modify_legislation_json)
     return reform
 
-# Réforme selon le prix du carbone : prix fixé à 32 euros (rapport Rocard) par tonne de CO2. En utilisant nos données
+# Réforme selon le prix du carbone : prix fixé à 50 euros par tonne de CO2. En utilisant nos données
 # d'équivalence entre consommation et émission, on met en place les montants de taxe suivants :
 
 
@@ -25,33 +25,40 @@ def modify_legislation_json(reference_legislation_json_copy):
         "@type": "Node",
         "description": "taxe_carbone",
         "children": {
+            "electricite": {
+                "@type": "Parameter",
+                "description": u"Surcroît de prix de l'électricité (en euros par kWh)",
+                "format": 'float',
+                "unit": 'currency',
+                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 0.0045}],
+                },
             "essence": {
                 "@type": "Parameter",
                 "description": u"Surcroît de prix de l'essence (en euros par hectolitres)",
                 "format": "float",
                 "unit": 'currency',
-                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 7.744}],
+                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 12.1}],
                 },
             "diesel": {
                 "@type": "Parameter",
                 "description": u"Surcroît de prix du diesel (en euros par hectolitres)",
                 "format": 'float',
                 "unit": 'currency',
-                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 8.512}],
+                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 13.3}],
                 },
-            "electricite": {
+            "fioul_domestique": {
                 "@type": "Parameter",
-                "description": u"Surcroît de prix de l'électricité (en euros par kWh)",
+                "description": u"Surcroît de prix du diesel (en euros par hectolitres)",
                 "format": 'float',
                 "unit": 'currency',
-                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 0.00288}],
+                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 15.5}],
                 },
             "gaz": {
                 "@type": "Parameter",
                 "description": u"Surcroît de prix du gaz (en euros par kWh)",
                 "format": 'float',
                 "unit": 'currency',
-                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 0.00768}],
+                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 0.012}],
                 },
             },
         }
