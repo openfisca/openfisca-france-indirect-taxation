@@ -8,6 +8,66 @@ from datetime import date
 from ..base import *  # noqa analysis:ignore
 
 
+class recettes_additionnelles_gaz_cce_2014_2015(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Recettes de la hausse de cce 2014-2015 sur la consommation de gaz - ceteris paribus"
+    # On ignore la baisse de contribution générale due à la baisse de consommation, et donc la baisse de contribution
+    # sur les taxes précédentes.
+
+    def function(self, simulation, period):
+        quantites_gaz_ajustees = simulation.calculate('quantites_gaz_ajustees_cce_2014_2015', period)
+        reforme_gaz = simulation.legislation_at(period.start).contribution_climat_energie_reforme.gaz_2014_2015
+        recettes_gaz = quantites_gaz_ajustees * reforme_gaz
+
+        return period, recettes_gaz
+
+
+class recettes_additionnelles_gaz_cce_2014_2016(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Recettes de la hausse de cce 2014-2016 sur la consommation de gaz - ceteris paribus"
+    # On ignore la baisse de contribution générale due à la baisse de consommation, et donc la baisse de contribution
+    # sur les taxes précédentes.
+
+    def function(self, simulation, period):
+        quantites_gaz_ajustees = simulation.calculate('quantites_gaz_ajustees_cce_2014_2016', period)
+        reforme_gaz = simulation.legislation_at(period.start).contribution_climat_energie_reforme.gaz_2014_2016
+        recettes_gaz = quantites_gaz_ajustees * reforme_gaz
+
+        return period, recettes_gaz
+
+
+class recettes_additionnelles_gaz_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Recettes de la taxe carbone sur la consommation de gaz - ceteris paribus"
+    # On ignore la baisse de contribution générale due à la baisse de consommation, et donc la baisse de contribution
+    # sur les taxes précédentes.
+
+    def function(self, simulation, period):
+        quantites_gaz_ajustees = simulation.calculate('quantites_gaz_ajustees_taxe_carbone', period)
+        reforme_gaz = simulation.legislation_at(period.start).taxe_carbone.gaz
+        recettes_gaz = quantites_gaz_ajustees * reforme_gaz
+
+        return period, recettes_gaz
+
+
+class recettes_additionnelles_electricite_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Recettes de la taxe carbone sur la consommation d'électricité - ceteris paribus"
+    # On ignore la baisse de contribution générale due à la baisse de consommation, et donc la baisse de contribution
+    # sur les taxes précédentes.
+
+    def function(self, simulation, period):
+        quantites_electricite_ajustees = simulation.calculate('quantites_electricite_ajustees_taxe_carbone', period)
+        reforme_electricite = simulation.legislation_at(period.start).taxe_carbone.electricite
+        recettes_electricite = quantites_electricite_ajustees * reforme_electricite
+
+        return period, recettes_electricite
+
+
 class diesel_ticpe_ajustee_taxes_carburants(Variable):
     column = FloatCol
     entity_class = Menages
@@ -33,15 +93,56 @@ class diesel_ticpe_ajustee_taxes_carburants(Variable):
             (prix_diesel_ttc_ajuste - accise_diesel_ticpe_ajustee * (1 + taux_plein_tva))
             )
 
-        depenses_diesel_ajustees_taxes_carburants = simulation.calculate('depenses_diesel_ajustees_taxes_carburants', period)
+        depenses_diesel_ajustees_taxes_carburants = \
+            simulation.calculate('depenses_diesel_ajustees_taxes_carburants', period)
         depenses_diesel_htva_ajustees = (
-            depenses_diesel_ajustees_taxes_carburants - tax_from_expense_including_tax(depenses_diesel_ajustees_taxes_carburants, taux_plein_tva)
+            depenses_diesel_ajustees_taxes_carburants -
+            tax_from_expense_including_tax(depenses_diesel_ajustees_taxes_carburants, taux_plein_tva)
             )
         montant_diesel_ticpe_ajuste = (
             tax_from_expense_including_tax(depenses_diesel_htva_ajustees, taux_implicite_diesel_ajuste)
             )
 
         return period, montant_diesel_ticpe_ajuste
+
+
+class difference_ticpe_diesel_taxes_carburants(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence entre les contributions à la TICPE sur le diesel avant et après la réforme"
+
+    def function(self, simulation, period):
+        diesel_ticpe_ajustee = simulation.calculate('diesel_ticpe_ajustee_taxes_carburants', period)
+        diesel_ticpe = simulation.calculate('diesel_ticpe', period)
+        difference = diesel_ticpe_ajustee - diesel_ticpe
+
+        return period, difference
+
+
+class difference_ticpe_essence_taxes_carburants(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence entre les contributions à la TICPE sur l'essence avant et après la réforme"
+
+    def function(self, simulation, period):
+        essence_ticpe_ajustee = simulation.calculate('essence_ticpe_ajustee_taxes_carburants', period)
+        essence_ticpe = simulation.calculate('essence_ticpe', period)
+        difference = essence_ticpe_ajustee - essence_ticpe
+
+        return period, difference
+
+
+class difference_ticpe_totale_taxes_carburants(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence entre les contributions à la TICPE avant et après la réforme"
+
+    def function(self, simulation, period):
+        ticpe_totale_ajustee = simulation.calculate('ticpe_totale_ajustee_taxes_carburants', period)
+        ticpe_totale = simulation.calculate('ticpe_totale', period)
+        difference = ticpe_totale_ajustee - ticpe_totale
+
+        return period, difference
 
 
 class essence_ticpe_ajustee_taxes_carburants(DatedVariable):
@@ -101,7 +202,8 @@ class sp_e10_ticpe_ajustee_taxes_carburants(Variable):
             (accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva)) /
             (super_95_e10_ttc_ajuste - accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
             )
-        depenses_essence_ajustees_taxes_carburants = simulation.calculate('depenses_essence_ajustees_taxes_carburants', period)
+        depenses_essence_ajustees_taxes_carburants = \
+            simulation.calculate('depenses_essence_ajustees_taxes_carburants', period)
         part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         sp_e10_depenses_ajustees = depenses_essence_ajustees_taxes_carburants * part_sp_e10
         sp_e10_depenses_htva_ajustees = \
@@ -136,7 +238,8 @@ class sp95_ticpe_ajustee_taxes_carburants(Variable):
             (accise_ticpe_super95_ajustee * (1 + taux_plein_tva)) /
             (super_95_ttc_ajuste - accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
             )
-        depenses_essence_ajustees_taxes_carburants = simulation.calculate('depenses_essence_ajustees_taxes_carburants', period)
+        depenses_essence_ajustees_taxes_carburants = \
+            simulation.calculate('depenses_essence_ajustees_taxes_carburants', period)
         part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp_95_ajustees = depenses_essence_ajustees_taxes_carburants * part_sp95
         depenses_sp_95_htva_ajustees = (
@@ -173,7 +276,8 @@ class sp98_ticpe_ajustee_taxes_carburants(Variable):
             (accise_ticpe_super98_ajustee * (1 + taux_plein_tva)) /
             (super_98_ttc_ajuste - accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
             )
-        depenses_essence_ajustees_taxes_carburants = simulation.calculate('depenses_essence_ajustees_taxes_carburants', period)
+        depenses_essence_ajustees_taxes_carburants = \
+            simulation.calculate('depenses_essence_ajustees_taxes_carburants', period)
         part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
         depenses_sp_98_ajustees = depenses_essence_ajustees_taxes_carburants * part_sp98
         depenses_sp_98_htva_ajustees = (
@@ -204,7 +308,8 @@ class super_plombe_ticpe_ajustee_taxes_carburants(Variable):
             (accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva)) /
             (super_plombe_ttc_ajuste - accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva))
             )
-        depenses_essence_ajustees_taxes_carburants = simulation.calculate('depenses_essence_ajustees_taxes_carburants', period)
+        depenses_essence_ajustees_taxes_carburants = \
+            simulation.calculate('depenses_essence_ajustees_taxes_carburants', period)
         part_super_plombe = \
             simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
         depenses_super_plombe_ajustees = depenses_essence_ajustees_taxes_carburants * part_super_plombe
@@ -229,42 +334,3 @@ class ticpe_totale_ajustee_taxes_carburants(Variable):
         ticpe_totale_ajustee = diesel_ticpe_ajustee + essence_ticpe_ajustee
 
         return period, ticpe_totale_ajustee
-
-
-class difference_ticpe_diesel_taxes_carburants(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Différence entre les contributions à la TICPE sur le diesel avant et après la réforme"
-
-    def function(self, simulation, period):
-        diesel_ticpe_ajustee = simulation.calculate('diesel_ticpe_ajustee_taxes_carburants', period)
-        diesel_ticpe = simulation.calculate('diesel_ticpe', period)
-        difference = diesel_ticpe_ajustee - diesel_ticpe
-
-        return period, difference
-
-
-class difference_ticpe_essence_taxes_carburants(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Différence entre les contributions à la TICPE sur l'essence avant et après la réforme"
-
-    def function(self, simulation, period):
-        essence_ticpe_ajustee = simulation.calculate('essence_ticpe_ajustee_taxes_carburants', period)
-        essence_ticpe = simulation.calculate('essence_ticpe', period)
-        difference = essence_ticpe_ajustee - essence_ticpe
-
-        return period, difference
-
-
-class difference_ticpe_totale_taxes_carburants(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Différence entre les contributions à la TICPE avant et après la réforme"
-
-    def function(self, simulation, period):
-        ticpe_totale_ajustee = simulation.calculate('ticpe_totale_ajustee_taxes_carburants', period)
-        ticpe_totale = simulation.calculate('ticpe_totale', period)
-        difference = ticpe_totale_ajustee - ticpe_totale
-
-        return period, difference
