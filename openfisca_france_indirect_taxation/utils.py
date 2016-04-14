@@ -33,7 +33,11 @@ import logging
 import pandas
 import pkg_resources
 
-from openfisca_survey_manager.survey_collections import SurveyCollection
+try:
+    from openfisca_survey_manager.survey_collections import SurveyCollection
+except ImportError:
+    SurveyCollection = None
+
 log = logging.getLogger(__name__)
 
 
