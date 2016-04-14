@@ -8,9 +8,12 @@ import os
 import pandas
 import pkg_resources
 
+try:
+    from openfisca_survey_manager.survey_collections import SurveyCollection
+    from openfisca_survey_manager import default_config_files_directory as config_files_directory
+except ImportError:
+    SurveyCollection, config_files_directory = None, None
 
-from openfisca_survey_manager.survey_collections import SurveyCollection
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
 
