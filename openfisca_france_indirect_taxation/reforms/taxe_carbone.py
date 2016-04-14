@@ -48,10 +48,10 @@ def modify_legislation_json(reference_legislation_json_copy):
                 },
             "fioul_domestique": {
                 "@type": "Parameter",
-                "description": u"Surcroît de prix du diesel (en euros par hectolitres)",
+                "description": u"Surcroît de prix du diesel (en euros par litre)",
                 "format": 'float',
                 "unit": 'currency',
-                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 15.5}],
+                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 0.155}],
                 },
             "gaz": {
                 "@type": "Parameter",

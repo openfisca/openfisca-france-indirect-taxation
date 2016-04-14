@@ -58,17 +58,17 @@ def modify_legislation_json(reference_legislation_json_copy):
                 },
             "fioul_domestique_2014_2015": {
                 "@type": "Parameter",
-                "description": u"Surcroît de prix du fioul domestique (en euros par hectolitres)",
+                "description": u"Surcroît de prix du fioul domestique (en euros par litre)",
                 "format": "float",
                 "unit": 'currency',
-                "values": [{'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 4.495 - 2.17}],
+                "values": [{'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 0.04495 - 0.0217}],
                 },
             "fioul_domestique_2014_2016": {
                 "@type": "Parameter",
-                "description": u"Surcroît de prix du fioul domestique (en euros par hectolitres)",
+                "description": u"Surcroît de prix du fioul domestique (en euros par litre)",
                 "format": "float",
                 "unit": 'currency',
-                "values": [{'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 6.82 - 2.17}],
+                "values": [{'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 0.0682 - 0.0217}],
                 },
             "gaz_2014_2015": {
                 "@type": "Parameter",
