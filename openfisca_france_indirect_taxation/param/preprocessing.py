@@ -63,21 +63,21 @@ def preprocess_legislation(legislation_json):
         values1 = dict()
         values1['start'] = u'{}-01-01'.format(year)
         values1['stop'] = u'{}-12-31'.format(year)
-        values1['value'] = prix_annuel.loc[year] * 100
+        values1['value'] = prix_annuel[year] * 100
         all_values['super_95_e10_ttc'].append(values1)
     prix_annuel = prix_annuel_carburants['super_95_ttc']
     for year in range(2009, 2013):
         values2 = dict()
         values2['start'] = u'{}-01-01'.format(year)
         values2['stop'] = u'{}-12-31'.format(year)
-        values2['value'] = prix_annuel.loc[year] * 100
+        values2['value'] = prix_annuel[year] * 100
         all_values['super_95_e10_ttc'].append(values2)
     prix_annuel = prix_annuel_carburants['super_95_e10_ttc']
     for year in range(2013, 2015):
         values3 = dict()
         values3['start'] = u'{}-01-01'.format(year)
         values3['stop'] = u'{}-12-31'.format(year)
-        values3['value'] = prix_annuel.loc[year] * 100
+        values3['value'] = prix_annuel[year] * 100
         all_values['super_95_e10_ttc'].append(values3)
 
     prix_carburants['children']['super_95_e10_ttc'] = {
@@ -95,7 +95,7 @@ def preprocess_legislation(legislation_json):
             values = dict()
             values['start'] = u'{}-01-01'.format(year)
             values['stop'] = u'{}-12-31'.format(year)
-            values['value'] = prix_annuel.loc[year] * 100
+            values['value'] = prix_annuel[year] * 100
             all_values[element].append(values)
 
         prix_carburants['children'][element] = {
@@ -135,7 +135,7 @@ def preprocess_legislation(legislation_json):
             values = dict()
             values['start'] = u'{}-01-01'.format(year)
             values['stop'] = u'{}-12-31'.format(year)
-            values['value'] = taille_parc.loc[year]
+            values['value'] = taille_parc[year]
             values_parc[element].append(values)
 
         parc_vp['children'][element] = {
@@ -175,7 +175,7 @@ def preprocess_legislation(legislation_json):
             values = dict()
             values['start'] = u'{}-01-01'.format(year)
             values['stop'] = u'{}-12-31'.format(year)
-            values['value'] = quantite_carburants.loc[year]
+            values['value'] = quantite_carburants[year]
             values_quantite[element].append(values)
 
         quantite_carbu_vp['children'][element] = {
@@ -236,7 +236,7 @@ def preprocess_legislation(legislation_json):
             values = dict()
             values['start'] = u'{}-01-01'.format(year)
             values['stop'] = u'{}-12-31'.format(year)
-            values['value'] = part_par_carburant.loc[year]
+            values['value'] = part_par_carburant[year]
             values_part_supercarburants[element].append(values)
 
         part_type_supercaburant['children'][element] = {
