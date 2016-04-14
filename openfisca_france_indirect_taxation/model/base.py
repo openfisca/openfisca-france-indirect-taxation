@@ -66,6 +66,28 @@ __all__ = [
     'weighted_quantiles',
     ]
 
+tva_by_categorie_primaire = dict(
+    biere = 'tva_taux_plein',
+    vin = 'tva_taux_plein',
+    alcools_forts = 'tva_taux_plein',
+    cigares = 'cigares',
+    cigarettes = 'cigarettes',
+    tabac_a_rouler = 'tabac_a_rouler',
+    ticpe = 'tva_taux_plein',
+    assurance_transport = '',
+    assurance_sante = '',
+    autres_assurances = '',
+    )
+
+
+def get_tva(categorie_fiscale):
+    tva = tva_by_categorie_primaire.get(categorie_fiscale, categorie_fiscale)
+    if tva[:4] == 'tva_':
+        return tva
+    else:
+        return None
+
+
 
 def droit_d_accise(depense, droit_cn, consommation_cn, taux_plein_tva):
     """
@@ -86,18 +108,6 @@ def tax_from_expense_including_tax(expense = None, tax_rate = None):
 
 def insert_tva(categories_fiscales):
     categories_fiscales = categories_fiscales.copy()
-    tva_by_categorie_primaire = dict(
-        biere = 'tva_taux_plein',
-        vin = 'tva_taux_plein',
-        alcools_forts = 'tva_taux_plein',
-        cigares = 'cigares',
-        cigarettes = 'cigarettes',
-        tabac_a_rouler = 'tabac_a_rouler',
-        ticpe = 'tva_taux_plein',
-        assurance_transport = '',
-        assurance_sante = '',
-        autres_assurances = '',
-        )
     extracts = pd.DataFrame()
     for categorie_primaire, tva in tva_by_categorie_primaire.iteritems():
         extract = categories_fiscales.query('categorie_fiscale == @categorie_primaire').copy()
@@ -157,32 +167,20 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                 categorie_fiscale_by_poste = dict(
                     (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
                     for poste in postes_coicop)
-                # for key, value in sorted(categorie_fiscale_by_poste.iteritems()):
-                #     print 'a', key, value
-
-                # if Reform.key == 'aliss_tva_sociale' and postes_coicop[0][:2] == '01':
-                #     for key in ['01.1.1.1.1', '01.1.1.3.3']:
-                #         assert categorie_fiscale_by_poste[key] == 'tva_taux_intermediaire', 'key: {} -> {}'.format(
-                #             key, categorie_fiscale_by_poste[key]
-                #             )
 
                 @dated_function(start = start, stop = stop)
                 def func(self, simulation, period, categorie_fiscale_by_poste = categorie_fiscale_by_poste):
-                    # print 'b', sorted(postes_coicop)
-                    # for key, value in sorted(categorie_fiscale_by_poste.iteritems()):
-                    #     print 'c', key, value
-                    #
-                    # for key in ['01.1.1.1.1', '01.1.1.3.3']:
-                    #     assert categorie_fiscale_by_poste[key] == 'tva_taux_intermediaire', 'key: {} -> {}'.format(
-                    #         key, categorie_fiscale_by_poste[key]
-                    #         )
+
+                    def taux(poste):
+                        tva = get_tva(categorie_fiscale_by_poste[poste])
+                        if tva is not None:
+                            return simulation.legislation_at(period.start).imposition_indirecte.tva[tva[4:]]
+                        else:
+                            return 0
+
                     poste_agrege = sum(simulation.calculate(
                         'depenses_ht_poste_' + slugify(poste, separator = u'_'), period
-                        ) * (
-                            1 + simulation.legislation_at(period.start).imposition_indirecte.tva[
-                                categorie_fiscale_by_poste[poste][4:]
-                                ]
-                            )
+                        ) * (1 + taux(poste))
                         for poste in postes_coicop
                         )
                     return period, poste_agrege
@@ -201,18 +199,11 @@ def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, 
 
     @dated_function(start = start, stop = stop)
     def func(self, simulation, period, categorie_fiscale = categorie_fiscale):
-        if categorie_fiscale == '':  # pas de tva
-            taux = 0
+        tva = get_tva(categorie_fiscale)
+        if tva is not None:
+            taux = simulation.legislation_at(period.start).imposition_indirecte.tva[tva[4:]]
         else:
-            if categorie_fiscale in ['biere', 'vin', 'alcools_forts', 'cigares', 'cigarettes', 'tabac_a_rouler',
-                    'ticpe', 'assurance_transport', 'assurance_sante', 'autres_assurances']:
-                categorie_fiscale = 'tva_taux_plein'
-            try:
-                taux = simulation.legislation_at(period.start).imposition_indirecte.tva[categorie_fiscale[4:]]
-            except Exception as e:
-                print categorie_fiscale
-                print e
-                raise
+            taux = 0
 
         return period, simulation.calculate('poste_' + slugify(poste_coicop, separator = u'_'), period) / (1 + taux)
 

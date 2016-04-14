@@ -43,8 +43,7 @@ categories_fiscales_data_frame = None
 codes_coicop_data_frame = None
 
 
-def depenses_function_creator(postes_coicop, categorie_fiscale = None, Reform = None,
-        year_start = None, year_stop = None):
+def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, year_stop = None):
     start = date(year_start, 1, 1) if year_start is not None else None
     stop = date(year_stop, 12, 31) if year_stop is not None else None
 
@@ -54,6 +53,7 @@ def depenses_function_creator(postes_coicop, categorie_fiscale = None, Reform = 
             return period, sum(simulation.calculate(
                 'depenses_ht_poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
                 )
+
         func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
         return func
 
@@ -61,6 +61,7 @@ def depenses_function_creator(postes_coicop, categorie_fiscale = None, Reform = 
 
         @dated_function(start = start, stop = stop)
         def func(self, simulation, period):
+            print 'toto'
             return period, self.zeros()
 
     func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
@@ -72,9 +73,6 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
     reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
     removed_categories = set()
     completed_categories_fiscales = insert_tva(categories_fiscales)
-    if Reform:
-        removed_categories = set(reference_categories).difference(
-            set(categories_fiscales['categorie_fiscale'].drop_duplicates()))
 
     for categorie_fiscale in reference_categories:
         year_start = 1994
@@ -85,6 +83,7 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
                 completed_categories_fiscales.query(
                     'start <= @year and stop >= @year and categorie_fiscale == @categorie_fiscale'
                     )['code_coicop'].astype(str))
+
             if year == year_start:
                 previous_postes_coicop = postes_coicop
                 continue
@@ -94,29 +93,24 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
             else:
                 year_stop = year - 1 if year != year_final_stop else year_final_stop
 
-                dated_func = depenses_function_creator(
+                dated_func = depenses_ht_categorie_function_creator(
                     previous_postes_coicop,
-                    categorie_fiscale,
-                    Reform = None,
                     year_start = year_start,
                     year_stop = year_stop,
                     )
                 dated_function_name = u"function_{year_start}_{year_stop}".format(
                     year_start = year_start, year_stop = year_stop)
                 log.info(u'Creating fiscal category {} ({}-{}) with the following products {}'.format(
-                    categorie_fiscale, year_start, year_stop, postes_coicop))
+                    categorie_fiscale, year_start, year_stop, previous_postes_coicop))
 
-                if len(previous_postes_coicop) != 0:
-                    functions_by_name[dated_function_name] = dated_func
-
-                if len(previous_postes_coicop) == 0 and categorie_fiscale in removed_categories:
-                    functions_by_name[dated_function_name] = dated_func
+                functions_by_name[dated_function_name] = dated_func
 
                 year_start = year
 
             previous_postes_coicop = postes_coicop
 
         class_name = u'depenses_ht_{}'.format(categorie_fiscale)
+
         # Trick to create a class with a dynamic name.
         if not Reform:
             definitions_by_name = dict(

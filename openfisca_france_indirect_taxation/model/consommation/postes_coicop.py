@@ -65,20 +65,20 @@ def generate_depenses_ht_postes_variables(categories_fiscales = None, Reform = N
                 year_stop = year - 1 if year != year_final_stop else year_final_stop
 
                 for poste_coicop in previous_postes_coicop:
-                    if not Reform:
-                        dated_func = depenses_ht_postes_function_creator(
-                            poste_coicop,
-                            categorie_fiscale = categorie_fiscale,
-                            year_start = year_start,
-                            year_stop = year_stop
-                            )
-                    else:
-                        dated_func = depenses_ht_postes_function_creator(
-                            poste_coicop,
-                            categorie_fiscale = categorie_fiscale,
-                            year_start = year_start,
-                            year_stop = year_stop
-                            )
+                    # if not Reform:
+                    dated_func = depenses_ht_postes_function_creator(
+                        poste_coicop,
+                        categorie_fiscale = categorie_fiscale,
+                        year_start = year_start,
+                        year_stop = year_stop
+                        )
+                    # else:
+                    #     dated_func = depenses_ht_postes_function_creator(
+                    #         poste_coicop,
+                    #         categorie_fiscale = categorie_fiscale,
+                    #         year_start = year_start,
+                    #         year_stop = year_stop
+                    #         )
 
                     dated_function_name = u"function_{year_start}_{year_stop}".format(
                         year_start = year_start, year_stop = year_stop)
@@ -98,20 +98,20 @@ def generate_depenses_ht_postes_variables(categories_fiscales = None, Reform = N
 
     for poste, functions_by_name in functions_by_name_by_poste.iteritems():
         class_name = u'depenses_ht_poste_{}'.format(slugify(poste, separator = u'_'))
-        if Reform is None:
-            definitions_by_name = dict(
-                column = FloatCol,
-                entity_class = Menages,
-                label = u"Dépenses hors taxe du poste_{0}".format(poste),
-                )
-            definitions_by_name.update(functions_by_name)
-            type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
-        else:
-            definitions_by_name = dict(
-                reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
-                )
-            definitions_by_name.update(functions_by_name)
-            type(class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
+        # if Reform is None:
+        definitions_by_name = dict(
+            column = FloatCol,
+            entity_class = Menages,
+            label = u"Dépenses hors taxe du poste_{0}".format(poste),
+            )
+        definitions_by_name.update(functions_by_name)
+        type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+        # else:
+        #     definitions_by_name = dict(
+        #         reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
+        #         )
+        #     definitions_by_name.update(functions_by_name)
+        #     type(class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
 
         del definitions_by_name
 

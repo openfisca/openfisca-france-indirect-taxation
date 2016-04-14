@@ -115,21 +115,30 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     year = 2014
     categories_fiscales_data_frame, _ = get_legislation_data_frames()
     categories_fiscales = categories_fiscales_data_frame.query('start <= @year & @year <= stop').copy()
+
     assert not categories_fiscales.empty
     assert not categories_fiscales.code_bdf.duplicated().any()
 
-    categories_fiscales = categories_fiscales.set_index(['code_bdf'])
-    categories_fiscales_reform = categories_fiscales_reform.set_index(['code_bdf'])
-    categories_fiscales.update(categories_fiscales_reform)
-    categories_fiscales.reset_index(inplace = True)
+    categories_fiscales_reform = categories_fiscales_reform.loc[
+        categories_fiscales_reform.code_bdf.str[:3] == 'c01'].copy()
+
+    assert not (categories_fiscales_reform.code_bdf == 'c02131').any()
+
+    codes_bdf_by_reform_categorie_fiscale = dict(
+        (
+            categorie_fiscale,
+            categories_fiscales_reform.query('categorie_fiscale == @categorie_fiscale')['code_bdf'].unique().tolist()
+            )
+        for categorie_fiscale in categories_fiscales_reform.categorie_fiscale.unique()
+        )
+
+    for categorie_fiscale, codes_bdf in codes_bdf_by_reform_categorie_fiscale.iteritems():
+        categories_fiscales.loc[
+            categories_fiscales.code_bdf.isin(codes_bdf), 'categorie_fiscale'] = categorie_fiscale
 
     assert not categories_fiscales.code_bdf.duplicated().any(), "there are {} duplicated".format(
         categories_fiscales.code_bdf.duplicated().sum())
 
-    # print '========================================================'
-    # print reform_key
-    # print categories_fiscales.head()
-    # print '--------'
     generate_variables(
         categories_fiscales = categories_fiscales,
         Reform = Reform,
