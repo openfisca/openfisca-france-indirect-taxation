@@ -40,6 +40,7 @@ from reactions_comportementales_reforme import (  # noqa analysis:ignore
     elasticites,
     emissions_ajustees,
     quantites_ajustees,
+    contributions,
     )
 from .revenus import (  # noqa analysis:ignore
     revenus_menages,
