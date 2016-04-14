@@ -1,5 +1,6 @@
  - name: u"Test réaction comportementale "
    period: "2014"
+   ignore: True
    input_variables:
      depenses_essence: 1000
      elas_price_1_1: -0.4

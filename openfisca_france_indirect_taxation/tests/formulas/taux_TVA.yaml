@@ -1,4 +1,4 @@
- - name: "Test différents taux de TVA "
+ - name: u"Test différents taux de TVA "
    period: "2013"
    input_variables:
      depenses_tva_taux_intermediaire: 100
@@ -6,7 +6,7 @@
      depenses_tva_taux_reduit: 100
      depenses_tva_taux_super_reduit: 100
    output_variables:
-    tva_taux_plein: 100 * 0.196 / (1 + 0.196)
-    tva_taux_intermediaire: 100 * 0.07 / (1 + 0.07)
-    tva_taux_reduit: 100 * 0.055 / (1 + 0.055)
-    tva_taux_super_reduit: 100 * 0.021 / (1 + 0.021)
+     tva_taux_plein: 100 * 0.196 / (1 + 0.196)
+     tva_taux_intermediaire: 100 * 0.07 / (1 + 0.07)
+     tva_taux_reduit: 100 * 0.055 / (1 + 0.055)
+     tva_taux_super_reduit: 100 * 0.021 / (1 + 0.021)
