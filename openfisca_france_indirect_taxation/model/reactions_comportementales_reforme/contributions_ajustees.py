@@ -216,6 +216,64 @@ class diesel_ticpe_ajustee_taxes_carburants(Variable):
         return period, montant_diesel_ticpe_ajuste
 
 
+class difference_contribution_energie_cce_2014_2015(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2014-2015"
+
+    def function(self, simulation, period):
+        contribution_diesel = simulation.calculate('difference_ticpe_diesel_cce_2014_2015', period)
+        contribution_essence = simulation.calculate('difference_ticpe_essence_cce_2014_2015', period)
+        contribution_gaz = simulation.calculate('contributions_additionnelles_gaz_cce_2014_2015', period)
+        ticpe_fioul_domestique_ajustee = simulation.calculate('fioul_domestique_ticpe_ajustees_cce_2014_2015', period)
+        ticpe_fioul_domestique = simulation.calculate('fioul_domestique_ticpe', period)
+        contribution_fioul = ticpe_fioul_domestique_ajustee - ticpe_fioul_domestique
+
+        total = contribution_diesel + contribution_essence + contribution_fioul + contribution_gaz
+
+        return period, total
+
+
+class difference_contribution_energie_cce_2014_2016(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2014-2016"
+
+    def function(self, simulation, period):
+        contribution_diesel = simulation.calculate('difference_ticpe_diesel_cce_2014_2016', period)
+        contribution_essence = simulation.calculate('difference_ticpe_essence_cce_2014_2016', period)
+        contribution_gaz = simulation.calculate('contributions_additionnelles_gaz_cce_2014_2016', period)
+        ticpe_fioul_domestique_ajustee = simulation.calculate('fioul_domestique_ticpe_ajustees_cce_2014_2016', period)
+        ticpe_fioul_domestique = simulation.calculate('fioul_domestique_ticpe', period)
+        contribution_fioul = ticpe_fioul_domestique_ajustee - ticpe_fioul_domestique
+
+        total = contribution_diesel + contribution_essence + contribution_fioul + contribution_gaz
+
+        return period, total
+
+
+class difference_contribution_energie_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence entre les contributions aux taxes sur l'énergie après la taxe carbone"
+
+    def function(self, simulation, period):
+        contribution_diesel = simulation.calculate('difference_ticpe_diesel_taxe_carbone', period)
+        contribution_electricite = simulation.calculate('contributions_additionnelles_electricite_taxe_carbone', period)
+        contribution_essence = simulation.calculate('difference_ticpe_essence_taxe_carbone', period)
+        contribution_gaz = simulation.calculate('contributions_additionnelles_gaz_taxe_carbone', period)
+        ticpe_fioul_domestique_ajustee = simulation.calculate('fioul_domestique_ticpe_ajustees_taxe_carbone', period)
+        ticpe_fioul_domestique = simulation.calculate('fioul_domestique_ticpe', period)
+        contribution_fioul = ticpe_fioul_domestique_ajustee - ticpe_fioul_domestique
+
+        total = (
+            contribution_diesel + contribution_electricite + contribution_essence +
+            contribution_fioul + contribution_gaz
+            )
+
+        return period, total
+
+
 class difference_ticpe_diesel_cce_2014_2015(Variable):
     column = FloatCol
     entity_class = Menages
@@ -472,6 +530,101 @@ class essence_ticpe_ajustee_taxes_carburants(DatedVariable):
         sp_e10_ticpe_ajustee = simulation.calculate('sp_e10_ticpe_ajustee_taxes_carburants', period)
         essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + sp_e10_ticpe_ajustee)
         return period, essence_ticpe_ajustee
+
+
+class fioul_domestique_ticpe_ajustees_cce_2014_2015(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Calcul du montant de TICPE sur le fioul domestique après réforme - hausse cce 2014-2015"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+
+        accise_fioul_ticpe = (
+            simulation.legislation_at(period.start).imposition_indirecte.ticpe.gazole_fioul_domestique_hectolitre / 100
+            )
+        reforme_fioul = \
+            simulation.legislation_at(period.start).contribution_climat_energie_reforme.fioul_domestique_2014_2015
+        accise_fioul_ajustee = accise_fioul_ticpe + reforme_fioul
+        prix_fioul_ttc = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
+        prix_fioul_ttc_ajuste = prix_fioul_ttc + reforme_fioul
+
+        taux_implicite_fioul_ajuste = (
+            (accise_fioul_ajustee * (1 + taux_plein_tva)) /
+            (prix_fioul_ttc_ajuste - accise_fioul_ajustee * (1 + taux_plein_tva))
+            )
+
+        depenses_fioul_ajustees = simulation.calculate('depenses_fioul_domestique_ajustees_cce_2014_2015', period)
+        depenses_fioul_ajustees_htva = \
+            depenses_fioul_ajustees - tax_from_expense_including_tax(depenses_fioul_ajustees, taux_plein_tva)
+        montant_fioul_ticpe_ajuste = \
+            tax_from_expense_including_tax(depenses_fioul_ajustees_htva, taux_implicite_fioul_ajuste)
+
+        return period, montant_fioul_ticpe_ajuste
+
+
+class fioul_domestique_ticpe_ajustees_cce_2014_2016(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Calcul du montant de TICPE sur le fioul domestique après réforme - hausse cce 2014-2016"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+
+        accise_fioul_ticpe = (
+            simulation.legislation_at(period.start).imposition_indirecte.ticpe.gazole_fioul_domestique_hectolitre / 100
+            )
+        reforme_fioul = \
+            simulation.legislation_at(period.start).contribution_climat_energie_reforme.fioul_domestique_2014_2016
+        accise_fioul_ajustee = accise_fioul_ticpe + reforme_fioul
+        prix_fioul_ttc = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
+        prix_fioul_ttc_ajuste = prix_fioul_ttc + reforme_fioul
+
+        taux_implicite_fioul_ajuste = (
+            (accise_fioul_ajustee * (1 + taux_plein_tva)) /
+            (prix_fioul_ttc_ajuste - accise_fioul_ajustee * (1 + taux_plein_tva))
+            )
+
+        depenses_fioul_ajustees = simulation.calculate('depenses_fioul_domestique_ajustees_cce_2014_2016', period)
+        depenses_fioul_ajustees_htva = \
+            depenses_fioul_ajustees - tax_from_expense_including_tax(depenses_fioul_ajustees, taux_plein_tva)
+        montant_fioul_ticpe_ajuste = \
+            tax_from_expense_including_tax(depenses_fioul_ajustees_htva, taux_implicite_fioul_ajuste)
+
+        return period, montant_fioul_ticpe_ajuste
+
+
+class fioul_domestique_ticpe_ajustees_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Calcul du montant de TICPE sur le fioul domestique après réforme - taxe carbone"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+
+        accise_fioul_ticpe = (
+            simulation.legislation_at(period.start).imposition_indirecte.ticpe.gazole_fioul_domestique_hectolitre / 100
+            )
+        reforme_fioul = simulation.legislation_at(period.start).taxe_carbone.fioul_domestique
+        accise_fioul_ajustee = accise_fioul_ticpe + reforme_fioul
+        prix_fioul_ttc = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
+        prix_fioul_ttc_ajuste = prix_fioul_ttc + reforme_fioul
+
+        taux_implicite_fioul_ajuste = (
+            (accise_fioul_ajustee * (1 + taux_plein_tva)) /
+            (prix_fioul_ttc_ajuste - accise_fioul_ajustee * (1 + taux_plein_tva))
+            )
+
+        depenses_fioul_ajustees = simulation.calculate('depenses_fioul_domestique_ajustees_taxe_carbone', period)
+        depenses_fioul_ajustees_htva = \
+            depenses_fioul_ajustees - tax_from_expense_including_tax(depenses_fioul_ajustees, taux_plein_tva)
+        montant_fioul_ticpe_ajuste = \
+            tax_from_expense_including_tax(depenses_fioul_ajustees_htva, taux_implicite_fioul_ajuste)
+
+        return period, montant_fioul_ticpe_ajuste
 
 
 class sp_e10_ticpe_ajustee_cce_2014_2015(Variable):
