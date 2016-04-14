@@ -173,6 +173,32 @@ class essence_ticpe(DatedVariable):
         return period, essence_ticpe
 
 
+class fioul_domestique_ticpe(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Calcul du montant de TICPE sur le fioul domestique"
+
+    def function(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+
+        accise_fioul_ticpe = (
+            simulation.legislation_at(period.start).imposition_indirecte.ticpe.gazole_fioul_domestique_hectolitre / 100
+            )
+
+        prix_fioul_ttc = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
+        taux_implicite_fioul = (
+            (accise_fioul_ticpe * (1 + taux_plein_tva)) /
+            (prix_fioul_ttc - accise_fioul_ticpe * (1 + taux_plein_tva))
+            )
+
+        depenses_fioul = simulation.calculate('poste_coicop_453', period)
+        depenses_fioul_htva = depenses_fioul - tax_from_expense_including_tax(depenses_fioul, taux_plein_tva)
+        montant_fioul_ticpe = tax_from_expense_including_tax(depenses_fioul_htva, taux_implicite_fioul)
+
+        return period, montant_fioul_ticpe
+
+
 class sp_e10_ticpe(Variable):
     column = FloatCol
     entity_class = Menages
