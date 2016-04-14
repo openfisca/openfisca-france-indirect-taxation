@@ -6,14 +6,42 @@ from __future__ import division
 from ..base import * # noqa analysis:ignore
 
 
-class emissions_CO2_carburants_ajustees(Variable):
+class difference_emissions_CO2_carburants_taxes_carburants(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Variation des émissions de CO2 des ménages via leur conso de carburants après taxe carbu, en kg de CO2"
+
+    def function(self, simulation, period):
+        emissions_carburants = simulation.calculate('emissions_CO2_carburants', period)
+        emissions_carburants_ajustees = \
+            simulation.calculate('emissions_CO2_carburants_ajustees_taxes_carburants', period)
+        difference_emissions = emissions_carburants - emissions_carburants_ajustees
+
+        return period, difference_emissions
+
+
+class difference_emissions_CO2_energies_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Variation des émissions de CO2 des ménages via leur conso d'énergies après taxe carbone, en kg de CO2"
+
+    def function(self, simulation, period):
+        emissions_energies = simulation.calculate('emissions_CO2_energies', period)
+        emissions_energies_ajustees = \
+            simulation.calculate('emissions_CO2_energies_ajustees_taxe_carbone', period)
+        difference_emissions = emissions_energies - emissions_energies_ajustees
+
+        return period, difference_emissions
+
+
+class emissions_CO2_carburants_ajustees_taxe_carbone(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
 
     def function(self, simulation, period):
-        quantites_diesel_ajustees = simulation.calculate('quantites_diesel_ajustees', period)
-        quantites_essence_ajustees = simulation.calculate('quantites_essence_ajustees', period)
+        quantites_diesel_ajustees = simulation.calculate('quantites_diesel_ajustees_taxe_carbone', period)
+        quantites_essence_ajustees = simulation.calculate('quantites_essence_ajustees_taxe_carbone', period)
         emissions_diesel = \
             simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
         emissions_essence = \
@@ -26,7 +54,46 @@ class emissions_CO2_carburants_ajustees(Variable):
         return period, emissions_ajustees
 
 
-class emissions_CO2_electricite_ajustees(Variable):
+class emissions_CO2_carburants_ajustees_taxes_carburants(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
+
+    def function(self, simulation, period):
+        quantites_diesel_ajustees = simulation.calculate('quantites_diesel_ajustees_taxes_carburants', period)
+        quantites_essence_ajustees = simulation.calculate('quantites_essence_ajustees_taxes_carburants', period)
+        emissions_diesel = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
+        emissions_essence = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
+        emissions_ajustees = (
+            (quantites_diesel_ajustees * emissions_diesel) +
+            (quantites_essence_ajustees * emissions_essence)
+            )  # Source : Ademe
+
+        return period, emissions_ajustees
+
+
+class emissions_CO2_energies_ajustees_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Emissions de CO2 des ménages via leur conso d'énergies après taxe carbone, en kg de CO2"
+
+    def function(self, simulation, period):
+        emissions_carburants_ajustees = simulation.calculate('emissions_CO2_carburants_ajustees_taxe_carbone', period)
+        emissions_electricite_ajustees = simulation.calculate('emissions_CO2_electricite_ajustees_taxe_carbone', period)
+        emissions_fioul_domestique_ajustees = \
+            simulation.calculate('emissions_CO2_fioul_domestique_ajustees_taxe_carbone', period)
+        emissions_gaz_ajustees = simulation.calculate('emissions_CO2_gaz_ajustees_taxe_carbone', period)
+
+        emissions_energies_ajustees = (
+            emissions_carburants_ajustees + emissions_electricite_ajustees +
+            emissions_fioul_domestique_ajustees + emissions_gaz_ajustees
+            )
+        return period, emissions_energies_ajustees
+
+
+class emissions_CO2_electricite_ajustees_taxe_carbone(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Emissions de CO2 des ménages via leur consommation d'électricité après réforme, en kg de CO2"
@@ -40,7 +107,21 @@ class emissions_CO2_electricite_ajustees(Variable):
         return period, emissions_ajustees
 
 
-class emissions_CO2_gaz_ajustees(Variable):
+class emissions_CO2_fioul_domestique_ajustees_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2"
+
+    def function(self, simulation, period):
+        quantites_fioul_ajustees = simulation.calculate('quantites_fioul_domestique_ajustees_taxe_carbone', period)
+        emissions_fioul = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_fioul_domestique
+        emissions_ajustees = quantites_fioul_ajustees * emissions_fioul
+
+        return period, emissions_ajustees
+
+
+class emissions_CO2_gaz_ajustees_taxe_carbone(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2"
