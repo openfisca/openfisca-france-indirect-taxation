@@ -14,6 +14,6 @@ install:
 
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION pip pandas nose numexpr numpy
   - source activate test-environment
-  - pip install flake8  # Not yet available in Debian stable
+  - pip install flake8  # Not yet available in Ubuntu precise (https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise)
   - pip install --editable .[test]
 script: make test-ci
