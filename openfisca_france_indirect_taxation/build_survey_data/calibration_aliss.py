@@ -34,6 +34,12 @@ def build_clean_aliss_data_frame():
     survey = aliss_survey_collection.get_survey('aliss_{}'.format(year))
 
     aliss = survey.get_values(table = 'Base_ALISS_2011')
+    aliss.shape
+
+    # Removing products with missing nomf
+    aliss = aliss.query('nomf != "nan"').copy()
+
+
     aliss['age'] = 99
     aliss['revenus'] = 99
 
@@ -126,9 +132,8 @@ def compute_kantar_elasticities(compute = False):
 
     if not compute:
         if os.path.exists(kantar_cross_price_elasticities_path):
-          nomk_cross_price_elasticity = pandas.read_csv(kantar_cross_price_elasticities_path, index_col = 0)
-
-          return nomk_cross_price_elasticity
+          nomk_cross_price_elasticity = pandas.read_csv(kantar_cross_price_elasticities_path)
+          return nomk_cross_price_elasticity.set_index(['age', 'revenus', 'nomk'])
 
     nomf_by_dirty_nomf = {
         '1 : Juices': 'Juic',
@@ -154,17 +159,23 @@ def compute_kantar_elasticities(compute = False):
         '21 : Prepared desserts': 'PrepD',
         }
 
+
+    assert  (aliss.nomf != 'nan').all()
+
     nomf_nomk = aliss.query('age == 0 & revenus == 0')[['nomf', 'nomk']]
+
+    aliss.loc[aliss.nomk.str.contains('11933'), ['nomf', 'nomk']]
     (nomf_nomk.nomk.value_counts() == 1).all()
     nomf_by_nomk = nomf_nomk.set_index('nomk').to_dict()['nomf']
     nomks_by_nomf = dict(
         (nomf_by_dirty_nomf.get(nomf), nomf_nomk.query('nomf == @nomf')['nomk'].unique())
         for nomf in nomf_nomk.nomf.unique()
         )
+    assert len(nomks_by_nomf.keys()) == 21
 
     # budget shares
     budget_share_path = os.path.join(elasticities_path, 'budget_share.csv')
-    if os.path.exists(budget_share_path):
+    if os.path.exists(budget_share_path) and not compute:
         kantar_budget_share = pandas.read_csv(budget_share_path)
     else:
         kantar_budget_share = pandas.DataFrame()
@@ -177,19 +188,24 @@ def compute_kantar_elasticities(compute = False):
                 ]
 
             assert len(extract.dm_f.unique()) == 1
-
             extract['budget_share_kf'] = extract.dm_k / extract.dm_f
             extract['nomf'] = nomf_by_dirty_nomf.get(nomf)
+
             kantar_budget_share = kantar_budget_share.append(extract)
 
         kantar_budget_share.fillna(0, inplace = True)
         kantar_budget_share.to_csv(budget_share_path)
+
+    assert (kantar_budget_share.nomf != 'nan').all()
+    assert kantar_budget_share.notnull().all().all()
 
     csv_path_name = os.path.join(
         elasticities_path,
         'cross_price_elasticities.csv',
         )
     nomf_cross_price_elasticities = pandas.read_csv(csv_path_name)
+
+    assert nomf_cross_price_elasticities.notnull().all().all()
 
     nomks = aliss.nomk.unique()
 
@@ -199,8 +215,6 @@ def compute_kantar_elasticities(compute = False):
         index = index,
         columns = nomks,
         )
-
-    nomk_cross_price_elasticity.index
 
     # TODO save by age, revenus
     for age, revenus in itertools.product(aliss.age.unique(), aliss.revenus.unique()):
@@ -224,23 +238,30 @@ def compute_kantar_elasticities(compute = False):
             budget_share = kantar_budget_share.query(
                 'age == @age & revenus == @revenus & nomk in @nomks_for_fprime & nomf == @fprime'
                 )[['nomk', 'budget_share_kf']].set_index(('nomk'))
+            assert budget_share.notnull().all().all()
             transposed_elasticity_kkprime = elasticity_kkprime.T
             transposed_elasticity_kkprime.loc[nomks_for_fprime] = budget_share * elasticity_ffprime
+            assert transposed_elasticity_kkprime.notnull().all().all()
+
             elasticity_kkprime = transposed_elasticity_kkprime.T
+            assert elasticity_kkprime.notnull().all().all(), \
+                'elasticity_kkprime: age={}, revenus={}, f={}, fprime={}'.format(age, revenus, f, fprime)
+
             temp_nomk_cross_price_elasticity = temp_nomk_cross_price_elasticity.combine_first(elasticity_kkprime)
+
 
         temp_nomk_cross_price_elasticity['age'] = age
         temp_nomk_cross_price_elasticity['revenus'] = revenus
         temp_nomk_cross_price_elasticity.index.name = 'nomk'
         temp_nomk_cross_price_elasticity = temp_nomk_cross_price_elasticity.reset_index()
+        temp_nomk_cross_price_elasticity = temp_nomk_cross_price_elasticity.set_index(['age', 'revenus', 'nomk'])
+        # print 'a', temp_nomk_cross_price_elasticity.age.notnull().all()
+        nomk_cross_price_elasticity = nomk_cross_price_elasticity.combine_first(temp_nomk_cross_price_elasticity)
 
-        nomk_cross_price_elasticity = nomk_cross_price_elasticity.merge(
-            temp_nomk_cross_price_elasticity, how = 'outer')
-        print "age = {} : \n {}".format(age, nomk_cross_price_elasticity.age.value_counts())
-        print "revenus = {} : \n {}".format(revenus, nomk_cross_price_elasticity.revenus.value_counts())
+    # Some k-kprime elasticities are not found
+    print "{} k-kprime elasticities are not found".format(nomk_cross_price_elasticity.isnull().sum().sum())
+    nomk_cross_price_elasticity.fillna(0, inplace = True)
 
-
-    nomk_cross_price_elasticity.set_index(['age', 'revenus', 'nomk'])
     nomk_cross_price_elasticity.to_csv(kantar_cross_price_elasticities_path)
     return nomk_cross_price_elasticity
 
@@ -251,6 +272,13 @@ def compute_expenses_coefficient():
 
 
 def wip():
+    pass
+
+
+
+if __name__ == '__main__':
+
+
     aliss_uncomplete = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss_uncomplete)
     aliss_extract = aliss[['nomk', 'poste_bdf', 'poste_coicop']].copy()
@@ -273,59 +301,30 @@ def wip():
     taux_by_categorie_fiscale = {
         'tva_taux_reduit': .055,
         'tva_taux_plein': .196,
-#        'alcools_forts',
-#        'vin',
-#        'biere',
+        # 'alcools_forts',
+        # 'vin',
+        # 'biere',
         }
 
     df['taux'] = df.categorie_fiscale.apply(lambda x: taux_by_categorie_fiscale.get(x, 0))
-    df['taux_reforme'] = df['taux'].copy()
-    df['elasticity_factor'] = (df.taux_reforme - df.taux) / ( 1 + df.taux)
+    df['taux_reforme'] = .196  # df['taux'].copy()
+    df['elasticity_factor'] = (df.taux_reforme - df.taux) / (1 + df.taux)
 
-    kantar_elasticities = compute_kantar_elasticities(compute = True)
-    assert sorted(kantar_elasticities.age.value_counts().index) == sorted(range(4))
-    assert sorted(kantar_elasticities.revenus.value_counts().index) == sorted(range(4))
+    kantar_elasticities_indexed = compute_kantar_elasticities(compute = False)
+
+    kantar_elasticities = kantar_elasticities_indexed.reset_index(['age', 'revenus'])
+    assert sorted(kantar_elasticities.age.value_counts(dropna = False).index) == sorted(range(4))
+    assert sorted(kantar_elasticities.revenus.value_counts(dropna = False).index) == sorted(range(4))
+    assert kantar_elasticities.age.notnull().all()
+    assert kantar_elasticities.revenus.notnull().all()
 
     for age, revenus in itertools.product(kantar_elasticities.age.unique(), kantar_elasticities.revenus.unique()):
-        age = 0
-        revenus = 0
         matrix = kantar_elasticities.query('age == @age & revenus == @revenus').drop(['age', 'revenus'], axis =1)
-        matrix.shape
-    assert sorted(matrix.index.tolist()) == sorted(df.nomk)
-
-    assert matrix.shape == (110, 110)
-    # depenses= compute_expenses()
-
-
-
-
-if __name__ == '__main__':
-
-    aliss_uncomplete = build_clean_aliss_data_frame()
-    aliss = add_poste_coicop(aliss_uncomplete)
-    aliss_extract = aliss[['nomf', 'nomk', 'nomc', 'poste_bdf', 'poste_coicop']].copy()
-    aliss_extract.drop_duplicates(inplace = True)
-    year = 2011
-
-    check = aliss_extract[['nomf', 'nomc']]
-    check.groupby(['nomc']).filter(
-        lambda x: x.nomf.nunique() > 1
-        )[''].unique()
-
-    legislation_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-        'openfisca_france_indirect_taxation',
-        'assets',
-        'legislation',
-        )
-    codes_coicop_data_frame = pandas.read_csv(
-        os.path.join(legislation_directory, 'coicop_legislation.csv'),
-        )
-    legislation = codes_coicop_data_frame[['code_bdf', 'categorie_fiscale']].copy()
-    legislation.rename(columns = {'code_bdf': 'poste_bdf'}, inplace = True)
-    df = aliss_extract.merge(legislation)
-    x = df.groupby(['nomf']).filter(
-        lambda x: x.categorie_fiscale.nunique() > 1
-        )[['nomf', 'poste_coicop', 'nomc', 'categorie_fiscale']].sort_values('nomf')
-
-    df.groupby(['nomf', 'poste_coicop', 'nomc'])['categorie_fiscale'].unique()
+        matrix.fillna(0, inplace = True)
+        assert sorted(matrix.index.tolist()) == sorted(df.nomk), "Problem at age={} and revenus={}\n {}, {}".format(
+            age, revenus, sorted(matrix.index.tolist()), sorted(df.nomk))
+        assert matrix.shape == (len(df.nomk), len(df.nomk))
+        import numpy as np
+        expense_factor = (1 + df.taux_reforme) / (1 + df.taux) * (1 + np.dot(matrix, df.elasticity_factor))
+        assert len(expense_factor) == len(df.nomk)
+        df['expense_factor'] = expense_factor
