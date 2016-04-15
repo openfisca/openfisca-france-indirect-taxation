@@ -1,7 +1,7 @@
 sudo: false # Use new Travis container-based infrastructure
 language: python
-cache: pip
 python: 2.7
+cache: pip
 install:
   - wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh
   - bash miniconda.sh -b -p $HOME/miniconda
@@ -15,5 +15,5 @@ install:
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION pip pandas nose numexpr numpy
   - source activate test-environment
   - pip install flake8  # Not yet available in Debian stable
-  - pip install --editable .[tests]
+  - pip install --editable .[test]
 script: make test-ci

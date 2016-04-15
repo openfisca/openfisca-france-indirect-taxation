@@ -55,7 +55,8 @@ setup(
     url = 'https://github.com/openfisca/openfisca-france-indirect-taxation',
 
     extras_require = dict(
-        tests = [
+        test = [
+            'nose',
             'pandas >= 0.17',
             ],
         survey = [
