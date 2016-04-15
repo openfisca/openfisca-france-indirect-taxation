@@ -140,6 +140,18 @@ def graph_builder_bar(graph):
         stacked = True,
         )
     plt.axhline(0, color = 'k')
+    axes.legend(
+        bbox_to_anchor = (1.5, 1.05),
+        )
+    return plt.show()
+
+
+def graph_builder_bar_percent(graph):
+    axes = graph.plot(
+        kind = 'bar',
+        stacked = True,
+        )
+    plt.axhline(0, color = 'k')
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
     axes.legend(
         bbox_to_anchor = (1.5, 1.05),
@@ -160,14 +172,11 @@ def graph_builder_bar_list(graph, a, b):
     return plt.show()
 
 
-def graph_builder_line_percent(graph, a, b):
+def graph_builder_line_percent(graph):
     axes = graph.plot(
         )
     plt.axhline(0, color = 'k')
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-    axes.legend(
-        bbox_to_anchor = (a, b),
-        )
     return plt.show()
 
 
@@ -209,7 +218,10 @@ def percent_formatter(x, pos = 0):
 
 
 def save_dataframe_to_graph(dataframe, file_name):
-    return dataframe.to_csv('C:/Users/thomas.douenne/Documents/data/Stats_rapport/' + file_name, sep = ',')
+    # return dataframe.to_csv('C:/Users/thomas.douenne/Documents/data/Stats_rapport/' + file_name, sep = ',')
+    return dataframe.to_csv(
+        u'C:/Users/thomas.douenne/Desktop/Dossier/Mémoire/Documents propres/Graphs/' + file_name, sep = ';'
+        )
 #    assets_directory = os.path.join(
 #        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
 #        )
