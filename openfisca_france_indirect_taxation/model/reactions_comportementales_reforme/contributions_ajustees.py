@@ -391,7 +391,7 @@ class difference_ticpe_totale_taxe_carbone(Variable):
         return period, difference
 
 
-class difference_ticpe_totale_taxes_carburants(Variable):
+class difference_contribution_energie_taxes_carburants(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Différence entre les contributions à la TICPE avant et après la réforme"

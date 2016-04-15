@@ -6,20 +6,6 @@ from __future__ import division
 from ..base import * # noqa analysis:ignore
 
 
-class difference_emissions_CO2_carburants_taxes_carburants(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Variation des émissions de CO2 des ménages via leur conso de carburants après taxe carbu, en kg de CO2"
-
-    def function(self, simulation, period):
-        emissions_carburants = simulation.calculate('emissions_CO2_carburants', period)
-        emissions_carburants_ajustees = \
-            simulation.calculate('emissions_CO2_carburants_ajustees_taxes_carburants', period)
-        difference_emissions = emissions_carburants - emissions_carburants_ajustees
-
-        return period, difference_emissions
-
-
 class difference_emissions_CO2_energies_cce_2014_2015(Variable):
     column = FloatCol
     entity_class = Menages
@@ -58,6 +44,20 @@ class difference_emissions_CO2_energies_taxe_carbone(Variable):
         emissions_energies_ajustees = \
             simulation.calculate('emissions_CO2_energies_ajustees_taxe_carbone', period)
         difference_emissions = emissions_energies - emissions_energies_ajustees
+
+        return period, difference_emissions
+
+
+class difference_emissions_CO2_energies_taxes_carburants(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Variation des émissions de CO2 des ménages via leur conso de carburants après taxe carbu, en kg de CO2"
+
+    def function(self, simulation, period):
+        emissions_carburants = simulation.calculate('emissions_CO2_carburants', period)
+        emissions_carburants_ajustees = \
+            simulation.calculate('emissions_CO2_carburants_ajustees_taxes_carburants', period)
+        difference_emissions = emissions_carburants - emissions_carburants_ajustees
 
         return period, difference_emissions
 
