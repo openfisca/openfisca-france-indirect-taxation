@@ -67,6 +67,26 @@ class strate(Variable):
     label = u"catégorie de la commune de résidence"
 
 
+class strate_agrege(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"catégorie de la commune de résidence, construction d'une nomenclature plus agrégée pour 2011"
+
+    def function(self, simulation, period):
+        strate = simulation.calculate('strate', period)
+        strate_agrege = (
+            1 * (strate == 111) +
+            2 * ((strate == 120) + (strate == 211) + (strate == 221)) +
+            3 * ((strate == 400) + (strate == 222) + (strate == 300) + (strate == 212) + (strate == 112))
+            ) + (
+            1 * ((strate == 4) + (strate == 3) + (strate == 2)) +
+            2 * (strate == 1) +
+            3 * (strate == 0)
+            )
+
+        return period, strate_agrege
+
+
 class typmen(Variable):
     column = FloatCol
     entity_class = Menages
