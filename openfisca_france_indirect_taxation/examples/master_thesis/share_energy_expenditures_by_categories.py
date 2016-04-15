@@ -1,0 +1,76 @@
+# -*- coding: utf-8 -*-
+
+# Import general modules
+from __future__ import division
+
+import pandas
+
+# Import modules specific to OpenFisca
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line_percent, \
+    save_dataframe_to_graph
+from openfisca_france_indirect_taxation.surveys import SurveyScenario
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
+from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
+
+#
+inflators_by_year = get_inflators_by_year_energy(rebuild = False)
+year = 2014
+data_year = 2011
+elasticities = get_elasticities(data_year)
+inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
+del inflation_kwargs['inflator_by_variable']['somme_coicop12']
+
+simulated_variables = ['depenses_energies', 'depenses_energies_logement', 'depenses_essence', 'depenses_diesel',
+                       'poste_coicop_722', 'poste_coicop_451', 'poste_coicop_452', 'poste_coicop_453',
+                       'poste_coicop_454', 'rev_disp_loyerimput', 'somme_coicop12']
+
+survey_scenario = SurveyScenario.create(
+    elasticities = elasticities,
+    inflation_kwargs = inflation_kwargs,
+    year = year,
+    data_year = data_year
+    )
+
+for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
+    pivot_table = pandas.DataFrame()
+    for values in simulated_variables:
+        pivot_table = pandas.concat([
+            pivot_table,
+            survey_scenario.compute_pivot_table(values = [values], columns = ['{}'.format(category)])
+            ])
+    df = pivot_table.T
+
+    df.rename(columns = {'somme_coicop12': 'total expenditures',
+        'rev_disp_loyerimput': 'disposable income'},
+        inplace = True)
+    for resource in [u'total expenditures', u'disposable income']:
+        df['Energy share in {}'.format(resource)] = df['depenses_energies'] / df['{}'.format(resource)]
+        df['Housing energy share in {}'.format(resource)] = df['depenses_energies_logement'] / df['{}'.format(resource)]
+        df['Transport energy share in {}'.format(resource)] = df['poste_coicop_722'] / df['{}'.format(resource)]
+        df['Diesel share in {}'.format(resource)] = df['depenses_diesel'] / df['{}'.format(resource)]
+        df['Gasoline share in {}'.format(resource)] = df['depenses_essence'] / df['{}'.format(resource)]
+        df['Electricity share in {}'.format(resource)] = df['poste_coicop_451'] / df['{}'.format(resource)]
+        df['Natural gas share in {}'.format(resource)] = df['poste_coicop_452'] / df['{}'.format(resource)]
+        df['Domestic fuel share in {}'.format(resource)] = df['poste_coicop_453'] / df['{}'.format(resource)]
+        df['Solid fuels share in {}'.format(resource)] = df['poste_coicop_454'] / df['{}'.format(resource)]
+
+        # Réalisation de graphiques
+        print 'Percentage of energy expenditure in {}'.format(resource)
+        graph_builder_line_percent(
+            df[['Energy share in {}'.format(resource),
+            'Housing energy share in {}'.format(resource),
+            'Transport energy share in {}'.format(resource)]]
+            )
+        graph_builder_line_percent(
+            df[['Diesel share in {}'.format(resource),
+            'Gasoline share in {}'.format(resource)]]
+            )
+        graph_builder_line_percent(
+            df[['Electricity share in {}'.format(resource),
+            'Natural gas share in {}'.format(resource),
+            'Domestic fuel share in {}'.format(resource),
+            'Solid fuels share in {}'.format(resource)]]
+            )
+
+        save_dataframe_to_graph(df,
+            'Expenditures/share_energy_expenditures_in_{0}_by_{1}.csv'.format(resource.replace(' ', '_'), category))
