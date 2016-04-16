@@ -4,6 +4,7 @@ from __future__ import division
 
 
 import itertools
+import numpy as np
 import os
 import pandas
 import pkg_resources
@@ -26,6 +27,16 @@ elasticities_path = os.path.join(
     )
 
 
+def detect_null(data_frame):
+    isnull_columns = list()
+    global_null = None
+    for column in data_frame.columns:
+        null = data_frame[column].isnull()
+        if null.any():
+            isnull_columns.append(column)
+            global_null = (global_null | null) if global_null is not None else null
+    return data_frame.loc[global_null].copy()
+
 def build_clean_aliss_data_frame():
     year = 2011
     aliss_survey_collection = SurveyCollection.load(
@@ -34,10 +45,14 @@ def build_clean_aliss_data_frame():
     survey = aliss_survey_collection.get_survey('aliss_{}'.format(year))
 
     aliss = survey.get_values(table = 'Base_ALISS_2011')
-    aliss.shape
+
+    detect_null(aliss).to_csv('aliss_errors.csv')
+
 
     # Removing products with missing nomf
     aliss = aliss.query('nomf != "nan"').copy()
+
+    aliss = aliss.loc[aliss.nomf.notnull()].copy()
 
 
     aliss['age'] = 99
@@ -71,6 +86,8 @@ def build_clean_aliss_data_frame():
     assert aliss.age.isin(range(4)).all()
     assert aliss.revenus.isin(range(4)).all()
     del aliss['type']
+
+    assert aliss.notnull().all().all()
 
     return aliss
 
@@ -159,14 +176,17 @@ def compute_kantar_elasticities(compute = False):
         '21 : Prepared desserts': 'PrepD',
         }
 
-
-    assert  (aliss.nomf != 'nan').all()
+    assert (aliss.nomf != 'nan').all()
+    assert aliss.nomf.notnull().all()
 
     nomf_nomk = aliss.query('age == 0 & revenus == 0')[['nomf', 'nomk']]
 
-    aliss.loc[aliss.nomk.str.contains('11933'), ['nomf', 'nomk']]
     (nomf_nomk.nomk.value_counts() == 1).all()
     nomf_by_nomk = nomf_nomk.set_index('nomk').to_dict()['nomf']
+
+    print nomf_nomk.nomf.value_counts(dropna = False)
+    boum
+
     nomks_by_nomf = dict(
         (nomf_by_dirty_nomf.get(nomf), nomf_nomk.query('nomf == @nomf')['nomk'].unique())
         for nomf in nomf_nomk.nomf.unique()
@@ -249,13 +269,11 @@ def compute_kantar_elasticities(compute = False):
 
             temp_nomk_cross_price_elasticity = temp_nomk_cross_price_elasticity.combine_first(elasticity_kkprime)
 
-
         temp_nomk_cross_price_elasticity['age'] = age
         temp_nomk_cross_price_elasticity['revenus'] = revenus
         temp_nomk_cross_price_elasticity.index.name = 'nomk'
         temp_nomk_cross_price_elasticity = temp_nomk_cross_price_elasticity.reset_index()
         temp_nomk_cross_price_elasticity = temp_nomk_cross_price_elasticity.set_index(['age', 'revenus', 'nomk'])
-        # print 'a', temp_nomk_cross_price_elasticity.age.notnull().all()
         nomk_cross_price_elasticity = nomk_cross_price_elasticity.combine_first(temp_nomk_cross_price_elasticity)
 
     # Some k-kprime elasticities are not found
@@ -266,19 +284,7 @@ def compute_kantar_elasticities(compute = False):
     return nomk_cross_price_elasticity
 
 
-def compute_expenses_coefficient():
-    coicop_poste_bdf = bdf(year = year)
-
-
-
-def wip():
-    pass
-
-
-
-if __name__ == '__main__':
-
-
+def compute_expenses_coefficient(taux_reforme):
     aliss_uncomplete = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss_uncomplete)
     aliss_extract = aliss[['nomk', 'poste_bdf', 'poste_coicop']].copy()
@@ -296,7 +302,7 @@ if __name__ == '__main__':
         )
     legislation = codes_coicop_data_frame[['code_bdf', 'categorie_fiscale']].copy()
     legislation.rename(columns = {'code_bdf': 'poste_bdf'}, inplace = True)
-    df = aliss_extract.merge(legislation)
+    correction = aliss_extract.merge(legislation)
 
     taux_by_categorie_fiscale = {
         'tva_taux_reduit': .055,
@@ -305,12 +311,12 @@ if __name__ == '__main__':
         # 'vin',
         # 'biere',
         }
+    # TODO gérér les catégories fiscales
+    correction['taux'] = correction.categorie_fiscale.apply(lambda x: taux_by_categorie_fiscale.get(x, 0))
+    correction['taux_reforme'] = taux_reforme
+    correction['elasticity_factor'] = (correction.taux_reforme - correction.taux) / (1 + correction.taux)
 
-    df['taux'] = df.categorie_fiscale.apply(lambda x: taux_by_categorie_fiscale.get(x, 0))
-    df['taux_reforme'] = .196  # df['taux'].copy()
-    df['elasticity_factor'] = (df.taux_reforme - df.taux) / (1 + df.taux)
-
-    kantar_elasticities_indexed = compute_kantar_elasticities(compute = False)
+    kantar_elasticities_indexed = compute_kantar_elasticities(compute = True)
 
     kantar_elasticities = kantar_elasticities_indexed.reset_index(['age', 'revenus'])
     assert sorted(kantar_elasticities.age.value_counts(dropna = False).index) == sorted(range(4))
@@ -318,13 +324,22 @@ if __name__ == '__main__':
     assert kantar_elasticities.age.notnull().all()
     assert kantar_elasticities.revenus.notnull().all()
 
+    nomk_len = len(correction.nomk)
     for age, revenus in itertools.product(kantar_elasticities.age.unique(), kantar_elasticities.revenus.unique()):
         matrix = kantar_elasticities.query('age == @age & revenus == @revenus').drop(['age', 'revenus'], axis =1)
         matrix.fillna(0, inplace = True)
-        assert sorted(matrix.index.tolist()) == sorted(df.nomk), "Problem at age={} and revenus={}\n {}, {}".format(
-            age, revenus, sorted(matrix.index.tolist()), sorted(df.nomk))
-        assert matrix.shape == (len(df.nomk), len(df.nomk))
-        import numpy as np
-        expense_factor = (1 + df.taux_reforme) / (1 + df.taux) * (1 + np.dot(matrix, df.elasticity_factor))
-        assert len(expense_factor) == len(df.nomk)
-        df['expense_factor'] = expense_factor
+        assert sorted(matrix.index.tolist()) == sorted(correction.nomk), \
+            "Problem at age={} and revenus={}\n {}, {}".format(
+                age, revenus, len(matrix.index.tolist()), len(correction.nomk))
+        assert matrix.shape == (nomk_len, nomk_len)
+        expense_factor = (
+            (1 + correction.taux_reforme) / (1 + correction.taux) * (1 + np.dot(matrix, correction.elasticity_factor))
+            )
+        assert len(expense_factor) == nomk_len
+        correction['expense_factor'] = expense_factor
+
+    return correction
+
+
+if __name__ == '__main__':
+    compute_expenses_coefficient(.1)
