@@ -60,6 +60,12 @@ def modify_legislation_json(reference_legislation_json_copy):
                 "unit": 'currency',
                 "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 0.012}],
                 },
+            "abaissement_tva_taux_plein": {
+                "@type": "Parameter",
+                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
+                "format": 'float',
+                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.02}],
+                },
             },
         }
 
