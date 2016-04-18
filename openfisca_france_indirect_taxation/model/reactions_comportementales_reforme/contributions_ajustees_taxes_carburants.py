@@ -127,6 +127,33 @@ class difference_contribution_energie_taxes_carburants(Variable):
         return period, difference
 
 
+class difference_contribution_totale_taxes_carburants_tva_plein(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence de contribution totale après réaction à la réforme et redistribution - taxes carburants"
+
+    def function(self, simulation, period):
+        contribution = simulation.calculate('difference_contribution_energie_taxes_carburants', period)
+        redistribution = simulation.calculate('difference_contribution_tva_taux_plein_taxes_carburants', period)
+        difference = redistribution - contribution
+
+        return period, difference
+
+
+class difference_contribution_totale_taxes_carburants_tva_plein_reduit_super_reduit(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence de contribution totale après réaction à la réforme et redistribution - taxes carburants"
+
+    def function(self, simulation, period):
+        contribution = simulation.calculate('difference_contribution_energie_taxes_carburants', period)
+        redistribution = \
+            simulation.calculate('difference_contribution_tva_plein_reduit_super_reduit_taxes_carburants', period)
+        difference = redistribution - contribution
+
+        return period, difference
+
+
 class difference_contribution_tva_taux_plein_taxes_carburants(Variable):
     column = FloatCol
     entity_class = Menages
@@ -159,33 +186,6 @@ class difference_contribution_tva_plein_reduit_super_reduit_taxes_carburants(Var
             (contribution_plein + contribution_reduit + contribution_super_reduit) -
             (contribution_plein_ajustee + contribution_reduit_ajustee + contribution_super_reduit_ajustee)
             )
-
-        return period, difference
-
-
-class difference_contribution_totale_taxes_carburants_tva_plein(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Différence de contribution totale après réaction à la réforme et redistribution - taxes carburants"
-
-    def function(self, simulation, period):
-        contribution = simulation.calculate('difference_contribution_energie_taxes_carburants', period)
-        redistribution = simulation.calculate('difference_contribution_tva_taux_plein_taxes_carburants', period)
-        difference = redistribution - contribution
-
-        return period, difference
-
-
-class difference_contribution_totale_taxes_carburants_tva_plein_reduit_super_reduit(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Différence de contribution totale après réaction à la réforme et redistribution - taxes carburants"
-
-    def function(self, simulation, period):
-        contribution = simulation.calculate('difference_contribution_energie_taxes_carburants', period)
-        redistribution = \
-            simulation.calculate('difference_contribution_tva_plein_reduit_super_reduit_taxes_carburants', period)
-        difference = redistribution - contribution
 
         return period, difference
 

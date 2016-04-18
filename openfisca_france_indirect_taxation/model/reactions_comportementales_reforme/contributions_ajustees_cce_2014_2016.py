@@ -149,19 +149,6 @@ class difference_contribution_energie_cce_2014_2016(Variable):
         return period, total
 
 
-class difference_contribution_tva_taux_plein_cce_2014_2016(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Différence de contribution sur la TVA à taux plein après réaction à la réforme - cce 2014-2016"
-
-    def function(self, simulation, period):
-        contribution = simulation.calculate('tva_taux_plein', period)
-        contribution_ajustee = simulation.calculate('contribution_tva_taux_plein_ajustee_cce_2014_2016', period)
-        difference = contribution - contribution_ajustee
-
-        return period, difference
-
-
 class difference_contribution_totale_cce_2014_2016_tva_plein(Variable):
     column = FloatCol
     entity_class = Menages
@@ -171,6 +158,33 @@ class difference_contribution_totale_cce_2014_2016_tva_plein(Variable):
         contribution = simulation.calculate('difference_contribution_energie_cce_2014_2016', period)
         redistribution = simulation.calculate('difference_contribution_tva_taux_plein_cce_2014_2016', period)
         difference = redistribution - contribution
+
+        return period, difference
+
+
+class difference_contribution_totale_cce_2014_2016_tva_plein_reduit_super_reduit(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence de contribution totale après réaction à la réforme et redistribution - cce 2014-2016"
+
+    def function(self, simulation, period):
+        contribution = simulation.calculate('difference_contribution_energie_cce_2014_2016', period)
+        redistribution = \
+            simulation.calculate('difference_contribution_tva_plein_reduit_super_reduit_cce_2014_2016', period)
+        difference = redistribution - contribution
+
+        return period, difference
+
+
+class difference_contribution_tva_taux_plein_cce_2014_2016(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence de contribution sur la TVA à taux plein après réaction à la réforme - cce 2014-2016"
+
+    def function(self, simulation, period):
+        contribution = simulation.calculate('tva_taux_plein', period)
+        contribution_ajustee = simulation.calculate('contribution_tva_taux_plein_ajustee_cce_2014_2016', period)
+        difference = contribution - contribution_ajustee
 
         return period, difference
 
@@ -194,20 +208,6 @@ class difference_contribution_tva_plein_reduit_super_reduit_cce_2014_2016(Variab
             (contribution_plein + contribution_reduit + contribution_super_reduit) -
             (contribution_plein_ajustee + contribution_reduit_ajustee + contribution_super_reduit_ajustee)
             )
-
-        return period, difference
-
-
-class difference_contribution_totale_cce_2014_2016_tva_plein_reduit_super_reduit(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Différence de contribution totale après réaction à la réforme et redistribution - cce 2014-2016"
-
-    def function(self, simulation, period):
-        contribution = simulation.calculate('difference_contribution_energie_cce_2014_2016', period)
-        redistribution = \
-            simulation.calculate('difference_contribution_tva_plein_reduit_super_reduit_cce_2014_2016', period)
-        difference = redistribution - contribution
 
         return period, difference
 
