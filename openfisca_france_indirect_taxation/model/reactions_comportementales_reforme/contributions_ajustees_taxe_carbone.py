@@ -52,6 +52,58 @@ class contribution_tva_taux_plein_ajustee_taxe_carbone(Variable):
         return period, tax_from_expense_including_tax(depenses_tva_taux_plein_ajustees, nouveau_taux_plein)
 
 
+class contribution_tva_taux_plein_bis_ajustee_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Contribution sur la TVA à taux plein après réaction à la réforme - taxe carbone"
+
+    def function(self, simulation, period):
+        depenses_tva_taux_plein_ajustees = \
+            simulation.calculate('depenses_tva_taux_plein_bis_ajustees_taxe_carbone', period)
+
+        taux_plein = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        abaissement_tva_taux_plein = \
+            simulation.legislation_at(period.start).taxe_carbone.abaissement_tva_taux_plein_bis
+        nouveau_taux_plein = taux_plein - abaissement_tva_taux_plein
+
+        return period, tax_from_expense_including_tax(depenses_tva_taux_plein_ajustees, nouveau_taux_plein)
+
+
+class contribution_tva_taux_reduit_ajustee_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Contribution sur la TVA à taux reduit après réaction à la réforme - taxe carbone"
+
+    def function(self, simulation, period):
+        depenses_tva_taux_reduit_ajustees = \
+            simulation.calculate('depenses_tva_taux_reduit_ajustees_taxe_carbone', period)
+
+        taux_reduit = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_reduit
+        abaissement_tva_taux_reduit = \
+            simulation.legislation_at(period.start).taxe_carbone.abaissement_tva_taux_reduit
+        nouveau_taux_reduit = taux_reduit - abaissement_tva_taux_reduit
+
+        return period, tax_from_expense_including_tax(depenses_tva_taux_reduit_ajustees, nouveau_taux_reduit)
+
+
+class contribution_tva_taux_super_reduit_ajustee_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Contribution sur la TVA à taux super reduit après réaction à la réforme - taxe carbone"
+
+    def function(self, simulation, period):
+        depenses_tva_taux_super_reduit_ajustees = \
+            simulation.calculate('depenses_tva_taux_super_reduit_ajustees_taxe_carbone', period)
+
+        taux_super_reduit = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_super_reduit
+        abaissement_tva_taux_super_reduit = \
+            simulation.legislation_at(period.start).taxe_carbone.abaissement_tva_taux_super_reduit
+        nouveau_taux_super_reduit = taux_super_reduit - abaissement_tva_taux_super_reduit
+
+        return period, \
+            tax_from_expense_including_tax(depenses_tva_taux_super_reduit_ajustees, nouveau_taux_super_reduit)
+
+
 class diesel_ticpe_ajustee_taxe_carbone(Variable):
     column = FloatCol
     entity_class = Menages
@@ -125,7 +177,7 @@ class difference_contribution_tva_taux_plein_taxe_carbone(Variable):
         return period, difference
 
 
-class difference_contribution_totale_taxe_carbone(Variable):
+class difference_contribution_totale_taxe_carbone_tva_plein(Variable):
     column = FloatCol
     entity_class = Menages
     label = u"Différence de contribution totale après réaction à la réforme et redistribution - taxe carbone"
@@ -133,6 +185,43 @@ class difference_contribution_totale_taxe_carbone(Variable):
     def function(self, simulation, period):
         contribution = simulation.calculate('difference_contribution_energie_taxe_carbone', period)
         redistribution = simulation.calculate('difference_contribution_tva_taux_plein_taxe_carbone', period)
+        difference = redistribution - contribution
+
+        return period, difference
+
+
+class difference_contribution_tva_plein_reduit_super_reduit_taxe_carbone(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence de contribution sur la TVA après réaction à la réforme - taxe carbone"
+
+    def function(self, simulation, period):
+        contribution_plein = simulation.calculate('tva_taux_plein', period)
+        contribution_reduit = simulation.calculate('tva_taux_reduit', period)
+        contribution_super_reduit = simulation.calculate('tva_taux_super_reduit', period)
+        contribution_plein_ajustee = \
+            simulation.calculate('contribution_tva_taux_plein_bis_ajustee_taxe_carbone', period)
+        contribution_reduit_ajustee = \
+            simulation.calculate('contribution_tva_taux_reduit_ajustee_taxe_carbone', period)
+        contribution_super_reduit_ajustee = \
+            simulation.calculate('contribution_tva_taux_super_reduit_ajustee_taxe_carbone', period)
+        difference = (
+            (contribution_plein + contribution_reduit + contribution_super_reduit) -
+            (contribution_plein_ajustee + contribution_reduit_ajustee + contribution_super_reduit_ajustee)
+            )
+
+        return period, difference
+
+
+class difference_contribution_totale_taxe_carbone_tva_plein_reduit_super_reduit(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence de contribution totale après réaction à la réforme et redistribution - taxe carbone"
+
+    def function(self, simulation, period):
+        contribution = simulation.calculate('difference_contribution_energie_taxe_carbone', period)
+        redistribution = \
+            simulation.calculate('difference_contribution_tva_plein_reduit_super_reduit_taxe_carbone', period)
         difference = redistribution - contribution
 
         return period, difference
