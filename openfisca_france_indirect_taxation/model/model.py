@@ -36,7 +36,10 @@ from .consommation import (  # noqa analysis:ignore
     quantites_energie,
     )
 from reactions_comportementales_reforme import (  # noqa analysis:ignore
-    contributions_ajustees,
+    contributions_ajustees_taxe_carbone,
+    contributions_ajustees_taxes_carburants,
+    contributions_ajustees_cce_2014_2015,
+    contributions_ajustees_cce_2014_2016,
     depenses_ajustees,
     elasticites,
     emissions_ajustees,

@@ -22,6 +22,24 @@ class contributions_additionnelles_gaz_cce_2014_2015(Variable):
         return period, recettes_gaz
 
 
+class contribution_tva_taux_plein_ajustee_cce_2014_2015(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Contribution sur la TVA à taux plein après réaction à la réforme - cce 2014-2015"
+
+    def function(self, simulation, period):
+        depenses_tva_taux_plein_ajustees = \
+            simulation.calculate('depenses_tva_taux_plein_ajustees_cce_2014_2015', period)
+
+        taux_plein = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        abaissement_tva_taux_plein = (
+            simulation.legislation_at(period.start).contribution_climat_energie_reforme.abaissement_tva_taux_plein_2014_2015
+            )
+        nouveau_taux_plein = taux_plein - abaissement_tva_taux_plein
+
+        return period, tax_from_expense_including_tax(depenses_tva_taux_plein_ajustees, nouveau_taux_plein)
+
+
 class diesel_ticpe_ajustee_cce_2014_2015(Variable):
     column = FloatCol
     entity_class = Menages
@@ -76,6 +94,32 @@ class difference_contribution_energie_cce_2014_2015(Variable):
         total = contribution_diesel + contribution_essence + contribution_fioul + contribution_gaz
 
         return period, total
+
+
+class difference_contribution_tva_taux_plein_cce_2014_2015(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence de contribution sur la TVA à taux plein après réaction à la réforme - cce 2014-2015"
+
+    def function(self, simulation, period):
+        contribution = simulation.calculate('tva_taux_plein', period)
+        contribution_ajustee = simulation.calculate('contribution_tva_taux_plein_ajustee_cce_2014_2015', period)
+        difference = contribution - contribution_ajustee
+
+        return period, difference
+
+
+class difference_contribution_totale_cce_2014_2015(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Différence de contribution totale après réaction à la réforme et redistribution - cce 2014-2015"
+
+    def function(self, simulation, period):
+        contribution = simulation.calculate('difference_contribution_energie_cce_2014_2015', period)
+        redistribution = simulation.calculate('difference_contribution_tva_taux_plein_cce_2014_2015', period)
+        difference = redistribution - contribution
+
+        return period, difference
 
 
 class difference_ticpe_diesel_cce_2014_2015(Variable):
