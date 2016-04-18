@@ -64,7 +64,25 @@ def modify_legislation_json(reference_legislation_json_copy):
                 "@type": "Parameter",
                 "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
                 "format": 'float',
-                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.02}],
+                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.03}],
+                },
+            "abaissement_tva_taux_plein_bis": {
+                "@type": "Parameter",
+                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
+                "format": 'float',
+                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.022}],
+                },
+            "abaissement_tva_taux_reduit": {
+                "@type": "Parameter",
+                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
+                "format": 'float',
+                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.015}],
+                },
+            "abaissement_tva_taux_super_reduit": {
+                "@type": "Parameter",
+                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
+                "format": 'float',
+                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.015}],
                 },
             },
         }

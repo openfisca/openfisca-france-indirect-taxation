@@ -19,6 +19,10 @@ def build_reform(tax_benefit_system):
 # Cette réforme consiste en un rattrapage de la fiscalité du diesel sur celle de l'essence. Les valeurs imputées
 # correspondent donc à la différence entre la fiscalité des deux carburants à ces dates.
 
+# On propose aussi deux réformes de redistribution : un abaissement de 1 point de TVA à taux plein, ou un abaissement
+# de 0.5 point accompagné d'une baisse d'un point sur la TVA à taux réduit et super réduit. Ces redistributions sont
+# telles que le budget doit être constant lorsqu'on simule sur les données 2011 inflatées pour 2014.
+
 
 def modify_legislation_json(reference_legislation_json_copy):
     reform_legislation_subtree = {
@@ -50,10 +54,35 @@ def modify_legislation_json(reference_legislation_json_copy):
                 "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
                 "format": 'float',
                 "values": [
-                    {'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.006},
+                    {'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.01},
+                    ],
+                },
+            "abaissement_tva_taux_plein_bis": {
+                "@type": "Parameter",
+                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
+                "format": 'float',
+                "values": [
+                    {'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.005},
+                    ],
+                },
+            "abaissement_tva_taux_reduit": {
+                "@type": "Parameter",
+                "description": u"Baisse de la TVA à taux réduit pour obtenir un budget constant",
+                "format": 'float',
+                "values": [
+                    {'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.01},
+                    ],
+                },
+            "abaissement_tva_taux_super_reduit": {
+                "@type": "Parameter",
+                "description": u"Baisse de la TVA à taux super réduit pour obtenir un budget constant",
+                "format": 'float',
+                "values": [
+                    {'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.01},
                     ],
                 },
             },
         }
+
     reference_legislation_json_copy['children']['taxes_carburants'] = reform_legislation_subtree
     return reference_legislation_json_copy
