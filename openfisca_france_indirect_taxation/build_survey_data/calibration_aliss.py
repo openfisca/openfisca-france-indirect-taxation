@@ -37,6 +37,7 @@ def detect_null(data_frame):
             global_null = (global_null | null) if global_null is not None else null
     return data_frame.loc[global_null].copy()
 
+
 def build_clean_aliss_data_frame():
     year = 2011
     aliss_survey_collection = SurveyCollection.load(
@@ -46,11 +47,17 @@ def build_clean_aliss_data_frame():
 
     aliss = survey.get_values(table = 'Base_ALISS_2011')
 
-    detect_null(aliss).to_csv('aliss_errors.csv')
-
+    errors = detect_null(aliss)
+    errors.to_csv('aliss_errors.csv')
 
     # Removing products with missing nomf
     aliss = aliss.query('nomf != "nan"').copy()
+
+    # Setting null nomk consumption to zéro
+    aliss.fillna(
+        dict(qt_k = 0, dt_k = 0, qm_k = 0, dm_k =0, pm_k = 0, qt_c = 0, dt_c = 0, qm_c = 0, dm_c = 0, pm_c = 0),
+        inplace = True
+        )
 
     aliss = aliss.loc[aliss.nomf.notnull()].copy()
 
@@ -185,7 +192,6 @@ def compute_kantar_elasticities(compute = False):
     nomf_by_nomk = nomf_nomk.set_index('nomk').to_dict()['nomf']
 
     print nomf_nomk.nomf.value_counts(dropna = False)
-    boum
 
     nomks_by_nomf = dict(
         (nomf_by_dirty_nomf.get(nomf), nomf_nomk.query('nomf == @nomf')['nomk'].unique())
@@ -213,7 +219,7 @@ def compute_kantar_elasticities(compute = False):
 
             kantar_budget_share = kantar_budget_share.append(extract)
 
-        kantar_budget_share.fillna(0, inplace = True)
+        kantar_budget_share.fillna(0, inplace = True) # TODO
         kantar_budget_share.to_csv(budget_share_path)
 
     assert (kantar_budget_share.nomf != 'nan').all()
