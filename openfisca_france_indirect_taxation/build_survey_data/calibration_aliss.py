@@ -116,19 +116,23 @@ def compute_expenses():
     # aliss/kantar data
     aliss = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss)
-    kept_variables = ['age', 'dt_c', 'dt_k', 'nomk', 'poste_coicop', 'tpoids', 'revenus']
+    kept_variables = ['age', 'dt_c', 'dt_k', 'nomk', 'nomc', 'poste_coicop', 'tpoids', 'revenus']
     aliss = aliss[kept_variables].copy()
     depenses_aliss = aliss.groupby(
-        ['age', 'revenus', 'poste_coicop']).apply(
+        ['age', 'revenus', 'poste_coicop', 'nomc']).apply(
             lambda df: (df.tpoids * df.dt_c).sum()
             ).reset_index()
-    depenses_aliss.rename({0: "depenses_kantar"}, inplace = True)
+    depenses_aliss.rename(columns = {0: "depenses_kantar"}, inplace = True)
 
     # BDF data
+    year = 2011
     input_data_frame = get_input_data_frame(year)
-    input_data_frame.eval("age = 0 + (agepr > 30) + (agepr > 45) + (agepr > 60)")
+    input_data_frame.eval("age = 0 + (agepr > 30) + (agepr > 45) + (agepr > 60)",
+        inplace = True,)
+    # TODO
     input_data_frame.eval(
-        "revenus = 0 + (rev_disponible > 10000) + (rev_disponible  > 20000) + (rev_disponible  > 30000)"
+        "revenus = 0 + (rev_disponible > 10000) + (rev_disponible  > 20000) + (rev_disponible  > 30000)",
+        inplace = True,
         )
     assert input_data_frame.age.isin([0, 1, 2, 3, 4]).all()
     assert input_data_frame.age.notnull().all()
@@ -290,10 +294,13 @@ def compute_kantar_elasticities(compute = False):
     return nomk_cross_price_elasticity
 
 
-def compute_expenses_coefficient(taux_reforme):
+def compute_expenses_coefficient(taux_reforme = None, reform = None):
+    from openfisca_france_indirect_taxation.reforms.aliss import build_aliss_reform
+
+    assert reform in ['sante', 'environnement', 'tva_sociale']
     aliss_uncomplete = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss_uncomplete)
-    aliss_extract = aliss[['nomk', 'poste_bdf', 'poste_coicop']].copy()
+    aliss_extract = aliss[['nomf', 'nomk', 'poste_bdf', 'poste_coicop']].copy()
     aliss_extract.drop_duplicates(inplace = True)
     year = 2011
 
@@ -309,29 +316,53 @@ def compute_expenses_coefficient(taux_reforme):
     legislation = codes_coicop_data_frame[['code_bdf', 'categorie_fiscale']].copy()
     legislation.rename(columns = {'code_bdf': 'poste_bdf'}, inplace = True)
     correction = aliss_extract.merge(legislation)
-
+    correction = correction[['nomf', 'nomk', 'poste_bdf', 'categorie_fiscale']].drop_duplicates().copy()
+    # load reforms and add taux
     taux_by_categorie_fiscale = {
+        'tva_taux_super_reduit': .021,
         'tva_taux_reduit': .055,
-        'tva_taux_plein': .196,
-        # 'alcools_forts',
-        # 'vin',
-        # 'biere',
+        'tva_taux_intermediaire': .1,
+        'tva_taux_plein': .2,
         }
+
+    aliss_reform = build_aliss_reform()
+    columns = ['nomf', 'nomc', 'code_bdf', 'categorie_fiscale'] + [reform]
+    reform_extract = aliss_reform[columns].copy()
+    reform_extract.rename(columns = {reform: 'reform_categorie_fiscale'}, inplace = True)
+
     # TODO gérér les catégories fiscales
-    correction['taux'] = correction.categorie_fiscale.apply(lambda x: taux_by_categorie_fiscale.get(x, 0))
-    correction['taux_reforme'] = taux_reforme
+
+    correction = correction.merge(
+        reform_extract[['nomf', 'reform_categorie_fiscale']].drop_duplicates().copy(), on = 'nomf', how = 'outer')
+
+    correction['taux'] = correction.categorie_fiscale.apply(
+        lambda x: taux_by_categorie_fiscale.get(x, 0))
+
+    correction['taux_reforme'] = correction.reform_categorie_fiscale.apply(
+        lambda x: taux_by_categorie_fiscale.get(x))
+
+    correction.loc[correction.reform_categorie_fiscale.isnull(), 'taux_reforme'] = \
+        correction.loc[correction.reform_categorie_fiscale.isnull(), 'taux'].values
     correction['elasticity_factor'] = (correction.taux_reforme - correction.taux) / (1 + correction.taux)
 
-    kantar_elasticities_indexed = compute_kantar_elasticities(compute = True)
-
+    kantar_elasticities_indexed = compute_kantar_elasticities(compute = False)
     kantar_elasticities = kantar_elasticities_indexed.reset_index(['age', 'revenus'])
     assert sorted(kantar_elasticities.age.value_counts(dropna = False).index) == sorted(range(4))
     assert sorted(kantar_elasticities.revenus.value_counts(dropna = False).index) == sorted(range(4))
     assert kantar_elasticities.age.notnull().all()
     assert kantar_elasticities.revenus.notnull().all()
 
+    iterables = [range(4), range(4), sorted(correction.nomk.unique())]
+    index = pandas.MultiIndex.from_product(iterables, names=['age', 'revenus', 'nomk'])
+    final_corrections = pandas.DataFrame(
+        index = index,
+        columns = sorted(correction.nomk.unique()),
+        )
+
     nomk_len = len(correction.nomk)
     for age, revenus in itertools.product(kantar_elasticities.age.unique(), kantar_elasticities.revenus.unique()):
+        correction['age'] = age
+        correction['revenus'] = revenus
         matrix = kantar_elasticities.query('age == @age & revenus == @revenus').drop(['age', 'revenus'], axis =1)
         matrix.fillna(0, inplace = True)
         assert sorted(matrix.index.tolist()) == sorted(correction.nomk), \
@@ -343,9 +374,13 @@ def compute_expenses_coefficient(taux_reforme):
             )
         assert len(expense_factor) == nomk_len
         correction['expense_factor'] = expense_factor
+        correction['inelastic_expense_factor'] = (1 + correction.taux_reforme) / (1 + correction.taux)
 
-    return correction
+        final_corrections = final_corrections.combine_first(correction.set_index(['age', 'revenus', 'nomk']))
+
+    return final_corrections.reset_index()
 
 
 if __name__ == '__main__':
-    compute_expenses_coefficient(.1)
+    # correction = compute_expenses_coefficient(reform = 'tva_sociale')
+    depenses = compute_expenses()
