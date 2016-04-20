@@ -112,7 +112,7 @@ def add_poste_coicop(aliss):
     return aliss
 
 
-def compute_expenses(drop_dom = False):
+def compute_expenses(drop_dom = True):
     # aliss/kantar data
     aliss = build_clean_aliss_data_frame()
 
@@ -127,6 +127,14 @@ def compute_expenses(drop_dom = False):
             ).reset_index()
     depenses_aliss.rename(columns = {0: "depenses_kantar"}, inplace = True)
 
+    print "depenses_kantar_total: ", (aliss.tpoids * aliss.dt_k).sum() / 1e9
+    print "population_kantar_total: ", aliss.tpoids.unique().sum()
+
+    depenses_aliss['budget_share_kantar'] = depenses_aliss.groupby(
+        ['age', 'revenus'])['depenses_kantar'].transform(
+            lambda x: x / x.sum()
+            )
+
     # BDF data
     year = 2011
     input_data_frame = get_input_data_frame(year)
@@ -134,15 +142,14 @@ def compute_expenses(drop_dom = False):
     if drop_dom:
         input_data_frame = input_data_frame.query('zeat != 0').copy()
 
-
     input_data_frame.eval("age = 0 + (agepr > 30) + (agepr > 45) + (agepr > 60)",
-    #    inplace = True,  # Remove comment for pandas 0.18
-        )
+                          #  inplace = True,  # Remove comment for pandas 0.18
+                          )
     print input_data_frame.groupby('age')['pondmen'].sum() / input_data_frame.pondmen.sum()
 
     input_data_frame['revenus_kantar'] = (
         input_data_frame.rev_disponible.astype('float') / input_data_frame.ocde10_old.astype('float')
-    #    inplace = True,
+        # inplace = True,
         )
     labels = np.arange(0, 20)
     input_data_frame['vingtile'], values = weighted_quantiles(input_data_frame.revenus_kantar.astype('float'), labels,
@@ -172,19 +179,35 @@ def compute_expenses(drop_dom = False):
             ).reset_index()
     depenses_input.rename(columns = {"variable": "poste_coicop", 0: "depenses_bdf"}, inplace = True)
 
+    # depenses_input['budget_share_bdf'] = depenses_input.depenses_bdf / depenses_input.depenses_bdf.sum()
+    print "depenses_bdf_total: ", depenses_input.depenses_bdf.sum() / 1e9
+
+    depenses_input['budget_share_bdf'] = depenses_input.groupby(
+        ['age', 'revenus'])['depenses_bdf'].transform(
+            lambda x: x / x.sum()
+            )
+
     depenses = depenses_aliss.merge(depenses_input)
 
-    grouped_depenses_kantar = depenses.groupby(['age', 'revenus', 'poste_coicop'])['depenses_kantar'].agg(
-        {'depenses_agregees_kantar': np.sum}
-        )
+    grouped_depenses_kantar = depenses.groupby(['age', 'revenus', 'poste_coicop']).agg({
+        'depenses_kantar': np.sum,
+        'budget_share_kantar': np.sum
+        }).rename(columns = {
+            'depenses_kantar': 'depenses_agregees_kantar',
+            'budget_share_kantar': 'budget_share_agregees_kantar'
+            })
+
     depenses = depenses.set_index(
         ['age', 'revenus', 'poste_coicop']
         ).combine_first(
             grouped_depenses_kantar
-            ).reset_index()
+            )
+
     depenses['kantar_to_bdf'] = depenses.depenses_bdf / depenses.depenses_agregees_kantar
+    depenses['budget_share_kantar_to_bdf'] = depenses.budget_share_bdf / depenses.budget_share_agregees_kantar
 
     depenses.to_csv(os.path.join(assets_path, 'expenses.csv'), index = False)
+
     return depenses
 
 
@@ -197,8 +220,8 @@ def compute_kantar_elasticities(compute = False):
 
     if not compute:
         if os.path.exists(kantar_cross_price_elasticities_path):
-          nomk_cross_price_elasticity = pandas.read_csv(kantar_cross_price_elasticities_path)
-          return nomk_cross_price_elasticity.set_index(['age', 'revenus', 'nomk'])
+            nomk_cross_price_elasticity = pandas.read_csv(kantar_cross_price_elasticities_path)
+            return nomk_cross_price_elasticity.set_index(['age', 'revenus', 'nomk'])
 
     nomf_by_dirty_nomf = {
         '1 : Juices': 'Juic',
@@ -230,7 +253,7 @@ def compute_kantar_elasticities(compute = False):
     nomf_nomk = aliss.query('age == 0 & revenus == 0')[['nomf', 'nomk']]
 
     (nomf_nomk.nomk.value_counts() == 1).all()
-    nomf_by_nomk = nomf_nomk.set_index('nomk').to_dict()['nomf']
+    # nomf_by_nomk = nomf_nomk.set_index('nomk').to_dict()['nomf']
 
     print nomf_nomk.nomf.value_counts(dropna = False)
 
@@ -260,7 +283,7 @@ def compute_kantar_elasticities(compute = False):
 
             kantar_budget_share = kantar_budget_share.append(extract)
 
-        kantar_budget_share.fillna(0, inplace = True) # TODO
+        kantar_budget_share.fillna(0, inplace = True)  # TODO
         kantar_budget_share.to_csv(budget_share_path)
 
     assert (kantar_budget_share.nomf != 'nan').all()
@@ -339,7 +362,6 @@ def compute_expenses_coefficient(taux_reforme = None, reform = None):
     aliss = add_poste_coicop(aliss_uncomplete)
     aliss_extract = aliss[['nomf', 'nomk', 'poste_bdf', 'poste_coicop']].copy()
     aliss_extract.drop_duplicates(inplace = True)
-    year = 2011
 
     legislation_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
