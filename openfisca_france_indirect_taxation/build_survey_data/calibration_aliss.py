@@ -206,7 +206,16 @@ def compute_expenses(drop_dom = True):
     depenses['kantar_to_bdf'] = depenses.depenses_bdf / depenses.depenses_agregees_kantar
     depenses['budget_share_kantar_to_bdf'] = depenses.budget_share_bdf / depenses.budget_share_agregees_kantar
 
-    depenses.to_csv(os.path.join(assets_path, 'expenses.csv'), index = False)
+    depenses.reset_index().to_csv(os.path.join(assets_path, 'expenses.csv'), index = False)
+
+    plot_variables = ['budget_share_bdf', 'budget_share_kantar_to_bdf', 'budget_share_agregees_kantar']
+    depenses[plot_variables].drop_duplicates().plot(
+        x = 'budget_share_bdf', y = 'budget_share_kantar_to_bdf', kind = 'scatter', xlim = [0, .13], ylim = [0, 7]
+        ).get_figure().savefig(os.path.join(assets_path, 'budget_share_ratios'))
+
+    depenses[plot_variables].drop_duplicates().plot(
+        x = 'budget_share_bdf', y = 'budget_share_agregees_kantar', kind = 'scatter', xlim = [0, .13], ylim = [0, .13]
+        ).get_figure().savefig(os.path.join(assets_path, 'budget_shares'))
 
     return depenses
 
@@ -354,7 +363,7 @@ def compute_kantar_elasticities(compute = False):
     return nomk_cross_price_elasticity
 
 
-def compute_expenses_coefficient(taux_reforme = None, reform = None):
+def compute_expenses_coefficient(reform = None):
     from openfisca_france_indirect_taxation.reforms.aliss import build_aliss_reform
 
     assert reform in ['sante', 'environnement', 'tva_sociale']
@@ -432,14 +441,14 @@ def compute_expenses_coefficient(taux_reforme = None, reform = None):
             (1 + correction.taux_reforme) / (1 + correction.taux) * (1 + np.dot(matrix, correction.elasticity_factor))
             )
         assert len(expense_factor) == nomk_len
-        correction['expense_factor'] = expense_factor
-        correction['inelastic_expense_factor'] = (1 + correction.taux_reforme) / (1 + correction.taux)
+        correction['expense_variation'] = expense_factor
+        correction['inelastic_expense_variation'] = (1 + correction.taux_reforme) / (1 + correction.taux)
 
         final_corrections = final_corrections.combine_first(correction.set_index(['age', 'revenus', 'nomk']))
 
-    return final_corrections.reset_index()
+    return final_corrections[['expense_variation', 'inelastic_expense_variation']].copy()
 
 
 if __name__ == '__main__':
-    # correction = compute_expenses_coefficient(reform = 'tva_sociale')
+    correction = compute_expenses_coefficient(reform = 'tva_sociale')
     depenses = compute_expenses(drop_dom = True)
