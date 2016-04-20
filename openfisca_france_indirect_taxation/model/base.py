@@ -23,7 +23,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import collections
 from datetime import date
 import os
 import pandas as pd
@@ -50,6 +49,7 @@ __all__ = [
     'DatedVariable',
     'dated_function',
     'depenses_postes_agreges_function_creator',
+    'depenses_ht_categorie_function_creator',
     'depenses_ht_postes_function_creator',
     'droit_d_accise',
     'Enum',
@@ -88,7 +88,6 @@ def get_tva(categorie_fiscale):
         return tva
     else:
         return None
-
 
 
 def droit_d_accise(depense, droit_cn, consommation_cn, taux_plein_tva):
@@ -192,6 +191,30 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                 return func
             else:
                 raise
+
+
+def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, year_stop = None):
+    start = date(year_start, 1, 1) if year_start is not None else None
+    stop = date(year_stop, 12, 31) if year_stop is not None else None
+
+    if len(postes_coicop) != 0:
+        @dated_function(start = start, stop = stop)
+        def func(self, simulation, period):
+            return period, sum(simulation.calculate(
+                'depenses_ht_poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
+                )
+
+        func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+        return func
+
+    else:  # To deal with Reform emptying some fiscal categories
+
+        @dated_function(start = start, stop = stop)
+        def func(self, simulation, period):
+            return period, self.zeros()
+
+    func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+    return func
 
 
 def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, year_start = None, year_stop = None):

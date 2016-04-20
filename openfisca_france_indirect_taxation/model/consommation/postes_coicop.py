@@ -72,13 +72,6 @@ def generate_depenses_ht_postes_variables(categories_fiscales = None, Reform = N
                         year_start = year_start,
                         year_stop = year_stop
                         )
-                    # else:
-                    #     dated_func = depenses_ht_postes_function_creator(
-                    #         poste_coicop,
-                    #         categorie_fiscale = categorie_fiscale,
-                    #         year_start = year_start,
-                    #         year_stop = year_stop
-                    #         )
 
                     dated_function_name = u"function_{year_start}_{year_stop}".format(
                         year_start = year_start, year_stop = year_stop)
@@ -106,18 +99,11 @@ def generate_depenses_ht_postes_variables(categories_fiscales = None, Reform = N
             )
         definitions_by_name.update(functions_by_name)
         type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
-        # else:
-        #     definitions_by_name = dict(
-        #         reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
-        #         )
-        #     definitions_by_name.update(functions_by_name)
-        #     type(class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
 
         del definitions_by_name
 
 
 def generate_postes_agreges_variables(categories_fiscales = None, Reform = None, tax_benefit_system = None):
-
     codes_bdf = [element for element in codes_coicop_data_frame.code_bdf.unique()]
     for num_prefix in ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]:
         codes_coicop = codes_coicop_data_frame.loc[

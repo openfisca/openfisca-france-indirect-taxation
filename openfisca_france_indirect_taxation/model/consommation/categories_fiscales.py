@@ -43,31 +43,6 @@ categories_fiscales_data_frame = None
 codes_coicop_data_frame = None
 
 
-def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, year_stop = None):
-    start = date(year_start, 1, 1) if year_start is not None else None
-    stop = date(year_stop, 12, 31) if year_stop is not None else None
-
-    if len(postes_coicop) != 0:
-        @dated_function(start = start, stop = stop)
-        def func(self, simulation, period):
-            return period, sum(simulation.calculate(
-                'depenses_ht_poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
-                )
-
-        func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
-        return func
-
-    else:  # To deal with Reform emptying some fiscal categories
-
-        @dated_function(start = start, stop = stop)
-        def func(self, simulation, period):
-            print 'toto'
-            return period, self.zeros()
-
-    func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
-    return func
-
-
 def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_system = None):
     assert categories_fiscales is not None
     reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
