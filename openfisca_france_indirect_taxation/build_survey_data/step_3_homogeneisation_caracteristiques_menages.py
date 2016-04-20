@@ -615,6 +615,11 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             )
         del variables
         menage.agecj = menage.agecj.fillna(0)
+
+        # Pour Aliss
+        menage['nadultes'] = menage.npers - menage.nenfants
+        menage['ocde10_old'] = 1 + 0.7 * numpy.maximum(0, menage['nadultes'] - 1) + 0.5 * menage['nenfants']
+
         # Ajout de la variable vag
         try:
             depmen = survey.get_values(table = "DEPMEN")

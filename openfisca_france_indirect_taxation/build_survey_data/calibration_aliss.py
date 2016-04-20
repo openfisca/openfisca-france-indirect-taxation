@@ -12,8 +12,9 @@ import pkg_resources
 try:
     from openfisca_survey_manager.survey_collections import SurveyCollection
     from openfisca_survey_manager import default_config_files_directory as config_files_directory
+    from openfisca_survey_manager.statshelpers import weighted_quantiles
 except ImportError:
-    SurveyCollection, config_files_directory = None, None
+    SurveyCollection, config_files_directory, weighted_quantiles = None, None, None
 
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
@@ -128,12 +129,18 @@ def compute_expenses():
     year = 2011
     input_data_frame = get_input_data_frame(year)
     input_data_frame.eval("age = 0 + (agepr > 30) + (agepr > 45) + (agepr > 60)",
-        inplace = True,)
-    # TODO
-    input_data_frame.eval(
-        "revenus = 0 + (rev_disponible > 10000) + (rev_disponible  > 20000) + (rev_disponible  > 30000)",
-        inplace = True,
+    #    inplace = True,
         )
+    # TODO
+
+    input_data_frame['revenus_kantar'] = (
+        input_data_frame.rev_disponible.astype('float') * input_data_frame.ocde10.astype('float') / input_data_frame.ocde10_old.astype('float')
+    #    inplace = True,
+        )
+    labels = np.arange(0, 4)
+    input_data_frame.revenus_kantar.dtype
+    input_data_frame['revenus'], values = weighted_quantiles(input_data_frame.revenus_kantar, labels, input_data_frame.pondmen.astype('float'), return_quantiles = True)
+
     assert input_data_frame.age.isin([0, 1, 2, 3, 4]).all()
     assert input_data_frame.age.notnull().all()
     kept_postes = list(aliss.poste_coicop.unique())
