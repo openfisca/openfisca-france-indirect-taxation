@@ -12,15 +12,15 @@ import pkg_resources
 try:
     from openfisca_survey_manager.survey_collections import SurveyCollection
     from openfisca_survey_manager import default_config_files_directory as config_files_directory
-    from openfisca_survey_manager.statshelpers import weighted_quantiles
+    from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
 except ImportError:
-    SurveyCollection, config_files_directory, weighted_quantiles = None, None, None
+    SurveyCollection, config_files_directory, mark_weighted_percentiles, weighted_quantiles = None, None, None, None
 
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
 
 
-elasticities_path = os.path.join(
+assets_path = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
     'openfisca_france_indirect_taxation',
     'assets',
@@ -61,7 +61,6 @@ def build_clean_aliss_data_frame():
         )
 
     aliss = aliss.loc[aliss.nomf.notnull()].copy()
-
 
     aliss['age'] = 99
     aliss['revenus'] = 99
@@ -113,35 +112,55 @@ def add_poste_coicop(aliss):
     return aliss
 
 
-def compute_expenses():
+def compute_expenses(drop_dom = False):
     # aliss/kantar data
     aliss = build_clean_aliss_data_frame()
+
+    print aliss.groupby('age')['tpoids'].sum() / aliss.tpoids.sum()
+
     aliss = add_poste_coicop(aliss)
     kept_variables = ['age', 'dt_c', 'dt_k', 'nomk', 'nomc', 'poste_coicop', 'tpoids', 'revenus']
     aliss = aliss[kept_variables].copy()
     depenses_aliss = aliss.groupby(
-        ['age', 'revenus', 'poste_coicop', 'nomc']).apply(
-            lambda df: (df.tpoids * df.dt_c).sum()
+        ['age', 'revenus', 'poste_coicop', 'nomc', 'nomk']).apply(
+            lambda df: (df.tpoids * df.dt_k).sum()
             ).reset_index()
     depenses_aliss.rename(columns = {0: "depenses_kantar"}, inplace = True)
 
     # BDF data
     year = 2011
     input_data_frame = get_input_data_frame(year)
+    print input_data_frame.zeat.value_counts()
+    if drop_dom:
+        input_data_frame = input_data_frame.query('zeat != 0').copy()
+
+
     input_data_frame.eval("age = 0 + (agepr > 30) + (agepr > 45) + (agepr > 60)",
-    #    inplace = True,
+    #    inplace = True,  # Remove comment for pandas 0.18
         )
-    # TODO
+    print input_data_frame.groupby('age')['pondmen'].sum() / input_data_frame.pondmen.sum()
 
     input_data_frame['revenus_kantar'] = (
-        input_data_frame.rev_disponible.astype('float') * input_data_frame.ocde10.astype('float') / input_data_frame.ocde10_old.astype('float')
+        input_data_frame.rev_disponible.astype('float') / input_data_frame.ocde10_old.astype('float')
     #    inplace = True,
         )
-    labels = np.arange(0, 4)
-    input_data_frame.revenus_kantar.dtype
-    input_data_frame['revenus'], values = weighted_quantiles(input_data_frame.revenus_kantar, labels, input_data_frame.pondmen.astype('float'), return_quantiles = True)
+    labels = np.arange(0, 20)
+    input_data_frame['vingtile'], values = weighted_quantiles(input_data_frame.revenus_kantar.astype('float'), labels,
+        input_data_frame.pondmen.astype('float'), return_quantiles = True)
 
-    assert input_data_frame.age.isin([0, 1, 2, 3, 4]).all()
+    print values
+    input_data_frame['revenus'] = (
+        0 +
+        (input_data_frame.revenus_kantar >= values[3 - 1]).astype('int') +
+        (input_data_frame.revenus_kantar >= values[11 - 1]).astype('int') +
+        (input_data_frame.revenus_kantar >= values[17 - 1]).astype('int')
+        )
+    print input_data_frame.vingtile.value_counts(dropna = False)
+    print input_data_frame.revenus.value_counts(dropna = False)
+    print input_data_frame.groupby('revenus')['pondmen'].sum() / input_data_frame.pondmen.sum()
+
+    assert input_data_frame.revenus.isin([0, 1, 2, 3]).all()
+    assert input_data_frame.age.isin([0, 1, 2, 3]).all()
     assert input_data_frame.age.notnull().all()
     kept_postes = list(aliss.poste_coicop.unique())
     input_data_frame = input_data_frame[kept_postes + ['age', 'pondmen', 'revenus']].copy()
@@ -155,13 +174,24 @@ def compute_expenses():
 
     depenses = depenses_aliss.merge(depenses_input)
 
+    grouped_depenses_kantar = depenses.groupby(['age', 'revenus', 'poste_coicop'])['depenses_kantar'].agg(
+        {'depenses_agregees_kantar': np.sum}
+        )
+    depenses = depenses.set_index(
+        ['age', 'revenus', 'poste_coicop']
+        ).combine_first(
+            grouped_depenses_kantar
+            ).reset_index()
+    depenses['kantar_to_bdf'] = depenses.depenses_bdf / depenses.depenses_agregees_kantar
+
+    depenses.to_csv(os.path.join(assets_path, 'expenses.csv'), index = False)
     return depenses
 
 
 def compute_kantar_elasticities(compute = False):
     aliss = build_clean_aliss_data_frame()
     kantar_cross_price_elasticities_path = os.path.join(
-        elasticities_path,
+        assets_path,
         'kantar_cross_price_elasticities.csv',
         )
 
@@ -211,7 +241,7 @@ def compute_kantar_elasticities(compute = False):
     assert len(nomks_by_nomf.keys()) == 21
 
     # budget shares
-    budget_share_path = os.path.join(elasticities_path, 'budget_share.csv')
+    budget_share_path = os.path.join(assets_path, 'budget_share.csv')
     if os.path.exists(budget_share_path) and not compute:
         kantar_budget_share = pandas.read_csv(budget_share_path)
     else:
@@ -237,7 +267,7 @@ def compute_kantar_elasticities(compute = False):
     assert kantar_budget_share.notnull().all().all()
 
     csv_path_name = os.path.join(
-        elasticities_path,
+        assets_path,
         'cross_price_elasticities.csv',
         )
     nomf_cross_price_elasticities = pandas.read_csv(csv_path_name)
@@ -390,4 +420,4 @@ def compute_expenses_coefficient(taux_reforme = None, reform = None):
 
 if __name__ == '__main__':
     # correction = compute_expenses_coefficient(reform = 'tva_sociale')
-    depenses = compute_expenses()
+    depenses = compute_expenses(drop_dom = True)

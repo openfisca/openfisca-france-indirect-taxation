@@ -136,7 +136,7 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
         categories_fiscales.loc[
             categories_fiscales.code_bdf.isin(codes_bdf), 'categorie_fiscale'] = categorie_fiscale
 
-    assert not categories_fiscales.code_bdf.duplicated().any(), "there are {} duplicated".format(
+    assert not categories_fiscales.code_bdf.duplicated().any(), "there are {} duplicated entries".format(
         categories_fiscales.code_bdf.duplicated().sum())
 
     generate_variables(
