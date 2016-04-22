@@ -75,6 +75,13 @@ class birth(Variable):
     label = u"Date de naissance"
 
 
+class nactifs(Variable):
+    column = IntCol
+    entity_class = Menages
+    is_permanent = True
+    label = u"Nombre d'actifs dans le ménage"
+
+
 class nadultes(Variable):
     column = IntCol
     entity_class = Individus
