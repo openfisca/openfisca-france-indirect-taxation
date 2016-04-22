@@ -38,12 +38,10 @@ log = logging.getLogger(__name__)
 class SurveyScenario(AbstractSurveyScenario):
     @classmethod
     def create(cls, calibration_kwargs = None, data_year = None, elasticities = None, inflation_kwargs = None,
-            reference_tax_benefit_system = None, reform = None, reform_key = None, tax_benefit_system = None,
+            input_data_frame = None, reference_tax_benefit_system = None, reform = None, reform_key = None, tax_benefit_system = None,
             year = None):  # Add debug parameters debug, debug_all trace for simulation)
 
         assert year is not None
-        if data_year is None:
-            data_year = year
 
         # it is either reform or reform_key which is not None
         assert not(
@@ -71,7 +69,11 @@ class SurveyScenario(AbstractSurveyScenario):
         if inflation_kwargs is not None:
             assert set(inflation_kwargs.keys()).issubset(set(['inflator_by_variable', 'target_by_variable']))
 
-        input_data_frame = get_input_data_frame(data_year)
+        assert data_year is None or input_data_frame is None
+
+        if input_data_frame is None:
+            data_year = data_year or year
+            input_data_frame = get_input_data_frame(data_year)
 
         if elasticities is not None:
             assert 'ident_men' in elasticities.columns
