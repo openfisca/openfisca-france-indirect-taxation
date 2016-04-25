@@ -146,6 +146,47 @@ def complete_input_data_frame(input_data_frame, drop_dom = True):
     return input_data_frame
 
 
+def build_aggregated_shares(expenditures, kantar_prefix = 'kantar'):
+    expenditures = expenditures.copy()
+    grouped_kantar_expenditures = expenditures.groupby(['age', 'revenus', 'poste_coicop']).agg({
+        '{}_expenditures'.format(kantar_prefix): np.sum,
+        '{}_budget_share'.format(kantar_prefix): np.sum
+        }).rename(columns = {
+            '{}_expenditures'.format(kantar_prefix): '{}_aggregated_expenditures'.format(kantar_prefix),
+            '{}_budget_share'.format(kantar_prefix): '{}_aggregated_budget_share'.format(kantar_prefix)
+            })
+
+    expenditures = expenditures.set_index(
+        ['age', 'revenus', 'poste_coicop']
+        ).combine_first(
+            grouped_kantar_expenditures
+            ).reset_index()
+
+    if (expenditures.kantar_aggregated_expenditures == 0).sum() > 0:
+        expenditures.loc[
+            expenditures.kantar_aggregated_expenditures == 0,
+            '{}_aggregated_expenditures'.format(kantar_prefix)
+            ] = (
+                expenditures.loc[expenditures.kantar_aggregated_expenditures == 0, 'bdf_expenditures']
+                )
+        expenditures.loc[
+            expenditures.kantar_aggregated_expenditures == 0,
+            '{}_aggregated_budget_share'.format(kantar_prefix)
+            ] = (
+                expenditures.loc[expenditures.kantar_aggregated_expenditures == 0, 'bdf_budget_share']
+                )
+    # TODO should renomalize
+    if kantar_prefix == 'kantar':
+        expenditures['{}_to_bdf'.format(kantar_prefix)] = (
+            expenditures.bdf_expenditures / expenditures.kantar_aggregated_expenditures
+            )
+        expenditures['{}_budget_share_to_bdf'.format(kantar_prefix)] = (
+            expenditures.bdf_budget_share / expenditures.kantar_aggregated_budget_share
+            )
+
+    return expenditures
+
+
 def compute_expenditures(drop_dom = True):
     # aliss/kantar data
     aliss = build_clean_aliss_data_frame()
@@ -193,23 +234,7 @@ def compute_expenditures(drop_dom = True):
             )
 
     expenditures = aliss_expenditures.merge(input_data_expenditures)
-
-    grouped_kantar_expenditures = expenditures.groupby(['age', 'revenus', 'poste_coicop']).agg({
-        'kantar_expenditures': np.sum,
-        'kantar_budget_share': np.sum
-        }).rename(columns = {
-            'kantar_expenditures': 'kantar_aggregated_expenditures',
-            'kantar_budget_share': 'kantar_aggregated_budget_share'
-            })
-
-    expenditures = expenditures.set_index(
-        ['age', 'revenus', 'poste_coicop']
-        ).combine_first(
-            grouped_kantar_expenditures
-            ).reset_index()
-
-    expenditures['kantar_to_bdf'] = expenditures.bdf_expenditures / expenditures.kantar_aggregated_expenditures
-    expenditures['kantar_budget_share_to_bdf'] = expenditures.bdf_budget_share / expenditures.kantar_aggregated_budget_share
+    expenditures = build_aggregated_shares(expenditures)
 
     expenditures.to_csv(os.path.join(assets_path, 'expenditures.csv'), index = False)
 
@@ -458,56 +483,76 @@ def compute_adjusted_expenditures(reform_key = None):
     correction = compute_expenditures_coefficient(reform_key = reform_key)
     expenditures = compute_expenditures(drop_dom = True)
     adjusted_expenditures = expenditures.combine_first(correction)
-
-    adjusted_expenditures.eval(
-        'pre_adjusted_kantar_budget_share = kantar_budget_share * expenditure_variation',
-        # inplace = True,
+    adjusted_expenditures['adjusted_kantar_expenditures'] = (
+        adjusted_expenditures.kantar_expenditures * adjusted_expenditures.expenditure_variation
         )
+    adjusted_expenditures['adjusted_kantar_budget_share'] = (
+        adjusted_expenditures.kantar_budget_share * adjusted_expenditures.expenditure_variation
+        )
+#    adjusted_expenditures['adjusted_kantar_budget_share'] = adjusted_expenditures.groupby(
+#        ['age', 'revenus'])['adjusted_kantar_budget_share'].transform(
+#            lambda x: x / x.sum()
+#            )
+
+    adjusted_expenditures = build_aggregated_shares(adjusted_expenditures.reset_index(), kantar_prefix = 'adjusted_kantar')
     adjusted_expenditures.reset_index(inplace = True)
-    adjusted_expenditures['adjusted_kantar_budget_share'] = adjusted_expenditures.groupby(
-        ['age', 'revenus'])['pre_adjusted_kantar_budget_share'].transform(
-            lambda x: x / x.sum()
-            )
 
-    total_expenditures_variation = adjusted_expenditures.groupby(
-        ['age', 'revenus'])['pre_adjusted_kantar_budget_share'].sum()
-
-
-    adjusted_expenditures = adjusted_expenditures.replace(
-         {'kantar_budget_share_to_bdf': {np.inf: np.nan}}
-         )
 
     adjusted_expenditures.eval(
-        'adjusted_bdf_budget_share = kantar_budget_share_to_bdf * bdf_budget_share',
+        'adjusted_bdf_budget_share = kantar_budget_share_to_bdf * adjusted_kantar_aggregated_budget_share',
         # inplace = True
         )
 
-    return adjusted_expenditures, total_expenditures_variation
+    return adjusted_expenditures  #, total_expenditures_variation
 
 
-def get_adjusted_input_data_frame(reform_key = None):
+def get_adjusted_input_data_frame(reform_key = None, verbose = False):
     assert reform_key is not None
     year = 2011
     input_data_frame = complete_input_data_frame(get_input_data_frame(year))
-    adjusted_expenditures, total_expenditures_variation = compute_adjusted_expenditures(reform_key = reform_key)
+    adjusted_expenditures = compute_adjusted_expenditures(reform_key = reform_key)
 
     bdf_adjusted_expenditures = adjusted_expenditures[
-        ['age', 'revenus', 'poste_coicop', 'adjusted_bdf_budget_share']
+        ['age', 'revenus', 'poste_coicop', 'adjusted_bdf_budget_share', 'bdf_budget_share']
         ].drop_duplicates().copy()
+    # TODO fix upstream
+    bdf_adjusted_expenditures.fillna(0, inplace = True)
+
+
+    postes_coicop = bdf_adjusted_expenditures.poste_coicop.unique().copy()
 
     iterator = itertools.product(
         bdf_adjusted_expenditures.age.unique().copy(),
         bdf_adjusted_expenditures.revenus.unique().copy(),
-        bdf_adjusted_expenditures.poste_coicop.unique().copy()
+        postes_coicop,
         )
+
     bdf_adjusted_expenditures.set_index(['age', 'revenus', 'poste_coicop'], inplace = True)
     for age, revenus, poste in iterator:
         selection = (input_data_frame.age == age) & (input_data_frame.revenus == revenus)
-        input_data_frame.loc[selection, poste] = (
-            bdf_adjusted_expenditures.loc[(age, revenus, poste), 'adjusted_bdf_budget_share'] *
-            input_data_frame.loc[selection, poste] *
-            total_expenditures_variation.loc[(age, revenus)]
-            )
+        if verbose:
+            print poste
+            before = (
+                input_data_frame.loc[selection, poste] * input_data_frame.loc[selection, 'pondmen']
+                ).sum()
+            print 'before: ', before
+            print 'adjusted_bdf_budget_share', bdf_adjusted_expenditures.loc[
+                (age, revenus, poste), 'adjusted_bdf_budget_share']
+            print 'bdf_budget_share', bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share']
+
+        if bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'] != 0:
+            input_data_frame.loc[selection, poste] = (
+                bdf_adjusted_expenditures.loc[(age, revenus, poste), 'adjusted_bdf_budget_share'] /
+                bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'] *
+                input_data_frame.loc[selection, poste]
+                )
+        if verbose:
+            print 'after/before: ', (
+                input_data_frame.loc[selection, poste] * input_data_frame.loc[selection, 'pondmen']
+                ).sum() / (before + 1) - 1
+
+
+
     return input_data_frame
 
 
