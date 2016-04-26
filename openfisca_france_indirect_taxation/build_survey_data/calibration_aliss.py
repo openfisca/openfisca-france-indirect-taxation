@@ -471,12 +471,18 @@ def compute_expenditures_coefficient(reform_key = None):
             (1 + correction.taux_reforme) / (1 + correction.taux) * (1 + np.dot(matrix, correction.elasticity_factor))
             )
         assert len(expense_factor) == nomk_len
+        tweeked_expense_factor = (
+            (1 + np.dot(matrix, correction.elasticity_factor))
+            )
         correction['expenditure_variation'] = expense_factor
+        correction['tweeked_expenditure_variation'] = tweeked_expense_factor
         correction['inelastic_expenditure_variation'] = (1 + correction.taux_reforme) / (1 + correction.taux)
 
         final_corrections = final_corrections.combine_first(correction.set_index(['age', 'revenus', 'nomk']))
 
-    return final_corrections[['expenditure_variation', 'inelastic_expenditure_variation']].copy()
+    return final_corrections[
+        ['expenditure_variation', 'tweeked_expenditure_variation', 'inelastic_expenditure_variation', 'taux', 'taux_reforme']
+        ].copy()
 
 
 def compute_adjusted_expenditures(reform_key = None):
@@ -484,19 +490,19 @@ def compute_adjusted_expenditures(reform_key = None):
     expenditures = compute_expenditures(drop_dom = True)
     adjusted_expenditures = expenditures.combine_first(correction)
     adjusted_expenditures['adjusted_kantar_expenditures'] = (
-        adjusted_expenditures.kantar_expenditures * adjusted_expenditures.expenditure_variation
+        adjusted_expenditures.kantar_expenditures * adjusted_expenditures.tweeked_expenditure_variation
         )
     adjusted_expenditures['adjusted_kantar_budget_share'] = (
-        adjusted_expenditures.kantar_budget_share * adjusted_expenditures.expenditure_variation
+        adjusted_expenditures.kantar_budget_share * adjusted_expenditures.tweeked_expenditure_variation
         )
 #    adjusted_expenditures['adjusted_kantar_budget_share'] = adjusted_expenditures.groupby(
 #        ['age', 'revenus'])['adjusted_kantar_budget_share'].transform(
 #            lambda x: x / x.sum()
 #            )
-
-    adjusted_expenditures = build_aggregated_shares(adjusted_expenditures.reset_index(), kantar_prefix = 'adjusted_kantar')
+    adjusted_expenditures = build_aggregated_shares(
+        adjusted_expenditures.reset_index(), kantar_prefix = 'adjusted_kantar'
+        )
     adjusted_expenditures.reset_index(inplace = True)
-
 
     adjusted_expenditures.eval(
         'adjusted_bdf_budget_share = kantar_budget_share_to_bdf * adjusted_kantar_aggregated_budget_share',
@@ -528,6 +534,7 @@ def get_adjusted_input_data_frame(reform_key = None, verbose = False):
         )
 
     bdf_adjusted_expenditures.set_index(['age', 'revenus', 'poste_coicop'], inplace = True)
+
     for age, revenus, poste in iterator:
         selection = (input_data_frame.age == age) & (input_data_frame.revenus == revenus)
         if verbose:
@@ -540,12 +547,18 @@ def get_adjusted_input_data_frame(reform_key = None, verbose = False):
                 (age, revenus, poste), 'adjusted_bdf_budget_share']
             print 'bdf_budget_share', bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share']
 
-        if bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'] != 0:
-            input_data_frame.loc[selection, poste] = (
-                bdf_adjusted_expenditures.loc[(age, revenus, poste), 'adjusted_bdf_budget_share'] /
-                bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'] *
-                input_data_frame.loc[selection, poste]
-                )
+        try:
+            if bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'] != 0:
+                input_data_frame.loc[selection, poste] = (
+                    bdf_adjusted_expenditures.loc[(age, revenus, poste), 'adjusted_bdf_budget_share'] /
+                    bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'] *
+                    input_data_frame.loc[selection, poste]
+                    )
+        except:
+            print bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share']
+            print bdf_adjusted_expenditures.loc[(age, revenus, poste)]
+            raise
+
         if verbose:
             print 'after/before: ', (
                 input_data_frame.loc[selection, poste] * input_data_frame.loc[selection, 'pondmen']
