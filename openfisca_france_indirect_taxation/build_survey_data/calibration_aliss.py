@@ -28,6 +28,7 @@ assets_path = os.path.join(
     )
 
 
+
 def detect_null(data_frame):
     isnull_columns = list()
     global_null = None
@@ -396,7 +397,7 @@ def compute_kantar_elasticities(compute = False):
 def compute_expenditures_coefficient(reform_key = None):
     from openfisca_france_indirect_taxation.reforms.aliss import build_aliss_reform
 
-    assert reform_key in ['sante', 'environnement', 'tva_sociale']
+    assert reform_key in ['sante', 'environnement', 'tva_sociale', 'mixte']
     aliss_uncomplete = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss_uncomplete)
     aliss_extract = aliss[['nomf', 'nomk', 'poste_bdf', 'poste_coicop']].copy()
@@ -415,16 +416,10 @@ def compute_expenditures_coefficient(reform_key = None):
     legislation.rename(columns = {'code_bdf': 'poste_bdf'}, inplace = True)
     correction = aliss_extract.merge(legislation)
     correction = correction[['nomf', 'nomk', 'poste_bdf', 'categorie_fiscale']].drop_duplicates().copy()
-    # load reforms and add taux
-    taux_by_categorie_fiscale = {
-        'tva_taux_super_reduit': .021,
-        'tva_taux_reduit': .055,
-        'tva_taux_intermediaire': .1,
-        'tva_taux_plein': .2,
-        }
 
+    # load reforms and add taux
     aliss_reform = build_aliss_reform()
-    columns = ['nomf', 'nomc', 'code_bdf', 'categorie_fiscale'] + [reform_key]
+    columns = ['nomf', 'nomc', 'code_bdf', 'categorie_fiscale'] + [reform_key]  # TODO remove nomc
     reform_extract = aliss_reform[columns].copy()
     reform_extract.rename(columns = {reform_key: 'reform_categorie_fiscale'}, inplace = True)
 
@@ -432,6 +427,13 @@ def compute_expenditures_coefficient(reform_key = None):
 
     correction = correction.merge(
         reform_extract[['nomf', 'reform_categorie_fiscale']].drop_duplicates().copy(), on = 'nomf', how = 'outer')
+
+    taux_by_categorie_fiscale = {
+        'tva_taux_super_reduit': .021,
+        'tva_taux_reduit': .055,
+        'tva_taux_intermediaire': .1,
+        'tva_taux_plein': .2,
+        }
 
     correction['taux'] = correction.categorie_fiscale.apply(
         lambda x: taux_by_categorie_fiscale.get(x, 0))

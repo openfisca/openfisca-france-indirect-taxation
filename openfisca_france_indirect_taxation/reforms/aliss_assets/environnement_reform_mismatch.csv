@@ -1,0 +1,8 @@
+nomf,nomc,code_bdf,categorie_fiscale,environnement
+15 : Cooked meats,"1125 : Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé",c01125,tva_taux_reduit,tva_taux_intermediaire
+16 : Animal-based foods high in fats,"1125 : Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé",c01125,tva_taux_reduit,tva_taux_reduit
+20 : Prepared mixed meals,"1126 : Conserve de viande, plat préparé de viandes",c01126,tva_taux_reduit,tva_taux_reduit
+13 : Beef,"1126 : Conserve de viande, plat préparé de viandes",c01126,tva_taux_reduit,tva_taux_plein
+14 : Other meats,"1126 : Conserve de viande, plat préparé de viandes",c01126,tva_taux_reduit,tva_taux_intermediaire
+20 : Prepared mixed meals,1134 : Conserves et plats préparés à base de produits de mer,c01134,tva_taux_reduit,tva_taux_reduit
+18 : Fish and seafoods,1134 : Conserves et plats préparés à base de produits de mer,c01134,tva_taux_reduit,tva_taux_intermediaire

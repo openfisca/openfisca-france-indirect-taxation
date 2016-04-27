@@ -3,8 +3,9 @@
 from __future__ import division
 
 
+import numpy as np
 import os
-import pandas
+import pandas as pd
 import pkg_resources
 
 
@@ -20,18 +21,21 @@ from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss impo
     )
 
 
+aliss_assets_reform_directory = os.path.join(
+    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+    'openfisca_france_indirect_taxation',
+    'reforms',
+    'aliss_assets',
+    )
+
+
 def build_aliss_reform(rebuild = False):
-    aliss_refom_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-        'openfisca_france_indirect_taxation',
-        'reforms',
-        )
-    aliss_reform_path = os.path.join(aliss_refom_directory, 'aliss_reform.csv')
+    aliss_reform_path = os.path.join(aliss_assets_reform_directory, 'aliss_reform.csv')
     if os.path.exists(aliss_reform_path) and rebuild is False:
-        aliss_reform = pandas.read_csv(aliss_reform_path)
+        aliss_reform = pd.read_csv(aliss_reform_path)
         return aliss_reform
 
-    aliss_reform_data = pandas.read_csv(os.path.join(aliss_refom_directory, 'aliss_reform_unprocessed_data.csv'))
+    aliss_reform_data = pd.read_csv(os.path.join(aliss_assets_reform_directory, 'aliss_reform_unprocessed_data.csv'))
     aliss_uncomplete = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss_uncomplete)
     aliss_extract = aliss[['nomf', 'nomc', 'poste_bdf']].copy()
@@ -42,7 +46,7 @@ def build_aliss_reform(rebuild = False):
         'assets',
         'legislation',
         )
-    codes_coicop_data_frame = pandas.read_csv(
+    codes_coicop_data_frame = pd.read_csv(
         os.path.join(legislation_directory, 'coicop_legislation.csv'),
         )
     legislation = codes_coicop_data_frame[['code_bdf', 'categorie_fiscale']].copy()
@@ -51,15 +55,24 @@ def build_aliss_reform(rebuild = False):
     aliss_legislation.rename(columns = {'poste_bdf': 'code_bdf'}, inplace = True)
     aliss_reform = aliss_legislation.merge(aliss_reform_data)
 
-    mismatch = aliss_reform.groupby(['code_bdf']).filter(
-        lambda x: (
-            x.sante.nunique() > 1 or
-            x.environnement.nunique() > 1 or
-            x.tva_sociale.nunique() > 1
-            )).copy().sort_values('code_bdf')
+    # Dealing with mismatch in reforms
+    reforms = ['sante', 'environnement', 'tva_sociale', 'mixte']
+    for reform in reforms:
+        labels = [removed_reform for removed_reform in reforms if removed_reform != reform]
+        print labels
+        mismatch = aliss_reform.drop(
+            labels,
+            axis = 1,
+            ).groupby(['code_bdf']).filter(
+                lambda x: x[reform].nunique() > 1,
+                ).sort_values('code_bdf')
 
-    mismatch.nomc = mismatch.nomc.str.decode('latin-1').str.encode('utf-8')
-    mismatch.to_csv('reform_mismatch.csv', index = False)
+        mismatch.nomc = mismatch.nomc.str.decode('latin-1').str.encode('utf-8')
+        mismatch.to_csv(
+            os.path.join(aliss_assets_reform_directory, '{}_reform_mismatch.csv'.format(reform)),
+            index = False,
+            )
+
     if rebuild:
         aliss_reform.to_csv(aliss_reform_path, index = False)
 
@@ -151,3 +164,105 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
         )
     reform = Reform()
     return reform
+
+
+
+def build_budget_shares():
+    aliss = build_clean_aliss_data_frame()
+    aliss = add_poste_coicop(aliss)
+    kept_variables = ['dt_k', 'nomf', 'nomc', 'poste_coicop', 'tpoids']
+    aliss = aliss[kept_variables].copy()
+    aliss_expenditures = aliss.groupby(
+        ['poste_coicop', 'nomc', 'nomf']).apply(
+            lambda df: (df.tpoids * df.dt_k).sum()
+            ).reset_index()
+    aliss_expenditures.rename(columns = {0: "expenditures"}, inplace = True)
+
+    aliss_expenditures['budget_share'] = aliss_expenditures.groupby(
+        ['poste_coicop'])['expenditures'].transform(
+            lambda x: x / x.sum()
+            )
+    return aliss_expenditures.query('budget_share < 1').copy()
+
+
+def build_legislation_including_f_nomencalture():
+    aliss_uncomplete = build_clean_aliss_data_frame()
+    aliss = add_poste_coicop(aliss_uncomplete)
+    aliss_extract = aliss[['nomf', 'nomk', 'poste_bdf', 'poste_coicop']].copy()
+    aliss_extract.drop_duplicates(inplace = True)
+
+    legislation_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'legislation',
+        )
+    codes_coicop_data_frame = pd.read_csv(
+        os.path.join(legislation_directory, 'coicop_legislation.csv'),
+        )
+    legislation = codes_coicop_data_frame[['code_bdf', 'categorie_fiscale']].copy()
+    legislation.rename(columns = {'code_bdf': 'poste_bdf'}, inplace = True)
+    return aliss_extract.merge(legislation)
+
+
+if __name__ == '__main__':
+
+    reform_key = 'mixte'
+    mismatch = pd.read_csv(os.path.join(
+        aliss_assets_reform_directory,
+        '{}_reform_mismatch.csv'.format(reform_key)
+        ))
+    mismatch['nomc_shrinked'] = mismatch.nomc.str[:4].copy()
+    mismatch.drop('nomc', axis = 1, inplace = True)
+    budget_shares = build_budget_shares()
+    budget_shares['nomc_shrinked'] = budget_shares.nomc.str[:4].copy()
+
+    taux_by_categorie_fiscale = {
+        'tva_taux_super_reduit': .021,
+        'tva_taux_reduit': .055,
+        'tva_taux_intermediaire': .1,
+        'tva_taux_plein': .2,
+        }
+
+    result = mismatch.merge(budget_shares)
+
+    result['reform_rate'] = result[reform_key].map(taux_by_categorie_fiscale)
+    weighted_mean = lambda x: np.average(x, weights = result.loc[x.index, "budget_share"])
+
+    reform_rate = result.groupby(['code_bdf', 'poste_coicop'])['reform_rate'].agg(
+        weighted_mean).reset_index()
+    result2 = result.drop('reform_rate', axis = 1).merge(reform_rate)
+    result2[reform_key] = "tva_taux_" + result2.poste_coicop.str[6:]
+
+    taux_by_categorie_fiscale_update = result2[
+        [reform_key, 'reform_rate']
+        ].set_index(reform_key).to_dict()['reform_rate']
+    taux_by_categorie_fiscale.update(taux_by_categorie_fiscale_update)
+
+    aliss_reform = build_aliss_reform(rebuild = True)
+    columns = ['nomf', 'nomc', 'code_bdf', 'categorie_fiscale'] + [reform_key]
+    reform_extract = aliss_reform[columns].copy()
+
+
+    reform_extract.set_index(['nomf', 'nomc'], inplace = True)
+    reform_extract.update(result2.set_index(['nomf', 'nomc']))
+    reform_extract.reset_index(inplace = True)
+    reform_extract.rename(columns = {reform_key: 'reform_categorie_fiscale', 'code_bdf': 'poste_bdf'}, inplace = True)
+
+    # TODO gérér les catégories fiscales
+
+    correction =  build_legislation_including_f_nomencalture()
+
+    correction = correction[['nomf', 'nomk', 'poste_bdf', 'categorie_fiscale']].drop_duplicates().copy()
+
+    # Compute taux
+    correction = correction.merge(
+        reform_extract[['poste_bdf', 'reform_categorie_fiscale']].drop_duplicates().copy(), on = 'poste_bdf', how = 'outer')
+
+
+    correction['taux'] = correction.categorie_fiscale.apply(
+        lambda x: taux_by_categorie_fiscale.get(x, 0))
+
+    correction['taux_reforme'] = correction.reform_categorie_fiscale.apply(
+        lambda x: taux_by_categorie_fiscale.get(x))
+
