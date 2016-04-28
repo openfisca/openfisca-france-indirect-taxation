@@ -10,6 +10,7 @@ import pkg_resources
 
 
 from openfisca_core import reforms
+from openfisca_core.formulas import dated_function, DatedVariable
 
 from openfisca_france_indirect_taxation.model.base import get_legislation_data_frames
 
