@@ -184,7 +184,11 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     return reform
 
 
-def build_budget_shares():
+def build_budget_shares(rebuild = False):
+    budget_shares_csv_path = os.path.join(aliss_assets_reform_directory, 'budget-shares.csv')
+    if not rebuild and os.path.exists(budget_shares_csv_path):
+        return pd.read_csv(budget_shares_path)
+
     aliss = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss)
     kept_variables = ['dt_k', 'nomf', 'nomc', 'poste_coicop', 'tpoids']
@@ -199,7 +203,10 @@ def build_budget_shares():
         ['poste_coicop'])['expenditures'].transform(
             lambda x: x / x.sum()
             )
-    return aliss_expenditures.query('budget_share < 1').copy()
+    budget_shares = aliss_expenditures.query('budget_share < 1').copy()
+    budget_shares.to_csv(budget_shares_csv_path)
+
+    return budget_shares
 
 
 def build_legislation_including_f_nomencalture():
@@ -240,7 +247,8 @@ def build_updated_categorie_fiscale(reform_key, categories_fiscales_reform):
         }
 
     weighted_categories_fiscales = mismatch.merge(budget_shares)
-    weighted_categories_fiscales['reform_rate'] = weighted_categories_fiscales[reform_key].map(taux_by_categorie_fiscale)
+    weighted_categories_fiscales['reform_rate'] = weighted_categories_fiscales[reform_key].map(
+        taux_by_categorie_fiscale)
 
     def weighted_mean(x):
         return np.average(x, weights = weighted_categories_fiscales.loc[x.index, "budget_share"])
@@ -352,7 +360,6 @@ def generate_additional_tva_variables(categories_fiscales = None, Reform = None)
         tva_class_name = u'{}'.format(categorie_fiscale)
         type(tva_class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
         del definitions_by_name
-
 
 
 if __name__ == '__main__':

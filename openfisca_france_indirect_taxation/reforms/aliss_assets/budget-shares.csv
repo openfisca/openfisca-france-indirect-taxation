@@ -1,0 +1,59 @@
+,poste_coicop,nomc,nomf,expenditures,budget_share
+0,poste_01_1_1_1_1,1112 : Pain/viennoiserie/biscuits/gâteaux,11 : Starchy foods,577781696.0,0.207668577307
+1,poste_01_1_1_1_1,1112 : Pain/viennoiserie/biscuits/gâteaux,20 : Prepared mixed meals,276699328.0,0.099452364423
+2,poste_01_1_1_1_1,1112 : Pain/viennoiserie/biscuits/gâteaux,21 : Prepared desserts,1927748736.0,0.69287905827
+3,poste_01_1_1_3_3,"1114 : Préparations telles que pâte à pâtisser, gâteau industriel, tarte, quiche",20 : Prepared mixed meals,1052960768.0,0.854427021281
+4,poste_01_1_1_3_3,"1114 : Préparations telles que pâte à pâtisser, gâteau industriel, tarte, quiche",21 : Prepared desserts,179398160.0,0.145572978719
+5,poste_01_1_1_4_1,1115 : Autres céréales et produits à base de céréales,10 : Plant-based foods high in sugar,274243904.0,0.437485087688
+6,poste_01_1_1_4_1,1115 : Autres céréales et produits à base de céréales,11 : Starchy foods,352620672.0,0.562514912312
+7,poste_01_1_1_4_2,1113 : Pâtes et plats à base de pâtes,9 : Plant-based dishes,101879456.0,0.147809895983
+8,poste_01_1_1_4_2,1113 : Pâtes et plats à base de pâtes,11 : Starchy foods,448937216.0,0.651332131178
+9,poste_01_1_1_4_2,1113 : Pâtes et plats à base de pâtes,20 : Prepared mixed meals,138443376.0,0.200857972839
+10,poste_01_1_1_4_3,1111 : Riz  et produits à base de riz,9 : Plant-based dishes,15923843.0,0.100141922577
+11,poste_01_1_1_4_3,1111 : Riz  et produits à base de riz,11 : Starchy foods,73637792.0,0.463093617867
+12,poste_01_1_1_4_3,1111 : Riz  et produits à base de riz,20 : Prepared mixed meals,69451120.0,0.436764459555
+16,poste_01_1_2_4_2,"1125 : Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé",15 : Cooked meats,4042887680.0,0.928121047559
+17,poste_01_1_2_4_2,"1125 : Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé",16 : Animal-based foods high in fats,313104128.0,0.0718789524409
+20,poste_01_1_2_6_3,"1126 : Conserve de viande, plat préparé de viandes",13 : Beef,1481134.5,0.00137682854864
+21,poste_01_1_2_6_3,"1126 : Conserve de viande, plat préparé de viandes",14 : Other meats,309425024.0,0.287634382095
+22,poste_01_1_2_6_3,"1126 : Conserve de viande, plat préparé de viandes",20 : Prepared mixed meals,764851968.0,0.710988789356
+27,poste_01_1_3_2_2,1134 : Conserves et plats préparés à base de produits de mer,18 : Fish and seafoods,848211136.0,0.690047141918
+28,poste_01_1_3_2_2,1134 : Conserves et plats préparés à base de produits de mer,20 : Prepared mixed meals,380996384.0,0.309952858082
+31,poste_01_1_4_1_1_c,1143 : Lait de conserve,19 : Dairy products,28554824.0,0.193754639148
+32,poste_01_1_4_1_1_c,1143 : Lait de conserve,21 : Prepared desserts,118821384.0,0.806245360852
+33,poste_01_1_4_2_1,"1144 : Yaourts, fromage blanc",11 : Starchy foods,22621942.0,0.0137175363607
+34,poste_01_1_4_2_1,"1144 : Yaourts, fromage blanc",17 : Cheese,381717984.0,0.231466879592
+35,poste_01_1_4_2_1,"1144 : Yaourts, fromage blanc",19 : Dairy products,1244785792.0,0.754815584048
+36,poste_01_1_4_2_2,"1146 : Autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisé)",11 : Starchy foods,30320968.0,0.0264110396112
+37,poste_01_1_4_2_2,"1146 : Autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisé)",16 : Animal-based foods high in fats,368837248.0,0.321275203583
+38,poste_01_1_4_2_2,"1146 : Autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisé)",19 : Dairy products,20658202.0,0.0179942998957
+39,poste_01_1_4_2_2,"1146 : Autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisé)",21 : Prepared desserts,728225024.0,0.63431945691
+40,poste_01_1_4_3_1,1145 : Fromage et lait caillé,17 : Cheese,3672479744.0,0.99877025547
+41,poste_01_1_4_3_1,1145 : Fromage et lait caillé,19 : Dairy products,4521772.5,0.00122974452953
+57,poste_01_1_7_1_1_a,"1171 : légumes frais à feuilles et à tiges, herbes aromatiques (frais)",6 : Fresh fruits and vegetables,786250304.0,0.990362956566
+58,poste_01_1_7_1_1_a,"1171 : légumes frais à feuilles et à tiges, herbes aromatiques (frais)",12 : Processed fruits and vegetables,7650860.0,0.00963704343429
+60,poste_01_1_7_1_1_c,1173 : légumes frais cultivés pour leurs fruits,6 : Fresh fruits and vegetables,920664512.0,0.98075291896
+61,poste_01_1_7_1_1_c,1173 : légumes frais cultivés pour leurs fruits,11 : Starchy foods,18067858.0,0.0192470810397
+64,poste_01_1_7_2_1_b,1176 : légumes surgelés (non cuisinés),11 : Starchy foods,10110697.0,0.0568914698067
+65,poste_01_1_7_2_1_b,1176 : légumes surgelés (non cuisinés),12 : Processed fruits and vegetables,167608336.0,0.943108530193
+66,poste_01_1_7_2_1_c,"1177 : légumes et plats à base de légume, en conserve (sans PDT)",9 : Plant-based dishes,24151452.0,0.026538697195
+67,poste_01_1_7_2_1_c,"1177 : légumes et plats à base de légume, en conserve (sans PDT)",11 : Starchy foods,62262924.0,0.0684172896318
+68,poste_01_1_7_2_1_c,"1177 : légumes et plats à base de légume, en conserve (sans PDT)",12 : Processed fruits and vegetables,823632256.0,0.905044013173
+69,poste_01_1_7_2_2,"1179 : pomme de terre, autres tubercules, produits à base de PDT",9 : Plant-based dishes,16771850.0,0.0236825988261
+70,poste_01_1_7_2_2,"1179 : pomme de terre, autres tubercules, produits à base de PDT",11 : Starchy foods,569197952.0,0.803732846995
+71,poste_01_1_7_2_2,"1179 : pomme de terre, autres tubercules, produits à base de PDT",20 : Prepared mixed meals,122223168.0,0.172584554179
+72,poste_01_1_7_2_3,"1178 : légumes préparés et plats à base de légumes, frais et surgelés",9 : Plant-based dishes,15522726.0,0.0356598002723
+73,poste_01_1_7_2_3,"1178 : légumes préparés et plats à base de légumes, frais et surgelés",11 : Starchy foods,8105107.0,0.018619570867
+74,poste_01_1_7_2_3,"1178 : légumes préparés et plats à base de légumes, frais et surgelés",12 : Processed fruits and vegetables,397809920.0,0.913874424734
+75,poste_01_1_7_2_3,"1178 : légumes préparés et plats à base de légumes, frais et surgelés",20 : Prepared mixed meals,13862666.0,0.0318462041269
+78,poste_01_1_8_1_2,"1182 : confitures, compote, gelées, purées et pâtes de fruits, miel",10 : Plant-based foods high in sugar,82486288.0,0.145928810229
+79,poste_01_1_8_1_2,"1182 : confitures, compote, gelées, purées et pâtes de fruits, miel",12 : Processed fruits and vegetables,482763904.0,0.854071189771
+83,poste_01_1_9_1_1_a,1191 : sauces et condiments,7 : Spices,63343296.0,0.1129112948
+84,poste_01_1_9_1_1_a,1191 : sauces et condiments,12 : Processed fruits and vegetables,283135136.0,0.504696737113
+85,poste_01_1_9_1_1_a,1191 : sauces et condiments,16 : Animal-based foods high in fats,214522096.0,0.382391968087
+87,poste_01_1_9_3_2,"1193 : levure , préparations pour desserts, soupes",9 : Plant-based dishes,242780192.0,0.681246027237
+88,poste_01_1_9_3_2,"1193 : levure , préparations pour desserts, soupes",20 : Prepared mixed meals,113596480.0,0.318753972763
+95,poste_01_2_2_2_3,"1223 : jus de fruits et de légumes, sirops, boissons aromatisées",1 : Juices,874932992.0,0.72645687629
+96,poste_01_2_2_2_3,"1223 : jus de fruits et de légumes, sirops, boissons aromatisées",3 : Soft drinks,329450944.0,0.27354312371
+100,poste_02_1_3_1_1,2131 : bière et boissons à base de bière,2 : Alcohol,511300320.0,0.971902441555
+101,poste_02_1_3_1_1,2131 : bière et boissons à base de bière,3 : Soft drinks,14781618.0,0.0280975584454

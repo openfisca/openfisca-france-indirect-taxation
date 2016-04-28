@@ -28,7 +28,6 @@ assets_path = os.path.join(
     )
 
 
-
 def detect_null(data_frame):
     isnull_columns = list()
     global_null = None
@@ -203,7 +202,7 @@ def compute_expenditures(drop_dom = True):
             ).reset_index()
     aliss_expenditures.rename(columns = {0: "kantar_expenditures"}, inplace = True)
 
-    print "kantar_expenditures_total: ", (aliss.tpoids * aliss.dt_k).sum() / 1e9
+    print "kantar_expenditures_total:", (aliss.tpoids * aliss.dt_k).sum() / 1e9
     print "bdf_expenditures_total: ", (aliss.tpoids * aliss.dt_c).drop_duplicates().sum() / 1e9
     print "population_kantar_total: ", aliss.tpoids.unique().sum()
 
@@ -226,7 +225,8 @@ def compute_expenditures(drop_dom = True):
             ).reset_index()
     input_data_expenditures.rename(columns = {"variable": "poste_coicop", 0: "bdf_expenditures"}, inplace = True)
 
-    # input_data_expenditures['bdf_budget_share'] = input_data_expenditures.bdf_expenditures / input_data_expenditures.bdf_expenditures.sum()
+    # input_data_expenditures['bdf_budget_share'] = (
+    #   input_data_expenditures.bdf_expenditures / input_data_expenditures.bdf_expenditures.sum())
     print "bdf_expenditures_total: ", input_data_expenditures.bdf_expenditures.sum() / 1e9
 
     input_data_expenditures['bdf_budget_share'] = input_data_expenditures.groupby(
@@ -526,7 +526,6 @@ def get_adjusted_input_data_frame(reform_key = None, verbose = False):
     # TODO fix upstream
     bdf_adjusted_expenditures.fillna(0, inplace = True)
 
-
     postes_coicop = bdf_adjusted_expenditures.poste_coicop.unique().copy()
 
     iterator = itertools.product(
@@ -565,8 +564,6 @@ def get_adjusted_input_data_frame(reform_key = None, verbose = False):
             print 'after/before: ', (
                 input_data_frame.loc[selection, poste] * input_data_frame.loc[selection, 'pondmen']
                 ).sum() / (before + 1) - 1
-
-
 
     return input_data_frame
 

@@ -61,7 +61,7 @@ class SurveyScenario(AbstractSurveyScenario):
             reference_tax_benefit_system = base.tax_benefit_system
 
         if calibration_kwargs is not None:
-            print calibration_kwargs
+            # print calibration_kwargs
             assert set(calibration_kwargs.keys()).issubset(set(
                 ['target_margins_by_variable', 'parameters', 'total_population']))
 
@@ -96,7 +96,7 @@ class SurveyScenario(AbstractSurveyScenario):
             survey_scenario.calibrate(**calibration_kwargs)
 
         if inflation_kwargs:
-            print 'inflating using {}'.format(inflation_kwargs)
+            # print 'inflating using {}'.format(inflation_kwargs)
             survey_scenario.inflate(**inflation_kwargs)
 
         return survey_scenario
