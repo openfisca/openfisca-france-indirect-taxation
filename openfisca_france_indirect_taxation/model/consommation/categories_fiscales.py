@@ -49,6 +49,9 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
     removed_categories = set()
     completed_categories_fiscales = insert_tva(categories_fiscales)
 
+    if Reform:
+        reference_categories = set(reference_categories).union(set(categories_fiscales.categorie_fiscale.unique()))
+
     for categorie_fiscale in reference_categories:
         year_start = 1994
         year_final_stop = 2014
@@ -91,14 +94,22 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
             definitions_by_name = dict(
                 column = FloatCol,
                 entity_class = Menages,
-                label = u"Categorie fiscale {0}".format(categorie_fiscale),
+                label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
                 )
             definitions_by_name.update(functions_by_name)
             type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
         else:
-            definitions_by_name = dict(
-                reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
-                )
+            if class_name.encode('utf-8') in tax_benefit_system.column_by_name:
+                definitions_by_name = dict(
+                    reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
+                    )
+            else:
+                definitions_by_name = dict(
+                    column = FloatCol,
+                    entity_class = Menages,
+                    label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
+                    )
+                print class_name.encode('utf-8')
             definitions_by_name.update(functions_by_name)
             type(class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
 

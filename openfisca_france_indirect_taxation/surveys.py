@@ -26,7 +26,6 @@
 import logging
 import numpy
 
-from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.scenarios import AbstractSurveyScenario
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation.tests import base
