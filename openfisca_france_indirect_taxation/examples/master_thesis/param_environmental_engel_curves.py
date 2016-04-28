@@ -60,7 +60,7 @@ age_group_pr2 = menages['age_group_pr2'].mean()
 situa_cj = menages['situa_cj'].mean()
 situa_pr = menages['situa_pr'].mean()
 
-liste_revenus = numpy.arange(1000, 1000000, 500)
+liste_revenus = numpy.arange(1000, 500000, 500)
 simulation_menages = pandas.DataFrame(liste_revenus)
 simulation_menages.rename(columns = {0: 'revenu_disponible'}, inplace = True)
 simulation_menages['revenu_disponible'] = simulation_menages['revenu_disponible'].astype(numpy.int64)
