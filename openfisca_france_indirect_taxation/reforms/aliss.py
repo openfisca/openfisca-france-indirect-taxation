@@ -2,7 +2,7 @@
 
 from __future__ import division
 
-
+import logging
 import numpy as np
 import os
 import pandas as pd
@@ -20,6 +20,9 @@ from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss impo
     add_poste_coicop,
     build_clean_aliss_data_frame,
     )
+
+
+log = logging.getLogger(__name__)
 
 
 aliss_assets_reform_directory = os.path.join(
