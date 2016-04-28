@@ -25,8 +25,6 @@ def get_elasticities(year):
     dataframe = data_quaids[liste_elasticities + ['ident_men', 'year']].copy()
 
     dataframe = dataframe.fillna(0)
-    # We block the elasticities of housing energy to some value found in the literature (see Clerc and Marcus, 2009)
-    dataframe['elas_price_2_2'] = -0.1
 
     assert not dataframe.ident_men.duplicated().any(), 'Some housholds are duplicated'
 
