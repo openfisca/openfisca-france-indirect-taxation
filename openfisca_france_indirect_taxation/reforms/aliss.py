@@ -187,7 +187,7 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
 def build_budget_shares(rebuild = False):
     budget_shares_csv_path = os.path.join(aliss_assets_reform_directory, 'budget-shares.csv')
     if not rebuild and os.path.exists(budget_shares_csv_path):
-        return pd.read_csv(budget_shares_path)
+        return pd.read_csv(budget_shares_csv_path)
 
     aliss = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss)
