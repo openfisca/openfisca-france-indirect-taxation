@@ -76,6 +76,6 @@ if __name__ == '__main__':
 
     for year in [2011]:  # [2000, 2005, 2011]:
         simulation, df = run_survey_simulation(year)
-        print df
-        print df.columns
-        print df.describe()
+        print(df)
+        print(df.columns)
+        print(df.describe())

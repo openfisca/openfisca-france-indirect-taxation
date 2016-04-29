@@ -5,8 +5,6 @@ from __future__ import division
 
 import os
 import pkg_resources
-import csv
-import pandas
 import numpy
 
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities

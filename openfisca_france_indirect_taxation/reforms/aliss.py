@@ -8,11 +8,13 @@ import os
 import pandas as pd
 import pkg_resources
 
+from biryani.strings import slugify
 
 from openfisca_core import reforms
+from openfisca_core.columns import FloatCol
 from openfisca_core.formulas import dated_function, DatedVariable
 
-from openfisca_france_indirect_taxation.model.base import get_legislation_data_frames
+from openfisca_france_indirect_taxation.model.base import get_legislation_data_frames, Menages
 
 from openfisca_france_indirect_taxation.model.consommation.postes_coicop import generate_postes_agreges_variables
 from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import generate_variables
@@ -110,6 +112,7 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     assert missmatch_rates in ["higher", "weighted"]  # "lower"]
     assert key is not None
     assert tax_benefit_system is not None
+    taux_by_categorie_fiscale = None
     Reform = reforms.make_reform(
         key = key,
         name = name,
@@ -121,7 +124,6 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     reform_mismatch = categories_fiscales_reform.groupby(['code_bdf']).filter(
         lambda x: x[reform_key].nunique() > 1).copy().sort_values('code_bdf')
 
-    categories_fiscales_reform[reform_key].unique()
     if not reform_mismatch.empty:
         if missmatch_rates == "weighted":
             categories_fiscales_reform, taux_by_categorie_fiscale = build_updated_categorie_fiscale(
@@ -180,10 +182,12 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
         Reform = Reform,
         tax_benefit_system = tax_benefit_system,
         )  # Dépenses taxes comprises des postes agrégés
+    taux_by_categorie_fiscale = taux_by_categorie_fiscale if taux_by_categorie_fiscale is not None else dict()
     generate_additional_tva_variables(
-        categories_fiscales = categories_fiscales,
         Reform = Reform,
+        taux_by_categorie_fiscale = taux_by_categorie_fiscale,
         )
+
     reform = Reform()
     return reform
 
@@ -262,7 +266,6 @@ def build_updated_categorie_fiscale(reform_key, categories_fiscales_reform):
 
     weighted_categories_fiscales = weighted_categories_fiscales.drop('reform_rate', axis = 1).merge(reform_rate)
     weighted_categories_fiscales[reform_key] = "tva_taux_" + weighted_categories_fiscales.poste_coicop.str[6:]
-    # print weighted_categories_fiscales
 
     # Updating taux_by_categorie_fiscale
     taux_by_categorie_fiscale_update = weighted_categories_fiscales[
@@ -290,81 +293,74 @@ def build_updated_categorie_fiscale(reform_key, categories_fiscales_reform):
         weighted_categories_fiscales[[reform_key, 'code_bdf']].set_index('code_bdf')
         )
     categories_fiscales_reform.reset_index(inplace = True)
-    print sorted(taux_by_categorie_fiscale)
+    log.info(u'The tva categries for reform_key {} are:\n{}'.format(reform_key, sorted(taux_by_categorie_fiscale)))
     return categories_fiscales_reform, taux_by_categorie_fiscale
 
 
-def depenses_new_tva_function_creator(categorie_fiscale = None, year_start = None, year_stop = None):
+def depenses_new_tva_function_creator(categorie_fiscale = None, taux = None, year_start = None, year_stop = None):
     start = date(year_start, 1, 1) if year_start is not None else None
-    stop = date(year_stop, 12, 31) if year_stop is not None else None
+    stop = date(year_stop, 14, 31) if year_stop is not None else None
     assert categorie_fiscale is not None
+    assert taux is not None
 
     @dated_function(start = start, stop = stop)
-    def func(self, simulation, period, categorie_fiscale = categorie_fiscale):
-        tva = get_tva(categorie_fiscale)
-        if tva is not None:
-            taux = simulation.legislation_at(period.start).imposition_indirecte.tva[tva[4:]]
-        else:
-            taux = 0
-
+    def func(self, simulation, period, categorie_fiscale = categorie_fiscale, taux = taux):
         return period, (
-            simulation.calculate('depenses_ht_poste_' + slugify(poste_coicop, separator = u'_'), period) * (1 + taux)
+            simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * (1 + taux)
             )
 
     func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
     return func
 
 
-def new_tva_function_creator(categorie_fiscale = None, year_start = None, year_stop = None):
+def new_tva_function_creator(categorie_fiscale = None, taux = None, year_start = None, year_stop = None):
     start = date(year_start, 1, 1) if year_start is not None else None
-    stop = date(year_stop, 12, 31) if year_stop is not None else None
+    stop = date(year_stop, 14, 31) if year_stop is not None else None
     assert categorie_fiscale is not None
+    assert taux is not None
 
     @dated_function(start = start, stop = stop)
-    def func(self, simulation, period, categorie_fiscale = categorie_fiscale):
-        tva = get_tva(categorie_fiscale)
-        if tva is not None:
-            taux = simulation.legislation_at(period.start).imposition_indirecte.tva[tva[4:]]
-        else:
-            taux = 0
-
+    def func(self, simulation, period, categorie_fiscale = categorie_fiscale, taux = taux):
         return period, (
-            simulation.calculate('depenses_ht_poste_' + slugify(poste_coicop, separator = u'_'), period) * taux
+            simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * taux
             )
 
     func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
     return func
 
 
-def generate_additional_tva_variables(categories_fiscales = None, Reform = None):
-    for categorie_fiscale in categories_fiscales:
-        depenses_new_tva_func = depenses_new_tva_function_creator(categorie_fiscale = categorie_fiscale)
-        new_tva_func = new_tva_function_creator(categorie_fiscale = categorie_fiscale)
-        log.info(u'Creating new fiscal category {}'.format(categorie_fiscale))
-
+def generate_additional_tva_variables(Reform = None, taux_by_categorie_fiscale = None):
+    for categorie_fiscale, taux in taux_by_categorie_fiscale.iteritems():
+        depenses_new_tva_func = depenses_new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
+        new_tva_func = new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
+        if not categorie_fiscale.startswith('tva'):
+            continue
         # Trick to create a class with a dynamic name.
-        definitions_by_name = dict(
-            column = FloatCol,
-            entity_class = Menages,
-            label = u"Dépenses taxes comprises: {0}".format(categorie_fiscale),
-            function = depenses_new_tva_func,
-            )
-        definitions_by_name.update(functions_by_name)
-        depenses_class_name = u'depenses_{}'.format(categorie_fiscale)
-        type(depenses_class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
-        del definitions_by_name
+        try:
+            definitions_by_name = dict(
+                column = FloatCol,
+                entity_class = Menages,
+                label = u"Dépenses taxes comprises: {0}".format(categorie_fiscale),
+                function = depenses_new_tva_func,
+                )
+            depenses_class_name = u'depenses_{}'.format(categorie_fiscale)
+            type(depenses_class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
+            del definitions_by_name
 
-        definitions_by_name = dict(
-            column = FloatCol,
-            entity_class = Menages,
-            label = u"Montant de la TVA acquitée à {0}".format(categorie_fiscale),
-            function = new_tva_func,
-            )
-        definitions_by_name.update(functions_by_name)
-        tva_class_name = u'{}'.format(categorie_fiscale)
-        type(tva_class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
-        del definitions_by_name
+            definitions_by_name = dict(
+                column = FloatCol,
+                entity_class = Menages,
+                label = u"Montant de la TVA acquitée à {0}".format(categorie_fiscale),
+                function = new_tva_func,
+                )
+            tva_class_name = u'{}'.format(categorie_fiscale)
+            type(tva_class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
+            del definitions_by_name
+            log.info(u'{} Created new fiscal category {}'.format(Reform.name, categorie_fiscale))
 
+        except AssertionError as e:
+            log.info(u'{} Fiscal category {} is not new : passing'.format(Reform.name, categorie_fiscale))
+            pass
 
 if __name__ == '__main__':
     pass

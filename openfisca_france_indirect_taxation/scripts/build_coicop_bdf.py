@@ -106,11 +106,12 @@ def test_coicop_to_legislation(data_frame, adjust_coicop, year):
         selection = data_frame.loc[data_frame.code_coicop == code_coicop].copy()
         products = selection.label.unique()
         try:
-            print code_coicop, products
-            print get_categorie_fiscale(
-                adjust_coicop.get(code_coicop, code_coicop), year = year)
+            print(code_coicop, products)
+            print(
+                get_categorie_fiscale(adjust_coicop.get(code_coicop, code_coicop), year = year)
+                )
         except AssertionError:
-            print 'error'
+            print('error')
             error = dict(
                 code_coicop = code_coicop,
                 products = products,
@@ -465,7 +466,7 @@ def bdf(year = 2011):
         data_frame.loc[data_frame.code_coicop == code_coicop, 'code_coicop'] = enhanced_code_coicops
 
     # errors = None  # test_coicop_to_legislation(data_frame, adjust_coicop, year = year)
-    return data_frame # errors
+    return data_frame  # errors
 
 
 # TODO check notamment problème avec sucre confiseries

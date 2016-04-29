@@ -37,8 +37,8 @@ log = logging.getLogger(__name__)
 class SurveyScenario(AbstractSurveyScenario):
     @classmethod
     def create(cls, calibration_kwargs = None, data_year = None, elasticities = None, inflation_kwargs = None,
-            input_data_frame = None, reference_tax_benefit_system = None, reform = None, reform_key = None, tax_benefit_system = None,
-            year = None):  # Add debug parameters debug, debug_all trace for simulation)
+            input_data_frame = None, reference_tax_benefit_system = None, reform = None, reform_key = None,
+            tax_benefit_system = None, year = None):  # Add debug parameters debug, debug_all trace for simulation)
 
         assert year is not None
 

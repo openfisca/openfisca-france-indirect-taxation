@@ -46,8 +46,10 @@ def extract_informations_from_coicop_to_categorie_fiscale():
             by = [exceptions.annee - np.arange(exceptions.shape[0]), 'posteCOICOP', 'categoriefiscale']
             )
         for k, g in grouped:
-            print g.posteCOICOP.unique()[0], g.description.unique()[0], g.annee.min(), g.annee.max(), \
+            print(
+                g.posteCOICOP.unique()[0], g.description.unique()[0], g.annee.min(), g.annee.max(),
                 taxe_by_categorie_fiscale_number[int(g.categoriefiscale.unique())]
+                )
 
     def get_dominant_and_exceptions(division):
         assert division in divisions
@@ -64,10 +66,10 @@ def extract_informations_from_coicop_to_categorie_fiscale():
 
     for coicop_division in divisions:
         dominant, exceptions = get_dominant_and_exceptions(coicop_division)
-        print u'\nDivision: {}.\nCatégorie fiscale dominante: {}.\nExceptions:'.format(
+        print(u'\nDivision: {}.\nCatégorie fiscale dominante: {}.\nExceptions:'.format(
             coicop_division,
             taxe_by_categorie_fiscale_number[dominant]
-            )
+            ))
         format_exceptions(exceptions)
 
 
@@ -178,7 +180,6 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
         coicop_nomenclature.reset_index(inplace = True, drop = True)
         coicop_nomenclature.sort_values(by = 'code_coicop', inplace = True)
 
-    # print coicop_nomenclature.categorie_fiscale.value_counts()
     return coicop_nomenclature
 
 
@@ -456,7 +457,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
     # Consommation de boissons alcoolisées
     consommation_boissons_alcoolisees = dict(
         value = ['11.1.1.2.2', '11.1.1.2.3', '11.1.1.2.4'],
-        categorie_fiscale = 'tva_taux_plein', # TODO sauf en corse à 10%
+        categorie_fiscale = 'tva_taux_plein',  # TODO sauf en corse à 10%
         )
     # Restauration sur place 1994 2009
     restauration_sur_place = dict(
@@ -567,48 +568,49 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         )
 
     for member in [
-        # 01
-        alimentation,
-        margarine, saindoux, confiserie,
-        # 02
-        alcools, vin, biere,
-        cigares, cigarettes, tabac_a_rouler, stupefiants, alcools_tabac_stupefiants_offerts,
-        # 03
-        habillement,
-        # 04
-        logement, eau_ordures_assainissement, eau_ordures_assainissement_reforme_2012, loyers,
-        # 05
-        ameublement, services_domestiques,
-        # 06
-        sante, pharmacie, parapharmacie, materiel_therapeutique,
-        # 07
-        transports,
-        transport_combine_passagers, transport_combine_passagers_reforme_2012,
-        transport_maritime, transport_maritime_reforme_2012,
-        transport_aerien, transport_aerien_reforme_2012,
-        transport_routier, transport_routier_reforme_2012,
-        transport_ferroviaire, transport_ferroviaire_reforme_2012,
-        carburants_lubrifiants,
-        # 08
-        communications, services_postaux,
-        # 09
-        loisirs_cuture, journaux_periodiques, livre, livre_reforme_2012, jeux_hasard,
-        services_culturels, services_culturels_reforme_2012,
-        services_recreatifs_sportifs, services_recreatifs_sportifs_reforme_2012,
-        # 10 Education
-        education,
-        # 11 Hotellerie restauration
-        hotellerie_restauration, cantines, service_hebergement,
-        consommation_boissons_alcoolisees,
-        restauration_sur_place, restauration_sur_place_reforme_2010, restauration_sur_place_reforme_2012,
-        restauration_a_emporter, restauration_a_emporter_reforme_2010, restauration_a_emporter_reforme_2012,
-        # 12
-        autres_biens_et_services,
-        protection_sociale_reforme_2000, protection_sociale_reforme_2012,
-        prostitution,
-        intermediation_financiere,
-        autres_assurances, assurance_transports, assurance_vie, assurance_maladie, assurance_habitation,
-        ]:
+            # 01
+            alimentation,
+            margarine, saindoux, confiserie,
+            # 02
+            alcools, vin, biere,
+            cigares, cigarettes, tabac_a_rouler, stupefiants, alcools_tabac_stupefiants_offerts,
+            # 03
+            habillement,
+            # 04
+            logement, eau_ordures_assainissement, eau_ordures_assainissement_reforme_2012, loyers,
+            # 05
+            ameublement, services_domestiques,
+            # 06
+            sante, pharmacie, parapharmacie, materiel_therapeutique,
+            # 07
+            transports,
+            transport_combine_passagers, transport_combine_passagers_reforme_2012,
+            transport_maritime, transport_maritime_reforme_2012,
+            transport_aerien, transport_aerien_reforme_2012,
+            transport_routier, transport_routier_reforme_2012,
+            transport_ferroviaire, transport_ferroviaire_reforme_2012,
+            carburants_lubrifiants,
+            # 08
+            communications, services_postaux,
+            # 09
+            loisirs_cuture, journaux_periodiques, livre, livre_reforme_2012, jeux_hasard,
+            services_culturels, services_culturels_reforme_2012,
+            services_recreatifs_sportifs, services_recreatifs_sportifs_reforme_2012,
+            # 10 Education
+            education,
+            # 11 Hotellerie restauration
+            hotellerie_restauration, cantines, service_hebergement,
+            consommation_boissons_alcoolisees,
+            restauration_sur_place, restauration_sur_place_reforme_2010, restauration_sur_place_reforme_2012,
+            restauration_a_emporter, restauration_a_emporter_reforme_2010, restauration_a_emporter_reforme_2012,
+            # 12
+            autres_biens_et_services,
+            protection_sociale_reforme_2000, protection_sociale_reforme_2012,
+            prostitution,
+            intermediation_financiere,
+            autres_assurances, assurance_transports, assurance_vie, assurance_maladie, assurance_habitation,
+            ]:
+
         coicop_nomenclature = apply_modification(coicop_nomenclature, **member)
 
     coicop_legislation = coicop_nomenclature.copy()
@@ -650,7 +652,6 @@ def test_coicop_legislation():
         return coicop_nomenclature.loc[coicop_nomenclature.categorie_fiscale.isnull()]
 
 
-
 if __name__ == "__main__":
     # extract_informations_from_coicop_to_categorie_fiscale()
     coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
@@ -661,4 +662,4 @@ if __name__ == "__main__":
     bdf_coicop_nomenclature = bdf(year = 2011)
     bdf_coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(bdf_coicop_nomenclature, to_csv = True)
 
-    print get_categorie_fiscale('11.1.1.1.1', year = 2010)
+    print(get_categorie_fiscale('11.1.1.1.1', year = 2010))

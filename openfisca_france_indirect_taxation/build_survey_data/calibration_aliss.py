@@ -85,7 +85,6 @@ def build_clean_aliss_data_frame():
         ]
 
     for household_type, age, revenus in triplets:
-        # print household_type, age, revenus
         selection = aliss.type.str.startswith(household_type)
         aliss.loc[selection, 'age'] = age
         aliss.loc[selection, 'revenus'] = revenus
@@ -119,7 +118,6 @@ def complete_input_data_frame(input_data_frame, drop_dom = True):
     input_data_frame.eval("age = 0 + (agepr > 30) + (agepr > 45) + (agepr > 60)",
                           #  inplace = True,  # Remove comment for pandas 0.18
                           )
-    # print input_data_frame.groupby('age')['pondmen'].sum() / input_data_frame.pondmen.sum()
 
     input_data_frame['revenus_kantar'] = (
         input_data_frame.rev_disponible.astype('float') / input_data_frame.ocde10_old.astype('float')
@@ -129,7 +127,6 @@ def complete_input_data_frame(input_data_frame, drop_dom = True):
     input_data_frame['vingtile'], values = weighted_quantiles(input_data_frame.revenus_kantar.astype('float'), labels,
         input_data_frame.pondmen.astype('float'), return_quantiles = True)
 
-    # print values
     input_data_frame['revenus'] = (
         0 +
         (input_data_frame.revenus_kantar >= values[3 - 1]).astype('int') +
@@ -191,8 +188,6 @@ def compute_expenditures(drop_dom = True):
     # aliss/kantar data
     aliss = build_clean_aliss_data_frame()
 
-    # print aliss.groupby('age')['tpoids'].sum() / aliss.tpoids.sum()
-
     aliss = add_poste_coicop(aliss)
     kept_variables = ['age', 'dt_c', 'dt_k', 'dt_f', 'nomk', 'nomc', 'poste_coicop', 'tpoids', 'revenus']
     aliss = aliss[kept_variables].copy()
@@ -202,9 +197,9 @@ def compute_expenditures(drop_dom = True):
             ).reset_index()
     aliss_expenditures.rename(columns = {0: "kantar_expenditures"}, inplace = True)
 
-    print "kantar_expenditures_total:", (aliss.tpoids * aliss.dt_k).sum() / 1e9
-    print "bdf_expenditures_total: ", (aliss.tpoids * aliss.dt_c).drop_duplicates().sum() / 1e9
-    print "population_kantar_total: ", aliss.tpoids.unique().sum()
+    print("kantar_expenditures_total:", (aliss.tpoids * aliss.dt_k).sum() / 1e9)
+    print("bdf_expenditures_total: ", (aliss.tpoids * aliss.dt_c).drop_duplicates().sum() / 1e9)
+    print("population_kantar_total: ", aliss.tpoids.unique().sum())
 
     aliss_expenditures['kantar_budget_share'] = aliss_expenditures.groupby(
         ['age', 'revenus'])['kantar_expenditures'].transform(
@@ -227,7 +222,7 @@ def compute_expenditures(drop_dom = True):
 
     # input_data_expenditures['bdf_budget_share'] = (
     #   input_data_expenditures.bdf_expenditures / input_data_expenditures.bdf_expenditures.sum())
-    print "bdf_expenditures_total: ", input_data_expenditures.bdf_expenditures.sum() / 1e9
+    print("bdf_expenditures_total: ", input_data_expenditures.bdf_expenditures.sum() / 1e9)
 
     input_data_expenditures['bdf_budget_share'] = input_data_expenditures.groupby(
         ['age', 'revenus'])['bdf_expenditures'].transform(
@@ -295,7 +290,7 @@ def compute_kantar_elasticities(compute = False):
     (nomf_nomk.nomk.value_counts() == 1).all()
     # nomf_by_nomk = nomf_nomk.set_index('nomk').to_dict()['nomf']
 
-    print nomf_nomk.nomf.value_counts(dropna = False)
+    print(nomf_nomk.nomf.value_counts(dropna = False))
 
     nomks_by_nomf = dict(
         (nomf_by_dirty_nomf.get(nomf), nomf_nomk.query('nomf == @nomf')['nomk'].unique())
@@ -387,7 +382,7 @@ def compute_kantar_elasticities(compute = False):
         nomk_cross_price_elasticity = nomk_cross_price_elasticity.combine_first(temp_nomk_cross_price_elasticity)
 
     # Some k-kprime elasticities are not found
-    print "{} k-kprime elasticities are not found".format(nomk_cross_price_elasticity.isnull().sum().sum())
+    print("{} k-kprime elasticities are not found".format(nomk_cross_price_elasticity.isnull().sum().sum()))
     nomk_cross_price_elasticity.fillna(0, inplace = True)
 
     nomk_cross_price_elasticity.to_csv(kantar_cross_price_elasticities_path)
@@ -482,9 +477,10 @@ def compute_expenditures_coefficient(reform_key = None):
 
         final_corrections = final_corrections.combine_first(correction.set_index(['age', 'revenus', 'nomk']))
 
-    return final_corrections[
-        ['expenditure_variation', 'tweeked_expenditure_variation', 'inelastic_expenditure_variation', 'taux', 'taux_reforme']
-        ].copy()
+    return final_corrections[[
+        'expenditure_variation', 'tweeked_expenditure_variation', 'inelastic_expenditure_variation', 'taux',
+        'taux_reforme'
+        ]].copy()
 
 
 def compute_adjusted_expenditures(reform_key = None):
@@ -497,10 +493,10 @@ def compute_adjusted_expenditures(reform_key = None):
     adjusted_expenditures['adjusted_kantar_budget_share'] = (
         adjusted_expenditures.kantar_budget_share * adjusted_expenditures.tweeked_expenditure_variation
         )
-#    adjusted_expenditures['adjusted_kantar_budget_share'] = adjusted_expenditures.groupby(
-#        ['age', 'revenus'])['adjusted_kantar_budget_share'].transform(
-#            lambda x: x / x.sum()
-#            )
+    #    adjusted_expenditures['adjusted_kantar_budget_share'] = adjusted_expenditures.groupby(
+    #        ['age', 'revenus'])['adjusted_kantar_budget_share'].transform(
+    #            lambda x: x / x.sum()
+    #            )
     adjusted_expenditures = build_aggregated_shares(
         adjusted_expenditures.reset_index(), kantar_prefix = 'adjusted_kantar'
         )
@@ -511,7 +507,7 @@ def compute_adjusted_expenditures(reform_key = None):
         # inplace = True
         )
 
-    return adjusted_expenditures  #, total_expenditures_variation
+    return adjusted_expenditures  # , total_expenditures_variation
 
 
 def get_adjusted_input_data_frame(reform_key = None, verbose = False):
@@ -539,14 +535,14 @@ def get_adjusted_input_data_frame(reform_key = None, verbose = False):
     for age, revenus, poste in iterator:
         selection = (input_data_frame.age == age) & (input_data_frame.revenus == revenus)
         if verbose:
-            print poste
+            print(poste)
             before = (
                 input_data_frame.loc[selection, poste] * input_data_frame.loc[selection, 'pondmen']
                 ).sum()
-            print 'before: ', before
-            print 'adjusted_bdf_budget_share', bdf_adjusted_expenditures.loc[
-                (age, revenus, poste), 'adjusted_bdf_budget_share']
-            print 'bdf_budget_share', bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share']
+            print('before: ', before)
+            print('adjusted_bdf_budget_share', bdf_adjusted_expenditures.loc[
+                (age, revenus, poste), 'adjusted_bdf_budget_share'])
+            print('bdf_budget_share', bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'])
 
         try:
             if bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'] != 0:
@@ -556,18 +552,18 @@ def get_adjusted_input_data_frame(reform_key = None, verbose = False):
                     input_data_frame.loc[selection, poste]
                     )
         except:
-            print bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share']
-            print bdf_adjusted_expenditures.loc[(age, revenus, poste)]
+            print(bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'])
+            print(bdf_adjusted_expenditures.loc[(age, revenus, poste)])
             raise
 
         if verbose:
-            print 'after/before: ', (
+            print('after/before: ', (
                 input_data_frame.loc[selection, poste] * input_data_frame.loc[selection, 'pondmen']
                 ).sum() / (before + 1) - 1
-
+                )
     return input_data_frame
 
 
 if __name__ == '__main__':
     input_data_frame = get_adjusted_input_data_frame(reform_key = 'tva_sociale')
-    print input_data_frame.columns[input_data_frame.isnull().any()]
+    print(input_data_frame.columns[input_data_frame.isnull().any()])

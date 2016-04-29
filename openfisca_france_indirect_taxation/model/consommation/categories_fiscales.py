@@ -109,7 +109,6 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
                     entity_class = Menages,
                     label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
                     )
-                print class_name.encode('utf-8')
             definitions_by_name.update(functions_by_name)
             type(class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
 

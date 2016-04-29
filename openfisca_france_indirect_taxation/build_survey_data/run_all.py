@@ -142,7 +142,7 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
 
     try:
         data_frame.reset_index(inplace = True)
-    except ValueError, e:
+    except ValueError as e:
         log.info('ignoring reset_index because {}'.format(e))
 
     # Remove duplicated colums causing bug with HDFStore
