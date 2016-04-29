@@ -186,6 +186,7 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     generate_additional_tva_variables(
         Reform = Reform,
         taux_by_categorie_fiscale = taux_by_categorie_fiscale,
+        tax_benefit_system = tax_benefit_system,
         )
 
     reform = Reform()
@@ -297,39 +298,46 @@ def build_updated_categorie_fiscale(reform_key, categories_fiscales_reform):
     return categories_fiscales_reform, taux_by_categorie_fiscale
 
 
-def depenses_new_tva_function_creator(categorie_fiscale = None, taux = None, year_start = None, year_stop = None):
-    start = date(year_start, 1, 1) if year_start is not None else None
-    stop = date(year_stop, 14, 31) if year_stop is not None else None
+def depenses_new_tva_function_creator(categorie_fiscale = None, taux = None):
     assert categorie_fiscale is not None
     assert taux is not None
 
-    @dated_function(start = start, stop = stop)
+    @dated_function(start = None, stop = None)
     def func(self, simulation, period, categorie_fiscale = categorie_fiscale, taux = taux):
         return period, (
             simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * (1 + taux)
             )
 
-    func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+    func.__name__ = "function"
     return func
 
 
-def new_tva_function_creator(categorie_fiscale = None, taux = None, year_start = None, year_stop = None):
-    start = date(year_start, 1, 1) if year_start is not None else None
-    stop = date(year_stop, 14, 31) if year_stop is not None else None
+def new_tva_function_creator(categorie_fiscale = None, taux = None):
     assert categorie_fiscale is not None
     assert taux is not None
 
-    @dated_function(start = start, stop = stop)
+    @dated_function(start = None, stop = None)
     def func(self, simulation, period, categorie_fiscale = categorie_fiscale, taux = taux):
         return period, (
             simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * taux
             )
 
-    func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+    func.__name__ = "function"
     return func
 
 
-def generate_additional_tva_variables(Reform = None, taux_by_categorie_fiscale = None):
+def new_tva_total_function_creator(categories_fiscales):
+    @dated_function(start = None, stop = None)
+    def func(self, simulation, period):
+        return period, sum(
+            simulation.calculate(categorie_fiscale, period) for categorie_fiscale in categories_fiscales
+            )
+
+    func.__name__ = "function"
+    return func
+
+
+def generate_additional_tva_variables(Reform = None, taux_by_categorie_fiscale = None, tax_benefit_system = None):
     for categorie_fiscale, taux in taux_by_categorie_fiscale.iteritems():
         depenses_new_tva_func = depenses_new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
         new_tva_func = new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
@@ -361,6 +369,21 @@ def generate_additional_tva_variables(Reform = None, taux_by_categorie_fiscale =
         except AssertionError as e:
             log.info(u'{} Fiscal category {} is not new : passing'.format(Reform.name, categorie_fiscale))
             pass
+
+    # tva_total variable creation
+    categories_fiscales = [
+        categorie_fiscale
+        for categorie_fiscale in taux_by_categorie_fiscale.keys()
+        if categorie_fiscale.startswith('tva_taux_')
+        ]
+    new_tva_total_func = new_tva_total_function_creator(categories_fiscales)
+    definitions_by_name = dict(
+        reference = tax_benefit_system.column_by_name[u'tva_total'.encode('utf-8')],
+        function = new_tva_total_func,
+        )
+    type(u'tva_total'.encode('utf-8'), (Reform.Variable,), definitions_by_name)
+    del definitions_by_name
+
 
 if __name__ == '__main__':
     pass

@@ -84,7 +84,7 @@ tva_by_categorie_primaire = dict(
 
 def get_tva(categorie_fiscale):
     tva = tva_by_categorie_primaire.get(categorie_fiscale, categorie_fiscale)
-    if tva[:4] == 'tva_':
+    if tva in ['tva_taux_plein', 'tva_taux_intermediaire', 'tva_taux_reduit', 'tva_taux_super_reduit']:
         return tva
     else:
         return None
