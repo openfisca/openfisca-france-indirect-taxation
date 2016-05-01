@@ -164,21 +164,28 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                     year_start = year_start, year_stop = year_stop)
                 return func
 
-            elif Reform is not None and categories_fiscales is not None:
+            elif Reform is not None and categories_fiscales is not None and taux_by_categorie_fiscale is not None:
                 categorie_fiscale_by_poste = dict(
                     (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
                     for poste in postes_coicop)
 
                 @dated_function(start = start, stop = stop)
                 def func(self, simulation, period, categorie_fiscale_by_poste = categorie_fiscale_by_poste):
-
-                    def taux(poste):
-                        return taux_by_categorie_fiscale.get(categorie_fiscale_by_poste[poste], 0)
-
+                    print postes_coicop
                     poste_agrege = sum(simulation.calculate(
                         'depenses_ht_poste_' + slugify(poste, separator = u'_'), period
                         ) * (
-                        1 + taux_by_categorie_fiscale.get(categorie_fiscale_by_poste[poste], 0))
+                        1 + taux_by_categorie_fiscale.get(
+                            categorie_fiscale_by_poste[poste],
+                            taux_by_categorie_fiscale.get(
+                                tva_by_categorie_primaire.get(
+                                    categorie_fiscale_by_poste[poste],
+                                    ''
+                                    ),
+                                0,
+                                )
+                            )
+                        )
                         for poste in postes_coicop
                         )
                     return period, poste_agrege
