@@ -150,7 +150,7 @@ def get_poste_categorie_fiscale(poste_coicop, categories_fiscales = None, start 
 
 
 def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales = None, Reform = None,
-        year_start = None, year_stop = None):
+        taux_by_categorie_fiscale = None, year_start = None, year_stop = None):
         start = date(year_start, 1, 1) if year_start is not None else None
         stop = date(year_stop, 12, 31) if year_stop is not None else None
         if len(postes_coicop) != 0:
@@ -173,15 +173,12 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                 def func(self, simulation, period, categorie_fiscale_by_poste = categorie_fiscale_by_poste):
 
                     def taux(poste):
-                        tva = get_tva(categorie_fiscale_by_poste[poste])
-                        if tva is not None:
-                            return simulation.legislation_at(period.start).imposition_indirecte.tva[tva[4:]]
-                        else:
-                            return 0
+                        return taux_by_categorie_fiscale.get(categorie_fiscale_by_poste[poste], 0)
 
                     poste_agrege = sum(simulation.calculate(
                         'depenses_ht_poste_' + slugify(poste, separator = u'_'), period
-                        ) * (1 + taux(poste))
+                        ) * (
+                        1 + taux_by_categorie_fiscale.get(categorie_fiscale_by_poste[poste], 0))
                         for poste in postes_coicop
                         )
                     return period, poste_agrege

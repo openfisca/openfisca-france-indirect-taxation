@@ -8,11 +8,9 @@ import os
 import pandas as pd
 import pkg_resources
 
-from biryani.strings import slugify
-
 from openfisca_core import reforms
 from openfisca_core.columns import FloatCol
-from openfisca_core.formulas import dated_function, DatedVariable
+from openfisca_core.formulas import dated_function
 
 from openfisca_france_indirect_taxation.model.base import get_legislation_data_frames, Menages
 
@@ -180,6 +178,7 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     generate_postes_agreges_variables(
         categories_fiscales = categories_fiscales,
         Reform = Reform,
+        taux_by_categorie_fiscale = taux_by_categorie_fiscale,
         tax_benefit_system = tax_benefit_system,
         )  # Dépenses taxes comprises des postes agrégés
     taux_by_categorie_fiscale = taux_by_categorie_fiscale if taux_by_categorie_fiscale is not None else dict()
@@ -367,6 +366,7 @@ def generate_additional_tva_variables(Reform = None, taux_by_categorie_fiscale =
             log.info(u'{} Created new fiscal category {}'.format(Reform.name, categorie_fiscale))
 
         except AssertionError as e:
+            log.info(e)
             log.info(u'{} Fiscal category {} is not new : passing'.format(Reform.name, categorie_fiscale))
             pass
 
