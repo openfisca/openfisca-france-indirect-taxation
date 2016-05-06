@@ -24,7 +24,8 @@ for reforme in ['taxes_carburants', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2
     simulated_variables = [
         'difference_contribution_energie_{}'.format(reforme),
         'depenses_energies',
-        'rev_disp_loyerimput'
+        'rev_disp_loyerimput',
+        'somme_coicop12'
         ]
 
     if reforme[:3] != 'cce':
@@ -52,20 +53,17 @@ for reforme in ['taxes_carburants', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2
                 survey_scenario.compute_pivot_table(values = [values], columns = ['{}'.format(category)])
                 ])
         df = pivot_table.T
-        df['Additional contribution on TICPE - energy expenditures'] = \
-            df['difference_contribution_energie_{}'.format(reforme)] / df['depenses_energies']
+        df['Additional effort rate on TICPE reform - expenditures'] = \
+            df['difference_contribution_energie_{}'.format(reforme)] / df['somme_coicop12']
         df['Additional effort rate on TICPE reform - income'] = \
             df['difference_contribution_energie_{}'.format(reforme)] / df['rev_disp_loyerimput']
-        df.rename(
-            columns = {'difference_contribution_energie_{}'.format(reforme): 'Cost of the reform born by households'},
-            inplace = True)
         save_dataframe_to_graph(
-            df, 'Contributions_reforme/contribution_additionnelles_reforme_{0}_{1}.csv'.format(reforme, category)
+            df, 'Contributions_reforme/Before_redistribution/contribution_additionnelles_reforme_{0}_{1}.csv'.format(reforme, category)
             )
 
         # Réalisation de graphiques
-        graph_builder_bar(df['Cost of the reform born by households'])
+        graph_builder_bar(df['difference_contribution_energie_{}'.format(reforme)])
         graph_builder_line_percent(
-            df[['Additional contribution on TICPE - energy expenditures',
+            df[['Additional effort rate on TICPE reform - expenditures',
             'Additional effort rate on TICPE reform - income']]
             )

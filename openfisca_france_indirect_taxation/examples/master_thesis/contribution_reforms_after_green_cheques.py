@@ -66,7 +66,8 @@ for reforme in ['taxes_carburants', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2
 
         save_dataframe_to_graph(
             df[u'Cost of the reform after green cheques'],
-            'Contributions_reforme/contribution_{0}_apres_cheques_verts_by_{1}.csv'.format(reforme, category)
+            'Contributions_reforme/Green_cheques/contribution_{0}_apres_cheques_verts_by_{1}.csv'.format(reforme,
+            category)
             )
 
         # Réalisation de graphiques
