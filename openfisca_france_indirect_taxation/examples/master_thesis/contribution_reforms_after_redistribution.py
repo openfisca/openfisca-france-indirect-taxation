@@ -23,7 +23,8 @@ del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 for reforme in ['taxes_carburants', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2016']:
     simulated_variables = [
         'difference_contribution_totale_{}_tva_plein_reduit_super_reduit'.format(reforme),
-        'difference_contribution_totale_{}_tva_plein'.format(reforme)
+        'difference_contribution_totale_{}_tva_plein'.format(reforme),
+        'pondmen'
         ]
 
     if reforme[:3] != 'cce':
@@ -57,3 +58,20 @@ for reforme in ['taxes_carburants', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2
 
         # Réalisation de graphiques
         graph_builder_bar(df)
+
+
+        df_by_entity = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
+        menages = df_by_entity['menages']
+
+        sum_reduit = (
+            menages['difference_contribution_totale_{}_tva_plein_reduit_super_reduit'.format(reforme)] *
+            menages['pondmen']
+            ).sum()
+
+        sum_plein = (
+            menages['difference_contribution_totale_{}_tva_plein'.format(reforme)] *
+            menages['pondmen']
+            ).sum()
+
+        print reforme, sum_reduit / menages['pondmen'].sum()
+        print reforme, sum_plein / menages['pondmen'].sum()
