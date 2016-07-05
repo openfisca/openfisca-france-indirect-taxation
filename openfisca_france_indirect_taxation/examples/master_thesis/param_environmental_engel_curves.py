@@ -16,13 +16,18 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 
 simulated_variables = [
-    'rev_disp_loyerimput',
+    'depenses_energies_logement',
     'emissions_CO2_energies',
+    'poste_coicop_452',
+    'poste_coicop_453',
+    'poste_coicop_722',
+    'rev_disp_loyerimput',
     'ocde10',
-    'age_group_pr',
     'strate_agrege',
+    'vag',
     'situacj',
     'situapr',
+    'age_group_pr'
     ]
 
 year = 2014
@@ -40,25 +45,36 @@ survey_scenario = SurveyScenario.create(
 df_by_entity = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
 menages = df_by_entity['menages']
 
-menages = menages.query('rev_disp_loyerimput > 1000')
-menages['rev_disp_loyerimput2'] = menages['rev_disp_loyerimput'] ** 2
-menages['situa_cj'] = (1 * (menages['situacj'] < 4))
-menages['situa_pr'] = (1 * (menages['situapr'] < 4))
-del menages['situacj'], menages['situapr']
-menages['age_group_pr2'] = menages['age_group_pr'] ** 2
+menages['rev_disp_loyerimput_2'] = menages['rev_disp_loyerimput'] ** 2
+menages['age_group_pr_2'] = menages['age_group_pr'] ** 2
+menages['alone'] = 0 + (1 * menages['situacj'] == 0)
+menages['occupe_both'] = (1 * (menages['situapr'] < 4)) * (1 * (menages['situacj'] < 4))
+menages['fioul'] = 0 + (1 * menages['poste_coicop_453'] > 0)
+menages['gaz'] = 0 + (1 * menages['poste_coicop_452'] > 0)
+
+for i in range(23, 29):
+    menages['vag_{}'.format(i)] = 0
+    menages.loc[menages['vag'] == i, 'vag_{}'.format(i)] = 1
+
+for i in range(1, 4):
+    menages['strate_{}'.format(i)] = 0
+    menages.loc[menages['strate_agrege'] == i, 'strate_{}'.format(i)] = 1
 
 reg_emissions = smf.ols(formula = 'emissions_CO2_energies ~ \
-    rev_disp_loyerimput + rev_disp_loyerimput2 + ocde10 + strate_agrege + age_group_pr + \
-    age_group_pr2 + situa_cj + situa_pr',
+    rev_disp_loyerimput + rev_disp_loyerimput_2 + ocde10 + strate_1 + strate_3 + age_group_pr + \
+    age_group_pr_2 + alone + occupe_both + gaz + fioul + vag_23 + vag_24 + vag_25 + vag_26 + vag_27',
     data = menages).fit()
 print reg_emissions.summary()
 
 ocde10 = menages['ocde10'].mean()
-strate_agrege = menages['strate_agrege'].mean()
+strate_1 = menages['strate_1'].mean()
+strate_3 = menages['strate_3'].mean()
 age_group_pr = menages['age_group_pr'].mean()
-age_group_pr2 = menages['age_group_pr2'].mean()
-situa_cj = menages['situa_cj'].mean()
-situa_pr = menages['situa_pr'].mean()
+age_group_pr_2 = menages['age_group_pr_2'].mean()
+alone = menages['alone'].mean()
+occupe_both = menages['occupe_both'].mean()
+gaz = menages['gaz'].mean()
+fioul = menages['fioul'].mean()
 
 liste_revenus = numpy.arange(1000, 500000, 500)
 simulation_menages = pandas.DataFrame(liste_revenus)
@@ -66,11 +82,11 @@ simulation_menages.rename(columns = {0: 'revenu_disponible'}, inplace = True)
 simulation_menages['revenu_disponible'] = simulation_menages['revenu_disponible'].astype(numpy.int64)
 simulation_menages['revenu_disponible2'] = (simulation_menages['revenu_disponible'] ** 2)
 
-simulation_menages['emissions'] = -2777.7559 + (
-    (1670.0499 * ocde10 + 951.3785 * strate_agrege + 969.5029 * age_group_pr +
-    -62.6559 * age_group_pr2 + -406.3679 * situa_cj + 453.0660 * situa_pr) +
-    0.0450 * simulation_menages['revenu_disponible'] +
-    -1.985e-08 * (simulation_menages['revenu_disponible2'])
+simulation_menages['emissions'] = -233.6354 + (
+    (873.8949 * ocde10 -1425.8345 * strate_1 + 172.7004 * strate_3 + 538.9584 * age_group_pr +
+    -50.8012 * age_group_pr_2 + -946.6144 * alone + 479.9245 * occupe_both + 4344.2562 * gaz + 8265.1751 * fioul) +
+    0.0403 * simulation_menages['revenu_disponible'] +
+    -1.715e-08 * (simulation_menages['revenu_disponible2'])
     )
 
 save_dataframe_to_graph(

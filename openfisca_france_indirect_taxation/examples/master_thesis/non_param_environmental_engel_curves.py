@@ -31,6 +31,10 @@ menages = df_by_entity['menages']
 
 menages = menages.query('rev_disp_loyerimput > 1000')
 
+save_dataframe_to_graph(
+    menages, 'Emissions/kernel_eec.csv'
+    )
+
 menages['rank'] = menages['rev_disp_loyerimput'].argsort().argsort()
 menages['quantile'] = menages['rank'] / len(menages)
 del menages['rank']
