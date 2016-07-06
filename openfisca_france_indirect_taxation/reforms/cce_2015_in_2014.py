@@ -17,97 +17,72 @@ from ..model.consommation import emissions_co2, quantites_energie
 
 def build_reform(tax_benefit_system):
     Reform = reforms.make_reform(
-        key = 'taxe_carbone',
-        name = u"Réforme de l'imposition indirecte des énergies selon leur contenu carbone",
+        key = 'cce_2015_in_2014',
+        name = u"Augmentation des taux de la contribution climat energie aux taux de 2015 sur les données de 2014",
         reference = tax_benefit_system,
         )
 
-    class depenses_diesel_ajustees_taxe_carbone(Reform.Variable):
+
+    class depenses_diesel_ajustees_cce_2014_2015(Reform.Variable):
         column = FloatCol
         entity_class = Menages
-        label = u"Dépenses en diesel après réaction à la réforme - taxe carbone"
+        label = u"Dépenses en diesel après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2015"
 
         def function(self, simulation, period):
             depenses_diesel = simulation.calculate('depenses_diesel', period)
             diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
-            reforme_diesel = simulation.legislation_at(period.start).taxe_carbone.diesel
+            reforme_diesel = simulation.legislation_at(period.start).cce_2015_in_2014.diesel_2014_2015
             carburants_elasticite_prix = simulation.calculate('elas_price_1_1')
-            depenses_diesel_ajustees_taxe_carbone = \
+            depenses_diesel_ajustees_cce_2014_2015 = \
                 depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel / diesel_ttc)
 
-            return period, depenses_diesel_ajustees_taxe_carbone
+            return period, depenses_diesel_ajustees_cce_2014_2015
 
 
-    class depenses_electricite_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_essence_ajustees_cce_2014_2015(Reform.Variable):
         column = FloatCol
         entity_class = Menages
-        label = u"Dépenses en électricité après réaction à la réforme - taxe carbone"
-
-        def function(self, simulation, period):
-            depenses_electricite_variables = simulation.calculate('depenses_electricite_variables', period)
-            depenses_electricite_prix_unitaire = simulation.calculate('depenses_electricite_prix_unitaire', period)
-            reforme_electricite = simulation.legislation_at(period.start).taxe_carbone.electricite
-            electricite_elasticite_prix = simulation.calculate('elas_price_2_2')
-            depenses_electricite_ajustees_variables = (
-                depenses_electricite_variables *
-                (1 + (1 + electricite_elasticite_prix) * reforme_electricite / depenses_electricite_prix_unitaire)
-                )
-            depenses_electricite_tarif_fixe = simulation.calculate('depenses_electricite_tarif_fixe', period)
-            min_tarif_fixe = depenses_electricite_tarif_fixe.min()
-            depenses_electricite_ajustees = depenses_electricite_ajustees_variables + depenses_electricite_tarif_fixe
-
-            # We do not want to input the expenditure of the contract for those who consume nothing
-            poste_coicop_451 = simulation.calculate('poste_coicop_451', period)
-            depenses_electricite_ajustees = (
-                depenses_electricite_ajustees * (poste_coicop_451 > min_tarif_fixe) +
-                poste_coicop_451 * (poste_coicop_451 < min_tarif_fixe)
-                )
-
-            return period, depenses_electricite_ajustees
-
-
-    class depenses_essence_ajustees_taxe_carbone(Reform.Variable):
-        column = FloatCol
-        entity_class = Menages
-        label = u"Dépenses en essence après réaction à la réforme - taxe carbone"
+        label = u"Dépenses en essence après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2015"
 
         def function(self, simulation, period):
             depenses_essence = simulation.calculate('depenses_essence', period)
             super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
-            reforme_essence = simulation.legislation_at(period.start).taxe_carbone.essence
+            reforme_essence = simulation.legislation_at(period.start).cce_2015_in_2014.essence_2014_2015
             carburants_elasticite_prix = simulation.calculate('elas_price_1_1')
-            depenses_essence_ajustees_taxe_carbone = \
+            depenses_essence_ajustees_cce_2014_2015 = \
                 depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
 
-            return period, depenses_essence_ajustees_taxe_carbone
+            return period, depenses_essence_ajustees_cce_2014_2015
 
 
-    class depenses_fioul_domestique_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_fioul_domestique_ajustees_cce_2014_2015(Reform.Variable):
         column = FloatCol
         entity_class = Menages
-        label = u"Dépenses en fioul domestique après réaction à la réforme - taxe carbone"
+        label = u"Dépenses en fioul après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2015"
 
         def function(self, simulation, period):
             depenses_fioul = simulation.calculate('poste_coicop_453', period)
             prix_fioul_ttc = \
                 simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
-            reforme_fioul = simulation.legislation_at(period.start).taxe_carbone.fioul_domestique
+            reforme_fioul = \
+                simulation.legislation_at(period.start).cce_2015_in_2014.fioul_domestique_2014_2015
             fioul_elasticite_prix = simulation.calculate('elas_price_2_2')
-            depenses_fioul_ajustees_taxe_carbone = \
+            depenses_fioul_ajustees_cce_2014_2015 = \
                 depenses_fioul * (1 + (1 + fioul_elasticite_prix) * reforme_fioul / prix_fioul_ttc)
 
-            return period, depenses_fioul_ajustees_taxe_carbone
+            return period, depenses_fioul_ajustees_cce_2014_2015
 
 
-    class depenses_gaz_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_gaz_ajustees_cce_2014_2015(Reform.Variable):
         column = FloatCol
         entity_class = Menages
-        label = u"Dépenses en gaz après réaction à la réforme - taxe carbone"
+        label = u"Dépenses en gaz après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2015"
 
         def function(self, simulation, period):
             depenses_gaz_variables = simulation.calculate('depenses_gaz_variables', period)
             depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
-            reforme_gaz = simulation.legislation_at(period.start).taxe_carbone.gaz
+            reforme_gaz = \
+                simulation.legislation_at(period.start).cce_2015_in_2014.gaz_2014_2015
             gaz_elasticite_prix = simulation.calculate('elas_price_2_2')
             depenses_gaz_ajustees_variables = \
                 depenses_gaz_variables * (1 + (1 + gaz_elasticite_prix) * reforme_gaz / depenses_gaz_prix_unitaire)
@@ -119,15 +94,17 @@ def build_reform(tax_benefit_system):
             return period, depenses_gaz_ajustees
 
 
-    class depenses_tva_taux_plein_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_tva_taux_plein_ajustees_cce_2014_2015(Reform.Variable):
         column = FloatCol
         entity_class = Menages
-        label = u"Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme - taxe carbone"
+        label = u"Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme - cce 2014-2015"
 
         def function(self, simulation, period):
             depenses_tva_taux_plein = simulation.calculate('depenses_tva_taux_plein', period)
             taux_plein = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-            abaissement_tva_taux_plein = simulation.legislation_at(period.start).taxe_carbone.abaissement_tva_taux_plein
+            abaissement_tva_taux_plein = (
+                simulation.legislation_at(period.start).cce_2015_in_2014.abaissement_tva_taux_plein_2014_2015
+                )
             elasticite = simulation.calculate('elas_price_3_3')
             depenses_tva_taux_plein_ajustees = \
                 depenses_tva_taux_plein * (1 + (1 + elasticite) * (- abaissement_tva_taux_plein) / (1 + taux_plein))
@@ -135,15 +112,17 @@ def build_reform(tax_benefit_system):
             return period, depenses_tva_taux_plein_ajustees
 
 
-    class depenses_tva_taux_plein_bis_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_tva_taux_plein_bis_ajustees_cce_2014_2015(Reform.Variable):
         column = FloatCol
         entity_class = Menages
-        label = u"Dépenses sur les biens assujetis à la TVA à taux plein bis après réaction à la réforme - taxe carbone"
+        label = u"Dépenses sur les biens assujetis à la TVA à taux plei bis après réaction à la réforme - cce 2014-2015"
 
         def function(self, simulation, period):
             depenses_tva_taux_plein = simulation.calculate('depenses_tva_taux_plein', period)
             taux_plein = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-            abaissement_tva_taux_plein_bis = simulation.legislation_at(period.start).taxe_carbone.abaissement_tva_taux_plein_bis
+            abaissement_tva_taux_plein_bis = (
+                simulation.legislation_at(period.start).cce_2015_in_2014.abaissement_tva_taux_plein_bis_2014_2015
+                )
             elasticite = simulation.calculate('elas_price_3_3')
             depenses_tva_taux_plein_bis_ajustees = (
                 depenses_tva_taux_plein *
@@ -153,15 +132,17 @@ def build_reform(tax_benefit_system):
             return period, depenses_tva_taux_plein_bis_ajustees
 
 
-    class depenses_tva_taux_reduit_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_tva_taux_reduit_ajustees_cce_2014_2015(Reform.Variable):
         column = FloatCol
         entity_class = Menages
-        label = u"Dépenses sur les biens assujetis à la TVA à taux reduit après réaction à la réforme - taxe carbone"
+        label = u"Dépenses sur les biens assujetis à la TVA à taux reduit après réaction à la réforme - cce 2014-2015"
 
         def function(self, simulation, period):
             depenses_tva_taux_reduit = simulation.calculate('depenses_tva_taux_reduit', period)
             taux_reduit = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_reduit
-            abaissement_tva_taux_reduit = simulation.legislation_at(period.start).taxe_carbone.abaissement_tva_taux_reduit
+            abaissement_tva_taux_reduit = (
+                simulation.legislation_at(period.start).cce_2015_in_2014.abaissement_tva_taux_reduit_2014_2015
+                )
             elasticite = simulation.calculate('elas_price_3_3')
             depenses_tva_taux_reduit_ajustees = \
                 depenses_tva_taux_reduit * (1 + (1 + elasticite) * (- abaissement_tva_taux_reduit) / (1 + taux_reduit))
@@ -169,15 +150,17 @@ def build_reform(tax_benefit_system):
             return period, depenses_tva_taux_reduit_ajustees
 
 
-    class depenses_tva_taux_super_reduit_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_tva_taux_super_reduit_ajustees_cce_2014_2015(Reform.Variable):
         column = FloatCol
         entity_class = Menages
-        label = u"Dépenses sur les biens assujetis à la TVA à taux super reduit après réaction à la réforme - taxe carbone"
+        label = u"Dépenses sur les biens assujetis à la TVA à taux super reduit après réaction à la réforme - cce 2014-2015"
 
         def function(self, simulation, period):
             depenses_tva_taux_super_reduit = simulation.calculate('depenses_tva_taux_super_reduit', period)
             taux_super_reduit = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_super_reduit
-            abaissement_tva_taux_super_reduit = simulation.legislation_at(period.start).taxe_carbone.abaissement_tva_taux_super_reduit
+            abaissement_tva_taux_super_reduit = (
+                simulation.legislation_at(period.start).cce_2015_in_2014.abaissement_tva_taux_super_reduit_2014_2015
+                )
             elasticite = simulation.calculate('elas_price_3_3')
             depenses_tva_taux_super_reduit_ajustees = \
                 depenses_tva_taux_super_reduit * (1 + (1 + elasticite) * (- abaissement_tva_taux_super_reduit) / (1 + taux_super_reduit))
@@ -200,7 +183,7 @@ def build_reform(tax_benefit_system):
             except:
                 accise_diesel_ticpe = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
 
-            reforme_diesel = simulation.legislation_at(period.start).taxe_carbone.diesel
+            reforme_diesel = simulation.legislation_at(period.start).cce_2015_in_2014.diesel_2014_2015
             accise_diesel_ticpe_ajustee = accise_diesel_ticpe + reforme_diesel
             prix_diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
             prix_diesel_ttc_ajuste = prix_diesel_ttc + reforme_diesel
@@ -209,11 +192,11 @@ def build_reform(tax_benefit_system):
                 (prix_diesel_ttc_ajuste - accise_diesel_ticpe_ajustee * (1 + taux_plein_tva))
                 )
 
-            depenses_diesel_ajustees_taxe_carbone = \
-                simulation.calculate('depenses_diesel_ajustees_taxe_carbone', period)
+            depenses_diesel_ajustees_cce_2014_2015 = \
+                simulation.calculate('depenses_diesel_ajustees_cce_2014_2015', period)
             depenses_diesel_htva_ajustees = (
-                depenses_diesel_ajustees_taxe_carbone -
-                tax_from_expense_including_tax(depenses_diesel_ajustees_taxe_carbone, taux_plein_tva)
+                depenses_diesel_ajustees_cce_2014_2015 -
+                tax_from_expense_including_tax(depenses_diesel_ajustees_cce_2014_2015, taux_plein_tva)
                 )
             montant_diesel_ticpe_ajuste = (
                 tax_from_expense_including_tax(depenses_diesel_htva_ajustees, taux_implicite_diesel_ajuste)
@@ -223,7 +206,7 @@ def build_reform(tax_benefit_system):
 
 
     class emissions_CO2_carburants(Reform.Variable):
-        label = u"Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
+        label = u"Emissions de CO2 des ménages via leur conso de carburants après réforme - cce 2014-2015 - en kg de CO2"
         reference = emissions_co2.emissions_CO2_carburants
 
         def function(self, simulation, period):
@@ -242,7 +225,7 @@ def build_reform(tax_benefit_system):
 
 
     class emissions_CO2_energies(Reform.Variable):
-        label = u"Emissions de CO2 des ménages via leur conso d'énergies après taxe carbone, en kg de CO2"
+        label = u"Emissions de CO2 des ménages via leur conso d'énergies après hausse cce 14-15, en kg de CO2"
         reference = emissions_co2.emissions_CO2_energies
 
         def function(self, simulation, period):
@@ -259,21 +242,8 @@ def build_reform(tax_benefit_system):
             return period, emissions_energies_ajustees
 
 
-    class emissions_CO2_electricite(Reform.Variable):
-        label = u"Emissions de CO2 des ménages via leur consommation d'électricité après réforme, en kg de CO2"
-        reference = emissions_co2.emissions_CO2_electricite
-
-        def function(self, simulation, period):
-            quantites_electricite_ajustees = simulation.calculate('quantites_electricite_selon_compteur_ajustees_taxe_carbone', period)
-            emissions_eletricite = \
-                simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_electricite
-            emissions_ajustees = quantites_electricite_ajustees * emissions_eletricite
-
-            return period, emissions_ajustees
-
-
     class emissions_CO2_fioul_domestique(Reform.Variable):
-        label = u"Emissions de CO2 des ménages via leur consommation de fioul après réforme, en kg de CO2"
+        label = u"Emissions de CO2 des ménages via leur conso de fioul après réforme - hausse cce 2014-2015 - en kg de CO2"
         reference = emissions_co2.emissions_CO2_fioul_domestique
 
         def function(self, simulation, period):
@@ -286,11 +256,11 @@ def build_reform(tax_benefit_system):
 
 
     class emissions_CO2_gaz(Reform.Variable):
-        label = u"Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2"
+        label = u"Emissions de CO2 des ménages via leur conso de gaz après réforme - hausse cce 2014-2015 - en kg de CO2"
         reference = emissions_co2.emissions_CO2_gaz
 
         def function(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_taxe_carbone', period)
+            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_cce_2014_2015', period)
             emissions_gaz = \
                 simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz
             emissions_ajustees = quantites_gaz_ajustees * emissions_gaz
@@ -330,7 +300,7 @@ def build_reform(tax_benefit_system):
 
 
     class fioul_domestique_ticpe(Reform.Variable):
-        label = u"Calcul du montant de TICPE sur le fioul domestique après réforme - taxe carbone"
+        label = u"Calcul du montant de TICPE sur le fioul domestique après réforme - hausse cce 2014-2015"
         reference = ticpe.fioul_domestique_ticpe
 
         def function(self, simulation, period):
@@ -339,7 +309,8 @@ def build_reform(tax_benefit_system):
             accise_fioul_ticpe = (
                 simulation.legislation_at(period.start).imposition_indirecte.ticpe.gazole_fioul_domestique_hectolitre / 100
                 )
-            reforme_fioul = simulation.legislation_at(period.start).taxe_carbone.fioul_domestique
+            reforme_fioul = \
+                simulation.legislation_at(period.start).cce_2015_in_2014.fioul_domestique_2014_2015
             accise_fioul_ajustee = accise_fioul_ticpe + reforme_fioul
             prix_fioul_ttc = \
                 simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
@@ -350,7 +321,7 @@ def build_reform(tax_benefit_system):
                 (prix_fioul_ttc_ajuste - accise_fioul_ajustee * (1 + taux_plein_tva))
                 )
 
-            depenses_fioul_ajustees = simulation.calculate('depenses_fioul_domestique_ajustees_taxe_carbone', period)
+            depenses_fioul_ajustees = simulation.calculate('depenses_fioul_domestique_ajustees_cce_2014_2015', period)
             depenses_fioul_ajustees_htva = \
                 depenses_fioul_ajustees - tax_from_expense_including_tax(depenses_fioul_ajustees, taux_plein_tva)
             montant_fioul_ticpe_ajuste = \
@@ -360,141 +331,121 @@ def build_reform(tax_benefit_system):
 
 
     class quantites_diesel(Reform.Variable):
-        label = u"Quantités de diesel consommées après la réforme - taxe carbone "
+        label = u"Quantités de diesel consommées après la réforme - contribution climat énergie, hausse de 2014 à 2015"
         reference = quantites_energie.quantites_diesel
 
         def function(self, simulation, period):
-            depenses_diesel_ajustees_taxe_carbone = \
-                simulation.calculate('depenses_diesel_ajustees_taxe_carbone', period)
+            depenses_diesel_ajustees_cce_2014_2015 = \
+                simulation.calculate('depenses_diesel_ajustees_cce_2014_2015', period)
             diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
-            reforme_diesel = simulation.legislation_at(period.start).taxe_carbone.diesel
-            quantites_diesel_ajustees = depenses_diesel_ajustees_taxe_carbone / (diesel_ttc + reforme_diesel) * 100
+            reforme_diesel = simulation.legislation_at(period.start).cce_2015_in_2014.diesel_2014_2015
+            quantites_diesel_ajustees = depenses_diesel_ajustees_cce_2014_2015 / (diesel_ttc + reforme_diesel) * 100
 
             return period, quantites_diesel_ajustees
 
 
     class quantites_fioul_domestique(Reform.Variable):
-        label = u"Quantités de fioul domestique consommées après la réforme - taxe carbone "
+        label = u"Quantités de fioul consommées après la réforme - contribution climat énergie, hausse de 2014 à 2015 "
         reference = quantites_energie.quantites_fioul_domestique
 
         def function(self, simulation, period):
-            depenses_fioul_ajustees_taxe_carbone = \
-                simulation.calculate('depenses_fioul_domestique_ajustees_taxe_carbone', period)
+            depenses_fioul_ajustees_cce_2014_2015 = \
+                simulation.calculate('depenses_fioul_domestique_ajustees_cce_2014_2015', period)
             prix_fioul_ttc = \
                 simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
-            reforme_fioul = simulation.legislation_at(period.start).taxe_carbone.fioul_domestique
-            quantites_fioul_ajustees = depenses_fioul_ajustees_taxe_carbone / (prix_fioul_ttc + reforme_fioul)
+            reforme_fioul = \
+                simulation.legislation_at(period.start).cce_2015_in_2014.fioul_domestique_2014_2015
+            quantites_fioul_ajustees = depenses_fioul_ajustees_cce_2014_2015 / (prix_fioul_ttc + reforme_fioul)
 
             return period, quantites_fioul_ajustees
 
 
-    class quantites_gaz_contrat_optimal_ajustees_taxe_carbone(Reform.Variable):
+    class quantites_gaz_contrat_optimal_ajustees_cce_2014_2015(Reform.Variable):
         column = FloatCol
         entity_class = Menages
-        label = u"Quantités de gaz consommées après la réforme - taxe carbone"
+        label = u"Quantités de gaz consommées après la réforme - contribution climat énergie, hausse de 2014 à 2015"
 
         def function(self, simulation, period):
-            depenses_gaz_ajustees_taxe_carbone = simulation.calculate('depenses_gaz_ajustees_taxe_carbone', period)
+            depenses_gaz_ajustees_cce_2014_2015 = simulation.calculate('depenses_gaz_ajustees_cce_2014_2015', period)
             depenses_gaz_tarif_fixe = simulation.calculate('depenses_gaz_tarif_fixe', period)
-            depenses_gaz_ajustees_variables = depenses_gaz_ajustees_taxe_carbone - depenses_gaz_tarif_fixe
+            depenses_gaz_ajustees_variables = depenses_gaz_ajustees_cce_2014_2015 - depenses_gaz_tarif_fixe
 
             depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
-            reforme_gaz = simulation.legislation_at(period.start).taxe_carbone.gaz
+            reforme_gaz = \
+                simulation.legislation_at(period.start).cce_2015_in_2014.gaz_2014_2015
 
             quantites_gaz_ajustees = depenses_gaz_ajustees_variables / (depenses_gaz_prix_unitaire + reforme_gaz)
 
             return period, quantites_gaz_ajustees
 
 
-    class quantites_electricite_selon_compteur_ajustees_taxe_carbone(Reform.Variable):
-        column = FloatCol
-        entity_class = Menages
-        label = u"Quantités d'électricité consommées après la réforme - taxe carbone"
-
-        def function(self, simulation, period):
-            depenses_electricite_ajustees_taxe_carbone = \
-                simulation.calculate('depenses_electricite_ajustees_taxe_carbone', period)
-            depenses_electricite_tarif_fixe = simulation.calculate('depenses_electricite_tarif_fixe', period)
-            depenses_electricite_ajustees_variables = \
-                depenses_electricite_ajustees_taxe_carbone - depenses_electricite_tarif_fixe
-
-            depenses_electricite_prix_unitaire = simulation.calculate('depenses_electricite_prix_unitaire', period)
-            reforme_electricite = simulation.legislation_at(period.start).taxe_carbone.electricite
-
-            quantites_electricite_ajustees = \
-                depenses_electricite_ajustees_variables / (depenses_electricite_prix_unitaire + reforme_electricite)
-
-            quantites_electricite_avant_reforme = simulation.calculate('quantites_electricite_selon_compteur', period)
-            quantites_electricite_ajustees = (
-                quantites_electricite_ajustees * (quantites_electricite_avant_reforme > 0)
-                )
-
-            return period, quantites_electricite_ajustees
-
-
     class quantites_sp_e10(Reform.Variable):
-        label = u"Quantités consommées de sans plomb e10 par les ménages après réforme - taxe carbone"
+        label = u"Quantités consommées de sans plomb e10 par les ménages après réforme - hausse cce 2014-2015"
         reference = quantites_energie.quantites_sp_e10
 
         def function(self, simulation, period):
-            depenses_essence_ajustees_taxe_carbone = simulation.calculate('depenses_essence_ajustees_taxe_carbone', period)
+            depenses_essence_ajustees_cce_2014_2015 = \
+                simulation.calculate('depenses_essence_ajustees_cce_2014_2015', period)
             part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
-            depenses_sp_e10_ajustees = depenses_essence_ajustees_taxe_carbone * part_sp_e10
+            depenses_sp_e10_ajustees = depenses_essence_ajustees_cce_2014_2015 * part_sp_e10
             super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
-            reforme_essence = simulation.legislation_at(period.start).taxe_carbone.essence
+            reforme_essence = simulation.legislation_at(period.start).cce_2015_in_2014.essence_2014_2015
             quantite_sp_e10 = depenses_sp_e10_ajustees / (super_95_e10_ttc + reforme_essence) * 100
 
             return period, quantite_sp_e10
 
 
     class quantites_sp95(Reform.Variable):
-        label = u"Quantités consommées de sans plomb 95 par les ménages après réforme"
+        label = u"Quantités consommées de sans plomb 95 par les ménages après réforme - hausse cce 2014-2015"
         reference = quantites_energie.quantites_sp95
 
         def function(self, simulation, period):
-            depenses_essence_ajustees_taxe_carbone = simulation.calculate('depenses_essence_ajustees_taxe_carbone', period)
+            depenses_essence_ajustees_cce_2014_2015 = \
+                simulation.calculate('depenses_essence_ajustees_cce_2014_2015', period)
             part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
-            depenses_sp95_ajustees = depenses_essence_ajustees_taxe_carbone * part_sp95
+            depenses_sp95_ajustees = depenses_essence_ajustees_cce_2014_2015 * part_sp95
             super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
-            reforme_essence = simulation.legislation_at(period.start).taxe_carbone.essence
+            reforme_essence = simulation.legislation_at(period.start).cce_2015_in_2014.essence_2014_2015
             quantites_sp95_ajustees = depenses_sp95_ajustees / (super_95_ttc + reforme_essence) * 100
 
             return period, quantites_sp95_ajustees
 
 
     class quantites_sp98(Reform.Variable):
-        label = u"Quantités consommées de sans plomb 98 par les ménages"
+        label = u"Quantités consommées de sans plomb 98 par les ménages - hausse cce 2014-2015"
         reference = quantites_energie.quantites_sp98
 
         def function(self, simulation, period):
-            depenses_essence_ajustees_taxe_carbone = simulation.calculate('depenses_essence_ajustees_taxe_carbone', period)
+            depenses_essence_ajustees_cce_2014_2015 = \
+                simulation.calculate('depenses_essence_ajustees_cce_2014_2015', period)
             part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
-            depenses_sp98_ajustees = depenses_essence_ajustees_taxe_carbone * part_sp98
+            depenses_sp98_ajustees = depenses_essence_ajustees_cce_2014_2015 * part_sp98
             super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
-            reforme_essence = simulation.legislation_at(period.start).taxe_carbone.essence
+            reforme_essence = simulation.legislation_at(period.start).cce_2015_in_2014.essence_2014_2015
             quantites_sp98_ajustees = depenses_sp98_ajustees / (super_98_ttc + reforme_essence) * 100
 
             return period, quantites_sp98_ajustees
 
 
     class quantites_super_plombe(Reform.Variable):
-        label = u"Quantités consommées de super plombé par les ménages après réforme"
+        label = u"Quantités consommées de super plombé par les ménages après réforme - hausse cce 2014-2015"
         reference = quantites_energie.quantites_super_plombe
 
         def function(self, simulation, period):
-            depenses_essence_ajustees_taxe_carbone = simulation.calculate('depenses_essence_ajustees_taxe_carbone', period)
+            depenses_essence_ajustees_cce_2014_2015 = \
+                simulation.calculate('depenses_essence_ajustees_cce_2014_2015', period)
             part_super_plombe = \
                 simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
-            depenses_super_plombe_ajustees = depenses_essence_ajustees_taxe_carbone * part_super_plombe
+            depenses_super_plombe_ajustees = depenses_essence_ajustees_cce_2014_2015 * part_super_plombe
             super_plombe_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
-            reforme_essence = simulation.legislation_at(period.start).taxe_carbone.essence
+            reforme_essence = simulation.legislation_at(period.start).cce_2015_in_2014.essence_2014_2015
             quantites_super_plombe_ajustees = depenses_super_plombe_ajustees / (super_plombe_ttc + reforme_essence) * 100
 
             return period, quantites_super_plombe_ajustees
 
 
     class quantites_essence(Reform.DatedVariable):
-        label = u"Quantités d'essence consommées par les ménages après réforme"
+        label = u"Quantités d'essence consommées par les ménages après réforme - hausse cce 2014-2015"
         reference = quantites_energie.quantites_essence
 
         @dated_function(start = date(1990, 1, 1), stop = date(2006, 12, 31))
@@ -543,7 +494,7 @@ def build_reform(tax_benefit_system):
                 accise_ticpe_super_e10 = \
                     simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
 
-            reforme_essence = simulation.legislation_at(period.start).taxe_carbone.essence
+            reforme_essence = simulation.legislation_at(period.start).cce_2015_in_2014.essence_2014_2015
             accise_ticpe_super_e10_ajustee = accise_ticpe_super_e10 + reforme_essence
             super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
             super_95_e10_ttc_ajuste = super_95_e10_ttc + reforme_essence
@@ -551,10 +502,10 @@ def build_reform(tax_benefit_system):
                 (accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva)) /
                 (super_95_e10_ttc_ajuste - accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
                 )
-            depenses_essence_ajustees_taxe_carbone = \
-                simulation.calculate('depenses_essence_ajustees_taxe_carbone', period)
+            depenses_essence_ajustees_cce_2014_2015 = \
+                simulation.calculate('depenses_essence_ajustees_cce_2014_2015', period)
             part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
-            sp_e10_depenses_ajustees = depenses_essence_ajustees_taxe_carbone * part_sp_e10
+            sp_e10_depenses_ajustees = depenses_essence_ajustees_cce_2014_2015 * part_sp_e10
             sp_e10_depenses_htva_ajustees = \
                 sp_e10_depenses_ajustees - tax_from_expense_including_tax(sp_e10_depenses_ajustees, taux_plein_tva)
             montant_sp_e10_ticpe_ajuste = \
@@ -578,7 +529,7 @@ def build_reform(tax_benefit_system):
             except:
                 accise_ticpe_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
 
-            reforme_essence = simulation.legislation_at(period.start).taxe_carbone.essence
+            reforme_essence = simulation.legislation_at(period.start).cce_2015_in_2014.essence_2014_2015
             accise_ticpe_super95_ajustee = accise_ticpe_super95 + reforme_essence
             super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
             super_95_ttc_ajuste = super_95_ttc + reforme_essence
@@ -586,10 +537,10 @@ def build_reform(tax_benefit_system):
                 (accise_ticpe_super95_ajustee * (1 + taux_plein_tva)) /
                 (super_95_ttc_ajuste - accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
                 )
-            depenses_essence_ajustees_taxe_carbone = \
-                simulation.calculate('depenses_essence_ajustees_taxe_carbone', period)
+            depenses_essence_ajustees_cce_2014_2015 = \
+                simulation.calculate('depenses_essence_ajustees_cce_2014_2015', period)
             part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
-            depenses_sp_95_ajustees = depenses_essence_ajustees_taxe_carbone * part_sp95
+            depenses_sp_95_ajustees = depenses_essence_ajustees_cce_2014_2015 * part_sp95
             depenses_sp_95_htva_ajustees = (
                 depenses_sp_95_ajustees - tax_from_expense_including_tax(depenses_sp_95_ajustees, taux_plein_tva)
                 )
@@ -615,7 +566,7 @@ def build_reform(tax_benefit_system):
             except:
                 accise_ticpe_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
 
-            reforme_essence = simulation.legislation_at(period.start).taxe_carbone.essence
+            reforme_essence = simulation.legislation_at(period.start).cce_2015_in_2014.essence_2014_2015
             accise_ticpe_super98_ajustee = accise_ticpe_super98 + reforme_essence
             super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
             super_98_ttc_ajuste = super_98_ttc + reforme_essence
@@ -623,10 +574,10 @@ def build_reform(tax_benefit_system):
                 (accise_ticpe_super98_ajustee * (1 + taux_plein_tva)) /
                 (super_98_ttc_ajuste - accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
                 )
-            depenses_essence_ajustees_taxe_carbone = \
-                simulation.calculate('depenses_essence_ajustees_taxe_carbone', period)
+            depenses_essence_ajustees_cce_2014_2015 = \
+                simulation.calculate('depenses_essence_ajustees_cce_2014_2015', period)
             part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
-            depenses_sp_98_ajustees = depenses_essence_ajustees_taxe_carbone * part_sp98
+            depenses_sp_98_ajustees = depenses_essence_ajustees_cce_2014_2015 * part_sp98
             depenses_sp_98_htva_ajustees = (
                 depenses_sp_98_ajustees - tax_from_expense_including_tax(depenses_sp_98_ajustees, taux_plein_tva)
                 )
@@ -646,7 +597,7 @@ def build_reform(tax_benefit_system):
             accise_super_plombe_ticpe = \
                 simulation.legislation_at(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
 
-            reforme_essence = simulation.legislation_at(period.start).taxe_carbone.essence
+            reforme_essence = simulation.legislation_at(period.start).cce_2015_in_2014.essence_2014_2015
             accise_super_plombe_ticpe_ajustee = accise_super_plombe_ticpe + reforme_essence
             super_plombe_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
             super_plombe_ttc_ajuste = super_plombe_ttc + reforme_essence
@@ -654,11 +605,11 @@ def build_reform(tax_benefit_system):
                 (accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva)) /
                 (super_plombe_ttc_ajuste - accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva))
                 )
-            depenses_essence_ajustees_taxe_carbone = \
-                simulation.calculate('depenses_essence_ajustees_taxe_carbone', period)
+            depenses_essence_ajustees_cce_2014_2015 = \
+                simulation.calculate('depenses_essence_ajustees_cce_2014_2015', period)
             part_super_plombe = \
                 simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
-            depenses_super_plombe_ajustees = depenses_essence_ajustees_taxe_carbone * part_super_plombe
+            depenses_super_plombe_ajustees = depenses_essence_ajustees_cce_2014_2015 * part_super_plombe
             depenses_super_plombe_htva_ajustees = (
                 depenses_super_plombe_ajustees -
                 tax_from_expense_including_tax(depenses_super_plombe_ajustees, taux_plein_tva)
@@ -669,29 +620,15 @@ def build_reform(tax_benefit_system):
             return period, montant_super_plombe_ticpe_ajuste
 
 
-    class taxe_electricite(Reform.Variable):
-        column = FloatCol
-        entity_class = Menages
-        label = u"Recettes de la taxe carbone sur la consommation d'électricité - ceteris paribus"
-        # On considère que les contributions sur les taxes précédentes ne sont pas affectées
-
-        def function(self, simulation, period):
-            quantites_electricite_ajustees = simulation.calculate('quantites_electricite_selon_compteur_ajustees_taxe_carbone', period)
-            reforme_electricite = simulation.legislation_at(period.start).taxe_carbone.electricite
-            recettes_electricite = quantites_electricite_ajustees * reforme_electricite
-
-            return period, recettes_electricite
-
-
     class taxe_gaz(Reform.Variable):
         column = FloatCol
         entity_class = Menages
-        label = u"Recettes de la taxe carbone sur la consommation de gaz - ceteris paribus"
+        label = u"Recettes de la hausse de cce 2014-2015 sur la consommation de gaz - ceteris paribus"
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
 
         def function(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_taxe_carbone', period)
-            reforme_gaz = simulation.legislation_at(period.start).taxe_carbone.gaz
+            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_cce_2014_2015', period)
+            reforme_gaz = simulation.legislation_at(period.start).cce_2015_in_2014.gaz_2014_2015
             recettes_gaz = quantites_gaz_ajustees * reforme_gaz
 
             return period, recettes_gaz
@@ -710,21 +647,88 @@ def build_reform(tax_benefit_system):
 
 
     class total_taxes_energies(Reform.Variable):
-        label = u"Différence entre les contributions aux taxes sur l'énergie après la taxe carbone"
+        label = u"Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2014-2015"
         reference = ticpe.total_taxes_energies
 
         def function(self, simulation, period):
             taxe_diesel = simulation.calculate('diesel_ticpe', period)
-            taxe_electricite = simulation.calculate('taxe_electricite', period)
             taxe_essence = simulation.calculate('essence_ticpe', period)
             taxe_fioul_domestique = simulation.calculate('fioul_domestique_ticpe', period)
             taxe_gaz = simulation.calculate('taxe_gaz', period)
 
             total = (
-                taxe_diesel + taxe_electricite + taxe_essence + taxe_fioul_domestique + taxe_gaz
+                taxe_diesel + taxe_essence + taxe_fioul_domestique + taxe_gaz
                 )
 
             return period, total
+
+
+    class tva_taux_plein(Reform.Variable):
+        label = u"Contribution sur la TVA à taux plein après réaction à la réforme - cce 2014-2015"
+        reference = tva.tva_taux_plein
+
+        def function(self, simulation, period):
+            depenses_tva_taux_plein_ajustees = \
+                simulation.calculate('depenses_tva_taux_plein_ajustees_cce_2014_2015', period)
+
+            taux_plein = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+            abaissement_tva_taux_plein = (
+                simulation.legislation_at(period.start).cce_2015_in_2014.abaissement_tva_taux_plein_2014_2015
+                )
+            nouveau_taux_plein = taux_plein - abaissement_tva_taux_plein
+
+            return period, tax_from_expense_including_tax(depenses_tva_taux_plein_ajustees, nouveau_taux_plein)
+
+
+    class tva_taux_plein_bis(Reform.Variable):
+        column = FloatCol
+        entity_class = Menages
+        label = u"Contribution sur la TVA à taux plein après réaction à la réforme - cce 2014-2015"
+
+        def function(self, simulation, period):
+            depenses_tva_taux_plein_ajustees = \
+                simulation.calculate('depenses_tva_taux_plein_bis_ajustees_cce_2014_2015', period)
+
+            taux_plein = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+            abaissement_tva_taux_plein = (
+                simulation.legislation_at(period.start).cce_2015_in_2014.abaissement_tva_taux_plein_bis_2014_2015
+                )
+            nouveau_taux_plein = taux_plein - abaissement_tva_taux_plein
+
+            return period, tax_from_expense_including_tax(depenses_tva_taux_plein_ajustees, nouveau_taux_plein)
+
+
+    class tva_taux_reduit(Reform.Variable):
+        label = u"Contribution sur la TVA à taux reduit après réaction à la réforme - cce 2014-2015"
+        reference = tva.tva_taux_reduit
+
+        def function(self, simulation, period):
+            depenses_tva_taux_reduit_ajustees = \
+                simulation.calculate('depenses_tva_taux_reduit_ajustees_cce_2014_2015', period)
+
+            taux_reduit = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_reduit
+            abaissement_tva_taux_reduit = \
+                simulation.legislation_at(period.start).cce_2015_in_2014.abaissement_tva_taux_reduit_2014_2015
+            nouveau_taux_reduit = taux_reduit - abaissement_tva_taux_reduit
+
+            return period, tax_from_expense_including_tax(depenses_tva_taux_reduit_ajustees, nouveau_taux_reduit)
+
+
+    class tva_taux_super_reduit(Reform.Variable):
+        label = u"Contribution sur la TVA à taux super reduit après réaction à la réforme - cce 2014-2015"
+        reference = tva.tva_taux_super_reduit
+
+        def function(self, simulation, period):
+            depenses_tva_taux_super_reduit_ajustees = \
+                simulation.calculate('depenses_tva_taux_super_reduit_ajustees_cce_2014_2015', period)
+
+            taux_super_reduit = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_super_reduit
+            abaissement_tva_taux_super_reduit = \
+                simulation.legislation_at(period.start).cce_2015_in_2014.abaissement_tva_taux_super_reduit_2014_2015
+            nouveau_taux_super_reduit = taux_super_reduit - abaissement_tva_taux_super_reduit
+
+            return period, \
+                tax_from_expense_including_tax(depenses_tva_taux_super_reduit_ajustees, nouveau_taux_super_reduit)
 
 
     class tva_total(Reform.Variable):
@@ -742,145 +746,76 @@ def build_reform(tax_benefit_system):
             return period, total
 
 
-    class tva_taux_plein(Reform.Variable):
-        label = u"Contribution sur la TVA à taux plein après réaction à la réforme - taxe carbone"
-        reference = tva.tva_taux_plein
-
-        def function(self, simulation, period):
-            depenses_tva_taux_plein_ajustees = \
-                simulation.calculate('depenses_tva_taux_plein_ajustees_taxe_carbone', period)
-
-            taux_plein = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-            abaissement_tva_taux_plein = simulation.legislation_at(period.start).taxe_carbone.abaissement_tva_taux_plein
-            nouveau_taux_plein = taux_plein - abaissement_tva_taux_plein
-
-            return period, tax_from_expense_including_tax(depenses_tva_taux_plein_ajustees, nouveau_taux_plein)
-
-
-    class tva_taux_plein_bis(Reform.Variable):
-        column = FloatCol
-        entity_class = Menages
-        label = u"Contribution sur la TVA à taux plein après réaction à la réforme - taxe carbone"
-
-        def function(self, simulation, period):
-            depenses_tva_taux_plein_ajustees = \
-                simulation.calculate('depenses_tva_taux_plein_bis_ajustees_taxe_carbone', period)
-
-            taux_plein = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-            abaissement_tva_taux_plein = \
-                simulation.legislation_at(period.start).taxe_carbone.abaissement_tva_taux_plein_bis
-            nouveau_taux_plein = taux_plein - abaissement_tva_taux_plein
-
-            return period, tax_from_expense_including_tax(depenses_tva_taux_plein_ajustees, nouveau_taux_plein)
-
-
-    class tva_taux_reduit(Reform.Variable):
-        label = u"Contribution sur la TVA à taux reduit après réaction à la réforme - taxe carbone"
-        reference = tva.tva_taux_reduit
-
-        def function(self, simulation, period):
-            depenses_tva_taux_reduit_ajustees = \
-                simulation.calculate('depenses_tva_taux_reduit_ajustees_taxe_carbone', period)
-
-            taux_reduit = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_reduit
-            abaissement_tva_taux_reduit = \
-                simulation.legislation_at(period.start).taxe_carbone.abaissement_tva_taux_reduit
-            nouveau_taux_reduit = taux_reduit - abaissement_tva_taux_reduit
-
-            return period, tax_from_expense_including_tax(depenses_tva_taux_reduit_ajustees, nouveau_taux_reduit)
-
-
-    class tva_taux_super_reduit(Reform.Variable):
-        label = u"Contribution sur la TVA à taux super reduit après réaction à la réforme - taxe carbone"
-        reference = tva.tva_taux_super_reduit
-
-        def function(self, simulation, period):
-            depenses_tva_taux_super_reduit_ajustees = \
-                simulation.calculate('depenses_tva_taux_super_reduit_ajustees_taxe_carbone', period)
-
-            taux_super_reduit = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_super_reduit
-            abaissement_tva_taux_super_reduit = \
-                simulation.legislation_at(period.start).taxe_carbone.abaissement_tva_taux_super_reduit
-            nouveau_taux_super_reduit = taux_super_reduit - abaissement_tva_taux_super_reduit
-
-            return period, \
-                tax_from_expense_including_tax(depenses_tva_taux_super_reduit_ajustees, nouveau_taux_super_reduit)
-
-
     reform = Reform()
     reform.modify_legislation_json(modifier_function = modify_legislation_json)
     return reform
 
-# Réforme selon le prix du carbone : prix fixé à 50 euros par tonne de CO2. En utilisant nos données
-# d'équivalence entre consommation et émission, on met en place les montants de taxe suivants :
+# Montants de taxe prévus par la loi Contribution climat-énergie. 7€ en 2014, 14,5€ en 2015, 22€ en 2016,
+# 30,5€ en 2017, 39€ en 2018 et 47.5€ en 2019 En utilisant nos données d'équivalence entre consommation et émission,
+# on met en place les montants de taxe suivants :
+# Dans cette réforme on suppose qu'on impute à la législation de 2014 une augmentation équivalente à ce qui est prévu
+# par la loi pour les années à venir.
 
 
 def modify_legislation_json(reference_legislation_json_copy):
     reform_legislation_subtree = {
         "@type": "Node",
-        "description": "taxe_carbone",
+        "description": "cce_2015_in_2014",
         "children": {
-            "electricite": {
-                "@type": "Parameter",
-                "description": u"Surcroît de prix de l'électricité (en euros par kWh)",
-                "format": 'float',
-                "unit": 'currency',
-                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 0.0045}],
-                },
-            "essence": {
-                "@type": "Parameter",
-                "description": u"Surcroît de prix de l'essence (en euros par hectolitres)",
-                "format": "float",
-                "unit": 'currency',
-                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 12.1 - 1.694}],
-                },
-            "diesel": {
+            "diesel_2014_2015": {
                 "@type": "Parameter",
                 "description": u"Surcroît de prix du diesel (en euros par hectolitres)",
                 "format": 'float',
                 "unit": 'currency',
-                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 13.3 - 1.862}],
+                "values": [{'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 3.857 - 1.862}]
                 },
-            "fioul_domestique": {
+            "essence_2014_2015": {
                 "@type": "Parameter",
-                "description": u"Surcroît de prix du diesel (en euros par litre)",
-                "format": 'float',
+                "description": u"Surcroît de prix de l'essence (en euros par hectolitres)",
+                "format": "float",
                 "unit": 'currency',
-                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 0.155 - 0.0217}],
+                "values": [{'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 3.509 - 1.694}],
                 },
-            "gaz": {
+            "fioul_domestique_2014_2015": {
+                "@type": "Parameter",
+                "description": u"Surcroît de prix du fioul domestique (en euros par litre)",
+                "format": "float",
+                "unit": 'currency',
+                "values": [{'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 0.04495 - 0.0217}],
+                },
+            "gaz_2014_2015": {
                 "@type": "Parameter",
                 "description": u"Surcroît de prix du gaz (en euros par kWh)",
                 "format": 'float',
                 "unit": 'currency',
-                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 0.012 - 0.00168}],
+                "values": [{'start': u'2014-01-01', 'stop': '2014-12-31', 'value': 0.00348 - 0.00168}],
                 },
-            "abaissement_tva_taux_plein": {
+            "abaissement_tva_taux_plein_2014_2015": {
                 "@type": "Parameter",
                 "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
                 "format": 'float',
-                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.026}],
+                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.004}],
                 },
-            "abaissement_tva_taux_plein_bis": {
+            "abaissement_tva_taux_plein_bis_2014_2015": {
                 "@type": "Parameter",
                 "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
                 "format": 'float',
-                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.01}],
+                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.002}],
                 },
-            "abaissement_tva_taux_reduit": {
+            "abaissement_tva_taux_reduit_2014_2015": {
                 "@type": "Parameter",
                 "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
                 "format": 'float',
-                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.03}],
+                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.004}],
                 },
-            "abaissement_tva_taux_super_reduit": {
+            "abaissement_tva_taux_super_reduit_2014_2015": {
                 "@type": "Parameter",
                 "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
                 "format": 'float',
-                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.01}],
+                "values": [{'start': u'2010-01-01', 'stop': '2017-12-31', 'value': 0.004}],
                 },
             },
         }
 
-    reference_legislation_json_copy['children']['taxe_carbone'] = reform_legislation_subtree
+    reference_legislation_json_copy['children']['cce_2015_in_2014'] = reform_legislation_subtree
     return reference_legislation_json_copy
