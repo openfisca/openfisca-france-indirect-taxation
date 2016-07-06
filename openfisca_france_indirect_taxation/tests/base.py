@@ -28,9 +28,11 @@ from openfisca_core.tools import assert_near
 
 from .. import init_country
 from ..reforms import (
-    taxes_carburants,
+    rattrapage_diesel,
     taxe_carbone,
     contribution_climat_energie_reforme,
+    cce_2015_in_2014,
+    cce_2016_in_2014,
     )
 
 
@@ -49,9 +51,11 @@ tax_benefit_system = TaxBenefitSystem()
 tax_benefit_system.prefill_cache()
 
 build_reform_function_by_key = {
-    'taxes_carburants': taxes_carburants.build_reform,
+    'rattrapage_diesel': rattrapage_diesel.build_reform,
     'taxe_carbone': taxe_carbone.build_reform,
     'contribution_climat_energie_reforme': contribution_climat_energie_reforme.build_reform,
+    'cce_2015_in_2014': cce_2015_in_2014.build_reform,
+    'cce_2016_in_2014': cce_2016_in_2014.build_reform,
     }
 reform_by_full_key = {}
 
