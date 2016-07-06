@@ -17,7 +17,7 @@ inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
 variations_emissions = dict()
-for reforme in ['taxes_carburants', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2016']:
+for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2016']:
     simulated_variables = [
         'difference_emissions_CO2_energies_{}'.format(reforme),
         'emissions_CO2_carburants',
@@ -56,7 +56,7 @@ for reforme in ['taxes_carburants', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2
         menages['pondmen']
         ).sum() / 1e06
 
-    if reforme != 'taxes_carburants':
+    if reforme != 'rattrapage_diesel':
         variations_emissions['gaz_{}'.format(reforme)] = (
             (menages['emissions_CO2_gaz_ajustees_{}'.format(reforme)] - menages['emissions_CO2_gaz']) *
             menages['pondmen']

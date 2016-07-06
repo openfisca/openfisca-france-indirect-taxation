@@ -17,7 +17,7 @@ inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
 variations_revenue = dict()
-for reforme in ['taxes_carburants', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2016']:
+for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2016']:
     simulated_variables = [
         'difference_contribution_energie_{}'.format(reforme),
         'pondmen',

@@ -36,15 +36,15 @@ from .consommation import (  # noqa analysis:ignore
     quantites_energie,
     )
 from reactions_comportementales_reforme import (  # noqa analysis:ignore
-    contributions_ajustees_taxe_carbone,
-    contributions_ajustees_taxes_carburants,
-    contributions_ajustees_cce_2014_2015,
-    contributions_ajustees_cce_2014_2016,
-    depenses_energies_ajustees,
-    depenses_tva_ajustees,
+#    contributions_ajustees_taxe_carbone,
+#    contributions_ajustees_rattrapage_diesel,
+#    contributions_ajustees_cce_2014_2015,
+#    contributions_ajustees_cce_2014_2016,
+#    depenses_energies_ajustees,
+#    depenses_tva_ajustees,
     elasticites,
-    emissions_ajustees,
-    quantites_ajustees,
+#    emissions_ajustees,
+#    quantites_ajustees,
     )
 from .revenus import (  # noqa analysis:ignore
     revenus_menages,
