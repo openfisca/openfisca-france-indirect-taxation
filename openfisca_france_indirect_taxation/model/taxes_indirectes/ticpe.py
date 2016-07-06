@@ -320,3 +320,17 @@ class ticpe_totale(Variable):
         ticpe_totale = diesel_ticpe + essence_ticpe
 
         return period, ticpe_totale
+
+
+class total_taxes_energies(Variable):
+    column = FloatCol
+    entity_class = Menages
+    label = u"Calcul du montant des taxes sur l'énergie, sauf électricité et gaz"
+
+    def function(self, simulation, period):
+        essence_ticpe = simulation.calculate('essence_ticpe', period)
+        diesel_ticpe = simulation.calculate('diesel_ticpe', period)
+        fioul_domestique_ticpe = simulation.calculate('fioul_domestique_ticpe', period)
+        total = diesel_ticpe + essence_ticpe + fioul_domestique_ticpe
+
+        return period, total
