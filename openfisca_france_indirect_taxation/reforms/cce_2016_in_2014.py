@@ -260,7 +260,7 @@ def build_reform(tax_benefit_system):
         reference = emissions_co2.emissions_CO2_gaz
 
         def function(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_cce_2014_2016', period)
+            quantites_gaz_ajustees = simulation.calculate('', period)
             emissions_gaz = \
                 simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz
             emissions_ajustees = quantites_gaz_ajustees * emissions_gaz
@@ -360,7 +360,7 @@ def build_reform(tax_benefit_system):
             return period, quantites_fioul_ajustees
 
 
-    class quantites_gaz_contrat_optimal_ajustees_cce_2014_2016(Reform.Variable):
+    class quantites_gaz_contrat_optimal_ajustees_cce_2016_in_2014(Reform.Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Quantités de gaz consommées après la réforme - contribution climat énergie, hausse de 2014 à 2016"
@@ -627,7 +627,7 @@ def build_reform(tax_benefit_system):
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
 
         def function(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal', period)
+            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_cce_2014_2016', period)
             reforme_gaz = simulation.legislation_at(period.start).cce_2016_in_2014.gaz_2014_2016
             recettes_gaz = quantites_gaz_ajustees * reforme_gaz
 
