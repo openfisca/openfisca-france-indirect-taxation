@@ -19,40 +19,39 @@ elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
-for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2016']:
-    simulated_variables = ['difference_emissions_CO2_energies_{}'.format(reforme)]
+for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
+    simulated_variables = ['emissions_CO2_energies']
 
-    if reforme[:3] != 'cce':
-        survey_scenario = SurveyScenario.create(
-            elasticities = elasticities,
-            inflation_kwargs = inflation_kwargs,
-            reform_key = '{}'.format(reforme),
-            year = year,
-            data_year = data_year
-            )
-    else:
-        survey_scenario = SurveyScenario.create(
-            elasticities = elasticities,
-            inflation_kwargs = inflation_kwargs,
-            reform_key = 'contribution_climat_energie_reforme',
-            year = year,
-            data_year = data_year
-            )
+    survey_scenario = SurveyScenario.create(
+        elasticities = elasticities,
+        inflation_kwargs = inflation_kwargs,
+        reform_key = '{}'.format(reforme),
+        year = year,
+        data_year = data_year
+        )
 
     for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
         pivot_table = pandas.DataFrame()
+        pivot_table_reference = pandas.DataFrame()
         for values in simulated_variables:
             pivot_table = pandas.concat([
                 pivot_table,
-                survey_scenario.compute_pivot_table(values = [values], columns = ['{}'.format(category)])
+                survey_scenario.compute_pivot_table(values = [values], columns = [category])
                 ])
-        df = pivot_table.T
-        df.rename(columns = {'difference_emissions_CO2_energies_{}'.format(reforme):
-            'Reduction in carbon emissions from reform'},
-            inplace = True)
+            pivot_table_reference = pandas.concat([
+                pivot_table_reference,
+                survey_scenario.compute_pivot_table(values = [values], columns = ['{}'.format(category)],
+                    reference = True)])
+
+        df_reform = pivot_table.T
+        df_reference = pivot_table_reference.T
+
+        df_reform[u'Reduction in carbon emissions from reform'] = \
+            df_reform['emissions_CO2_energies'] - df_reference['emissions_CO2_energies']
 
         # Réalisation de graphiques
-        graph_builder_bar(df)
+        graph_builder_bar(df_reform[u'Reduction in carbon emissions from reform'])
+
         save_dataframe_to_graph(
-            df,'Emissions_reforme/reduction_emissions_reforme_{0}_by_{1}.csv'.format(reforme, category)
+            df_reform, 'Emissions_reforme/reduction_emissions_reforme_{0}_by_{1}.csv'.format(reforme, category)
             )

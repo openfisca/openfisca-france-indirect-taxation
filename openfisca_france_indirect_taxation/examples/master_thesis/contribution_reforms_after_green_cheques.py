@@ -20,55 +20,66 @@ elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
-for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2016']:
+
+for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
     simulated_variables = [
-        'difference_contribution_energie_{}'.format(reforme),
+        'total_taxes_energies',
         'depenses_energies',
         'rev_disp_loyerimput',
         'pondmen',
         'ocde10',
         ]
 
-    if reforme[:3] != 'cce':
-        survey_scenario = SurveyScenario.create(
-            elasticities = elasticities,
-            inflation_kwargs = inflation_kwargs,
-            reform_key = '{}'.format(reforme),
-            year = year,
-            data_year = data_year
-            )
-    else:
-        survey_scenario = SurveyScenario.create(
-            elasticities = elasticities,
-            inflation_kwargs = inflation_kwargs,
-            reform_key = 'contribution_climat_energie_reforme',
-            year = year,
-            data_year = data_year
-            )
+    survey_scenario = SurveyScenario.create(
+        elasticities = elasticities,
+        inflation_kwargs = inflation_kwargs,
+        reform_key = '{}'.format(reforme),
+        year = year,
+        data_year = data_year
+        )
 
-    df_by_entity = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
-    menages = df_by_entity['menages']
-    unite_conso = (menages['ocde10'] * menages['pondmen']).sum()
-    contribution = (menages['difference_contribution_energie_{}'.format(reforme)] * menages['pondmen']).sum()
+    indiv_df_reform = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
+    indiv_df_reference = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables,
+        reference = True)
+
+    menages_reform = indiv_df_reform['menages']
+    menages_reference = indiv_df_reference['menages']
+
+    unite_conso = (menages_reform['ocde10'] * menages_reform['pondmen']).sum()
+    contribution = (
+        (menages_reform['total_taxes_energies'] - menages_reference['total_taxes_energies']) *
+        menages_reference['pondmen']
+        ).sum()
     contribution_unite_conso = contribution / unite_conso
 
-    for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
+    for category in ['niveau_vie_decile']:
         pivot_table = pandas.DataFrame()
+        pivot_table_reference = pandas.DataFrame()
         for values in simulated_variables:
             pivot_table = pandas.concat([
                 pivot_table,
-                survey_scenario.compute_pivot_table(values = [values], columns = ['{}'.format(category)])
+                survey_scenario.compute_pivot_table(values = [values], columns = [category])
                 ])
-        df = pivot_table.T
-        df[u'Cost of the reform after green cheques'] = (
-            ((contribution_unite_conso) * df['ocde10'] - df['difference_contribution_energie_{}'.format(reforme)])
+            pivot_table_reference = pandas.concat([
+                pivot_table_reference,
+                survey_scenario.compute_pivot_table(values = [values], columns = ['{}'.format(category)],
+                    reference = True)])
+
+        df_reform = pivot_table.T
+        df_reference = pivot_table_reference.T
+
+        df_reform[u'Cost of the reform after green cheques'] = (
+            ((contribution_unite_conso) * df_reform['ocde10'] -
+            (df_reform['total_taxes_energies'] - df_reference['total_taxes_energies']))
             )
 
+        # Réalisation de graphiques
+        graph_builder_bar(df_reform[u'Cost of the reform after green cheques'])
+
+"""
         save_dataframe_to_graph(
             df[u'Cost of the reform after green cheques'],
             'Contributions_reforme/Green_cheques/contribution_{0}_apres_cheques_verts_by_{1}.csv'.format(reforme,
             category)
             )
-
-        # Réalisation de graphiques
-        graph_builder_bar(df[u'Cost of the reform after green cheques'])
+"""

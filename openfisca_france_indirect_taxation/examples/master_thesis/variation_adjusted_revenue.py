@@ -17,33 +17,28 @@ inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
 variations_revenue = dict()
-for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2016']:
+for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
     simulated_variables = [
-        'difference_contribution_energie_{}'.format(reforme),
+        'total_taxes_energies',
         'pondmen',
         ]
 
-    if reforme[:3] != 'cce':
-        survey_scenario = SurveyScenario.create(
-            elasticities = elasticities,
-            inflation_kwargs = inflation_kwargs,
-            reform_key = '{}'.format(reforme),
-            year = year,
-            data_year = data_year
-            )
-    else:
-        survey_scenario = SurveyScenario.create(
-            elasticities = elasticities,
-            inflation_kwargs = inflation_kwargs,
-            reform_key = 'contribution_climat_energie_reforme',
-            year = year,
-            data_year = data_year
-            )
+    survey_scenario = SurveyScenario.create(
+        elasticities = elasticities,
+        inflation_kwargs = inflation_kwargs,
+        reform_key = '{}'.format(reforme),
+        year = year,
+        data_year = data_year
+        )
 
-    df_by_entity = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
-    menages = df_by_entity['menages']
+    indiv_df_reform = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
+    indiv_df_reference = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables,
+        reference = True)
+
+    menages_reform = indiv_df_reform['menages']
+    menages_reference = indiv_df_reference['menages']
 
     variations_revenue['total_{}'.format(reforme)] = (
-        menages['difference_contribution_energie_{}'.format(reforme)] *
-        menages['pondmen']
+        (menages_reform['total_taxes_energies'] - menages_reference['total_taxes_energies']) *
+        menages_reform['pondmen']
         ).sum() / 1e06

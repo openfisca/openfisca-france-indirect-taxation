@@ -17,61 +17,52 @@ inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
 variations_emissions = dict()
-for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2016']:
+for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
     simulated_variables = [
-        'difference_emissions_CO2_energies_{}'.format(reforme),
+        'emissions_CO2_energies',
         'emissions_CO2_carburants',
         'emissions_CO2_electricite',
         'emissions_CO2_gaz',
         'emissions_CO2_fioul_domestique',
-        'emissions_CO2_carburants_ajustees_{}'.format(reforme),
-        'emissions_CO2_electricite_ajustees_{}'.format(reforme),
-        'emissions_CO2_gaz_ajustees_{}'.format(reforme),
-        'emissions_CO2_fioul_domestique_ajustees_{}'.format(reforme),
         'pondmen',
         ]
 
-    if reforme[:3] != 'cce':
-        survey_scenario = SurveyScenario.create(
-            elasticities = elasticities,
-            inflation_kwargs = inflation_kwargs,
-            reform_key = '{}'.format(reforme),
-            year = year,
-            data_year = data_year
-            )
-    else:
-        survey_scenario = SurveyScenario.create(
-            elasticities = elasticities,
-            inflation_kwargs = inflation_kwargs,
-            reform_key = 'contribution_climat_energie_reforme',
-            year = year,
-            data_year = data_year
-            )
+    survey_scenario = SurveyScenario.create(
+        elasticities = elasticities,
+        inflation_kwargs = inflation_kwargs,
+        reform_key = '{}'.format(reforme),
+        year = year,
+        data_year = data_year
+        )
 
-    df_by_entity = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
-    menages = df_by_entity['menages']
+    indiv_df_reform = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
+    indiv_df_reference = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables,
+        reference = True)
+
+    menages_reform = indiv_df_reform['menages']
+    menages_reference = indiv_df_reference['menages']
 
     variations_emissions['carburants_{}'.format(reforme)] = (
-        (menages['emissions_CO2_carburants_ajustees_{}'.format(reforme)] - menages['emissions_CO2_carburants']) *
-        menages['pondmen']
+        (menages_reform['emissions_CO2_carburants'] - menages_reference['emissions_CO2_carburants']) *
+        menages_reform['pondmen']
         ).sum() / 1e06
 
     if reforme != 'rattrapage_diesel':
         variations_emissions['gaz_{}'.format(reforme)] = (
-            (menages['emissions_CO2_gaz_ajustees_{}'.format(reforme)] - menages['emissions_CO2_gaz']) *
-            menages['pondmen']
+            (menages_reform['emissions_CO2_gaz'] - menages_reference['emissions_CO2_gaz']) *
+            menages_reform['pondmen']
             ).sum() / 1e06
         variations_emissions['fioul_domestique_{}'.format(reforme)] = (
-            (menages['emissions_CO2_fioul_domestique_ajustees_{}'.format(reforme)] -
-            menages['emissions_CO2_fioul_domestique']) *
-            menages['pondmen']
+            (menages_reform['emissions_CO2_fioul_domestique'] -
+            menages_reference['emissions_CO2_fioul_domestique']) *
+            menages_reform['pondmen']
             ).sum() / 1e06
 
         if reforme == 'taxe_carbone':
             variations_emissions['electricite_{}'.format(reforme)] = (
-                (menages['emissions_CO2_electricite_ajustees_{}'.format(reforme)] -
-                menages['emissions_CO2_electricite']) *
-                menages['pondmen']
+                (menages_reform['emissions_CO2_electricite'] -
+                menages_reference['emissions_CO2_electricite']) *
+                menages_reform['pondmen']
                 ).sum() / 1e06
 
             variations_emissions['total_logement_{}'.format(reforme)] = (
@@ -86,6 +77,6 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_
                 ).sum()
 
     variations_emissions['total_{}'.format(reforme)] = (
-        menages['difference_emissions_CO2_energies_{}'.format(reforme)] *
-        menages['pondmen'] * (-1)
+        (menages_reform['emissions_CO2_energies'] - menages_reference['emissions_CO2_energies']) *
+        menages_reform['pondmen']
         ).sum() / 1e06

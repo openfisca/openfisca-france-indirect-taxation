@@ -20,50 +20,54 @@ elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
-for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_2016']:
+for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
     simulated_variables = [
-        'difference_contribution_energie_{}'.format(reforme),
+        'total_taxes_energies',
         'depenses_energies',
         'rev_disp_loyerimput',
         'somme_coicop12'
         ]
 
-    if reforme[:3] != 'cce':
-        survey_scenario = SurveyScenario.create(
-            elasticities = elasticities,
-            inflation_kwargs = inflation_kwargs,
-            reform_key = '{}'.format(reforme),
-            year = year,
-            data_year = data_year
-            )
-    else:
-        survey_scenario = SurveyScenario.create(
-            elasticities = elasticities,
-            inflation_kwargs = inflation_kwargs,
-            reform_key = 'contribution_climat_energie_reforme',
-            year = year,
-            data_year = data_year
-            )
+    survey_scenario = SurveyScenario.create(
+        elasticities = elasticities,
+        inflation_kwargs = inflation_kwargs,
+        reform_key = reforme,
+        year = year,
+        data_year = data_year
+        )
 
     for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
         pivot_table = pandas.DataFrame()
+        pivot_table_reference = pandas.DataFrame()
         for values in simulated_variables:
             pivot_table = pandas.concat([
                 pivot_table,
-                survey_scenario.compute_pivot_table(values = [values], columns = ['{}'.format(category)])
+                survey_scenario.compute_pivot_table(values = [values], columns = [category])
                 ])
-        df = pivot_table.T
-        df['Additional effort rate on TICPE reform - expenditures'] = \
-            df['difference_contribution_energie_{}'.format(reforme)] / df['somme_coicop12']
-        df['Additional effort rate on TICPE reform - income'] = \
-            df['difference_contribution_energie_{}'.format(reforme)] / df['rev_disp_loyerimput']
-        save_dataframe_to_graph(
-            df, 'Contributions_reforme/Before_redistribution/contribution_additionnelles_reforme_{0}_{1}.csv'.format(reforme, category)
+            pivot_table_reference = pandas.concat([
+                pivot_table_reference,
+                survey_scenario.compute_pivot_table(values = [values], columns = ['{}'.format(category)],
+                    reference = True)])
+
+        df_reform = pivot_table.T
+        df_reference = pivot_table_reference.T
+
+        df_reform['Additional effort rate on TICPE reform - expenditures'] = (
+            ((df_reform['total_taxes_energies']) - (df_reference['total_taxes_energies'])) / df_reform['somme_coicop12']
+            )
+        df_reform['Additional effort rate on TICPE reform - income'] = (
+            ((df_reform['total_taxes_energies']) - (df_reference['total_taxes_energies'])) /
+            df_reform['rev_disp_loyerimput']
             )
 
         # Réalisation de graphiques
-        graph_builder_bar(df['difference_contribution_energie_{}'.format(reforme)])
+        # graph_builder_bar(df_reform['total_taxes_energies']) - (df_reference['total_taxes_energies'])
         graph_builder_line_percent(
-            df[['Additional effort rate on TICPE reform - expenditures',
+            df_reform[['Additional effort rate on TICPE reform - expenditures',
             'Additional effort rate on TICPE reform - income']]
+            )
+
+        save_dataframe_to_graph(
+            df_reform,
+            'Contributions_reforme/Before_redistribution/contribution_additionnelles_reforme_{0}_{1}.csv'.format(reforme, category)
             )
