@@ -260,7 +260,8 @@ def build_reform(tax_benefit_system):
         reference = emissions_co2.emissions_CO2_gaz
 
         def function(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('', period)
+            quantites_gaz_ajustees = \
+                simulation.calculate('quantites_gaz_contrat_optimal_ajustees_cce_2016_in_2014', period)
             emissions_gaz = \
                 simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz
             emissions_ajustees = quantites_gaz_ajustees * emissions_gaz
@@ -627,7 +628,7 @@ def build_reform(tax_benefit_system):
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
 
         def function(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_cce_2014_2016', period)
+            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_cce_2016_in_2014', period)
             reforme_gaz = simulation.legislation_at(period.start).cce_2016_in_2014.gaz_2014_2016
             recettes_gaz = quantites_gaz_ajustees * reforme_gaz
 
