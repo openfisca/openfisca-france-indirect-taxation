@@ -20,14 +20,9 @@ elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
-for reforme in ['cce_2015_in_2014']:
+for reforme in ['cce_2016_in_2014']:
     simulated_variables = [
-        'difference_contribution_energie_{}'.format(reforme),
-        'depenses_energies',
-        'rev_disp_loyerimput',
-        'pondmen',
-        'ocde10',
-        'niveau_vie_decile'
+        'total_taxes_energies'
         ]
 
 survey_scenario = SurveyScenario.create(
@@ -40,19 +35,23 @@ survey_scenario = SurveyScenario.create(
 
 
 x = survey_scenario.compute_pivot_table(
-    values = ['total_taxes_energies'], columns = ['{}'.format('niveau_vie_decile')]
+    values = ['emissions_CO2_gaz'], columns = ['{}'.format('niveau_vie_decile')]
     )
 y = survey_scenario.compute_pivot_table(
-    values = ['total_taxes_energies'], columns = ['{}'.format('niveau_vie_decile')],
+    values = ['emissions_CO2_gaz'], columns = ['{}'.format('niveau_vie_decile')],
     reference = True,
     )
 
 x == y
 
+df_by_entity = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
+df_by_entity_bis = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables, reference = True)
+
+menages = df_by_entity['menages']
+menages_bis = df_by_entity_bis['menages']
+
 boum
 
-df_by_entity = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
-menages = df_by_entity['menages']
 unite_conso = (menages['ocde10'] * menages['pondmen']).sum()
 contribution = (menages['difference_contribution_energie_{}'.format(reforme)] * menages['pondmen']).sum()
 contribution_unite_conso = contribution / unite_conso

@@ -6,7 +6,8 @@ from __future__ import division
 import pandas
 
 # Import modules specific to OpenFisca
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line, save_dataframe_to_graph
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line, save_dataframe_to_graph, \
+    dataframe_by_group
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
@@ -29,13 +30,7 @@ survey_scenario = SurveyScenario.create(
     data_year = data_year
     )
 for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
-    pivot_table = pandas.DataFrame()
-    for values in simulated_variables:
-        pivot_table = pandas.concat([
-            pivot_table,
-            survey_scenario.compute_pivot_table(values = [values], columns = ['{}'.format(category)])
-            ])
-    df = pivot_table.T
+    df = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
     df.rename(columns = {'depenses_energies': 'Total energy expenditures',
         'depenses_energies_logement': 'Housing energy expenditures',
         'poste_coicop_722': 'Fuel expenditures'},

@@ -3,11 +3,9 @@
 # Import general modules
 from __future__ import division
 
-import pandas
-
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line_percent, graph_builder_bar, \
-    save_dataframe_to_graph
+    save_dataframe_to_graph, dataframe_by_group
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
@@ -37,20 +35,10 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         )
 
     for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
-        pivot_table = pandas.DataFrame()
-        pivot_table_reference = pandas.DataFrame()
-        for values in simulated_variables:
-            pivot_table = pandas.concat([
-                pivot_table,
-                survey_scenario.compute_pivot_table(values = [values], columns = [category])
-                ])
-            pivot_table_reference = pandas.concat([
-                pivot_table_reference,
-                survey_scenario.compute_pivot_table(values = [values], columns = ['{}'.format(category)],
-                    reference = True)])
-
-        df_reform = pivot_table.T
-        df_reference = pivot_table_reference.T
+        df_reform = \
+            dataframe_by_group(survey_scenario, category, simulated_variables, reference = False)
+        df_reference = \
+            dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
 
         df_reform['Additional effort rate on TICPE reform - expenditures'] = (
             ((df_reform['total_taxes_energies']) - (df_reference['total_taxes_energies'])) / df_reform['somme_coicop12']

@@ -3,14 +3,13 @@
 # Import general modules
 from __future__ import division
 
-import pandas
-
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, \
     save_dataframe_to_graph
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
+from openfisca_france_indirect_taxation.examples.utils_example import dataframe_by_group
 
 # Simulate contribution to fuel tax reform by categories
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
@@ -22,13 +21,6 @@ del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
 
 for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
-    simulated_variables = [
-        'total_taxes_energies',
-        'depenses_energies',
-        'rev_disp_loyerimput',
-        'pondmen',
-        'ocde10',
-        ]
 
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
@@ -37,6 +29,14 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         year = year,
         data_year = data_year
         )
+
+    simulated_variables = [
+        'total_taxes_energies',
+        'depenses_energies',
+        'rev_disp_loyerimput',
+        'pondmen',
+        'ocde10',
+        ]
 
     indiv_df_reform = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
     indiv_df_reference = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables,
@@ -52,21 +52,11 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         ).sum()
     contribution_unite_conso = contribution / unite_conso
 
-    for category in ['niveau_vie_decile']:
-        pivot_table = pandas.DataFrame()
-        pivot_table_reference = pandas.DataFrame()
-        for values in simulated_variables:
-            pivot_table = pandas.concat([
-                pivot_table,
-                survey_scenario.compute_pivot_table(values = [values], columns = [category])
-                ])
-            pivot_table_reference = pandas.concat([
-                pivot_table_reference,
-                survey_scenario.compute_pivot_table(values = [values], columns = ['{}'.format(category)],
-                    reference = True)])
-
-        df_reform = pivot_table.T
-        df_reference = pivot_table_reference.T
+    for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
+        df_reform = \
+            dataframe_by_group(survey_scenario, category, simulated_variables, reference = False)
+        df_reference = \
+            dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
 
         df_reform[u'Cost of the reform after green cheques'] = (
             ((contribution_unite_conso) * df_reform['ocde10'] -
@@ -76,10 +66,8 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         # Réalisation de graphiques
         graph_builder_bar(df_reform[u'Cost of the reform after green cheques'])
 
-"""
         save_dataframe_to_graph(
-            df[u'Cost of the reform after green cheques'],
+            df_reform[u'Cost of the reform after green cheques'],
             'Contributions_reforme/Green_cheques/contribution_{0}_apres_cheques_verts_by_{1}.csv'.format(reforme,
             category)
             )
-"""

@@ -7,7 +7,8 @@ import pandas
 import seaborn
 
 # Import de modules spécifiques à Openfisca
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, save_dataframe_to_graph
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, save_dataframe_to_graph, \
+    dataframe_by_group
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 # Import d'une nouvelle palette de couleurs
@@ -27,13 +28,7 @@ if __name__ == '__main__':
     data_year = 2011
     survey_scenario = SurveyScenario.create(year = year, data_year = data_year)
     for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
-        pivot_table = pandas.DataFrame()
-        for values in simulated_variables:
-            pivot_table = pandas.concat([
-                pivot_table,
-                survey_scenario.compute_pivot_table(values = [values], columns = ['{}'.format(category)])
-                ])
-        taxe_indirectes = pivot_table.T
+        taxe_indirectes = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
 
         for revenu in ['rev_disp_loyerimput', 'somme_coicop12']:
             list_part_taxes = []
