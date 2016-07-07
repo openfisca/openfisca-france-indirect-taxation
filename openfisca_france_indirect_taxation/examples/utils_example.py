@@ -3,6 +3,7 @@
 
 from __future__ import division
 
+import pandas
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
@@ -120,6 +121,27 @@ def collapse(dataframe, groupe, var):
     grouped = dataframe.groupby([groupe])
     var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x, var = var))
     return var_weighted_grouped
+
+
+def dataframe_by_group(survey_scenario, category, variables, reference = False):
+    pivot_table = pandas.DataFrame()
+
+    if reference is not False:
+        for values_reference in variables:
+            pivot_table = pandas.concat([
+                pivot_table,
+                survey_scenario.compute_pivot_table(values = [values_reference], columns = [category],
+                    reference = True)])
+    else:
+        for values_reform in variables:
+            pivot_table = pandas.concat([
+                pivot_table,
+                survey_scenario.compute_pivot_table(values = [values_reform], columns = [category])
+                ])
+
+    df_reform = pivot_table.T
+
+    return df_reform
 
 
 def df_weighted_average_grouped(dataframe, groupe, varlist):
