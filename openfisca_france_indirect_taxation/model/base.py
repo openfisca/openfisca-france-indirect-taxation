@@ -34,7 +34,8 @@ from biryani.strings import slugify
 
 from openfisca_core.columns import AgeCol, DateCol, FloatCol, IntCol, EnumCol, StrCol
 from openfisca_core.enumerations import Enum
-from openfisca_core.formulas import dated_function, DatedVariable, Variable
+from openfisca_core.formulas import dated_function
+from openfisca_core.variables import DatedVariable, Variable
 try:
     from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
 except ImportError:

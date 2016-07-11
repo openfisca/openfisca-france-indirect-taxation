@@ -23,10 +23,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from openfisca_core import reforms
+from openfisca_core.reforms import Reform, compose_reforms
 from openfisca_core.tools import assert_near
 
-from .. import init_country
+from openfisca_core.tools import assert_near
+
+from .. import FranceIndirectTaxationTaxBenefitSystem
 from ..reforms import (
     alimentation,
     aliss,
@@ -46,9 +48,7 @@ __all__ = [
 
 # Initialize a tax_benefit_system
 
-TaxBenefitSystem = init_country()
-tax_benefit_system = TaxBenefitSystem()
-tax_benefit_system.prefill_cache()
+tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
 build_reform_function_by_key = {
     'aliss_environnement': aliss.build_reform_environnement,
@@ -68,22 +68,23 @@ reform_by_full_key = {}
 def get_cached_composed_reform(reform_keys, tax_benefit_system):
     full_key = '.'.join(
         [tax_benefit_system.full_key] + reform_keys
-        if isinstance(tax_benefit_system, reforms.AbstractReform)
+        if isinstance(tax_benefit_system, Reform)
         else reform_keys
         )
     composed_reform = reform_by_full_key.get(full_key)
+
     if composed_reform is None:
-        build_reform_functions = []
+        reforms = []
         for reform_key in reform_keys:
-            assert reform_key in build_reform_function_by_key, \
+            assert reform_key in reform_list, \
                 'Error loading cached reform "{}" in build_reform_functions'.format(reform_key)
-            build_reform_function = build_reform_function_by_key[reform_key]
-            build_reform_functions.append(build_reform_function)
-        composed_reform = reforms.compose_reforms(
-            build_functions_and_keys = zip(build_reform_functions, reform_keys),
+            reform = reform_list[reform_key]
+            reforms.append(reform)
+        composed_reform = compose_reforms(
+            reforms = reforms,
             tax_benefit_system = tax_benefit_system,
             )
-        assert full_key == composed_reform.full_key
+        assert full_key == composed_reform.full_key, (full_key, composed_reform.full_key)
         reform_by_full_key[full_key] = composed_reform
     return composed_reform
 

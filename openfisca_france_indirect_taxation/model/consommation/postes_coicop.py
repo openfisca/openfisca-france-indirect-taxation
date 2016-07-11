@@ -9,7 +9,7 @@ import logging
 from biryani.strings import slugify
 
 from openfisca_core.columns import FloatCol
-from openfisca_core.formulas import Variable
+from openfisca_core.variables import Variable
 
 
 from openfisca_france_indirect_taxation.model.base import *

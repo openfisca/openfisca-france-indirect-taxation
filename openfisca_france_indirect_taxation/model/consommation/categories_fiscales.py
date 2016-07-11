@@ -30,7 +30,8 @@ import logging
 
 from biryani.strings import slugify
 
-from openfisca_core.formulas import dated_function, DatedVariable
+from openfisca_core.formulas import dated_function
+from openfisca_core.variables import DatedVariable
 
 
 from openfisca_france_indirect_taxation.model.base import *
