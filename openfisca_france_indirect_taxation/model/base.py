@@ -41,7 +41,7 @@ try:
 except ImportError:
     mark_weighted_percentiles, weighted_quantiles = None, None
 
-from ..entities import Individus, Menages
+from openfisca_france_indirect_taxation.entities import Individus, Menages
 
 
 __all__ = [

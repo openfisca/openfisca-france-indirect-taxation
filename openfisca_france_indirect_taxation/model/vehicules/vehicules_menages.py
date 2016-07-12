@@ -23,7 +23,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from ..base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
 class pourcentage_vehicule_essence(Variable):

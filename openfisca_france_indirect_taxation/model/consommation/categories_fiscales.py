@@ -44,7 +44,7 @@ categories_fiscales_data_frame = None
 codes_coicop_data_frame = None
 
 
-def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_system = None):
+def generate_variables(tax_benefit_system, categories_fiscales = None, Reform = None, old_tax_benefit_system = None):
     assert categories_fiscales is not None
     reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
     removed_categories = set()
@@ -98,11 +98,18 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
                 label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
                 )
             definitions_by_name.update(functions_by_name)
-            type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+            tax_benefit_system.add_variable(
+                type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                )
+
         else:
             if class_name.encode('utf-8') in tax_benefit_system.column_by_name:
                 definitions_by_name = dict(
                     reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
+                    )
+                definitions_by_name.update(functions_by_name)
+                tax_benefit_system.update_variable(
+                    type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
                     )
             else:
                 definitions_by_name = dict(
@@ -110,15 +117,18 @@ def generate_variables(categories_fiscales = None, Reform = None, tax_benefit_sy
                     entity_class = Menages,
                     label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
                     )
-            definitions_by_name.update(functions_by_name)
-            type(class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
+                definitions_by_name.update(functions_by_name)
+                tax_benefit_system.add_variable(
+                    type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                    )
 
         del definitions_by_name
 
 
-def preload_categories_fiscales_data_frame():
+def preload_categories_fiscales_data_frame(tax_benefit_system):
     global codes_coicop_data_frame
     global categories_fiscales_data_frame
     if codes_coicop_data_frame is None or categories_fiscales_data_frame is None:
         categories_fiscales_data_frame, codes_coicop_data_frame = get_legislation_data_frames()
-        generate_variables(categories_fiscales = categories_fiscales_data_frame.copy())
+
+    generate_variables(tax_benefit_system, categories_fiscales = categories_fiscales_data_frame.copy())

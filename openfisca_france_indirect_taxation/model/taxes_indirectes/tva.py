@@ -5,7 +5,7 @@ from __future__ import division
 
 import datetime
 
-from ..base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
 class depenses_tva_exonere(Variable):

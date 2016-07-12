@@ -23,19 +23,16 @@ class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
     def __init__(self):
         TaxBenefitSystem.__init__(self, entities.entities)
         self.Scenario = scenarios.Scenario
-        param_file = os.path.join(COUNTRY_DIR, 'param', 'param.xml')
+        param_file = os.path.join(COUNTRY_DIR, 'param', 'parameters.xml')
         self.add_legislation_params(param_file)
         self.add_variables_from_directory(os.path.join(COUNTRY_DIR, 'model'))
-        self.cache_blacklist = conf_cache_blacklist
         for extension_dir in EXTENSIONS_DIRECTORIES:
             self.load_extension(extension_dir)
+        self.prefill_cache()
 
     def prefill_cache(self):
         # Define and poste_* and categorie fiscales variables
         from .model.consommation import postes_coicop
-        postes_coicop.preload_postes_coicop_data_frame()
+        postes_coicop.preload_postes_coicop_data_frame(self)
         from .model.consommation import categories_fiscales
-        categories_fiscales.preload_categories_fiscales_data_frame()
-
-        # # Reindex columns since preload functions generate new columns.
-        # self.index_columns()
+        categories_fiscales.preload_categories_fiscales_data_frame(self)

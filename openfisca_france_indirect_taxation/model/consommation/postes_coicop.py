@@ -22,7 +22,7 @@ categories_fiscales_data_frame = None
 codes_coicop_data_frame = None
 
 
-def generate_postes_variables():
+def generate_postes_variables(tax_benefit_system):
     codes_bdf = [element for element in codes_coicop_data_frame.code_bdf.unique()]
     for code_bdf in codes_bdf:
         label = codes_coicop_data_frame.query('code_bdf == @code_bdf')['label'].drop_duplicates().tolist()
@@ -39,9 +39,16 @@ def generate_postes_variables():
             entity_class = Menages,
             label = label.decode('utf-8'),
             ))
+        tax_benefit_system.add_variable(
+            type(class_name.encode('utf-8'), (Variable,), dict(
+                column = FloatCol,
+                entity_class = Menages,
+                label = label.decode('utf-8'),
+                ))
+            )
 
 
-def generate_depenses_ht_postes_variables(categories_fiscales = None, Reform = None, tax_benefit_system = None):
+def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscales = None, Reform = None, old_tax_benefit_system = None):
     assert categories_fiscales is not None
     reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
     functions_by_name_by_poste = dict()
@@ -98,20 +105,22 @@ def generate_depenses_ht_postes_variables(categories_fiscales = None, Reform = N
             label = u"Dépenses hors taxe du poste_{0}".format(poste),
             )
         definitions_by_name.update(functions_by_name)
-        type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
-
+        tax_benefit_system.add_variable(
+            type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+            )
         del definitions_by_name
 
 
-def generate_postes_agreges_variables(categories_fiscales = None, Reform = None, taux_by_categorie_fiscale = None,
-        tax_benefit_system = None):
+def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = None, Reform = None, taux_by_categorie_fiscale = None,
+        old_tax_benefit_system = None):
     # codes_bdf = [element for element in codes_coicop_data_frame.code_bdf.unique()]
     for num_prefix in ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]:
         codes_coicop = codes_coicop_data_frame.loc[
             codes_coicop_data_frame.code_coicop.str.startswith(num_prefix)
             ]['code_coicop'].drop_duplicates().tolist()
         class_name = u"poste_agrege_{}".format(num_prefix)
-        log.info(u'Creating variable {} with label {} using {}'.format(class_name, num_prefix, codes_coicop))
+        label = u"Poste agrégé {}".format(num_prefix)
+        log.info(u'Creating variable {} with label {} using {}'.format(class_name, label, codes_coicop))
 
         # Trick to create a class with a dynamic name.
         dated_func = depenses_postes_agreges_function_creator(
@@ -122,7 +131,6 @@ def generate_postes_agreges_variables(categories_fiscales = None, Reform = None,
             )
 
         functions_by_name = dict(function = dated_func)
-        label = u"Poste agrégé {}".format(num_prefix)
         if not Reform:
             definitions_by_name = dict(
                 column = FloatCol,
@@ -130,22 +138,27 @@ def generate_postes_agreges_variables(categories_fiscales = None, Reform = None,
                 label = label,
                 )
             definitions_by_name.update(functions_by_name)
-            type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+            tax_benefit_system.add_variable(
+                type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                )
         else:
             definitions_by_name = dict(
-                reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
+                reference = old_tax_benefit_system.column_by_name[class_name.encode('utf-8')]
                 )
             definitions_by_name.update(functions_by_name)
-            type(class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
+            tax_benefit_system.update_variable(
+                type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                )
 
         del definitions_by_name
 
 
-def preload_postes_coicop_data_frame():
+def preload_postes_coicop_data_frame(tax_benefit_system):
     global categories_fiscales_data_frame
     global codes_coicop_data_frame
     if categories_fiscales_data_frame is None or codes_coicop_data_frame is None:
         categories_fiscales_data_frame, codes_coicop_data_frame = get_legislation_data_frames()
-        generate_postes_variables()
-        generate_postes_agreges_variables()
-        generate_depenses_ht_postes_variables(categories_fiscales = categories_fiscales_data_frame.copy())
+
+    generate_postes_variables(tax_benefit_system)
+    generate_postes_agreges_variables(tax_benefit_system)
+    generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscales = categories_fiscales_data_frame.copy())

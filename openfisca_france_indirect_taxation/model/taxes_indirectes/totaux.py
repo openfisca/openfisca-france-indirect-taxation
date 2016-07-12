@@ -25,7 +25,7 @@
 from __future__ import division
 
 
-from ..base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
 class taxes_indirectes_total(Variable):

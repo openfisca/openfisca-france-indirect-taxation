@@ -26,15 +26,14 @@
 from pandas import DataFrame
 
 
-import openfisca_france_indirect_taxation
 from openfisca_france_indirect_taxation.surveys import SurveyScenario, get_input_data_frame
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 
 
 def run_survey_simulation(year = None):
     assert year is not None
     input_data_frame = get_input_data_frame(year)
-    TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
-    tax_benefit_system = TaxBenefitSystem()
+    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
     survey_scenario = SurveyScenario().init_from_data_frame(
         input_data_frame = input_data_frame,
         tax_benefit_system = tax_benefit_system,
