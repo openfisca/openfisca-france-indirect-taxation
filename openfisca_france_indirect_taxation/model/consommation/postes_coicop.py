@@ -48,7 +48,8 @@ def generate_postes_variables(tax_benefit_system):
             )
 
 
-def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscales = None, Reform = None, old_tax_benefit_system = None):
+def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscales = None, Reform = None,
+        old_tax_benefit_system = None):
     assert categories_fiscales is not None
     reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
     functions_by_name_by_poste = dict()
@@ -111,8 +112,8 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
         del definitions_by_name
 
 
-def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = None, Reform = None, taux_by_categorie_fiscale = None,
-        old_tax_benefit_system = None):
+def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = None, Reform = None,
+        taux_by_categorie_fiscale = None, old_tax_benefit_system = None):
     # codes_bdf = [element for element in codes_coicop_data_frame.code_bdf.unique()]
     for num_prefix in ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]:
         codes_coicop = codes_coicop_data_frame.loc[
@@ -161,4 +162,5 @@ def preload_postes_coicop_data_frame(tax_benefit_system):
 
     generate_postes_variables(tax_benefit_system)
     generate_postes_agreges_variables(tax_benefit_system)
-    generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscales = categories_fiscales_data_frame.copy())
+    generate_depenses_ht_postes_variables(
+        tax_benefit_system, categories_fiscales = categories_fiscales_data_frame.copy())

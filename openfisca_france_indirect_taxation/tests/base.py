@@ -50,14 +50,19 @@ __all__ = [
 
 tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
+# The reforms commented haven't been adapted to the new core API yet.
+reform_list = {
+    'aliss_environnement': aliss.aliss_environnement,
+    'aliss_mixte': aliss.aliss_mixte,
+    'aliss_sante': aliss.aliss_sante,
+    'aliss_tva_sociale': aliss.aliss_tva_sociale,
+    # 'contribution_climat_energie': contribution_climat_energie.build_reform,
+    # 'test_reforme_alimentation': alimentation.build_reform,
+    # 'taxes_carburants': taxes_carburants.build_reform,
+    # 'taxe_carbone': taxe_carbone.build_reform,
+    }
+
 build_reform_function_by_key = {
-    'aliss_environnement': aliss.build_reform_environnement,
-    'aliss_sante': aliss.build_reform_sante,
-    'aliss_tva_sociale': aliss.build_reform_tva_sociale,
-    'contribution_climat_energie': contribution_climat_energie.build_reform,
-    'test_reforme_alimentation': alimentation.build_reform,
-    'taxes_carburants': taxes_carburants.build_reform,
-    'taxe_carbone': taxe_carbone.build_reform,
 
     }
 reform_by_full_key = {}

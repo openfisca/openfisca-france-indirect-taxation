@@ -82,28 +82,29 @@ def build_aliss_reform(rebuild = False):
     return aliss_reform
 
 
-def build_reform_environnement(tax_benefit_system):
+class aliss_environnement(reforms.Reform):
     key = 'aliss_environnement'
     name = u"Réforme Aliss-Environnement de l'imposition indirecte des biens alimentaires"
-    return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
+
+    # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
 
 
-def build_reform_mixte(tax_benefit_system):
+class aliss_mixte(reforms.Reform):
     key = 'aliss_mixte'
     name = u"Réforme Aliss-Mixte-Environnement-Sante de l'imposition indirecte des biens alimentaires"
-    return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
+    # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
 
 
-def build_reform_sante(tax_benefit_system):
+class aliss_sante(reforms.Reform):
     key = 'aliss_sante'
     name = u"Réforme Aliss-Santé de l'imposition indirecte des biens alimentaires"
-    return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
+    # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
 
 
-def build_reform_tva_sociale(tax_benefit_system):
+def aliss_tva_sociale(tax_benefit_system):
     key = 'aliss_tva_sociale'
     name = u"Réforme Aliss-TVA sociale de l'imposition indirecte des biens alimentaires"
-    return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
+    # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
 
 
 def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None, missmatch_rates = "weighted"):

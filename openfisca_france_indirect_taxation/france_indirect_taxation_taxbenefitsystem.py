@@ -6,6 +6,7 @@ import itertools
 import os
 
 from openfisca_core.taxbenefitsystems import TaxBenefitSystem
+from .param import preprocessing
 
 from . import entities
 from . import scenarios
@@ -19,6 +20,7 @@ EXTENSIONS_DIRECTORIES = glob.glob(os.path.join(EXTENSIONS_PATH, '*/'))
 class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
     """French indirect taxation tax benefit system"""
     CURRENCY = u"€"
+    preprocess_legislation = staticmethod(preprocessing.preprocess_legislation)
 
     def __init__(self):
         TaxBenefitSystem.__init__(self, entities.entities)
