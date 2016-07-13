@@ -11,25 +11,24 @@ import os
 def get_elasticities(year):
     default_config_files_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-    data_quaids = pd.read_csv(
-        os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
-            'quaids',
-            'data_quaids_energy_no_alime_all.csv'.format(year)
-            ), sep =',')
+    elasticities_path = os.path.join(
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'quaids',
+        'data_quaids_energy_no_alime_all.csv'.format(year)
+        )
+    if not os.path.exists(elasticities_path):
+        return None
+    data_quaids = pd.read_csv(elasticities_path, sep =',')
     data_quaids = data_quaids.query('year == @year').copy()
     liste_elasticities = [column for column in data_quaids.columns if column[:4] == 'elas']
     data_quaids[liste_elasticities] = data_quaids[liste_elasticities].astype('float32')
     dataframe = data_quaids[liste_elasticities + ['ident_men', 'year']].copy()
-
     dataframe = dataframe.fillna(0)
     # We block the elasticities of housing energy to some value found in the literature (see Clerc and Marcus, 2009)
     dataframe['elas_price_2_2'] = -0.1
-
     assert not dataframe.ident_men.duplicated().any(), 'Some housholds are duplicated'
-
     return dataframe
 
 

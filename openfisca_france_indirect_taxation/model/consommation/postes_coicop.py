@@ -48,8 +48,7 @@ def generate_postes_variables(tax_benefit_system):
             )
 
 
-def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscales = None, Reform = None,
-        old_tax_benefit_system = None):
+def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscales = None, reform_key = None):
     assert categories_fiscales is not None
     reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
     functions_by_name_by_poste = dict()
@@ -112,8 +111,8 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
         del definitions_by_name
 
 
-def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = None, Reform = None,
-        taux_by_categorie_fiscale = None, old_tax_benefit_system = None):
+def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = None, reform_key = None,
+        taux_by_categorie_fiscale = None):
     # codes_bdf = [element for element in codes_coicop_data_frame.code_bdf.unique()]
     for num_prefix in ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]:
         codes_coicop = codes_coicop_data_frame.loc[
@@ -127,12 +126,12 @@ def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = 
         dated_func = depenses_postes_agreges_function_creator(
             codes_coicop,
             categories_fiscales = categories_fiscales,
-            Reform = Reform,
+            reform_key = reform_key,
             taux_by_categorie_fiscale = taux_by_categorie_fiscale,
             )
 
         functions_by_name = dict(function = dated_func)
-        if not Reform:
+        if reform_key is None:
             definitions_by_name = dict(
                 column = FloatCol,
                 entity_class = Menages,
@@ -143,10 +142,7 @@ def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = 
                 type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
                 )
         else:
-            definitions_by_name = dict(
-                reference = old_tax_benefit_system.column_by_name[class_name.encode('utf-8')]
-                )
-            definitions_by_name.update(functions_by_name)
+            definitions_by_name = functions_by_name
             tax_benefit_system.update_variable(
                 type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
                 )

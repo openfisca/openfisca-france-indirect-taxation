@@ -29,10 +29,10 @@ import xml.etree.ElementTree
 
 from openfisca_core import conv, legislations, legislationsxml
 
-from openfisca_france_indirect_taxation import init_country
+import openfisca_france_indirect_taxation
 
 
-TaxBenefitSystem = init_country()
+TaxBenefitSystem = openfisca_france_indirect_taxation.FranceIndirectTaxationTaxBenefitSystem
 
 
 def check_legislation_xml_file(year):

@@ -1,28 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014, 2015 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
 from __future__ import division
 
 from datetime import date
@@ -44,13 +22,13 @@ categories_fiscales_data_frame = None
 codes_coicop_data_frame = None
 
 
-def generate_variables(tax_benefit_system, categories_fiscales = None, Reform = None, old_tax_benefit_system = None):
+def generate_variables(tax_benefit_system, categories_fiscales = None, reform_key = None):
     assert categories_fiscales is not None
     reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
     removed_categories = set()
     completed_categories_fiscales = insert_tva(categories_fiscales)
 
-    if Reform:
+    if reform_key:
         reference_categories = set(reference_categories).union(set(categories_fiscales.categorie_fiscale.unique()))
 
     for categorie_fiscale in reference_categories:
@@ -91,7 +69,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, Reform = 
         class_name = u'depenses_ht_{}'.format(categorie_fiscale)
 
         # Trick to create a class with a dynamic name.
-        if not Reform:
+        if reform_key is None:
             definitions_by_name = dict(
                 column = FloatCol,
                 entity_class = Menages,

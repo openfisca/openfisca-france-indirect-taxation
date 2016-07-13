@@ -5,8 +5,7 @@ from pandas import concat
 
 import openfisca_france_indirect_taxation
 
-TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
-tax_benefit_system = TaxBenefitSystem()
+tax_benefit_system = openfisca_france_indirect_taxation.FranceIndirectTaxationTaxBenefitSystem()
 legislation_json = tax_benefit_system.legislation_json
 
 

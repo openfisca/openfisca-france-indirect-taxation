@@ -8,10 +8,10 @@ import os
 import pandas as pd
 import pkg_resources
 
-from openfisca_core import reforms
+from openfisca_core.reforms import Reform
 from openfisca_core.columns import FloatCol
 from openfisca_core.formulas import dated_function
-from openfisca_core.variables import DatedVariable
+from openfisca_core.variables import DatedVariable, Variable
 
 
 from openfisca_france_indirect_taxation.model.base import get_legislation_data_frames, Menages
@@ -84,30 +84,39 @@ def build_aliss_reform(rebuild = False):
     return aliss_reform
 
 
-class aliss_environnement(reforms.Reform):
-    key = 'aliss_environnement'
+class aliss_environnement(Reform):
     name = u"Réforme Aliss-Environnement de l'imposition indirecte des biens alimentaires"
+    key = 'aliss_environnement'
 
     def apply(self):
         build_custom_aliss_reform(self, key = self.key, name = self.name)
 
 
-class aliss_mixte(reforms.Reform):
+class aliss_mixte(Reform):
     key = 'aliss_mixte'
-    name = u"Réforme Aliss-Mixte-Environnement-Sante de l'imposition indirecte des biens alimentaires"
+    # name = u"Réforme Aliss-Mixte-Environnement-Sante de l'imposition indirecte des biens alimentaires"
     # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
 
+    def apply(self):
+        build_custom_aliss_reform(self, key = self.key, name = self.name)
 
-class aliss_sante(reforms.Reform):
+
+class aliss_sante(Reform):
     key = 'aliss_sante'
     name = u"Réforme Aliss-Santé de l'imposition indirecte des biens alimentaires"
     # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
+
+    def apply(self):
+        build_custom_aliss_reform(self, key = self.key, name = self.name)
 
 
 def aliss_tva_sociale(tax_benefit_system):
     key = 'aliss_tva_sociale'
     name = u"Réforme Aliss-TVA sociale de l'imposition indirecte des biens alimentaires"
     # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
+
+    def apply(self):
+        build_custom_aliss_reform(self, key = self.key, name = self.name)
 
 
 def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None, missmatch_rates = "weighted"):
@@ -173,24 +182,20 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     generate_variables(
         tax_benefit_system,
         categories_fiscales = categories_fiscales,
-        # Reform = Reform,
+        reform_key = key,
         )  # Dépenses hors taxes
     generate_postes_agreges_variables(
         tax_benefit_system,
         categories_fiscales = categories_fiscales,
-        # Reform = Reform,
+        reform_key = key,
         taux_by_categorie_fiscale = taux_by_categorie_fiscale,
         )  # Dépenses taxes comprises des postes agrégés
     taux_by_categorie_fiscale = taux_by_categorie_fiscale if taux_by_categorie_fiscale is not None else dict()
     generate_additional_tva_variables(
         tax_benefit_system,
-        # Reform = Reform,
+        reform_key = key,
         taux_by_categorie_fiscale = taux_by_categorie_fiscale,
-        old_tax_benefit_system = tax_benefit_system,
         )
-
-    reform = Reform()
-    return reform
 
 
 def build_budget_shares(rebuild = False):
@@ -337,8 +342,7 @@ def new_tva_total_function_creator(categories_fiscales):
     return func
 
 
-def generate_additional_tva_variables(tax_benefit_system, Reform = None, taux_by_categorie_fiscale = None,
-        old_tax_benefit_system = None):
+def generate_additional_tva_variables(tax_benefit_system, reform_key = None, taux_by_categorie_fiscale = None):
     for categorie_fiscale, taux in taux_by_categorie_fiscale.iteritems():
         depenses_new_tva_func = depenses_new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
         new_tva_func = new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
@@ -353,9 +357,17 @@ def generate_additional_tva_variables(tax_benefit_system, Reform = None, taux_by
                 function = depenses_new_tva_func,
                 )
             depenses_class_name = u'depenses_{}'.format(categorie_fiscale)
-            tax_benefit_system.add_variable(
-                type(depenses_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
-                )
+            print 'toto'
+            print reform_key
+            print depenses_class_name
+            if depenses_class_name in tax_benefit_system.column_by_name.keys():
+                tax_benefit_system.update_variable(
+                    type(depenses_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                    )
+            else:
+                tax_benefit_system.add_variable(
+                    type(depenses_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                    )
             del definitions_by_name
 
             definitions_by_name = dict(
@@ -369,11 +381,11 @@ def generate_additional_tva_variables(tax_benefit_system, Reform = None, taux_by
                 type(tva_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
                 )
             del definitions_by_name
-            log.info(u'{} Created new fiscal category {}'.format(Reform.name, categorie_fiscale))
+            log.info(u'{} Created new fiscal category {}'.format(reform_key, categorie_fiscale))
 
         except AssertionError as e:
             log.info(e)
-            log.info(u'{} Fiscal category {} is not new : passing'.format(Reform.name, categorie_fiscale))
+            log.info(u'{} Fiscal category {} is not new : passing'.format(reform_key, categorie_fiscale))
             pass
 
     # tva_total variable creation
@@ -384,10 +396,9 @@ def generate_additional_tva_variables(tax_benefit_system, Reform = None, taux_by
         ]
     new_tva_total_func = new_tva_total_function_creator(categories_fiscales)
     definitions_by_name = dict(
-        reference = old_tax_benefit_system.column_by_name[u'tva_total'.encode('utf-8')],
         function = new_tva_total_func,
         )
-    type(u'tva_total'.encode('utf-8'), (Reform.Variable,), definitions_by_name)
+    type(u'tva_total'.encode('utf-8'), (Variable,), definitions_by_name)
     del definitions_by_name
 
 

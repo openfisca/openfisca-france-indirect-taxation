@@ -150,12 +150,12 @@ def get_poste_categorie_fiscale(poste_coicop, categories_fiscales = None, start 
         ].tolist()
 
 
-def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales = None, Reform = None,
+def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales = None, reform_key = None,
         taux_by_categorie_fiscale = None, year_start = None, year_stop = None):
     start = date(year_start, 1, 1) if year_start is not None else None
     stop = date(year_stop, 12, 31) if year_stop is not None else None
     if len(postes_coicop) != 0:
-        if not Reform:
+        if reform_key is None:
             @dated_function(start = start, stop = stop)
             def func(self, simulation, period):
                 return period, sum(simulation.calculate(
@@ -165,7 +165,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                 year_start = year_start, year_stop = year_stop)
             return func
 
-        elif Reform:
+        else:
             assert categories_fiscales is not None
             taux_by_categorie_fiscale = taux_by_categorie_fiscale if taux_by_categorie_fiscale is not None else dict()
             categorie_fiscale_by_poste = dict(
