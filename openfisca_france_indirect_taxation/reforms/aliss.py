@@ -11,6 +11,8 @@ import pkg_resources
 from openfisca_core import reforms
 from openfisca_core.columns import FloatCol
 from openfisca_core.formulas import dated_function
+from openfisca_core.variables import DatedVariable
+
 
 from openfisca_france_indirect_taxation.model.base import get_legislation_data_frames, Menages
 
@@ -86,7 +88,8 @@ class aliss_environnement(reforms.Reform):
     key = 'aliss_environnement'
     name = u"Réforme Aliss-Environnement de l'imposition indirecte des biens alimentaires"
 
-    # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
+    def apply(self):
+        build_custom_aliss_reform(self, key = self.key, name = self.name)
 
 
 class aliss_mixte(reforms.Reform):
@@ -98,7 +101,7 @@ class aliss_mixte(reforms.Reform):
 class aliss_sante(reforms.Reform):
     key = 'aliss_sante'
     name = u"Réforme Aliss-Santé de l'imposition indirecte des biens alimentaires"
-    # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
+    # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
 
 
 def aliss_tva_sociale(tax_benefit_system):
@@ -112,12 +115,8 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     assert key is not None
     assert tax_benefit_system is not None
     taux_by_categorie_fiscale = None
-    Reform = reforms.make_reform(
-        key = key,
-        name = name,
-        reference = tax_benefit_system,
-        )
     reform_key = key[6:]
+
     aliss_reform = build_aliss_reform()
     categories_fiscales_reform = aliss_reform[[reform_key, 'code_bdf']].drop_duplicates().copy()
     reform_mismatch = categories_fiscales_reform.groupby(['code_bdf']).filter(
@@ -143,7 +142,7 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
             assert not categories_fiscales_reform.code_bdf.duplicated().any()
             categories_fiscales_reform[reform_key] = categories_fiscales_reform[reform_key].astype(str)
 
-    categories_fiscales_reform.rename(columns=({reform_key: 'categorie_fiscale'}), inplace = True)
+    categories_fiscales_reform.rename(columns = ({reform_key: 'categorie_fiscale'}), inplace = True)
     year = 2014
     categories_fiscales_data_frame, _ = get_legislation_data_frames()
     categories_fiscales = categories_fiscales_data_frame.query('start <= @year & @year <= stop').copy()
@@ -172,21 +171,22 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
         categories_fiscales.code_bdf.duplicated().sum())
 
     generate_variables(
+        tax_benefit_system,
         categories_fiscales = categories_fiscales,
-        Reform = Reform,
-        tax_benefit_system = tax_benefit_system,
+        # Reform = Reform,
         )  # Dépenses hors taxes
     generate_postes_agreges_variables(
+        tax_benefit_system,
         categories_fiscales = categories_fiscales,
-        Reform = Reform,
+        # Reform = Reform,
         taux_by_categorie_fiscale = taux_by_categorie_fiscale,
-        tax_benefit_system = tax_benefit_system,
         )  # Dépenses taxes comprises des postes agrégés
     taux_by_categorie_fiscale = taux_by_categorie_fiscale if taux_by_categorie_fiscale is not None else dict()
     generate_additional_tva_variables(
-        Reform = Reform,
+        tax_benefit_system,
+        # Reform = Reform,
         taux_by_categorie_fiscale = taux_by_categorie_fiscale,
-        tax_benefit_system = tax_benefit_system,
+        old_tax_benefit_system = tax_benefit_system,
         )
 
     reform = Reform()
@@ -337,7 +337,8 @@ def new_tva_total_function_creator(categories_fiscales):
     return func
 
 
-def generate_additional_tva_variables(Reform = None, taux_by_categorie_fiscale = None, tax_benefit_system = None):
+def generate_additional_tva_variables(tax_benefit_system, Reform = None, taux_by_categorie_fiscale = None,
+        old_tax_benefit_system = None):
     for categorie_fiscale, taux in taux_by_categorie_fiscale.iteritems():
         depenses_new_tva_func = depenses_new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
         new_tva_func = new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
@@ -352,7 +353,9 @@ def generate_additional_tva_variables(Reform = None, taux_by_categorie_fiscale =
                 function = depenses_new_tva_func,
                 )
             depenses_class_name = u'depenses_{}'.format(categorie_fiscale)
-            type(depenses_class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
+            tax_benefit_system.add_variable(
+                type(depenses_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                )
             del definitions_by_name
 
             definitions_by_name = dict(
@@ -362,7 +365,9 @@ def generate_additional_tva_variables(Reform = None, taux_by_categorie_fiscale =
                 function = new_tva_func,
                 )
             tva_class_name = u'{}'.format(categorie_fiscale)
-            type(tva_class_name.encode('utf-8'), (Reform.DatedVariable,), definitions_by_name)
+            tax_benefit_system.add_variable(
+                type(tva_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                )
             del definitions_by_name
             log.info(u'{} Created new fiscal category {}'.format(Reform.name, categorie_fiscale))
 
@@ -379,7 +384,7 @@ def generate_additional_tva_variables(Reform = None, taux_by_categorie_fiscale =
         ]
     new_tva_total_func = new_tva_total_function_creator(categories_fiscales)
     definitions_by_name = dict(
-        reference = tax_benefit_system.column_by_name[u'tva_total'.encode('utf-8')],
+        reference = old_tax_benefit_system.column_by_name[u'tva_total'.encode('utf-8')],
         function = new_tva_total_func,
         )
     type(u'tva_total'.encode('utf-8'), (Reform.Variable,), definitions_by_name)
