@@ -94,8 +94,7 @@ class aliss_environnement(Reform):
 
 class aliss_mixte(Reform):
     key = 'aliss_mixte'
-    # name = u"Réforme Aliss-Mixte-Environnement-Sante de l'imposition indirecte des biens alimentaires"
-    # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
+    name = u"Réforme Aliss-Mixte-Environnement-Sante de l'imposition indirecte des biens alimentaires"
 
     def apply(self):
         build_custom_aliss_reform(self, key = self.key, name = self.name)
@@ -104,16 +103,14 @@ class aliss_mixte(Reform):
 class aliss_sante(Reform):
     key = 'aliss_sante'
     name = u"Réforme Aliss-Santé de l'imposition indirecte des biens alimentaires"
-    # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
 
     def apply(self):
         build_custom_aliss_reform(self, key = self.key, name = self.name)
 
 
-def aliss_tva_sociale(tax_benefit_system):
+class aliss_tva_sociale(Reform):
     key = 'aliss_tva_sociale'
     name = u"Réforme Aliss-TVA sociale de l'imposition indirecte des biens alimentaires"
-    # return build_custom_aliss_reform(tax_benefit_system, key = key, name = name)
 
     def apply(self):
         build_custom_aliss_reform(self, key = self.key, name = self.name)
@@ -344,49 +341,44 @@ def new_tva_total_function_creator(categories_fiscales):
 
 def generate_additional_tva_variables(tax_benefit_system, reform_key = None, taux_by_categorie_fiscale = None):
     for categorie_fiscale, taux in taux_by_categorie_fiscale.iteritems():
-        depenses_new_tva_func = depenses_new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
-        new_tva_func = new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
         if not categorie_fiscale.startswith('tva'):
             continue
-        # Trick to create a class with a dynamic name.
-        try:
+        # Create a depenses (TTC) class with a dynamic name.
+        depenses_class_name = u'depenses_{}'.format(categorie_fiscale)
+
+        if tax_benefit_system.get_column(depenses_class_name) is None:
+            depenses_new_tva_func = depenses_new_tva_function_creator(
+                categorie_fiscale = categorie_fiscale, taux = taux)
             definitions_by_name = dict(
                 column = FloatCol,
                 entity_class = Menages,
                 label = u"Dépenses taxes comprises: {0}".format(categorie_fiscale),
                 function = depenses_new_tva_func,
                 )
-            depenses_class_name = u'depenses_{}'.format(categorie_fiscale)
-            print 'toto'
-            print reform_key
-            print depenses_class_name
-            if depenses_class_name in tax_benefit_system.column_by_name.keys():
-                tax_benefit_system.update_variable(
-                    type(depenses_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
-                    )
-            else:
-                tax_benefit_system.add_variable(
-                    type(depenses_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
-                    )
+            depenses_variable_class = type(depenses_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+            tax_benefit_system.add_variable(depenses_variable_class)
             del definitions_by_name
 
+        # Create a tva (TTC) class with a dynamic name.
+        tva_class_name = u'{}'.format(categorie_fiscale)
+        if tax_benefit_system.get_column(tva_class_name) is None:
+            new_tva_func = new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
             definitions_by_name = dict(
                 column = FloatCol,
                 entity_class = Menages,
                 label = u"Montant de la TVA acquitée à {0}".format(categorie_fiscale),
                 function = new_tva_func,
                 )
-            tva_class_name = u'{}'.format(categorie_fiscale)
-            tax_benefit_system.add_variable(
-                type(tva_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
-                )
+            tva_variable_class = type(tva_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+            tax_benefit_system.add_variable(tva_variable_class)
             del definitions_by_name
-            log.info(u'{} Created new fiscal category {}'.format(reform_key, categorie_fiscale))
 
-        except AssertionError as e:
-            log.info(e)
-            log.info(u'{} Fiscal category {} is not new : passing'.format(reform_key, categorie_fiscale))
-            pass
+        log.info(u'{} Created new fiscal category {}'.format(reform_key, categorie_fiscale))
+
+        # except AssertionError as e:
+        #     log.info(e)
+        #     log.info(u'{} Fiscal category {} is not new : passing'.format(reform_key, categorie_fiscale))
+        #     pass
 
     # tva_total variable creation
     categories_fiscales = [

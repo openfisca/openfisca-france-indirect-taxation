@@ -22,9 +22,10 @@ __all__ = [
     ]
 
 # Initialize a tax_benefit_system
-
 tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
+
+# Reforms cache, used by long scripts like test_yaml.py
 # The reforms commented haven't been adapted to the new core API yet.
 reform_list = {
     'aliss_environnement': aliss.aliss_environnement,
@@ -39,8 +40,6 @@ reform_list = {
 
 reform_by_full_key = {}
 
-
-# Reforms cache, used by long scripts like test_yaml.py
 
 def get_cached_composed_reform(reform_keys, tax_benefit_system):
     full_key = '.'.join(
