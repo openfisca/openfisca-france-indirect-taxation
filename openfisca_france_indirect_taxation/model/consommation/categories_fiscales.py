@@ -82,9 +82,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
 
         else:
             if class_name.encode('utf-8') in tax_benefit_system.column_by_name:
-                definitions_by_name = dict(
-                    reference = tax_benefit_system.column_by_name[class_name.encode('utf-8')]
-                    )
+                definitions_by_name = dict()
                 definitions_by_name.update(functions_by_name)
                 tax_benefit_system.update_variable(
                     type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
