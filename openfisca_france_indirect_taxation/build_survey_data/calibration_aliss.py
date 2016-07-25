@@ -29,14 +29,16 @@ assets_path = os.path.join(
 
 
 def detect_null(data_frame):
-    isnull_columns = list()
     global_null = None
     for column in data_frame.columns:
         null = data_frame[column].isnull()
         if null.any():
-            isnull_columns.append(column)
             global_null = (global_null | null) if global_null is not None else null
-    return data_frame.loc[global_null].copy()
+
+    if global_null:
+        return data_frame.loc[global_null].copy()
+    else:
+        return pandas.DataFrame()
 
 
 def build_clean_aliss_data_frame():
@@ -47,6 +49,11 @@ def build_clean_aliss_data_frame():
     survey = aliss_survey_collection.get_survey('aliss_{}'.format(year))
 
     aliss = survey.get_values(table = 'Base_ALISS_2011')
+
+
+    assert len(aliss.dt_k.columns) == 2, 'dt_k is not duplicated'
+    assert aliss.columns[-2:].tolist() == ['dt_k', 'd_a'], 'The last two columns are not duplicatd dt_k and d_a'
+    aliss = aliss.iloc[:, 0:22].copy()  # Removing the last two columns
 
     errors = detect_null(aliss)
     errors.to_csv('aliss_errors.csv')
@@ -121,7 +128,6 @@ def complete_input_data_frame(input_data_frame, drop_dom = True):
 
     input_data_frame['revenus_kantar'] = (
         input_data_frame.rev_disponible.astype('float') / input_data_frame.ocde10_old.astype('float')
-        # inplace = True,
         )
     labels = np.arange(0, 20)
     input_data_frame['vingtile'], values = weighted_quantiles(input_data_frame.revenus_kantar.astype('float'), labels,
@@ -133,9 +139,6 @@ def complete_input_data_frame(input_data_frame, drop_dom = True):
         (input_data_frame.revenus_kantar >= values[11 - 1]).astype('int') +
         (input_data_frame.revenus_kantar >= values[17 - 1]).astype('int')
         )
-    # print input_data_frame.vingtile.value_counts(dropna = False)
-    # print input_data_frame.revenus.value_counts(dropna = False)
-    # print input_data_frame.groupby('revenus')['pondmen'].sum() / input_data_frame.pondmen.sum()
 
     assert input_data_frame.revenus.isin([0, 1, 2, 3]).all()
     assert input_data_frame.age.isin([0, 1, 2, 3]).all()
@@ -220,8 +223,7 @@ def compute_expenditures(drop_dom = True):
             ).reset_index()
     input_data_expenditures.rename(columns = {"variable": "poste_coicop", 0: "bdf_expenditures"}, inplace = True)
 
-    # input_data_expenditures['bdf_budget_share'] = (
-    #   input_data_expenditures.bdf_expenditures / input_data_expenditures.bdf_expenditures.sum())
+
     print("bdf_expenditures_total: ", input_data_expenditures.bdf_expenditures.sum() / 1e9)
 
     input_data_expenditures['bdf_budget_share'] = input_data_expenditures.groupby(
@@ -504,7 +506,7 @@ def compute_adjusted_expenditures(reform_key = None):
 
     adjusted_expenditures.eval(
         'adjusted_bdf_budget_share = kantar_budget_share_to_bdf * adjusted_kantar_aggregated_budget_share',
-        # inplace = True
+        inplace = True
         )
 
     return adjusted_expenditures  # , total_expenditures_variation
@@ -566,4 +568,6 @@ def get_adjusted_input_data_frame(reform_key = None, verbose = False):
 
 if __name__ == '__main__':
     input_data_frame = get_adjusted_input_data_frame(reform_key = 'tva_sociale')
-    print(input_data_frame.columns[input_data_frame.isnull().any()])
+#    print(input_data_frame.columns[input_data_frame.isnull().any()])
+
+    # df = build_clean_aliss_data_frame()
