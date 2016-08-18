@@ -1,3 +1,2 @@
--e git+https://github.com/openfisca/openfisca-core.git#egg=OpenFisca-Core
---no-deps -e git+https://github.com/openfisca/openfisca-survey-manager.git#egg=OpenFisca-Survey-Manager
+-e git+https://github.com/openfisca/openfisca-survey-manager.git#egg=OpenFisca-Survey-Manager
 -e .
