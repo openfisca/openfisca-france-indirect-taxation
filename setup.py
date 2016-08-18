@@ -58,7 +58,6 @@ setup(
         test = [
             'nose',
             'pandas >= 0.17',
-            'OpenFisca-Survey-Manager',
             ],
         survey = [
             'OpenFisca-Survey-Manager',
