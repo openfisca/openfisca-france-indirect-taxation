@@ -13,7 +13,7 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss import get_adjusted_input_data_frame
 
 # Import d'une nouvelle palette de couleurs
-if import is not None:
+if seaborn is not None:
     seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 
