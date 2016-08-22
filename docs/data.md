@@ -2,7 +2,7 @@
 
 ## Les différents types de données
 
-Plusieurs jeux de données de type, d'origine et aux fonctions diverses sont potentiellement mobilisées par le logiciel de microsimulation: 
+Plusieurs jeux de données différents par leur origine et leurs fonctions sont potentiellement mobilisées par le logiciel de microsimulation: 
 
  - des données micro issues d'enquêtes sur la consommation individuelle des ménages (enquête budget des familles de l'INSEE ou autre),
  - des informations tirées de la législation (taux de TVA, TICPE, _etc_.),
