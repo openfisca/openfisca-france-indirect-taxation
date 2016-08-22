@@ -40,7 +40,7 @@ La base fournie par ALISS est traitée dans le script [calibration_aliss] (../..
 
 A l'aide des matrices de passage de la nomenclature F à la nomenclature Kantar, il est possible selon certaine hypothèses (voir Annexe) de déduire des élastcités sur les produits de la nomenclature Kantar à l'aide de ceux de la nomenclature F pour chacun des ménages types (Voir la fonction [`compute_kantar_elasticities`] (../../build_survey_data/calibration_aliss.py#251))
 
-## Calage et intégration de la réaction comportmentale
+## Calage et intégration de la réaction comportementale
 
 Les données d'entrée du modèle de micro-simulation TAXIPP sont les données budget des familles obéissant à la nomenclature Coicop. Elles sont utilisées pour caler les données Kantar au niveau des ménages types mentionnées ci-dessus. Ces cales sont conservées pour usage ultérieure.
 
@@ -49,4 +49,13 @@ Une fois déduites les élastcités au niveau des produits de la nomenclature Ka
 Il est alors possible d'utiliser les cales calculées précédemment pour caler les budgets alimentaires dans le modèle TAXIPP.
 L'analyse des divers impacts sur les revenus des ménages peut ainsi être conduite dans le modèle TAXIPP ( (Voir la fonction [`get_adjusted_input_data_frame`] (../../build_survey_data/calibration_aliss.py#515)).
 
+## Réformes
+
+La procédure décrite au paragraphe précédent est utilisable avec les différentes réformes suivantes, consistant chacune à un changement de catégorie de TVA des produits alimentaire. Ont été mises en oeuvre:
+ - une réforme santé pour laquelle le taux d'imposition décroît avec la qualité nutritionnelle des produits,
+ - une réforme environnement pour laquelle le taux d'imposition décroît avec la qualité environnementale des produits,
+ - une réforme mixte pour laquelle le taux d'imposition retenu pour chaque produit est le maximum de ceux retenus dans les deux précédentes réformes pour le même produit,
+ - une réforme TVA sociale qui applique le taux de TVA intermédiaire à tous les produits
+
+Le détail de ces réformes est disponible dans ce [tableau] (../../reforms/aliss_assets/aliss_reform.csv).
 
