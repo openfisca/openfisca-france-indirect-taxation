@@ -31,3 +31,13 @@ Il s'agit élasticités prix directes et croisées, de catégories de produit do
 dans la table A2 de Caillavet et. al. (TODO link).
  - Les tables B4-B16 rassemblent les élasticités prix directes et croisées pour les 16 catégories de ménage. Elles sont disponibles pour chaque type de ménage dans ce [répertoire] (https://github.com/openfisca/openfisca-france-indirect-taxation/tree/api_migration/openfisca_france_indirect_taxation/assets/aliss) mais également rassemblée dans ce [fichier] (https://github.com/openfisca/openfisca-france-indirect-taxation/blob/api_migration/openfisca_france_indirect_taxation/assets/aliss/cross_price_elasticities.csv). 
  - La table B3 rassemble les élasticités-dépenses qui son également disponibles dans ce [fichier] (https://github.com/openfisca/openfisca-france-indirect-taxation/blob/api_migration/openfisca_france_indirect_taxation/assets/aliss/food-expenditure-elasticities.csv).  
+
+## Calage après intégration de la réaction comportmentale
+
+Afin de pouvoir utiliser ces élasticités, il est nécessaire de pouvoir passer de la nomenclature Coicop à la nomenclature F.
+Cette dernière est une nomenclature agrégée de la nomenclature Kantar. Le laboratoire ALISS a donc fournir une table appariant les produits de la nomenclature Kantar à ceux de la nomenclature Coicop d’un côté et à ceux de la nomemclature F de l’autre.
+Il faut noter cependant qu'une catégorie de la nomenclature Kantar n’appartient qu’à une seule catégorie Nomenclature F et à une seule catégorie de la nomenclature Coicop. En sus de la correspondance entre produits, sont fournis les quantités consommées, les prix unitaires et le poids des populations concernées ventilées au niveau des ménages types mentionnés ci-dessus.
+
+La base fournie par ALISS est traitée dans le script [calibration_aliss] (../../build_survey_data/calibration_aliss.py). Le  calcul des dépenses selon les différentes nomenclature est réalisé par la fonction ['compute_expenditures'] ( https://github.com/openfisca/openfisca-france-indirect-taxation/blob/api_migration/openfisca_france_indirect_taxation/build_survey_data/calibration_aliss.py#L190). Le fichier produit est [consultable] (./expenditures.csv). 
+
+A l'aide des matrices de passage de la nomenclature F à la nomenclature Kantar, il est possible selon certaine hypothèses (voir Annexe) de déduire des élastcités sur les produits de la nomenclature Kantar à l'aide de ceux de la nomenclature F pour chacun des ménages types.
