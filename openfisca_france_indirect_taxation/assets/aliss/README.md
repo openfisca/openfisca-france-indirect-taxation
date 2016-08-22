@@ -32,12 +32,21 @@ dans la table A2 de Caillavet et. al. (TODO link).
  - Les tables B4-B16 rassemblent les élasticités prix directes et croisées pour les 16 catégories de ménage. Elles sont disponibles pour chaque type de ménage dans ce [répertoire] (https://github.com/openfisca/openfisca-france-indirect-taxation/tree/api_migration/openfisca_france_indirect_taxation/assets/aliss) mais également rassemblée dans ce [fichier] (https://github.com/openfisca/openfisca-france-indirect-taxation/blob/api_migration/openfisca_france_indirect_taxation/assets/aliss/cross_price_elasticities.csv). 
  - La table B3 rassemble les élasticités-dépenses qui son également disponibles dans ce [fichier] (https://github.com/openfisca/openfisca-france-indirect-taxation/blob/api_migration/openfisca_france_indirect_taxation/assets/aliss/food-expenditure-elasticities.csv).  
 
-## Calage après intégration de la réaction comportmentale
-
 Afin de pouvoir utiliser ces élasticités, il est nécessaire de pouvoir passer de la nomenclature Coicop à la nomenclature F.
 Cette dernière est une nomenclature agrégée de la nomenclature Kantar. Le laboratoire ALISS a donc fournir une table appariant les produits de la nomenclature Kantar à ceux de la nomenclature Coicop d’un côté et à ceux de la nomemclature F de l’autre.
 Il faut noter cependant qu'une catégorie de la nomenclature Kantar n’appartient qu’à une seule catégorie Nomenclature F et à une seule catégorie de la nomenclature Coicop. En sus de la correspondance entre produits, sont fournis les quantités consommées, les prix unitaires et le poids des populations concernées ventilées au niveau des ménages types mentionnés ci-dessus.
 
-La base fournie par ALISS est traitée dans le script [calibration_aliss] (../../build_survey_data/calibration_aliss.py). Le  calcul des dépenses selon les différentes nomenclature est réalisé par la fonction [`compute_expenditures`] ( https://github.com/openfisca/openfisca-france-indirect-taxation/blob/api_migration/openfisca_france_indirect_taxation/build_survey_data/calibration_aliss.py#L190). Le fichier produit est [consultable] (./expenditures.csv). 
+La base fournie par ALISS est traitée dans le script [calibration_aliss] (../../build_survey_data/calibration_aliss.py). Le  calcul des dépenses selon les différentes nomenclature est réalisé par la fonction [`compute_expenditures`] ( ../../build_survey_data/calibration_aliss.py#L190). Le fichier produit est [consultable] (./expenditures.csv). 
 
-A l'aide des matrices de passage de la nomenclature F à la nomenclature Kantar, il est possible selon certaine hypothèses (voir Annexe) de déduire des élastcités sur les produits de la nomenclature Kantar à l'aide de ceux de la nomenclature F pour chacun des ménages types.
+A l'aide des matrices de passage de la nomenclature F à la nomenclature Kantar, il est possible selon certaine hypothèses (voir Annexe) de déduire des élastcités sur les produits de la nomenclature Kantar à l'aide de ceux de la nomenclature F pour chacun des ménages types (Voir la fonction [`compute_kantar_elasticities`] (../../build_survey_data/calibration_aliss.py#251))
+
+## Calage et intégration de la réaction comportmentale
+
+Les données d'entrée du modèle de micro-simulation TAXIPP sont les données budget des familles obéissant à la nomenclature Coicop. Elles sont utilisées pour caler les données Kantar au niveau des ménages types mentionnées ci-dessus. Ces cales sont conservées pour usage ultérieure.
+
+Une fois déduites les élastcités au niveau des produits de la nomenclature Kantar, il est possible de déterminer les nouveaux budgets alimentaires des ménages types.  
+
+Il est alors possible d'utiliser les cales calculées précédemment pour caler les budgets alimentaires dans le modèle TAXIPP.
+L'analyse des divers impacts sur les revenus des ménages peut ainsi être conduite dans le modèle TAXIPP ( (Voir la fonction [`get_adjusted_input_data_frame`] (../../build_survey_data/calibration_aliss.py#515)).
+
+
