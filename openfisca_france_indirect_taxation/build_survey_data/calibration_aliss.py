@@ -4,6 +4,7 @@ from __future__ import division
 
 
 import itertools
+import logging
 import numpy as np
 import os
 import pandas
@@ -18,6 +19,9 @@ except ImportError:
 
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
+
+
+log = logging.getLogger(__name__)
 
 
 assets_path = os.path.join(
@@ -187,7 +191,7 @@ def build_aggregated_shares(expenditures, kantar_prefix = 'kantar'):
     return expenditures
 
 
-def compute_expenditures(drop_dom = True):
+def compute_expenditures(drop_dom = True, display_plot = False):
     # aliss/kantar data
     aliss = build_clean_aliss_data_frame()
 
@@ -200,9 +204,9 @@ def compute_expenditures(drop_dom = True):
             ).reset_index()
     aliss_expenditures.rename(columns = {0: "kantar_expenditures"}, inplace = True)
 
-    print("kantar_expenditures_total:", (aliss.tpoids * aliss.dt_k).sum() / 1e9)
-    print("bdf_expenditures_total: ", (aliss.tpoids * aliss.dt_c).drop_duplicates().sum() / 1e9)
-    print("population_kantar_total: ", aliss.tpoids.unique().sum())
+    log.info("kantar_expenditures_total:", (aliss.tpoids * aliss.dt_k).sum() / 1e9)
+    log.info("bdf_expenditures_total: ", (aliss.tpoids * aliss.dt_c).drop_duplicates().sum() / 1e9)
+    log.info("population_kantar_total: ", aliss.tpoids.unique().sum())
 
     aliss_expenditures['kantar_budget_share'] = aliss_expenditures.groupby(
         ['age', 'revenus'])['kantar_expenditures'].transform(
@@ -223,8 +227,7 @@ def compute_expenditures(drop_dom = True):
             ).reset_index()
     input_data_expenditures.rename(columns = {"variable": "poste_coicop", 0: "bdf_expenditures"}, inplace = True)
 
-
-    print("bdf_expenditures_total: ", input_data_expenditures.bdf_expenditures.sum() / 1e9)
+    log.info("bdf_expenditures_total: ", input_data_expenditures.bdf_expenditures.sum() / 1e9)
 
     input_data_expenditures['bdf_budget_share'] = input_data_expenditures.groupby(
         ['age', 'revenus'])['bdf_expenditures'].transform(
@@ -236,14 +239,16 @@ def compute_expenditures(drop_dom = True):
 
     expenditures.to_csv(os.path.join(assets_path, 'expenditures.csv'), index = False)
 
-    plot_variables = ['bdf_budget_share', 'kantar_budget_share_to_bdf', 'kantar_aggregated_budget_share']
-    expenditures[plot_variables].drop_duplicates().plot(
-        x = 'bdf_budget_share', y = 'kantar_budget_share_to_bdf', kind = 'scatter', xlim = [0, .13], ylim = [0, 7]
-        ).get_figure().savefig(os.path.join(assets_path, 'budget_share_ratios'))
+    if display_plot:
+        plot_variables = ['bdf_budget_share', 'kantar_budget_share_to_bdf', 'kantar_aggregated_budget_share']
+        expenditures[plot_variables].drop_duplicates().plot(
+            x = 'bdf_budget_share', y = 'kantar_budget_share_to_bdf', kind = 'scatter', xlim = [0, .13], ylim = [0, 7],
+            ).get_figure().savefig(os.path.join(assets_path, 'budget_share_ratios'))
 
-    expenditures[plot_variables].drop_duplicates().plot(
-        x = 'bdf_budget_share', y = 'kantar_aggregated_budget_share', kind = 'scatter', xlim = [0, .13], ylim = [0, .13]
-        ).get_figure().savefig(os.path.join(assets_path, 'budget_shares'))
+        expenditures[plot_variables].drop_duplicates().plot(
+            x = 'bdf_budget_share', y = 'kantar_aggregated_budget_share', kind = 'scatter',
+            xlim = [0, .13], ylim = [0, .13],
+            ).get_figure().savefig(os.path.join(assets_path, 'budget_shares'))
 
     return expenditures.set_index(['age', 'revenus', 'nomk'])
 
@@ -292,7 +297,7 @@ def compute_kantar_elasticities(compute = False):
     (nomf_nomk.nomk.value_counts() == 1).all()
     # nomf_by_nomk = nomf_nomk.set_index('nomk').to_dict()['nomf']
 
-    print(nomf_nomk.nomf.value_counts(dropna = False))
+    log.info(nomf_nomk.nomf.value_counts(dropna = False))
 
     nomks_by_nomf = dict(
         (nomf_by_dirty_nomf.get(nomf), nomf_nomk.query('nomf == @nomf')['nomk'].unique())
@@ -384,7 +389,7 @@ def compute_kantar_elasticities(compute = False):
         nomk_cross_price_elasticity = nomk_cross_price_elasticity.combine_first(temp_nomk_cross_price_elasticity)
 
     # Some k-kprime elasticities are not found
-    print("{} k-kprime elasticities are not found".format(nomk_cross_price_elasticity.isnull().sum().sum()))
+    log.info("{} k-kprime elasticities are not found".format(nomk_cross_price_elasticity.isnull().sum().sum()))
     nomk_cross_price_elasticity.fillna(0, inplace = True)
 
     nomk_cross_price_elasticity.to_csv(kantar_cross_price_elasticities_path)
