@@ -4,9 +4,7 @@
 from __future__ import division
 
 import numpy as np
-import os
 import pandas as pd
-import pkg_resources
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss import get_adjusted_input_data_frame
