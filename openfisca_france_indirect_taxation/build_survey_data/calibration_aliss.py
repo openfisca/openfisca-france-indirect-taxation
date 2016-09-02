@@ -54,11 +54,10 @@ def build_clean_aliss_data_frame():
 
     aliss = survey.get_values(table = 'Base_ALISS_2011')
 
-
     assert len(aliss.dt_k.columns) == 2, 'dt_k is not duplicated'
     assert aliss.columns[-2:].tolist() == ['dt_k', 'd_a'], 'The last two columns are not duplicatd dt_k and d_a'
-    aliss = aliss.iloc[:, 0:22].copy()  # Removing the last two columns
-
+    # aliss = aliss.iloc[:, 0:22].copy()  # Removing the last two columns
+    print aliss.columns[-2:-1]
     errors = detect_null(aliss)
     errors.to_csv('aliss_errors.csv')
 
@@ -200,12 +199,12 @@ def compute_expenditures(drop_dom = True, display_plot = False):
     aliss = aliss[kept_variables].copy()
     aliss_expenditures = aliss.groupby(
         ['age', 'revenus', 'poste_coicop', 'nomc', 'nomk']).apply(
-            lambda df: (df.tpoids * df.dt_k).sum()
+            lambda df: (df.dt_k).sum()
             ).reset_index()
     aliss_expenditures.rename(columns = {0: "kantar_expenditures"}, inplace = True)
 
-    log.info("kantar_expenditures_total:", (aliss.tpoids * aliss.dt_k).sum() / 1e9)
-    log.info("bdf_expenditures_total: ", (aliss.tpoids * aliss.dt_c).drop_duplicates().sum() / 1e9)
+    log.info("kantar_expenditures_total:", (aliss.dt_k).sum() / 1e9)
+    log.info("bdf_expenditures_total: ", (aliss.dt_c).drop_duplicates().sum() / 1e9)
     log.info("population_kantar_total: ", aliss.tpoids.unique().sum())
 
     aliss_expenditures['kantar_budget_share'] = aliss_expenditures.groupby(
