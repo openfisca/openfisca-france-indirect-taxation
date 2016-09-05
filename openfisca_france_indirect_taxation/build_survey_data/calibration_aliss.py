@@ -51,30 +51,24 @@ def build_clean_aliss_data_frame():
         collection = 'aliss', config_files_directory = config_files_directory
         )
     survey = aliss_survey_collection.get_survey('aliss_{}'.format(year))
-
     aliss = survey.get_values(table = 'Base_ALISS_2011')
-
     assert len(aliss.dt_k.columns) == 2, 'dt_k is not duplicated'
     assert aliss.columns[-2:].tolist() == ['dt_k', 'd_a'], 'The last two columns are not duplicatd dt_k and d_a'
     # aliss = aliss.iloc[:, 0:22].copy()  # Removing the last two columns
     aliss.columns = aliss.columns.tolist()[:-2] + ['Dt_k', 'd_a']
     errors = detect_null(aliss)
     errors.to_csv('aliss_errors.csv')
-
     # Removing products with missing nomf
     aliss = aliss.query('nomf != "nan"').copy()
-
-    # Setting null nomk consumption to zéro
+    # Setting null nomk consumption to zero
     aliss.fillna(
         dict(qt_k = 0, dt_k = 0, qm_k = 0, dm_k =0, pm_k = 0, qt_c = 0, dt_c = 0, qm_c = 0, dm_c = 0, pm_c = 0),
         inplace = True
         )
-
+    # Renaming categories
     aliss = aliss.loc[aliss.nomf.notnull()].copy()
-
     aliss['age'] = 99
     aliss['revenus'] = 99
-
     triplets = [
         ('1 : Jeune/Ais', 0, 3),
         ('2 : Jeune/MoyenSup', 0, 2),
@@ -93,16 +87,13 @@ def build_clean_aliss_data_frame():
         ('15 : Vieux/MoyenInf', 3, 1),
         ('16 : Vieux/Modeste', 3, 0),
         ]
-
     for household_type, age, revenus in triplets:
         selection = aliss.type.str.startswith(household_type)
         aliss.loc[selection, 'age'] = age
         aliss.loc[selection, 'revenus'] = revenus
-
     assert aliss.age.isin(range(4)).all()
     assert aliss.revenus.isin(range(4)).all()
     del aliss['type']
-
     assert aliss.notnull().all().all()
 
     return aliss
@@ -190,10 +181,38 @@ def build_aggregated_shares(expenditures, kantar_prefix = 'kantar'):
     return expenditures
 
 
+def compute_population_shares(drop_dom = True, display_plot = False):
+    aliss = build_clean_aliss_data_frame()
+    kept_variables = ['age', 'tpoids', 'revenus']
+    aliss = aliss[kept_variables].copy()
+    aliss_population_shares = aliss.groupby(
+        ['age', 'revenus']).apply(
+            lambda df: (df.tpoids).sum()
+            ).reset_index()
+    aliss_population_shares.rename(columns = {0: "aliss_population"}, inplace = True)
+    aliss_population_shares['aliss_population_share'] = (
+        aliss_population_shares.aliss_population / aliss_population_shares.aliss_population.sum()
+        )
+
+    year = 2011
+    input_data_frame = get_input_data_frame(year)
+    input_data_frame = complete_input_data_frame(input_data_frame, drop_dom = drop_dom)
+    input_data_frame = input_data_frame[['age', 'pondmen', 'revenus']].copy()
+    bdf_population_shares = input_data_frame.groupby(
+        ['age', 'revenus']).apply(
+            lambda df: (df.pondmen).sum()
+            ).reset_index()
+    bdf_population_shares.rename(columns = {0: "bdf_population"}, inplace = True)
+    bdf_population_shares['bdf_population_share'] = (
+        bdf_population_shares.bdf_population / bdf_population_shares.bdf_population.sum()
+        )
+
+    return aliss_population_shares.merge(bdf_population_shares)
+
+
 def compute_expenditures(drop_dom = True, display_plot = False):
     # aliss/kantar data
     aliss = build_clean_aliss_data_frame()
-
     aliss = add_poste_coicop(aliss)
     kept_variables = ['age', 'dt_c', 'dt_k', 'dt_f', 'nomk', 'nomc', 'poste_coicop', 'revenus']
     aliss = aliss[kept_variables].copy()
@@ -257,7 +276,6 @@ def compute_kantar_elasticities(compute = False):
         assets_path,
         'kantar_cross_price_elasticities.csv',
         )
-
     if not compute:
         if os.path.exists(kantar_cross_price_elasticities_path):
             nomk_cross_price_elasticity = pandas.read_csv(kantar_cross_price_elasticities_path)
