@@ -202,11 +202,11 @@ def build_budget_shares(rebuild = False):
 
     aliss = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss)
-    kept_variables = ['dt_k', 'nomf', 'nomc', 'poste_coicop', 'tpoids']
+    kept_variables = ['dt_k', 'nomf', 'nomc', 'poste_coicop']
     aliss = aliss[kept_variables].copy()
     aliss_expenditures = aliss.groupby(
         ['poste_coicop', 'nomc', 'nomf']).apply(
-            lambda df: (df.tpoids * df.dt_k).sum()
+            lambda df: (df.dt_k).sum()
             ).reset_index()
     aliss_expenditures.rename(columns = {0: "expenditures"}, inplace = True)
 

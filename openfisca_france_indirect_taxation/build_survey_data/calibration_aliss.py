@@ -195,7 +195,7 @@ def compute_expenditures(drop_dom = True, display_plot = False):
     aliss = build_clean_aliss_data_frame()
 
     aliss = add_poste_coicop(aliss)
-    kept_variables = ['age', 'dt_c', 'dt_k', 'dt_f', 'nomk', 'nomc', 'poste_coicop', 'tpoids', 'revenus']
+    kept_variables = ['age', 'dt_c', 'dt_k', 'dt_f', 'nomk', 'nomc', 'poste_coicop', 'revenus']
     aliss = aliss[kept_variables].copy()
     aliss_expenditures = aliss.groupby(
         ['age', 'revenus', 'poste_coicop', 'nomc', 'nomk']).apply(
@@ -205,7 +205,6 @@ def compute_expenditures(drop_dom = True, display_plot = False):
 
     log.info("kantar_expenditures_total:", (aliss.dt_k).sum() / 1e9)
     log.info("bdf_expenditures_total: ", (aliss.dt_c).drop_duplicates().sum() / 1e9)
-    log.info("population_kantar_total: ", aliss.tpoids.unique().sum())
 
     aliss_expenditures['kantar_budget_share'] = aliss_expenditures.groupby(
         ['age', 'revenus'])['kantar_expenditures'].transform(
