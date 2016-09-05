@@ -57,7 +57,7 @@ def build_clean_aliss_data_frame():
     assert len(aliss.dt_k.columns) == 2, 'dt_k is not duplicated'
     assert aliss.columns[-2:].tolist() == ['dt_k', 'd_a'], 'The last two columns are not duplicatd dt_k and d_a'
     # aliss = aliss.iloc[:, 0:22].copy()  # Removing the last two columns
-    print aliss.columns[-2:-1]
+    aliss.columns = aliss.columns.tolist()[:-2] + ['Dt_k', 'd_a']
     errors = detect_null(aliss)
     errors.to_csv('aliss_errors.csv')
 
