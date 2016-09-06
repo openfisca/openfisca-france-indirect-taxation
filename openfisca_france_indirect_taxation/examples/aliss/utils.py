@@ -10,7 +10,7 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss import get_adjusted_input_data_frame
 
 
-def build_aggreggates(variables, by = 'niveau_vie_decile', survey_scenario = None, adjusted_survey_scenario = None):
+def build_aggreggates(variables, survey_scenario = None, adjusted_survey_scenario = None):
     aggregates = dict()
     reference_aggregates = dict()
     adjusted_aggregates = dict()

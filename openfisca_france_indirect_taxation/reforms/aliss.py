@@ -34,24 +34,33 @@ aliss_assets_reform_directory = os.path.join(
     'aliss_assets',
     )
 
+legislation_directory = os.path.join(
+    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+    'openfisca_france_indirect_taxation',
+    'assets',
+    'legislation',
+    )
 
-def build_aliss_reform(rebuild = False):
+
+def build_aliss_reform(rebuild = False, ajustable = False):
     aliss_reform_path = os.path.join(aliss_assets_reform_directory, 'aliss_reform.csv')
-    if os.path.exists(aliss_reform_path) and rebuild is False:
+
+    if os.path.exists(aliss_reform_path) and rebuild is False and ajustable is False:
         aliss_reform = pd.read_csv(aliss_reform_path)
         return aliss_reform
 
-    aliss_reform_data = pd.read_csv(os.path.join(aliss_assets_reform_directory, 'aliss_reform_unprocessed_data.csv'))
+    if ajustable is True:
+        aliss_reform_data = pd.read_csv(os.path.join(
+            aliss_assets_reform_directory, 'ajustable_aliss_reform_unprocessed_data.csv'))
+        reforms = ['ajustable',]
+    else:
+        reforms = ['sante', 'environnement', 'tva_sociale', 'mixte']
+
     aliss_uncomplete = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss_uncomplete)
     aliss_extract = aliss[['nomf', 'nomc', 'poste_bdf']].copy()
     aliss_extract.drop_duplicates(inplace = True)
-    legislation_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-        'openfisca_france_indirect_taxation',
-        'assets',
-        'legislation',
-        )
+
     codes_coicop_data_frame = pd.read_csv(
         os.path.join(legislation_directory, 'coicop_legislation.csv'),
         )
@@ -62,15 +71,22 @@ def build_aliss_reform(rebuild = False):
     aliss_reform = aliss_legislation.merge(aliss_reform_data)
 
     # Dealing with mismatch in reforms
-    reforms = ['sante', 'environnement', 'tva_sociale', 'mixte']
+
     for reform in reforms:
         labels = [removed_reform for removed_reform in reforms if removed_reform != reform]
-        mismatch = aliss_reform.drop(
-            labels,
-            axis = 1,
-            ).groupby(['code_bdf']).filter(
-                lambda x: x[reform].nunique() > 1,
-                ).sort_values('code_bdf')
+        if labels:
+            mismatch = aliss_reform.drop(
+                labels,
+                axis = 1,
+                ).groupby(['code_bdf']).filter(
+                    lambda x: x[reform].nunique() > 1,
+                    ).sort_values('code_bdf')
+        else:
+            for grp in aliss_reform.groupby(['code_bdf']):
+                print grp[1]
+            mismatch = aliss_reform.groupby(['code_bdf']).filter(
+                    lambda x: x[reform].nunique() > 1,
+                    ).sort_values('code_bdf')
 
         mismatch.nomc = mismatch.nomc.str.decode('latin-1').str.encode('utf-8')
         mismatch.to_csv(
@@ -78,10 +94,18 @@ def build_aliss_reform(rebuild = False):
             index = False,
             )
 
-    if rebuild:
+    if rebuild and ajustable is False:
         aliss_reform.to_csv(aliss_reform_path, index = False)
 
     return aliss_reform
+
+
+class aliss_ajustable(Reform):
+    name = u"Réforme Aliss- Ajustable"
+    key = 'aliss_ajustable'
+
+    def apply(self):
+        build_custom_aliss_reform(self, key = self.key, name = self.name)
 
 
 class aliss_environnement(Reform):
@@ -121,9 +145,13 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     assert key is not None
     assert tax_benefit_system is not None
     taux_by_categorie_fiscale = None
-    reform_key = key[6:]
 
-    aliss_reform = build_aliss_reform()
+    reform_key = key[6:]
+    if reform_key == 'ajustable':
+        aliss_reform = build_aliss_reform(rebuild = True, ajustable = True)
+    else:
+        aliss_reform = build_aliss_reform()
+
     categories_fiscales_reform = aliss_reform[[reform_key, 'code_bdf']].drop_duplicates().copy()
     reform_mismatch = categories_fiscales_reform.groupby(['code_bdf']).filter(
         lambda x: x[reform_key].nunique() > 1).copy().sort_values('code_bdf')
@@ -226,12 +254,6 @@ def build_legislation_including_f_nomencalture():
     aliss_extract = aliss[['nomf', 'nomk', 'poste_bdf', 'poste_coicop']].copy()
     aliss_extract.drop_duplicates(inplace = True)
 
-    legislation_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-        'openfisca_france_indirect_taxation',
-        'assets',
-        'legislation',
-        )
     codes_coicop_data_frame = pd.read_csv(
         os.path.join(legislation_directory, 'coicop_legislation.csv'),
         )
@@ -392,13 +414,3 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
         )
     type(u'tva_total'.encode('utf-8'), (Variable,), definitions_by_name)
     del definitions_by_name
-
-
-if __name__ == '__main__':
-    pass
-#    from openfisca_france_indirect_taxation.tests import base
-#    year = 2014
-#    data_year = 2011
-#    reform_key = 'aliss_sante'
-#    tax_benefit_system = base.tax_benefit_system
-#    reform = build_reform_mixte(tax_benefit_system)

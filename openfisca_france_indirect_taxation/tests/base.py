@@ -28,6 +28,7 @@ tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 # Reforms cache, used by long scripts like test_yaml.py
 # The reforms commented haven't been adapted to the new core API yet.
 reform_list = {
+    'aliss_ajustable': aliss.aliss_ajustable,
     'aliss_environnement': aliss.aliss_environnement,
     'aliss_mixte': aliss.aliss_mixte,
     'aliss_sante': aliss.aliss_sante,
