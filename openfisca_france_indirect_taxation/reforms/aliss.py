@@ -52,7 +52,7 @@ def build_aliss_reform(rebuild = False, ajustable = False):
     if ajustable is True:
         aliss_reform_data = pd.read_csv(os.path.join(
             aliss_assets_reform_directory, 'ajustable_aliss_reform_unprocessed_data.csv'))
-        reforms = ['ajustable',]
+        reforms = ['ajustable']
     else:
         reforms = ['sante', 'environnement', 'tva_sociale', 'mixte']
 
@@ -74,19 +74,12 @@ def build_aliss_reform(rebuild = False, ajustable = False):
 
     for reform in reforms:
         labels = [removed_reform for removed_reform in reforms if removed_reform != reform]
-        if labels:
-            mismatch = aliss_reform.drop(
-                labels,
-                axis = 1,
-                ).groupby(['code_bdf']).filter(
-                    lambda x: x[reform].nunique() > 1,
-                    ).sort_values('code_bdf')
-        else:
-            for grp in aliss_reform.groupby(['code_bdf']):
-                print grp[1]
-            mismatch = aliss_reform.groupby(['code_bdf']).filter(
-                    lambda x: x[reform].nunique() > 1,
-                    ).sort_values('code_bdf')
+        mismatch = aliss_reform.drop(
+            labels,
+            axis = 1,
+            ).groupby(['code_bdf']).filter(
+                lambda x: x[reform].nunique() > 1,
+                ).sort_values('code_bdf')
 
         mismatch.nomc = mismatch.nomc.str.decode('latin-1').str.encode('utf-8')
         mismatch.to_csv(
@@ -94,7 +87,7 @@ def build_aliss_reform(rebuild = False, ajustable = False):
             index = False,
             )
 
-    if rebuild and ajustable is False:
+    if rebuild is True and ajustable is False:
         aliss_reform.to_csv(aliss_reform_path, index = False)
 
     return aliss_reform

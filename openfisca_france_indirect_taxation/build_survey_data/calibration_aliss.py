@@ -54,7 +54,7 @@ def build_clean_aliss_data_frame():
     aliss = survey.get_values(table = 'Base_ALISS_2011')
     assert len(aliss.dt_k.columns) == 2, 'dt_k is not duplicated'
     assert aliss.columns[-2:].tolist() == ['dt_k', 'd_a'], 'The last two columns are not duplicatd dt_k and d_a'
-    # aliss = aliss.iloc[:, 0:22].copy()  # Removing the last two columns
+    # aliss = aliss.iloc[:, 0:22].copy()  # Removing the last two columns
     aliss.columns = aliss.columns.tolist()[:-2] + ['Dt_k', 'd_a']
     errors = detect_null(aliss)
     errors.to_csv('aliss_errors.csv')
@@ -65,7 +65,7 @@ def build_clean_aliss_data_frame():
         dict(qt_k = 0, dt_k = 0, qm_k = 0, dm_k =0, pm_k = 0, qt_c = 0, dt_c = 0, qm_c = 0, dm_c = 0, pm_c = 0),
         inplace = True
         )
-    # Renaming categories
+    # Renaming categories
     aliss = aliss.loc[aliss.nomf.notnull()].copy()
     aliss['age'] = 99
     aliss['revenus'] = 99
@@ -415,7 +415,7 @@ def compute_kantar_elasticities(compute = False):
 def compute_expenditures_coefficient(reform_key = None):
     from openfisca_france_indirect_taxation.reforms.aliss import build_aliss_reform
 
-    assert reform_key in ['sante', 'environnement', 'tva_sociale', 'mixte']
+    assert reform_key in ['sante', 'environnement', 'tva_sociale', 'mixte', 'ajustable']
     aliss_uncomplete = build_clean_aliss_data_frame()
     aliss = add_poste_coicop(aliss_uncomplete)
     aliss_extract = aliss[['nomf', 'nomk', 'poste_bdf', 'poste_coicop']].copy()
@@ -436,7 +436,11 @@ def compute_expenditures_coefficient(reform_key = None):
     correction = correction[['nomf', 'nomk', 'poste_bdf', 'categorie_fiscale']].drop_duplicates().copy()
 
     # load reforms and add taux
-    aliss_reform = build_aliss_reform()
+    if reform_key == 'ajustable':
+        aliss_reform = build_aliss_reform(ajustable = True)
+    else:
+        aliss_reform = build_aliss_reform()
+
     columns = ['nomf', 'nomc', 'code_bdf', 'categorie_fiscale'] + [reform_key]  # TODO remove nomc
     reform_extract = aliss_reform[columns].copy()
     reform_extract.rename(columns = {reform_key: 'reform_categorie_fiscale'}, inplace = True)

@@ -3,11 +3,25 @@
 
 from __future__ import division
 
+
+
 import numpy as np
+import os
+import pkg_resources
 import pandas as pd
+
+
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss import get_adjusted_input_data_frame
+
+
+aliss_assets_reform_directory = os.path.join(
+    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+    'openfisca_france_indirect_taxation',
+    'reforms',
+    'aliss_assets',
+    )
 
 
 def build_aggreggates(variables, survey_scenario = None, adjusted_survey_scenario = None):
@@ -73,6 +87,27 @@ def build_scenarios(data_year = 2011, reform_key = None, year = 2014):
         ))
     adjusted_survey_scenario = SurveyScenario.create(**adjusted_scenario_kwargs)
     return survey_scenario, adjusted_survey_scenario
+
+
+def get_adjustable_reform():
+    csv_file_path = os.path.join(aliss_assets_reform_directory, 'ajustable_aliss_reform_unprocessed_data.csv')
+    dataframe = pd.read_csv(
+        csv_file_path,
+        index_col = 'nomf'
+        )
+    return dataframe
+
+
+def set_adjustable_reform(dataframe):
+    csv_file_path = os.path.join(aliss_assets_reform_directory, 'ajustable_aliss_reform_unprocessed_data.csv')
+    old_dataframe = get_adjustable_reform()
+    from pandas.util.testing import assert_index_equal
+    print old_dataframe.index, dataframe.index
+    assert_index_equal(old_dataframe.index, dataframe.index)
+    assert dataframe.ajustable.isin(
+        ['tva_taux_super_reduit', 'tva_taux_reduit', 'tva_taux_intermediaire', 'tva_taux_plein']
+        ).all(), 'Type de taux de TVA invalide'
+    dataframe.to_csv(csv_file_path)
 
 
 def run_reform(reform_key = None):
