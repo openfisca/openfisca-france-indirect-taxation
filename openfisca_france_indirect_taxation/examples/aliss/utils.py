@@ -89,18 +89,26 @@ def build_scenarios(data_year = 2011, reform_key = None, year = 2014):
     return survey_scenario, adjusted_survey_scenario
 
 
-def get_adjustable_reform():
-    csv_file_path = os.path.join(aliss_assets_reform_directory, 'ajustable_aliss_reform_unprocessed_data.csv')
-    dataframe = pd.read_csv(
-        csv_file_path,
-        index_col = 'nomf'
-        )
-    return dataframe
+def get_reform(reform_key = 'ajustable'):
+    if reform_key == 'ajustable':
+        csv_file_path = os.path.join(aliss_assets_reform_directory, 'ajustable_aliss_reform_unprocessed_data.csv')
+        dataframe = pd.read_csv(
+            csv_file_path,
+            index_col = 'nomf'
+            )
+    else:
+        assert reform_key in ['sante', 'environnement', 'tva_sociale', 'mixte']
+        csv_file_path = os.path.join(aliss_assets_reform_directory, 'aliss_reform_unprocessed_data.csv')
+        dataframe = pd.read_csv(
+            csv_file_path,
+            usecols = ['nomf', reform_key],
+            ).set_index('nomf')
+    return dataframe.rename(columns = {reform_key: 'ajustable'})
 
 
 def set_adjustable_reform(dataframe):
     csv_file_path = os.path.join(aliss_assets_reform_directory, 'ajustable_aliss_reform_unprocessed_data.csv')
-    old_dataframe = get_adjustable_reform()
+    old_dataframe = get_reform()
     from pandas.util.testing import assert_index_equal
     print old_dataframe.index, dataframe.index
     assert_index_equal(old_dataframe.index, dataframe.index)
