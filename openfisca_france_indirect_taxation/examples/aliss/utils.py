@@ -110,7 +110,6 @@ def set_adjustable_reform(dataframe):
     csv_file_path = os.path.join(aliss_assets_reform_directory, 'ajustable_aliss_reform_unprocessed_data.csv')
     old_dataframe = get_reform()
     from pandas.util.testing import assert_index_equal
-    print old_dataframe.index, dataframe.index
     assert_index_equal(old_dataframe.index, dataframe.index)
     assert dataframe.ajustable.isin(
         ['tva_taux_super_reduit', 'tva_taux_reduit', 'tva_taux_intermediaire', 'tva_taux_plein']
