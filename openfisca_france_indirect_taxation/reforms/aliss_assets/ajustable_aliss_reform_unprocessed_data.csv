@@ -1,19 +1,19 @@
-nomf, ajustable
-1 : Juices, tva_taux_reduit
-3 : Soft drinks, tva_taux_plein
-6 : Fresh fruits and vegetables, tva_taux_reduit
-7 : Spices, tva_taux_intermediaire
-8 : Plant-based foods high in fats, tva_taux_plein
-9 : Plant-based dishes, tva_taux_reduit
-10 : Plant-based foods high in sugar, tva_taux_plein
-11 : Starchy foods, tva_taux_intermediaire
-12 : Processed fruits and vegetables, tva_taux_intermediaire
-13 : Beef, tva_taux_intermediaire
-14 : Other meats, tva_taux_intermediaire
-15 : Cooked meats, tva_taux_plein
-16 : Animal-based foods high in fats, tva_taux_plein
-17 : Cheese, tva_taux_plein
-18 : Fish and seafoods, tva_taux_intermediaire
-19 : Dairy products, tva_taux_reduit
-20 : Prepared mixed meals, tva_taux_intermediaire
-21 : Prepared desserts, tva_taux_plein
+nomf,ajustable
+1 : Juices,tva_taux_reduit
+3 : Soft drinks,tva_taux_plein
+6 : Fresh fruits and vegetables,tva_taux_reduit
+7 : Spices,tva_taux_intermediaire
+8 : Plant-based foods high in fats,tva_taux_plein
+9 : Plant-based dishes,tva_taux_reduit
+10 : Plant-based foods high in sugar,tva_taux_plein
+11 : Starchy foods,tva_taux_intermediaire
+12 : Processed fruits and vegetables,tva_taux_intermediaire
+13 : Beef,tva_taux_intermediaire
+14 : Other meats,tva_taux_intermediaire
+15 : Cooked meats,tva_taux_plein
+16 : Animal-based foods high in fats,tva_taux_plein
+17 : Cheese,tva_taux_plein
+18 : Fish and seafoods,tva_taux_intermediaire
+19 : Dairy products,tva_taux_plein
+20 : Prepared mixed meals,tva_taux_plein
+21 : Prepared desserts,tva_taux_plein
