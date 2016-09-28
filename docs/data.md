@@ -29,7 +29,7 @@ Elle est produite à partir de sources brutes par l'exécution du programme `bui
 [TODO: à détailler, exemple d'exécution après mise en forme du script]
 
 
-## Importation des données d'enquêtes brutes 
+## Importation des données brutes d'enquêtes  
 
 Le modèles de taxation indirecte peut être alimenter par des données d'enquête.
 Il est pariculièrement adapté aux données de l'enquête [budget des familles] (http://www.reseau-quetelet.cnrs.fr/spip/article.php3?id_article=128&lang=fr&ords_target=simple&ords_source=simple_form)
