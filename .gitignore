@@ -4,6 +4,7 @@ openfisca_france_indirect_taxation/assets/legislation/nomenclature_coicop_by*.cs
 
 .tags*
 .spyderproject
+.spyderworkspace
 .DS_store
 
 # Byte-compiled / optimized / DLL files
