@@ -321,33 +321,33 @@ In loyers_imputes and not in revenus:
         try:
             c05 = survey.get_values(
                 table = "C05",
-                variables = ['c13111', 'c13121', 'c13141', 'pondmen', 'ident_me'],
+                variables = ['c13111', 'c13121', 'c13141', 'pondmen', 'ident_men'],
                 )
-            rev_disp = c05.sort_values(by = ['ident_me'])
+            rev_disp = c05.sort_values(by = ['ident_men'])
         except:
             c05 = survey.get_values(
                 table = "c05",
-                variables = ['c13111', 'c13121', 'c13141', 'pondmen', 'ident_me'],
+                variables = ['c13111', 'c13121', 'c13141', 'pondmen', 'ident_men'],
                 )
-            rev_disp = c05.sort_values(by = ['ident_me'])
+            rev_disp = c05.sort_values(by = ['ident_men'])
         del c05
         try:
             menage = survey.get_values(
                 table = "MENAGE",
-                variables = ['ident_me', 'revtot', 'revact', 'revsoc', 'revpat', 'rev700', 'rev701', 'rev999',
+                variables = ['ident_men', 'revtot', 'revact', 'revsoc', 'revpat', 'rev700', 'rev701', 'rev999',
                              'revindep', 'salaires'],
-                ).sort_values(by = ['ident_me'])
+                ).sort_values(by = ['ident_men'])
         except:
             menage = survey.get_values(
                 table = "menage",
-                variables = ['ident_me', 'revtot', 'revact', 'revsoc', 'revpat', 'rev700', 'rev701', 'rev999',
+                variables = ['ident_men', 'revtot', 'revact', 'revsoc', 'revpat', 'rev700', 'rev701', 'rev999',
                              'revindep', 'salaires'],
-                ).sort_values(by = ['ident_me'])
+                ).sort_values(by = ['ident_men'])
 
         rev_disp.index = rev_disp.index.astype(ident_men_dtype)
         menage.index = menage.index.astype(ident_men_dtype)
-        rev_disp.set_index('ident_me', inplace = True)
-        menage.set_index('ident_me', inplace = True)
+        rev_disp.set_index('ident_men', inplace = True)
+        menage.set_index('ident_men', inplace = True)
         revenus = pandas.concat([menage, rev_disp], axis = 1)
         menage.index.name = 'ident_men'
         revenus.index.name = 'ident_men'

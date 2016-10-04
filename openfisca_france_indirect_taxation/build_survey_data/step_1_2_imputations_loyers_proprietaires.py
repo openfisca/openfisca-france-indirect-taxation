@@ -155,7 +155,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         except:
             loyers_imputes = survey.get_values(table = "menage")
 
-        kept_variables = ['ident_me', 'rev801']
+        kept_variables = ['ident_men', 'rev801']
         loyers_imputes = loyers_imputes[kept_variables]
         loyers_imputes.rename(columns = {'rev801': 'poste_coicop_421', 'ident_me': 'ident_men'},
                               inplace = True)

@@ -597,7 +597,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'agepr',
             'coeffuc',
             'decuc1',
-            'ident_me',
+            'ident_men',
             'pondmen',
             'npers',
             'nenfants',
