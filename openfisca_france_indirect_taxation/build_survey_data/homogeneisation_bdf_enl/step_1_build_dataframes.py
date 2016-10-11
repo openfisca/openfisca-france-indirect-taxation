@@ -22,7 +22,7 @@ from openfisca_survey_manager.temporary import TemporaryStore
 from openfisca_france_indirect_taxation.build_survey_data.utils \
     import ident_men_dtype
 
-temporary_store = TemporaryStore.create(file_name = "logement_tmp")
+temporary_store = TemporaryStore.create(file_name = 'logement_tmp')
 
 
 from openfisca_survey_manager.temporary import temporary_store_decorator
@@ -38,16 +38,17 @@ enl_survey_collection = SurveyCollection.load(
     )
 survey_enl = enl_survey_collection.get_survey('enquete_logement_{}'.format(year_enl))
 
-input_enl = survey_enl.get_values(table = "menlogfm_diff")
+input_enl = survey_enl.get_values(table = 'menlogfm_diff')
+input_enl_indiv = survey_enl.get_values(table = 'indivfm_diff')
 
 
 # Load BdF data :
 
 year_bdf = 2011
 
-openfisca_survey_collection = SurveyCollection.load(collection = "openfisca_indirect_taxation")
-openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year_bdf))
-input_data_frame = openfisca_survey.get_values(table = "input")
+openfisca_survey_collection = SurveyCollection.load(collection = 'openfisca_indirect_taxation')
+openfisca_survey = openfisca_survey_collection.get_survey('openfisca_indirect_taxation_data_{}'.format(year_bdf))
+input_data_frame = openfisca_survey.get_values(table = 'input')
 input_data_frame.reset_index(inplace = True)
 
 
@@ -81,6 +82,7 @@ variables_homogeneisation_bdf = [
     'ocde10',
     'pondmen',
     'poste_coicop_451',
+    'poste_coicop_4511',
     'poste_coicop_452',
     'poste_coicop_453',
     'revtot',
@@ -94,44 +96,57 @@ variables_homogeneisation_bdf = [
     ]
 
 variables_homogeneisation_enl = [
-    "aba",
-    "amr",
-    "cataeu2010",
-    "cceml",
-    "coml11",
-    "coml12",
-    "coml13",
-    "coml2",
-    "coml3",
-    "enfhod",
-    "fchauf",
-    "gmoy1",
-    "gtt1",
-    "hnph1",
-    "hsh1",
-    "htl",
-    "iaat",
-    "lmlm",
-    "mag",
-    "mcs",
-    "mcsc",
-    "mdiplo",
-    "mdiploc",
-    "mne1",
-    "mpa",
-    "mrtota2",
-    "msitua",
-    "msituac",
-    "mtyad",
-    "muc1",
-    "qex",
-    "tau2010",
-    "tu2010",
-    "zeat",
+    'aba',
+    'amr',
+    'cataeu2010',
+    'cceml',
+    'coml11',
+    'coml12',
+    'coml13',
+    'coml2',
+    'coml3',
+    'dom',
+    'enfhod',
+    'lchauf',
+    'gmoy1',
+    'gtt1',
+    'hnph1',
+    'hsh1',
+    'htl',
+    'iaat',
+    'idlog',
+    'lmlm',
+    'mag',
+    'mcs',
+    'mcsc',
+    'mdiplo',
+    'mdiploc',
+    'mne1',
+    'mpa',
+    'mrtota2',
+    'msitua',
+    'msituac',
+    'mtyad',
+    'muc1',
+    'qex',
+    'tau2010',
+    'tu2010',
+    'zeat',
     ]
+
+variables_indiv_enl = [
+    'idlog',
+    'igreflog',
+    'ndip14',
+    ]
+
 
 # Keep relevant variables :
 
+indiv_enl_keep = input_enl_indiv[variables_indiv_enl]
 menage_enl_keep = input_enl[variables_homogeneisation_enl]
 conso_bdf_keep = input_data_frame[variables_homogeneisation_bdf]
 
+indiv_enl_keep = indiv_enl_keep.query('igreflog == 1')
+del indiv_enl_keep['igreflog']
+menage_enl_keep = menage_enl_keep.merge(indiv_enl_keep, on = 'idlog')
