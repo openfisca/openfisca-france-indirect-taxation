@@ -121,3 +121,6 @@ data_enl.rename(
 
 data_bdf = data_bdf.sort_index(axis = 1)
 data_enl = data_enl.sort_index(axis = 1)
+
+data_bdf = data_bdf.astype(float)
+data_enl = data_enl.astype(float)
