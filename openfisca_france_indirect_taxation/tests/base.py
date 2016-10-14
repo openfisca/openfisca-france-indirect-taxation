@@ -26,7 +26,7 @@
 from openfisca_core import reforms
 from openfisca_core.tools import assert_near
 
-from .. import init_country
+from .. import FranceIndirectTaxationTaxBenefitSystem
 from ..reforms import (
     rattrapage_diesel,
     taxe_carbone,
@@ -44,11 +44,11 @@ __all__ = [
     'TaxBenefitSystem',
     ]
 
-# Initialize a tax_benefit_system
 
-TaxBenefitSystem = init_country()
-tax_benefit_system = TaxBenefitSystem()
-tax_benefit_system.prefill_cache()
+
+# Initialize a tax_benefit_system
+tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
+
 
 build_reform_function_by_key = {
     'rattrapage_diesel': rattrapage_diesel.build_reform,

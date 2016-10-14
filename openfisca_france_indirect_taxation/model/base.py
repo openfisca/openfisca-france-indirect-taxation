@@ -25,11 +25,12 @@
 
 from openfisca_core.columns import AgeCol, DateCol, FloatCol, IntCol, EnumCol, StrCol
 from openfisca_core.enumerations import Enum
-from openfisca_core.formulas import dated_function, DatedVariable, Variable
+from openfisca_core.formulas import dated_function
+from openfisca_core.variables import DatedVariable, Variable
 from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
 
 
-from ..entities import Individus, Menages
+from openfisca_france_indirect_taxation.entities import Individus, Menages
 
 
 __all__ = [

@@ -23,11 +23,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from .caracteristiques_menages import (  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.caracteristiques_menages import (  # noqa analysis:ignore
     autres_caracteristiques,
     demographie,
     )
-from .consommation import (  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.consommation import (  # noqa analysis:ignore
     categories_fiscales,
     consommation_menages,
     depenses_energies,
@@ -35,13 +35,13 @@ from .consommation import (  # noqa analysis:ignore
     postes_coicop,
     quantites_energie,
     )
-from reactions_comportementales_reforme import (  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.reactions_comportementales_reforme import (  # noqa analysis:ignore
     elasticites,
     )
-from .revenus import (  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.revenus import (  # noqa analysis:ignore
     revenus_menages,
     )
-from .taxes_indirectes import (  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.taxes_indirectes import (  # noqa analysis:ignore
     alcools,
     assurances,
     tabacs,
@@ -49,6 +49,6 @@ from .taxes_indirectes import (  # noqa analysis:ignore
     totaux,
     tva,
     )
-from .vehicules import (  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.vehicules import (  # noqa analysis:ignore
     vehicules_menages,
     )

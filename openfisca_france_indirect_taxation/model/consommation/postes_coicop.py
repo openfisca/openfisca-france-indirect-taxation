@@ -7,7 +7,7 @@ from __future__ import division
 from datetime import date
 
 from openfisca_core.columns import FloatCol
-from openfisca_core.formulas import Variable
+from openfisca_core.variables import Variable
 
 
 from openfisca_france_indirect_taxation.model.base import *
@@ -24,7 +24,7 @@ def generate_variables():
         liste_annees = postes_coicop_data_frame.loc[
             extraction_condition,
             'annee'].copy()
-        # assert liste_annees.shape == (21L,), "Some goods do not exist during certain years"
+        # assert liste_annees.shape == (21L,), "Some goods do not exist during certain years"
         label = postes_coicop_data_frame.loc[
             extraction_condition,
             'description'].values.squeeze().tolist()

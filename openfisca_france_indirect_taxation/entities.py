@@ -75,8 +75,4 @@ class Menages(entities.AbstractEntity):
         for enfant_role, enfant_id in enumerate(itertools.chain(enfants_id, autres_id), role):
             yield enfant_role, enfant_id
 
-
-entity_class_by_symbol = dict(
-    ind = Individus,
-    men = Menages,
-    )
+entities = [Individus, Menages]

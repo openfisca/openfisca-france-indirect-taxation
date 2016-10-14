@@ -29,7 +29,8 @@ from __future__ import division
 from datetime import date
 
 from openfisca_core.columns import FloatCol
-from openfisca_core.formulas import dated_function, DatedVariable
+from openfisca_core.formulas import dated_function
+from openfisca_core.variables import DatedVariable
 
 
 from openfisca_france_indirect_taxation.model.base import *
