@@ -27,7 +27,7 @@ from __future__ import division
 
 from datetime import date
 
-from ..base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.base import *
 
 
 for coicop12_index in range(1, 13):
