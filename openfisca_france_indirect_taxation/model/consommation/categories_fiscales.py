@@ -24,50 +24,50 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+# -*- coding: utf-8 -*-
+
+
 from __future__ import division
 
 from datetime import date
+import logging
 
-from openfisca_core.columns import FloatCol
+from biryani.strings import slugify
+
 from openfisca_core.formulas import dated_function
 from openfisca_core.variables import DatedVariable
 
 
 from openfisca_france_indirect_taxation.model.base import *
-from openfisca_france_indirect_taxation.utils import get_parametres_fiscalite_data_frame
+
+
+log = logging.getLogger(__name__)
 
 
 categories_fiscales_data_frame = None
+codes_coicop_data_frame = None
 
 
-def function_creator(postes_coicop, year_start = None, year_stop = None):
-    start = date(year_start, 1, 1) if year_start is not None else None
-    stop = date(year_stop, 12, 31) if year_stop is not None else None
+def generate_variables(tax_benefit_system, categories_fiscales = None, reform_key = None):
+    assert categories_fiscales is not None
+    reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
+    removed_categories = set()
+    completed_categories_fiscales = insert_tva(categories_fiscales)
 
-    @dated_function(start = start, stop = stop)
-    def func(self, simulation, period):
-        return period, sum(simulation.calculate('poste_coicop_' + poste, period) for poste in postes_coicop)
+    if reform_key:
+        reference_categories = set(reference_categories).union(set(categories_fiscales.categorie_fiscale.unique()))
 
-    func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
-    return func
-
-
-def generate_variables():
-    existing_categ = sorted(categories_fiscales_data_frame['categoriefiscale'].drop_duplicates())
-
-    for categorie_fiscale in existing_categ:
+    for categorie_fiscale in reference_categories:
         year_start = 1994
         year_final_stop = 2014
         functions_by_name = dict()
         for year in range(year_start, year_final_stop + 1):
             postes_coicop = sorted(
-                categories_fiscales_data_frame.query(
-                    'annee == @year and categoriefiscale == @categorie_fiscale'
-                    )['posteCOICOP'].astype(str))
-            variables = ', '.join(postes_coicop)
+                completed_categories_fiscales.query(
+                    'start <= @year and stop >= @year and categorie_fiscale == @categorie_fiscale'
+                    )['code_coicop'].astype(str))
 
             if year == year_start:
-                previous_variables = variables
                 previous_postes_coicop = postes_coicop
                 continue
 
@@ -76,34 +76,61 @@ def generate_variables():
             else:
                 year_stop = year - 1 if year != year_final_stop else year_final_stop
 
-                dated_func = function_creator(previous_postes_coicop, year_start = year_start, year_stop = year_stop)
+                dated_func = depenses_ht_categorie_function_creator(
+                    previous_postes_coicop,
+                    year_start = year_start,
+                    year_stop = year_stop,
+                    )
                 dated_function_name = u"function_{year_start}_{year_stop}".format(
                     year_start = year_start, year_stop = year_stop)
+                log.info(u'Creating fiscal category {} ({}-{}) with the following products {}'.format(
+                    categorie_fiscale, year_start, year_stop, previous_postes_coicop))
 
-                if len(previous_postes_coicop) != 0:
-                    functions_by_name[dated_function_name] = dated_func
+                functions_by_name[dated_function_name] = dated_func
 
                 year_start = year
 
             previous_postes_coicop = postes_coicop
 
-        class_name = u'categorie_fiscale_{}'.format(categorie_fiscale)
+        class_name = u'depenses_ht_{}'.format(categorie_fiscale)
+
         # Trick to create a class with a dynamic name.
-        definitions_by_name = dict(
-            column = FloatCol,
-            entity_class = Menages,
-            label = u"Categorie fiscale {0}".format(categorie_fiscale),
-            )
-        definitions_by_name.update(functions_by_name)
-        type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+        if reform_key is None:
+            definitions_by_name = dict(
+                column = FloatCol,
+                entity_class = Menages,
+                label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
+                )
+            definitions_by_name.update(functions_by_name)
+            tax_benefit_system.add_variable(
+                type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                )
+
+        else:
+            if class_name.encode('utf-8') in tax_benefit_system.column_by_name:
+                definitions_by_name = dict()
+                definitions_by_name.update(functions_by_name)
+                tax_benefit_system.update_variable(
+                    type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                    )
+            else:
+                definitions_by_name = dict(
+                    column = FloatCol,
+                    entity_class = Menages,
+                    label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
+                    )
+                definitions_by_name.update(functions_by_name)
+                tax_benefit_system.add_variable(
+                    type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                    )
+
         del definitions_by_name
 
 
-def preload_categories_fiscales_data_frame():
+def preload_categories_fiscales_data_frame(tax_benefit_system):
+    global codes_coicop_data_frame
     global categories_fiscales_data_frame
-    if categories_fiscales_data_frame is None:
-        categories_fiscales_data_frame = get_parametres_fiscalite_data_frame()
-        categories_fiscales_data_frame = categories_fiscales_data_frame[
-            ['posteCOICOP', 'annee', 'categoriefiscale']
-            ].copy()
-        generate_variables()
+    if codes_coicop_data_frame is None or categories_fiscales_data_frame is None:
+        categories_fiscales_data_frame, codes_coicop_data_frame = get_legislation_data_frames()
+
+    generate_variables(tax_benefit_system, categories_fiscales = categories_fiscales_data_frame.copy())
