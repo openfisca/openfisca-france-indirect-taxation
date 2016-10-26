@@ -273,17 +273,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         assert menage.zeat.isin(range(1, 9)).all()
 
-        try:
-            depmen = survey.get_values(table = "DEPMEN")
-        except:
-            depmen = survey.get_values(table = "depmen")
-        depmen.rename(columns = {'ident': 'ident_men'}, inplace = True)
-        sourcp = depmen[['sourcp', 'ident_men']].copy()
-        del depmen
-
-        sourcp.set_index('ident_men', inplace = True)
-        menage = menage.merge(sourcp, left_index = True, right_index = True)
-
         individus = survey.get_values(
             table = "individus",
             variables = ['ident', 'matri', 'lien', 'anais']
@@ -317,7 +306,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         activite_prof_variables += [column for column in menage.columns if column.startswith('cs42')]
         # logement
         logement_variables = ['htl', 'strate']
-        menage = menage[socio_demo_variables + activite_prof_variables + logement_variables]
+        menage = menage[socio_demo_variables + activite_prof_variables + logement_variables].copy()
         menage.rename(
             columns = {
                 # "agpr": "agepr",
@@ -378,10 +367,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.loc[menage.htl.isin(['1', '5']), 'typlog'] = 1
         assert menage.typlog.isin([1, 2]).all()
         del menage['htl']
-
-        sourcp = survey.get_values(table = "depmen", variables = ['ident_men', 'sourcp'])
-        sourcp.set_index('ident_men', inplace = True)
-        menage = menage.merge(sourcp, left_index = True, right_index = True)
 
         individus = survey.get_values(table = 'individu')
         # Il y a un problème sur l'année de naissance,
@@ -597,7 +582,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'agepr',
             'coeffuc',
             'decuc1',
-            'ident_men',
+            'ident_me',
             'pondmen',
             'npers',
             'nenfants',
@@ -630,6 +615,11 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             )
         del variables
         menage.agecj = menage.agecj.fillna(0)
+
+        # Pour Aliss
+        menage['nadultes'] = menage.npers - menage.nenfants
+        menage['ocde10_old'] = 1 + 0.7 * numpy.maximum(0, menage['nadultes'] - 1) + 0.5 * menage['nenfants']
+
         # Ajout de la variable vag
         try:
             depmen = survey.get_values(table = "DEPMEN")
@@ -638,7 +628,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         depmen.rename(columns = {'ident_me': 'ident_men'}, inplace = True)
         vague = depmen[['vag', 'ident_men']].copy()
         stalog = depmen[['stalog', 'ident_men']].copy()
-        sourcp = depmen[['sourcp', 'ident_men']].copy()
         del depmen
 
         menage.set_index('ident_men', inplace = True)
@@ -668,8 +657,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         assert stalog.stalog.isin(range(1, 6)).all()
         stalog.set_index('ident_men', inplace = True)
         menage = menage.merge(stalog, left_index = True, right_index = True)
-        sourcp.set_index('ident_men', inplace = True)
-        menage = menage.merge(sourcp, left_index = True, right_index = True)
 
         # Recodage des catégories zeat
         menage.loc[menage.zeat == 7, 'zeat'] = 6

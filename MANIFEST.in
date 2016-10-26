@@ -1,3 +1,11 @@
+recursive-include openfisca_france_indirect_taxation/assets/aliss *
+recursive-include openfisca_france_indirect_taxation/legislation *
 recursive-include openfisca_france_indirect_taxation/param *
+recursive-include openfisca_france_indirect_taxation/reforms/aliss_assets *
 recursive-include openfisca_france_indirect_taxation/scripts *
 recursive-include openfisca_france_indirect_taxation/tests/formulas *
+include openfisca_france_indirect_taxation/tests/__init__.py
+include openfisca_france_indirect_taxation/tests/base.py
+
+prune openfisca_france_indirect_taxation/assets/quaids/*.csv
+prune openfisca_france_indirect_taxation/assets/legislation/nomenclature_coicop_by*.csv

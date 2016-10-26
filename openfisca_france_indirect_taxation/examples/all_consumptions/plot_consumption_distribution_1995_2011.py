@@ -22,7 +22,8 @@ if __name__ == '__main__':
 
     inflators_by_year = get_inflators_by_year(rebuild = False)
     # Liste des coicop agrégées en 12 postes
-    simulated_variables = ['coicop12_{}'.format(coicop12_index) for coicop12_index in range(1, 13)]
+    suffixes = ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]
+    simulated_variables = ['poste_agrege_{}'.format(suffix) for suffix in suffixes]
 
     year = 2011
     elasticities = get_elasticities(year)
@@ -33,7 +34,7 @@ if __name__ == '__main__':
         inflation_kwargs = inflation_kwargs,
         year = year,
         )
-    coicop12_1 = survey_scenario.simulation.calculate('coicop12_1')
+    poste_agrege_01 = survey_scenario.simulation.calculate('poste_agrege_01')
     elasticite_1 = survey_scenario.simulation.calculate('elas_exp_1')
 
     # boum
@@ -44,10 +45,11 @@ if __name__ == '__main__':
             survey_scenario.compute_pivot_table(values = [values], columns = ['niveau_vie_decile'])
             ])
     df = pivot_table.T
-    df['depenses_tot'] = df[['coicop12_{}'.format(i) for i in range(1, 13)]].sum(axis = 1)
+    df['depenses_tot'] = df[['poste_agrege_{}'.format(suffix) for suffix in suffixes]].sum(axis = 1)
 
-    for i in range(1, 13):
-        df['part_coicop12_{}'.format(i)] = \
-            df['coicop12_{}'.format(i)] / df['depenses_tot']
+    for suffix in suffixes:
+        df['part_poste_agrege_{}'.format(suffix)] = \
+            df['poste_agrege_{}'.format(suffix)] / df['depenses_tot']
 
-    graph_builder_bar(df[['part_coicop12_{}'.format(i) for i in range(1, 13)]])
+    graph_builder_bar(df[['part_poste_agrege_{}'.format(suffix) for suffix in suffixes]])
+

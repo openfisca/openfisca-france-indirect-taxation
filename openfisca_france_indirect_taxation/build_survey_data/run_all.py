@@ -76,8 +76,8 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
 
     depenses = temporary_store["depenses_bdf_{}".format(year_calage)]
     depenses.index = depenses.index.astype(ident_men_dtype)
-    depenses_by_grosposte = temporary_store["depenses_by_grosposte_{}".format(year_calage)]
-    depenses_by_grosposte.index = depenses_by_grosposte.index.astype(str)
+    # depenses_by_grosposte = temporary_store["depenses_by_grosposte_{}".format(year_calage)]
+    # depenses_by_grosposte.index = depenses_by_grosposte.index.astype(str)
 
     # Gestion des véhicules:
     build_homogeneisation_vehicules(year = year_data)
@@ -179,6 +179,7 @@ def run(years_calage):
         start = time.time()
         run_all(year_calage, year_data_list)
         log.info("Finished {}".format(time.time() - start))
+
 
 if __name__ == '__main__':
     import sys
