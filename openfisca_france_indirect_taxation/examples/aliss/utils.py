@@ -24,7 +24,7 @@ aliss_assets_reform_directory = os.path.join(
     )
 
 
-def build_aggreggates(variables, survey_scenario = None, adjusted_survey_scenario = None):
+def build_aggreggates(variables, by = 'niveau_vie_decile', survey_scenario = None, adjusted_survey_scenario = None):
     aggregates = dict()
     reference_aggregates = dict()
     adjusted_aggregates = dict()
