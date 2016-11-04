@@ -24,34 +24,23 @@
 
 
 import logging
-
 import numpy
 
-from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.scenarios import AbstractSurveyScenario
+from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation.tests import base
 
 
 log = logging.getLogger(__name__)
 
 
-def get_input_data_frame(year):
-    openfisca_survey_collection = SurveyCollection.load(collection = "openfisca_indirect_taxation")
-    openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
-    input_data_frame = openfisca_survey.get_values(table = "input")
-    input_data_frame.reset_index(inplace = True)
-    return input_data_frame
-
-
 class SurveyScenario(AbstractSurveyScenario):
     @classmethod
     def create(cls, calibration_kwargs = None, data_year = None, elasticities = None, inflation_kwargs = None,
-            reference_tax_benefit_system = None, reform = None, reform_key = None, tax_benefit_system = None,
-            year = None):  # Add debug parameters debug, debug_all trace for simulation)
+            input_data_frame = None, reference_tax_benefit_system = None, reform = None, reform_key = None,
+            tax_benefit_system = None, year = None):  # Add debug parameters debug, debug_all trace for simulation)
 
         assert year is not None
-        if data_year is None:
-            data_year = year
 
         # it is either reform or reform_key which is not None
         assert not(
@@ -72,14 +61,18 @@ class SurveyScenario(AbstractSurveyScenario):
             reference_tax_benefit_system = base.tax_benefit_system
 
         if calibration_kwargs is not None:
-            print calibration_kwargs
+            # print calibration_kwargs
             assert set(calibration_kwargs.keys()).issubset(set(
                 ['target_margins_by_variable', 'parameters', 'total_population']))
 
         if inflation_kwargs is not None:
             assert set(inflation_kwargs.keys()).issubset(set(['inflator_by_variable', 'target_by_variable']))
 
-        input_data_frame = get_input_data_frame(data_year)
+        assert data_year is None or input_data_frame is None
+
+        if input_data_frame is None:
+            data_year = data_year or year
+            input_data_frame = get_input_data_frame(data_year)
 
         if elasticities is not None:
             assert 'ident_men' in elasticities.columns
