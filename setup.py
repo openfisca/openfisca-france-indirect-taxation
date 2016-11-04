@@ -55,17 +55,21 @@ setup(
     url = 'https://github.com/openfisca/openfisca-france-indirect-taxation',
 
     extras_require = dict(
-        tests = [
+        test = [
+            'nose',
             'pandas >= 0.17',
+            ],
+        survey = [
+            'OpenFisca-Survey-Manager',
             ],
         ),
     include_package_data = True,  # Will read MANIFEST.in
     install_requires = [
         'Babel >= 0.9.4',
         'Biryani[datetimeconv] >= 0.10.2dev',
-        'numpy',
-        'OpenFisca-Core >= 0.4dev',
-        'scipy >= 0.12',
+        'numpy >= 1.6',
+        'OpenFisca-Core >= 0.5.4',
+        'PyYAML >= 3.10',
         ],
     packages = find_packages(),
     test_suite = 'nose.collector',
