@@ -32,7 +32,6 @@ import collections
 import datetime
 import logging
 import os
-import pkg_resources
 import sys
 import xml.etree.ElementTree as etree
 
@@ -112,9 +111,10 @@ def main():
     tree = collections.OrderedDict()
     for source_dir_encoded, directories_name_encoded, filenames_encoded in os.walk(args.source_dir):
         # We deal only with taxation indirecte
-        if not (source_dir_encoded.endswith('taxation-indirecte')
-            or source_dir_encoded.endswith('tarification-energie-logement')):
+        if not (source_dir_encoded.endswith('taxation-indirecte') or source_dir_encoded.endswith(
+                'tarification-energie-logement')):
             continue
+
         directories_name_encoded.sort()
         for filename_encoded in sorted(filenames_encoded):
             if not filename_encoded.endswith('.yaml'):
