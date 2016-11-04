@@ -273,6 +273,17 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         assert menage.zeat.isin(range(1, 9)).all()
 
+        try:
+            depmen = survey.get_values(table = "DEPMEN")
+        except:
+            depmen = survey.get_values(table = "depmen")
+        depmen.rename(columns = {'ident': 'ident_men'}, inplace = True)
+        sourcp = depmen[['sourcp', 'ident_men']].copy()
+        del depmen
+
+        sourcp.set_index('ident_men', inplace = True)
+        menage = menage.merge(sourcp, left_index = True, right_index = True)
+
         individus = survey.get_values(
             table = "individus",
             variables = ['ident', 'matri', 'lien', 'anais']
@@ -367,6 +378,10 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.loc[menage.htl.isin(['1', '5']), 'typlog'] = 1
         assert menage.typlog.isin([1, 2]).all()
         del menage['htl']
+
+        sourcp = survey.get_values(table = "depmen", variables = ['ident_men', 'sourcp'])
+        sourcp.set_index('ident_men', inplace = True)
+        menage = menage.merge(sourcp, left_index = True, right_index = True)
 
         individus = survey.get_values(table = 'individu')
         # Il y a un problème sur l'année de naissance,
@@ -581,8 +596,10 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'agecj',
             'agepr',
             'coeffuc',
+            'cs42pr',
+            'cs42cj',
             'decuc1',
-            'ident_me',
+            'ident_men',
             'pondmen',
             'npers',
             'nenfants',
@@ -595,6 +612,8 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'cataeu',
             'situapr',
             'situacj',
+            'tuu',
+            'tau',
             'zeat',
             ]
 
@@ -620,15 +639,40 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage['nadultes'] = menage.npers - menage.nenfants
         menage['ocde10_old'] = 1 + 0.7 * numpy.maximum(0, menage['nadultes'] - 1) + 0.5 * menage['nenfants']
 
-        # Ajout de la variable vag
+        # Ajout des variables contenues dans la table depmen :
+        variables_depmen = [
+            'aidlog1',
+            'aidlog2',
+            'ancons',
+            'chaufp',
+            'htl',
+            'ident_men',
+            'mall1',
+            'mall2',
+            'mchof',
+            'mchof_d',
+            'mfac_eau1',
+            'mfac_eau1_d',
+            'mfac_eg1',
+            'mfac_eg1_d',
+            'mloy',
+            'mloy_d',
+            'nbh1',
+            'nbphab',
+            'sourcp',
+            'stalog',
+            'surfhab_d',
+            'tchof',
+            'vag',
+            ]
         try:
-            depmen = survey.get_values(table = "DEPMEN")
+            depmen = survey.get_values(table = "DEPMEN", variables = variables_depmen)
         except:
-            depmen = survey.get_values(table = "depmen")
+            depmen = survey.get_values(table = "depmen", variables = variables_depmen)
         depmen.rename(columns = {'ident_me': 'ident_men'}, inplace = True)
         vague = depmen[['vag', 'ident_men']].copy()
         stalog = depmen[['stalog', 'ident_men']].copy()
-        del depmen
+        sourcp = depmen[['sourcp', 'ident_men']].copy()
 
         menage.set_index('ident_men', inplace = True)
         vague.set_index('ident_men', inplace = True)
@@ -657,7 +701,9 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         assert stalog.stalog.isin(range(1, 6)).all()
         stalog.set_index('ident_men', inplace = True)
         menage = menage.merge(stalog, left_index = True, right_index = True)
-
+        sourcp.set_index('ident_men', inplace = True)
+        menage = menage.merge(sourcp, left_index = True, right_index = True)
+       
         # Recodage des catégories zeat
         menage.loc[menage.zeat == 7, 'zeat'] = 6
         menage.zeat.loc[menage.zeat == 8] = 7
