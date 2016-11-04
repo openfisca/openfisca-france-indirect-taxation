@@ -5,7 +5,7 @@ from __future__ import division
 
 from datetime import date
 
-from openfisca_france_indirect_taxation.model.base import *
+from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
 class depenses_diesel(Variable):

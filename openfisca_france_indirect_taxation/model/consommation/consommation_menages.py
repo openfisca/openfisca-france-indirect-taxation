@@ -27,7 +27,7 @@ from __future__ import division
 
 from datetime import date
 
-from openfisca_france_indirect_taxation.model.base import *
+from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
 for coicop12_index in range(1, 13):
@@ -40,84 +40,36 @@ for coicop12_index in range(1, 13):
         ))
 
 
-class depenses_alcools_forts(Variable):
+class depenses_carburants(Variable):
     column = FloatCol
     entity_class = Menages
-    label = u"Consommation d'alcools forts"
+    label = u"Consommation de ticpe"
 
     def function(self, simulation, period):
-        categorie_fiscale_10 = simulation.calculate('categorie_fiscale_10', period)
-        return period, categorie_fiscale_10
+        return period, simulation.calculate('depenses_ticpe', period)
 
 
-class depenses_assurance_sante(Variable):
+class depenses_ticpe(Variable):
     column = FloatCol
     entity_class = Menages
-    label = u"Consommation d'assurance santé"
+    label = u"Consommation de ticpe"
 
     def function(self, simulation, period):
-        categorie_fiscale_16 = simulation.calculate('categorie_fiscale_16', period)
-        return period, categorie_fiscale_16
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        return period, simulation.calculate('depenses_ht_ticpe', period) * (1 + taux_plein_tva)
 
 
-class depenses_assurance_transport(Variable):
+class depenses_essence_recalculees(Variable):
     column = FloatCol
     entity_class = Menages
-    label = u"Consommation d'assurance transport"
+    label = u"Dépenses en essence recalculées à partir du prix ht"
 
     def function(self, simulation, period):
-        categorie_fiscale_15 = simulation.calculate('categorie_fiscale_15', period)
-        return period, categorie_fiscale_15
-
-
-class depenses_autres_assurances(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Consommation d'autres assurances"
-
-    def function(self, simulation, period):
-        categorie_fiscale_17 = simulation.calculate('categorie_fiscale_17', period)
-        return period, categorie_fiscale_17
-
-
-class depenses_biere(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Consommation de bière"
-
-    def function(self, simulation, period):
-        categorie_fiscale_13 = simulation.calculate('categorie_fiscale_13', period)
-        return period, categorie_fiscale_13
-
-
-class depenses_cigares(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Consommation de cigares"
-
-    def function(self, simulation, period):
-        categorie_fiscale_8 = simulation.calculate('categorie_fiscale_8', period)
-        return period, categorie_fiscale_8
-
-
-class depenses_cigarettes(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Consommation de cigarettes"
-
-    def function(self, simulation, period):
-        categorie_fiscale_7 = simulation.calculate('categorie_fiscale_7', period)
-        return period, categorie_fiscale_7
-
-
-class depenses_tabac_a_rouler(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Consommation de tabac à rouler"
-
-    def function(self, simulation, period):
-        categorie_fiscale_9 = simulation.calculate('categorie_fiscale_9', period)
-        return period, categorie_fiscale_9
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        depenses_sp_e10_ht = simulation.calculate('depenses_sp_e10_ht', period)
+        depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
+        depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
+        depenses_super_plombe_ht = simulation.calculate('depenses_super_plombe_ht', period)
 
 
 class depenses_totales(Variable):
@@ -138,58 +90,16 @@ class depenses_totales(Variable):
             )
 
 
-class depenses_tva_taux_intermediaire(Variable):
+class quantite_diesel(Variable):
     column = FloatCol
     entity_class = Menages
-    label = u"Consommation soumis à une TVA à taux intermédiaire"
-
-    def function(self, simulation, period):
-        categorie_fiscale_4 = simulation.calculate('categorie_fiscale_4', period)
-        return period, categorie_fiscale_4
+    label = u"Quantité de diesel consommée (en hecto-litres)"
 
 
-class depenses_tva_taux_plein(Variable):
+class quantite_supercarburants(Variable):
     column = FloatCol
     entity_class = Menages
-    label = u"Consommation soumis à une TVA à taux plein"
-
-    def function(self, simulation, period):
-        categorie_fiscale_3 = simulation.calculate('categorie_fiscale_3', period)
-        try:
-            categorie_fiscale_11 = simulation.calculate('categorie_fiscale_11', period)
-        except:
-            categorie_fiscale_11 = 0
-        return period, categorie_fiscale_3 + categorie_fiscale_11
-
-
-class depenses_tva_taux_reduit(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Consommation soumis à une TVA à taux réduit"
-
-    def function(self, simulation, period):
-        categorie_fiscale_2 = simulation.calculate('categorie_fiscale_2', period)
-        return period, categorie_fiscale_2
-
-
-class depenses_tva_taux_super_reduit(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Consommation soumis à une TVA à taux super réduit"
-
-    def function(self, simulation, period):
-        categorie_fiscale_1 = simulation.calculate('categorie_fiscale_1', period)
-        return period, categorie_fiscale_1
-
-
-class depenses_vin(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Consommation de vin"
-
-    def function(self, simulation, period):
-        categorie_fiscale_12 = simulation.calculate('categorie_fiscale_12', period)
-        return period, categorie_fiscale_12
+    label = u"Quantité de supercarburants (super 95, super98 et superE10) consommée (en hecto-litres)"
 
 
 class somme_coicop12(Variable):

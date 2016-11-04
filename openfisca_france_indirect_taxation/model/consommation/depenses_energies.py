@@ -5,18 +5,8 @@ from __future__ import division
 
 from datetime import date
 
-from openfisca_france_indirect_taxation.model.base import *
+from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 import numpy
-
-
-class depenses_carburants(Variable):
-    column = FloatCol
-    entity_class = Menages
-    label = u"Consommation de ticpe"
-
-    def function(self, simulation, period):
-        categorie_fiscale_14 = simulation.calculate('categorie_fiscale_14', period)
-        return period, categorie_fiscale_14
 
 
 class depenses_diesel_htva(Variable):

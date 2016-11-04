@@ -3,7 +3,7 @@
 from __future__ import division
 
 
-from openfisca_france_indirect_taxation.model.base import *
+from openfisca_france_indirect_taxation.model.base import * # noqa analysis:ignore
 
 
 class emissions_CO2_carburants(Variable):

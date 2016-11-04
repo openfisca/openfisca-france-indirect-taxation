@@ -75,4 +75,5 @@ class Menages(entities.AbstractEntity):
         for enfant_role, enfant_id in enumerate(itertools.chain(enfants_id, autres_id), role):
             yield enfant_role, enfant_id
 
+
 entities = [Individus, Menages]
