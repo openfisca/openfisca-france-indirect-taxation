@@ -4,12 +4,10 @@
 from __future__ import division
 
 
-
 import numpy as np
 import os
 import pkg_resources
 import pandas as pd
-
 
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -30,12 +28,21 @@ def build_aggreggates(variables, by = 'niveau_vie_decile', survey_scenario = Non
     adjusted_aggregates = dict()
     for variable in variables:
         aggregates[variable] = survey_scenario.compute_aggregate(variable) / 1e9
+        adjusted_aggregates[variable] = adjusted_survey_scenario.compute_aggregate(variable) / 1e9
+        if not np.isfinite(survey_scenario.compute_aggregate(variable, reference = True)):
+            print 'variable {} aggregates is infinite'.format(variable)
+            reference_aggregates[variable] = (
+                survey_scenario.compute_aggregate(
+                    variable,
+                    reference = True,
+                    missing_variable_default_value = 0,
+                    ) / 1e9
+                )
+            continue
         reference_aggregates[variable] = (
             survey_scenario.compute_aggregate(variable, reference = True) / 1e9
-            if np.isfinite(survey_scenario.compute_aggregate(variable, reference = True)) else 0
             )
 
-        adjusted_aggregates[variable] = adjusted_survey_scenario.compute_aggregate(variable) / 1e9
     aggregates = pd.DataFrame({
         'reform': aggregates,
         'reference': reference_aggregates,
@@ -47,23 +54,39 @@ def build_aggreggates(variables, by = 'niveau_vie_decile', survey_scenario = Non
     return aggregates
 
 
-def build_pivot_table(variables, by = 'niveau_vie_decile', survey_scenario = None, adjusted_survey_scenario = None):
+def build_pivot_table(variables, by = 'niveau_vie_decile', survey_scenario = None, adjusted_survey_scenario = None,
+        aggfunc = 'mean'):
     pivot_table = pd.DataFrame()
     reference_pivot_table = pd.DataFrame()
     adjusted_pivot_table = pd.DataFrame()
     for variable in variables:
         pivot_table = pd.concat([
             pivot_table,
-            survey_scenario.compute_pivot_table(values = [variable], columns = [by])
+            survey_scenario.compute_pivot_table(
+                values = [variable],
+                columns = [by],
+                aggfunc = aggfunc,
+                missing_variable_default_value = 0,
+                )
             ])
         reference_pivot_table = pd.concat([
-            reference_pivot_table.fillna(0),
-            survey_scenario.compute_pivot_table(values = [variable], columns = [by],
-                                               reference = True)
+            reference_pivot_table,
+            survey_scenario.compute_pivot_table(
+                values = [variable],
+                columns = [by],
+                reference = True,
+                aggfunc = aggfunc,
+                missing_variable_default_value = 0,
+                )
             ])
         adjusted_pivot_table = pd.concat([
             adjusted_pivot_table,
-            adjusted_survey_scenario.compute_pivot_table(values = [variable], columns = [by])
+            adjusted_survey_scenario.compute_pivot_table(
+                values = [variable],
+                columns = [by],
+                aggfunc = aggfunc,
+                missing_variable_default_value = 0,
+                )
             ])
     pivot_table = pd.concat({
         'reform': pivot_table,
@@ -117,7 +140,7 @@ def set_adjustable_reform(dataframe):
     dataframe.to_csv(csv_file_path)
 
 
-def run_reform(reform_key = None):
+def run_reform(reform_key = None, aggfunc = 'mean'):
     survey_scenario, adjusted_survey_scenario = build_scenarios(reform_key = reform_key)
     alimentation_domicile_hors_alcool = [
         "depenses_ht_{}".format(key) for key in survey_scenario.tax_benefit_system.column_by_name.keys()
@@ -140,7 +163,8 @@ def run_reform(reform_key = None):
     aggregates = build_aggreggates(
         variables, survey_scenario = survey_scenario, adjusted_survey_scenario = adjusted_survey_scenario)
     pivot_table = build_pivot_table(
-        variables, survey_scenario = survey_scenario, adjusted_survey_scenario = adjusted_survey_scenario)
+        variables, survey_scenario = survey_scenario, adjusted_survey_scenario = adjusted_survey_scenario,
+        aggfunc = aggfunc)
 
     # Some tests
     assert (pd.DataFrame(
