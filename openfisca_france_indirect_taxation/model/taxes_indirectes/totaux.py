@@ -30,7 +30,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 class taxes_indirectes_total(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Montant total de taxes indirectes payées"
 
     def function(self, simulation, period):
@@ -44,7 +44,7 @@ class taxes_indirectes_total(Variable):
 
 class taxes_indirectes_total_hors_tva(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Montant total de taxes indirectes payées sans compter la TVA"
 
     def function(self, simulation, period):

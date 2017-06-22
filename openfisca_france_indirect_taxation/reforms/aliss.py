@@ -14,7 +14,7 @@ from openfisca_core.formulas import dated_function
 from openfisca_core.variables import DatedVariable, Variable
 
 
-from openfisca_france_indirect_taxation.model.base import get_legislation_data_frames, Menages
+from openfisca_france_indirect_taxation.model.base import get_legislation_data_frames, Menage
 
 from openfisca_france_indirect_taxation.model.consommation.postes_coicop import generate_postes_agreges_variables
 from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import generate_variables
@@ -366,7 +366,7 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
                 categorie_fiscale = categorie_fiscale, taux = taux)
             definitions_by_name = dict(
                 column = FloatCol,
-                entity_class = Menages,
+                entity_class = Menage,
                 label = u"Dépenses taxes comprises: {0}".format(categorie_fiscale),
                 function = depenses_new_tva_func,
                 )
@@ -380,7 +380,7 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
             new_tva_func = new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
             definitions_by_name = dict(
                 column = FloatCol,
-                entity_class = Menages,
+                entity_class = Menage,
                 label = u"Montant de la TVA acquitée à {0}".format(categorie_fiscale),
                 function = new_tva_func,
                 )

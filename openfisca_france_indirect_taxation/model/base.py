@@ -1,73 +1,38 @@
 # -*- coding: utf-8 -*-
 
 
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014, 2015 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
 from datetime import date
 import os
 import pandas as pd
 import pkg_resources
 
+from openfisca_core.model_api import *
 
 from biryani.strings import slugify
 
 
-from openfisca_core.columns import AgeCol, DateCol, FloatCol, IntCol, EnumCol, StrCol
-from openfisca_core.enumerations import Enum
-from openfisca_core.formulas import dated_function
-from openfisca_core.variables import DatedVariable, Variable
 try:
     from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
 except ImportError:
     mark_weighted_percentiles, weighted_quantiles = None, None
 
-from openfisca_france_indirect_taxation.entities import Individus, Menages
+from openfisca_france_indirect_taxation.entities import Individu, Menage
 
 
-__all__ = [
-    'AgeCol',
-    'DateCol',
-    'DatedVariable',
-    'dated_function',
-    'depenses_postes_agreges_function_creator',
-    'depenses_ht_categorie_function_creator',
-    'depenses_ht_postes_function_creator',
-    'droit_d_accise',
-    'Enum',
-    'EnumCol',
-    'FloatCol',
-    'get_legislation_data_frames',
-    'get_poste_categorie_fiscale',
-    'Individus',
-    'IntCol',
-    'insert_tva',
-    'mark_weighted_percentiles',
-    'Menages',
-    'StrCol',
-    'tax_from_expense_including_tax',
-    'Variable',
-    'weighted_quantiles',
-    ]
+# __all__ = [
+#     'depenses_postes_agreges_function_creator',
+#     'depenses_ht_categorie_function_creator',
+#     'depenses_ht_postes_function_creator',
+#     'droit_d_accise',
+#     'get_legislation_data_frames',
+#     'get_poste_categorie_fiscale',
+#     'Individu',
+#     'insert_tva',
+#     'mark_weighted_percentiles',
+#     'Menage',
+#     'tax_from_expense_including_tax',
+#     'weighted_quantiles',
+#     ]
 
 tva_by_categorie_primaire = dict(
     biere = 'tva_taux_plein',

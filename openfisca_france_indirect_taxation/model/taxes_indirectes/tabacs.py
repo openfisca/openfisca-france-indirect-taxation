@@ -8,7 +8,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 class cigares_droit_d_accise(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Montant des droits d'accises sur les cigares"
 
     def function(self, simulation, period):
@@ -19,7 +19,7 @@ class cigares_droit_d_accise(Variable):
 
 class cigarette_droit_d_accise(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Montant des droits d'accises sur les cigarettes"
 
     def function(self, simulation, period):
@@ -31,7 +31,7 @@ class cigarette_droit_d_accise(Variable):
 
 class depenses_cigares(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Dépenses de cigares"
 
     def function(self, simulation, period):
@@ -40,7 +40,7 @@ class depenses_cigares(Variable):
 
 class depenses_cigarettes(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Dépenses de cigarettes"
 
     def function(self, simulation, period):
@@ -49,7 +49,7 @@ class depenses_cigarettes(Variable):
 
 class depenses_tabac_a_rouler(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Dépenses de tabac à rouler et autres tabacs"
 
     def function(self, simulation, period):
@@ -58,7 +58,7 @@ class depenses_tabac_a_rouler(Variable):
 
 class tabac_a_rouler_droit_d_accise(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Montant des droits d'accises sur le tabac à rouler"
 
     def function(self, simulation, period):
@@ -70,7 +70,7 @@ class tabac_a_rouler_droit_d_accise(Variable):
 
 class total_tabac_droit_d_accise(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Montant des droits d'accises sur le tabac "
 
     def function(self, simulation, period):

@@ -72,7 +72,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
         if reform_key is None:
             definitions_by_name = dict(
                 column = FloatCol,
-                entity_class = Menages,
+                entity_class = Menage,
                 label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
                 )
             definitions_by_name.update(functions_by_name)
@@ -90,7 +90,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
             else:
                 definitions_by_name = dict(
                     column = FloatCol,
-                    entity_class = Menages,
+                    entity_class = Menage,
                     label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
                     )
                 definitions_by_name.update(functions_by_name)

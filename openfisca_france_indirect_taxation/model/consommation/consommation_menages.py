@@ -35,14 +35,14 @@ for coicop12_index in range(1, 13):
     # Trick to create a class with a dynamic name.
     type(name.encode('utf-8'), (Variable,), dict(
         column = FloatCol,
-        entity_class = Menages,
+        entity_class = Menage,
         label = u"Poste coicop {} de la nomenclature aggrégée à 12 niveaux".format(coicop12_index),
         ))
 
 
 class depenses_carburants(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Consommation de ticpe"
 
     def function(self, simulation, period):
@@ -51,7 +51,7 @@ class depenses_carburants(Variable):
 
 class depenses_ticpe(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Consommation de ticpe"
 
     def function(self, simulation, period):
@@ -61,7 +61,7 @@ class depenses_ticpe(Variable):
 
 class depenses_essence_recalculees(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Dépenses en essence recalculées à partir du prix ht"
 
     def function(self, simulation, period):
@@ -74,7 +74,7 @@ class depenses_essence_recalculees(Variable):
 
 class depenses_totales(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Consommation totale du ménage"
 
     def function(self, simulation, period):
@@ -92,19 +92,19 @@ class depenses_totales(Variable):
 
 class quantite_diesel(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantité de diesel consommée (en hecto-litres)"
 
 
 class quantite_supercarburants(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantité de supercarburants (super 95, super98 et superE10) consommée (en hecto-litres)"
 
 
 class somme_coicop12(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Somme des postes coicop12"
 
     def function(self, simulation, period):
@@ -116,7 +116,7 @@ class somme_coicop12(Variable):
 
 class somme_coicop12_conso(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Somme des postes coicop12 de 1 à 8"
 
     def function(self, simulation, period):

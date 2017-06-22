@@ -36,13 +36,13 @@ def generate_postes_variables(tax_benefit_system):
         # Trick to create a class with a dynamic name.
         type(class_name.encode('utf-8'), (Variable,), dict(
             column = FloatCol,
-            entity_class = Menages,
+            entity_class = Menage,
             label = label.decode('utf-8'),
             ))
         tax_benefit_system.add_variable(
             type(class_name.encode('utf-8'), (Variable,), dict(
                 column = FloatCol,
-                entity_class = Menages,
+                entity_class = Menage,
                 label = label.decode('utf-8'),
                 ))
             )
@@ -101,7 +101,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
         # if Reform is None:
         definitions_by_name = dict(
             column = FloatCol,
-            entity_class = Menages,
+            entity_class = Menage,
             label = u"Dépenses hors taxe du poste_{0}".format(poste),
             )
         definitions_by_name.update(functions_by_name)
@@ -134,7 +134,7 @@ def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = 
         if reform_key is None:
             definitions_by_name = dict(
                 column = FloatCol,
-                entity_class = Menages,
+                entity_class = Menage,
                 label = label,
                 )
             definitions_by_name.update(functions_by_name)

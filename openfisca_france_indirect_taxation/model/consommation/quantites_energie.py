@@ -11,7 +11,7 @@ from openfisca_france_indirect_taxation.model.base import * # noqa analysis:igno
 
 class quantites_diesel(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantités de diesel consommées par les ménages"
 
     def function(self, simulation, period):
@@ -24,7 +24,7 @@ class quantites_diesel(Variable):
 
 class quantites_sp_e10(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantités consommées de sans plomb e10 par les ménages"
 
     def function(self, simulation, period):
@@ -39,7 +39,7 @@ class quantites_sp_e10(Variable):
 
 class quantites_sp95(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantités consommées de sans plomb 95 par les ménages"
 
     def function(self, simulation, period):
@@ -54,7 +54,7 @@ class quantites_sp95(Variable):
 
 class quantites_sp98(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantités consommées de sans plomb 98 par les ménages"
 
     def function(self, simulation, period):
@@ -69,7 +69,7 @@ class quantites_sp98(Variable):
 
 class quantites_super_plombe(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantités consommées de super plombé par les ménages"
 
     def function(self, simulation, period):
@@ -85,7 +85,7 @@ class quantites_super_plombe(Variable):
 
 class quantites_essence(DatedVariable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantités d'essence consommées par les ménages"
 
     @dated_function(start = date(1990, 1, 1), stop = date(2006, 12, 31))
@@ -117,7 +117,7 @@ class quantites_essence(DatedVariable):
 
 class quantites_electricite_3kva(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 3 kva"
 
     def function(self, simulation, period):
@@ -134,7 +134,7 @@ class quantites_electricite_3kva(Variable):
 
 class quantites_electricite_6kva(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 6 kva"
 
     def function(self, simulation, period):
@@ -151,7 +151,7 @@ class quantites_electricite_6kva(Variable):
 
 class quantites_electricite_9kva(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 9 kva"
 
     def function(self, simulation, period):
@@ -168,7 +168,7 @@ class quantites_electricite_9kva(Variable):
 
 class quantites_electricite_12kva(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 12 kva"
 
     def function(self, simulation, period):
@@ -185,7 +185,7 @@ class quantites_electricite_12kva(Variable):
 
 class quantites_electricite_15kva(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 15 kva"
 
     def function(self, simulation, period):
@@ -202,7 +202,7 @@ class quantites_electricite_15kva(Variable):
 
 class quantites_electricite_18kva(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 18 kva"
 
     def function(self, simulation, period):
@@ -219,7 +219,7 @@ class quantites_electricite_18kva(Variable):
 
 class quantites_gaz_contrat_base(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat de base"
 
     def function(self, simulation, period):
@@ -236,7 +236,7 @@ class quantites_gaz_contrat_base(Variable):
 
 class quantites_gaz_contrat_b0(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat b0"
 
     def function(self, simulation, period):
@@ -253,7 +253,7 @@ class quantites_gaz_contrat_b0(Variable):
 
 class quantites_gaz_contrat_b1(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat b1"
 
     def function(self, simulation, period):
@@ -270,7 +270,7 @@ class quantites_gaz_contrat_b1(Variable):
 
 class quantites_gaz_contrat_b2i(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat b2i"
 
     def function(self, simulation, period):
@@ -287,7 +287,7 @@ class quantites_gaz_contrat_b2i(Variable):
 
 class quantites_gaz_contrat_optimal(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au meilleur contrat"
 
     def function(self, simulation, period):
@@ -305,7 +305,7 @@ class quantites_gaz_contrat_optimal(Variable):
 
 class quantites_electricite_selon_compteur(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Quantité d'électricité (en kWh) consommée par les ménages d'après le compteur imputé"
 
     def function(self, simulation, period):

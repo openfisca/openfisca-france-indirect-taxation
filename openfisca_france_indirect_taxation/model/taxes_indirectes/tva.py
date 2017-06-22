@@ -10,7 +10,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 class depenses_tva_exonere(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Dépenses TTC des biens n'acquittant pas de TVA"
 
     def function(self, simulation, period):
@@ -19,7 +19,7 @@ class depenses_tva_exonere(Variable):
 
 class depenses_tva_taux_intermediaire(DatedVariable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Dépenses TTC des biens acquittant la TVA à taux intermediaire"
 
     @dated_function(start = datetime.date(2012, 1, 1))
@@ -31,7 +31,7 @@ class depenses_tva_taux_intermediaire(DatedVariable):
 
 class depenses_tva_taux_plein(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Dépenses TTC des biens acquittant la TVA acquitée à taux plein"
 
     def function(self, simulation, period):
@@ -42,7 +42,7 @@ class depenses_tva_taux_plein(Variable):
 
 class depenses_tva_taux_reduit(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Dépenses TTC des biens acquittant la TVA acquitée à taux reduit"
 
     def function(self, simulation, period):
@@ -53,7 +53,7 @@ class depenses_tva_taux_reduit(Variable):
 
 class depenses_tva_taux_super_reduit(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Dépenses TTC des biens acquittant à taux super reduit"
 
     def function(self, simulation, period):
@@ -64,7 +64,7 @@ class depenses_tva_taux_super_reduit(Variable):
 
 class tva_taux_intermediaire(DatedVariable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Montant de la TVA acquitée à taux intermediaire"
 
     @dated_function(start = datetime.date(2012, 1, 1))
@@ -77,7 +77,7 @@ class tva_taux_intermediaire(DatedVariable):
 
 class tva_taux_plein(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Montant de la TVA acquitée à taux plein"
 
     def function(self, simulation, period):
@@ -89,7 +89,7 @@ class tva_taux_plein(Variable):
 
 class tva_taux_reduit(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Montant de la TVA acquitée à taux reduit"
 
     def function(self, simulation, period):
@@ -101,7 +101,7 @@ class tva_taux_reduit(Variable):
 
 class tva_taux_super_reduit(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Montant de la TVA acquitée à taux super reduit"
 
     def function(self, simulation, period):
@@ -113,7 +113,7 @@ class tva_taux_super_reduit(Variable):
 
 class tva_total(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity_class = Menage
     label = u"Montant de la TVA acquitée"
 
     def function(self, simulation, period):
