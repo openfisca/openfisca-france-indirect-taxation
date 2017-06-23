@@ -7,6 +7,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 import numpy
 
+
 class depenses_essence_ajustees(Variable):
     column = FloatCol
     entity = Menage
