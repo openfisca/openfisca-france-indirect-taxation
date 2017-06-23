@@ -3,8 +3,6 @@
 from __future__ import division
 
 
-import datetime
-
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 

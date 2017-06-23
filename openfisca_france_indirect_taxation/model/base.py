@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-from datetime import date
 import os
 import pandas as pd
 import pkg_resources
@@ -193,6 +192,7 @@ def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, yea
 
 def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, year_start = None, year_stop = None):
     assert categorie_fiscale is not None
+
     def func(self, simulation, period, categorie_fiscale = categorie_fiscale):
         tva = get_tva(categorie_fiscale)
         if tva is not None:

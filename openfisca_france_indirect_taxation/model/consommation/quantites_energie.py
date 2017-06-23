@@ -3,7 +3,6 @@
 from __future__ import division
 
 
-from datetime import date
 import numpy
 
 from openfisca_france_indirect_taxation.model.base import * # noqa analysis:ignore

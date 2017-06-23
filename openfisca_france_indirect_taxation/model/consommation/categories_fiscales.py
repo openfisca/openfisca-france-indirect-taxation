@@ -3,12 +3,9 @@
 
 from __future__ import division
 
-from datetime import date
 import logging
 
 from biryani.strings import slugify
-
-
 
 
 from openfisca_france_indirect_taxation.model.base import *
