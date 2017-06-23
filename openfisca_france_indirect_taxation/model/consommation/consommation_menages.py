@@ -1,27 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014, 2015 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 from __future__ import division
 
 
@@ -45,7 +24,7 @@ class depenses_carburants(Variable):
     entity_class = Menage
     label = u"Consommation de ticpe"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         return period, simulation.calculate('depenses_ticpe', period)
 
 
@@ -54,7 +33,7 @@ class depenses_ticpe(Variable):
     entity_class = Menage
     label = u"Consommation de ticpe"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         return period, simulation.calculate('depenses_ht_ticpe', period) * (1 + taux_plein_tva)
 
@@ -64,7 +43,7 @@ class depenses_essence_recalculees(Variable):
     entity_class = Menage
     label = u"Dépenses en essence recalculées à partir du prix ht"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         depenses_sp_e10_ht = simulation.calculate('depenses_sp_e10_ht', period)
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
@@ -77,7 +56,7 @@ class depenses_totales(Variable):
     entity_class = Menage
     label = u"Consommation totale du ménage"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_tva_taux_super_reduit = simulation.calculate('depenses_tva_taux_super_reduit', period)
         depenses_tva_taux_reduit = simulation.calculate('depenses_tva_taux_reduit', period)
         depenses_tva_taux_intermediaire = simulation.calculate('depenses_tva_taux_intermediaire', period)
@@ -107,7 +86,7 @@ class somme_coicop12(Variable):
     entity_class = Menage
     label = u"Somme des postes coicop12"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         return period, sum(
             simulation.calculate('coicop12_{}'.format(idx), period)
             for idx in xrange(1, 13)
@@ -119,7 +98,7 @@ class somme_coicop12_conso(Variable):
     entity_class = Menage
     label = u"Somme des postes coicop12 de 1 à 8"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         return period, sum(
             simulation.calculate('coicop12_{}'.format(idx), period)
             for idx in xrange(1, 9)

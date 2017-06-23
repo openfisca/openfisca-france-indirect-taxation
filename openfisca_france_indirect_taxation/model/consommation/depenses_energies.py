@@ -14,7 +14,7 @@ class depenses_diesel_htva(Variable):
     entity_class = Menage
     label = u"Dépenses en diesel htva (mais incluant toujours la TICPE)"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         depenses_diesel = simulation.calculate('depenses_diesel', period)
         depenses_diesel_htva = depenses_diesel - tax_from_expense_including_tax(depenses_diesel, taux_plein_tva)
@@ -27,7 +27,7 @@ class depenses_diesel_ht(Variable):
     entity_class = Menage
     label = u"Dépenses en diesel ht (prix brut sans TVA ni TICPE)"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
 
         try:
@@ -56,7 +56,7 @@ class depenses_diesel_recalculees(Variable):
     entity_class = Menage
     label = u"Dépenses en diesel recalculées à partir du prix ht"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         depenses_diesel_ht = simulation.calculate('depenses_diesel_ht', period)
 
@@ -84,7 +84,7 @@ class depenses_essence_ht(DatedVariable):
     entity_class = Menage
     label = u"Dépenses en essence hors taxes (HT, i.e. sans TVA ni TICPE)"
 
-    @dated_function(start = date(1990, 1, 1), stop = date(2006, 12, 31))
+    @dated_function(start = date(1990, 1, 1))
     def function_90_06(self, simulation, period):
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
@@ -92,14 +92,14 @@ class depenses_essence_ht(DatedVariable):
         depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht + depenses_super_plombe_ht)
         return period, depenses_essence_ht
 
-    @dated_function(start = date(2007, 1, 1), stop = date(2008, 12, 31))
+    @dated_function(start = date(2007, 1, 1))
     def function_07_08(self, simulation, period):
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
         depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht)
         return period, depenses_essence_ht
 
-    @dated_function(start = date(2009, 1, 1), stop = date(2015, 12, 31))
+    @dated_function(start = date(2009, 1, 1))
     def function_09_15(self, simulation, period):
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
@@ -113,7 +113,7 @@ class depenses_sp_e10_ht(Variable):
     entity_class = Menage
     label = u"Dépenses en essence sans plomb e10 hors taxes (HT, i.e. sans TVA ni TICPE)"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         depenses_essence = simulation.calculate('depenses_essence', period)
         part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
@@ -146,7 +146,7 @@ class depenses_sp_95_ht(Variable):
     entity_class = Menage
     label = u"Dépenses en essence sans plomb 95 hors taxes (HT, i.e. sans TVA ni TICPE)"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
 
         try:
@@ -177,7 +177,7 @@ class depenses_sp_98_ht(Variable):
     entity_class = Menage
     label = u"Dépenses en essence sans plomb 98 hors taxes (HT, i.e. sans TVA ni TICPE)"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
 
         try:
@@ -208,7 +208,7 @@ class depenses_super_plombe_ht(Variable):
     entity_class = Menage
     label = u"Dépenses en essence super plombée hors taxes (HT, i.e. sans TVA ni TICPE)"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         accise_super_plombe_ticpe = \
             simulation.legislation_at(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
@@ -234,7 +234,7 @@ class depenses_gaz_prix_unitaire(Variable):
     entity_class = Menage
     label = u"Prix unitaire du gaz rencontré par les ménages"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         quantite_base = simulation.calculate('quantites_gaz_contrat_base', period)
         quantite_b0 = simulation.calculate('quantites_gaz_contrat_b0', period)
         quantite_b1 = simulation.calculate('quantites_gaz_contrat_b1', period)
@@ -265,7 +265,7 @@ class depenses_gaz_tarif_fixe(Variable):
     entity_class = Menage
     label = u"Dépenses en gaz des ménages sur le coût fixe de l'abonnement"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         quantite_base = simulation.calculate('quantites_gaz_contrat_base', period)
         quantite_b0 = simulation.calculate('quantites_gaz_contrat_b0', period)
         quantite_b1 = simulation.calculate('quantites_gaz_contrat_b1', period)
@@ -296,7 +296,7 @@ class depenses_gaz_variables(Variable):
     entity_class = Menage
     label = u"Dépenses en gaz des ménages, hors coût fixe de l'abonnement"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_gaz = simulation.calculate('poste_coicop_452', period)
         tarif_fixe = simulation.calculate('depenses_gaz_tarif_fixe', period)
 
@@ -311,7 +311,7 @@ class depenses_electricite_percentile(Variable):
     entity_class = Menage
     label = u"Classement par percentile des dépenses d'électricité"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_electricite = simulation.calculate('poste_coicop_451', period)
         depenses_electricite_rank = depenses_electricite.argsort().argsort()
         depenses_electricite_percentile = depenses_electricite_rank / len(depenses_electricite_rank) * 100
@@ -324,7 +324,7 @@ class depenses_electricite_prix_unitaire(Variable):
     entity_class = Menage
     label = u"Prix unitaire de l'électricité de chaque ménage, après affectation d'un compteur"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_electricite_percentile = simulation.calculate('depenses_electricite_percentile', period)
 
         # Note : les barèmes ne donnent que les prix unitaires pour 3 et 6 kva. Pour les puissances supérieures,
@@ -347,7 +347,7 @@ class depenses_electricite_tarif_fixe(Variable):
     entity_class = Menage
     label = u"Dépenses en électricité des ménages sur le coût fixe de l'abonnement, après affectation d'un compteur"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_electricite_percentile = simulation.calculate('depenses_electricite_percentile', period)
 
         tarif_fixe_3kva = \
@@ -377,7 +377,7 @@ class depenses_electricite_variables(Variable):
     entity_class = Menage
     label = u"Dépenses en électricité des ménages, hors coût fixe de l'abonnement"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_electricite = simulation.calculate('poste_coicop_451', period)
         depenses_electricite_tarif_fixe = simulation.calculate('depenses_electricite_tarif_fixe', period)
         depenses_electricite_variables = depenses_electricite - depenses_electricite_tarif_fixe
