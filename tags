@@ -149,7 +149,7 @@ assets_path	openfisca_france_indirect_taxation/build_survey_data/calibration_ali
 assurance_sante	openfisca_france_indirect_taxation/model/base.py	/^    assurance_sante = '',$/;"	kind:variable	line:81
 assurance_sante_taxe	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^class assurance_sante_taxe(Variable):$/;"	kind:class	line:11
 assurance_transport	openfisca_france_indirect_taxation/model/base.py	/^    assurance_transport = '',$/;"	kind:variable	line:80
-assurance_transport_taxe	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^class assurance_transport_taxe(DatedVariable):$/;"	kind:class	line:24
+assurance_transport_taxe	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^class assurance_transport_taxe(Variable):$/;"	kind:class	line:24
 assurances.py	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	1;"	kind:file	line:1
 author	setup.py	/^    author = 'OpenFisca Team',$/;"	kind:variable	line:48
 author_email	setup.py	/^    author_email = 'contact@openfisca.fr',$/;"	kind:variable	line:49
@@ -596,7 +596,7 @@ depenses_energies.py	openfisca_france_indirect_taxation/model/consommation/depen
 depenses_essence	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_carburants.py	/^        depenses_essence = (data_simulation['depenses_essence'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:36
 depenses_essence	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_essence(Variable):$/;"	kind:class	line:114
 depenses_essence_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^class depenses_essence_ajustees(Variable):$/;"	kind:class	line:10
-depenses_essence_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_essence_ht(DatedVariable):$/;"	kind:class	line:82
+depenses_essence_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_essence_ht(Variable):$/;"	kind:class	line:82
 depenses_essence_recalculees	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class depenses_essence_recalculees(Variable):$/;"	kind:class	line:62
 depenses_essence_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_essence_ticpe = ($/;"	kind:variable	line:61
 depenses_essence_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_essence_ticpe = ($/;"	kind:variable	line:68
@@ -643,7 +643,7 @@ depenses_totales	openfisca_france_indirect_taxation/model/consommation/consommat
 depenses_transports	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_carburants.py	/^        depenses_transports = (data_simulation['coicop12_7'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:38
 depenses_transports_totales	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_carburants.py	/^    depenses_transports_totales = dict()$/;"	kind:variable	line:29
 depenses_tva_exonere	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_exonere(Variable):$/;"	kind:class	line:11
-depenses_tva_taux_intermediaire	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_intermediaire(DatedVariable):$/;"	kind:class	line:20
+depenses_tva_taux_intermediaire	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_intermediaire(Variable):$/;"	kind:class	line:20
 depenses_tva_taux_plein	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_plein(Variable):$/;"	kind:class	line:32
 depenses_tva_taux_reduit	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_reduit(Variable):$/;"	kind:class	line:43
 depenses_tva_taux_super_reduit	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_super_reduit(Variable):$/;"	kind:class	line:54
@@ -797,163 +797,163 @@ energie_logement	openfisca_france_indirect_taxation/almost_ideal_demand_system/a
 energie_logement	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_dataframe_builder_energy_no_alime.py	/^    energie_logement = ['poste_coicop_451', 'poste_coicop_4511', 'poste_coicop_452', 'poste_coicop_4522',$/;"	kind:variable	line:51
 entities	openfisca_france_indirect_taxation/entities.py	/^entities = [Individu, Menages]$/;"	kind:variable	line:79
 entities.py	openfisca_france_indirect_taxation/entities.py	1;"	kind:file	line:1
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity_class = Menages$/;"	kind:variable	line:34
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity_class = Menages$/;"	kind:variable	line:41
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity_class = Menages$/;"	kind:variable	line:47
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity_class = Menages$/;"	kind:variable	line:54
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity_class = Menages$/;"	kind:variable	line:60
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity_class = Menages$/;"	kind:variable	line:66
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity_class = Menages$/;"	kind:variable	line:72
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity_class = Menages$/;"	kind:variable	line:78
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity_class = Menages$/;"	kind:variable	line:95
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^    entity_class = Individu$/;"	kind:variable	line:36
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^    entity_class = Individu$/;"	kind:variable	line:46
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^    entity_class = Individu$/;"	kind:variable	line:53
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^    entity_class = Individu$/;"	kind:variable	line:60
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^    entity_class = Individu$/;"	kind:variable	line:67
-entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^    entity_class = Individu$/;"	kind:variable	line:74
-entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^        entity_class = Menages,$/;"	kind:variable	line:38
-entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:101
-entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:107
-entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:119
-entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:45
-entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:54
-entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:64
-entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:77
-entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:95
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:113
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:14
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:146
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:177
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:208
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:234
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:265
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:27
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:296
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:311
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:324
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:347
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:377
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:56
-entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity_class = Menages$/;"	kind:variable	line:84
-entity_class	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	/^    entity_class = Menages$/;"	kind:variable	line:11
-entity_class	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	/^    entity_class = Menages$/;"	kind:variable	line:28
-entity_class	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	/^    entity_class = Menages$/;"	kind:variable	line:42
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:120
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:137
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:14
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:154
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:171
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:188
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:205
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:222
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:239
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:256
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:27
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:273
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:290
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:308
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:42
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:57
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:72
-entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity_class = Menages$/;"	kind:variable	line:88
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:12
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:29
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:45
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:65
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity_class = Menages$/;"	kind:variable	line:12
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity_class = Menages$/;"	kind:variable	line:18
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity_class = Menages$/;"	kind:variable	line:24
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity_class = Menages$/;"	kind:variable	line:30
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity_class = Menages$/;"	kind:variable	line:36
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity_class = Menages$/;"	kind:variable	line:42
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity_class = Menages$/;"	kind:variable	line:48
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity_class = Menages$/;"	kind:variable	line:54
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity_class = Menages$/;"	kind:variable	line:60
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity_class = Menages$/;"	kind:variable	line:66
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity_class = Menages$/;"	kind:variable	line:72
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity_class = Menages$/;"	kind:variable	line:78
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:11
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:31
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:45
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:104
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:120
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:137
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:14
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:28
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:46
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:72
-entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity_class = Menages$/;"	kind:variable	line:88
-entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:104
-entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:35
-entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:41
-entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:66
-entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:83
-entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:90
-entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:97
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity_class = Menages$/;"	kind:variable	line:12
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity_class = Menages$/;"	kind:variable	line:27
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity_class = Menages$/;"	kind:variable	line:38
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity_class = Menages$/;"	kind:variable	line:53
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity_class = Menages$/;"	kind:variable	line:64
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity_class = Menages$/;"	kind:variable	line:76
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity_class = Menages$/;"	kind:variable	line:90
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^    entity_class = Menages$/;"	kind:variable	line:13
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^    entity_class = Menages$/;"	kind:variable	line:26
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^    entity_class = Menages$/;"	kind:variable	line:63
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^    entity_class = Menages$/;"	kind:variable	line:74
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity_class = Menages$/;"	kind:variable	line:11
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity_class = Menages$/;"	kind:variable	line:22
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity_class = Menages$/;"	kind:variable	line:34
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity_class = Menages$/;"	kind:variable	line:43
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity_class = Menages$/;"	kind:variable	line:52
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity_class = Menages$/;"	kind:variable	line:61
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity_class = Menages$/;"	kind:variable	line:73
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:116
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:129
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:13
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:142
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:155
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:168
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:182
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:214
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:246
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:277
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:313
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:341
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:378
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:406
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:443
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:466
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:498
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:51
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:511
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:524
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:537
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:550
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity_class = Menages$/;"	kind:variable	line:80
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/totaux.py	/^    entity_class = Menages$/;"	kind:variable	line:33
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/totaux.py	/^    entity_class = Menages$/;"	kind:variable	line:47
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity_class = Menages$/;"	kind:variable	line:104
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity_class = Menages$/;"	kind:variable	line:116
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity_class = Menages$/;"	kind:variable	line:13
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity_class = Menages$/;"	kind:variable	line:22
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity_class = Menages$/;"	kind:variable	line:34
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity_class = Menages$/;"	kind:variable	line:45
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity_class = Menages$/;"	kind:variable	line:56
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity_class = Menages$/;"	kind:variable	line:67
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity_class = Menages$/;"	kind:variable	line:80
-entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity_class = Menages$/;"	kind:variable	line:92
-entity_class	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:31
-entity_class	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:38
-entity_class	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:45
-entity_class	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^    entity_class = Menages$/;"	kind:variable	line:52
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity = Menages$/;"	kind:variable	line:34
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity = Menages$/;"	kind:variable	line:41
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity = Menages$/;"	kind:variable	line:47
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity = Menages$/;"	kind:variable	line:54
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity = Menages$/;"	kind:variable	line:60
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity = Menages$/;"	kind:variable	line:66
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity = Menages$/;"	kind:variable	line:72
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity = Menages$/;"	kind:variable	line:78
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^    entity = Menages$/;"	kind:variable	line:95
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^    entity = Individu$/;"	kind:variable	line:36
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^    entity = Individu$/;"	kind:variable	line:46
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^    entity = Individu$/;"	kind:variable	line:53
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^    entity = Individu$/;"	kind:variable	line:60
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^    entity = Individu$/;"	kind:variable	line:67
+entity_class	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^    entity = Individu$/;"	kind:variable	line:74
+entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^        entity = Menages,$/;"	kind:variable	line:38
+entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity = Menages$/;"	kind:variable	line:101
+entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity = Menages$/;"	kind:variable	line:107
+entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity = Menages$/;"	kind:variable	line:119
+entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity = Menages$/;"	kind:variable	line:45
+entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity = Menages$/;"	kind:variable	line:54
+entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity = Menages$/;"	kind:variable	line:64
+entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity = Menages$/;"	kind:variable	line:77
+entity_class	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    entity = Menages$/;"	kind:variable	line:95
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:113
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:14
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:146
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:177
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:208
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:234
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:265
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:27
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:296
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:311
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:324
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:347
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:377
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:56
+entity_class	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^    entity = Menages$/;"	kind:variable	line:84
+entity_class	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	/^    entity = Menages$/;"	kind:variable	line:11
+entity_class	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	/^    entity = Menages$/;"	kind:variable	line:28
+entity_class	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	/^    entity = Menages$/;"	kind:variable	line:42
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:120
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:137
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:14
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:154
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:171
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:188
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:205
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:222
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:239
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:256
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:27
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:273
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:290
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:308
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:42
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:57
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:72
+entity_class	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^    entity = Menages$/;"	kind:variable	line:88
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:12
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:29
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:45
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:65
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity = Menages$/;"	kind:variable	line:12
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity = Menages$/;"	kind:variable	line:18
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity = Menages$/;"	kind:variable	line:24
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity = Menages$/;"	kind:variable	line:30
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity = Menages$/;"	kind:variable	line:36
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity = Menages$/;"	kind:variable	line:42
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity = Menages$/;"	kind:variable	line:48
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity = Menages$/;"	kind:variable	line:54
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity = Menages$/;"	kind:variable	line:60
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity = Menages$/;"	kind:variable	line:66
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity = Menages$/;"	kind:variable	line:72
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^    entity = Menages$/;"	kind:variable	line:78
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:11
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:31
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:45
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:104
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:120
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:137
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:14
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:28
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:46
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:72
+entity_class	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^    entity = Menages$/;"	kind:variable	line:88
+entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity = Menages$/;"	kind:variable	line:104
+entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity = Menages$/;"	kind:variable	line:35
+entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity = Menages$/;"	kind:variable	line:41
+entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity = Menages$/;"	kind:variable	line:66
+entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity = Menages$/;"	kind:variable	line:83
+entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity = Menages$/;"	kind:variable	line:90
+entity_class	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^    entity = Menages$/;"	kind:variable	line:97
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity = Menages$/;"	kind:variable	line:12
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity = Menages$/;"	kind:variable	line:27
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity = Menages$/;"	kind:variable	line:38
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity = Menages$/;"	kind:variable	line:53
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity = Menages$/;"	kind:variable	line:64
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity = Menages$/;"	kind:variable	line:76
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^    entity = Menages$/;"	kind:variable	line:90
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^    entity = Menages$/;"	kind:variable	line:13
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^    entity = Menages$/;"	kind:variable	line:26
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^    entity = Menages$/;"	kind:variable	line:63
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^    entity = Menages$/;"	kind:variable	line:74
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity = Menages$/;"	kind:variable	line:11
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity = Menages$/;"	kind:variable	line:22
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity = Menages$/;"	kind:variable	line:34
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity = Menages$/;"	kind:variable	line:43
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity = Menages$/;"	kind:variable	line:52
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity = Menages$/;"	kind:variable	line:61
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^    entity = Menages$/;"	kind:variable	line:73
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:116
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:129
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:13
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:142
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:155
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:168
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:182
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:214
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:246
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:277
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:313
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:341
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:378
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:406
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:443
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:466
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:498
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:51
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:511
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:524
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:537
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:550
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^    entity = Menages$/;"	kind:variable	line:80
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/totaux.py	/^    entity = Menages$/;"	kind:variable	line:33
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/totaux.py	/^    entity = Menages$/;"	kind:variable	line:47
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity = Menages$/;"	kind:variable	line:104
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity = Menages$/;"	kind:variable	line:116
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity = Menages$/;"	kind:variable	line:13
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity = Menages$/;"	kind:variable	line:22
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity = Menages$/;"	kind:variable	line:34
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity = Menages$/;"	kind:variable	line:45
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity = Menages$/;"	kind:variable	line:56
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity = Menages$/;"	kind:variable	line:67
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity = Menages$/;"	kind:variable	line:80
+entity_class	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^    entity = Menages$/;"	kind:variable	line:92
+entity_class	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^    entity = Menages$/;"	kind:variable	line:31
+entity_class	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^    entity = Menages$/;"	kind:variable	line:38
+entity_class	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^    entity = Menages$/;"	kind:variable	line:45
+entity_class	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^    entity = Menages$/;"	kind:variable	line:52
 enum	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^        enum = Enum([$/;"	kind:variable	line:84
 enum	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^        enum = Enum([$/;"	kind:variable	line:52
 ess	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^        ess = 0$/;"	kind:variable	line:23
 ess	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^        ess = 1$/;"	kind:variable	line:25
-essence_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class essence_ticpe(DatedVariable):$/;"	kind:class	line:180
-essence_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class essence_ticpe_ajustee(DatedVariable):$/;"	kind:class	line:212
+essence_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class essence_ticpe(Variable):$/;"	kind:class	line:180
+essence_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class essence_ticpe_ajustee(Variable):$/;"	kind:class	line:212
 extract_informations_from_coicop_to_categorie_fiscale	openfisca_france_indirect_taxation/scripts/build_coicop_legislation.py	/^def extract_informations_from_coicop_to_categorie_fiscale():$/;"	kind:function	line:42
 extract_infra_labels_from_coicop_code	openfisca_france_indirect_taxation/scripts/build_coicop_legislation.py	/^def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_code = None, label = None):$/;"	kind:function	line:76
 extras_require	setup.py	/^    extras_require = dict($/;"	kind:variable	line:57
@@ -1639,8 +1639,8 @@ quantites_electricite_9kva	openfisca_france_indirect_taxation/model/consommation
 quantites_electricite_ajustees_taxe_carbone	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_electricite_ajustees_taxe_carbone(Variable):$/;"	kind:class	line:44
 quantites_electricite_selon_compteur	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_selon_compteur(Variable):$/;"	kind:class	line:306
 quantites_energie.py	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	1;"	kind:file	line:1
-quantites_essence	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_essence(DatedVariable):$/;"	kind:class	line:86
-quantites_essence_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_essence_ajustees(DatedVariable):$/;"	kind:class	line:135
+quantites_essence	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_essence(Variable):$/;"	kind:class	line:86
+quantites_essence_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_essence_ajustees(Variable):$/;"	kind:class	line:135
 quantites_essence_consommees	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^    quantites_essence_consommees = dict()$/;"	kind:variable	line:44
 quantites_gaz_ajustees_taxe_carbone	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_gaz_ajustees_taxe_carbone(Variable):$/;"	kind:class	line:26
 quantites_gaz_contrat_b0	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_gaz_contrat_b0(Variable):$/;"	kind:class	line:237
@@ -1936,7 +1936,7 @@ transform_node_to_element	openfisca_france_indirect_taxation/scripts/build_param
 transform_value_to_element	openfisca_france_indirect_taxation/scripts/build_parameters_from_ipp_tax_and_benefit_tables.py	/^def transform_value_to_element(leaf, missing_fin = root_fin):$/;"	kind:function	line:478
 tva.py	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	1;"	kind:file	line:1
 tva_by_categorie_primaire	openfisca_france_indirect_taxation/model/base.py	/^tva_by_categorie_primaire = dict($/;"	kind:variable	line:72
-tva_taux_intermediaire	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_taux_intermediaire(DatedVariable):$/;"	kind:class	line:65
+tva_taux_intermediaire	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_taux_intermediaire(Variable):$/;"	kind:class	line:65
 tva_taux_plein	openfisca_france_indirect_taxation/examples/transports/plot_legislation/plot_ticpe_taux_implicite.py	/^tva_taux_plein = get_tva_taux_plein()$/;"	kind:variable	line:24
 tva_taux_plein	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_taux_plein(Variable):$/;"	kind:class	line:78
 tva_taux_reduit	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_taux_reduit(Variable):$/;"	kind:class	line:90

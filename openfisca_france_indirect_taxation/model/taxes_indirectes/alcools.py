@@ -9,7 +9,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 class alcools_forts_droit_d_accise(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Montant des droits d'accises sur les alcools forts"
 
     def formula(self, simulation, period):
@@ -24,7 +24,7 @@ class alcools_forts_droit_d_accise(Variable):
 
 class depenses_alcools_forts(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses d'alcools forts'"
 
     def formula(self, simulation, period):
@@ -35,7 +35,7 @@ class depenses_alcools_forts(Variable):
 
 class biere_droit_d_accise(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Montant des droits d'accises sur la bière"
 
     def formula(self, simulation, period):
@@ -50,7 +50,7 @@ class biere_droit_d_accise(Variable):
 
 class depenses_biere(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses de bière"
 
     def formula(self, simulation, period):
@@ -61,7 +61,7 @@ class depenses_biere(Variable):
 
 class total_alcool_droit_d_accise(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Montant des droits d'accises sur l'alcool"
 
     def formula(self, simulation, period):
@@ -73,7 +73,7 @@ class total_alcool_droit_d_accise(Variable):
 
 class vin_droit_d_accise(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Montant des droits d'accises sur le vin"
 
     def formula(self, simulation, period):
@@ -87,7 +87,7 @@ class vin_droit_d_accise(Variable):
 
 class depenses_vin(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses de vin"
 
     def formula(self, simulation, period):

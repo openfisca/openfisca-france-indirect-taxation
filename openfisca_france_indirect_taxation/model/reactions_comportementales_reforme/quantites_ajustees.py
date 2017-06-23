@@ -11,7 +11,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 class quantites_diesel_ajustees(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Quantités de diesel consommées après la réforme des prix"
 
     def formula(self, simulation, period):
@@ -25,7 +25,7 @@ class quantites_diesel_ajustees(Variable):
 
 class quantites_gaz_ajustees_taxe_carbone(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Quantités de gaz consommées après la réforme - taxe carbone"
 
     def formula(self, simulation, period):
@@ -43,7 +43,7 @@ class quantites_gaz_ajustees_taxe_carbone(Variable):
 
 class quantites_electricite_ajustees_taxe_carbone(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Quantités d'électricité consommées après la réforme - taxe carbone"
 
     def formula(self, simulation, period):
@@ -69,7 +69,7 @@ class quantites_electricite_ajustees_taxe_carbone(Variable):
 
 class quantites_sp_e10_ajustees(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Quantités consommées de sans plomb e10 par les ménages après réforme"
 
     def formula(self, simulation, period):
@@ -85,7 +85,7 @@ class quantites_sp_e10_ajustees(Variable):
 
 class quantites_sp95_ajustees(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Quantités consommées de sans plomb 95 par les ménages après réforme"
 
     def formula(self, simulation, period):
@@ -101,7 +101,7 @@ class quantites_sp95_ajustees(Variable):
 
 class quantites_sp98_ajustees(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Quantités consommées de sans plomb 98 par les ménages"
 
     def formula(self, simulation, period):
@@ -117,7 +117,7 @@ class quantites_sp98_ajustees(Variable):
 
 class quantites_super_plombe_ajustees(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Quantités consommées de super plombé par les ménages après réforme"
 
     def formula(self, simulation, period):
@@ -132,9 +132,9 @@ class quantites_super_plombe_ajustees(Variable):
         return period, quantites_super_plombe_ajustees
 
 
-class quantites_essence_ajustees(DatedVariable):
+class quantites_essence_ajustees(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Quantités d'essence consommées par les ménages après réforme"
 
     def formula_1990(self, simulation, period):

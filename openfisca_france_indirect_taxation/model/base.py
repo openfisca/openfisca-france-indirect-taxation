@@ -117,11 +117,8 @@ def get_poste_categorie_fiscale(poste_coicop, categories_fiscales = None, start 
 
 def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales = None, reform_key = None,
         taux_by_categorie_fiscale = None, year_start = None, year_stop = None):
-    start = date(year_start, 1, 1) if year_start is not None else None
-    stop = date(year_stop, 12, 31) if year_stop is not None else None
     if len(postes_coicop) != 0:
         if reform_key is None:
-            @dated_function(start = start, stop = stop)
             def func(self, simulation, period):
                 return period, sum(simulation.calculate(
                     'poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
@@ -137,7 +134,6 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                 (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
                 for poste in postes_coicop)
 
-            @dated_function(start = None, stop = None)
             def func(self, simulation, period, categorie_fiscale_by_poste = categorie_fiscale_by_poste,
                     taux_by_categorie_fiscale = taux_by_categorie_fiscale):
 
@@ -178,11 +174,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
 
 
 def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, year_stop = None):
-    start = date(year_start, 1, 1) if year_start is not None else None
-    stop = date(year_stop, 12, 31) if year_stop is not None else None
-
     if len(postes_coicop) != 0:
-        @dated_function(start = start, stop = stop)
         def func(self, simulation, period):
             return period, sum(simulation.calculate(
                 'depenses_ht_poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
@@ -192,8 +184,6 @@ def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, yea
         return func
 
     else:  # To deal with Reform emptying some fiscal categories
-
-        @dated_function(start = start, stop = stop)
         def func(self, simulation, period):
             return period, self.zeros()
 
@@ -202,11 +192,7 @@ def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, yea
 
 
 def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, year_start = None, year_stop = None):
-    start = date(year_start, 1, 1) if year_start is not None else None
-    stop = date(year_stop, 12, 31) if year_stop is not None else None
     assert categorie_fiscale is not None
-
-    @dated_function(start = start, stop = stop)
     def func(self, simulation, period, categorie_fiscale = categorie_fiscale):
         tva = get_tva(categorie_fiscale)
         if tva is not None:

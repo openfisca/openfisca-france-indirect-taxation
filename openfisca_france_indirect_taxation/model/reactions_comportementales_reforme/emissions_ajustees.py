@@ -8,7 +8,7 @@ from openfisca_france_indirect_taxation.model.base import * # noqa analysis:igno
 
 class emissions_CO2_carburants_ajustees(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
 
     def formula(self, simulation, period):
@@ -28,7 +28,7 @@ class emissions_CO2_carburants_ajustees(Variable):
 
 class emissions_CO2_electricite_ajustees(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Emissions de CO2 des ménages via leur consommation d'électricité après réforme, en kg de CO2"
 
     def formula(self, simulation, period):
@@ -42,7 +42,7 @@ class emissions_CO2_electricite_ajustees(Variable):
 
 class emissions_CO2_gaz_ajustees(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2"
 
     def formula(self, simulation, period):

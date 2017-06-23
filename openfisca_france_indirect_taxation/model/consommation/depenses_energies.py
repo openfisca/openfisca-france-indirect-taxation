@@ -11,7 +11,7 @@ import numpy
 
 class depenses_diesel_htva(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en diesel htva (mais incluant toujours la TICPE)"
 
     def formula(self, simulation, period):
@@ -24,7 +24,7 @@ class depenses_diesel_htva(Variable):
 
 class depenses_diesel_ht(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en diesel ht (prix brut sans TVA ni TICPE)"
 
     def formula(self, simulation, period):
@@ -53,7 +53,7 @@ class depenses_diesel_ht(Variable):
 
 class depenses_diesel_recalculees(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en diesel recalculées à partir du prix ht"
 
     def formula(self, simulation, period):
@@ -79,28 +79,25 @@ class depenses_diesel_recalculees(Variable):
         return period, depenses_diesel_recalculees
 
 
-class depenses_essence_ht(DatedVariable):
+class depenses_essence_ht(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en essence hors taxes (HT, i.e. sans TVA ni TICPE)"
 
-    @dated_function(start = date(1990, 1, 1))
-    def function_90_06(self, simulation, period):
+    def function_1990(self, simulation, period):
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
         depenses_super_plombe_ht = simulation.calculate('depenses_super_plombe_ht', period)
         depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht + depenses_super_plombe_ht)
         return period, depenses_essence_ht
 
-    @dated_function(start = date(2007, 1, 1))
-    def function_07_08(self, simulation, period):
+    def function_2007(self, simulation, period):
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
         depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht)
         return period, depenses_essence_ht
 
-    @dated_function(start = date(2009, 1, 1))
-    def function_09_15(self, simulation, period):
+    def function_2009(self, simulation, period):
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
         depenses_sp_e10_ht = simulation.calculate('depenses_sp_e10_ht', period)
@@ -110,7 +107,7 @@ class depenses_essence_ht(DatedVariable):
 
 class depenses_sp_e10_ht(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en essence sans plomb e10 hors taxes (HT, i.e. sans TVA ni TICPE)"
 
     def formula(self, simulation, period):
@@ -143,7 +140,7 @@ class depenses_sp_e10_ht(Variable):
 
 class depenses_sp_95_ht(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en essence sans plomb 95 hors taxes (HT, i.e. sans TVA ni TICPE)"
 
     def formula(self, simulation, period):
@@ -174,7 +171,7 @@ class depenses_sp_95_ht(Variable):
 
 class depenses_sp_98_ht(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en essence sans plomb 98 hors taxes (HT, i.e. sans TVA ni TICPE)"
 
     def formula(self, simulation, period):
@@ -205,7 +202,7 @@ class depenses_sp_98_ht(Variable):
 
 class depenses_super_plombe_ht(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en essence super plombée hors taxes (HT, i.e. sans TVA ni TICPE)"
 
     def formula(self, simulation, period):
@@ -231,7 +228,7 @@ class depenses_super_plombe_ht(Variable):
 
 class depenses_gaz_prix_unitaire(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Prix unitaire du gaz rencontré par les ménages"
 
     def formula(self, simulation, period):
@@ -262,7 +259,7 @@ class depenses_gaz_prix_unitaire(Variable):
 
 class depenses_gaz_tarif_fixe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en gaz des ménages sur le coût fixe de l'abonnement"
 
     def formula(self, simulation, period):
@@ -293,7 +290,7 @@ class depenses_gaz_tarif_fixe(Variable):
 
 class depenses_gaz_variables(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en gaz des ménages, hors coût fixe de l'abonnement"
 
     def formula(self, simulation, period):
@@ -308,7 +305,7 @@ class depenses_gaz_variables(Variable):
 
 class depenses_electricite_percentile(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Classement par percentile des dépenses d'électricité"
 
     def formula(self, simulation, period):
@@ -321,7 +318,7 @@ class depenses_electricite_percentile(Variable):
 
 class depenses_electricite_prix_unitaire(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Prix unitaire de l'électricité de chaque ménage, après affectation d'un compteur"
 
     def formula(self, simulation, period):
@@ -344,7 +341,7 @@ class depenses_electricite_prix_unitaire(Variable):
 
 class depenses_electricite_tarif_fixe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en électricité des ménages sur le coût fixe de l'abonnement, après affectation d'un compteur"
 
     def formula(self, simulation, period):
@@ -374,7 +371,7 @@ class depenses_electricite_tarif_fixe(Variable):
 
 class depenses_electricite_variables(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en électricité des ménages, hors coût fixe de l'abonnement"
 
     def formula(self, simulation, period):

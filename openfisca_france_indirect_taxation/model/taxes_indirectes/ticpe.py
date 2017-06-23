@@ -10,7 +10,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 class depenses_diesel(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Construction par pondération des dépenses spécifiques au diesel"
 
     def formula(self, simulation, period):
@@ -48,7 +48,7 @@ class depenses_diesel(Variable):
 
 class diesel_ticpe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de TICPE sur le diesel"
 
     def formula(self, simulation, period):
@@ -77,7 +77,7 @@ class diesel_ticpe(Variable):
 
 class diesel_ticpe_ajustee(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de TICPE sur le diesel après réforme"
 
     def formula(self, simulation, period):
@@ -113,7 +113,7 @@ class diesel_ticpe_ajustee(Variable):
 
 class depenses_essence(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Construction par déduction des dépenses spécifiques à l'essence"
 
     def formula(self, simulation, period):
@@ -126,7 +126,7 @@ class depenses_essence(Variable):
 
 class depenses_sp_e10(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Construction par pondération des dépenses spécifiques au sans plomb e10"
 
     def formula(self, simulation, period):
@@ -139,7 +139,7 @@ class depenses_sp_e10(Variable):
 
 class depenses_sp_95(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Construction par pondération des dépenses spécifiques au sans plomb 95"
 
     def formula(self, simulation, period):
@@ -152,7 +152,7 @@ class depenses_sp_95(Variable):
 
 class depenses_sp_98(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Construction par pondération des dépenses spécifiques au sans plomb 98"
 
     def formula(self, simulation, period):
@@ -165,7 +165,7 @@ class depenses_sp_98(Variable):
 
 class depenses_super_plombe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Construction par pondération des dépenses spécifiques au super plombe"
 
     def formula(self, simulation, period):
@@ -177,9 +177,9 @@ class depenses_super_plombe(Variable):
         return period, depenses_super_plombe
 
 
-class essence_ticpe(DatedVariable):
+class essence_ticpe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de la TICPE sur toutes les essences cumulées"
 
     def formula_1990(self, simulation, period):
@@ -203,9 +203,9 @@ class essence_ticpe(DatedVariable):
         return period, essence_ticpe
 
 
-class essence_ticpe_ajustee(DatedVariable):
+class essence_ticpe_ajustee(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
 
     def formula_1990(self, simulation, period):
@@ -231,7 +231,7 @@ class essence_ticpe_ajustee(DatedVariable):
 
 class sp_e10_ticpe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de la TICPE sur le SP E10"
 
     def formula(self, simulation, period):
@@ -262,7 +262,7 @@ class sp_e10_ticpe(Variable):
 
 class sp_e10_ticpe_ajustee(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de la TICPE sur le SP E10 après réforme"
 
     def formula(self, simulation, period):
@@ -298,7 +298,7 @@ class sp_e10_ticpe_ajustee(Variable):
 
 class sp95_ticpe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de TICPE sur le sp_95"
 
     def formula(self, simulation, period):
@@ -326,7 +326,7 @@ class sp95_ticpe(Variable):
 
 class sp95_ticpe_ajustee(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de TICPE sur le sp_95 après réforme"
 
     def formula(self, simulation, period):
@@ -363,7 +363,7 @@ class sp95_ticpe_ajustee(Variable):
 
 class sp98_ticpe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de TICPE sur le sp_98"
 
     def formula(self, simulation, period):
@@ -391,7 +391,7 @@ class sp98_ticpe(Variable):
 
 class sp98_ticpe_ajustee(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de TICPE sur le sp_98 après réforme"
 
     def formula(self, simulation, period):
@@ -428,7 +428,7 @@ class sp98_ticpe_ajustee(Variable):
 
 class super_plombe_ticpe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de la TICPE sur le super plombé"
 
     def formula(self, simulation, period):
@@ -451,7 +451,7 @@ class super_plombe_ticpe(Variable):
 
 class super_plombe_ticpe_ajustee(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de la TICPE sur le super plombé après réforme"
 
     def formula(self, simulation, period):
@@ -483,7 +483,7 @@ class super_plombe_ticpe_ajustee(Variable):
 
 class ticpe_totale(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de la TICPE sur tous les carburants cumulés"
 
     def formula(self, simulation, period):
@@ -496,7 +496,7 @@ class ticpe_totale(Variable):
 
 class ticpe_totale_ajustee(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
 
     def formula(self, simulation, period):
@@ -509,7 +509,7 @@ class ticpe_totale_ajustee(Variable):
 
 class difference_ticpe_diesel_reforme(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Différence entre les contributions à la TICPE sur le diesel avant et après la réforme"
 
     def formula(self, simulation, period):
@@ -522,7 +522,7 @@ class difference_ticpe_diesel_reforme(Variable):
 
 class difference_ticpe_essence_reforme(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Différence entre les contributions à la TICPE sur l'essence avant et après la réforme"
 
     def formula(self, simulation, period):
@@ -535,7 +535,7 @@ class difference_ticpe_essence_reforme(Variable):
 
 class difference_ticpe_totale_reforme(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Différence entre les contributions à la TICPE avant et après la réforme"
 
     def formula(self, simulation, period):

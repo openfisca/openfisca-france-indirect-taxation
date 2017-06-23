@@ -33,7 +33,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 class age(Variable):
     column = AgeCol
-    entity_class = Individu
+    entity = Individu
     label = u"Age de l'individu"
 
     def formula(self, simulation, period):
@@ -43,34 +43,34 @@ class age(Variable):
 
 class agepr(Variable):
     column = AgeCol
-    entity_class = Individu
+    entity = Individu
     is_permanent = True
     label = u"Age personne de référence"
 
 
 class birth(Variable):
     column = DateCol
-    entity_class = Individu
+    entity = Individu
     is_permanent = True
     label = u"Date de naissance"
 
 
 class nadultes(Variable):
     column = IntCol
-    entity_class = Individu
+    entity = Individu
     is_permanent = True
     label = u"Nombre d'adultes dans le ménage"
 
 
 class nenfants(Variable):
     column = IntCol
-    entity_class = Individu
+    entity = Individu
     is_permanent = True
     label = u"Nombre d'enfants dans le ménage"
 
 
 class role_menage(Variable):
     column = IntCol
-    entity_class = Individu
+    entity = Individu
     is_permanent = True
     label = u"Rôle dans le ménage"

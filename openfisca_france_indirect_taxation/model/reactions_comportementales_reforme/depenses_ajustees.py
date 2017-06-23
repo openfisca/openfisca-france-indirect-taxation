@@ -9,7 +9,7 @@ import numpy
 
 class depenses_essence_ajustees(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en essence après réaction à la réforme des prix"
 
     def formula(self, simulation, period):
@@ -26,7 +26,7 @@ class depenses_essence_ajustees(Variable):
 
 class depenses_diesel_ajustees(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en diesel après réaction à la réforme des prix"
 
     def formula(self, simulation, period):
@@ -42,7 +42,7 @@ class depenses_diesel_ajustees(Variable):
 
 class depenses_gaz_ajustees_taxe_carbone(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en gaz après réaction à la réforme - taxe carbone"
 
     def formula(self, simulation, period):
@@ -62,7 +62,7 @@ class depenses_gaz_ajustees_taxe_carbone(Variable):
 
 class depenses_electricite_ajustees_taxe_carbone(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Dépenses en électricité après réaction à la réforme - taxe carbone"
 
     def formula(self, simulation, period):

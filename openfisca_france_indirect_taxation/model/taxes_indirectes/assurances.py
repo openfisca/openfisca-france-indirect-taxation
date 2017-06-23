@@ -10,7 +10,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 class assurance_sante_taxe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Montant des taxes sur l'assurance santé"
 
     def formula(self, simulation, period):
@@ -21,9 +21,9 @@ class assurance_sante_taxe(Variable):
         return period, tax_from_expense_including_tax(depenses_assurance_sante, taux)
 
 
-class assurance_transport_taxe(DatedVariable):
+class assurance_transport_taxe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Montant des taxes sur l'assurance transport"
 
     def formula_1984(self, simulation, period):
@@ -57,7 +57,7 @@ class assurance_transport_taxe(DatedVariable):
 
 class autres_assurances_taxe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Montant des taxes sur les autres assurances"
 
     def formula(self, simulation, period):
@@ -68,7 +68,7 @@ class autres_assurances_taxe(Variable):
 
 class total_assurances_taxe(Variable):
     column = FloatCol
-    entity_class = Menage
+    entity = Menage
     label = u"Montant des taxes sur les assurances"
 
     def formula(self, simulation, period):

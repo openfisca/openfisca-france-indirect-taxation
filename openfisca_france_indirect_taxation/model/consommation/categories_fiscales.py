@@ -8,8 +8,7 @@ import logging
 
 from biryani.strings import slugify
 
-from openfisca_core.formulas import dated_function
-from openfisca_core.variables import DatedVariable
+
 
 
 from openfisca_france_indirect_taxation.model.base import *
@@ -72,12 +71,12 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
         if reform_key is None:
             definitions_by_name = dict(
                 column = FloatCol,
-                entity_class = Menage,
+                entity = Menage,
                 label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
                 )
             definitions_by_name.update(functions_by_name)
             tax_benefit_system.add_variable(
-                type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                type(class_name.encode('utf-8'), (Variable,), definitions_by_name)
                 )
 
         else:
@@ -85,17 +84,17 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
                 definitions_by_name = dict()
                 definitions_by_name.update(functions_by_name)
                 tax_benefit_system.update_variable(
-                    type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                    type(class_name.encode('utf-8'), (Variable,), definitions_by_name)
                     )
             else:
                 definitions_by_name = dict(
                     column = FloatCol,
-                    entity_class = Menage,
+                    entity = Menage,
                     label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
                     )
                 definitions_by_name.update(functions_by_name)
                 tax_benefit_system.add_variable(
-                    type(class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+                    type(class_name.encode('utf-8'), (Variable,), definitions_by_name)
                     )
 
         del definitions_by_name
