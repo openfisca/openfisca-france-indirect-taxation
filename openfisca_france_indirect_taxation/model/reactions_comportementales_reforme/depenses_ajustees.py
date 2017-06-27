@@ -7,12 +7,13 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 import numpy
 
+
 class depenses_essence_ajustees(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Dépenses en essence après réaction à la réforme des prix"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_essence = simulation.calculate('depenses_essence', period)
         super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
         reforme_essence = simulation.legislation_at(period.start).taxes_carburants.essence
@@ -26,10 +27,10 @@ class depenses_essence_ajustees(Variable):
 
 class depenses_diesel_ajustees(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Dépenses en diesel après réaction à la réforme des prix"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_diesel = simulation.calculate('depenses_diesel', period)
         diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
         reforme_diesel = simulation.legislation_at(period.start).taxes_carburants.diesel
@@ -42,10 +43,10 @@ class depenses_diesel_ajustees(Variable):
 
 class depenses_gaz_ajustees_taxe_carbone(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Dépenses en gaz après réaction à la réforme - taxe carbone"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_gaz_variables = simulation.calculate('depenses_gaz_variables', period)
         depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
         reforme_gaz = simulation.legislation_at(period.start).taxe_carbone.gaz
@@ -62,10 +63,10 @@ class depenses_gaz_ajustees_taxe_carbone(Variable):
 
 class depenses_electricite_ajustees_taxe_carbone(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Dépenses en électricité après réaction à la réforme - taxe carbone"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_electricite_variables = simulation.calculate('depenses_electricite_variables', period)
         depenses_electricite_prix_unitaire = simulation.calculate('depenses_electricite_prix_unitaire', period)
         reforme_electricite = simulation.legislation_at(period.start).taxe_carbone.electricite

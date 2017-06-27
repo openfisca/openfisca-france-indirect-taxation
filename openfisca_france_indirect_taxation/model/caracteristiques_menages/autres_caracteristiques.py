@@ -31,51 +31,51 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 class ident_men(Variable):
     column = StrCol
-    entity_class = Menages
+    entity = Menage
     is_permanent = True
     label = u"Identifiant du ménage"
 
 
 class ocde10(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"unités de consommation"
 
 
 class pondmen(Variable):
     column = IntCol
-    entity_class = Menages
+    entity = Menage
     is_permanent = True
     label = u"Pondération du ménage"
 
 
 class situacj(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Situation du conjoint vis-à-vis du travail"
 
 
 class situapr(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Situation de la personne de référence vis-à-vis du travail"
 
 
 class strate(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"catégorie de la commune de résidence"
 
 
 class typmen(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"type du ménage"
 
 
 class vag(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"numéro de la vague d'interrogation du ménage"
 
 
@@ -92,6 +92,6 @@ class zeat(Variable):
             u"Centre-Est",
             u"Méditerrannée"], start = 0)
     )
-    entity_class = Menages
+    entity = Menage
     label = u"Zone d'étude et d'aménagement du territoire"
 

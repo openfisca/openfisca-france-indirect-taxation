@@ -32,16 +32,16 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 class decuc(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Décile de niveau de vie (revenu/unité de consommation)"
 
 
 class niveau_de_vie(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Revenus disponibles divisés par ocde10 soit le nombre d'unités de consommation du ménage"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         rev_disponible = simulation.calculate('rev_disponible', period)
         ocde10 = simulation.calculate('ocde10', period)
         return period, rev_disponible / ocde10
@@ -63,10 +63,10 @@ class niveau_vie_decile(Variable):
             u"10e décile"
             ])
         )
-    entity_class = Menages
+    entity = Menage
     label = u"Décile de niveau de vie"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         niveau_de_vie = simulation.calculate('niveau_de_vie', period)
         pondmen = simulation.calculate('pondmen', period)
         labels = numpy.arange(1, 11)
@@ -80,27 +80,27 @@ class niveau_vie_decile(Variable):
 
 class rev_disp_loyerimput(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     is_permanent = True
     label = u"Revenu disponible du ménage auquel on ajoute le loyer imputé"
 
 
 class rev_disponible(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     is_permanent = True
     label = u"Revenu disponible du ménage"
 
 
 class revtot(Variable):
     column = IntCol
-    entity_class = Menages
+    entity = Menage
     is_permanent = True
     label = u"Revenu total du ménage"
 
 
 class revtotuc(Variable):
     column = IntCol
-    entity_class = Menages
+    entity = Menage
     is_permanent = True
     label = u"Revenu total par unité de consommation du ménage"

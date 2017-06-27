@@ -11,10 +11,10 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 class quantites_diesel_ajustees(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Quantités de diesel consommées après la réforme des prix"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_diesel_ajustees = simulation.calculate('depenses_diesel_ajustees', period)
         diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
         reforme_diesel = simulation.legislation_at(period.start).taxes_carburants.diesel
@@ -25,10 +25,10 @@ class quantites_diesel_ajustees(Variable):
 
 class quantites_gaz_ajustees_taxe_carbone(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Quantités de gaz consommées après la réforme - taxe carbone"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_gaz_ajustees_taxe_carbone = simulation.calculate('depenses_gaz_ajustees_taxe_carbone', period)
         depenses_gaz_tarif_fixe = simulation.calculate('depenses_gaz_tarif_fixe', period)
         depenses_gaz_ajustees_variables = depenses_gaz_ajustees_taxe_carbone - depenses_gaz_tarif_fixe
@@ -43,10 +43,10 @@ class quantites_gaz_ajustees_taxe_carbone(Variable):
 
 class quantites_electricite_ajustees_taxe_carbone(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Quantités d'électricité consommées après la réforme - taxe carbone"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_electricite_ajustees_taxe_carbone = \
             simulation.calculate('depenses_electricite_ajustees_taxe_carbone', period)
         depenses_electricite_tarif_fixe = simulation.calculate('depenses_electricite_tarif_fixe', period)
@@ -69,10 +69,10 @@ class quantites_electricite_ajustees_taxe_carbone(Variable):
 
 class quantites_sp_e10_ajustees(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Quantités consommées de sans plomb e10 par les ménages après réforme"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees', period)
         part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10_ajustees = depenses_essence_ajustees * part_sp_e10
@@ -85,10 +85,10 @@ class quantites_sp_e10_ajustees(Variable):
 
 class quantites_sp95_ajustees(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Quantités consommées de sans plomb 95 par les ménages après réforme"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees', period)
         part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp95_ajustees = depenses_essence_ajustees * part_sp95
@@ -101,10 +101,10 @@ class quantites_sp95_ajustees(Variable):
 
 class quantites_sp98_ajustees(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Quantités consommées de sans plomb 98 par les ménages"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees', period)
         part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
         depenses_sp98_ajustees = depenses_essence_ajustees * part_sp98
@@ -117,10 +117,10 @@ class quantites_sp98_ajustees(Variable):
 
 class quantites_super_plombe_ajustees(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Quantités consommées de super plombé par les ménages après réforme"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees', period)
         part_super_plombe = \
             simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
@@ -132,14 +132,12 @@ class quantites_super_plombe_ajustees(Variable):
         return period, quantites_super_plombe_ajustees
 
 
-class quantites_essence_ajustees(DatedVariable):
+class quantites_essence_ajustees(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Quantités d'essence consommées par les ménages après réforme"
 
-    @dated_function(start = date(1990, 1, 1), stop = date(2006, 12, 31))
-    def function_90_06(self, simulation, period):
-
+    def formula_1990(self, simulation, period):
         quantites_sp95_ajustees = simulation.calculate('quantites_sp95_ajustees', period)
         quantites_sp98_ajustees = simulation.calculate('quantites_sp98_ajustees', period)
         quantites_super_plombe_ajustees = simulation.calculate('quantites_super_plombe_ajustees', period)
@@ -148,17 +146,13 @@ class quantites_essence_ajustees(DatedVariable):
             )
         return period, quantites_essence_ajustees
 
-    @dated_function(start = date(2007, 1, 1), stop = date(2008, 12, 31))
-    def function_07_08(self, simulation, period):
-
+    def formula_2007(self, simulation, period):
         quantites_sp95_ajustees = simulation.calculate('quantites_sp95_ajustees', period)
         quantites_sp98_ajustees = simulation.calculate('quantites_sp98_ajustees', period)
         quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees)
         return period, quantites_essence_ajustees
 
-    @dated_function(start = date(2009, 1, 1), stop = date(2015, 12, 31))
-    def function_09_15(self, simulation, period):
-
+    def formula_2009(self, simulation, period):
         quantites_sp95_ajustees = simulation.calculate('quantites_sp95_ajustees', period)
         quantites_sp98_ajustees = simulation.calculate('quantites_sp98_ajustees', period)
         quantites_sp_e10_ajustees = simulation.calculate('quantites_sp_e10_ajustees', period)

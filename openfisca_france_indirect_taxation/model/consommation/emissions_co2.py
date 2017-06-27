@@ -8,10 +8,10 @@ from openfisca_france_indirect_taxation.model.base import * # noqa analysis:igno
 
 class emissions_CO2_carburants(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         quantites_diesel = simulation.calculate('quantites_diesel', period)
         quantites_essence = simulation.calculate('quantites_essence', period)
         emissions_diesel = \
@@ -25,10 +25,10 @@ class emissions_CO2_carburants(Variable):
 
 class emissions_CO2_gaz(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         quantites_gaz = simulation.calculate('quantites_gaz_contrat_optimal', period)
         emissions_gaz = \
             simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz
@@ -39,10 +39,10 @@ class emissions_CO2_gaz(Variable):
 
 class emissions_CO2_electricite(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Emissions de CO2 des ménages via leur consommation d'électricité, en kg de CO2"
 
-    def function(self, simulation, period):
+    def formula(self, simulation, period):
         quantites_eletricite = simulation.calculate('quantites_electricite_selon_compteur', period)
         emissions_electricite = \
             simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_electricite
