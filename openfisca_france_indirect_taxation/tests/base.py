@@ -26,7 +26,7 @@
 from openfisca_core import reforms
 from openfisca_core.tools import assert_near
 
-from .. import FranceIndirectTaxationTaxBenefitSystem
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from ..reforms import (
     rattrapage_diesel,
     taxe_carbone,

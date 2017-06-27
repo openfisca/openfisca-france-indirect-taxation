@@ -3,11 +3,11 @@
 import pandas as pd
 from pandas import concat
 
-import openfisca_france_indirect_taxation
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 
-TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
-tax_benefit_system = TaxBenefitSystem()
-legislation_json = tax_benefit_system.legislation_json
+tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
+
+legislation_json = tax_benefit_system.get_legislation()
 
 
 def get_tva_taux_plein():

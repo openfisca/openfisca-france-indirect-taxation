@@ -6,6 +6,8 @@ TICPE: Taxe intérieure sur la consommation des produits énergétiques
 # L'objectif de ce script est d'illustrer graphiquement l'évolution du taux implicite de la TICPE depuis 1993.
 # On étudie ce taux pour le diesel, et pour les carburants sans plombs.
 
+import seaborn
+
 # Import de modules généraux
 from pandas import concat
 
@@ -15,6 +17,8 @@ from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get
 from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get_tva import get_tva_taux_plein
 from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get_prix_carburants import \
     get_prix_carburants
+
+seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 # Appel des paramètres de la législation et des prix
 ticpe = ['ticpe_gazole', 'ticpe_super9598']
