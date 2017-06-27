@@ -3,10 +3,10 @@
 import pandas as pd
 from pandas import concat
 
-import openfisca_france_indirect_taxation
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 
-tax_benefit_system = openfisca_france_indirect_taxation.FranceIndirectTaxationTaxBenefitSystem()
-legislation_json = tax_benefit_system.legislation_json
+tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
+legislation_json = tax_benefit_system.get_legislation()
 
 
 # To do: integrate "majoration regionale ticpe" to reflect the real excise taxes applied

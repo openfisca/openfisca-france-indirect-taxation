@@ -15,8 +15,7 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 
-if __name__ == '__main__':
-
+def plot_taux_effort_ticpe():
     simulated_variables = [
         'ticpe_totale',
         'diesel_ticpe',
@@ -47,3 +46,7 @@ if __name__ == '__main__':
             save_dataframe_to_graph(
                 df_to_graph, 'Taxes_indirectes/effort_rate_ticpe_on_{0}_by_{1}.csv'.format(revenu, category)
                 )
+
+
+if __name__ == '__main__':
+    plot_taux_effort_ticpe()
