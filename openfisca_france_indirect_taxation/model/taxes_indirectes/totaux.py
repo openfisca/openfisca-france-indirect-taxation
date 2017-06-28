@@ -8,7 +8,7 @@ from __future__ import division
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
-class taxes_indirectes_total(Variable):
+class taxes_indirectes_total(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Montant total de taxes indirectes payées"
@@ -16,13 +16,13 @@ class taxes_indirectes_total(Variable):
     def formula(self, simulation, period):
         tva_total = simulation.calculate('tva_total', period)
         taxes_indirectes_total_hors_tva = simulation.calculate('taxes_indirectes_total_hors_tva', period)
-        return period, (
+        return (
             tva_total +
             taxes_indirectes_total_hors_tva
             )
 
 
-class taxes_indirectes_total_hors_tva(Variable):
+class taxes_indirectes_total_hors_tva(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Montant total de taxes indirectes payées sans compter la TVA"
@@ -38,7 +38,7 @@ class taxes_indirectes_total_hors_tva(Variable):
         assurance_sante_taxe = simulation.calculate('assurance_sante_taxe', period)
         autres_assurances_taxe = simulation.calculate('autres_assurances_taxe', period)
         ticpe = simulation.calculate('ticpe_totale', period)
-        return period, (
+        return (
             vin_droit_d_accise +
             biere_droit_d_accise +
             alcools_forts_droit_d_accise +

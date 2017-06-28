@@ -26,29 +26,25 @@
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
-class pourcentage_vehicule_essence(Variable):
+class pourcentage_vehicule_essence(YearlyVariable):
     column = FloatCol
     entity = Menage
-    is_permanent = True
     label = u"Pourcentage de véhicules essence dans le ménage"
 
 
-class veh_diesel(Variable):
+class veh_diesel(YearlyVariable):
     column = IntCol
     entity = Menage
-    is_permanent = True
     label = u"Nombre de véhicules diesel dans le ménage"
 
 
-class veh_essence(Variable):
+class veh_essence(YearlyVariable):
     column = IntCol
     entity = Menage
-    is_permanent = True
     label = u"Nombre de véhicules essence dans le ménage"
 
 
-class veh_tot(Variable):
+class veh_tot(YearlyVariable):
     column = IntCol
     entity = Menage
-    is_permanent = True
     label = u"Nombre de véhicules total dans le ménage"

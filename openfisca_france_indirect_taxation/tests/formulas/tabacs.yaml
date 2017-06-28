@@ -1,5 +1,6 @@
  - name: "Cigarettes"
    period: "2010"
+   absolute_error_margin: .0049
    input_variables:
      poste_02_2_1: 100  # Cigarettes
 
@@ -31,6 +32,7 @@
 
  - name: "Cigares"
    period: "2010"
+   absolute_error_margin: .004
    input_variables:
      poste_02_2_2: 100  # Cigares
 
@@ -62,6 +64,7 @@
 
  - name: u"Tabac à rouler"
    period: "2010"
+   absolute_error_margin: .004
    input_variables:
      poste_02_2_3: 100  # tabac a rouler
 

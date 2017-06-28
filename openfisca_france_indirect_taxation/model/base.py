@@ -5,9 +5,11 @@ import os
 import pandas as pd
 import pkg_resources
 
-from openfisca_core.model_api import *
 
 from biryani.strings import slugify
+
+
+from openfisca_core.model_api import *
 
 
 try:
@@ -16,7 +18,7 @@ except ImportError:
     mark_weighted_percentiles, weighted_quantiles = None, None
 
 from openfisca_france_indirect_taxation.entities import Individu, Menage
-
+from openfisca_france_indirect_taxation.variables import YearlyVariable
 
 # __all__ = [
 #     'depenses_postes_agreges_function_creator',
@@ -32,6 +34,8 @@ from openfisca_france_indirect_taxation.entities import Individu, Menage
 #     'tax_from_expense_including_tax',
 #     'weighted_quantiles',
 #     ]
+
+
 
 tva_by_categorie_primaire = dict(
     biere = 'tva_taux_plein',
@@ -119,7 +123,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
     if len(postes_coicop) != 0:
         if reform_key is None:
             def func(self, simulation, period):
-                return period, sum(simulation.calculate(
+                return sum(simulation.calculate(
                     'poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
                     )
             func.__name__ = "function_{year_start}_{year_stop}".format(
@@ -166,7 +170,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                     )
                     for poste in postes_coicop
                     )
-                return period, poste_agrege
+                return poste_agrege
 
             func.__name__ = "function"
             return func
@@ -175,7 +179,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
 def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, year_stop = None):
     if len(postes_coicop) != 0:
         def func(self, simulation, period):
-            return period, sum(simulation.calculate(
+            return sum(simulation.calculate(
                 'depenses_ht_poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
                 )
 
@@ -184,7 +188,7 @@ def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, yea
 
     else:  # To deal with Reform emptying some fiscal categories
         def func(self, simulation, period):
-            return period, self.zeros()
+            return self.zeros()
 
     func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
     return func
@@ -200,7 +204,7 @@ def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, 
         else:
             taux = 0
 
-        return period, simulation.calculate('poste_' + slugify(poste_coicop, separator = u'_'), period) / (1 + taux)
+        return simulation.calculate('poste_' + slugify(poste_coicop, separator = u'_'), period) / (1 + taux)
 
     func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
     return func

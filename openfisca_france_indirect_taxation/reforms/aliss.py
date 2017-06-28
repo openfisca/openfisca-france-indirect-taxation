@@ -319,7 +319,7 @@ def depenses_new_tva_function_creator(categorie_fiscale = None, taux = None):
     assert taux is not None
 
     def func(self, simulation, period, categorie_fiscale = categorie_fiscale, taux = taux):
-        return period, (
+        return (
             simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * (1 + taux)
             )
 
@@ -332,7 +332,7 @@ def new_tva_function_creator(categorie_fiscale = None, taux = None):
     assert taux is not None
 
     def func(self, simulation, period, categorie_fiscale = categorie_fiscale, taux = taux):
-        return period, (
+        return (
             simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * taux
             )
 
@@ -342,7 +342,7 @@ def new_tva_function_creator(categorie_fiscale = None, taux = None):
 
 def new_tva_total_function_creator(categories_fiscales):
     def func(self, simulation, period):
-        return period, sum(
+        return sum(
             simulation.calculate(categorie_fiscale, period) for categorie_fiscale in categories_fiscales
             )
 
@@ -366,7 +366,7 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
                 label = u"Dépenses taxes comprises: {0}".format(categorie_fiscale),
                 function = depenses_new_tva_func,
                 )
-            depenses_variable_class = type(depenses_class_name.encode('utf-8'), (Variable,), definitions_by_name)
+            depenses_variable_class = type(depenses_class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
             tax_benefit_system.add_variable(depenses_variable_class)
             del definitions_by_name
 
@@ -380,7 +380,7 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
                 label = u"Montant de la TVA acquitée à {0}".format(categorie_fiscale),
                 function = new_tva_func,
                 )
-            tva_variable_class = type(tva_class_name.encode('utf-8'), (Variable,), definitions_by_name)
+            tva_variable_class = type(tva_class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
             tax_benefit_system.add_variable(tva_variable_class)
             del definitions_by_name
 
@@ -401,5 +401,5 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
     definitions_by_name = dict(
         function = new_tva_total_func,
         )
-    type(u'tva_total'.encode('utf-8'), (Variable,), definitions_by_name)
+    type(u'tva_total'.encode('utf-8'), (YearlyVariable,), definitions_by_name)
     del definitions_by_name

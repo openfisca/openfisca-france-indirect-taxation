@@ -63,7 +63,7 @@ add_vag_dummy	openfisca_france_indirect_taxation/almost_ideal_demand_system/util
 adjust_coicop	openfisca_france_indirect_taxation/scripts/build_coicop_bdf.py	/^def adjust_coicop(data_frame):$/;"	kind:function	line:436
 adjusted_bdf_coicop	openfisca_france_indirect_taxation/scripts/build_coicop_bdf.py	/^    adjusted_bdf_coicop = adjust_coicop(bdf_coicop)$/;"	kind:variable	line:476
 adjusted_coicop_by_original	openfisca_france_indirect_taxation/scripts/build_coicop_bdf.py	/^adjusted_coicop_by_original = {$/;"	kind:variable	line:127
-age	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^class age(Variable):$/;"	kind:class	line:34
+age	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^class age(YearlyVariable):$/;"	kind:class	line:34
 age	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^        age = 0,$/;"	kind:variable	line:105
 age	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^        age = 0,$/;"	kind:variable	line:137
 age	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^        age = 0,$/;"	kind:variable	line:41
@@ -83,7 +83,7 @@ age	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^     
 age	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^        age = None,$/;"	kind:variable	line:25
 age	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^        age = None,$/;"	kind:variable	line:33
 age	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^    age = table.pop('age')$/;"	kind:variable	line:173
-agepr	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^class agepr(Variable):$/;"	kind:class	line:44
+agepr	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^class agepr(YearlyVariable):$/;"	kind:class	line:44
 aggregates_data_frame	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_dataframe_builder_coicop.py	/^    aggregates_data_frame = get_input_data_frame(2011)$/;"	kind:variable	line:18
 aggregates_data_frame	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_dataframe_builder_energy.py	/^            aggregates_data_frame = aggregates_data_frame$/;"	kind:variable	line:49
 aggregates_data_frame	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_dataframe_builder_energy.py	/^            aggregates_data_frame = aggregates_data_frame.drop(bien, axis = 1)$/;"	kind:variable	line:47
@@ -109,7 +109,7 @@ aids_estimation_from_stata_three_categ.py	openfisca_france_indirect_taxation/alm
 aids_price_index_builder.py	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_price_index_builder.py	1;"	kind:file	line:1
 alcools.py	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	1;"	kind:file	line:1
 alcools_forts	openfisca_france_indirect_taxation/model/base.py	/^    alcools_forts = 'tva_taux_plein',$/;"	kind:variable	line:75
-alcools_forts_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class alcools_forts_droit_d_accise(Variable):$/;"	kind:class	line:10
+alcools_forts_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class alcools_forts_droit_d_accise(YearlyVariable):$/;"	kind:class	line:10
 alimentation.py	openfisca_france_indirect_taxation/reforms/alimentation.py	1;"	kind:file	line:1
 aliss	openfisca_france_indirect_taxation/scripts/build_coicop_bdf.py	/^def aliss(year = 2011):$/;"	kind:function	line:451
 aliss.py	openfisca_france_indirect_taxation/reforms/aliss.py	1;"	kind:file	line:1
@@ -147,14 +147,14 @@ assets_directory	openfisca_france_indirect_taxation/scripts/build_prix_energie_l
 assets_directory	openfisca_france_indirect_taxation/utils.py	/^assets_directory = os.path.join($/;"	kind:variable	line:44
 assets_path	openfisca_france_indirect_taxation/build_survey_data/calibration_aliss.py	/^assets_path = os.path.join($/;"	kind:variable	line:27
 assurance_sante	openfisca_france_indirect_taxation/model/base.py	/^    assurance_sante = '',$/;"	kind:variable	line:81
-assurance_sante_taxe	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^class assurance_sante_taxe(Variable):$/;"	kind:class	line:11
+assurance_sante_taxe	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^class assurance_sante_taxe(YearlyVariable):$/;"	kind:class	line:11
 assurance_transport	openfisca_france_indirect_taxation/model/base.py	/^    assurance_transport = '',$/;"	kind:variable	line:80
-assurance_transport_taxe	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^class assurance_transport_taxe(Variable):$/;"	kind:class	line:24
+assurance_transport_taxe	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^class assurance_transport_taxe(YearlyVariable):$/;"	kind:class	line:24
 assurances.py	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	1;"	kind:file	line:1
 author	setup.py	/^    author = 'OpenFisca Team',$/;"	kind:variable	line:48
 author_email	setup.py	/^    author_email = 'contact@openfisca.fr',$/;"	kind:variable	line:49
 autres_assurances	openfisca_france_indirect_taxation/model/base.py	/^    autres_assurances = '',$/;"	kind:variable	line:82
-autres_assurances_taxe	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^class autres_assurances_taxe(Variable):$/;"	kind:class	line:61
+autres_assurances_taxe	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^class autres_assurances_taxe(YearlyVariable):$/;"	kind:class	line:61
 autres_caracteristiques.py	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	1;"	kind:file	line:1
 autres_produits	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_price_index_builder.py	/^autres_produits = coicop_dix_douze[autres_produits_list]$/;"	kind:variable	line:65
 autres_produits	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_price_index_builder.py	/^autres_produits = coicop_one_nine[autres_produits_list]$/;"	kind:variable	line:54
@@ -171,9 +171,9 @@ biens_durables	openfisca_france_indirect_taxation/almost_ideal_demand_system/aid
 biens_durables	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_dataframe_builder_energy_no_alime.py	/^    biens_durables = ['poste_coicop_442', 'poste_coicop_711', 'poste_coicop_712', 'poste_coicop_713',$/;"	kind:variable	line:38
 biens_durables	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_dataframe_builder_energy_no_logem.py	/^    biens_durables = ['poste_coicop_442', 'poste_coicop_711', 'poste_coicop_712', 'poste_coicop_713',$/;"	kind:variable	line:38
 biere	openfisca_france_indirect_taxation/model/base.py	/^    biere = 'tva_taux_plein',$/;"	kind:variable	line:73
-biere_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class biere_droit_d_accise(Variable):$/;"	kind:class	line:36
+biere_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class biere_droit_d_accise(YearlyVariable):$/;"	kind:class	line:36
 birth	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^                birth = datetime.date(year - 40, 1, 1),$/;"	kind:variable	line:31
-birth	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^class birth(Variable):$/;"	kind:class	line:51
+birth	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^class birth(YearlyVariable):$/;"	kind:class	line:51
 borne_inferieure_el_dep	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_estimation_from_stata_three_categ.py	/^borne_inferieure_el_dep = dict()$/;"	kind:variable	line:10
 borne_superieure_el_dep	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_estimation_from_stata_three_categ.py	/^borne_superieure_el_dep = dict()$/;"	kind:variable	line:11
 build_aggregated_shares	openfisca_france_indirect_taxation/build_survey_data/calibration_aliss.py	/^def build_aggregated_shares(expenditures, kantar_prefix = 'kantar'):$/;"	kind:function	line:143
@@ -243,8 +243,8 @@ check_calculate_output	openfisca_france_indirect_taxation/tests/test_yaml.py	/^d
 check_categorie_fiscale	openfisca_france_indirect_taxation/tests/test_categorie_fiscale.py	/^def check_categorie_fiscale(member):$/;"	kind:function	line:43
 check_legislation_xml_file	openfisca_france_indirect_taxation/tests/test_legislations.py	/^def check_legislation_xml_file(year):$/;"	kind:function	line:38
 cigares	openfisca_france_indirect_taxation/model/base.py	/^    cigares = 'cigares',$/;"	kind:variable	line:76
-cigares_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class cigares_droit_d_accise(Variable):$/;"	kind:class	line:9
-cigarette_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class cigarette_droit_d_accise(Variable):$/;"	kind:class	line:20
+cigares_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class cigares_droit_d_accise(YearlyVariable):$/;"	kind:class	line:9
+cigarette_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class cigarette_droit_d_accise(YearlyVariable):$/;"	kind:class	line:20
 cigarettes	openfisca_france_indirect_taxation/model/base.py	/^    cigarettes = 'cigarettes',$/;"	kind:variable	line:77
 classifiers	setup.py	/^    classifiers = [classifier for classifier in classifiers.split('\\n') if classifier],$/;"	kind:variable	line:50
 codes_coicop_data_frame	openfisca_france_indirect_taxation/model/consommation/categories_fiscales.py	/^codes_coicop_data_frame = None$/;"	kind:variable	line:22
@@ -549,7 +549,7 @@ deb	openfisca_france_indirect_taxation/build_survey_data/step_2_homogeneisation_
 deb	openfisca_france_indirect_taxation/build_survey_data/step_3_homogeneisation_caracteristiques_menages.py	/^    deb = time.clock()$/;"	kind:variable	line:678
 deb	openfisca_france_indirect_taxation/build_survey_data/step_4_homogeneisation_revenus_menages.py	/^    deb = time.clock()$/;"	kind:variable	line:394
 deciles	openfisca_france_indirect_taxation/examples/transports/regress/regress_determinants_ticpe.py	/^    deciles = ['decile_1', 'decile_2', 'decile_3', 'decile_4', 'decile_5', 'decile_6', 'decile_7', 'decile_8',$/;"	kind:variable	line:52
-decuc	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class decuc(Variable):$/;"	kind:class	line:33
+decuc	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class decuc(YearlyVariable):$/;"	kind:class	line:33
 default_absolute_error_margin	openfisca_france_indirect_taxation/tests/test_yaml.py	/^                    default_absolute_error_margin = 0.005,$/;"	kind:variable	line:290
 default_absolute_error_margin	openfisca_france_indirect_taxation/tests/test_yaml.py	/^            default_absolute_error_margin = 0.005,$/;"	kind:variable	line:29
 default_absolute_error_margin	openfisca_france_indirect_taxation/tests/test_yaml.py	/^            default_absolute_error_margin = 0.5,$/;"	kind:variable	line:36
@@ -568,43 +568,43 @@ depenses	openfisca_france_indirect_taxation/examples/transports/depenses_par_cat
 depenses	openfisca_france_indirect_taxation/examples/transports/depenses_par_categories/plot_ticpe_part_depenses_par_decile.py	/^                depenses = part_depenses$/;"	kind:variable	line:79
 depenses	openfisca_france_indirect_taxation/examples/transports/depenses_par_categories/plot_ticpe_part_depenses_par_decile.py	/^        depenses = None$/;"	kind:variable	line:43
 depenses_ajustees.py	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	1;"	kind:file	line:1
-depenses_alcools_forts	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class depenses_alcools_forts(Variable):$/;"	kind:class	line:25
+depenses_alcools_forts	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class depenses_alcools_forts(YearlyVariable):$/;"	kind:class	line:25
 depenses_bdf	openfisca_france_indirect_taxation/examples/transports/compute_compare/compare_comptes_des_transports_depenses.py	/^    depenses_bdf = concat([depenses, depenses_bdf], axis = 1)$/;"	kind:variable	line:36
 depenses_bdf	openfisca_france_indirect_taxation/examples/transports/compute_compare/compare_comptes_des_transports_depenses.py	/^depenses_bdf = pd.DataFrame()$/;"	kind:variable	line:28
-depenses_biere	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class depenses_biere(Variable):$/;"	kind:class	line:51
+depenses_biere	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class depenses_biere(YearlyVariable):$/;"	kind:class	line:51
 depenses_carburants	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_carburants.py	/^        depenses_carburants = depenses_diesel + depenses_essence$/;"	kind:variable	line:37
 depenses_carburants	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^                depenses_carburants = 1000,$/;"	kind:variable	line:34
-depenses_carburants	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class depenses_carburants(Variable):$/;"	kind:class	line:43
+depenses_carburants	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class depenses_carburants(YearlyVariable):$/;"	kind:class	line:43
 depenses_carburants_totales	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_carburants.py	/^    depenses_carburants_totales = dict()$/;"	kind:variable	line:30
-depenses_cigares	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class depenses_cigares(Variable):$/;"	kind:class	line:32
-depenses_cigarettes	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class depenses_cigarettes(Variable):$/;"	kind:class	line:41
+depenses_cigares	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class depenses_cigares(YearlyVariable):$/;"	kind:class	line:32
+depenses_cigarettes	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class depenses_cigarettes(YearlyVariable):$/;"	kind:class	line:41
 depenses_diesel	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_carburants.py	/^        depenses_diesel = (data_simulation['depenses_diesel'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:35
-depenses_diesel	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_diesel(Variable):$/;"	kind:class	line:11
-depenses_diesel_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^class depenses_diesel_ajustees(Variable):$/;"	kind:class	line:27
-depenses_diesel_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_diesel_ht(Variable):$/;"	kind:class	line:25
-depenses_diesel_htva	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_diesel_htva(Variable):$/;"	kind:class	line:12
-depenses_diesel_recalculees	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_diesel_recalculees(Variable):$/;"	kind:class	line:54
+depenses_diesel	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_diesel(YearlyVariable):$/;"	kind:class	line:11
+depenses_diesel_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^class depenses_diesel_ajustees(YearlyVariable):$/;"	kind:class	line:27
+depenses_diesel_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_diesel_ht(YearlyVariable):$/;"	kind:class	line:25
+depenses_diesel_htva	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_diesel_htva(YearlyVariable):$/;"	kind:class	line:12
+depenses_diesel_recalculees	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_diesel_recalculees(YearlyVariable):$/;"	kind:class	line:54
 depenses_diesel_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_diesel_ticpe = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:46
 depenses_diesel_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_diesel_ticpe = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:54
 depenses_diesel_totales	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_carburants.py	/^    depenses_diesel_totales = dict()$/;"	kind:variable	line:31
-depenses_electricite_ajustees_taxe_carbone	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^class depenses_electricite_ajustees_taxe_carbone(Variable):$/;"	kind:class	line:63
-depenses_electricite_percentile	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_electricite_percentile(Variable):$/;"	kind:class	line:309
-depenses_electricite_prix_unitaire	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_electricite_prix_unitaire(Variable):$/;"	kind:class	line:322
-depenses_electricite_tarif_fixe	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_electricite_tarif_fixe(Variable):$/;"	kind:class	line:345
-depenses_electricite_variables	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_electricite_variables(Variable):$/;"	kind:class	line:375
+depenses_electricite_ajustees_taxe_carbone	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^class depenses_electricite_ajustees_taxe_carbone(YearlyVariable):$/;"	kind:class	line:63
+depenses_electricite_percentile	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_electricite_percentile(YearlyVariable):$/;"	kind:class	line:309
+depenses_electricite_prix_unitaire	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_electricite_prix_unitaire(YearlyVariable):$/;"	kind:class	line:322
+depenses_electricite_tarif_fixe	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_electricite_tarif_fixe(YearlyVariable):$/;"	kind:class	line:345
+depenses_electricite_variables	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_electricite_variables(YearlyVariable):$/;"	kind:class	line:375
 depenses_energies.py	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	1;"	kind:file	line:1
 depenses_essence	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_carburants.py	/^        depenses_essence = (data_simulation['depenses_essence'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:36
-depenses_essence	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_essence(Variable):$/;"	kind:class	line:114
-depenses_essence_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^class depenses_essence_ajustees(Variable):$/;"	kind:class	line:10
-depenses_essence_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_essence_ht(Variable):$/;"	kind:class	line:82
-depenses_essence_recalculees	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class depenses_essence_recalculees(Variable):$/;"	kind:class	line:62
+depenses_essence	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_essence(YearlyVariable):$/;"	kind:class	line:114
+depenses_essence_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^class depenses_essence_ajustees(YearlyVariable):$/;"	kind:class	line:10
+depenses_essence_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_essence_ht(YearlyVariable):$/;"	kind:class	line:82
+depenses_essence_recalculees	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class depenses_essence_recalculees(YearlyVariable):$/;"	kind:class	line:62
 depenses_essence_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_essence_ticpe = ($/;"	kind:variable	line:61
 depenses_essence_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_essence_ticpe = ($/;"	kind:variable	line:68
 depenses_essence_totales	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_carburants.py	/^    depenses_essence_totales = dict()$/;"	kind:variable	line:32
-depenses_gaz_ajustees_taxe_carbone	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^class depenses_gaz_ajustees_taxe_carbone(Variable):$/;"	kind:class	line:43
-depenses_gaz_prix_unitaire	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_gaz_prix_unitaire(Variable):$/;"	kind:class	line:232
-depenses_gaz_tarif_fixe	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_gaz_tarif_fixe(Variable):$/;"	kind:class	line:263
-depenses_gaz_variables	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_gaz_variables(Variable):$/;"	kind:class	line:294
+depenses_gaz_ajustees_taxe_carbone	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/depenses_ajustees.py	/^class depenses_gaz_ajustees_taxe_carbone(YearlyVariable):$/;"	kind:class	line:43
+depenses_gaz_prix_unitaire	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_gaz_prix_unitaire(YearlyVariable):$/;"	kind:class	line:232
+depenses_gaz_tarif_fixe	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_gaz_tarif_fixe(YearlyVariable):$/;"	kind:class	line:263
+depenses_gaz_variables	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_gaz_variables(YearlyVariable):$/;"	kind:class	line:294
 depenses_ht_categorie_function_creator	openfisca_france_indirect_taxation/model/base.py	/^def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, year_stop = None):$/;"	kind:function	line:215
 depenses_ht_postes_function_creator	openfisca_france_indirect_taxation/model/base.py	/^def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, year_start = None, year_stop = None):$/;"	kind:function	line:239
 depenses_menages_transports	openfisca_france_indirect_taxation/examples/transports/agregats_compte_transports/plot_transports_depenses.py	/^depenses_menages_transports = depenses_menages_transports.drop(['to_be_used'] + ['categorie'], axis = 1)$/;"	kind:variable	line:22
@@ -616,38 +616,38 @@ depenses_sp95_ticpe	openfisca_france_indirect_taxation/examples/transports/compu
 depenses_sp95_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_sp95_ticpe = (data_simulation['sp95_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:55
 depenses_sp98_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_sp98_ticpe = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:48
 depenses_sp98_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_sp98_ticpe = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:56
-depenses_sp_95	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_sp_95(Variable):$/;"	kind:class	line:140
-depenses_sp_95_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_sp_95_ht(Variable):$/;"	kind:class	line:144
-depenses_sp_98	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_sp_98(Variable):$/;"	kind:class	line:153
-depenses_sp_98_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_sp_98_ht(Variable):$/;"	kind:class	line:175
-depenses_sp_e10	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_sp_e10(Variable):$/;"	kind:class	line:127
-depenses_sp_e10_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_sp_e10_ht(Variable):$/;"	kind:class	line:111
+depenses_sp_95	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_sp_95(YearlyVariable):$/;"	kind:class	line:140
+depenses_sp_95_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_sp_95_ht(YearlyVariable):$/;"	kind:class	line:144
+depenses_sp_98	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_sp_98(YearlyVariable):$/;"	kind:class	line:153
+depenses_sp_98_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_sp_98_ht(YearlyVariable):$/;"	kind:class	line:175
+depenses_sp_e10	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_sp_e10(YearlyVariable):$/;"	kind:class	line:127
+depenses_sp_e10_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_sp_e10_ht(YearlyVariable):$/;"	kind:class	line:111
 depenses_sp_e10_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_sp_e10_ticpe = (data_simulation['sp_e10_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:50
 depenses_sp_e10_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_sp_e10_ticpe = 0$/;"	kind:variable	line:58
-depenses_super_plombe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_super_plombe(Variable):$/;"	kind:class	line:166
-depenses_super_plombe_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_super_plombe_ht(Variable):$/;"	kind:class	line:206
+depenses_super_plombe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class depenses_super_plombe(YearlyVariable):$/;"	kind:class	line:166
+depenses_super_plombe_ht	openfisca_france_indirect_taxation/model/consommation/depenses_energies.py	/^class depenses_super_plombe_ht(YearlyVariable):$/;"	kind:class	line:206
 depenses_super_plombe_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_super_plombe_ticpe = (data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:49
 depenses_super_plombe_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^            depenses_super_plombe_ticpe = (data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:57
-depenses_tabac_a_rouler	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class depenses_tabac_a_rouler(Variable):$/;"	kind:class	line:50
+depenses_tabac_a_rouler	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class depenses_tabac_a_rouler(YearlyVariable):$/;"	kind:class	line:50
 depenses_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compare_comptes_des_transports_ticpe.py	/^    depenses_ticpe = depenses_ticpe.sort_index()$/;"	kind:variable	line:43
 depenses_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compare_comptes_des_transports_ticpe.py	/^    depenses_ticpe = pd.DataFrame.from_csv($/;"	kind:variable	line:33
 depenses_ticpe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^        depenses_ticpe = depenses_diesel_ticpe + depenses_essence_ticpe$/;"	kind:variable	line:74
-depenses_ticpe	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class depenses_ticpe(Variable):$/;"	kind:class	line:52
+depenses_ticpe	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class depenses_ticpe(YearlyVariable):$/;"	kind:class	line:52
 depenses_ticpe_bdf	openfisca_france_indirect_taxation/examples/transports/compute_compare/compare_comptes_des_transports_ticpe.py	/^    depenses_ticpe_bdf = concat([depenses_ticpe_bdf, depenses_ticpe], axis = 1)$/;"	kind:variable	line:45
 depenses_ticpe_bdf	openfisca_france_indirect_taxation/examples/transports/compute_compare/compare_comptes_des_transports_ticpe.py	/^depenses_ticpe_bdf = pd.DataFrame()$/;"	kind:variable	line:31
 depenses_ticpe_diesel	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^    depenses_ticpe_diesel = dict()$/;"	kind:variable	line:40
 depenses_ticpe_essence	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^    depenses_ticpe_essence = dict()$/;"	kind:variable	line:41
 depenses_ticpe_pour_1000_euros_carbu	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^depenses_ticpe_pour_1000_euros_carbu = pd.DataFrame(index = index, columns = columns)$/;"	kind:variable	line:15
 depenses_ticpe_totales	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_ticpe.py	/^    depenses_ticpe_totales = dict()$/;"	kind:variable	line:39
-depenses_totales	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class depenses_totales(Variable):$/;"	kind:class	line:75
+depenses_totales	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class depenses_totales(YearlyVariable):$/;"	kind:class	line:75
 depenses_transports	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_carburants.py	/^        depenses_transports = (data_simulation['coicop12_7'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:38
 depenses_transports_totales	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_depenses_carburants.py	/^    depenses_transports_totales = dict()$/;"	kind:variable	line:29
-depenses_tva_exonere	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_exonere(Variable):$/;"	kind:class	line:11
-depenses_tva_taux_intermediaire	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_intermediaire(Variable):$/;"	kind:class	line:20
-depenses_tva_taux_plein	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_plein(Variable):$/;"	kind:class	line:32
-depenses_tva_taux_reduit	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_reduit(Variable):$/;"	kind:class	line:43
-depenses_tva_taux_super_reduit	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_super_reduit(Variable):$/;"	kind:class	line:54
-depenses_vin	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class depenses_vin(Variable):$/;"	kind:class	line:88
+depenses_tva_exonere	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_exonere(YearlyVariable):$/;"	kind:class	line:11
+depenses_tva_taux_intermediaire	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_intermediaire(YearlyVariable):$/;"	kind:class	line:20
+depenses_tva_taux_plein	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_plein(YearlyVariable):$/;"	kind:class	line:32
+depenses_tva_taux_reduit	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_reduit(YearlyVariable):$/;"	kind:class	line:43
+depenses_tva_taux_super_reduit	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class depenses_tva_taux_super_reduit(YearlyVariable):$/;"	kind:class	line:54
+depenses_vin	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class depenses_vin(YearlyVariable):$/;"	kind:class	line:88
 description	setup.py	/^    description = doc_lines[0],$/;"	kind:variable	line:51
 detect_null	openfisca_france_indirect_taxation/build_survey_data/calibration_aliss.py	/^def detect_null(data_frame):$/;"	kind:function	line:35
 df	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_dataframe_builder_coicop.py	/^    df = df.astype(str)$/;"	kind:variable	line:51
@@ -734,30 +734,30 @@ dict_constructor	openfisca_france_indirect_taxation/scripts/build_parameters_fro
 dict_constructor	openfisca_france_indirect_taxation/tests/test_yaml.py	/^def dict_constructor(loader, node):$/;"	kind:function	line:70
 dies	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^        dies = 0$/;"	kind:variable	line:19
 dies	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^        dies = 1$/;"	kind:variable	line:21
-diesel_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class diesel_ticpe(Variable):$/;"	kind:class	line:49
-diesel_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class diesel_ticpe_ajustee(Variable):$/;"	kind:class	line:78
+diesel_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class diesel_ticpe(YearlyVariable):$/;"	kind:class	line:49
+diesel_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class diesel_ticpe_ajustee(YearlyVariable):$/;"	kind:class	line:78
 diesel_ticpe_ponderee	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^            diesel_ticpe_ponderee = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:49
 diesel_ticpe_ponderee	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^            diesel_ticpe_ponderee = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:57
-difference_ticpe_diesel_reforme	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class difference_ticpe_diesel_reforme(Variable):$/;"	kind:class	line:522
-difference_ticpe_essence_reforme	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class difference_ticpe_essence_reforme(Variable):$/;"	kind:class	line:535
-difference_ticpe_totale_reforme	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class difference_ticpe_totale_reforme(Variable):$/;"	kind:class	line:548
+difference_ticpe_diesel_reforme	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class difference_ticpe_diesel_reforme(YearlyVariable):$/;"	kind:class	line:522
+difference_ticpe_essence_reforme	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class difference_ticpe_essence_reforme(YearlyVariable):$/;"	kind:class	line:535
+difference_ticpe_totale_reforme	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class difference_ticpe_totale_reforme(YearlyVariable):$/;"	kind:class	line:548
 dir	openfisca_france_indirect_taxation/tests/test_yaml.py	/^            dir = path if os.path.isdir(path) else os.path.dirname(path)$/;"	kind:variable	line:285
 divisions	openfisca_france_indirect_taxation/scripts/build_coicop_legislation.py	/^divisions = ['0{}'.format(i) for i in range(1, 10)] + ['11', '12']  # TODO: fix this$/;"	kind:variable	line:21
 divisions	openfisca_france_indirect_taxation/scripts/build_coicop_nomenclature.py	/^divisions = ['0{}'.format(i) for i in range(1, 10)] + ['11', '12']  # TODO: fix this$/;"	kind:variable	line:21
 doc_lines	setup.py	/^doc_lines = __doc__.split('\\n')$/;"	kind:variable	line:41
 droit_d_accise	openfisca_france_indirect_taxation/model/base.py	/^def droit_d_accise(depense, droit_cn, consommation_cn, taux_plein_tva):$/;"	kind:function	line:94
-elas_exp_1	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_exp_1(Variable):$/;"	kind:class	line:10
-elas_exp_2	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_exp_2(Variable):$/;"	kind:class	line:16
-elas_exp_3	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_exp_3(Variable):$/;"	kind:class	line:22
-elas_price_1_1	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_1_1(Variable):$/;"	kind:class	line:28
-elas_price_1_2	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_1_2(Variable):$/;"	kind:class	line:34
-elas_price_1_3	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_1_3(Variable):$/;"	kind:class	line:40
-elas_price_2_1	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_2_1(Variable):$/;"	kind:class	line:46
-elas_price_2_2	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_2_2(Variable):$/;"	kind:class	line:52
-elas_price_2_3	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_2_3(Variable):$/;"	kind:class	line:58
-elas_price_3_1	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_3_1(Variable):$/;"	kind:class	line:64
-elas_price_3_2	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_3_2(Variable):$/;"	kind:class	line:70
-elas_price_3_3	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_3_3(Variable):$/;"	kind:class	line:76
+elas_exp_1	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_exp_1(YearlyVariable):$/;"	kind:class	line:10
+elas_exp_2	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_exp_2(YearlyVariable):$/;"	kind:class	line:16
+elas_exp_3	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_exp_3(YearlyVariable):$/;"	kind:class	line:22
+elas_price_1_1	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_1_1(YearlyVariable):$/;"	kind:class	line:28
+elas_price_1_2	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_1_2(YearlyVariable):$/;"	kind:class	line:34
+elas_price_1_3	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_1_3(YearlyVariable):$/;"	kind:class	line:40
+elas_price_2_1	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_2_1(YearlyVariable):$/;"	kind:class	line:46
+elas_price_2_2	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_2_2(YearlyVariable):$/;"	kind:class	line:52
+elas_price_2_3	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_2_3(YearlyVariable):$/;"	kind:class	line:58
+elas_price_3_1	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_3_1(YearlyVariable):$/;"	kind:class	line:64
+elas_price_3_2	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_3_2(YearlyVariable):$/;"	kind:class	line:70
+elas_price_3_3	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	/^class elas_price_3_3(YearlyVariable):$/;"	kind:class	line:76
 elasticite_1	openfisca_france_indirect_taxation/examples/all_consumptions/plot_consumption_distribution_1995_2011.py	/^    elasticite_1 = survey_scenario.simulation.calculate('elas_exp_1')$/;"	kind:variable	line:38
 elasticites.py	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/elasticites.py	1;"	kind:file	line:1
 elasticities	openfisca_france_indirect_taxation/scripts/build_prix_energie_logement.py	/^        elasticities = elasticities,$/;"	kind:variable	line:28
@@ -765,12 +765,12 @@ elasticities	openfisca_france_indirect_taxation/scripts/build_prix_energie_logem
 elasticities_origin_xlsx	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^elasticities_origin_xlsx = os.path.join($/;"	kind:variable	line:18
 elasticities_path	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^elasticities_path = os.path.join($/;"	kind:variable	line:11
 electricite_only	openfisca_france_indirect_taxation/almost_ideal_demand_system/utils.py	/^def electricite_only(dataframe):$/;"	kind:function	line:48
-emissions_CO2_carburants	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	/^class emissions_CO2_carburants(Variable):$/;"	kind:class	line:9
-emissions_CO2_carburants_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	/^class emissions_CO2_carburants_ajustees(Variable):$/;"	kind:class	line:9
-emissions_CO2_electricite	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	/^class emissions_CO2_electricite(Variable):$/;"	kind:class	line:40
-emissions_CO2_electricite_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	/^class emissions_CO2_electricite_ajustees(Variable):$/;"	kind:class	line:29
-emissions_CO2_gaz	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	/^class emissions_CO2_gaz(Variable):$/;"	kind:class	line:26
-emissions_CO2_gaz_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	/^class emissions_CO2_gaz_ajustees(Variable):$/;"	kind:class	line:43
+emissions_CO2_carburants	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	/^class emissions_CO2_carburants(YearlyVariable):$/;"	kind:class	line:9
+emissions_CO2_carburants_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	/^class emissions_CO2_carburants_ajustees(YearlyVariable):$/;"	kind:class	line:9
+emissions_CO2_electricite	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	/^class emissions_CO2_electricite(YearlyVariable):$/;"	kind:class	line:40
+emissions_CO2_electricite_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	/^class emissions_CO2_electricite_ajustees(YearlyVariable):$/;"	kind:class	line:29
+emissions_CO2_gaz	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	/^class emissions_CO2_gaz(YearlyVariable):$/;"	kind:class	line:26
+emissions_CO2_gaz_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	/^class emissions_CO2_gaz_ajustees(YearlyVariable):$/;"	kind:class	line:43
 emissions_ajustees.py	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/emissions_ajustees.py	1;"	kind:file	line:1
 emissions_co2.py	openfisca_france_indirect_taxation/model/consommation/emissions_co2.py	1;"	kind:file	line:1
 end	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_price_index_builder.py	/^        end = dt.datetime(2000, 11, 5),$/;"	kind:variable	line:155
@@ -952,8 +952,8 @@ enum	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_ca
 enum	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^        enum = Enum([$/;"	kind:variable	line:52
 ess	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^        ess = 0$/;"	kind:variable	line:23
 ess	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^        ess = 1$/;"	kind:variable	line:25
-essence_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class essence_ticpe(Variable):$/;"	kind:class	line:180
-essence_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class essence_ticpe_ajustee(Variable):$/;"	kind:class	line:212
+essence_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class essence_ticpe(YearlyVariable):$/;"	kind:class	line:180
+essence_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class essence_ticpe_ajustee(YearlyVariable):$/;"	kind:class	line:212
 extract_informations_from_coicop_to_categorie_fiscale	openfisca_france_indirect_taxation/scripts/build_coicop_legislation.py	/^def extract_informations_from_coicop_to_categorie_fiscale():$/;"	kind:function	line:42
 extract_infra_labels_from_coicop_code	openfisca_france_indirect_taxation/scripts/build_coicop_legislation.py	/^def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_code = None, label = None):$/;"	kind:function	line:76
 extras_require	setup.py	/^    extras_require = dict($/;"	kind:variable	line:57
@@ -1151,7 +1151,7 @@ grouped	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_dataf
 guess_coicop_from_bdf	openfisca_france_indirect_taxation/scripts/build_coicop_bdf.py	/^def guess_coicop_from_bdf(year = 2011):$/;"	kind:function	line:42
 header	openfisca_france_indirect_taxation/examples/transports/compute_compare/compare_comptes_des_transports_ticpe.py	/^        header = -1$/;"	kind:variable	line:39
 help	openfisca_france_indirect_taxation/tests/test_yaml.py	/^        help = 'force testing of tests with "ignore" flag and formulas belonging to "ignore_output_variables" list')$/;"	kind:variable	line:275
-ident_men	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class ident_men(Variable):$/;"	kind:class	line:32
+ident_men	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class ident_men(YearlyVariable):$/;"	kind:class	line:32
 ident_men_dtype	openfisca_france_indirect_taxation/build_survey_data/utils.py	/^ident_men_dtype = 'str'$/;"	kind:variable	line:49
 include_package_data	setup.py	/^    include_package_data = True,  # Will read MANIFEST.in$/;"	kind:variable	line:66
 index	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^index = range(2000, 2014)$/;"	kind:variable	line:13
@@ -1435,7 +1435,7 @@ model.py	openfisca_france_indirect_taxation/model/model.py	1;"	kind:file	line:1
 modify_legislation_json	openfisca_france_indirect_taxation/reforms/contribution_climat_energie.py	/^def modify_legislation_json(reference_legislation_json_copy):$/;"	kind:function	line:25
 modify_legislation_json	openfisca_france_indirect_taxation/reforms/taxe_carbone.py	/^def modify_legislation_json(reference_legislation_json_copy):$/;"	kind:function	line:23
 modify_legislation_json	openfisca_france_indirect_taxation/reforms/taxes_carburants.py	/^def modify_legislation_json(reference_legislation_json_copy):$/;"	kind:function	line:23
-nadultes	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^class nadultes(Variable):$/;"	kind:class	line:58
+nadultes	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^class nadultes(YearlyVariable):$/;"	kind:class	line:58
 name	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^    name = u'coicop12_{}'.format(coicop12_index)$/;"	kind:variable	line:34
 name	openfisca_france_indirect_taxation/reforms/aliss.py	/^    name = u"Réforme Aliss- Ajustable"$/;"	kind:variable	line:97
 name	openfisca_france_indirect_taxation/reforms/aliss.py	/^    name = u"Réforme Aliss-Environnement de l'imposition indirecte des biens alimentaires"$/;"	kind:variable	line:105
@@ -1465,11 +1465,11 @@ name	setup.py	/^    name = 'OpenFisca-France-Indirect-Taxation',$/;"	kind:variab
 name_filter	openfisca_france_indirect_taxation/tests/test_yaml.py	/^                name_filter = args.name,$/;"	kind:variable	line:300
 name_key	openfisca_france_indirect_taxation/entities.py	/^    name_key = 'nom_individu'$/;"	kind:variable	line:38
 name_key	openfisca_france_indirect_taxation/entities.py	/^    name_key = 'nom_menage'$/;"	kind:variable	line:49
-nenfants	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^class nenfants(Variable):$/;"	kind:class	line:65
+nenfants	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^class nenfants(YearlyVariable):$/;"	kind:class	line:65
 new_tva_function_creator	openfisca_france_indirect_taxation/reforms/aliss.py	/^def new_tva_function_creator(categorie_fiscale = None, taux = None):$/;"	kind:function	line:332
 new_tva_total_function_creator	openfisca_france_indirect_taxation/reforms/aliss.py	/^def new_tva_total_function_creator(categories_fiscales):$/;"	kind:function	line:346
-niveau_de_vie	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class niveau_de_vie(Variable):$/;"	kind:class	line:39
-niveau_vie_decile	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class niveau_vie_decile(Variable):$/;"	kind:class	line:50
+niveau_de_vie	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class niveau_de_vie(YearlyVariable):$/;"	kind:class	line:39
+niveau_vie_decile	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class niveau_vie_decile(YearlyVariable):$/;"	kind:class	line:50
 nombre_diesel	openfisca_france_indirect_taxation/examples/transports/compute_compare/compare_comptes_des_transports_ticpe.py	/^nombre_diesel = nombre_diesel.set_index('index')$/;"	kind:variable	line:61
 nombre_diesel	openfisca_france_indirect_taxation/examples/transports/compute_compare/compare_comptes_des_transports_ticpe.py	/^nombre_diesel = nombre_diesel.transpose()$/;"	kind:variable	line:62
 nombre_essence	openfisca_france_indirect_taxation/examples/transports/compute_compare/compare_comptes_des_transports_ticpe.py	/^nombre_essence = nombre_essence.set_index('index')$/;"	kind:variable	line:52
@@ -1499,7 +1499,7 @@ number	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_price_
 number	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_price_index_builder.py	/^        number = 28,$/;"	kind:variable	line:233
 number	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_price_index_builder.py	/^        number = 9,$/;"	kind:variable	line:138
 number	openfisca_france_indirect_taxation/examples/transports/regress/regress_determinants_ticpe.py	/^        number = decile.replace('decile_', '')$/;"	kind:variable	line:57
-ocde10	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class ocde10(Variable):$/;"	kind:class	line:39
+ocde10	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class ocde10(YearlyVariable):$/;"	kind:class	line:39
 on	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_dataframe_builder_energy_no_alime.py	/^        on = 'ident_men')$/;"	kind:variable	line:106
 on	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_dataframe_builder_energy_no_alime.py	/^        on = 'ident_men')$/;"	kind:variable	line:151
 on	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_dataframe_builder_energy_no_logem.py	/^        on = 'ident_men')$/;"	kind:variable	line:102
@@ -1568,10 +1568,10 @@ plot_ticpe_taux_implicite.py	openfisca_france_indirect_taxation/examples/transpo
 plot_transports_depenses.py	openfisca_france_indirect_taxation/examples/transports/agregats_compte_transports/plot_transports_depenses.py	1;"	kind:file	line:1
 plot_transports_prix.py	openfisca_france_indirect_taxation/examples/transports/agregats_compte_transports/plot_transports_prix.py	1;"	kind:file	line:1
 plot_transports_quantites.py	openfisca_france_indirect_taxation/examples/transports/agregats_compte_transports/plot_transports_quantites.py	1;"	kind:file	line:1
-pondmen	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class pondmen(Variable):$/;"	kind:class	line:45
+pondmen	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class pondmen(YearlyVariable):$/;"	kind:class	line:45
 poste_agrege_01	openfisca_france_indirect_taxation/examples/all_consumptions/plot_consumption_distribution_1995_2011.py	/^    poste_agrege_01 = survey_scenario.simulation.calculate('poste_agrege_01')$/;"	kind:variable	line:37
 postes_coicop.py	openfisca_france_indirect_taxation/model/consommation/postes_coicop.py	1;"	kind:file	line:1
-pourcentage_vehicule_essence	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^class pourcentage_vehicule_essence(Variable):$/;"	kind:class	line:29
+pourcentage_vehicule_essence	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^class pourcentage_vehicule_essence(YearlyVariable):$/;"	kind:class	line:29
 prefill_cache	openfisca_france_indirect_taxation/france_indirect_taxation_taxbenefitsystem.py	/^    def prefill_cache(self):$/;"	kind:member	line:35
 preload_categories_fiscales_data_frame	openfisca_france_indirect_taxation/model/consommation/categories_fiscales.py	/^def preload_categories_fiscales_data_frame(tax_benefit_system):$/;"	kind:function	line:104
 preload_postes_coicop_data_frame	openfisca_france_indirect_taxation/model/consommation/postes_coicop.py	/^def preload_postes_coicop_data_frame(tax_benefit_system):$/;"	kind:function	line:153
@@ -1619,43 +1619,43 @@ quantite_carburants	openfisca_france_indirect_taxation/examples/transports/compu
 quantite_conso_vp	openfisca_france_indirect_taxation/examples/transports/agregats_compte_transports/plot_transports_quantites.py	/^quantite_conso_vp = quantite_conso_vp.transpose()$/;"	kind:variable	line:33
 quantite_conso_vp	openfisca_france_indirect_taxation/examples/transports/agregats_compte_transports/plot_transports_quantites.py	/^quantite_conso_vp = quantite_conso_vp[['ESSENCE + GAZOLE'] + ['ESSENCE'] + ['GAZOLE']]$/;"	kind:variable	line:40
 quantite_diesel	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^        quantite_diesel = diesel_ticpe_ponderee \/ (value_accise_diesel)$/;"	kind:variable	line:69
-quantite_diesel	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class quantite_diesel(Variable):$/;"	kind:class	line:93
+quantite_diesel	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class quantite_diesel(YearlyVariable):$/;"	kind:class	line:93
 quantite_essence	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^            quantite_essence = quantite_sans_plomb + quantite_super_plombe$/;"	kind:variable	line:74
 quantite_essence	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^            quantite_essence = quantite_sans_plomb$/;"	kind:variable	line:76
 quantite_sans_plomb	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^        quantite_sans_plomb = (sp95_ticpe_ponderee + sp98_ticpe_ponderee + sp_e10_ticpe_ponderee) \/ (value_accise_sp)$/;"	kind:variable	line:70
 quantite_super_plombe	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^        quantite_super_plombe = super_plombe_ticpe_ponderee \/ (value_accise_super_plombe)$/;"	kind:variable	line:71
-quantite_supercarburants	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class quantite_supercarburants(Variable):$/;"	kind:class	line:99
+quantite_supercarburants	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class quantite_supercarburants(YearlyVariable):$/;"	kind:class	line:99
 quantites_ajustees.py	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	1;"	kind:file	line:1
 quantites_carburants_consommees	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^    quantites_carburants_consommees = dict()$/;"	kind:variable	line:42
-quantites_diesel	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_diesel(Variable):$/;"	kind:class	line:12
-quantites_diesel_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_diesel_ajustees(Variable):$/;"	kind:class	line:12
+quantites_diesel	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_diesel(YearlyVariable):$/;"	kind:class	line:12
+quantites_diesel_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_diesel_ajustees(YearlyVariable):$/;"	kind:class	line:12
 quantites_diesel_consommees	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^    quantites_diesel_consommees = dict()$/;"	kind:variable	line:43
-quantites_electricite_12kva	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_12kva(Variable):$/;"	kind:class	line:169
-quantites_electricite_15kva	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_15kva(Variable):$/;"	kind:class	line:186
-quantites_electricite_18kva	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_18kva(Variable):$/;"	kind:class	line:203
-quantites_electricite_3kva	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_3kva(Variable):$/;"	kind:class	line:118
-quantites_electricite_6kva	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_6kva(Variable):$/;"	kind:class	line:135
-quantites_electricite_9kva	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_9kva(Variable):$/;"	kind:class	line:152
-quantites_electricite_ajustees_taxe_carbone	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_electricite_ajustees_taxe_carbone(Variable):$/;"	kind:class	line:44
-quantites_electricite_selon_compteur	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_selon_compteur(Variable):$/;"	kind:class	line:306
+quantites_electricite_12kva	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_12kva(YearlyVariable):$/;"	kind:class	line:169
+quantites_electricite_15kva	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_15kva(YearlyVariable):$/;"	kind:class	line:186
+quantites_electricite_18kva	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_18kva(YearlyVariable):$/;"	kind:class	line:203
+quantites_electricite_3kva	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_3kva(YearlyVariable):$/;"	kind:class	line:118
+quantites_electricite_6kva	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_6kva(YearlyVariable):$/;"	kind:class	line:135
+quantites_electricite_9kva	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_9kva(YearlyVariable):$/;"	kind:class	line:152
+quantites_electricite_ajustees_taxe_carbone	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_electricite_ajustees_taxe_carbone(YearlyVariable):$/;"	kind:class	line:44
+quantites_electricite_selon_compteur	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_electricite_selon_compteur(YearlyVariable):$/;"	kind:class	line:306
 quantites_energie.py	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	1;"	kind:file	line:1
-quantites_essence	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_essence(Variable):$/;"	kind:class	line:86
-quantites_essence_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_essence_ajustees(Variable):$/;"	kind:class	line:135
+quantites_essence	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_essence(YearlyVariable):$/;"	kind:class	line:86
+quantites_essence_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_essence_ajustees(YearlyVariable):$/;"	kind:class	line:135
 quantites_essence_consommees	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^    quantites_essence_consommees = dict()$/;"	kind:variable	line:44
-quantites_gaz_ajustees_taxe_carbone	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_gaz_ajustees_taxe_carbone(Variable):$/;"	kind:class	line:26
-quantites_gaz_contrat_b0	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_gaz_contrat_b0(Variable):$/;"	kind:class	line:237
-quantites_gaz_contrat_b1	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_gaz_contrat_b1(Variable):$/;"	kind:class	line:254
-quantites_gaz_contrat_b2i	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_gaz_contrat_b2i(Variable):$/;"	kind:class	line:271
-quantites_gaz_contrat_base	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_gaz_contrat_base(Variable):$/;"	kind:class	line:220
-quantites_gaz_contrat_optimal	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_gaz_contrat_optimal(Variable):$/;"	kind:class	line:288
-quantites_sp95	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_sp95(Variable):$/;"	kind:class	line:40
-quantites_sp95_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_sp95_ajustees(Variable):$/;"	kind:class	line:86
-quantites_sp98	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_sp98(Variable):$/;"	kind:class	line:55
-quantites_sp98_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_sp98_ajustees(Variable):$/;"	kind:class	line:102
-quantites_sp_e10	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_sp_e10(Variable):$/;"	kind:class	line:25
-quantites_sp_e10_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_sp_e10_ajustees(Variable):$/;"	kind:class	line:70
-quantites_super_plombe	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_super_plombe(Variable):$/;"	kind:class	line:70
-quantites_super_plombe_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_super_plombe_ajustees(Variable):$/;"	kind:class	line:118
+quantites_gaz_ajustees_taxe_carbone	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_gaz_ajustees_taxe_carbone(YearlyVariable):$/;"	kind:class	line:26
+quantites_gaz_contrat_b0	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_gaz_contrat_b0(YearlyVariable):$/;"	kind:class	line:237
+quantites_gaz_contrat_b1	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_gaz_contrat_b1(YearlyVariable):$/;"	kind:class	line:254
+quantites_gaz_contrat_b2i	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_gaz_contrat_b2i(YearlyVariable):$/;"	kind:class	line:271
+quantites_gaz_contrat_base	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_gaz_contrat_base(YearlyVariable):$/;"	kind:class	line:220
+quantites_gaz_contrat_optimal	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_gaz_contrat_optimal(YearlyVariable):$/;"	kind:class	line:288
+quantites_sp95	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_sp95(YearlyVariable):$/;"	kind:class	line:40
+quantites_sp95_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_sp95_ajustees(YearlyVariable):$/;"	kind:class	line:86
+quantites_sp98	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_sp98(YearlyVariable):$/;"	kind:class	line:55
+quantites_sp98_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_sp98_ajustees(YearlyVariable):$/;"	kind:class	line:102
+quantites_sp_e10	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_sp_e10(YearlyVariable):$/;"	kind:class	line:25
+quantites_sp_e10_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_sp_e10_ajustees(YearlyVariable):$/;"	kind:class	line:70
+quantites_super_plombe	openfisca_france_indirect_taxation/model/consommation/quantites_energie.py	/^class quantites_super_plombe(YearlyVariable):$/;"	kind:class	line:70
+quantites_super_plombe_ajustees	openfisca_france_indirect_taxation/model/reactions_comportementales_reforme/quantites_ajustees.py	/^class quantites_super_plombe_ajustees(YearlyVariable):$/;"	kind:class	line:118
 raw_data_ini	openfisca_france_indirect_taxation/scripts/build_survey_data_collection.py	/^raw_data_ini = os.path.join($/;"	kind:variable	line:17
 read_aliss_elasticites.py	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	1;"	kind:file	line:1
 recettes_ticpe	openfisca_france_indirect_taxation/examples/transports/agregats_compte_transports/plot_transports_quantites.py	/^recettes_ticpe = recettes_ticpe.transpose()$/;"	kind:variable	line:29
@@ -1692,8 +1692,8 @@ rev_disp	openfisca_france_indirect_taxation/build_survey_data/step_4_homogeneisa
 rev_disp_loyerimput	openfisca_france_indirect_taxation/examples/transports/depenses_par_categories/plot_ticpe_part_depenses_par_decile.py	/^                rev_disp_loyerimput = concat([rev_disp_loyerimput, part_rev_loyerimput], axis = 1)$/;"	kind:variable	line:72
 rev_disp_loyerimput	openfisca_france_indirect_taxation/examples/transports/depenses_par_categories/plot_ticpe_part_depenses_par_decile.py	/^                rev_disp_loyerimput = part_rev_loyerimput$/;"	kind:variable	line:74
 rev_disp_loyerimput	openfisca_france_indirect_taxation/examples/transports/depenses_par_categories/plot_ticpe_part_depenses_par_decile.py	/^        rev_disp_loyerimput = None$/;"	kind:variable	line:42
-rev_disp_loyerimput	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class rev_disp_loyerimput(Variable):$/;"	kind:class	line:81
-rev_disponible	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class rev_disponible(Variable):$/;"	kind:class	line:88
+rev_disp_loyerimput	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class rev_disp_loyerimput(YearlyVariable):$/;"	kind:class	line:81
+rev_disponible	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class rev_disponible(YearlyVariable):$/;"	kind:class	line:88
 revenus	openfisca_france_indirect_taxation/build_survey_data/step_4_homogeneisation_revenus_menages.py	/^        revenus = pandas.concat([menage, rev_disp], axis = 1)$/;"	kind:variable	line:351
 revenus	openfisca_france_indirect_taxation/build_survey_data/step_4_homogeneisation_revenus_menages.py	/^        revenus = revenus.merge(loyers_imputes, left_index = True, right_index = True)$/;"	kind:variable	line:313
 revenus	openfisca_france_indirect_taxation/build_survey_data/step_4_homogeneisation_revenus_menages.py	/^        revenus = revenus.merge(loyers_imputes, left_index = True, right_index = True)$/;"	kind:variable	line:383
@@ -1721,10 +1721,10 @@ revindep	openfisca_france_indirect_taxation/build_survey_data/step_4_homogeneisa
 revtot	openfisca_france_indirect_taxation/examples/transports/depenses_par_categories/plot_ticpe_part_depenses_par_decile.py	/^                revtot = concat([revtot, part_revtot], axis = 1)$/;"	kind:variable	line:67
 revtot	openfisca_france_indirect_taxation/examples/transports/depenses_par_categories/plot_ticpe_part_depenses_par_decile.py	/^                revtot = part_revtot$/;"	kind:variable	line:69
 revtot	openfisca_france_indirect_taxation/examples/transports/depenses_par_categories/plot_ticpe_part_depenses_par_decile.py	/^        revtot = None$/;"	kind:variable	line:41
-revtot	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class revtot(Variable):$/;"	kind:class	line:95
-revtotuc	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class revtotuc(Variable):$/;"	kind:class	line:102
+revtot	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class revtot(YearlyVariable):$/;"	kind:class	line:95
+revtotuc	openfisca_france_indirect_taxation/model/revenus/revenus_menages.py	/^class revtotuc(YearlyVariable):$/;"	kind:class	line:102
 role_for_person_variable_name	openfisca_france_indirect_taxation/entities.py	/^    role_for_person_variable_name = 'role_menage'$/;"	kind:variable	line:50
-role_menage	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^class role_menage(Variable):$/;"	kind:class	line:72
+role_menage	openfisca_france_indirect_taxation/model/caracteristiques_menages/demographie.py	/^class role_menage(YearlyVariable):$/;"	kind:class	line:72
 roles_key	openfisca_france_indirect_taxation/entities.py	/^    roles_key = ['personne_de_reference', 'conjoint', 'enfants', 'autres']$/;"	kind:variable	line:51
 root_deb	openfisca_france_indirect_taxation/scripts/build_parameters_from_ipp_tax_and_benefit_tables.py	/^root_deb = "1990-01-01"$/;"	kind:variable	line:41
 root_fin	openfisca_france_indirect_taxation/scripts/build_parameters_from_ipp_tax_and_benefit_tables.py	/^root_fin = "2020-12-31"$/;"	kind:variable	line:42
@@ -1783,8 +1783,8 @@ simulated_variables_without_e10	openfisca_france_indirect_taxation/examples/tran
 simulated_variables_without_e10	openfisca_france_indirect_taxation/examples/transports/regress/regress_determinants_conso_carbu.py	/^    simulated_variables_without_e10 = [$/;"	kind:variable	line:33
 simulation	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^        simulation = base.tax_benefit_system.new_scenario().init_single_entity($/;"	kind:variable	line:28
 simulation_data_frame	openfisca_france_indirect_taxation/examples/all_consumptions/plot_logement_decile.py	/^        simulation_data_frame = simulate(simulated_variables = simulated_variables, year = year)$/;"	kind:variable	line:54
-situacj	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class situacj(Variable):$/;"	kind:class	line:52
-situapr	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class situapr(Variable):$/;"	kind:class	line:58
+situacj	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class situacj(YearlyVariable):$/;"	kind:class	line:52
+situapr	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class situapr(YearlyVariable):$/;"	kind:class	line:58
 skiprows	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^        skiprows = 4,$/;"	kind:variable	line:107
 skiprows	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^        skiprows = 4,$/;"	kind:variable	line:115
 skiprows	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^        skiprows = 4,$/;"	kind:variable	line:123
@@ -1805,19 +1805,19 @@ skiprows	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^
 skiprows	openfisca_france_indirect_taxation/scripts/read_aliss_elasticites.py	/^        skiprows = 6,$/;"	kind:variable	line:35
 slugify_ipp_translation_key	openfisca_france_indirect_taxation/scripts/build_parameters_from_ipp_tax_and_benefit_tables.py	/^def slugify_ipp_translation_key(key):$/;"	kind:function	line:295
 slugify_ipp_translations_keys	openfisca_france_indirect_taxation/scripts/build_parameters_from_ipp_tax_and_benefit_tables.py	/^def slugify_ipp_translations_keys(ipp_translations):$/;"	kind:function	line:299
-somme_coicop12	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class somme_coicop12(Variable):$/;"	kind:class	line:105
-somme_coicop12_conso	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class somme_coicop12_conso(Variable):$/;"	kind:class	line:117
+somme_coicop12	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class somme_coicop12(YearlyVariable):$/;"	kind:class	line:105
+somme_coicop12_conso	openfisca_france_indirect_taxation/model/consommation/consommation_menages.py	/^class somme_coicop12_conso(YearlyVariable):$/;"	kind:class	line:117
 sort_elements	openfisca_france_indirect_taxation/scripts/build_parameters_from_ipp_tax_and_benefit_tables.py	/^def sort_elements(element):$/;"	kind:function	line:309
-sp95_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class sp95_ticpe(Variable):$/;"	kind:class	line:311
-sp95_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class sp95_ticpe_ajustee(Variable):$/;"	kind:class	line:339
+sp95_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class sp95_ticpe(YearlyVariable):$/;"	kind:class	line:311
+sp95_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class sp95_ticpe_ajustee(YearlyVariable):$/;"	kind:class	line:339
 sp95_ticpe_ponderee	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^            sp95_ticpe_ponderee = (data_simulation['sp95_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:50
 sp95_ticpe_ponderee	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^            sp95_ticpe_ponderee = (data_simulation['sp95_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:58
-sp98_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class sp98_ticpe(Variable):$/;"	kind:class	line:376
-sp98_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class sp98_ticpe_ajustee(Variable):$/;"	kind:class	line:404
+sp98_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class sp98_ticpe(YearlyVariable):$/;"	kind:class	line:376
+sp98_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class sp98_ticpe_ajustee(YearlyVariable):$/;"	kind:class	line:404
 sp98_ticpe_ponderee	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^            sp98_ticpe_ponderee = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:51
 sp98_ticpe_ponderee	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^            sp98_ticpe_ponderee = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:59
-sp_e10_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class sp_e10_ticpe(Variable):$/;"	kind:class	line:244
-sp_e10_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class sp_e10_ticpe_ajustee(Variable):$/;"	kind:class	line:275
+sp_e10_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class sp_e10_ticpe(YearlyVariable):$/;"	kind:class	line:244
+sp_e10_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class sp_e10_ticpe_ajustee(YearlyVariable):$/;"	kind:class	line:275
 sp_e10_ticpe_ponderee	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^            sp_e10_ticpe_ponderee = (data_simulation['sp_e10_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:53
 sp_e10_ticpe_ponderee	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^            sp_e10_ticpe_ponderee = 0$/;"	kind:variable	line:61
 start	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_price_index_builder.py	/^        start = dt.datetime(2000, 11, 6),$/;"	kind:variable	line:159
@@ -1845,12 +1845,12 @@ step_1_2_imputations_loyers_proprietaires.py	openfisca_france_indirect_taxation/
 step_2_homogeneisation_vehicules.py	openfisca_france_indirect_taxation/build_survey_data/step_2_homogeneisation_vehicules.py	1;"	kind:file	line:1
 step_3_homogeneisation_caracteristiques_menages.py	openfisca_france_indirect_taxation/build_survey_data/step_3_homogeneisation_caracteristiques_menages.py	1;"	kind:file	line:1
 step_4_homogeneisation_revenus_menages.py	openfisca_france_indirect_taxation/build_survey_data/step_4_homogeneisation_revenus_menages.py	1;"	kind:file	line:1
-strate	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class strate(Variable):$/;"	kind:class	line:64
+strate	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class strate(YearlyVariable):$/;"	kind:class	line:64
 sub_levels	openfisca_france_indirect_taxation/scripts/build_coicop_legislation.py	/^sub_levels = ['divisions', 'groupes', 'classes', 'sous_classes', 'postes']$/;"	kind:variable	line:20
 sub_levels	openfisca_france_indirect_taxation/scripts/build_coicop_nomenclature.py	/^sub_levels = ['divisions', 'groupes', 'classes', 'sous_classes', 'postes']$/;"	kind:variable	line:20
 suffixes	openfisca_france_indirect_taxation/examples/all_consumptions/plot_consumption_distribution_1995_2011.py	/^    suffixes = ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]$/;"	kind:variable	line:25
-super_plombe_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class super_plombe_ticpe(Variable):$/;"	kind:class	line:441
-super_plombe_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class super_plombe_ticpe_ajustee(Variable):$/;"	kind:class	line:464
+super_plombe_ticpe	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class super_plombe_ticpe(YearlyVariable):$/;"	kind:class	line:441
+super_plombe_ticpe_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class super_plombe_ticpe_ajustee(YearlyVariable):$/;"	kind:class	line:464
 super_plombe_ticpe_ponderee	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^            super_plombe_ticpe_ponderee = (data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:52
 super_plombe_ticpe_ponderee	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^            super_plombe_ticpe_ponderee = (data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']).sum()$/;"	kind:variable	line:60
 survey	setup.py	/^        survey = [$/;"	kind:variable	line:62
@@ -1865,7 +1865,7 @@ surveys.py	openfisca_france_indirect_taxation/surveys.py	1;"	kind:file	line:1
 symbol	openfisca_france_indirect_taxation/entities.py	/^    symbol = 'ind'$/;"	kind:variable	line:39
 symbol	openfisca_france_indirect_taxation/entities.py	/^    symbol = 'men'$/;"	kind:variable	line:58
 tabac_a_rouler	openfisca_france_indirect_taxation/model/base.py	/^    tabac_a_rouler = 'tabac_a_rouler',$/;"	kind:variable	line:78
-tabac_a_rouler_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class tabac_a_rouler_droit_d_accise(Variable):$/;"	kind:class	line:59
+tabac_a_rouler_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class tabac_a_rouler_droit_d_accise(YearlyVariable):$/;"	kind:class	line:59
 tabacs.py	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	1;"	kind:file	line:1
 table	openfisca_france_indirect_taxation/build_survey_data/step_4_homogeneisation_revenus_menages.py	/^                table = "C05",$/;"	kind:variable	line:323
 table	openfisca_france_indirect_taxation/build_survey_data/step_4_homogeneisation_revenus_menages.py	/^                table = "MENAGE",$/;"	kind:variable	line:336
@@ -1886,8 +1886,8 @@ taxe_indirectes	openfisca_france_indirect_taxation/examples/all_indirect_taxes/p
 taxe_indirectes	openfisca_france_indirect_taxation/examples/all_indirect_taxes/plot_regressivite.py	/^        taxe_indirectes = taxe_indirectes.rename(columns = {'revtot': u'revenu total',$/;"	kind:variable	line:64
 taxes_carburants.py	openfisca_france_indirect_taxation/reforms/taxes_carburants.py	1;"	kind:file	line:1
 taxes_indirectes	openfisca_france_indirect_taxation/examples/tva/plot_depenses_tva_by_decile.py	/^        taxes_indirectes = pivot_table.T$/;"	kind:variable	line:37
-taxes_indirectes_total	openfisca_france_indirect_taxation/model/taxes_indirectes/totaux.py	/^class taxes_indirectes_total(Variable):$/;"	kind:class	line:31
-taxes_indirectes_total_hors_tva	openfisca_france_indirect_taxation/model/taxes_indirectes/totaux.py	/^class taxes_indirectes_total_hors_tva(Variable):$/;"	kind:class	line:45
+taxes_indirectes_total	openfisca_france_indirect_taxation/model/taxes_indirectes/totaux.py	/^class taxes_indirectes_total(YearlyVariable):$/;"	kind:class	line:31
+taxes_indirectes_total_hors_tva	openfisca_france_indirect_taxation/model/taxes_indirectes/totaux.py	/^class taxes_indirectes_total_hors_tva(YearlyVariable):$/;"	kind:class	line:45
 test	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_estimation_from_stata.py	/^def test():$/;"	kind:function	line:35
 test	openfisca_france_indirect_taxation/tests/test_aliss_survey_scenario.py	/^def test():$/;"	kind:function	line:35
 test	openfisca_france_indirect_taxation/tests/test_categorie_fiscale.py	/^def test():$/;"	kind:function	line:7
@@ -1922,13 +1922,13 @@ tests_found	openfisca_france_indirect_taxation/tests/test_yaml.py	/^    tests_fo
 ticpe	openfisca_france_indirect_taxation/examples/transports/plot_legislation/plot_ticpe_taux_implicite.py	/^ticpe = ['ticpe_gazole', 'ticpe_super9598']$/;"	kind:variable	line:20
 ticpe	openfisca_france_indirect_taxation/model/base.py	/^    ticpe = 'tva_taux_plein',$/;"	kind:variable	line:79
 ticpe.py	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	1;"	kind:file	line:1
-ticpe_totale	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class ticpe_totale(Variable):$/;"	kind:class	line:496
-ticpe_totale_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class ticpe_totale_ajustee(Variable):$/;"	kind:class	line:509
+ticpe_totale	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class ticpe_totale(YearlyVariable):$/;"	kind:class	line:496
+ticpe_totale_ajustee	openfisca_france_indirect_taxation/model/taxes_indirectes/ticpe.py	/^class ticpe_totale_ajustee(YearlyVariable):$/;"	kind:class	line:509
 title	openfisca_france_indirect_taxation/tests/test_yaml.py	/^        title = "Test {}: {} {}{} - {}".format($/;"	kind:variable	line:305
 to_graph	openfisca_france_indirect_taxation/examples/transports/depenses_par_categories/plot_ticpe_depenses_par_decile.py	/^    to_graph = ['ticpe totale ', 'ticpe diesel ', 'ticpe essence ', 'depenses carburants ', 'depenses diesel ',$/;"	kind:variable	line:38
-total_alcool_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class total_alcool_droit_d_accise(Variable):$/;"	kind:class	line:62
-total_assurances_taxe	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^class total_assurances_taxe(Variable):$/;"	kind:class	line:72
-total_tabac_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class total_tabac_droit_d_accise(Variable):$/;"	kind:class	line:71
+total_alcool_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class total_alcool_droit_d_accise(YearlyVariable):$/;"	kind:class	line:62
+total_assurances_taxe	openfisca_france_indirect_taxation/model/taxes_indirectes/assurances.py	/^class total_assurances_taxe(YearlyVariable):$/;"	kind:class	line:72
+total_tabac_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/tabacs.py	/^class total_tabac_droit_d_accise(YearlyVariable):$/;"	kind:class	line:71
 totaux.py	openfisca_france_indirect_taxation/model/taxes_indirectes/totaux.py	1;"	kind:file	line:1
 toto	openfisca_france_indirect_taxation/tests/test_get_poste_categorie_fiscale.py	/^    toto = test()$/;"	kind:variable	line:51
 toto	openfisca_france_indirect_taxation/tests/test_survey_scenario.py	/^    toto = test()/;"	kind:variable	line:54
@@ -1936,20 +1936,20 @@ transform_node_to_element	openfisca_france_indirect_taxation/scripts/build_param
 transform_value_to_element	openfisca_france_indirect_taxation/scripts/build_parameters_from_ipp_tax_and_benefit_tables.py	/^def transform_value_to_element(leaf, missing_fin = root_fin):$/;"	kind:function	line:478
 tva.py	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	1;"	kind:file	line:1
 tva_by_categorie_primaire	openfisca_france_indirect_taxation/model/base.py	/^tva_by_categorie_primaire = dict($/;"	kind:variable	line:72
-tva_taux_intermediaire	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_taux_intermediaire(Variable):$/;"	kind:class	line:65
+tva_taux_intermediaire	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_taux_intermediaire(YearlyVariable):$/;"	kind:class	line:65
 tva_taux_plein	openfisca_france_indirect_taxation/examples/transports/plot_legislation/plot_ticpe_taux_implicite.py	/^tva_taux_plein = get_tva_taux_plein()$/;"	kind:variable	line:24
-tva_taux_plein	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_taux_plein(Variable):$/;"	kind:class	line:78
-tva_taux_reduit	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_taux_reduit(Variable):$/;"	kind:class	line:90
-tva_taux_super_reduit	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_taux_super_reduit(Variable):$/;"	kind:class	line:102
-tva_total	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_total(Variable):$/;"	kind:class	line:114
-typmen	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class typmen(Variable):$/;"	kind:class	line:70
+tva_taux_plein	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_taux_plein(YearlyVariable):$/;"	kind:class	line:78
+tva_taux_reduit	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_taux_reduit(YearlyVariable):$/;"	kind:class	line:90
+tva_taux_super_reduit	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_taux_super_reduit(YearlyVariable):$/;"	kind:class	line:102
+tva_total	openfisca_france_indirect_taxation/model/taxes_indirectes/tva.py	/^class tva_total(YearlyVariable):$/;"	kind:class	line:114
+typmen	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class typmen(YearlyVariable):$/;"	kind:class	line:70
 url	setup.py	/^    url = 'https:\/\/github.com\/openfisca\/openfisca-france-indirect-taxation',$/;"	kind:variable	line:55
 utils.py	openfisca_france_indirect_taxation/almost_ideal_demand_system/utils.py	1;"	kind:file	line:1
 utils.py	openfisca_france_indirect_taxation/build_survey_data/utils.py	1;"	kind:file	line:1
 utils.py	openfisca_france_indirect_taxation/examples/aliss/utils.py	1;"	kind:file	line:1
 utils.py	openfisca_france_indirect_taxation/utils.py	1;"	kind:file	line:1
 utils_example.py	openfisca_france_indirect_taxation/examples/utils_example.py	1;"	kind:file	line:1
-vag	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class vag(Variable):$/;"	kind:class	line:76
+vag	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class vag(YearlyVariable):$/;"	kind:class	line:76
 vagues	openfisca_france_indirect_taxation/almost_ideal_demand_system/aids_price_index_builder.py	/^vagues = [$/;"	kind:variable	line:136
 value_accise_diesel	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_quantite_carburants.py	/^        value_accise_diesel = liste_carburants_accise['accise majoree diesel'].loc[u'{}'.format(year)] \/ 100$/;"	kind:variable	line:64
 value_accise_diesel	openfisca_france_indirect_taxation/examples/transports/regress/regress_determinants_conso_carbu.py	/^        value_accise_diesel = liste_carburants_accise['accise majoree diesel'].loc[u'{}'.format(year)] \/ 100$/;"	kind:variable	line:67
@@ -1969,14 +1969,14 @@ variables	openfisca_france_indirect_taxation/build_survey_data/step_4_homogeneis
 varlist	openfisca_france_indirect_taxation/examples/all_consumptions/plot_tabac_alcool_decile.py	/^            varlist = simulated_variables)$/;"	kind:variable	line:68
 varlist	openfisca_france_indirect_taxation/examples/tva/plot_consumption_distribution_TVA_rates.py	/^            varlist = var_to_concat)$/;"	kind:variable	line:46
 veh_diesel	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^                veh_diesel = dies,$/;"	kind:variable	line:36
-veh_diesel	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^class veh_diesel(Variable):$/;"	kind:class	line:36
+veh_diesel	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^class veh_diesel(YearlyVariable):$/;"	kind:class	line:36
 veh_essence	openfisca_france_indirect_taxation/examples/transports/compute_compare/compute_ticpe_cas_type.py	/^                veh_essence = ess,$/;"	kind:variable	line:35
-veh_essence	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^class veh_essence(Variable):$/;"	kind:class	line:43
-veh_tot	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^class veh_tot(Variable):$/;"	kind:class	line:50
+veh_essence	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^class veh_essence(YearlyVariable):$/;"	kind:class	line:43
+veh_tot	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	/^class veh_tot(YearlyVariable):$/;"	kind:class	line:50
 vehicules_menages.py	openfisca_france_indirect_taxation/model/vehicules/vehicules_menages.py	1;"	kind:file	line:1
 version	setup.py	/^    version = '0.4.dev0',$/;"	kind:variable	line:46
 vin	openfisca_france_indirect_taxation/model/base.py	/^    vin = 'tva_taux_plein',$/;"	kind:variable	line:74
-vin_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class vin_droit_d_accise(Variable):$/;"	kind:class	line:74
+vin_droit_d_accise	openfisca_france_indirect_taxation/model/taxes_indirectes/alcools.py	/^class vin_droit_d_accise(YearlyVariable):$/;"	kind:class	line:74
 wavg	openfisca_france_indirect_taxation/examples/utils_example.py	/^def wavg(groupe, var):$/;"	kind:function	line:99
 weighted_mean	openfisca_france_indirect_taxation/reforms/aliss.py	/^    def weighted_mean(x):$/;"	kind:function	line:279
 weighted_sum	openfisca_france_indirect_taxation/build_survey_data/utils.py	/^def weighted_sum(groupe, var):$/;"	kind:function	line:52
@@ -2002,4 +2002,4 @@ year	openfisca_france_indirect_taxation/examples/transports/compute_compare/comp
 year	openfisca_france_indirect_taxation/scripts/build_coicop_bdf.py	/^    year = 2011$/;"	kind:variable	line:474
 year	openfisca_france_indirect_taxation/scripts/build_prix_energie_logement.py	/^        year = year,$/;"	kind:variable	line:31
 years_calage	openfisca_france_indirect_taxation/build_survey_data/run_all.py	/^    years_calage = [2011]  # [2000, 2005, 2011]$/;"	kind:variable	line:187
-zeat	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class zeat(Variable):$/;"	kind:class	line:82
+zeat	openfisca_france_indirect_taxation/model/caracteristiques_menages/autres_caracteristiques.py	/^class zeat(YearlyVariable):$/;"	kind:class	line:82

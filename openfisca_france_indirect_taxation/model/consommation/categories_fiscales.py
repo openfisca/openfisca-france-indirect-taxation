@@ -51,7 +51,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
                     year_start = year_start,
                     year_stop = year_stop,
                     )
-                dated_function_name = u"function_{year_start}_{year_stop}".format(
+                dated_function_name = u"formula_{year_start}".format(
                     year_start = year_start, year_stop = year_stop)
                 log.info(u'Creating fiscal category {} ({}-{}) with the following products {}'.format(
                     categorie_fiscale, year_start, year_stop, previous_postes_coicop))
@@ -73,7 +73,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
                 )
             definitions_by_name.update(functions_by_name)
             tax_benefit_system.add_variable(
-                type(class_name.encode('utf-8'), (Variable,), definitions_by_name)
+                type(class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
                 )
 
         else:
@@ -81,7 +81,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
                 definitions_by_name = dict()
                 definitions_by_name.update(functions_by_name)
                 tax_benefit_system.update_variable(
-                    type(class_name.encode('utf-8'), (Variable,), definitions_by_name)
+                    type(class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
                     )
             else:
                 definitions_by_name = dict(
@@ -91,7 +91,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
                     )
                 definitions_by_name.update(functions_by_name)
                 tax_benefit_system.add_variable(
-                    type(class_name.encode('utf-8'), (Variable,), definitions_by_name)
+                    type(class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
                     )
 
         del definitions_by_name

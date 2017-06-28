@@ -29,57 +29,55 @@ from __future__ import division
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
-class ident_men(Variable):
+class ident_men(YearlyVariable):
     column = StrCol
     entity = Menage
-    is_permanent = True
     label = u"Identifiant du ménage"
 
 
-class ocde10(Variable):
+class ocde10(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"unités de consommation"
 
 
-class pondmen(Variable):
+class pondmen(YearlyVariable):
     column = IntCol
     entity = Menage
-    is_permanent = True
     label = u"Pondération du ménage"
 
 
-class situacj(Variable):
+class situacj(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Situation du conjoint vis-à-vis du travail"
 
 
-class situapr(Variable):
+class situapr(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Situation de la personne de référence vis-à-vis du travail"
 
 
-class strate(Variable):
+class strate(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"catégorie de la commune de résidence"
 
 
-class typmen(Variable):
+class typmen(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"type du ménage"
 
 
-class vag(Variable):
+class vag(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"numéro de la vague d'interrogation du ménage"
 
 
-class zeat(Variable):
+class zeat(YearlyVariable):
     column = EnumCol(
         enum = Enum([
             u"DOM",

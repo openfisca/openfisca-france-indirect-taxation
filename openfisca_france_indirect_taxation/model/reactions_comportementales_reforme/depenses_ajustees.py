@@ -8,7 +8,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 import numpy
 
 
-class depenses_essence_ajustees(Variable):
+class depenses_essence_ajustees(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en essence après réaction à la réforme des prix"
@@ -22,10 +22,10 @@ class depenses_essence_ajustees(Variable):
         depenses_essence_ajustees = \
             depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
 
-        return period, depenses_essence_ajustees
+        return depenses_essence_ajustees
 
 
-class depenses_diesel_ajustees(Variable):
+class depenses_diesel_ajustees(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en diesel après réaction à la réforme des prix"
@@ -38,10 +38,10 @@ class depenses_diesel_ajustees(Variable):
         depenses_diesel_ajustees = \
             depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel / diesel_ttc)
 
-        return period, depenses_diesel_ajustees
+        return depenses_diesel_ajustees
 
 
-class depenses_gaz_ajustees_taxe_carbone(Variable):
+class depenses_gaz_ajustees_taxe_carbone(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en gaz après réaction à la réforme - taxe carbone"
@@ -58,10 +58,10 @@ class depenses_gaz_ajustees_taxe_carbone(Variable):
         depenses_gaz_ajustees[numpy.isnan(depenses_gaz_ajustees)] = 0
         depenses_gaz_ajustees[numpy.isinf(depenses_gaz_ajustees)] = 0
 
-        return period, depenses_gaz_ajustees
+        return depenses_gaz_ajustees
 
 
-class depenses_electricite_ajustees_taxe_carbone(Variable):
+class depenses_electricite_ajustees_taxe_carbone(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en électricité après réaction à la réforme - taxe carbone"
@@ -86,4 +86,4 @@ class depenses_electricite_ajustees_taxe_carbone(Variable):
             poste_coicop_451 * (poste_coicop_451 < min_tarif_fixe)
             )
 
-        return period, depenses_electricite_ajustees
+        return depenses_electricite_ajustees

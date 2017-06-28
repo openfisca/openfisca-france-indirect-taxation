@@ -1,5 +1,6 @@
  - name: "Spiritueux et liqueurs"
    period: "2010"
+   absolute_error_margin: .001
    input_variables:
      poste_02_1_1_1_1: 100  # spiritueux et liqueurs
 
@@ -33,6 +34,7 @@
 
  - name: "Vin et cidres"
    period: "2010"
+   absolute_error_margin: .001
    input_variables:
      poste_02_1_2_1_1: 100  # vins et cidres
 
@@ -66,6 +68,7 @@
 
  - name: "Vin et autres apéritifs à base de vin, champagne etc"
    period: "2010"
+   absolute_error_margin: .001
    input_variables:
      poste_02_1_2_1_1: 50  # vins et cidres
      poste_02_1_2_2_1: 50  # autres apéritifs à base de vin, champagne et autres mousseux, saké et autres
@@ -100,6 +103,7 @@
 
  - name: u"Bière"
    period: "2010"
+   absolute_error_margin: .001
    input_variables:
      poste_02_1_3_1_1: 100  # Bière et boissons à base de bière
 

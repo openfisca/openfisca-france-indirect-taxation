@@ -9,7 +9,7 @@ import numpy
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
-class quantites_diesel_ajustees(Variable):
+class quantites_diesel_ajustees(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Quantités de diesel consommées après la réforme des prix"
@@ -20,10 +20,10 @@ class quantites_diesel_ajustees(Variable):
         reforme_diesel = simulation.legislation_at(period.start).taxes_carburants.diesel
         quantites_diesel_ajustees = depenses_diesel_ajustees / (diesel_ttc + reforme_diesel) * 100
 
-        return period, quantites_diesel_ajustees
+        return quantites_diesel_ajustees
 
 
-class quantites_gaz_ajustees_taxe_carbone(Variable):
+class quantites_gaz_ajustees_taxe_carbone(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Quantités de gaz consommées après la réforme - taxe carbone"
@@ -38,10 +38,10 @@ class quantites_gaz_ajustees_taxe_carbone(Variable):
 
         quantites_gaz_ajustees = depenses_gaz_ajustees_variables / (depenses_gaz_prix_unitaire + reforme_gaz)
 
-        return period, quantites_gaz_ajustees
+        return quantites_gaz_ajustees
 
 
-class quantites_electricite_ajustees_taxe_carbone(Variable):
+class quantites_electricite_ajustees_taxe_carbone(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Quantités d'électricité consommées après la réforme - taxe carbone"
@@ -64,10 +64,10 @@ class quantites_electricite_ajustees_taxe_carbone(Variable):
             quantites_electricite_ajustees * (quantites_electricite_avant_reforme > 0)
             )
 
-        return period, quantites_electricite_ajustees
+        return quantites_electricite_ajustees
 
 
-class quantites_sp_e10_ajustees(Variable):
+class quantites_sp_e10_ajustees(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Quantités consommées de sans plomb e10 par les ménages après réforme"
@@ -80,10 +80,10 @@ class quantites_sp_e10_ajustees(Variable):
         reforme_essence = simulation.legislation_at(period.start).taxes_carburants.essence
         quantite_sp_e10 = depenses_sp_e10_ajustees / (super_95_e10_ttc + reforme_essence) * 100
 
-        return period, quantite_sp_e10
+        return quantite_sp_e10
 
 
-class quantites_sp95_ajustees(Variable):
+class quantites_sp95_ajustees(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Quantités consommées de sans plomb 95 par les ménages après réforme"
@@ -96,10 +96,10 @@ class quantites_sp95_ajustees(Variable):
         reforme_essence = simulation.legislation_at(period.start).taxes_carburants.essence
         quantites_sp95_ajustees = depenses_sp95_ajustees / (super_95_ttc + reforme_essence) * 100
 
-        return period, quantites_sp95_ajustees
+        return quantites_sp95_ajustees
 
 
-class quantites_sp98_ajustees(Variable):
+class quantites_sp98_ajustees(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Quantités consommées de sans plomb 98 par les ménages"
@@ -112,10 +112,10 @@ class quantites_sp98_ajustees(Variable):
         reforme_essence = simulation.legislation_at(period.start).taxes_carburants.essence
         quantites_sp98_ajustees = depenses_sp98_ajustees / (super_98_ttc + reforme_essence) * 100
 
-        return period, quantites_sp98_ajustees
+        return quantites_sp98_ajustees
 
 
-class quantites_super_plombe_ajustees(Variable):
+class quantites_super_plombe_ajustees(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Quantités consommées de super plombé par les ménages après réforme"
@@ -129,10 +129,10 @@ class quantites_super_plombe_ajustees(Variable):
         reforme_essence = simulation.legislation_at(period.start).taxes_carburants.essence
         quantites_super_plombe_ajustees = depenses_super_plombe_ajustees / (super_plombe_ttc + reforme_essence) * 100
 
-        return period, quantites_super_plombe_ajustees
+        return quantites_super_plombe_ajustees
 
 
-class quantites_essence_ajustees(Variable):
+class quantites_essence_ajustees(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Quantités d'essence consommées par les ménages après réforme"
@@ -144,17 +144,17 @@ class quantites_essence_ajustees(Variable):
         quantites_essence_ajustees = (
             quantites_sp95_ajustees + quantites_sp98_ajustees + quantites_super_plombe_ajustees
             )
-        return period, quantites_essence_ajustees
+        return quantites_essence_ajustees
 
     def formula_2007(self, simulation, period):
         quantites_sp95_ajustees = simulation.calculate('quantites_sp95_ajustees', period)
         quantites_sp98_ajustees = simulation.calculate('quantites_sp98_ajustees', period)
         quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees)
-        return period, quantites_essence_ajustees
+        return quantites_essence_ajustees
 
     def formula_2009(self, simulation, period):
         quantites_sp95_ajustees = simulation.calculate('quantites_sp95_ajustees', period)
         quantites_sp98_ajustees = simulation.calculate('quantites_sp98_ajustees', period)
         quantites_sp_e10_ajustees = simulation.calculate('quantites_sp_e10_ajustees', period)
         quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees + quantites_sp_e10_ajustees)
-        return period, quantites_essence_ajustees
+        return quantites_essence_ajustees

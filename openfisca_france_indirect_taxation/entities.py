@@ -3,7 +3,6 @@
 
 from openfisca_core.entities import build_entity
 
-
 Individu = build_entity(
     key = "individu",
     plural = "individus",

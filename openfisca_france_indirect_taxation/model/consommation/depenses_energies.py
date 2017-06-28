@@ -7,7 +7,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 import numpy
 
 
-class depenses_diesel_htva(Variable):
+class depenses_diesel_htva(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en diesel htva (mais incluant toujours la TICPE)"
@@ -17,10 +17,10 @@ class depenses_diesel_htva(Variable):
         depenses_diesel = simulation.calculate('depenses_diesel', period)
         depenses_diesel_htva = depenses_diesel - tax_from_expense_including_tax(depenses_diesel, taux_plein_tva)
 
-        return period, depenses_diesel_htva
+        return depenses_diesel_htva
 
 
-class depenses_diesel_ht(Variable):
+class depenses_diesel_ht(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en diesel ht (prix brut sans TVA ni TICPE)"
@@ -46,10 +46,10 @@ class depenses_diesel_ht(Variable):
         depenses_diesel_ht = \
             depenses_diesel_htva - tax_from_expense_including_tax(depenses_diesel_htva, taux_implicite_diesel)
 
-        return period, depenses_diesel_ht
+        return depenses_diesel_ht
 
 
-class depenses_diesel_recalculees(Variable):
+class depenses_diesel_recalculees(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en diesel recalculées à partir du prix ht"
@@ -74,36 +74,36 @@ class depenses_diesel_recalculees(Variable):
 
         depenses_diesel_recalculees = depenses_diesel_ht * (1 + taux_plein_tva) * (1 + taux_implicite_diesel)
 
-        return period, depenses_diesel_recalculees
+        return depenses_diesel_recalculees
 
 
-class depenses_essence_ht(Variable):
+class depenses_essence_ht(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en essence hors taxes (HT, i.e. sans TVA ni TICPE)"
 
-    def function_1990(self, simulation, period):
+    def formula_1990(self, simulation, period):
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
         depenses_super_plombe_ht = simulation.calculate('depenses_super_plombe_ht', period)
         depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht + depenses_super_plombe_ht)
-        return period, depenses_essence_ht
+        return depenses_essence_ht
 
-    def function_2007(self, simulation, period):
+    def formula_2007(self, simulation, period):
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
         depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht)
-        return period, depenses_essence_ht
+        return depenses_essence_ht
 
-    def function_2009(self, simulation, period):
+    def formula_2009(self, simulation, period):
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
         depenses_sp_e10_ht = simulation.calculate('depenses_sp_e10_ht', period)
         depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht + depenses_sp_e10_ht)
-        return period, depenses_essence_ht
+        return depenses_essence_ht
 
 
-class depenses_sp_e10_ht(Variable):
+class depenses_sp_e10_ht(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en essence sans plomb e10 hors taxes (HT, i.e. sans TVA ni TICPE)"
@@ -133,10 +133,10 @@ class depenses_sp_e10_ht(Variable):
         depenses_sp_e10_ht = \
             depenses_sp_e10_htva - tax_from_expense_including_tax(depenses_sp_e10_htva, taux_implicite_sp_e10)
 
-        return period, depenses_sp_e10_ht
+        return depenses_sp_e10_ht
 
 
-class depenses_sp_95_ht(Variable):
+class depenses_sp_95_ht(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en essence sans plomb 95 hors taxes (HT, i.e. sans TVA ni TICPE)"
@@ -164,10 +164,10 @@ class depenses_sp_95_ht(Variable):
         depenses_sp_95_ht = \
             depenses_sp_95_htva - tax_from_expense_including_tax(depenses_sp_95_htva, taux_implicite_sp95)
 
-        return period, depenses_sp_95_ht
+        return depenses_sp_95_ht
 
 
-class depenses_sp_98_ht(Variable):
+class depenses_sp_98_ht(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en essence sans plomb 98 hors taxes (HT, i.e. sans TVA ni TICPE)"
@@ -195,10 +195,10 @@ class depenses_sp_98_ht(Variable):
         depenses_sp_98_ht = \
             depenses_sp_98_htva - tax_from_expense_including_tax(depenses_sp_98_htva, taux_implicite_sp98)
 
-        return period, depenses_sp_98_ht
+        return depenses_sp_98_ht
 
 
-class depenses_super_plombe_ht(Variable):
+class depenses_super_plombe_ht(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en essence super plombée hors taxes (HT, i.e. sans TVA ni TICPE)"
@@ -221,10 +221,10 @@ class depenses_super_plombe_ht(Variable):
         depenses_super_plombe_ht = (depenses_super_plombe_htva -
             tax_from_expense_including_tax(depenses_super_plombe_htva, taux_implicite_super_plombe))
 
-        return period, depenses_super_plombe_ht
+        return depenses_super_plombe_ht
 
 
-class depenses_gaz_prix_unitaire(Variable):
+class depenses_gaz_prix_unitaire(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Prix unitaire du gaz rencontré par les ménages"
@@ -252,10 +252,10 @@ class depenses_gaz_prix_unitaire(Variable):
             (quantite_b2i == quantite_optimale) * (quantite_b1 != quantite_optimale) * prix_unitaire_b2i
             )
 
-        return period, prix_unitaire_optimal
+        return prix_unitaire_optimal
 
 
-class depenses_gaz_tarif_fixe(Variable):
+class depenses_gaz_tarif_fixe(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en gaz des ménages sur le coût fixe de l'abonnement"
@@ -283,10 +283,10 @@ class depenses_gaz_tarif_fixe(Variable):
             (quantite_b2i == quantite_optimale) * (quantite_b1 != quantite_optimale) * tarif_fixe_b2i
             )
 
-        return period, tarif_fixe_optimal
+        return tarif_fixe_optimal
 
 
-class depenses_gaz_variables(Variable):
+class depenses_gaz_variables(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en gaz des ménages, hors coût fixe de l'abonnement"
@@ -298,10 +298,10 @@ class depenses_gaz_variables(Variable):
         depenses_gaz_variables = depenses_gaz - tarif_fixe
         depenses_gaz_variables = numpy.maximum(depenses_gaz_variables, 0)
 
-        return period, depenses_gaz_variables
+        return depenses_gaz_variables
 
 
-class depenses_electricite_percentile(Variable):
+class depenses_electricite_percentile(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Classement par percentile des dépenses d'électricité"
@@ -311,10 +311,10 @@ class depenses_electricite_percentile(Variable):
         depenses_electricite_rank = depenses_electricite.argsort().argsort()
         depenses_electricite_percentile = depenses_electricite_rank / len(depenses_electricite_rank) * 100
 
-        return period, depenses_electricite_percentile
+        return depenses_electricite_percentile
 
 
-class depenses_electricite_prix_unitaire(Variable):
+class depenses_electricite_prix_unitaire(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Prix unitaire de l'électricité de chaque ménage, après affectation d'un compteur"
@@ -334,10 +334,10 @@ class depenses_electricite_prix_unitaire(Variable):
             (depenses_electricite_percentile > 4) * prix_unitaire_6kva
             )
 
-        return period, prix_unitaire
+        return prix_unitaire
 
 
-class depenses_electricite_tarif_fixe(Variable):
+class depenses_electricite_tarif_fixe(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en électricité des ménages sur le coût fixe de l'abonnement, après affectation d'un compteur"
@@ -364,10 +364,10 @@ class depenses_electricite_tarif_fixe(Variable):
             (depenses_electricite_percentile > 88) * tarif_fixe_15kva
             )
 
-        return period, tarif_fixe
+        return tarif_fixe
 
 
-class depenses_electricite_variables(Variable):
+class depenses_electricite_variables(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en électricité des ménages, hors coût fixe de l'abonnement"
@@ -378,4 +378,4 @@ class depenses_electricite_variables(Variable):
         depenses_electricite_variables = depenses_electricite - depenses_electricite_tarif_fixe
         depenses_electricite_variables = numpy.maximum(depenses_electricite_variables, 0)
 
-        return period, depenses_electricite_variables
+        return depenses_electricite_variables

@@ -1,5 +1,6 @@
 - name: "DOM"
   period: "2011"
+  absolute_error_margin: .1
   input_variables:
     zeat: 0
   output_variables:
@@ -7,6 +8,7 @@
 
 - name: "Paris"
   period: "2005"
+  absolute_error_margin: .1
   input_variables:
     zeat: 1
   output_variables:

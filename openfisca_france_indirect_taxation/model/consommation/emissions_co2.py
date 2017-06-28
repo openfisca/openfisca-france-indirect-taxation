@@ -6,7 +6,7 @@ from __future__ import division
 from openfisca_france_indirect_taxation.model.base import * # noqa analysis:ignore
 
 
-class emissions_CO2_carburants(Variable):
+class emissions_CO2_carburants(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2"
@@ -20,10 +20,10 @@ class emissions_CO2_carburants(Variable):
             simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
         emissions = quantites_diesel * emissions_diesel + quantites_essence * emissions_essence  # Source : Ademe
 
-        return period, emissions
+        return emissions
 
 
-class emissions_CO2_gaz(Variable):
+class emissions_CO2_gaz(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2"
@@ -34,10 +34,10 @@ class emissions_CO2_gaz(Variable):
             simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz
         emissions = quantites_gaz * emissions_gaz
 
-        return period, emissions
+        return emissions
 
 
-class emissions_CO2_electricite(Variable):
+class emissions_CO2_electricite(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Emissions de CO2 des ménages via leur consommation d'électricité, en kg de CO2"
@@ -48,4 +48,4 @@ class emissions_CO2_electricite(Variable):
             simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_electricite
         emissions = quantites_eletricite * emissions_electricite
 
-        return period, emissions
+        return emissions

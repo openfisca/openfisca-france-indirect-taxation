@@ -34,13 +34,13 @@ def generate_postes_variables(tax_benefit_system):
         class_name = u"poste_{}".format(slugify(unicode(code_coicop), separator = u'_'))
         log.info(u'Creating variable {} with label {}'.format(class_name, label.decode('utf-8')))
         # Trick to create a class with a dynamic name.
-        type(class_name.encode('utf-8'), (Variable,), dict(
+        type(class_name.encode('utf-8'), (YearlyVariable,), dict(
             column = FloatCol,
             entity = Menage,
             label = label.decode('utf-8'),
             ))
         tax_benefit_system.add_variable(
-            type(class_name.encode('utf-8'), (Variable,), dict(
+            type(class_name.encode('utf-8'), (YearlyVariable,), dict(
                 column = FloatCol,
                 entity = Menage,
                 label = label.decode('utf-8'),
@@ -80,7 +80,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
                         year_stop = year_stop
                         )
 
-                    dated_function_name = u"function_{year_start}_{year_stop}".format(
+                    dated_function_name = u"formula_{year_start}".format(
                         year_start = year_start, year_stop = year_stop)
                     log.info(u'Creating fiscal category {} ({}-{}) with the following products {}'.format(
                         categorie_fiscale, year_start, year_stop, postes_coicop))
@@ -106,7 +106,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
             )
         definitions_by_name.update(functions_by_name)
         tax_benefit_system.add_variable(
-            type(class_name.encode('utf-8'), (Variable,), definitions_by_name)
+            type(class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
             )
         del definitions_by_name
 
@@ -130,7 +130,7 @@ def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = 
             taux_by_categorie_fiscale = taux_by_categorie_fiscale,
             )
 
-        functions_by_name = dict(function = dated_func)
+        functions_by_name = dict(formula = dated_func)
         if reform_key is None:
             definitions_by_name = dict(
                 column = FloatCol,
@@ -139,12 +139,12 @@ def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = 
                 )
             definitions_by_name.update(functions_by_name)
             tax_benefit_system.add_variable(
-                type(class_name.encode('utf-8'), (Variable,), definitions_by_name)
+                type(class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
                 )
         else:
             definitions_by_name = functions_by_name
             tax_benefit_system.update_variable(
-                type(class_name.encode('utf-8'), (Variable,), definitions_by_name)
+                type(class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
                 )
 
         del definitions_by_name

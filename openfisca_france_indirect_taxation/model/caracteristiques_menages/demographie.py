@@ -31,46 +31,41 @@ import numpy
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
-class age(Variable):
+class age(YearlyVariable):
     column = AgeCol
     entity = Individu
     label = u"Age de l'individu"
 
     def formula(self, simulation, period):
         birth = simulation.calculate('birth', period)
-        return period, (numpy.datetime64(period.date) - birth).astype('timedelta64[Y]')
+        return (numpy.datetime64(period.date) - birth).astype('timedelta64[Y]')
 
 
-class agepr(Variable):
+class agepr(YearlyVariable):
     column = AgeCol
     entity = Individu
-    is_permanent = True
     label = u"Age personne de référence"
 
 
-class birth(Variable):
+class birth(YearlyVariable):
     column = DateCol
     entity = Individu
-    is_permanent = True
     label = u"Date de naissance"
 
 
-class nadultes(Variable):
+class nadultes(YearlyVariable):
     column = IntCol
     entity = Individu
-    is_permanent = True
     label = u"Nombre d'adultes dans le ménage"
 
 
-class nenfants(Variable):
+class nenfants(YearlyVariable):
     column = IntCol
     entity = Individu
-    is_permanent = True
     label = u"Nombre d'enfants dans le ménage"
 
 
-class role_menage(Variable):
+class role_menage(YearlyVariable):
     column = IntCol
     entity = Individu
-    is_permanent = True
     label = u"Rôle dans le ménage"
