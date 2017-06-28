@@ -2,7 +2,7 @@
 
 * Global estimates
 clear
-insheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_frame_energy_no_alime_all_years.csv", delimiter(",")
+insheet using "C:\Users\t.douenne\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_frame_energy_no_alime_all_years.csv", delimiter(",")
 tostring ident_men, replace format(%17.0g)
 replace w1 = . if w1 == 0
 
@@ -13,7 +13,7 @@ aidsills_elas
 
 * Estimates on rural households
 clear
-insheet using "C:\Users\thomas.douenne\Documents\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_frame_energy_no_alime_all_years.csv", delimiter(",")
+insheet using "C:\Users\t.douenne\GitHub\openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\assets\quaids\data_frame_energy_no_alime_all_years.csv", delimiter(",")
 tostring ident_men, replace format(%17.0g)
 replace w1 = . if w1 == 0
 

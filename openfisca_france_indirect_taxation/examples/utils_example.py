@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
 
-import openfisca_france_indirect_taxation
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.surveys import get_input_data_frame
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
@@ -25,9 +25,8 @@ def create_survey_scenario(year = None):
 
     assert year is not None
     input_data_frame = get_input_data_frame(year)
-    TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
 
-    tax_benefit_system = TaxBenefitSystem()
+    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
     survey_scenario = SurveyScenario().init_from_data_frame(
         input_data_frame = input_data_frame,
         tax_benefit_system = tax_benefit_system,
@@ -42,9 +41,8 @@ def simulate(simulated_variables, year):
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
     input_data_frame = get_input_data_frame(year)
-    TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
 
-    tax_benefit_system = TaxBenefitSystem()
+    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
     survey_scenario = SurveyScenario().init_from_data_frame(
         input_data_frame = input_data_frame,
         tax_benefit_system = tax_benefit_system,
@@ -65,9 +63,8 @@ def simulate_df_calee_by_grosposte(simulated_variables, year):
     '''
     input_data_frame = get_input_data_frame(year)
     input_data_frame_calee = build_df_calee_on_grospostes(input_data_frame, year, year)
-    TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
 
-    tax_benefit_system = TaxBenefitSystem()
+    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
     survey_scenario = SurveyScenario().init_from_data_frame(
         input_data_frame = input_data_frame_calee,
         tax_benefit_system = tax_benefit_system,
@@ -88,9 +85,8 @@ def simulate_df_calee_on_ticpe(simulated_variables, year):
     '''
     input_data_frame = get_input_data_frame(year)
     input_data_frame_calee = build_df_calee_on_ticpe(input_data_frame, year, year)
-    TaxBenefitSystem = openfisca_france_indirect_taxation.init_country()
 
-    tax_benefit_system = TaxBenefitSystem()
+    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
     survey_scenario = SurveyScenario().init_from_data_frame(
         input_data_frame = input_data_frame_calee,
         tax_benefit_system = tax_benefit_system,
