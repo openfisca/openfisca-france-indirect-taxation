@@ -10,7 +10,7 @@ import pkg_resources
 
 from openfisca_core.reforms import Reform
 from openfisca_core.columns import FloatCol
-from openfisca_core.variables import Variable
+from openfisca_france_indirect_taxation.variables import YearlyVariable
 
 
 from openfisca_france_indirect_taxation.model.base import get_legislation_data_frames, Menage
