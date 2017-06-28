@@ -22,7 +22,7 @@ def build_reform(tax_benefit_system):
         reference = tax_benefit_system,
         )
 
-    class depenses_diesel_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_diesel_ajustees_taxe_carbone(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Dépenses en diesel après réaction à la réforme - taxe carbone"
@@ -38,7 +38,7 @@ def build_reform(tax_benefit_system):
             return period, depenses_diesel_ajustees_taxe_carbone
 
 
-    class depenses_electricite_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_electricite_ajustees_taxe_carbone(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Dépenses en électricité après réaction à la réforme - taxe carbone"
@@ -66,7 +66,7 @@ def build_reform(tax_benefit_system):
             return period, depenses_electricite_ajustees
 
 
-    class depenses_essence_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_essence_ajustees_taxe_carbone(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Dépenses en essence après réaction à la réforme - taxe carbone"
@@ -82,7 +82,7 @@ def build_reform(tax_benefit_system):
             return period, depenses_essence_ajustees_taxe_carbone
 
 
-    class depenses_fioul_domestique_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_fioul_domestique_ajustees_taxe_carbone(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Dépenses en fioul domestique après réaction à la réforme - taxe carbone"
@@ -99,7 +99,7 @@ def build_reform(tax_benefit_system):
             return period, depenses_fioul_ajustees_taxe_carbone
 
 
-    class depenses_gaz_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_gaz_ajustees_taxe_carbone(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Dépenses en gaz après réaction à la réforme - taxe carbone"
@@ -119,7 +119,7 @@ def build_reform(tax_benefit_system):
             return period, depenses_gaz_ajustees
 
 
-    class depenses_tva_taux_plein_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_tva_taux_plein_ajustees_taxe_carbone(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme - taxe carbone"
@@ -135,7 +135,7 @@ def build_reform(tax_benefit_system):
             return period, depenses_tva_taux_plein_ajustees
 
 
-    class depenses_tva_taux_plein_bis_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_tva_taux_plein_bis_ajustees_taxe_carbone(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Dépenses sur les biens assujetis à la TVA à taux plein bis après réaction à la réforme - taxe carbone"
@@ -153,7 +153,7 @@ def build_reform(tax_benefit_system):
             return period, depenses_tva_taux_plein_bis_ajustees
 
 
-    class depenses_tva_taux_reduit_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_tva_taux_reduit_ajustees_taxe_carbone(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Dépenses sur les biens assujetis à la TVA à taux reduit après réaction à la réforme - taxe carbone"
@@ -169,7 +169,7 @@ def build_reform(tax_benefit_system):
             return period, depenses_tva_taux_reduit_ajustees
 
 
-    class depenses_tva_taux_super_reduit_ajustees_taxe_carbone(Reform.Variable):
+    class depenses_tva_taux_super_reduit_ajustees_taxe_carbone(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Dépenses sur les biens assujetis à la TVA à taux super reduit après réaction à la réforme - taxe carbone"
@@ -185,7 +185,7 @@ def build_reform(tax_benefit_system):
             return period, depenses_tva_taux_super_reduit_ajustees
 
 
-    class diesel_ticpe(Reform.Variable):
+    class diesel_ticpe(Variable):
         label = u"Calcul du montant de TICPE sur le diesel après réforme"
         reference = ticpe.diesel_ticpe
 
@@ -222,7 +222,7 @@ def build_reform(tax_benefit_system):
             return period, montant_diesel_ticpe_ajuste
 
 
-    class emissions_CO2_carburants(Reform.Variable):
+    class emissions_CO2_carburants(Variable):
         label = u"Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
         reference = emissions_co2.emissions_CO2_carburants
 
@@ -241,7 +241,7 @@ def build_reform(tax_benefit_system):
             return period, emissions_ajustees
 
 
-    class emissions_CO2_energies(Reform.Variable):
+    class emissions_CO2_energies(Variable):
         label = u"Emissions de CO2 des ménages via leur conso d'énergies après taxe carbone, en kg de CO2"
         reference = emissions_co2.emissions_CO2_energies
 
@@ -259,7 +259,7 @@ def build_reform(tax_benefit_system):
             return period, emissions_energies_ajustees
 
 
-    class emissions_CO2_electricite(Reform.Variable):
+    class emissions_CO2_electricite(Variable):
         label = u"Emissions de CO2 des ménages via leur consommation d'électricité après réforme, en kg de CO2"
         reference = emissions_co2.emissions_CO2_electricite
 
@@ -272,7 +272,7 @@ def build_reform(tax_benefit_system):
             return period, emissions_ajustees
 
 
-    class emissions_CO2_fioul_domestique(Reform.Variable):
+    class emissions_CO2_fioul_domestique(Variable):
         label = u"Emissions de CO2 des ménages via leur consommation de fioul après réforme, en kg de CO2"
         reference = emissions_co2.emissions_CO2_fioul_domestique
 
@@ -285,7 +285,7 @@ def build_reform(tax_benefit_system):
             return period, emissions_ajustees
 
 
-    class emissions_CO2_gaz(Reform.Variable):
+    class emissions_CO2_gaz(Variable):
         label = u"Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2"
         reference = emissions_co2.emissions_CO2_gaz
 
@@ -298,7 +298,7 @@ def build_reform(tax_benefit_system):
             return period, emissions_ajustees
 
 
-    class essence_ticpe(Reform.DatedVariable):
+    class essence_ticpe(DatedVariable):
         label = u"Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
         reference = ticpe.essence_ticpe
 
@@ -329,7 +329,7 @@ def build_reform(tax_benefit_system):
             return period, essence_ticpe_ajustee
 
 
-    class fioul_domestique_ticpe(Reform.Variable):
+    class fioul_domestique_ticpe(Variable):
         label = u"Calcul du montant de TICPE sur le fioul domestique après réforme - taxe carbone"
         reference = ticpe.fioul_domestique_ticpe
 
@@ -359,7 +359,7 @@ def build_reform(tax_benefit_system):
             return period, montant_fioul_ticpe_ajuste
 
 
-    class quantites_diesel(Reform.Variable):
+    class quantites_diesel(Variable):
         label = u"Quantités de diesel consommées après la réforme - taxe carbone "
         reference = quantites_energie.quantites_diesel
 
@@ -373,7 +373,7 @@ def build_reform(tax_benefit_system):
             return period, quantites_diesel_ajustees
 
 
-    class quantites_fioul_domestique(Reform.Variable):
+    class quantites_fioul_domestique(Variable):
         label = u"Quantités de fioul domestique consommées après la réforme - taxe carbone "
         reference = quantites_energie.quantites_fioul_domestique
 
@@ -388,7 +388,7 @@ def build_reform(tax_benefit_system):
             return period, quantites_fioul_ajustees
 
 
-    class quantites_gaz_contrat_optimal_ajustees_taxe_carbone(Reform.Variable):
+    class quantites_gaz_contrat_optimal_ajustees_taxe_carbone(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Quantités de gaz consommées après la réforme - taxe carbone"
@@ -406,7 +406,7 @@ def build_reform(tax_benefit_system):
             return period, quantites_gaz_ajustees
 
 
-    class quantites_electricite_selon_compteur_ajustees_taxe_carbone(Reform.Variable):
+    class quantites_electricite_selon_compteur_ajustees_taxe_carbone(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Quantités d'électricité consommées après la réforme - taxe carbone"
@@ -432,7 +432,7 @@ def build_reform(tax_benefit_system):
             return period, quantites_electricite_ajustees
 
 
-    class quantites_sp_e10(Reform.Variable):
+    class quantites_sp_e10(Variable):
         label = u"Quantités consommées de sans plomb e10 par les ménages après réforme - taxe carbone"
         reference = quantites_energie.quantites_sp_e10
 
@@ -447,7 +447,7 @@ def build_reform(tax_benefit_system):
             return period, quantite_sp_e10
 
 
-    class quantites_sp95(Reform.Variable):
+    class quantites_sp95(Variable):
         label = u"Quantités consommées de sans plomb 95 par les ménages après réforme"
         reference = quantites_energie.quantites_sp95
 
@@ -462,7 +462,7 @@ def build_reform(tax_benefit_system):
             return period, quantites_sp95_ajustees
 
 
-    class quantites_sp98(Reform.Variable):
+    class quantites_sp98(Variable):
         label = u"Quantités consommées de sans plomb 98 par les ménages"
         reference = quantites_energie.quantites_sp98
 
@@ -477,7 +477,7 @@ def build_reform(tax_benefit_system):
             return period, quantites_sp98_ajustees
 
 
-    class quantites_super_plombe(Reform.Variable):
+    class quantites_super_plombe(Variable):
         label = u"Quantités consommées de super plombé par les ménages après réforme"
         reference = quantites_energie.quantites_super_plombe
 
@@ -492,8 +492,7 @@ def build_reform(tax_benefit_system):
 
             return period, quantites_super_plombe_ajustees
 
-
-    class quantites_essence(Reform.DatedVariable):
+    class quantites_essence(DatedVariable):
         label = u"Quantités d'essence consommées par les ménages après réforme"
         reference = quantites_energie.quantites_essence
 
@@ -526,8 +525,7 @@ def build_reform(tax_benefit_system):
             quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees + quantites_sp_e10_ajustees)
             return period, quantites_essence_ajustees
 
-
-    class sp_e10_ticpe(Reform.Variable):
+    class sp_e10_ticpe(Variable):
         label = u"Calcul du montant de la TICPE sur le SP E10 après réforme"
         reference = ticpe.sp_e10_ticpe
 
@@ -562,8 +560,7 @@ def build_reform(tax_benefit_system):
 
             return period, montant_sp_e10_ticpe_ajuste
 
-
-    class sp95_ticpe(Reform.Variable):
+    class sp95_ticpe(Variable):
         label = u"Calcul du montant de TICPE sur le sp_95 après réforme"
         reference = ticpe.sp95_ticpe
 
@@ -599,8 +596,7 @@ def build_reform(tax_benefit_system):
 
             return period, montant_sp95_ticpe_ajuste
 
-
-    class sp98_ticpe(Reform.Variable):
+    class sp98_ticpe(Variable):
         label = u"Calcul du montant de TICPE sur le sp_98 après réforme"
         reference = ticpe.sp98_ticpe
 
@@ -636,8 +632,7 @@ def build_reform(tax_benefit_system):
 
             return period, montant_sp98_ticpe_ajuste
 
-
-    class super_plombe_ticpe(Reform.Variable):
+    class super_plombe_ticpe(Variable):
         label = u"Calcul du montant de la TICPE sur le super plombé après réforme"
         reference = ticpe.super_plombe_ticpe
 
@@ -668,8 +663,7 @@ def build_reform(tax_benefit_system):
 
             return period, montant_super_plombe_ticpe_ajuste
 
-
-    class taxe_electricite(Reform.Variable):
+    class taxe_electricite(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Recettes de la taxe carbone sur la consommation d'électricité - ceteris paribus"
@@ -682,8 +676,7 @@ def build_reform(tax_benefit_system):
 
             return period, recettes_electricite
 
-
-    class taxe_gaz(Reform.Variable):
+    class taxe_gaz(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Recettes de la taxe carbone sur la consommation de gaz - ceteris paribus"
@@ -696,8 +689,7 @@ def build_reform(tax_benefit_system):
 
             return period, recettes_gaz
 
-
-    class ticpe_totale(Reform.Variable):
+    class ticpe_totale(Variable):
         label = u"Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
         reference = ticpe.ticpe_totale
 
@@ -708,8 +700,7 @@ def build_reform(tax_benefit_system):
 
             return period, ticpe_totale_ajustee
 
-
-    class total_taxes_energies(Reform.Variable):
+    class total_taxes_energies(Variable):
         label = u"Différence entre les contributions aux taxes sur l'énergie après la taxe carbone"
         reference = ticpe.total_taxes_energies
 
@@ -726,8 +717,7 @@ def build_reform(tax_benefit_system):
 
             return period, total
 
-
-    class tva_total(Reform.Variable):
+    class tva_total(Variable):
         label = u"Différence de contribution sur la TVA après réaction à la réforme - taxes carburants"
         reference = tva.tva_total
 
@@ -741,8 +731,7 @@ def build_reform(tax_benefit_system):
 
             return period, total
 
-
-    class tva_taux_plein(Reform.Variable):
+    class tva_taux_plein(Variable):
         label = u"Contribution sur la TVA à taux plein après réaction à la réforme - taxe carbone"
         reference = tva.tva_taux_plein
 
@@ -756,8 +745,7 @@ def build_reform(tax_benefit_system):
 
             return period, tax_from_expense_including_tax(depenses_tva_taux_plein_ajustees, nouveau_taux_plein)
 
-
-    class tva_taux_plein_bis(Reform.Variable):
+    class tva_taux_plein_bis(Variable):
         column = FloatCol
         entity_class = Menages
         label = u"Contribution sur la TVA à taux plein après réaction à la réforme - taxe carbone"
@@ -773,8 +761,7 @@ def build_reform(tax_benefit_system):
 
             return period, tax_from_expense_including_tax(depenses_tva_taux_plein_ajustees, nouveau_taux_plein)
 
-
-    class tva_taux_reduit(Reform.Variable):
+    class tva_taux_reduit(Variable):
         label = u"Contribution sur la TVA à taux reduit après réaction à la réforme - taxe carbone"
         reference = tva.tva_taux_reduit
 
@@ -789,8 +776,7 @@ def build_reform(tax_benefit_system):
 
             return period, tax_from_expense_including_tax(depenses_tva_taux_reduit_ajustees, nouveau_taux_reduit)
 
-
-    class tva_taux_super_reduit(Reform.Variable):
+    class tva_taux_super_reduit(Variable):
         label = u"Contribution sur la TVA à taux super reduit après réaction à la réforme - taxe carbone"
         reference = tva.tva_taux_super_reduit
 
@@ -813,7 +799,6 @@ def build_reform(tax_benefit_system):
 
 # Réforme selon le prix du carbone : prix fixé à 50 euros par tonne de CO2. En utilisant nos données
 # d'équivalence entre consommation et émission, on met en place les montants de taxe suivants :
-
 
 def modify_legislation_json(reference_legislation_json_copy):
     reform_legislation_subtree = {

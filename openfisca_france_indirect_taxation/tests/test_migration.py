@@ -8,6 +8,7 @@ from openfisca_france_indirect_taxation.examples.transports.plot_legislation imp
 
 from openfisca_france_indirect_taxation.examples.master_thesis import (
     taux_effort_ticpe
+
     )
 
 
