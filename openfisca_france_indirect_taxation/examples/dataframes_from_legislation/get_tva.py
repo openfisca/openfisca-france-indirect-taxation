@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
-from pandas import concat
 
 import openfisca_france_indirect_taxation
 

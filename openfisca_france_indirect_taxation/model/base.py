@@ -36,7 +36,6 @@ from openfisca_france_indirect_taxation.variables import YearlyVariable
 #     ]
 
 
-
 tva_by_categorie_primaire = dict(
     biere = 'tva_taux_plein',
     vin = 'tva_taux_plein',

@@ -89,7 +89,6 @@ class zeat(YearlyVariable):
             u"Sud-Ouest",
             u"Centre-Est",
             u"Méditerrannée"], start = 0)
-    )
+        )
     entity = Menage
     label = u"Zone d'étude et d'aménagement du territoire"
-

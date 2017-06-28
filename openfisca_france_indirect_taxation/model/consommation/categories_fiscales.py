@@ -5,8 +5,6 @@ from __future__ import division
 
 import logging
 
-from biryani.strings import slugify
-
 
 from openfisca_france_indirect_taxation.model.base import *
 
@@ -21,7 +19,6 @@ codes_coicop_data_frame = None
 def generate_variables(tax_benefit_system, categories_fiscales = None, reform_key = None):
     assert categories_fiscales is not None
     reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
-    removed_categories = set()
     completed_categories_fiscales = insert_tva(categories_fiscales)
 
     if reform_key:
