@@ -6,10 +6,10 @@ from openfisca_core.tools import assert_near
 
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from ..reforms import (
+    cce_2015_in_2014,
     rattrapage_diesel,
     taxe_carbone,
     contribution_climat_energie_reforme,
-    cce_2015_in_2014,
     cce_2016_in_2014,
     )
 
@@ -30,11 +30,11 @@ tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 # Reforms cache, used by long scripts like test_yaml.py
 # The reforms commented haven't been adapted to the new core API yet.
 reform_list = {
+    'cce_2015_in_2014': cce_2015_in_2014.cce_2015_in_2014,
+    'cce_2016_in_2014': cce_2016_in_2014.cce_2016_in_2014,
     'rattrapage_diesel': rattrapage_diesel.rattrapage_diesel,
-    # 'taxe_carbone': taxe_carbone.build_reform,
-    # 'contribution_climat_energie_reforme': contribution_climat_energie_reforme.build_reform,
-    # 'cce_2015_in_2014': cce_2015_in_2014.build_reform,
-    # 'cce_2016_in_2014': cce_2016_in_2014.build_reform,
+    'taxe_carbone': taxe_carbone.taxe_carbone,
+    'contribution_climat_energie_reforme': contribution_climat_energie_reforme.contribution_climat_energie_reforme,
     }
 
 reform_by_full_key = {}

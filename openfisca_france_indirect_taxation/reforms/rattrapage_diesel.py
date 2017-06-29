@@ -595,10 +595,10 @@ class tva_total(Variable):
 
         return period, total
 
+        
 class rattrapage_diesel(Reform):
     key = 'rattrapage_diesel',
     name = u"Réforme de l'imposition indirecte des carburants",
-
 
 
     def apply(self):
@@ -606,7 +606,30 @@ class rattrapage_diesel(Reform):
         variables = [
             depenses_diesel_ajustees_rattrapage_diesel,
             depenses_essence_ajustees_rattrapage_diesel,
-            # TODO add other variables
+            depenses_tva_taux_plein_ajustees_rattrapage_diesel,
+            depenses_tva_taux_plein_bis_ajustees_rattrapage_diesel,
+            depenses_tva_taux_reduit_ajustees_rattrapage_diesel,
+            depenses_tva_taux_super_reduit_ajustees_rattrapage_diesel,
+            diesel_ticpe,
+            emissions_CO2_carburants,
+            essence_ticpe,
+            quantites_diesel,
+            quantites_sp_e10,
+            quantites_sp95,
+            quantites_sp98,
+            quantites_super_plombe,
+            quantites_essence,
+            sp_e10_ticpe,
+            sp95_ticpe,
+            sp98_ticpe,
+            super_plombe_ticpe,
+            ticpe_totale,
+            tva_taux_plein,
+            tva_taux_plein_bis,
+            tva_taux_reduit,
+            tva_taux_super_reduit,
+            tva_total,
             ]
         for variable in variables:
             self.add_variable(variable)
+            

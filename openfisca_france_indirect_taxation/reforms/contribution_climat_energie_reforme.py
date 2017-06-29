@@ -2,19 +2,8 @@
 
 from __future__ import division
 
-from openfisca_core import reforms
+from openfisca_core.reforms import Reform, update_legislation
 
-
-def build_reform(tax_benefit_system):
-    Reform = reforms.make_reform(
-        key = 'contribution_climat_energie_reforme',
-        name = u"Réforme de la contribution climat energie anticipée simulée sur les données de 2014",
-        reference = tax_benefit_system,
-        )
-
-    reform = Reform()
-    reform.modify_legislation_json(modifier_function = modify_legislation_json)
-    return reform
 
 # Montants de taxe prévus par la loi Contribution climat-énergie. 7€ en 2014, 14,5€ en 2015, 22€ en 2016,
 # 30,5€ en 2017, 39€ en 2018 et 47.5€ en 2019 En utilisant nos données d'équivalence entre consommation et émission,
@@ -137,3 +126,17 @@ def modify_legislation_json(reference_legislation_json_copy):
 
     reference_legislation_json_copy['children']['contribution_climat_energie_reforme'] = reform_legislation_subtree
     return reference_legislation_json_copy
+
+    
+    
+class contribution_climat_energie_reforme(Reform):
+    key = 'contribution_climat_energie_reforme',
+    name = u"Réforme de la contribution climat energie anticipée simulée sur les données de 2014",
+
+
+    def apply(self):
+        self.modify_legislation_json(modifier_function = modify_legislation_json)
+        variables = [
+            ]
+        for variable in variables:
+            self.add_variable(variable)
