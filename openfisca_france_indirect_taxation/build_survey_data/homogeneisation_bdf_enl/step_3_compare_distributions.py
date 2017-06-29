@@ -6,9 +6,16 @@ from __future__ import division
 # We compare distribution of variables in the two surveys and assess if they need a correction or not to be homogenous
 
 from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_enl.step_2_homogenize_variables import \
-    data_bdf, data_enl
+    homogenize_variables_definition_bdf_enl
+
+
+data = homogenize_variables_definition_bdf_enl()    
+data_enl = data[0]
+data_bdf = data[1]
+
 
 # aba - aides au logement
+# 1 = Oui, 2 = Non, 0 = ?
 for i in [0, 1, 2]:
     data_bdf['pondmen_{}'.format(i)] = 0
     data_bdf['pondmen_{}'.format(i)].loc[data_bdf.aba == i] = data_bdf['pondmen']
@@ -24,7 +31,7 @@ for i in [0, 1, 2]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# fonctionne plutôt bien
+# fonctionne bien
 
 
 # amr - montant des aides au logement
@@ -35,10 +42,13 @@ print (amr_enl['amr'] * amr_enl['pondmen']).sum() / amr_enl['pondmen'].sum()
 
 print data_bdf['amr'].quantile([0.8, 0.85, .9, 0.95, 0.99, 0.995, 0.999])
 print data_enl['amr'].quantile([0.8, 0.85, .9, 0.95, 0.99, 0.995, 0.999])
-# fonctionne moyennement
+# fonctionne moyennement : plus d'aide au logement dans l'ENL
 
 
 # cataeu - catégorie de la commune
+# 111 : grand pôle, 112 : couronne d'un GP, 120: multipolarisé grande aire urbaine,
+# 211 : moyen pôle, 212 : couronne MP, 221 : petit pôle, 222 : couronne PP,
+# 300 : autre multipolarisé, 400 : isolée
 for i in [111, 112, 120, 211, 212, 221, 222, 300, 400]: 
     data_bdf['pondmen_{}'.format(i)] = 0
     data_bdf['pondmen_{}'.format(i)].loc[data_bdf.cataeu == i] = data_bdf['pondmen']
@@ -62,7 +72,7 @@ print (data_bdf['mfac_eau1_d'] * data_bdf['pondmen']).sum() / data_bdf['pondmen'
 print (data_enl['mfac_eau1_d'] * data_enl['pondmen']).sum() / data_enl['pondmen'].sum()
 
 print data_enl['mfac_eau1_d'].mean()
-# fonctionne mal
+# fonctionne mal, dépenses beaucoup plus importantes dans ENL
 
 
 # poste_coicop_45(1,2,3) - dépenses d'électricité, de gaz et de fioul domestique
@@ -84,7 +94,7 @@ for i in [1, 2, 3]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Plutôt correct
+# Fonctionne plutôt bien
 
 
 # poste_coicop_4511 - déclaration jointe gaz-électricité
@@ -105,7 +115,7 @@ print (part_bdf * 100), 'BdF'
 print (part_enl * 100), 'ENL'
 print ' '
 del part_bdf, part_enl
-# Très mauvaises performances !
+# Très mauvaises performances : beaucoup plus de déclarations jointes dans BdF
 
 
 # nbh1 - nombre d'enfants vivant hors du domicile
@@ -124,9 +134,9 @@ for i in [0, 1, 2, 3, 4, 5]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
+    # Fonctionne très bien
 
-
-# mchof_d
+# mchof_d - montant annuel des dépenses en chauffage collectif
 print (data_bdf['mchof_d'] * data_bdf['pondmen']).sum() / data_bdf['pondmen'].sum()
 print (data_enl['mchof_d'] * data_enl['pondmen']).sum() / data_enl['pondmen'].sum()
 # Catastrophique...
@@ -148,7 +158,7 @@ for i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Bonnes performances
+    # Très Bonnes performances
 
 
 # surfhab_d - surface habitable en m²
@@ -173,7 +183,7 @@ for i in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Bonnes performances
+    # Bonnes performances
 
 # ancons - année de construction
 for i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
@@ -191,7 +201,7 @@ for i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Petit problème sur 8, 9 et 10 + problème des 99 de BdF.
+    # Petit problème sur 8, 9 et 10 + problème des 99 de BdF.
 
 
 # mloy_d - montant mensuel du loyer hors charges
@@ -224,7 +234,7 @@ for i in range(11,87):
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# 13 et 44 produisent des mauvais résultats, pour le reste ça va
+    # 13 et 44 produisent des mauvais résultats, pour le reste ça va
 
 
 
@@ -244,7 +254,7 @@ for i in range(11,87):
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# 12, 13, 23 en particulier sont mauvais, pas mal dans l'ensemble
+    # 12, 13, 23 en particulier sont mauvais, pas mal dans l'ensemble
 
 
 # dip14pr - diplôme de la personne de référence
@@ -263,7 +273,7 @@ for i in [0, 10, 12, 20, 30, 31, 33, 41, 42, 43, 44, 50, 60, 70, 71]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Bien
+    # Bien
 
 
 # nenfants - nombre d'enfants à charge
@@ -282,7 +292,7 @@ for i in [0, 1, 2, 3, 4, 5, 6]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Bon dans l'ensemble
+    # Bon dans l'ensemble
 
 
 # nactifs - nombre d'actifs
@@ -301,7 +311,7 @@ for i in [0, 1, 2, 3, 4]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Super
+    # Super
 
 
 # revtot - revenu total du ménage
@@ -326,7 +336,7 @@ for i in [1, 2, 3, 4, 5, 6, 7]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Plutôt bien
+    # Plutôt bien
 
 
 # situacj - occupation principale de la personne de référence
@@ -345,7 +355,7 @@ for i in [1, 2, 3, 4, 5, 6, 7]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Bien
+    # Bien
     
 
 # ocde10 - unités de consommations
@@ -364,7 +374,7 @@ for i in [1, 1.3, 1.5, 1.6, 1.8, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Bien
+    # Bien
 
 
 # tau - taille de l'aire urbaine par tranche
@@ -383,7 +393,7 @@ for i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Quelques petits soucis (2,5,6) mais ça va
+    # Quelques petits soucis (2,5,6) mais ça va
 
 
 # tuu - taille de l'unité urbaine par tranche
@@ -402,7 +412,7 @@ for i in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Pas mal
+    # Pas mal
 
 
 # zeat - zone d'étude et d'aménagement du territoire
