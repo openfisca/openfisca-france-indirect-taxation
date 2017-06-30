@@ -3,31 +3,31 @@
 from __future__ import division
 
 
-import logging
-import os
-import pandas
-import numpy
+#import logging
+#import os
+#import pandas
+#import numpy
 
-from matplotlib import pyplot
+#from matplotlib import pyplot
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
-from openfisca_survey_manager.surveys import Survey
+#from openfisca_survey_manager.surveys import Survey
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
-from openfisca_france_indirect_taxation.build_survey_data.utils \
-    import find_nearest_inferior
+#from openfisca_france_indirect_taxation.build_survey_data.utils \
+#    import find_nearest_inferior
 
 from openfisca_survey_manager.temporary import TemporaryStore
 
-from openfisca_france_indirect_taxation.build_survey_data.utils \
-    import ident_men_dtype
+#from openfisca_france_indirect_taxation.build_survey_data.utils \
+#    import ident_men_dtype
 
 temporary_store = TemporaryStore.create(file_name = 'logement_tmp')
 
 
-from openfisca_survey_manager.temporary import temporary_store_decorator
+#from openfisca_survey_manager.temporary import temporary_store_decorator
 
-from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
+#from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
 
 def load_data_bdf_enl():
     # Load ENL data :
@@ -56,18 +56,19 @@ def load_data_bdf_enl():
     # Set variables :
     
     variables_homogeneisation_bdf = [
-        'agepr',
-        'aidlog1',
+        'agepr', # âge de la pr
+        'aidlog1', # aides au logement
         'aidlog2',
+        'aise', # à l'aise avec le budget
         'ancons',
-        'cataeu',
+        'cataeu', # type de commune
         'chaufp',
-        'cs42pr',
+        'cs42pr', # catégorie socio-pro
         'cs42cj',
-        'dip14cj',
+        'dip14cj', # diplômes
         'dip14pr',
         #'h_trans1',
-        'htl',
+        'htl', # type de logement
         'mall1',
         'mall2',
         'mchof',
@@ -80,20 +81,20 @@ def load_data_bdf_enl():
         'nbphab',
         'nactifs',
         'nenfants',
-        'ocde10',
+        'ocde10', # nb unités de conso
         'pondmen',
-        'poste_coicop_451',
+        'poste_coicop_451', # dépenses énergies logement
         'poste_coicop_4511',
         'poste_coicop_452',
         'poste_coicop_453',
-        'revtot',
-        'situapr',
+        'revtot', # revenu total
+        'situapr', # situation pro
         'situacj',
-        'surfhab_d',
+        'surfhab_d', # surface habitable
         'tau',
         'tuu',
         'typmen',
-        'zeat',
+        'zeat', # zone climatique
         ]
     
     variables_homogeneisation_enl = [
@@ -108,14 +109,30 @@ def load_data_bdf_enl():
         'coml3',
         'dom',
         'enfhod',
-        'lchauf',
-        'gmoy1',
-        'gtt1',
+        'gchauf_1', #raisons du froid dans le logement
+        'gchauf_2',
+        'gchauf_3',
+        'gchauf_4',
+        'gchauf_5',
+        'gchauf_6',
+        'gchauf_7',
+        'gchaufs_1', #solutions contre le froid
+        'gchaufs_2',
+        'gchaufs_3',
+        'gchaufs_4',
+        'gchaufs_5',
+        'gmoy1', #moyen utilisé trajet travail
+        'gmur', #isolation thermique murs
+        'gtoit2', #isolation thermique toit
+        'gtt1', #durée trajet domicile-travail
+        'gvit1', #majorité double vitrage
+        'gvit1b', #fenêtres laissent passer l'air
         'hnph1',
         'hsh1',
         'htl',
         'iaat',
         'idlog',
+        'lchauf',
         'lmlm',
         'mag',
         'mcs',
@@ -140,7 +157,6 @@ def load_data_bdf_enl():
         'igreflog',
         'ndip14',
         ]
-    
     
     # Keep relevant variables :
     

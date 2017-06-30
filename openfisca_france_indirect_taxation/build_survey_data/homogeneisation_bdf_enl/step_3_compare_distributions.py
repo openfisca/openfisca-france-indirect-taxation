@@ -4,6 +4,7 @@ from __future__ import division
 
 
 # We compare distribution of variables in the two surveys and assess if they need a correction or not to be homogenous
+# This is an arbitrary decision based on a visual comparison.
 
 from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_enl.step_2_homogenize_variables import \
     homogenize_variables_definition_bdf_enl
@@ -31,7 +32,7 @@ for i in [0, 1, 2]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# fonctionne bien
+    # fonctionne bien
 
 
 # amr - montant des aides au logement
@@ -42,6 +43,7 @@ print (amr_enl['amr'] * amr_enl['pondmen']).sum() / amr_enl['pondmen'].sum()
 
 print data_bdf['amr'].quantile([0.8, 0.85, .9, 0.95, 0.99, 0.995, 0.999])
 print data_enl['amr'].quantile([0.8, 0.85, .9, 0.95, 0.99, 0.995, 0.999])
+del amr_bdf, amr_enl
 # fonctionne moyennement : plus d'aide au logement dans l'ENL
 
 
@@ -64,7 +66,7 @@ for i in [111, 112, 120, 211, 212, 221, 222, 300, 400]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# fonctionne plutôt bien
+    # fonctionne plutôt bien
 
 
 # mfac_eau1_d - montant annuel des dépenses d'eau, redressé
@@ -94,7 +96,7 @@ for i in [1, 2, 3]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-# Fonctionne plutôt bien
+    # Fonctionne plutôt bien
 
 
 # poste_coicop_4511 - déclaration jointe gaz-électricité
@@ -118,6 +120,30 @@ del part_bdf, part_enl
 # Très mauvaises performances : beaucoup plus de déclarations jointes dans BdF
 
 
+# Dépenses énergies logement
+data_bdf['energies'] = (
+    data_bdf['poste_coicop_4511'] + data_bdf['poste_coicop_451']
+    + data_bdf['poste_coicop_452'] + data_bdf['poste_coicop_453']
+    )
+data_enl['energies'] = (
+    data_enl['coml13'] + data_enl['poste_coicop_451']
+    + data_enl['poste_coicop_452'] + data_enl['poste_coicop_453']
+    )
+print (data_bdf['energies'] * data_bdf['pondmen']).sum() / data_bdf['pondmen'].sum()
+print (data_enl['energies'] * data_enl['pondmen']).sum() / data_enl['pondmen'].sum()
+
+print data_bdf['energies'].quantile([0.8, 0.85, .9, 0.95, 0.99, 0.995, 0.999])
+print data_enl['energies'].quantile([0.8, 0.85, .9, 0.95, 0.99, 0.995, 0.999])
+
+data_bdf_limited = data_bdf.query('energies < 6000')
+data_bdf_limited['energies'].hist(cumulative=True, normed=1, bins=100)
+data_enl_limited = data_enl.query('energies < 6000')
+cumul_enl = data_enl_limited['energies'].hist(cumulative=True, normed=1, bins=100)
+zero_bdf = data_bdf.query('energies == 0')
+zero_enl = data_enl.query('energies == 0')
+# Fonctionne plutôt bien
+
+
 # nbh1 - nombre d'enfants vivant hors du domicile
 for i in [0, 1, 2, 3, 4, 5]:
     data_bdf['pondmen_{}'.format(i)] = 0
@@ -134,7 +160,8 @@ for i in [0, 1, 2, 3, 4, 5]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-    # Fonctionne très bien
+    # Fonctionne très bien (mais variable probablement inutile...)
+
 
 # mchof_d - montant annuel des dépenses en chauffage collectif
 print (data_bdf['mchof_d'] * data_bdf['pondmen']).sum() / data_bdf['pondmen'].sum()
@@ -164,7 +191,10 @@ for i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
 # surfhab_d - surface habitable en m²
 print (data_bdf['surfhab_d'] * data_bdf['pondmen']).sum() / data_bdf['pondmen'].sum()
 print (data_enl['surfhab_d'] * data_enl['pondmen']).sum() / data_enl['pondmen'].sum()
-# Excellent
+
+print data_bdf['surfhab_d'].quantile([0.05, 0.2, 0.4, .6, 0.8, 0.95])
+print data_enl['surfhab_d'].quantile([0.05, 0.2, 0.4, .6, 0.8, 0.95])
+# Très bon en moyenne, mais sans les pondérations les surfaces sont un peu inférieures dans ENL
 
 
 # htl - type de logement
@@ -183,7 +213,8 @@ for i in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-    # Bonnes performances
+    # Assez bonnes performances -> revoir la définition
+
 
 # ancons - année de construction
 for i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
@@ -201,7 +232,7 @@ for i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
     print (part_enl * 100), 'ENL', '{}'.format(i)
     print ' '
     del part_bdf, part_enl
-    # Petit problème sur 8, 9 et 10 + problème des 99 de BdF.
+    # Petit problème sur 8, 9 et 10 + problème des 99 de BdF -> revoir la définition
 
 
 # mloy_d - montant mensuel du loyer hors charges
@@ -215,6 +246,9 @@ print data_enl['mloy_d'].mean()
 # agepr - age de la personne de référence
 print (data_bdf['agepr'] * data_bdf['pondmen']).sum() / data_bdf['pondmen'].sum()
 print (data_enl['agepr'] * data_enl['pondmen']).sum() / data_enl['pondmen'].sum()
+
+print data_bdf['agepr'].quantile([0.05, 0.2, 0.4, .6, 0.8, 0.95])
+print data_enl['agepr'].quantile([0.05, 0.2, 0.4, .6, 0.8, 0.95])
 # Bons résultats
 
 
@@ -235,7 +269,6 @@ for i in range(11,87):
     print ' '
     del part_bdf, part_enl
     # 13 et 44 produisent des mauvais résultats, pour le reste ça va
-
 
 
 # cs42cj - catégorie socioprofessionnelle du conjoint
@@ -317,7 +350,10 @@ for i in [0, 1, 2, 3, 4]:
 # revtot - revenu total du ménage
 print (data_bdf['revtot'] * data_bdf['pondmen']).sum() / data_bdf['pondmen'].sum()
 print (data_enl['revtot'] * data_enl['pondmen']).sum() / data_enl['pondmen'].sum()
-# Très bien
+
+print data_bdf['revtot'].quantile([0.05, 0.2, 0.4, .6, 0.8, 0.95])
+print data_enl['revtot'].quantile([0.05, 0.2, 0.4, .6, 0.8, 0.95])
+# Plutôt bon, mais la distribution de l'ENL est un peu plus dispersée
 
 
 # situapr - occupation principale de la personne de référence
