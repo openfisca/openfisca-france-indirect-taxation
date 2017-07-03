@@ -595,6 +595,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         variables = [
             'agecj',
             'agepr',
+            'aise',
             'coeffuc',
             'cs42pr',
             'cs42cj',
