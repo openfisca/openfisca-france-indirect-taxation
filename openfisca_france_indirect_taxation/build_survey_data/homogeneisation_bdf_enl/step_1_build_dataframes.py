@@ -65,10 +65,12 @@ def load_data_bdf_enl():
         'chaufp',
         'cs42pr', # catégorie socio-pro
         'cs42cj',
+        'decuc',
         'dip14cj', # diplômes
         'dip14pr',
         #'h_trans1',
         'htl', # type de logement
+        'ident_men',
         'mall1',
         'mall2',
         'mchof',
