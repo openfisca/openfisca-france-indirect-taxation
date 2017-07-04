@@ -106,6 +106,7 @@ def load_data_bdf_enl():
         'gchauf_5',
         'gchauf_6',
         'gchauf_7',
+        'gchauf_n', # nombre de raisons du froid
         'gchaufs_1', #solutions contre le froid
         'gchaufs_2',
         'gchaufs_3',

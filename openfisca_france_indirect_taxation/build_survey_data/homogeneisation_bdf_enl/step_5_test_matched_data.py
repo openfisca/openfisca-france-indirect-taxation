@@ -2,10 +2,20 @@
 
 # Dans ce script, on test la qualité de l'appariement.
 
+from __future__ import division
+
+
 import pandas as pd
 
 import os
 import pkg_resources
+
+from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_enl.step_4_clean_data import \
+    clean_data
+
+
+data_enl = clean_data()[0]
+
 
 # Importation de la base de données appariée
 default_config_files_directory = os.path.join(
@@ -22,6 +32,162 @@ data_matched = pd.read_csv(
     )
 
 
+"""
+Test : share of people having trouble with heat in general
+"""
+
+# In total
+print float(len(data_enl.query('gchauf_n != 0'))) / len(data_enl) * 100
+print float(len(data_matched.query('gchauf_n != 0'))) / len(data_matched) * 100
+
+
+# By income decile
+for i in range(1,11):
+    number_enl = len(data_enl.query('decile == {}'.format(i)))
+    number_matched = len(data_matched.query('decile == {}'.format(i)))
+
+    number_enl_gchauf_n = \
+        len(data_enl.query('decile == {}'.format(i)).query('gchauf_n != 0'))
+    number_matched_gchauf_n = \
+        len(data_matched.query('decile == {}'.format(i)).query('gchauf_n != 0'))
+    
+    gchauf_n_enl = (
+        float(number_enl_gchauf_n) /
+        number_enl
+        )
+    gchauf_n_matched = (
+        float(number_matched_gchauf_n) /
+        number_matched
+        )
+    
+    print i, gchauf_n_enl * 100, gchauf_n_matched * 100
+
+
+# By size of urban unit
+for i in range(1,9):
+    number_enl = len(data_enl.query('tuu == {}'.format(i)))
+    number_matched = len(data_matched.query('tuu == {}'.format(i)))
+
+    number_enl_gchauf_n = \
+        len(data_enl.query('tuu == {}'.format(i)).query('gchauf_n != 0'))
+    number_matched_gchauf_n = \
+        len(data_matched.query('tuu == {}'.format(i)).query('gchauf_n != 0'))
+    
+    gchauf_n_enl = (
+        float(number_enl_gchauf_n) /
+        number_enl
+        )
+    gchauf_n_matched = (
+        float(number_matched_gchauf_n) /
+        number_matched
+        )
+    
+    print i, gchauf_n_enl * 100, gchauf_n_matched * 100
+
+    
+"""
+Test : share of people having trouble with heat because it is too expensive
+"""
+
+# In total
+print float(len(data_enl.query('gchauf_3 == 1'))) / len(data_enl) * 100
+print float(len(data_matched.query('gchauf_3 == 1'))) / len(data_matched) * 100
+
+
+# By income decile
+for i in range(1,11):
+    number_enl = len(data_enl.query('decile == {}'.format(i)))
+    number_matched = len(data_matched.query('decile == {}'.format(i)))
+
+    number_enl_gchauf_3 = \
+        len(data_enl.query('decile == {}'.format(i)).query('gchauf_3 == 1'))
+    number_matched_gchauf_3 = \
+        len(data_matched.query('decile == {}'.format(i)).query('gchauf_3 == 1'))
+    
+    gchauf_3_enl = (
+        float(number_enl_gchauf_3) /
+        number_enl
+        )
+    gchauf_3_matched = (
+        float(number_matched_gchauf_3) /
+        number_matched
+        )
+    
+    print i, gchauf_3_enl * 100, gchauf_3_matched * 100
+
+
+# By size of urban unit
+for i in range(1,9):
+    number_enl = len(data_enl.query('tuu == {}'.format(i)))
+    number_matched = len(data_matched.query('tuu == {}'.format(i)))
+
+    number_enl_gchauf_3 = \
+        len(data_enl.query('tuu == {}'.format(i)).query('gchauf_3 == 1'))
+    number_matched_gchauf_3 = \
+        len(data_matched.query('tuu == {}'.format(i)).query('gchauf_3 == 1'))
+    
+    gchauf_3_enl = (
+        float(number_enl_gchauf_3) /
+        number_enl
+        )
+    gchauf_3_matched = (
+        float(number_matched_gchauf_3) /
+        number_matched
+        )
+    
+    print i, gchauf_3_enl * 100, gchauf_3_matched * 100
+    
+
+    
+"""
+Test : share of people having trouble with heat because of bad isolation
+"""
+    
+# By income decile
+for i in range(1,11):
+    number_enl = len(data_enl.query('decile == {}'.format(i)))
+    number_matched = len(data_matched.query('decile == {}'.format(i)))
+
+    number_enl_gchauf_4 = \
+        len(data_enl.query('decile == {}'.format(i)).query('gchauf_4 == 1'))
+    number_matched_gchauf_4 = \
+        len(data_matched.query('decile == {}'.format(i)).query('gchauf_4 == 1'))
+    
+    gchauf_4_enl = (
+        float(number_enl_gchauf_4) /
+        number_enl
+        )
+    gchauf_4_matched = (
+        float(number_matched_gchauf_4) /
+        number_matched
+        )
+    
+    print i, gchauf_4_enl * 100, gchauf_4_matched * 100
+
+
+# By size of urban unit
+for i in range(1,9):
+    number_enl = len(data_enl.query('tuu == {}'.format(i)))
+    number_matched = len(data_matched.query('tuu == {}'.format(i)))
+
+    number_enl_gchauf_4 = \
+        len(data_enl.query('tuu == {}'.format(i)).query('gchauf_4 == 1'))
+    number_matched_gchauf_4 = \
+        len(data_matched.query('tuu == {}'.format(i)).query('gchauf_4 == 1'))
+    
+    gchauf_4_enl = (
+        float(number_enl_gchauf_4) /
+        number_enl
+        )
+    gchauf_4_matched = (
+        float(number_matched_gchauf_4) /
+        number_matched
+        )
+    
+    print i, gchauf_4_enl * 100, gchauf_4_matched * 100
+    
+
+    
 """
 Placebo test for share of revenue spent in energies :
     How well do we do among income deciles, area and age ?
@@ -53,9 +219,3 @@ for i in [25, 35, 45, 55, 65, 75, 85]:
 
     print i, before * 100, after * 100
     del data_age
-
-
-"""
-...
-"""
-    
