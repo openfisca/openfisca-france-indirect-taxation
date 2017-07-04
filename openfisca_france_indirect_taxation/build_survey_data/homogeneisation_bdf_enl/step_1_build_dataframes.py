@@ -1,33 +1,21 @@
 # -*- coding: utf-8 -*-
 
+# Dans ce script on importe les données des enquêtes BdF 2011 et ENL 2013.
+# Pour chacune des deux enquêtes on importe les variables qui seront
+# susceptibles d'êtres utilisées dans l'appariement des bases de données.
+
 from __future__ import division
 
 
-#import logging
-#import os
-#import pandas
-#import numpy
-
-#from matplotlib import pyplot
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
-#from openfisca_survey_manager.surveys import Survey
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
-
-#from openfisca_france_indirect_taxation.build_survey_data.utils \
-#    import find_nearest_inferior
 
 from openfisca_survey_manager.temporary import TemporaryStore
 
-#from openfisca_france_indirect_taxation.build_survey_data.utils \
-#    import ident_men_dtype
 
 temporary_store = TemporaryStore.create(file_name = 'logement_tmp')
 
-
-#from openfisca_survey_manager.temporary import temporary_store_decorator
-
-#from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
 
 def load_data_bdf_enl():
     # Load ENL data :
@@ -55,7 +43,7 @@ def load_data_bdf_enl():
     
     # Set variables :
     
-    variables_homogeneisation_bdf = [
+    variables_menages_bdf = [
         'agepr', # âge de la pr
         'aidlog1', # aides au logement
         'aidlog2',
@@ -99,7 +87,7 @@ def load_data_bdf_enl():
         'zeat', # zone climatique
         ]
     
-    variables_homogeneisation_enl = [
+    variables_menages_enl = [
         'aba',
         'amr',
         'cataeu2010',
@@ -156,15 +144,14 @@ def load_data_bdf_enl():
     
     variables_indiv_enl = [
         'idlog',
-        'igreflog',
+        'igreflog', # = 1 si l'individu est la personne de référence
         'ndip14',
         ]
     
     # Keep relevant variables :
-    
     indiv_enl_keep = input_enl_indiv[variables_indiv_enl]
-    menage_enl_keep = input_enl[variables_homogeneisation_enl]
-    conso_bdf_keep = input_bdf[variables_homogeneisation_bdf]
+    menage_enl_keep = input_enl[variables_menages_enl]
+    conso_bdf_keep = input_bdf[variables_menages_bdf]
     del input_enl_indiv, input_enl, input_bdf
     
     indiv_enl_keep = indiv_enl_keep.query('igreflog == 1')

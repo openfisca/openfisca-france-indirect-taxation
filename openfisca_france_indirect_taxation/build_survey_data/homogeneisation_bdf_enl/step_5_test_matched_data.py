@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
+# Dans ce script, on test la qualité de l'appariement.
+
 import pandas as pd
 
 import os
 import pkg_resources
 
+# Importation de la base de données appariée
 default_config_files_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
 
@@ -14,10 +17,9 @@ data_matched = pd.read_csv(
         'openfisca_france_indirect_taxation',
         'assets',
         'matching',
-        'data_matched_small.csv'
+        'data_matched.csv'
         ), sep =',', decimal = '.'
     )
-
 
 
 """
@@ -28,12 +30,12 @@ Placebo test for share of revenue spent in energies :
 # Incomes deciles :
 for i in range(1,11):
     data_decuc = data_matched.query('decuc == {}'.format(i))
-    after = (data_decuc['part_energies_revenu'] * data_decuc['pondmen']).sum() / data_decuc['pondmen'].sum()
-    before = (data_decuc['part_energies_revtot'] * data_decuc['pondmen']).sum() / data_decuc['pondmen'].sum()
+    before = (data_decuc['part_energies_revtot_before'] * data_decuc['pondmen']).sum() / data_decuc['pondmen'].sum()
+    after = (data_decuc['part_energies_revtot_after'] * data_decuc['pondmen']).sum() / data_decuc['pondmen'].sum()
 
     print i, before * 100, after * 100
     del data_decuc
-    
+
 # Area of residence :
 for i in [111, 112, 120, 211, 212, 221, 300, 400]: #222
     data_cataeu = data_matched.query('cataeu == {}'.format(i))
@@ -42,7 +44,7 @@ for i in [111, 112, 120, 211, 212, 221, 300, 400]: #222
 
     print i, before * 100, after * 100
     del data_cataeu
-    
+
 # Age :
 for i in [25, 35, 45, 55, 65, 75, 85]: 
     data_age = data_matched.query('{0} < agepr < {1}'.format(i - 11, i))
@@ -51,3 +53,9 @@ for i in [25, 35, 45, 55, 65, 75, 85]:
 
     print i, before * 100, after * 100
     del data_age
+
+
+"""
+...
+"""
+    

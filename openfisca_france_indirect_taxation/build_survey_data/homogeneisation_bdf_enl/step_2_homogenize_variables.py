@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# Les variables qui ont des différences de définition doivent être reconstruites
+# Dans ce script les variables qui ont des différences de définition sont reconstruites
 # sur le modèle de l'enquête BdF (ou ENL dans certains cas où la nomenclature ENL a plus de sens)
 # de manière à avoir des définitions identiques.
-# Les noms de variables doivent aussi être alignés.
+# Les noms de variables sont aussi alignés.
 
 import numpy as np
+import pandas as pd
 
 from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_enl.step_1_build_dataframes import \
     load_data_bdf_enl
@@ -84,7 +85,7 @@ def homogenize_variables_definition_bdf_enl():
     
     # zeat : dans BdF certains ménages ont 6 et aucun 9, alors que 6 n'existe pas
     data_bdf.zeat.loc[data_bdf.zeat == 6] = 9
-    
+
     # Rename
     data_enl.rename(
         columns = {
@@ -114,6 +115,28 @@ def homogenize_variables_definition_bdf_enl():
         inplace = True,
         )
     
+    # Création d'une variable commune aux deux enquêtes pour les déciles de revenu
+    data_bdf['decile'] = pd.qcut(data_bdf['revtot'], 10,
+    labels = range(1,11)
+    )
+    data_enl['decile'] = pd.qcut(data_enl['revtot'], 10,
+    labels = range(1,11)
+    )
+
+    # Création d'une variable "placebo" pour l'évaluation ex post de l'appariement
+    data_enl = data_enl.query('revtot > 0')
+    data_bdf = data_bdf.query('revtot > 0')
+    
+    data_bdf['part_energies_revtot_before'] = (
+        data_bdf['poste_coicop_451']
+        + data_bdf['poste_coicop_452'] + data_bdf['poste_coicop_453']
+        ) / data_bdf['revtot']
+    data_enl['part_energies_revtot_after'] = (
+        data_enl['poste_coicop_451']
+        + data_enl['poste_coicop_452'] + data_enl['poste_coicop_453']
+        ) / data_enl['revtot']
+    
+
     data_enl = data_enl.sort_index(axis = 1)
     data_bdf = data_bdf.sort_index(axis = 1)
     

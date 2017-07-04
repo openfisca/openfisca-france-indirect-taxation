@@ -3,8 +3,10 @@
 from __future__ import division
 
 
-# We compare distribution of variables in the two surveys and assess if they need a correction or not to be homogenous
-# This is an arbitrary decision based on a visual comparison.
+# Dans ce script on compare la distribution des variables dans les deux enquêtes.
+# On peut ainsi juger si certaines d'entre elles doivent être ajustées de manière
+# à les harmoniser entre les deux enquêtes.
+# Cette décision se fait sur la base des résultats observés et ne dépend d'aucun critère précis.
 
 from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_enl.step_2_homogenize_variables import \
     homogenize_variables_definition_bdf_enl
