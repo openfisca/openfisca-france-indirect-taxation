@@ -115,13 +115,66 @@ def homogenize_variables_definition_bdf_enl():
         inplace = True,
         )
     
+    data_enl = data_enl.sort_index(axis = 1)
+    data_bdf = data_bdf.sort_index(axis = 1)
+    
+    return data_enl, data_bdf
+
+
+def create_new_variables():
+    data = homogenize_variables_definition_bdf_enl()    
+    data_enl = data[0]
+    data_bdf = data[1]
+
     # Création d'une variable commune aux deux enquêtes pour les déciles de revenu
-    data_bdf['decile'] = pd.qcut(data_bdf['revtot'], 10,
+    data_bdf['decile_revtot'] = pd.qcut(data_bdf['revtot'], 10,
     labels = range(1,11)
     )
-    data_enl['decile'] = pd.qcut(data_enl['revtot'], 10,
+    data_enl['decile_revtot'] = pd.qcut(data_enl['revtot'], 10,
     labels = range(1,11)
     )
+    
+    # Création d'une variable commune aux deux enquêtes pour les quintiles de revenu
+    data_bdf['quintile_revtot'] = pd.qcut(data_bdf['revtot'], 5,
+    labels = range(1,6)
+    )
+    data_enl['quintile_revtot'] = pd.qcut(data_enl['revtot'], 5,
+    labels = range(1,6)
+    )
+    
+    # Création de dummy variables pour la commune de résidence
+    data_enl['rural'] = 0
+    data_enl['petite_ville'] = 0
+    data_enl['moyenne_ville'] = 0
+    data_enl['grande_ville'] = 0
+    data_enl['paris'] = 0
+
+    data_bdf['rural'] = 0
+    data_bdf['petite_ville'] = 0
+    data_bdf['moyenne_ville'] = 0
+    data_bdf['grande_ville'] = 0
+    data_bdf['paris'] = 0
+
+    data_enl.loc[data_enl['tuu'] == 0, 'rural'] = 1
+    data_enl.loc[data_enl['tuu'] == 1, 'petite_ville'] = 1
+    data_enl.loc[data_enl['tuu'] == 2, 'petite_ville'] = 1
+    data_enl.loc[data_enl['tuu'] == 3, 'petite_ville'] = 1
+    data_enl.loc[data_enl['tuu'] == 4, 'moyenne_ville'] = 1
+    data_enl.loc[data_enl['tuu'] == 5, 'moyenne_ville'] = 1
+    data_enl.loc[data_enl['tuu'] == 6, 'moyenne_ville'] = 1
+    data_enl.loc[data_enl['tuu'] == 7, 'grande_ville'] = 1
+    data_enl.loc[data_enl['tuu'] == 8, 'paris'] = 1
+
+    data_bdf.loc[data_bdf['tuu'] == 0, 'rural'] = 1
+    data_bdf.loc[data_bdf['tuu'] == 1, 'petite_ville'] = 1
+    data_bdf.loc[data_bdf['tuu'] == 2, 'petite_ville'] = 1
+    data_bdf.loc[data_bdf['tuu'] == 3, 'petite_ville'] = 1
+    data_bdf.loc[data_bdf['tuu'] == 4, 'moyenne_ville'] = 1
+    data_bdf.loc[data_bdf['tuu'] == 5, 'moyenne_ville'] = 1
+    data_bdf.loc[data_bdf['tuu'] == 6, 'moyenne_ville'] = 1
+    data_bdf.loc[data_bdf['tuu'] == 7, 'grande_ville'] = 1
+    data_bdf.loc[data_bdf['tuu'] == 8, 'paris'] = 1
+
 
     # Création d'une variable "placebo" pour l'évaluation ex post de l'appariement
     data_enl = data_enl.query('revtot > 0')
@@ -137,13 +190,11 @@ def homogenize_variables_definition_bdf_enl():
         ) / data_enl['revtot']
     
 
-    data_enl = data_enl.sort_index(axis = 1)
-    data_bdf = data_bdf.sort_index(axis = 1)
-    
     return data_enl, data_bdf
 
 
+
 if __name__ == "__main__":
-    data = homogenize_variables_definition_bdf_enl()    
+    data = create_new_variables()    
     data_enl = data[0]
     data_bdf = data[1]

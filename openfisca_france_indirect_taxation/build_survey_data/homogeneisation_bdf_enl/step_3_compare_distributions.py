@@ -9,10 +9,10 @@ from __future__ import division
 # Cette décision se fait sur la base des résultats observés et ne dépend d'aucun critère précis.
 
 from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_enl.step_2_homogenize_variables import \
-    homogenize_variables_definition_bdf_enl
+    create_new_variables
 
 
-data = homogenize_variables_definition_bdf_enl()    
+data = create_new_variables()
 data_enl = data[0]
 data_bdf = data[1]
 
