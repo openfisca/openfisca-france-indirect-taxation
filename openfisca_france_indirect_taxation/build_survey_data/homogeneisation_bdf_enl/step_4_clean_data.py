@@ -25,8 +25,32 @@ def clean_data():
     data_bdf = data[1]
     
     # Suppression des outliers
-    data_bdf = data_bdf.query('part_energies_revtot_before < 0.5')
-    data_enl = data_enl.query('part_energies_revtot_after < 0.5')
+    data_bdf = data_bdf.query('part_energies_revtot < 0.5')
+    data_enl = data_enl.query('part_energies_revtot < 0.5')
+    
+    variables_to_drop_bdf = [
+        'amr', 'cataeu', 'chaufp', 'cs42cj', 'cs42pr', 'decuc', 'dip14cj',
+        'dip14pr', 'mchof', 'mchof_d', 'mfac_eau1_d', 'mfac_eg1_d',
+        'mloy_d', 'nactifs', 'nbh1', 'nenfants', 'poste_coicop_4511',
+        'poste_coicop_451', 'poste_coicop_452', 'poste_coicop_453',
+        'situacj', 'situapr', 'tau', 'tuu', 'typmen'
+        ]
+    
+    for variable in variables_to_drop_bdf:
+        del data_bdf[variable]
+
+
+    variables_to_drop_enl = [
+        'amr', 'cataeu', 'coml13', 'coml3', 'cs42cj', 'cs42pr',
+        'dip14pr', 'gmoy1', 'gtt1', 'gvit1', 'gvit1b', 'mchof_d', 'mfac_eau1_d',
+        'mloy_d', 'nactifs', 'nbh1', 'nenfants',
+        'poste_coicop_451', 'poste_coicop_452', 'poste_coicop_453',
+        'situacj', 'situapr', 'tau', 'tuu'
+        ]
+
+
+    for variable in variables_to_drop_enl:
+        del data_enl[variable]
 
     return data_enl, data_bdf
 

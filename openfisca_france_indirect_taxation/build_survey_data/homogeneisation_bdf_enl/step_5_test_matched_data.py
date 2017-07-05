@@ -31,6 +31,81 @@ data_matched = pd.read_csv(
         ), sep =',', decimal = '.'
     )
 
+    
+data_matched_random = pd.read_csv(
+    os.path.join(
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'matching',
+        'data_matched_random.csv'
+        ), sep =',', decimal = '.'
+    )
+
+
+data_matched_rank = pd.read_csv(
+    os.path.join(
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'matching',
+        'data_matched_rank.csv'
+        ), sep =',', decimal = '.'
+    )
+
+
+
+"""
+Test : share of people having trouble with heat in general
+    With sampling weights
+"""
+
+# In total
+print sum(data_enl['pondmen'] * (data_enl['gchauf_n'] != 0)) / sum(data_enl['pondmen'])
+print sum(data_matched['pondmen'] * (data_matched['gchauf_n'] != 0)) / sum(data_matched['pondmen'])
+print sum(data_matched_random['pondmen'] * (data_matched_random['gchauf_n'] != 0)) / sum(data_matched_random['pondmen'])
+print sum(data_matched_rank['pondmen'] * (data_matched_rank['gchauf_n'] != 0)) / sum(data_matched_rank['pondmen'])
+
+# By income decile
+for i in range(1,11):
+    data_enl_decile = data_enl.query('decile_revtot == {}'.format(i))
+    data_matched_decile = data_matched.query('decile_revtot == {}'.format(i))
+    data_matched_random_decile = data_matched_random.query('decile_revtot == {}'.format(i))
+    data_matched_rank_decile = data_matched_rank.query('decile_revtot == {}'.format(i))
+    
+    print i, 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_n'] != 0)) / sum(data_enl_decile['pondmen']), \
+        100 * sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_n'] != 0)) / sum(data_matched_decile['pondmen']), \
+        100 * sum(data_matched_random_decile['pondmen'] * (data_matched_random_decile['gchauf_n'] != 0)) / sum(data_matched_random_decile['pondmen']), \
+        100 * sum(data_matched_rank_decile['pondmen'] * (data_matched_rank_decile['gchauf_n'] != 0)) / sum(data_matched_rank_decile['pondmen'])
+
+    del data_enl_decile, data_matched_decile, data_matched_random_decile, data_matched_rank_decile
+
+"""
+Test : share of people having trouble with heat because of the cost
+    With sampling weights
+"""
+  
+# In total
+print 100 * sum(data_enl['pondmen'] * (data_enl['gchauf_3'] == 1)) / sum(data_enl['pondmen'])
+print 100 * sum(data_matched['pondmen'] * (data_matched['gchauf_3'] == 1)) / sum(data_matched['pondmen'])
+print 100 * sum(data_matched_random['pondmen'] * (data_matched_random['gchauf_3'] == 1)) / sum(data_matched_random['pondmen'])
+print 100 * sum(data_matched_rank['pondmen'] * (data_matched_rank['gchauf_3'] == 1)) / sum(data_matched_rank['pondmen'])
+
+# By income decile
+for i in range(1,11):
+    data_enl_decile = data_enl.query('decile_revtot == {}'.format(i))
+    data_matched_decile = data_matched.query('decile_revtot == {}'.format(i))
+    data_matched_random_decile = data_matched_random.query('decile_revtot == {}'.format(i))
+    data_matched_rank_decile = data_matched_rank.query('decile_revtot == {}'.format(i))
+    
+    print i, 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_3'] == 1)) / sum(data_enl_decile['pondmen']), \
+        100 * sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_3'] == 1)) / sum(data_matched_decile['pondmen']), \
+        100 * sum(data_matched_random_decile['pondmen'] * (data_matched_random_decile['gchauf_3'] == 1)) / sum(data_matched_random_decile['pondmen']), \
+        100 * sum(data_matched_rank_decile['pondmen'] * (data_matched_rank_decile['gchauf_3'] == 1)) / sum(data_matched_rank_decile['pondmen'])
+
+    del data_enl_decile, data_matched_decile, data_matched_random_decile, data_matched_rank_decile
+    
+
 
 """
 Test : share of people having trouble with heat in general
@@ -39,17 +114,25 @@ Test : share of people having trouble with heat in general
 # In total
 print float(len(data_enl.query('gchauf_n != 0'))) / len(data_enl) * 100
 print float(len(data_matched.query('gchauf_n != 0'))) / len(data_matched) * 100
+print float(len(data_matched_random.query('gchauf_n != 0'))) / len(data_matched_random) * 100
+print float(len(data_matched_rank.query('gchauf_n != 0'))) / len(data_matched_rank) * 100
 
 
 # By income decile
 for i in range(1,11):
     number_enl = len(data_enl.query('decile_revtot == {}'.format(i)))
     number_matched = len(data_matched.query('decile_revtot == {}'.format(i)))
+    number_matched_random = len(data_matched_random.query('decile_revtot == {}'.format(i)))
+    number_matched_rank = len(data_matched_rank.query('decile_revtot == {}'.format(i)))
 
     number_enl_gchauf_n = \
         len(data_enl.query('decile_revtot == {}'.format(i)).query('gchauf_n != 0'))
     number_matched_gchauf_n = \
         len(data_matched.query('decile_revtot == {}'.format(i)).query('gchauf_n != 0'))
+    number_matched_random_gchauf_n = \
+        len(data_matched_random.query('decile_revtot == {}'.format(i)).query('gchauf_n != 0'))
+    number_matched_rank_gchauf_n = \
+        len(data_matched_rank.query('decile_revtot == {}'.format(i)).query('gchauf_n != 0'))
     
     gchauf_n_enl = (
         float(number_enl_gchauf_n) /
@@ -59,8 +142,17 @@ for i in range(1,11):
         float(number_matched_gchauf_n) /
         number_matched
         )
+    gchauf_n_matched_random = (
+        float(number_matched_random_gchauf_n) /
+        number_matched_random
+        )
+    gchauf_n_matched_rank = (
+        float(number_matched_rank_gchauf_n) /
+        number_matched_rank
+        )
     
-    print i, gchauf_n_enl * 100, gchauf_n_matched * 100
+    print i, gchauf_n_enl * 100, gchauf_n_matched * 100, \
+        gchauf_n_matched_random * 100, gchauf_n_matched_rank * 100
 
 
 # By size of urban unit
@@ -92,17 +184,26 @@ Test : share of people having trouble with heat because it is too expensive
 # In total
 print float(len(data_enl.query('gchauf_3 == 1'))) / len(data_enl) * 100
 print float(len(data_matched.query('gchauf_3 == 1'))) / len(data_matched) * 100
+print float(len(data_matched_random.query('gchauf_3 == 1'))) / len(data_matched_random) * 100
+print float(len(data_matched_rank.query('gchauf_3 == 1'))) / len(data_matched_rank) * 100
 
 
 # By income decile_revtot
 for i in range(1,11):
     number_enl = len(data_enl.query('decile_revtot == {}'.format(i)))
     number_matched = len(data_matched.query('decile_revtot == {}'.format(i)))
+    number_matched_random = len(data_matched_random.query('decile_revtot == {}'.format(i)))
+    number_matched_rank = len(data_matched_rank.query('decile_revtot == {}'.format(i)))
 
+    
     number_enl_gchauf_3 = \
         len(data_enl.query('decile_revtot == {}'.format(i)).query('gchauf_3 == 1'))
     number_matched_gchauf_3 = \
         len(data_matched.query('decile_revtot == {}'.format(i)).query('gchauf_3 == 1'))
+    number_matched_random_gchauf_3 = \
+        len(data_matched_random.query('decile_revtot == {}'.format(i)).query('gchauf_3 == 1'))
+    number_matched_rank_gchauf_3 = \
+        len(data_matched_rank.query('decile_revtot == {}'.format(i)).query('gchauf_3 == 1'))
     
     gchauf_3_enl = (
         float(number_enl_gchauf_3) /
@@ -112,8 +213,17 @@ for i in range(1,11):
         float(number_matched_gchauf_3) /
         number_matched
         )
+    gchauf_3_matched_random = (
+        float(number_matched_random_gchauf_3) /
+        number_matched_random
+        )
+    gchauf_3_matched_rank = (
+        float(number_matched_rank_gchauf_3) /
+        number_matched_rank
+        )
     
-    print i, gchauf_3_enl * 100, gchauf_3_matched * 100
+    print i, gchauf_3_enl * 100, gchauf_3_matched * 100, \
+        gchauf_3_matched_random * 100, gchauf_3_matched_rank * 100
 
 
 # By size of urban unit
@@ -138,20 +248,23 @@ for i in range(1,9):
     print i, gchauf_3_enl * 100, gchauf_3_matched * 100
     
 
-    
+
 """
 Test : share of people having trouble with heat because of bad isolation
 """
-    
+
 # By income decile
 for i in range(1,11):
     number_enl = len(data_enl.query('decile_revtot == {}'.format(i)))
     number_matched = len(data_matched.query('decile_revtot == {}'.format(i)))
+    number_matched_rank = len(data_matched_rank.query('decile_revtot == {}'.format(i)))
 
     number_enl_gchauf_4 = \
         len(data_enl.query('decile_revtot == {}'.format(i)).query('gchauf_4 == 1'))
     number_matched_gchauf_4 = \
         len(data_matched.query('decile_revtot == {}'.format(i)).query('gchauf_4 == 1'))
+    number_matched_rank_gchauf_4 = \
+        len(data_matched_rank.query('decile_revtot == {}'.format(i)).query('gchauf_4 == 1'))
     
     gchauf_4_enl = (
         float(number_enl_gchauf_4) /
@@ -161,8 +274,12 @@ for i in range(1,11):
         float(number_matched_gchauf_4) /
         number_matched
         )
+    gchauf_4_matched_rank = (
+        float(number_matched_rank_gchauf_4) /
+        number_matched_rank
+        )
     
-    print i, gchauf_4_enl * 100, gchauf_4_matched * 100
+    print i, gchauf_4_enl * 100, gchauf_4_matched * 100, gchauf_4_matched_rank * 100
 
 
 # By size of urban unit

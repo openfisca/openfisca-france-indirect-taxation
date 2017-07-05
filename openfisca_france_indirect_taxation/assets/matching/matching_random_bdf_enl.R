@@ -2,19 +2,13 @@
 data_enl <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_enl.csv", header = -1, sep=",")
 data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_bdf.csv", header = -1, sep=",")
 
-# Compute matching
-out.nnd <- NND.hotdeck(
+# Compute random matching
+out.nnd <- RANDwNND.hotdeck(
   data.rec = data_bdf, data.don = data_enl,
-  match.vars = c("surfhab_d", "nbphab", "ocde10", "revtot", "part_energies_revtot",
-                 "agepr", "aba", "zeat"),
-  don.class = c("quintile_revtot", "rural", "petite_ville", "moyenne_ville", "grande_ville", "paris")
+  match.vars = c("surfhab_d", "bat_av_48", "bat_ap_74", "log_indiv", "part_energies_revtot", "agepr"),
+  don.class = c("decile_revtot", "rural", "paris", "ouest_sud"),
+  weight.don = "pondmen"
 )
-
-# Compute matching - rank method
-
-# Compute matching - random method
-
-# Compute matching - mixed method
 
 # Create fused file
 fused.nnd.m <- create.fused(
@@ -28,5 +22,5 @@ fused.nnd.m <- create.fused(
 
 # Save it as csv
 write.csv(fused.nnd.m,
-          file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matched.csv"
-          )
+          file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matched_random.csv"
+)

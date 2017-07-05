@@ -175,16 +175,64 @@ def create_new_variables():
     data_bdf.loc[data_bdf['tuu'] == 7, 'grande_ville'] = 1
     data_bdf.loc[data_bdf['tuu'] == 8, 'paris'] = 1
 
+    # Dummy variables pour l'ancienneté du batîment (1er norme importante sur l'isolation en 74)
+    data_enl['bat_av_48'] = 0
+    data_enl['bat_49_74'] = 0
+    data_enl['bat_ap_74'] = 0
+
+    data_bdf['bat_av_48'] = 0
+    data_bdf['bat_49_74'] = 0
+    data_bdf['bat_ap_74'] = 0
+
+    data_enl.loc[data_enl['ancons'] == 1, 'bat_av_48'] = 1
+    data_enl.loc[data_enl['ancons'] < 5, 'bat_49_74'] = 1
+    data_enl.loc[data_enl['ancons'] == 1, 'bat_49_74'] = 0
+    data_enl.loc[data_enl['ancons'] > 4, 'bat_ap_74'] = 1
+
+    data_bdf.loc[data_bdf['ancons'] == 1, 'bat_av_48'] = 1
+    data_bdf.loc[data_bdf['ancons'] < 5, 'bat_49_74'] = 1
+    data_bdf.loc[data_bdf['ancons'] == 1, 'bat_49_74'] = 0
+    data_bdf.loc[data_bdf['ancons'] > 4, 'bat_ap_74'] = 1
+
+    # Dummy variables pour le type de logement
+    data_enl['log_indiv'] = 0
+    data_enl['log_colec'] = 1
+
+    for i in [1,5,7]:    
+        data_enl.loc[data_enl['htl'] == i, 'log_indiv'] = 1
+        data_enl.loc[data_enl['htl'] == i, 'log_colec'] = 0
+    
+    data_bdf['log_indiv'] = 0
+    data_bdf['log_colec'] = 1
+
+    for i in [1,5,7]:    
+        data_bdf.loc[data_bdf['htl'] == i, 'log_indiv'] = 1
+        data_bdf.loc[data_bdf['htl'] == i, 'log_colec'] = 0
+
+    # Creation de dummy variables pour la zone climatique
+    data_enl['ouest_sud'] = 0
+    data_enl['est_nord'] = 1
+
+    for i in [5,7,9]:    
+        data_enl.loc[data_enl['zeat'] == i, 'ouest_sud'] = 1
+        data_enl.loc[data_enl['zeat'] == i, 'est_nord'] = 0
+
+    data_bdf['ouest_sud'] = 0
+    data_bdf['est_nord'] = 1
+
+    for i in [5,7,9]:    
+        data_bdf.loc[data_bdf['zeat'] == i, 'ouest_sud'] = 1
+        data_bdf.loc[data_bdf['zeat'] == i, 'est_nord'] = 0
 
     # Création d'une variable "placebo" pour l'évaluation ex post de l'appariement
     data_enl = data_enl.query('revtot > 0')
     data_bdf = data_bdf.query('revtot > 0')
     
-    data_bdf['part_energies_revtot_before'] = (
+    data_bdf['part_energies_revtot'] = (
         data_bdf['poste_coicop_451']
         + data_bdf['poste_coicop_452'] + data_bdf['poste_coicop_453']
         ) / data_bdf['revtot']
-    data_enl['part_energies_revtot_after'] = (
+    data_enl['part_energies_revtot'] = (
         data_enl['poste_coicop_451']
         + data_enl['poste_coicop_452'] + data_enl['poste_coicop_453']
         ) / data_enl['revtot']
