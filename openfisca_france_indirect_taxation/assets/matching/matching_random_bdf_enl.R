@@ -6,7 +6,8 @@ data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-i
 out.nnd <- RANDwNND.hotdeck(
   data.rec = data_bdf, data.don = data_enl,
   match.vars = c("surfhab_d", "bat_av_48", "bat_ap_74", "log_indiv", "part_energies_revtot", "agepr"),
-  don.class = c("decile_revtot", "rural", "paris", "ouest_sud"),
+  don.class = c("decile_revtot", "rural", "paris"),
+  dist.fun = "Mahalanobis",
   weight.don = "pondmen"
 )
 

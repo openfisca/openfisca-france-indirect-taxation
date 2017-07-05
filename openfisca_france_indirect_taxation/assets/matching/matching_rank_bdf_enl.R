@@ -6,7 +6,7 @@ data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-i
 out.nnd <- rankNND.hotdeck(
   data.rec = data_bdf, data.don = data_enl,
   var.rec = c("part_energies_revtot"),
-  don.class = c("bat_49_74", "log_colec", "decile_revtot", "rural"),
+  don.class = c("decile_revtot"),
   weight.rec = "pondmen",
   weight.don = "pondmen"
 )

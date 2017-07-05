@@ -5,16 +5,9 @@ data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-i
 # Compute matching
 out.nnd <- NND.hotdeck(
   data.rec = data_bdf, data.don = data_enl,
-  match.vars = c("surfhab_d", "nbphab", "ocde10", "revtot", "part_energies_revtot",
-                 "agepr", "aba", "zeat"),
-  don.class = c("quintile_revtot", "rural", "petite_ville", "moyenne_ville", "grande_ville", "paris")
+  match.vars = c("surfhab_d", "bat_av_48", "bat_ap_74", "log_indiv", "part_energies_revtot", "agepr", "fioul"),
+  don.class = c("decile_revtot")
 )
-
-# Compute matching - rank method
-
-# Compute matching - random method
-
-# Compute matching - mixed method
 
 # Create fused file
 fused.nnd.m <- create.fused(
