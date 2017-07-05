@@ -142,6 +142,26 @@ def create_new_variables():
     labels = range(1,6)
     )
     
+
+    # Dummy variable pour la consommation de fioul
+    data_bdf['fioul'] = 0
+    data_bdf.loc[data_bdf['poste_coicop_453'] > 0, 'fioul'] = 1
+
+    data_enl['fioul'] = 0
+    data_enl.loc[data_enl['poste_coicop_453'] > 0, 'fioul'] = 1
+
+    data_bdf['gaz'] = 0
+    data_bdf.loc[data_bdf['poste_coicop_452'] > 0, 'gaz'] = 1
+
+    data_enl['gaz'] = 0
+    data_enl.loc[data_enl['poste_coicop_452'] > 0, 'gaz'] = 1
+
+    data_bdf['electricite'] = 0
+    data_bdf.loc[data_bdf['poste_coicop_451'] > 0, 'electricite'] = 1
+
+    data_enl['electricite'] = 0
+    data_enl.loc[data_enl['poste_coicop_451'] > 0, 'electricite'] = 1
+
     # Création de dummy variables pour la commune de résidence
     data_enl['rural'] = 0
     data_enl['petite_ville'] = 0
