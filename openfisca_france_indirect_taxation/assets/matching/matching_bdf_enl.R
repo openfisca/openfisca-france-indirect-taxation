@@ -8,7 +8,7 @@ out.nnd <- NND.hotdeck(
   match.vars = c("surfhab_d", "nbphab", "ocde10", "revtot", "poste_coicop_451",
                  "poste_coicop_452", "poste_coicop_453", "agepr", "aba",
                  "cataeu", "tau", "tuu", "zeat"),
-  don.class = c("decile", "tuu")
+  don.class = c("decile_revtot", "tuu")
 )
 
 # Compute matching - rank method
