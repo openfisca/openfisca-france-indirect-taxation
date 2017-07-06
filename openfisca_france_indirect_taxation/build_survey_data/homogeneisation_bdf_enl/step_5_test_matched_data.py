@@ -84,7 +84,7 @@ for i in range(1,11):
 Test : share of people having trouble with heat because of the cost
     With sampling weights
 """
-  
+
 # In total
 print 100 * sum(data_enl['pondmen'] * (data_enl['gchauf_3'] == 1)) / sum(data_enl['pondmen'])
 print 100 * sum(data_matched['pondmen'] * (data_matched['gchauf_3'] == 1)) / sum(data_matched['pondmen'])

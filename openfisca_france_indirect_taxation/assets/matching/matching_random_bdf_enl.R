@@ -7,7 +7,7 @@ out.nnd <- RANDwNND.hotdeck(
   data.rec = data_bdf, data.don = data_enl,
   match.vars = c("surfhab_d", "bat_av_48", "bat_ap_74", "log_indiv", "part_energies_revtot", "agepr"),
   don.class = c("niveau_vie_decile", "rural", "paris"),
-  dist.fun = "Mahalanobis",
+  dist.fun = "Manhattan",
   weight.don = "pondmen"
 )
 
