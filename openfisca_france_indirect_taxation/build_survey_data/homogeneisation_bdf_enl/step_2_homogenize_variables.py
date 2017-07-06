@@ -91,6 +91,7 @@ def homogenize_variables_definition_bdf_enl():
         columns = {
             'cataeu2010': 'cataeu',
             'cceml': 'mfac_eau1_d',
+            'coml': 'depenses_energies',
             'coml11': 'poste_coicop_451',
             'coml12': 'poste_coicop_452',
             'coml2': 'poste_coicop_453',
@@ -217,14 +218,24 @@ def create_new_variables():
             data.loc[data['zeat'] == i, 'est_nord'] = 0
         del j
     
-        # Création d'une variable "placebo" pour l'évaluation ex post de l'appariement
+        # Création d'une variable pour la part des dépenses totales en énergies
+        energie_logement = ['poste_coicop_451', 'poste_coicop_4511', 'poste_coicop_452',
+        'poste_coicop_4522', 'poste_coicop_453', 'poste_coicop_454', 'poste_coicop_455',
+        'poste_coicop_4552']
+        
+        if i == 1:
+            data['depenses_energies'] = 0
+            for energie in energie_logement:
+                data['depenses_energies'] += data[energie]
+            data['part_energies_depenses_tot'] = (
+                data['depenses_energies'] / data['depenses_tot']
+                )
+
         data = data.query('revtot > 0')
-        
         data['part_energies_revtot'] = (
-            data['poste_coicop_451']
-            + data['poste_coicop_452'] + data['poste_coicop_453']
-            ) / data['revtot']
-        
+            data['depenses_energies'] / data['revtot']
+            )
+
         if i == 0:
             data_enl = data.copy()
         else:

@@ -40,7 +40,17 @@ def load_data_bdf_enl():
     input_bdf = openfisca_survey.get_values(table = 'input')
     input_bdf.reset_index(inplace = True)
     
-    
+
+    # Create variable for total spending
+    produits = [column for column in input_bdf.columns if column[:13] == 'poste_coicop_']
+    del column
+
+    input_bdf['depenses_tot'] = 0
+    for produit in produits:
+        if produit[13:15] != '99' and produit[13:15] != '13':
+            input_bdf['depenses_tot'] += input_bdf[produit]
+
+
     # Set variables :
     
     variables_menages_bdf = [
@@ -54,6 +64,7 @@ def load_data_bdf_enl():
         'cs42pr', # catégorie socio-pro
         'cs42cj',
         'decuc',
+        'depenses_tot',
         'dip14cj', # diplômes
         'dip14pr',
         #'h_trans1',
@@ -76,7 +87,11 @@ def load_data_bdf_enl():
         'poste_coicop_451', # dépenses énergies logement
         'poste_coicop_4511',
         'poste_coicop_452',
+        'poste_coicop_4522',
         'poste_coicop_453',
+        'poste_coicop_454',
+        'poste_coicop_455',
+        'poste_coicop_4552',
         'revtot', # revenu total
         'situapr', # situation pro
         'situacj',
@@ -92,6 +107,7 @@ def load_data_bdf_enl():
         'amr',
         'cataeu2010',
         'cceml',
+        'coml',
         'coml11',
         'coml12',
         'coml13',
