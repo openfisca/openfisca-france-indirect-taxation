@@ -121,145 +121,116 @@ def homogenize_variables_definition_bdf_enl():
     return data_enl, data_bdf
 
 
-def create_new_variables():
-    data = homogenize_variables_definition_bdf_enl()    
-    data_enl = data[0]
-    data_bdf = data[1]
+def create_niveau_vie_quantiles():
+    for i in [0,1]:
+        data = homogenize_variables_definition_bdf_enl()[i]
+        data['niveau_vie'] = data['revtot'] / data['ocde10']
 
-    # Création d'une variable commune aux deux enquêtes pour les déciles de revenu
-    data_bdf['decile_revtot'] = pd.qcut(data_bdf['revtot'], 10,
-    labels = range(1,11)
-    )
-    data_enl['decile_revtot'] = pd.qcut(data_enl['revtot'], 10,
-    labels = range(1,11)
-    )
-    
-    # Création d'une variable commune aux deux enquêtes pour les quintiles de revenu
-    data_bdf['quintile_revtot'] = pd.qcut(data_bdf['revtot'], 5,
-    labels = range(1,6)
-    )
-    data_enl['quintile_revtot'] = pd.qcut(data_enl['revtot'], 5,
-    labels = range(1,6)
-    )
-    
+        data = data.sort_values(by = ['niveau_vie'])
+        data['sum_pondmen'] = data['pondmen'].cumsum()
+        
+        data['niveau_vie_decile'] = pd.qcut(data['sum_pondmen'], 10,
+        labels = range(1,11)
+        )
 
-    # Dummy variable pour la consommation de fioul
-    data_bdf['fioul'] = 0
-    data_bdf.loc[data_bdf['poste_coicop_453'] > 0, 'fioul'] = 1
+        data['niveau_vie_quintile'] = pd.qcut(data['sum_pondmen'], 5,
+        labels = range(1,6)
+        )
 
-    data_enl['fioul'] = 0
-    data_enl.loc[data_enl['poste_coicop_453'] > 0, 'fioul'] = 1
+        data = data.sort_index()
+        del data['sum_pondmen']
 
-    data_bdf['gaz'] = 0
-    data_bdf.loc[data_bdf['poste_coicop_452'] > 0, 'gaz'] = 1
-
-    data_enl['gaz'] = 0
-    data_enl.loc[data_enl['poste_coicop_452'] > 0, 'gaz'] = 1
-
-    data_bdf['electricite'] = 0
-    data_bdf.loc[data_bdf['poste_coicop_451'] > 0, 'electricite'] = 1
-
-    data_enl['electricite'] = 0
-    data_enl.loc[data_enl['poste_coicop_451'] > 0, 'electricite'] = 1
-
-    # Création de dummy variables pour la commune de résidence
-    data_enl['rural'] = 0
-    data_enl['petite_ville'] = 0
-    data_enl['moyenne_ville'] = 0
-    data_enl['grande_ville'] = 0
-    data_enl['paris'] = 0
-
-    data_bdf['rural'] = 0
-    data_bdf['petite_ville'] = 0
-    data_bdf['moyenne_ville'] = 0
-    data_bdf['grande_ville'] = 0
-    data_bdf['paris'] = 0
-
-    data_enl.loc[data_enl['tuu'] == 0, 'rural'] = 1
-    data_enl.loc[data_enl['tuu'] == 1, 'petite_ville'] = 1
-    data_enl.loc[data_enl['tuu'] == 2, 'petite_ville'] = 1
-    data_enl.loc[data_enl['tuu'] == 3, 'petite_ville'] = 1
-    data_enl.loc[data_enl['tuu'] == 4, 'moyenne_ville'] = 1
-    data_enl.loc[data_enl['tuu'] == 5, 'moyenne_ville'] = 1
-    data_enl.loc[data_enl['tuu'] == 6, 'moyenne_ville'] = 1
-    data_enl.loc[data_enl['tuu'] == 7, 'grande_ville'] = 1
-    data_enl.loc[data_enl['tuu'] == 8, 'paris'] = 1
-
-    data_bdf.loc[data_bdf['tuu'] == 0, 'rural'] = 1
-    data_bdf.loc[data_bdf['tuu'] == 1, 'petite_ville'] = 1
-    data_bdf.loc[data_bdf['tuu'] == 2, 'petite_ville'] = 1
-    data_bdf.loc[data_bdf['tuu'] == 3, 'petite_ville'] = 1
-    data_bdf.loc[data_bdf['tuu'] == 4, 'moyenne_ville'] = 1
-    data_bdf.loc[data_bdf['tuu'] == 5, 'moyenne_ville'] = 1
-    data_bdf.loc[data_bdf['tuu'] == 6, 'moyenne_ville'] = 1
-    data_bdf.loc[data_bdf['tuu'] == 7, 'grande_ville'] = 1
-    data_bdf.loc[data_bdf['tuu'] == 8, 'paris'] = 1
-
-    # Dummy variables pour l'ancienneté du batîment (1er norme importante sur l'isolation en 74)
-    data_enl['bat_av_48'] = 0
-    data_enl['bat_49_74'] = 0
-    data_enl['bat_ap_74'] = 0
-
-    data_bdf['bat_av_48'] = 0
-    data_bdf['bat_49_74'] = 0
-    data_bdf['bat_ap_74'] = 0
-
-    data_enl.loc[data_enl['ancons'] == 1, 'bat_av_48'] = 1
-    data_enl.loc[data_enl['ancons'] < 5, 'bat_49_74'] = 1
-    data_enl.loc[data_enl['ancons'] == 1, 'bat_49_74'] = 0
-    data_enl.loc[data_enl['ancons'] > 4, 'bat_ap_74'] = 1
-
-    data_bdf.loc[data_bdf['ancons'] == 1, 'bat_av_48'] = 1
-    data_bdf.loc[data_bdf['ancons'] < 5, 'bat_49_74'] = 1
-    data_bdf.loc[data_bdf['ancons'] == 1, 'bat_49_74'] = 0
-    data_bdf.loc[data_bdf['ancons'] > 4, 'bat_ap_74'] = 1
-
-    # Dummy variables pour le type de logement
-    data_enl['log_indiv'] = 0
-    data_enl['log_colec'] = 1
-
-    for i in [1,5,7]:    
-        data_enl.loc[data_enl['htl'] == i, 'log_indiv'] = 1
-        data_enl.loc[data_enl['htl'] == i, 'log_colec'] = 0
-    
-    data_bdf['log_indiv'] = 0
-    data_bdf['log_colec'] = 1
-
-    for i in [1,5,7]:    
-        data_bdf.loc[data_bdf['htl'] == i, 'log_indiv'] = 1
-        data_bdf.loc[data_bdf['htl'] == i, 'log_colec'] = 0
-
-    # Creation de dummy variables pour la zone climatique
-    data_enl['ouest_sud'] = 0
-    data_enl['est_nord'] = 1
-
-    for i in [5,7,9]:    
-        data_enl.loc[data_enl['zeat'] == i, 'ouest_sud'] = 1
-        data_enl.loc[data_enl['zeat'] == i, 'est_nord'] = 0
-
-    data_bdf['ouest_sud'] = 0
-    data_bdf['est_nord'] = 1
-
-    for i in [5,7,9]:    
-        data_bdf.loc[data_bdf['zeat'] == i, 'ouest_sud'] = 1
-        data_bdf.loc[data_bdf['zeat'] == i, 'est_nord'] = 0
-
-    # Création d'une variable "placebo" pour l'évaluation ex post de l'appariement
-    data_enl = data_enl.query('revtot > 0')
-    data_bdf = data_bdf.query('revtot > 0')
-    
-    data_bdf['part_energies_revtot'] = (
-        data_bdf['poste_coicop_451']
-        + data_bdf['poste_coicop_452'] + data_bdf['poste_coicop_453']
-        ) / data_bdf['revtot']
-    data_enl['part_energies_revtot'] = (
-        data_enl['poste_coicop_451']
-        + data_enl['poste_coicop_452'] + data_enl['poste_coicop_453']
-        ) / data_enl['revtot']
-    
+        if i == 0:
+            data_enl = data.copy()
+        else:
+            data_bdf = data.copy()
 
     return data_enl, data_bdf
 
+
+def create_new_variables():
+    for i in [0,1]:
+        data = create_niveau_vie_quantiles()[i]
+
+        # Création d'une variable commune aux deux enquêtes pour les déciles de revenu
+        data['niveau_vie_decile'] = pd.qcut(data['revtot'], 10,
+        labels = range(1,11)
+        )
+    
+        # Création d'une variable commune aux deux enquêtes pour les quintiles de revenu
+        data['quintile_revtot'] = pd.qcut(data['revtot'], 5,
+        labels = range(1,6)
+        )
+
+        # Dummy variable pour la consommation de fioul
+        data['fioul'] = 0
+        data.loc[data['poste_coicop_453'] > 0, 'fioul'] = 1
+
+        data['gaz'] = 0
+        data.loc[data['poste_coicop_452'] > 0, 'gaz'] = 1
+
+        data['electricite'] = 0
+        data.loc[data['poste_coicop_451'] > 0, 'electricite'] = 1
+
+        # Création de dummy variables pour la commune de résidence
+        data['rural'] = 0
+        data['petite_ville'] = 0
+        data['moyenne_ville'] = 0
+        data['grande_ville'] = 0
+        data['paris'] = 0
+    
+        data.loc[data['tuu'] == 0, 'rural'] = 1
+        data.loc[data['tuu'] == 1, 'petite_ville'] = 1
+        data.loc[data['tuu'] == 2, 'petite_ville'] = 1
+        data.loc[data['tuu'] == 3, 'petite_ville'] = 1
+        data.loc[data['tuu'] == 4, 'moyenne_ville'] = 1
+        data.loc[data['tuu'] == 5, 'moyenne_ville'] = 1
+        data.loc[data['tuu'] == 6, 'moyenne_ville'] = 1
+        data.loc[data['tuu'] == 7, 'grande_ville'] = 1
+        data.loc[data['tuu'] == 8, 'paris'] = 1
+    
+        # Dummy variables pour l'ancienneté du batîment (1er norme importante sur l'isolation en 74)
+        data['bat_av_48'] = 0
+        data['bat_49_74'] = 0
+        data['bat_ap_74'] = 0
+    
+        data.loc[data['ancons'] == 1, 'bat_av_48'] = 1
+        data.loc[data['ancons'] < 5, 'bat_49_74'] = 1
+        data.loc[data['ancons'] == 1, 'bat_49_74'] = 0
+        data.loc[data['ancons'] > 4, 'bat_ap_74'] = 1
+    
+        # Dummy variables pour le type de logement
+        data['log_indiv'] = 0
+        data['log_colec'] = 1
+    
+        for j in [1,5,7]:    
+            data.loc[data['htl'] == i, 'log_indiv'] = 1
+            data.loc[data['htl'] == i, 'log_colec'] = 0
+        del j
+    
+        # Creation de dummy variables pour la zone climatique
+        data['ouest_sud'] = 0
+        data['est_nord'] = 1
+    
+        for j in [5,7,9]:    
+            data.loc[data['zeat'] == i, 'ouest_sud'] = 1
+            data.loc[data['zeat'] == i, 'est_nord'] = 0
+        del j
+    
+        # Création d'une variable "placebo" pour l'évaluation ex post de l'appariement
+        data = data.query('revtot > 0')
+        
+        data['part_energies_revtot'] = (
+            data['poste_coicop_451']
+            + data['poste_coicop_452'] + data['poste_coicop_453']
+            ) / data['revtot']
+        
+        if i == 0:
+            data_enl = data.copy()
+        else:
+            data_bdf = data.copy()
+
+    return data_enl, data_bdf
 
 
 if __name__ == "__main__":

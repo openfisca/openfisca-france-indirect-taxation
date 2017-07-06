@@ -68,10 +68,10 @@ print sum(data_matched_rank['pondmen'] * (data_matched_rank['gchauf_n'] != 0)) /
 
 # By income decile
 for i in range(1,11):
-    data_enl_decile = data_enl.query('decile_revtot == {}'.format(i))
-    data_matched_decile = data_matched.query('decile_revtot == {}'.format(i))
-    data_matched_random_decile = data_matched_random.query('decile_revtot == {}'.format(i))
-    data_matched_rank_decile = data_matched_rank.query('decile_revtot == {}'.format(i))
+    data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
+    data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
+    data_matched_random_decile = data_matched_random.query('niveau_vie_decile == {}'.format(i))
+    data_matched_rank_decile = data_matched_rank.query('niveau_vie_decile == {}'.format(i))
     
     print i, 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_n'] != 0)) / sum(data_enl_decile['pondmen']), \
         100 * sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_n'] != 0)) / sum(data_matched_decile['pondmen']), \
@@ -93,10 +93,10 @@ print 100 * sum(data_matched_rank['pondmen'] * (data_matched_rank['gchauf_3'] ==
 
 # By income decile
 for i in range(1,11):
-    data_enl_decile = data_enl.query('decile_revtot == {}'.format(i))
-    data_matched_decile = data_matched.query('decile_revtot == {}'.format(i))
-    data_matched_random_decile = data_matched_random.query('decile_revtot == {}'.format(i))
-    data_matched_rank_decile = data_matched_rank.query('decile_revtot == {}'.format(i))
+    data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
+    data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
+    data_matched_random_decile = data_matched_random.query('niveau_vie_decile == {}'.format(i))
+    data_matched_rank_decile = data_matched_rank.query('niveau_vie_decile == {}'.format(i))
     
     print i, 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_3'] == 1)) / sum(data_enl_decile['pondmen']), \
         100 * sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_3'] == 1)) / sum(data_matched_decile['pondmen']), \
@@ -120,19 +120,19 @@ print float(len(data_matched_rank.query('gchauf_n != 0'))) / len(data_matched_ra
 
 # By income decile
 for i in range(1,11):
-    number_enl = len(data_enl.query('decile_revtot == {}'.format(i)))
-    number_matched = len(data_matched.query('decile_revtot == {}'.format(i)))
-    number_matched_random = len(data_matched_random.query('decile_revtot == {}'.format(i)))
-    number_matched_rank = len(data_matched_rank.query('decile_revtot == {}'.format(i)))
+    number_enl = len(data_enl.query('niveau_vie_decile == {}'.format(i)))
+    number_matched = len(data_matched.query('niveau_vie_decile == {}'.format(i)))
+    number_matched_random = len(data_matched_random.query('niveau_vie_decile == {}'.format(i)))
+    number_matched_rank = len(data_matched_rank.query('niveau_vie_decile == {}'.format(i)))
 
     number_enl_gchauf_n = \
-        len(data_enl.query('decile_revtot == {}'.format(i)).query('gchauf_n != 0'))
+        len(data_enl.query('niveau_vie_decile == {}'.format(i)).query('gchauf_n != 0'))
     number_matched_gchauf_n = \
-        len(data_matched.query('decile_revtot == {}'.format(i)).query('gchauf_n != 0'))
+        len(data_matched.query('niveau_vie_decile == {}'.format(i)).query('gchauf_n != 0'))
     number_matched_random_gchauf_n = \
-        len(data_matched_random.query('decile_revtot == {}'.format(i)).query('gchauf_n != 0'))
+        len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('gchauf_n != 0'))
     number_matched_rank_gchauf_n = \
-        len(data_matched_rank.query('decile_revtot == {}'.format(i)).query('gchauf_n != 0'))
+        len(data_matched_rank.query('niveau_vie_decile == {}'.format(i)).query('gchauf_n != 0'))
     
     gchauf_n_enl = (
         float(number_enl_gchauf_n) /
@@ -188,22 +188,22 @@ print float(len(data_matched_random.query('gchauf_3 == 1'))) / len(data_matched_
 print float(len(data_matched_rank.query('gchauf_3 == 1'))) / len(data_matched_rank) * 100
 
 
-# By income decile_revtot
+# By income niveau_vie_decile
 for i in range(1,11):
-    number_enl = len(data_enl.query('decile_revtot == {}'.format(i)))
-    number_matched = len(data_matched.query('decile_revtot == {}'.format(i)))
-    number_matched_random = len(data_matched_random.query('decile_revtot == {}'.format(i)))
-    number_matched_rank = len(data_matched_rank.query('decile_revtot == {}'.format(i)))
+    number_enl = len(data_enl.query('niveau_vie_decile == {}'.format(i)))
+    number_matched = len(data_matched.query('niveau_vie_decile == {}'.format(i)))
+    number_matched_random = len(data_matched_random.query('niveau_vie_decile == {}'.format(i)))
+    number_matched_rank = len(data_matched_rank.query('niveau_vie_decile == {}'.format(i)))
 
     
     number_enl_gchauf_3 = \
-        len(data_enl.query('decile_revtot == {}'.format(i)).query('gchauf_3 == 1'))
+        len(data_enl.query('niveau_vie_decile == {}'.format(i)).query('gchauf_3 == 1'))
     number_matched_gchauf_3 = \
-        len(data_matched.query('decile_revtot == {}'.format(i)).query('gchauf_3 == 1'))
+        len(data_matched.query('niveau_vie_decile == {}'.format(i)).query('gchauf_3 == 1'))
     number_matched_random_gchauf_3 = \
-        len(data_matched_random.query('decile_revtot == {}'.format(i)).query('gchauf_3 == 1'))
+        len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('gchauf_3 == 1'))
     number_matched_rank_gchauf_3 = \
-        len(data_matched_rank.query('decile_revtot == {}'.format(i)).query('gchauf_3 == 1'))
+        len(data_matched_rank.query('niveau_vie_decile == {}'.format(i)).query('gchauf_3 == 1'))
     
     gchauf_3_enl = (
         float(number_enl_gchauf_3) /
@@ -255,16 +255,16 @@ Test : share of people having trouble with heat because of bad isolation
 
 # By income decile
 for i in range(1,11):
-    number_enl = len(data_enl.query('decile_revtot == {}'.format(i)))
-    number_matched = len(data_matched.query('decile_revtot == {}'.format(i)))
-    number_matched_rank = len(data_matched_rank.query('decile_revtot == {}'.format(i)))
+    number_enl = len(data_enl.query('niveau_vie_decile == {}'.format(i)))
+    number_matched = len(data_matched.query('niveau_vie_decile == {}'.format(i)))
+    number_matched_rank = len(data_matched_rank.query('niveau_vie_decile == {}'.format(i)))
 
     number_enl_gchauf_4 = \
-        len(data_enl.query('decile_revtot == {}'.format(i)).query('gchauf_4 == 1'))
+        len(data_enl.query('niveau_vie_decile == {}'.format(i)).query('gchauf_4 == 1'))
     number_matched_gchauf_4 = \
-        len(data_matched.query('decile_revtot == {}'.format(i)).query('gchauf_4 == 1'))
+        len(data_matched.query('niveau_vie_decile == {}'.format(i)).query('gchauf_4 == 1'))
     number_matched_rank_gchauf_4 = \
-        len(data_matched_rank.query('decile_revtot == {}'.format(i)).query('gchauf_4 == 1'))
+        len(data_matched_rank.query('niveau_vie_decile == {}'.format(i)).query('gchauf_4 == 1'))
     
     gchauf_4_enl = (
         float(number_enl_gchauf_4) /

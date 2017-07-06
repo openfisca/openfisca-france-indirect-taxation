@@ -6,7 +6,7 @@ data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-i
 out.nnd <- NND.hotdeck(
   data.rec = data_bdf, data.don = data_enl,
   match.vars = c("surfhab_d", "bat_av_48", "bat_ap_74", "log_indiv", "part_energies_revtot", "agepr", "fioul"),
-  don.class = c("decile_revtot")
+  don.class = c("niveau_vie_decile")
 )
 
 # Create fused file
