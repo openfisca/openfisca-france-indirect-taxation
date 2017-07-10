@@ -5,7 +5,7 @@ data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-i
 # Compute random matching
 out.nnd <- RANDwNND.hotdeck(
   data.rec = data_bdf, data.don = data_enl,
-  match.vars = c("surfhab_d", "bat_av_48", "bat_ap_74", "log_indiv", "part_energies_revtot", "agepr"),
+  match.vars = c("surfhab_d", "bat_av_49", "bat_ap_74", "log_indiv", "part_energies_revtot", "agepr"),
   don.class = c("niveau_vie_decile", "rural", "paris"),
   dist.fun = "Manhattan",
   weight.don = "pondmen"

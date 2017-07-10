@@ -32,13 +32,13 @@ Predict froid
 """
 
 regression = smf.ols(formula = 'froid ~ \
-    aides_logement + agepr + bat_av_48 + bat_49_74 + log_indiv + \
+    aides_logement + agepr + bat_av_49 + bat_49_74 + log_indiv + \
      ocde10 + ouest_sud + part_energies_revtot + revtot + revtot_2 + rural + \
     surfhab_d',
     data = data_enl).fit()
 print regression.summary()
 
-variables = ['aides_logement', 'agepr', 'bat_av_48', 'bat_49_74', 'log_indiv',
+variables = ['aides_logement', 'agepr', 'bat_av_49', 'bat_49_74', 'log_indiv',
     'ocde10', 'ouest_sud', 'part_energies_revtot', 'revtot', 'revtot_2', 'rural',
     'surfhab_d']
 
@@ -54,13 +54,13 @@ Predict froid_cout
 """
 
 regression = smf.ols(formula = 'froid_cout ~ \
-    aides_logement + agepr + bat_av_48 + bat_49_74 + log_indiv + \
+    aides_logement + agepr + bat_av_49 + bat_49_74 + log_indiv + \
      ocde10 + ouest_sud + part_energies_revtot + revtot + revtot_2 + rural + \
     surfhab_d',
     data = data_enl).fit()
 print regression.summary()
 
-variables = ['aides_logement', 'agepr', 'bat_av_48', 'bat_49_74', 'log_indiv',
+variables = ['aides_logement', 'agepr', 'bat_av_49', 'bat_49_74', 'log_indiv',
     'ocde10', 'ouest_sud', 'part_energies_revtot', 'revtot', 'revtot_2', 'rural',
     'surfhab_d']
 
