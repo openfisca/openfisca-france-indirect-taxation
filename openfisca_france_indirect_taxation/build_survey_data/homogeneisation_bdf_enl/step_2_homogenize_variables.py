@@ -122,46 +122,9 @@ def homogenize_variables_definition_bdf_enl():
     return data_enl, data_bdf
 
 
-def create_niveau_vie_quantiles():
-    for i in [0,1]:
-        data = homogenize_variables_definition_bdf_enl()[i]
-        data['niveau_vie'] = data['revtot'] / data['ocde10']
-
-        data = data.sort_values(by = ['niveau_vie'])
-        data['sum_pondmen'] = data['pondmen'].cumsum()
-        
-        data['niveau_vie_decile'] = pd.qcut(data['sum_pondmen'], 10,
-        labels = range(1,11)
-        )
-
-        data['niveau_vie_quintile'] = pd.qcut(data['sum_pondmen'], 5,
-        labels = range(1,6)
-        )
-
-        data = data.sort_index()
-        del data['sum_pondmen']
-
-        if i == 0:
-            data_enl = data.copy()
-        else:
-            data_bdf = data.copy()
-
-    return data_enl, data_bdf
-
-
 def create_new_variables():
     for i in [0,1]:
-        data = create_niveau_vie_quantiles()[i]
-
-        # Création d'une variable commune aux deux enquêtes pour les déciles de revenu
-        data['niveau_vie_decile'] = pd.qcut(data['revtot'], 10,
-        labels = range(1,11)
-        )
-    
-        # Création d'une variable commune aux deux enquêtes pour les quintiles de revenu
-        data['quintile_revtot'] = pd.qcut(data['revtot'], 5,
-        labels = range(1,6)
-        )
+        data = homogenize_variables_definition_bdf_enl()[i]
 
         # Dummy variable pour la consommation de fioul
         data['fioul'] = 0
@@ -191,11 +154,11 @@ def create_new_variables():
         data.loc[data['tuu'] == 8, 'paris'] = 1
     
         # Dummy variables pour l'ancienneté du batîment (1er norme importante sur l'isolation en 74)
-        data['bat_av_48'] = 0
+        data['bat_av_49'] = 0
         data['bat_49_74'] = 0
         data['bat_ap_74'] = 0
     
-        data.loc[data['ancons'] == 1, 'bat_av_48'] = 1
+        data.loc[data['ancons'] == 1, 'bat_av_49'] = 1
         data.loc[data['ancons'] < 5, 'bat_49_74'] = 1
         data.loc[data['ancons'] == 1, 'bat_49_74'] = 0
         data.loc[data['ancons'] > 4, 'bat_ap_74'] = 1
@@ -244,7 +207,35 @@ def create_new_variables():
     return data_enl, data_bdf
 
 
+def create_niveau_vie_quantiles():
+    for i in [0,1]:
+        data = create_new_variables()[i]
+        data['niveau_vie'] = data['revtot'] / data['ocde10']
+
+        data = data.sort_values(by = ['niveau_vie'])
+        data['sum_pondmen'] = data['pondmen'].cumsum()
+        
+        population_totale = data['sum_pondmen'].max()
+        data['niveau_vie_decile'] = 0
+        for j in range(1,11):
+            data.niveau_vie_decile.loc[data.sum_pondmen > population_totale*(float(j)/10 - 0.1)] = j
+        
+        data['niveau_vie_quintile'] = 0
+        for j in range(1,6):
+            data.niveau_vie_quintile.loc[data.sum_pondmen > population_totale*(float(j)/5 - 0.2)] = j
+
+        data = data.sort_index()
+        del data['sum_pondmen']
+
+        if i == 0:
+            data_enl = data.copy()
+        else:
+            data_bdf = data.copy()
+
+    return data_enl, data_bdf
+
+
 if __name__ == "__main__":
-    data = create_new_variables()    
+    data = create_niveau_vie_quantiles()
     data_enl = data[0]
     data_bdf = data[1]

@@ -12,7 +12,7 @@ import pkg_resources
 
 
 from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_enl.step_2_homogenize_variables import \
-    create_new_variables
+    create_niveau_vie_quantiles
 
 assets_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
@@ -20,7 +20,7 @@ assets_directory = os.path.join(
 
 
 def clean_data():
-    data = create_new_variables()
+    data = create_niveau_vie_quantiles()
     data_enl = data[0]
     data_bdf = data[1]
     

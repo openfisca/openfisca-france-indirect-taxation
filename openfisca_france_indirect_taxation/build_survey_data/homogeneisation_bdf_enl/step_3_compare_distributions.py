@@ -12,11 +12,11 @@ import matplotlib.pyplot as plt
 import seaborn
 
 from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_enl.step_2_homogenize_variables import \
-    create_new_variables
+    create_niveau_vie_quantiles
 
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
-data = create_new_variables()
+data = create_niveau_vie_quantiles()
 data_enl = data[0]
 data_bdf = data[1]
 
