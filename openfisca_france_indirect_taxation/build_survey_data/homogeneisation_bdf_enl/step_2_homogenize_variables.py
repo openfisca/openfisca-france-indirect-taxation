@@ -199,6 +199,9 @@ def create_new_variables():
             data['depenses_energies'] / data['revtot']
             )
 
+        # Suppression des outliers
+        data = data.query('part_energies_revtot < 0.5')
+
         if i == 0:
             data_enl = data.copy()
         else:
