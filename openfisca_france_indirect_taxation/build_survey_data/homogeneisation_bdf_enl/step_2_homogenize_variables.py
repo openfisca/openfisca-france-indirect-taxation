@@ -168,8 +168,8 @@ def create_new_variables():
         data['log_colec'] = 1
     
         for j in [1,5,7]:    
-            data.loc[data['htl'] == i, 'log_indiv'] = 1
-            data.loc[data['htl'] == i, 'log_colec'] = 0
+            data.loc[data['htl'] == j, 'log_indiv'] = 1
+            data.loc[data['htl'] == j, 'log_colec'] = 0
         del j
     
         # Creation de dummy variables pour la zone climatique
@@ -177,8 +177,8 @@ def create_new_variables():
         data['est_nord'] = 1
     
         for j in [5,7,9]:    
-            data.loc[data['zeat'] == i, 'ouest_sud'] = 1
-            data.loc[data['zeat'] == i, 'est_nord'] = 0
+            data.loc[data['zeat'] == j, 'ouest_sud'] = 1
+            data.loc[data['zeat'] == j, 'est_nord'] = 0
         del j
     
         # Création d'une variable pour la part des dépenses totales en énergies
