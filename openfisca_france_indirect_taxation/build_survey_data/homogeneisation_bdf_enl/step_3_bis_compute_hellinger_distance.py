@@ -20,7 +20,7 @@ _SQRT2 = np.sqrt(2)     # sqrt(2) with default precision np.float64
 
 def hellinger(p, q):
     return np.sqrt(np.sum((np.sqrt(p) - np.sqrt(q)) ** 2)) / _SQRT2
-    
+
 
 def hellinger_agepr(data_bdf, data_enl):
     data_bdf['agepr'] = data_bdf['agepr'].astype(float)
@@ -84,12 +84,14 @@ hellinger_deciles = hellinger_deciles(data_bdf, data_enl)
 def hellinger_depenses_energies(data_bdf, data_enl):
     data_bdf['depenses_energies'] = data_bdf['depenses_energies'].astype(float)
     data_bdf['depenses_energies_racine'] = (data_bdf['depenses_energies']) ** (0.5)
-    depenses_energies_racine_max = data_bdf['depenses_energies_racine'].max()
-    data_bdf['depenses_energies_groupe'] = (data_bdf['depenses_energies_racine'] / depenses_energies_racine_max).round(decimals = 2)
+    depenses_energies_racine_max_bdf = data_bdf['depenses_energies_racine'].max()
     
     data_enl['depenses_energies'] = data_enl['depenses_energies'].astype(float)
     data_enl['depenses_energies_racine'] = (data_enl['depenses_energies']) ** (0.5)
-    depenses_energies_racine_max = data_enl['depenses_energies_racine'].max()
+    depenses_energies_racine_max_enl = data_enl['depenses_energies_racine'].max()
+
+    depenses_energies_racine_max = max(depenses_energies_racine_max_bdf, depenses_energies_racine_max_enl)
+    data_bdf['depenses_energies_groupe'] = (data_bdf['depenses_energies_racine'] / depenses_energies_racine_max).round(decimals = 2)
     data_enl['depenses_energies_groupe'] = (data_enl['depenses_energies_racine'] / depenses_energies_racine_max).round(decimals = 2)
 
     distribution_bdf = dict()
@@ -266,11 +268,12 @@ def hellinger_postes_energies(data_bdf, data_enl):
     distribution_enl_3 = dict()
     for en in [1,2,3]:
         data_bdf['poste_coicop_45{}'.format(en)] = data_bdf['poste_coicop_45{}'.format(en)].astype(float)
-        poste_max = data_bdf['poste_coicop_45{}'.format(en)].max()
-        data_bdf['poste_coicop_45{}_groupe'.format(en)] = (data_bdf['poste_coicop_45{}'.format(en)] / poste_max).round(decimals = 2)
-        
+        poste_max_bdf = data_bdf['poste_coicop_45{}'.format(en)].max()        
         data_enl['poste_coicop_45{}'.format(en)] = data_enl['poste_coicop_45{}'.format(en)].astype(float)
-        poste_max = data_enl['poste_coicop_45{}'.format(en)].max()
+        poste_max_enl = data_enl['poste_coicop_45{}'.format(en)].max()
+
+        poste_max = max(poste_max_bdf, poste_max_enl)
+        data_bdf['poste_coicop_45{}_groupe'.format(en)] = (data_bdf['poste_coicop_45{}'.format(en)] / poste_max).round(decimals = 2)
         data_enl['poste_coicop_45{}_groupe'.format(en)] = (data_enl['poste_coicop_45{}'.format(en)] / poste_max).round(decimals = 2)    
     
         for i in range(0,101):
@@ -331,14 +334,15 @@ hellinger_quintiles = hellinger_quintiles(data_bdf, data_enl)
 def hellinger_revtot(data_bdf, data_enl):
     data_bdf['revtot'] = data_bdf['revtot'].astype(float)
     data_bdf['revtot_racine'] = (data_bdf['revtot']) ** (0.5)
-    revtot_racine_max = data_bdf['revtot_racine'].max()
-    data_bdf['revtot_groupe'] = (data_bdf['revtot_racine'] / revtot_racine_max).round(decimals = 2)
+    revtot_racine_max_bdf = data_bdf['revtot_racine'].max()
     
     data_enl['revtot'] = data_enl['revtot'].astype(float)
     data_enl['revtot_racine'] = (data_enl['revtot']) ** (0.5)
-    revtot_racine_max = data_enl['revtot_racine'].max()
-    data_enl['revtot_groupe'] = (data_enl['revtot_racine'] / revtot_racine_max).round(decimals = 2)
+    revtot_racine_max_enl = data_enl['revtot_racine'].max()
 
+    revtot_racine_max = max(revtot_racine_max_bdf, revtot_racine_max_enl)
+    data_bdf['revtot_groupe'] = (data_bdf['revtot_racine'] / revtot_racine_max).round(decimals = 2)
+    data_enl['revtot_groupe'] = (data_enl['revtot_racine'] / revtot_racine_max).round(decimals = 2)
 
     distribution_bdf = dict()
     for i in range(0,101):
@@ -361,13 +365,13 @@ hellinger_revtot = hellinger_revtot(data_bdf, data_enl)
 
 def hellinger_surfhab_d(data_bdf, data_enl):
     data_bdf['surfhab_d'] = data_bdf['surfhab_d'].astype(float)
-    surfhab_d_max = data_bdf['surfhab_d'].max()
-    data_bdf['surfhab_d_groupe'] = (data_bdf['surfhab_d'] / surfhab_d_max).round(decimals = 2)
-    
+    surfhab_d_max_bdf = data_bdf['surfhab_d'].max()    
     data_enl['surfhab_d'] = data_enl['surfhab_d'].astype(float)
-    surfhab_d_max = data_enl['surfhab_d'].max()
-    data_enl['surfhab_d_groupe'] = (data_enl['surfhab_d'] / surfhab_d_max).round(decimals = 2)
+    surfhab_d_max_enl = data_enl['surfhab_d'].max()
 
+    surfhab_d_max = max(surfhab_d_max_bdf, surfhab_d_max_enl)
+    data_bdf['surfhab_d_groupe'] = (data_bdf['surfhab_d'] / surfhab_d_max).round(decimals = 2)
+    data_enl['surfhab_d_groupe'] = (data_enl['surfhab_d'] / surfhab_d_max).round(decimals = 2)
 
     distribution_bdf = dict()
     for i in range(0,101):
