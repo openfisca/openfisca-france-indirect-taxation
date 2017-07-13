@@ -228,6 +228,18 @@ results_htl = check_htl()
 # Assez bonnes performances -> revoir la définition
 
 
+def check_log_indiv():
+    results = dict()
+    results['BdF'] = \
+        (data_bdf['log_indiv'] * data_bdf['pondmen']).sum() / data_bdf['pondmen'].sum()
+    results['ENL'] = \
+        (data_enl['log_indiv'] * data_enl['pondmen']).sum() / data_enl['pondmen'].sum()
+
+    return results
+
+results_log_indiv = check_log_indiv()
+
+
 # mchof_d - montant annuel des dépenses en chauffage collectif
 def check_mchof_d():
     results = dict()
