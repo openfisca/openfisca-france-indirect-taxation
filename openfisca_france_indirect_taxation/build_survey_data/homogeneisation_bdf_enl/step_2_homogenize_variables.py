@@ -41,12 +41,10 @@ def homogenize_variables_definition_bdf_enl():
     
     
     # Les définitions du ménage dans BdF et ENL sont différentes : 
-    # on vérifie que la variable HTL est définie de la même manière
+    # on exclut les catégories absentes de BdF (logements-foyers pour personnes âgées
+    # et chambre d'hôtels)
     for i in [4, 6]:
-        check = data_bdf.query('htl == {}'.format(i))
-        assert len(check) == 0
-        del check
-    
+        data_enl = data_enl.query('htl != {}'.format(i))
     
     # Changement nomenclature variable année de construction du batiment :
     data_enl['ancons'] = 0
