@@ -23,6 +23,15 @@ options_by_dir = {
     'formulas': {},
     }
 
+options_by_dir = collections.OrderedDict((
+    (
+        os.path.abspath(os.path.join(os.path.dirname(__file__), 'formulas')),
+        dict(
+            calculate_output = False,
+            default_absolute_error_margin = 0.005,
+            ),
+        ),
+    ))
 
 def test():
     for directory, options in options_by_dir.iteritems():
@@ -35,6 +44,11 @@ def test():
 
         if not options.get('default_relative_error_margin') and not options.get('default_absolute_error_margin'):
             options['default_absolute_error_margin'] = 0.005
+
+        if options.get('requires'):
+            # Check if the required package was successfully imported in tests/base.py
+            if getattr(base, options.get('requires')) is None:
+                continue
 
         reform_keys = options.get('reforms')
         tax_benefit_system = base.get_cached_composed_reform(

@@ -131,7 +131,7 @@ def preprocess_legislation(legislation_json):
     for element in ['diesel', 'essence']:
         taille_parc = parc_annuel_moyen_vp[element]
         values_parc[element] = []
-        for year in range(1990, 2014):
+        for year in range(1990, 2015):
             values = dict()
             values['start'] = u'{}-01-01'.format(year)
             values['stop'] = u'{}-12-31'.format(year)
@@ -171,7 +171,7 @@ def preprocess_legislation(legislation_json):
     for element in ['diesel', 'essence']:
         quantite_carburants = quantite_carbu_vp_france[element]
         values_quantite[element] = []
-        for year in range(1990, 2014):
+        for year in range(1990, 2015):
             values = dict()
             values['start'] = u'{}-01-01'.format(year)
             values['stop'] = u'{}-12-31'.format(year)

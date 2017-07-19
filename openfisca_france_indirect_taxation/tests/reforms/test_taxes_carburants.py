@@ -9,10 +9,10 @@ from openfisca_core.tools import assert_near
 from openfisca_france_indirect_taxation.tests import base
 
 
-def test_taxes_carburants():
+def test_rattrapage_diesel():
     year = 2014
     reform = base.get_cached_reform(
-        reform_key = 'taxes_carburants',
+        reform_key = 'rattrapage_diesel',
         tax_benefit_system = base.tax_benefit_system,
         )
     scenario = reform.new_scenario().init_single_entity(
@@ -27,9 +27,9 @@ def test_taxes_carburants():
         )
     reform_simulation = scenario.new_simulation(debug = True)
     absolute_error_margin = 0.01
-    reform_depenses_essence_ajustees = reform_simulation.calculate('depenses_essence_ajustees')
+    reform_depenses_essence_ajustees_rattrapage_diesel = reform_simulation.calculate('depenses_essence_ajustees_rattrapage_diesel')
     assert_near(
-        reform_depenses_essence_ajustees,
+        reform_depenses_essence_ajustees_rattrapage_diesel,
         1000 * (1 + (1 + -.4) * 10 / 148.4583),
         absolute_error_margin = absolute_error_margin
         )
@@ -39,4 +39,3 @@ if __name__ == '__main__':
     import logging
     import sys
     logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
-    test_taxes_carburants()

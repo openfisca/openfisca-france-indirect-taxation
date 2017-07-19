@@ -47,13 +47,39 @@ class agepr(YearlyVariable):
     label = u"Age personne de référence"
 
 
+class age_group_pr(Variable):
+    column = AgeCol
+    entity = Menage
+    label = u"Groupe d'âge personne de référence"
+
+    def formula(self, simulation, period):
+        age_group_pr = 0
+        agepr = simulation.calculate('agepr', period)
+        age_group_pr = (
+            1 * (agepr < 30) +
+            2 * (agepr < 40) * (agepr > 29) +
+            3 * (agepr < 50) * (agepr > 39) +
+            4 * (agepr < 60) * (agepr > 49) +
+            5 * (agepr < 70) * (agepr > 59) +
+            6 * (agepr > 69)
+            )
+
+        return age_group_pr
+
+
 class birth(YearlyVariable):
     column = DateCol
     entity = Individu
     label = u"Date de naissance"
 
 
-class nadultes(YearlyVariable):
+class nactifs(YearlyVariable):
+    column = IntCol
+    entity = Menages
+    label = u"Nombre d'actifs dans le ménage"
+
+
+class nadultes(Variable):
     column = IntCol
     entity = Individu
     label = u"Nombre d'adultes dans le ménage"

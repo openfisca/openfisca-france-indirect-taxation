@@ -3,12 +3,13 @@
 
 from __future__ import division
 
+import pandas
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
 
-import openfisca_france_indirect_taxation
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.surveys import get_input_data_frame
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
@@ -24,7 +25,8 @@ def create_survey_scenario(year = None):
 
     assert year is not None
     input_data_frame = get_input_data_frame(year)
-    tax_benefit_system = openfisca_france_indirect_taxation.FranceIndirectTaxationTaxBenefitSystem()
+
+    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
     survey_scenario = SurveyScenario().init_from_data_frame(
         input_data_frame = input_data_frame,
         tax_benefit_system = tax_benefit_system,
@@ -39,7 +41,8 @@ def simulate(simulated_variables, year):
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
     input_data_frame = get_input_data_frame(year)
-    tax_benefit_system = openfisca_france_indirect_taxation.FranceIndirectTaxationTaxBenefitSystem()
+
+    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
     survey_scenario = SurveyScenario().init_from_data_frame(
         input_data_frame = input_data_frame,
         tax_benefit_system = tax_benefit_system,
@@ -60,7 +63,8 @@ def simulate_df_calee_by_grosposte(simulated_variables, year):
     '''
     input_data_frame = get_input_data_frame(year)
     input_data_frame_calee = build_df_calee_on_grospostes(input_data_frame, year, year)
-    tax_benefit_system = openfisca_france_indirect_taxation.FranceIndirectTaxationTaxBenefitSystem()
+
+    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
     survey_scenario = SurveyScenario().init_from_data_frame(
         input_data_frame = input_data_frame_calee,
         tax_benefit_system = tax_benefit_system,
@@ -81,7 +85,8 @@ def simulate_df_calee_on_ticpe(simulated_variables, year):
     '''
     input_data_frame = get_input_data_frame(year)
     input_data_frame_calee = build_df_calee_on_ticpe(input_data_frame, year, year)
-    tax_benefit_system = openfisca_france_indirect_taxation.FranceIndirectTaxationTaxBenefitSystem()
+
+    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
     survey_scenario = SurveyScenario().init_from_data_frame(
         input_data_frame = input_data_frame_calee,
         tax_benefit_system = tax_benefit_system,
@@ -114,6 +119,27 @@ def collapse(dataframe, groupe, var):
     return var_weighted_grouped
 
 
+def dataframe_by_group(survey_scenario, category, variables, reference = False):
+    pivot_table = pandas.DataFrame()
+
+    if reference is not False:
+        for values_reference in variables:
+            pivot_table = pandas.concat([
+                pivot_table,
+                survey_scenario.compute_pivot_table(values = [values_reference], columns = [category],
+                    reference = True)])
+    else:
+        for values_reform in variables:
+            pivot_table = pandas.concat([
+                pivot_table,
+                survey_scenario.compute_pivot_table(values = [values_reform], columns = [category])
+                ])
+
+    df_reform = pivot_table.T
+
+    return df_reform
+
+
 def df_weighted_average_grouped(dataframe, groupe, varlist):
     '''
     Agrège les résultats de weighted_average_grouped() en une unique dataframe pour la liste de variable 'varlist'.
@@ -127,6 +153,18 @@ def df_weighted_average_grouped(dataframe, groupe, varlist):
 
 # To choose color when doing graph, could put a list of colors in argument
 def graph_builder_bar(graph):
+    axes = graph.plot(
+        kind = 'bar',
+        stacked = True,
+        )
+    plt.axhline(0, color = 'k')
+    axes.legend(
+        bbox_to_anchor = (1.5, 1.05),
+        )
+    return plt.show()
+
+
+def graph_builder_bar_percent(graph):
     axes = graph.plot(
         kind = 'bar',
         stacked = True,
@@ -152,14 +190,11 @@ def graph_builder_bar_list(graph, a, b):
     return plt.show()
 
 
-def graph_builder_line_percent(graph, a, b):
+def graph_builder_line_percent(graph):
     axes = graph.plot(
         )
     plt.axhline(0, color = 'k')
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
-    axes.legend(
-        bbox_to_anchor = (a, b),
-        )
     return plt.show()
 
 
@@ -201,7 +236,10 @@ def percent_formatter(x, pos = 0):
 
 
 def save_dataframe_to_graph(dataframe, file_name):
-    return dataframe.to_csv('C:/Users/thomas.douenne/Documents/data/Stats_rapport/' + file_name, sep = ',')
+    # return dataframe.to_csv('C:/Users/thomas.douenne/Documents/data/Stats_rapport/' + file_name, sep = ',')
+    return dataframe.to_csv(
+        u'C:/Users/thomas.douenne/Desktop/Dossier/Mémoire/Documents propres/Graphs/' + file_name, sep = ';'
+        )
 #    assets_directory = os.path.join(
 #        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
 #        )

@@ -5,8 +5,16 @@ from __future__ import division
 
 import logging
 
+from openfisca_core.columns import FloatCol
+from openfisca_core.formulas import dated_function, DatedVariable
+==== BASE ====
 
+from openfisca_core.formulas import dated_function
+from openfisca_core.variables import DatedVariable
+
+==== BASE ====
 from openfisca_france_indirect_taxation.model.base import *
+from openfisca_france_indirect_taxation.utils import get_parametres_fiscalite_data_frame
 
 
 log = logging.getLogger(__name__)

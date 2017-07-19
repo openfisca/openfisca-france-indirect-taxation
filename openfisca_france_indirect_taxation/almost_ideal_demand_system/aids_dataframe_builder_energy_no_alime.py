@@ -87,6 +87,8 @@ for year in [2000, 2005, 2011]:
     # On merge les prix des biens avec les dépenses déjà présentes dans df. Le merge se fait sur 'indice_prix_produit'
     # Indice prix produit correspond à poste_coicop_xyz_vag
     df_depenses_prix = pd.merge(df, df_indice_prix_produit, on = 'indice_prix_produit')
+    # To save some memory, we delete df...
+    del df
 
     # df_depenses_prix contient les dépenses de consommation et les prix associés à ces dépenses.
     # Il faut maintenant construire les catégories de biens que l'on souhaite comparer.
@@ -216,6 +218,8 @@ for year in [2000, 2005, 2011]:
     data_frame_all_years = pd.concat([data_frame_all_years, data_frame_for_reg])
     data_frame_all_years.fillna(0, inplace = True)
 
+"""
+
     data_frame_for_reg.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
     'quaids', 'data_frame_energy_no_alime_{}.csv'.format(year)), sep = ',')
 
@@ -246,6 +250,7 @@ data_frame_rural.to_csv(os.path.join(assets_directory, 'openfisca_france_indirec
 data_frame_large_cities.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
     'quaids', 'data_frame_large_cities_no_alime_all_years.csv'), sep = ',')
 
+"""
 
 # Must correct what is useless, improve demographics : dip14
 # dip14 : use only dip14pr (good proxy for dip14cj anyway), but change the nomenclature to have just 2 or 3 dummies

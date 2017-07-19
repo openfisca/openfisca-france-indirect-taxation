@@ -78,6 +78,12 @@ class niveau_vie_decile(YearlyVariable):
         return niveau_vie_decile
 
 
+class loyer_impute(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Loyer imputé du ménage"
+
+
 class rev_disp_loyerimput(YearlyVariable):
     column = FloatCol
     entity = Menage

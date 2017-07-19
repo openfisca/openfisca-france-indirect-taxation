@@ -8,9 +8,11 @@ from .. import FranceIndirectTaxationTaxBenefitSystem
 from ..reforms import (
     alimentation,
     aliss,
-    contribution_climat_energie,
-    taxes_carburants,
+    cce_2015_in_2014,
+    rattrapage_diesel,
     taxe_carbone,
+    contribution_climat_energie_reforme,
+    cce_2016_in_2014,
     )
 
 
