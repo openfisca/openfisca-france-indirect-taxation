@@ -65,12 +65,12 @@ hellinger_bat_annee = hellinger_bat_annee(data_bdf, data_enl)
 # By construction, the distance should be extremely close to 0
 def hellinger_deciles(data_bdf, data_enl):
     distribution_bdf = dict()
-    for i in range(1,10):
+    for i in range(1,11):
         distribution_bdf['{}'.format(i)] = (data_bdf.query('niveau_vie_decile == {}'.format(i))['pondmen'].sum() /
                  data_bdf['pondmen'].sum())
 
     distribution_enl = dict()
-    for i in range(1,10):
+    for i in range(1,11):
         distribution_enl['{}'.format(i)] = (data_enl.query('niveau_vie_decile == {}'.format(i))['pondmen'].sum() /
                  data_enl['pondmen'].sum())
 
