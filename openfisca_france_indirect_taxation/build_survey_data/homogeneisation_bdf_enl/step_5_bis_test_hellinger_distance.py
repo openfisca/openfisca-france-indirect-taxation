@@ -73,42 +73,42 @@ Test : share of people having trouble with heat in general
     With sampling weights
 """
 
-def hellinger_gchauf_n(data_matched, data_enl):
+def hellinger_froid(data_matched, data_enl):
     distribution_matched = dict()
     for i in [0, 1]:
-        distribution_matched['{}'.format(i)] = (data_matched.query('gchauf_n == {}'.format(i))['pondmen'].sum() /
+        distribution_matched['{}'.format(i)] = (data_matched.query('froid == {}'.format(i))['pondmen'].sum() /
                  data_matched['pondmen'].sum())
 
     distribution_enl = dict()
     for i in [0, 1]:
-        distribution_enl['{}'.format(i)] = (data_enl.query('gchauf_n == {}'.format(i))['pondmen'].sum() /
+        distribution_enl['{}'.format(i)] = (data_enl.query('froid == {}'.format(i))['pondmen'].sum() /
                  data_enl['pondmen'].sum())
 
     hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
     
     return hellinger_distance
     
-hellinger_gchauf_n_random = hellinger_gchauf_n(data_matched_random, data_enl)
-hellinger_gchauf_n_rank = hellinger_gchauf_n(data_matched_rank, data_enl)
+hellinger_froid_random = hellinger_froid(data_matched_random, data_enl)
+hellinger_froid_rank = hellinger_froid(data_matched_rank, data_enl)
 
 
-def hellinger_gchauf_3(data_matched, data_enl):
+def hellinger_froid_cout(data_matched, data_enl):
     distribution_matched = dict()
     for i in [0, 1]:
-        distribution_matched['{}'.format(i)] = (data_matched.query('gchauf_3 == {}'.format(i))['pondmen'].sum() /
+        distribution_matched['{}'.format(i)] = (data_matched.query('froid_cout == {}'.format(i))['pondmen'].sum() /
                  data_matched['pondmen'].sum())
 
     distribution_enl = dict()
     for i in [0, 1]:
-        distribution_enl['{}'.format(i)] = (data_enl.query('gchauf_3 == {}'.format(i))['pondmen'].sum() /
+        distribution_enl['{}'.format(i)] = (data_enl.query('froid_cout == {}'.format(i))['pondmen'].sum() /
                  data_enl['pondmen'].sum())
 
     hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
     
     return hellinger_distance
     
-hellinger_gchauf_3_random = hellinger_gchauf_3(data_matched_random, data_enl)
-hellinger_gchauf_3_rank = hellinger_gchauf_3(data_matched_rank, data_enl)
+hellinger_froid_cout_random = hellinger_froid_cout(data_matched_random, data_enl)
+hellinger_froid_cout_rank = hellinger_froid_cout(data_matched_rank, data_enl)
 
 
 def hellinger_froid_niveau_vie_decile(data_matched, data_enl):
@@ -118,13 +118,13 @@ def hellinger_froid_niveau_vie_decile(data_matched, data_enl):
         data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
         distribution_enl['{}'.format(i)] = (
             100 *
-            sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_n'] != 0)) /
+            sum(data_enl_decile['pondmen'] * (data_enl_decile['froid'] == 1)) /
             sum(data_enl_decile['pondmen'])
                 )
         data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
         distribution_matched['{}'.format(i)] = (
             100 *
-            sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_n'] != 0)) /
+            sum(data_matched_decile['pondmen'] * (data_matched_decile['froid'] == 1)) /
             sum(data_matched_decile['pondmen'])
                 )
 
@@ -149,13 +149,15 @@ def hellinger_froid_cout_niveau_vie_decile(data_matched, data_enl):
     for i in range(1,11):
         data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
         distribution_enl['{}'.format(i)] = (
-            100 * sum(data_enl_decile['pondmen'] *
-            (data_enl_decile['gchauf_3'] == 1)) / sum(data_enl_decile['pondmen'])
-                             )
+            100 *
+            sum(data_enl_decile['pondmen'] * (data_enl_decile['froid_cout'] == 1)) /
+            sum(data_enl_decile['pondmen'])
+            )
         data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
         distribution_matched['{}'.format(i)] = (
-            100 * sum(data_matched_decile['pondmen'] *
-            (data_matched_decile['gchauf_3'] == 1)) / sum(data_matched_decile['pondmen'])
+            100 *
+            sum(data_matched_decile['pondmen'] * (data_matched_decile['froid_cout'] == 1)) /
+            sum(data_matched_decile['pondmen'])
                              )
 
     hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())

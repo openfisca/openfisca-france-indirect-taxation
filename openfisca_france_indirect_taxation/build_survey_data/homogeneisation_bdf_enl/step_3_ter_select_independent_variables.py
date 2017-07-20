@@ -16,18 +16,6 @@ from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_en
 
 data_enl = create_niveau_vie_quantiles()[0]
 
-data_enl['froid'] = 0
-data_enl['froid'].loc[data_enl['gchauf_n'] != 0] = 1
-
-data_enl['froid_cout'] = 0
-data_enl['froid_cout'].loc[data_enl['gchauf_3'] == 1] = 1
-
-data_enl['froid_isolation'] = 0
-data_enl['froid_isolation'].loc[data_enl['gchauf_4'] == 1] = 1
-
-data_enl['aides_logement'] = 0
-data_enl['aides_logement'].loc[data_enl['aba'] == 1] = 1
-
 data_enl['revtot_2'] = data_enl['revtot'] ** 2
 
 

@@ -53,7 +53,7 @@ for i in range(1,11):
 # Indicateurs propres au sentiment de froid, à la consommation d'énergies, et indicateurs croisés.
 data_matched_random['aise_froid'] = 0
 data_matched_random['aise_froid'] = \
-    (data_matched_random['gchauf_n'] != 0) * (data_matched_random['aise'] > 3) * 1
+    (data_matched_random['froid'] == 1) * (data_matched_random['aise'] > 3) * 1
 
 print float(len(data_matched_random.query('aise_froid == 1'))) / len(data_matched_random) * 100
 for i in range(1,11):
@@ -62,7 +62,7 @@ for i in range(1,11):
     ) / len(data_matched_random.query('niveau_vie_decile == {}'.format(i))) * 100
 
 data_matched_random['aise_froid_cout'] = \
-    (data_matched_random['aise_froid'] == 1) * (data_matched_random['gchauf_3'] == 1) * 1
+    (data_matched_random['aise_froid'] == 1) * (data_matched_random['froid_cout'] == 1) * 1
 
 print "Parmi les personnes déclarant avoir eu froid à cause du prix de l'énergie, quelle est la part \
     ayant des difficultés dans leur budget ?"
@@ -70,7 +70,7 @@ print " "
 
 for i in range(1,11):
     print float(len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('aise_froid_cout == 1'))) / \
-        len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('gchauf_3 == 1'))
+        len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('froid_cout == 1'))
 print " "
 
 print "Parmi les personnes ayant des difficultés dans leur budget, et ayant froid dans leur logement \

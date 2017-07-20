@@ -50,13 +50,13 @@ Part des ménages ayant eu froid pendant l'hiver
 
 print "Sur l'ensemble des ménages :"
 print " "
-print 100 * sum(data_enl['pondmen'] * (data_enl['gchauf_n'] != 0)) / sum(data_enl['pondmen'])
+print 100 * sum(data_enl['pondmen'] * (data_enl['froid'] == 1)) / sum(data_enl['pondmen'])
 print " "
 print "Par décile de niveau de vie :"
 print " "
 for i in range(1,11):
     data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
-    print i, "-", 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_n'] != 0)) / sum(data_enl_decile['pondmen'])
+    print i, "-", 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['froid'] == 1)) / sum(data_enl_decile['pondmen'])
 
 
 """
@@ -65,13 +65,13 @@ Part des ménages ayant eu froid pendant l'hiver en raison du coût de l'énergi
 
 print "Sur l'ensemble des ménages :"
 print " "
-print 100 * sum(data_enl['pondmen'] * (data_enl['gchauf_3'] == 1)) / sum(data_enl['pondmen'])
+print 100 * sum(data_enl['pondmen'] * (data_enl['froid_cout'] == 1)) / sum(data_enl['pondmen'])
 print " "
 print "Par décile de niveau de vie :"
 print " "
 for i in range(1,11):
     data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
-    print i, "-", 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_3'] == 1)) / sum(data_enl_decile['pondmen'])
+    print i, "-", 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['froid_cout'] == 1)) / sum(data_enl_decile['pondmen'])
 
 
 """
@@ -80,7 +80,7 @@ Part des ménages ayant eu froid pendant l'hiver, et ayant des difficultés avec
 
 data_matched_random['aise_froid'] = 0
 data_matched_random['aise_froid'] = \
-    (data_matched_random['gchauf_n'] != 0) * (data_matched_random['aise'] > 3) * 1
+    (data_matched_random['froid'] == 1) * (data_matched_random['aise'] > 3) * 1
 
 print "Sur l'ensemble des ménages :"
 print " "
@@ -99,7 +99,7 @@ et ayant des difficultés avec leur budget
 """
 
 data_matched_random['aise_froid_cout'] = \
-    (data_matched_random['aise_froid'] == 1) * (data_matched_random['gchauf_3'] == 1) * 1
+    (data_matched_random['aise_froid'] == 1) * (data_matched_random['froid_cout'] == 1) * 1
 
 print "Sur l'ensemble des ménages :"
 print " "

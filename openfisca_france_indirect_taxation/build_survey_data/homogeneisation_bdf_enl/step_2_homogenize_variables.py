@@ -177,7 +177,25 @@ def create_new_variables():
             data.loc[data['zeat'] == j, 'ouest_sud'] = 1
             data.loc[data['zeat'] == j, 'est_nord'] = 0
         del j
-    
+
+        if i == 0:
+            data['froid'] = 0
+            data['froid'].loc[data['gchauf_n'] != 0] = 1
+            del data['gchauf_n']
+
+            data['froid_cout'] = 0
+            data['froid_cout'].loc[data['gchauf_3'] == 1] = 1
+            del data['gchauf_3']
+
+
+            data['froid_isolation'] = 0
+            data['froid_isolation'].loc[data['gchauf_4'] == 1] = 1
+            del data['gchauf_4']
+        
+        data['aides_logement'] = 0
+        data['aides_logement'].loc[data['aba'] == 1] = 1
+
+
         # Création d'une variable pour la part des dépenses totales en énergies
         energie_logement = ['poste_coicop_451', 'poste_coicop_4511', 'poste_coicop_452',
         'poste_coicop_4522', 'poste_coicop_453', 'poste_coicop_454', 'poste_coicop_455',

@@ -62,15 +62,15 @@ data_matched_rank = pd.read_csv(
 
 def test_froid_niveau_vie_decile(data_enl, data_matched):
     dict_froid = dict()
-    average_froid_enl = 100 * sum(data_enl['pondmen'] * (data_enl['gchauf_n'] != 0)) / sum(data_enl['pondmen'])
-    average_froid_matched = 100 * sum(data_matched['pondmen'] * (data_matched['gchauf_n'] != 0)) / sum(data_matched['pondmen'])
+    average_froid_enl = 100 * sum(data_enl['pondmen'] * (data_enl['froid'] == 1)) / sum(data_enl['pondmen'])
+    average_froid_matched = 100 * sum(data_matched['pondmen'] * (data_matched['froid'] == 1)) / sum(data_matched['pondmen'])
     dict_froid['Average'] = [average_froid_enl, average_froid_matched]
     for i in range(1,11):
         data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
         data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
     
-        part_froid_enl = 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_n'] != 0)) / sum(data_enl_decile['pondmen'])
-        part_froid_matched = 100 * sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_n'] != 0)) / sum(data_matched_decile['pondmen'])
+        part_froid_enl = 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['froid'] == 1)) / sum(data_enl_decile['pondmen'])
+        part_froid_matched = 100 * sum(data_matched_decile['pondmen'] * (data_matched_decile['froid'] == 1)) / sum(data_matched_decile['pondmen'])
     
         dict_froid['{}'.format(i)] = \
             [part_froid_enl, part_froid_matched]
@@ -84,15 +84,15 @@ test_froid_niveau_vie_decile_rank = test_froid_niveau_vie_decile(data_enl, data_
 
 def test_froid_cout_niveau_vie_decile(data_enl, data_matched):
     dict_froid = dict()
-    average_froid_enl = 100 * sum(data_enl['pondmen'] * (data_enl['gchauf_3'] == 1)) / sum(data_enl['pondmen'])
-    average_froid_matched = 100 * sum(data_matched['pondmen'] * (data_matched['gchauf_3'] == 1)) / sum(data_matched['pondmen'])
+    average_froid_enl = 100 * sum(data_enl['pondmen'] * (data_enl['froid_cout'] == 1)) / sum(data_enl['pondmen'])
+    average_froid_matched = 100 * sum(data_matched['pondmen'] * (data_matched['froid_cout'] == 1)) / sum(data_matched['pondmen'])
     dict_froid['Average'] = [average_froid_enl, average_froid_matched]
     for i in range(1,11):
         data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
         data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
     
-        part_froid_enl = 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_3'] == 1)) / sum(data_enl_decile['pondmen'])
-        part_froid_matched = 100 * sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_3'] == 1)) / sum(data_matched_decile['pondmen'])
+        part_froid_enl = 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['froid_cout'] == 1)) / sum(data_enl_decile['pondmen'])
+        part_froid_matched = 100 * sum(data_matched_decile['pondmen'] * (data_matched_decile['froid_cout'] == 1)) / sum(data_matched_decile['pondmen'])
     
         dict_froid['{}'.format(i)] = \
             [part_froid_enl, part_froid_matched]

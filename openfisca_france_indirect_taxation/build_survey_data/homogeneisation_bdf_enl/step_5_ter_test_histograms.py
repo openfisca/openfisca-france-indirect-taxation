@@ -81,12 +81,12 @@ def histogram_froid_niveau_vie_decile(data_matched, data_enl):
 
         part_enl = (
             100 *
-            sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_n'] != 0)) /
+            sum(data_enl_decile['pondmen'] * (data_enl_decile['froid'] == 1)) /
             sum(data_enl_decile['pondmen'])
             )
         part_matched = (
             100 *
-            sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_n'] != 0)) /
+            sum(data_matched_decile['pondmen'] * (data_matched_decile['froid'] == 1)) /
             sum(data_matched_decile['pondmen'])
             )
     
@@ -113,12 +113,12 @@ def histogram_froid_cout_niveau_vie_decile(data_matched, data_enl):
 
         part_enl = (
             100 *
-            sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_3'] == 1)) /
+            sum(data_enl_decile['pondmen'] * (data_enl_decile['froid_cout'] == 1)) /
             sum(data_enl_decile['pondmen'])
             )
         part_matched = (
             100 *
-            sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_3'] == 1)) /
+            sum(data_matched_decile['pondmen'] * (data_matched_decile['froid_cout'] == 1)) /
             sum(data_matched_decile['pondmen'])
             )
     
