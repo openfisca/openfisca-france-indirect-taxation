@@ -60,54 +60,45 @@ data_matched_rank = pd.read_csv(
     )
 
 
-
-"""
-Test : share of people having trouble with heat in general
-    With sampling weights
-"""
-
-# In total
-print sum(data_enl['pondmen'] * (data_enl['gchauf_n'] != 0)) / sum(data_enl['pondmen'])
-print sum(data_matched_distance['pondmen'] * (data_matched_distance['gchauf_n'] != 0)) / sum(data_matched_distance['pondmen'])
-print sum(data_matched_random['pondmen'] * (data_matched_random['gchauf_n'] != 0)) / sum(data_matched_random['pondmen'])
-print sum(data_matched_rank['pondmen'] * (data_matched_rank['gchauf_n'] != 0)) / sum(data_matched_rank['pondmen'])
-
-# By income decile
-for i in range(1,11):
-    data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
-    data_matched_distance_decile = data_matched_distance.query('niveau_vie_decile == {}'.format(i))
-    data_matched_random_decile = data_matched_random.query('niveau_vie_decile == {}'.format(i))
-    data_matched_rank_decile = data_matched_rank.query('niveau_vie_decile == {}'.format(i))
+def test_froid_niveau_vie_decile(data_enl, data_matched):
+    dict_froid = dict()
+    average_froid_enl = 100 * sum(data_enl['pondmen'] * (data_enl['gchauf_n'] != 0)) / sum(data_enl['pondmen'])
+    average_froid_matched = 100 * sum(data_matched['pondmen'] * (data_matched['gchauf_n'] != 0)) / sum(data_matched['pondmen'])
+    dict_froid['Average'] = [average_froid_enl, average_froid_matched]
+    for i in range(1,11):
+        data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
+        data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
     
-    print i, 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_n'] != 0)) / sum(data_enl_decile['pondmen']), \
-        100 * sum(data_matched_distance_decile['pondmen'] * (data_matched_distance_decile['gchauf_n'] != 0)) / sum(data_matched_distance_decile['pondmen']), \
-        100 * sum(data_matched_random_decile['pondmen'] * (data_matched_random_decile['gchauf_n'] != 0)) / sum(data_matched_random_decile['pondmen']), \
-        100 * sum(data_matched_rank_decile['pondmen'] * (data_matched_rank_decile['gchauf_n'] != 0)) / sum(data_matched_rank_decile['pondmen'])
-
-    del data_enl_decile, data_matched_distance_decile, data_matched_random_decile, data_matched_rank_decile
-
-
-"""
-Test : share of people having trouble with heat because of the cost
-    With sampling weights
-"""
-
-# In total
-print 100 * sum(data_enl['pondmen'] * (data_enl['gchauf_3'] == 1)) / sum(data_enl['pondmen'])
-print 100 * sum(data_matched_distance['pondmen'] * (data_matched_distance['gchauf_3'] == 1)) / sum(data_matched_distance['pondmen'])
-print 100 * sum(data_matched_random['pondmen'] * (data_matched_random['gchauf_3'] == 1)) / sum(data_matched_random['pondmen'])
-print 100 * sum(data_matched_rank['pondmen'] * (data_matched_rank['gchauf_3'] == 1)) / sum(data_matched_rank['pondmen'])
-
-# By income decile
-for i in range(1,11):
-    data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
-    data_matched_distance_decile = data_matched_distance.query('niveau_vie_decile == {}'.format(i))
-    data_matched_random_decile = data_matched_random.query('niveau_vie_decile == {}'.format(i))
-    data_matched_rank_decile = data_matched_rank.query('niveau_vie_decile == {}'.format(i))
+        part_froid_enl = 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_n'] != 0)) / sum(data_enl_decile['pondmen'])
+        part_froid_matched = 100 * sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_n'] != 0)) / sum(data_matched_decile['pondmen'])
     
-    print i, 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_3'] == 1)) / sum(data_enl_decile['pondmen']), \
-        100 * sum(data_matched_distance_decile['pondmen'] * (data_matched_distance_decile['gchauf_3'] == 1)) / sum(data_matched_distance_decile['pondmen']), \
-        100 * sum(data_matched_random_decile['pondmen'] * (data_matched_random_decile['gchauf_3'] == 1)) / sum(data_matched_random_decile['pondmen']), \
-        100 * sum(data_matched_rank_decile['pondmen'] * (data_matched_rank_decile['gchauf_3'] == 1)) / sum(data_matched_rank_decile['pondmen'])
+        dict_froid['{}'.format(i)] = \
+            [part_froid_enl, part_froid_matched]
+    
+    return dict_froid
 
-    del data_enl_decile, data_matched_distance_decile, data_matched_random_decile, data_matched_rank_decile
+test_froid_niveau_vie_decile_distance = test_froid_niveau_vie_decile(data_enl, data_matched_distance)
+test_froid_niveau_vie_decile_random = test_froid_niveau_vie_decile(data_enl, data_matched_random)
+test_froid_niveau_vie_decile_rank = test_froid_niveau_vie_decile(data_enl, data_matched_rank)
+
+
+def test_froid_cout_niveau_vie_decile(data_enl, data_matched):
+    dict_froid = dict()
+    average_froid_enl = 100 * sum(data_enl['pondmen'] * (data_enl['gchauf_3'] == 1)) / sum(data_enl['pondmen'])
+    average_froid_matched = 100 * sum(data_matched['pondmen'] * (data_matched['gchauf_3'] == 1)) / sum(data_matched['pondmen'])
+    dict_froid['Average'] = [average_froid_enl, average_froid_matched]
+    for i in range(1,11):
+        data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
+        data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
+    
+        part_froid_enl = 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_3'] == 1)) / sum(data_enl_decile['pondmen'])
+        part_froid_matched = 100 * sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_3'] == 1)) / sum(data_matched_decile['pondmen'])
+    
+        dict_froid['{}'.format(i)] = \
+            [part_froid_enl, part_froid_matched]
+    
+    return dict_froid
+
+test_froid_cout_niveau_vie_decile_distance = test_froid_cout_niveau_vie_decile(data_enl, data_matched_distance)
+test_froid_cout_niveau_vie_decile_random = test_froid_cout_niveau_vie_decile(data_enl, data_matched_random)
+test_froid_cout_niveau_vie_decile_rank = test_froid_cout_niveau_vie_decile(data_enl, data_matched_rank)
