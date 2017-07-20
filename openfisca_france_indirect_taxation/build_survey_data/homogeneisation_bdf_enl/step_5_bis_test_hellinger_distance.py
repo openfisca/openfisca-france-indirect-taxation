@@ -40,7 +40,7 @@ data_matched_distance = pd.read_csv(
         'openfisca_france_indirect_taxation',
         'assets',
         'matching',
-        'data_matched.csv'
+        'data_matched_distance.csv'
         ), sep =',', decimal = '.'
     )
 
@@ -118,20 +118,19 @@ def hellinger_froid_niveau_vie_decile(data_matched, data_enl):
         data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
         distribution_enl['{}'.format(i)] = (
             100 *
-            sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_n'] == 1)) /
+            sum(data_enl_decile['pondmen'] * (data_enl_decile['gchauf_n'] != 0)) /
             sum(data_enl_decile['pondmen'])
                 )
         data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
         distribution_matched['{}'.format(i)] = (
             100 *
-            sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_n'] == 1)) /
+            sum(data_matched_decile['pondmen'] * (data_matched_decile['gchauf_n'] != 0)) /
             sum(data_matched_decile['pondmen'])
                 )
 
     hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
     
     return hellinger_distance
-    
 
 hellinger_froid_niveau_vie_decile_distance = (
     hellinger_froid_niveau_vie_decile(data_matched_distance, data_enl)
@@ -164,11 +163,11 @@ def hellinger_froid_cout_niveau_vie_decile(data_matched, data_enl):
     return hellinger_distance
 
 hellinger_froid_cout_niveau_vie_decile_distance = (
-    hellinger_froid_niveau_vie_decile(data_matched_distance, data_enl)
+    hellinger_froid_cout_niveau_vie_decile(data_matched_distance, data_enl)
     )
 hellinger_froid_cout_niveau_vie_decile_random = (
-    hellinger_froid_niveau_vie_decile(data_matched_random, data_enl)
+    hellinger_froid_cout_niveau_vie_decile(data_matched_random, data_enl)
     )
 hellinger_froid_cout_niveau_vie_decile_rank = (
-    hellinger_froid_niveau_vie_decile(data_matched_rank, data_enl)
+    hellinger_froid_cout_niveau_vie_decile(data_matched_rank, data_enl)
     )

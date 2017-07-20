@@ -272,22 +272,6 @@ def histogram_nenfants():
 histogram_nenfants()
 
 
-def histogram_revtot():
-    list_values_bdf = []
-    list_values_enl = []
-    list_keys = []
-    for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
-        list_values_bdf.append(data_bdf['revtot'].quantile(i))
-        list_values_enl.append(data_enl['revtot'].quantile(i))
-        list_keys.append('{}'.format(i)) 
-
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
-    
-    return plt
-    
-histogram_revtot()
-
-
 def histogram_ocde10():
     list_values_bdf = []
     list_values_enl = []
@@ -360,6 +344,22 @@ def histogram_poste_coicop_453():
     return plt
     
 histogram_poste_coicop_453()
+
+
+def histogram_revtot():
+    list_values_bdf = []
+    list_values_enl = []
+    list_keys = []
+    for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
+        list_values_bdf.append(data_bdf['revtot'].quantile(i))
+        list_values_enl.append(data_enl['revtot'].quantile(i))
+        list_keys.append('{}'.format(i)) 
+
+    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    
+    return plt
+    
+histogram_revtot()
 
 
 def histogram_surfhab_d():

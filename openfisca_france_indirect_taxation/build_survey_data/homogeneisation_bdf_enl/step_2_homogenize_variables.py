@@ -6,7 +6,6 @@
 # Les noms de variables sont aussi alignés.
 
 import numpy as np
-import pandas as pd
 
 from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_enl.step_1_build_dataframes import \
     load_data_bdf_enl
@@ -196,7 +195,6 @@ def create_new_variables():
         data['part_energies_revtot'] = (
             data['depenses_energies'] / data['revtot']
             )
-
         # Suppression des outliers
         data = data.query('part_energies_revtot < 0.5')
 

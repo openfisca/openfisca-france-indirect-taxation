@@ -80,4 +80,6 @@ for dependent_variable in ['froid', 'froid_cout', 'froid_isolation']:
 
 print regression_froid
 print regression_froid_cout
-print regression_froid_isolation
+#print regression_froid_isolation
+
+latex = regression_froid.as_latex()
