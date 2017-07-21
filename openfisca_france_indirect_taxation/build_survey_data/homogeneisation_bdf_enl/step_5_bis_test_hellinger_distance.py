@@ -11,12 +11,12 @@ from __future__ import division
 
 
 import pandas as pd
+import numpy as np
 
 import os
 import pkg_resources
 
-from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_enl.step_3_bis_compute_hellinger_distance import \
-    hellinger
+_SQRT2 = np.sqrt(2)     # sqrt(2) with default precision np.float64
 
 # Importation des bases de données appariées et de la base de référence ENL
 default_config_files_directory = os.path.join(
@@ -73,6 +73,10 @@ Test : share of people having trouble with heat in general
     With sampling weights
 """
 
+def hellinger(p, q):
+    return np.sqrt(np.sum((np.sqrt(p) - np.sqrt(q)) ** 2)) / _SQRT2
+
+
 def hellinger_froid(data_matched, data_enl):
     distribution_matched = dict()
     for i in [0, 1]:
@@ -114,24 +118,31 @@ hellinger_froid_cout_rank = hellinger_froid_cout(data_matched_rank, data_enl)
 def hellinger_froid_niveau_vie_decile(data_matched, data_enl):
     distribution_matched = dict()
     distribution_enl = dict()
+    part_froid_enl = sum(data_enl['pondmen'] * data_enl['froid']) / sum(data_enl['pondmen'])
+    part_froid_matched = sum(data_matched['pondmen'] * data_matched['froid']) / sum(data_matched['pondmen'])
+    part_froid = max(part_froid_enl, part_froid_matched)
     for i in range(1,11):
-        data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
+        part_froid_decile_enl = (
+            sum(data_enl['pondmen'] * (data_enl['froid'] == 1) * (data_enl['niveau_vie_decile'] == i)) /
+            sum(data_enl['pondmen'])
+            )
+        part_froid_decile_matched = (
+            sum(data_matched['pondmen'] * (data_matched['froid'] == 1) * (data_matched['niveau_vie_decile'] == i)) /
+            sum(data_matched['pondmen'])
+            )
         distribution_enl['{}'.format(i)] = (
-            100 *
-            sum(data_enl_decile['pondmen'] * (data_enl_decile['froid'] == 1)) /
-            sum(data_enl_decile['pondmen'])
+            part_froid_decile_enl / part_froid
                 )
-        data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
         distribution_matched['{}'.format(i)] = (
-            100 *
-            sum(data_matched_decile['pondmen'] * (data_matched_decile['froid'] == 1)) /
-            sum(data_matched_decile['pondmen'])
+            part_froid_decile_matched / part_froid
                 )
 
     hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
     
     return hellinger_distance
 
+
+    
 hellinger_froid_niveau_vie_decile_distance = (
     hellinger_froid_niveau_vie_decile(data_matched_distance, data_enl)
     )
@@ -146,22 +157,27 @@ hellinger_froid_niveau_vie_decile_rank = (
 def hellinger_froid_cout_niveau_vie_decile(data_matched, data_enl):
     distribution_matched = dict()
     distribution_enl = dict()
+    part_froid_enl = sum(data_enl['pondmen'] * data_enl['froid_cout']) / sum(data_enl['pondmen'])
+    part_froid_matched = sum(data_matched['pondmen'] * data_matched['froid_cout']) / sum(data_matched['pondmen'])
+    part_froid = max(part_froid_enl, part_froid_matched)
     for i in range(1,11):
-        data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
-        distribution_enl['{}'.format(i)] = (
-            100 *
-            sum(data_enl_decile['pondmen'] * (data_enl_decile['froid_cout'] == 1)) /
-            sum(data_enl_decile['pondmen'])
+        part_froid_decile_enl = (
+            sum(data_enl['pondmen'] * (data_enl['froid_cout'] == 1) * (data_enl['niveau_vie_decile'] == i)) /
+            sum(data_enl['pondmen'])
             )
-        data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
+        part_froid_decile_matched = (
+            sum(data_matched['pondmen'] * (data_matched['froid_cout'] == 1) * (data_matched['niveau_vie_decile'] == i)) /
+            sum(data_matched['pondmen'])
+            )
+        distribution_enl['{}'.format(i)] = (
+            part_froid_decile_enl / part_froid
+                )
         distribution_matched['{}'.format(i)] = (
-            100 *
-            sum(data_matched_decile['pondmen'] * (data_matched_decile['froid_cout'] == 1)) /
-            sum(data_matched_decile['pondmen'])
-                             )
+            part_froid_decile_matched / part_froid
+                )
 
     hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
-    
+
     return hellinger_distance
 
 hellinger_froid_cout_niveau_vie_decile_distance = (
