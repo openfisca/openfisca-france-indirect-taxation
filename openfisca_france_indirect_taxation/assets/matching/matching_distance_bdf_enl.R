@@ -5,16 +5,18 @@ data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-i
 # Compute matching
 out.nnd <- NND.hotdeck(
   data.rec = data_bdf, data.don = data_enl,
-  match.vars = c("surfhab_d", "bat_av_49", "bat_ap_74", "log_indiv", "part_energies_revtot", "agepr", "fioul", "gaz"),
-  don.class = c("niveau_vie_decile"),
-  dist.fun = "Mahalanobis"
+  match.vars = c("part_energies_revtot", "log_indiv", "electricite", "ouest_sud",
+                 "nactifs", "dip14pr", "revtot", "rural", "nenfants",
+                 "petite_ville", "surfhab_d"),
+  don.class = c("donation_class_4"),
+  dist.fun = "Gower"
 )
 
 # Create fused file
 fused.nnd.m <- create.fused(
   data.rec = data_bdf, data.don = data_enl,
   mtc.ids = out.nnd$mtc.ids,
-  z.vars = c("gchauf_n", "gchauf_1", "gchauf_2", "gchauf_3", "gchauf_4",
+  z.vars = c("froid", "gchauf_1", "gchauf_2", "froid_cout", "froid_isolation",
              "gchauf_5", "gchauf_6", "gchauf_7", "gchaufs_1",
              "gchaufs_2", "gchaufs_3", "gchaufs_4", "gchaufs_5",
              "gmur", "gtoit2")

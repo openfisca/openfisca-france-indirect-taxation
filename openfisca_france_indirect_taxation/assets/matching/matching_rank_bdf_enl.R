@@ -6,7 +6,7 @@ data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-i
 out.nnd <- rankNND.hotdeck(
   data.rec = data_bdf, data.don = data_enl,
   var.rec = c("part_energies_revtot"),
-  don.class = c("niveau_vie_decile", "rural", "paris"),
+  don.class = c("donation_class_1"),
   weight.rec = "pondmen",
   weight.don = "pondmen"
 )
@@ -15,7 +15,7 @@ out.nnd <- rankNND.hotdeck(
 fused.nnd.m <- create.fused(
   data.rec = data_bdf, data.don = data_enl,
   mtc.ids = out.nnd$mtc.ids,
-  z.vars = c("gchauf_n", "gchauf_1", "gchauf_2", "gchauf_3", "gchauf_4",
+  z.vars = c("froid", "gchauf_1", "gchauf_2", "froid_cout", "froid_isolation",
              "gchauf_5", "gchauf_6", "gchauf_7", "gchaufs_1",
              "gchaufs_2", "gchaufs_3", "gchaufs_4", "gchaufs_5",
              "gmur", "gtoit2")
