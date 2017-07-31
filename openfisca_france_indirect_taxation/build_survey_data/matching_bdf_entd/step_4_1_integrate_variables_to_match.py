@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Dans ce script on importe les données des enquêtes BdF 2011 et ENTD 2008.
-# Pour chacune des deux enquêtes on importe les variables qui seront
-# susceptibles d'êtres utilisées dans l'appariement des bases de données.
 
 from __future__ import division
 
@@ -17,8 +12,7 @@ from openfisca_survey_manager.temporary import TemporaryStore
 temporary_store = TemporaryStore.create(file_name = 'transport_tmp')
 
 
-def load_data_bdf_entd():
-    # Load ENL data :
+def merge_tables_entd(): # WIP
     
     year_entd = 2008
     
@@ -30,39 +24,6 @@ def load_data_bdf_entd():
     input_entd_menages = survey_entd.get_values(table = 'q_tcm_menage')
     input_entd_usage_veh = survey_entd.get_values(table = 'qf_voitvul')
     
-    
-    # Load BdF data :
-    
-    year_bdf = 2011
-    
-    openfisca_survey_collection = SurveyCollection.load(collection = 'openfisca_indirect_taxation')
-    openfisca_survey = openfisca_survey_collection.get_survey('openfisca_indirect_taxation_data_{}'.format(year_bdf))
-    input_bdf = openfisca_survey.get_values(table = 'input')
-    input_bdf.reset_index(inplace = True)
-    
-
-    # Create variable for total spending
-    produits = [column for column in input_bdf.columns if column[:13] == 'poste_coicop_']
-    del column
-
-    input_bdf['depenses_tot'] = 0
-    for produit in produits:
-        if produit[13:15] != '99' and produit[13:15] != '13':
-            input_bdf['depenses_tot'] += input_bdf[produit]
-
-
-    # Set variables :
-    
-    variables_menages_bdf = [
-        'agepr', # âge de la pr
-        'ident_men',
-        'ocde10', # nb unités de conso
-        'pondmen',
-        'poste_coicop_722',
-        'revtot', # revenu total
-        'tuu',
-        # To be completed
-        ]
     
     variables_tcm_menages_entd = [
         'ident_men',
@@ -114,6 +75,7 @@ def load_data_bdf_entd():
     variables_qf_voitvul_entd = [
         'ident_men',
         'poids_veh1', # poids du véhicule
+        'ident_numveh',
         'mveh', # numéro du véhicule
         'v1_ken', # type de carburant majoritairement utilisé
         'v1_puiss_corr', # puissance fiscale corrigée
@@ -156,19 +118,16 @@ def load_data_bdf_entd():
     # Keep relevant variables :
     menages_entd_keep = input_entd_menages[variables_tcm_menages_entd]
     usage_veh_entd_keep = input_entd_usage_veh[variables_qf_voitvul_entd]
-    menages_bdf_keep = input_bdf[variables_menages_bdf]
     
-    indiv_enl_keep = indiv_enl_keep.query('igreflog == 1')
-    del indiv_enl_keep['igreflog']
-    menages_entd_keep_bis = menages_entd_keep.merge(usage_veh_entd_keep, on = 'ident_men')
+    # Merge entd tables into one dataframe
+    menages_entd_keep['ident_men'] = menages_entd_keep['ident_men'].astype(str)
+    usage_veh_entd_keep['ident_men'] = usage_veh_entd_keep['ident_men'].astype(str)
 
-
-    del input_entd_menages, input_bdf
-        
-    return menages_entd_keep, menages_bdf_keep
-
-
-if __name__ == "__main__":
-    data = load_data_bdf_entd()    
-    data_enl = data[0]
-    data_bdf = data[1]
+    # check whether ident_numveh has no duplicates :
+    usage_bis = usage_veh_entd_keep.drop_duplicates(['ident_numveh'], keep='last')
+    assert len(usage_bis) == len(usage_veh_entd_keep)
+    del usage_bis
+    
+    data_entd = menages_entd_keep.merge(usage_veh_entd_keep, on = 'ident_men', how = 'outer')
+    
+    return data_entd
