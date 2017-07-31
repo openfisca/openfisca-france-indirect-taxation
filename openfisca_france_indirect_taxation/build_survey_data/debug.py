@@ -6,7 +6,7 @@ Created on Mon Jul 03 13:23:15 2017
 """
 
 
-from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_enl.step_2_homogenize_variables import \
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_2_homogenize_variables import \
     homogenize_variables_definition_bdf_enl
 
 

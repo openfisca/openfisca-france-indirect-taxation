@@ -8,7 +8,7 @@ Created on Tue Jul 04 16:36:58 2017
 import statsmodels.formula.api as smf
 
 
-from openfisca_france_indirect_taxation.build_survey_data.homogeneisation_bdf_enl.step_4_clean_data import \
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_4_clean_data import \
     clean_data
 
 
