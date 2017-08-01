@@ -7,12 +7,12 @@
 
 import numpy as np
 
-from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_1_build_dataframes import \
-    load_data_menages_bdf_entd
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_1_2_build_dataframes_vehicles import \
+    build_df_menages_vehicles
 
 
 def homogenize_variables_definition_bdf_entd():
-    data = load_data_menages_bdf_entd()    
+    data = build_df_menages_vehicles()    
     data_entd = data[0]
     data_bdf = data[1]
     
@@ -26,6 +26,9 @@ def homogenize_variables_definition_bdf_entd():
     # Distribution des ménages parisiens dans les catégories des grands pôles
     data_entd.numcom_au2010.loc[data_entd.numcom_au2010 == 113] = 111
     data_entd.numcom_au2010.loc[data_entd.numcom_au2010 == 114] = 112
+
+    data_bdf.stalog.loc[data_bdf.stalog == 5] = 4
+    data_bdf.stalog.loc[data_bdf.stalog == 6] = 5
 
     # Rename
     data_entd.rename(
@@ -44,7 +47,7 @@ def homogenize_variables_definition_bdf_entd():
     
         inplace = True,
         )
-    
+
     data_entd = data_entd.sort_index(axis = 1)
     data_bdf = data_bdf.sort_index(axis = 1)
     
@@ -74,6 +77,27 @@ def create_new_variables():
             
         data['aides_logement'] = 0
         data['aides_logement'].loc[data['aba'] == 1] = 1
+        del data['aba']
+
+        data['veh_tot'] = data['veh_tot'].fillna(0)
+        data['mloy_d'] = data['mloy_d'].fillna(0)
+
+        data['part_essence'] = (
+            data['essence'] /
+            (data['essence'] + data['diesel'] + data['autre_carbu'])
+            )
+        data['part_diesel'] = (
+            data['diesel'] /
+            (data['essence'] + data['diesel'] + data['autre_carbu'])
+            )
+        data['nb_essence'] = data['veh_tot'] * data['part_essence']
+        data['nb_diesel'] = data['veh_tot'] * data['part_diesel']
+        data[['nb_essence'] + ['nb_diesel']] = \
+            data[['nb_essence'] + ['nb_diesel']].fillna(0)
+
+        to_delete = ['part_essence', 'part_diesel', 'essence', 'diesel', 'autre_carbu']
+        for element in to_delete:
+            del data[element]
 
         if i == 0:
             data_entd = data.copy()

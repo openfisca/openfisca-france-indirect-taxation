@@ -32,32 +32,6 @@ def histogrammes(list_keys, list_values_bdf, list_values_entd):
     return plt
 
 
-def histogram_aba():
-    list_values_bdf = []
-    list_values_entd = []
-    list_keys = []
-    for i in [0, 1, 2]:
-        data_bdf['pondmen_{}'.format(i)] = 0
-        data_bdf['pondmen_{}'.format(i)].loc[data_bdf.aba == i] = data_bdf['pondmen']
-        part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
-        del data_bdf['pondmen_{}'.format(i)]
-       
-        data_entd['pondmen_{}'.format(i)] = 0
-        data_entd['pondmen_{}'.format(i)].loc[data_entd.aba == i] = data_entd['pondmen']
-        part_entd = data_entd['pondmen_{}'.format(i)].sum() / data_entd['pondmen'].sum()
-        del data_entd['pondmen_{}'.format(i)]
-    
-        list_values_bdf.append(part_bdf)
-        list_values_entd.append(part_entd)
-        list_keys.append('{}'.format(i))
-
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
-    
-    return plt
-    
-histogram_aba()
-
-
 def histogram_agepr():
     list_values_bdf = []
     list_values_entd = []
@@ -72,6 +46,64 @@ def histogram_agepr():
     return plt
 
 histogram_agepr()
+
+
+def histogram_age_vehicule():
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
+        list_values_bdf.append(data_bdf['age_vehicule'].quantile(i))
+        list_values_entd.append(data_entd['age_vehicule'].quantile(i))
+        list_keys.append('{}'.format(i)) 
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+
+    return plt
+
+histogram_age_vehicule()
+
+
+def histogram_age_carte_grise():
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
+        list_values_bdf.append(data_bdf['age_carte_grise'].quantile(i))
+        list_values_entd.append(data_entd['age_carte_grise'].quantile(i))
+        list_keys.append('{}'.format(i)) 
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+
+    return plt
+
+histogram_age_carte_grise()
+
+
+def histogram_aides_logement():
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in [0, 1]:
+        data_bdf['pondmen_{}'.format(i)] = 0
+        data_bdf['pondmen_{}'.format(i)].loc[data_bdf.aides_logement == i] = data_bdf['pondmen']
+        part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
+        del data_bdf['pondmen_{}'.format(i)]
+       
+        data_entd['pondmen_{}'.format(i)] = 0
+        data_entd['pondmen_{}'.format(i)].loc[data_entd.aides_logement == i] = data_entd['pondmen']
+        part_entd = data_entd['pondmen_{}'.format(i)].sum() / data_entd['pondmen'].sum()
+        del data_entd['pondmen_{}'.format(i)]
+    
+        list_values_bdf.append(part_bdf)
+        list_values_entd.append(part_entd)
+        list_keys.append('{}'.format(i))
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    
+    return plt
+    
+histogram_aides_logement()
 
 
 def histogram_cataeu():
@@ -100,7 +132,33 @@ def histogram_cataeu():
 histogram_cataeu()
 
 
-def histogram_dip14():
+def histogram_cs42pr():
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in [0, 10, 12, 20, 30, 31, 33, 41, 42, 43, 44, 50, 60, 70, 71]:
+        data_bdf['pondmen_{}'.format(i)] = 0
+        data_bdf['pondmen_{}'.format(i)].loc[data_bdf['cs42pr'] == i] = data_bdf['pondmen']
+        part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
+        del data_bdf['pondmen_{}'.format(i)]
+    
+        data_entd['pondmen_{}'.format(i)] = 0
+        data_entd['pondmen_{}'.format(i)].loc[data_entd['cs42pr'] == i] = data_entd['pondmen']
+        part_entd = data_entd['pondmen_{}'.format(i)].sum() / data_entd['pondmen'].sum()
+        del data_entd['pondmen_{}'.format(i)]
+    
+        list_values_bdf.append(part_bdf)
+        list_values_entd.append(part_entd)
+        list_keys.append('{}'.format(i))
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    
+    return plt
+    
+histogram_cs42pr()
+
+
+def histogram_dip14pr():
     list_values_bdf = []
     list_values_entd = []
     list_keys = []
@@ -123,14 +181,30 @@ def histogram_dip14():
     
     return plt
     
-histogram_dip14()
+histogram_dip14pr()
+
+
+def histogram_mloy_d(): # comprendre ce qui ne va pas ici
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in [0.65, 0.7, 0.75, .8, 0.85, 0.9, 0.95]:
+        list_values_bdf.append(data_bdf['mloy_d'].quantile(i))
+        list_values_entd.append(data_entd['mloy_d'].quantile(i))
+        list_keys.append('{}'.format(i)) 
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    
+    return plt
+    
+histogram_mloy_d()
 
 
 def histogram_nactifs():
     list_values_bdf = []
     list_values_entd = []
     list_keys = []
-    for i in [0, 1, 2, 3, 4, 5, 6]:
+    for i in range(0,7):
         data_bdf['pondmen_{}'.format(i)] = 0
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf['nactifs'] == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
@@ -156,7 +230,7 @@ def histogram_nbphab():
     list_values_bdf = []
     list_values_entd = []
     list_keys = []
-    for i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
+    for i in range(0,11):
         data_bdf['pondmen_{}'.format(i)] = 0
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.nbphab == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
@@ -178,11 +252,63 @@ def histogram_nbphab():
 histogram_nbphab()
 
 
+def histogram_nb_diesel():
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in range(0,9):
+        data_bdf['pondmen_{}'.format(i)] = 0
+        data_bdf['pondmen_{}'.format(i)].loc[data_bdf.nb_diesel == i] = data_bdf['pondmen']
+        part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
+        del data_bdf['pondmen_{}'.format(i)]
+        
+        data_entd['pondmen_{}'.format(i)] = 0
+        data_entd['pondmen_{}'.format(i)].loc[data_entd.nb_diesel == i] = data_entd['pondmen']
+        part_entd = data_entd['pondmen_{}'.format(i)].sum() / data_entd['pondmen'].sum()
+        del data_entd['pondmen_{}'.format(i)]
+    
+        list_values_bdf.append(part_bdf)
+        list_values_entd.append(part_entd)
+        list_keys.append('{}'.format(i))
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    
+    return plt
+    
+histogram_nb_diesel()
+
+
+def histogram_nb_essence():
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in range(0,11):
+        data_bdf['pondmen_{}'.format(i)] = 0
+        data_bdf['pondmen_{}'.format(i)].loc[data_bdf.nb_essence == i] = data_bdf['pondmen']
+        part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
+        del data_bdf['pondmen_{}'.format(i)]
+        
+        data_entd['pondmen_{}'.format(i)] = 0
+        data_entd['pondmen_{}'.format(i)].loc[data_entd.nb_essence == i] = data_entd['pondmen']
+        part_entd = data_entd['pondmen_{}'.format(i)].sum() / data_entd['pondmen'].sum()
+        del data_entd['pondmen_{}'.format(i)]
+    
+        list_values_bdf.append(part_bdf)
+        list_values_entd.append(part_entd)
+        list_keys.append('{}'.format(i))
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    
+    return plt
+    
+histogram_nb_essence()
+
+
 def histogram_nenfants():
     list_values_bdf = []
     list_values_entd = []
     list_keys = []
-    for i in [0, 1, 2, 3, 4, 5, 6]:
+    for i in range(0,12):
         data_bdf['pondmen_{}'.format(i)] = 0
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf['nenfants'] == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
@@ -202,6 +328,48 @@ def histogram_nenfants():
     return plt
     
 histogram_nenfants()
+
+
+def histogram_niveau_vie():
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
+        list_values_bdf.append(data_bdf['niveau_vie'].quantile(i))
+        list_values_entd.append(data_entd['niveau_vie'].quantile(i))
+        list_keys.append('{}'.format(i)) 
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    
+    return plt
+    
+histogram_niveau_vie()
+
+
+def histogram_npers():
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in range(0,14):
+        data_bdf['pondmen_{}'.format(i)] = 0
+        data_bdf['pondmen_{}'.format(i)].loc[data_bdf['npers'] == i] = data_bdf['pondmen']
+        part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
+        del data_bdf['pondmen_{}'.format(i)]
+    
+        data_entd['pondmen_{}'.format(i)] = 0
+        data_entd['pondmen_{}'.format(i)].loc[data_entd['npers'] == i] = data_entd['pondmen']
+        part_entd = data_entd['pondmen_{}'.format(i)].sum() / data_entd['pondmen'].sum()
+        del data_entd['pondmen_{}'.format(i)]
+    
+        list_values_bdf.append(part_bdf)
+        list_values_entd.append(part_entd)
+        list_keys.append('{}'.format(i))
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    
+    return plt
+    
+histogram_npers()
 
 
 def histogram_ocde10():
@@ -230,27 +398,63 @@ def histogram_ocde10():
 histogram_ocde10()
 
 
-def histogram_niveau_vie():
+def histogram_situapr():
     list_values_bdf = []
     list_values_entd = []
     list_keys = []
-    for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
-        list_values_bdf.append(data_bdf['niveau_vie'].quantile(i))
-        list_values_entd.append(data_entd['niveau_vie'].quantile(i))
-        list_keys.append('{}'.format(i)) 
+    for i in range(1,8):
+        data_bdf['pondmen_{}'.format(i)] = 0
+        data_bdf['pondmen_{}'.format(i)].loc[data_bdf['situapr'] == i] = data_bdf['pondmen']
+        part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
+        del data_bdf['pondmen_{}'.format(i)]
+    
+        data_entd['pondmen_{}'.format(i)] = 0
+        data_entd['pondmen_{}'.format(i)].loc[data_entd['situapr'] == i] = data_entd['pondmen']
+        part_entd = data_entd['pondmen_{}'.format(i)].sum() / data_entd['pondmen'].sum()
+        del data_entd['pondmen_{}'.format(i)]
+    
+        list_values_bdf.append(part_bdf)
+        list_values_entd.append(part_entd)
+        list_keys.append('{}'.format(i))
 
     histogrammes(list_keys, list_values_bdf, list_values_entd)
     
     return plt
     
-histogram_niveau_vie()
+histogram_situapr()
+
+
+def histogram_stalog(): # This variable must be redefined
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in range(1,6):
+        data_bdf['pondmen_{}'.format(i)] = 0
+        data_bdf['pondmen_{}'.format(i)].loc[data_bdf['stalog'] == i] = data_bdf['pondmen']
+        part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
+        del data_bdf['pondmen_{}'.format(i)]
+    
+        data_entd['pondmen_{}'.format(i)] = 0
+        data_entd['pondmen_{}'.format(i)].loc[data_entd['stalog'] == i] = data_entd['pondmen']
+        part_entd = data_entd['pondmen_{}'.format(i)].sum() / data_entd['pondmen'].sum()
+        del data_entd['pondmen_{}'.format(i)]
+    
+        list_values_bdf.append(part_bdf)
+        list_values_entd.append(part_entd)
+        list_keys.append('{}'.format(i))
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    
+    return plt
+    
+histogram_stalog()
 
 
 def histogram_tau():
     list_values_bdf = []
     list_values_entd = []
     list_keys = []
-    for i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]:
+    for i in range(1,11):
         data_bdf['pondmen_{}'.format(i)] = 0
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.tau == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
@@ -276,7 +480,7 @@ def histogram_tuu():
     list_values_bdf = []
     list_values_entd = []
     list_keys = []
-    for i in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
+    for i in range(0,9):
         data_bdf['pondmen_{}'.format(i)] = 0
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.tuu == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
@@ -296,3 +500,107 @@ def histogram_tuu():
     return plt
     
 histogram_tuu()
+
+
+def histogram_typmen():
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in range(1,6):
+        data_bdf['pondmen_{}'.format(i)] = 0
+        data_bdf['pondmen_{}'.format(i)].loc[data_bdf.typmen == i] = data_bdf['pondmen']
+        part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
+        del data_bdf['pondmen_{}'.format(i)]
+    
+        data_entd['pondmen_{}'.format(i)] = 0
+        data_entd['pondmen_{}'.format(i)].loc[data_entd.typmen == i] = data_entd['pondmen']
+        part_entd = data_entd['pondmen_{}'.format(i)].sum() / data_entd['pondmen'].sum()
+        del data_entd['pondmen_{}'.format(i)]
+    
+        list_values_bdf.append(part_bdf)
+        list_values_entd.append(part_entd)
+        list_keys.append('{}'.format(i))
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    
+    return plt
+    
+histogram_typmen()
+
+
+def histogram_veh_tot():
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in range(0,11):
+        data_bdf['pondmen_{}'.format(i)] = 0
+        data_bdf['pondmen_{}'.format(i)].loc[data_bdf.veh_tot == i] = data_bdf['pondmen']
+        part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
+        del data_bdf['pondmen_{}'.format(i)]
+
+        data_entd['pondmen_{}'.format(i)] = 0
+        data_entd['pondmen_{}'.format(i)].loc[data_entd.veh_tot == i] = data_entd['pondmen']
+        part_entd = data_entd['pondmen_{}'.format(i)].sum() / data_entd['pondmen'].sum()
+        del data_entd['pondmen_{}'.format(i)]
+
+        list_values_bdf.append(part_bdf)
+        list_values_entd.append(part_entd)
+        list_keys.append('{}'.format(i))
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+
+    return plt
+
+histogram_veh_tot()
+
+
+def histogram_vp_deplacements_pro():
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in [0, 1]:
+        data_bdf['pondmen_{}'.format(i)] = 0
+        data_bdf['pondmen_{}'.format(i)].loc[data_bdf.vp_deplacements_pro == i] = data_bdf['pondmen']
+        part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
+        del data_bdf['pondmen_{}'.format(i)]
+       
+        data_entd['pondmen_{}'.format(i)] = 0
+        data_entd['pondmen_{}'.format(i)].loc[data_entd.vp_deplacements_pro == i] = data_entd['pondmen']
+        part_entd = data_entd['pondmen_{}'.format(i)].sum() / data_entd['pondmen'].sum()
+        del data_entd['pondmen_{}'.format(i)]
+    
+        list_values_bdf.append(part_bdf)
+        list_values_entd.append(part_entd)
+        list_keys.append('{}'.format(i))
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    
+    return plt
+    
+histogram_vp_deplacements_pro()
+
+
+def histogram_vp_domicile_travail():
+    list_values_bdf = []
+    list_values_entd = []
+    list_keys = []
+    for i in [0, 1]:
+        data_bdf['pondmen_{}'.format(i)] = 0
+        data_bdf['pondmen_{}'.format(i)].loc[data_bdf.vp_domicile_travail == i] = data_bdf['pondmen']
+        part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
+        del data_bdf['pondmen_{}'.format(i)]
+       
+        data_entd['pondmen_{}'.format(i)] = 0
+        data_entd['pondmen_{}'.format(i)].loc[data_entd.vp_domicile_travail == i] = data_entd['pondmen']
+        part_entd = data_entd['pondmen_{}'.format(i)].sum() / data_entd['pondmen'].sum()
+        del data_entd['pondmen_{}'.format(i)]
+    
+        list_values_bdf.append(part_bdf)
+        list_values_entd.append(part_entd)
+        list_keys.append('{}'.format(i))
+
+    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    
+    return plt
+    
+histogram_vp_domicile_travail()

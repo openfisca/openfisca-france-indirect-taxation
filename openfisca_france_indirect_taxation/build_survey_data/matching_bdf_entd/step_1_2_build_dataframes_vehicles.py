@@ -12,6 +12,9 @@ from __future__ import division
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_1_1_build_dataframes_menages import \
+    load_data_menages_bdf_entd
+
 from openfisca_survey_manager.temporary import TemporaryStore
 
 
@@ -110,7 +113,6 @@ def merge_vehicule_menage():
     data_bdf[['anvoi'] + ['recvoi']] = data_bdf[['anvoi'] + ['recvoi']].fillna(0)
     data_bdf[['anvoi'] + ['recvoi']] = data_bdf[['anvoi'] + ['recvoi']].astype(int, inplace = True)
 
-
     data_entd['age_vehicule'] = 0
     data_bdf['age_vehicule'] = 0
     data_entd.loc[data_entd['anvoi'] != 0, 'age_vehicule'] = 2008 - data_entd['anvoi']
@@ -129,6 +131,13 @@ def merge_vehicule_menage():
     data_entd['autre_carbu'] = 0    
     data_entd.loc[data_entd['v1_ken'] > 4, 'autre_carbu'] = 1  
 
+    data_bdf['essence'] = 0
+    data_bdf.loc[data_bdf['carbu'] == 1, 'essence'] = 1
+    data_bdf['diesel'] = 0
+    data_bdf.loc[data_bdf['carbu'] == 2, 'diesel'] = 1  
+    data_bdf['autre_carbu'] = 0
+    data_bdf.loc[data_bdf['carbu'] > 2, 'autre_carbu'] = 1  
+
     # déf des distances parcourues par carburant
     data_entd['distance_essence'] = 0
     data_entd.loc[data_entd['essence'] == 1, 'distance_essence'] = data_entd['v1_km_annu']
@@ -137,71 +146,58 @@ def merge_vehicule_menage():
     data_entd['distance_autre_carbu'] = 0
     data_entd.loc[data_entd['autre_carbu'] == 1, 'distance_autre_carbu'] = data_entd['v1_km_annu']
 
+    # Df avec le nombre de véhicule et les distances pour chaque type de carburant
     data_vehicule_entd = data_entd.groupby(by = 'ident_men')['essence',
         'diesel', 'autre_carbu', 'distance_essence', 'distance_diesel', 'distance_autre_carbu'].sum()
     data_vehicule_entd = data_vehicule_entd.reset_index()
 
-    data_entd_diesel = data_entd.query('diesel == 1').copy()
-    data_entd_diesel = data_entd_diesel.sort_values(by = ['v1_rang_veh'])
-    data_entd_diesel_pr = data_entd_diesel.drop_duplicates(['ident_men'], keep='first')
-    
-    data_entd_diesel_pr.rename(
+    # Df avec les infos du véhicule principal
+    data_entd = data_entd.sort_values(by = ['v1_rang_veh'])
+    data_entd = data_entd.drop_duplicates(['ident_men'], keep='first')
+    data_entd.rename(
         columns = {
-            'age_carte_grise' : 'age_carte_grise_diesel',
-            'age_vehicule' : 'age_vehicule_diesel',
-            'v1_puiss_corr' : 'puissance_diesel',
-            'v1_sfvachat' : 'etat_veh_achat_diesel',
-            'v1_sfvcosorout' : 'consommation_diesel',
+            'v1_puiss_corr' : 'puissance',
+            'v1_sfvachat' : 'etat_veh_achat',
+            'v1_sfvcosorout' : 'consommation',
                    },
         inplace = True,
         )
-
-    data_entd_diesel_pr = data_entd_diesel_pr[['ident_men'] + ['puissance_diesel'] +
-        ['etat_veh_achat_diesel'] + ['consommation_diesel'] + ['age_vehicule_diesel'] +
-        ['age_carte_grise_diesel']
+    data_entd = data_entd[['ident_men'] + ['puissance'] +
+        ['etat_veh_achat'] + ['consommation'] + ['age_vehicule'] +
+        ['age_carte_grise']
         ]
 
-    data_entd_essence = data_entd.query('essence == 1').copy()
-    data_entd_essence = data_entd_essence.sort_values(by = ['v1_rang_veh'])
-    data_entd_essence_pr = data_entd_essence.drop_duplicates(['ident_men'], keep='first')
+    data_bdf['km_essence'] = 0
+    data_bdf.loc[data_bdf['essence'] == 1, 'km_essence'] = data_bdf['km_auto']
+    data_bdf['km_diesel'] = 0
+    data_bdf.loc[data_bdf['diesel'] == 1, 'km_diesel'] = data_bdf['km_auto']
+    data_bdf['km_autre_carbu'] = 0
+    data_bdf.loc[data_bdf['autre_carbu'] == 1, 'km_autre_carbu'] = data_bdf['km_auto']
 
-    data_entd_essence_pr.rename(
+    # Df avec le nombre de véhicule et les distances pour chaque type de carburant
+    data_vehicule_bdf = data_bdf.groupby(by = 'ident_men')['essence',
+        'diesel', 'autre_carbu', 'km_essence', 'km_diesel', 'km_autre_carbu'].sum()
+    data_vehicule_bdf = data_vehicule_bdf.reset_index()
+
+    # Df avec les infos du véhicule principal
+    data_bdf = data_bdf.sort_values(by = ['nbvehic'])
+    data_bdf = data_bdf.drop_duplicates(['ident_men'], keep='first')
+    data_bdf.rename(
         columns = {
-            'age_carte_grise' : 'age_carte_grise_essence',
-            'age_vehicule' : 'age_vehicule_essence',
-            'v1_puiss_corr' : 'puissance_essence',
-            'v1_sfvachat' : 'etat_veh_achat_essence',
-            'v1_sfvcosorout' : 'consommation_essence',
+            'acqvoi' : 'etat_veh_achat',
+            'expvoi1' : 'vp_domicile_travail',
+            'expvoi2' : 'vp_deplacements_pro',
+            'nbvehic' : 'veh_tot',
+            'privoi_d' : 'prix_achat',
                    },
         inplace = True,
         )
-
-    data_entd_essence_pr = data_entd_essence_pr[['ident_men'] + ['puissance_essence'] +
-        ['etat_veh_achat_essence'] + ['consommation_essence'] + ['age_vehicule_essence'] +
-        ['age_carte_grise_essence']
+    data_bdf = data_bdf[['ident_men'] + ['prix_achat'] + ['veh_tot'] +
+        ['etat_veh_achat'] + ['age_vehicule'] + ['age_carte_grise'] +
+        ['vp_domicile_travail'] + ['vp_deplacements_pro']
         ]
 
-
-    data_entd_autre_carbu = data_entd.query('autre_carbu == 1').copy()
-    data_entd_autre_carbu = data_entd_autre_carbu.sort_values(by = ['v1_rang_veh'])
-    data_entd_autre_carbu_pr = data_entd_autre_carbu.drop_duplicates(['ident_men'], keep='first')
-
-    data_entd_autre_carbu_pr.rename(
-        columns = {
-            'age_carte_grise' : 'age_carte_grise_autre_carbu',
-            'age_vehicule' : 'age_vehicule_autre_carbu',
-            'v1_puiss_corr' : 'puissance_autre_carbu',
-            'v1_sfvachat' : 'etat_veh_achat_autre_carbu',
-            'v1_sfvcosorout' : 'consommation_autre_carbu',
-                   },
-        inplace = True,
-        )
-
-    data_entd_autre_carbu_pr = data_entd_autre_carbu_pr[['ident_men'] + ['puissance_autre_carbu'] +
-        ['etat_veh_achat_autre_carbu'] + ['consommation_autre_carbu'] + ['age_vehicule_autre_carbu'] +
-        ['age_carte_grise_autre_carbu']
-        ]
-
+    # Df infos comportements ménages
     data_entd_menage.rename(
         columns = {
             'v1_logdist01' : 'distance_commerces',
@@ -214,16 +210,30 @@ def merge_vehicule_menage():
         )
 
     # Merge les différentes df
-    data_entd_full = data_vehicule_entd.merge(data_entd_diesel_pr, on = 'ident_men', how = 'left')
-    data_entd_full = data_entd_full.merge(data_entd_essence_pr, on = 'ident_men', how = 'left')
-    data_entd_full = data_entd_full.merge(data_entd_autre_carbu_pr, on = 'ident_men', how = 'left')
+    data_entd_full = data_vehicule_entd.merge(data_entd, on = 'ident_men', how = 'left')
     data_entd_final = data_entd_menage.merge(data_entd_full, on = 'ident_men', how = 'left')
 
+    data_bdf_full = data_vehicule_bdf.merge(data_bdf, on = 'ident_men', how = 'left')
 
-    return data_entd_final
+    return data_entd_final, data_bdf_full
 
+
+def build_df_menages_vehicles():
+    data_menages = load_data_menages_bdf_entd()    
+    data_menages_entd = data_menages[0]
+    data_menages_bdf = data_menages[1]
+
+    data_vehicules = merge_vehicule_menage()  
+    data_vehicules_entd = data_vehicules[0]
+    data_vehicules_bdf = data_vehicules[1]
+    data_vehicules_bdf['ident_men'] = data_vehicules_bdf['ident_men'].astype(str)
+
+    data_entd = data_menages_entd.merge(data_vehicules_entd, on = 'ident_men')
+    data_bdf = data_menages_bdf.merge(data_vehicules_bdf, on = 'ident_men', how = 'left')
+
+    return data_entd, data_bdf
 
 if __name__ == "__main__":
-    data = merge_vehicule_menage()  
-    #data_entd = data[0]
-    #data_bdf = data[1]
+    data = build_df_menages_vehicles()  
+    data_entd = data[0]
+    data_bdf = data[1]
