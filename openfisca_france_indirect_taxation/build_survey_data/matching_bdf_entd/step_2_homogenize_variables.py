@@ -100,6 +100,12 @@ def create_new_variables():
             del data[element]
 
         if i == 0:
+            data['distance'] = (
+                data['distance_diesel'] + data['distance_essence'] +
+                data['distance_autre_carbu']
+                ).fillna(0)
+
+        if i == 0:
             data_entd = data.copy()
         else:
             data_bdf = data.copy()

@@ -3,12 +3,11 @@ data_entd <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-
 data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matching_bdf.csv", header = -1, sep=",")
 
 # Compute random matching
-out.nnd <- RANDwNND.hotdeck(
+out.nnd <- NND.hotdeck(
   data.rec = data_bdf, data.don = data_entd,
   match.vars = c("nb_diesel", "age_vehicule"),
   don.class = c("niveau_vie_decile"),
-  dist.fun = "Gower",
-  weight.don = "pondmen"
+  dist.fun = "Gower"
 )
 
 # Create fused file
@@ -20,5 +19,5 @@ fused.nnd.m <- create.fused(
 
 # Save it as csv
 write.csv(fused.nnd.m,
-          file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matched_random.csv"
+          file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matched_distance.csv"
 )

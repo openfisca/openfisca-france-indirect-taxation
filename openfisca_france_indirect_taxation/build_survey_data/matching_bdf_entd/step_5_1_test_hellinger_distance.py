@@ -18,18 +18,19 @@ import pkg_resources
 
 _SQRT2 = np.sqrt(2)     # sqrt(2) with default precision np.float64
 
-# Importation des bases de données appariées et de la base de référence ENL
+# Importation des bases de données appariées et de la base de référence entd
 default_config_files_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
 
 
-data_enl = pd.read_csv(
+data_entd = pd.read_csv(
     os.path.join(
         default_config_files_directory,
         'openfisca_france_indirect_taxation',
         'assets',
         'matching',
-        'data_matching_enl.csv'
+        'matching_entd',
+        'data_matching_entd.csv'
         ), sep =',', decimal = '.'
     )
 
@@ -40,6 +41,7 @@ data_matched_distance = pd.read_csv(
         'openfisca_france_indirect_taxation',
         'assets',
         'matching',
+        'matching_entd',
         'data_matched_distance.csv'
         ), sep =',', decimal = '.'
     )
@@ -51,267 +53,188 @@ data_matched_random = pd.read_csv(
         'openfisca_france_indirect_taxation',
         'assets',
         'matching',
+        'matching_entd',
         'data_matched_random.csv'
         ), sep =',', decimal = '.'
     )
 
-
-data_matched_rank = pd.read_csv(
-    os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
-        'matching',
-        'data_matched_rank.csv'
-        ), sep =',', decimal = '.'
-    )
-
-
+data_matched = data_matched_distance.copy()
+    
+    
 def hellinger(p, q):
     return np.sqrt(np.sum((np.sqrt(p) - np.sqrt(q)) ** 2)) / _SQRT2
 
 
-def hellinger_froid(data_matched, data_enl):
+def hellinger_distance_annuelle(data_matched, data_entd):
+    data_matched['distance'] = data_matched['distance'].astype(float)
+    data_matched['distance_racine'] = (data_matched['distance']) ** (0.5)
+    distance_racine_max_matched = data_matched['distance_racine'].max()
+
+    data_entd['distance'] = data_entd['distance'].astype(float)
+    data_entd['distance_racine'] = (data_entd['distance']) ** (0.5)
+    distance_racine_max_entd = data_entd['distance_racine'].max()
+
+    distance_racine_max = max(distance_racine_max_matched, distance_racine_max_entd)
+    data_matched['distance_groupe'] = (data_matched['distance_racine'] / distance_racine_max).round(decimals = 2)
+    data_entd['distance_groupe'] = (data_entd['distance_racine'] / distance_racine_max).round(decimals = 2)
+
     distribution_matched = dict()
-    for i in [0, 1]:
-        distribution_matched['{}'.format(i)] = (data_matched.query('froid == {}'.format(i))['pondmen'].sum() /
-                 data_matched['pondmen'].sum())
-
-    distribution_enl = dict()
-    for i in [0, 1]:
-        distribution_enl['{}'.format(i)] = (data_enl.query('froid == {}'.format(i))['pondmen'].sum() /
-                 data_enl['pondmen'].sum())
-
-    hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
-    
-    return hellinger_distance
-    
-
-def hellinger_froid_cout(data_matched, data_enl):
-    distribution_matched = dict()
-    for i in [0, 1]:
-        distribution_matched['{}'.format(i)] = (data_matched.query('froid_cout == {}'.format(i))['pondmen'].sum() /
-                 data_matched['pondmen'].sum())
-
-    distribution_enl = dict()
-    for i in [0, 1]:
-        distribution_enl['{}'.format(i)] = (data_enl.query('froid_cout == {}'.format(i))['pondmen'].sum() /
-                 data_enl['pondmen'].sum())
-
-    hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
-    
-    return hellinger_distance
-    
-
-def hellinger_froid_niveau_vie_decile(data_matched, data_enl):
-    distribution_matched = dict()
-    distribution_enl = dict()
-    part_froid_enl = sum(data_enl['pondmen'] * data_enl['froid']) / sum(data_enl['pondmen'])
-    part_froid_matched = sum(data_matched['pondmen'] * data_matched['froid']) / sum(data_matched['pondmen'])
-    part_froid = max(part_froid_enl, part_froid_matched)
-    for i in range(1,11):
-        part_froid_decile_enl = (
-            sum(data_enl['pondmen'] * (data_enl['froid'] == 1) * (data_enl['niveau_vie_decile'] == i)) /
-            sum(data_enl['pondmen'])
-            )
-        part_froid_decile_matched = (
-            sum(data_matched['pondmen'] * (data_matched['froid'] == 1) * (data_matched['niveau_vie_decile'] == i)) /
-            sum(data_matched['pondmen'])
-            )
-        distribution_enl['{}'.format(i)] = (
-            part_froid_decile_enl / part_froid
-                )
-        distribution_matched['{}'.format(i)] = (
-            part_froid_decile_matched / part_froid
-                )
-
-    hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
-    
-    return hellinger_distance
-
-    
-def hellinger_froid_tuu(data_matched, data_enl):
-    distribution_matched = dict()
-    distribution_enl = dict()
-    part_froid_enl = sum(data_enl['pondmen'] * data_enl['froid']) / sum(data_enl['pondmen'])
-    part_froid_matched = sum(data_matched['pondmen'] * data_matched['froid']) / sum(data_matched['pondmen'])
-    part_froid = max(part_froid_enl, part_froid_matched)
-    for i in range(1,9):
-        part_froid_tuu_enl = (
-            sum(data_enl['pondmen'] * (data_enl['froid'] == 1) * (data_enl['tuu'] == i)) /
-            sum(data_enl['pondmen'])
-            )
-        part_froid_tuu_matched = (
-            sum(data_matched['pondmen'] * (data_matched['froid'] == 1) * (data_matched['tuu'] == i)) /
-            sum(data_matched['pondmen'])
-            )
-        distribution_enl['{}'.format(i)] = (
-            part_froid_tuu_enl / part_froid
-                )
-        distribution_matched['{}'.format(i)] = (
-            part_froid_tuu_matched / part_froid
-                )
-
-    hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
-    
-    return hellinger_distance
-
-    
-def hellinger_froid_zeat(data_matched, data_enl):
-    distribution_matched = dict()
-    distribution_enl = dict()
-    part_froid_enl = sum(data_enl['pondmen'] * data_enl['froid']) / sum(data_enl['pondmen'])
-    part_froid_matched = sum(data_matched['pondmen'] * data_matched['froid']) / sum(data_matched['pondmen'])
-    part_froid = max(part_froid_enl, part_froid_matched)
-    for i in range(1,10):
-        part_froid_zeat_enl = (
-            sum(data_enl['pondmen'] * (data_enl['froid'] == 1) * (data_enl['zeat'] == i)) /
-            sum(data_enl['pondmen'])
-            )
-        part_froid_zeat_matched = (
-            sum(data_matched['pondmen'] * (data_matched['froid'] == 1) * (data_matched['zeat'] == i)) /
-            sum(data_matched['pondmen'])
-            )
-        distribution_enl['{}'.format(i)] = (
-            part_froid_zeat_enl / part_froid
-                )
-        distribution_matched['{}'.format(i)] = (
-            part_froid_zeat_matched / part_froid
-                )
-
-    hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
-    
-    return hellinger_distance
-
-
-def hellinger_froid_revtot(data_matched, data_enl):
-    distribution_matched = dict()
-    distribution_enl = dict()
-
-    part_froid_enl = sum(data_enl['pondmen'] * data_enl['froid']) / sum(data_enl['pondmen'])
-    part_froid_matched = sum(data_matched['pondmen'] * data_matched['froid']) / sum(data_matched['pondmen'])
-    part_froid = max(part_froid_enl, part_froid_matched)
-
-    data_matched['revtot'] = data_matched['revtot'].astype(float)
-    data_matched['revtot_racine'] = (data_matched['revtot']) ** (0.5)
-    revtot_racine_max_matched = data_matched['revtot_racine'].max()
-    
-    data_enl['revtot'] = data_enl['revtot'].astype(float)
-    data_enl['revtot_racine'] = (data_enl['revtot']) ** (0.5)
-    revtot_racine_max_enl = data_enl['revtot_racine'].max()
-
-    revtot_racine_max = max(revtot_racine_max_matched, revtot_racine_max_enl)
-    data_matched['revtot_groupe'] = (data_matched['revtot_racine'] / revtot_racine_max).round(decimals = 2)
-    data_enl['revtot_groupe'] = (data_enl['revtot_racine'] / revtot_racine_max).round(decimals = 2)
-
-    for i in range(1,101):
+    for i in range(0,101):
         j = float(i)/100
-        part_froid_surf_enl = (
-            sum(data_enl['pondmen'] * (data_enl['froid'] == 1) * (data_enl['revtot_groupe'] == j)) /
-            sum(data_enl['pondmen'])
-            )
-        part_froid_surf_matched = (
-            sum(data_matched['pondmen'] * (data_matched['froid'] == 1) * (data_matched['revtot_groupe'] == j)) /
-            sum(data_matched['pondmen'])
-            )
-        distribution_enl['{}'.format(i)] = (
-            part_froid_surf_enl / part_froid
-                )
-        distribution_matched['{}'.format(i)] = (
-            part_froid_surf_matched / part_froid
-                )
-
-    hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
+        distribution_matched['{}'.format(j)] = (data_matched.query('distance_groupe == {}'.format(j))['pondmen'].sum() /
+                 data_matched['pondmen'].sum())
     
-    return hellinger_distance
-    
-    
-def hellinger_froid_surfhab_d(data_matched, data_enl):
-    distribution_matched = dict()
-    distribution_enl = dict()
-
-    part_froid_enl = sum(data_enl['pondmen'] * data_enl['froid']) / sum(data_enl['pondmen'])
-    part_froid_matched = sum(data_matched['pondmen'] * data_matched['froid']) / sum(data_matched['pondmen'])
-    part_froid = max(part_froid_enl, part_froid_matched)
-
-    data_matched['surfhab_d'] = data_matched['surfhab_d'].astype(float)
-    surfhab_d_max_bdf = data_matched['surfhab_d'].max()    
-    data_enl['surfhab_d'] = data_enl['surfhab_d'].astype(float)
-    surfhab_d_max_enl = data_enl['surfhab_d'].max()
-
-    surfhab_d_max = max(surfhab_d_max_bdf, surfhab_d_max_enl)
-    data_matched['surfhab_d_groupe'] = (data_matched['surfhab_d'] / surfhab_d_max).round(decimals = 2)
-    data_enl['surfhab_d_groupe'] = (data_enl['surfhab_d'] / surfhab_d_max).round(decimals = 2)
-
-    for i in range(1,101):
+    distribution_entd = dict()
+    for i in range(0,101):
         j = float(i)/100
-        part_froid_surf_enl = (
-            sum(data_enl['pondmen'] * (data_enl['froid'] == 1) * (data_enl['surfhab_d_groupe'] == j)) /
-            sum(data_enl['pondmen'])
-            )
-        part_froid_surf_matched = (
-            sum(data_matched['pondmen'] * (data_matched['froid'] == 1) * (data_matched['surfhab_d_groupe'] == j)) /
-            sum(data_matched['pondmen'])
-            )
-        distribution_enl['{}'.format(i)] = (
-            part_froid_surf_enl / part_froid
-                )
-        distribution_matched['{}'.format(i)] = (
-            part_froid_surf_matched / part_froid
-                )
+        distribution_entd['{}'.format(j)] = (data_entd.query('distance_groupe == {}'.format(j))['pondmen'].sum() /
+                 data_entd['pondmen'].sum())
 
-    hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
+    hellinger_distance = hellinger(distribution_matched.values(),distribution_entd.values())
     
     return hellinger_distance
-
     
-def hellinger_froid_cout_niveau_vie_decile(data_matched, data_enl):
+
+def hellinger_distance_diesel_annuelle(data_matched, data_entd):
+    data_matched['distance_diesel'] = data_matched['distance_diesel'].astype(float)
+    data_matched['distance_diesel_racine'] = (data_matched['distance_diesel']) ** (0.5)
+    distance_diesel_racine_max_matched = data_matched['distance_diesel_racine'].max()
+    
+    data_entd['distance_diesel'] = data_entd['distance_diesel'].astype(float)
+    data_entd['distance_diesel_racine'] = (data_entd['distance_diesel']) ** (0.5)
+    distance_diesel_racine_max_entd = data_entd['distance_diesel_racine'].max()
+
+    distance_diesel_racine_max = max(distance_diesel_racine_max_matched, distance_diesel_racine_max_entd)
+    data_matched['distance_diesel_groupe'] = (data_matched['distance_diesel_racine'] / distance_diesel_racine_max).round(decimals = 2)
+    data_entd['distance_diesel_groupe'] = (data_entd['distance_diesel_racine'] / distance_diesel_racine_max).round(decimals = 2)
+
     distribution_matched = dict()
-    distribution_enl = dict()
-    part_froid_enl = sum(data_enl['pondmen'] * data_enl['froid_cout']) / sum(data_enl['pondmen'])
-    part_froid_matched = sum(data_matched['pondmen'] * data_matched['froid_cout']) / sum(data_matched['pondmen'])
-    part_froid = max(part_froid_enl, part_froid_matched)
-    for i in range(1,11):
-        part_froid_decile_enl = (
-            sum(data_enl['pondmen'] * (data_enl['froid_cout'] == 1) * (data_enl['niveau_vie_decile'] == i)) /
-            sum(data_enl['pondmen'])
-            )
-        part_froid_decile_matched = (
-            sum(data_matched['pondmen'] * (data_matched['froid_cout'] == 1) * (data_matched['niveau_vie_decile'] == i)) /
-            sum(data_matched['pondmen'])
-            )
-        distribution_enl['{}'.format(i)] = (
-            part_froid_decile_enl / part_froid
-                )
-        distribution_matched['{}'.format(i)] = (
-            part_froid_decile_matched / part_froid
-                )
+    for i in range(0,101):
+        j = float(i)/100
+        distribution_matched['{}'.format(j)] = (data_matched.query('distance_diesel_groupe == {}'.format(j))['pondmen'].sum() /
+                 data_matched['pondmen'].sum())
+    
+    distribution_entd = dict()
+    for i in range(0,101):
+        j = float(i)/100
+        distribution_entd['{}'.format(j)] = (data_entd.query('distance_diesel_groupe == {}'.format(j))['pondmen'].sum() /
+                 data_entd['pondmen'].sum())
 
-    hellinger_distance = hellinger(distribution_matched.values(),distribution_enl.values())
-
-    return hellinger_distance
+    hellinger_distance_diesel = hellinger(distribution_matched.values(),distribution_entd.values())
+    
+    return hellinger_distance_diesel
+    
 
     
-hellinger_froid_niveau_vie_decile_random = (
-    hellinger_froid_niveau_vie_decile(data_matched_random, data_enl)
-    )
+def hellinger_distance_essence_annuelle(data_matched, data_entd):
+    data_matched['distance_essence'] = data_matched['distance_essence'].astype(float)
+    data_matched['distance_essence_racine'] = (data_matched['distance_essence']) ** (0.5)
+    distance_essence_racine_max_matched = data_matched['distance_essence_racine'].max()
+    
+    data_entd['distance_essence'] = data_entd['distance_essence'].astype(float)
+    data_entd['distance_essence_racine'] = (data_entd['distance_essence']) ** (0.5)
+    distance_essence_racine_max_entd = data_entd['distance_essence_racine'].max()
 
-hellinger_froid_cout_niveau_vie_decile_random = (
-    hellinger_froid_cout_niveau_vie_decile(data_matched_random, data_enl)
-    )
+    distance_essence_racine_max = max(distance_essence_racine_max_matched, distance_essence_racine_max_entd)
+    data_matched['distance_essence_groupe'] = (data_matched['distance_essence_racine'] / distance_essence_racine_max).round(decimals = 2)
+    data_entd['distance_essence_groupe'] = (data_entd['distance_essence_racine'] / distance_essence_racine_max).round(decimals = 2)
 
-hellinger_froid_revtot_random = (
-    hellinger_froid_revtot(data_matched_random, data_enl)
-    )
+    distribution_matched = dict()
+    for i in range(0,101):
+        j = float(i)/100
+        distribution_matched['{}'.format(j)] = (data_matched.query('distance_essence_groupe == {}'.format(j))['pondmen'].sum() /
+                 data_matched['pondmen'].sum())
+    
+    distribution_entd = dict()
+    for i in range(0,101):
+        j = float(i)/100
+        distribution_entd['{}'.format(j)] = (data_entd.query('distance_essence_groupe == {}'.format(j))['pondmen'].sum() /
+                 data_entd['pondmen'].sum())
 
-hellinger_froid_surf_random = (
-    hellinger_froid_surfhab_d(data_matched_random, data_enl)
-    )
+    hellinger_distance_essence = hellinger(distribution_matched.values(),distribution_entd.values())
+    
+    return hellinger_distance_essence
 
-hellinger_froid_tuu_random = (
-    hellinger_froid_tuu(data_matched_random, data_enl)
-    )
 
-hellinger_froid_zeat_random = (
-    hellinger_froid_zeat(data_matched_random, data_enl)
-    )
+def hellinger_distance_annuelle_niveau_vie_decile(data_matched, data_entd):
+    data_matched['distance'] = data_matched['distance'].astype(float)
+    data_matched['distance_racine'] = (data_matched['distance']) ** (0.5)
+    distance_racine_max_matched = data_matched['distance_racine'].max()
+
+    data_entd['distance'] = data_entd['distance'].astype(float)
+    data_entd['distance_racine'] = (data_entd['distance']) ** (0.5)
+    distance_racine_max_entd = data_entd['distance_racine'].max()
+
+    distance_racine_max = max(distance_racine_max_matched, distance_racine_max_entd)
+    data_matched['distance_groupe'] = (data_matched['distance_racine'] / distance_racine_max).round(decimals = 1)
+    data_entd['distance_groupe'] = (data_entd['distance_racine'] / distance_racine_max).round(decimals = 1)
+
+    distribution_matched = dict()
+    for d in range(1,11):
+        for i in range(0,11):
+            j = float(i)/10
+            distribution_matched['{} - {}'.format(d,j)] = (
+                (data_matched.query('niveau_vie_decile == {}'.format(d)).query('distance_groupe == {}'.format(j))['pondmen']).sum() /
+                data_matched['pondmen'].sum()
+                ) 
+    
+    distribution_entd = dict()
+    for d in range(1,11):
+        for i in range(0,11):
+            j = float(i)/10
+            distribution_entd['{} - {}'.format(d,j)] = (
+                (data_entd.query('niveau_vie_decile == {}'.format(d)).query('distance_groupe == {}'.format(j))['pondmen']).sum() /
+                data_entd['pondmen'].sum()
+                ) 
+
+    hellinger_distance = hellinger(distribution_matched.values(),distribution_entd.values())
+    
+    return hellinger_distance
+
+
+def hellinger_distance_annuelle_tuu(data_matched, data_entd):
+    data_matched['distance'] = data_matched['distance'].astype(float)
+    data_matched['distance_racine'] = (data_matched['distance']) ** (0.5)
+    distance_racine_max_matched = data_matched['distance_racine'].max()
+
+    data_entd['distance'] = data_entd['distance'].astype(float)
+    data_entd['distance_racine'] = (data_entd['distance']) ** (0.5)
+    distance_racine_max_entd = data_entd['distance_racine'].max()
+
+    distance_racine_max = max(distance_racine_max_matched, distance_racine_max_entd)
+    data_matched['distance_groupe'] = (data_matched['distance_racine'] / distance_racine_max).round(decimals = 1)
+    data_entd['distance_groupe'] = (data_entd['distance_racine'] / distance_racine_max).round(decimals = 1)
+
+    distribution_matched = dict()
+    for t in range(0,9):
+        for i in range(0,11):
+            j = float(i)/10
+            distribution_matched['{} - {}'.format(t,j)] = (
+                (data_matched.query('tuu == {}'.format(t)).query('distance_groupe == {}'.format(j))['pondmen']).sum() /
+                data_matched['pondmen'].sum()
+                ) 
+    
+    distribution_entd = dict()
+    for t in range(0,9):
+        for i in range(0,11):
+            j = float(i)/10
+            distribution_entd['{} - {}'.format(t,j)] = (
+                (data_entd.query('tuu == {}'.format(t)).query('distance_groupe == {}'.format(j))['pondmen']).sum() /
+                data_entd['pondmen'].sum()
+                ) 
+
+    hellinger_distance = hellinger(distribution_matched.values(),distribution_entd.values())
+    
+    return hellinger_distance
+
+
+    
+hellinger_distance_annuelle = hellinger_distance_annuelle(data_matched_distance, data_entd) 
+
+hellinger_distance_diesel_annuelle = hellinger_distance_diesel_annuelle(data_matched_distance, data_entd)
+
+hellinger_distance_essence_annuelle = hellinger_distance_essence_annuelle(data_matched_distance, data_entd)
+
+hellinger_distance_annuelle_nvd = hellinger_distance_annuelle_niveau_vie_decile(data_matched_distance, data_entd)
+
+hellinger_distance_annuelle_tuu = hellinger_distance_annuelle_tuu(data_matched_distance, data_entd)
