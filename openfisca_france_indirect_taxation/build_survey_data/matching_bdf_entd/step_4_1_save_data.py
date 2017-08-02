@@ -36,12 +36,15 @@ def clean_data():
     for variable in variables_to_drop_entd:
         del data_entd[variable]
 
+    data_entd = data_entd.fillna(0)
+    data_bdf = data_bdf.fillna(0)
+
     return data_entd, data_bdf
 
 
 def create_donation_classes():
     for base in [0,1]:
-        data = create_niveau_vie_quantiles()[base]
+        data = clean_data()[base]
 
         # Classes based on niveau_vie_decile and aides_logement
         data['donation_class_1'] = 0
