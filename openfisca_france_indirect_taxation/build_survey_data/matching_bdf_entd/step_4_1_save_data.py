@@ -58,19 +58,11 @@ def create_donation_classes():
       
         data['donation_class_3'] = 0
         for i in range(1,11):
-            for log in [0,1]:
-                if i < 5:
-                    for j in [0,1]:
-                        data.loc[
-                            (data['aides_logement'] == j) & (data['niveau_vie_decile'] == i) & (data['rural'] == log),
-                            'donation_class_3'
-                            ] = '{}_{}_{}'.format(i,log,j)
-                else:
-                    data.loc[
-                        (data['niveau_vie_decile'] == i) & (data['rural'] == log),
-                        'donation_class_3'
-                        ] = '{}_{}'.format(i,log)
-
+            for rur in [0,1]:
+                data.loc[
+                    (data['niveau_vie_decile'] == i) & (data['rural'] == rur),
+                    'donation_class_3'
+                    ] = '{}_{}'.format(i,rur)
 
         if base == 0:
             data_entd = data.copy()
