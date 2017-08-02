@@ -58,6 +58,19 @@ data_matched_random = pd.read_csv(
         ), sep =',', decimal = '.'
     )
 
+
+data_matched_rank = pd.read_csv(
+    os.path.join(
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'matching',
+        'matching_entd',
+        'data_matched_rank.csv'
+        ), sep =',', decimal = '.'
+    )
+
+
 data_matched = data_matched_distance.copy()
     
     
@@ -228,7 +241,6 @@ def hellinger_distance_annuelle_tuu(data_matched, data_entd):
     return hellinger_distance
 
 
-    
 hellinger_distance_annuelle = hellinger_distance_annuelle(data_matched_distance, data_entd) 
 
 hellinger_distance_diesel_annuelle = hellinger_distance_diesel_annuelle(data_matched_distance, data_entd)
