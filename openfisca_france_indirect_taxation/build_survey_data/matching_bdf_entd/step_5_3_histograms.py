@@ -124,7 +124,7 @@ def histogram_distribution_distance_annuelle(data_matched, data_entd, distance):
             )
 
         list_values_entd.append(part_entd)
-        list_keys.append('{}'.format(i))
+        list_keys.append('{}'.format(j))
 
     figure = histogrammes(list_keys, list_values_matched, list_values_entd, 'Matched', 'ENTD')
     
@@ -165,7 +165,7 @@ def histogram_distribution_distance_annuelle_group(data_matched, data_entd, dist
             )
 
         list_values_entd.append(part_entd)
-        list_keys.append('{}'.format(i))
+        list_keys.append('{}'.format(j))
 
     figure = histogrammes(list_keys, list_values_matched, list_values_entd, 'Matched', 'ENTD')
 

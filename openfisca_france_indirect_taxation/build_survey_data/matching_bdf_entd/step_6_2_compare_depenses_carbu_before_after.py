@@ -56,5 +56,19 @@ def histogram_depenses_annuelle_group(data_matched, group):
     return figure
 
 
-histogram_depenses_annuelle_group(data_matched, 'niveau_vie_decile')
+def histogram_distribution_depenses_annuelle(data_matched):
+    list_values_poste_coicop = []
+    list_values_depenses_carburants = []
+    list_keys = []
+    for i in [.05, .1, .2, .3, .4, .5, .6, .7, .8, .9, .95]:
+        list_values_poste_coicop.append(data_matched['poste_coicop_722'].quantile(i))
+        list_values_depenses_carburants.append(data_matched['depenses_carburants'].quantile(i))
+        list_keys.append('{}'.format(i)) 
+
+    figure = histogrammes(list_keys, list_values_poste_coicop, list_values_depenses_carburants, 'Ex ante', 'Ex post')
+
+    return figure
     
+    
+histogram_depenses_annuelle_group(data_matched, 'niveau_vie_decile')
+histogram_distribution_depenses_annuelle(data_matched)

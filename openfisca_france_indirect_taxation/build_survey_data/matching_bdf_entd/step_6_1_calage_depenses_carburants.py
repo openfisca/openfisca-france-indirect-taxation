@@ -50,14 +50,14 @@ def calage_depenses_from_distance(data_matched):
                 sum(data_matched_group['poste_coicop_722'] * data_matched_group['pondmen']) /
                 data_matched_group['pondmen'].sum()
                 )
-        
-            data_matched['depenses_carburants'] = \
+
+            data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_carburants'] = \
                 data_matched['distance'] * avg_depenses / avg_distance
     
-            data_matched['depenses_diesel'] = \
+            data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_diesel'] = \
                 data_matched['distance_diesel'] * avg_depenses / avg_distance
     
-            data_matched['depenses_essence'] = \
+            data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_essence'] = \
                 data_matched['distance_essence'] * avg_depenses / avg_distance
 
     return data_matched

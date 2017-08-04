@@ -231,27 +231,6 @@ def hellinger_part_energies_revtot(data_bdf, data_enl):
 hellinger_part_energies_revtot = hellinger_part_energies_revtot(data_bdf, data_enl)
 
 
-# Test if two opposite distributions have hellinger distance = 1
-def hellinger_test(data_bdf, data_enl):
-    distribution_bdf = dict()
-    for i in range(1,51):
-        distribution_bdf['{}'.format(i)] = 0.02
-    for i in range(51,101):
-        distribution_bdf['{}'.format(i)] = 0
-    
-    distribution_enl = dict()
-    for i in range(1,51):
-        distribution_enl['{}'.format(i)] = 0
-    for i in range(51,101):
-        distribution_enl['{}'.format(i)] = 0.02
-
-    hellinger_distance = hellinger(distribution_bdf.values(),distribution_enl.values())
-    
-    return hellinger_distance
-    
-hellinger_test = hellinger_test(data_bdf, data_enl)
-
-
 def hellinger_postes_energies(data_bdf, data_enl):
     distribution_bdf_1 = dict()
     distribution_bdf_2 = dict()
@@ -321,7 +300,6 @@ def hellinger_quintiles(data_bdf, data_enl):
     return hellinger_distance
     
 hellinger_quintiles = hellinger_quintiles(data_bdf, data_enl)
-
 
 
 def hellinger_revtot(data_bdf, data_enl):
@@ -401,6 +379,27 @@ def hellinger_tau(data_bdf, data_enl):
     return hellinger_distance
     
 hellinger_tau = hellinger_tau(data_bdf, data_enl)
+
+
+# Test if two opposite distributions have hellinger distance = 1
+def hellinger_test(data_bdf, data_enl):
+    distribution_bdf = dict()
+    for i in range(1,51):
+        distribution_bdf['{}'.format(i)] = 0.02
+    for i in range(51,101):
+        distribution_bdf['{}'.format(i)] = 0
+    
+    distribution_enl = dict()
+    for i in range(1,51):
+        distribution_enl['{}'.format(i)] = 0
+    for i in range(51,101):
+        distribution_enl['{}'.format(i)] = 0.02
+
+    hellinger_distance = hellinger(distribution_bdf.values(),distribution_enl.values())
+    
+    return hellinger_distance
+    
+hellinger_test = hellinger_test(data_bdf, data_enl)
 
 
 def hellinger_tuu(data_bdf, data_enl):
