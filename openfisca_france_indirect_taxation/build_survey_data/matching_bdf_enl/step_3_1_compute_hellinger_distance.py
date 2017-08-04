@@ -5,21 +5,14 @@ Computing the Hellinger distance between two discrete
 probability distributions
 """
 
-import numpy as np
-
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
+from openfisca_france_indirect_taxation.build_survey_data.utils import \
+    hellinger
 
 data = create_niveau_vie_quantiles()
 data_enl = data[0]
 data_bdf = data[1]
-
-
-_SQRT2 = np.sqrt(2)     # sqrt(2) with default precision np.float64
-
-
-def hellinger(p, q):
-    return np.sqrt(np.sum((np.sqrt(p) - np.sqrt(q)) ** 2)) / _SQRT2
 
 
 def hellinger_agepr(data_bdf, data_enl):

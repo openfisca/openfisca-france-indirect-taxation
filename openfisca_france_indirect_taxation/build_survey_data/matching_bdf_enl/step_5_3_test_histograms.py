@@ -6,16 +6,12 @@ from __future__ import division
 # à les harmoniser entre les deux enquêtes.
 # Cette décision se fait sur la base des résultats observés et ne dépend d'aucun critère précis.
 
-import matplotlib.pyplot as plt
-import seaborn
-
 import os
 import pkg_resources
 import pandas as pd
-import numpy as np
 
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
-
+from openfisca_france_indirect_taxation.build_survey_data.utils import \
+    histogrammes
 
 # Importation des bases de données appariées et de la base de référence ENL
 default_config_files_directory = os.path.join(
@@ -65,16 +61,6 @@ data_matched_rank = pd.read_csv(
         ), sep =',', decimal = '.'
     )
 
-    
-def histogrammes(list_keys, list_values_bdf, list_values_enl):
-    size_hist = np.arange(len(list_keys))
-    plot_bdf = plt.bar(size_hist-0.125, list_values_bdf, color = 'b', align='center', width=0.25)
-    plot_enl = plt.bar(size_hist+0.125, list_values_enl, color = 'r', align='center', width=0.25)
-    plt.xticks(size_hist, list_keys)
-    plt.legend((plot_bdf[0], plot_enl[0]), ('Matched', 'ENL'))
-    
-    return plt
-
 
 def histogram_froid_niveau_vie_decile(data_matched, data_enl):
     list_values_matched = []
@@ -99,9 +85,9 @@ def histogram_froid_niveau_vie_decile(data_matched, data_enl):
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_matched, list_values_enl)
+    figure = histogrammes(list_keys, list_values_matched, list_values_enl, 'Matched', 'ENL')
     
-    return plt
+    return figure
 
 
 def histogram_froid_cout_niveau_vie_decile(data_matched, data_enl):
@@ -127,9 +113,9 @@ def histogram_froid_cout_niveau_vie_decile(data_matched, data_enl):
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_matched, list_values_enl)
+    figure = histogrammes(list_keys, list_values_matched, list_values_enl, 'Matched', 'ENL')
     
-    return plt
+    return figure
 
 
 def histogram_froid_tuu(data_matched, data_enl):
@@ -155,9 +141,9 @@ def histogram_froid_tuu(data_matched, data_enl):
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_matched, list_values_enl)
+    figure = histogrammes(list_keys, list_values_matched, list_values_enl, 'Matched', 'ENL')
     
-    return plt
+    return figure
 
 
 histogram_froid_niveau_vie_decile(data_matched_distance, data_enl)

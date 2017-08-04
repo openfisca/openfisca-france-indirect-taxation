@@ -8,28 +8,15 @@ from __future__ import division
 # à les harmoniser entre les deux enquêtes.
 # Cette décision se fait sur la base des résultats observés et ne dépend d'aucun critère précis.
 
-import matplotlib.pyplot as plt
-import numpy as np
-import seaborn
-
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
+from openfisca_france_indirect_taxation.build_survey_data.utils import \
+    histogrammes
 
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
-
+    
 data = create_niveau_vie_quantiles()
 data_entd = data[0]
 data_bdf = data[1]
-
-
-def histogrammes(list_keys, list_values_bdf, list_values_entd):
-    size_hist = np.arange(len(list_keys))
-    plot_bdf = plt.bar(size_hist-0.125, list_values_bdf, color = 'b', align='center', width=0.25)
-    plot_entd = plt.bar(size_hist+0.125, list_values_entd, color = 'r', align='center', width=0.25)
-    plt.xticks(size_hist, list_keys)
-    plt.legend((plot_bdf[0], plot_entd[0]), ('BdF', 'ENTD'))
-    
-    return plt
 
 
 def histogram_agepr():
@@ -41,9 +28,9 @@ def histogram_agepr():
         list_values_entd.append(data_entd['agepr'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
 
-    return plt
+    return figure
 
 histogram_agepr()
 
@@ -57,9 +44,9 @@ def histogram_age_vehicule():
         list_values_entd.append(data_entd['age_vehicule'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
 
-    return plt
+    return figure
 
 histogram_age_vehicule()
 
@@ -73,9 +60,9 @@ def histogram_age_carte_grise():
         list_values_entd.append(data_entd['age_carte_grise'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
 
-    return plt
+    return figure
 
 histogram_age_carte_grise()
 
@@ -99,9 +86,9 @@ def histogram_aides_logement():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_aides_logement()
 
@@ -125,9 +112,9 @@ def histogram_cataeu():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_cataeu()
 
@@ -151,9 +138,9 @@ def histogram_cs42pr():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_cs42pr()
 
@@ -177,9 +164,9 @@ def histogram_dip14pr():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_dip14pr()
 
@@ -193,9 +180,9 @@ def histogram_mloy_d(): # comprendre ce qui ne va pas ici
         list_values_entd.append(data_entd['mloy_d'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_mloy_d()
 
@@ -219,9 +206,9 @@ def histogram_nactifs():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_nactifs()
 
@@ -245,9 +232,9 @@ def histogram_nbphab():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_nbphab()
 
@@ -271,9 +258,9 @@ def histogram_nb_diesel():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_nb_diesel()
 
@@ -297,9 +284,9 @@ def histogram_nb_essence():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_nb_essence()
 
@@ -323,9 +310,9 @@ def histogram_nenfants():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_nenfants()
 
@@ -339,9 +326,9 @@ def histogram_niveau_vie():
         list_values_entd.append(data_entd['niveau_vie'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_niveau_vie()
 
@@ -365,9 +352,9 @@ def histogram_npers():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_npers()
 
@@ -391,9 +378,9 @@ def histogram_ocde10():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_ocde10()
 
@@ -417,9 +404,9 @@ def histogram_situapr():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_situapr()
 
@@ -443,9 +430,9 @@ def histogram_stalog(): # This variable must be redefined
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_stalog()
 
@@ -469,9 +456,9 @@ def histogram_tau():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_tau()
 
@@ -495,9 +482,9 @@ def histogram_tuu():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_tuu()
 
@@ -521,9 +508,9 @@ def histogram_typmen():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_typmen()
 
@@ -547,9 +534,9 @@ def histogram_veh_tot():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
 
-    return plt
+    return figure
 
 histogram_veh_tot()
 
@@ -573,9 +560,9 @@ def histogram_vp_deplacements_pro():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_vp_deplacements_pro()
 
@@ -599,8 +586,8 @@ def histogram_vp_domicile_travail():
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_entd)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_entd, 'BdF', 'ENTD')
     
-    return plt
+    return figure
     
 histogram_vp_domicile_travail()

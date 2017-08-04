@@ -6,15 +6,13 @@ from __future__ import division
 # à les harmoniser entre les deux enquêtes.
 # Cette décision se fait sur la base des résultats observés et ne dépend d'aucun critère précis.
 
-import matplotlib.pyplot as plt
-import seaborn
-
 import os
 import pkg_resources
 import pandas as pd
-import numpy as np
 
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+
+from openfisca_france_indirect_taxation.build_survey_data.utils import \
+    histogrammes, plots_by_group
 
 
 # Importation des bases de données appariées et de la base de référence entd
@@ -59,55 +57,6 @@ data_matched_random = pd.read_csv(
 
 data_matched = data_matched_distance.copy()
 
-    
-def histogrammes(list_keys, list_values_bdf, list_values_entd):
-    size_hist = np.arange(len(list_keys))
-    plot_bdf = plt.bar(size_hist-0.125, list_values_bdf, color = 'b', align='center', width=0.25)
-    plot_entd = plt.bar(size_hist+0.125, list_values_entd, color = 'r', align='center', width=0.25)
-    plt.xticks(size_hist, list_keys)
-    plt.legend((plot_bdf[0], plot_entd[0]), ('Matched', 'entd'))
-    
-    return plt
-
-
-def plots_by_group(function, data_matched, distance, group):    
-    fig = plt.figure()
-    
-    if group == 'tuu':
-        corr = -1
-    else:
-        corr = 0
-
-    ax1 = fig.add_subplot(521)
-    ax1 = function(data_matched, data_entd, distance, group, 1+corr)
-    
-    ax2 = fig.add_subplot(522)
-    ax2 = function(data_matched, data_entd, distance, group, 2+corr)
-    
-    ax3 = fig.add_subplot(523)
-    ax3 = function(data_matched, data_entd, distance, group, 3+corr)
-    
-    ax4 = fig.add_subplot(524)
-    ax4 = function(data_matched, data_entd, distance, group, 4+corr)
-
-    ax5 = fig.add_subplot(525)
-    ax5 = function(data_matched, data_entd, distance, group, 5+corr)
-    
-    ax6 = fig.add_subplot(526)
-    ax6 = function(data_matched, data_entd, distance, group, 6+corr)
-
-    ax7 = fig.add_subplot(527)
-    ax7 = function(data_matched, data_entd, distance, group, 7+corr)
-
-    ax8 = fig.add_subplot(528)
-    ax8 = function(data_matched, data_entd, distance, group, 8+corr)
-
-    ax9 = fig.add_subplot(529)
-    ax9 = function(data_matched, data_entd, distance, group, 9+corr)
-
-    if group == 'niveau_vie_decile':
-        ax10 = fig.add_subplot(5,2,10)
-        ax10 = function(data_matched, data_entd, distance, group, 10+corr)
 
 
 def histogram_distance_annuelle_group(data_matched, data_entd, distance, group):
@@ -137,9 +86,9 @@ def histogram_distance_annuelle_group(data_matched, data_entd, distance, group):
         list_values_entd.append(distance_entd)
         list_keys.append('{}'.format(element))
 
-    histogrammes(list_keys, list_values_matched, list_values_entd)
+    figure = histogrammes(list_keys, list_values_matched, list_values_entd, 'Matched', 'ENTD')
 
-    return plt
+    return figure
 
 
 def histogram_distribution_distance_annuelle(data_matched, data_entd, distance):
@@ -177,9 +126,9 @@ def histogram_distribution_distance_annuelle(data_matched, data_entd, distance):
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_matched, list_values_entd)
+    figure = histogrammes(list_keys, list_values_matched, list_values_entd, 'Matched', 'ENTD')
     
-    return plt
+    return figure
 
 
 def histogram_distribution_distance_annuelle_group(data_matched, data_entd, distance, group, element):
@@ -218,11 +167,11 @@ def histogram_distribution_distance_annuelle_group(data_matched, data_entd, dist
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_matched, list_values_entd)
+    figure = histogrammes(list_keys, list_values_matched, list_values_entd, 'Matched', 'ENTD')
 
-    return plt
+    return figure
 
 
-histogram_distance_annuelle_group(data_matched_distance, data_entd, 'distance', 'tuu')
-histogram_distribution_distance_annuelle(data_matched_distance, data_entd)
-plots_by_group(histogram_distribution_distance_annuelle_group, data_matched_random, 'distance_diesel', 'tuu')
+histogram_distance_annuelle_group(data_matched_random, data_entd, 'distance', 'niveau_vie_decile')
+histogram_distribution_distance_annuelle(data_matched_distance, data_entd, 'distance')
+plots_by_group(histogram_distribution_distance_annuelle_group, data_matched_random, data_entd, 'distance_diesel', 'tuu')

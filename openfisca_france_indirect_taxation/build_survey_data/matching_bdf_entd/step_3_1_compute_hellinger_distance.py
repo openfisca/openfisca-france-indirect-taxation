@@ -7,25 +7,14 @@ probability distributions
 
 # To be completed : add missing variables
 
-import numpy as np
-
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
+from openfisca_france_indirect_taxation.build_survey_data.utils import \
+    hellinger
 
 data = create_niveau_vie_quantiles()
 data_entd = data[0]
 data_bdf = data[1]
-
-
-_SQRT2 = np.sqrt(2)     # sqrt(2) with default precision np.float64
-
-
-print data_bdf.dtypes
-print data_entd.dtypes
-
-
-def hellinger(p, q):
-    return np.sqrt(np.sum((np.sqrt(p) - np.sqrt(q)) ** 2)) / _SQRT2
 
 
 def hellinger_agepr(data_bdf, data_entd):

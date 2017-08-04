@@ -8,28 +8,15 @@ from __future__ import division
 # à les harmoniser entre les deux enquêtes.
 # Cette décision se fait sur la base des résultats observés et ne dépend d'aucun critère précis.
 
-import matplotlib.pyplot as plt
-import numpy as np
-import seaborn
-
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
+from openfisca_france_indirect_taxation.build_survey_data.utils import \
+    histogrammes
 
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 data = create_niveau_vie_quantiles()
 data_enl = data[0]
 data_bdf = data[1]
-
-
-def histogrammes(list_keys, list_values_bdf, list_values_enl):
-    size_hist = np.arange(len(list_keys))
-    plot_bdf = plt.bar(size_hist-0.125, list_values_bdf, color = 'b', align='center', width=0.25)
-    plot_enl = plt.bar(size_hist+0.125, list_values_enl, color = 'r', align='center', width=0.25)
-    plt.xticks(size_hist, list_keys)
-    plt.legend((plot_bdf[0], plot_enl[0]), ('BdF', 'ENL'))
-    
-    return plt
 
 
 def histogram_aba():
@@ -51,9 +38,9 @@ def histogram_aba():
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_aba()
 
@@ -67,9 +54,9 @@ def histogram_agepr():
         list_values_enl.append(data_enl['agepr'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
-    return plt
+    return figure
 
 histogram_agepr()
 
@@ -93,9 +80,9 @@ def histogram_ancons():
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_ancons()
 
@@ -119,9 +106,9 @@ def histogram_cataeu():
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_cataeu()
 
@@ -135,9 +122,9 @@ def histogram_depenses_energies():
         list_values_enl.append(data_enl['depenses_energies'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_depenses_energies()
 
@@ -161,9 +148,9 @@ def histogram_dip14():
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_dip14()
 
@@ -187,9 +174,9 @@ def histogram_htl():
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_htl()
 
@@ -213,9 +200,9 @@ def histogram_nactifs():
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_nactifs()
 
@@ -239,9 +226,9 @@ def histogram_nbphab():
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_nbphab()
 
@@ -265,9 +252,9 @@ def histogram_nenfants():
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_nenfants()
 
@@ -291,9 +278,9 @@ def histogram_ocde10():
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_ocde10()
 
@@ -307,9 +294,9 @@ def histogram_poste_coicop_451():
         list_values_enl.append(data_enl['poste_coicop_451'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
-        histogrammes(list_keys, list_values_bdf, list_values_enl)
+        figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
-    return plt
+    return figure
     
 histogram_poste_coicop_451()
 
@@ -323,9 +310,9 @@ def histogram_poste_coicop_452():
         list_values_enl.append(data_enl['poste_coicop_452'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
-        histogrammes(list_keys, list_values_bdf, list_values_enl)
+        figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
-    return plt
+    return figure
     
 histogram_poste_coicop_452()
 
@@ -339,9 +326,9 @@ def histogram_poste_coicop_453():
         list_values_enl.append(data_enl['poste_coicop_453'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
-        histogrammes(list_keys, list_values_bdf, list_values_enl)
+        figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
-    return plt
+    return figure
     
 histogram_poste_coicop_453()
 
@@ -355,9 +342,9 @@ def histogram_revtot():
         list_values_enl.append(data_enl['revtot'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_revtot()
 
@@ -371,9 +358,9 @@ def histogram_surfhab_d():
         list_values_enl.append(data_enl['surfhab_d'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
-        histogrammes(list_keys, list_values_bdf, list_values_enl)
+        figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
-    return plt
+    return figure
     
 histogram_surfhab_d()
 
@@ -397,9 +384,9 @@ def histogram_tau():
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_tau()
 
@@ -423,9 +410,9 @@ def histogram_tuu():
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_tuu()
 
@@ -449,8 +436,8 @@ def histogram_zeat():
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
-    histogrammes(list_keys, list_values_bdf, list_values_enl)
+    figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
     
-    return plt
+    return figure
     
 histogram_zeat()

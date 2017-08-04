@@ -11,12 +11,12 @@ from __future__ import division
 
 
 import pandas as pd
-import numpy as np
 
 import os
 import pkg_resources
 
-_SQRT2 = np.sqrt(2)     # sqrt(2) with default precision np.float64
+from openfisca_france_indirect_taxation.build_survey_data.utils import \
+    hellinger
 
 # Importation des bases de données appariées et de la base de référence ENL
 default_config_files_directory = os.path.join(
@@ -65,10 +65,6 @@ data_matched_rank = pd.read_csv(
         'data_matched_rank.csv'
         ), sep =',', decimal = '.'
     )
-
-
-def hellinger(p, q):
-    return np.sqrt(np.sum((np.sqrt(p) - np.sqrt(q)) ** 2)) / _SQRT2
 
 
 def hellinger_froid(data_matched, data_enl):

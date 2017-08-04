@@ -4,6 +4,9 @@ import os
 import pkg_resources
 import pandas as pd
 
+from openfisca_france_indirect_taxation.build_survey_data.utils import \
+    histogrammes
+
 
 default_config_files_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
@@ -16,20 +19,9 @@ data_matched = pd.read_csv(
         'assets',
         'matching',
         'matching_entd',
-        'data_matched_random.csv'
+        'data_matched_final.csv'
         ), sep =',', decimal = '.'
     )
-
-
-    
-def histogrammes(list_keys, list_values_bdf, list_values_entd):
-    size_hist = np.arange(len(list_keys))
-    plot_bdf = plt.bar(size_hist-0.125, list_values_bdf, color = 'b', align='center', width=0.25)
-    plot_entd = plt.bar(size_hist+0.125, list_values_entd, color = 'r', align='center', width=0.25)
-    plt.xticks(size_hist, list_keys)
-    plt.legend((plot_bdf[0], plot_entd[0]), ('Matched', 'entd'))
-    
-    return plt
 
     
 def histogram_depenses_annuelle_group(data_matched, group):
@@ -59,10 +51,10 @@ def histogram_depenses_annuelle_group(data_matched, group):
         list_values_depenses_carburants.append(depenses_carburants)
         list_keys.append('{}'.format(element))
 
-    histogrammes(list_keys, list_values_poste_coicop, list_values_depenses_carburants)
+    figure = histogrammes(list_keys, list_values_poste_coicop, list_values_depenses_carburants, 'Ex ante', 'Ex post')
 
-    return plt
+    return figure
 
-    
-histogram_depenses_annuelle_group(data_matched_distance, 'niveau_vie_decile')
+
+histogram_depenses_annuelle_group(data_matched, 'niveau_vie_decile')
     
