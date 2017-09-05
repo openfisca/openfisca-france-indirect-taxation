@@ -13,6 +13,14 @@ log = logging.getLogger(__name__)
 
 
 class SurveyScenario(AbstractSurveyScenario):
+    id_variable_by_entity_key = dict(
+        menage = 'ident_men',
+        )
+    filtering_variable_by_entity = None
+    role_variable_by_entity_key = dict(
+        menage = 'role_menage',
+        )
+
     @classmethod
     def create(cls, calibration_kwargs = None, data_year = None, elasticities = None, inflation_kwargs = None,
             input_data_frame = None, reference_tax_benefit_system = None, reform = None, reform_key = None,
@@ -39,7 +47,6 @@ class SurveyScenario(AbstractSurveyScenario):
             reference_tax_benefit_system = base.tax_benefit_system
 
         if calibration_kwargs is not None:
-            # print calibration_kwargs
             assert set(calibration_kwargs.keys()).issubset(set(
                 ['target_margins_by_variable', 'parameters', 'total_population']))
 
@@ -77,10 +84,12 @@ class SurveyScenario(AbstractSurveyScenario):
             # print 'inflating using {}'.format(inflation_kwargs)
             survey_scenario.inflate(**inflation_kwargs)
 
-        return survey_scenario
+        assert survey_scenario.simulation is not None
+        assert survey_scenario.tax_benefit_system is not None
 
+        return survey_scenario
 
     def initialize_weights(self):
         self.weight_column_name_by_entity = dict()
-        self.weight_column_name_by_entity['menages'] = 'pondmen'
-        # self.weight_column_name_by_entity__key_plural['individus'] = 'weight_ind'
+        self.weight_column_name_by_entity['menage'] = 'pondmen'
+        self.weight_column_name_by_entity['individu'] = 'weight_ind'

@@ -125,7 +125,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                 return sum(simulation.calculate(
                     'poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
                     )
-            func.__name__ = "function_{year_start}_{year_stop}".format(
+            func.__name__ = "formula_{year_start}".format(
                 year_start = year_start, year_stop = year_stop)
             return func
 
@@ -171,7 +171,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                     )
                 return poste_agrege
 
-            func.__name__ = "function"
+            func.__name__ = "formula"
             return func
 
 
@@ -182,14 +182,14 @@ def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, yea
                 'depenses_ht_poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
                 )
 
-        func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+        func.__name__ = "formula_{year_start}".format(year_start = year_start, year_stop = year_stop)
         return func
 
     else:  # To deal with Reform emptying some fiscal categories
         def func(self, simulation, period):
             return self.zeros()
 
-    func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+    func.__name__ = "formula_{year_start}".format(year_start = year_start, year_stop = year_stop)
     return func
 
 
@@ -205,5 +205,5 @@ def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, 
 
         return simulation.calculate('poste_' + slugify(poste_coicop, separator = u'_'), period) / (1 + taux)
 
-    func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
+    func.__name__ = "formula_{year_start}".format(year_start = year_start, year_stop = year_stop)
     return func

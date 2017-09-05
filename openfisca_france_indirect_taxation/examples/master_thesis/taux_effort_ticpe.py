@@ -26,6 +26,7 @@ def plot_taux_effort_ticpe():
     year = 2014
     data_year = 2011
     survey_scenario = SurveyScenario.create(year = year, data_year = data_year)
+
     for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
         taxe_indirectes = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
 

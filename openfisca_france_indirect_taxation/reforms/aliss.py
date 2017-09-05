@@ -323,7 +323,7 @@ def depenses_new_tva_function_creator(categorie_fiscale = None, taux = None):
             simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * (1 + taux)
             )
 
-    func.__name__ = "function"
+    func.__name__ = "formula"
     return func
 
 
@@ -336,8 +336,8 @@ def new_tva_function_creator(categorie_fiscale = None, taux = None):
             simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * taux
             )
 
-    func.__name__ = "function"
-    return func
+    func.__name__ = "formula"
+    return formulanc
 
 
 def new_tva_total_function_creator(categories_fiscales):
@@ -346,7 +346,7 @@ def new_tva_total_function_creator(categories_fiscales):
             simulation.calculate(categorie_fiscale, period) for categorie_fiscale in categories_fiscales
             )
 
-    func.__name__ = "function"
+    func.__name__ = "formula"
     return func
 
 
@@ -384,12 +384,7 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
             tax_benefit_system.add_variable(tva_variable_class)
             del definitions_by_name
 
-        log.info(u'{} Created new fiscal category {}'.format(reform_key, categorie_fiscale))
-
-        # except AssertionError as e:
-        #     log.info(e)
-        #     log.info(u'{} Fiscal category {} is not new : passing'.format(reform_key, categorie_fiscale))
-        #     pass
+        log.debug(u'{} Created new fiscal category {}'.format(reform_key, categorie_fiscale))
 
     # tva_total variable creation
     categories_fiscales = [

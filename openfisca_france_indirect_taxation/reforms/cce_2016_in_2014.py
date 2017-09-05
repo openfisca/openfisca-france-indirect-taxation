@@ -5,7 +5,7 @@ from __future__ import division
 from datetime import date
 from openfisca_core.reforms import Reform, update_legislation
 
-from ..model.base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 from ..model.taxes_indirectes import tva, ticpe
 from ..model.consommation import emissions_co2, quantites_energie
 
@@ -20,7 +20,7 @@ from ..model.consommation import emissions_co2, quantites_energie
 # Dans cette réforme on suppose qu'on impute à la législation de 2014 une augmentation équivalente à ce qui est prévu
 # par la loi pour les années à venir.
 
-    
+
 def modify_legislation_json(reference_legislation_json_copy):
     reform_legislation_subtree = {
         "@type": "Node",
@@ -84,11 +84,11 @@ def modify_legislation_json(reference_legislation_json_copy):
     reference_legislation_json_copy['children']['cce_2016_in_2014'] = reform_legislation_subtree
     return reference_legislation_json_copy
 
-    
-    
+
+
 class depenses_diesel_ajustees_cce_2014_2016(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Dépenses en diesel après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
 
     def function(self, simulation, period):
@@ -104,7 +104,7 @@ class depenses_diesel_ajustees_cce_2014_2016(Variable):
 
 class depenses_essence_ajustees_cce_2014_2016(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Dépenses en essence après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
 
     def function(self, simulation, period):
@@ -120,7 +120,7 @@ class depenses_essence_ajustees_cce_2014_2016(Variable):
 
 class depenses_fioul_domestique_ajustees_cce_2014_2016(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Dépenses en fioul après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2015"
 
     def function(self, simulation, period):
@@ -138,7 +138,7 @@ class depenses_fioul_domestique_ajustees_cce_2014_2016(Variable):
 
 class depenses_gaz_ajustees_cce_2014_2016(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Dépenses en gaz après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
 
     def function(self, simulation, period):
@@ -159,7 +159,7 @@ class depenses_gaz_ajustees_cce_2014_2016(Variable):
 
 class depenses_tva_taux_plein_ajustees_cce_2014_2016(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme - cce 2014-2016"
 
     def function(self, simulation, period):
@@ -177,7 +177,7 @@ class depenses_tva_taux_plein_ajustees_cce_2014_2016(Variable):
 
 class depenses_tva_taux_plein_bis_ajustees_cce_2014_2016(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Dépenses sur les biens assujetis à la TVA à taux plein bis après réaction à la réforme - cce 2014-2016"
 
     def function(self, simulation, period):
@@ -197,7 +197,7 @@ class depenses_tva_taux_plein_bis_ajustees_cce_2014_2016(Variable):
 
 class depenses_tva_taux_reduit_ajustees_cce_2014_2016(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Dépenses sur les biens assujetis à la TVA à taux reduit après réaction à la réforme - cce 2014-2016"
 
     def function(self, simulation, period):
@@ -215,7 +215,7 @@ class depenses_tva_taux_reduit_ajustees_cce_2014_2016(Variable):
 
 class depenses_tva_taux_super_reduit_ajustees_cce_2014_2016(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Dépenses sur les biens assujetis à la TVA à taux super reduit après réaction à la réforme - cce 2014-2016"
 
     def function(self, simulation, period):
@@ -270,7 +270,7 @@ class diesel_ticpe(Variable):
 
 class emissions_CO2_carburants(Variable):
     label = u"Emissions de CO2 des ménages via leur conso de carburants après réforme - cce 2014-2016 - en kg de CO2"
-    reference = emissions_co2.emissions_CO2_carburants
+    # reference = emissions_co2.emissions_CO2_carburants
 
     def function(self, simulation, period):
         quantites_diesel_ajustees = simulation.calculate('quantites_diesel', period)
@@ -289,7 +289,7 @@ class emissions_CO2_carburants(Variable):
 
 class emissions_CO2_energies(Variable):
     label = u"Emissions de CO2 des ménages via leur conso d'énergies après hausse cce 14-16, en kg de CO2"
-    reference = emissions_co2.emissions_CO2_energies
+    # # reference = emissions_co2.emissions_CO2_energies
 
     def function(self, simulation, period):
         emissions_carburants_ajustees = simulation.calculate('emissions_CO2_carburants', period)
@@ -307,7 +307,7 @@ class emissions_CO2_energies(Variable):
 
 class emissions_CO2_fioul_domestique(Variable):
     label = u"Emissions de CO2 des ménages via leur conso de fioul après réforme - hausse cce 2014-2016 - en kg de CO2"
-    reference = emissions_co2.emissions_CO2_fioul_domestique
+    # reference = emissions_co2.emissions_CO2_fioul_domestique
 
     def function(self, simulation, period):
         quantites_fioul_ajustees = simulation.calculate('quantites_fioul_domestique', period)
@@ -320,7 +320,7 @@ class emissions_CO2_fioul_domestique(Variable):
 
 class emissions_CO2_gaz(Variable):
     label = u"Emissions de CO2 des ménages via leur conso de gaz après réforme - hausse cce 2014-2016 - en kg de CO2"
-    reference = emissions_co2.emissions_CO2_gaz
+    # reference = emissions_co2.emissions_CO2_gaz
 
     def function(self, simulation, period):
         quantites_gaz_ajustees = \
@@ -332,11 +332,11 @@ class emissions_CO2_gaz(Variable):
         return period, emissions_ajustees
 
 
-class essence_ticpe(DatedVariable):
+class essence_ticpe(Variable):
     label = u"Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
     reference = ticpe.essence_ticpe
 
-    @dated_function(start = date(1990, 1, 1), stop = date(2006, 12, 31))
+    # @dated_function(start = date(1990, 1, 1), stop = date(2006, 12, 31))
     def function_90_06(self, simulation, period):
 
         sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe', period)
@@ -345,7 +345,7 @@ class essence_ticpe(DatedVariable):
         essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + super_plombe_ticpe_ajustee)
         return period, essence_ticpe_ajustee
 
-    @dated_function(start = date(2007, 1, 1), stop = date(2008, 12, 31))
+    # @dated_function(start = date(2007, 1, 1), stop = date(2008, 12, 31))
     def function_07_08(self, simulation, period):
 
         sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe', period)
@@ -353,7 +353,7 @@ class essence_ticpe(DatedVariable):
         essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee)
         return period, essence_ticpe_ajustee
 
-    @dated_function(start = date(2009, 1, 1), stop = date(2015, 12, 31))
+    # @dated_function(start = date(2009, 1, 1), stop = date(2015, 12, 31))
     def function_09_15(self, simulation, period):
 
         sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe', period)
@@ -365,7 +365,7 @@ class essence_ticpe(DatedVariable):
 
 class fioul_domestique_ticpe(Variable):
     label = u"Calcul du montant de TICPE sur le fioul domestique après réforme - hausse cce 2014-2016"
-    reference = ticpe.fioul_domestique_ticpe
+    # reference = ticpe.fioul_domestique_ticpe
 
     def function(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
@@ -410,7 +410,7 @@ class quantites_diesel(Variable):
 
 class quantites_fioul_domestique(Variable):
     label = u"Quantités de fioul consommées après la réforme - contribution climat énergie, hausse de 2014 à 2016 "
-    reference = quantites_energie.quantites_fioul_domestique
+    # reference = quantites_energie.quantites_fioul_domestique
 
     def function(self, simulation, period):
         depenses_fioul_ajustees_cce_2014_2016 = \
@@ -426,7 +426,7 @@ class quantites_fioul_domestique(Variable):
 
 class quantites_gaz_contrat_optimal_ajustees_cce_2016_in_2014(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Quantités de gaz consommées après la réforme - contribution climat énergie, hausse de 2014 à 2016"
 
     def function(self, simulation, period):
@@ -508,11 +508,11 @@ class quantites_super_plombe(Variable):
         return period, quantites_super_plombe_ajustees
 
 
-class quantites_essence(DatedVariable):
+class quantites_essence(Variable):
     label = u"Quantités d'essence consommées par les ménages après réforme - hausse cce 2014-2016"
     reference = quantites_energie.quantites_essence
 
-    @dated_function(start = date(1990, 1, 1), stop = date(2006, 12, 31))
+    # @dated_function(start = date(1990, 1, 1), stop = date(2006, 12, 31))
     def function_90_06(self, simulation, period):
 
         quantites_sp95_ajustees = simulation.calculate('quantites_sp95', period)
@@ -524,7 +524,7 @@ class quantites_essence(DatedVariable):
             )
         return period, quantites_essence_ajustees
 
-    @dated_function(start = date(2007, 1, 1), stop = date(2008, 12, 31))
+    # @dated_function(start = date(2007, 1, 1), stop = date(2008, 12, 31))
     def function_07_08(self, simulation, period):
 
         quantites_sp95_ajustees = simulation.calculate('quantites_sp95', period)
@@ -532,7 +532,7 @@ class quantites_essence(DatedVariable):
         quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees)
         return period, quantites_essence_ajustees
 
-    @dated_function(start = date(2009, 1, 1), stop = date(2015, 12, 31))
+    # @dated_function(start = date(2009, 1, 1), stop = date(2015, 12, 31))
     def function_09_15(self, simulation, period):
 
         quantites_sp95_ajustees = simulation.calculate('quantites_sp95', period)
@@ -686,7 +686,7 @@ class super_plombe_ticpe(Variable):
 
 class taxe_gaz(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Recettes de la hausse de cce 2014-2016 sur la consommation de gaz - ceteris paribus"
     # On considère que les contributions sur les taxes précédentes ne sont pas affectées
 
@@ -712,7 +712,7 @@ class ticpe_totale(Variable):
 
 class total_taxes_energies(Variable):
     label = u"Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2014-2016"
-    reference = ticpe.total_taxes_energies
+    # reference = ticpe.total_taxes_energies
 
     def function(self, simulation, period):
         taxe_diesel = simulation.calculate('diesel_ticpe', period)
@@ -746,7 +746,7 @@ class tva_taux_plein(Variable):
 
 class tva_taux_plein_bis(Variable):
     column = FloatCol
-    entity_class = Menages
+    entity = Menage
     label = u"Contribution sur la TVA à taux plein après réaction à la réforme - cce 2014-2016"
 
     def function(self, simulation, period):

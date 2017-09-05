@@ -85,7 +85,7 @@ class strate_agrege(YearlyVariable):
         return strate_agrege
 
 
-class typmen(Variable):
+class typmen(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"type du ménage"

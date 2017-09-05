@@ -81,7 +81,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
 
                     dated_function_name = u"formula_{year_start}".format(
                         year_start = year_start, year_stop = year_stop)
-                    log.info(u'Creating fiscal category {} ({}-{}) with the following products {}'.format(
+                    log.debug(u'Creating fiscal category {} ({}-{}) with the following products {}'.format(
                         categorie_fiscale, year_start, year_stop, postes_coicop))
 
                     if poste_coicop not in functions_by_name_by_poste:

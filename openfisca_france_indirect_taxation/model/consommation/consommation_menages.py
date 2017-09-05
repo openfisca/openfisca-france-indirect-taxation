@@ -10,7 +10,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 for coicop12_index in range(1, 13):
     name = u'coicop12_{}'.format(coicop12_index)
     # Trick to create a class with a dynamic name.
-    type(name.encode('utf-8'), (Variable,), dict(
+    type(name.encode('utf-8'), (YearlyVariable,), dict(
         column = FloatCol,
         entity = Menage,
         label = u"Poste coicop {} de la nomenclature aggrégée à 12 niveaux".format(coicop12_index),

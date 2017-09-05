@@ -77,7 +77,7 @@ class Scenario(scenarios.AbstractScenario):
                                         (
                                             (column.name, column.json_to_python)
                                             for column in column_by_name.itervalues()
-                                            if column.entity == 'ind' and column.name not in ('idmen', 'quimen')
+                                            if column.entity == 'ind' and column.name not in ('idmen', 'role_menage')
                                             ),
                                         )),
                                     drop_none_values = True,

@@ -1,64 +1,49 @@
 # -*- coding: utf-8 -*-
 
 
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
-from pandas import DataFrame
-
-
-from openfisca_france_indirect_taxation.surveys import SurveyScenario, get_input_data_frame
-from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
+from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
 def run_survey_simulation(year = None):
     assert year is not None
-    input_data_frame = get_input_data_frame(year)
-    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
-    survey_scenario = SurveyScenario().init_from_data_frame(
-        input_data_frame = input_data_frame,
-        tax_benefit_system = tax_benefit_system,
-        year = year,
-        )
-    simulation = survey_scenario.new_simulation()
-    simulation.calculate('tva_taux_plein')
+    data_year = year
+    survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
+    basic_variables = [
+        'ident_men',
+        'pondmen',
+        'decuc',
+        'poste_01_1_1_1_1',
+        'poste_11_1_1_1_1',
+        'poste_07_2_2_1_1',
+        'depenses_ht_ticpe',
+        'depenses_ticpe',
+        'depenses_carburants',
+        'tva_taux_plein',
+        'tva_taux_reduit',
+        'tva_taux_super_reduit',
+        ]
+    categorie_fiscale_yaml_variables = [
+        'poste_06_1_1_1_1',
+        'poste_09_5_2_1_1',
+        'depenses_tva_taux_super_reduit',
+        'depenses_ht_poste_06_1_1_1_1',
+        'depenses_ht_poste_09_5_2_1_1',
+        'poste_agrege_06',
+        'poste_agrege_09',
+        ]
 
-    return simulation, DataFrame(
-        dict([
-            (name, simulation.calculate(name)) for name in [
-                'ident_men',
-                'pondmen',
-                'decuc',
-                'poste_01_1_1_1_1',
-                'poste_11_1_1_1_1',
-                'poste_07_2_2_1_1',
-                'depenses_ticpe',
-                'depenses_carburants',
-                'tva_taux_plein',
-                'tva_taux_intermediaire',
-                'tva_taux_reduit',
-                'tva_taux_super_reduit',
-                ]
-            ])
+    tva_yaml_lait_variables = [
+        'poste_01_1_4_1_1_a',  # Lait entier tva_taux__reduit devient taux_reduit
+        'depenses_ht_poste_01_1_4_1_1_a'
+        ]
+
+    return survey_scenario, survey_scenario.create_data_frame_by_entity(
+        variables = (
+            tva_yaml_lait_variables +
+            categorie_fiscale_yaml_variables +
+            basic_variables +
+            []),
+        period = year,
         )
 
 
@@ -67,14 +52,24 @@ def test_survey_simulation():
         yield run_survey_simulation, year
 
 
+def get_ht_variables(year):
+    assert year is not None
+    data_year = year
+    survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
+    return [
+        variable for variable in survey_scenario.tax_benefit_system.column_by_name.keys()
+        if '_ht_' in variable
+        ]
+
 if __name__ == '__main__':
     import logging
     log = logging.getLogger(__name__)
     import sys
-    logging.basicConfig(level = logging.INFO, stream = sys.stdout)
+    logging.basicConfig(level = logging.DEBUG, stream = sys.stdout)
 
     for year in [2011]:  # [2000, 2005, 2011]:
-        simulation, df = run_survey_simulation(year)
-        print(df)
-        print(df.columns)
-        print(df.describe())
+
+        survey_scenario, df_by_entity = run_survey_simulation(year)
+        df = df_by_entity['menage']
+        for column in df.columns:
+            assert not (df[column] == 0).all(), 'variable {} contains only 0s'.format(column)

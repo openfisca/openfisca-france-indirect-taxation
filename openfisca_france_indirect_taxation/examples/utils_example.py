@@ -10,30 +10,12 @@ import matplotlib.ticker as ticker
 
 
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
-from openfisca_france_indirect_taxation.surveys import get_input_data_frame
+from openfisca_france_indirect_taxation.surveys import get_input_data_frame, SurveyScenario
 from openfisca_survey_manager.survey_collections import SurveyCollection
-
-
-from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn import \
     build_df_calee_on_grospostes, build_df_calee_on_ticpe
-
-
-def create_survey_scenario(year = None):
-
-    assert year is not None
-    input_data_frame = get_input_data_frame(year)
-
-    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
-    survey_scenario = SurveyScenario().init_from_data_frame(
-        input_data_frame = input_data_frame,
-        tax_benefit_system = tax_benefit_system,
-        year = year,
-        )
-
-    return survey_scenario
 
 
 def simulate(simulated_variables, year):
@@ -41,17 +23,13 @@ def simulate(simulated_variables, year):
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
     input_data_frame = get_input_data_frame(year)
-
-    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
-    survey_scenario = SurveyScenario().init_from_data_frame(
-        input_data_frame = input_data_frame,
-        tax_benefit_system = tax_benefit_system,
-        year = year,
-        )
+    data_year = year
+    # input_data_frame = get_input_data_frame(year)
+    survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
     simulation = survey_scenario.new_simulation()
     return DataFrame(
         dict([
-            (name, simulation.calculate(name)) for name in simulated_variables
+            (name, simulation.calculate(name, period = year)) for name in simulated_variables
 
             ])
         )
@@ -63,17 +41,15 @@ def simulate_df_calee_by_grosposte(simulated_variables, year):
     '''
     input_data_frame = get_input_data_frame(year)
     input_data_frame_calee = build_df_calee_on_grospostes(input_data_frame, year, year)
+    # TODO calage non inclus !!!
+    data_year = year
+    # input_data_frame = get_input_data_frame(year)
+    survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
 
-    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
-    survey_scenario = SurveyScenario().init_from_data_frame(
-        input_data_frame = input_data_frame_calee,
-        tax_benefit_system = tax_benefit_system,
-        year = year,
-        )
     simulation = survey_scenario.new_simulation()
     return DataFrame(
         dict([
-            (name, simulation.calculate(name)) for name in simulated_variables
+            (name, simulation.calculate(name, period = year)) for name in simulated_variables
 
             ])
         )
@@ -85,17 +61,14 @@ def simulate_df_calee_on_ticpe(simulated_variables, year):
     '''
     input_data_frame = get_input_data_frame(year)
     input_data_frame_calee = build_df_calee_on_ticpe(input_data_frame, year, year)
-
-    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
-    survey_scenario = SurveyScenario().init_from_data_frame(
-        input_data_frame = input_data_frame_calee,
-        tax_benefit_system = tax_benefit_system,
-        year = year,
-        )
+    # TODO calage non inclus !!!
+    data_year = year
+    # input_data_frame = get_input_data_frame(year)
+    survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
     simulation = survey_scenario.new_simulation()
     return DataFrame(
         dict([
-            (name, simulation.calculate(name)) for name in simulated_variables
+            (name, simulation.calculate(name, period = year)) for name in simulated_variables
 
             ])
         )
@@ -121,18 +94,18 @@ def collapse(dataframe, groupe, var):
 
 def dataframe_by_group(survey_scenario, category, variables, reference = False):
     pivot_table = pandas.DataFrame()
-
+    period = survey_scenario.year
     if reference is not False:
         for values_reference in variables:
             pivot_table = pandas.concat([
                 pivot_table,
                 survey_scenario.compute_pivot_table(values = [values_reference], columns = [category],
-                    reference = True)])
+                    reference = True, period = period)])
     else:
         for values_reform in variables:
             pivot_table = pandas.concat([
                 pivot_table,
-                survey_scenario.compute_pivot_table(values = [values_reform], columns = [category])
+                survey_scenario.compute_pivot_table(values = [values_reform], columns = [category], period = period)
                 ])
 
     df_reform = pivot_table.T

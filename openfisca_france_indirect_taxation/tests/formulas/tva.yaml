@@ -39,3 +39,28 @@
      tva_taux_intermediaire: 0
      tva_taux_reduit: 200 * 0.055 / (1 + 0.055)
      tva_taux_super_reduit: 0
+
+
+ - name: "Référence Aliss sante"
+   period: "2011"
+   absolute_error_margin: .001
+   input_variables:
+     poste_01_1_4_1_1_a: 100  # Lait entier tva_taux__reduit devient taux_reduit
+     poste_01_1_4_3_1: 100    # Fromage et lait caillé tva_taux_reduit taux plein
+   output_variables:
+     depenses_ht_poste_01_1_4_1_1_a: 100 / (1 + 0.055)
+     depenses_ht_poste_01_1_4_3_1: 100 / (1 + 0.055)
+     depenses_ht_tva_taux_plein: 0
+     depenses_ht_tva_taux_intermediaire: 0
+     depenses_ht_tva_taux_reduit: 200 / (1 + 0.055)
+     depenses_ht_tva_taux_super_reduit: 0
+     #
+     depenses_tva_taux_plein: 0
+     depenses_tva_taux_intermediaire: 0
+     depenses_tva_taux_reduit: 200
+     depenses_tva_taux_super_reduit: 0
+     #
+     tva_taux_plein: 0
+     tva_taux_intermediaire: 0
+     tva_taux_reduit: 200 * 0.055 / (1 + 0.055)
+     tva_taux_super_reduit: 0

@@ -645,36 +645,36 @@
     </NODE>
     <NODE code="taxes_electricite_et_gaz">
       <CODE code="cspe" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="22.5" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="19.5" />
-        <VALUE deb="2014-01-01" fin="2014-12-31" valeur="16.5" />
-        <VALUE deb="2013-01-01" fin="2013-12-31" valeur="13.5" />
-        <VALUE deb="2012-07-01" fin="2012-12-31" valeur="10.5" />
-        <VALUE deb="2011-07-31" fin="2012-06-30" valeur="9" />
-        <VALUE deb="2011-01-01" fin="2011-07-30" valeur="7.5" />
-        <VALUE deb="2004-01-01" fin="2010-12-31" valeur="4.5" />
+        <VALUE deb="2016-01-01" valeur="22.5" />
+        <VALUE deb="2015-01-01" valeur="19.5" />
+        <VALUE deb="2014-01-01" valeur="16.5" />
+        <VALUE deb="2013-01-01" valeur="13.5" />
+        <VALUE deb="2012-07-01" valeur="10.5" />
+        <VALUE deb="2011-07-31" valeur="9" />
+        <VALUE deb="2011-01-01" valeur="7.5" />
+        <VALUE deb="2004-01-01" valeur="4.5" />
       </CODE>
       <CODE code="cta" format="percent">
-        <VALUE deb="2013-05-01" fin="2020-12-31" valeur="0.2704" />
-        <VALUE deb="2006-01-01" fin="2013-04-30" valeur="0.21" />
+        <VALUE deb="2013-05-01" valeur="0.2704" />
+        <VALUE deb="2006-01-01" valeur="0.21" />
       </CODE>
       <CODE code="ctssg_prix_par_mwh" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="0" />
-        <VALUE deb="2014-01-01" fin="2015-12-31" valeur="0.2" />
-        <VALUE deb="2013-01-01" fin="2013-12-31" valeur="0.1" />
-        <VALUE deb="2010-01-01" fin="2012-12-31" valeur="0.045" />
-        <VALUE deb="2009-01-01" fin="2009-12-31" valeur="0.089" />
-        <VALUE deb="2008-01-01" fin="2008-12-31" valeur="0.026" />
+        <VALUE deb="2016-01-01" valeur="0" />
+        <VALUE deb="2014-01-01" valeur="0.2" />
+        <VALUE deb="2013-01-01" valeur="0.1" />
+        <VALUE deb="2010-01-01" valeur="0.045" />
+        <VALUE deb="2009-01-01" valeur="0.089" />
+        <VALUE deb="2008-01-01" valeur="0.026" />
       </CODE>
       <CODE code="plafonds_tcfe_pour_compteurs_ou_a_36_kva_en_euros_par_mwh" format="float" type="monetary">
-        <VALUE deb="2015-01-01" fin="2020-12-31" valeur="9.6" />
-        <VALUE deb="2014-01-01" fin="2014-12-31" valeur="9.5" />
-        <VALUE deb="2013-01-01" fin="2013-12-31" valeur="9.315" />
+        <VALUE deb="2015-01-01" valeur="9.6" />
+        <VALUE deb="2014-01-01" valeur="9.5" />
+        <VALUE deb="2013-01-01" valeur="9.315" />
       </CODE>
       <CODE code="ticgn_prix_par_mwh" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="4.34" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="2.64" />
-        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="1.19" />
+        <VALUE deb="2016-01-01" valeur="4.34" />
+        <VALUE deb="2015-01-01" valeur="2.64" />
+        <VALUE deb="2003-01-01" valeur="1.19" />
       </CODE>
     </NODE>
     <NODE code="tgap_carburants">
@@ -961,7 +961,7 @@
         <VALUE deb="1998-01-01"  valeur="60" />
         <VALUE deb="1997-01-01"  valeur="65.17" />
         <VALUE deb="1996-01-01"  valeur="63.83" />
-        <VALUE deb="1995-01-01"  valeur="62.64" />
+        <VALUE deb="1995-01-01"   valeur="62.64" />
         <VALUE deb="1994-01-01"  valeur="61.59" />
         <VALUE deb="1993-04-15"  valeur="55.446" />
       </CODE>
@@ -2255,38 +2255,37 @@
     </NODE>
     <NODE code="taxes_electricite_et_gaz">
       <CODE code="cspe" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="22.5" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="19.5" />
-        <VALUE deb="2014-01-01" fin="2014-12-31" valeur="16.5" />
-        <VALUE deb="2013-01-01" fin="2013-12-31" valeur="13.5" />
-        <VALUE deb="2012-07-01" fin="2012-12-31" valeur="10.5" />
-        <VALUE deb="2011-07-31" fin="2012-06-30" valeur="9" />
-        <VALUE deb="2011-01-01" fin="2011-07-30" valeur="7.5" />
-        <VALUE deb="2004-01-01" fin="2010-12-31" valeur="4.5" />
+        <VALUE deb="2016-01-01" valeur="22.5" />
+        <VALUE deb="2015-01-01" valeur="19.5" />
+        <VALUE deb="2014-01-01" valeur="16.5" />
+        <VALUE deb="2013-01-01" valeur="13.5" />
+        <VALUE deb="2012-07-01" valeur="10.5" />
+        <VALUE deb="2011-07-31" valeur="9" />
+        <VALUE deb="2011-01-01" valeur="7.5" />
+        <VALUE deb="2004-01-01" valeur="4.5" />
       </CODE>
       <CODE code="cta" format="percent">
-        <VALUE deb="2013-05-01" fin="2020-12-31" valeur="0.2704" />
-        <VALUE deb="2006-01-01" fin="2013-04-30" valeur="0.21" />
+        <VALUE deb="2013-05-01" valeur="0.2704" />
+        <VALUE deb="2006-01-01" valeur="0.21" />
       </CODE>
       <CODE code="ctssg_prix_par_mwh" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="0" />
-        <VALUE deb="2014-01-01" fin="2015-12-31" valeur="0.2" />
-        <VALUE deb="2013-01-01" fin="2013-12-31" valeur="0.1" />
-        <VALUE deb="2010-01-01" fin="2012-12-31" valeur="0.045" />
-        <VALUE deb="2009-01-01" fin="2009-12-31" valeur="0.089" />
-        <VALUE deb="2008-01-01" fin="2008-12-31" valeur="0.026" />
+        <VALUE deb="2016-01-01" valeur="0" />
+        <VALUE deb="2014-01-01" valeur="0.2" />
+        <VALUE deb="2013-01-01" valeur="0.1" />
+        <VALUE deb="2010-01-01" valeur="0.045" />
+        <VALUE deb="2009-01-01" valeur="0.089" />
+        <VALUE deb="2008-01-01" valeur="0.026" />
       </CODE>
       <CODE code="plafonds_tcfe_pour_compteurs_ou_a_36_kva_en_euros_par_mwh" format="float" type="monetary">
-        <VALUE deb="2015-01-01" fin="2020-12-31" valeur="9.6" />
-        <VALUE deb="2014-01-01" fin="2014-12-31" valeur="9.5" />
-        <VALUE deb="2013-01-01" fin="2013-12-31" valeur="9.315" />
+        <VALUE deb="2015-01-01" valeur="9.6" />
+        <VALUE deb="2014-01-01" valeur="9.5" />
+        <VALUE deb="2013-01-01" valeur="9.315" />
       </CODE>
       <CODE code="ticgn_prix_par_mwh" format="float" type="monetary">
-        <VALUE deb="2016-01-01" fin="2020-12-31" valeur="4.34" />
-        <VALUE deb="2015-01-01" fin="2015-12-31" valeur="2.64" />
-        <VALUE deb="2003-01-01" fin="2014-12-31" valeur="1.19" />
+        <VALUE deb="2016-01-01" valeur="4.34" />
+        <VALUE deb="2015-01-01" valeur="2.64" />
+        <VALUE deb="2003-01-01" valeur="1.19" />
       </CODE>
     </NODE>
-==== BASE ====
   </NODE>
 </NODE>
