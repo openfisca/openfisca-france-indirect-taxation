@@ -36,30 +36,30 @@ if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    list_coicop12 = []
-    for coicop12_index in range(1, 13):
-        list_coicop12.append('coicop12_{}'.format(coicop12_index))
+    postes_agreges = ['poste_agrege_{}'.format(index) for index in
+        ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]
+        ]
 
     simulated_variables = [
         'pondmen',
-        'niveau_vie_decile',
-        'somme_coicop12',
+        'niveau_vie_decile'
         ]
 
-    simulated_variables += list_coicop12
+    simulated_variables += postes_agreges
 
     p = dict()
     df_to_graph = None
-    for year in [2000, 2005, 2011]:
+    for year in [2005]:
         simulation_data_frame = simulate(simulated_variables = simulated_variables, year = year)
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame,
             groupe = 'niveau_vie_decile', varlist = simulated_variables)
 
-        aggregates_data_frame[year] = aggregates_data_frame['coicop12_4'] / aggregates_data_frame['somme_coicop12']
+        aggregates_data_frame['depenses_tot'] = aggregates_data_frame[postes_agreges].sum(axis = 1)
+        aggregates_data_frame[year] = aggregates_data_frame['poste_agrege_04'] / aggregates_data_frame['depenses_tot']
         appendable = aggregates_data_frame[year]
         if df_to_graph is not None:
             df_to_graph = concat([df_to_graph, appendable], axis = 1)
         else:
             df_to_graph = appendable
 
-    graph_builder_line_percent(df_to_graph, 1, 1)
+    graph_builder_line_percent(df_to_graph)

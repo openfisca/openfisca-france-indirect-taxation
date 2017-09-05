@@ -36,7 +36,7 @@ if __name__ == '__main__':
     # Exemple: graphe par décile de revenu par uc de la ventilation de la consommation
     # selon les postes agrégés de la CN
     # Liste des coicop agrégées en 12 postes
-    list_coicop12 = ['coicop12_2']
+    list_coicop12 = ['poste_agrege_02']
 #    for coicop12_index in range(1, 13):
 #        list_coicop12.append('coicop12_{}'.format(coicop12_index))
     # Liste des variables que l'on veut simuler
