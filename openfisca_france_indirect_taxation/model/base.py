@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
+from datetime import date
 import os
 import pandas as pd
 import pkg_resources
@@ -20,21 +21,6 @@ except ImportError:
 from openfisca_france_indirect_taxation.entities import Individu, Menage
 from openfisca_france_indirect_taxation.variables import YearlyVariable
 
-# __all__ = [
-#     'depenses_postes_agreges_function_creator',
-#     'depenses_ht_categorie_function_creator',
-#     'depenses_ht_postes_function_creator',
-#     'droit_d_accise',
-#     'get_legislation_data_frames',
-#     'get_poste_categorie_fiscale',
-#     'Individu',
-#     'insert_tva',
-#     'mark_weighted_percentiles',
-#     'Menage',
-#     'tax_from_expense_including_tax',
-#     'weighted_quantiles',
-#     ]
-
 
 tva_by_categorie_primaire = dict(
     biere = 'tva_taux_plein',
@@ -48,6 +34,14 @@ tva_by_categorie_primaire = dict(
     assurance_sante = '',
     autres_assurances = '',
     )
+
+
+def get_tva(categorie_fiscale):
+    tva = tva_by_categorie_primaire.get(categorie_fiscale, categorie_fiscale)
+    if tva in ['tva_taux_plein', 'tva_taux_intermediaire', 'tva_taux_reduit', 'tva_taux_super_reduit']:
+        return tva
+    else:
+        return None
 
 
 def get_tva(categorie_fiscale):

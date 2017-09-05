@@ -595,6 +595,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         variables = [
             'agecj',
             'agepr',
+            'aise',
             'coeffuc',
             'cs42pr',
             'cs42cj',
@@ -628,17 +629,14 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
                 'coeffuc': 'ocde10',
                 'typmen5': 'typmen',
                 'decuc1': 'decuc',
-                'cataeu': 'strate'
                 },
             inplace = True,
             )
         del variables
         menage.agecj = menage.agecj.fillna(0)
-
         # Pour Aliss
         menage['nadultes'] = menage.npers - menage.nenfants
         menage['ocde10_old'] = 1 + 0.7 * numpy.maximum(0, menage['nadultes'] - 1) + 0.5 * menage['nenfants']
-
         # Ajout des variables contenues dans la table depmen :
         variables_depmen = [
             'aidlog1',
@@ -670,12 +668,38 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         except:
             depmen = survey.get_values(table = "depmen", variables = variables_depmen)
         depmen.rename(columns = {'ident_me': 'ident_men'}, inplace = True)
+
+        menage.set_index('ident_men', inplace = True)
+        depmen.set_index('ident_men', inplace = True)
+
+        menage = menage.merge(depmen, left_index = True, right_index = True)
+
+        menage['vag_'] = menage['vag'].copy()
+        menage.vag.loc[menage.vag_ == 1] = 23
+        menage.vag.loc[menage.vag_ == 2] = 24
+        menage.vag.loc[menage.vag_ == 3] = 25
+        menage.vag.loc[menage.vag_ == 4] = 26
+        menage.vag.loc[menage.vag_ == 5] = 27
+        menage.vag.loc[menage.vag_ == 6] = 28
+        del menage['vag_']
+
+        menage['stalog'] = menage.stalog.astype('int').copy()
+        menage['new_stalog'] = 0
+        menage.loc[menage.stalog == 2, 'new_stalog'] = 1
+        menage.loc[menage.stalog == 1, 'new_stalog'] = 2
+        menage.loc[menage.stalog == 4, 'new_stalog'] = 3
+        menage.loc[menage.stalog == 5, 'new_stalog'] = 4
+        menage.loc[menage.stalog.isin([3, 6]), 'new_stalog'] = 5
+        menage.stalog = menage.new_stalog.copy()
+        del menage['new_stalog']
+        assert menage.stalog.isin(range(1, 6)).all()
+
+        '''
+        TODO a déplacer ailleurs après avoir compris à quoi cela sert !
         vague = depmen[['vag', 'ident_men']].copy()
         stalog = depmen[['stalog', 'ident_men']].copy()
         sourcp = depmen[['sourcp', 'ident_men']].copy()
 
-        menage.set_index('ident_men', inplace = True)
-        vague.set_index('ident_men', inplace = True)
         menage = menage.merge(vague, left_index = True, right_index = True)
         # On met un numéro à chaque vague pour pouvoir faire un meilleur suivi des évolutions temporelles pour
         # le modèle de demande
@@ -703,7 +727,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage = menage.merge(stalog, left_index = True, right_index = True)
         sourcp.set_index('ident_men', inplace = True)
         menage = menage.merge(sourcp, left_index = True, right_index = True)
-       
+        '''
         # Recodage des catégories zeat
         menage.loc[menage.zeat == 7, 'zeat'] = 6
         menage.zeat.loc[menage.zeat == 8] = 7

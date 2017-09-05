@@ -10,10 +10,18 @@ import pkg_resources
 
 from openfisca_core.reforms import Reform
 from openfisca_core.columns import FloatCol
+<<<<<<< HEAD
 from openfisca_france_indirect_taxation.variables import YearlyVariable
 
 
 from openfisca_france_indirect_taxation.model.base import get_legislation_data_frames, Menage
+=======
+from openfisca_core.formulas import dated_function
+from openfisca_core.variables import DatedVariable, Variable
+
+
+from openfisca_france_indirect_taxation.model.base import get_legislation_data_frames, Menages
+>>>>>>> thomas/energie
 
 from openfisca_france_indirect_taxation.model.consommation.postes_coicop import generate_postes_agreges_variables
 from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import generate_variables
@@ -318,12 +326,22 @@ def depenses_new_tva_function_creator(categorie_fiscale = None, taux = None):
     assert categorie_fiscale is not None
     assert taux is not None
 
+<<<<<<< HEAD
     def func(self, simulation, period, categorie_fiscale = categorie_fiscale, taux = taux):
         return (
             simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * (1 + taux)
             )
 
     func.__name__ = "formula"
+=======
+    @dated_function(start = None, stop = None)
+    def func(self, simulation, period, categorie_fiscale = categorie_fiscale, taux = taux):
+        return period, (
+            simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * (1 + taux)
+            )
+
+    func.__name__ = "function"
+>>>>>>> thomas/energie
     return func
 
 
@@ -331,6 +349,7 @@ def new_tva_function_creator(categorie_fiscale = None, taux = None):
     assert categorie_fiscale is not None
     assert taux is not None
 
+<<<<<<< HEAD
     def func(self, simulation, period, categorie_fiscale = categorie_fiscale, taux = taux):
         return (
             simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * taux
@@ -347,6 +366,26 @@ def new_tva_total_function_creator(categories_fiscales):
             )
 
     func.__name__ = "formula"
+=======
+    @dated_function(start = None, stop = None)
+    def func(self, simulation, period, categorie_fiscale = categorie_fiscale, taux = taux):
+        return period, (
+            simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * taux
+            )
+
+    func.__name__ = "function"
+    return func
+
+
+def new_tva_total_function_creator(categories_fiscales):
+    @dated_function(start = None, stop = None)
+    def func(self, simulation, period):
+        return period, sum(
+            simulation.calculate(categorie_fiscale, period) for categorie_fiscale in categories_fiscales
+            )
+
+    func.__name__ = "function"
+>>>>>>> thomas/energie
     return func
 
 
@@ -362,11 +401,19 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
                 categorie_fiscale = categorie_fiscale, taux = taux)
             definitions_by_name = dict(
                 column = FloatCol,
+<<<<<<< HEAD
                 entity = Menage,
                 label = u"Dépenses taxes comprises: {0}".format(categorie_fiscale),
                 function = depenses_new_tva_func,
                 )
             depenses_variable_class = type(depenses_class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
+=======
+                entity_class = Menages,
+                label = u"Dépenses taxes comprises: {0}".format(categorie_fiscale),
+                function = depenses_new_tva_func,
+                )
+            depenses_variable_class = type(depenses_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+>>>>>>> thomas/energie
             tax_benefit_system.add_variable(depenses_variable_class)
             del definitions_by_name
 
@@ -376,6 +423,7 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
             new_tva_func = new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
             definitions_by_name = dict(
                 column = FloatCol,
+<<<<<<< HEAD
                 entity = Menage,
                 label = u"Montant de la TVA acquitée à {0}".format(categorie_fiscale),
                 function = new_tva_func,
@@ -385,6 +433,22 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
             del definitions_by_name
 
         log.debug(u'{} Created new fiscal category {}'.format(reform_key, categorie_fiscale))
+=======
+                entity_class = Menages,
+                label = u"Montant de la TVA acquitée à {0}".format(categorie_fiscale),
+                function = new_tva_func,
+                )
+            tva_variable_class = type(tva_class_name.encode('utf-8'), (DatedVariable,), definitions_by_name)
+            tax_benefit_system.add_variable(tva_variable_class)
+            del definitions_by_name
+
+        log.info(u'{} Created new fiscal category {}'.format(reform_key, categorie_fiscale))
+
+        # except AssertionError as e:
+        #     log.info(e)
+        #     log.info(u'{} Fiscal category {} is not new : passing'.format(reform_key, categorie_fiscale))
+        #     pass
+>>>>>>> thomas/energie
 
     # tva_total variable creation
     categories_fiscales = [
@@ -396,5 +460,9 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
     definitions_by_name = dict(
         function = new_tva_total_func,
         )
+<<<<<<< HEAD
     type(u'tva_total'.encode('utf-8'), (YearlyVariable,), definitions_by_name)
+=======
+    type(u'tva_total'.encode('utf-8'), (Variable,), definitions_by_name)
+>>>>>>> thomas/energie
     del definitions_by_name
