@@ -47,7 +47,7 @@ def homogenize_variables_definition_bdf_enl():
     
     # Changement nomenclature variable année de construction du batiment :
     data_enl['ancons'] = 0
-    data_enl.ancons.loc[data_enl.iaat < 4] = 1
+    data_enl.loc[data_enl.iaat < 4, 'ancons'] = 1
     data_enl.ancons.loc[data_enl.iaat == 4] = 2
     data_enl.ancons.loc[data_enl.iaat == 5] = 3
     data_enl.ancons.loc[data_enl.iaat == 6] = 4
