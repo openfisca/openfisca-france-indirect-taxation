@@ -20,33 +20,32 @@ elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
-simulated_variables = ['depenses_energies', 'depenses_energies_logement', 'depenses_essence', 'depenses_diesel',
-                       'poste_coicop_722', 'poste_coicop_451', 'poste_coicop_452', 'poste_coicop_453',
-                       'poste_coicop_454', 'rev_disp_loyerimput', 'somme_coicop12']
+simulated_variables = ['depenses_energies_totales', 'depenses_energies_logement', 'depenses_essence', 'depenses_diesel',
+                       'depenses_carburants', 'depenses_electricite', 'depenses_gaz', 'depenses_combustibles_liquides',
+                       'depenses_combustibles_solides', 'poste_04_5_4_1_1', 'rev_disp_loyerimput'] #'
 
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
-    inflation_kwargs = inflation_kwargs,
+    #inflation_kwargs = inflation_kwargs,
     year = year,
     data_year = data_year
     )
 
-for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
+for category in ['niveau_vie_decile']: #, 'age_group_pr', 'strate_agrege'
     df = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
 
-    df.rename(columns = {'somme_coicop12': 'total expenditures',
-        'rev_disp_loyerimput': 'disposable income'},
+    df.rename(columns = {'rev_disp_loyerimput': 'disposable income'},
         inplace = True)
-    for resource in [u'total expenditures', u'disposable income']:
-        df['Energy share in {}'.format(resource)] = df['depenses_energies'] / df['{}'.format(resource)]
-        df['Housing energy share in {}'.format(resource)] = df['depenses_energies_logement'] / df['{}'.format(resource)]
-        df['Transport energy share in {}'.format(resource)] = df['poste_coicop_722'] / df['{}'.format(resource)]
-        df['Diesel share in {}'.format(resource)] = df['depenses_diesel'] / df['{}'.format(resource)]
-        df['Gasoline share in {}'.format(resource)] = df['depenses_essence'] / df['{}'.format(resource)]
-        df['Electricity share in {}'.format(resource)] = df['poste_coicop_451'] / df['{}'.format(resource)]
-        df['Natural gas share in {}'.format(resource)] = df['poste_coicop_452'] / df['{}'.format(resource)]
-        df['Domestic fuel share in {}'.format(resource)] = df['poste_coicop_453'] / df['{}'.format(resource)]
-        df['Solid fuels share in {}'.format(resource)] = df['poste_coicop_454'] / df['{}'.format(resource)]
+    for resource in [u'disposable income']:
+        df['Energy share in {}'.format(resource)] = df['depenses_energies_totales'] / df[resource]
+        df['Housing energy share in {}'.format(resource)] = df['depenses_energies_logement'] / df[resource]
+        df['Transport energy share in {}'.format(resource)] = df['depenses_carburants'] / df[resource]
+        df['Diesel share in {}'.format(resource)] = df['depenses_diesel'] / df[resource]
+        df['Gasoline share in {}'.format(resource)] = df['depenses_essence'] / df[resource]
+        df['Electricity share in {}'.format(resource)] = df['depenses_electricite'] / df[resource]
+        df['Natural gas share in {}'.format(resource)] = df['depenses_gaz'] / df[resource]
+        df['Domestic fuel share in {}'.format(resource)] = df['depenses_combustibles_liquides'] / df[resource]
+        df['Solid fuels share in {}'.format(resource)] = df['depenses_combustibles_solides'] / df[resource]
 
         # Réalisation de graphiques
         print 'Percentage of energy expenditure in {}'.format(resource)
@@ -66,5 +65,5 @@ for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
             'Solid fuels share in {}'.format(resource)]]
             )
 
-        save_dataframe_to_graph(df,
-            'Expenditures/share_energy_expenditures_in_{0}_by_{1}.csv'.format(resource.replace(' ', '_'), category))
+        #save_dataframe_to_graph(df,
+        #    'Expenditures/share_energy_expenditures_in_{0}_by_{1}.csv'.format(resource.replace(' ', '_'), category))
