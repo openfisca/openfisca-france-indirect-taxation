@@ -154,7 +154,7 @@ class depenses_fioul_domestique_ajustees_taxe_carbone(Variable):
     label = u"Dépenses en fioul domestique après réaction à la réforme - taxe carbone"
 
     def function(self, simulation, period):
-        depenses_fioul = simulation.calculate('poste_coicop_453', period)
+        depenses_fioul = simulation.calculate('poste_04_5_3_1_1', period)
         prix_fioul_ttc = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
         reforme_fioul = simulation.legislation_at(period.start).taxe_carbone.fioul_domestique

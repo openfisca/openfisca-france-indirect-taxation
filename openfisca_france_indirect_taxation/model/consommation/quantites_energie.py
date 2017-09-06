@@ -117,7 +117,7 @@ class quantites_electricite_3kva(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_elect = \
             simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_3_kva
-        depenses_elect = simulation.calculate('poste_coicop_451', period)
+        depenses_elect = simulation.calculate('poste_04_5_1_1_1_a', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_3_kva
@@ -134,7 +134,7 @@ class quantites_electricite_6kva(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_elect = \
             simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_6_kva
-        depenses_elect = simulation.calculate('poste_coicop_451', period)
+        depenses_elect = simulation.calculate('poste_04_5_1_1_1_a', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
@@ -151,7 +151,7 @@ class quantites_electricite_9kva(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_elect = \
             simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_9_kva
-        depenses_elect = simulation.calculate('poste_coicop_451', period)
+        depenses_elect = simulation.calculate('poste_04_5_1_1_1_a', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
@@ -168,7 +168,7 @@ class quantites_electricite_12kva(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_elect = \
             simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_12_kva
-        depenses_elect = simulation.calculate('poste_coicop_451', period)
+        depenses_elect = simulation.calculate('poste_04_5_1_1_1_a', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
@@ -185,7 +185,7 @@ class quantites_electricite_15kva(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_elect = \
             simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
-        depenses_elect = simulation.calculate('poste_coicop_451', period)
+        depenses_elect = simulation.calculate('poste_04_5_1_1_1_a', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
@@ -202,7 +202,7 @@ class quantites_electricite_18kva(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_elect = \
             simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_18_kva
-        depenses_elect = simulation.calculate('poste_coicop_451', period)
+        depenses_elect = simulation.calculate('poste_04_5_1_1_1_a', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
@@ -219,7 +219,7 @@ class quantites_gaz_contrat_base(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_gaz = \
             simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.base_0_1000
-        depenses_gaz = simulation.calculate('poste_coicop_452', period)
+        depenses_gaz = simulation.calculate('poste_04_5_2_1_1', period)
         depenses_sans_part_fixe = depenses_gaz - tarif_fixe_gaz
         prix_unitaire_gaz = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_base_ttc
@@ -236,7 +236,7 @@ class quantites_gaz_contrat_b0(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_gaz = \
             simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b0_1000_6000
-        depenses_gaz = simulation.calculate('poste_coicop_452', period)
+        depenses_gaz = simulation.calculate('poste_04_5_2_1_1', period)
         depenses_sans_part_fixe = depenses_gaz - tarif_fixe_gaz
         prix_unitaire_gaz = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b0_ttc
@@ -253,7 +253,7 @@ class quantites_gaz_contrat_b1(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_gaz = \
             simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b1_6_30000
-        depenses_gaz = simulation.calculate('poste_coicop_452', period)
+        depenses_gaz = simulation.calculate('poste_04_5_2_1_1', period)
         depenses_sans_part_fixe = depenses_gaz - tarif_fixe_gaz
         prix_unitaire_gaz = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b1_ttc
@@ -270,7 +270,7 @@ class quantites_gaz_contrat_b2i(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_gaz = \
             simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b2i_30000
-        depenses_gaz = simulation.calculate('poste_coicop_452', period)
+        depenses_gaz = simulation.calculate('poste_04_5_2_1_1', period)
         depenses_gaz_variables = depenses_gaz - tarif_fixe_gaz
         prix_unitaire_gaz = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b2i_ttc
