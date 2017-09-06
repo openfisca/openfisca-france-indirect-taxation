@@ -23,6 +23,33 @@ class emissions_CO2_carburants(YearlyVariable):
         return emissions
 
 
+class emissions_CO2_energies_totales(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Emissions de CO2 des ménages via leur consommation d'énergies totale, en kg de CO2"
+
+    def formula(self, simulation, period):
+        emissions_energies_logement = simulation.calculate('emissions_CO2_energies_logement', period)
+        emissions_carburants = simulation.calculate('emissions_CO2_carburants', period)
+        emissions = emissions_energies_logement + emissions_carburants  # Source : Ademe
+
+        return emissions
+
+
+# Ajouter le fioul domestique !
+class emissions_CO2_energies_logement(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Emissions de CO2 des ménages via leur consommation d'énergies dans leur logement, en kg de CO2"
+
+    def formula(self, simulation, period):
+        emissions_electricite = simulation.calculate('emissions_CO2_electricite', period)
+        emissions_gaz = simulation.calculate('emissions_CO2_gaz', period)
+        emissions = emissions_electricite + emissions_gaz  # Source : Ademe
+
+        return emissions
+
+
 class emissions_CO2_gaz(YearlyVariable):
     column = FloatCol
     entity = Menage

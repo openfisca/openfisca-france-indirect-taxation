@@ -17,24 +17,15 @@ for coicop12_index in range(1, 13):
         ))
 
 
-class depenses_carburants(YearlyVariable):
-    column = FloatCol
-    entity = Menage
-    label = u"Consommation de ticpe"
-
-    def formula(self, simulation, period):
-        return simulation.calculate('depenses_ticpe', period)
-
-
 class depenses_ticpe(YearlyVariable):
     column = FloatCol
     entity = Menage
-    label = u"Consommation de ticpe"
+    label = u"Consommation de carburants"
 
     def formula(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         return simulation.calculate('depenses_ht_ticpe', period) * (1 + taux_plein_tva)
-
+        # This is equivalent to call directly poste_07_2_2_1_1
 
 class depenses_essence_recalculees(YearlyVariable):
     column = FloatCol
@@ -47,6 +38,22 @@ class depenses_essence_recalculees(YearlyVariable):
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
         depenses_super_plombe_ht = simulation.calculate('depenses_super_plombe_ht', period)
+
+
+class depenses_tot(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Somme des dépenses du ménage"
+
+    def formula(self, simulation, period):
+        postes_agreges = ['poste_agrege_{}'.format(index) for index in
+            ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]
+            ]
+        depenses_tot = 0
+        for poste in postes_agreges:
+            depenses_tot += simulation.calculate('{}'.format(poste), period)
+
+        return depenses_tot
 
 
 class depenses_totales(YearlyVariable):
