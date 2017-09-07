@@ -175,7 +175,8 @@ class depenses_super_plombe(YearlyVariable):
         return depenses_super_plombe
 
 
-class essence_ticpe(YearlyVariable):
+# To be erased
+class essence_ticpe_bis(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Calcul du montant de la TICPE sur toutes les essences cumulées"
@@ -198,6 +199,34 @@ class essence_ticpe(YearlyVariable):
         sp98_ticpe = simulation.calculate('sp98_ticpe', period)
         sp_e10_ticpe = simulation.calculate('sp_e10_ticpe', period)
         essence_ticpe = (sp95_ticpe + sp98_ticpe + sp_e10_ticpe)
+        return essence_ticpe
+
+
+# To be fixed
+class essence_ticpe(Variable):
+    column = FloatCol
+    entity = Menage
+    label = u"Calcul du montant de la TICPE sur toutes les essences cumulées"
+    definition_period = YEAR
+
+    def formula_1990(self, simulation, period):
+        sp95_ticpe = simulation.calculate('sp95_ticpe', period)
+        sp98_ticpe = simulation.calculate('sp98_ticpe', period)
+        super_plombe_ticpe = simulation.calculate('super_plombe_ticpe', period)
+        essence_ticpe = (sp95_ticpe + sp98_ticpe + super_plombe_ticpe)
+        return essence_ticpe
+
+    def formula_2007(self, simulation, period):
+        sp95_ticpe = simulation.calculate('sp95_ticpe', period)
+        sp98_ticpe = simulation.calculate('sp98_ticpe', period)
+        essence_ticpe = (sp95_ticpe + sp98_ticpe)
+        return essence_ticpe
+
+    def formula_2009(self, simulation, period):
+        sp95_ticpe = simulation.calculate('sp95_ticpe', period)
+        sp98_ticpe = simulation.calculate('sp98_ticpe', period)
+        #sp_e10_ticpe = simulation.calculate('sp_e10_ticpe', period)
+        essence_ticpe = (sp95_ticpe + sp98_ticpe) # + sp_e10_ticpe
         return essence_ticpe
 
 
@@ -227,7 +256,8 @@ class essence_ticpe_ajustee(YearlyVariable):
         return essence_ticpe_ajustee
 
 
-class sp_e10_ticpe(YearlyVariable):
+# To be erased
+class sp_e10_ticpe_bis(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Calcul du montant de la TICPE sur le SP E10"
@@ -256,6 +286,125 @@ class sp_e10_ticpe(YearlyVariable):
             tax_from_expense_including_tax(depenses_sp_e10_htva, taux_implicite_sp_e10)
 
         return montant_sp_e10_ticpe
+
+
+# WIP, to be cleaned
+class sp_e10_ticpe(Variable):
+    column = FloatCol
+    entity = Menage
+    label = u"Calcul du montant de la TICPE sur le SP E10"
+    definition_period = YEAR
+
+    def formula(self, simulation, period):
+        serie = (0 * simulation.calculate('depenses_sp_95', period))
+        return serie
+
+    def formula_2009(self, simulation, period):
+        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        try:
+            accise_super_e10 = \
+                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+            majoration_ticpe_super_e10 = \
+                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+            accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
+        except:
+            accise_super_e10 = \
+                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+
+        super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+        taux_implicite_sp_e10 = (
+            (accise_ticpe_super_e10 * (1 + taux_plein_tva)) /
+            (super_95_e10_ttc - accise_ticpe_super_e10 * (1 + taux_plein_tva))
+            )
+        depenses_sp_e10 = simulation.calculate('depenses_sp_e10', period)
+        depenses_sp_e10_htva = \
+            depenses_sp_e10 - tax_from_expense_including_tax(depenses_sp_e10, taux_plein_tva)
+        montant_sp_e10_ticpe = \
+            tax_from_expense_including_tax(depenses_sp_e10_htva, taux_implicite_sp_e10)
+
+        super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
+        super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+        super_plombe_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
+        depenses_super_plombe = simulation.calculate('depenses_super_plombe', period)
+
+
+        return 0 * depenses_super_plombe +  accise_super_e10 # montant_sp_e10_ticpe
+
+
+class prix_super_95_e10_ttc(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Calcul du montant de la TICPE sur le SP E10 après réforme"
+
+    def formula(self, simulation, period):
+        super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+        depenses_super_plombe = simulation.calculate('depenses_super_plombe', period)
+
+        return 0 * depenses_super_plombe +  super_95_e10_ttc
+
+
+class prix_super_95_ttc(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Calcul du montant de la TICPE sur le SP E10 après réforme"
+
+    def formula(self, simulation, period):
+        super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+        depenses_super_plombe = simulation.calculate('depenses_super_plombe', period)
+
+        return 0 * depenses_super_plombe +  super_95_ttc
+
+
+class prix_super_plombe_ttc(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Calcul du montant de la TICPE sur le SP E10 après réforme"
+
+    def formula(self, simulation, period):
+        super_plombe_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
+        depenses_super_plombe = simulation.calculate('depenses_super_plombe', period)
+
+        return 0 * depenses_super_plombe +  super_plombe_ttc
+
+
+class accise_sp_95(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Calcul du montant de la TICPE sur le SP E10 après réforme"
+
+    def formula(self, simulation, period):
+        try:
+            accise_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            majoration_ticpe_super95 = \
+                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+            accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
+        except:
+            accise_ticpe_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+
+        depenses_super_plombe = simulation.calculate('depenses_super_plombe', period)
+
+        return 0 * depenses_super_plombe +  accise_ticpe_super95
+
+
+class accise_sp_95_e10(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Calcul du montant de la TICPE sur le SP E10 après réforme"
+
+    def formula(self, simulation, period):
+        try:
+            accise_super_e10 = \
+                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+            majoration_ticpe_super_e10 = \
+                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+            accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
+        except:
+            accise_ticpe_super_e10 = \
+                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+
+        depenses_super_plombe = simulation.calculate('depenses_super_plombe', period)
+
+        return 0 * depenses_super_plombe +  accise_ticpe_super_e10
 
 
 class sp_e10_ticpe_ajustee(YearlyVariable):
