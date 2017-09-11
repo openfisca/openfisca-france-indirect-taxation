@@ -299,6 +299,14 @@ def preprocess_legislation(legislation_json):
                     {'start': u'1990-01-01', 'stop': u'2015-12-31', 'value': 0.24},
                     ],
                 },
+            "CO2_combustibles_liquides": {
+                "@type": "Parameter",
+                "description": u"émissions de CO2 des combustibles liquides, en kg par litre",
+                "format": "float",
+                "values": [
+                    {'start': u'1990-01-01', 'stop': u'2015-12-31', 'value': 3.24},
+                    ],
+                },
             },
         }
 

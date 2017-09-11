@@ -30,10 +30,15 @@ class quantites_sp_e10(YearlyVariable):
         depenses_essence = simulation.calculate('depenses_essence', period)
         part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10 = depenses_essence * part_sp_e10
-        super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+        super_95_e10_ttc = simulation.legislation(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+        super_95_ttc = simulation.legislation(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+
+        param = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_combustibles_solides
+        
         quantite_sp_e10 = depenses_sp_e10 / super_95_e10_ttc * 100
 
-        return quantite_sp_e10
+        return (depenses_essence * 0.000000001) + super_95_e10_ttc
 
 
 class quantites_sp95(YearlyVariable):
@@ -309,3 +314,18 @@ class quantites_electricite_selon_compteur(YearlyVariable):
         quantites_electricite_selon_compteur = numpy.maximum(quantites_electricite_selon_compteur, 0)
 
         return quantites_electricite_selon_compteur
+
+
+class quantites_combustibles_liquides(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Quantité de combustibles solides (en litres) consommée par les ménages"
+
+    def formula(self, simulation, period):
+        depenses_combustibles_liquides = simulation.calculate('depenses_combustibles_liquides', period)
+        prix_combustibles_liquides = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
+        
+        quantite_combustibles_liquides = depenses_combustibles_liquides / prix_combustibles_liquides
+        
+        return quantite_combustibles_liquides
