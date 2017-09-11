@@ -18,7 +18,7 @@ year = 2014
 data_year = 2011
 elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-del inflation_kwargs['inflator_by_variable']['somme_coicop12']
+del inflation_kwargs['inflator_by_variable']['depenses_tot']
 
 simulated_variables = ['depenses_energies_totales', 'depenses_energies_logement', 'depenses_essence', 'depenses_diesel',
                        'depenses_carburants', 'depenses_electricite', 'depenses_gaz', 'depenses_combustibles_liquides',
