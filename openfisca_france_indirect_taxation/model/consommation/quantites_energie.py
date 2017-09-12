@@ -30,15 +30,10 @@ class quantites_sp_e10(YearlyVariable):
         depenses_essence = simulation.calculate('depenses_essence', period)
         part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10 = depenses_essence * part_sp_e10
-        super_95_e10_ttc = simulation.legislation(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
-        super_95_ttc = simulation.legislation(period.start).imposition_indirecte.prix_carburants.super_95_ttc
-
-        param = \
-            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_combustibles_solides
-        
+        super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
         quantite_sp_e10 = depenses_sp_e10 / super_95_e10_ttc * 100
 
-        return (depenses_essence * 0.000000001) + super_95_e10_ttc
+        return quantite_sp_e10
 
 
 class quantites_sp95(YearlyVariable):
@@ -114,6 +109,7 @@ class quantites_essence(YearlyVariable):
         return quantites_essence
 
 
+# Not used
 class quantites_electricite_3kva(YearlyVariable):
     column = FloatCol
     entity = Menage
@@ -131,6 +127,7 @@ class quantites_electricite_3kva(YearlyVariable):
         return quantite_elect
 
 
+# Not used
 class quantites_electricite_6kva(YearlyVariable):
     column = FloatCol
     entity = Menage
@@ -148,6 +145,7 @@ class quantites_electricite_6kva(YearlyVariable):
         return quantite_elect
 
 
+# Not used
 class quantites_electricite_9kva(YearlyVariable):
     column = FloatCol
     entity = Menage
@@ -165,6 +163,7 @@ class quantites_electricite_9kva(YearlyVariable):
         return quantite_elect
 
 
+# Not used
 class quantites_electricite_12kva(YearlyVariable):
     column = FloatCol
     entity = Menage
@@ -182,6 +181,7 @@ class quantites_electricite_12kva(YearlyVariable):
         return quantite_elect
 
 
+# Not used
 class quantites_electricite_15kva(YearlyVariable):
     column = FloatCol
     entity = Menage
@@ -199,6 +199,7 @@ class quantites_electricite_15kva(YearlyVariable):
         return quantite_elect
 
 
+# Not used
 class quantites_electricite_18kva(YearlyVariable):
     column = FloatCol
     entity = Menage

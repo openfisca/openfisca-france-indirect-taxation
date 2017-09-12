@@ -223,16 +223,17 @@ class depenses_diesel_recalculees(YearlyVariable):
         return depenses_diesel_recalculees
 
 
-class depenses_essence_ht(YearlyVariable):
+class depenses_essence_ht(Variable):
     column = FloatCol
     entity = Menage
     label = u"Dépenses en essence hors taxes (HT, i.e. sans TVA ni TICPE)"
+    definition_period = YEAR
 
-    def formula_1990(self, simulation, period):
+    def formula_2009(self, simulation, period):
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
-        depenses_super_plombe_ht = simulation.calculate('depenses_super_plombe_ht', period)
-        depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht + depenses_super_plombe_ht)
+        depenses_sp_e10_ht = simulation.calculate('depenses_sp_e10_ht', period)
+        depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht + depenses_sp_e10_ht)
         return depenses_essence_ht
 
     def formula_2007(self, simulation, period):
@@ -241,11 +242,11 @@ class depenses_essence_ht(YearlyVariable):
         depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht)
         return depenses_essence_ht
 
-    def formula_2009(self, simulation, period):
+    def formula_1990(self, simulation, period):
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
-        depenses_sp_e10_ht = simulation.calculate('depenses_sp_e10_ht', period)
-        depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht + depenses_sp_e10_ht)
+        depenses_super_plombe_ht = simulation.calculate('depenses_super_plombe_ht', period)
+        depenses_essence_ht = (depenses_sp_95_ht + depenses_sp_98_ht + depenses_super_plombe_ht)
         return depenses_essence_ht
 
 
@@ -438,7 +439,7 @@ class depenses_gaz_variables(YearlyVariable):
     label = u"Dépenses en gaz des ménages, hors coût fixe de l'abonnement"
 
     def formula(self, simulation, period):
-        depenses_gaz = simulation.calculate('poste_04_5_2_1_1', period)
+        depenses_gaz = simulation.calculate('depenses_gaz', period)
         tarif_fixe = simulation.calculate('depenses_gaz_tarif_fixe', period)
 
         depenses_gaz_variables = depenses_gaz - tarif_fixe
@@ -453,7 +454,7 @@ class depenses_electricite_percentile(YearlyVariable):
     label = u"Classement par percentile des dépenses d'électricité"
 
     def formula(self, simulation, period):
-        depenses_electricite = simulation.calculate('poste_04_5_1_1_1_b', period)
+        depenses_electricite = simulation.calculate('depenses_electricite', period)
         depenses_electricite_rank = depenses_electricite.argsort().argsort()
         depenses_electricite_percentile = depenses_electricite_rank / len(depenses_electricite_rank) * 100
 
@@ -519,7 +520,7 @@ class depenses_electricite_variables(YearlyVariable):
     label = u"Dépenses en électricité des ménages, hors coût fixe de l'abonnement"
 
     def formula(self, simulation, period):
-        depenses_electricite = simulation.calculate('poste_04_5_1_1_1_b', period)
+        depenses_electricite = simulation.calculate('depenses_electricite', period)
         depenses_electricite_tarif_fixe = simulation.calculate('depenses_electricite_tarif_fixe', period)
         depenses_electricite_variables = depenses_electricite - depenses_electricite_tarif_fixe
         depenses_electricite_variables = numpy.maximum(depenses_electricite_variables, 0)
