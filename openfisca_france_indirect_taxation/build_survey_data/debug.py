@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from __future__ import division
 
 # Import de modules spécifiques à Openfisca
@@ -7,16 +9,16 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
 simulated_variables = [
-    'quantites_sp_e10',
+    'depenses_electricite_gaz_confondus',
+    'depenses_electricite_seule'
     ]
 
 year = 2011
 data_year = 2011
 survey_scenario = SurveyScenario.create(year = year, data_year = data_year)
 
-for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate_agrege']
+for category in ['niveau_vie_decile']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
-    #taxe_indirectes['depenses_tot'] = taxe_indirectes[postes_agreges].sum(axis = 1)
 
 
 
@@ -37,19 +39,6 @@ for element in liste:
     if element[:9] == 'depenses_':
         print element
 
-taxe_indirectes['poste_04_5_1_1_1_a'].mean()
-taxe_indirectes['poste_04_5_1_1_1_b'].mean()
-
-df['Housing energy share in {}'.format(resource)] = df['depenses_energies_logement'] / df[resource]
-
-
-print df['depenses_combustibles_solides'] / df[resource]
-
-df[df.index.duplicated()]
-
-data_year = 2011
-target_year = 2011
-
 liste_variables = depenses.columns.tolist()
 depenses['depenses_tot'] = 0
 for element in liste_variables:
@@ -69,19 +58,7 @@ for element in liste_variables:
 
 
 
-
-
-print depenses['depenses_tot_bis'].mean()
-print depenses['depenses_tot'].mean()
-print depenses['rev_disponible'].mean()
-
-print masses_cn_data_frame['poste']
-print masses_cn_data_frame.dtypes
-
-
-momo = masses_cn_data_frame.drop_duplicates('poste')
-mimi = masses_cn_data_frame.query('poste == 0')
-
-mama = masses_cn_data_frame[masses_cn_data_frame.poste != '0']
+year = 2000
+year = 2005
 
 

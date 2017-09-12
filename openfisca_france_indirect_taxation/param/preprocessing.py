@@ -11,7 +11,6 @@ def preprocess_legislation(legislation_json):
     import os
     import pkg_resources
     import pandas as pd
-    # print legislation_json
     # Add fuel prices to the tree
 
     default_config_files_directory = os.path.join(
@@ -89,7 +88,7 @@ def preprocess_legislation(legislation_json):
             }
 
     legislation_json['children']['imposition_indirecte']['children']['prix_carburants'] = prix_carburants
-    print legislation_json
+    #print legislation_json
 
     # Add the number of vehicle in circulation to the tree
 

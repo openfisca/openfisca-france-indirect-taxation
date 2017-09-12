@@ -33,7 +33,7 @@ def plot_taux_effort_ticpe():
     data_year = 2011
     survey_scenario = SurveyScenario.create(year = year, data_year = data_year)
 
-    for category in ['age_group_pr']: #['niveau_vie_decile', 'age_group_pr', 'strate_agrege']
+    for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate_agrege']
         taxe_indirectes = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
         taxe_indirectes['depenses_tot'] = taxe_indirectes[postes_agreges].sum(axis = 1)
 
@@ -50,7 +50,7 @@ def plot_taux_effort_ticpe():
 
             print '''Contributions aux différentes taxes indirectes en part de {0},
                 par décile de revenu en {1}'''.format(revenu, year)
-            graph_builder_bar(df_to_graph)
+            graph_builder_bar(df_to_graph) # Attention, ces graphes sont mal adaptés
             #save_dataframe_to_graph(
             #    df_to_graph, 'Taxes_indirectes/effort_rate_ticpe_on_{0}_by_{1}.csv'.format(revenu, category)
             #    )
