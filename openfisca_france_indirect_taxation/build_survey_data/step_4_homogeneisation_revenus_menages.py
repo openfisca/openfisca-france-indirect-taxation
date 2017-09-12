@@ -221,11 +221,11 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         revenus['impfon'] = 0.35 * (revenus.impot_res_ppal + revenus.impot_autres_res)
 
         loyers_imputes = temporary_store["depenses_bdf_{}".format(year)]
-        variables = ["poste_coicop_04_2_1"]
+        variables = ["poste_04_2_1"]
         loyers_imputes = loyers_imputes[variables]
 
         loyers_imputes.rename(
-            columns = {"poste_coicop_04_2_1": "loyer_impute"},
+            columns = {"poste_04_2_1": "loyer_impute"},
             inplace = True,
             )
 
@@ -295,10 +295,10 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         #    * Calculer le revenu disponible avec et sans le loyer imputé
 
         loyers_imputes = temporary_store["depenses_bdf_{}".format(year)]
-        variables = ["poste_coicop_04_2_1"]
+        variables = ["poste_04_2_1"]
         loyers_imputes = loyers_imputes[variables]
         loyers_imputes.rename(
-            columns = {"poste_coicop_04_2_1": "loyer_impute"},
+            columns = {"poste_04_2_1": "loyer_impute"},
             inplace = True,
             )
         temporary_store["loyers_imputes_{}".format(year)] = loyers_imputes
@@ -373,10 +373,10 @@ In loyers_imputes and not in revenus:
         del revenus['impot_res_ppal']
 
         loyers_imputes = temporary_store["depenses_bdf_{}".format(year)]
-        variables = ["poste_coicop_04_2_1"]  # loyers imputés
+        variables = ["poste_04_2_1"]  # loyers imputés
         loyers_imputes = loyers_imputes[variables].copy()
         loyers_imputes.rename(
-            columns = {"poste_coicop_04_2_1": "loyer_impute"},
+            columns = {"poste_04_2_1": "loyer_impute"},
             inplace = True,
             )
         temporary_store["loyers_imputes_{}".format(year)] = loyers_imputes
