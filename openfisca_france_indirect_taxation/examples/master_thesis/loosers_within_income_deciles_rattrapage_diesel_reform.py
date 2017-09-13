@@ -44,8 +44,8 @@ y = survey_scenario.compute_pivot_table(
 
 x == y
 
-df_by_entity = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
-df_by_entity_bis = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables, reference = True)
+df_by_entity = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
+df_by_entity_bis = survey_scenario.create_data_frame_by_entity(simulated_variables, reference = True, period = year)
 
 menages = df_by_entity['menages']
 menages_bis = df_by_entity_bis['menages']

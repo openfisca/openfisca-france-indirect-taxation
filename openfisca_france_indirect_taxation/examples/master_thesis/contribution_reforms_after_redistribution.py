@@ -60,7 +60,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_
         graph_builder_bar(df)
 
 
-        df_by_entity = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
+        df_by_entity = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
         menages = df_by_entity['menages']
 
         sum_reduit = (

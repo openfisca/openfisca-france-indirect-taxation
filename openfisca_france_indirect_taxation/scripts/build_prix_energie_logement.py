@@ -31,7 +31,7 @@ for year in [2000, 2005, 2011]:
         year = year,
         )
 
-    df_by_entity = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
+    df_by_entity = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
     menages = df_by_entity['menages']
 
     assert not menages.ident_men.duplicated().any(), 'Some households are duplicated'
