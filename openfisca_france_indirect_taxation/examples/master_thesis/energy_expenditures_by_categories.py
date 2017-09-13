@@ -34,12 +34,12 @@ survey_scenario = SurveyScenario.create(
 for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
 
-    df['depenses_energies_totales_uc'] = df['depenses_energies_totales'] / df['ocde10'] 
+    df['depenses_energies_totales_uc'] = df['depenses_energies_totales'] / df['ocde10']
     df['depenses_energies_logement_uc'] = df['depenses_energies_logement'] / df['ocde10']
     df['depenses_carburants_corrigees_uc'] = df['depenses_carburants_corrigees'] / df['ocde10']
 
-    df = df[['depenses_energies_totales_uc'] + ['depenses_energies_logement_uc'] + ['depenses_carburants_corrigees_uc']]    
-    
+    df = df[['depenses_energies_totales_uc'] + ['depenses_energies_logement_uc'] + ['depenses_carburants_corrigees_uc']]
+
     df.rename(columns = {'depenses_energies_totales_uc': 'Total energy expenditures',
         'depenses_energies_logement_uc': 'Housing energy expenditures',
         'depenses_carburants_corrigees_uc': 'Fuel expenditures'},
