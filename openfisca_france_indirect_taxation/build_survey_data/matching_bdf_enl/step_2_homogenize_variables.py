@@ -80,6 +80,9 @@ def homogenize_variables_definition_bdf_enl():
     # Nbh1
     data_bdf['nbh1'] = data_bdf['nbh1'].fillna(0)
     
+    # Gestion des dépenses d'énergies
+    data_bdf['poste_04_5_1_1_1'] = data_bdf['poste_04_5_1_1_1_a'] + data_bdf['poste_04_5_1_1_1_b']
+    del data_bdf['poste_04_5_1_1_1_a'], data_bdf['poste_04_5_1_1_1_b']
     # zeat : dans BdF certains ménages ont 6 et aucun 9, alors que 6 n'existe pas
     data_bdf.zeat.loc[data_bdf.zeat == 6] = 9
 
@@ -89,9 +92,10 @@ def homogenize_variables_definition_bdf_enl():
             'cataeu2010': 'cataeu',
             'cceml': 'mfac_eau1_d',
             'coml': 'depenses_energies',
-            'coml11': 'poste_coicop_451',
-            'coml12': 'poste_coicop_452',
-            'coml2': 'poste_coicop_453',
+            'coml11': 'poste_04_5_1_1_1',
+            'coml12': 'poste_04_5_2_1_1',
+            'coml2': 'poste_04_5_3_1_1',
+            'coml3': 'poste_04_5_2_2_1',
             'enfhod': 'nbh1',
             'lchauf': 'mchof_d',
             'hnph1': 'nbphab',
@@ -125,13 +129,13 @@ def create_new_variables():
 
         # Dummy variable pour la consommation de fioul
         data['fioul'] = 0
-        data.loc[data['poste_coicop_453'] > 0, 'fioul'] = 1
+        data.loc[data['poste_04_5_3_1_1'] > 0, 'fioul'] = 1
 
         data['gaz'] = 0
-        data.loc[data['poste_coicop_452'] > 0, 'gaz'] = 1
+        data.loc[data['poste_04_5_2_1_1'] > 0, 'gaz'] = 1
 
         data['electricite'] = 0
-        data.loc[data['poste_coicop_451'] > 0, 'electricite'] = 1
+        data.loc[data['poste_04_5_1_1_1'] > 0, 'electricite'] = 1
 
         # Création de dummy variables pour la commune de résidence
         data['rural'] = 0
@@ -197,9 +201,8 @@ def create_new_variables():
 
 
         # Création d'une variable pour la part des dépenses totales en énergies
-        energie_logement = ['poste_coicop_451', 'poste_coicop_4511', 'poste_coicop_452',
-        'poste_coicop_4522', 'poste_coicop_453', 'poste_coicop_454', 'poste_coicop_455',
-        'poste_coicop_4552']
+        energie_logement = ['poste_04_5_1_1_1', 'poste_04_5_2_1_1', 'poste_04_5_2_2_1',
+        'poste_04_5_3_1_1', 'poste_04_5_4_1_1', 'poste_04_5_5_1_1']
         
         if i == 1:
             data['depenses_energies'] = 0
