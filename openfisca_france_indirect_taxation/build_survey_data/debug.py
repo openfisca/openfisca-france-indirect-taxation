@@ -3,14 +3,13 @@
 from __future__ import division
 
 # Import de modules spécifiques à Openfisca
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, save_dataframe_to_graph, \
-    dataframe_by_group
+from openfisca_france_indirect_taxation.examples.utils_example import dataframe_by_group
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
 simulated_variables = [
-    'depenses_electricite_gaz_confondus',
-    'depenses_electricite_seule'
+    'strate_agrege',
+    'strate',
     ]
 
 year = 2011
@@ -19,8 +18,18 @@ survey_scenario = SurveyScenario.create(year = year, data_year = data_year)
 
 for category in ['niveau_vie_decile']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
+    indiv_df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
 
 
+i = 0
+variables_menages_bdf = ['poste_04_5_1_1_1_b', 'poste_04_5_2_1_1', 'poste_04_5_1_1_1_a']
+variables_menages_enl = ['coml11', 'coml12', 'coml13']
+bibi = menage_enl_keep.query('coml13 > 0')
+bobo = conso_bdf_keep.query('poste_04_5_1_1_1_a > 0')
+
+from openfisca_france_indirect_taxation.utils import get_input_data_frame
+df = get_input_data_frame(year)
+print df['strate']
 
 
 
