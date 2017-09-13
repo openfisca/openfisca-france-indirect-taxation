@@ -81,8 +81,15 @@ def homogenize_variables_definition_bdf_enl():
     data_bdf['nbh1'] = data_bdf['nbh1'].fillna(0)
     
     # Gestion des dépenses d'énergies
-    data_bdf['poste_04_5_1_1_1'] = data_bdf['poste_04_5_1_1_1_a'] + data_bdf['poste_04_5_1_1_1_b']
+    data_bdf['poste_04_5_1_1_1'] = (data_bdf['poste_04_5_1_1_1_a'] + data_bdf['poste_04_5_1_1_1_b']).copy()
     del data_bdf['poste_04_5_1_1_1_a'], data_bdf['poste_04_5_1_1_1_b']
+
+    data_enl['poste_04_5_1_1_1'] = (data_enl['coml11'] + data_enl['coml13']).copy()
+    del data_enl['coml11'], data_enl['coml13']
+
+    data_enl['poste_04_5_4_1_1'] = (data_enl['coml41'] + data_enl['coml42']).copy()
+    del data_enl['coml41'], data_enl['coml42']
+    
     # zeat : dans BdF certains ménages ont 6 et aucun 9, alors que 6 n'existe pas
     data_bdf.zeat.loc[data_bdf.zeat == 6] = 9
 
@@ -92,7 +99,6 @@ def homogenize_variables_definition_bdf_enl():
             'cataeu2010': 'cataeu',
             'cceml': 'mfac_eau1_d',
             'coml': 'depenses_energies',
-            'coml11': 'poste_04_5_1_1_1',
             'coml12': 'poste_04_5_2_1_1',
             'coml2': 'poste_04_5_3_1_1',
             'coml3': 'poste_04_5_2_2_1',
@@ -133,6 +139,7 @@ def create_new_variables():
 
         data['gaz'] = 0
         data.loc[data['poste_04_5_2_1_1'] > 0, 'gaz'] = 1
+        data.loc[data['poste_04_5_2_2_1'] > 0, 'gaz'] = 1
 
         data['electricite'] = 0
         data.loc[data['poste_04_5_1_1_1'] > 0, 'electricite'] = 1
@@ -201,8 +208,9 @@ def create_new_variables():
 
 
         # Création d'une variable pour la part des dépenses totales en énergies
+        # On néglige l'énergie thermique de BdF car les dépenses sont absentes de l'ENL
         energie_logement = ['poste_04_5_1_1_1', 'poste_04_5_2_1_1', 'poste_04_5_2_2_1',
-        'poste_04_5_3_1_1', 'poste_04_5_4_1_1', 'poste_04_5_5_1_1']
+        'poste_04_5_3_1_1', 'poste_04_5_4_1_1']
         
         if i == 1:
             data['depenses_energies'] = 0

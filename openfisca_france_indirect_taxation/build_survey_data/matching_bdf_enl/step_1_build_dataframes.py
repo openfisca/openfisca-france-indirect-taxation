@@ -115,6 +115,8 @@ def load_data_bdf_enl():
         'coml13',
         'coml2',
         'coml3',
+        'coml41',
+        'coml42',
         'dom',
         'enfhod',
         'gchauf_1', #raisons du froid dans le logement

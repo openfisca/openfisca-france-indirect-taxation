@@ -239,37 +239,37 @@ def hellinger_postes_energies(data_bdf, data_enl):
     distribution_enl_2 = dict()
     distribution_enl_3 = dict()
     for en in [1,2,3]:
-        data_bdf['poste_coicop_45{}'.format(en)] = data_bdf['poste_coicop_45{}'.format(en)].astype(float)
-        poste_max_bdf = data_bdf['poste_coicop_45{}'.format(en)].max()        
-        data_enl['poste_coicop_45{}'.format(en)] = data_enl['poste_coicop_45{}'.format(en)].astype(float)
-        poste_max_enl = data_enl['poste_coicop_45{}'.format(en)].max()
+        data_bdf['poste_04_5_{}_1_1'.format(en)] = data_bdf['poste_04_5_{}_1_1'.format(en)].astype(float)
+        poste_max_bdf = data_bdf['poste_04_5_{}_1_1'.format(en)].max()        
+        data_enl['poste_04_5_{}_1_1'.format(en)] = data_enl['poste_04_5_{}_1_1'.format(en)].astype(float)
+        poste_max_enl = data_enl['poste_04_5_{}_1_1'.format(en)].max()
 
         poste_max = max(poste_max_bdf, poste_max_enl)
-        data_bdf['poste_coicop_45{}_groupe'.format(en)] = (data_bdf['poste_coicop_45{}'.format(en)] / poste_max).round(decimals = 2)
-        data_enl['poste_coicop_45{}_groupe'.format(en)] = (data_enl['poste_coicop_45{}'.format(en)] / poste_max).round(decimals = 2)    
+        data_bdf['poste_04_5_{}_1_1_groupe'.format(en)] = (data_bdf['poste_04_5_{}_1_1'.format(en)] / poste_max).round(decimals = 2)
+        data_enl['poste_04_5_{}_1_1_groupe'.format(en)] = (data_enl['poste_04_5_{}_1_1'.format(en)] / poste_max).round(decimals = 2)    
     
         for i in range(0,101):
             j = float(i)/100
             if en == 1:
-                distribution_bdf_1['{}'.format(j)] = (data_bdf.query('poste_coicop_45{}_groupe == {}'.format(en, j))['pondmen'].sum() /
+                distribution_bdf_1['{}'.format(j)] = (data_bdf.query('poste_04_5_{}_1_1_groupe == {}'.format(en, j))['pondmen'].sum() /
                  data_bdf['pondmen'].sum())
             if en == 2:
-                distribution_bdf_2['{}'.format(j)] = (data_bdf.query('poste_coicop_45{}_groupe == {}'.format(en, j))['pondmen'].sum() /
+                distribution_bdf_2['{}'.format(j)] = (data_bdf.query('poste_04_5_{}_1_1_groupe == {}'.format(en, j))['pondmen'].sum() /
                  data_bdf['pondmen'].sum())
             else:
-                distribution_bdf_3['{}'.format(j)] = (data_bdf.query('poste_coicop_45{}_groupe == {}'.format(en, j))['pondmen'].sum() /
+                distribution_bdf_3['{}'.format(j)] = (data_bdf.query('poste_04_5_{}_1_1_groupe == {}'.format(en, j))['pondmen'].sum() /
                  data_bdf['pondmen'].sum())
         
         for i in range(0,101):
             j = float(i)/100
             if en == 1:
-                distribution_enl_1['{}'.format(j)] = (data_enl.query('poste_coicop_45{}_groupe == {}'.format(en, j))['pondmen'].sum() /
+                distribution_enl_1['{}'.format(j)] = (data_enl.query('poste_04_5_{}_1_1_groupe == {}'.format(en, j))['pondmen'].sum() /
                  data_enl['pondmen'].sum())
             if en == 2:
-                distribution_enl_2['{}'.format(j)] = (data_enl.query('poste_coicop_45{}_groupe == {}'.format(en, j))['pondmen'].sum() /
+                distribution_enl_2['{}'.format(j)] = (data_enl.query('poste_04_5_{}_1_1_groupe == {}'.format(en, j))['pondmen'].sum() /
                  data_enl['pondmen'].sum())
             else:
-                distribution_enl_3['{}'.format(j)] = (data_enl.query('poste_coicop_45{}_groupe == {}'.format(en, j))['pondmen'].sum() /
+                distribution_enl_3['{}'.format(j)] = (data_enl.query('poste_04_5_{}_1_1_groupe == {}'.format(en, j))['pondmen'].sum() /
                  data_enl['pondmen'].sum())
     
         hellinger_distance_1 = hellinger(distribution_bdf_1.values(),distribution_enl_1.values())
@@ -278,9 +278,9 @@ def hellinger_postes_energies(data_bdf, data_enl):
     
     return hellinger_distance_1, hellinger_distance_2, hellinger_distance_3
     
-hellinger_poste_coicop_451 = hellinger_postes_energies(data_bdf, data_enl)[0]
-hellinger_poste_coicop_452 = hellinger_postes_energies(data_bdf, data_enl)[1]
-hellinger_poste_coicop_453 = hellinger_postes_energies(data_bdf, data_enl)[2]
+hellinger_poste_451 = hellinger_postes_energies(data_bdf, data_enl)[0]
+hellinger_poste_452 = hellinger_postes_energies(data_bdf, data_enl)[1]
+hellinger_poste_453 = hellinger_postes_energies(data_bdf, data_enl)[2]
 
 
 # By construction, the distance should be extremely close to 0
