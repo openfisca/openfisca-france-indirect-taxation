@@ -170,6 +170,7 @@ def load_data_bdf_enl():
     indiv_enl_keep = input_enl_indiv[variables_indiv_enl]
     menage_enl_keep = input_enl[variables_menages_enl]
     conso_bdf_keep = input_bdf[variables_menages_bdf]
+    #conso_bdf_keep = conso_bdf_keep.query('zeat != 0')
     del input_enl_indiv, input_enl, input_bdf
     
     indiv_enl_keep = indiv_enl_keep.query('igreflog == 1')

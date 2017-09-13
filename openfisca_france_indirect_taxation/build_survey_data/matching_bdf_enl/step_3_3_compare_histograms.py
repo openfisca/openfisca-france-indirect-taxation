@@ -301,7 +301,6 @@ def histogram_poste_451():
 histogram_poste_451()
 
 
-# Gros problèmes ici
 def histogram_poste_452():
     list_values_bdf = []
     list_values_enl = []
