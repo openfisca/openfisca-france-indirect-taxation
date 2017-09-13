@@ -45,13 +45,15 @@ def load_data_menages_bdf_entd():
     
 
     # Create variable for total spending
-    produits = [column for column in input_bdf.columns if column[:13] == 'poste_coicop_']
-    del column
-
+    liste_variables = input_bdf.columns.tolist()
+    postes_agreges = ['poste_{}'.format(index) for index in
+        ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]
+        ]
     input_bdf['depenses_tot'] = 0
-    for produit in produits:
-        if produit[13:15] != '99' and produit[13:15] != '13':
-            input_bdf['depenses_tot'] += input_bdf[produit]
+    for element in liste_variables:
+        for poste in postes_agreges:
+            if element[:8] == poste:
+                input_bdf['depenses_tot'] += input_bdf[element]
 
 
     # Set variables :
@@ -99,7 +101,7 @@ def load_data_menages_bdf_entd():
         'npers',
         'ocde10', # nb unités de conso
         'pondmen',
-        'poste_coicop_722',
+        'poste_07_2_2_1_1',
         'revtot', # revenu total
         'situapr',
         'stalog',
