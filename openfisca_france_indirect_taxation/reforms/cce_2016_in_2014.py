@@ -124,7 +124,7 @@ class depenses_fioul_domestique_ajustees_cce_2014_2016(Variable):
     label = u"Dépenses en fioul après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2015"
 
     def function(self, simulation, period):
-        depenses_fioul = simulation.calculate('poste_coicop_453', period)
+        depenses_fioul = simulation.calculate('poste_04_5_3_1_1', period)
         prix_fioul_ttc = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
         reforme_fioul = \
@@ -289,7 +289,7 @@ class emissions_CO2_carburants(Variable):
 
 class emissions_CO2_energies(Variable):
     label = u"Emissions de CO2 des ménages via leur conso d'énergies après hausse cce 14-16, en kg de CO2"
-    # # reference = emissions_co2.emissions_CO2_energies
+    # # reference = emissions_co2.emissions_CO2_energies
 
     def function(self, simulation, period):
         emissions_carburants_ajustees = simulation.calculate('emissions_CO2_carburants', period)

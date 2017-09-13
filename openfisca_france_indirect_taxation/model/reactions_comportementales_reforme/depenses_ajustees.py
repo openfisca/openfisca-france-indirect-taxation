@@ -80,10 +80,10 @@ class depenses_electricite_ajustees_taxe_carbone(YearlyVariable):
         depenses_electricite_ajustees = depenses_electricite_ajustees_variables + depenses_electricite_tarif_fixe
 
         # We do not want to input the expenditure of the contract for those who consume nothing
-        poste_coicop_451 = simulation.calculate('poste_coicop_451', period)
+        poste_04_5_1_1_1_a = simulation.calculate('poste_04_5_1_1_1_a', period)
         depenses_electricite_ajustees = (
-            depenses_electricite_ajustees * (poste_coicop_451 > min_tarif_fixe) +
-            poste_coicop_451 * (poste_coicop_451 < min_tarif_fixe)
+            depenses_electricite_ajustees * (poste_04_5_1_1_1_a > min_tarif_fixe) +
+            poste_04_5_1_1_1_a * (poste_04_5_1_1_1_a < min_tarif_fixe)
             )
 
         return depenses_electricite_ajustees

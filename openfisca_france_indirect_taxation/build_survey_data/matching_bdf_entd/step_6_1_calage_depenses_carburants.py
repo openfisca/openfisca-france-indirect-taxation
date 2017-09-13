@@ -47,7 +47,7 @@ def calage_depenses_from_distance(data_matched):
                 data_matched_group['pondmen'].sum()
                 )
             avg_depenses = (
-                sum(data_matched_group['poste_coicop_722'] * data_matched_group['pondmen']) /
+                sum(data_matched_group['poste_07_2_2_1_1'] * data_matched_group['pondmen']) /
                 data_matched_group['pondmen'].sum()
                 )
 

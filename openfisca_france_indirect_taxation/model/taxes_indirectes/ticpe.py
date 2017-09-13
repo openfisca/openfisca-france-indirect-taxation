@@ -175,23 +175,11 @@ class depenses_super_plombe(YearlyVariable):
         return depenses_super_plombe
 
 
-class essence_ticpe(YearlyVariable):
+class essence_ticpe(Variable):
     column = FloatCol
     entity = Menage
     label = u"Calcul du montant de la TICPE sur toutes les essences cumulées"
-
-    def formula_1990(self, simulation, period):
-        sp95_ticpe = simulation.calculate('sp95_ticpe', period)
-        sp98_ticpe = simulation.calculate('sp98_ticpe', period)
-        super_plombe_ticpe = simulation.calculate('super_plombe_ticpe', period)
-        essence_ticpe = (sp95_ticpe + sp98_ticpe + super_plombe_ticpe)
-        return essence_ticpe
-
-    def formula_2007(self, simulation, period):
-        sp95_ticpe = simulation.calculate('sp95_ticpe', period)
-        sp98_ticpe = simulation.calculate('sp98_ticpe', period)
-        essence_ticpe = (sp95_ticpe + sp98_ticpe)
-        return essence_ticpe
+    definition_period = YEAR
 
     def formula_2009(self, simulation, period):
         sp95_ticpe = simulation.calculate('sp95_ticpe', period)
@@ -200,24 +188,25 @@ class essence_ticpe(YearlyVariable):
         essence_ticpe = (sp95_ticpe + sp98_ticpe + sp_e10_ticpe)
         return essence_ticpe
 
+    def formula_2007(self, simulation, period):
+        sp95_ticpe = simulation.calculate('sp95_ticpe', period)
+        sp98_ticpe = simulation.calculate('sp98_ticpe', period)
+        essence_ticpe = (sp95_ticpe + sp98_ticpe)
+        return essence_ticpe
 
-class essence_ticpe_ajustee(YearlyVariable):
+    def formula_1990(self, simulation, period):
+        sp95_ticpe = simulation.calculate('sp95_ticpe', period)
+        sp98_ticpe = simulation.calculate('sp98_ticpe', period)
+        super_plombe_ticpe = simulation.calculate('super_plombe_ticpe', period)
+        essence_ticpe = (sp95_ticpe + sp98_ticpe + super_plombe_ticpe)
+        return essence_ticpe
+
+
+class essence_ticpe_ajustee(Variable):
     column = FloatCol
     entity = Menage
     label = u"Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
-
-    def formula_1990(self, simulation, period):
-        sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe_ajustee', period)
-        sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe_ajustee', period)
-        super_plombe_ticpe_ajustee = simulation.calculate('super_plombe_ticpe_ajustee', period)
-        essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + super_plombe_ticpe_ajustee)
-        return essence_ticpe_ajustee
-
-    def formula_2007(self, simulation, period):
-        sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe_ajustee', period)
-        sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe_ajustee', period)
-        essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee)
-        return essence_ticpe_ajustee
+    definition_period = YEAR
 
     def formula_2009(self, simulation, period):
         sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe_ajustee', period)
@@ -226,13 +215,27 @@ class essence_ticpe_ajustee(YearlyVariable):
         essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + sp_e10_ticpe_ajustee)
         return essence_ticpe_ajustee
 
+    def formula_2007(self, simulation, period):
+        sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe_ajustee', period)
+        sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe_ajustee', period)
+        essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee)
+        return essence_ticpe_ajustee
 
-class sp_e10_ticpe(YearlyVariable):
+    def formula_1990(self, simulation, period):
+        sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe_ajustee', period)
+        sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe_ajustee', period)
+        super_plombe_ticpe_ajustee = simulation.calculate('super_plombe_ticpe_ajustee', period)
+        essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + super_plombe_ticpe_ajustee)
+        return essence_ticpe_ajustee
+
+
+class sp_e10_ticpe(Variable):
     column = FloatCol
     entity = Menage
     label = u"Calcul du montant de la TICPE sur le SP E10"
+    definition_period = YEAR
 
-    def formula(self, simulation, period):
+    def formula_2009(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         try:
             accise_super_e10 = \
@@ -257,13 +260,19 @@ class sp_e10_ticpe(YearlyVariable):
 
         return montant_sp_e10_ticpe
 
+    def formula(self, simulation, period):
+        montant_sp_e10_ticpe = (0 * simulation.calculate('depenses_sp_95', period))
+        return montant_sp_e10_ticpe
 
-class sp_e10_ticpe_ajustee(YearlyVariable):
+
+# Check if there is no need to have period formulas
+class sp_e10_ticpe_ajustee(Variable):
     column = FloatCol
     entity = Menage
     label = u"Calcul du montant de la TICPE sur le SP E10 après réforme"
+    definition_period = YEAR
 
-    def formula(self, simulation, period):
+    def formula_2009(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
         try:
             accise_super_e10 = \
@@ -424,10 +433,16 @@ class sp98_ticpe_ajustee(YearlyVariable):
         return montant_sp98_ticpe_ajuste
 
 
-class super_plombe_ticpe(YearlyVariable):
+class super_plombe_ticpe(Variable):
     column = FloatCol
     entity = Menage
     label = u"Calcul du montant de la TICPE sur le super plombé"
+    definition_period = YEAR
+
+    def formula_2007(self, simulation, period):
+        montant_super_plombe_ticpe = (0 * simulation.calculate('depenses_sp_95', period))
+        return montant_super_plombe_ticpe
+
 
     def formula(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
@@ -447,10 +462,15 @@ class super_plombe_ticpe(YearlyVariable):
         return montant_super_plombe_ticpe
 
 
-class super_plombe_ticpe_ajustee(YearlyVariable):
+class super_plombe_ticpe_ajustee(Variable):
     column = FloatCol
     entity = Menage
     label = u"Calcul du montant de la TICPE sur le super plombé après réforme"
+    definition_period = YEAR
+
+    def formula_2007(self, simulation, period):
+        montant_super_plombe_ticpe = (0 * simulation.calculate('depenses_sp_95', period))
+        return montant_super_plombe_ticpe
 
     def formula(self, simulation, period):
         taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein

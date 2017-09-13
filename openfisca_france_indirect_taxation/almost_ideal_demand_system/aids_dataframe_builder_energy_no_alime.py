@@ -35,12 +35,23 @@ for year in [2000, 2005, 2011]:
     # achat de véhicules, 911, 912, 9122, 913, 9151 : technologies high-tech, 9211, 921, 923: gros équipements loisirs,
     # 941, 960 : voyages séjours et cadeaux, 10i0 : enseignement, 12.. : articles de soin et bijoux
 
-    biens_durables = ['poste_coicop_442', 'poste_coicop_711', 'poste_coicop_712', 'poste_coicop_713',
-        'poste_coicop_911', 'poste_coicop_912', 'poste_coicop_9122', 'poste_coicop_913', 'poste_coicop_9151',
-        'poste_coicop_9211', 'poste_coicop_921', 'poste_coicop_922', 'poste_coicop_923', 'poste_coicop_960',
-        'poste_coicop_941', 'poste_coicop_1010', 'poste_coicop_1015', 'poste_coicop_10152', 'poste_coicop_1020',
-        'poste_coicop_1040', 'poste_coicop_1050', 'poste_coicop_1212', 'poste_coicop_1231', 'poste_coicop_1240',
-        'poste_coicop_12411', 'poste_coicop_1270']
+    #biens_durables = ['poste_coicop_442', 'poste_coicop_711', 'poste_coicop_712', 'poste_coicop_713',
+    #    'poste_coicop_911', 'poste_coicop_912', 'poste_coicop_9122', 'poste_coicop_913', 'poste_coicop_9151',
+    #    'poste_coicop_9211', 'poste_coicop_921', 'poste_coicop_922', 'poste_coicop_923', 'poste_coicop_960',
+    #    'poste_coicop_941', 'poste_coicop_1010', 'poste_coicop_1015', 'poste_coicop_10152', 'poste_coicop_1020',
+    #    'poste_coicop_1040', 'poste_coicop_1050', 'poste_coicop_1212', 'poste_coicop_1231', 'poste_coicop_1240',
+    #    'poste_coicop_12411', 'poste_coicop_1270']
+
+    # Check if there is anything else to include in this list
+    biens_durables = ['poste_04_1_1_1_1', 'poste_04_1_1_2_1', 'poste_04_4_1_2_1', 'poste_04_4_1_3_1',
+        'poste_07_1_1_1_1', 'poste_07_1_2_1_1', 'poste_07_1_2_1_2', 'poste_09_1_1_1_3', 'poste_09_1_1_1_2',
+        'poste_09_1_2_1_1_a', 'poste_09_1_2_1_1_b', 'poste_09_1_3_1_1', 'poste_09_2_1_1_1', 'poste_09_6_1_1_1',
+        'poste_09_7_1', 'poste_09_7_2', 'poste_10_1', 'poste_10_2', 'poste_10_3', 'poste_10_4', 'poste_10_5_1',
+        'poste_10_5_2', 'poste_12_1_3_3_3', 'poste_12_3_1_1_1', 'poste_12_5_1_1_1', 'poste_12_5_2_1_1',
+        'poste_12_5_3_1_1', 'poste_12_5_4_1_1', 'poste_12_5_5_1_1', 'poste_12_7_1_2_1'
+        
+        ]
+
 
     for bien in biens_durables:
         try:
@@ -48,13 +59,13 @@ for year in [2000, 2005, 2011]:
         except:
             aggregates_data_frame = aggregates_data_frame
 
-    energie_logement = ['poste_coicop_451', 'poste_coicop_4511', 'poste_coicop_452', 'poste_coicop_4522',
-        'poste_coicop_453', 'poste_coicop_454', 'poste_coicop_455', 'poste_coicop_4552']
+        energie_logement = ['poste_04_5_1_1_1_a', 'poste_04_5_1_1_1_b', 'poste_04_5_2_1_1', 'poste_04_5_2_2_1',
+        'poste_04_5_3_1_1', 'poste_04_5_4_1_1']
 
-    produits = [column for column in aggregates_data_frame.columns if column[:13] == 'poste_coicop_']
+    produits = [column for column in aggregates_data_frame.columns if column[:6] == 'poste_']
     del column
 
-    aggregates_data_frame['depenses_carbu'] = aggregates_data_frame['poste_coicop_07_2_2_1_1']
+    aggregates_data_frame['depenses_carbu'] = aggregates_data_frame['poste_07_2_2_1_1']
 
     aggregates_data_frame['depenses_logem'] = 0
     for logem in energie_logement:
@@ -85,7 +96,7 @@ for year in [2000, 2005, 2011]:
     df['indice_prix_produit'] = df['bien'] + '_' + df['vag']
 
     # On merge les prix des biens avec les dépenses déjà présentes dans df. Le merge se fait sur 'indice_prix_produit'
-    # Indice prix produit correspond à poste_coicop_xyz_vag
+    # Indice prix produit correspond à poste_xyz_vag
     df_depenses_prix = pd.merge(df, df_indice_prix_produit, on = 'indice_prix_produit')
     # To save some memory, we delete df...
     del df
@@ -93,7 +104,7 @@ for year in [2000, 2005, 2011]:
     # df_depenses_prix contient les dépenses de consommation et les prix associés à ces dépenses.
     # Il faut maintenant construire les catégories de biens que l'on souhaite comparer.
     df_depenses_prix['type_bien'] = 'autre'
-    df_depenses_prix.loc[df_depenses_prix['bien'] == 'poste_coicop_07_2_2_1_1', 'type_bien'] = 'carbu'
+    df_depenses_prix.loc[df_depenses_prix['bien'] == 'poste_07_2_2_1_1', 'type_bien'] = 'carbu'
     for logem in energie_logement:
         df_depenses_prix.loc[df_depenses_prix['bien'] == logem, 'type_bien'] = 'logem'
     del logem, produit

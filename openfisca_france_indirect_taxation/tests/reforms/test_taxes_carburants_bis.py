@@ -19,7 +19,7 @@ def test_rattrapage_diesel_bis():
         )
 
     simulated_variables = ['depenses_essence_ajustees_rattrapage_diesel', 'depenses_essence', 'elas_price_1_1']
-    df = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
+    df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
     df['menages']['depenses_essence_ajustees_rattrapage_diesel'] = df['menages']['depenses_essence_ajustees_rattrapage_diesel'].astype(float)
     df['menages']['check'] = (
         df['menages']['depenses_essence'] * (1 + (1 + df['menages']['elas_price_1_1']) * 10 / 149.9535) -

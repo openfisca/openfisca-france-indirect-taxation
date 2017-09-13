@@ -20,12 +20,21 @@ def get_bdf_aggregates_energy(data_year = None):
     assert data_year is not None
 
     depenses = get_input_data_frame(data_year)
-    depenses['somme_coicop12'] = 0
-    for i in range(1, 13):
-        depenses['somme_coicop12'] += depenses['coicop12_{}'.format(i)]
+    
+    # Construct depenses_tot for total consumption
+    liste_variables = depenses.columns.tolist()
+    postes_agreges = ['poste_{}'.format(index) for index in
+        ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]]
+    depenses['depenses_tot'] = 0
+    for element in liste_variables:
+        for poste in postes_agreges:
+            if element[:8] == poste:
+                depenses['depenses_tot'] += depenses[element]
+
     depenses_energie = pandas.DataFrame()
-    variables_energie = ['poste_coicop_451', 'poste_coicop_452', 'poste_coicop_453', 'poste_coicop_454',
-        'poste_coicop_722', 'rev_disponible', 'loyer_impute', 'rev_disp_loyerimput', 'somme_coicop12']
+    variables_energie = ['poste_04_5_1_1_1_a', 'poste_04_5_1_1_1_b', 'poste_04_5_2_1_1',
+        'poste_04_5_2_2_1', 'poste_04_5_3_1_1', 'poste_04_5_4_1_1', 'poste_07_2_2_1_1',
+        'rev_disponible', 'loyer_impute', 'rev_disp_loyerimput', 'depenses_tot']
     for energie in variables_energie:
         if depenses_energie is None:
             depenses_energie = depenses['{}'.format(energie)]
@@ -33,8 +42,23 @@ def get_bdf_aggregates_energy(data_year = None):
             depenses_energie = concat([depenses_energie, depenses['{}'.format(energie)]], axis = 1)
 
     depenses_energie = concat([depenses_energie, depenses['pondmen']], axis = 1)
+
+    depenses_energie['depenses_electricite'] = depenses_energie['poste_04_5_1_1_1_a'] + depenses_energie['poste_04_5_1_1_1_b']
+    depenses_energie['depenses_gaz'] = depenses_energie['poste_04_5_2_1_1'] + depenses_energie['poste_04_5_2_2_1']
+    depenses_energie.rename(
+        columns = {
+            'poste_04_5_3_1_1': 'depenses_combustibles_liquides',
+            'poste_04_5_4_1_1': 'depenses_combustibles_solides',
+            'poste_07_2_2_1_1': 'depenses_carburants'
+            },
+        inplace = True
+        )
+
+    variables_to_inflate = ['depenses_carburants', 'depenses_combustibles_liquides', 'depenses_combustibles_solides',
+        'depenses_electricite', 'depenses_gaz', 'depenses_tot', 'loyer_impute', 'rev_disponible', 'rev_disp_loyerimput']
+    
     bdf_aggregates_by_energie = pandas.DataFrame()
-    for energie in variables_energie:
+    for energie in variables_to_inflate:
         bdf_aggregates_by_energie.loc[energie, 'bdf_aggregates'] = (
             depenses_energie[energie] * depenses_energie['pondmen']
             ).sum()
@@ -58,15 +82,15 @@ def get_cn_aggregates_energy(target_year = None):
     masses_cn_data_frame.columns = masses_cn_data_frame.iloc[2]
     masses_cn_data_frame = masses_cn_data_frame.loc[:, ['Code', target_year]].copy()
 
-    masses_cn_data_frame['poste'] = 0
-    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.1', 'poste'] = 'poste_coicop_451'
-    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.2', 'poste'] = 'poste_coicop_452'
-    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.3', 'poste'] = 'poste_coicop_453'
-    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.4', 'poste'] = 'poste_coicop_454'
-    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            07.2.2', 'poste'] = 'poste_coicop_722'
+    masses_cn_data_frame['poste'] = '0'
+    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.1', 'poste'] = 'depenses_electricite'
+    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.2', 'poste'] = 'depenses_gaz'
+    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.3', 'poste'] = 'depenses_combustibles_liquides'
+    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.4', 'poste'] = 'depenses_combustibles_solides'
+    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            07.2.2', 'poste'] = 'depenses_carburants'
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == u'01..12+15 (HS)', 'poste'] = \
-        'somme_coicop12'
-    masses_cn_energie = masses_cn_data_frame.query('poste != 0')
+        'depenses_tot'
+    masses_cn_energie = masses_cn_data_frame[masses_cn_data_frame.poste != '0']
     del masses_cn_energie['Code']
 
     masses_cn_energie.rename(
@@ -167,13 +191,13 @@ def get_inflators_by_year_energy(rebuild = False):
         )
     if rebuild is not False:
         inflators_by_year = dict()
-        for target_year in range(2000, 2015):
+        for target_year in range(2011, 2015): # To do : range(2000, 2015) -> solve the issue with build_survey_data
             inflators = get_inflators_energy(target_year)
             inflators_by_year[target_year] = inflators
 
         writer_inflators = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation',
             'assets', 'inflateurs', 'inflators_by_year_wip.csv'), 'wb'))
-        for year in range(2000, 2015):
+        for year in range(2011, 2015): # To do : range(2000, 2015) -> solve the issue with build_survey_data
             for key, value in inflators_by_year[year].items():
                 writer_inflators.writerow([key, value, year])
 

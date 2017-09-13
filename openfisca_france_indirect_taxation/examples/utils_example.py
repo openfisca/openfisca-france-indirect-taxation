@@ -211,7 +211,7 @@ def percent_formatter(x, pos = 0):
 def save_dataframe_to_graph(dataframe, file_name):
     # return dataframe.to_csv('C:/Users/thomas.douenne/Documents/data/Stats_rapport/' + file_name, sep = ',')
     return dataframe.to_csv(
-        u'C:/Users/thomas.douenne/Desktop/Dossier/Mémoire/Documents propres/Graphs/' + file_name, sep = ';'
+        u'U:/Cours/These/Projets/Papier_n1/Graphs/' + file_name, sep = ';'
         )
 #    assets_directory = os.path.join(
 #        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location

@@ -42,7 +42,7 @@ survey_scenario = SurveyScenario.create(
     data_year = data_year
     )
 
-df_by_entity = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
+df_by_entity = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
 menages = df_by_entity['menages']
 
 menages['rev_disp_loyerimput_2'] = menages['rev_disp_loyerimput'] ** 2

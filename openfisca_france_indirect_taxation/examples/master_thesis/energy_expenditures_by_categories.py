@@ -18,24 +18,24 @@ year = 2014
 data_year = 2011
 elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-del inflation_kwargs['inflator_by_variable']['somme_coicop12']
+#del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
-simulated_variables = ['depenses_energies', 'depenses_energies_logement', 'poste_coicop_722']
+simulated_variables = ['depenses_carburants', 'depenses_energies_totales', 'depenses_energies_logement'] #['depenses_energies', 'depenses_energies_logement', 'poste_coicop_722']
 
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
-    inflation_kwargs = inflation_kwargs,
-    reform_key = 'taxe_carbone',
+    #inflation_kwargs = inflation_kwargs,
+    #reform_key = 'taxe_carbone',
     year = year,
     data_year = data_year
     )
-for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
+for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate_agrege']
     df = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
-    df.rename(columns = {'depenses_energies': 'Total energy expenditures',
+    df.rename(columns = {'depenses_energies_totales': 'Total energy expenditures',
         'depenses_energies_logement': 'Housing energy expenditures',
-        'poste_coicop_722': 'Fuel expenditures'},
+        'depenses_carburants': 'Fuel expenditures'},
         inplace = True)
 
     # Réalisation de graphiques
     graph_builder_line(df)
-    save_dataframe_to_graph(df, 'Expenditures/energy_expenditures_by_{}.csv'.format(category))
+    #save_dataframe_to_graph(df, 'Expenditures/energy_expenditures_by_{}.csv'.format(category))

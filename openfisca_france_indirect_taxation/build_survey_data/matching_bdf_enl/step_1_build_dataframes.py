@@ -42,13 +42,15 @@ def load_data_bdf_enl():
     
 
     # Create variable for total spending
-    produits = [column for column in input_bdf.columns if column[:13] == 'poste_coicop_']
-    del column
-
+    liste_variables = input_bdf.columns.tolist()
+    postes_agreges = ['poste_{}'.format(index) for index in
+        ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]
+        ]
     input_bdf['depenses_tot'] = 0
-    for produit in produits:
-        if produit[13:15] != '99' and produit[13:15] != '13':
-            input_bdf['depenses_tot'] += input_bdf[produit]
+    for element in liste_variables:
+        for poste in postes_agreges:
+            if element[:8] == poste:
+                input_bdf['depenses_tot'] += input_bdf[element]
 
 
     # Set variables :
@@ -84,14 +86,14 @@ def load_data_bdf_enl():
         'nenfants',
         'ocde10', # nb unités de conso
         'pondmen',
-        'poste_coicop_451', # dépenses énergies logement
-        'poste_coicop_4511',
-        'poste_coicop_452',
-        'poste_coicop_4522',
-        'poste_coicop_453',
-        'poste_coicop_454',
-        'poste_coicop_455',
-        'poste_coicop_4552',
+        'poste_04_5_1_1_1_a',
+        'poste_04_5_1_1_1_b',
+        'poste_04_5_2_1_1',
+        'poste_04_5_2_2_1',
+        'poste_04_5_3_1_1',
+        'poste_04_5_4_1_1',
+        'poste_04_5_5_1_1',
+        #'poste_07_2_2_1_1',
         'revtot', # revenu total
         'situapr', # situation pro
         'situacj',
@@ -113,6 +115,8 @@ def load_data_bdf_enl():
         'coml13',
         'coml2',
         'coml3',
+        'coml41',
+        'coml42',
         'dom',
         'enfhod',
         'gchauf_1', #raisons du froid dans le logement
@@ -166,6 +170,7 @@ def load_data_bdf_enl():
     indiv_enl_keep = input_enl_indiv[variables_indiv_enl]
     menage_enl_keep = input_enl[variables_menages_enl]
     conso_bdf_keep = input_bdf[variables_menages_bdf]
+    #conso_bdf_keep = conso_bdf_keep.query('zeat != 0')
     del input_enl_indiv, input_enl, input_bdf
     
     indiv_enl_keep = indiv_enl_keep.query('igreflog == 1')

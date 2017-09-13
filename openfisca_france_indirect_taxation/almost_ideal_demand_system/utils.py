@@ -46,8 +46,8 @@ def add_vag_dummy(dataframe):
 
 
 def electricite_only(dataframe):
-    energie_logement_non_elec = ['poste_coicop_452', 'poste_coicop_4522', 'poste_coicop_453', 'poste_coicop_454',
-        'poste_coicop_455', 'poste_coicop_4552']
+    energie_logement_non_elec = ['poste_04_5_2_1_1', 'poste_04_5_2_2_1', 'poste_04_5_3_1_1', 'poste_04_5_4_1_1']
+
     dataframe['sum'] = 0
     for energie in energie_logement_non_elec:
         try:
@@ -154,10 +154,10 @@ def price_energy_from_contracts(dataframe, year):
     prix_contrats.loc[prix_contrats['depenses_electricite_prix_unitaire'] == 0, 'depenses_electricite_prix_unitaire'] = \
         moyenne_prix_electricite
     dataframe = pd.merge(dataframe, prix_contrats, on = 'ident_men')
-    dataframe.loc[dataframe['bien'] == 'poste_coicop_452', 'prix'] = (
+    dataframe.loc[dataframe['bien'] == 'poste_04_5_2_1_1', 'prix'] = (
         dataframe['prix'] * dataframe['depenses_gaz_prix_unitaire'] / moyenne_prix_gaz
         )
-    dataframe.loc[dataframe['bien'] == 'poste_coicop_451', 'prix'] = (
+    dataframe.loc[dataframe['bien'] == 'poste_04_5_1_1_1_b', 'prix'] = (
         dataframe['prix'] * dataframe['depenses_electricite_prix_unitaire'] / moyenne_prix_electricite
         )
 

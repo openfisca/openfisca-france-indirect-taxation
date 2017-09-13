@@ -18,11 +18,11 @@ def homogenize_variables_definition_bdf_enl():
     
     # Vérification que les données ENL ne contiennent pas les DOM
     assert (data_enl['dom'] == 2).any()
-    del data_enl['dom']
-    
+    del data_enl['dom'] 
+    assert (data_bdf['zeat'] != 0).any()
     
     # Aides au logement : séparation propriétaire/locataire dans BdF -> création d'une unique variable
-    check = data_bdf.query('aidlog1 != 0')
+    check = data_bdf.query('aidlog1 != 0').copy()
     assert (check['aidlog2'] == 0).any()
     
     data_bdf['aba'] = data_bdf['aidlog1'] + data_bdf['aidlog2']
@@ -47,26 +47,27 @@ def homogenize_variables_definition_bdf_enl():
     
     # Changement nomenclature variable année de construction du batiment :
     data_enl['ancons'] = 0
-    data_enl.ancons.loc[data_enl.iaat < 4] = 1
-    data_enl.ancons.loc[data_enl.iaat == 4] = 2
-    data_enl.ancons.loc[data_enl.iaat == 5] = 3
-    data_enl.ancons.loc[data_enl.iaat == 6] = 4
-    data_enl.ancons.loc[data_enl.iaat == 7] = 5
-    data_enl.ancons.loc[data_enl.iaat == 8] = 6
-    data_enl.ancons.loc[data_enl.iaat == 9] = 7
+    data_enl.loc[data_enl.iaat < 4, 'ancons'] = 1
+    data_enl.loc[data_enl.iaat == 4, 'ancons'] = 2
+    data_enl.loc[data_enl.iaat == 5, 'ancons'] = 3
+    data_enl.loc[data_enl.iaat == 6, 'ancons'] = 4
+    data_enl.loc[data_enl.iaat == 7, 'ancons'] = 5
+    data_enl.loc[data_enl.iaat == 8, 'ancons'] = 6
+    data_enl.loc[data_enl.iaat == 9, 'ancons'] = 7
+
     # Pour après 1998 on affecte aléatoirement 8 ou 9 (99-03 ou 03-et après)
-    data_enl.ancons.loc[data_enl.iaat == 10] = np.random.choice(np.array([8, 9]))
+    data_enl.loc[data_enl.iaat == 10, 'ancons'] = np.random.choice(np.array([8, 9]))
     
     
     # dip14pr - dans ENL les sans diplômes sont notés 0 au lieu de 71
-    data_enl.ndip14.loc[data_enl.ndip14 == 0] = 71
+    data_enl.loc[data_enl.ndip14 == 0, 'ndip14'] = 71
     
     
     # Situapr et Situacj vs Msitua
     data_enl['situapr'] = data_enl['msitua'].copy()
-    data_enl.situapr.loc[data_enl.msitua == 8] = 7
+    data_enl.loc[data_enl.msitua == 8, 'situapr'] = 7
     data_enl['situacj'] = data_enl['msituac'].copy()
-    data_enl.situacj.loc[data_enl.msituac == 8] = 7
+    data_enl.loc[data_enl.msituac == 8, 'situacj'] = 7
     
     del data_enl['msitua'], data_enl['msituac']
     
@@ -80,6 +81,20 @@ def homogenize_variables_definition_bdf_enl():
     # Nbh1
     data_bdf['nbh1'] = data_bdf['nbh1'].fillna(0)
     
+    # Gestion des dépenses d'énergies
+    #data_bdf['poste_04_5_1_1_1'] = (data_bdf['poste_04_5_1_1_1_a'] + data_bdf['poste_04_5_1_1_1_b']).copy()
+    data_bdf['poste_04_5_1_1_1'] = (data_bdf['poste_04_5_1_1_1_b']).copy()
+
+    #del data_bdf['poste_04_5_1_1_1_a'], data_bdf['poste_04_5_1_1_1_b']
+
+    #data_enl['poste_04_5_1_1_1'] = (data_enl['coml11'] + data_enl['coml13']).copy()
+    data_enl['poste_04_5_1_1_1'] = (data_enl['coml11']).copy()
+
+    #del data_enl['coml11'], data_enl['coml13']
+
+    data_enl['poste_04_5_4_1_1'] = (data_enl['coml41'] + data_enl['coml42']).copy()
+    del data_enl['coml41'], data_enl['coml42']
+    
     # zeat : dans BdF certains ménages ont 6 et aucun 9, alors que 6 n'existe pas
     data_bdf.zeat.loc[data_bdf.zeat == 6] = 9
 
@@ -89,9 +104,9 @@ def homogenize_variables_definition_bdf_enl():
             'cataeu2010': 'cataeu',
             'cceml': 'mfac_eau1_d',
             'coml': 'depenses_energies',
-            'coml11': 'poste_coicop_451',
-            'coml12': 'poste_coicop_452',
-            'coml2': 'poste_coicop_453',
+            'coml12': 'poste_04_5_2_1_1',
+            'coml2': 'poste_04_5_3_1_1',
+            'coml3': 'poste_04_5_2_2_1',
             'enfhod': 'nbh1',
             'lchauf': 'mchof_d',
             'hnph1': 'nbphab',
@@ -125,13 +140,14 @@ def create_new_variables():
 
         # Dummy variable pour la consommation de fioul
         data['fioul'] = 0
-        data.loc[data['poste_coicop_453'] > 0, 'fioul'] = 1
+        data.loc[data['poste_04_5_3_1_1'] > 0, 'fioul'] = 1
 
         data['gaz'] = 0
-        data.loc[data['poste_coicop_452'] > 0, 'gaz'] = 1
+        data.loc[data['poste_04_5_2_1_1'] > 0, 'gaz'] = 1
+        data.loc[data['poste_04_5_2_2_1'] > 0, 'gaz'] = 1
 
         data['electricite'] = 0
-        data.loc[data['poste_coicop_451'] > 0, 'electricite'] = 1
+        data.loc[data['poste_04_5_1_1_1'] > 0, 'electricite'] = 1
 
         # Création de dummy variables pour la commune de résidence
         data['rural'] = 0
@@ -197,9 +213,9 @@ def create_new_variables():
 
 
         # Création d'une variable pour la part des dépenses totales en énergies
-        energie_logement = ['poste_coicop_451', 'poste_coicop_4511', 'poste_coicop_452',
-        'poste_coicop_4522', 'poste_coicop_453', 'poste_coicop_454', 'poste_coicop_455',
-        'poste_coicop_4552']
+        # On néglige l'énergie thermique de BdF car les dépenses sont absentes de l'ENL
+        energie_logement = ['poste_04_5_1_1_1', 'poste_04_5_2_1_1', 'poste_04_5_2_2_1',
+        'poste_04_5_3_1_1', 'poste_04_5_4_1_1']
         
         if i == 1:
             data['depenses_energies'] = 0
@@ -207,12 +223,12 @@ def create_new_variables():
                 data['depenses_energies'] += data[energie]
             data['part_energies_depenses_tot'] = (
                 data['depenses_energies'] / data['depenses_tot']
-                )
+                ).copy()
 
         data = data.query('revtot > 0')
         data['part_energies_revtot'] = (
             data['depenses_energies'] / data['revtot']
-            )
+            ).copy()
         # Suppression des outliers
         data = data.query('part_energies_revtot < 0.5')
 
@@ -227,7 +243,7 @@ def create_new_variables():
 def create_niveau_vie_quantiles():
     for i in [0,1]:
         data = create_new_variables()[i]
-        data['niveau_vie'] = data['revtot'] / data['ocde10']
+        data['niveau_vie'] = (data['revtot'] / data['ocde10']).copy()
 
         data = data.sort_values(by = ['niveau_vie'])
         data['sum_pondmen'] = data['pondmen'].cumsum()

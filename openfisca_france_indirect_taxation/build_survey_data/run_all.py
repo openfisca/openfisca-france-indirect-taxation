@@ -113,10 +113,10 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
     # TODO: Homogénéiser: soit faire en sorte que ident_men existe pour toutes les années
     # soit qu'elle soit en index pour toutes
 
-    # On ne garde que les ménages métropolitaines
+    # On ne garde que les ménages métropolitains
     if year_data == 2011:
-        # data_frame = data_frame.query('zeat != 0').copy()
-        pass
+        data_frame = data_frame.query('zeat != 0').copy()
+        #pass
 
     try:
         data_frame.reset_index(inplace = True)

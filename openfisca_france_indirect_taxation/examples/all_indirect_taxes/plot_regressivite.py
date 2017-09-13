@@ -25,21 +25,21 @@ if __name__ == '__main__':
         'cigarette_droit_d_accise',
         'cigares_droit_d_accise',
         'tabac_a_rouler_droit_d_accise',
-        'assurance_transport_taxe',
-        'assurance_sante_taxe',
-        'autres_assurances_taxe',
+        #'assurance_transport_taxe',
+        #'assurance_sante_taxe',
+        #'autres_assurances_taxe',
         'revtot',
         'rev_disponible',
-        'somme_coicop12',
-        'taxes_indirectes_total'
+        #'somme_coicop12',
+        #'taxes_indirectes_total'
         ]
-    for year in [2000, 2005, 2011]:
+    for year in [2011]: #[2000, 2005, 2011]
         survey_scenario = SurveyScenario.create(year = year)
         pivot_table = pandas.DataFrame()
         for values in simulated_variables:
             pivot_table = pandas.concat([
                 pivot_table,
-                survey_scenario.compute_pivot_table(values = [values], columns = ['niveau_vie_decile'])
+                survey_scenario.compute_pivot_table(values = [values], columns = ['niveau_vie_decile'], period = year)
                 ])
         taxe_indirectes = pivot_table.T
 
@@ -50,11 +50,11 @@ if __name__ == '__main__':
             taxe_indirectes['biere_droit_d_accise'] +
             taxe_indirectes['alcools_forts_droit_d_accise']
             ).copy()
-        taxe_indirectes[u'Taxes assurances'] = (
-            taxe_indirectes['assurance_sante_taxe'] +
-            taxe_indirectes['assurance_transport_taxe'] +
-            taxe_indirectes['autres_assurances_taxe']
-            ).copy()
+        #taxe_indirectes[u'Taxes assurances'] = (
+        #    taxe_indirectes['assurance_sante_taxe'] +
+        #    taxe_indirectes['assurance_transport_taxe'] +
+        #    taxe_indirectes['autres_assurances_taxe']
+        #    ).copy()
         taxe_indirectes[u'Taxes tabacs'] = (
             taxe_indirectes['cigarette_droit_d_accise'] +
             taxe_indirectes['cigares_droit_d_accise'] +
@@ -62,11 +62,10 @@ if __name__ == '__main__':
             ).copy()
 
         taxe_indirectes = taxe_indirectes.rename(columns = {'revtot': u'revenu total',
-            'rev_disponible': u'revenu disponible', 'somme_coicop12': u'depenses totales',
-            'taxes_indirectes_total': u'toutes les taxes indirectes'})
-        for revenu in [u'revenu total', u'revenu disponible', u'depenses totales', u'toutes les taxes indirectes']:
+            'rev_disponible': u'revenu disponible'}) #, 'taxes_indirectes_total': u'toutes les taxes indirectes'
+        for revenu in [u'revenu total']: #[u'revenu total', u'revenu disponible', u'depenses totales', u'toutes les taxes indirectes']
             list_part_taxes = []
-            for taxe in ['TVA', 'TICPE', u'Taxes alcools', u'Taxes assurances', u'Taxes tabacs']:
+            for taxe in ['TVA', 'TICPE', u'Taxes alcools', u'Taxes tabacs']: #u'Taxes assurances', 
                 taxe_indirectes[u'part ' + taxe] = (
                     taxe_indirectes[taxe] / taxe_indirectes[revenu]
                     )

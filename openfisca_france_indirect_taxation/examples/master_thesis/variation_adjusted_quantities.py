@@ -44,9 +44,9 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         data_year = data_year
         )
 
-    indiv_df_reform = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables_reform)
-    indiv_df_reference = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables_reference,
-        reference = True)
+    indiv_df_reform = survey_scenario.create_data_frame_by_entity(simulated_variables_reform, period = year)
+    indiv_df_reference = survey_scenario.create_data_frame_by_entity(simulated_variables_reference,
+        reference = True, period = year)
 
     menages_reform = indiv_df_reform['menages']
     menages_reference = indiv_df_reference['menages']

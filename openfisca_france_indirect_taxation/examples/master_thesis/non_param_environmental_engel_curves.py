@@ -14,20 +14,20 @@ simulated_variables = [
     'emissions_CO2_energies'
     ]
 
-year = 2014
+year = 2011
 data_year = 2011
-inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-del inflation_kwargs['inflator_by_variable']['somme_coicop12']
+#inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
+#del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
 
 survey_scenario = SurveyScenario.create(
-    inflation_kwargs = inflation_kwargs,
+    #inflation_kwargs = inflation_kwargs,
     year = year,
     data_year = data_year
     )
 
-df_by_entity = survey_scenario.create_data_frame_by_entity_key_plural(simulated_variables)
-menages = df_by_entity['menages']
+df_by_entity = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
+menages = df_by_entity['menage']
 
 menages = menages.query('rev_disp_loyerimput > 1000')
 

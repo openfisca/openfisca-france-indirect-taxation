@@ -22,7 +22,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     assert temporary_store is not None
     assert year is not None
 
-    year = 2011
+    #year = 2011
     bdf_survey_collection = SurveyCollection.load(
         collection = 'budget_des_familles', config_files_directory = config_files_directory
         )
@@ -80,7 +80,6 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
         conso.rename(
             columns = {
                 'ident': 'ident_men',
-                'pondmen': 'pondmen',
                 },
             inplace = True,
             )

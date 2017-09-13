@@ -15,7 +15,7 @@ from openfisca_france_indirect_taxation.scripts.build_coicop_legislation import 
 
 
 def coicop_from_aliss(year = 2011):
-    assert year == 2011
+    #assert year == 2011
     aliss_survey_collection = SurveyCollection.load(
         collection = 'aliss', config_files_directory = config_files_directory
         )
@@ -40,7 +40,7 @@ def coicop_from_aliss(year = 2011):
 
 
 def guess_coicop_from_bdf(year = 2011):
-    assert year == 2011
+    #assert year == 2011
     from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
     matrice_passage_data_frame, _ = get_transfert_data_frames(year)
     matrice_passage_data_frame.rename(

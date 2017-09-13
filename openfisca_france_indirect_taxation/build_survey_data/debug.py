@@ -1,36 +1,40 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jul 03 13:23:15 2017
 
-@author: t.douenne
-"""
+from __future__ import division
 
-
-from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_2_homogenize_variables import \
-    homogenize_variables_definition_bdf_enl
+# Import de modules spécifiques à Openfisca
+from openfisca_france_indirect_taxation.examples.utils_example import dataframe_by_group
+from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
-data = homogenize_variables_definition_bdf_enl()    
-data_enl = data[0]
-data_bdf = data[1]
+simulated_variables = [
+    'strate_agrege',
+    'strate',
+    ]
+
+year = 2011
+data_year = 2011
+survey_scenario = SurveyScenario.create(year = year, data_year = data_year)
+
+for category in ['niveau_vie_decile']:
+    df = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
+    indiv_df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
 
 
-for i in range(0,9):
-    data_tuu = data_bdf.query('tuu == {}'.format(i))
-    print i, len(data_tuu)
-    
 
-for i in range(0,9):
-    print i, len(data_bdf.query('htl == {}'.format(i)))
-    
-    
-    
-    
-    
-    
-energie_logement = ['poste_coicop_451', 'poste_coicop_4511', 'poste_coicop_452', 'poste_coicop_4522',
-'poste_coicop_453', 'poste_coicop_454', 'poste_coicop_455', 'poste_coicop_4552']
 
-for energie in energie_logement:
-    data['depenses_energies'] = data['depenses_energies'].copy() + data[energie].copy()
 
+from openfisca_france_indirect_taxation.utils import get_input_data_frame
+df = get_input_data_frame(year)
+print df['strate']
+
+df_postes = []
+df_columns = df.columns.tolist()
+for element in df_columns:
+    if element[:5] == 'poste':
+        df_postes.append(element)
+
+
+
+
+liste = survey_scenario.tax_benefit_system.column_by_name.keys()

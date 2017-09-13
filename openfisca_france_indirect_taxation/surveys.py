@@ -81,8 +81,8 @@ class SurveyScenario(AbstractSurveyScenario):
             survey_scenario.calibrate(**calibration_kwargs)
 
         if inflation_kwargs:
-            # print 'inflating using {}'.format(inflation_kwargs)
-            survey_scenario.inflate(**inflation_kwargs)
+            log.info('inflating for year = {} using {}'.format(year, inflation_kwargs))
+            survey_scenario.inflate(period = year, **inflation_kwargs)
 
         assert survey_scenario.simulation is not None
         assert survey_scenario.tax_benefit_system is not None

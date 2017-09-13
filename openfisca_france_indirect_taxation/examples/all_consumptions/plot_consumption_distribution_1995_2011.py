@@ -34,14 +34,14 @@ if __name__ == '__main__':
         # inflation_kwargs = inflation_kwargs,
         year = year,
         )
-    poste_agrege_01 = survey_scenario.simulation.calculate('poste_agrege_01')
-    elasticite_1 = survey_scenario.simulation.calculate('elas_exp_1')
+    poste_agrege_01 = survey_scenario.simulation.calculate('poste_agrege_01', period = year)
+    elasticite_1 = survey_scenario.simulation.calculate('elas_exp_1', period = year)
 
     pivot_table = pandas.DataFrame()
     for values in simulated_variables:
         pivot_table = pandas.concat([
             pivot_table,
-            survey_scenario.compute_pivot_table(values = [values], columns = ['niveau_vie_decile'])
+            survey_scenario.compute_pivot_table(values = [values], columns = ['niveau_vie_decile'], period = year)
             ])
     df = pivot_table.T
     df['depenses_tot'] = df[['poste_agrege_{}'.format(suffix) for suffix in suffixes]].sum(axis = 1)
