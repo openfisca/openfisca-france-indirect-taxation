@@ -10,8 +10,6 @@ import pkg_resources
 
 
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
-from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
-    df_indice_prix_produit
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import \
     add_area_dummy, add_stalog_dummy, add_vag_dummy, electricite_only, indices_prix_carbus, price_carbu_pond, \
     price_carbu_from_quantities, price_energy_from_contracts
@@ -21,13 +19,24 @@ assets_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
     )
 
+df_indice_prix_produit = pd.read_csv(
+    os.path.join(
+        assets_directory,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'prix',
+        'df_indice_prix_produit.csv'
+        ), sep =';', decimal = ','
+    )
+df_indice_prix_produit.set_index('Unnamed: 0', inplace = True)
+
 # On importe la dataframe qui recense les indices de prix. Notre objectif est de construire une nouvelle dataframe avec
 # le reste des informations, i.e. la consommation et autres variables pertinentes concernant les ménages.
 
 # On commence par cinstruire une dataframe appelée data_conso rassemblant les informations sur les dépenses des ménages.
 data_frame_for_reg = None
 data_frame_all_years = pd.DataFrame()
-for year in [2000, 2005, 2011]:
+for year in [2000, 2005, 2011]: #
     aggregates_data_frame = get_input_data_frame(year)
 
     # Pour estimer QAIDS, on se concentre sur les biens non-durables.
@@ -76,7 +85,7 @@ for year in [2000, 2005, 2011]:
 
     aggregates_data_frame['depenses_tot'] = 0
     for produit in produits:
-        if produit[13:15] != '99' and produit[13:15] != '13':
+        if produit[6:8] != '99' and produit[6:8] != '13':
             aggregates_data_frame['depenses_tot'] += aggregates_data_frame[produit]
 
     aggregates_data_frame['depenses_autre'] = (
@@ -97,6 +106,7 @@ for year in [2000, 2005, 2011]:
 
     # On merge les prix des biens avec les dépenses déjà présentes dans df. Le merge se fait sur 'indice_prix_produit'
     # Indice prix produit correspond à poste_xyz_vag
+    # Vérifier pourquoi on perd des données dans ce merge
     df_depenses_prix = pd.merge(df, df_indice_prix_produit, on = 'indice_prix_produit')
     # To save some memory, we delete df...
     del df
@@ -174,8 +184,8 @@ for year in [2000, 2005, 2011]:
     # On récupère les informations importantes sur les ménages, dont les variables démographiques
     df_info_menage = aggregates_data_frame[['agepr', 'depenses_autre', 'depenses_carbu',
         'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'ident_men', 'nenfants', 'nactifs', 'ocde10',
-        'revtot', 'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
-        'veh_essence']].copy()
+        'revtot', 'situacj', 'situapr', 'stalog', 'typmen', 'vag', 'veh_diesel',
+        'veh_essence']].copy() #'strate', 
     df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
     df_info_menage['part_autre'] = df_info_menage['depenses_autre'] / df_info_menage['depenses_tot']
     df_info_menage['part_carbu'] = df_info_menage['depenses_carbu'] / df_info_menage['depenses_tot']
@@ -187,10 +197,12 @@ for year in [2000, 2005, 2011]:
     del df_info_menage, df_prix_to_merge
 
     # Pour ceux qui ne consomment pas de carburants, on leur associe le prix correspondant à leur vague d'enquête
-    price_carbu = df_indice_prix_produit[df_indice_prix_produit['indice_prix_produit'].str[13:16] == '722'].copy()
+    price_carbu = df_indice_prix_produit[df_indice_prix_produit['indice_prix_produit'].str[6:16] == '07_2_2_1_1'].copy()
     price_carbu['vag'] = price_carbu['indice_prix_produit'].str[17:].astype(int)
     price_carbu = price_carbu[['vag', 'prix']]
     price_carbu['prix'] = price_carbu['prix'].astype(float)
+
+
     dataframe = pd.merge(dataframe, price_carbu, on = 'vag')
     del price_carbu
     dataframe.loc[dataframe['prix_carbu'] == 0, 'prix_carbu'] = dataframe['prix']
@@ -199,7 +211,7 @@ for year in [2000, 2005, 2011]:
 
     dataframe = dataframe[['ident_men', 'part_carbu', 'part_logem', 'part_autre', 'prix_carbu', 'prix_logem',
         'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'elect_only', 'nactifs', 'nenfants',
-        'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel', 'veh_essence']]
+        'situacj', 'situapr', 'stalog', 'typmen', 'vag', 'veh_diesel', 'veh_essence']] #'strate', 
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la
