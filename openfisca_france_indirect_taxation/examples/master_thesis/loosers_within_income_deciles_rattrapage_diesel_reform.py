@@ -56,7 +56,7 @@ unite_conso = (menages['ocde10'] * menages['pondmen']).sum()
 contribution = (menages['difference_contribution_energie_{}'.format(reforme)] * menages['pondmen']).sum()
 contribution_unite_conso = contribution / unite_conso
 
-#for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
+#for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
 menages[u'Cost_after_green_cheques'] = (
     ((contribution_unite_conso) * menages['ocde10'] - menages['difference_contribution_energie_{}'.format(reforme)])
     )

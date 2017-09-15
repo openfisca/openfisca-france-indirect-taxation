@@ -48,7 +48,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         ).sum()
     contribution_unite_conso = contribution / unite_conso
 
-    # for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
+    # for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
     menages_reform[u'Cost_after_green_cheques'] = (
         contribution_unite_conso * menages_reform['ocde10'] -
         (menages_reform['total_taxes_energies'] - menages_reference['total_taxes_energies'])

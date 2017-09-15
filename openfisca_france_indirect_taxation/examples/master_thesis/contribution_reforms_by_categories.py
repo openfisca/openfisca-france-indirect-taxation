@@ -34,7 +34,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         data_year = data_year
         )
 
-    for category in ['niveau_vie_decile', 'age_group_pr', 'strate_agrege']:
+    for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
         df_reform = \
             dataframe_by_group(survey_scenario, category, simulated_variables, reference = False)
         df_reference = \

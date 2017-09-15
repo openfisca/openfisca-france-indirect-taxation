@@ -17,7 +17,7 @@ simulated_variables = [
     'poste_coicop_722',
     'rev_disp_loyerimput',
     'ocde10',
-    'strate_agrege',
+    'strate',
     'vag',
     'situacj',
     'situapr',
@@ -52,16 +52,16 @@ for i in range(23, 29):
 
 for i in range(1, 4):
     menages['strate_{}'.format(i)] = 0
-    menages.loc[menages['strate_agrege'] == i, 'strate_{}'.format(i)] = 1
+    menages.loc[menages['strate'] == i, 'strate_{}'.format(i)] = 1
 
 reg_transports = smf.ols(formula = 'poste_coicop_722 ~ \
-    rev_disp_loyerimput + rev_disp_loyerimput_2 + ocde10 + strate_1 + strate_3 + age_group_pr + \
+    rev_disp_loyerimput + rev_disp_loyerimput_2 + ocde10 + strate_0 + strate_1 + strate_3 + strate_4 + age_group_pr + \
     age_group_pr_2 + alone + occupe_both + gaz + fioul + vag_23 + vag_24 + vag_25 + vag_26 + vag_27',
     data = menages).fit()
 print reg_transports.summary()
 
 reg_housing = smf.ols(formula = 'depenses_energies_logement ~ \
-    rev_disp_loyerimput + rev_disp_loyerimput_2 + ocde10 + strate_1 + strate_3 + age_group_pr + \
+    rev_disp_loyerimput + rev_disp_loyerimput_2 + ocde10 + strate_0 + strate_1 + strate_3 + strate_4 + age_group_pr + \
     age_group_pr_2 + alone + occupe_both + gaz + fioul + vag_23 + vag_24 + vag_25 + vag_26 + vag_27',
     data = menages).fit()
 print reg_housing.summary()

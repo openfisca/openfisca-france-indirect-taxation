@@ -71,12 +71,6 @@ class cataeu(YearlyVariable):
     label = u"catégorie de la commune de résidence 2011"
 
 
-class strate_agrege(YearlyVariable):
-    column = FloatCol
-    entity = Menage
-    label = u"catégorie de la commune de résidence, construction d'une nomenclature agrégée"
-
-
 class tuu(YearlyVariable):
     column = FloatCol
     entity = Menage
