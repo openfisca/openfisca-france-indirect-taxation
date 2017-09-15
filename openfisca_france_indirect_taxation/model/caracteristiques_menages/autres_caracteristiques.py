@@ -77,6 +77,12 @@ class strate_agrege(YearlyVariable):
     label = u"catégorie de la commune de résidence, construction d'une nomenclature agrégée"
 
 
+class tuu(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"unité urbaine"
+
+
 class typmen(YearlyVariable):
     column = FloatCol
     entity = Menage

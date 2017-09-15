@@ -264,11 +264,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.dip14pr.loc[menage.diespr == 48] = 12
         menage.dip14pr.loc[menage.diespr == 47] = 10
 
-        menage['strate_agrege'] = 0
-        menage.loc[menage.strate.isin([2, 3, 4]), 'strate_agrege'] = 1
-        menage.loc[menage.strate == 1, 'strate_agrege'] = 2
-        menage.loc[menage.strate == 0, 'strate_agrege'] = 3
-
         menage.set_index('ident_men', inplace = True)
 
         # Recodage des catégories zeat
@@ -362,11 +357,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.zeat.loc[menage.zeat == 7] = 6
         menage.zeat.loc[menage.zeat == 8] = 7
         menage.zeat.loc[menage.zeat == 9] = 8
-
-        menage['strate_agrege'] = 0
-        menage.loc[menage.strate.isin([2, 3, 4]), 'strate_agrege'] = 1
-        menage.loc[menage.strate == 1, 'strate_agrege'] = 2
-        menage.loc[menage.strate == 0, 'strate_agrege'] = 3
 
         assert menage.zeat.isin(range(1, 9)).all()
 
@@ -647,10 +637,12 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         # Pour Aliss
         menage['nadultes'] = menage.npers - menage.nenfants
         menage['ocde10_old'] = 1 + 0.7 * numpy.maximum(0, menage['nadultes'] - 1) + 0.5 * menage['nenfants']
-        menage['strate_agrege'] = 0
-        menage.loc[menage.cataeu == 111, 'strate_agrege'] = 1
-        menage.loc[menage.cataeu.isin([120, 211, 221]), 'strate_agrege'] = 2
-        menage.loc[menage.cataeu.isin([112, 212, 222, 300, 400]), 'strate_agrege'] = 3
+
+        menage['strate'] = 0
+        menage.loc[menage.tuu.isin([1, 2, 3]), 'strate'] = 1
+        menage.loc[menage.tuu.isin([4, 5]), 'strate'] = 2 
+        menage.loc[menage.tuu.isin([6, 7]), 'strate'] = 3
+        menage.loc[menage.tuu == 8, 'strate'] = 4
 
         # Ajout des variables contenues dans la table depmen :
         variables_depmen = [

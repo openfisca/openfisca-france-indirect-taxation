@@ -58,7 +58,6 @@ for year in [2000, 2005, 2011]: #
         'poste_09_7_1', 'poste_09_7_2', 'poste_10_1', 'poste_10_2', 'poste_10_3', 'poste_10_4', 'poste_10_5_1',
         'poste_10_5_2', 'poste_12_1_3_3_3', 'poste_12_3_1_1_1', 'poste_12_5_1_1_1', 'poste_12_5_2_1_1',
         'poste_12_5_3_1_1', 'poste_12_5_4_1_1', 'poste_12_5_5_1_1', 'poste_12_7_1_2_1'
-        
         ]
 
 
@@ -184,8 +183,8 @@ for year in [2000, 2005, 2011]: #
     # On récupère les informations importantes sur les ménages, dont les variables démographiques
     df_info_menage = aggregates_data_frame[['agepr', 'depenses_autre', 'depenses_carbu',
         'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'ident_men', 'nenfants', 'nactifs', 'ocde10',
-        'revtot', 'situacj', 'situapr', 'stalog', 'typmen', 'vag', 'veh_diesel',
-        'veh_essence']].copy() #'strate', 
+        'revtot', 'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
+        'veh_essence']].copy()
     df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
     df_info_menage['part_autre'] = df_info_menage['depenses_autre'] / df_info_menage['depenses_tot']
     df_info_menage['part_carbu'] = df_info_menage['depenses_carbu'] / df_info_menage['depenses_tot']
@@ -211,7 +210,7 @@ for year in [2000, 2005, 2011]: #
 
     dataframe = dataframe[['ident_men', 'part_carbu', 'part_logem', 'part_autre', 'prix_carbu', 'prix_logem',
         'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'elect_only', 'nactifs', 'nenfants',
-        'situacj', 'situapr', 'stalog', 'typmen', 'vag', 'veh_diesel', 'veh_essence']] #'strate', 
+        'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel', 'veh_essence']]
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la
