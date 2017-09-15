@@ -25,7 +25,7 @@ if __name__ == '__main__':
     suffixes = ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]
     simulated_variables = ['poste_agrege_{}'.format(suffix) for suffix in suffixes]
 
-    year = 2011
+    year = 2000
     # elasticities = get_elasticities(year)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 

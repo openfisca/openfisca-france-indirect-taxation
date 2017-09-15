@@ -1,27 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
 from __future__ import division
 
 from pandas import concat
@@ -49,7 +27,7 @@ if __name__ == '__main__':
 
     p = dict()
     df_to_graph = None
-    for year in [2005]:
+    for year in [2000, 2011]:
         simulation_data_frame = simulate(simulated_variables = simulated_variables, year = year)
         aggregates_data_frame = df_weighted_average_grouped(dataframe = simulation_data_frame,
             groupe = 'niveau_vie_decile', varlist = simulated_variables)

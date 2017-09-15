@@ -72,6 +72,8 @@ class depenses_electricite_gaz_confondus(YearlyVariable):
 
         return depenses_electricite_gaz
 
+
+# To do : répartir les factures jointes entre électricité et gaz
 class depenses_electricite(YearlyVariable):
     column = FloatCol
     entity = Menage
@@ -79,8 +81,8 @@ class depenses_electricite(YearlyVariable):
 
     def formula(self, simulation, period):
         depenses_electricite_seule = simulation.calculate('poste_04_5_1_1_1_b', period)
-        depenses_electricite_gaz = simulation.calculate('poste_04_5_1_1_1_a', period)
-        depenses_electricite = depenses_electricite_seule + depenses_electricite_gaz
+        #depenses_electricite_gaz = simulation.calculate('poste_04_5_1_1_1_a', period)
+        depenses_electricite = depenses_electricite_seule #+ depenses_electricite_gaz
 
         return depenses_electricite
 
