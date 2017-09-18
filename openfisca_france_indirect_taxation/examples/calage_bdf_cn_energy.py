@@ -33,7 +33,7 @@ def get_bdf_aggregates_energy(data_year = None):
 
     depenses_energie = pandas.DataFrame()
     variables_energie = ['poste_04_5_1_1_1_a', 'poste_04_5_1_1_1_b', 'poste_04_5_2_1_1',
-        'poste_04_5_2_2_1', 'poste_04_5_3_1_1', 'poste_04_5_4_1_1', 'poste_07_2_2_1_1',
+        'poste_04_5_3_1_1', 'poste_04_5_4_1_1', 'poste_07_2_2_1_1',
         'rev_disponible', 'loyer_impute', 'rev_disp_loyerimput', 'depenses_tot']
     for energie in variables_energie:
         if depenses_energie is None:
@@ -43,8 +43,23 @@ def get_bdf_aggregates_energy(data_year = None):
 
     depenses_energie = concat([depenses_energie, depenses['pondmen']], axis = 1)
 
-    depenses_energie['depenses_electricite'] = depenses_energie['poste_04_5_1_1_1_a'] + depenses_energie['poste_04_5_1_1_1_b']
-    depenses_energie['depenses_gaz'] = depenses_energie['poste_04_5_2_1_1'] + depenses_energie['poste_04_5_2_2_1']
+    depenses_energie['factures_jointes_electricite_gaz'] = \
+        (depenses_energie['poste_04_5_1_1_1_b'] * depenses_energie['poste_04_5_2_1_1']) > 0
+    depenses_energie['depenses_electricite_factures_jointes'] = (
+        depenses_energie.query('factures_jointes_electricite_gaz == 1')['poste_04_5_1_1_1_b'].mean() /
+        (depenses_energie.query('factures_jointes_electricite_gaz == 1')['poste_04_5_1_1_1_b'].mean() +
+        depenses_energie.query('factures_jointes_electricite_gaz == 1')['poste_04_5_2_1_1'].mean())
+        ) * depenses_energie['poste_04_5_1_1_1_a']
+    depenses_energie['depenses_electricite'] = (
+        depenses_energie['poste_04_5_1_1_1_b'] + depenses_energie['depenses_electricite_factures_jointes']
+        )
+
+    depenses_energie['depenses_gaz_ville'] = (
+        depenses_energie['poste_04_5_2_1_1'] +
+        depenses_energie['poste_04_5_1_1_1_a'] -
+        depenses_energie['depenses_electricite_factures_jointes']
+        )
+
     depenses_energie.rename(
         columns = {
             'poste_04_5_3_1_1': 'depenses_combustibles_liquides',
@@ -54,8 +69,9 @@ def get_bdf_aggregates_energy(data_year = None):
         inplace = True
         )
 
-    variables_to_inflate = ['depenses_carburants', 'depenses_combustibles_liquides', 'depenses_combustibles_solides',
-        'depenses_electricite', 'depenses_gaz', 'depenses_tot', 'loyer_impute', 'rev_disponible', 'rev_disp_loyerimput']
+    variables_to_inflate = ['depenses_carburants', 'depenses_combustibles_liquides',
+        'depenses_combustibles_solides', 'depenses_electricite','depenses_gaz_ville',
+        'depenses_tot', 'loyer_impute', 'rev_disponible', 'rev_disp_loyerimput']
     
     bdf_aggregates_by_energie = pandas.DataFrame()
     for energie in variables_to_inflate:
@@ -84,7 +100,7 @@ def get_cn_aggregates_energy(target_year = None):
 
     masses_cn_data_frame['poste'] = '0'
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.1', 'poste'] = 'depenses_electricite'
-    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.2', 'poste'] = 'depenses_gaz'
+    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.2', 'poste'] = 'depenses_gaz_ville'
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.3', 'poste'] = 'depenses_combustibles_liquides'
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.4', 'poste'] = 'depenses_combustibles_solides'
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            07.2.2', 'poste'] = 'depenses_carburants'
@@ -181,6 +197,7 @@ def get_inflators_energy(target_year):
     ratio_by_variable = dict()
     for key in inflators_cn_to_cn.keys():
         ratio_by_variable[key] = inflators_bdf_to_cn[key] * inflators_cn_to_cn[key]
+    ratio_by_variable['depenses_gaz_liquefie'] = ratio_by_variable['depenses_gaz_ville']
 
     return ratio_by_variable
 

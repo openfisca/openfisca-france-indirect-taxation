@@ -26,43 +26,16 @@ class emissions_CO2_carburants(YearlyVariable):
         return emissions
 
 
-class emissions_CO2_energies_totales(YearlyVariable):
+class emissions_CO2_combustibles_liquides(YearlyVariable):
     column = FloatCol
     entity = Menage
-    label = u"Emissions de CO2 des ménages via leur consommation d'énergies totale, en kg de CO2"
+    label = u"Emissions de CO2 des ménages via leur consommation de combustibles liquides, en kg de CO2"
 
     def formula(self, simulation, period):
-        emissions_energies_logement = simulation.calculate('emissions_CO2_energies_logement', period)
-        emissions_carburants = simulation.calculate('emissions_CO2_carburants', period)
-        emissions = emissions_energies_logement + emissions_carburants
-
-        return emissions
-
-
-class emissions_CO2_energies_logement(YearlyVariable):
-    column = FloatCol
-    entity = Menage
-    label = u"Emissions de CO2 des ménages via leur consommation d'énergies dans leur logement, en kg de CO2"
-
-    def formula(self, simulation, period):
-        emissions_electricite = simulation.calculate('emissions_CO2_electricite', period)
-        emissions_gaz = simulation.calculate('emissions_CO2_gaz', period)
-        emissions_combustibles_liquides = simulation.calculate('emissions_CO2_combustibles_liquides', period)
-        emissions = emissions_electricite + emissions_gaz + emissions_combustibles_liquides  # Source : Ademe
-
-        return emissions
-
-
-class emissions_CO2_gaz(YearlyVariable):
-    column = FloatCol
-    entity = Menage
-    label = u"Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2"
-
-    def formula(self, simulation, period):
-        quantites_gaz = simulation.calculate('quantites_gaz_contrat_optimal', period)
-        emissions_gaz = \
-            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz
-        emissions = quantites_gaz * emissions_gaz
+        quantite_combustibles_liquides = simulation.calculate('quantites_combustibles_liquides', period)
+        emissions_combustibles_liquidies = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_combustibles_liquides
+        emissions = quantite_combustibles_liquides * emissions_combustibles_liquidies
 
         return emissions
 
@@ -81,15 +54,57 @@ class emissions_CO2_electricite(YearlyVariable):
         return emissions
 
 
-class emissions_CO2_combustibles_liquides(YearlyVariable):
+class emissions_CO2_energies_logement(YearlyVariable):
     column = FloatCol
     entity = Menage
-    label = u"Emissions de CO2 des ménages via leur consommation de combustibles liquides, en kg de CO2"
+    label = u"Emissions de CO2 des ménages via leur consommation d'énergies dans leur logement, en kg de CO2"
 
     def formula(self, simulation, period):
-        quantite_combustibles_liquides = simulation.calculate('quantites_combustibles_liquides', period)
-        emissions_combustibles_liquidies = \
-            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_combustibles_liquides
-        emissions = quantite_combustibles_liquides * emissions_combustibles_liquidies
+        emissions_electricite = simulation.calculate('emissions_CO2_electricite', period)
+        emissions_gaz_ville = simulation.calculate('emissions_CO2_gaz_ville', period)
+        emissions_gaz_liquefie = simulation.calculate('emissions_CO2_gaz_liquefie', period)
+        emissions_combustibles_liquides = simulation.calculate('emissions_CO2_combustibles_liquides', period)
+        emissions = emissions_electricite + emissions_gaz_ville + emissions_gaz_liquefie + emissions_combustibles_liquides  # Source : Ademe
+
+        return emissions
+
+
+class emissions_CO2_energies_totales(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Emissions de CO2 des ménages via leur consommation d'énergies totale, en kg de CO2"
+
+    def formula(self, simulation, period):
+        emissions_energies_logement = simulation.calculate('emissions_CO2_energies_logement', period)
+        emissions_carburants = simulation.calculate('emissions_CO2_carburants', period)
+        emissions = emissions_energies_logement + emissions_carburants
+
+        return emissions
+
+
+class emissions_CO2_gaz_liquefie(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2"
+
+    def formula(self, simulation, period):
+        quantites_gaz = simulation.calculate('quantites_gaz_liquefie', period)
+        emissions_gaz = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_liquefie
+        emissions = quantites_gaz * emissions_gaz
+
+        return emissions
+
+
+class emissions_CO2_gaz_ville(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2"
+
+    def formula(self, simulation, period):
+        quantites_gaz = simulation.calculate('quantites_gaz_contrat_optimal', period)
+        emissions_gaz = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_ville
+        emissions = quantites_gaz * emissions_gaz
 
         return emissions

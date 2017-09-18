@@ -277,12 +277,20 @@ def preprocess_legislation(legislation_json):
                     {'start': u'1990-01-01', 'value': 0.09},
                     ],
                 },
-            "CO2_gaz": {
+            "CO2_gaz_ville": {
                 "@type": "Parameter",
                 "description": u"émissions de CO2 du gaz, en kg par kWh",
                 "format": "float",
                 "values": [
-                    {'start': u'1990-01-01', 'value': 0.24},
+                    {'start': u'1990-01-01', 'value': 0.241},
+                    ],
+                },
+            "CO2_gaz_liquefie": {
+                "@type": "Parameter",
+                "description": u"émissions de CO2 du gaz, en kg par kWh",
+                "format": "float",
+                "values": [
+                    {'start': u'1990-01-01', 'value': 0.253},
                     ],
                 },
             "CO2_combustibles_liquides": {
