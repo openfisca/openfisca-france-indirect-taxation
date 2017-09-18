@@ -109,6 +109,11 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
             data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
     # 'ratio_loyer_impute',  'ratio_revenus' To be added
 
+    if year_data == 2005:
+        data_frame['ident_men'] = range(0,len(data_frame))
+        data_frame['ident_men'] = data_frame['ident_men'] + 200500000
+        data_frame = data_frame.set_index('ident_men')
+
     data_frame.index.name = "ident_men"
     # TODO: Homogénéiser: soit faire en sorte que ident_men existe pour toutes les années
     # soit qu'elle soit en index pour toutes
@@ -162,5 +167,5 @@ def run(years_calage):
 if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    years_calage = [2000, 2005, 2011]
+    years_calage = [2005]# [2000, 2005, 2011]
     run(years_calage)
