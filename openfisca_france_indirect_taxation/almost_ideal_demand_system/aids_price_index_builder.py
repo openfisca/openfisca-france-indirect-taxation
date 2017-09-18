@@ -112,6 +112,7 @@ indice_prix_mensuel_98_2015[c + '04_2_1'] =  indice_prix_mensuel_98_2015[c + '04
 indice_prix_mensuel_98_2015[c + '04_6'] =  indice_prix_mensuel_98_2015[c + '04_0_0'] # cadeaux
 indice_prix_mensuel_98_2015[c + '05_1_4_1'] =  indice_prix_mensuel_98_2015[c + '05_0_0']
 indice_prix_mensuel_98_2015[c + '05_2_1_1_3'] =  indice_prix_mensuel_98_2015[c + '05_2_0'] # articles literie
+indice_prix_mensuel_98_2015[c + '05_2_1_2_1'] =  indice_prix_mensuel_98_2015[c + '05_2_0'] # articles literie
 indice_prix_mensuel_98_2015[c + '05_5_2_3'] =  indice_prix_mensuel_98_2015[c + '05_2_0'] # articles literie
 indice_prix_mensuel_98_2015[c + '05_7_1'] =  indice_prix_mensuel_98_2015[c + '05_0_0'] # cadeaux
 indice_prix_mensuel_98_2015[c + '05_7_2'] =  indice_prix_mensuel_98_2015[c + '05_0_0'] # cadeaux

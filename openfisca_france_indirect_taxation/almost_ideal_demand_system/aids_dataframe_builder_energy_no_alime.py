@@ -36,7 +36,7 @@ df_indice_prix_produit.set_index('Unnamed: 0', inplace = True)
 # On commence par cinstruire une dataframe appelée data_conso rassemblant les informations sur les dépenses des ménages.
 data_frame_for_reg = None
 data_frame_all_years = pd.DataFrame()
-for year in [2000, 2005, 2011]: #
+for year in [2000, 2005, 2011]: #year = 2011
     aggregates_data_frame = get_input_data_frame(year)
 
     # Pour estimer QAIDS, on se concentre sur les biens non-durables.
@@ -103,9 +103,20 @@ for year in [2000, 2005, 2011]: #
     df['vag'] = df['vag'].astype(str)
     df['indice_prix_produit'] = df['bien'] + '_' + df['vag']
 
+    # Test df_indice_prix_produit
+    liste_df = df['indice_prix_produit'].values.tolist()
+    liste_df_keep = dict.fromkeys(liste_df).keys()
+
+    liste_df_i_p_p = df_indice_prix_produit['indice_prix_produit'].values.tolist()
+    liste_df_i_p_p_keep = dict.fromkeys(liste_df_i_p_p).keys()
+    
+    diff_df = [item for item in liste_df_keep if item not in liste_df_i_p_p_keep]
+    
+    for element in diff_df:
+        assert int(element[6:8]) > 12
+
     # On merge les prix des biens avec les dépenses déjà présentes dans df. Le merge se fait sur 'indice_prix_produit'
     # Indice prix produit correspond à poste_xyz_vag
-    # Vérifier pourquoi on perd des données dans ce merge
     df_depenses_prix = pd.merge(df, df_indice_prix_produit, on = 'indice_prix_produit')
     # To save some memory, we delete df...
     del df
