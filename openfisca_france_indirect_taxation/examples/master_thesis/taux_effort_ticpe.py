@@ -28,8 +28,8 @@ def plot_taux_effort_ticpe():
         ]
     simulated_variables += postes_agreges
 
-    year = 2014
-    data_year = 2011
+    year = 2005
+    data_year = 2005
     survey_scenario = SurveyScenario.create(year = year, data_year = data_year)
 
     for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:

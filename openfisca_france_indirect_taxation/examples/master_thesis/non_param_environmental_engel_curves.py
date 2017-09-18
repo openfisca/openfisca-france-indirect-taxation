@@ -14,14 +14,13 @@ simulated_variables = [
     'emissions_CO2_energies'
     ]
 
-year = 2011
+year = 2014
 data_year = 2011
-#inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-#del inflation_kwargs['inflator_by_variable']['somme_coicop12']
+inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 
 survey_scenario = SurveyScenario.create(
-    #inflation_kwargs = inflation_kwargs,
+    inflation_kwargs = inflation_kwargs,
     year = year,
     data_year = data_year
     )

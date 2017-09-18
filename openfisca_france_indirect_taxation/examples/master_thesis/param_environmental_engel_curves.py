@@ -18,8 +18,8 @@ inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 simulated_variables = [
     'depenses_energies_logement',
     'emissions_CO2_energies',
-    'poste_coicop_452',
-    'poste_coicop_453',
+    'depenses_gaz_ville',
+    'depenses_combustibles_liquides',
     'poste_coicop_722',
     'rev_disp_loyerimput',
     'ocde10',
@@ -33,8 +33,6 @@ simulated_variables = [
 year = 2014
 data_year = 2011
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-del inflation_kwargs['inflator_by_variable']['somme_coicop12']
-
 
 survey_scenario = SurveyScenario.create(
     inflation_kwargs = inflation_kwargs,
@@ -49,8 +47,8 @@ menages['rev_disp_loyerimput_2'] = menages['rev_disp_loyerimput'] ** 2
 menages['age_group_pr_2'] = menages['age_group_pr'] ** 2
 menages['alone'] = 0 + (1 * menages['situacj'] == 0)
 menages['occupe_both'] = (1 * (menages['situapr'] < 4)) * (1 * (menages['situacj'] < 4))
-menages['fioul'] = 0 + (1 * menages['poste_coicop_453'] > 0)
-menages['gaz'] = 0 + (1 * menages['poste_coicop_452'] > 0)
+menages['fioul'] = 0 + (1 * menages['depenses_combustibles_liquides'] > 0)
+menages['gaz'] = 0 + (1 * menages['depenses_gaz_ville'] > 0)
 
 for i in range(23, 29):
     menages['vag_{}'.format(i)] = 0
@@ -82,6 +80,7 @@ simulation_menages.rename(columns = {0: 'revenu_disponible'}, inplace = True)
 simulation_menages['revenu_disponible'] = simulation_menages['revenu_disponible'].astype(numpy.int64)
 simulation_menages['revenu_disponible2'] = (simulation_menages['revenu_disponible'] ** 2)
 
+# Change parameters to fit new results
 simulation_menages['emissions'] = -233.6354 + (
     (873.8949 * ocde10 -1425.8345 * strate_1 + 172.7004 * strate_3 + 538.9584 * age_group_pr +
     -50.8012 * age_group_pr_2 + -946.6144 * alone + 479.9245 * occupe_both + 4344.2562 * gaz + 8265.1751 * fioul) +
