@@ -14,8 +14,7 @@ from openfisca_france_indirect_taxation.scripts.build_coicop_nomenclature import
 from openfisca_france_indirect_taxation.scripts.build_coicop_legislation import get_categorie_fiscale
 
 
-def coicop_from_aliss(year = 2011):
-    #assert year == 2011
+def coicop_from_aliss(year):
     aliss_survey_collection = SurveyCollection.load(
         collection = 'aliss', config_files_directory = config_files_directory
         )
@@ -39,8 +38,7 @@ def coicop_from_aliss(year = 2011):
     return result
 
 
-def guess_coicop_from_bdf(year = 2011):
-    #assert year == 2011
+def guess_coicop_from_bdf(year):
     from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
     matrice_passage_data_frame, _ = get_transfert_data_frames(year)
     matrice_passage_data_frame.rename(
@@ -448,13 +446,13 @@ def adjust_coicop(data_frame):
     return result
 
 
-def aliss(year = 2011):
+def aliss(year):
     aliss_coicop = coicop_from_aliss(year = year)
     data_frame = merge_with_coicop_nomenclature(aliss_coicop)
     return test_coicop_to_legislation(data_frame, adjust_coicop, year = year)
 
 
-def bdf(year = 2011):
+def bdf(year):
     bdf_coicop = guess_coicop_from_bdf(year = year)
     bdf_coicop = adjust_coicop(bdf_coicop)
     data_frame = merge_with_coicop_nomenclature(bdf_coicop)

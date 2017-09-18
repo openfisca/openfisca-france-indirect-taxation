@@ -52,6 +52,8 @@ def get_transfert_data_frames(year = None):
         matrice_passage_data_frame = pandas.read_excel(matrice_passage_xls_file_path)
         matrice_passage_data_frame.to_csv(matrice_passage_csv_file_path, encoding = 'utf-8')
 
+    if year == 2005:
+        matrice_passage_data_frame = matrice_passage_data_frame.query('poste2005 != 5316')
     if year == 2011:
         matrice_passage_data_frame['poste2011'] = \
             matrice_passage_data_frame['poste2011'].apply(lambda x: int(x.replace('c', '').lstrip('0')))
