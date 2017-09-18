@@ -208,13 +208,13 @@ def get_inflators_by_year_energy(rebuild = False):
         )
     if rebuild is not False:
         inflators_by_year = dict()
-        for target_year in range(2011, 2015): # To do : range(2000, 2015) -> solve the issue with build_survey_data
+        for target_year in range(2000, 2015):
             inflators = get_inflators_energy(target_year)
             inflators_by_year[target_year] = inflators
 
         writer_inflators = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation',
             'assets', 'inflateurs', 'inflators_by_year_wip.csv'), 'wb'))
-        for year in range(2011, 2015): # To do : range(2000, 2015) -> solve the issue with build_survey_data
+        for year in range(2000, 2015):
             for key, value in inflators_by_year[year].items():
                 writer_inflators.writerow([key, value, year])
 
