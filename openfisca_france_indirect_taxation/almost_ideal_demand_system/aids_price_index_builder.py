@@ -143,6 +143,7 @@ indice_prix_mensuel_98_2015[c + '11_1_3_1'] =  indice_prix_mensuel_98_2015[c + '
 indice_prix_mensuel_98_2015[c + '11_1_3_2'] =  indice_prix_mensuel_98_2015[c + '11_0_0']
 indice_prix_mensuel_98_2015[c + '11_2_1_1_1'] =  indice_prix_mensuel_98_2015[c + '11_2_0']
 indice_prix_mensuel_98_2015[c + '12_2_1_1'] =  indice_prix_mensuel_98_2015[c + '12_3_1']
+indice_prix_mensuel_98_2015[c + '12_2_2_1'] =  indice_prix_mensuel_98_2015[c + '12_0_0']
 indice_prix_mensuel_98_2015[c + '12_2_2_2'] =  indice_prix_mensuel_98_2015[c + '12_0_0']
 indice_prix_mensuel_98_2015[c + '12_3_3_1_1'] =  indice_prix_mensuel_98_2015[c + '12_0_0']
 indice_prix_mensuel_98_2015[c + '12_4_2_1'] =  indice_prix_mensuel_98_2015[c + '12_4_0']
