@@ -251,7 +251,7 @@ for year in [2000, 2005, 2011]:
     data_frame_all_years = pd.concat([data_frame_all_years, data_frame_for_reg])
     data_frame_all_years.fillna(0, inplace = True)
 
-"""
+
 
     data_frame_for_reg.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
     'quaids', 'data_frame_energy_no_alime_{}.csv'.format(year)), sep = ',')
@@ -275,15 +275,14 @@ data_frame_low_income.to_csv(os.path.join(assets_directory, 'openfisca_france_in
     'quaids', 'data_frame_low_income_no_alime_all_years.csv'), sep = ',')
 
 data_frame_rural = \
-    data_frame_all_years.query('strate == 400 | strate == 112 | strate == 212 | strate == 222 | strate == 0')
+    data_frame_all_years.query('strate == 0')
 data_frame_large_cities = \
-    data_frame_all_years.query('strate == 111 | strate == 4 | strate == 3 | strate == 2')
+    data_frame_all_years.query('strate == 4 | strate == 3 | strate == 2')
 data_frame_rural.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
     'quaids', 'data_frame_rural_no_alime_all_years.csv'), sep = ',')
 data_frame_large_cities.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
     'quaids', 'data_frame_large_cities_no_alime_all_years.csv'), sep = ',')
 
-"""
 
 # Must correct what is useless, improve demographics : dip14
 # dip14 : use only dip14pr (good proxy for dip14cj anyway), but change the nomenclature to have just 2 or 3 dummies

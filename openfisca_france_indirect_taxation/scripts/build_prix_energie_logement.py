@@ -27,12 +27,12 @@ for year in [2000, 2005, 2011]:
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
-        reform_key = 'rattrapage_diesel',
+        #reform_key = 'rattrapage_diesel',
         year = year,
         )
 
     df_by_entity = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
-    menages = df_by_entity['menages']
+    menages = df_by_entity['menage']
 
     assert not menages.ident_men.duplicated().any(), 'Some households are duplicated'
 
@@ -40,5 +40,5 @@ for year in [2000, 2005, 2011]:
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
         )
     menages['ident_men'] = menages['ident_men'].astype(numpy.int64)
-    menages.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'prix', 'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)), sep = ',')
+    #menages.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+    #    'prix', 'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)), sep = ',')
