@@ -17,7 +17,7 @@ inflators_by_year = get_inflators_by_year(rebuild = False)
 simulated_variables = [
     'depenses_electricite_prix_unitaire',
     'depenses_gaz_prix_unitaire',
-    'ident_men',
+    'numero_menage',
     ]
 
 for year in [2000, 2005, 2011]:
@@ -34,11 +34,11 @@ for year in [2000, 2005, 2011]:
     df_by_entity = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
     menages = df_by_entity['menage']
 
-    assert not menages.ident_men.duplicated().any(), 'Some households are duplicated'
+    assert not menages.numero_menage.duplicated().any(), 'Some households are duplicated'
 
     assets_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
         )
-    menages['ident_men'] = menages['ident_men'].astype(numpy.int64)
-    #menages.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    #    'prix', 'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)), sep = ',')
+    menages['numero_menage'] = menages['numero_menage'].astype(numpy.int64)
+    menages.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+        'prix', 'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)), sep = ',')

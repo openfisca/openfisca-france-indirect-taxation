@@ -35,6 +35,12 @@ class ident_men(YearlyVariable):
     label = u"Identifiant du ménage"
 
 
+class numero_menage(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Numéro identifiant le ménage"
+
+
 class ocde10(YearlyVariable):
     column = FloatCol
     entity = Menage

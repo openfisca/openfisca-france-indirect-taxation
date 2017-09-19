@@ -144,7 +144,7 @@ def price_energy_from_contracts(dataframe, year):
     prix_contrats = pd.DataFrame.from_csv(os.path.join(assets_directory,
         'openfisca_france_indirect_taxation', 'assets', 'prix',
         'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)))
-    prix_contrats['ident_men'] = prix_contrats['ident_men'].astype(str)
+    prix_contrats['numero_menage'] = prix_contrats['numero_menage'].astype(str)
     moyenne_prix_gaz = \
         prix_contrats.query('depenses_gaz_prix_unitaire > 0').depenses_gaz_prix_unitaire.mean()
     moyenne_prix_electricite = \
@@ -152,7 +152,7 @@ def price_energy_from_contracts(dataframe, year):
     prix_contrats.loc[prix_contrats['depenses_gaz_prix_unitaire'] == 0, 'depenses_gaz_prix_unitaire'] = moyenne_prix_gaz
     prix_contrats.loc[prix_contrats['depenses_electricite_prix_unitaire'] == 0, 'depenses_electricite_prix_unitaire'] = \
         moyenne_prix_electricite
-    dataframe = pd.merge(dataframe, prix_contrats, on = 'ident_men')
+    dataframe = pd.merge(dataframe, prix_contrats, on = 'numero_menage')
     dataframe.loc[dataframe['bien'] == 'poste_04_5_2_1_1', 'prix'] = (
         dataframe['prix'] * dataframe['depenses_gaz_prix_unitaire'] / moyenne_prix_gaz
         )

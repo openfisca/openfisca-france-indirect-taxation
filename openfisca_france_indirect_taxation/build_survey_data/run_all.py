@@ -115,6 +115,12 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
         data_frame = data_frame.set_index('ident_men')
 
     data_frame.index.name = "ident_men"
+
+
+    # Créer un nouvel identifiant pour les ménages
+    data_frame['numero_menage'] = range(0,len(data_frame))
+    data_frame['numero_menage'] = data_frame['numero_menage'] + (year_data * 100000)
+
     # TODO: Homogénéiser: soit faire en sorte que ident_men existe pour toutes les années
     # soit qu'elle soit en index pour toutes
 

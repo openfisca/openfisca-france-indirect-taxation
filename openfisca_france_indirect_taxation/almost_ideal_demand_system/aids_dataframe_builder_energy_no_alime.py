@@ -91,11 +91,11 @@ for year in [2000, 2005, 2011]:
         aggregates_data_frame['depenses_tot'] - aggregates_data_frame['depenses_carbu'] -
         aggregates_data_frame['depenses_logem'])
 
-    data_conso = aggregates_data_frame[produits + ['vag', 'ident_men', 'depenses_autre', 'depenses_carbu',
+    data_conso = aggregates_data_frame[produits + ['vag', 'numero_menage', 'depenses_autre', 'depenses_carbu',
         'depenses_logem']].copy()
 
     # On renverse la dataframe pour obtenir une ligne pour chaque article consommé par chaque personne
-    df = pd.melt(data_conso, id_vars = ['vag', 'ident_men'], value_vars=produits,
+    df = pd.melt(data_conso, id_vars = ['vag', 'numero_menage'], value_vars=produits,
         value_name = 'depense_bien', var_name = 'bien')
 
     df_indice_prix_produit = df_indice_prix_produit[['indice_prix_produit', 'prix', 'temps', 'mois']]
@@ -130,13 +130,13 @@ for year in [2000, 2005, 2011]:
     del logem, produit
 
     # Construire les indices de prix pondérés pour les deux catégories
-    df_depenses_prix[['type_bien', 'ident_men']] = df_depenses_prix[['type_bien', 'ident_men']].astype(str)
-    df_depenses_prix['id'] = df_depenses_prix['type_bien'] + '_' + df_depenses_prix['ident_men']
+    df_depenses_prix[['type_bien', 'numero_menage']] = df_depenses_prix[['type_bien', 'numero_menage']].astype(str)
+    df_depenses_prix['id'] = df_depenses_prix['type_bien'] + '_' + df_depenses_prix['numero_menage']
 
-    data_conso['ident_men'] = data_conso['ident_men'].astype(str)
+    data_conso['numero_menage'] = data_conso['numero_menage'].astype(str)
     df_depenses_prix = pd.merge(
-        df_depenses_prix, data_conso[['depenses_autre', 'depenses_carbu', 'depenses_logem', 'ident_men']],
-        on = 'ident_men')
+        df_depenses_prix, data_conso[['depenses_autre', 'depenses_carbu', 'depenses_logem', 'numero_menage']],
+        on = 'numero_menage')
     del data_conso
     df_depenses_prix[['depenses_autre', 'depense_bien', 'depenses_carbu', 'depenses_logem', 'prix']] = \
         df_depenses_prix[['depenses_autre', 'depense_bien', 'depenses_carbu', 'depenses_logem', 'prix']].astype(float)
@@ -174,15 +174,15 @@ for year in [2000, 2005, 2011]:
         grouped.loc[grouped['categorie'] == categorie, 'prix_' + categorie] = grouped['indice_prix_pondere']
 
     grouped_autre = grouped[grouped['categorie'] == 'autre'].copy()
-    grouped_autre['ident_men'] = grouped_autre['id'].str[6:]
+    grouped_autre['numero_menage'] = grouped_autre['id'].str[6:]
     grouped_carbu = grouped[grouped['categorie'] == 'carbu'].copy()
-    grouped_carbu['ident_men'] = grouped_carbu['id'].str[6:]
+    grouped_carbu['numero_menage'] = grouped_carbu['id'].str[6:]
     grouped_logem = grouped[grouped['categorie'] == 'logem'].copy()
-    grouped_logem['ident_men'] = grouped_logem['id'].str[6:]
+    grouped_logem['numero_menage'] = grouped_logem['id'].str[6:]
 
-    df_prix_to_merge = pd.merge(grouped_carbu[['ident_men', 'prix_carbu']], grouped_autre[['ident_men', 'prix_autre']],
-        on = 'ident_men')
-    df_prix_to_merge = pd.merge(df_prix_to_merge, grouped_logem[['ident_men', 'prix_logem']], on = 'ident_men')
+    df_prix_to_merge = pd.merge(grouped_carbu[['numero_menage', 'prix_carbu']], grouped_autre[['numero_menage', 'prix_autre']],
+        on = 'numero_menage')
+    df_prix_to_merge = pd.merge(df_prix_to_merge, grouped_logem[['numero_menage', 'prix_logem']], on = 'numero_menage')
     del grouped, grouped_autre, grouped_carbu, grouped_logem
 
     # Problème: ceux qui ne consomment pas de carbu ou d'alimentaire se voient affecter un indice de prix égal à 0. Ils
@@ -193,17 +193,17 @@ for year in [2000, 2005, 2011]:
     aggregates_data_frame = electricite_only(aggregates_data_frame)
     # On récupère les informations importantes sur les ménages, dont les variables démographiques
     df_info_menage = aggregates_data_frame[['agepr', 'depenses_autre', 'depenses_carbu',
-        'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'ident_men', 'nenfants', 'nactifs', 'ocde10',
+        'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'numero_menage', 'nenfants', 'nactifs', 'ocde10',
         'revtot', 'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
         'veh_essence']].copy()
-    df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
+    df_info_menage['numero_menage'] = df_info_menage['numero_menage'].astype(str)
     df_info_menage['part_autre'] = df_info_menage['depenses_autre'] / df_info_menage['depenses_tot']
     df_info_menage['part_carbu'] = df_info_menage['depenses_carbu'] / df_info_menage['depenses_tot']
     df_info_menage['part_logem'] = df_info_menage['depenses_logem'] / df_info_menage['depenses_tot']
 
     # On merge les informations sur les caractéristiques du ménage et leurs consommations avec les indices de prix
     # pondérés pour les deux catégories
-    dataframe = pd.merge(df_info_menage, df_prix_to_merge, on = 'ident_men')
+    dataframe = pd.merge(df_info_menage, df_prix_to_merge, on = 'numero_menage')
     del df_info_menage, df_prix_to_merge
 
     # Pour ceux qui ne consomment pas de carburants, on leur associe le prix correspondant à leur vague d'enquête
@@ -219,7 +219,7 @@ for year in [2000, 2005, 2011]:
 
     dataframe['depenses_par_uc'] = dataframe['depenses_tot'] / dataframe['ocde10']
 
-    dataframe = dataframe[['ident_men', 'part_carbu', 'part_logem', 'part_autre', 'prix_carbu', 'prix_logem',
+    dataframe = dataframe[['numero_menage', 'part_carbu', 'part_logem', 'part_autre', 'prix_carbu', 'prix_logem',
         'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'elect_only', 'nactifs', 'nenfants',
         'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel', 'veh_essence']]
 
