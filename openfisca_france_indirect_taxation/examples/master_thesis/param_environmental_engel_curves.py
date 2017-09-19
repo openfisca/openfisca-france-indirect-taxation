@@ -17,10 +17,10 @@ inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 
 simulated_variables = [
     'depenses_energies_logement',
-    'emissions_CO2_energies',
+    'emissions_CO2_energies_totales',
     'depenses_gaz_ville',
     'depenses_combustibles_liquides',
-    'poste_coicop_722',
+    'poste_07_2_2_1_1',
     'rev_disp_loyerimput',
     'ocde10',
     'strate',
@@ -41,7 +41,7 @@ survey_scenario = SurveyScenario.create(
     )
 
 df_by_entity = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
-menages = df_by_entity['menages']
+menages = df_by_entity['menage']
 
 menages['rev_disp_loyerimput_2'] = menages['rev_disp_loyerimput'] ** 2
 menages['age_group_pr_2'] = menages['age_group_pr'] ** 2
@@ -54,11 +54,11 @@ for i in range(23, 29):
     menages['vag_{}'.format(i)] = 0
     menages.loc[menages['vag'] == i, 'vag_{}'.format(i)] = 1
 
-for i in range(1, 4):
+for i in range(0, 5):
     menages['strate_{}'.format(i)] = 0
     menages.loc[menages['strate'] == i, 'strate_{}'.format(i)] = 1
 
-reg_emissions = smf.ols(formula = 'emissions_CO2_energies ~ \
+reg_emissions = smf.ols(formula = 'emissions_CO2_energies_totales ~ \
     rev_disp_loyerimput + rev_disp_loyerimput_2 + ocde10 + strate_0 + strate_1 + strate_3 + strate_4 + age_group_pr + \
     age_group_pr_2 + alone + occupe_both + gaz + fioul + vag_23 + vag_24 + vag_25 + vag_26 + vag_27',
     data = menages).fit()
