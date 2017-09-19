@@ -7,14 +7,40 @@ from __future__ import division
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
-for coicop12_index in range(1, 13):
-    name = u'coicop12_{}'.format(coicop12_index)
-    # Trick to create a class with a dynamic name.
-    type(name.encode('utf-8'), (YearlyVariable,), dict(
-        column = FloatCol,
-        entity = Menage,
-        label = u"Poste coicop {} de la nomenclature aggrégée à 12 niveaux".format(coicop12_index),
-        ))
+class depenses_assurance_sante(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Dépenses en assurances liées aux transports"
+
+    def formula(self, simulation, period):
+        depenses_assurance_sante = simulation.calculate('poste_12_5_3_1_1', period)
+        return depenses_assurance_sante
+
+
+class depenses_assurance_transport(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Dépenses en assurances liées aux transports"
+
+    def formula(self, simulation, period):
+        depenses_assurance_transport = simulation.calculate('poste_12_5_4_1_1', period)
+        return depenses_assurance_transport
+
+
+class depenses_autres_assurances(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Dépenses en assurances liées aux transports"
+
+    def formula(self, simulation, period):
+        depenses_assurance_vie_deces = simulation.calculate('poste_12_5_1_1_1', period)
+        depenses_assurance_logement = simulation.calculate('poste_12_5_2_1_1', period)
+        depenses_assurance_reste = simulation.calculate('poste_12_5_5_1_1', period)
+
+        depenses_assurance_autres = \
+            depenses_assurance_vie_deces + depenses_assurance_logement + depenses_assurance_reste
+
+        return depenses_assurance_autres
 
 
 class depenses_ticpe(YearlyVariable):
