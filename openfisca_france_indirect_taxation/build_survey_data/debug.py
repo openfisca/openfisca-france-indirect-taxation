@@ -10,7 +10,8 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 
 simulated_variables = [
     'pondmen',
-    'ident_men'
+    #'ident_men',
+    'numero_menage'
     ]
 
 year = 2011
@@ -34,10 +35,6 @@ indiv_df = survey_scenario.create_data_frame_by_entity(simulated_variables, peri
 liste = survey_scenario.tax_benefit_system.column_by_name.keys()
 
 
-year = 2000
-year = 2005
-data_year = 2005
-year_calage = 2005 
-year_data = 2005
+print aggregates_data_frame['numero_menage']
 
 

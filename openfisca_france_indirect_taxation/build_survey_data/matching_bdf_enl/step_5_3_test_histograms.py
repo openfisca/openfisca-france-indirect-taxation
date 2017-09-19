@@ -157,5 +157,3 @@ histogram_froid_cout_niveau_vie_decile(data_matched_rank, data_enl)
 histogram_froid_tuu(data_matched_distance, data_enl)
 histogram_froid_tuu(data_matched_random, data_enl)
 histogram_froid_tuu(data_matched_rank, data_enl)
-
-
