@@ -285,52 +285,84 @@ def histogram_ocde10():
 histogram_ocde10()
 
 
-def histogram_poste_451():
+def histogram_depenses_electricite():
     list_values_bdf = []
     list_values_enl = []
     list_keys = []
     for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
-        list_values_bdf.append(data_bdf['poste_04_5_1_1_1'].quantile(i))
-        list_values_enl.append(data_enl['poste_04_5_1_1_1'].quantile(i))
+        list_values_bdf.append(data_bdf['depenses_electricite'].quantile(i))
+        list_values_enl.append(data_enl['depenses_electricite'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
         figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
     return figure
     
-histogram_poste_451()
+histogram_depenses_electricite()
 
 
-def histogram_poste_452():
+def histogram_depenses_gaz_ville():
     list_values_bdf = []
     list_values_enl = []
     list_keys = []
     for i in [.5, 0.6, .7, .8, .85, .9, 0.95, 0.975]:
-        list_values_bdf.append(data_bdf['poste_04_5_2_1_1'].quantile(i))
-        list_values_enl.append(data_enl['poste_04_5_2_1_1'].quantile(i))
+        list_values_bdf.append(data_bdf['depenses_gaz_ville'].quantile(i))
+        list_values_enl.append(data_enl['depenses_gaz_ville'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
         figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
     return figure
     
-histogram_poste_452()
+histogram_depenses_gaz_ville()
 
 
-def histogram_poste_453():
+def histogram_depenses_gaz_liquefie():
+    list_values_bdf = []
+    list_values_enl = []
+    list_keys = []
+    for i in [.5, 0.6, .7, .8, .85, .9, 0.95, 0.975]:
+        list_values_bdf.append(data_bdf['depenses_gaz_liquefie'].quantile(i))
+        list_values_enl.append(data_enl['depenses_gaz_liquefie'].quantile(i))
+        list_keys.append('{}'.format(i)) 
+
+        figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
+
+    return figure
+    
+histogram_depenses_gaz_liquefie()
+
+
+def histogram_depenses_combustibles_liquides():
     list_values_bdf = []
     list_values_enl = []
     list_keys = []
     for i in [.8, .85, .875, .9, .925, 0.95, .975]:
-        list_values_bdf.append(data_bdf['poste_04_5_3_1_1'].quantile(i))
-        list_values_enl.append(data_enl['poste_04_5_3_1_1'].quantile(i))
+        list_values_bdf.append(data_bdf['depenses_combustibles_liquides'].quantile(i))
+        list_values_enl.append(data_enl['depenses_combustibles_liquides'].quantile(i))
         list_keys.append('{}'.format(i)) 
 
         figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
     return figure
     
-histogram_poste_453()
+histogram_depenses_combustibles_liquides()
+
+
+def histogram_depenses_combustibles_solides():
+    list_values_bdf = []
+    list_values_enl = []
+    list_keys = []
+    for i in [.8, .85, .875, .9, .925, 0.95, .975]:
+        list_values_bdf.append(data_bdf['depenses_combustibles_solides'].quantile(i))
+        list_values_enl.append(data_enl['depenses_combustibles_solides'].quantile(i))
+        list_keys.append('{}'.format(i)) 
+
+        figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
+
+    return figure
+    
+histogram_depenses_combustibles_solides()
 
 
 def histogram_revtot():

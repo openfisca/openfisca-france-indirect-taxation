@@ -71,10 +71,6 @@ def homogenize_variables_definition_bdf_enl():
     
     del data_enl['msitua'], data_enl['msituac']
     
-    # mfac_eg1_d
-    #print data_bdf['poste_coicop_4511'].mean()
-    #print data_enl['coml13'].mean()
-    
     # OCDE10 vs MUC1
     data_enl['muc1'] = data_enl['muc1'].copy() / 10
     
@@ -82,17 +78,31 @@ def homogenize_variables_definition_bdf_enl():
     data_bdf['nbh1'] = data_bdf['nbh1'].fillna(0)
     
     # Gestion des dépenses d'énergies
-    #data_bdf['poste_04_5_1_1_1'] = (data_bdf['poste_04_5_1_1_1_a'] + data_bdf['poste_04_5_1_1_1_b']).copy()
-    data_bdf['poste_04_5_1_1_1'] = (data_bdf['poste_04_5_1_1_1_b']).copy()
+    joint_data_bdf = data_bdf.query('poste_04_5_1_1_1_b > 0').query('poste_04_5_2_1_1 > 0')
+    part_electricite_bdf = (joint_data_bdf['poste_04_5_1_1_1_b'].sum() /
+        (joint_data_bdf['poste_04_5_1_1_1_b'].sum() + joint_data_bdf['poste_04_5_2_1_1'].sum())
+        )
+    data_bdf['depenses_electricite'] = (
+        data_bdf['poste_04_5_1_1_1_b'] + data_bdf['poste_04_5_1_1_1_a'] * part_electricite_bdf
+        )
+    data_bdf['depenses_gaz_ville'] = (
+        data_bdf['poste_04_5_2_1_1'] + data_bdf['poste_04_5_1_1_1_a'] * (1 - part_electricite_bdf)
+        )
 
-    #del data_bdf['poste_04_5_1_1_1_a'], data_bdf['poste_04_5_1_1_1_b']
+    joint_data_enl = data_enl.query('coml11 > 0').query('coml12 > 0')
+    part_electricite_enl = (joint_data_enl['coml11'].sum() /
+        (joint_data_enl['coml11'].sum() + joint_data_enl['coml12'].sum())
+        )
+    data_enl['depenses_electricite'] = (
+        data_enl['coml11'] + data_enl['coml13'] * part_electricite_enl
+        )
+    data_enl['depenses_gaz_ville'] = (
+        data_enl['coml12'] + data_enl['coml13'] * (1 - part_electricite_enl)
+        )
 
-    #data_enl['poste_04_5_1_1_1'] = (data_enl['coml11'] + data_enl['coml13']).copy()
     data_enl['poste_04_5_1_1_1'] = (data_enl['coml11']).copy()
 
-    #del data_enl['coml11'], data_enl['coml13']
-
-    data_enl['poste_04_5_4_1_1'] = (data_enl['coml41'] + data_enl['coml42']).copy()
+    data_enl['depenses_combustibles_solides'] = (data_enl['coml41'] + data_enl['coml42']).copy()
     del data_enl['coml41'], data_enl['coml42']
     
     # zeat : dans BdF certains ménages ont 6 et aucun 9, alors que 6 n'existe pas
@@ -104,9 +114,8 @@ def homogenize_variables_definition_bdf_enl():
             'cataeu2010': 'cataeu',
             'cceml': 'mfac_eau1_d',
             'coml': 'depenses_energies',
-            'coml12': 'poste_04_5_2_1_1',
-            'coml2': 'poste_04_5_3_1_1',
-            'coml3': 'poste_04_5_2_2_1',
+            'coml2': 'depenses_combustibles_liquides',
+            'coml3': 'depenses_gaz_liquefie',
             'enfhod': 'nbh1',
             'lchauf': 'mchof_d',
             'hnph1': 'nbphab',
@@ -127,7 +136,16 @@ def homogenize_variables_definition_bdf_enl():
     
         inplace = True,
         )
+    data_bdf.rename(
+        columns = {
+            'poste_04_5_2_2_1': 'depenses_gaz_liquefie',
+            'poste_04_5_3_1_1': 'depenses_combustibles_liquides',
+            'poste_04_5_4_1_1': 'depenses_combustibles_solides',
+                   },
     
+        inplace = True,
+        )
+
     data_enl = data_enl.sort_index(axis = 1)
     data_bdf = data_bdf.sort_index(axis = 1)
     
@@ -140,14 +158,13 @@ def create_new_variables():
 
         # Dummy variable pour la consommation de fioul
         data['fioul'] = 0
-        data.loc[data['poste_04_5_3_1_1'] > 0, 'fioul'] = 1
+        data.loc[data['depenses_combustibles_solides'] > 0, 'fioul'] = 1
 
-        data['gaz'] = 0
-        data.loc[data['poste_04_5_2_1_1'] > 0, 'gaz'] = 1
-        data.loc[data['poste_04_5_2_2_1'] > 0, 'gaz'] = 1
-
+        data['gaz_ville'] = 0
+        data.loc[data['depenses_gaz_ville'] > 0, 'gaz_ville'] = 1
+        
         data['electricite'] = 0
-        data.loc[data['poste_04_5_1_1_1'] > 0, 'electricite'] = 1
+        data.loc[data['depenses_electricite'] > 0, 'electricite'] = 1
 
         # Création de dummy variables pour la commune de résidence
         data['rural'] = 0
@@ -214,8 +231,8 @@ def create_new_variables():
 
         # Création d'une variable pour la part des dépenses totales en énergies
         # On néglige l'énergie thermique de BdF car les dépenses sont absentes de l'ENL
-        energie_logement = ['poste_04_5_1_1_1', 'poste_04_5_2_1_1', 'poste_04_5_2_2_1',
-        'poste_04_5_3_1_1', 'poste_04_5_4_1_1']
+        energie_logement = ['depenses_combustibles_liquides', 'depenses_combustibles_solides',
+            'depenses_electricite', 'depenses_gaz_liquefie', 'depenses_gaz_ville']
         
         if i == 1:
             data['depenses_energies'] = 0

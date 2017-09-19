@@ -232,55 +232,65 @@ hellinger_part_energies_revtot = hellinger_part_energies_revtot(data_bdf, data_e
 
 
 def hellinger_postes_energies(data_bdf, data_enl):
-    distribution_bdf_1 = dict()
-    distribution_bdf_2 = dict()
-    distribution_bdf_3 = dict()
-    distribution_enl_1 = dict()
-    distribution_enl_2 = dict()
-    distribution_enl_3 = dict()
-    for en in [1,2,3]:
-        data_bdf['poste_04_5_{}_1_1'.format(en)] = data_bdf['poste_04_5_{}_1_1'.format(en)].astype(float)
-        poste_max_bdf = data_bdf['poste_04_5_{}_1_1'.format(en)].max()        
-        data_enl['poste_04_5_{}_1_1'.format(en)] = data_enl['poste_04_5_{}_1_1'.format(en)].astype(float)
-        poste_max_enl = data_enl['poste_04_5_{}_1_1'.format(en)].max()
+    distribution_bdf_elec = dict()
+    distribution_bdf_gaz = dict()
+    distribution_bdf_com_liq = dict()
+    distribution_bdf_com_sol = dict()
+    distribution_enl_elec = dict()
+    distribution_enl_gaz = dict()
+    distribution_enl_com_liq = dict()
+    distribution_enl_com_sol = dict()
+    for en in ['electricite', 'gaz_ville', 'combustibles_liquides', 'combustibles_solides']:
+        data_bdf['depenses_{}'.format(en)] = data_bdf['depenses_{}'.format(en)].astype(float)
+        poste_max_bdf = data_bdf['depenses_{}'.format(en)].max()        
+        data_enl['depenses_{}'.format(en)] = data_enl['depenses_{}'.format(en)].astype(float)
+        poste_max_enl = data_enl['depenses_{}'.format(en)].max()
 
         poste_max = max(poste_max_bdf, poste_max_enl)
-        data_bdf['poste_04_5_{}_1_1_groupe'.format(en)] = (data_bdf['poste_04_5_{}_1_1'.format(en)] / poste_max).round(decimals = 2)
-        data_enl['poste_04_5_{}_1_1_groupe'.format(en)] = (data_enl['poste_04_5_{}_1_1'.format(en)] / poste_max).round(decimals = 2)    
+        data_bdf['depenses_{}_groupe'.format(en)] = (data_bdf['depenses_{}'.format(en)] / poste_max).round(decimals = 2)
+        data_enl['depenses_{}_groupe'.format(en)] = (data_enl['depenses_{}'.format(en)] / poste_max).round(decimals = 2)    
     
         for i in range(0,101):
             j = float(i)/100
-            if en == 1:
-                distribution_bdf_1['{}'.format(j)] = (data_bdf.query('poste_04_5_{}_1_1_groupe == {}'.format(en, j))['pondmen'].sum() /
+            if en == 'electricite':
+                distribution_bdf_elec['{}'.format(j)] = (data_bdf.query('depenses_{}_groupe == {}'.format(en, j))['pondmen'].sum() /
                  data_bdf['pondmen'].sum())
-            if en == 2:
-                distribution_bdf_2['{}'.format(j)] = (data_bdf.query('poste_04_5_{}_1_1_groupe == {}'.format(en, j))['pondmen'].sum() /
+            if en == 'gaz_ville':
+                distribution_bdf_gaz['{}'.format(j)] = (data_bdf.query('depenses_{}_groupe == {}'.format(en, j))['pondmen'].sum() /
+                 data_bdf['pondmen'].sum())
+            if en == 'combustibles_liquides':
+                distribution_bdf_com_liq['{}'.format(j)] = (data_bdf.query('depenses_{}_groupe == {}'.format(en, j))['pondmen'].sum() /
                  data_bdf['pondmen'].sum())
             else:
-                distribution_bdf_3['{}'.format(j)] = (data_bdf.query('poste_04_5_{}_1_1_groupe == {}'.format(en, j))['pondmen'].sum() /
+                distribution_bdf_com_sol['{}'.format(j)] = (data_bdf.query('depenses_{}_groupe == {}'.format(en, j))['pondmen'].sum() /
                  data_bdf['pondmen'].sum())
         
         for i in range(0,101):
             j = float(i)/100
-            if en == 1:
-                distribution_enl_1['{}'.format(j)] = (data_enl.query('poste_04_5_{}_1_1_groupe == {}'.format(en, j))['pondmen'].sum() /
+            if en == 'electricite':
+                distribution_enl_elec['{}'.format(j)] = (data_enl.query('depenses_{}_groupe == {}'.format(en, j))['pondmen'].sum() /
                  data_enl['pondmen'].sum())
-            if en == 2:
-                distribution_enl_2['{}'.format(j)] = (data_enl.query('poste_04_5_{}_1_1_groupe == {}'.format(en, j))['pondmen'].sum() /
+            if en == 'gaz_ville':
+                distribution_enl_gaz['{}'.format(j)] = (data_enl.query('depenses_{}_groupe == {}'.format(en, j))['pondmen'].sum() /
+                 data_enl['pondmen'].sum())
+            if en == 'combustibles_liquides':
+                distribution_enl_com_liq['{}'.format(j)] = (data_enl.query('depenses_{}_groupe == {}'.format(en, j))['pondmen'].sum() /
                  data_enl['pondmen'].sum())
             else:
-                distribution_enl_3['{}'.format(j)] = (data_enl.query('poste_04_5_{}_1_1_groupe == {}'.format(en, j))['pondmen'].sum() /
+                distribution_enl_com_sol['{}'.format(j)] = (data_enl.query('depenses_{}_groupe == {}'.format(en, j))['pondmen'].sum() /
                  data_enl['pondmen'].sum())
     
-        hellinger_distance_1 = hellinger(distribution_bdf_1.values(),distribution_enl_1.values())
-        hellinger_distance_2 = hellinger(distribution_bdf_2.values(),distribution_enl_2.values())
-        hellinger_distance_3 = hellinger(distribution_bdf_3.values(),distribution_enl_3.values())
+        hellinger_distance_elec = hellinger(distribution_bdf_elec.values(),distribution_enl_elec.values())
+        hellinger_distance_gaz = hellinger(distribution_bdf_gaz.values(),distribution_enl_gaz.values())
+        hellinger_distance_com_liq = hellinger(distribution_bdf_com_liq.values(),distribution_enl_com_liq.values())
+        hellinger_distance_com_sol = hellinger(distribution_bdf_com_sol.values(),distribution_enl_com_sol.values())
     
-    return hellinger_distance_1, hellinger_distance_2, hellinger_distance_3
+    return hellinger_distance_elec, hellinger_distance_gaz, hellinger_distance_com_liq, hellinger_distance_com_sol
     
-hellinger_poste_451 = hellinger_postes_energies(data_bdf, data_enl)[0]
-hellinger_poste_452 = hellinger_postes_energies(data_bdf, data_enl)[1]
-hellinger_poste_453 = hellinger_postes_energies(data_bdf, data_enl)[2]
+hellinger_poste_elec = hellinger_postes_energies(data_bdf, data_enl)[0]
+hellinger_poste_gaz = hellinger_postes_energies(data_bdf, data_enl)[1]
+hellinger_poste_com_liq = hellinger_postes_energies(data_bdf, data_enl)[2]
+hellinger_poste_com_sol = hellinger_postes_energies(data_bdf, data_enl)[3]
 
 
 # By construction, the distance should be extremely close to 0

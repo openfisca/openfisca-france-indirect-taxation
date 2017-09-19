@@ -432,28 +432,28 @@ plot_enl = check_part_energies_revtot(data_bdf, data_enl)[2]
 # poste_45(1,2,3) - dépenses d'électricité, de gaz et de fioul domestique
 def check_postes_energies():
     results = dict()
-    for i in [1, 2, 3]:
-        results['poste_04_5_{}_1_1 - BdF'.format(i)] = (
-            (data_bdf['poste_04_5_{}_1_1'.format(i)] * data_bdf['pondmen']).sum() /
+    for i in ['electricite', 'gaz_ville', 'combustibles_liquides', 'combustibles_solides']:
+        results['depenses_{} - BdF'.format(i)] = (
+            (data_bdf['depenses_{}'.format(i)] * data_bdf['pondmen']).sum() /
             data_bdf['pondmen'].sum()
             )
-        results['poste_04_5_{}_1_1 - ENL'.format(i)] = (
-            (data_enl['poste_04_5_{}_1_1'.format(i)] * data_enl['pondmen']).sum() /
+        results['depenses_{} - ENL'.format(i)] = (
+            (data_enl['depenses_{}'.format(i)] * data_enl['pondmen']).sum() /
             data_enl['pondmen'].sum()
             )
 
         data_bdf['pondmen_{}'.format(i)] = 0
-        data_bdf['pondmen_{}'.format(i)].loc[data_bdf['poste_04_5_{}_1_1'.format(i)] > 0] = data_bdf['pondmen']
+        data_bdf['pondmen_{}'.format(i)].loc[data_bdf['depenses_{}'.format(i)] > 0] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
     
         data_enl['pondmen_{}'.format(i)] = 0
-        data_enl['pondmen_{}'.format(i)].loc[data_enl['poste_04_5_{}_1_1'.format(i)] > 0] = data_enl['pondmen']
+        data_enl['pondmen_{}'.format(i)].loc[data_enl['depenses_{}'.format(i)] > 0] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
         
-        results['part_consommateurs_poste_04_5_{}_1_1 - BdF'.format(i)] = part_bdf
-        results['part_consommateurs_poste_04_5_{}_1_1 - ENL'.format(i)] = part_enl
+        results['part_consommateurs_depenses_{} - BdF'.format(i)] = part_bdf
+        results['part_consommateurs_depenses_{} - ENL'.format(i)] = part_enl
 
     return results
 

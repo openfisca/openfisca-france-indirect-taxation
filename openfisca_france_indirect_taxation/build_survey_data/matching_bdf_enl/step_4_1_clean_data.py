@@ -27,8 +27,8 @@ def clean_data():
     variables_to_drop_bdf = [
         'amr', 'cataeu', 'chaufp', 'cs42cj', 'cs42pr', 'decuc', 'dip14cj',
         'mchof', 'mchof_d', 'mfac_eau1_d', 'mfac_eg1_d',
-        'mloy_d', 'nbh1', 'poste_coicop_4511',
-        'poste_coicop_451', 'poste_coicop_452', 'poste_coicop_453',
+        'mloy_d', 'nbh1', 'poste_04_5_1_1_1_a', 'poste_04_5_1_1_1_b',
+        'poste_04_5_2_1_1', 'poste_04_5_5_1_1',
         'situacj', 'situapr', 'tau', 'tuu', 'typmen'
         ]
     
@@ -36,10 +36,9 @@ def clean_data():
         del data_bdf[variable]
 
     variables_to_drop_enl = [
-        'amr', 'cataeu', 'coml13', 'coml3', 'cs42cj', 'cs42pr',
+        'amr', 'cataeu', 'coml11', 'coml12', 'cs42cj', 'cs42pr',
         'gmoy1', 'gtt1', 'gvit1', 'gvit1b', 'mchof_d', 'mfac_eau1_d',
-        'mloy_d', 'nbh1', 'poste_coicop_451', 'poste_coicop_452',
-        'poste_coicop_453', 'situacj', 'situapr', 'tau', 'tuu'
+        'mloy_d', 'nbh1', 'situacj', 'situapr', 'tau', 'tuu'
         ]
 
     for variable in variables_to_drop_enl:
