@@ -44,13 +44,6 @@ for year in [2000, 2005, 2011]:
     # achat de véhicules, 911, 912, 9122, 913, 9151 : technologies high-tech, 9211, 921, 923: gros équipements loisirs,
     # 941, 960 : voyages séjours et cadeaux, 10i0 : enseignement, 12.. : articles de soin et bijoux
 
-    #biens_durables = ['poste_coicop_442', 'poste_coicop_711', 'poste_coicop_712', 'poste_coicop_713',
-    #    'poste_coicop_911', 'poste_coicop_912', 'poste_coicop_9122', 'poste_coicop_913', 'poste_coicop_9151',
-    #    'poste_coicop_9211', 'poste_coicop_921', 'poste_coicop_922', 'poste_coicop_923', 'poste_coicop_960',
-    #    'poste_coicop_941', 'poste_coicop_1010', 'poste_coicop_1015', 'poste_coicop_10152', 'poste_coicop_1020',
-    #    'poste_coicop_1040', 'poste_coicop_1050', 'poste_coicop_1212', 'poste_coicop_1231', 'poste_coicop_1240',
-    #    'poste_coicop_12411', 'poste_coicop_1270']
-
     # Check if there is anything else to include in this list
     biens_durables = ['poste_04_1_1_1_1', 'poste_04_1_1_2_1', 'poste_04_4_1_2_1', 'poste_04_4_1_3_1',
         'poste_07_1_1_1_1', 'poste_07_1_2_1_1', 'poste_07_1_2_1_2', 'poste_09_1_1_1_3', 'poste_09_1_1_1_2',
@@ -193,7 +186,7 @@ for year in [2000, 2005, 2011]:
     aggregates_data_frame = electricite_only(aggregates_data_frame)
     # On récupère les informations importantes sur les ménages, dont les variables démographiques
     df_info_menage = aggregates_data_frame[['agepr', 'depenses_autre', 'depenses_carbu',
-        'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'numero_menage', 'nenfants', 'nactifs', 'ocde10',
+        'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'ident_men', 'numero_menage', 'nenfants', 'nactifs', 'ocde10',
         'revtot', 'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
         'veh_essence']].copy()
     df_info_menage['numero_menage'] = df_info_menage['numero_menage'].astype(str)
@@ -219,7 +212,7 @@ for year in [2000, 2005, 2011]:
 
     dataframe['depenses_par_uc'] = dataframe['depenses_tot'] / dataframe['ocde10']
 
-    dataframe = dataframe[['numero_menage', 'part_carbu', 'part_logem', 'part_autre', 'prix_carbu', 'prix_logem',
+    dataframe = dataframe[['ident_men', 'numero_menage', 'part_carbu', 'part_logem', 'part_autre', 'prix_carbu', 'prix_logem',
         'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'elect_only', 'nactifs', 'nenfants',
         'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel', 'veh_essence']]
 
