@@ -5,8 +5,8 @@ data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-i
 # Compute matching
 out.nnd <- NND.hotdeck(
   data.rec = data_bdf, data.don = data_enl,
-  match.vars = c("part_energies_revtot", "log_indiv", "electricite", "ouest_sud",
-                 "nactifs", "dip14pr", "revtot", "rural", "nenfants",
+  match.vars = c("part_energies_revtot", "aides_logement", "log_indiv", "electricite", "ouest_sud",
+                 "nactifs", "bat_av_49", "dip14pr", "revtot", "rural", "nenfants",
                  "petite_ville", "surfhab_d"),
   don.class = c("donation_class_4"),
   dist.fun = "Gower"
