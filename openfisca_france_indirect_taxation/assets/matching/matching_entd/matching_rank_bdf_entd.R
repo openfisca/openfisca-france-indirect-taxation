@@ -1,11 +1,11 @@
 # Import data
-data_entd <- read.csv(file = "C:/Users/t.douenne/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matching_entd.csv", header = -1, sep=",")
-data_bdf <- read.csv(file = "C:/Users/t.douenne/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matching_bdf.csv", header = -1, sep=",")
+data_entd <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matching_entd.csv", header = -1, sep=",")
+data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matching_bdf.csv", header = -1, sep=",")
 
 # Compute ranked matching
 out.nnd <- rankNND.hotdeck(
   data.rec = data_bdf, data.don = data_entd,
-  var.rec = c("poste_coicop_722"),
+  var.rec = c("poste_07_2_2_1_1"),
   var.don = c("distance"),
   don.class = c("niveau_vie_decile", "rural"),
   weight.rec = "pondmen",
@@ -21,5 +21,5 @@ fused.nnd.m <- create.fused(
 
 # Save it as csv
 write.csv(fused.nnd.m,
-          file = "C:/Users/t.douenne/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matched_rank.csv"
+          file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matched_rank.csv"
 )
