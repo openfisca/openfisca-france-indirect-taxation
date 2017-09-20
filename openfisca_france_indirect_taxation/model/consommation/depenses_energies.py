@@ -17,6 +17,12 @@ class depenses_carburants(YearlyVariable):
         return simulation.calculate('poste_07_2_2_1_1', period)
 
 
+class depenses_carburants_corrigees(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Consommation de carburants corrigees après appariement ENTD"
+
+
 class depenses_combustibles_liquides(YearlyVariable):
     column = FloatCol
     entity = Menage
@@ -37,6 +43,12 @@ class depenses_combustibles_solides(YearlyVariable):
         depenses_combustibles_solides = simulation.calculate('poste_04_5_4_1_1', period)
 
         return depenses_combustibles_solides
+
+
+class depenses_diesel_corrigees(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Consommation en diesel corrigees après appariement ENTD"
 
 
 class depenses_diesel_htva(YearlyVariable):
@@ -277,6 +289,12 @@ class depenses_energies_totales(YearlyVariable):
             )
 
         return depenses_energies_totales
+
+
+class depenses_essence_corrigees(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Consommation en essence corrigees après appariement ENTD"
 
 
 class depenses_essence_ht(Variable):

@@ -51,13 +51,13 @@ def calage_depenses_from_distance(data_matched):
                 data_matched_group['pondmen'].sum()
                 )
 
-            data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_carburants'] = \
+            data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_carburants_corrigees'] = \
                 data_matched['distance'] * avg_depenses / avg_distance
     
-            data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_diesel'] = \
+            data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_diesel_corrigees'] = \
                 data_matched['distance_diesel'] * avg_depenses / avg_distance
     
-            data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_essence'] = \
+            data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_essence_corrigees'] = \
                 data_matched['distance_essence'] * avg_depenses / avg_distance
 
     return data_matched

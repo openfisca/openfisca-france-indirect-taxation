@@ -29,6 +29,24 @@ from __future__ import division
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
+class froid(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver"
+
+
+class froid_cout(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver en raison du cout du chauffage"
+
+
+class froid_isolation(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver en raison d'une mauvaise isolation"
+
+
 class ident_men(YearlyVariable):
     column = StrCol
     entity = Menage

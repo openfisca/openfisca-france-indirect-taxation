@@ -6,6 +6,7 @@ from __future__ import division
 
 import logging
 import os
+import pkg_resources
 import pandas
 import numpy
 
@@ -116,23 +117,36 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
 
     data_frame.index.name = "ident_men"
 
-
-    # Créer un nouvel identifiant pour les ménages
-    data_frame['identifiant_menage'] = range(0,len(data_frame))
-    data_frame['identifiant_menage'] = data_frame['identifiant_menage'] + (year_data * 100000)
-
     # TODO: Homogénéiser: soit faire en sorte que ident_men existe pour toutes les années
     # soit qu'elle soit en index pour toutes
-
-    # On ne garde que les ménages métropolitains
-    if year_data == 2011:
-        data_frame = data_frame.query('zeat != 0').copy()
-        #pass
 
     try:
         data_frame.reset_index(inplace = True)
     except ValueError as e:
         log.info('ignoring reset_index because {}'.format(e))
+
+    # On ne garde que les ménages métropolitains
+    if year_data == 2011:
+        data_frame = data_frame.query('zeat != 0').copy()
+
+        # On apparie ajoute les données appariées de l'ENL et l'ENTD
+        default_config_files_directory = os.path.join(
+            pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+        data_matched = pandas.read_csv(
+            os.path.join(
+                default_config_files_directory,
+                'openfisca_france_indirect_taxation',
+                'assets',
+                'matching',
+                'data_for_run_all.csv'
+                ), sep =',', decimal = '.'
+            )
+        data_matched['ident_men'] = data_matched['ident_men'].astype(str)
+        data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
+
+    # Créer un nouvel identifiant pour les ménages
+    data_frame['identifiant_menage'] = range(0,len(data_frame))
+    data_frame['identifiant_menage'] = data_frame['identifiant_menage'] + (year_data * 100000)
 
     # Remove duplicated colums causing bug with HDFStore
     # according to https://github.com/pydata/pandas/issues/6240
