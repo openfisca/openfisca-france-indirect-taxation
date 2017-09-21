@@ -3,20 +3,86 @@
 from __future__ import division
 
 import os
+from openfisca_core.reforms import Reform, update_legislation
+
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 from ..model.taxes_indirectes import tva, ticpe
 from ..model.consommation import emissions_co2, quantites_energie
 
 
-dir_path = os.path.join(os.path.dirname(__file__), 'parameters')
+#dir_path = os.path.join(os.path.dirname(__file__), 'parameters')
 
 
-def modify_parameters(parameters):
-    file_path = os.path.join(dir_path, 'rattrapage-diesel-parameters.yaml')
-    reform_parameters_subtree = load_parameter_file(name='rattrapage-diesel-parameters', file_path=file_path)
-    parameters.add_child('rattrapage-diesel-parameters', reform_parameters_subtree)
-    return parameters
+#def modify_parameters(parameters):
+#    file_path = os.path.join(dir_path, 'rattrapage-diesel-parameters.yaml')
+#    reform_parameters_subtree = load_parameter_file(name='rattrapage-diesel-parameters', file_path=file_path)
+#    parameters.add_child('rattrapage_diesel-parameters', reform_parameters_subtree)
+#    return parameters
+
+
+def modify_legislation_json(reference_legislation_json_copy):
+    reform_legislation_subtree = {
+        "@type": "Node",
+        "description": "rattrapage_diesel",
+        "children": {
+            "diesel": {
+                "@type": "Parameter",
+                "description": u"Surcroît de prix du diesel (en euros par hectolitres)",
+                "format": "float",
+                "unit": "currency",
+                "values": [
+                    {'start': u'2016-01-01', 'value': 15.31},
+                    {'start': u'2015-01-01', 'value': 15.59},
+                    {'start': u'2010-01-01', 'value': 17.85},
+                    ],
+                },
+            "essence": {
+                "@type": "Parameter",
+                "description": u"Surcroît de prix de l'essence (en euros par hectolitres)",
+                "format": 'float',
+                "unit": 'currency',
+                "values": [
+                    {'start': u'2010-01-01', 'value': 0},
+                    ],
+                },
+            "abaissement_tva_taux_plein": {
+                "@type": "Parameter",
+                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
+                "format": 'float',
+                "values": [
+                    {'start': u'2010-01-01', 'value': 0.01},
+                    ],
+                },
+            "abaissement_tva_taux_plein_bis": {
+                "@type": "Parameter",
+                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
+                "format": 'float',
+                "values": [
+                    {'start': u'2010-01-01', 'value': 0.005},
+                    ],
+                },
+            "abaissement_tva_taux_reduit": {
+                "@type": "Parameter",
+                "description": u"Baisse de la TVA à taux réduit pour obtenir un budget constant",
+                "format": 'float',
+                "values": [
+                    {'start': u'2010-01-01', 'value': 0.01},
+                    ],
+                },
+            "abaissement_tva_taux_super_reduit": {
+                "@type": "Parameter",
+                "description": u"Baisse de la TVA à taux super réduit pour obtenir un budget constant",
+                "format": 'float',
+                "values": [
+                    {'start': u'2010-01-01', 'value': 0.01},
+                    ],
+                },
+            },
+        }
+
+    reference_legislation_json_copy['children']['rattrapage_diesel'] = reform_legislation_subtree
+    return reference_legislation_json_copy
 
 
 class rattrapage_diesel(Reform):
@@ -545,7 +611,7 @@ class rattrapage_diesel(Reform):
             return total
     
 
-    
+
     def apply(self):
         self.update_variable(self.depenses_diesel_ajustees_rattrapage_diesel)
         self.update_variable(self.depenses_essence_ajustees_rattrapage_diesel)
@@ -572,4 +638,45 @@ class rattrapage_diesel(Reform):
         self.update_variable(self.tva_taux_reduit)
         self.update_variable(self.tva_taux_super_reduit)
         self.update_variable(self.tva_total)
-        self.modify_parameters(modifier_function = modify_parameters)
+        self.modify_legislation_json(modifier_function = modify_legislation_json)
+        #self.modify_parameters(modifier_function = modify_parameters)
+
+
+
+"""
+
+    def apply(self):
+        self.modify_legislation_json(modifier_function = modify_legislation_json)
+        variables = [
+            depenses_diesel_ajustees_rattrapage_diesel,
+            depenses_essence_ajustees_rattrapage_diesel,
+            depenses_tva_taux_plein_ajustees_rattrapage_diesel,
+            depenses_tva_taux_plein_bis_ajustees_rattrapage_diesel,
+            depenses_tva_taux_reduit_ajustees_rattrapage_diesel,
+            depenses_tva_taux_super_reduit_ajustees_rattrapage_diesel,
+            diesel_ticpe,
+            emissions_CO2_carburants,
+            essence_ticpe,
+            quantites_diesel,
+            quantites_sp_e10,
+            quantites_sp95,
+            quantites_sp98,
+            quantites_super_plombe,
+            quantites_essence,
+            sp_e10_ticpe,
+            sp95_ticpe,
+            sp98_ticpe,
+            super_plombe_ticpe,
+            ticpe_totale,
+            tva_taux_plein,
+            tva_taux_plein_bis,
+            tva_taux_reduit,
+            tva_taux_super_reduit,
+            tva_total,
+            ]
+        for variable in variables:
+            self.add_variable(variable)
+
+"""
+
+
