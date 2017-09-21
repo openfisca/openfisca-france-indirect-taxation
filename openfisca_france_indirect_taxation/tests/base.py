@@ -35,7 +35,7 @@ reform_list = {
     'aliss_mixte': aliss.aliss_mixte,
     'aliss_sante': aliss.aliss_sante,
     'aliss_tva_sociale': aliss.aliss_tva_sociale,
-    'rattrapage_diesel_bis': rattrapage_diesel_bis
+    'rattrapage_diesel': rattrapage_diesel_bis.rattrapage_diesel
     # 'contribution_climat_energie': contribution_climat_energie.build_reform,
     # 'test_reforme_alimentation': alimentation.build_reform,
     # 'taxes_carburants': taxes_carburants.build_reform,
