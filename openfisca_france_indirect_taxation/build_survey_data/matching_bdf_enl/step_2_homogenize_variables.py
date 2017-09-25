@@ -9,6 +9,25 @@ import numpy as np
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_1_build_dataframes import \
     load_data_bdf_enl
+from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
+
+
+
+def inflate_energy_consumption(data_enl, data_bdf):
+    inflators = get_inflators_by_year_energy() # Inflate BdF to year of the ENL, 2013
+    inflators_bdf = inflators[2013]
+    inflators_enl = dict()
+    inflators_bdf['depenses_gaz_liquefie'] = inflators_bdf['depenses_gaz_ville']
+    for energie in ['depenses_electricite', 'depenses_gaz_ville', 'depenses_gaz_liquefie',
+        'depenses_combustibles_liquides', 'depenses_combustibles_solides']:
+        data_bdf[energie] = data_bdf[energie] * inflators_bdf[energie]
+        inflators_enl[energie] = (
+            (sum(data_bdf['pondmen'] * data_bdf[energie]) / sum(data_bdf['pondmen'])) /
+            (sum(data_enl['pondmen'] * data_enl[energie]) / sum(data_enl['pondmen']))
+            )
+        data_enl[energie] = data_enl[energie] * inflators_enl[energie]
+        
+    return data_enl, data_bdf
 
 
 def homogenize_variables_definition_bdf_enl():
@@ -148,7 +167,9 @@ def homogenize_variables_definition_bdf_enl():
 
     data_enl = data_enl.sort_index(axis = 1)
     data_bdf = data_bdf.sort_index(axis = 1)
-    
+
+    (data_enl, data_bdf) = inflate_energy_consumption(data_enl, data_bdf) 
+
     return data_enl, data_bdf
 
 
