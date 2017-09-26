@@ -253,12 +253,13 @@ class depenses_energies_logement(YearlyVariable):
 
     def formula(self, simulation, period):
         depenses_electricite = simulation.calculate('depenses_electricite', period)
-        depenses_gaz = simulation.calculate('depenses_gaz_ville', period)
+        depenses_gaz_ville = simulation.calculate('depenses_gaz_ville', period)
+        depenses_gaz_liquefie = simulation.calculate('depenses_gaz_liquefie', period)
         depenses_combustibles_liquides = simulation.calculate('depenses_combustibles_liquides', period)
         depenses_combustibles_solides = simulation.calculate('depenses_combustibles_solides', period)
         depenses_energie_thermique = simulation.calculate('depenses_energie_thermique', period)
         depenses_energies_logement = (
-            depenses_electricite + depenses_gaz + depenses_combustibles_liquides +
+            depenses_electricite + depenses_gaz_ville + depenses_gaz_liquefie + depenses_combustibles_liquides +
             depenses_combustibles_solides + depenses_energie_thermique
             )
 
@@ -444,7 +445,7 @@ class depenses_gaz_ville(YearlyVariable):
     def formula(self, simulation, period):
         depenses_gaz_seul = simulation.calculate('depenses_gaz_seul', period)
         depenses_gaz_factures_jointes = simulation.calculate('depenses_gaz_factures_jointes', period)
-        depenses_gaz_ville = depenses_gaz_seul - depenses_gaz_factures_jointes
+        depenses_gaz_ville = depenses_gaz_seul + depenses_gaz_factures_jointes
  
         return depenses_gaz_ville
 

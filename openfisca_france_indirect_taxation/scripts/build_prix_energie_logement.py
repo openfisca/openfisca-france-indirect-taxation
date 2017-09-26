@@ -27,7 +27,7 @@ for year in [2000, 2005, 2011]:
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
-        reform_key = 'rattrapage_diesel',
+        reform_key = 'rattrapage_diesel_bis',
         year = year,
         )
 

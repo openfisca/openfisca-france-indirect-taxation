@@ -140,7 +140,7 @@ def graph_builder_bar(graph):
 def graph_builder_bar_percent(graph):
     axes = graph.plot(
         kind = 'bar',
-        stacked = True,
+        stacked = False,
         )
     plt.axhline(0, color = 'k')
     axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
