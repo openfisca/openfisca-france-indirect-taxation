@@ -32,7 +32,8 @@ data_matched_entd = pandas.read_csv(
     )
 
 data_matched_enl = data_matched_enl[
-    ['froid'] + ['froid_cout'] + ['froid_isolation'] + ['ident_men']
+    ['froid'] + ['froid_cout'] + ['froid_installation'] + ['froid_impaye'] +
+    ['froid_isolation'] + ['ident_men']
     ]
 
 data_matched_entd = data_matched_entd[

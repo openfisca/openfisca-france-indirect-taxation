@@ -237,6 +237,10 @@ def create_new_variables():
             data['froid'].loc[data['gchauf_n'] != 0] = 1
             del data['gchauf_n']
 
+            data['froid_installation'] = 0
+            data['froid_installation'].loc[data['gchauf_1'] == 1] = 1
+            del data['gchauf_1']
+
             data['froid_cout'] = 0
             data['froid_cout'].loc[data['gchauf_3'] == 1] = 1
             del data['gchauf_3']
@@ -245,7 +249,11 @@ def create_new_variables():
             data['froid_isolation'] = 0
             data['froid_isolation'].loc[data['gchauf_4'] == 1] = 1
             del data['gchauf_4']
-        
+ 
+            data['froid_impaye'] = 0
+            data['froid_impaye'].loc[data['gchauf_5'] == 1] = 1
+            del data['gchauf_5']
+       
         data['aides_logement'] = 0
         data['aides_logement'].loc[data['aba'] == 1] = 1
 

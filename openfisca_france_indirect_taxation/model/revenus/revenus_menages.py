@@ -84,6 +84,20 @@ class loyer_impute(YearlyVariable):
     label = u"Loyer imputé du ménage"
 
 
+class rev_apres_loyer(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Revenu disponible du ménage auquel on ajoute le loyer imputé"
+
+    def formula(self, simulation, period):
+        revenu_disponible = simulation.calculate('rev_disponible', period)
+        loyer = simulation.calculate('poste_04_1_1_1_1', period)
+        
+        rev_apres_loyer = revenu_disponible - loyer
+        
+        return rev_apres_loyer
+
+
 class rev_disp_loyerimput(YearlyVariable):
     column = FloatCol
     entity = Menage
