@@ -15,8 +15,8 @@ out.nnd <- rankNND.hotdeck(
 fused.nnd.m <- create.fused(
   data.rec = data_bdf, data.don = data_enl,
   mtc.ids = out.nnd$mtc.ids,
-  z.vars = c("froid", "gchauf_1", "gchauf_2", "froid_cout", "froid_isolation",
-             "gchauf_5", "gchauf_6", "gchauf_7", "gchaufs_1",
+  z.vars = c("froid", "froid_installation", "gchauf_2", "froid_cout", "froid_isolation",
+             "froid_impaye", "gchauf_6", "gchauf_7", "gchaufs_1",
              "gchaufs_2", "gchaufs_3", "gchaufs_4", "gchaufs_5",
              "gmur", "gtoit2")
 )
