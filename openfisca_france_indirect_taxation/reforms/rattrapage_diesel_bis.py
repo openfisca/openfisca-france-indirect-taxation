@@ -28,7 +28,7 @@ def modify_legislation_json(reference_legislation_json_copy):
         "children": {
             "diesel": {
                 "@type": "Parameter",
-                "description": u"Surcroît de prix du diesel (en euros par hectolitres)",
+                "description": u"Surcroit de prix du diesel (en euros par hectolitres)",
                 "format": "float",
                 "unit": "currency",
                 "values": [
@@ -39,7 +39,7 @@ def modify_legislation_json(reference_legislation_json_copy):
                 },
             "essence": {
                 "@type": "Parameter",
-                "description": u"Surcroît de prix de l'essence (en euros par hectolitres)",
+                "description": u"Surcroit de prix de l'essence (en euros par hectolitres)",
                 "format": 'float',
                 "unit": 'currency',
                 "values": [
@@ -48,7 +48,7 @@ def modify_legislation_json(reference_legislation_json_copy):
                 },
             "abaissement_tva_taux_plein": {
                 "@type": "Parameter",
-                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
+                "description": u"Baisse de la TVA a taux plein pour obtenir un budget constant",
                 "format": 'float',
                 "values": [
                     {'start': u'2010-01-01', 'value': 0.01},
@@ -56,7 +56,7 @@ def modify_legislation_json(reference_legislation_json_copy):
                 },
             "abaissement_tva_taux_plein_bis": {
                 "@type": "Parameter",
-                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
+                "description": u"Baisse de la TVA a taux plein pour obtenir un budget constant",
                 "format": 'float',
                 "values": [
                     {'start': u'2010-01-01', 'value': 0.005},
@@ -64,7 +64,7 @@ def modify_legislation_json(reference_legislation_json_copy):
                 },
             "abaissement_tva_taux_reduit": {
                 "@type": "Parameter",
-                "description": u"Baisse de la TVA à taux réduit pour obtenir un budget constant",
+                "description": u"Baisse de la TVA a taux reduit pour obtenir un budget constant",
                 "format": 'float',
                 "values": [
                     {'start': u'2010-01-01', 'value': 0.01},
@@ -72,7 +72,7 @@ def modify_legislation_json(reference_legislation_json_copy):
                 },
             "abaissement_tva_taux_super_reduit": {
                 "@type": "Parameter",
-                "description": u"Baisse de la TVA à taux super réduit pour obtenir un budget constant",
+                "description": u"Baisse de la TVA a taux super reduit pour obtenir un budget constant",
                 "format": 'float',
                 "values": [
                     {'start': u'2010-01-01', 'value': 0.01},
@@ -87,13 +87,13 @@ def modify_legislation_json(reference_legislation_json_copy):
 
 class rattrapage_diesel(Reform):
     key = 'rattrapage_diesel',
-    name = u"Réforme de l'imposition indirecte des carburants",
+    name = u"Reforme de l'imposition indirecte des carburants",
 
 
     class depenses_diesel_ajustees_rattrapage_diesel(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses en diesel après réaction à la réforme - taxes carburants"
+        label = u"Depenses en diesel après reaction a la reforme - taxes carburants"
     
         def formula(self, simulation, period):
             depenses_diesel = simulation.calculate('depenses_diesel', period)
@@ -109,7 +109,7 @@ class rattrapage_diesel(Reform):
     class depenses_essence_ajustees_rattrapage_diesel(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses en essence après réaction à la réforme - taxes carburants"
+        label = u"Depenses en essence après reaction a la reforme - taxes carburants"
     
         def formula(self, simulation, period):
             depenses_essence = simulation.calculate('depenses_essence', period)
@@ -125,7 +125,7 @@ class rattrapage_diesel(Reform):
     class depenses_tva_taux_plein_ajustees_rattrapage_diesel(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme - taxes carburants"
+        label = u"Depenses sur les biens assujetis a la TVA a taux plein après reaction a la reforme - taxes carburants"
     
         def formula(self, simulation, period):
             depenses_tva_taux_plein = simulation.calculate('depenses_tva_taux_plein', period)
@@ -143,7 +143,7 @@ class rattrapage_diesel(Reform):
     class depenses_tva_taux_plein_bis_ajustees_rattrapage_diesel(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme - taxes carburants"
+        label = u"Depenses sur les biens assujetis a la TVA a taux plein après reaction a la reforme - taxes carburants"
     
         def formula(self, simulation, period):
             depenses_tva_taux_plein = simulation.calculate('depenses_tva_taux_plein', period)
@@ -160,7 +160,7 @@ class rattrapage_diesel(Reform):
     class depenses_tva_taux_reduit_ajustees_rattrapage_diesel(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses sur les biens assujetis à la TVA à taux reduit après réaction à la réforme - taxes carburants"
+        label = u"Depenses sur les biens assujetis a la TVA a taux reduit après reaction a la reforme - taxes carburants"
     
         def formula(self, simulation, period):
             depenses_tva_taux_reduit = simulation.calculate('depenses_tva_taux_reduit', period)
@@ -177,7 +177,7 @@ class rattrapage_diesel(Reform):
     class depenses_tva_taux_super_reduit_ajustees_rattrapage_diesel(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses sur les biens assujetis à la TVA tx super reduit après réaction à la réforme - taxes carburants"
+        label = u"Depenses sur les biens assujetis a la TVA tx super reduit après reaction a la reforme - taxes carburants"
     
         def formula(self, simulation, period):
             depenses_tva_taux_super_reduit = simulation.calculate('depenses_tva_taux_super_reduit', period)
@@ -193,7 +193,7 @@ class rattrapage_diesel(Reform):
     
     
     class diesel_ticpe(YearlyVariable):
-        label = u"Calcul du montant de TICPE sur le diesel après réforme"
+        label = u"Calcul du montant de TICPE sur le diesel après reforme"
         reference = ticpe.diesel_ticpe
     
         def formula(self, simulation, period):
@@ -230,7 +230,7 @@ class rattrapage_diesel(Reform):
     
     
     class emissions_CO2_carburants(YearlyVariable):
-        label = u"Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
+        label = u"Emissions de CO2 des menages via leur consommation de carburants après reforme, en kg de CO2"
         # reference = emissions_co2.emissions_CO2_carburants
     
         def formula(self, simulation, period):
@@ -249,7 +249,7 @@ class rattrapage_diesel(Reform):
     
     
     class essence_ticpe(YearlyVariable):
-        label = u"Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
+        label = u"Calcul du montant de la TICPE sur toutes les essences cumulees, après reforme"
         reference = ticpe.essence_ticpe
         definition_period = YEAR
     
@@ -275,7 +275,7 @@ class rattrapage_diesel(Reform):
     
     
     class quantites_diesel(YearlyVariable):
-        label = u"Quantités de diesel consommées après la réforme - taxe carburants"
+        label = u"Quantites de diesel consommees après la reforme - taxe carburants"
         reference = quantites_energie.quantites_diesel
     
         def formula(self, simulation, period):
@@ -289,7 +289,7 @@ class rattrapage_diesel(Reform):
     
     
     class quantites_sp_e10(YearlyVariable):
-        label = u"Quantités consommées de sans plomb e10 par les ménages après réforme - taxe carburants"
+        label = u"Quantites consommees de sans plomb e10 par les menages après reforme - taxe carburants"
         reference = quantites_energie.quantites_sp_e10
     
         def formula(self, simulation, period):
@@ -305,7 +305,7 @@ class rattrapage_diesel(Reform):
     
     
     class quantites_sp95(YearlyVariable):
-        label = u"Quantités consommées de sans plomb 95 par les ménages après réforme"
+        label = u"Quantites consommees de sans plomb 95 par les menages après reforme"
         reference = quantites_energie.quantites_sp95
     
         def formula(self, simulation, period):
@@ -320,7 +320,7 @@ class rattrapage_diesel(Reform):
     
     
     class quantites_sp98(YearlyVariable):
-        label = u"Quantités consommées de sans plomb 98 par les ménages"
+        label = u"Quantites consommees de sans plomb 98 par les menages"
         reference = quantites_energie.quantites_sp98
     
         def formula(self, simulation, period):
@@ -335,7 +335,7 @@ class rattrapage_diesel(Reform):
     
     
     class quantites_super_plombe(YearlyVariable):
-        label = u"Quantités consommées de super plombé par les ménages après réforme"
+        label = u"Quantites consommees de super plombe par les menages après reforme"
         reference = quantites_energie.quantites_super_plombe
     
         def formula(self, simulation, period):
@@ -351,7 +351,7 @@ class rattrapage_diesel(Reform):
     
 
     class quantites_essence(YearlyVariable):
-        label = u"Quantités d'essence consommées par les ménages après réforme"
+        label = u"Quantites d'essence consommees par les menages après reforme"
         reference = quantites_energie.quantites_essence
     
         def formula_2009(self, simulation, period):
@@ -379,7 +379,7 @@ class rattrapage_diesel(Reform):
     
 
     class sp_e10_ticpe(YearlyVariable):
-        label = u"Calcul du montant de la TICPE sur le SP E10 après réforme"
+        label = u"Calcul du montant de la TICPE sur le SP E10 après reforme"
         reference = ticpe.sp_e10_ticpe
     
         def formula(self, simulation, period):
@@ -415,7 +415,7 @@ class rattrapage_diesel(Reform):
 
     
     class sp95_ticpe(YearlyVariable):
-        label = u"Calcul du montant de TICPE sur le sp_95 après réforme"
+        label = u"Calcul du montant de TICPE sur le sp_95 après reforme"
         reference = ticpe.sp95_ticpe
     
         def formula(self, simulation, period):
@@ -452,7 +452,7 @@ class rattrapage_diesel(Reform):
 
     
     class sp98_ticpe(YearlyVariable):
-        label = u"Calcul du montant de TICPE sur le sp_98 après réforme"
+        label = u"Calcul du montant de TICPE sur le sp_98 après reforme"
         reference = ticpe.sp98_ticpe
     
         def formula(self, simulation, period):
@@ -489,7 +489,7 @@ class rattrapage_diesel(Reform):
     
 
     class super_plombe_ticpe(YearlyVariable):
-        label = u"Calcul du montant de la TICPE sur le super plombé après réforme"
+        label = u"Calcul du montant de la TICPE sur le super plombe après reforme"
         reference = ticpe.super_plombe_ticpe
     
         def formula(self, simulation, period):
@@ -521,7 +521,7 @@ class rattrapage_diesel(Reform):
 
     
     class ticpe_totale(YearlyVariable):
-        label = u"Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
+        label = u"Calcul du montant de la TICPE sur tous les carburants cumules, après reforme"
         reference = ticpe.ticpe_totale
     
         def formula(self, simulation, period):
@@ -533,7 +533,7 @@ class rattrapage_diesel(Reform):
 
     
     class tva_taux_plein(YearlyVariable):
-        label = u"Contribution sur la TVA à taux plein après réaction à la réforme - taxes carburants"
+        label = u"Contribution sur la TVA a taux plein après reaction a la reforme - taxes carburants"
         reference = tva.tva_taux_plein
     
         def formula(self, simulation, period):
@@ -550,7 +550,7 @@ class rattrapage_diesel(Reform):
     class tva_taux_plein_bis(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Contribution sur la TVA à taux plein après réaction à la réforme - taxes carburants"
+        label = u"Contribution sur la TVA a taux plein après reaction a la reforme - taxes carburants"
     
         def formula(self, simulation, period):
             depenses_tva_taux_plein_ajustees = \
@@ -565,7 +565,7 @@ class rattrapage_diesel(Reform):
 
     
     class tva_taux_reduit(YearlyVariable):
-        label = u"Contribution sur la TVA à taux reduit après réaction à la réforme - taxes carburants"
+        label = u"Contribution sur la TVA a taux reduit après reaction a la reforme - taxes carburants"
         reference = tva.tva_taux_reduit
     
         def formula(self, simulation, period):
@@ -581,7 +581,7 @@ class rattrapage_diesel(Reform):
 
     
     class tva_taux_super_reduit(YearlyVariable):
-        label = u"Contribution sur la TVA à taux super reduit après réaction à la réforme - taxes carburants"
+        label = u"Contribution sur la TVA a taux super reduit après reaction a la reforme - taxes carburants"
         reference = tva.tva_taux_super_reduit
     
         def formula(self, simulation, period):
@@ -597,7 +597,7 @@ class rattrapage_diesel(Reform):
 
 
     class tva_total(YearlyVariable):
-        label = u"Différence de contribution sur la TVA après réaction à la réforme - rattrapage diesel"
+        label = u"Difference de contribution sur la TVA après reaction a la reforme - rattrapage diesel"
         reference = tva.tva_total
     
         def formula(self, simulation, period):
@@ -609,42 +609,8 @@ class rattrapage_diesel(Reform):
             total = (taux_plein + taux_reduit + taux_super_reduit + taux_intermediaire)
     
             return total
-    
 
-
-    def apply(self):
-        self.update_variable(self.depenses_diesel_ajustees_rattrapage_diesel)
-        self.update_variable(self.depenses_essence_ajustees_rattrapage_diesel)
-        self.update_variable(self.depenses_tva_taux_plein_ajustees_rattrapage_diesel)
-        self.update_variable(self.depenses_tva_taux_plein_bis_ajustees_rattrapage_diesel)
-        self.update_variable(self.depenses_tva_taux_reduit_ajustees_rattrapage_diesel)
-        self.update_variable(self.depenses_tva_taux_super_reduit_ajustees_rattrapage_diesel)
-        self.update_variable(self.diesel_ticpe)
-        self.update_variable(self.emissions_CO2_carburants)
-        self.update_variable(self.essence_ticpe)
-        self.update_variable(self.quantites_diesel)
-        self.update_variable(self.quantites_sp_e10)
-        self.update_variable(self.quantites_sp95)
-        self.update_variable(self.quantites_sp98)
-        self.update_variable(self.quantites_super_plombe)
-        self.update_variable(self.quantites_essence)
-        self.update_variable(self.sp_e10_ticpe)
-        self.update_variable(self.sp95_ticpe)
-        self.update_variable(self.sp98_ticpe)
-        self.update_variable(self.super_plombe_ticpe)
-        self.update_variable(self.ticpe_totale)
-        self.update_variable(self.tva_taux_plein)
-        self.update_variable(self.tva_taux_plein_bis)
-        self.update_variable(self.tva_taux_reduit)
-        self.update_variable(self.tva_taux_super_reduit)
-        self.update_variable(self.tva_total)
-        self.modify_legislation_json(modifier_function = modify_legislation_json)
-        #self.modify_parameters(modifier_function = modify_parameters)
-
-
-
-"""
-
+            
     def apply(self):
         self.modify_legislation_json(modifier_function = modify_legislation_json)
         variables = [
@@ -676,7 +642,39 @@ class rattrapage_diesel(Reform):
             ]
         for variable in variables:
             self.add_variable(variable)
+    
 
 """
+
+    def apply(self):
+        self.update_variable(self.depenses_diesel_ajustees_rattrapage_diesel)
+        self.update_variable(self.depenses_essence_ajustees_rattrapage_diesel)
+        self.update_variable(self.depenses_tva_taux_plein_ajustees_rattrapage_diesel)
+        self.update_variable(self.depenses_tva_taux_plein_bis_ajustees_rattrapage_diesel)
+        self.update_variable(self.depenses_tva_taux_reduit_ajustees_rattrapage_diesel)
+        self.update_variable(self.depenses_tva_taux_super_reduit_ajustees_rattrapage_diesel)
+        self.update_variable(self.diesel_ticpe)
+        self.update_variable(self.emissions_CO2_carburants)
+        self.update_variable(self.essence_ticpe)
+        self.update_variable(self.quantites_diesel)
+        self.update_variable(self.quantites_sp_e10)
+        self.update_variable(self.quantites_sp95)
+        self.update_variable(self.quantites_sp98)
+        self.update_variable(self.quantites_super_plombe)
+        self.update_variable(self.quantites_essence)
+        self.update_variable(self.sp_e10_ticpe)
+        self.update_variable(self.sp95_ticpe)
+        self.update_variable(self.sp98_ticpe)
+        self.update_variable(self.super_plombe_ticpe)
+        self.update_variable(self.ticpe_totale)
+        self.update_variable(self.tva_taux_plein)
+        self.update_variable(self.tva_taux_plein_bis)
+        self.update_variable(self.tva_taux_reduit)
+        self.update_variable(self.tva_taux_super_reduit)
+        self.update_variable(self.tva_total)
+        self.modify_legislation_json(modifier_function = modify_legislation_json)
+        #self.modify_parameters(modifier_function = modify_parameters)
+"""
+
 
 

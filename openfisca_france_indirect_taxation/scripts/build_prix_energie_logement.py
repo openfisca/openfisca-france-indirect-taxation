@@ -13,7 +13,7 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_bis import get_in
 
 
 inflators_by_year = get_inflators_by_year(rebuild = False)
-# Liste des coicop agrégées en 12 postes
+
 simulated_variables = [
     'depenses_electricite_prix_unitaire',
     'depenses_gaz_prix_unitaire',

@@ -8,15 +8,15 @@ legislation_json = {
     "children": {
         "imposition_indirecte": {
             "@type": "Node",
-            "description": "Impôts et taxes indirectes",
+            "description": u"Impôts et taxes indirectes",
             "children": {
                 "tva": {
                     "@type": "Node",
-                    "description": "Taxe sur la valeur ajoutée",
+                    "description": u"Taxe sur la valeur ajoutée",
                     "children": {
                         "taux_plein": {
                             "@type": "Parameter",
-                            "description": "Taux plein",
+                            "description": u"Taux plein",
                             "format": "float",
                             "values": [
                                 {'start': u'1993-01-01', 'stop': u'1995-08-01', 'value': .186},
@@ -27,7 +27,7 @@ legislation_json = {
                             },
                         "taux_intermediaire": {
                             "@type": "Parameter",
-                            "description": "Taux intermédiaire",
+                            "description": u"Taux intermédiaire",
                             "format": "float",
                             "values": [
                                 {'start': u'1995-01-01', 'stop': u'2012-12-31', 'value': 0},
@@ -37,7 +37,7 @@ legislation_json = {
                             },
                         "taux_reduit": {
                             "@type": "Parameter",
-                            "description": "Taux réduit",
+                            "description": u"Taux réduit",
                             "format": "float",
                             "values": [
                                 {'start': u'2000-01-01', 'stop': u'2014-12-31', 'value': .055}
@@ -45,7 +45,7 @@ legislation_json = {
                             },
                         "taux_super_reduit": {
                             "@type": "Parameter",
-                            "description": "Taux super réduit",
+                            "description": u"Taux super réduit",
                             "format": "float",
                             "values": [
                                 {'start': u'1995-01-01', 'stop': u'2014-12-31', 'value': .021}
@@ -55,11 +55,11 @@ legislation_json = {
                     },
                 "taux_assurances": {
                     "@type": "Node",
-                    "description": "Différentes taxes sur les assurances",
+                    "description": u"Différentes taxes sur les assurances",
                     "children": {
                         "taux_assur_transport": {
                             "@type": "Parameter",
-                            "description": "Le taux d'assurance sur les transports",
+                            "description": u"Le taux d'assurance sur les transports",
                             "format": "float",
                             "values": [
                                 {'start': u'1995-01-01', 'stop': u'2001-12-31', 'value': 0.18},
@@ -80,7 +80,7 @@ legislation_json = {
                             },
                         "taux_assurances_sante": {
                             "@type": "Parameter",
-                            "description": "Le taux d'assurance sante",
+                            "description": u"Le taux d'assurance sante",
                             "format": "float",
                             "values": [
                                 {'start': u'1995-01-01', 'stop': u'1999-12-31', 'value': 0.07},
@@ -103,7 +103,7 @@ legislation_json = {
                             },
                         "taux_assurances_autres": {
                             "@type": "Parameter",
-                            "description": "Le taux d'assurance sur autres",
+                            "description": u"Le taux d'assurance sur autres",
                             "format": "float",
                             "values": [
                                 {'start': u'1995-01-01', 'stop': u'1999-12-31', 'value': 0.09},
@@ -128,11 +128,11 @@ legislation_json = {
                     },
                 "prix_carburants": {
                     "@type": "Node",
-                    "description": "prix des carburants en euros par hectolitre",
+                    "description": u"prix des carburants en euros par hectolitre",
                     "children": {
                         "prix_ttc_gazole": {
                             "@type": "Parameter",
-                            "description": "prix ttc gazole",
+                            "description": u"prix ttc gazole",
                             "format": "float",
                             "values": [
                                 # TODO: Doit-on déplacer les prix dans un autre arbre ?
@@ -160,7 +160,7 @@ legislation_json = {
                             },
                         "prix_ttc_super95": {
                             "@type": "Parameter",
-                            "description": "Prix ttc super95 ",
+                            "description": u"Prix ttc super95 ",
                             "format": "float",
                             "values": [
                                 {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 85.7},
@@ -187,7 +187,7 @@ legislation_json = {
 #                        Bien changer les prix et appliquer ceux de l'E10
 #                            "prix_ttc_superE10": {
 #                            "@type": "Parameter",
-#                            "description": "Prix ttc super95 ",
+#                            "description": u"Prix ttc super95 ",
 #                            "format": "float",
 #                            "values": [
 #                                {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 85.7},
@@ -212,7 +212,7 @@ legislation_json = {
 #                            },
                         "prix_ttc_super98": {
                             "@type": "Parameter",
-                            "description": "prix ttc super98",
+                            "description": u"prix ttc super98",
                             "format": "float",
                             "values": [
                                 {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 86.31},
@@ -239,52 +239,11 @@ legislation_json = {
                     },
                 "ticpe": {
                     "@type": "Node",
-                    "description": "ticpe sur les différents carburants",
-                    "children": {
-                        "ticpe_super9598": {
-                            "@type": "Parameter",
-                            "description": "ticpe sur super95 super98",
-                            "format": "float",
-                            "values": [
-                                {'start': u'1995-01-01', 'stop': u'2000-12-31', 'value': 58.63},
-                                {'start': u'2001-01-01', 'stop': u'2001-12-31', 'value': 58.63},
-                                {'start': u'2002-01-01', 'stop': u'2002-12-31', 'value': 58.63},
-                                {'start': u'2003-01-01', 'stop': u'2003-12-31', 'value': 58.92},
-                                {'start': u'2004-01-01', 'stop': u'2004-12-31', 'value': 58.92},
-                                {'start': u'2005-01-01', 'stop': u'2005-12-31', 'value': 58.92},
-                                {'start': u'2006-01-01', 'stop': u'2006-12-31', 'value': 58.92},
-                                {'start': u'2007-01-01', 'stop': u'2007-12-31', 'value': 60.69},
-                                {'start': u'2008-01-01', 'stop': u'2008-12-31', 'value': 60.69},
-                                {'start': u'2009-01-01', 'stop': u'2009-12-31', 'value': 60.69},
-                                {'start': u'2010-01-01', 'stop': u'2010-12-31', 'value': 60.69},
-                                {'start': u'2011-01-01', 'stop': u'2011-12-31', 'value': 61.42},
-                                {'start': u'2012-01-01', 'stop': u'2012-12-31', 'value': 61.42},
-                                {'start': u'2013-01-01', 'stop': u'2013-12-31', 'value': 61.42},
-                                {'start': u'2014-01-01', 'stop': u'2014-12-31', 'value': 61.42},
-                                ],
-                            },
-                        "ticpe_gazole": {
-                            "@type": "Parameter",
-                            "description": "ticpe sur gazole ",
-                            "format": "float",
-                            "values": [
-                                {'start': u'1995-01-01', 'stop': u'2002-12-31', 'value': 38.9},
-                                {'start': u'2003-01-01', 'stop': u'2003-12-31', 'value': 39.19},
-                                {'start': u'2004-01-01', 'stop': u'2006-12-31', 'value': 41.69},
-                                {'start': u'2007-01-01', 'stop': u'2010-12-31', 'value': 42.84},
-                                {'start': u'2011-01-01', 'stop': u'2014-12-31', 'value': 44.19},
-                                ],
-                            },
-                        },
-                    },
-
-                "ticpe": {
-                    "@type": "Node",
-                    "description": "ticpe sur les différents produits énergetiques",
+                    "description": u"ticpe sur les différents produits énergetiques",
                     "children": {
                         "ticpe_supercarburants": {
                             "@type": "Parameter",
-                            "description": "ticpe sur super95 super98 et superE10, incluant majorations des régions",
+                            "description": u"ticpe sur super95 super98 et superE10, incluant majorations des régions",
                             "format": "float",
                             "values": [
                                 {'start': u'1995-01-01', 'stop': u'2000-12-31', 'value': 58.63},
@@ -308,7 +267,7 @@ legislation_json = {
                             },
                         "ticpe_gazole": {
                             "@type": "Parameter",
-                            "description": "ticpe sur diesel, incluant majorations des régions ",
+                            "description": u"ticpe sur diesel, incluant majorations des régions ",
                             "format": "float",
                             "values": [
                                 {'start': u'1995-01-01', 'stop': u'2002-12-31', 'value': 38.9},
@@ -329,11 +288,11 @@ legislation_json = {
 
                 "alcool_conso_et_vin": {
                     "@type": "Node",
-                    "description": "alcools",
+                    "description": u"alcools",
                     "children": {
                         "vin": {
                             "@type": "Node",
-                            "description": "Pour calculer le taux de taxation implicite sur le vin",
+                            "description": u"Pour calculer le taux de taxation implicite sur le vin",
                             "children": {
                                 "droit_cn_vin": {
                                     "@type": "Parameter",
@@ -393,11 +352,11 @@ legislation_json = {
                             },
                         "biere": {
                             "@type": "Node",
-                            "description": "Pour calculer le taux de taxation implicite sur la bière",
+                            "description": u"Pour calculer le taux de taxation implicite sur la bière",
                             "children": {
                                 "droit_cn_biere": {
                                     "@type": "Parameter",
-                                    "description": "Masse droit biere selon comptabilité nationale",
+                                    "description": u"Masse droit biere selon comptabilité nationale",
                                     "format": "float",
                                     "values": [
                                         {'start': u'1995-01-01', 'stop': u'1995-12-31', 'value': 361},
@@ -453,11 +412,11 @@ legislation_json = {
                             },
                         "alcools_forts": {
                             "@type": "Node",
-                            "description": "Pour calculer le taux de taxation implicite sur alcools forts",
+                            "description": u"Pour calculer le taux de taxation implicite sur alcools forts",
                             "children": {
                                 "droit_cn_alcools": {
                                     "@type": "Parameter",
-                                    "description": "Masse droit alcool selon comptabilité nationale sans droits sur les produits intermediaires et cotisation spéciale alcool fort",
+                                    "description": u"Masse droit alcool selon comptabilité nationale sans droits sur les produits intermediaires et cotisation spéciale alcool fort",
                                     "format": "float",
                                     "values": [
                                         {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 1872},
@@ -535,15 +494,15 @@ legislation_json = {
                     },
                 "tabac": {
                     "@type": "Node",
-                    "description": "tabac",
+                    "description": u"tabac",
                     "children": {
                         "cigarettes": {
                             "@type": "Node",
-                            "description": "Pour calculer le taux de taxation implicite sur les cigarettes",
+                            "description": u"Pour calculer le taux de taxation implicite sur les cigarettes",
                             "children": {
                                 "taux_normal_cigarette": {
                                     "@type": "Parameter",
-                                    "description": "Taux normal cigarette",
+                                    "description": u"Taux normal cigarette",
                                     "format": "float",
                                     "values": [
                                         {'start': u'1993-05-24', 'stop': u'1995-07-31', 'value': 0.587},
@@ -557,7 +516,7 @@ legislation_json = {
                                     },
                                 "taux_specifique_cigarette": {
                                     "@type": "Parameter",
-                                    "description": "Taux specifique cigarette",
+                                    "description": u"Taux specifique cigarette",
                                     "format": "float",
                                     "values": [
                                         {'start': u'1995-01-01', 'stop': u'2004-30-04', 'value': 0.05},
@@ -572,11 +531,11 @@ legislation_json = {
                             },
                         "tabac_a_rouler": {
                             "@type": "Node",
-                            "description": "Pour calculer le taux de taxation implicite sur le tabac à rouler",
+                            "description": u"Pour calculer le taux de taxation implicite sur le tabac à rouler",
                             "children": {
                                 "taux_normal_tabac_a_rouler": {
                                     "@type": "Parameter",
-                                    "description": "Taux normal tabac à rouler",
+                                    "description": u"Taux normal tabac à rouler",
                                     "format": "float",
                                     "values": [
                                         {'start': u'1993-05-24', 'stop': u'1995-07-31', 'value': 0.514},
@@ -589,7 +548,7 @@ legislation_json = {
                                     },
                                 "taux_specifique_tabac_a_rouler": {
                                     "@type": "Parameter",
-                                    "description": "Taux specifique tabac à rouler",
+                                    "description": u"Taux specifique tabac à rouler",
                                     "format": "float",
                                     "values": [
                                         {'start': u'1995-01-01', 'stop': u'2012-12-31', 'value': 0},
@@ -600,11 +559,11 @@ legislation_json = {
                             },
                         "cigares": {
                             "@type": "Node",
-                            "description": "Pour calculer le taux de taxation implicite sur les cigares",
+                            "description": u"Pour calculer le taux de taxation implicite sur les cigares",
                             "children": {
                                 "taux_normal_cigare": {
                                     "@type": "Parameter",
-                                    "description": "Taux normaux de taxation cigares",
+                                    "description": u"Taux normaux de taxation cigares",
                                     "format": "float",
                                     "values": [
                                         {'start': u'1993-05-24', 'stop': u'1995-07-31', 'value': 0.2926},
@@ -633,15 +592,15 @@ legislation_json = {
                     },
                 "contribution_solidarite_avion": {
                     "@type": "Node",
-                    "description": "Taxe sur les billets d'avions",
+                    "description": u"Taxe sur les billets d'avions",
                     "children": {
                         "Taxe sur les billets d'avions": {
                             "@type": "Node",
-                            "description": "Pour calculer le taux de taxation implicite sur les billets d'avions",
+                            "description": u"Pour calculer le taux de taxation implicite sur les billets d'avions",
                             "children": {
                                 "consommation_billets_d_avions": {
                                     "@type": "Parameter",
-                                    "description": "Consommation billets d'avions",
+                                    "description": u"Consommation billets d'avions",
                                     "format": "float",
                                     "values": [
                                         {'start': u'2000-01-01', 'stop': u'2000-12-31', 'value': 5024},
@@ -663,7 +622,7 @@ legislation_json = {
                                     },
                                 "recette_de_la_contribution_sur_billets_d_avions": {
                                     "@type": "Parameter",
-                                    "description": "Revenu de la contribution",
+                                    "description": u"Revenu de la contribution",
                                     "format": "float",
                                     "values": [
                                         {'start': u'1995-01-01', 'stop': u'2005-12-31', 'value': 0},

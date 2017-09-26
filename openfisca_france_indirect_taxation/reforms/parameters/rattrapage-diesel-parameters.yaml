@@ -1,7 +1,7 @@
-description: "Rattrapage de la fiscalité du diesel au taux de l'essence"
+description: u"Rattrapage de la fiscalité du diesel au taux de l'essence"
 diesel:
   unit: currency
-  description: "Surcroît de prix du diesel (en euros par hectolitres)"
+  description: u"Surcroît de prix du diesel (en euros par hectolitres)"
   values:
     '2016-01-01':
       value: 15.31
@@ -10,7 +10,7 @@ diesel:
     '2010-01-01':
       value: 15.31
 abaissement_tva_taux_plein:
-  description: "Baisse de la TVA à taux plein pour obtenir un budget constant"
+  description: u"Baisse de la TVA à taux plein pour obtenir un budget constant"
   values:
     '2010-01-01':
       value: 0.005

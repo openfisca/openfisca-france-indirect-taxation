@@ -11,7 +11,6 @@ def preprocess_legislation(legislation_json):
     import os
     import pkg_resources
     import pandas as pd
-    # Add fuel prices to the tree
 
     default_config_files_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
@@ -108,7 +107,7 @@ def preprocess_legislation(legislation_json):
     values_parc = {}
     parc_vp = {
         "@type": "Node",
-        "description": "taille moyenne du parc automobile en France métropolitaine en milliers de véhicules",
+        "description": u"taille moyenne du parc automobile en France métropolitaine en milliers de véhicules",
         "children": {},
     }
     for element in ['diesel', 'essence']:
@@ -124,7 +123,7 @@ def preprocess_legislation(legislation_json):
 
         parc_vp['children'][element] = {
             "@type": "Parameter",
-            "description": "nombre de véhicules particuliers immatriculés en France à motorisation " + element,
+            "description": u"nombre de véhicules particuliers immatriculés en France à motorisation " + element,
             "format": "float",
             "values": values_parc[element]
         }
@@ -149,7 +148,7 @@ def preprocess_legislation(legislation_json):
     values_quantite = {}
     quantite_carbu_vp = {
         "@type": "Node",
-        "description": "quantite de carburants consommés en France métropolitaine",
+        "description": u"quantite de carburants consommés en France métropolitaine",
         "children": {},
     }
     for element in ['diesel', 'essence']:
@@ -244,7 +243,7 @@ def preprocess_legislation(legislation_json):
         }
     emissions_CO2['children']['carburants'] = {
         "@type": "Node",
-        "description": "émissions de CO2 des carburants",
+        "description": u"émissions de CO2 des carburants",
         "children": {
             "CO2_diesel": {
                 "@type": "Parameter",
@@ -267,7 +266,7 @@ def preprocess_legislation(legislation_json):
 
     emissions_CO2['children']['energie_logement'] = {
         "@type": "Node",
-        "description": "émissions de CO2 de l'énergie dans le logement",
+        "description": u"émissions de CO2 de l'énergie dans le logement",
         "children": {
             "CO2_electricite": {
                 "@type": "Parameter",
@@ -380,7 +379,7 @@ def preprocess_legislation(legislation_json):
         "children": {
             "droit_cn_biere": {
                 "@type": "Parameter",
-                "description": "Masse droit biere selon comptabilité nationale",
+                "description": u"Masse droit biere selon comptabilité nationale",
                 "format": "float",
                 "values": [
                     {'start': u'2013-01-01', 'value': 897},
@@ -440,7 +439,7 @@ def preprocess_legislation(legislation_json):
         "children": {
             "droit_cn_alcools": {
                 "@type": "Parameter",
-                "description": "Masse droit alcool selon comptabilité nationale sans droits sur les produits intermediaires et cotisation spéciale alcool fort",
+                "description": u"Masse droit alcool selon comptabilité nationale sans droits sur les produits intermediaires et cotisation spéciale alcool fort",
                 "format": "float",
                 "values": [
                     {'start': u'2012-01-01', 'value': 2225},
