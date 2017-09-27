@@ -5,7 +5,8 @@ from __future__ import division
 import pandas
 import seaborn
 
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent, dataframe_by_group
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent, \
+    dataframe_by_group, save_dataframe_to_graph
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 
@@ -49,3 +50,5 @@ for category in ['age_group_pr', 'strate']:
     dataframe_rev_disponible = \
         dataframe_by_group(survey_scenario, category, simulated_variables_rev_disponible, reference = True)
     graph_builder_bar_percent(dataframe_rev_disponible)
+    save_dataframe_to_graph(dataframe_depenses_tot, 'indicators_depenses_tot_{}.csv'.format(category))
+    save_dataframe_to_graph(dataframe_rev_disponible, 'indicators_rev_disponible_{}.csv'.format(category))

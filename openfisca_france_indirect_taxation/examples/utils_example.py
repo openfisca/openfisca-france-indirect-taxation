@@ -7,6 +7,8 @@ import pandas
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+import os
+import pkg_resources
 
 
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
@@ -210,11 +212,11 @@ def percent_formatter(x, pos = 0):
 
 def save_dataframe_to_graph(dataframe, file_name):
     # return dataframe.to_csv('C:/Users/thomas.douenne/Documents/data/Stats_rapport/' + file_name, sep = ',')
-    return dataframe.to_csv(
-        u'U:/Cours/These/Projets/Papier_n1/Graphs/' + file_name, sep = ';'
+    assets_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
         )
-#    assets_directory = os.path.join(
-#        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-#        )
-#    return dataframe.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-#        file_name), sep = ',')
+    #return dataframe.to_csv(
+    #    u'U:/Cours/These/Projets/Papier_n1/Graphs/' + file_name, sep = ';'
+    #    )
+    return dataframe.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets', 'to_graph',
+        file_name), sep = ',')
