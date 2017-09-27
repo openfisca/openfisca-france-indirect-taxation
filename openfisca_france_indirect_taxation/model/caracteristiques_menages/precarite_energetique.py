@@ -7,13 +7,36 @@ import numpy as np
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
-class brde_m2(YearlyVariable):
+class brde_m2_depenses_tot(YearlyVariable):
     column = StrCol
     entity = Menage
     label = u"bas revenu dépenses élevées"
 
     def formula(self, simulation, period):
-        revenu = simulation.calculate('rev_apres_loyer', period)
+        depenses_tot = simulation.calculate('depenses_tot', period)
+        uc = simulation.calculate('ocde10', period)
+        depenses_tot_uc = depenses_tot / uc
+        mediane_depenses_tot_uc = np.median(depenses_tot_uc)
+        bas_revenu = 1 * (depenses_tot_uc < 0.6 * mediane_depenses_tot_uc)
+        
+        depenses_energies_logement = simulation.calculate('depenses_energies_logement', period)
+        surface = simulation.calculate('surfhab_d', period)
+        depenses_surface = depenses_energies_logement / surface
+        mediane_depenses_surface = np.median(depenses_surface)
+        depenses_elevees = 1 * (depenses_surface > mediane_depenses_surface)
+        
+        brde = bas_revenu * depenses_elevees
+     
+        return brde
+
+
+class brde_m2_rev_disponible(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"bas revenu dépenses élevées"
+
+    def formula(self, simulation, period):
+        revenu = simulation.calculate('rev_disponible', period)
         uc = simulation.calculate('ocde10', period)
         revenu_uc = revenu / uc
         mediane_revenu_uc = np.median(revenu_uc)
@@ -103,15 +126,15 @@ class froid_3_deciles(YearlyVariable):
         return froid_3_deciles
 
 
-class precarite_energetique_3_indicateurs(YearlyVariable):
+class precarite_energetique_depenses_tot(YearlyVariable):
     column = StrCol
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
     def formula(self, simulation, period):
-        brde_m2 = simulation.calculate('brde_m2', period)
+        brde_m2 = simulation.calculate('brde_m2_depenses_tot', period)
         froid_4_criteres_3_deciles = simulation.calculate('froid_4_criteres_3_deciles', period)
-        tee_10_3_deciles = simulation.calculate('tee_10_3_deciles', period)
+        tee_10_3_deciles = simulation.calculate('tee_10_3_deciles_depenses_tot', period)
         
         somme_3_indicateurs = brde_m2 + froid_4_criteres_3_deciles + tee_10_3_deciles
         precarite_energetique_3_indicateurs = 1 * (somme_3_indicateurs != 0)
@@ -119,40 +142,94 @@ class precarite_energetique_3_indicateurs(YearlyVariable):
         return precarite_energetique_3_indicateurs
 
 
-# Revenu ou revenu par uc ? Loyer imputé ou non ? revtot ou rev disp ? Ou les dépenses ?
-class tee(YearlyVariable):
+class precarite_energetique_rev_disponible(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+
+    def formula(self, simulation, period):
+        brde_m2 = simulation.calculate('brde_m2_rev_disponible', period)
+        froid_4_criteres_3_deciles = simulation.calculate('froid_4_criteres_3_deciles', period)
+        tee_10_3_deciles = simulation.calculate('tee_10_3_deciles_rev_disponible', period)
+        
+        somme_3_indicateurs = brde_m2 + froid_4_criteres_3_deciles + tee_10_3_deciles
+        precarite_energetique_3_indicateurs = 1 * (somme_3_indicateurs != 0)
+        
+        return precarite_energetique_3_indicateurs
+
+
+class tee_depenses_tot(YearlyVariable):
     column = StrCol
     entity = Menage
     label = u"Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
 
     def formula(self, simulation, period):
         depenses_energies_logement = simulation.calculate('depenses_energies_logement', period)
-        revenu_disponible = simulation.calculate('depenses_tot', period)
+        depenses_tot = simulation.calculate('depenses_tot', period)
         
-        tee = depenses_energies_logement / revenu_disponible
+        tee = depenses_energies_logement / depenses_tot
         
         return tee
 
 
-class tee_10(YearlyVariable):
+class tee_10_depenses_tot(YearlyVariable):
     column = StrCol
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10%"
 
     def formula(self, simulation, period):
-        tee = simulation.calculate('tee', period)
+        tee = simulation.calculate('tee_depenses_tot', period)
         tee_10 = (tee > 0.1) * 1
         
         return tee_10
 
 
-class tee_10_3_deciles(YearlyVariable):
+class tee_10_3_deciles_depenses_tot(YearlyVariable):
     column = StrCol
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
     def formula(self, simulation, period):
-        tee = simulation.calculate('tee', period)
+        tee = simulation.calculate('tee_depenses_tot', period)
+        nvd = simulation.calculate('niveau_vie_decile', period)
+        tee_10_3_deciles = (tee > 0.1) * (nvd < 4) * 1
+        
+        return tee_10_3_deciles
+
+
+class tee_rev_disponible(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
+
+    def formula(self, simulation, period):
+        depenses_energies_logement = simulation.calculate('depenses_energies_logement', period)
+        rev_disponible = simulation.calculate('rev_disponible', period)
+        
+        tee = depenses_energies_logement / rev_disponible
+        
+        return tee
+
+
+class tee_10_rev_disponible(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Indicateur, taux d'effort énergétique supérieur à 10%"
+
+    def formula(self, simulation, period):
+        tee = simulation.calculate('tee_rev_disponible', period)
+        tee_10 = (tee > 0.1) * 1
+        
+        return tee_10
+
+
+class tee_10_3_deciles_rev_disponible(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+
+    def formula(self, simulation, period):
+        tee = simulation.calculate('tee_rev_disponible', period)
         nvd = simulation.calculate('niveau_vie_decile', period)
         tee_10_3_deciles = (tee > 0.1) * (nvd < 4) * 1
         

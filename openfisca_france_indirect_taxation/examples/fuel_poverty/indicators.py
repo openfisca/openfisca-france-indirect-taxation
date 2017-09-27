@@ -12,13 +12,20 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 # Import d'une nouvelle palette de couleurs
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
-simulated_variables = [
-    'precarite_energetique_3_indicateurs',
-    'brde_m2',
+simulated_variables_depenses_tot = [
+    'precarite_energetique_depenses_tot',
+    'brde_m2_depenses_tot',
     'froid_4_criteres_3_deciles',
-    'tee_10_3_deciles',
+    'tee_10_3_deciles_depenses_tot',
     ]
 
+simulated_variables_rev_disponible = [
+    'precarite_energetique_rev_disponible',
+    'brde_m2_rev_disponible',
+    'froid_4_criteres_3_deciles',
+    'tee_10_3_deciles_rev_disponible',
+    ]
+    
 year = 2011
 data_year = 2011
 
@@ -33,7 +40,12 @@ survey_scenario = SurveyScenario.create(
     data_year = data_year
     )
 
-for category in ['age_group_pr', 'strate']:
-    dataframe = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
-    graph_builder_bar_percent(dataframe)
 
+for category in ['age_group_pr', 'strate']:
+    dataframe_depenses_tot = \
+        dataframe_by_group(survey_scenario, category, simulated_variables_depenses_tot, reference = True)
+    graph_builder_bar_percent(dataframe_depenses_tot)
+
+    dataframe_rev_disponible = \
+        dataframe_by_group(survey_scenario, category, simulated_variables_rev_disponible, reference = True)
+    graph_builder_bar_percent(dataframe_rev_disponible)
