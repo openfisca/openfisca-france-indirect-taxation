@@ -3,11 +3,10 @@
 # Import de modules généraux
 from __future__ import division
 
-import pandas
 import seaborn
 
 # Import de modules spécifiques à Openfisca
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, save_dataframe_to_graph, \
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent, save_dataframe_to_graph, \
     dataframe_by_group
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
@@ -49,7 +48,7 @@ def plot_taux_effort_ticpe():
 
             print '''Contributions aux différentes taxes indirectes en part de {0},
                 par décile de revenu en {1}'''.format(revenu, year)
-            graph_builder_bar(df_to_graph) # Attention, ces graphes sont mal adaptés
+            graph_builder_bar_percent(df_to_graph)
             #save_dataframe_to_graph(
             #    df_to_graph, 'Taxes_indirectes/effort_rate_ticpe_on_{0}_by_{1}.csv'.format(revenu, category)
             #    )
