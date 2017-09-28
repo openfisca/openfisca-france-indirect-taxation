@@ -10,7 +10,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 class brde_m2_depenses_tot(YearlyVariable):
     column = StrCol
     entity = Menage
-    label = u"bas revenu dépenses élevées"
+    label = u"bas revenu (depenses tot )dépenses élevées (énergies logement)"
 
     def formula(self, simulation, period):
         depenses_tot = simulation.calculate('depenses_tot', period)
@@ -29,11 +29,11 @@ class brde_m2_depenses_tot(YearlyVariable):
      
         return brde
 
-
+        
 class brde_m2_rev_disponible(YearlyVariable):
     column = StrCol
     entity = Menage
-    label = u"bas revenu dépenses élevées"
+    label = u"bas revenu (revenu disponible) dépenses élevées (énergies logement)"
 
     def formula(self, simulation, period):
         revenu = simulation.calculate('rev_disponible', period)
@@ -42,11 +42,55 @@ class brde_m2_rev_disponible(YearlyVariable):
         mediane_revenu_uc = np.median(revenu_uc)
         bas_revenu = 1 * (revenu_uc < 0.6 * mediane_revenu_uc)
         
-        depenses_energies_logement = simulation.calculate('depenses_energies_logement', period)
+        depenses_energies_logement = simulation.calculate('depenses_carburants_corrigees', period)
         surface = simulation.calculate('surfhab_d', period)
         depenses_surface = depenses_energies_logement / surface
         mediane_depenses_surface = np.median(depenses_surface)
         depenses_elevees = 1 * (depenses_surface > mediane_depenses_surface)
+        
+        brde = bas_revenu * depenses_elevees
+     
+        return brde
+
+
+class brde_transports_depenses_tot(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"bas revenu (depenses tot) dépenses élevées (en carburants)"
+
+    def formula(self, simulation, period):
+        depenses_tot = simulation.calculate('depenses_tot', period)
+        uc = simulation.calculate('ocde10', period)
+        depenses_tot_uc = depenses_tot / uc
+        mediane_depenses_tot_uc = np.median(depenses_tot_uc)
+        bas_revenu = 1 * (depenses_tot_uc < 0.6 * mediane_depenses_tot_uc)
+        
+        # Médiane ou médiane parmi ceux conduisant ?
+        depenses_carburants = simulation.calculate('depenses_carburants_corrigees', period)
+        mediane_depenses_carburants = np.median(depenses_carburants)
+        depenses_elevees = 1 * (depenses_carburants > mediane_depenses_carburants)
+        
+        brde = bas_revenu * depenses_elevees
+     
+        return brde
+
+
+class brde_transports_rev_disponible(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"bas revenu (revenu disponible) dépenses élevées (en carburants)"
+
+    def formula(self, simulation, period):
+        revenu = simulation.calculate('rev_disponible', period)
+        uc = simulation.calculate('ocde10', period)
+        revenu_uc = revenu / uc
+        mediane_revenu_uc = np.median(revenu_uc)
+        bas_revenu = 1 * (revenu_uc < 0.6 * mediane_revenu_uc)
+        
+        # Médiane ou médiane parmi ceux conduisant ?
+        depenses_carburants = simulation.calculate('depenses_carburants_corrigees', period)
+        mediane_depenses_carburants = np.median(depenses_carburants)
+        depenses_elevees = 1 * (depenses_carburants > mediane_depenses_carburants)
         
         brde = bas_revenu * depenses_elevees
      
@@ -158,6 +202,36 @@ class precarite_energetique_rev_disponible(YearlyVariable):
         return precarite_energetique_3_indicateurs
 
 
+class precarite_transports_depenses_tot(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+
+    def formula(self, simulation, period):
+        brde_transports_depenses_tot = simulation.calculate('brde_transports_depenses_tot', period)
+        tee_transports_10_3_deciles_depenses_tot = simulation.calculate('tee_transports_10_3_deciles_depenses_tot', period)
+        
+        somme_3_indicateurs = brde_transports_depenses_tot + tee_transports_10_3_deciles_depenses_tot
+        precarite_transports = 1 * (somme_3_indicateurs != 0)
+        
+        return precarite_transports
+
+
+class precarite_transports_rev_disponible(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+
+    def formula(self, simulation, period):
+        brde_transports_rev_disponible = simulation.calculate('brde_transports_rev_disponible', period)
+        tee_transports_10_3_deciles_rev_disponible = simulation.calculate('tee_transports_10_3_deciles_rev_disponible', period)
+        
+        somme_3_indicateurs = brde_transports_rev_disponible + tee_transports_10_3_deciles_rev_disponible
+        precarite_transports = 1 * (somme_3_indicateurs != 0)
+        
+        return precarite_transports
+
+
 class tee_depenses_tot(YearlyVariable):
     column = StrCol
     entity = Menage
@@ -230,6 +304,84 @@ class tee_10_3_deciles_rev_disponible(YearlyVariable):
 
     def formula(self, simulation, period):
         tee = simulation.calculate('tee_rev_disponible', period)
+        nvd = simulation.calculate('niveau_vie_decile', period)
+        tee_10_3_deciles = (tee > 0.1) * (nvd < 4) * 1
+        
+        return tee_10_3_deciles
+
+								
+class tee_transports_depenses_tot(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
+
+    def formula(self, simulation, period):
+        depenses_carburants = simulation.calculate('depenses_carburants_corrigees', period)
+        depenses_tot = simulation.calculate('depenses_tot', period)
+        
+        tee = depenses_carburants / depenses_tot
+        
+        return tee
+
+
+class tee_transports_10_depenses_tot(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Indicateur, taux d'effort énergétique supérieur à 10%"
+
+    def formula(self, simulation, period):
+        tee = simulation.calculate('tee_transports_depenses_tot', period)
+        tee_10 = (tee > 0.1) * 1
+        
+        return tee_10
+
+
+class tee_transports_10_3_deciles_depenses_tot(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+
+    def formula(self, simulation, period):
+        tee = simulation.calculate('tee_transports_depenses_tot', period)
+        nvd = simulation.calculate('niveau_vie_decile', period)
+        tee_10_3_deciles = (tee > 0.1) * (nvd < 4) * 1
+        
+        return tee_10_3_deciles
+
+
+class tee_transports_rev_disponible(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
+
+    def formula(self, simulation, period):
+        depenses_energies_logement = simulation.calculate('depenses_carburants_corrigees', period)
+        rev_disponible = simulation.calculate('rev_disponible', period)
+        
+        tee = depenses_energies_logement / rev_disponible
+        
+        return tee
+
+
+class tee_transports_10_rev_disponible(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Indicateur, taux d'effort énergétique supérieur à 10%"
+
+    def formula(self, simulation, period):
+        tee = simulation.calculate('tee_transports_rev_disponible', period)
+        tee_10 = (tee > 0.1) * 1
+        
+        return tee_10
+
+
+class tee_transports_10_3_deciles_rev_disponible(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+
+    def formula(self, simulation, period):
+        tee = simulation.calculate('tee_transports_rev_disponible', period)
         nvd = simulation.calculate('niveau_vie_decile', period)
         tee_10_3_deciles = (tee > 0.1) * (nvd < 4) * 1
         
