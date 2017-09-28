@@ -13,21 +13,21 @@ def test_rattrapage_diesel_bis():
     elasticities = get_elasticities(year)
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
-        inflation_kwargs = inflation_kwargs,
+        #inflation_kwargs = inflation_kwargs,
         reform_key = 'rattrapage_diesel',
         year = year,
         )
 
     simulated_variables = ['depenses_essence_ajustees_rattrapage_diesel', 'depenses_essence', 'elas_price_1_1']
     df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
-    df['menages']['depenses_essence_ajustees_rattrapage_diesel'] = df['menages']['depenses_essence_ajustees_rattrapage_diesel'].astype(float)
-    df['menages']['check'] = (
-        df['menages']['depenses_essence'] * (1 + (1 + df['menages']['elas_price_1_1']) * 10 / 149.9535) -
-        df['menages']['depenses_essence_ajustees_rattrapage_diesel']
+    df['menage']['depenses_essence_ajustees_rattrapage_diesel'] = df['menage']['depenses_essence_ajustees_rattrapage_diesel'].astype(float)
+    df['menage']['check'] = (
+        df['menage']['depenses_essence'] * (1 + (1 + df['menage']['elas_price_1_1']) * 10 / 149.9535) -
+        df['menage']['depenses_essence_ajustees_rattrapage_diesel']
         )
     absolute_error_margin = 0.01
-    assert (df['menages']['check'] < absolute_error_margin).any()
-    assert (-absolute_error_margin < df['menages']['check']).any()
+    assert (df['menage']['check'] < absolute_error_margin).any()
+    assert (-absolute_error_margin < df['menage']['check']).any()
 
 
 if __name__ == '__main__':

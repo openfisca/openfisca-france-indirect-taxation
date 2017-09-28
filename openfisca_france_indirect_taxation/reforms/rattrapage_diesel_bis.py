@@ -99,7 +99,7 @@ class rattrapage_diesel(Reform):
             depenses_diesel = simulation.calculate('depenses_diesel', period)
             diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
             reforme_diesel = simulation.legislation_at(period.start).rattrapage_diesel.diesel
-            carburants_elasticite_prix = simulation.calculate('elas_price_1_1')
+            carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
             depenses_diesel_ajustees_rattrapage_diesel = \
                 depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel / diesel_ttc)
 
@@ -110,12 +110,12 @@ class rattrapage_diesel(Reform):
         column = FloatCol
         entity = Menage
         label = u"Depenses en essence après reaction a la reforme - taxes carburants"
-    
+
         def formula(self, simulation, period):
             depenses_essence = simulation.calculate('depenses_essence', period)
             super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
             reforme_essence = simulation.legislation_at(period.start).rattrapage_diesel.essence
-            carburants_elasticite_prix = simulation.calculate('elas_price_1_1')
+            carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
             depenses_essence_ajustees_rattrapage_diesel = \
                 depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
     
@@ -131,7 +131,7 @@ class rattrapage_diesel(Reform):
             depenses_tva_taux_plein = simulation.calculate('depenses_tva_taux_plein', period)
             taux_plein = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
             abaissement_tva_taux_plein = simulation.legislation_at(period.start).rattrapage_diesel.abaissement_tva_taux_plein
-            elasticite = simulation.calculate('elas_price_3_3')
+            elasticite = simulation.calculate('elas_price_3_3', period)
             depenses_tva_taux_plein_ajustees = (
                 depenses_tva_taux_plein *
                 (1 + (1 + elasticite) * (- abaissement_tva_taux_plein) / (1 + taux_plein))
@@ -150,7 +150,7 @@ class rattrapage_diesel(Reform):
             taux_plein = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
             abaissement_tva_taux_plein = \
                 simulation.legislation_at(period.start).rattrapage_diesel.abaissement_tva_taux_plein_bis
-            elasticite = simulation.calculate('elas_price_3_3')
+            elasticite = simulation.calculate('elas_price_3_3', period)
             depenses_tva_taux_plein_ajustees = \
                 depenses_tva_taux_plein * (1 + (1 + elasticite) * (- abaissement_tva_taux_plein) / (1 + taux_plein))
     
@@ -167,7 +167,7 @@ class rattrapage_diesel(Reform):
             taux_reduit = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_reduit
             abaissement_tva_taux_reduit = \
                 simulation.legislation_at(period.start).rattrapage_diesel.abaissement_tva_taux_reduit
-            elasticite = simulation.calculate('elas_price_3_3')
+            elasticite = simulation.calculate('elas_price_3_3', period)
             depenses_tva_taux_reduit_ajustees = \
                 depenses_tva_taux_reduit * (1 + (1 + elasticite) * (- abaissement_tva_taux_reduit) / (1 + taux_reduit))
     
@@ -184,7 +184,7 @@ class rattrapage_diesel(Reform):
             taux_super_reduit = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_super_reduit
             abaissement_tva_taux_super_reduit = \
                 simulation.legislation_at(period.start).rattrapage_diesel.abaissement_tva_taux_super_reduit
-            elasticite = simulation.calculate('elas_price_3_3')
+            elasticite = simulation.calculate('elas_price_3_3', period)
             depenses_tva_taux_super_reduit_ajustees = (
                 depenses_tva_taux_super_reduit *
                 (1 + (1 + elasticite) * (- abaissement_tva_taux_super_reduit) / (1 + taux_super_reduit))
@@ -610,42 +610,8 @@ class rattrapage_diesel(Reform):
     
             return total
 
+ 
             
-    def apply(self):
-        self.modify_legislation_json(modifier_function = modify_legislation_json)
-        variables = [
-            depenses_diesel_ajustees_rattrapage_diesel,
-            depenses_essence_ajustees_rattrapage_diesel,
-            depenses_tva_taux_plein_ajustees_rattrapage_diesel,
-            depenses_tva_taux_plein_bis_ajustees_rattrapage_diesel,
-            depenses_tva_taux_reduit_ajustees_rattrapage_diesel,
-            depenses_tva_taux_super_reduit_ajustees_rattrapage_diesel,
-            diesel_ticpe,
-            emissions_CO2_carburants,
-            essence_ticpe,
-            quantites_diesel,
-            quantites_sp_e10,
-            quantites_sp95,
-            quantites_sp98,
-            quantites_super_plombe,
-            quantites_essence,
-            sp_e10_ticpe,
-            sp95_ticpe,
-            sp98_ticpe,
-            super_plombe_ticpe,
-            ticpe_totale,
-            tva_taux_plein,
-            tva_taux_plein_bis,
-            tva_taux_reduit,
-            tva_taux_super_reduit,
-            tva_total,
-            ]
-        for variable in variables:
-            self.add_variable(variable)
-    
-
-"""
-
     def apply(self):
         self.update_variable(self.depenses_diesel_ajustees_rattrapage_diesel)
         self.update_variable(self.depenses_essence_ajustees_rattrapage_diesel)
@@ -673,8 +639,3 @@ class rattrapage_diesel(Reform):
         self.update_variable(self.tva_taux_super_reduit)
         self.update_variable(self.tva_total)
         self.modify_legislation_json(modifier_function = modify_legislation_json)
-        #self.modify_parameters(modifier_function = modify_parameters)
-"""
-
-
-
