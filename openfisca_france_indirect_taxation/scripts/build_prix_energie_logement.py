@@ -25,9 +25,9 @@ for year in [2000, 2005, 2011]:
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
     survey_scenario = SurveyScenario.create(
-        elasticities = elasticities,
+        #elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
-        reform_key = 'rattrapage_diesel_bis',
+        #reform_key = 'rattrapage_diesel_bis',
         year = year,
         )
 
@@ -40,5 +40,5 @@ for year in [2000, 2005, 2011]:
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
         )
     menages['identifiant_menage'] = menages['identifiant_menage'].astype(numpy.int64)
-    #menages.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    #    'prix', 'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)), sep = ',')
+    menages.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
+        'prix', 'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)), sep = ',')
