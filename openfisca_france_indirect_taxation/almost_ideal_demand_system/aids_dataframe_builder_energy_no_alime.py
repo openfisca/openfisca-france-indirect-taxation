@@ -185,10 +185,19 @@ for year in [2000, 2005, 2011]:
     # Si seulement électricité, elle est égale à 1.
     aggregates_data_frame = electricite_only(aggregates_data_frame)
     # On récupère les informations importantes sur les ménages, dont les variables démographiques
-    df_info_menage = aggregates_data_frame[['agepr', 'depenses_autre', 'depenses_carbu',
+
+    variables_menages = ['agepr', 'depenses_autre', 'depenses_carbu',
         'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'ident_men', 'identifiant_menage', 'nenfants', 'nactifs', 'ocde10',
         'revtot', 'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
-        'veh_essence']].copy()
+        'veh_essence']
+    if year == 2011:
+        variables_imputees = ['froid', 'froid_cout', 'froid_installation',
+        'froid_impaye', 'froid_isolation']
+    else:
+        variables_imputees = []
+    variables_menages = variables_menages + variables_imputees
+
+    df_info_menage = aggregates_data_frame[variables_menages].copy()
     df_info_menage['identifiant_menage'] = df_info_menage['identifiant_menage'].astype(str)
     df_info_menage['part_autre'] = df_info_menage['depenses_autre'] / df_info_menage['depenses_tot']
     df_info_menage['part_carbu'] = df_info_menage['depenses_carbu'] / df_info_menage['depenses_tot']
@@ -211,10 +220,11 @@ for year in [2000, 2005, 2011]:
     dataframe.loc[dataframe['prix_carbu'] == 0, 'prix_carbu'] = dataframe['prix']
 
     dataframe['depenses_par_uc'] = dataframe['depenses_tot'] / dataframe['ocde10']
+    dataframe['diesel'] = 1 * (dataframe['veh_diesel'] > 0)
 
     dataframe = dataframe[['ident_men', 'identifiant_menage', 'part_carbu', 'part_logem', 'part_autre', 'prix_carbu', 'prix_logem',
         'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'elect_only', 'nactifs', 'nenfants',
-        'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel', 'veh_essence']]
+        'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel', 'veh_essence', 'diesel'] + variables_imputees]
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la
