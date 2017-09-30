@@ -9,10 +9,10 @@ from ..reforms import (
     alimentation,
     aliss,
     cce_2015_in_2014,
-    rattrapage_diesel_bis,
-    taxe_carbone,
-    contribution_climat_energie_reforme,
     cce_2016_in_2014,
+    contribution_climat_energie_reforme,
+    rattrapage_diesel,
+    taxe_carbone,
     )
 
 
@@ -35,7 +35,10 @@ reform_list = {
     'aliss_mixte': aliss.aliss_mixte,
     'aliss_sante': aliss.aliss_sante,
     'aliss_tva_sociale': aliss.aliss_tva_sociale,
-    'rattrapage_diesel': rattrapage_diesel_bis.rattrapage_diesel
+    'rattrapage_diesel': rattrapage_diesel.rattrapage_diesel,
+    'taxe_carbone': taxe_carbone.taxe_carbone,
+    'cce_2015_in_2014': cce_2015_in_2014.cce_2015_in_2014,
+    'cce_2016_in_2014': cce_2016_in_2014.cce_2016_in_2014,
     # 'contribution_climat_energie': contribution_climat_energie.build_reform,
     # 'test_reforme_alimentation': alimentation.build_reform,
     # 'taxes_carburants': taxes_carburants.build_reform,
