@@ -23,8 +23,15 @@ def create_data_elasticities():
     dataframe = data_quaids[liste_elasticities + ['ident_men', 'year']].copy()
     
     dataframe = dataframe.fillna(0)
-    # We block the elasticities of housing energy to some value found in the literature (see Clerc and Marcus, 2009)
-    dataframe['elas_price_2_2'] = -0.1
+    # Faire un min et un max pour borner les élasticités
+    for j in range(1,4):
+        dataframe['elas_price_{0}_{0}'.format(j)] = \
+	       (dataframe['elas_price_{0}_{0}'.format(j)] < 0) * dataframe['elas_price_{0}_{0}'.format(j)]
+        dataframe['elas_price_{0}_{0}'.format(j)] = (
+	       (dataframe['elas_price_{0}_{0}'.format(j)] > -2) * dataframe['elas_price_{0}_{0}'.format(j)] +
+	       (dataframe['elas_price_{0}_{0}'.format(j)] < -2) * (-2)
+            )
+				
     assert not dataframe.ident_men.duplicated().any(), 'Some housholds are duplicated'
     
     return dataframe.to_csv(os.path.join(

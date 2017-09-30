@@ -5,6 +5,7 @@ import pkg_resources
 import os
 
 # Import data_quaids to get the results of the estimation run on Stata.
+selection_elasticites = dict()
 resultats_elasticite_depenses = dict()
 resultats_elasticite_uncomp = dict()
 resultats_elasticite_comp = dict()
@@ -21,7 +22,21 @@ for year in ['energy_no_alime_all']:
             ), sep =',')
 
     data_quaids = data_quaids.fillna(0)
+    df = data_quaids.query('year == 2011')
 
+    # Set upper and lower bounds for elasticities : [-2;0]
+    for j in range(1,4):
+        selection_elasticites['elas_price_{0}_{0} - (0)'.format(j)] = \
+            float(len(df.query('elas_price_{0}_{0} > 0'.format(j)))) / len(df)
+        selection_elasticites['elas_price_{0}_{0} - (-2)'.format(j)] = \
+            float(len(df.query('elas_price_{0}_{0} < -2'.format(j)))) / len(df)
+        data_quaids['elas_price_{0}_{0}'.format(j)] = \
+	       (data_quaids['elas_price_{0}_{0}'.format(j)] < 0) * data_quaids['elas_price_{0}_{0}'.format(j)]
+        data_quaids['elas_price_{0}_{0}'.format(j)] = (
+	       (data_quaids['elas_price_{0}_{0}'.format(j)] > -2) * data_quaids['elas_price_{0}_{0}'.format(j)] +
+	       (data_quaids['elas_price_{0}_{0}'.format(j)] < -2) * (-2)
+            )
+								
     for i in range(1, 4):
         data_quaids['el_uncomp_{}'.format(i)] = (
             data_quaids['elas_price_{}_{}'.format(i, i)] *
@@ -51,3 +66,4 @@ for year in ['energy_no_alime_all']:
 
     for i in range(1, 4):
         resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] = sum(data_quaids['el_{}'.format(i)])
+
