@@ -29,6 +29,42 @@ from __future__ import division
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
+class aides_logement(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Le ménage touche des aides au logement"
+
+
+class bat_av_49(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Le bâtiment date d'avant 1949"
+
+
+class bat_49_74(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Le bâtiment date d'entre 1949 et 1974"
+
+
+class bat_ap_74(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Le bâtiment date d'après 1974"
+
+
+class cataeu(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"catégorie de la commune de résidence 2011"
+
+
+class dip14pr(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Diplôme de la personne de référence"
+
+
 class ident_men(YearlyVariable):
     column = StrCol
     entity = Menage
@@ -41,16 +77,46 @@ class identifiant_menage(YearlyVariable):
     label = u"Code identifiant le ménage"
 
 
+class log_indiv(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Le ménage vie dans un logement individuel"
+
+
 class ocde10(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"unités de consommation"
 
 
+class ouest_sud(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Le ménage vit dans l'ouest ou le sud de la France"
+
+
+class paris(YearlyVariable):
+    column = IntCol
+    entity = Menage
+    label = u"Le ménage vit en région parisienne"
+
+
+class petite_ville(YearlyVariable):
+    column = IntCol
+    entity = Menage
+    label = u"Le ménage vit dans une petite ville"
+
+
 class pondmen(YearlyVariable):
     column = IntCol
     entity = Menage
     label = u"Pondération du ménage"
+
+
+class rural(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Le ménage vit en milieu rural"
 
 
 class situacj(YearlyVariable):
@@ -75,12 +141,6 @@ class strate(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"catégorie de la commune de résidence"
-
-
-class cataeu(YearlyVariable):
-    column = FloatCol
-    entity = Menage
-    label = u"catégorie de la commune de résidence 2011"
 
 
 class tuu(YearlyVariable):

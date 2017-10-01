@@ -33,7 +33,9 @@ data_matched_entd = pandas.read_csv(
 
 data_matched_enl = data_matched_enl[
     ['froid'] + ['froid_cout'] + ['froid_installation'] + ['froid_impaye'] +
-    ['froid_isolation'] + ['ident_men']
+    ['froid_isolation'] + ['ident_men'] + ['log_indiv'] + ['bat_av_49'] + ['bat_49_74'] +
+    ['bat_ap_74'] + ['ouest_sud'] + ['aides_logement'] + ['rural'] + ['petite_ville'] +
+    ['paris']
     ]
 
 data_matched_entd = data_matched_entd[

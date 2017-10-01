@@ -569,3 +569,41 @@ class depenses_super_plombe_ht(YearlyVariable):
             tax_from_expense_including_tax(depenses_super_plombe_htva, taux_implicite_super_plombe))
 
         return depenses_super_plombe_ht
+
+        
+class combustibles_liquides(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"=1 si le menage consomme de l'électricité"
+
+    def formula(self, simulation, period):
+        depenses_combustibles_liquides = simulation.calculate('depenses_combustibles_liquides', period)
+        combustibles_liquides = 1 * (depenses_combustibles_liquides > 0)
+        
+        return combustibles_liquides
+    
+        
+class electricite(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"=1 si le menage consomme de l'électricité"
+
+    def formula(self, simulation, period):
+        depenses_electricite = simulation.calculate('depenses_electricite', period)
+        electricite = 1 * (depenses_electricite > 0)
+        
+        return electricite
+        
+    
+class gaz_ville(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"=1 si le menage consomme de l'électricité"
+
+    def formula(self, simulation, period):
+        depenses_gaz_ville = simulation.calculate('depenses_gaz_ville', period)
+        gaz_ville = 1 * (depenses_gaz_ville > 0)
+        
+        return gaz_ville
+        
+        
