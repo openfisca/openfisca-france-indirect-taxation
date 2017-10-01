@@ -3,7 +3,7 @@
 from __future__ import division
 
 from openfisca_core.reforms import Reform, update_legislation
-
+import numpy
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 from ..model.taxes_indirectes import tva, ticpe
@@ -120,14 +120,14 @@ class taxe_carbone(Reform):
             depenses_electricite_tarif_fixe = simulation.calculate('depenses_electricite_tarif_fixe', period)
             min_tarif_fixe = depenses_electricite_tarif_fixe.min()
             depenses_electricite_ajustees = depenses_electricite_ajustees_variables + depenses_electricite_tarif_fixe
-    
+
             # We do not want to input the expenditure of the contract for those who consume nothing
-            poste_coicop_451 = simulation.calculate('poste_coicop_451', period)
+            depenses_electricite = simulation.calculate('depenses_electricite', period)
             depenses_electricite_ajustees = (
-                depenses_electricite_ajustees * (poste_coicop_451 > min_tarif_fixe) +
-                poste_coicop_451 * (poste_coicop_451 < min_tarif_fixe)
+                depenses_electricite_ajustees * (depenses_electricite > min_tarif_fixe) +
+                depenses_electricite * (depenses_electricite < min_tarif_fixe)
                 )
-    
+
             return depenses_electricite_ajustees
     
     
@@ -161,7 +161,7 @@ class taxe_carbone(Reform):
             depenses_combustibles_liquides_ajustees_taxe_carbone = \
                 depenses_combustibles_liquides * (1 + (1 + combustibles_liquides_elasticite_prix) * reforme_fioul / prix_fioul_ttc)
     
-            return depenses_fioul_ajustees_taxe_carbone
+            return depenses_combustibles_liquides_ajustees_taxe_carbone
     
     
     class depenses_gaz_ajustees_taxe_carbone(YearlyVariable):
@@ -344,7 +344,7 @@ class taxe_carbone(Reform):
         def formula(self, simulation, period):
             quantites_combustibles_liquides_ajustees = simulation.calculate('quantites_combustibles_liquides', period)
             emissions_combustibles_liquides = \
-                simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.C02_combustibles_liquides
+                simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_combustibles_liquides
             emissions_ajustees = quantites_combustibles_liquides_ajustees * emissions_combustibles_liquides
     
             return emissions_ajustees
@@ -357,7 +357,7 @@ class taxe_carbone(Reform):
         def formula(self, simulation, period):
             quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_taxe_carbone', period)
             emissions_gaz = \
-                simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz
+                simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_ville
             emissions_ajustees = quantites_gaz_ajustees * emissions_gaz
     
             return emissions_ajustees

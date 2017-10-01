@@ -44,6 +44,19 @@ class depenses_diesel(YearlyVariable):
         return depenses_diesel
 
 
+class combustibles_liquides_ticpe(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Calcul du montant de TICPE sur les combustibles liquides"
+
+    def formula(self, simulation, period):
+        quantites_combustibles_liquides = simulation.calculate('quantites_combustibles_liquides', period)
+        accise_combustibles_liquides = simulation.legislation_at(period.start).imposition_indirecte.ticpe.gazole_fioul_domestique_hectolitre
+        combustibles_liquides_ticpe = quantites_combustibles_liquides * accise_combustibles_liquides / 100
+
+        return combustibles_liquides_ticpe
+
+
 class diesel_ticpe(YearlyVariable):
     column = FloatCol
     entity = Menage
@@ -524,7 +537,20 @@ class ticpe_totale_ajustee(YearlyVariable):
 
         return ticpe_totale_ajustee
 
+class total_taxes_energies(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Calcul du montant de la TICPE sur tous les carburants cumulés"
 
+    def formula(self, simulation, period):
+        essence_ticpe = simulation.calculate('essence_ticpe', period)
+        diesel_ticpe = simulation.calculate('diesel_ticpe', period)
+        combustibles_liquides_ticpe = simulation.calculate('combustibles_liquides_ticpe', period)
+        total_taxes_energies = diesel_ticpe + essence_ticpe + combustibles_liquides_ticpe
+
+        return total_taxes_energies
+
+        
 class difference_ticpe_diesel_reforme(YearlyVariable):
     column = FloatCol
     entity = Menage

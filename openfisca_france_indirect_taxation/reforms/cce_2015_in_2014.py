@@ -3,7 +3,7 @@
 from __future__ import division
 
 from openfisca_core.reforms import Reform, update_legislation
-
+import numpy
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 from ..model.taxes_indirectes import tva, ticpe
@@ -126,11 +126,11 @@ class cce_2015_in_2014(Reform):
         label = u"Dépenses en combustibles_liquides après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2015"
     
         def formula(self, simulation, period):
-            depenses_combustibles_liquides = simulation.calculate('poste_04_5_3_1_1', period)
+            depenses_combustibles_liquides = simulation.calculate('depenses_combustibles_liquides', period)
             prix_fioul_ttc = \
                 simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
             reforme_combustibles_liquides = \
-                simulation.legislation_at(period.start).cce_2015_in_2014.combustibles_liquides
+                simulation.legislation_at(period.start).cce_2015_in_2014.combustibles_liquides_2014_2015
             combustibles_liquides_elasticite_prix = simulation.calculate('elas_price_2_2', period)
             depenses_combustibles_liquides_ajustees_cce_2014_2015 = \
                 depenses_combustibles_liquides * (1 + (1 + combustibles_liquides_elasticite_prix) * reforme_combustibles_liquides / prix_fioul_ttc)
@@ -366,7 +366,7 @@ class cce_2015_in_2014(Reform):
             taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
     
             accise_combustibles_liquides_ticpe = (
-                simulation.legislation_at(period.start).imposition_indirecte.ticpe.gazole_combustibles_liquides_domestique_hectolitre / 100
+                simulation.legislation_at(period.start).imposition_indirecte.ticpe.gazole_fioul_domestique_hectolitre / 100
                 )
             reforme_combustibles_liquides = \
                 simulation.legislation_at(period.start).cce_2015_in_2014.combustibles_liquides_2014_2015

@@ -174,4 +174,4 @@ def histogram_distribution_distance_annuelle_group(data_matched, data_entd, dist
 
 histogram_distance_annuelle_group(data_matched_random, data_entd, 'distance', 'niveau_vie_decile')
 histogram_distribution_distance_annuelle(data_matched_distance, data_entd, 'distance')
-plots_by_group(histogram_distribution_distance_annuelle_group, data_matched_random, data_entd, 'distance_diesel', 'tuu')
+plots_by_group(histogram_distribution_distance_annuelle_group, data_matched_random, data_entd, 'distance_diesel', 'niveau_vie_decile')

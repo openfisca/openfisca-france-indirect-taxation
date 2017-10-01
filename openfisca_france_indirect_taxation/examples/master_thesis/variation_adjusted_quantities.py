@@ -14,7 +14,6 @@ year = 2014
 data_year = 2011
 elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
 variations_quantites = dict()
 for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
@@ -22,7 +21,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         'quantites_diesel',
         'quantites_essence',
         'quantites_electricite_selon_compteur',
-        'quantites_fioul_domestique',
+        'quantites_combustibles_liquides',
         'quantites_gaz_contrat_optimal',
         'pondmen',
         ]
@@ -31,14 +30,14 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         'quantites_diesel',
         'quantites_essence',
         'quantites_electricite_selon_compteur_ajustees_taxe_carbone',
-        'quantites_fioul_domestique',
+        'quantites_combustibles_liquides',
         'quantites_gaz_contrat_optimal_ajustees_{}'.format(reforme),
         'pondmen',
         ]
 
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
-        inflation_kwargs = inflation_kwargs,
+        #inflation_kwargs = inflation_kwargs,
         reform_key = '{}'.format(reforme),
         year = year,
         data_year = data_year
@@ -48,8 +47,8 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
     indiv_df_reference = survey_scenario.create_data_frame_by_entity(simulated_variables_reference,
         reference = True, period = year)
 
-    menages_reform = indiv_df_reform['menages']
-    menages_reference = indiv_df_reference['menages']
+    menages_reform = indiv_df_reform['menage']
+    menages_reference = indiv_df_reference['menage']
 
     variations_quantites['diesel_{}'.format(reforme)] = (
         (menages_reform['quantites_diesel'] - menages_reference['quantites_diesel']) *
@@ -66,9 +65,9 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
             menages_reference['quantites_gaz_contrat_optimal']) *
             menages_reform['pondmen']
             ).sum() / 1e06
-        variations_quantites['fioul_domestique_{}'.format(reforme)] = (
-            (menages_reform['quantites_fioul_domestique'] -
-            menages_reference['quantites_fioul_domestique']) *
+        variations_quantites['combustibles_liquides_{}'.format(reforme)] = (
+            (menages_reform['quantites_combustibles_liquides'] -
+            menages_reference['quantites_combustibles_liquides']) *
             menages_reform['pondmen']
             ).sum() / 1e06
 

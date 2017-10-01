@@ -3,7 +3,6 @@
 # Import general modules
 from __future__ import division
 
-import pandas
 
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line, save_dataframe_to_graph, \
@@ -25,7 +24,7 @@ simulated_variables = ['depenses_carburants', 'depenses_energies_totales', 'depe
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
     #inflation_kwargs = inflation_kwargs,
-    #reform_key = 'taxe_carbone',
+    reform_key = 'taxe_carbone',
     year = year,
     data_year = data_year
     )

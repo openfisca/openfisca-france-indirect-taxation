@@ -179,7 +179,7 @@ def create_new_variables():
 
         # Dummy variable pour la consommation de fioul
         data['fioul'] = 0
-        data.loc[data['depenses_combustibles_solides'] > 0, 'fioul'] = 1
+        data.loc[data['depenses_combustibles_liquides'] > 0, 'fioul'] = 1
 
         data['gaz_ville'] = 0
         data.loc[data['depenses_gaz_ville'] > 0, 'gaz_ville'] = 1

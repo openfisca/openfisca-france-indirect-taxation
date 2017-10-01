@@ -19,7 +19,7 @@ class quantites_combustibles_liquides(YearlyVariable):
             simulation.legislation_at(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
         
         quantite_combustibles_liquides = depenses_combustibles_liquides / prix_combustibles_liquides
-        
+
         return quantite_combustibles_liquides
 
 

@@ -47,10 +47,8 @@ x == y
 df_by_entity = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
 df_by_entity_bis = survey_scenario.create_data_frame_by_entity(simulated_variables, reference = True, period = year)
 
-menages = df_by_entity['menages']
-menages_bis = df_by_entity_bis['menages']
-
-boum
+menages = df_by_entity['menage']
+menages_bis = df_by_entity_bis['menage']
 
 unite_conso = (menages['ocde10'] * menages['pondmen']).sum()
 contribution = (menages['difference_contribution_energie_{}'.format(reforme)] * menages['pondmen']).sum()

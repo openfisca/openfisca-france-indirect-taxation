@@ -17,7 +17,6 @@ year = 2014
 data_year = 2011
 elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
 
 for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
@@ -42,8 +41,8 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
     indiv_df_reference = survey_scenario.create_data_frame_by_entity(simulated_variables,
         reference = True, period = year)
 
-    menages_reform = indiv_df_reform['menages']
-    menages_reference = indiv_df_reference['menages']
+    menages_reform = indiv_df_reform['menage']
+    menages_reference = indiv_df_reference['menage']
 
     unite_conso = (menages_reform['ocde10'] * menages_reform['pondmen']).sum()
     contribution = (
