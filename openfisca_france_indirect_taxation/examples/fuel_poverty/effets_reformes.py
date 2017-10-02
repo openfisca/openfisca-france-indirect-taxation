@@ -6,12 +6,9 @@ from __future__ import division
 import numpy as np
 
 # Import modules specific to OpenFisca
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, \
-    save_dataframe_to_graph
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
-from openfisca_france_indirect_taxation.examples.utils_example import dataframe_by_group
 
 # Simulate contribution to fuel tax reform by categories
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
@@ -21,7 +18,72 @@ elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 
-for reforme in ['taxe_carbone']:#['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
+def cheque_vert(data_reference, data_reforme, reforme):
+    unite_conso = (data_reforme['ocde10'] * data_reforme['pondmen']).sum()
+    contribution = (
+        (data_reforme['total_taxes_energies'] - data_reference['total_taxes_energies']) *
+        data_reference['pondmen']
+        ).sum()
+    contribution_unite_conso = contribution / unite_conso
+
+    if reforme != 'rattrapage_diesel':
+        data_reforme['part_cheque_logement'] = (
+            (data_reforme['depenses_energies_logement_ajustees_{}'.format(reforme)] - data_reforme['depenses_energies_logement']) /
+            ((data_reforme['depenses_energies_logement_ajustees_{}'.format(reforme)] - data_reforme['depenses_energies_logement']) +
+            (data_reforme['depenses_carburants_corrigees_ajustees_{}'.format(reforme)] - data_reforme['depenses_carburants_corrigees']))
+            )
+        data_reforme['part_cheque_logement'] = data_reforme['part_cheque_logement'].fillna(1)
+        data_reforme['part_cheque_logement'] = (
+            (data_reforme['part_cheque_logement'] < 1) * data_reforme['part_cheque_logement'] +
+            (data_reforme['part_cheque_logement'] > 1) * 1
+            )
+        data_reforme['part_cheque_logement'] = (data_reforme['part_cheque_logement'] > 0) * data_reforme['part_cheque_logement']
+        data_reforme['cheque_vert_logement'] = data_reforme['part_cheque_logement'] * contribution_unite_conso * data_reforme['ocde10']
+        data_reforme['cheque_vert_transport'] = (1 - data_reforme['part_cheque_logement']) * contribution_unite_conso * data_reforme['ocde10']
+    else:
+        data_reforme['cheque_vert_transport'] = contribution_unite_conso * data_reforme['ocde10']
+
+    return data_reforme
+
+
+def brde(data, depenses, revenu, logement):
+    mediane_revenu_uc = np.median(
+        data[revenu] / data['ocde10']
+        )
+    data['bas_revenu'] = (
+        1 * (
+        (data[revenu] / data['ocde10'])
+        < (0.6 * mediane_revenu_uc))
+        )
+    if logement == 'logement':
+        data['depenses_bis'] = data[depenses] / data['surfhab_d']
+    else:
+        data['depenses_bis'] = data[depenses].copy()
+    mediane_depenses = np.median(data['depenses_bis'])
+    data['depenses_elevees'] = 1 * (data['depenses_bis'] > mediane_depenses)
+    data['brde_m2_{0}_{1}'.format(logement, revenu)] = (
+        data['bas_revenu'] * data['depenses_elevees']
+        )
+    del data['depenses_bis']
+    
+    return data 
+
+
+def tee_10_3(data, depenses, revenu, logement):
+    data['tee_10_3_{0}_{1}'.format(revenu, logement)] = \
+        1 * ((data[depenses] / data[revenu]) > 0.1) * (data['niveau_vie_decile'] < 4)
+
+    return data
+
+
+def precarite(data, brde, tee, logement):
+    data['precarite_{}'.format(logement)] = data[brde] + data[tee] - (data[brde] * data[tee])
+    
+    return data
+
+effets_reforme_transport = dict()
+effets_reforme_logement = dict()
+for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
 
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
@@ -33,7 +95,9 @@ for reforme in ['taxe_carbone']:#['rattrapage_diesel', 'taxe_carbone', 'cce_2015
 
     simulated_variables = [
         'depenses_carburants_corrigees',
+        'depenses_carburants_corrigees_ajustees_{}'.format(reforme),
         'depenses_energies_logement',
+        'depenses_energies_logement_ajustees_{}'.format(reforme),
         'depenses_tot',
         'niveau_vie_decile',
         'pondmen',
@@ -50,64 +114,73 @@ for reforme in ['taxe_carbone']:#['rattrapage_diesel', 'taxe_carbone', 'cce_2015
     menages_reforme = indiv_df_reform['menage']
     menages_reference = indiv_df_reference['menage']
 
-    unite_conso = (menages_reforme['ocde10'] * menages_reforme['pondmen']).sum()
-    contribution = (
-        (menages_reforme['total_taxes_energies'] - menages_reference['total_taxes_energies']) *
-        menages_reference['pondmen']
-        ).sum()
-    contribution_unite_conso = contribution / unite_conso
+    for redistribution in ['before', 'after']:
+        if redistribution == 'after':
+        # Compute value of green cheques and their allocation between housing and transports
+            if reforme != 'rattrapage_diesel':
+                menages_reforme = cheque_vert(menages_reference, menages_reforme, reforme)
+                menages_reforme['depenses_energies_logement_ajustees_{}'.format(reforme)] = (
+                    menages_reforme['depenses_energies_logement_ajustees_{}'.format(reforme)] - menages_reforme['cheque_vert_logement']
+                    )
+                menages_reforme['depenses_carburants_corrigees_ajustees_{}'.format(reforme)] = (
+                    menages_reforme['depenses_carburants_corrigees_ajustees_{}'.format(reforme)] - menages_reforme['cheque_vert_transport']
+                    )
+            if reforme == 'rattrapage_diesel':
+                menages_reforme = cheque_vert(menages_reference, menages_reforme, reforme)
+                menages_reforme['depenses_carburants_corrigees_ajustees_{}'.format(reforme)] = (
+                    menages_reforme['depenses_carburants_corrigees_ajustees_{}'.format(reforme)] - menages_reforme['cheque_vert_transport']
+                    )
+          
+        # Compute BRDE
+        if reforme != 'rattrapage_diesel':
+            menages_reference = brde(menages_reference, 'depenses_energies_logement', 'depenses_tot',  'logement')
+            menages_reforme = brde(menages_reforme, 'depenses_energies_logement_ajustees_{}'.format(reforme), 'depenses_tot', 'logement')
+    
+            effets_reforme_logement['brde - {0} - {1}'.format(reforme, redistribution)] = float(
+                (menages_reforme['brde_m2_logement_depenses_tot'] * menages_reforme['pondmen']).sum() -
+                (menages_reference['brde_m2_logement_depenses_tot'] * menages_reference['pondmen']).sum()
+                ) / menages_reference['pondmen'].sum() * 100
+    
+        menages_reference = brde(menages_reference, 'depenses_carburants_corrigees', 'depenses_tot',  'transport')
+        menages_reforme = brde(menages_reforme, 'depenses_carburants_corrigees_ajustees_{}'.format(reforme), 'depenses_tot', 'transport')
+    
+        effets_reforme_transport['brde - {0} - {1}'.format(reforme, redistribution)] = float(
+            (menages_reforme['brde_m2_transport_depenses_tot'] * menages_reforme['pondmen']).sum() -
+            (menages_reference['brde_m2_transport_depenses_tot'] * menages_reference['pondmen']).sum()
+            ) / menages_reference['pondmen'].sum() * 100
+    
+        # Compute TEE
+        if reforme != 'rattrapage_diesel':
+            menages_reference = tee_10_3(menages_reference, 'depenses_energies_logement', 'depenses_tot', 'logement')
+            menages_reforme = tee_10_3(menages_reforme, 'depenses_energies_logement_ajustees_{}'.format(reforme), 'depenses_tot', 'logement')
+            effets_reforme_logement['tee - {0} - {1}'.format(reforme, redistribution)] = float(
+                (menages_reforme['tee_10_3_depenses_tot_logement'] * menages_reforme['pondmen']).sum() -
+                (menages_reference['tee_10_3_depenses_tot_logement'] * menages_reference['pondmen']).sum()
+                ) / menages_reference['pondmen'].sum() * 100  
+    
+        menages_reference = tee_10_3(menages_reference, 'depenses_carburants_corrigees', 'depenses_tot', 'transport')
+        menages_reforme = tee_10_3(menages_reforme, 'depenses_carburants_corrigees_ajustees_{}'.format(reforme), 'depenses_tot', 'transport')
+    
+        effets_reforme_transport['tee - {0} - {1}'.format(reforme, redistribution)] = float(
+            (menages_reforme['tee_10_3_depenses_tot_transport'] * menages_reforme['pondmen']).sum() -
+            (menages_reference['tee_10_3_depenses_tot_transport'] * menages_reference['pondmen']).sum()
+            ) / menages_reference['pondmen'].sum() * 100
+    
+    
+        # Compute precarite
+        if reforme != 'rattrapage_diesel':
+            menages_reference = precarite(menages_reference, 'brde_m2_logement_depenses_tot', 'tee_10_3_depenses_tot_logement', 'logement')
+            menages_reforme = precarite(menages_reforme, 'brde_m2_logement_depenses_tot', 'tee_10_3_depenses_tot_logement', 'logement')
+        
+            effets_reforme_logement['precarite - {0} - {1}'.format(reforme, redistribution)] = float(
+                (menages_reforme['precarite_logement'] * menages_reforme['pondmen']).sum() -
+                (menages_reference['precarite_logement'] * menages_reference['pondmen']).sum()
+                ) / menages_reference['pondmen'].sum() * 100  
 
-    # Construire des indicateurs de précarité pour les deux df
-    mediane_depenses_tot_uc = np.median(
-        menages_reference['depenses_tot'] / menages_reference['ocde10']
-        )
-    menages_reference['bas_revenu'] = (
-        1 * (
-        (menages_reference['depenses_tot'] / menages_reference['ocde10'])
-        < (0.6 * mediane_depenses_tot_uc))
-        )
-
-    mediane_depenses_surface = np.median(
-        menages_reference['depenses_energies_logement'] / menages_reference['surfhab_d']
-        )
-    menages_reference['depenses_elevees'] = (
-        1 * (
-        (menages_reference['depenses_energies_logement'] / menages_reference['surfhab_d'])
-        > mediane_depenses_surface)
-        )
-    menages_reference['brde_m2_depenses_tot'] = (
-        menages_reference['bas_revenu'] * menages_reference['depenses_elevees']
-        )
-
-
-    # reforme        
-    mediane_depenses_tot_uc = np.median(
-        menages_reforme['depenses_tot'] / menages_reforme['ocde10']
-        )
-    menages_reforme['bas_revenu'] = (
-        1 * (
-        (menages_reforme['depenses_tot'] / menages_reforme['ocde10'])
-        < (0.6 * mediane_depenses_tot_uc))
-        )
-
-    menages_reforme['depenses_energies_logement'] = (
-        menages_reforme['depenses_energies_logement'] -
-        (contribution_unite_conso * menages_reforme['ocde10'])
-        )
-    mediane_depenses_surface = np.median(
-        menages_reforme['depenses_energies_logement'] / menages_reforme['surfhab_d']
-        )
-    menages_reforme['depenses_elevees'] = (
-        1 * (
-        (menages_reforme['depenses_energies_logement'] / menages_reforme['surfhab_d'])
-        > mediane_depenses_surface)
-        )
-    menages_reforme['brde_m2_depenses_tot'] = (
-        menages_reforme['bas_revenu'] * menages_reforme['depenses_elevees']
-        )
-
-
-    # A revoir : les dépenses apres reforme sont-elles les bonnes ? -> ajouter cela aux réformes
-    # + bien prendre en compte que les contributions doivent aller aussi aux transports
-    print menages_reforme['brde_m2_depenses_tot'].mean()
-    print menages_reference['brde_m2_depenses_tot'].mean()
+        menages_reference = precarite(menages_reference, 'brde_m2_transport_depenses_tot', 'tee_10_3_depenses_tot_transport', 'transport')
+        menages_reforme = precarite(menages_reforme, 'brde_m2_transport_depenses_tot', 'tee_10_3_depenses_tot_transport', 'transport')
+    
+        effets_reforme_transport['precarite - {0} - {1}'.format(reforme, redistribution)] = float(
+            (menages_reforme['precarite_transport'] * menages_reforme['pondmen']).sum() -
+            (menages_reference['precarite_transport'] * menages_reference['pondmen']).sum()
+            ) / menages_reference['pondmen'].sum() * 100

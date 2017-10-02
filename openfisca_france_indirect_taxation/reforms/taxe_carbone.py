@@ -87,6 +87,32 @@ class taxe_carbone(Reform):
     name = u"Réforme de l'imposition indirecte des énergies selon leur contenu carbone",
 
     
+    class depenses_carburants_ajustees_taxe_carbone(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Dépenses en carburants après réaction à la réforme - taxe carbone"
+    
+        def formula(self, simulation, period):
+            depenses_diesel_ajustees = simulation.calculate('depenses_diesel_ajustees_taxe_carbone', period)
+            depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees_taxe_carbone', period)
+            depenses_carburants_ajustees = depenses_diesel_ajustees + depenses_essence_ajustees
+
+            return depenses_carburants_ajustees
+
+
+    class depenses_carburants_corrigees_ajustees_taxe_carbone(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Dépenses en carburants après réaction à la réforme - taxe carbone"
+    
+        def formula(self, simulation, period):
+            depenses_diesel_ajustees = simulation.calculate('depenses_diesel_corrigees_ajustees_taxe_carbone', period)
+            depenses_essence_ajustees = simulation.calculate('depenses_essence_corrigees_ajustees_taxe_carbone', period)
+            depenses_carburants_ajustees = depenses_diesel_ajustees + depenses_essence_ajustees
+
+            return depenses_carburants_ajustees
+
+
     class depenses_diesel_ajustees_taxe_carbone(YearlyVariable):
         column = FloatCol
         entity = Menage
@@ -94,6 +120,22 @@ class taxe_carbone(Reform):
     
         def formula(self, simulation, period):
             depenses_diesel = simulation.calculate('depenses_diesel', period)
+            diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+            reforme_diesel = simulation.legislation_at(period.start).taxe_carbone.diesel
+            carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
+            depenses_diesel_ajustees_taxe_carbone = \
+                depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel / diesel_ttc)
+    
+            return depenses_diesel_ajustees_taxe_carbone
+    
+    
+    class depenses_diesel_corrigees_ajustees_taxe_carbone(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Dépenses en diesel après réaction à la réforme - taxe carbone"
+    
+        def formula(self, simulation, period):
+            depenses_diesel = simulation.calculate('depenses_diesel_corrigees', period)
             diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
             reforme_diesel = simulation.legislation_at(period.start).taxe_carbone.diesel
             carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
@@ -130,6 +172,26 @@ class taxe_carbone(Reform):
 
             return depenses_electricite_ajustees
     
+
+    class depenses_energies_logement_ajustees_taxe_carbone(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Dépenses en électricité sans inclure dépenses jointes avec le gaz"
+    
+        def formula(self, simulation, period):
+            depenses_electricite_ajustees = simulation.calculate('depenses_electricite_ajustees_taxe_carbone', period)
+            depenses_gaz_ville_ajustees = simulation.calculate('depenses_gaz_ville_ajustees_taxe_carbone', period)
+            depenses_gaz_liquefie = simulation.calculate('depenses_gaz_liquefie', period)
+            depenses_combustibles_liquides_ajustees = simulation.calculate('depenses_combustibles_liquides_ajustees_taxe_carbone', period)
+            depenses_combustibles_solides = simulation.calculate('depenses_combustibles_solides', period)
+            depenses_energie_thermique = simulation.calculate('depenses_energie_thermique', period)
+            depenses_energies_logement_ajustees_taxe_carbone = (
+                depenses_electricite_ajustees + depenses_gaz_ville_ajustees + depenses_gaz_liquefie +
+                depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
+                )
+    
+            return depenses_energies_logement_ajustees_taxe_carbone
+
     
     class depenses_essence_ajustees_taxe_carbone(YearlyVariable):
         column = FloatCol
@@ -138,6 +200,22 @@ class taxe_carbone(Reform):
     
         def formula(self, simulation, period):
             depenses_essence = simulation.calculate('depenses_essence', period)
+            super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+            reforme_essence = simulation.legislation_at(period.start).taxe_carbone.essence
+            carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
+            depenses_essence_ajustees_taxe_carbone = \
+                depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
+    
+            return depenses_essence_ajustees_taxe_carbone
+    
+    
+    class depenses_essence_corrigees_ajustees_taxe_carbone(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Dépenses en essence après réaction à la réforme - taxe carbone"
+    
+        def formula(self, simulation, period):
+            depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
             super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
             reforme_essence = simulation.legislation_at(period.start).taxe_carbone.essence
             carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
@@ -164,7 +242,7 @@ class taxe_carbone(Reform):
             return depenses_combustibles_liquides_ajustees_taxe_carbone
     
     
-    class depenses_gaz_ajustees_taxe_carbone(YearlyVariable):
+    class depenses_gaz_ville_ajustees_taxe_carbone(YearlyVariable):
         column = FloatCol
         entity = Menage
         label = u"Dépenses en gaz après réaction à la réforme - taxe carbone"
@@ -454,7 +532,7 @@ class taxe_carbone(Reform):
         label = u"Quantités de gaz consommées après la réforme - taxe carbone"
     
         def formula(self, simulation, period):
-            depenses_gaz_ajustees_taxe_carbone = simulation.calculate('depenses_gaz_ajustees_taxe_carbone', period)
+            depenses_gaz_ajustees_taxe_carbone = simulation.calculate('depenses_gaz_ville_ajustees_taxe_carbone', period)
             depenses_gaz_tarif_fixe = simulation.calculate('depenses_gaz_tarif_fixe', period)
             depenses_gaz_ajustees_variables = depenses_gaz_ajustees_taxe_carbone - depenses_gaz_tarif_fixe
     
@@ -847,14 +925,19 @@ class taxe_carbone(Reform):
             total = (taux_plein + taux_reduit + taux_super_reduit + taux_intermediaire)
     
             return total
-    
-    
+
+
     def apply(self):
+        self.update_variable(self.depenses_carburants_ajustees_taxe_carbone)
+        self.update_variable(self.depenses_carburants_corrigees_ajustees_taxe_carbone)
         self.update_variable(self.depenses_diesel_ajustees_taxe_carbone)
+        self.update_variable(self.depenses_diesel_corrigees_ajustees_taxe_carbone)
         self.update_variable(self.depenses_electricite_ajustees_taxe_carbone)
         self.update_variable(self.depenses_essence_ajustees_taxe_carbone)
+        self.update_variable(self.depenses_essence_corrigees_ajustees_taxe_carbone)
         self.update_variable(self.depenses_combustibles_liquides_ajustees_taxe_carbone)
-        self.update_variable(self.depenses_gaz_ajustees_taxe_carbone)
+        self.update_variable(self.depenses_gaz_ville_ajustees_taxe_carbone)
+        self.update_variable(self.depenses_energies_logement_ajustees_taxe_carbone)
         self.update_variable(self.depenses_tva_taux_plein_ajustees_taxe_carbone)
         self.update_variable(self.depenses_tva_taux_plein_bis_ajustees_taxe_carbone)
         self.update_variable(self.depenses_tva_taux_reduit_ajustees_taxe_carbone)
