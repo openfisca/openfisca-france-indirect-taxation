@@ -31,7 +31,6 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
 
     simulated_variables = [
         'total_taxes_energies',
-        'depenses_energies',
         'rev_disp_loyerimput',
         'pondmen',
         'ocde10',
@@ -65,8 +64,8 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         # Réalisation de graphiques
         graph_builder_bar(df_reform[u'Cost of the reform after green cheques'])
 
-        save_dataframe_to_graph(
-            df_reform[u'Cost of the reform after green cheques'],
-            'Contributions_reforme/Green_cheques/contribution_{0}_apres_cheques_verts_by_{1}.csv'.format(reforme,
-            category)
-            )
+        #save_dataframe_to_graph(
+        #    df_reform[u'Cost of the reform after green cheques'],
+        #    'Contributions_reforme/Green_cheques/contribution_{0}_apres_cheques_verts_by_{1}.csv'.format(reforme,
+        #    category)
+        #    )

@@ -16,14 +16,12 @@ year = 2014
 data_year = 2011
 elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
 for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
     simulated_variables = [
         'total_taxes_energies',
-        'depenses_energies',
         'rev_disp_loyerimput',
-        'somme_coicop12'
+        'depenses_tot'
         ]
 
     survey_scenario = SurveyScenario.create(
@@ -41,7 +39,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
             dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
 
         df_reform['Additional effort rate on TICPE reform - expenditures'] = (
-            ((df_reform['total_taxes_energies']) - (df_reference['total_taxes_energies'])) / df_reform['somme_coicop12']
+            ((df_reform['total_taxes_energies']) - (df_reference['total_taxes_energies'])) / df_reform['depenses_tot']
             )
         df_reform['Additional effort rate on TICPE reform - income'] = (
             ((df_reform['total_taxes_energies']) - (df_reference['total_taxes_energies'])) /
@@ -55,7 +53,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
             'Additional effort rate on TICPE reform - income']]
             )
 
-        save_dataframe_to_graph(
-            df_reform,
-            'Contributions_reforme/Before_redistribution/contribution_additionnelles_reforme_{0}_{1}.csv'.format(reforme, category)
-            )
+        #save_dataframe_to_graph(
+        #    df_reform,
+        #    'Contributions_reforme/Before_redistribution/contribution_additionnelles_reforme_{0}_{1}.csv'.format(reforme, category)
+        #    )

@@ -16,10 +16,9 @@ year = 2014
 data_year = 2011
 elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
 for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
-    simulated_variables = ['emissions_CO2_energies']
+    simulated_variables = ['emissions_CO2_energies_totales']
 
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
@@ -36,11 +35,11 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
             dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
 
         df_reform[u'Reduction in carbon emissions from reform'] = \
-            df_reform['emissions_CO2_energies'] - df_reference['emissions_CO2_energies']
+            df_reform['emissions_CO2_energies_totales'] - df_reference['emissions_CO2_energies_totales']
 
         # Réalisation de graphiques
         graph_builder_bar(df_reform[u'Reduction in carbon emissions from reform'])
 
-        save_dataframe_to_graph(
-            df_reform, 'Emissions_reforme/reduction_emissions_reforme_{0}_by_{1}.csv'.format(reforme, category)
-            )
+        #save_dataframe_to_graph(
+        #    df_reform, 'Emissions_reforme/reduction_emissions_reforme_{0}_by_{1}.csv'.format(reforme, category)
+        #    )

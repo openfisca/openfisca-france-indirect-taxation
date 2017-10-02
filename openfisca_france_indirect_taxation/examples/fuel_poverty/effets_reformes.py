@@ -10,14 +10,6 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 
-# Simulate contribution to fuel tax reform by categories
-inflators_by_year = get_inflators_by_year_energy(rebuild = False)
-year = 2014
-data_year = 2011
-elasticities = get_elasticities(data_year)
-inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-
-
 def cheque_vert(data_reference, data_reforme, reforme):
     unite_conso = (data_reforme['ocde10'] * data_reforme['pondmen']).sum()
     contribution = (
@@ -81,14 +73,19 @@ def precarite(data, brde, tee, logement):
     
     return data
 
+inflators_by_year = get_inflators_by_year_energy(rebuild = False)
+year = 2014
+data_year = 2011
+elasticities = get_elasticities(data_year)
+inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
+
 effets_reforme_transport = dict()
 effets_reforme_logement = dict()
 for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
-
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
-        #inflation_kwargs = inflation_kwargs,
-        reform_key = '{}'.format(reforme),
+        inflation_kwargs = inflation_kwargs,
+        reform_key = reforme,
         year = year,
         data_year = data_year
         )
@@ -179,7 +176,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
 
         menages_reference = precarite(menages_reference, 'brde_m2_transport_depenses_tot', 'tee_10_3_depenses_tot_transport', 'transport')
         menages_reforme = precarite(menages_reforme, 'brde_m2_transport_depenses_tot', 'tee_10_3_depenses_tot_transport', 'transport')
-    
+
         effets_reforme_transport['precarite - {0} - {1}'.format(reforme, redistribution)] = float(
             (menages_reforme['precarite_transport'] * menages_reforme['pondmen']).sum() -
             (menages_reference['precarite_transport'] * menages_reference['pondmen']).sum()
