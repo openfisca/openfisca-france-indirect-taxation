@@ -7,8 +7,10 @@ import pandas
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+from matplotlib.ticker import FuncFormatter
 import os
 import pkg_resources
+import numpy as np
 
 
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
@@ -85,6 +87,57 @@ def wavg(groupe, var):
     return (d * w).sum() / w.sum()
 
 
+def brde(data, depenses, revenu, logement):
+    mediane_revenu_uc = np.median(
+        data[revenu] / data['ocde10']
+        )
+    data['bas_revenu'] = (
+        1 * (
+        (data[revenu] / data['ocde10'])
+        < (0.6 * mediane_revenu_uc))
+        )
+    if logement == 'logement':
+        data['depenses_bis'] = data[depenses] / data['surfhab_d']
+    else:
+        data['depenses_bis'] = data[depenses].copy()
+    mediane_depenses = np.median(data['depenses_bis'])
+    data['depenses_elevees'] = 1 * (data['depenses_bis'] > mediane_depenses)
+    data['brde_m2_{0}_{1}'.format(logement, revenu)] = (
+        data['bas_revenu'] * data['depenses_elevees']
+        )
+    del data['depenses_bis']
+    
+    return data 
+
+
+def cheque_vert(data_reference, data_reforme, reforme):
+    unite_conso = (data_reforme['ocde10'] * data_reforme['pondmen']).sum()
+    contribution = (
+        (data_reforme['total_taxes_energies'] - data_reference['total_taxes_energies']) *
+        data_reference['pondmen']
+        ).sum()
+    contribution_unite_conso = contribution / unite_conso
+
+    if reforme != 'rattrapage_diesel':
+        data_reforme['part_cheque_logement'] = (
+            (data_reforme['depenses_energies_logement_ajustees_{}'.format(reforme)] - data_reforme['depenses_energies_logement']) /
+            ((data_reforme['depenses_energies_logement_ajustees_{}'.format(reforme)] - data_reforme['depenses_energies_logement']) +
+            (data_reforme['depenses_carburants_corrigees_ajustees_{}'.format(reforme)] - data_reforme['depenses_carburants_corrigees']))
+            )
+        data_reforme['part_cheque_logement'] = data_reforme['part_cheque_logement'].fillna(1)
+        data_reforme['part_cheque_logement'] = (
+            (data_reforme['part_cheque_logement'] < 1) * data_reforme['part_cheque_logement'] +
+            (data_reforme['part_cheque_logement'] > 1) * 1
+            )
+        data_reforme['part_cheque_logement'] = (data_reforme['part_cheque_logement'] > 0) * data_reforme['part_cheque_logement']
+        data_reforme['cheque_vert_logement'] = data_reforme['part_cheque_logement'] * contribution_unite_conso * data_reforme['ocde10']
+        data_reforme['cheque_vert_transport'] = (1 - data_reforme['part_cheque_logement']) * contribution_unite_conso * data_reforme['ocde10']
+    else:
+        data_reforme['cheque_vert_transport'] = contribution_unite_conso * data_reforme['ocde10']
+
+    return data_reforme
+
+
 def collapse(dataframe, groupe, var):
     '''
     Pour une variable, fonction qui calcule la moyenne pondérée au sein de chaque groupe.
@@ -145,7 +198,8 @@ def graph_builder_bar_percent(graph):
         stacked = False,
         )
     plt.axhline(0, color = 'k')
-    axes.yaxis.set_major_formatter(ticker.FuncFormatter(percent_formatter))
+    axes.yaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.1%}'.format(y)))
+    # .1% means that we want one decimal
     axes.legend(
         bbox_to_anchor = (1.5, 1.05),
         )
@@ -210,13 +264,31 @@ def percent_formatter(x, pos = 0):
     return '%1.0f%%' % (100 * x)
 
 
+def precarite(data, brde, tee, logement):
+    if logement == 'logement':
+        data['precarite_{}'.format(logement)] = (
+            data[brde] + data[tee] + data['froid_4_criteres_3_deciles']
+            - (data[brde] * data[tee]) - (data[brde] * data['froid_4_criteres_3_deciles'])
+            - (data[tee] * data['froid_4_criteres_3_deciles']) + (data[brde] * data[tee] * data['froid_4_criteres_3_deciles'])
+            )
+    else:
+        data['precarite_{}'.format(logement)] = (
+            data[brde] + data[tee] - (data[brde] * data[tee])
+            )
+      
+    return data
+
+
 def save_dataframe_to_graph(dataframe, file_name):
-    # return dataframe.to_csv('C:/Users/thomas.douenne/Documents/data/Stats_rapport/' + file_name, sep = ',')
     assets_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
         )
-    #return dataframe.to_csv(
-    #    u'U:/Cours/These/Projets/Papier_n1/Graphs/' + file_name, sep = ';'
-    #    )
     return dataframe.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets', 'to_graph',
-        file_name), sep = ',')
+        file_name), sep = ';')
+
+
+def tee_10_3(data, depenses, revenu, logement):
+    data['tee_10_3_{0}_{1}'.format(revenu, logement)] = \
+        1 * ((data[depenses] / data[revenu]) > 0.1) * (data['niveau_vie_decile'] < 4)
+
+    return data
