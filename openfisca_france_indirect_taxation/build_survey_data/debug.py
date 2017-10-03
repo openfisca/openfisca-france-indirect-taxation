@@ -10,39 +10,30 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 
 
 simulated_variables = [
-    'depenses_diesel',
-    'depenses_diesel_ajustees_rattrapage_diesel',
-    'pondmen',
-    #'depenses_combustibles_liquides',
-    #'depenses_gaz_ville',
-    #'rev_disponible',
-    #'loyer_impute',
-    #'depenses_electricite',
+    #'ticpe_totale',
+    #'diesel_ticpe',
+    #'essence_ticpe',
+    #'rev_disp_loyerimput',
+    #'depenses_diesel',
+    #'depenses_diesel_corrigees',
+    'depenses_essence_corrigees_entd',
+    'depenses_essence_corrigees',
+    'depenses_essence',
     ]
 
-year = 2014
-data_year = 2011
+year = 2010
+data_year = 2005
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 elasticities = get_elasticities(data_year)
 
 survey_scenario = SurveyScenario.create(
-    elasticities = elasticities,
-    inflation_kwargs = inflation_kwargs,
-    reform_key = 'rattrapage_diesel',
+    #elasticities = elasticities,
+    #inflation_kwargs = inflation_kwargs,
+    #reform_key = 'taxe_carbone',
     year = year,
     data_year = data_year
     )
 
-
-indiv_df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
-
-print sum(indiv_df['pondmen'] * indiv_df['depenses_diesel']) / indiv_df['pondmen'].sum()
-print sum(indiv_df['pondmen'] * indiv_df['depenses_diesel_ajustees_rattrapage_diesel']) / indiv_df['pondmen'].sum()
-
-#for var in simulated_variables:
-#    print var
-#    print indiv_df[var].mean()
-
-#for category in ['niveau_vie_decile']:
-#    df = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
+df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
+reforme = 'rattrapage_diesel'
