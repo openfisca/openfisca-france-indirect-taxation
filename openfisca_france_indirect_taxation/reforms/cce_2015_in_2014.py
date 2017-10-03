@@ -88,19 +88,6 @@ class cce_2015_in_2014(Reform):
     name = u"Augmentation des taux de la contribution climat energie aux taux de 2015 sur les données de 2014",
 
 
-    class depenses_carburants_ajustees_cce_2015_in_2014(YearlyVariable):
-        column = FloatCol
-        entity = Menage
-        label = u"Depenses en carburants après reaction a la reforme - taxes carburants"
-
-        def formula(self, simulation, period):
-            depenses_diesel_ajustees = simulation.calculate('depenses_diesel_ajustees_cce_2015_in_2014', period)
-            depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees_cce_2015_in_2014', period)
-            depenses_carburants_ajustees = depenses_diesel_ajustees + depenses_essence_ajustees
-
-            return depenses_carburants_ajustees
-    
-    
     class depenses_carburants_corrigees_ajustees_cce_2015_in_2014(YearlyVariable):
         column = FloatCol
         entity = Menage
@@ -113,22 +100,6 @@ class cce_2015_in_2014(Reform):
 
             return depenses_carburants_ajustees
 
-    
-    class depenses_diesel_ajustees_cce_2015_in_2014(YearlyVariable):
-        column = FloatCol
-        entity = Menage
-        label = u"Dépenses en diesel après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2015"
-    
-        def formula(self, simulation, period):
-            depenses_diesel = simulation.calculate('depenses_diesel', period)
-            diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
-            reforme_diesel = simulation.legislation_at(period.start).cce_2015_in_2014.diesel_2014_2015
-            carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
-            depenses_diesel_ajustees_cce_2015_in_2014 = \
-                depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel / diesel_ttc)
-    
-            return depenses_diesel_ajustees_cce_2015_in_2014
-    
     
     class depenses_diesel_corrigees_ajustees_cce_2015_in_2014(YearlyVariable):
         column = FloatCol
@@ -165,22 +136,6 @@ class cce_2015_in_2014(Reform):
     
             return depenses_energies_logement_ajustees_cce_2015_in_2014
 
-    
-    class depenses_essence_ajustees_cce_2015_in_2014(YearlyVariable):
-        column = FloatCol
-        entity = Menage
-        label = u"Dépenses en essence après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2015"
-    
-        def formula(self, simulation, period):
-            depenses_essence = simulation.calculate('depenses_essence', period)
-            super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
-            reforme_essence = simulation.legislation_at(period.start).cce_2015_in_2014.essence_2014_2015
-            carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
-            depenses_essence_ajustees_cce_2015_in_2014 = \
-                depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
-    
-            return depenses_essence_ajustees_cce_2015_in_2014
-    
     
     class depenses_essence_corrigees_ajustees_cce_2015_in_2014(YearlyVariable):
         column = FloatCol
@@ -336,7 +291,7 @@ class cce_2015_in_2014(Reform):
                 )
     
             depenses_diesel_ajustees_cce_2015_in_2014 = \
-                simulation.calculate('depenses_diesel_ajustees_cce_2015_in_2014', period)
+                simulation.calculate('depenses_diesel_corrigees_ajustees_cce_2015_in_2014', period)
             depenses_diesel_htva_ajustees = (
                 depenses_diesel_ajustees_cce_2015_in_2014 -
                 tax_from_expense_including_tax(depenses_diesel_ajustees_cce_2015_in_2014, taux_plein_tva)
@@ -473,7 +428,7 @@ class cce_2015_in_2014(Reform):
     
         def formula(self, simulation, period):
             depenses_diesel_ajustees_cce_2015_in_2014 = \
-                simulation.calculate('depenses_diesel_ajustees_cce_2015_in_2014', period)
+                simulation.calculate('depenses_diesel_corrigees_ajustees_cce_2015_in_2014', period)
             diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
             reforme_diesel = simulation.legislation_at(period.start).cce_2015_in_2014.diesel_2014_2015
             quantites_diesel_ajustees = depenses_diesel_ajustees_cce_2015_in_2014 / (diesel_ttc + reforme_diesel) * 100
@@ -522,7 +477,7 @@ class cce_2015_in_2014(Reform):
     
         def formula(self, simulation, period):
             depenses_essence_ajustees_cce_2015_in_2014 = \
-                simulation.calculate('depenses_essence_ajustees_cce_2015_in_2014', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2015_in_2014', period)
             part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
             depenses_sp_e10_ajustees = depenses_essence_ajustees_cce_2015_in_2014 * part_sp_e10
             super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
@@ -538,7 +493,7 @@ class cce_2015_in_2014(Reform):
     
         def formula(self, simulation, period):
             depenses_essence_ajustees_cce_2015_in_2014 = \
-                simulation.calculate('depenses_essence_ajustees_cce_2015_in_2014', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2015_in_2014', period)
             part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
             depenses_sp95_ajustees = depenses_essence_ajustees_cce_2015_in_2014 * part_sp95
             super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
@@ -554,7 +509,7 @@ class cce_2015_in_2014(Reform):
     
         def formula(self, simulation, period):
             depenses_essence_ajustees_cce_2015_in_2014 = \
-                simulation.calculate('depenses_essence_ajustees_cce_2015_in_2014', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2015_in_2014', period)
             part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
             depenses_sp98_ajustees = depenses_essence_ajustees_cce_2015_in_2014 * part_sp98
             super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
@@ -570,7 +525,7 @@ class cce_2015_in_2014(Reform):
     
         def formula(self, simulation, period):
             depenses_essence_ajustees_cce_2015_in_2014 = \
-                simulation.calculate('depenses_essence_ajustees_cce_2015_in_2014', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2015_in_2014', period)
             part_super_plombe = \
                 simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
             depenses_super_plombe_ajustees = depenses_essence_ajustees_cce_2015_in_2014 * part_super_plombe
@@ -635,7 +590,7 @@ class cce_2015_in_2014(Reform):
                 (super_95_e10_ttc_ajuste - accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_ajustees_cce_2015_in_2014 = \
-                simulation.calculate('depenses_essence_ajustees_cce_2015_in_2014', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2015_in_2014', period)
             part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
             sp_e10_depenses_ajustees = depenses_essence_ajustees_cce_2015_in_2014 * part_sp_e10
             sp_e10_depenses_htva_ajustees = \
@@ -670,7 +625,7 @@ class cce_2015_in_2014(Reform):
                 (super_95_ttc_ajuste - accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_ajustees_cce_2015_in_2014 = \
-                simulation.calculate('depenses_essence_ajustees_cce_2015_in_2014', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2015_in_2014', period)
             part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
             depenses_sp_95_ajustees = depenses_essence_ajustees_cce_2015_in_2014 * part_sp95
             depenses_sp_95_htva_ajustees = (
@@ -707,7 +662,7 @@ class cce_2015_in_2014(Reform):
                 (super_98_ttc_ajuste - accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_ajustees_cce_2015_in_2014 = \
-                simulation.calculate('depenses_essence_ajustees_cce_2015_in_2014', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2015_in_2014', period)
             part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
             depenses_sp_98_ajustees = depenses_essence_ajustees_cce_2015_in_2014 * part_sp98
             depenses_sp_98_htva_ajustees = (
@@ -718,8 +673,8 @@ class cce_2015_in_2014(Reform):
                 )
     
             return montant_sp98_ticpe_ajuste
-    
-    
+
+
     class super_plombe_ticpe(YearlyVariable):
         label = u"Calcul du montant de la TICPE sur le super plombé après réforme"
         reference = ticpe.super_plombe_ticpe
@@ -738,7 +693,7 @@ class cce_2015_in_2014(Reform):
                 (super_plombe_ttc_ajuste - accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_ajustees_cce_2015_in_2014 = \
-                simulation.calculate('depenses_essence_ajustees_cce_2015_in_2014', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2015_in_2014', period)
             part_super_plombe = \
                 simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
             depenses_super_plombe_ajustees = depenses_essence_ajustees_cce_2015_in_2014 * part_super_plombe
@@ -879,12 +834,9 @@ class cce_2015_in_2014(Reform):
 
 
     def apply(self):
-        self.update_variable(self.depenses_carburants_ajustees_cce_2015_in_2014)
         self.update_variable(self.depenses_carburants_corrigees_ajustees_cce_2015_in_2014)
-        self.update_variable(self.depenses_diesel_ajustees_cce_2015_in_2014)
         self.update_variable(self.depenses_diesel_corrigees_ajustees_cce_2015_in_2014)
         self.update_variable(self.depenses_energies_logement_ajustees_cce_2015_in_2014)
-        self.update_variable(self.depenses_essence_ajustees_cce_2015_in_2014)
         self.update_variable(self.depenses_essence_corrigees_ajustees_cce_2015_in_2014)
         self.update_variable(self.depenses_combustibles_liquides_ajustees_cce_2015_in_2014)
         self.update_variable(self.depenses_gaz_ville_ajustees_cce_2015_in_2014)

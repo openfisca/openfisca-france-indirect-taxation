@@ -29,7 +29,7 @@ class quantites_diesel(YearlyVariable):
     label = u"Quantités de diesel consommées par les ménages"
 
     def formula(self, simulation, period):
-        depenses_diesel = simulation.calculate('depenses_diesel', period)
+        depenses_diesel = simulation.calculate('depenses_diesel_corrigees', period)
         diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
         quantites_diesel = depenses_diesel / diesel_ttc * 100
 
@@ -296,7 +296,7 @@ class quantites_sp_e10(YearlyVariable):
     label = u"Quantités consommées de sans plomb e10 par les ménages"
 
     def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence', period)
+        depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
         part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10 = depenses_essence * part_sp_e10
         super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
@@ -311,7 +311,7 @@ class quantites_sp95(YearlyVariable):
     label = u"Quantités consommées de sans plomb 95 par les ménages"
 
     def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence', period)
+        depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
         part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp95 = depenses_essence * part_sp95
         super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
@@ -326,7 +326,7 @@ class quantites_sp98(YearlyVariable):
     label = u"Quantités consommées de sans plomb 98 par les ménages"
 
     def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence', period)
+        depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
         part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
         depenses_sp98 = depenses_essence * part_sp98
         super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
@@ -341,7 +341,7 @@ class quantites_super_plombe(YearlyVariable):
     label = u"Quantités consommées de super plombé par les ménages"
 
     def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence', period)
+        depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
         part_super_plombe = \
             simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
         depenses_super_plombe = depenses_essence * part_super_plombe

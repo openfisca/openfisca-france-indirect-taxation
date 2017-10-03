@@ -40,8 +40,8 @@ data_matched_enl = data_matched_enl[
 
 data_matched_entd = data_matched_entd[
     ['distance'] + ['distance_diesel'] + ['distance_essence'] +
-    ['depenses_carburants_corrigees'] + ['depenses_diesel_corrigees'] +
-    ['depenses_essence_corrigees'] + ['ident_men']
+    ['depenses_carburants_corrigees_entd'] + ['depenses_diesel_corrigees_entd'] +
+    ['depenses_essence_corrigees_entd'] + ['ident_men']
     ]
 
 

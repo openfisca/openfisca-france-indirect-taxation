@@ -89,17 +89,17 @@ class rattrapage_diesel(Reform):
     name = u"Reforme de l'imposition indirecte des carburants",
 
 
-    class depenses_carburants_ajustees_rattrapage_diesel(YearlyVariable):
-        column = FloatCol
-        entity = Menage
-        label = u"Depenses en carburants après reaction a la reforme - taxes carburants"
+    #class depenses_carburants_ajustees_rattrapage_diesel(YearlyVariable):
+    #    column = FloatCol
+    #    entity = Menage
+    #    label = u"Depenses en carburants après reaction a la reforme - taxes carburants"
 
-        def formula(self, simulation, period):
-            depenses_diesel_ajustees = simulation.calculate('depenses_diesel_ajustees_rattrapage_diesel', period)
-            depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees_rattrapage_diesel', period)
-            depenses_carburants_ajustees = depenses_diesel_ajustees + depenses_essence_ajustees
+    #    def formula(self, simulation, period):
+    #        depenses_diesel_ajustees = simulation.calculate('depenses_diesel_ajustees_rattrapage_diesel', period)
+    #        depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees_rattrapage_diesel', period)
+    #        depenses_carburants_ajustees = depenses_diesel_ajustees + depenses_essence_ajustees
 
-            return depenses_carburants_ajustees
+    #        return depenses_carburants_ajustees
     
     
     class depenses_carburants_corrigees_ajustees_rattrapage_diesel(YearlyVariable):
@@ -115,20 +115,20 @@ class rattrapage_diesel(Reform):
             return depenses_carburants_ajustees
 
     
-    class depenses_diesel_ajustees_rattrapage_diesel(YearlyVariable):
-        column = FloatCol
-        entity = Menage
-        label = u"Depenses en diesel après reaction a la reforme - taxes carburants"
+    #class depenses_diesel_ajustees_rattrapage_diesel(YearlyVariable):
+    #    column = FloatCol
+    #    entity = Menage
+    #    label = u"Depenses en diesel après reaction a la reforme - taxes carburants"
     
-        def formula(self, simulation, period):
-            depenses_diesel = simulation.calculate('depenses_diesel', period)
-            diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
-            reforme_diesel = simulation.legislation_at(period.start).rattrapage_diesel.diesel
-            carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
-            depenses_diesel_ajustees_rattrapage_diesel = \
-                depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel / diesel_ttc)
+    #    def formula(self, simulation, period):
+    #        depenses_diesel = simulation.calculate('depenses_diesel', period)
+    #        diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+    #        reforme_diesel = simulation.legislation_at(period.start).rattrapage_diesel.diesel
+    #        carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
+    #        depenses_diesel_ajustees_rattrapage_diesel = \
+    #            depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel / diesel_ttc)
 
-            return depenses_diesel_ajustees_rattrapage_diesel
+    #        return depenses_diesel_ajustees_rattrapage_diesel
 
 
     class depenses_diesel_corrigees_ajustees_rattrapage_diesel(YearlyVariable):
@@ -147,20 +147,20 @@ class rattrapage_diesel(Reform):
             return depenses_diesel_ajustees_rattrapage_diesel
 
 
-    class depenses_essence_ajustees_rattrapage_diesel(YearlyVariable):
-        column = FloatCol
-        entity = Menage
-        label = u"Depenses en essence après reaction a la reforme - taxes carburants"
+    #class depenses_essence_ajustees_rattrapage_diesel(YearlyVariable):
+    #    column = FloatCol
+    #    entity = Menage
+    #    label = u"Depenses en essence après reaction a la reforme - taxes carburants"
 
-        def formula(self, simulation, period):
-            depenses_essence = simulation.calculate('depenses_essence', period)
-            super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
-            reforme_essence = simulation.legislation_at(period.start).rattrapage_diesel.essence
-            carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
-            depenses_essence_ajustees_rattrapage_diesel = \
-                depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
+    #    def formula(self, simulation, period):
+    #        depenses_essence = simulation.calculate('depenses_essence', period)
+    #        super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+    #        reforme_essence = simulation.legislation_at(period.start).rattrapage_diesel.essence
+    #        carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
+    #        depenses_essence_ajustees_rattrapage_diesel = \
+    #            depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
     
-            return depenses_essence_ajustees_rattrapage_diesel
+    #        return depenses_essence_ajustees_rattrapage_diesel
     
     
     class depenses_essence_corrigees_ajustees_rattrapage_diesel(YearlyVariable):
@@ -274,7 +274,7 @@ class rattrapage_diesel(Reform):
                 )
     
             depenses_diesel_ajustees_rattrapage_diesel = \
-                simulation.calculate('depenses_diesel_ajustees_rattrapage_diesel', period)
+                simulation.calculate('depenses_diesel_corrigees_ajustees_rattrapage_diesel', period)
             depenses_diesel_htva_ajustees = (
                 depenses_diesel_ajustees_rattrapage_diesel -
                 tax_from_expense_including_tax(depenses_diesel_ajustees_rattrapage_diesel, taux_plein_tva)
@@ -337,7 +337,7 @@ class rattrapage_diesel(Reform):
     
         def formula(self, simulation, period):
             depenses_diesel_ajustees_rattrapage_diesel = \
-                simulation.calculate('depenses_diesel_ajustees_rattrapage_diesel', period)
+                simulation.calculate('depenses_diesel_corrigees_ajustees_rattrapage_diesel', period)
             diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
             reforme_diesel = simulation.legislation_at(period.start).rattrapage_diesel.diesel
             quantites_diesel_ajustees = depenses_diesel_ajustees_rattrapage_diesel / (diesel_ttc + reforme_diesel) * 100
@@ -351,7 +351,7 @@ class rattrapage_diesel(Reform):
     
         def formula(self, simulation, period):
             depenses_essence_ajustees_rattrapage_diesel = \
-                simulation.calculate('depenses_essence_ajustees_rattrapage_diesel', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
             part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
             depenses_sp_e10_ajustees = depenses_essence_ajustees_rattrapage_diesel * part_sp_e10
             super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
@@ -366,7 +366,7 @@ class rattrapage_diesel(Reform):
         reference = quantites_energie.quantites_sp95
     
         def formula(self, simulation, period):
-            depenses_essence_ajustees_rattrapage_diesel = simulation.calculate('depenses_essence_ajustees_rattrapage_diesel', period)
+            depenses_essence_ajustees_rattrapage_diesel = simulation.calculate('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
             part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
             depenses_sp95_ajustees = depenses_essence_ajustees_rattrapage_diesel * part_sp95
             super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
@@ -381,7 +381,7 @@ class rattrapage_diesel(Reform):
         reference = quantites_energie.quantites_sp98
     
         def formula(self, simulation, period):
-            depenses_essence_ajustees_rattrapage_diesel = simulation.calculate('depenses_essence_ajustees_rattrapage_diesel', period)
+            depenses_essence_ajustees_rattrapage_diesel = simulation.calculate('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
             part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
             depenses_sp98_ajustees = depenses_essence_ajustees_rattrapage_diesel * part_sp98
             super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
@@ -396,7 +396,7 @@ class rattrapage_diesel(Reform):
         reference = quantites_energie.quantites_super_plombe
     
         def formula(self, simulation, period):
-            depenses_essence_ajustees_rattrapage_diesel = simulation.calculate('depenses_essence_ajustees_rattrapage_diesel', period)
+            depenses_essence_ajustees_rattrapage_diesel = simulation.calculate('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
             part_super_plombe = \
                 simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
             depenses_super_plombe_ajustees = depenses_essence_ajustees_rattrapage_diesel * part_super_plombe
@@ -461,7 +461,7 @@ class rattrapage_diesel(Reform):
                 (super_95_e10_ttc_ajuste - accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_ajustees_rattrapage_diesel = \
-                simulation.calculate('depenses_essence_ajustees_rattrapage_diesel', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
             part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
             sp_e10_depenses_ajustees = depenses_essence_ajustees_rattrapage_diesel * part_sp_e10
             sp_e10_depenses_htva_ajustees = \
@@ -496,7 +496,7 @@ class rattrapage_diesel(Reform):
                 (super_95_ttc_ajuste - accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_ajustees_rattrapage_diesel = \
-                simulation.calculate('depenses_essence_ajustees_rattrapage_diesel', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
             part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
             depenses_sp_95_ajustees = depenses_essence_ajustees_rattrapage_diesel * part_sp95
             depenses_sp_95_htva_ajustees = (
@@ -533,7 +533,7 @@ class rattrapage_diesel(Reform):
                 (super_98_ttc_ajuste - accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_ajustees_rattrapage_diesel = \
-                simulation.calculate('depenses_essence_ajustees_rattrapage_diesel', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
             part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
             depenses_sp_98_ajustees = depenses_essence_ajustees_rattrapage_diesel * part_sp98
             depenses_sp_98_htva_ajustees = (
@@ -564,7 +564,7 @@ class rattrapage_diesel(Reform):
                 (super_plombe_ttc_ajuste - accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_ajustees_rattrapage_diesel = \
-                simulation.calculate('depenses_essence_ajustees_rattrapage_diesel', period)
+                simulation.calculate('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
             part_super_plombe = \
                 simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
             depenses_super_plombe_ajustees = depenses_essence_ajustees_rattrapage_diesel * part_super_plombe
@@ -670,11 +670,11 @@ class rattrapage_diesel(Reform):
 
             
     def apply(self):
-        self.update_variable(self.depenses_carburants_ajustees_rattrapage_diesel)
+        #self.update_variable(self.depenses_carburants_ajustees_rattrapage_diesel)
         self.update_variable(self.depenses_carburants_corrigees_ajustees_rattrapage_diesel)
-        self.update_variable(self.depenses_diesel_ajustees_rattrapage_diesel)
+        #self.update_variable(self.depenses_diesel_ajustees_rattrapage_diesel)
         self.update_variable(self.depenses_diesel_corrigees_ajustees_rattrapage_diesel)
-        self.update_variable(self.depenses_essence_ajustees_rattrapage_diesel)
+        #self.update_variable(self.depenses_essence_ajustees_rattrapage_diesel)
         self.update_variable(self.depenses_essence_corrigees_ajustees_rattrapage_diesel)
         self.update_variable(self.depenses_tva_taux_plein_ajustees_rattrapage_diesel)
         self.update_variable(self.depenses_tva_taux_plein_bis_ajustees_rattrapage_diesel)

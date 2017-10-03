@@ -6,44 +6,6 @@ from __future__ import division
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
-class depenses_diesel(YearlyVariable):
-    column = FloatCol
-    entity = Menage
-    label = u"Construction par pondération des dépenses spécifiques au diesel"
-
-    def formula(self, simulation, period):
-        conso_totale_vp_diesel = simulation.legislation_at(period.start).imposition_indirecte.quantite_carbu_vp.diesel
-        conso_totale_vp_essence = simulation.legislation_at(period.start).imposition_indirecte.quantite_carbu_vp.essence
-        taille_parc_diesel = simulation.legislation_at(period.start).imposition_indirecte.parc_vp.diesel
-        taille_parc_essence = simulation.legislation_at(period.start).imposition_indirecte.parc_vp.essence
-
-        conso_moyenne_vp_diesel = conso_totale_vp_diesel / taille_parc_diesel
-        conso_moyenne_vp_essence = conso_totale_vp_essence / taille_parc_essence
-
-        nombre_vehicules_diesel = simulation.calculate('veh_diesel', period)
-        nombre_vehicules_essence = simulation.calculate('veh_essence', period)
-        nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence
-
-        # to compute part_conso_diesel we need to avoid dividing by zero for those we do not have any vehicle
-        # Thus, we choose arbitrarily to divide it by 1, but this choice won't affect the result as long as it is not 0
-        denominateur = (
-            (nombre_vehicules_diesel * conso_moyenne_vp_diesel) + (nombre_vehicules_essence * conso_moyenne_vp_essence)
-            ) * (nombre_vehicules_total != 0) + 1 * (nombre_vehicules_total == 0)
-
-        part_conso_diesel = (nombre_vehicules_diesel * conso_moyenne_vp_diesel) / denominateur
-
-        depenses_carburants = simulation.calculate('depenses_carburants', period)
-
-        depenses_diesel = depenses_carburants * (
-            (nombre_vehicules_total == 0) * (
-                conso_totale_vp_diesel / (conso_totale_vp_diesel + conso_totale_vp_essence)
-                ) +
-            (nombre_vehicules_total != 0) * part_conso_diesel
-            )
-
-        return depenses_diesel
-
-
 class combustibles_liquides_ticpe(YearlyVariable):
     column = FloatCol
     entity = Menage
@@ -79,7 +41,7 @@ class diesel_ticpe(YearlyVariable):
             (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
             )
 
-        depenses_diesel = simulation.calculate('depenses_diesel', period)
+        depenses_diesel = simulation.calculate('depenses_diesel_corrigees', period)
         depenses_diesel_htva = depenses_diesel - tax_from_expense_including_tax(depenses_diesel, taux_plein_tva)
         montant_diesel_ticpe = tax_from_expense_including_tax(depenses_diesel_htva, taux_implicite_diesel)
 
@@ -120,72 +82,6 @@ class diesel_ticpe_ajustee(YearlyVariable):
             )
 
         return montant_diesel_ticpe_ajuste
-
-
-class depenses_essence(YearlyVariable):
-    column = FloatCol
-    entity = Menage
-    label = u"Construction par déduction des dépenses spécifiques à l'essence"
-
-    def formula(self, simulation, period):
-        depenses_carburants = simulation.calculate('depenses_carburants', period)
-        depenses_diesel = simulation.calculate('depenses_diesel', period)
-        depenses_essence = depenses_carburants - depenses_diesel
-
-        return depenses_essence
-
-
-class depenses_sp_e10(YearlyVariable):
-    column = FloatCol
-    entity = Menage
-    label = u"Construction par pondération des dépenses spécifiques au sans plomb e10"
-
-    def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence', period)
-        part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
-        depenses_sp_e10 = depenses_essence * part_sp_e10
-
-        return depenses_sp_e10
-
-
-class depenses_sp_95(YearlyVariable):
-    column = FloatCol
-    entity = Menage
-    label = u"Construction par pondération des dépenses spécifiques au sans plomb 95"
-
-    def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence', period)
-        part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
-        depenses_sp_95 = depenses_essence * part_sp95
-
-        return depenses_sp_95
-
-
-class depenses_sp_98(YearlyVariable):
-    column = FloatCol
-    entity = Menage
-    label = u"Construction par pondération des dépenses spécifiques au sans plomb 98"
-
-    def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence', period)
-        part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
-        depenses_sp_98 = depenses_essence * part_sp98
-
-        return depenses_sp_98
-
-
-class depenses_super_plombe(YearlyVariable):
-    column = FloatCol
-    entity = Menage
-    label = u"Construction par pondération des dépenses spécifiques au super plombe"
-
-    def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence', period)
-        part_super_plombe = \
-            simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
-        depenses_super_plombe = depenses_essence * part_super_plombe
-
-        return depenses_super_plombe
 
 
 class essence_ticpe(Variable):
@@ -536,6 +432,7 @@ class ticpe_totale_ajustee(YearlyVariable):
         ticpe_totale_ajustee = diesel_ticpe_ajustee + essence_ticpe_ajustee
 
         return ticpe_totale_ajustee
+
 
 class total_taxes_energies(YearlyVariable):
     column = FloatCol

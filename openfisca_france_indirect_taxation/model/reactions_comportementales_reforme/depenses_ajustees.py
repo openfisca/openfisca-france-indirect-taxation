@@ -14,7 +14,7 @@ class depenses_essence_ajustees(YearlyVariable):
     label = u"Dépenses en essence après réaction à la réforme des prix"
 
     def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence', period)
+        depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
         super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
         reforme_essence = simulation.legislation_at(period.start).taxes_carburants.essence
         # simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.reforme_essence
@@ -31,7 +31,7 @@ class depenses_diesel_ajustees(YearlyVariable):
     label = u"Dépenses en diesel après réaction à la réforme des prix"
 
     def formula(self, simulation, period):
-        depenses_diesel = simulation.calculate('depenses_diesel', period)
+        depenses_diesel = simulation.calculate('depenses_diesel_corrigees', period)
         diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
         reforme_diesel = simulation.legislation_at(period.start).taxes_carburants.diesel
         carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
