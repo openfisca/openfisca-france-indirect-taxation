@@ -15,6 +15,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import brde, cheq
 def nombre_precaires_reformes(reforme, year, data_year):
     dict_logement = dict()
     dict_transport = dict()
+    dict_double = dict()
 
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
     elasticities = get_elasticities(data_year)
@@ -136,7 +137,7 @@ def nombre_precaires_reformes(reforme, year, data_year):
         if reforme != 'rattrapage_diesel':
             menages_reference = precarite(menages_reference, 'brde_m2_logement_depenses_tot', 'tee_10_3_depenses_tot_logement', 'logement')
             menages_reforme = precarite(menages_reforme, 'brde_m2_logement_depenses_tot', 'tee_10_3_depenses_tot_logement', 'logement')
-        
+            
             dict_logement['precarite - {0} - {1}'.format(reforme, redistribution)] = (
                 float((menages_reforme['precarite_logement'] * menages_reforme['pondmen']).sum()) /
                 menages_reference['pondmen'].sum() 
@@ -149,6 +150,25 @@ def nombre_precaires_reformes(reforme, year, data_year):
         menages_reference = precarite(menages_reference, 'brde_m2_transport_depenses_tot', 'tee_10_3_depenses_tot_transport', 'transport')
         menages_reforme = precarite(menages_reforme, 'brde_m2_transport_depenses_tot', 'tee_10_3_depenses_tot_transport', 'transport')
 
+        if reforme != 'rattrapage_diesel':
+            menages_reference['double_precaire'] = (
+                menages_reference['precarite_logement'] + menages_reference['precarite_transport'] -
+                (menages_reference['precarite_logement'] * menages_reference['precarite_transport'])
+                )
+            menages_reforme['double_precaire'] = (
+                menages_reforme['precarite_logement'] + menages_reforme['precarite_transport'] -
+                (menages_reforme['precarite_logement'] * menages_reforme['precarite_transport'])
+                )
+            dict_double['precarite - {0} - {1}'.format(reforme, redistribution)] = (
+                float((menages_reforme['double_precaire'] * menages_reforme['pondmen']).sum()) /
+                menages_reference['pondmen'].sum() 
+                )
+            dict_double['precarite - {0} - reference'.format(reforme)] = (
+                float((menages_reference['double_precaire'] * menages_reference['pondmen']).sum()) /
+                menages_reference['pondmen'].sum() 
+                )
+
+
         dict_transport['precarite - {0} - {1}'.format(reforme, redistribution)] = (
             float((menages_reforme['precarite_transport'] * menages_reforme['pondmen']).sum()) /
             menages_reference['pondmen'].sum()
@@ -158,7 +178,7 @@ def nombre_precaires_reformes(reforme, year, data_year):
             menages_reference['pondmen'].sum()
             )
         
-    return dict_logement, dict_transport
+    return dict_logement, dict_transport, dict_double
 
 
 if __name__ == '__main__':    
@@ -167,5 +187,6 @@ if __name__ == '__main__':
     
     dict_reformes = dict()
     for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
-        (dict_reformes['logement - {}'.format(reforme)], dict_reformes['transport - {}'.format(reforme)]) = \
+        (dict_reformes['logement - {}'.format(reforme)], dict_reformes['transport - {}'.format(reforme)],
+            dict_reformes['double - {}'.format(reforme)]) = \
             nombre_precaires_reformes(reforme, year, data_year)

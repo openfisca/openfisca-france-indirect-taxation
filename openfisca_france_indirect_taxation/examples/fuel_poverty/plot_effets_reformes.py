@@ -23,20 +23,27 @@ def plot_precarite(indicateur):
     statuts = ['reference', 'before', 'after']
     dataframe_logement = pd.DataFrame(index = reformes, columns=statuts)
     dataframe_logement = dataframe_logement.drop(['rattrapage_diesel'])
+    dataframe_double = pd.DataFrame(index = reformes, columns=statuts)
+    dataframe_double = dataframe_double.drop(['rattrapage_diesel'])
     dataframe_transport = pd.DataFrame(index = reformes, columns=statuts)
     dict_reformes = dict()
     for reforme in reformes:
-        (dict_reformes['logement - {}'.format(reforme)], dict_reformes['transport - {}'.format(reforme)]) = \
+        (dict_reformes['logement - {}'.format(reforme)], dict_reformes['transport - {}'.format(reforme)],
+            dict_reformes['double - {}'.format(reforme)]) = \
             nombre_precaires_reformes(reforme, year, data_year)
         for statut in statuts:
             if reforme != 'rattrapage_diesel':
                 dataframe_logement[statut][reforme] = \
                     dict_reformes['logement - {}'.format(reforme)]['{0} - {1} - {2}'.format(indicateur, reforme, statut)]
+                if indicateur == 'precarite':
+                    dataframe_double[statut][reforme] = \
+                        dict_reformes['double - {}'.format(reforme)]['precarite - {0} - {1}'.format(reforme, statut)]
             dataframe_transport[statut][reforme] = \
                 dict_reformes['transport - {}'.format(reforme)]['{0} - {1} - {2}'.format(indicateur, reforme, statut)]
 
     graph_builder_bar_percent(dataframe_logement)
     graph_builder_bar_percent(dataframe_transport)
+    graph_builder_bar_percent(dataframe_double)
 
 
 def plot_effet_reformes_indicateurs(indicateur):
@@ -44,15 +51,21 @@ def plot_effet_reformes_indicateurs(indicateur):
     statuts = ['before', 'after']
     dataframe_logement = pd.DataFrame(index = reformes, columns=statuts)
     dataframe_logement = dataframe_logement.drop(['rattrapage_diesel'])
+    dataframe_double = pd.DataFrame(index = reformes, columns=statuts)
+    dataframe_double = dataframe_double.drop(['rattrapage_diesel'])
     dataframe_transport = pd.DataFrame(index = reformes, columns=statuts)
     dict_reformes = dict()
     for reforme in reformes:
-        (dict_reformes['logement - {}'.format(reforme)], dict_reformes['transport - {}'.format(reforme)]) = \
+        (dict_reformes['logement - {}'.format(reforme)], dict_reformes['transport - {}'.format(reforme)],
+            dict_reformes['double - {}'.format(reforme)]) = \
             effets_reformes_precarite(reforme, year, data_year)
         for statut in statuts:
             if reforme != 'rattrapage_diesel':
                 dataframe_logement[statut][reforme] = \
                     dict_reformes['logement - {}'.format(reforme)]['{0} - {1} - {2}'.format(indicateur, reforme, statut)]
+                if indicateur == 'precarite':
+                    dataframe_double[statut][reforme] = \
+                        dict_reformes['double - {}'.format(reforme)]['precarite - {0} - {1}'.format(reforme, statut)]
             dataframe_transport[statut][reforme] = \
                 dict_reformes['transport - {}'.format(reforme)]['{0} - {1} - {2}'.format(indicateur, reforme, statut)]
 
@@ -62,11 +75,14 @@ def plot_effet_reformes_indicateurs(indicateur):
     save_dataframe_to_graph(
         dataframe_transport, 'Precarite/effet_reformes_{}_transport.csv'.format(indicateur)
         )
+    save_dataframe_to_graph(
+        dataframe_double, 'Precarite/effet_reformes_{}_double.csv'.format(indicateur)
+        )
 
 
     graph_builder_bar_percent(dataframe_logement)
     graph_builder_bar_percent(dataframe_transport)
-
+    graph_builder_bar_percent(dataframe_double)
 
 
 if __name__ == '__main__':    
