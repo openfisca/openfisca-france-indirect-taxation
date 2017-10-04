@@ -64,7 +64,7 @@ def calage_depenses_from_distance(data_matched):
 
 
 if __name__ == "__main__":
-    data = calage_depenses_from_distance(data_matched_distance)    
+    data = calage_depenses_from_distance(data_matched_distance)
 
     # Sauvegarde des données dans des fichiers .csv
     data.to_csv(os.path.join(default_config_files_directory, 'openfisca_france_indirect_taxation', 'assets',

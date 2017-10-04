@@ -36,4 +36,3 @@ survey_scenario = SurveyScenario.create(
     )
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
-reforme = 'rattrapage_diesel'

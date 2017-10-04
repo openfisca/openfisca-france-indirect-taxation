@@ -64,7 +64,7 @@ def hellinger(p, q):
 def histogrammes(list_keys, list_values_bdf, list_values_entd, data_name_1, data_name_2):
     size_hist = np.arange(len(list_keys))
     plot_bdf = plt.bar(size_hist-0.125, list_values_bdf, color = 'b', align='center', width=0.25)
-    plot_entd = plt.bar(size_hist+0.125, list_values_entd, color = 'r', align='center', width=0.25)
+    plot_entd = plt.bar(size_hist+0.125, list_values_entd, align='center', width=0.25)
     plt.xticks(size_hist, list_keys)
     plt.legend((plot_bdf[0], plot_entd[0]), (data_name_1, data_name_2))
     

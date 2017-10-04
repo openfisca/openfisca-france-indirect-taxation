@@ -9,10 +9,13 @@ from __future__ import division
 import os
 import pkg_resources
 import pandas as pd
+import seaborn
 
 
 from openfisca_france_indirect_taxation.build_survey_data.utils import \
     histogrammes, plots_by_group
+
+seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 
 # Importation des bases de données appariées et de la base de référence entd
