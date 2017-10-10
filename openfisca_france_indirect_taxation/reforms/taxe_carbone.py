@@ -87,13 +87,13 @@ class taxe_carbone(Reform):
     name = u"Réforme de l'imposition indirecte des énergies selon leur contenu carbone",
 
     
-    class cheques_energie_taxe_carbone(YearlyVariable):
+    class cheques_energie(YearlyVariable):
         column = FloatCol
         entity = Menage
         label = u"Montant des chèques énergie (indexés par uc) - taxe carbone"
     
         def formula(self, simulation, period):
-            contribution = simulation.calculate('contributions_taxe_carbone', period)
+            contribution = simulation.calculate('contributions_reforme', period)
             ocde10 = simulation.calculate('ocde10', period)
             pondmen = simulation.calculate('pondmen', period)
             
@@ -105,7 +105,7 @@ class taxe_carbone(Reform):
             return cheque
 
 
-    class contributions_taxe_carbone(YearlyVariable):
+    class contributions_reforme(YearlyVariable):
         column = FloatCol
         entity = Menage
         label = u"Changement de contribution aux taxes énergétiques suite à la réforme - taxe carbone"
@@ -329,7 +329,7 @@ class taxe_carbone(Reform):
                 accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
             except:
                 accise_diesel_ticpe = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
-    
+
             reforme_diesel = simulation.legislation_at(period.start).taxe_carbone.diesel
             accise_diesel_ticpe_ajustee = accise_diesel_ticpe + reforme_diesel
             prix_diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
@@ -460,7 +460,7 @@ class taxe_carbone(Reform):
     
         def formula(self, simulation, period):
             taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
-    
+
             accise_fioul_ticpe = (
                 simulation.legislation_at(period.start).imposition_indirecte.ticpe.gazole_fioul_domestique_hectolitre / 100
                 )
@@ -916,8 +916,8 @@ class taxe_carbone(Reform):
 
 
     def apply(self):
-        self.update_variable(self.cheques_energie_taxe_carbone)     
-        self.update_variable(self.contributions_taxe_carbone)     
+        self.update_variable(self.cheques_energie)     
+        self.update_variable(self.contributions_reforme)     
         self.update_variable(self.depenses_carburants_corrigees_ajustees_taxe_carbone)
         self.update_variable(self.depenses_diesel_corrigees_ajustees_taxe_carbone)
         self.update_variable(self.depenses_electricite_ajustees_taxe_carbone)

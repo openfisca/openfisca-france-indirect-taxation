@@ -2,6 +2,8 @@
 
 from __future__ import division
 
+import numpy
+
 from openfisca_core.reforms import Reform, update_legislation
 
 
@@ -102,6 +104,38 @@ class rattrapage_diesel(Reform):
     #        return depenses_carburants_ajustees
     
     
+    class cheques_energie(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Montant des chèques énergie (indexés par uc) - taxe carbone"
+    
+        def formula(self, simulation, period):
+            contribution = simulation.calculate('contributions_reforme', period)
+            ocde10 = simulation.calculate('ocde10', period)
+            pondmen = simulation.calculate('pondmen', period)
+            
+            somme_contributions = numpy.sum(contribution * pondmen)
+            contribution_uc = somme_contributions / numpy.sum(ocde10 * pondmen)
+
+            cheque = contribution_uc * ocde10
+
+            return cheque
+
+
+    class contributions_reforme(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Changement de contribution aux taxes énergétiques suite à la réforme - taxe carbone"
+
+        def formula(self, simulation, period):
+            total_taxes_energies = simulation.calculate('total_taxes_energies', period)
+            total_taxes_energies_rattrapage_diesel = simulation.calculate('total_taxes_energies_rattrapage_diesel', period)
+
+            contribution = total_taxes_energies_rattrapage_diesel - total_taxes_energies
+
+            return contribution
+
+
     class depenses_carburants_corrigees_ajustees_rattrapage_diesel(YearlyVariable):
         column = FloatCol
         entity = Menage
@@ -586,9 +620,25 @@ class rattrapage_diesel(Reform):
             essence_ticpe = simulation.calculate('essence_ticpe', period)
             diesel_ticpe = simulation.calculate('diesel_ticpe', period)
             ticpe_totale = diesel_ticpe + essence_ticpe
-    
+
             return ticpe_totale
 
+    
+    class total_taxes_energies_rattrapage_diesel(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Différence entre les contributions aux taxes sur l'énergie après la taxe carbone"
+    
+        def formula(self, simulation, period):
+            taxe_diesel = simulation.calculate('diesel_ticpe', period)
+            taxe_essence = simulation.calculate('essence_ticpe', period)
+            taxe_combustibles_liquides = simulation.calculate('combustibles_liquides_ticpe', period)
+    
+            total = (
+                taxe_diesel + taxe_essence + taxe_combustibles_liquides
+                )
+    
+            return total
     
     class tva_taux_plein(YearlyVariable):
         label = u"Contribution sur la TVA a taux plein après reaction a la reforme - taxes carburants"
@@ -670,11 +720,10 @@ class rattrapage_diesel(Reform):
 
             
     def apply(self):
-        #self.update_variable(self.depenses_carburants_ajustees_rattrapage_diesel)
+        self.update_variable(self.cheques_energie)     
+        self.update_variable(self.contributions_reforme)     
         self.update_variable(self.depenses_carburants_corrigees_ajustees_rattrapage_diesel)
-        #self.update_variable(self.depenses_diesel_ajustees_rattrapage_diesel)
         self.update_variable(self.depenses_diesel_corrigees_ajustees_rattrapage_diesel)
-        #self.update_variable(self.depenses_essence_ajustees_rattrapage_diesel)
         self.update_variable(self.depenses_essence_corrigees_ajustees_rattrapage_diesel)
         self.update_variable(self.depenses_tva_taux_plein_ajustees_rattrapage_diesel)
         self.update_variable(self.depenses_tva_taux_plein_bis_ajustees_rattrapage_diesel)
@@ -694,6 +743,7 @@ class rattrapage_diesel(Reform):
         self.update_variable(self.sp98_ticpe)
         self.update_variable(self.super_plombe_ticpe)
         self.update_variable(self.ticpe_totale)
+        self.update_variable(self.total_taxes_energies_rattrapage_diesel)
         self.update_variable(self.tva_taux_plein)
         self.update_variable(self.tva_taux_plein_bis)
         self.update_variable(self.tva_taux_reduit)

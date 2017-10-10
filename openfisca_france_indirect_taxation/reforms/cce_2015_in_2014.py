@@ -88,6 +88,38 @@ class cce_2015_in_2014(Reform):
     name = u"Augmentation des taux de la contribution climat energie aux taux de 2015 sur les données de 2014",
 
 
+    class cheques_energie(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Montant des chèques énergie (indexés par uc) - taxe carbone"
+    
+        def formula(self, simulation, period):
+            contribution = simulation.calculate('contributions_reforme', period)
+            ocde10 = simulation.calculate('ocde10', period)
+            pondmen = simulation.calculate('pondmen', period)
+            
+            somme_contributions = numpy.sum(contribution * pondmen)
+            contribution_uc = somme_contributions / numpy.sum(ocde10 * pondmen)
+
+            cheque = contribution_uc * ocde10
+
+            return cheque
+
+
+    class contributions_reforme(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Changement de contribution aux taxes énergétiques suite à la réforme - taxe carbone"
+    
+        def formula(self, simulation, period):
+            total_taxes_energies = simulation.calculate('total_taxes_energies', period)
+            total_taxes_energies_cce = simulation.calculate('total_taxes_energies_cce_2015_in_2014', period)
+
+            contribution = total_taxes_energies_cce - total_taxes_energies
+
+            return contribution
+
+
     class depenses_carburants_corrigees_ajustees_cce_2015_in_2014(YearlyVariable):
         column = FloatCol
         entity = Menage
@@ -733,9 +765,10 @@ class cce_2015_in_2014(Reform):
             return ticpe_totale_ajustee
     
     
-    class total_taxes_energies(YearlyVariable):
+    class total_taxes_energies_cce_2015_in_2014(YearlyVariable):
+        column = FloatCol
+        entity = Menage
         label = u"Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2014-2015"
-        reference = ticpe.total_taxes_energies
     
         def formula(self, simulation, period):
             taxe_diesel = simulation.calculate('diesel_ticpe', period)
@@ -834,6 +867,8 @@ class cce_2015_in_2014(Reform):
 
 
     def apply(self):
+        self.update_variable(self.cheques_energie)     
+        self.update_variable(self.contributions_reforme)     
         self.update_variable(self.depenses_carburants_corrigees_ajustees_cce_2015_in_2014)
         self.update_variable(self.depenses_diesel_corrigees_ajustees_cce_2015_in_2014)
         self.update_variable(self.depenses_energies_logement_ajustees_cce_2015_in_2014)
@@ -865,7 +900,7 @@ class cce_2015_in_2014(Reform):
         self.update_variable(self.super_plombe_ticpe)
         self.update_variable(self.taxe_gaz_ville)
         self.update_variable(self.ticpe_totale)
-        self.update_variable(self.total_taxes_energies)
+        self.update_variable(self.total_taxes_energies_cce_2015_in_2014)
         self.update_variable(self.tva_taux_plein)
         self.update_variable(self.tva_taux_plein_bis)
         self.update_variable(self.tva_taux_reduit)
