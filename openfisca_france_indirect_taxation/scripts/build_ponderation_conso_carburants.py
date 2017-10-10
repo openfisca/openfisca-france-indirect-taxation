@@ -5,9 +5,10 @@
 import pkg_resources
 import os
 
-from ipp_macro_series_parser.agregats_transports.transports_cleaner import g2_1, g_3a
+from ipp_macro_series_parser.agregats_transports.poids_carburants.poids_carburants_cleaner import consommation, parc_auto
 
-parc_annuel_moyen_vp = g2_1[g2_1['categorie'] == u'Voitures particulières']
+
+parc_annuel_moyen_vp = parc_auto[parc_auto['categorie'] == u'Voitures particulières']
 del parc_annuel_moyen_vp['categorie']
 parc_annuel_moyen_vp = parc_annuel_moyen_vp.set_index('index')
 parc_annuel_moyen_vp = parc_annuel_moyen_vp.transpose()
@@ -19,7 +20,7 @@ del parc_annuel_moyen_vp['Total']
 del parc_annuel_moyen_vp['check']
 parc_annuel_moyen_vp.columns = ['essence', 'diesel']
 
-quantite_carbu_vp_france = g_3a[g_3a['index'] == u'Voitures particulières']
+quantite_carbu_vp_france = consommation[consommation['index'] == u'Voitures particulières']
 del quantite_carbu_vp_france['index']
 quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('categorie')
 quantite_carbu_vp_france = quantite_carbu_vp_france.transpose()

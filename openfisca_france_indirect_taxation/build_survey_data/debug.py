@@ -40,6 +40,3 @@ simulated_variables = [
     ]
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
-
-print df_reforme['contributions_reforme'].mean()
-print df_reforme['cheques_energie'].mean()
