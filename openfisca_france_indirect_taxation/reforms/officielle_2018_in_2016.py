@@ -10,9 +10,11 @@ from ..model.taxes_indirectes import tva, ticpe
 from ..model.consommation import emissions_co2, quantites_energie
 
 
+# 44,6€ la tonne de CO2 en 2018 (au lieu des 39# initialement prévus par la CCE),
+# contre 22€ en 2016.
+# Le rattrapage de la fiscalité du diesel prévoit une hausse de 2,6€ par an (par hectolitre)
+# pendant 4 ans, en plus de la hausse de la composante carbone.
 
-# Montants de taxe prévus par la loi Contribution climat-énergie : 7€ en 2014, 14,5€ en 2015, 22€ en 2016,
-# x€ en 2017, y€ en 2018 et z€ en 2019.
 # En utilisant nos données d'équivalence entre consommation et émission,
 # on met en place les montants de taxe suivants :
 # Dans cette réforme on suppose qu'on impute à la législation de 2016 une augmentation équivalente à ce qui est prévu
@@ -29,52 +31,59 @@ def modify_legislation_json(reference_legislation_json_copy):
                 "description": u"Surcroît de prix du diesel (en euros par hectolitres)",
                 "format": 'float',
                 "unit": 'currency',
-                "values": [{'start': u'2014-01-01', 'value': 5.852 - 1.862}]
+                "values": [{'start': u'2016-01-01', 'value': 2.6 + 266*(0.0446 - 0.022)}]
                 },
             "essence_2016_2018": {
                 "@type": "Parameter",
                 "description": u"Surcroît de prix de l'essence (en euros par hectolitres)",
                 "format": "float",
                 "unit": 'currency',
-                "values": [{'start': u'2014-01-01', 'value': 5.324 - 1.694}],
+                "values": [{'start': u'2016-01-01', 'value': 242*(0.0446 - 0.022)}],
                 },
             "combustibles_liquides_2016_2018": {
                 "@type": "Parameter",
                 "description": u"Surcroît de prix du fioul domestique (en euros par litre)",
                 "format": "float",
                 "unit": 'currency',
-                "values": [{'start': u'2014-01-01', 'value': 0.0682 - 0.0217}],
+                "values": [{'start': u'2016-01-01', 'value': 3.24*(0.0446 - 0.022)}],
                 },
-            "gaz_2016_2018": {
+            "electricite_2016_2018": {
+                "@type": "Parameter",
+                "description": u"Surcroît de prix de l'électricité (en euros par kWh)",
+                "format": 'float',
+                "unit": 'currency',
+                "values": [{'start': u'2016-01-01', 'value': 0}],
+                },
+            "gaz_ville_2016_2018": {
                 "@type": "Parameter",
                 "description": u"Surcroît de prix du gaz (en euros par kWh)",
                 "format": 'float',
                 "unit": 'currency',
-                "values": [{'start': u'2014-01-01', 'value': 0.00528 - 0.00168}],
+                "values": [{'start': u'2016-01-01', 'value': 0.241*(0.0446 - 0.022)}],
                 },
             "abaissement_tva_taux_plein_2016_2018": {
                 "@type": "Parameter",
                 "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
                 "format": 'float',
-                "values": [{'start': u'2010-01-01', 'value': 0.008}],
+                "values": [{'start': u'2010-01-01', 'value': 0}],
                 },
             "abaissement_tva_taux_plein_bis_2016_2018": {
                 "@type": "Parameter",
                 "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
                 "format": 'float',
-                "values": [{'start': u'2010-01-01', 'value': 0.005}],
+                "values": [{'start': u'2010-01-01', 'value': 0}],
                 },
             "abaissement_tva_taux_reduit_2016_2018": {
                 "@type": "Parameter",
                 "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
                 "format": 'float',
-                "values": [{'start': u'2010-01-01', 'value': 0.006}],
+                "values": [{'start': u'2010-01-01', 'value': 0}],
                 },
             "abaissement_tva_taux_super_reduit_2016_2018": {
                 "@type": "Parameter",
                 "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
                 "format": 'float',
-                "values": [{'start': u'2010-01-01', 'value': 0.006}],
+                "values": [{'start': u'2010-01-01', 'value': 0}],
                 },
             },
         }
@@ -92,13 +101,13 @@ class officielle_2018_in_2016(Reform):
     class cheques_energie(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Montant des chèques énergie (indexés par uc) - taxe carbone"
+        label = u"Montant des chèques énergie (indexés par uc)"
     
         def formula(self, simulation, period):
-            contribution = simulation.calculate('contributions_reforme', period)
+            pondmen = simulation.calculate('contributions_reforme', period)
             ocde10 = simulation.calculate('ocde10', period)
             pondmen = simulation.calculate('pondmen', period)
-            
+
             somme_contributions = numpy.sum(contribution * pondmen)
             contribution_uc = somme_contributions / numpy.sum(ocde10 * pondmen)
 
@@ -213,7 +222,7 @@ class officielle_2018_in_2016(Reform):
             depenses_gaz_variables = simulation.calculate('depenses_gaz_variables', period)
             depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
             reforme_gaz = \
-                simulation.legislation_at(period.start).officielle_2018_in_2016.gaz_2016_2018
+                simulation.legislation_at(period.start).officielle_2018_in_2016.gaz_ville_2016_2018
             gaz_elasticite_prix = simulation.calculate('elas_price_2_2', period)
             depenses_gaz_ajustees_variables = \
                 depenses_gaz_variables * (1 + (1 + gaz_elasticite_prix) * reforme_gaz / depenses_gaz_prix_unitaire)
@@ -497,7 +506,7 @@ class officielle_2018_in_2016(Reform):
     
             depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
             reforme_gaz = \
-                simulation.legislation_at(period.start).officielle_2018_in_2016.gaz_2016_2018
+                simulation.legislation_at(period.start).officielle_2018_in_2016.gaz_ville_2016_2018
     
             quantites_gaz_ajustees = depenses_gaz_ajustees_variables / (depenses_gaz_prix_unitaire + reforme_gaz)
     
@@ -748,7 +757,7 @@ class officielle_2018_in_2016(Reform):
     
         def formula(self, simulation, period):
             quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_officielle_2018_in_2016', period)
-            reforme_gaz = simulation.legislation_at(period.start).officielle_2018_in_2016.gaz_2016_2018
+            reforme_gaz = simulation.legislation_at(period.start).officielle_2018_in_2016.gaz_ville_2016_2018
             recettes_gaz = quantites_gaz_ajustees * reforme_gaz
     
             return recettes_gaz

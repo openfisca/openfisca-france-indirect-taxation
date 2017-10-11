@@ -26,12 +26,17 @@ survey_scenario = SurveyScenario.create(
     )
 
 simulated_variables = [
-    'ticpe_totale',
-    'diesel_ticpe',
-    'essence_ticpe',
+    'rev_disponible',
+    'rev_disp_loyerimput',
+    'pondmen',
+    'ocde10',
     #'rev_disp_loyerimput',
     #'depenses_diesel',
     #'depenses_diesel_corrigees',
     ]
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
+
+print df_reforme['pondmen'].sum()
+df_reforme['seuil'] = 1 * ((df_reforme['rev_disponible'] / df_reforme['ocde10']) < 7700)
+print (df_reforme['seuil']* df_reforme['pondmen']).sum()
