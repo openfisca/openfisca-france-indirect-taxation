@@ -99,6 +99,7 @@ def get_cn_aggregates_energy(target_year = None):
     masses_cn_data_frame = masses_cn_data_frame.loc[:, ['Code', target_year]].copy()
 
     masses_cn_data_frame['poste'] = '0'
+    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '        04.2', 'poste'] = 'loyer_impute'
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.1', 'poste'] = 'depenses_electricite'
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.2', 'poste'] = 'depenses_gaz_ville'
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.3', 'poste'] = 'depenses_combustibles_liquides'
@@ -119,6 +120,7 @@ def get_cn_aggregates_energy(target_year = None):
     masses_cn_energie.set_index('poste', inplace = True)
     masses_cn_energie = masses_cn_energie * 1e6
 
+
     default_config_files_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parametres_fiscalite_file_path = os.path.join(
@@ -126,31 +128,62 @@ def get_cn_aggregates_energy(target_year = None):
         'openfisca_france_indirect_taxation',
         'assets',
         'legislation',
-        'Parametres fiscalite indirecte.xls'
+        't_2101.xls'
         )
 
+    revenus_cn = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "t_2101")
+    revenus_cn.iat[1,1] = 'Code'
+    revenus_cn = revenus_cn.drop(revenus_cn.columns[0], axis=1)
+    revenus_cn.columns = revenus_cn.iloc[1]
+    revenus_cn = revenus_cn.loc[:, ['Code', target_year]].copy()
+    revenus_cn['revenu'] = 0
+    revenus_cn.loc[revenus_cn['Code'] == 'Revenu disponible brut', 'revenu'] = 'rev_disponible'
+    revenus_cn = revenus_cn[revenus_cn.revenu != 0]
+    del revenus_cn['Code']
 
-    masses_cn_revenus_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "revenus_CN")
-    masses_cn_revenus_data_frame.rename(
+    revenus_cn.rename(
         columns = {
-            'annee': 'year',
-            'Revenu disponible brut': 'rev_disponible',
-            'Loyers imputes': 'loyer_impute'
+            target_year: 'conso_CN_{}'.format(target_year),
             },
-        inplace = True
+        inplace = True,
         )
-    masses_cn_revenus_data_frame = masses_cn_revenus_data_frame[masses_cn_revenus_data_frame.year == target_year]
-    revenus_cn = masses_cn_revenus_data_frame[['loyer_impute'] + ['rev_disponible']].copy()
-    # On redéfinie le revenu disponible de la compta nat en enlevant le loyer imputé pour faire concorder la définition
-    # avec BdF.
-    revenus_cn['rev_disp_loyerimput'] = revenus_cn['rev_disponible'].copy()
-    revenus_cn['rev_disponible'] = revenus_cn['rev_disponible'] - revenus_cn['loyer_impute']
-    revenus_cn = pandas.melt(revenus_cn)
-    revenus_cn = revenus_cn.set_index('variable')
-    revenus_cn.rename(columns = {'value': 'conso_CN_{}'.format(target_year)}, inplace = True)
+
+    revenus_cn.set_index('revenu', inplace = True)
     revenus_cn = revenus_cn * 1e9
 
+
+    #default_config_files_directory = os.path.join(
+    #    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    #parametres_fiscalite_file_path = os.path.join(
+    #    default_config_files_directory,
+    #    'openfisca_france_indirect_taxation',
+    #    'assets',
+    #    'legislation',
+    #    'Parametres fiscalite indirecte.xls'
+    #    )
+
+    #masses_cn_revenus_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "revenus_CN")
+    #masses_cn_revenus_data_frame.rename(
+    #   columns = {
+    #       'annee': 'year',
+    #        'Revenu disponible brut': 'rev_disponible',
+    #        'Loyers imputes': 'loyer_impute'
+    #        },
+    #    inplace = True
+    #    )
+    #masses_cn_revenus_data_frame = masses_cn_revenus_data_frame[masses_cn_revenus_data_frame.year == target_year]
+    #loyer_impute_cn = masses_cn_revenus_data_frame[['loyer_impute']].copy()
+    # On redéfinie le revenu disponible de la compta nat en enlevant le loyer imputé pour faire concorder la définition
+    # avec BdF.
+    #loyer_impute_cn['rev_disp_loyerimput'] = loyer_impute_cn['rev_disponible'].copy()
+    #loyer_impute_cn['rev_disponible'] = loyer_impute_cn['rev_disponible'] - loyer_impute_cn['loyer_impute']
+    #loyer_impute_cn = pandas.melt(loyer_impute_cn)
+    #loyer_impute_cn = loyer_impute_cn.set_index('variable')
+    #loyer_impute_cn.rename(columns = {'value': 'conso_CN_{}'.format(target_year)}, inplace = True)
+    #loyer_impute_cn = loyer_impute_cn * 1e9
+
     masses_cn = pandas.concat([masses_cn_energie, revenus_cn])
+    masses_cn.loc['rev_disp_loyerimput'] = masses_cn.loc['rev_disponible'] - masses_cn.loc['loyer_impute']
 
     return masses_cn
 
@@ -211,13 +244,13 @@ def get_inflators_by_year_energy(rebuild = False):
         )
     if rebuild is not False:
         inflators_by_year = dict()
-        for target_year in range(2000, 2015):
+        for target_year in range(2000, 2017):
             inflators = get_inflators_energy(target_year)
             inflators_by_year[target_year] = inflators
 
         writer_inflators = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation',
             'assets', 'inflateurs', 'inflators_by_year_wip.csv'), 'wb'))
-        for year in range(2000, 2015):
+        for year in range(2000, 2017):
             for key, value in inflators_by_year[year].items():
                 writer_inflators.writerow([key, value, year])
 
@@ -228,7 +261,7 @@ def get_inflators_by_year_energy(rebuild = False):
         inflators_from_csv = pandas.DataFrame.from_csv(os.path.join(assets_directory,
             'openfisca_france_indirect_taxation', 'assets', 'inflateurs', 'inflators_by_year_wip.csv'),
             header = -1)
-        for year in range(2000, 2015):
+        for year in range(2000, 2017):
             inflators_from_csv_by_year = inflators_from_csv[inflators_from_csv[2] == year]
             inflators_to_dict = pandas.DataFrame.to_dict(inflators_from_csv_by_year)
             inflators = inflators_to_dict[1]

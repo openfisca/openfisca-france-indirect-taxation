@@ -35,7 +35,7 @@ def preprocess_legislation(legislation_json):
     # because we don't have the data. We use super_95 because it is very close and won't affect the results too much
     all_values['super_95_e10_ttc'] = []
     prix_annuel = prix_annuel_carburants['super_95_e10_ttc']
-    years = range(2013, 2015)
+    years = range(2013, 2017)
     years = sorted(years, key=int, reverse=True)
     for year in years:
         values3 = dict()
@@ -71,7 +71,7 @@ def preprocess_legislation(legislation_json):
         assert element in prix_annuel_carburants.columns
         prix_annuel = prix_annuel_carburants[element]
         all_values[element] = []
-        years = range(1990, 2015)
+        years = range(1990, 2017)
         years = sorted(years, key=int, reverse=True)
         for year in years:
             values = dict()
