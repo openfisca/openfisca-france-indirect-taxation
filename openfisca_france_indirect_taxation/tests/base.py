@@ -11,6 +11,7 @@ from ..reforms import (
     cce_2015_in_2014,
     cce_2016_in_2014,
     contribution_climat_energie_reforme,
+    officielle_2018_in_2016,
     rattrapage_diesel,
     taxe_carbone,
     )
@@ -39,6 +40,7 @@ reform_list = {
     'taxe_carbone': taxe_carbone.taxe_carbone,
     'cce_2015_in_2014': cce_2015_in_2014.cce_2015_in_2014,
     'cce_2016_in_2014': cce_2016_in_2014.cce_2016_in_2014,
+    'officielle_2018_in_2016': officielle_2018_in_2016.officielle_2018_in_2016,
     # 'contribution_climat_energie': contribution_climat_energie.build_reform,
     # 'test_reforme_alimentation': alimentation.build_reform,
     # 'taxes_carburants': taxes_carburants.build_reform,
