@@ -234,6 +234,7 @@ def get_inflators_energy(target_year):
     ratio_by_variable['depenses_carburants_corrigees'] = ratio_by_variable['depenses_carburants']
     ratio_by_variable['depenses_diesel_corrigees'] = ratio_by_variable['depenses_carburants']
     ratio_by_variable['depenses_essence_corrigees'] = ratio_by_variable['depenses_carburants']
+    ratio_by_variable['revtot'] = ratio_by_variable['rev_disponible']
 
     return ratio_by_variable
 

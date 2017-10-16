@@ -26,17 +26,37 @@ survey_scenario = SurveyScenario.create(
     )
 
 simulated_variables = [
-    'rev_disponible',
-    'rev_disp_loyerimput',
-    'pondmen',
+    'cmu',
+    'depenses_electricite',
+    'tarifs_sociaux_electricite',
+    'tarifs_sociaux_gaz',
     'ocde10',
-    #'rev_disp_loyerimput',
-    #'depenses_diesel',
-    #'depenses_diesel_corrigees',
+    'pondmen',
+    'npers',
+    'tchof',
+    'revtot',
+    'quantites_gaz_final',
+    'quantites_gaz_contrat_optimal',
     ]
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
+print len(df_reforme.query('cmu > 0'))
 
-print df_reforme['pondmen'].sum()
-df_reforme['seuil'] = 1 * ((df_reforme['rev_disponible'] / df_reforme['ocde10']) < 7700)
-print (df_reforme['seuil']* df_reforme['pondmen']).sum()
+print sum(df_reforme['pondmen'] * df_reforme['cmu'])
+
+bibi = df_reforme.query('tarifs_sociaux_electricite > 0')
+print sum(bibi['pondmen'])
+
+bobo = df_reforme.query('tarifs_sociaux_gaz > 0')
+print sum(bobo['pondmen'])
+
+df_reforme['eligible'] = (
+    1 * (df_reforme['revtot'] < 8723) * (df_reforme['npers'] == 1) +
+    1 * (df_reforme['revtot'] < 13085) * (df_reforme['npers'] == 2) +
+    1 * (df_reforme['revtot'] < 15701) * (df_reforme['npers'] == 3) +
+    1 * (df_reforme['revtot'] < 18318) * (df_reforme['npers'] == 4) +
+    1 * (df_reforme['revtot'] < 18318 + (df_reforme['npers'] - 4) * 3489) * (df_reforme['npers'] > 4)
+    )
+
+baba = df_reforme.query('eligible > 0')
+print sum(baba['pondmen'])
