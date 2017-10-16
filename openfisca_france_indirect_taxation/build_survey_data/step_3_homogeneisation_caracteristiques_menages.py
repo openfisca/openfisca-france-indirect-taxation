@@ -679,7 +679,17 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.set_index('ident_men', inplace = True)
         depmen.set_index('ident_men', inplace = True)
 
+        variables_sante = ['ident_men', 'complentr']
+        compl_sante = survey.get_values(table = "COMPL_SANTE", variables = variables_sante)
+        compl_sante.set_index('ident_men', inplace = True)
+
+        compl_sante['cmu'] = 0 + 1 * (compl_sante['complentr'] == 5)
+        compl_sante = compl_sante.query('cmu != 0')
+
         menage = menage.merge(depmen, left_index = True, right_index = True)
+        menage = menage.merge(compl_sante, left_index = True, right_index = True, how = 'left')
+        menage = menage.groupby(menage.index).first()
+        menage.cmu = menage.cmu.fillna(0)
 
         menage['vag_'] = menage['vag'].copy()
         menage.vag.loc[menage.vag_ == 1] = 23

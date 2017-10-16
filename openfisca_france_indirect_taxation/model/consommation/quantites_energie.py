@@ -257,6 +257,23 @@ class quantites_gaz_contrat_optimal(YearlyVariable):
         return quantite_optimale
 
 
+class quantites_gaz_final(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au meilleur contrat"
+
+    def formula(self, simulation, period):
+        quantites_gaz_contrat_optimal = simulation.calculate('quantites_gaz_contrat_optimal', period)
+        depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
+        tarifs_sociaux_gaz = simulation.calculate('tarifs_sociaux_gaz', period)
+        
+        # Ceux qui ne consomment pas de gaz ayant depenses_gaz_prix_unitaire = 0, on remplace 0 par 1 pour éviter de diviser par zéro
+        depenses_gaz_prix_unitaire = depenses_gaz_prix_unitaire + 1 * (depenses_gaz_prix_unitaire == 0)
+        quantites_gaz_finale = quantites_gaz_contrat_optimal + (tarifs_sociaux_gaz / depenses_gaz_prix_unitaire * (depenses_gaz_prix_unitaire != 0))
+        
+        return quantites_gaz_finale
+
+
 class quantites_electricite_selon_compteur(YearlyVariable):
     column = FloatCol
     entity = Menage
@@ -265,7 +282,9 @@ class quantites_electricite_selon_compteur(YearlyVariable):
     def formula(self, simulation, period):
         depenses_electricite_variables = simulation.calculate('depenses_electricite_variables', period)
         depenses_electricite_prix_unitaire = simulation.calculate('depenses_electricite_prix_unitaire', period)
-        quantites_electricite_selon_compteur = depenses_electricite_variables / depenses_electricite_prix_unitaire
+        # On inclut ici les dépenses non facturées aux ménages (provenant des TPN) pour refleter leur "vraie" consommation        
+        tarifs_sociaux_electricite = simulation.calculate('tarifs_sociaux_electricite', period)
+        quantites_electricite_selon_compteur = (depenses_electricite_variables + tarifs_sociaux_electricite) / depenses_electricite_prix_unitaire
         quantites_electricite_selon_compteur = numpy.maximum(quantites_electricite_selon_compteur, 0)
 
         return quantites_electricite_selon_compteur

@@ -7,6 +7,12 @@ import numpy as np
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
+class cmu(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Le ménage touche la couverture maladie universelle complémentaire "
+
+
 class brde_m2_depenses_tot(YearlyVariable):
     column = StrCol
     entity = Menage
@@ -230,6 +236,73 @@ class precarite_transports_rev_disponible(YearlyVariable):
         precarite_transports = 1 * (somme_3_indicateurs != 0)
         
         return precarite_transports
+
+
+class tarifs_sociaux_electricite(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Montant perçus en tarifs sociaux sur l'électricité (TPN)"
+
+    def formula(self, simulation, period):
+        depenses_electricite_percentile = simulation.calculate('depenses_electricite_percentile', period)
+        cmu = simulation.calculate('cmu', period)
+        uc = simulation.calculate('ocde10', period)
+        uc_1 = 1 * (uc == 1)
+        uc_1_2 = 1 * (uc > 1) * (uc < 2)
+        uc_2 = 1 * ((uc == 2) + (uc > 2))
+        kva_3 = 1 * (depenses_electricite_percentile < 4)
+        kva_6 = 1 * (depenses_electricite_percentile > 4) * (depenses_electricite_percentile < 52)
+        kva_9 = 1 * (depenses_electricite_percentile > 52)
+        tarifs_sociaux = cmu * (
+            kva_3 * (uc_1 * 71 + uc_1_2 * 88 + uc_2 * 106) +
+            kva_6 * (uc_1 * 87 + uc_1_2 * 109 + uc_2 * 131) +
+            kva_9 * (uc_1 * 94 + uc_1_2 * 117 + uc_2 * 140)
+            )
+
+        depenses_electricite = simulation.calculate('depenses_electricite', period)
+        tarifs_sociaux = (
+            tarifs_sociaux * (tarifs_sociaux < depenses_electricite) +
+            depenses_electricite * (tarifs_sociaux > depenses_electricite)
+            )
+            
+        return tarifs_sociaux
+
+
+class tarifs_sociaux_gaz(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Montant perçus en tarifs sociaux sur l'électricité (TSS)"
+
+    def formula(self, simulation, period):
+        depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
+        prix_unitaire_base = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_base_ttc
+        prix_unitaire_b0 = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b0_ttc
+        prix_unitaire_b1 = \
+            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b1_ttc
+
+        cmu = simulation.calculate('cmu', period)
+        uc = simulation.calculate('ocde10', period)
+        uc_1 = 1 * (uc == 1)
+        uc_1_2 = 1 * (uc > 1) * (uc < 2)
+        uc_2 = 1 * ((uc == 2) + (uc > 2))
+        base = 1 * (depenses_gaz_prix_unitaire == prix_unitaire_base)
+        b0 = 1 * (depenses_gaz_prix_unitaire == prix_unitaire_b0)
+        b1 = 1 * (depenses_gaz_prix_unitaire == prix_unitaire_b1)
+        tarifs_sociaux = cmu * (
+            base * (uc_1 * 23 + uc_1_2 * 30 + uc_2 * 38) +
+            b0 * (uc_1 * 72 + uc_1_2 * 95 + uc_2 * 117) +
+            b1 * (uc_1 * 123 + uc_1_2 * 153 + uc_2 * 185)
+            )
+
+        depenses_gaz_ville = simulation.calculate('depenses_gaz_ville', period)
+        tarifs_sociaux = (
+            tarifs_sociaux * (tarifs_sociaux < depenses_gaz_ville) +
+            depenses_gaz_ville * (tarifs_sociaux > depenses_gaz_ville)
+            )
+            
+        return tarifs_sociaux
 
 
 class tee_depenses_tot(YearlyVariable):

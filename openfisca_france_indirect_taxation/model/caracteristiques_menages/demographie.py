@@ -69,6 +69,12 @@ class nenfants(YearlyVariable):
     label = u"Nombre d'enfants dans le ménage"
 
 
+class npers(YearlyVariable):
+    column = IntCol
+    entity = Menage
+    label = u"Nombre de personnes dans le ménage"
+
+
 class role_menage(YearlyVariable):
     column = IntCol
     entity = Individu

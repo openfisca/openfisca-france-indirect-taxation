@@ -249,6 +249,10 @@ class officielle_2018_in_2016(Reform):
     
         def formula(self, simulation, period):
             depenses_electricite_variables = simulation.calculate('depenses_electricite_variables', period)
+            tarifs_sociaux_electricite = simulation.calculate('tarifs_sociaux_electricite', period)
+            # Avec la réforme ces tarifs disparaissent, de nouvelles consommations entrent dans les dépenses des ménages :
+            depenses_electricite_variables = depenses_electricite_variables + tarifs_sociaux_electricite
+            
             depenses_electricite_prix_unitaire = simulation.calculate('depenses_electricite_prix_unitaire', period)
             reforme_electricite = simulation.legislation_at(period.start).officielle_2018_in_2016.electricite_cspe
             electricite_elasticite_prix = simulation.calculate('elas_price_2_2', period)
@@ -273,17 +277,18 @@ class officielle_2018_in_2016(Reform):
     class depenses_energies_logement_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses en électricité sans inclure dépenses jointes avec le gaz"
+        label = u"Dépenses en énergies dans le logement après la réforme"
     
         def formula(self, simulation, period):
             depenses_electricite = simulation.calculate('depenses_electricite', period)
+            tarifs_sociaux_electricite = simulation.calculate('tarifs_sociaux_electricite', period)
             depenses_gaz_ville_ajustees = simulation.calculate('depenses_gaz_ville_officielle_2018_in_2016', period)
             depenses_gaz_liquefie = simulation.calculate('depenses_gaz_liquefie', period)
             depenses_combustibles_liquides_ajustees = simulation.calculate('depenses_combustibles_liquides_officielle_2018_in_2016', period)
             depenses_combustibles_solides = simulation.calculate('depenses_combustibles_solides', period)
             depenses_energie_thermique = simulation.calculate('depenses_energie_thermique', period)
             depenses_energies_logement_officielle_2018_in_2016 = (
-                depenses_electricite + depenses_gaz_ville_ajustees + depenses_gaz_liquefie +
+                depenses_electricite + tarifs_sociaux_electricite + depenses_gaz_ville_ajustees + depenses_gaz_liquefie +
                 depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
                 )
     
@@ -351,6 +356,10 @@ class officielle_2018_in_2016(Reform):
     
         def formula(self, simulation, period):
             depenses_gaz_variables = simulation.calculate('depenses_gaz_variables', period)
+            # Avec la réforme ces tarifs disparaissent, de nouvelles consommations entrent dans les dépenses des ménages :
+            tarifs_sociaux_gaz = simulation.calculate('tarifs_sociaux_gaz', period)
+            depenses_gaz_variables = depenses_gaz_variables + tarifs_sociaux_gaz
+            
             depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
             reforme_gaz = \
                 simulation.legislation_at(period.start).officielle_2018_in_2016.gaz_ville_2016_2018
@@ -363,8 +372,8 @@ class officielle_2018_in_2016(Reform):
             depenses_gaz_ajustees[numpy.isinf(depenses_gaz_ajustees)] = 0
     
             return depenses_gaz_ajustees
-    
-    
+
+
     class depenses_tva_taux_plein_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
