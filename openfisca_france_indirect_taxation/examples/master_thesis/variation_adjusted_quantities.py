@@ -22,7 +22,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         'quantites_essence',
         'quantites_electricite_selon_compteur',
         'quantites_combustibles_liquides',
-        'quantites_gaz_contrat_optimal',
+        'quantites_gaz_final',
         'pondmen',
         ]
 
@@ -31,7 +31,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         'quantites_essence',
         'quantites_electricite_selon_compteur_ajustees_taxe_carbone',
         'quantites_combustibles_liquides',
-        'quantites_gaz_contrat_optimal_ajustees_{}'.format(reforme),
+        'quantites_gaz_final_ajustees_{}'.format(reforme),
         'pondmen',
         ]
 
@@ -61,8 +61,8 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
 
     if reforme != 'rattrapage_diesel':
         variations_quantites['gaz_{}'.format(reforme)] = (
-            (menages_reform['quantites_gaz_contrat_optimal_ajustees_{}'.format(reforme)] -
-            menages_reference['quantites_gaz_contrat_optimal']) *
+            (menages_reform['quantites_gaz_final_ajustees_{}'.format(reforme)] -
+            menages_reference['quantites_gaz_final']) *
             menages_reform['pondmen']
             ).sum() / 1e06
         variations_quantites['combustibles_liquides_{}'.format(reforme)] = (

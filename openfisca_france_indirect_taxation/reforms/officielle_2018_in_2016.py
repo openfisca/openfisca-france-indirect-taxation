@@ -685,7 +685,7 @@ class officielle_2018_in_2016(Reform):
         reference = emissions_co2.emissions_CO2_gaz_ville
     
         def formula(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_officielle_2018_in_2016', period)
+            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_final_officielle_2018_in_2016', period)
             emissions_gaz = \
                 simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_ville
             emissions_ajustees = quantites_gaz_ajustees * emissions_gaz
@@ -835,7 +835,7 @@ class officielle_2018_in_2016(Reform):
             return quantites_electricite_ajustees
     
     
-    class quantites_gaz_contrat_optimal_officielle_2018_in_2016(YearlyVariable):
+    class quantites_gaz_final_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
         label = u"Quantités de gaz consommées après la réforme - contribution climat énergie, hausse de 2014 à 2016"
@@ -850,7 +850,7 @@ class officielle_2018_in_2016(Reform):
                 simulation.legislation_at(period.start).officielle_2018_in_2016.gaz_ville_2016_2018
     
             quantites_gaz_ajustees = depenses_gaz_variables / (depenses_gaz_prix_unitaire + reforme_gaz)
-    
+
             return quantites_gaz_ajustees
     
     
@@ -1111,7 +1111,7 @@ class officielle_2018_in_2016(Reform):
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
 
         def formula(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_officielle_2018_in_2016', period)
+            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_final_officielle_2018_in_2016', period)
             reforme_gaz = simulation.legislation_at(period.start).officielle_2018_in_2016.gaz_ville_2016_2018
             recettes_gaz = quantites_gaz_ajustees * reforme_gaz
     
@@ -1264,7 +1264,7 @@ class officielle_2018_in_2016(Reform):
         self.update_variable(self.quantites_diesel_rattrapage_integral)
         self.update_variable(self.quantites_electricite_selon_compteur_cspe)
         self.update_variable(self.quantites_combustibles_liquides_officielle_2018_in_2016)
-        self.update_variable(self.quantites_gaz_contrat_optimal_officielle_2018_in_2016)
+        self.update_variable(self.quantites_gaz_final_officielle_2018_in_2016)
         self.update_variable(self.quantites_sp_e10_officielle_2018_in_2016)
         self.update_variable(self.quantites_sp95_officielle_2018_in_2016)
         self.update_variable(self.quantites_sp98_officielle_2018_in_2016)

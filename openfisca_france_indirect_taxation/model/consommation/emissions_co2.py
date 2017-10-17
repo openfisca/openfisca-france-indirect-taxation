@@ -102,7 +102,7 @@ class emissions_CO2_gaz_ville(YearlyVariable):
     label = u"Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2"
 
     def formula(self, simulation, period):
-        quantites_gaz = simulation.calculate('quantites_gaz_contrat_optimal', period)
+        quantites_gaz = simulation.calculate('quantites_gaz_final', period)
         emissions_gaz = \
             simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_ville
         emissions = quantites_gaz * emissions_gaz

@@ -390,7 +390,7 @@ class cce_2015_in_2014(Reform):
         reference = emissions_co2.emissions_CO2_gaz_ville
     
         def formula(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_cce_2015_in_2014', period)
+            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_final_ajustees_cce_2015_in_2014', period)
             emissions_gaz = \
                 simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_ville
             emissions_ajustees = quantites_gaz_ajustees * emissions_gaz
@@ -484,7 +484,7 @@ class cce_2015_in_2014(Reform):
             return quantites_combustibles_liquides_ajustees
     
     
-    class quantites_gaz_contrat_optimal_ajustees_cce_2015_in_2014(YearlyVariable):
+    class quantites_gaz_final_ajustees_cce_2015_in_2014(YearlyVariable):
         column = FloatCol
         entity = Menage
         label = u"Quantités de gaz consommées après la réforme - contribution climat énergie, hausse de 2014 à 2015"
@@ -746,7 +746,7 @@ class cce_2015_in_2014(Reform):
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
     
         def formula(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_cce_2015_in_2014', period)
+            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_final_ajustees_cce_2015_in_2014', period)
             reforme_gaz = simulation.legislation_at(period.start).cce_2015_in_2014.gaz_2014_2015
             recettes_gaz = quantites_gaz_ajustees * reforme_gaz
     
@@ -868,7 +868,7 @@ class cce_2015_in_2014(Reform):
 
     def apply(self):
         self.update_variable(self.cheques_energie)     
-        self.update_variable(self.contributions_reforme)     
+        self.update_variable(self.contributions_reforme)
         self.update_variable(self.depenses_carburants_corrigees_ajustees_cce_2015_in_2014)
         self.update_variable(self.depenses_diesel_corrigees_ajustees_cce_2015_in_2014)
         self.update_variable(self.depenses_energies_logement_ajustees_cce_2015_in_2014)
@@ -888,7 +888,7 @@ class cce_2015_in_2014(Reform):
         self.update_variable(self.combustibles_liquides_ticpe)
         self.update_variable(self.quantites_diesel)
         self.update_variable(self.quantites_combustibles_liquides)
-        self.update_variable(self.quantites_gaz_contrat_optimal_ajustees_cce_2015_in_2014)
+        self.update_variable(self.quantites_gaz_final_ajustees_cce_2015_in_2014)
         self.update_variable(self.quantites_sp_e10)
         self.update_variable(self.quantites_sp95)
         self.update_variable(self.quantites_sp98)

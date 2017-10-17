@@ -420,7 +420,7 @@ class taxe_carbone(Reform):
         reference = emissions_co2.emissions_CO2_gaz_ville
     
         def formula(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_taxe_carbone', period)
+            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_final_ajustees_taxe_carbone', period)
             emissions_gaz = \
                 simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_ville
             emissions_ajustees = quantites_gaz_ajustees * emissions_gaz
@@ -513,7 +513,7 @@ class taxe_carbone(Reform):
             return quantites_combustibles_liquides_ajustees
     
     
-    class quantites_gaz_contrat_optimal_ajustees_taxe_carbone(YearlyVariable):
+    class quantites_gaz_final_ajustees_taxe_carbone(YearlyVariable):
         column = FloatCol
         entity = Menage
         label = u"Quantités de gaz consommées après la réforme - taxe carbone"
@@ -804,7 +804,7 @@ class taxe_carbone(Reform):
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
     
         def formula(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_contrat_optimal_ajustees_taxe_carbone', period)
+            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_final_ajustees_taxe_carbone', period)
             reforme_gaz = simulation.legislation_at(period.start).taxe_carbone.gaz
             recettes_gaz = quantites_gaz_ajustees * reforme_gaz
     
@@ -939,7 +939,7 @@ class taxe_carbone(Reform):
         self.update_variable(self.combustibles_liquides_ticpe)
         self.update_variable(self.quantites_diesel)
         self.update_variable(self.quantites_combustibles_liquides)
-        self.update_variable(self.quantites_gaz_contrat_optimal_ajustees_taxe_carbone)
+        self.update_variable(self.quantites_gaz_final_ajustees_taxe_carbone)
         self.update_variable(self.quantites_electricite_selon_compteur_ajustees_taxe_carbone)
         self.update_variable(self.quantites_sp_e10)
         self.update_variable(self.quantites_sp95)
