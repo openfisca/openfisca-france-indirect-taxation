@@ -839,8 +839,30 @@ class officielle_2018_in_2016(Reform):
             super_plombe_ticpe_ajustee = simulation.calculate('super_plombe_ticpe_officielle_2018_in_2016', period)
             essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + super_plombe_ticpe_ajustee)
             return essence_ticpe_ajustee
+
+
+    # Vérifier que rien n'est oublié ici
+    class pertes_financieres_avant_redistribution_officielle_2018_in_2016(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Montant total des pertes financières dues à la réforme, avant redistribution"
     
-    
+        def formula(self, simulation, period):
+            depenses_energies_totales = simulation.calculate('depenses_energies_totales', period)
+            depenses_energies_logement_officielle_2018_in_2016 = \
+                simulation.calculate('depenses_energies_logement_officielle_2018_in_2016', period)
+            depenses_carburants_officielle_2018_in_2016 = \
+                simulation.calculate('depenses_carburants_corrigees_officielle_2018_in_2016', period)
+
+            pertes = (
+                depenses_energies_logement_officielle_2018_in_2016 +
+                depenses_carburants_officielle_2018_in_2016 -
+                depenses_energies_totales
+                )
+
+            return pertes
+
+
     class quantites_combustibles_liquides_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
@@ -1453,6 +1475,7 @@ class officielle_2018_in_2016(Reform):
         self.update_variable(self.emissions_CO2_energies_totales_officielle_2018_in_2016_plus_cspe)
         self.update_variable(self.emissions_CO2_gaz_ville_officielle_2018_in_2016)
         self.update_variable(self.essence_ticpe_officielle_2018_in_2016)
+        self.update_variable(self.pertes_financieres_avant_redistribution_officielle_2018_in_2016)
         self.update_variable(self.quantites_combustibles_liquides_officielle_2018_in_2016)
         self.update_variable(self.quantites_diesel_cce_seulement)
         self.update_variable(self.quantites_diesel_officielle_2018_in_2016)

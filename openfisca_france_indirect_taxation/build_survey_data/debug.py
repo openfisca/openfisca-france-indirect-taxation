@@ -34,6 +34,7 @@ simulated_variables = [
     'revenu_reforme_officielle_2018_in_2016_plus_cspe',
     'revenu_reforme_rattrapage_integral',
     'revenu_reforme_cce_seulement',
+    'pertes_financieres_avant_redistribution_officielle_2018_in_2016',
     'ocde10',
     'pondmen',
     'npers',
@@ -47,15 +48,17 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 
 nombre_parts = sum(df_reforme['pondmen'] * df_reforme['ocde10'])
 
-print sum(df_reforme['pondmen'] * df_reforme['revenu_reforme_officielle_2018_in_2016']) / nombre_parts
-print sum(df_reforme['pondmen'] * df_reforme['revenu_reforme_officielle_2018_in_2016_plus_cspe']) / nombre_parts
-print sum(df_reforme['pondmen'] * df_reforme['revenu_reforme_rattrapage_integral']) / nombre_parts
-print sum(df_reforme['pondmen'] * df_reforme['revenu_reforme_cce_seulement']) / nombre_parts
+#print sum(df_reforme['pondmen'] * df_reforme['revenu_reforme_officielle_2018_in_2016']) / nombre_parts
+#print sum(df_reforme['pondmen'] * df_reforme['revenu_reforme_officielle_2018_in_2016_plus_cspe']) / nombre_parts
+#print sum(df_reforme['pondmen'] * df_reforme['revenu_reforme_rattrapage_integral']) / nombre_parts
+#print sum(df_reforme['pondmen'] * df_reforme['revenu_reforme_cce_seulement']) / nombre_parts
 
 print (df_reforme['cheques_energie_integral_inconditionnel_officielle_2018_in_2016']).mean()
-print (df_reforme['cheques_energie_integral_inconditionnel_officielle_2018_in_2016_plus_cspe']).mean()
-print (df_reforme['cheques_energie_integral_inconditionnel_cce_seulement']).mean()
-print (df_reforme['cheques_energie_integral_inconditionnel_rattrapage_integral']).mean()
+#print (df_reforme['cheques_energie_integral_inconditionnel_officielle_2018_in_2016_plus_cspe']).mean()
+#print (df_reforme['cheques_energie_integral_inconditionnel_cce_seulement']).mean()
+#print (df_reforme['cheques_energie_integral_inconditionnel_rattrapage_integral']).mean()
+
+print (df_reforme['pertes_financieres_avant_redistribution_officielle_2018_in_2016']).mean()
 
 #df_reforme['eligible'] = (
 #    1 * (df_reforme['revtot'] < 8723) * (df_reforme['npers'] == 1) +
