@@ -30,7 +30,7 @@ simulated_variables = [
     #'cheques_energie_integral_inconditionnel_officielle_2018_in_2016_plus_cspe',
     #'cheques_energie_integral_inconditionnel_cce_seulement',
     #'cheques_energie_integral_inconditionnel_rattrapage_integral',
-    #'revenu_reforme_officielle_2018_in_2016',
+    'revenu_reforme_officielle_2018_in_2016',
     #'revenu_reforme_officielle_2018_in_2016_plus_cspe',
     #'revenu_reforme_rattrapage_integral',
     #'revenu_reforme_cce_seulement',
@@ -39,6 +39,7 @@ simulated_variables = [
     'pondmen',
     #'npers',
     'revdecm',
+    'cheques_energie_officielle_2018_in_2016',
     #'tchof',
     #'revtot',
     #'quantites_gaz_final',
@@ -68,3 +69,12 @@ nombre_parts = sum(df_reforme['pondmen'] * df_reforme['ocde10'])
 #    1 * (df_reforme['revtot'] < 18318) * (df_reforme['npers'] == 4) +
 #    1 * (df_reforme['revtot'] < 18318 + (df_reforme['npers'] - 4) * 3489) * (df_reforme['npers'] > 4)
 #    )
+
+print (df_reforme['cheques_energie_officielle_2018_in_2016'] * df_reforme['pondmen']).sum()
+print (df_reforme['revenu_reforme_officielle_2018_in_2016'] * df_reforme['pondmen']).sum()
+
+
+#print df_reforme.query('cheques_energie_officielle_2018_in_2016 > 0')['pondmen'].sum()
+#print max(df_reforme['cheques_energie_officielle_2018_in_2016'])
+#bibi = df_reforme.query('cheques_energie_officielle_2018_in_2016 > 0')
+#print max(bibi['revdecm'] / bibi['ocde10'])

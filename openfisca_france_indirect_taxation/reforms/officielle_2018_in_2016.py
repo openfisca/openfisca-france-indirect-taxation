@@ -182,21 +182,28 @@ class officielle_2018_in_2016(Reform):
             return cheque
 
 
-    # A déterminer d'après les revenus imputés via l'ERFS
     class cheques_energie_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Montant des chèques énergie (indexés par uc)"
+        label = u"Montant des chèques énergie tels que prévus par la loi"
     
         def formula(self, simulation, period):
-            pondmen = simulation.calculate('contributions_reforme', period)
+            revenu_fiscal = simulation.calculate('revdecm', period)
             ocde10 = simulation.calculate('ocde10', period)
-            pondmen = simulation.calculate('pondmen', period)
+            revenu_fiscal_uc = revenu_fiscal / ocde10
 
-            somme_contributions = numpy.sum(contribution * pondmen)
-            contribution_uc = somme_contributions / numpy.sum(ocde10 * pondmen)
-
-            cheque = contribution_uc * ocde10
+            cheque = (
+                0 +
+                144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
+                190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
+                227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
+                96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
+                126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
+                152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
+                48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
+                63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
+                76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))              
+                )
 
             return cheque
 
