@@ -113,7 +113,7 @@ def load_data_bdf_erfs():
         ]
 
     menages_erfs = menages_erfs[variables_erfs]
-    menages_bdf = menages_bdf[variables_bdf] # mhab_d, rev_202, rev_205, rev_502
+    menages_bdf = menages_bdf[variables_bdf] # mhab_d
         
     return menages_erfs, menages_bdf
 

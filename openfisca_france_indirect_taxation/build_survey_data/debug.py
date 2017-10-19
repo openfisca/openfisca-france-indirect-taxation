@@ -67,3 +67,9 @@ print (df_reforme['pertes_financieres_avant_redistribution_officielle_2018_in_20
 #    1 * (df_reforme['revtot'] < 18318) * (df_reforme['npers'] == 4) +
 #    1 * (df_reforme['revtot'] < 18318 + (df_reforme['npers'] - 4) * 3489) * (df_reforme['npers'] > 4)
 #    )
+
+
+
+bibi = data_erfs.query('cataeu == 211')
+print data_erfs['cataeu'].dtype
+
