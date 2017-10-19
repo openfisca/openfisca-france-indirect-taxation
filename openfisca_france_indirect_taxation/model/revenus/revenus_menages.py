@@ -110,6 +110,12 @@ class rev_disponible(YearlyVariable):
     label = u"Revenu disponible du ménage"
 
 
+class revdecm(YearlyVariable):
+    column = IntCol
+    entity = Menage
+    label = u"Revenu déclaré du ménage (imputé à partir de l'ERFS)"
+
+
 class revtot(YearlyVariable):
     column = IntCol
     entity = Menage

@@ -31,6 +31,18 @@ data_matched_entd = pandas.read_csv(
         ), sep =',', decimal = '.'
     )
 
+data_matched_erfs = pandas.read_csv(
+    os.path.join(
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'matching',
+        'matching_erfs',
+        'data_matched_rank.csv'
+        ), sep =',', decimal = '.'
+    )
+
+
 data_matched_enl = data_matched_enl[
     ['froid'] + ['froid_cout'] + ['froid_installation'] + ['froid_impaye'] +
     ['froid_isolation'] + ['ident_men'] + ['log_indiv'] + ['bat_av_49'] + ['bat_49_74'] +
@@ -44,8 +56,10 @@ data_matched_entd = data_matched_entd[
     ['depenses_essence_corrigees_entd'] + ['ident_men']
     ]
 
-
+data_matched_erfs = data_matched_erfs[['revdecm'] + ['ident_men']]
+    
 data_frame = pandas.merge(data_matched_entd, data_matched_enl, on = 'ident_men', how = 'left')
+data_frame = pandas.merge(data_frame, data_matched_erfs, on = 'ident_men')
 data_frame['ident_men'] = data_frame['ident_men'].astype(str)
 data_frame = data_frame.fillna(0)
 
