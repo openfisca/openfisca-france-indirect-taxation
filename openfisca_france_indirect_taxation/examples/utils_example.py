@@ -180,10 +180,10 @@ def df_weighted_average_grouped(dataframe, groupe, varlist):
 
 
 # To choose color when doing graph, could put a list of colors in argument
-def graph_builder_bar(graph):
+def graph_builder_bar(graph, stacked):
     axes = graph.plot(
         kind = 'bar',
-        stacked = True,
+        stacked = stacked,
         )
     plt.axhline(0, color = 'k')
     axes.legend(
