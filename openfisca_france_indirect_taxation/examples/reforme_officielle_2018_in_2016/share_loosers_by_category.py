@@ -12,7 +12,7 @@ from __future__ import division
 import pandas as pd
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
@@ -68,7 +68,7 @@ for i in range(1,11):
     df_by_categ['perdant_cheque_officiel'][i] = part_perdants_officiel
     df_by_categ['perdant_cheque_integral_inconditionnel'][i] = part_perdants_integral_inconditionnel
 
-graph_builder_bar(df_by_categ[
+graph_builder_bar_percent(df_by_categ[
     [u'perdant_cheque_officiel'] +
     [u'perdant_cheque_integral_inconditionnel']
-    ], False)
+    ])

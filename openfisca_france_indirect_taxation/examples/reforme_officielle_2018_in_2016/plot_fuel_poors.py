@@ -11,7 +11,7 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.examples.reforme_officielle_2018_in_2016.number_fuel_poor import number_fuel_poors
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent, graph_builder_bar
 
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
@@ -47,7 +47,7 @@ def plot_number_fuel_poors():
             dataframe[statut][type_precarite] = \
                 dict_precarite[type_precarite]['precarite - ' + statut]
 
-    graph_builder_bar_percent(dataframe)
+    graph_builder_bar(dataframe, False)
 
 
 def plot_share_fuel_poors():
@@ -58,7 +58,7 @@ def plot_share_fuel_poors():
         year = year,
         data_year = data_year
         )
-    
+
     df_reforme = survey_scenario.create_data_frame_by_entity(['pondmen'], period = year)['menage']
     pop_size = df_reforme['pondmen'].sum()
 

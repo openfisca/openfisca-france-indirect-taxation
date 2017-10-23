@@ -26,62 +26,22 @@ survey_scenario = SurveyScenario.create(
     )
 
 simulated_variables = [
-    #'cheques_energie_integral_inconditionnel_officielle_2018_in_2016',
-    #'cheques_energie_integral_inconditionnel_officielle_2018_in_2016_plus_cspe',
-    #'cheques_energie_integral_inconditionnel_cce_seulement',
-    #'cheques_energie_integral_inconditionnel_rattrapage_integral',
-    #'revenu_reforme_officielle_2018_in_2016',
-    #'revenu_reforme_officielle_2018_in_2016_plus_cspe',
-    #'revenu_reforme_rattrapage_integral',
-    #'revenu_reforme_cce_seulement',
-    #'pertes_financieres_avant_redistribution_officielle_2018_in_2016',
     'ocde10',
     'pondmen',
-    'elas_price_1_1',
-    'depenses_energies_logement_officielle_2018_in_2016',
-    #'npers',
-    #'revdecm',
-    #'cheques_energie_officielle_2018_in_2016',
-    #'tchof',
-    #'revtot',
-    #'quantites_gaz_final',
-    #'quantites_gaz_contrat_optimal',
+    'gains_tva_carburants_officielle_2018_in_2016',
+    'gains_tva_combustibles_liquides_officielle_2018_in_2016',
+    'gains_tva_gaz_ville_officielle_2018_in_2016',
+    'gains_tva_total_energies_officielle_2018_in_2016',
+    'revenu_reforme_officielle_2018_in_2016',
     ]
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 df = dataframe_by_group(survey_scenario, 'niveau_vie_decile', simulated_variables)
 
-
-nombre_parts = sum(df_reforme['pondmen'] * df_reforme['ocde10'])
-
-#print sum(df_reforme['pondmen'] * df_reforme['revenu_reforme_officielle_2018_in_2016']) / nombre_parts
-#print sum(df_reforme['pondmen'] * df_reforme['revenu_reforme_officielle_2018_in_2016_plus_cspe']) / nombre_parts
-#print sum(df_reforme['pondmen'] * df_reforme['revenu_reforme_rattrapage_integral']) / nombre_parts
-#print sum(df_reforme['pondmen'] * df_reforme['revenu_reforme_cce_seulement']) / nombre_parts
-
-#print (df_reforme['cheques_energie_integral_inconditionnel_officielle_2018_in_2016']).mean()
-#print (df_reforme['cheques_energie_integral_inconditionnel_officielle_2018_in_2016_plus_cspe']).mean()
-#print (df_reforme['cheques_energie_integral_inconditionnel_cce_seulement']).mean()
-#print (df_reforme['cheques_energie_integral_inconditionnel_rattrapage_integral']).mean()
-
-#print (df_reforme['pertes_financieres_avant_redistribution_officielle_2018_in_2016']).mean()
-
-#df_reforme['eligible'] = (
-#    1 * (df_reforme['revtot'] < 8723) * (df_reforme['npers'] == 1) +
-#    1 * (df_reforme['revtot'] < 13085) * (df_reforme['npers'] == 2) +
-#    1 * (df_reforme['revtot'] < 15701) * (df_reforme['npers'] == 3) +
-#    1 * (df_reforme['revtot'] < 18318) * (df_reforme['npers'] == 4) +
-#    1 * (df_reforme['revtot'] < 18318 + (df_reforme['npers'] - 4) * 3489) * (df_reforme['npers'] > 4)
-#    )
-
-#print (df_reforme['cheques_energie_officielle_2018_in_2016'] * df_reforme['pondmen']).sum()
-#print (df_reforme['revenu_reforme_officielle_2018_in_2016'] * df_reforme['pondmen']).sum()
-
-
+#print (df_reforme['eligibilite_tarifs_sociaux_energies'] * df_reforme['pondmen']).sum()
+#print df_reforme.query('tarifs_sociaux_electricite > 0')['pondmen'].sum()
+#print df_reforme.query('tarifs_sociaux_gaz > 0')['pondmen'].sum()
 #print df_reforme.query('cheques_energie_officielle_2018_in_2016 > 0')['pondmen'].sum()
-#print max(df_reforme['cheques_energie_officielle_2018_in_2016'])
-#bibi = df_reforme.query('cheques_energie_officielle_2018_in_2016 > 0')
-#print max(bibi['revdecm'] / bibi['ocde10'])
 
-depenses = 'depenses'
-data = df_reforme
+print df_reforme['gains_tva_total_energies_officielle_2018_in_2016'].mean()
+print df_reforme['revenu_reforme_officielle_2018_in_2016'].mean()

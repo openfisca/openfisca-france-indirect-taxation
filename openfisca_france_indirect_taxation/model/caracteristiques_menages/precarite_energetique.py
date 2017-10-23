@@ -103,6 +103,27 @@ class brde_transports_rev_disponible(YearlyVariable):
         return brde
 
 
+# critère basé sur les barèmes d'éligibilité à la CMU-C en utilisant le revenu fiscal.
+# Le revenu pris en compte est normalement différent mais le nombre de ménages bénéficiaires est le même.
+class eligibilite_tarifs_sociaux_energies(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Le ménage est éligible aux tarifs sociaux de l'énergie"
+
+    def formula(self, simulation, period):
+        revenu = simulation.calculate('revdecm', period)
+        npers = simulation.calculate('npers', period)
+
+        eligible = (
+            1 * (revenu < 8653) * (npers == 1) +
+            1 * (revenu < 12980) * (npers == 2) +
+            1 * (revenu < 15576) * (npers == 3) +
+            1 * (revenu < 18172 + ((npers - 4) * 3461.26)) * ((npers == 4) + (npers > 4))
+            )
+
+        return eligible
+
+
 class froid(YearlyVariable):
     column = StrCol
     entity = Menage
@@ -245,7 +266,7 @@ class tarifs_sociaux_electricite(YearlyVariable):
 
     def formula(self, simulation, period):
         depenses_electricite_percentile = simulation.calculate('depenses_electricite_percentile', period)
-        cmu = simulation.calculate('cmu', period)
+        eligible = simulation.calculate('eligibilite_tarifs_sociaux_energies', period)
         uc = simulation.calculate('ocde10', period)
         uc_1 = 1 * (uc == 1)
         uc_1_2 = 1 * (uc > 1) * (uc < 2)
@@ -253,7 +274,7 @@ class tarifs_sociaux_electricite(YearlyVariable):
         kva_3 = 1 * (depenses_electricite_percentile < 4)
         kva_6 = 1 * (depenses_electricite_percentile > 4) * (depenses_electricite_percentile < 52)
         kva_9 = 1 * (depenses_electricite_percentile > 52)
-        tarifs_sociaux = cmu * (
+        tarifs_sociaux = eligible * (
             kva_3 * (uc_1 * 71 + uc_1_2 * 88 + uc_2 * 106) +
             kva_6 * (uc_1 * 87 + uc_1_2 * 109 + uc_2 * 131) +
             kva_9 * (uc_1 * 94 + uc_1_2 * 117 + uc_2 * 140)
@@ -263,8 +284,8 @@ class tarifs_sociaux_electricite(YearlyVariable):
         tarifs_sociaux = (
             tarifs_sociaux * (tarifs_sociaux < depenses_electricite) +
             depenses_electricite * (tarifs_sociaux > depenses_electricite)
-            )
-            
+            ) * eligible
+
         return tarifs_sociaux
 
 
@@ -282,7 +303,7 @@ class tarifs_sociaux_gaz(YearlyVariable):
         prix_unitaire_b1 = \
             simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b1_ttc
 
-        cmu = simulation.calculate('cmu', period)
+        eligible = simulation.calculate('eligibilite_tarifs_sociaux_energies', period)
         uc = simulation.calculate('ocde10', period)
         uc_1 = 1 * (uc == 1)
         uc_1_2 = 1 * (uc > 1) * (uc < 2)
@@ -290,7 +311,7 @@ class tarifs_sociaux_gaz(YearlyVariable):
         base = 1 * (depenses_gaz_prix_unitaire == prix_unitaire_base)
         b0 = 1 * (depenses_gaz_prix_unitaire == prix_unitaire_b0)
         b1 = 1 * (depenses_gaz_prix_unitaire == prix_unitaire_b1)
-        tarifs_sociaux = cmu * (
+        tarifs_sociaux = eligible * (
             base * (uc_1 * 23 + uc_1_2 * 30 + uc_2 * 38) +
             b0 * (uc_1 * 72 + uc_1_2 * 95 + uc_2 * 117) +
             b1 * (uc_1 * 123 + uc_1_2 * 153 + uc_2 * 185)
@@ -300,7 +321,7 @@ class tarifs_sociaux_gaz(YearlyVariable):
         tarifs_sociaux = (
             tarifs_sociaux * (tarifs_sociaux < depenses_gaz_ville) +
             depenses_gaz_ville * (tarifs_sociaux > depenses_gaz_ville)
-            )
+            ) * eligible
             
         return tarifs_sociaux
 

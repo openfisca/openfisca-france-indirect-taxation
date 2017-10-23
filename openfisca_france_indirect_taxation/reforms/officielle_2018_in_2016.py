@@ -508,8 +508,8 @@ class officielle_2018_in_2016(Reform):
                 depenses_tva_taux_plein * (1 + (1 + elasticite) * (- abaissement_tva_taux_plein) / (1 + taux_plein))
     
             return depenses_tva_taux_plein_ajustees
-    
-    
+
+
     class depenses_tva_taux_plein_bis_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
@@ -848,6 +848,98 @@ class officielle_2018_in_2016(Reform):
             return essence_ticpe_ajustee
 
 
+    class gains_tva_carburants_officielle_2018_in_2016(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Recettes en TVA sur les carburants de la réforme"
+    
+        def formula(self, simulation, period):
+            taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+            depenses_carburants_corrigees_officielle_2018_in_2016 = \
+                simulation.calculate('depenses_carburants_corrigees_officielle_2018_in_2016', period)
+            tva_depenses_carburants_corrigees_officielle_2018_in_2016 = (
+                (taux_plein_tva / (1 + taux_plein_tva)) *
+                depenses_carburants_corrigees_officielle_2018_in_2016
+                )
+            depenses_carburants_corrigees = \
+                simulation.calculate('depenses_carburants_corrigees', period)
+            tva_depenses_carburants_corrigees = (
+                (taux_plein_tva / (1 + taux_plein_tva)) *
+                depenses_carburants_corrigees
+                )
+            gains_tva_carburants = (
+                tva_depenses_carburants_corrigees_officielle_2018_in_2016 -
+                tva_depenses_carburants_corrigees
+                )
+            return gains_tva_carburants
+            
+            
+    class gains_tva_combustibles_liquides_officielle_2018_in_2016(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Recettes en TVA sur les carburants de la réforme"
+    
+        def formula(self, simulation, period):
+            taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+            depenses_combustibles_liquides_officielle_2018_in_2016 = \
+                simulation.calculate('depenses_combustibles_liquides_officielle_2018_in_2016', period)
+            tva_depenses_combustibles_liquides_officielle_2018_in_2016 = (
+                (taux_plein_tva / (1 + taux_plein_tva)) *
+                depenses_combustibles_liquides_officielle_2018_in_2016
+                )
+            depenses_combustibles_liquides = \
+                simulation.calculate('depenses_combustibles_liquides', period)
+            tva_depenses_combustibles_liquides = (
+                (taux_plein_tva / (1 + taux_plein_tva)) *
+                depenses_combustibles_liquides
+                )
+            gains_tva_combustibles_liquides = (
+                tva_depenses_combustibles_liquides_officielle_2018_in_2016 -
+                tva_depenses_combustibles_liquides
+                )
+            return gains_tva_combustibles_liquides
+            
+            
+    class gains_tva_gaz_ville_officielle_2018_in_2016(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Recettes en TVA sur les carburants de la réforme"
+    
+        def formula(self, simulation, period):
+            taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+            depenses_gaz_tarif_fixe = simulation.calculate('depenses_gaz_tarif_fixe', period)
+            depenses_gaz_ville_officielle_2018_in_2016 = \
+                simulation.calculate('depenses_gaz_ville_officielle_2018_in_2016', period)
+            tva_depenses_gaz_ville_officielle_2018_in_2016 = (
+                (taux_plein_tva / (1 + taux_plein_tva)) *
+                (depenses_gaz_ville_officielle_2018_in_2016 - depenses_gaz_tarif_fixe)
+                )
+            depenses_gaz_ville = \
+                simulation.calculate('depenses_gaz_ville', period)
+            tva_depenses_gaz_ville = (
+                (taux_plein_tva / (1 + taux_plein_tva)) *
+                (depenses_gaz_ville - depenses_gaz_tarif_fixe)
+                )
+            gains_tva_gaz_ville = (
+                tva_depenses_gaz_ville_officielle_2018_in_2016 -
+                tva_depenses_gaz_ville
+                )
+            return gains_tva_gaz_ville
+            
+            
+    class gains_tva_total_energies_officielle_2018_in_2016(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Recettes en TVA sur toutes les énergies de la réforme"
+    
+        def formula(self, simulation, period):
+            gains_carburants = simulation.calculate('gains_tva_carburants_officielle_2018_in_2016', period)
+            gains_combustibles_liquides = simulation.calculate('gains_tva_combustibles_liquides_officielle_2018_in_2016', period)
+            gains_gaz_ville = simulation.calculate('gains_tva_gaz_ville_officielle_2018_in_2016', period)
+
+            somme_gains = gains_carburants + gains_combustibles_liquides + gains_gaz_ville
+            return somme_gains
+
     # Vérifier que rien n'est oublié ici
     class pertes_financieres_avant_redistribution_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
@@ -863,6 +955,27 @@ class officielle_2018_in_2016(Reform):
 
             pertes = (
                 depenses_energies_logement_officielle_2018_in_2016 +
+                depenses_carburants_officielle_2018_in_2016 -
+                depenses_energies_totales
+                )
+
+            return pertes
+
+
+    class pertes_financieres_avant_redistribution_officielle_2018_in_2016_plus_cspe(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Montant total des pertes financières dues à la réforme, avant redistribution"
+    
+        def formula(self, simulation, period):
+            depenses_energies_totales = simulation.calculate('depenses_energies_totales', period)
+            depenses_energies_logement_officielle_2018_in_2016_plus_cspe = \
+                simulation.calculate('depenses_energies_logement_officielle_2018_in_2016_plus_cspe', period)
+            depenses_carburants_officielle_2018_in_2016 = \
+                simulation.calculate('depenses_carburants_corrigees_officielle_2018_in_2016', period)
+
+            pertes = (
+                depenses_energies_logement_officielle_2018_in_2016_plus_cspe +
                 depenses_carburants_officielle_2018_in_2016 -
                 depenses_energies_totales
                 )
@@ -1107,12 +1220,13 @@ class officielle_2018_in_2016(Reform):
             total_taxes_energies = simulation.calculate('total_taxes_energies', period)
             total_taxes_energies_officielle_2018_in_2016 = \
                 simulation.calculate('total_taxes_energies_officielle_2018_in_2016', period)
+            gains_tva_total_energies = simulation.calculate('gains_tva_total_energies_officielle_2018_in_2016', period)
             tarifs_sociaux_electricite = simulation.calculate('tarifs_sociaux_electricite', period)
             tarifs_sociaux_gaz = simulation.calculate('tarifs_sociaux_gaz', period)
 
             revenu_reforme = (
-                total_taxes_energies_officielle_2018_in_2016 - total_taxes_energies
-                + tarifs_sociaux_electricite + tarifs_sociaux_gaz
+                total_taxes_energies_officielle_2018_in_2016 - total_taxes_energies +
+                gains_tva_total_energies + tarifs_sociaux_electricite + tarifs_sociaux_gaz
                 )
 
             return revenu_reforme
@@ -1482,7 +1596,12 @@ class officielle_2018_in_2016(Reform):
         self.update_variable(self.emissions_CO2_energies_totales_officielle_2018_in_2016_plus_cspe)
         self.update_variable(self.emissions_CO2_gaz_ville_officielle_2018_in_2016)
         self.update_variable(self.essence_ticpe_officielle_2018_in_2016)
+        self.update_variable(self.gains_tva_carburants_officielle_2018_in_2016)
+        self.update_variable(self.gains_tva_combustibles_liquides_officielle_2018_in_2016)
+        self.update_variable(self.gains_tva_gaz_ville_officielle_2018_in_2016)
+        self.update_variable(self.gains_tva_total_energies_officielle_2018_in_2016)
         self.update_variable(self.pertes_financieres_avant_redistribution_officielle_2018_in_2016)
+        self.update_variable(self.pertes_financieres_avant_redistribution_officielle_2018_in_2016_plus_cspe)
         self.update_variable(self.quantites_combustibles_liquides_officielle_2018_in_2016)
         self.update_variable(self.quantites_diesel_cce_seulement)
         self.update_variable(self.quantites_diesel_officielle_2018_in_2016)
