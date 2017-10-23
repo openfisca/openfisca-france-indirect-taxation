@@ -28,10 +28,8 @@ survey_scenario = SurveyScenario.create(
 simulated_variables = [
     'ocde10',
     'pondmen',
-    'gains_tva_carburants_officielle_2018_in_2016',
-    'gains_tva_combustibles_liquides_officielle_2018_in_2016',
-    'gains_tva_gaz_ville_officielle_2018_in_2016',
-    'gains_tva_total_energies_officielle_2018_in_2016',
+    'rev_disponible',
+    'reste_transferts_neutre_officielle_2018_in_2016',
     'revenu_reforme_officielle_2018_in_2016',
     ]
 
@@ -43,5 +41,6 @@ df = dataframe_by_group(survey_scenario, 'niveau_vie_decile', simulated_variable
 #print df_reforme.query('tarifs_sociaux_gaz > 0')['pondmen'].sum()
 #print df_reforme.query('cheques_energie_officielle_2018_in_2016 > 0')['pondmen'].sum()
 
-print df_reforme['gains_tva_total_energies_officielle_2018_in_2016'].mean()
+print df_reforme['reste_transferts_neutre_officielle_2018_in_2016'].mean()
 print df_reforme['revenu_reforme_officielle_2018_in_2016'].mean()
+df_reforme['ratio'] = df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] / df_reforme['rev_disponible']

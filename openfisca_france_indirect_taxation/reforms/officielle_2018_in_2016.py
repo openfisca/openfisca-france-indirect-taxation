@@ -940,6 +940,7 @@ class officielle_2018_in_2016(Reform):
             somme_gains = gains_carburants + gains_combustibles_liquides + gains_gaz_ville
             return somme_gains
 
+
     # Vérifier que rien n'est oublié ici
     class pertes_financieres_avant_redistribution_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
@@ -1191,6 +1192,29 @@ class officielle_2018_in_2016(Reform):
             return quantites_super_plombe_ajustees
     
     
+    # A modifier : prendre en compte uniquement le reste des cheques, et faire quelque chose de neutre
+    class reste_transferts_neutre_officielle_2018_in_2016(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Montant des transferts additionnels à imputer pour avoir une réforme à budget neutre, sans biaiser les effets distributifs"
+    
+        def formula(self, simulation, period):
+            ocde10 = simulation.calculate('ocde10', period)
+            pondmen = simulation.calculate('pondmen', period)
+
+            revenu_reforme = \
+                simulation.calculate('revenu_reforme_rattrapage_integral', period)
+            somme_revenu = numpy.sum(revenu_reforme * pondmen)
+            cheque = simulation.calculate('cheques_energie_officielle_2018_in_2016', period)
+            somme_cheque = numpy.sum(cheque * pondmen)
+            revenu_restant = somme_revenu - somme_cheque
+
+            revenu_uc = revenu_restant / numpy.sum(ocde10 * pondmen)
+            reste_transferts = revenu_uc * ocde10
+
+            return reste_transferts
+
+
     class revenu_reforme_cce_seulement(YearlyVariable):
         column = FloatCol
         entity = Menage
@@ -1613,6 +1637,7 @@ class officielle_2018_in_2016(Reform):
         self.update_variable(self.quantites_sp95_officielle_2018_in_2016)
         self.update_variable(self.quantites_sp98_officielle_2018_in_2016)
         self.update_variable(self.quantites_super_plombe_officielle_2018_in_2016)
+        self.update_variable(self.reste_transferts_neutre_officielle_2018_in_2016)
         self.update_variable(self.revenu_reforme_cce_seulement)
         self.update_variable(self.revenu_reforme_officielle_2018_in_2016)
         self.update_variable(self.revenu_reforme_officielle_2018_in_2016_plus_cspe)
