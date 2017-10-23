@@ -109,7 +109,19 @@ def brde(data, depenses, revenu, logement):
     
     return data 
 
+    
+def cheque_energie_logement_transport(data, depenses_logement, depenses_transport, cheque):
+    data['part_cheque_logement'] = (
+        data[depenses_logement] / (data[depenses_logement] + data[depenses_transport])
+        )
+    data['part_cheque_logement'] = data['part_cheque_logement'].fillna(0)
+    data['cheque_logement'] = data['part_cheque_logement'] * data[cheque]
+    data['cheque_transport'] = data[cheque] - data['cheque_logement']
+    del data['part_cheque_logement']
 
+    return data
+    
+    
 def cheque_vert(data_reference, data_reforme, reforme):
     unite_conso = (data_reforme['ocde10'] * data_reforme['pondmen']).sum()
     contribution = (
