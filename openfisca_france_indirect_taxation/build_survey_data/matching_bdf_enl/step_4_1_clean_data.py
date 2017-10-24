@@ -37,7 +37,7 @@ def clean_data():
 
     variables_to_drop_enl = [
         'amr', 'cataeu', 'coml11', 'coml12', 'cs42cj', 'cs42pr',
-        'gmoy1', 'gtt1', 'gvit1', 'gvit1b', 'mchof_d', 'mfac_eau1_d',
+        'gmoy1', 'gtt1', 'mchof_d', 'mfac_eau1_d',
         'mloy_d', 'nbh1', 'situacj', 'situapr', 'tau', 'tuu'
         ]
 

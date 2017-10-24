@@ -136,6 +136,10 @@ def homogenize_variables_definition_bdf_enl():
             'coml2': 'depenses_combustibles_liquides',
             'coml3': 'depenses_gaz_liquefie',
             'enfhod': 'nbh1',
+            'gmur': 'isolation_murs',
+            'gtoit2': 'isolation_toit',
+            'gvit1': 'majorite_double_vitrage',
+            'gvit1b': 'isolation_fenetres',
             'lchauf': 'mchof_d',
             'hnph1': 'nbphab',
             'hsh1': 'surfhab_d',
@@ -164,6 +168,11 @@ def homogenize_variables_definition_bdf_enl():
     
         inplace = True,
         )
+
+    # Pour ceux ne connaissant pas l'isolation de leurs murs (4), on impute une isolation moyenne (2)
+    data_enl.loc[data_enl['isolation_murs'] == 4, 'isolation_murs'] = 2
+    # Pour ceux ne connaissant pas l'isolation de leur toit (5), on impute une isolation ancienne mais suffisante (2)
+    data_enl.loc[data_enl['isolation_toit'] == 5, 'isolation_murs'] = 2
 
     data_enl = data_enl.sort_index(axis = 1)
     data_bdf = data_bdf.sort_index(axis = 1)

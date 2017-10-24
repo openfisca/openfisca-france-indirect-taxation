@@ -1,6 +1,6 @@
 # Import data
-data_enl <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_enl.csv", header = -1, sep=",")
-data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_bdf.csv", header = -1, sep=",")
+data_enl <- read.csv(file = "C:/Users/t.douenne/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_enl.csv", header = -1, sep=",")
+data_bdf <- read.csv(file = "C:/Users/t.douenne/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_bdf.csv", header = -1, sep=",")
 
 # Compute ranked matching
 out.nnd <- rankNND.hotdeck(
@@ -18,10 +18,10 @@ fused.nnd.m <- create.fused(
   z.vars = c("froid", "froid_installation", "gchauf_2", "froid_cout", "froid_isolation",
              "froid_impaye", "gchauf_6", "gchauf_7", "gchaufs_1",
              "gchaufs_2", "gchaufs_3", "gchaufs_4", "gchaufs_5",
-             "gmur", "gtoit2")
+             "isolation_murs", "isolation_toit", "isolation_fenetres", "majorite_double_vitrage")
 )
 
 # Save it as csv
 write.csv(fused.nnd.m,
-          file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matched_rank.csv"
+          file = "C:/Users/t.douenne/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matched_rank.csv"
 )

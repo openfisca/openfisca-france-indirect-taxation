@@ -21,7 +21,7 @@ class age(YearlyVariable):
 
 class agepr(YearlyVariable):
     column = AgeCol
-    entity = Individu
+    entity = Menage
     label = u"Age personne de référence"
 
 
@@ -65,7 +65,7 @@ class nadultes(YearlyVariable):
 
 class nenfants(YearlyVariable):
     column = IntCol
-    entity = Individu
+    entity = Menage
     label = u"Nombre d'enfants dans le ménage"
 
 

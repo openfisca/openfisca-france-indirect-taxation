@@ -45,7 +45,8 @@ data_matched_erfs = pandas.read_csv(
 
 data_matched_enl = data_matched_enl[
     ['froid'] + ['froid_cout'] + ['froid_installation'] + ['froid_impaye'] +
-    ['froid_isolation'] + ['ident_men'] + ['log_indiv'] + ['bat_av_49'] + ['bat_49_74'] +
+    ['froid_isolation'] + ['ident_men'] + ['isolation_fenetres'] + ['isolation_murs'] +
+    ['isolation_toit'] + ['majorite_double_vitrage'] + ['log_indiv'] + ['bat_av_49'] + ['bat_49_74'] +
     ['bat_ap_74'] + ['ouest_sud'] + ['aides_logement'] + ['rural'] + ['petite_ville'] +
     ['paris']
     ]

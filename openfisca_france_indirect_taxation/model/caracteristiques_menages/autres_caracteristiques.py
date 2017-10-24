@@ -71,6 +71,24 @@ class ident_men(YearlyVariable):
     label = u"Identifiant du ménage"
 
 
+class isolation_fenetres(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Qualité de l'isolation des fenêtres"
+
+
+class isolation_murs(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Qualité de l'isolation des murs"
+
+
+class isolation_toit(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Qualité de l'isolation du toit"
+
+
 class identifiant_menage(YearlyVariable):
     column = StrCol
     entity = Menage
@@ -81,6 +99,12 @@ class log_indiv(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"Le ménage vie dans un logement individuel"
+
+
+class majorite_double_vitrage(YearlyVariable):
+    column = StrCol
+    entity = Menage
+    label = u"Majorité de double vitrage dans le logement"
 
 
 class ocde10(YearlyVariable):
