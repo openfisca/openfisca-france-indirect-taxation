@@ -35,6 +35,7 @@ simulated_variables = [
     'isolation_murs',
     'isolation_toit',
     'majorite_double_vitrage',
+    'typmen',
     ]
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
@@ -45,12 +46,11 @@ df = dataframe_by_group(survey_scenario, 'niveau_vie_decile', simulated_variable
 #print df_reforme.query('tarifs_sociaux_gaz > 0')['pondmen'].sum()
 #print df_reforme.query('cheques_energie_officielle_2018_in_2016 > 0')['pondmen'].sum()
 
+print len(df_reforme.query('typmen == 2'))
+
 print df_reforme['reste_transferts_neutre_officielle_2018_in_2016'].mean()
 print df_reforme['revenu_reforme_officielle_2018_in_2016'].mean()
 df_reforme['ratio'] = df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] / df_reforme['rev_disponible']
 
 
 
-regressors = ['part_energies_revtot', 'revtot', 'revtot_2', 'depenses_combustibles_liquides',
-              'depenses_electricite', 'depenses_gaz_ville', 'gvit1b', 'gmur', 'gtoit2', 'gvit1'] + variables_kept
-liste_colonnes = data_enl.columns.tolist()

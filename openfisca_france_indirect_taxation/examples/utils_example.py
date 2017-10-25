@@ -122,6 +122,23 @@ def cheque_energie_logement_transport(data, depenses_logement, depenses_transpor
     return data
     
     
+def cheque_par_energie(data, depenses_combustibles_liquides, depenses_electricite, depenses_gaz, cheque):
+    data['part_cheque_combustibles_liquides'] = (
+        data[depenses_combustibles_liquides] / (data[depenses_combustibles_liquides] + data[depenses_electricite] + data[depenses_gaz])
+        )
+    data['part_cheque_electricite'] = (
+        data[depenses_electricite] / (data[depenses_combustibles_liquides] + data[depenses_electricite] + data[depenses_gaz])
+        )
+    data['part_cheque_combustibles_liquides'] = data['part_cheque_combustibles_liquides'].fillna(0)
+    data['part_cheque_electricite'] = data['part_cheque_electricite'].fillna(0)
+    data['cheque_combustibles_liquides'] = data['part_cheque_combustibles_liquides'] * data[cheque]
+    data['cheque_electricite'] = data['part_cheque_electricite'] * data[cheque]
+    data['cheque_gaz_ville'] = data[cheque] - data['cheque_combustibles_liquides'] - data['cheque_electricite']
+    del data['part_cheque_combustibles_liquides'], data['part_cheque_electricite']
+
+    return data
+    
+
 def cheque_vert(data_reference, data_reforme, reforme):
     unite_conso = (data_reforme['ocde10'] * data_reforme['pondmen']).sum()
     contribution = (

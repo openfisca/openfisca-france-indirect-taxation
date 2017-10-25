@@ -37,7 +37,7 @@ class brde_m2_depenses_tot(YearlyVariable):
 
         
 class brde_m2_rev_disponible(YearlyVariable):
-    column = StrCol
+    column = IntCol
     entity = Menage
     label = u"bas revenu (revenu disponible) dépenses élevées (énergies logement)"
 
@@ -392,7 +392,7 @@ class tee_10_rev_disponible(YearlyVariable):
 
 
 class tee_10_3_deciles_rev_disponible(YearlyVariable):
-    column = StrCol
+    column = IntCol
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
