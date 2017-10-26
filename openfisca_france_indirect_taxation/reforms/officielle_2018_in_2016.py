@@ -756,6 +756,20 @@ class officielle_2018_in_2016(Reform):
             return emissions_ajustees
     
     
+    class emissions_CO2_diesel_officielle_2018_in_2016(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Emissions de CO2 des ménages via leur conso de diesel après réforme, en kg de CO2"
+    
+        def formula(self, simulation, period):
+            quantites_diesel_ajustees = simulation.calculate('quantites_diesel_officielle_2018_in_2016', period)
+            emissions_diesel = \
+                simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
+            emissions_ajustees = quantites_diesel_ajustees * emissions_diesel
+    
+            return emissions_ajustees
+    
+    
     class emissions_CO2_electricite_cspe(YearlyVariable):
         column = FloatCol
         entity = Menage
@@ -806,6 +820,20 @@ class officielle_2018_in_2016(Reform):
                 emissions_combustibles_liquides_ajustees + emissions_gaz_ajustees
                 )
             return emissions_energies_ajustees
+    
+    
+    class emissions_CO2_essence_officielle_2018_in_2016(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Emissions de CO2 des ménages via leur conso d'essence après réforme, en kg de CO2"
+    
+        def formula(self, simulation, period):
+            quantites_essence_ajustees = simulation.calculate('quantites_essence_officielle_2018_in_2016', period)
+            emissions_essence = \
+                simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
+            emissions_ajustees = quantites_essence_ajustees * emissions_essence
+                
+            return emissions_ajustees
     
     
     class emissions_CO2_gaz_ville_officielle_2018_in_2016(YearlyVariable):
@@ -1615,9 +1643,11 @@ class officielle_2018_in_2016(Reform):
         self.update_variable(self.emissions_CO2_carburants_officielle_2018_in_2016)
         self.update_variable(self.emissions_CO2_carburants_rattrapage_integral)
         self.update_variable(self.emissions_CO2_combustibles_liquides_officielle_2018_in_2016)
+        self.update_variable(self.emissions_CO2_diesel_officielle_2018_in_2016)
         self.update_variable(self.emissions_CO2_electricite_cspe)
         self.update_variable(self.emissions_CO2_energies_totales_officielle_2018_in_2016)
         self.update_variable(self.emissions_CO2_energies_totales_officielle_2018_in_2016_plus_cspe)
+        self.update_variable(self.emissions_CO2_essence_officielle_2018_in_2016)
         self.update_variable(self.emissions_CO2_gaz_ville_officielle_2018_in_2016)
         self.update_variable(self.essence_ticpe_officielle_2018_in_2016)
         self.update_variable(self.gains_tva_carburants_officielle_2018_in_2016)

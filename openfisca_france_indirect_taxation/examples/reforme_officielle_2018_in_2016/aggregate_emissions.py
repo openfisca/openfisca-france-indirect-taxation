@@ -31,11 +31,15 @@ simulated_variables = [
     'emissions_CO2_carburants_rattrapage_integral',
     'emissions_CO2_combustibles_liquides',
     'emissions_CO2_combustibles_liquides_officielle_2018_in_2016',
+    'emissions_CO2_diesel',
+    'emissions_CO2_diesel_officielle_2018_in_2016',
     'emissions_CO2_electricite_cspe',
     'emissions_CO2_electricite',
     'emissions_CO2_energies_totales',
     'emissions_CO2_energies_totales_officielle_2018_in_2016',
     'emissions_CO2_energies_totales_officielle_2018_in_2016_plus_cspe',
+    'emissions_CO2_essence',
+    'emissions_CO2_essence_officielle_2018_in_2016',
     'emissions_CO2_gaz_ville',
     'emissions_CO2_gaz_ville_officielle_2018_in_2016',
     'pondmen',
@@ -76,6 +80,12 @@ emissions_officielle['combustibles_liquides'] = emissions_cce_seulement['combust
 emissions_officielle_plus_cspe['combustibles_liquides'] = emissions_cce_seulement['combustibles_liquides']
 emissions_rattrapage_integral['combustibles_liquides'] = 0
 
+# Diesel
+emissions_officielle['diesel'] = (
+    (df_reforme['emissions_CO2_diesel'] - df_reforme['emissions_CO2_diesel_officielle_2018_in_2016']) *
+    df_reforme['pondmen']
+    ).sum() / 1e06
+
 # Electricité
 emissions_cce_seulement['electricite'] = 0
 emissions_officielle['electricite'] = 0
@@ -86,6 +96,11 @@ emissions_officielle_plus_cspe['electricite'] = (
     ).sum() / 1e06
 emissions_rattrapage_integral['electricite'] = 0
 
+# Essence
+emissions_officielle['essence'] = (
+    (df_reforme['emissions_CO2_essence'] - df_reforme['emissions_CO2_essence_officielle_2018_in_2016']) *
+    df_reforme['pondmen']
+    ).sum() / 1e06
 
 # Gaz de ville
 emissions_cce_seulement['gaz_ville'] = (

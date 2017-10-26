@@ -40,6 +40,20 @@ class emissions_CO2_combustibles_liquides(YearlyVariable):
         return emissions
 
 
+class emissions_CO2_diesel(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Emissions de CO2 des ménages via leur consommation de diesel, en kg de CO2"
+
+    def formula(self, simulation, period):
+        quantites_diesel = simulation.calculate('quantites_diesel', period)
+        emissions_diesel = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
+        emissions_co2 = quantites_diesel * emissions_diesel
+
+        return emissions_co2
+
+
 class emissions_CO2_electricite(YearlyVariable):
     column = FloatCol
     entity = Menage
@@ -80,6 +94,20 @@ class emissions_CO2_energies_totales(YearlyVariable):
         emissions = emissions_energies_logement + emissions_carburants
 
         return emissions
+
+
+class emissions_CO2_essence(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2"
+
+    def formula(self, simulation, period):
+        quantites_essence = simulation.calculate('quantites_essence', period)
+        emissions_essence = \
+            simulation.legislation_at(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
+        emissions_co2 = quantites_essence * emissions_essence
+
+        return emissions_co2
 
 
 class emissions_CO2_gaz_liquefie(YearlyVariable):
