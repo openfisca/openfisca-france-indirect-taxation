@@ -138,7 +138,7 @@ def number_fuel_poors(year, data_year):
         dict_transport['precarite - {0} - {1}'.format('officielle', redistribution)] = (
             (df_reforme['precarite_transport'] * df_reforme['pondmen']).sum()
             )
-    
+
         # double et joint
         df_reforme['double_precarite'] = (
             (df_reforme['precarite_logement'] * df_reforme['precarite_transport'])

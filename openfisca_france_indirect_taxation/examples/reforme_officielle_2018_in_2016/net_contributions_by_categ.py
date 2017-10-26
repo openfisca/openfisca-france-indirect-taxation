@@ -38,11 +38,13 @@ survey_scenario = SurveyScenario.create(
     )
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
+
+# Before revenue recycling
 for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
     df[u'contribution_nette_cheque_officiel'] = (
         df['cheques_energie_officielle_2018_in_2016'] -
-        df['revenu_reforme_officielle_2018_in_2016'] 
+        df['revenu_reforme_officielle_2018_in_2016']
         )
     df[u'contribution_nette_cheque_integral_inconditionnel'] = (
         df['cheques_energie_integral_inconditionnel_officielle_2018_in_2016'] -

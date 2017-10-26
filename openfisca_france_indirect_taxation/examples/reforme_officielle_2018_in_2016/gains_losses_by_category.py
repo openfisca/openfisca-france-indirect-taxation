@@ -43,7 +43,7 @@ for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
     df[u'gains_cheque_officiel'] = (
         df['cheques_energie_officielle_2018_in_2016'] +
         df['reste_transferts_neutre_officielle_2018_in_2016'] -
-        df['pertes_financieres_avant_redistribution_officielle_2018_in_2016'] 
+        df['pertes_financieres_avant_redistribution_officielle_2018_in_2016']
         )
     df[u'gains_cheque_integral_inconditionnel'] = (
         df['cheques_energie_integral_inconditionnel_officielle_2018_in_2016'] -

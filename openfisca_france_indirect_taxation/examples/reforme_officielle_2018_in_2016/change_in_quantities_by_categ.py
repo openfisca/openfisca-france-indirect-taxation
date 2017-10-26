@@ -10,7 +10,7 @@ from __future__ import division
 import pandas as pd
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent, save_dataframe_to_graph
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
@@ -154,9 +154,11 @@ for i in range(1,11):
         )
     df_by_categ['change_in_gaz_ville'][i] = change_in_gaz_ville
 
-graph_builder_bar_percent(df_by_categ[
+df_to_plot = df_by_categ[
     [u'change_in_diesel'] +
     [u'change_in_essence'] +
     [u'change_in_combustibles_liquides'] +
     [u'change_in_gaz_ville']
-    ])
+    ]
+graph_builder_bar_percent(df_to_plot)
+save_dataframe_to_graph(df_to_plot, 'change_in_quantities_by_deciles.csv')
