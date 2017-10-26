@@ -1231,7 +1231,7 @@ class officielle_2018_in_2016(Reform):
             pondmen = simulation.calculate('pondmen', period)
 
             revenu_reforme = \
-                simulation.calculate('revenu_reforme_rattrapage_integral', period)
+                simulation.calculate('revenu_reforme_officielle_2018_in_2016', period)
             somme_revenu = numpy.sum(revenu_reforme * pondmen)
             cheque = simulation.calculate('cheques_energie_officielle_2018_in_2016', period)
             somme_cheque = numpy.sum(cheque * pondmen)

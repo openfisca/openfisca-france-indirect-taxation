@@ -12,7 +12,7 @@ from __future__ import division
 import pandas as pd
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent, save_dataframe_to_graph
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
@@ -37,7 +37,7 @@ survey_scenario = SurveyScenario.create(
 simulated_variables = [
     'pertes_financieres_avant_redistribution_officielle_2018_in_2016',
     'cheques_energie_officielle_2018_in_2016',
-    'cheques_energie_integral_inconditionnel_officielle_2018_in_2016',
+    'reste_transferts_neutre_officielle_2018_in_2016',
     'niveau_vie_decile',
     'pondmen',
     ]
@@ -45,30 +45,19 @@ simulated_variables = [
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
 df_reforme[u'gains_cheque_officiel'] = (
-    df_reforme['cheques_energie_officielle_2018_in_2016'] -
-    df_reforme['pertes_financieres_avant_redistribution_officielle_2018_in_2016'] 
-    )
-df_reforme[u'gains_cheque_integral_inconditionnel'] = (
-    df_reforme['cheques_energie_integral_inconditionnel_officielle_2018_in_2016'] -
+    df_reforme['cheques_energie_officielle_2018_in_2016'] +
+    df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
     df_reforme['pertes_financieres_avant_redistribution_officielle_2018_in_2016'] 
     )
 df_reforme['perdant_cheque_officiel'] = 1 * (df_reforme['gains_cheque_officiel'] < 0)
-df_reforme['perdant_cheque_integral_inconditionnel'] = 1 * (df_reforme['gains_cheque_integral_inconditionnel'] < 0)
 
-df_by_categ = pd.DataFrame(index = range(1,11), columns = ['perdant_cheque_officiel', 'perdant_cheque_integral_inconditionnel'])
+df_by_categ = pd.DataFrame(index = range(1,11), columns = ['perdant_cheque_officiel'])
 for i in range(1,11):
     part_perdants_officiel = (
         float(df_reforme.query('niveau_vie_decile == {}'.format(i)).query('perdant_cheque_officiel == 1')['pondmen'].sum()) /
         df_reforme.query('niveau_vie_decile == {}'.format(i))['pondmen'].sum()
         )
-    part_perdants_integral_inconditionnel = (
-        float(df_reforme.query('niveau_vie_decile == {}'.format(i)).query('perdant_cheque_integral_inconditionnel == 1')['pondmen'].sum()) /
-        df_reforme.query('niveau_vie_decile == {}'.format(i))['pondmen'].sum()
-        )
     df_by_categ['perdant_cheque_officiel'][i] = part_perdants_officiel
-    df_by_categ['perdant_cheque_integral_inconditionnel'][i] = part_perdants_integral_inconditionnel
 
-graph_builder_bar_percent(df_by_categ[
-    [u'perdant_cheque_officiel'] +
-    [u'perdant_cheque_integral_inconditionnel']
-    ])
+graph_builder_bar_percent(df_by_categ[u'perdant_cheque_officiel'])
+save_dataframe_to_graph(df_by_categ, 'Monetary/share_loosers_within_income_deciles.csv')

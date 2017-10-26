@@ -26,7 +26,7 @@ simulated_variables = [
     'pertes_financieres_avant_redistribution_officielle_2018_in_2016',
     'cheques_energie_officielle_2018_in_2016',
     'cheques_energie_integral_inconditionnel_officielle_2018_in_2016',
-    'reste_transferts_neutre_officielle_2018_in_2016',
+df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
     ]
 
 survey_scenario = SurveyScenario.create(

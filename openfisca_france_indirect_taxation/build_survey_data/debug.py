@@ -26,31 +26,27 @@ survey_scenario = SurveyScenario.create(
     )
 
 simulated_variables = [
-    'ocde10',
+    'depenses_energies_logement',
+    'depenses_carburants_corrigees',
     'pondmen',
     'rev_disponible',
-    'reste_transferts_neutre_officielle_2018_in_2016',
-    'revenu_reforme_officielle_2018_in_2016',
-    'isolation_fenetres',
-    'isolation_murs',
-    'isolation_toit',
-    'majorite_double_vitrage',
-    'typmen',
+    'depenses_tot',
     ]
 
-df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
-df = dataframe_by_group(survey_scenario, 'niveau_vie_decile', simulated_variables)
+df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-#print (df_reforme['eligibilite_tarifs_sociaux_energies'] * df_reforme['pondmen']).sum()
-#print df_reforme.query('tarifs_sociaux_electricite > 0')['pondmen'].sum()
-#print df_reforme.query('tarifs_sociaux_gaz > 0')['pondmen'].sum()
-#print df_reforme.query('cheques_energie_officielle_2018_in_2016 > 0')['pondmen'].sum()
+df = df.query('rev_disponible > 0')
+df['part_logement_rev'] = df['depenses_energies_logement'] / df['rev_disponible']
+df['part_logement_dep'] = df['depenses_energies_logement'] / df['depenses_tot']
 
-print len(df_reforme.query('typmen == 2'))
+share_log_rev = (df['part_logement_rev'] * df['pondmen']).sum() / df['pondmen'].sum()
+share_log_dep = (df['part_logement_dep'] * df['pondmen']).sum() / df['pondmen'].sum()
 
-print df_reforme['reste_transferts_neutre_officielle_2018_in_2016'].mean()
-print df_reforme['revenu_reforme_officielle_2018_in_2016'].mean()
-df_reforme['ratio'] = df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] / df_reforme['rev_disponible']
+df['part_transport_rev'] = df['depenses_carburants_corrigees'] / df['rev_disponible']
+df['part_transport_dep'] = df['depenses_carburants_corrigees'] / df['depenses_tot']
 
+share_tr_rev = (df['part_transport_rev'] * df['pondmen']).sum() / df['pondmen'].sum()
+share_tr_dep = (df['part_transport_dep'] * df['pondmen']).sum() / df['pondmen'].sum()
 
-
+share_log_dep_median = df['part_logement_dep'].median() * 100
+share_tr_dep_median = df['part_transport_dep'].median() * 100
