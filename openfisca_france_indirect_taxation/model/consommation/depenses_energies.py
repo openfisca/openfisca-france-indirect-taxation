@@ -723,7 +723,7 @@ class depenses_super_plombe_ht(YearlyVariable):
 class combustibles_liquides(YearlyVariable):
     column = FloatCol
     entity = Menage
-    label = u"=1 si le menage consomme de l'électricité"
+    label = u"=1 si le menage consomme des combustibles liquides"
 
     def formula(self, simulation, period):
         depenses_combustibles_liquides = simulation.calculate('depenses_combustibles_liquides', period)
@@ -747,7 +747,7 @@ class electricite(YearlyVariable):
 class gaz_ville(YearlyVariable):
     column = FloatCol
     entity = Menage
-    label = u"=1 si le menage consomme de l'électricité"
+    label = u"=1 si le menage consomme du gaz"
 
     def formula(self, simulation, period):
         depenses_gaz_ville = simulation.calculate('depenses_gaz_ville', period)

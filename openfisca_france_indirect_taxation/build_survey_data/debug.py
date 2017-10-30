@@ -31,22 +31,13 @@ simulated_variables = [
     'pondmen',
     'rev_disponible',
     'depenses_tot',
+    'strate',
+    'cataeu',
+    'tuu',
+    'agepr',
     ]
 
 df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-df = df.query('rev_disponible > 0')
-df['part_logement_rev'] = df['depenses_energies_logement'] / df['rev_disponible']
-df['part_logement_dep'] = df['depenses_energies_logement'] / df['depenses_tot']
 
-share_log_rev = (df['part_logement_rev'] * df['pondmen']).sum() / df['pondmen'].sum()
-share_log_dep = (df['part_logement_dep'] * df['pondmen']).sum() / df['pondmen'].sum()
-
-df['part_transport_rev'] = df['depenses_carburants_corrigees'] / df['rev_disponible']
-df['part_transport_dep'] = df['depenses_carburants_corrigees'] / df['depenses_tot']
-
-share_tr_rev = (df['part_transport_rev'] * df['pondmen']).sum() / df['pondmen'].sum()
-share_tr_dep = (df['part_transport_dep'] * df['pondmen']).sum() / df['pondmen'].sum()
-
-share_log_dep_median = df['part_logement_dep'].median() * 100
-share_tr_dep_median = df['part_transport_dep'].median() * 100
+bibi = age_group(df)

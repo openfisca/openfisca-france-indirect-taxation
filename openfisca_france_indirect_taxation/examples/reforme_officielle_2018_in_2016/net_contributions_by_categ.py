@@ -42,7 +42,7 @@ survey_scenario = SurveyScenario.create(
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
+for category in ['strate']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
     df['transferts_nets_apres_redistribution'] = (
         df['cheques_energie_officielle_2018_in_2016'] +

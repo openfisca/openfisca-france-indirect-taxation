@@ -140,7 +140,7 @@ def effect_reform_cold():
     df_reforme['predict_log_odds'] = 0
     for var in explanatory_vars:
         df_reforme['predict_log_odds'] += df_reforme[var] * params[var][0]
-    
+
     df_reforme['predict_odds'] = np.exp(df_reforme['predict_log_odds'])
     df_reforme['predict_proba'] = df_reforme['predict_odds'] / (1 + df_reforme['predict_odds'])
     df_reforme.loc[df_reforme['niveau_vie_decile'] > 3, 'predict_proba'] = 0
