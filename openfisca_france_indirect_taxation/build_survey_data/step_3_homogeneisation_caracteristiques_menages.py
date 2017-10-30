@@ -640,8 +640,8 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         menage['strate'] = 0
         menage.loc[menage.tuu.isin([1, 2, 3]), 'strate'] = 1
-        menage.loc[menage.tuu.isin([4, 5]), 'strate'] = 2 
-        menage.loc[menage.tuu.isin([6, 7]), 'strate'] = 3
+        menage.loc[menage.tuu.isin([4, 5, 6]), 'strate'] = 2 
+        menage.loc[menage.tuu == 7, 'strate'] = 3
         menage.loc[menage.tuu == 8, 'strate'] = 4
 
         # Ajout des variables contenues dans la table depmen :
