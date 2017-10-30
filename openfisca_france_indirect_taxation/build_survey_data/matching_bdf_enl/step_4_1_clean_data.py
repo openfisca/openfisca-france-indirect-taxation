@@ -75,21 +75,21 @@ def create_donation_classes():
                         (data['niveau_vie_decile'] == i) & (data['log_indiv'] == log),
                         'donation_class_2'
                         ] = '{}_{}'.format(i,log)
-      
+
         data['donation_class_3'] = 0
         for i in range(1,11):
-            for log in [0,1]:
+            for strate in range(0,5):
                 if i < 5:
                     for j in [0,1]:
                         data.loc[
-                            (data['aides_logement'] == j) & (data['niveau_vie_decile'] == i) & (data['rural'] == log),
+                            (data['aides_logement'] == j) & (data['niveau_vie_decile'] == i) & (data['strate'] == strate),
                             'donation_class_3'
-                            ] = '{}_{}_{}'.format(i,log,j)
+                            ] = '{}_{}_{}'.format(i,strate,j)
                 else:
                     data.loc[
-                        (data['niveau_vie_decile'] == i) & (data['rural'] == log),
+                        (data['niveau_vie_decile'] == i) & (data['strate'] == strate),
                         'donation_class_3'
-                        ] = '{}_{}'.format(i,log)
+                        ] = '{}_{}'.format(i,strate)
 
         data['donation_class_4'] = 0
         for i in range(1,11):

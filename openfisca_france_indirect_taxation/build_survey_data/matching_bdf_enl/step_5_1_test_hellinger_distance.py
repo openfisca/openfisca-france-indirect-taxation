@@ -289,25 +289,25 @@ def hellinger_froid_cout_niveau_vie_decile(data_matched, data_enl):
 
     
 hellinger_froid_niveau_vie_decile_random = (
-    hellinger_froid_niveau_vie_decile(data_matched_random, data_enl)
+    hellinger_froid_niveau_vie_decile(data_matched_distance, data_enl)
     )
 
 hellinger_froid_cout_niveau_vie_decile_random = (
-    hellinger_froid_cout_niveau_vie_decile(data_matched_random, data_enl)
+    hellinger_froid_cout_niveau_vie_decile(data_matched_distance, data_enl)
     )
 
 hellinger_froid_revtot_random = (
-    hellinger_froid_revtot(data_matched_random, data_enl)
+    hellinger_froid_revtot(data_matched_distance, data_enl)
     )
 
 hellinger_froid_surf_random = (
-    hellinger_froid_surfhab_d(data_matched_random, data_enl)
+    hellinger_froid_surfhab_d(data_matched_distance, data_enl)
     )
 
 hellinger_froid_tuu_random = (
-    hellinger_froid_tuu(data_matched_random, data_enl)
+    hellinger_froid_tuu(data_matched_distance, data_enl)
     )
 
 hellinger_froid_zeat_random = (
-    hellinger_froid_zeat(data_matched_random, data_enl)
+    hellinger_froid_zeat(data_matched_distance, data_enl)
     )

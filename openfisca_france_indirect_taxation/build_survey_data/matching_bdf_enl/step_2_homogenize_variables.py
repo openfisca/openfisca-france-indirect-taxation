@@ -197,21 +197,23 @@ def create_new_variables():
         data.loc[data['depenses_electricite'] > 0, 'electricite'] = 1
 
         # Création de dummy variables pour la commune de résidence
+        data['strate'] = 0
+        data.loc[data['tuu'].isin([1, 2, 3]), 'strate'] = 1
+        data.loc[data['tuu'].isin([4, 5, 6]), 'strate'] = 2
+        data.loc[data['tuu'] == 7, 'strate'] = 3
+        data.loc[data['tuu'] == 8, 'strate'] = 4
+
         data['rural'] = 0
         data['petite_ville'] = 0
         data['moyenne_ville'] = 0
         data['grande_ville'] = 0
         data['paris'] = 0
     
-        data.loc[data['tuu'] == 0, 'rural'] = 1
-        data.loc[data['tuu'] == 1, 'petite_ville'] = 1
-        data.loc[data['tuu'] == 2, 'petite_ville'] = 1
-        data.loc[data['tuu'] == 3, 'petite_ville'] = 1
-        data.loc[data['tuu'] == 4, 'moyenne_ville'] = 1
-        data.loc[data['tuu'] == 5, 'moyenne_ville'] = 1
-        data.loc[data['tuu'] == 6, 'moyenne_ville'] = 1
-        data.loc[data['tuu'] == 7, 'grande_ville'] = 1
-        data.loc[data['tuu'] == 8, 'paris'] = 1
+        data.loc[data['strate'] == 0, 'rural'] = 1
+        data.loc[data['strate'] == 1, 'petite_ville'] = 1
+        data.loc[data['strate'] == 2, 'moyenne_ville'] = 1
+        data.loc[data['strate'] == 3, 'grande_ville'] = 1
+        data.loc[data['strate'] == 4, 'paris'] = 1
     
         # Dummy variables pour l'ancienneté du batîment (1er norme importante sur l'isolation en 74)
         data['bat_av_49'] = 0
