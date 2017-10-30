@@ -22,6 +22,26 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn import \
     build_df_calee_on_grospostes, build_df_calee_on_ticpe
 
 
+def age_group(data):
+    data['age_group'] = 6
+    data.loc[data['agepr'] < 70, 'age_group'] = 5
+    data.loc[data['agepr'] < 60, 'age_group'] = 4
+    data.loc[data['agepr'] < 50, 'age_group'] = 3
+    data.loc[data['agepr'] < 40, 'age_group'] = 2
+    data.loc[data['agepr'] < 30, 'age_group'] = 1
+
+    return data
+
+
+def energy_modes(data):
+    data['energy_mode'] = (
+        2 * data['combustibles_liquides']
+        + 1 * data['gaz_ville']
+        - 1 * (data['combustibles_liquides'] * data['gaz_ville'])
+        )
+    return data
+
+
 def simulate(simulated_variables, year):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
