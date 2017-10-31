@@ -162,7 +162,7 @@ class surfhab_d(YearlyVariable):
 
 
 class strate(YearlyVariable):
-    column = FloatCol
+    column = IntCol
     entity = Menage
     label = u"catégorie de la commune de résidence"
 
