@@ -34,6 +34,10 @@ simulated_variables = [
     'combustibles_liquides',
     'gaz_ville',
     'agepr',
+    'isolation_murs',
+    'isolation_fenetres',
+    'nenfants',
+    'ocde10',
     ]
 
 survey_scenario = SurveyScenario.create(
@@ -77,10 +81,27 @@ def net_transfers_by_sub_group(df_reforme, group):
 
     return df_to_plot
 
-# Add something like family size, maybe age group, employment status.
 
-#df_to_plot_strate = net_transfers_by_sub_group(df_reforme, 'strate')
-#df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'combustibles_liquides')
-#df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'gaz_ville')
-#df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'energy_mode')
-df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'age_group')
+if __name__ == "__main__":
+    
+    # Add something like family size, employment status.
+    
+    #df_to_plot_strate = net_transfers_by_sub_group(df_reforme, 'strate')
+    #df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'combustibles_liquides')
+    #df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'gaz_ville')
+    #df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'energy_mode')
+
+    df_reforme['qualite_isolation'] = df_reforme['isolation_fenetres'] * df_reforme['isolation_murs']
+    df_selected = df_reforme.query('qualite_isolation != 0')
+    df_selected.loc[df_selected['qualite_isolation'] == 6, 'qualite_isolation'] = 5
+    df_to_plot = net_transfers_by_sub_group(df_selected, 'qualite_isolation')
+
+    df_reforme['household_size'] = (
+        1 * (df_reforme['ocde10'] == 1)
+        + 2 * (df_reforme['ocde10'] < 2) * (df_reforme['ocde10'] > 1)
+        + 3 * ((df_reforme['ocde10'] == 2) + (df_reforme['ocde10'] > 2))
+        )
+
+    df_to_plot = net_transfers_by_sub_group(df_reforme, 'household_size')
+
+

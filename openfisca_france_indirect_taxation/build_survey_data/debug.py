@@ -26,35 +26,8 @@ survey_scenario = SurveyScenario.create(
     )
 
 simulated_variables = [
-    'depenses_diesel_corrigees',
-    'depenses_essence_corrigees',
-    'depenses_carburants_corrigees',
-    'depenses_combustibles_liquides',
-    'depenses_gaz_ville_officielle_2018_in_2016',
-    'niveau_vie_decile',
-    'ocde10',
-    'nactifs',
-    'revdecm',
-    'niveau_de_vie',
-    'agepr',
-    'pondmen',
+    'isolation_murs',
+    'isolation_fenetres',
     ]
 
 df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
-
-for i in range(1,11):
-    df_nvd = df.query('niveau_vie_decile == {}'.format(i))
-    print df_nvd['depenses_diesel_corrigees'].mean() / df_nvd['depenses_carburants_corrigees'].mean()
-
-
-df_die = df.query('depenses_diesel_corrigees > depenses_essence_corrigees')
-df_ess = df.query('depenses_diesel_corrigees < depenses_essence_corrigees')
-
-print df_die['depenses_carburants_corrigees'].mean()
-print df_ess['depenses_carburants_corrigees'].mean()
-
-print float((df.query('depenses_combustibles_liquides > 0')['pondmen']).sum()) / df['pondmen'].sum()
-print float((df.query('depenses_gaz_ville_officielle_2018_in_2016 > 0')['pondmen']).sum()) / df['pondmen'].sum()
-
-group = 'strate'
-i = 3
