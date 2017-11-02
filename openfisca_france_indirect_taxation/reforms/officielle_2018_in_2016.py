@@ -103,14 +103,14 @@ def modify_legislation_json(reference_legislation_json_copy):
 
 class officielle_2018_in_2016(Reform):
     key = 'officielle_2018_in_2016',
-    name = u"Augmentation des taux de la contribution climat energie aux taux de 2016 sur les données de 2014",
+    name = u"Réforme de la fiscalité des énergies de 2018 par rapport aux taux de 2016",
 
 
     class cheques_energie_integral_inconditionnel_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
         label = u"Montant des chèques énergie (indexés par uc) avec redistribution intégrale et inconditionnelle"
-    
+
         def formula(self, simulation, period):
             revenu_reforme = \
                 simulation.calculate('revenu_reforme_officielle_2018_in_2016', period)
@@ -346,7 +346,7 @@ class officielle_2018_in_2016(Reform):
     class combustibles_liquides_ticpe_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Calcul du montant de TICPE sur le combustibles_liquides domestique après réforme - hausse cce 2014-2016"
+        label = u"Calcul du montant de TICPE sur le combustibles_liquides domestique après réforme"
     
         def formula(self, simulation, period):
             taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
@@ -375,66 +375,10 @@ class officielle_2018_in_2016(Reform):
             return montant_combustibles_liquides_ticpe_ajuste
     
     
-    class contributions_reforme_cce_seulement(YearlyVariable):
-        column = FloatCol
-        entity = Menage
-        label = u"Changement de contribution aux taxes énergétiques suite à la réforme - taxe carbone"
-    
-        def formula(self, simulation, period):
-            total_taxes_energies = simulation.calculate('total_taxes_energies', period)
-            total_taxes_energies_officielle_2018_in_2016 = simulation.calculate('total_taxes_energies_cce_seulement', period)
-
-            contribution = total_taxes_energies_officielle_2018_in_2016 - total_taxes_energies
-
-            return contribution
-
-
-    class contributions_reforme_officielle_2018_in_2016(YearlyVariable):
-        column = FloatCol
-        entity = Menage
-        label = u"Changement de contribution aux taxes énergétiques suite à la réforme - taxe carbone"
-    
-        def formula(self, simulation, period):
-            total_taxes_energies = simulation.calculate('total_taxes_energies', period)
-            total_taxes_energies_officielle_2018_in_2016 = simulation.calculate('total_taxes_energies_officielle_2018_in_2016', period)
-
-            contribution = total_taxes_energies_officielle_2018_in_2016 - total_taxes_energies
-
-            return contribution
-
-
-    class contributions_reforme_officielle_2018_in_2016_plus_cspe(YearlyVariable):
-        column = FloatCol
-        entity = Menage
-        label = u"Changement de contribution aux taxes énergétiques suite à la réforme - taxe carbone"
-    
-        def formula(self, simulation, period):
-            total_taxes_energies = simulation.calculate('total_taxes_energies', period)
-            total_taxes_energies_officielle_2018_in_2016 = simulation.calculate('total_taxes_energies_officielle_2018_in_2016_plus_cspe', period)
-
-            contribution = total_taxes_energies_officielle_2018_in_2016 - total_taxes_energies
-
-            return contribution
-
-
-    class contributions_reforme_rattrapage_integral(YearlyVariable):
-        column = FloatCol
-        entity = Menage
-        label = u"Changement de contribution aux taxes énergétiques suite à la réforme - taxe carbone"
-    
-        def formula(self, simulation, period):
-            total_taxes_energies = simulation.calculate('total_taxes_energies', period)
-            total_taxes_energies_officielle_2018_in_2016 = simulation.calculate('total_taxes_energies_rattrapage_integral', period)
-
-            contribution = total_taxes_energies_officielle_2018_in_2016 - total_taxes_energies
-
-            return contribution
-
-
     class depenses_carburants_corrigees_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Depenses en carburants après reaction a la reforme - taxes carburants"
+        label = u"Depenses en carburants après reaction a la reforme"
 
         def formula(self, simulation, period):
             depenses_diesel_ajustees = simulation.calculate('depenses_diesel_corrigees_officielle_2018_in_2016', period)
@@ -447,7 +391,7 @@ class officielle_2018_in_2016(Reform):
     class depenses_combustibles_liquides_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses en combustibles_liquides après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
+        label = u"Dépenses en combustibles_liquides après réaction à la réforme"
     
         def formula(self, simulation, period):
             depenses_combustibles_liquides = simulation.calculate('depenses_combustibles_liquides', period)
@@ -465,7 +409,7 @@ class officielle_2018_in_2016(Reform):
     class depenses_diesel_corrigees_cce_seulement(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses en diesel après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
+        label = u"Dépenses en diesel après réaction à la réforme"
     
         def formula(self, simulation, period):
             depenses_diesel = simulation.calculate('depenses_diesel_corrigees', period)
@@ -481,7 +425,7 @@ class officielle_2018_in_2016(Reform):
     class depenses_diesel_corrigees_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses en diesel après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
+        label = u"Dépenses en diesel après réaction à la réforme"
     
         def formula(self, simulation, period):
             depenses_diesel = simulation.calculate('depenses_diesel_corrigees', period)
@@ -497,7 +441,7 @@ class officielle_2018_in_2016(Reform):
     class depenses_diesel_corrigees_rattrapage_integral(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses en diesel après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
+        label = u"Dépenses en diesel après réaction à la réforme"
     
         def formula(self, simulation, period):
             depenses_diesel = simulation.calculate('depenses_diesel_corrigees', period)
@@ -568,7 +512,7 @@ class officielle_2018_in_2016(Reform):
     class depenses_energies_logement_officielle_2018_in_2016_plus_cspe(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses en électricité sans inclure dépenses jointes avec le gaz"
+        label = u"Dépenses en énergies logement après réforme avec hausse de la CSPE"
     
         def formula(self, simulation, period):
             depenses_electricite_ajustees = simulation.calculate('depenses_electricite_cspe', period)
@@ -588,7 +532,7 @@ class officielle_2018_in_2016(Reform):
     class depenses_essence_corrigees_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses en essence après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
+        label = u"Dépenses en essence après réaction à la réforme"
     
         def formula(self, simulation, period):
             depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
@@ -604,7 +548,7 @@ class officielle_2018_in_2016(Reform):
     class depenses_gaz_ville_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses en gaz après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
+        label = u"Dépenses en gaz après réaction à la réforme"
     
         def formula(self, simulation, period):
             depenses_gaz_variables = simulation.calculate('depenses_gaz_variables', period)
@@ -630,7 +574,7 @@ class officielle_2018_in_2016(Reform):
     class depenses_tva_taux_plein_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme - cce 2014-2016"
+        label = u"Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme"
     
         def formula(self, simulation, period):
             depenses_tva_taux_plein = simulation.calculate('depenses_tva_taux_plein', period)
@@ -648,7 +592,7 @@ class officielle_2018_in_2016(Reform):
     class depenses_tva_taux_plein_bis_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses sur les biens assujetis à la TVA à taux plei bis après réaction à la réforme - cce 2014-2016"
+        label = u"Dépenses sur les biens assujetis à la TVA à taux plein bis après réaction à la réforme"
     
         def formula(self, simulation, period):
             depenses_tva_taux_plein = simulation.calculate('depenses_tva_taux_plein', period)
@@ -668,7 +612,7 @@ class officielle_2018_in_2016(Reform):
     class depenses_tva_taux_reduit_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses sur les biens assujetis à la TVA à taux reduit après réaction à la réforme - cce 2014-2016"
+        label = u"Dépenses sur les biens assujetis à la TVA à taux reduit après réaction à la réforme"
     
         def formula(self, simulation, period):
             depenses_tva_taux_reduit = simulation.calculate('depenses_tva_taux_reduit', period)
@@ -686,7 +630,7 @@ class officielle_2018_in_2016(Reform):
     class depenses_tva_taux_super_reduit_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Dépenses sur les biens assujetis à la TVA à taux super reduit après réaction à la réforme - cce 2014-2016"
+        label = u"Dépenses sur les biens assujetis à la TVA à taux super reduit après réaction à la réforme"
     
         def formula(self, simulation, period):
             depenses_tva_taux_super_reduit = simulation.calculate('depenses_tva_taux_super_reduit', period)
@@ -880,7 +824,7 @@ class officielle_2018_in_2016(Reform):
     class emissions_CO2_combustibles_liquides_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Emissions de CO2 des ménages via leur conso de fioul après réforme - hausse cce 2014-2016 - en kg de CO2"
+        label = u"Emissions de CO2 des ménages via leur conso de fioul après réforme - en kg de CO2"
     
         def formula(self, simulation, period):
             quantites_combustibles_liquides_ajustees = simulation.calculate('quantites_combustibles_liquides_officielle_2018_in_2016', period)
@@ -974,7 +918,7 @@ class officielle_2018_in_2016(Reform):
     class emissions_CO2_gaz_ville_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Emissions de CO2 des ménages via leur conso de gaz après réforme - hausse cce 2014-2016 - en kg de CO2"
+        label = u"Emissions de CO2 des ménages via leur conso de gaz après réforme - en kg de CO2"
     
         def formula(self, simulation, period):
             quantites_gaz_ajustees = simulation.calculate('quantites_gaz_final_officielle_2018_in_2016', period)
@@ -1040,7 +984,7 @@ class officielle_2018_in_2016(Reform):
     class gains_tva_combustibles_liquides_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Recettes en TVA sur les carburants de la réforme"
+        label = u"Recettes de la réforme en TVA sur les combustibles liquides"
     
         def formula(self, simulation, period):
             taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
@@ -1066,7 +1010,7 @@ class officielle_2018_in_2016(Reform):
     class gains_tva_gaz_ville_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Recettes en TVA sur les carburants de la réforme"
+        label = u"Recettes de la réforme en TVA sur le gaz naturel"
     
         def formula(self, simulation, period):
             taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
@@ -1093,7 +1037,7 @@ class officielle_2018_in_2016(Reform):
     class gains_tva_total_energies_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Recettes en TVA sur toutes les énergies de la réforme"
+        label = u"Recettes de la réforme en TVA sur toutes les énergies"
     
         def formula(self, simulation, period):
             gains_carburants = simulation.calculate('gains_tva_carburants_officielle_2018_in_2016', period)
@@ -1150,8 +1094,8 @@ class officielle_2018_in_2016(Reform):
     class quantites_combustibles_liquides_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Quantités de combustibles_liquides consommées après la réforme - contribution climat énergie, hausse de 2014 à 2016 "
-    
+        label = u"Quantités de combustibles_liquides consommées après la réforme"
+
         def formula(self, simulation, period):
             depenses_combustibles_liquides_officielle_2018_in_2016 = \
                 simulation.calculate('depenses_combustibles_liquides_officielle_2018_in_2016', period)
@@ -1182,7 +1126,7 @@ class officielle_2018_in_2016(Reform):
     class quantites_diesel_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Quantités de diesel consommées après la réforme - contribution climat énergie, hausse de 2014 à 2016"
+        label = u"Quantités de diesel consommées après la réforme"
 
         def formula(self, simulation, period):
             depenses_diesel_officielle_2018_in_2016 = \
@@ -1197,7 +1141,7 @@ class officielle_2018_in_2016(Reform):
     class quantites_diesel_rattrapage_integral(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Quantités de diesel consommées après la réforme - contribution climat énergie, hausse de 2014 à 2016"
+        label = u"Quantités de diesel consommées après la réforme"
     
         def formula(self, simulation, period):
             depenses_diesel_officielle_2018_in_2016 = \
@@ -1240,7 +1184,7 @@ class officielle_2018_in_2016(Reform):
     class quantites_essence_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Quantités d'essence consommées par les ménages après réforme - hausse cce 2014-2016"
+        label = u"Quantités d'essence consommées par les ménages après réforme"
         definition_period = YEAR
     
         def formula_2009(self, simulation, period):
@@ -1270,7 +1214,7 @@ class officielle_2018_in_2016(Reform):
     class quantites_gaz_final_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Quantités de gaz consommées après la réforme - contribution climat énergie, hausse de 2014 à 2016"
+        label = u"Quantités de gaz consommées après la réforme"
     
         def formula(self, simulation, period):
             depenses_gaz_ville_officielle_2018_in_2016 = simulation.calculate('depenses_gaz_ville_officielle_2018_in_2016', period)
@@ -1289,7 +1233,7 @@ class officielle_2018_in_2016(Reform):
     class quantites_sp_e10_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Quantités consommées de sans plomb e10 par les ménages après réforme - hausse cce 2014-2016"
+        label = u"Quantités consommées de sans plomb e10 par les ménages après réforme"
     
         def formula(self, simulation, period):
             depenses_essence_officielle_2018_in_2016 = \
@@ -1306,7 +1250,7 @@ class officielle_2018_in_2016(Reform):
     class quantites_sp95_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Quantités consommées de sans plomb 95 par les ménages après réforme - hausse cce 2014-2016"
+        label = u"Quantités consommées de sans plomb 95 par les ménages après réforme"
     
         def formula(self, simulation, period):
             depenses_essence_officielle_2018_in_2016 = \
@@ -1323,7 +1267,7 @@ class officielle_2018_in_2016(Reform):
     class quantites_sp98_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Quantités consommées de sans plomb 98 par les ménages - hausse cce 2014-2016"
+        label = u"Quantités consommées de sans plomb 98 par les ménages"
     
         def formula(self, simulation, period):
             depenses_essence_officielle_2018_in_2016 = \
@@ -1340,7 +1284,7 @@ class officielle_2018_in_2016(Reform):
     class quantites_super_plombe_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Quantités consommées de super plombé par les ménages après réforme - hausse cce 2014-2016"
+        label = u"Quantités consommées de super plombé par les ménages après réforme"
     
         def formula(self, simulation, period):
             depenses_essence_officielle_2018_in_2016 = \
@@ -1367,6 +1311,28 @@ class officielle_2018_in_2016(Reform):
 
             revenu_reforme = \
                 simulation.calculate('revenu_reforme_officielle_2018_in_2016', period)
+            somme_revenu = numpy.sum(revenu_reforme * pondmen)
+            cheque = simulation.calculate('cheques_energie_officielle_2018_in_2016', period)
+            somme_cheque = numpy.sum(cheque * pondmen)
+            revenu_restant = somme_revenu - somme_cheque
+
+            revenu_uc = revenu_restant / numpy.sum(ocde10 * pondmen)
+            reste_transferts = revenu_uc * ocde10
+
+            return reste_transferts
+
+
+    class reste_transferts_neutre_officielle_2018_in_2016_plus_cspe(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Montant des transferts additionnels à imputer pour avoir une réforme à budget neutre, sans biaiser les effets distributifs"
+    
+        def formula(self, simulation, period):
+            ocde10 = simulation.calculate('ocde10', period)
+            pondmen = simulation.calculate('pondmen', period)
+
+            revenu_reforme = \
+                simulation.calculate('revenu_reforme_officielle_2018_in_2016_plus_cspe', period)
             somme_revenu = numpy.sum(revenu_reforme * pondmen)
             cheque = simulation.calculate('cheques_energie_officielle_2018_in_2016', period)
             somme_cheque = numpy.sum(cheque * pondmen)
@@ -1612,7 +1578,7 @@ class officielle_2018_in_2016(Reform):
         entity = Menage
         label = u"Recettes de l'augmentation de la CSPE sur la consommation d'électricité - ceteris paribus"
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
-    
+
         def formula(self, simulation, period):
             quantites_electricite_ajustees = simulation.calculate('quantites_electricite_selon_compteur_cspe', period)
             reforme_electricite = simulation.legislation_at(period.start).officielle_2018_in_2016.electricite_cspe
@@ -1624,7 +1590,7 @@ class officielle_2018_in_2016(Reform):
     class taxe_gaz_ville_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
-        label = u"Recettes de la hausse de cce 2014-2016 sur la consommation de gaz - ceteris paribus"
+        label = u"Recettes de la taxe sur la consommation de gaz - ceteris paribus"
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
 
         def formula(self, simulation, period):
@@ -1756,10 +1722,6 @@ class officielle_2018_in_2016(Reform):
         self.update_variable(self.cheques_energie_by_energy_officielle_2018_in_2016)
         self.update_variable(self.cheques_energie_ruraux_by_energy_officielle_2018_in_2016)
         self.update_variable(self.combustibles_liquides_ticpe_officielle_2018_in_2016)
-        self.update_variable(self.contributions_reforme_cce_seulement)
-        self.update_variable(self.contributions_reforme_officielle_2018_in_2016)     
-        self.update_variable(self.contributions_reforme_officielle_2018_in_2016_plus_cspe)     
-        self.update_variable(self.contributions_reforme_rattrapage_integral)     
         self.update_variable(self.depenses_carburants_corrigees_officielle_2018_in_2016)
         self.update_variable(self.depenses_combustibles_liquides_officielle_2018_in_2016)
         self.update_variable(self.depenses_diesel_corrigees_cce_seulement)
@@ -1806,6 +1768,7 @@ class officielle_2018_in_2016(Reform):
         self.update_variable(self.quantites_sp98_officielle_2018_in_2016)
         self.update_variable(self.quantites_super_plombe_officielle_2018_in_2016)
         self.update_variable(self.reste_transferts_neutre_officielle_2018_in_2016)
+        self.update_variable(self.reste_transferts_neutre_officielle_2018_in_2016_plus_cspe)
         self.update_variable(self.revenu_reforme_cce_seulement)
         self.update_variable(self.revenu_reforme_officielle_2018_in_2016)
         self.update_variable(self.revenu_reforme_officielle_2018_in_2016_plus_cspe)

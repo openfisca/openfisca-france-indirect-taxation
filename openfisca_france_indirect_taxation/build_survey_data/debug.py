@@ -41,8 +41,3 @@ simulated_variables = [
     ]
 
 df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
-
-df_dec = df.query('niveau_vie_decile == 2')
-print df_dec.query('combustibles_liquides == 1')['depenses_energies_totales'].mean()
-print df_dec.query('gaz_ville == 1')['depenses_energies_totales'].mean()
-print df_dec['depenses_energies_totales'].mean()
