@@ -24,7 +24,7 @@ def estimate_froid():
         'brde_m2_rev_disponible',
         'tee_10_3_deciles_rev_disponible',
         'dip14pr',
-        'electricite',
+        'combustibles_liquides',
         'gaz_ville',
         'isolation_fenetres',
         'isolation_murs',
@@ -38,13 +38,15 @@ def estimate_froid():
         'paris',
         'petite_ville',
         'rural',
+        'strate',
         'surfhab_d',
         'typmen',
+        'rev_disponible',
         ]
 
     simulated_variables = stock_variables + ['quantites_combustibles_liquides', 'quantites_electricite_selon_compteur',
         'quantites_gaz_final', 'niveau_vie_decile',
-        'froid_4_criteres_3_deciles', 'revtot']
+        'froid_4_criteres', 'df_reforme']
 
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
     year = 2014
@@ -64,14 +66,22 @@ def estimate_froid():
     dataframe = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
     dataframe = dataframe.query('niveau_vie_decile < 4')
     
-    dataframe['froid_4_criteres_3_deciles'] = \
-        dataframe['froid_4_criteres_3_deciles'].astype(int)
-    dataframe = dataframe.query('revtot > 0')
+    dataframe['froid_4_criteres'] = \
+        dataframe['froid_4_criteres'].astype(int)
+    dataframe = dataframe.query('rev_disponible > 0')
     dataframe['monoparental'] = 0
     dataframe.loc[dataframe['typmen'] == 2, 'monoparental'] = 1
     
+    # On passe en kWh
+    dataframe['quantites_combustibles_liquides'] = 9.96 * dataframe['quantites_combustibles_liquides']
     
-    #dataframe['part_energies_revtot'] = dataframe['depenses_energies_logement'] / dataframe['revtot']
+    dataframe['quantites_kwh'] = (
+        dataframe['quantites_combustibles_liquides']
+        + dataframe['quantites_gaz_final']
+        + dataframe['quantites_electricite_selon_compteur']
+        )    
+    
+    #dataframe['part_energies_rev_disponible'] = dataframe['depenses_energies_logement'] / dataframe['rev_disponible']
     
     # OLS regression
     new_stock_variables = list(stock_variables)
@@ -94,7 +104,7 @@ def estimate_froid():
                 else:
                     regressors = regressors + ' + {}'.format(element)
 
-            regression_ols = smf.ols(formula = 'froid_4_criteres_3_deciles ~ revtot + \
+            regression_ols = smf.ols(formula = 'froid_4_criteres ~ rev_disponible + \
                 quantites_combustibles_liquides + quantites_electricite_selon_compteur + quantites_gaz_final + {}'.format(regressors),
                 data = dataframe).fit()
             rsquared_adj = regression_ols.rsquared_adj
@@ -106,27 +116,31 @@ def estimate_froid():
 
     # Logisctic regression    
     regressors = [
-        'revtot',
-        'quantites_combustibles_liquides',
-        'quantites_electricite_selon_compteur',
-        'quantites_gaz_final',
+        'quantites_kwh',
+        'rev_disponible',
+        #'quantites_combustibles_liquides',
+        #'quantites_electricite_selon_compteur',
+        #'quantites_gaz_final',
         'isolation_murs',
         'isolation_fenetres',
         'isolation_toit',
         'majorite_double_vitrage',
-        'brde_m2_rev_disponible',
-        'tee_10_3_deciles_rev_disponible',
+        #'brde_m2_rev_disponible',
+        #'tee_10_3_deciles_rev_disponible',
         'ouest_sud',
-        'rural',
-        'paris',
-        'surfhab_d',
-        'aides_logement',
-        'electricite',
+        #'rural',
+        #'paris',
+        #'surfhab_d',
+        #'aides_logement',
+        #'electricite',
         'agepr',
         'npers',
         'monoparental',
-        ]
-    regression_logit = smf.Logit(dataframe['froid_4_criteres_3_deciles'], dataframe[regressors]).fit()
+        'combustibles_liquides',
+        'strate',
+        ]        
+        
+    regression_logit = smf.Logit(dataframe['froid_4_criteres'], dataframe[regressors]).fit()
     
     return regression_ols, regression_logit
 

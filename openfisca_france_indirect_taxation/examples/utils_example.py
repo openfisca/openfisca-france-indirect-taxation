@@ -39,6 +39,8 @@ def energy_modes(data):
         + 1 * data['gaz_ville']
         - 1 * (data['combustibles_liquides'] * data['gaz_ville'])
         )
+    data['energy_mode'] = data['energy_mode'].astype(int)        
+    
     return data
 
 

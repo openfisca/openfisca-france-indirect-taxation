@@ -32,7 +32,8 @@ def effect_reform_cold():
         'quantites_gaz_final',
         'dip14pr',
         'electricite',
-        'froid_4_criteres_3_deciles',
+        'combustibles_liquides',
+        'froid_4_criteres',
         'gaz_ville',
         'isolation_fenetres',
         'isolation_murs',
@@ -47,10 +48,11 @@ def effect_reform_cold():
         'paris',
         'petite_ville',
         'pondmen',
-        'revtot',
+        'rev_disponible',
         'rural',
         'surfhab_d',
         'typmen',
+        'strate',
         ]
 
     variables_reforme = [
@@ -61,7 +63,8 @@ def effect_reform_cold():
         'tee_10_3_deciles_rev_disponible',
         'dip14pr',
         'electricite',
-        'froid_4_criteres_3_deciles',
+        'combustibles_liquides',
+        'froid_4_criteres',
         'gaz_ville',
         'isolation_fenetres',
         'isolation_murs',
@@ -81,10 +84,11 @@ def effect_reform_cold():
         'quantites_electricite_selon_compteur',
         'quantites_gaz_final_officielle_2018_in_2016',
         'reste_transferts_neutre_officielle_2018_in_2016',
-        'revtot',
+        'rev_disponible',
         'rural',
         'surfhab_d',
         'typmen',
+        'strate',
         ]
 
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
@@ -103,9 +107,17 @@ def effect_reform_cold():
     
     df_reference = survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
     df_reforme = survey_scenario.create_data_frame_by_entity(variables_reforme, period = year)['menage']
-    
+
+    # On passe en kWh
+    df_reference['quantites_combustibles_liquides'] = 9.96 * df_reference['quantites_combustibles_liquides']    
+    df_reference['quantites_kwh'] = (
+        df_reference['quantites_combustibles_liquides']
+        + df_reference['quantites_gaz_final']
+        + df_reference['quantites_electricite_selon_compteur']
+        )    
+
     # Reference case :
-    df_reference = df_reference.query('revtot > 0')
+    df_reference = df_reference.query('rev_disponible > 0')
 
     df_reference['monoparental'] = 0
     df_reference.loc[df_reference['typmen'] == 2, 'monoparental'] = 1
@@ -118,7 +130,7 @@ def effect_reform_cold():
     df_reference['predict_proba'] = df_reference['predict_odds'] / (1 + df_reference['predict_odds'])
     df_reference.loc[df_reference['niveau_vie_decile'] > 3, 'predict_proba'] = 0
 
-    # Official reform :
+    # Before revenue recycling :
     df_reforme.rename(
         columns = {
             'quantites_combustibles_liquides_officielle_2018_in_2016': 'quantites_combustibles_liquides',
@@ -127,13 +139,14 @@ def effect_reform_cold():
         inplace = True,
         )
 
-    df_reforme = df_reforme.query('revtot > 0')
-    df_reforme['revtot'] = (
-        df_reforme['revtot'] +
-        df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] +
-        df_reforme['cheques_energie_officielle_2018_in_2016'] -
-        df_reforme['pertes_financieres_avant_redistribution_officielle_2018_in_2016']
-        )
+    df_reforme['quantites_combustibles_liquides'] = 9.96 * df_reforme['quantites_combustibles_liquides']    
+    df_reforme['quantites_kwh'] = (
+        df_reforme['quantites_combustibles_liquides']
+        + df_reforme['quantites_gaz_final']
+        + df_reforme['quantites_electricite_selon_compteur']
+        )    
+
+    df_reforme = df_reforme.query('rev_disponible > 0')
     df_reforme['monoparental'] = 0
     df_reforme.loc[df_reforme['typmen'] == 2, 'monoparental'] = 1
 
@@ -144,15 +157,39 @@ def effect_reform_cold():
     df_reforme['predict_odds'] = np.exp(df_reforme['predict_log_odds'])
     df_reforme['predict_proba'] = df_reforme['predict_odds'] / (1 + df_reforme['predict_odds'])
     df_reforme.loc[df_reforme['niveau_vie_decile'] > 3, 'predict_proba'] = 0
+
+
+    # After revenue recycling :
+    df_reforme_after = df_reforme.copy()
+    df_reforme_after['rev_disponible'] = (
+        df_reforme_after['rev_disponible']
+        + df_reforme_after['reste_transferts_neutre_officielle_2018_in_2016']
+        + df_reforme_after['cheques_energie_officielle_2018_in_2016']
+        - df_reforme_after['pertes_financieres_avant_redistribution_officielle_2018_in_2016']
+        )
+
+    df_reforme_after['predict_log_odds'] = 0
+    for var in explanatory_vars:
+        df_reforme_after['predict_log_odds'] += df_reforme_after[var] * params[var][0]
+
+    df_reforme_after['predict_odds'] = np.exp(df_reforme['predict_log_odds'])
+    df_reforme_after['predict_proba'] = df_reforme_after['predict_odds'] / (1 + df_reforme_after['predict_odds'])
+    df_reforme_after.loc[df_reforme_after['niveau_vie_decile'] > 3, 'predict_proba'] = 0
     
     # Results
     cold['number_cold_reference'] = (df_reference['predict_proba'] * df_reference['pondmen']).sum()
-    cold['number_cold_reforme'] = (df_reforme['predict_proba'] * df_reforme['pondmen']).sum()
-    cold['increase_number_cold'] = cold['number_cold_reforme'] - cold['number_cold_reference']
+    cold['number_cold_reforme_before'] = (df_reforme['predict_proba'] * df_reforme['pondmen']).sum()
+    cold['number_cold_reforme_after'] = (df_reforme_after['predict_proba'] * df_reforme_after['pondmen']).sum()
+
+    cold['increase_number_cold_before'] = cold['number_cold_reforme_before'] - cold['number_cold_reference']
+    cold['increase_number_cold_after'] = cold['number_cold_reforme_after'] - cold['number_cold_reference']
     
     cold['share_cold_reference'] = cold['number_cold_reference'] / df_reference['pondmen'].sum() * 100
-    cold['share_cold_reforme'] = cold['number_cold_reforme'] / df_reforme['pondmen'].sum() * 100
-    cold['increase_share_cold'] = (cold['share_cold_reforme'] - cold['share_cold_reference']) / cold['share_cold_reference'] * 100
+    cold['share_cold_reforme_before'] = cold['number_cold_reforme_before'] / df_reforme['pondmen'].sum() * 100
+    cold['share_cold_reforme_after'] = cold['number_cold_reforme_after'] / df_reforme['pondmen'].sum() * 100
+
+    cold['increase_share_cold_before'] = (cold['share_cold_reforme_before'] - cold['share_cold_reference']) / cold['share_cold_reference'] * 100
+    cold['increase_share_cold_after'] = (cold['share_cold_reforme_after'] - cold['share_cold_reference']) / cold['share_cold_reference'] * 100
 
     return cold
 

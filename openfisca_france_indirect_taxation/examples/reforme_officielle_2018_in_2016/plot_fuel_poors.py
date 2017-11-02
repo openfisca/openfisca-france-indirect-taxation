@@ -11,32 +11,34 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.examples.reforme_officielle_2018_in_2016.number_fuel_poor import number_fuel_poors
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent, graph_builder_bar
+from openfisca_france_indirect_taxation.examples.utils_example import \
+    graph_builder_bar_percent, graph_builder_bar, save_dataframe_to_graph
 
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 
 def plot_effect_reform_fuel_poors():
     types = ['logement', 'transport', 'joint', 'double']
-    statuts = [u'avant reforme', u'officielle - officielle', u'officielle - integrale']
+    statuts = [u'avant reforme', u'avant redistribution', u'apres redistribution']
     dataframe = pd.DataFrame(index = types, columns=statuts)
     dict_precarite = dict()
     (dict_precarite['logement'], dict_precarite['transport'],
         dict_precarite['double'], dict_precarite['joint']) = \
         number_fuel_poors(year, data_year)
     for type_precarite in types:
-        for statut in [u'officielle - officielle', u'officielle - integrale']:
+        for statut in [u'avant redistribution', u'apres redistribution']:
             dataframe[statut][type_precarite] = (
                 dict_precarite[type_precarite]['precarite - ' + statut] -
                 dict_precarite[type_precarite]['precarite - avant reforme']
                 ) / dict_precarite[type_precarite]['precarite - avant reforme']
 
+    save_dataframe_to_graph(dataframe, 'Precarite/effect_reform_fuel_poors.csv')
     graph_builder_bar_percent(dataframe)
 
     
 def plot_number_fuel_poors():
     types = ['logement', 'transport', 'joint', 'double']
-    statuts = [u'avant reforme', u'officielle - officielle', u'officielle - integrale']
+    statuts = [u'avant reforme', u'avant redistribution', u'apres redistribution']
     dataframe = pd.DataFrame(index = types, columns=statuts)
     dict_precarite = dict()
     (dict_precarite['logement'], dict_precarite['transport'],
@@ -48,7 +50,7 @@ def plot_number_fuel_poors():
                 dict_precarite[type_precarite]['precarite - ' + statut]
 
     graph_builder_bar(dataframe, False)
-
+    save_dataframe_to_graph(dataframe, 'Precarite/number_fuel_poors.csv')
 
 def plot_share_fuel_poors():
     survey_scenario = SurveyScenario.create(
@@ -63,7 +65,7 @@ def plot_share_fuel_poors():
     pop_size = df_reforme['pondmen'].sum()
 
     types = ['logement', 'transport', 'joint', 'double']
-    statuts = [u'avant reforme', u'officielle - officielle', u'officielle - integrale']
+    statuts = [u'avant reforme', u'avant redistribution', u'apres redistribution']
     dataframe = pd.DataFrame(index = types, columns=statuts)
     dict_precarite = dict()
     (dict_precarite['logement'], dict_precarite['transport'],
@@ -87,4 +89,3 @@ if __name__ == '__main__':
     plot_effect_reform_fuel_poors()
     plot_number_fuel_poors()
     plot_share_fuel_poors()
-
