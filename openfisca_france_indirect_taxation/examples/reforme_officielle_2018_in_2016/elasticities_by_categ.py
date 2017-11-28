@@ -74,7 +74,6 @@ df['part_carbu'] = (df['depenses_carburants_corrigees'] * df['pondmen']) / (df['
 elas_price_1_ponderee = (df['part_carbu'] * df['elas_price_1_1']).sum()
 elas_exp_1_ponderee = (df['part_carbu'] * df['elas_exp_1']).sum()
 
-
 df['part_housing'] = (df['depenses_energies_logement'] * df['pondmen']) / (df['depenses_energies_logement'] * df['pondmen']).sum()
 elas_price_2_ponderee = (df['part_housing'] * df['elas_price_2_2']).sum()
 elas_exp_2_ponderee = (df['part_housing'] * df['elas_exp_2']).sum()
@@ -87,3 +86,11 @@ elas_price_3_ponderee = (df['part_other'] * df['elas_price_3_3']).sum()
 elas_exp_3_ponderee = (df['part_other'] * df['elas_exp_3']).sum()
 
 categ = 'strate'
+
+positive_elas = df.query('energy_mode != 0').query('elas_price_2_2 == 0')['pondmen'].sum()
+sum_pop = df.query('energy_mode != 0')['pondmen'].sum()
+ratio_positive_elas = float(positive_elas) / sum_pop
+
+conso_null = (df.query('elas_price_2_2 == 0')['depenses_energies_logement'] * df.query('elas_price_2_2 == 0')['pondmen']).sum()
+conso_tot = (df['depenses_energies_logement'] * df['pondmen']).sum()
+ratio_conso = conso_null / conso_tot

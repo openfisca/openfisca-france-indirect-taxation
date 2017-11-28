@@ -26,6 +26,7 @@ inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 simulated_variables = [
     'revenu_reforme_officielle_2018_in_2016',
     'cheques_energie_officielle_2018_in_2016',
+    'cheques_energie_by_energy_officielle_2018_in_2016',
     'reste_transferts_neutre_officielle_2018_in_2016',
     'rev_disp_loyerimput',
     'depenses_tot',
@@ -42,10 +43,10 @@ survey_scenario = SurveyScenario.create(
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-for category in ['strate']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
+for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
     df['transferts_nets_apres_redistribution'] = (
-        df['cheques_energie_officielle_2018_in_2016'] +
+        df['cheques_energie_by_energy_officielle_2018_in_2016'] +
         df['reste_transferts_neutre_officielle_2018_in_2016'] -
         df['revenu_reforme_officielle_2018_in_2016']
         )
@@ -62,4 +63,4 @@ for category in ['strate']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
     graph_builder_bar(df_to_plot['regressivite_revenu'], False)
     graph_builder_bar(df_to_plot['regressivite_depenses'], False)
     graph_builder_bar(df_to_plot['transferts_nets_apres_redistribution'], False)
-    save_dataframe_to_graph(df_to_plot, 'Monetary/transfers_by_{}.csv'.format(category))
+    #save_dataframe_to_graph(df_to_plot, 'Monetary/transfers_by_{}.csv'.format(category))

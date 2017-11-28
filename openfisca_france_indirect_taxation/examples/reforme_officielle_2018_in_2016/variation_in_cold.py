@@ -33,6 +33,7 @@ def estimate_froid():
         'nactifs',
         'nenfants',
         'npers',
+        'niveau_de_vie',
         'ocde10',
         'ouest_sud',
         'paris',
@@ -42,6 +43,9 @@ def estimate_froid():
         'surfhab_d',
         'typmen',
         'rev_disponible',
+        'depenses_tot',
+        'revdecm',
+        'revtot',
         ]
 
     simulated_variables = stock_variables + ['quantites_combustibles_liquides', 'quantites_electricite_selon_compteur',
@@ -80,7 +84,12 @@ def estimate_froid():
         + dataframe['quantites_gaz_final']
         + dataframe['quantites_electricite_selon_compteur']
         )    
-    
+
+    for i in range(0, 5):
+        dataframe['strate_{}'.format(i)] = 0
+        dataframe.loc[dataframe['strate'] == i, 'strate_{}'.format(i)] = 1
+
+
     #dataframe['part_energies_rev_disponible'] = dataframe['depenses_energies_logement'] / dataframe['rev_disponible']
     
     # OLS regression
@@ -117,27 +126,34 @@ def estimate_froid():
     # Logisctic regression    
     regressors = [
         'quantites_kwh',
-        'rev_disponible',
+        #'revdecm',
+        #'revtot',
+        #'rev_disponible',
         #'quantites_combustibles_liquides',
         #'quantites_electricite_selon_compteur',
         #'quantites_gaz_final',
         'isolation_murs',
-        'isolation_fenetres',
-        'isolation_toit',
+        #'isolation_fenetres',
+        #'isolation_toit',
         'majorite_double_vitrage',
+        'niveau_de_vie',
         #'brde_m2_rev_disponible',
         #'tee_10_3_deciles_rev_disponible',
-        'ouest_sud',
+        #'ouest_sud',
         #'rural',
         #'paris',
         #'surfhab_d',
         #'aides_logement',
         #'electricite',
         'agepr',
-        'npers',
-        'monoparental',
+        #'npers',
+        #'monoparental',
         'combustibles_liquides',
-        'strate',
+        'strate_0',
+        #'strate_1',
+        #'strate_2',
+        #'strate_3',
+        #'depenses_tot',
         ]        
         
     regression_logit = smf.Logit(dataframe['froid_4_criteres'], dataframe[regressors]).fit()

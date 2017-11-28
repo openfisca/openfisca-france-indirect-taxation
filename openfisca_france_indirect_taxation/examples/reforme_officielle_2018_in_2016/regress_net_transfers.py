@@ -38,12 +38,19 @@ simulated_variables = [
     'agepr',
     'isolation_murs',
     'isolation_fenetres',
+    'majorite_double_vitrage',
     'nenfants',
     'ocde10',
     'rev_disp_loyerimput',
     'situacj',
     'situapr',
-    'vag',
+    'log_indiv',
+    'bat_av_49',
+    'bat_49_74',
+    'ouest_sud',
+    'surfhab_d',
+    'aides_logement',
+    
     ]
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
@@ -60,10 +67,20 @@ df_reforme = energy_modes(df_reforme)
 df_reforme['rev_disp_loyerimput_2'] = df_reforme['rev_disp_loyerimput'] ** 2
 df_reforme['alone'] = 0 + (1 * df_reforme['situacj'] == 0)
 df_reforme['occupe_both'] = (1 * (df_reforme['situapr'] < 4)) * (1 * (df_reforme['situacj'] < 4))
+for i in range(0, 5):
+    df_reforme['strate_{}'.format(i)] = 0
+    df_reforme.loc[df_reforme['strate'] == i, 'strate_{}'.format(i)] = 1
+
+df_reforme['majorite_double_vitrage'] = 1 * (df_reforme['majorite_double_vitrage'] == 1)
+df_reforme['mauvaise_isolation_fenetres'] = 1 * (df_reforme['isolation_fenetres'] == 1)
+df_reforme['bonne_isolation_murs'] = 1 * (df_reforme['isolation_murs'] == 1)
+df_reforme['mauvaise_isolation_murs'] = 1 * (df_reforme['isolation_murs'] == 3)
+
 
 regression_ols = smf.ols(formula = 'transferts_nets_apres_redistribution ~ \
-    rev_disp_loyerimput + rev_disp_loyerimput_2 + ocde10 + strate + age_group + \
-    alone + occupe_both + combustibles_liquides + gaz_ville + \
-    isolation_murs + isolation_fenetres',
+    rev_disp_loyerimput + rev_disp_loyerimput_2 + \
+    majorite_double_vitrage + mauvaise_isolation_fenetres + mauvaise_isolation_murs + bonne_isolation_murs + \
+    ouest_sud + surfhab_d + aides_logement + agepr + ocde10 + bat_av_49 + bat_49_74 + log_indiv + \
+    combustibles_liquides + gaz_ville + strate_0 + strate_1 + strate_3 + strate_4',
     data = df_reforme).fit()
 print regression_ols.summary()

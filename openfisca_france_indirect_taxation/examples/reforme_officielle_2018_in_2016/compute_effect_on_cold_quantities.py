@@ -42,6 +42,7 @@ def effect_reform_cold():
         'nactifs',
         'nenfants',
         'niveau_vie_decile',
+        'niveau_de_vie',
         'npers',
         'ocde10',
         'ouest_sud',
@@ -73,6 +74,7 @@ def effect_reform_cold():
         'nactifs',
         'nenfants',
         'niveau_vie_decile',
+        'niveau_de_vie',
         'npers',
         'ocde10',
         'ouest_sud',
@@ -121,6 +123,10 @@ def effect_reform_cold():
 
     df_reference['monoparental'] = 0
     df_reference.loc[df_reference['typmen'] == 2, 'monoparental'] = 1
+    for i in range(0, 5):
+        df_reference['strate_{}'.format(i)] = 0
+        df_reference.loc[df_reference['strate'] == i, 'strate_{}'.format(i)] = 1
+
 
     df_reference['predict_log_odds'] = 0
     for var in explanatory_vars:
@@ -149,6 +155,9 @@ def effect_reform_cold():
     df_reforme = df_reforme.query('rev_disponible > 0')
     df_reforme['monoparental'] = 0
     df_reforme.loc[df_reforme['typmen'] == 2, 'monoparental'] = 1
+    for i in range(0, 5):
+        df_reforme['strate_{}'.format(i)] = 0
+        df_reforme.loc[df_reforme['strate'] == i, 'strate_{}'.format(i)] = 1
 
     df_reforme['predict_log_odds'] = 0
     for var in explanatory_vars:

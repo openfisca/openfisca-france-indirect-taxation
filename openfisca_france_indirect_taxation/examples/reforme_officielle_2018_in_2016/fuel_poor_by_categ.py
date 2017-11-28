@@ -29,7 +29,7 @@ def number_fuel_poors_by_categ(df_reforme, group, variables_precarite):
             df_to_plot[variable][i] = \
                 (df[variable] * df['pondmen']).sum() / df['pondmen'].sum()
     
-    save_dataframe_to_graph(df_to_plot, 'Precarite/fuel_poor_by_{}.csv'.format(group))
+    #save_dataframe_to_graph(df_to_plot, 'Precarite/fuel_poor_by_{}.csv'.format(group))
     df_to_plot = df_to_plot.transpose()
     graph_builder_bar_percent(df_to_plot)
 
@@ -94,8 +94,10 @@ if __name__ == '__main__':
         (df_reforme['precarite_logement'] * df_reforme['precarite_transport'])
         )
 
-    variables_precarite = ['brde_m2_logement_rev_disponible', 'tee_10_3_rev_disponible_logement',
-        'brde_m2_transport_rev_disponible', 'tee_10_3_rev_disponible_transport', 'froid_4_criteres_3_deciles']
+    #variables_precarite = ['brde_m2_logement_rev_disponible', 'tee_10_3_rev_disponible_logement',
+    #    'brde_m2_transport_rev_disponible', 'tee_10_3_rev_disponible_transport', 'froid_4_criteres_3_deciles']
+    
+    variables_precarite = ['precarite_joint']
 
     df_to_plot = number_fuel_poors_by_categ(df_reforme, 'strate', variables_precarite)
     df_to_plot = number_fuel_poors_by_categ(df_reforme, 'age_group', variables_precarite)

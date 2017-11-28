@@ -31,8 +31,10 @@ def number_fuel_poors(year, data_year):
         )
     
     simulated_variables = [
+        'cheques_energie_ruraux_officielle_2018_in_2016',
         'cheques_energie_officielle_2018_in_2016',
-        'cheques_energie_integral_inconditionnel_officielle_2018_in_2016',
+        'cheques_energie_by_energy_officielle_2018_in_2016',
+        'cheques_energie_ruraux_by_energy_officielle_2018_in_2016',
         'depenses_carburants_corrigees',
         'depenses_carburants_corrigees_officielle_2018_in_2016',
         'depenses_energies_logement',

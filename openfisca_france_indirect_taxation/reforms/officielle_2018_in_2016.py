@@ -208,6 +208,141 @@ class officielle_2018_in_2016(Reform):
             return cheque
 
 
+    class cheques_energie_ruraux_officielle_2018_in_2016(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Montant des chèques énergie tels que prévus par la loi"
+    
+        def formula(self, simulation, period):
+            revenu_fiscal = simulation.calculate('revdecm', period)
+            ocde10 = simulation.calculate('ocde10', period)
+            pondmen = simulation.calculate('pondmen', period)
+            revenu_fiscal_uc = revenu_fiscal / ocde10
+            strate = simulation.calculate('strate', period)
+            urbains = 1 * (strate > 0)
+
+            eligibles = 1 * (revenu_fiscal_uc < 7700)
+            ruraux_eligibles = (1 - urbains) * eligibles
+            cheque_ruraux = 15 * ruraux_eligibles
+
+            somme_cheques_ruraux = numpy.sum(cheque_ruraux * pondmen)
+
+            cheque = (
+                0 +
+                144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
+                190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
+                227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
+                96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
+                126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
+                152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
+                48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
+                63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
+                76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))              
+                )
+
+            somme_cheques = numpy.sum(cheque * pondmen)
+            ratio_ruraux = somme_cheques_ruraux / somme_cheques
+            
+            cheque_final = (cheque * (1 - ratio_ruraux)) + cheque_ruraux
+
+            return cheque_final
+
+
+    class cheques_energie_by_energy_officielle_2018_in_2016(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Montant des chèques énergie tels que prévus par la loi"
+    
+        def formula(self, simulation, period):
+            revenu_fiscal = simulation.calculate('revdecm', period)
+            ocde10 = simulation.calculate('ocde10', period)
+            pondmen = simulation.calculate('pondmen', period)
+            revenu_fiscal_uc = revenu_fiscal / ocde10
+            combustibles_liquides = simulation.calculate('combustibles_liquides', period)
+            gaz_ville = simulation.calculate('gaz_ville', period)
+            by_energy = 1 * ((combustibles_liquides + gaz_ville) > 0)
+
+            eligibles = 1 * (revenu_fiscal_uc < 7700)
+            eligibles_by_energy = by_energy * eligibles
+            cheque_by_energy = 100 * eligibles_by_energy
+
+            somme_cheques_by_energy = numpy.sum(cheque_by_energy * pondmen)
+
+            cheque = (
+                0 +
+                144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
+                190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
+                227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
+                96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
+                126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
+                152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
+                48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
+                63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
+                76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))              
+                )
+
+            somme_cheques = numpy.sum(cheque * pondmen)
+            ratio_by_energy = somme_cheques_by_energy / somme_cheques
+            
+            cheque_final = (cheque * (1 - ratio_by_energy)) + cheque_by_energy
+
+            return cheque_final
+
+
+    class cheques_energie_ruraux_by_energy_officielle_2018_in_2016(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Montant des chèques énergie tels que prévus par la loi"
+    
+        def formula(self, simulation, period):
+            revenu_fiscal = simulation.calculate('revdecm', period)
+            ocde10 = simulation.calculate('ocde10', period)
+            pondmen = simulation.calculate('pondmen', period)
+            revenu_fiscal_uc = revenu_fiscal / ocde10
+            strate = simulation.calculate('strate', period)
+            urbains = 1 * (strate > 0)
+
+            eligibles = 1 * (revenu_fiscal_uc < 7700)
+            ruraux_eligibles = (1 - urbains) * eligibles
+            cheque_ruraux = 15 * ruraux_eligibles
+
+            somme_cheques_ruraux = numpy.sum(cheque_ruraux * pondmen)
+
+            combustibles_liquides = simulation.calculate('combustibles_liquides', period)
+            gaz_ville = simulation.calculate('gaz_ville', period)
+            by_energy = 1 * ((combustibles_liquides + gaz_ville) > 0)
+            
+            eligibles_by_energy = by_energy * eligibles
+            cheque_by_energy = 100 * eligibles_by_energy
+            somme_cheques_by_energy = numpy.sum(cheque_by_energy * pondmen)
+
+
+            cheque = (
+                0 +
+                144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
+                190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
+                227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
+                96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
+                126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
+                152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
+                48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
+                63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
+                76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))              
+                )
+
+            somme_cheques = numpy.sum(cheque * pondmen)
+            ratio_ruraux = somme_cheques_ruraux / somme_cheques
+            ratio_by_energy = somme_cheques_by_energy / somme_cheques
+            
+            cheque_final = (
+                (cheque * (1 - ratio_ruraux - ratio_by_energy))
+                + cheque_ruraux
+                + cheque_by_energy
+                )
+
+            return cheque_final
+
+
     class combustibles_liquides_ticpe_officielle_2018_in_2016(YearlyVariable):
         column = FloatCol
         entity = Menage
@@ -1617,6 +1752,9 @@ class officielle_2018_in_2016(Reform):
         self.update_variable(self.cheques_energie_integral_inconditionnel_officielle_2018_in_2016)
         self.update_variable(self.cheques_energie_integral_inconditionnel_officielle_2018_in_2016_plus_cspe)
         self.update_variable(self.cheques_energie_integral_inconditionnel_rattrapage_integral)
+        self.update_variable(self.cheques_energie_ruraux_officielle_2018_in_2016)
+        self.update_variable(self.cheques_energie_by_energy_officielle_2018_in_2016)
+        self.update_variable(self.cheques_energie_ruraux_by_energy_officielle_2018_in_2016)
         self.update_variable(self.combustibles_liquides_ticpe_officielle_2018_in_2016)
         self.update_variable(self.contributions_reforme_cce_seulement)
         self.update_variable(self.contributions_reforme_officielle_2018_in_2016)     
