@@ -28,40 +28,21 @@ survey_scenario = SurveyScenario.create(
     )
 
 simulated_variables = [
-    'isolation_murs',
-    'isolation_fenetres',
+    'cheques_energie_ruraux_officielle_2018_in_2016',
+    'cheques_energie_officielle_2018_in_2016',
+    'cheques_energie_combustibles_liquides_officielle_2018_in_2016',
+    'cheques_energie_ruraux_combustibles_liquides_officielle_2018_in_2016',
+    'strate',
+    'combustibles_liquides',
+    'pondmen',
+    'depenses_energies_totales',
+    'gaz_ville',
+    'niveau_vie_decile',
     ]
 
 df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-print df_reforme['rev_disponible'].mean()
-print df_reforme['depenses_energies_logement_officielle_2018_in_2016'].mean()
-
-df_reforme['tee'] = ((df_reforme['depenses_carburants_corrigees_officielle_2018_in_2016'] / df_reforme['rev_disponible']) > 0.1)*1
-
-bibi = df_reforme[['tee_10_3_rev_disponible_transport_bis'] + ['tee_10_3_rev_disponible_transport'] + ['niveau_vie_decile']]
-
-bibi['tee'] = bibi['tee_10_3_rev_disponible_transport'] + bibi['tee_10_3_rev_disponible_transport_bis']
-
-bibi = bibi.query('tee > 0')
-
-print df_reforme['']
-
-
-dataframe_bis = dataframe_bis.rename(columns={
-    'depenses_carburants_corrigees_officielle_2018_in_2016': 'depenses_carburants_corrigees_officielle_2018_in_2016_bis',
-    'rev_disponible': 'rev_disponible_bis',
-    'tee_10_3_rev_disponible_transport': 'tee_10_3_rev_disponible_transport_bis'
-    })
-
-difi = pandas.concat([dataframe, dataframe_bis], axis = 1)
-difi['tee'] = difi['tee_10_3_rev_disponible_transport'] + difi['tee_10_3_rev_disponible_transport_bis']
-difi_bis = difi.query('tee > 0')
-difi_bis_bis = difi_bis.query('ere_bis < 0.1')
-del difi['tee']
-
-difi['ere'] = difi['depenses_carburants_corrigees_officielle_2018_in_2016'] / difi['rev_disponible']
-difi['ere_bis'] = difi['depenses_carburants_corrigees_officielle_2018_in_2016_bis'] / difi['rev_disponible_bis']
-
-
-bibi = df_reforme.query('ere_carbu_before < ere_carbu_after')
+df_dec = df.query('niveau_vie_decile == 2')
+print df_dec.query('combustibles_liquides == 1')['depenses_energies_totales'].mean()
+print df_dec.query('gaz_ville == 1')['depenses_energies_totales'].mean()
+print df_dec['depenses_energies_totales'].mean()
