@@ -100,6 +100,18 @@ class depenses_totales(YearlyVariable):
             )
 
 
+class distance_routiere_hebdomadaire_teg(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Distance routière parcourue par le ménage pour se rendre à son teg par semaine"
+
+
+class duree_moyenne_trajet_aller_retour_teg(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Durée moyenne de l'aller-retour pour le teg"
+
+
 class quantite_diesel(YearlyVariable):
     column = FloatCol
     entity = Menage

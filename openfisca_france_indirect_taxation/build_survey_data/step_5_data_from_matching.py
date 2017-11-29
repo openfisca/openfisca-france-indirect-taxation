@@ -52,9 +52,10 @@ data_matched_enl = data_matched_enl[
     ]
 
 data_matched_entd = data_matched_entd[
-    ['distance'] + ['distance_diesel'] + ['distance_essence'] +
-    ['depenses_carburants_corrigees_entd'] + ['depenses_diesel_corrigees_entd'] +
-    ['depenses_essence_corrigees_entd'] + ['ident_men']
+    ['age_carte_grise'] + ['age_vehicule'] + ['distance'] + ['distance_diesel'] + ['distance_essence'] +
+    ['distance_routiere_hebdomadaire_teg'] + ['depenses_carburants_corrigees_entd'] + ['depenses_diesel_corrigees_entd'] +
+    ['depenses_essence_corrigees_entd'] + ['duree_moyenne_trajet_aller_retour_teg'] + ['ident_men'] +
+    ['mode_principal_deplacement_teg'] + ['vp_deplacements_pro'] + ['vp_domicile_travail']
     ]
 
 data_matched_erfs = data_matched_erfs[['revdecm'] + ['ident_men']]

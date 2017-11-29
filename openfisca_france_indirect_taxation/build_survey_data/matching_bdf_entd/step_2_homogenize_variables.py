@@ -7,12 +7,12 @@
 
 import numpy as np
 
-from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_1_2_build_dataframes_vehicles import \
-    build_df_menages_vehicles
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_1_3_build_dataframes_indiv_teg import \
+    merge_indiv_teg_menage
 
 
 def homogenize_variables_definition_bdf_entd():
-    data = build_df_menages_vehicles()    
+    data = merge_indiv_teg_menage()    
     data_entd = data[0]
     data_bdf = data[1]
     

@@ -29,6 +29,18 @@ from __future__ import division
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
+class age_carte_grise(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"âge de la carte grise du véhicule principal"
+
+
+class age_vehicule(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"âge du véhicule principal"
+
+
 class aides_logement(YearlyVariable):
     column = FloatCol
     entity = Menage
@@ -189,6 +201,18 @@ class vag(YearlyVariable):
     column = FloatCol
     entity = Menage
     label = u"numéro de la vague d'interrogation du ménage"
+
+
+class vp_deplacements_pro(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Le ménage utilise son véhicule particulier pour ses déplacements pro"
+
+
+class vp_domicile_travail(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Le ménage utilise son véhicule particulier pour se rendre à son travail"
 
 
 class zeat(YearlyVariable):
