@@ -43,6 +43,7 @@ simulated_variables = [
     'pondmen',
     'strate',
     'agepr',
+    'ocde10'
     ]
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
@@ -61,7 +62,7 @@ def emissions_by_categ(data, categ):
     for element in range(min_categ, max_categ+1):
         df = data.query('{0} == {1}'.format(categ, element))
         df_to_plot['emissions_CO2'][element] = \
-            (df['emissions_CO2_energies_totales'] * df['pondmen']).sum() / df['pondmen'].sum()
+            (df['emissions_CO2_energies_totales'] / df['ocde10'] * df['pondmen']).sum() / df['pondmen'].sum()
 
     graph_builder_bar(df_to_plot, False)
     save_dataframe_to_graph(df_to_plot, 'Emissions/co2_emissions_by_{}.csv'.format(categ))

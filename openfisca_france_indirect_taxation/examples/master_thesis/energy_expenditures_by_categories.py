@@ -17,7 +17,12 @@ inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 elasticities = get_elasticities(data_year)
 
-simulated_variables = ['depenses_energies_totales', 'depenses_energies_logement', 'depenses_carburants_corrigees'] #['depenses_energies', 'depenses_energies_logement', 'poste_coicop_722']
+simulated_variables = [
+    'depenses_energies_totales',
+    'depenses_energies_logement',
+    'depenses_carburants_corrigees',
+    'ocde10'
+    ]
 
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
@@ -28,11 +33,18 @@ survey_scenario = SurveyScenario.create(
     )
 for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
-    df.rename(columns = {'depenses_energies_totales': 'Total energy expenditures',
-        'depenses_energies_logement': 'Housing energy expenditures',
-        'depenses_carburants_corrigees': 'Fuel expenditures'},
+
+    df['depenses_energies_totales_uc'] = df['depenses_energies_totales'] / df['ocde10'] 
+    df['depenses_energies_logement_uc'] = df['depenses_energies_logement'] / df['ocde10']
+    df['depenses_carburants_corrigees_uc'] = df['depenses_carburants_corrigees'] / df['ocde10']
+
+    df = df[['depenses_energies_totales_uc'] + ['depenses_energies_logement_uc'] + ['depenses_carburants_corrigees_uc']]    
+    
+    df.rename(columns = {'depenses_energies_totales_uc': 'Total energy expenditures',
+        'depenses_energies_logement_uc': 'Housing energy expenditures',
+        'depenses_carburants_corrigees_uc': 'Fuel expenditures'},
         inplace = True)
 
     # Réalisation de graphiques
     graph_builder_bar(df, False)
-    save_dataframe_to_graph(df, 'Expenditures/energy_expenditures_by_{}.csv'.format(category))
+    save_dataframe_to_graph(df, 'Expenditures/energy_expenditures_by_uc_by_{}.csv'.format(category))

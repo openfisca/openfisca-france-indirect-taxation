@@ -30,6 +30,7 @@ simulated_variables = [
     'reste_transferts_neutre_officielle_2018_in_2016',
     'rev_disp_loyerimput',
     'depenses_tot',
+    'ocde10',
     #'cheques_energie_integral_inconditionnel_officielle_2018_in_2016',
     ]
 
@@ -45,11 +46,11 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 
 for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
-    df['transferts_nets_apres_redistribution'] = (
-        df['cheques_energie_by_energy_officielle_2018_in_2016'] +
+    df['transferts_nets_apres_redistribution_uc'] = (
+        df['cheques_energie_officielle_2018_in_2016'] +
         df['reste_transferts_neutre_officielle_2018_in_2016'] -
         df['revenu_reforme_officielle_2018_in_2016']
-        )
+        ) / df['ocde10']
 
     df['regressivite_revenu'] = df['revenu_reforme_officielle_2018_in_2016'] / df['rev_disp_loyerimput']
     df['regressivite_depenses'] = df['revenu_reforme_officielle_2018_in_2016'] / df['depenses_tot']
@@ -58,9 +59,9 @@ for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 's
     df_to_plot = df[
         ['regressivite_revenu'] +
         ['regressivite_depenses'] +
-        ['transferts_nets_apres_redistribution']
+        ['transferts_nets_apres_redistribution_uc']
         ]
     graph_builder_bar(df_to_plot['regressivite_revenu'], False)
     graph_builder_bar(df_to_plot['regressivite_depenses'], False)
-    graph_builder_bar(df_to_plot['transferts_nets_apres_redistribution'], False)
-    #save_dataframe_to_graph(df_to_plot, 'Monetary/transfers_by_{}.csv'.format(category))
+    graph_builder_bar(df_to_plot['transferts_nets_apres_redistribution_uc'], False)
+    save_dataframe_to_graph(df_to_plot, 'Monetary/transfers_by_{}.csv'.format(category))

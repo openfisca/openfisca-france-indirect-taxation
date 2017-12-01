@@ -56,11 +56,11 @@ df_reforme = energy_modes(df_reforme)
 
 def net_transfers_by_sub_group(df_reforme, group):
 
-    df_reforme['transferts_nets_apres_redistribution'] = (
+    df_reforme['transferts_nets_apres_redistribution_uc'] = (
         df_reforme['cheques_energie_officielle_2018_in_2016'] +
         df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
         df_reforme['revenu_reforme_officielle_2018_in_2016']
-        )
+        ) / df_reforme['ocde10']
 
     df_reforme[group] = df_reforme[group].astype(int)
 
@@ -74,22 +74,21 @@ def net_transfers_by_sub_group(df_reforme, group):
         for decile in deciles:
             df = df_reforme.query('{0} == {1}'.format(group, element)).query('niveau_vie_decile == {}'.format(decile))
             df_to_plot[element][decile] = \
-                (df['transferts_nets_apres_redistribution'] * df['pondmen']).sum() / df['pondmen'].sum()
+                (df['transferts_nets_apres_redistribution_uc'] * df['pondmen']).sum() / df['pondmen'].sum()
 
     graph_builder_bar(df_to_plot, False)
-    #save_dataframe_to_graph(df_to_plot, 'Monetary/heterogeneity_transfers_by_{}.csv'.format(group))
+    save_dataframe_to_graph(df_to_plot, 'Monetary/heterogeneity_transfers_by_uc_by_{}.csv'.format(group))
 
     return df_to_plot
 
 
 if __name__ == "__main__":
     
-    # Add something like family size, employment status.
-    
-    #df_to_plot_strate = net_transfers_by_sub_group(df_reforme, 'strate')
-    #df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'combustibles_liquides')
-    #df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'gaz_ville')
-    #df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'energy_mode')
+    df_to_plot_strate = net_transfers_by_sub_group(df_reforme, 'strate')
+    df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'combustibles_liquides')
+    df_to_plot_gaz_ville = net_transfers_by_sub_group(df_reforme, 'gaz_ville')
+    df_to_plot_energy_mode = net_transfers_by_sub_group(df_reforme, 'energy_mode')
+    df_to_plot_age = net_transfers_by_sub_group(df_reforme, 'age_group')
 
     df_reforme['qualite_isolation'] = df_reforme['isolation_fenetres'] * df_reforme['isolation_murs']
     df_selected = df_reforme.query('qualite_isolation != 0')

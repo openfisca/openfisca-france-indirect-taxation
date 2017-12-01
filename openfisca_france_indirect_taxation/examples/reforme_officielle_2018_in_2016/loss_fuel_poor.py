@@ -43,6 +43,7 @@ simulated_variables = [
     'cheques_energie_ruraux_by_energy_officielle_2018_in_2016',
     'reste_transferts_neutre_officielle_2018_in_2016',
     'niveau_vie_decile',
+    'ocde10',
     'pondmen',
     'precarite_energetique_rev_disponible',
     'precarite_transports_rev_disponible',
@@ -51,10 +52,10 @@ simulated_variables = [
 
 def distribution_pertes_precaires(df_precaires):
     quantiles = [0.1, 0.25, 0.5, 0.75, 0.9]
-    df_to_plot = pd.DataFrame(index = quantiles, columns = ['transfert_net_cheque_officiel'])
+    df_to_plot = pd.DataFrame(index = quantiles, columns = ['transfert_net_cheque_officiel_uc'])
     for i in quantiles:
-        df_to_plot['transfert_net_cheque_officiel'][i] = \
-            df_precaires['transfert_net_cheque_officiel'].quantile(i)
+        df_to_plot['transfert_net_cheque_officiel_uc'][i] = \
+            df_precaires['transfert_net_cheque_officiel_uc'].quantile(i)
     
     graph_builder_bar(df_to_plot, False)
     #save_dataframe_to_graph(df_to_plot, 'Monetary/losses_among_fuel_poors.csv')
@@ -64,12 +65,12 @@ def distribution_pertes_precaires(df_precaires):
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-df_reforme[u'transfert_net_cheque_officiel'] = (
+df_reforme[u'transfert_net_cheque_officiel_uc'] = (
     df_reforme['cheques_energie_ruraux_by_energy_officielle_2018_in_2016']
     + df_reforme['reste_transferts_neutre_officielle_2018_in_2016']
     - df_reforme['revenu_reforme_officielle_2018_in_2016'] 
-    )
-df_reforme['perdant_fiscal_cheque_officiel'] = 1 * (df_reforme['transfert_net_cheque_officiel'] < 0)
+    ) / df_reforme['ocde10']
+df_reforme['perdant_fiscal_cheque_officiel'] = 1 * (df_reforme['transfert_net_cheque_officiel_uc'] < 0)
 
 df_reforme['precarite_jointe'] = (
     1 * ((df_reforme['precarite_energetique_rev_disponible'] + df_reforme['precarite_transports_rev_disponible']) > 0)
@@ -80,5 +81,6 @@ df_precaires_transports = df_reforme.query('precarite_transports_rev_disponible 
 df_precaires_logement = df_reforme.query('precarite_energetique_rev_disponible == 1')
 
 df_to_plot = distribution_pertes_precaires(df_precaires_joint)
+print df_to_plot
 #df_to_plot = distribution_pertes_precaires(df_precaires_transports)
 #df_to_plot = distribution_pertes_precaires(df_precaires_logement)
