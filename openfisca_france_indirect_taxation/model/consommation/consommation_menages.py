@@ -100,6 +100,12 @@ class depenses_totales(YearlyVariable):
             )
 
 
+class distance(YearlyVariable):
+    column = FloatCol
+    entity = Menage
+    label = u"Distance annuelle parcourue imputée de l'ENTD"
+
+
 class distance_routiere_hebdomadaire_teg(YearlyVariable):
     column = FloatCol
     entity = Menage

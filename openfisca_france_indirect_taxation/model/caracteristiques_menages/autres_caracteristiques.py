@@ -179,6 +179,12 @@ class strate(YearlyVariable):
     label = u"catégorie de la commune de résidence"
 
 
+class stalog(YearlyVariable):
+    column = IntCol
+    entity = Menage
+    label = u"Statut du logement (1 = propriétaire)"
+
+
 class tchof(YearlyVariable):
     column = FloatCol
     entity = Menage

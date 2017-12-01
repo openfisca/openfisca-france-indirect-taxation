@@ -46,7 +46,6 @@ def homogenize_variables_definition_bdf_enl():
     
     data_bdf['aba'] = data_bdf['aidlog1'] + data_bdf['aidlog2']
     del check
-
     
     # Montant des aides au logement : séparation propriétaire/locataire dans BdF -> création d'une unique variable
     for i in [1, 2]:
@@ -57,6 +56,12 @@ def homogenize_variables_definition_bdf_enl():
     data_bdf['amr'] = data_bdf['mall1'] + data_bdf['mall2']
     del data_bdf['aidlog1'], data_bdf['aidlog2'], data_bdf['mall1'], data_bdf['mall2'], check
     
+    # Définition du statut du logement
+    data_enl['stalog'] = 0
+    data_enl.loc[data_enl.soc == 0, 'stalog'] = 1
+    data_enl.loc[data_enl.soc == 1, 'stalog'] = 2
+    data_enl.loc[data_enl.soc == 2, 'stalog'] = 3
+    data_enl.loc[data_enl.soc == 3, 'stalog'] = 4
     
     # Les définitions du ménage dans BdF et ENL sont différentes : 
     # on exclut les catégories absentes de BdF (logements-foyers pour personnes âgées

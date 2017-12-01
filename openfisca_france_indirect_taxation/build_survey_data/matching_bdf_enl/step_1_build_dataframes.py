@@ -97,6 +97,7 @@ def load_data_bdf_enl():
         'revtot', # revenu total
         'situapr', # situation pro
         'situacj',
+        'stalog',
         'surfhab_d', # surface habitable
         'tau',
         'tuu',
@@ -153,8 +154,10 @@ def load_data_bdf_enl():
         'mrtota2',
         'msitua',
         'msituac',
+        'mtypmena',
         'muc1',
         'qex',
+        'soc',
         'tau2010',
         'tu2010',
         'zeat',
