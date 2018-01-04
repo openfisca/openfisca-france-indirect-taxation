@@ -88,8 +88,11 @@ for year in [2000, 2005, 2011]:
     ## Construction de groupes de préférences
     aggregates_data_frame['zeat'] = aggregates_data_frame['zeat'].astype(str)
     aggregates_data_frame['strate'] = aggregates_data_frame['strate'].astype(str)
-    aggregates_data_frame['preference_group'] = aggregates_data_frame['zeat'] + '_' + aggregates_data_frame['strate']
-    
+    aggregates_data_frame['ocde10'] = aggregates_data_frame['ocde10'].astype(str)
+    aggregates_data_frame['preference_group'] = aggregates_data_frame['zeat'] + '_' + aggregates_data_frame['strate'] + '_' + aggregates_data_frame['ocde10']
+
+    aggregates_data_frame['ocde10'] = aggregates_data_frame['ocde10'].astype(float)
+
     data_preference_group = aggregates_data_frame[produits + ['vag', 'identifiant_menage', 'depenses_autre', 'depenses_carbu',
         'depenses_logem', 'preference_group']].copy()
     data_preference_group[produits + ['depenses_autre', 'depenses_carbu', 'depenses_logem']] = \
@@ -99,12 +102,6 @@ for year in [2000, 2005, 2011]:
     data_preference_group = data_preference_group[['vag', 'identifiant_menage', 'preference_group']]
 
     data_conso_group = pd.merge(data_preference_group, data_conso_group, on = 'preference_group', how = 'left')
-
-    ###############
-    # tentative de construction d'indices de prix par groupes de préférences
-    ## Construction de groupes de préférences
-
-    ###############
 
     # On renverse la dataframe pour obtenir une ligne pour chaque article consommé par chaque personne
     df = pd.melt(data_conso_group, id_vars = ['vag', 'identifiant_menage'], value_vars=produits,
@@ -168,7 +165,7 @@ for year in [2000, 2005, 2011]:
     # Les parts des biens dans leur catégorie permettent de construire des indices de prix pondérés (Cf. Lewbel)
     df_depenses_prix['indice_prix_pondere'] = 0
     # On utilise les contrats imputés pour affiner les prix du gaz et de l'électricité
-    df_depenses_prix = price_energy_from_contracts(df_depenses_prix, year)
+    #df_depenses_prix = price_energy_from_contracts(df_depenses_prix, year)
     df_depenses_prix['indice_prix_pondere'] = df_depenses_prix['part_bien_categorie'] * df_depenses_prix['prix']
 
     # grouped donne l'indice de prix pondéré pour chacune des deux catégories pour chaque individu
@@ -276,6 +273,9 @@ for year in [2000, 2005, 2011]:
 
     data_frame_all_years = pd.concat([data_frame_all_years, data_frame_for_reg])
     data_frame_all_years.fillna(0, inplace = True)
+    
+    data_frame_all_years['year_2000'] = 1 * (data_frame_all_years['year'] == 2000)
+    data_frame_all_years['year_2005'] = 1 * (data_frame_all_years['year'] == 2005)
 
     data_frame_for_reg.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
     'quaids', 'data_frame_energy_no_alime_{}_preference_groups.csv'.format(year)), sep = ',')
@@ -287,4 +287,4 @@ dataframe['zeat'] = dataframe['zeat'].astype(int)
 dataframe['strate'] = dataframe['strate'].astype(int)
 dataframe['vag'] = dataframe['vag'].astype(int)
 
-test_pref = dataframe.query('zeat == 6').query('strate == 3').query('vag == 24')
+test_pref = dataframe.query('zeat == 6').query('strate == 3').query('vag == 24').query('ocde10 == 1.8')
