@@ -11,7 +11,8 @@ import pkg_resources
 
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import \
-    add_area_dummy, add_stalog_dummy, add_vag_dummy, electricite_only, indices_prix_carbus, price_carbu_pond, \
+    add_area_dummy, add_niveau_vie_decile, add_stalog_dummy, add_vag_dummy, \
+    electricite_only, indices_prix_carbus, price_carbu_pond, \
     price_carbu_from_quantities, price_energy_from_contracts
 
 
@@ -187,7 +188,8 @@ for year in [2000, 2005, 2011]:
     # On récupère les informations importantes sur les ménages, dont les variables démographiques
 
     variables_menages = ['agepr', 'depenses_autre', 'depenses_carbu',
-        'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'ident_men', 'identifiant_menage', 'nenfants', 'nactifs', 'ocde10',
+        'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'ident_men', 'identifiant_menage',
+        'nactifs', 'nenfants', 'ocde10', 'pondmen', 'rev_disponible',
         'revtot', 'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
         'veh_essence']
     if year == 2011:
@@ -223,7 +225,7 @@ for year in [2000, 2005, 2011]:
     dataframe['diesel'] = 1 * (dataframe['veh_diesel'] > 0)
 
     dataframe = dataframe[['ident_men', 'identifiant_menage', 'part_carbu', 'part_logem', 'part_autre', 'prix_carbu', 'prix_logem',
-        'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'elect_only', 'nactifs', 'nenfants',
+        'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'elect_only', 'nactifs', 'nenfants', 'ocde10', 'pondmen', 'rev_disponible', 'revtot',
         'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel', 'veh_essence', 'diesel'] + variables_imputees]
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
@@ -247,7 +249,8 @@ for year in [2000, 2005, 2011]:
     dataframe = add_area_dummy(dataframe)
     dataframe = add_stalog_dummy(dataframe)
     dataframe = add_vag_dummy(dataframe)
-
+    dataframe = add_niveau_vie_decile(dataframe)
+    
     data_frame_for_reg = dataframe.rename(columns = {'part_carbu': 'w1', 'part_logem': 'w2',
         'part_autre': 'w3', 'prix_carbu': 'p1', 'prix_logem': 'p2', 'prix_autre': 'p3'})
 
