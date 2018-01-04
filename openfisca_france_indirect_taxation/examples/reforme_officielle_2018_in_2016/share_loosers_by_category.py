@@ -38,6 +38,7 @@ simulated_variables = [
     'revenu_reforme_officielle_2018_in_2016',
     'pertes_financieres_avant_redistribution_officielle_2018_in_2016',
     'cheques_energie_officielle_2018_in_2016',
+    'cheques_energie_by_energy_officielle_2018_in_2016',
     'reste_transferts_neutre_officielle_2018_in_2016',
     'niveau_vie_decile',
     'pondmen',

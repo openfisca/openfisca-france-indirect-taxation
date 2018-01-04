@@ -17,7 +17,7 @@ from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitS
 
 def estimate_froid():
     data_enl = create_niveau_vie_quantiles()[0]
-            
+
     data_enl = data_enl.query('niveau_vie_decile < 4')
     data_enl['froid_4_criteres_3_deciles'] = (
         data_enl['froid_cout'] + data_enl['froid_isolation'] + data_enl['froid_impaye'] + data_enl['froid_installation']
@@ -134,6 +134,9 @@ def estimate_froid():
     data_enl['proprietaire'] = 0
     data_enl.loc[data_enl.stalog.isin([1,2]), 'proprietaire'] = 1
     
+    data_enl['etudiant'] = 0
+    data_enl.loc[data_enl.situapr == 3, 'etudiant'] = 1
+    
     data_enl['monoparental'] = 0
     data_enl.loc[data_enl.mtypmena.isin([31,32]), 'monoparental'] = 1
 
@@ -155,6 +158,7 @@ def estimate_froid():
             'ouest_sud' : 'Ouest_south',
             'surfhab_d' : 'Living_area_m2',
             'aides_logement' : 'Housing_benefits',
+            'etudiant': 'Student',
             'agepr' : 'Age_representative',
             'agepr_2' : 'Age_representative_squared',
             'nactifs' : 'Number_in_labor_force',
@@ -177,6 +181,7 @@ def estimate_froid():
         'Majority_double_glazing',
         'Building_before_1949',
         'Building_1949_74',
+        'Owner',
         'Individual_housing',
         'Living_area_m2',
         'Consumption_units',
@@ -189,6 +194,7 @@ def estimate_froid():
         'Ouest_south',
         'Domestic_fuel',
         'Natural_gas',
+        'Student',
         'Age_representative',
         'Age_representative_squared',
         'Monoparental',

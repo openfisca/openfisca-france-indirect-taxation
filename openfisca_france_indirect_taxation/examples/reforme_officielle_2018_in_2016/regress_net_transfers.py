@@ -56,7 +56,8 @@ simulated_variables = [
     'distance_routiere_hebdomadaire_teg',
     'duree_moyenne_trajet_aller_retour_teg',
     'age_vehicule',
-    'stalog'
+    'stalog',
+    'situapr',
     ]
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
@@ -89,6 +90,9 @@ df_reforme.loc[df_reforme['typmen'] == 2, 'monoparental'] = 1
 df_reforme['proprietaire'] = 0
 df_reforme.loc[df_reforme.stalog.isin([1, 2]), 'proprietaire'] = 1
 
+df_reforme['etudiant'] = 0
+df_reforme.loc[df_reforme.situapr == 3, 'etudiant'] = 1
+
 df_reforme['distance_routiere_hebdomadaire_teg'] = (
     df_reforme['distance_routiere_hebdomadaire_teg'] * (df_reforme['distance'] > 0)
     )
@@ -113,6 +117,7 @@ df_reforme.rename(
         'ouest_sud' : 'Ouest_south',
         'surfhab_d' : 'Living_area_m2',
         'aides_logement' : 'Housing_benefits',
+        'etudiant': 'Student',
         'agepr' : 'Age_representative',
         'agepr_2' : 'Age_representative_squared',
         'nactifs' : 'Number_in_labor_force',
@@ -134,7 +139,7 @@ regression_ols = smf.ols(formula = 'Net_transfers_by_cu_after_recycling ~ \
     Majority_double_glazing + Bad_walls_isolation + Good_walls_isolation + \
     Building_before_1949 + Building_1949_74 + Individual_housing + Owner + \
     Living_area_m2 + Housing_benefits + \
-    Consumption_units + Monoparental + Number_in_labor_force + Age_representative + Age_representative_squared + \
+    Consumption_units + Monoparental + Number_in_labor_force + Student + Age_representative + Age_representative_squared + \
     Share_distance_to_work + Vehicule_age',
     data = df_reforme).fit()
 print regression_ols.summary()

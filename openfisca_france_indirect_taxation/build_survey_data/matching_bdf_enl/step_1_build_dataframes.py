@@ -120,6 +120,7 @@ def load_data_bdf_enl():
         'coml42',
         'dom',
         'enfhod',
+        'kusa_5',
         'gchauf_1', #raisons du froid dans le logement
         'gchauf_2',
         'gchauf_3',
