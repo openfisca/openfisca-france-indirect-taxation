@@ -85,11 +85,29 @@ for year in [2000, 2005, 2011]:
         aggregates_data_frame['depenses_tot'] - aggregates_data_frame['depenses_carbu'] -
         aggregates_data_frame['depenses_logem'])
 
-    data_conso = aggregates_data_frame[produits + ['vag', 'identifiant_menage', 'depenses_autre', 'depenses_carbu',
-        'depenses_logem']].copy()
+    ## Construction de groupes de préférences
+    aggregates_data_frame['zeat'] = aggregates_data_frame['zeat'].astype(str)
+    aggregates_data_frame['strate'] = aggregates_data_frame['strate'].astype(str)
+    aggregates_data_frame['preference_group'] = aggregates_data_frame['zeat'] + '_' + aggregates_data_frame['strate']
+    
+    data_preference_group = aggregates_data_frame[produits + ['vag', 'identifiant_menage', 'depenses_autre', 'depenses_carbu',
+        'depenses_logem', 'preference_group']].copy()
+    data_preference_group[produits + ['depenses_autre', 'depenses_carbu', 'depenses_logem']] = \
+        data_preference_group[produits + ['depenses_autre', 'depenses_carbu', 'depenses_logem']].astype(float)
+
+    data_conso_group = data_preference_group.groupby('preference_group', as_index=False)[produits + ['depenses_autre', 'depenses_carbu', 'depenses_logem']].mean()
+    data_preference_group = data_preference_group[['vag', 'identifiant_menage', 'preference_group']]
+
+    data_conso_group = pd.merge(data_preference_group, data_conso_group, on = 'preference_group', how = 'left')
+
+    ###############
+    # tentative de construction d'indices de prix par groupes de préférences
+    ## Construction de groupes de préférences
+
+    ###############
 
     # On renverse la dataframe pour obtenir une ligne pour chaque article consommé par chaque personne
-    df = pd.melt(data_conso, id_vars = ['vag', 'identifiant_menage'], value_vars=produits,
+    df = pd.melt(data_conso_group, id_vars = ['vag', 'identifiant_menage'], value_vars=produits,
         value_name = 'depense_bien', var_name = 'bien')
 
     df_indice_prix_produit = df_indice_prix_produit[['indice_prix_produit', 'prix', 'temps', 'mois']]
@@ -127,11 +145,13 @@ for year in [2000, 2005, 2011]:
     df_depenses_prix[['type_bien', 'identifiant_menage']] = df_depenses_prix[['type_bien', 'identifiant_menage']].astype(str)
     df_depenses_prix['id'] = df_depenses_prix['type_bien'] + '_' + df_depenses_prix['identifiant_menage']
 
-    data_conso['identifiant_menage'] = data_conso['identifiant_menage'].astype(str)
+    #data_conso = aggregates_data_frame[produits + ['vag', 'identifiant_menage', 'depenses_autre', 'depenses_carbu',
+    #    'depenses_logem']].copy()
+    data_conso_group['identifiant_menage'] = data_conso_group['identifiant_menage'].astype(str)
     df_depenses_prix = pd.merge(
-        df_depenses_prix, data_conso[['depenses_autre', 'depenses_carbu', 'depenses_logem', 'identifiant_menage']],
+        df_depenses_prix, data_conso_group[['depenses_autre', 'depenses_carbu', 'depenses_logem', 'identifiant_menage']],
         on = 'identifiant_menage')
-    del data_conso
+    #del data_conso
     df_depenses_prix[['depenses_autre', 'depense_bien', 'depenses_carbu', 'depenses_logem', 'prix']] = \
         df_depenses_prix[['depenses_autre', 'depense_bien', 'depenses_carbu', 'depenses_logem', 'prix']].astype(float)
 
@@ -191,7 +211,7 @@ for year in [2000, 2005, 2011]:
         'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'ident_men', 'identifiant_menage',
         'nactifs', 'nenfants', 'ocde10', 'pondmen', 'rev_disponible',
         'revtot', 'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
-        'veh_essence']
+        'veh_essence', 'zeat']
     if year == 2011:
         variables_imputees = ['froid', 'froid_cout', 'froid_installation',
         'froid_impaye', 'froid_isolation']
@@ -226,7 +246,7 @@ for year in [2000, 2005, 2011]:
 
     dataframe = dataframe[['ident_men', 'identifiant_menage', 'part_carbu', 'part_logem', 'part_autre', 'prix_carbu', 'prix_logem',
         'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'elect_only', 'nactifs', 'nenfants', 'ocde10', 'pondmen', 'rev_disponible', 'revtot',
-        'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel', 'veh_essence', 'diesel'] + variables_imputees]
+        'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel', 'veh_essence', 'diesel', 'zeat'] + variables_imputees]
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la
@@ -262,3 +282,9 @@ for year in [2000, 2005, 2011]:
 
 data_frame_all_years.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
     'quaids', 'data_frame_energy_no_alime_all_years_preference_groups.csv'), sep = ',')
+
+dataframe['zeat'] = dataframe['zeat'].astype(int)
+dataframe['strate'] = dataframe['strate'].astype(int)
+dataframe['vag'] = dataframe['vag'].astype(int)
+
+test_pref = dataframe.query('zeat == 6').query('strate == 3').query('vag == 24')
