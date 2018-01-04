@@ -5,6 +5,7 @@ from __future__ import division
 import os
 import pkg_resources
 import pandas as pd
+import numpy as np
 
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_survey_manager.survey_collections import SurveyCollection
@@ -19,6 +20,17 @@ def add_area_dummy(dataframe):
     dataframe.loc[dataframe['strate'] == 2, 'villes_moyennes'] = 1
     dataframe.loc[dataframe['strate'] == 3, 'villes_grandes'] = 1
     dataframe.loc[dataframe['strate'] == 4, 'agglo_paris'] = 1
+    return dataframe
+
+
+def add_niveau_vie_decile(dataframe):
+    dataframe['niveau_de_vie'] = dataframe['rev_disponible'] / dataframe['ocde10']
+    dataframe = dataframe.sort_values(by = ['niveau_de_vie'])
+    dataframe['cum_pondmen'] = dataframe['pondmen'].cumsum()
+    dataframe['rank'] = dataframe['cum_pondmen'] / dataframe['cum_pondmen'].max()
+    dataframe['rank'] = dataframe['rank'].astype(float)
+    dataframe['niveau_vie_decile'] = np.ceil(dataframe['rank'] * 10)
+    dataframe.drop(['rank', 'cum_pondmen', 'niveau_de_vie'], axis = 1, inplace = True)
     return dataframe
 
 

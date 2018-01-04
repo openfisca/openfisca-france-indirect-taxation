@@ -14,7 +14,10 @@ out.nnd <- NND.hotdeck(
 fused.nnd.m <- create.fused(
   data.rec = data_bdf, data.don = data_entd,
   mtc.ids = out.nnd$mtc.ids,
-  z.vars = c("distance", "distance_autre_carbu", "distance_diesel", "distance_essence")
+  z.vars = c("distance", "distance_autre_carbu", "distance_diesel", "distance_essence",
+             "age_carte_grise", "age_vehicule", "distance_routiere_hebdomadaire_teg",
+             "duree_moyenne_trajet_aller_retour_teg", "mode_principal_deplacement_teg", "vp_deplacements_pro",
+             "vp_domicile_travail")
 )
 
 # Save it as csv

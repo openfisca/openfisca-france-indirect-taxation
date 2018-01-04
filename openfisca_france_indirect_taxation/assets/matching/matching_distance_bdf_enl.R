@@ -8,7 +8,7 @@ out.nnd <- NND.hotdeck(
   match.vars = c("part_energies_revtot", "aides_logement", "log_indiv", "electricite", "ouest_sud",
                  "nactifs", "bat_av_49", "dip14pr", "revtot", "rural", "nenfants",
                  "petite_ville", "surfhab_d"),
-  don.class = c("donation_class_4"),
+  don.class = c("donation_class_3"),
   dist.fun = "Gower"
 )
 
@@ -19,7 +19,7 @@ fused.nnd.m <- create.fused(
   z.vars = c("froid", "froid_installation", "gchauf_2", "froid_cout", "froid_isolation",
              "froid_impaye", "gchauf_6", "gchauf_7", "gchaufs_1",
              "gchaufs_2", "gchaufs_3", "gchaufs_4", "gchaufs_5",
-             "gmur", "gtoit2")
+             "isolation_murs", "isolation_toit", "isolation_fenetres", "majorite_double_vitrage")
 )
 
 # Save it as csv
