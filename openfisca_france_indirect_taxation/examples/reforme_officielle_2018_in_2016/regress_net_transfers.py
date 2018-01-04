@@ -10,12 +10,14 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, graph_builder_line, save_dataframe_to_graph, \
     dataframe_by_group, age_group, energy_modes
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
 
 
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 year = 2016
 data_year = 2011
-elasticities = get_elasticities(data_year)
+#elasticities = get_elasticities(data_year)
+elasticities = get_elasticities_aidsills(data_year, True)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 survey_scenario = SurveyScenario.create(

@@ -12,6 +12,7 @@ import pandas as pd
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent, save_dataframe_to_graph
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
 
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 
@@ -170,8 +171,9 @@ if __name__ == '__main__':
     data_year = 2011
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-    elasticities = get_elasticities(data_year)
-    
+    #elasticities = get_elasticities(data_year)
+    elasticities = get_elasticities_aidsills(data_year, True)
+
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
@@ -181,4 +183,4 @@ if __name__ == '__main__':
         )
 
     df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
-    df_to_plot = change_quantities_among_consumers_by_categ(df_reforme, 'strate')
+    df_to_plot = change_quantities_among_consumers_by_categ(df_reforme, 'niveau_vie_decile')

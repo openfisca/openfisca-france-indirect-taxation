@@ -9,6 +9,7 @@ import pandas as pd
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.examples.utils_example import brde, \
     cheque_energie_logement_transport, tee_10_3, precarite
@@ -41,7 +42,8 @@ if __name__ == '__main__':
     year = 2016
     data_year = 2011
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
-    elasticities = get_elasticities(data_year)
+    #elasticities = get_elasticities(data_year)
+    elasticities = get_elasticities_aidsills(data_year, False)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
         
     survey_scenario = SurveyScenario.create(
@@ -94,10 +96,10 @@ if __name__ == '__main__':
         (df_reforme['precarite_logement'] * df_reforme['precarite_transport'])
         )
 
-    #variables_precarite = ['brde_m2_logement_rev_disponible', 'tee_10_3_rev_disponible_logement',
-    #    'brde_m2_transport_rev_disponible', 'tee_10_3_rev_disponible_transport', 'froid_4_criteres_3_deciles']
+    variables_precarite = ['brde_m2_logement_rev_disponible', 'tee_10_3_rev_disponible_logement',
+        'brde_m2_transport_rev_disponible', 'tee_10_3_rev_disponible_transport', 'froid_4_criteres_3_deciles']
     
-    variables_precarite = ['precarite_joint']
+    #variables_precarite = ['precarite_joint']
 
     df_to_plot = number_fuel_poors_by_categ(df_reforme, 'strate', variables_precarite)
     df_to_plot = number_fuel_poors_by_categ(df_reforme, 'age_group', variables_precarite)

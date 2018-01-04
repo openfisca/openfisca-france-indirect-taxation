@@ -10,13 +10,15 @@ from __future__ import division
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 
 # Simulate contribution to fuel tax reform by categories
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 year = 2016
 data_year = 2011
-elasticities = get_elasticities(data_year)
+#elasticities = get_elasticities(data_year)
+elasticities = get_elasticities_aidsills(data_year, False)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 emissions_cce_seulement = dict()
