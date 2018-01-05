@@ -13,7 +13,7 @@ year = 2016
 data_year = 2011
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-elasticities = get_elasticities_aidsills(data_year)
+elasticities = get_elasticities_aidsills(data_year, True)
 
 reforme = 'officielle_2018_in_2016'
 
@@ -26,19 +26,12 @@ survey_scenario = SurveyScenario.create(
     )
 
 simulated_variables = [
-    'strate',
-    'niveau_vie_decile',
-    'identifiant_menage',
-    'elas_price_1_1',
-    'elas_price_2_2',
-    'depenses_carburants_corrigees_officielle_2018_in_2016',
-    'depenses_combustibles_liquides_officielle_2018_in_2016',
+    'cheques_energie_officielle_2018_in_2016',
+    'pondmen',
+    'revenu_reforme_officielle_2018_in_2016',
     ]
 
 df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-print df.depenses_carburants_corrigees_officielle_2018_in_2016.mean() # 1376
-print df.depenses_combustibles_liquides_officielle_2018_in_2016.mean() # 215.3
-
-df_2_4 = df.query('strate == 2').query('niveau_vie_decile == 4')
-print df_2_4.elas_price_1_1.mean()
+print (df.pondmen * df.cheques_energie_officielle_2018_in_2016).sum()
+print (df.pondmen * df.revenu_reforme_officielle_2018_in_2016).sum()

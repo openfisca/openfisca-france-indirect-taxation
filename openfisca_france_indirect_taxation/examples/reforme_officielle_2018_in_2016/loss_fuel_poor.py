@@ -68,7 +68,7 @@ def distribution_pertes_precaires(df_precaires):
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
 df_reforme[u'transfert_net_cheque_officiel_uc'] = (
-    df_reforme['cheques_energie_ruraux_by_energy_officielle_2018_in_2016']
+    df_reforme['cheques_energie_officielle_2018_in_2016']
     + df_reforme['reste_transferts_neutre_officielle_2018_in_2016']
     - df_reforme['revenu_reforme_officielle_2018_in_2016'] 
     ) / df_reforme['ocde10']

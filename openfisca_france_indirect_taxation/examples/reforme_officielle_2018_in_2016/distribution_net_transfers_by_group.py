@@ -79,3 +79,4 @@ if __name__ == '__main__':
         ) / df_reforme['ocde10']
 
     df_to_plot = distribution_net_transfers_by_group(df_reforme, 'niveau_vie_decile')
+    print df_to_plot

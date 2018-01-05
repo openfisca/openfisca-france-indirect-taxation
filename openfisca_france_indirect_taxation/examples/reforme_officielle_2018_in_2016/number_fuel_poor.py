@@ -146,7 +146,7 @@ def number_fuel_poors(year, data_year):
     # Après redistribution
     df_reforme['depenses_energies_logement_officielle_2018_in_2016'] = (
         df_reforme['depenses_energies_logement_officielle_2018_in_2016']
-        - df_reforme['cheques_energie_officielle_2018_in_2016']
+        - df_reforme['cheques_energie_ruraux_by_energy_officielle_2018_in_2016']
         )
     df_reforme['rev_disponible'] = (
         df_reforme['rev_disponible']

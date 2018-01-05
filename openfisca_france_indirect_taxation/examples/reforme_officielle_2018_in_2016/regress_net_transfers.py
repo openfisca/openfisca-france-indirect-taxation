@@ -20,6 +20,15 @@ data_year = 2011
 elasticities = get_elasticities_aidsills(data_year, True)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
+
+# Homogeneous + SL :
+#elasticities['elas_price_1_1'] = -0.466
+#elasticities['elas_price_2_2'] = -0.214
+
+# Homogeneous, no SL :
+#elasticities['elas_price_1_1'] = -0.440
+#elasticities['elas_price_2_2'] = -0.139
+
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
@@ -146,6 +155,7 @@ regression_ols = smf.ols(formula = 'Net_transfers_by_cu_after_recycling ~ \
     data = df_reforme).fit()
 print regression_ols.summary()
 
+"""
 
 # Compute transfers by income
 params = regression_ols.params
@@ -188,3 +198,5 @@ df_age = pd.DataFrame(index = range(15, 91), columns = ['transfers'])
 df_age = df_age.reset_index()
 df_age['transfers'] = average_transfers_by_age + df_age['index'] * param_age + (df_age['index'] ** 2) * param_age_2
 graph_builder_line(df_age['transfers'])
+
+"""

@@ -223,7 +223,7 @@ class officielle_2018_in_2016(Reform):
 
             eligibles = 1 * (revenu_fiscal_uc < 7700)
             ruraux_eligibles = (1 - urbains) * eligibles
-            cheque_ruraux = 12 * ruraux_eligibles * ocde10
+            cheque_ruraux = 10 * ruraux_eligibles * ocde10
 
             somme_cheques_ruraux = numpy.sum(cheque_ruraux * pondmen)
 
@@ -305,7 +305,7 @@ class officielle_2018_in_2016(Reform):
             eligibles = 1 * (revenu_fiscal_uc < 7700)
 
             ruraux_eligibles = (1 - urbains) * eligibles
-            cheque_ruraux = 12 * ruraux_eligibles * ocde10
+            cheque_ruraux = 10 * ruraux_eligibles * ocde10
             somme_cheques_ruraux = numpy.sum(cheque_ruraux * pondmen)
 
             combustibles_liquides = simulation.calculate('combustibles_liquides', period)
