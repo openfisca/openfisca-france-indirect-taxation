@@ -26,12 +26,27 @@ survey_scenario = SurveyScenario.create(
     )
 
 simulated_variables = [
-    'cheques_energie_officielle_2018_in_2016',
+    'niveau_vie_decile',
     'pondmen',
-    'revenu_reforme_officielle_2018_in_2016',
+    'depenses_energies_logement',
+    'combustibles_liquides',
+    'gaz_ville',
+    'emissions_CO2_energies_totales',
+    'depenses_energies_totales',
+    'depenses_energies_logement',
+    'ticpe_totale',
+    'diesel_ticpe',
+    'essence_ticpe',
+    'rev_disp_loyerimput',
+    'depenses_tot'
+
     ]
 
 df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-print (df.pondmen * df.cheques_energie_officielle_2018_in_2016).sum()
-print (df.pondmen * df.revenu_reforme_officielle_2018_in_2016).sum()
+for i in range(1,11):
+    df_decile = df.query('niveau_vie_decile == {}'.format(i))
+    print i, \
+    (df_decile.pondmen * df_decile.depenses_energies_logement / df_decile.depenses_tot).sum() / df_decile.pondmen.sum()
+
+

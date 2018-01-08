@@ -33,6 +33,8 @@ simulated_variables = [
     'rev_disp_loyerimput',
     'depenses_tot',
     'ocde10',
+    'tarifs_sociaux_electricite',
+    'tarifs_sociaux_gaz',
     #'cheques_energie_integral_inconditionnel_officielle_2018_in_2016',
     ]
 
@@ -54,8 +56,8 @@ for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 's
         df['revenu_reforme_officielle_2018_in_2016']
         ) / df['ocde10']
 
-    df['regressivite_revenu'] = df['revenu_reforme_officielle_2018_in_2016'] / df['rev_disp_loyerimput']
-    df['regressivite_depenses'] = df['revenu_reforme_officielle_2018_in_2016'] / df['depenses_tot']
+    df['regressivite_revenu'] = (df['revenu_reforme_officielle_2018_in_2016'] - df['tarifs_sociaux_electricite'] - df['tarifs_sociaux_gaz']) / df['rev_disp_loyerimput']
+    df['regressivite_depenses'] = (df['revenu_reforme_officielle_2018_in_2016'] - df['tarifs_sociaux_electricite'] - df['tarifs_sociaux_gaz']) / df['depenses_tot']
 
     # Réalisation de graphiques
     df_to_plot = df[
