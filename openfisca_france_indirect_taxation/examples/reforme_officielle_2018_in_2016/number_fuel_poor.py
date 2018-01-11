@@ -49,11 +49,13 @@ def number_fuel_poors(year, data_year):
         'reste_transferts_neutre_officielle_2018_in_2016',
         'rev_disponible',
         'surfhab_d',
+        'tarifs_sociaux_electricite',
+        'tarifs_sociaux_gaz'
         ]
-    
+
     df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
     df_reforme = df_reforme.query('rev_disponible > 0')
-      
+
    # Avant reforme
     df_reforme = brde(df_reforme, 'depenses_energies_logement', 'rev_disponible', 'logement')
     dict_logement['brde - avant reforme'] = (
@@ -102,11 +104,13 @@ def number_fuel_poors(year, data_year):
     df_reforme['precarite_joint_avant_ref'] = df_reforme['precarite_joint'].copy()
     
     # Avant redistribution
-    df_reforme = brde(df_reforme, 'depenses_energies_logement_officielle_2018_in_2016', 'rev_disponible', 'logement')
+    df_reforme['depenses_energies_logement_officielle_avec_tarifs_sociaux'] = \
+        df_reforme['depenses_energies_logement_officielle_2018_in_2016'] - df_reforme['tarifs_sociaux_electricite'] - df_reforme['tarifs_sociaux_gaz']
+    df_reforme = brde(df_reforme, 'depenses_energies_logement_officielle_avec_tarifs_sociaux', 'rev_disponible', 'logement')
     dict_logement['brde - avant redistribution'] = (
         (df_reforme['brde_m2_logement_rev_disponible'] * df_reforme['pondmen']).sum()
         )
-    df_reforme = tee_10_3(df_reforme, 'depenses_energies_logement_officielle_2018_in_2016', 'rev_disponible', 'logement')
+    df_reforme = tee_10_3(df_reforme, 'depenses_energies_logement_officielle_avec_tarifs_sociaux', 'rev_disponible', 'logement')
     dict_logement['tee - avant redistribution'] = (
         (df_reforme['tee_10_3_rev_disponible_logement'] * df_reforme['pondmen']).sum()
         )
@@ -146,7 +150,7 @@ def number_fuel_poors(year, data_year):
     # Après redistribution
     df_reforme['depenses_energies_logement_officielle_2018_in_2016'] = (
         df_reforme['depenses_energies_logement_officielle_2018_in_2016']
-        - df_reforme['cheques_energie_ruraux_by_energy_officielle_2018_in_2016']
+        - df_reforme['cheques_energie_officielle_2018_in_2016']
         )
     df_reforme['rev_disponible'] = (
         df_reforme['rev_disponible']

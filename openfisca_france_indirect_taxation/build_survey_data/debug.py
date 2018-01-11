@@ -29,17 +29,25 @@ simulated_variables = [
     'niveau_vie_decile',
     'pondmen',
     'depenses_energies_logement',
+    'depenses_energies_totales',
+    'depenses_carburants_corrigees',
     'combustibles_liquides',
     'gaz_ville',
     'emissions_CO2_energies_totales',
+    'emissions_CO2_energies_logement',
+    'emissions_CO2_carburants',
     'depenses_energies_totales',
     'depenses_energies_logement',
     'ticpe_totale',
     'diesel_ticpe',
     'essence_ticpe',
     'rev_disp_loyerimput',
-    'depenses_tot'
-
+    'depenses_tot',
+    'depenses_essence_corrigees',
+    'depenses_diesel_corrigees',
+    'strate',
+    'npers',
+    'ocde10'
     ]
 
 df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
@@ -47,6 +55,10 @@ df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = y
 for i in range(1,11):
     df_decile = df.query('niveau_vie_decile == {}'.format(i))
     print i, \
-    (df_decile.pondmen * df_decile.depenses_energies_logement / df_decile.depenses_tot).sum() / df_decile.pondmen.sum()
+    (df_decile.pondmen * df_decile.rev_disp_loyerimput).sum() / df_decile.pondmen.sum(), \
+    (df_decile.pondmen * df_decile.depenses_tot).sum() / df_decile.pondmen.sum()
 
+for j in range(0,5):
+    df_strate = df.query('strate == {}'.format(j))
+    print (df_strate['rev_disp_loyerimput'] / df_strate['ocde10'] * df_strate['pondmen']).sum() / df_strate['pondmen'].sum()
 
