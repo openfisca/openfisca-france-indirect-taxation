@@ -44,8 +44,8 @@ def function_creator(postes_coicop, year_start = None, year_stop = None):
     stop = date(year_stop, 12, 31) if year_stop is not None else None
 
     @dated_function(start = start, stop = stop)
-    def func(self, simulation, period):
-        return period, sum(simulation.calculate('poste_coicop_' + poste, period) for poste in postes_coicop)
+    def func(menage, period, parameters):
+        return period, sum(menage('poste_coicop_' + poste, period) for poste in postes_coicop)
 
     func.__name__ = "function_{year_start}_{year_stop}".format(year_start = year_start, year_stop = year_stop)
     return func

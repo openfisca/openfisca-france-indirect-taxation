@@ -36,8 +36,8 @@ class age(Variable):
     entity_class = Individus
     label = u"Age de l'individu"
 
-    def function(self, simulation, period):
-        birth = simulation.calculate('birth', period)
+    def function(individu, period):
+        birth = individu('birth', period)
         return period, (numpy.datetime64(period.date) - birth).astype('timedelta64[Y]')
 
 

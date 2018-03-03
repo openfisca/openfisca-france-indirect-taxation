@@ -94,7 +94,7 @@ class categorie_fiscale_{0}(DatedVariable):
 
             dated_function = '''
     @dated_function(start = date({year_start}, 1, 1), stop = date({year_stop}, 12, 31))
-    def function_{year_start}_{year_stop}(self, simulation, period):
+    def function_{year_start}_{year_stop}(menage, period, parameters):
         categorie_fiscale_{categorie_fiscale} = 0
         for poste in {postes_coicop}:
             categorie_fiscale_{categorie_fiscale} += simulation.calculate('poste_coicop_' + poste, period)

@@ -41,9 +41,9 @@ class niveau_de_vie(Variable):
     entity_class = Menages
     label = u"Revenus disponibles divisés par ocde10 soit le nombre d'unités de consommation du ménage"
 
-    def function(self, simulation, period):
-        rev_disponible = simulation.calculate('rev_disponible', period)
-        ocde10 = simulation.calculate('ocde10', period)
+    def function(menage, period, parameters):
+        rev_disponible = menage('rev_disponible', period)
+        ocde10 = menage('ocde10', period)
         return period, rev_disponible / ocde10
 
 
@@ -66,9 +66,9 @@ class niveau_vie_decile(Variable):
     entity_class = Menages
     label = u"Décile de niveau de vie"
 
-    def function(self, simulation, period):
-        niveau_de_vie = simulation.calculate('niveau_de_vie', period)
-        pondmen = simulation.calculate('pondmen', period)
+    def function(menage, period, parameters):
+        niveau_de_vie = menage('niveau_de_vie', period)
+        pondmen = menage('pondmen', period)
         labels = numpy.arange(1, 11)
         # Alternative method
         # method = 2
