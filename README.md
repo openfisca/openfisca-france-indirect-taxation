@@ -29,7 +29,7 @@ contact@openfisca.fr
 
 ## Contributors
 
-[IPP](www.ipp.eu) is the main contributor to this repo. (openfisca-france-indirect-taxation)  [https://github.com/openfisca/openfisca-france-indirect-taxation] is a fundamental building block of the TAXIPP microsimulation model. 
+[IPP](www.ipp.eu) is the main contributor to this repo. (openfisca-france-indirect-taxation)[https://github.com/openfisca/openfisca-france-indirect-taxation] is a fundamental building block of the TAXIPP microsimulation model. 
 
 Etienne Fontaine, Vincent Gollier, Hadrien Leclerc and Germain Marchand contributed to this project to fulfill their applied statistics project at [ENSAE](ensae.fr).
 
