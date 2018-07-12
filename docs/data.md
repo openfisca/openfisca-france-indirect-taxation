@@ -28,15 +28,14 @@ Les taux d'imposition des différents produits sont renseignés dans une [table 
 Elle est produite à partir de sources brutes par l'exécution du programme `build_coicop_legislation`.
 [TODO: à détailler, exemple d'exécution après mise en forme du script]
 
-
 ## Importation des données d'enquêtes brutes
 
-Le modèles de taxation indirecte peut être alimenté par des données d'enquête.
-Il est pariculièrement adapté aux données de l'enquête [budget des familles] (http://www.reseau-quetelet.cnrs.fr/spip/article.php3?id_article=128&lang=fr&ords_target=simple&ords_source=simple_form)
-de l'INSEE telles que livrées par le [réseau Quetelet](http://www.reseau-quetelet.cnrs.fr/spip/).
+Le modèle de taxation indirecte peut être alimentée par des données d'enquête.
+Il est pariculièrement adapté aux données de l'enquête [budget des familles](http://www.reseau-quetelet.cnrs.fr/spip/article.php3?id_article=128&lang=fr&ords_target=simple&ords_source=simple_form)
+de l'INSEE telles que fournies par le [réseau Quetelet](http://www.reseau-quetelet.cnrs.fr/spip/).
 
 Afin de manipuler les tables des différentes enquêtes budget dens familles par l'intermdéiaire de programmes écrit en python, il convient de convertir les données brutes sous le format [HDF5](https://www.hdfgroup.org/HDF5/). Sous ce format, les tables sont aisément manipulables à l'aide de la bibliothèque [pandas] (pandas.pydata.org).
-La conversion est réalisée par le script [build_collection] (https://github.com/openfisca/openfisca-survey-manager/blob/master/openfisca_survey_manager/scripts/build_collection.py) fourni avec le package [openfisca-survey-manager](https://github.com/openfisca/openfisca-survey-manager).
+La conversion est réalisée par le script [build_collection](https://github.com/openfisca/openfisca-survey-manager/blob/master/openfisca_survey_manager/scripts/build_collection.py) fourni avec le package [openfisca-survey-manager](https://github.com/openfisca/openfisca-survey-manager).
 
 Les années traitées sont les enquêtes budget des familles 2011, 2005, 2000.
 
