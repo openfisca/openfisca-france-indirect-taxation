@@ -29,36 +29,56 @@ simulated_variables = [
     'niveau_vie_decile',
     'pondmen',
     'depenses_energies_logement',
+    'depenses_energies_logement_officielle_2018_in_2016',
     'depenses_energies_totales',
     'depenses_carburants_corrigees',
     'combustibles_liquides',
     'gaz_ville',
-    'emissions_CO2_energies_totales',
-    'emissions_CO2_energies_logement',
-    'emissions_CO2_carburants',
-    'depenses_energies_totales',
-    'depenses_energies_logement',
-    'ticpe_totale',
-    'diesel_ticpe',
-    'essence_ticpe',
     'rev_disp_loyerimput',
     'depenses_tot',
-    'depenses_essence_corrigees',
-    'depenses_diesel_corrigees',
-    'strate',
-    'npers',
-    'ocde10'
+    'cheques_energie_officielle_2018_in_2016',
+    'reste_transferts_neutre_officielle_2018_in_2016',
+    'revenu_reforme_officielle_2018_in_2016',
+    'precarite_transports_rev_disponible',
+    'precarite_energetique_rev_disponible',
+    'tarifs_sociaux_electricite',
+    'tarifs_sociaux_gaz',
+    'depenses_gaz_ville_officielle_2018_in_2016',
+    'depenses_gaz_ville',
+    'depenses_combustibles_liquides_officielle_2018_in_2016',
+    'depenses_combustibles_liquides',
     ]
 
 df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-for i in range(1,11):
-    df_decile = df.query('niveau_vie_decile == {}'.format(i))
-    print i, \
-    (df_decile.pondmen * df_decile.rev_disp_loyerimput).sum() / df_decile.pondmen.sum(), \
-    (df_decile.pondmen * df_decile.depenses_tot).sum() / df_decile.pondmen.sum()
+keep = df[
+    ['depenses_energies_logement_officielle_2018_in_2016']
+    + ['depenses_energies_logement']
+    + ['tarifs_sociaux_electricite']
+    + ['tarifs_sociaux_gaz']
+    + ['depenses_combustibles_liquides_officielle_2018_in_2016']
+    + ['depenses_combustibles_liquides']
+    + ['depenses_gaz_ville_officielle_2018_in_2016']
+    + ['depenses_gaz_ville']
+    ]
 
-for j in range(0,5):
-    df_strate = df.query('strate == {}'.format(j))
-    print (df_strate['rev_disp_loyerimput'] / df_strate['ocde10'] * df_strate['pondmen']).sum() / df_strate['pondmen'].sum()
+keep['net_logement'] = keep['depenses_energies_logement_officielle_2018_in_2016'] - keep['depenses_energies_logement']
+weird = keep.query('net < 0')
 
+keep['net_gaz'] = keep['depenses_gaz_ville_officielle_2018_in_2016'] - keep['depenses_gaz_ville']
+keep['net_fioul'] = keep['depenses_combustibles_liquides_officielle_2018_in_2016'] - keep['depenses_combustibles_liquides']
+
+weird_fioul = keep.query('net_fioul < 0')
+weird_gaz = keep.query('net_gaz < 0')
+weird_gaz_keep = weird_gaz[['depenses_gaz_ville_officielle_2018_in_2016'] + ['depenses_gaz_ville']]
+
+precaires_log = (df['precarite_energetique_rev_disponible'] * df['pondmen']).sum()
+precaires_tra = (df['precarite_transports_rev_disponible'] * df['pondmen']).sum()
+df['preca_joint'] = 1* ((df['precarite_energetique_rev_disponible'] + df['precarite_transports_rev_disponible']) > 0)
+df['preca_both'] = 1 * ((df['precarite_energetique_rev_disponible'] + df['precarite_transports_rev_disponible']) > 1)
+
+preca_joint = (df['preca_joint'] * df['pondmen']).sum()
+preca_both = (df['preca_both'] * df['pondmen']).sum()
+
+
+weird.net.min()

@@ -12,7 +12,7 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_a
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.examples.utils_example import brde, tee_10_3, precarite
 
-    
+
 def number_fuel_poors(year, data_year):
     dict_logement = dict()
     dict_transport = dict()

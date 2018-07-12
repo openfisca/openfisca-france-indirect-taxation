@@ -263,6 +263,8 @@ for year in [2000, 2005, 2011]:
         dataframe = price_carbu_pond(dataframe)
     dataframe['year'] = year
 
+    # Grouper les indices de prix
+
     dataframe = add_area_dummy(dataframe)
     dataframe = add_stalog_dummy(dataframe)
     dataframe = add_vag_dummy(dataframe)

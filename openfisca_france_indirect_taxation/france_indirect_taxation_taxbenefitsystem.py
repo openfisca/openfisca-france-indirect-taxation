@@ -6,10 +6,10 @@ import itertools
 import os
 
 from openfisca_core.taxbenefitsystems import TaxBenefitSystem
-from .param import preprocessing
+from openfisca_france_indirect_taxation.param import preprocessing
 
-from . import entities
-from . import scenarios
+from openfisca_france_indirect_taxation import entities
+from openfisca_france_indirect_taxation import scenarios
 
 
 COUNTRY_DIR = os.path.dirname(os.path.abspath(__file__))

@@ -30,6 +30,7 @@ simulated_variables = [
     'revenu_reforme_officielle_2018_in_2016',
     'cheques_energie_officielle_2018_in_2016',
     'reste_transferts_neutre_officielle_2018_in_2016',
+    'revenu_reforme_officielle_2018_in_2016_plus_cspe',
     'strate',
     'niveau_vie_decile',
     'pondmen',
@@ -79,7 +80,7 @@ def net_transfers_by_sub_group(df_reforme, group):
                 (df['transferts_nets_apres_redistribution_uc'] * df['pondmen']).sum() / df['pondmen'].sum()
 
     graph_builder_bar(df_to_plot, False)
-    save_dataframe_to_graph(df_to_plot, 'Monetary/heterogeneity_transfers_by_uc_by_{}.csv'.format(group))
+    #save_dataframe_to_graph(df_to_plot, 'Monetary/heterogeneity_transfers_by_uc_by_{}.csv'.format(group))
 
     return df_to_plot
 

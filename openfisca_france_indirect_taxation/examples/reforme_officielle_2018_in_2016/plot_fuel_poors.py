@@ -88,4 +88,4 @@ if __name__ == '__main__':
     
     dataframe = plot_effect_reform_fuel_poors()
     #plot_number_fuel_poors()
-    #plot_share_fuel_poors()
+    dataframe2 = plot_share_fuel_poors()

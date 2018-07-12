@@ -4,8 +4,8 @@
 from openfisca_core.reforms import Reform, compose_reforms
 from openfisca_core.tools import assert_near
 
-from .. import FranceIndirectTaxationTaxBenefitSystem
-from ..reforms import (
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
+from openfisca_france_indirect_taxation.reforms import (
     alimentation,
     aliss,
     cce_2015_in_2014,
@@ -14,6 +14,7 @@ from ..reforms import (
     officielle_2018_in_2016,
     rattrapage_diesel,
     taxe_carbone,
+    reforme_tva_2019,
     )
 
 
@@ -41,6 +42,7 @@ reform_list = {
     'cce_2015_in_2014': cce_2015_in_2014.cce_2015_in_2014,
     'cce_2016_in_2014': cce_2016_in_2014.cce_2016_in_2014,
     'officielle_2018_in_2016': officielle_2018_in_2016.officielle_2018_in_2016,
+    'reforme_tva_2019': reforme_tva_2019,
     # 'contribution_climat_energie': contribution_climat_energie.build_reform,
     # 'test_reforme_alimentation': alimentation.build_reform,
     # 'taxes_carburants': taxes_carburants.build_reform,

@@ -7,7 +7,7 @@ import pandas as pd
 import pkg_resources
 
 
-import build_coicop_nomenclature
+from openfisca_france_indirect_taxation.scripts import build_coicop_nomenclature
 
 legislation_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
