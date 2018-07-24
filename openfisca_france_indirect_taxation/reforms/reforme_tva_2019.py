@@ -56,8 +56,120 @@ class reforme_tva_2019(Reform):
 
             return poste_agrege_11_reforme_tva_2019
 
+    class poste_11_1_1_1_1_reforme_tva_2019(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Dépenses en restaurant augmentation de la TVA"
+    
+        def formula(self, simulation, period):
+            poste_11_1_1_1_1 = simulation.calculate('poste_11_1_1_1_1', period)
+            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
+            incidence_consommateur = 0.5
+            #elasticite_prix_bien = -0.2
+            
+            poste_11_1_1_1_1_reforme_tva_2019 = (
+                poste_11_1_1_1_1 * (1 + (reforme_tva * incidence_consommateur))
+                )
+
+            return poste_11_1_1_1_1_reforme_tva_2019
+    
+
+    class poste_11_1_1_1_2_reforme_tva_2019(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Dépenses en café/bars augmentation de la TVA"
+    
+        def formula(self, simulation, period):
+            poste_11_1_1_1_2 = simulation.calculate('poste_11_1_1_1_2', period)
+            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
+            incidence_consommateur = 0.5
+            #elasticite_prix_bien = -0.2
+            
+            poste_11_1_1_1_2_reforme_tva_2019 = (
+                poste_11_1_1_1_2 * (1 + (reforme_tva * incidence_consommateur))
+                )
+
+            return poste_11_1_1_1_2_reforme_tva_2019
+    
+
+    class poste_11_1_2_1_1_reforme_tva_2019(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Dépenses en cantine augmentation de la TVA"
+    
+        def formula(self, simulation, period):
+            poste_11_1_2_1_1 = simulation.calculate('poste_11_1_2_1_1', period)
+            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
+            incidence_consommateur = 0.5
+            #elasticite_prix_bien = -0.2
+            
+            poste_11_1_2_1_1_reforme_tva_2019 = (
+                poste_11_1_2_1_1 * (1 + (reforme_tva * incidence_consommateur))
+                )
+
+            return poste_11_1_2_1_1_reforme_tva_2019
+    
+
+    class poste_11_1_3_1_reforme_tva_2019(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Autres dépenses en restauration, augmentation de la TVA"
+    
+        def formula(self, simulation, period):
+            poste_11_1_3_1 = simulation.calculate('poste_11_1_3_1', period)
+            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
+            incidence_consommateur = 0.5
+            #elasticite_prix_bien = -0.2
+            
+            poste_11_1_3_1_reforme_tva_2019 = (
+                poste_11_1_3_1 * (1 + (reforme_tva * incidence_consommateur))
+                )
+
+            return poste_11_1_3_1_reforme_tva_2019
+    
+
+    class poste_11_1_3_2_reforme_tva_2019(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Autres dépenses en restauration (cadeaux à autres ménages), augmentation de la TVA"
+    
+        def formula(self, simulation, period):
+            poste_11_1_3_2 = simulation.calculate('poste_11_1_3_2', period)
+            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
+            incidence_consommateur = 0.5
+            #elasticite_prix_bien = -0.2
+            
+            poste_11_1_3_2_reforme_tva_2019 = (
+                poste_11_1_3_2 * (1 + (reforme_tva * incidence_consommateur))
+                )
+
+            return poste_11_1_3_2_reforme_tva_2019
+    
+
+    class poste_11_2_1_1_1_reforme_tva_2019(YearlyVariable):
+        column = FloatCol
+        entity = Menage
+        label = u"Dépenses en hébergements augmentation de la TVA"
+    
+        def formula(self, simulation, period):
+            poste_11_2_1_1_1 = simulation.calculate('poste_11_2_1_1_1', period)
+            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
+            incidence_consommateur = 0.5
+            #elasticite_prix_bien = -0.2
+            
+            poste_11_2_1_1_1_reforme_tva_2019 = (
+                poste_11_2_1_1_1 * (1 + (reforme_tva * incidence_consommateur))
+                )
+
+            return poste_11_2_1_1_1_reforme_tva_2019
     
 
     def apply(self):
         self.update_variable(self.poste_agrege_11_reforme_tva_2019)
+        self.update_variable(self.poste_11_1_1_1_1_reforme_tva_2019)
+        self.update_variable(self.poste_11_1_1_1_2_reforme_tva_2019)
+        self.update_variable(self.poste_11_1_2_1_1_reforme_tva_2019)
+        self.update_variable(self.poste_11_1_3_1_reforme_tva_2019)
+        self.update_variable(self.poste_11_1_3_2_reforme_tva_2019)
+        self.update_variable(self.poste_11_2_1_1_1_reforme_tva_2019)
         self.modify_legislation_json(modifier_function = modify_legislation_json)
