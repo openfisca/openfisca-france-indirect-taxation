@@ -41,7 +41,7 @@ simulated_variables = [
 survey_scenario = SurveyScenario.create(
     #elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
-    reform_key = 'cce_2016_in_2014', # comprendre pourquoi al réforme ne fonctionne pas
+    reform_key = 'reforme_tva_2019',
     year = year,
     data_year = data_year
     )
