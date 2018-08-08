@@ -27,18 +27,18 @@ inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 simulated_variables = [
     'poste_11_1_1_1_1',
     'poste_11_1_1_1_2',
-    'poste_11_1_2_1_1',
+    #'poste_11_1_2_1_1',
     'poste_11_1_3_1',
     'poste_11_1_3_2',
     #'poste_11_2_1_1_1',
-    'poste_agrege_11',
+    #'poste_agrege_11',
     'poste_11_1_1_1_1_reforme_tva_2019',
     'poste_11_1_1_1_2_reforme_tva_2019',
     'poste_11_1_2_1_1_reforme_tva_2019',
     'poste_11_1_3_1_reforme_tva_2019',
     'poste_11_1_3_2_reforme_tva_2019',
     #'poste_11_2_1_1_1_reforme_tva_2019',
-    'poste_agrege_11_reforme_tva_2019',
+    #'poste_agrege_11_reforme_tva_2019',
     'rev_disp_loyerimput',
     'depenses_tot',
     'ocde10',
@@ -60,7 +60,6 @@ for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 's
     df['poste_agrege_restauration'] = (
         df['poste_11_1_1_1_1']
         + df['poste_11_1_1_1_2']
-        + df['poste_11_1_2_1_1']
         + df['poste_11_1_3_1']
         + df['poste_11_1_3_2']
         )
@@ -68,7 +67,6 @@ for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 's
     df['poste_agrege_restauration_reforme_tva_2019'] = (
         df['poste_11_1_1_1_1_reforme_tva_2019']
         + df['poste_11_1_1_1_2_reforme_tva_2019']
-        + df['poste_11_1_2_1_1_reforme_tva_2019']
         + df['poste_11_1_3_1_reforme_tva_2019']
         + df['poste_11_1_3_2_reforme_tva_2019']
         )

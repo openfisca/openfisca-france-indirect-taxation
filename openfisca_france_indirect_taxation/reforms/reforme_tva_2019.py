@@ -14,17 +14,17 @@ def modify_legislation_json(reference_legislation_json_copy):
         "@type": "Node",
         "description": "reforme_tva_2019",
         "children": {
-            "variation_1_tva_2019": {
+            "nouveau_taux_tva_a_2019": {
                 "@type": "Parameter",
                 "description": u"Augmentation de la TVA prévue par la LF 2019",
                 "format": 'float',
-                "values": [{'start': u'2013-01-01', 'value': 0.01}]
+                "values": [{'start': u'2013-01-01', 'value': 0.15}]
                 },
-            "variation_2_tva_2019": {
+            "nouveau_taux_tva_b_2019": {
                 "@type": "Parameter",
                 "description": u"Augmentation de la TVA prévue par la LF 2019",
                 "format": 'float',
-                "values": [{'start': u'2013-01-01', 'value': 0.02}]
+                "values": [{'start': u'2013-01-01', 'value': 0.15}]
                 },
             },
         }
@@ -39,23 +39,6 @@ class reforme_tva_2019(Reform):
     name = u"Réforme de la TVA prévue par la loi de finance 2019",
 
 
-    class poste_agrege_11_reforme_tva_2019(YearlyVariable):
-        column = FloatCol
-        entity = Menage
-        label = u"Dépenses dans le poste 11 après augmentation de la TVA"
-    
-        def formula(self, simulation, period):
-            poste_agrege_11 = simulation.calculate('poste_agrege_11', period)
-            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
-            incidence_consommateur = 0.5
-            #elasticite_prix_bien = -0.2
-            
-            poste_agrege_11_reforme_tva_2019 = (
-                poste_agrege_11 * (1 + (reforme_tva * incidence_consommateur))
-                )
-
-            return poste_agrege_11_reforme_tva_2019
-
     class poste_11_1_1_1_1_reforme_tva_2019(YearlyVariable):
         column = FloatCol
         entity = Menage
@@ -63,12 +46,17 @@ class reforme_tva_2019(Reform):
     
         def formula(self, simulation, period):
             poste_11_1_1_1_1 = simulation.calculate('poste_11_1_1_1_1', period)
-            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
+            ancien_taux_intermediaire = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
+            nouveau_taux_tva = simulation.legislation_at(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
             incidence_consommateur = 0.5
-            #elasticite_prix_bien = -0.2
+            elasticite_prix = -0.0
             
             poste_11_1_1_1_1_reforme_tva_2019 = (
-                poste_11_1_1_1_1 * (1 + (reforme_tva * incidence_consommateur))
+                poste_11_1_1_1_1
+                * (1 +
+                    (1+ elasticite_prix)
+                    *(incidence_consommateur
+                    *(nouveau_taux_tva - ancien_taux_intermediaire))/(1+incidence_consommateur * ancien_taux_intermediaire))
                 )
 
             return poste_11_1_1_1_1_reforme_tva_2019
@@ -81,12 +69,17 @@ class reforme_tva_2019(Reform):
     
         def formula(self, simulation, period):
             poste_11_1_1_1_2 = simulation.calculate('poste_11_1_1_1_2', period)
-            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
+            ancien_taux_intermediaire = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
+            nouveau_taux_tva = simulation.legislation_at(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
             incidence_consommateur = 0.5
-            #elasticite_prix_bien = -0.2
+            elasticite_prix = -0.0
             
             poste_11_1_1_1_2_reforme_tva_2019 = (
-                poste_11_1_1_1_2 * (1 + (reforme_tva * incidence_consommateur))
+                poste_11_1_1_1_2
+                * (1 +
+                    (1+ elasticite_prix)
+                    *(incidence_consommateur
+                    *(nouveau_taux_tva - ancien_taux_intermediaire))/(1+incidence_consommateur * ancien_taux_intermediaire))
                 )
 
             return poste_11_1_1_1_2_reforme_tva_2019
@@ -99,12 +92,17 @@ class reforme_tva_2019(Reform):
     
         def formula(self, simulation, period):
             poste_11_1_2_1_1 = simulation.calculate('poste_11_1_2_1_1', period)
-            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
+            ancien_taux_intermediaire = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
+            nouveau_taux_tva = simulation.legislation_at(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
             incidence_consommateur = 0.5
-            #elasticite_prix_bien = -0.2
+            elasticite_prix = -0.0
             
             poste_11_1_2_1_1_reforme_tva_2019 = (
-                poste_11_1_2_1_1 * (1 + (reforme_tva * incidence_consommateur))
+                poste_11_1_2_1_1
+                * (1 +
+                    (1+ elasticite_prix)
+                    *(incidence_consommateur
+                    *(nouveau_taux_tva - ancien_taux_intermediaire))/(1+incidence_consommateur * ancien_taux_intermediaire))
                 )
 
             return poste_11_1_2_1_1_reforme_tva_2019
@@ -117,12 +115,17 @@ class reforme_tva_2019(Reform):
     
         def formula(self, simulation, period):
             poste_11_1_3_1 = simulation.calculate('poste_11_1_3_1', period)
-            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
+            ancien_taux_intermediaire = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
+            nouveau_taux_tva = simulation.legislation_at(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
             incidence_consommateur = 0.5
-            #elasticite_prix_bien = -0.2
+            elasticite_prix = -0.0
             
             poste_11_1_3_1_reforme_tva_2019 = (
-                poste_11_1_3_1 * (1 + (reforme_tva * incidence_consommateur))
+                poste_11_1_3_1
+                * (1 +
+                    (1+ elasticite_prix)
+                    *(incidence_consommateur
+                    *(nouveau_taux_tva - ancien_taux_intermediaire))/(1+incidence_consommateur * ancien_taux_intermediaire))
                 )
 
             return poste_11_1_3_1_reforme_tva_2019
@@ -135,12 +138,17 @@ class reforme_tva_2019(Reform):
     
         def formula(self, simulation, period):
             poste_11_1_3_2 = simulation.calculate('poste_11_1_3_2', period)
-            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
+            ancien_taux_intermediaire = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
+            nouveau_taux_tva = simulation.legislation_at(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
             incidence_consommateur = 0.5
-            #elasticite_prix_bien = -0.2
+            elasticite_prix = -0.0
             
             poste_11_1_3_2_reforme_tva_2019 = (
-                poste_11_1_3_2 * (1 + (reforme_tva * incidence_consommateur))
+                poste_11_1_3_2
+                * (1 +
+                    (1+ elasticite_prix)
+                    *(incidence_consommateur
+                    *(nouveau_taux_tva - ancien_taux_intermediaire))/(1+incidence_consommateur * ancien_taux_intermediaire))
                 )
 
             return poste_11_1_3_2_reforme_tva_2019
@@ -153,19 +161,23 @@ class reforme_tva_2019(Reform):
     
         def formula(self, simulation, period):
             poste_11_2_1_1_1 = simulation.calculate('poste_11_2_1_1_1', period)
-            reforme_tva = simulation.legislation_at(period.start).reforme_tva_2019.variation_1_tva_2019
+            ancien_taux_intermediaire = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
+            nouveau_taux_tva = simulation.legislation_at(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
             incidence_consommateur = 0.5
-            #elasticite_prix_bien = -0.2
+            elasticite_prix = -0.0
             
             poste_11_2_1_1_1_reforme_tva_2019 = (
-                poste_11_2_1_1_1 * (1 + (reforme_tva * incidence_consommateur))
+                poste_11_2_1_1_1
+                * (1 +
+                    (1+ elasticite_prix)
+                    *(incidence_consommateur
+                    *(nouveau_taux_tva - ancien_taux_intermediaire))/(1+incidence_consommateur * ancien_taux_intermediaire))
                 )
 
             return poste_11_2_1_1_1_reforme_tva_2019
     
 
     def apply(self):
-        self.update_variable(self.poste_agrege_11_reforme_tva_2019)
         self.update_variable(self.poste_11_1_1_1_1_reforme_tva_2019)
         self.update_variable(self.poste_11_1_1_1_2_reforme_tva_2019)
         self.update_variable(self.poste_11_1_2_1_1_reforme_tva_2019)
