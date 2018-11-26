@@ -31,10 +31,14 @@ simulated_variables = [
     'poste_11_1_3_1', # autres dépenses de restauration : séjours hors domicile, personnes vivant hors du domicile
     'poste_11_1_3_2', # " : cadeau offert à destination d'un autre ménage
     'poste_11_2_1_1_1', # serices d'hébergement (hôtels, gîtes, campings, CROUS, internats)
+    'poste_02_2_1', #
+    'poste_02_2_2', #
+    'poste_02_2_3', #
     'poste_agrege_11',
     'rev_disp_loyerimput',
     'depenses_tot',
     'ocde10',
+    'strate'
     ]
 
 survey_scenario = SurveyScenario.create(
@@ -49,6 +53,11 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 
 for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
+
+    graph_builder_bar(df[['poste_02_2_1'] + ['poste_02_2_2'] + ['poste_02_2_3']], False)
+
+
+    boum
 
     df['check_poste_agrege_11'] = (
         df['poste_11_1_1_1_1'] + df['poste_11_1_1_1_2'] + df['poste_11_1_2_1_1']

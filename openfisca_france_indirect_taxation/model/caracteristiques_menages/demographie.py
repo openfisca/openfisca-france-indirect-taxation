@@ -59,7 +59,7 @@ class nactifs(YearlyVariable):
 
 class nadultes(YearlyVariable):
     column = IntCol
-    entity = Individu
+    entity = Menage
     label = u"Nombre d'adultes dans le ménage"
 
 

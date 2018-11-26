@@ -18,13 +18,13 @@ def modify_legislation_json(reference_legislation_json_copy):
                 "@type": "Parameter",
                 "description": u"Augmentation de la TVA prévue par la LF 2019",
                 "format": 'float',
-                "values": [{'start': u'2013-01-01', 'value': 0.15}]
+                "values": [{'start': u'2013-01-01', 'value': 0.2}]
                 },
             "nouveau_taux_tva_b_2019": {
                 "@type": "Parameter",
                 "description": u"Augmentation de la TVA prévue par la LF 2019",
                 "format": 'float',
-                "values": [{'start': u'2013-01-01', 'value': 0.15}]
+                "values": [{'start': u'2013-01-01', 'value': 0.2}]
                 },
             },
         }
