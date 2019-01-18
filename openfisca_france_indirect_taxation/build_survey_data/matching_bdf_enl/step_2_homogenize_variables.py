@@ -157,6 +157,7 @@ def homogenize_variables_definition_bdf_enl():
             'mrtota2': 'revtot',
             'muc1': 'ocde10',
             'ndip14': 'dip14pr',
+            'nhab': 'npers',
             'qex': 'pondmen',
             'tau2010': 'tau',
             'tu2010': 'tuu',
@@ -182,7 +183,7 @@ def homogenize_variables_definition_bdf_enl():
     data_enl = data_enl.sort_index(axis = 1)
     data_bdf = data_bdf.sort_index(axis = 1)
 
-    (data_enl, data_bdf) = inflate_energy_consumption(data_enl, data_bdf) 
+    (data_enl, data_bdf) = inflate_energy_consumption(data_enl, data_bdf)
 
     return data_enl, data_bdf
 

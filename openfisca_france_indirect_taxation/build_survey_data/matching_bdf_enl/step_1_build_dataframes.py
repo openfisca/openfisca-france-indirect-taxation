@@ -72,6 +72,7 @@ def load_data_bdf_enl():
         #'h_trans1',
         'htl', # type de logement
         'ident_men',
+        'identifiant_menage',
         'mall1',
         'mall2',
         'mchof',
@@ -84,6 +85,7 @@ def load_data_bdf_enl():
         'nbphab',
         'nactifs',
         'nenfants',
+        'npers',
         'ocde10', # nb unités de conso
         'pondmen',
         'poste_04_5_1_1_1_a',
@@ -150,13 +152,13 @@ def load_data_bdf_enl():
         'mag',
         'mcs',
         'mcsc',
-        'mne1',
         'mpa',
-        'mrtota2',
+        'mrtota2', # Revenu total du ménage
         'msitua',
         'msituac',
         'mtypmena',
         'muc1',
+        'nhab', # nombre d'habitants du logement
         'qex',
         'soc',
         'tau2010',
@@ -168,6 +170,7 @@ def load_data_bdf_enl():
         'idlog',
         'igreflog', # = 1 si l'individu est la personne de référence
         'ndip14',
+        'nanais'
         ]
     
     # Keep relevant variables :
@@ -176,6 +179,16 @@ def load_data_bdf_enl():
     conso_bdf_keep = input_bdf[variables_menages_bdf]
     #conso_bdf_keep = conso_bdf_keep.query('zeat != 0')
     del input_enl_indiv, input_enl, input_bdf
+    
+    indiv_enl_keep['plus_18'] = 1 * (indiv_enl_keep['nanais'] < 1996) # 18 ans et plus
+    indiv_enl_keep['plus_14'] = 1 * (indiv_enl_keep['nanais'] < 2000) # 14 ans et plus
+    
+    indiv_age = indiv_enl_keep.groupby('idlog').sum()
+    indiv_age = indiv_age.reset_index()
+    indiv_age = indiv_age[['idlog'] + ['plus_14'] + ['plus_18']]
+    
+    indiv_enl_keep = indiv_enl_keep[['idlog'] + ['igreflog'] + ['ndip14']]
+    indiv_enl_keep = indiv_enl_keep.merge(indiv_age, on = 'idlog')
     
     indiv_enl_keep = indiv_enl_keep.query('igreflog == 1')
     del indiv_enl_keep['igreflog']
