@@ -93,7 +93,6 @@ for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 's
     graph_builder_bar(df['cout_reforme_rev_disp_loyerimput_elasticite'], False)
     graph_builder_bar(df['cout_reforme_depenses_tot_elasticite'], False)
 
-
-
     # Calculer le budget total
     print df['cout_reforme_elasticite'].mean()
+    print df['cout_reforme_elasticite'].mean() * df_reforme['pondmen'].sum()

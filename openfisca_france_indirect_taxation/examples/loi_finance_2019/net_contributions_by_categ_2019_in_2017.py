@@ -29,7 +29,7 @@ simulated_variables = [
     'revenu_reforme_officielle_2019_in_2017',
     'cheques_energie_officielle_2019_in_2017',
     'cheques_energie_philippe_officielle_2019_in_2017',
-    'cheques_energie_augmente_proportionnel_officielle_2019_in_2017',
+    'cheques_energie_majore_officielle_2019_in_2017',
     'reste_transferts_neutre_officielle_2019_in_2017',
     'rev_disp_loyerimput',
     'rev_disponible',
@@ -59,31 +59,57 @@ print (df_reforme['pondmen'] * df_reforme['cheque_philippe']).sum()
 for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
 
+    df['cout_reforme_uc_avant_cheque_energie'] = (
+        df['revenu_reforme_officielle_2019_in_2017']
+        - df['tarifs_sociaux_electricite'] - df['tarifs_sociaux_gaz']
+        )
     df['cout_reforme_uc_cheque_officiel'] = (
         df['revenu_reforme_officielle_2019_in_2017']
         - df['cheques_energie_officielle_2019_in_2017']
+        )
+    df['cout_reforme_uc_cheque_majore'] = (
+        df['revenu_reforme_officielle_2019_in_2017']
+        - df['cheques_energie_majore_officielle_2019_in_2017']
         )
     df['cout_reforme_uc_cheque_philippe'] = (
         df['revenu_reforme_officielle_2019_in_2017']
         - df['cheques_energie_philippe_officielle_2019_in_2017']
         )
-    df['cout_reforme_uc_cheque_proportionnel'] = (
-        df['revenu_reforme_officielle_2019_in_2017']
-        - df['cheques_energie_augmente_proportionnel_officielle_2019_in_2017']
-        )
+
+    df['taux_effort_avant_cheque_energie'] = df['cout_reforme_uc_avant_cheque_energie'] / df['rev_disponible']
+    df['taux_effort_cheque_officiel'] = df['cout_reforme_uc_cheque_officiel'] / df['rev_disponible']
+    df['taux_effort_cheque_majore'] = df['cout_reforme_uc_cheque_majore'] / df['rev_disponible']
     df['taux_effort_cheque_philippe'] = df['cout_reforme_uc_cheque_philippe'] / df['rev_disponible']
 
     graph_builder_bar(df['niveau_de_vie'], False)
+    graph_builder_bar(df['cout_reforme_uc_avant_cheque_energie'], False)
     graph_builder_bar(df['cout_reforme_uc_cheque_officiel'], False)
     graph_builder_bar(df['cout_reforme_uc_cheque_philippe'], False)
-    graph_builder_bar(df['cout_reforme_uc_cheque_proportionnel'], False)
+    graph_builder_bar(df['cout_reforme_uc_cheque_majore'], False)
     graph_builder_bar(df['taux_effort_cheque_philippe'], False)
 
     # Calcul du revenu de la taxe :
+    df_reforme['cout_reforme_uc_avant_cheque_energie'] = (
+        df_reforme['revenu_reforme_officielle_2019_in_2017']
+        - df_reforme['tarifs_sociaux_electricite'] - df_reforme['tarifs_sociaux_gaz']
+        )
+    df_reforme['cout_reforme_uc_cheque_officiel'] = (
+        df_reforme['revenu_reforme_officielle_2019_in_2017']
+        - df_reforme['cheques_energie_officielle_2019_in_2017']
+        )
+    df_reforme['cout_reforme_uc_cheque_majore'] = (
+        df_reforme['revenu_reforme_officielle_2019_in_2017']
+        - df_reforme['cheques_energie_majore_officielle_2019_in_2017']
+        )
     df_reforme['cout_reforme_uc_cheque_philippe'] = (
         df_reforme['revenu_reforme_officielle_2019_in_2017']
         - df_reforme['cheques_energie_philippe_officielle_2019_in_2017']
         )
+    print (df_reforme['cout_reforme_uc_avant_cheque_energie'] * df_reforme['pondmen']).sum() / 1000000    
+    print (df_reforme['cout_reforme_uc_cheque_officiel'] * df_reforme['pondmen']).sum() / 1000000
+    print (df_reforme['cout_reforme_uc_cheque_majore'] * df_reforme['pondmen']).sum() / 1000000
     print (df_reforme['cout_reforme_uc_cheque_philippe'] * df_reforme['pondmen']).sum() / 1000000
     print (df_reforme['cheques_energie_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1000000
+    print (df_reforme['cheques_energie_majore_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1000000
+    print (df_reforme['cheques_energie_philippe_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1000000
     

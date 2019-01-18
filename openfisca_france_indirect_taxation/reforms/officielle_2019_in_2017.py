@@ -89,14 +89,13 @@ class officielle_2019_in_2017(Reform):
             return cheque
 
 
-    # Augmentation de 50€ pour tous les bénéficiaires
-    class cheques_energie_augmente_homogene_officielle_2019_in_2017(YearlyVariable):
+    class cheques_energie_majore_officielle_2019_in_2017(YearlyVariable):
         column = FloatCol
         entity = Menage
         label = u"Montant des chèques énergie tels que prévus par la loi"
     
         def formula(self, simulation, period):
-            revenu_fiscal = simulation.calculate('revdecm', period)
+            revenu_fiscal = simulation.calculate('revdecm', period) / 1.22
             ocde10 = simulation.calculate('ocde10', period)
             revenu_fiscal_uc = revenu_fiscal / ocde10
 
@@ -112,33 +111,6 @@ class officielle_2019_in_2017(Reform):
                 (63 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
                 (76 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))              
                 )
-
-            return cheque
-
-
-    # Augmentation proportionnelle pour une hausse moyenne de 50€ par bénéficiaire
-    class cheques_energie_augmente_proportionnel_officielle_2019_in_2017(YearlyVariable):
-        column = FloatCol
-        entity = Menage
-        label = u"Montant des chèques énergie tels que prévus par la loi"
-    
-        def formula(self, simulation, period):
-            revenu_fiscal = simulation.calculate('revdecm', period)
-            ocde10 = simulation.calculate('ocde10', period)
-            revenu_fiscal_uc = revenu_fiscal / ocde10
-
-            cheque = (
-                0 +
-                144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
-                190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
-                126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 > 1) * (ocde10 < 2) +
-                152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * ((ocde10 == 2) + (ocde10 > 2)) +
-                48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
-                63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
-                76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))              
-                ) * (200/150)
 
             return cheque
 
@@ -1052,8 +1024,7 @@ class officielle_2019_in_2017(Reform):
     
     def apply(self):
         self.update_variable(self.cheques_energie_officielle_2019_in_2017)
-        self.update_variable(self.cheques_energie_augmente_homogene_officielle_2019_in_2017)
-        self.update_variable(self.cheques_energie_augmente_proportionnel_officielle_2019_in_2017)
+        self.update_variable(self.cheques_energie_majore_officielle_2019_in_2017)
         self.update_variable(self.cheques_energie_philippe_officielle_2019_in_2017)        
         self.update_variable(self.combustibles_liquides_ticpe_officielle_2019_in_2017)
         self.update_variable(self.depenses_carburants_corrigees_officielle_2019_in_2017)

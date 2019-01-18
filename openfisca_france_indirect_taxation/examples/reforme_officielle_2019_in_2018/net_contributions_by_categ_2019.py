@@ -29,14 +29,14 @@ simulated_variables = [
     'revenu_reforme_officielle_2019_in_2018',
     'cheques_energie_officielle_2019_in_2018',
     'reste_transferts_neutre_officielle_2019_in_2018',
-    'rev_disp_loyerimput',
+    'rev_disponible',
     'depenses_tot',
     'ocde10',
     'tarifs_sociaux_electricite',
     'tarifs_sociaux_gaz',
     'total_taxes_energies_officielle_2019_in_2018',
     'total_taxes_energies',
-    'cheques_energie_augmente_proportionnel_officielle_2019_in_2018',
+    'cheques_energie_majore_officielle_2019_in_2018',
     'cheques_energie_philippe_officielle_2019_in_2018',
     'ticpe_totale_officielle_2019_in_2018',
     'pondmen'
@@ -59,12 +59,12 @@ for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 's
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
 
     df['cout_reforme'] = df['total_taxes_energies_officielle_2019_in_2018'] - df['total_taxes_energies']
-    df['cout_reforme_cheque_majore'] = df['cout_reforme'] + df['cheques_energie_officielle_2019_in_2018'] - df['cheques_energie_augmente_proportionnel_officielle_2019_in_2018']
+    df['cout_reforme_cheque_majore'] = df['cout_reforme'] + df['cheques_energie_officielle_2019_in_2018'] - df['cheques_energie_majore_officielle_2019_in_2018']
     df['cout_reforme_cheque_philippe'] = df['cout_reforme'] + df['cheques_energie_officielle_2019_in_2018'] - df['cheques_energie_philippe_officielle_2019_in_2018']
 
-    df['regressivite_revenu'] = df['cout_reforme'] / df['rev_disp_loyerimput']
+    df['regressivite_revenu'] = df['cout_reforme'] / df['rev_disponible']
     df['regressivite_depenses'] = df['cout_reforme'] / df['depenses_tot']
-    df['regressivite_revenu_cheque_philippe'] = df['cout_reforme_cheque_philippe'] / df['rev_disp_loyerimput']
+    df['regressivite_revenu_cheque_philippe'] = df['cout_reforme_cheque_philippe'] / df['rev_disponible']
 
     # Réalisation de graphiques
     df_to_plot = df[
@@ -80,3 +80,20 @@ for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 's
     graph_builder_bar(df_to_plot['cout_reforme_cheque_philippe'], False)
     graph_builder_bar(df_to_plot['regressivite_revenu'], False)
     graph_builder_bar(df_to_plot['regressivite_depenses'], False)
+
+    df_reforme['cout_reforme_cheque_officiel'] = (
+        df_reforme['total_taxes_energies_officielle_2019_in_2018'] - df_reforme['total_taxes_energies']
+        )
+    df_reforme['cout_reforme_cheque_majore'] = (
+        df_reforme['cout_reforme_cheque_officiel'] + df_reforme['cheques_energie_officielle_2019_in_2018'] - df_reforme['cheques_energie_majore_officielle_2019_in_2018']
+        )
+    df_reforme['cout_reforme_cheque_philippe'] = (
+        df_reforme['cout_reforme_cheque_officiel'] + df_reforme['cheques_energie_officielle_2019_in_2018'] - df_reforme['cheques_energie_philippe_officielle_2019_in_2018']
+        )
+    print (df_reforme['cout_reforme_cheque_officiel'] * df_reforme['pondmen']).sum() / 1000000
+    print (df_reforme['cout_reforme_cheque_majore'] * df_reforme['pondmen']).sum() / 1000000
+    print (df_reforme['cout_reforme_cheque_philippe'] * df_reforme['pondmen']).sum() / 1000000
+
+    print (df_reforme['cheques_energie_officielle_2019_in_2018'] * df_reforme['pondmen']).sum() / 1000000
+    print (df_reforme['cheques_energie_majore_officielle_2019_in_2018'] * df_reforme['pondmen']).sum() / 1000000
+    print (df_reforme['cheques_energie_philippe_officielle_2019_in_2018'] * df_reforme['pondmen']).sum() / 1000000
