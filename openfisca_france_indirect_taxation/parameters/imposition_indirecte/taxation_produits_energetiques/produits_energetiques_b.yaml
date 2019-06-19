@@ -1,0 +1,476 @@
+description: TICPE - produits énergétiques b
+carburateurs_type_essence_sous_conditions_hectolitre:
+  description: Carburateurs type essence, sous conditions (hectolitre)
+  values:
+    2014-04-01:
+      value: null
+    2003-01-01:
+      value: 2.54
+    2002-01-01:
+      value: 2.25
+    2000-01-01:
+      value: 14.76
+    1999-01-01:
+      value: 14.69
+    1998-01-01:
+      value: 14.56
+    1997-01-01:
+      value: 14.37
+    1996-01-01:
+      value: 14.07
+    1995-01-01:
+      value: 13.81
+    1994-01-01:
+      value: 13.58
+    1993-04-15:
+      value: 12.22
+    1993-01-01:
+      value: 11.97
+  metadata:
+    unit:
+      2002-01-01: currency-EUR
+      1993-01-01: currency-FRF
+carburateurs_type_essence_carburants_avion_hectolitre:
+  description: Carburateurs type essence, carburants pour avion (hectolitre)
+  values:
+    2018-01-01:
+      value: 39.79
+    2017-01-01:
+      value: 36.19
+    2016-01-01:
+      value: 34.02
+    2015-01-01:
+      value: 32.11
+    2008-01-01:
+      value: 30.2
+    2006-01-01:
+      value: 60.69
+    2003-01-01:
+      value: 58.92
+    2002-01-01:
+      value: 58.63
+    2000-01-01:
+      value: 384.62
+    1999-01-01:
+      value: 398.86
+    1998-01-01:
+      value: 394.92
+    1997-01-01:
+      value: 386.92
+    1996-01-01:
+      value: 380.92
+    1995-01-01:
+      value: 367.92
+    1994-01-01:
+      value: 347.41
+    1993-04-15:
+      value: 311.25
+    1993-01-01:
+      value: null
+  metadata:
+    unit:
+      2002-01-01: currency-EUR
+      1993-04-15: currency-FRF
+carburateurs_type_essence_autres_hectolitre:
+  description: Carburateurs type essence, autres (hectolitre)
+  values:
+    2018-01-01:
+      value: 68.51
+    2017-01-01:
+      value: 64.91
+    2016-01-01:
+      value: 62.74
+    2015-01-01:
+      value: 60.83
+    2008-01-01:
+      value: 58.92
+    1993-01-01:
+      value: null
+  metadata:
+    unit: currency-EUR
+autres_huiles_legeres_hectolitre:
+  description: Autres huiles légères (hectolitre)
+  values:
+    2018-01-01:
+      value: 67.52
+    2017-01-01:
+      value: 64.3
+    2016-01-01:
+      value: 62.35
+    2015-01-01:
+      value: 60.64
+    2008-01-01:
+      value: 58.92
+    2006-01-01:
+      value: 60.69
+    2003-01-01:
+      value: 58.92
+    2002-01-01:
+      value: 58.63
+    2000-01-01:
+      value: 384.62
+    1999-01-01:
+      value: 398.86
+    1998-01-01:
+      value: 394.92
+    1997-01-01:
+      value: 386.92
+    1996-01-01:
+      value: 380.92
+    1995-01-01:
+      value: 367.92
+    1994-01-01:
+      value: 347.41
+    1993-04-15:
+      value: 311.25
+    1993-01-01:
+      value: null
+  metadata:
+    unit:
+      2002-01-01: currency-EUR
+      1993-04-15: currency-FRF
+petrole_lampant_utilise_comme_combustible_hectolitre:
+  description: Pétrole lampant utilisé comme combustible (hectolitre)
+  values:
+    2018-01-01:
+      value: 15.25
+    2017-01-01:
+      value: 11.65
+    2016-01-01:
+      value: 9.48
+    2015-01-01:
+      value: 7.57
+    2003-01-01:
+      value: 5.66
+    2002-01-01:
+      value: 5.49
+    2000-01-01:
+      value: 51.73
+    1993-01-01:
+      value: null
+  metadata:
+    unit:
+      2002-01-01: currency-EUR
+      2000-01-01: currency-FRF
+petrole_lampant_autre_hectolitre:
+  description: Pétrole lampant, autre (hectolitre)
+  values:
+    2018-01-01:
+      value: 51.28
+    2017-01-01:
+      value: 47.68
+    2016-01-01:
+      value: 45.51
+    2015-01-01:
+      value: 43.6
+    2008-01-01:
+      value: 41.69
+    2006-01-01:
+      value: 42.84
+    2004-01-01:
+      value: 41.69
+    2003-01-01:
+      value: 39.19
+    2002-01-01:
+      value: 38.9
+    2000-01-01:
+      value: 255.18
+    1993-01-01:
+      value: null
+  metadata:
+    unit:
+      2002-01-01: currency-EUR
+      2000-01-01: currency-FRF
+carbureacteurs_type_petrole_lampant_sous_conditions_hectolitre:
+  description: Carburéacteurs, type pétrole lampant , sous conditions (hectolitre)
+  values:
+    2014-04-01:
+      value: null
+    2003-01-01:
+      value: 2.54
+    2002-01-01:
+      value: 2.25
+    2000-01-01:
+      value: 14.76
+    1999-01-01:
+      value: 14.69
+    1998-01-01:
+      value: 14.56
+    1997-01-01:
+      value: 14.37
+    1996-01-01:
+      value: 14.07
+    1995-01-01:
+      value: 13.81
+    1994-01-01:
+      value: 13.58
+    1993-04-15:
+      value: 12.22
+    1993-01-01:
+      value: 11.97
+  metadata:
+    ipp_csv_id: ticpe_carbu_petrole_lampant_cond
+    unit:
+      2002-01-01: currency-EUR
+      1993-01-01: currency-FRF
+carbureacteurs_type_petrole_lampant_carburant_moteurs_avion_hectolitre:
+  description: Carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre)
+  values:
+    2018-01-01:
+      value: 39.79
+    2017-01-01:
+      value: 36.19
+    2016-01-01:
+      value: 34.02
+    2015-01-01:
+      value: 32.11
+    2008-01-01:
+      value: 30.2
+    2006-01-01:
+      value: 42.84
+    2004-01-01:
+      value: 41.69
+    2003-01-01:
+      value: 39.19
+    2002-01-01:
+      value: 38.9
+    2000-01-01:
+      value: 255.18
+    1993-01-01:
+      value: null
+  metadata:
+    ipp_csv_id: ticpe_carbu_petrole_lampant
+    unit:
+      2002-01-01: currency-EUR
+      2000-01-01: currency-FRF
+carbureacteurs_type_petrole_lampant_autres_hectolitre:
+  description: Carburéacteurs, type pétrole lampant, autres (hectolitre)
+  values:
+    2018-01-01:
+      value: 51.28
+    2017-01-01:
+      value: 47.68
+    2016-01-01:
+      value: 45.51
+    2015-01-01:
+      value: 43.6
+    2008-01-01:
+      value: 41.69
+    1993-01-01:
+      value: null
+  metadata:
+    ipp_csv_id: ticpe_carbu_petrole_lampant_autres
+    unit: currency-EUR
+autres_huiles_moyennes_hectolitre:
+  description: Autres huiles moyennes (hectolitre)
+  values:
+    2018-01-01:
+      value: 51.28
+    2017-01-01:
+      value: 47.68
+    2016-01-01:
+      value: 45.51
+    2015-01-01:
+      value: 43.6
+    2008-01-01:
+      value: 41.69
+    2006-01-01:
+      value: 42.84
+    2004-01-01:
+      value: 41.69
+    2003-01-01:
+      value: 39.19
+    2002-01-01:
+      value: 38.9
+    2000-01-01:
+      value: 255.18
+    1993-01-01:
+      value: null
+  metadata:
+    ipp_csv_id: ticpe_autres_huiles_moyennes
+    unit:
+      2002-01-01: currency-EUR
+      2000-01-01: currency-FRF
+gazole_comme_carburants_sous_conditions_hectolitre:
+  description: Gazole comme carburants sous conditions (hectolitre)
+  values:
+    2018-01-01:
+      value: 18.82
+    2017-01-01:
+      value: 15.09
+    2016-01-01:
+      value: 12.83
+    2015-01-01:
+      value: 10.84
+    2014-04-01:
+      value: 8.86
+    2012-01-01:
+      value: 7.2
+    2003-01-01:
+      value: 5.66
+    2002-01-01:
+      value: 5.49
+    2000-01-01:
+      value: 51.73
+    1999-01-01:
+      value: 51.47
+    1998-01-01:
+      value: 51.01
+    1997-01-01:
+      value: 50.36
+    1996-01-01:
+      value: 49.32
+    1995-01-01:
+      value: 48.4
+    1994-01-01:
+      value: 47.59
+    1993-04-15:
+      value: 42.85
+    1993-01-01:
+      value: null
+  metadata:
+    ipp_csv_id: ticpe_gazole_cond
+    unit:
+      2002-01-01: currency-EUR
+      1993-04-15: currency-FRF
+gazole_fioul_domestique_hectolitre:
+  description: Gazole, fioul domestique (hectolitre)
+  values:
+    2018-01-01:
+      value: 15.62
+    2017-01-01:
+      value: 11.89
+    2016-01-01:
+      value: 9.63
+    2015-01-01:
+      value: 7.64
+    2008-01-01:
+      value: 5.66
+    1993-01-01:
+      value: null
+  metadata:
+    ipp_csv_id: ticpe_fioul_domestique
+    unit: currency-EUR
+metadata:
+  order:
+  - carburateurs_type_essence_sous_conditions_hectolitre
+  - carburateurs_type_essence_carburants_avion_hectolitre
+  - carburateurs_type_essence_autres_hectolitre
+  - autres_huiles_legeres_hectolitre
+  - petrole_lampant_utilise_comme_combustible_hectolitre
+  - petrole_lampant_autre_hectolitre
+  - carbureacteurs_type_petrole_lampant_sous_conditions_hectolitre
+  - carbureacteurs_type_petrole_lampant_carburant_moteurs_avion_hectolitre
+  - carbureacteurs_type_petrole_lampant_autres_hectolitre
+  - autres_huiles_moyennes_hectolitre
+  - gazole_comme_carburants_sous_conditions_hectolitre
+  - gazole_fioul_domestique_hectolitre
+  reference:
+    2018-01-01:
+      title: Loi 2017-1837 du 30/12/2017 (LF pour 2018)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000036339197
+    2017-01-01:
+      title: Loi 2016-1918 du 29/12/2016 (LFR pour 2016)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000033734341
+    2016-01-01: Loi 2015-1786 du 29/12/2015 (LFR pour 2015) - art. 14 et 17
+    2015-01-01:
+      title: Loi 2014-1654 du 29/12/2014 (LF pour 2015) - art. 36
+      href: https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000029994876&cidTexte=JORFTEXT000029988857
+    2014-04-01:
+      title: Loi 2013-1278 du 29/12/2013 (LF pour 2014) - art. 32
+      href: https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000028402549&cidTexte=JORFTEXT000028399511
+    2012-01-01:
+      title: Loi 2011-1977 du 28/12/2011 (LF pour 2012) - art. 21
+      href: https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000025048278&cidTexte=JORFTEXT000025044460
+    2011-01-01:
+      title: Loi 2010-1657 du 29/12/2010 (LF pour 2011) - art. 138
+      href: https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000023347209&cidTexte=JORFTEXT000023314376
+    2010-03-11: Loi 2010-237 du 09/03/2010 (LFR pour 2010) - art. 4 et 5
+    2010-01-01:
+      title: Loi 2009-1674 du 30/12/2009 (LFR pour 2009) - art. 76
+      href: https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000021580225&cidTexte=JORFTEXT000021559075
+    2009-01-01:
+      title: Loi 2008-1443 du 30/12/2008 (LFR pour 2008)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000020014790
+    2008-12-29: Loi 2008-1425 du 27/12/2008 (LF pour 2009)  - art. 16 et 17
+    2008-01-01:
+      title: Loi 2007-1822 du 24/12/2007 (LF pour 2008)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000017853368
+    2006-01-01:
+      title: Loi 2004-1484 du 30/12/2004 (LF pour 2005)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000789373
+    2004-01-01:
+      title: Loi 2003-1311 du 30/12/2003 (LF pour 2004)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000612133
+    2003-01-01:
+      title: Loi 2002-1575 du 30/12/2002 (LF pour 2003)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000234121
+    2002-01-01:
+      title: Loi 2001-1275 du 28/12/2001 (LF pour 2002)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000592233
+    2000-01-01:
+      title: Loi 99-1172 du 30/12/1999 (LF pour 2000)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000762233
+    1999-01-01:
+      title: Loi 98-1266 du 30/12/1998 (LF pour 1999)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000209044
+    1998-01-01:
+      title: Loi 97-1269 du 30/12/1997 (LF pour 1998)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000569621
+    1997-01-01:
+      title: Loi 96-1181 du 30/12/1996 (LF pour 1997)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000380034
+    1996-01-01:
+      title: Loi 95-1346 du 30/12/1995 (LF pour 1996)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000191068
+    1995-01-01:
+      title: Loi 94-1162 du 29/12/1994 (LF pour 1995)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000367398
+    1994-01-01:
+      title: Loi 93-1352 du 30/12/1993 (LF pour 1994)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000509319
+    1993-04-15:
+      title: Loi 92-1376 du 30/12/1992 (LF pour 1993)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000178406
+    1993-01-01:
+      title: Loi 92-1376 du 30/12/1992 (LF pour 1993)
+      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000178406
+  date_parution_jo:
+    2018-01-01: 2017-12-31
+    2017-01-01: 2016-12-30
+    2016-01-01: 2015-12-30
+    2015-01-01: 2014-12-30
+    2014-04-01: 2013-12-30
+    2012-01-01: 2011-12-29
+    2011-01-01: 2010-12-30
+    2010-03-11: 2010-03-10
+    2010-01-01: 2009-12-31
+    2009-01-01: 2008-12-31
+    2008-12-29: 2008-12-28
+    2008-01-01: 2007-12-27
+    2006-01-01: 2004-12-31
+    2004-01-01: 2003-12-31
+    2003-01-01: 2002-12-31
+    2002-01-01: 2001-12-29
+    2000-01-01: 1999-12-31
+    1999-01-01: 1998-12-31
+    1998-01-01: 1997-12-31
+    1997-01-01: 1996-12-31
+    1996-01-01: 1995-12-31
+    1995-01-01: 1994-12-30
+    1994-01-01: 1993-12-31
+    1993-04-15: 1992-12-31
+    1993-01-01: 1992-12-31
+  description_en: TICPE - Energy products b
+documentation: |
+  Notes :
+  NB : données renseignées dans l'article 265 du code des douanes
+  NB : les produits énergétiques sont rangés de a à e dans l'ordre de leur numérotation dans l'article 265 du code des douanes. Cette séparation en cinq onglets a pour seul objectif la lisibilité.
+  NB : en 2011 le nom de TIPP (taxe intérieure de consommation sur les produits pétroliers) change pour TICPE (taxe intérieure de consommation sur les produits énergétiques). L'objectif est de souligner le changement d'assiette récent qui incorpore désormais les biocarburants.
+  Dans le code des douanes, les produits énergétiques sont désignés par les indices suivants :
+  17 - carburéacteurs, type pétrole lampant , sous conditions
+  17 bis - carburéacteurs, type pétrole lampant, carburant moteurs d'avion
+  17 ter - carburéacteurs, type pétrole lampant, autres
+  18 - autres huiles moyennes
+  20 - gazole comme carburants sous conditions
+  21 - gazole, fioul domestique

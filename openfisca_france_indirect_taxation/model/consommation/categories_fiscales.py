@@ -3,7 +3,7 @@
 
 from __future__ import division
 
-
+from sortedcontainers.sorteddict import SortedDict
 from biryani.strings import slugify
 import logging
 
@@ -21,6 +21,7 @@ codes_coicop_data_frame = None
 
 def generate_variables(tax_benefit_system, categories_fiscales = None, reform_key = None):
     assert categories_fiscales is not None
+
     reference_categories = sorted(categories_fiscales_data_frame['categorie_fiscale'].drop_duplicates())
     completed_categories_fiscales = insert_tva(categories_fiscales)
 
@@ -28,9 +29,13 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
         reference_categories = set(reference_categories).union(set(categories_fiscales.categorie_fiscale.unique()))
 
     for categorie_fiscale in reference_categories:
+        if categorie_fiscale == '':
+            continue
+
         year_start = 1994
         year_final_stop = 2014
         functions_by_name = dict()
+        formulas = SortedDict()
         for year in range(year_start, year_final_stop + 1):
             postes_coicop = sorted(
                 completed_categories_fiscales.query(
@@ -57,7 +62,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
                     categorie_fiscale, year_start, year_stop, previous_postes_coicop))
 
                 functions_by_name[dated_function_name] = dated_func
-
+                # formulas["{}-01-01".format(year_start)] = dated_func
                 year_start = year
 
             previous_postes_coicop = postes_coicop
@@ -67,31 +72,35 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
         # Trick to create a class with a dynamic name.
         if reform_key is None:
             definitions_by_name = dict(
-                column = FloatCol,
+                value_type = float,
                 entity = Menage,
                 label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
                 )
             definitions_by_name.update(functions_by_name)
             tax_benefit_system.add_variable(
-                type(class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
+                type(class_name, (YearlyVariable,), definitions_by_name)
                 )
 
         else:
-            if class_name.encode('utf-8') in tax_benefit_system.column_by_name:
-                definitions_by_name = dict()
+            if class_name in tax_benefit_system.variables:
+                definitions_by_name = tax_benefit_system.variables[class_name].__dict__.copy()
                 definitions_by_name.update(functions_by_name)
+                for attribute in ['name', 'baseline_variable', 'dtype', 'json_type', 'is_neutralized', 'formulas']:
+                    definitions_by_name.pop(attribute, None)
+                #   definitions_by_name['formulas'] = formulas
                 tax_benefit_system.update_variable(
-                    type(class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
+                    type(class_name, (YearlyVariable,), definitions_by_name)
                     )
             else:
                 definitions_by_name = dict(
-                    column = FloatCol,
+                    value_type = float,
                     entity = Menage,
                     label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
                     )
                 definitions_by_name.update(functions_by_name)
+                definitions_by_name['formulas'] = formulas
                 tax_benefit_system.add_variable(
-                    type(class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
+                    type(class_name, (YearlyVariable,), definitions_by_name)
                     )
 
         del definitions_by_name

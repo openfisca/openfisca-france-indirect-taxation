@@ -34,7 +34,7 @@ options_by_dir = collections.OrderedDict((
     ))
 
 def test():
-    for directory, options in options_by_dir.iteritems():
+    for directory, options in options_by_dir.items():
         path = os.path.abspath(os.path.join(os.path.dirname(__file__), directory))
 
         if options.get('requires'):

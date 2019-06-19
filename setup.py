@@ -33,6 +33,9 @@ setup(
     url = 'https://github.com/openfisca/openfisca-france-indirect-taxation',
 
     extras_require = dict(
+        dev = [
+            'pdbpp',
+            ],
         test = [
             'nose',
             'pandas >= 0.17',

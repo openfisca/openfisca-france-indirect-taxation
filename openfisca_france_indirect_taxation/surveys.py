@@ -30,7 +30,7 @@ class SurveyScenario(AbstractSurveyScenario):
 
         # it is either reform or reform_key which is not None
         assert not(
-            (reform is not None) and (reform_key is not None)   
+            (reform is not None) and (reform_key is not None)
             )
 
         if reform_key is not None:
@@ -75,7 +75,7 @@ class SurveyScenario(AbstractSurveyScenario):
 
         survey_scenario.new_simulation()
         if reform or reform_key:
-            survey_scenario.new_simulation(reference = True)
+            survey_scenario.new_simulation(use_baseline =True)
 
         if calibration_kwargs:
             survey_scenario.calibrate(**calibration_kwargs)

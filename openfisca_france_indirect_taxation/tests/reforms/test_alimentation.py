@@ -9,18 +9,22 @@ import datetime
 
 from openfisca_core import periods
 from openfisca_core.tools import assert_near
-from openfisca_france_indirect_taxation.tests import base
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
+from openfisca_france_indirect_taxation.scenarios import init_single_entity
+from openfisca_france_indirect_taxation.reforms.alimentation import reforme_alimentation
+
+# Initialize a tax_benefit_system
+tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
 
 def test_reforme_alimentation():
     year = 2014
-    reform = base.get_cached_reform(
-        reform_key = 'test_reforme_alimentation',
-        tax_benefit_system = base.tax_benefit_system,
-        )
-    scenario = reform.new_scenario().init_single_entity(
-        period = periods.period('year', year),
-        personne_de_reference = dict(
+    period = periods.period(year)
+    reform = reforme_alimentation(tax_benefit_system)
+    scenario = init_single_entity(
+        scenario = reform.new_scenario(),
+        period = period,
+        personne_de_reference =dict(
             birth = datetime.date(year - 40, 1, 1),
             ),
         menage = dict(
@@ -30,10 +34,10 @@ def test_reforme_alimentation():
             ),
         )
     reform_simulation = scenario.new_simulation(debug = True)
-    reference_simulation = scenario.new_simulation(debug = True, reference = True)
+    reference_simulation = scenario.new_simulation(debug = True, use_baseline =True)
 
-    reference_tva_taux_super_reduit = reference_simulation.calculate('tva_taux_super_reduit')
-    reform_tva_taux_super_reduit = reform_simulation.calculate('tva_taux_super_reduit')
+    reference_tva_taux_super_reduit = reference_simulation.calculate('tva_taux_super_reduit', period)
+    reform_tva_taux_super_reduit = reform_simulation.calculate('tva_taux_super_reduit', period)
 
     absolute_error_margin = 0.01
 
@@ -49,8 +53,8 @@ def test_reforme_alimentation():
         absolute_error_margin = absolute_error_margin
         )
 
-    reference_depenses_vin = reference_simulation.calculate('depenses_vin')
-    reform_depenses_vin = reform_simulation.calculate('depenses_vin')
+    reference_depenses_vin = reference_simulation.calculate('depenses_vin', period)
+    reform_depenses_vin = reform_simulation.calculate('depenses_vin', period)
     assert_near(
         reference_depenses_vin,
         100,
@@ -66,5 +70,5 @@ def test_reforme_alimentation():
 if __name__ == '__main__':
     import logging
     import sys
-    logging.basicConfig(level = logging.ERROR, stream = sys.stdout)
+    logging.basicConfig(level = logging.INFO, stream = sys.stdout)
     test_reforme_alimentation()

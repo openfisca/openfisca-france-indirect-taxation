@@ -86,7 +86,7 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
         depenses = depenses,
         )
 
-    for name, preprocessed_data_frame in preprocessed_data_frame_by_name.iteritems():
+    for name, preprocessed_data_frame in preprocessed_data_frame_by_name.items():
         assert preprocessed_data_frame.index.name == 'ident_men', \
             'Index is labelled {} instead of ident_men in data frame {} for year {}'.format(
                 preprocessed_data_frame.index.name, name, year_data)

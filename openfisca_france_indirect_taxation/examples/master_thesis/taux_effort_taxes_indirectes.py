@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
     for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
         taxe_indirectes = \
-            dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
+            dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
 
         taxe_indirectes['TVA'] = taxe_indirectes['tva_total']
         taxe_indirectes['TICPE'] = taxe_indirectes['ticpe_totale']
@@ -63,7 +63,7 @@ if __name__ == '__main__':
             'taxes_indirectes_total': u'toutes les taxes indirectes'})
         for revenu in [u'revenu disponible']: #[u'revenu disponible', u'depenses totales', u'toutes les taxes indirectes']
             list_part_taxes = []
-            for taxe in ['TVA', 'TICPE', u'Taxes alcools', u'Taxes assurances', u'Taxes tabacs']: 
+            for taxe in ['TVA', 'TICPE', u'Taxes alcools', u'Taxes assurances', u'Taxes tabacs']:
                 taxe_indirectes[u'part ' + taxe] = (
                     taxe_indirectes[taxe] / taxe_indirectes[revenu]
                     )

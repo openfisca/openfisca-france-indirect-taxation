@@ -9,7 +9,7 @@ import numpy
 
 
 class depenses_carburants(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Consommation de carburants"
 
@@ -18,7 +18,7 @@ class depenses_carburants(YearlyVariable):
 
 
 class depenses_carburants_corrigees(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Consommation en carburants corrigees après appariement ENTD pour 2011 seulement"
     definition_period = YEAR
@@ -26,20 +26,20 @@ class depenses_carburants_corrigees(YearlyVariable):
     def formula_2011(self, simulation, period):
         depenses_carburants_corrigees = simulation.calculate('depenses_carburants_corrigees_entd', period)
         return depenses_carburants_corrigees
-    
+
     def formula(self, simulation, period):
         depenses_carburants_corrigees = simulation.calculate('depenses_carburants', period)
         return depenses_carburants_corrigees
 
 
 class depenses_carburants_corrigees_entd(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Consommation de carburants corrigees après appariement ENTD"
 
 
 class depenses_combustibles_liquides(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en combustibles liquides"
 
@@ -50,7 +50,7 @@ class depenses_combustibles_liquides(YearlyVariable):
 
 
 class depenses_combustibles_solides(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en combustibles solides"
 
@@ -61,15 +61,15 @@ class depenses_combustibles_solides(YearlyVariable):
 
 
 class depenses_diesel(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Construction par pondération des dépenses spécifiques au diesel"
 
     def formula(self, simulation, period):
-        conso_totale_vp_diesel = simulation.legislation_at(period.start).imposition_indirecte.quantite_carbu_vp.diesel
-        conso_totale_vp_essence = simulation.legislation_at(period.start).imposition_indirecte.quantite_carbu_vp.essence
-        taille_parc_diesel = simulation.legislation_at(period.start).imposition_indirecte.parc_vp.diesel
-        taille_parc_essence = simulation.legislation_at(period.start).imposition_indirecte.parc_vp.essence
+        conso_totale_vp_diesel = parameters(period.start).imposition_indirecte.quantite_carbu_vp.diesel
+        conso_totale_vp_essence = parameters(period.start).imposition_indirecte.quantite_carbu_vp.essence
+        taille_parc_diesel = parameters(period.start).imposition_indirecte.parc_vp.diesel
+        taille_parc_essence = parameters(period.start).imposition_indirecte.parc_vp.essence
 
         conso_moyenne_vp_diesel = conso_totale_vp_diesel / taille_parc_diesel
         conso_moyenne_vp_essence = conso_totale_vp_essence / taille_parc_essence
@@ -99,7 +99,7 @@ class depenses_diesel(YearlyVariable):
 
 
 class depenses_diesel_corrigees(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Consommation en diesel corrigees après appariement ENTD pour 2011 seulement"
     definition_period = YEAR
@@ -107,25 +107,25 @@ class depenses_diesel_corrigees(YearlyVariable):
     def formula_2011(self, simulation, period):
         depenses_diesel_corrigees = simulation.calculate('depenses_diesel_corrigees_entd', period)
         return depenses_diesel_corrigees
-    
+
     def formula(self, simulation, period):
         depenses_diesel_corrigees = simulation.calculate('depenses_diesel', period)
         return depenses_diesel_corrigees
 
 
 class depenses_diesel_corrigees_entd(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Consommation en diesel corrigees après appariement ENTD"
 
 
 class depenses_diesel_htva(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en diesel htva (mais incluant toujours la TICPE)"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         depenses_diesel = simulation.calculate('depenses_diesel_corrigees', period)
         depenses_diesel_htva = depenses_diesel - tax_from_expense_including_tax(depenses_diesel, taux_plein_tva)
 
@@ -133,22 +133,22 @@ class depenses_diesel_htva(YearlyVariable):
 
 
 class depenses_diesel_ht(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en diesel ht (prix brut sans TVA ni TICPE)"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
         try:
             majoration_ticpe_diesel = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
-            accise_diesel = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
+            accise_diesel = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
             accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
         except:
-            accise_diesel_ticpe = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+            accise_diesel_ticpe = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
 
-        prix_diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+        prix_diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
         taux_implicite_diesel = (
             (accise_diesel_ticpe * (1 + taux_plein_tva)) /
             (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
@@ -162,23 +162,23 @@ class depenses_diesel_ht(YearlyVariable):
 
 
 class depenses_diesel_recalculees(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en diesel recalculées à partir du prix ht"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         depenses_diesel_ht = simulation.calculate('depenses_diesel_ht', period)
 
         try:
             majoration_ticpe_diesel = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
-            accise_diesel = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
+            accise_diesel = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
             accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
         except:
-            accise_diesel_ticpe = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+            accise_diesel_ticpe = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
 
-        prix_diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+        prix_diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
         taux_implicite_diesel = (
             (accise_diesel_ticpe * (1 + taux_plein_tva)) /
             (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
@@ -190,7 +190,7 @@ class depenses_diesel_recalculees(YearlyVariable):
 
 
 class depenses_electricite(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en électricité totale après imputation factures jointes"
 
@@ -203,7 +203,7 @@ class depenses_electricite(YearlyVariable):
 
 
 class depenses_electricite_factures_jointes(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en électricité estimées des factures jointes électricité et gaz"
 
@@ -212,19 +212,19 @@ class depenses_electricite_factures_jointes(YearlyVariable):
 
         depenses_electricite_seule = simulation.calculate('depenses_electricite_seule', period)
         depenses_gaz_seul = simulation.calculate('depenses_gaz_seul', period)
-        depenses_gaz_elec = (depenses_electricite_seule * depenses_gaz_seul) > 0      
-        
+        depenses_gaz_elec = (depenses_electricite_seule * depenses_gaz_seul) > 0
+
         moyenne_elec = numpy.mean(depenses_electricite_seule * depenses_gaz_elec)
         moyenne_gaz = numpy.mean(depenses_gaz_seul * depenses_gaz_elec)
         part_elec = moyenne_elec / (moyenne_elec + moyenne_gaz)
-        
+
         depenses_electricite_factures_jointes = depenses_factures_jointes * part_elec
 
         return depenses_electricite_factures_jointes
 
 
 class depenses_electricite_percentile(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Classement par percentile des dépenses d'électricité"
 
@@ -237,7 +237,7 @@ class depenses_electricite_percentile(YearlyVariable):
 
 
 class depenses_electricite_prix_unitaire(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Prix unitaire de l'électricité de chaque ménage, après affectation d'un compteur"
 
@@ -247,9 +247,9 @@ class depenses_electricite_prix_unitaire(YearlyVariable):
         # Note : les barèmes ne donnent que les prix unitaires pour 3 et 6 kva. Pour les puissances supérieures,
         # les valeurs sont assez proches de celles du compteur 6kva que nous utilisons comme proxy.
         prix_unitaire_3kva = \
-            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_3_kva
+            parameters(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_3_kva
         prix_unitaire_6kva = \
-            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+            parameters(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
 
         prix_unitaire = (
             (depenses_electricite_percentile < 4) * prix_unitaire_3kva +
@@ -260,7 +260,7 @@ class depenses_electricite_prix_unitaire(YearlyVariable):
 
 
 class depenses_electricite_seule(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en électricité sans inclure dépenses jointes avec le gaz"
 
@@ -271,7 +271,7 @@ class depenses_electricite_seule(YearlyVariable):
 
 
 class depenses_electricite_tarif_fixe(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en électricité des ménages sur le coût fixe de l'abonnement, après affectation d'un compteur"
 
@@ -279,15 +279,15 @@ class depenses_electricite_tarif_fixe(YearlyVariable):
         depenses_electricite_percentile = simulation.calculate('depenses_electricite_percentile', period)
 
         tarif_fixe_3kva = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_3_kva
+            parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_3_kva
         tarif_fixe_6kva = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_6_kva
+            parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_6_kva
         tarif_fixe_9kva = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_9_kva
+            parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_9_kva
         tarif_fixe_12kva = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_12_kva
+            parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_12_kva
         tarif_fixe_15kva = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
+            parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
 
         tarif_fixe = (
             (depenses_electricite_percentile < 4) * tarif_fixe_3kva +
@@ -301,7 +301,7 @@ class depenses_electricite_tarif_fixe(YearlyVariable):
 
 
 class depenses_electricite_variables(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en électricité des ménages, hors coût fixe de l'abonnement"
 
@@ -315,7 +315,7 @@ class depenses_electricite_variables(YearlyVariable):
 
 
 class depenses_energies_logement(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en électricité sans inclure dépenses jointes avec le gaz"
 
@@ -335,7 +335,7 @@ class depenses_energies_logement(YearlyVariable):
 
 
 class depenses_energie_thermique(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en énergie thermique"
 
@@ -346,7 +346,7 @@ class depenses_energie_thermique(YearlyVariable):
 
 
 class depenses_energies_totales(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en électricité sans inclure dépenses jointes avec le gaz"
 
@@ -361,7 +361,7 @@ class depenses_energies_totales(YearlyVariable):
 
 
 class depenses_essence(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Construction par déduction des dépenses spécifiques à l'essence"
 
@@ -374,7 +374,7 @@ class depenses_essence(YearlyVariable):
 
 
 class depenses_essence_corrigees(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Consommation en essence corrigees après appariement ENTD pour 2011 seulement"
     definition_period = YEAR
@@ -382,20 +382,20 @@ class depenses_essence_corrigees(YearlyVariable):
     def formula_2011(self, simulation, period):
         depenses_essence_corrigees = simulation.calculate('depenses_essence_corrigees_entd', period)
         return depenses_essence_corrigees
-    
+
     def formula(self, simulation, period):
         depenses_essence_corrigees = simulation.calculate('depenses_essence', period)
         return depenses_essence_corrigees
 
 
 class depenses_essence_corrigees_entd(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Consommation en essence corrigees après appariement ENTD"
 
 
 class depenses_essence_ht(Variable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en essence hors taxes (HT, i.e. sans TVA ni TICPE)"
     definition_period = YEAR
@@ -422,7 +422,7 @@ class depenses_essence_ht(Variable):
 
 
 class depenses_gaz_factures_jointes(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en gaz estimées des factures jointes électricité et gaz"
 
@@ -430,12 +430,12 @@ class depenses_gaz_factures_jointes(YearlyVariable):
         depenses_factures_jointes = simulation.calculate('poste_04_5_1_1_1_a', period)
         depenses_electricite_factures_jointes = simulation.calculate('depenses_electricite_factures_jointes', period)
         depenses_gaz_factures_jointes = depenses_factures_jointes - depenses_electricite_factures_jointes
- 
+
         return depenses_gaz_factures_jointes
 
 
 class depenses_gaz_liquefie(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en gaz liquéfié"
 
@@ -446,7 +446,7 @@ class depenses_gaz_liquefie(YearlyVariable):
 
 
 class depenses_gaz_prix_unitaire(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Prix unitaire du gaz rencontré par les ménages"
 
@@ -458,13 +458,13 @@ class depenses_gaz_prix_unitaire(YearlyVariable):
         quantite_optimale = simulation.calculate('quantites_gaz_contrat_optimal', period)
 
         prix_unitaire_base = \
-            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_base_ttc
+            parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_base_ttc
         prix_unitaire_b0 = \
-            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b0_ttc
+            parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b0_ttc
         prix_unitaire_b1 = \
-            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b1_ttc
+            parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b1_ttc
         prix_unitaire_b2i = \
-            simulation.legislation_at(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b2i_ttc
+            parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b2i_ttc
 
         prix_unitaire_optimal = (
             (quantite_base == quantite_optimale) * prix_unitaire_base +
@@ -477,7 +477,7 @@ class depenses_gaz_prix_unitaire(YearlyVariable):
 
 
 class depenses_gaz_seul(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en gaz de ville"
 
@@ -488,7 +488,7 @@ class depenses_gaz_seul(YearlyVariable):
 
 
 class depenses_gaz_tarif_fixe(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en gaz des ménages sur le coût fixe de l'abonnement"
 
@@ -500,13 +500,13 @@ class depenses_gaz_tarif_fixe(YearlyVariable):
         quantite_optimale = simulation.calculate('quantites_gaz_contrat_optimal', period)
 
         tarif_fixe_base = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.base_0_1000
+            parameters(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.base_0_1000
         tarif_fixe_b0 = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b0_1000_6000
+            parameters(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b0_1000_6000
         tarif_fixe_b1 = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b1_6_30000
+            parameters(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b1_6_30000
         tarif_fixe_b2i = \
-            simulation.legislation_at(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b2i_30000
+            parameters(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b2i_30000
 
         tarif_fixe_optimal = (
             (quantite_base == quantite_optimale) * tarif_fixe_base +
@@ -519,7 +519,7 @@ class depenses_gaz_tarif_fixe(YearlyVariable):
 
 
 class depenses_gaz_variables(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en gaz des ménages, hors coût fixe de l'abonnement"
 
@@ -534,7 +534,7 @@ class depenses_gaz_variables(YearlyVariable):
 
 
 class depenses_gaz_ville(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en gaz estimées des factures jointes électricité et gaz"
 
@@ -542,46 +542,46 @@ class depenses_gaz_ville(YearlyVariable):
         depenses_gaz_seul = simulation.calculate('depenses_gaz_seul', period)
         depenses_gaz_factures_jointes = simulation.calculate('depenses_gaz_factures_jointes', period)
         depenses_gaz_ville = depenses_gaz_seul + depenses_gaz_factures_jointes
- 
+
         return depenses_gaz_ville
 
 
 class depenses_sp_e10(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Construction par pondération des dépenses spécifiques au sans plomb e10"
 
     def formula(self, simulation, period):
         depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
-        part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
+        part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10 = depenses_essence * part_sp_e10
 
         return depenses_sp_e10
 
 
 class depenses_sp_e10_ht(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en essence sans plomb e10 hors taxes (HT, i.e. sans TVA ni TICPE)"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
-        part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
+        part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10 = depenses_essence * part_sp_e10
         depenses_sp_e10_htva = depenses_sp_e10 - tax_from_expense_including_tax(depenses_sp_e10, taux_plein_tva)
 
         try:
             accise_super_e10 = \
-                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+                parameters(period.start).imposition_indirecte.ticpe.ticpe_super_e10
             majoration_ticpe_super_e10 = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
             accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
         except:
             accise_super_e10 = \
-                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+                parameters(period.start).imposition_indirecte.ticpe.ticpe_super_e10
 
-        super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+        super_95_e10_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
         taux_implicite_sp_e10 = (
             (accise_ticpe_super_e10 * (1 + taux_plein_tva)) /
             (super_95_e10_ttc - accise_ticpe_super_e10 * (1 + taux_plein_tva))
@@ -593,41 +593,41 @@ class depenses_sp_e10_ht(YearlyVariable):
 
 
 class depenses_sp_95(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Construction par pondération des dépenses spécifiques au sans plomb 95"
 
     def formula(self, simulation, period):
         depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
-        part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
+        part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp_95 = depenses_essence * part_sp95
 
         return depenses_sp_95
 
 
 class depenses_sp_95_ht(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en essence sans plomb 95 hors taxes (HT, i.e. sans TVA ni TICPE)"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
         try:
-            accise_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_super95 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
             majoration_ticpe_super95 = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
             accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
         except:
-            accise_ticpe_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_ticpe_super95 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
 
-        super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+        super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
         taux_implicite_sp95 = (
             (accise_ticpe_super95 * (1 + taux_plein_tva)) /
             (super_95_ttc - accise_ticpe_super95 * (1 + taux_plein_tva))
             )
         depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
-        part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
+        part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp_95 = depenses_essence * part_sp95
         depenses_sp_95_htva = depenses_sp_95 - tax_from_expense_including_tax(depenses_sp_95, taux_plein_tva)
         depenses_sp_95_ht = \
@@ -637,41 +637,41 @@ class depenses_sp_95_ht(YearlyVariable):
 
 
 class depenses_sp_98(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Construction par pondération des dépenses spécifiques au sans plomb 98"
 
     def formula(self, simulation, period):
         depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
-        part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
+        part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
         depenses_sp_98 = depenses_essence * part_sp98
 
         return depenses_sp_98
 
 
 class depenses_sp_98_ht(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en essence sans plomb 98 hors taxes (HT, i.e. sans TVA ni TICPE)"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
         try:
-            accise_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_super98 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
             majoration_ticpe_super98 = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
             accise_ticpe_super98 = accise_super98 + majoration_ticpe_super98
         except:
-            accise_ticpe_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_ticpe_super98 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
 
-        super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
+        super_98_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_98_ttc
         taux_implicite_sp98 = (
             (accise_ticpe_super98 * (1 + taux_plein_tva)) /
             (super_98_ttc - accise_ticpe_super98 * (1 + taux_plein_tva))
             )
         depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
-        part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
+        part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
         depenses_sp_98 = depenses_essence * part_sp98
         depenses_sp_98_htva = depenses_sp_98 - tax_from_expense_including_tax(depenses_sp_98, taux_plein_tva)
         depenses_sp_98_ht = \
@@ -681,36 +681,36 @@ class depenses_sp_98_ht(YearlyVariable):
 
 
 class depenses_super_plombe(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Construction par pondération des dépenses spécifiques au super plombe"
 
     def formula(self, simulation, period):
         depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
         part_super_plombe = \
-            simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
+            parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
         depenses_super_plombe = depenses_essence * part_super_plombe
 
         return depenses_super_plombe
 
 
 class depenses_super_plombe_ht(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en essence super plombée hors taxes (HT, i.e. sans TVA ni TICPE)"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         accise_super_plombe_ticpe = \
-            simulation.legislation_at(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
-        super_plombe_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
+            parameters(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
+        super_plombe_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
         taux_implicite_super_plombe = (
             (accise_super_plombe_ticpe * (1 + taux_plein_tva)) /
             (super_plombe_ttc - accise_super_plombe_ticpe * (1 + taux_plein_tva))
             )
         depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
         part_super_plombe = \
-            simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
+            parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
         depenses_super_plombe = depenses_essence * part_super_plombe
         depenses_super_plombe_htva = \
             depenses_super_plombe - tax_from_expense_including_tax(depenses_super_plombe, taux_plein_tva)
@@ -719,40 +719,39 @@ class depenses_super_plombe_ht(YearlyVariable):
 
         return depenses_super_plombe_ht
 
-        
+
 class combustibles_liquides(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"=1 si le menage consomme des combustibles liquides"
 
     def formula(self, simulation, period):
         depenses_combustibles_liquides = simulation.calculate('depenses_combustibles_liquides', period)
         combustibles_liquides = 1 * (depenses_combustibles_liquides > 0)
-        
+
         return combustibles_liquides
-    
-        
+
+
 class electricite(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"=1 si le menage consomme de l'électricité"
 
     def formula(self, simulation, period):
         depenses_electricite = simulation.calculate('depenses_electricite', period)
         electricite = 1 * (depenses_electricite > 0)
-        
+
         return electricite
-        
-    
+
+
 class gaz_ville(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"=1 si le menage consomme du gaz"
 
     def formula(self, simulation, period):
         depenses_gaz_ville = simulation.calculate('depenses_gaz_ville', period)
         gaz_ville = 1 * (depenses_gaz_ville > 0)
-        
+
         return gaz_ville
-        
-        
+

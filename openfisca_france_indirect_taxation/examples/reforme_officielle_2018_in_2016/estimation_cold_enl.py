@@ -18,7 +18,7 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_
 def estimate_froid():
     data_enl = create_niveau_vie_quantiles()[0]
 
-    variables_reference = [
+    variables_use_baseline =[
         'pondmen',
         'quantites_combustibles_liquides',
         'quantites_electricite_selon_compteur',
@@ -37,16 +37,16 @@ def estimate_froid():
         reform_key = 'officielle_2018_in_2016',
         year = year,
         data_year = data_year
-        )    
-    df_reference = survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
-    
+        )
+    df_use_baseline =survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
+
     data_enl = data_enl.query('niveau_vie_decile < 4')
     data_enl['froid_4_criteres_3_deciles'] = (
         data_enl['froid_cout'] + data_enl['froid_isolation'] + data_enl['froid_impaye'] + data_enl['froid_installation']
         )
     data_enl['froid_4_criteres_3_deciles'] = 1 * (data_enl['froid_4_criteres_3_deciles'] > 0)
-    
-    data_enl = data_enl.query('revtot > 0')    
+
+    data_enl = data_enl.query('revtot > 0')
 
     quantites_moyennes_combustibles_liquides = \
         (df_reference['quantites_combustibles_liquides'] * df_reference['pondmen']).sum() / df_reference['pondmen'].sum()
@@ -61,15 +61,15 @@ def estimate_froid():
         (data_enl['depenses_electricite'] * data_enl['pondmen']).sum() / data_enl['pondmen'].sum()
     depenses_moyennes_gaz_ville = \
         (data_enl['depenses_gaz_ville'] * data_enl['pondmen']).sum() / data_enl['pondmen'].sum()
-    
+
     data_enl['quantites_combustibles_liquides'] = \
-        data_enl['depenses_combustibles_liquides'] * quantites_moyennes_combustibles_liquides / depenses_moyennes_combustibles_liquides    
+        data_enl['depenses_combustibles_liquides'] * quantites_moyennes_combustibles_liquides / depenses_moyennes_combustibles_liquides
     data_enl['quantites_electricite_selon_compteur'] = \
         data_enl['depenses_electricite'] * quantites_moyennes_electricite / depenses_moyennes_electricite
     data_enl['quantites_gaz_final'] = \
         data_enl['depenses_gaz_ville'] * quantites_moyennes_gaz_ville / depenses_moyennes_gaz_ville
-    
-    # Logisctic regression    
+
+    # Logisctic regression
     regressors = [
         'revtot',
         'quantites_combustibles_liquides',
@@ -94,7 +94,7 @@ def estimate_froid():
         ]
 
     regression_logit = smf.Logit(data_enl['froid_4_criteres_3_deciles'], data_enl[regressors]).fit()
-    
+
     return regression_ols, regression_logit
 
 

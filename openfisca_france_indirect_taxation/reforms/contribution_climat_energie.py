@@ -9,7 +9,7 @@ def build_reform(tax_benefit_system):
     Reform = reforms.make_reform(
         key = 'contribution_climat_energie',
         name = u"Réforme telle que prévue par la loi",
-        reference = tax_benefit_system,
+        use_baseline =tax_benefit_system,
         )
 
     reform = Reform()

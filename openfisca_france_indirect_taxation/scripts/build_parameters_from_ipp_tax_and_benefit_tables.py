@@ -2,26 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014, 2015 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 
 """Build YAML files of IPP tax and benefit tables to generate an XML file of parameters."""
@@ -82,7 +63,7 @@ yaml.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, dict_constr
 
 def iter_ipp_values(node):
     if isinstance(node, dict):
-        for name, child in node.iteritems():
+        for name, child in node.items():
             for path, value in iter_ipp_values(child):
                 yield [name] + path, value
     else:
@@ -148,13 +129,13 @@ def main():
                 elif not isinstance(start, datetime.date):
                     start = start[u"Année Revenus"]
                 row_by_start[start] = row
-            sorted_row_by_start = sorted(row_by_start.iteritems())
+            sorted_row_by_start = sorted(row_by_start.items())
 
             unsorted_relative_ipp_paths = set()
             relative_ipp_paths_by_start = {}
             for start, row in sorted_row_by_start:
                 relative_ipp_paths_by_start[start] = start_relative_ipp_paths = []
-                for name, child in row.iteritems():
+                for name, child in row.items():
                     if name in date_names:
                         continue
                     if name in note_names:
@@ -302,7 +283,7 @@ def slugify_ipp_translations_keys(ipp_translations):
             slugify_ipp_translation_key(key),
             slugify_ipp_translations_keys(value) if isinstance(value, dict) else value,
             )
-        for key, value in ipp_translations.iteritems()
+        for key, value in ipp_translations.items()
         )
 
 
@@ -451,7 +432,7 @@ def transform_node_to_element(name, node):
             node_element = etree.Element('NODE', attrib = dict(
                 code = strings.slugify(name, separator = u'_'),
                 ))
-            for key, value in node.iteritems():
+            for key, value in node.items():
                 child_element = transform_node_to_element(key, value)
                 if child_element is not None:
                     node_element.append(child_element)

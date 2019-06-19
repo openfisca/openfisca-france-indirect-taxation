@@ -16,8 +16,8 @@ def test_rattrapage_diesel():
         tax_benefit_system = base.tax_benefit_system,
         )
     scenario = reform.new_scenario().init_single_entity(
-        period = periods.period('year', year),
-        personne_de_reference = dict(
+        period = periods.period(year),
+        personne_de_reference =dict(
             birth = datetime.date(year - 40, 1, 1),
             ),
         menage = dict(

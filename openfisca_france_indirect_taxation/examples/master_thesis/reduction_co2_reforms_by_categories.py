@@ -30,9 +30,9 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
 
     for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
         df_reform = \
-            dataframe_by_group(survey_scenario, category, simulated_variables, reference = False)
-        df_reference = \
-            dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
+            dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =False)
+        df_use_baseline =\
+            dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
 
         df_reform[u'Reduction in carbon emissions from reform'] = \
             df_reform['emissions_CO2_energies_totales'] - df_reference['emissions_CO2_energies_totales']

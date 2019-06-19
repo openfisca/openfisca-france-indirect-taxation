@@ -39,8 +39,8 @@ def energy_modes(data):
         + 1 * data['gaz_ville']
         - 1 * (data['combustibles_liquides'] * data['gaz_ville'])
         )
-    data['energy_mode'] = data['energy_mode'].astype(int)        
-    
+    data['energy_mode'] = data['energy_mode'].astype(int)
+
     return data
 
 
@@ -128,10 +128,10 @@ def brde(data, depenses, revenu, logement):
         data['bas_revenu'] * data['depenses_elevees']
         )
     del data['depenses_bis']
-    
-    return data 
 
-    
+    return data
+
+
 def cheque_energie_logement_transport(data, depenses_logement, depenses_transport, cheque):
     data['part_cheque_logement'] = (
         data[depenses_logement] / (data[depenses_logement] + data[depenses_transport])
@@ -142,8 +142,8 @@ def cheque_energie_logement_transport(data, depenses_logement, depenses_transpor
     del data['part_cheque_logement']
 
     return data
-    
-    
+
+
 def cheque_par_energie(data, depenses_combustibles_liquides, depenses_electricite, depenses_gaz, cheque):
     data['part_cheque_combustibles_liquides'] = (
         data[depenses_combustibles_liquides] / (data[depenses_combustibles_liquides] + data[depenses_electricite] + data[depenses_gaz])
@@ -159,7 +159,7 @@ def cheque_par_energie(data, depenses_combustibles_liquides, depenses_electricit
     del data['part_cheque_combustibles_liquides'], data['part_cheque_electricite']
 
     return data
-    
+
 
 def cheque_vert(data_reference, data_reforme, reforme):
     unite_conso = (data_reforme['ocde10'] * data_reforme['pondmen']).sum()
@@ -198,7 +198,7 @@ def collapse(dataframe, groupe, var):
     return var_weighted_grouped
 
 
-def dataframe_by_group(survey_scenario, category, variables, reference = False):
+def dataframe_by_group(survey_scenario, category, variables, use_baseline =False):
     pivot_table = pandas.DataFrame()
     period = survey_scenario.year
     if reference is not False:
@@ -206,7 +206,7 @@ def dataframe_by_group(survey_scenario, category, variables, reference = False):
             pivot_table = pandas.concat([
                 pivot_table,
                 survey_scenario.compute_pivot_table(values = [values_reference], columns = [category],
-                    reference = True, period = period)])
+                    use_baseline =True, period = period)])
     else:
         for values_reform in variables:
             pivot_table = pandas.concat([
@@ -326,7 +326,7 @@ def precarite(data, brde, tee, logement):
         data['precarite_{}'.format(logement)] = (
             data[brde] + data[tee] - (data[brde] * data[tee])
             )
-      
+
     return data
 
 

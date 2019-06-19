@@ -8,9 +8,6 @@ import logging
 
 from biryani.strings import slugify
 
-from openfisca_core.columns import FloatCol
-
-
 from openfisca_france_indirect_taxation.model.base import *
 
 
@@ -30,19 +27,19 @@ def generate_postes_variables(tax_benefit_system):
         code_coicop = codes_coicop_data_frame.query('code_bdf == @code_bdf')['code_coicop'].drop_duplicates().tolist()
         assert len(code_coicop) == 1, u"Too many code_coicop for {}: {}".format(code_bdf, code_coicop)
         code_coicop = code_coicop[0]
-        class_name = u"poste_{}".format(slugify(unicode(code_coicop), separator = u'_'))
-        log.info(u'Creating variable {} with label {}'.format(class_name, label.decode('utf-8')))
+        class_name = u"poste_{}".format(slugify(code_coicop, separator = u'_'))
+        log.info(u'Creating variable {} with label {}'.format(class_name, label))
         # Trick to create a class with a dynamic name.
-        type(class_name.encode('utf-8'), (YearlyVariable,), dict(
-            column = FloatCol,
+        type(class_name, (YearlyVariable,), dict(
+            value_type = float,
             entity = Menage,
-            label = label.decode('utf-8'),
+            label = label,
             ))
         tax_benefit_system.add_variable(
-            type(class_name.encode('utf-8'), (YearlyVariable,), dict(
-                column = FloatCol,
+            type(class_name, (YearlyVariable,), dict(
+                value_type = float,
                 entity = Menage,
-                label = label.decode('utf-8'),
+                label = label,
                 ))
             )
 
@@ -95,17 +92,17 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
 
     assert set(functions_by_name_by_poste.keys()) == postes_coicop_all
 
-    for poste, functions_by_name in functions_by_name_by_poste.iteritems():
+    for poste, functions_by_name in functions_by_name_by_poste.items():
         class_name = u'depenses_ht_poste_{}'.format(slugify(poste, separator = u'_'))
         # if Reform is None:
         definitions_by_name = dict(
-            column = FloatCol,
+            value_type = float,
             entity = Menage,
             label = u"Dépenses hors taxe du poste_{0}".format(poste),
             )
         definitions_by_name.update(functions_by_name)
         tax_benefit_system.add_variable(
-            type(class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
+            type(class_name, (YearlyVariable,), definitions_by_name)
             )
         del definitions_by_name
 
@@ -132,18 +129,18 @@ def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = 
         functions_by_name = dict(formula = dated_func)
         if reform_key is None:
             definitions_by_name = dict(
-                column = FloatCol,
+                value_type = float,
                 entity = Menage,
                 label = label,
                 )
             definitions_by_name.update(functions_by_name)
             tax_benefit_system.add_variable(
-                type(class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
+                type(class_name, (YearlyVariable,), definitions_by_name)
                 )
         else:
             definitions_by_name = functions_by_name
             tax_benefit_system.update_variable(
-                type(class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
+                type(class_name, (YearlyVariable,), definitions_by_name)
                 )
 
         del definitions_by_name

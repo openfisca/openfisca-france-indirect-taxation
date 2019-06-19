@@ -2,14 +2,12 @@
 
 
 import glob
-import itertools
 import os
 
 from openfisca_core.taxbenefitsystems import TaxBenefitSystem
 from openfisca_france_indirect_taxation.param import preprocessing
 
 from openfisca_france_indirect_taxation import entities
-from openfisca_france_indirect_taxation import scenarios
 
 
 COUNTRY_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -24,9 +22,10 @@ class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
 
     def __init__(self):
         TaxBenefitSystem.__init__(self, entities.entities)
-        self.Scenario = scenarios.Scenario
-        param_file = os.path.join(COUNTRY_DIR, 'param', 'parameters.xml')
-        self.add_legislation_params(param_file)
+        # param_file = os.path.join(COUNTRY_DIR, 'param', 'parameters.xml')
+        # self.add_legislation_params(param_file)
+        param_dir = os.path.join(COUNTRY_DIR, 'parameters')
+        self.load_parameters(param_dir)
         self.add_variables_from_directory(os.path.join(COUNTRY_DIR, 'model'))
         for extension_dir in EXTENSIONS_DIRECTORIES:
             self.load_extension(extension_dir)

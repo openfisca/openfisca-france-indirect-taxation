@@ -40,17 +40,17 @@ class reforme_tva_2019(Reform):
 
 
     class poste_11_1_1_1_1_reforme_tva_2019(YearlyVariable):
-        column = FloatCol
+        value_type = float
         entity = Menage
         label = u"Dépenses en restaurant augmentation de la TVA"
-    
+
         def formula(self, simulation, period):
             poste_11_1_1_1_1 = simulation.calculate('poste_11_1_1_1_1', period)
-            ancien_taux_intermediaire = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
-            nouveau_taux_tva = simulation.legislation_at(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
+            ancien_taux_intermediaire = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_intermediaire
+            nouveau_taux_tva = parameters(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
             incidence_consommateur = 0.5
             elasticite_prix = -0.0
-            
+
             poste_11_1_1_1_1_reforme_tva_2019 = (
                 poste_11_1_1_1_1
                 * (1 +
@@ -60,20 +60,20 @@ class reforme_tva_2019(Reform):
                 )
 
             return poste_11_1_1_1_1_reforme_tva_2019
-    
+
 
     class poste_11_1_1_1_2_reforme_tva_2019(YearlyVariable):
-        column = FloatCol
+        value_type = float
         entity = Menage
         label = u"Dépenses en café/bars augmentation de la TVA"
-    
+
         def formula(self, simulation, period):
             poste_11_1_1_1_2 = simulation.calculate('poste_11_1_1_1_2', period)
-            ancien_taux_intermediaire = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
-            nouveau_taux_tva = simulation.legislation_at(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
+            ancien_taux_intermediaire = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_intermediaire
+            nouveau_taux_tva = parameters(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
             incidence_consommateur = 0.5
             elasticite_prix = -0.0
-            
+
             poste_11_1_1_1_2_reforme_tva_2019 = (
                 poste_11_1_1_1_2
                 * (1 +
@@ -83,20 +83,20 @@ class reforme_tva_2019(Reform):
                 )
 
             return poste_11_1_1_1_2_reforme_tva_2019
-    
+
 
     class poste_11_1_2_1_1_reforme_tva_2019(YearlyVariable):
-        column = FloatCol
+        value_type = float
         entity = Menage
         label = u"Dépenses en cantine augmentation de la TVA"
-    
+
         def formula(self, simulation, period):
             poste_11_1_2_1_1 = simulation.calculate('poste_11_1_2_1_1', period)
-            ancien_taux_intermediaire = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
-            nouveau_taux_tva = simulation.legislation_at(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
+            ancien_taux_intermediaire = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_intermediaire
+            nouveau_taux_tva = parameters(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
             incidence_consommateur = 0.5
             elasticite_prix = -0.0
-            
+
             poste_11_1_2_1_1_reforme_tva_2019 = (
                 poste_11_1_2_1_1
                 * (1 +
@@ -106,20 +106,20 @@ class reforme_tva_2019(Reform):
                 )
 
             return poste_11_1_2_1_1_reforme_tva_2019
-    
+
 
     class poste_11_1_3_1_reforme_tva_2019(YearlyVariable):
-        column = FloatCol
+        value_type = float
         entity = Menage
         label = u"Autres dépenses en restauration, augmentation de la TVA"
-    
+
         def formula(self, simulation, period):
             poste_11_1_3_1 = simulation.calculate('poste_11_1_3_1', period)
-            ancien_taux_intermediaire = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
-            nouveau_taux_tva = simulation.legislation_at(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
+            ancien_taux_intermediaire = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_intermediaire
+            nouveau_taux_tva = parameters(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
             incidence_consommateur = 0.5
             elasticite_prix = -0.0
-            
+
             poste_11_1_3_1_reforme_tva_2019 = (
                 poste_11_1_3_1
                 * (1 +
@@ -129,20 +129,20 @@ class reforme_tva_2019(Reform):
                 )
 
             return poste_11_1_3_1_reforme_tva_2019
-    
+
 
     class poste_11_1_3_2_reforme_tva_2019(YearlyVariable):
-        column = FloatCol
+        value_type = float
         entity = Menage
         label = u"Autres dépenses en restauration (cadeaux à autres ménages), augmentation de la TVA"
-    
+
         def formula(self, simulation, period):
             poste_11_1_3_2 = simulation.calculate('poste_11_1_3_2', period)
-            ancien_taux_intermediaire = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
-            nouveau_taux_tva = simulation.legislation_at(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
+            ancien_taux_intermediaire = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_intermediaire
+            nouveau_taux_tva = parameters(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
             incidence_consommateur = 0.5
             elasticite_prix = -0.0
-            
+
             poste_11_1_3_2_reforme_tva_2019 = (
                 poste_11_1_3_2
                 * (1 +
@@ -152,20 +152,20 @@ class reforme_tva_2019(Reform):
                 )
 
             return poste_11_1_3_2_reforme_tva_2019
-    
+
 
     class poste_11_2_1_1_1_reforme_tva_2019(YearlyVariable):
-        column = FloatCol
+        value_type = float
         entity = Menage
         label = u"Dépenses en hébergements augmentation de la TVA"
-    
+
         def formula(self, simulation, period):
             poste_11_2_1_1_1 = simulation.calculate('poste_11_2_1_1_1', period)
-            ancien_taux_intermediaire = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_intermediaire
-            nouveau_taux_tva = simulation.legislation_at(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
+            ancien_taux_intermediaire = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_intermediaire
+            nouveau_taux_tva = parameters(period.start).reforme_tva_2019.nouveau_taux_tva_a_2019
             incidence_consommateur = 0.5
             elasticite_prix = -0.0
-            
+
             poste_11_2_1_1_1_reforme_tva_2019 = (
                 poste_11_2_1_1_1
                 * (1 +
@@ -175,7 +175,7 @@ class reforme_tva_2019(Reform):
                 )
 
             return poste_11_2_1_1_1_reforme_tva_2019
-    
+
 
     def apply(self):
         self.update_variable(self.poste_11_1_1_1_1_reforme_tva_2019)

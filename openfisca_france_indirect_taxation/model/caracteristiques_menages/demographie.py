@@ -10,7 +10,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 
 class age(YearlyVariable):
-    column = AgeCol
+    value_type = int
     entity = Individu
     label = u"Age de l'individu"
 
@@ -20,13 +20,13 @@ class age(YearlyVariable):
 
 
 class agepr(YearlyVariable):
-    column = AgeCol
+    value_type = int
     entity = Menage
     label = u"Age personne de référence"
 
 
 class age_group_pr(YearlyVariable):
-    column = AgeCol
+    value_type = int
     entity = Menage
     label = u"Groupe d'âge personne de référence"
 
@@ -46,36 +46,36 @@ class age_group_pr(YearlyVariable):
 
 
 class birth(YearlyVariable):
-    column = DateCol
+    value_type = date
     entity = Individu
     label = u"Date de naissance"
 
 
 class nactifs(YearlyVariable):
-    column = IntCol
+    value_type = int
     entity = Menage
     label = u"Nombre d'actifs dans le ménage"
 
 
 class nadultes(YearlyVariable):
-    column = IntCol
+    value_type = int
     entity = Menage
     label = u"Nombre d'adultes dans le ménage"
 
 
 class nenfants(YearlyVariable):
-    column = IntCol
+    value_type = int
     entity = Menage
     label = u"Nombre d'enfants dans le ménage"
 
 
 class npers(YearlyVariable):
-    column = IntCol
+    value_type = int
     entity = Menage
     label = u"Nombre de personnes dans le ménage"
 
 
 class role_menage(YearlyVariable):
-    column = IntCol
+    value_type = int
     entity = Individu
     label = u"Rôle dans le ménage"

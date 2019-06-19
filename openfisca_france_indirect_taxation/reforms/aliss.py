@@ -9,7 +9,6 @@ import pandas as pd
 import pkg_resources
 
 from openfisca_core.reforms import Reform
-from openfisca_core.columns import FloatCol
 from openfisca_france_indirect_taxation.variables import YearlyVariable
 
 
@@ -189,7 +188,7 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
         for categorie_fiscale in categories_fiscales_reform.categorie_fiscale.unique()
         )
 
-    for categorie_fiscale, codes_bdf in codes_bdf_by_reform_categorie_fiscale.iteritems():
+    for categorie_fiscale, codes_bdf in codes_bdf_by_reform_categorie_fiscale.items():
         categories_fiscales.loc[
             categories_fiscales.code_bdf.isin(codes_bdf), 'categorie_fiscale'] = categorie_fiscale
 
@@ -351,7 +350,7 @@ def new_tva_total_function_creator(categories_fiscales):
 
 
 def generate_additional_tva_variables(tax_benefit_system, reform_key = None, taux_by_categorie_fiscale = None):
-    for categorie_fiscale, taux in taux_by_categorie_fiscale.iteritems():
+    for categorie_fiscale, taux in taux_by_categorie_fiscale.items():
         if not categorie_fiscale.startswith('tva'):
             continue
         # Create a depenses (TTC) class with a dynamic name.
@@ -361,12 +360,12 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
             depenses_new_tva_func = depenses_new_tva_function_creator(
                 categorie_fiscale = categorie_fiscale, taux = taux)
             definitions_by_name = dict(
-                column = FloatCol,
+                value_type = float,
                 entity = Menage,
                 label = u"Dépenses taxes comprises: {0}".format(categorie_fiscale),
                 function = depenses_new_tva_func,
                 )
-            depenses_variable_class = type(depenses_class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
+            depenses_variable_class = type(depenses_class_name, (YearlyVariable,), definitions_by_name)
             tax_benefit_system.add_variable(depenses_variable_class)
             del definitions_by_name
 
@@ -375,12 +374,12 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
         if tax_benefit_system.get_column(tva_class_name) is None:
             new_tva_func = new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
             definitions_by_name = dict(
-                column = FloatCol,
+                value_type = float,
                 entity = Menage,
                 label = u"Montant de la TVA acquitée à {0}".format(categorie_fiscale),
                 function = new_tva_func,
                 )
-            tva_variable_class = type(tva_class_name.encode('utf-8'), (YearlyVariable,), definitions_by_name)
+            tva_variable_class = type(tva_class_name, (YearlyVariable,), definitions_by_name)
             tax_benefit_system.add_variable(tva_variable_class)
             del definitions_by_name
 
@@ -396,5 +395,5 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
     definitions_by_name = dict(
         function = new_tva_total_func,
         )
-    type(u'tva_total'.encode('utf-8'), (YearlyVariable,), definitions_by_name)
+    type(u'tva_total', (YearlyVariable,), definitions_by_name)
     del definitions_by_name

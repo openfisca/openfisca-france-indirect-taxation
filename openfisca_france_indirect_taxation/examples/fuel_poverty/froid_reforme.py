@@ -55,11 +55,11 @@ survey_scenario = SurveyScenario.create(
     data_year = data_year
     )
 
-indiv_df_reference = survey_scenario.create_data_frame_by_entity(simulated_variables,
-    reference = True, period = year)
+indiv_df_use_baseline =survey_scenario.create_data_frame_by_entity(simulated_variables,
+    use_baseline =True, period = year)
 
-menages_reference = indiv_df_reference['menage']
-#menages_reference = menages_reference.query('niveau_vie_decile < 4')
+menages_use_baseline =indiv_df_reference['menage']
+#menages_use_baseline =menages_reference.query('niveau_vie_decile < 4')
 menages_reference['froid_4_criteres_3_deciles'] = \
     menages_reference['froid_4_criteres_3_deciles'].astype(int)
 
@@ -75,8 +75,8 @@ while max_rsquared_adj > current_max_rsquared_adj:
         variables_kept = variables_kept + [variable_to_include]
     for variable in new_stock_variables:
         variables = variables_kept + [variable]
-        
-        regressors = ' ' 
+
+        regressors = ' '
         for element in variables:
             if regressors == ' ':
                 regressors = element

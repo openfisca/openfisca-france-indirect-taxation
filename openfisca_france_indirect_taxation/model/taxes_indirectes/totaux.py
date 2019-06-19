@@ -8,7 +8,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 
 class taxes_indirectes_total(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Montant total de taxes indirectes payées"
 
@@ -22,7 +22,7 @@ class taxes_indirectes_total(YearlyVariable):
 
 
 class taxes_indirectes_total_hors_tva(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Montant total de taxes indirectes payées sans compter la TVA"
 

@@ -84,7 +84,7 @@ def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_cod
         coicop_nomenclature.code_coicop.str[:len(coicop_sub_code)] == coicop_sub_code,
         ['label_{}'.format(level[:-1]) for level in known_levels]
         ].drop_duplicates().dropna().to_dict(orient = 'records')[0]
-    for key, value in labels_by_sub_level.iteritems():
+    for key, value in labels_by_sub_level.items():
         labels_by_sub_level[key] = value
     modified_level = sub_levels[len(coicop_code.split('.')) - 1][:-1]
     labels_by_sub_level['label_{}'.format(modified_level)] = label
@@ -173,7 +173,7 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
             'origin': origin
             }
         additional_dict.update(infra_labels)
-        for item, val in additional_dict.iteritems():
+        for item, val in additional_dict.items():
             additional_row[item] = [val]
 
         coicop_nomenclature = coicop_nomenclature.append(additional_row)

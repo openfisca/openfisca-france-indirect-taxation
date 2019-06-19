@@ -57,7 +57,7 @@ def get_ht_variables(year):
     data_year = year
     survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
     return [
-        variable for variable in survey_scenario.tax_benefit_system.column_by_name.keys()
+        variable for variable in survey_scenario.tax_benefit_system.variables.keys()
         if '_ht_' in variable
         ]
 

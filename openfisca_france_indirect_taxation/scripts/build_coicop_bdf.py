@@ -434,7 +434,7 @@ adjusted_coicop_by_original = {
 def adjust_coicop(data_frame):
     non_overlapping_adjust_coicop = dict()
     remaining_adjust_coicop = dict()
-    for key, value in adjusted_coicop_by_original.iteritems():
+    for key, value in adjusted_coicop_by_original.items():
         if value not in adjusted_coicop_by_original.keys():
             non_overlapping_adjust_coicop[key] = value
         else:

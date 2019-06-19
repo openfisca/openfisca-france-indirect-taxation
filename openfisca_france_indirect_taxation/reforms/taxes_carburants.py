@@ -9,7 +9,7 @@ def build_reform(tax_benefit_system):
     Reform = reforms.make_reform(
         key = 'taxes_carburants',
         name = u"Réforme de l'imposition indirecte des carburants",
-        reference = tax_benefit_system,
+        use_baseline =tax_benefit_system,
         )
 
     reform = Reform()

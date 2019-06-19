@@ -8,7 +8,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 
 class depenses_assurance_sante(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en assurances liées aux transports"
 
@@ -18,7 +18,7 @@ class depenses_assurance_sante(YearlyVariable):
 
 
 class depenses_assurance_transport(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en assurances liées aux transports"
 
@@ -28,7 +28,7 @@ class depenses_assurance_transport(YearlyVariable):
 
 
 class depenses_autres_assurances(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en assurances liées aux transports"
 
@@ -44,22 +44,22 @@ class depenses_autres_assurances(YearlyVariable):
 
 
 class depenses_ticpe(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Consommation de carburants"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         return simulation.calculate('depenses_ht_ticpe', period) * (1 + taux_plein_tva)
         # This is equivalent to call directly poste_07_2_2_1_1
 
 class depenses_essence_recalculees(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Dépenses en essence recalculées à partir du prix ht"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         depenses_sp_e10_ht = simulation.calculate('depenses_sp_e10_ht', period)
         depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
         depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
@@ -67,7 +67,7 @@ class depenses_essence_recalculees(YearlyVariable):
 
 
 class depenses_tot(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Somme des dépenses du ménage"
 
@@ -83,7 +83,7 @@ class depenses_tot(YearlyVariable):
 
 
 class depenses_totales(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Consommation totale du ménage"
 
@@ -101,37 +101,37 @@ class depenses_totales(YearlyVariable):
 
 
 class distance(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Distance annuelle parcourue imputée de l'ENTD"
 
 
 class distance_routiere_hebdomadaire_teg(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Distance routière parcourue par le ménage pour se rendre à son teg par semaine"
 
 
 class duree_moyenne_trajet_aller_retour_teg(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Durée moyenne de l'aller-retour pour le teg"
 
 
 class quantite_diesel(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Quantité de diesel consommée (en hecto-litres)"
 
 
 class quantite_supercarburants(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Quantité de supercarburants (super 95, super98 et superE10) consommée (en hecto-litres)"
 
 
 class somme_coicop12(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Somme des postes coicop12"
 
@@ -143,7 +143,7 @@ class somme_coicop12(YearlyVariable):
 
 
 class somme_coicop12_conso(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Somme des postes coicop12 de 1 à 8"
 

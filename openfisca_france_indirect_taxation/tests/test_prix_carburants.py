@@ -20,7 +20,7 @@ data_year = 2011
 survey_scenario = SurveyScenario.create(year = year, data_year = data_year)
 
 for category in ['niveau_vie_decile']:
-    taxe_indirectes = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
+    taxe_indirectes = dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
 
 assert 63.18 < taxe_indirectes['accise_sp_95'].mean() < 63.20 # accise en 2011 : 60.69 + 2.5 majoration régionale
 assert taxe_indirectes['accise_sp_95'].mean() == taxe_indirectes['accise_sp_95_e10'].mean() # same taxes at this time

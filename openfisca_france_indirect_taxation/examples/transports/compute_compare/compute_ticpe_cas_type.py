@@ -27,7 +27,7 @@ for element in columns:
         year = year
         simulation = base.tax_benefit_system.new_scenario().init_single_entity(
             period = year,
-            personne_de_reference = dict(
+            personne_de_reference =dict(
                 birth = datetime.date(year - 40, 1, 1),
                 ),
             menage = dict(

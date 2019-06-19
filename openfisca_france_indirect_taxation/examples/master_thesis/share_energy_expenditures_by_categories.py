@@ -29,7 +29,7 @@ survey_scenario = SurveyScenario.create(
     )
 
 for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
-    df = dataframe_by_group(survey_scenario, category, simulated_variables, reference = True)
+    df = dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
 
     df.rename(columns = {'rev_disp_loyerimput': 'disposable income'},
         inplace = True)

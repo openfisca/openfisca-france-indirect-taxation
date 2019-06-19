@@ -72,7 +72,7 @@ def tax_from_expense_including_tax(expense = None, tax_rate = None):
 def insert_tva(categories_fiscales):
     categories_fiscales = categories_fiscales.copy()
     extracts = pd.DataFrame()
-    for categorie_primaire, tva in tva_by_categorie_primaire.iteritems():
+    for categorie_primaire, tva in tva_by_categorie_primaire.items():
         extract = categories_fiscales.query('categorie_fiscale == @categorie_primaire').copy()
         extract['categorie_fiscale'] = tva
         extracts = pd.concat([extracts, extract], ignore_index=True)
@@ -115,9 +115,9 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
         taux_by_categorie_fiscale = None, year_start = None, year_stop = None):
     if len(postes_coicop) != 0:
         if reform_key is None:
-            def func(self, simulation, period):
-                return sum(simulation.calculate(
-                    'poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
+            def func(entity, period_arg):
+                return sum(entity(
+                    'poste_' + slugify(poste, separator = u'_'), period_arg) for poste in postes_coicop
                     )
             func.__name__ = "formula_{year_start}".format(
                 year_start = year_start, year_stop = year_stop)
@@ -130,25 +130,25 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                 (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
                 for poste in postes_coicop)
 
-            def func(self, simulation, period, categorie_fiscale_by_poste = categorie_fiscale_by_poste,
+            def func(entity, period_arg, parameters, categorie_fiscale_by_poste = categorie_fiscale_by_poste,
                     taux_by_categorie_fiscale = taux_by_categorie_fiscale):
 
                 taux_by_categorie_fiscale.update({
-                    'tva_taux_super_reduit': simulation.legislation_at(period.start).imposition_indirecte.tva[
-                        'taux_super_reduit'
+                    'tva_taux_super_reduit': parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[
+                        'taux_particulier_super_reduit'
                         ],
-                    'tva_taux_reduit': simulation.legislation_at(period.start).imposition_indirecte.tva[
+                    'tva_taux_reduit': parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[
                         'taux_reduit'
                         ],
-                    'tva_taux_intermediaire': simulation.legislation_at(period.start).imposition_indirecte.tva[
+                    'tva_taux_intermediaire': parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[
                         'taux_intermediaire'
                         ],
-                    'tva_taux_plein': simulation.legislation_at(period.start).imposition_indirecte.tva[
+                    'tva_taux_plein': parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[
                         'taux_plein'
                         ],
                     })
-                poste_agrege = sum(simulation.calculate(
-                    'depenses_ht_poste_' + slugify(poste, separator = u'_'), period
+                poste_agrege = sum(entity(
+                    'depenses_ht_poste_' + slugify(poste, separator = u'_'), period_arg
                     ) * (
                     1 + taux_by_categorie_fiscale.get(
                         categorie_fiscale_by_poste[poste],
@@ -171,17 +171,17 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
 
 def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, year_stop = None):
     if len(postes_coicop) != 0:
-        def func(self, simulation, period):
-            return sum(simulation.calculate(
-                'depenses_ht_poste_' + slugify(poste, separator = u'_'), period) for poste in postes_coicop
+        def func(entity, period_arg):
+            return sum(entity(
+                'depenses_ht_poste_' + slugify(poste, separator = u'_'), period_arg) for poste in postes_coicop
                 )
 
         func.__name__ = "formula_{year_start}".format(year_start = year_start, year_stop = year_stop)
         return func
 
     else:  # To deal with Reform emptying some fiscal categories
-        def func(self, simulation, period):
-            return self.zeros()
+        def func(entity, period_arg):
+            return 0
 
     func.__name__ = "formula_{year_start}".format(year_start = year_start, year_stop = year_stop)
     return func
@@ -190,14 +190,19 @@ def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, yea
 def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, year_start = None, year_stop = None):
     assert categorie_fiscale is not None
 
-    def func(self, simulation, period, categorie_fiscale = categorie_fiscale):
+    def func(entity, period_arg, parameters, categorie_fiscale = categorie_fiscale):
         tva = get_tva(categorie_fiscale)
         if tva is not None:
-            taux = simulation.legislation_at(period.start).imposition_indirecte.tva[tva[4:]]
+            tva_str = tva[4:]
+            if tva_str == 'taux_super_reduit':
+                tva_str = 'taux_particulier_super_reduit'
+            elif tva_str == 'taux_plein':
+                tva_str = 'taux_normal'
+            taux = parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[tva_str]
         else:
             taux = 0
 
-        return simulation.calculate('poste_' + slugify(poste_coicop, separator = u'_'), period) / (1 + taux)
+        return entity('poste_' + slugify(poste_coicop, separator = u'_'), period_arg) / (1 + taux)
 
     func.__name__ = "formula_{year_start}".format(year_start = year_start, year_stop = year_stop)
     return func

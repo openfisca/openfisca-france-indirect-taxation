@@ -39,13 +39,13 @@ x = survey_scenario.compute_pivot_table(
     )
 y = survey_scenario.compute_pivot_table(
     values = ['emissions_CO2_gaz'], columns = ['{}'.format('niveau_vie_decile')],
-    reference = True,
+    use_baseline =True,
     )
 
 x == y
 
 df_by_entity = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
-df_by_entity_bis = survey_scenario.create_data_frame_by_entity(simulated_variables, reference = True, period = year)
+df_by_entity_bis = survey_scenario.create_data_frame_by_entity(simulated_variables, use_baseline =True, period = year)
 
 menages = df_by_entity['menage']
 menages_bis = df_by_entity_bis['menage']

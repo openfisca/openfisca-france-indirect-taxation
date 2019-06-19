@@ -7,35 +7,35 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 
 class combustibles_liquides_ticpe(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de TICPE sur les combustibles liquides"
 
     def formula(self, simulation, period):
         quantites_combustibles_liquides = simulation.calculate('quantites_combustibles_liquides', period)
-        accise_combustibles_liquides = simulation.legislation_at(period.start).imposition_indirecte.ticpe.gazole_fioul_domestique_hectolitre
+        accise_combustibles_liquides = parameters(period.start).imposition_indirecte.ticpe.gazole_fioul_domestique_hectolitre
         combustibles_liquides_ticpe = quantites_combustibles_liquides * accise_combustibles_liquides / 100
 
         return combustibles_liquides_ticpe
 
 
 class diesel_ticpe(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de TICPE sur le diesel"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
         try:
             majoration_ticpe_diesel = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
-            accise_diesel = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
+            accise_diesel = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
             accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
         except:
-            accise_diesel_ticpe = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+            accise_diesel_ticpe = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
 
-        prix_diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+        prix_diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
         taux_implicite_diesel = (
             (accise_diesel_ticpe * (1 + taux_plein_tva)) /
             (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
@@ -49,24 +49,24 @@ class diesel_ticpe(YearlyVariable):
 
 
 class diesel_ticpe_ajustee(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de TICPE sur le diesel après réforme"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
         try:
             majoration_ticpe_diesel = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
-            accise_diesel = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
+            accise_diesel = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
             accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
         except:
-            accise_diesel_ticpe = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_gazole
+            accise_diesel_ticpe = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
 
-        reforme_diesel = simulation.legislation_at(period.start).taxes_carburants.diesel
+        reforme_diesel = parameters(period.start).taxes_carburants.diesel
         accise_diesel_ticpe_ajustee = accise_diesel_ticpe + reforme_diesel
-        prix_diesel_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+        prix_diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
         prix_diesel_ttc_ajuste = prix_diesel_ttc + reforme_diesel
         taux_implicite_diesel_ajuste = (
             (accise_diesel_ticpe_ajustee * (1 + taux_plein_tva)) /
@@ -85,7 +85,7 @@ class diesel_ticpe_ajustee(YearlyVariable):
 
 
 class essence_ticpe(Variable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de la TICPE sur toutes les essences cumulées"
     definition_period = YEAR
@@ -112,7 +112,7 @@ class essence_ticpe(Variable):
 
 
 class essence_ticpe_ajustee(Variable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
     definition_period = YEAR
@@ -139,24 +139,24 @@ class essence_ticpe_ajustee(Variable):
 
 
 class sp_e10_ticpe(Variable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de la TICPE sur le SP E10"
     definition_period = YEAR
 
     def formula_2009(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         try:
             accise_super_e10 = \
-                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+                parameters(period.start).imposition_indirecte.ticpe.ticpe_super_e10
             majoration_ticpe_super_e10 = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
             accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
         except:
             accise_super_e10 = \
-                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+                parameters(period.start).imposition_indirecte.ticpe.ticpe_super_e10
 
-        super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+        super_95_e10_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
         taux_implicite_sp_e10 = (
             (accise_ticpe_super_e10 * (1 + taux_plein_tva)) /
             (super_95_e10_ttc - accise_ticpe_super_e10 * (1 + taux_plein_tva))
@@ -176,33 +176,33 @@ class sp_e10_ticpe(Variable):
 
 # Check if there is no need to have period formulas
 class sp_e10_ticpe_ajustee(Variable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de la TICPE sur le SP E10 après réforme"
     definition_period = YEAR
 
     def formula_2009(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         try:
             accise_super_e10 = \
-                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+                parameters(period.start).imposition_indirecte.ticpe.ticpe_super_e10
             majoration_ticpe_super_e10 = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
             accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
         except:
             accise_ticpe_super_e10 = \
-                simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+                parameters(period.start).imposition_indirecte.ticpe.ticpe_super_e10
 
-        reforme_essence = simulation.legislation_at(period.start).taxes_carburants.essence
+        reforme_essence = parameters(period.start).taxes_carburants.essence
         accise_ticpe_super_e10_ajustee = accise_ticpe_super_e10 + reforme_essence
-        super_95_e10_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+        super_95_e10_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
         super_95_e10_ttc_ajuste = super_95_e10_ttc + reforme_essence
         taux_implicite_sp_e10_ajuste = (
             (accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva)) /
             (super_95_e10_ttc_ajuste - accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
             )
         depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees', period)
-        part_sp_e10 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
+        part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         sp_e10_depenses_ajustees = depenses_essence_ajustees * part_sp_e10
         sp_e10_depenses_htva_ajustees = \
             sp_e10_depenses_ajustees - tax_from_expense_including_tax(sp_e10_depenses_ajustees, taux_plein_tva)
@@ -213,22 +213,22 @@ class sp_e10_ticpe_ajustee(Variable):
 
 
 class sp95_ticpe(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de TICPE sur le sp_95"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
         try:
-            accise_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_super95 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
             majoration_ticpe_super95 = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
             accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
         except:
-            accise_ticpe_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_ticpe_super95 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
 
-        super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+        super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
         taux_implicite_sp95 = (
             (accise_ticpe_super95 * (1 + taux_plein_tva)) /
             (super_95_ttc - accise_ticpe_super95 * (1 + taux_plein_tva))
@@ -241,31 +241,31 @@ class sp95_ticpe(YearlyVariable):
 
 
 class sp95_ticpe_ajustee(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de TICPE sur le sp_95 après réforme"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
         try:
-            accise_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_super95 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
             majoration_ticpe_super95 = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
             accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
         except:
-            accise_ticpe_super95 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_ticpe_super95 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
 
-        reforme_essence = simulation.legislation_at(period.start).taxes_carburants.essence
+        reforme_essence = parameters(period.start).taxes_carburants.essence
         accise_ticpe_super95_ajustee = accise_ticpe_super95 + reforme_essence
-        super_95_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+        super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
         super_95_ttc_ajuste = super_95_ttc + reforme_essence
         taux_implicite_sp95_ajuste = (
             (accise_ticpe_super95_ajustee * (1 + taux_plein_tva)) /
             (super_95_ttc_ajuste - accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
             )
         depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees', period)
-        part_sp95 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_95
+        part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp_95_ajustees = depenses_essence_ajustees * part_sp95
         depenses_sp_95_htva_ajustees = (
             depenses_sp_95_ajustees - tax_from_expense_including_tax(depenses_sp_95_ajustees, taux_plein_tva)
@@ -278,22 +278,22 @@ class sp95_ticpe_ajustee(YearlyVariable):
 
 
 class sp98_ticpe(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de TICPE sur le sp_98"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
         try:
-            accise_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_super98 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
             majoration_ticpe_super98 = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
             accise_ticpe_super98 = accise_super98 + majoration_ticpe_super98
         except:
-            accise_ticpe_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_ticpe_super98 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
 
-        super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
+        super_98_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_98_ttc
         taux_implicite_sp98 = (
             (accise_ticpe_super98 * (1 + taux_plein_tva)) /
             (super_98_ttc - accise_ticpe_super98 * (1 + taux_plein_tva))
@@ -306,31 +306,31 @@ class sp98_ticpe(YearlyVariable):
 
 
 class sp98_ticpe_ajustee(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de TICPE sur le sp_98 après réforme"
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
         try:
-            accise_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_super98 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
             majoration_ticpe_super98 = \
-                simulation.legislation_at(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
             accise_ticpe_super98 = accise_super98 + majoration_ticpe_super98
         except:
-            accise_ticpe_super98 = simulation.legislation_at(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_ticpe_super98 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
 
-        reforme_essence = simulation.legislation_at(period.start).taxes_carburants.essence
+        reforme_essence = parameters(period.start).taxes_carburants.essence
         accise_ticpe_super98_ajustee = accise_ticpe_super98 + reforme_essence
-        super_98_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_98_ttc
+        super_98_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_98_ttc
         super_98_ttc_ajuste = super_98_ttc + reforme_essence
         taux_implicite_sp98_ajuste = (
             (accise_ticpe_super98_ajustee * (1 + taux_plein_tva)) /
             (super_98_ttc_ajuste - accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
             )
         depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees', period)
-        part_sp98 = simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.sp_98
+        part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
         depenses_sp_98_ajustees = depenses_essence_ajustees * part_sp98
         depenses_sp_98_htva_ajustees = (
             depenses_sp_98_ajustees - tax_from_expense_including_tax(depenses_sp_98_ajustees, taux_plein_tva)
@@ -343,7 +343,7 @@ class sp98_ticpe_ajustee(YearlyVariable):
 
 
 class super_plombe_ticpe(Variable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de la TICPE sur le super plombé"
     definition_period = YEAR
@@ -354,10 +354,10 @@ class super_plombe_ticpe(Variable):
 
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         accise_super_plombe_ticpe = \
-            simulation.legislation_at(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
-        super_plombe_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
+            parameters(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
+        super_plombe_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
         taux_implicite_super_plombe = (
             (accise_super_plombe_ticpe * (1 + taux_plein_tva)) /
             (super_plombe_ttc - accise_super_plombe_ticpe * (1 + taux_plein_tva))
@@ -372,7 +372,7 @@ class super_plombe_ticpe(Variable):
 
 
 class super_plombe_ticpe_ajustee(Variable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de la TICPE sur le super plombé après réforme"
     definition_period = YEAR
@@ -382,13 +382,13 @@ class super_plombe_ticpe_ajustee(Variable):
         return montant_super_plombe_ticpe
 
     def formula(self, simulation, period):
-        taux_plein_tva = simulation.legislation_at(period.start).imposition_indirecte.tva.taux_plein
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         accise_super_plombe_ticpe = \
-            simulation.legislation_at(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
+            parameters(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
 
-        reforme_essence = simulation.legislation_at(period.start).taxes_carburants.essence
+        reforme_essence = parameters(period.start).taxes_carburants.essence
         accise_super_plombe_ticpe_ajustee = accise_super_plombe_ticpe + reforme_essence
-        super_plombe_ttc = simulation.legislation_at(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
+        super_plombe_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
         super_plombe_ttc_ajuste = super_plombe_ttc + reforme_essence
         taux_implicite_super_plombe_ajuste = (
             (accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva)) /
@@ -396,7 +396,7 @@ class super_plombe_ticpe_ajustee(Variable):
             )
         depenses_essence_ajustees = simulation.calculate('depenses_essence_ajustees', period)
         part_super_plombe = \
-            simulation.legislation_at(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
+            parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
         depenses_super_plombe_ajustees = depenses_essence_ajustees * part_super_plombe
         depenses_super_plombe_htva_ajustees = (
             depenses_super_plombe_ajustees -
@@ -409,7 +409,7 @@ class super_plombe_ticpe_ajustee(Variable):
 
 
 class ticpe_totale(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de la TICPE sur tous les carburants cumulés"
 
@@ -422,7 +422,7 @@ class ticpe_totale(YearlyVariable):
 
 
 class ticpe_totale_ajustee(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
 
@@ -435,7 +435,7 @@ class ticpe_totale_ajustee(YearlyVariable):
 
 
 class total_taxes_energies(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Calcul du montant de la TICPE sur tous les carburants cumulés"
 
@@ -447,9 +447,9 @@ class total_taxes_energies(YearlyVariable):
 
         return total_taxes_energies
 
-        
+
 class difference_ticpe_diesel_reforme(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Différence entre les contributions à la TICPE sur le diesel avant et après la réforme"
 
@@ -462,7 +462,7 @@ class difference_ticpe_diesel_reforme(YearlyVariable):
 
 
 class difference_ticpe_essence_reforme(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Différence entre les contributions à la TICPE sur l'essence avant et après la réforme"
 
@@ -475,7 +475,7 @@ class difference_ticpe_essence_reforme(YearlyVariable):
 
 
 class difference_ticpe_totale_reforme(YearlyVariable):
-    column = FloatCol
+    value_type = float
     entity = Menage
     label = u"Différence entre les contributions à la TICPE avant et après la réforme"
 
