@@ -9,8 +9,30 @@ diesel:
       value: 15.59
     '2010-01-01':
       value: 15.31
+essence:
+  unit: currency
+  description: u"Surcroit de prix de l'essence (en euros par hectolitres)"
+  values:
+    '2010-01-01':
+      value: 0
 abaissement_tva_taux_plein:
   description: u"Baisse de la TVA à taux plein pour obtenir un budget constant"
   values:
     '2010-01-01':
+      value: 0.01
+
+abaissement_tva_taux_plein_bis:
+  description: u"Baisse de la TVA à taux plein pour obtenir un budget constant"
+  values:
+    '2010-01-01':
       value: 0.005
+abaissement_tva_taux_reduit:
+  description: u"Baisse de la TVA à taux réduit pour obtenir un budget constant"
+  values:
+    '2010-01-01':
+      value: 0.01
+abaissement_tva_taux_super_reduit:
+  description: u"Baisse de la TVA à taux super réduit pour obtenir un budget constant"
+  values:
+    '2010-01-01':
+      value: 0.01

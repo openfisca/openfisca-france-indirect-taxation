@@ -37,8 +37,10 @@ setup(
             'pdbpp',
             ],
         test = [
+            'matplotlib',
             'nose',
             'pandas >= 0.17',
+            'seaborn',
             ],
         survey = [
             'OpenFisca-Survey-Manager',

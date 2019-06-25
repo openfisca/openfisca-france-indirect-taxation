@@ -1,0 +1,57 @@
+description: officielle_2018_in_2016
+
+diesel_2016_2018:
+  description: Surcroît de prix du diesel (en euros par hectolitres)
+  unit: currency
+  values:
+    2016-01-01:
+      2.6 + 266 * (0.0446 - 0.022)
+
+diesel_cce_seulement:
+  description: Surcroît de prix du diesel (en euros par hectolitres) rattrapage exclut (i.e. cce seulement)
+  unit: currency
+  values:
+    2016-01-01: 266 * (0.0446 - 0.022)
+
+essence_2016_2018:
+    description: Surcroît de prix de lessence (en euros par hectolitres)
+    unit: currency
+    values:
+      2016-01-01: 242 * (0.0446 - 0.022)
+
+combustibles_liquides_2016_2018:
+description: Surcroît de prix du fioul domestique (en euros par litre)
+    unit: currency
+    values: 2016-01-01: 3.24 * (0.0446 - 0.022)
+
+electricite_cspe:
+    description: Surcroît de prix de lélectricité (en euros par kWh) en ajoutant la différence avec un prix de 10€ sur le marché EU-ETS
+    unit: currency
+    values:
+      2016-01-01: 0.09 * (0.0446 - 0.01), # Différence entre prix de la réforme et prix (environ 10€) sur le marché EU-ETS
+
+gaz_ville_2016_2018:
+    description: Surcroît de prix du gaz (en euros par kWh)
+    unit: currency
+    values:
+      2016-01-01: 0.241*(0.0446 - 0.022)
+
+abaissement_tva_taux_plein_2016_2018:
+    description: Baisse de la TVA à taux plein pour obtenir un budget constant
+    values:
+      2010-01-01: 0
+
+abaissement_tva_taux_plein_bis_2016_2018:
+    description: Baisse de la TVA à taux plein pour obtenir un budget constant
+    values:
+      2010-01-01: 0
+
+abaissement_tva_taux_reduit_2016_2018:
+    description: Baisse de la TVA à taux plein pour obtenir un budget constant
+    values:
+      2010-01-01: 0
+
+abaissement_tva_taux_super_reduit_2016_2018:
+    description: Baisse de la TVA à taux plein pour obtenir un budget constant
+    values:
+      2010-01-01: 0

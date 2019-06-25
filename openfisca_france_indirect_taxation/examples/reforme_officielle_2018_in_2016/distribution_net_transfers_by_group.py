@@ -52,9 +52,9 @@ def distribution_net_transfers_by_group(df_reform, group):
 
     graph_builder_bar(df_by_categ[[u'quantile_10'] + [u'quantile_25'] + ['quantile_50'] + ['quantile_75'] + ['quantile_90']], False)
     save_dataframe_to_graph(df_by_categ, 'Monetary/distribution_loosers_within_{}.csv'.format(group))
-    
+
     return df_by_categ
-    
+
 if __name__ == '__main__':
     year = 2016
     data_year = 2011
@@ -62,7 +62,7 @@ if __name__ == '__main__':
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
     #elasticities = get_elasticities(data_year)
     elasticities = get_elasticities_aidsills(data_year, True)
-    
+
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
@@ -75,8 +75,8 @@ if __name__ == '__main__':
     df_reforme[u'transfert_net_cheque_officiel_uc'] = (
         df_reforme['cheques_energie_officielle_2018_in_2016'] +
         df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
-        df_reforme['revenu_reforme_officielle_2018_in_2016'] 
+        df_reforme['revenu_reforme_officielle_2018_in_2016']
         ) / df_reforme['ocde10']
 
     df_to_plot = distribution_net_transfers_by_group(df_reforme, 'niveau_vie_decile')
-    print df_to_plot
+    print(df_to_plot)

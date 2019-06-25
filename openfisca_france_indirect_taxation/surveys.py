@@ -6,8 +6,7 @@ import numpy
 
 from openfisca_survey_manager.scenarios import AbstractSurveyScenario
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
-from openfisca_france_indirect_taxation.tests import base
-
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 
 log = logging.getLogger(__name__)
 
@@ -23,28 +22,22 @@ class SurveyScenario(AbstractSurveyScenario):
 
     @classmethod
     def create(cls, calibration_kwargs = None, data_year = None, elasticities = None, inflation_kwargs = None,
-            input_data_frame = None, reference_tax_benefit_system = None, reform = None, reform_key = None,
-            tax_benefit_system = None, year = None):  # Add debug parameters debug, debug_all trace for simulation)
+            input_data_frame = None, baseline_tax_benefit_system = None, reform = None,
+            tax_benefit_system = None, year = None):
 
         assert year is not None
 
-        # it is either reform or reform_key which is not None
-        assert not(
-            (reform is not None) and (reform_key is not None)
-            )
-
-        if reform_key is not None:
-            reform = base.get_cached_reform(
-                reform_key = reform_key,
-                tax_benefit_system = reference_tax_benefit_system or base.tax_benefit_system,
-                )
+        assert tax_benefit_system is not None
 
         if reform is None:
-            assert reference_tax_benefit_system is None, "No need of reference_tax_benefit_system if no reform"
-            tax_benefit_system = base.tax_benefit_system
+            assert baseline_tax_benefit_system is None, "No need of reference_tax_benefit_system if no reform"
+            if tax_benefit_system is None:
+                tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
         else:
-            tax_benefit_system = reform
-            reference_tax_benefit_system = base.tax_benefit_system
+            if baseline_tax_benefit_system is None:
+                baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
+
+            tax_benefit_system = reform(baseline_tax_benefit_system)
 
         if calibration_kwargs is not None:
             assert set(calibration_kwargs.keys()).issubset(set(
@@ -66,11 +59,13 @@ class SurveyScenario(AbstractSurveyScenario):
             for col in elasticities.columns:
                 assert col in input_data_frame.columns
 
-        survey_scenario = cls().init_from_data_frame(
-            input_data_frame = input_data_frame,
+        survey_scenario = cls().init_from_data(
+            dict(input_data_frame = input_data_frame),
             )
-        survey_scenario.tax_benefit_system = tax_benefit_system
-        survey_scenario.reference_tax_benefit_system = reference_tax_benefit_system
+        survey_scenario.set_tax_benefit_systems(
+            tax_benefit_system = tax_benefit_system,
+            baseline_tax_benefit_system = baseline_tax_benefit_system
+            )
         survey_scenario.year = year
 
         survey_scenario.new_simulation()
