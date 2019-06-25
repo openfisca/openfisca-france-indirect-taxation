@@ -29,10 +29,7 @@ from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import (
 year = 2016
 data_year = 2011
 
-
-
 survey_scenario = SurveyScenario.create(
-    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem(),
     reform = reforme_officielle_2018_in_2016,
     year = year,
     data_year = data_year

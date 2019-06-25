@@ -9,6 +9,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 from ..model.taxes_indirectes import tva, ticpe
 from ..model.consommation import emissions_co2, quantites_energie
 
+parameters_path = os.path.join(os.path.dirname(__file__), 'parameters')
 
 # 44,6€ la tonne de CO2 en 2018 (au lieu des 39€ initialement prévus par la CCE), contre 22€ en 2016.
 # Le rattrapage de la fiscalité du diesel prévoit une hausse de 2,6€ par an (par hectolitre)
@@ -120,7 +121,6 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return cheque
 
-
     class cheques_energie_integral_inconditionnel_officielle_2018_in_2016_plus_cspe(YearlyVariable):
         value_type = float
         entity = Menage
@@ -138,7 +138,6 @@ class reforme_officielle_2018_in_2016(Reform):
             cheque = revenu_uc * ocde10
 
             return cheque
-
 
     class cheques_energie_integral_inconditionnel_cce_seulement(YearlyVariable):
         value_type = float
@@ -158,7 +157,6 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return cheque
 
-
     class cheques_energie_integral_inconditionnel_rattrapage_integral(YearlyVariable):
         value_type = float
         entity = Menage
@@ -176,7 +174,6 @@ class reforme_officielle_2018_in_2016(Reform):
             cheque = revenu_uc * ocde10
 
             return cheque
-
 
     class cheques_energie_officielle_2018_in_2016(YearlyVariable):
         value_type = float
@@ -242,7 +239,6 @@ class reforme_officielle_2018_in_2016(Reform):
             cheque_final = (cheque * (1 - ratio_ruraux)) + cheque_ruraux
 
             return cheque_final
-
 
     class cheques_energie_by_energy_officielle_2018_in_2016(YearlyVariable):
         value_type = float
@@ -312,7 +308,6 @@ class reforme_officielle_2018_in_2016(Reform):
             cheque_by_energy = 70 * eligibles_by_energy * ocde10
             somme_cheques_by_energy = numpy.sum(cheque_by_energy * pondmen)
 
-
             cheque = (
                 0 +
                 144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
@@ -337,7 +332,6 @@ class reforme_officielle_2018_in_2016(Reform):
                 )
 
             return cheque_final
-
 
     class combustibles_liquides_ticpe_officielle_2018_in_2016(YearlyVariable):
         value_type = float
@@ -370,7 +364,6 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return montant_combustibles_liquides_ticpe_ajuste
 
-
     class depenses_carburants_corrigees_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
@@ -382,7 +375,6 @@ class reforme_officielle_2018_in_2016(Reform):
             depenses_carburants_ajustees = depenses_diesel_ajustees + depenses_essence_ajustees
 
             return depenses_carburants_ajustees
-
 
     class depenses_combustibles_liquides_officielle_2018_in_2016(YearlyVariable):
         value_type = float
@@ -433,7 +425,6 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return depenses_diesel_officielle_2018_in_2016
 
-
     class depenses_diesel_corrigees_rattrapage_integral(YearlyVariable):
         value_type = float
         entity = Menage
@@ -450,7 +441,6 @@ class reforme_officielle_2018_in_2016(Reform):
                 depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel / diesel_ttc)
 
             return depenses_diesel_rattrapage_integral
-
 
     class depenses_electricite_cspe(YearlyVariable):
         value_type = float
