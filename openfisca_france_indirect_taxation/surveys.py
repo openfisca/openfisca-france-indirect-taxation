@@ -59,18 +59,20 @@ class SurveyScenario(AbstractSurveyScenario):
             for col in elasticities.columns:
                 assert col in input_data_frame.columns
 
-        survey_scenario = cls().init_from_data(
-            dict(input_data_frame = input_data_frame),
-            )
+        survey_scenario = cls()
         survey_scenario.set_tax_benefit_systems(
             tax_benefit_system = tax_benefit_system,
             baseline_tax_benefit_system = baseline_tax_benefit_system
             )
+        survey_scenario.used_as_input_variables = set(input_data_frame.columns).intersection(
+            set(tax_benefit_system.variables.keys()))
         survey_scenario.year = year
+        data = dict(input_data_frame = input_data_frame)
 
-        survey_scenario.new_simulation()
-        if reform or reform_key:
-            survey_scenario.new_simulation(use_baseline =True)
+        survey_scenario.init_from_data(data = data)
+        # survey_scenario.new_simulation(data = data)
+        # if reform:
+        #     survey_scenario.new_simulation(data = data, use_baseline =True)
 
         if calibration_kwargs:
             survey_scenario.calibrate(**calibration_kwargs)

@@ -44,6 +44,7 @@ setup(
             ],
         survey = [
             'OpenFisca-Survey-Manager',
+            'tables',
             ],
         ),
     include_package_data = True,  # Will read MANIFEST.in

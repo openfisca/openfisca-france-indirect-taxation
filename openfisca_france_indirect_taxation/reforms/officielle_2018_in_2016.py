@@ -2,7 +2,7 @@
 
 from __future__ import division
 
-from openfisca_core.reforms import Reform, update_legislation
+from openfisca_core.reforms import Reform
 import numpy
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
@@ -22,89 +22,85 @@ from ..model.consommation import emissions_co2, quantites_energie
 # 3) la hausse de la composante carbone sans le rattrapage du diesel
 
 
-def modify_legislation_json(reference_legislation_json_copy):
-    reform_legislation_subtree = {
-        "@type": "Node",
-        "description": "officielle_2018_in_2016",
-        "children": {
+def modify_parameters(parameters):
+    node = ParameterNode(
+        'officielle_2018_in_2016',
+        data = {
+            "description": "officielle_2018_in_2016",
             "diesel_2016_2018": {
-                "@type": "Parameter",
-                "description": u"Surcroît de prix du diesel (en euros par hectolitres)",
-                "format": 'float',
-                "unit": 'currency',
-                "values": [{'start': u'2016-01-01', 'value': 2.6 + 266*(0.0446 - 0.022)}]
+                "description": "Surcroît de prix du diesel (en euros par hectolitres)",
+                "unit": "currency",
+                "values": {
+                    "2016-01-01": 2.6 + 266 * (0.0446 - 0.022)
+                    },
                 },
             "diesel_cce_seulement": {
-                "@type": "Parameter",
-                "description": u"Surcroît de prix du diesel (en euros par hectolitres) rattrapage exclut (i.e. cce seulement)",
-                "format": 'float',
-                "unit": 'currency',
-                "values": [{'start': u'2016-01-01', 'value': 266*(0.0446 - 0.022)}]
+                "description": "Surcroît de prix du diesel (en euros par hectolitres) rattrapage exclut (i.e. cce seulement)",
+                "unit": "currency",
+                "values": {
+                    "2016-01-01": 266 * (0.0446 - 0.022)
+                    },
                 },
             "essence_2016_2018": {
-                "@type": "Parameter",
-                "description": u"Surcroît de prix de l'essence (en euros par hectolitres)",
-                "format": "float",
-                "unit": 'currency',
-                "values": [{'start': u'2016-01-01', 'value': 242*(0.0446 - 0.022)}],
+                "description": "Surcroît de prix de lessence (en euros par hectolitres)",
+                "unit": "currency",
+                "values": {
+                    "2016-01-01": 242 * (0.0446 - 0.022)
+                    }
                 },
             "combustibles_liquides_2016_2018": {
-                "@type": "Parameter",
-                "description": u"Surcroît de prix du fioul domestique (en euros par litre)",
-                "format": "float",
-                "unit": 'currency',
-                "values": [{'start': u'2016-01-01', 'value': 3.24*(0.0446 - 0.022)}],
+                "description": "Surcroît de prix du fioul domestique (en euros par litre)",
+                "unit": "currency",
+                "values": {
+                    "2016-01-01": 3.24 * (0.0446 - 0.022),
+                    }
                 },
             "electricite_cspe": {
-                "@type": "Parameter",
-                "description": u"Surcroît de prix de l'électricité (en euros par kWh) en ajoutant la différence avec un prix de 10€ sur le marché EU-ETS",
-                "format": 'float',
-                "unit": 'currency',
-                "values": [{'start': u'2016-01-01', 'value': 0.09*(0.0446 - 0.01)}], # Différence entre prix de la réforme et prix (environ 10€) sur le marché EU-ETS
+                "description": "Surcroît de prix de lélectricité (en euros par kWh) en ajoutant la différence avec un prix de 10€ sur le marché EU-ETS",
+                "unit": "currency",
+                "values": {
+                    "2016-01-01": 0.09 * (0.0446 - 0.01), # Différence entre prix de la réforme et prix (environ 10€) sur le marché EU-ETS
+                    },
                 },
             "gaz_ville_2016_2018": {
-                "@type": "Parameter",
-                "description": u"Surcroît de prix du gaz (en euros par kWh)",
-                "format": 'float',
-                "unit": 'currency',
-                "values": [{'start': u'2016-01-01', 'value': 0.241*(0.0446 - 0.022)}],
+                "description": "Surcroît de prix du gaz (en euros par kWh)",
+                "unit": "currency",
+                "values":
+                    {"2016-01-01": 0.241 * (0.0446 - 0.022)}
                 },
             "abaissement_tva_taux_plein_2016_2018": {
-                "@type": "Parameter",
-                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
-                "format": 'float',
-                "values": [{'start': u'2010-01-01', 'value': 0}],
+                "description": "Baisse de la TVA à taux plein pour obtenir un budget constantœ",
+                "values": {
+                    "2010-01-01": 0
+                    },
                 },
             "abaissement_tva_taux_plein_bis_2016_2018": {
-                "@type": "Parameter",
-                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
-                "format": 'float',
-                "values": [{'start': u'2010-01-01', 'value': 0}],
+                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+                "values": {
+                    "2010-01-01": 0
+                    },
                 },
             "abaissement_tva_taux_reduit_2016_2018": {
-                "@type": "Parameter",
-                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
-                "format": 'float',
-                "values": [{'start': u'2010-01-01', 'value': 0}],
+                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+                "values": {
+                    "2010-01-01": 0
+                    },
                 },
             "abaissement_tva_taux_super_reduit_2016_2018": {
-                "@type": "Parameter",
-                "description": u"Baisse de la TVA à taux plein pour obtenir un budget constant",
-                "format": 'float',
-                "values": [{'start': u'2010-01-01', 'value': 0}],
-                },
-            },
-        }
-
-    reference_legislation_json_copy['children']['officielle_2018_in_2016'] = reform_legislation_subtree
-    return reference_legislation_json_copy
-
+                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+                "values": {
+                    "2010-01-01": 0
+                    }
+                }
+            }
+        )
+    parameters.add_child('officielle_2018_in_2016', node)
+    return parameters
 
 
-class officielle_2018_in_2016(Reform):
+class reforme_officielle_2018_in_2016(Reform):
     key = 'officielle_2018_in_2016',
     name = u"Réforme de la fiscalité des énergies de 2018 par rapport aux taux de 2016",
-
 
     class cheques_energie_integral_inconditionnel_officielle_2018_in_2016(YearlyVariable):
         value_type = float
@@ -1786,4 +1782,4 @@ class officielle_2018_in_2016(Reform):
         self.update_variable(self.total_taxes_energies_officielle_2018_in_2016)
         self.update_variable(self.total_taxes_energies_officielle_2018_in_2016_plus_cspe)
         self.update_variable(self.total_taxes_energies_rattrapage_integral)
-        self.modify_legislation_json(modifier_function = modify_legislation_json)
+        self.modify_parameters(modifier_function = modify_parameters)
