@@ -18,6 +18,7 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_a
 
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 
+from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import reforme_officielle_2018_in_2016
 
 simulated_variables = [
     'revenu_reforme_officielle_2018_in_2016',
@@ -37,27 +38,27 @@ def distribution_net_transfers_by_group(df_reform, group):
 
     i_min = df_reforme[group].min()
     i_max = df_reforme[group].max()
-    df_by_categ = pd.DataFrame(index = range(i_min, i_max+1),
+    df_by_categ = pd.DataFrame(index = range(i_min, i_max + 1),
         columns = ['quantile_10', 'quantile_25', 'quantile_50', 'quantile_75', 'quantile_90']
         )
 
-
-    for i in range(i_min, i_max+1):
+    for i in range(i_min, i_max + 1):
         df_by_categ['quantile_10'][i] = df_reforme.query('{} == {}'.format(group, i))[u'transfert_net_cheque_officiel_uc'].quantile(0.1)
         df_by_categ['quantile_25'][i] = df_reforme.query('{} == {}'.format(group, i))[u'transfert_net_cheque_officiel_uc'].quantile(0.25)
         df_by_categ['quantile_50'][i] = df_reforme.query('{} == {}'.format(group, i))[u'transfert_net_cheque_officiel_uc'].quantile(0.5)
         df_by_categ['quantile_75'][i] = df_reforme.query('{} == {}'.format(group, i))[u'transfert_net_cheque_officiel_uc'].quantile(0.75)
         df_by_categ['quantile_90'][i] = df_reforme.query('{} == {}'.format(group, i))[u'transfert_net_cheque_officiel_uc'].quantile(0.9)
 
-
     graph_builder_bar(df_by_categ[[u'quantile_10'] + [u'quantile_25'] + ['quantile_50'] + ['quantile_75'] + ['quantile_90']], False)
     save_dataframe_to_graph(df_by_categ, 'Monetary/distribution_loosers_within_{}.csv'.format(group))
 
     return df_by_categ
 
+
 if __name__ == '__main__':
     year = 2016
     data_year = 2011
+    from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
     #elasticities = get_elasticities(data_year)
@@ -65,8 +66,9 @@ if __name__ == '__main__':
 
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
+        tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem(),
         inflation_kwargs = inflation_kwargs,
-        reform_key = 'officielle_2018_in_2016',
+        reform = reforme_officielle_2018_in_2016,
         year = year,
         data_year = data_year
         )

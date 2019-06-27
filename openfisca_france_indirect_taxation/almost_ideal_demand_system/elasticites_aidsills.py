@@ -146,7 +146,7 @@ def create_data_elasticities_aidsills():
             'openfisca_france_indirect_taxation',
             'assets',
             'quaids',
-            'data_elasticities_energy_no_alime_all_aidsills.csv'
+            'data_elasticities_energy_no_alime_all.csv'
             ), sep =',')
 
 
@@ -159,7 +159,7 @@ def get_elasticities_aidsills(year, non_positive):
             'openfisca_france_indirect_taxation',
             'assets',
             'quaids',
-            'data_elasticities_energy_no_alime_all_aidsills.csv'
+            'data_elasticities_energy_no_alime_all.csv'
             ), sep =',')
     liste_elasticities = [column for column in data_elasticities.columns if column[:4] == 'elas']
     dataframe = data_elasticities[liste_elasticities + ['ident_men', 'year']].copy()
