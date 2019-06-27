@@ -6,8 +6,7 @@ import os
 import pkg_resources
 import csv
 
-import pandas
-from pandas import concat
+import pandas as pd
 
 from openfisca_france_indirect_taxation.examples.utils_example import get_input_data_frame
 from openfisca_france_indirect_taxation.build_survey_data.utils import find_nearest_inferior
@@ -20,7 +19,7 @@ def get_bdf_aggregates_energy(data_year = None):
     assert data_year is not None
 
     depenses = get_input_data_frame(data_year)
-    
+
     # Construct depenses_tot for total consumption
     liste_variables = depenses.columns.tolist()
     postes_agreges = ['poste_{}'.format(index) for index in
@@ -31,7 +30,7 @@ def get_bdf_aggregates_energy(data_year = None):
             if element[:8] == poste:
                 depenses['depenses_tot'] += depenses[element]
 
-    depenses_energie = pandas.DataFrame()
+    depenses_energie = pd.DataFrame()
     variables_energie = ['poste_04_5_1_1_1_a', 'poste_04_5_1_1_1_b', 'poste_04_5_2_1_1',
         'poste_04_5_3_1_1', 'poste_04_5_4_1_1', 'poste_07_2_2_1_1',
         'rev_disponible', 'loyer_impute', 'rev_disp_loyerimput', 'depenses_tot']
@@ -39,9 +38,9 @@ def get_bdf_aggregates_energy(data_year = None):
         if depenses_energie is None:
             depenses_energie = depenses['{}'.format(energie)]
         else:
-            depenses_energie = concat([depenses_energie, depenses['{}'.format(energie)]], axis = 1)
+            depenses_energie = pd.concat([depenses_energie, depenses['{}'.format(energie)]], axis = 1)
 
-    depenses_energie = concat([depenses_energie, depenses['pondmen']], axis = 1)
+    depenses_energie = pd.concat([depenses_energie, depenses['pondmen']], axis = 1)
 
     depenses_energie['factures_jointes_electricite_gaz'] = \
         (depenses_energie['poste_04_5_1_1_1_b'] * depenses_energie['poste_04_5_2_1_1']) > 0
@@ -72,8 +71,8 @@ def get_bdf_aggregates_energy(data_year = None):
     variables_to_inflate = ['depenses_carburants', 'depenses_combustibles_liquides',
         'depenses_combustibles_solides', 'depenses_electricite','depenses_gaz_ville',
         'depenses_tot', 'loyer_impute', 'rev_disponible', 'rev_disp_loyerimput']
-    
-    bdf_aggregates_by_energie = pandas.DataFrame()
+
+    bdf_aggregates_by_energie = pd.DataFrame()
     for energie in variables_to_inflate:
         bdf_aggregates_by_energie.loc[energie, 'bdf_aggregates'] = (
             depenses_energie[energie] * depenses_energie['pondmen']
@@ -182,7 +181,7 @@ def get_cn_aggregates_energy(target_year = None):
     #loyer_impute_cn.rename(columns = {'value': 'conso_CN_{}'.format(target_year)}, inplace = True)
     #loyer_impute_cn = loyer_impute_cn * 1e9
 
-    masses_cn = pandas.concat([masses_cn_energie, revenus_cn])
+    masses_cn = pandas.pd.concat([masses_cn_energie, revenus_cn])
     masses_cn.loc['rev_disp_loyerimput'] = masses_cn.loc['rev_disponible'] - masses_cn.loc['loyer_impute']
 
     return masses_cn
@@ -259,12 +258,13 @@ def get_inflators_by_year_energy(rebuild = False):
 
     else:
         re_build_inflators = dict()
-        inflators_from_csv = pandas.DataFrame.from_csv(os.path.join(assets_directory,
+        import pandas as pd
+        inflators_from_csv = pd.read_csv(os.path.join(assets_directory,
             'openfisca_france_indirect_taxation', 'assets', 'inflateurs', 'inflators_by_year_wip.csv'),
-            header = -1)
+            index_col = 0, header = -1)
         for year in range(2000, 2017):
             inflators_from_csv_by_year = inflators_from_csv[inflators_from_csv[2] == year]
-            inflators_to_dict = pandas.DataFrame.to_dict(inflators_from_csv_by_year)
+            inflators_to_dict = pd.DataFrame.to_dict(inflators_from_csv_by_year)
             inflators = inflators_to_dict[1]
             re_build_inflators[year] = inflators
 

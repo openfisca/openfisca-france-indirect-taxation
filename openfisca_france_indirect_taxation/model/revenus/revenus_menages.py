@@ -35,9 +35,9 @@ class niveau_de_vie(YearlyVariable):
     entity = Menage
     label = u"Revenus disponibles divisés par ocde10 soit le nombre d'unités de consommation du ménage"
 
-    def formula(self, simulation, period):
-        rev_disponible = simulation.calculate('rev_disponible', period)
-        ocde10 = simulation.calculate('ocde10', period)
+    def formula(menage, period):
+        rev_disponible = menage('rev_disponible', period)
+        ocde10 = menage('ocde10', period)
         return rev_disponible / ocde10
 
 
@@ -48,9 +48,9 @@ class niveau_vie_decile(YearlyVariable):
     entity = Menage
     label = u"Décile de niveau de vie"
 
-    def formula(self, simulation, period):
-        niveau_de_vie = simulation.calculate('niveau_de_vie', period)
-        pondmen = simulation.calculate('pondmen', period)
+    def formula(menage, period):
+        niveau_de_vie = menage('niveau_de_vie', period)
+        pondmen = menage('pondmen', period)
         labels = numpy.arange(1, 11)
         # Alternative method
         # method = 2
@@ -71,9 +71,9 @@ class rev_apres_loyer(YearlyVariable):
     entity = Menage
     label = u"Revenu disponible du ménage auquel on ajoute le loyer imputé"
 
-    def formula(self, simulation, period):
-        revenu_disponible = simulation.calculate('rev_disponible', period)
-        loyer = simulation.calculate('poste_04_1_1_1_1', period)
+    def formula(menage, period):
+        revenu_disponible = menage('rev_disponible', period)
+        loyer = menage('poste_04_1_1_1_1', period)
 
         rev_apres_loyer = revenu_disponible - loyer
 
