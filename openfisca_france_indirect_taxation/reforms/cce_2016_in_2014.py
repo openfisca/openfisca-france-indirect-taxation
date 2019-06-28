@@ -94,9 +94,9 @@ class cce_2016_in_2014(Reform):
         label = u"Montant des chèques énergie (indexés par uc) - taxe carbone"
 
         def formula(self, simulation, period):
-            contribution = simulation.calculate('contributions_reforme', period)
-            ocde10 = simulation.calculate('ocde10', period)
-            pondmen = simulation.calculate('pondmen', period)
+            contribution = menage('contributions_reforme', period)
+            ocde10 = menage('ocde10', period)
+            pondmen = menage('pondmen', period)
 
             somme_contributions = numpy.sum(contribution * pondmen)
             contribution_uc = somme_contributions / numpy.sum(ocde10 * pondmen)
@@ -112,8 +112,8 @@ class cce_2016_in_2014(Reform):
         label = u"Changement de contribution aux taxes énergétiques suite à la réforme - taxe carbone"
 
         def formula(self, simulation, period):
-            total_taxes_energies = simulation.calculate('total_taxes_energies', period)
-            total_taxes_energies_cce = simulation.calculate('total_taxes_energies_cce_2016_in_2014', period)
+            total_taxes_energies = menage('total_taxes_energies', period)
+            total_taxes_energies_cce = menage('total_taxes_energies_cce_2016_in_2014', period)
 
             contribution = total_taxes_energies_cce - total_taxes_energies
 
@@ -126,8 +126,8 @@ class cce_2016_in_2014(Reform):
         label = u"Depenses en carburants après reaction a la reforme - taxes carburants"
 
         def formula(self, simulation, period):
-            depenses_diesel_ajustees = simulation.calculate('depenses_diesel_corrigees_ajustees_cce_2016_in_2014', period)
-            depenses_essence_ajustees = simulation.calculate('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
+            depenses_diesel_ajustees = menage('depenses_diesel_corrigees_ajustees_cce_2016_in_2014', period)
+            depenses_essence_ajustees = menage('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
             depenses_carburants_ajustees = depenses_diesel_ajustees + depenses_essence_ajustees
 
             return depenses_carburants_ajustees
@@ -139,10 +139,10 @@ class cce_2016_in_2014(Reform):
         label = u"Dépenses en diesel après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
 
         def formula(self, simulation, period):
-            depenses_diesel = simulation.calculate('depenses_diesel_corrigees', period)
+            depenses_diesel = menage('depenses_diesel_corrigees', period)
             diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).cce_2016_in_2014.diesel_2014_2016
-            carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
+            carburants_elasticite_prix = menage('elas_price_1_1', period)
             depenses_diesel_ajustees_cce_2016_in_2014 = \
                 depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel / diesel_ttc)
 
@@ -155,12 +155,12 @@ class cce_2016_in_2014(Reform):
         label = u"Dépenses en électricité sans inclure dépenses jointes avec le gaz"
 
         def formula(self, simulation, period):
-            depenses_electricite_ajustees = simulation.calculate('depenses_electricite', period)
-            depenses_gaz_ville_ajustees = simulation.calculate('depenses_gaz_ville_ajustees_cce_2016_in_2014', period)
-            depenses_gaz_liquefie = simulation.calculate('depenses_gaz_liquefie', period)
-            depenses_combustibles_liquides_ajustees = simulation.calculate('depenses_combustibles_liquides_ajustees_cce_2016_in_2014', period)
-            depenses_combustibles_solides = simulation.calculate('depenses_combustibles_solides', period)
-            depenses_energie_thermique = simulation.calculate('depenses_energie_thermique', period)
+            depenses_electricite_ajustees = menage('depenses_electricite', period)
+            depenses_gaz_ville_ajustees = menage('depenses_gaz_ville_ajustees_cce_2016_in_2014', period)
+            depenses_gaz_liquefie = menage('depenses_gaz_liquefie', period)
+            depenses_combustibles_liquides_ajustees = menage('depenses_combustibles_liquides_ajustees_cce_2016_in_2014', period)
+            depenses_combustibles_solides = menage('depenses_combustibles_solides', period)
+            depenses_energie_thermique = menage('depenses_energie_thermique', period)
             depenses_energies_logement_ajustees_cce_2016_in_2014 = (
                 depenses_electricite_ajustees + depenses_gaz_ville_ajustees + depenses_gaz_liquefie +
                 depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
@@ -175,10 +175,10 @@ class cce_2016_in_2014(Reform):
         label = u"Dépenses en essence après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
 
         def formula(self, simulation, period):
-            depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
+            depenses_essence = menage('depenses_essence_corrigees', period)
             super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
             reforme_essence = parameters(period.start).cce_2016_in_2014.essence_2014_2016
-            carburants_elasticite_prix = simulation.calculate('elas_price_1_1', period)
+            carburants_elasticite_prix = menage('elas_price_1_1', period)
             depenses_essence_ajustees_cce_2016_in_2014 = \
                 depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
 
@@ -191,12 +191,12 @@ class cce_2016_in_2014(Reform):
         label = u"Dépenses en combustibles_liquides après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
 
         def formula(self, simulation, period):
-            depenses_combustibles_liquides = simulation.calculate('depenses_combustibles_liquides', period)
+            depenses_combustibles_liquides = menage('depenses_combustibles_liquides', period)
             prix_fioul_ttc = \
                 parameters(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
             reforme_combustibles_liquides = \
                 parameters(period.start).cce_2016_in_2014.combustibles_liquides_2014_2016
-            combustibles_liquides_elasticite_prix = simulation.calculate('elas_price_2_2', period)
+            combustibles_liquides_elasticite_prix = menage('elas_price_2_2', period)
             depenses_combustibles_liquides_ajustees_cce_2016_in_2014 = \
                 depenses_combustibles_liquides * (1 + (1 + combustibles_liquides_elasticite_prix) * reforme_combustibles_liquides / prix_fioul_ttc)
 
@@ -209,14 +209,14 @@ class cce_2016_in_2014(Reform):
         label = u"Dépenses en gaz après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2016"
 
         def formula(self, simulation, period):
-            depenses_gaz_variables = simulation.calculate('depenses_gaz_variables', period)
-            depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
+            depenses_gaz_variables = menage('depenses_gaz_variables', period)
+            depenses_gaz_prix_unitaire = menage('depenses_gaz_prix_unitaire', period)
             reforme_gaz = \
                 parameters(period.start).cce_2016_in_2014.gaz_2014_2016
-            gaz_elasticite_prix = simulation.calculate('elas_price_2_2', period)
+            gaz_elasticite_prix = menage('elas_price_2_2', period)
             depenses_gaz_ajustees_variables = \
                 depenses_gaz_variables * (1 + (1 + gaz_elasticite_prix) * reforme_gaz / depenses_gaz_prix_unitaire)
-            depenses_gaz_tarif_fixe = simulation.calculate('depenses_gaz_tarif_fixe', period)
+            depenses_gaz_tarif_fixe = menage('depenses_gaz_tarif_fixe', period)
             depenses_gaz_ajustees = depenses_gaz_ajustees_variables + depenses_gaz_tarif_fixe
             depenses_gaz_ajustees[numpy.isnan(depenses_gaz_ajustees)] = 0
             depenses_gaz_ajustees[numpy.isinf(depenses_gaz_ajustees)] = 0
@@ -230,12 +230,12 @@ class cce_2016_in_2014(Reform):
         label = u"Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme - cce 2014-2016"
 
         def formula(self, simulation, period):
-            depenses_tva_taux_plein = simulation.calculate('depenses_tva_taux_plein', period)
+            depenses_tva_taux_plein = menage('depenses_tva_taux_plein', period)
             taux_plein = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             abaissement_tva_taux_plein = (
                 parameters(period.start).cce_2016_in_2014.abaissement_tva_taux_plein_2014_2016
                 )
-            elasticite = simulation.calculate('elas_price_3_3', period)
+            elasticite = menage('elas_price_3_3', period)
             depenses_tva_taux_plein_ajustees = \
                 depenses_tva_taux_plein * (1 + (1 + elasticite) * (- abaissement_tva_taux_plein) / (1 + taux_plein))
 
@@ -248,12 +248,12 @@ class cce_2016_in_2014(Reform):
         label = u"Dépenses sur les biens assujetis à la TVA à taux plei bis après réaction à la réforme - cce 2014-2016"
 
         def formula(self, simulation, period):
-            depenses_tva_taux_plein = simulation.calculate('depenses_tva_taux_plein', period)
+            depenses_tva_taux_plein = menage('depenses_tva_taux_plein', period)
             taux_plein = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             abaissement_tva_taux_plein_bis = (
                 parameters(period.start).cce_2016_in_2014.abaissement_tva_taux_plein_bis_2014_2016
                 )
-            elasticite = simulation.calculate('elas_price_3_3', period)
+            elasticite = menage('elas_price_3_3', period)
             depenses_tva_taux_plein_bis_ajustees = (
                 depenses_tva_taux_plein *
                 (1 + (1 + elasticite) * (- abaissement_tva_taux_plein_bis) / (1 + taux_plein))
@@ -268,12 +268,12 @@ class cce_2016_in_2014(Reform):
         label = u"Dépenses sur les biens assujetis à la TVA à taux reduit après réaction à la réforme - cce 2014-2016"
 
         def formula(self, simulation, period):
-            depenses_tva_taux_reduit = simulation.calculate('depenses_tva_taux_reduit', period)
+            depenses_tva_taux_reduit = menage('depenses_tva_taux_reduit', period)
             taux_reduit = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_reduit
             abaissement_tva_taux_reduit = (
                 parameters(period.start).cce_2016_in_2014.abaissement_tva_taux_reduit_2014_2016
                 )
-            elasticite = simulation.calculate('elas_price_3_3', period)
+            elasticite = menage('elas_price_3_3', period)
             depenses_tva_taux_reduit_ajustees = \
                 depenses_tva_taux_reduit * (1 + (1 + elasticite) * (- abaissement_tva_taux_reduit) / (1 + taux_reduit))
 
@@ -286,12 +286,12 @@ class cce_2016_in_2014(Reform):
         label = u"Dépenses sur les biens assujetis à la TVA à taux super reduit après réaction à la réforme - cce 2014-2016"
 
         def formula(self, simulation, period):
-            depenses_tva_taux_super_reduit = simulation.calculate('depenses_tva_taux_super_reduit', period)
+            depenses_tva_taux_super_reduit = menage('depenses_tva_taux_super_reduit', period)
             taux_super_reduit = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_particulier_super_reduit
             abaissement_tva_taux_super_reduit = (
                 parameters(period.start).cce_2016_in_2014.abaissement_tva_taux_super_reduit_2014_2016
                 )
-            elasticite = simulation.calculate('elas_price_3_3', period)
+            elasticite = menage('elas_price_3_3', period)
             depenses_tva_taux_super_reduit_ajustees = \
                 depenses_tva_taux_super_reduit * (1 + (1 + elasticite) * (- abaissement_tva_taux_super_reduit) / (1 + taux_super_reduit))
 
@@ -323,7 +323,7 @@ class cce_2016_in_2014(Reform):
                 )
 
             depenses_diesel_ajustees_cce_2016_in_2014 = \
-                simulation.calculate('depenses_diesel_corrigees_ajustees_cce_2016_in_2014', period)
+               menage('depenses_diesel_corrigees_ajustees_cce_2016_in_2014', period)
             depenses_diesel_htva_ajustees = (
                 depenses_diesel_ajustees_cce_2016_in_2014 -
                 tax_from_expense_including_tax(depenses_diesel_ajustees_cce_2016_in_2014, taux_plein_tva)
@@ -340,8 +340,8 @@ class cce_2016_in_2014(Reform):
         use_baseline =emissions_co2.emissions_CO2_carburants
 
         def formula(self, simulation, period):
-            quantites_diesel_ajustees = simulation.calculate('quantites_diesel', period)
-            quantites_essence_ajustees = simulation.calculate('quantites_essence', period)
+            quantites_diesel_ajustees = menage('quantites_diesel', period)
+            quantites_essence_ajustees = menage('quantites_essence', period)
             emissions_diesel = \
                 parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
             emissions_essence = \
@@ -359,11 +359,11 @@ class cce_2016_in_2014(Reform):
         use_baseline =emissions_co2.emissions_CO2_energies_totales
 
         def formula(self, simulation, period):
-            emissions_carburants_ajustees = simulation.calculate('emissions_CO2_carburants', period)
-            emissions_electricite_ajustees = simulation.calculate('emissions_CO2_electricite', period)
+            emissions_carburants_ajustees = menage('emissions_CO2_carburants', period)
+            emissions_electricite_ajustees = menage('emissions_CO2_electricite', period)
             emissions_combustibles_liquides_ajustees = \
-                simulation.calculate('emissions_CO2_combustibles_liquides', period)
-            emissions_gaz_ajustees = simulation.calculate('emissions_CO2_gaz_ville', period)
+               menage('emissions_CO2_combustibles_liquides', period)
+            emissions_gaz_ajustees = menage('emissions_CO2_gaz_ville', period)
 
             emissions_energies_ajustees = (
                 emissions_carburants_ajustees + emissions_electricite_ajustees +
@@ -377,7 +377,7 @@ class cce_2016_in_2014(Reform):
         use_baseline =emissions_co2.emissions_CO2_combustibles_liquides
 
         def formula(self, simulation, period):
-            quantites_combustibles_liquides_ajustees = simulation.calculate('quantites_combustibles_liquides', period)
+            quantites_combustibles_liquides_ajustees = menage('quantites_combustibles_liquides', period)
             emissions_combustibles_liquides = \
                 parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_combustibles_liquides
             emissions_ajustees = quantites_combustibles_liquides_ajustees * emissions_combustibles_liquides
@@ -390,7 +390,7 @@ class cce_2016_in_2014(Reform):
         use_baseline =emissions_co2.emissions_CO2_gaz_ville
 
         def formula(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_final_ajustees_cce_2016_in_2014', period)
+            quantites_gaz_ajustees = menage('quantites_gaz_final_ajustees_cce_2016_in_2014', period)
             emissions_gaz = \
                 parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_ville
             emissions_ajustees = quantites_gaz_ajustees * emissions_gaz
@@ -403,22 +403,22 @@ class cce_2016_in_2014(Reform):
         definition_period = YEAR
 
         def formula_2009(self, simulation, period):
-            sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe', period)
-            sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe', period)
-            sp_e10_ticpe_ajustee = simulation.calculate('sp_e10_ticpe', period)
+            sp95_ticpe_ajustee = menage('sp95_ticpe', period)
+            sp98_ticpe_ajustee = menage('sp98_ticpe', period)
+            sp_e10_ticpe_ajustee = menage('sp_e10_ticpe', period)
             essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + sp_e10_ticpe_ajustee)
             return essence_ticpe_ajustee
 
         def formula_2007(self, simulation, period):
-            sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe', period)
-            sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe', period)
+            sp95_ticpe_ajustee = menage('sp95_ticpe', period)
+            sp98_ticpe_ajustee = menage('sp98_ticpe', period)
             essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee)
             return essence_ticpe_ajustee
 
         def formula_1990(self, simulation, period):
-            sp95_ticpe_ajustee = simulation.calculate('sp95_ticpe', period)
-            sp98_ticpe_ajustee = simulation.calculate('sp98_ticpe', period)
-            super_plombe_ticpe_ajustee = simulation.calculate('super_plombe_ticpe', period)
+            sp95_ticpe_ajustee = menage('sp95_ticpe', period)
+            sp98_ticpe_ajustee = menage('sp98_ticpe', period)
+            super_plombe_ticpe_ajustee = menage('super_plombe_ticpe', period)
             essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + super_plombe_ticpe_ajustee)
             return essence_ticpe_ajustee
 
@@ -445,7 +445,7 @@ class cce_2016_in_2014(Reform):
                 (prix_fioul_ttc_ajuste - accise_combustibles_liquides_ajustee * (1 + taux_plein_tva))
                 )
 
-            depenses_combustibles_liquides_ajustees = simulation.calculate('depenses_combustibles_liquides_ajustees_cce_2016_in_2014', period)
+            depenses_combustibles_liquides_ajustees = menage('depenses_combustibles_liquides_ajustees_cce_2016_in_2014', period)
             depenses_combustibles_liquides_ajustees_htva = \
                 depenses_combustibles_liquides_ajustees - tax_from_expense_including_tax(depenses_combustibles_liquides_ajustees, taux_plein_tva)
             montant_combustibles_liquides_ticpe_ajuste = \
@@ -460,7 +460,7 @@ class cce_2016_in_2014(Reform):
 
         def formula(self, simulation, period):
             depenses_diesel_ajustees_cce_2016_in_2014 = \
-                simulation.calculate('depenses_diesel_corrigees_ajustees_cce_2016_in_2014', period)
+               menage('depenses_diesel_corrigees_ajustees_cce_2016_in_2014', period)
             diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).cce_2016_in_2014.diesel_2014_2016
             quantites_diesel_ajustees = depenses_diesel_ajustees_cce_2016_in_2014 / (diesel_ttc + reforme_diesel) * 100
@@ -474,7 +474,7 @@ class cce_2016_in_2014(Reform):
 
         def formula(self, simulation, period):
             depenses_combustibles_liquides_ajustees_cce_2016_in_2014 = \
-                simulation.calculate('depenses_combustibles_liquides_ajustees_cce_2016_in_2014', period)
+               menage('depenses_combustibles_liquides_ajustees_cce_2016_in_2014', period)
             prix_fioul_ttc = \
                 parameters(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
             reforme_combustibles_liquides = \
@@ -490,11 +490,11 @@ class cce_2016_in_2014(Reform):
         label = u"Quantités de gaz consommées après la réforme - contribution climat énergie, hausse de 2014 à 2016"
 
         def formula(self, simulation, period):
-            depenses_gaz_ville_ajustees_cce_2016_in_2014 = simulation.calculate('depenses_gaz_ville_ajustees_cce_2016_in_2014', period)
-            depenses_gaz_tarif_fixe = simulation.calculate('depenses_gaz_tarif_fixe', period)
+            depenses_gaz_ville_ajustees_cce_2016_in_2014 = menage('depenses_gaz_ville_ajustees_cce_2016_in_2014', period)
+            depenses_gaz_tarif_fixe = menage('depenses_gaz_tarif_fixe', period)
             depenses_gaz_ajustees_variables = depenses_gaz_ville_ajustees_cce_2016_in_2014 - depenses_gaz_tarif_fixe
 
-            depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
+            depenses_gaz_prix_unitaire = menage('depenses_gaz_prix_unitaire', period)
             reforme_gaz = \
                 parameters(period.start).cce_2016_in_2014.gaz_2014_2016
 
@@ -509,7 +509,7 @@ class cce_2016_in_2014(Reform):
 
         def formula(self, simulation, period):
             depenses_essence_ajustees_cce_2016_in_2014 = \
-                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
+               menage('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
             part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
             depenses_sp_e10_ajustees = depenses_essence_ajustees_cce_2016_in_2014 * part_sp_e10
             super_95_e10_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
@@ -525,7 +525,7 @@ class cce_2016_in_2014(Reform):
 
         def formula(self, simulation, period):
             depenses_essence_ajustees_cce_2016_in_2014 = \
-                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
+               menage('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
             part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
             depenses_sp95_ajustees = depenses_essence_ajustees_cce_2016_in_2014 * part_sp95
             super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
@@ -541,7 +541,7 @@ class cce_2016_in_2014(Reform):
 
         def formula(self, simulation, period):
             depenses_essence_ajustees_cce_2016_in_2014 = \
-                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
+               menage('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
             part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
             depenses_sp98_ajustees = depenses_essence_ajustees_cce_2016_in_2014 * part_sp98
             super_98_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_98_ttc
@@ -557,7 +557,7 @@ class cce_2016_in_2014(Reform):
 
         def formula(self, simulation, period):
             depenses_essence_ajustees_cce_2016_in_2014 = \
-                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
+               menage('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
             part_super_plombe = \
                 parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
             depenses_super_plombe_ajustees = depenses_essence_ajustees_cce_2016_in_2014 * part_super_plombe
@@ -574,23 +574,23 @@ class cce_2016_in_2014(Reform):
         definition_period = YEAR
 
         def formula_2009(self, simulation, period):
-            quantites_sp95_ajustees = simulation.calculate('quantites_sp95', period)
-            quantites_sp98_ajustees = simulation.calculate('quantites_sp98', period)
-            quantites_sp_e10_ajustees = simulation.calculate('quantites_sp_e10', period)
+            quantites_sp95_ajustees = menage('quantites_sp95', period)
+            quantites_sp98_ajustees = menage('quantites_sp98', period)
+            quantites_sp_e10_ajustees = menage('quantites_sp_e10', period)
             quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees + quantites_sp_e10_ajustees)
             return quantites_essence_ajustees
 
         def formula_2007(self, simulation, period):
-            quantites_sp95_ajustees = simulation.calculate('quantites_sp95', period)
-            quantites_sp98_ajustees = simulation.calculate('quantites_sp98', period)
+            quantites_sp95_ajustees = menage('quantites_sp95', period)
+            quantites_sp98_ajustees = menage('quantites_sp98', period)
             quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees)
             return quantites_essence_ajustees
 
         def formula_1990(self, simulation, period):
-            quantites_sp95_ajustees = simulation.calculate('quantites_sp95', period)
-            quantites_sp98_ajustees = simulation.calculate('quantites_sp98', period)
+            quantites_sp95_ajustees = menage('quantites_sp95', period)
+            quantites_sp98_ajustees = menage('quantites_sp98', period)
             quantites_super_plombe_ajustees = \
-                simulation.calculate('quantites_super_plombe', period)
+               menage('quantites_super_plombe', period)
             quantites_essence_ajustees = (
                 quantites_sp95_ajustees + quantites_sp98_ajustees + quantites_super_plombe_ajustees
                 )
@@ -622,7 +622,7 @@ class cce_2016_in_2014(Reform):
                 (super_95_e10_ttc_ajuste - accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_ajustees_cce_2016_in_2014 = \
-                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
+               menage('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
             part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
             sp_e10_depenses_ajustees = depenses_essence_ajustees_cce_2016_in_2014 * part_sp_e10
             sp_e10_depenses_htva_ajustees = \
@@ -657,7 +657,7 @@ class cce_2016_in_2014(Reform):
                 (super_95_ttc_ajuste - accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_ajustees_cce_2016_in_2014 = \
-                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
+               menage('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
             part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
             depenses_sp_95_ajustees = depenses_essence_ajustees_cce_2016_in_2014 * part_sp95
             depenses_sp_95_htva_ajustees = (
@@ -694,7 +694,7 @@ class cce_2016_in_2014(Reform):
                 (super_98_ttc_ajuste - accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_ajustees_cce_2016_in_2014 = \
-                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
+               menage('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
             part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
             depenses_sp_98_ajustees = depenses_essence_ajustees_cce_2016_in_2014 * part_sp98
             depenses_sp_98_htva_ajustees = (
@@ -725,7 +725,7 @@ class cce_2016_in_2014(Reform):
                 (super_plombe_ttc_ajuste - accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_ajustees_cce_2016_in_2014 = \
-                simulation.calculate('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
+               menage('depenses_essence_corrigees_ajustees_cce_2016_in_2014', period)
             part_super_plombe = \
                 parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
             depenses_super_plombe_ajustees = depenses_essence_ajustees_cce_2016_in_2014 * part_super_plombe
@@ -746,7 +746,7 @@ class cce_2016_in_2014(Reform):
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
 
         def formula(self, simulation, period):
-            quantites_gaz_ajustees = simulation.calculate('quantites_gaz_final_ajustees_cce_2016_in_2014', period)
+            quantites_gaz_ajustees = menage('quantites_gaz_final_ajustees_cce_2016_in_2014', period)
             reforme_gaz = parameters(period.start).cce_2016_in_2014.gaz_2014_2016
             recettes_gaz = quantites_gaz_ajustees * reforme_gaz
 
@@ -758,8 +758,8 @@ class cce_2016_in_2014(Reform):
         use_baseline =ticpe.ticpe_totale
 
         def formula(self, simulation, period):
-            essence_ticpe_ajustee = simulation.calculate('essence_ticpe', period)
-            diesel_ticpe_ajustee = simulation.calculate('diesel_ticpe', period)
+            essence_ticpe_ajustee = menage('essence_ticpe', period)
+            diesel_ticpe_ajustee = menage('diesel_ticpe', period)
             ticpe_totale_ajustee = diesel_ticpe_ajustee + essence_ticpe_ajustee
 
             return ticpe_totale_ajustee
@@ -771,10 +771,10 @@ class cce_2016_in_2014(Reform):
         label = u"Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2014-2016"
 
         def formula(self, simulation, period):
-            taxe_diesel = simulation.calculate('diesel_ticpe', period)
-            taxe_essence = simulation.calculate('essence_ticpe', period)
-            taxe_combustibles_liquides = simulation.calculate('combustibles_liquides_ticpe', period)
-            taxe_gaz_ville = simulation.calculate('taxe_gaz_ville', period)
+            taxe_diesel = menage('diesel_ticpe', period)
+            taxe_essence = menage('essence_ticpe', period)
+            taxe_combustibles_liquides = menage('combustibles_liquides_ticpe', period)
+            taxe_gaz_ville = menage('taxe_gaz_ville', period)
 
             total = (
                 taxe_diesel + taxe_essence + taxe_combustibles_liquides + taxe_gaz_ville
@@ -789,7 +789,7 @@ class cce_2016_in_2014(Reform):
 
         def formula(self, simulation, period):
             depenses_tva_taux_plein_ajustees = \
-                simulation.calculate('depenses_tva_taux_plein_ajustees_cce_2016_in_2014', period)
+               menage('depenses_tva_taux_plein_ajustees_cce_2016_in_2014', period)
 
             taux_plein = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             abaissement_tva_taux_plein = (
@@ -807,7 +807,7 @@ class cce_2016_in_2014(Reform):
 
         def formula(self, simulation, period):
             depenses_tva_taux_plein_ajustees = \
-                simulation.calculate('depenses_tva_taux_plein_bis_ajustees_cce_2016_in_2014', period)
+               menage('depenses_tva_taux_plein_bis_ajustees_cce_2016_in_2014', period)
 
             taux_plein = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             abaissement_tva_taux_plein = (
@@ -824,7 +824,7 @@ class cce_2016_in_2014(Reform):
 
         def formula(self, simulation, period):
             depenses_tva_taux_reduit_ajustees = \
-                simulation.calculate('depenses_tva_taux_reduit_ajustees_cce_2016_in_2014', period)
+               menage('depenses_tva_taux_reduit_ajustees_cce_2016_in_2014', period)
 
             taux_reduit = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_reduit
             abaissement_tva_taux_reduit = \
@@ -840,7 +840,7 @@ class cce_2016_in_2014(Reform):
 
         def formula(self, simulation, period):
             depenses_tva_taux_super_reduit_ajustees = \
-                simulation.calculate('depenses_tva_taux_super_reduit_ajustees_cce_2016_in_2014', period)
+               menage('depenses_tva_taux_super_reduit_ajustees_cce_2016_in_2014', period)
 
             taux_super_reduit = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_particulier_super_reduit
             abaissement_tva_taux_super_reduit = \
@@ -856,10 +856,10 @@ class cce_2016_in_2014(Reform):
         use_baseline =tva.tva_total
 
         def formula(self, simulation, period):
-            taux_plein = simulation.calculate('tva_taux_plein_bis', period)
-            taux_reduit = simulation.calculate('tva_taux_reduit', period)
-            taux_super_reduit = simulation.calculate('tva_taux_super_reduit', period)
-            taux_intermediaire = simulation.calculate('tva_taux_intermediaire', period)
+            taux_plein = menage('tva_taux_plein_bis', period)
+            taux_reduit = menage('tva_taux_reduit', period)
+            taux_super_reduit = menage('tva_taux_super_reduit', period)
+            taux_intermediaire = menage('tva_taux_intermediaire', period)
 
             total = (taux_plein + taux_reduit + taux_super_reduit + taux_intermediaire)
 

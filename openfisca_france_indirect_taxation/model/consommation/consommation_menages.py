@@ -12,8 +12,8 @@ class depenses_assurance_sante(YearlyVariable):
     entity = Menage
     label = u"Dépenses en assurances liées aux transports"
 
-    def formula(self, simulation, period):
-        depenses_assurance_sante = simulation.calculate('poste_12_5_3_1_1', period)
+    def formula(menage, period):
+        depenses_assurance_sante = menage('poste_12_5_3_1_1', period)
         return depenses_assurance_sante
 
 
@@ -22,8 +22,8 @@ class depenses_assurance_transport(YearlyVariable):
     entity = Menage
     label = u"Dépenses en assurances liées aux transports"
 
-    def formula(self, simulation, period):
-        depenses_assurance_transport = simulation.calculate('poste_12_5_4_1_1', period)
+    def formula(menage, period):
+        depenses_assurance_transport = menage('poste_12_5_4_1_1', period)
         return depenses_assurance_transport
 
 
@@ -32,10 +32,10 @@ class depenses_autres_assurances(YearlyVariable):
     entity = Menage
     label = u"Dépenses en assurances liées aux transports"
 
-    def formula(self, simulation, period):
-        depenses_assurance_vie_deces = simulation.calculate('poste_12_5_1_1_1', period)
-        depenses_assurance_logement = simulation.calculate('poste_12_5_2_1_1', period)
-        depenses_assurance_reste = simulation.calculate('poste_12_5_5_1_1', period)
+    def formula(menage, period):
+        depenses_assurance_vie_deces = menage('poste_12_5_1_1_1', period)
+        depenses_assurance_logement = menage('poste_12_5_2_1_1', period)
+        depenses_assurance_reste = menage('poste_12_5_5_1_1', period)
 
         depenses_assurance_autres = \
             depenses_assurance_vie_deces + depenses_assurance_logement + depenses_assurance_reste
@@ -48,9 +48,9 @@ class depenses_ticpe(YearlyVariable):
     entity = Menage
     label = u"Consommation de carburants"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-        return simulation.calculate('depenses_ht_ticpe', period) * (1 + taux_plein_tva)
+        returnmenage('depenses_ht_ticpe', period) * (1 + taux_plein_tva)
         # This is equivalent to call directly poste_07_2_2_1_1
 
 class depenses_essence_recalculees(YearlyVariable):
@@ -58,12 +58,12 @@ class depenses_essence_recalculees(YearlyVariable):
     entity = Menage
     label = u"Dépenses en essence recalculées à partir du prix ht"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-        depenses_sp_e10_ht = simulation.calculate('depenses_sp_e10_ht', period)
-        depenses_sp_95_ht = simulation.calculate('depenses_sp_95_ht', period)
-        depenses_sp_98_ht = simulation.calculate('depenses_sp_98_ht', period)
-        depenses_super_plombe_ht = simulation.calculate('depenses_super_plombe_ht', period)
+        depenses_sp_e10_ht = menage('depenses_sp_e10_ht', period)
+        depenses_sp_95_ht = menage('depenses_sp_95_ht', period)
+        depenses_sp_98_ht = menage('depenses_sp_98_ht', period)
+        depenses_super_plombe_ht = menage('depenses_super_plombe_ht', period)
 
 
 class depenses_tot(YearlyVariable):
@@ -71,13 +71,13 @@ class depenses_tot(YearlyVariable):
     entity = Menage
     label = u"Somme des dépenses du ménage"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         postes_agreges = ['poste_agrege_{}'.format(index) for index in
             ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]
             ]
         depenses_tot = 0
         for poste in postes_agreges:
-            depenses_tot += simulation.calculate('{}'.format(poste), period)
+            depenses_tot += menage('{}'.format(poste), period)
 
         return depenses_tot
 
@@ -87,11 +87,11 @@ class depenses_totales(YearlyVariable):
     entity = Menage
     label = u"Consommation totale du ménage"
 
-    def formula(self, simulation, period):
-        depenses_tva_taux_super_reduit = simulation.calculate('depenses_tva_taux_super_reduit', period)
-        depenses_tva_taux_reduit = simulation.calculate('depenses_tva_taux_reduit', period)
-        depenses_tva_taux_intermediaire = simulation.calculate('depenses_tva_taux_intermediaire', period)
-        depenses_tva_taux_plein = simulation.calculate('depenses_tva_taux_plein', period)
+    def formula(menage, period):
+        depenses_tva_taux_super_reduit = menage('depenses_tva_taux_super_reduit', period)
+        depenses_tva_taux_reduit = menage('depenses_tva_taux_reduit', period)
+        depenses_tva_taux_intermediaire = menage('depenses_tva_taux_intermediaire', period)
+        depenses_tva_taux_plein = menage('depenses_tva_taux_plein', period)
         return (
             depenses_tva_taux_super_reduit +
             depenses_tva_taux_reduit +
@@ -135,9 +135,9 @@ class somme_coicop12(YearlyVariable):
     entity = Menage
     label = u"Somme des postes coicop12"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         return sum(
-            simulation.calculate('coicop12_{}'.format(idx), period)
+           menage('coicop12_{}'.format(idx), period)
             for idx in xrange(1, 13)
             )
 
@@ -147,8 +147,8 @@ class somme_coicop12_conso(YearlyVariable):
     entity = Menage
     label = u"Somme des postes coicop12 de 1 à 8"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         return sum(
-            simulation.calculate('coicop12_{}'.format(idx), period)
+           menage('coicop12_{}'.format(idx), period)
             for idx in xrange(1, 9)
             )

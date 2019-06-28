@@ -15,8 +15,8 @@ class emissions_CO2_carburants(YearlyVariable):
     label = u"Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2"
 
     def formula(self, simulation, period):
-        quantites_diesel = simulation.calculate('quantites_diesel', period)
-        quantites_essence = simulation.calculate('quantites_essence', period)
+        quantites_diesel = menage('quantites_diesel', period)
+        quantites_essence = menage('quantites_essence', period)
         emissions_diesel = \
             parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
         emissions_essence = \
@@ -32,7 +32,7 @@ class emissions_CO2_combustibles_liquides(YearlyVariable):
     label = u"Emissions de CO2 des ménages via leur consommation de combustibles liquides, en kg de CO2"
 
     def formula(self, simulation, period):
-        quantite_combustibles_liquides = simulation.calculate('quantites_combustibles_liquides', period)
+        quantite_combustibles_liquides = menage('quantites_combustibles_liquides', period)
         emissions_combustibles_liquidies = \
             parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_combustibles_liquides
         emissions = quantite_combustibles_liquides * emissions_combustibles_liquidies
@@ -46,7 +46,7 @@ class emissions_CO2_diesel(YearlyVariable):
     label = u"Emissions de CO2 des ménages via leur consommation de diesel, en kg de CO2"
 
     def formula(self, simulation, period):
-        quantites_diesel = simulation.calculate('quantites_diesel', period)
+        quantites_diesel = menage('quantites_diesel', period)
         emissions_diesel = \
             parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
         emissions_co2 = quantites_diesel * emissions_diesel
@@ -60,7 +60,7 @@ class emissions_CO2_electricite(YearlyVariable):
     label = u"Emissions de CO2 des ménages via leur consommation d'électricité, en kg de CO2"
 
     def formula(self, simulation, period):
-        quantites_eletricite = simulation.calculate('quantites_electricite_selon_compteur', period)
+        quantites_eletricite = menage('quantites_electricite_selon_compteur', period)
         emissions_electricite = \
             parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_electricite
         emissions = quantites_eletricite * emissions_electricite
@@ -74,10 +74,10 @@ class emissions_CO2_energies_logement(YearlyVariable):
     label = u"Emissions de CO2 des ménages via leur consommation d'énergies dans leur logement, en kg de CO2"
 
     def formula(self, simulation, period):
-        emissions_electricite = simulation.calculate('emissions_CO2_electricite', period)
-        emissions_gaz_ville = simulation.calculate('emissions_CO2_gaz_ville', period)
-        emissions_gaz_liquefie = simulation.calculate('emissions_CO2_gaz_liquefie', period)
-        emissions_combustibles_liquides = simulation.calculate('emissions_CO2_combustibles_liquides', period)
+        emissions_electricite = menage('emissions_CO2_electricite', period)
+        emissions_gaz_ville = menage('emissions_CO2_gaz_ville', period)
+        emissions_gaz_liquefie = menage('emissions_CO2_gaz_liquefie', period)
+        emissions_combustibles_liquides = menage('emissions_CO2_combustibles_liquides', period)
         emissions = emissions_electricite + emissions_gaz_ville + emissions_gaz_liquefie + emissions_combustibles_liquides  # Source : Ademe
 
         return emissions
@@ -89,8 +89,8 @@ class emissions_CO2_energies_totales(YearlyVariable):
     label = u"Emissions de CO2 des ménages via leur consommation d'énergies totale, en kg de CO2"
 
     def formula(self, simulation, period):
-        emissions_energies_logement = simulation.calculate('emissions_CO2_energies_logement', period)
-        emissions_carburants = simulation.calculate('emissions_CO2_carburants', period)
+        emissions_energies_logement = menage('emissions_CO2_energies_logement', period)
+        emissions_carburants = menage('emissions_CO2_carburants', period)
         emissions = emissions_energies_logement + emissions_carburants
 
         return emissions
@@ -102,7 +102,7 @@ class emissions_CO2_essence(YearlyVariable):
     label = u"Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2"
 
     def formula(self, simulation, period):
-        quantites_essence = simulation.calculate('quantites_essence', period)
+        quantites_essence = menage('quantites_essence', period)
         emissions_essence = \
             parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
         emissions_co2 = quantites_essence * emissions_essence
@@ -116,7 +116,7 @@ class emissions_CO2_gaz_liquefie(YearlyVariable):
     label = u"Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2"
 
     def formula(self, simulation, period):
-        quantites_gaz = simulation.calculate('quantites_gaz_liquefie', period)
+        quantites_gaz = menage('quantites_gaz_liquefie', period)
         emissions_gaz = \
             parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_liquefie
         emissions = quantites_gaz * emissions_gaz
@@ -130,7 +130,7 @@ class emissions_CO2_gaz_ville(YearlyVariable):
     label = u"Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2"
 
     def formula(self, simulation, period):
-        quantites_gaz = simulation.calculate('quantites_gaz_final', period)
+        quantites_gaz = menage('quantites_gaz_final', period)
         emissions_gaz = \
             parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_ville
         emissions = quantites_gaz * emissions_gaz

@@ -14,7 +14,7 @@ class quantites_combustibles_liquides(YearlyVariable):
     label = u"Quantité de combustibles solides (en litres) consommée par les ménages"
 
     def formula(self, simulation, period):
-        depenses_combustibles_liquides = simulation.calculate('depenses_combustibles_liquides', period)
+        depenses_combustibles_liquides = menage('depenses_combustibles_liquides', period)
         prix_combustibles_liquides = \
             parameters(period.start).tarification_energie_logement.prix_fioul_domestique.prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre
 
@@ -29,7 +29,7 @@ class quantites_diesel(YearlyVariable):
     label = u"Quantités de diesel consommées par les ménages"
 
     def formula(self, simulation, period):
-        depenses_diesel = simulation.calculate('depenses_diesel_corrigees', period)
+        depenses_diesel = menage('depenses_diesel_corrigees', period)
         diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
         quantites_diesel = depenses_diesel / diesel_ttc * 100
 
@@ -45,7 +45,7 @@ class quantites_electricite_3kva(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_elect = \
             parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_3_kva
-        depenses_elect = simulation.calculate('depenses_electricite', period)
+        depenses_elect = menage('depenses_electricite', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
             parameters(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_3_kva
@@ -63,7 +63,7 @@ class quantites_electricite_6kva(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_elect = \
             parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_6_kva
-        depenses_elect = simulation.calculate('depenses_electricite', period)
+        depenses_elect = menage('depenses_electricite', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
             parameters(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
@@ -81,7 +81,7 @@ class quantites_electricite_9kva(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_elect = \
             parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_9_kva
-        depenses_elect = simulation.calculate('depenses_electricite', period)
+        depenses_elect = menage('depenses_electricite', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
             parameters(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
@@ -99,7 +99,7 @@ class quantites_electricite_12kva(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_elect = \
             parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_12_kva
-        depenses_elect = simulation.calculate('depenses_electricite', period)
+        depenses_elect = menage('depenses_electricite', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
             parameters(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
@@ -117,7 +117,7 @@ class quantites_electricite_15kva(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_elect = \
             parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
-        depenses_elect = simulation.calculate('depenses_electricite', period)
+        depenses_elect = menage('depenses_electricite', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
             parameters(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
@@ -135,7 +135,7 @@ class quantites_electricite_18kva(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_elect = \
             parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_18_kva
-        depenses_elect = simulation.calculate('depenses_electricite', period)
+        depenses_elect = menage('depenses_electricite', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
             parameters(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
@@ -150,23 +150,23 @@ class quantites_essence(YearlyVariable):
     label = u"Quantités d'essence consommées par les ménages"
 
     def formula_1990(self, simulation, period):
-        quantites_sp95 = simulation.calculate('quantites_sp95', period)
-        quantites_sp98 = simulation.calculate('quantites_sp98', period)
-        quantites_super_plombe = simulation.calculate('quantites_super_plombe', period)
+        quantites_sp95 = menage('quantites_sp95', period)
+        quantites_sp98 = menage('quantites_sp98', period)
+        quantites_super_plombe = menage('quantites_super_plombe', period)
         quantites_essence = (quantites_sp95 + quantites_sp98 + quantites_super_plombe)
         return quantites_essence
 
     def formula_2007(self, simulation, period):
 
-        quantites_sp95 = simulation.calculate('quantites_sp95', period)
-        quantites_sp98 = simulation.calculate('quantites_sp98', period)
+        quantites_sp95 = menage('quantites_sp95', period)
+        quantites_sp98 = menage('quantites_sp98', period)
         quantites_essence = (quantites_sp95 + quantites_sp98)
         return quantites_essence
 
     def formula_2009(self, simulation, period):
-        quantites_sp95 = simulation.calculate('quantites_sp95', period)
-        quantites_sp98 = simulation.calculate('quantites_sp98', period)
-        quantites_sp_e10 = simulation.calculate('quantites_sp_e10', period)
+        quantites_sp95 = menage('quantites_sp95', period)
+        quantites_sp98 = menage('quantites_sp98', period)
+        quantites_sp_e10 = menage('quantites_sp_e10', period)
         quantites_essence = (quantites_sp95 + quantites_sp98 + quantites_sp_e10)
         return quantites_essence
 
@@ -179,7 +179,7 @@ class quantites_gaz_contrat_base(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_gaz = \
             parameters(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.base_0_1000
-        depenses_gaz = simulation.calculate('depenses_gaz_ville', period)
+        depenses_gaz = menage('depenses_gaz_ville', period)
         depenses_sans_part_fixe = depenses_gaz - tarif_fixe_gaz
         prix_unitaire_gaz = \
             parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_base_ttc
@@ -196,7 +196,7 @@ class quantites_gaz_contrat_b0(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_gaz = \
             parameters(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b0_1000_6000
-        depenses_gaz = simulation.calculate('depenses_gaz_ville', period)
+        depenses_gaz = menage('depenses_gaz_ville', period)
         depenses_sans_part_fixe = depenses_gaz - tarif_fixe_gaz
         prix_unitaire_gaz = \
             parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b0_ttc
@@ -213,7 +213,7 @@ class quantites_gaz_contrat_b1(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_gaz = \
             parameters(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b1_6_30000
-        depenses_gaz = simulation.calculate('depenses_gaz_ville', period)
+        depenses_gaz = menage('depenses_gaz_ville', period)
         depenses_sans_part_fixe = depenses_gaz - tarif_fixe_gaz
         prix_unitaire_gaz = \
             parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b1_ttc
@@ -230,7 +230,7 @@ class quantites_gaz_contrat_b2i(YearlyVariable):
     def formula(self, simulation, period):
         tarif_fixe_gaz = \
             parameters(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b2i_30000
-        depenses_gaz = simulation.calculate('depenses_gaz_ville', period)
+        depenses_gaz = menage('depenses_gaz_ville', period)
         depenses_gaz_variables = depenses_gaz - tarif_fixe_gaz
         prix_unitaire_gaz = \
             parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b2i_ttc
@@ -245,10 +245,10 @@ class quantites_gaz_contrat_optimal(YearlyVariable):
     label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au meilleur contrat"
 
     def formula(self, simulation, period):
-        quantite_base = simulation.calculate('quantites_gaz_contrat_base', period)
-        quantite_b0 = simulation.calculate('quantites_gaz_contrat_b0', period)
-        quantite_b1 = simulation.calculate('quantites_gaz_contrat_b1', period)
-        quantite_b2i = simulation.calculate('quantites_gaz_contrat_b2i', period)
+        quantite_base = menage('quantites_gaz_contrat_base', period)
+        quantite_b0 = menage('quantites_gaz_contrat_b0', period)
+        quantite_b1 = menage('quantites_gaz_contrat_b1', period)
+        quantite_b2i = menage('quantites_gaz_contrat_b2i', period)
         quantite_optimale_base_b0 = numpy.maximum(quantite_base, quantite_b0)
         quantite_optimale_base_b1 = numpy.maximum(quantite_optimale_base_b0, quantite_b1)
         quantite_optimale_base_b2i = numpy.maximum(quantite_optimale_base_b1, quantite_b2i)
@@ -263,9 +263,9 @@ class quantites_gaz_final(YearlyVariable):
     label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au meilleur contrat"
 
     def formula(self, simulation, period):
-        quantites_gaz_contrat_optimal = simulation.calculate('quantites_gaz_contrat_optimal', period)
-        depenses_gaz_prix_unitaire = simulation.calculate('depenses_gaz_prix_unitaire', period)
-        tarifs_sociaux_gaz = simulation.calculate('tarifs_sociaux_gaz', period)
+        quantites_gaz_contrat_optimal = menage('quantites_gaz_contrat_optimal', period)
+        depenses_gaz_prix_unitaire = menage('depenses_gaz_prix_unitaire', period)
+        tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
 
         # Ceux qui ne consomment pas de gaz ayant depenses_gaz_prix_unitaire = 0, on remplace 0 par 1 pour éviter de diviser par zéro
         depenses_gaz_prix_unitaire = depenses_gaz_prix_unitaire + 1 * (depenses_gaz_prix_unitaire == 0)
@@ -280,10 +280,10 @@ class quantites_electricite_selon_compteur(YearlyVariable):
     label = u"Quantité d'électricité (en kWh) consommée par les ménages d'après le compteur imputé"
 
     def formula(self, simulation, period):
-        depenses_electricite_variables = simulation.calculate('depenses_electricite_variables', period)
-        depenses_electricite_prix_unitaire = simulation.calculate('depenses_electricite_prix_unitaire', period)
+        depenses_electricite_variables = menage('depenses_electricite_variables', period)
+        depenses_electricite_prix_unitaire = menage('depenses_electricite_prix_unitaire', period)
         # On inclut ici les dépenses non facturées aux ménages (provenant des TPN) pour refleter leur "vraie" consommation
-        tarifs_sociaux_electricite = simulation.calculate('tarifs_sociaux_electricite', period)
+        tarifs_sociaux_electricite = menage('tarifs_sociaux_electricite', period)
         quantites_electricite_selon_compteur = (depenses_electricite_variables + tarifs_sociaux_electricite) / depenses_electricite_prix_unitaire
         quantites_electricite_selon_compteur = numpy.maximum(quantites_electricite_selon_compteur, 0)
 
@@ -296,8 +296,8 @@ class quantites_gaz_liquefie(YearlyVariable):
     label = u"Quantité de gaz liquefie (en kWh) consommée par les ménages d'après SOeS Phébus 2013"
 
     def formula(self, simulation, period):
-        depenses_gaz_liquefie = simulation.calculate('depenses_gaz_liquefie', period)
-        pondmen = simulation.calculate('pondmen', period)
+        depenses_gaz_liquefie = menage('depenses_gaz_liquefie', period)
+        pondmen = menage('pondmen', period)
 
         population = numpy.sum(pondmen)
         total_gpl_phebus = population * 0.19 # quantité annuelle moyenne consommée par les ménages
@@ -315,7 +315,7 @@ class quantites_sp_e10(YearlyVariable):
     label = u"Quantités consommées de sans plomb e10 par les ménages"
 
     def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence_corrigees', period)
         part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10 = depenses_essence * part_sp_e10
         super_95_e10_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
@@ -330,7 +330,7 @@ class quantites_sp95(YearlyVariable):
     label = u"Quantités consommées de sans plomb 95 par les ménages"
 
     def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence_corrigees', period)
         part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp95 = depenses_essence * part_sp95
         super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
@@ -345,7 +345,7 @@ class quantites_sp98(YearlyVariable):
     label = u"Quantités consommées de sans plomb 98 par les ménages"
 
     def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence_corrigees', period)
         part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
         depenses_sp98 = depenses_essence * part_sp98
         super_98_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_98_ttc
@@ -360,7 +360,7 @@ class quantites_super_plombe(YearlyVariable):
     label = u"Quantités consommées de super plombé par les ménages"
 
     def formula(self, simulation, period):
-        depenses_essence = simulation.calculate('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence_corrigees', period)
         part_super_plombe = \
             parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
         depenses_super_plombe = depenses_essence * part_super_plombe
