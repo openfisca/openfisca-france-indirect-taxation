@@ -90,7 +90,7 @@ class reforme_rattrapage_diesel(Reform):
 
     #    def formula(menage, period, parameters):
     #        depenses_diesel = menage('depenses_diesel', period)
-    #        diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+    #        diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
     #        reforme_diesel = parameters(period.start).rattrapage_diesel.diesel
     #        carburants_elasticite_prix = menage('elas_price_1_1', period)
     #        depenses_diesel_ajustees_rattrapage_diesel = \
@@ -106,7 +106,7 @@ class reforme_rattrapage_diesel(Reform):
 
         def formula(menage, period, parameters):
             depenses_diesel = menage('depenses_diesel_corrigees', period)
-            diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+            diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).rattrapage_diesel.diesel
             carburants_elasticite_prix = menage('elas_price_1_1', period)
             depenses_diesel_ajustees_rattrapage_diesel = \
@@ -122,7 +122,7 @@ class reforme_rattrapage_diesel(Reform):
 
        def formula(menage, period, parameters):
            depenses_essence = menage('depenses_essence', period)
-           super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+           super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
            reforme_essence = parameters(period.start).rattrapage_diesel.essence
            carburants_elasticite_prix = menage('elas_price_1_1', period)
            depenses_essence_ajustees_rattrapage_diesel = \
@@ -138,7 +138,7 @@ class reforme_rattrapage_diesel(Reform):
 
         def formula(menage, period, parameters):
             depenses_essence = menage('depenses_essence_corrigees', period)
-            super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+            super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
             reforme_essence = parameters(period.start).rattrapage_diesel.essence
             carburants_elasticite_prix = menage('elas_price_1_1', period)
             depenses_essence_ajustees_rattrapage_diesel = \
@@ -227,14 +227,14 @@ class reforme_rattrapage_diesel(Reform):
             try:
                 majoration_ticpe_diesel = \
                     parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
-                accise_diesel = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
+                accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
                 accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
             except:
-                accise_diesel_ticpe = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
+                accise_diesel_ticpe = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
 
             reforme_diesel = parameters(period.start).rattrapage_diesel.diesel
             accise_diesel_ticpe_ajustee = accise_diesel_ticpe + reforme_diesel
-            prix_diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+            prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             prix_diesel_ttc_ajuste = prix_diesel_ttc + reforme_diesel
             taux_implicite_diesel_ajuste = (
                 (accise_diesel_ticpe_ajustee * (1 + taux_plein_tva)) /
@@ -305,7 +305,7 @@ class reforme_rattrapage_diesel(Reform):
         def formula(menage, period, parameters):
             depenses_diesel_ajustees_rattrapage_diesel = \
                 menage('depenses_diesel_corrigees_ajustees_rattrapage_diesel', period)
-            diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+            diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).rattrapage_diesel.diesel
             quantites_diesel_ajustees = depenses_diesel_ajustees_rattrapage_diesel / (diesel_ttc + reforme_diesel) * 100
 
@@ -321,7 +321,7 @@ class reforme_rattrapage_diesel(Reform):
                 menage('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
             part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
             depenses_sp_e10_ajustees = depenses_essence_ajustees_rattrapage_diesel * part_sp_e10
-            super_95_e10_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+            super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
             reforme_essence = parameters(period.start).rattrapage_diesel.essence
             quantite_sp_e10 = depenses_sp_e10_ajustees / (super_95_e10_ttc + reforme_essence) * 100
 
@@ -336,7 +336,7 @@ class reforme_rattrapage_diesel(Reform):
             depenses_essence_ajustees_rattrapage_diesel = menage('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
             part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
             depenses_sp95_ajustees = depenses_essence_ajustees_rattrapage_diesel * part_sp95
-            super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+            super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
             reforme_essence = parameters(period.start).rattrapage_diesel.essence
             quantites_sp95_ajustees = depenses_sp95_ajustees / (super_95_ttc + reforme_essence) * 100
 
@@ -351,7 +351,7 @@ class reforme_rattrapage_diesel(Reform):
             depenses_essence_ajustees_rattrapage_diesel = menage('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
             part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
             depenses_sp98_ajustees = depenses_essence_ajustees_rattrapage_diesel * part_sp98
-            super_98_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_98_ttc
+            super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
             reforme_essence = parameters(period.start).rattrapage_diesel.essence
             quantites_sp98_ajustees = depenses_sp98_ajustees / (super_98_ttc + reforme_essence) * 100
 
@@ -367,7 +367,7 @@ class reforme_rattrapage_diesel(Reform):
             part_super_plombe = \
                 parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
             depenses_super_plombe_ajustees = depenses_essence_ajustees_rattrapage_diesel * part_super_plombe
-            super_plombe_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
+            super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
             reforme_essence = parameters(period.start).rattrapage_diesel.essence
             quantites_super_plombe_ajustees = depenses_super_plombe_ajustees / (super_plombe_ttc + reforme_essence) * 100
 
@@ -411,17 +411,17 @@ class reforme_rattrapage_diesel(Reform):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             try:
                 accise_super_e10 = \
-                    parameters(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+                    parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
                 majoration_ticpe_super_e10 = \
-                    parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                    parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
                 accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
             except:
                 accise_ticpe_super_e10 = \
-                    parameters(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+                    parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
 
             reforme_essence = parameters(period.start).rattrapage_diesel.essence
             accise_ticpe_super_e10_ajustee = accise_ticpe_super_e10 + reforme_essence
-            super_95_e10_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+            super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
             super_95_e10_ttc_ajuste = super_95_e10_ttc + reforme_essence
             taux_implicite_sp_e10_ajuste = (
                 (accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva)) /
@@ -447,16 +447,16 @@ class reforme_rattrapage_diesel(Reform):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
             try:
-                accise_super95 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
+                accise_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
                 majoration_ticpe_super95 = \
-                    parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                    parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
                 accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
             except:
-                accise_ticpe_super95 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
+                accise_ticpe_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
             reforme_essence = parameters(period.start).rattrapage_diesel.essence
             accise_ticpe_super95_ajustee = accise_ticpe_super95 + reforme_essence
-            super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+            super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
             super_95_ttc_ajuste = super_95_ttc + reforme_essence
             taux_implicite_sp95_ajuste = (
                 (accise_ticpe_super95_ajustee * (1 + taux_plein_tva)) /
@@ -484,16 +484,16 @@ class reforme_rattrapage_diesel(Reform):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
             try:
-                accise_super98 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
+                accise_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
                 majoration_ticpe_super98 = \
-                    parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                    parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
                 accise_ticpe_super98 = accise_super98 + majoration_ticpe_super98
             except:
-                accise_ticpe_super98 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
+                accise_ticpe_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
             reforme_essence = parameters(period.start).rattrapage_diesel.essence
             accise_ticpe_super98_ajustee = accise_ticpe_super98 + reforme_essence
-            super_98_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_98_ttc
+            super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
             super_98_ttc_ajuste = super_98_ttc + reforme_essence
             taux_implicite_sp98_ajuste = (
                 (accise_ticpe_super98_ajustee * (1 + taux_plein_tva)) /
@@ -524,7 +524,7 @@ class reforme_rattrapage_diesel(Reform):
 
             reforme_essence = parameters(period.start).rattrapage_diesel.essence
             accise_super_plombe_ticpe_ajustee = accise_super_plombe_ticpe + reforme_essence
-            super_plombe_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
+            super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
             super_plombe_ttc_ajuste = super_plombe_ttc + reforme_essence
             taux_implicite_super_plombe_ajuste = (
                 (accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva)) /

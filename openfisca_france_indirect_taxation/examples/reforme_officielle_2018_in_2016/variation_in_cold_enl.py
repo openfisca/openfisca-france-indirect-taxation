@@ -23,12 +23,12 @@ def estimate_froid():
         data_enl['froid_cout'] + data_enl['froid_isolation'] + data_enl['froid_impaye'] + data_enl['froid_installation']
         )
     data_enl['froid_4_criteres_3_deciles'] = 1 * (data_enl['froid_4_criteres_3_deciles'] > 0)
-    
+
     data_enl = data_enl.query('revtot > 0')
     data_enl['revtot_2'] = data_enl['revtot'] ** 2
-    
+
     data_enl['agepr_2'] = data_enl['agepr'] ** 2
-    
+
     data_enl['part_energies_revtot'] = data_enl['depenses_energies'] / data_enl['revtot']
 
     for i in range(0, 5):
@@ -49,7 +49,7 @@ def estimate_froid():
     legislation_json = tax_benefit_system.get_legislation()
 
     dict_prix_combustibles_liquides = \
-        legislation_json['children']['tarification_energie_logement']['children']['prix_fioul_domestique']['children']['prix_annuel_moyen_du_fioul_domestique_ttc_livraisons_de_2000_a_4999_litres_en_euro_par_litre']
+        legislation_json['children']['tarifs_energie']['children']['prix_fioul_domestique']['children']['prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre']
 
     df_prix = pd.DataFrame.from_dict(dict_prix_combustibles_liquides['values'])
     df_prix['start'] = df_prix['start'].str[:4]
@@ -63,14 +63,14 @@ def estimate_froid():
 
     # Quantités gaz
     dict_prix_fixe_gaz_base = \
-        legislation_json['children']['tarification_energie_logement']['children']['tarif_fixe_gdf_ttc']['children']['base_0_1000']
+        legislation_json['children']['tarifs_energie']['children']['tarif_fixe_gdf_ttc']['children']['base_0_1000']
     df_prix = pd.DataFrame.from_dict(dict_prix_fixe_gaz_base['values'])
     df_prix['start'] = df_prix['start'].str[:4]
     df_prix = df_prix.set_index('start')
     prix_fixe_base = df_prix['value']['2013']
 
     dict_prix_unitaire_gaz_base = \
-        legislation_json['children']['tarification_energie_logement']['children']['prix_unitaire_gdf_ttc']['children']['prix_kwh_base_ttc']
+        legislation_json['children']['tarifs_energie']['children']['prix_unitaire_gdf_ttc']['children']['prix_kwh_base_ttc']
     df_prix = pd.DataFrame.from_dict(dict_prix_unitaire_gaz_base['values'])
     df_prix['start'] = df_prix['start'].str[:4]
     df_prix = df_prix.set_index('start')
@@ -83,14 +83,14 @@ def estimate_froid():
 
 
     dict_prix_fixe_gaz_b0 = \
-        legislation_json['children']['tarification_energie_logement']['children']['tarif_fixe_gdf_ttc']['children']['b0_1000_6000']
+        legislation_json['children']['tarifs_energie']['children']['tarif_fixe_gdf_ttc']['children']['b0_1000_6000']
     df_prix = pd.DataFrame.from_dict(dict_prix_fixe_gaz_b0['values'])
     df_prix['start'] = df_prix['start'].str[:4]
     df_prix = df_prix.set_index('start')
     prix_fixe_base = df_prix['value']['2013']
 
     dict_prix_unitaire_gaz_b0 = \
-        legislation_json['children']['tarification_energie_logement']['children']['prix_unitaire_gdf_ttc']['children']['prix_kwh_b0_ttc']
+        legislation_json['children']['tarifs_energie']['children']['prix_unitaire_gdf_ttc']['children']['prix_kwh_b0_ttc']
     df_prix = pd.DataFrame.from_dict(dict_prix_unitaire_gaz_b0['values'])
     df_prix['start'] = df_prix['start'].str[:4]
     df_prix = df_prix.set_index('start')
@@ -103,14 +103,14 @@ def estimate_froid():
 
 
     dict_prix_fixe_gaz_1 = \
-        legislation_json['children']['tarification_energie_logement']['children']['tarif_fixe_gdf_ttc']['children']['b1_6_30000']
+        legislation_json['children']['tarifs_energie']['children']['tarif_fixe_gdf_ttc']['children']['b1_6_30000']
     df_prix = pd.DataFrame.from_dict(dict_prix_fixe_gaz_1['values'])
     df_prix['start'] = df_prix['start'].str[:4]
     df_prix = df_prix.set_index('start')
     prix_fixe_base = df_prix['value']['2013']
 
     dict_prix_unitaire_gaz_1 = \
-        legislation_json['children']['tarification_energie_logement']['children']['prix_unitaire_gdf_ttc']['children']['prix_kwh_b1_ttc']
+        legislation_json['children']['tarifs_energie']['children']['prix_unitaire_gdf_ttc']['children']['prix_kwh_b1_ttc']
     df_prix = pd.DataFrame.from_dict(dict_prix_unitaire_gaz_1['values'])
     df_prix['start'] = df_prix['start'].str[:4]
     df_prix = df_prix.set_index('start')
@@ -126,17 +126,17 @@ def estimate_froid():
         + data_enl['quantites_b0'] * (data_enl['quantites_b0'] > data_enl['quantites_base']) * (data_enl['quantites_b0'] > data_enl['quantites_b1'])
         + data_enl['quantites_b1'] * (data_enl['quantites_b1'] > data_enl['quantites_base']) * (data_enl['quantites_b1'] > data_enl['quantites_b0'])
         )
-    
+
     data_enl['quantites_gaz_ville'] = (data_enl['quantites_gaz_ville'] > 0) * data_enl['quantites_gaz_ville']
 
     data_enl['quantites_kwh'] = 9.96 * data_enl['quantites_combustibles_liquides'] + data_enl['quantites_gaz_ville']
 
     data_enl['proprietaire'] = 0
     data_enl.loc[data_enl.stalog.isin([1,2]), 'proprietaire'] = 1
-    
+
     data_enl['etudiant'] = 0
     data_enl.loc[data_enl.situapr == 3, 'etudiant'] = 1
-    
+
     data_enl['monoparental'] = 0
     data_enl.loc[data_enl.mtypmena.isin([31,32]), 'monoparental'] = 1
 
@@ -177,7 +177,7 @@ def estimate_froid():
         'Quantity_natural_gaz',
         'Quantity_domestic_fuel',
         #'Bad_walls_isolation',
-        #'Good_walls_isolation',        
+        #'Good_walls_isolation',
         #'Majority_double_glazing',
         #'Building_before_1949',
         #'Building_1949_74',
@@ -224,7 +224,7 @@ def estimate_froid():
 
 
     regression_logit = smf.Logit(data_enl['FC_indicator'], data_enl[regressors]).fit()
-    
+
     return regression_logit
 
 

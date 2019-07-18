@@ -21,7 +21,7 @@ from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 # Appel des paramètres de la législation et des prix
-ticpe = ['ticpe_gazole', 'ticpe_super9598']
+ticpe = ['ticpe_gazole', 'super_95_98']
 accise_diesel = get_accises_carburants(ticpe)
 prix_ttc = ['diesel_ttc', 'super_95_ttc']
 prix_carburants = get_prix_carburants(prix_ttc)

@@ -143,12 +143,12 @@ class depenses_diesel_ht(YearlyVariable):
         try:
             majoration_ticpe_diesel = \
                 parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
-            accise_diesel = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
+            accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
             accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
         except:
-            accise_diesel_ticpe = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
+            accise_diesel_ticpe = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
 
-        prix_diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+        prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         taux_implicite_diesel = (
             (accise_diesel_ticpe * (1 + taux_plein_tva)) /
             (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
@@ -173,12 +173,12 @@ class depenses_diesel_recalculees(YearlyVariable):
         try:
             majoration_ticpe_diesel = \
                 parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
-            accise_diesel = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
+            accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
             accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
         except:
-            accise_diesel_ticpe = parameters(period.start).imposition_indirecte.ticpe.ticpe_gazole
+            accise_diesel_ticpe = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
 
-        prix_diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+        prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         taux_implicite_diesel = (
             (accise_diesel_ticpe * (1 + taux_plein_tva)) /
             (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
@@ -247,9 +247,9 @@ class depenses_electricite_prix_unitaire(YearlyVariable):
         # Note : les barèmes ne donnent que les prix unitaires pour 3 et 6 kva. Pour les puissances supérieures,
         # les valeurs sont assez proches de celles du compteur 6kva que nous utilisons comme proxy.
         prix_unitaire_3kva = \
-            parameters(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_3_kva
+            parameters(period.start).tarifs_energie.prix_unitaire_base_edf_ttc.prix_du_kwh_3_kva
         prix_unitaire_6kva = \
-            parameters(period.start).tarification_energie_logement.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+            parameters(period.start).tarifs_energie.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
 
         prix_unitaire = (
             (depenses_electricite_percentile < 4) * prix_unitaire_3kva +
@@ -279,15 +279,15 @@ class depenses_electricite_tarif_fixe(YearlyVariable):
         depenses_electricite_percentile = menage('depenses_electricite_percentile', period)
 
         tarif_fixe_3kva = \
-            parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_3_kva
+            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_3_kva
         tarif_fixe_6kva = \
-            parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_6_kva
+            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_6_kva
         tarif_fixe_9kva = \
-            parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_9_kva
+            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_9_kva
         tarif_fixe_12kva = \
-            parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_12_kva
+            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_12_kva
         tarif_fixe_15kva = \
-            parameters(period.start).tarification_energie_logement.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
+            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
 
         tarif_fixe = (
             (depenses_electricite_percentile < 4) * tarif_fixe_3kva +
@@ -458,13 +458,13 @@ class depenses_gaz_prix_unitaire(YearlyVariable):
         quantite_optimale = menage('quantites_gaz_contrat_optimal', period)
 
         prix_unitaire_base = \
-            parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_base_ttc
+            parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.prix_unitaire_gdf_ttc.prix_kwh_base_ttc
         prix_unitaire_b0 = \
-            parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b0_ttc
+            parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.prix_unitaire_gdf_ttc.prix_kwh_b0_ttc
         prix_unitaire_b1 = \
-            parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b1_ttc
+            parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.prix_unitaire_gdf_ttc.prix_kwh_b1_ttc
         prix_unitaire_b2i = \
-            parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b2i_ttc
+            parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.prix_unitaire_gdf_ttc.prix_kwh_b2i_ttc
 
         prix_unitaire_optimal = (
             (quantite_base == quantite_optimale) * prix_unitaire_base +
@@ -500,13 +500,13 @@ class depenses_gaz_tarif_fixe(YearlyVariable):
         quantite_optimale = menage('quantites_gaz_contrat_optimal', period)
 
         tarif_fixe_base = \
-            parameters(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.base_0_1000
+            parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.tarif_fixe_gdf_ttc.base_0_1000
         tarif_fixe_b0 = \
-            parameters(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b0_1000_6000
+            parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.tarif_fixe_gdf_ttc.b0_1000_6000
         tarif_fixe_b1 = \
-            parameters(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b1_6_30000
+            parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.tarif_fixe_gdf_ttc.b1_6_30000
         tarif_fixe_b2i = \
-            parameters(period.start).tarification_energie_logement.tarif_fixe_gdf_ttc.b2i_30000
+            parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.tarif_fixe_gdf_ttc.b2i_30000
 
         tarif_fixe_optimal = (
             (quantite_base == quantite_optimale) * tarif_fixe_base +
@@ -573,15 +573,15 @@ class depenses_sp_e10_ht(YearlyVariable):
 
         try:
             accise_super_e10 = \
-                parameters(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+                parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
             majoration_ticpe_super_e10 = \
-                parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
             accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
         except:
             accise_super_e10 = \
-                parameters(period.start).imposition_indirecte.ticpe.ticpe_super_e10
+                parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
 
-        super_95_e10_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+        super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
         taux_implicite_sp_e10 = (
             (accise_ticpe_super_e10 * (1 + taux_plein_tva)) /
             (super_95_e10_ttc - accise_ticpe_super_e10 * (1 + taux_plein_tva))
@@ -614,14 +614,14 @@ class depenses_sp_95_ht(YearlyVariable):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
         try:
-            accise_super95 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
             majoration_ticpe_super95 = \
-                parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
             accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
         except:
-            accise_ticpe_super95 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_ticpe_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
-        super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+        super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
         taux_implicite_sp95 = (
             (accise_ticpe_super95 * (1 + taux_plein_tva)) /
             (super_95_ttc - accise_ticpe_super95 * (1 + taux_plein_tva))
@@ -658,14 +658,14 @@ class depenses_sp_98_ht(YearlyVariable):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
         try:
-            accise_super98 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
             majoration_ticpe_super98 = \
-                parameters(period.start).imposition_indirecte.major_regionale_ticpe_super.alsace
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
             accise_ticpe_super98 = accise_super98 + majoration_ticpe_super98
         except:
-            accise_ticpe_super98 = parameters(period.start).imposition_indirecte.ticpe.ticpe_super9598
+            accise_ticpe_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
-        super_98_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_98_ttc
+        super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
         taux_implicite_sp98 = (
             (accise_ticpe_super98 * (1 + taux_plein_tva)) /
             (super_98_ttc - accise_ticpe_super98 * (1 + taux_plein_tva))
@@ -703,7 +703,7 @@ class depenses_super_plombe_ht(YearlyVariable):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         accise_super_plombe_ticpe = \
             parameters(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
-        super_plombe_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
+        super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
         taux_implicite_super_plombe = (
             (accise_super_plombe_ticpe * (1 + taux_plein_tva)) /
             (super_plombe_ttc - accise_super_plombe_ticpe * (1 + taux_plein_tva))

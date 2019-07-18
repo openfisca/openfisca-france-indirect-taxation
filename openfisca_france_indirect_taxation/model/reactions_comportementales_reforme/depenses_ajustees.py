@@ -15,9 +15,9 @@ class depenses_essence_ajustees(YearlyVariable):
 
     def formula(self, simulation, period):
         depenses_essence = menage('depenses_essence_corrigees', period)
-        super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+        super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
         reforme_essence = parameters(period.start).taxes_carburants.essence
-        # parameters(period.start).imposition_indirecte.prix_carburants.reforme_essence
+        # parameters(period.start).prix_carburants.reforme_essence
         carburants_elasticite_prix = menage('elas_price_1_1', period)
         depenses_essence_ajustees = \
             depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
@@ -32,7 +32,7 @@ class depenses_diesel_ajustees(YearlyVariable):
 
     def formula(self, simulation, period):
         depenses_diesel = menage('depenses_diesel_corrigees', period)
-        diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+        diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         reforme_diesel = parameters(period.start).taxes_carburants.diesel
         carburants_elasticite_prix = menage('elas_price_1_1', period)
         depenses_diesel_ajustees = \

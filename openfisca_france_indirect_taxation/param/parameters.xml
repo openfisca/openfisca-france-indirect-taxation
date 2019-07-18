@@ -1085,7 +1085,7 @@
         <VALUE deb="1994-01-01"  valeur="210.22" />
         <VALUE deb="1993-04-15"  valeur="174.06" />
       </CODE>
-      <CODE code="ticpe_super9598" format="float" type="monetary">
+      <CODE code="super_95_98" format="float" type="monetary">
         <VALUE deb="2016-01-01"  valeur="64.12" />
         <VALUE deb="2015-01-01"  valeur="62.41" />
         <VALUE deb="2006-01-01"  valeur="60.69" />

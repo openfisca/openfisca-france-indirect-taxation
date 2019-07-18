@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 
+import os
+import pkg_resources
+import pandas as pd
 
-from openfisca_core import reforms
+from openfisca_france_indirect_taxation.model.base import ParameterNode
 
 
-def preprocess_legislation(legislation_json):
+def preprocess_legislation(parameters):
     '''
     Preprocess the legislation parameters to add prices and amounts from national accounts
     '''
-    import os
-    import pkg_resources
-    import pandas as pd
-
     default_config_files_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+
     prix_annuel_carburants = pd.read_csv(
         os.path.join(
             default_config_files_directory,
@@ -25,74 +25,67 @@ def preprocess_legislation(legislation_json):
         )
     prix_annuel_carburants['Date'] = prix_annuel_carburants['Date'].astype(int)
     prix_annuel_carburants = prix_annuel_carburants.set_index('Date')
-    all_values = {}
-    prix_carburants = {
-        "@type": "Node",
-        "description": "prix des carburants en euros par hectolitre",
-        "children": {},
-        }
+    prix_carburants = dict()
+
     # For super_95_e10, we need to use the price of super_95 between 2009 and 2012 included,
     # because we don't have the data. We use super_95 because it is very close and won't affect the results too much
-    all_values['super_95_e10_ttc'] = []
     prix_annuel = prix_annuel_carburants['super_95_e10_ttc']
     years = range(2013, 2017)
     years = sorted(years, key=int, reverse=True)
+    values = dict()
     for year in years:
-        values3 = dict()
-        values3['start'] = u'{}-01-01'.format(year)
-        values3['value'] = prix_annuel[year] * 100
-        all_values['super_95_e10_ttc'].append(values3)
-    prix_annuel = prix_annuel_carburants['super_95_ttc']
+        values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
 
     years = range(2009, 2013)
     years = sorted(years, key=int, reverse=True)
     for year in years:
-        values2 = dict()
-        values2['start'] = u'{}-01-01'.format(year)
-        values2['value'] = prix_annuel[year] * 100
-        all_values['super_95_e10_ttc'].append(values2)
-    prix_annuel = prix_annuel_carburants['super_95_e10_ttc']
+        values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
+
     years = range(1990, 2009)
     years = sorted(years, key=int, reverse=True)
     for year in years:
-        values1 = dict()
-        values1['start'] = u'{}-01-01'.format(year)
-        values1['value'] = prix_annuel[year] * 100
-        all_values['super_95_e10_ttc'].append(values1)
+        values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
 
-    prix_carburants['children']['super_95_e10_ttc'] = {
-        "@type": "Parameter",
+    prix_carburants['super_95_e10_ttc'] = {
         "description": 'super_95_e10_ttc'.replace('_', ' '),
-        "format": "float",
-        "values": all_values['super_95_e10_ttc']
+        "unit": "currency",
+        "values": values
         }
-    for element in ['diesel_ht', 'diesel_ttc', 'super_95_ht', 'super_95_ttc', 'super_98_ht', 'super_98_ttc',
-            'super_95_e10_ht', 'gplc_ht', 'gplc_ttc', 'super_plombe_ht', 'super_plombe_ttc']:
+    autres_carburants = [
+        'diesel_ht',
+        'diesel_ttc',
+        'gplc_ht',
+        'gplc_ttc',
+        'super_95_e10_ht',
+        'super_95_ht',
+        'super_95_ttc',
+        'super_98_ht',
+        'super_98_ttc',
+        'super_plombe_ht',
+        'super_plombe_ttc',
+        ]
+    for element in autres_carburants:
         assert element in prix_annuel_carburants.columns
         prix_annuel = prix_annuel_carburants[element]
-        all_values[element] = []
         years = range(1990, 2017)
         years = sorted(years, key=int, reverse=True)
+        values = dict()
         for year in years:
-            values = dict()
-            values['start'] = u'{}-01-01'.format(year)
-            values['value'] = prix_annuel[year] * 100
-            all_values[element].append(values)
+            values['{}-01-01'.format(year)] = prix_annuel[year] * 100
 
-        prix_carburants['children'][element] = {
-            "@type": "Parameter",
+        prix_carburants[element] = {
             "description": element.replace('_', ' '),
-            "format": "float",
-            "values": all_values[element]
+            "unit": "currency",
+            "values": values
             }
-
-    legislation_json['children']['imposition_indirecte']['children']['prix_carburants'] = prix_carburants
-    #print legislation_json
+    prix_carburants['description'] = "Prix des carburants"
+    node_prix_carburants = ParameterNode(
+        'prix_carburants',
+        data = prix_carburants,
+        )
+    parameters.add_child('prix_carburants', node_prix_carburants)
 
     # Add the number of vehicle in circulation to the tree
-
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parc_annuel_moyen_vp = pd.read_csv(
         os.path.join(
             default_config_files_directory,
@@ -104,36 +97,30 @@ def preprocess_legislation(legislation_json):
         )
 
     parc_annuel_moyen_vp = parc_annuel_moyen_vp.set_index('Unnamed: 0')
-    values_parc = {}
     parc_vp = {
-        "@type": "Node",
-        "description": u"taille moyenne du parc automobile en France métropolitaine en milliers de véhicules",
-        "children": {},
-    }
+        "description": "taille moyenne du parc automobile en France métropolitaine en milliers de véhicules",
+        }
     for element in ['diesel', 'essence']:
         taille_parc = parc_annuel_moyen_vp[element]
-        values_parc[element] = []
         years = range(1990, 2017)
         years = sorted(years, key=int, reverse=True)
+        values = dict()
         for year in years:
-            values = dict()
-            values['start'] = u'{}-01-01'.format(year)
-            values['value'] = taille_parc[year]
-            values_parc[element].append(values)
+            values['{}-01-01'.format(year)] = taille_parc[year]
 
-        parc_vp['children'][element] = {
-            "@type": "Parameter",
-            "description": u"nombre de véhicules particuliers immatriculés en France à motorisation " + element,
-            "format": "float",
-            "values": values_parc[element]
-        }
+        parc_vp[element] = {
+            "description": "nombre de véhicules particuliers immatriculés en France à motorisation " + element,
+            "unit": 1000,
+            "values": values,
+            }
 
-        legislation_json['children']['imposition_indirecte']['children']['parc_vp'] = parc_vp
+    node_parc_vp = ParameterNode(
+        'parc_vp',
+        data = parc_vp,
+        )
+    parameters.add_child('parc_vp', node_parc_vp)
 
     # Add the total quantity of fuel consumed per year to the tree
-
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     quantite_carbu_vp_france = pd.read_csv(
         os.path.join(
             default_config_files_directory,
@@ -145,36 +132,30 @@ def preprocess_legislation(legislation_json):
         )
 
     quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('Unnamed: 0')
-    values_quantite = {}
     quantite_carbu_vp = {
-        "@type": "Node",
         "description": u"quantite de carburants consommés en France métropolitaine",
-        "children": {},
-    }
+        }
     for element in ['diesel', 'essence']:
         quantite_carburants = quantite_carbu_vp_france[element]
-        values_quantite[element] = []
+        # values_quantite[element] = []
         years = range(1990, 2017)
         years = sorted(years, key=int, reverse=True)
+        values = dict()
         for year in years:
-            values = dict()
-            values['start'] = u'{}-01-01'.format(year)
-            values['value'] = quantite_carburants[year]
-            values_quantite[element].append(values)
+            values['{}-01-01'.format(year)] = quantite_carburants[year]
 
-        quantite_carbu_vp['children'][element] = {
-            "@type": "Parameter",
+        quantite_carbu_vp[element] = {
             "description": "consommation totale de " + element + " en France",
-            "format": "float",
-            "values": values_quantite[element]
-        }
+            "values": values
+            }
 
-        legislation_json['children']['imposition_indirecte']['children']['quantite_carbu_vp'] = quantite_carbu_vp
+    node_quantite_carbu_vp = ParameterNode(
+        'quantite_carbu_vp',
+        data = quantite_carbu_vp,
+        )
+    parameters.add_child('quantite_carbu_vp', node_quantite_carbu_vp)
 
     # Add the shares of each type of supercabrurant (SP95, SP98, E10, etc.) among supercarburants
-
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     part_des_types_de_supercarburants = pd.read_csv(
         os.path.join(
             default_config_files_directory,
@@ -206,36 +187,30 @@ def preprocess_legislation(legislation_json):
         part_des_types_de_supercarburants['somme'] += part_des_types_de_supercarburants[element]
     assert (part_des_types_de_supercarburants['somme'] == 1).any(), "The weighting of the shares did not work"
 
-
-    values_part_supercarburants = {}
-    part_type_supercaburant = {
-        "@type": "Node",
+    part_type_supercaburants = {
         "description": "part de la consommation totale d'essence de chaque type supercarburant",
-        "children": {},
-    }
+        }
     for element in ['super_plombe', 'sp_95', 'sp_98', 'sp_e10']:
         part_par_carburant = part_des_types_de_supercarburants[element]
-        values_part_supercarburants[element] = []
         years = range(2000, 2017)
         years = sorted(years, key=int, reverse=True)
+        values = dict()
         for year in years:
-            values = dict()
-            values['start'] = u'{}-01-01'.format(year)
-            values['value'] = part_par_carburant[year]
-            values_part_supercarburants[element].append(values)
+            values['{}-01-01'.format(year)] = part_par_carburant[year]
 
-        part_type_supercaburant['children'][element] = {
-            "@type": "Parameter",
+        part_type_supercaburants[element] = {
             "description": "part de " + element + " dans la consommation totale d'essences",
-            "format": "float",
-            "values": values_part_supercarburants[element]
-        }
+            "unit": "/1",
+            "values": values
+            }
 
-        legislation_json['children']['imposition_indirecte']['children']['part_type_supercarburants'] = \
-            part_type_supercaburant
-
+    node_part_type_supercaburants = ParameterNode(
+        'part_type_supercaburants',
+        data = part_type_supercaburants,
+        )
+    parameters.children['imposition_indirecte'].add_child('part_type_supercarburants', node_part_type_supercaburants)
+    return parameters
     # Add CO2 emissions from energy (Source : Ademe)
-
     emissions_CO2 = {
         "@type": "Node",
         "description": u"émissions de CO2 des énergies",
@@ -386,7 +361,7 @@ def preprocess_legislation(legislation_json):
                     {'start': u'2012-01-01', 'value': 783},
                     {'start': u'2011-01-01', 'value': 393},
                     {'start': u'2010-01-01', 'value': 375},
-                    {'start': u'2008-01-01', 'value': 375},                                            
+                    {'start': u'2008-01-01', 'value': 375},
                     {'start': u'2009-01-01', 'value': 376},
                     {'start': u'2007-01-01', 'value': 382},
                     {'start': u'2006-01-01', 'value': 396},

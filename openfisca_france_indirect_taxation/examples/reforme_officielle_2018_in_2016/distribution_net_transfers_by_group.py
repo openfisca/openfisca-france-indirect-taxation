@@ -36,8 +36,9 @@ simulated_variables = [
 
 def distribution_net_transfers_by_group(df_reform, group):
 
-    i_min = df_reforme[group].min()
-    i_max = df_reforme[group].max()
+    i_min = int(df_reforme[group].min())
+    i_max = int(df_reforme[group].max())
+
     df_by_categ = pd.DataFrame(index = range(i_min, i_max + 1),
         columns = ['quantile_10', 'quantile_25', 'quantile_50', 'quantile_75', 'quantile_90']
         )

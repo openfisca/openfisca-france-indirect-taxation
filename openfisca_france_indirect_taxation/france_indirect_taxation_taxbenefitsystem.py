@@ -30,6 +30,7 @@ class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
         for extension_dir in EXTENSIONS_DIRECTORIES:
             self.load_extension(extension_dir)
         self.prefill_cache()
+        self.parameters = self.preprocess_legislation(self.parameters)
 
     def prefill_cache(self):
         # Define and poste_* and categorie fiscales variables

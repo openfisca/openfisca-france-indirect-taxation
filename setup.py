@@ -34,6 +34,7 @@ setup(
 
     extras_require = dict(
         dev = [
+            'ruamel.yaml'
             'pdbpp',
             ],
         test = [

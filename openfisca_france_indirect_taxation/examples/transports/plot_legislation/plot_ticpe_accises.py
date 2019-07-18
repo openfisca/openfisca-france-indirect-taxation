@@ -12,7 +12,7 @@ from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 # Recherche des paramètres de la législation
-liste = ['ticpe_gazole', 'ticpe_super9598', 'super_plombe_ticpe']
+liste = ['ticpe_gazole', 'super_95_98', 'super_plombe_ticpe']
 df_accises = get_accise_ticpe_majoree()
 
 # Réalisation des graphiques

@@ -18,7 +18,7 @@ class brde_m2_depenses_tot(YearlyVariable):
     entity = Menage
     label = u"bas revenu (depenses tot )dépenses élevées (énergies logement)"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         depenses_tot = menage('depenses_tot', period)
         uc = menage('ocde10', period)
         depenses_tot_uc = depenses_tot / uc
@@ -41,7 +41,7 @@ class brde_m2_rev_disponible(YearlyVariable):
     entity = Menage
     label = u"bas revenu (revenu disponible) dépenses élevées (énergies logement)"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         revenu = menage('rev_disponible', period)
         uc = menage('ocde10', period)
         revenu_uc = revenu / uc
@@ -64,7 +64,7 @@ class brde_transports_depenses_tot(YearlyVariable):
     entity = Menage
     label = u"bas revenu (depenses tot) dépenses élevées (en carburants)"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         depenses_tot = menage('depenses_tot', period)
         uc = menage('ocde10', period)
         depenses_tot_uc = depenses_tot / uc
@@ -86,7 +86,7 @@ class brde_transports_rev_disponible(YearlyVariable):
     entity = Menage
     label = u"bas revenu (revenu disponible) dépenses élevées (en carburants)"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         revenu = menage('rev_disponible', period)
         uc = menage('ocde10', period)
         revenu_uc = revenu / uc
@@ -110,7 +110,7 @@ class eligibilite_tarifs_sociaux_energies(YearlyVariable):
     entity = Menage
     label = u"Le ménage est éligible aux tarifs sociaux de l'énergie"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         revenu = menage('revdecm', period)
         npers = menage('npers', period)
 
@@ -159,7 +159,7 @@ class froid_4_criteres(YearlyVariable):
     entity = Menage
     label = u"Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver - 4 critères"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         froid_cout = menage('froid_cout', period)
         froid_impaye = menage('froid_impaye', period)
         froid_installation = menage('froid_installation', period)
@@ -176,7 +176,7 @@ class froid_4_criteres_3_deciles(YearlyVariable):
     entity = Menage
     label = u"Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver - 4 critères, 3 deciles"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         froid_4_criteres = menage('froid_4_criteres', period)
         nvd = menage('niveau_vie_decile', period)
         froid_4_criteres_3_deciles = froid_4_criteres * (nvd < 4)
@@ -189,7 +189,7 @@ class froid_3_deciles(YearlyVariable):
     entity = Menage
     label = u"Le ménage a éprouvé un sentiment de froid dans son logement - 3 premiers déciles"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         froid = menage('froid', period)
         nvd = menage('niveau_vie_decile', period)
         froid_3_deciles = froid * (nvd < 4)
@@ -202,7 +202,7 @@ class precarite_energetique_depenses_tot(YearlyVariable):
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         brde_m2 = menage('brde_m2_depenses_tot', period)
         froid_4_criteres_3_deciles = menage('froid_4_criteres_3_deciles', period)
         tee_10_3_deciles = menage('tee_10_3_deciles_depenses_tot', period)
@@ -218,7 +218,7 @@ class precarite_energetique_rev_disponible(YearlyVariable):
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         brde_m2 = menage('brde_m2_rev_disponible', period)
         froid_4_criteres_3_deciles = menage('froid_4_criteres_3_deciles', period)
         tee_10_3_deciles = menage('tee_10_3_deciles_rev_disponible', period)
@@ -234,7 +234,7 @@ class precarite_transports_depenses_tot(YearlyVariable):
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         brde_transports_depenses_tot = menage('brde_transports_depenses_tot', period)
         tee_transports_10_3_deciles_depenses_tot = menage('tee_transports_10_3_deciles_depenses_tot', period)
 
@@ -249,7 +249,7 @@ class precarite_transports_rev_disponible(YearlyVariable):
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         brde_transports_rev_disponible = menage('brde_transports_rev_disponible', period)
         tee_transports_10_3_deciles_rev_disponible = menage('tee_transports_10_3_deciles_rev_disponible', period)
 
@@ -264,7 +264,7 @@ class tarifs_sociaux_electricite(YearlyVariable):
     entity = Menage
     label = u"Montant perçus en tarifs sociaux sur l'électricité (TPN)"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         depenses_electricite_percentile = menage('depenses_electricite_percentile', period)
         eligible = menage('eligibilite_tarifs_sociaux_energies', period)
         uc = menage('ocde10', period)
@@ -294,14 +294,14 @@ class tarifs_sociaux_gaz(YearlyVariable):
     entity = Menage
     label = u"Montant perçus en tarifs sociaux sur l'électricité (TSS)"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_gaz_prix_unitaire = menage('depenses_gaz_prix_unitaire', period)
         prix_unitaire_base = \
-            parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_base_ttc
+            parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.prix_unitaire_gdf_ttc.prix_kwh_base_ttc
         prix_unitaire_b0 = \
-            parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b0_ttc
+            parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.prix_unitaire_gdf_ttc.prix_kwh_b0_ttc
         prix_unitaire_b1 = \
-            parameters(period.start).tarification_energie_logement.prix_unitaire_gdf_ttc.prix_kwh_b1_ttc
+            parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.prix_unitaire_gdf_ttc.prix_kwh_b1_ttc
 
         eligible = menage('eligibilite_tarifs_sociaux_energies', period)
         uc = menage('ocde10', period)
@@ -331,7 +331,7 @@ class tee_depenses_tot(YearlyVariable):
     entity = Menage
     label = u"Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         depenses_energies_logement = menage('depenses_energies_logement', period)
         depenses_tot = menage('depenses_tot', period)
 
@@ -345,7 +345,7 @@ class tee_10_depenses_tot(YearlyVariable):
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10%"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         tee = menage('tee_depenses_tot', period)
         tee_10 = (tee > 0.1) * 1
 
@@ -357,7 +357,7 @@ class tee_10_3_deciles_depenses_tot(YearlyVariable):
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         tee = menage('tee_depenses_tot', period)
         nvd = menage('niveau_vie_decile', period)
         tee_10_3_deciles = (tee > 0.1) * (nvd < 4) * 1
@@ -370,7 +370,7 @@ class tee_rev_disponible(YearlyVariable):
     entity = Menage
     label = u"Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         depenses_energies_logement = menage('depenses_energies_logement', period)
         rev_disponible = menage('rev_disponible', period)
 
@@ -384,7 +384,7 @@ class tee_10_rev_disponible(YearlyVariable):
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10%"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         tee = menage('tee_rev_disponible', period)
         tee_10 = (tee > 0.1) * 1
 
@@ -396,7 +396,7 @@ class tee_10_3_deciles_rev_disponible(YearlyVariable):
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         tee = menage('tee_rev_disponible', period)
         nvd = menage('niveau_vie_decile', period)
         tee_10_3_deciles = (tee > 0.1) * (nvd < 4) * 1
@@ -409,7 +409,7 @@ class tee_transports_depenses_tot(YearlyVariable):
     entity = Menage
     label = u"Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         depenses_carburants = menage('depenses_carburants_corrigees', period)
         depenses_tot = menage('depenses_tot', period)
 
@@ -423,7 +423,7 @@ class tee_transports_10_depenses_tot(YearlyVariable):
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10%"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         tee = menage('tee_transports_depenses_tot', period)
         tee_10 = (tee > 0.1) * 1
 
@@ -435,7 +435,7 @@ class tee_transports_10_3_deciles_depenses_tot(YearlyVariable):
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         tee = menage('tee_transports_depenses_tot', period)
         nvd = menage('niveau_vie_decile', period)
         tee_10_3_deciles = (tee > 0.1) * (nvd < 4) * 1
@@ -448,7 +448,7 @@ class tee_transports_rev_disponible(YearlyVariable):
     entity = Menage
     label = u"Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         depenses_energies_logement = menage('depenses_carburants_corrigees', period)
         rev_disponible = menage('rev_disponible', period)
 
@@ -462,7 +462,7 @@ class tee_transports_10_rev_disponible(YearlyVariable):
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10%"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         tee = menage('tee_transports_rev_disponible', period)
         tee_10 = (tee > 0.1) * 1
 
@@ -474,7 +474,7 @@ class tee_transports_10_3_deciles_rev_disponible(YearlyVariable):
     entity = Menage
     label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         tee = menage('tee_transports_rev_disponible', period)
         nvd = menage('niveau_vie_decile', period)
         tee_10_3_deciles = (tee > 0.1) * (nvd < 4) * 1

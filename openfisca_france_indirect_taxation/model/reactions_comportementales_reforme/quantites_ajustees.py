@@ -13,7 +13,7 @@ class quantites_diesel_ajustees(YearlyVariable):
 
     def formula(self, simulation, period):
         depenses_diesel_ajustees = menage('depenses_diesel_ajustees', period)
-        diesel_ttc = parameters(period.start).imposition_indirecte.prix_carburants.diesel_ttc
+        diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         reforme_diesel = parameters(period.start).taxes_carburants.diesel
         quantites_diesel_ajustees = depenses_diesel_ajustees / (diesel_ttc + reforme_diesel) * 100
 
@@ -73,7 +73,7 @@ class quantites_sp_e10_ajustees(YearlyVariable):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
         part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10_ajustees = depenses_essence_ajustees * part_sp_e10
-        super_95_e10_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_e10_ttc
+        super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
         reforme_essence = parameters(period.start).taxes_carburants.essence
         quantite_sp_e10 = depenses_sp_e10_ajustees / (super_95_e10_ttc + reforme_essence) * 100
 
@@ -89,7 +89,7 @@ class quantites_sp95_ajustees(YearlyVariable):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
         part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp95_ajustees = depenses_essence_ajustees * part_sp95
-        super_95_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_95_ttc
+        super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
         reforme_essence = parameters(period.start).taxes_carburants.essence
         quantites_sp95_ajustees = depenses_sp95_ajustees / (super_95_ttc + reforme_essence) * 100
 
@@ -105,7 +105,7 @@ class quantites_sp98_ajustees(YearlyVariable):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
         part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
         depenses_sp98_ajustees = depenses_essence_ajustees * part_sp98
-        super_98_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_98_ttc
+        super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
         reforme_essence = parameters(period.start).taxes_carburants.essence
         quantites_sp98_ajustees = depenses_sp98_ajustees / (super_98_ttc + reforme_essence) * 100
 
@@ -122,7 +122,7 @@ class quantites_super_plombe_ajustees(YearlyVariable):
         part_super_plombe = \
             parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
         depenses_super_plombe_ajustees = depenses_essence_ajustees * part_super_plombe
-        super_plombe_ttc = parameters(period.start).imposition_indirecte.prix_carburants.super_plombe_ttc
+        super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
         reforme_essence = parameters(period.start).taxes_carburants.essence
         quantites_super_plombe_ajustees = depenses_super_plombe_ajustees / (super_plombe_ttc + reforme_essence) * 100
 

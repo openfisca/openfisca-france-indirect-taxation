@@ -69,7 +69,7 @@ def get_majoration_ticpe(liste_carburants):
 
 
 def get_accise_ticpe_majoree():
-    accise_nationale = get_accises_carburants(['ticpe_gazole', 'ticpe_super9598', 'super_plombe_ticpe'])
+    accise_nationale = get_accises_carburants(['ticpe_gazole', 'super_95_98', 'super_plombe_ticpe'])
     majoration_regionale = get_majoration_ticpe(['major_regionale_ticpe_gazole', 'major_regionale_ticpe_super'])
     accise_totale = concat([accise_nationale, majoration_regionale], axis = 1)
     accise_totale = accise_totale.fillna(0)
