@@ -39,6 +39,7 @@ setup(
             ],
         test = [
             'matplotlib',
+            'nbconvert >= 5.5.0',
             'nose',
             'pandas >= 0.17',
             'seaborn',

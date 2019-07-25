@@ -27,8 +27,6 @@ class SurveyScenario(AbstractSurveyScenario):
 
         assert year is not None
 
-        assert tax_benefit_system is not None
-
         if reform is None:
             assert baseline_tax_benefit_system is None, "No need of reference_tax_benefit_system if no reform"
             if tax_benefit_system is None:
