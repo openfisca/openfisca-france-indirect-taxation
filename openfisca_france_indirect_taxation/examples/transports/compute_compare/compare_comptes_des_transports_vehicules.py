@@ -44,8 +44,8 @@ for year in [2000, 2005, 2011]:
         nombre_vehicules_essence_bdf
 
     nombre_vehicules_total_bdf = (
-        (df_nombre_vehicules_bdf['veh_essence'] + df_nombre_vehicules_bdf['veh_diesel']) *
-        df_nombre_vehicules_bdf['pondmen']
+        (df_nombre_vehicules_bdf['veh_essence'] + df_nombre_vehicules_bdf['veh_diesel'])
+        * df_nombre_vehicules_bdf['pondmen']
         ).sum() / 1000
     comparaison_vehicules.loc[comparaison_vehicules.index == year, 'total bdf'] = \
         nombre_vehicules_total_bdf

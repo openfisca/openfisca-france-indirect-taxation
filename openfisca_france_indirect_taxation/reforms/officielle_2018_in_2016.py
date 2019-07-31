@@ -452,8 +452,8 @@ class reforme_officielle_2018_in_2016(Reform):
             reforme_electricite = parameters(period.start).officielle_2018_in_2016.electricite_cspe
             electricite_elasticite_prix = menage('elas_price_2_2', period)
             depenses_electricite_ajustees_variables = (
-                depenses_electricite_variables *
-                (1 + (1 + electricite_elasticite_prix) * reforme_electricite / depenses_electricite_prix_unitaire)
+                depenses_electricite_variables
+                * (1 + (1 + electricite_elasticite_prix) * reforme_electricite / depenses_electricite_prix_unitaire)
                 )
             depenses_electricite_tarif_fixe = menage('depenses_electricite_tarif_fixe', period)
             min_tarif_fixe = depenses_electricite_tarif_fixe.min()
@@ -577,8 +577,8 @@ class reforme_officielle_2018_in_2016(Reform):
                 )
             elasticite = menage('elas_price_3_3', period)
             depenses_tva_taux_plein_bis_ajustees = (
-                depenses_tva_taux_plein *
-                (1 + (1 + elasticite) * (- abaissement_tva_taux_plein_bis) / (1 + taux_plein))
+                depenses_tva_taux_plein
+                * (1 + (1 + elasticite) * (- abaissement_tva_taux_plein_bis) / (1 + taux_plein))
                 )
 
             return depenses_tva_taux_plein_bis_ajustees
@@ -923,14 +923,14 @@ class reforme_officielle_2018_in_2016(Reform):
             depenses_carburants_corrigees_officielle_2018_in_2016 = \
                 menage('depenses_carburants_corrigees_officielle_2018_in_2016', period)
             tva_depenses_carburants_corrigees_officielle_2018_in_2016 = (
-                (taux_plein_tva / (1 + taux_plein_tva)) *
-                depenses_carburants_corrigees_officielle_2018_in_2016
+                (taux_plein_tva / (1 + taux_plein_tva))
+                * depenses_carburants_corrigees_officielle_2018_in_2016
                 )
             depenses_carburants_corrigees = \
                 menage('depenses_carburants_corrigees', period)
             tva_depenses_carburants_corrigees = (
-                (taux_plein_tva / (1 + taux_plein_tva)) *
-                depenses_carburants_corrigees
+                (taux_plein_tva / (1 + taux_plein_tva))
+                * depenses_carburants_corrigees
                 )
             gains_tva_carburants = (
                 tva_depenses_carburants_corrigees_officielle_2018_in_2016 -
@@ -948,14 +948,14 @@ class reforme_officielle_2018_in_2016(Reform):
             depenses_combustibles_liquides_officielle_2018_in_2016 = \
                 menage('depenses_combustibles_liquides_officielle_2018_in_2016', period)
             tva_depenses_combustibles_liquides_officielle_2018_in_2016 = (
-                (taux_plein_tva / (1 + taux_plein_tva)) *
-                depenses_combustibles_liquides_officielle_2018_in_2016
+                (taux_plein_tva / (1 + taux_plein_tva))
+                * depenses_combustibles_liquides_officielle_2018_in_2016
                 )
             depenses_combustibles_liquides = \
                 menage('depenses_combustibles_liquides', period)
             tva_depenses_combustibles_liquides = (
-                (taux_plein_tva / (1 + taux_plein_tva)) *
-                depenses_combustibles_liquides
+                (taux_plein_tva / (1 + taux_plein_tva))
+                * depenses_combustibles_liquides
                 )
             gains_tva_combustibles_liquides = (
                 tva_depenses_combustibles_liquides_officielle_2018_in_2016 -
@@ -974,14 +974,14 @@ class reforme_officielle_2018_in_2016(Reform):
             depenses_gaz_ville_officielle_2018_in_2016 = \
                 menage('depenses_gaz_ville_officielle_2018_in_2016', period)
             tva_depenses_gaz_ville_officielle_2018_in_2016 = (
-                (taux_plein_tva / (1 + taux_plein_tva)) *
-                (depenses_gaz_ville_officielle_2018_in_2016 - depenses_gaz_tarif_fixe)
+                (taux_plein_tva / (1 + taux_plein_tva))
+                * (depenses_gaz_ville_officielle_2018_in_2016 - depenses_gaz_tarif_fixe)
                 )
             depenses_gaz_ville = \
                 menage('depenses_gaz_ville', period)
             tva_depenses_gaz_ville = (
-                (taux_plein_tva / (1 + taux_plein_tva)) *
-                (depenses_gaz_ville - depenses_gaz_tarif_fixe)
+                (taux_plein_tva / (1 + taux_plein_tva))
+                * (depenses_gaz_ville - depenses_gaz_tarif_fixe)
                 )
             gains_tva_gaz_ville = (
                 tva_depenses_gaz_ville_officielle_2018_in_2016 -

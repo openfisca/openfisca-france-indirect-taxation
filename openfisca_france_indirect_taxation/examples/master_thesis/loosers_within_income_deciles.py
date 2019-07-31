@@ -41,8 +41,8 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
 
     unite_conso = (menages_reform['ocde10'] * menages_reform['pondmen']).sum()
     contribution = (
-        (menages_reform['total_taxes_energies'] - menages_reference['total_taxes_energies']) *
-        menages_reform['pondmen']
+        (menages_reform['total_taxes_energies'] - menages_reference['total_taxes_energies'])
+        * menages_reform['pondmen']
         ).sum()
     contribution_unite_conso = contribution / unite_conso
 

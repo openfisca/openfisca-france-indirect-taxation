@@ -40,18 +40,18 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 
 # Here I should include VAT gains
 variations_revenue['revenue_cce_seulement'] = (
-    (df_reforme['total_taxes_energies_cce_seulement'] - df_reforme['total_taxes_energies']) *
-    df_reforme['pondmen']
+    (df_reforme['total_taxes_energies_cce_seulement'] - df_reforme['total_taxes_energies'])
+    * df_reforme['pondmen']
     ).sum() / 1e06
 variations_revenue['revenue_officielle_2018_in_2016'] = (
-    (df_reforme['total_taxes_energies_officielle_2018_in_2016'] - df_reforme['total_taxes_energies']) *
-    df_reforme['pondmen']
+    (df_reforme['total_taxes_energies_officielle_2018_in_2016'] - df_reforme['total_taxes_energies'])
+    * df_reforme['pondmen']
     ).sum() / 1e06
 variations_revenue['revenue_officielle_2018_in_2016_plus_cspe'] = (
-    (df_reforme['total_taxes_energies_officielle_2018_in_2016_plus_cspe'] - df_reforme['total_taxes_energies']) *
-    df_reforme['pondmen']
+    (df_reforme['total_taxes_energies_officielle_2018_in_2016_plus_cspe'] - df_reforme['total_taxes_energies'])
+    * df_reforme['pondmen']
     ).sum() / 1e06
 variations_revenue['revenue_rattrapage_integral'] = (
-    (df_reforme['total_taxes_energies_rattrapage_integral'] - df_reforme['total_taxes_energies']) *
-    df_reforme['pondmen']
+    (df_reforme['total_taxes_energies_rattrapage_integral'] - df_reforme['total_taxes_energies'])
+    * df_reforme['pondmen']
     ).sum() / 1e06

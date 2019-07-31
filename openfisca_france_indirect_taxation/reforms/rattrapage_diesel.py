@@ -150,8 +150,8 @@ class reforme_rattrapage_diesel(Reform):
             abaissement_tva_taux_plein = parameters(period.start).rattrapage_diesel.abaissement_tva_taux_plein
             elasticite = menage('elas_price_3_3', period)
             depenses_tva_taux_plein_ajustees = (
-                depenses_tva_taux_plein *
-                (1 + (1 + elasticite) * (- abaissement_tva_taux_plein) / (1 + taux_plein))
+                depenses_tva_taux_plein
+                * (1 + (1 + elasticite) * (- abaissement_tva_taux_plein) / (1 + taux_plein))
                 )
 
             return depenses_tva_taux_plein_ajustees
@@ -200,8 +200,8 @@ class reforme_rattrapage_diesel(Reform):
                 parameters(period.start).rattrapage_diesel.abaissement_tva_taux_super_reduit
             elasticite = menage('elas_price_3_3', period)
             depenses_tva_taux_super_reduit_ajustees = (
-                depenses_tva_taux_super_reduit *
-                (1 + (1 + elasticite) * (- abaissement_tva_taux_super_reduit) / (1 + taux_super_reduit))
+                depenses_tva_taux_super_reduit
+                * (1 + (1 + elasticite) * (- abaissement_tva_taux_super_reduit) / (1 + taux_super_reduit))
                 )
             return depenses_tva_taux_super_reduit_ajustees
 

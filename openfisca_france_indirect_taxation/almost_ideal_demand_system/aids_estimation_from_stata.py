@@ -106,13 +106,13 @@ def test():
         # Compute the 95% confidence interval for those elasticities
         for i in range(1, 5):
             borne_superieure_el_dep['borne_sup_{0}_{1}'.format(i, year)] = (
-                resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] + 1.96 *
-                (data_quaids['elas_exp_{}'.format(i)].describe()['std'] /
+                resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] + 1.96
+                * (data_quaids['elas_exp_{}'.format(i)].describe()['std'] /
                 len(data_quaids['elas_exp_{}'.format(i)]) ** 0.5)
                 )
             borne_inferieure_el_dep['borne_inf_{0}_{1}'.format(i, year)] = (
-                resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] - 1.96 *
-                (data_quaids['elas_exp_{}'.format(i)].describe()['std'] /
+                resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] - 1.96
+                * (data_quaids['elas_exp_{}'.format(i)].describe()['std'] /
                 len(data_quaids['elas_exp_{}'.format(i)]) ** 0.5)
                 )
 

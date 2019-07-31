@@ -162,8 +162,8 @@ def cheque_par_energie(data, depenses_combustibles_liquides, depenses_electricit
 def cheque_vert(data_reference, data_reforme, reforme):
     unite_conso = (data_reforme['ocde10'] * data_reforme['pondmen']).sum()
     contribution = (
-        (data_reforme['total_taxes_energies'] - data_reference['total_taxes_energies']) *
-        data_reference['pondmen']
+        (data_reforme['total_taxes_energies'] - data_reference['total_taxes_energies'])
+        * data_reference['pondmen']
         ).sum()
     contribution_unite_conso = contribution / unite_conso
 

@@ -71,13 +71,13 @@ recettes_ticpe_non_vp = concat(
     axis = 1)
 
 recettes_ticpe_non_vp['recettes essence'] = (
-    recettes_ticpe_non_vp['vehicules essence non particuliers'] *
-    recettes_ticpe_non_vp['accise majoree sans plomb'] / 100
+    recettes_ticpe_non_vp['vehicules essence non particuliers']
+    * recettes_ticpe_non_vp['accise majoree sans plomb'] / 100
     )
 
 recettes_ticpe_non_vp['recettes diesel'] = (
-    recettes_ticpe_non_vp['vehicules diesel non particuliers'] *
-    recettes_ticpe_non_vp['accise majoree diesel'] / 100
+    recettes_ticpe_non_vp['vehicules diesel non particuliers']
+    * recettes_ticpe_non_vp['accise majoree diesel'] / 100
     )
 
 recettes_ticpe_non_vp['recettes totales non vp'] = (

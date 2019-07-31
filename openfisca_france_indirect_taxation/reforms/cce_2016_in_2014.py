@@ -242,8 +242,8 @@ class cce_2016_in_2014(Reform):
                 )
             elasticite = menage('elas_price_3_3', period)
             depenses_tva_taux_plein_bis_ajustees = (
-                depenses_tva_taux_plein *
-                (1 + (1 + elasticite) * (- abaissement_tva_taux_plein_bis) / (1 + taux_plein))
+                depenses_tva_taux_plein
+                * (1 + (1 + elasticite) * (- abaissement_tva_taux_plein_bis) / (1 + taux_plein))
                 )
 
             return depenses_tva_taux_plein_bis_ajustees

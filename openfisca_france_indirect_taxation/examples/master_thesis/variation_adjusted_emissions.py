@@ -43,26 +43,26 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
     menages_use_baseline = indiv_df_reference['menage']
 
     variations_emissions['carburants_{}'.format(reforme)] = (
-        (menages_reform['emissions_CO2_carburants'] - menages_reference['emissions_CO2_carburants']) *
-        menages_reform['pondmen']
+        (menages_reform['emissions_CO2_carburants'] - menages_reference['emissions_CO2_carburants'])
+        * menages_reform['pondmen']
         ).sum() / 1e06
 
     if reforme != 'rattrapage_diesel':
         variations_emissions['gaz_{}'.format(reforme)] = (
-            (menages_reform['emissions_CO2_gaz_ville'] - menages_reference['emissions_CO2_gaz_ville']) *
-            menages_reform['pondmen']
+            (menages_reform['emissions_CO2_gaz_ville'] - menages_reference['emissions_CO2_gaz_ville'])
+            * menages_reform['pondmen']
             ).sum() / 1e06
         variations_emissions['combustibles_liquides_{}'.format(reforme)] = (
             (menages_reform['emissions_CO2_combustibles_liquides'] -
-            menages_reference['emissions_CO2_combustibles_liquides']) *
-            menages_reform['pondmen']
+            menages_reference['emissions_CO2_combustibles_liquides'])
+            * menages_reform['pondmen']
             ).sum() / 1e06
 
         if reforme == 'taxe_carbone':
             variations_emissions['electricite_{}'.format(reforme)] = (
                 (menages_reform['emissions_CO2_electricite'] -
-                menages_reference['emissions_CO2_electricite']) *
-                menages_reform['pondmen']
+                menages_reference['emissions_CO2_electricite'])
+                * menages_reform['pondmen']
                 ).sum() / 1e06
 
             variations_emissions['total_logement_{}'.format(reforme)] = (
@@ -77,6 +77,6 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
                 ).sum()
 
     variations_emissions['total_{}'.format(reforme)] = (
-        (menages_reform['emissions_CO2_energies_totales'] - menages_reference['emissions_CO2_energies_totales']) *
-        menages_reform['pondmen']
+        (menages_reform['emissions_CO2_energies_totales'] - menages_reference['emissions_CO2_energies_totales'])
+        * menages_reform['pondmen']
         ).sum() / 1e06

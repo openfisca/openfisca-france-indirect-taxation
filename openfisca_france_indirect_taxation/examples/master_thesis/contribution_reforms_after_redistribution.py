@@ -62,13 +62,13 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_
         menages = df_by_entity['menage']
 
         sum_reduit = (
-            menages['difference_contribution_totale_{}_tva_plein_reduit_super_reduit'.format(reforme)] *
-            menages['pondmen']
+            menages['difference_contribution_totale_{}_tva_plein_reduit_super_reduit'.format(reforme)]
+            * menages['pondmen']
             ).sum()
 
         sum_plein = (
-            menages['difference_contribution_totale_{}_tva_plein'.format(reforme)] *
-            menages['pondmen']
+            menages['difference_contribution_totale_{}_tva_plein'.format(reforme)]
+            * menages['pondmen']
             ).sum()
 
         print(reforme, sum_reduit / menages['pondmen'].sum())

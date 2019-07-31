@@ -37,6 +37,6 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 
 # Here I should include VAT gains
 variations_revenue['revenue_officielle_2019_in_2018'] = (
-    (df_reforme['total_taxes_energies_officielle_2019_in_2018'] - df_reforme['total_taxes_energies']) *
-    df_reforme['pondmen']
+    (df_reforme['total_taxes_energies_officielle_2019_in_2018'] - df_reforme['total_taxes_energies'])
+    * df_reforme['pondmen']
     ).sum() / 1e06

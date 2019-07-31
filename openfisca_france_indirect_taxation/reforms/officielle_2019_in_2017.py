@@ -492,14 +492,14 @@ class officielle_2019_in_2017(Reform):
             depenses_carburants_corrigees_officielle_2019_in_2017 = \
                 menage('depenses_carburants_corrigees_officielle_2019_in_2017', period)
             tva_depenses_carburants_corrigees_officielle_2019_in_2017 = (
-                (taux_plein_tva / (1 + taux_plein_tva)) *
-                depenses_carburants_corrigees_officielle_2019_in_2017
+                (taux_plein_tva / (1 + taux_plein_tva))
+                * depenses_carburants_corrigees_officielle_2019_in_2017
                 )
             depenses_carburants_corrigees = \
                 menage('depenses_carburants_corrigees', period)
             tva_depenses_carburants_corrigees = (
-                (taux_plein_tva / (1 + taux_plein_tva)) *
-                depenses_carburants_corrigees
+                (taux_plein_tva / (1 + taux_plein_tva))
+                * depenses_carburants_corrigees
                 )
             gains_tva_carburants = (
                 tva_depenses_carburants_corrigees_officielle_2019_in_2017 -
@@ -517,14 +517,14 @@ class officielle_2019_in_2017(Reform):
             depenses_combustibles_liquides_officielle_2019_in_2017 = \
                 menage('depenses_combustibles_liquides_officielle_2019_in_2017', period)
             tva_depenses_combustibles_liquides_officielle_2019_in_2017 = (
-                (taux_plein_tva / (1 + taux_plein_tva)) *
-                depenses_combustibles_liquides_officielle_2019_in_2017
+                (taux_plein_tva / (1 + taux_plein_tva))
+                * depenses_combustibles_liquides_officielle_2019_in_2017
                 )
             depenses_combustibles_liquides = \
                 menage('depenses_combustibles_liquides', period)
             tva_depenses_combustibles_liquides = (
-                (taux_plein_tva / (1 + taux_plein_tva)) *
-                depenses_combustibles_liquides
+                (taux_plein_tva / (1 + taux_plein_tva))
+                * depenses_combustibles_liquides
                 )
             gains_tva_combustibles_liquides = (
                 tva_depenses_combustibles_liquides_officielle_2019_in_2017 -
@@ -543,14 +543,14 @@ class officielle_2019_in_2017(Reform):
             depenses_gaz_ville_officielle_2019_in_2017 = \
                 menage('depenses_gaz_ville_officielle_2019_in_2017', period)
             tva_depenses_gaz_ville_officielle_2019_in_2017 = (
-                (taux_plein_tva / (1 + taux_plein_tva)) *
-                (depenses_gaz_ville_officielle_2019_in_2017 - depenses_gaz_tarif_fixe)
+                (taux_plein_tva / (1 + taux_plein_tva))
+                * (depenses_gaz_ville_officielle_2019_in_2017 - depenses_gaz_tarif_fixe)
                 )
             depenses_gaz_ville = \
                 menage('depenses_gaz_ville', period)
             tva_depenses_gaz_ville = (
-                (taux_plein_tva / (1 + taux_plein_tva)) *
-                (depenses_gaz_ville - depenses_gaz_tarif_fixe)
+                (taux_plein_tva / (1 + taux_plein_tva))
+                * (depenses_gaz_ville - depenses_gaz_tarif_fixe)
                 )
             gains_tva_gaz_ville = (
                 tva_depenses_gaz_ville_officielle_2019_in_2017 -

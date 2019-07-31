@@ -38,6 +38,6 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
     menages_use_baseline = indiv_df_reference['menage']
 
     variations_revenue['total_{}'.format(reforme)] = (
-        (menages_reform['total_taxes_energies'] - menages_reference['total_taxes_energies']) *
-        menages_reform['pondmen']
+        (menages_reform['total_taxes_energies'] - menages_reference['total_taxes_energies'])
+        * menages_reform['pondmen']
         ).sum() / 1e06

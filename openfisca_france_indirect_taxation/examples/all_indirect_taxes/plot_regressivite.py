@@ -64,16 +64,16 @@ taxe_indirectes[u'Taxes tabacs'] = (
 taxe_indirectes = taxe_indirectes.rename(columns = {'revtot': u'revenu total',
         'rev_disponible': u'revenu disponible'})  # , 'taxes_indirectes_total': u'toutes les taxes indirectes'
 for revenu in [u'revenu total']:  # [u'revenu total', u'revenu disponible', u'depenses totales', u'toutes les taxes indirectes']
-        list_part_taxes = []
-        for taxe in ['TVA', 'TICPE', u'Taxes alcools', u'Taxes tabacs']:  # u'Taxes assurances',
-            taxe_indirectes[u'part ' + taxe] = (
-                taxe_indirectes[taxe] / taxe_indirectes[revenu]
-                )
-            'list_part_taxes_{}'.format(taxe)
-            list_part_taxes.append(u'part ' + taxe)
+    list_part_taxes = []
+    for taxe in ['TVA', 'TICPE', u'Taxes alcools', u'Taxes tabacs']:  # u'Taxes assurances',
+        taxe_indirectes[u'part ' + taxe] = (
+            taxe_indirectes[taxe] / taxe_indirectes[revenu]
+            )
+        'list_part_taxes_{}'.format(taxe)
+        list_part_taxes.append(u'part ' + taxe)
 
-        df_to_graph = taxe_indirectes[list_part_taxes]
+    df_to_graph = taxe_indirectes[list_part_taxes]
 
-        print('''Contributions aux différentes taxes indirectes en part de {0},
+    print('''Contributions aux différentes taxes indirectes en part de {0},
                 par décile de revenu en {1}'''.format(revenu, year))
-        graph_builder_bar(df_to_graph)
+    graph_builder_bar(df_to_graph)

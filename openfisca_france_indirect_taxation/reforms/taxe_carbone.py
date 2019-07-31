@@ -152,8 +152,8 @@ class taxe_carbone(Reform):
             reforme_electricite = parameters(period.start).taxe_carbone.electricite
             electricite_elasticite_prix = menage('elas_price_2_2', period)
             depenses_electricite_ajustees_variables = (
-                depenses_electricite_variables *
-                (1 + (1 + electricite_elasticite_prix) * reforme_electricite / depenses_electricite_prix_unitaire)
+                depenses_electricite_variables
+                * (1 + (1 + electricite_elasticite_prix) * reforme_electricite / depenses_electricite_prix_unitaire)
                 )
             depenses_electricite_tarif_fixe = menage('depenses_electricite_tarif_fixe', period)
             min_tarif_fixe = depenses_electricite_tarif_fixe.min()
@@ -263,8 +263,8 @@ class taxe_carbone(Reform):
             abaissement_tva_taux_plein_bis = parameters(period.start).taxe_carbone.abaissement_tva_taux_plein_bis
             elasticite = menage('elas_price_3_3', period)
             depenses_tva_taux_plein_bis_ajustees = (
-                depenses_tva_taux_plein *
-                (1 + (1 + elasticite) * (- abaissement_tva_taux_plein_bis) / (1 + taux_plein))
+                depenses_tva_taux_plein
+                * (1 + (1 + elasticite) * (- abaissement_tva_taux_plein_bis) / (1 + taux_plein))
                 )
 
             return depenses_tva_taux_plein_bis_ajustees

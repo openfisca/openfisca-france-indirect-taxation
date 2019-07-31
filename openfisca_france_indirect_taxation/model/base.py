@@ -12,7 +12,6 @@ from biryani.strings import slugify
 
 from openfisca_core.model_api import *
 
-
 try:
     from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
 except ImportError:

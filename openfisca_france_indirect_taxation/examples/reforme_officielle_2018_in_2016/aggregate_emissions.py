@@ -59,24 +59,24 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 
 # Carburants
 emissions_cce_seulement['carburants'] = (
-    (df_reforme['emissions_CO2_carburants'] - df_reforme['emissions_CO2_carburants_cce_seulement']) *
-    df_reforme['pondmen']
+    (df_reforme['emissions_CO2_carburants'] - df_reforme['emissions_CO2_carburants_cce_seulement'])
+    * df_reforme['pondmen']
     ).sum() / 1e06
 emissions_officielle['carburants'] = (
-    (df_reforme['emissions_CO2_carburants'] - df_reforme['emissions_CO2_carburants_officielle_2018_in_2016']) *
-    df_reforme['pondmen']
+    (df_reforme['emissions_CO2_carburants'] - df_reforme['emissions_CO2_carburants_officielle_2018_in_2016'])
+    * df_reforme['pondmen']
     ).sum() / 1e06
 emissions_officielle_plus_cspe['carburants'] = emissions_officielle['carburants']
 emissions_rattrapage_integral['carburants'] = (
-    (df_reforme['emissions_CO2_carburants'] - df_reforme['emissions_CO2_carburants_rattrapage_integral']) *
-    df_reforme['pondmen']
+    (df_reforme['emissions_CO2_carburants'] - df_reforme['emissions_CO2_carburants_rattrapage_integral'])
+    * df_reforme['pondmen']
     ).sum() / 1e06
 
 # Combustibles liquides
 emissions_cce_seulement['combustibles_liquides'] = (
     (df_reforme['emissions_CO2_combustibles_liquides'] -
-    df_reforme['emissions_CO2_combustibles_liquides_officielle_2018_in_2016']) *
-    df_reforme['pondmen']
+    df_reforme['emissions_CO2_combustibles_liquides_officielle_2018_in_2016'])
+    * df_reforme['pondmen']
     ).sum() / 1e06
 emissions_officielle['combustibles_liquides'] = emissions_cce_seulement['combustibles_liquides']
 emissions_officielle_plus_cspe['combustibles_liquides'] = emissions_cce_seulement['combustibles_liquides']
@@ -84,8 +84,8 @@ emissions_rattrapage_integral['combustibles_liquides'] = 0
 
 # Diesel
 emissions_officielle['diesel'] = (
-    (df_reforme['emissions_CO2_diesel'] - df_reforme['emissions_CO2_diesel_officielle_2018_in_2016']) *
-    df_reforme['pondmen']
+    (df_reforme['emissions_CO2_diesel'] - df_reforme['emissions_CO2_diesel_officielle_2018_in_2016'])
+    * df_reforme['pondmen']
     ).sum() / 1e06
 
 # Electricité
@@ -93,21 +93,21 @@ emissions_cce_seulement['electricite'] = 0
 emissions_officielle['electricite'] = 0
 emissions_officielle_plus_cspe['electricite'] = (
     (df_reforme['emissions_CO2_electricite'] -
-    df_reforme['emissions_CO2_electricite_cspe']) *
-    df_reforme['pondmen']
+    df_reforme['emissions_CO2_electricite_cspe'])
+    * df_reforme['pondmen']
     ).sum() / 1e06
 emissions_rattrapage_integral['electricite'] = 0
 
 # Essence
 emissions_officielle['essence'] = (
-    (df_reforme['emissions_CO2_essence'] - df_reforme['emissions_CO2_essence_officielle_2018_in_2016']) *
-    df_reforme['pondmen']
+    (df_reforme['emissions_CO2_essence'] - df_reforme['emissions_CO2_essence_officielle_2018_in_2016'])
+    * df_reforme['pondmen']
     ).sum() / 1e06
 
 # Gaz de ville
 emissions_cce_seulement['gaz_ville'] = (
-    (df_reforme['emissions_CO2_gaz_ville'] - df_reforme['emissions_CO2_gaz_ville_officielle_2018_in_2016']) *
-    df_reforme['pondmen']
+    (df_reforme['emissions_CO2_gaz_ville'] - df_reforme['emissions_CO2_gaz_ville_officielle_2018_in_2016'])
+    * df_reforme['pondmen']
     ).sum() / 1e06
 emissions_officielle['gaz_ville'] = emissions_cce_seulement['gaz_ville']
 emissions_officielle_plus_cspe['gaz_ville'] = emissions_cce_seulement['gaz_ville']

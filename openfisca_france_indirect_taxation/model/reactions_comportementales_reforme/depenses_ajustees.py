@@ -70,8 +70,8 @@ class depenses_electricite_ajustees_taxe_carbone(YearlyVariable):
         reforme_electricite = parameters(period.start).taxe_carbone.electricite
         electricite_elasticite_prix = menage('elas_price_2_2', period)
         depenses_electricite_ajustees_variables = (
-            depenses_electricite_variables *
-            (1 + (1 + electricite_elasticite_prix) * reforme_electricite / depenses_electricite_prix_unitaire)
+            depenses_electricite_variables
+            * (1 + (1 + electricite_elasticite_prix) * reforme_electricite / depenses_electricite_prix_unitaire)
             )
         depenses_electricite_tarif_fixe = menage('depenses_electricite_tarif_fixe', period)
         min_tarif_fixe = depenses_electricite_tarif_fixe.min()

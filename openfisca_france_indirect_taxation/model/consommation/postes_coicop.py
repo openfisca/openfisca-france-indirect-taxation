@@ -8,7 +8,6 @@ from biryani.strings import slugify
 
 from openfisca_france_indirect_taxation.model.base import *
 
-
 log = logging.getLogger(__name__)
 
 
