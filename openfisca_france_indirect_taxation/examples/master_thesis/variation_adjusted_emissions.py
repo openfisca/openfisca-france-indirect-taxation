@@ -53,15 +53,15 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
             * menages_reform['pondmen']
             ).sum() / 1e06
         variations_emissions['combustibles_liquides_{}'.format(reforme)] = (
-            (menages_reform['emissions_CO2_combustibles_liquides'] -
-            menages_reference['emissions_CO2_combustibles_liquides'])
+            (menages_reform['emissions_CO2_combustibles_liquides']
+- menages_reference['emissions_CO2_combustibles_liquides'])
             * menages_reform['pondmen']
             ).sum() / 1e06
 
         if reforme == 'taxe_carbone':
             variations_emissions['electricite_{}'.format(reforme)] = (
-                (menages_reform['emissions_CO2_electricite'] -
-                menages_reference['emissions_CO2_electricite'])
+                (menages_reform['emissions_CO2_electricite']
+- menages_reference['emissions_CO2_electricite'])
                 * menages_reform['pondmen']
                 ).sum() / 1e06
 

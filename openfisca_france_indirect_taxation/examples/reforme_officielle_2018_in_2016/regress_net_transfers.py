@@ -74,8 +74,8 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 
 df_reforme['transferts_nets_apres_redistribution_uc'] = (
     df_reforme['cheques_energie_officielle_2018_in_2016']
-    + df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
-    df_reforme['revenu_reforme_officielle_2018_in_2016']
+    + df_reforme['reste_transferts_neutre_officielle_2018_in_2016']
+    - df_reforme['revenu_reforme_officielle_2018_in_2016']
     ) / df_reforme['ocde10']
 
 df_reforme = age_group(df_reforme)

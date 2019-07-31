@@ -73,8 +73,8 @@ for year in [2000, 2005, 2011]:
             aggregates_data_frame['depenses_tot'] += aggregates_data_frame[produit]
 
     aggregates_data_frame['depenses_autre'] = (
-        aggregates_data_frame['depenses_tot'] - aggregates_data_frame['depenses_alime'] -
-        aggregates_data_frame['depenses_carbu'] - aggregates_data_frame['depenses_logem'])
+        aggregates_data_frame['depenses_tot'] - aggregates_data_frame['depenses_alime']
+        - aggregates_data_frame['depenses_carbu'] - aggregates_data_frame['depenses_logem'])
 
     data_conso = aggregates_data_frame[
         produits + ['ident_men', 'vag', 'depenses_alime', 'depenses_autre', 'depenses_carbu', 'depenses_logem']

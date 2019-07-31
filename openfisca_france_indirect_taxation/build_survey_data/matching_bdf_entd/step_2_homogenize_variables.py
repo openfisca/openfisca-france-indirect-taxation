@@ -83,12 +83,12 @@ def create_new_variables():
         data['mloy_d'] = data['mloy_d'].fillna(0)
 
         data['part_essence'] = (
-            data['essence'] /
-            (data['essence'] + data['diesel'] + data['autre_carbu'])
+            data['essence']
+            / (data['essence'] + data['diesel'] + data['autre_carbu'])
             )
         data['part_diesel'] = (
-            data['diesel'] /
-            (data['essence'] + data['diesel'] + data['autre_carbu'])
+            data['diesel']
+            / (data['essence'] + data['diesel'] + data['autre_carbu'])
             )
         data['nb_essence'] = data['veh_tot'] * data['part_essence']
         data['nb_diesel'] = data['veh_tot'] * data['part_diesel']

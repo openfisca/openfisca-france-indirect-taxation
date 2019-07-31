@@ -176,8 +176,8 @@ def preprocess_legislation(parameters):
     cols = part_des_types_de_supercarburants.columns
     for element in cols:
         part_des_types_de_supercarburants[element] = (
-            part_des_types_de_supercarburants[element] /
-            (part_des_types_de_supercarburants['somme'] - part_des_types_de_supercarburants['sp_e85'])
+            part_des_types_de_supercarburants[element]
+            / (part_des_types_de_supercarburants['somme'] - part_des_types_de_supercarburants['sp_e85'])
             )
     del part_des_types_de_supercarburants['sp_e85']
     del part_des_types_de_supercarburants['somme']

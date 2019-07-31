@@ -48,15 +48,15 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 
 df_reforme['gains_cheque_officiel'] = (
     df_reforme['cheques_energie_officielle_2018_in_2016']
-    + df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
-    df_reforme['pertes_financieres_avant_redistribution_officielle_2018_in_2016']
+    + df_reforme['reste_transferts_neutre_officielle_2018_in_2016']
+    - df_reforme['pertes_financieres_avant_redistribution_officielle_2018_in_2016']
     )
 df_reforme['perdant_total_cheque_officiel'] = 1 * (df_reforme['gains_cheque_officiel'] < 0)
 
 df_reforme['transfert_net_cheque_officiel'] = (
     df_reforme['cheques_energie_officielle_2018_in_2016']
-    + df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
-    df_reforme['revenu_reforme_officielle_2018_in_2016']
+    + df_reforme['reste_transferts_neutre_officielle_2018_in_2016']
+    - df_reforme['revenu_reforme_officielle_2018_in_2016']
     )
 df_reforme['perdant_fiscal_cheque_officiel'] = 1 * (df_reforme['transfert_net_cheque_officiel'] < 0)
 
@@ -64,14 +64,14 @@ df_reforme['perdant_fiscal_cheque_officiel'] = 1 * (df_reforme['transfert_net_ch
 df_by_categ = pd.DataFrame(index = list(range(1, 11)), columns = ['perdant_total_cheque_officiel', 'perdant_fiscal_cheque_officiel'])
 for i in range(1, 11):
     part_perdants_total_officiel = (
-        float(df_reforme.query('niveau_vie_decile == {}'.format(i)).query('perdant_total_cheque_officiel == 1')['pondmen'].sum()) /
-        df_reforme.query('niveau_vie_decile == {}'.format(i))['pondmen'].sum()
+        float(df_reforme.query('niveau_vie_decile == {}'.format(i)).query('perdant_total_cheque_officiel == 1')['pondmen'].sum())
+        / df_reforme.query('niveau_vie_decile == {}'.format(i))['pondmen'].sum()
         )
     df_by_categ['perdant_total_cheque_officiel'][i] = part_perdants_total_officiel
 
     part_perdants_fiscal_officiel = (
-        float(df_reforme.query('niveau_vie_decile == {}'.format(i)).query('perdant_fiscal_cheque_officiel == 1')['pondmen'].sum()) /
-        df_reforme.query('niveau_vie_decile == {}'.format(i))['pondmen'].sum()
+        float(df_reforme.query('niveau_vie_decile == {}'.format(i)).query('perdant_fiscal_cheque_officiel == 1')['pondmen'].sum())
+        / df_reforme.query('niveau_vie_decile == {}'.format(i))['pondmen'].sum()
         )
     df_by_categ['perdant_fiscal_cheque_officiel'][i] = part_perdants_fiscal_officiel
 

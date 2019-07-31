@@ -74,8 +74,8 @@ emissions_rattrapage_integral['carburants'] = (
 
 # Combustibles liquides
 emissions_cce_seulement['combustibles_liquides'] = (
-    (df_reforme['emissions_CO2_combustibles_liquides'] -
-    df_reforme['emissions_CO2_combustibles_liquides_officielle_2018_in_2016'])
+    (df_reforme['emissions_CO2_combustibles_liquides']
+- df_reforme['emissions_CO2_combustibles_liquides_officielle_2018_in_2016'])
     * df_reforme['pondmen']
     ).sum() / 1e06
 emissions_officielle['combustibles_liquides'] = emissions_cce_seulement['combustibles_liquides']
@@ -92,8 +92,8 @@ emissions_officielle['diesel'] = (
 emissions_cce_seulement['electricite'] = 0
 emissions_officielle['electricite'] = 0
 emissions_officielle_plus_cspe['electricite'] = (
-    (df_reforme['emissions_CO2_electricite'] -
-    df_reforme['emissions_CO2_electricite_cspe'])
+    (df_reforme['emissions_CO2_electricite']
+- df_reforme['emissions_CO2_electricite_cspe'])
     * df_reforme['pondmen']
     ).sum() / 1e06
 emissions_rattrapage_integral['electricite'] = 0

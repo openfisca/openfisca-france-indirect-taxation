@@ -33,15 +33,15 @@ df_taux_implicite.rename(columns = {'value': 'taux plein tva'}, inplace = True)
 
 # A partir des paramètres, calcul des taux de taxation implicites
 df_taux_implicite['taux_implicite_diesel'] = (
-    df_taux_implicite['accise ticpe gazole'] * (1 + df_taux_implicite['taux plein tva']) /
-    (df_taux_implicite['prix diesel ttc'] -
-    (df_taux_implicite['accise ticpe gazole'] * (1 + df_taux_implicite['taux plein tva'])))
+    df_taux_implicite['accise ticpe gazole'] * (1 + df_taux_implicite['taux plein tva'])
+    / (df_taux_implicite['prix diesel ttc']
+- (df_taux_implicite['accise ticpe gazole'] * (1 + df_taux_implicite['taux plein tva'])))
     )
 
 df_taux_implicite['taux_implicite_sp95'] = (
-    df_taux_implicite['accise ticpe super9598'] * (1 + df_taux_implicite['taux plein tva']) /
-    (df_taux_implicite['prix super 95 ttc'] -
-    (df_taux_implicite['accise ticpe super9598'] * (1 + df_taux_implicite['taux plein tva'])))
+    df_taux_implicite['accise ticpe super9598'] * (1 + df_taux_implicite['taux plein tva'])
+    / (df_taux_implicite['prix super 95 ttc']
+- (df_taux_implicite['accise ticpe super9598'] * (1 + df_taux_implicite['taux plein tva'])))
     )
 
 df_taux_implicite = df_taux_implicite.dropna()

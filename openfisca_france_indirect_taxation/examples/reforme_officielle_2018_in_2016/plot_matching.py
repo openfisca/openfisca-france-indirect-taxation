@@ -119,12 +119,12 @@ def histogram_froid_group(data_matched, data_enl, froid, group):
         data_matched_decile = data_matched.query('{0} == {1}'.format(group, i))
 
         part_enl = (
-            sum(data_enl_decile['pondmen'] * (data_enl_decile[froid] == 1)) /
-            sum(data_enl_decile['pondmen'])
+            sum(data_enl_decile['pondmen'] * (data_enl_decile[froid] == 1))
+            / sum(data_enl_decile['pondmen'])
             )
         part_matched = (
-            sum(data_matched_decile['pondmen'] * (data_matched_decile[froid] == 1)) /
-            sum(data_matched_decile['pondmen'])
+            sum(data_matched_decile['pondmen'] * (data_matched_decile[froid] == 1))
+            / sum(data_matched_decile['pondmen'])
             )
 
         df_to_plot['Matched'][i] = part_matched
@@ -142,13 +142,13 @@ def histogram_distance_group(data_matched, data_entd, distance, group):
     for i in range(min_group, max_group + 1):
         data_matched_group = data_matched.query('{} == {}'.format(group, i))
         distance_matched = (
-            sum(data_matched_group[distance] * data_matched_group['pondmen']) /
-            data_matched_group['pondmen'].sum()
+            sum(data_matched_group[distance] * data_matched_group['pondmen'])
+            / data_matched_group['pondmen'].sum()
             )
         data_entd_group = data_entd.query('{} == {}'.format(group, i))
         distance_entd = (
-            sum(data_entd_group[distance] * data_entd_group['pondmen']) /
-            data_entd_group['pondmen'].sum()
+            sum(data_entd_group[distance] * data_entd_group['pondmen'])
+            / data_entd_group['pondmen'].sum()
             )
 
         df_to_plot['Matched'][i] = distance_matched

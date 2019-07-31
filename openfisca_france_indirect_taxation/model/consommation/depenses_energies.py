@@ -147,8 +147,8 @@ class depenses_diesel_ht(YearlyVariable):
 
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         taux_implicite_diesel = (
-            (accise_diesel_ticpe * (1 + taux_plein_tva)) /
-            (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
+            (accise_diesel_ticpe * (1 + taux_plein_tva))
+            / (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
             )
 
         depenses_diesel_htva = menage('depenses_diesel_htva', period)
@@ -177,8 +177,8 @@ class depenses_diesel_recalculees(YearlyVariable):
 
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         taux_implicite_diesel = (
-            (accise_diesel_ticpe * (1 + taux_plein_tva)) /
-            (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
+            (accise_diesel_ticpe * (1 + taux_plein_tva))
+            / (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
             )
 
         depenses_diesel_recalculees = depenses_diesel_ht * (1 + taux_plein_tva) * (1 + taux_implicite_diesel)
@@ -580,8 +580,8 @@ class depenses_sp_e10_ht(YearlyVariable):
 
         super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
         taux_implicite_sp_e10 = (
-            (accise_ticpe_super_e10 * (1 + taux_plein_tva)) /
-            (super_95_e10_ttc - accise_ticpe_super_e10 * (1 + taux_plein_tva))
+            (accise_ticpe_super_e10 * (1 + taux_plein_tva))
+            / (super_95_e10_ttc - accise_ticpe_super_e10 * (1 + taux_plein_tva))
             )
         depenses_sp_e10_ht = \
             depenses_sp_e10_htva - tax_from_expense_including_tax(depenses_sp_e10_htva, taux_implicite_sp_e10)
@@ -620,8 +620,8 @@ class depenses_sp_95_ht(YearlyVariable):
 
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
         taux_implicite_sp95 = (
-            (accise_ticpe_super95 * (1 + taux_plein_tva)) /
-            (super_95_ttc - accise_ticpe_super95 * (1 + taux_plein_tva))
+            (accise_ticpe_super95 * (1 + taux_plein_tva))
+            / (super_95_ttc - accise_ticpe_super95 * (1 + taux_plein_tva))
             )
         depenses_essence = menage('depenses_essence_corrigees', period)
         part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
@@ -664,8 +664,8 @@ class depenses_sp_98_ht(YearlyVariable):
 
         super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
         taux_implicite_sp98 = (
-            (accise_ticpe_super98 * (1 + taux_plein_tva)) /
-            (super_98_ttc - accise_ticpe_super98 * (1 + taux_plein_tva))
+            (accise_ticpe_super98 * (1 + taux_plein_tva))
+            / (super_98_ttc - accise_ticpe_super98 * (1 + taux_plein_tva))
             )
         depenses_essence = menage('depenses_essence_corrigees', period)
         part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
@@ -702,8 +702,8 @@ class depenses_super_plombe_ht(YearlyVariable):
             parameters(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
         super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
         taux_implicite_super_plombe = (
-            (accise_super_plombe_ticpe * (1 + taux_plein_tva)) /
-            (super_plombe_ttc - accise_super_plombe_ticpe * (1 + taux_plein_tva))
+            (accise_super_plombe_ticpe * (1 + taux_plein_tva))
+            / (super_plombe_ttc - accise_super_plombe_ticpe * (1 + taux_plein_tva))
             )
         depenses_essence = menage('depenses_essence_corrigees', period)
         part_super_plombe = \
@@ -711,8 +711,8 @@ class depenses_super_plombe_ht(YearlyVariable):
         depenses_super_plombe = depenses_essence * part_super_plombe
         depenses_super_plombe_htva = \
             depenses_super_plombe - tax_from_expense_including_tax(depenses_super_plombe, taux_plein_tva)
-        depenses_super_plombe_ht = (depenses_super_plombe_htva -
-            tax_from_expense_including_tax(depenses_super_plombe_htva, taux_implicite_super_plombe))
+        depenses_super_plombe_ht = (depenses_super_plombe_htva
+- tax_from_expense_including_tax(depenses_super_plombe_htva, taux_implicite_super_plombe))
 
         return depenses_super_plombe_ht
 

@@ -44,8 +44,8 @@ for year in ['energy_no_alime_all']:
     for i in range(1, 4):
         df['el_uncomp_{}'.format(i)] = (
             df['elas_price_{}_{}'.format(i, i)]
-            * (df['depenses_tot'] * df['w{}'.format(i)]) /
-            (df['depenses_tot'] * df['w{}'.format(i)]).sum()
+            * (df['depenses_tot'] * df['w{}'.format(i)])
+            / (df['depenses_tot'] * df['w{}'.format(i)]).sum()
             )
 
     for i in range(1, 4):
@@ -54,8 +54,8 @@ for year in ['energy_no_alime_all']:
     for i in range(1, 4):
         df['el_comp_{}'.format(i)] = (
             df['comp_price_{}_{}'.format(i, i)]
-            * (df['depenses_tot'] * df['w{}'.format(i)]) /
-            (df['depenses_tot'] * df['w{}'.format(i)]).sum()
+            * (df['depenses_tot'] * df['w{}'.format(i)])
+            / (df['depenses_tot'] * df['w{}'.format(i)]).sum()
             )
 
     for i in range(1, 4):
@@ -64,8 +64,8 @@ for year in ['energy_no_alime_all']:
     for i in range(1, 4):
         df['el_{}'.format(i)] = (
             df['elas_exp_{}'.format(i)]
-            * (df['depenses_tot'] * df['w{}'.format(i)]) /
-            (df['depenses_tot'] * df['w{}'.format(i)]).sum()
+            * (df['depenses_tot'] * df['w{}'.format(i)])
+            / (df['depenses_tot'] * df['w{}'.format(i)]).sum()
             )
 
     for i in range(1, 4):

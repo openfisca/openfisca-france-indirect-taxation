@@ -57,8 +57,8 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
             dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
 
         df_reform['Cost of the reform after green cheques'] = (
-            ((contribution_unite_conso) * df_reform['ocde10'] -
-            (df_reform['total_taxes_energies'] - df_reference['total_taxes_energies']))
+            ((contribution_unite_conso) * df_reform['ocde10']
+- (df_reform['total_taxes_energies'] - df_reference['total_taxes_energies']))
             )
 
         # Réalisation de graphiques

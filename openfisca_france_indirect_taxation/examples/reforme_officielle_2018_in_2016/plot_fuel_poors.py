@@ -28,8 +28,8 @@ def plot_effect_reform_fuel_poors():
     for type_precarite in types:
         for statut in ['avant redistribution', 'apres redistribution']:
             dataframe[statut][type_precarite] = (
-                dict_precarite[type_precarite]['precarite - ' + statut] -
-                dict_precarite[type_precarite]['precarite - avant reforme']
+                dict_precarite[type_precarite]['precarite - ' + statut]
+                - dict_precarite[type_precarite]['precarite - avant reforme']
                 ) / dict_precarite[type_precarite]['precarite - avant reforme']
 
     #save_dataframe_to_graph(dataframe, 'Precarite/effect_reform_fuel_poors.csv')

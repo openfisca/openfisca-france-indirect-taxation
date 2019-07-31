@@ -73,15 +73,15 @@ def histogram_distance_annuelle_group(data_matched, data_entd, distance, group):
     for element in range(min_element, max_element):
         data_matched_group = data_matched.query('{} == {}'.format(group, element))
         distance_matched = (
-            sum(data_matched_group[distance] * data_matched_group['pondmen']) /
-            data_matched_group['pondmen'].sum()
+            sum(data_matched_group[distance] * data_matched_group['pondmen'])
+            / data_matched_group['pondmen'].sum()
             )
         list_values_matched.append(distance_matched)
 
         data_entd_group = data_entd.query('{} == {}'.format(group, element))
         distance_entd = (
-            sum(data_entd_group[distance] * data_entd_group['pondmen']) /
-            data_entd_group['pondmen'].sum()
+            sum(data_entd_group[distance] * data_entd_group['pondmen'])
+            / data_entd_group['pondmen'].sum()
             )
 
         list_values_entd.append(distance_entd)
@@ -112,16 +112,16 @@ def histogram_distribution_distance_annuelle(data_matched, data_entd, distance):
     for i in range(0, 11):
         j = float(i) / 10
         part_matched = (
-            sum(data_matched.query('{}_groupe == {}'.format(distance, j))['pondmen']) /
-            data_matched['pondmen'].sum()
+            sum(data_matched.query('{}_groupe == {}'.format(distance, j))['pondmen'])
+            / data_matched['pondmen'].sum()
             )
         list_values_matched.append(part_matched)
 
     for i in range(0, 11):
         j = float(i) / 10
         part_entd = (
-            sum(data_entd.query('{}_groupe == {}'.format(distance, j))['pondmen']) /
-            data_entd['pondmen'].sum()
+            sum(data_entd.query('{}_groupe == {}'.format(distance, j))['pondmen'])
+            / data_entd['pondmen'].sum()
             )
 
         list_values_entd.append(part_entd)
@@ -152,8 +152,8 @@ def histogram_distribution_distance_annuelle_group(data_matched, data_entd, dist
     for i in range(0, 11):
         j = float(i) / 10
         part_matched = (
-            sum(data_matched_decile.query('{}_groupe == {}'.format(distance, j))['pondmen']) /
-            data_matched_decile['pondmen'].sum()
+            sum(data_matched_decile.query('{}_groupe == {}'.format(distance, j))['pondmen'])
+            / data_matched_decile['pondmen'].sum()
             )
         list_values_matched.append(part_matched)
 
@@ -161,8 +161,8 @@ def histogram_distribution_distance_annuelle_group(data_matched, data_entd, dist
     for i in range(0, 11):
         j = float(i) / 10
         part_entd = (
-            sum(data_entd_decile.query('{}_groupe == {}'.format(distance, j))['pondmen']) /
-            data_entd_decile['pondmen'].sum()
+            sum(data_entd_decile.query('{}_groupe == {}'.format(distance, j))['pondmen'])
+            / data_entd_decile['pondmen'].sum()
             )
 
         list_values_entd.append(part_entd)

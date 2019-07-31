@@ -67,8 +67,8 @@ print("Parmi les personnes déclarant avoir eu froid à cause du prix de l'éner
 print(" ")
 
 for i in range(1, 11):
-    print(float(len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('aise_froid_cout == 1'))) /
-        len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('froid_cout == 1')))
+    print(float(len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('aise_froid_cout == 1')))
+/ len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('froid_cout == 1')))
 print(" ")
 
 print("Parmi les personnes ayant des difficultés dans leur budget, et ayant froid dans leur logement \
@@ -76,5 +76,5 @@ print("Parmi les personnes ayant des difficultés dans leur budget, et ayant fro
 print(" ")
 
 for i in range(1, 11):
-    print(float(len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('aise_froid_cout == 1'))) /
-        len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('aise_froid == 1')))
+    print(float(len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('aise_froid_cout == 1')))
+/ len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('aise_froid == 1')))

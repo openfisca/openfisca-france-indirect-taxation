@@ -35,8 +35,8 @@ class diesel_ticpe(YearlyVariable):
 
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         taux_implicite_diesel = (
-            (accise_diesel_ticpe * (1 + taux_plein_tva)) /
-            (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
+            (accise_diesel_ticpe * (1 + taux_plein_tva))
+            / (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
             )
 
         depenses_diesel = menage('depenses_diesel_corrigees', period)
@@ -67,8 +67,8 @@ class diesel_ticpe_ajustee(YearlyVariable):
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         prix_diesel_ttc_ajuste = prix_diesel_ttc + reforme_diesel
         taux_implicite_diesel_ajuste = (
-            (accise_diesel_ticpe_ajustee * (1 + taux_plein_tva)) /
-            (prix_diesel_ttc_ajuste - accise_diesel_ticpe_ajustee * (1 + taux_plein_tva))
+            (accise_diesel_ticpe_ajustee * (1 + taux_plein_tva))
+            / (prix_diesel_ttc_ajuste - accise_diesel_ticpe_ajustee * (1 + taux_plein_tva))
             )
 
         depenses_diesel_ajustees = menage('depenses_diesel_ajustees', period)
@@ -156,8 +156,8 @@ class sp_e10_ticpe(Variable):
 
         super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
         taux_implicite_sp_e10 = (
-            (accise_ticpe_super_e10 * (1 + taux_plein_tva)) /
-            (super_95_e10_ttc - accise_ticpe_super_e10 * (1 + taux_plein_tva))
+            (accise_ticpe_super_e10 * (1 + taux_plein_tva))
+            / (super_95_e10_ttc - accise_ticpe_super_e10 * (1 + taux_plein_tva))
             )
         depenses_sp_e10 = menage('depenses_sp_e10', period)
         depenses_sp_e10_htva = \
@@ -196,8 +196,8 @@ class sp_e10_ticpe_ajustee(Variable):
         super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
         super_95_e10_ttc_ajuste = super_95_e10_ttc + reforme_essence
         taux_implicite_sp_e10_ajuste = (
-            (accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva)) /
-            (super_95_e10_ttc_ajuste - accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
+            (accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
+            / (super_95_e10_ttc_ajuste - accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
             )
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
         part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
@@ -228,8 +228,8 @@ class sp95_ticpe(YearlyVariable):
 
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
         taux_implicite_sp95 = (
-            (accise_ticpe_super95 * (1 + taux_plein_tva)) /
-            (super_95_ttc - accise_ticpe_super95 * (1 + taux_plein_tva))
+            (accise_ticpe_super95 * (1 + taux_plein_tva))
+            / (super_95_ttc - accise_ticpe_super95 * (1 + taux_plein_tva))
             )
         depenses_sp_95 = menage('depenses_sp_95', period)
         depenses_sp_95_htva = depenses_sp_95 - tax_from_expense_including_tax(depenses_sp_95, taux_plein_tva)
@@ -259,8 +259,8 @@ class sp95_ticpe_ajustee(YearlyVariable):
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
         super_95_ttc_ajuste = super_95_ttc + reforme_essence
         taux_implicite_sp95_ajuste = (
-            (accise_ticpe_super95_ajustee * (1 + taux_plein_tva)) /
-            (super_95_ttc_ajuste - accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
+            (accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
+            / (super_95_ttc_ajuste - accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
             )
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
         part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
@@ -293,8 +293,8 @@ class sp98_ticpe(YearlyVariable):
 
         super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
         taux_implicite_sp98 = (
-            (accise_ticpe_super98 * (1 + taux_plein_tva)) /
-            (super_98_ttc - accise_ticpe_super98 * (1 + taux_plein_tva))
+            (accise_ticpe_super98 * (1 + taux_plein_tva))
+            / (super_98_ttc - accise_ticpe_super98 * (1 + taux_plein_tva))
             )
         depenses_sp_98 = menage('depenses_sp_98', period)
         depenses_sp_98_htva = depenses_sp_98 - tax_from_expense_including_tax(depenses_sp_98, taux_plein_tva)
@@ -324,8 +324,8 @@ class sp98_ticpe_ajustee(YearlyVariable):
         super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
         super_98_ttc_ajuste = super_98_ttc + reforme_essence
         taux_implicite_sp98_ajuste = (
-            (accise_ticpe_super98_ajustee * (1 + taux_plein_tva)) /
-            (super_98_ttc_ajuste - accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
+            (accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
+            / (super_98_ttc_ajuste - accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
             )
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
         part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
@@ -356,8 +356,8 @@ class super_plombe_ticpe(Variable):
             parameters(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
         super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
         taux_implicite_super_plombe = (
-            (accise_super_plombe_ticpe * (1 + taux_plein_tva)) /
-            (super_plombe_ttc - accise_super_plombe_ticpe * (1 + taux_plein_tva))
+            (accise_super_plombe_ticpe * (1 + taux_plein_tva))
+            / (super_plombe_ttc - accise_super_plombe_ticpe * (1 + taux_plein_tva))
             )
         depenses_super_plombe = menage('depenses_super_plombe', period)
         depenses_super_plombe_htva = \
@@ -388,16 +388,16 @@ class super_plombe_ticpe_ajustee(Variable):
         super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
         super_plombe_ttc_ajuste = super_plombe_ttc + reforme_essence
         taux_implicite_super_plombe_ajuste = (
-            (accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva)) /
-            (super_plombe_ttc_ajuste - accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva))
+            (accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva))
+            / (super_plombe_ttc_ajuste - accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva))
             )
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
         part_super_plombe = \
             parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
         depenses_super_plombe_ajustees = depenses_essence_ajustees * part_super_plombe
         depenses_super_plombe_htva_ajustees = (
-            depenses_super_plombe_ajustees -
-            tax_from_expense_including_tax(depenses_super_plombe_ajustees, taux_plein_tva)
+            depenses_super_plombe_ajustees
+            - tax_from_expense_including_tax(depenses_super_plombe_ajustees, taux_plein_tva)
             )
         montant_super_plombe_ticpe_ajuste = \
             tax_from_expense_including_tax(depenses_super_plombe_htva_ajustees, taux_implicite_super_plombe_ajuste)

@@ -79,8 +79,8 @@ for year in [2000, 2005, 2011]:
             aggregates_data_frame['depenses_tot'] += aggregates_data_frame[produit]
 
     aggregates_data_frame['depenses_autre'] = (
-        aggregates_data_frame['depenses_tot'] - aggregates_data_frame['depenses_carbu'] -
-        aggregates_data_frame['depenses_logem'])
+        aggregates_data_frame['depenses_tot'] - aggregates_data_frame['depenses_carbu']
+        - aggregates_data_frame['depenses_logem'])
 
     # Construction de groupes de préférences
     aggregates_data_frame['zeat'] = aggregates_data_frame['zeat'].astype(str)

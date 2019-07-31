@@ -25,12 +25,12 @@ depenses_menages_transports = depenses_menages_transports.transpose()
 
 # Calcul des parts des transports et des carburants dans les dépenses totales des ménages
 depenses_menages_transports['part carburants dépenses totales'] = (
-    depenses_menages_transports['Dépenses carburants et lubrifiants'] /
-    depenses_menages_transports['Ensemble des dépenses de consommation des ménages ']
+    depenses_menages_transports['Dépenses carburants et lubrifiants']
+    / depenses_menages_transports['Ensemble des dépenses de consommation des ménages ']
     )
 depenses_menages_transports['part transports dépenses totales'] = (
-    depenses_menages_transports['Dépenses totales en transports'] /
-    depenses_menages_transports['Ensemble des dépenses de consommation des ménages ']
+    depenses_menages_transports['Dépenses totales en transports']
+    / depenses_menages_transports['Ensemble des dépenses de consommation des ménages ']
     )
 
 # Réalisation des graphiques

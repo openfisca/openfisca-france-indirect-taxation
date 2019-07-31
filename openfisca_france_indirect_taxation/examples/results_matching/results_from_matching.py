@@ -78,8 +78,8 @@ def data_distribution_distance_annuelle_group(data_matched, data_entd, distance,
     for i in range(0, 11):
         j = float(i) / 10
         part_matched = (
-            sum(data_matched_decile.query('{}_groupe == {}'.format(distance, j))['pondmen']) /
-            data_matched_decile['pondmen'].sum()
+            sum(data_matched_decile.query('{}_groupe == {}'.format(distance, j))['pondmen'])
+            / data_matched_decile['pondmen'].sum()
             )
         list_values_matched.append(part_matched)
 
@@ -87,8 +87,8 @@ def data_distribution_distance_annuelle_group(data_matched, data_entd, distance,
     for i in range(0, 11):
         j = float(i) / 10
         part_entd = (
-            sum(data_entd_decile.query('{}_groupe == {}'.format(distance, j))['pondmen']) /
-            data_entd_decile['pondmen'].sum()
+            sum(data_entd_decile.query('{}_groupe == {}'.format(distance, j))['pondmen'])
+            / data_entd_decile['pondmen'].sum()
             )
 
         list_values_entd.append(part_entd)

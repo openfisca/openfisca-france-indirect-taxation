@@ -51,8 +51,8 @@ for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
     df['transferts_nets_apres_redistribution_uc'] = (
         df['cheques_energie_officielle_2018_in_2016']
-        + df['reste_transferts_neutre_officielle_2018_in_2016'] -
-        df['revenu_reforme_officielle_2018_in_2016']
+        + df['reste_transferts_neutre_officielle_2018_in_2016']
+        - df['revenu_reforme_officielle_2018_in_2016']
         ) / df['ocde10']
 
     df['regressivite_revenu'] = (df['revenu_reforme_officielle_2018_in_2016'] - df['tarifs_sociaux_electricite'] - df['tarifs_sociaux_gaz']) / df['rev_disp_loyerimput']

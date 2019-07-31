@@ -12,12 +12,12 @@ prix_mensuel_carburants_90_15 = prix_mensuel_carburants_90_15.set_index('date')
 
 # Calcul des taux de taxation implicite sur les carburants, incluant la TICPE et la TVA
 prix_mensuel_carburants_90_15['taux_implicite_diesel_ticpe'] = (
-    (prix_mensuel_carburants_90_15['diesel_ttc'] - prix_mensuel_carburants_90_15['diesel_ht']) /
-    prix_mensuel_carburants_90_15['diesel_ht']
+    (prix_mensuel_carburants_90_15['diesel_ttc'] - prix_mensuel_carburants_90_15['diesel_ht'])
+    / prix_mensuel_carburants_90_15['diesel_ht']
     )
 prix_mensuel_carburants_90_15['taux_implicite_ticpe_super_95'] = (
-    (prix_mensuel_carburants_90_15['super_95_ttc'] - prix_mensuel_carburants_90_15['super_95_ht']) /
-    prix_mensuel_carburants_90_15['super_95_ht']
+    (prix_mensuel_carburants_90_15['super_95_ttc'] - prix_mensuel_carburants_90_15['super_95_ht'])
+    / prix_mensuel_carburants_90_15['super_95_ht']
     )
 
 # Changement des noms des variables pour être plus explicites

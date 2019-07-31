@@ -91,8 +91,8 @@ if __name__ == '__main__':
         (df_reforme['precarite_logement'] * df_reforme['precarite_transport'])
         )
     df_reforme['precarite_joint'] = (
-        df_reforme['precarite_logement'] + df_reforme['precarite_transport'] -
-        (df_reforme['precarite_logement'] * df_reforme['precarite_transport'])
+        df_reforme['precarite_logement'] + df_reforme['precarite_transport']
+        - (df_reforme['precarite_logement'] * df_reforme['precarite_transport'])
         )
 
     variables_precarite = ['brde_m2_logement_rev_disponible', 'tee_10_3_rev_disponible_logement',

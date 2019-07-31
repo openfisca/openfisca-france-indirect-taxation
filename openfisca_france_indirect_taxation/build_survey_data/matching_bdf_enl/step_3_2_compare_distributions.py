@@ -413,12 +413,12 @@ results_ocde10 = check_ocde10()
 def check_part_energies_revtot(data_bdf, data_enl):
     results = dict()
     results['Average - BdF'] = (
-        100 * (data_bdf['part_energies_revtot'] * data_bdf['pondmen']).sum() /
-        data_bdf['pondmen'].sum()
+        100 * (data_bdf['part_energies_revtot'] * data_bdf['pondmen']).sum()
+        / data_bdf['pondmen'].sum()
         )
     results['Average - ENL'] = (
-        100 * (data_enl['part_energies_revtot'] * data_enl['pondmen']).sum() /
-        data_enl['pondmen'].sum()
+        100 * (data_enl['part_energies_revtot'] * data_enl['pondmen']).sum()
+        / data_enl['pondmen'].sum()
         )
     for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
         results['{} th quantile - BdF'.format(i)] = \
@@ -450,12 +450,12 @@ def check_postes_energies():
     results = dict()
     for i in ['electricite', 'gaz_ville', 'combustibles_liquides', 'combustibles_solides']:
         results['depenses_{} - BdF'.format(i)] = (
-            (data_bdf['depenses_{}'.format(i)] * data_bdf['pondmen']).sum() /
-            data_bdf['pondmen'].sum()
+            (data_bdf['depenses_{}'.format(i)] * data_bdf['pondmen']).sum()
+            / data_bdf['pondmen'].sum()
             )
         results['depenses_{} - ENL'.format(i)] = (
-            (data_enl['depenses_{}'.format(i)] * data_enl['pondmen']).sum() /
-            data_enl['pondmen'].sum()
+            (data_enl['depenses_{}'.format(i)] * data_enl['pondmen']).sum()
+            / data_enl['pondmen'].sum()
             )
 
         data_bdf['pondmen_{}'.format(i)] = 0
@@ -513,12 +513,12 @@ results_situacj = check_situa()[1]
 def check_surfhab_d():
     results = dict()
     results['Average - BdF'] = (
-        (data_bdf['surfhab_d'] * data_bdf['pondmen']).sum() /
-        data_bdf['pondmen'].sum()
+        (data_bdf['surfhab_d'] * data_bdf['pondmen']).sum()
+        / data_bdf['pondmen'].sum()
         )
     results['Average - ENL'] = (
-        (data_enl['surfhab_d'] * data_enl['pondmen']).sum() /
-        data_enl['pondmen'].sum()
+        (data_enl['surfhab_d'] * data_enl['pondmen']).sum()
+        / data_enl['pondmen'].sum()
         )
     for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
         results['{} th quantile - BdF'.format(i)] = \

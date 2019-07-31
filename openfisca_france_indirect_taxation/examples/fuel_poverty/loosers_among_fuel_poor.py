@@ -48,13 +48,13 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
 
     # for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
     menages_reforme['Cost_after_green_cheques_{}'.format(reforme)] = (
-        contribution_unite_conso * menages_reforme['ocde10'] -
-        (menages_reforme['total_taxes_energies'] - menages_reference['total_taxes_energies'])
+        contribution_unite_conso * menages_reforme['ocde10']
+        - (menages_reforme['total_taxes_energies'] - menages_reference['total_taxes_energies'])
         )
 
     menages_reforme['precaire_energetique'] = (
-        menages_reforme['precarite_energetique_rev_disponible'] + menages_reforme['precarite_transports_rev_disponible'] -
-        (menages_reforme['precarite_energetique_rev_disponible'] * menages_reforme['precarite_transports_rev_disponible'])
+        menages_reforme['precarite_energetique_rev_disponible'] + menages_reforme['precarite_transports_rev_disponible']
+        - (menages_reforme['precarite_energetique_rev_disponible'] * menages_reforme['precarite_transports_rev_disponible'])
         )
     menages_reforme = menages_reforme.query('precaire_energetique == 1')
 

@@ -110,13 +110,13 @@ def histogram_froid_4_criteres_niveau_vie_decile(data_matched, data_enl, categor
 
         part_enl = (
             100
-            * sum(data_enl_decile['pondmen'] * (data_enl_decile['froid_4_criteres'] == 1)) /
-            sum(data_enl_decile['pondmen'])
+            * sum(data_enl_decile['pondmen'] * (data_enl_decile['froid_4_criteres'] == 1))
+            / sum(data_enl_decile['pondmen'])
             )
         part_matched = (
             100
-            * sum(data_matched_decile['pondmen'] * (data_matched_decile['froid_4_criteres'] == 1)) /
-            sum(data_matched_decile['pondmen'])
+            * sum(data_matched_decile['pondmen'] * (data_matched_decile['froid_4_criteres'] == 1))
+            / sum(data_matched_decile['pondmen'])
             )
 
         list_values_matched.append(part_matched)

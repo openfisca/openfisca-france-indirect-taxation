@@ -96,14 +96,14 @@ def create_donation_classes():
                     if i < 5:
                         for j in [0, 1]:
                             data.loc[
-                                (data['aides_logement'] == j) & (data['niveau_vie_decile'] == i) &
-                                (data['bat_av_49'] == bat_1) & (data['bat_49_74'] == bat_2),
+                                (data['aides_logement'] == j) & (data['niveau_vie_decile'] == i)
+                                & (data['bat_av_49'] == bat_1) & (data['bat_49_74'] == bat_2),
                                 'donation_class_4'
                                 ] = '{}_{}_{}'.format(i, bat_1, bat_2, j)
                     else:
                         data.loc[
-                            (data['niveau_vie_decile'] == i) & (data['bat_av_49'] == bat_1) &
-                            (data['bat_49_74'] == bat_2),
+                            (data['niveau_vie_decile'] == i) & (data['bat_av_49'] == bat_1)
+                            & (data['bat_49_74'] == bat_2),
                             'donation_class_4'
                             ] = '{}_{}_{}'.format(i, bat_1, bat_2)
 

@@ -42,8 +42,8 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
             ((df_reform['total_taxes_energies']) - (df_reference['total_taxes_energies'])) / df_reform['depenses_tot']
             )
         df_reform['Additional effort rate on TICPE reform - income'] = (
-            ((df_reform['total_taxes_energies']) - (df_reference['total_taxes_energies'])) /
-            df_reform['rev_disp_loyerimput']
+            ((df_reform['total_taxes_energies']) - (df_reference['total_taxes_energies']))
+            / df_reform['rev_disp_loyerimput']
             )
 
         # Réalisation de graphiques

@@ -42,12 +42,12 @@ def calage_depenses_from_distance(data_matched):
         for rur in [0, 1]:
             data_matched_group = data_matched.query('niveau_vie_decile == {}'.format(i)).query('rural == {}'.format(rur))
             avg_distance = (
-                sum(data_matched_group['distance'] * data_matched_group['pondmen']) /
-                data_matched_group['pondmen'].sum()
+                sum(data_matched_group['distance'] * data_matched_group['pondmen'])
+                / data_matched_group['pondmen'].sum()
                 )
             avg_depenses = (
-                sum(data_matched_group['poste_07_2_2_1_1'] * data_matched_group['pondmen']) /
-                data_matched_group['pondmen'].sum()
+                sum(data_matched_group['poste_07_2_2_1_1'] * data_matched_group['pondmen'])
+                / data_matched_group['pondmen'].sum()
                 )
 
             data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_carburants_corrigees_entd'] = \

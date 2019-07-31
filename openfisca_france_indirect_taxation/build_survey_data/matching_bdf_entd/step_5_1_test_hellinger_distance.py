@@ -89,14 +89,14 @@ def hellinger_distance_annuelle(data_matched, data_entd):
     distribution_matched = dict()
     for i in range(0, 101):
         j = float(i) / 100
-        distribution_matched['{}'.format(j)] = (data_matched.query('distance_groupe == {}'.format(j))['pondmen'].sum() /
-                 data_matched['pondmen'].sum())
+        distribution_matched['{}'.format(j)] = (data_matched.query('distance_groupe == {}'.format(j))['pondmen'].sum()
+/ data_matched['pondmen'].sum())
 
     distribution_entd = dict()
     for i in range(0, 101):
         j = float(i) / 100
-        distribution_entd['{}'.format(j)] = (data_entd.query('distance_groupe == {}'.format(j))['pondmen'].sum() /
-                 data_entd['pondmen'].sum())
+        distribution_entd['{}'.format(j)] = (data_entd.query('distance_groupe == {}'.format(j))['pondmen'].sum()
+/ data_entd['pondmen'].sum())
 
     hellinger_distance = hellinger(list(distribution_matched.values()), list(distribution_entd.values()))
 
@@ -119,14 +119,14 @@ def hellinger_distance_diesel_annuelle(data_matched, data_entd):
     distribution_matched = dict()
     for i in range(0, 101):
         j = float(i) / 100
-        distribution_matched['{}'.format(j)] = (data_matched.query('distance_diesel_groupe == {}'.format(j))['pondmen'].sum() /
-                 data_matched['pondmen'].sum())
+        distribution_matched['{}'.format(j)] = (data_matched.query('distance_diesel_groupe == {}'.format(j))['pondmen'].sum()
+/ data_matched['pondmen'].sum())
 
     distribution_entd = dict()
     for i in range(0, 101):
         j = float(i) / 100
-        distribution_entd['{}'.format(j)] = (data_entd.query('distance_diesel_groupe == {}'.format(j))['pondmen'].sum() /
-                 data_entd['pondmen'].sum())
+        distribution_entd['{}'.format(j)] = (data_entd.query('distance_diesel_groupe == {}'.format(j))['pondmen'].sum()
+/ data_entd['pondmen'].sum())
 
     hellinger_distance_diesel = hellinger(list(distribution_matched.values()), list(distribution_entd.values()))
 
@@ -149,14 +149,14 @@ def hellinger_distance_essence_annuelle(data_matched, data_entd):
     distribution_matched = dict()
     for i in range(0, 101):
         j = float(i) / 100
-        distribution_matched['{}'.format(j)] = (data_matched.query('distance_essence_groupe == {}'.format(j))['pondmen'].sum() /
-                 data_matched['pondmen'].sum())
+        distribution_matched['{}'.format(j)] = (data_matched.query('distance_essence_groupe == {}'.format(j))['pondmen'].sum()
+/ data_matched['pondmen'].sum())
 
     distribution_entd = dict()
     for i in range(0, 101):
         j = float(i) / 100
-        distribution_entd['{}'.format(j)] = (data_entd.query('distance_essence_groupe == {}'.format(j))['pondmen'].sum() /
-                 data_entd['pondmen'].sum())
+        distribution_entd['{}'.format(j)] = (data_entd.query('distance_essence_groupe == {}'.format(j))['pondmen'].sum()
+/ data_entd['pondmen'].sum())
 
     hellinger_distance_essence = hellinger(list(distribution_matched.values()), list(distribution_entd.values()))
 
@@ -181,8 +181,8 @@ def hellinger_distance_annuelle_niveau_vie_decile(data_matched, data_entd):
         for i in range(0, 11):
             j = float(i) / 10
             distribution_matched['{} - {}'.format(d, j)] = (
-                (data_matched.query('niveau_vie_decile == {}'.format(d)).query('distance_groupe == {}'.format(j))['pondmen']).sum() /
-                data_matched['pondmen'].sum()
+                (data_matched.query('niveau_vie_decile == {}'.format(d)).query('distance_groupe == {}'.format(j))['pondmen']).sum()
+                / data_matched['pondmen'].sum()
                 )
 
     distribution_entd = dict()
@@ -190,8 +190,8 @@ def hellinger_distance_annuelle_niveau_vie_decile(data_matched, data_entd):
         for i in range(0, 11):
             j = float(i) / 10
             distribution_entd['{} - {}'.format(d, j)] = (
-                (data_entd.query('niveau_vie_decile == {}'.format(d)).query('distance_groupe == {}'.format(j))['pondmen']).sum() /
-                data_entd['pondmen'].sum()
+                (data_entd.query('niveau_vie_decile == {}'.format(d)).query('distance_groupe == {}'.format(j))['pondmen']).sum()
+                / data_entd['pondmen'].sum()
                 )
 
     hellinger_distance = hellinger(list(distribution_matched.values()), list(distribution_entd.values()))
@@ -217,8 +217,8 @@ def hellinger_distance_annuelle_tuu(data_matched, data_entd):
         for i in range(0, 11):
             j = float(i) / 10
             distribution_matched['{} - {}'.format(t, j)] = (
-                (data_matched.query('tuu == {}'.format(t)).query('distance_groupe == {}'.format(j))['pondmen']).sum() /
-                data_matched['pondmen'].sum()
+                (data_matched.query('tuu == {}'.format(t)).query('distance_groupe == {}'.format(j))['pondmen']).sum()
+                / data_matched['pondmen'].sum()
                 )
 
     distribution_entd = dict()
@@ -226,8 +226,8 @@ def hellinger_distance_annuelle_tuu(data_matched, data_entd):
         for i in range(0, 11):
             j = float(i) / 10
             distribution_entd['{} - {}'.format(t, j)] = (
-                (data_entd.query('tuu == {}'.format(t)).query('distance_groupe == {}'.format(j))['pondmen']).sum() /
-                data_entd['pondmen'].sum()
+                (data_entd.query('tuu == {}'.format(t)).query('distance_groupe == {}'.format(j))['pondmen']).sum()
+                / data_entd['pondmen'].sum()
                 )
 
     hellinger_distance = hellinger(list(distribution_matched.values()), list(distribution_entd.values()))

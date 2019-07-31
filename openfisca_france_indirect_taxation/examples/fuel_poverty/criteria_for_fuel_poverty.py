@@ -109,8 +109,8 @@ for i in range(1, 11):
     data_matched_random_decile = data_matched_random.query('niveau_vie_decile == {}'.format(i))
     print((i, "-", (
         100 * sum(data_matched_random_decile['pondmen']
-* (data_matched_random_decile['aise_froid_cout'] == 1)) /
-        sum(data_matched_random_decile['pondmen'])
+* (data_matched_random_decile['aise_froid_cout'] == 1))
+        / sum(data_matched_random_decile['pondmen'])
         )))
 
 
@@ -128,8 +128,8 @@ for i in range(1, 11):
     data_matched_random_decile = data_matched_random.query('niveau_vie_decile == {}'.format(i))
     print((i, "-", (
         100 * sum(data_matched_random_decile['pondmen']
-* (data_matched_random_decile['part_energies_revtot'] > 0.15)) /
-        sum(data_matched_random_decile['pondmen'])
+* (data_matched_random_decile['part_energies_revtot'] > 0.15))
+        / sum(data_matched_random_decile['pondmen'])
         )))
 
 
@@ -147,8 +147,8 @@ for i in range(1, 11):
     data_matched_random_decile = data_matched_random.query('niveau_vie_decile == {}'.format(i))
     print((i, "-", (
         100 * sum(data_matched_random_decile['pondmen']
-* (data_matched_random_decile['part_energies_revtot'] > 0.1)) /
-        sum(data_matched_random_decile['pondmen'])
+* (data_matched_random_decile['part_energies_revtot'] > 0.1))
+        / sum(data_matched_random_decile['pondmen'])
         )))
 
 
@@ -166,8 +166,8 @@ for i in range(1, 11):
     data_matched_random_decile = data_matched_random.query('niveau_vie_decile == {}'.format(i))
     print((i, "-", (
         100 * sum(data_matched_random_decile['pondmen']
-* (data_matched_random_decile['part_energies_depenses_tot'] > 0.15)) /
-        sum(data_matched_random_decile['pondmen'])
+* (data_matched_random_decile['part_energies_depenses_tot'] > 0.15))
+        / sum(data_matched_random_decile['pondmen'])
         )))
 
 
@@ -185,6 +185,6 @@ for i in range(1, 11):
     data_matched_random_decile = data_matched_random.query('niveau_vie_decile == {}'.format(i))
     print((i, "-", (
         100 * sum(data_matched_random_decile['pondmen']
-* (data_matched_random_decile['part_energies_depenses_tot'] > 0.1)) /
-        sum(data_matched_random_decile['pondmen'])
+* (data_matched_random_decile['part_energies_depenses_tot'] > 0.1))
+        / sum(data_matched_random_decile['pondmen'])
         )))

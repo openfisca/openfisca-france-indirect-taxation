@@ -572,8 +572,8 @@ def get_adjusted_input_data_frame(reform_key = None, verbose = False):
         try:
             if bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'] != 0:
                 input_data_frame.loc[selection, poste] = (
-                    bdf_adjusted_expenditures.loc[(age, revenus, poste), 'adjusted_bdf_budget_share'] /
-                    bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share']
+                    bdf_adjusted_expenditures.loc[(age, revenus, poste), 'adjusted_bdf_budget_share']
+                    / bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share']
                     * input_data_frame.loc[selection, poste]
                     )
         except Exception:

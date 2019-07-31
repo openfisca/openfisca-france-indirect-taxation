@@ -270,8 +270,16 @@ def build_df_calee_on_grospostes(dataframe, year_calage = None, year_data = None
         year_calage = year_data
     depenses_calees = build_depenses_calees(dataframe, year_calage, year_data)
     revenus_cales = build_revenus_cales(dataframe, year_calage, year_data)
-    var_list = [variable for variable in dataframe.columns if variable[:5] != 'poste' and variable != 'loyer_impute' and
-        variable != 'rev_disponible' and variable != 'rev_disp_loyerimput' and variable != 'pondmen']
+    var_list = [
+        variable for variable in dataframe.columns
+        if (
+            variable[:5] != 'poste'
+            and variable != 'loyer_impute'
+            and variable != 'rev_disponible'
+            and variable != 'rev_disp_loyerimput'
+            and variable != 'pondmen'
+            )
+        ]
     autres_variables = dataframe[var_list]
     dataframe_calee = concat([depenses_calees, revenus_cales, autres_variables], axis = 1)
 

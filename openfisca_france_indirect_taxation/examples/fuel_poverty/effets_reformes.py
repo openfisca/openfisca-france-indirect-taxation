@@ -75,16 +75,16 @@ def effets_reformes_precarite(reforme, year, data_year):
             menages_reforme = brde(menages_reforme, 'depenses_energies_logement_ajustees_{}'.format(reforme), 'depenses_tot', 'logement')
 
             dict_logement['brde - {0} - {1}'.format(reforme, redistribution)] = float(
-                (menages_reforme['brde_m2_logement_depenses_tot'] * menages_reforme['pondmen']).sum() -
-                (menages_reference['brde_m2_logement_depenses_tot'] * menages_reference['pondmen']).sum()
+                (menages_reforme['brde_m2_logement_depenses_tot'] * menages_reforme['pondmen']).sum()
+                - (menages_reference['brde_m2_logement_depenses_tot'] * menages_reference['pondmen']).sum()
                 ) / menages_reference.query('brde_m2_logement_depenses_tot == 1')['pondmen'].sum()
 
         menages_use_baseline = brde(menages_reference, 'depenses_carburants_corrigees', 'depenses_tot', 'transport')
         menages_reforme = brde(menages_reforme, 'depenses_carburants_corrigees_ajustees_{}'.format(reforme), 'depenses_tot', 'transport')
 
         dict_transport['brde - {0} - {1}'.format(reforme, redistribution)] = float(
-            (menages_reforme['brde_m2_transport_depenses_tot'] * menages_reforme['pondmen']).sum() -
-            (menages_reference['brde_m2_transport_depenses_tot'] * menages_reference['pondmen']).sum()
+            (menages_reforme['brde_m2_transport_depenses_tot'] * menages_reforme['pondmen']).sum()
+            - (menages_reference['brde_m2_transport_depenses_tot'] * menages_reference['pondmen']).sum()
             ) / menages_reference.query('brde_m2_transport_depenses_tot == 1')['pondmen'].sum()
 
         # Compute TEE
@@ -92,16 +92,16 @@ def effets_reformes_precarite(reforme, year, data_year):
             menages_use_baseline = tee_10_3(menages_reference, 'depenses_energies_logement', 'depenses_tot', 'logement')
             menages_reforme = tee_10_3(menages_reforme, 'depenses_energies_logement_ajustees_{}'.format(reforme), 'depenses_tot', 'logement')
             dict_logement['tee - {0} - {1}'.format(reforme, redistribution)] = float(
-                (menages_reforme['tee_10_3_depenses_tot_logement'] * menages_reforme['pondmen']).sum() -
-                (menages_reference['tee_10_3_depenses_tot_logement'] * menages_reference['pondmen']).sum()
+                (menages_reforme['tee_10_3_depenses_tot_logement'] * menages_reforme['pondmen']).sum()
+                - (menages_reference['tee_10_3_depenses_tot_logement'] * menages_reference['pondmen']).sum()
                 ) / menages_reference.query('tee_10_3_depenses_tot_logement == 1')['pondmen'].sum()
 
         menages_use_baseline = tee_10_3(menages_reference, 'depenses_carburants_corrigees', 'depenses_tot', 'transport')
         menages_reforme = tee_10_3(menages_reforme, 'depenses_carburants_corrigees_ajustees_{}'.format(reforme), 'depenses_tot', 'transport')
 
         dict_transport['tee - {0} - {1}'.format(reforme, redistribution)] = float(
-            (menages_reforme['tee_10_3_depenses_tot_transport'] * menages_reforme['pondmen']).sum() -
-            (menages_reference['tee_10_3_depenses_tot_transport'] * menages_reference['pondmen']).sum()
+            (menages_reforme['tee_10_3_depenses_tot_transport'] * menages_reforme['pondmen']).sum()
+            - (menages_reference['tee_10_3_depenses_tot_transport'] * menages_reference['pondmen']).sum()
             ) / menages_reference.query('tee_10_3_depenses_tot_transport == 1')['pondmen'].sum()
 
         # Compute precarite
@@ -110,8 +110,8 @@ def effets_reformes_precarite(reforme, year, data_year):
             menages_reforme = precarite(menages_reforme, 'brde_m2_logement_depenses_tot', 'tee_10_3_depenses_tot_logement', 'logement')
 
             dict_logement['precarite - {0} - {1}'.format(reforme, redistribution)] = float(
-                (menages_reforme['precarite_logement'] * menages_reforme['pondmen']).sum() -
-                (menages_reference['precarite_logement'] * menages_reference['pondmen']).sum()
+                (menages_reforme['precarite_logement'] * menages_reforme['pondmen']).sum()
+                - (menages_reference['precarite_logement'] * menages_reference['pondmen']).sum()
                 ) / menages_reference.query('precarite_logement == 1')['pondmen'].sum()
 
         menages_use_baseline = precarite(menages_reference, 'brde_m2_transport_depenses_tot', 'tee_10_3_depenses_tot_transport', 'transport')
@@ -125,25 +125,25 @@ def effets_reformes_precarite(reforme, year, data_year):
                 (menages_reforme['precarite_logement'] * menages_reforme['precarite_transport'])
                 )
             menages_reference['precarite_joint'] = (
-                menages_reference['precarite_logement'] + menages_reference['precarite_transport'] -
-                (menages_reference['precarite_logement'] * menages_reference['precarite_transport'])
+                menages_reference['precarite_logement'] + menages_reference['precarite_transport']
+                - (menages_reference['precarite_logement'] * menages_reference['precarite_transport'])
                 )
             menages_reforme['precarite_joint'] = (
-                menages_reforme['precarite_logement'] + menages_reforme['precarite_transport'] -
-                (menages_reforme['precarite_logement'] * menages_reforme['precarite_transport'])
+                menages_reforme['precarite_logement'] + menages_reforme['precarite_transport']
+                - (menages_reforme['precarite_logement'] * menages_reforme['precarite_transport'])
                 )
             dict_double['precarite - {0} - {1}'.format(reforme, redistribution)] = float(
-                (menages_reforme['double_precaire'] * menages_reforme['pondmen']).sum() -
-                (menages_reference['double_precaire'] * menages_reference['pondmen']).sum()
+                (menages_reforme['double_precaire'] * menages_reforme['pondmen']).sum()
+                - (menages_reference['double_precaire'] * menages_reference['pondmen']).sum()
                 ) / menages_reference.query('double_precaire == 1')['pondmen'].sum()
             dict_joint['precarite - {0} - {1}'.format(reforme, redistribution)] = float(
-                (menages_reforme['precarite_joint'] * menages_reforme['pondmen']).sum() -
-                (menages_reference['precarite_joint'] * menages_reference['pondmen']).sum()
+                (menages_reforme['precarite_joint'] * menages_reforme['pondmen']).sum()
+                - (menages_reference['precarite_joint'] * menages_reference['pondmen']).sum()
                 ) / menages_reference.query('precarite_joint == 1')['pondmen'].sum()
 
         dict_transport['precarite - {0} - {1}'.format(reforme, redistribution)] = float(
-            (menages_reforme['precarite_transport'] * menages_reforme['pondmen']).sum() -
-            (menages_reference['precarite_transport'] * menages_reference['pondmen']).sum()
+            (menages_reforme['precarite_transport'] * menages_reforme['pondmen']).sum()
+            - (menages_reference['precarite_transport'] * menages_reference['pondmen']).sum()
             ) / menages_reference.query('precarite_transport == 1')['pondmen'].sum()
 
     return dict_logement, dict_transport, dict_double, dict_joint

@@ -107,8 +107,8 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
 
     if selection.any():  # la coicop existe
         filled_start_stop = (
-            (coicop_nomenclature.loc[selection, 'start'].unique() != 0).any() or
-            (coicop_nomenclature.loc[selection, 'stop'].unique() != 0).any()
+            (coicop_nomenclature.loc[selection, 'start'].unique() != 0).any()
+            or (coicop_nomenclature.loc[selection, 'stop'].unique() != 0).any()
             )
         if not filled_start_stop:
             coicop_nomenclature.loc[selection, 'start'] = 1994
