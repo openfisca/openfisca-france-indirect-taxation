@@ -88,8 +88,8 @@ class depenses_diesel(YearlyVariable):
         depenses_diesel = depenses_carburants * (
             (nombre_vehicules_total == 0) * (
                 conso_totale_vp_diesel / (conso_totale_vp_diesel + conso_totale_vp_essence)
-                ) +
-            (nombre_vehicules_total != 0) * part_conso_diesel
+                )
+            + (nombre_vehicules_total != 0) * part_conso_diesel
             )
 
         return depenses_diesel
@@ -249,8 +249,8 @@ class depenses_electricite_prix_unitaire(YearlyVariable):
             parameters(period.start).tarifs_energie.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
 
         prix_unitaire = (
-            (depenses_electricite_percentile < 4) * prix_unitaire_3kva +
-            (depenses_electricite_percentile > 4) * prix_unitaire_6kva
+            (depenses_electricite_percentile < 4) * prix_unitaire_3kva
+            + (depenses_electricite_percentile > 4) * prix_unitaire_6kva
             )
 
         return prix_unitaire
@@ -287,11 +287,11 @@ class depenses_electricite_tarif_fixe(YearlyVariable):
             parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
 
         tarif_fixe = (
-            (depenses_electricite_percentile < 4) * tarif_fixe_3kva +
-            (depenses_electricite_percentile > 4) * (depenses_electricite_percentile < 52) * tarif_fixe_6kva +
-            (depenses_electricite_percentile > 52) * (depenses_electricite_percentile < 78) * tarif_fixe_9kva +
-            (depenses_electricite_percentile > 78) * (depenses_electricite_percentile < 88) * tarif_fixe_12kva +
-            (depenses_electricite_percentile > 88) * tarif_fixe_15kva
+            (depenses_electricite_percentile < 4) * tarif_fixe_3kva
+            + (depenses_electricite_percentile > 4) * (depenses_electricite_percentile < 52) * tarif_fixe_6kva
+            + (depenses_electricite_percentile > 52) * (depenses_electricite_percentile < 78) * tarif_fixe_9kva
+            + (depenses_electricite_percentile > 78) * (depenses_electricite_percentile < 88) * tarif_fixe_12kva
+            + (depenses_electricite_percentile > 88) * tarif_fixe_15kva
             )
 
         return tarif_fixe
@@ -324,8 +324,8 @@ class depenses_energies_logement(YearlyVariable):
         depenses_combustibles_solides = menage('depenses_combustibles_solides', period)
         depenses_energie_thermique = menage('depenses_energie_thermique', period)
         depenses_energies_logement = (
-            depenses_electricite + depenses_gaz_ville + depenses_gaz_liquefie + depenses_combustibles_liquides +
-            depenses_combustibles_solides + depenses_energie_thermique
+            depenses_electricite + depenses_gaz_ville + depenses_gaz_liquefie + depenses_combustibles_liquides
+            + depenses_combustibles_solides + depenses_energie_thermique
             )
 
         return depenses_energies_logement
@@ -464,10 +464,10 @@ class depenses_gaz_prix_unitaire(YearlyVariable):
             parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.prix_unitaire_gdf_ttc.prix_kwh_b2i_ttc
 
         prix_unitaire_optimal = (
-            (quantite_base == quantite_optimale) * prix_unitaire_base +
-            (quantite_b0 == quantite_optimale) * prix_unitaire_b0 +
-            (quantite_b1 == quantite_optimale) * prix_unitaire_b1 +
-            (quantite_b2i == quantite_optimale) * (quantite_b1 != quantite_optimale) * prix_unitaire_b2i
+            (quantite_base == quantite_optimale) * prix_unitaire_base
+            + (quantite_b0 == quantite_optimale) * prix_unitaire_b0
+            + (quantite_b1 == quantite_optimale) * prix_unitaire_b1
+            + (quantite_b2i == quantite_optimale) * (quantite_b1 != quantite_optimale) * prix_unitaire_b2i
             )
 
         return prix_unitaire_optimal
@@ -506,10 +506,10 @@ class depenses_gaz_tarif_fixe(YearlyVariable):
             parameters(period.start).tarifs_energie.tarifs_reglementes_gdf.tarif_fixe_gdf_ttc.b2i_30000
 
         tarif_fixe_optimal = (
-            (quantite_base == quantite_optimale) * tarif_fixe_base +
-            (quantite_b0 == quantite_optimale) * tarif_fixe_b0 +
-            (quantite_b1 == quantite_optimale) * tarif_fixe_b1 +
-            (quantite_b2i == quantite_optimale) * (quantite_b1 != quantite_optimale) * tarif_fixe_b2i
+            (quantite_base == quantite_optimale) * tarif_fixe_base
+            + (quantite_b0 == quantite_optimale) * tarif_fixe_b0
+            + (quantite_b1 == quantite_optimale) * tarif_fixe_b1
+            + (quantite_b2i == quantite_optimale) * (quantite_b1 != quantite_optimale) * tarif_fixe_b2i
             )
 
         return tarif_fixe_optimal

@@ -85,10 +85,10 @@ def change_quantities_by_categ(df_reforme, group):
         df_by_categ['change_in_gaz_ville'][i] = change_in_gaz_ville
 
     df_to_plot = df_by_categ[
-        ['change_in_diesel'] +
-        ['change_in_essence'] +
-        ['change_in_combustibles_liquides'] +
-        ['change_in_gaz_ville']
+        ['change_in_diesel']
+        + ['change_in_essence']
+        + ['change_in_combustibles_liquides']
+        + ['change_in_gaz_ville']
         ]
     graph_builder_bar_percent(df_to_plot)
 
@@ -154,10 +154,10 @@ def change_quantities_among_consumers_by_categ(df_reforme, group):
         df_by_categ['change_in_gaz_ville'][i] = change_in_gaz_ville
 
     df_to_plot = df_by_categ[
-        ['change_in_diesel'] +
-        ['change_in_essence'] +
-        ['change_in_combustibles_liquides'] +
-        ['change_in_gaz_ville']
+        ['change_in_diesel']
+        + ['change_in_essence']
+        + ['change_in_combustibles_liquides']
+        + ['change_in_gaz_ville']
         ]
     graph_builder_bar_percent(df_to_plot)
     save_dataframe_to_graph(df_to_plot, 'Quantities/change_in_quantities_by_{}.csv'.format(group))

@@ -114,10 +114,10 @@ class eligibilite_tarifs_sociaux_energies(YearlyVariable):
         npers = menage('npers', period)
 
         eligible = (
-            1 * (revenu < 8653) * (npers == 1) +
-            1 * (revenu < 12980) * (npers == 2) +
-            1 * (revenu < 15576) * (npers == 3) +
-            1 * (revenu < 18172 + ((npers - 4) * 3461.26)) * ((npers == 4) + (npers > 4))
+            1 * (revenu < 8653) * (npers == 1)
+            + 1 * (revenu < 12980) * (npers == 2)
+            + 1 * (revenu < 15576) * (npers == 3)
+            + 1 * (revenu < 18172 + ((npers - 4) * 3461.26)) * ((npers == 4) + (npers > 4))
             )
 
         return eligible
@@ -274,15 +274,15 @@ class tarifs_sociaux_electricite(YearlyVariable):
         kva_6 = 1 * (depenses_electricite_percentile > 4) * (depenses_electricite_percentile < 52)
         kva_9 = 1 * (depenses_electricite_percentile > 52)
         tarifs_sociaux = eligible * (
-            kva_3 * (uc_1 * 71 + uc_1_2 * 88 + uc_2 * 106) +
-            kva_6 * (uc_1 * 87 + uc_1_2 * 109 + uc_2 * 131) +
-            kva_9 * (uc_1 * 94 + uc_1_2 * 117 + uc_2 * 140)
+            kva_3 * (uc_1 * 71 + uc_1_2 * 88 + uc_2 * 106)
+            + kva_6 * (uc_1 * 87 + uc_1_2 * 109 + uc_2 * 131)
+            + kva_9 * (uc_1 * 94 + uc_1_2 * 117 + uc_2 * 140)
             )
 
         depenses_electricite = menage('depenses_electricite', period)
         tarifs_sociaux = (
-            tarifs_sociaux * (tarifs_sociaux < depenses_electricite) +
-            depenses_electricite * (tarifs_sociaux > depenses_electricite)
+            tarifs_sociaux * (tarifs_sociaux < depenses_electricite)
+            + depenses_electricite * (tarifs_sociaux > depenses_electricite)
             ) * eligible
 
         return tarifs_sociaux
@@ -311,15 +311,15 @@ class tarifs_sociaux_gaz(YearlyVariable):
         b0 = 1 * (depenses_gaz_prix_unitaire == prix_unitaire_b0)
         b1 = 1 * (depenses_gaz_prix_unitaire == prix_unitaire_b1)
         tarifs_sociaux = eligible * (
-            base * (uc_1 * 23 + uc_1_2 * 30 + uc_2 * 38) +
-            b0 * (uc_1 * 72 + uc_1_2 * 95 + uc_2 * 117) +
-            b1 * (uc_1 * 123 + uc_1_2 * 153 + uc_2 * 185)
+            base * (uc_1 * 23 + uc_1_2 * 30 + uc_2 * 38)
+            + b0 * (uc_1 * 72 + uc_1_2 * 95 + uc_2 * 117)
+            + b1 * (uc_1 * 123 + uc_1_2 * 153 + uc_2 * 185)
             )
 
         depenses_gaz_ville = menage('depenses_gaz_ville', period)
         tarifs_sociaux = (
-            tarifs_sociaux * (tarifs_sociaux < depenses_gaz_ville) +
-            depenses_gaz_ville * (tarifs_sociaux > depenses_gaz_ville)
+            tarifs_sociaux * (tarifs_sociaux < depenses_gaz_ville)
+            + depenses_gaz_ville * (tarifs_sociaux > depenses_gaz_ville)
             ) * eligible
 
         return tarifs_sociaux

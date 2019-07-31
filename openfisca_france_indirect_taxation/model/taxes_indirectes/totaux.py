@@ -13,8 +13,8 @@ class taxes_indirectes_total(YearlyVariable):
         tva_total = menage('tva_total', period)
         taxes_indirectes_total_hors_tva = menage('taxes_indirectes_total_hors_tva', period)
         return (
-            tva_total +
-            taxes_indirectes_total_hors_tva
+            tva_total
+            + taxes_indirectes_total_hors_tva
             )
 
 
@@ -35,14 +35,14 @@ class taxes_indirectes_total_hors_tva(YearlyVariable):
         autres_assurances_taxe = menage('autres_assurances_taxe', period)
         ticpe = menage('ticpe_totale', period)
         return (
-            vin_droit_d_accise +
-            biere_droit_d_accise +
-            alcools_forts_droit_d_accise +
-            cigarette_droit_d_accise +
-            cigares_droit_d_accise +
-            tabac_a_rouler_droit_d_accise +
-            assurance_transport_taxe +
-            assurance_sante_taxe +
-            autres_assurances_taxe +
-            ticpe
+            vin_droit_d_accise
+            + biere_droit_d_accise
+            + alcools_forts_droit_d_accise
+            + cigarette_droit_d_accise
+            + cigares_droit_d_accise
+            + tabac_a_rouler_droit_d_accise
+            + assurance_transport_taxe
+            + assurance_sante_taxe
+            + autres_assurances_taxe
+            + ticpe
             )

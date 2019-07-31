@@ -47,15 +47,15 @@ simulated_variables = [
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
 df_reforme['gains_cheque_officiel'] = (
-    df_reforme['cheques_energie_officielle_2018_in_2016'] +
-    df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
+    df_reforme['cheques_energie_officielle_2018_in_2016']
+    + df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
     df_reforme['pertes_financieres_avant_redistribution_officielle_2018_in_2016']
     )
 df_reforme['perdant_total_cheque_officiel'] = 1 * (df_reforme['gains_cheque_officiel'] < 0)
 
 df_reforme['transfert_net_cheque_officiel'] = (
-    df_reforme['cheques_energie_officielle_2018_in_2016'] +
-    df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
+    df_reforme['cheques_energie_officielle_2018_in_2016']
+    + df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
     df_reforme['revenu_reforme_officielle_2018_in_2016']
     )
 df_reforme['perdant_fiscal_cheque_officiel'] = 1 * (df_reforme['transfert_net_cheque_officiel'] < 0)

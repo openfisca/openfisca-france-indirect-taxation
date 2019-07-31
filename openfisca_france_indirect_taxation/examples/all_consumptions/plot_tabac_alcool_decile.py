@@ -71,8 +71,8 @@ if __name__ == '__main__':
             / Wconcat['rev_disponible']
         list_alcool_tabac.append('part_alcool')
         Wconcat['part_tabac'] = \
-            (Wconcat['depenses_cigarettes'] + Wconcat['depenses_cigares'] +
-            Wconcat['depenses_tabac_a_rouler']) / Wconcat['rev_disponible']
+            (Wconcat['depenses_cigarettes'] + Wconcat['depenses_cigares']
++ Wconcat['depenses_tabac_a_rouler']) / Wconcat['rev_disponible']
         list_alcool_tabac.append('part_tabac')
 
         df_to_graph = Wconcat[list_alcool_tabac].copy()

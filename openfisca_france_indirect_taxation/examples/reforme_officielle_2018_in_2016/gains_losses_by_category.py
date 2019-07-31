@@ -39,8 +39,8 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
     df['gains_cheque_officiel'] = (
-        df['cheques_energie_officielle_2018_in_2016'] +
-        df['reste_transferts_neutre_officielle_2018_in_2016'] -
+        df['cheques_energie_officielle_2018_in_2016']
+        + df['reste_transferts_neutre_officielle_2018_in_2016'] -
         df['pertes_financieres_avant_redistribution_officielle_2018_in_2016']
         )
     df['gains_cheque_integral_inconditionnel'] = (
@@ -50,7 +50,7 @@ for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
 
     # Réalisation de graphiques
     graph_builder_bar(df[
-        ['gains_cheque_officiel'] +
-        ['gains_cheque_integral_inconditionnel']
+        ['gains_cheque_officiel']
+        + ['gains_cheque_integral_inconditionnel']
         ], False)
     #save_dataframe_to_graph(df, 'Expenditures/energy_expenditures_by_{}.csv'.format(category))

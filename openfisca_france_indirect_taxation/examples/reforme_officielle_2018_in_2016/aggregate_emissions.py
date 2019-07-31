@@ -115,40 +115,40 @@ emissions_rattrapage_integral['gaz_ville'] = 0
 
 # Total logement
 emissions_cce_seulement['total_logement'] = (
-    emissions_cce_seulement['gaz_ville'] +
-    emissions_cce_seulement['combustibles_liquides'] +
-    emissions_cce_seulement['electricite']
+    emissions_cce_seulement['gaz_ville']
+    + emissions_cce_seulement['combustibles_liquides']
+    + emissions_cce_seulement['electricite']
     )
 emissions_officielle['total_logement'] = (
-    emissions_officielle['gaz_ville'] +
-    emissions_officielle['combustibles_liquides'] +
-    emissions_officielle['electricite']
+    emissions_officielle['gaz_ville']
+    + emissions_officielle['combustibles_liquides']
+    + emissions_officielle['electricite']
     )
 emissions_officielle_plus_cspe['total_logement'] = (
-    emissions_officielle_plus_cspe['gaz_ville'] +
-    emissions_officielle_plus_cspe['combustibles_liquides'] +
-    emissions_officielle_plus_cspe['electricite']
+    emissions_officielle_plus_cspe['gaz_ville']
+    + emissions_officielle_plus_cspe['combustibles_liquides']
+    + emissions_officielle_plus_cspe['electricite']
     )
 emissions_rattrapage_integral['total_logement'] = (
-    emissions_rattrapage_integral['gaz_ville'] +
-    emissions_rattrapage_integral['combustibles_liquides'] +
-    emissions_rattrapage_integral['electricite']
+    emissions_rattrapage_integral['gaz_ville']
+    + emissions_rattrapage_integral['combustibles_liquides']
+    + emissions_rattrapage_integral['electricite']
     )
 
 # Total
 emissions_cce_seulement['total'] = (
-    emissions_cce_seulement['total_logement'] +
-    emissions_cce_seulement['carburants']
+    emissions_cce_seulement['total_logement']
+    + emissions_cce_seulement['carburants']
     )
 emissions_officielle['total'] = (
-    emissions_officielle['total_logement'] +
-    emissions_officielle['carburants']
+    emissions_officielle['total_logement']
+    + emissions_officielle['carburants']
     )
 emissions_officielle_plus_cspe['total'] = (
-    emissions_officielle_plus_cspe['total_logement'] +
-    emissions_officielle_plus_cspe['carburants']
+    emissions_officielle_plus_cspe['total_logement']
+    + emissions_officielle_plus_cspe['carburants']
     )
 emissions_rattrapage_integral['total'] = (
-    emissions_rattrapage_integral['total_logement'] +
-    emissions_rattrapage_integral['carburants']
+    emissions_rattrapage_integral['total_logement']
+    + emissions_rattrapage_integral['carburants']
     )

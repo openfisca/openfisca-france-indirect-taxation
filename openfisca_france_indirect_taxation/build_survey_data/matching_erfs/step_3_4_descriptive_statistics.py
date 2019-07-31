@@ -41,8 +41,8 @@ data_erfs['difference_position'] = (
     data_erfs['position_rev_disponible'] - data_erfs['position_revdecm']
     )
 print((
-    len(data_erfs.query('difference_position > 0.1')) +
-    len(data_erfs.query('difference_position < -0.1'))
+    len(data_erfs.query('difference_position > 0.1'))
+    + len(data_erfs.query('difference_position < -0.1'))
     ) / len(data_erfs))
 
 

@@ -73,8 +73,8 @@ simulated_variables = [
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
 df_reforme['transferts_nets_apres_redistribution_uc'] = (
-    df_reforme['cheques_energie_officielle_2018_in_2016'] +
-    df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
+    df_reforme['cheques_energie_officielle_2018_in_2016']
+    + df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
     df_reforme['revenu_reforme_officielle_2018_in_2016']
     ) / df_reforme['ocde10']
 

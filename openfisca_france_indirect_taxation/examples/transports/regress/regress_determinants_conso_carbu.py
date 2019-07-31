@@ -68,8 +68,8 @@ if __name__ == '__main__':
             liste_carburants_accise['accise majoree super plombe'].loc['{}'.format(year)] / 100
 
         data_simulation['quantite_diesel'] = data_simulation['diesel_ticpe'] / (value_accise_diesel)
-        data_simulation['quantite_sans_plomb'] = (data_simulation['sp95_ticpe'] + data_simulation['sp98_ticpe'] +
-            data_simulation['sp_e10_ticpe']) / (value_accise_sp)
+        data_simulation['quantite_sans_plomb'] = (data_simulation['sp95_ticpe'] + data_simulation['sp98_ticpe']
++ data_simulation['sp_e10_ticpe']) / (value_accise_sp)
         data_simulation['quantite_super_plombe'] = data_simulation['super_plombe_ticpe'] / (value_accise_super_plombe)
         del value_accise_diesel, value_accise_sp, value_accise_super_plombe, liste_carburants_accise
 
@@ -116,10 +116,10 @@ if __name__ == '__main__':
         data_households = pd.merge(data_simulation, prix_carbu, on = 'vag')
         del data_simulation, prix_carbu
 
-        data_households = data_households[['quantite_carbu'] + ['quantite_diesel'] + ['quantite_essence'] +
-            ['diesel_ttc'] + ['super_95_ttc'] + ['rev_disponible'] + ['rural'] + ['petite_villes'] +
-            ['villes_moyennes'] + ['grandes_villes'] + ['agglo_paris'] + ['nenfants'] + ['nadultes'] + ['ocde10'] +
-            ['situapr'] + ['situacj'] + ['poste_coicop_411'] + ['poste_coicop_412'] + ['poste_coicop_421']
+        data_households = data_households[['quantite_carbu'] + ['quantite_diesel'] + ['quantite_essence']
++ ['diesel_ttc'] + ['super_95_ttc'] + ['rev_disponible'] + ['rural'] + ['petite_villes']
+            + ['villes_moyennes'] + ['grandes_villes'] + ['agglo_paris'] + ['nenfants'] + ['nadultes'] + ['ocde10']
+            + ['situapr'] + ['situacj'] + ['poste_coicop_411'] + ['poste_coicop_412'] + ['poste_coicop_421']
             ].astype(float)
 
         # data_households contains all the variables we need for the regression. We can therefore implement it

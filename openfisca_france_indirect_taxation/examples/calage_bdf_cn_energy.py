@@ -45,16 +45,16 @@ def get_bdf_aggregates_energy(data_year = None):
         (depenses_energie['poste_04_5_1_1_1_b'] * depenses_energie['poste_04_5_2_1_1']) > 0
     depenses_energie['depenses_electricite_factures_jointes'] = (
         depenses_energie.query('factures_jointes_electricite_gaz == 1')['poste_04_5_1_1_1_b'].mean() /
-        (depenses_energie.query('factures_jointes_electricite_gaz == 1')['poste_04_5_1_1_1_b'].mean() +
-        depenses_energie.query('factures_jointes_electricite_gaz == 1')['poste_04_5_2_1_1'].mean())
+        (depenses_energie.query('factures_jointes_electricite_gaz == 1')['poste_04_5_1_1_1_b'].mean()
++ depenses_energie.query('factures_jointes_electricite_gaz == 1')['poste_04_5_2_1_1'].mean())
         ) * depenses_energie['poste_04_5_1_1_1_a']
     depenses_energie['depenses_electricite'] = (
         depenses_energie['poste_04_5_1_1_1_b'] + depenses_energie['depenses_electricite_factures_jointes']
         )
 
     depenses_energie['depenses_gaz_ville'] = (
-        depenses_energie['poste_04_5_2_1_1'] +
-        depenses_energie['poste_04_5_1_1_1_a'] -
+        depenses_energie['poste_04_5_2_1_1']
+        + depenses_energie['poste_04_5_1_1_1_a'] -
         depenses_energie['depenses_electricite_factures_jointes']
         )
 

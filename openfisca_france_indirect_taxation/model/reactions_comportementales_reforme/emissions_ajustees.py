@@ -17,8 +17,8 @@ class emissions_CO2_carburants_ajustees(YearlyVariable):
         emissions_essence = \
             parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
         emissions_ajustees = (
-            (quantites_diesel_ajustees * emissions_diesel) +
-            (quantites_essence_ajustees * emissions_essence)
+            (quantites_diesel_ajustees * emissions_diesel)
+            + (quantites_essence_ajustees * emissions_essence)
             )  # Source : Ademe
 
         return emissions_ajustees

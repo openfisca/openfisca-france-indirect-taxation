@@ -81,10 +81,10 @@ simulation_menages['revenu_disponible2'] = (simulation_menages['revenu_disponibl
 
 # Change parameters to fit new results
 simulation_menages['emissions'] = -233.6354 + (
-    (873.8949 * ocde10 - 1425.8345 * strate_1 + 172.7004 * strate_3 + 538.9584 * age_group_pr +
-    -50.8012 * age_group_pr_2 + -946.6144 * alone + 479.9245 * occupe_both + 4344.2562 * gaz + 8265.1751 * fioul) +
-    0.0403 * simulation_menages['revenu_disponible'] +
-    -1.715e-08 * (simulation_menages['revenu_disponible2'])
+    (873.8949 * ocde10 - 1425.8345 * strate_1 + 172.7004 * strate_3 + 538.9584 * age_group_pr
++ -50.8012 * age_group_pr_2 + -946.6144 * alone + 479.9245 * occupe_both + 4344.2562 * gaz + 8265.1751 * fioul)
+    + 0.0403 * simulation_menages['revenu_disponible']
+    + -1.715e-08 * (simulation_menages['revenu_disponible2'])
     )
 
 save_dataframe_to_graph(

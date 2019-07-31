@@ -60,8 +60,8 @@ df_reforme = energy_modes(df_reforme)
 def net_transfers_by_sub_group(df_reforme, group):
 
     df_reforme['transferts_nets_apres_redistribution_uc'] = (
-        df_reforme['cheques_energie_officielle_2018_in_2016'] +
-        df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
+        df_reforme['cheques_energie_officielle_2018_in_2016']
+        + df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
         df_reforme['revenu_reforme_officielle_2018_in_2016']
         ) / df_reforme['ocde10']
 

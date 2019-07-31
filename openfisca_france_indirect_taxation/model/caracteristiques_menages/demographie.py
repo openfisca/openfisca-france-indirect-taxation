@@ -31,12 +31,12 @@ class age_group_pr(YearlyVariable):
         age_group_pr = 0
         agepr = menage('agepr', period)
         age_group_pr = (
-            1 * (agepr < 30) +
-            2 * (agepr < 40) * (agepr > 29) +
-            3 * (agepr < 50) * (agepr > 39) +
-            4 * (agepr < 60) * (agepr > 49) +
-            5 * (agepr < 70) * (agepr > 59) +
-            6 * (agepr > 69)
+            1 * (agepr < 30)
+            + 2 * (agepr < 40) * (agepr > 29)
+            + 3 * (agepr < 50) * (agepr > 39)
+            + 4 * (agepr < 60) * (agepr > 49)
+            + 5 * (agepr < 70) * (agepr > 59)
+            + 6 * (agepr > 69)
             )
 
         return age_group_pr

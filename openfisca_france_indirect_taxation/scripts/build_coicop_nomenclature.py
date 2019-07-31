@@ -92,9 +92,9 @@ def build_raw_coicop_nomenclature():
             coicop_nomenclature = pd.merge(coicop_nomenclature, build_coicop_level_nomenclature(next_level), on = on)
 
     coicop_nomenclature = coicop_nomenclature[
-        ['code_coicop'] +
-        ['label_{}'.format(sub_level[:-1]) for sub_level in sub_levels] +
-        sub_levels
+        ['code_coicop']
+        + ['label_{}'.format(sub_level[:-1]) for sub_level in sub_levels]
+        + sub_levels
         ].copy()
 
     return coicop_nomenclature[['label_division', 'label_groupe', 'label_classe',

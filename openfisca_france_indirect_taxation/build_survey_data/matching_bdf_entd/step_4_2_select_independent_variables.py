@@ -18,8 +18,8 @@ data_entd = create_niveau_vie_quantiles()[0]
 
 data_entd['niveau_vie_2'] = data_entd['niveau_vie'] ** 2
 data_entd['distance'] = (
-    data_entd['distance_diesel'] + data_entd['distance_essence'] +
-    data_entd['distance_autre_carbu']
+    data_entd['distance_diesel'] + data_entd['distance_essence']
+    + data_entd['distance_autre_carbu']
     )
 
 stock_variables = ['agepr', 'age_vehicule', 'age_carte_grise', 'aides_logement',

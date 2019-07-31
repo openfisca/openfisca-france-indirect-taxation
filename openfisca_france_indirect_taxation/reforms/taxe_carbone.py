@@ -162,8 +162,8 @@ class taxe_carbone(Reform):
             # We do not want to input the expenditure of the contract for those who consume nothing
             depenses_electricite = menage('depenses_electricite', period)
             depenses_electricite_ajustees = (
-                depenses_electricite_ajustees * (depenses_electricite > min_tarif_fixe) +
-                depenses_electricite * (depenses_electricite < min_tarif_fixe)
+                depenses_electricite_ajustees * (depenses_electricite > min_tarif_fixe)
+                + depenses_electricite * (depenses_electricite < min_tarif_fixe)
                 )
 
             return depenses_electricite_ajustees
@@ -181,8 +181,8 @@ class taxe_carbone(Reform):
             depenses_combustibles_solides = menage('depenses_combustibles_solides', period)
             depenses_energie_thermique = menage('depenses_energie_thermique', period)
             depenses_energies_logement_ajustees_taxe_carbone = (
-                depenses_electricite_ajustees + depenses_gaz_ville_ajustees + depenses_gaz_liquefie +
-                depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
+                depenses_electricite_ajustees + depenses_gaz_ville_ajustees + depenses_gaz_liquefie
+                + depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
                 )
 
             return depenses_energies_logement_ajustees_taxe_carbone
@@ -347,8 +347,8 @@ class taxe_carbone(Reform):
             emissions_essence = \
                 parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
             emissions_ajustees = (
-                (quantites_diesel_ajustees * emissions_diesel) +
-                (quantites_essence_ajustees * emissions_essence)
+                (quantites_diesel_ajustees * emissions_diesel)
+                + (quantites_essence_ajustees * emissions_essence)
                 )  # Source : Ademe
 
             return emissions_ajustees
@@ -365,8 +365,8 @@ class taxe_carbone(Reform):
             emissions_gaz_ajustees = menage('emissions_CO2_gaz_ville', period)
 
             emissions_energies_ajustees = (
-                emissions_carburants_ajustees + emissions_electricite_ajustees +
-                emissions_combustibles_liquides_ajustees + emissions_gaz_ajustees
+                emissions_carburants_ajustees + emissions_electricite_ajustees
+                + emissions_combustibles_liquides_ajustees + emissions_gaz_ajustees
                 )
             return emissions_energies_ajustees
 

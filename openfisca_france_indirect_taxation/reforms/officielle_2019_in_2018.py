@@ -64,16 +64,16 @@ class officielle_2019_in_2018(Reform):
             revenu_fiscal_uc = revenu_fiscal / ocde10
 
             cheque = (
-                0 +
-                144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
-                190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
-                126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 > 1) * (ocde10 < 2) +
-                152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * ((ocde10 == 2) + (ocde10 > 2)) +
-                48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
-                63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
-                76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
+                0
+                + 144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1)
+                + 190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
+                + 227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
+                + 96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1)
+                + 126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 > 1) * (ocde10 < 2)
+                + 152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * ((ocde10 == 2) + (ocde10 > 2))
+                + 48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1)
+                + 63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2)
+                + 76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
                 )
 
             return cheque
@@ -89,16 +89,16 @@ class officielle_2019_in_2018(Reform):
             revenu_fiscal_uc = revenu_fiscal / ocde10
 
             cheque = (
-                0 +
-                144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
-                190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
-                126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 > 1) * (ocde10 < 2) +
-                152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * ((ocde10 == 2) + (ocde10 > 2)) +
-                48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
-                63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
-                76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
+                0
+                + 144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1)
+                + 190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
+                + 227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
+                + 96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1)
+                + 126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 > 1) * (ocde10 < 2)
+                + 152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * ((ocde10 == 2) + (ocde10 > 2))
+                + 48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1)
+                + 63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2)
+                + 76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
                 ) * (200 / 150)
 
             return cheque
@@ -114,16 +114,16 @@ class officielle_2019_in_2018(Reform):
             revenu_fiscal_uc = revenu_fiscal / ocde10
 
             cheque = (
-                0 +
-                (144 + 50) * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
-                (190 + 50) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                (227 + 50) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                (96 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
-                (126 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 > 1) * (ocde10 < 2) +
-                (152 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * ((ocde10 == 2) + (ocde10 > 2)) +
-                (48 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
-                (63 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
-                (76 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
+                0
+                + (144 + 50) * (revenu_fiscal_uc < 5600) * (ocde10 == 1)
+                + (190 + 50) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
+                + (227 + 50) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
+                + (96 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1)
+                + (126 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 > 1) * (ocde10 < 2)
+                + (152 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * ((ocde10 == 2) + (ocde10 > 2))
+                + (48 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1)
+                + (63 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2)
+                + (76 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
                 )
 
             return cheque
@@ -139,19 +139,19 @@ class officielle_2019_in_2018(Reform):
             revenu_fiscal_uc = revenu_fiscal / ocde10
 
             cheque = (
-                0 +
-                (144 + 50) * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
-                (190 + 50) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                (227 + 50) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                (96 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
-                (126 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 > 1) * (ocde10 < 2) +
-                (152 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * ((ocde10 == 2) + (ocde10 > 2)) +
-                (48 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
-                (63 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
-                (76 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2)) +
-                (48) * (revenu_fiscal_uc > 7700) * (revenu_fiscal_uc < 9700) * (ocde10 == 1) +
-                (63) * (revenu_fiscal_uc > 7700) * (revenu_fiscal_uc < 9700) * (ocde10 > 1) * (ocde10 < 2) +
-                (76) * (revenu_fiscal_uc > 7700) * (revenu_fiscal_uc < 9700) * ((ocde10 == 2) + (ocde10 > 2))
+                0
+                + (144 + 50) * (revenu_fiscal_uc < 5600) * (ocde10 == 1)
+                + (190 + 50) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
+                + (227 + 50) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
+                + (96 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1)
+                + (126 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 > 1) * (ocde10 < 2)
+                + (152 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * ((ocde10 == 2) + (ocde10 > 2))
+                + (48 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1)
+                + (63 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2)
+                + (76 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
+                + (48) * (revenu_fiscal_uc > 7700) * (revenu_fiscal_uc < 9700) * (ocde10 == 1)
+                + (63) * (revenu_fiscal_uc > 7700) * (revenu_fiscal_uc < 9700) * (ocde10 > 1) * (ocde10 < 2)
+                + (76) * (revenu_fiscal_uc > 7700) * (revenu_fiscal_uc < 9700) * ((ocde10 == 2) + (ocde10 > 2))
                 )
 
             return cheque
@@ -245,8 +245,8 @@ class officielle_2019_in_2018(Reform):
             depenses_combustibles_solides = menage('depenses_combustibles_solides', period)
             depenses_energie_thermique = menage('depenses_energie_thermique', period)
             depenses_energies_logement_officielle_2019_in_2018 = (
-                depenses_electricite + tarifs_sociaux_electricite + depenses_gaz_ville_ajustees + depenses_gaz_liquefie +
-                depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
+                depenses_electricite + tarifs_sociaux_electricite + depenses_gaz_ville_ajustees + depenses_gaz_liquefie
+                + depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
                 )
 
             return depenses_energies_logement_officielle_2019_in_2018
@@ -456,8 +456,8 @@ class officielle_2019_in_2018(Reform):
                 menage('depenses_carburants_corrigees_officielle_2019_in_2018', period)
 
             pertes = (
-                depenses_energies_logement_officielle_2019_in_2018 +
-                depenses_carburants_officielle_2019_in_2018 -
+                depenses_energies_logement_officielle_2019_in_2018
+                + depenses_carburants_officielle_2019_in_2018 -
                 depenses_energies_totales
                 )
 
@@ -641,8 +641,8 @@ class officielle_2019_in_2018(Reform):
             tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
 
             revenu_reforme = (
-                total_taxes_energies_officielle_2019_in_2018 - total_taxes_energies +
-                gains_tva_total_energies + tarifs_sociaux_electricite + tarifs_sociaux_gaz
+                total_taxes_energies_officielle_2019_in_2018 - total_taxes_energies
+                + gains_tva_total_energies + tarifs_sociaux_electricite + tarifs_sociaux_gaz
                 )
 
             return revenu_reforme

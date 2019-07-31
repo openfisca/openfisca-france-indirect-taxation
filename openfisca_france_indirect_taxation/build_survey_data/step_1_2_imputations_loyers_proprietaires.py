@@ -88,14 +88,14 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         imput00['maison_appart'] = imput00.sitlog == 1
 
         imput00['catsurf'] = (
-            1 +
-            (imput00.surfhab > 15) +
-            (imput00.surfhab > 30) +
-            (imput00.surfhab > 40) +
-            (imput00.surfhab > 60) +
-            (imput00.surfhab > 80) +
-            (imput00.surfhab > 100) +
-            (imput00.surfhab > 150)
+            1
+            + (imput00.surfhab > 15)
+            + (imput00.surfhab > 30)
+            + (imput00.surfhab > 40)
+            + (imput00.surfhab > 60)
+            + (imput00.surfhab > 80)
+            + (imput00.surfhab > 100)
+            + (imput00.surfhab > 150)
             )
         assert imput00.catsurf.isin(list(range(1, 9))).all()
         # TODO: vérifier ce qe l'on fait notamment regarder la vleur catsurf = 2 ommise dans le code stata

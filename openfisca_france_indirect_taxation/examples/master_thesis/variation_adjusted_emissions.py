@@ -66,14 +66,14 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
                 ).sum() / 1e06
 
             variations_emissions['total_logement_{}'.format(reforme)] = (
-                variations_emissions['gaz_{}'.format(reforme)] +
-                variations_emissions['combustibles_liquides_{}'.format(reforme)] +
-                variations_emissions['electricite_{}'.format(reforme)]
+                variations_emissions['gaz_{}'.format(reforme)]
+                + variations_emissions['combustibles_liquides_{}'.format(reforme)]
+                + variations_emissions['electricite_{}'.format(reforme)]
                 ).sum()
         else:
             variations_emissions['total_logement_{}'.format(reforme)] = (
-                variations_emissions['gaz_{}'.format(reforme)] +
-                variations_emissions['combustibles_liquides_{}'.format(reforme)]
+                variations_emissions['gaz_{}'.format(reforme)]
+                + variations_emissions['combustibles_liquides_{}'.format(reforme)]
                 ).sum()
 
     variations_emissions['total_{}'.format(reforme)] = (

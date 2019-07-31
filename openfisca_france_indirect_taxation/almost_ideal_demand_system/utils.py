@@ -94,8 +94,8 @@ def indices_prix_carbus(year):
     quantite_carbu_vp_france = quantite_carbu_vp_france[quantite_carbu_vp_france['annee'] == year]
     part_conso_ess = quantite_carbu_vp_france['part_conso_ess'].min()
 
-    prix_carbu['indice_ess'] = prix_carbu['super_95_ttc'] / (prix_carbu['super_95_ttc'] * part_conso_ess +
-        prix_carbu['diesel_ttc'] * (1 - part_conso_ess))
+    prix_carbu['indice_ess'] = prix_carbu['super_95_ttc'] / (prix_carbu['super_95_ttc'] * part_conso_ess
++ prix_carbu['diesel_ttc'] * (1 - part_conso_ess))
     prix_carbu['indice_die'] = prix_carbu['indice_ess'] * (prix_carbu['diesel_ttc'] / prix_carbu['super_95_ttc'])
 
     return prix_carbu[['indice_ess'] + ['indice_die'] + ['vag']]
@@ -111,8 +111,8 @@ def price_carbu_pond(dataframe):
     dispose_de_vehicule = dataframe['veh_tot'] != 0
     dataframe.loc[dispose_de_vehicule, 'part_veh_essence'] = \
         dataframe.loc[dispose_de_vehicule, 'veh_essence'] / dataframe.loc[dispose_de_vehicule, 'veh_tot']
-    dataframe['prix_carbu'] = dataframe['prix_carbu'] * (dataframe['part_veh_essence'] * dataframe['indice_ess'] +
-        (1 - dataframe['part_veh_essence']) * dataframe['indice_die'])
+    dataframe['prix_carbu'] = dataframe['prix_carbu'] * (dataframe['part_veh_essence'] * dataframe['indice_ess']
++ (1 - dataframe['part_veh_essence']) * dataframe['indice_die'])
     del dataframe['indice_ess'], dataframe['indice_die']
     return dataframe
 

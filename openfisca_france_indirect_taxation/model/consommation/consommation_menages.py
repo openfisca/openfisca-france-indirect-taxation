@@ -91,10 +91,10 @@ class depenses_totales(YearlyVariable):
         depenses_tva_taux_intermediaire = menage('depenses_tva_taux_intermediaire', period)
         depenses_tva_taux_plein = menage('depenses_tva_taux_plein', period)
         return (
-            depenses_tva_taux_super_reduit +
-            depenses_tva_taux_reduit +
-            depenses_tva_taux_intermediaire +
-            depenses_tva_taux_plein
+            depenses_tva_taux_super_reduit
+            + depenses_tva_taux_reduit
+            + depenses_tva_taux_intermediaire
+            + depenses_tva_taux_plein
             )
 
 

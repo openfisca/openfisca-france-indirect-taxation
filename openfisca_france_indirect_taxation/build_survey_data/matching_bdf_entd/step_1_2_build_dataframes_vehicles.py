@@ -159,9 +159,9 @@ def merge_vehicule_menage():
             },
         inplace = True,
         )
-    data_entd = data_entd[['ident_men'] + ['puissance'] +
-        ['etat_veh_achat'] + ['consommation'] + ['age_vehicule'] +
-        ['age_carte_grise']
+    data_entd = data_entd[['ident_men'] + ['puissance']
++ ['etat_veh_achat'] + ['consommation'] + ['age_vehicule']
+        + ['age_carte_grise']
         ]
 
     data_bdf['km_essence'] = 0
@@ -189,9 +189,9 @@ def merge_vehicule_menage():
             },
         inplace = True,
         )
-    data_bdf = data_bdf[['ident_men'] + ['prix_achat'] + ['veh_tot'] +
-        ['etat_veh_achat'] + ['age_vehicule'] + ['age_carte_grise'] +
-        ['vp_domicile_travail'] + ['vp_deplacements_pro']
+    data_bdf = data_bdf[['ident_men'] + ['prix_achat'] + ['veh_tot']
++ ['etat_veh_achat'] + ['age_vehicule'] + ['age_carte_grise']
+        + ['vp_domicile_travail'] + ['vp_deplacements_pro']
         ]
 
     # Df infos comportements ménages

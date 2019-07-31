@@ -50,8 +50,8 @@ class reforme_tva_2019(Reform):
 
             poste_11_1_1_1_1_reforme_tva_2019 = (
                 poste_11_1_1_1_1
-                * (1 +
-                    (1 + elasticite_prix)
+                * (1
++ (1 + elasticite_prix)
                     * (incidence_consommateur
                     * (nouveau_taux_tva - ancien_taux_intermediaire)) / (1 + incidence_consommateur * ancien_taux_intermediaire))
                 )
@@ -72,8 +72,8 @@ class reforme_tva_2019(Reform):
 
             poste_11_1_1_1_2_reforme_tva_2019 = (
                 poste_11_1_1_1_2
-                * (1 +
-                    (1 + elasticite_prix)
+                * (1
++ (1 + elasticite_prix)
                     * (incidence_consommateur
                     * (nouveau_taux_tva - ancien_taux_intermediaire)) / (1 + incidence_consommateur * ancien_taux_intermediaire))
                 )
@@ -94,8 +94,8 @@ class reforme_tva_2019(Reform):
 
             poste_11_1_2_1_1_reforme_tva_2019 = (
                 poste_11_1_2_1_1
-                * (1 +
-                    (1 + elasticite_prix)
+                * (1
++ (1 + elasticite_prix)
                     * (incidence_consommateur
                     * (nouveau_taux_tva - ancien_taux_intermediaire)) / (1 + incidence_consommateur * ancien_taux_intermediaire))
                 )
@@ -116,8 +116,8 @@ class reforme_tva_2019(Reform):
 
             poste_11_1_3_1_reforme_tva_2019 = (
                 poste_11_1_3_1
-                * (1 +
-                    (1 + elasticite_prix)
+                * (1
++ (1 + elasticite_prix)
                     * (incidence_consommateur
                     * (nouveau_taux_tva - ancien_taux_intermediaire)) / (1 + incidence_consommateur * ancien_taux_intermediaire))
                 )
@@ -138,8 +138,8 @@ class reforme_tva_2019(Reform):
 
             poste_11_1_3_2_reforme_tva_2019 = (
                 poste_11_1_3_2
-                * (1 +
-                    (1 + elasticite_prix)
+                * (1
++ (1 + elasticite_prix)
                     * (incidence_consommateur
                     * (nouveau_taux_tva - ancien_taux_intermediaire)) / (1 + incidence_consommateur * ancien_taux_intermediaire))
                 )
@@ -160,8 +160,8 @@ class reforme_tva_2019(Reform):
 
             poste_11_2_1_1_1_reforme_tva_2019 = (
                 poste_11_2_1_1_1
-                * (1 +
-                    (1 + elasticite_prix)
+                * (1
++ (1 + elasticite_prix)
                     * (incidence_consommateur
                     * (nouveau_taux_tva - ancien_taux_intermediaire)) / (1 + incidence_consommateur * ancien_taux_intermediaire))
                 )

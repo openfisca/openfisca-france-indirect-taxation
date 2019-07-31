@@ -80,8 +80,8 @@ class depenses_electricite_ajustees_taxe_carbone(YearlyVariable):
         # We do not want to input the expenditure of the contract for those who consume nothing
         depenses_elec = menage('depenses_electricite', period)
         depenses_electricite_ajustees = (
-            depenses_electricite_ajustees * (depenses_elec > min_tarif_fixe) +
-            depenses_elec * (depenses_elec < min_tarif_fixe)
+            depenses_electricite_ajustees * (depenses_elec > min_tarif_fixe)
+            + depenses_elec * (depenses_elec < min_tarif_fixe)
             )
 
         return depenses_electricite_ajustees

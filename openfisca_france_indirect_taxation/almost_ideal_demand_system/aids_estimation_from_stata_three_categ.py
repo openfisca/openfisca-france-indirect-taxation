@@ -37,8 +37,8 @@ for year in ['energy_no_alime_all']:
         df['elas_price_{0}_{0}'.format(j)] = \
             (df['elas_price_{0}_{0}'.format(j)] < 0) * df['elas_price_{0}_{0}'.format(j)]
         df['elas_price_{0}_{0}'.format(j)] = (
-            (df['elas_price_{0}_{0}'.format(j)] > -2) * df['elas_price_{0}_{0}'.format(j)] +
-            (df['elas_price_{0}_{0}'.format(j)] < -2) * (-2)
+            (df['elas_price_{0}_{0}'.format(j)] > -2) * df['elas_price_{0}_{0}'.format(j)]
+            + (df['elas_price_{0}_{0}'.format(j)] < -2) * (-2)
             )
 
     for i in range(1, 4):

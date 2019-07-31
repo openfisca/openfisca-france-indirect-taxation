@@ -138,8 +138,8 @@ for year in [2000, 2005, 2011]:
     grouped_carbu = grouped[grouped['categorie'] == 'carbu'].copy()
     grouped_carbu['ident_men'] = grouped_carbu['id'].str[6:]
 
-    df_prix_to_merge = pd.merge(grouped_carbu[['ident_men', 'prix_carbu']], grouped_alime[['ident_men'] +
-        ['prix_alime']], on = 'ident_men')
+    df_prix_to_merge = pd.merge(grouped_carbu[['ident_men', 'prix_carbu']], grouped_alime[['ident_men']
++ ['prix_alime']], on = 'ident_men')
     df_prix_to_merge = pd.merge(df_prix_to_merge, grouped_autre[['ident_men', 'prix_autre']], on = 'ident_men')
     del grouped, grouped_alime, grouped_autre, grouped_carbu
 

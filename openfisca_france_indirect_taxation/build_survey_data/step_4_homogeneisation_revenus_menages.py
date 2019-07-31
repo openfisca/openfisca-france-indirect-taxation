@@ -121,8 +121,8 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         rev_disp = rev_disp[(rev_disp.exrev == 1) & (rev_disp.exdep == 1)]
 
         rev_disp['revsoc'] = (
-            rev_disp['revret'] + rev_disp['revcho'] + rev_disp['revfam'] + rev_disp['revlog'] + rev_disp['revinv'] +
-            rev_disp['revrmi']
+            rev_disp['revret'] + rev_disp['revcho'] + rev_disp['revfam'] + rev_disp['revlog'] + rev_disp['revinv']
+            + rev_disp['revrmi']
             )
         rev_disp['impot_revenu'] = rev_disp['ir'] + rev_disp['irbis']
 

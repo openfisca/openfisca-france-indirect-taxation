@@ -185,16 +185,16 @@ class reforme_officielle_2018_in_2016(Reform):
             revenu_fiscal_uc = revenu_fiscal / ocde10
 
             cheque = (
-                0 +
-                144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
-                190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
-                126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
-                63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
-                76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
+                0
+                + 144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1)
+                + 190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
+                + 227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
+                + 96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1)
+                + 126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
+                + 152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
+                + 48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1)
+                + 63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2)
+                + 76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
                 )
 
             return cheque
@@ -219,16 +219,16 @@ class reforme_officielle_2018_in_2016(Reform):
             somme_cheques_ruraux = numpy.sum(cheque_ruraux * pondmen)
 
             cheque = (
-                0 +
-                144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
-                190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
-                126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
-                63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
-                76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
+                0
+                + 144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1)
+                + 190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
+                + 227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
+                + 96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1)
+                + 126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
+                + 152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
+                + 48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1)
+                + 63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2)
+                + 76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
                 )
 
             somme_cheques = numpy.sum(cheque * pondmen)
@@ -259,16 +259,16 @@ class reforme_officielle_2018_in_2016(Reform):
             somme_cheques_by_energy = numpy.sum(cheque_by_energy * pondmen)
 
             cheque = (
-                0 +
-                144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
-                190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
-                126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
-                63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
-                76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
+                0
+                + 144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1)
+                + 190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
+                + 227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
+                + 96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1)
+                + 126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
+                + 152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
+                + 48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1)
+                + 63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2)
+                + 76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
                 )
 
             somme_cheques = numpy.sum(cheque * pondmen)
@@ -306,16 +306,16 @@ class reforme_officielle_2018_in_2016(Reform):
             somme_cheques_by_energy = numpy.sum(cheque_by_energy * pondmen)
 
             cheque = (
-                0 +
-                144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1) +
-                190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1) +
-                126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2) +
-                152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2)) +
-                48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1) +
-                63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2) +
-                76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
+                0
+                + 144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1)
+                + 190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
+                + 227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
+                + 96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1)
+                + 126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
+                + 152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
+                + 48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1)
+                + 63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2)
+                + 76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
                 )
 
             somme_cheques = numpy.sum(cheque * pondmen)
@@ -462,8 +462,8 @@ class reforme_officielle_2018_in_2016(Reform):
             # We do not want to input the expenditure of the contract for those who consume nothing
             depenses_electricite = menage('depenses_electricite', period)
             depenses_electricite_ajustees = (
-                depenses_electricite_ajustees * (depenses_electricite > min_tarif_fixe) +
-                depenses_electricite * (depenses_electricite < min_tarif_fixe)
+                depenses_electricite_ajustees * (depenses_electricite > min_tarif_fixe)
+                + depenses_electricite * (depenses_electricite < min_tarif_fixe)
                 )
 
             return depenses_electricite_ajustees
@@ -482,8 +482,8 @@ class reforme_officielle_2018_in_2016(Reform):
             depenses_combustibles_solides = menage('depenses_combustibles_solides', period)
             depenses_energie_thermique = menage('depenses_energie_thermique', period)
             depenses_energies_logement_officielle_2018_in_2016 = (
-                depenses_electricite + tarifs_sociaux_electricite + depenses_gaz_ville_ajustees + depenses_gaz_liquefie +
-                depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
+                depenses_electricite + tarifs_sociaux_electricite + depenses_gaz_ville_ajustees + depenses_gaz_liquefie
+                + depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
                 )
 
             return depenses_energies_logement_officielle_2018_in_2016
@@ -501,8 +501,8 @@ class reforme_officielle_2018_in_2016(Reform):
             depenses_combustibles_solides = menage('depenses_combustibles_solides', period)
             depenses_energie_thermique = menage('depenses_energie_thermique', period)
             depenses_energies_logement_officielle_2018_in_2016 = (
-                depenses_electricite_ajustees + depenses_gaz_ville_ajustees + depenses_gaz_liquefie +
-                depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
+                depenses_electricite_ajustees + depenses_gaz_ville_ajustees + depenses_gaz_liquefie
+                + depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
                 )
 
             return depenses_energies_logement_officielle_2018_in_2016
@@ -743,8 +743,8 @@ class reforme_officielle_2018_in_2016(Reform):
             emissions_essence = \
                 parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
             emissions_ajustees = (
-                (quantites_diesel_ajustees * emissions_diesel) +
-                (quantites_essence_ajustees * emissions_essence)
+                (quantites_diesel_ajustees * emissions_diesel)
+                + (quantites_essence_ajustees * emissions_essence)
                 )
 
             return emissions_ajustees
@@ -762,8 +762,8 @@ class reforme_officielle_2018_in_2016(Reform):
             emissions_essence = \
                 parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
             emissions_ajustees = (
-                (quantites_diesel_ajustees * emissions_diesel) +
-                (quantites_essence_ajustees * emissions_essence)
+                (quantites_diesel_ajustees * emissions_diesel)
+                + (quantites_essence_ajustees * emissions_essence)
                 )
 
             return emissions_ajustees
@@ -781,8 +781,8 @@ class reforme_officielle_2018_in_2016(Reform):
             emissions_essence = \
                 parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
             emissions_ajustees = (
-                (quantites_diesel_ajustees * emissions_diesel) +
-                (quantites_essence_ajustees * emissions_essence)
+                (quantites_diesel_ajustees * emissions_diesel)
+                + (quantites_essence_ajustees * emissions_essence)
                 )
 
             return emissions_ajustees
@@ -839,8 +839,8 @@ class reforme_officielle_2018_in_2016(Reform):
             emissions_gaz_ajustees = menage('emissions_CO2_gaz_ville_officielle_2018_in_2016', period)
 
             emissions_energies_ajustees = (
-                emissions_carburants_ajustees + emissions_electricite +
-                emissions_combustibles_liquides_ajustees + emissions_gaz_ajustees
+                emissions_carburants_ajustees + emissions_electricite
+                + emissions_combustibles_liquides_ajustees + emissions_gaz_ajustees
                 )
             return emissions_energies_ajustees
 
@@ -857,8 +857,8 @@ class reforme_officielle_2018_in_2016(Reform):
             emissions_gaz_ajustees = menage('emissions_CO2_gaz_ville_officielle_2018_in_2016', period)
 
             emissions_energies_ajustees = (
-                emissions_carburants_ajustees + emissions_electricite_ajustees +
-                emissions_combustibles_liquides_ajustees + emissions_gaz_ajustees
+                emissions_carburants_ajustees + emissions_electricite_ajustees
+                + emissions_combustibles_liquides_ajustees + emissions_gaz_ajustees
                 )
             return emissions_energies_ajustees
 
@@ -1016,8 +1016,8 @@ class reforme_officielle_2018_in_2016(Reform):
                 menage('depenses_carburants_corrigees_officielle_2018_in_2016', period)
 
             pertes = (
-                depenses_energies_logement_officielle_2018_in_2016 +
-                depenses_carburants_officielle_2018_in_2016 -
+                depenses_energies_logement_officielle_2018_in_2016
+                + depenses_carburants_officielle_2018_in_2016 -
                 depenses_energies_totales
                 )
 
@@ -1036,8 +1036,8 @@ class reforme_officielle_2018_in_2016(Reform):
                 menage('depenses_carburants_corrigees_officielle_2018_in_2016', period)
 
             pertes = (
-                depenses_energies_logement_officielle_2018_in_2016_plus_cspe +
-                depenses_carburants_officielle_2018_in_2016 -
+                depenses_energies_logement_officielle_2018_in_2016_plus_cspe
+                + depenses_carburants_officielle_2018_in_2016 -
                 depenses_energies_totales
                 )
 
@@ -1316,8 +1316,8 @@ class reforme_officielle_2018_in_2016(Reform):
             tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
 
             revenu_reforme = (
-                total_taxes_energies_officielle_2018_in_2016 - total_taxes_energies +
-                gains_tva_total_energies + tarifs_sociaux_electricite + tarifs_sociaux_gaz
+                total_taxes_energies_officielle_2018_in_2016 - total_taxes_energies
+                + gains_tva_total_energies + tarifs_sociaux_electricite + tarifs_sociaux_gaz
                 )
 
             return revenu_reforme

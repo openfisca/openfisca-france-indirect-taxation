@@ -101,8 +101,8 @@ def create_new_variables():
 
         if i == 0:
             data['distance'] = (
-                data['distance_diesel'] + data['distance_essence'] +
-                data['distance_autre_carbu']
+                data['distance_diesel'] + data['distance_essence']
+                + data['distance_autre_carbu']
                 )
 
         if i == 0:

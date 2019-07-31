@@ -126,10 +126,10 @@ def complete_input_data_frame(input_data_frame, drop_dom = True):
         input_data_frame.pondmen.astype('float'), return_quantiles = True)
 
     input_data_frame['revenus'] = (
-        0 +
-        (input_data_frame.revenus_kantar >= values[3 - 1]).astype('int') +
-        (input_data_frame.revenus_kantar >= values[11 - 1]).astype('int') +
-        (input_data_frame.revenus_kantar >= values[17 - 1]).astype('int')
+        0
+        + (input_data_frame.revenus_kantar >= values[3 - 1]).astype('int')
+        + (input_data_frame.revenus_kantar >= values[11 - 1]).astype('int')
+        + (input_data_frame.revenus_kantar >= values[17 - 1]).astype('int')
         )
 
     assert input_data_frame.revenus.isin([0, 1, 2, 3]).all()

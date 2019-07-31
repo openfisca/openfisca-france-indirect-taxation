@@ -154,8 +154,8 @@ class cce_2016_in_2014(Reform):
             depenses_combustibles_solides = menage('depenses_combustibles_solides', period)
             depenses_energie_thermique = menage('depenses_energie_thermique', period)
             depenses_energies_logement_ajustees_cce_2016_in_2014 = (
-                depenses_electricite_ajustees + depenses_gaz_ville_ajustees + depenses_gaz_liquefie +
-                depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
+                depenses_electricite_ajustees + depenses_gaz_ville_ajustees + depenses_gaz_liquefie
+                + depenses_combustibles_liquides_ajustees + depenses_combustibles_solides + depenses_energie_thermique
                 )
 
             return depenses_energies_logement_ajustees_cce_2016_in_2014
@@ -330,8 +330,8 @@ class cce_2016_in_2014(Reform):
             emissions_essence = \
                 parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
             emissions_ajustees = (
-                (quantites_diesel_ajustees * emissions_diesel) +
-                (quantites_essence_ajustees * emissions_essence)
+                (quantites_diesel_ajustees * emissions_diesel)
+                + (quantites_essence_ajustees * emissions_essence)
                 )  # Source : Ademe
 
             return emissions_ajustees
@@ -348,8 +348,8 @@ class cce_2016_in_2014(Reform):
             emissions_gaz_ajustees = menage('emissions_CO2_gaz_ville', period)
 
             emissions_energies_ajustees = (
-                emissions_carburants_ajustees + emissions_electricite_ajustees +
-                emissions_combustibles_liquides_ajustees + emissions_gaz_ajustees
+                emissions_carburants_ajustees + emissions_electricite_ajustees
+                + emissions_combustibles_liquides_ajustees + emissions_gaz_ajustees
                 )
             return emissions_energies_ajustees
 

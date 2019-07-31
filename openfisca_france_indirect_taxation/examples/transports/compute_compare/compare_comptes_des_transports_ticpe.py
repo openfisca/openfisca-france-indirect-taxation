@@ -83,8 +83,8 @@ recettes_ticpe_non_vp['recettes diesel'] = (
 recettes_ticpe_non_vp['recettes totales non vp'] = (
     recettes_ticpe_non_vp['recettes diesel'] + recettes_ticpe_non_vp['recettes essence'])
 
-recettes_ticpe_totale = concat([recettes_ticpe_non_vp[['recettes totales non vp'] +
-    ['recettes diesel'] + ['recettes essence']], depenses_ticpe_bdf], axis = 1)
+recettes_ticpe_totale = concat([recettes_ticpe_non_vp[['recettes totales non vp']
++ ['recettes diesel'] + ['recettes essence']], depenses_ticpe_bdf], axis = 1)
 
 recettes_ticpe_totale = recettes_ticpe_totale.dropna()
 recettes_ticpe_totale['recettes totales tous carburants'] = \

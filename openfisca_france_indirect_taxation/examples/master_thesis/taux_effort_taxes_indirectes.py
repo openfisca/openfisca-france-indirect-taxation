@@ -43,19 +43,19 @@ if __name__ == '__main__':
         taxe_indirectes['TVA'] = taxe_indirectes['tva_total']
         taxe_indirectes['TICPE'] = taxe_indirectes['ticpe_totale']
         taxe_indirectes['Taxes alcools'] = (
-            taxe_indirectes['vin_droit_d_accise'] +
-            taxe_indirectes['biere_droit_d_accise'] +
-            taxe_indirectes['alcools_forts_droit_d_accise']
+            taxe_indirectes['vin_droit_d_accise']
+            + taxe_indirectes['biere_droit_d_accise']
+            + taxe_indirectes['alcools_forts_droit_d_accise']
             ).copy()
         taxe_indirectes['Taxes assurances'] = (
-            taxe_indirectes['assurance_sante_taxe'] +
-            taxe_indirectes['assurance_transport_taxe'] +
-            taxe_indirectes['autres_assurances_taxe']
+            taxe_indirectes['assurance_sante_taxe']
+            + taxe_indirectes['assurance_transport_taxe']
+            + taxe_indirectes['autres_assurances_taxe']
             ).copy()
         taxe_indirectes['Taxes tabacs'] = (
-            taxe_indirectes['cigarette_droit_d_accise'] +
-            taxe_indirectes['cigares_droit_d_accise'] +
-            taxe_indirectes['tabac_a_rouler_droit_d_accise']
+            taxe_indirectes['cigarette_droit_d_accise']
+            + taxe_indirectes['cigares_droit_d_accise']
+            + taxe_indirectes['tabac_a_rouler_droit_d_accise']
             ).copy()
 
         taxe_indirectes = taxe_indirectes.rename(columns = {

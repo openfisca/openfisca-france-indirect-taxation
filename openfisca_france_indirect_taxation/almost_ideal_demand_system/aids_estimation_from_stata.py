@@ -35,8 +35,8 @@ def create_data_elasticities():
         dataframe['elas_price_{0}_{0}'.format(j)] = \
             (dataframe['elas_price_{0}_{0}'.format(j)] < 0) * dataframe['elas_price_{0}_{0}'.format(j)]
         dataframe['elas_price_{0}_{0}'.format(j)] = (
-            (dataframe['elas_price_{0}_{0}'.format(j)] > -2) * dataframe['elas_price_{0}_{0}'.format(j)] +
-            (dataframe['elas_price_{0}_{0}'.format(j)] < -2) * (-2)
+            (dataframe['elas_price_{0}_{0}'.format(j)] > -2) * dataframe['elas_price_{0}_{0}'.format(j)]
+            + (dataframe['elas_price_{0}_{0}'.format(j)] < -2) * (-2)
             )
 
     assert not dataframe.ident_men.duplicated().any(), 'Some housholds are duplicated'

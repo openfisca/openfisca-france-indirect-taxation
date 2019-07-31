@@ -59,16 +59,16 @@ if __name__ == '__main__':
 
         if year < 2007:
             depenses_essence_ticpe = (
-                depenses_sp95_ticpe +
-                depenses_sp98_ticpe +
-                depenses_sp_e10_ticpe +
-                depenses_super_plombe_ticpe
+                depenses_sp95_ticpe
+                + depenses_sp98_ticpe
+                + depenses_sp_e10_ticpe
+                + depenses_super_plombe_ticpe
                 )
         else:
             depenses_essence_ticpe = (
-                depenses_sp95_ticpe +
-                depenses_sp98_ticpe +
-                depenses_sp_e10_ticpe
+                depenses_sp95_ticpe
+                + depenses_sp98_ticpe
+                + depenses_sp_e10_ticpe
                 )
 
         depenses_ticpe = depenses_diesel_ticpe + depenses_essence_ticpe

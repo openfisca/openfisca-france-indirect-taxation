@@ -77,8 +77,8 @@ def merge_indiv_teg_menage():
     data_teg = data_teg.query('noi == 1').query('typlieu == 1')
     data_teg = data_teg.fillna(0)
 
-    data_teg = data_teg[['ident_men'] + ['distance_routiere_hebdomadaire_teg'] +
-        ['duree_moyenne_trajet_aller_retour_teg'] + ['mode_principal_deplacement_teg']]
+    data_teg = data_teg[['ident_men'] + ['distance_routiere_hebdomadaire_teg']
++ ['duree_moyenne_trajet_aller_retour_teg'] + ['mode_principal_deplacement_teg']]
     data_teg['ident_men'] = data_teg['ident_men'].astype(str)
     data_menages_entd['ident_men'] = data_menages_entd['ident_men'].astype(str)
 

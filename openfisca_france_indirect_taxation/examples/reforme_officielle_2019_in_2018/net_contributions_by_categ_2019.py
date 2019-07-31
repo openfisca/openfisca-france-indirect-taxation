@@ -67,12 +67,12 @@ for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 
 
     # Réalisation de graphiques
     df_to_plot = df[
-        ['cout_reforme'] +
-        ['cout_reforme_cheque_majore'] +
-        ['cout_reforme_cheque_philippe'] +
-        ['regressivite_revenu_cheque_philippe'] +
-        ['regressivite_revenu'] +
-        ['regressivite_depenses']
+        ['cout_reforme']
+        + ['cout_reforme_cheque_majore']
+        + ['cout_reforme_cheque_philippe']
+        + ['regressivite_revenu_cheque_philippe']
+        + ['regressivite_revenu']
+        + ['regressivite_depenses']
         ]
     graph_builder_bar(df_to_plot['cout_reforme'], False)
     graph_builder_bar(df_to_plot['cout_reforme_cheque_majore'], False)
