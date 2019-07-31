@@ -41,8 +41,8 @@ def plot_taux_effort_ticpe():
 
             df_to_graph = taxe_indirectes[list_part_taxes]
 
-            print '''Contributions aux différentes taxes indirectes en part de {0},
-                par décile de revenu en {1}'''.format(revenu, year)
+            print('''Contributions aux différentes taxes indirectes en part de {0},
+                par décile de revenu en {1}'''.format(revenu, year))
             graph_builder_bar_percent(df_to_graph)
             save_dataframe_to_graph(df_to_graph, 'Monetary/effort_rate_ticpe_over_{}.csv'.format(revenu))
 

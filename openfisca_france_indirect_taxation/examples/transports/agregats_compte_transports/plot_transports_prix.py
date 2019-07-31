@@ -27,12 +27,12 @@ prix_mensuel_carburants_90_15.rename(columns = {'diesel_ht': 'prix diesel ht', '
     inplace = True)
 
 # Réalisation des graphiques
-print 'Evolution du prix des carburants entre 1990 et 2015'
+print('Evolution du prix des carburants entre 1990 et 2015')
 graph_builder_carburants(
     prix_mensuel_carburants_90_15[['prix SP95 ttc'] + ['prix diesel ttc'] + ['prix SP95 ht'] + ['prix diesel ht']],
     'prix carburants', 0.39, 1.025, 'darkgreen', 'darkred', 'lawngreen', 'orangered')
 
-print 'Evolution du taux implicite de taxation (incluant la TVA) des carburants entre 1990 et 2015'
+print('Evolution du taux implicite de taxation (incluant la TVA) des carburants entre 1990 et 2015')
 graph_builder_carburants(
     prix_mensuel_carburants_90_15[['taux implicite diesel'] + ['taux implicite super 95']],
     'taux implicite ticpe', 1, 1, 'darkred', 'darkgreen', None, None)

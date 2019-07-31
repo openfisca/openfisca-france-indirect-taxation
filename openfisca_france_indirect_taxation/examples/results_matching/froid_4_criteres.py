@@ -46,7 +46,7 @@ data_matched_distance = pd.read_csv(
         ), sep =',', decimal = '.'
     )
 
-    
+
 data_matched_random = pd.read_csv(
     os.path.join(
         default_config_files_directory,
@@ -78,7 +78,7 @@ def histogram_froid_4_criteres_niveau_vie_decile(data_matched, data_enl, categor
     if category == 'tuu':
         i_max = 9
     else:
-        print 'Wrong category'
+        print('Wrong category')
     for i in range(1,i_max):
         data_enl_decile = data_enl.query('{} == {}'.format(category, i))
         data_matched_decile = data_matched.query('{} == {}'.format(category, i))
@@ -119,7 +119,7 @@ def histogram_froid_4_criteres_niveau_vie_decile(data_matched, data_enl, categor
             sum(data_matched_decile['pondmen'] * (data_matched_decile['froid_4_criteres'] == 1)) /
             sum(data_matched_decile['pondmen'])
             )
-    
+
         list_values_matched.append(part_matched)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
@@ -129,7 +129,7 @@ def histogram_froid_4_criteres_niveau_vie_decile(data_matched, data_enl, categor
     values = {'keys': list_keys, 'enl' : list_values_enl, 'matched': list_values_matched}
     dataframe = pd.DataFrame.from_dict(values)
     dataframe = dataframe.set_index('keys')
-    
+
     return figure, dataframe
 
 for category in ['niveau_vie_decile', 'tuu']:

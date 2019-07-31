@@ -45,7 +45,7 @@ for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
         df['Solid fuels share in {}'.format(resource)] = df['depenses_combustibles_solides'] / df[resource]
 
         # Réalisation de graphiques
-        print 'Percentage of energy expenditure in {}'.format(resource)
+        print('Percentage of energy expenditure in {}').format(resource)
         graph_builder_line_percent(
             df[['Energy share in {}'.format(resource),
             'Housing energy share in {}'.format(resource),

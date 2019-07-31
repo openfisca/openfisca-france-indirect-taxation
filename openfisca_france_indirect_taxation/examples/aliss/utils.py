@@ -30,7 +30,7 @@ def build_aggreggates(variables, by = 'niveau_vie_decile', survey_scenario = Non
         aggregates[variable] = survey_scenario.compute_aggregate(variable) / 1e9
         adjusted_aggregates[variable] = adjusted_survey_scenario.compute_aggregate(variable) / 1e9
         if not np.isfinite(survey_scenario.compute_aggregate(variable, use_baseline =True)):
-            print 'variable {} aggregates is infinite'.format(variable)
+            print('variable {} aggregates is infinite').format(variable)
             reference_aggregates[variable] = (
                 survey_scenario.compute_aggregate(
                     variable,

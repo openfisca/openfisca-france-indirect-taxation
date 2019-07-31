@@ -34,14 +34,12 @@ setup(
 
     extras_require = dict(
         dev = [
-            'ruamel.yaml'
-            'pdbpp',
-            ],
-        test = [
             'matplotlib',
             'nbconvert >= 5.5.0',
             'nose',
             'pandas >= 0.17',
+            'pdbpp',
+            'ruamel.yaml',
             'seaborn',
             ],
         survey = [

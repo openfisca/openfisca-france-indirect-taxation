@@ -72,8 +72,8 @@ if __name__ == '__main__':
 
             df_to_graph = taxe_indirectes[list_part_taxes]
 
-            print '''Contributions aux différentes taxes indirectes en part de {0},
-                par décile de revenu en {1}'''.format(revenu, year)
+            print('''Contributions aux différentes taxes indirectes en part de {0},
+                par décile de revenu en {1}'''.format(revenu, year))
             graph_builder_bar(df_to_graph)
             #save_dataframe_to_graph(
             #    df_to_graph, 'Taxes_indirectes/effort_rate_indirect_taxation_on_{0}_by_{1}.csv'.format(revenu, category)
