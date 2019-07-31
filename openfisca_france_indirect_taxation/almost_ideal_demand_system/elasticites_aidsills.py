@@ -132,7 +132,7 @@ def create_data_elasticities_aidsills():
     dataframe = data_quaids[liste_elasticities + ['ident_men', 'year']].copy()
 
     dataframe = dataframe.fillna(0)
-    #dataframe = dataframe.query('year == 2011')
+    # dataframe = dataframe.query('year == 2011')
 
     assert not dataframe.ident_men.duplicated().any(), 'Some housholds are duplicated'
 

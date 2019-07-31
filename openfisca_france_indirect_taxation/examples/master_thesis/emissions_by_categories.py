@@ -18,13 +18,13 @@ year = 2014
 data_year = 2011
 elasticities = get_elasticities(data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-#del inflation_kwargs['inflator_by_variable']['somme_coicop12']
+# del inflation_kwargs['inflator_by_variable']['somme_coicop12']
 
 simulated_variables = ['emissions_CO2_carburants', 'emissions_CO2_energies_logement', 'emissions_CO2_energies_totales']
 
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
-    #inflation_kwargs = inflation_kwargs,
+    # inflation_kwargs = inflation_kwargs,
     year = year,
     data_year = data_year
     )
@@ -33,4 +33,4 @@ for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
 
     # Réalisation de graphiques
     graph_builder_line(df)
-    #save_dataframe_to_graph(df, 'Emissions/emissions_by_{}.csv'.format(category))
+    # save_dataframe_to_graph(df, 'Emissions/emissions_by_{}.csv'.format(category))

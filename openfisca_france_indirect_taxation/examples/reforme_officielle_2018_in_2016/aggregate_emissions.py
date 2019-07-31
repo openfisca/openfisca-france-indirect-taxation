@@ -17,7 +17,7 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 year = 2016
 data_year = 2011
-#elasticities = get_elasticities(data_year)
+# elasticities = get_elasticities(data_year)
 elasticities = get_elasticities_aidsills(data_year, False)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 

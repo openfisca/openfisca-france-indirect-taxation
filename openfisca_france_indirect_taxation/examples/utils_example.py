@@ -259,7 +259,7 @@ def graph_builder_bar_list(graph, a, b):
     axes = graph.plot(
         kind = 'bar',
         stacked = True,
-        color = ['#FF0000']
+        color = ['# FF0000']
         )
     plt.axhline(0, color = 'k')
     axes.legend(

@@ -53,4 +53,4 @@ for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
         ['gains_cheque_officiel']
         + ['gains_cheque_integral_inconditionnel']
         ], False)
-    #save_dataframe_to_graph(df, 'Expenditures/energy_expenditures_by_{}.csv'.format(category))
+    # save_dataframe_to_graph(df, 'Expenditures/energy_expenditures_by_{}.csv'.format(category))

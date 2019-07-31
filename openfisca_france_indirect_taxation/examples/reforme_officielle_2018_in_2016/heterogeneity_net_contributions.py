@@ -22,7 +22,7 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 year = 2016
 data_year = 2011
-#elasticities = get_elasticities(data_year)
+# elasticities = get_elasticities(data_year)
 elasticities = get_elasticities_aidsills(data_year, True)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
@@ -80,7 +80,7 @@ def net_transfers_by_sub_group(df_reforme, group):
                 (df['transferts_nets_apres_redistribution_uc'] * df['pondmen']).sum() / df['pondmen'].sum()
 
     graph_builder_bar(df_to_plot, False)
-    #save_dataframe_to_graph(df_to_plot, 'Monetary/heterogeneity_transfers_by_uc_by_{}.csv'.format(group))
+    # save_dataframe_to_graph(df_to_plot, 'Monetary/heterogeneity_transfers_by_uc_by_{}.csv'.format(group))
 
     return df_to_plot
 

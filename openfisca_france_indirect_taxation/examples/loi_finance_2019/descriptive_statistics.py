@@ -19,8 +19,8 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 year = 2016
 data_year = 2011
-#elasticities = get_elasticities(data_year)
-#elasticities = get_elasticities_aidsills(data_year, True)
+# elasticities = get_elasticities(data_year)
+# elasticities = get_elasticities_aidsills(data_year, True)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 simulated_variables = [
@@ -41,7 +41,7 @@ simulated_variables = [
     ]
 
 survey_scenario = SurveyScenario.create(
-    #elasticities = elasticities,
+    # elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
     reform_key = 'reforme_tva_2019',
     year = year,
@@ -74,4 +74,4 @@ for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 
         ]
     graph_builder_bar(df_to_plot['part_poste_agrege_11_rev_disp_loyerimput'], False)
     graph_builder_bar(df_to_plot['part_poste_agrege_11_depenses_tot'], False)
-    #save_dataframe_to_graph(df_to_plot, 'Monetary/transfers_by_{}.csv'.format(category))
+    # save_dataframe_to_graph(df_to_plot, 'Monetary/transfers_by_{}.csv'.format(category))

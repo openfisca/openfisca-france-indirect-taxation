@@ -23,9 +23,9 @@ for year in [2000, 2005, 2011]:
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
     survey_scenario = SurveyScenario.create(
-        #elasticities = elasticities,
+        # elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
-        #reform_key = 'rattrapage_diesel_bis',
+        # reform_key = 'rattrapage_diesel_bis',
         year = year,
         )
 

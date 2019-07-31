@@ -170,7 +170,7 @@ if __name__ == '__main__':
     data_year = 2011
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-    #elasticities = get_elasticities(data_year)
+    # elasticities = get_elasticities(data_year)
     elasticities = get_elasticities_aidsills(data_year, True)
 
     survey_scenario = SurveyScenario.create(

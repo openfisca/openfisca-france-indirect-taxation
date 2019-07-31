@@ -88,7 +88,7 @@ def estimate_froid():
         dataframe['strate_{}'.format(i)] = 0
         dataframe.loc[dataframe['strate'] == i, 'strate_{}'.format(i)] = 1
 
-    #dataframe['part_energies_rev_disponible'] = dataframe['depenses_energies_logement'] / dataframe['rev_disponible']
+    # dataframe['part_energies_rev_disponible'] = dataframe['depenses_energies_logement'] / dataframe['rev_disponible']
 
     # OLS regression
     new_stock_variables = list(stock_variables)

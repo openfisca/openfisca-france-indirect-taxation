@@ -18,7 +18,7 @@ def get_accises_carburants(liste_carburants):
         df_accise = pd.DataFrame.from_dict(accise_dict['values'])
 
         df_accise['start'] = df_accise['start'].str[:4]
-        #del df_accise['stop']
+        # del df_accise['stop']
         df_accise = df_accise.set_index('start')
         df_accise = df_accise.transpose()
 
@@ -47,7 +47,7 @@ def get_majoration_ticpe(liste_carburants):
             legislation_json['children']['imposition_indirecte']['children'][element]['children']['alsace']
         df_majoration = pd.DataFrame.from_dict(majoration_dict['values'])
         df_majoration['start'] = df_majoration['start'].str[:4]
-        #del df_majoration['stop']
+        # del df_majoration['stop']
         df_majoration = df_majoration.set_index('start')
         df_majoration = df_majoration.transpose()
 

@@ -32,7 +32,7 @@ def plot_effect_reform_fuel_poors():
                 - dict_precarite[type_precarite]['precarite - avant reforme']
                 ) / dict_precarite[type_precarite]['precarite - avant reforme']
 
-    #save_dataframe_to_graph(dataframe, 'Precarite/effect_reform_fuel_poors.csv')
+    # save_dataframe_to_graph(dataframe, 'Precarite/effect_reform_fuel_poors.csv')
     graph_builder_bar_percent(dataframe)
     return dataframe
 
@@ -51,7 +51,7 @@ def plot_number_fuel_poors():
                 dict_precarite[type_precarite]['precarite - ' + statut]
 
     graph_builder_bar(dataframe, False)
-    #save_dataframe_to_graph(dataframe, 'Precarite/number_fuel_poors.csv')
+    # save_dataframe_to_graph(dataframe, 'Precarite/number_fuel_poors.csv')
 
 
 def plot_share_fuel_poors():

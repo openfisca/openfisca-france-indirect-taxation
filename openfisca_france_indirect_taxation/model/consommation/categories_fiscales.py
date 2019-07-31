@@ -85,7 +85,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
                 definitions_by_name.update(functions_by_name)
                 for attribute in ['name', 'baseline_variable', 'dtype', 'json_type', 'is_neutralized', 'formulas']:
                     definitions_by_name.pop(attribute, None)
-                #   definitions_by_name['formulas'] = formulas
+                    # definitions_by_name['formulas'] = formulas
                 tax_benefit_system.update_variable(
                     type(class_name, (YearlyVariable,), definitions_by_name)
                     )

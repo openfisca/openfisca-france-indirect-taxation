@@ -17,7 +17,7 @@ def get_prix_carburants(liste_carburants):
         df_prix = pd.DataFrame.from_dict(prix_dict['values'])
 
         df_prix['start'] = df_prix['start'].str[:4]
-        #del df_prix['stop']
+        # del df_prix['stop']
         df_prix = df_prix.set_index('start')
         df_prix.rename(columns = {'value': 'prix ' + element.replace('_', ' ')}, inplace = True)
 

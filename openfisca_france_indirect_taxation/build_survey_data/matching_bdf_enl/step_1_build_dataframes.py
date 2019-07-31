@@ -74,7 +74,7 @@ def load_data_bdf_enl():
         'mfac_eau1_d',
         'mfac_eg1_d',
         'mloy_d',
-        #'mode_trans1', depindiv
+        # 'mode_trans1', depindiv
         'nbh1',
         'nbphab',
         'nactifs',
@@ -171,7 +171,7 @@ def load_data_bdf_enl():
     indiv_enl_keep = input_enl_indiv[variables_indiv_enl]
     menage_enl_keep = input_enl[variables_menages_enl]
     conso_bdf_keep = input_bdf[variables_menages_bdf]
-    #conso_bdf_keep = conso_bdf_keep.query('zeat != 0')
+    # conso_bdf_keep = conso_bdf_keep.query('zeat != 0')
     del input_enl_indiv, input_enl, input_bdf
 
     indiv_enl_keep['plus_18'] = 1 * (indiv_enl_keep['nanais'] < 1996)  # 18 ans et plus

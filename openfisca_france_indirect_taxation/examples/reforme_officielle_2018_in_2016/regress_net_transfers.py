@@ -15,21 +15,21 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_a
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 year = 2016
 data_year = 2011
-#elasticities = get_elasticities(data_year)
+# elasticities = get_elasticities(data_year)
 elasticities = get_elasticities_aidsills(data_year, True)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 
 # Homogeneous + SL :
-#elasticities['elas_price_1_1'] = -0.466
-#elasticities['elas_price_2_2'] = -0.214
+# elasticities['elas_price_1_1'] = -0.466
+# elasticities['elas_price_2_2'] = -0.214
 
 # Homogeneous, no SL :
-#elasticities['elas_price_1_1'] = -0.440
-#elasticities['elas_price_2_2'] = -0.139
+# elasticities['elas_price_1_1'] = -0.440
+# elasticities['elas_price_2_2'] = -0.139
 
 survey_scenario = SurveyScenario.create(
-    #elasticities = elasticities,
+    # elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
     reform_key = 'officielle_2018_in_2016',
     year = year,

@@ -145,7 +145,7 @@ for year in [2000, 2005, 2011]:
     df_depenses_prix = pd.merge(
         df_depenses_prix, data_conso_group[['depenses_autre', 'depenses_carbu', 'depenses_logem', 'identifiant_menage']],
         on = 'identifiant_menage')
-    #del data_conso
+    # del data_conso
     df_depenses_prix[['depenses_autre', 'depense_bien', 'depenses_carbu', 'depenses_logem', 'prix']] = \
         df_depenses_prix[['depenses_autre', 'depense_bien', 'depenses_carbu', 'depenses_logem', 'prix']].astype(float)
 
@@ -162,7 +162,7 @@ for year in [2000, 2005, 2011]:
     # Les parts des biens dans leur catégorie permettent de construire des indices de prix pondérés (Cf. Lewbel)
     df_depenses_prix['indice_prix_pondere'] = 0
     # On utilise les contrats imputés pour affiner les prix du gaz et de l'électricité
-    #df_depenses_prix = price_energy_from_contracts(df_depenses_prix, year)
+    # df_depenses_prix = price_energy_from_contracts(df_depenses_prix, year)
     df_depenses_prix['indice_prix_pondere'] = df_depenses_prix['part_bien_categorie'] * df_depenses_prix['prix']
 
     # grouped donne l'indice de prix pondéré pour chacune des deux catégories pour chaque individu

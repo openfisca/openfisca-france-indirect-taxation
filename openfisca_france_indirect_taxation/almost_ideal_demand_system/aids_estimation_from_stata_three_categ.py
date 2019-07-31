@@ -24,9 +24,9 @@ for year in ['energy_no_alime_all']:
     data_quaids = data_quaids.fillna(0)
     df = data_quaids.query('year == 2011')
 
-    #positive_elas = df.query('elect_only == 0').query('elas_price_2_2 > 0')['pondmen'].sum()
-    #sum_pop = df.query('elect_only == 0')['pondmen'].sum()
-    #ratio_positive_elas = positive_elas / sum_pop
+    # positive_elas = df.query('elect_only == 0').query('elas_price_2_2 > 0')['pondmen'].sum()
+    # sum_pop = df.query('elect_only == 0')['pondmen'].sum()
+    # ratio_positive_elas = positive_elas / sum_pop
 
     # Set upper and lower bounds for elasticities : [-2;0]
     for j in range(1, 4):

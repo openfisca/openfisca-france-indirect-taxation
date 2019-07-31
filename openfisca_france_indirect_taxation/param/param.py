@@ -206,7 +206,7 @@ legislation_json = {
                         #                                {'start': u'2009-01-01', 'value': 120.9205769},
                         #                                {'start': u'2010-01-01', 'value': 134.6401887},
                         #                                {'start': u'2011-01-01', 'value': 149.94},
-                        #                                #TODO: {'start': u'2012-01-01', 'value': },
+                        #                                # TODO: {'start': u'2012-01-01', 'value': },
                         #                                ],
                         #                            },
                         "prix_ttc_super98": {

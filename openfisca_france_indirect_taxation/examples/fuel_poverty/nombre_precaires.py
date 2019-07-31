@@ -24,7 +24,7 @@ def nombre_precaires_reformes(reforme, year, data_year):
 
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
-        #inflation_kwargs = inflation_kwargs,
+        # inflation_kwargs = inflation_kwargs,
         reform_key = reforme,
         year = year,
         data_year = data_year

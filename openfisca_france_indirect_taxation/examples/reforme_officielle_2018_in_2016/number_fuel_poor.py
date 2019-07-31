@@ -20,7 +20,7 @@ def number_fuel_poors(year, data_year):
     dict_joint = dict()
 
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
-    #elasticities = get_elasticities(data_year)
+    # elasticities = get_elasticities(data_year)
     elasticities = get_elasticities_aidsills(data_year, True)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 

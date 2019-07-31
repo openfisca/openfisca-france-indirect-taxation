@@ -21,7 +21,7 @@ year = 2016
 data_year = 2011
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-#elasticities = get_elasticities(data_year)
+# elasticities = get_elasticities(data_year)
 elasticities = get_elasticities_aidsills(data_year, True)
 
 reforme = 'officielle_2018_in_2016'
@@ -82,5 +82,5 @@ df_precaires_logement = df_reforme.query('precarite_energetique_rev_disponible =
 
 df_to_plot = distribution_pertes_precaires(df_precaires_joint)
 print(df_to_plot)
-#df_to_plot = distribution_pertes_precaires(df_precaires_transports)
-#df_to_plot = distribution_pertes_precaires(df_precaires_logement)
+# df_to_plot = distribution_pertes_precaires(df_precaires_transports)
+# df_to_plot = distribution_pertes_precaires(df_precaires_logement)

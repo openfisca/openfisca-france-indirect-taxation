@@ -59,7 +59,7 @@ indiv_df_use_baseline = survey_scenario.create_data_frame_by_entity(simulated_va
     use_baseline =True, period = year)
 
 menages_use_baseline = indiv_df_reference['menage']
-#menages_use_baseline =menages_reference.query('niveau_vie_decile < 4')
+# menages_use_baseline =menages_reference.query('niveau_vie_decile < 4')
 menages_reference['froid_4_criteres_3_deciles'] = \
     menages_reference['froid_4_criteres_3_deciles'].astype(int)
 
