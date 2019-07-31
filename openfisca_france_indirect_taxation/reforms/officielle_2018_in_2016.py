@@ -5,8 +5,7 @@ from openfisca_core.reforms import Reform
 import numpy
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
-from ..model.taxes_indirectes import tva, ticpe
-from ..model.consommation import emissions_co2, quantites_energie
+
 
 parameters_path = os.path.join(os.path.dirname(__file__), 'parameters')
 

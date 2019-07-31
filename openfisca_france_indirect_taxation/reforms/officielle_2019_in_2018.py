@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
 
-from openfisca_core.reforms import Reform, update_legislation
 import numpy
 
+from openfisca_core.reforms import Reform, update_legislation
+
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
-from ..model.taxes_indirectes import tva, ticpe
-from ..model.consommation import emissions_co2, quantites_energie
 
 
 def modify_legislation_json(reference_legislation_json_copy):

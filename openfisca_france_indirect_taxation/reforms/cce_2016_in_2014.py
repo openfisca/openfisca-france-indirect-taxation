@@ -5,9 +5,6 @@ from openfisca_core.reforms import Reform, update_legislation
 import numpy
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
-from ..model.taxes_indirectes import tva, ticpe
-from ..model.consommation import emissions_co2, quantites_energie
-
 
 # Montants de taxe prévus par la loi Contribution climat-énergie. 7€ en 2014, 14,5€ en 2015, 22€ en 2016,
 # 30,5€ en 2017, 39€ en 2018 et 47.5€ en 2019 En utilisant nos données d'équivalence entre consommation et émission,
@@ -284,7 +281,7 @@ class cce_2016_in_2014(Reform):
 
     class diesel_ticpe(YearlyVariable):
         label = "Calcul du montant de TICPE sur le diesel après réforme"
-        use_baseline = ticpe.diesel_ticpe
+
 
         def formula(self, simulation, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -320,7 +317,7 @@ class cce_2016_in_2014(Reform):
 
     class emissions_CO2_carburants(YearlyVariable):
         label = "Emissions de CO2 des ménages via leur conso de carburants après réforme - cce 2014-2016 - en kg de CO2"
-        use_baseline = emissions_co2.emissions_CO2_carburants
+
 
         def formula(self, simulation, period):
             quantites_diesel_ajustees = menage('quantites_diesel', period)
@@ -338,7 +335,7 @@ class cce_2016_in_2014(Reform):
 
     class emissions_CO2_energies_totales(YearlyVariable):
         label = "Emissions de CO2 des ménages via leur conso d'énergies après hausse cce 14-15, en kg de CO2"
-        use_baseline = emissions_co2.emissions_CO2_energies_totales
+
 
         def formula(self, simulation, period):
             emissions_carburants_ajustees = menage('emissions_CO2_carburants', period)
@@ -355,7 +352,7 @@ class cce_2016_in_2014(Reform):
 
     class emissions_CO2_combustibles_liquides(YearlyVariable):
         label = "Emissions de CO2 des ménages via leur conso de fioul après réforme - hausse cce 2014-2016 - en kg de CO2"
-        use_baseline = emissions_co2.emissions_CO2_combustibles_liquides
+
 
         def formula(self, simulation, period):
             quantites_combustibles_liquides_ajustees = menage('quantites_combustibles_liquides', period)
@@ -367,7 +364,7 @@ class cce_2016_in_2014(Reform):
 
     class emissions_CO2_gaz_ville(YearlyVariable):
         label = "Emissions de CO2 des ménages via leur conso de gaz après réforme - hausse cce 2014-2016 - en kg de CO2"
-        use_baseline = emissions_co2.emissions_CO2_gaz_ville
+
 
         def formula(self, simulation, period):
             quantites_gaz_ajustees = menage('quantites_gaz_final_ajustees_cce_2016_in_2014', period)
@@ -403,7 +400,7 @@ class cce_2016_in_2014(Reform):
 
     class combustibles_liquides_ticpe(YearlyVariable):
         label = "Calcul du montant de TICPE sur le combustibles_liquides domestique après réforme - hausse cce 2014-2016"
-        use_baseline = ticpe.combustibles_liquides_ticpe
+
 
         def formula(self, simulation, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -433,7 +430,7 @@ class cce_2016_in_2014(Reform):
 
     class quantites_diesel(YearlyVariable):
         label = "Quantités de diesel consommées après la réforme - contribution climat énergie, hausse de 2014 à 2016"
-        use_baseline = quantites_energie.quantites_diesel
+
 
         def formula(self, simulation, period):
             depenses_diesel_ajustees_cce_2016_in_2014 = \
@@ -446,7 +443,7 @@ class cce_2016_in_2014(Reform):
 
     class quantites_combustibles_liquides(YearlyVariable):
         label = "Quantités de combustibles_liquides consommées après la réforme - contribution climat énergie, hausse de 2014 à 2016 "
-        use_baseline = quantites_energie.quantites_combustibles_liquides
+
 
         def formula(self, simulation, period):
             depenses_combustibles_liquides_ajustees_cce_2016_in_2014 = \
@@ -479,7 +476,7 @@ class cce_2016_in_2014(Reform):
 
     class quantites_sp_e10(YearlyVariable):
         label = "Quantités consommées de sans plomb e10 par les ménages après réforme - hausse cce 2014-2016"
-        use_baseline = quantites_energie.quantites_sp_e10
+
 
         def formula(self, simulation, period):
             depenses_essence_ajustees_cce_2016_in_2014 = \
@@ -494,7 +491,7 @@ class cce_2016_in_2014(Reform):
 
     class quantites_sp95(YearlyVariable):
         label = "Quantités consommées de sans plomb 95 par les ménages après réforme - hausse cce 2014-2016"
-        use_baseline = quantites_energie.quantites_sp95
+
 
         def formula(self, simulation, period):
             depenses_essence_ajustees_cce_2016_in_2014 = \
@@ -509,7 +506,7 @@ class cce_2016_in_2014(Reform):
 
     class quantites_sp98(YearlyVariable):
         label = "Quantités consommées de sans plomb 98 par les ménages - hausse cce 2014-2016"
-        use_baseline = quantites_energie.quantites_sp98
+
 
         def formula(self, simulation, period):
             depenses_essence_ajustees_cce_2016_in_2014 = \
@@ -524,7 +521,7 @@ class cce_2016_in_2014(Reform):
 
     class quantites_super_plombe(YearlyVariable):
         label = "Quantités consommées de super plombé par les ménages après réforme - hausse cce 2014-2016"
-        use_baseline = quantites_energie.quantites_super_plombe
+
 
         def formula(self, simulation, period):
             depenses_essence_ajustees_cce_2016_in_2014 = \
@@ -540,7 +537,7 @@ class cce_2016_in_2014(Reform):
 
     class quantites_essence(YearlyVariable):
         label = "Quantités d'essence consommées par les ménages après réforme - hausse cce 2014-2016"
-        use_baseline = quantites_energie.quantites_essence
+
         definition_period = YEAR
 
         def formula_2009(self, simulation, period):
@@ -568,7 +565,7 @@ class cce_2016_in_2014(Reform):
 
     class sp_e10_ticpe(YearlyVariable):
         label = "Calcul du montant de la TICPE sur le SP E10 après réforme"
-        use_baseline = ticpe.sp_e10_ticpe
+
 
         def formula(self, simulation, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -603,7 +600,7 @@ class cce_2016_in_2014(Reform):
 
     class sp95_ticpe(YearlyVariable):
         label = "Calcul du montant de TICPE sur le sp_95 après réforme"
-        use_baseline = ticpe.sp95_ticpe
+
 
         def formula(self, simulation, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -639,7 +636,7 @@ class cce_2016_in_2014(Reform):
 
     class sp98_ticpe(YearlyVariable):
         label = "Calcul du montant de TICPE sur le sp_98 après réforme"
-        use_baseline = ticpe.sp98_ticpe
+
 
         def formula(self, simulation, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -675,7 +672,7 @@ class cce_2016_in_2014(Reform):
 
     class super_plombe_ticpe(YearlyVariable):
         label = "Calcul du montant de la TICPE sur le super plombé après réforme"
-        use_baseline = ticpe.super_plombe_ticpe
+
 
         def formula(self, simulation, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -719,7 +716,7 @@ class cce_2016_in_2014(Reform):
 
     class ticpe_totale(YearlyVariable):
         label = "Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
-        use_baseline = ticpe.ticpe_totale
+
 
         def formula(self, simulation, period):
             essence_ticpe_ajustee = menage('essence_ticpe', period)
@@ -747,7 +744,7 @@ class cce_2016_in_2014(Reform):
 
     class tva_taux_plein(YearlyVariable):
         label = "Contribution sur la TVA à taux plein après réaction à la réforme - cce 2014-2016"
-        use_baseline = tva.tva_taux_plein
+
 
         def formula(self, simulation, period):
             depenses_tva_taux_plein_ajustees = \
@@ -780,7 +777,7 @@ class cce_2016_in_2014(Reform):
 
     class tva_taux_reduit(YearlyVariable):
         label = "Contribution sur la TVA à taux reduit après réaction à la réforme - cce 2014-2016"
-        use_baseline = tva.tva_taux_reduit
+
 
         def formula(self, simulation, period):
             depenses_tva_taux_reduit_ajustees = \
@@ -795,7 +792,7 @@ class cce_2016_in_2014(Reform):
 
     class tva_taux_super_reduit(YearlyVariable):
         label = "Contribution sur la TVA à taux super reduit après réaction à la réforme - cce 2014-2016"
-        use_baseline = tva.tva_taux_super_reduit
+
 
         def formula(self, simulation, period):
             depenses_tva_taux_super_reduit_ajustees = \
@@ -811,7 +808,7 @@ class cce_2016_in_2014(Reform):
 
     class tva_total(YearlyVariable):
         label = "Différence de contribution sur la TVA après réaction à la réforme - taxes carburants"
-        use_baseline = tva.tva_total
+
 
         def formula(self, simulation, period):
             taux_plein = menage('tva_taux_plein_bis', period)

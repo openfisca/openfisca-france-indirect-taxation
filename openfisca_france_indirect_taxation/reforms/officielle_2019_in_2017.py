@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
 
-from openfisca_core.reforms import Reform, update_legislation
 import numpy
 
+from openfisca_core.reforms import Reform, update_legislation
+
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
-from ..model.taxes_indirectes import tva, ticpe
-from ..model.consommation import emissions_co2, quantites_energie
 
 
 # 30,5€ la tonne de CO2 en 2017 (au lieu des 39€ initialement prévus par la CCE), contre 55€ en 2019.
