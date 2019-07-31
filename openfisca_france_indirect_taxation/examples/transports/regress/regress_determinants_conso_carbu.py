@@ -152,7 +152,7 @@ if __name__ == '__main__':
             'quaids', 'data_regression.csv'), sep = ',')
         # model = \
         #    gmm.IV2SLS(data_log['ln_rev_disponible'], data_log['ln_quantite_carbu'], data_log['loyer']).fit()
-        #print model.summary()
+        # print model.summary()
 
         # reg_gmm = statsmodels.sandbox.regression.gmm.IV2SLS('ln_rev_disponible', 'ln_quantite_carbu',
         #                                                  instrument='loyer')

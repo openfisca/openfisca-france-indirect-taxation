@@ -9,7 +9,7 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_bis import get_in
 def test_rattrapage_diesel_bis():
     year = 2011
     inflators_by_year = get_inflators_by_year(rebuild = False)
-    inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year]) # noqa analysis:ignore
+    inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])  # noqa analysis:ignore
     elasticities = get_elasticities(year)
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,

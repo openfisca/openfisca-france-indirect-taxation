@@ -24,16 +24,14 @@ from openfisca_france_indirect_taxation.build_survey_data.utils \
     import find_nearest_inferior
 
 from openfisca_survey_manager.temporary import TemporaryStore
+from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
+from openfisca_survey_manager.temporary import temporary_store_decorator
 
 from openfisca_france_indirect_taxation.build_survey_data.utils \
     import ident_men_dtype
 
 temporary_store = TemporaryStore.create(file_name = "logement_tmp")
 
-
-from openfisca_survey_manager.temporary import temporary_store_decorator
-
-from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
 
 # Load ENL data :
 

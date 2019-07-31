@@ -5,6 +5,8 @@
 # à les harmoniser entre les deux enquêtes.
 # Cette décision se fait sur la base des résultats observés et ne dépend d'aucun critère précis.
 
+from openfisca_france_indirect_taxation.build_survey_data.utils import \
+    histogrammes
 import os
 import pkg_resources
 import numpy as np
@@ -16,8 +18,6 @@ from openfisca_france_indirect_taxation.examples.utils_example import graph_buil
 
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
-from openfisca_france_indirect_taxation.build_survey_data.utils import \
-    histogrammes
 
 # Importation des bases de données appariées et de la base de référence ENL
 default_config_files_directory = os.path.join(

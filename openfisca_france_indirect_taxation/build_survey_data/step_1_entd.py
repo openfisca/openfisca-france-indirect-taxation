@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
+from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
+from openfisca_survey_manager.temporary import temporary_store_decorator
 import logging
 import os
 import pandas
@@ -21,10 +23,6 @@ from openfisca_france_indirect_taxation.build_survey_data.utils \
 
 temporary_store = TemporaryStore.create(file_name = "transport_tmp")
 
-
-from openfisca_survey_manager.temporary import temporary_store_decorator
-
-from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
 
 year = 2008
 

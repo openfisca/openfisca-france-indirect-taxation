@@ -71,7 +71,7 @@ for dependent_variable in ['distance', 'distance_diesel', 'distance_essence']:
 
 
 print(regression_distance)
-#print regression_distance_diesel
-#print regression_distance_essence
+# print regression_distance_diesel
+# print regression_distance_essence
 
 #latex = regression_distance.as_latex()
