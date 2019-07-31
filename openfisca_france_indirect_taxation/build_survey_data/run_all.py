@@ -155,7 +155,7 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
     try:
         openfisca_survey_collection = SurveyCollection.load(
             collection = 'openfisca_indirect_taxation', config_files_directory = config_files_directory)
-    except:
+    except Exception:
         openfisca_survey_collection = SurveyCollection(
             name = 'openfisca_indirect_taxation', config_files_directory = config_files_directory)
 

@@ -9,12 +9,12 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_bis import get_in
 def test_rattrapage_diesel_bis():
     year = 2011
     inflators_by_year = get_inflators_by_year(rebuild = False)
-    inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
+    inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year]) # noqa analysis:ignore
     elasticities = get_elasticities(year)
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
-        #inflation_kwargs = inflation_kwargs,
-        reform_key = 'rattrapage_diesel',
+        # inflation_kwargs = inflation_kwargs,
+        reform = 'rattrapage_diesel',
         year = year,
         )
 
@@ -22,8 +22,8 @@ def test_rattrapage_diesel_bis():
     df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
     df['menage']['depenses_essence_ajustees_rattrapage_diesel'] = df['menage']['depenses_essence_ajustees_rattrapage_diesel'].astype(float)
     df['menage']['check'] = (
-        df['menage']['depenses_essence'] * (1 + (1 + df['menage']['elas_price_1_1']) * 10 / 149.9535) -
-        df['menage']['depenses_essence_ajustees_rattrapage_diesel']
+        df['menage']['depenses_essence'] * (1 + (1 + df['menage']['elas_price_1_1']) * 10 / 149.9535)
+        - df['menage']['depenses_essence_ajustees_rattrapage_diesel']
         )
     absolute_error_margin = 0.01
     assert (df['menage']['check'] < absolute_error_margin).any()

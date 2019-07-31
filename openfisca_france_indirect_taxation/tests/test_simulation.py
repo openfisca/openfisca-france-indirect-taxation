@@ -39,10 +39,10 @@ def run_survey_simulation(year = None):
 
     return survey_scenario, survey_scenario.create_data_frame_by_entity(
         variables = (
-            tva_yaml_lait_variables +
-            categorie_fiscale_yaml_variables +
-            basic_variables +
-            []),
+            tva_yaml_lait_variables
+            + categorie_fiscale_yaml_variables
+            + basic_variables
+            ),
         period = year,
         )
 

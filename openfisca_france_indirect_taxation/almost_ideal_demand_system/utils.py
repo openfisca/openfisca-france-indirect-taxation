@@ -62,7 +62,7 @@ def electricite_only(dataframe):
     for energie in energie_logement_non_elec:
         try:
             dataframe['sum'] += dataframe[energie]
-        except:
+        except Exception:
             pass
     dataframe['elect_only'] = 0
     dataframe.loc[dataframe['sum'] == 0, 'elect_only'] = 1

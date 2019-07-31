@@ -42,7 +42,7 @@ for year in [2000, 2005, 2011]:
     for bien in biens_durables:
         try:
             aggregates_data_frame = aggregates_data_frame.drop(bien, axis = 1)
-        except:
+        except Exception:
             aggregates_data_frame = aggregates_data_frame
 
     produits_alimentaire = ['poste_coicop_111', 'poste_coicop_112', 'poste_coicop_113', 'poste_coicop_114',

@@ -55,7 +55,7 @@ if __name__ == '__main__':
         try:
             data_simulation = \
                 simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_with_e10, year = year)
-        except:
+        except Exception:
             data_simulation = \
                 simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_without_e10, year = year)
             data_simulation['sp_e10_ticpe'] = 0

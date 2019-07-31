@@ -576,7 +576,7 @@ def get_adjusted_input_data_frame(reform_key = None, verbose = False):
                     bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'] *
                     input_data_frame.loc[selection, poste]
                     )
-        except:
+        except Exception:
             print((bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share']))
             print((bdf_adjusted_expenditures.loc[(age, revenus, poste)]))
             raise

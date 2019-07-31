@@ -25,7 +25,7 @@ def get_accises_carburants(liste_carburants):
         for year in range(1993, 2017):
             try:
                 df_accise['{}'.format(year)]
-            except:
+            except KeyError:
                 df_accise['{}'.format(year)] = df_accise['{}'.format(year - 1)]
 
         df_accise = df_accise.transpose()
@@ -54,7 +54,7 @@ def get_majoration_ticpe(liste_carburants):
         for year in range(2007, 2021):
             try:
                 df_majoration['{}'.format(year)]
-            except:
+            except KeyError:
                 df_majoration['{}'.format(year)] = df_majoration['{}'.format(year - 1)]
         df_majoration = df_majoration.transpose()
         df_majoration.rename(columns = {'value': element.replace('_', ' ')}, inplace = True)

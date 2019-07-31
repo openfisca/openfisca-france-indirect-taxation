@@ -30,7 +30,7 @@ class diesel_ticpe(YearlyVariable):
                 parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
             accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
             accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
-        except:
+        except Exception:
             accise_diesel_ticpe = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
 
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
@@ -59,7 +59,7 @@ class diesel_ticpe_ajustee(YearlyVariable):
                 parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
             accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
             accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
-        except:
+        except Exception:
             accise_diesel_ticpe = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
 
         reforme_diesel = parameters(period.start).taxes_carburants.diesel
@@ -150,7 +150,7 @@ class sp_e10_ticpe(Variable):
             majoration_ticpe_super_e10 = \
                 parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
             accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
-        except:
+        except Exception:
             accise_super_e10 = \
                 parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
 
@@ -187,7 +187,7 @@ class sp_e10_ticpe_ajustee(Variable):
             majoration_ticpe_super_e10 = \
                 parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
             accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
-        except:
+        except Exception:
             accise_ticpe_super_e10 = \
                 parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
 
@@ -223,7 +223,7 @@ class sp95_ticpe(YearlyVariable):
             majoration_ticpe_super95 = \
                 parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
             accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
-        except:
+        except Exception:
             accise_ticpe_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
@@ -251,7 +251,7 @@ class sp95_ticpe_ajustee(YearlyVariable):
             majoration_ticpe_super95 = \
                 parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
             accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
-        except:
+        except Exception:
             accise_ticpe_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
         reforme_essence = parameters(period.start).taxes_carburants.essence
@@ -288,7 +288,7 @@ class sp98_ticpe(YearlyVariable):
             majoration_ticpe_super98 = \
                 parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
             accise_ticpe_super98 = accise_super98 + majoration_ticpe_super98
-        except:
+        except Exception:
             accise_ticpe_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
         super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
@@ -316,7 +316,7 @@ class sp98_ticpe_ajustee(YearlyVariable):
             majoration_ticpe_super98 = \
                 parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
             accise_ticpe_super98 = accise_super98 + majoration_ticpe_super98
-        except:
+        except Exception:
             accise_ticpe_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
         reforme_essence = parameters(period.start).taxes_carburants.essence

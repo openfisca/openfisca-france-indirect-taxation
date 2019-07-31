@@ -321,7 +321,7 @@ In loyers_imputes and not in revenus:
                 variables = ['c13111', 'c13121', 'c13141', 'pondmen', 'ident_men'],
                 )
             rev_disp = c05.sort_values(by = ['ident_men'])
-        except:
+        except Exception:
             c05 = survey.get_values(
                 table = "c05",
                 variables = ['c13111', 'c13121', 'c13141', 'pondmen', 'ident_men'],
@@ -334,7 +334,7 @@ In loyers_imputes and not in revenus:
                 variables = ['ident_men', 'revtot', 'revact', 'revsoc', 'revpat', 'rev700', 'rev701', 'rev999',
                              'revindep', 'salaires'],
                 ).sort_values(by = ['ident_men'])
-        except:
+        except Exception:
             menage = survey.get_values(
                 table = "menage",
                 variables = ['ident_men', 'revtot', 'revact', 'revsoc', 'revpat', 'rev700', 'rev701', 'rev999',

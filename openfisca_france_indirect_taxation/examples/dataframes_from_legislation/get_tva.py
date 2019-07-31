@@ -20,7 +20,7 @@ def get_tva_taux_plein():
     for year in range(1968, 2015):
         try:
             df_tva_taux_plein['{}'.format(year)]
-        except:
+        except KeyError:
             df_tva_taux_plein['{}'.format(year)] = df_tva_taux_plein['{}'.format(year - 1)]
     df_tva_taux_plein = df_tva_taux_plein.transpose()
     df_tva_taux_plein = df_tva_taux_plein.sort_index()

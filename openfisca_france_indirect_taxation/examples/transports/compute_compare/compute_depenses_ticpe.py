@@ -48,7 +48,7 @@ if __name__ == '__main__':
             depenses_sp98_ticpe = (data_simulation['sp98_ticpe'] * data_simulation['pondmen']).sum()
             depenses_super_plombe_ticpe = (data_simulation['super_plombe_ticpe'] * data_simulation['pondmen']).sum()
             depenses_sp_e10_ticpe = (data_simulation['sp_e10_ticpe'] * data_simulation['pondmen']).sum()
-        except:
+        except Exception:
             data_simulation = \
                 simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_without_e10, year = year)
             depenses_diesel_ticpe = (data_simulation['diesel_ticpe'] * data_simulation['pondmen']).sum()

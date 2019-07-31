@@ -91,7 +91,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     if year == 2011:
         try:
             conso = survey.get_values(table = "C05")
-        except:
+        except Exception:
             conso = survey.get_values(table = "c05")
         conso.rename(
             columns = {

@@ -113,7 +113,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
                 parser.get("openfisca_france_indirect_taxation", "assets")
                 )
             hotdeck = pandas.read_stata(os.path.join(directory_path, 'hotdeck_result.dta'))
-        except:
+        except Exception:
             hotdeck = survey.get_values(table = 'hotdeck_result')
 
         imput00.reset_index(inplace = True)
@@ -147,7 +147,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
     if year == 2011:
         try:
             loyers_imputes = survey.get_values(table = "MENAGE")
-        except:
+        except Exception:
             loyers_imputes = survey.get_values(table = "menage")
 
         kept_variables = ['ident_men', 'rev801']

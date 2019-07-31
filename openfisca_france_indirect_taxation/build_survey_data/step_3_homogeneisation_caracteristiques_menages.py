@@ -272,7 +272,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         try:
             depmen = survey.get_values(table = "DEPMEN")
-        except:
+        except Exception:
             depmen = survey.get_values(table = "depmen")
         depmen.rename(columns = {'ident': 'ident_men'}, inplace = True)
         sourcp = depmen[['sourcp', 'ident_men']].copy()
@@ -617,7 +617,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         try:
             menage = survey.get_values(table = "MENAGE", variables = variables)
-        except:
+        except Exception:
             menage = survey.get_values(table = "menage", variables = variables)
 
         menage.rename(
@@ -669,7 +669,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             ]
         try:
             depmen = survey.get_values(table = "DEPMEN", variables = variables_depmen)
-        except:
+        except Exception:
             depmen = survey.get_values(table = "depmen", variables = variables_depmen)
         depmen.rename(columns = {'ident_me': 'ident_men'}, inplace = True)
 
