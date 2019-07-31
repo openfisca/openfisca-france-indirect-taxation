@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
-
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
 class alcools_forts_droit_d_accise(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant des droits d'accises sur les alcools forts"
+    label = "Montant des droits d'accises sur les alcools forts"
 
     def formula(menage, period, parameters):
         depenses_ht_alcools_forts = menage('depenses_ht_alcools_forts', period)
@@ -25,7 +22,7 @@ class alcools_forts_droit_d_accise(YearlyVariable):
 class depenses_alcools_forts(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses d'alcools forts'"
+    label = "Dépenses d'alcools forts'"
 
     def formula(menage, period, parameters):
         depenses_ht_alcools_forts = menage('depenses_ht_alcools_forts', period)
@@ -36,7 +33,7 @@ class depenses_alcools_forts(YearlyVariable):
 class biere_droit_d_accise(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant des droits d'accises sur la bière"
+    label = "Montant des droits d'accises sur la bière"
 
     def formula(menage, period, parameters):
         depenses_ht_biere = menage('depenses_ht_biere', period)
@@ -51,7 +48,7 @@ class biere_droit_d_accise(YearlyVariable):
 class depenses_biere(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses de bière"
+    label = "Dépenses de bière"
 
     def formula(menage, period, parameters):
         depenses_ht_biere = menage('depenses_ht_biere', period)
@@ -62,7 +59,7 @@ class depenses_biere(YearlyVariable):
 class total_alcool_droit_d_accise(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant des droits d'accises sur l'alcool"
+    label = "Montant des droits d'accises sur l'alcool"
 
     def formula(menage, period):
         vin_droit_d_accise = menage('vin_droit_d_accise', period)
@@ -74,7 +71,7 @@ class total_alcool_droit_d_accise(YearlyVariable):
 class vin_droit_d_accise(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant des droits d'accises sur le vin"
+    label = "Montant des droits d'accises sur le vin"
 
     def formula(menage, period, parameters):
         depenses_vin = menage('depenses_vin', period)
@@ -88,7 +85,7 @@ class vin_droit_d_accise(YearlyVariable):
 class depenses_vin(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses de vin"
+    label = "Dépenses de vin"
 
     def formula(menage, period, parameters):
         depenses_ht_vin = menage('depenses_ht_vin', period)

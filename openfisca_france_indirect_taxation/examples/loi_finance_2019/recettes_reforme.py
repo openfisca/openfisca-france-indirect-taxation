@@ -6,7 +6,6 @@
 # the increase in taxes he faced. These amounts do not take into account VAT.
 
 # Import general modules
-from __future__ import division
 
 
 # Import modules specific to OpenFisca
@@ -51,59 +50,59 @@ taux_tva_apres_reforme = 0.2
 
 # poste_11_1_1_1_1
 df_reforme['recettes_tva_avant_reforme_poste_11_1_1_1_1'] = (
-        df_reforme['poste_11_1_1_1_1'] * taux_tva_avant_reforme / (1+taux_tva_avant_reforme)
-        )
+    df_reforme['poste_11_1_1_1_1'] * taux_tva_avant_reforme / (1 + taux_tva_avant_reforme)
+    )
 df_reforme['recettes_tva_apres_reforme_poste_11_1_1_1_1'] = (
-        df_reforme['poste_11_1_1_1_1_reforme_tva_2019'] * taux_tva_apres_reforme / (1+taux_tva_apres_reforme)
-        )
+    df_reforme['poste_11_1_1_1_1_reforme_tva_2019'] * taux_tva_apres_reforme / (1 + taux_tva_apres_reforme)
+    )
 df_reforme['recettes_reforme_poste_11_1_1_1_1'] = (
-        df_reforme['recettes_tva_apres_reforme_poste_11_1_1_1_1']
-        - df_reforme['recettes_tva_avant_reforme_poste_11_1_1_1_1']
-        )
+    df_reforme['recettes_tva_apres_reforme_poste_11_1_1_1_1']
+    - df_reforme['recettes_tva_avant_reforme_poste_11_1_1_1_1']
+    )
 recettes_poste_11_1_1_1_1 = (df_reforme['recettes_reforme_poste_11_1_1_1_1'] * df_reforme['pondmen']).sum() / 1000000
 
 # poste_11_1_1_1_2
 df_reforme['recettes_tva_avant_reforme_poste_11_1_1_1_2'] = (
-        df_reforme['poste_11_1_1_1_2'] * taux_tva_avant_reforme / (1+taux_tva_avant_reforme)
-        )
+    df_reforme['poste_11_1_1_1_2'] * taux_tva_avant_reforme / (1 + taux_tva_avant_reforme)
+    )
 df_reforme['recettes_tva_apres_reforme_poste_11_1_1_1_2'] = (
-        df_reforme['poste_11_1_1_1_2_reforme_tva_2019'] * taux_tva_apres_reforme / (1+taux_tva_apres_reforme)
-        )
+    df_reforme['poste_11_1_1_1_2_reforme_tva_2019'] * taux_tva_apres_reforme / (1 + taux_tva_apres_reforme)
+    )
 df_reforme['recettes_reforme_poste_11_1_1_1_2'] = (
-        df_reforme['recettes_tva_apres_reforme_poste_11_1_1_1_2']
-        - df_reforme['recettes_tva_avant_reforme_poste_11_1_1_1_2']
-        )
+    df_reforme['recettes_tva_apres_reforme_poste_11_1_1_1_2']
+    - df_reforme['recettes_tva_avant_reforme_poste_11_1_1_1_2']
+    )
 recettes_poste_11_1_1_1_2 = (df_reforme['recettes_reforme_poste_11_1_1_1_2'] * df_reforme['pondmen']).sum() / 1000000
 
 # poste_11_1_3_1
 df_reforme['recettes_tva_avant_reforme_poste_11_1_3_1'] = (
-        df_reforme['poste_11_1_3_1'] * taux_tva_avant_reforme / (1+taux_tva_avant_reforme)
-        )
+    df_reforme['poste_11_1_3_1'] * taux_tva_avant_reforme / (1 + taux_tva_avant_reforme)
+    )
 df_reforme['recettes_tva_apres_reforme_poste_11_1_3_1'] = (
-        df_reforme['poste_11_1_3_1_reforme_tva_2019'] * taux_tva_apres_reforme / (1+taux_tva_apres_reforme)
-        )
+    df_reforme['poste_11_1_3_1_reforme_tva_2019'] * taux_tva_apres_reforme / (1 + taux_tva_apres_reforme)
+    )
 df_reforme['recettes_reforme_poste_11_1_3_1'] = (
-        df_reforme['recettes_tva_apres_reforme_poste_11_1_3_1']
-        - df_reforme['recettes_tva_avant_reforme_poste_11_1_3_1']
-        )
+    df_reforme['recettes_tva_apres_reforme_poste_11_1_3_1']
+    - df_reforme['recettes_tva_avant_reforme_poste_11_1_3_1']
+    )
 recettes_poste_11_1_3_1 = (df_reforme['recettes_reforme_poste_11_1_3_1'] * df_reforme['pondmen']).sum() / 1000000
 
 # poste_11_1_3_2
 df_reforme['recettes_tva_avant_reforme_poste_11_1_3_2'] = (
-        df_reforme['poste_11_1_3_2'] * taux_tva_avant_reforme / (1+taux_tva_avant_reforme)
-        )
+    df_reforme['poste_11_1_3_2'] * taux_tva_avant_reforme / (1 + taux_tva_avant_reforme)
+    )
 df_reforme['recettes_tva_apres_reforme_poste_11_1_3_2'] = (
-        df_reforme['poste_11_1_3_2_reforme_tva_2019'] * taux_tva_apres_reforme / (1+taux_tva_apres_reforme)
-        )
+    df_reforme['poste_11_1_3_2_reforme_tva_2019'] * taux_tva_apres_reforme / (1 + taux_tva_apres_reforme)
+    )
 df_reforme['recettes_reforme_poste_11_1_3_2'] = (
-        df_reforme['recettes_tva_apres_reforme_poste_11_1_3_2']
-        - df_reforme['recettes_tva_avant_reforme_poste_11_1_3_2']
-        )
+    df_reforme['recettes_tva_apres_reforme_poste_11_1_3_2']
+    - df_reforme['recettes_tva_avant_reforme_poste_11_1_3_2']
+    )
 recettes_poste_11_1_3_2 = (df_reforme['recettes_reforme_poste_11_1_3_2'] * df_reforme['pondmen']).sum() / 1000000
 
 recettes_reforme = (
-        recettes_poste_11_1_1_1_1
-        + recettes_poste_11_1_1_1_2
-        + recettes_poste_11_1_3_1
-        + recettes_poste_11_1_3_2
-        )
+    recettes_poste_11_1_1_1_1
+    + recettes_poste_11_1_1_1_2
+    + recettes_poste_11_1_3_1
+    + recettes_poste_11_1_3_2
+    )

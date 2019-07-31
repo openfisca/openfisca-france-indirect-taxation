@@ -46,17 +46,17 @@ def extract_informations_from_coicop_to_categorie_fiscale():
             by = [exceptions.annee - np.arange(exceptions.shape[0]), 'posteCOICOP', 'categoriefiscale']
             )
         for k, g in grouped:
-            print(
+            print((
                 g.posteCOICOP.unique()[0], g.description.unique()[0], g.annee.min(), g.annee.max(),
                 taxe_by_categorie_fiscale_number[int(g.categoriefiscale.unique())]
-                )
+                ))
 
     def get_dominant_and_exceptions(division):
         assert division in divisions
         parametres_fiscalite_file_path = os.path.join(legislation_directory, 'coicop_to_categorie_fiscale.csv')
         parametres_fiscalite_data_frame = pd.read_csv(
             parametres_fiscalite_file_path,
-            converters = {'posteCOICOP': unicode}
+            converters = {'posteCOICOP': str}
             )
         parametres_fiscalite_data_frame['division'] = parametres_fiscalite_data_frame['posteCOICOP'].str[:2].copy()
         division_dataframe = parametres_fiscalite_data_frame.query('division == @division')
@@ -66,10 +66,10 @@ def extract_informations_from_coicop_to_categorie_fiscale():
 
     for coicop_division in divisions:
         dominant, exceptions = get_dominant_and_exceptions(coicop_division)
-        print(u'\nDivision: {}.\nCatégorie fiscale dominante: {}.\nExceptions:'.format(
+        print(('\nDivision: {}.\nCatégorie fiscale dominante: {}.\nExceptions:'.format(
             coicop_division,
             taxe_by_categorie_fiscale_number[dominant]
-            ))
+            )))
         format_exceptions(exceptions)
 
 
@@ -84,7 +84,7 @@ def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_cod
         coicop_nomenclature.code_coicop.str[:len(coicop_sub_code)] == coicop_sub_code,
         ['label_{}'.format(level[:-1]) for level in known_levels]
         ].drop_duplicates().dropna().to_dict(orient = 'records')[0]
-    for key, value in labels_by_sub_level.items():
+    for key, value in list(labels_by_sub_level.items()):
         labels_by_sub_level[key] = value
     modified_level = sub_levels[len(coicop_code.split('.')) - 1][:-1]
     labels_by_sub_level['label_{}'.format(modified_level)] = label
@@ -94,7 +94,7 @@ def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_cod
 def apply_modification(coicop_nomenclature = None, value = None, categorie_fiscale = None,
         origin = None, start = 1994, stop = 2014, label = ''):
     assert coicop_nomenclature is not None
-    assert categorie_fiscale in taxe_by_categorie_fiscale_number.values()
+    assert categorie_fiscale in list(taxe_by_categorie_fiscale_number.values())
     assert 1994 <= start < stop <= 2014, "Invalid start={} and/or stop={}".format(start, stop)
 
     if isinstance(value, int):
@@ -173,7 +173,7 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
             'origin': origin
             }
         additional_dict.update(infra_labels)
-        for item, val in additional_dict.items():
+        for item, val in list(additional_dict.items()):
             additional_row[item] = [val]
 
         coicop_nomenclature = coicop_nomenclature.append(additional_row)
@@ -658,8 +658,8 @@ if __name__ == "__main__":
     coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = True)
     test_coicop_legislation()
 
-    from build_coicop_bdf import bdf
+    from .build_coicop_bdf import bdf
     bdf_coicop_nomenclature = bdf(year = 2011)
     bdf_coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(bdf_coicop_nomenclature, to_csv = True)
 
-    print(get_categorie_fiscale('11.1.1.1.1', year = 2010))
+    print((get_categorie_fiscale('11.1.1.1.1', year = 2010)))

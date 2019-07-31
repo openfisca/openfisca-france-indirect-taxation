@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
-
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
 class taxes_indirectes_total(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant total de taxes indirectes payées"
+    label = "Montant total de taxes indirectes payées"
 
     def formula(self, simulation, period):
         tva_total = menage('tva_total', period)
@@ -24,7 +21,7 @@ class taxes_indirectes_total(YearlyVariable):
 class taxes_indirectes_total_hors_tva(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant total de taxes indirectes payées sans compter la TVA"
+    label = "Montant total de taxes indirectes payées sans compter la TVA"
 
     def formula(self, simulation, period):
         vin_droit_d_accise = menage('vin_droit_d_accise', period)

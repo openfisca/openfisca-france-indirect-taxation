@@ -1,4 +1,3 @@
-from __future__ import division
 
 
 # Dans ce script on utilise des histogrammes pour comparer la distribution des variables dans les deux enquêtes.
@@ -44,7 +43,7 @@ data_matched_distance = pd.read_csv(
         ), sep =',', decimal = '.'
     )
 
-    
+
 data_matched_random = pd.read_csv(
     os.path.join(
         default_config_files_directory,
@@ -76,17 +75,17 @@ def data_distribution_distance_annuelle_group(data_matched, data_entd, distance,
     list_values_entd = []
     list_keys = []
     data_matched_decile = data_matched.query('{} == {}'.format(group, element))
-    for i in range(0,11):
-        j = float(i)/10
+    for i in range(0, 11):
+        j = float(i) / 10
         part_matched = (
             sum(data_matched_decile.query('{}_groupe == {}'.format(distance, j))['pondmen']) /
             data_matched_decile['pondmen'].sum()
             )
         list_values_matched.append(part_matched)
-    
+
     data_entd_decile = data_entd.query('{} == {}'.format(group, element))
-    for i in range(0,11):
-        j = float(i)/10
+    for i in range(0, 11):
+        j = float(i) / 10
         part_entd = (
             sum(data_entd_decile.query('{}_groupe == {}'.format(distance, j))['pondmen']) /
             data_entd_decile['pondmen'].sum()
@@ -95,13 +94,14 @@ def data_distribution_distance_annuelle_group(data_matched, data_entd, distance,
         list_values_entd.append(part_entd)
         list_keys.append('{}'.format(j))
 
-    values = {'keys': list_keys, 'entd' : list_values_entd, 'matched': list_values_matched}
+    values = {'keys': list_keys, 'entd': list_values_entd, 'matched': list_values_matched}
     dataframe = pd.DataFrame.from_dict(values)
     dataframe = dataframe.set_index('keys')
 
     return dataframe
 
-for i in range(1,11):
+
+for i in range(1, 11):
     dataframe = data_distribution_distance_annuelle_group(data_matched_random, data_entd, 'distance', 'niveau_vie_decile', i)
     save_dataframe_to_graph(
         dataframe, 'Matching/distribution_distance_annuelle_decile_{}.csv'.format(i)

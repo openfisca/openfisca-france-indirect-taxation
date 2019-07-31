@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
-
 import logging
 
 
@@ -63,7 +60,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
         # Passage à l'euro
         conso.depense = conso.depense / 6.55957
         conso.depense_avt_imput = conso.depense_avt_imput / 6.55957
-        conso_small = conso[[u'ident_men', u'poste1995', u'depense']]
+        conso_small = conso[['ident_men', 'poste1995', 'depense']]
 
         conso_unstacked = conso_small.set_index(['ident_men', 'poste1995']).unstack('poste1995')
         conso_unstacked = conso_unstacked.fillna(0)
@@ -116,10 +113,10 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     assert not set(conso.columns).difference(set(coicop_poste_bdf.code_bdf))
     assert not set(coicop_poste_bdf.code_bdf.dropna()).difference(set(conso.columns))
 
-    coicop_poste_bdf['formatted_poste'] = u'poste_' + coicop_poste_bdf.code_coicop.str.replace('.', u'_')
+    coicop_poste_bdf['formatted_poste'] = 'poste_' + coicop_poste_bdf.code_coicop.str.replace('.', '_')
     coicop_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['code_coicop']
     assert not set(coicop_by_poste_bdf.keys()).difference(set(conso.columns))
-    assert not set(set(conso.columns)).difference(coicop_by_poste_bdf.keys())
+    assert not set(set(conso.columns)).difference(list(coicop_by_poste_bdf.keys()))
     formatted_poste_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['formatted_poste']
     coicop_data_frame = conso.rename(columns = formatted_poste_by_poste_bdf)
     depenses = coicop_data_frame.merge(poids, left_index = True, right_index = True)

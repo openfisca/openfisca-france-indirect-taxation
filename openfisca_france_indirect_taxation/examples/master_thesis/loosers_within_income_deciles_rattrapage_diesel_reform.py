@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 import pandas
 
@@ -54,21 +54,21 @@ unite_conso = (menages['ocde10'] * menages['pondmen']).sum()
 contribution = (menages['difference_contribution_energie_{}'.format(reforme)] * menages['pondmen']).sum()
 contribution_unite_conso = contribution / unite_conso
 
-#for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
-menages[u'Cost_after_green_cheques'] = (
+# for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
+menages['Cost_after_green_cheques'] = (
     ((contribution_unite_conso) * menages['ocde10'] - menages['difference_contribution_energie_{}'.format(reforme)])
     )
 
-print reforme
+print(reforme)
 for i in range(1, 11):
     menages_decile = menages.loc[menages['niveau_vie_decile'] == i]
     len_decile = float(len(menages_decile))
 
-    menages_decile_loosers = menages_decile.query(u'Cost_after_green_cheques < 0')
+    menages_decile_loosers = menages_decile.query('Cost_after_green_cheques < 0')
     len_loosers = float(len(menages_decile_loosers))
     share = len_loosers / len_decile
 
     mean_loosers = menages_decile_loosers['Cost_after_green_cheques'].mean()
     mean_loosers_income = menages_decile_loosers['rev_disp_loyerimput'].mean()
 
-    print i, share * 100, mean_loosers, mean_loosers_income
+    print(i, share * 100, mean_loosers, mean_loosers_income)

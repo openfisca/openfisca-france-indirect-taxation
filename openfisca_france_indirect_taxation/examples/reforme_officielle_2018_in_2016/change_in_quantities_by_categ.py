@@ -5,8 +5,6 @@
 # It gives another point of view than the financial effort.
 
 
-from __future__ import division
-
 import pandas as pd
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -31,15 +29,16 @@ simulated_variables = [
     'pondmen',
     ]
 
+
 def change_quantities_by_categ(df_reforme, group):
 
     i_min = df_reforme[group].min()
     i_max = df_reforme[group].max()
-    df_by_categ = pd.DataFrame(index = range(i_min, i_max+1), columns =
+    df_by_categ = pd.DataFrame(index = list(range(i_min, i_max + 1)), columns =
         ['change_in_combustibles_liquides', 'change_in_diesel', 'change_in_essence', 'change_in_gaz_ville']
         )
 
-    for i in range(i_min, i_max+1):
+    for i in range(i_min, i_max + 1):
         df_category = df_reforme.query('{0} == {1}'.format(group, i))
         df_category['change_in_combustibles_liquides'] = ((
             df_category['quantites_combustibles_liquides_officielle_2018_in_2016'] -
@@ -51,7 +50,7 @@ def change_quantities_by_categ(df_reforme, group):
             df_category['pondmen'].sum()
             )
         df_by_categ['change_in_combustibles_liquides'][i] = change_in_combustibles_liquides
-    
+
         df_category['change_in_diesel'] = ((
             df_category['quantites_diesel_officielle_2018_in_2016'] -
             df_category['quantites_diesel']
@@ -62,7 +61,7 @@ def change_quantities_by_categ(df_reforme, group):
             df_category['pondmen'].sum()
             )
         df_by_categ['change_in_diesel'][i] = change_in_diesel
-    
+
         df_category['change_in_essence'] = ((
             df_category['quantites_essence_officielle_2018_in_2016'] -
             df_category['quantites_essence']
@@ -73,7 +72,7 @@ def change_quantities_by_categ(df_reforme, group):
             df_category['pondmen'].sum()
             )
         df_by_categ['change_in_essence'][i] = change_in_essence
-    
+
         df_category['change_in_gaz_ville'] = ((
             df_category['quantites_gaz_final_officielle_2018_in_2016'] -
             df_category['quantites_gaz_final']
@@ -84,15 +83,15 @@ def change_quantities_by_categ(df_reforme, group):
             df_category['pondmen'].sum()
             )
         df_by_categ['change_in_gaz_ville'][i] = change_in_gaz_ville
-    
+
     df_to_plot = df_by_categ[
-        [u'change_in_diesel'] +
-        [u'change_in_essence'] +
-        [u'change_in_combustibles_liquides'] +
-        [u'change_in_gaz_ville']
+        ['change_in_diesel'] +
+        ['change_in_essence'] +
+        ['change_in_combustibles_liquides'] +
+        ['change_in_gaz_ville']
         ]
     graph_builder_bar_percent(df_to_plot)
-    
+
     return df_to_plot
 
 
@@ -100,11 +99,11 @@ def change_quantities_among_consumers_by_categ(df_reforme, group):
 
     i_min = df_reforme[group].min()
     i_max = df_reforme[group].max()
-    df_by_categ = pd.DataFrame(index = range(i_min, i_max+1), columns =
+    df_by_categ = pd.DataFrame(index = list(range(i_min, i_max + 1)), columns =
         ['change_in_combustibles_liquides', 'change_in_diesel', 'change_in_essence', 'change_in_gaz_ville']
         )
 
-    for i in range(i_min, i_max+1):
+    for i in range(i_min, i_max + 1):
         df_category = df_reforme.query('{} == {}'.format(group, i))
         df_restricted = df_category.query('quantites_combustibles_liquides > 0')
         df_restricted['change_in_combustibles_liquides'] = ((
@@ -117,7 +116,7 @@ def change_quantities_among_consumers_by_categ(df_reforme, group):
             df_restricted['pondmen'].sum()
             )
         df_by_categ['change_in_combustibles_liquides'][i] = change_in_combustibles_liquides
-    
+
         df_restricted = df_category.query('quantites_diesel > 0')
         df_restricted['change_in_diesel'] = ((
             df_restricted['quantites_diesel_officielle_2018_in_2016'] -
@@ -129,7 +128,7 @@ def change_quantities_among_consumers_by_categ(df_reforme, group):
             df_restricted['pondmen'].sum()
             )
         df_by_categ['change_in_diesel'][i] = change_in_diesel
-    
+
         df_restricted = df_category.query('quantites_essence > 0')
         df_restricted['change_in_essence'] = ((
             df_restricted['quantites_essence_officielle_2018_in_2016'] -
@@ -141,7 +140,7 @@ def change_quantities_among_consumers_by_categ(df_reforme, group):
             df_restricted['pondmen'].sum()
             )
         df_by_categ['change_in_essence'][i] = change_in_essence
-    
+
         df_restricted = df_category.query('quantites_gaz_final > 0')
         df_restricted['change_in_gaz_ville'] = ((
             df_restricted['quantites_gaz_final_officielle_2018_in_2016'] -
@@ -153,12 +152,12 @@ def change_quantities_among_consumers_by_categ(df_reforme, group):
             df_restricted['pondmen'].sum()
             )
         df_by_categ['change_in_gaz_ville'][i] = change_in_gaz_ville
-    
+
     df_to_plot = df_by_categ[
-        [u'change_in_diesel'] +
-        [u'change_in_essence'] +
-        [u'change_in_combustibles_liquides'] +
-        [u'change_in_gaz_ville']
+        ['change_in_diesel'] +
+        ['change_in_essence'] +
+        ['change_in_combustibles_liquides'] +
+        ['change_in_gaz_ville']
         ]
     graph_builder_bar_percent(df_to_plot)
     save_dataframe_to_graph(df_to_plot, 'Quantities/change_in_quantities_by_{}.csv'.format(group))

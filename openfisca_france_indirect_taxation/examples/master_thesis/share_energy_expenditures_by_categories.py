@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line_percent, \
@@ -33,7 +33,7 @@ for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
 
     df.rename(columns = {'rev_disp_loyerimput': 'disposable income'},
         inplace = True)
-    for resource in [u'disposable income']:
+    for resource in ['disposable income']:
         df['Energy share in {}'.format(resource)] = df['depenses_energies_totales'] / df[resource]
         df['Housing energy share in {}'.format(resource)] = df['depenses_energies_logement'] / df[resource]
         df['Transport energy share in {}'.format(resource)] = df['depenses_carburants_corrigees'] / df[resource]
@@ -45,7 +45,7 @@ for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
         df['Solid fuels share in {}'.format(resource)] = df['depenses_combustibles_solides'] / df[resource]
 
         # Réalisation de graphiques
-        print('Percentage of energy expenditure in {}').format(resource)
+        print(('Percentage of energy expenditure in {}').format(resource))
         graph_builder_line_percent(
             df[['Energy share in {}'.format(resource),
             'Housing energy share in {}'.format(resource),
@@ -62,5 +62,5 @@ for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
             'Solid fuels share in {}'.format(resource)]]
             )
 
-        #save_dataframe_to_graph(df,
+        # save_dataframe_to_graph(df,
         #    'Expenditures/share_energy_expenditures_in_{0}_by_{1}.csv'.format(resource.replace(' ', '_'), category))

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 from openfisca_core import reforms
 
@@ -8,7 +7,7 @@ from openfisca_core import reforms
 def build_reform(tax_benefit_system):
     Reform = reforms.make_reform(
         key = 'taxes_carburants',
-        name = u"Réforme de l'imposition indirecte des carburants",
+        name = "Réforme de l'imposition indirecte des carburants",
         use_baseline =tax_benefit_system,
         )
 
@@ -27,12 +26,12 @@ def modify_legislation_json(reference_legislation_json_copy):
         "children": {
             "diesel": {
                 "@type": "Parameter",
-                "description": u"Surcroît de prix du diesel (en euros par hectolitres)",
+                "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 "format": 'float',
                 "unit": 'currency',
-                "values": [{'start': u'2010-01-01', 'stop': '2014-12-31', 'value': 17.85}],
-                "values": [{'start': u'2015-01-01', 'stop': '2015-12-31', 'value': 15.59}],
-                "values": [{'start': u'2016-01-01', 'stop': '2017-12-31', 'value': 15.31}],
+                "values": [{'start': '2010-01-01', 'stop': '2014-12-31', 'value': 17.85}],
+                "values": [{'start': '2015-01-01', 'stop': '2015-12-31', 'value': 15.59}],
+                "values": [{'start': '2016-01-01', 'stop': '2017-12-31', 'value': 15.31}],
                 },
             },
         }

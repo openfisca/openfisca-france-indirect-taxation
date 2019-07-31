@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
-
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
 class depenses_assurance_sante(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses en assurances liées aux transports"
+    label = "Dépenses en assurances liées aux transports"
 
     def formula(menage, period):
         depenses_assurance_sante = menage('poste_12_5_3_1_1', period)
@@ -20,7 +17,7 @@ class depenses_assurance_sante(YearlyVariable):
 class depenses_assurance_transport(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses en assurances liées aux transports"
+    label = "Dépenses en assurances liées aux transports"
 
     def formula(menage, period):
         depenses_assurance_transport = menage('poste_12_5_4_1_1', period)
@@ -30,7 +27,7 @@ class depenses_assurance_transport(YearlyVariable):
 class depenses_autres_assurances(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses en assurances liées aux transports"
+    label = "Dépenses en assurances liées aux transports"
 
     def formula(menage, period):
         depenses_assurance_vie_deces = menage('poste_12_5_1_1_1', period)
@@ -46,17 +43,18 @@ class depenses_autres_assurances(YearlyVariable):
 class depenses_ticpe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Consommation de carburants"
+    label = "Consommation de carburants"
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         returnmenage('depenses_ht_ticpe', period) * (1 + taux_plein_tva)
         # This is equivalent to call directly poste_07_2_2_1_1
 
+
 class depenses_essence_recalculees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses en essence recalculées à partir du prix ht"
+    label = "Dépenses en essence recalculées à partir du prix ht"
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -69,7 +67,7 @@ class depenses_essence_recalculees(YearlyVariable):
 class depenses_tot(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Somme des dépenses du ménage"
+    label = "Somme des dépenses du ménage"
 
     def formula(menage, period):
         postes_agreges = ['poste_agrege_{}'.format(index) for index in
@@ -85,7 +83,7 @@ class depenses_tot(YearlyVariable):
 class depenses_totales(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Consommation totale du ménage"
+    label = "Consommation totale du ménage"
 
     def formula(menage, period):
         depenses_tva_taux_super_reduit = menage('depenses_tva_taux_super_reduit', period)
@@ -103,52 +101,52 @@ class depenses_totales(YearlyVariable):
 class distance(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Distance annuelle parcourue imputée de l'ENTD"
+    label = "Distance annuelle parcourue imputée de l'ENTD"
 
 
 class distance_routiere_hebdomadaire_teg(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Distance routière parcourue par le ménage pour se rendre à son teg par semaine"
+    label = "Distance routière parcourue par le ménage pour se rendre à son teg par semaine"
 
 
 class duree_moyenne_trajet_aller_retour_teg(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Durée moyenne de l'aller-retour pour le teg"
+    label = "Durée moyenne de l'aller-retour pour le teg"
 
 
 class quantite_diesel(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantité de diesel consommée (en hecto-litres)"
+    label = "Quantité de diesel consommée (en hecto-litres)"
 
 
 class quantite_supercarburants(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantité de supercarburants (super 95, super98 et superE10) consommée (en hecto-litres)"
+    label = "Quantité de supercarburants (super 95, super98 et superE10) consommée (en hecto-litres)"
 
 
 class somme_coicop12(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Somme des postes coicop12"
+    label = "Somme des postes coicop12"
 
     def formula(menage, period):
         return sum(
-           menage('coicop12_{}'.format(idx), period)
-            for idx in xrange(1, 13)
+            menage('coicop12_{}'.format(idx), period)
+            for idx in range(1, 13)
             )
 
 
 class somme_coicop12_conso(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Somme des postes coicop12 de 1 à 8"
+    label = "Somme des postes coicop12 de 1 à 8"
 
     def formula(menage, period):
         return sum(
-           menage('coicop12_{}'.format(idx), period)
-            for idx in xrange(1, 9)
+            menage('coicop12_{}'.format(idx), period)
+            for idx in range(1, 9)
             )

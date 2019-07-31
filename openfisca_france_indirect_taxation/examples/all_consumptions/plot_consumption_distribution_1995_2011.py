@@ -2,7 +2,7 @@
 
 
 # Import de modules généraux
-from __future__ import division
+
 
 import pandas
 import seaborn
@@ -51,4 +51,3 @@ if __name__ == '__main__':
             df['poste_agrege_{}'.format(suffix)] / df['depenses_tot']
 
     graph_builder_bar(df[['part_poste_agrege_{}'.format(suffix) for suffix in suffixes]])
-

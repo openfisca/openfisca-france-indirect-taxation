@@ -9,9 +9,6 @@
 # Regarder code StatMatch
 
 
-from __future__ import division
-
-
 import logging
 import os
 import pandas
@@ -64,28 +61,28 @@ input_data_frame.reset_index(inplace = True)
 
 variables_bdf = [
     'agepr',
-    #'aidlog1',
-    #'aidlog2',
-    #'ancons',
-    #'cataeu',
-    #'chaufp',
-    #'cs42',
-    #'dip14',
-    #'h_trans1',
-    #'htl',
-    #'mall1',
-    #'mall2',
-    #'mchof',
-    #'mchof_d',
-    #'mfac_eau1',
-    #'mfac_eau1_d',
-    #'mfac_eg1',
-    #'mfac_eg1_d',
-    #'mloy',
-    #'mloy_d',
-    #'mode_trans1',
-    #'nbh1',
-    #'nbphab',
+    # 'aidlog1',
+    # 'aidlog2',
+    # 'ancons',
+    # 'cataeu',
+    # 'chaufp',
+    # 'cs42',
+    # 'dip14',
+    # 'h_trans1',
+    # 'htl',
+    # 'mall1',
+    # 'mall2',
+    # 'mchof',
+    # 'mchof_d',
+    # 'mfac_eau1',
+    # 'mfac_eau1_d',
+    # 'mfac_eg1',
+    # 'mfac_eg1_d',
+    # 'mloy',
+    # 'mloy_d',
+    # 'mode_trans1',
+    # 'nbh1',
+    # 'nbphab',
     'nactifs',
     'nenfants',
     'ocde10',
@@ -95,10 +92,10 @@ variables_bdf = [
     'revtot',
     'situapr',
     'situacj',
-    #'surfhab',
-    #'tau',
-    #'tchof',
-    #'tuu',
+    # 'surfhab',
+    # 'tau',
+    # 'tchof',
+    # 'tuu',
     'typmen',
     'zeat',
     ]
@@ -126,14 +123,14 @@ conso_bdf_keep = input_data_frame[variables_bdf]
 # Compare surveys :
 
 menage_enl_keep['depenses_gaz'] = menage_enl_keep['coml12'] + menage_enl_keep['coml3']
-print menage_enl_keep['depenses_gaz'].mean()
-print conso_bdf_keep['poste_coicop_452'].mean()
+print(menage_enl_keep['depenses_gaz'].mean())
+print(conso_bdf_keep['poste_coicop_452'].mean())
 
-print menage_enl_keep['msituac'].hist()
-print conso_bdf_keep['situacj'].hist()
+print(menage_enl_keep['msituac'].hist())
+print(conso_bdf_keep['situacj'].hist())
 
-print menage_enl_keep['mne1'].hist()
-print conso_bdf_keep['nenfants'].hist()
+print(menage_enl_keep['mne1'].hist())
+print(conso_bdf_keep['nenfants'].hist())
 
 menage_enl_keep['mne1'].plot.density()
 conso_bdf_keep['nenfants'].plot.density()

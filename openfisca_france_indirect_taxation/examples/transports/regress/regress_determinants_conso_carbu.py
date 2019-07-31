@@ -12,8 +12,6 @@
 # We must construct a dataframe with for each individual its fuel consumption, and all the determinant variables.
 
 
-from __future__ import division
-
 import statsmodels.formula.api as smf
 import numpy as np
 import pandas as pd
@@ -64,10 +62,10 @@ if __name__ == '__main__':
         del simulated_variables_with_e10, simulated_variables_without_e10
 
         liste_carburants_accise = get_accise_ticpe_majoree()
-        value_accise_diesel = liste_carburants_accise['accise majoree diesel'].loc[u'{}'.format(year)] / 100
-        value_accise_sp = liste_carburants_accise['accise majoree sans plomb'].loc[u'{}'.format(year)] / 100
+        value_accise_diesel = liste_carburants_accise['accise majoree diesel'].loc['{}'.format(year)] / 100
+        value_accise_sp = liste_carburants_accise['accise majoree sans plomb'].loc['{}'.format(year)] / 100
         value_accise_super_plombe = \
-            liste_carburants_accise['accise majoree super plombe'].loc[u'{}'.format(year)] / 100
+            liste_carburants_accise['accise majoree super plombe'].loc['{}'.format(year)] / 100
 
         data_simulation['quantite_diesel'] = data_simulation['diesel_ticpe'] / (value_accise_diesel)
         data_simulation['quantite_sans_plomb'] = (data_simulation['sp95_ticpe'] + data_simulation['sp98_ticpe'] +
@@ -145,19 +143,19 @@ if __name__ == '__main__':
             ln_diesel_ttc + ln_super_95_ttc + ln_rev_disponible + rural + petite_villes + grandes_villes + \
             agglo_paris + nenfants + nadultes + situacj + situapr',
             data = data_log).fit()
-        print reg_conso_carbu_log.summary()
+        print(reg_conso_carbu_log.summary())
 
         # We will now introduce an instrumental variable to correct for the endogeneity of expenditures.
 
         data_log['loyer'] = data_log['poste_coicop_411'] + data_log['poste_coicop_412'] + data_log['poste_coicop_421']
         data_log.to_csv(os.path.join(default_config_files_directory, 'openfisca_france_indirect_taxation', 'assets',
             'quaids', 'data_regression.csv'), sep = ',')
-        #model = \
+        # model = \
         #    gmm.IV2SLS(data_log['ln_rev_disponible'], data_log['ln_quantite_carbu'], data_log['loyer']).fit()
         #print model.summary()
 
         # reg_gmm = statsmodels.sandbox.regression.gmm.IV2SLS('ln_rev_disponible', 'ln_quantite_carbu',
-          #                                                  instrument='loyer')
+        #                                                  instrument='loyer')
 
 # The results are equivalent for the three years concerning the income elasticity, and it is close to 1. It seems to be
 # important, but not absurd. The price elasticities however are probably not well estimated, with positive price

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -36,7 +36,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         )
 
     menages_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
-    menages_use_baseline =survey_scenario.create_data_frame_by_entity(simulated_variables,
+    menages_use_baseline = survey_scenario.create_data_frame_by_entity(simulated_variables,
         use_baseline =True, period = year)['menage']
 
     unite_conso = (menages_reforme['ocde10'] * menages_reforme['pondmen']).sum()
@@ -47,7 +47,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
     contribution_unite_conso = contribution / unite_conso
 
     # for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
-    menages_reforme[u'Cost_after_green_cheques_{}'.format(reforme)] = (
+    menages_reforme['Cost_after_green_cheques_{}'.format(reforme)] = (
         contribution_unite_conso * menages_reforme['ocde10'] -
         (menages_reforme['total_taxes_energies'] - menages_reference['total_taxes_energies'])
         )
@@ -60,10 +60,10 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
 
     len_tot = float(len(menages_reforme))
 
-    menages_loosers = menages_reforme.query(u'Cost_after_green_cheques_{} < 0'.format(reforme))
+    menages_loosers = menages_reforme.query('Cost_after_green_cheques_{} < 0'.format(reforme))
     len_loosers = float(len(menages_loosers))
     share = len_loosers / len_tot
 
-    mean_loosers = menages_loosers[u'Cost_after_green_cheques_{}'.format(reforme)].mean()
+    mean_loosers = menages_loosers['Cost_after_green_cheques_{}'.format(reforme)].mean()
 
     share_loosers[reforme] = [share * 100, mean_loosers]

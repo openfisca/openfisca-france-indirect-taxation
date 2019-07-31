@@ -8,7 +8,7 @@ import os
 from ipp_macro_series_parser.agregats_transports.poids_carburants.poids_carburants_cleaner import consommation, parc_auto
 
 
-parc_annuel_moyen_vp = parc_auto[parc_auto['categorie'] == u'Voitures particulières']
+parc_annuel_moyen_vp = parc_auto[parc_auto['categorie'] == 'Voitures particulières']
 del parc_annuel_moyen_vp['categorie']
 parc_annuel_moyen_vp = parc_annuel_moyen_vp.set_index('index')
 parc_annuel_moyen_vp = parc_annuel_moyen_vp.transpose()
@@ -20,7 +20,7 @@ del parc_annuel_moyen_vp['Total']
 del parc_annuel_moyen_vp['check']
 parc_annuel_moyen_vp.columns = ['essence', 'diesel']
 
-quantite_carbu_vp_france = consommation[consommation['index'] == u'Voitures particulières']
+quantite_carbu_vp_france = consommation[consommation['index'] == 'Voitures particulières']
 del quantite_carbu_vp_france['index']
 quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('categorie')
 quantite_carbu_vp_france = quantite_carbu_vp_france.transpose()

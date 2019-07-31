@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
-
 import pandas as pd
 import numpy as np
 import os
@@ -175,7 +172,7 @@ for year in [2000, 2005, 2011]:
     dataframe['depenses_par_uc'] = dataframe['depenses_tot'] / dataframe['ocde10']
 
     dataframe = dataframe[['ident_men', 'part_carbu', 'part_alime', 'part_autre', 'prix_carbu', 'prix_alime',
-        'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'nactifs', 'nenfants','situacj',
+        'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'nactifs', 'nenfants', 'situacj',
         'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel', 'veh_essence']]
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.

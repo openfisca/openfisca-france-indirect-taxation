@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import de modules généraux
-from __future__ import division
+
 
 import seaborn
 
@@ -25,9 +25,9 @@ if __name__ == '__main__':
     year = 2014
     data_year = 2011
     survey_scenario = SurveyScenario.create(year = year, data_year = data_year)
-    for category in ['niveau_vie_decile']: # , 'age_group_pr', 'strate_agrege'
+    for category in ['niveau_vie_decile']:  # , 'age_group_pr', 'strate_agrege'
         taxe_indirectes = dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
 
-        #graph_builder_bar(taxe_indirectes)
+        # graph_builder_bar(taxe_indirectes)
 
 gazole = get_accises_carburants(['ticpe_gazole'])

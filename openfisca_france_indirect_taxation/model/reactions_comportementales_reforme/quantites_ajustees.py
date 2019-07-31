@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
@@ -9,7 +7,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 class quantites_diesel_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités de diesel consommées après la réforme des prix"
+    label = "Quantités de diesel consommées après la réforme des prix"
 
     def formula(self, simulation, period):
         depenses_diesel_ajustees = menage('depenses_diesel_ajustees', period)
@@ -23,7 +21,7 @@ class quantites_diesel_ajustees(YearlyVariable):
 class quantites_gaz_ajustees_taxe_carbone(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités de gaz consommées après la réforme - taxe carbone"
+    label = "Quantités de gaz consommées après la réforme - taxe carbone"
 
     def formula(self, simulation, period):
         depenses_gaz_ajustees_taxe_carbone = menage('depenses_gaz_ajustees_taxe_carbone', period)
@@ -41,11 +39,11 @@ class quantites_gaz_ajustees_taxe_carbone(YearlyVariable):
 class quantites_electricite_ajustees_taxe_carbone(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités d'électricité consommées après la réforme - taxe carbone"
+    label = "Quantités d'électricité consommées après la réforme - taxe carbone"
 
     def formula(self, simulation, period):
         depenses_electricite_ajustees_taxe_carbone = \
-           menage('depenses_electricite_ajustees_taxe_carbone', period)
+            menage('depenses_electricite_ajustees_taxe_carbone', period)
         depenses_electricite_tarif_fixe = menage('depenses_electricite_tarif_fixe', period)
         depenses_electricite_ajustees_variables = \
             depenses_electricite_ajustees_taxe_carbone - depenses_electricite_tarif_fixe
@@ -67,7 +65,7 @@ class quantites_electricite_ajustees_taxe_carbone(YearlyVariable):
 class quantites_sp_e10_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités consommées de sans plomb e10 par les ménages après réforme"
+    label = "Quantités consommées de sans plomb e10 par les ménages après réforme"
 
     def formula(self, simulation, period):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
@@ -83,7 +81,7 @@ class quantites_sp_e10_ajustees(YearlyVariable):
 class quantites_sp95_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités consommées de sans plomb 95 par les ménages après réforme"
+    label = "Quantités consommées de sans plomb 95 par les ménages après réforme"
 
     def formula(self, simulation, period):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
@@ -99,7 +97,7 @@ class quantites_sp95_ajustees(YearlyVariable):
 class quantites_sp98_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités consommées de sans plomb 98 par les ménages"
+    label = "Quantités consommées de sans plomb 98 par les ménages"
 
     def formula(self, simulation, period):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
@@ -115,7 +113,7 @@ class quantites_sp98_ajustees(YearlyVariable):
 class quantites_super_plombe_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités consommées de super plombé par les ménages après réforme"
+    label = "Quantités consommées de super plombé par les ménages après réforme"
 
     def formula(self, simulation, period):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
@@ -132,7 +130,7 @@ class quantites_super_plombe_ajustees(YearlyVariable):
 class quantites_essence_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités d'essence consommées par les ménages après réforme"
+    label = "Quantités d'essence consommées par les ménages après réforme"
 
     def formula_1990(self, simulation, period):
         quantites_sp95_ajustees = menage('quantites_sp95_ajustees', period)

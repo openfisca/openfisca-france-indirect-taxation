@@ -5,14 +5,14 @@ import pandas
 import os
 import pkg_resources
 
-#from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_dataframe_builder_energy_no_alime import \
+# from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_dataframe_builder_energy_no_alime import \
 #    aggregates_data_frame, data_frame_for_reg#, df, df_depenses_prix
 
 assets_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
     )
 
-    
+
 df_indice_prix_produit = pandas.read_csv(
     os.path.join(
         assets_directory,
@@ -35,7 +35,7 @@ data_frame_for_reg_2011 = pandas.read_csv(
     )
 data_frame_for_reg_2011.set_index('Unnamed: 0', inplace = True)
 
-    
+
 """ Check that the sum of the share for the four categories is 1 """
 
 data_frame_for_reg_2011['sum_shares'] = 0

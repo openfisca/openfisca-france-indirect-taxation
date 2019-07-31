@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, save_dataframe_to_graph, \
@@ -34,12 +34,12 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         df_use_baseline =\
             dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
 
-        df_reform[u'Reduction in carbon emissions from reform'] = \
+        df_reform['Reduction in carbon emissions from reform'] = \
             df_reform['emissions_CO2_energies_totales'] - df_reference['emissions_CO2_energies_totales']
 
         # Réalisation de graphiques
-        graph_builder_bar(df_reform[u'Reduction in carbon emissions from reform'])
+        graph_builder_bar(df_reform['Reduction in carbon emissions from reform'])
 
-        #save_dataframe_to_graph(
+        # save_dataframe_to_graph(
         #    df_reform, 'Emissions_reforme/reduction_emissions_reforme_{0}_by_{1}.csv'.format(reforme, category)
         #    )

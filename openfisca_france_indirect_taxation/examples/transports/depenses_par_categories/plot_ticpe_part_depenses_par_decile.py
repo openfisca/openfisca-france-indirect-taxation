@@ -6,7 +6,7 @@
 # spécifiées.
 
 # Import de modules généraux
-from __future__ import division
+
 
 import pandas
 import seaborn

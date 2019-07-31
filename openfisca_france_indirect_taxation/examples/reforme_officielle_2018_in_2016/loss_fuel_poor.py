@@ -7,8 +7,6 @@
 # by the reform.
 
 
-from __future__ import division
-
 import pandas as pd
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -58,19 +56,19 @@ def distribution_pertes_precaires(df_precaires):
     for i in quantiles:
         df_to_plot['transfert_net_cheque_officiel_uc'][i] = \
             df_precaires['transfert_net_cheque_officiel_uc'].quantile(i)
-    
+
     graph_builder_bar(df_to_plot, False)
     save_dataframe_to_graph(df_to_plot, 'Monetary/losses_among_fuel_poors.csv')
-    
+
     return df_to_plot
 
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-df_reforme[u'transfert_net_cheque_officiel_uc'] = (
+df_reforme['transfert_net_cheque_officiel_uc'] = (
     df_reforme['cheques_energie_officielle_2018_in_2016']
     + df_reforme['reste_transferts_neutre_officielle_2018_in_2016']
-    - df_reforme['revenu_reforme_officielle_2018_in_2016'] 
+    - df_reforme['revenu_reforme_officielle_2018_in_2016']
     ) / df_reforme['ocde10']
 df_reforme['perdant_fiscal_cheque_officiel'] = 1 * (df_reforme['transfert_net_cheque_officiel_uc'] < 0)
 
@@ -83,6 +81,6 @@ df_precaires_transports = df_reforme.query('precarite_transports_rev_disponible 
 df_precaires_logement = df_reforme.query('precarite_energetique_rev_disponible == 1')
 
 df_to_plot = distribution_pertes_precaires(df_precaires_joint)
-print df_to_plot
+print(df_to_plot)
 #df_to_plot = distribution_pertes_precaires(df_precaires_transports)
 #df_to_plot = distribution_pertes_precaires(df_precaires_logement)

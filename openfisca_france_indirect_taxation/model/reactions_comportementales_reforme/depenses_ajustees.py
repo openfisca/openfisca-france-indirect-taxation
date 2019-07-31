@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
@@ -11,7 +9,7 @@ import numpy
 class depenses_essence_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses en essence après réaction à la réforme des prix"
+    label = "Dépenses en essence après réaction à la réforme des prix"
 
     def formula(self, simulation, period):
         depenses_essence = menage('depenses_essence_corrigees', period)
@@ -28,7 +26,7 @@ class depenses_essence_ajustees(YearlyVariable):
 class depenses_diesel_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses en diesel après réaction à la réforme des prix"
+    label = "Dépenses en diesel après réaction à la réforme des prix"
 
     def formula(self, simulation, period):
         depenses_diesel = menage('depenses_diesel_corrigees', period)
@@ -44,7 +42,7 @@ class depenses_diesel_ajustees(YearlyVariable):
 class depenses_gaz_ville_ajustees_taxe_carbone(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses en gaz après réaction à la réforme - taxe carbone"
+    label = "Dépenses en gaz après réaction à la réforme - taxe carbone"
 
     def formula(self, simulation, period):
         depenses_gaz_variables = menage('depenses_gaz_variables', period)
@@ -64,7 +62,7 @@ class depenses_gaz_ville_ajustees_taxe_carbone(YearlyVariable):
 class depenses_electricite_ajustees_taxe_carbone(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses en électricité après réaction à la réforme - taxe carbone"
+    label = "Dépenses en électricité après réaction à la réforme - taxe carbone"
 
     def formula(self, simulation, period):
         depenses_electricite_variables = menage('depenses_electricite_variables', period)

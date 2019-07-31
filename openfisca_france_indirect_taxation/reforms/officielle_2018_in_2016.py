@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 from openfisca_core.reforms import Reform
 import numpy
@@ -60,7 +59,7 @@ def modify_parameters(parameters):
                 "description": "Surcroît de prix de lélectricité (en euros par kWh) en ajoutant la différence avec un prix de 10€ sur le marché EU-ETS",
                 "unit": "currency",
                 "values": {
-                    "2016-01-01": 0.09 * (0.0446 - 0.01), # Différence entre prix de la réforme et prix (environ 10€) sur le marché EU-ETS
+                    "2016-01-01": 0.09 * (0.0446 - 0.01),  # Différence entre prix de la réforme et prix (environ 10€) sur le marché EU-ETS
                     },
                 },
             "gaz_ville_2016_2018": {
@@ -101,16 +100,16 @@ def modify_parameters(parameters):
 
 class reforme_officielle_2018_in_2016(Reform):
     key = 'officielle_2018_in_2016',
-    name = u"Réforme de la fiscalité des énergies de 2018 par rapport aux taux de 2016",
+    name = "Réforme de la fiscalité des énergies de 2018 par rapport aux taux de 2016",
 
     class cheques_energie_integral_inconditionnel_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant des chèques énergie (indexés par uc) avec redistribution intégrale et inconditionnelle"
+        label = "Montant des chèques énergie (indexés par uc) avec redistribution intégrale et inconditionnelle"
 
         def formula(menage, period):
             revenu_reforme = \
-               menage('revenu_reforme_officielle_2018_in_2016', period)
+                menage('revenu_reforme_officielle_2018_in_2016', period)
             ocde10 = menage('ocde10', period)
             pondmen = menage('pondmen', period)
 
@@ -124,11 +123,11 @@ class reforme_officielle_2018_in_2016(Reform):
     class cheques_energie_integral_inconditionnel_officielle_2018_in_2016_plus_cspe(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant des chèques énergie (indexés par uc) avec redistribution intégrale et inconditionnelle"
+        label = "Montant des chèques énergie (indexés par uc) avec redistribution intégrale et inconditionnelle"
 
         def formula(menage, period):
             revenu_reforme = \
-               menage('revenu_reforme_officielle_2018_in_2016_plus_cspe', period)
+                menage('revenu_reforme_officielle_2018_in_2016_plus_cspe', period)
             ocde10 = menage('ocde10', period)
             pondmen = menage('pondmen', period)
 
@@ -142,11 +141,11 @@ class reforme_officielle_2018_in_2016(Reform):
     class cheques_energie_integral_inconditionnel_cce_seulement(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant des chèques énergie (indexés par uc) avec redistribution intégrale et inconditionnelle"
+        label = "Montant des chèques énergie (indexés par uc) avec redistribution intégrale et inconditionnelle"
 
         def formula(menage, period):
             revenu_reforme = \
-               menage('revenu_reforme_cce_seulement', period)
+                menage('revenu_reforme_cce_seulement', period)
             ocde10 = menage('ocde10', period)
             pondmen = menage('pondmen', period)
 
@@ -160,11 +159,11 @@ class reforme_officielle_2018_in_2016(Reform):
     class cheques_energie_integral_inconditionnel_rattrapage_integral(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant des chèques énergie (indexés par uc) avec redistribution intégrale et inconditionnelle"
+        label = "Montant des chèques énergie (indexés par uc) avec redistribution intégrale et inconditionnelle"
 
         def formula(menage, period):
             revenu_reforme = \
-               menage('revenu_reforme_rattrapage_integral', period)
+                menage('revenu_reforme_rattrapage_integral', period)
             ocde10 = menage('ocde10', period)
             pondmen = menage('pondmen', period)
 
@@ -178,7 +177,7 @@ class reforme_officielle_2018_in_2016(Reform):
     class cheques_energie_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant des chèques énergie tels que prévus par la loi"
+        label = "Montant des chèques énergie tels que prévus par la loi"
 
         def formula(menage, period):
             revenu_fiscal = menage('revdecm', period)
@@ -200,11 +199,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return cheque
 
-
     class cheques_energie_ruraux_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant des chèques énergie tels que prévus par la loi"
+        label = "Montant des chèques énergie tels que prévus par la loi"
 
         def formula(menage, period):
             revenu_fiscal = menage('revdecm', period)
@@ -243,7 +241,7 @@ class reforme_officielle_2018_in_2016(Reform):
     class cheques_energie_by_energy_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant des chèques énergie tels que prévus par la loi"
+        label = "Montant des chèques énergie tels que prévus par la loi"
 
         def formula(menage, period):
             revenu_fiscal = menage('revdecm', period)
@@ -280,11 +278,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return cheque_final
 
-
     class cheques_energie_ruraux_by_energy_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant des chèques énergie tels que prévus par la loi"
+        label = "Montant des chèques énergie tels que prévus par la loi"
 
         def formula(menage, period):
             revenu_fiscal = menage('revdecm', period)
@@ -336,7 +333,7 @@ class reforme_officielle_2018_in_2016(Reform):
     class combustibles_liquides_ticpe_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Calcul du montant de TICPE sur le combustibles_liquides domestique après réforme"
+        label = "Calcul du montant de TICPE sur le combustibles_liquides domestique après réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -367,7 +364,7 @@ class reforme_officielle_2018_in_2016(Reform):
     class depenses_carburants_corrigees_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Depenses en carburants après reaction a la reforme"
+        label = "Depenses en carburants après reaction a la reforme"
 
         def formula(menage, period):
             depenses_diesel_ajustees = menage('depenses_diesel_corrigees_officielle_2018_in_2016', period)
@@ -379,7 +376,7 @@ class reforme_officielle_2018_in_2016(Reform):
     class depenses_combustibles_liquides_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses en combustibles_liquides après réaction à la réforme"
+        label = "Dépenses en combustibles_liquides après réaction à la réforme"
 
         def formula(menage, period, parameters):
             depenses_combustibles_liquides = menage('depenses_combustibles_liquides', period)
@@ -393,11 +390,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return depenses_combustibles_liquides_officielle_2018_in_2016
 
-
     class depenses_diesel_corrigees_cce_seulement(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses en diesel après réaction à la réforme"
+        label = "Dépenses en diesel après réaction à la réforme"
 
         def formula(menage, period, parameters):
             depenses_diesel = menage('depenses_diesel_corrigees', period)
@@ -409,11 +405,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return depenses_diesel_cce_seulement
 
-
     class depenses_diesel_corrigees_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses en diesel après réaction à la réforme"
+        label = "Dépenses en diesel après réaction à la réforme"
 
         def formula(menage, period, parameters):
             depenses_diesel = menage('depenses_diesel_corrigees', period)
@@ -428,7 +423,7 @@ class reforme_officielle_2018_in_2016(Reform):
     class depenses_diesel_corrigees_rattrapage_integral(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses en diesel après réaction à la réforme"
+        label = "Dépenses en diesel après réaction à la réforme"
 
         def formula(menage, period, parameters):
             depenses_diesel = menage('depenses_diesel_corrigees', period)
@@ -445,7 +440,7 @@ class reforme_officielle_2018_in_2016(Reform):
     class depenses_electricite_cspe(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses en électricité après réaction à la hausse de la CSPE"
+        label = "Dépenses en électricité après réaction à la hausse de la CSPE"
 
         def formula(menage, period, parameters):
             depenses_electricite_variables = menage('depenses_electricite_variables', period)
@@ -473,11 +468,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return depenses_electricite_ajustees
 
-
     class depenses_energies_logement_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses en énergies dans le logement après la réforme"
+        label = "Dépenses en énergies dans le logement après la réforme"
 
         def formula(menage, period):
             depenses_electricite = menage('depenses_electricite', period)
@@ -494,11 +488,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return depenses_energies_logement_officielle_2018_in_2016
 
-
     class depenses_energies_logement_officielle_2018_in_2016_plus_cspe(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses en énergies logement après réforme avec hausse de la CSPE"
+        label = "Dépenses en énergies logement après réforme avec hausse de la CSPE"
 
         def formula(menage, period):
             depenses_electricite_ajustees = menage('depenses_electricite_cspe', period)
@@ -514,11 +507,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return depenses_energies_logement_officielle_2018_in_2016
 
-
     class depenses_essence_corrigees_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses en essence après réaction à la réforme"
+        label = "Dépenses en essence après réaction à la réforme"
 
         def formula(menage, period, parameters):
             depenses_essence = menage('depenses_essence_corrigees', period)
@@ -530,11 +522,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return depenses_essence_officielle_2018_in_2016
 
-
     class depenses_gaz_ville_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses en gaz après réaction à la réforme"
+        label = "Dépenses en gaz après réaction à la réforme"
 
         def formula(menage, period, parameters):
             depenses_gaz_variables = menage('depenses_gaz_variables', period)
@@ -556,11 +547,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return depenses_gaz_ajustees
 
-
     class depenses_tva_taux_plein_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme"
+        label = "Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme"
 
         def formula(menage, period, parameters):
             depenses_tva_taux_plein = menage('depenses_tva_taux_plein', period)
@@ -574,11 +564,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return depenses_tva_taux_plein_ajustees
 
-
     class depenses_tva_taux_plein_bis_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses sur les biens assujetis à la TVA à taux plein bis après réaction à la réforme"
+        label = "Dépenses sur les biens assujetis à la TVA à taux plein bis après réaction à la réforme"
 
         def formula(menage, period, parameters):
             depenses_tva_taux_plein = menage('depenses_tva_taux_plein', period)
@@ -594,11 +583,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return depenses_tva_taux_plein_bis_ajustees
 
-
     class depenses_tva_taux_reduit_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses sur les biens assujetis à la TVA à taux reduit après réaction à la réforme"
+        label = "Dépenses sur les biens assujetis à la TVA à taux reduit après réaction à la réforme"
 
         def formula(menage, period, parameters):
             depenses_tva_taux_reduit = menage('depenses_tva_taux_reduit', period)
@@ -612,11 +600,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return depenses_tva_taux_reduit_ajustees
 
-
     class depenses_tva_taux_super_reduit_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Dépenses sur les biens assujetis à la TVA à taux super reduit après réaction à la réforme"
+        label = "Dépenses sur les biens assujetis à la TVA à taux super reduit après réaction à la réforme"
 
         def formula(menage, period, parameters):
             depenses_tva_taux_super_reduit = menage('depenses_tva_taux_super_reduit', period)
@@ -630,11 +617,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return depenses_tva_taux_super_reduit_ajustees
 
-
     class diesel_ticpe_cce_seulement(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Calcul du montant de TICPE sur le diesel après réforme"
+        label = "Calcul du montant de TICPE sur le diesel après réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -657,7 +643,7 @@ class reforme_officielle_2018_in_2016(Reform):
                 )
 
             depenses_diesel_cce_seulement = \
-               menage('depenses_diesel_corrigees_cce_seulement', period)
+                menage('depenses_diesel_corrigees_cce_seulement', period)
             depenses_diesel_htva_ajustees = (
                 depenses_diesel_cce_seulement -
                 tax_from_expense_including_tax(depenses_diesel_cce_seulement, taux_plein_tva)
@@ -668,11 +654,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return montant_diesel_ticpe_ajuste
 
-
     class diesel_ticpe_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Calcul du montant de TICPE sur le diesel après réforme"
+        label = "Calcul du montant de TICPE sur le diesel après réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -695,7 +680,7 @@ class reforme_officielle_2018_in_2016(Reform):
                 )
 
             depenses_diesel_officielle_2018_in_2016 = \
-               menage('depenses_diesel_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_diesel_corrigees_officielle_2018_in_2016', period)
             depenses_diesel_htva_ajustees = (
                 depenses_diesel_officielle_2018_in_2016 -
                 tax_from_expense_including_tax(depenses_diesel_officielle_2018_in_2016, taux_plein_tva)
@@ -706,11 +691,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return montant_diesel_ticpe_ajuste
 
-
     class diesel_ticpe_rattrapage_integral(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Calcul du montant de TICPE sur le diesel après réforme"
+        label = "Calcul du montant de TICPE sur le diesel après réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -735,7 +719,7 @@ class reforme_officielle_2018_in_2016(Reform):
                 )
 
             depenses_diesel_rattrapage_integral = \
-               menage('depenses_diesel_corrigees_rattrapage_integral', period)
+                menage('depenses_diesel_corrigees_rattrapage_integral', period)
             depenses_diesel_htva_ajustees = (
                 depenses_diesel_rattrapage_integral -
                 tax_from_expense_including_tax(depenses_diesel_rattrapage_integral, taux_plein_tva)
@@ -746,11 +730,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return montant_diesel_ticpe_ajuste
 
-
     class emissions_CO2_carburants_cce_seulement(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Emissions de CO2 des ménages via leur conso de carburants après réforme CCE sans rattrapage diesel, en kg de CO2"
+        label = "Emissions de CO2 des ménages via leur conso de carburants après réforme CCE sans rattrapage diesel, en kg de CO2"
 
         def formula(menage, period, parameters):
             quantites_diesel_ajustees = menage('quantites_diesel_cce_seulement', period)
@@ -766,11 +749,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return emissions_ajustees
 
-
     class emissions_CO2_carburants_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Emissions de CO2 des ménages via leur conso de carburants après réforme, en kg de CO2"
+        label = "Emissions de CO2 des ménages via leur conso de carburants après réforme, en kg de CO2"
 
         def formula(menage, period, parameters):
             quantites_diesel_ajustees = menage('quantites_diesel_officielle_2018_in_2016', period)
@@ -786,11 +768,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return emissions_ajustees
 
-
     class emissions_CO2_carburants_rattrapage_integral(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Emissions de CO2 des ménages via leur conso de carburants après rattrapage intégral fisalité diesel, en kg de CO2"
+        label = "Emissions de CO2 des ménages via leur conso de carburants après rattrapage intégral fisalité diesel, en kg de CO2"
 
         def formula(menage, period, parameters):
             quantites_diesel_ajustees = menage('quantites_diesel_rattrapage_integral', period)
@@ -806,11 +787,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return emissions_ajustees
 
-
     class emissions_CO2_combustibles_liquides_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Emissions de CO2 des ménages via leur conso de fioul après réforme - en kg de CO2"
+        label = "Emissions de CO2 des ménages via leur conso de fioul après réforme - en kg de CO2"
 
         def formula(menage, period, parameters):
             quantites_combustibles_liquides_ajustees = menage('quantites_combustibles_liquides_officielle_2018_in_2016', period)
@@ -820,11 +800,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return emissions_ajustees
 
-
     class emissions_CO2_diesel_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Emissions de CO2 des ménages via leur conso de diesel après réforme, en kg de CO2"
+        label = "Emissions de CO2 des ménages via leur conso de diesel après réforme, en kg de CO2"
 
         def formula(menage, period, parameters):
             quantites_diesel_ajustees = menage('quantites_diesel_officielle_2018_in_2016', period)
@@ -834,11 +813,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return emissions_ajustees
 
-
     class emissions_CO2_electricite_cspe(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Emissions de CO2 des ménages via leur consommation d'électricité après réforme cspe, en kg de CO2"
+        label = "Emissions de CO2 des ménages via leur consommation d'électricité après réforme cspe, en kg de CO2"
 
         def formula(menage, period, parameters):
             quantites_electricite_ajustees = menage('quantites_electricite_selon_compteur_cspe', period)
@@ -848,17 +826,16 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return emissions_ajustees
 
-
     class emissions_CO2_energies_totales_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Emissions de CO2 des ménages via leur conso d'énergies après hausse cce 16-18, en kg de CO2"
+        label = "Emissions de CO2 des ménages via leur conso d'énergies après hausse cce 16-18, en kg de CO2"
 
         def formula(menage, period):
             emissions_carburants_ajustees = menage('emissions_CO2_carburants_officielle_2018_in_2016', period)
             emissions_electricite = menage('emissions_CO2_electricite', period)
             emissions_combustibles_liquides_ajustees = \
-               menage('emissions_CO2_combustibles_liquides_officielle_2018_in_2016', period)
+                menage('emissions_CO2_combustibles_liquides_officielle_2018_in_2016', period)
             emissions_gaz_ajustees = menage('emissions_CO2_gaz_ville_officielle_2018_in_2016', period)
 
             emissions_energies_ajustees = (
@@ -867,17 +844,16 @@ class reforme_officielle_2018_in_2016(Reform):
                 )
             return emissions_energies_ajustees
 
-
     class emissions_CO2_energies_totales_officielle_2018_in_2016_plus_cspe(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Emissions de CO2 des ménages via leur conso d'énergies après hausse cce 16-18, en kg de CO2"
+        label = "Emissions de CO2 des ménages via leur conso d'énergies après hausse cce 16-18, en kg de CO2"
 
         def formula(menage, period):
             emissions_carburants_ajustees = menage('emissions_CO2_carburants_officielle_2018_in_2016', period)
             emissions_electricite_ajustees = menage('emissions_CO2_electricite_cspe', period)
             emissions_combustibles_liquides_ajustees = \
-               menage('emissions_CO2_combustibles_liquides_officielle_2018_in_2016', period)
+                menage('emissions_CO2_combustibles_liquides_officielle_2018_in_2016', period)
             emissions_gaz_ajustees = menage('emissions_CO2_gaz_ville_officielle_2018_in_2016', period)
 
             emissions_energies_ajustees = (
@@ -886,11 +862,10 @@ class reforme_officielle_2018_in_2016(Reform):
                 )
             return emissions_energies_ajustees
 
-
     class emissions_CO2_essence_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Emissions de CO2 des ménages via leur conso d'essence après réforme, en kg de CO2"
+        label = "Emissions de CO2 des ménages via leur conso d'essence après réforme, en kg de CO2"
 
         def formula(menage, period, parameters):
             quantites_essence_ajustees = menage('quantites_essence_officielle_2018_in_2016', period)
@@ -900,11 +875,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return emissions_ajustees
 
-
     class emissions_CO2_gaz_ville_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Emissions de CO2 des ménages via leur conso de gaz après réforme - en kg de CO2"
+        label = "Emissions de CO2 des ménages via leur conso de gaz après réforme - en kg de CO2"
 
         def formula(menage, period, parameters):
             quantites_gaz_ajustees = menage('quantites_gaz_final_officielle_2018_in_2016', period)
@@ -914,11 +888,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return emissions_ajustees
 
-
     class essence_ticpe_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
+        label = "Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
 
         def formula_2009(menage, period):
             sp95_ticpe_ajustee = menage('sp95_ticpe_officielle_2018_in_2016', period)
@@ -940,22 +913,21 @@ class reforme_officielle_2018_in_2016(Reform):
             essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + super_plombe_ticpe_ajustee)
             return essence_ticpe_ajustee
 
-
     class gains_tva_carburants_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Recettes en TVA sur les carburants de la réforme"
+        label = "Recettes en TVA sur les carburants de la réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             depenses_carburants_corrigees_officielle_2018_in_2016 = \
-               menage('depenses_carburants_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_carburants_corrigees_officielle_2018_in_2016', period)
             tva_depenses_carburants_corrigees_officielle_2018_in_2016 = (
                 (taux_plein_tva / (1 + taux_plein_tva)) *
                 depenses_carburants_corrigees_officielle_2018_in_2016
                 )
             depenses_carburants_corrigees = \
-               menage('depenses_carburants_corrigees', period)
+                menage('depenses_carburants_corrigees', period)
             tva_depenses_carburants_corrigees = (
                 (taux_plein_tva / (1 + taux_plein_tva)) *
                 depenses_carburants_corrigees
@@ -966,22 +938,21 @@ class reforme_officielle_2018_in_2016(Reform):
                 )
             return gains_tva_carburants
 
-
     class gains_tva_combustibles_liquides_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Recettes de la réforme en TVA sur les combustibles liquides"
+        label = "Recettes de la réforme en TVA sur les combustibles liquides"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             depenses_combustibles_liquides_officielle_2018_in_2016 = \
-               menage('depenses_combustibles_liquides_officielle_2018_in_2016', period)
+                menage('depenses_combustibles_liquides_officielle_2018_in_2016', period)
             tva_depenses_combustibles_liquides_officielle_2018_in_2016 = (
                 (taux_plein_tva / (1 + taux_plein_tva)) *
                 depenses_combustibles_liquides_officielle_2018_in_2016
                 )
             depenses_combustibles_liquides = \
-               menage('depenses_combustibles_liquides', period)
+                menage('depenses_combustibles_liquides', period)
             tva_depenses_combustibles_liquides = (
                 (taux_plein_tva / (1 + taux_plein_tva)) *
                 depenses_combustibles_liquides
@@ -992,23 +963,22 @@ class reforme_officielle_2018_in_2016(Reform):
                 )
             return gains_tva_combustibles_liquides
 
-
     class gains_tva_gaz_ville_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Recettes de la réforme en TVA sur le gaz naturel"
+        label = "Recettes de la réforme en TVA sur le gaz naturel"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             depenses_gaz_tarif_fixe = menage('depenses_gaz_tarif_fixe', period)
             depenses_gaz_ville_officielle_2018_in_2016 = \
-               menage('depenses_gaz_ville_officielle_2018_in_2016', period)
+                menage('depenses_gaz_ville_officielle_2018_in_2016', period)
             tva_depenses_gaz_ville_officielle_2018_in_2016 = (
                 (taux_plein_tva / (1 + taux_plein_tva)) *
                 (depenses_gaz_ville_officielle_2018_in_2016 - depenses_gaz_tarif_fixe)
                 )
             depenses_gaz_ville = \
-               menage('depenses_gaz_ville', period)
+                menage('depenses_gaz_ville', period)
             tva_depenses_gaz_ville = (
                 (taux_plein_tva / (1 + taux_plein_tva)) *
                 (depenses_gaz_ville - depenses_gaz_tarif_fixe)
@@ -1019,11 +989,10 @@ class reforme_officielle_2018_in_2016(Reform):
                 )
             return gains_tva_gaz_ville
 
-
     class gains_tva_total_energies_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Recettes de la réforme en TVA sur toutes les énergies"
+        label = "Recettes de la réforme en TVA sur toutes les énergies"
 
         def formula(menage, period):
             gains_carburants = menage('gains_tva_carburants_officielle_2018_in_2016', period)
@@ -1033,19 +1002,18 @@ class reforme_officielle_2018_in_2016(Reform):
             somme_gains = gains_carburants + gains_combustibles_liquides + gains_gaz_ville
             return somme_gains
 
-
     # Vérifier que rien n'est oublié ici
     class pertes_financieres_avant_redistribution_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant total des pertes financières dues à la réforme, avant redistribution"
+        label = "Montant total des pertes financières dues à la réforme, avant redistribution"
 
         def formula(menage, period):
             depenses_energies_totales = menage('depenses_energies_totales', period)
             depenses_energies_logement_officielle_2018_in_2016 = \
-               menage('depenses_energies_logement_officielle_2018_in_2016', period)
+                menage('depenses_energies_logement_officielle_2018_in_2016', period)
             depenses_carburants_officielle_2018_in_2016 = \
-               menage('depenses_carburants_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_carburants_corrigees_officielle_2018_in_2016', period)
 
             pertes = (
                 depenses_energies_logement_officielle_2018_in_2016 +
@@ -1055,18 +1023,17 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return pertes
 
-
     class pertes_financieres_avant_redistribution_officielle_2018_in_2016_plus_cspe(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant total des pertes financières dues à la réforme, avant redistribution"
+        label = "Montant total des pertes financières dues à la réforme, avant redistribution"
 
         def formula(menage, period):
             depenses_energies_totales = menage('depenses_energies_totales', period)
             depenses_energies_logement_officielle_2018_in_2016_plus_cspe = \
-               menage('depenses_energies_logement_officielle_2018_in_2016_plus_cspe', period)
+                menage('depenses_energies_logement_officielle_2018_in_2016_plus_cspe', period)
             depenses_carburants_officielle_2018_in_2016 = \
-               menage('depenses_carburants_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_carburants_corrigees_officielle_2018_in_2016', period)
 
             pertes = (
                 depenses_energies_logement_officielle_2018_in_2016_plus_cspe +
@@ -1076,15 +1043,14 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return pertes
 
-
     class quantites_combustibles_liquides_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Quantités de combustibles_liquides consommées après la réforme"
+        label = "Quantités de combustibles_liquides consommées après la réforme"
 
         def formula(menage, period, parameters):
             depenses_combustibles_liquides_officielle_2018_in_2016 = \
-               menage('depenses_combustibles_liquides_officielle_2018_in_2016', period)
+                menage('depenses_combustibles_liquides_officielle_2018_in_2016', period)
             prix_fioul_ttc = \
                 parameters(period.start).tarifs_energie.prix_fioul_domestique.prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre
             reforme_combustibles_liquides = \
@@ -1093,45 +1059,42 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return quantites_combustibles_liquides_ajustees
 
-
     class quantites_diesel_cce_seulement(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Quantités de diesel consommées après la réforme - contribution climat énergie, hausse de 2016 à 2018"
+        label = "Quantités de diesel consommées après la réforme - contribution climat énergie, hausse de 2016 à 2018"
 
         def formula(menage, period, parameters):
             depenses_diesel_officielle_2018_in_2016 = \
-               menage('depenses_diesel_corrigees_cce_seulement', period)
+                menage('depenses_diesel_corrigees_cce_seulement', period)
             diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).officielle_2018_in_2016.diesel_cce_seulement
             quantites_diesel_ajustees = depenses_diesel_officielle_2018_in_2016 / (diesel_ttc + reforme_diesel) * 100
 
             return quantites_diesel_ajustees
 
-
     class quantites_diesel_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Quantités de diesel consommées après la réforme"
+        label = "Quantités de diesel consommées après la réforme"
 
         def formula(menage, period, parameters):
             depenses_diesel_officielle_2018_in_2016 = \
-               menage('depenses_diesel_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_diesel_corrigees_officielle_2018_in_2016', period)
             diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).officielle_2018_in_2016.diesel_2016_2018
             quantites_diesel_ajustees = depenses_diesel_officielle_2018_in_2016 / (diesel_ttc + reforme_diesel) * 100
 
             return quantites_diesel_ajustees
 
-
     class quantites_diesel_rattrapage_integral(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Quantités de diesel consommées après la réforme"
+        label = "Quantités de diesel consommées après la réforme"
 
         def formula(menage, period, parameters):
             depenses_diesel_officielle_2018_in_2016 = \
-               menage('depenses_diesel_corrigees_rattrapage_integral', period)
+                menage('depenses_diesel_corrigees_rattrapage_integral', period)
             diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             taxe_essence = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
             taxe_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
@@ -1140,15 +1103,14 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return quantites_diesel_ajustees
 
-
     class quantites_electricite_selon_compteur_cspe(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Quantités d'électricité consommées après la réforme cspe"
+        label = "Quantités d'électricité consommées après la réforme cspe"
 
         def formula(menage, period):
             depenses_electricite_ajustees = \
-               menage('depenses_electricite_cspe', period)
+                menage('depenses_electricite_cspe', period)
             depenses_electricite_tarif_fixe = menage('depenses_electricite_tarif_fixe', period)
             depenses_electricite_ajustees_variables = \
                 depenses_electricite_ajustees - depenses_electricite_tarif_fixe
@@ -1166,11 +1128,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return quantites_electricite_ajustees
 
-
     class quantites_essence_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Quantités d'essence consommées par les ménages après réforme"
+        label = "Quantités d'essence consommées par les ménages après réforme"
         definition_period = YEAR
 
         def formula_2009(menage, period):
@@ -1190,17 +1151,16 @@ class reforme_officielle_2018_in_2016(Reform):
             quantites_sp95_ajustees = menage('quantites_sp95_officielle_2018_in_2016', period)
             quantites_sp98_ajustees = menage('quantites_sp98_officielle_2018_in_2016', period)
             quantites_super_plombe_ajustees = \
-               menage('quantites_super_plombe_officielle_2018_in_2016', period)
+                menage('quantites_super_plombe_officielle_2018_in_2016', period)
             quantites_essence_ajustees = (
                 quantites_sp95_ajustees + quantites_sp98_ajustees + quantites_super_plombe_ajustees
                 )
             return quantites_essence_ajustees
 
-
     class quantites_gaz_final_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Quantités de gaz consommées après la réforme"
+        label = "Quantités de gaz consommées après la réforme"
 
         def formula(menage, period, parameters):
             depenses_gaz_ville_officielle_2018_in_2016 = menage('depenses_gaz_ville_officielle_2018_in_2016', period)
@@ -1215,15 +1175,14 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return quantites_gaz_ajustees
 
-
     class quantites_sp_e10_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Quantités consommées de sans plomb e10 par les ménages après réforme"
+        label = "Quantités consommées de sans plomb e10 par les ménages après réforme"
 
         def formula(menage, period, parameters):
             depenses_essence_officielle_2018_in_2016 = \
-               menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
             part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
             depenses_sp_e10_ajustees = depenses_essence_officielle_2018_in_2016 * part_sp_e10
             super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
@@ -1232,15 +1191,14 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return quantite_sp_e10
 
-
     class quantites_sp95_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Quantités consommées de sans plomb 95 par les ménages après réforme"
+        label = "Quantités consommées de sans plomb 95 par les ménages après réforme"
 
         def formula(menage, period, parameters):
             depenses_essence_officielle_2018_in_2016 = \
-               menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
             part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
             depenses_sp95_ajustees = depenses_essence_officielle_2018_in_2016 * part_sp95
             super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
@@ -1249,15 +1207,14 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return quantites_sp95_ajustees
 
-
     class quantites_sp98_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Quantités consommées de sans plomb 98 par les ménages"
+        label = "Quantités consommées de sans plomb 98 par les ménages"
 
         def formula(menage, period, parameters):
             depenses_essence_officielle_2018_in_2016 = \
-               menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
             part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
             depenses_sp98_ajustees = depenses_essence_officielle_2018_in_2016 * part_sp98
             super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
@@ -1266,15 +1223,14 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return quantites_sp98_ajustees
 
-
     class quantites_super_plombe_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Quantités consommées de super plombé par les ménages après réforme"
+        label = "Quantités consommées de super plombé par les ménages après réforme"
 
         def formula(menage, period, parameters):
             depenses_essence_officielle_2018_in_2016 = \
-               menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
             part_super_plombe = \
                 parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
             depenses_super_plombe_ajustees = depenses_essence_officielle_2018_in_2016 * part_super_plombe
@@ -1284,19 +1240,18 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return quantites_super_plombe_ajustees
 
-
     # A modifier : prendre en compte uniquement le reste des cheques, et faire quelque chose de neutre
     class reste_transferts_neutre_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant des transferts additionnels à imputer pour avoir une réforme à budget neutre, sans biaiser les effets distributifs"
+        label = "Montant des transferts additionnels à imputer pour avoir une réforme à budget neutre, sans biaiser les effets distributifs"
 
         def formula(menage, period):
             ocde10 = menage('ocde10', period)
             pondmen = menage('pondmen', period)
 
             revenu_reforme = \
-               menage('revenu_reforme_officielle_2018_in_2016', period)
+                menage('revenu_reforme_officielle_2018_in_2016', period)
             somme_revenu = numpy.sum(revenu_reforme * pondmen)
             cheque = menage('cheques_energie_officielle_2018_in_2016', period)
             somme_cheque = numpy.sum(cheque * pondmen)
@@ -1306,19 +1261,18 @@ class reforme_officielle_2018_in_2016(Reform):
             reste_transferts = revenu_uc * ocde10
 
             return reste_transferts
-
 
     class reste_transferts_neutre_officielle_2018_in_2016_plus_cspe(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant des transferts additionnels à imputer pour avoir une réforme à budget neutre, sans biaiser les effets distributifs"
+        label = "Montant des transferts additionnels à imputer pour avoir une réforme à budget neutre, sans biaiser les effets distributifs"
 
         def formula(menage, period):
             ocde10 = menage('ocde10', period)
             pondmen = menage('pondmen', period)
 
             revenu_reforme = \
-               menage('revenu_reforme_officielle_2018_in_2016_plus_cspe', period)
+                menage('revenu_reforme_officielle_2018_in_2016_plus_cspe', period)
             somme_revenu = numpy.sum(revenu_reforme * pondmen)
             cheque = menage('cheques_energie_officielle_2018_in_2016', period)
             somme_cheque = numpy.sum(cheque * pondmen)
@@ -1329,16 +1283,15 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return reste_transferts
 
-
     class revenu_reforme_cce_seulement(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Revenu généré par la réforme de la cce, avant redistribution"
+        label = "Revenu généré par la réforme de la cce, avant redistribution"
 
         def formula(menage, period):
             total_taxes_energies = menage('total_taxes_energies', period)
             total_taxes_energies_cce_seulement = \
-               menage('total_taxes_energies_cce_seulement', period)
+                menage('total_taxes_energies_cce_seulement', period)
             tarifs_sociaux_electricite = menage('tarifs_sociaux_electricite', period)
             tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
 
@@ -1349,16 +1302,15 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return revenu_reforme
 
-
     class revenu_reforme_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Revenu généré par la réforme officielle 2018 avant redistribution"
+        label = "Revenu généré par la réforme officielle 2018 avant redistribution"
 
         def formula(menage, period):
             total_taxes_energies = menage('total_taxes_energies', period)
             total_taxes_energies_officielle_2018_in_2016 = \
-               menage('total_taxes_energies_officielle_2018_in_2016', period)
+                menage('total_taxes_energies_officielle_2018_in_2016', period)
             gains_tva_total_energies = menage('gains_tva_total_energies_officielle_2018_in_2016', period)
             tarifs_sociaux_electricite = menage('tarifs_sociaux_electricite', period)
             tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
@@ -1370,16 +1322,15 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return revenu_reforme
 
-
     class revenu_reforme_officielle_2018_in_2016_plus_cspe(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Revenu généré par la réforme officielle 2018 plus cspe, avant redistribution"
+        label = "Revenu généré par la réforme officielle 2018 plus cspe, avant redistribution"
 
         def formula(menage, period):
             total_taxes_energies = menage('total_taxes_energies', period)
             total_taxes_energies_officielle_2018_in_2016_plus_cspe = \
-               menage('total_taxes_energies_officielle_2018_in_2016_plus_cspe', period)
+                menage('total_taxes_energies_officielle_2018_in_2016_plus_cspe', period)
 
             tarifs_sociaux_electricite = menage('tarifs_sociaux_electricite', period)
             tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
@@ -1391,16 +1342,15 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return revenu_reforme
 
-
     class revenu_reforme_rattrapage_integral(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Revenu généré par le rattrapage intégral, avant redistribution"
+        label = "Revenu généré par le rattrapage intégral, avant redistribution"
 
         def formula(menage, period):
             total_taxes_energies = menage('total_taxes_energies', period)
             total_taxes_energies_rattrapage_integral = \
-               menage('total_taxes_energies_rattrapage_integral', period)
+                menage('total_taxes_energies_rattrapage_integral', period)
 
             tarifs_sociaux_electricite = menage('tarifs_sociaux_electricite', period)
             tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
@@ -1412,11 +1362,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return revenu_reforme
 
-
     class sp_e10_ticpe_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Calcul du montant de la TICPE sur le SP E10 après réforme"
+        label = "Calcul du montant de la TICPE sur le SP E10 après réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -1439,7 +1388,7 @@ class reforme_officielle_2018_in_2016(Reform):
                 (super_95_e10_ttc_ajuste - accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_officielle_2018_in_2016 = \
-               menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
             part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
             sp_e10_depenses_ajustees = depenses_essence_officielle_2018_in_2016 * part_sp_e10
             sp_e10_depenses_htva_ajustees = \
@@ -1449,11 +1398,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return montant_sp_e10_ticpe_ajuste
 
-
     class sp95_ticpe_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Calcul du montant de TICPE sur le sp_95 après réforme"
+        label = "Calcul du montant de TICPE sur le sp_95 après réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -1475,7 +1423,7 @@ class reforme_officielle_2018_in_2016(Reform):
                 (super_95_ttc_ajuste - accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_officielle_2018_in_2016 = \
-               menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
             part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
             depenses_sp_95_ajustees = depenses_essence_officielle_2018_in_2016 * part_sp95
             depenses_sp_95_htva_ajustees = (
@@ -1487,11 +1435,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return montant_sp95_ticpe_ajuste
 
-
     class sp98_ticpe_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Calcul du montant de TICPE sur le sp_98 après réforme"
+        label = "Calcul du montant de TICPE sur le sp_98 après réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -1513,7 +1460,7 @@ class reforme_officielle_2018_in_2016(Reform):
                 (super_98_ttc_ajuste - accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_officielle_2018_in_2016 = \
-               menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
             part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
             depenses_sp_98_ajustees = depenses_essence_officielle_2018_in_2016 * part_sp98
             depenses_sp_98_htva_ajustees = (
@@ -1525,11 +1472,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return montant_sp98_ticpe_ajuste
 
-
     class super_plombe_ticpe_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Calcul du montant de la TICPE sur le super plombé après réforme"
+        label = "Calcul du montant de la TICPE sur le super plombé après réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -1545,7 +1491,7 @@ class reforme_officielle_2018_in_2016(Reform):
                 (super_plombe_ttc_ajuste - accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva))
                 )
             depenses_essence_officielle_2018_in_2016 = \
-               menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
+                menage('depenses_essence_corrigees_officielle_2018_in_2016', period)
             part_super_plombe = \
                 parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
             depenses_super_plombe_ajustees = depenses_essence_officielle_2018_in_2016 * part_super_plombe
@@ -1558,11 +1504,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return montant_super_plombe_ticpe_ajuste
 
-
     class taxe_electricite_cspe(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Recettes de l'augmentation de la CSPE sur la consommation d'électricité - ceteris paribus"
+        label = "Recettes de l'augmentation de la CSPE sur la consommation d'électricité - ceteris paribus"
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
 
         def formula(menage, period, parameters):
@@ -1572,11 +1517,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return recettes_electricite
 
-
     class taxe_gaz_ville_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Recettes de la taxe sur la consommation de gaz - ceteris paribus"
+        label = "Recettes de la taxe sur la consommation de gaz - ceteris paribus"
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
 
         def formula(menage, period, parameters):
@@ -1586,11 +1530,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return recettes_gaz
 
-
     class ticpe_totale_cce_seulement(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
+        label = "Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
 
         def formula(menage, period):
             essence_ticpe_ajustee = menage('essence_ticpe_officielle_2018_in_2016', period)
@@ -1599,11 +1542,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return ticpe_totale_ajustee
 
-
     class ticpe_totale_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
+        label = "Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
 
         def formula(menage, period):
             essence_ticpe_ajustee = menage('essence_ticpe_officielle_2018_in_2016', period)
@@ -1612,11 +1554,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return ticpe_totale_ajustee
 
-
     class ticpe_totale_rattrapage_integral(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
+        label = "Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
 
         def formula(menage, period):
             essence_ticpe_ajustee = menage('essence_ticpe', period)
@@ -1625,11 +1566,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return ticpe_totale_ajustee
 
-
     class total_taxes_energies_cce_seulement(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2016-2018"
+        label = "Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2016-2018"
 
         def formula(menage, period):
             taxe_diesel = menage('diesel_ticpe_cce_seulement', period)
@@ -1643,11 +1583,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return total
 
-
     class total_taxes_energies_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2016-2018"
+        label = "Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2016-2018"
 
         def formula(menage, period):
             taxe_diesel = menage('diesel_ticpe_officielle_2018_in_2016', period)
@@ -1661,11 +1600,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return total
 
-
     class total_taxes_energies_officielle_2018_in_2016_plus_cspe(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Différence entre les contributions aux taxes sur l'énergie après la hausse 2016-2018"
+        label = "Différence entre les contributions aux taxes sur l'énergie après la hausse 2016-2018"
 
         def formula(menage, period):
             taxe_diesel = menage('diesel_ticpe_officielle_2018_in_2016', period)
@@ -1680,11 +1618,10 @@ class reforme_officielle_2018_in_2016(Reform):
 
             return total
 
-
     class total_taxes_energies_rattrapage_integral(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2016-2018"
+        label = "Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2016-2018"
 
         def formula(menage, period):
             taxe_diesel = menage('diesel_ticpe_rattrapage_integral', period)
@@ -1696,7 +1633,6 @@ class reforme_officielle_2018_in_2016(Reform):
                 )
 
             return total
-
 
     def apply(self):
         self.update_variable(self.cheques_energie_officielle_2018_in_2016)

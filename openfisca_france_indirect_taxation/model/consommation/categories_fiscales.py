@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
 from sortedcontainers.sorteddict import SortedDict
 from biryani.strings import slugify
 import logging
@@ -56,9 +54,9 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
                     year_start = year_start,
                     year_stop = year_stop,
                     )
-                dated_function_name = u"formula_{year_start}".format(
+                dated_function_name = "formula_{year_start}".format(
                     year_start = year_start, year_stop = year_stop)
-                log.info(u'Creating fiscal category {} ({}-{}) with the following products {}'.format(
+                log.info('Creating fiscal category {} ({}-{}) with the following products {}'.format(
                     categorie_fiscale, year_start, year_stop, previous_postes_coicop))
 
                 functions_by_name[dated_function_name] = dated_func
@@ -67,14 +65,14 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
 
             previous_postes_coicop = postes_coicop
 
-        class_name = u'depenses_ht_{}'.format(categorie_fiscale)
+        class_name = 'depenses_ht_{}'.format(categorie_fiscale)
 
         # Trick to create a class with a dynamic name.
         if reform_key is None:
             definitions_by_name = dict(
                 value_type = float,
                 entity = Menage,
-                label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
+                label = "Dépenses hors taxes: {0}".format(categorie_fiscale),
                 )
             definitions_by_name.update(functions_by_name)
             tax_benefit_system.add_variable(
@@ -95,7 +93,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
                 definitions_by_name = dict(
                     value_type = float,
                     entity = Menage,
-                    label = u"Dépenses hors taxes: {0}".format(categorie_fiscale),
+                    label = "Dépenses hors taxes: {0}".format(categorie_fiscale),
                     )
                 definitions_by_name.update(functions_by_name)
                 definitions_by_name['formulas'] = formulas

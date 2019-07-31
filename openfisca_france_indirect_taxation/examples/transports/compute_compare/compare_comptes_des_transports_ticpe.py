@@ -4,7 +4,7 @@
 # agrégées de Budget des Familles après calage, avec celles de la comptabilité nationale.
 
 # Import de modules généraux
-from __future__ import division
+
 
 from pandas import concat
 import pkg_resources
@@ -51,18 +51,18 @@ nombre_essence = g_3a[g_3a['categorie'] == 'ESSENCE']
 del nombre_essence['categorie']
 nombre_essence = nombre_essence.set_index('index')
 nombre_essence = nombre_essence.transpose()
-consommation_essence = nombre_essence[[u'Voitures particulières'] + [u'Livraisons CPDP (1)']].copy()
+consommation_essence = nombre_essence[['Voitures particulières'] + ['Livraisons CPDP (1)']].copy()
 consommation_essence['vehicules essence non particuliers'] = (
-    consommation_essence[u'Livraisons CPDP (1)'] - consommation_essence[u'Voitures particulières']
+    consommation_essence['Livraisons CPDP (1)'] - consommation_essence['Voitures particulières']
     )
 
 nombre_diesel = g_3a[g_3a['categorie'] == 'GAZOLE']
 del nombre_diesel['categorie']
 nombre_diesel = nombre_diesel.set_index('index')
 nombre_diesel = nombre_diesel.transpose()
-consommation_diesel = nombre_diesel[[u'Voitures particulières'] + [u'Livraisons CPDP (1)']].copy()
+consommation_diesel = nombre_diesel[['Voitures particulières'] + ['Livraisons CPDP (1)']].copy()
 consommation_diesel['vehicules diesel non particuliers'] = (
-    consommation_diesel[u'Livraisons CPDP (1)'] - consommation_diesel[u'Voitures particulières']
+    consommation_diesel['Livraisons CPDP (1)'] - consommation_diesel['Voitures particulières']
     )
 
 recettes_ticpe_non_vp = concat(

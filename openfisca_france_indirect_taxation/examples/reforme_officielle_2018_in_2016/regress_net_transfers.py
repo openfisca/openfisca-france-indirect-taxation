@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import pandas as pd
 import statsmodels.formula.api as smf
@@ -113,33 +112,33 @@ df_reforme['part_distance_teg'] = df_reforme['part_distance_teg'].fillna(0) * 47
 
 df_reforme.rename(
     columns = {
-        'transferts_nets_apres_redistribution_uc' : 'Net_transfers_by_cu_after_recycling',
-        'rev_disp_loyerimput' : 'Disposable_income',
-        'rev_disp_loyerimput_2' : 'Disposable_income_squared',
-        'combustibles_liquides' : 'Domestic_fuel',
-        'gaz_ville' : 'Natural_gas',
-        'strate_0' : 'Rural',
-        'strate_1' : 'Small_cities',
-        'strate_3' : 'Large_cities',
-        'strate_4' : 'Paris',
-        'majorite_double_vitrage' : 'Majority_double_glazing',
-        'mauvaise_isolation_murs' : 'Bad_walls_isolation',
-        'bonne_isolation_murs' : 'Good_walls_isolation',
-        'ouest_sud' : 'Ouest_south',
-        'surfhab_d' : 'Living_area_m2',
-        'aides_logement' : 'Housing_benefits',
+        'transferts_nets_apres_redistribution_uc': 'Net_transfers_by_cu_after_recycling',
+        'rev_disp_loyerimput': 'Disposable_income',
+        'rev_disp_loyerimput_2': 'Disposable_income_squared',
+        'combustibles_liquides': 'Domestic_fuel',
+        'gaz_ville': 'Natural_gas',
+        'strate_0': 'Rural',
+        'strate_1': 'Small_cities',
+        'strate_3': 'Large_cities',
+        'strate_4': 'Paris',
+        'majorite_double_vitrage': 'Majority_double_glazing',
+        'mauvaise_isolation_murs': 'Bad_walls_isolation',
+        'bonne_isolation_murs': 'Good_walls_isolation',
+        'ouest_sud': 'Ouest_south',
+        'surfhab_d': 'Living_area_m2',
+        'aides_logement': 'Housing_benefits',
         'etudiant': 'Student',
-        'agepr' : 'Age_representative',
-        'agepr_2' : 'Age_representative_squared',
-        'nactifs' : 'Number_in_labor_force',
-        'age_vehicule' : 'Vehicule_age',
-        'part_distance_teg' : 'Share_distance_to_work',
-        'ocde10' : 'Consumption_units',
-        'monoparental' : 'Monoparental',
-        'bat_av_49' : 'Building_before_1949',
-        'bat_49_74' : 'Building_1949_74',
-        'log_indiv' : 'Individual_housing',
-        'proprietaire' : 'Owner'
+        'agepr': 'Age_representative',
+        'agepr_2': 'Age_representative_squared',
+        'nactifs': 'Number_in_labor_force',
+        'age_vehicule': 'Vehicule_age',
+        'part_distance_teg': 'Share_distance_to_work',
+        'ocde10': 'Consumption_units',
+        'monoparental': 'Monoparental',
+        'bat_av_49': 'Building_before_1949',
+        'bat_49_74': 'Building_1949_74',
+        'log_indiv': 'Individual_housing',
+        'proprietaire': 'Owner'
         },
     inplace = True)
 
@@ -153,7 +152,7 @@ regression_ols = smf.ols(formula = 'Net_transfers_by_cu_after_recycling ~ \
     Consumption_units + Monoparental + Number_in_labor_force + Student + Age_representative + Age_representative_squared + \
     Share_distance_to_work + Vehicule_age',
     data = df_reforme).fit()
-print regression_ols.summary()
+print(regression_ols.summary())
 
 """
 

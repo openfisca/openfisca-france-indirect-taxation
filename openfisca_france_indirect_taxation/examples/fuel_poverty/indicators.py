@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import pandas
 import seaborn
@@ -46,13 +45,13 @@ for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
     dataframe_depenses_tot = \
         dataframe_by_group(survey_scenario, category, simulated_variables_depenses_tot, use_baseline =True)
     if category == 'niveau_vie_decile':
-        dataframe_depenses_tot = dataframe_depenses_tot.drop(range(4,11))
+        dataframe_depenses_tot = dataframe_depenses_tot.drop(list(range(4, 11)))
     graph_builder_bar_percent(dataframe_depenses_tot)
 
     dataframe_rev_disponible = \
         dataframe_by_group(survey_scenario, category, simulated_variables_rev_disponible, use_baseline =True)
     if category == 'niveau_vie_decile':
-        dataframe_rev_disponible = dataframe_rev_disponible.drop(range(4,11))
+        dataframe_rev_disponible = dataframe_rev_disponible.drop(list(range(4, 11)))
     graph_builder_bar_percent(dataframe_rev_disponible)
     save_dataframe_to_graph(dataframe_depenses_tot, 'Precarite/indicators_depenses_tot_{}.csv'.format(category))
     save_dataframe_to_graph(dataframe_rev_disponible, 'Precarite/indicators_rev_disponible_{}.csv'.format(category))

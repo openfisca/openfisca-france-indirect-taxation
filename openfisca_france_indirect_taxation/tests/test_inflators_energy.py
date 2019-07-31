@@ -1,4 +1,4 @@
-from __future__ import division
+
 
 import pandas as pd
 
@@ -32,4 +32,4 @@ df_compare = pd.DataFrame()
 for var in simulated_variables:
     df_2011[var + '_inflated'] = (df_2011[var] * inflation_kwargs['inflator_by_variable'][var]).copy()
     df_compare[var] = (df_2011[var + '_inflated'] - df_year[var]).copy()
-    assert max(df_compare[var]) < 1 # check the difference is less than 1€
+    assert max(df_compare[var]) < 1  # check the difference is less than 1€

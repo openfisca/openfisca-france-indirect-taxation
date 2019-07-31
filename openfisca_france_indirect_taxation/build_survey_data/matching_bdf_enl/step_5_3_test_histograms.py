@@ -1,4 +1,3 @@
-from __future__ import division
 
 
 # Dans ce script on utilise des histogrammes pour comparer la distribution des variables dans les deux enquêtes.
@@ -39,7 +38,7 @@ data_matched_distance = pd.read_csv(
         ), sep =',', decimal = '.'
     )
 
-    
+
 data_matched_random = pd.read_csv(
     os.path.join(
         default_config_files_directory,
@@ -66,7 +65,7 @@ def histogram_froid_niveau_vie_decile(data_matched, data_enl):
     list_values_matched = []
     list_values_enl = []
     list_keys = []
-    for i in range(1,11):
+    for i in range(1, 11):
         data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
         data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
 
@@ -86,7 +85,7 @@ def histogram_froid_niveau_vie_decile(data_matched, data_enl):
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_matched, list_values_enl, 'Matched', 'ENL')
-    
+
     return figure
 
 
@@ -94,7 +93,7 @@ def histogram_froid_cout_niveau_vie_decile(data_matched, data_enl):
     list_values_matched = []
     list_values_enl = []
     list_keys = []
-    for i in range(1,11):
+    for i in range(1, 11):
         data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
         data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
 
@@ -108,13 +107,13 @@ def histogram_froid_cout_niveau_vie_decile(data_matched, data_enl):
             sum(data_matched_decile['pondmen'] * (data_matched_decile['froid_cout'] == 1)) /
             sum(data_matched_decile['pondmen'])
             )
-    
+
         list_values_matched.append(part_matched)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_matched, list_values_enl, 'Matched', 'ENL')
-    
+
     return figure
 
 
@@ -122,7 +121,7 @@ def histogram_froid_tuu(data_matched, data_enl):
     list_values_matched = []
     list_values_enl = []
     list_keys = []
-    for i in range(1,9):
+    for i in range(1, 9):
         data_enl_tuu = data_enl.query('tuu == {}'.format(i))
         data_matched_tuu = data_matched.query('tuu == {}'.format(i))
 
@@ -142,7 +141,7 @@ def histogram_froid_tuu(data_matched, data_enl):
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_matched, list_values_enl, 'Matched', 'ENL')
-    
+
     return figure
 
 

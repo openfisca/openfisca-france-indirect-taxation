@@ -2,7 +2,7 @@
 
 
 # Import de modules généraux
-from __future__ import division
+
 
 from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import get_poste_categorie_fiscale
 
@@ -44,7 +44,6 @@ def assert_categorie_fiscale(poste_coicop, categorie_fiscale):
     assert categorie_fiscale == got, \
         "For poste coicop {} we have wrong categorie fiscale: \n got {} but should be {}".format(
             poste_coicop, got, categorie_fiscale)
-
 
 
 if __name__ == '__main__':

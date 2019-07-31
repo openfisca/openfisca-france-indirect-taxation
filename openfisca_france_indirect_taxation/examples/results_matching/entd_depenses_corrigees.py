@@ -1,4 +1,3 @@
-from __future__ import division
 
 
 # Dans ce script on utilise des histogrammes pour comparer la distribution des variables dans les deux enquêtes.
@@ -38,15 +37,16 @@ def data_histogram_distribution_depenses_annuelle(data_matched):
     for i in [.05, .1, .2, .3, .4, .5, .6, .7, .8, .9, .95]:
         list_values_poste.append(data_matched['poste_07_2_2_1_1'].quantile(i))
         list_values_depenses_carburants.append(data_matched['depenses_carburants_corrigees_entd'].quantile(i))
-        list_keys.append('{}'.format(i)) 
+        list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_poste, list_values_depenses_carburants, 'Ex ante', 'Ex post')
 
-    values = {'keys': list_keys, 'Ex ante' : list_values_poste, 'Ex post': list_values_depenses_carburants}
+    values = {'keys': list_keys, 'Ex ante': list_values_poste, 'Ex post': list_values_depenses_carburants}
     dataframe = pd.DataFrame.from_dict(values)
     dataframe = dataframe.set_index('keys')
 
     return figure, dataframe
+
 
 dataframe = data_histogram_distribution_depenses_annuelle(data_matched)[1]
 save_dataframe_to_graph(

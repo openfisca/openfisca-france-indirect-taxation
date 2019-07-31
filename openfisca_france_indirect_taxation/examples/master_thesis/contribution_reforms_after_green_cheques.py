@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, \
@@ -37,11 +37,11 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         ]
 
     indiv_df_reform = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
-    indiv_df_use_baseline =survey_scenario.create_data_frame_by_entity(simulated_variables,
+    indiv_df_use_baseline = survey_scenario.create_data_frame_by_entity(simulated_variables,
         use_baseline =True, period = year)
 
     menages_reform = indiv_df_reform['menage']
-    menages_use_baseline =indiv_df_reference['menage']
+    menages_use_baseline = indiv_df_reference['menage']
 
     unite_conso = (menages_reform['ocde10'] * menages_reform['pondmen']).sum()
     contribution = (
@@ -56,15 +56,15 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         df_use_baseline =\
             dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
 
-        df_reform[u'Cost of the reform after green cheques'] = (
+        df_reform['Cost of the reform after green cheques'] = (
             ((contribution_unite_conso) * df_reform['ocde10'] -
             (df_reform['total_taxes_energies'] - df_reference['total_taxes_energies']))
             )
 
         # Réalisation de graphiques
-        graph_builder_bar(df_reform[u'Cost of the reform after green cheques'])
+        graph_builder_bar(df_reform['Cost of the reform after green cheques'])
 
-        #save_dataframe_to_graph(
+        # save_dataframe_to_graph(
         #    df_reform[u'Cost of the reform after green cheques'],
         #    'Contributions_reforme/Green_cheques/contribution_{0}_apres_cheques_verts_by_{1}.csv'.format(reforme,
         #    category)

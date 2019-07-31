@@ -1,4 +1,3 @@
-from __future__ import division
 
 
 # Dans ce script on utilise des histogrammes pour comparer la distribution des variables dans les deux enquêtes.
@@ -49,10 +48,10 @@ def histogram_revdecm(data_matched, data_erfs):
     for i in [.01, .02, .04, .06, .08, .1, .2, .35, .5, .65, .8, .95, .99]:
         list_values_matched.append(data_matched['revdecm'].quantile(i))
         list_values_erfs.append(data_erfs['revdecm'].quantile(i))
-        list_keys.append('{}'.format(i)) 
+        list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_matched, list_values_erfs, 'Matched', 'ERFS')
-    
+
     return figure
 
 

@@ -2,8 +2,6 @@
 
 # Dans ce script, on test la qualité de l'appariement.
 
-from __future__ import division
-
 
 import pandas as pd
 
@@ -37,7 +35,7 @@ data_matched_distance = pd.read_csv(
         ), sep =',', decimal = '.'
     )
 
-    
+
 data_matched_random = pd.read_csv(
     os.path.join(
         default_config_files_directory,
@@ -65,17 +63,18 @@ def test_froid_niveau_vie_decile(data_enl, data_matched):
     average_froid_enl = 100 * sum(data_enl['pondmen'] * (data_enl['froid'] == 1)) / sum(data_enl['pondmen'])
     average_froid_matched = 100 * sum(data_matched['pondmen'] * (data_matched['froid'] == 1)) / sum(data_matched['pondmen'])
     dict_froid['Average'] = [average_froid_enl, average_froid_matched]
-    for i in range(1,11):
+    for i in range(1, 11):
         data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
         data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
-    
+
         part_froid_enl = 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['froid'] == 1)) / sum(data_enl_decile['pondmen'])
         part_froid_matched = 100 * sum(data_matched_decile['pondmen'] * (data_matched_decile['froid'] == 1)) / sum(data_matched_decile['pondmen'])
-    
+
         dict_froid['{}'.format(i)] = \
             [part_froid_enl, part_froid_matched]
-    
+
     return dict_froid
+
 
 test_froid_niveau_vie_decile_distance = test_froid_niveau_vie_decile(data_enl, data_matched_distance)
 test_froid_niveau_vie_decile_random = test_froid_niveau_vie_decile(data_enl, data_matched_random)
@@ -87,17 +86,18 @@ def test_froid_cout_niveau_vie_decile(data_enl, data_matched):
     average_froid_enl = 100 * sum(data_enl['pondmen'] * (data_enl['froid_cout'] == 1)) / sum(data_enl['pondmen'])
     average_froid_matched = 100 * sum(data_matched['pondmen'] * (data_matched['froid_cout'] == 1)) / sum(data_matched['pondmen'])
     dict_froid['Average'] = [average_froid_enl, average_froid_matched]
-    for i in range(1,11):
+    for i in range(1, 11):
         data_enl_decile = data_enl.query('niveau_vie_decile == {}'.format(i))
         data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
-    
+
         part_froid_enl = 100 * sum(data_enl_decile['pondmen'] * (data_enl_decile['froid_cout'] == 1)) / sum(data_enl_decile['pondmen'])
         part_froid_matched = 100 * sum(data_matched_decile['pondmen'] * (data_matched_decile['froid_cout'] == 1)) / sum(data_matched_decile['pondmen'])
-    
+
         dict_froid['{}'.format(i)] = \
             [part_froid_enl, part_froid_matched]
-    
+
     return dict_froid
+
 
 test_froid_cout_niveau_vie_decile_distance = test_froid_cout_niveau_vie_decile(data_enl, data_matched_distance)
 test_froid_cout_niveau_vie_decile_random = test_froid_cout_niveau_vie_decile(data_enl, data_matched_random)

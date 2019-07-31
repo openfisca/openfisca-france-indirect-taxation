@@ -24,8 +24,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from __future__ import division
-
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn
@@ -63,52 +61,52 @@ def hellinger(p, q):
 
 def histogrammes(list_keys, list_values_bdf, list_values_entd, data_name_1, data_name_2):
     size_hist = np.arange(len(list_keys))
-    plot_bdf = plt.bar(size_hist-0.125, list_values_bdf, color = 'b', align='center', width=0.25)
-    plot_entd = plt.bar(size_hist+0.125, list_values_entd, align='center', width=0.25)
+    plot_bdf = plt.bar(size_hist - 0.125, list_values_bdf, color = 'b', align='center', width=0.25)
+    plot_entd = plt.bar(size_hist + 0.125, list_values_entd, align='center', width=0.25)
     plt.xticks(size_hist, list_keys)
     plt.legend((plot_bdf[0], plot_entd[0]), (data_name_1, data_name_2))
-    
+
     return plt
 
 
-def plots_by_group(function, data_name_1, data_name_2, distance, group):    
+def plots_by_group(function, data_name_1, data_name_2, distance, group):
     fig = plt.figure()
-    
+
     if group == 'tuu':
         corr = -1
     else:
         corr = 0
 
     ax1 = fig.add_subplot(521)
-    ax1 = function(data_name_1, data_name_2, distance, group, 1+corr)
-    
+    ax1 = function(data_name_1, data_name_2, distance, group, 1 + corr)
+
     ax2 = fig.add_subplot(522)
-    ax2 = function(data_name_1, data_name_2, distance, group, 2+corr)
-    
+    ax2 = function(data_name_1, data_name_2, distance, group, 2 + corr)
+
     ax3 = fig.add_subplot(523)
-    ax3 = function(data_name_1, data_name_2, distance, group, 3+corr)
-    
+    ax3 = function(data_name_1, data_name_2, distance, group, 3 + corr)
+
     ax4 = fig.add_subplot(524)
-    ax4 = function(data_name_1, data_name_2, distance, group, 4+corr)
+    ax4 = function(data_name_1, data_name_2, distance, group, 4 + corr)
 
     ax5 = fig.add_subplot(525)
-    ax5 = function(data_name_1, data_name_2, distance, group, 5+corr)
-    
+    ax5 = function(data_name_1, data_name_2, distance, group, 5 + corr)
+
     ax6 = fig.add_subplot(526)
-    ax6 = function(data_name_1, data_name_2, distance, group, 6+corr)
+    ax6 = function(data_name_1, data_name_2, distance, group, 6 + corr)
 
     ax7 = fig.add_subplot(527)
-    ax7 = function(data_name_1, data_name_2, distance, group, 7+corr)
+    ax7 = function(data_name_1, data_name_2, distance, group, 7 + corr)
 
     ax8 = fig.add_subplot(528)
-    ax8 = function(data_name_1, data_name_2, distance, group, 8+corr)
+    ax8 = function(data_name_1, data_name_2, distance, group, 8 + corr)
 
     ax9 = fig.add_subplot(529)
-    ax9 = function(data_name_1, data_name_2, distance, group, 9+corr)
+    ax9 = function(data_name_1, data_name_2, distance, group, 9 + corr)
 
     if group == 'niveau_vie_decile':
-        ax10 = fig.add_subplot(5,2,10)
-        ax10 = function(data_name_1, data_name_2, distance, group, 10+corr)
+        ax10 = fig.add_subplot(5, 2, 10)
+        ax10 = function(data_name_1, data_name_2, distance, group, 10 + corr)
 
 
 def weighted_sum(groupe, var):

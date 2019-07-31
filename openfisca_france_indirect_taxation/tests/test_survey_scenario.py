@@ -2,7 +2,7 @@
 
 
 # Import de modules généraux
-from __future__ import division
+
 
 import pandas
 import seaborn
@@ -26,7 +26,7 @@ def test():
         ]
     year = 2011
     elasticities = get_elasticities(year)
-    inflation_kwargs = None # dict(inflator_by_variable = inflators_by_year[year])
+    inflation_kwargs = None  # dict(inflator_by_variable = inflators_by_year[year])
 
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,

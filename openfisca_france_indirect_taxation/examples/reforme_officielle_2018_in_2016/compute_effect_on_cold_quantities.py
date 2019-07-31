@@ -5,7 +5,7 @@
 # We then replicate this with adjusted quantities after the reform and do the difference.
 
 # Import general modules
-from __future__ import division
+
 
 import numpy as np
 
@@ -21,9 +21,10 @@ params = logit.params
 params = params.to_frame().T
 explanatory_vars = params.columns.tolist()
 
+
 def effect_reform_cold():
     cold = dict()
-    variables_use_baseline =[
+    variables_use_baseline = [
         'agepr',
         'aides_logement',
         'brde_m2_rev_disponible',
@@ -109,7 +110,7 @@ def effect_reform_cold():
         data_year = data_year
         )
 
-    df_use_baseline =survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
+    df_use_baseline = survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
     df_reforme = survey_scenario.create_data_frame_by_entity(variables_reforme, period = year)['menage']
 
     # On passe en kWh
@@ -121,14 +122,13 @@ def effect_reform_cold():
         )
 
     # Reference case :
-    df_use_baseline =df_reference.query('rev_disponible > 0')
+    df_use_baseline = df_reference.query('rev_disponible > 0')
 
     df_reference['monoparental'] = 0
     df_reference.loc[df_reference['typmen'] == 2, 'monoparental'] = 1
     for i in range(0, 5):
         df_reference['strate_{}'.format(i)] = 0
         df_reference.loc[df_reference['strate'] == i, 'strate_{}'.format(i)] = 1
-
 
     df_reference['predict_log_odds'] = 0
     for var in explanatory_vars:
@@ -143,7 +143,7 @@ def effect_reform_cold():
         columns = {
             'quantites_combustibles_liquides_officielle_2018_in_2016': 'quantites_combustibles_liquides',
             'quantites_gaz_final_officielle_2018_in_2016': 'quantites_gaz_final',
-                   },
+            },
         inplace = True,
         )
 
@@ -168,7 +168,6 @@ def effect_reform_cold():
     df_reforme['predict_odds'] = np.exp(df_reforme['predict_log_odds'])
     df_reforme['predict_proba'] = df_reforme['predict_odds'] / (1 + df_reforme['predict_odds'])
     df_reforme.loc[df_reforme['niveau_vie_decile'] > 3, 'predict_proba'] = 0
-
 
     # After revenue recycling :
     df_reforme_after = df_reforme.copy()
@@ -207,4 +206,4 @@ def effect_reform_cold():
 
 if __name__ == "__main__":
     cold = effect_reform_cold()
-    print logit.summary()
+    print(logit.summary())

@@ -6,7 +6,6 @@
 
 
 # Import general modules
-from __future__ import division
 
 
 # Import modules specific to OpenFisca
@@ -39,19 +38,19 @@ survey_scenario = SurveyScenario.create(
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
-    df[u'gains_cheque_officiel'] = (
+    df['gains_cheque_officiel'] = (
         df['cheques_energie_officielle_2018_in_2016'] +
         df['reste_transferts_neutre_officielle_2018_in_2016'] -
         df['pertes_financieres_avant_redistribution_officielle_2018_in_2016']
         )
-    df[u'gains_cheque_integral_inconditionnel'] = (
+    df['gains_cheque_integral_inconditionnel'] = (
         df['cheques_energie_integral_inconditionnel_officielle_2018_in_2016'] -
         df['pertes_financieres_avant_redistribution_officielle_2018_in_2016']
         )
 
     # Réalisation de graphiques
     graph_builder_bar(df[
-        [u'gains_cheque_officiel'] +
-        [u'gains_cheque_integral_inconditionnel']
+        ['gains_cheque_officiel'] +
+        ['gains_cheque_integral_inconditionnel']
         ], False)
     #save_dataframe_to_graph(df, 'Expenditures/energy_expenditures_by_{}.csv'.format(category))

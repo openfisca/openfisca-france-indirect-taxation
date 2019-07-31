@@ -1,7 +1,5 @@
- # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
-
-from __future__ import division
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
@@ -16,9 +14,9 @@ temporary_store = TemporaryStore.create(file_name = 'transport_tmp')
 
 
 def load_data_indiv_teg():
-    
+
     year_entd = 2008
-    
+
     entd_survey_collection = SurveyCollection.load(
         collection = 'enquete_transport', config_files_directory = config_files_directory
         )
@@ -27,15 +25,15 @@ def load_data_indiv_teg():
 
     variables_indiv_teg = [
         'ident_men',
-        'noi', # numero de l'indiv dans le menage
-        'typlieu', # numéro du lieu de travail pour l'indiv
+        'noi',  # numero de l'indiv dans le menage
+        'typlieu',  # numéro du lieu de travail pour l'indiv
         'v1_btravdist',
-        'v1_btravtempsa', # Durée habituelle pour faire le trajet aller au TEG (en min)
-        'v1_btravtempsr', # Durée habituelle pour faire le trajet retour du TEG (en min)
-        'v1_btravnbarj', # Nb d'aller-retour/jour de dplct
-        'v1_btravbarf', #  Nb de jours/sem. où X se rend à son lieu de travail étude ou garde (TEG), en gral
-        'v1_btravmoyen1s', # Façon habituelle de se rendre au TEG, moy. 1
-        'distrteg', # Distance routière domicile – lieu de TEG (source Odomatrix Inra-Insee) (en km)
+        'v1_btravtempsa',  # Durée habituelle pour faire le trajet aller au TEG (en min)
+        'v1_btravtempsr',  # Durée habituelle pour faire le trajet retour du TEG (en min)
+        'v1_btravnbarj',  # Nb d'aller-retour/jour de dplct
+        'v1_btravbarf',  # Nb de jours/sem. où X se rend à son lieu de travail étude ou garde (TEG), en gral
+        'v1_btravmoyen1s',  # Façon habituelle de se rendre au TEG, moy. 1
+        'distrteg',  # Distance routière domicile – lieu de TEG (source Odomatrix Inra-Insee) (en km)
         ]
 
     # Keep relevant variables :
@@ -53,13 +51,13 @@ def merge_indiv_teg_menage():
 
     data_teg.rename(
         columns = {
-            'v1_btravtempsa' : 'duree_trajet_aller_teg',
-            'v1_btravtempsr' : 'duree_trajet_retour_teg',
-            'v1_btravnbarj' : 'nb_aller_retour_jour_teg',
-            'v1_btravbarf' : 'nb_jours_deplacement_teg',
-            'v1_btravmoyen1s' : 'mode_principal_deplacement_teg',
-            'distrteg' : 'distance_routiere_teg',
-                   },
+            'v1_btravtempsa': 'duree_trajet_aller_teg',
+            'v1_btravtempsr': 'duree_trajet_retour_teg',
+            'v1_btravnbarj': 'nb_aller_retour_jour_teg',
+            'v1_btravbarf': 'nb_jours_deplacement_teg',
+            'v1_btravmoyen1s': 'mode_principal_deplacement_teg',
+            'distrteg': 'distance_routiere_teg',
+            },
         inplace = True,
         )
 
@@ -86,10 +84,11 @@ def merge_indiv_teg_menage():
 
     data_entd = data_menages_entd.merge(data_teg, on = 'ident_men', how='left')
     data_entd = data_entd.fillna(0)
-    
+
     return data_entd, data_bdf
 
+
 if __name__ == "__main__":
-    data = merge_indiv_teg_menage()  
+    data = merge_indiv_teg_menage()
     data_entd = data[0]
     data_bdf = data[1]

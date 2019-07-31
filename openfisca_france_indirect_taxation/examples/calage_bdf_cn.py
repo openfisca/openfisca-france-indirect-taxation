@@ -29,7 +29,7 @@
 # importants pour restaurer les bonnes quantités. Plusieurs méthodes sont proposées.
 
 # Import de modules généraux
-from __future__ import division
+
 
 import logging
 import os
@@ -81,7 +81,7 @@ def calage_viellissement_depenses(year_data, year_calage, depenses, masses):
             ratio_bdf_cn = masses.at[grosposte, 'ratio_bdf{}_cn{}'.format(year_data, year_data)]
             ratio_cn_cn = masses.at[grosposte, 'ratio_cn{}_cn{}'.format(year_data, year_calage)]
             depenses_calees[column] = depenses[column] * ratio_bdf_cn * ratio_cn_cn
-            log.info(u'''
+            log.info('''
 Pour le grosposte {}, le ratio de calage de la base bdf {} sur la cn est {},
 le ratio de calage sur la cn pour l\'annee {} est {}'''.format(
                 grosposte, year_data, ratio_bdf_cn, year_calage, ratio_cn_cn))
@@ -135,7 +135,7 @@ def get_bdf_data_frames(depenses, year_data = None):
     df_bdf_weighted_sum_by_grosposte = pandas.DataFrame(
         pandas.Series(
             data = dict_bdf_weighted_sum_by_grosposte,
-            index = dict_bdf_weighted_sum_by_grosposte.keys()
+            index = list(dict_bdf_weighted_sum_by_grosposte.keys())
             )
         )
     return df_bdf_weighted_sum_by_grosposte
@@ -162,7 +162,7 @@ def get_cn_data_frames(year_data = None, year_calage = None):
     else:
         masses_cn_12postes_data_frame = masses_cn_data_frame.loc[:, ['Code', year_data]]
 
-    masses_cn_12postes_data_frame['code_unicode'] = masses_cn_12postes_data_frame.Code.astype(unicode)
+    masses_cn_12postes_data_frame['code_unicode'] = masses_cn_12postes_data_frame.Code.astype(str)
     masses_cn_12postes_data_frame['len_code'] = masses_cn_12postes_data_frame['code_unicode'].apply(lambda x: len(x))
 
 #    On ne garde que les 12 postes sur lesquels on cale:

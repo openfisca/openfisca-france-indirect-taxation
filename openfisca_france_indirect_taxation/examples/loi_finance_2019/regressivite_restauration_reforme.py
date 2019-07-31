@@ -6,7 +6,6 @@
 # the increase in taxes he faced. These amounts do not take into account VAT.
 
 # Import general modules
-from __future__ import division
 
 
 # Import modules specific to OpenFisca
@@ -27,18 +26,18 @@ inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 simulated_variables = [
     'poste_11_1_1_1_1',
     'poste_11_1_1_1_2',
-    #'poste_11_1_2_1_1',
+    # 'poste_11_1_2_1_1',
     'poste_11_1_3_1',
     'poste_11_1_3_2',
-    #'poste_11_2_1_1_1',
-    #'poste_agrege_11',
+    # 'poste_11_2_1_1_1',
+    # 'poste_agrege_11',
     'poste_11_1_1_1_1_reforme_tva_2019',
     'poste_11_1_1_1_2_reforme_tva_2019',
     'poste_11_1_2_1_1_reforme_tva_2019',
     'poste_11_1_3_1_reforme_tva_2019',
     'poste_11_1_3_2_reforme_tva_2019',
-    #'poste_11_2_1_1_1_reforme_tva_2019',
-    #'poste_agrege_11_reforme_tva_2019',
+    # 'poste_11_2_1_1_1_reforme_tva_2019',
+    # 'poste_agrege_11_reforme_tva_2019',
     'rev_disp_loyerimput',
     'depenses_tot',
     'ocde10',
@@ -54,7 +53,7 @@ survey_scenario = SurveyScenario.create(
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
+for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
 
     df['poste_agrege_restauration'] = (
@@ -74,7 +73,7 @@ for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 's
     df['augmentation_depenses_restauration_reforme_tva_2019'] = (
         df['poste_agrege_restauration_reforme_tva_2019']
         - df['poste_agrege_restauration']
-            )
+        )
 
     df['augmentation_depenses_rev_disp_loyerimput'] = df['augmentation_depenses_restauration_reforme_tva_2019'] / df['rev_disp_loyerimput']
     df['augmentation_depenses_depenses_tot'] = df['augmentation_depenses_restauration_reforme_tva_2019'] / df['depenses_tot']

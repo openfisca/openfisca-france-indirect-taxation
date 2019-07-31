@@ -5,7 +5,7 @@
 # The aime will then be to compute the effect of the reform on the likelihood of being cold
 
 # Import general modules
-from __future__ import division
+
 
 import statsmodels.formula.api as smf
 import pandas as pd
@@ -42,7 +42,6 @@ def estimate_froid():
     data_enl['mauvaise_isolation_fenetres'] = 1 * (data_enl['isolation_fenetres'] == 1)
     data_enl['bonne_isolation_murs'] = 1 * (data_enl['isolation_murs'] == 1)
     data_enl['mauvaise_isolation_murs'] = 1 * (data_enl['isolation_murs'] == 3)
-
 
     # Compute quantities from expenditures
     tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
@@ -81,7 +80,6 @@ def estimate_froid():
         / prix_unitaire_base
         )
 
-
     dict_prix_fixe_gaz_b0 = \
         legislation_json['children']['tarifs_energie']['children']['tarif_fixe_gdf_ttc']['children']['b0_1000_6000']
     df_prix = pd.DataFrame.from_dict(dict_prix_fixe_gaz_b0['values'])
@@ -100,7 +98,6 @@ def estimate_froid():
         (data_enl['depenses_gaz_ville'] - prix_fixe_base)
         / prix_unitaire_base
         )
-
 
     dict_prix_fixe_gaz_1 = \
         legislation_json['children']['tarifs_energie']['children']['tarif_fixe_gdf_ttc']['children']['b1_6_30000']
@@ -132,42 +129,42 @@ def estimate_froid():
     data_enl['quantites_kwh'] = 9.96 * data_enl['quantites_combustibles_liquides'] + data_enl['quantites_gaz_ville']
 
     data_enl['proprietaire'] = 0
-    data_enl.loc[data_enl.stalog.isin([1,2]), 'proprietaire'] = 1
+    data_enl.loc[data_enl.stalog.isin([1, 2]), 'proprietaire'] = 1
 
     data_enl['etudiant'] = 0
     data_enl.loc[data_enl.situapr == 3, 'etudiant'] = 1
 
     data_enl['monoparental'] = 0
-    data_enl.loc[data_enl.mtypmena.isin([31,32]), 'monoparental'] = 1
+    data_enl.loc[data_enl.mtypmena.isin([31, 32]), 'monoparental'] = 1
 
     data_enl.rename(
         columns = {
-            'froid_4_criteres_3_deciles' : 'FC_indicator',
-            'revtot' : 'Disposable_income',
-            'quantites_gaz_ville' : 'Quantity_natural_gaz',
-            'quantites_combustibles_liquides' : 'Quantity_domestic_fuel',
-            'combustibles_liquides' : 'Domestic_fuel',
-            'gaz_ville' : 'Natural_gas',
-            'strate_0' : 'Rural',
-            'strate_1' : 'Small_cities',
-            'strate_3' : 'Large_cities',
-            'strate_4' : 'Paris',
-            'majorite_double_vitrage' : 'Majority_double_glazing',
-            'mauvaise_isolation_murs' : 'Bad_walls_isolation',
-            'bonne_isolation_murs' : 'Good_walls_isolation',
-            'ouest_sud' : 'Ouest_south',
-            'surfhab_d' : 'Living_area_m2',
-            'aides_logement' : 'Housing_benefits',
+            'froid_4_criteres_3_deciles': 'FC_indicator',
+            'revtot': 'Disposable_income',
+            'quantites_gaz_ville': 'Quantity_natural_gaz',
+            'quantites_combustibles_liquides': 'Quantity_domestic_fuel',
+            'combustibles_liquides': 'Domestic_fuel',
+            'gaz_ville': 'Natural_gas',
+            'strate_0': 'Rural',
+            'strate_1': 'Small_cities',
+            'strate_3': 'Large_cities',
+            'strate_4': 'Paris',
+            'majorite_double_vitrage': 'Majority_double_glazing',
+            'mauvaise_isolation_murs': 'Bad_walls_isolation',
+            'bonne_isolation_murs': 'Good_walls_isolation',
+            'ouest_sud': 'Ouest_south',
+            'surfhab_d': 'Living_area_m2',
+            'aides_logement': 'Housing_benefits',
             'etudiant': 'Student',
-            'agepr' : 'Age_representative',
-            'agepr_2' : 'Age_representative_squared',
-            'nactifs' : 'Number_in_labor_force',
-            'ocde10' : 'Consumption_units',
-            'monoparental' : 'Monoparental',
-            'bat_av_49' : 'Building_before_1949',
-            'bat_49_74' : 'Building_1949_74',
-            'log_indiv' : 'Individual_housing',
-            'proprietaire' : 'Owner'
+            'agepr': 'Age_representative',
+            'agepr_2': 'Age_representative_squared',
+            'nactifs': 'Number_in_labor_force',
+            'ocde10': 'Consumption_units',
+            'monoparental': 'Monoparental',
+            'bat_av_49': 'Building_before_1949',
+            'bat_49_74': 'Building_1949_74',
+            'log_indiv': 'Individual_housing',
+            'proprietaire': 'Owner'
             },
         inplace = True
         )
@@ -176,52 +173,51 @@ def estimate_froid():
         'Disposable_income',
         'Quantity_natural_gaz',
         'Quantity_domestic_fuel',
-        #'Bad_walls_isolation',
-        #'Good_walls_isolation',
-        #'Majority_double_glazing',
-        #'Building_before_1949',
-        #'Building_1949_74',
-        #'Owner',
-        #'Individual_housing',
-        #'Living_area_m2',
-        #'Consumption_units',
-        #'Number_in_labor_force',
-        #'Housing_benefits',
-        #'Rural',
-        #'Small_cities',
-        #'Large_cities',
-        #'Paris',
-        #'Ouest_south',
-        #'Domestic_fuel',
-        #'Natural_gas',
-        #'Student',
-        #'Age_representative',
-        #'Age_representative_squared',
-        #'Monoparental',
-        #'isolation_toit',
-        #'quantites_electricite_selon_compteur',
-        #'quantites_gaz_final',
-        #'isolation_murs',
-        #'mauvaise_isolation_fenetres',
-        #'depenses_gaz_ville',
-        #'depenses_electricite',
-        #'depenses_energies',
-        #'quantites_kwh',
-        #'part_energies_revtot',
-        #'quantites_combustibles_liquides',
-        #'niveau_de_vie',
-        #'brde_m2_rev_disponible',
-        #'tee_10_3_deciles_rev_disponible',
-        #'rural',
-        #'paris',
-        #'electricite',
-        #'npers',
-        #'strate',
-        #'depenses_tot',
-        #'quantites_kwh',
-        #'revdecm',
+        # 'Bad_walls_isolation',
+        # 'Good_walls_isolation',
+        # 'Majority_double_glazing',
+        # 'Building_before_1949',
+        # 'Building_1949_74',
+        # 'Owner',
+        # 'Individual_housing',
+        # 'Living_area_m2',
+        # 'Consumption_units',
+        # 'Number_in_labor_force',
+        # 'Housing_benefits',
+        # 'Rural',
+        # 'Small_cities',
+        # 'Large_cities',
+        # 'Paris',
+        # 'Ouest_south',
+        # 'Domestic_fuel',
+        # 'Natural_gas',
+        # 'Student',
+        # 'Age_representative',
+        # 'Age_representative_squared',
+        # 'Monoparental',
+        # 'isolation_toit',
+        # 'quantites_electricite_selon_compteur',
+        # 'quantites_gaz_final',
+        # 'isolation_murs',
+        # 'mauvaise_isolation_fenetres',
+        # 'depenses_gaz_ville',
+        # 'depenses_electricite',
+        # 'depenses_energies',
+        # 'quantites_kwh',
+        # 'part_energies_revtot',
+        # 'quantites_combustibles_liquides',
+        # 'niveau_de_vie',
+        # 'brde_m2_rev_disponible',
+        # 'tee_10_3_deciles_rev_disponible',
+        # 'rural',
+        # 'paris',
+        # 'electricite',
+        # 'npers',
+        # 'strate',
+        # 'depenses_tot',
+        # 'quantites_kwh',
+        # 'revdecm',
         ]
-
 
     regression_logit = smf.Logit(data_enl['FC_indicator'], data_enl[regressors]).fit()
 
@@ -231,5 +227,4 @@ def estimate_froid():
 if __name__ == "__main__":
     regression_logit = estimate_froid()
     #print regression_logit.summary()
-    print regression_logit.get_margeff().summary()
-
+    print(regression_logit.get_margeff().summary())

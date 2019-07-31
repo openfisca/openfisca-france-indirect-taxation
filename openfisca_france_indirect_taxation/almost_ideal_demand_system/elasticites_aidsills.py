@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import pandas as pd
 import pkg_resources
@@ -102,12 +101,12 @@ aidsills_elas.rename(columns={0: 'elas_price_1_1', 1: 'elas_price_2_2'}, inplace
 df = df.astype(str)
 df['index_nvd_area'] = df['strate'] + '_' + df['niveau_vie_decile']
 aidsills_elas = aidsills_elas.reset_index()
-aidsills_elas.rename(columns={'index':'index_nvd_area'}, inplace = True)
+aidsills_elas.rename(columns={'index': 'index_nvd_area'}, inplace = True)
 aidsills_elas['index_nvd_area'] = aidsills_elas['index_nvd_area'].str[5:]
 
 elasticites_new = pd.merge(df, aidsills_elas, how = 'left', on = 'index_nvd_area')
 elasticites_new = elasticites_new.reset_index()
-elasticites_new.rename(columns={'index':'ident_men'}, inplace = True)
+elasticites_new.rename(columns={'index': 'ident_men'}, inplace = True)
 
 
 def create_data_elasticities_aidsills():
@@ -135,16 +134,15 @@ def create_data_elasticities_aidsills():
     dataframe = dataframe.fillna(0)
     #dataframe = dataframe.query('year == 2011')
 
-
     assert not dataframe.ident_men.duplicated().any(), 'Some housholds are duplicated'
 
     return dataframe.to_csv(os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
-            'quaids',
-            'data_elasticities_energy_no_alime_all.csv'
-            ), sep =',')
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'quaids',
+        'data_elasticities_energy_no_alime_all.csv'
+        ), sep =',')
 
 
 def get_elasticities_aidsills(year, non_positive):

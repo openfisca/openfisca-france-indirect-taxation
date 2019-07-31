@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
@@ -9,7 +7,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 class assurance_sante_taxe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant des taxes sur l'assurance santé"
+    label = "Montant des taxes sur l'assurance santé"
 
     def formula(self, simulation, period):
         depenses_assurance_sante = menage('depenses_assurance_sante', period)
@@ -22,7 +20,7 @@ class assurance_sante_taxe(YearlyVariable):
 class assurance_transport_taxe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant des taxes sur l'assurance transport"
+    label = "Montant des taxes sur l'assurance transport"
 
     def formula_1984(self, simulation, period):
         depenses_assurance_transport = menage('depenses_assurance_transport', period)
@@ -56,7 +54,7 @@ class assurance_transport_taxe(YearlyVariable):
 class autres_assurances_taxe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant des taxes sur les autres assurances"
+    label = "Montant des taxes sur les autres assurances"
 
     def formula(self, simulation, period):
         depenses_autres_assurances = menage('depenses_autres_assurances', period)
@@ -67,7 +65,7 @@ class autres_assurances_taxe(YearlyVariable):
 class total_assurances_taxe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant des taxes sur les assurances"
+    label = "Montant des taxes sur les assurances"
 
     def formula(self, simulation, period):
         assurance_transport_taxe = menage('assurance_transport_taxe', period)

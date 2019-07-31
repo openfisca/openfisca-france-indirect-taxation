@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 
 import pandas as pd
 import pkg_resources
 import os
+
 
 def create_data_elasticities():
     default_config_files_directory = os.path.join(
@@ -21,35 +20,34 @@ def create_data_elasticities():
     liste_elasticities = [column for column in data_quaids.columns if column[:4] == 'elas']
     data_quaids[liste_elasticities] = data_quaids[liste_elasticities].astype('float32')
     dataframe = data_quaids[liste_elasticities + ['ident_men', 'year']].copy()
-    
+
     dataframe = dataframe.fillna(0)
     dataframe_2011 = dataframe.query('year == 2011')
-    
-    for j in range(1,4):
-        print(dataframe_2011['elas_price_{0}_{0}'.format(j)].mean())
-    
+
+    for j in range(1, 4):
+        print((dataframe_2011['elas_price_{0}_{0}'.format(j)].mean()))
+
     data_plus = dataframe_2011.query('elas_price_2_2 > 0')
-    data_plus['elas_price_2_2'].quantile([0.1, .2, .3, .4, .5, .6, .7, .8, .9]) 
+    data_plus['elas_price_2_2'].quantile([0.1, .2, .3, .4, .5, .6, .7, .8, .9])
 
     # Faire un min et un max pour borner les élasticités
-    for j in range(1,4):
+    for j in range(1, 4):
         dataframe['elas_price_{0}_{0}'.format(j)] = \
-	       (dataframe['elas_price_{0}_{0}'.format(j)] < 0) * dataframe['elas_price_{0}_{0}'.format(j)]
+            (dataframe['elas_price_{0}_{0}'.format(j)] < 0) * dataframe['elas_price_{0}_{0}'.format(j)]
         dataframe['elas_price_{0}_{0}'.format(j)] = (
-	       (dataframe['elas_price_{0}_{0}'.format(j)] > -2) * dataframe['elas_price_{0}_{0}'.format(j)] +
-	       (dataframe['elas_price_{0}_{0}'.format(j)] < -2) * (-2)
+            (dataframe['elas_price_{0}_{0}'.format(j)] > -2) * dataframe['elas_price_{0}_{0}'.format(j)] +
+            (dataframe['elas_price_{0}_{0}'.format(j)] < -2) * (-2)
             )
-				
-    assert not dataframe.ident_men.duplicated().any(), 'Some housholds are duplicated'
-    
-    return dataframe.to_csv(os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
-            'quaids',
-            'data_elasticities_energy_no_alime_all.csv'
-            ), sep =',')
 
+    assert not dataframe.ident_men.duplicated().any(), 'Some housholds are duplicated'
+
+    return dataframe.to_csv(os.path.join(
+        default_config_files_directory,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'quaids',
+        'data_elasticities_energy_no_alime_all.csv'
+        ), sep =',')
 
 
 def get_elasticities(year):
@@ -132,4 +130,4 @@ if __name__ == "__main__":
     year = 2011
     create_data_elasticities()
     df = get_elasticities(year)
-    print(df.dtypes)
+    print((df.dtypes))

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import argparse
-import ConfigParser
+import configparser
 import datetime
 import logging
 import os
@@ -37,7 +37,7 @@ def main():
     args = parser.parse_args()
     logging.basicConfig(level = logging.DEBUG if args.verbose else logging.WARNING, stream = sys.stdout)
 
-    config_parser = ConfigParser.SafeConfigParser()
+    config_parser = configparser.SafeConfigParser()
     config_parser.read(args.config)
 
     if args.collection == 'both':

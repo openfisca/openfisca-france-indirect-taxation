@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import os
 import pkg_resources
@@ -59,7 +58,7 @@ data_matched_entd = data_matched_entd[
     ]
 
 data_matched_erfs = data_matched_erfs[['revdecm'] + ['ident_men']]
-    
+
 data_frame = pandas.merge(data_matched_entd, data_matched_enl, on = 'ident_men', how = 'left')
 data_frame = pandas.merge(data_frame, data_matched_erfs, on = 'ident_men')
 data_frame['ident_men'] = data_frame['ident_men'].astype(str)

@@ -17,7 +17,7 @@ EXTENSIONS_DIRECTORIES = glob.glob(os.path.join(EXTENSIONS_PATH, '*/'))
 
 class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
     """French indirect taxation tax benefit system"""
-    CURRENCY = u"€"
+    CURRENCY = "€"
     preprocess_legislation = staticmethod(preprocessing.preprocess_legislation)
 
     def __init__(self):

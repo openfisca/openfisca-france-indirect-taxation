@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 
 
-
-
-
 """Build YAML files of IPP tax and benefit tables to generate an XML file of parameters."""
 
 
@@ -25,26 +22,26 @@ root_fin = "2020-12-31"
 app_name = os.path.splitext(os.path.basename(__file__))[0]
 date_names = (
     # u"Age de départ (AAD=Age d'annulation de la décôte)",
-    u"Date",
-    u"Date d'effet",
-    u"Date de perception du salaire",
-    u"Date ISF",
+    "Date",
+    "Date d'effet",
+    "Date de perception du salaire",
+    "Date ISF",
     )
 log = logging.getLogger(app_name)
 note_names = (
-    u"Notes",
-    u"Notes bis",
+    "Notes",
+    "Notes bis",
     )
 parameters_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'param'))
 
 reference_names = (
-    u"Parution au JO",
-    u"Références BOI",
-    u"Références législatives",
-    u"Références législatives - définition des ressources et plafonds",
-    u"Références législatives - revalorisation des plafonds",
-    u"Références législatives des règles de calcul et du paramètre Po",
-    u"Références législatives de tous les autres paramètres",
+    "Parution au JO",
+    "Références BOI",
+    "Références législatives",
+    "Références législatives - définition des ressources et plafonds",
+    "Références législatives - revalorisation des plafonds",
+    "Références législatives des règles de calcul et du paramètre Po",
+    "Références législatives de tous les autres paramètres",
     )
 
 
@@ -63,7 +60,7 @@ yaml.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, dict_constr
 
 def iter_ipp_values(node):
     if isinstance(node, dict):
-        for name, child in node.items():
+        for name, child in list(node.items()):
             for path, value in iter_ipp_values(child):
                 yield [name] + path, value
     else:
@@ -108,16 +105,16 @@ def main():
             if sheet_name.isupper():
                 continue
             assert sheet_name.islower(), sheet_name
-            log.info(u'Loading file {}'.format(relative_file_path))
+            log.info('Loading file {}'.format(relative_file_path))
             with open(source_file_path_encoded) as source_file:
                 data = yaml.load(source_file)
-            rows = data.get(u"Valeurs")
+            rows = data.get("Valeurs")
             if rows is None:
-                log.info(u'  Skipping file {} without "Valeurs"'.format(relative_file_path))
+                log.info('  Skipping file {} without "Valeurs"'.format(relative_file_path))
                 continue
             row_by_start = {}
             for row in rows:
-                start = row.get(u"Date d'effet")
+                start = row.get("Date d'effet")
                 if start is None:
                     for date_name in date_names:
                         start = row.get(date_name)
@@ -127,7 +124,7 @@ def main():
                         # No date found. Skip row.
                         continue
                 elif not isinstance(start, datetime.date):
-                    start = start[u"Année Revenus"]
+                    start = start["Année Revenus"]
                 row_by_start[start] = row
             sorted_row_by_start = sorted(row_by_start.items())
 
@@ -135,7 +132,7 @@ def main():
             relative_ipp_paths_by_start = {}
             for start, row in sorted_row_by_start:
                 relative_ipp_paths_by_start[start] = start_relative_ipp_paths = []
-                for name, child in row.items():
+                for name, child in list(row.items()):
                     if name in date_names:
                         continue
                     if name in note_names:
@@ -151,7 +148,7 @@ def main():
             def compare_relative_ipp_paths(x, y):
                 if x == y:
                     return 0
-                for relative_ipp_paths in relative_ipp_paths_by_start.itervalues():
+                for relative_ipp_paths in relative_ipp_paths_by_start.values():
                     try:
                         return cmp(relative_ipp_paths.index(x), relative_ipp_paths.index(y))
                     except ValueError:
@@ -169,7 +166,7 @@ def main():
                         if value is None:
                             break
 
-                    if value in (u'-', u'na', u'nc'):
+                    if value in ('-', 'na', 'nc'):
                         # Value is unknown. Previous value must  be propagated.
                         continue
                     ipp_path = relative_file_path.split(os.sep)[:-1] + [sheet_name] + list(relative_ipp_path)
@@ -193,48 +190,48 @@ def main():
                                 if translation is not None:
                                     fragment = translation
                                 type = translations.get('TYPE')
-                                assert type in (None, u'BAREME')
+                                assert type in (None, 'BAREME')
                             else:
                                 fragment = translations
                                 translations = None
-                        sub_path = [fragment] if isinstance(fragment, basestring) else fragment[:]
+                        sub_path = [fragment] if isinstance(fragment, str) else fragment[:]
                         while sub_path:
                             fragment = sub_path.pop(0)
                             fragment = slugify_ipp_translation_key(fragment)
                             translated_path.append(fragment)
-                            if fragment == u'ASSIETTE':
-                                assert sub_tree.get('TYPE') == u'BAREME', str((translated_path, sub_path, sub_tree))
+                            if fragment == 'ASSIETTE':
+                                assert sub_tree.get('TYPE') == 'BAREME', str((translated_path, sub_path, sub_tree))
                                 assert not sub_path
                                 slice_name = remaining_path.pop(0)
                                 assert not remaining_path
-                                sub_tree = sub_tree.setdefault(u'ASSIETTE', collections.OrderedDict()).setdefault(
+                                sub_tree = sub_tree.setdefault('ASSIETTE', collections.OrderedDict()).setdefault(
                                     slice_name, [])
-                            elif fragment == u'BAREME':
+                            elif fragment == 'BAREME':
                                 existing_type = sub_tree.get('TYPE')
                                 if existing_type is None:
                                     sub_tree['TYPE'] = fragment
                                 else:
                                     assert existing_type == fragment
-                            elif fragment == u'MONTANT':
-                                assert sub_tree.get('TYPE') == u'BAREME', str((translated_path, sub_path, sub_tree))
+                            elif fragment == 'MONTANT':
+                                assert sub_tree.get('TYPE') == 'BAREME', str((translated_path, sub_path, sub_tree))
                                 assert not sub_path
                                 slice_name = remaining_path.pop(0)
                                 assert not remaining_path
-                                sub_tree = sub_tree.setdefault(u'MONTANT', collections.OrderedDict()).setdefault(
+                                sub_tree = sub_tree.setdefault('MONTANT', collections.OrderedDict()).setdefault(
                                     slice_name, [])
-                            elif fragment == u'SEUIL':
-                                assert sub_tree.get('TYPE') == u'BAREME', str((translated_path, sub_path, sub_tree))
+                            elif fragment == 'SEUIL':
+                                assert sub_tree.get('TYPE') == 'BAREME', str((translated_path, sub_path, sub_tree))
                                 assert not sub_path
                                 slice_name = remaining_path.pop(0)
                                 assert not remaining_path
-                                sub_tree = sub_tree.setdefault(u'SEUIL', collections.OrderedDict()).setdefault(
+                                sub_tree = sub_tree.setdefault('SEUIL', collections.OrderedDict()).setdefault(
                                     slice_name, [])
-                            elif fragment == u'TAUX':
-                                assert sub_tree.get('TYPE') == u'BAREME', str((translated_path, sub_path, sub_tree))
+                            elif fragment == 'TAUX':
+                                assert sub_tree.get('TYPE') == 'BAREME', str((translated_path, sub_path, sub_tree))
                                 assert not sub_path
                                 slice_name = remaining_path.pop(0)
                                 assert not remaining_path
-                                sub_tree = sub_tree.setdefault(u'TAUX', collections.OrderedDict()).setdefault(
+                                sub_tree = sub_tree.setdefault('TAUX', collections.OrderedDict()).setdefault(
                                     slice_name, [])
                             elif sub_path or remaining_path:
                                 sub_tree = sub_tree.setdefault(fragment, collections.OrderedDict())
@@ -261,7 +258,7 @@ def main():
     # tree = collections.OrderedDict(
     #     [('imposition_indirecte', tree)]
     #     )
-    root_element = transform_node_to_element(u'root', tree)
+    root_element = transform_node_to_element('root', tree)
     # root_element.set('deb', root_deb)
     # root_element.set('fin', root_fin)
     sort_elements(root_element)
@@ -274,7 +271,7 @@ def main():
 
 
 def slugify_ipp_translation_key(key):
-    return key if key in ('RENAME', 'TYPE') else strings.slugify(key, separator = u'_')
+    return key if key in ('RENAME', 'TYPE') else strings.slugify(key, separator = '_')
 
 
 def slugify_ipp_translations_keys(ipp_translations):
@@ -283,7 +280,7 @@ def slugify_ipp_translations_keys(ipp_translations):
             slugify_ipp_translation_key(key),
             slugify_ipp_translations_keys(value) if isinstance(value, dict) else value,
             )
-        for key, value in ipp_translations.items()
+        for key, value in list(ipp_translations.items())
         )
 
 
@@ -315,38 +312,38 @@ def prepare_xml_values(name, leafs):
     type = None
     for leaf in leafs:
         value = leaf['value']
-        if isinstance(value, basestring):
+        if isinstance(value, str):
             split_value = value.split()
             if len(split_value) == 2 and split_value[1] in (
-                    u'%',
-                    u'AF',  # anciens francs
-                    u'CFA',  # francs CFA
+                    '%',
+                    'AF',  # anciens francs
+                    'CFA',  # francs CFA
                     # u'COTISATIONS',
-                    u'EUR',
-                    u'FRF',
+                    'EUR',
+                    'FRF',
                     ):
                 value = float(split_value[0])
                 unit = split_value[1]
-                if unit == u'%':
+                if unit == '%':
                     if format is None:
-                        format = u'percent'
-                    elif format != u'percent':
-                        log.warning(u'Non constant percent format {} in {}: {}'.format(format, name, leafs))
+                        format = 'percent'
+                    elif format != 'percent':
+                        log.warning('Non constant percent format {} in {}: {}'.format(format, name, leafs))
                         return None, format, type
                     value = value / 100
                 else:
                     if format is None:
-                        format = u'float'
-                    elif format != u'float':
-                        log.warning(u'Non constant float format {} in {}: {}'.format(format, name, leafs))
+                        format = 'float'
+                    elif format != 'float':
+                        log.warning('Non constant float format {} in {}: {}'.format(format, name, leafs))
                         return None, format, type
                     if type is None:
-                        type = u'monetary'
-                    elif type != u'monetary':
-                        log.warning(u'Non constant monetary type {} in {}: {}'.format(type, name, leafs))
+                        type = 'monetary'
+                    elif type != 'monetary':
+                        log.warning('Non constant monetary type {} in {}: {}'.format(type, name, leafs))
                         return None, format, type
                     else:
-                        assert type == u'monetary', type
+                        assert type == 'monetary', type
                 # elif unit == u'AF':
                 #     # Convert "anciens francs" to €.
                 #     value = round(value / (100 * 6.55957), 2)
@@ -380,13 +377,13 @@ def reindent(elem, depth = 0):
 
 def transform_node_to_element(name, node):
     if isinstance(node, dict):
-        if node.get('TYPE') == u'BAREME':
+        if node.get('TYPE') == 'BAREME':
             scale_element = etree.Element('BAREME', attrib = dict(
-                code = strings.slugify(name, separator = u'_'),
+                code = strings.slugify(name, separator = '_'),
                 ))
-            for slice_name in node.get('SEUIL', {}).keys():
+            for slice_name in list(node.get('SEUIL', {}).keys()):
                 slice_element = etree.Element('TRANCHE', attrib = dict(
-                    code = strings.slugify(slice_name, separator = u'_'),
+                    code = strings.slugify(slice_name, separator = '_'),
                     ))
 
                 threshold_element = etree.Element('SEUIL')
@@ -430,9 +427,9 @@ def transform_node_to_element(name, node):
             return scale_element if len(scale_element) > 0 else None
         else:
             node_element = etree.Element('NODE', attrib = dict(
-                code = strings.slugify(name, separator = u'_'),
+                code = strings.slugify(name, separator = '_'),
                 ))
-            for key, value in node.items():
+            for key, value in list(node.items()):
                 child_element = transform_node_to_element(key, value)
                 if child_element is not None:
                     node_element.append(child_element)
@@ -443,7 +440,7 @@ def transform_node_to_element(name, node):
         if not values:
             return None
         code_element = etree.Element('CODE', attrib = dict(
-            code = strings.slugify(name, separator = u'_'),
+            code = strings.slugify(name, separator = '_'),
             ))
         if format is not None:
             code_element.set('format', format)
@@ -461,7 +458,7 @@ def transform_value_to_element(leaf, missing_fin = root_fin):
     if value is None:
         return None
     value_element = etree.Element('VALUE', attrib = dict(
-        valeur = unicode(value),
+        valeur = str(value),
         ))
     start = leaf.get('start')
     if start is not None:

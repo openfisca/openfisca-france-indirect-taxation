@@ -4,7 +4,7 @@
 # dans les données des Comptes du Transport, et celles des enquêtes Budget des Familles.
 
 # Import de modules généraux
-from __future__ import division
+
 
 import seaborn
 
@@ -17,7 +17,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import graph_buil
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 # Sélection des données des Compte des Transports utilisées et organisation de la dataframe
-comparaison_vehicules = g2_1[g2_1['categorie'] == u'Voitures particulières']
+comparaison_vehicules = g2_1[g2_1['categorie'] == 'Voitures particulières']
 del comparaison_vehicules['categorie']
 comparaison_vehicules = comparaison_vehicules.set_index('index')
 comparaison_vehicules = comparaison_vehicules.transpose()

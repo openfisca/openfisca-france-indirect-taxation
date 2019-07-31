@@ -24,9 +24,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from __future__ import division
-
-
 import logging
 import numpy
 import pandas
@@ -42,7 +39,7 @@ log = logging.getLogger(__name__)
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year = None):
-    u"""Homogénéisation des caractéristiques sociales des ménages """
+    """Homogénéisation des caractéristiques sociales des ménages """
 
     assert temporary_store is not None
     assert year is not None
@@ -271,7 +268,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.zeat.loc[menage.zeat == 8] = 7
         menage.zeat.loc[menage.zeat == 9] = 8
 
-        assert menage.zeat.isin(range(1, 9)).all()
+        assert menage.zeat.isin(list(range(1, 9))).all()
 
         try:
             depmen = survey.get_values(table = "DEPMEN")
@@ -358,7 +355,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.zeat.loc[menage.zeat == 8] = 7
         menage.zeat.loc[menage.zeat == 9] = 8
 
-        assert menage.zeat.isin(range(1, 9)).all()
+        assert menage.zeat.isin(list(range(1, 9))).all()
 
         stalog = survey.get_values(table = "depmen", variables = ['ident_men', 'stalog'])
         stalog['stalog'] = stalog.stalog.astype('int').copy()
@@ -371,7 +368,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         stalog.stalog = stalog.new_stalog.copy()
         del stalog['new_stalog']
 
-        assert stalog.stalog.isin(range(1, 6)).all()
+        assert stalog.stalog.isin(list(range(1, 6))).all()
         stalog.set_index('ident_men', inplace = True)
         menage = menage.merge(stalog, left_index = True, right_index = True)
         menage['typlog'] = 2
@@ -405,7 +402,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         individus['age'] = year - individus.anais
         individus.loc[individus.vag == 6, ['age']] = year + 1 - individus.anais
         # Garder toutes les personnes du ménage qui ne sont pas la personne de référence et le conjoint
-        individus = individus[(individus.lienpref != 00) & (individus.lienpref != 01)].copy()
+        individus = individus[(individus.lienpref != 00) & (individus.lienpref != 0o1)].copy()
         individus.sort_values(by = ['ident_men', 'ident_ind'], inplace = True)
 
         # Inspired by http://stackoverflow.com/questions/17228215/enumerate-each-row-for-each-group-in-a-dataframe
@@ -424,7 +421,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             )
         individus.set_index('ident_men', inplace = True)
         pr = individus.loc[individus.lienpref == 00, 'agfinetu'].copy()
-        conjoint = individus.loc[individus.lienpref == 01, 'agfinetu'].copy()
+        conjoint = individus.loc[individus.lienpref == 0o1, 'agfinetu'].copy()
         conjoint.name = 'agfinetu_cj'
         agfinetu_merged = pandas.concat([pr, conjoint], axis = 1)
         menage = menage.merge(agfinetu_merged, left_index = True, right_index = True)
@@ -575,12 +572,12 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             81: ["81"],
             82: ["83", "84", "85", "86", "**", "00"],
             }
-        for csp24, csp42s in csp42s_by_csp24.items():
+        for csp24, csp42s in list(csp42s_by_csp24.items()):
             menage.loc[menage.cs42pr.isin(csp42s), 'cs24pr'] = csp24
-        assert menage.cs24pr.isin(csp42s_by_csp24.keys()).all()
+        assert menage.cs24pr.isin(list(csp42s_by_csp24.keys())).all()
 
         menage['cs8pr'] = numpy.floor(menage.cs24pr / 10)
-        assert menage.cs8pr.isin(range(1, 9)).all()
+        assert menage.cs8pr.isin(list(range(1, 9))).all()
 
         variables = [
             'pondmen', 'npers', 'nenfants', 'nenfhors', 'nadultes', 'nactifs', 'ocde10', 'typmen',
@@ -640,7 +637,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         menage['strate'] = 0
         menage.loc[menage.tuu.isin([1, 2, 3]), 'strate'] = 1
-        menage.loc[menage.tuu.isin([4, 5, 6]), 'strate'] = 2 
+        menage.loc[menage.tuu.isin([4, 5, 6]), 'strate'] = 2
         menage.loc[menage.tuu == 7, 'strate'] = 3
         menage.loc[menage.tuu == 8, 'strate'] = 4
 
@@ -709,7 +706,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.loc[menage.stalog.isin([3, 6]), 'new_stalog'] = 5
         menage.stalog = menage.new_stalog.copy()
         del menage['new_stalog']
-        assert menage.stalog.isin(range(1, 6)).all()
+        assert menage.stalog.isin(list(range(1, 6))).all()
 
         '''
         TODO a déplacer ailleurs après avoir compris à quoi cela sert !
@@ -749,7 +746,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.loc[menage.zeat == 7, 'zeat'] = 6
         menage.zeat.loc[menage.zeat == 8] = 7
         menage.zeat.loc[menage.zeat == 9] = 8
-        assert menage.zeat.isin(range(0, 9)).all()
+        assert menage.zeat.isin(list(range(0, 9))).all()
         menage.index.name = 'ident_men'
 
     #

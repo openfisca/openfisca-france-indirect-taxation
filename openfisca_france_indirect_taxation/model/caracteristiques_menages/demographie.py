@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
-
 import numpy
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
@@ -12,7 +9,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 class age(YearlyVariable):
     value_type = int
     entity = Individu
-    label = u"Age de l'individu"
+    label = "Age de l'individu"
 
     def formula(individu, period):
         birth = individu('birth', period)
@@ -22,13 +19,13 @@ class age(YearlyVariable):
 class agepr(YearlyVariable):
     value_type = int
     entity = Menage
-    label = u"Age personne de référence"
+    label = "Age personne de référence"
 
 
 class age_group_pr(YearlyVariable):
     value_type = int
     entity = Menage
-    label = u"Groupe d'âge personne de référence"
+    label = "Groupe d'âge personne de référence"
 
     def formula(menage, period):
         age_group_pr = 0
@@ -48,34 +45,34 @@ class age_group_pr(YearlyVariable):
 class birth(YearlyVariable):
     value_type = date
     entity = Individu
-    label = u"Date de naissance"
+    label = "Date de naissance"
 
 
 class nactifs(YearlyVariable):
     value_type = int
     entity = Menage
-    label = u"Nombre d'actifs dans le ménage"
+    label = "Nombre d'actifs dans le ménage"
 
 
 class nadultes(YearlyVariable):
     value_type = int
     entity = Menage
-    label = u"Nombre d'adultes dans le ménage"
+    label = "Nombre d'adultes dans le ménage"
 
 
 class nenfants(YearlyVariable):
     value_type = int
     entity = Menage
-    label = u"Nombre d'enfants dans le ménage"
+    label = "Nombre d'enfants dans le ménage"
 
 
 class npers(YearlyVariable):
     value_type = int
     entity = Menage
-    label = u"Nombre de personnes dans le ménage"
+    label = "Nombre de personnes dans le ménage"
 
 
 class role_menage(YearlyVariable):
     value_type = int
     entity = Individu
-    label = u"Rôle dans le ménage"
+    label = "Rôle dans le ménage"

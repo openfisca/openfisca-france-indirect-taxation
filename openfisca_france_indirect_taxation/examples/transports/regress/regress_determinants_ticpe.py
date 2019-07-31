@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import statsmodels.formula.api as smf
 
@@ -71,21 +70,21 @@ if __name__ == '__main__':
         rural + petite_villes + grandes_villes + agglo_paris + \
         nenfants + nadultes + travaille',
         data = data_for_reg).fit()
-    print regression_carburants.summary()
+    print(regression_carburants.summary())
 
     regression_diesel = smf.ols(formula = 'part_diesel ~ \
         decile_1 + decile_2 + decile_3 + decile_4 + decile_5 + decile_6 + decile_7 + decile_8 + decile_9 + \
         rural + petite_villes + grandes_villes + agglo_paris + \
         nenfants + nadultes + travaille',
         data = data_for_reg).fit()
-    print regression_diesel.summary()
+    print(regression_diesel.summary())
 
     regression_essence = smf.ols(formula = 'part_essence ~ \
         decile_1 + decile_2 + decile_3 + decile_4 + decile_5 + decile_6 + decile_7 + decile_8 + decile_9 + \
         rural + petite_villes + grandes_villes + agglo_paris + \
         nenfants + nadultes + travaille',
         data = data_for_reg).fit()
-    print regression_essence.summary()
+    print(regression_essence.summary())
 
 # It is tempting to add a variable 'vehicule'. However, I think it is a case of bad control. It captures part
 # of the effect we actually want to estimate.

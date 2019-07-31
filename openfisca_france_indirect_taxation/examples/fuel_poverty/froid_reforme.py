@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 import statsmodels.formula.api as smf
 
@@ -12,9 +12,9 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 
 
 stock_variables = [
-    #'agepr',
+    # 'agepr',
     'aides_logement',
-    #'brde_m2_depenses_tot',
+    # 'brde_m2_depenses_tot',
     'combustibles_liquides',
     'depenses_combustibles_liquides',
     'depenses_electricite',
@@ -25,7 +25,7 @@ stock_variables = [
     'electricite',
     'gaz_ville',
     'nactifs',
-    #'nenfants',
+    # 'nenfants',
     'ocde10',
     'ouest_sud',
     'paris',
@@ -34,7 +34,7 @@ stock_variables = [
     'rev_disp_loyerimput',
     'rural',
     'surfhab_d',
-    #'tee_10_3_deciles_depenses_tot',
+    # 'tee_10_3_deciles_depenses_tot',
     ]
 
 simulated_variables = stock_variables + ['niveau_vie_decile',
@@ -55,10 +55,10 @@ survey_scenario = SurveyScenario.create(
     data_year = data_year
     )
 
-indiv_df_use_baseline =survey_scenario.create_data_frame_by_entity(simulated_variables,
+indiv_df_use_baseline = survey_scenario.create_data_frame_by_entity(simulated_variables,
     use_baseline =True, period = year)
 
-menages_use_baseline =indiv_df_reference['menage']
+menages_use_baseline = indiv_df_reference['menage']
 #menages_use_baseline =menages_reference.query('niveau_vie_decile < 4')
 menages_reference['froid_4_criteres_3_deciles'] = \
     menages_reference['froid_4_criteres_3_deciles'].astype(int)
@@ -94,11 +94,10 @@ while max_rsquared_adj > current_max_rsquared_adj:
 
 regression = regression.summary()
 
-print regression
+print(regression)
 
-
-    # A partir des coefficients estimés, calculer la probabilité de précarité de chaque ménage
-    # Remplacer par 1 pour ceux déjà précaires via le TEE ou le BRDE
-    # Calculer le nombre moyen de précaires en agrégeant les probas
-    # Faire de même après la réforme
-    # Comparer avant/après
+# A partir des coefficients estimés, calculer la probabilité de précarité de chaque ménage
+# Remplacer par 1 pour ceux déjà précaires via le TEE ou le BRDE
+# Calculer le nombre moyen de précaires en agrégeant les probas
+# Faire de même après la réforme
+# Comparer avant/après

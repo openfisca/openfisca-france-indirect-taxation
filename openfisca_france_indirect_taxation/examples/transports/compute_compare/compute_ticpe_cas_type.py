@@ -10,7 +10,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import graph_buil
 Nous prenons un ménage dont les dépenses annuelles en carburants s'élèveraient à 1000 euros
 C'est en dessous de la moyenne de nos samples (plutôt autour de 1500)"""
 
-index = range(2000, 2014)
+index = list(range(2000, 2014))
 columns = ['si une essence et une diesel', 'si seulement vehicules diesel', 'si seulement vehicules essence']
 depenses_ticpe_pour_1000_euros_carbu = pd.DataFrame(index = index, columns = columns)
 

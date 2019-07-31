@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 from openfisca_france_indirect_taxation.examples.utils_example import dataframe_by_group
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -74,7 +73,7 @@ weird_gaz_keep = weird_gaz[['depenses_gaz_ville_officielle_2018_in_2016'] + ['de
 
 precaires_log = (df['precarite_energetique_rev_disponible'] * df['pondmen']).sum()
 precaires_tra = (df['precarite_transports_rev_disponible'] * df['pondmen']).sum()
-df['preca_joint'] = 1* ((df['precarite_energetique_rev_disponible'] + df['precarite_transports_rev_disponible']) > 0)
+df['preca_joint'] = 1 * ((df['precarite_energetique_rev_disponible'] + df['precarite_transports_rev_disponible']) > 0)
 df['preca_both'] = 1 * ((df['precarite_energetique_rev_disponible'] + df['precarite_transports_rev_disponible']) > 1)
 
 preca_joint = (df['preca_joint'] * df['pondmen']).sum()

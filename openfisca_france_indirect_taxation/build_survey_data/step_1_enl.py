@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-
-
-
-from __future__ import division
-
-
 import logging
 import os
 import pandas
@@ -59,9 +53,9 @@ variables_to_keep = [
     "dep_idf",
     "dom",
     "enfhod",
-    #"eq_chauf",
-    #"eq_combu",
-    #"eq_nb_vo",
+    # "eq_chauf",
+    # "eq_combu",
+    # "eq_nb_vo",
     "fchauf",
     "fpbel",
     "gchauf_1",
@@ -145,9 +139,8 @@ variables_to_keep_comp = [
     "eq_combu",
     "eq_nb_vo",
     "idlog",
-    #"rmact",
+    # "rmact",
     "totreven",
     ]
 
 menage_comp_to_keep = menage_comp[variables_to_keep_comp]
-

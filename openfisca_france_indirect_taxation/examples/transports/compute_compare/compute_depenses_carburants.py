@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import de modules généraux
-from __future__ import division
+
 
 import csv
 import pkg_resources
@@ -49,20 +49,20 @@ if __name__ == '__main__':
 
     writer_transports = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
         'depenses', 'depenses_transports_totales_bdf.csv'), 'wb'))
-    for key, value in depenses_transports_totales.items():
+    for key, value in list(depenses_transports_totales.items()):
         writer_transports.writerow([key, value])
 
     writer_carburants = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
         'depenses', 'depenses_carburants_totales_bdf.csv'), 'wb'))
-    for key, value in depenses_carburants_totales.items():
+    for key, value in list(depenses_carburants_totales.items()):
         writer_carburants.writerow([key, value])
 
     writer_diesel = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
         'depenses', 'depenses_diesel_totales_bdf.csv'), 'wb'))
-    for key, value in depenses_diesel_totales.items():
+    for key, value in list(depenses_diesel_totales.items()):
         writer_diesel.writerow([key, value])
 
     writer_essence = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
         'depenses', 'depenses_essence_totales_bdf.csv'), 'wb'))
-    for key, value in depenses_essence_totales.items():
+    for key, value in list(depenses_essence_totales.items()):
         writer_essence.writerow([key, value])

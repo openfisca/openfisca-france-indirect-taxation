@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 from openfisca_france_indirect_taxation.examples.utils_example import save_dataframe_to_graph
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -38,7 +37,7 @@ menages['rank'] = menages['rev_disp_loyerimput'].argsort().argsort()
 menages['quantile'] = menages['rank'] / len(menages)
 del menages['rank']
 menages['bin'] = 0
-for i in range(0,50):
+for i in range(0, 50):
     menages['bin'] += \
         (menages['quantile'] < 0.02 * (i + 1)) * (menages['quantile'] > 0.02 * (i)) * 2 * (i + 1)
 

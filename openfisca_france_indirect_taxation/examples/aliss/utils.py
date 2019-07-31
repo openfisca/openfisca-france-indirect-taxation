@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
-
 import numpy as np
 import os
 import pkg_resources
@@ -30,7 +27,7 @@ def build_aggreggates(variables, by = 'niveau_vie_decile', survey_scenario = Non
         aggregates[variable] = survey_scenario.compute_aggregate(variable) / 1e9
         adjusted_aggregates[variable] = adjusted_survey_scenario.compute_aggregate(variable) / 1e9
         if not np.isfinite(survey_scenario.compute_aggregate(variable, use_baseline =True)):
-            print('variable {} aggregates is infinite').format(variable)
+            print(('variable {} aggregates is infinite').format(variable))
             reference_aggregates[variable] = (
                 survey_scenario.compute_aggregate(
                     variable,
@@ -96,7 +93,7 @@ def build_pivot_table(variables, by = 'niveau_vie_decile', survey_scenario = Non
         'adjusted-reform': adjusted_pivot_table - pivot_table,
         'adjusted-reference': adjusted_pivot_table - reference_pivot_table,
         })
-    return pivot_table.reset_index().rename(columns = {u'level_0': 'simulation', u'level_1': 'variable'})
+    return pivot_table.reset_index().rename(columns = {'level_0': 'simulation', 'level_1': 'variable'})
 
 
 def build_scenarios(data_year = 2011, reform_key = None, year = 2014):
@@ -143,8 +140,8 @@ def set_adjustable_reform(dataframe):
 def run_reform(reform_key = None, aggfunc = 'mean'):
     survey_scenario, adjusted_survey_scenario = build_scenarios(reform_key = reform_key)
     alimentation_domicile_hors_alcool = [
-        "depenses_ht_{}".format(key) for key in survey_scenario.tax_benefit_system.variables.keys()
-        if key.startswith(u'poste_01')
+        "depenses_ht_{}".format(key) for key in list(survey_scenario.tax_benefit_system.variables.keys())
+        if key.startswith('poste_01')
         ]
     alimentation_domicile = alimentation_domicile_hors_alcool + [
         'depenses_biere',
@@ -152,12 +149,12 @@ def run_reform(reform_key = None, aggfunc = 'mean'):
         'depenses_alcools_forts'
         ]
     depenses_ht_tvas = [
-        "depenses_ht_{}".format(key) for key in survey_scenario.tax_benefit_system.variables.keys()
-        if key.startswith(u'tva_taux_')
+        "depenses_ht_{}".format(key) for key in list(survey_scenario.tax_benefit_system.variables.keys())
+        if key.startswith('tva_taux_')
         ]
     tvas = [
-        key for key in survey_scenario.tax_benefit_system.variables.keys()
-        if key.startswith(u'tva_taux_')
+        key for key in list(survey_scenario.tax_benefit_system.variables.keys())
+        if key.startswith('tva_taux_')
         ] + ['tva_total']
     variables = alimentation_domicile + ['poste_agrege_01', 'poste_agrege_02', ] + depenses_ht_tvas + tvas
     aggregates = build_aggreggates(

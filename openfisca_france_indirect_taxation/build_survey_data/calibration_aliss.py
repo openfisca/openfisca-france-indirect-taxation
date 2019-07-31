@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 
 import itertools
 import logging
@@ -91,8 +89,8 @@ def build_clean_aliss_data_frame():
         selection = aliss.type.str.startswith(household_type)
         aliss.loc[selection, 'age'] = age
         aliss.loc[selection, 'revenus'] = revenus
-    assert aliss.age.isin(range(4)).all()
-    assert aliss.revenus.isin(range(4)).all()
+    assert aliss.age.isin(list(range(4))).all()
+    assert aliss.revenus.isin(list(range(4))).all()
     del aliss['type']
     assert aliss.notnull().all().all()
 
@@ -105,7 +103,7 @@ def add_poste_coicop(aliss):
     aliss['poste_bdf'] = 'c0' + aliss.nomc.str[:4]
     coicop_poste_bdf = bdf(year = year)[['code_bdf', 'code_coicop']].copy()
     assert not set(aliss.poste_bdf).difference(set(coicop_poste_bdf.code_bdf))
-    coicop_poste_bdf['formatted_poste'] = u'poste_' + coicop_poste_bdf.code_coicop.str.replace('.', u'_')
+    coicop_poste_bdf['formatted_poste'] = 'poste_' + coicop_poste_bdf.code_coicop.str.replace('.', '_')
     formatted_poste_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['formatted_poste']
     aliss['poste_coicop'] = aliss.poste_bdf.copy()
     aliss.replace(to_replace = dict(poste_coicop = formatted_poste_by_poste_bdf), inplace = True)
@@ -319,7 +317,7 @@ def compute_kantar_elasticities(compute = False):
         (nomf_by_dirty_nomf.get(nomf), nomf_nomk.query('nomf == @nomf')['nomk'].unique())
         for nomf in nomf_nomk.nomf.unique()
         )
-    assert len(nomks_by_nomf.keys()) == 21
+    assert len(list(nomks_by_nomf.keys())) == 21
 
     # budget shares
     budget_share_path = os.path.join(assets_path, 'budget_share.csv')
@@ -357,7 +355,7 @@ def compute_kantar_elasticities(compute = False):
 
     nomks = aliss.nomk.unique()
 
-    iterables = [range(4), range(4), nomks]
+    iterables = [list(range(4)), list(range(4)), nomks]
     index = pandas.MultiIndex.from_product(iterables, names=['age', 'revenus', 'nomk'])
     nomk_cross_price_elasticity = pandas.DataFrame(
         index = index,
@@ -474,7 +472,7 @@ def compute_expenditures_coefficient(reform_key = None):
     assert kantar_elasticities.age.notnull().all()
     assert kantar_elasticities.revenus.notnull().all()
 
-    iterables = [range(4), range(4), sorted(correction.nomk.unique())]
+    iterables = [list(range(4)), list(range(4)), sorted(correction.nomk.unique())]
     index = pandas.MultiIndex.from_product(iterables, names=['age', 'revenus', 'nomk'])
     final_corrections = pandas.DataFrame(
         index = index,
@@ -566,10 +564,10 @@ def get_adjusted_input_data_frame(reform_key = None, verbose = False):
             before = (
                 input_data_frame.loc[selection, poste] * input_data_frame.loc[selection, 'pondmen']
                 ).sum()
-            print('before: ', before)
-            print('adjusted_bdf_budget_share', bdf_adjusted_expenditures.loc[
-                (age, revenus, poste), 'adjusted_bdf_budget_share'])
-            print('bdf_budget_share', bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'])
+            print(('before: ', before))
+            print(('adjusted_bdf_budget_share', bdf_adjusted_expenditures.loc[
+                (age, revenus, poste), 'adjusted_bdf_budget_share']))
+            print(('bdf_budget_share', bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share']))
 
         try:
             if bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'] != 0:
@@ -579,15 +577,15 @@ def get_adjusted_input_data_frame(reform_key = None, verbose = False):
                     input_data_frame.loc[selection, poste]
                     )
         except:
-            print(bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share'])
-            print(bdf_adjusted_expenditures.loc[(age, revenus, poste)])
+            print((bdf_adjusted_expenditures.loc[(age, revenus, poste), 'bdf_budget_share']))
+            print((bdf_adjusted_expenditures.loc[(age, revenus, poste)]))
             raise
 
         if verbose:
-            print('after/before: ', (
+            print(('after/before: ', (
                 input_data_frame.loc[selection, poste] * input_data_frame.loc[selection, 'pondmen']
                 ).sum() / (before + 1) - 1
-                )
+                ))
     return input_data_frame
 
 

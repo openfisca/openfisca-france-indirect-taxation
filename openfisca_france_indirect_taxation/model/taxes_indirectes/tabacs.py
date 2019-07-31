@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
@@ -9,7 +7,7 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 class cigares_droit_d_accise(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant des droits d'accises sur les cigares"
+    label = "Montant des droits d'accises sur les cigares"
 
     def formula(self, simulation, period):
         depenses_cigares = menage('depenses_cigares', period)
@@ -20,7 +18,7 @@ class cigares_droit_d_accise(YearlyVariable):
 class cigarette_droit_d_accise(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant des droits d'accises sur les cigarettes"
+    label = "Montant des droits d'accises sur les cigarettes"
 
     def formula(self, simulation, period):
         depenses_cigarettes = menage('depenses_cigarettes', period)
@@ -32,7 +30,7 @@ class cigarette_droit_d_accise(YearlyVariable):
 class depenses_cigares(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses de cigares"
+    label = "Dépenses de cigares"
 
     def formula(self, simulation, period):
         returnmenage('poste_02_2_2', period)
@@ -41,7 +39,7 @@ class depenses_cigares(YearlyVariable):
 class depenses_cigarettes(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses de cigarettes"
+    label = "Dépenses de cigarettes"
 
     def formula(self, simulation, period):
         returnmenage('poste_02_2_1', period)
@@ -50,7 +48,7 @@ class depenses_cigarettes(YearlyVariable):
 class depenses_tabac_a_rouler(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Dépenses de tabac à rouler et autres tabacs"
+    label = "Dépenses de tabac à rouler et autres tabacs"
 
     def formula(self, simulation, period):
         returnmenage('poste_02_2_3', period)
@@ -59,7 +57,7 @@ class depenses_tabac_a_rouler(YearlyVariable):
 class tabac_a_rouler_droit_d_accise(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant des droits d'accises sur le tabac à rouler"
+    label = "Montant des droits d'accises sur le tabac à rouler"
 
     def formula(self, simulation, period):
         depenses_tabac_a_rouler = menage('depenses_tabac_a_rouler', period)
@@ -71,7 +69,7 @@ class tabac_a_rouler_droit_d_accise(YearlyVariable):
 class total_tabac_droit_d_accise(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Montant des droits d'accises sur le tabac "
+    label = "Montant des droits d'accises sur le tabac "
 
     def formula(self, simulation, period):
         cigarette_droit_d_accise = menage('cigarette_droit_d_accise', period)

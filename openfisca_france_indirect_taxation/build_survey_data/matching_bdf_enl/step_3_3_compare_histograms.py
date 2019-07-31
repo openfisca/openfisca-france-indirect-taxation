@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 
 # Dans ce script on utilise des histogrammes pour comparer la distribution des variables dans les deux enquêtes.
 # On peut ainsi juger si certaines d'entre elles doivent être ajustées de manière
@@ -28,20 +26,21 @@ def histogram_aba():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.aba == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-       
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.aba == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         list_values_bdf.append(part_bdf)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_aba()
 
 
@@ -52,11 +51,12 @@ def histogram_agepr():
     for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
         list_values_bdf.append(data_bdf['agepr'].quantile(i))
         list_values_enl.append(data_enl['agepr'].quantile(i))
-        list_keys.append('{}'.format(i)) 
+        list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
     return figure
+
 
 histogram_agepr()
 
@@ -70,20 +70,21 @@ def histogram_ancons():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.ancons == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.ancons == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         list_values_bdf.append(part_bdf)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_ancons()
 
 
@@ -96,20 +97,21 @@ def histogram_cataeu():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.cataeu == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-        
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.cataeu == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         list_values_bdf.append(part_bdf)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_cataeu()
 
 
@@ -120,12 +122,13 @@ def histogram_depenses_energies():
     for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
         list_values_bdf.append(data_bdf['depenses_energies'].quantile(i))
         list_values_enl.append(data_enl['depenses_energies'].quantile(i))
-        list_keys.append('{}'.format(i)) 
+        list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_depenses_energies()
 
 
@@ -138,20 +141,21 @@ def histogram_dip14():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf['dip14pr'] == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl['dip14pr'] == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         list_values_bdf.append(part_bdf)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_dip14()
 
 
@@ -164,20 +168,21 @@ def histogram_htl():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.htl == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.htl == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         list_values_bdf.append(part_bdf)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_htl()
 
 
@@ -190,20 +195,21 @@ def histogram_nactifs():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf['nactifs'] == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl['nactifs'] == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         list_values_bdf.append(part_bdf)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_nactifs()
 
 
@@ -216,20 +222,21 @@ def histogram_nbphab():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.nbphab == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-        
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.nbphab == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         list_values_bdf.append(part_bdf)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_nbphab()
 
 
@@ -242,20 +249,21 @@ def histogram_nenfants():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf['nenfants'] == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl['nenfants'] == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         list_values_bdf.append(part_bdf)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_nenfants()
 
 
@@ -268,20 +276,21 @@ def histogram_ocde10():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.ocde10 == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.ocde10 == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         list_values_bdf.append(part_bdf)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_ocde10()
 
 
@@ -292,12 +301,13 @@ def histogram_depenses_electricite():
     for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
         list_values_bdf.append(data_bdf['depenses_electricite'].quantile(i))
         list_values_enl.append(data_enl['depenses_electricite'].quantile(i))
-        list_keys.append('{}'.format(i)) 
+        list_keys.append('{}'.format(i))
 
         figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
     return figure
-    
+
+
 histogram_depenses_electricite()
 
 
@@ -308,12 +318,13 @@ def histogram_depenses_gaz_ville():
     for i in [.5, 0.6, .7, .8, .85, .9, 0.95, 0.975]:
         list_values_bdf.append(data_bdf['depenses_gaz_ville'].quantile(i))
         list_values_enl.append(data_enl['depenses_gaz_ville'].quantile(i))
-        list_keys.append('{}'.format(i)) 
+        list_keys.append('{}'.format(i))
 
         figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
     return figure
-    
+
+
 histogram_depenses_gaz_ville()
 
 
@@ -324,12 +335,13 @@ def histogram_depenses_gaz_liquefie():
     for i in [.5, 0.6, .7, .8, .85, .9, 0.95, 0.975]:
         list_values_bdf.append(data_bdf['depenses_gaz_liquefie'].quantile(i))
         list_values_enl.append(data_enl['depenses_gaz_liquefie'].quantile(i))
-        list_keys.append('{}'.format(i)) 
+        list_keys.append('{}'.format(i))
 
         figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
     return figure
-    
+
+
 histogram_depenses_gaz_liquefie()
 
 
@@ -340,12 +352,13 @@ def histogram_depenses_combustibles_liquides():
     for i in [.8, .85, .875, .9, .925, 0.95, .975]:
         list_values_bdf.append(data_bdf['depenses_combustibles_liquides'].quantile(i))
         list_values_enl.append(data_enl['depenses_combustibles_liquides'].quantile(i))
-        list_keys.append('{}'.format(i)) 
+        list_keys.append('{}'.format(i))
 
         figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
     return figure
-    
+
+
 histogram_depenses_combustibles_liquides()
 
 
@@ -356,12 +369,13 @@ def histogram_depenses_combustibles_solides():
     for i in [.8, .85, .875, .9, .925, 0.95, .975]:
         list_values_bdf.append(data_bdf['depenses_combustibles_solides'].quantile(i))
         list_values_enl.append(data_enl['depenses_combustibles_solides'].quantile(i))
-        list_keys.append('{}'.format(i)) 
+        list_keys.append('{}'.format(i))
 
         figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
     return figure
-    
+
+
 histogram_depenses_combustibles_solides()
 
 
@@ -372,12 +386,13 @@ def histogram_revtot():
     for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
         list_values_bdf.append(data_bdf['revtot'].quantile(i))
         list_values_enl.append(data_enl['revtot'].quantile(i))
-        list_keys.append('{}'.format(i)) 
+        list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_revtot()
 
 
@@ -388,12 +403,13 @@ def histogram_surfhab_d():
     for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
         list_values_bdf.append(data_bdf['surfhab_d'].quantile(i))
         list_values_enl.append(data_enl['surfhab_d'].quantile(i))
-        list_keys.append('{}'.format(i)) 
+        list_keys.append('{}'.format(i))
 
         figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
 
     return figure
-    
+
+
 histogram_surfhab_d()
 
 
@@ -406,20 +422,21 @@ def histogram_tau():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.tau == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.tau == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         list_values_bdf.append(part_bdf)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_tau()
 
 
@@ -432,20 +449,21 @@ def histogram_tuu():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.tuu == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.tuu == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         list_values_bdf.append(part_bdf)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_tuu()
 
 
@@ -458,18 +476,19 @@ def histogram_zeat():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.zeat == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.zeat == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         list_values_bdf.append(part_bdf)
         list_values_enl.append(part_enl)
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_bdf, list_values_enl, 'BdF', 'ENL')
-    
+
     return figure
-    
+
+
 histogram_zeat()

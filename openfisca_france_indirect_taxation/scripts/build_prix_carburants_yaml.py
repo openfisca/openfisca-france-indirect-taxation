@@ -35,7 +35,7 @@ df.drop(columns = ['Date'], inplace = True)
 df = (df
     .set_index('date')
     .sort_index()
-    )
+      )
 
 
 prices_by_name = dict()
@@ -43,9 +43,9 @@ for column in df:
     series = (df[column]
         .dropna()
         .sort_index(ascending = False)
-        )
+              )
     prices_by_date = series.to_dict()
-    for date, price in prices_by_date.items():
+    for date, price in list(prices_by_date.items()):
         prices_by_date[date] = dict(value = price)
     prices_by_name[column] = dict(values = prices_by_date)
 

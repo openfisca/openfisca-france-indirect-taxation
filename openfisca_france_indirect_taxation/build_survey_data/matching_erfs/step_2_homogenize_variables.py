@@ -12,7 +12,7 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_1_b
 
 
 def homogenize_definitions():
-    data = load_data_bdf_erfs()    
+    data = load_data_bdf_erfs()
     data_erfs = data[0]
     data_bdf = data[1]
 
@@ -21,7 +21,7 @@ def homogenize_definitions():
 
     data_erfs.loc[data_erfs.typmen7 == 6, 'typmen7'] = 5
     data_erfs.loc[data_erfs.typmen7 == 9, 'typmen7'] = 5
-    
+
     data_erfs.rename(
         columns = {
             'wprm': 'pondmen',
@@ -40,24 +40,23 @@ def homogenize_definitions():
             'th': 'mhab_d',
             'tuu2010': 'tuu',
             'typmen7': 'typmen',
-                   },
+            },
         inplace = True,
         )
 
     data_bdf.rename(
         columns = {
             'rev502': 'rev_valeurs_mobilieres_bruts',
-                   },
+            },
         inplace = True,
         )
 
     data_erfs = data_erfs.astype(object)
-    
+
     return data_erfs, data_bdf
 
 
 if __name__ == "__main__":
-    data = homogenize_definitions()    
+    data = homogenize_definitions()
     data_erfs = data[0]
     data_bdf = data[1]
-      

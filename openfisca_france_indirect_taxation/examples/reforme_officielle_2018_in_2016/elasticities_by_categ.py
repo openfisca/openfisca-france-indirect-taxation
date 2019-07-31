@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import pandas as pd
 
@@ -50,19 +49,21 @@ df = survey_scenario.create_data_frame_by_entity(simulated_variables, period = y
 
 df = energy_modes(df)
 
+
 def elasticities_by_categ(df, categ):
     i_min = df[categ].min()
     i_max = df[categ].max()
-    df_to_plot = pd.DataFrame(index = range(i_min, i_max+1), columns = ['elas_transports', 'elas_housing'])
-    for i in range(i_min, i_max+1):
+    df_to_plot = pd.DataFrame(index = list(range(i_min, i_max + 1)), columns = ['elas_transports', 'elas_housing'])
+    for i in range(i_min, i_max + 1):
         df_categ = df.query('{0} == {1}'.format(categ, i))
         df_to_plot['elas_transports'][i] = df_categ['elas_price_1_1'].mean()
         df_to_plot['elas_housing'][i] = df_categ['elas_price_2_2'].mean()
-  
+
     graph_builder_bar(df_to_plot, False)
     save_dataframe_to_graph(df_to_plot, 'Elasticities/elasticities_by_{}.csv'.format(categ))
 
     return df_to_plot
+
 
 df_to_plot = elasticities_by_categ(df, 'niveau_vie_decile')
 df_to_plot = elasticities_by_categ(df, 'strate')

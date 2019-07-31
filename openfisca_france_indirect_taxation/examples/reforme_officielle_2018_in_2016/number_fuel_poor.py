@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 import numpy as np
 
@@ -18,12 +18,12 @@ def number_fuel_poors(year, data_year):
     dict_transport = dict()
     dict_double = dict()
     dict_joint = dict()
-    
+
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
     #elasticities = get_elasticities(data_year)
     elasticities = get_elasticities_aidsills(data_year, True)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-    
+
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
@@ -31,7 +31,7 @@ def number_fuel_poors(year, data_year):
         year = year,
         data_year = data_year
         )
-    
+
     simulated_variables = [
         'cheques_energie_ruraux_officielle_2018_in_2016',
         'cheques_energie_officielle_2018_in_2016',
@@ -73,7 +73,7 @@ def number_fuel_poors(year, data_year):
     dict_transport['tee - avant reforme'] = (
         (df_reforme['tee_10_3_rev_disponible_transport'] * df_reforme['pondmen']).sum()
         )
-    
+
     df_reforme = precarite(df_reforme, 'brde_m2_logement_rev_disponible', 'tee_10_3_rev_disponible_logement', 'logement')
     dict_logement['precarite - avant reforme'] = (
         (df_reforme['precarite_logement'] * df_reforme['pondmen']).sum()
@@ -82,8 +82,7 @@ def number_fuel_poors(year, data_year):
     dict_transport['precarite - avant reforme'] = (
         (df_reforme['precarite_transport'] * df_reforme['pondmen']).sum()
         )
-    
-    
+
     df_reforme['double_precarite'] = (
         (df_reforme['precarite_logement'] * df_reforme['precarite_transport'])
         )
@@ -97,12 +96,12 @@ def number_fuel_poors(year, data_year):
     dict_joint['precarite - avant reforme'] = (
         (df_reforme['precarite_joint'] * df_reforme['pondmen']).sum()
         )
-    
+
     df_reforme['precarite_logement_avant_ref'] = df_reforme['precarite_logement'].copy()
     df_reforme['precarite_transport_avant_ref'] = df_reforme['precarite_transport'].copy()
     df_reforme['precarite_double_avant_ref'] = df_reforme['double_precarite'].copy()
     df_reforme['precarite_joint_avant_ref'] = df_reforme['precarite_joint'].copy()
-    
+
     # Avant redistribution
     df_reforme['depenses_energies_logement_officielle_avec_tarifs_sociaux'] = \
         df_reforme['depenses_energies_logement_officielle_2018_in_2016'] - df_reforme['tarifs_sociaux_electricite'] - df_reforme['tarifs_sociaux_gaz']
@@ -122,7 +121,7 @@ def number_fuel_poors(year, data_year):
     dict_transport['tee - avant redistribution'] = (
         (df_reforme['tee_10_3_rev_disponible_transport'] * df_reforme['pondmen']).sum()
         )
-    
+
     df_reforme = precarite(df_reforme, 'brde_m2_logement_rev_disponible', 'tee_10_3_rev_disponible_logement', 'logement')
     dict_logement['precarite - avant redistribution'] = (
         (df_reforme['precarite_logement'] * df_reforme['pondmen']).sum()
@@ -131,8 +130,7 @@ def number_fuel_poors(year, data_year):
     dict_transport['precarite - avant redistribution'] = (
         (df_reforme['precarite_transport'] * df_reforme['pondmen']).sum()
         )
-    
-    
+
     df_reforme['double_precarite'] = (
         (df_reforme['precarite_logement'] * df_reforme['precarite_transport'])
         )
@@ -199,10 +197,9 @@ def number_fuel_poors(year, data_year):
     dict_joint['precarite - apres redistribution'] = (
         (df_reforme['precarite_joint'] * df_reforme['pondmen']).sum()
         )
-    
-    
+
     # Entrants - sortants
-    df_reforme['entrant_sortant_logement'] = (df_reforme['precarite_logement_avant_ref'] -  df_reforme['precarite_logement'])
+    df_reforme['entrant_sortant_logement'] = (df_reforme['precarite_logement_avant_ref'] - df_reforme['precarite_logement'])
     dict_logement['precarite - entrants'] = (
         df_reforme.query('entrant_sortant_logement == -1')['pondmen'].sum()
         )
@@ -210,7 +207,7 @@ def number_fuel_poors(year, data_year):
         df_reforme.query('entrant_sortant_logement == 1')['pondmen'].sum()
         )
 
-    df_reforme['entrant_sortant_transport'] = (df_reforme['precarite_transport_avant_ref'] -  df_reforme['precarite_transport'])
+    df_reforme['entrant_sortant_transport'] = (df_reforme['precarite_transport_avant_ref'] - df_reforme['precarite_transport'])
     dict_transport['precarite - entrants'] = (
         df_reforme.query('entrant_sortant_transport == -1')['pondmen'].sum()
         )
@@ -218,7 +215,7 @@ def number_fuel_poors(year, data_year):
         df_reforme.query('entrant_sortant_transport == 1')['pondmen'].sum()
         )
 
-    df_reforme['entrant_sortant_double'] = (df_reforme['precarite_double_avant_ref'] -  df_reforme['double_precarite'])
+    df_reforme['entrant_sortant_double'] = (df_reforme['precarite_double_avant_ref'] - df_reforme['double_precarite'])
     dict_double['precarite - entrants'] = (
         df_reforme.query('entrant_sortant_double == -1')['pondmen'].sum()
         )
@@ -226,7 +223,7 @@ def number_fuel_poors(year, data_year):
         df_reforme.query('entrant_sortant_double == 1')['pondmen'].sum()
         )
 
-    df_reforme['entrant_sortant_joint'] = (df_reforme['precarite_joint_avant_ref'] -  df_reforme['precarite_joint'])
+    df_reforme['entrant_sortant_joint'] = (df_reforme['precarite_joint_avant_ref'] - df_reforme['precarite_joint'])
     dict_joint['precarite - entrants'] = (
         df_reforme.query('entrant_sortant_joint == -1')['pondmen'].sum()
         )
@@ -234,14 +231,13 @@ def number_fuel_poors(year, data_year):
         df_reforme.query('entrant_sortant_joint == 1')['pondmen'].sum()
         )
 
-
     return dict_logement, dict_transport, dict_double, dict_joint
 
 
 if __name__ == '__main__':
     year = 2016
     data_year = 2011
-    
+
     dict_reformes = dict()
     (dict_reformes['logement'], dict_reformes['transport'],
         dict_reformes['double'], dict_reformes['joint']) = \

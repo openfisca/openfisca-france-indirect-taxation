@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import numpy
 
@@ -24,9 +23,9 @@ def modify_parameters(parameters):
 
 class reforme_rattrapage_diesel(Reform):
     key = 'rattrapage_diesel',
-    name = u"Reforme de l'imposition indirecte des carburants",
+    name = "Reforme de l'imposition indirecte des carburants",
 
-    #class depenses_carburants_ajustees_rattrapage_diesel(YearlyVariable):
+    # class depenses_carburants_ajustees_rattrapage_diesel(YearlyVariable):
     #    value_type = float
     #    entity = Menage
     #    label = u"Depenses en carburants après reaction a la reforme - taxes carburants"
@@ -41,7 +40,7 @@ class reforme_rattrapage_diesel(Reform):
     class cheques_energie(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Montant des chèques énergie (indexés par uc) - taxe carbone"
+        label = "Montant des chèques énergie (indexés par uc) - taxe carbone"
 
         def formula(menage, period):
             contribution = menage('contributions_reforme', period)
@@ -55,11 +54,10 @@ class reforme_rattrapage_diesel(Reform):
 
             return cheque
 
-
     class contributions_reforme(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Changement de contribution aux taxes énergétiques suite à la réforme - taxe carbone"
+        label = "Changement de contribution aux taxes énergétiques suite à la réforme - taxe carbone"
 
         def formula(menage, period):
             total_taxes_energies = menage('total_taxes_energies', period)
@@ -69,11 +67,10 @@ class reforme_rattrapage_diesel(Reform):
 
             return contribution
 
-
     class depenses_carburants_corrigees_ajustees_rattrapage_diesel(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Depenses en carburants après reaction a la reforme - taxes carburants"
+        label = "Depenses en carburants après reaction a la reforme - taxes carburants"
 
         def formula(menage, period):
             depenses_diesel_ajustees = menage('depenses_diesel_corrigees_ajustees_rattrapage_diesel', period)
@@ -82,8 +79,7 @@ class reforme_rattrapage_diesel(Reform):
 
             return depenses_carburants_ajustees
 
-
-    #class depenses_diesel_ajustees_rattrapage_diesel(YearlyVariable):
+    # class depenses_diesel_ajustees_rattrapage_diesel(YearlyVariable):
     #    value_type = float
     #    entity = Menage
     #    label = u"Depenses en diesel après reaction a la reforme - taxes carburants"
@@ -98,11 +94,10 @@ class reforme_rattrapage_diesel(Reform):
 
     #        return depenses_diesel_ajustees_rattrapage_diesel
 
-
     class depenses_diesel_corrigees_ajustees_rattrapage_diesel(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Depenses en diesel après reaction a la reforme - taxes carburants"
+        label = "Depenses en diesel après reaction a la reforme - taxes carburants"
 
         def formula(menage, period, parameters):
             depenses_diesel = menage('depenses_diesel_corrigees', period)
@@ -114,27 +109,25 @@ class reforme_rattrapage_diesel(Reform):
 
             return depenses_diesel_ajustees_rattrapage_diesel
 
-
     class depenses_essence_ajustees_rattrapage_diesel(YearlyVariable):
-       value_type = float
-       entity = Menage
-       label = u"Depenses en essence après reaction a la reforme - taxes carburants"
+        value_type = float
+        entity = Menage
+        label = "Depenses en essence après reaction a la reforme - taxes carburants"
 
-       def formula(menage, period, parameters):
-           depenses_essence = menage('depenses_essence', period)
-           super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
-           reforme_essence = parameters(period.start).rattrapage_diesel.essence
-           carburants_elasticite_prix = menage('elas_price_1_1', period)
-           depenses_essence_ajustees_rattrapage_diesel = \
-               depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
+        def formula(menage, period, parameters):
+            depenses_essence = menage('depenses_essence', period)
+            super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
+            reforme_essence = parameters(period.start).rattrapage_diesel.essence
+            carburants_elasticite_prix = menage('elas_price_1_1', period)
+            depenses_essence_ajustees_rattrapage_diesel = \
+                depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
 
-           return depenses_essence_ajustees_rattrapage_diesel
-
+            return depenses_essence_ajustees_rattrapage_diesel
 
     class depenses_essence_corrigees_ajustees_rattrapage_diesel(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Depenses en essence après reaction a la reforme - taxes carburants"
+        label = "Depenses en essence après reaction a la reforme - taxes carburants"
 
         def formula(menage, period, parameters):
             depenses_essence = menage('depenses_essence_corrigees', period)
@@ -146,11 +139,10 @@ class reforme_rattrapage_diesel(Reform):
 
             return depenses_essence_ajustees_rattrapage_diesel
 
-
     class depenses_tva_taux_plein_ajustees_rattrapage_diesel(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Depenses sur les biens assujetis a la TVA a taux plein après reaction a la reforme - taxes carburants"
+        label = "Depenses sur les biens assujetis a la TVA a taux plein après reaction a la reforme - taxes carburants"
 
         def formula(menage, period, parameters):
             depenses_tva_taux_plein = menage('depenses_tva_taux_plein', period)
@@ -164,11 +156,10 @@ class reforme_rattrapage_diesel(Reform):
 
             return depenses_tva_taux_plein_ajustees
 
-
     class depenses_tva_taux_plein_bis_ajustees_rattrapage_diesel(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Depenses sur les biens assujetis a la TVA a taux plein après reaction a la reforme - taxes carburants"
+        label = "Depenses sur les biens assujetis a la TVA a taux plein après reaction a la reforme - taxes carburants"
 
         def formula(menage, period, parameters):
             depenses_tva_taux_plein = menage('depenses_tva_taux_plein', period)
@@ -181,11 +172,10 @@ class reforme_rattrapage_diesel(Reform):
 
             return depenses_tva_taux_plein_ajustees
 
-
     class depenses_tva_taux_reduit_ajustees_rattrapage_diesel(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Depenses sur les biens assujetis a la TVA a taux reduit après reaction a la reforme - taxes carburants"
+        label = "Depenses sur les biens assujetis a la TVA a taux reduit après reaction a la reforme - taxes carburants"
 
         def formula(menage, period, parameters):
             depenses_tva_taux_reduit = menage('depenses_tva_taux_reduit', period)
@@ -198,11 +188,10 @@ class reforme_rattrapage_diesel(Reform):
 
             return depenses_tva_taux_reduit_ajustees
 
-
     class depenses_tva_taux_super_reduit_ajustees_rattrapage_diesel(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Depenses sur les biens assujetis a la TVA tx super reduit après reaction a la reforme - taxes carburants"
+        label = "Depenses sur les biens assujetis a la TVA tx super reduit après reaction a la reforme - taxes carburants"
 
         def formula(menage, period, parameters):
             depenses_tva_taux_super_reduit = menage('depenses_tva_taux_super_reduit', period)
@@ -216,9 +205,8 @@ class reforme_rattrapage_diesel(Reform):
                 )
             return depenses_tva_taux_super_reduit_ajustees
 
-
     class diesel_ticpe(YearlyVariable):
-        label = u"Calcul du montant de TICPE sur le diesel après reforme"
+        label = "Calcul du montant de TICPE sur le diesel après reforme"
         # baseline_variable = ticpe.diesel_ticpe TODO réintégrer
 
         def formula(menage, period, parameters):
@@ -253,9 +241,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return montant_diesel_ticpe_ajuste
 
-
     class emissions_CO2_carburants(YearlyVariable):
-        label = u"Emissions de CO2 des menages via leur consommation de carburants après reforme, en kg de CO2"
+        label = "Emissions de CO2 des menages via leur consommation de carburants après reforme, en kg de CO2"
         # baseline_variable = emissions_co2.emissions_CO2_carburants
 
         def formula(menage, period, parameters):
@@ -272,9 +259,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return emissions_ajustees
 
-
     class essence_ticpe(YearlyVariable):
-        label = u"Calcul du montant de la TICPE sur toutes les essences cumulees, après reforme"
+        label = "Calcul du montant de la TICPE sur toutes les essences cumulees, après reforme"
         # baseline_variable  = ticpe.essence_ticpe
 
         def formula_2009(menage, period):
@@ -297,9 +283,8 @@ class reforme_rattrapage_diesel(Reform):
             essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + super_plombe_ticpe_ajustee)
             return essence_ticpe_ajustee
 
-
     class quantites_diesel(YearlyVariable):
-        label = u"Quantites de diesel consommees après la reforme - taxe carburants"
+        label = "Quantites de diesel consommees après la reforme - taxe carburants"
         #baseline_variable = quantites_energie.quantites_diesel
 
         def formula(menage, period, parameters):
@@ -311,9 +296,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return quantites_diesel_ajustees
 
-
     class quantites_sp_e10(YearlyVariable):
-        label = u"Quantites consommees de sans plomb e10 par les menages après reforme - taxe carburants"
+        label = "Quantites consommees de sans plomb e10 par les menages après reforme - taxe carburants"
         # baseline_variable = quantites_energie.quantites_sp_e10
 
         def formula(menage, period, parameters):
@@ -327,9 +311,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return quantite_sp_e10
 
-
     class quantites_sp95(YearlyVariable):
-        label = u"Quantites consommees de sans plomb 95 par les menages après reforme"
+        label = "Quantites consommees de sans plomb 95 par les menages après reforme"
         # baseline_variable = quantites_energie.quantites_sp95
 
         def formula(menage, period, parameters):
@@ -342,9 +325,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return quantites_sp95_ajustees
 
-
     class quantites_sp98(YearlyVariable):
-        label = u"Quantites consommees de sans plomb 98 par les menages"
+        label = "Quantites consommees de sans plomb 98 par les menages"
         # baseline_variable = quantites_energie.quantites_sp98
 
         def formula(menage, period, parameters):
@@ -357,9 +339,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return quantites_sp98_ajustees
 
-
     class quantites_super_plombe(YearlyVariable):
-        label = u"Quantites consommees de super plombe par les menages après reforme"
+        label = "Quantites consommees de super plombe par les menages après reforme"
         # baseline_variable = quantites_energie.quantites_super_plombe
 
         def formula(menage, period, parameters):
@@ -373,9 +354,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return quantites_super_plombe_ajustees
 
-
     class quantites_essence(YearlyVariable):
-        label = u"Quantites d'essence consommees par les menages après reforme"
+        label = "Quantites d'essence consommees par les menages après reforme"
         # baseline_variable = quantites_energie.quantites_essence
         definition_period = YEAR
 
@@ -402,9 +382,8 @@ class reforme_rattrapage_diesel(Reform):
                 )
             return quantites_essence_ajustees
 
-
     class sp_e10_ticpe(YearlyVariable):
-        label = u"Calcul du montant de la TICPE sur le SP E10 après reforme"
+        label = "Calcul du montant de la TICPE sur le SP E10 après reforme"
         # baseline_variable = ticpe.sp_e10_ticpe
 
         def formula(menage, period, parameters):
@@ -438,9 +417,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return montant_sp_e10_ticpe_ajuste
 
-
     class sp95_ticpe(YearlyVariable):
-        label = u"Calcul du montant de TICPE sur le sp_95 après reforme"
+        label = "Calcul du montant de TICPE sur le sp_95 après reforme"
         # baseline_variable = ticpe.sp95_ticpe
 
         def formula(menage, period, parameters):
@@ -475,9 +453,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return montant_sp95_ticpe_ajuste
 
-
     class sp98_ticpe(YearlyVariable):
-        label = u"Calcul du montant de TICPE sur le sp_98 après reforme"
+        label = "Calcul du montant de TICPE sur le sp_98 après reforme"
         # baseline_variable = ticpe.sp98_ticpe
 
         def formula(menage, period, parameters):
@@ -512,9 +489,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return montant_sp98_ticpe_ajuste
 
-
     class super_plombe_ticpe(YearlyVariable):
-        label = u"Calcul du montant de la TICPE sur le super plombe après reforme"
+        label = "Calcul du montant de la TICPE sur le super plombe après reforme"
         # baseline_variable = ticpe.super_plombe_ticpe
 
         def formula(menage, period, parameters):
@@ -544,9 +520,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return montant_super_plombe_ticpe_ajuste
 
-
     class ticpe_totale(YearlyVariable):
-        label = u"Calcul du montant de la TICPE sur tous les carburants cumules, après reforme"
+        label = "Calcul du montant de la TICPE sur tous les carburants cumules, après reforme"
         # baseline_variable = ticpe.ticpe_totale
 
         def formula(menage, period):
@@ -556,11 +531,10 @@ class reforme_rattrapage_diesel(Reform):
 
             return ticpe_totale
 
-
     class total_taxes_energies_rattrapage_diesel(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Différence entre les contributions aux taxes sur l'énergie après la taxe carbone"
+        label = "Différence entre les contributions aux taxes sur l'énergie après la taxe carbone"
 
         def formula(menage, period):
             taxe_diesel = menage('diesel_ticpe', period)
@@ -574,7 +548,7 @@ class reforme_rattrapage_diesel(Reform):
             return total
 
     class tva_taux_plein(YearlyVariable):
-        label = u"Contribution sur la TVA a taux plein après reaction a la reforme - taxes carburants"
+        label = "Contribution sur la TVA a taux plein après reaction a la reforme - taxes carburants"
         # baseline_variable = tva.tva_taux_plein
 
         def formula(menage, period, parameters):
@@ -587,11 +561,10 @@ class reforme_rattrapage_diesel(Reform):
 
             return tax_from_expense_including_tax(depenses_tva_taux_plein_ajustees, nouveau_taux_plein)
 
-
     class tva_taux_plein_bis(YearlyVariable):
         value_type = float
         entity = Menage
-        label = u"Contribution sur la TVA a taux plein après reaction a la reforme - taxes carburants"
+        label = "Contribution sur la TVA a taux plein après reaction a la reforme - taxes carburants"
 
         def formula(menage, period, parameters):
             depenses_tva_taux_plein_ajustees = \
@@ -604,9 +577,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return tax_from_expense_including_tax(depenses_tva_taux_plein_ajustees, nouveau_taux_plein)
 
-
     class tva_taux_reduit(YearlyVariable):
-        label = u"Contribution sur la TVA a taux reduit après reaction a la reforme - taxes carburants"
+        label = "Contribution sur la TVA a taux reduit après reaction a la reforme - taxes carburants"
         # baseline_variable = tva.tva_taux_reduit
 
         def formula(menage, period, parameters):
@@ -620,9 +592,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return tax_from_expense_including_tax(depenses_tva_taux_reduit_ajustees, nouveau_taux_reduit)
 
-
     class tva_taux_super_reduit(YearlyVariable):
-        label = u"Contribution sur la TVA a taux super reduit après reaction a la reforme - taxes carburants"
+        label = "Contribution sur la TVA a taux super reduit après reaction a la reforme - taxes carburants"
         # baseline_variable = tva.tva_taux_super_reduit
 
         def formula(menage, period, parameters):
@@ -636,9 +607,8 @@ class reforme_rattrapage_diesel(Reform):
 
             return tax_from_expense_including_tax(depenses_tva_taux_super_reduit_ajustees, nouveau_taux_super_reduit)
 
-
     class tva_total(YearlyVariable):
-        label = u"Difference de contribution sur la TVA après reaction a la reforme - rattrapage diesel"
+        label = "Difference de contribution sur la TVA après reaction a la reforme - rattrapage diesel"
         # baseline_variable = tva.tva_total
 
         def formula(menage, period):

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 import numpy as np
 
@@ -46,15 +46,15 @@ def effets_reformes_precarite(reforme, year, data_year):
         ]
 
     indiv_df_reform = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
-    indiv_df_use_baseline =survey_scenario.create_data_frame_by_entity(simulated_variables,
+    indiv_df_use_baseline = survey_scenario.create_data_frame_by_entity(simulated_variables,
         use_baseline =True, period = year)
 
     menages_reforme = indiv_df_reform['menage']
-    menages_use_baseline =indiv_df_reference['menage']
+    menages_use_baseline = indiv_df_reference['menage']
 
     for redistribution in ['before', 'after']:
         if redistribution == 'after':
-        # Compute value of green cheques and their allocation between housing and transports
+            # Compute value of green cheques and their allocation between housing and transports
             if reforme != 'rattrapage_diesel':
                 menages_reforme = cheque_vert(menages_reference, menages_reforme, reforme)
                 menages_reforme['depenses_energies_logement_ajustees_{}'.format(reforme)] = (
@@ -71,7 +71,7 @@ def effets_reformes_precarite(reforme, year, data_year):
 
         # Compute BRDE
         if reforme != 'rattrapage_diesel':
-            menages_use_baseline =brde(menages_reference, 'depenses_energies_logement', 'depenses_tot',  'logement')
+            menages_use_baseline = brde(menages_reference, 'depenses_energies_logement', 'depenses_tot', 'logement')
             menages_reforme = brde(menages_reforme, 'depenses_energies_logement_ajustees_{}'.format(reforme), 'depenses_tot', 'logement')
 
             dict_logement['brde - {0} - {1}'.format(reforme, redistribution)] = float(
@@ -79,7 +79,7 @@ def effets_reformes_precarite(reforme, year, data_year):
                 (menages_reference['brde_m2_logement_depenses_tot'] * menages_reference['pondmen']).sum()
                 ) / menages_reference.query('brde_m2_logement_depenses_tot == 1')['pondmen'].sum()
 
-        menages_use_baseline =brde(menages_reference, 'depenses_carburants_corrigees', 'depenses_tot',  'transport')
+        menages_use_baseline = brde(menages_reference, 'depenses_carburants_corrigees', 'depenses_tot', 'transport')
         menages_reforme = brde(menages_reforme, 'depenses_carburants_corrigees_ajustees_{}'.format(reforme), 'depenses_tot', 'transport')
 
         dict_transport['brde - {0} - {1}'.format(reforme, redistribution)] = float(
@@ -89,14 +89,14 @@ def effets_reformes_precarite(reforme, year, data_year):
 
         # Compute TEE
         if reforme != 'rattrapage_diesel':
-            menages_use_baseline =tee_10_3(menages_reference, 'depenses_energies_logement', 'depenses_tot', 'logement')
+            menages_use_baseline = tee_10_3(menages_reference, 'depenses_energies_logement', 'depenses_tot', 'logement')
             menages_reforme = tee_10_3(menages_reforme, 'depenses_energies_logement_ajustees_{}'.format(reforme), 'depenses_tot', 'logement')
             dict_logement['tee - {0} - {1}'.format(reforme, redistribution)] = float(
                 (menages_reforme['tee_10_3_depenses_tot_logement'] * menages_reforme['pondmen']).sum() -
                 (menages_reference['tee_10_3_depenses_tot_logement'] * menages_reference['pondmen']).sum()
                 ) / menages_reference.query('tee_10_3_depenses_tot_logement == 1')['pondmen'].sum()
 
-        menages_use_baseline =tee_10_3(menages_reference, 'depenses_carburants_corrigees', 'depenses_tot', 'transport')
+        menages_use_baseline = tee_10_3(menages_reference, 'depenses_carburants_corrigees', 'depenses_tot', 'transport')
         menages_reforme = tee_10_3(menages_reforme, 'depenses_carburants_corrigees_ajustees_{}'.format(reforme), 'depenses_tot', 'transport')
 
         dict_transport['tee - {0} - {1}'.format(reforme, redistribution)] = float(
@@ -104,10 +104,9 @@ def effets_reformes_precarite(reforme, year, data_year):
             (menages_reference['tee_10_3_depenses_tot_transport'] * menages_reference['pondmen']).sum()
             ) / menages_reference.query('tee_10_3_depenses_tot_transport == 1')['pondmen'].sum()
 
-
         # Compute precarite
         if reforme != 'rattrapage_diesel':
-            menages_use_baseline =precarite(menages_reference, 'brde_m2_logement_depenses_tot', 'tee_10_3_depenses_tot_logement', 'logement')
+            menages_use_baseline = precarite(menages_reference, 'brde_m2_logement_depenses_tot', 'tee_10_3_depenses_tot_logement', 'logement')
             menages_reforme = precarite(menages_reforme, 'brde_m2_logement_depenses_tot', 'tee_10_3_depenses_tot_logement', 'logement')
 
             dict_logement['precarite - {0} - {1}'.format(reforme, redistribution)] = float(
@@ -115,7 +114,7 @@ def effets_reformes_precarite(reforme, year, data_year):
                 (menages_reference['precarite_logement'] * menages_reference['pondmen']).sum()
                 ) / menages_reference.query('precarite_logement == 1')['pondmen'].sum()
 
-        menages_use_baseline =precarite(menages_reference, 'brde_m2_transport_depenses_tot', 'tee_10_3_depenses_tot_transport', 'transport')
+        menages_use_baseline = precarite(menages_reference, 'brde_m2_transport_depenses_tot', 'tee_10_3_depenses_tot_transport', 'transport')
         menages_reforme = precarite(menages_reforme, 'brde_m2_transport_depenses_tot', 'tee_10_3_depenses_tot_transport', 'transport')
 
         if reforme != 'rattrapage_diesel':

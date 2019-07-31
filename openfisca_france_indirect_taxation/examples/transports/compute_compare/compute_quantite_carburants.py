@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import de modules généraux
-from __future__ import division
+
 
 import numpy as np
 import csv
@@ -61,10 +61,10 @@ if __name__ == '__main__':
             sp_e10_ticpe_ponderee = 0
 
         liste_carburants_accise = get_accise_ticpe_majoree()
-        value_accise_diesel = liste_carburants_accise['accise majoree diesel'].loc[u'{}'.format(year)] / 100
-        value_accise_sp = liste_carburants_accise['accise majoree sans plomb'].loc[u'{}'.format(year)] / 100
+        value_accise_diesel = liste_carburants_accise['accise majoree diesel'].loc['{}'.format(year)] / 100
+        value_accise_sp = liste_carburants_accise['accise majoree sans plomb'].loc['{}'.format(year)] / 100
         value_accise_super_plombe = \
-            liste_carburants_accise['accise majoree super plombe'].loc[u'{}'.format(year)] / 100
+            liste_carburants_accise['accise majoree super plombe'].loc['{}'.format(year)] / 100
 
         quantite_diesel = diesel_ticpe_ponderee / (value_accise_diesel)
         quantite_sans_plomb = (sp95_ticpe_ponderee + sp98_ticpe_ponderee + sp_e10_ticpe_ponderee) / (value_accise_sp)
@@ -87,15 +87,15 @@ if __name__ == '__main__':
 
     writer_carburants = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
         'quantites', 'quantites_carburants_consommees_bdf.csv'), 'wb'))
-    for key, value in quantites_carburants_consommees.items():
+    for key, value in list(quantites_carburants_consommees.items()):
         writer_carburants.writerow([key, value])
 
     writer_diesel = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
         'quantites', 'quantites_diesel_consommees_bdf.csv'), 'wb'))
-    for key, value in quantites_diesel_consommees.items():
+    for key, value in list(quantites_diesel_consommees.items()):
         writer_diesel.writerow([key, value])
 
     writer_essence = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
         'quantites', 'quantites_essence_consommees_bdf.csv'), 'wb'))
-    for key, value in quantites_essence_consommees.items():
+    for key, value in list(quantites_essence_consommees.items()):
         writer_essence.writerow([key, value])

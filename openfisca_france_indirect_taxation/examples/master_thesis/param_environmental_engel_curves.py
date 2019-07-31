@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import statsmodels.formula.api as smf
 import numpy
@@ -62,7 +61,7 @@ reg_emissions = smf.ols(formula = 'emissions_CO2_energies_totales ~ \
     rev_disp_loyerimput + rev_disp_loyerimput_2 + ocde10 + strate_0 + strate_1 + strate_3 + strate_4 + age_group_pr + \
     age_group_pr_2 + alone + occupe_both + gaz + fioul + vag_23 + vag_24 + vag_25 + vag_26 + vag_27',
     data = menages).fit()
-print reg_emissions.summary()
+print(reg_emissions.summary())
 
 ocde10 = menages['ocde10'].mean()
 strate_1 = menages['strate_1'].mean()
@@ -82,7 +81,7 @@ simulation_menages['revenu_disponible2'] = (simulation_menages['revenu_disponibl
 
 # Change parameters to fit new results
 simulation_menages['emissions'] = -233.6354 + (
-    (873.8949 * ocde10 -1425.8345 * strate_1 + 172.7004 * strate_3 + 538.9584 * age_group_pr +
+    (873.8949 * ocde10 - 1425.8345 * strate_1 + 172.7004 * strate_3 + 538.9584 * age_group_pr +
     -50.8012 * age_group_pr_2 + -946.6144 * alone + 479.9245 * occupe_both + 4344.2562 * gaz + 8265.1751 * fioul) +
     0.0403 * simulation_menages['revenu_disponible'] +
     -1.715e-08 * (simulation_menages['revenu_disponible2'])

@@ -5,8 +5,6 @@
 # au préalable les corrections nécessaires pour avoir des bases homogènes.
 
 
-from __future__ import division
-
 import os
 import pkg_resources
 
@@ -23,10 +21,10 @@ def clean_data():
     data = create_niveau_vie_quantiles()
     data_entd = data[0]
     data_bdf = data[1]
-    
+
     variables_to_drop_bdf = [
         ]
-    
+
     for variable in variables_to_drop_bdf:
         del data_bdf[variable]
 
@@ -43,26 +41,25 @@ def clean_data():
 
 
 def create_donation_classes():
-    for base in [0,1]:
+    for base in [0, 1]:
         data = clean_data()[base]
 
         # Classes based on niveau_vie_decile and aides_logement
         data['donation_class_1'] = 0
-        for i in range(1,11):
+        for i in range(1, 11):
             if i < 5:
-                for j in [0,1]:
-                    data.loc[(data['aides_logement'] == j) & (data['niveau_vie_decile'] == i), 'donation_class_1'] = '{}_{}'.format(i,j)
+                for j in [0, 1]:
+                    data.loc[(data['aides_logement'] == j) & (data['niveau_vie_decile'] == i), 'donation_class_1'] = '{}_{}'.format(i, j)
             else:
                 data.loc[data['niveau_vie_decile'] == i, 'donation_class_1'] = '{}'.format(i)
 
-      
         data['donation_class_3'] = 0
-        for i in range(1,11):
-            for rur in [0,1]:
+        for i in range(1, 11):
+            for rur in [0, 1]:
                 data.loc[
                     (data['niveau_vie_decile'] == i) & (data['rural'] == rur),
                     'donation_class_3'
-                    ] = '{}_{}'.format(i,rur)
+                    ] = '{}_{}'.format(i, rur)
 
         if base == 0:
             data_entd = data.copy()
@@ -71,16 +68,16 @@ def create_donation_classes():
 
     return data_entd, data_bdf
 
-    
+
 def check_donation_classes_size(data, donation_class):
     elements_in_dc = data[donation_class].tolist()
 
     dict_dc = dict()
     for element in elements_in_dc:
         dict_dc['{}'.format(element)] = 1
-                        
-    list_dc = dict_dc.keys()
-    
+
+    list_dc = list(dict_dc.keys())
+
     dict_dc_taille = dict()
     for element in list_dc:
         dict_dc_taille[element] = len(data_entd[data_entd[donation_class] == element])
@@ -89,7 +86,7 @@ def check_donation_classes_size(data, donation_class):
 
 
 if __name__ == "__main__":
-    data = create_donation_classes()    
+    data = create_donation_classes()
     data_entd = data[0]
     data_bdf = data[1]
 

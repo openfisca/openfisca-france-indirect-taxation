@@ -2,8 +2,6 @@
 
 # Dans ce script, on test la qualité de l'appariement.
 
-from __future__ import division
-
 
 import pandas as pd
 
@@ -39,7 +37,7 @@ data_matched_distance = pd.read_csv(
         ), sep =',', decimal = '.'
     )
 
-    
+
 data_matched_random = pd.read_csv(
     os.path.join(
         default_config_files_directory,
@@ -69,51 +67,52 @@ def test_distance_niveau_vie_decile(data_entd, data_matched):
     average_froid_entd = sum(data_entd['pondmen'] * (data_entd['distance'])) / sum(data_entd['pondmen'])
     average_froid_matched = sum(data_matched['pondmen'] * (data_matched['distance'])) / sum(data_matched['pondmen'])
     dict_froid['Average'] = [average_froid_entd, average_froid_matched]
-    for i in range(1,11):
+    for i in range(1, 11):
         data_entd_decile = data_entd.query('niveau_vie_decile == {}'.format(i))
         data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
-    
+
         part_froid_entd = sum(data_entd_decile['pondmen'] * (data_entd_decile['distance'])) / sum(data_entd_decile['pondmen'])
         part_froid_matched = sum(data_matched_decile['pondmen'] * (data_matched_decile['distance'])) / sum(data_matched_decile['pondmen'])
-    
+
         dict_froid['{}'.format(i)] = \
             [part_froid_entd, part_froid_matched]
-    
+
     return dict_froid
 
-    
+
 def test_distance_diesel_niveau_vie_decile(data_entd, data_matched):
     dict_froid = dict()
     average_froid_entd = sum(data_entd['pondmen'] * (data_entd['distance_diesel'])) / sum(data_entd['pondmen'])
     average_froid_matched = sum(data_matched['pondmen'] * (data_matched['distance_diesel'])) / sum(data_matched['pondmen'])
     dict_froid['Average'] = [average_froid_entd, average_froid_matched]
-    for i in range(1,11):
+    for i in range(1, 11):
         data_entd_decile = data_entd.query('niveau_vie_decile == {}'.format(i))
         data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
-    
+
         part_froid_entd = sum(data_entd_decile['pondmen'] * (data_entd_decile['distance_diesel'])) / sum(data_entd_decile['pondmen'])
         part_froid_matched = sum(data_matched_decile['pondmen'] * (data_matched_decile['distance_diesel'])) / sum(data_matched_decile['pondmen'])
-    
+
         dict_froid['{}'.format(i)] = \
             [part_froid_entd, part_froid_matched]
-    
+
     return dict_froid
+
 
 def test_distance_essence_niveau_vie_decile(data_entd, data_matched):
     dict_froid = dict()
     average_froid_entd = sum(data_entd['pondmen'] * (data_entd['distance_essence'])) / sum(data_entd['pondmen'])
     average_froid_matched = sum(data_matched['pondmen'] * (data_matched['distance_essence'])) / sum(data_matched['pondmen'])
     dict_froid['Average'] = [average_froid_entd, average_froid_matched]
-    for i in range(1,11):
+    for i in range(1, 11):
         data_entd_decile = data_entd.query('niveau_vie_decile == {}'.format(i))
         data_matched_decile = data_matched.query('niveau_vie_decile == {}'.format(i))
-    
+
         part_froid_entd = sum(data_entd_decile['pondmen'] * (data_entd_decile['distance_essence'])) / sum(data_entd_decile['pondmen'])
         part_froid_matched = sum(data_matched_decile['pondmen'] * (data_matched_decile['distance_essence'])) / sum(data_matched_decile['pondmen'])
-    
+
         dict_froid['{}'.format(i)] = \
             [part_froid_entd, part_froid_matched]
-    
+
     return dict_froid
 
 

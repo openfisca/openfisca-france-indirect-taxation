@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -31,11 +31,11 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         )
 
     indiv_df_reform = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
-    indiv_df_use_baseline =survey_scenario.create_data_frame_by_entity(simulated_variables,
+    indiv_df_use_baseline = survey_scenario.create_data_frame_by_entity(simulated_variables,
         use_baseline =True, period = year)
 
     menages_reform = indiv_df_reform['menage']
-    menages_use_baseline =indiv_df_reference['menage']
+    menages_use_baseline = indiv_df_reference['menage']
 
     variations_revenue['total_{}'.format(reforme)] = (
         (menages_reform['total_taxes_energies'] - menages_reference['total_taxes_energies']) *

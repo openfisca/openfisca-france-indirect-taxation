@@ -13,14 +13,13 @@ class YearlyVariable(Variable):
         except AttributeError:
             pass
         else:
-            print("deleting class baseline_variable for {}".format(self.__class__.__name__))
+            print(("deleting class baseline_variable for {}".format(self.__class__.__name__)))
 
         try:
             delattr(self, 'baseline_variable')
         except AttributeError:
             pass
         else:
-            print("deleting instance baseline_variable for {}".format(self.__class__.__name__))
+            print(("deleting instance baseline_variable for {}".format(self.__class__.__name__)))
 
         Variable.__init__(self, baseline_variable = baseline_variable)
-

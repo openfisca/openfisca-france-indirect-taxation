@@ -24,9 +24,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from __future__ import division
-
-
 import logging
 
 
@@ -106,6 +103,7 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
         # Save in temporary store
         vehicule.index = vehicule.index.astype(ident_men_dtype)
         temporary_store['automobile_{}'.format(year)] = vehicule
+
 
 if __name__ == '__main__':
     import sys

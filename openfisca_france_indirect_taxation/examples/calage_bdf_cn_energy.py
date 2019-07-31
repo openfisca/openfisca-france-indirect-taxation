@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import os
 import pkg_resources
@@ -69,7 +68,7 @@ def get_bdf_aggregates_energy(data_year = None):
         )
 
     variables_to_inflate = ['depenses_carburants', 'depenses_combustibles_liquides',
-        'depenses_combustibles_solides', 'depenses_electricite','depenses_gaz_ville',
+        'depenses_combustibles_solides', 'depenses_electricite', 'depenses_gaz_ville',
         'depenses_tot', 'loyer_impute', 'rev_disponible', 'rev_disp_loyerimput']
 
     bdf_aggregates_by_energie = pd.DataFrame()
@@ -93,7 +92,7 @@ def get_cn_aggregates_energy(target_year = None):
         'conso-eff-fonction.xls'
         )
 
-    masses_cn_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = u"M€cour")
+    masses_cn_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "M€cour")
     masses_cn_data_frame.columns = masses_cn_data_frame.iloc[2]
     masses_cn_data_frame = masses_cn_data_frame.loc[:, ['Code', target_year]].copy()
 
@@ -104,7 +103,7 @@ def get_cn_aggregates_energy(target_year = None):
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.3', 'poste'] = 'depenses_combustibles_liquides'
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            04.5.4', 'poste'] = 'depenses_combustibles_solides'
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '            07.2.2', 'poste'] = 'depenses_carburants'
-    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == u'01..12+15 (HS)', 'poste'] = \
+    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == '01..12+15 (HS)', 'poste'] = \
         'depenses_tot'
     masses_cn_energie = masses_cn_data_frame[masses_cn_data_frame.poste != '0']
     del masses_cn_energie['Code']
@@ -119,7 +118,6 @@ def get_cn_aggregates_energy(target_year = None):
     masses_cn_energie.set_index('poste', inplace = True)
     masses_cn_energie = masses_cn_energie * 1e6
 
-
     default_config_files_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parametres_fiscalite_file_path = os.path.join(
@@ -131,7 +129,7 @@ def get_cn_aggregates_energy(target_year = None):
         )
 
     revenus_cn = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "t_2101")
-    revenus_cn.iat[1,1] = 'Code'
+    revenus_cn.iat[1, 1] = 'Code'
     revenus_cn = revenus_cn.drop(revenus_cn.columns[0], axis=1)
     revenus_cn.columns = revenus_cn.iloc[1]
     revenus_cn = revenus_cn.loc[:, ['Code', target_year]].copy()
@@ -150,10 +148,9 @@ def get_cn_aggregates_energy(target_year = None):
     revenus_cn.set_index('revenu', inplace = True)
     revenus_cn = revenus_cn * 1e9
 
-
-    #default_config_files_directory = os.path.join(
+    # default_config_files_directory = os.path.join(
     #    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-    #parametres_fiscalite_file_path = os.path.join(
+    # parametres_fiscalite_file_path = os.path.join(
     #    default_config_files_directory,
     #    'openfisca_france_indirect_taxation',
     #    'assets',
@@ -162,7 +159,7 @@ def get_cn_aggregates_energy(target_year = None):
     #    )
 
     #masses_cn_revenus_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "revenus_CN")
-    #masses_cn_revenus_data_frame.rename(
+    # masses_cn_revenus_data_frame.rename(
     #   columns = {
     #       'annee': 'year',
     #        'Revenu disponible brut': 'rev_disponible',
@@ -213,7 +210,7 @@ def get_inflators_cn_to_cn_energy(target_year):
 
     return dict(
         (key, target_year_cn_aggregates[key] / data_year_cn_aggregates[key])
-        for key in data_year_cn_aggregates.keys()
+        for key in list(data_year_cn_aggregates.keys())
         )
 
 
@@ -227,7 +224,7 @@ def get_inflators_energy(target_year):
     inflators_cn_to_cn = get_inflators_cn_to_cn_energy(target_year)
 
     ratio_by_variable = dict()
-    for key in inflators_cn_to_cn.keys():
+    for key in list(inflators_cn_to_cn.keys()):
         ratio_by_variable[key] = inflators_bdf_to_cn[key] * inflators_cn_to_cn[key]
     ratio_by_variable['depenses_gaz_liquefie'] = ratio_by_variable['depenses_gaz_ville']
     ratio_by_variable['depenses_carburants_corrigees'] = ratio_by_variable['depenses_carburants']
@@ -251,7 +248,7 @@ def get_inflators_by_year_energy(rebuild = False):
         writer_inflators = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation',
             'assets', 'inflateurs', 'inflators_by_year_wip.csv'), 'wb'))
         for year in range(2000, 2017):
-            for key, value in inflators_by_year[year].items():
+            for key, value in list(inflators_by_year[year].items()):
                 writer_inflators.writerow([key, value, year])
 
         return inflators_by_year

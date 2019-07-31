@@ -7,7 +7,6 @@
 
 
 # Import general modules
-from __future__ import division
 
 
 # Import modules specific to OpenFisca
@@ -53,10 +52,10 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 
 df_reforme['cheque'] = 1 * (df_reforme['cheques_energie_officielle_2019_in_2017'] > 0)
 df_reforme['cheque_philippe'] = 1 * (df_reforme['cheques_energie_philippe_officielle_2019_in_2017'] > 0)
-print (df_reforme['pondmen'] * df_reforme['cheque']).sum()
-print (df_reforme['pondmen'] * df_reforme['cheque_philippe']).sum()
+print((df_reforme['pondmen'] * df_reforme['cheque']).sum())
+print((df_reforme['pondmen'] * df_reforme['cheque_philippe']).sum())
 
-for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
+for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
 
     df['cout_reforme_uc_avant_cheque_energie'] = (
@@ -105,11 +104,10 @@ for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 's
         df_reforme['revenu_reforme_officielle_2019_in_2017']
         - df_reforme['cheques_energie_philippe_officielle_2019_in_2017']
         )
-    print (df_reforme['cout_reforme_uc_avant_cheque_energie'] * df_reforme['pondmen']).sum() / 1000000    
-    print (df_reforme['cout_reforme_uc_cheque_officiel'] * df_reforme['pondmen']).sum() / 1000000
-    print (df_reforme['cout_reforme_uc_cheque_majore'] * df_reforme['pondmen']).sum() / 1000000
-    print (df_reforme['cout_reforme_uc_cheque_philippe'] * df_reforme['pondmen']).sum() / 1000000
-    print (df_reforme['cheques_energie_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1000000
-    print (df_reforme['cheques_energie_majore_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1000000
-    print (df_reforme['cheques_energie_philippe_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1000000
-    
+    print((df_reforme['cout_reforme_uc_avant_cheque_energie'] * df_reforme['pondmen']).sum() / 1000000)
+    print((df_reforme['cout_reforme_uc_cheque_officiel'] * df_reforme['pondmen']).sum() / 1000000)
+    print((df_reforme['cout_reforme_uc_cheque_majore'] * df_reforme['pondmen']).sum() / 1000000)
+    print((df_reforme['cout_reforme_uc_cheque_philippe'] * df_reforme['pondmen']).sum() / 1000000)
+    print((df_reforme['cheques_energie_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1000000)
+    print((df_reforme['cheques_energie_majore_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1000000)
+    print((df_reforme['cheques_energie_philippe_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1000000)

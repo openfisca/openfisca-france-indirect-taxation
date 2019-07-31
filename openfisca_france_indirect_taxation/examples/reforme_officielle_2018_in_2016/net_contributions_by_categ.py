@@ -7,7 +7,6 @@
 
 
 # Import general modules
-from __future__ import division
 
 
 # Import modules specific to OpenFisca
@@ -35,7 +34,7 @@ simulated_variables = [
     'ocde10',
     'tarifs_sociaux_electricite',
     'tarifs_sociaux_gaz',
-    #'cheques_energie_integral_inconditionnel_officielle_2018_in_2016',
+    # 'cheques_energie_integral_inconditionnel_officielle_2018_in_2016',
     ]
 
 survey_scenario = SurveyScenario.create(
@@ -48,7 +47,7 @@ survey_scenario = SurveyScenario.create(
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
+for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
     df['transferts_nets_apres_redistribution_uc'] = (
         df['cheques_energie_officielle_2018_in_2016'] +

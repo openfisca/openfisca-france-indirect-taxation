@@ -15,7 +15,6 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_
 data_enl = clean_data()[0]
 
 
-
 data_enl['froid'] = 0
 data_enl['froid'].loc[data_enl['gchauf_n'] != 0] = 1
 
@@ -36,17 +35,17 @@ regression = smf.ols(formula = 'froid ~ \
      ocde10 + ouest_sud + part_energies_revtot + revtot + revtot_2 + rural + \
     surfhab_d',
     data = data_enl).fit()
-print regression.summary()
+print(regression.summary())
 
 variables = ['aides_logement', 'agepr', 'bat_av_49', 'bat_49_74', 'log_indiv',
     'ocde10', 'ouest_sud', 'part_energies_revtot', 'revtot', 'revtot_2', 'rural',
     'surfhab_d']
 
 logit = smf.Logit(data_enl['froid'], data_enl[variables]).fit()
-print logit.summary()
+print(logit.summary())
 
 probit = smf.Probit(data_enl['froid'], data_enl[variables]).fit()
-print probit.summary()
+print(probit.summary())
 
 
 """
@@ -58,13 +57,11 @@ regression = smf.ols(formula = 'froid_cout ~ \
      ocde10 + ouest_sud + part_energies_revtot + revtot + revtot_2 + rural + \
     surfhab_d',
     data = data_enl).fit()
-print regression.summary()
+print(regression.summary())
 
 variables = ['aides_logement', 'agepr', 'bat_av_49', 'bat_49_74', 'log_indiv',
     'ocde10', 'ouest_sud', 'part_energies_revtot', 'revtot', 'revtot_2', 'rural',
     'surfhab_d']
 
 logit = smf.Logit(data_enl['froid_cout'], data_enl[variables]).fit()
-print logit.summary()
-
-
+print(logit.summary())

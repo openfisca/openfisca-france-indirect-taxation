@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
-
-from openfisca_france_indirect_taxation.model.base import * # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
 class emissions_CO2_carburants_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
+    label = "Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
 
     def formula(self, simulation, period):
         quantites_diesel_ajustees = menage('quantites_diesel_ajustees', period)
@@ -29,7 +27,7 @@ class emissions_CO2_carburants_ajustees(YearlyVariable):
 class emissions_CO2_electricite_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Emissions de CO2 des ménages via leur consommation d'électricité après réforme, en kg de CO2"
+    label = "Emissions de CO2 des ménages via leur consommation d'électricité après réforme, en kg de CO2"
 
     def formula(self, simulation, period):
         quantites_electricite_ajustees = menage('quantites_electricite_ajustees_taxe_carbone', period)
@@ -43,7 +41,7 @@ class emissions_CO2_electricite_ajustees(YearlyVariable):
 class emissions_CO2_gaz_ajustees:
     value_type = float
     entity = Menage
-    label = u"Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2"
+    label = "Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2"
 
     def formula(self, simulation, period):
         quantites_gaz_ajustees = menage('quantites_gaz_ajustees_taxe_carbone', period)

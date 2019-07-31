@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 import pandas
 
@@ -58,7 +58,6 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_
         # Réalisation de graphiques
         graph_builder_bar(df)
 
-
         df_by_entity = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
         menages = df_by_entity['menage']
 
@@ -72,5 +71,5 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_
             menages['pondmen']
             ).sum()
 
-        print reforme, sum_reduit / menages['pondmen'].sum()
-        print reforme, sum_plein / menages['pondmen'].sum()
+        print(reforme, sum_reduit / menages['pondmen'].sum())
+        print(reforme, sum_plein / menages['pondmen'].sum())

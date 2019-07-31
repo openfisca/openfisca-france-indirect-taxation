@@ -6,7 +6,6 @@
 # the increase in taxes he faced. These amounts do not take into account VAT.
 
 # Import general modules
-from __future__ import division
 
 
 # Import modules specific to OpenFisca
@@ -25,15 +24,15 @@ data_year = 2011
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 simulated_variables = [
-    'poste_11_1_1_1_1', # repas pris dans un restaurant
-    'poste_11_1_1_1_2', # " dans un café, bars ou assimilé
-    'poste_11_1_2_1_1', # cantines scolaire et professionnelle
-    'poste_11_1_3_1', # autres dépenses de restauration : séjours hors domicile, personnes vivant hors du domicile
-    'poste_11_1_3_2', # " : cadeau offert à destination d'un autre ménage
-    'poste_11_2_1_1_1', # serices d'hébergement (hôtels, gîtes, campings, CROUS, internats)
-    'poste_02_2_1', #
-    'poste_02_2_2', #
-    'poste_02_2_3', #
+    'poste_11_1_1_1_1',  # repas pris dans un restaurant
+    'poste_11_1_1_1_2',  # " dans un café, bars ou assimilé
+    'poste_11_1_2_1_1',  # cantines scolaire et professionnelle
+    'poste_11_1_3_1',  # autres dépenses de restauration : séjours hors domicile, personnes vivant hors du domicile
+    'poste_11_1_3_2',  # " : cadeau offert à destination d'un autre ménage
+    'poste_11_2_1_1_1',  # serices d'hébergement (hôtels, gîtes, campings, CROUS, internats)
+    'poste_02_2_1',
+    'poste_02_2_2',
+    'poste_02_2_3',
     'poste_agrege_11',
     'rev_disp_loyerimput',
     'depenses_tot',
@@ -51,11 +50,10 @@ survey_scenario = SurveyScenario.create(
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
+for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
 
     graph_builder_bar(df[['poste_02_2_1'] + ['poste_02_2_2'] + ['poste_02_2_3']], False)
-
 
     boum
 

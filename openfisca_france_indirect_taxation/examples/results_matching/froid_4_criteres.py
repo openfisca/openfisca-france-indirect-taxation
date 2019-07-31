@@ -1,4 +1,3 @@
-from __future__ import division
 
 
 # Dans ce script on utilise des histogrammes pour comparer la distribution des variables dans les deux enquêtes.
@@ -79,7 +78,7 @@ def histogram_froid_4_criteres_niveau_vie_decile(data_matched, data_enl, categor
         i_max = 9
     else:
         print('Wrong category')
-    for i in range(1,i_max):
+    for i in range(1, i_max):
         data_enl_decile = data_enl.query('{} == {}'.format(category, i))
         data_matched_decile = data_matched.query('{} == {}'.format(category, i))
 
@@ -126,11 +125,12 @@ def histogram_froid_4_criteres_niveau_vie_decile(data_matched, data_enl, categor
 
     figure = histogrammes(list_keys, list_values_matched, list_values_enl, 'Matched', 'ENL')
 
-    values = {'keys': list_keys, 'enl' : list_values_enl, 'matched': list_values_matched}
+    values = {'keys': list_keys, 'enl': list_values_enl, 'matched': list_values_matched}
     dataframe = pd.DataFrame.from_dict(values)
     dataframe = dataframe.set_index('keys')
 
     return figure, dataframe
+
 
 for category in ['niveau_vie_decile', 'tuu']:
     dataframe = histogram_froid_4_criteres_niveau_vie_decile(data_matched_rank, data_enl, category)[1]

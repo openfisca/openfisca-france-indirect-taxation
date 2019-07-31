@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import logging
 import numpy as np
@@ -92,7 +91,7 @@ def build_aliss_reform(rebuild = False, ajustable = False):
 
 
 class aliss_ajustable(Reform):
-    name = u"Réforme Aliss- Ajustable"
+    name = "Réforme Aliss- Ajustable"
     key = 'aliss_ajustable'
 
     def apply(self):
@@ -100,7 +99,7 @@ class aliss_ajustable(Reform):
 
 
 class aliss_environnement(Reform):
-    name = u"Réforme Aliss-Environnement de l'imposition indirecte des biens alimentaires"
+    name = "Réforme Aliss-Environnement de l'imposition indirecte des biens alimentaires"
     key = 'aliss_environnement'
 
     def apply(self):
@@ -109,7 +108,7 @@ class aliss_environnement(Reform):
 
 class aliss_mixte(Reform):
     key = 'aliss_mixte'
-    name = u"Réforme Aliss-Mixte-Environnement-Sante de l'imposition indirecte des biens alimentaires"
+    name = "Réforme Aliss-Mixte-Environnement-Sante de l'imposition indirecte des biens alimentaires"
 
     def apply(self):
         build_custom_aliss_reform(self, key = self.key, name = self.name)
@@ -117,7 +116,7 @@ class aliss_mixte(Reform):
 
 class aliss_sante(Reform):
     key = 'aliss_sante'
-    name = u"Réforme Aliss-Santé de l'imposition indirecte des biens alimentaires"
+    name = "Réforme Aliss-Santé de l'imposition indirecte des biens alimentaires"
 
     def apply(self):
         build_custom_aliss_reform(self, key = self.key, name = self.name)
@@ -125,7 +124,7 @@ class aliss_sante(Reform):
 
 class aliss_tva_sociale(Reform):
     key = 'aliss_tva_sociale'
-    name = u"Réforme Aliss-TVA sociale de l'imposition indirecte des biens alimentaires"
+    name = "Réforme Aliss-TVA sociale de l'imposition indirecte des biens alimentaires"
 
     def apply(self):
         build_custom_aliss_reform(self, key = self.key, name = self.name)
@@ -188,7 +187,7 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
         for categorie_fiscale in categories_fiscales_reform.categorie_fiscale.unique()
         )
 
-    for categorie_fiscale, codes_bdf in codes_bdf_by_reform_categorie_fiscale.items():
+    for categorie_fiscale, codes_bdf in list(codes_bdf_by_reform_categorie_fiscale.items()):
         categories_fiscales.loc[
             categories_fiscales.code_bdf.isin(codes_bdf), 'categorie_fiscale'] = categorie_fiscale
 
@@ -309,7 +308,7 @@ def build_updated_categorie_fiscale(reform_key, categories_fiscales_reform):
         weighted_categories_fiscales[[reform_key, 'code_bdf']].set_index('code_bdf')
         )
     categories_fiscales_reform.reset_index(inplace = True)
-    log.info(u'The tva categries for reform_key {} are:\n{}'.format(reform_key, sorted(taux_by_categorie_fiscale)))
+    log.info('The tva categries for reform_key {} are:\n{}'.format(reform_key, sorted(taux_by_categorie_fiscale)))
     return categories_fiscales_reform, taux_by_categorie_fiscale
 
 
@@ -350,11 +349,11 @@ def new_tva_total_function_creator(categories_fiscales):
 
 
 def generate_additional_tva_variables(tax_benefit_system, reform_key = None, taux_by_categorie_fiscale = None):
-    for categorie_fiscale, taux in taux_by_categorie_fiscale.items():
+    for categorie_fiscale, taux in list(taux_by_categorie_fiscale.items()):
         if not categorie_fiscale.startswith('tva'):
             continue
         # Create a depenses (TTC) class with a dynamic name.
-        depenses_class_name = u'depenses_{}'.format(categorie_fiscale)
+        depenses_class_name = 'depenses_{}'.format(categorie_fiscale)
 
         if tax_benefit_system.get_column(depenses_class_name) is None:
             depenses_new_tva_func = depenses_new_tva_function_creator(
@@ -362,7 +361,7 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
             definitions_by_name = dict(
                 value_type = float,
                 entity = Menage,
-                label = u"Dépenses taxes comprises: {0}".format(categorie_fiscale),
+                label = "Dépenses taxes comprises: {0}".format(categorie_fiscale),
                 function = depenses_new_tva_func,
                 )
             depenses_variable_class = type(depenses_class_name, (YearlyVariable,), definitions_by_name)
@@ -370,30 +369,30 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
             del definitions_by_name
 
         # Create a tva (TTC) class with a dynamic name.
-        tva_class_name = u'{}'.format(categorie_fiscale)
+        tva_class_name = '{}'.format(categorie_fiscale)
         if tax_benefit_system.get_column(tva_class_name) is None:
             new_tva_func = new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
             definitions_by_name = dict(
                 value_type = float,
                 entity = Menage,
-                label = u"Montant de la TVA acquitée à {0}".format(categorie_fiscale),
+                label = "Montant de la TVA acquitée à {0}".format(categorie_fiscale),
                 function = new_tva_func,
                 )
             tva_variable_class = type(tva_class_name, (YearlyVariable,), definitions_by_name)
             tax_benefit_system.add_variable(tva_variable_class)
             del definitions_by_name
 
-        log.debug(u'{} Created new fiscal category {}'.format(reform_key, categorie_fiscale))
+        log.debug('{} Created new fiscal category {}'.format(reform_key, categorie_fiscale))
 
     # tva_total variable creation
     categories_fiscales = [
         categorie_fiscale
-        for categorie_fiscale in taux_by_categorie_fiscale.keys()
+        for categorie_fiscale in list(taux_by_categorie_fiscale.keys())
         if categorie_fiscale.startswith('tva_taux_')
         ]
     new_tva_total_func = new_tva_total_function_creator(categories_fiscales)
     definitions_by_name = dict(
         function = new_tva_total_func,
         )
-    type(u'tva_total', (YearlyVariable,), definitions_by_name)
+    type('tva_total', (YearlyVariable,), definitions_by_name)
     del definitions_by_name

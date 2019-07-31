@@ -7,8 +7,6 @@
 # by the reform.
 
 
-from __future__ import division
-
 import pandas as pd
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -39,18 +37,18 @@ def distribution_net_transfers_by_group(df_reform, group):
     i_min = int(df_reforme[group].min())
     i_max = int(df_reforme[group].max())
 
-    df_by_categ = pd.DataFrame(index = range(i_min, i_max + 1),
+    df_by_categ = pd.DataFrame(index = list(range(i_min, i_max + 1)),
         columns = ['quantile_10', 'quantile_25', 'quantile_50', 'quantile_75', 'quantile_90']
         )
 
     for i in range(i_min, i_max + 1):
-        df_by_categ['quantile_10'][i] = df_reforme.query('{} == {}'.format(group, i))[u'transfert_net_cheque_officiel_uc'].quantile(0.1)
-        df_by_categ['quantile_25'][i] = df_reforme.query('{} == {}'.format(group, i))[u'transfert_net_cheque_officiel_uc'].quantile(0.25)
-        df_by_categ['quantile_50'][i] = df_reforme.query('{} == {}'.format(group, i))[u'transfert_net_cheque_officiel_uc'].quantile(0.5)
-        df_by_categ['quantile_75'][i] = df_reforme.query('{} == {}'.format(group, i))[u'transfert_net_cheque_officiel_uc'].quantile(0.75)
-        df_by_categ['quantile_90'][i] = df_reforme.query('{} == {}'.format(group, i))[u'transfert_net_cheque_officiel_uc'].quantile(0.9)
+        df_by_categ['quantile_10'][i] = df_reforme.query('{} == {}'.format(group, i))['transfert_net_cheque_officiel_uc'].quantile(0.1)
+        df_by_categ['quantile_25'][i] = df_reforme.query('{} == {}'.format(group, i))['transfert_net_cheque_officiel_uc'].quantile(0.25)
+        df_by_categ['quantile_50'][i] = df_reforme.query('{} == {}'.format(group, i))['transfert_net_cheque_officiel_uc'].quantile(0.5)
+        df_by_categ['quantile_75'][i] = df_reforme.query('{} == {}'.format(group, i))['transfert_net_cheque_officiel_uc'].quantile(0.75)
+        df_by_categ['quantile_90'][i] = df_reforme.query('{} == {}'.format(group, i))['transfert_net_cheque_officiel_uc'].quantile(0.9)
 
-    graph_builder_bar(df_by_categ[[u'quantile_10'] + [u'quantile_25'] + ['quantile_50'] + ['quantile_75'] + ['quantile_90']], False)
+    graph_builder_bar(df_by_categ[['quantile_10'] + ['quantile_25'] + ['quantile_50'] + ['quantile_75'] + ['quantile_90']], False)
     save_dataframe_to_graph(df_by_categ, 'Monetary/distribution_loosers_within_{}.csv'.format(group))
 
     return df_by_categ
@@ -75,7 +73,7 @@ if __name__ == '__main__':
         )
 
     df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
-    df_reforme[u'transfert_net_cheque_officiel_uc'] = (
+    df_reforme['transfert_net_cheque_officiel_uc'] = (
         df_reforme['cheques_energie_officielle_2018_in_2016'] +
         df_reforme['reste_transferts_neutre_officielle_2018_in_2016'] -
         df_reforme['revenu_reforme_officielle_2018_in_2016']

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import numpy as np
 
@@ -10,13 +9,13 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 class cmu(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Le ménage touche la couverture maladie universelle complémentaire "
+    label = "Le ménage touche la couverture maladie universelle complémentaire "
 
 
 class brde_m2_depenses_tot(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"bas revenu (depenses tot )dépenses élevées (énergies logement)"
+    label = "bas revenu (depenses tot )dépenses élevées (énergies logement)"
 
     def formula(menage, period):
         depenses_tot = menage('depenses_tot', period)
@@ -39,7 +38,7 @@ class brde_m2_depenses_tot(YearlyVariable):
 class brde_m2_rev_disponible(YearlyVariable):
     value_type = int
     entity = Menage
-    label = u"bas revenu (revenu disponible) dépenses élevées (énergies logement)"
+    label = "bas revenu (revenu disponible) dépenses élevées (énergies logement)"
 
     def formula(menage, period):
         revenu = menage('rev_disponible', period)
@@ -62,7 +61,7 @@ class brde_m2_rev_disponible(YearlyVariable):
 class brde_transports_depenses_tot(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"bas revenu (depenses tot) dépenses élevées (en carburants)"
+    label = "bas revenu (depenses tot) dépenses élevées (en carburants)"
 
     def formula(menage, period):
         depenses_tot = menage('depenses_tot', period)
@@ -84,7 +83,7 @@ class brde_transports_depenses_tot(YearlyVariable):
 class brde_transports_rev_disponible(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"bas revenu (revenu disponible) dépenses élevées (en carburants)"
+    label = "bas revenu (revenu disponible) dépenses élevées (en carburants)"
 
     def formula(menage, period):
         revenu = menage('rev_disponible', period)
@@ -108,7 +107,7 @@ class brde_transports_rev_disponible(YearlyVariable):
 class eligibilite_tarifs_sociaux_energies(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Le ménage est éligible aux tarifs sociaux de l'énergie"
+    label = "Le ménage est éligible aux tarifs sociaux de l'énergie"
 
     def formula(menage, period):
         revenu = menage('revdecm', period)
@@ -127,37 +126,37 @@ class eligibilite_tarifs_sociaux_energies(YearlyVariable):
 class froid(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver"
+    label = "Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver"
 
 
 class froid_cout(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver en raison du cout du chauffage"
+    label = "Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver en raison du cout du chauffage"
 
 
 class froid_impaye(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver en raison d'une coupure pour facture impayée"
+    label = "Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver en raison d'une coupure pour facture impayée"
 
 
 class froid_installation(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver en raison d'une installation insuffisante"
+    label = "Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver en raison d'une installation insuffisante"
 
 
 class froid_isolation(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver en raison d'une mauvaise isolation"
+    label = "Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver en raison d'une mauvaise isolation"
 
 
 class froid_4_criteres(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver - 4 critères"
+    label = "Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver - 4 critères"
 
     def formula(menage, period):
         froid_cout = menage('froid_cout', period)
@@ -174,7 +173,7 @@ class froid_4_criteres(YearlyVariable):
 class froid_4_criteres_3_deciles(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver - 4 critères, 3 deciles"
+    label = "Le ménage a éprouvé un sentiment de froid dans son logement pendant l'hiver - 4 critères, 3 deciles"
 
     def formula(menage, period):
         froid_4_criteres = menage('froid_4_criteres', period)
@@ -187,7 +186,7 @@ class froid_4_criteres_3_deciles(YearlyVariable):
 class froid_3_deciles(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Le ménage a éprouvé un sentiment de froid dans son logement - 3 premiers déciles"
+    label = "Le ménage a éprouvé un sentiment de froid dans son logement - 3 premiers déciles"
 
     def formula(menage, period):
         froid = menage('froid', period)
@@ -200,7 +199,7 @@ class froid_3_deciles(YearlyVariable):
 class precarite_energetique_depenses_tot(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+    label = "Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
     def formula(menage, period):
         brde_m2 = menage('brde_m2_depenses_tot', period)
@@ -216,7 +215,7 @@ class precarite_energetique_depenses_tot(YearlyVariable):
 class precarite_energetique_rev_disponible(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+    label = "Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
     def formula(menage, period):
         brde_m2 = menage('brde_m2_rev_disponible', period)
@@ -232,7 +231,7 @@ class precarite_energetique_rev_disponible(YearlyVariable):
 class precarite_transports_depenses_tot(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+    label = "Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
     def formula(menage, period):
         brde_transports_depenses_tot = menage('brde_transports_depenses_tot', period)
@@ -247,7 +246,7 @@ class precarite_transports_depenses_tot(YearlyVariable):
 class precarite_transports_rev_disponible(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+    label = "Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
     def formula(menage, period):
         brde_transports_rev_disponible = menage('brde_transports_rev_disponible', period)
@@ -262,7 +261,7 @@ class precarite_transports_rev_disponible(YearlyVariable):
 class tarifs_sociaux_electricite(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Montant perçus en tarifs sociaux sur l'électricité (TPN)"
+    label = "Montant perçus en tarifs sociaux sur l'électricité (TPN)"
 
     def formula(menage, period):
         depenses_electricite_percentile = menage('depenses_electricite_percentile', period)
@@ -292,7 +291,7 @@ class tarifs_sociaux_electricite(YearlyVariable):
 class tarifs_sociaux_gaz(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Montant perçus en tarifs sociaux sur l'électricité (TSS)"
+    label = "Montant perçus en tarifs sociaux sur l'électricité (TSS)"
 
     def formula(menage, period, parameters):
         depenses_gaz_prix_unitaire = menage('depenses_gaz_prix_unitaire', period)
@@ -329,7 +328,7 @@ class tarifs_sociaux_gaz(YearlyVariable):
 class tee_depenses_tot(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
+    label = "Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
 
     def formula(menage, period):
         depenses_energies_logement = menage('depenses_energies_logement', period)
@@ -343,7 +342,7 @@ class tee_depenses_tot(YearlyVariable):
 class tee_10_depenses_tot(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Indicateur, taux d'effort énergétique supérieur à 10%"
+    label = "Indicateur, taux d'effort énergétique supérieur à 10%"
 
     def formula(menage, period):
         tee = menage('tee_depenses_tot', period)
@@ -355,7 +354,7 @@ class tee_10_depenses_tot(YearlyVariable):
 class tee_10_3_deciles_depenses_tot(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+    label = "Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
     def formula(menage, period):
         tee = menage('tee_depenses_tot', period)
@@ -368,7 +367,7 @@ class tee_10_3_deciles_depenses_tot(YearlyVariable):
 class tee_rev_disponible(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
+    label = "Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
 
     def formula(menage, period):
         depenses_energies_logement = menage('depenses_energies_logement', period)
@@ -382,7 +381,7 @@ class tee_rev_disponible(YearlyVariable):
 class tee_10_rev_disponible(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Indicateur, taux d'effort énergétique supérieur à 10%"
+    label = "Indicateur, taux d'effort énergétique supérieur à 10%"
 
     def formula(menage, period):
         tee = menage('tee_rev_disponible', period)
@@ -394,7 +393,7 @@ class tee_10_rev_disponible(YearlyVariable):
 class tee_10_3_deciles_rev_disponible(YearlyVariable):
     value_type = int
     entity = Menage
-    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+    label = "Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
     def formula(menage, period):
         tee = menage('tee_rev_disponible', period)
@@ -407,7 +406,7 @@ class tee_10_3_deciles_rev_disponible(YearlyVariable):
 class tee_transports_depenses_tot(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
+    label = "Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
 
     def formula(menage, period):
         depenses_carburants = menage('depenses_carburants_corrigees', period)
@@ -421,7 +420,7 @@ class tee_transports_depenses_tot(YearlyVariable):
 class tee_transports_10_depenses_tot(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Indicateur, taux d'effort énergétique supérieur à 10%"
+    label = "Indicateur, taux d'effort énergétique supérieur à 10%"
 
     def formula(menage, period):
         tee = menage('tee_transports_depenses_tot', period)
@@ -433,7 +432,7 @@ class tee_transports_10_depenses_tot(YearlyVariable):
 class tee_transports_10_3_deciles_depenses_tot(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+    label = "Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
     def formula(menage, period):
         tee = menage('tee_transports_depenses_tot', period)
@@ -446,7 +445,7 @@ class tee_transports_10_3_deciles_depenses_tot(YearlyVariable):
 class tee_transports_rev_disponible(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
+    label = "Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
 
     def formula(menage, period):
         depenses_energies_logement = menage('depenses_carburants_corrigees', period)
@@ -460,7 +459,7 @@ class tee_transports_rev_disponible(YearlyVariable):
 class tee_transports_10_rev_disponible(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Indicateur, taux d'effort énergétique supérieur à 10%"
+    label = "Indicateur, taux d'effort énergétique supérieur à 10%"
 
     def formula(menage, period):
         tee = menage('tee_transports_rev_disponible', period)
@@ -472,7 +471,7 @@ class tee_transports_10_rev_disponible(YearlyVariable):
 class tee_transports_10_3_deciles_rev_disponible(YearlyVariable):
     value_type = str
     entity = Menage
-    label = u"Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
+    label = "Indicateur, taux d'effort énergétique supérieur à 10% et 3 premiers déciles"
 
     def formula(menage, period):
         tee = menage('tee_transports_rev_disponible', period)

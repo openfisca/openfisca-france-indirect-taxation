@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 import pandas as pd
 import seaborn
@@ -19,14 +19,14 @@ seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 def plot_effect_reform_fuel_poors():
     types = ['logement', 'transport', 'joint', 'double']
-    statuts = [u'avant reforme', u'avant redistribution', u'apres redistribution']
+    statuts = ['avant reforme', 'avant redistribution', 'apres redistribution']
     dataframe = pd.DataFrame(index = types, columns=statuts)
     dict_precarite = dict()
     (dict_precarite['logement'], dict_precarite['transport'],
         dict_precarite['double'], dict_precarite['joint']) = \
         number_fuel_poors(year, data_year)
     for type_precarite in types:
-        for statut in [u'avant redistribution', u'apres redistribution']:
+        for statut in ['avant redistribution', 'apres redistribution']:
             dataframe[statut][type_precarite] = (
                 dict_precarite[type_precarite]['precarite - ' + statut] -
                 dict_precarite[type_precarite]['precarite - avant reforme']
@@ -35,10 +35,11 @@ def plot_effect_reform_fuel_poors():
     #save_dataframe_to_graph(dataframe, 'Precarite/effect_reform_fuel_poors.csv')
     graph_builder_bar_percent(dataframe)
     return dataframe
-    
+
+
 def plot_number_fuel_poors():
     types = ['logement', 'transport', 'joint', 'double']
-    statuts = [u'avant reforme', u'avant redistribution', u'apres redistribution']
+    statuts = ['avant reforme', 'avant redistribution', 'apres redistribution']
     dataframe = pd.DataFrame(index = types, columns=statuts)
     dict_precarite = dict()
     (dict_precarite['logement'], dict_precarite['transport'],
@@ -51,6 +52,7 @@ def plot_number_fuel_poors():
 
     graph_builder_bar(dataframe, False)
     #save_dataframe_to_graph(dataframe, 'Precarite/number_fuel_poors.csv')
+
 
 def plot_share_fuel_poors():
     survey_scenario = SurveyScenario.create(
@@ -65,7 +67,7 @@ def plot_share_fuel_poors():
     pop_size = df_reforme['pondmen'].sum()
 
     types = ['logement', 'transport', 'joint', 'double']
-    statuts = [u'avant reforme', u'avant redistribution', u'apres redistribution']
+    statuts = ['avant reforme', 'avant redistribution', 'apres redistribution']
     dataframe = pd.DataFrame(index = types, columns=statuts)
     dict_precarite = dict()
     (dict_precarite['logement'], dict_precarite['transport'],
@@ -79,13 +81,13 @@ def plot_share_fuel_poors():
     graph_builder_bar_percent(dataframe)
 
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
     year = 2016
     data_year = 2011
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
     elasticities = get_elasticities(data_year)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-    
+
     dataframe = plot_effect_reform_fuel_poors()
-    #plot_number_fuel_poors()
+    # plot_number_fuel_poors()
     dataframe2 = plot_share_fuel_poors()

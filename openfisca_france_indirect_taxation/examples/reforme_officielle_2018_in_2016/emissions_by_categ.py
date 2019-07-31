@@ -7,8 +7,6 @@
 # by the reform.
 
 
-from __future__ import division
-
 import pandas as pd
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -56,10 +54,10 @@ def emissions_by_categ(data, categ):
 
     min_categ = data[categ].min()
     max_categ = data[categ].max()
-    elements_categ = range(min_categ, max_categ+1)
+    elements_categ = list(range(min_categ, max_categ + 1))
     df_to_plot = pd.DataFrame(index = elements_categ, columns = ['emissions_CO2'])
 
-    for element in range(min_categ, max_categ+1):
+    for element in range(min_categ, max_categ + 1):
         df = data.query('{0} == {1}'.format(categ, element))
         df_to_plot['emissions_CO2'][element] = \
             (df['emissions_CO2_energies_totales'] / df['ocde10'] * df['pondmen']).sum() / df['pondmen'].sum()

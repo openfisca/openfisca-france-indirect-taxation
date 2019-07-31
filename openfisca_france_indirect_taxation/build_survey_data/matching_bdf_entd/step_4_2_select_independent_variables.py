@@ -27,7 +27,7 @@ stock_variables = ['agepr', 'age_vehicule', 'age_carte_grise', 'aides_logement',
     'nb_essence', 'nbphab', 'nenfants', 'niveau_vie', 'niveau_vie_2', 'npers',
     'ocde10', 'paris', 'petite_ville', 'rural', 'situapr', 'typmen', 'veh_tot',
     'vp_deplacements_pro', 'vp_domicile_travail'
-    ]
+                   ]
 
 for dependent_variable in ['distance', 'distance_diesel', 'distance_essence']:
     new_stock_variables = list(stock_variables)
@@ -42,35 +42,35 @@ for dependent_variable in ['distance', 'distance_diesel', 'distance_essence']:
             variables_kept = variables_kept + [variable_to_include]
         for variable in new_stock_variables:
             variables = variables_kept + [variable]
-            
+
             regressors = ' '
             for element in variables:
                 if regressors == ' ':
                     regressors = element
                 else:
                     regressors = regressors + ' + {}'.format(element)
-            
+
             regression = smf.ols(formula = '{} ~ \
                 {}'.format(dependent_variable, regressors),
                 data = data_entd).fit()
-            
+
             rsquared_adj = regression.rsquared_adj
             max_rsquared_adj = max(max_rsquared_adj, rsquared_adj)
             if rsquared_adj == max_rsquared_adj:
                 variable_to_include = variable
             else:
                 continue
-    
+
     else:
-        if dependent_variable == 'distance':      
+        if dependent_variable == 'distance':
             regression_distance = regression.summary()
-        if dependent_variable == 'distance_diesel':      
+        if dependent_variable == 'distance_diesel':
             regression_distance_diesel = regression.summary()
         else:
             regression_distance_essence = regression.summary()
 
 
-print regression_distance
+print(regression_distance)
 #print regression_distance_diesel
 #print regression_distance_essence
 

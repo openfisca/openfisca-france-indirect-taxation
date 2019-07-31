@@ -4,7 +4,7 @@
 # des ménages, selon leur décile de revenu.
 
 # Import de modules généraux
-from __future__ import division
+
 
 # Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.examples.utils_example import simulate, df_weighted_average_grouped, \

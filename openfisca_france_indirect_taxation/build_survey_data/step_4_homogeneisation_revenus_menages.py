@@ -24,9 +24,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from __future__ import division
-
-
 import logging
 import pandas
 
@@ -175,7 +172,7 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         rev_disp['rev_disp_loyerimput'] = rev_disp['rev_disponible'] - rev_dispbis['loyer_impute']
 
         for var in ['somme_obl_recue', 'act_indpt', 'revpat', 'salaires', 'autres_rev', 'rev_disponible', 'impfon',
-            'imphab', 'revsoc', 'revact', 'impot_revenu', 'revtot', 'rev_disp_loyerimput']:
+                'imphab', 'revsoc', 'revact', 'impot_revenu', 'revtot', 'rev_disp_loyerimput']:
             rev_disp[var] = rev_disp[var] / 6.55957  # CONVERSION EN EUROS
 
         temporary_store["revenus_{}".format(year)] = rev_disp

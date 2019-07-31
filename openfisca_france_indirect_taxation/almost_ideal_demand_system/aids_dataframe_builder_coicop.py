@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 from pandas import concat
 
-from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
-
+from openfisca_france_indirect_taxation.utils import get_input_data_frame
 
 # Now that we have our price indexes, we construct a dataframe with the rest of the information
 
@@ -89,10 +87,18 @@ for year in [2000, 2005, 2011]:
     # Import information about households, including niveau_vie_decile
     # (To do: Obviously there are mistakes in its computation, check why).
 
-    df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['vag'] + ['typmen'] + ['revtot'] +
-        ['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']]
+    df_info_menage = aggregates_data_frame[[
+        'ocde10',
+        'depenses_tot',
+        'vag',
+        'typmen',
+        'revtot',
+        'poste_coicop_2201',
+        'poste_coicop_2202',
+        'poste_coicop_2203',
+        ]]
     df_info_menage['fumeur'] = 0
-    df_info_menage[['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']] = \
+    df_info_menage[['poste_coicop_2201', 'poste_coicop_2202', 'poste_coicop_2203']] = \
         df_info_menage[['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']].astype(float)
     df_info_menage['consommation_tabac'] = (
         df_info_menage['poste_coicop_2201'] + df_info_menage['poste_coicop_2202'] + df_info_menage['poste_coicop_2203']

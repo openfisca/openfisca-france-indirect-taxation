@@ -1,4 +1,3 @@
-from __future__ import division
 
 
 # Dans ce script on transforme les distances imputées en dépenses, sur la base des dépenses
@@ -25,7 +24,7 @@ data_matched_distance = pd.read_csv(
         ), sep =',', decimal = '.'
     )
 
-    
+
 data_matched_random = pd.read_csv(
     os.path.join(
         default_config_files_directory,
@@ -39,8 +38,8 @@ data_matched_random = pd.read_csv(
 
 
 def calage_depenses_from_distance(data_matched):
-    for i in range(1,11):
-        for rur in [0,1]:
+    for i in range(1, 11):
+        for rur in [0, 1]:
             data_matched_group = data_matched.query('niveau_vie_decile == {}'.format(i)).query('rural == {}'.format(rur))
             avg_distance = (
                 sum(data_matched_group['distance'] * data_matched_group['pondmen']) /
@@ -53,10 +52,10 @@ def calage_depenses_from_distance(data_matched):
 
             data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_carburants_corrigees_entd'] = \
                 data_matched['distance'] * avg_depenses / avg_distance
-    
+
             data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_diesel_corrigees_entd'] = \
                 data_matched['distance_diesel'] * avg_depenses / avg_distance
-    
+
             data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_essence_corrigees_entd'] = \
                 data_matched['distance_essence'] * avg_depenses / avg_distance
 

@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 
 # Dans ce script on compare la distribution des variables dans les deux enquêtes.
 # On peut ainsi juger si certaines d'entre elles doivent être ajustées de manière
@@ -30,7 +28,7 @@ def check_aba():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.aba == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-       
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.aba == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
@@ -38,8 +36,9 @@ def check_aba():
 
         results['{} - BdF'.format(i)] = part_bdf
         results['{} - ENL'.format(i)] = part_enl
-        
+
     return results
+
 
 results_aba = check_aba()
 
@@ -51,7 +50,7 @@ def check_agepr():
         (data_bdf['agepr'] * data_bdf['pondmen']).sum() / data_bdf['pondmen'].sum()
     results['Average - ENL'] = \
         (data_enl['agepr'] * data_enl['pondmen']).sum() / data_enl['pondmen'].sum()
- 
+
     for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
         results['{} th quantile - BdF'.format(i)] = \
             data_bdf['agepr'].quantile(i)
@@ -59,6 +58,7 @@ def check_agepr():
             data_enl['agepr'].quantile(i)
 
     return results
+
 
 results_agepr = check_agepr()
 # Bons résultats
@@ -78,8 +78,9 @@ def check_amr():
             data_bdf['amr'].quantile(i)
         results['{} th quantile - ENL'.format(i)] = \
             data_enl['amr'].quantile(i)
-    
+
     return results
+
 
 results_amr = check_amr()
 # fonctionne moyennement : plus d'aide au logement dans l'ENL
@@ -93,16 +94,17 @@ def check_ancons():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.ancons == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.ancons == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         results['{} - BdF'.format(i)] = part_bdf * 100
         results['{} - ENL'.format(i)] = part_enl * 100
 
     return results
+
 
 results_ancons = check_ancons()
 # Petit problème sur 8, 9 et 10 + problème des 99 de BdF -> revoir la définition
@@ -119,16 +121,17 @@ def check_cataeu():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.cataeu == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-        
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.cataeu == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         results['{} - BdF'.format(i)] = part_bdf
         results['{} - ENL'.format(i)] = part_enl
-        
+
     return results
+
 
 results_cataeu = check_cataeu()
 
@@ -138,26 +141,26 @@ def check_cs42():
     results_pr = dict()
     results_cj = dict()
     for j in ['pr', 'cj']:
-        for i in range(11,87):
+        for i in range(11, 87):
             data_bdf['pondmen_{}'.format(i)] = 0
             data_bdf['pondmen_{}'.format(i)].loc[data_bdf['cs42{}'.format(j)] == i] = data_bdf['pondmen']
             part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
             del data_bdf['pondmen_{}'.format(i)]
-        
+
             data_enl['pondmen_{}'.format(i)] = 0
             data_enl['pondmen_{}'.format(i)].loc[data_enl['cs42{}'.format(j)] == i] = data_enl['pondmen']
             part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
             del data_enl['pondmen_{}'.format(i)]
 
-            if j == 'pr':      
+            if j == 'pr':
                 results_pr['{} - BdF'.format(i)] = part_bdf * 100
                 results_pr['{} - ENL'.format(i)] = part_enl * 100
             else:
                 results_cj['{} - BdF'.format(i)] = part_bdf * 100
                 results_cj['{} - ENL'.format(i)] = part_enl * 100
 
-
     return results_pr, results_cj
+
 
 results_cs42pr = check_cs42()[0]
 # 13 et 44 produisent des mauvais résultats, pour le reste ça va
@@ -176,8 +179,9 @@ def check_depenses_energies():
             data_bdf['depenses_energies'].quantile(i)
         results['{} th quantile - ENL'.format(i)] = \
             data_enl['depenses_energies'].quantile(i)
-    
+
     return results
+
 
 results_depenses_energies = check_depenses_energies()
 
@@ -190,7 +194,7 @@ def check_dip14():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf['dip14pr'] == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl['dip14pr'] == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
@@ -200,6 +204,7 @@ def check_dip14():
         results['{} - ENL'.format(i)] = part_enl * 100
 
     return results
+
 
 results_dip14pr = check_dip14()
 # Bien
@@ -213,7 +218,7 @@ def check_htl():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.htl == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.htl == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
@@ -223,6 +228,7 @@ def check_htl():
         results['{} - ENL'.format(i)] = part_enl * 100
 
     return results
+
 
 results_htl = check_htl()
 # Assez bonnes performances -> revoir la définition
@@ -237,6 +243,7 @@ def check_log_indiv():
 
     return results
 
+
 results_log_indiv = check_log_indiv()
 
 
@@ -249,6 +256,7 @@ def check_mchof_d():
         (data_enl['mchof_d'] * data_enl['pondmen']).sum() / data_enl['pondmen'].sum()
 
     return results
+
 
 results_mchof_d = check_mchof_d()
 # Catastrophique...
@@ -264,6 +272,7 @@ def check_mfac_eau1_d():
 
     return results
 
+
 results_mfac_eau1_d = check_mfac_eau1_d()
 # fonctionne mal, dépenses beaucoup plus importantes dans ENL
 
@@ -278,6 +287,7 @@ def check_mloy_d():
 
     return results
 
+
 results_mloy_d = check_mloy_d()
 # résultats catastrophiques
 
@@ -290,7 +300,7 @@ def check_nactifs():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf['nactifs'] == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl['nactifs'] == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
@@ -300,6 +310,7 @@ def check_nactifs():
         results['{} - ENL'.format(i)] = part_enl * 100
 
     return results
+
 
 results_nactifs = check_nactifs()
 # Super
@@ -313,16 +324,17 @@ def check_nbphab():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.nbphab == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-        
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.nbphab == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-    
+
         results['{} - BdF'.format(i)] = part_bdf * 100
         results['{} - ENL'.format(i)] = part_enl * 100
 
     return results
+
 
 results_nbphab = check_nbphab()
 # Très Bonnes performances
@@ -336,7 +348,7 @@ def check_nenfants():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf['nenfants'] == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl['nenfants'] == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
@@ -346,6 +358,7 @@ def check_nenfants():
         results['{} - ENL'.format(i)] = part_enl * 100
 
     return results
+
 
 results_nenfants = check_nenfants()
 # Bon dans l'ensemble
@@ -358,7 +371,7 @@ def check_revtot():
         (data_bdf['revtot'] * data_bdf['pondmen']).sum() / data_bdf['pondmen'].sum()
     results['Average - ENL'] = \
         (data_enl['revtot'] * data_enl['pondmen']).sum() / data_enl['pondmen'].sum()
- 
+
     for i in [.05, .2, .35, .5, 0.65, .8, 0.95]:
         results['{} th quantile - BdF'.format(i)] = \
             data_bdf['revtot'].quantile(i)
@@ -366,6 +379,7 @@ def check_revtot():
             data_enl['revtot'].quantile(i)
 
     return results
+
 
 results_revtot = check_revtot()
 # Plutôt bon, mais la distribution de l'ENL est un peu plus dispersée
@@ -379,16 +393,17 @@ def check_ocde10():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.ocde10 == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.ocde10 == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
- 
+
         results['{} - BdF'.format(i)] = part_bdf * 100
         results['{} - ENL'.format(i)] = part_enl * 100
 
     return results
+
 
 results_ocde10 = check_ocde10()
 # Bien
@@ -420,8 +435,9 @@ def check_part_energies_revtot(data_bdf, data_enl):
     data_enl = data_enl.query('part_energies_revtot < 1').copy()
     data_enl['rank'] = data_enl['pondmen'].cumsum() / sum(data_enl['pondmen'])
     plot_enl = plt.plot(data_enl['rank'], data_enl['part_energies_revtot'])
-    
+
     return results, plot_bdf, plot_enl
+
 
 results_part_energies_revtot = check_part_energies_revtot(data_bdf, data_enl)[0]
 plot_bdf = check_part_energies_revtot(data_bdf, data_enl)[1]
@@ -446,16 +462,17 @@ def check_postes_energies():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf['depenses_{}'.format(i)] > 0] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl['depenses_{}'.format(i)] > 0] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-        
+
         results['part_consommateurs_depenses_{} - BdF'.format(i)] = part_bdf
         results['part_consommateurs_depenses_{} - ENL'.format(i)] = part_enl
 
     return results
+
 
 results_check_postes_energies = check_postes_energies()
 # Fonctionne plutôt bien
@@ -471,21 +488,21 @@ def check_situa():
             data_bdf['pondmen_{}'.format(i)].loc[data_bdf['situa{}'.format(j)] == i] = data_bdf['pondmen']
             part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
             del data_bdf['pondmen_{}'.format(i)]
-        
+
             data_enl['pondmen_{}'.format(i)] = 0
             data_enl['pondmen_{}'.format(i)].loc[data_enl['situa{}'.format(j)] == i] = data_enl['pondmen']
             part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
             del data_enl['pondmen_{}'.format(i)]
 
-            if j == 'pr':      
+            if j == 'pr':
                 results_pr['{} - BdF'.format(i)] = part_bdf * 100
                 results_pr['{} - ENL'.format(i)] = part_enl * 100
             else:
                 results_cj['{} - BdF'.format(i)] = part_bdf * 100
                 results_cj['{} - ENL'.format(i)] = part_enl * 100
 
-
     return results_pr, results_cj
+
 
 results_situapr = check_situa()[0]
 # Plutôt bien
@@ -511,6 +528,7 @@ def check_surfhab_d():
 
     return results
 
+
 results_surfhab_d = check_surfhab_d()
 # Très bon
 
@@ -523,16 +541,17 @@ def check_tau():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.tau == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.tau == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-  
+
         results['{} - BdF'.format(i)] = part_bdf * 100
         results['{} - ENL'.format(i)] = part_enl * 100
 
     return results
+
 
 results_tau = check_tau()
 # Quelques petits soucis (2,5,6) mais ça va
@@ -546,16 +565,17 @@ def check_tuu():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.tuu == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.tuu == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-  
+
         results['{} - BdF'.format(i)] = part_bdf * 100
         results['{} - ENL'.format(i)] = part_enl * 100
 
     return results
+
 
 results_tuu = check_tuu()
 # Pas mal
@@ -569,16 +589,17 @@ def check_zeat():
         data_bdf['pondmen_{}'.format(i)].loc[data_bdf.zeat == i] = data_bdf['pondmen']
         part_bdf = data_bdf['pondmen_{}'.format(i)].sum() / data_bdf['pondmen'].sum()
         del data_bdf['pondmen_{}'.format(i)]
-    
+
         data_enl['pondmen_{}'.format(i)] = 0
         data_enl['pondmen_{}'.format(i)].loc[data_enl.zeat == i] = data_enl['pondmen']
         part_enl = data_enl['pondmen_{}'.format(i)].sum() / data_enl['pondmen'].sum()
         del data_enl['pondmen_{}'.format(i)]
-  
+
         results['{} - BdF'.format(i)] = part_bdf * 100
         results['{} - ENL'.format(i)] = part_enl * 100
 
     return results
+
 
 results_zeat = check_zeat()
 # Très bien !

@@ -29,16 +29,16 @@ for year in ['energy_no_alime_all']:
     #ratio_positive_elas = positive_elas / sum_pop
 
     # Set upper and lower bounds for elasticities : [-2;0]
-    for j in range(1,4):
+    for j in range(1, 4):
         selection_elasticites['elas_price_{0}_{0} - (0)'.format(j)] = \
             float(len(df.query('elas_price_{0}_{0} > 0'.format(j)))) / len(df)
         selection_elasticites['elas_price_{0}_{0} - (-2)'.format(j)] = \
             float(len(df.query('elas_price_{0}_{0} < -2'.format(j)))) / len(df)
         df['elas_price_{0}_{0}'.format(j)] = \
-	       (df['elas_price_{0}_{0}'.format(j)] < 0) * df['elas_price_{0}_{0}'.format(j)]
+            (df['elas_price_{0}_{0}'.format(j)] < 0) * df['elas_price_{0}_{0}'.format(j)]
         df['elas_price_{0}_{0}'.format(j)] = (
-	       (df['elas_price_{0}_{0}'.format(j)] > -2) * df['elas_price_{0}_{0}'.format(j)] +
-	       (df['elas_price_{0}_{0}'.format(j)] < -2) * (-2)
+            (df['elas_price_{0}_{0}'.format(j)] > -2) * df['elas_price_{0}_{0}'.format(j)] +
+            (df['elas_price_{0}_{0}'.format(j)] < -2) * (-2)
             )
 
     for i in range(1, 4):

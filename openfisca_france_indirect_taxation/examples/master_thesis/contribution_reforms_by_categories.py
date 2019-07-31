@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line_percent, graph_builder_bar, \
@@ -53,7 +53,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
             'Additional effort rate on TICPE reform - income']]
             )
 
-        #save_dataframe_to_graph(
+        # save_dataframe_to_graph(
         #    df_reform,
         #    'Contributions_reforme/Before_redistribution/contribution_additionnelles_reforme_{0}_{1}.csv'.format(reforme, category)
         #    )

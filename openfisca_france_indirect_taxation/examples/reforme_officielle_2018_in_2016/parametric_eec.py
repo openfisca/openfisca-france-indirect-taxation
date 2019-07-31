@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import statsmodels.formula.api as smf
 import numpy
@@ -66,4 +65,4 @@ reg_emissions = smf.ols(formula = 'emissions_CO2_energies_totales ~ \
     rev_disp_loyerimput + rev_disp_loyerimput_2 + ocde10 + strate_0 + strate_1 + strate_3 + strate_4 + age_group_pr + \
     age_group_pr_2 + alone + occupe_both + gaz_ville + combustibles_liquides',
     data = menages).fit()
-print reg_emissions.summary()
+print(reg_emissions.summary())

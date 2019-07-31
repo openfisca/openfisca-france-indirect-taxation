@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 import pandas as pd
 import seaborn
@@ -47,7 +47,7 @@ def plot_precarite(indicateur):
     graph_builder_bar_percent(dataframe_transport)
     graph_builder_bar_percent(dataframe_double)
     graph_builder_bar_percent(dataframe_joint)
-    
+
 
 def plot_effet_reformes_indicateurs(indicateur):
     reformes = ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']
@@ -89,19 +89,18 @@ def plot_effet_reformes_indicateurs(indicateur):
         dataframe_double, 'Precarite/effet_reformes_{}_joint.csv'.format(indicateur)
         )
 
-
     graph_builder_bar_percent(dataframe_logement)
     graph_builder_bar_percent(dataframe_transport)
     graph_builder_bar_percent(dataframe_double)
     graph_builder_bar_percent(dataframe_joint)
 
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
     year = 2014
     data_year = 2011
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
     elasticities = get_elasticities(data_year)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-    
-    #plot_precarite('precarite')
+
+    # plot_precarite('precarite')
     plot_effet_reformes_indicateurs('precarite')

@@ -5,7 +5,7 @@
 # We then replicate this with adjusted expenditures and do the difference.
 
 # Import general modules
-from __future__ import division
+
 
 import statsmodels.formula.api as smf
 import numpy as np
@@ -17,7 +17,7 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 
 
 def estimate_froid():
-    
+
     stock_variables = [
         'agepr',
         'aides_logement',
@@ -58,7 +58,6 @@ def estimate_froid():
     elasticities = get_elasticities(data_year)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
-
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
@@ -66,32 +65,31 @@ def estimate_froid():
         year = year,
         data_year = data_year
         )
-    
+
     dataframe = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
     dataframe = dataframe.query('niveau_vie_decile < 4')
-    
+
     dataframe['froid_4_criteres'] = \
         dataframe['froid_4_criteres'].astype(int)
     dataframe = dataframe.query('rev_disponible > 0')
     dataframe['monoparental'] = 0
     dataframe.loc[dataframe['typmen'] == 2, 'monoparental'] = 1
-    
+
     # On passe en kWh
     dataframe['quantites_combustibles_liquides'] = 9.96 * dataframe['quantites_combustibles_liquides']
-    
+
     dataframe['quantites_kwh'] = (
         dataframe['quantites_combustibles_liquides']
         + dataframe['quantites_gaz_final']
         + dataframe['quantites_electricite_selon_compteur']
-        )    
+        )
 
     for i in range(0, 5):
         dataframe['strate_{}'.format(i)] = 0
         dataframe.loc[dataframe['strate'] == i, 'strate_{}'.format(i)] = 1
 
-
     #dataframe['part_energies_rev_disponible'] = dataframe['depenses_energies_logement'] / dataframe['rev_disponible']
-    
+
     # OLS regression
     new_stock_variables = list(stock_variables)
     max_rsquared_adj = 0.000001
@@ -105,8 +103,8 @@ def estimate_froid():
             variables_kept = variables_kept + [variable_to_include]
         for variable in new_stock_variables:
             variables = variables_kept + [variable]
-    
-            regressors = ' ' 
+
+            regressors = ' '
             for element in variables:
                 if regressors == ' ':
                     regressors = element
@@ -123,41 +121,41 @@ def estimate_froid():
             else:
                 continue
 
-    # Logisctic regression    
+    # Logisctic regression
     regressors = [
         'quantites_kwh',
-        #'revdecm',
-        #'revtot',
-        #'rev_disponible',
-        #'quantites_combustibles_liquides',
-        #'quantites_electricite_selon_compteur',
-        #'quantites_gaz_final',
+        # 'revdecm',
+        # 'revtot',
+        # 'rev_disponible',
+        # 'quantites_combustibles_liquides',
+        # 'quantites_electricite_selon_compteur',
+        # 'quantites_gaz_final',
         'isolation_murs',
-        #'isolation_fenetres',
-        #'isolation_toit',
+        # 'isolation_fenetres',
+        # 'isolation_toit',
         'majorite_double_vitrage',
         'niveau_de_vie',
-        #'brde_m2_rev_disponible',
-        #'tee_10_3_deciles_rev_disponible',
-        #'ouest_sud',
-        #'rural',
-        #'paris',
-        #'surfhab_d',
-        #'aides_logement',
-        #'electricite',
+        # 'brde_m2_rev_disponible',
+        # 'tee_10_3_deciles_rev_disponible',
+        # 'ouest_sud',
+        # 'rural',
+        # 'paris',
+        # 'surfhab_d',
+        # 'aides_logement',
+        # 'electricite',
         'agepr',
-        #'npers',
-        #'monoparental',
+        # 'npers',
+        # 'monoparental',
         'combustibles_liquides',
         'strate_0',
-        #'strate_1',
-        #'strate_2',
-        #'strate_3',
-        #'depenses_tot',
-        ]        
-        
+        # 'strate_1',
+        # 'strate_2',
+        # 'strate_3',
+        # 'depenses_tot',
+        ]
+
     regression_logit = smf.Logit(dataframe['froid_4_criteres'], dataframe[regressors]).fit()
-    
+
     return regression_ols, regression_logit
 
 
@@ -166,5 +164,5 @@ if __name__ == "__main__":
     regression_ols = estimations[0]
     regression_logit = estimations[1]
 
-    print regression_ols.summary()
-    print regression_logit.summary()
+    print(regression_ols.summary())
+    print(regression_logit.summary())

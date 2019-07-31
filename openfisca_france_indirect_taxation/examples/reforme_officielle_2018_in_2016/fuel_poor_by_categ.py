@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import general modules
-from __future__ import division
+
 
 import numpy as np
 import pandas as pd
@@ -16,20 +16,20 @@ from openfisca_france_indirect_taxation.examples.utils_example import brde, \
 from openfisca_france_indirect_taxation.examples.utils_example import \
     graph_builder_bar_percent, save_dataframe_to_graph, age_group, energy_modes
 
-    
+
 def number_fuel_poors_by_categ(df_reforme, group, variables_precarite):
 
     min_group = df_reforme[group].min()
     max_group = df_reforme[group].max()
-    elements_group = range(min_group, max_group+1)
+    elements_group = list(range(min_group, max_group + 1))
     df_to_plot = pd.DataFrame(index = elements_group, columns = variables_precarite)
-    
+
     for variable in variables_precarite:
         for i in elements_group:
             df = df_reforme.query('{0} == {1}'.format(group, i))
             df_to_plot[variable][i] = \
                 (df[variable] * df['pondmen']).sum() / df['pondmen'].sum()
-    
+
     #save_dataframe_to_graph(df_to_plot, 'Precarite/fuel_poor_by_{}.csv'.format(group))
     df_to_plot = df_to_plot.transpose()
     graph_builder_bar_percent(df_to_plot)
@@ -38,14 +38,14 @@ def number_fuel_poors_by_categ(df_reforme, group, variables_precarite):
 
 
 if __name__ == '__main__':
-    
+
     year = 2016
     data_year = 2011
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
     #elasticities = get_elasticities(data_year)
     elasticities = get_elasticities_aidsills(data_year, False)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-        
+
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
@@ -74,7 +74,6 @@ if __name__ == '__main__':
         'combustibles_liquides'
         ]
 
-
     df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
     df_reforme = age_group(df_reforme)
@@ -84,10 +83,10 @@ if __name__ == '__main__':
     df_reforme = tee_10_3(df_reforme, 'depenses_energies_logement', 'rev_disponible', 'logement')
     df_reforme = brde(df_reforme, 'depenses_carburants_corrigees', 'rev_disponible', 'transport')
     df_reforme = tee_10_3(df_reforme, 'depenses_carburants_corrigees', 'rev_disponible', 'transport')
-    
+
     df_reforme = precarite(df_reforme, 'brde_m2_logement_rev_disponible', 'tee_10_3_rev_disponible_logement', 'logement')
     df_reforme = precarite(df_reforme, 'brde_m2_transport_rev_disponible', 'tee_10_3_rev_disponible_transport', 'transport')
-    
+
     df_reforme['double_precarite'] = (
         (df_reforme['precarite_logement'] * df_reforme['precarite_transport'])
         )
@@ -98,7 +97,7 @@ if __name__ == '__main__':
 
     variables_precarite = ['brde_m2_logement_rev_disponible', 'tee_10_3_rev_disponible_logement',
         'brde_m2_transport_rev_disponible', 'tee_10_3_rev_disponible_transport', 'froid_4_criteres_3_deciles']
-    
+
     #variables_precarite = ['precarite_joint']
 
     df_to_plot = number_fuel_poors_by_categ(df_reforme, 'strate', variables_precarite)

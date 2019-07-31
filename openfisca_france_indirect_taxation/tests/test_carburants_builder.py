@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
-
 from openfisca_core.tools import assert_near
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
 

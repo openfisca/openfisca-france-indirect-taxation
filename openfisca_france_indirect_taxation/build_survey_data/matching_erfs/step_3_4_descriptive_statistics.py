@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import statsmodels.formula.api as smf
 import os
@@ -22,18 +21,18 @@ data = homogenize_definitions()
 data_erfs = data[0]
 data_bdf = data[1]
 
-#regression = smf.ols(formula = 'rev_disponible ~ \
+# regression = smf.ols(formula = 'rev_disponible ~ \
 #    ocde10',
 #    data = data_bdf).fit()
 #print regression.summary()
 
 data_erfs['position_rev_disponible'] = data_erfs['rev_disponible'].argsort().argsort()
-data_erfs['position_rev_disponible'] = data_erfs['position_rev_disponible'] / len(data_erfs) 
+data_erfs['position_rev_disponible'] = data_erfs['position_rev_disponible'] / len(data_erfs)
 
 data_erfs['position_revdecm'] = data_erfs['revdecm'].argsort().argsort()
-data_erfs['position_revdecm'] = data_erfs['position_revdecm'] / len(data_erfs) 
+data_erfs['position_revdecm'] = data_erfs['position_revdecm'] / len(data_erfs)
 
-print data_erfs[['position_rev_disponible'] + ['rev_disponible']]
+print(data_erfs[['position_rev_disponible'] + ['rev_disponible']])
 
 graph_builder_dot(data_erfs['position_revdecm'], data_erfs['position_rev_disponible'])
 graph_builder_dot(data_erfs['revdecm'], data_erfs['rev_disponible'])
@@ -41,10 +40,10 @@ graph_builder_dot(data_erfs['revdecm'], data_erfs['rev_disponible'])
 data_erfs['difference_position'] = (
     data_erfs['position_rev_disponible'] - data_erfs['position_revdecm']
     )
-print (
+print((
     len(data_erfs.query('difference_position > 0.1')) +
     len(data_erfs.query('difference_position < -0.1'))
-    ) / len(data_erfs)
+    ) / len(data_erfs))
 
 
 assets_directory = os.path.join(

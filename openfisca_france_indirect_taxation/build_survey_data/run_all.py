@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
-
 import logging
 import os
 import pkg_resources
@@ -86,7 +83,7 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
         depenses = depenses,
         )
 
-    for name, preprocessed_data_frame in preprocessed_data_frame_by_name.items():
+    for name, preprocessed_data_frame in list(preprocessed_data_frame_by_name.items()):
         assert preprocessed_data_frame.index.name == 'ident_men', \
             'Index is labelled {} instead of ident_men in data frame {} for year {}'.format(
                 preprocessed_data_frame.index.name, name, year_data)
@@ -95,7 +92,7 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
             name, preprocessed_data_frame.index.dtype)
 
     data_frame = pandas.concat(
-        preprocessed_data_frame_by_name.values(),
+        list(preprocessed_data_frame_by_name.values()),
         axis = 1,
         )
 
@@ -111,7 +108,7 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
     # 'ratio_loyer_impute',  'ratio_revenus' To be added
 
     if year_data == 2005:
-        data_frame['ident_men'] = range(0,len(data_frame))
+        data_frame['ident_men'] = list(range(0, len(data_frame)))
         data_frame['ident_men'] = data_frame['ident_men'] + 200500000
         data_frame = data_frame.set_index('ident_men')
 
@@ -145,7 +142,7 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
         data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
 
     # Créer un nouvel identifiant pour les ménages
-    data_frame['identifiant_menage'] = range(0,len(data_frame))
+    data_frame['identifiant_menage'] = list(range(0, len(data_frame)))
     data_frame['identifiant_menage'] = data_frame['identifiant_menage'] + (year_data * 100000)
 
     # Remove duplicated colums causing bug with HDFStore

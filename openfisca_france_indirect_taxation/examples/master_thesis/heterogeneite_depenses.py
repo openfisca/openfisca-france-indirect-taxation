@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
 
 import statsmodels.formula.api as smf
 
@@ -58,10 +57,10 @@ reg_transports = smf.ols(formula = 'poste_coicop_722 ~ \
     rev_disp_loyerimput + rev_disp_loyerimput_2 + ocde10 + strate_0 + strate_1 + strate_3 + strate_4 + age_group_pr + \
     age_group_pr_2 + alone + occupe_both + gaz + fioul + vag_23 + vag_24 + vag_25 + vag_26 + vag_27',
     data = menages).fit()
-print reg_transports.summary()
+print(reg_transports.summary())
 
 reg_housing = smf.ols(formula = 'depenses_energies_logement ~ \
     rev_disp_loyerimput + rev_disp_loyerimput_2 + ocde10 + strate_0 + strate_1 + strate_3 + strate_4 + age_group_pr + \
     age_group_pr_2 + alone + occupe_both + gaz + fioul + vag_23 + vag_24 + vag_25 + vag_26 + vag_27',
     data = menages).fit()
-print reg_housing.summary()
+print(reg_housing.summary())

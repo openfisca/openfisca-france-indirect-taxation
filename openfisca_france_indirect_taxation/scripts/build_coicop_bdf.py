@@ -104,10 +104,10 @@ def test_coicop_to_legislation(data_frame, adjust_coicop, year):
         selection = data_frame.loc[data_frame.code_coicop == code_coicop].copy()
         products = selection.label.unique()
         try:
-            print(code_coicop, products)
-            print(
+            print((code_coicop, products))
+            print((
                 get_categorie_fiscale(adjust_coicop.get(code_coicop, code_coicop), year = year)
-                )
+                ))
         except AssertionError:
             print('error')
             error = dict(
@@ -434,8 +434,8 @@ adjusted_coicop_by_original = {
 def adjust_coicop(data_frame):
     non_overlapping_adjust_coicop = dict()
     remaining_adjust_coicop = dict()
-    for key, value in adjusted_coicop_by_original.items():
-        if value not in adjusted_coicop_by_original.keys():
+    for key, value in list(adjusted_coicop_by_original.items()):
+        if value not in list(adjusted_coicop_by_original.keys()):
             non_overlapping_adjust_coicop[key] = value
         else:
             remaining_adjust_coicop[key] = value

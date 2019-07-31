@@ -10,18 +10,18 @@ from openfisca_france_indirect_taxation.examples.utils_example import graph_buil
     graph_builder_carburants_no_color
 
 # Identification de la série des recettes de la TICPE
-recettes_ticpe = a6_b[a6_b['categorie'] == u'TICPE ( TIPP avant 2010) (1)']
+recettes_ticpe = a6_b[a6_b['categorie'] == 'TICPE ( TIPP avant 2010) (1)']
 recettes_ticpe = recettes_ticpe[recettes_ticpe['index'] == 'Total']
 del recettes_ticpe['index']
 
 # Identification des séries des quantités de carburants consommées
-g_3a.loc[g_3a['index'] == u'Voitures particulières', 'index'] = 'to_be_used'
-g_3a.loc[g_3a['index'] == u'Total VP françaises', 'index'] = 'to_be_used'
+g_3a.loc[g_3a['index'] == 'Voitures particulières', 'index'] = 'to_be_used'
+g_3a.loc[g_3a['index'] == 'Total VP françaises', 'index'] = 'to_be_used'
 quantite_conso_vp = g_3a[g_3a['index'] == 'to_be_used']
 del quantite_conso_vp['index']
 
 # Identification des séries décrivant la taille et composition du parc automobile
-taille_parc_vp = g2_1[g2_1['categorie'] == u'Voitures particulières']
+taille_parc_vp = g2_1[g2_1['categorie'] == 'Voitures particulières']
 del taille_parc_vp['categorie']
 
 # Redefinition des index et transposition des dataframes
@@ -33,7 +33,7 @@ quantite_conso_vp.set_index(['categorie'], inplace = True)
 quantite_conso_vp = quantite_conso_vp.transpose()
 
 # Changement de noms de variables pour être plus explicites
-recettes_ticpe.rename(columns = {u'TICPE ( TIPP avant 2010) (1)': 'Total recettes TICPE'}, inplace = True)
+recettes_ticpe.rename(columns = {'TICPE ( TIPP avant 2010) (1)': 'Total recettes TICPE'}, inplace = True)
 
 taille_parc_vp.rename(columns = {'Total': 'parc vp total', 'dont Diesel': 'dont diesel'}, inplace = True)
 

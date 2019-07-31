@@ -7,7 +7,7 @@
 # ....
 
 # Import general modules
-from __future__ import division
+
 
 import pandas as pd
 
@@ -69,11 +69,11 @@ def net_transfers_by_sub_group(df_reforme, group):
 
     min_group = df_reforme[group].min()
     max_group = df_reforme[group].max()
-    elements_group = range(min_group, max_group+1)
-    deciles = range(1, 11)
+    elements_group = list(range(min_group, max_group + 1))
+    deciles = list(range(1, 11))
     df_to_plot = pd.DataFrame(index = deciles, columns = elements_group)
 
-    for element in range(min_group, max_group+1):
+    for element in range(min_group, max_group + 1):
         for decile in deciles:
             df = df_reforme.query('{0} == {1}'.format(group, element)).query('niveau_vie_decile == {}'.format(decile))
             df_to_plot[element][decile] = \
@@ -86,7 +86,7 @@ def net_transfers_by_sub_group(df_reforme, group):
 
 
 if __name__ == "__main__":
-    
+
     df_to_plot_strate = net_transfers_by_sub_group(df_reforme, 'strate')
     df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'combustibles_liquides')
     df_to_plot_gaz_ville = net_transfers_by_sub_group(df_reforme, 'gaz_ville')
@@ -105,5 +105,3 @@ if __name__ == "__main__":
         )
 
     df_to_plot = net_transfers_by_sub_group(df_reforme, 'household_size')
-
-

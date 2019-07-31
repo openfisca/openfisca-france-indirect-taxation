@@ -82,8 +82,7 @@ limited_df_indice_prix_produit['numero_categ'] = limited_df_indice_prix_produit[
 for i in range(1, 10):
     limited_df_part_bien_categ = limited_df_indice_prix_produit[limited_df_indice_prix_produit['numero_categ'] == i]
     limited_df_part_bien_categ = limited_df_part_bien_categ.groupby('ident_men').sum()
-    assert (limited_df_part_bien_categ['part_bien_categ'] == 1).any()\
-        [(limited_df_part_bien_categ['part_bien_categ'] == 1).any()], \
+    assert (limited_df_part_bien_categ['part_bien_categ'] == 1).any()[(limited_df_part_bien_categ['part_bien_categ'] == 1).any()], \
         'part_bien_categ does not sum up to 1'
 
 

@@ -4,7 +4,7 @@
 # agrégées de Budget des Familles après calage, avec celles de la comptabilité nationale.
 
 # Import de modules généraux
-from __future__ import division
+
 
 import pkg_resources
 import os

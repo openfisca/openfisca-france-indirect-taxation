@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 
 import pandas as pd
 import numpy as np
@@ -52,8 +50,7 @@ for year in [2000, 2005, 2011]:
         'poste_09_7_1', 'poste_09_7_2', 'poste_10_1', 'poste_10_2', 'poste_10_3', 'poste_10_4', 'poste_10_5_1',
         'poste_10_5_2', 'poste_12_1_3_3_3', 'poste_12_3_1_1_1', 'poste_12_5_1_1_1', 'poste_12_5_2_1_1',
         'poste_12_5_3_1_1', 'poste_12_5_4_1_1', 'poste_12_5_5_1_1', 'poste_12_7_1_2_1'
-        ]
-
+                      ]
 
     for bien in biens_durables:
         try:
@@ -85,7 +82,7 @@ for year in [2000, 2005, 2011]:
         aggregates_data_frame['depenses_tot'] - aggregates_data_frame['depenses_carbu'] -
         aggregates_data_frame['depenses_logem'])
 
-    ## Construction de groupes de préférences
+    # Construction de groupes de préférences
     aggregates_data_frame['zeat'] = aggregates_data_frame['zeat'].astype(str)
     aggregates_data_frame['strate'] = aggregates_data_frame['strate'].astype(str)
     aggregates_data_frame['ocde10'] = aggregates_data_frame['ocde10'].astype(str)
@@ -114,13 +111,13 @@ for year in [2000, 2005, 2011]:
 
     # Test df_indice_prix_produit
     liste_df = df['indice_prix_produit'].values.tolist()
-    liste_df_keep = dict.fromkeys(liste_df).keys()
+    liste_df_keep = list(dict.fromkeys(liste_df).keys())
 
     liste_df_i_p_p = df_indice_prix_produit['indice_prix_produit'].values.tolist()
-    liste_df_i_p_p_keep = dict.fromkeys(liste_df_i_p_p).keys()
-    
+    liste_df_i_p_p_keep = list(dict.fromkeys(liste_df_i_p_p).keys())
+
     diff_df = [item for item in liste_df_keep if item not in liste_df_i_p_p_keep]
-    
+
     for element in diff_df:
         assert int(element[6:8]) > 12
 
@@ -142,7 +139,7 @@ for year in [2000, 2005, 2011]:
     df_depenses_prix[['type_bien', 'identifiant_menage']] = df_depenses_prix[['type_bien', 'identifiant_menage']].astype(str)
     df_depenses_prix['id'] = df_depenses_prix['type_bien'] + '_' + df_depenses_prix['identifiant_menage']
 
-    #data_conso = aggregates_data_frame[produits + ['vag', 'identifiant_menage', 'depenses_autre', 'depenses_carbu',
+    # data_conso = aggregates_data_frame[produits + ['vag', 'identifiant_menage', 'depenses_autre', 'depenses_carbu',
     #    'depenses_logem']].copy()
     data_conso_group['identifiant_menage'] = data_conso_group['identifiant_menage'].astype(str)
     df_depenses_prix = pd.merge(
@@ -233,7 +230,6 @@ for year in [2000, 2005, 2011]:
     price_carbu = price_carbu[['vag', 'prix']]
     price_carbu['prix'] = price_carbu['prix'].astype(float)
 
-
     dataframe = pd.merge(dataframe, price_carbu, on = 'vag')
     del price_carbu
     dataframe.loc[dataframe['prix_carbu'] == 0, 'prix_carbu'] = dataframe['prix']
@@ -269,13 +265,13 @@ for year in [2000, 2005, 2011]:
     dataframe = add_stalog_dummy(dataframe)
     dataframe = add_vag_dummy(dataframe)
     dataframe = add_niveau_vie_decile(dataframe)
-    
+
     data_frame_for_reg = dataframe.rename(columns = {'part_carbu': 'w1', 'part_logem': 'w2',
         'part_autre': 'w3', 'prix_carbu': 'p1', 'prix_logem': 'p2', 'prix_autre': 'p3'})
 
     data_frame_all_years = pd.concat([data_frame_all_years, data_frame_for_reg])
     data_frame_all_years.fillna(0, inplace = True)
-    
+
     data_frame_all_years['year_2000'] = 1 * (data_frame_all_years['year'] == 2000)
     data_frame_all_years['year_2005'] = 1 * (data_frame_all_years['year'] == 2005)
 

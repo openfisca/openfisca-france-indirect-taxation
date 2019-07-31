@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Import de modules généraux
-from __future__ import division
+
 
 import pandas
 import seaborn
@@ -42,39 +42,39 @@ if __name__ == '__main__':
 
         taxe_indirectes['TVA'] = taxe_indirectes['tva_total']
         taxe_indirectes['TICPE'] = taxe_indirectes['ticpe_totale']
-        taxe_indirectes[u'Taxes alcools'] = (
+        taxe_indirectes['Taxes alcools'] = (
             taxe_indirectes['vin_droit_d_accise'] +
             taxe_indirectes['biere_droit_d_accise'] +
             taxe_indirectes['alcools_forts_droit_d_accise']
             ).copy()
-        taxe_indirectes[u'Taxes assurances'] = (
+        taxe_indirectes['Taxes assurances'] = (
             taxe_indirectes['assurance_sante_taxe'] +
             taxe_indirectes['assurance_transport_taxe'] +
             taxe_indirectes['autres_assurances_taxe']
             ).copy()
-        taxe_indirectes[u'Taxes tabacs'] = (
+        taxe_indirectes['Taxes tabacs'] = (
             taxe_indirectes['cigarette_droit_d_accise'] +
             taxe_indirectes['cigares_droit_d_accise'] +
             taxe_indirectes['tabac_a_rouler_droit_d_accise']
             ).copy()
 
         taxe_indirectes = taxe_indirectes.rename(columns = {
-            'rev_disp_loyerimput': u'revenu disponible',
-            'taxes_indirectes_total': u'toutes les taxes indirectes'})
-        for revenu in [u'revenu disponible']: #[u'revenu disponible', u'depenses totales', u'toutes les taxes indirectes']
+            'rev_disp_loyerimput': 'revenu disponible',
+            'taxes_indirectes_total': 'toutes les taxes indirectes'})
+        for revenu in ['revenu disponible']:  # [u'revenu disponible', u'depenses totales', u'toutes les taxes indirectes']
             list_part_taxes = []
-            for taxe in ['TVA', 'TICPE', u'Taxes alcools', u'Taxes assurances', u'Taxes tabacs']:
-                taxe_indirectes[u'part ' + taxe] = (
+            for taxe in ['TVA', 'TICPE', 'Taxes alcools', 'Taxes assurances', 'Taxes tabacs']:
+                taxe_indirectes['part ' + taxe] = (
                     taxe_indirectes[taxe] / taxe_indirectes[revenu]
                     )
                 'list_part_taxes_{}'.format(taxe)
-                list_part_taxes.append(u'part ' + taxe)
+                list_part_taxes.append('part ' + taxe)
 
             df_to_graph = taxe_indirectes[list_part_taxes]
 
-            print('''Contributions aux différentes taxes indirectes en part de {0},
-                par décile de revenu en {1}'''.format(revenu, year))
+            print(('''Contributions aux différentes taxes indirectes en part de {0},
+                par décile de revenu en {1}'''.format(revenu, year)))
             graph_builder_bar(df_to_graph)
-            #save_dataframe_to_graph(
+            # save_dataframe_to_graph(
             #    df_to_graph, 'Taxes_indirectes/effort_rate_indirect_taxation_on_{0}_by_{1}.csv'.format(revenu, category)
             #    )

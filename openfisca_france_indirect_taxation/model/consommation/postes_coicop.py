@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
 import logging
 
 from biryani.strings import slugify
@@ -22,13 +20,13 @@ def generate_postes_variables(tax_benefit_system):
     codes_bdf = [element for element in codes_coicop_data_frame.code_bdf.unique()]
     for code_bdf in codes_bdf:
         label = codes_coicop_data_frame.query('code_bdf == @code_bdf')['label'].drop_duplicates().tolist()
-        assert len(label) == 1, u"Too many labels for {}: {}".format(code_bdf, label)
+        assert len(label) == 1, "Too many labels for {}: {}".format(code_bdf, label)
         label = label[0]
         code_coicop = codes_coicop_data_frame.query('code_bdf == @code_bdf')['code_coicop'].drop_duplicates().tolist()
-        assert len(code_coicop) == 1, u"Too many code_coicop for {}: {}".format(code_bdf, code_coicop)
+        assert len(code_coicop) == 1, "Too many code_coicop for {}: {}".format(code_bdf, code_coicop)
         code_coicop = code_coicop[0]
-        class_name = u"poste_{}".format(slugify(code_coicop, separator = u'_'))
-        log.info(u'Creating variable {} with label {}'.format(class_name, label))
+        class_name = "poste_{}".format(slugify(code_coicop, separator = '_'))
+        log.info('Creating variable {} with label {}'.format(class_name, label))
         # Trick to create a class with a dynamic name.
         type(class_name, (YearlyVariable,), dict(
             value_type = float,
@@ -76,13 +74,13 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
                         year_stop = year_stop
                         )
 
-                    dated_function_name = u"formula_{year_start}".format(
+                    dated_function_name = "formula_{year_start}".format(
                         year_start = year_start, year_stop = year_stop)
-                    log.debug(u'Creating fiscal category {} ({}-{}) with the following products {}'.format(
+                    log.debug('Creating fiscal category {} ({}-{}) with the following products {}'.format(
                         categorie_fiscale, year_start, year_stop, postes_coicop))
 
                     if poste_coicop not in functions_by_name_by_poste:
-                            functions_by_name_by_poste[poste_coicop] = dict()
+                        functions_by_name_by_poste[poste_coicop] = dict()
                     functions_by_name_by_poste[poste_coicop][dated_function_name] = dated_func
 
                 year_start = year
@@ -92,13 +90,13 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
 
     assert set(functions_by_name_by_poste.keys()) == postes_coicop_all
 
-    for poste, functions_by_name in functions_by_name_by_poste.items():
-        class_name = u'depenses_ht_poste_{}'.format(slugify(poste, separator = u'_'))
+    for poste, functions_by_name in list(functions_by_name_by_poste.items()):
+        class_name = 'depenses_ht_poste_{}'.format(slugify(poste, separator = '_'))
         # if Reform is None:
         definitions_by_name = dict(
             value_type = float,
             entity = Menage,
-            label = u"Dépenses hors taxe du poste_{0}".format(poste),
+            label = "Dépenses hors taxe du poste_{0}".format(poste),
             )
         definitions_by_name.update(functions_by_name)
         tax_benefit_system.add_variable(
@@ -114,9 +112,9 @@ def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = 
         codes_coicop = codes_coicop_data_frame.loc[
             codes_coicop_data_frame.code_coicop.str.startswith(num_prefix)
             ]['code_coicop'].drop_duplicates().tolist()
-        class_name = u"poste_agrege_{}".format(num_prefix)
-        label = u"Poste agrégé {}".format(num_prefix)
-        log.info(u'Creating variable {} with label {} using {}'.format(class_name, label, codes_coicop))
+        class_name = "poste_agrege_{}".format(num_prefix)
+        label = "Poste agrégé {}".format(num_prefix)
+        log.info('Creating variable {} with label {} using {}'.format(class_name, label, codes_coicop))
 
         # Trick to create a class with a dynamic name.
         dated_func = depenses_postes_agreges_function_creator(

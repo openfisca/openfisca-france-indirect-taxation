@@ -72,7 +72,7 @@ def tax_from_expense_including_tax(expense = None, tax_rate = None):
 def insert_tva(categories_fiscales):
     categories_fiscales = categories_fiscales.copy()
     extracts = pd.DataFrame()
-    for categorie_primaire, tva in tva_by_categorie_primaire.items():
+    for categorie_primaire, tva in list(tva_by_categorie_primaire.items()):
         extract = categories_fiscales.query('categorie_fiscale == @categorie_primaire').copy()
         extract['categorie_fiscale'] = tva
         extracts = pd.concat([extracts, extract], ignore_index=True)
@@ -117,7 +117,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
         if reform_key is None:
             def func(entity, period_arg):
                 return sum(entity(
-                    'poste_' + slugify(poste, separator = u'_'), period_arg) for poste in postes_coicop
+                    'poste_' + slugify(poste, separator = '_'), period_arg) for poste in postes_coicop
                     )
             func.__name__ = "formula_{year_start}".format(
                 year_start = year_start, year_stop = year_stop)
@@ -148,7 +148,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                         ],
                     })
                 poste_agrege = sum(entity(
-                    'depenses_ht_poste_' + slugify(poste, separator = u'_'), period_arg
+                    'depenses_ht_poste_' + slugify(poste, separator = '_'), period_arg
                     ) * (
                     1 + taux_by_categorie_fiscale.get(
                         categorie_fiscale_by_poste[poste],
@@ -173,7 +173,7 @@ def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, yea
     if len(postes_coicop) != 0:
         def func(entity, period_arg):
             return sum(entity(
-                'depenses_ht_poste_' + slugify(poste, separator = u'_'), period_arg) for poste in postes_coicop
+                'depenses_ht_poste_' + slugify(poste, separator = '_'), period_arg) for poste in postes_coicop
                 )
 
         func.__name__ = "formula_{year_start}".format(year_start = year_start, year_stop = year_stop)
@@ -202,7 +202,7 @@ def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, 
         else:
             taux = 0
 
-        return entity('poste_' + slugify(poste_coicop, separator = u'_'), period_arg) / (1 + taux)
+        return entity('poste_' + slugify(poste_coicop, separator = '_'), period_arg) / (1 + taux)
 
     func.__name__ = "formula_{year_start}".format(year_start = year_start, year_stop = year_stop)
     return func

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
 import pandas
 from pandas import DataFrame
 import matplotlib.pyplot as plt
@@ -115,8 +113,8 @@ def brde(data, depenses, revenu, logement):
         )
     data['bas_revenu'] = (
         1 * (
-        (data[revenu] / data['ocde10'])
-        < (0.6 * mediane_revenu_uc))
+            (data[revenu] / data['ocde10'])
+            < (0.6 * mediane_revenu_uc))
         )
     if logement == 'logement':
         data['depenses_bis'] = data[depenses] / data['surfhab_d']

@@ -6,7 +6,6 @@
 # the increase in taxes he faced. These amounts do not take into account VAT.
 
 # Import general modules
-from __future__ import division
 
 
 # Import modules specific to OpenFisca
@@ -30,7 +29,7 @@ simulated_variables = [
     'poste_11_1_2_1_1',
     'poste_11_1_3_1',
     'poste_11_1_3_2',
-    #'poste_11_2_1_1_1',
+    # 'poste_11_2_1_1_1',
     'poste_agrege_11',
     'rev_disp_loyerimput',
     'depenses_tot',
@@ -47,7 +46,7 @@ survey_scenario = SurveyScenario.create(
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-for category in ['niveau_vie_decile']: #['niveau_vie_decile', 'age_group_pr', 'strate']:
+for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
 
     df['poste_agrege_restauration'] = (

@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 
 from openfisca_core.reforms import Reform
 
@@ -9,7 +7,7 @@ from openfisca_france_indirect_taxation.model.consommation.categories_fiscales i
 
 
 class reforme_alimentation(Reform):
-    name = u'Allocations familiales imposables'
+    name = 'Allocations familiales imposables'
 
     def apply(self):
         from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import categories_fiscales_data_frame

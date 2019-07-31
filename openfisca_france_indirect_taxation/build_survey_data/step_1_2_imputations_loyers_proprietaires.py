@@ -24,13 +24,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from __future__ import division
-
-
 import os
 
 
-from ConfigParser import SafeConfigParser
+from configparser import SafeConfigParser
 import logging
 import pandas
 
@@ -100,7 +97,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
             (imput00.surfhab > 100) +
             (imput00.surfhab > 150)
             )
-        assert imput00.catsurf.isin(range(1, 9)).all()
+        assert imput00.catsurf.isin(list(range(1, 9))).all()
         # TODO: vérifier ce qe l'on fait notamment regarder la vleur catsurf = 2 ommise dans le code stata
         imput00.maison = 1 - ((imput00.cc == 5) & (imput00.catsurf == 1) & (imput00.maison_appart == 1))
         imput00.maison = 1 - ((imput00.cc == 5) & (imput00.catsurf == 3) & (imput00.maison_appart == 1))

@@ -5,7 +5,7 @@
 # The aime will then be to compute the effect of the reform on the likelihood of being cold
 
 # Import general modules
-from __future__ import division
+
 
 import statsmodels.formula.api as smf
 
@@ -15,10 +15,11 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
 
+
 def estimate_froid():
     data_enl = create_niveau_vie_quantiles()[0]
 
-    variables_use_baseline =[
+    variables_use_baseline = [
         'pondmen',
         'quantites_combustibles_liquides',
         'quantites_electricite_selon_compteur',
@@ -38,7 +39,7 @@ def estimate_froid():
         year = year,
         data_year = data_year
         )
-    df_use_baseline =survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
+    df_use_baseline = survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
 
     data_enl = data_enl.query('niveau_vie_decile < 4')
     data_enl['froid_4_criteres_3_deciles'] = (
@@ -79,8 +80,8 @@ def estimate_froid():
         'isolation_fenetres',
         'isolation_toit',
         'majorite_double_vitrage',
-        #'brde_m2_rev_disponible',
-        #'tee_10_3_deciles_rev_disponible',
+        # 'brde_m2_rev_disponible',
+        # 'tee_10_3_deciles_rev_disponible',
         'ouest_sud',
         'rural',
         'paris',
@@ -89,8 +90,8 @@ def estimate_froid():
         'electricite',
         'agepr',
         'ocde10',
-        #'npers',
-        #'monoparental',
+        # 'npers',
+        # 'monoparental',
         ]
 
     regression_logit = smf.Logit(data_enl['froid_4_criteres_3_deciles'], data_enl[regressors]).fit()
@@ -103,4 +104,4 @@ if __name__ == "__main__":
     regression_ols = estimations[0]
     regression_logit = estimations[1]
 
-    print regression_logit.summary()
+    print(regression_logit.summary())

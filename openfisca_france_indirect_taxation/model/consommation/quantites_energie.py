@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 
 import numpy
 
-from openfisca_france_indirect_taxation.model.base import * # noqa analysis:ignore
+from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
 class quantites_combustibles_liquides(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantité de combustibles solides (en litres) consommée par les ménages"
+    label = "Quantité de combustibles solides (en litres) consommée par les ménages"
 
     def formula(menage, period, parameters):
         depenses_combustibles_liquides = menage('depenses_combustibles_liquides', period)
@@ -26,7 +24,7 @@ class quantites_combustibles_liquides(YearlyVariable):
 class quantites_diesel(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités de diesel consommées par les ménages"
+    label = "Quantités de diesel consommées par les ménages"
 
     def formula(menage, period, parameters):
         depenses_diesel = menage('depenses_diesel_corrigees', period)
@@ -40,7 +38,7 @@ class quantites_diesel(YearlyVariable):
 class quantites_electricite_3kva(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 3 kva"
+    label = "Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 3 kva"
 
     def formula(menage, period, parameters):
         tarif_fixe_elect = \
@@ -58,7 +56,7 @@ class quantites_electricite_3kva(YearlyVariable):
 class quantites_electricite_6kva(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 6 kva"
+    label = "Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 6 kva"
 
     def formula(menage, period, parameters):
         tarif_fixe_elect = \
@@ -76,7 +74,7 @@ class quantites_electricite_6kva(YearlyVariable):
 class quantites_electricite_9kva(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 9 kva"
+    label = "Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 9 kva"
 
     def formula(menage, period, parameters):
         tarif_fixe_elect = \
@@ -94,7 +92,7 @@ class quantites_electricite_9kva(YearlyVariable):
 class quantites_electricite_12kva(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 12 kva"
+    label = "Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 12 kva"
 
     def formula(menage, period, parameters):
         tarif_fixe_elect = \
@@ -112,7 +110,7 @@ class quantites_electricite_12kva(YearlyVariable):
 class quantites_electricite_15kva(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 15 kva"
+    label = "Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 15 kva"
 
     def formula(menage, period, parameters):
         tarif_fixe_elect = \
@@ -130,7 +128,7 @@ class quantites_electricite_15kva(YearlyVariable):
 class quantites_electricite_18kva(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 18 kva"
+    label = "Quantite d'électricité (en kWh) consommée par les ménages si leur compteur est de 18 kva"
 
     def formula(menage, period, parameters):
         tarif_fixe_elect = \
@@ -147,7 +145,7 @@ class quantites_electricite_18kva(YearlyVariable):
 class quantites_essence(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités d'essence consommées par les ménages"
+    label = "Quantités d'essence consommées par les ménages"
 
     def formula_1990(menage, period):
         quantites_sp95 = menage('quantites_sp95', period)
@@ -174,7 +172,7 @@ class quantites_essence(YearlyVariable):
 class quantites_gaz_contrat_base(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat de base"
+    label = "Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat de base"
 
     def formula(menage, period, parameters):
         tarif_fixe_gaz = \
@@ -191,7 +189,7 @@ class quantites_gaz_contrat_base(YearlyVariable):
 class quantites_gaz_contrat_b0(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat b0"
+    label = "Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat b0"
 
     def formula(menage, period, parameters):
         tarif_fixe_gaz = \
@@ -208,7 +206,7 @@ class quantites_gaz_contrat_b0(YearlyVariable):
 class quantites_gaz_contrat_b1(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat b1"
+    label = "Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat b1"
 
     def formula(menage, period, parameters):
         tarif_fixe_gaz = \
@@ -225,7 +223,7 @@ class quantites_gaz_contrat_b1(YearlyVariable):
 class quantites_gaz_contrat_b2i(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat b2i"
+    label = "Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au contrat b2i"
 
     def formula(menage, period, parameters):
         tarif_fixe_gaz = \
@@ -242,7 +240,7 @@ class quantites_gaz_contrat_b2i(YearlyVariable):
 class quantites_gaz_contrat_optimal(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au meilleur contrat"
+    label = "Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au meilleur contrat"
 
     def formula(menage, period):
         quantite_base = menage('quantites_gaz_contrat_base', period)
@@ -260,7 +258,7 @@ class quantites_gaz_contrat_optimal(YearlyVariable):
 class quantites_gaz_final(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au meilleur contrat"
+    label = "Quantité de gaz (en kWh) consommée par les ménages s'ils ont souscrit au meilleur contrat"
 
     def formula(menage, period):
         quantites_gaz_contrat_optimal = menage('quantites_gaz_contrat_optimal', period)
@@ -277,7 +275,7 @@ class quantites_gaz_final(YearlyVariable):
 class quantites_electricite_selon_compteur(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantité d'électricité (en kWh) consommée par les ménages d'après le compteur imputé"
+    label = "Quantité d'électricité (en kWh) consommée par les ménages d'après le compteur imputé"
 
     def formula(menage, period):
         depenses_electricite_variables = menage('depenses_electricite_variables', period)
@@ -293,26 +291,26 @@ class quantites_electricite_selon_compteur(YearlyVariable):
 class quantites_gaz_liquefie(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantité de gaz liquefie (en kWh) consommée par les ménages d'après SOeS Phébus 2013"
+    label = "Quantité de gaz liquefie (en kWh) consommée par les ménages d'après SOeS Phébus 2013"
 
     def formula(menage, period):
         depenses_gaz_liquefie = menage('depenses_gaz_liquefie', period)
         pondmen = menage('pondmen', period)
 
         population = numpy.sum(pondmen)
-        total_gpl_phebus = population * 0.19 # quantité annuelle moyenne consommée par les ménages
+        total_gpl_phebus = population * 0.19  # quantité annuelle moyenne consommée par les ménages
         # en MWh d'après la conversion des tep donnés par SOeS Phébus
         total_gpl_bdf = numpy.sum(depenses_gaz_liquefie * pondmen)
 
         quantites_gaz_liquefie = depenses_gaz_liquefie * total_gpl_phebus / total_gpl_bdf
 
-        return quantites_gaz_liquefie * 1000 # en KWh
+        return quantites_gaz_liquefie * 1000  # en KWh
 
 
 class quantites_sp_e10(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités consommées de sans plomb e10 par les ménages"
+    label = "Quantités consommées de sans plomb e10 par les ménages"
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence_corrigees', period)
@@ -327,7 +325,7 @@ class quantites_sp_e10(YearlyVariable):
 class quantites_sp95(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités consommées de sans plomb 95 par les ménages"
+    label = "Quantités consommées de sans plomb 95 par les ménages"
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence_corrigees', period)
@@ -342,7 +340,7 @@ class quantites_sp95(YearlyVariable):
 class quantites_sp98(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités consommées de sans plomb 98 par les ménages"
+    label = "Quantités consommées de sans plomb 98 par les ménages"
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence_corrigees', period)
@@ -357,7 +355,7 @@ class quantites_sp98(YearlyVariable):
 class quantites_super_plombe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = u"Quantités consommées de super plombé par les ménages"
+    label = "Quantités consommées de super plombé par les ménages"
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence_corrigees', period)

@@ -38,36 +38,36 @@ for dependent_variable in ['froid', 'froid_cout', 'froid_isolation']:
             variables_kept = variables_kept + [variable_to_include]
         for variable in new_stock_variables:
             variables = variables_kept + [variable]
-            
+
             regressors = ' '
             for element in variables:
                 if regressors == ' ':
                     regressors = element
                 else:
                     regressors = regressors + ' + {}'.format(element)
-            
+
             regression = smf.ols(formula = '{} ~ \
                 {}'.format(dependent_variable, regressors),
                 data = data_enl).fit()
-            
+
             rsquared_adj = regression.rsquared_adj
             max_rsquared_adj = max(max_rsquared_adj, rsquared_adj)
             if rsquared_adj == max_rsquared_adj:
                 variable_to_include = variable
             else:
                 continue
-    
+
     else:
-        if dependent_variable == 'froid':      
+        if dependent_variable == 'froid':
             regression_froid = regression.summary()
-        if dependent_variable == 'froid_cout':      
+        if dependent_variable == 'froid_cout':
             regression_froid_cout = regression.summary()
         else:
             regression_froid_isolation = regression.summary()
 
 
-print regression_froid
-print regression_froid_cout
+print(regression_froid)
+print(regression_froid_cout)
 #print regression_froid_isolation
 
 latex = regression_froid.as_latex()
