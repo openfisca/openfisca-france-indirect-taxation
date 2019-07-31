@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
-from openfisca_core.reforms import Reform, update_legislation
 import numpy
+
+from openfisca_core.reforms import Reform, update_legislation
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
@@ -300,7 +301,6 @@ class taxe_carbone(Reform):
     class diesel_ticpe(YearlyVariable):
         label = "Calcul du montant de TICPE sur le diesel après réforme"
 
-
         def formula(self, simulation, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
@@ -354,7 +354,6 @@ class taxe_carbone(Reform):
     class emissions_CO2_energies_totales(YearlyVariable):
         label = "Emissions de CO2 des ménages via leur conso d'énergies après taxe carbone, en kg de CO2"
 
-
         def formula(self, simulation, period):
             emissions_carburants_ajustees = menage('emissions_CO2_carburants', period)
             emissions_electricite_ajustees = menage('emissions_CO2_electricite', period)
@@ -371,7 +370,6 @@ class taxe_carbone(Reform):
     class emissions_CO2_electricite(YearlyVariable):
         label = "Emissions de CO2 des ménages via leur consommation d'électricité après réforme, en kg de CO2"
 
-
         def formula(self, simulation, period):
             quantites_electricite_ajustees = menage('quantites_electricite_selon_compteur_ajustees_taxe_carbone', period)
             emissions_eletricite = \
@@ -383,7 +381,6 @@ class taxe_carbone(Reform):
     class emissions_CO2_combustibles_liquides(YearlyVariable):
         label = "Emissions de CO2 des ménages via leur consommation de fioul après réforme, en kg de CO2"
 
-
         def formula(self, simulation, period):
             quantites_combustibles_liquides_ajustees = menage('quantites_combustibles_liquides', period)
             emissions_combustibles_liquides = \
@@ -394,7 +391,6 @@ class taxe_carbone(Reform):
 
     class emissions_CO2_gaz_ville(YearlyVariable):
         label = "Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2"
-
 
         def formula(self, simulation, period):
             quantites_gaz_ajustees = menage('quantites_gaz_final_ajustees_taxe_carbone', period)
@@ -432,7 +428,6 @@ class taxe_carbone(Reform):
     class combustibles_liquides_ticpe(YearlyVariable):
         label = "Calcul du montant de TICPE sur le fioul domestique après réforme - taxe carbone"
 
-
         def formula(self, simulation, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
@@ -461,7 +456,6 @@ class taxe_carbone(Reform):
     class quantites_diesel(YearlyVariable):
         label = "Quantités de diesel consommées après la réforme - taxe carbone "
 
-
         def formula(self, simulation, period):
             depenses_diesel_ajustees_taxe_carbone = \
                 menage('depenses_diesel_corrigees_ajustees_taxe_carbone', period)
@@ -473,7 +467,6 @@ class taxe_carbone(Reform):
 
     class quantites_combustibles_liquides(YearlyVariable):
         label = "Quantités de fioul domestique consommées après la réforme - taxe carbone "
-
 
         def formula(self, simulation, period):
             depenses_combustibles_liquides_ajustees_taxe_carbone = \
@@ -530,7 +523,6 @@ class taxe_carbone(Reform):
     class quantites_sp_e10(YearlyVariable):
         label = "Quantités consommées de sans plomb e10 par les ménages après réforme - taxe carbone"
 
-
         def formula(self, simulation, period):
             depenses_essence_ajustees_taxe_carbone = menage('depenses_essence_corrigees_ajustees_taxe_carbone', period)
             part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
@@ -543,7 +535,6 @@ class taxe_carbone(Reform):
 
     class quantites_sp95(YearlyVariable):
         label = "Quantités consommées de sans plomb 95 par les ménages après réforme"
-
 
         def formula(self, simulation, period):
             depenses_essence_ajustees_taxe_carbone = menage('depenses_essence_corrigees_ajustees_taxe_carbone', period)
@@ -558,7 +549,6 @@ class taxe_carbone(Reform):
     class quantites_sp98(YearlyVariable):
         label = "Quantités consommées de sans plomb 98 par les ménages"
 
-
         def formula(self, simulation, period):
             depenses_essence_ajustees_taxe_carbone = menage('depenses_essence_corrigees_ajustees_taxe_carbone', period)
             part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
@@ -571,7 +561,6 @@ class taxe_carbone(Reform):
 
     class quantites_super_plombe(YearlyVariable):
         label = "Quantités consommées de super plombé par les ménages après réforme"
-
 
         def formula(self, simulation, period):
             depenses_essence_ajustees_taxe_carbone = menage('depenses_essence_corrigees_ajustees_taxe_carbone', period)
@@ -615,7 +604,6 @@ class taxe_carbone(Reform):
     class sp_e10_ticpe(YearlyVariable):
         label = "Calcul du montant de la TICPE sur le SP E10 après réforme"
 
-
         def formula(self, simulation, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             try:
@@ -649,7 +637,6 @@ class taxe_carbone(Reform):
 
     class sp95_ticpe(YearlyVariable):
         label = "Calcul du montant de TICPE sur le sp_95 après réforme"
-
 
         def formula(self, simulation, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -686,7 +673,6 @@ class taxe_carbone(Reform):
     class sp98_ticpe(YearlyVariable):
         label = "Calcul du montant de TICPE sur le sp_98 après réforme"
 
-
         def formula(self, simulation, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
@@ -721,7 +707,6 @@ class taxe_carbone(Reform):
 
     class super_plombe_ticpe(YearlyVariable):
         label = "Calcul du montant de la TICPE sur le super plombé après réforme"
-
 
         def formula(self, simulation, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -779,7 +764,6 @@ class taxe_carbone(Reform):
     class ticpe_totale(YearlyVariable):
         label = "Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
 
-
         def formula(self, simulation, period):
             essence_ticpe_ajustee = menage('essence_ticpe', period)
             diesel_ticpe_ajustee = menage('diesel_ticpe', period)
@@ -807,7 +791,6 @@ class taxe_carbone(Reform):
 
     class tva_taux_plein(YearlyVariable):
         label = "Contribution sur la TVA à taux plein après réaction à la réforme - taxe carbone"
-
 
         def formula(self, simulation, period):
             depenses_tva_taux_plein_ajustees = \
@@ -838,7 +821,6 @@ class taxe_carbone(Reform):
     class tva_taux_reduit(YearlyVariable):
         label = "Contribution sur la TVA à taux reduit après réaction à la réforme - taxe carbone"
 
-
         def formula(self, simulation, period):
             depenses_tva_taux_reduit_ajustees = \
                 menage('depenses_tva_taux_reduit_ajustees_taxe_carbone', period)
@@ -852,7 +834,6 @@ class taxe_carbone(Reform):
 
     class tva_taux_super_reduit(YearlyVariable):
         label = "Contribution sur la TVA à taux super reduit après réaction à la réforme - taxe carbone"
-
 
         def formula(self, simulation, period):
             depenses_tva_taux_super_reduit_ajustees = \
@@ -868,7 +849,6 @@ class taxe_carbone(Reform):
 
     class tva_total(YearlyVariable):
         label = "Différence de contribution sur la TVA après réaction à la réforme - taxes carburants"
-
 
         def formula(self, simulation, period):
             taux_plein = menage('tva_taux_plein_bis', period)

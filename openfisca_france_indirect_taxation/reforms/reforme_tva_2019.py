@@ -6,7 +6,6 @@ from openfisca_core.reforms import Reform, update_legislation
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
-
 def modify_legislation_json(reference_legislation_json_copy):
     reform_legislation_subtree = {
         "@type": "Node",
