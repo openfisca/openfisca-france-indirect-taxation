@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-import pandas as pd
 import statsmodels.formula.api as smf
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario

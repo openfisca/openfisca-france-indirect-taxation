@@ -2,12 +2,10 @@
 
 
 from sortedcontainers.sorteddict import SortedDict
-from biryani.strings import slugify
 import logging
 
 
 from openfisca_france_indirect_taxation.model.base import *
-from openfisca_france_indirect_taxation.utils import get_parametres_fiscalite_data_frame
 
 
 log = logging.getLogger(__name__)

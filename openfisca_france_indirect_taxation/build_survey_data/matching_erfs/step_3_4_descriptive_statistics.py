@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-import statsmodels.formula.api as smf
 import os
 import pkg_resources
 

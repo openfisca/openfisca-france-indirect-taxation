@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-from openfisca_core.reforms import Reform, update_legislation
+from openfisca_core.reforms import Reform
 import numpy
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore

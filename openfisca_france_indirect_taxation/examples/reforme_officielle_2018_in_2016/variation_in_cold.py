@@ -8,7 +8,6 @@
 
 
 import statsmodels.formula.api as smf
-import numpy as np
 
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.surveys import SurveyScenario

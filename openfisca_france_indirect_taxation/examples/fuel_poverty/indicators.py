@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-import pandas
 import seaborn
 
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent, \

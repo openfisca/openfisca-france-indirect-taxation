@@ -11,9 +11,7 @@ import pkg_resources
 import numpy as np
 
 
-from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.surveys import get_input_data_frame, SurveyScenario
-from openfisca_survey_manager.survey_collections import SurveyCollection
 
 
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn import \

@@ -3,7 +3,6 @@
 # Import de modules généraux
 
 
-import pandas
 import seaborn
 
 # Import de modules spécifiques à Openfisca

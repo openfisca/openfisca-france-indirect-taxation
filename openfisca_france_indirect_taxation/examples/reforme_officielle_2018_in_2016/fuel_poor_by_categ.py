@@ -3,7 +3,6 @@
 # Import general modules
 
 
-import numpy as np
 import pandas as pd
 
 # Import modules specific to OpenFisca

@@ -5,7 +5,6 @@
 # de manière à avoir des définitions identiques.
 # Les noms de variables sont aussi alignés.
 
-import numpy as np
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_1_3_build_dataframes_indiv_teg import \
     merge_indiv_teg_menage

@@ -1,16 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
-from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
-from openfisca_survey_manager.temporary import temporary_store_decorator
-import logging
-import os
-import pandas
-import numpy
 
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
-from openfisca_survey_manager.surveys import Survey
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
 from openfisca_france_indirect_taxation.build_survey_data.utils \

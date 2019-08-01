@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-from openfisca_france_indirect_taxation.examples.utils_example import dataframe_by_group
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
 

@@ -5,7 +5,6 @@ import pandas as pd
 import pkg_resources
 import os
 
-from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import (
     reforme_officielle_2018_in_2016

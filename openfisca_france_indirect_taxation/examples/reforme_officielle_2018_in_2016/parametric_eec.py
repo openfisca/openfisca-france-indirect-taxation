@@ -2,12 +2,8 @@
 
 
 import statsmodels.formula.api as smf
-import numpy
-import pandas
 
-import matplotlib.pyplot as plt
 
-from openfisca_france_indirect_taxation.examples.utils_example import save_dataframe_to_graph
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities

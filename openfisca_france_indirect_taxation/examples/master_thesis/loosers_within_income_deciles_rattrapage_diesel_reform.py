@@ -3,7 +3,6 @@
 # Import general modules
 
 
-import pandas
 
 # Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, \

@@ -3,7 +3,7 @@
 
 import numpy
 
-from openfisca_core.reforms import Reform, update_legislation
+from openfisca_core.reforms import Reform
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 

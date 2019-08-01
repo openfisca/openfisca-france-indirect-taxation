@@ -9,12 +9,11 @@ from openfisca_france_indirect_taxation.build_survey_data.utils import \
     histogrammes
 import os
 import pkg_resources
-import numpy as np
 import pandas as pd
 import seaborn
 
 # Import modules specific to OpenFisca
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent, save_dataframe_to_graph
+from openfisca_france_indirect_taxation.examples.utils_example import save_dataframe_to_graph
 
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 

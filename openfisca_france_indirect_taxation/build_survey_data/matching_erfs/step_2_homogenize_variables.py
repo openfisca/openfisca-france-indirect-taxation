@@ -5,7 +5,6 @@
 # de manière à avoir des définitions identiques.
 # Les noms de variables sont aussi alignés.
 
-import numpy as np
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_1_build_dataframes import \
     load_data_bdf_erfs
