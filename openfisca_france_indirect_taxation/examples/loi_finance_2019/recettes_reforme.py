@@ -50,7 +50,7 @@ df_reforme['recettes_reforme_poste_11_1_1_1_1'] = (
     df_reforme['recettes_tva_apres_reforme_poste_11_1_1_1_1']
     - df_reforme['recettes_tva_avant_reforme_poste_11_1_1_1_1']
     )
-recettes_poste_11_1_1_1_1 = (df_reforme['recettes_reforme_poste_11_1_1_1_1'] * df_reforme['pondmen']).sum() / 1000000
+recettes_poste_11_1_1_1_1 = (df_reforme['recettes_reforme_poste_11_1_1_1_1'] * df_reforme['pondmen']).sum() / 1e6
 
 # poste_11_1_1_1_2
 df_reforme['recettes_tva_avant_reforme_poste_11_1_1_1_2'] = (
@@ -63,7 +63,7 @@ df_reforme['recettes_reforme_poste_11_1_1_1_2'] = (
     df_reforme['recettes_tva_apres_reforme_poste_11_1_1_1_2']
     - df_reforme['recettes_tva_avant_reforme_poste_11_1_1_1_2']
     )
-recettes_poste_11_1_1_1_2 = (df_reforme['recettes_reforme_poste_11_1_1_1_2'] * df_reforme['pondmen']).sum() / 1000000
+recettes_poste_11_1_1_1_2 = (df_reforme['recettes_reforme_poste_11_1_1_1_2'] * df_reforme['pondmen']).sum() / 1e6
 
 # poste_11_1_3_1
 df_reforme['recettes_tva_avant_reforme_poste_11_1_3_1'] = (
@@ -76,7 +76,7 @@ df_reforme['recettes_reforme_poste_11_1_3_1'] = (
     df_reforme['recettes_tva_apres_reforme_poste_11_1_3_1']
     - df_reforme['recettes_tva_avant_reforme_poste_11_1_3_1']
     )
-recettes_poste_11_1_3_1 = (df_reforme['recettes_reforme_poste_11_1_3_1'] * df_reforme['pondmen']).sum() / 1000000
+recettes_poste_11_1_3_1 = (df_reforme['recettes_reforme_poste_11_1_3_1'] * df_reforme['pondmen']).sum() / 1e6
 
 # poste_11_1_3_2
 df_reforme['recettes_tva_avant_reforme_poste_11_1_3_2'] = (
@@ -89,7 +89,7 @@ df_reforme['recettes_reforme_poste_11_1_3_2'] = (
     df_reforme['recettes_tva_apres_reforme_poste_11_1_3_2']
     - df_reforme['recettes_tva_avant_reforme_poste_11_1_3_2']
     )
-recettes_poste_11_1_3_2 = (df_reforme['recettes_reforme_poste_11_1_3_2'] * df_reforme['pondmen']).sum() / 1000000
+recettes_poste_11_1_3_2 = (df_reforme['recettes_reforme_poste_11_1_3_2'] * df_reforme['pondmen']).sum() / 1e6
 
 recettes_reforme = (
     recettes_poste_11_1_1_1_1

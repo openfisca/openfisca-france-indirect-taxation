@@ -47,7 +47,7 @@ survey_scenario = SurveyScenario.create(
     )
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
-print((df_reforme['pondmen'] * df_reforme['ticpe_totale_officielle_2019_in_2018']).sum() / 1000000000)
+print((df_reforme['pondmen'] * df_reforme['ticpe_totale_officielle_2019_in_2018']).sum() / 1e9)
 
 
 for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 'strate']:
@@ -85,10 +85,10 @@ for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 
     df_reforme['cout_reforme_cheque_philippe'] = (
         df_reforme['cout_reforme_cheque_officiel'] + df_reforme['cheques_energie_officielle_2019_in_2018'] - df_reforme['cheques_energie_philippe_officielle_2019_in_2018']
         )
-    print((df_reforme['cout_reforme_cheque_officiel'] * df_reforme['pondmen']).sum() / 1000000)
-    print((df_reforme['cout_reforme_cheque_majore'] * df_reforme['pondmen']).sum() / 1000000)
-    print((df_reforme['cout_reforme_cheque_philippe'] * df_reforme['pondmen']).sum() / 1000000)
+    print((df_reforme['cout_reforme_cheque_officiel'] * df_reforme['pondmen']).sum() / 1e6)
+    print((df_reforme['cout_reforme_cheque_majore'] * df_reforme['pondmen']).sum() / 1e6)
+    print((df_reforme['cout_reforme_cheque_philippe'] * df_reforme['pondmen']).sum() / 1e6)
 
-    print((df_reforme['cheques_energie_officielle_2019_in_2018'] * df_reforme['pondmen']).sum() / 1000000)
-    print((df_reforme['cheques_energie_majore_officielle_2019_in_2018'] * df_reforme['pondmen']).sum() / 1000000)
-    print((df_reforme['cheques_energie_philippe_officielle_2019_in_2018'] * df_reforme['pondmen']).sum() / 1000000)
+    print((df_reforme['cheques_energie_officielle_2019_in_2018'] * df_reforme['pondmen']).sum() / 1e6)
+    print((df_reforme['cheques_energie_majore_officielle_2019_in_2018'] * df_reforme['pondmen']).sum() / 1e6)
+    print((df_reforme['cheques_energie_philippe_officielle_2019_in_2018'] * df_reforme['pondmen']).sum() / 1e6)

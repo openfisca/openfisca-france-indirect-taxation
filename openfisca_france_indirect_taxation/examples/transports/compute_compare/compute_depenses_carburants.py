@@ -37,10 +37,10 @@ if __name__ == '__main__':
         depenses_carburants = depenses_diesel + depenses_essence
         depenses_transports = (data_simulation['coicop12_7'] * data_simulation['pondmen']).sum()
 
-        depenses_transports_totales['en {}'.format(year)] = depenses_transports / 1000000
-        depenses_carburants_totales['en {}'.format(year)] = depenses_carburants / 1000000
-        depenses_diesel_totales['en {}'.format(year)] = depenses_diesel / 1000000
-        depenses_essence_totales['en {}'.format(year)] = depenses_essence / 1000000
+        depenses_transports_totales['en {}'.format(year)] = depenses_transports / 1e6
+        depenses_carburants_totales['en {}'.format(year)] = depenses_carburants / 1e6
+        depenses_diesel_totales['en {}'.format(year)] = depenses_diesel / 1e6
+        depenses_essence_totales['en {}'.format(year)] = depenses_essence / 1e6
 
     # Enregistrement des dépenses agrégées dans des fichiers csv
     assets_directory = os.path.join(

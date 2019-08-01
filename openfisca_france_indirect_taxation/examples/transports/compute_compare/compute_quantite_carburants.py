@@ -76,9 +76,9 @@ if __name__ == '__main__':
             quantite_essence = quantite_sans_plomb
 
         quantite_carburants = quantite_diesel + quantite_essence
-        quantites_carburants_consommees['en milliers de m3 en {}'.format(year)] = quantite_carburants / 1000000
-        quantites_diesel_consommees['en milliers de m3 en {}'.format(year)] = quantite_diesel / 1000000
-        quantites_essence_consommees['en milliers de m3 en {}'.format(year)] = quantite_essence / 1000000
+        quantites_carburants_consommees['en milliers de m3 en {}'.format(year)] = quantite_carburants / 1e6
+        quantites_diesel_consommees['en milliers de m3 en {}'.format(year)] = quantite_diesel / 1e6
+        quantites_essence_consommees['en milliers de m3 en {}'.format(year)] = quantite_essence / 1e6
 
     # Enregistrement des montants agrégées dans des fichiers csv
     assets_directory = os.path.join(

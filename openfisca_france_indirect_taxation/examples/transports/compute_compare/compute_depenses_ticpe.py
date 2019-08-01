@@ -72,9 +72,9 @@ if __name__ == '__main__':
                 )
 
         depenses_ticpe = depenses_diesel_ticpe + depenses_essence_ticpe
-        depenses_ticpe_totales['en millions d euros en {}'.format(year)] = depenses_ticpe / 1000000
-        depenses_ticpe_diesel['en millions d euros en {}'.format(year)] = depenses_diesel_ticpe / 1000000
-        depenses_ticpe_essence['en millions d euros en {}'.format(year)] = depenses_essence_ticpe / 1000000
+        depenses_ticpe_totales['en millions d euros en {}'.format(year)] = depenses_ticpe / 1e6
+        depenses_ticpe_diesel['en millions d euros en {}'.format(year)] = depenses_diesel_ticpe / 1e6
+        depenses_ticpe_essence['en millions d euros en {}'.format(year)] = depenses_essence_ticpe / 1e6
 
     # Enregistrement des montants agrégées dans des fichiers csv
     assets_directory = os.path.join(

@@ -102,10 +102,10 @@ for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 
         df_reforme['revenu_reforme_officielle_2019_in_2017']
         - df_reforme['cheques_energie_philippe_officielle_2019_in_2017']
         )
-    print((df_reforme['cout_reforme_uc_avant_cheque_energie'] * df_reforme['pondmen']).sum() / 1000000)
-    print((df_reforme['cout_reforme_uc_cheque_officiel'] * df_reforme['pondmen']).sum() / 1000000)
-    print((df_reforme['cout_reforme_uc_cheque_majore'] * df_reforme['pondmen']).sum() / 1000000)
-    print((df_reforme['cout_reforme_uc_cheque_philippe'] * df_reforme['pondmen']).sum() / 1000000)
-    print((df_reforme['cheques_energie_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1000000)
-    print((df_reforme['cheques_energie_majore_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1000000)
-    print((df_reforme['cheques_energie_philippe_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1000000)
+    print((df_reforme['cout_reforme_uc_avant_cheque_energie'] * df_reforme['pondmen']).sum() / 1e6)
+    print((df_reforme['cout_reforme_uc_cheque_officiel'] * df_reforme['pondmen']).sum() / 1e6)
+    print((df_reforme['cout_reforme_uc_cheque_majore'] * df_reforme['pondmen']).sum() / 1e6)
+    print((df_reforme['cout_reforme_uc_cheque_philippe'] * df_reforme['pondmen']).sum() / 1e6)
+    print((df_reforme['cheques_energie_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1e6)
+    print((df_reforme['cheques_energie_majore_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1e6)
+    print((df_reforme['cheques_energie_philippe_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1e6)
