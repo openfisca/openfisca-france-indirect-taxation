@@ -32,9 +32,7 @@ inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 survey_scenario = SurveyScenario.create(
-    # elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
-    # reform_key = 'rattrapage_diesel',
     year = year,
     data_year = data_year
     )

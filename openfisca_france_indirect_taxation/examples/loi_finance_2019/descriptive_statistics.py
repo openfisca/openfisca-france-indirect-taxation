@@ -52,8 +52,6 @@ for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 
 
     graph_builder_bar(df[['poste_02_2_1'] + ['poste_02_2_2'] + ['poste_02_2_3']], False)
 
-    boum
-
     df['check_poste_agrege_11'] = (
         df['poste_11_1_1_1_1'] + df['poste_11_1_1_1_2'] + df['poste_11_1_2_1_1']
         + df['poste_11_1_3_1'] + df['poste_11_1_3_2'] + df['poste_11_2_1_1_1']

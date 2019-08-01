@@ -212,297 +212,254 @@ def preprocess_legislation(parameters):
     return parameters
     # Add CO2 emissions from energy (Source : Ademe)
     emissions_CO2 = {
-        "@type": "Node",
         "description": "émissions de CO2 des énergies",
-        "children": {},
         }
-    emissions_CO2['children']['carburants'] = {
-        "@type": "Node",
+    emissions_CO2['carburants'] = {
         "description": "émissions de CO2 des carburants",
-        "children": {
-            "CO2_diesel": {
-                "@type": "Parameter",
-                "description": "émissions de CO2 du diesel en kg par litre",
-                "format": "float",
-                "values": [
-                    {'start': '1990-01-01', 'value': 2.66},
-                    ],
-                },
-            "CO2_essence": {
-                "@type": "Parameter",
-                "description": "émissions de CO2 du diesel en kg par litre",
-                "format": "float",
-                "values": [
-                    {'start': '1990-01-01', 'value': 2.42},
-                    ],
-                },
+        "CO2_diesel": {
+            "description": "émissions de CO2 du diesel (en kg par litre)",
+            "unit": "kg/l",
+            "values": {'1990-01-01': 2.66}
+            },
+        "CO2_essence": {
+            "description": "émissions de CO2 du diesel en kg par litre",
+            "unit": "kg/l",
+            "values": {'1990-01-01': 2.42},
             },
         }
 
     emissions_CO2['children']['energie_logement'] = {
-        "@type": "Node",
         "description": "émissions de CO2 de l'énergie dans le logement",
         "children": {
             "CO2_electricite": {
-                "@type": "Parameter",
-                "description": "émissions de CO2 de l'électricité, en kg par kWh",
-                "format": "float",
-                "values": [
-                    {'start': '1990-01-01', 'value': 0.09},
-                    ],
+                "description": "émissions de CO2 de l'électricité (kg par kWh)",
+                "unit": "kg/kWh",
+                "values": {'1990-01-01': 0.09},
                 },
             "CO2_gaz_ville": {
-                "@type": "Parameter",
-                "description": "émissions de CO2 du gaz, en kg par kWh",
-                "format": "float",
-                "values": [
-                    {'start': '1990-01-01', 'value': 0.241},
-                    ],
+                "description": "émissions de CO2 du gaz (kg par kWh)",
+                "unit": "kg/kWh",
+                "values": {'1990-01-01': 0.241},
                 },
             "CO2_gaz_liquefie": {
-                "@type": "Parameter",
-                "description": "émissions de CO2 du gaz, en kg par kWh",
-                "format": "float",
-                "values": [
-                    {'start': '1990-01-01', 'value': 0.253},
-                    ],
+                "description": "émissions de CO2 du gaz (kg par kWh)",
+                "unit": "kg/kWh",
+                "values": {'1990-01-01': 0.253},
                 },
             "CO2_combustibles_liquides": {
-                "@type": "Parameter",
-                "description": "émissions de CO2 des combustibles liquides, en kg par litre",
-                "format": "float",
-                "values": [
-                    {'start': '1990-01-01', 'value': 3.24},
-                    ],
+                "description": "émissions de CO2 des combustibles liquides, (kg par litre)",
+                "unit": "kg/l",
+                "values": {'1990-01-01': 3.24},
                 },
             },
         }
-
-    legislation_json['children']['imposition_indirecte']['children']['emissions_CO2'] = emissions_CO2
+    node_emissions_CO2 = ParameterNode(
+        'emissions_CO2',
+        data = emissions_CO2,
+        )
+    parameters.children['imposition_indirecte'].add_child('emissions_CO2', node_emissions_CO2)
 
     # Add data from comptabilite national about alcohol
-
     alcool_conso_et_vin = {
-        "@type": "Node",
         "description": "alcools",
-        "children": {},
         }
-    alcool_conso_et_vin['children']['vin'] = {
-        "@type": "Node",
+    alcool_conso_et_vin['vin'] = {
         "description": "Pour calculer le taux de taxation implicite sur le vin",
-        "children": {
-            "droit_cn_vin": {
-                "@type": "Parameter",
-                "description": "Masse droit vin, vin mousseux, cidres et poirés selon comptabilité nationale",
-                "format": "float",
-                "values": [
-                    {'start': '2013-01-01', 'value': 122},
-                    {'start': '2012-01-01', 'value': 120},
-                    {'start': '2011-01-01', 'value': 118},
-                    {'start': '2010-01-01', 'value': 119},
-                    {'start': '2009-01-01', 'value': 117},
-                    {'start': '2008-01-01', 'value': 114},
-                    {'start': '2007-01-01', 'value': 117},
-                    {'start': '2006-01-01', 'value': 119},
-                    {'start': '2005-01-01', 'value': 117},
-                    {'start': '2004-01-01', 'value': 125},
-                    {'start': '2003-01-01', 'value': 127},
-                    {'start': '2002-01-01', 'value': 127},
-                    {'start': '2001-01-01', 'value': 127},
-                    {'start': '2000-01-01', 'value': 127},
-                    {'start': '1999-01-01', 'value': 133},
-                    {'start': '1998-01-01', 'value': 132},
-                    {'start': '1997-01-01', 'value': 129},
-                    {'start': '1996-01-01', 'value': 130},
-                    {'start': '1995-01-01', 'value': 129},
-                    # {'start': u'2014-01-01', 'value': },
-                    ],
+        "droit_cn_vin": {
+            "description": "Masse droit vin, vin mousseux, cidres et poirés selon comptabilité nationale",
+            # TODO "unit": "currency" ?
+            "values": {
+                '2013-01-01': 122,
+                '2012-01-01': 120,
+                '2011-01-01': 118,
+                '2010-01-01': 119,
+                '2009-01-01': 117,
+                '2008-01-01': 114,
+                '2007-01-01': 117,
+                '2006-01-01': 119,
+                '2005-01-01': 117,
+                '2004-01-01': 125,
+                '2003-01-01': 127,
+                '2002-01-01': 127,
+                '2001-01-01': 127,
+                '2000-01-01': 127,
+                '1999-01-01': 133,
+                '1998-01-01': 132,
+                '1997-01-01': 129,
+                '1996-01-01': 130,
+                '1995-01-01': 129,
                 },
-            "masse_conso_cn_vin": {
-                "@type": "Parameter",
-                "description": "Masse consommation vin, vin mousseux, cidres et poirés selon comptabilité nationale",
-                "format": "float",
-                "values": [
-                    {'start': '2013-01-01', 'value': 11515},
-                    {'start': '2012-01-01', 'value': 11407},
-                    {'start': '2011-01-01', 'value': 11387},
-                    {'start': '2010-01-01', 'value': 11002},
-                    {'start': '2009-01-01', 'value': 10728},
-                    {'start': '2008-01-01', 'value': 10461},
-                    {'start': '2007-01-01', 'value': 10345},
-                    {'start': '2006-01-01', 'value': 10002},
-                    {'start': '2005-01-01', 'value': 9933},
-                    {'start': '2004-01-01', 'value': 9985},
-                    {'start': '2003-01-01', 'value': 9695},
-                    {'start': '2002-01-01', 'value': 9476},
-                    {'start': '2001-01-01', 'value': 9168},
-                    {'start': '2000-01-01', 'value': 8854},
-                    {'start': '1999-01-01', 'value': 8451},
-                    {'start': '1998-01-01', 'value': 8025},
-                    {'start': '1997-01-01', 'value': 7636},
-                    {'start': '1996-01-01', 'value': 7419},
-                    {'start': '1995-01-01', 'value': 7191},
-                    # {'start': u'2014-01-01', 'value': },
-                    ],
+            },
+        "masse_conso_cn_vin": {
+            "description": "Masse consommation vin, vin mousseux, cidres et poirés selon comptabilité nationale",
+            # TODO "unit": "currency" ?
+            "values": {
+                '2013-01-01': 11515,
+                '2012-01-01': 11407,
+                '2011-01-01': 11387,
+                '2010-01-01': 11002,
+                '2009-01-01': 10728,
+                '2008-01-01': 10461,
+                '2007-01-01': 10345,
+                '2006-01-01': 10002,
+                '2005-01-01': 9933,
+                '2004-01-01': 9985,
+                '2003-01-01': 9695,
+                '2002-01-01': 9476,
+                '2001-01-01': 9168,
+                '2000-01-01': 8854,
+                '1999-01-01': 8451,
+                '1998-01-01': 8025,
+                '1997-01-01': 7636,
+                '1996-01-01': 7419,
+                '1995-01-01': 7191,
+                # {u'2014-01-01': },
                 },
             },
         }
 
-    alcool_conso_et_vin['children']['biere'] = {
-        "@type": "Node",
+    alcool_conso_et_vin['biere'] = {
         "description": "Pour calculer le taux de taxation implicite sur la bière",
-        "children": {
-            "droit_cn_biere": {
-                "@type": "Parameter",
-                "description": "Masse droit biere selon comptabilité nationale",
-                "format": "float",
-                "values": [
-                    {'start': '2013-01-01', 'value': 897},
-                    {'start': '2012-01-01', 'value': 783},
-                    {'start': '2011-01-01', 'value': 393},
-                    {'start': '2010-01-01', 'value': 375},
-                    {'start': '2008-01-01', 'value': 375},
-                    {'start': '2009-01-01', 'value': 376},
-                    {'start': '2007-01-01', 'value': 382},
-                    {'start': '2006-01-01', 'value': 396},
-                    {'start': '2005-01-01', 'value': 364},
-                    {'start': '2004-01-01', 'value': 378},
-                    {'start': '2003-01-01', 'value': 370},
-                    {'start': '2002-01-01', 'value': 361},
-                    {'start': '2001-01-01', 'value': 364},
-                    {'start': '2000-01-01', 'value': 359},
-                    {'start': '1999-01-01', 'value': 380},
-                    {'start': '1998-01-01', 'value': 365},
-                    {'start': '1997-01-01', 'value': 364},
-                    {'start': '1996-01-01', 'value': 366},
-                    {'start': '1995-01-01', 'value': 361},
-                    # {'start': u'2014-01-01', 'value': },
-                    ],
-                },
-            "masse_conso_cn_biere": {
-                "@type": "Parameter",
-                "description": "Masse consommation biere selon comptabilité nationale",
-                "format": "float",
-                "values": [
-                    {'start': '2013-01-01', 'value': 3321},
-                    {'start': '2012-01-01', 'value': 2868},
-                    {'start': '2011-01-01', 'value': 2769},
-                    {'start': '2010-01-01', 'value': 2461},
-                    {'start': '2009-01-01', 'value': 2375},
-                    {'start': '2008-01-01', 'value': 2287},
-                    {'start': '2007-01-01', 'value': 2458},
-                    {'start': '2006-01-01', 'value': 2486},
-                    {'start': '2005-01-01', 'value': 2466},
-                    {'start': '2004-01-01', 'value': 2484},
-                    {'start': '2003-01-01', 'value': 2554},
-                    {'start': '2002-01-01', 'value': 2405},
-                    {'start': '2001-01-01', 'value': 2327},
-                    {'start': '2000-01-01', 'value': 2290},
-                    {'start': '1999-01-01', 'value': 2334},
-                    {'start': '1998-01-01', 'value': 2291},
-                    {'start': '1997-01-01', 'value': 2186},
-                    {'start': '1996-01-01', 'value': 2144},
-                    {'start': '1995-01-01', 'value': 2111},
-                    # {'start': u'2014-01-01', 'value': },
-                    ],
+        "droit_cn_biere": {
+            "description": "Masse droit biere selon comptabilité nationale",
+            # TODO "unit": "float",
+            "values": {
+                '2013-01-01': 897,
+                '2012-01-01': 783,
+                '2011-01-01': 393,
+                '2010-01-01': 375,
+                '2008-01-01': 375,
+                '2009-01-01': 376,
+                '2007-01-01': 382,
+                '2006-01-01': 396,
+                '2005-01-01': 364,
+                '2004-01-01': 378,
+                '2003-01-01': 370,
+                '2002-01-01': 361,
+                '2001-01-01': 364,
+                '2000-01-01': 359,
+                '1999-01-01': 380,
+                '1998-01-01': 365,
+                '1997-01-01': 364,
+                '1996-01-01': 366,
+                '1995-01-01': 361,
+                }
+            },
+        "masse_conso_cn_biere": {
+            "description": "Masse consommation biere selon comptabilité nationale",
+            # TODO "unit": "float",
+            "values": {
+                '2013-01-01': 3321,
+                '2012-01-01': 2868,
+                '2011-01-01': 2769,
+                '2010-01-01': 2461,
+                '2009-01-01': 2375,
+                '2008-01-01': 2287,
+                '2007-01-01': 2458,
+                '2006-01-01': 2486,
+                '2005-01-01': 2466,
+                '2004-01-01': 2484,
+                '2003-01-01': 2554,
+                '2002-01-01': 2405,
+                '2001-01-01': 2327,
+                '2000-01-01': 2290,
+                '1999-01-01': 2334,
+                '1998-01-01': 2291,
+                '1997-01-01': 2186,
+                '1996-01-01': 2144,
+                '1995-01-01': 2111,
                 },
             },
         }
 
-    alcool_conso_et_vin['children']['alcools_forts'] = {
-        "@type": "Node",
+    alcool_conso_et_vin['alcools_forts'] = {
         "description": "Pour calculer le taux de taxation implicite sur alcools forts",
-        "children": {
-            "droit_cn_alcools": {
-                "@type": "Parameter",
-                "description": "Masse droit alcool selon comptabilité nationale sans droits sur les produits intermediaires et cotisation spéciale alcool fort",
-                "format": "float",
-                "values": [
-                    {'start': '2012-01-01', 'value': 2225},
-                    {'start': '2011-01-01', 'value': 2150},
-                    {'start': '2010-01-01', 'value': 2111},
-                    {'start': '2009-01-01', 'value': 2031},
-                    {'start': '2008-01-01', 'value': 2005},
-                    {'start': '2007-01-01', 'value': 1990},
-                    {'start': '2006-01-01', 'value': 1954},
-                    {'start': '2005-01-01', 'value': 1842},
-                    {'start': '2004-01-01', 'value': 1908},
-                    {'start': '2003-01-01', 'value': 1891},
-                    {'start': '2002-01-01', 'value': 1932},
-                    {'start': '2001-01-01', 'value': 1957},
-                    {'start': '2000-01-01', 'value': 1872},
-                    # TODO: Problème pour les alcools forts chiffres différents entre les deux bases excel !
-                    ],
+        "droit_cn_alcools": {
+            "description": "Masse droit alcool selon comptabilité nationale sans droits sur les produits intermediaires et cotisation spéciale alcool fort",
+            # TODO "unit": "float",
+            "values": {
+                '2012-01-01': 2225,
+                '2011-01-01': 2150,
+                '2010-01-01': 2111,
+                '2009-01-01': 2031,
+                '2008-01-01': 2005,
+                '2007-01-01': 1990,
+                '2006-01-01': 1954,
+                '2005-01-01': 1842,
+                '2004-01-01': 1908,
+                '2003-01-01': 1891,
+                '2002-01-01': 1932,
+                '2001-01-01': 1957,
+                '2000-01-01': 1872,
+                # TODO: Problème pour les alcools forts chiffres différents entre les deux bases excel !
                 },
-            "droit_cn_alcools_total": {
-                "@type": "Parameter",
-                "description": "Masse droit alcool selon comptabilité nationale avec les differents droits",
-                "format": "float",
-                "values": [
-                    {'start': '2013-01-01', 'value': 3022},
-                    {'start': '2012-01-01', 'value': 2718},
-                    {'start': '2011-01-01', 'value': 3078},
-                    {'start': '2010-01-01', 'value': 2734},
-                    {'start': '2009-01-01', 'value': 2629},
-                    {'start': '2008-01-01', 'value': 2528},
-                    {'start': '2007-01-01', 'value': 2516},
-                    {'start': '2006-01-01', 'value': 2477},
-                    {'start': '2005-01-01', 'value': 2352},
-                    {'start': '2004-01-01', 'value': 2409},
-                    {'start': '2003-01-01', 'value': 2453},
-                    {'start': '2002-01-01', 'value': 2503},
-                    {'start': '2000-01-01', 'value': 2416},
-                    {'start': '2001-01-01', 'value': 2514},
-                    {'start': '1999-01-01', 'value': 2385},
-                    {'start': '1998-01-01', 'value': 2369},
-                    {'start': '1997-01-01', 'value': 2366},
-                    {'start': '1996-01-01', 'value': 2350},
-                    {'start': '1995-01-01', 'value': 2337},
-                    # {'start': u'2014-01-01', 'value': },
-                    ],
+            },
+        "droit_cn_alcools_total": {
+            "description": "Masse droit alcool selon comptabilité nationale avec les differents droits",
+            # TODO "unit": "float",
+            "values": {
+                '2013-01-01': 3022,
+                '2012-01-01': 2718,
+                '2011-01-01': 3078,
+                '2010-01-01': 2734,
+                '2009-01-01': 2629,
+                '2008-01-01': 2528,
+                '2007-01-01': 2516,
+                '2006-01-01': 2477,
+                '2005-01-01': 2352,
+                '2004-01-01': 2409,
+                '2003-01-01': 2453,
+                '2002-01-01': 2503,
+                '2000-01-01': 2416,
+                '2001-01-01': 2514,
+                '1999-01-01': 2385,
+                '1998-01-01': 2369,
+                '1997-01-01': 2366,
+                '1996-01-01': 2350,
+                '1995-01-01': 2337,
                 },
-            "masse_conso_cn_alcools": {
-                "@type": "Parameter",
-                "description": "Masse consommation alcool selon comptabilité nationale",
-                "format": "float",
-                "values": [
-                    {'start': '2013-01-01', 'value': 7022},
-                    {'start': '2012-01-01', 'value': 6996},
-                    {'start': '2011-01-01', 'value': 6680},
-                    {'start': '2010-01-01', 'value': 6618},
-                    {'start': '2009-01-01', 'value': 6342},
-                    {'start': '2008-01-01', 'value': 6147},
-                    {'start': '2007-01-01', 'value': 6142},
-                    {'start': '2006-01-01', 'value': 6106},
-                    {'start': '2005-01-01', 'value': 5960},
-                    {'start': '2004-01-01', 'value': 5967},
-                    {'start': '2003-01-01', 'value': 5895},
-                    {'start': '2002-01-01', 'value': 5932},
-                    {'start': '2001-01-01', 'value': 5721},
-                    {'start': '2000-01-01', 'value': 5558},
-                    {'start': '1999-01-01', 'value': 5234},
-                    {'start': '1998-01-01', 'value': 5123},
-                    {'start': '1997-01-01', 'value': 5065},
-                    {'start': '1996-01-01', 'value': 5075},
-                    {'start': '1995-01-01', 'value': 4893},
-                    ],
+            },
+        "masse_conso_cn_alcools": {
+            "description": "Masse consommation alcool selon comptabilité nationale",
+            # TODO "unit": "float",
+            "values": {
+                '2013-01-01': 7022,
+                '2012-01-01': 6996,
+                '2011-01-01': 6680,
+                '2010-01-01': 6618,
+                '2009-01-01': 6342,
+                '2008-01-01': 6147,
+                '2007-01-01': 6142,
+                '2006-01-01': 6106,
+                '2005-01-01': 5960,
+                '2004-01-01': 5967,
+                '2003-01-01': 5895,
+                '2002-01-01': 5932,
+                '2001-01-01': 5721,
+                '2000-01-01': 5558,
+                '1999-01-01': 5234,
+                '1998-01-01': 5123,
+                '1997-01-01': 5065,
+                '1996-01-01': 5075,
+                '1995-01-01': 4893,
                 },
             },
         }
 
-    legislation_json['children']['imposition_indirecte']['children']['alcool_conso_et_vin'] = alcool_conso_et_vin
+    node_alcool_conso_et_vin = ParameterNode(
+        'alcool_conso_et_vin',
+        data = alcool_conso_et_vin,
+        )
+    parameters.children['imposition_indirecte'].add_child('alcool_conso_et_vin', node_alcool_conso_et_vin)
 
     # Make the change from francs to euros for excise taxes in ticpe
-    keys_ticpe = list(legislation_json['children']['imposition_indirecte']['children']['ticpe']['children'].keys())
+    keys_ticpe = list(parameters.imposition_indirecte.ticpe.children.keys())
     for element in keys_ticpe:
-        get_values = \
-            legislation_json['children']['imposition_indirecte']['children']['ticpe']['children'][element]['values']
-        for each_value in get_values:
-            get_character = '{}'.format(each_value['start'])
-            year = int(get_character[:4])
+        values = \
+            parameters.imposition_indirecte.ticpe.children[element]['values']
+        for date_str, value in values:
+            year = int(date_str[:4])
             if year < 2002:
-                each_value['value'] = each_value['value'] / 6.55957
-            else:
-                each_value['value'] = each_value['value']
+                values[date_str] = value / 6.55957
 
-    return legislation_json
+    return parameters

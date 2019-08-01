@@ -12,6 +12,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
     graph_builder_bar_percent, age_group, energy_modes
     )
 
+
 def number_fuel_poors_by_categ(df_reforme, group, variables_precarite):
 
     min_group = df_reforme[group].min()

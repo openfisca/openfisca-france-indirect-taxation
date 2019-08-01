@@ -63,7 +63,6 @@ for year in [2000, 2005, 2011]:
         'poste_04_5_3_1_1', 'poste_04_5_4_1_1']
 
     produits = [column for column in aggregates_data_frame.columns if column[:6] == 'poste_']
-    del column
 
     aggregates_data_frame['depenses_carbu'] = aggregates_data_frame['poste_07_2_2_1_1']
 

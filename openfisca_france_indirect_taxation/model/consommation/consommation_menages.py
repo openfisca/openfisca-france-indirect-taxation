@@ -47,7 +47,7 @@ class depenses_ticpe(YearlyVariable):
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-        returnmenage('depenses_ht_ticpe', period) * (1 + taux_plein_tva)
+        return menage('depenses_ht_ticpe', period) * (1 + taux_plein_tva)
         # This is equivalent to call directly poste_07_2_2_1_1
 
 

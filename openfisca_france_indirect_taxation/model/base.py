@@ -9,10 +9,15 @@ import pkg_resources
 from biryani.strings import slugify
 
 
+from openfisca_core.model_api import *
 try:
     from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
 except ImportError:
     mark_weighted_percentiles, weighted_quantiles = None, None
+
+
+from openfisca_france_indirect_taxation.variables import YearlyVariable
+from openfisca_france_indirect_taxation.entities import Individu, Menage
 
 
 tva_by_categorie_primaire = dict(

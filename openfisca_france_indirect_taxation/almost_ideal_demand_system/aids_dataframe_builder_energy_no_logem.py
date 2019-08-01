@@ -50,7 +50,6 @@ for year in [2000, 2005, 2011]:
         'poste_coicop_1181', 'poste_coicop_119', 'poste_coicop_121', 'poste_coicop_122']
 
     produits = [column for column in aggregates_data_frame.columns if column[:13] == 'poste_coicop_']
-    del column
 
     aggregates_data_frame['depenses_alime'] = sum(aggregates_data_frame[alime] for alime in produits_alimentaire)
 

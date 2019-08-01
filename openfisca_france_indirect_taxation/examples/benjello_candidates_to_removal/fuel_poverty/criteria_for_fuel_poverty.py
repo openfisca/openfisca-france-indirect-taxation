@@ -4,7 +4,6 @@
 # On évalue la précarité énergétique selon plusieurs critères.
 
 
-
 import os
 import pkg_resources
 
