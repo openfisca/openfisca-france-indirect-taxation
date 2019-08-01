@@ -3,8 +3,8 @@
 
 import pandas as pd
 
-from openfisca_france_indirect_taxation.examples.utils_example import \
-    dataframe_by_group, graph_builder_bar, save_dataframe_to_graph, energy_modes
+from openfisca_france_indirect_taxation.examples.utils_example import (
+    graph_builder_bar, energy_modes)
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 

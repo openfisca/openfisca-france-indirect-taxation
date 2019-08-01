@@ -5,14 +5,12 @@ import pandas as pd
 
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-# from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
-from openfisca_france_indirect_taxation.examples.utils_example import brde, \
-    cheque_energie_logement_transport, tee_10_3, precarite
-from openfisca_france_indirect_taxation.examples.utils_example import \
-    graph_builder_bar_percent, save_dataframe_to_graph, age_group, energy_modes
-
+from openfisca_france_indirect_taxation.examples.utils_example import brde, tee_10_3, precarite
+from openfisca_france_indirect_taxation.examples.utils_example import (
+    graph_builder_bar_percent, age_group, energy_modes
+    )
 
 def number_fuel_poors_by_categ(df_reforme, group, variables_precarite):
 

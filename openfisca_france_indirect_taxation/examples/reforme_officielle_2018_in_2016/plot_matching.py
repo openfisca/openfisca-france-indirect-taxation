@@ -11,8 +11,8 @@ import pandas as pd
 import seaborn
 
 
-from openfisca_france_indirect_taxation.examples.utils_example import \
-    graph_builder_bar_percent, graph_builder_bar, save_dataframe_to_graph
+from openfisca_france_indirect_taxation.examples.utils_example import (
+    graph_builder_bar, save_dataframe_to_graph)
 
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 

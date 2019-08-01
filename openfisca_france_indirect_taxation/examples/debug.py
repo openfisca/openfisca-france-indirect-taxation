@@ -6,8 +6,9 @@
 import seaborn
 
 # Import de modules spécifiques à Openfisca
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, save_dataframe_to_graph, \
-    dataframe_by_group
+from openfisca_france_indirect_taxation.examples.utils_example import (
+    dataframe_by_group,
+    )
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 # Import d'une nouvelle palette de couleurs
@@ -28,6 +29,5 @@ if __name__ == '__main__':
     for category in ['niveau_vie_decile']:  # , 'age_group_pr', 'strate_agrege'
         taxe_indirectes = dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
 
-        # graph_builder_bar(taxe_indirectes)
 
 gazole = get_accises_carburants(['ticpe_gazole'])

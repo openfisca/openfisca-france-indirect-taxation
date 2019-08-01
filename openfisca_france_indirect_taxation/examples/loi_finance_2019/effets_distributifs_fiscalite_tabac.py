@@ -5,8 +5,10 @@
 # taxes paid. A positive value means the household received higher transfers than
 # the increase in taxes he faced. These amounts do not take into account VAT.
 
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, save_dataframe_to_graph, \
-    dataframe_by_group
+from openfisca_france_indirect_taxation.examples.utils_example import (
+    dataframe_by_group,
+    graph_builder_bar,
+    )
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 

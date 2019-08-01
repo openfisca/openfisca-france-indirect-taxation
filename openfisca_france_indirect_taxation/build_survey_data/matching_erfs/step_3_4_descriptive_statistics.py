@@ -4,10 +4,8 @@
 import os
 import pkg_resources
 
-from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_2_homogenize_variables import \
-    homogenize_definitions
-from openfisca_france_indirect_taxation.build_survey_data.utils import \
-    histogrammes
+from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_2_homogenize_variables import (
+    homogenize_definitions)
 import matplotlib.pyplot as plt
 
 
