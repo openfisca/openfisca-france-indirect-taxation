@@ -209,7 +209,7 @@ def preprocess_legislation(parameters):
         data = part_type_supercaburants,
         )
     parameters.children['imposition_indirecte'].add_child('part_type_supercarburants', node_part_type_supercaburants)
-    return parameters
+
     # Add CO2 emissions from energy (Source : Ademe)
     emissions_CO2 = {
         "description": "émissions de CO2 des énergies",
@@ -218,39 +218,37 @@ def preprocess_legislation(parameters):
         "description": "émissions de CO2 des carburants",
         "CO2_diesel": {
             "description": "émissions de CO2 du diesel (en kg par litre)",
-            "unit": "kg/l",
+            # "unit": "kg/l",
             "values": {'1990-01-01': 2.66}
             },
         "CO2_essence": {
             "description": "émissions de CO2 du diesel en kg par litre",
-            "unit": "kg/l",
+            # "unit": "kg/l",
             "values": {'1990-01-01': 2.42},
             },
         }
 
-    emissions_CO2['children']['energie_logement'] = {
+    emissions_CO2['energie_logement'] = {
         "description": "émissions de CO2 de l'énergie dans le logement",
-        "children": {
-            "CO2_electricite": {
-                "description": "émissions de CO2 de l'électricité (kg par kWh)",
-                "unit": "kg/kWh",
-                "values": {'1990-01-01': 0.09},
-                },
-            "CO2_gaz_ville": {
-                "description": "émissions de CO2 du gaz (kg par kWh)",
-                "unit": "kg/kWh",
-                "values": {'1990-01-01': 0.241},
-                },
-            "CO2_gaz_liquefie": {
-                "description": "émissions de CO2 du gaz (kg par kWh)",
-                "unit": "kg/kWh",
-                "values": {'1990-01-01': 0.253},
-                },
-            "CO2_combustibles_liquides": {
-                "description": "émissions de CO2 des combustibles liquides, (kg par litre)",
-                "unit": "kg/l",
-                "values": {'1990-01-01': 3.24},
-                },
+        "CO2_electricite": {
+            "description": "émissions de CO2 de l'électricité (kg par kWh)",
+            # "unit": "kg/kWh",
+            "values": {'1990-01-01': 0.09},
+            },
+        "CO2_gaz_ville": {
+            "description": "émissions de CO2 du gaz (kg par kWh)",
+            # "unit": "kg/kWh",
+            "values": {'1990-01-01': 0.241},
+            },
+        "CO2_gaz_liquefie": {
+            "description": "émissions de CO2 du gaz (kg par kWh)",
+            # "unit": "kg/kWh",
+            "values": {'1990-01-01': 0.253},
+            },
+        "CO2_combustibles_liquides": {
+            "description": "émissions de CO2 des combustibles liquides, (kg par litre)",
+            # "unit": "kg/l",
+            "values": {'1990-01-01': 3.24},
             },
         }
     node_emissions_CO2 = ParameterNode(
@@ -451,15 +449,15 @@ def preprocess_legislation(parameters):
         data = alcool_conso_et_vin,
         )
     parameters.children['imposition_indirecte'].add_child('alcool_conso_et_vin', node_alcool_conso_et_vin)
-
     # Make the change from francs to euros for excise taxes in ticpe
-    keys_ticpe = list(parameters.imposition_indirecte.ticpe.children.keys())
+    keys_ticpe = list(parameters.imposition_indirecte.produits_energetiques.ticpe.children.keys())
     for element in keys_ticpe:
-        values = \
-            parameters.imposition_indirecte.ticpe.children[element]['values']
-        for date_str, value in values:
-            year = int(date_str[:4])
+        values_list = \
+            parameters.imposition_indirecte.produits_energetiques.ticpe.children[element].values_list
+        for dated_value in values_list:
+            year = int(dated_value.instant_str[:4])
             if year < 2002:
-                values[date_str] = value / 6.55957
+                if dated_value.value:
+                    dated_value.value = dated_value.value / 6.55957
 
     return parameters

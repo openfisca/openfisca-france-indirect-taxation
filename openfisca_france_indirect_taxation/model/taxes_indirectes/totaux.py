@@ -9,7 +9,7 @@ class taxes_indirectes_total(YearlyVariable):
     entity = Menage
     label = "Montant total de taxes indirectes payées"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         tva_total = menage('tva_total', period)
         taxes_indirectes_total_hors_tva = menage('taxes_indirectes_total_hors_tva', period)
         return (
@@ -23,7 +23,7 @@ class taxes_indirectes_total_hors_tva(YearlyVariable):
     entity = Menage
     label = "Montant total de taxes indirectes payées sans compter la TVA"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         vin_droit_d_accise = menage('vin_droit_d_accise', period)
         biere_droit_d_accise = menage('biere_droit_d_accise', period)
         alcools_forts_droit_d_accise = menage('alcools_forts_droit_d_accise', period)

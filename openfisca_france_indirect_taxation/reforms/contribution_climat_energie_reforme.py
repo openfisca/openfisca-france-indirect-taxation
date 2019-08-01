@@ -11,114 +11,98 @@ from openfisca_core.reforms import Reform
 # par la loi pour les années à venir.
 
 
-def modify_legislation_json(reference_legislation_json_copy):
+def modify_parameters(parameters):
     reform_legislation_subtree = {
-        "@type": "Node",
+
         "description": "contribution_climat_energie_reforme",
         "children": {
             "diesel_2014_2015": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
-                "format": 'float',
+                # TODO "unit": '?',
                 "unit": 'currency',
-                "values": [{'start': '2014-01-01', 'stop': '2014-12-31', 'value': 3.857 - 1.862}]
+                "values": ['2014-01-01': 3.857 - 1.862}]
                 },
             "diesel_2014_2016": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
-                "format": 'float',
+                # TODO "unit": '?',
                 "unit": 'currency',
-                "values": [{'start': '2014-01-01', 'stop': '2014-12-31', 'value': 5.852 - 1.862}]
+                "values": ['2014-01-01': 5.852 - 1.862}]
                 },
             "essence_2014_2015": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "format": "float",
                 "unit": 'currency',
-                "values": [{'start': '2014-01-01', 'stop': '2014-12-31', 'value': 3.509 - 1.694}],
+                "values": ['2014-01-01': 3.509 - 1.694}],
                 },
             "essence_2014_2016": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "format": "float",
                 "unit": 'currency',
-                "values": [{'start': '2014-01-01', 'stop': '2014-12-31', 'value': 5.324 - 1.694}],
+                "values": ['2014-01-01': 5.324 - 1.694}],
                 },
             "fioul_domestique_2014_2015": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
                 "format": "float",
                 "unit": 'currency',
-                "values": [{'start': '2014-01-01', 'stop': '2014-12-31', 'value': 0.04495 - 0.0217}],
+                "values": ['2014-01-01': 0.04495 - 0.0217}],
                 },
             "fioul_domestique_2014_2016": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
                 "format": "float",
                 "unit": 'currency',
-                "values": [{'start': '2014-01-01', 'stop': '2014-12-31', 'value': 0.0682 - 0.0217}],
+                "values": ['2014-01-01': 0.0682 - 0.0217}],
                 },
             "gaz_2014_2015": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
-                "format": 'float',
+                # TODO "unit": '?',
                 "unit": 'currency',
-                "values": [{'start': '2014-01-01', 'stop': '2014-12-31', 'value': 0.00348 - 0.00168}],
+                "values": ['2014-01-01': 0.00348 - 0.00168}],
                 },
             "gaz_2014_2016": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
-                "format": 'float',
+                # TODO "unit": '?',
                 "unit": 'currency',
-                "values": [{'start': '2014-01-01', 'stop': '2014-12-31', 'value': 0.00528 - 0.00168}],
+                "values": ['2014-01-01': 0.00528 - 0.00168}],
                 },
             "abaissement_tva_taux_plein_2014_2015": {
-                "@type": "Parameter",
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
-                "format": 'float',
-                "values": [{'start': '2010-01-01', 'stop': '2017-12-31', 'value': 0.004}],
+                # TODO "unit": '?',
+                "values": ['2010-01-01': 0.004}],
                 },
             "abaissement_tva_taux_plein_2014_2016": {
-                "@type": "Parameter",
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
-                "format": 'float',
-                "values": [{'start': '2010-01-01', 'stop': '2017-12-31', 'value': 0.008}],
+                # TODO "unit": '?',
+                "values": ['2010-01-01': 0.008}],
                 },
             "abaissement_tva_taux_plein_bis_2014_2015": {
-                "@type": "Parameter",
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
-                "format": 'float',
-                "values": [{'start': '2010-01-01', 'stop': '2017-12-31', 'value': 0.002}],
+                # TODO "unit": '?',
+                "values": ['2010-01-01': 0.002}],
                 },
             "abaissement_tva_taux_plein_bis_2014_2016": {
-                "@type": "Parameter",
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
-                "format": 'float',
-                "values": [{'start': '2010-01-01', 'stop': '2017-12-31', 'value': 0.005}],
+                # TODO "unit": '?',
+                "values": ['2010-01-01': 0.005}],
                 },
             "abaissement_tva_taux_reduit_2014_2015": {
-                "@type": "Parameter",
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
-                "format": 'float',
-                "values": [{'start': '2010-01-01', 'stop': '2017-12-31', 'value': 0.004}],
+                # TODO "unit": '?',
+                "values": ['2010-01-01': 0.004}],
                 },
             "abaissement_tva_taux_reduit_2014_2016": {
-                "@type": "Parameter",
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
-                "format": 'float',
-                "values": [{'start': '2010-01-01', 'stop': '2017-12-31', 'value': 0.006}],
+                # TODO "unit": '?',
+                "values": ['2010-01-01': 0.006}],
                 },
             "abaissement_tva_taux_super_reduit_2014_2015": {
-                "@type": "Parameter",
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
-                "format": 'float',
-                "values": [{'start': '2010-01-01', 'stop': '2017-12-31', 'value': 0.004}],
+                # TODO "unit": '?',
+                "values": ['2010-01-01': 0.004}],
                 },
             "abaissement_tva_taux_super_reduit_2014_2016": {
-                "@type": "Parameter",
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
-                "format": 'float',
-                "values": [{'start': '2010-01-01', 'stop': '2017-12-31', 'value': 0.006}],
+                # TODO "unit": '?',
+                "values": ['2010-01-01': 0.006}],
                 },
             },
         }
@@ -132,7 +116,7 @@ class contribution_climat_energie_reforme(Reform):
     name = "Réforme de la contribution climat energie anticipée simulée sur les données de 2014",
 
     def apply(self):
-        self.modify_legislation_json(modifier_function = modify_legislation_json)
+        self.modify_parameters(modifier_function = modify_parameters)
         variables = [
             ]
         for variable in variables:

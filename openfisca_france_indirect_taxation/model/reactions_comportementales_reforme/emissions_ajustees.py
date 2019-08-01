@@ -9,7 +9,7 @@ class emissions_CO2_carburants_ajustees(YearlyVariable):
     entity = Menage
     label = "Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         quantites_diesel_ajustees = menage('quantites_diesel_ajustees', period)
         quantites_essence_ajustees = menage('quantites_essence_ajustees', period)
         emissions_diesel = \
@@ -29,7 +29,7 @@ class emissions_CO2_electricite_ajustees(YearlyVariable):
     entity = Menage
     label = "Emissions de CO2 des ménages via leur consommation d'électricité après réforme, en kg de CO2"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         quantites_electricite_ajustees = menage('quantites_electricite_ajustees_taxe_carbone', period)
         emissions_eletricite = \
             parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_electricite
@@ -43,7 +43,7 @@ class emissions_CO2_gaz_ajustees:
     entity = Menage
     label = "Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         quantites_gaz_ajustees = menage('quantites_gaz_ajustees_taxe_carbone', period)
         emissions_gaz = \
             parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz

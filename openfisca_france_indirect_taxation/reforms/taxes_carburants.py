@@ -12,26 +12,26 @@ def build_reform(tax_benefit_system):
         )
 
     reform = Reform()
-    reform.modify_legislation_json(modifier_function = modify_legislation_json)
+    reform.modify_parameters(modifier_function = modify_parameters)
     return reform
 
 # Cette réforme consiste en un rattrapage de la fiscalité du diesel sur celle de l'essence. Les valeurs imputées
 # correspondent donc à la différence entre la fiscalité des deux carburants à ces dates.
 
 
-def modify_legislation_json(reference_legislation_json_copy):
-    reform_legislation_subtree = {
-        "@type": "Node",
+def modify_parameters(parameters):
+
+    data = {
         "description": "taxes_carburants",
         "children": {
             "diesel": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
-                "format": 'float',
+                # TODO "unit": '?',
                 "unit": 'currency',
-                "values": [{'start': '2010-01-01', 'stop': '2014-12-31', 'value': 17.85}],
-                "values": [{'start': '2015-01-01', 'stop': '2015-12-31', 'value': 15.59}],
-                "values": [{'start': '2016-01-01', 'stop': '2017-12-31', 'value': 15.31}],
+                "values": {
+                    '2010-01-01': 17.85,
+                    '2015-01-01': 15.59,
+                    '2016-01-01': 15.31,
                 },
             },
         }

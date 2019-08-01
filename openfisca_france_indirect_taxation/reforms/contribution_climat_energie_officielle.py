@@ -12,7 +12,7 @@ def build_reform(tax_benefit_system):
         )
 
     reform = Reform()
-    reform.modify_legislation_json(modifier_function = modify_legislation_json)
+    reform.modify_parameters(modifier_function = modify_parameters)
     return reform
 
 # Montants de taxe prévus par la loi Contribution climat-énergie. 7€ en 2014, 14,5€ en 2015, 22€ en 2016,
@@ -21,65 +21,61 @@ def build_reform(tax_benefit_system):
 # Todo : voir comment on met en place cette réforme sachant qu'elle est déjà partiellement entrée dans les prix.
 
 
-def modify_legislation_json(reference_legislation_json_copy):
+def modify_parameters(parameters):
     reform_legislation_subtree = {
-        "@type": "Node",
+
         "description": "contribution_climat_energie_officielle",
         "children": {
             "diesel": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
-                "format": 'float',
+                # TODO "unit": '?',
                 "unit": 'currency',
                 "values": [
-                    {'start': '2014-01-01', 'stop': '2014-12-31', 'value': 1.862},
-                    {'start': '2015-01-01', 'stop': '2015-12-31', 'value': 3.857},
-                    {'start': '2016-01-01', 'stop': '2016-12-31', 'value': 5.852},
-                    {'start': '2017-01-01', 'stop': '2017-12-31', 'value': 8.113},
-                    {'start': '2018-01-01', 'stop': '2018-12-31', 'value': 10.374},
-                    {'start': '2019-01-01', 'stop': '2019-12-31', 'value': 12.635},
+                    '2014-01-01': 1.862},
+                    '2015-01-01': 3.857},
+                    '2016-01-01': 5.852},
+                    '2017-01-01': 8.113},
+                    '2018-01-01': 10.374},
+                    '2019-01-01': 12.635},
                     ],
                 },
             "essence": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "format": "float",
                 "unit": 'currency',
                 "values": [
-                    {'start': '2014-01-01', 'stop': '2014-12-31', 'value': 1.694},
-                    {'start': '2015-01-01', 'stop': '2015-12-31', 'value': 3.509},
-                    {'start': '2016-01-01', 'stop': '2016-12-31', 'value': 5.324},
-                    {'start': '2017-01-01', 'stop': '2017-12-31', 'value': 7.381},
-                    {'start': '2018-01-01', 'stop': '2018-12-31', 'value': 9.438},
-                    {'start': '2019-01-01', 'stop': '2019-12-31', 'value': 11.495},
+                    '2014-01-01': 1.694},
+                    '2015-01-01': 3.509},
+                    '2016-01-01': 5.324},
+                    '2017-01-01': 7.381},
+                    '2018-01-01': 9.438},
+                    '2019-01-01': 11.495},
                     ],
                 },
             "fioul_domestique": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
                 "format": "float",
                 "unit": 'currency',
                 "values": [
-                    {'start': '2014-01-01', 'stop': '2014-12-31', 'value': 0.0217},
-                    {'start': '2015-01-01', 'stop': '2015-12-31', 'value': 0.04495},
-                    {'start': '2016-01-01', 'stop': '2016-12-31', 'value': 0.0682},
-                    {'start': '2017-01-01', 'stop': '2017-12-31', 'value': 0.09455},
-                    {'start': '2018-01-01', 'stop': '2018-12-31', 'value': 0.1209},
-                    {'start': '2019-01-01', 'stop': '2019-12-31', 'value': 0.14725},
+                    '2014-01-01': 0.0217},
+                    '2015-01-01': 0.04495},
+                    '2016-01-01': 0.0682},
+                    '2017-01-01': 0.09455},
+                    '2018-01-01': 0.1209},
+                    '2019-01-01': 0.14725},
                     ],
                 },
             "gaz": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
-                "format": 'float',
+                # TODO "unit": '?',
                 "unit": 'currency',
                 "values": [
-                    {'start': '2014-01-01', 'stop': '2014-12-31', 'value': 0.00168},
-                    {'start': '2015-01-01', 'stop': '2015-12-31', 'value': 0.00348},
-                    {'start': '2016-01-01', 'stop': '2016-12-31', 'value': 0.00528},
-                    {'start': '2017-01-01', 'stop': '2017-12-31', 'value': 0.00732},
-                    {'start': '2018-01-01', 'stop': '2018-12-31', 'value': 0.00936},
-                    {'start': '2019-01-01', 'stop': '2019-12-31', 'value': 0.0114},
+                    '2014-01-01': 0.00168},
+                    '2015-01-01': 0.00348},
+                    '2016-01-01': 0.00528},
+                    '2017-01-01': 0.00732},
+                    '2018-01-01': 0.00936},
+                    '2019-01-01': 0.0114},
                     ],
                 },
             },

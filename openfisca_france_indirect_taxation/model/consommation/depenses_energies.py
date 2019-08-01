@@ -238,15 +238,15 @@ class depenses_electricite_prix_unitaire(YearlyVariable):
     entity = Menage
     label = "Prix unitaire de l'électricité de chaque ménage, après affectation d'un compteur"
 
-    def formula(menage, period):
+    def formula(menage, period, parameters):
         depenses_electricite_percentile = menage('depenses_electricite_percentile', period)
 
         # Note : les barèmes ne donnent que les prix unitaires pour 3 et 6 kva. Pour les puissances supérieures,
         # les valeurs sont assez proches de celles du compteur 6kva que nous utilisons comme proxy.
         prix_unitaire_3kva = \
-            parameters(period.start).tarifs_energie.prix_unitaire_base_edf_ttc.prix_du_kwh_3_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.prix_unitaire_base_edf_ttc.prix_kwh_3_kva
         prix_unitaire_6kva = \
-            parameters(period.start).tarifs_energie.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.prix_unitaire_base_edf_ttc.prix_kwh_6_kva
 
         prix_unitaire = (
             (depenses_electricite_percentile < 4) * prix_unitaire_3kva
@@ -276,15 +276,15 @@ class depenses_electricite_tarif_fixe(YearlyVariable):
         depenses_electricite_percentile = menage('depenses_electricite_percentile', period)
 
         tarif_fixe_3kva = \
-            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_3_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.tarif_fixe_base_edf_ttc.tarif_fixe_3_kva
         tarif_fixe_6kva = \
-            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_6_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.tarif_fixe_base_edf_ttc.tarif_fixe_6_kva
         tarif_fixe_9kva = \
-            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_9_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.tarif_fixe_base_edf_ttc.tarif_fixe_9_kva
         tarif_fixe_12kva = \
-            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_12_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.tarif_fixe_base_edf_ttc.tarif_fixe_12_kva
         tarif_fixe_15kva = \
-            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
 
         tarif_fixe = (
             (depenses_electricite_percentile < 4) * tarif_fixe_3kva

@@ -194,20 +194,28 @@ def collapse(dataframe, groupe, var):
     return var_weighted_grouped
 
 
-def dataframe_by_group(survey_scenario, category, variables, use_baseline =False):
+def dataframe_by_group(survey_scenario, category, variables, use_baseline = False):
     pivot_table = pandas.DataFrame()
     period = survey_scenario.year
-    if reference is not False:
+    if use_baseline:
         for values_reference in variables:
             pivot_table = pandas.concat([
                 pivot_table,
-                survey_scenario.compute_pivot_table(values = [values_reference], columns = [category],
-                    use_baseline =True, period = period)])
+                survey_scenario.compute_pivot_table(
+                    values = [values_reference],
+                    columns = [category],
+                    use_baseline = True,
+                    period = period)]
+                    )
     else:
         for values_reform in variables:
             pivot_table = pandas.concat([
                 pivot_table,
-                survey_scenario.compute_pivot_table(values = [values_reform], columns = [category], period = period)
+                survey_scenario.compute_pivot_table(
+                    values = [values_reform],
+                    columns = [category],
+                    period = period
+                    )
                 ])
 
     df_reform = pivot_table.T

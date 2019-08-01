@@ -12,7 +12,7 @@ class emissions_CO2_carburants(YearlyVariable):
     entity = Menage
     label = "Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         quantites_diesel = menage('quantites_diesel', period)
         quantites_essence = menage('quantites_essence', period)
         emissions_diesel = \
@@ -29,7 +29,7 @@ class emissions_CO2_combustibles_liquides(YearlyVariable):
     entity = Menage
     label = "Emissions de CO2 des ménages via leur consommation de combustibles liquides, en kg de CO2"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         quantite_combustibles_liquides = menage('quantites_combustibles_liquides', period)
         emissions_combustibles_liquidies = \
             parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_combustibles_liquides
@@ -43,7 +43,7 @@ class emissions_CO2_diesel(YearlyVariable):
     entity = Menage
     label = "Emissions de CO2 des ménages via leur consommation de diesel, en kg de CO2"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         quantites_diesel = menage('quantites_diesel', period)
         emissions_diesel = \
             parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
@@ -57,7 +57,7 @@ class emissions_CO2_electricite(YearlyVariable):
     entity = Menage
     label = "Emissions de CO2 des ménages via leur consommation d'électricité, en kg de CO2"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         quantites_eletricite = menage('quantites_electricite_selon_compteur', period)
         emissions_electricite = \
             parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_electricite
@@ -71,7 +71,7 @@ class emissions_CO2_energies_logement(YearlyVariable):
     entity = Menage
     label = "Emissions de CO2 des ménages via leur consommation d'énergies dans leur logement, en kg de CO2"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         emissions_electricite = menage('emissions_CO2_electricite', period)
         emissions_gaz_ville = menage('emissions_CO2_gaz_ville', period)
         emissions_gaz_liquefie = menage('emissions_CO2_gaz_liquefie', period)
@@ -86,7 +86,7 @@ class emissions_CO2_energies_totales(YearlyVariable):
     entity = Menage
     label = "Emissions de CO2 des ménages via leur consommation d'énergies totale, en kg de CO2"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         emissions_energies_logement = menage('emissions_CO2_energies_logement', period)
         emissions_carburants = menage('emissions_CO2_carburants', period)
         emissions = emissions_energies_logement + emissions_carburants
@@ -99,7 +99,7 @@ class emissions_CO2_essence(YearlyVariable):
     entity = Menage
     label = "Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         quantites_essence = menage('quantites_essence', period)
         emissions_essence = \
             parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
@@ -113,7 +113,7 @@ class emissions_CO2_gaz_liquefie(YearlyVariable):
     entity = Menage
     label = "Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         quantites_gaz = menage('quantites_gaz_liquefie', period)
         emissions_gaz = \
             parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_liquefie
@@ -127,7 +127,7 @@ class emissions_CO2_gaz_ville(YearlyVariable):
     entity = Menage
     label = "Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         quantites_gaz = menage('quantites_gaz_final', period)
         emissions_gaz = \
             parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_ville

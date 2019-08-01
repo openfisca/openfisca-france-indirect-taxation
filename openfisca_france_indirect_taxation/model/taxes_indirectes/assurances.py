@@ -9,7 +9,7 @@ class assurance_sante_taxe(YearlyVariable):
     entity = Menage
     label = "Montant des taxes sur l'assurance santé"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_assurance_sante = menage('depenses_assurance_sante', period)
         taux = parameters(period.start).imposition_indirecte.taux_assurances[
             'contrats_d_assurance_maladie_individuelles_et_collectives_cas_general_2_ter']
@@ -22,7 +22,7 @@ class assurance_transport_taxe(YearlyVariable):
     entity = Menage
     label = "Montant des taxes sur l'assurance transport"
 
-    def formula_1984(self, simulation, period):
+    def formula_1984(menage, period, parameters):
         depenses_assurance_transport = menage('depenses_assurance_transport', period)
         taux_assurance_vtm = \
             parameters(period.start).imposition_indirecte.taux_assurances[
@@ -30,7 +30,7 @@ class assurance_transport_taxe(YearlyVariable):
         taux = taux_assurance_vtm
         return tax_from_expense_including_tax(depenses_assurance_transport, taux)
 
-    def formula_2002(self, simulation, period):
+    def formula_2002(menage, period, parameters):
         depenses_assurance_transport = menage('depenses_assurance_transport', period)
         taux_assurance_vtm = parameters(period.start).imposition_indirecte.taux_assurances[
             'assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers']
@@ -39,7 +39,7 @@ class assurance_transport_taxe(YearlyVariable):
         taux = taux_assurance_vtm + taux_contrib_secu_vtm
         return tax_from_expense_including_tax(depenses_assurance_transport, taux)
 
-    def formula_2004(self, simulation, period):
+    def formula_2004(menage, period, parameters):
         depenses_assurance_transport = menage('depenses_assurance_transport', period)
         taux_assurance_vtm = \
             parameters(period.start).imposition_indirecte.taux_assurances.assurance_pour_les_vehicules_terrestres_a_moteurs_pour_les_particuliers
@@ -56,7 +56,7 @@ class autres_assurances_taxe(YearlyVariable):
     entity = Menage
     label = "Montant des taxes sur les autres assurances"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_autres_assurances = menage('depenses_autres_assurances', period)
         taux = parameters(period.start).imposition_indirecte.taux_assurances.autres_assurances
         return tax_from_expense_including_tax(depenses_autres_assurances, taux)
@@ -67,7 +67,7 @@ class total_assurances_taxe(YearlyVariable):
     entity = Menage
     label = "Montant des taxes sur les assurances"
 
-    def formula(self, simulation, period):
+    def formula(menage, period):
         assurance_transport_taxe = menage('assurance_transport_taxe', period)
         assurance_sante_taxe = menage('assurance_sante_taxe', period)
         autres_assurances_taxe = menage('autres_assurances_taxe', period)

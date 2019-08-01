@@ -11,6 +11,7 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent, save_dataframe_to_graph
 # from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
+from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import reforme_officielle_2018_in_2016
 
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 
@@ -34,11 +35,11 @@ def change_quantities_by_categ(df_reforme, group):
 
     i_min = df_reforme[group].min()
     i_max = df_reforme[group].max()
-    df_by_categ = pd.DataFrame(index = list(range(i_min, i_max + 1)), columns =
+    df_by_categ = pd.DataFrame(index = list(range(int(i_min), int(i_max + 1))), columns =
         ['change_in_combustibles_liquides', 'change_in_diesel', 'change_in_essence', 'change_in_gaz_ville']
         )
 
-    for i in range(i_min, i_max + 1):
+    for i in range(int(i_min), int(i_max + 1)):
         df_category = df_reforme.query('{0} == {1}'.format(group, i))
         df_category['change_in_combustibles_liquides'] = ((
             df_category['quantites_combustibles_liquides_officielle_2018_in_2016']
@@ -99,13 +100,13 @@ def change_quantities_among_consumers_by_categ(df_reforme, group):
 
     i_min = df_reforme[group].min()
     i_max = df_reforme[group].max()
-    df_by_categ = pd.DataFrame(index = list(range(i_min, i_max + 1)), columns =
+    df_by_categ = pd.DataFrame(index = list(range(int(i_min), int(i_max + 1))), columns =
         ['change_in_combustibles_liquides', 'change_in_diesel', 'change_in_essence', 'change_in_gaz_ville']
         )
 
-    for i in range(i_min, i_max + 1):
-        df_category = df_reforme.query('{} == {}'.format(group, i))
-        df_restricted = df_category.query('quantites_combustibles_liquides > 0')
+    for i in range(int(i_min), int(i_max + 1)):
+        df_category = df_reforme.query('{} == {}'.format(group, i)).copy()
+        df_restricted = df_category.query('quantites_combustibles_liquides > 0').copy()
         df_restricted['change_in_combustibles_liquides'] = ((
             df_restricted['quantites_combustibles_liquides_officielle_2018_in_2016']
             - df_restricted['quantites_combustibles_liquides']
@@ -117,7 +118,7 @@ def change_quantities_among_consumers_by_categ(df_reforme, group):
             )
         df_by_categ['change_in_combustibles_liquides'][i] = change_in_combustibles_liquides
 
-        df_restricted = df_category.query('quantites_diesel > 0')
+        df_restricted = df_category.query('quantites_diesel > 0').copy()
         df_restricted['change_in_diesel'] = ((
             df_restricted['quantites_diesel_officielle_2018_in_2016']
             - df_restricted['quantites_diesel']
@@ -129,7 +130,7 @@ def change_quantities_among_consumers_by_categ(df_reforme, group):
             )
         df_by_categ['change_in_diesel'][i] = change_in_diesel
 
-        df_restricted = df_category.query('quantites_essence > 0')
+        df_restricted = df_category.query('quantites_essence > 0').copy()
         df_restricted['change_in_essence'] = ((
             df_restricted['quantites_essence_officielle_2018_in_2016']
             - df_restricted['quantites_essence']
@@ -141,7 +142,7 @@ def change_quantities_among_consumers_by_categ(df_reforme, group):
             )
         df_by_categ['change_in_essence'][i] = change_in_essence
 
-        df_restricted = df_category.query('quantites_gaz_final > 0')
+        df_restricted = df_category.query('quantites_gaz_final > 0').copy()
         df_restricted['change_in_gaz_ville'] = ((
             df_restricted['quantites_gaz_final_officielle_2018_in_2016']
             - df_restricted['quantites_gaz_final']

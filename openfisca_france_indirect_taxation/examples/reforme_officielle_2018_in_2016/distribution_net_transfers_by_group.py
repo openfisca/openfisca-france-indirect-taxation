@@ -36,11 +36,11 @@ def distribution_net_transfers_by_group(df_reform, group):
     i_min = int(df_reforme[group].min())
     i_max = int(df_reforme[group].max())
 
-    df_by_categ = pd.DataFrame(index = list(range(i_min, i_max + 1)),
+    df_by_categ = pd.DataFrame(index = list(range(int(i_min), int(i_max + 1))),
         columns = ['quantile_10', 'quantile_25', 'quantile_50', 'quantile_75', 'quantile_90']
         )
 
-    for i in range(i_min, i_max + 1):
+    for i in range(int(i_min), int(i_max + 1)):
         df_by_categ['quantile_10'][i] = df_reforme.query('{} == {}'.format(group, i))['transfert_net_cheque_officiel_uc'].quantile(0.1)
         df_by_categ['quantile_25'][i] = df_reforme.query('{} == {}'.format(group, i))['transfert_net_cheque_officiel_uc'].quantile(0.25)
         df_by_categ['quantile_50'][i] = df_reforme.query('{} == {}'.format(group, i))['transfert_net_cheque_officiel_uc'].quantile(0.5)

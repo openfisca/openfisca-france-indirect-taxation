@@ -1304,7 +1304,7 @@
         <VALUE deb="2001-11-12"  valeur="0.0787" />
         <VALUE deb="2001-05-01"  valeur="0.0779" />
       </CODE>
-      <CODE code="prix_du_kwh_3_kva" format="float" type="monetary">
+      <CODE code="prix_kwh_3_kva" format="float" type="monetary">
         <VALUE deb="2014-11-01"  valeur="0.0909" />
         <VALUE deb="2013-08-01"  valeur="0.0883" />
         <VALUE deb="2012-08-01"  valeur="0.0822" />
@@ -1320,7 +1320,7 @@
         <VALUE deb="2001-11-12"  valeur="0.096" />
         <VALUE deb="2001-05-01"  valeur="0.095" />
       </CODE>
-      <CODE code="prix_du_kwh_6_kva" format="float" type="monetary">
+      <CODE code="prix_kwh_6_kva" format="float" type="monetary">
         <VALUE deb="2014-11-01"  valeur="0.0909" />
         <VALUE deb="2013-08-01"  valeur="0.0883" />
         <VALUE deb="2012-08-01"  valeur="0.0828" />
@@ -1353,7 +1353,7 @@
       </CODE>
     </NODE>
     <NODE code="prix_unitaire_base_edf_ttc">
-      <CODE code="prix_du_kwh_3_kva" format="float" type="monetary">
+      <CODE code="prix_kwh_3_kva" format="float" type="monetary">
         <VALUE deb="2014-01-01"  valeur="0.1377" />
         <VALUE deb="2013-01-01"  valeur="0.1315" />
         <VALUE deb="2012-01-01"  valeur="0.1218" />
@@ -1386,7 +1386,7 @@
         <VALUE deb="1984-01-01"  valeur="0.1055" />
         <VALUE deb="1983-01-01"  valeur="0.0891" />
       </CODE>
-      <CODE code="prix_du_kwh_6_kva" format="float" type="monetary">
+      <CODE code="prix_kwh_6_kva" format="float" type="monetary">
         <VALUE deb="2014-01-01"  valeur="0.1377" />
         <VALUE deb="2013-01-01"  valeur="0.1319" />
         <VALUE deb="2012-01-01"  valeur="0.1225" />

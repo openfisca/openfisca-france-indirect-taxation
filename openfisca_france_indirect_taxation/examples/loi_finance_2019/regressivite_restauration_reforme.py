@@ -12,12 +12,12 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
     )
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
+from openfisca_france_indirect_taxation.reforms.reforme_tva_2019 import reforme_tva_2019
+
 
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 year = 2016
 data_year = 2011
-# elasticities = get_elasticities(data_year)
-# elasticities = get_elasticities_aidsills(data_year, True)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 simulated_variables = [
@@ -43,7 +43,7 @@ simulated_variables = [
 survey_scenario = SurveyScenario.create(
     # elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
-    reform_key = 'reforme_tva_2019',
+    reform = reforme_tva_2019,
     year = year,
     data_year = data_year
     )

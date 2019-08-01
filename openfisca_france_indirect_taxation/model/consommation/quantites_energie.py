@@ -42,11 +42,11 @@ class quantites_electricite_3kva(YearlyVariable):
 
     def formula(menage, period, parameters):
         tarif_fixe_elect = \
-            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_3_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.tarif_fixe_base_edf_ttc.tarif_fixe_3_kva
         depenses_elect = menage('depenses_electricite', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
-            parameters(period.start).tarifs_energie.prix_unitaire_base_edf_ttc.prix_du_kwh_3_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.prix_unitaire_base_edf_ttc.prix_kwh_3_kva
         quantite_elect = depenses_sans_part_fixe / prix_unitaire_elect
 
         return quantite_elect
@@ -60,11 +60,11 @@ class quantites_electricite_6kva(YearlyVariable):
 
     def formula(menage, period, parameters):
         tarif_fixe_elect = \
-            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_6_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.tarif_fixe_base_edf_ttc.tarif_fixe_6_kva
         depenses_elect = menage('depenses_electricite', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
-            parameters(period.start).tarifs_energie.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.prix_unitaire_base_edf_ttc.prix_kwh_6_kva
         quantite_elect = depenses_sans_part_fixe / prix_unitaire_elect
 
         return quantite_elect
@@ -78,11 +78,11 @@ class quantites_electricite_9kva(YearlyVariable):
 
     def formula(menage, period, parameters):
         tarif_fixe_elect = \
-            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_9_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.tarif_fixe_base_edf_ttc.tarif_fixe_9_kva
         depenses_elect = menage('depenses_electricite', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
-            parameters(period.start).tarifs_energie.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.prix_unitaire_base_edf_ttc.prix_kwh_6_kva
         quantite_elect = depenses_sans_part_fixe / prix_unitaire_elect
 
         return quantite_elect
@@ -96,11 +96,11 @@ class quantites_electricite_12kva(YearlyVariable):
 
     def formula(menage, period, parameters):
         tarif_fixe_elect = \
-            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_12_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.tarif_fixe_base_edf_ttc.tarif_fixe_12_kva
         depenses_elect = menage('depenses_electricite', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
-            parameters(period.start).tarifs_energie.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.prix_unitaire_base_edf_ttc.prix_kwh_6_kva
         quantite_elect = depenses_sans_part_fixe / prix_unitaire_elect
 
         return quantite_elect
@@ -114,11 +114,11 @@ class quantites_electricite_15kva(YearlyVariable):
 
     def formula(menage, period, parameters):
         tarif_fixe_elect = \
-            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.tarif_fixe_base_edf_ttc.tarif_fixe_15_kva
         depenses_elect = menage('depenses_electricite', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
-            parameters(period.start).tarifs_energie.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.prix_unitaire_base_edf_ttc.prix_kwh_6_kva
         quantite_elect = depenses_sans_part_fixe / prix_unitaire_elect
 
         return quantite_elect
@@ -132,11 +132,11 @@ class quantites_electricite_18kva(YearlyVariable):
 
     def formula(menage, period, parameters):
         tarif_fixe_elect = \
-            parameters(period.start).tarifs_energie.tarif_fixe_base_edf_ttc.tarif_fixe_18_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.tarif_fixe_base_edf_ttc.tarif_fixe_18_kva
         depenses_elect = menage('depenses_electricite', period)
         depenses_sans_part_fixe = depenses_elect - tarif_fixe_elect
         prix_unitaire_elect = \
-            parameters(period.start).tarifs_energie.prix_unitaire_base_edf_ttc.prix_du_kwh_6_kva
+            parameters(period.start).tarifs_energie.tarifs_reglementes_edf.prix_unitaire_base_edf_ttc.prix_kwh_6_kva
         quantite_elect = depenses_sans_part_fixe / prix_unitaire_elect
 
         return quantite_elect

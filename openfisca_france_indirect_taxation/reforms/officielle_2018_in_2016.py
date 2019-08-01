@@ -1107,7 +1107,7 @@ class reforme_officielle_2018_in_2016(Reform):
         entity = Menage
         label = "Quantités d'électricité consommées après la réforme cspe"
 
-        def formula(menage, period):
+        def formula(menage, period, parameters):
             depenses_electricite_ajustees = \
                 menage('depenses_electricite_cspe', period)
             depenses_electricite_tarif_fixe = menage('depenses_electricite_tarif_fixe', period)

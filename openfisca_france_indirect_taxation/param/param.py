@@ -7,16 +7,15 @@ legislation_json = {
     "@type": "Node",
     "children": {
         "imposition_indirecte": {
-            "@type": "Node",
+
             "description": "Impôts et taxes indirectes",
             "children": {
                 "tva": {
-                    "@type": "Node",
+
                     "description": "Taxe sur la valeur ajoutée",
                     "children": {
                         "taux_plein": {
-                            "@type": "Parameter",
-                            "description": "Taux plein",
+                                        "description": "Taux plein",
                             "format": "float",
                             "values": [
                                 {'start': '2014-01-01', 'value': .2},
@@ -26,8 +25,7 @@ legislation_json = {
                                 ],
                             },
                         "taux_intermediaire": {
-                            "@type": "Parameter",
-                            "description": "Taux intermédiaire",
+                                        "description": "Taux intermédiaire",
                             "format": "float",
                             "values": [
                                 {'start': '2014-01-01', 'value': .1},
@@ -36,16 +34,14 @@ legislation_json = {
                                 ],
                             },
                         "taux_reduit": {
-                            "@type": "Parameter",
-                            "description": "Taux réduit",
+                                        "description": "Taux réduit",
                             "format": "float",
                             "values": [
                                 {'start': '2000-01-01', 'value': .055}
                                 ],
                             },
                         "taux_super_reduit": {
-                            "@type": "Parameter",
-                            "description": "Taux super réduit",
+                                        "description": "Taux super réduit",
                             "format": "float",
                             "values": [
                                 {'start': '1995-01-01', 'value': .021}
@@ -54,12 +50,11 @@ legislation_json = {
                         },
                     },
                 "taux_assurances": {
-                    "@type": "Node",
+
                     "description": "Différentes taxes sur les assurances",
                     "children": {
                         "taux_assur_transport": {
-                            "@type": "Parameter",
-                            "description": "Le taux d'assurance sur les transports",
+                                        "description": "Le taux d'assurance sur les transports",
                             "format": "float",
                             "values": [
                                 {'start': '2014-01-01', 'value': 0.342},
@@ -79,8 +74,7 @@ legislation_json = {
                                 ],
                             },
                         "taux_assurances_sante": {
-                            "@type": "Parameter",
-                            "description": "Le taux d'assurance sante",
+                                        "description": "Le taux d'assurance sante",
                             "format": "float",
                             "values": [
                                 {'start': '2014-01-01', 'value': 0.1327},
@@ -102,8 +96,7 @@ legislation_json = {
                                 ],
                             },
                         "taux_assurances_autres": {
-                            "@type": "Parameter",
-                            "description": "Le taux d'assurance sur autres",
+                                        "description": "Le taux d'assurance sur autres",
                             "format": "float",
                             "values": [
                                 {'start': '2014-01-01', 'value': 0.09},
@@ -127,12 +120,11 @@ legislation_json = {
                         },
                     },
                 "prix_carburants": {
-                    "@type": "Node",
+
                     "description": "prix des carburants en euros par hectolitre",
                     "children": {
                         "prix_ttc_gazole": {
-                            "@type": "Parameter",
-                            "description": "prix ttc gazole",
+                                        "description": "prix ttc gazole",
                             "format": "float",
                             "values": [
                                 # TODO: Doit-on déplacer les prix dans un autre arbre ?
@@ -159,8 +151,7 @@ legislation_json = {
                                 ],
                             },
                         "prix_ttc_super95": {
-                            "@type": "Parameter",
-                            "description": "Prix ttc super95 ",
+                                        "description": "Prix ttc super95 ",
                             "format": "float",
                             "values": [
                                 {'start': '2012-01-01', 'value': 156.58},
@@ -185,8 +176,7 @@ legislation_json = {
                             },
                         #                        Bien changer les prix et appliquer ceux de l'E10
                         #                            "prix_ttc_superE10": {
-                        #                            "@type": "Parameter",
-                        #                            "description": u"Prix ttc super95 ",
+                        #                                    #                            "description": u"Prix ttc super95 ",
                         #                            "format": "float",
                         #                            "values": [
                         #                                {'start': u'1995-01-01', 'value': 85.7},
@@ -210,8 +200,7 @@ legislation_json = {
                         #                                ],
                         #                            },
                         "prix_ttc_super98": {
-                            "@type": "Parameter",
-                            "description": "prix ttc super98",
+                                        "description": "prix ttc super98",
                             "format": "float",
                             "values": [
                                 {'start': '2011-01-01', 'value': 153.75},
@@ -236,12 +225,11 @@ legislation_json = {
                         },
                     },
                 "ticpe": {
-                    "@type": "Node",
+
                     "description": "ticpe sur les différents produits énergetiques",
                     "children": {
                         "ticpe_supercarburants": {
-                            "@type": "Parameter",
-                            "description": "ticpe sur super95 super98 et superE10, incluant majorations des régions",
+                                        "description": "ticpe sur super95 super98 et superE10, incluant majorations des régions",
                             "format": "float",
                             "values": [
                                 {'start': '2016-01-01', 'value': 64.85},
@@ -264,8 +252,7 @@ legislation_json = {
                                 ],
                             },
                         "ticpe_gazole": {
-                            "@type": "Parameter",
-                            "description": "ticpe sur diesel, incluant majorations des régions ",
+                                        "description": "ticpe sur diesel, incluant majorations des régions ",
                             "format": "float",
                             "values": [
                                 {'start': '2016-01-01', 'value': 50.16},
@@ -285,16 +272,15 @@ legislation_json = {
 
 
                 "alcool_conso_et_vin": {
-                    "@type": "Node",
+
                     "description": "alcools",
                     "children": {
                         "vin": {
-                            "@type": "Node",
+
                             "description": "Pour calculer le taux de taxation implicite sur le vin",
                             "children": {
                                 "droit_cn_vin": {
-                                    "@type": "Parameter",
-                                    "description": "Masse droit vin, vin mousseux, cidres et poirés selon comptabilité nationale",
+                                                        "description": "Masse droit vin, vin mousseux, cidres et poirés selon comptabilité nationale",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-01-01', 'value': 122},
@@ -319,8 +305,7 @@ legislation_json = {
                                         ],
                                     },
                                 "masse_conso_cn_vin": {
-                                    "@type": "Parameter",
-                                    "description": "Masse consommation vin, vin mousseux, cidres et poirés selon comptabilité nationale",
+                                                        "description": "Masse consommation vin, vin mousseux, cidres et poirés selon comptabilité nationale",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-01-01', 'value': 11515},
@@ -347,12 +332,11 @@ legislation_json = {
                                 },
                             },
                         "biere": {
-                            "@type": "Node",
+
                             "description": "Pour calculer le taux de taxation implicite sur la bière",
                             "children": {
                                 "droit_cn_biere": {
-                                    "@type": "Parameter",
-                                    "description": "Masse droit biere selon comptabilité nationale",
+                                                        "description": "Masse droit biere selon comptabilité nationale",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-01-01', 'value': 897},
@@ -377,8 +361,7 @@ legislation_json = {
                                         ],
                                     },
                                 "masse_conso_cn_biere": {
-                                    "@type": "Parameter",
-                                    "description": "Masse consommation biere selon comptabilité nationale",
+                                                        "description": "Masse consommation biere selon comptabilité nationale",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-01-01', 'value': 3321},
@@ -405,12 +388,11 @@ legislation_json = {
                                 },
                             },
                         "alcools_forts": {
-                            "@type": "Node",
+
                             "description": "Pour calculer le taux de taxation implicite sur alcools forts",
                             "children": {
                                 "droit_cn_alcools": {
-                                    "@type": "Parameter",
-                                    "description": "Masse droit alcool selon comptabilité nationale sans droits sur les produits intermediaires et cotisation spéciale alcool fort",
+                                                        "description": "Masse droit alcool selon comptabilité nationale sans droits sur les produits intermediaires et cotisation spéciale alcool fort",
                                     "format": "float",
                                     "values": [
                                         {'start': '2012-01-01', 'value': 2225},
@@ -430,8 +412,7 @@ legislation_json = {
                                         ],
                                     },
                                 "droit_cn_alcools_total": {
-                                    "@type": "Parameter",
-                                    "description": "Masse droit alcool selon comptabilité nationale avec les differents droits",
+                                                        "description": "Masse droit alcool selon comptabilité nationale avec les differents droits",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-01-01', 'value': 3022},
@@ -456,8 +437,7 @@ legislation_json = {
                                         ],
                                     },
                                 "masse_conso_cn_alcools": {
-                                    "@type": "Parameter",
-                                    "description": "Masse consommation alcool selon comptabilité nationale",
+                                                        "description": "Masse consommation alcool selon comptabilité nationale",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-01-01', 'value': 7022},
@@ -486,16 +466,15 @@ legislation_json = {
                         },
                     },
                 "tabac": {
-                    "@type": "Node",
+
                     "description": "tabac",
                     "children": {
                         "cigarettes": {
-                            "@type": "Node",
+
                             "description": "Pour calculer le taux de taxation implicite sur les cigarettes",
                             "children": {
                                 "taux_normal_cigarette": {
-                                    "@type": "Parameter",
-                                    "description": "Taux normal cigarette",
+                                                        "description": "Taux normal cigarette",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-07-01', 'value': 0.647},
@@ -508,8 +487,7 @@ legislation_json = {
                                         ],
                                     },
                                 "taux_specifique_cigarette": {
-                                    "@type": "Parameter",
-                                    "description": "Taux specifique cigarette",
+                                                        "description": "Taux specifique cigarette",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-07-01', 'value': 0.15},
@@ -523,12 +501,11 @@ legislation_json = {
                                 },
                             },
                         "tabac_a_rouler": {
-                            "@type": "Node",
+
                             "description": "Pour calculer le taux de taxation implicite sur le tabac à rouler",
                             "children": {
                                 "taux_normal_tabac_a_rouler": {
-                                    "@type": "Parameter",
-                                    "description": "Taux normal tabac à rouler",
+                                                        "description": "Taux normal tabac à rouler",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-07-01', 'value': 0.62},
@@ -540,8 +517,7 @@ legislation_json = {
                                         ],
                                     },
                                 "taux_specifique_tabac_a_rouler": {
-                                    "@type": "Parameter",
-                                    "description": "Taux specifique tabac à rouler",
+                                                        "description": "Taux specifique tabac à rouler",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-12-01', 'value': 0.3},
@@ -551,12 +527,11 @@ legislation_json = {
                                 },
                             },
                         "cigares": {
-                            "@type": "Node",
+
                             "description": "Pour calculer le taux de taxation implicite sur les cigares",
                             "children": {
                                 "taux_normal_cigare": {
-                                    "@type": "Parameter",
-                                    "description": "Taux normaux de taxation cigares",
+                                                        "description": "Taux normaux de taxation cigares",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-01-01', 'value': 0.28},
@@ -571,8 +546,7 @@ legislation_json = {
                                         ]
                                     },
                                 "taux_specifique_cigare": {
-                                    "@type": "Parameter",
-                                    "description": "Taux spécifique de taxation cigares",
+                                                        "description": "Taux spécifique de taxation cigares",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-01-01', 'value': 0.05},
@@ -584,16 +558,15 @@ legislation_json = {
                         },
                     },
                 "contribution_solidarite_avion": {
-                    "@type": "Node",
+
                     "description": "Taxe sur les billets d'avions",
                     "children": {
                         "Taxe sur les billets d'avions": {
-                            "@type": "Node",
+
                             "description": "Pour calculer le taux de taxation implicite sur les billets d'avions",
                             "children": {
                                 "consommation_billets_d_avions": {
-                                    "@type": "Parameter",
-                                    "description": "Consommation billets d'avions",
+                                                        "description": "Consommation billets d'avions",
                                     "format": "float",
                                     "values": [
                                         {'start': '2013-01-01', 'value': 9605},
@@ -613,8 +586,7 @@ legislation_json = {
                                         ]
                                     },
                                 "recette_de_la_contribution_sur_billets_d_avions": {
-                                    "@type": "Parameter",
-                                    "description": "Revenu de la contribution",
+                                                        "description": "Revenu de la contribution",
                                     "format": "float",
                                     "values": [
                                         {'start': '2011-01-01', 'value': 175},

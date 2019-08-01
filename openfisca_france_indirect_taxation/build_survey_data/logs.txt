@@ -380,7 +380,7 @@ ValueError: The modified legislation_json of the reform "rattrapage_diesel" is i
         "prix_unitaire_base_edf_ttc": {
           "@type": "Node",
           "children": {
-            "prix_du_kwh_3_kva": {
+            "prix_kwh_3_kva": {
               "values": [
                 {
                   "start": "2014-01-01",
@@ -511,7 +511,7 @@ ValueError: The modified legislation_json of the reform "rattrapage_diesel" is i
               "unit": "currency",
               "format": "float"
             },
-            "prix_du_kwh_6_kva": {
+            "prix_kwh_6_kva": {
               "values": [
                 {
                   "start": "2014-01-01",
@@ -3969,7 +3969,7 @@ ValueError: The modified legislation_json of the reform "rattrapage_diesel" is i
               "unit": "currency",
               "format": "float"
             },
-            "prix_du_kwh_3_kva": {
+            "prix_kwh_3_kva": {
               "values": [
                 {
                   "start": "2014-11-01",
@@ -4032,7 +4032,7 @@ ValueError: The modified legislation_json of the reform "rattrapage_diesel" is i
               "unit": "currency",
               "format": "float"
             },
-            "prix_du_kwh_6_kva": {
+            "prix_kwh_6_kva": {
               "values": [
                 {
                   "start": "2014-11-01",

@@ -53,8 +53,8 @@ df = energy_modes(df)
 def elasticities_by_categ(df, categ):
     i_min = df[categ].min()
     i_max = df[categ].max()
-    df_to_plot = pd.DataFrame(index = list(range(i_min, i_max + 1)), columns = ['elas_transports', 'elas_housing'])
-    for i in range(i_min, i_max + 1):
+    df_to_plot = pd.DataFrame(index = list(range(int(i_min), int(i_max + 1))), columns = ['elas_transports', 'elas_housing'])
+    for i in range(int(i_min), int(i_max + 1)):
         df_categ = df.query('{0} == {1}'.format(categ, i))
         df_to_plot['elas_transports'][i] = df_categ['elas_price_1_1'].mean()
         df_to_plot['elas_housing'][i] = df_categ['elas_price_2_2'].mean()

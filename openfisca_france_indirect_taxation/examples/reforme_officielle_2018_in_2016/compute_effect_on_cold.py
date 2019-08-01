@@ -14,6 +14,8 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_a
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.examples.reforme_officielle_2018_in_2016.variation_in_cold_enl import estimate_froid
 from openfisca_france_indirect_taxation.examples.utils_example import cheque_par_energie
+from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import reforme_officielle_2018_in_2016
+
 
 logit = estimate_froid()[1]
 params = logit.params

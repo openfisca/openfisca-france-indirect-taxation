@@ -216,8 +216,8 @@ class sp95_ticpe(YearlyVariable):
     label = "Calcul du montant de TICPE sur le sp_95"
 
     def formula(menage, period, parameters):
-        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
+        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         try:
             accise_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
             majoration_ticpe_super95 = \

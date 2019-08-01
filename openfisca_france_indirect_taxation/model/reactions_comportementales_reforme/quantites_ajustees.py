@@ -9,7 +9,7 @@ class quantites_diesel_ajustees(YearlyVariable):
     entity = Menage
     label = "Quantités de diesel consommées après la réforme des prix"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_diesel_ajustees = menage('depenses_diesel_ajustees', period)
         diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         reforme_diesel = parameters(period.start).taxes_carburants.diesel
@@ -23,7 +23,7 @@ class quantites_gaz_ajustees_taxe_carbone(YearlyVariable):
     entity = Menage
     label = "Quantités de gaz consommées après la réforme - taxe carbone"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_gaz_ajustees_taxe_carbone = menage('depenses_gaz_ajustees_taxe_carbone', period)
         depenses_gaz_tarif_fixe = menage('depenses_gaz_tarif_fixe', period)
         depenses_gaz_ajustees_variables = depenses_gaz_ajustees_taxe_carbone - depenses_gaz_tarif_fixe
@@ -41,7 +41,7 @@ class quantites_electricite_ajustees_taxe_carbone(YearlyVariable):
     entity = Menage
     label = "Quantités d'électricité consommées après la réforme - taxe carbone"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_electricite_ajustees_taxe_carbone = \
             menage('depenses_electricite_ajustees_taxe_carbone', period)
         depenses_electricite_tarif_fixe = menage('depenses_electricite_tarif_fixe', period)
@@ -67,7 +67,7 @@ class quantites_sp_e10_ajustees(YearlyVariable):
     entity = Menage
     label = "Quantités consommées de sans plomb e10 par les ménages après réforme"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
         part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10_ajustees = depenses_essence_ajustees * part_sp_e10
@@ -83,7 +83,7 @@ class quantites_sp95_ajustees(YearlyVariable):
     entity = Menage
     label = "Quantités consommées de sans plomb 95 par les ménages après réforme"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
         part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp95_ajustees = depenses_essence_ajustees * part_sp95
@@ -99,7 +99,7 @@ class quantites_sp98_ajustees(YearlyVariable):
     entity = Menage
     label = "Quantités consommées de sans plomb 98 par les ménages"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
         part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
         depenses_sp98_ajustees = depenses_essence_ajustees * part_sp98
@@ -115,7 +115,7 @@ class quantites_super_plombe_ajustees(YearlyVariable):
     entity = Menage
     label = "Quantités consommées de super plombé par les ménages après réforme"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
         part_super_plombe = \
             parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
@@ -132,7 +132,7 @@ class quantites_essence_ajustees(YearlyVariable):
     entity = Menage
     label = "Quantités d'essence consommées par les ménages après réforme"
 
-    def formula_1990(self, simulation, period):
+    def formula_1990(menage, period):
         quantites_sp95_ajustees = menage('quantites_sp95_ajustees', period)
         quantites_sp98_ajustees = menage('quantites_sp98_ajustees', period)
         quantites_super_plombe_ajustees = menage('quantites_super_plombe_ajustees', period)
@@ -141,13 +141,13 @@ class quantites_essence_ajustees(YearlyVariable):
             )
         return quantites_essence_ajustees
 
-    def formula_2007(self, simulation, period):
+    def formula_2007(menage, period):
         quantites_sp95_ajustees = menage('quantites_sp95_ajustees', period)
         quantites_sp98_ajustees = menage('quantites_sp98_ajustees', period)
         quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees)
         return quantites_essence_ajustees
 
-    def formula_2009(self, simulation, period):
+    def formula_2009(menage, period):
         quantites_sp95_ajustees = menage('quantites_sp95_ajustees', period)
         quantites_sp98_ajustees = menage('quantites_sp98_ajustees', period)
         quantites_sp_e10_ajustees = menage('quantites_sp_e10_ajustees', period)

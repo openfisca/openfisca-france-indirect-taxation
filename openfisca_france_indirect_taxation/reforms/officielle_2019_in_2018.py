@@ -8,38 +8,34 @@ from openfisca_core.reforms import Reform
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
 
 
-def modify_legislation_json(reference_legislation_json_copy):
+def modify_parameters(parameters):
     reform_legislation_subtree = {
-        "@type": "Node",
+
         "description": "officielle_2019_in_2018",
         "children": {
             "diesel_2019_in_2018": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
-                "format": 'float',
+                # TODO "unit": '?',
                 "unit": 'currency',
-                "values": [{'start': '2016-01-01', 'value': 2.6 + 266 * (0.055 - 0.0446)}]
+                "values": ['2016-01-01': 2.6 + 266 * (0.055 - 0.0446)}]
                 },
             "essence_2019_in_2018": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "format": "float",
                 "unit": 'currency',
-                "values": [{'start': '2016-01-01', 'value': 242 * (0.055 - 0.0446)}],
+                "values": ['2016-01-01': 242 * (0.055 - 0.0446)}],
                 },
             "combustibles_liquides_2019_in_2018": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
                 "format": "float",
                 "unit": 'currency',
-                "values": [{'start': '2016-01-01', 'value': 3.24 * (0.055 - 0.0446)}],
+                "values": ['2016-01-01': 3.24 * (0.055 - 0.0446)}],
                 },
             "gaz_ville_2019_in_2018": {
-                "@type": "Parameter",
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
-                "format": 'float',
+                # TODO "unit": '?',
                 "unit": 'currency',
-                "values": [{'start': '2016-01-01', 'value': 0.241 * (0.055 - 0.0446)}],
+                "values": ['2016-01-01': 0.241 * (0.055 - 0.0446)}],
                 },
             },
         }
@@ -57,7 +53,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Montant des chèques énergie tels que prévus par la loi"
 
-        def formula(self, simulation, period):
+        def formula(menage, period):
             revenu_fiscal = menage('revdecm', period) / 1.22
             ocde10 = menage('ocde10', period)
             revenu_fiscal_uc = revenu_fiscal / ocde10
@@ -82,7 +78,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Montant des chèques énergie tels que prévus par la loi"
 
-        def formula(self, simulation, period):
+        def formula(menage, period):
             revenu_fiscal = menage('revdecm', period) / 1.22
             ocde10 = menage('ocde10', period)
             revenu_fiscal_uc = revenu_fiscal / ocde10
@@ -107,7 +103,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Montant des chèques énergie tels que prévus par la loi"
 
-        def formula(self, simulation, period):
+        def formula(menage, period):
             revenu_fiscal = menage('revdecm', period) / 1.22
             ocde10 = menage('ocde10', period)
             revenu_fiscal_uc = revenu_fiscal / ocde10
@@ -132,7 +128,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Montant des chèques énergie tels que prévus par la loi"
 
-        def formula(self, simulation, period):
+        def formula(menage, period):
             revenu_fiscal = menage('revdecm', period) / 1.22
             ocde10 = menage('ocde10', period)
             revenu_fiscal_uc = revenu_fiscal / ocde10
@@ -160,7 +156,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Calcul du montant de TICPE sur le combustibles_liquides domestique après réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
             accise_combustibles_liquides_ticpe = (
@@ -191,7 +187,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Depenses en carburants après reaction a la reforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period):
             depenses_diesel_ajustees = menage('depenses_diesel_corrigees_officielle_2019_in_2018', period)
             depenses_essence_ajustees = menage('depenses_essence_corrigees_officielle_2019_in_2018', period)
             depenses_carburants_ajustees = depenses_diesel_ajustees + depenses_essence_ajustees
@@ -203,7 +199,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Dépenses en combustibles_liquides après réaction à la réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             depenses_combustibles_liquides = menage('depenses_combustibles_liquides', period)
             prix_fioul_ttc = \
                 parameters(period.start).tarifs_energie.prix_fioul_domestique.prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre
@@ -220,7 +216,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Dépenses en diesel après réaction à la réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             depenses_diesel = menage('depenses_diesel_corrigees', period)
             diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).officielle_2019_in_2018.diesel_2019_in_2018
@@ -235,7 +231,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Dépenses en énergies dans le logement après la réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period):
             depenses_electricite = menage('depenses_electricite', period)
             tarifs_sociaux_electricite = menage('tarifs_sociaux_electricite', period)
             depenses_gaz_ville_ajustees = menage('depenses_gaz_ville_officielle_2019_in_2018', period)
@@ -255,7 +251,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Dépenses en essence après réaction à la réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             depenses_essence = menage('depenses_essence_corrigees', period)
             super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
             reforme_essence = parameters(period.start).officielle_2019_in_2018.essence_2019_in_2018
@@ -270,7 +266,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Dépenses en gaz après réaction à la réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             depenses_gaz_variables = menage('depenses_gaz_variables', period)
             # Avec la réforme ces tarifs disparaissent, de nouvelles consommations entrent dans les dépenses des ménages :
             tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
@@ -295,7 +291,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Calcul du montant de TICPE sur le diesel après réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
             try:
@@ -332,20 +328,20 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
 
-        def formula_2009(self, simulation, period):
+        def formula_2009(menage, period):
             sp95_ticpe_ajustee = menage('sp95_ticpe_officielle_2019_in_2018', period)
             sp98_ticpe_ajustee = menage('sp98_ticpe_officielle_2019_in_2018', period)
             sp_e10_ticpe_ajustee = menage('sp_e10_ticpe_officielle_2019_in_2018', period)
             essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + sp_e10_ticpe_ajustee)
             return essence_ticpe_ajustee
 
-        def formula_2007(self, simulation, period):
+        def formula_2007(menage, period):
             sp95_ticpe_ajustee = menage('sp95_ticpe_officielle_2019_in_2018', period)
             sp98_ticpe_ajustee = menage('sp98_ticpe_officielle_2019_in_2018', period)
             essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee)
             return essence_ticpe_ajustee
 
-        def formula_1990(self, simulation, period):
+        def formula_1990(menage, period, parameters):
             sp95_ticpe_ajustee = menage('sp95_ticpe_officielle_2019_in_2018', period)
             sp98_ticpe_ajustee = menage('sp98_ticpe_officielle_2019_in_2018', period)
             super_plombe_ticpe_ajustee = menage('super_plombe_ticpe_officielle_2019_in_2018', period)
@@ -357,7 +353,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Recettes en TVA sur les carburants de la réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             depenses_carburants_corrigees_officielle_2019_in_2018 = \
                 menage('depenses_carburants_corrigees_officielle_2019_in_2018', period)
@@ -382,7 +378,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Recettes de la réforme en TVA sur les combustibles liquides"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             depenses_combustibles_liquides_officielle_2019_in_2018 = \
                 menage('depenses_combustibles_liquides_officielle_2019_in_2018', period)
@@ -407,7 +403,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Recettes de la réforme en TVA sur le gaz naturel"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             depenses_gaz_tarif_fixe = menage('depenses_gaz_tarif_fixe', period)
             depenses_gaz_ville_officielle_2019_in_2018 = \
@@ -433,7 +429,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Recettes de la réforme en TVA sur toutes les énergies"
 
-        def formula(self, simulation, period):
+        def formula(menage, period):
             gains_carburants = menage('gains_tva_carburants_officielle_2019_in_2018', period)
             gains_combustibles_liquides = menage('gains_tva_combustibles_liquides_officielle_2019_in_2018', period)
             gains_gaz_ville = menage('gains_tva_gaz_ville_officielle_2019_in_2018', period)
@@ -447,7 +443,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Montant total des pertes financières dues à la réforme, avant redistribution"
 
-        def formula(self, simulation, period):
+        def formula(menage, period):
             depenses_energies_totales = menage('depenses_energies_totales', period)
             depenses_energies_logement_officielle_2019_in_2018 = \
                 menage('depenses_energies_logement_officielle_2019_in_2018', period)
@@ -467,7 +463,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Quantités de combustibles_liquides consommées après la réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             depenses_combustibles_liquides_officielle_2019_in_2018 = \
                 menage('depenses_combustibles_liquides_officielle_2019_in_2018', period)
             prix_fioul_ttc = \
@@ -483,7 +479,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Quantités de diesel consommées après la réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             depenses_diesel_officielle_2019_in_2018 = \
                 menage('depenses_diesel_corrigees_officielle_2019_in_2018', period)
             diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
@@ -498,20 +494,20 @@ class officielle_2019_in_2018(Reform):
         label = "Quantités d'essence consommées par les ménages après réforme"
         definition_period = YEAR
 
-        def formula_2009(self, simulation, period):
+        def formula_2009(menage, period):
             quantites_sp95_ajustees = menage('quantites_sp95_officielle_2019_in_2018', period)
             quantites_sp98_ajustees = menage('quantites_sp98_officielle_2019_in_2018', period)
             quantites_sp_e10_ajustees = menage('quantites_sp_e10_officielle_2019_in_2018', period)
             quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees + quantites_sp_e10_ajustees)
             return quantites_essence_ajustees
 
-        def formula_2007(self, simulation, period):
+        def formula_2007(menage, period, parameters):
             quantites_sp95_ajustees = menage('quantites_sp95_officielle_2019_in_2018', period)
             quantites_sp98_ajustees = menage('quantites_sp98_officielle_2019_in_2018', period)
             quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees)
             return quantites_essence_ajustees
 
-        def formula_1990(self, simulation, period):
+        def formula_1990(menage, period, parameters):
             quantites_sp95_ajustees = menage('quantites_sp95_officielle_2019_in_2018', period)
             quantites_sp98_ajustees = menage('quantites_sp98_officielle_2019_in_2018', period)
             quantites_super_plombe_ajustees = \
@@ -526,7 +522,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Quantités de gaz consommées après la réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             depenses_gaz_ville_officielle_2019_in_2018 = menage('depenses_gaz_ville_officielle_2019_in_2018', period)
             depenses_gaz_tarif_fixe = menage('depenses_gaz_tarif_fixe', period)
             depenses_gaz_variables = depenses_gaz_ville_officielle_2019_in_2018 - depenses_gaz_tarif_fixe
@@ -544,7 +540,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Quantités consommées de sans plomb e10 par les ménages après réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             depenses_essence_officielle_2019_in_2018 = \
                 menage('depenses_essence_corrigees_officielle_2019_in_2018', period)
             part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
@@ -560,7 +556,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Quantités consommées de sans plomb 95 par les ménages après réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             depenses_essence_officielle_2019_in_2018 = \
                 menage('depenses_essence_corrigees_officielle_2019_in_2018', period)
             part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
@@ -576,7 +572,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Quantités consommées de sans plomb 98 par les ménages"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             depenses_essence_officielle_2019_in_2018 = \
                 menage('depenses_essence_corrigees_officielle_2019_in_2018', period)
             part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
@@ -592,7 +588,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Quantités consommées de super plombé par les ménages après réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             depenses_essence_officielle_2019_in_2018 = \
                 menage('depenses_essence_corrigees_officielle_2019_in_2018', period)
             part_super_plombe = \
@@ -610,7 +606,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Montant des transferts additionnels à imputer pour avoir une réforme à budget neutre, sans biaiser les effets distributifs"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             ocde10 = menage('ocde10', period)
             pondmen = menage('pondmen', period)
 
@@ -631,7 +627,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Revenu généré par la réforme officielle 2018 avant redistribution"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             total_taxes_energies = menage('total_taxes_energies', period)
             total_taxes_energies_officielle_2019_in_2018 = \
                 menage('total_taxes_energies_officielle_2019_in_2018', period)
@@ -651,7 +647,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Calcul du montant de la TICPE sur le SP E10 après réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             try:
                 accise_super_e10 = \
@@ -687,7 +683,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Calcul du montant de TICPE sur le sp_95 après réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
             try:
@@ -724,7 +720,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Calcul du montant de TICPE sur le sp_98 après réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
             try:
@@ -761,7 +757,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Calcul du montant de la TICPE sur le super plombé après réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             accise_super_plombe_ticpe = \
                 parameters(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
@@ -794,7 +790,7 @@ class officielle_2019_in_2018(Reform):
         label = "Recettes de la taxe sur la consommation de gaz - ceteris paribus"
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
 
-        def formula(self, simulation, period):
+        def formula(menage, period):
             quantites_gaz_ajustees = menage('quantites_gaz_final_officielle_2019_in_2018', period)
             reforme_gaz = parameters(period.start).officielle_2019_in_2018.gaz_ville_2019_in_2018
             recettes_gaz = quantites_gaz_ajustees * reforme_gaz
@@ -806,7 +802,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
 
-        def formula(self, simulation, period):
+        def formula(menage, period):
             essence_ticpe_ajustee = menage('essence_ticpe_officielle_2019_in_2018', period)
             diesel_ticpe_ajustee = menage('diesel_ticpe_officielle_2019_in_2018', period)
             ticpe_totale_ajustee = diesel_ticpe_ajustee + essence_ticpe_ajustee
@@ -818,7 +814,7 @@ class officielle_2019_in_2018(Reform):
         entity = Menage
         label = "Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2016-2018"
 
-        def formula(self, simulation, period):
+        def formula(menage, period):
             taxe_diesel = menage('diesel_ticpe_officielle_2019_in_2018', period)
             taxe_essence = menage('essence_ticpe_officielle_2019_in_2018', period)
             taxe_combustibles_liquides = menage('combustibles_liquides_ticpe_officielle_2019_in_2018', period)
@@ -866,4 +862,4 @@ class officielle_2019_in_2018(Reform):
         self.update_variable(self.taxe_gaz_ville_officielle_2019_in_2018)
         self.update_variable(self.ticpe_totale_officielle_2019_in_2018)
         self.update_variable(self.total_taxes_energies_officielle_2019_in_2018)
-        self.modify_legislation_json(modifier_function = modify_legislation_json)
+        self.modify_parameters(modifier_function = modify_parameters)

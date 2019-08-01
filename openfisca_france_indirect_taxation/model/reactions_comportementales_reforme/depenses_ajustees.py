@@ -11,7 +11,7 @@ class depenses_essence_ajustees(YearlyVariable):
     entity = Menage
     label = "Dépenses en essence après réaction à la réforme des prix"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence_corrigees', period)
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
         reforme_essence = parameters(period.start).taxes_carburants.essence
@@ -28,7 +28,7 @@ class depenses_diesel_ajustees(YearlyVariable):
     entity = Menage
     label = "Dépenses en diesel après réaction à la réforme des prix"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_diesel = menage('depenses_diesel_corrigees', period)
         diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         reforme_diesel = parameters(period.start).taxes_carburants.diesel
@@ -44,7 +44,7 @@ class depenses_gaz_ville_ajustees_taxe_carbone(YearlyVariable):
     entity = Menage
     label = "Dépenses en gaz après réaction à la réforme - taxe carbone"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_gaz_variables = menage('depenses_gaz_variables', period)
         depenses_gaz_prix_unitaire = menage('depenses_gaz_prix_unitaire', period)
         reforme_gaz = parameters(period.start).taxe_carbone.gaz
@@ -64,7 +64,7 @@ class depenses_electricite_ajustees_taxe_carbone(YearlyVariable):
     entity = Menage
     label = "Dépenses en électricité après réaction à la réforme - taxe carbone"
 
-    def formula(self, simulation, period):
+    def formula(menage, period, parameters):
         depenses_electricite_variables = menage('depenses_electricite_variables', period)
         depenses_electricite_prix_unitaire = menage('depenses_electricite_prix_unitaire', period)
         reforme_electricite = parameters(period.start).taxe_carbone.electricite
