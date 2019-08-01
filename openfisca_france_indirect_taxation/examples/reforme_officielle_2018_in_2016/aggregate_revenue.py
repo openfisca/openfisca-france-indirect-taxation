@@ -3,10 +3,7 @@
 # This script compares the revenue raised by various scenarios of reform.
 # This revenue only includes energy taxes and neglect the effect on VAT.
 
-# Import general modules
 
-
-# Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy

@@ -4,8 +4,6 @@
 # to be cold according to several of his characteristics.
 # The aime will then be to compute the effect of the reform on the likelihood of being cold
 
-# Import general modules
-
 
 import statsmodels.formula.api as smf
 

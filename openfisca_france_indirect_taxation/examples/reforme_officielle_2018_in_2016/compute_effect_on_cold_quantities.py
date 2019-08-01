@@ -4,12 +4,10 @@
 # and we compute the probabilities of being cold for BdF households.
 # We then replicate this with adjusted quantities after the reform and do the difference.
 
-# Import general modules
-
 
 import numpy as np
 
-# Import modules specific to OpenFisca
+
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 # from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills

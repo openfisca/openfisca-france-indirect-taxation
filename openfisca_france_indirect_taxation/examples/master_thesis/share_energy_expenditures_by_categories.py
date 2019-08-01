@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Import general modules
 
-
-# Import modules specific to OpenFisca
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line_percent, \
     save_dataframe_to_graph, dataframe_by_group
 from openfisca_france_indirect_taxation.surveys import SurveyScenario

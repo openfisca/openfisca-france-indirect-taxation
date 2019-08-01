@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Import general modules
-
 
 import pandas as pd
 
-# Import modules specific to OpenFisca
+
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 # from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills

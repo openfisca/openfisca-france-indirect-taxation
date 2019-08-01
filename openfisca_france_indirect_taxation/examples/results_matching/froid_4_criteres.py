@@ -12,7 +12,7 @@ import pkg_resources
 import pandas as pd
 import seaborn
 
-# Import modules specific to OpenFisca
+
 from openfisca_france_indirect_taxation.examples.utils_example import save_dataframe_to_graph
 
 seaborn.set_palette(seaborn.color_palette("Set2", 12))

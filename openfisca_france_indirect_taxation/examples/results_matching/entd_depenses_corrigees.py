@@ -10,8 +10,7 @@ import pkg_resources
 import pandas as pd
 
 
-from openfisca_france_indirect_taxation.build_survey_data.utils import \
-    histogrammes, plots_by_group
+from openfisca_france_indirect_taxation.build_survey_data.utils import histogrammes
 from openfisca_france_indirect_taxation.examples.utils_example import save_dataframe_to_graph
 
 default_config_files_directory = os.path.join(
