@@ -9,12 +9,10 @@ import pkg_resources
 from biryani.strings import slugify
 
 
-
 try:
     from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
 except ImportError:
     mark_weighted_percentiles, weighted_quantiles = None, None
-
 
 
 tva_by_categorie_primaire = dict(
