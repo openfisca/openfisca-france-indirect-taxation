@@ -9,8 +9,8 @@ tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 legislation_json = tax_benefit_system.get_legislation()
 
 
-# To do: integrate "majoration regionale ticpe" to reflect the real excise taxes applied
 def get_accises_carburants(liste_carburants):
+    # TODO: integrate "majoration regionale ticpe" to reflect the real excise taxes applied
     accises_carburants = None
     for element in liste_carburants:
         accise_dict = \
@@ -86,5 +86,4 @@ def get_accise_ticpe_majoree():
         ['accise majoree sans plomb'] + ['accise majoree super plombe'] + ['accise majoree diesel']
         ].copy()
     accise_totale = accise_totale[accise_totale['accise majoree sans plomb'] != 2.5].copy()
-
     return accise_totale
