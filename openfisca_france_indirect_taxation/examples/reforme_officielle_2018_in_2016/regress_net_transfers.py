@@ -33,7 +33,7 @@ inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 survey_scenario = SurveyScenario.create(
     # elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
-    reform_key = 'officielle_2018_in_2016',
+    reform = reforme_officielle_2018_in_2016,
     year = year,
     data_year = data_year
     )

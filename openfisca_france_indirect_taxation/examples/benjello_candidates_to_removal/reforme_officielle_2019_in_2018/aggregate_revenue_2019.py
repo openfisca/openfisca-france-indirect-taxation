@@ -18,17 +18,14 @@ inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 variations_revenue = dict()
 simulated_variables = [
     'total_taxes_energies',
-    'total_taxes_energies_cce_seulement',
-    'total_taxes_energies_officielle_2018_in_2016',
-    'total_taxes_energies_officielle_2018_in_2016_plus_cspe',
-    'total_taxes_energies_rattrapage_integral',
+    'total_taxes_energies_officielle_2019_in_2018',
     'pondmen',
     ]
 
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
-    reform_key = 'officielle_2018_in_2016',
+    reform_key = 'officielle_2019_in_2018',
     year = year,
     data_year = data_year
     )
@@ -36,19 +33,7 @@ survey_scenario = SurveyScenario.create(
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
 # Here I should include VAT gains
-variations_revenue['revenue_cce_seulement'] = (
-    (df_reforme['total_taxes_energies_cce_seulement'] - df_reforme['total_taxes_energies'])
-    * df_reforme['pondmen']
-    ).sum() / 1e06
-variations_revenue['revenue_officielle_2018_in_2016'] = (
-    (df_reforme['total_taxes_energies_officielle_2018_in_2016'] - df_reforme['total_taxes_energies'])
-    * df_reforme['pondmen']
-    ).sum() / 1e06
-variations_revenue['revenue_officielle_2018_in_2016_plus_cspe'] = (
-    (df_reforme['total_taxes_energies_officielle_2018_in_2016_plus_cspe'] - df_reforme['total_taxes_energies'])
-    * df_reforme['pondmen']
-    ).sum() / 1e06
-variations_revenue['revenue_rattrapage_integral'] = (
-    (df_reforme['total_taxes_energies_rattrapage_integral'] - df_reforme['total_taxes_energies'])
+variations_revenue['revenue_officielle_2019_in_2018'] = (
+    (df_reforme['total_taxes_energies_officielle_2019_in_2018'] - df_reforme['total_taxes_energies'])
     * df_reforme['pondmen']
     ).sum() / 1e06
