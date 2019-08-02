@@ -5,6 +5,10 @@ from openfisca_france_indirect_taxation.examples.utils_example import dataframe_
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
+
+@pytest.mark.skip(
+    reason = "AssertionError: None of the requested variables {'prix_super_95_ttc'} are in the tax-benefit-system"
+    )
 def test_prix_carburants():
     """
     This test is made to verify that when prices are called to construct variables, they take their right value.

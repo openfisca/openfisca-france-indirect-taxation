@@ -1,11 +1,11 @@
-# -*- coding: utf-8 -*-
+import pytest
 
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
-def run_survey_simulation(year = None):
-    assert year is not None
+@pytest.mark.parametrize("year", [2000, 2005, 2011])
+def test_survey_simulation(year):
     data_year = year
     survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
     basic_variables = [
@@ -47,11 +47,6 @@ def run_survey_simulation(year = None):
         )
 
 
-def test_survey_simulation():
-    for year in [2000, 2005, 2011]:
-        yield run_survey_simulation, year
-
-
 def get_ht_variables(year):
     assert year is not None
     data_year = year
@@ -70,7 +65,7 @@ if __name__ == '__main__':
 
     for year in [2011]:  # [2000, 2005, 2011]:
 
-        survey_scenario, df_by_entity = run_survey_simulation(year)
+        survey_scenario, df_by_entity = test_survey_simulation(year)
         df = df_by_entity['menage']
         for column in df.columns:
             assert not (df[column] == 0).all(), 'variable {} contains only 0s'.format(column)

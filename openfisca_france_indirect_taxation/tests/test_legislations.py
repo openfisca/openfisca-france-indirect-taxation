@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import datetime
 
 
@@ -10,11 +8,9 @@ from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitS
 tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
 
-def check_legislation_xml_file(year):
-    compact_legislation = tax_benefit_system.get_compact_legislation(year)
-    assert compact_legislation is not None
-
-
-def test_legislation_xml_file():
+def test_parameters():
+    parameters = tax_benefit_system.parameters
+    assert parameters is not None
     for year in range(1995, datetime.date.today().year + 1):
-        yield check_legislation_xml_file, year
+        parameters_at_instant = tax_benefit_system.get_parameters_at_instant(year)
+        assert parameters_at_instant is not None

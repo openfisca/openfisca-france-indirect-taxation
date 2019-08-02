@@ -51,7 +51,7 @@ def simulate(simulated_variables, year):
         year = year,
         data_year = data_year
         )
-    return survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
+    return survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
 
 def simulate_df_calee_by_grosposte(simulated_variables, year):

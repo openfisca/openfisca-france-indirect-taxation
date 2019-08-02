@@ -63,10 +63,10 @@ class depenses_diesel(YearlyVariable):
     label = "Construction par pondération des dépenses spécifiques au diesel"
 
     def formula(menage, period, parameters):
-        conso_totale_vp_diesel = parameters(period.start).imposition_indirecte.quantite_carbu_vp.diesel
-        conso_totale_vp_essence = parameters(period.start).imposition_indirecte.quantite_carbu_vp.essence
-        taille_parc_diesel = parameters(period.start).imposition_indirecte.parc_vp.diesel
-        taille_parc_essence = parameters(period.start).imposition_indirecte.parc_vp.essence
+        conso_totale_vp_diesel = parameters(period.start).quantite_carbu_vp.diesel
+        conso_totale_vp_essence = parameters(period.start).quantite_carbu_vp.essence
+        taille_parc_diesel = parameters(period.start).parc_vp.diesel
+        taille_parc_essence = parameters(period.start).parc_vp.essence
 
         conso_moyenne_vp_diesel = conso_totale_vp_diesel / taille_parc_diesel
         conso_moyenne_vp_essence = conso_totale_vp_essence / taille_parc_essence

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+import pytest
 
 
 try:
@@ -31,6 +31,9 @@ def build_aliss_scenarios(reform = None):
     return survey_scenario, adjusted_survey_scenario
 
 
+@pytest.mark.skip(
+    reason = "AssertionError: Survey openfisca_indirect_taxation_data_2014 cannot be found for survey collection openfisca_indirect_taxation."
+    )
 def test():
     reform = aliss_tva_sociale
     survey_scenario, adjusted_survey_scenario = build_aliss_scenarios(reform = reform)

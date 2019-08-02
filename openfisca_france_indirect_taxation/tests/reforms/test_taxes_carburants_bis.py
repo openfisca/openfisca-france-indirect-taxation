@@ -4,6 +4,7 @@
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_bis import get_inflators_by_year
+from openfisca_france_indirect_taxation.reforms.rattrapage_diesel import reforme_rattrapage_diesel
 
 
 def test_rattrapage_diesel_bis():
@@ -14,7 +15,7 @@ def test_rattrapage_diesel_bis():
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         # inflation_kwargs = inflation_kwargs,
-        reform = 'rattrapage_diesel',
+        reform = reforme_rattrapage_diesel,
         year = year,
         )
 
