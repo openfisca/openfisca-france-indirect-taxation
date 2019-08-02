@@ -1,0 +1,27 @@
+variables:
+    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+
+Run models:
+  stage: build
+  image: python:3.7-stretch
+  # only:
+  #   variables:
+  #     - $DOLOS == 'True'
+  script:
+    - pip3 install -r requirements.txt
+    - cat /home/ipp/data/openfisca-france-indirect-taxation/openfisca_survey_manager_config.ini
+    - cat /home/ipp/data/openfisca-france-indirect-taxation/openfisca_survey_manager_raw_data.ini
+    - mkdir ~/.config
+    - mkdir ~/.config/openfisca-survey-manager
+    - cp /home/ipp/data/openfisca-france-indirect-taxation/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
+    - cp /home/ipp/data/openfisca-france-indirect-taxation/openfisca_survey_manager_config.ini ~/.config/openfisca-survey-manager/config.ini
+    - cat ~/.config/openfisca-survey-manager/config.ini
+    - cat ~/.config/openfisca-survey-manager/raw_data.ini
+    - pwd
+    - ls -alrth
+    - mkdir /root/ci-files
+    - make test
