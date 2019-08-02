@@ -9,7 +9,6 @@ import pkg_resources
 import pandas as pd
 
 
-from openfisca_france_indirect_taxation.examples.utils_example import get_input_data_frame
 from openfisca_france_indirect_taxation.build_survey_data.utils import find_nearest_inferior
 
 

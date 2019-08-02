@@ -34,7 +34,7 @@ format-style:
 check-style:
 		@# Do not analyse .gitignored files.
 		@# `make` needs `$$` to output `$`. Ref: http://stackoverflow.com/questions/2382764.
-		flake8 `git ls-files | grep "\.py$$"`
+		flake8 `git ls-files | grep "\.py$$" | grep -v benjello_candidates_to_removal`
 
 test: clean check-syntax-errors check-style
 		@# Launch tests from openfisca_france_indirect_taxation/tests directory (and not .) because TaxBenefitSystem must be initialized

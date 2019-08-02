@@ -14,6 +14,9 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
     graph_builder_bar,
     # save_dataframe_to_graph,
     )
+from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import reforme_officielle_2018_in_2016
+
+
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 

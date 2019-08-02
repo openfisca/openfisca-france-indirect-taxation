@@ -20,7 +20,7 @@ reforme = 'officielle_2018_in_2016'
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
-    reform_key = reforme,
+    reform = reforme,
     year = year,
     data_year = data_year
     )

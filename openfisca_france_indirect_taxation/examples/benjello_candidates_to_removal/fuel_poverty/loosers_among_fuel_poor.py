@@ -27,13 +27,13 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         # inflation_kwargs = inflation_kwargs,
-        reform_key = reforme,
+        reform = reforme,
         year = year,
         data_year = data_year
         )
 
     menages_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
-    menages_use_baseline = survey_scenario.create_data_frame_by_entity(simulated_variables,
+    menages_reference = survey_scenario.create_data_frame_by_entity(simulated_variables,
         use_baseline =True, period = year)['menage']
 
     unite_conso = (menages_reforme['ocde10'] * menages_reforme['pondmen']).sum()

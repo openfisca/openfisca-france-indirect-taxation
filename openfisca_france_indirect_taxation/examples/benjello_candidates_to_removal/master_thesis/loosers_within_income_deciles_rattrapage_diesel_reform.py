@@ -23,7 +23,7 @@ for reforme in ['cce_2016_in_2014']:
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
-    reform_key = reforme,
+    reform = reforme,
     year = year,
     data_year = data_year
     )

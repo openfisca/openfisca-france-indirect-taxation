@@ -12,12 +12,13 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimati
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
+from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import reforme_officielle_2018_in_2016
 
 
 def estimate_froid():
     data_enl = create_niveau_vie_quantiles()[0]
 
-    variables_use_baseline = [
+    variables_reference = [
         'pondmen',
         'quantites_combustibles_liquides',
         'quantites_electricite_selon_compteur',
@@ -37,7 +38,7 @@ def estimate_froid():
         year = year,
         data_year = data_year
         )
-    df_use_baseline = survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
+    df_reference = survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
 
     data_enl = data_enl.query('niveau_vie_decile < 4')
     data_enl['froid_4_criteres_3_deciles'] = (

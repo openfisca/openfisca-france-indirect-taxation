@@ -29,5 +29,4 @@ if __name__ == '__main__':
     for category in ['niveau_vie_decile']:  # , 'age_group_pr', 'strate_agrege'
         taxe_indirectes = dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
 
-
     # gazole = get_accises_carburants(['ticpe_gazole'])

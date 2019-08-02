@@ -22,7 +22,7 @@ params = logit.params
 params = params.to_frame().T
 explanatory_vars = params.columns.tolist()
 
-variables_use_baseline = [
+variables_reference = [
     'agepr',
     'aides_logement',
     'depenses_combustibles_liquides',
@@ -95,7 +95,7 @@ survey_scenario = SurveyScenario.create(
     data_year = data_year
     )
 
-df_use_baseline = survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
+df_reference = survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
 df_reforme = survey_scenario.create_data_frame_by_entity(variables_reforme, period = year)['menage']
 
 # Reference case :
@@ -106,7 +106,7 @@ df_reference.rename(
     inplace = True,
     )
 
-df_use_baseline = df_reference.query('revtot > 0')
+df_reference = df_reference.query('revtot > 0')
 df_reference['revtot_2'] = df_reference['revtot'] ** 2
 df_reference['part_energies_revtot'] = df_reference['depenses_energies'] / df_reference['revtot']
 
@@ -163,7 +163,7 @@ df_reforme['predict_proba'] = df_reforme['predict_odds'] / (1 + df_reforme['pred
 df_reforme.loc[df_reforme['niveau_vie_decile'] > 3, 'predict_proba'] = 0
 
 # Show some of the results
-share_cold_use_baseline = (df_reference['predict_proba'] * df_reference['pondmen']).sum() / df_reference['pondmen'].sum()
+share_cold_reference = (df_reference['predict_proba'] * df_reference['pondmen']).sum() / df_reference['pondmen'].sum()
 share_cold_reforme = (df_reforme['predict_proba'] * df_reforme['pondmen']).sum() / df_reforme['pondmen'].sum()
 
 percentage_increase_cold_reforme = (share_cold_reforme - share_cold_reference) / share_cold_reference

@@ -9,10 +9,12 @@ import numpy as np
 
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-# from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
+from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import reforme_officielle_2018_in_2016
+
 from openfisca_france_indirect_taxation.examples.reforme_officielle_2018_in_2016.variation_in_cold import estimate_froid
+
 
 logit = estimate_froid()[1]
 params = logit.params
@@ -22,7 +24,7 @@ explanatory_vars = params.columns.tolist()
 
 def effect_reform_cold():
     cold = dict()
-    variables_use_baseline = [
+    variables_reference = [
         'agepr',
         'aides_logement',
         'brde_m2_rev_disponible',
@@ -96,7 +98,6 @@ def effect_reform_cold():
     inflators_by_year = get_inflators_by_year_energy(rebuild = False)
     year = 2016
     data_year = 2011
-    # elasticities = get_elasticities(data_year)
     elasticities = get_elasticities_aidsills(data_year, True)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
@@ -108,7 +109,7 @@ def effect_reform_cold():
         data_year = data_year
         )
 
-    df_use_baseline = survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
+    df_reference = survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
     df_reforme = survey_scenario.create_data_frame_by_entity(variables_reforme, period = year)['menage']
 
     # On passe en kWh
@@ -120,7 +121,7 @@ def effect_reform_cold():
         )
 
     # Reference case :
-    df_use_baseline = df_reference.query('rev_disponible > 0')
+    df_reference = df_reference.query('rev_disponible > 0')
 
     df_reference['monoparental'] = 0
     df_reference.loc[df_reference['typmen'] == 2, 'monoparental'] = 1

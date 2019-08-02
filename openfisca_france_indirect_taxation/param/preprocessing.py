@@ -232,12 +232,12 @@ def preprocess_legislation(parameters):
         "description": "émissions de CO2 de l'énergie dans le logement",
         "CO2_electricite": {
             "description": "émissions de CO2 de l'électricité (kg par kWh)",
-            # "unit": "kg/kWh",
+            # "unit": "kg/kWh",
             "values": {'1990-01-01': 0.09},
             },
         "CO2_gaz_ville": {
             "description": "émissions de CO2 du gaz (kg par kWh)",
-            # "unit": "kg/kWh",
+            # "unit": "kg/kWh",
             "values": {'1990-01-01': 0.241},
             },
         "CO2_gaz_liquefie": {
@@ -265,7 +265,7 @@ def preprocess_legislation(parameters):
         "description": "Pour calculer le taux de taxation implicite sur le vin",
         "droit_cn_vin": {
             "description": "Masse droit vin, vin mousseux, cidres et poirés selon comptabilité nationale",
-            # TODO "unit": "currency" ?
+            # TODO "unit": "currency" ?
             "values": {
                 '2013-01-01': 122,
                 '2012-01-01': 120,
@@ -290,7 +290,7 @@ def preprocess_legislation(parameters):
             },
         "masse_conso_cn_vin": {
             "description": "Masse consommation vin, vin mousseux, cidres et poirés selon comptabilité nationale",
-            # TODO "unit": "currency" ?
+            # TODO "unit": "currency" ?
             "values": {
                 '2013-01-01': 11515,
                 '2012-01-01': 11407,

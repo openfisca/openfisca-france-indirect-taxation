@@ -24,6 +24,6 @@ class reforme_alimentation(Reform):
 
         generate_variables(
             categories_fiscales = categories_fiscales,
-            reform_key = self.name,
+            reform = self.name,
             tax_benefit_system = self,
             )

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+from openfisca_core.parameters import ParameterNode
 from openfisca_core import reforms
 
 
@@ -22,43 +22,50 @@ def build_reform(tax_benefit_system):
 
 
 def modify_parameters(parameters):
-    reform_legislation_subtree = {
-
-        "description": "contribution_climat_energie",
-        "essence": {
-            "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
-            "format": "float",
-            "unit": 'currency',
-            "values": ['2014-01-01': 1.694}],
-            "values": ['2015-01-01': 3.509}],
-            "values": ['2016-01-01': 5.324}],
-            "values": ['2017-01-01': 7.381}],
-            "values": ['2018-01-01': 9.438}],
-            "values": ['2019-01-01': 11.495}],
-            },
-        "diesel": {
-            "description": "Surcroît de prix du diesel (en euros par hectolitres)",
-            # TODO "unit": '?',
-            "unit": 'currency',
-            "values": ['2014-01-01': 1.862}],
-            "values": ['2015-01-01': 3.857}],
-            "values": ['2016-01-01': 5.852}],
-            "values": ['2017-01-01': 8.113}],
-            "values": ['2018-01-01': 10.374}],
-            "values": ['2019-01-01': 12.635}],
-            },
-        "gaz": {
-            "description": "Surcroît de prix du gaz (en euros par kWh)",
-            # TODO "unit": '?',
-            "unit": 'currency',
-            "values": ['2014-01-01': 0.00168}],
-            "values": ['2015-01-01': 0.00348}],
-            "values": ['2016-01-01': 0.00528}],
-            "values": ['2017-01-01': 0.00732}],
-            "values": ['2018-01-01': 0.00936}],
-            "values": ['2019-01-01': 0.0114}],
-            },
-        }
-
-    reference_legislation_json_copy['children']['contribution_climat_energie'] = reform_legislation_subtree
-    return reference_legislation_json_copy
+    node = ParameterNode(
+        "contribution_climat_energie",
+        data = {
+            "description": "contribution_climat_energie",
+            "essence": {
+                "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
+                "format": "float",
+                "unit": 'currency',
+                "values": {
+                    '2014-01-01': 1.694,
+                    '2015-01-01': 3.509,
+                    '2016-01-01': 5.324,
+                    '2017-01-01': 7.381,
+                    '2018-01-01': 9.438,
+                    '2019-01-01': 11.495,
+                    },
+                },
+            "diesel": {
+                "description": "Surcroît de prix du diesel (en euros par hectolitres)",
+                # TODO "unit": '?',
+                "unit": 'currency',
+                "values": {
+                    '2014-01-01': 1.862,
+                    '2015-01-01': 3.857,
+                    '2016-01-01': 5.852,
+                    '2017-01-01': 8.113,
+                    '2018-01-01': 10.374,
+                    '2019-01-01': 12.635,
+                    },
+                },
+            "gaz": {
+                "description": "Surcroît de prix du gaz (en euros par kWh)",
+                # TODO "unit": '?',
+                "unit": 'currency',
+                "values": {
+                    '2014-01-01': 0.00168,
+                    '2015-01-01': 0.00348,
+                    '2016-01-01': 0.00528,
+                    '2017-01-01': 0.00732,
+                    '2018-01-01': 0.00936,
+                    '2019-01-01': 0.0114,
+                    }
+                }
+            }
+        )
+    parameters.add_child('contribution_climat_energie', node)
+    return parameters

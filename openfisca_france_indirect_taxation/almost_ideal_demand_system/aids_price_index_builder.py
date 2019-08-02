@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
-import pandas as pd
-# from pandas import concat
 import datetime as dt
-
 import os
+import pandas as pd
 import pkg_resources
 
 
@@ -89,9 +87,9 @@ for year in [2000, 2005, 2011]:
     bdf = get_input_data_frame(year)
     postes_bdf = [column for column in bdf.columns if column[:6] == 'poste_' and int(column[6:8]) < 13]
     for poste_bdf in postes_bdf:
-        if (poste_bdf[:12] in colonnes_prix) == True:
+        if (poste_bdf[:12] in colonnes_prix) is True:
             indice_prix_mensuel_98_2015[poste_bdf] = indice_prix_mensuel_98_2015[poste_bdf[:12]]
-        elif (poste_bdf[:14] in colonnes_prix) == True:
+        elif (poste_bdf[:14] in colonnes_prix) is True:
             indice_prix_mensuel_98_2015[poste_bdf] = indice_prix_mensuel_98_2015[poste_bdf[:14]]
         else:
             if poste_bdf not in unpriced:

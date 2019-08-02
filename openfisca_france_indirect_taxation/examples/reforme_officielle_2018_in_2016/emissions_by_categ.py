@@ -11,9 +11,13 @@ import pandas as pd
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.examples.utils_example import (
-    graph_builder_bar, age_group, energy_modes)
+    age_group,
+    energy_modes,
+    graph_builder_bar,
+    save_dataframe_to_graph,
+    )
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
-
+from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import reforme_officielle_2018_in_2016
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 
 
@@ -23,12 +27,10 @@ inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 elasticities = get_elasticities(data_year)
 
-reforme = 'officielle_2018_in_2016'
-
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
-    reform_key = reforme,
+    reform = reforme_officielle_2018_in_2016,
     year = year,
     data_year = data_year
     )

@@ -14,7 +14,7 @@ inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 variations_quantites = dict()
 for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
-    simulated_variables_use_baseline = [
+    simulated_variables_reference = [
         'quantites_diesel',
         'quantites_essence',
         'quantites_electricite_selon_compteur',
@@ -35,17 +35,17 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         # inflation_kwargs = inflation_kwargs,
-        reform_key = reforme,
+        reform = reforme,
         year = year,
         data_year = data_year
         )
 
     indiv_df_reform = survey_scenario.create_data_frame_by_entity(simulated_variables_reform, period = year)
-    indiv_df_use_baseline = survey_scenario.create_data_frame_by_entity(simulated_variables_reference,
+    indiv_df_reference = survey_scenario.create_data_frame_by_entity(simulated_variables_reference,
         use_baseline =True, period = year)
 
     menages_reform = indiv_df_reform['menage']
-    menages_use_baseline = indiv_df_reference['menage']
+    menages_reference = indiv_df_reference['menage']
 
     variations_quantites['diesel_{}'.format(reforme)] = (
         (menages_reform['quantites_diesel'] - menages_reference['quantites_diesel'])

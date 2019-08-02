@@ -16,59 +16,58 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 
 def modify_parameters(parameters):
-    reform_legislation_subtree = {
-
-        "description": "cce_2015_in_2014",
-        "children": {
+    node = ParameterNode(
+        "cce_2015_in_2014",
+        data = {
+            "description": "cce_2015_in_2014",
             "diesel_2014_2015": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 # TODO "unit": '?',
                 "unit": 'currency',
-                "values": ['2014-01-01': 3.857 - 1.862}]
+                "values": {'2014-01-01': 3.857 - 1.862}
                 },
             "essence_2014_2015": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "format": "float",
                 "unit": 'currency',
-                "values": ['2014-01-01', 'value': 3.509 - 1.694}],
+                "values": {'2014-01-01': 3.509 - 1.694},
                 },
             "combustibles_liquides_2014_2015": {
                 "description": "Surcroît de prix du combustibles_liquides domestique (en euros par litre)",
                 "format": "float",
                 "unit": 'currency',
-                "values": ['2014-01-01', 'value': 0.04495 - 0.0217}],
+                "values": {'2014-01-01': 0.04495 - 0.0217},
                 },
             "gaz_2014_2015": {
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
                 # TODO "unit": '?',
                 "unit": 'currency',
-                "values": ['2014-01-01', 'value': 0.00348 - 0.00168}],
+                "values": {'2014-01-01': 0.00348 - 0.00168},
                 },
             "abaissement_tva_taux_plein_2014_2015": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01', 'value': 0.004}],
+                "values": {'2010-01-01': 0.004},
                 },
             "abaissement_tva_taux_plein_bis_2014_2015": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01', 'value': 0.002}],
+                "values": {'2010-01-01': 0.002},
                 },
             "abaissement_tva_taux_reduit_2014_2015": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01', 'value': 0.004}],
+                "values": {'2010-01-01': 0.004},
                 },
             "abaissement_tva_taux_super_reduit_2014_2015": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01', 'value': 0.004}],
+                "values": {'2010-01-01': 0.004},
                 },
             },
-        }
-
-    reference_legislation_json_copy['children']['cce_2015_in_2014'] = reform_legislation_subtree
-    return reference_legislation_json_copy
+        )
+    parameters.add_child('cce_2015_in_2014', node)
+    return parameters
 
 
 class cce_2015_in_2014(Reform):

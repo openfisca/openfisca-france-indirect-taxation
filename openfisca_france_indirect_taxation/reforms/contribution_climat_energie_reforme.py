@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+from openfisca_core.parameters import ParameterNode
 from openfisca_core.reforms import Reform
 
 
@@ -12,103 +12,102 @@ from openfisca_core.reforms import Reform
 
 
 def modify_parameters(parameters):
-    reform_legislation_subtree = {
-
-        "description": "contribution_climat_energie_reforme",
-        "children": {
+    node = ParameterNode(
+        "contribution_climat_energie_reforme",
+        data = {
+            "description": "contribution_climat_energie_reforme",
             "diesel_2014_2015": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 # TODO "unit": '?',
                 "unit": 'currency',
-                "values": ['2014-01-01': 3.857 - 1.862}]
+                "values": {'2014-01-01': 3.857 - 1.862}
                 },
             "diesel_2014_2016": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 # TODO "unit": '?',
                 "unit": 'currency',
-                "values": ['2014-01-01': 5.852 - 1.862}]
+                "values": {'2014-01-01': 5.852 - 1.862}
                 },
             "essence_2014_2015": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "format": "float",
                 "unit": 'currency',
-                "values": ['2014-01-01': 3.509 - 1.694}],
+                "values": {'2014-01-01': 3.509 - 1.694}
                 },
             "essence_2014_2016": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "format": "float",
                 "unit": 'currency',
-                "values": ['2014-01-01': 5.324 - 1.694}],
+                "values": {'2014-01-01': 5.324 - 1.694}
                 },
             "fioul_domestique_2014_2015": {
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
                 "format": "float",
                 "unit": 'currency',
-                "values": ['2014-01-01': 0.04495 - 0.0217}],
+                "values": {'2014-01-01': 0.04495 - 0.0217}
                 },
             "fioul_domestique_2014_2016": {
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
                 "format": "float",
                 "unit": 'currency',
-                "values": ['2014-01-01': 0.0682 - 0.0217}],
+                "values": {'2014-01-01': 0.0682 - 0.0217}
                 },
             "gaz_2014_2015": {
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
                 # TODO "unit": '?',
                 "unit": 'currency',
-                "values": ['2014-01-01': 0.00348 - 0.00168}],
+                "values": {'2014-01-01': 0.00348 - 0.00168}
                 },
             "gaz_2014_2016": {
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
                 # TODO "unit": '?',
                 "unit": 'currency',
-                "values": ['2014-01-01': 0.00528 - 0.00168}],
+                "values": {'2014-01-01': 0.00528 - 0.00168}
                 },
             "abaissement_tva_taux_plein_2014_2015": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01': 0.004}],
+                "values": {'2010-01-01': 0.004}
                 },
             "abaissement_tva_taux_plein_2014_2016": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01': 0.008}],
+                "values": {'2010-01-01': 0.008}
                 },
             "abaissement_tva_taux_plein_bis_2014_2015": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01': 0.002}],
+                "values": {'2010-01-01': 0.002}
                 },
             "abaissement_tva_taux_plein_bis_2014_2016": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01': 0.005}],
+                "values": {'2010-01-01': 0.005}
                 },
             "abaissement_tva_taux_reduit_2014_2015": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01': 0.004}],
+                "values": {'2010-01-01': 0.004}
                 },
             "abaissement_tva_taux_reduit_2014_2016": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01': 0.006}],
+                "values": {'2010-01-01': 0.006}
                 },
             "abaissement_tva_taux_super_reduit_2014_2015": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01': 0.004}],
+                "values": {'2010-01-01': 0.004}
                 },
             "abaissement_tva_taux_super_reduit_2014_2016": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01': 0.006}],
+                "values": {'2010-01-01': 0.006}
                 },
             },
-        }
-
-    reference_legislation_json_copy['children']['contribution_climat_energie_reforme'] = reform_legislation_subtree
-    return reference_legislation_json_copy
+        )
+    parameters.add_child('contribution_climat_energie_reforme', node)
+    return parameters
 
 
 class contribution_climat_energie_reforme(Reform):

@@ -123,11 +123,11 @@ class aliss_sante(Reform):
 
 
 class aliss_tva_sociale(Reform):
-    key = 'aliss_tva_sociale'
     name = "Réforme Aliss-TVA sociale de l'imposition indirecte des biens alimentaires"
 
     def apply(self):
-        build_custom_aliss_reform(self, key = self.key, name = self.name)
+        key = 'aliss_tva_sociale'
+        build_custom_aliss_reform(self, key = key, name = self.name)
 
 
 def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None, missmatch_rates = "weighted"):
@@ -167,7 +167,7 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
             categories_fiscales_reform[reform_key] = categories_fiscales_reform[reform_key].astype(str)
 
     categories_fiscales_reform.rename(columns = ({reform_key: 'categorie_fiscale'}), inplace = True)
-    year = 2014
+    year = 2014  # noqa :analysis:ignore
     categories_fiscales_data_frame, _ = get_legislation_data_frames()
     categories_fiscales = categories_fiscales_data_frame.query('start <= @year & @year <= stop').copy()
 
@@ -335,7 +335,7 @@ def new_tva_function_creator(categorie_fiscale = None, taux = None):
             )
 
     func.__name__ = "formula"
-    return formulanc
+    return func
 
 
 def new_tva_total_function_creator(categories_fiscales):

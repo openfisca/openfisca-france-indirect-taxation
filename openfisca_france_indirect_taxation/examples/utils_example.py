@@ -11,11 +11,13 @@ import pkg_resources
 import numpy as np
 
 
-from openfisca_france_indirect_taxation.surveys import get_input_data_frame, SurveyScenario
+from openfisca_france_indirect_taxation.surveys import (
+    # get_input_data_frame,
+    SurveyScenario,
+    )
 
-
-from openfisca_france_indirect_taxation.examples.calage_bdf_cn import \
-    build_df_calee_on_grospostes, build_df_calee_on_ticpe
+# from openfisca_france_indirect_taxation.examples.calage_bdf_cn import \
+#     build_df_calee_on_grospostes, build_df_calee_on_ticpe
 
 
 def age_group(data):
@@ -44,30 +46,23 @@ def simulate(simulated_variables, year):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
-    input_data_frame = get_input_data_frame(year)
     data_year = year
-    # input_data_frame = get_input_data_frame(year)
-    survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
-    simulation = survey_scenario.new_simulation()
-    return DataFrame(
-        dict([
-            (name, simulation.calculate(name, period = year)) for name in simulated_variables
-
-            ])
+    survey_scenario = SurveyScenario.create(
+        year = year,
+        data_year = data_year
         )
+    return survey_scenario.create_data_frame_by_entity(variables_reference, period = year)['menage']
 
 
 def simulate_df_calee_by_grosposte(simulated_variables, year):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
-    input_data_frame = get_input_data_frame(year)
-    input_data_frame_calee = build_df_calee_on_grospostes(input_data_frame, year, year)
-    # TODO calage non inclus !!!
-    data_year = year
     # input_data_frame = get_input_data_frame(year)
+    # input_data_frame_calee = build_df_calee_on_grospostes(input_data_frame, year, year)
+    # # TODO calage non inclus !!!
+    data_year = year
     survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
-
     simulation = survey_scenario.new_simulation()
     return DataFrame(
         dict([
@@ -81,11 +76,10 @@ def simulate_df_calee_on_ticpe(simulated_variables, year):
     '''
     Construction de la DataFrame à partir de laquelle sera faite l'analyse des données
     '''
-    input_data_frame = get_input_data_frame(year)
-    input_data_frame_calee = build_df_calee_on_ticpe(input_data_frame, year, year)
-    # TODO calage non inclus !!!
-    data_year = year
     # input_data_frame = get_input_data_frame(year)
+    # input_data_frame_calee = build_df_calee_on_ticpe(input_data_frame, year, year)
+    # # TODO calage non inclus !!!
+    data_year = year
     survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
     simulation = survey_scenario.new_simulation()
     return DataFrame(
@@ -206,7 +200,7 @@ def dataframe_by_group(survey_scenario, category, variables, use_baseline = Fals
                     columns = [category],
                     use_baseline = True,
                     period = period)]
-                    )
+                )
     else:
         for values_reform in variables:
             pivot_table = pandas.concat([

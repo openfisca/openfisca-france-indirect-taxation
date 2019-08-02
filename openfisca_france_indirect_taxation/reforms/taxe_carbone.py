@@ -9,65 +9,64 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 
 def modify_parameters(parameters):
-    reform_legislation_subtree = {
-
-        "description": "taxe_carbone",
-        "children": {
+    node = ParameterNode(
+        "taxe_carbone",
+        data = {
+            "description": "taxe_carbone",
             "electricite": {
                 "description": "Surcroît de prix de l'électricité (en euros par kWh)",
                 # TODO "unit": '?',
                 "unit": 'currency',
-                "values": ['2010-01-01': 0.0045}],
+                "values": {'2010-01-01': 0.0045},
                 },
             "essence": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "format": "float",
                 "unit": 'currency',
-                "values": ['2010-01-01': 12.1 - 1.694}],
+                "values": {'2010-01-01': 12.1 - 1.694},
                 },
             "diesel": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 # TODO "unit": '?',
                 "unit": 'currency',
-                "values": ['2010-01-01': 13.3 - 1.862}],
+                "values": {'2010-01-01': 13.3 - 1.862},
                 },
             "combustibles_liquides": {
                 "description": "Surcroît de prix du diesel (en euros par litre)",
                 # TODO "unit": '?',
                 "unit": 'currency',
-                "values": ['2010-01-01': 0.155 - 0.0217}],
+                "values": {'2010-01-01': 0.155 - 0.0217},
                 },
             "gaz": {
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
                 # TODO "unit": '?',
                 "unit": 'currency',
-                "values": ['2010-01-01': 0.012 - 0.00168}],
+                "values": {'2010-01-01': 0.012 - 0.00168},
                 },
             "abaissement_tva_taux_plein": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01': 0.026}],
+                "values": {'2010-01-01': 0.026},
                 },
             "abaissement_tva_taux_plein_bis": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01': 0.01}],
+                "values": {'2010-01-01': 0.01},
                 },
             "abaissement_tva_taux_reduit": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01': 0.03}],
+                "values": {'2010-01-01': 0.03},
                 },
             "abaissement_tva_taux_super_reduit": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
                 # TODO "unit": '?',
-                "values": ['2010-01-01': 0.01}],
+                "values": {'2010-01-01': 0.01},
                 },
             },
-        }
-
-    reference_legislation_json_copy['children']['taxe_carbone'] = reform_legislation_subtree
-    return reference_legislation_json_copy
+        )
+    parameters.add_child('taxe_carbone', node)
+    return parameters
 
 
 class taxe_carbone(Reform):

@@ -62,6 +62,12 @@ class depenses_essence_recalculees(YearlyVariable):
         depenses_sp_95_ht = menage('depenses_sp_95_ht', period)
         depenses_sp_98_ht = menage('depenses_sp_98_ht', period)
         depenses_super_plombe_ht = menage('depenses_super_plombe_ht', period)
+        return (
+            depenses_sp_e10_ht
+            + depenses_sp_95_ht
+            + depenses_sp_98_ht
+            + depenses_super_plombe_ht
+            ) * (1 + taux_plein_tva)
 
 
 class depenses_tot(YearlyVariable):

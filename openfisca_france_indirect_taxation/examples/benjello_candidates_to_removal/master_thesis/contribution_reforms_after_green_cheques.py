@@ -21,7 +21,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
-        reform_key = '{}'.format(reforme),
+        reform = '{}'.format(reforme),
         year = year,
         data_year = data_year
         )
@@ -34,11 +34,11 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
         ]
 
     indiv_df_reform = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
-    indiv_df_use_baseline = survey_scenario.create_data_frame_by_entity(simulated_variables,
+    indiv_df_reference = survey_scenario.create_data_frame_by_entity(simulated_variables,
         use_baseline =True, period = year)
 
     menages_reform = indiv_df_reform['menage']
-    menages_use_baseline = indiv_df_reference['menage']
+    menages_reference = indiv_df_reference['menage']
 
     unite_conso = (menages_reform['ocde10'] * menages_reform['pondmen']).sum()
     contribution = (
@@ -50,7 +50,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
     for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
         df_reform = \
             dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =False)
-        df_use_baseline =\
+        df_reference =\
             dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
 
         df_reform['Cost of the reform after green cheques'] = (

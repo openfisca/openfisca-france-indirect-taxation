@@ -9,39 +9,38 @@ from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ign
 
 
 def modify_parameters(parameters):
-    reform_legislation_subtree = {
-
-        "description": "officielle_2019_in_2018",
-        "children": {
+    node = ParameterNode(
+        "officielle_2019_in_2018",
+        data = {
+            "description": "officielle_2019_in_2018",
             "diesel_2019_in_2018": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 # TODO "unit": '?',
                 "unit": 'currency',
-                "values": ['2016-01-01': 2.6 + 266 * (0.055 - 0.0446)}]
+                "values": {'2016-01-01': 2.6 + 266 * (0.055 - 0.0446)}
                 },
             "essence_2019_in_2018": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "format": "float",
                 "unit": 'currency',
-                "values": ['2016-01-01': 242 * (0.055 - 0.0446)}],
+                "values": {'2016-01-01': 242 * (0.055 - 0.0446)}
                 },
             "combustibles_liquides_2019_in_2018": {
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
                 "format": "float",
                 "unit": 'currency',
-                "values": ['2016-01-01': 3.24 * (0.055 - 0.0446)}],
+                "values": {'2016-01-01': 3.24 * (0.055 - 0.0446)}
                 },
             "gaz_ville_2019_in_2018": {
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
                 # TODO "unit": '?',
                 "unit": 'currency',
-                "values": ['2016-01-01': 0.241 * (0.055 - 0.0446)}],
+                "values": {'2016-01-01': 0.241 * (0.055 - 0.0446)}
                 },
             },
-        }
-
-    reference_legislation_json_copy['children']['officielle_2019_in_2018'] = reform_legislation_subtree
-    return reference_legislation_json_copy
+        )
+    parameters.add_child('officielle_2019_in_2018', node)
+    return parameters
 
 
 class officielle_2019_in_2018(Reform):

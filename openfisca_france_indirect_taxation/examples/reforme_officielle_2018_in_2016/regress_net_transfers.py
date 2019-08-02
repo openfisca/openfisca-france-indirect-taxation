@@ -10,8 +10,8 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
     age_group,
     energy_modes,
     )
-# from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
+from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import reforme_officielle_2018_in_2016
 
 
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)

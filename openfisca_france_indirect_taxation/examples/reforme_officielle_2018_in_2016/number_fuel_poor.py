@@ -6,6 +6,7 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.examples.utils_example import brde, tee_10_3, precarite
+from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import reforme_officielle_2018_in_2016
 
 
 def number_fuel_poors(year, data_year):
@@ -51,7 +52,7 @@ def number_fuel_poors(year, data_year):
     df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
     df_reforme = df_reforme.query('rev_disponible > 0')
 
-   # Avant reforme
+    # Avant reforme
     df_reforme = brde(df_reforme, 'depenses_energies_logement', 'rev_disponible', 'logement')
     dict_logement['brde - avant reforme'] = (
         (df_reforme['brde_m2_logement_rev_disponible'] * df_reforme['pondmen']).sum()

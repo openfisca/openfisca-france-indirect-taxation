@@ -2,6 +2,7 @@
 
 
 from openfisca_core import reforms
+from openfisca_core.parameters import ParameterNode
 
 
 def build_reform(tax_benefit_system):
@@ -20,10 +21,10 @@ def build_reform(tax_benefit_system):
 
 
 def modify_parameters(parameters):
-
-    data = {
-        "description": "taxes_carburants",
-        "children": {
+    node = ParameterNode(
+        'taxes_carburants',
+        data = {
+            "description": "taxes_carburants",
             "diesel": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 # TODO "unit": '?',
@@ -32,8 +33,9 @@ def modify_parameters(parameters):
                     '2010-01-01': 17.85,
                     '2015-01-01': 15.59,
                     '2016-01-01': 15.31,
+                    },
                 },
             },
-        }
-    reference_legislation_json_copy['children']['taxes_carburants'] = reform_legislation_subtree
-    return reference_legislation_json_copy
+        )
+    parameters.add_child('taxes_carburants', node)
+    return parameters

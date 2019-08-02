@@ -28,7 +28,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_
         survey_scenario = SurveyScenario.create(
             elasticities = elasticities,
             inflation_kwargs = inflation_kwargs,
-            reform_key = '{}'.format(reforme),
+            reform = '{}'.format(reforme),
             year = year,
             data_year = data_year
             )
@@ -36,7 +36,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2014_2015', 'cce_2014_
         survey_scenario = SurveyScenario.create(
             elasticities = elasticities,
             inflation_kwargs = inflation_kwargs,
-            reform_key = 'contribution_climat_energie_reforme',
+            reform = 'contribution_climat_energie_reforme',
             year = year,
             data_year = data_year
             )

@@ -76,7 +76,7 @@ del check, check2, common_check, common_check2
 for element in common:
     short_name = element[13:15]
     assert short_name == '99' or short_name == '13', 'Some goods are not matched with any price'
-del common, short_name, x
+del common, short_name
 
 
 """ Check if the shares of each poste in their broad category sum to 1 """

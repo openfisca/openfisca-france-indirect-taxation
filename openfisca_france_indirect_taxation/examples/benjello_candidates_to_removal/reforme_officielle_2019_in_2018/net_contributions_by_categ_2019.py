@@ -41,7 +41,7 @@ simulated_variables = [
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
-    reform_key = 'officielle_2019_in_2018',
+    reform = 'officielle_2019_in_2018',
     year = year,
     data_year = data_year
     )

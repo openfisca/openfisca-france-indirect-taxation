@@ -11,6 +11,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import brde, tee_
 from openfisca_france_indirect_taxation.examples.utils_example import (
     graph_builder_bar_percent, age_group, energy_modes
     )
+from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import reforme_officielle_2018_in_2016
 
 
 def number_fuel_poors_by_categ(df_reforme, group, variables_precarite):

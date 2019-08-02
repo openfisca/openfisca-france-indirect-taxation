@@ -9,15 +9,14 @@ import pkg_resources
 from biryani.strings import slugify
 
 
-from openfisca_core.model_api import *
+from openfisca_core.model_api import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.variables import YearlyVariable  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.entities import Individu, Menage  # noqa analysis:ignore
+
 try:
     from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
 except ImportError:
     mark_weighted_percentiles, weighted_quantiles = None, None
-
-
-from openfisca_france_indirect_taxation.variables import YearlyVariable
-from openfisca_france_indirect_taxation.entities import Individu, Menage
 
 
 tva_by_categorie_primaire = dict(
@@ -32,14 +31,6 @@ tva_by_categorie_primaire = dict(
     assurance_sante = '',
     autres_assurances = '',
     )
-
-
-def get_tva(categorie_fiscale):
-    tva = tva_by_categorie_primaire.get(categorie_fiscale, categorie_fiscale)
-    if tva in ['tva_taux_plein', 'tva_taux_intermediaire', 'tva_taux_reduit', 'tva_taux_super_reduit']:
-        return tva
-    else:
-        return None
 
 
 def get_tva(categorie_fiscale):
