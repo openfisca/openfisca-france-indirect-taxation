@@ -6,6 +6,7 @@ import pytest
 from openfisca_core.tools import assert_near
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
 
+
 @pytest.mark.skipif(reason = "KeyError: '['poste_coicop_07_2_2_1_1'] not in index'")
 @pytest.mark.parametrize("year", [2000, 2005, 2011])
 def test_carburants_builder(year):

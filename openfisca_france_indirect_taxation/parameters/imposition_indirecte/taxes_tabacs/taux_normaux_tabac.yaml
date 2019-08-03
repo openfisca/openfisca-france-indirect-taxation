@@ -79,7 +79,7 @@ taux_normal:
     metadata:
       ipp_csv_id: tx_cigares
       unit: /1
-  tabac_rouler:
+  tabac_a_rouler:
     description: Tabac à rouler
     values:
       2020-11-01:

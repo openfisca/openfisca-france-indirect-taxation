@@ -35,6 +35,7 @@ restauration_sur_place_reforme_2010 = dict(
     year = 2010,
     )
 
+
 @pytest.mark.parametrize("member", [margarine, confiserie, alcools, vin, restauration_sur_place, restauration_sur_place_reforme_2010])
 def check_categorie_fiscale(member):
     computed_categorie_fiscale = get_categorie_fiscale(member['value'], year = member.get('year'))

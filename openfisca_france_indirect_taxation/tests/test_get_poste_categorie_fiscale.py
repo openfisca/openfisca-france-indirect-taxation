@@ -25,6 +25,7 @@ biere = dict(
     categorie_fiscale = 'biere',
     )
 
+
 @pytest.mark.parametrize("categorie", [confiserie, alcools, vin, biere])
 def test_categorie_fiscale(categorie):
     postes_coicop = categorie['value']

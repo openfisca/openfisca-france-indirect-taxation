@@ -1,10 +1,10 @@
  - name: "Cigarettes"
    period: "2010"
    absolute_error_margin: .0049
-   input_variables:
+   input:
      poste_02_2_1: 100  # Cigarettes
 
-   output_variables:
+   output:
      depenses_cigares: 0
      depenses_cigarettes: 100
      depenses_tabac_a_rouler: 0
@@ -33,10 +33,10 @@
  - name: "Cigares"
    period: "2010"
    absolute_error_margin: .004
-   input_variables:
+   input:
      poste_02_2_2: 100  # Cigares
 
-   output_variables:
+   output:
      depenses_cigares: 100
      depenses_cigarettes: 0
      depenses_tabac_a_rouler: 0
@@ -65,10 +65,10 @@
  - name: u"Tabac à rouler"
    period: "2010"
    absolute_error_margin: .004
-   input_variables:
+   input:
      poste_02_2_3: 100  # tabac a rouler
 
-   output_variables:
+   output:
      depenses_cigares: 0
      depenses_cigarettes: 0
      depenses_tabac_a_rouler: 100

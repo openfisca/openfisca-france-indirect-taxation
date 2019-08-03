@@ -1,10 +1,10 @@
  - name: u"Test réaction comportementale diesel 2014"
    period: "2014"
    ignore: True
-   input_variables:
+   input:
      depenses_essence: 1000
      elas_price_1_1: -0.4
-   output_variables:
+   output:
      depenses_essence: 1000
      elas_price_1_1: -0.4
      depenses_essence_ajustees_rattrapage_diesel: 1000 * (1 + (1 - 0.4) * (10 / 148.4583))
@@ -14,8 +14,8 @@
    ignore: True
    period: "2013"
    absolute_error_margin: .001
-   input_variables:
+   input:
      depenses_essence: 1000
      elas_price_1_1: -0.4
-   output_variables:
+   output:
      depenses_essence_ajustees: 1000 * (1 + (-0.4 * 30 / 153.67))  #  super_95_ttc = 153.673461538

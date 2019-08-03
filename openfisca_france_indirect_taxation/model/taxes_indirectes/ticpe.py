@@ -38,7 +38,7 @@ class diesel_ticpe(YearlyVariable):
             (accise_diesel_ticpe * (1 + taux_plein_tva))
             / (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
             )
-
+        print("taux_implicite_diesel: {}".format(taux_implicite_diesel))
         depenses_diesel = menage('depenses_diesel_corrigees', period)
         depenses_diesel_htva = depenses_diesel - tax_from_expense_including_tax(depenses_diesel, taux_plein_tva)
         montant_diesel_ticpe = tax_from_expense_including_tax(depenses_diesel_htva, taux_implicite_diesel)

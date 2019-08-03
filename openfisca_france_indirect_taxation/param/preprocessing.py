@@ -36,11 +36,13 @@ def preprocess_legislation(parameters):
     for year in years:
         values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
 
+    prix_annuel = prix_annuel_carburants['super_95_ttc']
     years = list(range(2009, 2013))
     years = sorted(years, key=int, reverse=True)
     for year in years:
         values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
 
+    prix_annuel = prix_annuel_carburants['super_95_e10_ttc']
     years = list(range(1990, 2009))
     years = sorted(years, key=int, reverse=True)
     for year in years:

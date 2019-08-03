@@ -10,6 +10,7 @@ import pandas as pd
 
 
 from openfisca_france_indirect_taxation.build_survey_data.utils import find_nearest_inferior
+from openfisca_france_indirect_taxation.utils import get_input_data_frame
 
 
 data_years = [2000, 2005, 2011]
@@ -179,7 +180,7 @@ def get_cn_aggregates_energy(target_year = None):
     # loyer_impute_cn.rename(columns = {'value': 'conso_CN_{}'.format(target_year)}, inplace = True)
     # loyer_impute_cn = loyer_impute_cn * 1e9
 
-    masses_cn = pd.pd.concat([masses_cn_energie, revenus_cn])
+    masses_cn = pd.concat([masses_cn_energie, revenus_cn])
     masses_cn.loc['rev_disp_loyerimput'] = masses_cn.loc['rev_disponible'] - masses_cn.loc['loyer_impute']
 
     return masses_cn
