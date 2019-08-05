@@ -36,7 +36,7 @@ setup(
         dev = [
             "autopep8 ==1.4.4",
             "flake8 >=3.7.0,<3.8.0",
-            "flake8-print",
+            # "flake8-print", Bring back when one has time to clear all prints
             'matplotlib',
             'nbconvert >= 5.5.0',
             'pandas >= 0.17',
