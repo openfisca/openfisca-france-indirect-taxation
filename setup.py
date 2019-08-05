@@ -34,10 +34,13 @@ setup(
 
     extras_require = dict(
         dev = [
+            "autopep8 ==1.4.4",
+            "flake8 >=3.7.0,<3.8.0",
+            "flake8-print",
             'matplotlib',
             'nbconvert >= 5.5.0',
-            'nose',
             'pandas >= 0.17',
+            "pytest < 5.0",
             'pdbpp',
             'ruamel.yaml',
             'seaborn',
