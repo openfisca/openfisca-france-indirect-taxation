@@ -139,7 +139,6 @@ def preprocess_legislation(parameters):
         }
     for element in ['diesel', 'essence']:
         quantite_carburants = quantite_carbu_vp_france[element]
-        # values_quantite[element] = []
         years = list(range(1990, 2017))
         years = sorted(years, key=int, reverse=True)
         values = dict()

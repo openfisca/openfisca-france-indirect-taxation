@@ -24,5 +24,6 @@ Run models:
     - pwd
     - ls -alrth
     - mkdir /root/ci-files
+    - mkdir /root/ci-files/data_collections
     - build-collection -c budget_des_familles -d -m
     - make test
