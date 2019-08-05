@@ -26,5 +26,5 @@ Run models:
     - mkdir /root/ci-files
     - mkdir /root/ci-files/data_collections
     - build-collection -c budget_des_familles -d -m -s 2011
-    - build-survey-data - y 2011 -v
+    - build-survey-data -y 2011 -v
     - make test
