@@ -1,2 +1,0 @@
--e git+https://github.com/openfisca/openfisca-survey-manager.git#egg=OpenFisca-Survey-Manager
--e .
