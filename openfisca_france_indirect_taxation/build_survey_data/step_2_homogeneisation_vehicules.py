@@ -26,9 +26,9 @@ log = logging.getLogger(__name__)
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_homogeneisation_vehicules(temporary_store = None, year = None):
-    assert temporary_store is not None
     """Compute vehicule numbers by type"""
 
+    assert temporary_store is not None
     assert year is not None
     # Load data
     bdf_survey_collection = SurveyCollection.load(

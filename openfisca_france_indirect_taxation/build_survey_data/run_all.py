@@ -29,7 +29,8 @@ from openfisca_france_indirect_taxation.build_survey_data.step_3_homogeneisation
 from openfisca_france_indirect_taxation.build_survey_data.step_4_homogeneisation_revenus_menages \
     import build_homogeneisation_revenus_menages
 
-from openfisca_survey_manager.temporary import TemporaryStore
+from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.temporary import temporary_store_decorator
 
 from openfisca_france_indirect_taxation.build_survey_data.utils import ident_men_dtype
 
@@ -37,9 +38,10 @@ from openfisca_france_indirect_taxation.build_survey_data.utils import ident_men
 log = logging.getLogger(__name__)
 
 
+@temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def run_all_steps(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
 
-    temporary_store = TemporaryStore.create(file_name = "indirect_taxation_tmp")
+    assert temporary_store is not None
 
     # Quelle base de données choisir pour le calage ?
     year_data = find_nearest_inferior(year_data_list, year_calage)
