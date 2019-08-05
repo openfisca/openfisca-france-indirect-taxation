@@ -31,14 +31,13 @@ from openfisca_france_indirect_taxation.build_survey_data.step_4_homogeneisation
 
 from openfisca_survey_manager.temporary import TemporaryStore
 
-from openfisca_france_indirect_taxation.build_survey_data.utils \
-    import ident_men_dtype
+from openfisca_france_indirect_taxation.build_survey_data.utils import ident_men_dtype
 
 
 log = logging.getLogger(__name__)
 
 
-def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
+def run_all_steps(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
 
     temporary_store = TemporaryStore.create(file_name = "indirect_taxation_tmp")
 
@@ -177,12 +176,5 @@ def run(years_calage):
     year_data_list = [1995, 2000, 2005, 2011]
     for year_calage in years_calage:
         start = time.time()
-        run_all(year_calage, year_data_list)
+        run_all_steps(year_calage, year_data_list)
         log.info("Finished {}".format(time.time() - start))
-
-
-if __name__ == '__main__':
-    import sys
-    logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    years_calage = [2000, 2005, 2011]
-    run(years_calage)
