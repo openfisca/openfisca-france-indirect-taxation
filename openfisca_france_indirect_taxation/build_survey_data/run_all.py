@@ -11,9 +11,9 @@ import numpy
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.surveys import Survey
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.temporary import temporary_store_decorator
 
-from openfisca_france_indirect_taxation.build_survey_data.utils \
-    import find_nearest_inferior
+from openfisca_france_indirect_taxation.build_survey_data.utils import find_nearest_inferior
 
 from openfisca_france_indirect_taxation.build_survey_data.step_1_1_homogeneisation_donnees_depenses \
     import build_depenses_homogenisees
@@ -29,8 +29,6 @@ from openfisca_france_indirect_taxation.build_survey_data.step_3_homogeneisation
 from openfisca_france_indirect_taxation.build_survey_data.step_4_homogeneisation_revenus_menages \
     import build_homogeneisation_revenus_menages
 
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
-from openfisca_survey_manager.temporary import temporary_store_decorator
 
 from openfisca_france_indirect_taxation.build_survey_data.utils import ident_men_dtype
 
@@ -39,7 +37,7 @@ log = logging.getLogger(__name__)
 
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
-def run_all_steps(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
+def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
 
     assert temporary_store is not None
 
@@ -175,8 +173,7 @@ def run_all_steps(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011])
 
 def run(years_calage):
     import time
-    year_data_list = [1995, 2000, 2005, 2011]
     for year_calage in years_calage:
         start = time.time()
-        run_all_steps(year_calage, year_data_list)
+        run_all_steps(year_calage = year_calage)
         log.info("Finished {}".format(time.time() - start))
