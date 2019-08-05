@@ -20,8 +20,8 @@ def modify_parameters(parameters):
 
 
 class reforme_rattrapage_diesel(Reform):
-    key = 'rattrapage_diesel',
-    name = "Reforme de l'imposition indirecte des carburants",
+    key = 'rattrapage_diesel'
+    name = "Reforme de l'imposition indirecte des carburants"
 
     # class depenses_carburants_ajustees_rattrapage_diesel(YearlyVariable):
     #    value_type = float
