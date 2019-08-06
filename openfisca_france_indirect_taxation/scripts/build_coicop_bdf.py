@@ -74,7 +74,7 @@ def merge_with_coicop_nomenclature(data_frame):
     coicop_nomenclature = build_complete_coicop_nomenclature()
     # First pass on coicop level 5
     coicop_nomenclature['poste_coicop'] = coicop_nomenclature['code_coicop'].copy()
-    df1 = coicop_nomenclature.merge(data_frame, on = 'code_coicop', how = 'left')
+    df1 = coicop_nomenclature.merge(data_frame, on = 'code_coicop', how = 'left', sort = True)
 
     level = data_frame['code_coicop'].loc[0].count('.') + 1
     coicop_nomenclature['code_coicop'] = coicop_nomenclature['code_coicop'].str[:2 * level]
@@ -82,19 +82,21 @@ def merge_with_coicop_nomenclature(data_frame):
     remaining_data_frame = data_frame.loc[
         ~(data_frame.code_coicop.isin(coicop_nomenclature['poste_coicop'].unique()))
         ].copy()
-    df2 = coicop_nomenclature.merge(remaining_data_frame, on = 'code_coicop', how = 'outer')
+
+    df2 = coicop_nomenclature.merge(remaining_data_frame, on = 'code_coicop', how = 'outer', sort = True)
 
     result = df1.append(df2, ignore_index = True)
+
     result = result.loc[~(result.poste_coicop.duplicated(keep = False) & result.label.isnull())].copy()
-
-    result = result.append(coicop_nomenclature.loc[
-        ~coicop_nomenclature.poste_coicop.isin(result.poste_coicop.unique())])
-
+    result = result.append(
+        coicop_nomenclature.loc[
+            ~coicop_nomenclature.poste_coicop.isin(result.poste_coicop.unique())],
+        sort = True
+        )
     result = result[[
         'label_division', 'label_groupe', 'label_classe', 'label_sous_classe', 'label_poste',
         'poste_coicop', 'code_coicop', 'label', 'code_bdf',
         ]].sort_values(by = ['code_coicop', 'code_bdf'])
-
     return result
 
 
@@ -471,9 +473,11 @@ def bdf(year):
 if __name__ == '__main__':
     year = 2011
     bdf_coicop = guess_coicop_from_bdf(year = year)
+    print("1")
     adjusted_bdf_coicop = adjust_coicop(bdf_coicop)
+    print("2")
     data_frame = merge_with_coicop_nomenclature(adjusted_bdf_coicop)
 
-#   len(errors)
-#   df = pandas.DataFrame.from_records(errors).sort_values(by = 'code_coicop')
-#   print df[['code_coicop', 'products', 'categorie_fiscale']]
+    #   len(errors)
+    #   df = pandas.DataFrame.from_records(errors).sort_values(by = 'code_coicop')
+    #   print df[['code_coicop', 'products', 'categorie_fiscale']]

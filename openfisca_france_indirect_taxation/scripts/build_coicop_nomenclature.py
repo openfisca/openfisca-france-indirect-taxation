@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 
 
+import logging
 import os
 import pandas as pd
 import pkg_resources
+
+
+log = logging.getLogger(__name__)
 
 
 legislation_directory = os.path.join(
@@ -38,20 +42,21 @@ taxe_by_categorie_fiscale_number = {
 
 def build_coicop_level_nomenclature(level, keep_code = False, to_csv = False):
     assert level in sub_levels
-    data_frame = pd.read_csv(
+    log.debug("Reading nomenclature coicop source data for level {}".format(level))
+    try:
+        data_frame = pd.read_csv(
         os.path.join(legislation_directory, 'nomenclature_coicop_source_by_{}.csv'.format(level)),
         sep = ';',
         header = -1,
         )
+    except:
+        log.info("Error when reading nomenclature coicop source data for level {}".format(level))
+
     data_frame.reset_index(inplace = True)
     data_frame.rename(columns = {0: 'code_coicop', 1: 'label_{}'.format(level[:-1])}, inplace = True)
     data_frame = data_frame.ix[2:].copy()
 
-    # Problème dû au fichier Excel, nous devons changer le contenu d'une case:
-    if level == 'sous_classes':
-        data_frame.loc[data_frame['code_coicop'] == "01.1.4.4", 'code_coicop'] = "'01.1.4.4"
-
-    index, stop = 1, False
+    index, stop = 0, False
     for sub_level in sub_levels:
         if stop:
             continue
@@ -103,7 +108,6 @@ def build_raw_coicop_nomenclature():
 
 def build_complete_coicop_nomenclature(to_csv = True):
     coicop_nomenclature = build_raw_coicop_nomenclature()
-
     items = [
         ("Cigares et cigarillos", "02.2.1"),
         ("Cigarettes", "02.2.2"),
