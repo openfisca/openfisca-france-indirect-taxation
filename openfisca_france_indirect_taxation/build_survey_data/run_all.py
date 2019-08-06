@@ -93,6 +93,7 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
     data_frame = pandas.concat(
         list(preprocessed_data_frame_by_name.values()),
         axis = 1,
+        sort = True
         )
 
     if year_data == 2005:
@@ -100,6 +101,7 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
             data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
         for variable in ['age{}'.format(i) for i in range(3, 14)] + ['agecj', 'agfinetu', 'agfinetu_cj', 'nenfhors']:
             data_frame.loc[data_frame[variable].isnull(), variable] = 0
+
     if year_data == 2011:
         for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
         'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']:
@@ -125,20 +127,24 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
     if year_data == 2011:
         data_frame = data_frame.query('zeat != 0').copy()
 
-        # On apparie ajoute les données appariées de l'ENL et l'ENTD
-        default_config_files_directory = os.path.join(
-            pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-        data_matched = pandas.read_csv(
-            os.path.join(
-                default_config_files_directory,
-                'openfisca_france_indirect_taxation',
-                'assets',
-                'matching',
-                'data_for_run_all.csv'
-                ), sep =',', decimal = '.'
-            )
-        data_matched['ident_men'] = data_matched['ident_men'].astype(str)
-        data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
+        try:
+            # On apparie ajoute les données appariées de l'ENL et l'ENTD
+            default_config_files_directory = os.path.join(
+                pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+            data_matched = pandas.read_csv(
+                os.path.join(
+                    default_config_files_directory,
+                    'openfisca_france_indirect_taxation',
+                    'assets',
+                    'matching',
+                    'data_for_run_all.csv'
+                    ), sep =',', decimal = '.'
+                )
+            data_matched['ident_men'] = data_matched['ident_men'].astype(str)
+            data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
+        except FileNotFoundError as e:
+            log.debug("Matching data with ENL and ENTD are not present")
+            raise(e)
 
     # Créer un nouvel identifiant pour les ménages
     data_frame['identifiant_menage'] = list(range(0, len(data_frame)))
