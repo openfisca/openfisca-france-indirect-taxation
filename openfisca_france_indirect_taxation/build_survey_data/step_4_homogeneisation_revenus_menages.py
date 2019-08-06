@@ -328,7 +328,8 @@ In loyers_imputes and not in revenus:
             log.debug(e)
             menage = survey.get_values(
                 table = "menage",
-                variables =  menage_variables)
+                variables = menage_variables,
+                )
 
         menage = menage.rename(columns = {'ident_me': 'ident_men'}).sort_values(by = ['ident_men'])
 
