@@ -45,12 +45,13 @@ def build_coicop_level_nomenclature(level, keep_code = False, to_csv = False):
     log.debug("Reading nomenclature coicop source data for level {}".format(level))
     try:
         data_frame = pd.read_csv(
-        os.path.join(legislation_directory, 'nomenclature_coicop_source_by_{}.csv'.format(level)),
-        sep = ';',
-        header = -1,
-        )
-    except:
+            os.path.join(legislation_directory, 'nomenclature_coicop_source_by_{}.csv'.format(level)),
+            sep = ';',
+            header = -1,
+            )
+    except Exception as e:
         log.info("Error when reading nomenclature coicop source data for level {}".format(level))
+        raise(e)
 
     data_frame.reset_index(inplace = True)
     data_frame.rename(columns = {0: 'code_coicop', 1: 'label_{}'.format(level[:-1])}, inplace = True)
