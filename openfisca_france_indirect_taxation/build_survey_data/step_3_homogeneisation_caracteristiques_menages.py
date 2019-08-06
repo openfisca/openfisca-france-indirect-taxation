@@ -629,17 +629,17 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'mall2',
             'mchof',
             'mchof_d',
-            'mfac_eau1',
-            'mfac_eau1_d',
+            # 'mfac_eau1',
+            # 'mfac_eau1_d',
             'mfac_eg1',
-            'mfac_eg1_d',
+            # 'mfac_eg1_d',
             'mloy',
             'mloy_d',
             'nbh1',
             'nbphab',
             'sourcp',
             'stalog',
-            'surfhab_d',
+            # 'surfhab_d',
             'tchof',
             'vag',
             ]
@@ -647,6 +647,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             depmen = survey.get_values(table = "DEPMEN", variables = variables_depmen)
         except Exception:
             depmen = survey.get_values(table = "depmen", variables = variables_depmen)
+
         depmen.rename(columns = {'ident_me': 'ident_men'}, inplace = True)
 
         menage.set_index('ident_men', inplace = True)
