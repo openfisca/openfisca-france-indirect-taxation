@@ -48,7 +48,7 @@ setup(
             'seaborn',
             ],
         survey = [
-            'OpenFisca-Survey-Manager',
+            'OpenFisca-Survey-Manager >= 0.32.1',
             'tables',
             ],
         ),

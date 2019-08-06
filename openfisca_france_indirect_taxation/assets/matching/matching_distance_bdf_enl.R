@@ -1,28 +1,60 @@
 # Import data
-data_enl <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_enl.csv", header = -1, sep=",")
-data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_bdf.csv", header = -1, sep=",")
+
+data_matching_enl_path <- "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_enl.csv"
+data_matching_bdf_path <- "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_bdf.csv"
+
+data_enl <- read.csv(file = data_matching_enl_path, header = -1, sep=",")
+data_bdf <- read.csv(file = data_matching_bdf_path, header = -1, sep=",")
 
 # Compute matching
 out.nnd <- NND.hotdeck(
   data.rec = data_bdf, data.don = data_enl,
-  match.vars = c("part_energies_revtot", "aides_logement", "log_indiv", "electricite", "ouest_sud",
-                 "nactifs", "bat_av_49", "dip14pr", "revtot", "rural", "nenfants",
-                 "petite_ville", "surfhab_d"),
+  match.vars = c(
+    "aides_logement",
+    "bat_av_49",
+    "dip14pr",
+    "electricite",
+    "log_indiv",
+    "nactifs",
+    "nenfants",
+    "ouest_sud",
+    "part_energies_revtot",
+    "petite_ville",
+    "revtot",
+    "rural",
+    "surfhab_d"
+    ),
   don.class = c("donation_class_3"),
   dist.fun = "Gower"
-)
+  )
 
 # Create fused file
 fused.nnd.m <- create.fused(
   data.rec = data_bdf, data.don = data_enl,
   mtc.ids = out.nnd$mtc.ids,
-  z.vars = c("froid", "froid_installation", "gchauf_2", "froid_cout", "froid_isolation",
-             "froid_impaye", "gchauf_6", "gchauf_7", "gchaufs_1",
-             "gchaufs_2", "gchaufs_3", "gchaufs_4", "gchaufs_5",
-             "isolation_murs", "isolation_toit", "isolation_fenetres", "majorite_double_vitrage")
+  z.vars = c(
+    "froid_cout",
+    "froid_impaye",
+    "froid_installation",
+    "froid_isolation",
+    "froid",
+    "gchauf_2",
+    "gchauf_6",
+    "gchauf_7",
+    "gchaufs_1",
+    "gchaufs_2",
+    "gchaufs_3",
+    "gchaufs_4",
+    "gchaufs_5",
+    "isolation_fenetres",
+    "isolation_murs",
+    "isolation_toit",
+    "majorite_double_vitrage"
+    )
 )
 
+data_matched_distance_path <- "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matched_distance.csv"
 # Save it as csv
 write.csv(fused.nnd.m,
-          file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matched_distance.csv"
+          file = data_matched_distance_path
           )
