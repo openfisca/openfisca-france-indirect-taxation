@@ -573,7 +573,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'cs42pr',
             'cs42cj',
             'decuc1',
-            'ident_men',
+            'ident_me',
             'pondmen',
             'npers',
             'nenfants',
@@ -593,7 +593,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         try:
             menage = survey.get_values(table = "MENAGE", variables = variables)
-        except Exception:
+        except Exception as:
             menage = survey.get_values(table = "menage", variables = variables)
 
         menage.rename(
@@ -605,7 +605,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
                 },
             inplace = True,
             )
-        del variables
         menage.agecj = menage.agecj.fillna(0)
         # Pour Aliss
         menage['nadultes'] = menage.npers - menage.nenfants
@@ -624,7 +623,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'ancons',
             'chaufp',
             'htl',
-            'ident_men',
+            'ident_me',
             'mall1',
             'mall2',
             'mchof',
