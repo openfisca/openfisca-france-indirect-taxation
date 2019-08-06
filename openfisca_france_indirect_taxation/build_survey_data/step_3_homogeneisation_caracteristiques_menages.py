@@ -653,13 +653,13 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.set_index('ident_men', inplace = True)
         depmen.set_index('ident_men', inplace = True)
 
-        variables_sante = ['ident_me', 'complentr']
+        variables_sante = ['ident_me', 'complent']
         try:
             compl_sante = survey.get_values(table = "COMPL_SANTE", variables = variables_sante)
             compl_sante.rename(columns = {'ident_me': 'ident_men'}, inplace = True)
             compl_sante.set_index('ident_men', inplace = True)
 
-            compl_sante['cmu'] = 0 + 1 * (compl_sante['complentr'] == 5)
+            compl_sante['cmu'] = 0 + 1 * (compl_sante['complent'] == 5)
             compl_sante = compl_sante.query('cmu != 0')
         except Exception as e:
             log.debug(e)
