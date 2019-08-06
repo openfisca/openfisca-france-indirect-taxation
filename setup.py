@@ -42,7 +42,6 @@ setup(
             # "flake8-print", Bring back when one has time to clear all prints
             'matplotlib',
             'nbconvert >= 5.5.0',
-            "numpy >= 1.11, <1.16",  # openfisca-survey-manager deps and https://github.com/openfisca/openfisca-survey-manager/pull/79            'pandas >= 0.17',
             "pytest < 5.0",
             'pdbpp',
             'ruamel.yaml',
@@ -57,7 +56,7 @@ setup(
     install_requires = [
         'Babel >= 0.9.4',
         'Biryani[datetimeconv] >= 0.10.2dev',
-        'numpy >= 1.6',
+        "numpy >= 1.11, <1.16",  # openfisca-survey-manager deps and https://github.com/openfisca/openfisca-survey-manager/pull/79            'pandas >= 0.17',
         'OpenFisca-Core >= 0.5.4',
         'PyYAML >= 3.10',
         ],
