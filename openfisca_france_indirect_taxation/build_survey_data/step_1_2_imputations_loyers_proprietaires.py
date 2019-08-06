@@ -101,7 +101,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         assert loyers_imputes.loyer_impute.notnull().all()
         loyers_imputes.rename(columns = dict(loyer_impute = '0411'), inplace = True)
 
-    # POUR BdF 2000 ET 2005, ON UTILISE LES LOYERS IMPUTES CALCULES PAR L'INSEE
+    # Pour bdf 2000 et 2005, on utilise les loyers imputes calcules par l'insee
     if year == 2000:
         # Garder les loyers imputés (disponibles dans la table sur les ménages)
         loyers_imputes = survey.get_values(table = "menage", variables = ['ident', 'rev81'])
@@ -123,11 +123,21 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
     if year == 2011:
         try:
             loyers_imputes = survey.get_values(table = "MENAGE")
+            log.debug("Using 'MENAGE' table")
         except Exception:
+            log.debug("Using 'menage' table")
             loyers_imputes = survey.get_values(table = "menage")
 
         kept_variables = ['ident_men', 'rev801']
-        loyers_imputes = loyers_imputes[kept_variables].copy()
+        try:
+            loyers_imputes = loyers_imputes[kept_variables].copy()
+        except KeyError as e:
+            log.debug("Variables that are not found: {}".format(
+                set(kept_variables).difference(set(loyers_imputes.columns))
+                ))
+            log.debug("loyers_imputes columns are: {}".format(loyers_imputes.columns))
+            raise (e)
+
         loyers_imputes.rename(
             columns = {'rev801': 'poste_04_2_1'},
             inplace = True
