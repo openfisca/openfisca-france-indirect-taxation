@@ -65,8 +65,11 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
             vehicule = survey.get_values(table = "AUTOMOBILE")
         except Exception:
             vehicule = survey.get_values(table = "automobile")
+
         kept_variables = ['ident_men', 'carbu']
-        vehicule = vehicule[kept_variables].copy()
+        vehicule = vehicule.rename(
+            columns = {'ident_me': 'ident_men'},
+            )[kept_variables].copy()
         vehicule["veh_tot"] = 1
         vehicule["veh_essence"] = (vehicule['carbu'] == 1).copy()
         vehicule["veh_diesel"] = (vehicule['carbu'] == 2).copy()
