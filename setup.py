@@ -57,6 +57,7 @@ setup(
         'Babel >= 0.9.4',
         'Biryani[datetimeconv] >= 0.10.2dev',
         "numpy >= 1.11, <1.16",  # openfisca-survey-manager deps and https://github.com/openfisca/openfisca-survey-manager/pull/79            'pandas >= 0.17',
+        "pandas <= 0.24.2",
         'OpenFisca-Core >= 0.5.4',
         'PyYAML >= 3.10',
         ],
