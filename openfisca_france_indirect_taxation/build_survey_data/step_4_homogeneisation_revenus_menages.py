@@ -330,7 +330,7 @@ In loyers_imputes and not in revenus:
                 table = "menage",
                 variables =  menage_variables)
 
-        menage = meane.rename(columns = {'ident_me': 'ident_men'}).sort_values(by = ['ident_men'])
+        menage = menage.rename(columns = {'ident_me': 'ident_men'}).sort_values(by = ['ident_men'])
 
         rev_disp.index = rev_disp.index.astype(ident_men_dtype)
         menage.index = menage.index.astype(ident_men_dtype)
