@@ -91,7 +91,7 @@ def merge_with_coicop_nomenclature(data_frame):
     result = result.append(
         coicop_nomenclature.loc[
             ~coicop_nomenclature.poste_coicop.isin(result.poste_coicop.unique())],
-        sort = True
+        sort = True,
         )
     result = result[[
         'label_division', 'label_groupe', 'label_classe', 'label_sous_classe', 'label_poste',
@@ -473,9 +473,7 @@ def bdf(year):
 if __name__ == '__main__':
     year = 2011
     bdf_coicop = guess_coicop_from_bdf(year = year)
-    print("1")
     adjusted_bdf_coicop = adjust_coicop(bdf_coicop)
-    print("2")
     data_frame = merge_with_coicop_nomenclature(adjusted_bdf_coicop)
 
     #   len(errors)
