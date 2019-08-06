@@ -42,7 +42,7 @@ setup(
             # "flake8-print", Bring back when one has time to clear all prints
             'matplotlib',
             'nbconvert >= 5.5.0',
-            'pandas >= 0.17',
+            "numpy >= 1.11, <1.16",  # openfisca-survey-manager deps and https://github.com/openfisca/openfisca-survey-manager/pull/79            'pandas >= 0.17',
             "pytest < 5.0",
             'pdbpp',
             'ruamel.yaml',
