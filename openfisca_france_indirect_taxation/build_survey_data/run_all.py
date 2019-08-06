@@ -144,7 +144,7 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
             data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
         except FileNotFoundError as e:
             log.debug("Matching data with ENL and ENTD are not present")
-            log(e)
+            log.debug(e)
             log.debug("Skipping this step")
 
     # Créer un nouvel identifiant pour les ménages
