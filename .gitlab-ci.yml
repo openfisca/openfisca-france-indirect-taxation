@@ -19,6 +19,6 @@ Run models:
     - cp /home/ipp/data/openfisca-france-indirect-taxation/openfisca_survey_manager_config.ini ~/.config/openfisca-survey-manager/config.ini
     - mkdir /root/ci-files
     - mkdir /root/ci-files/data_collections
-    - build-collection -c budget_des_familles -d -m -s 2011
-    - build-survey-data -y 2011 -v
+    - build-collection -c budget_des_familles -d -m
+    - build-survey-data -v
     - make test
