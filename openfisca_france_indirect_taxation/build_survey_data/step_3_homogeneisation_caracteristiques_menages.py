@@ -593,7 +593,8 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         try:
             menage = survey.get_values(table = "MENAGE", variables = variables)
-        except Exception as:
+        except Exception as e:
+            log.debug(e)
             menage = survey.get_values(table = "menage", variables = variables)
 
         menage.rename(
