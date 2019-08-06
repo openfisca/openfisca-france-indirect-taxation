@@ -8,8 +8,7 @@ from openfisca_survey_manager.temporary import temporary_store_decorator
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
-from openfisca_france_indirect_taxation.build_survey_data.utils \
-    import ident_men_dtype
+from openfisca_france_indirect_taxation.build_survey_data.utils import ident_men_dtype
 
 
 log = logging.getLogger(__name__)
@@ -17,9 +16,9 @@ log = logging.getLogger(__name__)
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
-    assert temporary_store is not None
     """Build menage consumption by categorie fiscale dataframe """
 
+    assert temporary_store is not None
     assert year is not None
     # Load data
     bdf_survey_collection = SurveyCollection.load(
@@ -291,31 +290,47 @@ In loyers_imputes and not in revenus:
         temporary_store["revenus_{}".format(year)] = revenus
 
     elif year == 2011:
+        c05_variables = ['c13111', 'c13121', 'c13141', 'pondmen', 'ident_me']
         try:
             c05 = survey.get_values(
                 table = "C05",
-                variables = ['c13111', 'c13121', 'c13141', 'pondmen', 'ident_men'],
+                variables = c05_variables,
                 )
-            rev_disp = c05.sort_values(by = ['ident_men'])
-        except Exception:
+        except Exception as e:
+            log.debug(e)
             c05 = survey.get_values(
                 table = "c05",
-                variables = ['c13111', 'c13121', 'c13141', 'pondmen', 'ident_men'],
+                variables = c05_variables,
                 )
-            rev_disp = c05.sort_values(by = ['ident_men'])
-        del c05
+
+        rev_disp = c05.rename(columns = {'ident_me': 'ident_men'}).sort_values(by = ['ident_men'])
+        del c05, c05_variables
+
+        menage_variables = [
+            'ident_me',
+            'rev700',
+            'rev701',
+            'rev999',
+            'revact',
+            'revindep',
+            'revpat',
+            'revsoc',
+            'revtot',
+            'salaires',
+            ]
+
         try:
             menage = survey.get_values(
                 table = "MENAGE",
-                variables = ['ident_men', 'revtot', 'revact', 'revsoc', 'revpat', 'rev700', 'rev701', 'rev999',
-                             'revindep', 'salaires'],
-                ).sort_values(by = ['ident_men'])
-        except Exception:
+                variables = menage_variables,
+                )
+        except Exception as e:
+            log.debug(e)
             menage = survey.get_values(
                 table = "menage",
-                variables = ['ident_men', 'revtot', 'revact', 'revsoc', 'revpat', 'rev700', 'rev701', 'rev999',
-                             'revindep', 'salaires'],
-                ).sort_values(by = ['ident_men'])
+                variables =  menage_variables)
+
+        menage = meane.rename(columns = {'ident_me': 'ident_men'}).sort_values(by = ['ident_men'])
 
         rev_disp.index = rev_disp.index.astype(ident_men_dtype)
         menage.index = menage.index.astype(ident_men_dtype)
