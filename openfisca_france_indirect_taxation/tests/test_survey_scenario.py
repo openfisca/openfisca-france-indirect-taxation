@@ -18,7 +18,7 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimati
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 
-def test():
+def test(display_plot = False):
     # inflators_by_year = get_inflators_by_year()
     # Liste des coicop agrégées en 12 postes
     postes_agreges = ['poste_agrege_{}'.format(index) for index in
@@ -52,9 +52,11 @@ def test():
         df['part_{}'.format(poste_agrege)] = df[poste_agrege] / df['depenses_tot']
         parts_postes_agreges.append('part_{}'.format(poste_agrege))
 
-    graph_builder_bar(df[parts_postes_agreges])
+    if display_plot:
+        graph_builder_bar(df[parts_postes_agreges])
+
     return survey_scenario, df
 
 
 if __name__ == '__main__':
-    survey_scenario, df = test()
+    survey_scenario, df = test(display_plot = True)

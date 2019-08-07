@@ -14,7 +14,6 @@ from openfisca_france_indirect_taxation.reforms.alimentation import reforme_alim
 tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
 
-@pytest.mark.skip(reason = "TypeError: generate_variables() got an unexpected keyword argument 'reform'")
 def test_reforme_alimentation():
     year = 2014
     period = periods.period(year)

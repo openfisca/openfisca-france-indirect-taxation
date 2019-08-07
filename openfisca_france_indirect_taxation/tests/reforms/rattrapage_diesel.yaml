@@ -1,0 +1,10 @@
+- name: "Rattrapage diesel"
+  period: "2014"
+  reforms:
+    - openfisca_france_indirect_taxation.reforms.rattrapage_diesel.reforme_rattrapage_diesel
+  input:
+    depenses_essence: 1000
+    elas_price_1_1: -0.4
+
+  output:
+    depenses_essence_ajustees_rattrapage_diesel: 1000 * (1 + (1 + -.4) * 10 / 148.4583)

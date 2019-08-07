@@ -30,19 +30,6 @@ assets_path = os.path.join(
     )
 
 
-def detect_null(data_frame):
-    global_null = None
-    for column in data_frame.columns:
-        null = data_frame[column].isnull()
-        if null.any():
-            global_null = (global_null | null) if global_null is not None else null
-
-    if global_null:
-        return data_frame.loc[global_null].copy()
-    else:
-        return pandas.DataFrame()
-
-
 def build_clean_aliss_data_frame():
     year = 2011
     aliss_survey_collection = SurveyCollection.load(
@@ -50,37 +37,41 @@ def build_clean_aliss_data_frame():
         )
     survey = aliss_survey_collection.get_survey('aliss_{}'.format(year))
     aliss = survey.get_values(table = 'Base_ALISS_2011')
-    assert len(aliss.dt_k.columns) == 2, 'dt_k is not duplicated'
-    assert aliss.columns[-2:].tolist() == ['dt_k', 'd_a'], 'The last two columns are not duplicatd dt_k and d_a'
-    # aliss = aliss.iloc[:, 0:22].copy()  # Removing the last two columns
-    aliss.columns = aliss.columns.tolist()[:-2] + ['Dt_k', 'd_a']
-    errors = detect_null(aliss)
-    errors.to_csv('aliss_errors.csv')
-    # Removing products with missing nomf
-    aliss = aliss.query('nomf != "nan"').copy()
-    # Setting null nomk consumption to zero
-    aliss.fillna(
-        dict(qt_k = 0, dt_k = 0, qm_k = 0, dm_k =0, pm_k = 0, qt_c = 0, dt_c = 0, qm_c = 0, dm_c = 0, pm_c = 0),
-        inplace = True
-        )
+
+    assert (
+        aliss.columns.tolist()
+        == [
+            'type', 'nomF', 'nomK', 'nomC', 'Qt_c', 'Dt_c', 'Qm_c', 'Dm_c', 'pm_c',
+            'Tpoids', 'Qt_k', 'Dt_k', 'Qm_k', 'Dm_k', 'pm_k', 'Qt_f', 'Dt_f',
+            'Qm_f', 'Dm_f', 'pm_f', 'nomCOICOP', 'SomTpoids', 'DT_k', 'D_a'
+            ]
+       )
+    assert (aliss['DT_k'] == aliss['DT_k'].unique()[0]).all(), "DT_k is not a unique total number"
+
+    # Lower case all variables but DT_k which is translated to 'Dt_k'
+    aliss.columns = list(map(str.lower, aliss.columns[:-2])) + ['Dt_k', 'd_a']
+    log.info("These columns contains nans {}".format(
+        aliss.columns[aliss.isnull().any()].tolist()
+        ))
+    aliss.dropna(inplace = True)
+    assert aliss.notnull().all().all()
     # Renaming categories
-    aliss = aliss.loc[aliss.nomf.notnull()].copy()
     aliss['age'] = 99
     aliss['revenus'] = 99
     triplets = [
-        ('1 : Jeune/Ais', 0, 3),
+        ('1 : Jeune/Aisé', 0, 3),
         ('2 : Jeune/MoyenSup', 0, 2),
         ('3 : Jeune/MoyenInf', 0, 1),
         ('4 : Jeune/Modeste', 0, 0),
-        ('5 : Age Moyen/Ais', 1, 3),
+        ('5 : Age Moyen/Aisé', 1, 3),
         ('6 : Age Moyen/MoyenSup', 1, 2),
         ('7 : Age Moyen/MoyenInf', 1, 1),
         ('8 : Age Moyen/Modeste', 1, 0),
-        ('9 : Age Sup/Ais', 2, 3),
+        ('9 : Age Sup/Aisé', 2, 3),
         ('10 : Age Sup/MoyenSup', 2, 2),
         ('11 : Age Sup/MoyenInf', 2, 1),
         ('12 : Age Sup/Modeste', 2, 0),
-        ('13 : Vieux/Ais', 3, 3),
+        ('13 : Vieux/Aisé', 3, 3),
         ('14 : Vieux/MoyenSup', 3, 2),
         ('15 : Vieux/MoyenInf', 3, 1),
         ('16 : Vieux/Modeste', 3, 0),
@@ -89,11 +80,21 @@ def build_clean_aliss_data_frame():
         selection = aliss.type.str.startswith(household_type)
         aliss.loc[selection, 'age'] = age
         aliss.loc[selection, 'revenus'] = revenus
+
     assert aliss.age.isin(list(range(4))).all()
     assert aliss.revenus.isin(list(range(4))).all()
     del aliss['type']
     assert aliss.notnull().all().all()
 
+    aliss.replace(
+        {
+            'nomk': {
+                '11471 : \x8cufs ': '11471 : Œufs ',
+                '11262 : b\x9cuf pané': '11262 : bœuf pané'
+                },
+            },
+        inplace = True,
+        )
     return aliss
 
 
@@ -114,9 +115,10 @@ def complete_input_data_frame(input_data_frame, drop_dom = True):
     if drop_dom:
         input_data_frame = input_data_frame.query('zeat != 0').copy()
 
-    input_data_frame.eval("age = 0 + (agepr > 30) + (agepr > 45) + (agepr > 60)",
-                          #  inplace = True,  # Remove comment for pandas 0.18
-                          )
+    input_data_frame.eval(
+        "age = 0 + (agepr > 30) + (agepr > 45) + (agepr > 60)",
+        inplace = True,  # Remove comment for pandas 0.18
+        )
 
     input_data_frame['revenus_kantar'] = (
         input_data_frame.rev_disponible.astype('float') / input_data_frame.ocde10_old.astype('float')
@@ -444,7 +446,6 @@ def compute_expenditures_coefficient(reform_key = None):
     reform_extract.rename(columns = {reform_key: 'reform_categorie_fiscale'}, inplace = True)
 
     # TODO gérér les catégories fiscales
-
     correction = correction.merge(
         reform_extract[['nomf', 'reform_categorie_fiscale']].drop_duplicates().copy(), on = 'nomf', how = 'outer')
 
@@ -590,6 +591,9 @@ def get_adjusted_input_data_frame(reform_key = None, verbose = False):
 
 
 if __name__ == '__main__':
+    import sys
+    logging.basicConfig(level = logging.INFO, stream = sys.stdout)
+
     input_data_frame = get_adjusted_input_data_frame(reform_key = 'tva_sociale')
 #    print(input_data_frame.columns[input_data_frame.isnull().any()])
 

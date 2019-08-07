@@ -68,9 +68,6 @@ class SurveyScenario(AbstractSurveyScenario):
         data = dict(input_data_frame = input_data_frame)
 
         survey_scenario.init_from_data(data = data)
-        # survey_scenario.new_simulation(data = data)
-        # if reform:
-        #     survey_scenario.new_simulation(data = data, use_baseline =True)
 
         if calibration_kwargs:
             survey_scenario.calibrate(**calibration_kwargs)

@@ -7,7 +7,7 @@ from openfisca_france_indirect_taxation.model.consommation.categories_fiscales i
 
 
 class reforme_alimentation(Reform):
-    name = 'Allocations familiales imposables'
+    name = 'reforme_alimentation'
 
     def apply(self):
         from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import categories_fiscales_data_frame
@@ -24,6 +24,6 @@ class reforme_alimentation(Reform):
 
         generate_variables(
             categories_fiscales = categories_fiscales,
-            reform = self.name,
+            reform_key = self.name,
             tax_benefit_system = self,
             )
