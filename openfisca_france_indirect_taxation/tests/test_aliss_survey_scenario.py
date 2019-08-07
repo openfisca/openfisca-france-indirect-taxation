@@ -1,18 +1,14 @@
-import pytest
-
-
 try:
     import seaborn
     # Import d'une nouvelle palette de couleurs
     seaborn.set_palette(seaborn.color_palette("Set2", 12))
-except ImportError as e:
+except ImportError:
     seaborn = None
 
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss import get_adjusted_input_data_frame
 from openfisca_france_indirect_taxation.reforms.aliss import aliss_tva_sociale
-
 
 
 def build_aliss_scenarios(reform = None):

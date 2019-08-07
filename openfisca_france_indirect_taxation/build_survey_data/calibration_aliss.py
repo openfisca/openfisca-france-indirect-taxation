@@ -45,7 +45,7 @@ def build_clean_aliss_data_frame():
             'Tpoids', 'Qt_k', 'Dt_k', 'Qm_k', 'Dm_k', 'pm_k', 'Qt_f', 'Dt_f',
             'Qm_f', 'Dm_f', 'pm_f', 'nomCOICOP', 'SomTpoids', 'DT_k', 'D_a'
             ]
-       )
+        )
     assert (aliss['DT_k'] == aliss['DT_k'].unique()[0]).all(), "DT_k is not a unique total number"
 
     # Lower case all variables but DT_k which is translated to 'Dt_k'

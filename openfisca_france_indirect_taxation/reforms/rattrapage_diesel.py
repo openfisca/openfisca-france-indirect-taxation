@@ -210,7 +210,7 @@ class reforme_rattrapage_diesel(Reform):
             return depenses_tva_taux_super_reduit_ajustees
 
     class diesel_ticpe(YearlyVariable):
-        baseline_variable = ticpe.diesel_ticpe # TODO réintégrer ou effacer car update
+        baseline_variable = ticpe.diesel_ticpe  #  TODO réintégrer ou effacer car update
         label = "Calcul du montant de TICPE sur le diesel après reforme"
 
         def formula(menage, period, parameters):
@@ -265,7 +265,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class essence_ticpe(YearlyVariable):
         label = "Calcul du montant de la TICPE sur toutes les essences cumulees, après reforme"
-        baseline_variable  = ticpe.essence_ticpe
+        baseline_variable = ticpe.essence_ticpe
 
         def formula_2009(menage, period):
             sp95_ticpe_ajustee = menage('sp95_ticpe', period)
