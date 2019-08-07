@@ -12,7 +12,7 @@ Run models:
   #   variables:
   #     - $DOLOS == 'True'
   script:
-    - pip3 install .[dev,survey]
+    - pip3 install -e .[dev,survey]
     - mkdir ~/.config
     - mkdir ~/.config/openfisca-survey-manager
     - cp /home/ipp/data/openfisca-france-indirect-taxation/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
