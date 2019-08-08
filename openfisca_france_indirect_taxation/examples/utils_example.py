@@ -200,8 +200,7 @@ def dataframe_by_group(survey_scenario, category, variables, use_baseline = Fals
                     columns = [category],
                     use_baseline = True,
                     period = period)
-                    ]
-                )
+                ])
     else:
         for values_reform in variables:
             pivot_table = pandas.concat([
