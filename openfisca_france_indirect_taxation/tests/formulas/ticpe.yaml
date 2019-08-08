@@ -1,10 +1,20 @@
+ - name: "Test ventilation essence / diesel"
+   period: 2006
+   absolute_error_margin: .01
+   input:
+     poste_07_2_2_1_1: 100
+     veh_diesel: 2
+     veh_essence: 1
+   output:
+     depenses_diesel: 75.075
+
  - name: "Test ticpe diesel"
    period: "2010"
    absolute_error_margin: .001
    input:
-     poste_07_2_2_1_1: 100  # Gazole et gpl
      veh_diesel: 1
      veh_essence: 0
+     poste_07_2_2_1_1: 100  # Gazole et gpl
    output:
      depenses_ht_tva_taux_plein: 100 / (1.196)
      depenses_sp_e10: 0
@@ -34,7 +44,10 @@
      veh_diesel: 0
      veh_essence: 1
    output:
-     depenses_ht_tva_taux_plein: 100 / (1.196)
+     depenses_ht_tva_taux_plein: 100 / 1.196
+     depenses_sp_95_ht: 100 / (1.196) * 0.627 / 0.996
+     # sp98_depenses_htva = depenses_htva * 0.188 / 0.996
+     # sp_e10_depenses_hta = depenses_htva * 0.181 / 0.996
      essence_ticpe: >
        100 / (1.196) * (
          (
@@ -76,7 +89,6 @@
              )
           )
        )
-      # depenses_htva = 100 / (1.196)
       # sp95_depenses_htva = depenses_htva * 0.627 / 0.996
       # sp98_depenses_htva = depenses_htva * 0.188 / 0.996
       # sp_e10_depenses_hta = depenses_htva * 0.181 / 0.996
@@ -98,14 +110,3 @@
      depenses_tva_taux_super_reduit: 0
      tva_taux_plein: 100 / (1.196) * 0.196
      poste_agrege_07: 100
-
-
- - name: "Test ventilation essence / diesel"
-   period: 2006
-   absolute_error_margin: .01
-   input:
-     poste_07_2_2_1_1: 100
-     veh_diesel: 2
-     veh_essence: 1
-   output:
-     depenses_diesel: 75.075

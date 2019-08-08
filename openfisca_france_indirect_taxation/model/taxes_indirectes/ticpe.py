@@ -27,7 +27,7 @@ class diesel_ticpe(YearlyVariable):
 
         try:
             majoration_ticpe_diesel = \
-                parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
             accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
             accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
         except Exception:
@@ -55,7 +55,7 @@ class diesel_ticpe_ajustee(YearlyVariable):
 
         try:
             majoration_ticpe_diesel = \
-                parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
             accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
             accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
         except Exception:

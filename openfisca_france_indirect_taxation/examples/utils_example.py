@@ -199,7 +199,8 @@ def dataframe_by_group(survey_scenario, category, variables, use_baseline = Fals
                     values = [values_reference],
                     columns = [category],
                     use_baseline = True,
-                    period = period)]
+                    period = period)
+                    ]
                 )
     else:
         for values_reform in variables:

@@ -373,12 +373,12 @@ class depenses_essence(YearlyVariable):
 class depenses_essence_corrigees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Consommation en essence corrigees après appariement ENTD pour 2011 seulement"
+    label = "Consommation en essence corrigées après appariement ENTD pour 2011 seulement"
     definition_period = YEAR
 
-    def formula_2011(menage, period):
-        depenses_essence_corrigees = menage('depenses_essence_corrigees_entd', period)
-        return depenses_essence_corrigees
+    # def formula_2011(menage, period):
+    #     depenses_essence_corrigees = menage('depenses_essence_corrigees_entd', period)
+    #     return depenses_essence_corrigees
 
     def formula(menage, period):
         depenses_essence_corrigees = menage('depenses_essence', period)
@@ -388,7 +388,7 @@ class depenses_essence_corrigees(YearlyVariable):
 class depenses_essence_corrigees_entd(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Consommation en essence corrigees après appariement ENTD"
+    label = "Consommation en essence corrigées après appariement ENTD"
 
 
 class depenses_essence_ht(Variable):
@@ -615,7 +615,8 @@ class depenses_sp_95_ht(YearlyVariable):
             majoration_ticpe_super95 = \
                 parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
             accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
-        except Exception:
+        except Exception as e:
+            print(e)
             accise_ticpe_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
@@ -624,9 +625,13 @@ class depenses_sp_95_ht(YearlyVariable):
             / (super_95_ttc - accise_ticpe_super95 * (1 + taux_plein_tva))
             )
         depenses_essence = menage('depenses_essence_corrigees', period)
+        print('depenses_essence_corrigees', depenses_essence)
         part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp_95 = depenses_essence * part_sp95
         depenses_sp_95_htva = depenses_sp_95 - tax_from_expense_including_tax(depenses_sp_95, taux_plein_tva)
+        print("depenses_sp_95_htva", depenses_sp_95_htva)
+        print('taux_implicite_sp95', taux_implicite_sp95)
+
         depenses_sp_95_ht = \
             depenses_sp_95_htva - tax_from_expense_including_tax(depenses_sp_95_htva, taux_implicite_sp95)
 

@@ -25,8 +25,12 @@ if __name__ == '__main__':
         ]
     year = 2014
     data_year = 2011
-    survey_scenario = SurveyScenario.create(year = year, data_year = data_year)
+    survey_scenario = SurveyScenario.create(
+        year = year,
+        data_year = data_year
+        )
     for category in ['niveau_vie_decile']:  # , 'age_group_pr', 'strate_agrege'
-        taxe_indirectes = dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
+        taxes_indirectes = dataframe_by_group(survey_scenario, category, simulated_variables)
 
     # gazole = get_accises_carburants(['ticpe_gazole'])
+    print(taxes_indirectes)
