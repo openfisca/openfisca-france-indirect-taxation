@@ -14,7 +14,7 @@ essence:
   description: u"Surcroit de prix de l'essence (en euros par hectolitres)"
   values:
     '2010-01-01':
-      value: 0
+      value: 10
 abaissement_tva_taux_plein:
   description: u"Baisse de la TVA à taux plein pour obtenir un budget constant"
   values:

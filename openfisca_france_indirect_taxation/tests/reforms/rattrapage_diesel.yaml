@@ -12,7 +12,6 @@
 
 
 - name: u"Test réaction comportementale super_95_ttc 2013"
-  ignore: True
   period: "2013"
   reforms:
   - openfisca_france_indirect_taxation.reforms.rattrapage_diesel.reforme_rattrapage_diesel

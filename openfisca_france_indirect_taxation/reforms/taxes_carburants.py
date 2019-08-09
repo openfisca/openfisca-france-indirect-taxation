@@ -27,7 +27,6 @@ def modify_parameters(parameters):
             "description": "taxes_carburants",
             "diesel": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
-                # TODO "unit": '?',
                 "unit": 'currency',
                 "values": {
                     '2010-01-01': 17.85,

@@ -61,7 +61,7 @@ class diesel_ticpe_ajustee(YearlyVariable):
         except Exception:
             accise_diesel_ticpe = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
 
-        reforme_diesel = parameters(period.start).taxes_carburants.diesel
+        reforme_diesel = parameters(period.start).rattrapage_diesel.diesel
         accise_diesel_ticpe_ajustee = accise_diesel_ticpe + reforme_diesel
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         prix_diesel_ttc_ajuste = prix_diesel_ttc + reforme_diesel
@@ -190,7 +190,7 @@ class sp_e10_ticpe_ajustee(Variable):
             accise_ticpe_super_e10 = \
                 parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
 
-        reforme_essence = parameters(period.start).taxes_carburants.essence
+        reforme_essence = parameters(period.start).rattrapage_diesel.essence
         accise_ticpe_super_e10_ajustee = accise_ticpe_super_e10 + reforme_essence
         super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
         super_95_e10_ttc_ajuste = super_95_e10_ttc + reforme_essence
@@ -253,7 +253,7 @@ class sp95_ticpe_ajustee(YearlyVariable):
         except Exception:
             accise_ticpe_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
-        reforme_essence = parameters(period.start).taxes_carburants.essence
+        reforme_essence = parameters(period.start).rattrapage_diesel.essence
         accise_ticpe_super95_ajustee = accise_ticpe_super95 + reforme_essence
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
         super_95_ttc_ajuste = super_95_ttc + reforme_essence
@@ -319,7 +319,7 @@ class sp98_ticpe_ajustee(YearlyVariable):
         except Exception:
             accise_ticpe_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
-        reforme_essence = parameters(period.start).taxes_carburants.essence
+        reforme_essence = parameters(period.start).rattrapage_diesel.essence
         accise_ticpe_super98_ajustee = accise_ticpe_super98 + reforme_essence
         super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
         super_98_ttc_ajuste = super_98_ttc + reforme_essence
@@ -383,7 +383,7 @@ class super_plombe_ticpe_ajustee(Variable):
         accise_super_plombe_ticpe = \
             parameters(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
 
-        reforme_essence = parameters(period.start).taxes_carburants.essence
+        reforme_essence = parameters(period.start).rattrapage_diesel.essence
         accise_super_plombe_ticpe_ajustee = accise_super_plombe_ticpe + reforme_essence
         super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
         super_plombe_ttc_ajuste = super_plombe_ttc + reforme_essence
