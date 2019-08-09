@@ -291,6 +291,7 @@ class sp98_ticpe(YearlyVariable):
             accise_ticpe_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
         super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
+
         taux_implicite_sp98 = (
             (accise_ticpe_super98 * (1 + taux_plein_tva))
             / (super_98_ttc - accise_ticpe_super98 * (1 + taux_plein_tva))
