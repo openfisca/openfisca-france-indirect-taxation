@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import logging
+import numpy
+
 
 from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
-import numpy
+
+
+log = logging.getLogger(__name__)
 
 
 class depenses_carburants(YearlyVariable):
@@ -615,6 +620,7 @@ class depenses_sp_95_ht(YearlyVariable):
                 parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
             accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
         except Exception as e:
+            log.debug(e)
             accise_ticpe_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
 
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
