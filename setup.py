@@ -55,11 +55,11 @@ setup(
     include_package_data = True,  # Will read MANIFEST.in
     install_requires = [
         'Babel >= 0.9.4',
+        'OpenFisca-Core >= 0.5.4',
         'python-slugify',
+        'PyYAML >= 3.10',
         "numpy >= 1.11, <1.16",  # openfisca-survey-manager deps and https://github.com/openfisca/openfisca-survey-manager/pull/79            'pandas >= 0.17',
         "pandas <= 0.24.2",
-        'OpenFisca-Core >= 0.5.4',
-        'PyYAML >= 3.10',
         ],
     packages = find_packages(),
     test_suite = 'nose.collector',
