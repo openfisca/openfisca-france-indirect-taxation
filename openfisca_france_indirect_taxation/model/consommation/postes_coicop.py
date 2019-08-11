@@ -4,7 +4,7 @@
 
 import logging
 
-from biryani.strings import slugify
+from slugify import slugify
 
 from openfisca_france_indirect_taxation.model.base import *
 

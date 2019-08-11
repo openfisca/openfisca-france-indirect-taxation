@@ -7,7 +7,7 @@ import pandas as pd
 import pkg_resources
 
 
-from biryani.strings import slugify
+from slugify import slugify
 
 
 from openfisca_core.model_api import *  # noqa analysis:ignore

@@ -5,7 +5,7 @@ import os
 import pandas
 import pkg_resources
 
-from biryani.strings import slugify
+from slugify import slugify
 
 
 elasticities_path = os.path.join(
