@@ -704,7 +704,7 @@ class depenses_super_plombe_ht(YearlyVariable):
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         accise_super_plombe_ticpe = \
-            parameters(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
+            parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_plombe
         super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
         taux_implicite_super_plombe = (
             (accise_super_plombe_ticpe * (1 + taux_plein_tva))

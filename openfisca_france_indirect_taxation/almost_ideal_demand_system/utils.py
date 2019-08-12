@@ -152,7 +152,7 @@ def price_energy_from_contracts(dataframe, year):
     assets_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
         )
-    prix_contrats = pd.DataFrame.from_csv(os.path.join(assets_directory,
+    prix_contrats = pd.DataFrame.read_csv(os.path.join(assets_directory,
         'openfisca_france_indirect_taxation', 'assets', 'prix',
         'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)))
     prix_contrats['identifiant_menage'] = prix_contrats['identifiant_menage'].astype(str)

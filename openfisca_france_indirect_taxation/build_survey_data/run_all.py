@@ -95,7 +95,6 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
         axis = 1,
         sort = True
         )
-
     if year_data == 2005:
         for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence']:
             data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
@@ -140,12 +139,13 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
                     'data_for_run_all.csv'
                     ), sep =',', decimal = '.'
                 )
-            data_matched['ident_men'] = data_matched['ident_men'].astype(str)
+            data_matched['ident_men'] = data_matched['ident_men'].astype(str).copy()
             data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
         except FileNotFoundError as e:
             log.debug("Matching data with ENL and ENTD are not present")
             log.debug(e)
             log.debug("Skipping this step")
+
 
     # Créer un nouvel identifiant pour les ménages
     data_frame['identifiant_menage'] = list(range(0, len(data_frame)))
@@ -184,3 +184,7 @@ def run(years_calage):
         start = time.time()
         run_all_steps(year_calage = year_calage)
         log.info("Finished {}".format(time.time() - start))
+
+
+if __name__ == '__main__':
+    run([2011])

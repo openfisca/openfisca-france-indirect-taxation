@@ -181,7 +181,7 @@ super_95_98:
     unit:
       2002-01-01: currency-EUR
       1993-04-15: currency-FRF
-supercarburants_contenant_additif_hectolitre:
+super_plombe:
   description: Supercarburants contenant un additif (hectolitre)
   values:
     2018-01-01:
@@ -1112,7 +1112,7 @@ metadata:
   - essences_speciales_utilisees_comme_carburants_combustibles_hectolitre
   - huiles_legeres_preparation_essence_aviation_hectolitre
   - super_95_98
-  - supercarburants_contenant_additif_hectolitre
+  - super_plombe
   - supere10_hectolitre
   - essence_normale_hectolitre
   - carburateurs_type_essence_sous_conditions_hectolitre
@@ -1285,5 +1285,3 @@ documentation: |
   53 - Emulsion d'eau dans du gazole …, autres
   55 - Super E 85 utilisé comme carburant
   56 - Carburant constitué d'un mélange d'au minimum 90 % d'alcool éthylique d'origine agricole, d'eau et d'additifs
-
-

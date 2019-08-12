@@ -30,7 +30,7 @@ assets_directory = os.path.join(
 products = ['totales', 'essence', 'diesel']
 depenses_ticpe_bdf = pd.DataFrame()
 for element in products:
-    depenses_ticpe = pd.DataFrame.from_csv(
+    depenses_ticpe = pd.DataFrame.read_csv(
         os.path.join(
             assets_directory,
             'openfisca_france_indirect_taxation', 'assets', 'depenses',

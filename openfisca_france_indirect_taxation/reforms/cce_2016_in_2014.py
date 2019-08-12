@@ -652,7 +652,7 @@ class cce_2016_in_2014(Reform):
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             accise_super_plombe_ticpe = \
-                parameters(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
+                parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_plombe
 
             reforme_essence = parameters(period.start).cce_2016_in_2014.essence_2014_2016
             accise_super_plombe_ticpe_ajustee = accise_super_plombe_ticpe + reforme_essence

@@ -124,7 +124,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         try:
             loyers_imputes = survey.get_values(table = "MENAGE")
             log.debug("Using 'MENAGE' table")
-        except Exception as e:
+        except KeyError as e:
             log.debug(e)
             log.debug("Using 'menage' table")
             loyers_imputes = survey.get_values(table = "menage")

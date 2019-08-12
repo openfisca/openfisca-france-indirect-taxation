@@ -606,7 +606,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
                 },
             inplace = True,
             )
-        menage.agecj = menage.agecj.fillna(0)
+        menage['agecj'] = menage.agecj.fillna(0)
         # Pour Aliss
         menage['nadultes'] = menage.npers - menage.nenfants
         menage['ocde10_old'] = 1 + 0.7 * numpy.maximum(0, menage['nadultes'] - 1) + 0.5 * menage['nenfants']
@@ -660,7 +660,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             compl_sante.set_index('ident_men', inplace = True)
 
             compl_sante['cmu'] = 0 + 1 * (compl_sante['complent'] == 5)
-            compl_sante = compl_sante.query('cmu != 0')
+            compl_sante = compl_sante.query('cmu != 0').copy()
         except Exception as e:
             log.debug(e)
             compl_sante = survey.get_values(table = "COMPL_SANTE")
@@ -668,22 +668,21 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             pprint.pprint(compl_sante.columns)
 
         menage = menage.merge(depmen, left_index = True, right_index = True)
-
         try:
             menage = menage.merge(compl_sante, left_index = True, right_index = True, how = 'left')
 
             menage = menage.groupby(menage.index).first()
-            menage.cmu = menage.cmu.fillna(0)
+            menage['cmu'] = menage.cmu.fillna(0)
         except Exception as e:
             log.debug(e)
 
         menage['vag_'] = menage['vag'].copy()
-        menage.vag.loc[menage.vag_ == 1] = 23
-        menage.vag.loc[menage.vag_ == 2] = 24
-        menage.vag.loc[menage.vag_ == 3] = 25
-        menage.vag.loc[menage.vag_ == 4] = 26
-        menage.vag.loc[menage.vag_ == 5] = 27
-        menage.vag.loc[menage.vag_ == 6] = 28
+        menage.loc[menage.vag_ == 1, 'vag'] = 23
+        menage.loc[menage.vag_ == 2, 'vag'] = 24
+        menage.loc[menage.vag_ == 3, 'vag'] = 25
+        menage.loc[menage.vag_ == 4, 'vag'] = 26
+        menage.loc[menage.vag_ == 5, 'vag'] = 27
+        menage.loc[menage.vag_ == 6, 'vag'] = 28
         del menage['vag_']
 
         menage['stalog'] = menage.stalog.astype('int').copy()
@@ -696,7 +695,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.stalog = menage.new_stalog.copy()
         del menage['new_stalog']
         assert menage.stalog.isin(list(range(1, 6))).all()
-
         '''
         TODO a déplacer ailleurs après avoir compris à quoi cela sert !
         vague = depmen[['vag', 'ident_men']].copy()
@@ -733,8 +731,8 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         '''
         # Recodage des catégories zeat
         menage.loc[menage.zeat == 7, 'zeat'] = 6
-        menage.zeat.loc[menage.zeat == 8] = 7
-        menage.zeat.loc[menage.zeat == 9] = 8
+        menage.loc[menage.zeat == 8, 'zeat'] = 7
+        menage.loc[menage.zeat == 9, 'zeat'] = 8
         assert menage.zeat.isin(list(range(0, 9))).all()
         menage.index.name = 'ident_men'
 

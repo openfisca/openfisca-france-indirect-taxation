@@ -38,10 +38,13 @@ class diesel_ticpe(YearlyVariable):
             (accise_diesel_ticpe * (1 + taux_plein_tva))
             / (prix_diesel_ttc - accise_diesel_ticpe * (1 + taux_plein_tva))
             )
+        print("taux_implicite_diesel", taux_implicite_diesel)
         depenses_diesel = menage('depenses_diesel_corrigees', period)
+        print("depenses_diesel_corrigees", depenses_diesel)
+
         depenses_diesel_htva = depenses_diesel - tax_from_expense_including_tax(depenses_diesel, taux_plein_tva)
         montant_diesel_ticpe = tax_from_expense_including_tax(depenses_diesel_htva, taux_implicite_diesel)
-
+        print(montant_diesel_ticpe)
         return montant_diesel_ticpe
 
 
@@ -353,7 +356,7 @@ class super_plombe_ticpe(Variable):
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         accise_super_plombe_ticpe = \
-            parameters(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
+            parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_plombe
         super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
         taux_implicite_super_plombe = (
             (accise_super_plombe_ticpe * (1 + taux_plein_tva))
@@ -381,7 +384,7 @@ class super_plombe_ticpe_ajustee(Variable):
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         accise_super_plombe_ticpe = \
-            parameters(period.start).imposition_indirecte.ticpe.super_plombe_ticpe
+            parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_plombe
 
         reforme_essence = parameters(period.start).rattrapage_diesel.essence
         accise_super_plombe_ticpe_ajustee = accise_super_plombe_ticpe + reforme_essence
