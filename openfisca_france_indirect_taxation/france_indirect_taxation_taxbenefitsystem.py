@@ -5,7 +5,7 @@ import glob
 import os
 
 from openfisca_core.taxbenefitsystems import TaxBenefitSystem
-from openfisca_france_indirect_taxation.param import preprocessing
+from openfisca_france_indirect_taxation.parameters import preprocessing
 
 from openfisca_france_indirect_taxation import entities
 
@@ -22,8 +22,6 @@ class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
 
     def __init__(self):
         TaxBenefitSystem.__init__(self, entities.entities)
-        # param_file = os.path.join(COUNTRY_DIR, 'param', 'parameters.xml')
-        # self.add_legislation_params(param_file)
         param_dir = os.path.join(COUNTRY_DIR, 'parameters')
         self.load_parameters(param_dir)
         self.add_variables_from_directory(os.path.join(COUNTRY_DIR, 'model'))
@@ -33,7 +31,7 @@ class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
         self.parameters = self.preprocess_legislation(self.parameters)
 
     def prefill_cache(self):
-        # Define and poste_* and categorie fiscales variables
+        """Define poste_* and categorie fiscales variables"""
         from .model.consommation import postes_coicop
         postes_coicop.preload_postes_coicop_data_frame(self)
         from .model.consommation import categories_fiscales

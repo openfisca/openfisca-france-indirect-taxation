@@ -8,7 +8,7 @@ diesel:
     '2015-01-01':
       value: 15.59
     '2010-01-01':
-      value: 15.31
+      value: 15.31  # was 17.85 in removed taxes_carburants
 essence:
   unit: currency
   description: u"Surcroit de prix de l'essence (en euros par hectolitres)"
