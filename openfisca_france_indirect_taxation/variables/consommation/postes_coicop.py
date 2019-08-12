@@ -6,7 +6,7 @@ import logging
 
 from slugify import slugify
 
-from openfisca_france_indirect_taxation.model.base import *
+from openfisca_france_indirect_taxation.variables.base import *
 
 log = logging.getLogger(__name__)
 

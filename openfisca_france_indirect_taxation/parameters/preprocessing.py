@@ -4,7 +4,7 @@ import os
 import pkg_resources
 import pandas as pd
 
-from openfisca_france_indirect_taxation.model.base import ParameterNode
+from openfisca_france_indirect_taxation.variables.base import ParameterNode
 
 
 def preprocess_legislation(parameters):

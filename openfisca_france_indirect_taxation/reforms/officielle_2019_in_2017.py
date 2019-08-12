@@ -5,7 +5,7 @@ import numpy
 
 from openfisca_core.reforms import Reform
 
-from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
 # 30,5€ la tonne de CO2 en 2017 (au lieu des 39€ initialement prévus par la CCE), contre 55€ en 2019.

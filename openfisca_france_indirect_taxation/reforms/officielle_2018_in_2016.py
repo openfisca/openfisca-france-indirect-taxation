@@ -4,7 +4,7 @@
 from openfisca_core.reforms import Reform
 import numpy
 
-from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
 parameters_path = os.path.join(os.path.dirname(__file__), 'parameters')

@@ -5,7 +5,7 @@ import numpy
 
 from openfisca_core.reforms import Reform
 
-from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
 # Montants de taxe prévus par la loi Contribution climat-énergie. 7€ en 2014, 14,5€ en 2015, 22€ en 2016,

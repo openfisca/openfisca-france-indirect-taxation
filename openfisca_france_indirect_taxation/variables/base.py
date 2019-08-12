@@ -11,7 +11,7 @@ from slugify import slugify
 
 
 from openfisca_core.model_api import *  # noqa analysis:ignore
-from openfisca_france_indirect_taxation.variables import YearlyVariable  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable  # noqa analysis:ignore
 from openfisca_france_indirect_taxation.entities import Individu, Menage  # noqa analysis:ignore
 
 try:

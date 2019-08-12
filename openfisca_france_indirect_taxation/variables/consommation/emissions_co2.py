@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
 # Source : Ademe, Documentation des facteurs d'émissions de la Base Carbone

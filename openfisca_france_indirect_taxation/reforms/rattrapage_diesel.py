@@ -6,12 +6,12 @@ import numpy
 from openfisca_core.reforms import Reform
 
 
-from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
-from openfisca_france_indirect_taxation.model.taxes_indirectes import (
+from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.variables.taxes_indirectes import (
     ticpe,
     tva,
     )
-from openfisca_france_indirect_taxation.model.consommation import (
+from openfisca_france_indirect_taxation.variables.consommation import (
     emissions_co2, quantites_energie)
 
 

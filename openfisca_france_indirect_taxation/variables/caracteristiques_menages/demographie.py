@@ -3,7 +3,7 @@
 
 import numpy
 
-from openfisca_france_indirect_taxation.model.base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
 class age(YearlyVariable):

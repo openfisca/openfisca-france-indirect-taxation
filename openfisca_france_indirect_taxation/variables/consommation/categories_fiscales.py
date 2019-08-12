@@ -5,7 +5,7 @@ from sortedcontainers.sorteddict import SortedDict
 import logging
 
 
-from openfisca_france_indirect_taxation.model.base import *
+from openfisca_france_indirect_taxation.variables.base import *
 
 
 log = logging.getLogger(__name__)

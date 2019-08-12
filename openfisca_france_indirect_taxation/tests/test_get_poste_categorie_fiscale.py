@@ -1,7 +1,7 @@
 import pytest
 
 
-from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import get_poste_categorie_fiscale
+from openfisca_france_indirect_taxation.variables.consommation.categories_fiscales import get_poste_categorie_fiscale
 
 
 confiserie = dict(

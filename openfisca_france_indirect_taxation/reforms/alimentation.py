@@ -3,14 +3,14 @@
 
 from openfisca_core.reforms import Reform
 
-from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import generate_variables
+from openfisca_france_indirect_taxation.variables.consommation.categories_fiscales import generate_variables
 
 
 class reforme_alimentation(Reform):
     name = 'reforme_alimentation'
 
     def apply(self):
-        from openfisca_france_indirect_taxation.model.consommation.categories_fiscales import categories_fiscales_data_frame
+        from openfisca_france_indirect_taxation.variables.consommation.categories_fiscales import categories_fiscales_data_frame
         categories_fiscales = categories_fiscales_data_frame.copy()
         categories_fiscales.loc[
             (categories_fiscales.categorie_fiscale == 'tva_taux_super_reduit') & (

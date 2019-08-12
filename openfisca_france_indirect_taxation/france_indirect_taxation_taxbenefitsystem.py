@@ -32,7 +32,7 @@ class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
 
     def prefill_cache(self):
         """Define poste_* and categorie fiscales variables"""
-        from .model.consommation import postes_coicop
+        from openfisca_france_indirect_taxation.variables.consommation import postes_coicop
         postes_coicop.preload_postes_coicop_data_frame(self)
-        from .model.consommation import categories_fiscales
+        from openfisca_france_indirect_taxation.variables.consommation import categories_fiscales
         categories_fiscales.preload_categories_fiscales_data_frame(self)
