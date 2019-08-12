@@ -24,7 +24,7 @@ class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
         TaxBenefitSystem.__init__(self, entities.entities)
         param_dir = os.path.join(COUNTRY_DIR, 'parameters')
         self.load_parameters(param_dir)
-        self.add_variables_from_directory(os.path.join(COUNTRY_DIR, 'model'))
+        self.add_variables_from_directory(os.path.join(COUNTRY_DIR, 'variables'))
         for extension_dir in EXTENSIONS_DIRECTORIES:
             self.load_extension(extension_dir)
         self.prefill_cache()

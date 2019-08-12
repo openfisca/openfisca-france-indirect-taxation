@@ -11,7 +11,7 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 def test_prix_carburants():
     """
     This test is made to verify that when prices are called to construct variables, they take their right value.
-    The corresponding variables are defined in model/taxes_indirectes/ticpe.
+    The corresponding variables are defined in variables/taxes_indirectes/ticpe.
     These variables have been constructed just for the test.
     """
 
