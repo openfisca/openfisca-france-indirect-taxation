@@ -42,7 +42,6 @@ def main():
             ), sep =',', decimal = '.'
         )
 
-
     data_matched_enl = data_matched_enl[
         ['froid'] + ['froid_cout'] + ['froid_installation'] + ['froid_impaye']
         + ['froid_isolation'] + ['ident_men'] + ['isolation_fenetres'] + ['isolation_murs']

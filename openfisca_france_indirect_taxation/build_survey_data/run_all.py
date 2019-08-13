@@ -146,7 +146,6 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
             log.debug(e)
             log.debug("Skipping this step")
 
-
     # Créer un nouvel identifiant pour les ménages
     data_frame['identifiant_menage'] = list(range(0, len(data_frame)))
     data_frame['identifiant_menage'] = data_frame['identifiant_menage'] + (year_data * 100000)
