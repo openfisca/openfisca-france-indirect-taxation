@@ -43,7 +43,7 @@ simulated_variables = [
     'pondmen',
     'combustibles_liquides',
     'gaz_ville',
-    'depenses_carburants_corrigees',
+    'depenses_carburants',
     'depenses_energies_logement',
     'depenses_tot',
     ]
@@ -73,7 +73,7 @@ df_to_plot = elasticities_by_categ(df, 'strate')
 df_to_plot = elasticities_by_categ(df, 'age_group_pr')
 df_to_plot = elasticities_by_categ(df, 'energy_mode')
 
-df['part_carbu'] = (df['depenses_carburants_corrigees'] * df['pondmen']) / (df['depenses_carburants_corrigees'] * df['pondmen']).sum()
+df['part_carbu'] = (df['depenses_carburants'] * df['pondmen']) / (df['depenses_carburants'] * df['pondmen']).sum()
 
 elas_price_1_ponderee = (df['part_carbu'] * df['elas_price_1_1']).sum()
 elas_exp_1_ponderee = (df['part_carbu'] * df['elas_exp_1']).sum()
@@ -82,7 +82,7 @@ df['part_housing'] = (df['depenses_energies_logement'] * df['pondmen']) / (df['d
 elas_price_2_ponderee = (df['part_housing'] * df['elas_price_2_2']).sum()
 elas_exp_2_ponderee = (df['part_housing'] * df['elas_exp_2']).sum()
 
-df['depenses_other'] = df['depenses_tot'] - df['depenses_carburants_corrigees'] - df['depenses_energies_logement']
+df['depenses_other'] = df['depenses_tot'] - df['depenses_carburants'] - df['depenses_energies_logement']
 df.loc[df['depenses_other'] < 0, 'depenses_other'] = 0
 
 df['part_other'] = (df['depenses_other'] * df['pondmen']) / (df['depenses_other'] * df['pondmen']).sum()

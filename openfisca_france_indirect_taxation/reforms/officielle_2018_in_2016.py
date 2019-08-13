@@ -395,7 +395,7 @@ class reforme_officielle_2018_in_2016(Reform):
         label = "Dépenses en diesel après réaction à la réforme"
 
         def formula(menage, period, parameters):
-            depenses_diesel = menage('depenses_diesel_corrigees', period)
+            depenses_diesel = menage('depenses_diesel', period)
             diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).officielle_2018_in_2016.diesel_cce_seulement
             carburants_elasticite_prix = menage('elas_price_1_1', period)
@@ -410,7 +410,7 @@ class reforme_officielle_2018_in_2016(Reform):
         label = "Dépenses en diesel après réaction à la réforme"
 
         def formula(menage, period, parameters):
-            depenses_diesel = menage('depenses_diesel_corrigees', period)
+            depenses_diesel = menage('depenses_diesel', period)
             diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).officielle_2018_in_2016.diesel_2016_2018
             carburants_elasticite_prix = menage('elas_price_1_1', period)
@@ -425,7 +425,7 @@ class reforme_officielle_2018_in_2016(Reform):
         label = "Dépenses en diesel après réaction à la réforme"
 
         def formula(menage, period, parameters):
-            depenses_diesel = menage('depenses_diesel_corrigees', period)
+            depenses_diesel = menage('depenses_diesel', period)
             diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             taxe_essence = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
             taxe_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
@@ -512,7 +512,7 @@ class reforme_officielle_2018_in_2016(Reform):
         label = "Dépenses en essence après réaction à la réforme"
 
         def formula(menage, period, parameters):
-            depenses_essence = menage('depenses_essence_corrigees', period)
+            depenses_essence = menage('depenses_essence', period)
             super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
             reforme_essence = parameters(period.start).officielle_2018_in_2016.essence_2016_2018
             carburants_elasticite_prix = menage('elas_price_1_1', period)
@@ -926,7 +926,7 @@ class reforme_officielle_2018_in_2016(Reform):
                 * depenses_carburants_corrigees_officielle_2018_in_2016
                 )
             depenses_carburants_corrigees = \
-                menage('depenses_carburants_corrigees', period)
+                menage('depenses_carburants', period)
             tva_depenses_carburants_corrigees = (
                 (taux_plein_tva / (1 + taux_plein_tva))
                 * depenses_carburants_corrigees

@@ -26,7 +26,7 @@ def nombre_precaires_reformes(reforme, year, data_year):
         )
 
     simulated_variables = [
-        'depenses_carburants_corrigees',
+        'depenses_carburants',
         'depenses_carburants_corrigees_ajustees_{}'.format(reforme),
         'depenses_energies_logement',
         'depenses_energies_logement_ajustees_{}'.format(reforme),
@@ -78,7 +78,7 @@ def nombre_precaires_reformes(reforme, year, data_year):
                 / menages_reference['pondmen'].sum()
                 )
 
-        menages_reference = brde(menages_reference, 'depenses_carburants_corrigees', 'depenses_tot', 'transport')
+        menages_reference = brde(menages_reference, 'depenses_carburants', 'depenses_tot', 'transport')
         menages_reforme = brde(menages_reforme, 'depenses_carburants_corrigees_ajustees_{}'.format(reforme), 'depenses_tot', 'transport')
 
         dict_transport['brde - {0} - {1}'.format(reforme, redistribution)] = (
@@ -103,7 +103,7 @@ def nombre_precaires_reformes(reforme, year, data_year):
                 / menages_reference['pondmen'].sum()
                 )
 
-        menages_reference = tee_10_3(menages_reference, 'depenses_carburants_corrigees', 'depenses_tot', 'transport')
+        menages_reference = tee_10_3(menages_reference, 'depenses_carburants', 'depenses_tot', 'transport')
         menages_reforme = tee_10_3(menages_reforme, 'depenses_carburants_corrigees_ajustees_{}'.format(reforme), 'depenses_tot', 'transport')
 
         dict_transport['tee - {0} - {1}'.format(reforme, redistribution)] = (

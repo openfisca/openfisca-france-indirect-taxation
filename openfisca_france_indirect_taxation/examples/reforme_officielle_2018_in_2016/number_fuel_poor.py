@@ -33,7 +33,7 @@ def number_fuel_poors(year, data_year):
         'cheques_energie_officielle_2018_in_2016',
         'cheques_energie_by_energy_officielle_2018_in_2016',
         'cheques_energie_ruraux_by_energy_officielle_2018_in_2016',
-        'depenses_carburants_corrigees',
+        'depenses_carburants',
         'depenses_carburants_corrigees_officielle_2018_in_2016',
         'depenses_energies_logement',
         'depenses_energies_logement_officielle_2018_in_2016',
@@ -61,11 +61,11 @@ def number_fuel_poors(year, data_year):
     dict_logement['tee - avant reforme'] = (
         (df_reforme['tee_10_3_rev_disponible_logement'] * df_reforme['pondmen']).sum()
         )
-    df_reforme = brde(df_reforme, 'depenses_carburants_corrigees', 'rev_disponible', 'transport')
+    df_reforme = brde(df_reforme, 'depenses_carburants', 'rev_disponible', 'transport')
     dict_transport['brde - avant reforme'] = (
         (df_reforme['brde_m2_transport_rev_disponible'] * df_reforme['pondmen']).sum()
         )
-    df_reforme = tee_10_3(df_reforme, 'depenses_carburants_corrigees', 'rev_disponible', 'transport')
+    df_reforme = tee_10_3(df_reforme, 'depenses_carburants', 'rev_disponible', 'transport')
     dict_transport['tee - avant reforme'] = (
         (df_reforme['tee_10_3_rev_disponible_transport'] * df_reforme['pondmen']).sum()
         )

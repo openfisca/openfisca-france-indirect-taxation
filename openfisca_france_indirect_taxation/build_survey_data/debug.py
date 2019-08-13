@@ -29,7 +29,7 @@ simulated_variables = [
     'depenses_energies_logement',
     'depenses_energies_logement_officielle_2018_in_2016',
     'depenses_energies_totales',
-    'depenses_carburants_corrigees',
+    'depenses_carburants',
     'combustibles_liquides',
     'gaz_ville',
     'rev_disp_loyerimput',

@@ -31,7 +31,7 @@ simulated_variables = [
     'emissions_CO2_energies_totales',
     'depenses_gaz_ville',
     'depenses_combustibles_liquides',
-    'depenses_carburants_corrigees',
+    'depenses_carburants',
     'rev_disp_loyerimput',
     'ocde10',
     'strate',

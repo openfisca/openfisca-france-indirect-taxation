@@ -27,7 +27,7 @@ assets_directory = os.path.join(
 products = ['transports', 'carburants', 'essence', 'diesel']
 depenses_bdf = pd.DataFrame()
 for element in products:
-    depenses = pd.DataFrame.read_csv(os.path.join(assets_directory,
+    depenses = pd.read_csv(os.path.join(assets_directory,
             'openfisca_france_indirect_taxation', 'assets', 'depenses',
             'depenses_{}_totales_bdf.csv').format(element), sep = ',', header = -1)
     depenses.rename(columns = {1: '{} bdf'.format(element)}, inplace = True)

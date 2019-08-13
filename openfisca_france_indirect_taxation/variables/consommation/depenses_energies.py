@@ -19,27 +19,6 @@ class depenses_carburants(YearlyVariable):
         return menage('poste_07_2_2_1_1', period)
 
 
-class depenses_carburants_corrigees(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = "Consommation en carburants corrigees après appariement ENTD pour 2011 seulement"
-    definition_period = YEAR
-
-    def formula_2011(menage, period):
-        depenses_carburants_corrigees = menage('depenses_carburants_corrigees_entd', period)
-        return depenses_carburants_corrigees
-
-    def formula(menage, period):
-        depenses_carburants_corrigees = menage('depenses_carburants', period)
-        return depenses_carburants_corrigees
-
-
-class depenses_carburants_corrigees_entd(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = "Consommation de carburants corrigees après appariement ENTD"
-
-
 class depenses_combustibles_liquides(YearlyVariable):
     value_type = float
     entity = Menage
@@ -100,27 +79,6 @@ class depenses_diesel(YearlyVariable):
         return depenses_diesel
 
 
-class depenses_diesel_corrigees(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = "Consommation en diesel corrigees après appariement ENTD pour 2011 seulement"
-    definition_period = YEAR
-
-    def formula_2011(menage, period):
-        depenses_diesel_corrigees = menage('depenses_diesel_corrigees_entd', period)
-        return depenses_diesel_corrigees
-
-    def formula(menage, period):
-        depenses_diesel_corrigees = menage('depenses_diesel', period)
-        return depenses_diesel_corrigees
-
-
-class depenses_diesel_corrigees_entd(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = "Consommation en diesel corrigees après appariement ENTD"
-
-
 class depenses_diesel_htva(YearlyVariable):
     value_type = float
     entity = Menage
@@ -128,7 +86,7 @@ class depenses_diesel_htva(YearlyVariable):
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-        depenses_diesel = menage('depenses_diesel_corrigees', period)
+        depenses_diesel = menage('depenses_diesel', period)
         depenses_diesel_htva = depenses_diesel - tax_from_expense_including_tax(depenses_diesel, taux_plein_tva)
 
         return depenses_diesel_htva
@@ -354,7 +312,7 @@ class depenses_energies_totales(YearlyVariable):
 
     def formula(menage, period):
         depenses_energies_logement = menage('depenses_energies_logement', period)
-        depenses_carburants = menage('depenses_carburants_corrigees', period)
+        depenses_carburants = menage('depenses_carburants', period)
         depenses_energies_totales = (
             depenses_energies_logement + depenses_carburants
             )
@@ -373,27 +331,6 @@ class depenses_essence(YearlyVariable):
         depenses_essence = depenses_carburants - depenses_diesel
 
         return depenses_essence
-
-
-class depenses_essence_corrigees(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = "Consommation en essence corrigées après appariement ENTD pour 2011 seulement"
-    definition_period = YEAR
-
-    # def formula_2011(menage, period):
-    #     depenses_essence_corrigees = menage('depenses_essence_corrigees_entd', period)
-    #     return depenses_essence_corrigees
-
-    def formula(menage, period):
-        depenses_essence_corrigees = menage('depenses_essence', period)
-        return depenses_essence_corrigees
-
-
-class depenses_essence_corrigees_entd(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = "Consommation en essence corrigées après appariement ENTD"
 
 
 class depenses_essence_ht(Variable):
@@ -554,7 +491,7 @@ class depenses_sp_e10(YearlyVariable):
     label = "Construction par pondération des dépenses spécifiques au sans plomb e10"
 
     def formula(menage, period, parameters):
-        depenses_essence = menage('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence', period)
         part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10 = depenses_essence * part_sp_e10
 
@@ -568,7 +505,7 @@ class depenses_sp_e10_ht(YearlyVariable):
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-        depenses_essence = menage('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence', period)
         part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10 = depenses_essence * part_sp_e10
         depenses_sp_e10_htva = depenses_sp_e10 - tax_from_expense_including_tax(depenses_sp_e10, taux_plein_tva)
@@ -599,7 +536,7 @@ class depenses_sp_95(YearlyVariable):
     label = "Construction par pondération des dépenses spécifiques au sans plomb 95"
 
     def formula(menage, period, parameters):
-        depenses_essence = menage('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence', period)
         part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp_95 = depenses_essence * part_sp95
 
@@ -628,7 +565,7 @@ class depenses_sp_95_ht(YearlyVariable):
             (accise_ticpe_super95 * (1 + taux_plein_tva))
             / (super_95_ttc - accise_ticpe_super95 * (1 + taux_plein_tva))
             )
-        depenses_essence = menage('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence', period)
         part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp_95 = depenses_essence * part_sp95
         depenses_sp_95_htva = depenses_sp_95 - tax_from_expense_including_tax(depenses_sp_95, taux_plein_tva)
@@ -644,7 +581,7 @@ class depenses_sp_98(YearlyVariable):
     label = "Construction par pondération des dépenses spécifiques au sans plomb 98"
 
     def formula(menage, period, parameters):
-        depenses_essence = menage('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence', period)
         part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
         depenses_sp_98 = depenses_essence * part_sp98
 
@@ -672,7 +609,7 @@ class depenses_sp_98_ht(YearlyVariable):
             (accise_ticpe_super98 * (1 + taux_plein_tva))
             / (super_98_ttc - accise_ticpe_super98 * (1 + taux_plein_tva))
             )
-        depenses_essence = menage('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence', period)
         part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
         depenses_sp_98 = depenses_essence * part_sp98
         depenses_sp_98_htva = depenses_sp_98 - tax_from_expense_including_tax(depenses_sp_98, taux_plein_tva)
@@ -688,7 +625,7 @@ class depenses_super_plombe(YearlyVariable):
     label = "Construction par pondération des dépenses spécifiques au super plombe"
 
     def formula(menage, period, parameters):
-        depenses_essence = menage('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence', period)
         part_super_plombe = \
             parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
         depenses_super_plombe = depenses_essence * part_super_plombe
@@ -710,7 +647,7 @@ class depenses_super_plombe_ht(YearlyVariable):
             (accise_super_plombe_ticpe * (1 + taux_plein_tva))
             / (super_plombe_ttc - accise_super_plombe_ticpe * (1 + taux_plein_tva))
             )
-        depenses_essence = menage('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence', period)
         part_super_plombe = \
             parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
         depenses_super_plombe = depenses_essence * part_super_plombe

@@ -54,7 +54,7 @@ if __name__ == '__main__':
     simulated_variables = [
         'cheques_energie_officielle_2018_in_2016',
         'cheques_energie_integral_inconditionnel_officielle_2018_in_2016',
-        'depenses_carburants_corrigees',
+        'depenses_carburants',
         'depenses_carburants_corrigees_officielle_2018_in_2016',
         'depenses_energies_logement',
         'depenses_energies_logement_officielle_2018_in_2016',
@@ -78,8 +78,8 @@ if __name__ == '__main__':
 
     df_reforme = brde(df_reforme, 'depenses_energies_logement', 'rev_disponible', 'logement')
     df_reforme = tee_10_3(df_reforme, 'depenses_energies_logement', 'rev_disponible', 'logement')
-    df_reforme = brde(df_reforme, 'depenses_carburants_corrigees', 'rev_disponible', 'transport')
-    df_reforme = tee_10_3(df_reforme, 'depenses_carburants_corrigees', 'rev_disponible', 'transport')
+    df_reforme = brde(df_reforme, 'depenses_carburants', 'rev_disponible', 'transport')
+    df_reforme = tee_10_3(df_reforme, 'depenses_carburants', 'rev_disponible', 'transport')
 
     df_reforme = precarite(df_reforme, 'brde_m2_logement_rev_disponible', 'tee_10_3_rev_disponible_logement', 'logement')
     df_reforme = precarite(df_reforme, 'brde_m2_transport_rev_disponible', 'tee_10_3_rev_disponible_transport', 'transport')

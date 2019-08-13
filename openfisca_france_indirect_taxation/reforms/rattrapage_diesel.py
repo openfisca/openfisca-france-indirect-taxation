@@ -104,7 +104,7 @@ class reforme_rattrapage_diesel(Reform):
         label = "Depenses en diesel après reaction a la reforme - taxes carburants"
 
         def formula(menage, period, parameters):
-            depenses_diesel = menage('depenses_diesel_corrigees', period)
+            depenses_diesel = menage('depenses_diesel', period)
             diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).rattrapage_diesel.diesel
             carburants_elasticite_prix = menage('elas_price_1_1', period)
@@ -136,7 +136,7 @@ class reforme_rattrapage_diesel(Reform):
         label = "Depenses en essence après reaction a la reforme - taxes carburants"
 
         def formula(menage, period, parameters):
-            depenses_essence = menage('depenses_essence_corrigees', period)
+            depenses_essence = menage('depenses_essence', period)
             super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
             reforme_essence = parameters(period.start).rattrapage_diesel.essence
             carburants_elasticite_prix = menage('elas_price_1_1', period)

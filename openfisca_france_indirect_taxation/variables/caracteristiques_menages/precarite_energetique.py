@@ -47,7 +47,7 @@ class brde_m2_rev_disponible(YearlyVariable):
         mediane_revenu_uc = np.median(revenu_uc)
         bas_revenu = 1 * (revenu_uc < 0.6 * mediane_revenu_uc)
 
-        depenses_energies_logement = menage('depenses_carburants_corrigees', period)
+        depenses_energies_logement = menage('depenses_carburants', period)
         surface = menage('surfhab_d', period)
         depenses_surface = depenses_energies_logement / surface
         mediane_depenses_surface = np.median(depenses_surface)
@@ -71,7 +71,7 @@ class brde_transports_depenses_tot(YearlyVariable):
         bas_revenu = 1 * (depenses_tot_uc < 0.6 * mediane_depenses_tot_uc)
 
         # Médiane ou médiane parmi ceux conduisant ?
-        depenses_carburants = menage('depenses_carburants_corrigees', period)
+        depenses_carburants = menage('depenses_carburants', period)
         mediane_depenses_carburants = np.median(depenses_carburants)
         depenses_elevees = 1 * (depenses_carburants > mediane_depenses_carburants)
 
@@ -93,7 +93,7 @@ class brde_transports_rev_disponible(YearlyVariable):
         bas_revenu = 1 * (revenu_uc < 0.6 * mediane_revenu_uc)
 
         # Médiane ou médiane parmi ceux conduisant ?
-        depenses_carburants = menage('depenses_carburants_corrigees', period)
+        depenses_carburants = menage('depenses_carburants', period)
         mediane_depenses_carburants = np.median(depenses_carburants)
         depenses_elevees = 1 * (depenses_carburants > mediane_depenses_carburants)
 
@@ -409,7 +409,7 @@ class tee_transports_depenses_tot(YearlyVariable):
     label = "Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
 
     def formula(menage, period):
-        depenses_carburants = menage('depenses_carburants_corrigees', period)
+        depenses_carburants = menage('depenses_carburants', period)
         depenses_tot = menage('depenses_tot', period)
 
         tee = depenses_carburants / depenses_tot
@@ -448,7 +448,7 @@ class tee_transports_rev_disponible(YearlyVariable):
     label = "Taux d'effort énergétique du ménage pour le logement, en fonction du revenu disponible"
 
     def formula(menage, period):
-        depenses_energies_logement = menage('depenses_carburants_corrigees', period)
+        depenses_energies_logement = menage('depenses_carburants', period)
         rev_disponible = menage('rev_disponible', period)
 
         tee = depenses_energies_logement / rev_disponible

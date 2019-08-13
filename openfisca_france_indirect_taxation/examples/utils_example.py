@@ -163,7 +163,7 @@ def cheque_vert(data_reference, data_reforme, reforme):
         data_reforme['part_cheque_logement'] = (
             (data_reforme['depenses_energies_logement_ajustees_{}'.format(reforme)] - data_reforme['depenses_energies_logement'])
             / ((data_reforme['depenses_energies_logement_ajustees_{}'.format(reforme)] - data_reforme['depenses_energies_logement'])
-+ (data_reforme['depenses_carburants_corrigees_ajustees_{}'.format(reforme)] - data_reforme['depenses_carburants_corrigees']))
++ (data_reforme['depenses_carburants_corrigees_ajustees_{}'.format(reforme)] - data_reforme['depenses_carburants']))
             )
         data_reforme['part_cheque_logement'] = data_reforme['part_cheque_logement'].fillna(1)
         data_reforme['part_cheque_logement'] = (

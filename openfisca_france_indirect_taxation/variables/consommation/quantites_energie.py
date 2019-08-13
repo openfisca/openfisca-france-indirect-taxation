@@ -27,7 +27,7 @@ class quantites_diesel(YearlyVariable):
     label = "Quantités de diesel consommées par les ménages"
 
     def formula(menage, period, parameters):
-        depenses_diesel = menage('depenses_diesel_corrigees', period)
+        depenses_diesel = menage('depenses_diesel', period)
         diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         quantites_diesel = depenses_diesel / diesel_ttc * 100
 
@@ -313,7 +313,7 @@ class quantites_sp_e10(YearlyVariable):
     label = "Quantités consommées de sans plomb e10 par les ménages"
 
     def formula(menage, period, parameters):
-        depenses_essence = menage('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence', period)
         part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10 = depenses_essence * part_sp_e10
         super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
@@ -328,7 +328,7 @@ class quantites_sp95(YearlyVariable):
     label = "Quantités consommées de sans plomb 95 par les ménages"
 
     def formula(menage, period, parameters):
-        depenses_essence = menage('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence', period)
         part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
         depenses_sp95 = depenses_essence * part_sp95
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
@@ -343,7 +343,7 @@ class quantites_sp98(YearlyVariable):
     label = "Quantités consommées de sans plomb 98 par les ménages"
 
     def formula(menage, period, parameters):
-        depenses_essence = menage('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence', period)
         part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
         depenses_sp98 = depenses_essence * part_sp98
         super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
@@ -358,7 +358,7 @@ class quantites_super_plombe(YearlyVariable):
     label = "Quantités consommées de super plombé par les ménages"
 
     def formula(menage, period, parameters):
-        depenses_essence = menage('depenses_essence_corrigees', period)
+        depenses_essence = menage('depenses_essence', period)
         part_super_plombe = \
             parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
         depenses_super_plombe = depenses_essence * part_super_plombe

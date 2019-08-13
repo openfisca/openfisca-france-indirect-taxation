@@ -122,7 +122,7 @@ class cce_2015_in_2014(Reform):
         label = "Dépenses en diesel après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2015"
 
         def formula(menage, period, parameters):
-            depenses_diesel = menage('depenses_diesel_corrigees', period)
+            depenses_diesel = menage('depenses_diesel', period)
             diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).cce_2015_in_2014.diesel_2014_2015
             carburants_elasticite_prix = menage('elas_price_1_1', period)
@@ -156,7 +156,7 @@ class cce_2015_in_2014(Reform):
         label = "Dépenses en essence après réaction à la réforme - contribution climat énergie, hausse de 2014 à 2015"
 
         def formula(menage, period, parameters):
-            depenses_essence = menage('depenses_essence_corrigees', period)
+            depenses_essence = menage('depenses_essence', period)
             super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
             reforme_essence = parameters(period.start).cce_2015_in_2014.essence_2014_2015
             carburants_elasticite_prix = menage('elas_price_1_1', period)

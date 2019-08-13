@@ -16,7 +16,7 @@ elasticities = get_elasticities(data_year)
 simulated_variables = [
     'depenses_energies_totales',
     'depenses_energies_logement',
-    'depenses_carburants_corrigees',
+    'depenses_carburants',
     'ocde10'
     ]
 
@@ -32,7 +32,7 @@ for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
 
     df['depenses_energies_totales_uc'] = df['depenses_energies_totales'] / df['ocde10']
     df['depenses_energies_logement_uc'] = df['depenses_energies_logement'] / df['ocde10']
-    df['depenses_carburants_corrigees_uc'] = df['depenses_carburants_corrigees'] / df['ocde10']
+    df['depenses_carburants_corrigees_uc'] = df['depenses_carburants'] / df['ocde10']
 
     df = df[['depenses_energies_totales_uc'] + ['depenses_energies_logement_uc'] + ['depenses_carburants_corrigees_uc']]
 

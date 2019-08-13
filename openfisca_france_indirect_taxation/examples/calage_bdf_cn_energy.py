@@ -229,9 +229,9 @@ def get_inflators_energy(target_year):
     for key in list(inflators_cn_to_cn.keys()):
         ratio_by_variable[key] = inflators_bdf_to_cn[key] * inflators_cn_to_cn[key]
     ratio_by_variable['depenses_gaz_liquefie'] = ratio_by_variable['depenses_gaz_ville']
-    ratio_by_variable['depenses_carburants_corrigees'] = ratio_by_variable['depenses_carburants']
-    ratio_by_variable['depenses_diesel_corrigees'] = ratio_by_variable['depenses_carburants']
-    ratio_by_variable['depenses_essence_corrigees'] = ratio_by_variable['depenses_carburants']
+    ratio_by_variable['depenses_carburants'] = ratio_by_variable['depenses_carburants']
+    ratio_by_variable['depenses_diesel'] = ratio_by_variable['depenses_carburants']
+    ratio_by_variable['depenses_essence'] = ratio_by_variable['depenses_carburants']
     ratio_by_variable['revtot'] = ratio_by_variable['rev_disponible']
 
     return ratio_by_variable

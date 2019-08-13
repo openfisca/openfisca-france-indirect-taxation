@@ -144,7 +144,7 @@ def get_inflators_by_year(rebuild = False):
 
     else:
         re_build_inflators = dict()
-        inflators_from_csv = pandas.DataFrame.read_csv(os.path.join(assets_directory,
+        inflators_from_csv = pandas.read_csv(os.path.join(assets_directory,
             'openfisca_france_indirect_taxation', 'assets', 'inflateurs', 'inflators_by_year_wip.csv'),
             header = -1)
         for year in range(2000, 2015):
