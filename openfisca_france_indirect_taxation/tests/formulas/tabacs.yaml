@@ -10,9 +10,9 @@
      depenses_tabac_a_rouler: 0
      #
      cigares_droit_d_accise: 0
-     cigarette_droit_d_accise: 39.02  # TODO check with old version
+     cigarette_droit_d_accise: 39.02
      tabac_a_rouler_droit_d_accise: 0
-     total_tabac_droit_d_accise: 39.02  # TODO check with old version
+     total_tabac_droit_d_accise: 39.02
      #
      depenses_ht_tva_taux_plein: 0
      depenses_tva_taux_plein: 0
@@ -41,10 +41,10 @@
      depenses_cigarettes: 0
      depenses_tabac_a_rouler: 0
      #
-     cigares_droit_d_accise: 21.61  # TODO check with old version
+     cigares_droit_d_accise: 21.61
      cigarette_droit_d_accise: 0
      tabac_a_rouler_droit_d_accise: 0
-     total_tabac_droit_d_accise: 21.61  # TODO check with old version
+     total_tabac_droit_d_accise: 21.61
      #
      depenses_ht_tva_taux_plein: 0
      depenses_tva_taux_plein: 0
@@ -75,8 +75,8 @@
      #
      cigares_droit_d_accise: 0
      cigarette_droit_d_accise: 0
-     tabac_a_rouler_droit_d_accise: 36.94  # TODO check with old version
-     total_tabac_droit_d_accise: 36.94  # TODO check with old version
+     tabac_a_rouler_droit_d_accise: 36.94
+     total_tabac_droit_d_accise: 36.94
      #
      depenses_ht_tva_taux_plein: 0
      depenses_tva_taux_plein: 0
