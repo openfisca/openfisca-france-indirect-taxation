@@ -1,6 +1,0 @@
-Problematic files
-openfisca_france_indirect_taxation/build_survey_data/step_3_homogeneisation_caracteristiques_menages.py
-openfisca_france_indirect_taxation/model/consommation/consommation_menages.py
-
-Fix
-test_carburants_builder.py

@@ -132,27 +132,3 @@ class quantite_supercarburants(YearlyVariable):
     value_type = float
     entity = Menage
     label = "Quantité de supercarburants (super 95, super98 et superE10) consommée (en hecto-litres)"
-
-
-class somme_coicop12(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = "Somme des postes coicop12"
-
-    def formula(menage, period):
-        return sum(
-            menage('coicop12_{}'.format(idx), period)
-            for idx in range(1, 13)
-            )
-
-
-class somme_coicop12_conso(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = "Somme des postes coicop12 de 1 à 8"
-
-    def formula(menage, period):
-        return sum(
-            menage('coicop12_{}'.format(idx), period)
-            for idx in range(1, 9)
-            )
