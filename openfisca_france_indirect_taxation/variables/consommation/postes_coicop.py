@@ -26,12 +26,7 @@ def generate_postes_variables(tax_benefit_system):
         code_coicop = code_coicop[0]
         class_name = "poste_{}".format(slugify(code_coicop, separator = '_'))
         log.info('Creating variable {} with label {}'.format(class_name, label))
-        # Trick to create a class with a dynamic name.
-        type(class_name, (YearlyVariable,), dict(
-            value_type = float,
-            entity = Menage,
-            label = label,
-            ))
+        # Use type to create a class with a dynamic name
         tax_benefit_system.add_variable(
             type(class_name, (YearlyVariable,), dict(
                 value_type = float,
