@@ -42,13 +42,15 @@ setup(
             # "flake8-print", Bring back when one has time to clear all prints
             'matplotlib',
             'nbconvert >= 5.5.0',
+            'OpenFisca-Survey-Manager >= 0.34,<1.0',
             "pytest < 5.0",
             'pdbpp',
             'ruamel.yaml',
             'seaborn',
+            'tables',
             ],
         survey = [
-            'OpenFisca-Survey-Manager >= 0.32.1',
+            'OpenFisca-Survey-Manager >= 0.34,<1.0',
             'tables',
             ],
         ),
@@ -62,5 +64,4 @@ setup(
         "pandas <= 0.24.2",
         ],
     packages = find_packages(),
-    test_suite = 'nose.collector',
     )

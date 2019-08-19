@@ -91,5 +91,4 @@ if __name__ == '__main__':
     deb = time.clock()
     year = 2005
     build_homogeneisation_vehicules(year = year)
-
     log.info("step 0_2_homogeneisation_vehicules duration is {}".format(time.clock() - deb))

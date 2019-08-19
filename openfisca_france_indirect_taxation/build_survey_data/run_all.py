@@ -51,8 +51,6 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
 
     depenses = temporary_store["depenses_bdf_{}".format(year_calage)]
     depenses.index = depenses.index.astype(ident_men_dtype)
-    # depenses_by_grosposte = temporary_store["depenses_by_grosposte_{}".format(year_calage)]
-    # depenses_by_grosposte.index = depenses_by_grosposte.index.astype(str)
 
     # Gestion des véhicules:
     build_homogeneisation_vehicules(year = year_data)
@@ -105,7 +103,6 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
         for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
         'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']:
             data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
-    # 'ratio_loyer_impute',  'ratio_revenus' To be added
 
     if year_data == 2005:
         data_frame['ident_men'] = list(range(0, len(data_frame)))

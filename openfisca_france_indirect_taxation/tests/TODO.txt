@@ -1,0 +1,17 @@
+# New issues:
+
+## Réactions comportementales
+  - Intégrer de façon homogène la(les) réaction(s) comportemenatle(s) comme une(des)
+   extension(s).
+  - Normaliser dans l'arborescence des paramètres les surcoûts de prix.
+
+
+## test_depenses_carburants
+  - le test ne passe pas
+
+
+# test_aliss_survey_scenario.py
+  - le test ne passe pas sur msika/portable
+  - vérifier à l'IPP
+  - ajuster les dpéendances
+

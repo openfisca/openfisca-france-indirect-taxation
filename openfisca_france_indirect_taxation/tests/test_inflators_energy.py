@@ -14,6 +14,7 @@ def test_inflators_energy():
 
     simulated_variables = ['depenses_carburants', 'depenses_combustibles_liquides', 'depenses_combustibles_solides',
         'depenses_electricite', 'depenses_tot', 'loyer_impute', 'rev_disp_loyerimput', 'rev_disponible']
+
     # TODO This variable is bugging 'depenses_gaz'
     # Should have been changed lately
 
@@ -34,4 +35,4 @@ def test_inflators_energy():
     for var in simulated_variables:
         df_2011[var + '_inflated'] = (df_2011[var] * inflation_kwargs['inflator_by_variable'][var]).copy()
         df_compare[var] = (df_2011[var + '_inflated'] - df_year[var]).copy()
-        assert max(df_compare[var]) < 1  # check the difference is less than 1€
+        assert max(df_compare[var].abs()) < 1  # check the difference is less than 1€
