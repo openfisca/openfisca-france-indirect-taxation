@@ -26,7 +26,9 @@ df_indice_prix_produit = pd.read_csv(
         'assets',
         'prix',
         'df_indice_prix_produit.csv'
-        ), sep =';', decimal = ','
+        ),
+    sep =';',
+    decimal = ','
     )
 df_indice_prix_produit.set_index('Unnamed: 0', inplace = True)
 
