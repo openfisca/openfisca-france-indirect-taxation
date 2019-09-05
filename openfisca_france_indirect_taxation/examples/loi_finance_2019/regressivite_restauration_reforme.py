@@ -77,7 +77,7 @@ for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 
 
     # Réalisation de graphiques
     df_to_plot = df[
-        ['augmentation_depenses_restauration_reforme_tva_2019'] + ['augmentation_depenses_rev_disp_loyerimput']
+        ['augmentation_depenses_restauration_reforme_tva_2019', 'augmentation_depenses_rev_disp_loyerimput']
         + ['augmentation_depenses_depenses_tot']
         ]
     graph_builder_bar(df_to_plot['augmentation_depenses_restauration_reforme_tva_2019'], False)

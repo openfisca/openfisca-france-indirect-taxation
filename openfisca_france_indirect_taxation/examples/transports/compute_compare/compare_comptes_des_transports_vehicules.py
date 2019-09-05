@@ -30,7 +30,7 @@ comparaison_vehicules['total bdf'] = 0
 # Sélection des données Budget des Familles utilisées et organisation de la dataframe
 for year in [2000, 2005, 2011]:
     aggregates_data_frame = get_input_data_frame(year)
-    df_nombre_vehicules_bdf = aggregates_data_frame[['veh_diesel'] + ['veh_essence'] + ['pondmen']]
+    df_nombre_vehicules_bdf = aggregates_data_frame[['veh_diesel', 'veh_essence', 'pondmen']]
     nombre_vehicules_diesel_bdf = (
         df_nombre_vehicules_bdf['veh_diesel'] * df_nombre_vehicules_bdf['pondmen']
         ).sum() / 1000
@@ -53,6 +53,6 @@ for year in [2000, 2005, 2011]:
 comparaison_vehicules = comparaison_vehicules[comparaison_vehicules['total bdf'] != 0]
 
 # Réalisation de graphiques
-graph_builder_line(comparaison_vehicules[['total bdf'] + ['total agregats']])
-graph_builder_line(comparaison_vehicules[['diesel bdf'] + ['diesel agregats']])
-graph_builder_line(comparaison_vehicules[['essence bdf'] + ['essence agregats']])
+graph_builder_line(comparaison_vehicules[['total bdf', 'total agregats']])
+graph_builder_line(comparaison_vehicules[['diesel bdf', 'diesel agregats']])
+graph_builder_line(comparaison_vehicules[['essence bdf', 'essence agregats']])

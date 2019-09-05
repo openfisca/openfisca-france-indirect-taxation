@@ -156,7 +156,7 @@ indice_prix_mensuel_98_2015[c + '12_8_1'] = indice_prix_mensuel_98_2015[c + '12_
 indice_prix_mensuel_98_2015[c + '12_9_1_1'] = indice_prix_mensuel_98_2015[c + '12_0_0']
 
 indice_prix_mensuel_98_2015['date'] = indice_prix_mensuel_98_2015['Annee'] + '_' + indice_prix_mensuel_98_2015['Mois']
-indice_prix_mensuel_98_2015[['Annee'] + ['Mois']] = indice_prix_mensuel_98_2015[['Annee'] + ['Mois']].astype(float)
+indice_prix_mensuel_98_2015[['Annee', 'Mois']] = indice_prix_mensuel_98_2015[['Annee', 'Mois']].astype(float)
 indice_prix_mensuel_98_2015['temps'] = \
     ((indice_prix_mensuel_98_2015['Annee'] - 1998) * 12) + indice_prix_mensuel_98_2015['Mois']
 del indice_prix_mensuel_98_2015['Annee']

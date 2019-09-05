@@ -83,7 +83,7 @@ def get_accise_ticpe_majoree():
         accise_totale['accise ticpe gazole'] + accise_totale['major regionale ticpe gazole']
         )
     accise_totale = accise_totale[
-        ['accise majoree sans plomb'] + ['accise majoree super plombe'] + ['accise majoree diesel']
+        ['accise majoree sans plomb', 'accise majoree super plombe', 'accise majoree diesel']
         ].copy()
     accise_totale = accise_totale[accise_totale['accise majoree sans plomb'] != 2.5].copy()
     return accise_totale

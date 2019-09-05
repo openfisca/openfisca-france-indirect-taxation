@@ -49,7 +49,7 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 'strate']:
     df = dataframe_by_group(survey_scenario, category, simulated_variables)
 
-    graph_builder_bar(df[['poste_02_2_1'] + ['poste_02_2_2'] + ['poste_02_2_3']], False)
+    graph_builder_bar(df[['poste_02_2_1', 'poste_02_2_2', 'poste_02_2_3']], False)
 
     df['check_poste_agrege_11'] = (
         df['poste_11_1_1_1_1'] + df['poste_11_1_1_1_2'] + df['poste_11_1_2_1_1']
@@ -63,7 +63,7 @@ for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 
 
     # Réalisation de graphiques
     df_to_plot = df[
-        ['poste_agrege_11'] + ['part_poste_agrege_11_rev_disp_loyerimput']
+        ['poste_agrege_11', 'part_poste_agrege_11_rev_disp_loyerimput']
         + ['part_poste_agrege_11_depenses_tot']
         ]
     graph_builder_bar(df_to_plot['part_poste_agrege_11_rev_disp_loyerimput'], False)

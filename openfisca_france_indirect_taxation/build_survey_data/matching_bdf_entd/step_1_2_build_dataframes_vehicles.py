@@ -104,10 +104,10 @@ def merge_vehicule_menage():
     data_entd.loc[data_entd['check_annee'] == '/', 'recvoi'] = data_entd['v1_sfvdatcg'].str[6:].copy()
     del data_entd['v1_sfvdatcg'], data_entd['check_annee']
 
-    data_entd[['anvoi'] + ['recvoi']] = data_entd[['anvoi'] + ['recvoi']].astype(int, inplace = True)
+    data_entd[['anvoi', 'recvoi']] = data_entd[['anvoi', 'recvoi']].astype(int, inplace = True)
 
-    data_bdf[['anvoi'] + ['recvoi']] = data_bdf[['anvoi'] + ['recvoi']].fillna(0)
-    data_bdf[['anvoi'] + ['recvoi']] = data_bdf[['anvoi'] + ['recvoi']].astype(int, inplace = True)
+    data_bdf[['anvoi', 'recvoi']] = data_bdf[['anvoi', 'recvoi']].fillna(0)
+    data_bdf[['anvoi', 'recvoi']] = data_bdf[['anvoi', 'recvoi']].astype(int, inplace = True)
 
     data_entd['age_vehicule'] = 0
     data_bdf['age_vehicule'] = 0
@@ -158,8 +158,8 @@ def merge_vehicule_menage():
             },
         inplace = True,
         )
-    data_entd = data_entd[['ident_men'] + ['puissance']
-+ ['etat_veh_achat'] + ['consommation'] + ['age_vehicule']
+    data_entd = data_entd[['ident_men', 'puissance']
++ ['etat_veh_achat', 'consommation', 'age_vehicule']
         + ['age_carte_grise']
         ]
 
@@ -188,9 +188,9 @@ def merge_vehicule_menage():
             },
         inplace = True,
         )
-    data_bdf = data_bdf[['ident_men'] + ['prix_achat'] + ['veh_tot']
-+ ['etat_veh_achat'] + ['age_vehicule'] + ['age_carte_grise']
-        + ['vp_domicile_travail'] + ['vp_deplacements_pro']
+    data_bdf = data_bdf[['ident_men', 'prix_achat', 'veh_tot']
++ ['etat_veh_achat', 'age_vehicule', 'age_carte_grise']
+        + ['vp_domicile_travail', 'vp_deplacements_pro']
         ]
 
     # Df infos comportements ménages
@@ -215,9 +215,7 @@ def merge_vehicule_menage():
 
 
 def build_df_menages_vehicles():
-    data_menages = load_data_menages_bdf_entd()
-    data_menages_entd = data_menages[0]
-    data_menages_bdf = data_menages[1]
+    data_menages_entd, data_menages_bdf = load_data_menages_bdf_entd()
 
     data_vehicules = merge_vehicule_menage()
     data_vehicules_entd = data_vehicules[0]

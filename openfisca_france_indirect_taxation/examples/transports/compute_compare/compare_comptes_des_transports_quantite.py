@@ -49,6 +49,6 @@ comparaison_bdf_agregats = concat([quantite_carbu_vp_france, quantite_bdf], axis
 comparaison_bdf_agregats = comparaison_bdf_agregats.dropna()
 
 # Créer des graphiques pour comparer les consommations obtenues via Bdf vis-à-vis de la comptabilité nationale
-graph_builder_line(comparaison_bdf_agregats[['essence agregat'] + ['essence bdf']])
-graph_builder_line(comparaison_bdf_agregats[['diesel agregat'] + ['diesel bdf']])
-graph_builder_line(comparaison_bdf_agregats[['carburants agregat'] + ['carburants bdf']])
+graph_builder_line(comparaison_bdf_agregats[['essence agregat', 'essence bdf']])
+graph_builder_line(comparaison_bdf_agregats[['diesel agregat', 'diesel bdf']])
+graph_builder_line(comparaison_bdf_agregats[['carburants agregat', 'carburants bdf']])

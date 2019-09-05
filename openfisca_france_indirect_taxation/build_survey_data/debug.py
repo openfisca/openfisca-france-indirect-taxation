@@ -68,7 +68,7 @@ keep['net_fioul'] = keep['depenses_combustibles_liquides_officielle_2018_in_2016
 
 weird_fioul = keep.query('net_fioul < 0')
 weird_gaz = keep.query('net_gaz < 0')
-weird_gaz_keep = weird_gaz[['depenses_gaz_ville_officielle_2018_in_2016'] + ['depenses_gaz_ville']]
+weird_gaz_keep = weird_gaz[['depenses_gaz_ville_officielle_2018_in_2016', 'depenses_gaz_ville']]
 
 precaires_log = (df['precarite_energetique_rev_disponible'] * df['pondmen']).sum()
 precaires_tra = (df['precarite_transports_rev_disponible'] * df['pondmen']).sum()

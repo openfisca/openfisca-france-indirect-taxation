@@ -19,7 +19,6 @@ temporary_store = TemporaryStore.create(file_name = 'transport_tmp')
 
 def load_data_menages_bdf_entd():
     # Load ENTD data :
-
     year_entd = 2008
 
     entd_survey_collection = SurveyCollection.load(
@@ -31,9 +30,7 @@ def load_data_menages_bdf_entd():
     input_entd_menage = survey_entd.get_values(table = 'q_menage')
 
     # Load BdF data :
-
     year_bdf = 2011
-
     openfisca_survey_collection = SurveyCollection.load(collection = 'openfisca_indirect_taxation')
     openfisca_survey = openfisca_survey_collection.get_survey('openfisca_indirect_taxation_data_{}'.format(year_bdf))
     input_bdf = openfisca_survey.get_values(table = 'input')
@@ -120,6 +117,4 @@ def load_data_menages_bdf_entd():
 
 
 if __name__ == "__main__":
-    data = load_data_menages_bdf_entd()
-    data_entd = data[0]
-    data_bdf = data[1]
+    data_entd, data_bdf = load_data_menages_bdf_entd()

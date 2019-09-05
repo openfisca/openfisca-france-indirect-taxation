@@ -59,5 +59,5 @@ comparaison_bdf_agregats = concat([depenses_bdf, masses_cn_carburants, masses_cn
 comparaison_bdf_agregats = comparaison_bdf_agregats.dropna()
 
 # Créer des graphiques pour comparer les consommations obtenues via Bdf vis-à-vis de la comptabilité nationale
-graph_builder_line(comparaison_bdf_agregats[['carburants agregat'] + ['carburants bdf']])
-graph_builder_line(comparaison_bdf_agregats[['transports agregat'] + ['transports bdf']])
+graph_builder_line(comparaison_bdf_agregats[['carburants agregat', 'carburants bdf']])
+graph_builder_line(comparaison_bdf_agregats[['transports agregat', 'transports bdf']])

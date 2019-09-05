@@ -111,15 +111,15 @@ if __name__ == '__main__':
                 ), sep =';', decimal = ','
             )
 
-        prix_carbu = prix_carbu[['diesel_ttc'] + ['super_95_ttc'] + ['vag']].astype(float)
+        prix_carbu = prix_carbu[['diesel_ttc', 'super_95_ttc', 'vag']].astype(float)
 
         data_households = pd.merge(data_simulation, prix_carbu, on = 'vag')
         del data_simulation, prix_carbu
 
-        data_households = data_households[['quantite_carbu'] + ['quantite_diesel'] + ['quantite_essence']
-+ ['diesel_ttc'] + ['super_95_ttc'] + ['rev_disponible'] + ['rural'] + ['petite_villes']
-            + ['villes_moyennes'] + ['grandes_villes'] + ['agglo_paris'] + ['nenfants'] + ['nadultes'] + ['ocde10']
-            + ['situapr'] + ['situacj'] + ['poste_coicop_411'] + ['poste_coicop_412'] + ['poste_coicop_421']
+        data_households = data_households[['quantite_carbu', 'quantite_diesel', 'quantite_essence']
++ ['diesel_ttc', 'super_95_ttc', 'rev_disponible', 'rural', 'petite_villes']
+            + ['villes_moyennes', 'grandes_villes', 'agglo_paris', 'nenfants', 'nadultes', 'ocde10']
+            + ['situapr', 'situacj', 'poste_coicop_411', 'poste_coicop_412', 'poste_coicop_421']
             ].astype(float)
 
         # data_households contains all the variables we need for the regression. We can therefore implement it

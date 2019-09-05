@@ -217,7 +217,7 @@ def build_revenus_cales(revenus, year_calage, year_data):
 
     masses_cn_revenus_data_frame = masses_cn_revenus_data_frame[masses_cn_revenus_data_frame.year == year_calage]
 
-    revenus = revenus[['pondmen'] + ['loyer_impute'] + ['rev_disponible'] + ['rev_disp_loyerimput']]
+    revenus = revenus[['pondmen', 'loyer_impute', 'rev_disponible', 'rev_disp_loyerimput']]
     weighted_sum_revenus = (revenus.pondmen * revenus.rev_disponible).sum()
 
     revenus.loyer_impute = revenus.loyer_impute.astype(float)

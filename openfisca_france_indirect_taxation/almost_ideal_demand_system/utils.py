@@ -82,7 +82,7 @@ def indices_prix_carbus(year):
             'prix_mensuel_carbu_match_to_vag.csv'
             ), sep =',', decimal = '.'
         )
-    prix_carbu = prix_carbu[['diesel_ttc'] + ['super_95_ttc'] + ['vag']].astype(float)
+    prix_carbu = prix_carbu[['diesel_ttc', 'super_95_ttc', 'vag']].astype(float)
 
     quantite_carbu_vp_france = pd.read_csv(os.path.join(default_config_files_directory,
             'openfisca_france_indirect_taxation', 'assets', 'quantites',
@@ -98,7 +98,7 @@ def indices_prix_carbus(year):
 + prix_carbu['diesel_ttc'] * (1 - part_conso_ess))
     prix_carbu['indice_die'] = prix_carbu['indice_ess'] * (prix_carbu['diesel_ttc'] / prix_carbu['super_95_ttc'])
 
-    return prix_carbu[['indice_ess'] + ['indice_die'] + ['vag']]
+    return prix_carbu[['indice_ess', 'indice_die', 'vag']]
 
 
 # On veut construire des indices de prix plus précis pour les carburants, en prenant en compte le type de voitures

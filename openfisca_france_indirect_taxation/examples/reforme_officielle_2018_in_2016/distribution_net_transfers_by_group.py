@@ -47,7 +47,7 @@ def distribution_net_transfers_by_group(df_reform, group):
         df_by_categ['quantile_75'][i] = df_reforme.query('{} == {}'.format(group, i))['transfert_net_cheque_officiel_uc'].quantile(0.75)
         df_by_categ['quantile_90'][i] = df_reforme.query('{} == {}'.format(group, i))['transfert_net_cheque_officiel_uc'].quantile(0.9)
 
-    graph_builder_bar(df_by_categ[['quantile_10'] + ['quantile_25'] + ['quantile_50'] + ['quantile_75'] + ['quantile_90']], False)
+    graph_builder_bar(df_by_categ[['quantile_10', 'quantile_25', 'quantile_50', 'quantile_75', 'quantile_90']], False)
     save_dataframe_to_graph(df_by_categ, 'Monetary/distribution_loosers_within_{}.csv'.format(group))
 
     return df_by_categ

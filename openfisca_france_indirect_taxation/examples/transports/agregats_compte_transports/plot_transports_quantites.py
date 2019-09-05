@@ -37,7 +37,7 @@ recettes_ticpe.rename(columns = {'TICPE ( TIPP avant 2010) (1)': 'Total recettes
 
 taille_parc_vp.rename(columns = {'Total': 'parc vp total', 'dont Diesel': 'dont diesel'}, inplace = True)
 
-quantite_conso_vp = quantite_conso_vp[['ESSENCE + GAZOLE'] + ['ESSENCE'] + ['GAZOLE']]
+quantite_conso_vp = quantite_conso_vp[['ESSENCE + GAZOLE', 'ESSENCE', 'GAZOLE']]
 quantite_conso_vp.rename(columns = {'ESSENCE + GAZOLE': 'consommation totale', 'ESSENCE': 'consommation essence',
     'GAZOLE': 'consommation diesel'}, inplace = True)
 

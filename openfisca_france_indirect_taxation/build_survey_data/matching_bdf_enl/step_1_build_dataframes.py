@@ -16,21 +16,16 @@ temporary_store = TemporaryStore.create(file_name = 'logement_tmp')
 
 def load_data_bdf_enl():
     # Load ENL data :
-
     year_enl = 2013
-
     enl_survey_collection = SurveyCollection.load(
         collection = 'enquete_logement', config_files_directory = config_files_directory
         )
     survey_enl = enl_survey_collection.get_survey('enquete_logement_{}'.format(year_enl))
-
     input_enl = survey_enl.get_values(table = 'menlogfm_diff')
     input_enl_indiv = survey_enl.get_values(table = 'indivfm_diff')
 
     # Load BdF data :
-
     year_bdf = 2011
-
     openfisca_survey_collection = SurveyCollection.load(collection = 'openfisca_indirect_taxation')
     openfisca_survey = openfisca_survey_collection.get_survey('openfisca_indirect_taxation_data_{}'.format(year_bdf))
     input_bdf = openfisca_survey.get_values(table = 'input')
@@ -48,7 +43,6 @@ def load_data_bdf_enl():
                 input_bdf['depenses_tot'] += input_bdf[element]
 
     # Set variables :
-
     variables_menages_bdf = [
         'agepr',  # âge de la pr
         'aidlog1',  # aides au logement
@@ -179,19 +173,16 @@ def load_data_bdf_enl():
 
     indiv_age = indiv_enl_keep.groupby('idlog').sum()
     indiv_age = indiv_age.reset_index()
-    indiv_age = indiv_age[['idlog'] + ['plus_14'] + ['plus_18']]
+    indiv_age = indiv_age[['idlog', 'plus_14', 'plus_18']]
 
-    indiv_enl_keep = indiv_enl_keep[['idlog'] + ['igreflog'] + ['ndip14']]
+    indiv_enl_keep = indiv_enl_keep[['idlog', 'igreflog', 'ndip14']]
     indiv_enl_keep = indiv_enl_keep.merge(indiv_age, on = 'idlog')
 
     indiv_enl_keep = indiv_enl_keep.query('igreflog == 1')
     del indiv_enl_keep['igreflog']
     menage_enl_keep = menage_enl_keep.merge(indiv_enl_keep, on = 'idlog')
-
     return menage_enl_keep, conso_bdf_keep
 
 
 if __name__ == "__main__":
-    data = load_data_bdf_enl()
-    data_enl = data[0]
-    data_bdf = data[1]
+    data_enl, data_bdf = load_data_bdf_enl()

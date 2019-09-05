@@ -17,14 +17,14 @@ prix_mensuel_carbu_match_to_vag = prix_mensuel_carburants_90_17.copy()
 prix_annuel_carburants_90_16['Date'] = prix_annuel_carburants_90_16['Date'].astype(int)
 prix_annuel_carburants_90_16 = prix_annuel_carburants_90_16.set_index('Date')
 
-prix_mensuel_carburants_90_17[['annee'] + ['mois']] = prix_mensuel_carburants_90_17[['annee'] + ['mois']].astype(str)
+prix_mensuel_carburants_90_17[['annee', 'mois']] = prix_mensuel_carburants_90_17[['annee', 'mois']].astype(str)
 prix_mensuel_carburants_90_17['Date'] = \
     prix_mensuel_carburants_90_17['annee'] + '/' + prix_mensuel_carburants_90_17['mois']
 prix_mensuel_carburants_90_17 = prix_mensuel_carburants_90_17.drop(['annee', 'mois'], axis = 1)
 prix_mensuel_carburants_90_17 = prix_mensuel_carburants_90_17.set_index('Date')
 
-prix_mensuel_carbu_match_to_vag[['annee'] + ['mois']] = \
-    prix_mensuel_carbu_match_to_vag[['annee'] + ['mois']].astype(str)
+prix_mensuel_carbu_match_to_vag[['annee', 'mois']] = \
+    prix_mensuel_carbu_match_to_vag[['annee', 'mois']].astype(str)
 prix_mensuel_carbu_match_to_vag['date'] = \
     prix_mensuel_carbu_match_to_vag['annee'] + '_' + prix_mensuel_carbu_match_to_vag['mois']
 prix_mensuel_carbu_match_to_vag['vag'] = prix_mensuel_carbu_match_to_vag['date'].map(date_to_vag)

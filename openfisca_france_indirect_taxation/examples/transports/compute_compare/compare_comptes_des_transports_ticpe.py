@@ -51,7 +51,7 @@ nombre_essence = g_3a[g_3a['categorie'] == 'ESSENCE']
 del nombre_essence['categorie']
 nombre_essence = nombre_essence.set_index('index')
 nombre_essence = nombre_essence.transpose()
-consommation_essence = nombre_essence[['Voitures particulières'] + ['Livraisons CPDP (1)']].copy()
+consommation_essence = nombre_essence[['Voitures particulières', 'Livraisons CPDP (1)']].copy()
 consommation_essence['vehicules essence non particuliers'] = (
     consommation_essence['Livraisons CPDP (1)'] - consommation_essence['Voitures particulières']
     )
@@ -60,7 +60,7 @@ nombre_diesel = g_3a[g_3a['categorie'] == 'GAZOLE']
 del nombre_diesel['categorie']
 nombre_diesel = nombre_diesel.set_index('index')
 nombre_diesel = nombre_diesel.transpose()
-consommation_diesel = nombre_diesel[['Voitures particulières'] + ['Livraisons CPDP (1)']].copy()
+consommation_diesel = nombre_diesel[['Voitures particulières', 'Livraisons CPDP (1)']].copy()
 consommation_diesel['vehicules diesel non particuliers'] = (
     consommation_diesel['Livraisons CPDP (1)'] - consommation_diesel['Voitures particulières']
     )
@@ -84,7 +84,7 @@ recettes_ticpe_non_vp['recettes totales non vp'] = (
     recettes_ticpe_non_vp['recettes diesel'] + recettes_ticpe_non_vp['recettes essence'])
 
 recettes_ticpe_totale = concat([recettes_ticpe_non_vp[['recettes totales non vp']
-+ ['recettes diesel'] + ['recettes essence']], depenses_ticpe_bdf], axis = 1)
++ ['recettes diesel', 'recettes essence']], depenses_ticpe_bdf], axis = 1)
 
 recettes_ticpe_totale = recettes_ticpe_totale.dropna()
 recettes_ticpe_totale['recettes totales tous carburants'] = \

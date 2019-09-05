@@ -60,7 +60,7 @@ assert len(restricted_df_to_merge) == len(df_to_merge), \
 
 """ Check if the price index for each good is the same for everyone """
 
-limited_df = df[['ident_men'] + ['indice_prix_produit'] + ['prix'] + ['vag']]
+limited_df = df[['ident_men', 'indice_prix_produit', 'prix', 'vag']]
 limited_df = limited_df.astype(float)
 if year == 2000:
     limited_df = limited_df[limited_df['vag'] == 9]
@@ -68,7 +68,7 @@ if year == 2005:
     limited_df = limited_df[limited_df['vag'] == 20]
 if year == 2011:
     limited_df = limited_df[limited_df['vag'] == 25]
-limited_df = limited_df[['ident_men'] + ['prix'] + ['indice_prix_produit']]
+limited_df = limited_df[['ident_men', 'prix', 'indice_prix_produit']]
 limited_df = pd.pivot_table(limited_df, index = 'indice_prix_produit', columns = 'ident_men')
 limited_df = limited_df.T.drop_duplicates().T
 assert len(limited_df.columns) == 1, \
@@ -77,7 +77,7 @@ assert len(limited_df.columns) == 1, \
 
 """ Check part_bien_categ """
 
-limited_df_indice_prix_produit = df[['ident_men'] + ['part_bien_categ'] + ['numero_categ']]
+limited_df_indice_prix_produit = df[['ident_men', 'part_bien_categ', 'numero_categ']]
 limited_df_indice_prix_produit['numero_categ'] = limited_df_indice_prix_produit['numero_categ'].astype(float)
 for i in range(1, 10):
     limited_df_part_bien_categ = limited_df_indice_prix_produit[limited_df_indice_prix_produit['numero_categ'] == i]

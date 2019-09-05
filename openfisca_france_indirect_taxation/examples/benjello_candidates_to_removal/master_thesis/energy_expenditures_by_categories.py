@@ -34,7 +34,7 @@ for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
     df['depenses_energies_logement_uc'] = df['depenses_energies_logement'] / df['ocde10']
     df['depenses_carburants_corrigees_uc'] = df['depenses_carburants'] / df['ocde10']
 
-    df = df[['depenses_energies_totales_uc'] + ['depenses_energies_logement_uc'] + ['depenses_carburants_corrigees_uc']]
+    df = df[['depenses_energies_totales_uc', 'depenses_energies_logement_uc', 'depenses_carburants_corrigees_uc']]
 
     df.rename(columns = {'depenses_energies_totales_uc': 'Total energy expenditures',
         'depenses_energies_logement_uc': 'Housing energy expenditures',

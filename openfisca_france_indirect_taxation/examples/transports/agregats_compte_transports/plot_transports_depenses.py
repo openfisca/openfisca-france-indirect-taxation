@@ -19,7 +19,7 @@ a3_a.loc[a3_a['index'] == '07 Transport', 'index'] = 'Dépenses totales en trans
 a3_a.loc[a3_a['index'] == 'Ensemble des dépenses de consommation des ménages ', 'to_be_used'] = 1
 
 depenses_menages_transports = a3_a[a3_a['to_be_used'] == 1]
-depenses_menages_transports = depenses_menages_transports.drop(['to_be_used'] + ['categorie'], axis = 1)
+depenses_menages_transports = depenses_menages_transports.drop(['to_be_used', 'categorie'], axis = 1)
 depenses_menages_transports = depenses_menages_transports.set_index(['index'])
 depenses_menages_transports = depenses_menages_transports.transpose()
 
@@ -40,5 +40,5 @@ graph_builder_carburants_no_color(depenses_menages_transports['Dépenses carbura
 
 print('Evolution de la part des carburants et des transports dans les dépenses totales des ménages')
 graph_builder_carburants(
-    depenses_menages_transports[['part transports dépenses totales'] + ['part carburants dépenses totales']],
+    depenses_menages_transports[['part transports dépenses totales', 'part carburants dépenses totales']],
     'part transports depenses menages', 1, 0.65, 'midnightblue', 'turquoise', 'blue', None)

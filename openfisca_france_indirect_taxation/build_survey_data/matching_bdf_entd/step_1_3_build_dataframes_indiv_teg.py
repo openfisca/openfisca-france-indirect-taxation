@@ -43,9 +43,7 @@ def load_data_indiv_teg():
 
 
 def merge_indiv_teg_menage():
-    data_menages = build_df_menages_vehicles()
-    data_menages_entd = data_menages[0]
-    data_bdf = data_menages[1]
+    data_menages_entd, data_bdf = build_df_menages_vehicles()
 
     data_teg = load_data_indiv_teg()
 
@@ -77,8 +75,8 @@ def merge_indiv_teg_menage():
     data_teg = data_teg.query('noi == 1').query('typlieu == 1')
     data_teg = data_teg.fillna(0)
 
-    data_teg = data_teg[['ident_men'] + ['distance_routiere_hebdomadaire_teg']
-+ ['duree_moyenne_trajet_aller_retour_teg'] + ['mode_principal_deplacement_teg']]
+    data_teg = data_teg[['ident_men', 'distance_routiere_hebdomadaire_teg']
+        + ['duree_moyenne_trajet_aller_retour_teg', 'mode_principal_deplacement_teg']]
     data_teg['ident_men'] = data_teg['ident_men'].astype(str)
     data_menages_entd['ident_men'] = data_menages_entd['ident_men'].astype(str)
 
@@ -89,6 +87,4 @@ def merge_indiv_teg_menage():
 
 
 if __name__ == "__main__":
-    data = merge_indiv_teg_menage()
-    data_entd = data[0]
-    data_bdf = data[1]
+    data_entd, data_bdf = merge_indiv_teg_menage()

@@ -11,9 +11,7 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step
 
 
 def homogenize_variables_definition_bdf_entd():
-    data = merge_indiv_teg_menage()
-    data_entd = data[0]
-    data_bdf = data[1]
+    data_entd, data_bdf = merge_indiv_teg_menage()
 
     # Aides au logement : séparation propriétaire/locataire dans BdF -> création d'une unique variable
     check = data_bdf.query('aidlog1 != 0')
@@ -43,7 +41,6 @@ def homogenize_variables_definition_bdf_entd():
             'v1_logloymens': 'mloy_d',
             'v1_logocc': 'stalog'
             },
-
         inplace = True,
         )
 
@@ -91,8 +88,8 @@ def create_new_variables():
             )
         data['nb_essence'] = data['veh_tot'] * data['part_essence']
         data['nb_diesel'] = data['veh_tot'] * data['part_diesel']
-        data[['nb_essence'] + ['nb_diesel']] = \
-            data[['nb_essence'] + ['nb_diesel']].fillna(0)
+        data[['nb_essence', 'nb_diesel']] = \
+            data[['nb_essence', 'nb_diesel']].fillna(0)
 
         to_delete = ['part_essence', 'part_diesel', 'essence', 'diesel', 'autre_carbu']
         for element in to_delete:
@@ -145,6 +142,4 @@ def create_niveau_vie_quantiles():
 
 
 if __name__ == "__main__":
-    data = create_niveau_vie_quantiles()
-    data_entd = data[0]
-    data_bdf = data[1]
+    data_entd, data_bdf = create_niveau_vie_quantiles()

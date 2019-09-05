@@ -30,9 +30,7 @@ def inflate_energy_consumption(data_enl, data_bdf):
 
 
 def homogenize_variables_definition_bdf_enl():
-    data = load_data_bdf_enl()
-    data_enl = data[0]
-    data_bdf = data[1]
+    data_enl, data_bdf = load_data_bdf_enl()
 
     # Vérification que les données ENL ne contiennent pas les DOM
     assert (data_enl['dom'] == 2).any()
@@ -111,8 +109,9 @@ def homogenize_variables_definition_bdf_enl():
         )
 
     joint_data_enl = data_enl.query('coml11 > 0').query('coml12 > 0')
-    part_electricite_enl = (joint_data_enl['coml11'].sum()
-/ (joint_data_enl['coml11'].sum() + joint_data_enl['coml12'].sum())
+    part_electricite_enl = (
+        joint_data_enl['coml11'].sum()
+        / (joint_data_enl['coml11'].sum() + joint_data_enl['coml12'].sum())
         )
     data_enl['depenses_electricite'] = (
         data_enl['coml11'] + data_enl['coml13'] * part_electricite_enl
@@ -180,14 +179,16 @@ def homogenize_variables_definition_bdf_enl():
     data_enl = data_enl.sort_index(axis = 1)
     data_bdf = data_bdf.sort_index(axis = 1)
 
-    (data_enl, data_bdf) = inflate_energy_consumption(data_enl, data_bdf)
+    data_enl, data_bdf = inflate_energy_consumption(data_enl, data_bdf)
 
     return data_enl, data_bdf
 
 
 def create_new_variables():
-    for i in [0, 1]:
-        data = homogenize_variables_definition_bdf_enl()[i]
+    data_enl, data_bdf = homogenize_variables_definition_bdf_enl()
+
+    def create_new_variables_(data, option = None):
+        assert option in ['enl, bdf']
 
         # Dummy variable pour la consommation de fioul
         data['fioul'] = 0
@@ -246,7 +247,7 @@ def create_new_variables():
             data.loc[data['zeat'] == j, 'est_nord'] = 0
         del j
 
-        if i == 0:
+        if option == 'enl':
             data['froid'] = 0
             data['froid'].loc[data['gchauf_n'] != 0] = 1
             del data['gchauf_n']
@@ -275,7 +276,7 @@ def create_new_variables():
         energie_logement = ['depenses_combustibles_liquides', 'depenses_combustibles_solides',
             'depenses_electricite', 'depenses_gaz_liquefie', 'depenses_gaz_ville']
 
-        if i == 1:
+        if 'option' == 'bdf':
             data['depenses_energies'] = 0
             for energie in energie_logement:
                 data['depenses_energies'] += data[energie]
@@ -288,19 +289,17 @@ def create_new_variables():
             data['depenses_energies'] / data['revtot']
             ).copy()
         # Suppression des outliers
-        data = data.query('part_energies_revtot < 0.5')
+        data = data.query('part_energies_revtot < 0.5').copy()
 
-        if i == 0:
-            data_enl = data.copy()
-        else:
-            data_bdf = data.copy()
+        return data.copy()
 
-    return data_enl, data_bdf
+    return create_new_variables_(data_enl, option = 'enl'), create_new_variables_(data_bdf, option = 'bdf')
 
 
 def create_niveau_vie_quantiles():
-    for i in [0, 1]:
-        data = create_new_variables()[i]
+    data_enl, data_bdf = create_new_variables()
+
+    def create_niveau_vie_quantiles_(data):
         data['niveau_vie'] = (data['revtot'] / data['ocde10']).copy()
 
         data = data.sort_values(by = ['niveau_vie'])
@@ -317,16 +316,10 @@ def create_niveau_vie_quantiles():
 
         data = data.sort_index()
         del data['sum_pondmen']
+        return data.copy()
 
-        if i == 0:
-            data_enl = data.copy()
-        else:
-            data_bdf = data.copy()
-
-    return data_enl, data_bdf
+    return create_niveau_vie_quantiles_(data_enl), create_niveau_vie_quantiles_(data_bdf)
 
 
 if __name__ == "__main__":
-    data = create_niveau_vie_quantiles()
-    data_enl = data[0]
-    data_bdf = data[1]
+    data_enl, data_bdf = create_niveau_vie_quantiles()
