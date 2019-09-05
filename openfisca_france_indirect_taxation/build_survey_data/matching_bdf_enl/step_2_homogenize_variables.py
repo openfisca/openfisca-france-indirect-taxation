@@ -150,7 +150,7 @@ def homogenize_variables_definition_bdf_enl():
             'mcsc': 'cs42cj',
             'mne1': 'nenfants',
             'mpa': 'nactifs',
-            'mrtota2': 'revtot',
+            'mrtota3': 'revtot',
             'muc1': 'ocde10',
             'ndip14': 'dip14pr',
             'nhab': 'npers',

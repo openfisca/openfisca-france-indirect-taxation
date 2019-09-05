@@ -8,11 +8,6 @@
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
-from openfisca_survey_manager.temporary import TemporaryStore
-
-
-temporary_store = TemporaryStore.create(file_name = 'logement_tmp')
-
 
 def load_data_bdf_enl():
     # Load ENL data :
@@ -21,8 +16,8 @@ def load_data_bdf_enl():
         collection = 'enquete_logement', config_files_directory = config_files_directory
         )
     survey_enl = enl_survey_collection.get_survey('enquete_logement_{}'.format(year_enl))
-    input_enl = survey_enl.get_values(table = 'menlogfm_diff')
-    input_enl_indiv = survey_enl.get_values(table = 'indivfm_diff')
+    input_enl = survey_enl.get_values(table = 'menlog_diff')
+    input_enl_indiv = survey_enl.get_values(table = 'indiv_diff')
 
     # Load BdF data :
     year_bdf = 2011
@@ -141,7 +136,7 @@ def load_data_bdf_enl():
         'mcs',
         'mcsc',
         'mpa',
-        'mrtota2',  # Revenu total du ménage
+        'mrtota3',  # Revenu total du ménage
         'msitua',
         'msituac',
         'mtypmena',

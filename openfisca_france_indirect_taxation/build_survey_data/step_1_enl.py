@@ -94,7 +94,7 @@ variables_to_keep = [
     "menq",
     "mne1",
     "mpa",
-    "mrtota2",
+    "mrtota3",
     "msitua",
     "msituac",
     "mtyad",
