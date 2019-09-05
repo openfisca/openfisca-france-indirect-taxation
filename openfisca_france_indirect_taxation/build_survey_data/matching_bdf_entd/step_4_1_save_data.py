@@ -69,7 +69,12 @@ def check_donation_classes_size(data, donation_class):
 if __name__ == "__main__":
     data_entd, data_bdf = create_donation_classes()
     # Sauvegarde des données dans des fichiers .csv
-    data_entd.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'matching', 'matching_entd', 'data_matching_entd.csv'), sep = ',')
-    data_bdf.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'matching', 'matching_entd', 'data_matching_bdf.csv'), sep = ',')
+    matching_entd_directory = os.path.join(
+        assets_directory,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'matching',
+        'matching_entd'
+        )
+    data_entd.to_csv(os.path.join(matching_entd_directory, 'data_matching_entd.csv'), sep = ',')
+    data_bdf.to_csv(os.path.join(matching_entd_directory, 'data_matching_bdf.csv'), sep = ',')

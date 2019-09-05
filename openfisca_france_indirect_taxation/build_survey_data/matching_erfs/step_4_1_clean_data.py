@@ -32,9 +32,7 @@ def create_donation_classes():
     return data_erfs, data_bdf
 
 
-data = create_donation_classes()
-data_erfs = data[0]
-data_bdf = data[1]
+data_erfs, data_bdf = create_donation_classes()
 
 # Sauvegarde des données dans des fichiers .csv
 data_erfs.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',

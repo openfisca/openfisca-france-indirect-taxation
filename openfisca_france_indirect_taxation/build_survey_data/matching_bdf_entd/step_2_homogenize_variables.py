@@ -51,8 +51,10 @@ def homogenize_variables_definition_bdf_entd():
 
 
 def create_new_variables():
-    for i in [0, 1]:
-        data = homogenize_variables_definition_bdf_entd()[i]
+    data_entd, data_bdf = homogenize_variables_definition_bdf_entd()[i]
+
+    def create_new_variables_(data, option = None):
+        assert option in ['entd', 'bdf']
 
         # Création de dummy variables pour la commune de résidence
         data['rural'] = 0
@@ -95,24 +97,21 @@ def create_new_variables():
         for element in to_delete:
             del data[element]
 
-        if i == 0:
+        if option == "entd":
             data['distance'] = (
                 data['distance_diesel'] + data['distance_essence']
                 + data['distance_autre_carbu']
                 )
 
-        if i == 0:
-            data_entd = data.copy()
-        else:
-            data_bdf = data.copy()
-
-    return data_entd, data_bdf
+    return create_new_variables_(data_entd), create_new_variables_(data_bdf)
 
 
 def create_niveau_vie_quantiles():
-    for i in [0, 1]:
-        data = create_new_variables()[i]
-        if i == 0:
+    data_entd, data_bdf = create_new_variables()
+
+    def create_niveau_vie_quantiles_(data, option = None):
+        assert option in ['entd', 'bdf']
+        if option == 'entd':
             data['niveau_vie'] = data['revuc'].copy() * 12
             del data['revuc']
         else:
@@ -133,12 +132,9 @@ def create_niveau_vie_quantiles():
         data = data.sort_index()
         del data['sum_pondmen']
 
-        if i == 0:
-            data_entd = data.copy()
-        else:
-            data_bdf = data.copy()
+        return data.copy()
 
-    return data_entd, data_bdf
+    return create_niveau_vie_quantiles_(data_entd, option = 'entd'), create_niveau_vie_quantiles_(data_bdf, option = 'bdf')
 
 
 if __name__ == "__main__":

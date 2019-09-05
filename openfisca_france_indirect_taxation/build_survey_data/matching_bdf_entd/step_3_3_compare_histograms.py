@@ -12,9 +12,7 @@ from openfisca_france_indirect_taxation.build_survey_data.utils import \
     histogrammes
 
 
-data = create_niveau_vie_quantiles()
-data_entd = data[0]
-data_bdf = data[1]
+data_entd, data_bdf = create_niveau_vie_quantiles()
 
 
 def histogram_agepr():

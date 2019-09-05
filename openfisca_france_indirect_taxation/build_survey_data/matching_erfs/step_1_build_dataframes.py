@@ -117,6 +117,4 @@ def load_data_bdf_erfs():
 
 
 if __name__ == "__main__":
-    data = load_data_bdf_erfs()
-    data_erfs = data[0]
-    data_bdf = data[1]
+    data_erfs, data_bdf = load_data_bdf_erfs()

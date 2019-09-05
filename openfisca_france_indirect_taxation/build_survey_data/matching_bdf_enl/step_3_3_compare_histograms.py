@@ -12,9 +12,8 @@ from openfisca_france_indirect_taxation.build_survey_data.utils import \
     histogrammes
 
 
-data = create_niveau_vie_quantiles()
-data_enl = data[0]
-data_bdf = data[1]
+data_enl, data_bdf = create_niveau_vie_quantiles()
+
 
 
 def histogram_aba():

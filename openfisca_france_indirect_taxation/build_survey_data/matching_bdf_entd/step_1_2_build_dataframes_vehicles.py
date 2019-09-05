@@ -88,10 +88,7 @@ def load_data_vehicules_bdf_entd():
 
 
 def merge_vehicule_menage():
-    data = load_data_vehicules_bdf_entd()
-    data_entd = data[0]
-    data_entd_menage = data[1]
-    data_bdf = data[2]
+    data_entd, data_entd_menage, data_bdf = load_data_vehicules_bdf_entd()
 
     # Calcul de l'âge du véhicule et de la carte grise
     data_entd['anvoi'] = 0
@@ -158,9 +155,8 @@ def merge_vehicule_menage():
             },
         inplace = True,
         )
-    data_entd = data_entd[['ident_men', 'puissance']
-+ ['etat_veh_achat', 'consommation', 'age_vehicule']
-        + ['age_carte_grise']
+    data_entd = data_entd[
+        ['ident_men', 'puissance', 'etat_veh_achat', 'consommation', 'age_vehicule', 'age_carte_grise']
         ]
 
     data_bdf['km_essence'] = 0
@@ -171,8 +167,9 @@ def merge_vehicule_menage():
     data_bdf.loc[data_bdf['autre_carbu'] == 1, 'km_autre_carbu'] = data_bdf['km_auto']
 
     # Df avec le nombre de véhicule et les distances pour chaque type de carburant
-    data_vehicule_bdf = data_bdf.groupby(by = 'ident_men')['essence',
-        'diesel', 'autre_carbu', 'km_essence', 'km_diesel', 'km_autre_carbu'].sum()
+    data_vehicule_bdf = data_bdf.groupby(by = 'ident_men')[
+        'essence', 'diesel', 'autre_carbu', 'km_essence', 'km_diesel', 'km_autre_carbu'
+        ].sum()
     data_vehicule_bdf = data_vehicule_bdf.reset_index()
 
     # Df avec les infos du véhicule principal
@@ -188,9 +185,8 @@ def merge_vehicule_menage():
             },
         inplace = True,
         )
-    data_bdf = data_bdf[['ident_men', 'prix_achat', 'veh_tot']
-+ ['etat_veh_achat', 'age_vehicule', 'age_carte_grise']
-        + ['vp_domicile_travail', 'vp_deplacements_pro']
+    data_bdf = data_bdf[
+        ['ident_men', 'prix_achat', 'veh_tot', 'etat_veh_achat', 'age_vehicule', 'age_carte_grise', 'vp_domicile_travail', 'vp_deplacements_pro']
         ]
 
     # Df infos comportements ménages
@@ -229,6 +225,4 @@ def build_df_menages_vehicles():
 
 
 if __name__ == "__main__":
-    data = build_df_menages_vehicles()
-    data_entd = data[0]
-    data_bdf = data[1]
+    data_entd, data_bdf = build_df_menages_vehicles()

@@ -51,7 +51,7 @@ for year in [2000, 2005, 2011]:
         'poste_09_7_1', 'poste_09_7_2', 'poste_10_1', 'poste_10_2', 'poste_10_3', 'poste_10_4', 'poste_10_5_1',
         'poste_10_5_2', 'poste_12_1_3_3_3', 'poste_12_3_1_1_1', 'poste_12_5_1_1_1', 'poste_12_5_2_1_1',
         'poste_12_5_3_1_1', 'poste_12_5_4_1_1', 'poste_12_5_5_1_1', 'poste_12_7_1_2_1'
-                      ]
+        ]
 
     for bien in biens_durables:
         try:

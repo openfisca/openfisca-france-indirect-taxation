@@ -14,9 +14,7 @@ def graph_builder_dot(x_var, y_var):
     return plt.show()
 
 
-data = homogenize_definitions()
-data_erfs = data[0]
-data_bdf = data[1]
+data_erfs, data_bdf = homogenize_definitions()
 
 # regression = smf.ols(formula = 'rev_disponible ~ \
 #    ocde10',

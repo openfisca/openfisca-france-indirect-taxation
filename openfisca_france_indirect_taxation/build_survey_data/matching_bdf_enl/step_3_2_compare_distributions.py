@@ -14,10 +14,7 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_
 
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
-data = create_niveau_vie_quantiles()
-data_enl = data[0]
-data_bdf = data[1]
-
+data_enl, data_bdf = create_niveau_vie_quantiles()
 
 # aba - aides au logement
 # 1 = Oui, 2 = Non, 0 = ?

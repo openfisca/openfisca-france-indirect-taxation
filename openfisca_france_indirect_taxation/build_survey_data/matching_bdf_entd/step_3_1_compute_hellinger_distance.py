@@ -12,9 +12,7 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step
 from openfisca_france_indirect_taxation.build_survey_data.utils import \
     hellinger
 
-data = create_niveau_vie_quantiles()
-data_entd = data[0]
-data_bdf = data[1]
+data_entd, data_bdf = create_niveau_vie_quantiles()
 
 
 def hellinger_agepr(data_bdf, data_entd):
