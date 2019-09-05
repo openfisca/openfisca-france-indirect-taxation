@@ -46,6 +46,7 @@ setup(
             'pdbpp',
             'ruamel.yaml',
             'seaborn',
+            'tables',
             ],
         ),
     include_package_data = True,  # Will read MANIFEST.in
