@@ -1,134 +1,134 @@
 ,label_division,label_groupe,label_classe,label_sous_classe,label_poste,code_coicop
-0,Éducation,Services d'éducation,Services d'éducation,Services d'éducation,Secondaires à financement  privé,0.1.1.1.1
-1,Éducation,Services d'éducation,Services d'éducation,Services d'éducation,Supérieurs à financement privé,0.1.1.1.2
-2,Éducation,Services d'éducation,Services d'éducation,Services d'éducation,Cours par correspondance,0.1.1.1.3
-3,Boissons alcoolisées et tabac,Tabac,Cigares et cigarillos,Cigares et cigarillos,Cigares et cigarillos,02.2.1
-4,Boissons alcoolisées et tabac,Tabac,Cigarettes,Cigarettes,Cigarettes,02.2.2
-5,Boissons alcoolisées et tabac,Tabac,Tabac sous d'autres formes et produits connexes,Tabac sous d'autres formes et produits connexes,Tabac sous d'autres formes et produits connexes,02.2.3
+0,Boissons alcoolisées et tabac,Tabac,Cigares et cigarillos,Cigares et cigarillos,Cigares et cigarillos,02.2.1
+1,Boissons alcoolisées et tabac,Tabac,Cigarettes,Cigarettes,Cigarettes,02.2.2
+2,Boissons alcoolisées et tabac,Tabac,Tabac sous d'autres formes et produits connexes,Tabac sous d'autres formes et produits connexes,Tabac sous d'autres formes et produits connexes,02.2.3
 308,Boissons alcoolisées et tabac,Tabac,Stupéfiants ,Stupéfiants ,Stupéfiants ,02.3
-7,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Pain,Pain,1.1.1.1.1
-6,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Restauration,Repas traditionnel dans un restaurant,1.1.1.1.1
-8,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Restauration,Repas en libre service et restauration rapide,1.1.1.1.2
-9,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Pâtisserie fraîche et viennoiserie,Pâtisserie fraîche,1.1.1.2.1
-10,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Cafés et autres boiss. chaudes cons. dans les cafés,1.1.1.2.1
-11,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Pâtisserie fraîche et viennoiserie,Viennoiserie,1.1.1.2.2
-12,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Vin consommé dans les cafés,1.1.1.2.2
-13,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Bière et cidre consommés dans les cafés,1.1.1.2.3
-14,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Spiritueux consommés dans les cafés,1.1.1.2.4
-15,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Boissons non alcoolisées cons. dans les cafés,1.1.1.2.5
-16,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,"Gâteaux, pâtisserie de conservation","Biscottes, triscottes, pains durs",1.1.1.3.1
-17,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,"Gâteaux, pâtisserie de conservation",Biscuits et gâteaux,1.1.1.3.2
-18,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,"Gâteaux, pâtisserie de conservation",Pâtisserie de conservation,1.1.1.3.3
-19,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Céréales,"Farines, semoules, céréales",1.1.1.4.1
-20,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Céréales,Pâtes alimentaires,1.1.1.4.2
-21,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Céréales,Riz,1.1.1.4.3
-22,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Céréales,Plats cuisinés à base de céréales,1.1.1.4.4
-23,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de bœuf,Bœuf à rôtir,1.1.2.1.1
-24,"Hôtellerie, cafés, restauration",Restauration et cafés,Cantines,Repas dans un restaurant scolaire ou universitaire,Repas dans un restaurant scolaire ou universitaire,1.1.2.1.1
-25,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de bœuf,Bœuf à braiser et bouillir,1.1.2.1.2
-26,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de bœuf,Bœuf haché,1.1.2.1.3
-28,"Hôtellerie, cafés, restauration",Restauration et cafés,Cantines,Repas dans un restaurant d'entreprise ou d'administration,Repas dans un restaurant d'entreprise ou d'admin.,1.1.2.2.1
-27,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de veau,Veau à rôtir,1.1.2.2.1
-29,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de veau,Veau à braiser et bouillir,1.1.2.2.2
-30,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,"Viande de mouton, de cheval",Agneau,1.1.2.3.1
-31,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,"Viande de mouton, de cheval",Cheval,1.1.2.3.2
-32,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,"Porc frais, salé, fumé",1.1.2.4.1
-33,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Jambon,1.1.2.4.2
-34,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Pâté,1.1.2.4.3
-35,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Saucisson,1.1.2.4.4
-36,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Saucisse,1.1.2.4.5
-37,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Autres charcuteries et conserves de viande,1.1.2.4.6
-38,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Volaille,Poulet,1.1.2.5.1
-39,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Volaille,Dinde,1.1.2.5.2
-40,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Volaille,Autres volailles,1.1.2.5.3
-41,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Autres viandes et plats cuisinés à base de viande,"Lapin, gibier",1.1.2.6.1
-42,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Autres viandes et plats cuisinés à base de viande,Triperie,1.1.2.6.2
-43,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Autres viandes et plats cuisinés à base de viande,Plats cuisinés à base de viande,1.1.2.6.3
-44,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Poissons et crustacés,Poissons et crustacés frais,Poissons frais,1.1.3.1.1
-45,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Poissons et crustacés,Poissons et crustacés frais,Crustacés et mollusques frais,1.1.3.1.2
-46,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Poissons et crustacés,"Poissons et crustacés préparés, en conserves et surgelés","Poissons en conserves, surgelés, séchés, fumés",1.1.3.2.1
-47,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Poissons et crustacés,"Poissons et crustacés préparés, en conserves et surgelés",Plats cuisinés à base de poisson,1.1.3.2.2
-48,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Lait et crème,Laits,1.1.4.1.1
-49,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Lait et crème,Crèmes fraîches,1.1.4.1.2
-50,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Yaourts et desserts lactés,Yaourts,1.1.4.2.1
-51,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Yaourts et desserts lactés,Desserts lactés frais,1.1.4.2.2
-52,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages frais,1.1.4.3.1
-53,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages à pâte molle et à pâte persillée,1.1.4.3.2
-54,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages à pâte pressée,1.1.4.3.3
-55,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages de chèvre,1.1.4.3.4
-56,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages fondus,1.1.4.3.5
-57,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Œufs,Œufs,1.1.4.4.1
-58,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Huiles et graisses,Beurres,Beurres,1.1.5.1.1
-59,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Huiles et graisses,Huiles et margarines,Huiles alimentaires,1.1.5.2.1
-60,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Huiles et graisses,Huiles et margarines,Margarine végétale et autres graisses,1.1.5.2.2
-61,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Fruits,Fruits frais,Fruits frais,1.1.6.1.1
-62,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Fruits,"Fruits surgelés, appertisés ou secs","Fruits surgelés, appertisés ou secs",1.1.6.2.1
-63,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Légumes,Légumes frais,Légumes frais,1.1.7.1.1
-64,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Légumes,"Légumes préparés, surgelés et en conserve","Légumes surgelés, secs et en conserve",1.1.7.2.1
-65,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Légumes,"Légumes préparés, surgelés et en conserve",Pommes de terre préparées,1.1.7.2.2
-66,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Légumes,"Légumes préparés, surgelés et en conserve",Autres plats cuisinés à base de légumes,1.1.7.2.3
-67,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de sucre,Sucre,1.1.8.1.1
-68,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de sucre,"Confitures, compotes et miel",1.1.8.1.2
-69,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de sucre,Confiseries à base de sucre,1.1.8.1.3
-70,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de chocolat,Chocolat en tablettes,1.1.8.2.1
-71,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de chocolat,Confiseries à base de chocolat,1.1.8.2.2
-72,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés","Crèmes glacées, glaces et sorbets","Crèmes glacées, glaces et sorbets",1.1.8.3.1
-73,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Condiments et assaisonnements,"Sels, épices, condiments, vinaigres et sauces",1.1.9.1.1
-74,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Aliments préparés pour enfants et produits diététiques,Aliments préparés pour bébés,1.1.9.2.1
-75,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Aliments préparés pour enfants et produits diététiques,Produits diététiques,1.1.9.2.2
-76,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Autres produits alimentaires n.d.a.,Potages préparés,1.1.9.3.1
-77,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Autres produits alimentaires n.d.a.,Desserts et produits pour pâtisserie,1.1.9.3.2
-78,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Hôtellerie y.c. pension,Locations de chambres d'hôtel,1.2.1.1.1
-79,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,"Café, thé et cacao",Produits chocolatés,Chocolat en poudre,1.2.1.1.1
-80,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Hôtellerie y.c. pension,Pensions et demi-pensions dans les hôtels,1.2.1.1.2
-82,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Internat scolaire et universitaire,"Frais d'internat scol., résidences univers., foyers",1.2.1.2.1
-81,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,"Café, thé et cacao",Cafés,Cafés en grains ou moulu,1.2.1.2.1
-83,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,"Café, thé et cacao",Cafés,Café soluble et succédanée de café,1.2.1.2.2
-84,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,"Café, thé et cacao",Thés et infusions,Thés et infusions,1.2.1.3.1
-85,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Hébergements de vacances,Hébergements de vacances ou de loisirs,1.2.1.3.1
-86,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Hébergements de vacances,Terrains de camping et auberges de jeunesse,1.2.1.3.2
-87,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,Autres boissons non alcoolisées,Eaux minérales et de source,Eaux minérales et de source,1.2.2.1.1
-88,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,Autres boissons non alcoolisées,"Boissons gazeuses, jus et sirops",Jus de fruits et de légumes,1.2.2.2.1
-89,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,Autres boissons non alcoolisées,"Boissons gazeuses, jus et sirops","Boissons aux fruits non gazeuses, sodas, limonades",1.2.2.2.2
-90,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,Autres boissons non alcoolisées,"Boissons gazeuses, jus et sirops",Sirops et concentrés,1.2.2.2.3
-91,Autres biens et services,Soins personnels,Salons de coiffure et esthétique corporelle,Coiffure,Coiffeurs pour hommes,2.1.1.1.1
-92,Boissons alcoolisées et tabac,Boissons alcoolisées,Alcools,Apéritifs,Apéritifs anisés à base d'alcool,2.1.1.1.1
-93,Autres biens et services,Soins personnels,Salons de coiffure et esthétique corporelle,Coiffure,Coiffeurs pour femmes,2.1.1.1.2
-94,Boissons alcoolisées et tabac,Boissons alcoolisées,Alcools,Apéritifs,Whisky,2.1.1.1.2
-95,Autres biens et services,Soins personnels,Salons de coiffure et esthétique corporelle,Autres services d'esthétique,Autres services d'esthétique corporelle,2.1.1.2.1
-96,Boissons alcoolisées et tabac,Boissons alcoolisées,Alcools,Eaux de vie et liqueurs,Eaux de vie,2.1.1.2.1
-97,Boissons alcoolisées et tabac,Boissons alcoolisées,Alcools,Eaux de vie et liqueurs,Liqueurs,2.1.1.2.2
-98,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne",Vins,Vins de consommation courante,2.1.2.1.1
-99,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne",Vins,Vins supérieurs,2.1.2.1.2
-100,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne",Vins,Vins doux naturels et apéritifs à base de vin,2.1.2.1.3
-101,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne","Champagne, mousseux et cidres",Champagne et mousseux,2.1.2.2.1
-102,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne","Champagne, mousseux et cidres",Cidres,2.1.2.2.2
-103,Boissons alcoolisées et tabac,Boissons alcoolisées,Bières,Bières,Bières,2.1.3.1.1
-104,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Parfumerie et produits de beauté,Parfums et eaux de toilette,2.1.3.1.1
-105,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Parfumerie et produits de beauté,Produits de maquillage et de soin de la peau,2.1.3.1.2
-106,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Produits de l'hygiène corporelle,"Savons, dentifrices et produits de toilette",2.1.3.2.1
-107,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Produits de l'hygiène corporelle,Shampooings et produits capillaires divers,2.1.3.2.2
-108,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Appareils et autres articles de toilette,Autres articles de toilette,2.1.3.3.1
-109,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Appareils et autres articles de toilette,Articles d'hygiène à base de papier,2.1.3.3.2
-110,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Appareils et autres articles de toilette,Appareils de toilette électriques,2.1.3.3.3
-111,Boissons alcoolisées et tabac,Tabac,Tabac,Tabac,Tabac,2.2.1.1.1
-112,Autres biens et services,Effets personnels n.d.a.,"Horlogerie, bijouterie, joaillerie","Horlogerie, bijouterie, joaillerie",Horlogerie,2.3.1.1.1
-113,Autres biens et services,Effets personnels n.d.a.,"Horlogerie, bijouterie, joaillerie","Horlogerie, bijouterie, joaillerie","Bijouterie, joaillerie",2.3.1.1.2
-114,Autres biens et services,Effets personnels n.d.a.,Autres effets personnels,Maroquinerie et articles de voyages,Maroquinerie et articles de voyage,2.3.2.1.1
-115,Autres biens et services,Effets personnels n.d.a.,Autres effets personnels,Autres effets personnels y.c. réparation,Articles de puériculture,2.3.2.2.1
-116,Autres biens et services,Effets personnels n.d.a.,Autres effets personnels,Autres effets personnels y.c. réparation,"Articles pour fumeurs, articles divers",2.3.2.2.2
-117,Autres biens et services,Effets personnels n.d.a.,Autres effets personnels,Autres effets personnels y.c. réparation,Réparation horlogerie ou bijoux,2.3.2.2.3
-118,Autres biens et services,Protection sociale,Services de protection sociale,"Crèches, assistantes maternelles","Crèches, assistantes maternelles",2.4.1.1.1
-119,Autres biens et services,Protection sociale,Services de protection sociale,Maisons de retraite et autres services pour personnes âgées,Maisons de retraite et autres services pour personnes âgées,2.4.1.2.1
-120,Autres biens et services,Protection sociale,Services de protection sociale,Établissements pour adultes handicapés,Établissements pour adultes handicapés,2.4.1.3.1
-121,Autres biens et services,Assurances,Assurance habitation,Assurance habitation,Assurance habitation,2.5.2.1.1
-122,Autres biens et services,Assurances,Assurance santé,Assurance santé complémentaire,Assurance santé complémentaire,2.5.3.1.1
-123,Autres biens et services,Assurances,Assurance automobile,Assurance automobile,Assurance automobile,2.5.4.1.1
-124,Autres biens et services,Services financiers,Services financiers n.d.a.,Services financiers,Services financiers,2.6.1.1.1
-125,Autres biens et services,Autres services,Autres services,Services funéraires,Services funéraires,2.7.1.1.1
-126,Autres biens et services,Autres services,Autres services,Prestations administratives et privées diverses,Formalités administratives,2.7.1.2.1
-127,Autres biens et services,Autres services,Autres services,Prestations administratives et privées diverses,Services juridiques,2.7.1.2.2
-128,Autres biens et services,Autres services,Autres services,Prestations administratives et privées diverses,Autres services aux ménages,2.7.1.2.3
+3,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Pain,Pain,1.1.1.1.1
+4,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Pâtisserie fraîche et viennoiserie,Pâtisserie fraîche,1.1.1.2.1
+5,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Pâtisserie fraîche et viennoiserie,Viennoiserie,1.1.1.2.2
+6,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,"Gâteaux, pâtisserie de conservation","Biscottes, triscottes, pains durs",1.1.1.3.1
+7,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,"Gâteaux, pâtisserie de conservation",Biscuits et gâteaux,1.1.1.3.2
+8,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,"Gâteaux, pâtisserie de conservation",Pâtisserie de conservation,1.1.1.3.3
+9,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Céréales,"Farines, semoules, céréales",1.1.1.4.1
+10,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Céréales,Pâtes alimentaires,1.1.1.4.2
+11,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Céréales,Riz,1.1.1.4.3
+12,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Céréales,Plats cuisinés à base de céréales,1.1.1.4.4
+13,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de bœuf,Bœuf à rôtir,1.1.2.1.1
+14,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de bœuf,Bœuf à braiser et bouillir,1.1.2.1.2
+15,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de bœuf,Bœuf haché,1.1.2.1.3
+16,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de veau,Veau à rôtir,1.1.2.2.1
+17,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de veau,Veau à braiser et bouillir,1.1.2.2.2
+18,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,"Viande de mouton, de cheval",Agneau,1.1.2.3.1
+19,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,"Viande de mouton, de cheval",Cheval,1.1.2.3.2
+20,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,"Porc frais, salé, fumé",1.1.2.4.1
+21,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Jambon,1.1.2.4.2
+22,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Pâté,1.1.2.4.3
+23,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Saucisson,1.1.2.4.4
+24,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Saucisse,1.1.2.4.5
+25,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Autres charcuteries et conserves de viande,1.1.2.4.6
+26,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Volaille,Poulet,1.1.2.5.1
+27,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Volaille,Dinde,1.1.2.5.2
+28,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Volaille,Autres volailles,1.1.2.5.3
+29,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Autres viandes et plats cuisinés à base de viande,"Lapin, gibier",1.1.2.6.1
+30,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Autres viandes et plats cuisinés à base de viande,Triperie,1.1.2.6.2
+31,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Autres viandes et plats cuisinés à base de viande,Plats cuisinés à base de viande,1.1.2.6.3
+32,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Poissons et crustacés,Poissons et crustacés frais,Poissons frais,1.1.3.1.1
+33,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Poissons et crustacés,Poissons et crustacés frais,Crustacés et mollusques frais,1.1.3.1.2
+34,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Poissons et crustacés,"Poissons et crustacés préparés, en conserves et surgelés","Poissons en conserves, surgelés, séchés, fumés",1.1.3.2.1
+35,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Poissons et crustacés,"Poissons et crustacés préparés, en conserves et surgelés",Plats cuisinés à base de poisson,1.1.3.2.2
+36,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Lait et crème,Laits,1.1.4.1.1
+37,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Lait et crème,Crèmes fraîches,1.1.4.1.2
+38,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Yaourts et desserts lactés,Yaourts,1.1.4.2.1
+39,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Yaourts et desserts lactés,Desserts lactés frais,1.1.4.2.2
+40,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages frais,1.1.4.3.1
+41,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages à pâte molle et à pâte persillée,1.1.4.3.2
+42,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages à pâte pressée,1.1.4.3.3
+43,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages de chèvre,1.1.4.3.4
+44,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages fondus,1.1.4.3.5
+45,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Œufs,Œufs,1.1.4.4.1
+46,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Huiles et graisses,Beurres,Beurres,1.1.5.1.1
+47,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Huiles et graisses,Huiles et margarines,Huiles alimentaires,1.1.5.2.1
+48,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Huiles et graisses,Huiles et margarines,Margarine végétale et autres graisses,1.1.5.2.2
+49,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Fruits,Fruits frais,Fruits frais,1.1.6.1.1
+50,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Fruits,"Fruits surgelés, appertisés ou secs","Fruits surgelés, appertisés ou secs",1.1.6.2.1
+51,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Légumes,Légumes frais,Légumes frais,1.1.7.1.1
+52,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Légumes,"Légumes préparés, surgelés et en conserve","Légumes surgelés, secs et en conserve",1.1.7.2.1
+53,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Légumes,"Légumes préparés, surgelés et en conserve",Pommes de terre préparées,1.1.7.2.2
+54,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Légumes,"Légumes préparés, surgelés et en conserve",Autres plats cuisinés à base de légumes,1.1.7.2.3
+55,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de sucre,Sucre,1.1.8.1.1
+56,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de sucre,"Confitures, compotes et miel",1.1.8.1.2
+57,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de sucre,Confiseries à base de sucre,1.1.8.1.3
+58,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de chocolat,Chocolat en tablettes,1.1.8.2.1
+59,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de chocolat,Confiseries à base de chocolat,1.1.8.2.2
+60,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés","Crèmes glacées, glaces et sorbets","Crèmes glacées, glaces et sorbets",1.1.8.3.1
+61,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Condiments et assaisonnements,"Sels, épices, condiments, vinaigres et sauces",1.1.9.1.1
+62,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Aliments préparés pour enfants et produits diététiques,Aliments préparés pour bébés,1.1.9.2.1
+63,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Aliments préparés pour enfants et produits diététiques,Produits diététiques,1.1.9.2.2
+64,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Autres produits alimentaires n.d.a.,Potages préparés,1.1.9.3.1
+65,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Autres produits alimentaires n.d.a.,Desserts et produits pour pâtisserie,1.1.9.3.2
+66,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,"Café, thé et cacao",Produits chocolatés,Chocolat en poudre,1.2.1.1.1
+67,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,"Café, thé et cacao",Cafés,Cafés en grains ou moulu,1.2.1.2.1
+68,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,"Café, thé et cacao",Cafés,Café soluble et succédanée de café,1.2.1.2.2
+69,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,"Café, thé et cacao",Thés et infusions,Thés et infusions,1.2.1.3.1
+70,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,Autres boissons non alcoolisées,Eaux minérales et de source,Eaux minérales et de source,1.2.2.1.1
+71,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,Autres boissons non alcoolisées,"Boissons gazeuses, jus et sirops",Jus de fruits et de légumes,1.2.2.2.1
+72,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,Autres boissons non alcoolisées,"Boissons gazeuses, jus et sirops","Boissons aux fruits non gazeuses, sodas, limonades",1.2.2.2.2
+73,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,Autres boissons non alcoolisées,"Boissons gazeuses, jus et sirops",Sirops et concentrés,1.2.2.2.3
+74,Éducation,Services d'éducation,Services d'éducation,Services d'éducation,Secondaires à financement  privé,10.1.1.1.1
+75,Éducation,Services d'éducation,Services d'éducation,Services d'éducation,Supérieurs à financement privé,10.1.1.1.2
+76,Éducation,Services d'éducation,Services d'éducation,Services d'éducation,Cours par correspondance,10.1.1.1.3
+77,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Restauration,Repas traditionnel dans un restaurant,11.1.1.1.1
+78,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Restauration,Repas en libre service et restauration rapide,11.1.1.1.2
+79,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Cafés et autres boiss. chaudes cons. dans les cafés,11.1.1.2.1
+80,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Vin consommé dans les cafés,11.1.1.2.2
+81,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Bière et cidre consommés dans les cafés,11.1.1.2.3
+82,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Spiritueux consommés dans les cafés,11.1.1.2.4
+83,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Boissons non alcoolisées cons. dans les cafés,11.1.1.2.5
+84,"Hôtellerie, cafés, restauration",Restauration et cafés,Cantines,Repas dans un restaurant scolaire ou universitaire,Repas dans un restaurant scolaire ou universitaire,11.1.2.1.1
+85,"Hôtellerie, cafés, restauration",Restauration et cafés,Cantines,Repas dans un restaurant d'entreprise ou d'administration,Repas dans un restaurant d'entreprise ou d'admin.,11.1.2.2.1
+86,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Hôtellerie y.c. pension,Locations de chambres d'hôtel,11.2.1.1.1
+87,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Hôtellerie y.c. pension,Pensions et demi-pensions dans les hôtels,11.2.1.1.2
+88,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Internat scolaire et universitaire,"Frais d'internat scol., résidences univers., foyers",11.2.1.2.1
+89,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Hébergements de vacances,Hébergements de vacances ou de loisirs,11.2.1.3.1
+90,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Hébergements de vacances,Terrains de camping et auberges de jeunesse,11.2.1.3.2
+91,Autres biens et services,Soins personnels,Salons de coiffure et esthétique corporelle,Coiffure,Coiffeurs pour hommes,12.1.1.1.1
+92,Autres biens et services,Soins personnels,Salons de coiffure et esthétique corporelle,Coiffure,Coiffeurs pour femmes,12.1.1.1.2
+93,Autres biens et services,Soins personnels,Salons de coiffure et esthétique corporelle,Autres services d'esthétique,Autres services d'esthétique corporelle,12.1.1.2.1
+94,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Parfumerie et produits de beauté,Parfums et eaux de toilette,12.1.3.1.1
+95,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Parfumerie et produits de beauté,Produits de maquillage et de soin de la peau,12.1.3.1.2
+96,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Produits de l'hygiène corporelle,"Savons, dentifrices et produits de toilette",12.1.3.2.1
+97,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Produits de l'hygiène corporelle,Shampooings et produits capillaires divers,12.1.3.2.2
+98,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Appareils et autres articles de toilette,Autres articles de toilette,12.1.3.3.1
+99,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Appareils et autres articles de toilette,Articles d'hygiène à base de papier,12.1.3.3.2
+100,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Appareils et autres articles de toilette,Appareils de toilette électriques,12.1.3.3.3
+101,Autres biens et services,Effets personnels n.d.a.,"Horlogerie, bijouterie, joaillerie","Horlogerie, bijouterie, joaillerie",Horlogerie,12.3.1.1.1
+102,Autres biens et services,Effets personnels n.d.a.,"Horlogerie, bijouterie, joaillerie","Horlogerie, bijouterie, joaillerie","Bijouterie, joaillerie",12.3.1.1.2
+103,Autres biens et services,Effets personnels n.d.a.,Autres effets personnels,Maroquinerie et articles de voyages,Maroquinerie et articles de voyage,12.3.2.1.1
+104,Autres biens et services,Effets personnels n.d.a.,Autres effets personnels,Autres effets personnels y.c. réparation,Articles de puériculture,12.3.2.2.1
+105,Autres biens et services,Effets personnels n.d.a.,Autres effets personnels,Autres effets personnels y.c. réparation,"Articles pour fumeurs, articles divers",12.3.2.2.2
+106,Autres biens et services,Effets personnels n.d.a.,Autres effets personnels,Autres effets personnels y.c. réparation,Réparation horlogerie ou bijoux,12.3.2.2.3
+107,Autres biens et services,Protection sociale,Services de protection sociale,"Crèches, assistantes maternelles","Crèches, assistantes maternelles",12.4.1.1.1
+108,Autres biens et services,Protection sociale,Services de protection sociale,Maisons de retraite et autres services pour personnes âgées,Maisons de retraite et autres services pour personnes âgées,12.4.1.2.1
+109,Autres biens et services,Protection sociale,Services de protection sociale,Établissements pour adultes handicapés,Établissements pour adultes handicapés,12.4.1.3.1
+110,Autres biens et services,Assurances,Assurance habitation,Assurance habitation,Assurance habitation,12.5.2.1.1
+111,Autres biens et services,Assurances,Assurance santé,Assurance santé complémentaire,Assurance santé complémentaire,12.5.3.1.1
+112,Autres biens et services,Assurances,Assurance automobile,Assurance automobile,Assurance automobile,12.5.4.1.1
+113,Autres biens et services,Services financiers,Services financiers n.d.a.,Services financiers,Services financiers,12.6.1.1.1
+114,Autres biens et services,Autres services,Autres services,Services funéraires,Services funéraires,12.7.1.1.1
+115,Autres biens et services,Autres services,Autres services,Prestations administratives et privées diverses,Formalités administratives,12.7.1.2.1
+116,Autres biens et services,Autres services,Autres services,Prestations administratives et privées diverses,Services juridiques,12.7.1.2.2
+117,Autres biens et services,Autres services,Autres services,Prestations administratives et privées diverses,Autres services aux ménages,12.7.1.2.3
+118,Boissons alcoolisées et tabac,Boissons alcoolisées,Alcools,Apéritifs,Apéritifs anisés à base d'alcool,2.1.1.1.1
+119,Boissons alcoolisées et tabac,Boissons alcoolisées,Alcools,Apéritifs,Whisky,2.1.1.1.2
+120,Boissons alcoolisées et tabac,Boissons alcoolisées,Alcools,Eaux de vie et liqueurs,Eaux de vie,2.1.1.2.1
+121,Boissons alcoolisées et tabac,Boissons alcoolisées,Alcools,Eaux de vie et liqueurs,Liqueurs,2.1.1.2.2
+122,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne",Vins,Vins de consommation courante,2.1.2.1.1
+123,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne",Vins,Vins supérieurs,2.1.2.1.2
+124,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne",Vins,Vins doux naturels et apéritifs à base de vin,2.1.2.1.3
+125,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne","Champagne, mousseux et cidres",Champagne et mousseux,2.1.2.2.1
+126,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne","Champagne, mousseux et cidres",Cidres,2.1.2.2.2
+127,Boissons alcoolisées et tabac,Boissons alcoolisées,Bières,Bières,Bières,2.1.3.1.1
+128,Boissons alcoolisées et tabac,Tabac,Tabac,Tabac,Tabac,2.2.1.1.1
 129,Habillement et chaussures,Habillement,Tissus d'habillement,Tissus d'habillement,Tissus d'habillement,3.1.1.1.1
 130,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour hommes,"Manteaux, imper. et vêtements en peau pour hommes",3.1.2.1.1
 131,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour hommes,Costumes pour hommes,3.1.2.1.2

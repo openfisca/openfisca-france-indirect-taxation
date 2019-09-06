@@ -121,7 +121,6 @@ def check_donation_classes_size(data, donation_class):
     return dict_dc_taille
 
 
-
 if __name__ == "__main__":
     data_enl, data_bdf = create_donation_classes()
     # dico = check_donation_classes_size(data_enl, 'donation_class_4')

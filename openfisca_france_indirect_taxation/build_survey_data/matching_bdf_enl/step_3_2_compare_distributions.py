@@ -16,6 +16,7 @@ seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 data_enl, data_bdf = create_niveau_vie_quantiles()
 
+
 # aba - aides au logement
 # 1 = Oui, 2 = Non, 0 = ?
 def check_aba():

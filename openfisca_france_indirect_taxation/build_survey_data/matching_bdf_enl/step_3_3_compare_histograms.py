@@ -15,7 +15,6 @@ from openfisca_france_indirect_taxation.build_survey_data.utils import \
 data_enl, data_bdf = create_niveau_vie_quantiles()
 
 
-
 def histogram_aba():
     list_values_bdf = []
     list_values_enl = []

@@ -51,7 +51,7 @@ def homogenize_variables_definition_bdf_entd():
 
 
 def create_new_variables():
-    data_entd, data_bdf = homogenize_variables_definition_bdf_entd()[i]
+    data_entd, data_bdf = homogenize_variables_definition_bdf_entd()
 
     def create_new_variables_(data, option = None):
         assert option in ['entd', 'bdf']

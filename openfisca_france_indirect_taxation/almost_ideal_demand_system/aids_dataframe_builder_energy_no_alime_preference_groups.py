@@ -47,7 +47,8 @@ for year in [2000, 2005, 2011]:
     # 941, 960 : voyages séjours et cadeaux, 10i0 : enseignement, 12.. : articles de soin et bijoux
 
     # Check if there is anything else to include in this list
-    biens_durables = ['poste_04_1_1_1_1', 'poste_04_1_1_2_1', 'poste_04_4_1_2_1', 'poste_04_4_1_3_1',
+    biens_durables = [
+        'poste_04_1_1_1_1', 'poste_04_1_1_2_1', 'poste_04_4_1_2_1', 'poste_04_4_1_3_1',
         'poste_07_1_1_1_1', 'poste_07_1_2_1_1', 'poste_07_1_2_1_2', 'poste_09_1_1_1_3', 'poste_09_1_1_1_2',
         'poste_09_1_2_1_1_a', 'poste_09_1_2_1_1_b', 'poste_09_1_3_1_1', 'poste_09_2_1_1_1', 'poste_09_6_1_1_1',
         'poste_09_7_1', 'poste_09_7_2', 'poste_10_1', 'poste_10_2', 'poste_10_3', 'poste_10_4', 'poste_10_5_1',
