@@ -10,6 +10,9 @@ from openfisca_survey_manager import default_config_files_directory as config_fi
 
 
 def load_data_bdf_enl():
+
+    enl_provisoire = False
+
     # Load ENL data :
     year_enl = 2013
     enl_survey_collection = SurveyCollection.load(
@@ -61,7 +64,7 @@ def load_data_bdf_enl():
         'mchof',
         'mchof_d',
         'mfac_eau1_d',
-        'mfac_eg1_d',
+        # 'mfac_eg1_d',
         'mloy_d',
         # 'mode_trans1', depindiv
         'nbh1',
@@ -128,7 +131,6 @@ def load_data_bdf_enl():
         'hnph1',
         'hsh1',
         'htl',
-        'iaat',
         'idlog',
         'lchauf',
         'lmlm',
@@ -136,7 +138,6 @@ def load_data_bdf_enl():
         'mcs',
         'mcsc',
         'mpa',
-        'mrtota3',  # Revenu total du ménage
         'msitua',
         'msituac',
         'mtypmena',
@@ -157,6 +158,11 @@ def load_data_bdf_enl():
         ]
 
     # Keep relevant variables :
+    if enl_provisoire:
+        variables_menages_enl += ['iaat', 'mrtota2']
+    else:
+        variables_menages_enl += ['iaatr', 'mrtota3']  # Revenu total du ménage
+
     indiv_enl_keep = input_enl_indiv[variables_indiv_enl]
     menage_enl_keep = input_enl[variables_menages_enl]
     conso_bdf_keep = input_bdf[variables_menages_bdf]

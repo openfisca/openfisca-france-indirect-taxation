@@ -630,22 +630,24 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'mchof',
             'mchof_d',
             # 'mfac_eau1',
-            # 'mfac_eau1_d',
+            'mfac_eau1_d',
             'mfac_eg1',
-            # 'mfac_eg1_d',
+            'mfac_eg1_d',
             'mloy',
             'mloy_d',
             'nbh1',
             'nbphab',
             'sourcp',
             'stalog',
-            # 'surfhab_d',
+            'surfhab_d',
             'tchof',
             'vag',
             ]
         try:
             depmen = survey.get_values(table = "DEPMEN", variables = variables_depmen)
-        except Exception:
+        except Exception as e:
+            print(e)
+            BIM
             depmen = survey.get_values(table = "depmen", variables = variables_depmen)
 
         depmen.rename(columns = {'ident_me': 'ident_men'}, inplace = True)

@@ -30,6 +30,8 @@ def inflate_energy_consumption(data_enl, data_bdf):
 
 
 def homogenize_variables_definition_bdf_enl():
+
+    enl_provisoire = False
     data_enl, data_bdf = load_data_bdf_enl()
 
     # Vérification que les données ENL ne contiennent pas les DOM
@@ -66,18 +68,61 @@ def homogenize_variables_definition_bdf_enl():
     for i in [4, 6]:
         data_enl = data_enl.query('htl != {}'.format(i))
 
-    # Changement nomenclature variable année de construction du batiment :
-    data_enl['ancons'] = 0
-    data_enl.loc[data_enl.iaat < 4, 'ancons'] = 1
-    data_enl.loc[data_enl.iaat == 4, 'ancons'] = 2
-    data_enl.loc[data_enl.iaat == 5, 'ancons'] = 3
-    data_enl.loc[data_enl.iaat == 6, 'ancons'] = 4
-    data_enl.loc[data_enl.iaat == 7, 'ancons'] = 5
-    data_enl.loc[data_enl.iaat == 8, 'ancons'] = 6
-    data_enl.loc[data_enl.iaat == 9, 'ancons'] = 7
+    # Changement nomenclature variable année de construction du batiment:
+    # ENL 2006 et ENL 2013 provisoire
+    # iaat annee d'achevement de la construction
+    # 1  Avant 1871
+    # 2  De 1871 à 1914
+    # 3  De 1915 à 1948
+    # 4  De 1949 à 1961
+    # 5  De 1962 à 1967
+    # 6  De 1968 à 1974
+    # 7  De 1975 à 1981
+    # 8  De 1982 à 1989
+    # 9  De 1990 à 1998
+    # 10 En 1999 ou après
 
-    # Pour après 1998 on affecte aléatoirement 8 ou 9 (99-03 ou 03-et après)
-    data_enl.loc[data_enl.iaat == 10, 'ancons'] = np.random.choice(np.array([8, 9]))
+    # ENL 2013 définitive
+    # iaatr
+    # 1 Avant 1949
+    # 2 De 1949 à 1974
+    # 3 De 1975 à 1981
+    # 4 De 1982 à 1989
+    # 5 De 1990 à 1998
+    # 6 1999 ou après
+
+    # BDF 2011
+    # ancons année d'achèvement de l'immeuble
+    # 1 En 1948 ou avant
+    # 2 De 1949 à 1961
+    # 3 De 1962 à 1967
+    # 4 De 1968 à 1974
+    # 5 De 1975 à 1981
+    # 6 De 1982 à 1989
+    # 7 De 1990 à 1998
+    # 8 De 1999 à 2003
+    # 9 En 2004 et après
+    # 10 En construction
+    if enl_provisoire:
+        data_enl['ancons'] = 0
+        data_enl.loc[data_enl.iaat < 4, 'ancons'] = 1
+        data_enl.loc[data_enl.iaat == 4, 'ancons'] = 2
+        data_enl.loc[data_enl.iaat == 5, 'ancons'] = 3
+        data_enl.loc[data_enl.iaat == 6, 'ancons'] = 4
+        data_enl.loc[data_enl.iaat == 7, 'ancons'] = 5
+        data_enl.loc[data_enl.iaat == 8, 'ancons'] = 6
+        data_enl.loc[data_enl.iaat == 9, 'ancons'] = 7
+        # Pour après 1998 on affecte aléatoirement 8 ou 9 (99-03 ou 03-et après)
+        data_enl.loc[data_enl.iaat == 10, 'ancons'] = np.random.choice(np.array([8, 9]))
+    else:
+        data_enl['ancons'] = 0
+        data_enl.loc[data_enl.iaatr == 1, 'ancons'] = 1
+        data_enl.loc[data_enl.iaatr == 2, 'ancons'] = 2  # TODO ,3,4
+        data_enl.loc[data_enl.iaatr == 3, 'ancons'] = 5
+        data_enl.loc[data_enl.iaatr == 4, 'ancons'] = 6
+        data_enl.loc[data_enl.iaatr == 5, 'ancons'] = 7
+        data_enl.loc[data_enl.iaatr == 6, 'ancons'] = 8
+        data_enl.loc[data_enl.iaatr == 6 & data_enl.iaatcd >= 2004, 'ancons'] = 9
 
     # dip14pr - dans ENL les sans diplômes sont notés 0 au lieu de 71
     data_enl.loc[data_enl.ndip14 == 0, 'ndip14'] = 71
