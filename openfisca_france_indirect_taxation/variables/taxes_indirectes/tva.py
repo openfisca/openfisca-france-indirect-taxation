@@ -66,7 +66,6 @@ class tva_taux_intermediaire(YearlyVariable):
         depenses_ht_tva_taux_intermediaire = menage('depenses_ht_tva_taux_intermediaire', period)
         taux_intermediaire = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_intermediaire
         return depenses_ht_tva_taux_intermediaire * taux_intermediaire
-        # tax_from_expense_including_tax(depenses_tva_taux_intermediaire, taux_intermediaire)
 
 
 class tva_taux_plein(YearlyVariable):
@@ -78,7 +77,6 @@ class tva_taux_plein(YearlyVariable):
         depenses_ht_tva_taux_plein = menage('depenses_ht_tva_taux_plein', period)
         taux_plein = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         return depenses_ht_tva_taux_plein * taux_plein
-        # tax_from_expense_including_tax(depenses_tva_taux_plein, taux_plein)
 
 
 class tva_taux_reduit(YearlyVariable):
@@ -90,7 +88,6 @@ class tva_taux_reduit(YearlyVariable):
         depenses_ht_tva_taux_reduit = menage('depenses_ht_tva_taux_reduit', period)
         taux_reduit = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_reduit
         return depenses_ht_tva_taux_reduit * taux_reduit
-        # tax_from_expense_including_tax(depenses_tva_taux_reduit, taux_reduit)
 
 
 class tva_taux_super_reduit(YearlyVariable):
@@ -102,7 +99,6 @@ class tva_taux_super_reduit(YearlyVariable):
         depenses_ht_tva_taux_super_reduit = menage('depenses_ht_tva_taux_super_reduit', period)
         taux_super_reduit = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_particulier_super_reduit
         return depenses_ht_tva_taux_super_reduit * taux_super_reduit
-        # tax_from_expense_including_tax(depenses_tva_taux_super_reduit, taux_super_reduit)
 
 
 class tva_total(YearlyVariable):
