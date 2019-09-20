@@ -37,7 +37,7 @@ log = logging.getLogger(__name__)
 
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
-def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
+def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011], skip_matching = False):
 
     assert temporary_store is not None
 
@@ -123,6 +123,7 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
     if year_data == 2011:
         data_frame = data_frame.query('zeat != 0').copy()
 
+    if year_data == 2011 and not skip_matching:
         try:
             # On apparie ajoute les données appariées de l'ENL et l'ENTD
             default_config_files_directory = os.path.join(
@@ -174,13 +175,13 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
     openfisca_survey_collection.dump()
 
 
-def run(years_calage):
+def run(years_calage, skip_matching = False):
     import time
     for year_calage in years_calage:
         start = time.time()
-        run_all_steps(year_calage = year_calage)
+        run_all_steps(year_calage = year_calage, skip_matching = skip_matching)
         log.info("Finished {}".format(time.time() - start))
 
 
 if __name__ == '__main__':
-    run([2011])
+    run([2011], skip_matching = True)
