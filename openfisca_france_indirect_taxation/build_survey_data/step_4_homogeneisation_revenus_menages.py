@@ -25,17 +25,15 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         collection = 'budget_des_familles', config_files_directory = config_files_directory)
     survey = bdf_survey_collection.get_survey('budget_des_familles_{}'.format(year))
 
-# **********************************************************************************************************************
-# ********************************* HOMOGENEISATION DES DONNEES SUR LES REVENUS DES MENAGES ****************************
-# ************************************ CALCUL D'UN PROXI DU REVENU DISPONIBLE DES MENAGES ******************************
-# **********************************************************************************************************************
-#
-# ********************HOMOGENEISATION DES BASES DE RESSOURCES***************************
+# Homogeneisation des donnees sur les revenus des menages
+# Calcul d'un proxi du revenu disponible des menages
 
-# La base 95 permet de distinguer taxe d'habitation et impôts fonciers.
-# On calcule leur montant relatif pour l'appliquer à 00 et 05
+# Homogeneisation des bases de ressources
+
 
     if year == 1995:
+        # La base 95 permet de distinguer taxe d'habitation et impôts fonciers.
+        # On calcule leur montant relatif pour l'appliquer à 00 et 05
         menrev = survey.get_values(
             table = "menrev",
             variables = [
@@ -290,24 +288,19 @@ In loyers_imputes and not in revenus:
         temporary_store["revenus_{}".format(year)] = revenus
 
     elif year == 2011:
-        c05_variables = ['c13111', 'c13121', 'c13141', 'pondmen', 'ident_me']
-        try:
-            c05 = survey.get_values(
-                table = "C05",
-                variables = c05_variables,
-                )
-        except Exception as e:
-            log.debug(e)
-            c05 = survey.get_values(
-                table = "c05",
-                variables = c05_variables,
-                )
+        c05_variables = ['c13111', 'c13121', 'c13141', 'pondmen', 'ident_men']
+        c05 = survey.get_values(
+            table = "c05",
+            variables = c05_variables,
+            ignorecase = True,
+            lowercase = True
+            )
 
-        rev_disp = c05.rename(columns = {'ident_me': 'ident_men'}).sort_values(by = ['ident_men'])
+        rev_disp = c05.sort_values(by = ['ident_men'])
         del c05, c05_variables
 
         menage_variables = [
-            'ident_me',
+            'ident_men',
             'rev700',
             'rev701',
             'rev999',
@@ -319,19 +312,13 @@ In loyers_imputes and not in revenus:
             'salaires',
             ]
 
-        try:
-            menage = survey.get_values(
-                table = "MENAGE",
-                variables = menage_variables,
-                )
-        except Exception as e:
-            log.debug(e)
-            menage = survey.get_values(
-                table = "menage",
-                variables = menage_variables,
-                )
+        menage = survey.get_values(
+            table = "menage",
+            variables = menage_variables,
+            ignorecase = True
+            )
 
-        menage = menage.rename(columns = {'ident_me': 'ident_men'}).sort_values(by = ['ident_men'])
+        menage = menage.sort_values(by = ['ident_men'])
 
         rev_disp.index = rev_disp.index.astype(ident_men_dtype)
         menage.index = menage.index.astype(ident_men_dtype)

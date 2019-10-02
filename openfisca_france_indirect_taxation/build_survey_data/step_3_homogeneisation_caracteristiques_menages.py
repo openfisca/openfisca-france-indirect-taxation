@@ -23,10 +23,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
     bdf_survey_collection = SurveyCollection.load(
         collection = 'budget_des_familles', config_files_directory = config_files_directory)
     survey = bdf_survey_collection.get_survey('budget_des_familles_{}'.format(year))
-    # ******************************************************************************************************************
-    # * Etape n° 0-3 : HOMOGENEISATION DES CARACTERISTIQUES SOCIALES DES MENAGES
-    # ******************************************************************************************************************
-    # ******************************************************************************************************************
 
     if year == 1995:
         kept_variables = ['exdep', 'exrev', 'mena', 'v', 'ponderrd', 'nbpers', 'nbenf', 'typmen1', 'cohabpr', 'sexepr',
@@ -247,9 +243,10 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         assert menage.zeat.isin(list(range(1, 9))).all()
 
         try:
-            depmen = survey.get_values(table = "DEPMEN")
+            depmen = survey.get_values(table = "DEPMEN", ignorecase = True)
         except Exception:
             depmen = survey.get_values(table = "depmen")
+
         depmen.rename(columns = {'ident': 'ident_men'}, inplace = True)
         sourcp = depmen[['sourcp', 'ident_men']].copy()
         del depmen
@@ -573,7 +570,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'cs42pr',
             'cs42cj',
             'decuc1',
-            'ident_me',
+            'ident_men',
             'pondmen',
             'npers',
             'nenfants',
@@ -591,15 +588,9 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'zeat',
             ]
 
-        try:
-            menage = survey.get_values(table = "MENAGE", variables = variables)
-        except Exception as e:
-            log.debug(e)
-            menage = survey.get_values(table = "menage", variables = variables)
-
+        menage = survey.get_values(table = "menage", variables = variables, ignorecase = True)
         menage.rename(
             columns = {
-                'ident_me': 'ident_men',
                 'coeffuc': 'ocde10',
                 'typmen5': 'typmen',
                 'decuc1': 'decuc',
@@ -624,12 +615,12 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'ancons',
             'chaufp',
             'htl',
-            'ident_me',
+            'ident_men',
             'mall1',
             'mall2',
             'mchof',
             'mchof_d',
-            # 'mfac_eau1',
+            'mfac_eau1',
             'mfac_eau1_d',
             'mfac_eg1',
             'mfac_eg1_d',
@@ -643,40 +634,23 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'tchof',
             'vag',
             ]
-        try:
-            depmen = survey.get_values(table = "DEPMEN", variables = variables_depmen)
-        except Exception as e:
-            print(e)
-            BIM
-            depmen = survey.get_values(table = "depmen", variables = variables_depmen)
 
-        depmen.rename(columns = {'ident_me': 'ident_men'}, inplace = True)
+        depmen = survey.get_values(table = "depmen", variables = variables_depmen, ignorecase = True)
 
         menage.set_index('ident_men', inplace = True)
         depmen.set_index('ident_men', inplace = True)
+        variables_sante = ['ident_men', 'complentr']
+        compl_sante = survey.get_values(table = "compl_sante", variables = variables_sante, ignorecase = True)
 
-        variables_sante = ['ident_me', 'complent']
-        try:
-            compl_sante = survey.get_values(table = "COMPL_SANTE", variables = variables_sante)
-            compl_sante.rename(columns = {'ident_me': 'ident_men'}, inplace = True)
-            compl_sante.set_index('ident_men', inplace = True)
+        compl_sante.set_index('ident_men', inplace = True)
 
-            compl_sante['cmu'] = 0 + 1 * (compl_sante['complent'] == 5)
-            compl_sante = compl_sante.query('cmu != 0').copy()
-        except Exception as e:
-            log.debug(e)
-            compl_sante = survey.get_values(table = "COMPL_SANTE")
-            import pprint
-            pprint.pprint(compl_sante.columns)
+        compl_sante['cmu'] = 0 + 1 * (compl_sante['complentr'] == 5)
+        compl_sante = compl_sante.query('cmu != 0').copy()
 
         menage = menage.merge(depmen, left_index = True, right_index = True)
-        try:
-            menage = menage.merge(compl_sante, left_index = True, right_index = True, how = 'left')
-
-            menage = menage.groupby(menage.index).first()
-            menage['cmu'] = menage.cmu.fillna(0)
-        except Exception as e:
-            log.debug(e)
+        menage = menage.merge(compl_sante, left_index = True, right_index = True, how = 'left')
+        menage = menage.groupby(menage.index).first()
+        menage['cmu'] = menage.cmu.fillna(0)
 
         menage['vag_'] = menage['vag'].copy()
         menage.loc[menage.vag_ == 1, 'vag'] = 23

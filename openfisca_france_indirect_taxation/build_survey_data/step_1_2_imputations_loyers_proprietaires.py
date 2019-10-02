@@ -121,25 +121,16 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         loyers_imputes.rename(columns = {'rev801_d': 'poste_04_2_1'}, inplace = True)
 
     if year == 2011:
-        try:
-            loyers_imputes = survey.get_values(table = "MENAGE")
-            log.debug("Using 'MENAGE' table")
-        except KeyError as e:
-            log.debug(e)
-            log.debug("Using 'menage' table")
-            loyers_imputes = survey.get_values(table = "menage")
+        loyers_imputes = survey.get_values(table = "menage", ignorecase = True)
 
         kept_variables = ['ident_men', 'rev801']
-        try:
-            loyers_imputes = loyers_imputes.rename(
-                columns = {'ident_me': 'ident_men'},
-                )[kept_variables].copy()
-        except KeyError as e:
-            log.debug("Variables that are not found: {}".format(
-                set(kept_variables).difference(set(loyers_imputes.columns))
-                ))
-            log.debug("loyers_imputes columns are: {}".format(loyers_imputes.columns))
-            raise (e)
+        loyers_imputes = loyers_imputes[kept_variables].copy()
+        # except KeyError as e:
+        #     log.debug("Variables that are not found: {}".format(
+        #         set(kept_variables).difference(set(loyers_imputes.columns))
+        #         ))
+        #     log.debug("loyers_imputes columns are: {}".format(loyers_imputes.columns))
+        #     raise (e)
 
         loyers_imputes.rename(
             columns = {'rev801': 'poste_04_2_1'},
