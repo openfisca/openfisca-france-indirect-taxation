@@ -30,7 +30,6 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
 
 # Homogeneisation des bases de ressources
 
-
     if year == 1995:
         # La base 95 permet de distinguer taxe d'habitation et impôts fonciers.
         # On calcule leur montant relatif pour l'appliquer à 00 et 05
