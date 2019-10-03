@@ -53,7 +53,7 @@ setup(
     install_requires = [
         'Babel >= 0.9.4',
         'OpenFisca-Core >= 0.5.4',
-        'OpenFisca-Survey-Manager >= 0.35,<1.0',
+        'OpenFisca-Survey-Manager >= 0.37.0,<1.0',
         'python-slugify',
         'PyYAML >= 3.10',
         "numpy >= 1.11, <1.16",  # openfisca-survey-manager deps and https://github.com/openfisca/openfisca-survey-manager/pull/79            'pandas >= 0.17',
