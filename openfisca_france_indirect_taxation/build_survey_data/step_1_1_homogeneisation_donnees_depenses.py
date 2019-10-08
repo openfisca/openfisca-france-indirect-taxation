@@ -117,7 +117,6 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     depenses = coicop_data_frame.merge(poids, left_index = True, right_index = True)
     temporary_store['depenses_{}'.format(year)] = depenses
 
-
 if __name__ == '__main__':
     import sys
     import time
