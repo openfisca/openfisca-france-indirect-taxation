@@ -21,12 +21,9 @@ def inflate_energy_consumption(data_enl, data_bdf):
             'depenses_combustibles_liquides', 'depenses_combustibles_solides']:
         data_bdf[energie] = data_bdf[energie] * inflators_bdf[energie]
         inflators_enl[energie] = (
-            (sum(data_bdf['pondmen'] * data_bdf[energie]) / sum(data_bdf['pondmen']))
-                / (
-                    sum(data_enl['pondmen'] * data_enl[energie])
-                        / sum(data_enl['pondmen']
-                        )
-                    )
+            (data_bdf.pondmen * data_bdf[energie]).sum() / data_bdf.pondmen.sum()
+            ) / (
+            (data_enl.pondmen * data_enl[energie]).sum() / data_bdf.pondmen.sum()
             )
         data_enl[energie] = data_enl[energie] * inflators_enl[energie]
 
@@ -148,7 +145,11 @@ def homogenize_variables_definition_bdf_enl():
 
     # Gestion des dépenses d'énergies
     joint_data_bdf = data_bdf.query('poste_04_5_1_1_1_b > 0').query('poste_04_5_2_1_1 > 0').copy()
-    part_electricite_bdf = (joint_data_bdf['poste_04_5_1_1_1_b'].sum() / (joint_data_bdf['poste_04_5_1_1_1_b'].sum() + joint_data_bdf['poste_04_5_2_1_1'].sum())
+    part_electricite_bdf = (
+        joint_data_bdf.poste_04_5_1_1_1_b.sum() / (
+            joint_data_bdf.poste_04_5_1_1_1_b.sum()
+            + joint_data_bdf.poste_04_5_2_1_1.sum()
+            )
         )
     data_bdf['depenses_electricite'] = (
         data_bdf['poste_04_5_1_1_1_b'] + data_bdf['poste_04_5_1_1_1_a'] * part_electricite_bdf
