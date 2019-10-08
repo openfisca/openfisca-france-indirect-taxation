@@ -34,7 +34,9 @@
     #
     tva_taux_plein: 100 / (1.196) * 0.196
     poste_agrege_07: 100
-
+    depenses_diesel_htva: 100 / (1.196)
+    depenses_diesel: 100
+    depenses_diesel_ht: 100 / (1.196) - 38.36062
 
 - name: "Test ticpe essence"
   period: 2013
