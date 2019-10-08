@@ -10,6 +10,7 @@ def main():
     default_config_files_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
 
+    # Seems to be produced by openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_rank_bdf_enl.R
     data_matched_enl = pandas.read_csv(
         os.path.join(
             default_config_files_directory,

@@ -161,11 +161,11 @@ def load_data_bdf_enl():
     if enl_provisoire:
         variables_menages_enl += ['iaat', 'mrtota2']
     else:
-        variables_menages_enl += ['iaatr', 'mrtota3']  # Revenu total du ménage
+        variables_menages_enl += ['iaatr', 'mrtota3', 'iaatcd']  # Revenu total du ménage
 
     indiv_enl_keep = input_enl_indiv[variables_indiv_enl]
-    menage_enl_keep = input_enl[variables_menages_enl]
-    conso_bdf_keep = input_bdf[variables_menages_bdf]
+    menage_enl_keep = input_enl[variables_menages_enl].copy()
+    conso_bdf_keep = input_bdf[variables_menages_bdf].copy()
     # conso_bdf_keep = conso_bdf_keep.query('zeat != 0')
     del input_enl_indiv, input_enl, input_bdf
 

@@ -22,7 +22,11 @@ def inflate_energy_consumption(data_enl, data_bdf):
         data_bdf[energie] = data_bdf[energie] * inflators_bdf[energie]
         inflators_enl[energie] = (
             (sum(data_bdf['pondmen'] * data_bdf[energie]) / sum(data_bdf['pondmen']))
-            / (sum(data_enl['pondmen'] * data_enl[energie]) / sum(data_enl['pondmen']))
+                / (
+                    sum(data_enl['pondmen'] * data_enl[energie])
+                        / sum(data_enl['pondmen']
+                        )
+                    )
             )
         data_enl[energie] = data_enl[energie] * inflators_enl[energie]
 
@@ -49,10 +53,11 @@ def homogenize_variables_definition_bdf_enl():
     # Montant des aides au logement : séparation propriétaire/locataire dans BdF -> création d'une unique variable
     for i in [1, 2]:
         data_bdf['mall{}'.format(i)] = data_bdf['mall{}'.format(i)].fillna(0)
-        check = data_bdf.query('aidlog{} != 1'.format(i))
+        check = data_bdf.query('aidlog{} != 1'.format(i)).copy()
         assert (check['mall{}'.format(i)] == 0).any()
 
     data_bdf['amr'] = data_bdf['mall1'] + data_bdf['mall2']
+
     del data_bdf['aidlog1'], data_bdf['aidlog2'], data_bdf['mall1'], data_bdf['mall2'], check
 
     # Définition du statut du logement
@@ -66,7 +71,7 @@ def homogenize_variables_definition_bdf_enl():
     # on exclut les catégories absentes de BdF (logements-foyers pour personnes âgées
     # et chambre d'hôtels)
     for i in [4, 6]:
-        data_enl = data_enl.query('htl != {}'.format(i))
+        data_enl = data_enl.query('htl != {}'.format(i)).copy()
 
     # Changement nomenclature variable année de construction du batiment:
     # ENL 2006 et ENL 2013 provisoire
@@ -122,7 +127,7 @@ def homogenize_variables_definition_bdf_enl():
         data_enl.loc[data_enl.iaatr == 4, 'ancons'] = 6
         data_enl.loc[data_enl.iaatr == 5, 'ancons'] = 7
         data_enl.loc[data_enl.iaatr == 6, 'ancons'] = 8
-        data_enl.loc[data_enl.iaatr == 6 & data_enl.iaatcd >= 2004, 'ancons'] = 9
+        data_enl.loc[(data_enl.iaatr == 6) & (data_enl.iaatcd >= 2004), 'ancons'] = 9
 
     # dip14pr - dans ENL les sans diplômes sont notés 0 au lieu de 71
     data_enl.loc[data_enl.ndip14 == 0, 'ndip14'] = 71
@@ -142,9 +147,8 @@ def homogenize_variables_definition_bdf_enl():
     data_bdf['nbh1'] = data_bdf['nbh1'].fillna(0)
 
     # Gestion des dépenses d'énergies
-    joint_data_bdf = data_bdf.query('poste_04_5_1_1_1_b > 0').query('poste_04_5_2_1_1 > 0')
-    part_electricite_bdf = (joint_data_bdf['poste_04_5_1_1_1_b'].sum()
-/ (joint_data_bdf['poste_04_5_1_1_1_b'].sum() + joint_data_bdf['poste_04_5_2_1_1'].sum())
+    joint_data_bdf = data_bdf.query('poste_04_5_1_1_1_b > 0').query('poste_04_5_2_1_1 > 0').copy()
+    part_electricite_bdf = (joint_data_bdf['poste_04_5_1_1_1_b'].sum() / (joint_data_bdf['poste_04_5_1_1_1_b'].sum() + joint_data_bdf['poste_04_5_2_1_1'].sum())
         )
     data_bdf['depenses_electricite'] = (
         data_bdf['poste_04_5_1_1_1_b'] + data_bdf['poste_04_5_1_1_1_a'] * part_electricite_bdf
@@ -153,7 +157,7 @@ def homogenize_variables_definition_bdf_enl():
         data_bdf['poste_04_5_2_1_1'] + data_bdf['poste_04_5_1_1_1_a'] * (1 - part_electricite_bdf)
         )
 
-    joint_data_enl = data_enl.query('coml11 > 0').query('coml12 > 0')
+    joint_data_enl = data_enl.query('coml11 > 0').query('coml12 > 0').copy()
     part_electricite_enl = (
         joint_data_enl['coml11'].sum()
         / (joint_data_enl['coml11'].sum() + joint_data_enl['coml12'].sum())
@@ -174,45 +178,49 @@ def homogenize_variables_definition_bdf_enl():
     data_bdf.zeat.loc[data_bdf.zeat == 6] = 9
 
     # Rename
-    data_enl.rename(
-        columns = {
-            'cataeu2010': 'cataeu',
-            'cceml': 'mfac_eau1_d',
-            'coml': 'depenses_energies',
-            'coml2': 'depenses_combustibles_liquides',
-            'coml3': 'depenses_gaz_liquefie',
-            'enfhod': 'nbh1',
-            'gmur': 'isolation_murs',
-            'gtoit2': 'isolation_toit',
-            'gvit1': 'majorite_double_vitrage',
-            'gvit1b': 'isolation_fenetres',
-            'lchauf': 'mchof_d',
-            'hnph1': 'nbphab',
-            'hsh1': 'surfhab_d',
-            'lmlm': 'mloy_d',
-            'mag': 'agepr',
-            'mcs': 'cs42pr',
-            'mcsc': 'cs42cj',
-            'mne1': 'nenfants',
-            'mpa': 'nactifs',
-            'mrtota3': 'revtot',
-            'muc1': 'ocde10',
-            'ndip14': 'dip14pr',
-            'nhab': 'npers',
-            'qex': 'pondmen',
-            'tau2010': 'tau',
-            'tu2010': 'tuu',
-            },
+    renaming = {
+        'cataeu2010': 'cataeu',
+        'cceml': 'mfac_eau1_d',
+        'coml': 'depenses_energies',
+        'coml2': 'depenses_combustibles_liquides',
+        'coml3': 'depenses_gaz_liquefie',
+        'enfhod': 'nbh1',
+        'gmur': 'isolation_murs',
+        'gtoit2': 'isolation_toit',
+        'gvit1': 'majorite_double_vitrage',
+        'gvit1b': 'isolation_fenetres',
+        'lchauf': 'mchof_d',
+        'hnph1': 'nbphab',
+        'hsh1': 'surfhab_d',
+        'lmlm': 'mloy_d',
+        'mag': 'agepr',
+        'mcs': 'cs42pr',
+        'mcsc': 'cs42cj',
+        # 'mne1': 'nenfants', add back if needed
+        'mpa': 'nactifs',
+        'mrtota3': 'revtot',
+        'muc1': 'ocde10',
+        'ndip14': 'dip14pr',
+        'nhab': 'npers',
+        'qex': 'pondmen',
+        'tau2010': 'tau',
+        'tu2010': 'tuu',
+        }
 
+    assert set(renaming.keys()) < set(data_enl.columns), "Missing {} in data_enl".format(
+        set(renaming.keys()).difference(set(data_enl.columns))
+        )
+    data_enl.rename(
+        columns = renaming,
         inplace = True,
         )
+
     data_bdf.rename(
         columns = {
             'poste_04_5_2_2_1': 'depenses_gaz_liquefie',
             'poste_04_5_3_1_1': 'depenses_combustibles_liquides',
             'poste_04_5_4_1_1': 'depenses_combustibles_solides',
             },
-
         inplace = True,
         )
 
@@ -233,7 +241,10 @@ def create_new_variables():
     data_enl, data_bdf = homogenize_variables_definition_bdf_enl()
 
     def create_new_variables_(data, option = None):
-        assert option in ['enl, bdf']
+        assert option in ['enl', 'bdf']
+
+        if option == 'bdf':
+            assert 'revtot' in data
 
         # Dummy variable pour la consommation de fioul
         data['fioul'] = 0
@@ -294,49 +305,52 @@ def create_new_variables():
 
         if option == 'enl':
             data['froid'] = 0
-            data['froid'].loc[data['gchauf_n'] != 0] = 1
+            data.loc[data.gchauf_n != 0, 'froid'] = 1
             del data['gchauf_n']
 
             data['froid_installation'] = 0
-            data['froid_installation'].loc[data['gchauf_1'] == 1] = 1
+            data.loc[data.gchauf_1 == 1, 'froid_installation'] = 1
             del data['gchauf_1']
 
             data['froid_cout'] = 0
-            data['froid_cout'].loc[data['gchauf_3'] == 1] = 1
+            data.loc[data.gchauf_3 == 1, 'froid_cout'] = 1
             del data['gchauf_3']
 
             data['froid_isolation'] = 0
-            data['froid_isolation'].loc[data['gchauf_4'] == 1] = 1
+            data.loc[data.gchauf_4 == 1, 'froid_isolation'] = 1
             del data['gchauf_4']
 
             data['froid_impaye'] = 0
-            data['froid_impaye'].loc[data['gchauf_5'] == 1] = 1
+            data.loc[data.gchauf_5 == 1, 'froid_impaye'] = 1
             del data['gchauf_5']
 
         data['aides_logement'] = 0
-        data['aides_logement'].loc[data['aba'] == 1] = 1
+        data.loc[data['aba'] == 1, 'aides_logement'] = 1
 
         # Création d'une variable pour la part des dépenses totales en énergies
         # On néglige l'énergie thermique de BdF car les dépenses sont absentes de l'ENL
         energie_logement = ['depenses_combustibles_liquides', 'depenses_combustibles_solides',
             'depenses_electricite', 'depenses_gaz_liquefie', 'depenses_gaz_ville']
 
-        if 'option' == 'bdf':
+        if option == 'bdf':
             data['depenses_energies'] = 0
             for energie in energie_logement:
                 data['depenses_energies'] += data[energie]
             data['part_energies_depenses_tot'] = (
                 data['depenses_energies'] / data['depenses_tot']
-                ).copy()
+                )
 
-        data = data.query('revtot > 0')
+        assert 'depenses_energies' in data
+        assert 'revtot' in data
+
+        data = data.query('revtot > 0').copy()
         data['part_energies_revtot'] = (
             data['depenses_energies'] / data['revtot']
-            ).copy()
+            )
         # Suppression des outliers
         data = data.query('part_energies_revtot < 0.5').copy()
 
-        return data.copy()
+        return data
 
     return create_new_variables_(data_enl, option = 'enl'), create_new_variables_(data_bdf, option = 'bdf')
 

@@ -22,6 +22,5 @@ fused.nnd.m <- create.fused(
 )
 
 # Save it as csv
-write.csv(fused.nnd.m,
-          file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matched_rank.csv"
-)
+write.csv(fused.nnd.m, file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matched_rank.csv"
+  )
