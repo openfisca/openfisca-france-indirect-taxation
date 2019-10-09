@@ -1,7 +1,12 @@
-# Import data
+suppressPackageStartupMessages(library("configr"))
+suppressPackageStartupMessages(library("StatMatch"))
 
-data_matching_enl_path <- "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_enl.csv"
-data_matching_bdf_path <- "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_bdf.csv"
+config <- read.config(file = "~/.config/openfisca-survey-manager/config.ini")
+assets_directory = config$openfisca_france_indirect_taxation$assets
+
+# Import data
+data_matching_enl_path <- file.path(assets_directory, "/matching/data_matching_enl.csv")
+data_matching_bdf_path <- file.path(assets_directory, "/matching/data_matching_bdf.csv")
 
 data_enl <- read.csv(file = data_matching_enl_path, header = -1, sep=",")
 data_bdf <- read.csv(file = data_matching_bdf_path, header = -1, sep=",")
@@ -53,8 +58,5 @@ fused.nnd.m <- create.fused(
     )
 )
 
-data_matched_distance_path <- "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matched_distance.csv"
-# Save it as csv
-write.csv(fused.nnd.m,
-          file = data_matched_distance_path
-          )
+data_matched_distance_path <- file.path(assets_directory, "/matching/data_matched_distance.csv")
+write.csv(fused.nnd.m, file = data_matched_distance_path)

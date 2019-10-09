@@ -1,6 +1,12 @@
+suppressPackageStartupMessages(library("configr"))
+suppressPackageStartupMessages(library("StatMatch"))
+
+config <- read.config(file = "~/.config/openfisca-survey-manager/config.ini")
+assets_directory = config$openfisca_france_indirect_taxation$assets
+
 # Import data
-data_enl <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_enl.csv", header = -1, sep=",")
-data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_bdf.csv", header = -1, sep=",")
+data_enl <- read.csv(file = file.path(assets_directory, "/matching/data_matching_enl.csv"), header = -1, sep=",")
+data_bdf <- read.csv(file = file.path(assets_directory, "/matching/data_matching_bdf.csv"), header = -1, sep=",")
 
 # Compute random matching
 out.nnd <- RANDwNND.hotdeck(
@@ -25,5 +31,5 @@ fused.nnd.m <- create.fused(
 
 # Save it as csv
 write.csv(fused.nnd.m,
-          file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matched_random.csv"
+          file = file.path(assets_directory, "/matching/data_matched_random.csv"
 )

@@ -1,6 +1,6 @@
 # Import data
-data_erfs <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_erfs/data_matching_erfs.csv", header = -1, sep=",")
-data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_erfs/data_matching_bdf.csv", header = -1, sep=",")
+data_erfs <- read.csv(file = file.path(assets_directory, "/matching/matching_erfs/data_matching_erfs.csv"), header = -1, sep=",")
+data_bdf <- read.csv(file = file.path(assets_directory, "/matching/matching_erfs/data_matching_bdf.csv"), header = -1, sep=",")
 
 # Compute ranked matching
 out.nnd <- rankNND.hotdeck(
@@ -20,5 +20,5 @@ fused.nnd.m <- create.fused(
 
 # Save it as csv
 write.csv(fused.nnd.m,
-          file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_erfs/data_matched_rank.csv"
-)
+  file = file.path(assets_directory, "/matching/matching_erfs/data_matched_rank.csv")
+  )

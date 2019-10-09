@@ -6,6 +6,8 @@ On effectue au préalable les corrections nécessaires pour avoir des bases homo
 """
 
 from configparser import ConfigParser
+import datetime
+import subprocess
 import os
 
 
@@ -129,6 +131,18 @@ if __name__ == "__main__":
     data_bdf.to_csv(os.path.join(assets_directory, 'matching', 'data_matching_bdf.csv'), sep = ',')
     parser = ConfigParser()
     config_ini = os.path.join(config_files_directory, 'config.ini')
-    parser.read([config_ini])
-    parser.set("openfisca_france_indirect_taxation", "assets", assets_directory)
-    parser.write([config_ini])
+    parser.read(config_ini)
+
+    modifiedTime = os.path.getmtime(config_ini)
+    timestamp = datetime.datetime.fromtimestamp(modifiedTime).strftime("%b-%d-%Y_%H.%M.%S")
+    os.rename(config_ini, config_ini + "_" + timestamp)
+    try:
+        parser.add_section("openfisca_france_indirect_taxation")
+
+    finally:
+        parser.set("openfisca_france_indirect_taxation", "assets", assets_directory)
+        with open(config_ini, 'w') as configfile:
+            parser.write(configfile)
+
+    r_script_path = os.path.join(assets_directory, 'matching', 'matching_rank_bdf_enl.R')
+    subprocess.call(['Rscript', '--vanilla', r_script_path])
