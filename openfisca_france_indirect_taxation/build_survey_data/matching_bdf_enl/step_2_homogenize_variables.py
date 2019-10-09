@@ -34,7 +34,6 @@ def homogenize_variables_definition_bdf_enl():
 
     enl_provisoire = False
     data_enl, data_bdf = load_data_bdf_enl()
-
     # Vérification que les données ENL ne contiennent pas les DOM
     assert (data_enl['dom'] == 2).any()
     del data_enl['dom']
@@ -138,7 +137,7 @@ def homogenize_variables_definition_bdf_enl():
     del data_enl['msitua'], data_enl['msituac']
 
     # OCDE10 vs MUC1
-    data_enl['muc1'] = data_enl['muc1'].copy() / 10
+    data_enl['muc1'] = data_enl['muc1'] / 10
 
     # Nbh1
     data_bdf['nbh1'] = data_bdf['nbh1'].fillna(0)
@@ -173,10 +172,11 @@ def homogenize_variables_definition_bdf_enl():
     data_enl['poste_04_5_1_1_1'] = (data_enl['coml11']).copy()
 
     data_enl['depenses_combustibles_solides'] = (data_enl['coml41'] + data_enl['coml42']).copy()
+
     del data_enl['coml41'], data_enl['coml42']
 
     # zeat : dans BdF certains ménages ont 6 et aucun 9, alors que 6 n'existe pas
-    data_bdf.zeat.loc[data_bdf.zeat == 6] = 9
+    data_bdf.loc[data_bdf.zeat == 6, 'zeat'] = 9
 
     # Rename
     renaming = {
@@ -368,15 +368,15 @@ def create_niveau_vie_quantiles():
         population_totale = data['sum_pondmen'].max()
         data['niveau_vie_decile'] = 0
         for j in range(1, 11):
-            data.niveau_vie_decile.loc[data.sum_pondmen > population_totale * (float(j) / 10 - 0.1)] = j
+            data.loc[data.sum_pondmen > population_totale * (float(j) / 10 - 0.1), 'niveau_vie_decile'] = j
 
         data['niveau_vie_quintile'] = 0
         for j in range(1, 6):
-            data.niveau_vie_quintile.loc[data.sum_pondmen > population_totale * (float(j) / 5 - 0.2)] = j
+            data.loc[data.sum_pondmen > population_totale * (float(j) / 5 - 0.2), 'niveau_vie_quintile'] = j
 
         data = data.sort_index()
         del data['sum_pondmen']
-        return data.copy()
+        return data
 
     return create_niveau_vie_quantiles_(data_enl), create_niveau_vie_quantiles_(data_bdf)
 
