@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 
 
-import pandas as pd
-import pkg_resources
 import os
+import pandas as pd
+
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import (
     reforme_officielle_2018_in_2016
     )
+from openfisca_france_indirect_taxation.utils import assets_directory
+
 
 ###########
 #   WIP   #
@@ -109,13 +111,9 @@ elasticites_new.rename(columns={'index': 'ident_men'}, inplace = True)
 
 
 def create_data_elasticities_aidsills():
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     data_quaids = pd.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'quaids',
             'data_quaids_energy_no_alime_all.csv'
             ), sep =',')
@@ -136,22 +134,16 @@ def create_data_elasticities_aidsills():
     assert not dataframe.ident_men.duplicated().any(), 'Some housholds are duplicated'
 
     return dataframe.to_csv(os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'quaids',
         'data_elasticities_energy_no_alime_all.csv'
         ), sep =',')
 
 
 def get_elasticities_aidsills(year, non_positive):
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     data_elasticities = pd.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'quaids',
             'data_elasticities_energy_no_alime_all.csv'
             ), sep =',')

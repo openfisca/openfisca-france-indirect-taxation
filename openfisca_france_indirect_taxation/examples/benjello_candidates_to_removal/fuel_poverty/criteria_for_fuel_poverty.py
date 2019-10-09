@@ -5,27 +5,22 @@
 
 
 import os
-import pkg_resources
 
 import pandas as pd
 
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_4_clean_data import (
     clean_data)
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 data_enl = clean_data()[0]
 
 # Importation de la base de données appariée
-default_config_files_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-
 
 data_matched_random = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'data_matched_random.csv'
         ), sep =',', decimal = '.'
@@ -34,9 +29,7 @@ data_matched_random = pd.read_csv(
 
 data_matched_rank = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'data_matched_rank.csv'
         ), sep =',', decimal = '.'

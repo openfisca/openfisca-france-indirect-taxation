@@ -3,7 +3,6 @@
 
 import logging
 import os
-import pkg_resources
 import csv
 
 import pandas
@@ -44,12 +43,8 @@ def get_bdf_aggregates(data_year = None):
 
 def get_cn_aggregates(target_year = None):
     assert target_year is not None
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parametres_fiscalite_file_path = os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'legislation',
         'Parametres fiscalite indirecte.xls'
         )

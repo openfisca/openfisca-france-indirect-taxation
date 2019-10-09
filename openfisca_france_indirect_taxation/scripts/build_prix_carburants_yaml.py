@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
 
-import os
-import pkg_resources
-import pandas as pd
-from ruamel import yaml
-
 """
     Create yaml files for prix_carburants
 """
 
 
+import os
+import pandas as pd
+import pkg_resources
+from ruamel import yaml
+
+
+from openfisca_france_indirect_taxation.utils import assets_directory
+
+
 file_path = os.path.join(
-    pkg_resources.get_distribution('openfisca-france-indirect-taxation').location,
-    'openfisca_france_indirect_taxation',
-    'assets',
+    assets_directory,
     'prix',
     'prix_mensuel_carburants.csv'
     )

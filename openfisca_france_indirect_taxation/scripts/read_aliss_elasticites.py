@@ -3,15 +3,14 @@
 
 import os
 import pandas
-import pkg_resources
 
 from slugify import slugify
 
+from openfisca_france_indirect_taxation.utils import assets_directory
+
 
 elasticities_path = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-    'openfisca_france_indirect_taxation',
-    'assets',
+    assets_directory,
     'aliss',
     )
 

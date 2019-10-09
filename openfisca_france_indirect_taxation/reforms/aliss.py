@@ -13,6 +13,7 @@ from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable
 
 from openfisca_france_indirect_taxation.variables.base import get_legislation_data_frames, Menage
 
+from openfisca_france_indirect_taxation.utils import assets_directory
 from openfisca_france_indirect_taxation.variables.consommation.postes_coicop import generate_postes_agreges_variables
 from openfisca_france_indirect_taxation.variables.consommation.categories_fiscales import generate_variables
 from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss import (
@@ -32,9 +33,7 @@ aliss_assets_reform_directory = os.path.join(
     )
 
 legislation_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-    'openfisca_france_indirect_taxation',
-    'assets',
+    assets_directory,
     'legislation',
     )
 

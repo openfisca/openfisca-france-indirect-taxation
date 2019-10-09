@@ -3,7 +3,6 @@
 
 import logging
 import os
-import pkg_resources
 import pandas
 import numpy
 
@@ -31,6 +30,7 @@ from openfisca_france_indirect_taxation.build_survey_data.step_4_homogeneisation
 
 
 from openfisca_france_indirect_taxation.build_survey_data.utils import ident_men_dtype
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 log = logging.getLogger(__name__)
@@ -126,13 +126,9 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
     if year_data == 2011 and not skip_matching:
         try:
             # On apparie ajoute les données appariées de l'ENL et l'ENTD
-            default_config_files_directory = os.path.join(
-                pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
             data_matched = pandas.read_csv(
                 os.path.join(
-                    default_config_files_directory,
-                    'openfisca_france_indirect_taxation',
-                    'assets',
+                    assets_directory,
                     'matching',
                     'data_for_run_all.csv'
                     ), sep =',', decimal = '.'

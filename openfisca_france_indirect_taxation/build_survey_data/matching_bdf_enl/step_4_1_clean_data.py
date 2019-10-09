@@ -7,7 +7,6 @@ On effectue au préalable les corrections nécessaires pour avoir des bases homo
 
 from configparser import ConfigParser
 import os
-import pkg_resources
 
 
 from openfisca_survey_manager import default_config_files_directory as config_files_directory

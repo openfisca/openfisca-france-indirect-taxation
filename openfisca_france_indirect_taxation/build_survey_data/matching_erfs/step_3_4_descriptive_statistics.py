@@ -2,11 +2,11 @@
 
 
 import os
-import pkg_resources
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_2_homogenize_variables import (
     homogenize_definitions)
 import matplotlib.pyplot as plt
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 def graph_builder_dot(x_var, y_var):
@@ -41,5 +41,4 @@ print((
     ) / len(data_erfs))
 
 
-from openfisca_france_indirect_taxation.utils import assets_directory
 data_erfs.to_csv(os.path.join(assets_directory, 'to_graph', 'data_erfs.csv'), sep = ';')

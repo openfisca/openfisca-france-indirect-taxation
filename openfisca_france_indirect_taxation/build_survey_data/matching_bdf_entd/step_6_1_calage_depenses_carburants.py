@@ -5,19 +5,14 @@
 # des véhicules par type de ménage.
 
 import os
-import pkg_resources
 import pandas as pd
 
 # Importation des bases de données appariées et de la base de référence entd
-default_config_files_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 data_matched_distance = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'matching_entd',
         'data_matched_distance.csv'
@@ -27,9 +22,7 @@ data_matched_distance = pd.read_csv(
 
 data_matched_random = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'matching_entd',
         'data_matched_random.csv'
@@ -66,5 +59,5 @@ if __name__ == "__main__":
     data = calage_depenses_from_distance(data_matched_distance)
 
     # Sauvegarde des données dans des fichiers .csv
-    data.to_csv(os.path.join(default_config_files_directory, 'openfisca_france_indirect_taxation', 'assets',
+    data.to_csv(os.path.join(assets_directory,
         'matching', 'matching_entd', 'data_matched_final.csv'), sep = ',')

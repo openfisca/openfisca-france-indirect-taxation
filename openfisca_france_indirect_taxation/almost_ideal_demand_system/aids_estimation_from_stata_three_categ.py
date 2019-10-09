@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
-import pkg_resources
 import os
+
+from openfisca_france_indirect_taxation.utils import assets_directory
+
 
 # Import data_quaids to get the results of the estimation run on Stata.
 selection_elasticites = dict()
@@ -10,13 +12,9 @@ resultats_elasticite_depenses = dict()
 resultats_elasticite_uncomp = dict()
 resultats_elasticite_comp = dict()
 for year in ['energy_no_alime_all']:
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     data_quaids = pd.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'quaids',
             'data_quaids_{}.csv'.format(year)
             ), sep =',')

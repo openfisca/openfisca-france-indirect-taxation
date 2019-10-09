@@ -1,22 +1,16 @@
 
 
 import os
-import pkg_resources
 import pandas as pd
 
 from openfisca_france_indirect_taxation.build_survey_data.utils import \
     histogrammes
+from openfisca_france_indirect_taxation.utils import assets_directory
 
-
-default_config_files_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
 
 data_matched = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'matching_entd',
         'data_matched_final.csv'

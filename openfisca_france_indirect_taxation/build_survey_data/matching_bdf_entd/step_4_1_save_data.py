@@ -6,7 +6,6 @@
 
 
 import os
-import pkg_resources
 
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \

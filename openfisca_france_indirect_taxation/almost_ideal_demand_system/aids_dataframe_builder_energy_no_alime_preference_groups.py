@@ -4,7 +4,6 @@
 import pandas as pd
 import numpy as np
 import os
-import pkg_resources
 
 
 from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
@@ -272,11 +271,9 @@ for year in [2000, 2005, 2011]:
     data_frame_all_years['year_2000'] = 1 * (data_frame_all_years['year'] == 2000)
     data_frame_all_years['year_2005'] = 1 * (data_frame_all_years['year'] == 2005)
 
-    data_frame_for_reg.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quaids', 'data_frame_energy_no_alime_{}_preference_groups.csv'.format(year)), sep = ',')
+    data_frame_for_reg.to_csv(os.path.join(assets_directory, 'quaids', 'data_frame_energy_no_alime_{}_preference_groups.csv'.format(year)), sep = ',')
 
-data_frame_all_years.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quaids', 'data_frame_energy_no_alime_all_years_preference_groups.csv'), sep = ',')
+data_frame_all_years.to_csv(os.path.join(assets_directory, 'quaids', 'data_frame_energy_no_alime_all_years_preference_groups.csv'), sep = ',')
 
 dataframe['zeat'] = dataframe['zeat'].astype(int)
 dataframe['strate'] = dataframe['strate'].astype(int)

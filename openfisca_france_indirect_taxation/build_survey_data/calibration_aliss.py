@@ -6,7 +6,7 @@ import logging
 import numpy as np
 import os
 import pandas
-import pkg_resources
+
 
 try:
     from openfisca_survey_manager.survey_collections import SurveyCollection
@@ -15,7 +15,7 @@ try:
 except ImportError:
     SurveyCollection, config_files_directory, mark_weighted_percentiles, weighted_quantiles = None, None, None, None
 
-from openfisca_france_indirect_taxation.utils import get_input_data_frame
+from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
 from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
 
 
@@ -23,9 +23,7 @@ log = logging.getLogger(__name__)
 
 
 assets_path = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-    'openfisca_france_indirect_taxation',
-    'assets',
+    assets_directory,
     'aliss',
     )
 
@@ -422,9 +420,7 @@ def compute_expenditures_coefficient(reform_key = None):
     aliss_extract.drop_duplicates(inplace = True)
 
     legislation_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'legislation',
         )
     codes_coicop_data_frame = pandas.read_csv(

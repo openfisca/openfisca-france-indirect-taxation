@@ -11,54 +11,50 @@ probability distributions
 import pandas as pd
 
 import os
-import pkg_resources
 
 from openfisca_france_indirect_taxation.build_survey_data.utils import \
     hellinger
 
-# Importation des bases de données appariées et de la base de référence ENL
-default_config_files_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+from openfisca_france_indirect_taxation.utils import assets_directory
 
+# Importation des bases de données appariées et de la base de référence ENL
 
 data_enl = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'data_matching_enl.csv'
-        ), sep =',', decimal = '.'
+        ),
+    sep =',',
+    decimal = '.'
     )
 
 
 data_matched_distance = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'data_matched_distance.csv'
-        ), sep =',', decimal = '.'
+        ),
+    sep =',',
+    decimal = '.'
     )
 
 
 data_matched_random = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'data_matched_random.csv'
-        ), sep =',', decimal = '.'
+        ),
+    sep =',',
+    decimal = '.'
     )
 
 
 data_matched_rank = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'data_matched_rank.csv'
         ), sep =',', decimal = '.'

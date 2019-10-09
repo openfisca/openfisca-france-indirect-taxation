@@ -6,27 +6,23 @@
 # Cette décision se fait sur la base des résultats observés et ne dépend d'aucun critère précis.
 
 import os
-import pkg_resources
 import pandas as pd
 import seaborn
 
 
 from openfisca_france_indirect_taxation.build_survey_data.utils import \
     histogrammes, plots_by_group
+from openfisca_france_indirect_taxation.utils import assets_directory
+
 
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 
 # Importation des bases de données appariées et de la base de référence entd
-default_config_files_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-
 
 data_entd = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'matching_entd',
         'data_matching_entd.csv'
@@ -36,9 +32,7 @@ data_entd = pd.read_csv(
 
 data_matched_distance = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'matching_entd',
         'data_matched_distance.csv'
@@ -48,9 +42,7 @@ data_matched_distance = pd.read_csv(
 
 data_matched_random = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'matching_entd',
         'data_matched_random.csv'

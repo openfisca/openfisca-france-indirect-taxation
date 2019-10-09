@@ -4,10 +4,9 @@
 import datetime as dt
 import os
 import pandas as pd
-import pkg_resources
 
 
-from openfisca_france_indirect_taxation.utils import get_input_data_frame
+from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
 
 
 def date_to_vag(date):
@@ -22,13 +21,9 @@ def date_to_vag(date):
     return None
 
 
-default_config_files_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
 indice_prix_mensuel_98_2015 = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'prix',
         'indice_prix_mensuel_98_2015.csv'
         ), sep =';', decimal = ','
@@ -280,6 +275,4 @@ df_indice_prix_produit['indice_prix_produit'] = df_indice_prix_produit['bien'] +
 df_indice_prix_produit = df_indice_prix_produit.drop_duplicates(
     subset = ['indice_prix_produit'], keep = 'last')
 
-df_indice_prix_produit.to_csv(os.path.join(default_config_files_directory,
-    'openfisca_france_indirect_taxation', 'assets',
-    'prix', 'df_indice_prix_produit.csv'), sep = ';')
+df_indice_prix_produit.to_csv(os.path.join(assets_directory, 'prix', 'df_indice_prix_produit.csv'), sep = ';')

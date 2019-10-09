@@ -6,7 +6,6 @@
 # Cette décision se fait sur la base des résultats observés et ne dépend d'aucun critère précis.
 
 import os
-import pkg_resources
 import pandas as pd
 
 
@@ -14,15 +13,11 @@ from openfisca_france_indirect_taxation.examples.utils_example import save_dataf
 
 
 # Importation des bases de données appariées et de la base de référence entd
-default_config_files_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 data_entd = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'matching_entd',
         'data_matching_entd.csv'
@@ -32,9 +27,7 @@ data_entd = pd.read_csv(
 
 data_matched_distance = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'matching_entd',
         'data_matched_distance.csv'
@@ -44,9 +37,7 @@ data_matched_distance = pd.read_csv(
 
 data_matched_random = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'matching_entd',
         'data_matched_random.csv'

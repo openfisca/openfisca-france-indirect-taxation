@@ -4,21 +4,18 @@
 import numpy as np
 import os
 import pandas as pd
-import pkg_resources
 
 
 from openfisca_france_indirect_taxation.scripts import build_coicop_nomenclature
+from openfisca_france_indirect_taxation.utils import assets_directory
 
-legislation_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-    'openfisca_france_indirect_taxation',
-    'assets',
-    'legislation',
-    )
 
+legislation_directory = os.path.join(assets_directory, 'legislation')
 
 sub_levels = ['divisions', 'groupes', 'classes', 'sous_classes', 'postes']
-divisions = ['0{}'.format(i) for i in range(1, 10)] + ['11', '12']  # TODO: fix this
+
+divisions = ['0{}'.format(i) for i in range(1, 10)] + ['11', '12']
+
 taxe_by_categorie_fiscale_number = {
     0: '',
     1: 'tva_taux_super_reduit',
@@ -45,7 +42,7 @@ def extract_informations_from_coicop_to_categorie_fiscale():
         grouped = exceptions.groupby(
             by = [exceptions.annee - np.arange(exceptions.shape[0]), 'posteCOICOP', 'categoriefiscale']
             )
-        for k, g in grouped:
+        for _, g in grouped:
             print((
                 g.posteCOICOP.unique()[0], g.description.unique()[0], g.annee.min(), g.annee.max(),
                 taxe_by_categorie_fiscale_number[int(g.categoriefiscale.unique())]

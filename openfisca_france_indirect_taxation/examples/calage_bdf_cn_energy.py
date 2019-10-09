@@ -3,7 +3,6 @@
 
 import csv
 import os
-import pkg_resources
 
 
 import pandas as pd
@@ -84,12 +83,8 @@ def get_bdf_aggregates_energy(data_year = None):
 
 def get_cn_aggregates_energy(target_year = None):
     assert target_year is not None
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parametres_fiscalite_file_path = os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'legislation',
         'conso-eff-fonction.xls'
         )
@@ -120,12 +115,8 @@ def get_cn_aggregates_energy(target_year = None):
     masses_cn_energie.set_index('poste', inplace = True)
     masses_cn_energie = masses_cn_energie * 1e6
 
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parametres_fiscalite_file_path = os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'legislation',
         't_2101.xls'
         )

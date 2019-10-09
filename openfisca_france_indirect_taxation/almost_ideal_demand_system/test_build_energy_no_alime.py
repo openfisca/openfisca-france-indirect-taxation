@@ -3,7 +3,7 @@
 import pandas
 
 import os
-import pkg_resources
+
 
 # from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_dataframe_builder_energy_no_alime import \
 #    aggregates_data_frame, data_frame_for_reg#, df, df_depenses_prix

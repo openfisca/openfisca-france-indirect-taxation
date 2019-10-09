@@ -2,20 +2,17 @@
 
 
 import os
-import pkg_resources
 import pandas
 
 
-def main():
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+from openfisca_france_indirect_taxation.utils import assets_directory
 
+
+def main():
     # Seems to be produced by openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_rank_bdf_enl.R
     data_matched_enl = pandas.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'matching',
             'data_matched_rank.csv'
             ), sep =',', decimal = '.'
@@ -23,9 +20,7 @@ def main():
 
     data_matched_entd = pandas.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'matching',
             'matching_entd',
             'data_matched_final.csv'
@@ -34,9 +29,7 @@ def main():
 
     data_matched_erfs = pandas.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'matching',
             'matching_erfs',
             'data_matched_rank.csv'
@@ -92,7 +85,7 @@ def main():
     data_frame = data_frame.fillna(0)
 
     data_frame.to_csv(
-        os.path.join(default_config_files_directory, 'openfisca_france_indirect_taxation', 'assets', 'matching', 'data_for_run_all.csv'),
+        os.path.join(assets_directory, 'matching', 'data_for_run_all.csv'),
         sep = ','
         )
     return

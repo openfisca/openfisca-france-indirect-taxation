@@ -4,7 +4,6 @@
 
 
 import csv
-import pkg_resources
 import os
 
 # Import de modules spécifiques à Openfisca

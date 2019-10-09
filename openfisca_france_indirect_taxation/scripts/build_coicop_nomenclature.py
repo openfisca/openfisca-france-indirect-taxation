@@ -4,19 +4,16 @@
 import logging
 import os
 import pandas as pd
-import pkg_resources
 
 
 from openfisca_survey_manager.coicop import build_raw_coicop_nomenclature
-
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 log = logging.getLogger(__name__)
 
 
 legislation_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-    'openfisca_france_indirect_taxation',
-    'assets',
+    assets_directory,
     'legislation',
     )
 

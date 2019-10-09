@@ -7,7 +7,6 @@
 
 
 from pandas import concat
-import pkg_resources
 import os
 import pandas as pd
 

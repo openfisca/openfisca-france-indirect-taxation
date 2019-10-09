@@ -7,9 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from matplotlib.ticker import FuncFormatter
 import os
-import pkg_resources
 import numpy as np
-
 
 
 from openfisca_france_indirect_taxation.utils import assets_directory

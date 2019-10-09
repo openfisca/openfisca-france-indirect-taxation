@@ -4,7 +4,6 @@
 import pandas as pd
 import numpy as np
 import os
-import pkg_resources
 
 
 from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame

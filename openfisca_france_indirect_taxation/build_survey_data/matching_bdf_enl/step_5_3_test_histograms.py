@@ -6,58 +6,54 @@
 # Cette décision se fait sur la base des résultats observés et ne dépend d'aucun critère précis.
 
 import os
-import pkg_resources
 import pandas as pd
 
 from openfisca_france_indirect_taxation.build_survey_data.utils import \
     histogrammes
-
+from openfisca_france_indirect_taxation.utils import assets_directory
 # Importation des bases de données appariées et de la base de référence ENL
-default_config_files_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-
 
 data_enl = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'data_matching_enl.csv'
-        ), sep =',', decimal = '.'
+        ),
+    sep =',',
+    decimal = '.'
     )
 
 
 data_matched_distance = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'data_matched_distance.csv'
-        ), sep =',', decimal = '.'
+        ),
+    sep =',',
+    decimal = '.'
     )
 
 
 data_matched_random = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'data_matched_random.csv'
-        ), sep =',', decimal = '.'
+        ),
+    sep =',',
+    decimal = '.'
     )
 
 
 data_matched_rank = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'data_matched_rank.csv'
-        ), sep =',', decimal = '.'
+        ),
+    sep =',',
+    decimal = '.'
     )
 
 

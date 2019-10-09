@@ -1,24 +1,20 @@
 # -*- coding: utf-8 -*-
 
 import os
-import pkg_resources
 import pandas as pd
 
 from openfisca_france_indirect_taxation.variables.base import ParameterNode
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 def preprocess_legislation(parameters):
     '''
     Preprocess the legislation parameters to add prices and amounts from national accounts
     '''
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
 
     prix_annuel_carburants = pd.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'prix',
             'prix_annuel_carburants.csv'
             ), sep =','
@@ -90,9 +86,7 @@ def preprocess_legislation(parameters):
     # Add the number of vehicle in circulation to the tree
     parc_annuel_moyen_vp = pd.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'quantites',
             'parc_annuel_moyen_vp.csv'
             ), sep =','
@@ -125,9 +119,7 @@ def preprocess_legislation(parameters):
     # Add the total quantity of fuel consumed per year to the tree
     quantite_carbu_vp_france = pd.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'quantites',
             'quantite_carbu_vp_france.csv'
             ), sep =','
@@ -159,9 +151,7 @@ def preprocess_legislation(parameters):
     # Add the shares of each type of supercabrurant (SP95, SP98, E10, etc.) among supercarburants
     part_des_types_de_supercarburants = pd.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'part_des_types_de_supercarburants.csv'
             ), sep =';'
         )

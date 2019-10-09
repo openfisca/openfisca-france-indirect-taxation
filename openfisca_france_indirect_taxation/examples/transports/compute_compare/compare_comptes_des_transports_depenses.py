@@ -6,7 +6,6 @@
 # Import de modules généraux
 
 
-import pkg_resources
 import os
 import pandas as pd
 from pandas import concat

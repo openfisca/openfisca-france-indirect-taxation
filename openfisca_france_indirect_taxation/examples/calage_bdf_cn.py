@@ -9,13 +9,13 @@
 
 import logging
 import os
-import pkg_resources
 
 import pandas
 from pandas import concat
 
 # Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.build_survey_data.utils import ident_men_dtype
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 log = logging.getLogger(__name__)
@@ -122,12 +122,8 @@ def get_cn_data_frames(year_data = None, year_calage = None):
     if year_calage is None:
         year_calage = year_data
 
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parametres_fiscalite_file_path = os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'legislation',
         'Parametres fiscalite indirecte.xls'
         )
@@ -194,12 +190,8 @@ def build_depenses_calees(depenses, year_calage, year_data):
 
 def build_revenus_cales(revenus, year_calage, year_data):
     # Masses de calage provenant de la comptabilité nationale
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parametres_fiscalite_file_path = os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'legislation',
         'Parametres fiscalite indirecte.xls',
         )
@@ -268,12 +260,8 @@ def build_df_calee_on_ticpe(dataframe, year_calage = None, year_data = None):
         year_calage = year_data
     dataframe_calee = build_df_calee_on_grospostes(dataframe, year_calage, year_data)
 
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parametres_fiscalite_file_path = os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'legislation',
         'Parametres fiscalite indirecte.xls'
         )

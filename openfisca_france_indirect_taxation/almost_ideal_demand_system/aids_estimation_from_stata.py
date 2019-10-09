@@ -2,18 +2,16 @@
 
 
 import pandas as pd
-import pkg_resources
 import os
 
 
+from openfisca_france_indirect_taxation.utils import assets_directory
+
+
 def create_data_elasticities():
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     data_quaids = pd.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'quaids',
             'data_quaids_energy_no_alime_all.csv'
             ), sep =',')
@@ -42,22 +40,16 @@ def create_data_elasticities():
     assert not dataframe.ident_men.duplicated().any(), 'Some housholds are duplicated'
 
     return dataframe.to_csv(os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'quaids',
         'data_elasticities_energy_no_alime_all.csv'
         ), sep =',')
 
 
 def get_elasticities(year):
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     data_elasticities = pd.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'quaids',
             'data_elasticities_energy_no_alime_all.csv'
             ), sep =',')
@@ -77,13 +69,9 @@ def test():
     borne_inferieure_el_dep = dict()
     borne_superieure_el_dep = dict()
     for year in ['all', 'all_no_elect_only']:
-        default_config_files_directory = os.path.join(
-            pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
         data_quaids = pd.read_csv(
             os.path.join(
-                default_config_files_directory,
-                'openfisca_france_indirect_taxation',
-                'assets',
+                assets_directory,
                 'quaids',
                 'data_quaids_{}.csv'.format(year)
                 ),
@@ -107,13 +95,11 @@ def test():
         for i in range(1, 5):
             borne_superieure_el_dep['borne_sup_{0}_{1}'.format(i, year)] = (
                 resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] + 1.96
-                * (data_quaids['elas_exp_{}'.format(i)].describe()['std']
-/ len(data_quaids['elas_exp_{}'.format(i)]) ** 0.5)
+                * (data_quaids['elas_exp_{}'.format(i)].describe()['std'] / len(data_quaids['elas_exp_{}'.format(i)]) ** 0.5)
                 )
             borne_inferieure_el_dep['borne_inf_{0}_{1}'.format(i, year)] = (
                 resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] - 1.96
-                * (data_quaids['elas_exp_{}'.format(i)].describe()['std']
-/ len(data_quaids['elas_exp_{}'.format(i)]) ** 0.5)
+                * (data_quaids['elas_exp_{}'.format(i)].describe()['std'] / len(data_quaids['elas_exp_{}'.format(i)]) ** 0.5)
                 )
 
         for i in range(1, 5):

@@ -6,7 +6,6 @@
 # Cette décision se fait sur la base des résultats observés et ne dépend d'aucun critère précis.
 
 import os
-import pkg_resources
 import pandas as pd
 import seaborn
 
@@ -14,19 +13,17 @@ import seaborn
 from openfisca_france_indirect_taxation.examples.utils_example import (
     graph_builder_bar, save_dataframe_to_graph)
 
+
+from openfisca_france_indirect_taxation.utils import assets_directory
+
+
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 
 # Importation des bases de données appariées et de la base de référence entd
-default_config_files_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
-
-
 data_enl = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'data_matching_enl.csv'
         ), sep =',', decimal = '.'
@@ -34,9 +31,7 @@ data_enl = pd.read_csv(
 
 data_matched_enl = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'data_matched_rank.csv'
         ), sep =',', decimal = '.'
@@ -45,9 +40,7 @@ data_matched_enl = pd.read_csv(
 
 data_entd = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'matching_entd',
         'data_matching_entd.csv'
@@ -57,9 +50,7 @@ data_entd = pd.read_csv(
 
 data_matched_entd = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'matching_entd',
         'data_matched_distance.csv'
@@ -68,9 +59,7 @@ data_matched_entd = pd.read_csv(
 
 data_matched_final_entd = pd.read_csv(
     os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'matching',
         'matching_entd',
         'data_matched_final.csv'

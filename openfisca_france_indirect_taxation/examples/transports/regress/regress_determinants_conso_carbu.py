@@ -15,12 +15,13 @@
 import statsmodels.formula.api as smf
 import numpy as np
 import pandas as pd
-import pkg_resources
 import os
 
 from openfisca_france_indirect_taxation.examples.utils_example import simulate_df_calee_on_ticpe
 from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get_accises import \
     get_accise_ticpe_majoree
+from openfisca_france_indirect_taxation.utils import assets_directory
+
 
 if __name__ == '__main__':
     import logging
@@ -99,13 +100,9 @@ if __name__ == '__main__':
         # For each household we now have the quantity of fuel consumed in litres. This is our dependant variable.
         # We will now construct a dataframe including the explanatory variables. We especially need prices.
 
-        default_config_files_directory = os.path.join(
-            pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
         prix_carbu = pd.read_csv(
             os.path.join(
-                default_config_files_directory,
-                'openfisca_france_indirect_taxation',
-                'assets',
+                assets_directory,
                 'prix',
                 'prix_mensuel_carbu_match_to_vag.csv'
                 ), sep =';', decimal = ','
@@ -148,7 +145,7 @@ if __name__ == '__main__':
         # We will now introduce an instrumental variable to correct for the endogeneity of expenditures.
 
         data_log['loyer'] = data_log['poste_coicop_411'] + data_log['poste_coicop_412'] + data_log['poste_coicop_421']
-        data_log.to_csv(os.path.join(default_config_files_directory, 'openfisca_france_indirect_taxation', 'assets',
+        data_log.to_csv(os.path.join(assets_directory,
             'quaids', 'data_regression.csv'), sep = ',')
         # model = \
         #    gmm.IV2SLS(data_log['ln_rev_disponible'], data_log['ln_quantite_carbu'], data_log['loyer']).fit()
