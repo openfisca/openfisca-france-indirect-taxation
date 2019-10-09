@@ -1,10 +1,14 @@
- - name: "Test différents taux de TVA "
-   period: "2013"
-   input:
-     poste_06_1_1_1_1: 100  # tva_taux_super_reduit mais non imposé dans réforme
-     poste_09_5_2_1_1: 100  # tva_taux_super_reduit
-     poste_02_1_2_1_1: 100  # vin mais non imposé dans réforme (catégorie fiscale inexistante)
+- name: "Test différents taux de TVA "
+  reforms:
+  - openfisca_france_indirect_taxation.reforms.alimentation.reforme_alimentation
+  period: "2013"
+  absolute_error_margin: .001
+  input:
+    poste_06_1_1_1_1: 100  # tva_taux_super_reduit mais non imposé dans réforme
+    poste_09_5_2_1_1: 100  # tva_taux_super_reduit
+    poste_02_1_2_1_1: 100  # vin mais non imposé dans réforme (catégorie fiscale inexistante)
+    depenses_ht_vin: 100
 
-   output:
-     depenses_vin: 0
-     tva_taux_super_reduit: 100 * 0.021 / (1 + 0.021)
+  output:
+    depenses_vin: 100 / (1 + 0.196)
+    tva_taux_super_reduit: 100 * 0.021 / (1 + 0.021)
