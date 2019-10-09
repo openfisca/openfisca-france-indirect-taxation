@@ -16,9 +16,9 @@ class depenses_essence_ajustees(YearlyVariable):
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
         reforme_essence = parameters(period.start).rattrapage_diesel.essence
         carburants_elasticite_prix = menage('elas_price_1_1', period)
-        depenses_essence_ajustees = \
+        depenses_essence_ajustees = (
             depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
-
+            )
         return depenses_essence_ajustees
 
 
