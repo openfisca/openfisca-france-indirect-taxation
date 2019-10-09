@@ -3,7 +3,7 @@
 import os
 
 
-from configparser import SafeConfigParser
+from configparser import ConfigParser
 import logging
 import pandas
 
@@ -81,10 +81,9 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         imput00.maison = 1 - ((imput00.cc == 4) & (imput00.catsurf == 1) & (imput00.maison_appart == 1))
 
         try:
-            parser = SafeConfigParser()
-            config_local_ini = os.path.join(config_files_directory, 'config_local.ini')
+            parser = ConfigParser()
             config_ini = os.path.join(config_files_directory, 'config.ini')
-            parser.read([config_ini, config_local_ini])
+            parser.read([config_ini])
             directory_path = os.path.normpath(
                 parser.get("openfisca_france_indirect_taxation", "assets")
                 )

@@ -41,8 +41,5 @@ print((
     ) / len(data_erfs))
 
 
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
-data_erfs.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets', 'to_graph',
-    'data_erfs.csv'), sep = ';')
+from openfisca_france_indirect_taxation.utils import assets_directory
+data_erfs.to_csv(os.path.join(assets_directory, 'to_graph', 'data_erfs.csv'), sep = ';')

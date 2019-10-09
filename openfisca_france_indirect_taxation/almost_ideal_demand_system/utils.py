@@ -6,8 +6,10 @@ import pkg_resources
 import pandas as pd
 import numpy as np
 
+
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_survey_manager.survey_collections import SurveyCollection
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 def add_area_dummy(dataframe):
@@ -149,12 +151,11 @@ def price_carbu_from_quantities(dataframe, year):
 
 
 def price_energy_from_contracts(dataframe, year):
-    assets_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-        )
-    prix_contrats = pd.read_csv(os.path.join(assets_directory,
-        'openfisca_france_indirect_taxation', 'assets', 'prix',
-        'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)))
+    prix_contrats = pd.read_csv(os.path.join(
+        assets_directory,
+        'prix',
+        'prix_unitaire_gaz_electricite_par_menage_{}.csv'.format(year)
+        ))
     prix_contrats['identifiant_menage'] = prix_contrats['identifiant_menage'].astype(str)
     moyenne_prix_gaz = \
         prix_contrats.query('depenses_gaz_prix_unitaire > 0').depenses_gaz_prix_unitaire.mean()

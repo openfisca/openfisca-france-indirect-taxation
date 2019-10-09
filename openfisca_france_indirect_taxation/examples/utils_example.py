@@ -11,8 +11,9 @@ import pkg_resources
 import numpy as np
 
 
+
+from openfisca_france_indirect_taxation.utils import assets_directory
 from openfisca_france_indirect_taxation.surveys import (
-    # get_input_data_frame,
     SurveyScenario,
     )
 
@@ -329,10 +330,7 @@ def precarite(data, brde, tee, logement):
 
 
 def save_dataframe_to_graph(dataframe, file_name):
-    assets_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-        )
-    return dataframe.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets', 'to_graph',
+    return dataframe.to_csv(os.path.join(assets_directory, 'to_graph',
         file_name), sep = ';')
 
 

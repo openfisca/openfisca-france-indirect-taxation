@@ -8,16 +8,13 @@ import pkg_resources
 # from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_dataframe_builder_energy_no_alime import \
 #    aggregates_data_frame, data_frame_for_reg#, df, df_depenses_prix
 
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
+
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 df_indice_prix_produit = pandas.read_csv(
     os.path.join(
         assets_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
         'prix',
         'df_indice_prix_produit.csv'
         ), sep =';', decimal = ','
@@ -27,8 +24,6 @@ df_indice_prix_produit.set_index('Unnamed: 0', inplace = True)
 data_frame_for_reg_2011 = pandas.read_csv(
     os.path.join(
         assets_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
         'quaids',
         'data_frame_energy_no_alime_2011.csv'
         ), sep =','

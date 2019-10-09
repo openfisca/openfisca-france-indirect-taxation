@@ -7,16 +7,12 @@ import os
 import pkg_resources
 
 
-from openfisca_france_indirect_taxation.utils import get_input_data_frame
+from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import \
     add_area_dummy, add_vag_dummy, indices_prix_carbus, price_carbu_pond
 
-
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
 
 # On importe la dataframe qui recense les indices de prix. Notre objectif est de construire une nouvelle dataframe avec
 # le reste des informations, i.e. la consommation et autres variables pertinentes concernant les ménages.
@@ -197,11 +193,9 @@ for year in [2000, 2005, 2011]:
     data_frame_all_years = pd.concat([data_frame_all_years, data_frame_for_reg])
     data_frame_all_years.fillna(0, inplace = True)
 
-    data_frame_for_reg.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quaids', 'data_frame_carbu_{}.csv'.format(year)), sep = ',')
+    data_frame_for_reg.to_csv(os.path.join(assets_directory, 'quaids', 'data_frame_carbu_{}.csv'.format(year)), sep = ',')
 
-data_frame_all_years.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quaids', 'data_frame_carbu_all_years.csv'), sep = ',')
+data_frame_all_years.to_csv(os.path.join(assets_directory, 'quaids', 'data_frame_carbu_all_years.csv'), sep = ',')
 
 # Must correct what is useless, improve demographics : dip14
 # dip14 : use only dip14pr (good proxy for dip14cj anyway), but change the nomenclature to have just 2 or 3 dummies

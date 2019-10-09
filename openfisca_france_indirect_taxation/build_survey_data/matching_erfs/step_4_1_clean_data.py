@@ -10,10 +10,7 @@ import pkg_resources
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_2_homogenize_variables import \
     homogenize_definitions
-
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 def create_donation_classes():
@@ -35,7 +32,5 @@ def create_donation_classes():
 data_erfs, data_bdf = create_donation_classes()
 
 # Sauvegarde des données dans des fichiers .csv
-data_erfs.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'matching', 'matching_erfs', 'data_matching_erfs.csv'), sep = ',')
-data_bdf.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'matching', 'matching_erfs', 'data_matching_bdf.csv'), sep = ',')
+data_erfs.to_csv(os.path.join(assets_directory, 'matching', 'matching_erfs', 'data_matching_erfs.csv'), sep = ',')
+data_bdf.to_csv(os.path.join(assets_directory, 'matching', 'matching_erfs', 'data_matching_bdf.csv'), sep = ',')

@@ -14,22 +14,24 @@ import seaborn
 
 # Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line
-
+from openfisca_france_indirect_taxation.utils import assets_directory
 # Import d'une nouvelle palette de couleurs
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 # Import des fichiers csv donnant les montants agrégés des dépenses répertoriées dans les enquêtes BdF.
 # Ces montants sont calculés dans compute_depenses_carburants
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
 
 products = ['transports', 'carburants', 'essence', 'diesel']
 depenses_bdf = pd.DataFrame()
 for element in products:
-    depenses = pd.read_csv(os.path.join(assets_directory,
-            'openfisca_france_indirect_taxation', 'assets', 'depenses',
-            'depenses_{}_totales_bdf.csv').format(element), sep = ',', header = -1)
+    depenses = pd.read_csv(
+        os.path.join(
+            assets_directory,
+            'depenses',
+            'depenses_{}_totales_bdf.csv').format(element),
+        sep = ',',
+        header = -1
+        )
     depenses.rename(columns = {1: '{} bdf'.format(element)}, inplace = True)
     depenses.index = depenses.index.str.replace('en ', '')
     depenses = depenses.sort_index()
@@ -40,8 +42,6 @@ depenses_bdf.index = depenses_bdf.index.astype(int)
 # Import des fichiers csv donnant les montants agrégés des mêmes postes d'après la comptabilité nationale
 parametres_fiscalite_file_path = os.path.join(
     assets_directory,
-    'openfisca_france_indirect_taxation',
-    'assets',
     'legislation',
     'Parametres fiscalite indirecte.xls'
     )

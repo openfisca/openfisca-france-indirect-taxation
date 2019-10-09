@@ -11,10 +11,7 @@ import pkg_resources
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
-
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 def clean_data():
@@ -71,8 +68,6 @@ if __name__ == "__main__":
     # Sauvegarde des données dans des fichiers .csv
     matching_entd_directory = os.path.join(
         assets_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
         'matching',
         'matching_entd'
         )

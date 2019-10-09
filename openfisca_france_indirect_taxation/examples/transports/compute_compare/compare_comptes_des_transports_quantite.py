@@ -13,32 +13,41 @@ from pandas import concat
 import seaborn
 
 # Import de modules spécifiques à Openfisca
+
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line
+from openfisca_france_indirect_taxation.utils import assets_directory
+
 
 # Import d'une nouvelle palette de couleurs
 seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 # Import des fichiers csv donnant les montants agrégés des quantités consommées répertoriées dans les enquêtes BdF.
 # Ces montants sont calculés dans compute_quantite_carburants
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
 
 quantite_bdf = pd.DataFrame()
 produits = ['carburants', 'diesel', 'essence']
 for element in produits:
-    quantite = pd.read_csv(os.path.join(assets_directory,
-            'openfisca_france_indirect_taxation', 'assets', 'quantites',
-            'quantites_{}_consommees_bdf.csv'.format(element)), sep = ',', header = -1)
+    quantite = pd.read_csv(
+        os.path.join(
+            assets_directory,
+            'quantites',
+            'quantites_{}_consommees_bdf.csv'.format(element)),
+        sep = ',',
+        header = -1,
+        )
     quantite.rename(columns = {1: '{} bdf'.format(element)}, inplace = True)
     quantite.index = quantite.index.str.replace('en milliers de m3 en ', '')
     quantite = quantite.sort_index()
     quantite_bdf = concat([quantite, quantite_bdf], axis = 1)
 
 # Import des fichiers csv donnant les quantités agrégées d'après la comptabilité nationale.
-quantite_carbu_vp_france = pd.read_csv(os.path.join(assets_directory,
-        'openfisca_france_indirect_taxation', 'assets', 'quantites',
-        'quantite_carbu_vp_france.csv'), sep = ',')
+quantite_carbu_vp_france = pd.read_csv(
+    os.path.join(
+        assets_directory,
+        'quantites',
+        'quantite_carbu_vp_france.csv'),
+    sep = ','
+    )
 quantite_carbu_vp_france['Unnamed: 0'] = quantite_carbu_vp_france['Unnamed: 0'].astype(str)
 quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('Unnamed: 0')
 quantite_carbu_vp_france.rename(columns = {'essence': 'essence agregat'}, inplace = True)

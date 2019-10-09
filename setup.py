@@ -58,6 +58,7 @@ setup(
         'PyYAML >= 3.10',
         "numpy >= 1.11, <1.16",  # openfisca-survey-manager deps and https://github.com/openfisca/openfisca-survey-manager/pull/79            'pandas >= 0.17',
         "pandas <= 0.24.2",
+        "statsmodels >= 0.10.1, <1.0",
         ],
     packages = find_packages(),
     )

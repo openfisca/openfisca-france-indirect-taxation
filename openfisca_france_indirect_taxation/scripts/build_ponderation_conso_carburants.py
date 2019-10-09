@@ -6,6 +6,7 @@ import pkg_resources
 import os
 
 from ipp_macro_series_parser.agregats_transports.poids_carburants.poids_carburants_cleaner import consommation, parc_auto
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 parc_annuel_moyen_vp = parc_auto[parc_auto['categorie'] == 'Voitures particulières']
@@ -26,12 +27,7 @@ quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('categorie')
 quantite_carbu_vp_france = quantite_carbu_vp_france.transpose()
 quantite_carbu_vp_france.columns = ['essence', 'diesel']
 
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
 
-parc_annuel_moyen_vp.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quantites', 'parc_annuel_moyen_vp.csv'), sep = ',')
+parc_annuel_moyen_vp.to_csv(os.path.join(assets_directory, 'quantites', 'parc_annuel_moyen_vp.csv'), sep = ',')
 
-quantite_carbu_vp_france.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quantites', 'quantite_carbu_vp_france.csv'), sep = ',')
+quantite_carbu_vp_france.to_csv(os.path.join(assets_directory, 'quantites', 'quantite_carbu_vp_france.csv'), sep = ',')

@@ -5,16 +5,16 @@ Ils seront ensuite importées dans R pour l'appariement.
 On effectue au préalable les corrections nécessaires pour avoir des bases homogènes.
 """
 
+from configparser import ConfigParser
 import os
 import pkg_resources
 
 
-from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_2_homogenize_variables import \
-    create_niveau_vie_quantiles
+from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_2_homogenize_variables import (
+    create_niveau_vie_quantiles)
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 def clean_data():
@@ -126,7 +126,10 @@ if __name__ == "__main__":
     # dico = check_donation_classes_size(data_enl, 'donation_class_4')
 
     # Sauvegarde des données dans des fichiers .csv
-    data_enl.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'matching', 'data_matching_enl.csv'), sep = ',')
-    data_bdf.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'matching', 'data_matching_bdf.csv'), sep = ',')
+    data_enl.to_csv(os.path.join(assets_directory, 'matching', 'data_matching_enl.csv'), sep = ',')
+    data_bdf.to_csv(os.path.join(assets_directory, 'matching', 'data_matching_bdf.csv'), sep = ',')
+    parser = ConfigParser()
+    config_ini = os.path.join(config_files_directory, 'config.ini')
+    parser.read([config_ini])
+    parser.set("openfisca_france_indirect_taxation", "assets", assets_directory)
+    parser.write([config_ini])

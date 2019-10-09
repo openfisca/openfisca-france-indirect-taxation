@@ -12,7 +12,7 @@ import os
 from openfisca_france_indirect_taxation.examples.utils_example import simulate_df_calee_on_ticpe
 from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get_accises import \
     get_accise_ticpe_majoree
-
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 if __name__ == '__main__':
     import logging
@@ -81,21 +81,14 @@ if __name__ == '__main__':
         quantites_essence_consommees['en milliers de m3 en {}'.format(year)] = quantite_essence / 1e6
 
     # Enregistrement des montants agrégées dans des fichiers csv
-    assets_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-        )
-
-    writer_carburants = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'quantites', 'quantites_carburants_consommees_bdf.csv'), 'wb'))
+    writer_carburants = csv.writer(open(os.path.join(assets_directory, 'quantites', 'quantites_carburants_consommees_bdf.csv'), 'wb'))
     for key, value in list(quantites_carburants_consommees.items()):
         writer_carburants.writerow([key, value])
 
-    writer_diesel = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'quantites', 'quantites_diesel_consommees_bdf.csv'), 'wb'))
+    writer_diesel = csv.writer(open(os.path.join(assets_directory, 'quantites', 'quantites_diesel_consommees_bdf.csv'), 'wb'))
     for key, value in list(quantites_diesel_consommees.items()):
         writer_diesel.writerow([key, value])
 
-    writer_essence = csv.writer(open(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-        'quantites', 'quantites_essence_consommees_bdf.csv'), 'wb'))
+    writer_essence = csv.writer(open(os.path.join(assets_directory, 'quantites', 'quantites_essence_consommees_bdf.csv'), 'wb'))
     for key, value in list(quantites_essence_consommees.items()):
         writer_essence.writerow([key, value])

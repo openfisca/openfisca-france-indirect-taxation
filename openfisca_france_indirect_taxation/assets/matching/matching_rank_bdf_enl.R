@@ -1,6 +1,8 @@
 # Import data
-data_enl <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_enl.csv", header = -1, sep=",")
-data_bdf <- read.csv(file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_bdf.csv", header = -1, sep=",")
+data_enl <- read.csv(
+  file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_enl.csv", header = -1, sep=",")
+data_bdf <- read.csv(
+  file = "C:/Users/Thomas/Documents/GitHub/openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/data_matching_bdf.csv", header = -1, sep=",")
 
 # Compute ranked matching
 out.nnd <- rankNND.hotdeck(

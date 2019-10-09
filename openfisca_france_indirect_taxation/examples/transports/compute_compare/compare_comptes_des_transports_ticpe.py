@@ -17,15 +17,14 @@ from ipp_macro_series_parser.agregats_transports.transports_cleaner import g_3a
 from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get_accises import \
     get_accise_ticpe_majoree
 
+from openfisca_france_indirect_taxation.utils import assets_directory
+
 """Ici on applique aux quantités de carburants consommées par des véhicules autres que les ménages
 la ticpe à taux plein. En réalité, un certain nombre d'exonération s'appliquent pour les professionels.
 On calcul donc simplement une borne supérieure des recettes engendrées"""
 
 # Import des fichiers csv donnant les montants agrégés des dépenses en TICPE d'après les enquêtes BdF.
 # Ces montants sont calculés dans compute_depenses_ticpe
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
 
 products = ['totales', 'essence', 'diesel']
 depenses_ticpe_bdf = pd.DataFrame()
@@ -33,7 +32,7 @@ for element in products:
     depenses_ticpe = pd.read_csv(
         os.path.join(
             assets_directory,
-            'openfisca_france_indirect_taxation', 'assets', 'depenses',
+            'depenses',
             'depenses_ticpe_{}_bdf.csv'.format(element)),
         sep = ',',
         header = -1

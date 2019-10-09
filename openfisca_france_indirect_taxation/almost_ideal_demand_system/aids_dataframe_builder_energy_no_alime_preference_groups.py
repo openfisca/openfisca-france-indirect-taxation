@@ -7,7 +7,7 @@ import os
 import pkg_resources
 
 
-from openfisca_france_indirect_taxation.utils import get_input_data_frame
+from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import (
     add_area_dummy, add_niveau_vie_decile, add_stalog_dummy, add_vag_dummy,
     electricite_only, indices_prix_carbus, price_carbu_pond,
@@ -15,15 +15,9 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import 
     )
 
 
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
-
 df_indice_prix_produit = pd.read_csv(
     os.path.join(
         assets_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
         'prix',
         'df_indice_prix_produit.csv'
         ),

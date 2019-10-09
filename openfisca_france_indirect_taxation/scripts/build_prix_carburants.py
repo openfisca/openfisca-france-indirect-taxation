@@ -8,6 +8,8 @@ import os
 from ipp_macro_series_parser.agregats_transports.poids_carburants.parser_cleaner_prix_carburants import prix_annuel_carburants_90_16, \
     prix_mensuel_carburants_90_17
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import date_to_vag
+from openfisca_france_indirect_taxation.utils import assets_directory
+
 
 # We will create three csv files. One for annual data, two other for monthly data.
 # The one match_to_vag will match prices to vagues.
@@ -34,13 +36,7 @@ prix_mensuel_carbu_match_to_vag['vag'] = prix_mensuel_carbu_match_to_vag['vag'].
 prix_mensuel_carbu_match_to_vag = prix_mensuel_carbu_match_to_vag.set_index('vag')
 prix_mensuel_carbu_match_to_vag = prix_mensuel_carbu_match_to_vag.drop(['annee', 'mois', 'date'], axis = 1)
 
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
 
-prix_annuel_carburants_90_16.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'prix', 'prix_annuel_carburants.csv'), sep = ',')
-prix_mensuel_carburants_90_17.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'prix', 'prix_mensuel_carburants.csv'), sep = ',')
-prix_mensuel_carbu_match_to_vag.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'prix', 'prix_mensuel_carbu_match_to_vag.csv'), sep = ',')
+prix_annuel_carburants_90_16.to_csv(os.path.join(assets_directory, 'prix', 'prix_annuel_carburants.csv'), sep = ',')
+prix_mensuel_carburants_90_17.to_csv(os.path.join(assets_directory, 'prix', 'prix_mensuel_carburants.csv'), sep = ',')
+prix_mensuel_carbu_match_to_vag.to_csv(os.path.join(assets_directory, 'prix', 'prix_mensuel_carbu_match_to_vag.csv'), sep = ',')

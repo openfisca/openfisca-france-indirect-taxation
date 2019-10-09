@@ -7,21 +7,15 @@ import os
 import pkg_resources
 
 
-from openfisca_france_indirect_taxation.utils import get_input_data_frame
+from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import \
     add_area_dummy, add_stalog_dummy, add_vag_dummy, electricite_only, indices_prix_carbus, price_carbu_pond, \
     price_carbu_from_quantities, price_energy_from_contracts
 
 
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
-
 df_indice_prix_produit = pd.read_csv(
     os.path.join(
         assets_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
         'prix',
         'df_indice_prix_produit.csv'
         ), sep =';', decimal = ','
@@ -249,8 +243,8 @@ for year in [2000, 2005, 2011]:
     data_frame_all_years = pd.concat([data_frame_all_years, data_frame_for_reg])
     data_frame_all_years.fillna(0, inplace = True)
 
-    data_frame_for_reg.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quaids', 'data_frame_energy_no_electricity_{}.csv'.format(year)), sep = ',')
+    data_frame_for_reg.to_csv(os.path.join(
+        assets_directory, 'quaids', 'data_frame_energy_no_electricity_{}.csv'.format(year)), sep = ',')
 
-data_frame_all_years.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quaids', 'data_frame_energy_no_electricity_all_years.csv'), sep = ',')
+data_frame_all_years.to_csv(os.path.join(
+    assets_directory, 'quaids', 'data_frame_energy_no_electricity_all_years.csv'), sep = ',')
