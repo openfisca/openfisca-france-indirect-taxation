@@ -7,11 +7,6 @@ from openfisca_survey_manager import default_config_files_directory as config_fi
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_1_2_build_dataframes_vehicles import \
     build_df_menages_vehicles
 
-from openfisca_survey_manager.temporary import TemporaryStore
-
-
-temporary_store = TemporaryStore.create(file_name = 'transport_tmp')
-
 
 def load_data_indiv_teg():
 

@@ -1,23 +1,67 @@
 # -*- coding: utf-8 -*-
 
 
+from configparser import ConfigParser
+import datetime
 import os
 import pandas
+import subprocess
 
 
+from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.utils import assets_directory
 
 
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_4_1_clean_data import prepare_bdf_enl_matching_data
+
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_4_1_save_data import prepare_bdf_entd_matching_data
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_6_1_calage_depenses_carburants import cale_bdf_entd_matching_data
+
+from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_4_1_clean_data import prepare_bdf_erfs_matching_data
+
+
+def check_config_ini():
+    """Check that assets option of section openfisca_france_indirect_taxation is set in openfisca-survey-manager config.ini file
+    since that file is used by R
+    """
+    config_parser = ConfigParser()
+    config_ini = os.path.join(config_files_directory, 'config.ini')
+    config_parser.read(config_ini)
+    if config_parser.has_section('openfisca_france_indirect_taxation') and config_parser.has_option('openfisca_france_indirect_taxation', 'assets'):
+        return
+    else:
+        modifiedTime = os.path.getmtime(config_ini)
+        timestamp = datetime.datetime.fromtimestamp(modifiedTime).strftime("%b-%d-%Y_%H.%M.%S")
+        os.rename(config_ini, config_ini + "_" + timestamp)
+        try:
+            config_parser.add_section("openfisca_france_indirect_taxation")
+
+        finally:
+            config_parser.set("openfisca_france_indirect_taxation", "assets", assets_directory)
+            with open(config_ini, 'w') as configfile:
+                config_parser.write(configfile)
+
+
+
 def main():
-    # Seems to be produced by openfisca-france-indirect-taxation/openfisca_france_indirect_taxation/assets/matching/matching_rank_bdf_enl.R
+    check_config_ini()
+    prepare_bdf_enl_matching_data()
+    r_script_path = os.path.join(assets_directory, 'matching', 'matching_enl', 'matching_rank_bdf_enl.R')
+    subprocess.call(['Rscript', '--vanilla', r_script_path])
+
     data_matched_enl = pandas.read_csv(
         os.path.join(
             assets_directory,
             'matching',
+            'matching_enl',
             'data_matched_rank.csv'
             ), sep =',', decimal = '.'
         )
 
+    prepare_bdf_entd_matching_data()
+    r_script_path = os.path.join(assets_directory, 'matching', 'matching_entd', 'matching_rank_bdf_entd.R')
+    subprocess.call(['Rscript', '--vanilla', r_script_path])
+    cale_bdf_entd_matching_data()
     data_matched_entd = pandas.read_csv(
         os.path.join(
             assets_directory,
@@ -26,6 +70,10 @@ def main():
             'data_matched_final.csv'
             ), sep =',', decimal = '.'
         )
+
+    prepare_bdf_erfs_matching_data()
+    r_script_path = os.path.join(assets_directory, 'matching', 'matching_erfs', 'matching_rank_bdf_erfs.R')
+    subprocess.call(['Rscript', '--vanilla', r_script_path])
 
     data_matched_erfs = pandas.read_csv(
         os.path.join(

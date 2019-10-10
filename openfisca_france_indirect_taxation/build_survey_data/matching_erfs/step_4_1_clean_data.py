@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
-# Dans ce script on crée deux fichiers .csv pour les deux bases de données
-# homogènes, qui seront ensuite importées dans R pour l'appariement..
+
+"""Prépapration de deux fichiers .csv homogénéiser pour l'appariement via R de BDF et ERFS
+"""
 
 
 import os
 
 
-from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_2_homogenize_variables import \
-    homogenize_definitions
+from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_2_homogenize_variables import homogenize_definitions
 from openfisca_france_indirect_taxation.utils import assets_directory
 
 
@@ -28,8 +28,7 @@ def create_donation_classes():
     return data_erfs, data_bdf
 
 
-data_erfs, data_bdf = create_donation_classes()
-
-# Sauvegarde des données dans des fichiers .csv
-data_erfs.to_csv(os.path.join(assets_directory, 'matching', 'matching_erfs', 'data_matching_erfs.csv'), sep = ',')
-data_bdf.to_csv(os.path.join(assets_directory, 'matching', 'matching_erfs', 'data_matching_bdf.csv'), sep = ',')
+def prepare_bdf_erfs_matching_data():
+    data_erfs, data_bdf = create_donation_classes()
+    data_erfs.to_csv(os.path.join(assets_directory, 'matching', 'matching_erfs', 'data_matching_erfs.csv'), sep = ',')
+    data_bdf.to_csv(os.path.join(assets_directory, 'matching', 'matching_erfs', 'data_matching_bdf.csv'), sep = ',')

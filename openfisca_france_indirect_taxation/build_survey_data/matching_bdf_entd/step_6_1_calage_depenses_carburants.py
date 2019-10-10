@@ -10,15 +10,6 @@ import pandas as pd
 # Importation des bases de données appariées et de la base de référence entd
 from openfisca_france_indirect_taxation.utils import assets_directory
 
-data_matched_distance = pd.read_csv(
-    os.path.join(
-        assets_directory,
-        'matching',
-        'matching_entd',
-        'data_matched_distance.csv'
-        ), sep =',', decimal = '.'
-    )
-
 
 data_matched_random = pd.read_csv(
     os.path.join(
@@ -55,9 +46,17 @@ def calage_depenses_from_distance(data_matched):
     return data_matched
 
 
-if __name__ == "__main__":
+def cale_bdf_entd_matching_data():
+    data_matched_distance = pd.read_csv(
+        os.path.join(
+            assets_directory,
+            'matching',
+            'matching_entd',
+            'data_matched_distance.csv'
+            ), sep =',', decimal = '.'
+        )
     data = calage_depenses_from_distance(data_matched_distance)
-
-    # Sauvegarde des données dans des fichiers .csv
-    data.to_csv(os.path.join(assets_directory,
-        'matching', 'matching_entd', 'data_matched_final.csv'), sep = ',')
+    data.to_csv(
+        os.path.join(assets_directory,'matching', 'matching_entd', 'data_matched_final.csv'),
+        sep = ',',
+        )

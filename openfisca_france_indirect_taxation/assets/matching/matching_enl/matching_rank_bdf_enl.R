@@ -4,8 +4,8 @@ suppressPackageStartupMessages(library("StatMatch"))
 config <- read.config(file = "~/.config/openfisca-survey-manager/config.ini")
 assets_directory = config$openfisca_france_indirect_taxation$assets
 
-data_enl <- read.csv(file = file.path(assets_directory, "matching/data_matching_enl.csv"), header = -1, sep=",")
-data_bdf <- read.csv(file = file.path(assets_directory, "matching/data_matching_bdf.csv"), header = -1, sep=",")
+data_enl <- read.csv(file = file.path(assets_directory, "matching/matching_enl/data_matching_enl.csv"), header = -1, sep=",")
+data_bdf <- read.csv(file = file.path(assets_directory, "matching/matching_enl/data_matching_bdf.csv"), header = -1, sep=",")
 
 # Compute ranked matching
 out.nnd <- rankNND.hotdeck(
@@ -20,10 +20,12 @@ out.nnd <- rankNND.hotdeck(
 fused.nnd.m <- create.fused(
   data.rec = data_bdf, data.don = data_enl,
   mtc.ids = out.nnd$mtc.ids,
-  z.vars = c("froid", "froid_installation", "gchauf_2", "froid_cout", "froid_isolation",
-             "froid_impaye", "gchauf_6", "gchauf_7", "gchaufs_1",
-             "gchaufs_2", "gchaufs_3", "gchaufs_4", "gchaufs_5",
-             "isolation_murs", "isolation_toit", "isolation_fenetres", "majorite_double_vitrage")
+  z.vars = c(
+    "froid", "froid_installation", "gchauf_2", "froid_cout", "froid_isolation",
+    "froid_impaye", "gchauf_6", "gchauf_7", "gchaufs_1",
+    "gchaufs_2", "gchaufs_3", "gchaufs_4", "gchaufs_5",
+    "isolation_murs", "isolation_toit", "isolation_fenetres", "majorite_double_vitrage"
+    )
   )
 
-write.csv(fused.nnd.m, file = file.path(assets_directory, "matching/data_matched_rank.csv"))
+write.csv(fused.nnd.m, file = file.path(assets_directory, "matching/matching_enl/data_matched_rank.csv"))

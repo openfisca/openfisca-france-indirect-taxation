@@ -5,13 +5,8 @@ Ils seront ensuite importées dans R pour l'appariement.
 On effectue au préalable les corrections nécessaires pour avoir des bases homogènes.
 """
 
-from configparser import ConfigParser
-import datetime
-import subprocess
 import os
 
-
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_2_homogenize_variables import (
     create_niveau_vie_quantiles)
@@ -122,27 +117,10 @@ def check_donation_classes_size(data, donation_class):
     return dict_dc_taille
 
 
-if __name__ == "__main__":
+def prepare_bdf_enl_matching_data():
     data_enl, data_bdf = create_donation_classes()
     # dico = check_donation_classes_size(data_enl, 'donation_class_4')
 
     # Sauvegarde des données dans des fichiers .csv
-    data_enl.to_csv(os.path.join(assets_directory, 'matching', 'data_matching_enl.csv'), sep = ',')
-    data_bdf.to_csv(os.path.join(assets_directory, 'matching', 'data_matching_bdf.csv'), sep = ',')
-    parser = ConfigParser()
-    config_ini = os.path.join(config_files_directory, 'config.ini')
-    parser.read(config_ini)
-
-    modifiedTime = os.path.getmtime(config_ini)
-    timestamp = datetime.datetime.fromtimestamp(modifiedTime).strftime("%b-%d-%Y_%H.%M.%S")
-    os.rename(config_ini, config_ini + "_" + timestamp)
-    try:
-        parser.add_section("openfisca_france_indirect_taxation")
-
-    finally:
-        parser.set("openfisca_france_indirect_taxation", "assets", assets_directory)
-        with open(config_ini, 'w') as configfile:
-            parser.write(configfile)
-
-    r_script_path = os.path.join(assets_directory, 'matching', 'matching_rank_bdf_enl.R')
-    subprocess.call(['Rscript', '--vanilla', r_script_path])
+    data_enl.to_csv(os.path.join(assets_directory, 'matching', 'matching_enl', 'data_matching_enl.csv'), sep = ',')
+    data_bdf.to_csv(os.path.join(assets_directory, 'matching', 'matching_enl', 'data_matching_bdf.csv'), sep = ',')

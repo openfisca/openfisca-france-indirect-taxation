@@ -57,14 +57,13 @@ def check_donation_classes_size(data, donation_class):
 
     dict_dc_taille = dict()
     for element in list_dc:
-        dict_dc_taille[element] = len(data_entd[data_entd[donation_class] == element])
+        dict_dc_taille[element] = len(data[data[donation_class] == element])
 
     return dict_dc_taille
 
 
-if __name__ == "__main__":
+def prepare_bdf_entd_matching_data():
     data_entd, data_bdf = create_donation_classes()
-    # Sauvegarde des données dans des fichiers .csv
     matching_entd_directory = os.path.join(
         assets_directory,
         'matching',
