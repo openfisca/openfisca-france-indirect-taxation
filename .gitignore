@@ -1,11 +1,15 @@
 
-openfisca_france_indirect_taxation/assets/matching/matching_entd/data_*.csv
-openfisca_france_indirect_taxation/assets/matching/matching_erfs/data_*.csv
+openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matched_final.csv
+openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matched_rank.csv
+openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matching_bdf.csv
+openfisca_france_indirect_taxation/assets/matching/matching_entd/data_matching_entd.csv
+openfisca_france_indirect_taxation/assets/matching/matching_erfs/data_matched_rank.csv
 
 openfisca_france_indirect_taxation/examples/notebooks/.ipynb_checkpoints/*.ipynb
 openfisca_france_indirect_taxation/assets/quaids/*.csv
 openfisca_france_indirect_taxation/assets/matching/*.csv
 openfisca_france_indirect_taxation/assets/legislation/nomenclature_coicop_by*.csv
+
 
 .vscode
 .idea

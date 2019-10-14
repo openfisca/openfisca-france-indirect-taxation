@@ -16,9 +16,9 @@ def load_data_bdf_erfs():
     year_erfs = 2013
 
     erfs_survey_collection = SurveyCollection.load(
-        collection = 'enquete_revenus_fiscaux_sociaux', config_files_directory = config_files_directory
+        collection = 'erfs_fpr', config_files_directory = config_files_directory
         )
-    survey_erfs = erfs_survey_collection.get_survey('enquete_revenus_fiscaux_sociaux_{}'.format(year_erfs))
+    survey_erfs = erfs_survey_collection.get_survey('erfs_fpr_{}'.format(year_erfs))
 
     revenus_erfs = survey_erfs.get_values(table = 'fpr_menage_2013')
     menages_erfs = survey_erfs.get_values(table = 'fpr_mrf13e13t4')

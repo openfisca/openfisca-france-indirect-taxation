@@ -57,7 +57,6 @@ def main():
             'data_matched_rank.csv'
             ), sep =',', decimal = '.'
         )
-
     prepare_bdf_entd_matching_data()
     r_script_path = os.path.join(assets_directory, 'matching', 'matching_entd', 'matching_rank_bdf_entd.R')
     subprocess.call(['Rscript', '--vanilla', r_script_path])
@@ -70,7 +69,6 @@ def main():
             'data_matched_final.csv'
             ), sep =',', decimal = '.'
         )
-
     prepare_bdf_erfs_matching_data()
     r_script_path = os.path.join(assets_directory, 'matching', 'matching_erfs', 'matching_rank_bdf_erfs.R')
     subprocess.call(['Rscript', '--vanilla', r_script_path])
@@ -101,11 +99,11 @@ def main():
         'log_indiv',
         'majorite_double_vitrage',
         'ouest_sud',
-        'paris'
+        'paris',
         'petite_ville',
         'rural',
         ]
-    data_matched_enl = data_matched_enl[enl_variables]
+    data_matched_enl = data_matched_enl[enl_variables].copy()
 
     entd_variables = [
         'age_carte_grise',
@@ -123,9 +121,9 @@ def main():
         'vp_deplacements_pro',
         'vp_domicile_travail',
         ]
-    data_matched_entd = data_matched_entd[entd_variables]
+    data_matched_entd = data_matched_entd[entd_variables].copy()
 
-    data_matched_erfs = data_matched_erfs[['revdecm', 'ident_men']]
+    data_matched_erfs = data_matched_erfs[['revdecm', 'ident_men']].copy()
 
     data_frame = pandas.merge(data_matched_entd, data_matched_enl, on = 'ident_men', how = 'left')
     data_frame = pandas.merge(data_frame, data_matched_erfs, on = 'ident_men')

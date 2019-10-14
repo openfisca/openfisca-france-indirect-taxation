@@ -133,12 +133,16 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
                     'data_for_run_all.csv'
                     ), sep =',', decimal = '.'
                 )
-            data_matched['ident_men'] = data_matched['ident_men'].astype(str).copy()
-            data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
         except FileNotFoundError as e:
             log.debug("Matching data with ENL and ENTD are not present")
             log.debug(e)
             log.debug("Skipping this step")
+            from openfisca_france_indirect_taxation.build_survey_data import step_5_data_from_matching
+            step_5_data_from_matching.main()
+
+        data_matched['ident_men'] = data_matched['ident_men'].astype(str).copy()
+        data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
+
 
     # Créer un nouvel identifiant pour les ménages
     data_frame['identifiant_menage'] = list(range(0, len(data_frame)))
@@ -180,4 +184,4 @@ def run(years_calage, skip_matching = False):
 
 
 if __name__ == '__main__':
-    run([2011], skip_matching = True)
+    run([2011], skip_matching = False)

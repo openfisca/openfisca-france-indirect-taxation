@@ -22,9 +22,9 @@ def load_data_vehicules_bdf_entd():
     year_entd = 2008
 
     entd_survey_collection = SurveyCollection.load(
-        collection = 'enquete_transport', config_files_directory = config_files_directory
+        collection = 'enquete_transports', config_files_directory = config_files_directory
         )
-    survey_entd = entd_survey_collection.get_survey('enquete_transport_{}'.format(year_entd))
+    survey_entd = entd_survey_collection.get_survey('enquete_transports_{}'.format(year_entd))
     input_entd_vehicule = survey_entd.get_values(table = 'qf_voitvul')
     input_entd_menage = survey_entd.get_values(table = 'q_menage')
 
