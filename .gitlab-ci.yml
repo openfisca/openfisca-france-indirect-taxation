@@ -23,6 +23,6 @@ Run models:
     - build-collection -c aliss -m -d
     - build-collection -c enquete_logement -d -m -s 2013
     - build-collection -c enquete_transports -d -m -s 2008
-    - build-collection -c erfs_fpr -s -d -m 2013
+    - build-collection -c erfs_fpr -d -m -s 2013
     - build-survey-data -v
     - make test
