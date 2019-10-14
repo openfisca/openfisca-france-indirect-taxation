@@ -1,5 +1,6 @@
 
-openfisca_france_indirect_taxation/assets/matching/matching_*/data_*.csv
+openfisca_france_indirect_taxation/assets/matching/matching_entd/data_*.csv
+openfisca_france_indirect_taxation/assets/matching/matching_erfs/data_*.csv
 
 openfisca_france_indirect_taxation/examples/notebooks/.ipynb_checkpoints/*.ipynb
 openfisca_france_indirect_taxation/assets/quaids/*.csv
