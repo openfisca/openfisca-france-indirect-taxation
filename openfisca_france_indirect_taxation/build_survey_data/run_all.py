@@ -111,8 +111,7 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
 
     data_frame.index.name = "ident_men"
 
-    # TODO: Homogénéiser: soit faire en sorte que ident_men existe pour toutes les années
-    # soit qu'elle soit en index pour toutes
+    # TODO: Homogénéiser: soit faire en sorte que ident_men existe pour toutes les années soit qu'elle soit en index pour toutes
 
     try:
         data_frame.reset_index(inplace = True)
@@ -124,6 +123,7 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
         data_frame = data_frame.query('zeat != 0').copy()
 
     if year_data == 2011 and not skip_matching:
+        save(data_frame, year_calage)  # Needed by step_5_data_from_matching
         try:
             # On apparie ajoute les données appariées de l'ENL et l'ENTD
             data_matched = pandas.read_csv(
@@ -143,7 +143,6 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
         data_matched['ident_men'] = data_matched['ident_men'].astype(str).copy()
         data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
 
-
     # Créer un nouvel identifiant pour les ménages
     data_frame['identifiant_menage'] = list(range(0, len(data_frame)))
     data_frame['identifiant_menage'] = data_frame['identifiant_menage'] + (year_data * 100000)
@@ -154,6 +153,10 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
     # http://stackoverflow.com/questions/16938441/how-to-remove-duplicate-columns-from-a-dataframe-using-python-pandas
     data_frame = data_frame.T.groupby(level = 0).first().T
 
+    save(data_frame, year_calage)
+
+
+def save(data_frame, year_calage):
     log.info('Saving the openfisca indirect taxation input dataframe')
     try:
         openfisca_survey_collection = SurveyCollection.load(
