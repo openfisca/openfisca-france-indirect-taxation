@@ -12,7 +12,7 @@ Run models:
   #   variables:
   #     - $DOLOS == 'True'
   script:
-    - aptitude install r-base  # Should be in the docker image
+    - apt-get install r-base  # Should be in the docker image
     - pip3 install -e .[dev,survey]
     - mkdir ~/.config
     - mkdir ~/.config/openfisca-survey-manager
