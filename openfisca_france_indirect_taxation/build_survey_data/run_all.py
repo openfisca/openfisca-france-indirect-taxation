@@ -143,11 +143,6 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
         data_matched['ident_men'] = data_matched['ident_men'].astype(str).copy()
         data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
 
-    # Créer un nouvel identifiant pour les ménages
-    data_frame['identifiant_menage'] = list(range(0, len(data_frame)))
-    data_frame['identifiant_menage'] = data_frame['identifiant_menage'] + (year_data * 100000)
-
-
     save(data_frame, year_calage)
 
 
@@ -157,6 +152,9 @@ def save(data_frame, year_calage):
     # using solution form stackoverflow
     # http://stackoverflow.com/questions/16938441/how-to-remove-duplicate-columns-from-a-dataframe-using-python-pandas
     data_frame = data_frame.T.groupby(level = 0).first().T
+    # Créer un nouvel identifiant pour les ménages
+    data_frame['identifiant_menage'] = list(range(0, len(data_frame)))
+    data_frame['identifiant_menage'] = data_frame['identifiant_menage'] + (year_data * 100000)
 
     log.info('Saving the openfisca indirect taxation input dataframe')
     try:
