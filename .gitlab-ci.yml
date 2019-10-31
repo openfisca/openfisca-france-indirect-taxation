@@ -14,7 +14,7 @@ Run models:
   script:
     - apt-get update -qq
     - apt-get install -qq r-base  # Should be in the docker image
-    - R -e 'install.packages(c("configr", "StatMatch"), repos = "http://cran.us.r-project.org", dependencies = TRUE)'
+    - R -e 'install.packages(c("configr", "proxy", "StatMatch"), repos = "http://cran.us.r-project.org")'
     - pip3 install -e .[dev,survey]
     - mkdir ~/.config
     - mkdir ~/.config/openfisca-survey-manager
