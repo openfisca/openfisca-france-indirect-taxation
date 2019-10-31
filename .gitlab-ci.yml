@@ -7,7 +7,7 @@ cache:
 
 Run models:
   stage: build
-  image: python:3.7-stretch
+  image: python:3.7-buster
   # only:
   #   variables:
   #     - $DOLOS == 'True'
