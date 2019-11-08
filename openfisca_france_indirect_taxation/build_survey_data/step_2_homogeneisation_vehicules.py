@@ -27,7 +27,6 @@ log = logging.getLogger(__name__)
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_homogeneisation_vehicules(temporary_store = None, year = None):
     """Compute vehicule numbers by type"""
-
     assert temporary_store is not None
     assert year is not None
     # Load data
@@ -54,11 +53,12 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
 
     if year == 2005:
         vehicule = survey.get_values(table = "automobile")
-        kept_variables = ['ident_men', 'carbu']
-        vehicule = vehicule[kept_variables].copy()
+        vehicule = vehicule[
+            ['ident_men', 'carbu']
+            ].copy()
         vehicule["veh_tot"] = 1
-        vehicule["veh_essence"] = (vehicule['carbu'] == 1)
-        vehicule["veh_diesel"] = (vehicule['carbu'] == 2)
+        vehicule["veh_essence"] = vehicule['carbu'] == 1
+        vehicule["veh_diesel"] = vehicule['carbu'] == 2
 
     if year == 2011:
         try:

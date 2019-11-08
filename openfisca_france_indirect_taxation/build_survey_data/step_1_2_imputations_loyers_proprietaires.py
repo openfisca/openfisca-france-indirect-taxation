@@ -21,8 +21,7 @@ log = logging.getLogger(__name__)
 # **************************************************************************************************************************
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
-    """Build menage consumption by categorie fiscale dataframe """
-
+    """Impute rent for owner"""
     assert temporary_store is not None
     assert year is not None
 

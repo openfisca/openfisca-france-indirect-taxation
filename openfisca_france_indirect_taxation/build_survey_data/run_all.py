@@ -79,7 +79,6 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
         menage = menage,
         depenses = depenses,
         )
-
     for name, preprocessed_data_frame in list(preprocessed_data_frame_by_name.items()):
         assert preprocessed_data_frame.index.name == 'ident_men', \
             'Index is labelled {} instead of ident_men in data frame {} for year {}'.format(
@@ -186,4 +185,7 @@ def run(years_calage, skip_matching = False):
 
 
 if __name__ == '__main__':
+    import sys
+    log = logging.getLogger(__name__)
+    logging.basicConfig(level = logging.DEBUG, stream = sys.stdout)
     run([2011], skip_matching = False)

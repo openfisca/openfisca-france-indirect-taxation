@@ -15,8 +15,7 @@ log = logging.getLogger(__name__)
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year = None):
-    """Homogénéisation des caractéristiques sociales des ménages """
-
+    """Homogénéisation des caractéristiques sociales des ménages"""
     assert temporary_store is not None
     assert year is not None
     # Load data
@@ -278,8 +277,25 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
     if year == 2005:
         menage = survey.get_values(table = "menage")
         # données socio-démographiques
-        socio_demo_variables = ['agpr', 'agcj', 'couplepr', 'decuc', 'ident_men', 'nactifs', 'nenfants', 'nenfhors',
-            'npers', 'ocde10', 'pondmen', 'sexecj', 'sexepr', 'typmen5', 'vag', 'zeat', 'cs24pr']
+        socio_demo_variables = [
+            'agpr',
+            'agcj',
+            'couplepr',
+            'decuc',
+            'ident_men',
+            'nactifs',
+            'nenfants',
+            'nenfhors',
+            'npers',
+            'ocde10',
+            'pondmen',
+            'sexecj',
+            'sexepr',
+            'typmen5',
+            'vag',
+            'zeat',
+            'cs24pr'
+            ]
         socio_demo_variables += [column for column in menage.columns if column.startswith('dip14')]
         socio_demo_variables += [column for column in menage.columns if column.startswith('natio7')]
         # activité professionnelle
@@ -315,18 +331,18 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         # on met un numéro à chaque vague pour pouvoir faire un meilleur suivi des évolutions temporelles
         # pour le modèle de demande
         menage['vag_'] = menage['vag']
-        menage.vag.loc[menage.vag_ == 1] = 17
-        menage.vag.loc[menage.vag_ == 2] = 18
-        menage.vag.loc[menage.vag_ == 3] = 19
-        menage.vag.loc[menage.vag_ == 4] = 20
-        menage.vag.loc[menage.vag_ == 5] = 21
-        menage.vag.loc[menage.vag_ == 6] = 22
+        menage.loc[menage.vag_ == 1, '.vag'] = 17
+        menage.loc[menage.vag_ == 2, '.vag'] = 18
+        menage.loc[menage.vag_ == 3, '.vag'] = 19
+        menage.loc[menage.vag_ == 4, '.vag'] = 20
+        menage.loc[menage.vag_ == 5, '.vag'] = 21
+        menage.loc[menage.vag_ == 6, '.vag'] = 22
         del menage['vag_']
 
         # Recodage des catégories zeat
-        menage.zeat.loc[menage.zeat == 7] = 6
-        menage.zeat.loc[menage.zeat == 8] = 7
-        menage.zeat.loc[menage.zeat == 9] = 8
+        menage.loc[menage.zeat == 7, 'zeat'] = 6
+        menage.loc[menage.zeat == 8, 'zeat'] = 7
+        menage.loc[menage.zeat == 9, 'zeat'] = 8
 
         assert menage.zeat.isin(list(range(1, 9))).all()
 
@@ -361,7 +377,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         individus = individus[individus.lienpref == 00].copy()
         kept_variables = ['ident_men', 'etamatri', 'agepr']
         individus = individus[kept_variables].copy()
-        individus.etamatri.loc[individus.etamatri == 0] = 1
+        individus.loc[individus.etamatri == 0, 'etamatri'] = 1
         individus['etamatri'] = individus['etamatri'].astype('int')  # MBJ TODO: define as a catagory ?
         individus.set_index('ident_men', inplace = True)
         menage = menage.merge(individus, left_index = True, right_index = True)
@@ -373,7 +389,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         # Il y a un problème sur l'année de naissance,
         # donc on le recalcule avec l'année de naissance et la vague d'enquête
         individus['age'] = year - individus.anais
-        individus.loc[individus.vag == 6, ['age']] = year + 1 - individus.anais
+        individus.loc[individus.vag == 6, 'age'] = year + 1 - individus.anais
         # Garder toutes les personnes du ménage qui ne sont pas la personne de référence et le conjoint
         individus = individus[(individus.lienpref != 00) & (individus.lienpref != 0o1)].copy()
         individus.sort_values(by = ['ident_men', 'ident_ind'], inplace = True)
