@@ -134,7 +134,7 @@ def main():
         os.path.join(assets_directory, 'matching', 'data_for_run_all.csv'),
         sep = ','
         )
-    return
+    return data_frame
 
 
 if __name__ == '__main__':

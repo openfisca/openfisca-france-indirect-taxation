@@ -137,7 +137,7 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
             log.debug(e)
             log.debug("Skipping this step")
             from openfisca_france_indirect_taxation.build_survey_data import step_5_data_from_matching
-            step_5_data_from_matching.main()
+            data_matched = step_5_data_from_matching.main()
 
         data_matched['ident_men'] = data_matched['ident_men'].astype(str).copy()
         data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
