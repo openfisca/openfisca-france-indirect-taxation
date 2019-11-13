@@ -57,6 +57,6 @@ def cale_bdf_entd_matching_data():
         )
     data = calage_depenses_from_distance(data_matched_distance)
     data.to_csv(
-        os.path.join(assets_directory,'matching', 'matching_entd', 'data_matched_final.csv'),
+        os.path.join(assets_directory, 'matching', 'matching_entd', 'data_matched_final.csv'),
         sep = ',',
         )

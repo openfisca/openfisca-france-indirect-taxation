@@ -122,7 +122,8 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
         data_frame = data_frame.query('zeat != 0').copy()
 
     if year_data == 2011 and not skip_matching:
-        save(data_frame, year_data, year_calage)  # Needed by step_5_data_from_matching
+        # Save file needed by step_5_data_from_matching
+        save(data_frame, year_data, year_calage)
         try:
             # On apparie ajoute les données appariées de l'ENL et l'ENTD
             data_matched = pandas.read_csv(

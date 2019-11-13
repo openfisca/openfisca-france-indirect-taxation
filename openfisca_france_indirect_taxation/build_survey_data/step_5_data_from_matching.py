@@ -42,7 +42,6 @@ def check_config_ini():
                 config_parser.write(configfile)
 
 
-
 def main():
     check_config_ini()
     prepare_bdf_enl_matching_data()

@@ -113,7 +113,7 @@ def check_donation_classes_size(data, donation_class):
     dict_dc_taille = dict()
 
     for element in list_dc:
-        dict_dc_taille[element] = len(data_enl[data_enl[donation_class] == element])
+        dict_dc_taille[element] = len(data[data[donation_class] == element])
     return dict_dc_taille
 
 
