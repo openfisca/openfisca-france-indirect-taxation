@@ -1,27 +1,54 @@
+stages:
+  - build_docker_image
+  - build
+
 variables:
-    PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
 
 cache:
   paths:
     - .cache/pip
 
+Build Docker image:
+  stage: build_docker_image
+  only:
+    changes:
+      - Dockerfile.ci
+    refs:
+      - ultimate_migration
+  image: docker:19.03.1
+  services:
+    - docker:19.03.1-dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+    # Create the certificates inside this directory for both the server
+    # and client. The certificates used by the client will be created in
+    # /certs/client so we only need to share this directory with the
+    # volume mount in `config.toml`.
+    DOCKER_TLS_CERTDIR: "/certs"
+  before_script:
+    - docker info
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:latest -f Dockerfile.ci .
+    - docker push $CI_REGISTRY_IMAGE:latest
+  tags:
+    - docker-privileged
+
 Run models:
   stage: build
-  image: python:3.7-buster
+  image: $CI_REGISTRY_IMAGE:latest
   # only:
   #   variables:
   #     - $DOLOS == 'True'
-  script:
-    - apt-get update -qq
-    - apt-get install -qq r-base  # Should be in the docker image
-    - R -e 'install.packages(c("configr", "proxy", "StatMatch"), repos = "http://cran.us.r-project.org")'
-    - pip3 install -e .[dev,survey]
-    - mkdir ~/.config
-    - mkdir ~/.config/openfisca-survey-manager
+  before_script:
+    - mkdir -p ~/.config/openfisca-survey-manager
     - cp /home/ipp/data/openfisca-france-indirect-taxation/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
     - cp /home/ipp/data/openfisca-france-indirect-taxation/openfisca_survey_manager_config.ini ~/.config/openfisca-survey-manager/config.ini
-    - mkdir /root/ci-files
-    - mkdir /root/ci-files/data_collections
+    - mkdir -p /root/ci-files/data_collections
+    - pip3 install -e .[dev,survey]
+  script:
     - build-collection -c budget_des_familles -d -m
     - build-collection -c aliss -m -d
     - build-collection -c enquete_logement -d -m -s 2013
