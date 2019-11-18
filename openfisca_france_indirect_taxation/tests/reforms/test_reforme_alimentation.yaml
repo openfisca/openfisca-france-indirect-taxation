@@ -10,5 +10,5 @@
     depenses_ht_vin: 100
 
   output:
-    depenses_vin: 100 / (1 + 0.196)
+    depenses_vin: 100 * (1 + 0.196)
     tva_taux_super_reduit: 100 * 0.021 / (1 + 0.021)
