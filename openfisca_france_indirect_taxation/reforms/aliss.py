@@ -354,14 +354,14 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
         # Create a depenses (TTC) class with a dynamic name.
         depenses_class_name = 'depenses_{}'.format(categorie_fiscale)
 
-        if tax_benefit_system.get_column(depenses_class_name) is None:
+        if depenses_class_name not in tax_benefit_system.variables:
             depenses_new_tva_func = depenses_new_tva_function_creator(
                 categorie_fiscale = categorie_fiscale, taux = taux)
             definitions_by_name = dict(
                 value_type = float,
                 entity = Menage,
                 label = "Dépenses taxes comprises: {0}".format(categorie_fiscale),
-                function = depenses_new_tva_func,
+                formula = depenses_new_tva_func,
                 )
             depenses_variable_class = type(depenses_class_name, (YearlyVariable,), definitions_by_name)
             tax_benefit_system.add_variable(depenses_variable_class)
@@ -369,13 +369,14 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
 
         # Create a tva (TTC) class with a dynamic name.
         tva_class_name = '{}'.format(categorie_fiscale)
-        if tax_benefit_system.get_column(tva_class_name) is None:
+
+        if tva_class_name not in tax_benefit_system.variables:
             new_tva_func = new_tva_function_creator(categorie_fiscale = categorie_fiscale, taux = taux)
             definitions_by_name = dict(
                 value_type = float,
                 entity = Menage,
                 label = "Montant de la TVA acquitée à {0}".format(categorie_fiscale),
-                function = new_tva_func,
+                formula = new_tva_func,
                 )
             tva_variable_class = type(tva_class_name, (YearlyVariable,), definitions_by_name)
             tax_benefit_system.add_variable(tva_variable_class)

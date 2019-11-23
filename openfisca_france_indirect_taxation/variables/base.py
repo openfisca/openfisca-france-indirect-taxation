@@ -127,19 +127,12 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
             def func(entity, period_arg, parameters, categorie_fiscale_by_poste = categorie_fiscale_by_poste,
                     taux_by_categorie_fiscale = taux_by_categorie_fiscale):
 
+                taux_de_tva = parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva._children
                 taux_by_categorie_fiscale.update({
-                    'tva_taux_super_reduit': parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[
-                        'taux_particulier_super_reduit'
-                        ],
-                    'tva_taux_reduit': parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[
-                        'taux_reduit'
-                        ],
-                    'tva_taux_intermediaire': parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[
-                        'taux_intermediaire'
-                        ],
-                    'tva_taux_plein': parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[
-                        'taux_plein'
-                        ],
+                    'tva_taux_super_reduit': taux_de_tva.get('taux_particulier_super_reduit', 0.0),
+                    'tva_taux_reduit': taux_de_tva.get('taux_reduit', 0.0),
+                    'tva_taux_intermediaire': taux_de_tva.get('taux_intermediaire', 0.0),
+                    'tva_taux_plein': taux_de_tva.get('taux_plein', 0.0),
                     })
                 poste_agrege = sum(entity(
                     'depenses_ht_poste_' + slugify(poste, separator = '_'), period_arg
