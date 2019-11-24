@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-from sortedcontainers.sorteddict import SortedDict
+# from sortedcontainers.sorteddict import SortedDict
 import logging
 
 
@@ -31,7 +31,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
         year_start = 1994
         year_final_stop = 2014
         functions_by_name = dict()
-        formulas = SortedDict()
+        # formulas = SortedDict()
         for year in range(year_start, year_final_stop + 1):
             postes_coicop = sorted(
                 completed_categories_fiscales.query(
