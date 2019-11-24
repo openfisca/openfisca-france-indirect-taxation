@@ -1,26 +1,29 @@
- - name: "Réforme TVA sociale (taux intermédiaire pour tous les biens)"
-   period: "2014"  # La TVA taux intermédiare est de 10 % à cete date
-   input:
-     poste_01_1_1_1_1: 100  # Pain et autres produits de boulangerie   tva_taux_reduit
-     poste_01_1_1_3_3: 100  # Préparations telles que pâte à  pâtisser, gâteau industriel, tva_taux_reduit
-     poste_09_5_1_1_2: 100  # Livres TVA taux intermédiaire avant et après réforme
-   output:
-     depenses_ht_poste_01_1_1_1_1: 100 / (1 + 0.055)
-     depenses_ht_poste_01_1_1_3_3: 100 / (1 + 0.055)
-     depenses_ht_poste_09_5_1_1_2: 100 / (1 + 0.1)
-     poste_agrege_01: 200 * (1 + 0.1 ) / (1 + 0.055)
-     #
-     depenses_ht_tva_taux_plein: 0
-     depenses_ht_tva_taux_intermediaire: 200 / (1 + 0.055) + 100 / (1 + 0.1)
-     depenses_ht_tva_taux_reduit: 0
-     depenses_ht_tva_taux_super_reduit: 0
-     #
-     depenses_tva_taux_plein: 0
-     depenses_tva_taux_intermediaire: 200 * (1 + 0.1 ) / (1 + 0.055) + 100
-     depenses_tva_taux_reduit: 0
-     depenses_tva_taux_super_reduit: 0
-     #
-     tva_taux_plein: 0
-     tva_taux_intermediaire: 200 * 0.1 / (1 + 0.055) + 100 / (1 + 0.1) * 0.1
-     tva_taux_reduit: 0
-     tva_taux_super_reduit: 0
+- name: "Réforme TVA sociale (taux intermédiaire pour tous les biens)"
+  relative_error_margin: .00001
+  reforms:
+    - openfisca_france_indirect_taxation.reforms.aliss.aliss_tva_sociale
+  period: "2014"  # La TVA taux intermédiare est de 10 % à cete date
+  input:
+    poste_01_1_1_1_1: 100  # Pain et autres produits de boulangerie   tva_taux_reduit
+    poste_01_1_1_3_3: 100  # Préparations telles que pâte à  pâtisser, gâteau industriel, tva_taux_reduit
+    poste_09_5_1_1_2: 100  # Livres TVA taux intermédiaire avant et après réforme
+  output:
+    depenses_ht_poste_01_1_1_1_1: 100 / (1 + 0.055)
+    depenses_ht_poste_01_1_1_3_3: 100 / (1 + 0.055)
+    depenses_ht_poste_09_5_1_1_2: 100 / (1 + 0.1)
+    poste_agrege_01: 200 * (1 + 0.1 ) / (1 + 0.055)
+    #
+    depenses_ht_tva_taux_plein: 0
+    depenses_ht_tva_taux_intermediaire: 200 / (1 + 0.055) + 100 / (1 + 0.1)
+    depenses_ht_tva_taux_reduit: 0
+    depenses_ht_tva_taux_super_reduit: 0
+    #
+    depenses_tva_taux_plein: 0
+    depenses_tva_taux_intermediaire: 200 * (1 + 0.1 ) / (1 + 0.055) + 100
+    depenses_tva_taux_reduit: 0
+    depenses_tva_taux_super_reduit: 0
+    #
+    tva_taux_plein: 0
+    tva_taux_intermediaire: 200 * 0.1 / (1 + 0.055) + 100 / (1 + 0.1) * 0.1
+    tva_taux_reduit: 0
+    tva_taux_super_reduit: 0
