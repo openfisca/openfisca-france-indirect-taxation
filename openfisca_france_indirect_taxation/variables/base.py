@@ -132,8 +132,9 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                     'tva_taux_super_reduit': taux_de_tva.get('taux_particulier_super_reduit', 0.0),
                     'tva_taux_reduit': taux_de_tva.get('taux_reduit', 0.0),
                     'tva_taux_intermediaire': taux_de_tva.get('taux_intermediaire', 0.0),
-                    'tva_taux_plein': taux_de_tva.get('taux_plein', 0.0),
+                    'tva_taux_plein': taux_de_tva.get('taux_normal', 0.0),
                     })
+
                 poste_agrege = sum(entity(
                     'depenses_ht_poste_' + slugify(poste, separator = '_'), period_arg
                     ) * (
