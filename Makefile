@@ -6,6 +6,7 @@ uninstall:
 clean:
 		rm -rf build dist
 		find . -name '*.pyc' -exec rm \{\} \;
+		py3clean .
 
 deps:
 		pip install --upgrade pip twine wheel
