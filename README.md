@@ -7,15 +7,15 @@
 [OpenFisca](http://www.openfisca.fr/) is a versatile microsimulation free software.
 This is the source code of the France module indirect taxation module.
 
-Please consult http://www.openfisca.fr/presentation
+Please consult https://openfisca.org/doc/index.html
 
 ## Documentation
 
-Please consult http://www.openfisca.fr/documentation
+Please consult https://openfisca.org/doc/
 
 ## Installation
 
-Please consult http://www.openfisca.fr/installation if you want to develop with OpenFisca on your computer.
+Please consult https://openfisca.org/doc/installation/index.html if you want to develop with OpenFisca on your computer.
 
 ## Contribute
 
@@ -29,7 +29,7 @@ contact@openfisca.fr
 
 ## Contributors
 
-[IPP](www.ipp.eu) is the main contributor to this repo. [openfisca-france-indirect-taxation]  (https://github.com/openfisca/openfisca-france-indirect-taxation) is a fundamental building block of the TAXIPP microsimulation model.
+[IPP](www.ipp.eu) is the main contributor to this repo. [openfisca-france-indirect-taxation](https://github.com/openfisca/openfisca-france-indirect-taxation) is a fundamental building block of the TAXIPP microsimulation model.
 
 Etienne Fontaine, Vincent Gollier, Hadrien Leclerc and Germain Marchand contributed to this project to fulfill their applied statistics project at [ENSAE](ensae.fr).
 
