@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import pytest
 
 
@@ -15,10 +13,17 @@ def test_carburants_builder(year):
     carburants = aggregates_data_frame[postes_07].copy()
     data_year = year
     survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
+
+    for poste in postes_07:
+        assert_near(
+            carburants[poste].sum(),
+            survey_scenario.calculate_variable(poste, period = year).sum(),
+            absolute_error_margin = 1
+            )
+
     unweighted_input_data = carburants.sum().sum()
     unweighted_computed_aggregate = survey_scenario.calculate_variable('poste_agrege_07', period = year).sum()
-    assert_near(unweighted_input_data, unweighted_computed_aggregate, absolute_error_margin = 1), \
-        "the total of transport differs from the sum of its components"
+    assert_near(unweighted_input_data, unweighted_computed_aggregate, absolute_error_margin = 1)
 
     weighted_input_data = ((carburants).sum(axis = 1) * pondmen).sum()
     weighted_computed_aggregate = survey_scenario.compute_aggregate('poste_agrege_07', period = year)
