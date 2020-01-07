@@ -26,6 +26,8 @@ Build Docker image:
 Run models:
   stage: build
   image: $CI_REGISTRY_IMAGE:latest
+  tags:
+    - ipp
   # only:
   #   variables:
   #     - $DOLOS == 'True'
