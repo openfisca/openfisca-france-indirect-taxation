@@ -76,12 +76,13 @@ class SurveyScenario(AbstractSurveyScenario):
             log.info('inflating for year = {} using {}'.format(year, inflation_kwargs))
             survey_scenario.inflate(period = year, **inflation_kwargs)
 
+        survey_scenario.initialize_weights()
         assert survey_scenario.simulation is not None
         assert survey_scenario.tax_benefit_system is not None
 
         return survey_scenario
 
     def initialize_weights(self):
-        self.weight_column_name_by_entity = dict()
-        self.weight_column_name_by_entity['menage'] = 'pondmen'
-        self.weight_column_name_by_entity['individu'] = 'weight_ind'
+        self.weight_variable_by_entity = dict()
+        self.weight_variable_by_entity['menage'] = 'pondmen'
+        self.weight_variable_by_entity['individu'] = 'weight_ind'

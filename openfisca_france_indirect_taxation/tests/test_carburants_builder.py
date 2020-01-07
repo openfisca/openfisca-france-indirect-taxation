@@ -4,55 +4,22 @@ import pytest
 
 
 from openfisca_core.tools import assert_near
+from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
 
-
-@pytest.mark.skipif(reason = "KeyError: '['poste_coicop_07_2_2_1_1'] not in index'")
 @pytest.mark.parametrize("year", [2000, 2005, 2011])
 def test_carburants_builder(year):
     aggregates_data_frame = get_input_data_frame(year)
-    if year == 2000:
-        df = aggregates_data_frame[[
-            'coicop12_7',
-            'poste_coicop_07_2_2_1_1',
-            'poste_coicop_711',
-            'poste_coicop_712',
-            'poste_coicop_713',
-            'poste_coicop_721',
-            'poste_coicop_723',
-            'poste_coicop_724',
-            'poste_coicop_731',
-            'poste_coicop_732',
-            'poste_coicop_733',
-            'poste_coicop_734',
-            'poste_coicop_736'
-            ]].copy()
-        df['check'] = (
-            df['poste_coicop_711']
-            + df['poste_coicop_712']
-            + df['poste_coicop_713']
-            + df['poste_coicop_721']
-            + df['poste_coicop_07_2_2_1_1']
-            + df['poste_coicop_723']
-            + df['poste_coicop_724']
-            + df['poste_coicop_731']
-            + df['poste_coicop_732']
-            + df['poste_coicop_733']
-            + df['poste_coicop_734']
-            + df['poste_coicop_736']
-            - df['coicop12_7']
-            )
-    else:
-        df = aggregates_data_frame[
-            ['poste_coicop_07_2_2_1_1', 'coicop12_7', 'poste_coicop_711']
-            + ['poste_coicop_712', 'poste_coicop_735', 'poste_coicop_713', 'poste_coicop_721']
-            + ['poste_coicop_723', 'poste_coicop_724', 'poste_coicop_731', 'poste_coicop_732']
-            + ['poste_coicop_733', 'poste_coicop_734', 'poste_coicop_736']
-            ].copy()
-        df['check'] = (
-            df['poste_coicop_711'] + df['poste_coicop_712'] + df['poste_coicop_713'] + df['poste_coicop_721']
-            + df['poste_coicop_07_2_2_1_1'] + df['poste_coicop_723'] + df['poste_coicop_724'] + df['poste_coicop_731']
-            + df['poste_coicop_732'] + df['poste_coicop_733'] + df['poste_coicop_734'] + df['poste_coicop_736']
-            + df['poste_coicop_735'] - df['coicop12_7']
-            )
-    assert_near(df['check'].any(), 0, 0.0001), "the total of transport differs from the sum of its components"
+    postes_07 = [column for column in aggregates_data_frame.columns if column.startswith('poste_07')]
+    pondmen = aggregates_data_frame.pondmen.copy()
+    carburants = aggregates_data_frame[postes_07].copy()
+    data_year = year
+    survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
+    unweighted_input_data = carburants.sum().sum()
+    unweighted_computed_aggregate = survey_scenario.calculate_variable('poste_agrege_07', period = year).sum()
+    assert_near(unweighted_input_data, unweighted_computed_aggregate, absolute_error_margin = 1), \
+        "the total of transport differs from the sum of its components"
+
+    weighted_input_data = ((carburants).sum(axis = 1) * pondmen).sum()
+    weighted_computed_aggregate = survey_scenario.compute_aggregate('poste_agrege_07', period = year)
+    assert_near(weighted_input_data, weighted_computed_aggregate, 1), "the total of transport differs from the sum of its components"
