@@ -5,6 +5,7 @@ from openfisca_core.tools import assert_near
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
 
+
 # TODO 2005 is failing see https://github.com/openfisca/openfisca-france-indirect-taxation/issues/177
 # TODO 200 is failing at IPP
 @pytest.mark.parametrize("year", [2011])
