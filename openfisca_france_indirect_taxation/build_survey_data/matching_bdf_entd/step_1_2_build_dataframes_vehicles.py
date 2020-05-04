@@ -97,10 +97,10 @@ def merge_vehicule_menage():
     data_entd.loc[data_entd['check_annee'] == '/', 'recvoi'] = data_entd['v1_sfvdatcg'].str[6:].copy()
     del data_entd['v1_sfvdatcg'], data_entd['check_annee']
 
-    data_entd[['anvoi', 'recvoi']] = data_entd[['anvoi', 'recvoi']].astype(int, inplace = True)
+    data_entd[['anvoi', 'recvoi']] = data_entd[['anvoi', 'recvoi']].astype(int)
 
     data_bdf[['anvoi', 'recvoi']] = data_bdf[['anvoi', 'recvoi']].fillna(0)
-    data_bdf[['anvoi', 'recvoi']] = data_bdf[['anvoi', 'recvoi']].astype(int, inplace = True)
+    data_bdf[['anvoi', 'recvoi']] = data_bdf[['anvoi', 'recvoi']].astype(int)
 
     data_entd['age_vehicule'] = 0
     data_bdf['age_vehicule'] = 0
