@@ -43,7 +43,6 @@ setup(
             'matplotlib',
             'nbconvert >= 5.5.0',
             "pytest", # < 5.0",
-            'pdbpp',
             'ruamel.yaml',
             'seaborn',
             'tables',
