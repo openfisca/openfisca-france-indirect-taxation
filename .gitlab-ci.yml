@@ -44,6 +44,7 @@ Build data collections:
   when: manual
 
 Test:
+  stage: test
   image: $CI_REGISTRY_IMAGE:latest
   tags:
     - ipp
