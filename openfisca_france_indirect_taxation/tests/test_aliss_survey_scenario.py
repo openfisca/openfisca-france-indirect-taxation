@@ -27,7 +27,7 @@ def build_aliss_scenarios(reform = None):
     adjusted_survey_scenario = SurveyScenario.create(**adjusted_scenario_kwargs)
     return survey_scenario, adjusted_survey_scenario
 
-# Do not run on laptop msika
+# Do not run on laptop msika
 @pytest.mark.skip(reason = "Need to fix aliss .dta file problem with utf8")
 def test():
     reform = aliss_tva_sociale
