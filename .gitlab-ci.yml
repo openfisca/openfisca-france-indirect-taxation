@@ -54,5 +54,6 @@ Test:
     - cp ./runner/openfisca_survey_manager_config.ini ~/.config/openfisca-survey-manager/config.ini
     - mkdir -p /root/ci-files/data_collections
     - pip3 install -e .[dev,survey]
+  script:
     - build-survey-data -v
     - make test
