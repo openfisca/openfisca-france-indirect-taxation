@@ -1,3 +1,4 @@
+import pytest
 try:
     import seaborn
     # Import d'une nouvelle palette de couleurs
@@ -26,7 +27,8 @@ def build_aliss_scenarios(reform = None):
     adjusted_survey_scenario = SurveyScenario.create(**adjusted_scenario_kwargs)
     return survey_scenario, adjusted_survey_scenario
 
-
+# Do not run on laptop msika
+@pytest.mark.skip(reason = "Need to fix aliss .dta file problem with utf8")
 def test():
     reform = aliss_tva_sociale
     survey_scenario, adjusted_survey_scenario = build_aliss_scenarios(reform = reform)
