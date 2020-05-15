@@ -136,7 +136,7 @@ def get_inflators_by_year(rebuild = False):
     else:
         re_build_inflators = dict()
         inflators_from_csv = pandas.read_csv(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year_wip.csv'),
-            header = -1)
+            header = None)
         for year in range(2000, 2015):
             inflators_from_csv_by_year = inflators_from_csv[inflators_from_csv[2] == year]
             inflators_to_dict = pandas.DataFrame.to_dict(inflators_from_csv_by_year)
