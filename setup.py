@@ -42,7 +42,7 @@ setup(
             # "flake8-print", Bring back when one has time to clear all prints
             'matplotlib',
             'nbconvert >= 5.5.0',
-            "pytest", # < 5.0",
+            "pytest",  # < 5.0",
             'ruamel.yaml',
             'seaborn',
             'tables',
@@ -56,7 +56,7 @@ setup(
         'OpenFisca-Survey-Manager >= 0.37.0,<1.0',
         'python-slugify',
         'PyYAML >= 3.10',
-        "pandas", # <= 0.24.2",
+        "pandas",  # <= 0.24.2",
         "statsmodels >= 0.10.1, <1.0",
         ],
     packages = find_packages(),
