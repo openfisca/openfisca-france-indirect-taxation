@@ -42,7 +42,6 @@ def modify_parameters(parameters):
                 },
             "essence": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
-                "format": "float",
                 "unit": 'currency',
                 "values": {
                     '2014-01-01': 1.694,
@@ -55,7 +54,6 @@ def modify_parameters(parameters):
                 },
             "fioul_domestique": {
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
-                "format": "float",
                 "unit": 'currency',
                 "values": {
                     '2014-01-01': 0.0217,

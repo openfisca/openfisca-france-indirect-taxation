@@ -5,6 +5,9 @@
 # taxes paid. A positive value means the household received higher transfers than
 # the increase in taxes he faced. These amounts do not take into account VAT.
 
+import os
+import pkg_resources
+
 
 from openfisca_france_indirect_taxation.examples.utils_example import (
     dataframe_by_group,
@@ -110,3 +113,26 @@ for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 
     print((df_reforme['cheques_energie_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1e6)
     print((df_reforme['cheques_energie_majore_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1e6)
     print((df_reforme['cheques_energie_philippe_officielle_2019_in_2017'] * df_reforme['pondmen']).sum() / 1e6)
+
+    test_assets_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'tests'
+        )
+
+    test_variables = [
+        'niveau_de_vie',
+        'cout_reforme_uc_avant_cheque_energie',
+        'cout_reforme_uc_cheque_officiel',
+        'cout_reforme_uc_cheque_philippe',
+        'cout_reforme_uc_cheque_majore',
+        'taux_effort_cheque_philippe',
+        ]
+
+    df[test_variables].to_csv(
+        os.path.join(
+            test_assets_directory,
+            'net_contributions_by_categ_2019_in_2017.csv'
+            )
+        )

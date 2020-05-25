@@ -9,6 +9,14 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 
 parameters_path = os.path.join(os.path.dirname(__file__), 'parameters')
 
+# Quelques constantes
+# 266 kg de C02 par hectorlitre de diesel
+# 242 kg de C02 par hectorlitre de d'essence
+
+DIESEL_KG_CO2_PAR_HL = 266
+ESSENCE_KG_CO2_PAR_HL = 242
+
+
 # 44,6€ la tonne de CO2 en 2018 (au lieu des 39€ initialement prévus par la CCE), contre 22€ en 2016.
 # Le rattrapage de la fiscalité du diesel prévoit une hausse de 2,6€ par an (par hectolitre)
 # pendant 4 ans, en plus de la hausse de la composante carbone.
@@ -30,42 +38,42 @@ def modify_parameters(parameters):
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 "unit": "currency",
                 "values": {
-                    "2016-01-01": 2.6 + 266 * (0.0446 - 0.022)
+                    "2016-01-01": 2.6 + (44.6 - 22) / 1e3 * DIESEL_KG_CO2_PAR_HL
                     },
                 },
             "diesel_cce_seulement": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres) rattrapage exclut (i.e. cce seulement)",
                 "unit": "currency",
                 "values": {
-                    "2016-01-01": 266 * (0.0446 - 0.022)
+                    "2016-01-01": (44.6 - 22) / 1e3 * DIESEL_KG_CO2_PAR_HL
                     },
                 },
             "essence_2016_2018": {
-                "description": "Surcroît de prix de lessence (en euros par hectolitres)",
+                "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "unit": "currency",
                 "values": {
-                    "2016-01-01": 242 * (0.0446 - 0.022)
+                    "2016-01-01": (44.6 - 22) / 1e3 * ESSENCE_KG_CO2_PAR_HL
                     }
                 },
             "combustibles_liquides_2016_2018": {
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
                 "unit": "currency",
                 "values": {
-                    "2016-01-01": 3.24 * (0.0446 - 0.022),
+                    "2016-01-01": (44.6 - 22) / 1e3 * 3.24,
                     }
                 },
             "electricite_cspe": {
-                "description": "Surcroît de prix de lélectricité (en euros par kWh) en ajoutant la différence avec un prix de 10€ sur le marché EU-ETS",
+                "description": "Surcroît de prix de l'électricité (en euros par kWh) en ajoutant la différence avec un prix de 10€ sur le marché EU-ETS",
                 "unit": "currency",
                 "values": {
-                    "2016-01-01": 0.09 * (0.0446 - 0.01),  # Différence entre prix de la réforme et prix (environ 10€) sur le marché EU-ETS
+                    "2016-01-01": (44.6 - 10) / 1e3 * 0.09,  # Différence entre prix de la réforme et prix (environ 10€) sur le marché EU-ETS
                     },
                 },
             "gaz_ville_2016_2018": {
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
                 "unit": "currency",
                 "values":
-                    {"2016-01-01": 0.241 * (0.0446 - 0.022)}
+                    {"2016-01-01": (44.6 - 22) / 1e3 * 0.241}
                 },
             "abaissement_tva_taux_plein_2016_2018": {
                 "description": "Baisse de la TVA à taux plein pour obtenir un budget constantœ",

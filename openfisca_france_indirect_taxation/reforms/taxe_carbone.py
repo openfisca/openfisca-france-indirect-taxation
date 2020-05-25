@@ -21,7 +21,6 @@ def modify_parameters(parameters):
                 },
             "essence": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
-                "format": "float",
                 "unit": 'currency',
                 "values": {'2010-01-01': 12.1 - 1.694},
                 },

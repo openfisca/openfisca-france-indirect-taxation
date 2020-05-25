@@ -28,7 +28,6 @@ def modify_parameters(parameters):
             "description": "contribution_climat_energie",
             "essence": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
-                "format": "float",
                 "unit": 'currency',
                 "values": {
                     '2014-01-01': 1.694,
@@ -41,7 +40,6 @@ def modify_parameters(parameters):
                 },
             "diesel": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
-                # TODO "unit": '?',
                 "unit": 'currency',
                 "values": {
                     '2014-01-01': 1.862,
@@ -54,7 +52,6 @@ def modify_parameters(parameters):
                 },
             "gaz": {
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
-                # TODO "unit": '?',
                 "unit": 'currency',
                 "values": {
                     '2014-01-01': 0.00168,

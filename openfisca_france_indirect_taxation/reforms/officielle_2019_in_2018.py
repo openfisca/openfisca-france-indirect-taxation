@@ -15,25 +15,21 @@ def modify_parameters(parameters):
             "description": "officielle_2019_in_2018",
             "diesel_2019_in_2018": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
-                # TODO "unit": '?',
                 "unit": 'currency',
                 "values": {'2016-01-01': 2.6 + 266 * (0.055 - 0.0446)}
                 },
             "essence_2019_in_2018": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
-                "format": "float",
                 "unit": 'currency',
                 "values": {'2016-01-01': 242 * (0.055 - 0.0446)}
                 },
             "combustibles_liquides_2019_in_2018": {
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
-                "format": "float",
                 "unit": 'currency',
                 "values": {'2016-01-01': 3.24 * (0.055 - 0.0446)}
                 },
             "gaz_ville_2019_in_2018": {
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
-                # TODO "unit": '?',
                 "unit": 'currency',
                 "values": {'2016-01-01': 0.241 * (0.055 - 0.0446)}
                 },
@@ -789,7 +785,7 @@ class officielle_2019_in_2018(Reform):
         label = "Recettes de la taxe sur la consommation de gaz - ceteris paribus"
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
 
-        def formula(menage, period):
+        def formula(menage, period, parameters):
             quantites_gaz_ajustees = menage('quantites_gaz_final_officielle_2019_in_2018', period)
             reforme_gaz = parameters(period.start).officielle_2019_in_2018.gaz_ville_2019_in_2018
             recettes_gaz = quantites_gaz_ajustees * reforme_gaz
