@@ -15,9 +15,9 @@ data_year = 2011
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 simulated_variables = [
-    'poste_02_2_1',  # cigarettes
-    'poste_02_2_2',  # cigares et cigarillos
-    'poste_02_2_3',  # tabac sous d'autres formes
+    'depenses_cigarettes',
+    'depenses_cigares',
+    'depenses_tabac_a_rouler',
     'rev_disp_loyerimput',
     'depenses_tot',
     'ocde10',
@@ -34,7 +34,6 @@ survey_scenario = SurveyScenario.create(
     )
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
-df_reforme['depenses_tabac'] = df_reforme['poste_02_2_1'] + df_reforme['poste_02_2_2'] + df_reforme['poste_02_2_3']
 
 nombre_paquets_annuel = 2.21e9  # Nb de paquets de 20 cigarettes consommés en France par an en 2017
 paquets_par_menage = nombre_paquets_annuel / (df_reforme['pondmen']).sum()  # Nombre moyen de paquets par ménage en 2017
@@ -43,7 +42,7 @@ paquets_par_menage = nombre_paquets_annuel / (df_reforme['pondmen']).sum()  # No
 df = dataframe_by_group(survey_scenario, category = 'niveau_vie_decile', variables = simulated_variables)
 
 # Calibration du nombre de paquets moyen par ménage
-df['nombre_paquets_moyen'] = paquets_par_menage * (df['poste_02_2_1'] * 10) / (df['poste_02_2_1'].sum())
+df['nombre_paquets_moyen'] = paquets_par_menage * (df['depenses_cigarettes'] * 10) / (df['depenses_cigarettes'].sum())
 
 # Elasticité
 elas_tabac = -0.5  # valeur provenant de la littérature. Hill & Legoupil (2018) -0,5 sur la période 1950-2015 et -0,4 sur la période 2000-2015
@@ -62,12 +61,12 @@ df['cout_reforme_cigarettes_elasticite_2019'] = (
 
 
 # REFORME TABAC A ROULER : Effet d'une augmentation du prix de la bague de tabac de 10.8€ à 11.7€ en avril, puis 12.6€ en novembre, avec élasticité
-df['poste_02_2_3_janvier_2019'] = df['poste_02_2_3'] * (1 + (1 + elas_tabac) * ((10.8 - 8.8) / 8.8))
-df['poste_02_2_3_avril_2019'] = df['poste_02_2_3'] * (1 + (1 + elas_tabac) * ((11.7 - 8.8) / 8.8))
-df['poste_02_2_3_novembre_2019'] = df['poste_02_2_3'] * (1 + (1 + elas_tabac) * ((12.6 - 8.8) / 8.8))
+df['depenses_tabac_a_rouler_janvier_2019'] = df['depenses_tabac_a_rouler'] * (1 + (1 + elas_tabac) * ((10.8 - 8.8) / 8.8))
+df['depenses_tabac_a_rouler_avril_2019'] = df['depenses_tabac_a_rouler'] * (1 + (1 + elas_tabac) * ((11.7 - 8.8) / 8.8))
+df['depenses_tabac_a_rouler_novembre_2019'] = df['depenses_tabac_a_rouler'] * (1 + (1 + elas_tabac) * ((12.6 - 8.8) / 8.8))
 df['cout_reforme_tabac_rouler_elasticite_2019'] = (
-    3 * df['poste_02_2_3_janvier_2019'] + 7 * df['poste_02_2_3_avril_2019'] + 2 * df['poste_02_2_3_novembre_2019']
-    ) / 12 - df['poste_02_2_3']
+    3 * df['depenses_tabac_a_rouler_janvier_2019'] + 7 * df['depenses_tabac_a_rouler_avril_2019'] + 2 * df['depenses_tabac_a_rouler_novembre_2019']
+    ) / 12 - df['depenses_tabac_a_rouler']
 
 # Effet pour l'ensemble des réformes, avec élasticités
 df['cout_reforme_elasticite_2019'] = df['cout_reforme_cigarettes_elasticite_2019'] + df['cout_reforme_tabac_rouler_elasticite_2019']
