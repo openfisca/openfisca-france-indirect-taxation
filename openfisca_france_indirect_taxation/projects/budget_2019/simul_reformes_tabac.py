@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import pandas as pd
+
 from openfisca_france_indirect_taxation.examples.utils_example import (
     graph_builder_bar,
     dataframe_by_group,
@@ -76,3 +78,7 @@ graph_builder_bar(df['cout_reforme_rev_disp_loyerimput_elasticite_2019'], False)
 # Calculer le budget total
 print("Coût total de la réforme : {} milliards d'euros".format(df['cout_reforme_elasticite_2019'].mean() * df_reforme['pondmen'].sum()/1e9))
 
+## Test
+
+resultats_a_reproduire = pd.read_csv("../../assets/tests/resultats_reformes_tabac_budget_2019.csv", header = None)
+assert (abs(df['cout_reforme_rev_disp_loyerimput_elasticite_2019'].values - resultats_a_reproduire[0].values) < 1e-6).all()
