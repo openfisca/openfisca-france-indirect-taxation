@@ -38,7 +38,7 @@ prix_paquet = {'2017': 7.1, '2018': 7.9}
 prix_tabac_rouler = {'2017': 8.8, '2018': 10.8}
 
 
-for baseline_year in ['2018']:
+for baseline_year in ['2017', '2018']:
     
     # Résultats agrégés par déciles de niveau de vie
     df = dataframe_by_group(survey_scenario, category = 'niveau_vie_decile', variables = simulated_variables)
