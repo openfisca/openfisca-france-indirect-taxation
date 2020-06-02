@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import pandas as pd
 import pkg_resources
 
 from openfisca_france_indirect_taxation.examples.utils_example import (
@@ -88,19 +89,6 @@ test_assets_directory = os.path.join(
     'assets',
     'tests'
     )
-
-test_variables = [
-    'niveau_de_vie',
-    'cout_reforme_uc_avant_cheque_energie',
-    'cout_reforme_uc_cheque_officiel',
-    'cout_reforme_uc_cheque_philippe',
-    'cout_reforme_uc_cheque_majore',
-    'taux_effort_cheque_philippe',
-    ]
-
-df[test_variables].to_csv(
-    os.path.join(
-        test_assets_directory,
-        'net_contributions_by_categ_2019_in_2017.csv'
-        )
-    )
+reforme = '2018_2019'
+resultats_a_reproduire = pd.read_csv(os.path.join(test_assets_directory,"resultats_reformes_energie_budget_{}.csv".format(reforme)), header = None)
+assert (abs(df['cout_reforme_uc_cheque_philippe'].values - resultats_a_reproduire[0].values) < 1e-6).all()
