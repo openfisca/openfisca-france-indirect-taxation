@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import pkg_resources
 
+
 from openfisca_france_indirect_taxation.examples.utils_example import (
     dataframe_by_group,
     graph_builder_bar,
@@ -45,12 +46,17 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 
 print(
     "Nombre de ménages bénéficiant du chèque énergie (avant extension) : {} millions".format(
-    (df_reforme['pondmen'] * (df_reforme['cheques_energie_officielle_2019_in_2017'] > 0)).sum()/1e6)
+        (
+            df_reforme['pondmen'] * (df_reforme['cheques_energie_officielle_2019_in_2017'] > 0)
+            ).sum() / 1e6
+        )
     )
 print(
     "Nombre de ménages bénéficiant du chèque énergie (après extension) : {} millions".format(
-    (df_reforme['pondmen'] * (df_reforme['cheques_energie_philippe_officielle_2019_in_2017'] > 0)).sum()/1e6)
-    )
+        (
+            df_reforme['pondmen'] * (df_reforme['cheques_energie_philippe_officielle_2019_in_2017'] > 0)
+            ).sum() / 1e6)
+        )
 
 # Résultats agrégés par déciles de niveau de vie
 df = dataframe_by_group(survey_scenario, category = 'niveau_vie_decile', variables = simulated_variables)
@@ -81,7 +87,7 @@ df['taux_effort_cheque_philippe'] = df['cout_reforme_uc_cheque_philippe'] / df['
 graph_builder_bar(df['taux_effort_cheque_philippe'], False)
 print("Coût total de la réforme : {} milliards d'euros".format(df['cout_reforme_uc_cheque_philippe'].mean() * df_reforme['pondmen'].sum()/1e9))
 
-## Tests
+# Tests
 
 test_assets_directory = os.path.join(
     pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
@@ -90,5 +96,8 @@ test_assets_directory = os.path.join(
     'tests'
     )
 reforme = '2018_2019'
-resultats_a_reproduire = pd.read_csv(os.path.join(test_assets_directory,"resultats_reformes_energie_budget_{}.csv".format(reforme)), header = None)
+resultats_a_reproduire = pd.read_csv(
+    os.path.join(test_assets_directory, "resultats_reformes_energie_budget_{}.csv".format(reforme)),
+    header = None
+    )
 assert (abs(df['cout_reforme_uc_cheque_philippe'].values - resultats_a_reproduire[0].values) < 1e-6).all()
