@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
+import os
 import pandas as pd
+import pkg_resources
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
@@ -79,5 +81,11 @@ for baseline_year in ['2018']:
         reforme = "2018_2019"
     if baseline_year == '2018':
         reforme = "2019"
-    resultats_a_reproduire = pd.read_csv("../../assets/tests/resultats_reformes_tabac_budget_{}.csv".format(reforme), header = None)
+    test_assets_directory = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'tests'
+        )
+    resultats_a_reproduire = pd.read_csv(os.path.join(test_assets_directory,"resultats_reformes_tabac_budget_{}.csv".format(reforme)), header = None)
     assert (abs(df['cout_reforme_rev_disp_loyerimput_elasticite'].values - resultats_a_reproduire[0].values) < 1e-6).all()
