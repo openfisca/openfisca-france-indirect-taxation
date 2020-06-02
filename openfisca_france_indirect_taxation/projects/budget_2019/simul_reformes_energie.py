@@ -56,7 +56,7 @@ print(
         (
             df_reforme['pondmen'] * (df_reforme['cheques_energie_philippe_officielle_2019_in_2017'] > 0)
             ).sum() / 1e6)
-        )
+    )
 
 # Résultats agrégés par déciles de niveau de vie
 df = dataframe_by_group(survey_scenario, category = 'niveau_vie_decile', variables = simulated_variables)
@@ -85,7 +85,9 @@ df['taux_effort_cheque_officiel'] = df['cout_reforme_uc_cheque_officiel'] / df['
 df['taux_effort_cheque_majore'] = df['cout_reforme_uc_cheque_majore'] / df['rev_disponible']
 df['taux_effort_cheque_philippe'] = df['cout_reforme_uc_cheque_philippe'] / df['rev_disponible']
 graph_builder_bar(df['taux_effort_cheque_philippe'], False)
-print("Coût total de la réforme : {} milliards d'euros".format(df['cout_reforme_uc_cheque_philippe'].mean() * df_reforme['pondmen'].sum()/1e9))
+print("Coût total de la réforme : {} milliards d'euros".format(
+    df['cout_reforme_uc_cheque_philippe'].mean() * df_reforme['pondmen'].sum() / 1e9)
+    )
 
 # Tests
 
