@@ -34,9 +34,8 @@ survey_scenario = SurveyScenario.create(
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-prix_paquet = {'2017': 7.1, '2018': 7.9}
-prix_tabac_rouler = {'2017': 8.8, '2018': 10.8}
-
+prix_paquet = {'2017': 7.1, '2018': 7.9, '2019-03-01': 8.4, '2019-11-01': 8.9}
+prix_tabac_rouler = {'2017': 8.8, '2018': 10.8, '2019-03-01': 11.7, '2019-11-01': 12.6}
 
 for baseline_year in ['2017', '2018']:
 
@@ -50,21 +49,21 @@ for baseline_year in ['2017', '2018']:
 
     # REFORME CIGARETTES : Effet d'une augmentation de 80c du prix du paquet en 2018, 50c en avril 2019, puis 50c en novembre, avec élasticité :
     df['depenses_cigarettes_janvier_2019'] = df['depenses_cigarettes'] * (1 + (1 + elasticite_tabac) * ((7.9 - prix_paquet[baseline_year]) / prix_paquet[baseline_year]))
-    df['depenses_cigarettes_avril_2019'] = df['depenses_cigarettes'] * (1 + (1 + elasticite_tabac) * ((8.4 - prix_paquet[baseline_year]) / prix_paquet[baseline_year]))
+    df['depenses_cigarettes_mars_2019'] = df['depenses_cigarettes'] * (1 + (1 + elasticite_tabac) * ((8.4 - prix_paquet[baseline_year]) / prix_paquet[baseline_year]))
     df['depenses_cigarettes_novembre_2019'] = df['depenses_cigarettes'] * (1 + (1 + elasticite_tabac) * ((8.9 - prix_paquet[baseline_year]) / prix_paquet[baseline_year]))
     df['cout_reforme_cigarettes_elasticite'] = (
-        3 * df['depenses_cigarettes_janvier_2019']
-        + 7 * df['depenses_cigarettes_avril_2019']
+        2 * df['depenses_cigarettes_janvier_2019']
+        + 8 * df['depenses_cigarettes_mars_2019']
         + 2 * df['depenses_cigarettes_novembre_2019']
         ) / 12 - df['depenses_cigarettes']
 
     # REFORME TABAC A ROULER : Effet d'une augmentation du prix de la bague de tabac de 10.8€ à 11.7€ en avril, puis 12.6€ en novembre, avec élasticité
     df['depenses_tabac_a_rouler_janvier_2019'] = df['depenses_tabac_a_rouler'] * (1 + (1 + elasticite_tabac) * ((10.8 - prix_tabac_rouler[baseline_year]) / prix_tabac_rouler[baseline_year]))
-    df['depenses_tabac_a_rouler_avril_2019'] = df['depenses_tabac_a_rouler'] * (1 + (1 + elasticite_tabac) * ((11.7 - prix_tabac_rouler[baseline_year]) / prix_tabac_rouler[baseline_year]))
+    df['depenses_tabac_a_rouler_mars_2019'] = df['depenses_tabac_a_rouler'] * (1 + (1 + elasticite_tabac) * ((11.7 - prix_tabac_rouler[baseline_year]) / prix_tabac_rouler[baseline_year]))
     df['depenses_tabac_a_rouler_novembre_2019'] = df['depenses_tabac_a_rouler'] * (1 + (1 + elasticite_tabac) * ((12.6 - prix_tabac_rouler[baseline_year]) / prix_tabac_rouler[baseline_year]))
     df['cout_reforme_tabac_rouler_elasticite'] = (
-        3 * df['depenses_tabac_a_rouler_janvier_2019']
-        + 7 * df['depenses_tabac_a_rouler_avril_2019']
+        2 * df['depenses_tabac_a_rouler_janvier_2019']
+        + 8 * df['depenses_tabac_a_rouler_mars_2019']
         + 2 * df['depenses_tabac_a_rouler_novembre_2019']
         ) / 12 - df['depenses_tabac_a_rouler']
 
