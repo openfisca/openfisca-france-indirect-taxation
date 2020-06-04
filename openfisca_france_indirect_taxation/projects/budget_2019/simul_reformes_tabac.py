@@ -8,7 +8,7 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, dataframe_by_group
 from openfisca_france_indirect_taxation.reforms.reforme_tva_2019 import reforme_tva_2019
-from openfisca_france_indirect_taxation.projects.base import elasticite_tabac
+from openfisca_france_indirect_taxation.projects.base import elasticite_tabac, nombre_paquets_cigarettes_by_year
 
 
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
@@ -44,8 +44,7 @@ for baseline_year in ['2017', '2018']:
     df = dataframe_by_group(survey_scenario, category = 'niveau_vie_decile', variables = simulated_variables)
 
     # Calibration du nombre de paquets moyen par ménage
-    nombre_paquets_annuel = 2.21e9  # Nb de paquets de 20 cigarettes consommés en France par an en 2017
-    paquets_par_menage = nombre_paquets_annuel / (df_reforme['pondmen']).sum()  # Nombre moyen de paquets par ménage en 2017
+    paquets_par_menage = nombre_paquets_cigarettes_by_year[2017] / (df_reforme['pondmen']).sum()
     df['nombre_paquets_moyen'] = paquets_par_menage * (df['depenses_cigarettes'] * 10) / (df['depenses_cigarettes'].sum())
     df['depenses_cigarettes'] = df['nombre_paquets_moyen'] * prix_paquet[baseline_year]
 
