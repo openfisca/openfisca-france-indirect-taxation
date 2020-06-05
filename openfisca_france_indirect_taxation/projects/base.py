@@ -4,6 +4,8 @@ elasticite_tabac = -0.5  # valeur provenant de la littérature. Hill & Legoupil 
 
 # Consommation agrége de cigarettes (nombre de paquets consommés en France par an)
 # Source : https://www.douane.gouv.fr/la-douane/opendata/categories/tabacs-manufactures/statistiques-des-ventes-en-france-continentale-et
+# Ce lien renseigne pour le nombre de cigarettes consommées par mois en France métropolitaine
+# On en déduit le nombre de paquets de 20 cigarettes consommés par an en France métropolitaine.
 nombre_paquets_cigarettes_by_year = {
     2017 : 2.21e9,
     2018 : 2.01e9,
