@@ -4,6 +4,7 @@ import numpy
 
 from openfisca_core.reforms import Reform
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.variables.revenus.revenus_menages import Deciles
 from openfisca_france_indirect_taxation.projects.base import elasticite_tabac, nombre_paquets_cigarettes_by_year
 
 
@@ -14,7 +15,7 @@ class reforme_tabac_budgets_2018_2019(Reform):
     class depenses_cigarettes_calibre(YearlyVariable):
         value_type = float
         entity = Menage
-        label = ""
+        label = "Dépenses cigarettes calibrées au niveau individuel"
 
         def formula(menage, period, parameters):
             prix_paquet = parameters("2017-01-01").imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
@@ -26,6 +27,60 @@ class reforme_tabac_budgets_2018_2019(Reform):
                 )
             return nombre_paquets_imputes * prix_paquet
 
+    class depenses_cigarettes_calibre_par_decile(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Dépenses cigarettes calibrées au niveau du décile"
+
+        def formula(menage, period, parameters):
+            prix_paquet = parameters("2017-01-01").imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
+            paquets_par_menage = nombre_paquets_cigarettes_by_year[2017] / (menage('pondmen', period).sum())
+            decile = menage('niveau_vie_decile', period)
+            depenses_cigarettes_totales = (menage('depenses_cigarettes', period) * menage('pondmen', period)).sum()
+            depenses_cigarettes_decile = list()
+            nombre_paquets_imputes = list()
+            for i in range(1,11):
+                depenses_cigarettes_decile.append(
+                    (
+                    menage('depenses_cigarettes', period) 
+                    * menage('pondmen', period) 
+                    * (decile == i)
+                    ).sum()
+                    )
+                nombre_paquets_imputes.append(
+                    (
+                    paquets_par_menage 
+                    * (depenses_cigarettes_decile[i-1] * 10) 
+                    / depenses_cigarettes_totales
+                    )
+                    )
+            return numpy.select(
+                [
+                    (decile == Deciles.decile_1),
+                    (decile == Deciles.decile_2),
+                    (decile == Deciles.decile_3),
+                    (decile == Deciles.decile_4),
+                    (decile == Deciles.decile_5),
+                    (decile == Deciles.decile_6),
+                    (decile == Deciles.decile_7),
+                    (decile == Deciles.decile_8),
+                    (decile == Deciles.decile_9),
+                    (decile == Deciles.decile_10),
+                    ],
+                [
+                    nombre_paquets_imputes[0] * prix_paquet,
+                    nombre_paquets_imputes[1] * prix_paquet,
+                    nombre_paquets_imputes[2] * prix_paquet,
+                    nombre_paquets_imputes[3] * prix_paquet,
+                    nombre_paquets_imputes[4] * prix_paquet,
+                    nombre_paquets_imputes[5] * prix_paquet,
+                    nombre_paquets_imputes[6] * prix_paquet,
+                    nombre_paquets_imputes[7] * prix_paquet,
+                    nombre_paquets_imputes[8] * prix_paquet,
+                    nombre_paquets_imputes[9] * prix_paquet,
+                    ],
+                default=0.0
+                )
 
     class depenses_cigarettes_calibre_apres_reforme_mars_2018(YearlyVariable):
         value_type = float
@@ -35,7 +90,7 @@ class reforme_tabac_budgets_2018_2019(Reform):
         def formula(menage, period, parameters):
             prix_paquet_baseline = parameters("2017-12-31").imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
             prix_paquet_reforme = parameters("2018-03-01").imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes 
-            depenses_cigarettes_calibre = menage('depenses_cigarettes_calibre', period)
+            depenses_cigarettes_calibre = menage('depenses_cigarettes_calibre_par_decile', period)
             depenses_cigarettes_calibre_elast = (
                 depenses_cigarettes_calibre 
                 * (
@@ -55,7 +110,7 @@ class reforme_tabac_budgets_2018_2019(Reform):
         def formula(menage, period, parameters):
             prix_paquet_baseline = parameters("2017-12-31").imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
             prix_paquet_reforme = parameters("2019-03-01").imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes 
-            depenses_cigarettes_calibre = menage('depenses_cigarettes_calibre', period)
+            depenses_cigarettes_calibre = menage('depenses_cigarettes_calibre_par_decile', period)
             depenses_cigarettes_calibre_elast = (
                 depenses_cigarettes_calibre 
                 * (
@@ -74,7 +129,7 @@ class reforme_tabac_budgets_2018_2019(Reform):
         def formula(menage, period, parameters):
             prix_paquet_baseline = parameters("2017-12-31").imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
             prix_paquet_reforme = parameters("2019-11-01").imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes 
-            depenses_cigarettes_calibre = menage('depenses_cigarettes_calibre', period)
+            depenses_cigarettes_calibre = menage('depenses_cigarettes_calibre_par_decile', period)
             depenses_cigarettes_calibre_elast = (
                 depenses_cigarettes_calibre 
                 * (
@@ -151,7 +206,7 @@ class reforme_tabac_budgets_2018_2019(Reform):
 
         def formula(menage, period):
 
-            depenses_cigarettes_calibre = menage('depenses_cigarettes_calibre', period) 
+            depenses_cigarettes_calibre = menage('depenses_cigarettes_calibre_par_decile', period) 
             depenses_tabac_a_rouler = menage('depenses_tabac_a_rouler', period) 
 
             return depenses_cigarettes_calibre + depenses_tabac_a_rouler
@@ -165,7 +220,7 @@ class reforme_tabac_budgets_2018_2019(Reform):
         def formula(menage, period):
 
             depenses_cigarettes = (
-                2 * menage('depenses_cigarettes_calibre', period) # dépenses contrefactuelles (pas de réforme de janvier à février)
+                2 * menage('depenses_cigarettes_calibre_par_decile', period) # dépenses contrefactuelles (pas de réforme de janvier à février)
                 + 8 * menage('depenses_cigarettes_calibre_apres_reforme_mars_2019', period) # effet de mars à octobre
                 + 2 * menage('depenses_cigarettes_calibre_apres_reforme_novembre_2019', period) # effet de novembre à décembre
                 ) / 12
@@ -201,6 +256,7 @@ class reforme_tabac_budgets_2018_2019(Reform):
 
     def apply(self):
         self.update_variable(self.depenses_cigarettes_calibre)
+        self.update_variable(self.depenses_cigarettes_calibre_par_decile)
         self.update_variable(self.depenses_cigarettes_calibre_apres_reforme_mars_2018)
         self.update_variable(self.depenses_cigarettes_calibre_apres_reforme_mars_2019)
         self.update_variable(self.depenses_cigarettes_calibre_apres_reforme_novembre_2019)
@@ -210,3 +266,4 @@ class reforme_tabac_budgets_2018_2019(Reform):
         self.update_variable(self.depenses_reforme_tabac_2019_in_2017)
         self.update_variable(self.depenses_reforme_tabac_2019_in_2018)
         self.update_variable(self.depenses_tabac_calibre)
+        

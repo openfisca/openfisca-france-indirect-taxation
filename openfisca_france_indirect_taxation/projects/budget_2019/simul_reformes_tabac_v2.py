@@ -16,8 +16,7 @@ data_year = 2011
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 simulated_variables = [
-    'depenses_cigarettes',
-    'depenses_cigarettes_calibre',
+    'depenses_cigarettes_calibre_par_decile',
     'depenses_cigarettes_calibre_apres_reforme_mars_2018',
     'depenses_cigarettes_calibre_apres_reforme_mars_2019',
     'depenses_cigarettes_calibre_apres_reforme_novembre_2019',
