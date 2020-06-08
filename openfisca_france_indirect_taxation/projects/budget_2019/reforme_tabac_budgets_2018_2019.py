@@ -22,7 +22,7 @@ def create_reforme_tabac_budgets_2018_2019(baseline_year = None):
             label = "Dépenses cigarettes calibrées au niveau individuel"
     
             def formula(menage, period, parameters):
-                prix_paquet = parameters("{}-01-01".format(baseline_year)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
+                prix_paquet = parameters("{}-12-31".format(baseline_year)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
                 paquets_par_menage = nombre_paquets_cigarettes_by_year[2017] / (menage('pondmen', period).sum())
                 nombre_paquets_imputes = (
                     paquets_par_menage 
@@ -37,7 +37,7 @@ def create_reforme_tabac_budgets_2018_2019(baseline_year = None):
             label = "Dépenses cigarettes calibrées au niveau du décile"
     
             def formula(menage, period, parameters):
-                prix_paquet = parameters("{}-01-01".format(baseline_year)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
+                prix_paquet = parameters("{}-12-31".format(baseline_year)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
                 paquets_par_menage = nombre_paquets_cigarettes_by_year[2017] / (menage('pondmen', period).sum())
                 decile = menage('niveau_vie_decile', period)
                 depenses_cigarettes_totales = (menage('depenses_cigarettes', period) * menage('pondmen', period)).sum()
