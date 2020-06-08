@@ -8,7 +8,6 @@ from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitS
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, dataframe_by_group
-from openfisca_france_indirect_taxation.reforms.reforme_tva_2019 import reforme_tva_2019
 from openfisca_france_indirect_taxation.projects.budget_2019.reforme_tabac_budgets_2018_2019 import reforme_tabac_budgets_2018_2019
 
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
@@ -36,7 +35,6 @@ simulated_variables = [
     ]
 
 tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
-tax_benefit_system = reforme_tva_2019(tax_benefit_system)
 tax_benefit_system = reforme_tabac_budgets_2018_2019(tax_benefit_system)
 
 survey_scenario = SurveyScenario.create(

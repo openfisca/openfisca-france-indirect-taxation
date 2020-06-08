@@ -7,7 +7,6 @@ import pkg_resources
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, dataframe_by_group
-from openfisca_france_indirect_taxation.reforms.reforme_tva_2019 import reforme_tva_2019
 from openfisca_france_indirect_taxation.projects.base import elasticite_tabac, nombre_paquets_cigarettes_by_year
 
 
@@ -27,7 +26,6 @@ simulated_variables = [
 
 survey_scenario = SurveyScenario.create(
     inflation_kwargs = inflation_kwargs,
-    reform = reforme_tva_2019,
     year = year,
     data_year = data_year
     )
@@ -37,7 +35,10 @@ df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, pe
 prix_paquet = {'2017': 7.1, '2018': 7.9, '2019-03-01': 8.4, '2019-11-01': 8.9}
 prix_tabac_rouler = {'2017': 8.8, '2018': 10.8, '2019-03-01': 11.7, '2019-11-01': 12.6}
 
-for baseline_year in ['2017', '2018']:
+print(survey_scenario.compute_aggregate(variable = 'depenses_cigarettes', period = year)/1e9)
+
+
+for baseline_year in ['2018']:
 
     # Résultats agrégés par déciles de niveau de vie
     df = dataframe_by_group(survey_scenario, category = 'niveau_vie_decile', variables = simulated_variables)
@@ -46,6 +47,7 @@ for baseline_year in ['2017', '2018']:
     paquets_par_menage = nombre_paquets_cigarettes_by_year[2017] / (df_reforme['pondmen']).sum()
     df['nombre_paquets_moyen'] = paquets_par_menage * (df['depenses_cigarettes'] * 10) / (df['depenses_cigarettes'].sum())
     df['depenses_cigarettes'] = df['nombre_paquets_moyen'] * prix_paquet[baseline_year]
+    print(df['depenses_cigarettes'].sum()/10*df_reforme['pondmen'].sum()/1e9)
 
     # REFORME CIGARETTES : Effet d'une augmentation de 80c du prix du paquet en 2018, 50c en avril 2019, puis 50c en novembre, avec élasticité :
     df['depenses_cigarettes_janvier_2019'] = df['depenses_cigarettes'] * (1 + (1 + elasticite_tabac) * ((7.9 - prix_paquet[baseline_year]) / prix_paquet[baseline_year]))
