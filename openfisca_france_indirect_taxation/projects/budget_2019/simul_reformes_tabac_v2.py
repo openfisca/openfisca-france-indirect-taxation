@@ -41,7 +41,7 @@ for baseline_year in ['2017', '2018']:
     # Recalage des dépenses de cigarettes BDF sur consommations agrégées officielles
 
     reforme_calage = create_reforme_calage_depenses_cigarettes(
-        agregat_depenses = nombre_paquets_cigarettes_by_year[2017], 
+        agregat_depenses = nombre_paquets_cigarettes_by_year[int(baseline_year)], 
         year_calage =  baseline_year,
     )
     tax_benefit_system = reforme_calage(tax_benefit_system)
