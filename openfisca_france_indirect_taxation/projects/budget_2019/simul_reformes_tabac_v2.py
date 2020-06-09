@@ -8,6 +8,8 @@ from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitS
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, dataframe_by_group
+from openfisca_france_indirect_taxation.projects.base import nombre_paquets_cigarettes_by_year
+from openfisca_france_indirect_taxation.projects.calage_depenses_cigarettes import create_reforme_calage_depenses_cigarettes
 from openfisca_france_indirect_taxation.projects.budget_2019.reforme_tabac_budgets_2018_2019 import create_reforme_tabac_budgets_2018_2019
 
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
@@ -34,14 +36,24 @@ simulated_variables = [
 
 tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
-
 for baseline_year in ['2017', '2018']:
-        
-    reform = create_reforme_tabac_budgets_2018_2019(baseline_year = baseline_year)
     
+    # Recalage des dépenses de cigarettes BDF sur consommations agrégées officielles
+
+    reforme_calage = create_reforme_calage_depenses_cigarettes(
+        agregat_depenses = nombre_paquets_cigarettes_by_year[2017], 
+        year_calage =  baseline_year,
+    )
+    tax_benefit_system = reforme_calage(tax_benefit_system)
+
+    # Applicatin des réformes de la fiscalité tabac
+    
+    reform = create_reforme_tabac_budgets_2018_2019(baseline_year = baseline_year)
+    tax_benefit_system = reform(tax_benefit_system)
+
     survey_scenario = SurveyScenario.create(
         inflation_kwargs = inflation_kwargs,
-        reform = reform,
+        tax_benefit_system = tax_benefit_system,
         year = year,
         data_year = data_year
         )
