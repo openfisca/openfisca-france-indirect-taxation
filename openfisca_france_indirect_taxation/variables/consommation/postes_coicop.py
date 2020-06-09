@@ -32,6 +32,7 @@ def generate_postes_variables(tax_benefit_system):
                 value_type = float,
                 entity = Menage,
                 label = label,
+                set_input = set_input_divide_by_period,
                 ))
             )
 
