@@ -93,15 +93,7 @@ print("Coût total de la réforme : {} milliards d'euros".format(
 
 # Tests
 
-test_assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-    'openfisca_france_indirect_taxation',
-    'assets',
-    'tests'
-    )
-reforme = '2018_2019'
-resultats_a_reproduire = pd.read_csv(
-    os.path.join(test_assets_directory, "resultats_reformes_energie_budget_{}.csv".format(reforme)),
-    header = None
-    )
-# assert (abs(df['cout_total_reforme'].values - resultats_a_reproduire[0].values) < 1e-6).all()
+from openfisca_france_indirect_taxation.assets.tests.resultats_reformes_energie_thomas_initial import results
+
+for variables in results.columns:
+    assert (abs(df['{}'.format(variables)] - results['{}'.format(variables)]) < 1).all()
