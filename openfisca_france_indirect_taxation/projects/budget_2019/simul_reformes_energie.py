@@ -15,7 +15,7 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 from openfisca_france_indirect_taxation.projects.budget_2019.reforme_energie_budgets_2018_2019 import officielle_2019_in_2017
 
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
-year = 2016
+year = 2019
 data_year = 2011
 elasticities = get_elasticities_aidsills(data_year, True)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
