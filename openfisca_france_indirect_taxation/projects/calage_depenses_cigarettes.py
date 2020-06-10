@@ -10,7 +10,7 @@ def create_reforme_calage_depenses_cigarettes(
     niveau_calage = None,
     year_calage = None,
     ):
-    
+
     assert agregat_depenses is not None
     assert niveau_calage in ['decile', 'individuel']
     assert year_calage is not None
@@ -26,19 +26,19 @@ def create_reforme_calage_depenses_cigarettes(
                 entity = Menage
                 definition_period = MONTH
                 set_input = set_input_divide_by_period
-                
+
                 def formula(menage, period, parameters):
                     prix_paquet = parameters("{}-12-31".format(year_calage)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
                     paquets_par_menage = agregat_depenses / 12 / (menage('pondmen', period).sum())
                     nombre_paquets_imputes = (
-                        paquets_par_menage 
-                        * (menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year) * len(menage('pondmen', period.this_year))) 
+                        paquets_par_menage
+                        * (menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year) * len(menage('pondmen', period.this_year)))
                         / ((menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year)).sum())
                         )
                     return nombre_paquets_imputes * prix_paquet
 
         if niveau_calage == 'decile':
-                
+
             class depenses_cigarettes(Variable):
                 value_type = float
                 entity = Menage
@@ -56,14 +56,14 @@ def create_reforme_calage_depenses_cigarettes(
                         depenses_cigarettes_decile.append(
                             (
                             menage('poste_02_2_1', period, options = [DIVIDE])
-                            * menage('pondmen', period.this_year) 
+                            * menage('pondmen', period.this_year)
                             * (decile == i)
                             ).sum()
                             )
                         nombre_paquets_imputes.append(
                             (
-                            paquets_par_menage 
-                            * (depenses_cigarettes_decile[i-1] * 10) 
+                            paquets_par_menage
+                            * (depenses_cigarettes_decile[i-1] * 10)
                             / depenses_cigarettes_totales
                             )
                             )
