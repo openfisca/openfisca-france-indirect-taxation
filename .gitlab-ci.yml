@@ -1,6 +1,7 @@
 stages:
   - build_docker_image
   - build_collections
+  - build_matched_data
   - test
 
 variables:
@@ -45,7 +46,7 @@ Build survey collections:
   when: manual
 
 Build matched data:
-  stage: test
+  stage: build_matched_data
   image: $CI_REGISTRY_IMAGE:latest
   tags:
     - ipp
