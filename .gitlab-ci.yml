@@ -58,6 +58,7 @@ Build matched data:
     - mkdir -p /root/ci-files/data_collections
   script:
     - build-survey-data -v
+  when: manual
 
 Test:
   stage: test
