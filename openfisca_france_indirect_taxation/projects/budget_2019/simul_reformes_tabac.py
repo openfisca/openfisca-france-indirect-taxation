@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
+import logging
 
-import os
-import pandas as pd
-import pkg_resources
 
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
@@ -12,7 +9,11 @@ from openfisca_france_indirect_taxation.projects.base import nombre_paquets_ciga
 from openfisca_france_indirect_taxation.projects.calage_depenses_cigarettes import create_reforme_calage_depenses_cigarettes
 from openfisca_france_indirect_taxation.projects.budget_2019.reforme_tabac_budgets_2018_2019 import create_reforme_tabac_budgets_2018_2019
 
+
+log = logging.getLogger(__name__)
+
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
+
 # En attendant les données pour pouvoir inflater plus loin que 2016
 inflators_by_year[2017] = inflators_by_year[2016]
 inflators_by_year[2018] = inflators_by_year[2016]
@@ -23,12 +24,11 @@ data_year = 2011
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 
-for baseline_year in ['2017', '2018']:
-
+def simulate_reforme_tabac(baseline_year, graph = True):
+    assert baseline_year in ['2017', '2018']
     baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
     # Recalage des dépenses de cigarettes BDF sur consommations agrégées officielles
-
     reforme_calage = create_reforme_calage_depenses_cigarettes(
         agregat_depenses = nombre_paquets_cigarettes_by_year[int(baseline_year)],
         niveau_calage = 'decile',
@@ -37,7 +37,6 @@ for baseline_year in ['2017', '2018']:
     baseline_tax_benefit_system = reforme_calage(baseline_tax_benefit_system)
 
     # Applicatin des réformes de la fiscalité tabac
-
     reform = create_reforme_tabac_budgets_2018_2019(baseline_year = baseline_year)
 
     survey_scenario = SurveyScenario.create(
@@ -64,29 +63,24 @@ for baseline_year in ['2017', '2018']:
         diff['depenses_tabac']
         / df['rev_disp_loyerimput']
         )
-    graph_builder_bar(diff['variation_relative_depenses_tabac'], False)
-    print("Coût total de la réforme (baseline : {}): {} milliards d'euros".format(
+    if graph:
+        graph_builder_bar(diff['variation_relative_depenses_tabac'], False)
+    log.info("Coût total de la réforme (baseline : {}): {} milliards d'euros".format(
         baseline_year,
         survey_scenario.compute_aggregate(variable = 'depenses_tabac', period = year, difference = True) / 1e9
         ))
 
-    if baseline_year == '2017':
-        reforme = "2018_2019"
-    if baseline_year == '2018':
-        reforme = "2019"
-    test_assets_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-        'openfisca_france_indirect_taxation',
-        'assets',
-        'tests'
-        )
-    resultats_a_reproduire = pd.read_csv(
-        os.path.join(test_assets_directory, "resultats_reformes_tabac_budget_{}.csv".format(reforme)),
-        header = None
-        )
-    df['ecart'] = abs(
-        diff['variation_relative_depenses_tabac'].values
-        - resultats_a_reproduire[0].values
-        )
-    df['resultats_a_reproduire'] = resultats_a_reproduire[0].values
-    assert (df['ecart'] < 1e-5).all()
+    return diff['variation_relative_depenses_tabac'].values
+
+
+if __name__ == '__main__':
+    import sys
+    logging.basicConfig(level = logging.INFO, stream = sys.stdout)
+
+    for baseline_year in ['2017', '2018']:
+        # from tests.budgets.budget_2019 import test_plf_2019_reforme_tabacs
+        # test_plf_2019_reforme_tabac(baseline_year)
+        variation_relative_depenses_tabac = simulate_reforme_tabac(baseline_year)
+
+
+

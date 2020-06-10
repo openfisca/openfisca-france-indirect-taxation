@@ -156,7 +156,7 @@ def save(data_frame, year_data, year_calage):
     data_frame['identifiant_menage'] = list(range(0, len(data_frame)))
     data_frame['identifiant_menage'] = data_frame['identifiant_menage'] + (year_data * 100000)
 
-    log.info('Saving the openfisca indirect taxation input dataframe')
+    log.debug('Saving the openfisca indirect taxation input dataframe')
     try:
         openfisca_survey_collection = SurveyCollection.load(
             collection = 'openfisca_indirect_taxation', config_files_directory = config_files_directory)

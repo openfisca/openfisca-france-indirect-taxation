@@ -73,7 +73,7 @@ class SurveyScenario(AbstractSurveyScenario):
             survey_scenario.calibrate(**calibration_kwargs)
 
         if inflation_kwargs:
-            log.info('inflating for year = {} using {}'.format(year, inflation_kwargs))
+            log.debug('inflating for year = {} using {}'.format(year, inflation_kwargs))
             survey_scenario.inflate(period = year, **inflation_kwargs)
 
         survey_scenario.initialize_weights()
