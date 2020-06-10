@@ -51,6 +51,7 @@
     tva_taux_super_reduit: 0
     #
     poste_agrege_02: 100
+
 - name: "Cigares"
   period: "2010"
   absolute_error_margin: .004
@@ -104,6 +105,7 @@
     tva_taux_super_reduit: 0
     #
     poste_agrege_02: 100
+
 - name: u"Tabac à rouler"
   period: "2010"
   absolute_error_margin: .004
