@@ -78,9 +78,6 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
     for baseline_year in ['2017', '2018']:
-        # from tests.budgets.budget_2019 import test_plf_2019_reforme_tabacs
+        # from tests.budgets.budget_2019 import test_plf_2019_reforme_tabacs
         # test_plf_2019_reforme_tabac(baseline_year)
         variation_relative_depenses_tabac = simulate_reforme_tabac(baseline_year)
-
-
-
