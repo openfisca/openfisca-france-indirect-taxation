@@ -21,7 +21,7 @@ class cigarette_droit_d_accise(YearlyVariable):
     label = "Montant des droits d'accises sur les cigarettes"
 
     def formula(menage, period, parameters):
-        depenses_cigarettes = menage('depenses_cigarettes', period)
+        depenses_cigarettes = menage('depenses_cigarettes', period, options = [ADD])
         taux_normal_cigarette = \
             parameters(period.start).imposition_indirecte.taxes_tabacs.taux_normaux_tabac.taux_normal.cigarettes
         return tax_from_expense_including_tax(depenses_cigarettes, taux_normal_cigarette)
@@ -77,7 +77,7 @@ class tabac_a_rouler_droit_d_accise(YearlyVariable):
     label = "Montant des droits d'accises sur le tabac à rouler"
 
     def formula(menage, period, parameters):
-        depenses_tabac_a_rouler = menage('depenses_tabac_a_rouler', period)
+        depenses_tabac_a_rouler = menage('depenses_tabac_a_rouler', period, options = [ADD])
         taux_normal_tabac_a_rouler = \
             parameters(period.start).imposition_indirecte.taxes_tabacs.taux_normaux_tabac.taux_normal.tabac_a_rouler
         return tax_from_expense_including_tax(depenses_tabac_a_rouler, taux_normal_tabac_a_rouler)
