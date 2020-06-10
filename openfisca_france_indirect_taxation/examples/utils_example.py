@@ -187,22 +187,22 @@ def collapse(dataframe, groupe, var):
 
 
 def dataframe_by_group(
-        survey_scenario, category, variables, 
+        survey_scenario, category, variables,
         use_baseline = False, difference = False
         ):
     pivot_table = pandas.DataFrame()
     period = survey_scenario.year
-    
+
     if difference:
         for values_reference in variables:
-           pivot_table = pandas.concat([
-               pivot_table,
-               survey_scenario.compute_pivot_table(
-                   values = [values_reference],
-                   columns = [category],
-                   difference = True,
-                   period = period)
-               ])
+            pivot_table = pandas.concat([
+                pivot_table,
+                survey_scenario.compute_pivot_table(
+                    values = [values_reference],
+                    columns = [category],
+                    difference = True,
+                    period = period)
+                ])
     else:
         if use_baseline:
             for values_reference in variables:

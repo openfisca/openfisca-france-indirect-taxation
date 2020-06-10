@@ -6,10 +6,10 @@ from openfisca_france_indirect_taxation.variables.revenus.revenus_menages import
 
 
 def create_reforme_calage_depenses_cigarettes(
-    agregat_depenses = None,
-    niveau_calage = None,
-    year_calage = None,
-    ):
+        agregat_depenses = None,
+        niveau_calage = None,
+        year_calage = None,
+        ):
 
     assert agregat_depenses is not None
     assert niveau_calage in ['decile', 'individuel']
@@ -52,20 +52,20 @@ def create_reforme_calage_depenses_cigarettes(
                     depenses_cigarettes_totales = (menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year)).sum()
                     depenses_cigarettes_decile = list()
                     nombre_paquets_imputes = list()
-                    for i in range(1,11):
+                    for i in range(1, 11):
                         depenses_cigarettes_decile.append(
                             (
-                            menage('poste_02_2_1', period, options = [DIVIDE])
-                            * menage('pondmen', period.this_year)
-                            * (decile == i)
-                            ).sum()
+                                menage('poste_02_2_1', period, options = [DIVIDE])
+                                * menage('pondmen', period.this_year)
+                                * (decile == i)
+                                ).sum()
                             )
                         nombre_paquets_imputes.append(
                             (
-                            paquets_par_menage
-                            * (depenses_cigarettes_decile[i-1] * 10)
-                            / depenses_cigarettes_totales
-                            )
+                                paquets_par_menage
+                                * (depenses_cigarettes_decile[i - 1] * 10)
+                                / depenses_cigarettes_totales
+                                )
                             )
                     return numpy.select(
                         [

@@ -70,6 +70,7 @@ class depenses_tabac(YearlyVariable):
             + menage('depenses_tabac_a_rouler', period, options = [ADD])
             )
 
+
 class tabac_a_rouler_droit_d_accise(YearlyVariable):
     value_type = float
     entity = Menage
