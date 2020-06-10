@@ -81,7 +81,7 @@ df['cout_majoration_et_extension_cheque_energie'] = (
     - df['cheques_energie_officielle_2019_in_2017']
     ) / df['rev_disponible']
 df['cout_total_reforme'] = (
-    - df['cout_reforme_pures_taxes'] 
+    - df['cout_reforme_pures_taxes']
     + df['cout_majoration_et_extension_cheque_energie']
     + df['cout_passage_tarifs_sociaux_cheque_energie']
     )
@@ -104,4 +104,4 @@ resultats_a_reproduire = pd.read_csv(
     os.path.join(test_assets_directory, "resultats_reformes_energie_budget_{}.csv".format(reforme)),
     header = None
     )
-#assert (abs(df['cout_total_reforme'].values - resultats_a_reproduire[0].values) < 1e-6).all()
+# assert (abs(df['cout_total_reforme'].values - resultats_a_reproduire[0].values) < 1e-6).all()
