@@ -20,7 +20,6 @@ def create_reforme_calage_depenses_cigarettes(
         name = "Réforme qui recale les dépenses de cigarettes pour atteindre un certain niveau agrégé",
 
         if niveau_calage == 'individuel':
-
             class depenses_cigarettes(Variable):
                 value_type = float
                 entity = Menage
@@ -37,8 +36,7 @@ def create_reforme_calage_depenses_cigarettes(
                         )
                     return nombre_paquets_imputes * prix_paquet
 
-        if niveau_calage == 'decile':
-
+        elif niveau_calage == 'decile':
             class depenses_cigarettes(Variable):
                 value_type = float
                 entity = Menage
@@ -92,7 +90,7 @@ def create_reforme_calage_depenses_cigarettes(
                             nombre_paquets_imputes[8] * prix_paquet,
                             nombre_paquets_imputes[9] * prix_paquet,
                             ],
-                        default=0.0
+                        default = 0.0
                         )
 
         def apply(self):
