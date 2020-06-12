@@ -23,11 +23,11 @@ data_year = 2011
 elasticities = get_elasticities_aidsills(data_year, True)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
+#urvey_scenario.baseline_tax_benefit_system.parameters.prestations.cheque_energie
+# survey_scenario.compute_aggregate(variable = 'cheques_energie', period = year, use_baseline = True)
 simulated_variables = [
     'revenu_reforme_officielle_2019_in_2017',
-    'cheques_energie_officielle_2019_in_2017',
-    'cheques_energie_philippe_officielle_2019_in_2017',
-    'cheques_energie_majore_officielle_2019_in_2017',
+    'cheques_energie',
     'rev_disp_loyerimput',
     'rev_disponible',
     'niveau_de_vie',
@@ -49,22 +49,15 @@ survey_scenario = SurveyScenario.create(
 
 df_reforme = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']
 
-print(
-    "Nombre de ménages bénéficiant du chèque énergie (avant extension) : {} millions".format(
-        (
-            df_reforme['pondmen'] * (df_reforme['cheques_energie_officielle_2019_in_2017'] > 0)
-            ).sum() / 1e6
-        )
-    )
-print(
-    "Nombre de ménages bénéficiant du chèque énergie (après extension) : {} millions".format(
-        (
-            df_reforme['pondmen'] * (df_reforme['cheques_energie_philippe_officielle_2019_in_2017'] > 0)
-            ).sum() / 1e6)
-    )
 
 # Résultats agrégés par déciles de niveau de vie
 df = dataframe_by_group(survey_scenario, category = 'niveau_vie_decile', variables = simulated_variables)
+df_energie = dataframe_by_group(
+    survey_scenario,
+    category = 'niveau_vie_decile',
+    variables = ['cheques_energie'],
+    use_baseline =  False,
+    )
 
 # Simulation des effets de différentes réformes
 
@@ -73,22 +66,13 @@ df['cout_reforme_pures_taxes'] = (
     df['revenu_reforme_officielle_2019_in_2017']
     - df['tarifs_sociaux_electricite'] - df['tarifs_sociaux_gaz']
     ) / df['rev_disponible']
-df['cout_passage_tarifs_sociaux_cheque_energie'] = (
-    df['cheques_energie_officielle_2019_in_2017']
+df['cout_passage_tarifs_sociaux_cheque_energie_majore_et_etendu'] = (
+    df['cheques_energie']
     - df['tarifs_sociaux_electricite'] - df['tarifs_sociaux_gaz']
-    ) / df['rev_disponible']
-df['cout_majoration_cheque_energie'] = (
-    df['cheques_energie_majore_officielle_2019_in_2017']
-    - df['cheques_energie_officielle_2019_in_2017']
-    ) / df['rev_disponible']
-df['cout_majoration_et_extension_cheque_energie'] = (
-    df['cheques_energie_philippe_officielle_2019_in_2017']
-    - df['cheques_energie_officielle_2019_in_2017']
     ) / df['rev_disponible']
 df['cout_total_reforme'] = (
     - df['cout_reforme_pures_taxes']
-    + df['cout_majoration_et_extension_cheque_energie']
-    + df['cout_passage_tarifs_sociaux_cheque_energie']
+    + df['cout_passage_tarifs_sociaux_cheque_energie_majore_et_etendu']
     )
 
 graph_builder_bar(df['cout_total_reforme'], False)

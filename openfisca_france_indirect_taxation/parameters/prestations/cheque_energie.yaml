@@ -9,39 +9,59 @@ menage_avec_1_uc:
         value: 194.0
       2018-01-01:
         value: 144.0
+      1945-01-01:
+        value: 0.0
     threshold:
       2018-01-01:
+        value: 0.0
+      1945-01-01:
         value: 0.0
   - amount:
       2019-01-01:
         value: 146.0
       2018-01-01:
         value: 96.0
+      1945-01-01:
+        value: 0.0
     threshold:
       2018-01-01:
         value: 5601.0
+      1945-01-01:
+        value: 0.0
   - amount:
       2019-01-01:
         value: 98.0
       2018-01-01:
         value: 48.0
+      1945-01-01:
+        value: 0.0
     threshold:
       2018-01-01:
         value: 6701.0
+      1945-01-01:
+        value: 0.0
   - amount:
       2019-01-01:
         value: 48.0
       2018-01-01:
         value: 0.0
+      1945-01-01:
+        value: 0.0
     threshold:
       2018-01-01:
         value: 7701.0
+      1945-01-01:
+        value: 0.0
   - amount:
       2018-01-01:
+        value: 0.0
+      1945-01-01:
         value: 0.0
     threshold:
       2018-01-01:
         value: 10701.0
+      1945-01-01:
+        value: 0.0
 menage_entre_1_et_2_uc:
   description: Cas des ménages avec entre 1 et 2 UC
   metadata:
@@ -52,39 +72,59 @@ menage_entre_1_et_2_uc:
         value: 240.0
       2018-01-01:
         value: 190.0
+      1945-01-01:
+        value: 0.0
     threshold:
       2018-01-01:
+        value: 0.0
+      1945-01-01:
         value: 0.0
   - amount:
       2019-01-01:
         value: 176.0
       2018-01-01:
         value: 126.0
+      1945-01-01:
+        value: 0.0
     threshold:
       2018-01-01:
         value: 5601.0
+      1945-01-01:
+        value: 0.0
   - amount:
       2019-01-01:
         value: 113.0
       2018-01-01:
         value: 63.0
+      1945-01-01:
+        value: 0.0
     threshold:
       2018-01-01:
         value: 6701.0
+      1945-01-01:
+        value: 0.0
   - amount:
       2019-01-01:
         value: 63.0
       2018-01-01:
         value: 0.0
+      1945-01-01:
+        value: 0.0
     threshold:
       2018-01-01:
         value: 7701.0
+      1945-01-01:
+        value: 0.0
   - amount:
       2018-01-01:
+        value: 0.0
+      1945-01-01:
         value: 0.0
     threshold:
       2018-01-01:
         value: 10701.0
+      1945-01-01:
+        value: 0.0
 menage_avec_2_uc_et_plus:
   description: Cas des ménages avec 2 UC ou plus
   metadata:
@@ -95,39 +135,59 @@ menage_avec_2_uc_et_plus:
         value: 277.0
       2018-01-01:
         value: 227.0
+      1945-01-01:
+        value: 0.0
     threshold:
       2018-01-01:
+        value: 0.0
+      1945-01-01:
         value: 0.0
   - amount:
       2019-01-01:
         value: 202.0
       2018-01-01:
         value: 152.0
+      1945-01-01:
+        value: 0.0
     threshold:
       2018-01-01:
         value: 5601.0
+      1945-01-01:
+        value: 0.0
   - amount:
       2019-01-01:
         value: 126.0
       2018-01-01:
         value: 76.0
+      1945-01-01:
+        value: 0.0
     threshold:
       2018-01-01:
         value: 6701.0
+      1945-01-01:
+        value: 0.0
   - amount:
       2019-01-01:
         value: 76.0
       2018-01-01:
         value: 0.0
+      1945-01-01:
+        value: 0.0
     threshold:
       2018-01-01:
         value: 7701.0
+      1945-01-01:
+        value: 0.0
   - amount:
       2018-01-01:
+        value: 0.0
+      1945-01-01:
         value: 0.0
     threshold:
       2018-01-01:
         value: 10701.0
+      1945-01-01:
+        value: 0.0
 metadata:
   order:
   - menage_avec_1_uc

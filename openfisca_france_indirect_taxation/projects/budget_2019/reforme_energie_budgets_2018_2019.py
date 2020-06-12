@@ -3,6 +3,7 @@
 import numpy
 
 from openfisca_core.reforms import Reform
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
@@ -34,12 +35,41 @@ def modify_parameters(parameters):
             }
         )
     parameters.add_child('officielle_2019_in_2017', node)
+    parameters.prestations.add_child('cheque_energie_reforme', FranceIndirectTaxationTaxBenefitSystem().parameters.prestations.cheque_energie)
+
     return parameters
 
 
 class officielle_2019_in_2017(Reform):
     key = 'officielle_2019_in_2017',
     name = "Réforme de la fiscalité des énergies de 2018 par rapport aux taux de 2016",
+
+
+
+    class cheques_energie(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Montant des chèques énergie tels que prévus par la loi"
+
+        def formula(menage, period, parameters):
+            revenu_fiscal = numpy.maximum(0.0, menage('revdecm', period) / 1.22)
+            ocde10 = menage('ocde10', period)
+            revenu_fiscal_uc = revenu_fiscal / ocde10
+            bareme_cheque_energie_reforme = parameters(period).prestations.cheque_energie_reforme
+
+            return numpy.select(
+                [
+                    (ocde10 == 1),
+                    ((ocde10 > 1) * (ocde10 < 2)),
+                    (ocde10 >= 2),
+                    ],
+                [
+                    bareme_cheque_energie_reforme.menage_avec_1_uc.calc(revenu_fiscal_uc),
+                    bareme_cheque_energie_reforme.menage_entre_1_et_2_uc.calc(revenu_fiscal_uc),
+                    bareme_cheque_energie_reforme.menage_avec_2_uc_et_plus.calc(revenu_fiscal_uc),
+                    ],
+                default = 0.0
+                )
 
     class combustibles_liquides_ticpe_officielle_2019_in_2017(YearlyVariable):
         value_type = float
@@ -589,6 +619,7 @@ class officielle_2019_in_2017(Reform):
             return total
 
     def apply(self):
+        self.update_variable(self.cheques_energie)
         self.update_variable(self.combustibles_liquides_ticpe_officielle_2019_in_2017)
         self.update_variable(self.depenses_carburants_corrigees_officielle_2019_in_2017)
         self.update_variable(self.depenses_combustibles_liquides_officielle_2019_in_2017)
