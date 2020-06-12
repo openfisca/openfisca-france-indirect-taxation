@@ -123,8 +123,6 @@ class reforme_rattrapage_diesel(Reform):
             super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
             reforme_essence = parameters(period.start).rattrapage_diesel.essence
             carburants_elasticite_prix = menage('elas_price_1_1', period)
-            print("reforme_essence", reforme_essence)
-            print("super_95_ttc", super_95_ttc)
             depenses_essence_ajustees_rattrapage_diesel = \
                 depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
 
