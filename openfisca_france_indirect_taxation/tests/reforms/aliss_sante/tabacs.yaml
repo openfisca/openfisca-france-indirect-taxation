@@ -9,8 +9,32 @@
   output:
     depenses_ht_poste_02_2_1: 100
     depenses_cigares: 0
-    depenses_cigarettes: 100
-    depenses_tabac_a_rouler: 0
+    depenses_cigarettes:
+      2010-01: 100 / 12
+      2010-02: 100 / 12
+      2010-03: 100 / 12
+      2010-04: 100 / 12
+      2010-05: 100 / 12
+      2010-06: 100 / 12
+      2010-07: 100 / 12
+      2010-08: 100 / 12
+      2010-09: 100 / 12
+      2010-10: 100 / 12
+      2010-11: 100 / 12
+      2010-12: 100 / 12
+    depenses_tabac_a_rouler:
+      2010-01: 0
+      2010-02: 0
+      2010-03: 0
+      2010-04: 0
+      2010-05: 0
+      2010-06: 0
+      2010-07: 0
+      2010-08: 0
+      2010-09: 0
+      2010-10: 0
+      2010-11: 0
+      2010-12: 0
     #
     cigares_droit_d_accise: 0
     cigarette_droit_d_accise: 39.02
@@ -39,8 +63,32 @@
     poste_02_2_2: 100  # Cigares
   output:
     depenses_cigares: 100
-    depenses_cigarettes: 0
-    depenses_tabac_a_rouler: 0
+    depenses_cigarettes:
+      2010-01: 0
+      2010-02: 0
+      2010-03: 0
+      2010-04: 0
+      2010-05: 0
+      2010-06: 0
+      2010-07: 0
+      2010-08: 0
+      2010-09: 0
+      2010-10: 0
+      2010-11: 0
+      2010-12: 0
+    depenses_tabac_a_rouler:
+      2010-01: 0
+      2010-02: 0
+      2010-03: 0
+      2010-04: 0
+      2010-05: 0
+      2010-06: 0
+      2010-07: 0
+      2010-08: 0
+      2010-09: 0
+      2010-10: 0
+      2010-11: 0
+      2010-12: 0
     #
     cigares_droit_d_accise: 21.61
     cigarette_droit_d_accise: 0
@@ -69,8 +117,32 @@
     poste_02_2_3: 100  # tabac a rouler
   output:
     depenses_cigares: 0
-    depenses_cigarettes: 0
-    depenses_tabac_a_rouler: 100
+    depenses_cigarettes:
+      2010-01: 0
+      2010-02: 0
+      2010-03: 0
+      2010-04: 0
+      2010-05: 0
+      2010-06: 0
+      2010-07: 0
+      2010-08: 0
+      2010-09: 0
+      2010-10: 0
+      2010-11: 0
+      2010-12: 0
+    depenses_tabac_a_rouler:
+      2010-01: 100 / 12
+      2010-02: 100 / 12
+      2010-03: 100 / 12
+      2010-04: 100 / 12
+      2010-05: 100 / 12
+      2010-06: 100 / 12
+      2010-07: 100 / 12
+      2010-08: 100 / 12
+      2010-09: 100 / 12
+      2010-10: 100 / 12
+      2010-11: 100 / 12
+      2010-12: 100 / 12
     #
     cigares_droit_d_accise: 0
     cigarette_droit_d_accise: 0

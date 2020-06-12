@@ -6,12 +6,24 @@
   - Normaliser dans l'arborescence des paramètres les surcoûts de prix.
 
 
-## test_depenses_carburants
-  - le test ne passe pas
-
-
 # test_aliss_survey_scenario.py
   - le test ne passe pas sur msika/portable
   - vérifier à l'IPP
-  - ajuster les dpéendances
+  - skipped
+
+
+
+Etapes:
+  - Lister les résultats que l'on veut reproduire (vérifier avec Thomas):
+    - pas de réforme de la tva restauration
+    - montée en charge taxe carbone (mais pas dans le PLF)
+    - réforme tabac
+    - autre ?
+  - Construire une législation continue jusqu'à aujourd'hui (ou vérifier qu'elle est disponible).
+  - Reproduire le PLF avec des asofs et des réformes séparées.
+
+On risque de devoir régler les problèmes suivants:
+  - Intégrer de façon homogène la(les) réaction(s) comportemenatle(s) comme une(des)
+   extension(s).
+  - Normaliser dans l'arborescence des paramètres les surcoûts de prix.
 

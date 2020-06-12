@@ -1,0 +1,29 @@
+description: Taux spécifique tabac
+prix_paquet_cigarettes:
+  description: Prix unitaire du paquet de 20 cigarettes
+  values:
+    2019-11-01:
+      value: 8.9
+    2019-03-01:
+      value: 8.4
+    2018-03-01:
+      value: 7.9
+    2015-01-01:
+      value: 7.1
+prix_bague_tabac:
+  description: Prix unitaire de la bague de tabac à rouler
+  values:
+    2019-11-01:
+      value: 12.6
+    2019-03-01:
+      value: 11.7
+    2018-03-01:
+      value: 10.8
+    2015-01-01:
+      value: 8.8
+metadata:
+  order:
+  - prix_paquet_cigarettes
+  - prix_bague_tabac
+  reference:
+    2015-01-01: null
