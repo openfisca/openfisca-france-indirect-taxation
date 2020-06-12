@@ -4,7 +4,9 @@ import os
 import pandas as pd
 import pkg_resources
 
+from openfisca_survey_manager.utils import asof
 
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.examples.utils_example import (
     dataframe_by_group,
     graph_builder_bar,
@@ -38,9 +40,12 @@ simulated_variables = [
     'pondmen'
     ]
 
+baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
+baseline_tax_benefit_system = asof(baseline_tax_benefit_system, "2017-12-31")
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
+    baseline_tax_benefit_system = baseline_tax_benefit_system,
     reform = officielle_2019_in_2017,
     year = year,
     data_year = data_year
@@ -94,6 +99,7 @@ graph_builder_bar(df['cout_total_reforme'], False)
 print("Coût total de la réforme : {} milliards d'euros".format(
     df['cout_total_reforme'].mean() * df_reforme['pondmen'].sum() / 1e9)
     )
+
 
 # Tests
 
