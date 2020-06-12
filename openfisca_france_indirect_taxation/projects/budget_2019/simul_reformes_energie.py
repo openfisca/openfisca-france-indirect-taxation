@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-
-import os
-import pandas as pd
-import pkg_resources
-
 from openfisca_survey_manager.utils import asof
 
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
@@ -15,6 +9,8 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
 from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.projects.budget_2019.reforme_energie_budgets_2018_2019 import officielle_2019_in_2017
+from openfisca_france_indirect_taxation.assets.tests.resultats_reformes_energie_thomas_initial import results
+
 
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 # En attendant les données pour pouvoir inflater plus loin que 2016
@@ -41,7 +37,7 @@ simulated_variables = [
     ]
 
 baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
-baseline_tax_benefit_system = asof(baseline_tax_benefit_system, "2017-12-31")
+asof(baseline_tax_benefit_system, "2017-12-31")
 survey_scenario = SurveyScenario.create(
     elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
@@ -103,7 +99,6 @@ print("Coût total de la réforme : {} milliards d'euros".format(
 
 # Tests
 
-from openfisca_france_indirect_taxation.assets.tests.resultats_reformes_energie_thomas_initial import results
 
 for variables in results.columns:
     assert (abs(df['{}'.format(variables)] - results['{}'.format(variables)]) < 1).all()

@@ -14,7 +14,7 @@ def modify_parameters(parameters):
             "diesel_2019_in_2017": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 "unit": 'currency',
-                "values": {'2016-01-01': 1 * 2.6 + 266 * (0.0446 - 0.0305)} # 266 = valeur du contenu carbone du diesel (source : Ademe)
+                "values": {'2016-01-01': 1 * 2.6 + 266 * (0.0446 - 0.0305)}  # 266 = valeur du contenu carbone du diesel (source : Ademe)
                 },
             "essence_2019_in_2017": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
@@ -40,7 +40,6 @@ def modify_parameters(parameters):
 class officielle_2019_in_2017(Reform):
     key = 'officielle_2019_in_2017',
     name = "Réforme de la fiscalité des énergies de 2018 par rapport aux taux de 2016",
-
 
     class combustibles_liquides_ticpe_officielle_2019_in_2017(YearlyVariable):
         value_type = float
@@ -253,7 +252,6 @@ class officielle_2019_in_2017(Reform):
 
             return montant_diesel_ticpe_ajuste
 
-
     class essence_ticpe_officielle_2019_in_2017(YearlyVariable):
         value_type = float
         entity = Menage
@@ -368,7 +366,6 @@ class officielle_2019_in_2017(Reform):
             somme_gains = gains_carburants + gains_combustibles_liquides + gains_gaz_ville
             return somme_gains
 
-
     class quantites_gaz_final_officielle_2019_in_2017(YearlyVariable):
         value_type = float
         entity = Menage
@@ -386,7 +383,6 @@ class officielle_2019_in_2017(Reform):
             quantites_gaz_ajustees = depenses_gaz_variables / (depenses_gaz_prix_unitaire + reforme_gaz)
 
             return quantites_gaz_ajustees
-
 
     class revenu_reforme_officielle_2019_in_2017(YearlyVariable):
         value_type = float

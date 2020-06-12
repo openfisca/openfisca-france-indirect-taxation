@@ -3,7 +3,6 @@ import numpy
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
-
 class cheques_energie_officielle_2019_in_2017(YearlyVariable):
     value_type = float
     entity = Menage
@@ -29,6 +28,7 @@ class cheques_energie_officielle_2019_in_2017(YearlyVariable):
             default = 0.0
             )
 
+
 class cheques_energie_majore_officielle_2019_in_2017(YearlyVariable):
     value_type = float
     entity = Menage
@@ -53,6 +53,7 @@ class cheques_energie_majore_officielle_2019_in_2017(YearlyVariable):
                 ],
             default = 0.0
             )
+
 
 class cheques_energie_philippe_officielle_2019_in_2017(YearlyVariable):
     value_type = float
