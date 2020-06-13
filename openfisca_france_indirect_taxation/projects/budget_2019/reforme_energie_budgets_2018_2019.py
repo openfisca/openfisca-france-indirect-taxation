@@ -44,8 +44,6 @@ class officielle_2019_in_2017(Reform):
     key = 'officielle_2019_in_2017',
     name = "Réforme de la fiscalité des énergies de 2018 par rapport aux taux de 2016",
 
-
-
     class cheques_energie(YearlyVariable):
         value_type = float
         entity = Menage

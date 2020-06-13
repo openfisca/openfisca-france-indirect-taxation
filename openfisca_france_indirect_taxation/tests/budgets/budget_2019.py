@@ -7,7 +7,7 @@ import pytest
 
 from openfisca_france_indirect_taxation.projects.budget_2019.simul_reformes_tabac import simulate_reforme_tabac
 from openfisca_france_indirect_taxation.projects.budget_2019.simul_reformes_energie import simulate_reformes_energie
-    from openfisca_france_indirect_taxation.assets.tests.resultats_reformes_energie_thomas_initial import results
+from openfisca_france_indirect_taxation.assets.tests.resultats_reformes_energie_thomas_initial import results
 
 
 @pytest.mark.parametrize("baseline_year", ['2017', '2018'])
