@@ -58,7 +58,7 @@ def simulate_reformes_energie(graph = True):
     # Résultats agrégés par déciles de niveau de vie
     df = dataframe_by_group(survey_scenario, category = 'niveau_vie_decile', variables = simulated_variables)
 
-    # TODO unused remove ?
+    # TODO unused remove ?
     # df_energie = dataframe_by_group(
     #     survey_scenario,
     #     category = 'niveau_vie_decile',
