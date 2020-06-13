@@ -23,7 +23,7 @@ data_year = 2011
 elasticities = get_elasticities_aidsills(data_year, True)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
-#urvey_scenario.baseline_tax_benefit_system.parameters.prestations.cheque_energie
+# survey_scenario.baseline_tax_benefit_system.parameters.prestations.cheque_energie
 # survey_scenario.compute_aggregate(variable = 'cheques_energie', period = year, use_baseline = True)
 simulated_variables = [
     'revenu_reforme_officielle_2019_in_2017',
@@ -56,7 +56,7 @@ df_energie = dataframe_by_group(
     survey_scenario,
     category = 'niveau_vie_decile',
     variables = ['cheques_energie'],
-    use_baseline =  False,
+    use_baseline = False,
     )
 
 # Simulation des effets de différentes réformes
