@@ -6,6 +6,8 @@ import pytest
 
 
 from openfisca_france_indirect_taxation.projects.budget_2019.simul_reformes_tabac import simulate_reforme_tabac
+from openfisca_france_indirect_taxation.projects.budget_2019.simul_reformes_energie import simulate_reformes_energie
+    from openfisca_france_indirect_taxation.assets.tests.resultats_reformes_energie_thomas_initial import results
 
 
 @pytest.mark.parametrize("baseline_year", ['2017', '2018'])
@@ -32,3 +34,14 @@ def test_plf_2019_reforme_tabac(baseline_year):
         resultats_a_reproduire[0].values,
         atol = 1e-5
         )
+
+
+def test_plf_2019_reformes_energie():
+    df = simulate_reformes_energie(graph = False)
+    for variable in results.columns:
+        # assert ((df['{}'.format(variable)] - results['{}'.format(variable)]) < 1).all()
+        np.testing.assert_allclose(
+            df['{}'.format(variable)].values,
+            results['{}'.format(variable)].values,
+            atol = 1
+            )
