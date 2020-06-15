@@ -149,15 +149,16 @@ class sp_e10_ticpe(Variable):
 
     def formula_2009(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-        try:
-            accise_super_e10 = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
-            majoration_ticpe_super_e10 = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
-            accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
-        except Exception:
-            accise_super_e10 = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
+        accise_super_e10 = \
+            parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
+        majoration_ticpe_super_e10 = \
+            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
+
+        accise_ticpe_super_e10 = (
+            accise_super_e10 + majoration_ticpe_super_e10
+            if majoration_ticpe_super_e10 is not None
+            else accise_super_e10
+            )
 
         super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
         taux_implicite_sp_e10 = (
@@ -186,16 +187,16 @@ class sp_e10_ticpe_ajustee(Variable):
 
     def formula_2009(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-        try:
-            accise_super_e10 = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
-            majoration_ticpe_super_e10 = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
-            accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
-        except Exception:
-            accise_ticpe_super_e10 = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
-
+        accise_super_e10 = \
+            parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
+        majoration_ticpe_super_e10 = \
+            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
+        accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
+        accise_ticpe_super_e10 = (
+            accise_super_e10 + majoration_ticpe_super_e10
+            if majoration_ticpe_super_e10 is not None
+            else accise_super_e10
+            )
         reforme_essence = parameters(period.start).rattrapage_diesel.essence
         accise_ticpe_super_e10_ajustee = accise_ticpe_super_e10 + reforme_essence
         super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
@@ -221,15 +222,16 @@ class sp95_ticpe(YearlyVariable):
     label = "Calcul du montant de TICPE sur le sp_95"
 
     def formula(menage, period, parameters):
-
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-        try:
-            accise_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
-            majoration_ticpe_super95 = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
-            accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
-        except Exception:
-            accise_ticpe_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
+
+        accise_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
+        majoration_ticpe_super95 = \
+            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
+        accise_ticpe_super95 = (
+            accise_super95 + majoration_ticpe_super95
+            if majoration_ticpe_super95 is not None
+            else accise_super95
+            )
 
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
         taux_implicite_sp95 = (
@@ -251,13 +253,14 @@ class sp95_ticpe_ajustee(YearlyVariable):
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
-        try:
-            accise_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
-            majoration_ticpe_super95 = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
-            accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
-        except Exception:
-            accise_ticpe_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
+        accise_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
+        majoration_ticpe_super95 = \
+            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
+        accise_ticpe_super95 = (
+            accise_super95 + majoration_ticpe_super95
+            if majoration_ticpe_super95 is not None
+            else accise_super95
+            )
 
         reforme_essence = parameters(period.start).rattrapage_diesel.essence
         accise_ticpe_super95_ajustee = accise_ticpe_super95 + reforme_essence

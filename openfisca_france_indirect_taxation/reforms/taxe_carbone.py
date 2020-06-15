@@ -636,14 +636,14 @@ class taxe_carbone(Reform):
         def formula(menage, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
-            try:
-                accise_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
-                majoration_ticpe_super95 = \
-                    parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
-                accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
-            except Exception:
-                accise_ticpe_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
-
+            accise_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
+            majoration_ticpe_super95 = \
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
+            accise_ticpe_super95 = (
+                accise_super95 + majoration_ticpe_super95
+                if majoration_ticpe_super95 is not None
+                else accise_super95
+                )
             reforme_essence = parameters(period.start).taxe_carbone.essence
             accise_ticpe_super95_ajustee = accise_ticpe_super95 + reforme_essence
             super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
@@ -671,13 +671,14 @@ class taxe_carbone(Reform):
         def formula(menage, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
-            try:
-                accise_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
-                majoration_ticpe_super98 = \
-                    parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
-                accise_ticpe_super98 = accise_super98 + majoration_ticpe_super98
-            except Exception:
-                accise_ticpe_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
+            accise_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
+            majoration_ticpe_super98 = \
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
+            accise_ticpe_super98 = (
+                accise_super98 + majoration_ticpe_super98
+                if majoration_ticpe_super98 is not None
+                else accise_super98
+                )
 
             reforme_essence = parameters(period.start).taxe_carbone.essence
             accise_ticpe_super98_ajustee = accise_ticpe_super98 + reforme_essence

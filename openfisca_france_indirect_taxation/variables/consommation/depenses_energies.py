@@ -508,15 +508,16 @@ class depenses_sp_e10_ht(YearlyVariable):
         part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
         depenses_sp_e10 = depenses_essence * part_sp_e10
         depenses_sp_e10_htva = depenses_sp_e10 - tax_from_expense_including_tax(depenses_sp_e10, taux_plein_tva)
-        try:
-            accise_super_e10 = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
-            majoration_ticpe_super_e10 = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
-            accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
-        except Exception:
-            accise_super_e10 = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
+
+        accise_super_e10 = \
+            parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
+        majoration_ticpe_super_e10 = \
+            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
+        accise_ticpe_super_e10 = (
+            accise_super_e10 + majoration_ticpe_super_e10
+            if majoration_ticpe_super_e10 is not None
+            else accise_super_e10
+            )
 
         super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
         taux_implicite_sp_e10 = (
