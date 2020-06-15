@@ -1388,15 +1388,17 @@ class reforme_officielle_2018_in_2016(Reform):
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-            try:
-                accise_super_e10 = \
-                    parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
-                majoration_ticpe_super_e10 = \
-                    parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
-                accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
-            except Exception:
-                accise_ticpe_super_e10 = \
-                    parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
+            accise_super_e10 = \
+                parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
+            # If the parameter does not have a defined value, it returns None
+            majoration_ticpe_super_e10 = \
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
+
+            accise_ticpe_super_e10 = (
+                accise_super_e10 + majoration_ticpe_super_e10
+                if majoration_ticpe_super_e10 is not None
+                else accise_super_e10
+                )
 
             reforme_essence = parameters(period.start).officielle_2018_in_2016.essence_2016_2018
             accise_ticpe_super_e10_ajustee = accise_ticpe_super_e10 + reforme_essence
