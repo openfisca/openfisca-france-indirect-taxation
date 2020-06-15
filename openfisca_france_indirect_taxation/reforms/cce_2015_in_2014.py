@@ -278,7 +278,7 @@ class cce_2015_in_2014(Reform):
 
             try:
                 majoration_ticpe_diesel = \
-                    parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
+                    parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
                 accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
                 accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
             except Exception:

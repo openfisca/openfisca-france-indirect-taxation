@@ -37,7 +37,6 @@ class depenses_combustibles_solides(YearlyVariable):
 
     def formula(menage, period):
         depenses_combustibles_solides = menage('poste_04_5_4_1_1', period)
-
         return depenses_combustibles_solides
 
 
@@ -99,7 +98,6 @@ class depenses_diesel_ht(YearlyVariable):
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-
         try:
             majoration_ticpe_diesel = \
                 parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
@@ -129,10 +127,9 @@ class depenses_diesel_recalculees(YearlyVariable):
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         depenses_diesel_ht = menage('depenses_diesel_ht', period)
-
         try:
             majoration_ticpe_diesel = \
-                parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
             accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
             accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
         except Exception:
