@@ -212,17 +212,17 @@ class officielle_2019_in_2017(Reform):
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
-        # If the parameter does not have a defined value, it returns None
-        majoration_ticpe_diesel = \
-            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
+            # If the parameter does not have a defined value, it returns None
+            majoration_ticpe_diesel = \
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
 
-        accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
+            accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
 
-        accise_diesel_ticpe = (
-            accise_diesel + majoration_ticpe_diesel
-            if majoration_ticpe_diesel is not None
-            else accise_diesel
-            )
+            accise_diesel_ticpe = (
+                accise_diesel + majoration_ticpe_diesel
+                if majoration_ticpe_diesel is not None
+                else accise_diesel
+                )
 
             reforme_diesel = parameters(period.start).officielle_2019_in_2017.diesel_2019_in_2017
             accise_diesel_ticpe_ajustee = accise_diesel_ticpe + reforme_diesel
@@ -253,17 +253,17 @@ class officielle_2019_in_2017(Reform):
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
-        # If the parameter does not have a defined value, it returns None
-        majoration_ticpe_diesel = \
-            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
+            # If the parameter does not have a defined value, it returns None
+            majoration_ticpe_diesel = \
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
 
-        accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
+            accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
 
-        accise_diesel_ticpe = (
-            accise_diesel + majoration_ticpe_diesel
-            if majoration_ticpe_diesel is not None
-            else accise_diesel
-            )
+            accise_diesel_ticpe = (
+                accise_diesel + majoration_ticpe_diesel
+                if majoration_ticpe_diesel is not None
+                else accise_diesel
+                )
 
             taxe_essence = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
             taxe_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
