@@ -330,7 +330,6 @@ class sp98_ticpe_ajustee(YearlyVariable):
             else accise_super98
             )
 
-
         reforme_essence = parameters(period.start).rattrapage_diesel.essence
         accise_ticpe_super98_ajustee = accise_ticpe_super98 + reforme_essence
         super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
