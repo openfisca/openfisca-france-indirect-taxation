@@ -29,8 +29,6 @@ def simulate_reformes_energie(graph = True):
     elasticities = get_elasticities_aidsills(data_year, True)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
-    # survey_scenario.baseline_tax_benefit_system.parameters.prestations.cheque_energie
-    # survey_scenario.compute_aggregate(variable = 'cheques_energie', period = year, use_baseline = True)
     simulated_variables = [
         'revenu_reforme_officielle_2019_in_2017',
         'cheques_energie',
@@ -57,14 +55,6 @@ def simulate_reformes_energie(graph = True):
 
     # Résultats agrégés par déciles de niveau de vie
     df = dataframe_by_group(survey_scenario, category = 'niveau_vie_decile', variables = simulated_variables)
-
-    # TODO unused remove ?
-    # df_energie = dataframe_by_group(
-    #     survey_scenario,
-    #     category = 'niveau_vie_decile',
-    #     variables = ['cheques_energie'],
-    #     use_baseline = False,
-    #     )
 
     # Simulation des effets de différentes réformes
 
@@ -94,6 +84,6 @@ def simulate_reformes_energie(graph = True):
 if __name__ == "__main__":
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    # from openfisca_france_indirect_taxation.tests.budgets.budget_2019 import test_plf_2019_reformes_energie
-    # test_plf_2019_reformes_energie()
+    from openfisca_france_indirect_taxation.tests.budgets.budget_2019 import test_plf_2019_reformes_energie
+    test_plf_2019_reformes_energie()
     df = simulate_reformes_energie()
