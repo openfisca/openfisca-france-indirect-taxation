@@ -1,3 +1,0 @@
-from openfisca_france_indirect_taxation.france_indirect_taxation_taxbenefitsystem import FranceIndirectTaxationTaxBenefitSystem
-
-CountryTaxBenefitSystem = FranceIndirectTaxationTaxBenefitSystem
