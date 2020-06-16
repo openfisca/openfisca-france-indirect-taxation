@@ -7,7 +7,7 @@ from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, dataframe_by_group
 from openfisca_france_indirect_taxation.projects.base import nombre_paquets_cigarettes_by_year
 from openfisca_france_indirect_taxation.projects.calage_depenses_cigarettes import create_reforme_calage_depenses_cigarettes
-from openfisca_france_indirect_taxation.projects.budget_2019.reforme_tabac_budgets_2018_2019 import create_reforme_tabac_budgets_2018_2019
+from openfisca_france_indirect_taxation.reforms.reforme_tabac_budget import create_reforme_tabac_budget
 
 
 log = logging.getLogger(__name__)
@@ -37,7 +37,7 @@ def simulate_reforme_tabac(baseline_year, graph = True):
     baseline_tax_benefit_system = reforme_calage(baseline_tax_benefit_system)
 
     # Applicatin des réformes de la fiscalité tabac
-    reform = create_reforme_tabac_budgets_2018_2019(baseline_year = baseline_year)
+    reform = create_reforme_tabac_budget(baseline_year = baseline_year)
 
     survey_scenario = SurveyScenario.create(
         inflation_kwargs = inflation_kwargs,

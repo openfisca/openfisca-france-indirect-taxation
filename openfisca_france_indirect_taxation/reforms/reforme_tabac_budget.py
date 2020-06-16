@@ -5,13 +5,12 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 from openfisca_france_indirect_taxation.projects.base import elasticite_tabac
 
 
-def create_reforme_tabac_budgets_2018_2019(baseline_year = None):
+def create_reforme_tabac_budget(baseline_year = None):
 
     assert baseline_year is not None
 
-    class reforme_tabac_budgets_2018_2019(Reform):
-        key = 'reforme_tabac_budgets_2018_2019',
-        name = "Réforme de la fiscalité tabac (tabac à rouler et cigarettes) prévue par les budgets 2018 et 2019",
+    class reforme_tabac_budget(Reform):
+        key = 'reforme_tabac_budget',
 
         def apply(self):
             baseline_depenses_cigarettes = self.baseline.get_variable('depenses_cigarettes')
@@ -63,4 +62,4 @@ def create_reforme_tabac_budgets_2018_2019(baseline_year = None):
             self.update_variable(depenses_cigarettes)
             self.update_variable(depenses_tabac_a_rouler)
 
-    return reforme_tabac_budgets_2018_2019
+    return reforme_tabac_budget
