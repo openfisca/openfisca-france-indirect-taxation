@@ -12,7 +12,7 @@ from openfisca_france_indirect_taxation.assets.tests.resultats_reformes_energie_
 
 @pytest.mark.parametrize("baseline_year", ['2017', '2018'])
 def test_plf_2019_reforme_tabac(baseline_year):
-    variation_relative_depenses_tabac = simulate_reforme_tabac(baseline_year, graph = False)
+    variation_relative_depenses_tabac = simulate_reforme_tabac(year = 2019, baseline_year = baseline_year, graph = False)
     assert baseline_year in ['2017', '2018']
     if baseline_year == '2017':
         reforme = "2018_2019"

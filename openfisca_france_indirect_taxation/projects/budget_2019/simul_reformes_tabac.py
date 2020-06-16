@@ -18,14 +18,13 @@ inflators_by_year = get_inflators_by_year_energy(rebuild = False)
 inflators_by_year[2017] = inflators_by_year[2016]
 inflators_by_year[2018] = inflators_by_year[2016]
 inflators_by_year[2019] = inflators_by_year[2016]
+inflators_by_year[2020] = inflators_by_year[2016]
 
-year = 2019
 data_year = 2011
-inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
 
-def simulate_reforme_tabac(baseline_year, graph = True):
-    assert baseline_year in ['2017', '2018']
+def simulate_reforme_tabac(year, baseline_year, graph = True):
+
     baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
     # Recalage des dépenses de cigarettes BDF sur consommations agrégées officielles
@@ -40,7 +39,7 @@ def simulate_reforme_tabac(baseline_year, graph = True):
     reform = create_reforme_tabac_budget(baseline_year = baseline_year)
 
     survey_scenario = SurveyScenario.create(
-        inflation_kwargs = inflation_kwargs,
+        inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year]),
         baseline_tax_benefit_system = baseline_tax_benefit_system,
         reform = reform,
         year = year,
@@ -80,4 +79,4 @@ if __name__ == '__main__':
     for baseline_year in ['2017', '2018']:
         from openfisca_france_indirect_taxation.tests.budgets.budget_2019 import test_plf_2019_reforme_tabac
         test_plf_2019_reforme_tabac(baseline_year)
-        variation_relative_depenses_tabac = simulate_reforme_tabac(baseline_year)
+        variation_relative_depenses_tabac = simulate_reforme_tabac(year = 2019, baseline_year = baseline_year)
