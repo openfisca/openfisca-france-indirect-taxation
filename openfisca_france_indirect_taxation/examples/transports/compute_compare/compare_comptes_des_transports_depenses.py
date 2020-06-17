@@ -44,7 +44,7 @@ parametres_fiscalite_file_path = os.path.join(
     'legislation',
     'Parametres fiscalite indirecte.xls'
     )
-masses_cn_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheetname = "consommation_CN")
+masses_cn_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "consommation_CN")
 
 masses_cn_carburants = masses_cn_data_frame[masses_cn_data_frame['Fonction'] == 'Carburants et lubrifiants']
 masses_cn_carburants = masses_cn_carburants.transpose()

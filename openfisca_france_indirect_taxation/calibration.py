@@ -89,7 +89,7 @@ def get_cn_aggregates_energy(target_year = None):
         'conso-eff-fonction.xls'
         )
 
-    masses_cn_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheetname = "M€cour")
+    masses_cn_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "M€cour")
     masses_cn_data_frame.columns = masses_cn_data_frame.iloc[2]
     masses_cn_data_frame = masses_cn_data_frame.loc[:, ['Code', target_year]].copy()
 
@@ -121,7 +121,7 @@ def get_cn_aggregates_energy(target_year = None):
         't_2101.xls'
         )
 
-    revenus_cn = pd.read_excel(parametres_fiscalite_file_path, sheetname = "t_2101")
+    revenus_cn = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "t_2101")
     revenus_cn.iat[1, 1] = 'Code'
     revenus_cn = revenus_cn.drop(revenus_cn.columns[0], axis=1)
     revenus_cn.columns = revenus_cn.iloc[1]
@@ -151,7 +151,7 @@ def get_cn_aggregates_energy(target_year = None):
     #    'Parametres fiscalite indirecte.xls'
     #    )
 
-    # masses_cn_revenus_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheetname = "revenus_CN")
+    # masses_cn_revenus_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "revenus_CN")
     # masses_cn_revenus_data_frame.rename(
     #   columns = {
     #       'annee': 'year',
