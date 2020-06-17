@@ -121,7 +121,7 @@ def get_cn_aggregates_energy(target_year = None):
         't_2101.xls'
         )
 
-    revenus_cn = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "t_2101")
+    revenus_cn = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "2101")
     revenus_cn.iat[1, 1] = 'Code'
     revenus_cn = revenus_cn.drop(revenus_cn.columns[0], axis=1)
     revenus_cn.columns = revenus_cn.iloc[1]
@@ -235,13 +235,12 @@ def get_inflators_by_year_energy(rebuild = False):
             inflators = get_inflators_energy(target_year)
             inflators_by_year[target_year] = inflators
 
-        writer_inflators = csv.writer(open(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year_wip.csv'), 'wb'))
+        writer_inflators = csv.writer(open(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year_wip.csv'), 'w'))
         for year in range(2000, 2020):
             for key, value in list(inflators_by_year[year].items()):
                 writer_inflators.writerow([key, value, year])
 
         return inflators_by_year
-
     else:
         re_build_inflators = dict()
         inflators_from_csv = pd.read_csv(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year_wip.csv'),
