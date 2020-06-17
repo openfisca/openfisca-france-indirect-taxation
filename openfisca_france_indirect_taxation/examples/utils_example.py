@@ -14,10 +14,6 @@ from openfisca_france_indirect_taxation.utils import assets_directory
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
-# from openfisca_france_indirect_taxation.examples.calage_bdf_cn import \
-#     build_df_calee_on_grospostes, build_df_calee_on_ticpe
-
-
 def age_group(data):
     data['age_group'] = 6
     data.loc[data['agepr'] < 70, 'age_group'] = 5
