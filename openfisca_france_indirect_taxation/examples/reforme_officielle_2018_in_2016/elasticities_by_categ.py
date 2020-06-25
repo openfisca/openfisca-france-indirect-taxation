@@ -13,7 +13,7 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimati
 from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import reforme_officielle_2018_in_2016
 
 
-from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
+from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
 
 
 year = 2016

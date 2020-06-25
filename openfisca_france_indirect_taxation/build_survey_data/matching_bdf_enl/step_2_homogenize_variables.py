@@ -9,7 +9,7 @@ import numpy as np
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_1_build_dataframes import \
     load_data_bdf_enl
-from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
+from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
 
 
 def inflate_energy_consumption(data_enl, data_bdf):
