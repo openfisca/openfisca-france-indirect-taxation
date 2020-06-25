@@ -18,12 +18,7 @@ log = logging.getLogger(__name__)
 
 
 def simulate_reformes_energie(graph = True):
-    inflators_by_year = get_inflators_by_year_energy(rebuild = False)
-    # En attendant les données pour pouvoir inflater plus loin que 2016
-    inflators_by_year[2017] = inflators_by_year[2016]
-    inflators_by_year[2018] = inflators_by_year[2016]
-    inflators_by_year[2019] = inflators_by_year[2016]
-
+    inflators_by_year = get_inflators_by_year_energy(rebuild = True)
     year = 2019
     data_year = 2011
     elasticities = get_elasticities_aidsills(data_year, True)

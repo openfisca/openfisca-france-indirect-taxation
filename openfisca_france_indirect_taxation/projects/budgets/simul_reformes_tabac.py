@@ -12,14 +12,7 @@ from openfisca_france_indirect_taxation.reforms.reforme_tabac import create_refo
 
 log = logging.getLogger(__name__)
 
-inflators_by_year = get_inflators_by_year_energy(rebuild = False)
-
-# En attendant les données pour pouvoir inflater plus loin que 2016
-inflators_by_year[2017] = inflators_by_year[2016]
-inflators_by_year[2018] = inflators_by_year[2016]
-inflators_by_year[2019] = inflators_by_year[2016]
-inflators_by_year[2020] = inflators_by_year[2016]
-
+inflators_by_year = get_inflators_by_year_energy(rebuild = True)
 data_year = 2011
 
 
