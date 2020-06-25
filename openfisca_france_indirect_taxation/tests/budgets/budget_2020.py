@@ -15,7 +15,7 @@ def test_plf_2020_reforme_tabac(baseline_year):
     if baseline_year == '2017':
         reforme = "2018_2020"
     if baseline_year == '2019':
-        reforme = "2018"
+        reforme = "2020"
     test_assets_directory = os.path.join(
         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
         'openfisca_france_indirect_taxation',
