@@ -43,5 +43,5 @@ def test_plf_2019_reformes_energie():
         np.testing.assert_allclose(
             df['{}'.format(variable)].values,
             results['{}'.format(variable)].values,
-            atol = 1
+            atol = 5
             )
