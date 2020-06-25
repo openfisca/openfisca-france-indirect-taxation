@@ -1,18 +1,10 @@
 # -*- coding: utf-8 -*-
 
-
 import numpy
 
 from openfisca_core.reforms import Reform
-
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
-
-
-# 30,5€ la tonne de CO2 en 2017 (au lieu des 39€ initialement prévus par la CCE), contre 55€ en 2019.
-# Le rattrapage de la fiscalité du diesel prévoit une hausse de 2,6€ par an (par hectolitre)
-# pendant 4 ans, en plus de la hausse de la composante carbone.
-# Le chèque énergie remplace les tarifs sociaux de l'électricité et du gaz en 2018.
-# Le chèque énergie est majoré d'en moyenne 50€ par bénéficiaire en 2019.
 
 
 def modify_parameters(parameters):
@@ -23,26 +15,28 @@ def modify_parameters(parameters):
             "diesel_2019_in_2017": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 "unit": 'currency',
-                "values": {'2016-01-01': 2 * 2.6 + 266 * (0.055 - 0.0305)}
+                "values": {'2016-01-01': 1 * 2.6 + 266 * (0.0446 - 0.0305)}  # 266 = valeur du contenu carbone du diesel (source : Ademe)
                 },
             "essence_2019_in_2017": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "unit": 'currency',
-                "values": {'2016-01-01': 242 * (0.055 - 0.0305)},
+                "values": {'2016-01-01': 242 * (0.0446 - 0.0305)},
                 },
             "combustibles_liquides_2019_in_2017": {
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
                 "unit": 'currency',
-                "values": {'2016-01-01': 3.24 * (0.055 - 0.0305)},
+                "values": {'2016-01-01': 3.24 * (0.0446 - 0.0305)},
                 },
             "gaz_ville_2019_in_2017": {
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
                 "unit": 'currency',
-                "values": {'2016-01-01': 0.241 * (0.055 - 0.0305)},
+                "values": {'2016-01-01': 0.241 * (0.0446 - 0.0305)},
                 },
             }
         )
     parameters.add_child('officielle_2019_in_2017', node)
+    parameters.prestations.add_child('cheque_energie_reforme', FranceIndirectTaxationTaxBenefitSystem().parameters.prestations.cheque_energie)
+
     return parameters
 
 
@@ -50,83 +44,30 @@ class officielle_2019_in_2017(Reform):
     key = 'officielle_2019_in_2017',
     name = "Réforme de la fiscalité des énergies de 2018 par rapport aux taux de 2016",
 
-    class cheques_energie_officielle_2019_in_2017(YearlyVariable):
+    class cheques_energie(YearlyVariable):
         value_type = float
         entity = Menage
         label = "Montant des chèques énergie tels que prévus par la loi"
 
-        def formula(menage, period):
-            revenu_fiscal = menage('revdecm', period) / 1.22
+        def formula(menage, period, parameters):
+            revenu_fiscal = numpy.maximum(0.0, menage('revdecm', period) / 1.22)
             ocde10 = menage('ocde10', period)
             revenu_fiscal_uc = revenu_fiscal / ocde10
+            bareme_cheque_energie_reforme = parameters(period).prestations.cheque_energie_reforme
 
-            cheque = (
-                0
-                + 144 * (revenu_fiscal_uc < 5600) * (ocde10 == 1)
-                + 190 * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
-                + 227 * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
-                + 96 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1)
-                + 126 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 > 1) * (ocde10 < 2)
-                + 152 * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * ((ocde10 == 2) + (ocde10 > 2))
-                + 48 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1)
-                + 63 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2)
-                + 76 * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
+            return numpy.select(
+                [
+                    (ocde10 == 1),
+                    ((ocde10 > 1) * (ocde10 < 2)),
+                    (ocde10 >= 2),
+                    ],
+                [
+                    bareme_cheque_energie_reforme.menage_avec_1_uc.calc(revenu_fiscal_uc),
+                    bareme_cheque_energie_reforme.menage_entre_1_et_2_uc.calc(revenu_fiscal_uc),
+                    bareme_cheque_energie_reforme.menage_avec_2_uc_et_plus.calc(revenu_fiscal_uc),
+                    ],
+                default = 0.0
                 )
-
-            return cheque
-
-    class cheques_energie_majore_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Montant des chèques énergie tels que prévus par la loi"
-
-        def formula(menage, period):
-            revenu_fiscal = menage('revdecm', period) / 1.22
-            ocde10 = menage('ocde10', period)
-            revenu_fiscal_uc = revenu_fiscal / ocde10
-
-            cheque = (
-                0
-                + (144 + 50) * (revenu_fiscal_uc < 5600) * (ocde10 == 1)
-                + (190 + 50) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
-                + (227 + 50) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
-                + (96 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1)
-                + (126 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 > 1) * (ocde10 < 2)
-                + (152 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * ((ocde10 == 2) + (ocde10 > 2))
-                + (48 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1)
-                + (63 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2)
-                + (76 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
-                )
-
-            return cheque
-
-    class cheques_energie_philippe_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Montant des chèques énergie tels que prévus par la loi"
-
-        def formula(menage, period):
-            revenu_fiscal = menage('revdecm', period) / 1.22
-            ocde10 = menage('ocde10', period)
-            revenu_fiscal_uc = revenu_fiscal / ocde10
-
-            cheque = (
-                0
-                + (144 + 50) * (revenu_fiscal_uc < 5600) * (ocde10 == 1)
-                + (190 + 50) * (revenu_fiscal_uc < 5600) * (ocde10 > 1) * (ocde10 < 2)
-                + (227 + 50) * (revenu_fiscal_uc < 5600) * ((ocde10 == 2) + (ocde10 > 2))
-                + (96 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 == 1)
-                + (126 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * (ocde10 > 1) * (ocde10 < 2)
-                + (152 + 50) * (revenu_fiscal_uc > 5600) * (revenu_fiscal_uc < 6700) * ((ocde10 == 2) + (ocde10 > 2))
-                + (48 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 == 1)
-                + (63 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * (ocde10 > 1) * (ocde10 < 2)
-                + (76 + 50) * (revenu_fiscal_uc > 6700) * (revenu_fiscal_uc < 7700) * ((ocde10 == 2) + (ocde10 > 2))
-                + (48) * (revenu_fiscal_uc > 7700) * (revenu_fiscal_uc < 9700) * (ocde10 == 1)
-                + (63) * (revenu_fiscal_uc > 7700) * (revenu_fiscal_uc < 9700) * (ocde10 > 1) * (ocde10 < 2)
-                + (76) * (revenu_fiscal_uc > 7700) * (revenu_fiscal_uc < 9700) * ((ocde10 == 2) + (ocde10 > 2))
-                )
-
-            return cheque
 
     class combustibles_liquides_ticpe_officielle_2019_in_2017(YearlyVariable):
         value_type = float
@@ -271,13 +212,17 @@ class officielle_2019_in_2017(Reform):
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
-            try:
-                majoration_ticpe_diesel = \
-                    parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
-                accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
-                accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
-            except Exception:
-                accise_diesel_ticpe = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
+            # If the parameter does not have a defined value, it returns None
+            majoration_ticpe_diesel = \
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
+
+            accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
+
+            accise_diesel_ticpe = (
+                accise_diesel + majoration_ticpe_diesel
+                if majoration_ticpe_diesel is not None
+                else accise_diesel
+                )
 
             reforme_diesel = parameters(period.start).officielle_2019_in_2017.diesel_2019_in_2017
             accise_diesel_ticpe_ajustee = accise_diesel_ticpe + reforme_diesel
@@ -308,13 +253,17 @@ class officielle_2019_in_2017(Reform):
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
-            try:
-                majoration_ticpe_diesel = \
-                    parameters(period.start).imposition_indirecte.major_regionale_ticpe_gazole.alsace
-                accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
-                accise_diesel_ticpe = accise_diesel + majoration_ticpe_diesel
-            except Exception:
-                accise_diesel_ticpe = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
+            # If the parameter does not have a defined value, it returns None
+            majoration_ticpe_diesel = \
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
+
+            accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
+
+            accise_diesel_ticpe = (
+                accise_diesel + majoration_ticpe_diesel
+                if majoration_ticpe_diesel is not None
+                else accise_diesel
+                )
 
             taxe_essence = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
             taxe_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
@@ -338,114 +287,6 @@ class officielle_2019_in_2017(Reform):
                 )
 
             return montant_diesel_ticpe_ajuste
-
-    class emissions_CO2_carburants_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Emissions de CO2 des ménages via leur conso de carburants après réforme, en kg de CO2"
-
-        def formula(menage, period, parameters):
-            quantites_diesel_ajustees = menage('quantites_diesel_officielle_2019_in_2017', period)
-            quantites_essence_ajustees = menage('quantites_essence_officielle_2019_in_2017', period)
-            emissions_diesel = \
-                parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
-            emissions_essence = \
-                parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
-            emissions_ajustees = (
-                (quantites_diesel_ajustees * emissions_diesel)
-                + (quantites_essence_ajustees * emissions_essence)
-                )
-
-            return emissions_ajustees
-
-    class emissions_CO2_carburants_rattrapage_integral(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Emissions de CO2 des ménages via leur conso de carburants après rattrapage intégral fisalité diesel, en kg de CO2"
-
-        def formula(menage, period, parameters):
-            quantites_diesel_ajustees = menage('quantites_diesel_rattrapage_integral', period)
-            quantites_essence_ajustees = menage('quantites_essence', period)
-            emissions_diesel = \
-                parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
-            emissions_essence = \
-                parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
-            emissions_ajustees = (
-                (quantites_diesel_ajustees * emissions_diesel)
-                + (quantites_essence_ajustees * emissions_essence)
-                )
-
-            return emissions_ajustees
-
-    class emissions_CO2_combustibles_liquides_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Emissions de CO2 des ménages via leur conso de fioul après réforme - en kg de CO2"
-
-        def formula(menage, period, parameters):
-            quantites_combustibles_liquides_ajustees = menage('quantites_combustibles_liquides_officielle_2019_in_2017', period)
-            emissions_combustibles_liquides = \
-                parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_combustibles_liquides
-            emissions_ajustees = quantites_combustibles_liquides_ajustees * emissions_combustibles_liquides
-
-            return emissions_ajustees
-
-    class emissions_CO2_diesel_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Emissions de CO2 des ménages via leur conso de diesel après réforme, en kg de CO2"
-
-        def formula(menage, period, parameters):
-            quantites_diesel_ajustees = menage('quantites_diesel_officielle_2019_in_2017', period)
-            emissions_diesel = \
-                parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
-            emissions_ajustees = quantites_diesel_ajustees * emissions_diesel
-
-            return emissions_ajustees
-
-    class emissions_CO2_energies_totales_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Emissions de CO2 des ménages via leur conso d'énergies après hausse cce 16-18, en kg de CO2"
-
-        def formula(menage, period):
-            emissions_carburants_ajustees = menage('emissions_CO2_carburants_officielle_2019_in_2017', period)
-            emissions_electricite = menage('emissions_CO2_electricite', period)
-            emissions_combustibles_liquides_ajustees = \
-                menage('emissions_CO2_combustibles_liquides_officielle_2019_in_2017', period)
-            emissions_gaz_ajustees = menage('emissions_CO2_gaz_ville_officielle_2019_in_2017', period)
-
-            emissions_energies_ajustees = (
-                emissions_carburants_ajustees + emissions_electricite
-                + emissions_combustibles_liquides_ajustees + emissions_gaz_ajustees
-                )
-            return emissions_energies_ajustees
-
-    class emissions_CO2_essence_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Emissions de CO2 des ménages via leur conso d'essence après réforme, en kg de CO2"
-
-        def formula(menage, period, parameters):
-            quantites_essence_ajustees = menage('quantites_essence_officielle_2019_in_2017', period)
-            emissions_essence = \
-                parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
-            emissions_ajustees = quantites_essence_ajustees * emissions_essence
-
-            return emissions_ajustees
-
-    class emissions_CO2_gaz_ville_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Emissions de CO2 des ménages via leur conso de gaz après réforme - en kg de CO2"
-
-        def formula(menage, period, parameters):
-            quantites_gaz_ajustees = menage('quantites_gaz_final_officielle_2019_in_2017', period)
-            emissions_gaz = \
-                parameters(period.start).imposition_indirecte.emissions_CO2.energie_logement.CO2_gaz_ville
-            emissions_ajustees = quantites_gaz_ajustees * emissions_gaz
-
-            return emissions_ajustees
 
     class essence_ticpe_officielle_2019_in_2017(YearlyVariable):
         value_type = float
@@ -561,102 +402,6 @@ class officielle_2019_in_2017(Reform):
             somme_gains = gains_carburants + gains_combustibles_liquides + gains_gaz_ville
             return somme_gains
 
-    # Vérifier que rien n'est oublié ici
-    class pertes_financieres_avant_redistribution_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Montant total des pertes financières dues à la réforme, avant redistribution"
-
-        def formula(menage, period, parameters):
-            depenses_energies_totales = menage('depenses_energies_totales', period)
-            depenses_energies_logement_officielle_2019_in_2017 = \
-                menage('depenses_energies_logement_officielle_2019_in_2017', period)
-            depenses_carburants_officielle_2019_in_2017 = \
-                menage('depenses_carburants_corrigees_officielle_2019_in_2017', period)
-
-            pertes = (
-                depenses_energies_logement_officielle_2019_in_2017
-                + depenses_carburants_officielle_2019_in_2017
-                - depenses_energies_totales
-                )
-
-            return pertes
-
-    class quantites_combustibles_liquides_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Quantités de combustibles_liquides consommées après la réforme"
-
-        def formula(menage, period, parameters):
-            depenses_combustibles_liquides_officielle_2019_in_2017 = \
-                menage('depenses_combustibles_liquides_officielle_2019_in_2017', period)
-            prix_fioul_ttc = \
-                parameters(period.start).tarifs_energie.prix_fioul_domestique.prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre
-            reforme_combustibles_liquides = \
-                parameters(period.start).officielle_2019_in_2017.combustibles_liquides_2019_in_2017
-            quantites_combustibles_liquides_ajustees = depenses_combustibles_liquides_officielle_2019_in_2017 / (prix_fioul_ttc + reforme_combustibles_liquides)
-
-            return quantites_combustibles_liquides_ajustees
-
-    class quantites_diesel_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Quantités de diesel consommées après la réforme"
-
-        def formula(menage, period, parameters):
-            depenses_diesel_officielle_2019_in_2017 = \
-                menage('depenses_diesel_corrigees_officielle_2019_in_2017', period)
-            diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
-            reforme_diesel = parameters(period.start).officielle_2019_in_2017.diesel_2019_in_2017
-            quantites_diesel_ajustees = depenses_diesel_officielle_2019_in_2017 / (diesel_ttc + reforme_diesel) * 100
-
-            return quantites_diesel_ajustees
-
-    class quantites_diesel_rattrapage_integral(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Quantités de diesel consommées après la réforme"
-
-        def formula(menage, period, parameters):
-            depenses_diesel_officielle_2019_in_2017 = \
-                menage('depenses_diesel_corrigees_rattrapage_integral', period)
-            diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
-            taxe_essence = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
-            taxe_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
-            reforme_diesel = taxe_essence - taxe_diesel
-            quantites_diesel_ajustees = depenses_diesel_officielle_2019_in_2017 / (diesel_ttc + reforme_diesel) * 100
-
-            return quantites_diesel_ajustees
-
-    class quantites_essence_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Quantités d'essence consommées par les ménages après réforme"
-        definition_period = YEAR
-
-        def formula_2009(menage, period):
-            quantites_sp95_ajustees = menage('quantites_sp95_officielle_2019_in_2017', period)
-            quantites_sp98_ajustees = menage('quantites_sp98_officielle_2019_in_2017', period)
-            quantites_sp_e10_ajustees = menage('quantites_sp_e10_officielle_2019_in_2017', period)
-            quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees + quantites_sp_e10_ajustees)
-            return quantites_essence_ajustees
-
-        def formula_2007(menage, period):
-            quantites_sp95_ajustees = menage('quantites_sp95_officielle_2019_in_2017', period)
-            quantites_sp98_ajustees = menage('quantites_sp98_officielle_2019_in_2017', period)
-            quantites_essence_ajustees = (quantites_sp95_ajustees + quantites_sp98_ajustees)
-            return quantites_essence_ajustees
-
-        def formula_1990(menage, period, parameters):
-            quantites_sp95_ajustees = menage('quantites_sp95_officielle_2019_in_2017', period)
-            quantites_sp98_ajustees = menage('quantites_sp98_officielle_2019_in_2017', period)
-            quantites_super_plombe_ajustees = \
-                menage('quantites_super_plombe_officielle_2019_in_2017', period)
-            quantites_essence_ajustees = (
-                quantites_sp95_ajustees + quantites_sp98_ajustees + quantites_super_plombe_ajustees
-                )
-            return quantites_essence_ajustees
-
     class quantites_gaz_final_officielle_2019_in_2017(YearlyVariable):
         value_type = float
         entity = Menage
@@ -674,93 +419,6 @@ class officielle_2019_in_2017(Reform):
             quantites_gaz_ajustees = depenses_gaz_variables / (depenses_gaz_prix_unitaire + reforme_gaz)
 
             return quantites_gaz_ajustees
-
-    class quantites_sp_e10_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Quantités consommées de sans plomb e10 par les ménages après réforme"
-
-        def formula(menage, period, parameters):
-            depenses_essence_officielle_2019_in_2017 = \
-                menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
-            part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
-            depenses_sp_e10_ajustees = depenses_essence_officielle_2019_in_2017 * part_sp_e10
-            super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
-            reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
-            quantite_sp_e10 = depenses_sp_e10_ajustees / (super_95_e10_ttc + reforme_essence) * 100
-
-            return quantite_sp_e10
-
-    class quantites_sp95_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Quantités consommées de sans plomb 95 par les ménages après réforme"
-
-        def formula(menage, period, parameters):
-            depenses_essence_officielle_2019_in_2017 = \
-                menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
-            part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
-            depenses_sp95_ajustees = depenses_essence_officielle_2019_in_2017 * part_sp95
-            super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
-            reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
-            quantites_sp95_ajustees = depenses_sp95_ajustees / (super_95_ttc + reforme_essence) * 100
-
-            return quantites_sp95_ajustees
-
-    class quantites_sp98_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Quantités consommées de sans plomb 98 par les ménages"
-
-        def formula(menage, period, parameters):
-            depenses_essence_officielle_2019_in_2017 = \
-                menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
-            part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
-            depenses_sp98_ajustees = depenses_essence_officielle_2019_in_2017 * part_sp98
-            super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
-            reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
-            quantites_sp98_ajustees = depenses_sp98_ajustees / (super_98_ttc + reforme_essence) * 100
-
-            return quantites_sp98_ajustees
-
-    class quantites_super_plombe_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Quantités consommées de super plombé par les ménages après réforme"
-
-        def formula(menage, period, parameters):
-            depenses_essence_officielle_2019_in_2017 = \
-                menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
-            part_super_plombe = \
-                parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
-            depenses_super_plombe_ajustees = depenses_essence_officielle_2019_in_2017 * part_super_plombe
-            super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
-            reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
-            quantites_super_plombe_ajustees = depenses_super_plombe_ajustees / (super_plombe_ttc + reforme_essence) * 100
-
-            return quantites_super_plombe_ajustees
-
-    # A modifier : prendre en compte uniquement le reste des cheques, et faire quelque chose de neutre
-    class reste_transferts_neutre_officielle_2019_in_2017(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Montant des transferts additionnels à imputer pour avoir une réforme à budget neutre, sans biaiser les effets distributifs"
-
-        def formula(menage, period):
-            ocde10 = menage('ocde10', period)
-            pondmen = menage('pondmen', period)
-
-            revenu_reforme = \
-                menage('revenu_reforme_officielle_2019_in_2017', period)
-            somme_revenu = numpy.sum(revenu_reforme * pondmen)
-            cheque = menage('cheques_energie_officielle_2019_in_2017', period)
-            somme_cheque = numpy.sum(cheque * pondmen)
-            revenu_restant = somme_revenu - somme_cheque
-
-            revenu_uc = revenu_restant / numpy.sum(ocde10 * pondmen)
-            reste_transferts = revenu_uc * ocde10
-
-            return reste_transferts
 
     class revenu_reforme_officielle_2019_in_2017(YearlyVariable):
         value_type = float
@@ -789,15 +447,18 @@ class officielle_2019_in_2017(Reform):
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-            try:
-                accise_super_e10 = \
-                    parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
-                majoration_ticpe_super_e10 = \
-                    parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
-                accise_ticpe_super_e10 = accise_super_e10 + majoration_ticpe_super_e10
-            except Exception:
-                accise_ticpe_super_e10 = \
-                    parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
+
+            accise_super_e10 = \
+                parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e10
+            # If the parameter does not have a defined value, it returns None
+            majoration_ticpe_super_e10 = \
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
+
+            accise_ticpe_super_e10 = (
+                accise_super_e10 + majoration_ticpe_super_e10
+                if majoration_ticpe_super_e10 is not None
+                else accise_super_e10
+                )
 
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
             accise_ticpe_super_e10_ajustee = accise_ticpe_super_e10 + reforme_essence
@@ -826,13 +487,14 @@ class officielle_2019_in_2017(Reform):
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
-            try:
-                accise_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
-                majoration_ticpe_super95 = \
-                    parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
-                accise_ticpe_super95 = accise_super95 + majoration_ticpe_super95
-            except Exception:
-                accise_ticpe_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
+            accise_super95 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
+            majoration_ticpe_super95 = \
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
+            accise_ticpe_super95 = (
+                accise_super95 + majoration_ticpe_super95
+                if majoration_ticpe_super95 is not None
+                else accise_super95
+                )
 
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
             accise_ticpe_super95_ajustee = accise_ticpe_super95 + reforme_essence
@@ -863,13 +525,14 @@ class officielle_2019_in_2017(Reform):
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
-            try:
-                accise_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
-                majoration_ticpe_super98 = \
-                    parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
-                accise_ticpe_super98 = accise_super98 + majoration_ticpe_super98
-            except Exception:
-                accise_ticpe_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
+            accise_super98 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_95_98
+            majoration_ticpe_super98 = \
+                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
+            accise_ticpe_super98 = (
+                accise_super98 + majoration_ticpe_super98
+                if majoration_ticpe_super98 is not None
+                else accise_super98
+                )
 
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
             accise_ticpe_super98_ajustee = accise_ticpe_super98 + reforme_essence
@@ -967,9 +630,7 @@ class officielle_2019_in_2017(Reform):
             return total
 
     def apply(self):
-        self.update_variable(self.cheques_energie_officielle_2019_in_2017)
-        self.update_variable(self.cheques_energie_majore_officielle_2019_in_2017)
-        self.update_variable(self.cheques_energie_philippe_officielle_2019_in_2017)
+        self.update_variable(self.cheques_energie)
         self.update_variable(self.combustibles_liquides_ticpe_officielle_2019_in_2017)
         self.update_variable(self.depenses_carburants_corrigees_officielle_2019_in_2017)
         self.update_variable(self.depenses_combustibles_liquides_officielle_2019_in_2017)
@@ -978,27 +639,12 @@ class officielle_2019_in_2017(Reform):
         self.update_variable(self.depenses_essence_corrigees_officielle_2019_in_2017)
         self.update_variable(self.depenses_gaz_ville_officielle_2019_in_2017)
         self.update_variable(self.diesel_ticpe_officielle_2019_in_2017)
-        self.update_variable(self.emissions_CO2_carburants_officielle_2019_in_2017)
-        self.update_variable(self.emissions_CO2_combustibles_liquides_officielle_2019_in_2017)
-        self.update_variable(self.emissions_CO2_diesel_officielle_2019_in_2017)
-        self.update_variable(self.emissions_CO2_energies_totales_officielle_2019_in_2017)
-        self.update_variable(self.emissions_CO2_essence_officielle_2019_in_2017)
-        self.update_variable(self.emissions_CO2_gaz_ville_officielle_2019_in_2017)
         self.update_variable(self.essence_ticpe_officielle_2019_in_2017)
         self.update_variable(self.gains_tva_carburants_officielle_2019_in_2017)
         self.update_variable(self.gains_tva_combustibles_liquides_officielle_2019_in_2017)
         self.update_variable(self.gains_tva_gaz_ville_officielle_2019_in_2017)
         self.update_variable(self.gains_tva_total_energies_officielle_2019_in_2017)
-        self.update_variable(self.pertes_financieres_avant_redistribution_officielle_2019_in_2017)
-        self.update_variable(self.quantites_combustibles_liquides_officielle_2019_in_2017)
-        self.update_variable(self.quantites_diesel_officielle_2019_in_2017)
-        self.update_variable(self.quantites_essence_officielle_2019_in_2017)
         self.update_variable(self.quantites_gaz_final_officielle_2019_in_2017)
-        self.update_variable(self.quantites_sp_e10_officielle_2019_in_2017)
-        self.update_variable(self.quantites_sp95_officielle_2019_in_2017)
-        self.update_variable(self.quantites_sp98_officielle_2019_in_2017)
-        self.update_variable(self.quantites_super_plombe_officielle_2019_in_2017)
-        self.update_variable(self.reste_transferts_neutre_officielle_2019_in_2017)
         self.update_variable(self.revenu_reforme_officielle_2019_in_2017)
         self.update_variable(self.sp_e10_ticpe_officielle_2019_in_2017)
         self.update_variable(self.sp95_ticpe_officielle_2019_in_2017)

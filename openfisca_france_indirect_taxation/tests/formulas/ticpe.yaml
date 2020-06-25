@@ -37,6 +37,7 @@
     depenses_diesel_htva: 100 / (1.196)
     depenses_diesel: 100
     depenses_diesel_ht: 100 / (1.196) - 38.36062
+    depenses_diesel_recalculees: 100
 
 - name: "Test ticpe essence"
   period: 2013
