@@ -1,6 +1,6 @@
 description: Taux sp√©cifique tabac
 prix_paquet_cigarettes:
-  description: Prix unitaire du paquet de 20 cigarettes (prix moyen pondÈrÈ), en euros
+  description: Prix unitaire du paquet de 20 cigarettes (prix moyen pond√©r√©), en euros
   values:
     2020-11-01:
       value: 10.0
@@ -15,7 +15,7 @@ prix_paquet_cigarettes:
     2015-01-01:
       value: 7.1
 prix_bague_tabac:
-  description: Prix unitaire de la bague de tabac ‡†rouler (prix moyen pondÈrÈ), en euros
+  description: Prix unitaire de la bague de tabac √† rouler (prix moyen pond√©r√©), en euros
   values:
     2020-11-01:
       value: 14.4
