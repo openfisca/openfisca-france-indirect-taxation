@@ -5,14 +5,14 @@ import pkg_resources
 import pytest
 
 
-from openfisca_france_indirect_taxation.projects.budget_2019.simul_reformes_tabac import simulate_reforme_tabac
-from openfisca_france_indirect_taxation.projects.budget_2019.simul_reformes_energie import simulate_reformes_energie
+from openfisca_france_indirect_taxation.projects.budgets.simul_reformes_tabac import simulate_reforme_tabac
+from openfisca_france_indirect_taxation.projects.budgets.simul_reformes_energie import simulate_reformes_energie
 from openfisca_france_indirect_taxation.assets.tests.resultats_reformes_energie_thomas_initial import results
 
 
 @pytest.mark.parametrize("baseline_year", ['2017', '2018'])
 def test_plf_2019_reforme_tabac(baseline_year):
-    variation_relative_depenses_tabac = simulate_reforme_tabac(baseline_year, graph = False)
+    variation_relative_depenses_tabac = simulate_reforme_tabac(year = 2019, baseline_year = baseline_year, graph = False)
     assert baseline_year in ['2017', '2018']
     if baseline_year == '2017':
         reforme = "2018_2019"
