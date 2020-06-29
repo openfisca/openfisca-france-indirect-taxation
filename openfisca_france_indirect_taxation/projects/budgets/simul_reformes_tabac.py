@@ -16,6 +16,7 @@ log = logging.getLogger(__name__)
 def simulate_reforme_tabac(year, baseline_year, graph = True):
 
     inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020))
+    inflators_by_year[2020] = inflators_by_year[2019]
     data_year = 2011
 
     baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
