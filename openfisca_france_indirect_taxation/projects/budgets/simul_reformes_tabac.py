@@ -12,11 +12,11 @@ from openfisca_france_indirect_taxation.reforms.reforme_tabac import create_refo
 
 log = logging.getLogger(__name__)
 
-inflators_by_year = get_inflators_by_year_energy(rebuild = True)
-data_year = 2011
-
 
 def simulate_reforme_tabac(year, baseline_year, graph = True):
+
+    inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020))
+    data_year = 2011
 
     baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 

@@ -228,15 +228,15 @@ def get_inflators_energy(target_year):
     return ratio_by_variable
 
 
-def get_inflators_by_year_energy(rebuild = False):
+def get_inflators_by_year_energy(rebuild = False, year_range = range(2000, 2020)):
     if rebuild is not False:
         inflators_by_year = dict()
-        for target_year in range(2000, 2020):
+        for target_year in year_range:
             inflators = get_inflators_energy(target_year)
             inflators_by_year[target_year] = inflators
 
         writer_inflators = csv.writer(open(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year_wip.csv'), 'w'))
-        for year in range(2000, 2020):
+        for year in year_range:
             for key, value in list(inflators_by_year[year].items()):
                 writer_inflators.writerow([key, value, year])
 
@@ -245,7 +245,7 @@ def get_inflators_by_year_energy(rebuild = False):
         re_build_inflators = dict()
         inflators_from_csv = pd.read_csv(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year_wip.csv'),
             index_col = 0, header = None)
-        for year in range(2000, 2020):
+        for year in year_range:
             inflators_from_csv_by_year = inflators_from_csv[inflators_from_csv[2] == year]
             inflators_to_dict = pd.DataFrame.to_dict(inflators_from_csv_by_year)
             inflators = inflators_to_dict[1]
