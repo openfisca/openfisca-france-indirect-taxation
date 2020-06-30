@@ -4,7 +4,7 @@
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
 
-from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
+from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
 
 
 year = 2016

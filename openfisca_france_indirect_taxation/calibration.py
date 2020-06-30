@@ -89,7 +89,7 @@ def get_cn_aggregates_energy(target_year = None):
         'conso-eff-fonction.xls'
         )
 
-    masses_cn_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheetname = "M€cour")
+    masses_cn_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "M€cour")
     masses_cn_data_frame.columns = masses_cn_data_frame.iloc[2]
     masses_cn_data_frame = masses_cn_data_frame.loc[:, ['Code', target_year]].copy()
 
@@ -121,7 +121,7 @@ def get_cn_aggregates_energy(target_year = None):
         't_2101.xls'
         )
 
-    revenus_cn = pd.read_excel(parametres_fiscalite_file_path, sheetname = "t_2101")
+    revenus_cn = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "2101")
     revenus_cn.iat[1, 1] = 'Code'
     revenus_cn = revenus_cn.drop(revenus_cn.columns[0], axis=1)
     revenus_cn.columns = revenus_cn.iloc[1]
@@ -151,7 +151,7 @@ def get_cn_aggregates_energy(target_year = None):
     #    'Parametres fiscalite indirecte.xls'
     #    )
 
-    # masses_cn_revenus_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheetname = "revenus_CN")
+    # masses_cn_revenus_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "revenus_CN")
     # masses_cn_revenus_data_frame.rename(
     #   columns = {
     #       'annee': 'year',
@@ -228,25 +228,24 @@ def get_inflators_energy(target_year):
     return ratio_by_variable
 
 
-def get_inflators_by_year_energy(rebuild = False):
+def get_inflators_by_year_energy(rebuild = False, year_range = range(2000, 2020)):
     if rebuild is not False:
         inflators_by_year = dict()
-        for target_year in range(2000, 2017):
+        for target_year in year_range:
             inflators = get_inflators_energy(target_year)
             inflators_by_year[target_year] = inflators
 
-        writer_inflators = csv.writer(open(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year_wip.csv'), 'wb'))
-        for year in range(2000, 2017):
+        writer_inflators = csv.writer(open(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year_wip.csv'), 'w'))
+        for year in year_range:
             for key, value in list(inflators_by_year[year].items()):
                 writer_inflators.writerow([key, value, year])
 
         return inflators_by_year
-
     else:
         re_build_inflators = dict()
         inflators_from_csv = pd.read_csv(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year_wip.csv'),
             index_col = 0, header = None)
-        for year in range(2000, 2017):
+        for year in year_range:
             inflators_from_csv_by_year = inflators_from_csv[inflators_from_csv[2] == year]
             inflators_to_dict = pd.DataFrame.to_dict(inflators_from_csv_by_year)
             inflators = inflators_to_dict[1]

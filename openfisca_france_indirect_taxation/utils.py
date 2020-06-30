@@ -98,7 +98,7 @@ def get_parametres_fiscalite_data_frame(year = None):
             'Parametres fiscalite indirecte.xls',
             )
         parametres_fiscalite_data_frame = pandas.read_excel(parametres_fiscalite_xls_file_path,
-            sheetname = "categoriefiscale")
+            sheet_name = "categoriefiscale")
         parametres_fiscalite_data_frame.to_csv(parametres_fiscalite_csv_file_path, encoding = 'utf-8')
 
     if year:

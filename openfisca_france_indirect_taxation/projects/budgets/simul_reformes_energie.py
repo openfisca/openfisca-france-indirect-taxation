@@ -10,20 +10,16 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
     )
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
-from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.projects.budgets.reforme_energie_budgets_2018_2019 import officielle_2019_in_2017
+from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
 
 
 log = logging.getLogger(__name__)
 
 
 def simulate_reformes_energie(graph = True):
-    inflators_by_year = get_inflators_by_year_energy(rebuild = False)
-    # En attendant les données pour pouvoir inflater plus loin que 2016
-    inflators_by_year[2017] = inflators_by_year[2016]
-    inflators_by_year[2018] = inflators_by_year[2016]
-    inflators_by_year[2019] = inflators_by_year[2016]
-
+    inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020))
+    inflators_by_year[2020] = inflators_by_year[2019]
     year = 2019
     data_year = 2011
     elasticities = get_elasticities_aidsills(data_year, True)

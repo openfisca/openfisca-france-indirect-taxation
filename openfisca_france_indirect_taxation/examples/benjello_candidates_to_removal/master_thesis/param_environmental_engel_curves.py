@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 from openfisca_france_indirect_taxation.examples.utils_example import save_dataframe_to_graph
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
+from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
 
 
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)

@@ -58,6 +58,7 @@ setup(
         'PyYAML >= 3.10',
         "pandas",  # <= 0.24.2",
         "statsmodels >= 0.10.1, <1.0",
+        'xlrd >= 1.0.0',
         ],
     packages = find_packages(),
     )

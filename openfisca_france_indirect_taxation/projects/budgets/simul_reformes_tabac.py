@@ -3,7 +3,7 @@ import logging
 
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
+from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, dataframe_by_group
 from openfisca_france_indirect_taxation.projects.base import nombre_paquets_cigarettes_by_year
 from openfisca_france_indirect_taxation.projects.calage_depenses_cigarettes import create_reforme_calage_depenses_cigarettes
@@ -12,18 +12,12 @@ from openfisca_france_indirect_taxation.reforms.reforme_tabac import create_refo
 
 log = logging.getLogger(__name__)
 
-inflators_by_year = get_inflators_by_year_energy(rebuild = False)
-
-# En attendant les données pour pouvoir inflater plus loin que 2016
-inflators_by_year[2017] = inflators_by_year[2016]
-inflators_by_year[2018] = inflators_by_year[2016]
-inflators_by_year[2019] = inflators_by_year[2016]
-inflators_by_year[2020] = inflators_by_year[2016]
-
-data_year = 2011
-
 
 def simulate_reforme_tabac(year, baseline_year, graph = True):
+
+    inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020))
+    inflators_by_year[2020] = inflators_by_year[2019]
+    data_year = 2011
 
     baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 

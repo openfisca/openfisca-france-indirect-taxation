@@ -11,7 +11,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
     graph_builder_bar,
     )
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.examples.calage_bdf_cn_energy import get_inflators_by_year_energy
+from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.reforms.reforme_tva_2019 import reforme_tva_2019
 
 inflators_by_year = get_inflators_by_year_energy(rebuild = False)
