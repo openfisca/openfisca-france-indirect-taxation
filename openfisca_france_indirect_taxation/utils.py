@@ -24,8 +24,7 @@ assets_directory = os.path.join(
 
 
 def get_input_data_frame(year, use_entd = True):
-    """Retrieve budget des familles (BDF) survey data from disk with the opportunity to use variables from
-    enquête nationale transports et déplacements (ENTD)
+    """Retrieve budget des familles (BDF) survey data from disk with the opportunity to use variables from enquête nationale transports et déplacements (ENTD).
 
     :param year: survey year
     :type year: int
@@ -34,7 +33,6 @@ def get_input_data_frame(year, use_entd = True):
     :return: survey data
     :rtype: DataFrame
     """
-
     openfisca_survey_collection = SurveyCollection.load(collection = "openfisca_indirect_taxation")
     openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
     input_data_frame = openfisca_survey.get_values(table = "input")

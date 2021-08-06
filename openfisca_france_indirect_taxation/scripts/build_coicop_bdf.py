@@ -155,7 +155,7 @@ adjusted_coicop_by_original = {
     '01.1.5.2': '01.1.5.2.2',  # Margarine
     '01.1.5.3': '01.1.5.2.1',  # Huiles alimentaires d'olive]
     '01.1.5.4': '01.1.5.2.1',  # Huiles alimentaires d'arachide, de tournesol...
-    # On a rassemblé les deux les huiles alimentaires # TODO: peut-être faut-il séparer les huiles végétales
+    # On a rassemblé les deux huiles alimentaires # TODO: peut-être faut-il séparer les huiles végétales
     '01.1.5.5': '01.1.5.2.2',  # saindoux et autres graisses d'origine animale
     '01.1.6.1': '01.1.6.1.1',  # agrumes frais et surgelés
     '01.1.6.2': '01.1.6.1.1',  # bananes fraiches
@@ -188,7 +188,7 @@ adjusted_coicop_by_original = {
     '01.1.9.2': '01.1.9.1.1',  # sel et épices sèches
     '01.1.9.3': '01.1.9.3.2',  # levure , préparations pour desserts, soupes TODO verif soupe à remettre ailleurs
     '01.1.9.4': '01.1.8.1.1',  # autres produits alimentaires (aliments enfants, produits diététiques)
-    # TODO panier alimentaire
+    # TODO: panier alimentaire
     '01.2.1.1': '01.2.1.2.1',  # café
     '01.2.1.2': '01.2.1.3.1',  # thé et plantes à infusion
     '01.2.1.3': '01.2.1.1.1',  # cacao et chocolat en poudre
@@ -216,8 +216,8 @@ adjusted_coicop_by_original = {
     '03.2.1.2': '03.2.1.1.2',  # chaussures pour femmes
     '03.2.1.3': '03.2.1.1.3',  # chaussures pour enfants
     '03.2.2.1': '03.2.1.2.3',  # Réparation de chaussures
-    '03.3.1.1': '03.3.1',      # Autres dépenses d'habillement : cérémonie, séjours hors domicile, personnes viva"
-    '03.3.1.2': '03.3.2',	  # "Autres dépenses d'habillement : cadeau offert (à destination d'un autre  ménage)"
+    '03.3.1.1': '03.3.1',      # Autres dépenses d'habillement : cérémonie, séjours hors domicile, personnes viva
+    '03.3.1.2': '03.3.2',	   # Autres dépenses d'habillement : cadeau offert (à destination d'un autre  ménage)
     '04.1.1.1': '04.1.1.1.1',  # loyer en résidence principale
     '04.1.2.1': '04.1.1.2.1',  # loyer autres résidence
     '04.3.1.1': '04.3.1.1.1',  # Produits destinés aux travaux courants d’entretien et de réparation du logement

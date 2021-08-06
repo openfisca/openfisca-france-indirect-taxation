@@ -86,7 +86,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     if year == 2005:
         conso = survey.get_values(table = "c05d")
 
-    if year == 2011:
+    if year == 2011 or year == 2017:
         conso = survey.get_values(table = "c05", ignorecase = True)
         conso.rename(
             columns = {
@@ -95,6 +95,8 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
             inplace = True,
             )
         del conso['ctot']
+        for col in sorted(conso.columns):
+            print(f"- {col}")
 
     # Grouping by coicop
     poids = conso[['ident_men', 'pondmen']].copy()
@@ -123,6 +125,6 @@ if __name__ == '__main__':
     import time
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
     deb = time.clock()
-    year = 2011
+    year = 2017
     build_depenses_homogenisees(year = year)
     log.info("duration is {}".format(time.clock() - deb))
