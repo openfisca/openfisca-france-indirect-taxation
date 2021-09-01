@@ -1,5 +1,3 @@
-#
-
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, dataframe_by_group
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities

@@ -90,7 +90,7 @@ def create_donation_classes():
                                 (data['aides_logement'] == j) & (data['niveau_vie_decile'] == i)
                                 & (data['bat_av_49'] == bat_1) & (data['bat_49_74'] == bat_2),
                                 'donation_class_4'
-                                ] = '{}_{}_{}'.format(i, bat_1, bat_2, j)
+                                ] = '{}_{}_{}_{}'.format(i, bat_1, bat_2, j)
                     else:
                         data.loc[
                             (data['niveau_vie_decile'] == i) & (data['bat_av_49'] == bat_1)

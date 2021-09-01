@@ -52,8 +52,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
                     year_start = year_start,
                     year_stop = year_stop,
                     )
-                dated_function_name = "formula_{year_start}".format(
-                    year_start = year_start, year_stop = year_stop)
+                dated_function_name = f"formula_{year_start}"
                 log.debug('Creating fiscal category {} ({}-{}) with the following products {}'.format(
                     categorie_fiscale, year_start, year_stop, previous_postes_coicop))
 

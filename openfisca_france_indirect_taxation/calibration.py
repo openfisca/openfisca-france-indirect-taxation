@@ -228,7 +228,10 @@ def get_inflators_energy(target_year):
     return ratio_by_variable
 
 
-def get_inflators_by_year_energy(rebuild = False, year_range = range(2000, 2020)):
+def get_inflators_by_year_energy(rebuild = False, year_range = None):
+    if year_range is None:
+        year_range = range(2000, 2020)
+
     if rebuild is not False:
         inflators_by_year = dict()
         for target_year in year_range:

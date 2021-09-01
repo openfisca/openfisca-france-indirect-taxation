@@ -89,7 +89,7 @@ if __name__ == "__main__":
             log.debug(str(e.__class__.__name__) + ": ")
             if e.__class__ is CellExecutionError and e.from_cell_and_msg:
                 log.debug(e.from_cell_and_msg)
-            elif e.message:
-                log.debug(e.message)
+            elif str(e):
+                log.debug(str(e))
             log.error(traceback.format_exc())
             sys.exit(1)

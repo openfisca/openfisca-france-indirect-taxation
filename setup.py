@@ -34,10 +34,9 @@ setup(
     entry_points = {
         'console_scripts': ['build-survey-data=openfisca_france_indirect_taxation.scripts.build_survey_data:main'],
         },
-
     extras_require = dict(
         dev = [
-           'autopep8 >= 1.4.0, < 1.6.0',
+            'autopep8 >= 1.4.0, < 1.6.0',
             'flake8 >= 3.9.0, < 4.0.0',
             'flake8-bugbear >= 19.3.0, < 20.0.0',
             'matplotlib',

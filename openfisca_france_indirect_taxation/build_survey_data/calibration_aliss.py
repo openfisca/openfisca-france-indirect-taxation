@@ -333,7 +333,7 @@ def compute_kantar_elasticities(compute = False):
                     ['age', 'revenus', 'nomk', 'dm_k', 'dm_f']
                 ]
 
-            assert len(extract.dm_f.unique()) == 1
+            assert len(extract.dm_f.unique()) == 1, f"Problem when extracting budget share for age = {age} and revenu = {revenus}"
             extract['budget_share_kf'] = extract.dm_k / extract.dm_f
             extract['nomf'] = nomf_by_dirty_nomf.get(nomf)
 

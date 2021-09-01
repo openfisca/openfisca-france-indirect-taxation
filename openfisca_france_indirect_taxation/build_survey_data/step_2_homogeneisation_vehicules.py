@@ -72,7 +72,7 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
         vehicule["veh_essence"] = vehicule['carbu'] == 1
         vehicule["veh_diesel"] = vehicule['carbu'] == 2
 
-
+    # TOOD RESTART HERE for 2017
 
     # Compute the number of cars by category and save
     if year != 1995:
