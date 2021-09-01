@@ -18,6 +18,7 @@ Build Docker image:
       - Dockerfile.ci
     refs:
       - ultimate_migration
+      - data-2017
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
