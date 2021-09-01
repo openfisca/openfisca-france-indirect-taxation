@@ -118,7 +118,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         loyers_imputes = loyers_imputes[kept_variables]
         loyers_imputes.rename(columns = {'rev801_d': 'poste_04_2_1'}, inplace = True)
 
-    if year == 2011:
+    if year in [2011, 2017]:
         loyers_imputes = survey.get_values(table = "menage", ignorecase = True)
 
         kept_variables = ['ident_men', 'rev801']
@@ -153,7 +153,7 @@ if __name__ == '__main__':
     import sys
     import time
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    deb = time.clock()
+    deb = time.process_time()()
     year = 1995
     build_imputation_loyers_proprietaires(year = year)
-    log.info("step 0_1_2_build_imputation_loyers_proprietaires duration is {}".format(time.clock() - deb))
+    log.info("step 0_1_2_build_imputation_loyers_proprietaires duration is {}".format(time.process_time()() - deb))

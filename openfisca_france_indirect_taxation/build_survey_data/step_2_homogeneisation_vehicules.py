@@ -51,8 +51,10 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
         vehicule["veh_diesel"] = 1 * (vehicule['carbu1'] == 2) + 1 * (vehicule['carbu2'] == 2)
         vehicule.index = vehicule.index.astype(ident_men_dtype)
 
-    if year == 2005:
+    if year in [2005, 2011, 2017]:
         vehicule = survey.get_values(table = "automobile")
+
+    if year == 2005:
         vehicule = vehicule[
             ['ident_men', 'carbu']
             ].copy()
@@ -60,19 +62,17 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
         vehicule["veh_essence"] = vehicule['carbu'] == 1
         vehicule["veh_diesel"] = vehicule['carbu'] == 2
 
-    if year == 2011:
-        try:
-            vehicule = survey.get_values(table = "AUTOMOBILE")
-        except Exception:
-            vehicule = survey.get_values(table = "automobile")
-
+    if year in [2011]:
+        vehicule = survey.get_values(table = "automobile")
         kept_variables = ['ident_men', 'carbu']
         vehicule = vehicule.rename(
             columns = {'ident_me': 'ident_men'},
             )[kept_variables].copy()
         vehicule["veh_tot"] = 1
-        vehicule["veh_essence"] = (vehicule['carbu'] == 1).copy()
-        vehicule["veh_diesel"] = (vehicule['carbu'] == 2).copy()
+        vehicule["veh_essence"] = vehicule['carbu'] == 1
+        vehicule["veh_diesel"] = vehicule['carbu'] == 2
+
+
 
     # Compute the number of cars by category and save
     if year != 1995:
@@ -88,7 +88,7 @@ if __name__ == '__main__':
     import sys
     import time
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    deb = time.clock()
+    deb = time.process_time()()
     year = 2005
     build_homogeneisation_vehicules(year = year)
-    log.info("step 0_2_homogeneisation_vehicules duration is {}".format(time.clock() - deb))
+    log.info("step 0_2_homogeneisation_vehicules duration is {}".format(time.process_time()() - deb))

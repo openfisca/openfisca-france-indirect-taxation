@@ -1,498 +1,247 @@
-,poste2017,posteCOICOP,label2011,Nomenclature correspondante pour la TVA,Nomenclature correspondante si il y a une autre taxe,Unnamed: 5
-0,c01111,111,Riz sous toutes ses formes et produits à base de riz,3,,TVA Taux réduit
-1,c01112,111,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,3,,TVA Taux réduit
-2,c01113,111,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,3,,TVA Taux réduit
-3,c01114,111,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",3,,TVA Taux réduit
-4,c01115,111,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner",3,,TVA Taux réduit
-5,c01121,112,Viande bovine fraîche ou surgelée,3,,TVA Taux réduit
-6,c01122,112,Viande porcine fraîche ou surgelée,3,,TVA Taux réduit
-7,c01123,112,Viande ovine ou caprine fraîche ou surgelée,3,,TVA Taux réduit
-8,c01124,112,Viande de volaille fraîche ou surgelée,3,,TVA Taux réduit
-9,c01125,112,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, sa",3,,TVA Taux réduit
-10,c01126,112,"Conserve de viande, produit de transformation des viandes, plat préparé de viand",3,,TVA Taux réduit
-11,c01127,112,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc anim",3,,TVA Taux réduit
-12,c01130,113,Poissons frais,3,,TVA Taux réduit
-13,c01131,113,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),3,,TVA Taux réduit
-14,c01132,113,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",3,,TVA Taux réduit
-15,c01133,113,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",3,,TVA Taux réduit
-16,c01134,113,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou,3,,TVA Taux réduit
-17,c01141 ,114,Lait entier,3,,TVA Taux réduit
-18,c01142,114,"Lait demi-écrémé, écrémé",3,,TVA Taux réduit
-19,c01143,114,Lait de conserve,3,,TVA Taux réduit
-20,c01144,114,"Yaourts, fromage blanc et petits suisses yc de soja",3,,TVA Taux réduit
-21,c01145,114,Fromage et lait caillé,3,,TVA Taux réduit
-22,c01146,114,"Autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisé)",3,,TVA Taux réduit
-23,c01147,114,Oeufs,3,,TVA Taux réduit
-24,c01151,115,Beurre,3,,TVA Taux réduit
-25,c01152,1151,"Margarine, allégés et autres graisses végétales",1,,TVA taux plein
-26,c01153,115,Huiles alimentaires d'olive,3,,TVA Taux réduit
-27,c01154,115,"Huiles alimentaires d'arachide, de tournesol, de maïs, colza",3,,TVA Taux réduit
-28,c01155,115,saindoux et autres graisses d'origine animale,3,,TVA Taux réduit
-29,c01161,116,agrumes (frais ou congelés),3,,TVA Taux réduit
-30,c01162,116,bananes fraiches,3,,TVA Taux réduit
-31,c01163,116,pommes,3,,TVA Taux réduit
-32,c01164,116,poires,3,,TVA Taux réduit
-33,c01165,116,fruits à noyaux (frais ou congelés),3,,TVA Taux réduit
-34,c01166,116,baies (fraîches ou congelées),3,,TVA Taux réduit
-35,c01167,116,"autres fruits, fruits tropicaux (frais ou congelés)",3,,TVA Taux réduit
-36,c01168,116,fruits séchés,3,,TVA Taux réduit
-37,c01169,116,fruits au sirop et fruits surgelés,3,,TVA Taux réduit
-38,c01171,117,"légumes frais à feuilles et à tiges, herbes aromatiques (frais)",3,,TVA Taux réduit
-39,c01172,117,choux (frais),3,,TVA Taux réduit
-40,c01173,117,légumes frais cultivés pour leurs fruits,3,,TVA Taux réduit
-41,c01174,117,racines alimentaires fraiches et champignons frais,3,,TVA Taux réduit
-42,c01175,117,légumes secs,3,,TVA Taux réduit
-43,c01176,117,légumes surgelés (non cuisinés),3,,TVA Taux réduit
-44,c01177,117,"légumes et plats à base de légume, en conserve (sans pommes de terre)",3,,TVA Taux réduit
-45,c01178,117,"légumes préparés et plats à base de légumes, frais et surgelés",3,,TVA Taux réduit
-46,c01179,117,"pomme de terre, autres tubercules, produits à base de pommes de terre et tubercu",3,,TVA Taux réduit
-47,c01181,118,sucre,3,,TVA Taux réduit
-48,c01182,118,"confitures, marmelade, compote, gelées, purées et pâtes de fruits, miel",3,,TVA Taux réduit
-49,c01183,118,chocolat,3,,TVA Taux réduit
-50,c01184,1181,"sucreries, bonbons et autres confiseries",1,,TVA taux plein
-51,c01185,118,"crèmes glacées, sorbets, entremets glacés",3,,TVA Taux réduit
-52,c01186,118,autres produits à base de sucre,3,,TVA Taux réduit
-53,c01191,119,sauces et condiments,3,,TVA Taux réduit
-54,c01192,119,sel et épices sèches,3,,TVA Taux réduit
-55,c01193,119,"levure , préparations pour desserts, soupes",3,,TVA Taux réduit
-56,c01194,119,autres produits alimentaires,3,,TVA Taux réduit
-57,c01195,119,Panier alimentaire,3,,TVA Taux réduit
-58,c01211,121,café,3,,TVA Taux réduit
-59,c01212,121,thé et plantes à infusion,3,,TVA Taux réduit
-60,c01213,121,cacao et chocolat en poudre,3,,TVA Taux réduit
-61,c01221,122,eaux minérales,3,,TVA Taux réduit
-62,c01222,122,boissons gazeuses,3,,TVA Taux réduit
-63,c01223,122,"jus de fruits et de légumes, sirops, boissons aromatisées",3,,TVA Taux réduit
-64,c01224,122,jus de légumes,3,,TVA Taux réduit
-65,c01311,119,"autres dépenses d'alimentation : cérémonies, séjours hors domicile, personne viv",3,,TVA Taux réduit
-66,c01312,119,autres dépenses d'alimentation : cadeau offert (à destination d'un autre ménage,3,,TVA Taux réduit
-67,c02111,211,spiritueux et liqueurs,1,10,TVA taux plein
-68,c02121,212,vins et cidres,1,8,TVA taux plein
-69,c02122,212,"autres apéritifs à base de vin, champagne et autres mousseux, saké et autres",1,8,TVA taux plein
-70,c02131,213,bière et boissons à base de bière,1,9,TVA taux plein
-71,c02211,2201,cigarettes,1,5,TVA taux plein
-72,c02212,2202,cigares et cigarillos,1,6,TVA taux plein
-73,c02213,2203,tabac sous d'autres formes et produits connexes,1,7,TVA taux plein
-75,c02411,2411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre",,,
-76,c03111,311,Tissus pour vêtements,1,,TVA taux plein
-77,c03121,312,Vêtements pour homme,1,,TVA taux plein
-78,c03122,312,Vêtements pour femme,1,,TVA taux plein
-79,c03123,312,Vêtements pour enfant (3 à 13 ans),1,,TVA taux plein
-80,c03131,313,Accessoires du vêtement et mercerie,1,,TVA taux plein
-81,c03141,314,"Nettoyage, réparation et location de vêtements",1,,TVA taux plein
-82,c03211,321,Chaussures pour homme,1,,TVA taux plein
-83,c03212,321,Chaussures pour femme,1,,TVA taux plein
-84,c03213,321,Chaussures pour enfant (3 à 13 ans),1,,TVA taux plein
-85,c03221,322,Réparation et location de chaussures,1,,TVA taux plein
-86,c03311,312,"Autres dépenses d'habillement : cérémonie, séjours hors domicile, personnes viva",1,,TVA taux plein
-87,c03312,312,Autres dépenses d’habillement : cadeau offert (à destination d’un autre  ménage),1,,TVA taux plein
-88,c04111,411,Loyers (hors charges ou avec charges non isolables) des locataires résidence pri,20,,Pas de taxe
-89,c04121,412,Loyers (hors charges ou avec charges non isolables) des locataires autres réside,20,,Pas de taxe
-90,c04311,431,Produits destinés aux travaux courants d’entretien et de réparation du logement ,1,,TVA taux plein
-91,c04321,432,"Services d'entretien et petites réparation dans le logement (plombier, entretien",3,,TVA Taux réduit
-92,c04411,442,Redevance d’enlèvement des ordures,1 puis 3 depuis 2000,,
-
-94,c04431,441,"Factures d’eau résidence principale, autre logement, dépendance, terrain",3,,TVA Taux réduit
-95,c04441,444,Charges collectives relatives au logement (payées isolément du loyer ou crédit),,,
-96,c04500,4511,Facture électricité + gaz (non dissociables),3,,TVA Taux réduit
-97,c04511,451,"Facture d'électricité résidence principale, autre logement, garage, dépendance",3,,TVA Taux réduit
-98,c04521,452,"Facture de gaz résidence principale, autre logement",3,,TVA Taux réduit
-99,c04522,4522,"Achats de butane, propane résidence principale, autre logement",3,,TVA Taux réduit
-100,c04531,453,"Combustibles liquides pour la résidence principale : fuel, mazout, pétrole",3,,TVA Taux réduit
-101,c04541,454,Combustible solide résidence principale,1,Nombreux changements,TVA taux plein
-102,c04551,455,Chauffage urbain (par vapeur),3,,TVA Taux réduit
-103,c04552,4552,Glace,3,,TVA Taux réduit
-104,c04611,411,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),1,,TVA taux plein
-105,c05110,511,Meubles informatiques,1,,TVA taux plein
-106,c05111,511,"Mobilier de chambre (lit, armoire, commode, chevet, bureau enfant, sommier) yc m",1,,TVA taux plein
-107,c05112,511,"Mobilier de séjour (buffet, bahut, bibliothèque, etc.)",1,,TVA taux plein
-108,c05113,511,"Mobilier de cuisine et de salle de bain yc éléments intégrés ou non, tabourets, ",1,,TVA taux plein
-109,c05114,511,"Tables, sièges, chaises hors cuisine et salle de bain",1,,TVA taux plein
-110,c05115,511,"Mobilier de jardin (balancelle, table, fauteuil, abri de jardin, portique, etc.)",1,,TVA taux plein
-111,c05116,511,"Autres meubles, accessoires du mobilier (yc luminaires, décoration, équipement e",1,,TVA taux plein
-112,c05121,512,"Tapis et autres revêtements de sol (lino, moquette, etc.), pose et réparation de",1,,TVA taux plein
-113,c05131,51154,Réparation de meubles,1,,TVA taux plein
-114,c05211,520,"Articles de literie (futons, oreillers, couettes, couvertures, draps, alèses, et",1,,TVA taux plein
-115,c05212,520,"Autres articles de ménage en textile (tissu d'ameublement, voilages, linge de ma",1,,TVA taux plein
-116,c05311,531,"Réfrigérateurs, congélateurs et caves à vin",1,,TVA taux plein
-117,c05312,531,"Lave linge, sèche linge et lave vaisselle",1,,TVA taux plein
-118,c05313,531,Gros appareils de cuisson,1,,TVA taux plein
-119,c05314,531,Appareils de chauffage et de climatisation et autres gros appareils électroménag,1,,TVA taux plein
-120,c05315,531,"Appareils de nettoyage (aspirateur, nettoyeur vapeur etc.)",1,,TVA taux plein
-121,c05316,531,Machine à coudre et à tricoter,1,,TVA taux plein
-122,c05317,531,Autres gros appareils ménagers,1,,TVA taux plein
-123,c05321,532,Petit électroménager,1,,TVA taux plein
-124,c05331,533,Réparation et entretien des appareils électroménagers,1,,TVA taux plein
-125,c05411,540,"Verrerie et cristallerie, vaisselle, articles de ménage ou de toilette en faïenc",1,,TVA taux plein
-126,c05412,540,Coutellerie et argenterie,1,,TVA taux plein
-127,c05413,540,Ustensiles de cuisine et autres articles de ménage,1,,TVA taux plein
-128,c05414,541,"Réparation et entretien verrerie, vaisselle et autres ustensiles de cuisine",1,,TVA taux plein
-129,c05511,551,Gros outillage de bricolage,1,,TVA taux plein
-130,c05512,551,Gros outillage de jardinage,1,,TVA taux plein
-131,c05513,551,Réparation du gros outillage,1,,TVA taux plein
-132,c05521,552,Petit outillage et accessoires divers de bricolage yc petit matériel électrique ,1,,TVA taux plein
-133,c05522,552,"Petit outillage et accessoires divers de jardinage, matériaux d'aménagement exté",1,,TVA taux plein
-134,c05523,552,Réparation des petits outillages,1,,TVA taux plein
-135,c05611,561,Produits de nettoyage et d’entretien (yc pour piscine),1,,TVA taux plein
-136,c05612,561,"Autres produits ménagers (articles papier et plastique, brosserie, produits dive",1,,TVA taux plein
-137,c05621,562,"Services domestiques (ménage, garde enfant, jardinage, etc.)",2,,TVA Taux intermédiaire
-138,c05622,562,"Autres services d’entretien pour le logement (blanchisserie, location appareils,",,,
-139,c05711,5711,Autres dépenses en équipement : personnes vivant hors du domicile au moins un jo,,,
-140,c05712,5712,Autres dépenses en équipement : cadeau offert (à destination d’un autre ménage),,,
-141,c06111,611,"Produits pharmaceutiques à ingurgiter et traitants, compléments alimentaires, vi",3,,TVA Taux réduit
-142,c06112,612,"Autres produits pharmaceutiques (parapharmacie, pansements, préservatifs, etc. )",1,,TVA taux plein
-143,c06113,613,"Appareils et matériels thérapeutiques (lunettes, prothèses, etc.) yc leur répara",1,Si prothèse handicapé 5.5,TVA taux plein
-144,c06211,621,Consultations des médecins généralistes ou spécialistes hors hospitalisation,20,,Pas de taxe
-145,c06221,622,"Dentiste, orthodontie",20,,Pas de taxe
-146,c06231,623,Services des laboratoires d’analyse médicale et des cabinets de radiologie,20,,Pas de taxe
-147,c06232,623,"Services des auxiliaires médicaux (infirmier, kiné, laboratoire, etc.)",20,,Pas de taxe
-148,c06233,623,"Services extra hospitaliers (ambulance, location matériel)",20,,Pas de taxe
-149,c06311,630,Services et soins hospitaliers,20,,Pas de taxe
-150,c06411,6111,Autres dépenses de santé : personnes vivant hors du domicile au moins un jour pa,,,
-151,c06412,6412,Autres dépenses de santé : cadeau offert (à destination d’un autre ménage),,,
-152,c07111,711,Achats d'automobiles neuves,1,,TVA taux plein
-153,c07112,711,Achats d'automobiles d'occasion,1,,TVA taux plein
-154,c07121,712,Achats de motocycles neufs et occasion,1,,TVA taux plein
-155,c07131,713,Achats de cycles neufs et occasion,1,,TVA taux plein
-156,c07141,711,Achats d'autres véhicules neufs et occasion,1,,TVA taux plein
-157,c07211,721,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux ",1,,TVA taux plein
-158,c07221,722,"Carburants, électricité, huiles, lubrifiants, etc.",1,,TVA taux plein
-159,c07231,723,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",1,,TVA taux plein
-160,c07241,724,"Services de location d’un local, frais de parking",1,,TVA taux plein
-161,c07242,724,"Autres services liés à l’utilisation de véhicules personnels (péages, auto école",1,,TVA taux plein
-162,c07311,735,"Services de transports de voyageurs locaux (métro, tram) et SNCF longue distance",3,,TVA Taux réduit
-163,c07321,731,Services de transports de voyageurs par route yc car scolaire,3,,TVA Taux réduit
-164,c07331,732,Services de transports de voyageurs par air (yc transport de bagages et de véhic,20,16,Contribution de solidarité sur les billets d'avion
-165,c07341,733,Services de transport par mer et voies navigables intérieures (yc transport de b,3,,TVA Taux réduit
-166,c07351,734,"Services combinés de transport de voyageurs carte navigo, tickets train + bus, e",3,,TVA Taux réduit
-167,c07361,736,Autres services de transport (yc déménagement),1,,TVA taux plein
-168,c07411,736,"Autres dépenses de transport : cérémonie, séjours hors domicile, personnes vivan",1,,TVA taux plein
-169,c07412,736,Autres dépenses de transport : cadeau offert (à destination d’un autre ménage),1,,TVA taux plein
-170,c08111,810,"Services postaux (yc timbres, enveloppes)",20,,Pas de taxe
-171,c08121,831,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",3,,TVA Taux réduit
-172,c08131,832,"Services de téléphone et fax, internet, recharges téléphoniques",1,,TVA taux plein
-173,c08141,8141,Autres dépenses de communications  : cadeau offert (à destination d’un autre mén,,,
-174,c09111,911,"Appareils de réception, d’enregistrement et de reproduction du son",1,,TVA taux plein
-175,c09112,911,"Téléviseurs, home cinéma, magnétoscopes, antennes, adapteur et lecteur DVD de sa",1,,TVA taux plein
-176,c09121,912,Equipement photographique et cinématographique (yc accessoires),1,,TVA taux plein
-177,c09122,9122,"Instruments d'optique non médicale et divers électroacoustique (microscope, jume",,,
-178,c09131,913,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces ",1,,TVA taux plein
-179,c09141,914,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),1,,TVA taux plein
-180,c09151,9151,Réparation des équipements et accessoires audiovisuels photographiques et inform,1,,TVA taux plein
-181,c09211,9211,"Gros équipements pour les loisirs de plein air et les sports (caravanes, camping",1,,TVA taux plein
-182,c09221,922,Instruments de musique et accessoires,1,,TVA taux plein
-183,c09222,921,"Gros équipements pour les loisirs d’intérieur (table de billard, de ping-pong, f",1,,TVA taux plein
-184,c09231,923,"Réparation et entretien de biens durables pour les loisirs, les sports et la cul",1,,TVA taux plein
-185,c09311,931,"Jeux, jouets et passe temps yc jeux vidéos",1,,TVA taux plein
-186,c09312,932,"Equipements de sport, de camping et de loisirs en plein air (pêche, chasse, uste",1,,TVA taux plein
-187,c09321,933,"Horticulture, accessoires et frais de livraison",2,,TVA Taux intermédiaire
-188,c09331,934,"Animaux d’agrément, nourriture, produits et accessoires pour les animaux d’agrém",1,,TVA taux plein
-189,c09341,9341,"Aliments autres animaux (chèvre, volaille, cabri, cochon, etc.)",2,,TVA Taux intermédiaire
-190,c09411,941,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, loc",3,,TVA Taux réduit
-191,c09421,942,"Cinémas, théâtres, salles de concert, cirques, foire",3,,TVA Taux réduit
-192,c09422,942,"Musées, jardins zoologiques et similaires",3,,TVA Taux réduit
-193,c09423,942,"Services de télévision et de radiodiffusion (location, redevance, abonnement)",3,2 POUR LA REDEVANCE,TVA Taux réduit
-194,c09424,942,"Smartbox et autres services de loisirs (animateurs, photographes, services pour ",1,,TVA taux plein
-195,c09431,943,"Jeux de hasard (loto, tiercé, etc.)",1,,TVA taux plein
-196,c09511,951,Livres yc e-books,3,,3 mais 2 sauf en 2012
-197,c09521,952,Journaux et périodiques yc par abonnement,4,,TVA Taux super-réduit
-198,c09531,953,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, a",3,,TVA Taux réduit
-199,c09541,954,Articles de papeterie et de dessin (yc toner pour imprimante),3,,TVA Taux réduit
-200,c09611,960,"Voyages à forfait, week-end, excursions yc voyage scolaire",,,
-201,c09711,941,"Autres dépenses des loisirs : séjours hors domicile, personnes vivant hors du do",1,,TVA taux plein
-202,c09712,941,Autres dépenses de loisirs et culture : cadeau offert (à destination d’un autre ,1,,TVA taux plein
-203,c10111,1010,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),20,,Pas de taxe
-204,c10121,1020,Enseignement secondaire (scolarité et inscription aux concours de niveau seconda,20,,Pas de taxe
-205,c10131,1040,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,20,,Pas de taxe
-206,c10141,1050,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, en",2,"Passage de 7 à 19,6 en 2013",TVA Taux intermédiaire
-207,c10151,10151,Autres dépenses d’enseignement : personnes vivant hors du domicile au moins un j,,,
-208,c10152,10152,Autres dépenses d’enseignement : cadeau offert (à destination d’un autre ménage),2,,TVA Taux intermédiaire
-209,c11111,11112,Repas pris dans un restaurant,3,,TVA Taux réduit
-210,c11112,11113,"Repas pris dans un café, bar ou assimilé",3,,TVA Taux réduit
-211,c11121,1112,Cantines scolaire et professionnelle,3,,TVA Taux réduit
-212,c11131,11112,"Autres dépenses de restauration : séjours hors domicile, personnes vivant hors d",3,,TVA Taux réduit
-213,c11132,11112,Autres dépenses de restauration : cadeau offert (à destination d’un autre ménage,3,,TVA Taux réduit
-214,c11211,1120,"Services d’hébergement (hôtels, gîtes, campings, CROUS, internats)",3,,TVA Taux réduit
-215,c12111,1211,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, pier",3,,TVA Taux réduit
-216,c12121,1212,Appareils électriques pour les soins personnels,1,,TVA taux plein
-217,c12122,1213,"Autres articles et produits pour les soins personnels (savon, produits de toilet",1,,TVA taux plein
-218,c12311,1231,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",1,,TVA taux plein
-219,c12321,1232,"Articles de voyage et autres contenants d'effets personnels (maroquinerie, valis",1,,TVA taux plein
-220,c12322,1232,"Autres effets personnels (briquets, parapluies, lunettes de soleil, articles pou",1,,TVA taux plein
-221,c12331,1240,Autres biens et services offerts (à des personnes extérieures au ménage),,,
-222,c12411,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retrait",2,,TVA Taux intermédiaire
-223,c12511,1251,"Assurances vie, décès",20,15,
-224,c12521,1252,Assurances liées au logement,20,15,
-225,c12531,1253,Assurances liées à la santé,20,14,
-226,c12541,1254,Assurances liées aux transports (yc assurance voyage),20,13,
-227,c12551,1255,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, ob",20,15,
-228,c12611,1261,Services financiers,,,
-229,c12711,1270,"Autres services (pompes funèbres, services juridiques, vestiaires, consignes, gr",1,,TVA taux plein
-230,c12712,9901,Caution pour la location d'un logement,0,,Pas de taxe
-231,c12811,1270,Autres dépenses occasionnées par une cérémonie,1,,TVA taux plein
-232,c12911,1291,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,,,
-233,c13111,9911,Impôts et taxes de la résidence principale,0,,Pas de taxe
-234,c13121,9912,Impôts et taxes pour une résidence secondaire ou un autre logement,0,,Pas de taxe
-235,c13141,9913,Impôts sur le revenu,0,,Pas de taxe
-236,c13151,9914,"Taxes automobiles (cartes grises, contraventions)",,18,Taxe sur les certificats d’immatriculation des véhicules et pour leur gestion
-237,c13161,9915,"Autres impôts et taxes (taxe foncière pour jardin ou autre, amendes, passeport),",,19,taxe sur les papiers officiels
-238,c13211,9921,Remboursements de prêts pour la résidence principale (yc garage et dépendance),0,,Pas de taxe
-239,c13221,9922,Remboursements des autres prêts immobiliers,0,,Pas de taxe
-240,c13311,9932,Aides et dons (occasionnels ou réguliers) en argent offerts par le ménage et pen,0,,Pas de taxe
-241,c13411,9903,Gros travaux pour la résidence principale yc matériaux de construction de gros œ,2,,TVA Taux intermédiaire
-242,c13421,9903,Gros travaux pour une résidence secondaire ou un autre logement yc matériaux de ,3,,TVA Taux réduit
-243,c13511,1351,"lRemboursements de crédits à a consommation (yc voiture, gros travaux, biens dur",0,,Pas de taxe
-244,c13611,1361,Prélèvements de l'employeur,0,,Pas de taxe
-245,c13711,13711,"Achats de logements, garages, parkings, box et terrains",3,,TVA Taux réduit
-246,c13722,13722,Epargne salariale : achat d’actions de l’entreprise,,,
-247,c14111,1411,Allocations logement reçu par le ménage,,,
-
-
-
-
-c01111,
-c01112,
-c01113,
-c01114,
-c01115,
-c01121,
-c01122,
-c01123,
-c01124,
-c01125,
-c01126,
-c01127,
-c01130,
-c01131,
-c01132,
-c01133,
-c01134,
-c01141,
-c01142,
-c01143,
-c01144,
-c01145,
-c01146,
-c01147,
-c01151,
-c01152,
-c01153,
-c01154,
-c01155,
-c01161,
-c01162,
-c01163,
-c01164,
-c01165,
-c01166,
-c01167,
-c01168,
-c01169,
-c01171,
-c01172,
-c01173,
-c01174,
-c01175,
-c01176,
-c01177,
-c01178,
-c01179,
-c01181,
-c01182,
-c01183,
-c01184,
-c01185,
-c01186,
-c01191,
-c01192,
-c01193,
-c01194,
-c01195,
-c01211,
-c01212,
-c01213,
-c01221,
-c01222,
-c01223,
-c01224,
-c01311,
-c01312,
-c02111,
-c02121,
-c02122,
-c02131,
-c02211,
-c02212,
-c02213,
-c02411,
-c03111,
-c03121,
-c03122,
-c03123,
-c03131,
-c03141,
-c03211,
-c03212,
-c03213,
-c03221,
-c03311,
-c03312,
-c04111,
-c04121,
-c04311,
-c04321,
-c04411,
-c04431,
-c04441,
-c04500,
-c04511,
-c04521,
-c04522,
-c04531,
-c04541,
-c04551,
-c04552,
-c04611,
-c05110,
-c05111,
-c05112,
-c05113,
-c05114,
-c05115,
-c05116,
-c05121,
-c05131,
-c05211,
-c05212,
-c05311,
-c05312,
-c05313,
-c05314,
-c05315,
-c05316,
-c05317,
-c05321,
-c05331,
-c05411,
-c05412,
-c05413,
-c05414,
-c05511,
-c05512,
-c05513,
-c05521,
-c05522,
-c05523,
-c05611,
-c05612,
-c05621,
-c05622,
-c05711,
-c05712,
-c06111,
-c06112,
-c06113,
-c06211,
-c06221,
-c06231,
-c06232,
-c06233,
-c06311,
-c06411,
-c06412,
-c07111,
-c07112,
-c07121,
-c07131,
-c07141,
-c07211,
-c07221,
-c07231,
-c07241,
-c07242,
-c07311,
-c07321,
-c07331,
-c07341,
-c07351,
-c07361,
-c07411,
-c07412,
-c08111,
-c08121,
-c08131,
-c08141,
-c09111,
-c09112,
-c09121,
-c09122,
-c09131,
-c09141,
-c09151,
-c09211,
-c09221,
-c09222,
-c09231,
-c09311,
-c09312,
-c09321,
-c09331,
-c09341,
-c09411,
-c09421,
-c09422,
-c09423,
-c09424,
-c09431,
-c09511,
-c09521,
-c09531,
-c09541,
-c09611,
-c09711,
-c09712,
-c10111,
-c10121,
-c10131,
-c10141,
-c10151,
-c10152,
-c11111,
-c11112,
-c11121,
-c11131,
-c11132,
-c11211,
-c12111,
-c12121,
-c12122,
-c12311,
-c12321,
-c12322,
-c12331,
-c12411,
-c12511,
-c12521,
-c12531,
-c12541,
-c12551,
-c12611,
-c12711,
-c12712,
-c12811,
-c12911,
-c13111,
-c13121,
-c13141,
-c13151,
-c13161,
-c13211,
-c13221,
-c13311,
-c13411,
-c13421,
-c13511,
-c13611,
-c13711,
-c13722,
-c14111,
+poste2017,posteCOICOP,label2017,Nomenclature correspondante pour la TVA,Nomenclature correspondante si il y a une autre taxe,Unnamed: 5
+c01111,111,Riz sous toutes ses formes et produits à base de riz,3,,TVA Taux réduit
+c01112,111,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,3,,TVA Taux réduit
+c01113,111,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,3,,TVA Taux réduit
+c01114,111,"Préparations telles que pâte à pâtisser, gâteau industriel, tarte, tourte, quiche, pizza",3,,TVA Taux réduit
+c01115,111,"Autres céréales et produits à base de céréales yc farine, semoule, céréales petit déjeuner",3,,TVA Taux réduit
+c01121,112,Viande bovine fraîche ou surgelée,3,,TVA Taux réduit
+c01122,112,Viande porcine fraîche ou surgelée,3,,TVA Taux réduit
+c01123,112,Viande ovine ou caprine fraîche ou surgelée,3,,TVA Taux réduit
+c01124,112,Viande de volaille fraîche ou surgelée,3,,TVA Taux réduit
+c01125,112,"Viande séchée salée ou fumée, charcuterie et abats, frais ou surgelé (jambon, sa",3,,TVA Taux réduit
+c01126,112,"Conserve de viande, produit de transformation des viandes, plat préparé de viand",3,,TVA Taux réduit
+c01127,112,"Autres viandes comestibles fraîches ou surgelées (cheval, lapin, gibier) yc anim",3,,TVA Taux réduit
+c01130,113,Poissons frais,3,,TVA Taux réduit
+c01131,113,Poissons surgelés ou congelés (hors poissons panés ou cuisinés),3,,TVA Taux réduit
+c01132,113,"Fruits de mer frais ou surgelés (yc cuits, nc cuisinés )",3,,TVA Taux réduit
+c01133,113,"Poissons et fruits de mer salés, fumés, séchés yc surgelé",3,,TVA Taux réduit
+c01134,113,Conserves de poisson et de fruits de mer et plats préparés à base de poissons ou,3,,TVA Taux réduit
+c01141 ,114,Lait entier,3,,TVA Taux réduit
+c01142,114,"Lait demi-écrémé, écrémé",3,,TVA Taux réduit
+c01143,114,Lait de conserve,3,,TVA Taux réduit
+c01144,114,"Yaourts, fromage blanc et petits suisses yc de soja",3,,TVA Taux réduit
+c01145,114,Fromage et lait caillé,3,,TVA Taux réduit
+c01146,114,"Autres produits laitiers (dessert à base de lait, crème fraîche, lait aromatisé)",3,,TVA Taux réduit
+c01147,114,Oeufs,3,,TVA Taux réduit
+c01151,115,Beurre,3,,TVA Taux réduit
+c01152,1151,"Margarine, allégés et autres graisses végétales",1,,TVA taux plein
+c01153,115,Huiles alimentaires d'olive,3,,TVA Taux réduit
+c01154,115,"Huiles alimentaires d'arachide, de tournesol, de maïs, colza",3,,TVA Taux réduit
+c01155,115,saindoux et autres graisses d'origine animale,3,,TVA Taux réduit
+c01161,116,agrumes (frais ou congelés),3,,TVA Taux réduit
+c01162,116,bananes fraiches,3,,TVA Taux réduit
+c01163,116,pommes,3,,TVA Taux réduit
+c01164,116,poires,3,,TVA Taux réduit
+c01165,116,fruits à noyaux (frais ou congelés),3,,TVA Taux réduit
+c01166,116,baies (fraîches ou congelées),3,,TVA Taux réduit
+c01167,116,"autres fruits, fruits tropicaux (frais ou congelés)",3,,TVA Taux réduit
+c01168,116,fruits séchés,3,,TVA Taux réduit
+c01169,116,fruits au sirop et fruits surgelés,3,,TVA Taux réduit
+c01171,117,"légumes frais à feuilles et à tiges, herbes aromatiques (frais)",3,,TVA Taux réduit
+c01172,117,choux (frais),3,,TVA Taux réduit
+c01173,117,légumes frais cultivés pour leurs fruits,3,,TVA Taux réduit
+c01174,117,racines alimentaires fraiches et champignons frais,3,,TVA Taux réduit
+c01175,117,légumes secs,3,,TVA Taux réduit
+c01176,117,légumes surgelés (non cuisinés),3,,TVA Taux réduit
+c01177,117,"légumes et plats à base de légume, en conserve (sans pommes de terre)",3,,TVA Taux réduit
+c01178,117,"légumes préparés et plats à base de légumes, frais et surgelés",3,,TVA Taux réduit
+c01179,117,"pomme de terre, autres tubercules, produits à base de pommes de terre et tubercu",3,,TVA Taux réduit
+c01181,118,sucre,3,,TVA Taux réduit
+c01182,118,"confitures, marmelade, compote, gelées, purées et pâtes de fruits, miel",3,,TVA Taux réduit
+c01183,118,chocolat,3,,TVA Taux réduit
+c01184,1181,"sucreries, bonbons et autres confiseries",1,,TVA taux plein
+c01185,118,"crèmes glacées, sorbets, entremets glacés",3,,TVA Taux réduit
+c01186,118,autres produits à base de sucre,3,,TVA Taux réduit
+c01191,119,sauces et condiments,3,,TVA Taux réduit
+c01192,119,sel et épices sèches,3,,TVA Taux réduit
+c01193,119,"levure , préparations pour desserts, soupes",3,,TVA Taux réduit
+c01194,119,autres produits alimentaires,3,,TVA Taux réduit
+c01195,119,Panier alimentaire,3,,TVA Taux réduit
+c01211,121,café,3,,TVA Taux réduit
+c01212,121,thé et plantes à infusion,3,,TVA Taux réduit
+c01213,121,cacao et chocolat en poudre,3,,TVA Taux réduit
+c01221,122,eaux minérales,3,,TVA Taux réduit
+c01222,122,boissons gazeuses,3,,TVA Taux réduit
+c01223,122,"jus de fruits et de légumes, sirops, boissons aromatisées",3,,TVA Taux réduit
+c01224,122,jus de légumes,3,,TVA Taux réduit
+c01311,119,"autres dépenses d'alimentation : cérémonies, séjours hors domicile, personne viv",3,,TVA Taux réduit
+c01312,119,autres dépenses d'alimentation : cadeau offert (à destination d'un autre ménage,3,,TVA Taux réduit
+c02111,211,spiritueux et liqueurs,1,10,TVA taux plein
+c02121,212,vins et cidres,1,8,TVA taux plein
+c02122,212,"autres apéritifs à base de vin, champagne et autres mousseux, saké et autres",1,8,TVA taux plein
+c02131,213,bière et boissons à base de bière,1,9,TVA taux plein
+c02211,2201,cigarettes,1,5,TVA taux plein
+c02212,2202,cigares et cigarillos,1,6,TVA taux plein
+c02213,2203,tabac sous d'autres formes et produits connexes,1,7,TVA taux plein
+c02411,2411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre",,,
+c03111,311,Tissus pour vêtements,1,,TVA taux plein
+c03121,312,Vêtements pour homme,1,,TVA taux plein
+c03122,312,Vêtements pour femme,1,,TVA taux plein
+c03123,312,Vêtements pour enfant (3 à 13 ans),1,,TVA taux plein
+c03131,313,Accessoires du vêtement et mercerie,1,,TVA taux plein
+c03141,314,"Nettoyage, réparation et location de vêtements",1,,TVA taux plein
+c03211,321,Chaussures pour homme,1,,TVA taux plein
+c03212,321,Chaussures pour femme,1,,TVA taux plein
+c03213,321,Chaussures pour enfant (3 à 13 ans),1,,TVA taux plein
+c03221,322,Réparation et location de chaussures,1,,TVA taux plein
+c03311,312,"Autres dépenses d'habillement : cérémonie, séjours hors domicile, personnes viva",1,,TVA taux plein
+c03312,312,Autres dépenses d’habillement : cadeau offert (à destination d’un autre  ménage),1,,TVA taux plein
+c04111,411,Loyers (hors charges ou avec charges non isolables) des locataires résidence pri,20,,Pas de taxe
+c04121,412,Loyers (hors charges ou avec charges non isolables) des locataires autres réside,20,,Pas de taxe
+c04311,431,Produits destinés aux travaux courants d’entretien et de réparation du logement ,1,,TVA taux plein
+c04321,432,"Services d'entretien et petites réparation dans le logement (plombier, entretien",3,,TVA Taux réduit
+c04411,442,Redevance d’enlèvement des ordures,1 puis 3 depuis 2000,,
+c04431,441,"Factures d’eau résidence principale, autre logement, dépendance, terrain",3,,TVA Taux réduit
+c04441,444,Charges collectives relatives au logement (payées isolément du loyer ou crédit),,,
+c04500,4511,Facture électricité + gaz (non dissociables),3,,TVA Taux réduit
+c04511,451,"Facture d'électricité résidence principale, autre logement, garage, dépendance",3,,TVA Taux réduit
+c04521,452,"Facture de gaz résidence principale, autre logement",3,,TVA Taux réduit
+c04522,4522,"Achats de butane, propane résidence principale, autre logement",3,,TVA Taux réduit
+c04531,453,"Combustibles liquides pour la résidence principale : fuel, mazout, pétrole",3,,TVA Taux réduit
+c04541,454,Combustible solide résidence principale,1,Nombreux changements,TVA taux plein
+c04551,455,Chauffage urbain (par vapeur),3,,TVA Taux réduit
+c04552,4552,Glace,3,,TVA Taux réduit
+c04611,411,Autres dépenses d’habitation : cadeau offert (à destination d’un autre ménage),1,,TVA taux plein
+c05110,511,Meubles informatiques,1,,TVA taux plein
+c05111,511,"Mobilier de chambre (lit, armoire, commode, chevet, bureau enfant, sommier) yc m",1,,TVA taux plein
+c05112,511,"Mobilier de séjour (buffet, bahut, bibliothèque, etc.)",1,,TVA taux plein
+c05113,511,"Mobilier de cuisine et de salle de bain yc éléments intégrés ou non, tabourets, ",1,,TVA taux plein
+c05114,511,"Tables, sièges, chaises hors cuisine et salle de bain",1,,TVA taux plein
+c05115,511,"Mobilier de jardin (balancelle, table, fauteuil, abri de jardin, portique, etc.)",1,,TVA taux plein
+c05116,511,"Autres meubles, accessoires du mobilier (yc luminaires, décoration, équipement e",1,,TVA taux plein
+c05121,512,"Tapis et autres revêtements de sol (lino, moquette, etc.), pose et réparation de",1,,TVA taux plein
+c05131,51154,Réparation de meubles,1,,TVA taux plein
+c05211,520,"Articles de literie (futons, oreillers, couettes, couvertures, draps, alèses, et",1,,TVA taux plein
+c05212,520,"Autres articles de ménage en textile (tissu d'ameublement, voilages, linge de ma",1,,TVA taux plein
+c05311,531,"Réfrigérateurs, congélateurs et caves à vin",1,,TVA taux plein
+c05312,531,"Lave linge, sèche linge et lave vaisselle",1,,TVA taux plein
+c05313,531,Gros appareils de cuisson,1,,TVA taux plein
+c05314,531,Appareils de chauffage et de climatisation et autres gros appareils électroménag,1,,TVA taux plein
+c05315,531,"Appareils de nettoyage (aspirateur, nettoyeur vapeur etc.)",1,,TVA taux plein
+c05316,531,Machine à coudre et à tricoter,1,,TVA taux plein
+c05317,531,Autres gros appareils ménagers,1,,TVA taux plein
+c05321,532,Petit électroménager,1,,TVA taux plein
+c05331,533,Réparation et entretien des appareils électroménagers,1,,TVA taux plein
+c05411,540,"Verrerie et cristallerie, vaisselle, articles de ménage ou de toilette en faïenc",1,,TVA taux plein
+c05412,540,Coutellerie et argenterie,1,,TVA taux plein
+c05413,540,Ustensiles de cuisine et autres articles de ménage,1,,TVA taux plein
+c05414,541,"Réparation et entretien verrerie, vaisselle et autres ustensiles de cuisine",1,,TVA taux plein
+c05511,551,Gros outillage de bricolage,1,,TVA taux plein
+c05512,551,Gros outillage de jardinage,1,,TVA taux plein
+c05513,551,Réparation du gros outillage,1,,TVA taux plein
+c05521,552,Petit outillage et accessoires divers de bricolage yc petit matériel électrique ,1,,TVA taux plein
+c05522,552,"Petit outillage et accessoires divers de jardinage, matériaux d'aménagement exté",1,,TVA taux plein
+c05523,552,Réparation des petits outillages,1,,TVA taux plein
+c05611,561,Produits de nettoyage et d’entretien (yc pour piscine),1,,TVA taux plein
+c05612,561,"Autres produits ménagers (articles papier et plastique, brosserie, produits dive",1,,TVA taux plein
+c05621,562,"Services domestiques (ménage, garde enfant, jardinage, etc.)",2,,TVA Taux intermédiaire
+c05622,562,"Autres services d’entretien pour le logement (blanchisserie, location appareils,",,,
+c05711,5711,Autres dépenses en équipement : personnes vivant hors du domicile au moins un jo,,,
+c05712,5712,Autres dépenses en équipement : cadeau offert (à destination d’un autre ménage),,,
+c06111,611,"Produits pharmaceutiques à ingurgiter et traitants, compléments alimentaires, vi",3,,TVA Taux réduit
+c06112,612,"Autres produits pharmaceutiques (parapharmacie, pansements, préservatifs, etc. )",1,,TVA taux plein
+c06113,613,"Appareils et matériels thérapeutiques (lunettes, prothèses, etc.) yc leur répara",1,Si prothèse handicapé 5.5,TVA taux plein
+c06211,621,Consultations des médecins généralistes ou spécialistes hors hospitalisation,20,,Pas de taxe
+c06221,622,"Dentiste, orthodontie",20,,Pas de taxe
+c06231,623,Services des laboratoires d’analyse médicale et des cabinets de radiologie,20,,Pas de taxe
+c06232,623,"Services des auxiliaires médicaux (infirmier, kiné, laboratoire, etc.)",20,,Pas de taxe
+c06233,623,"Services extra hospitaliers (ambulance, location matériel)",20,,Pas de taxe
+c06311,630,Services et soins hospitaliers,20,,Pas de taxe
+c06411,6111,Autres dépenses de santé : personnes vivant hors du domicile au moins un jour pa,,,
+c06412,6412,Autres dépenses de santé : cadeau offert (à destination d’un autre ménage),,,
+c07111,711,Achats d'automobiles neuves,1,,TVA taux plein
+c07112,711,Achats d'automobiles d'occasion,1,,TVA taux plein
+c07121,712,Achats de motocycles neufs et occasion,1,,TVA taux plein
+c07131,713,Achats de cycles neufs et occasion,1,,TVA taux plein
+c07141,711,Achats d'autres véhicules neufs et occasion,1,,TVA taux plein
+c07211,721,"Pièces détachées, pneus et accessoires pour les véhicules personnels (hors ceux ",1,,TVA taux plein
+c07221,722,"Carburants, électricité, huiles, lubrifiants, etc.",1,,TVA taux plein
+c07231,723,"Réparations, dépannages, révisions, lavage, entretien et contrôle technique",1,,TVA taux plein
+c07241,724,"Services de location d’un local, frais de parking",1,,TVA taux plein
+c07242,724,"Autres services liés à l’utilisation de véhicules personnels (péages, auto école",1,,TVA taux plein
+c07311,735,"Services de transports de voyageurs locaux (métro, tram) et SNCF longue distance",3,,TVA Taux réduit
+c07321,731,Services de transports de voyageurs par route yc car scolaire,3,,TVA Taux réduit
+c07331,732,Services de transports de voyageurs par air (yc transport de bagages et de véhic,20,16,Contribution de solidarité sur les billets d'avion
+c07341,733,Services de transport par mer et voies navigables intérieures (yc transport de b,3,,TVA Taux réduit
+c07351,734,"Services combinés de transport de voyageurs carte navigo, tickets train + bus, e",3,,TVA Taux réduit
+c07361,736,Autres services de transport (yc déménagement),1,,TVA taux plein
+c07411,736,"Autres dépenses de transport : cérémonie, séjours hors domicile, personnes vivan",1,,TVA taux plein
+c07412,736,Autres dépenses de transport : cadeau offert (à destination d’un autre ménage),1,,TVA taux plein
+c08111,810,"Services postaux (yc timbres, enveloppes)",20,,Pas de taxe
+c08121,831,"Achats et réparation téléphones fixes ou portables, télécopieurs et accessoires",3,,TVA Taux réduit
+c08131,832,"Services de téléphone et fax, internet, recharges téléphoniques",1,,TVA taux plein
+c08141,8141,Autres dépenses de communications  : cadeau offert (à destination d’un autre mén,,,
+c09111,911,"Appareils de réception, d’enregistrement et de reproduction du son",1,,TVA taux plein
+c09112,911,"Téléviseurs, home cinéma, magnétoscopes, antennes, adapteur et lecteur DVD de sa",1,,TVA taux plein
+c09121,912,Equipement photographique et cinématographique (yc accessoires),1,,TVA taux plein
+c09122,9122,"Instruments d'optique non médicale et divers électroacoustique (microscope, jume",,,
+c09131,913,"Micro-ordinateurs, tablettes, matériels et accessoires informatiques (yc pièces ",1,,TVA taux plein
+c09141,914,Supports vierges ou enregistrés pour l’image et le son (yc téléchargement),1,,TVA taux plein
+c09151,9151,Réparation des équipements et accessoires audiovisuels photographiques et inform,1,,TVA taux plein
+c09211,9211,"Gros équipements pour les loisirs de plein air et les sports (caravanes, camping",1,,TVA taux plein
+c09221,922,Instruments de musique et accessoires,1,,TVA taux plein
+c09222,921,"Gros équipements pour les loisirs d’intérieur (table de billard, de ping-pong, f",1,,TVA taux plein
+c09231,923,"Réparation et entretien de biens durables pour les loisirs, les sports et la cul",1,,TVA taux plein
+c09311,931,"Jeux, jouets et passe temps yc jeux vidéos",1,,TVA taux plein
+c09312,932,"Equipements de sport, de camping et de loisirs en plein air (pêche, chasse, uste",1,,TVA taux plein
+c09321,933,"Horticulture, accessoires et frais de livraison",2,,TVA Taux intermédiaire
+c09331,934,"Animaux d’agrément, nourriture, produits et accessoires pour les animaux d’agrém",1,,TVA taux plein
+c09341,9341,"Aliments autres animaux (chèvre, volaille, cabri, cochon, etc.)",2,,TVA Taux intermédiaire
+c09411,941,"Services sportifs et récréatifs (spectacles sportifs, participation loisirs, loc",3,,TVA Taux réduit
+c09421,942,"Cinémas, théâtres, salles de concert, cirques, foire",3,,TVA Taux réduit
+c09422,942,"Musées, jardins zoologiques et similaires",3,,TVA Taux réduit
+c09423,942,"Services de télévision et de radiodiffusion (location, redevance, abonnement)",3,2 POUR LA REDEVANCE,TVA Taux réduit
+c09424,942,"Smartbox et autres services de loisirs (animateurs, photographes, services pour ",1,,TVA taux plein
+c09431,943,"Jeux de hasard (loto, tiercé, etc.)",1,,TVA taux plein
+c09511,951,Livres yc e-books,3,,3 mais 2 sauf en 2012
+c09521,952,Journaux et périodiques yc par abonnement,4,,TVA Taux super-réduit
+c09531,953,"Imprimés divers (carte postale, de visite, poster, calendrier, carte routière, a",3,,TVA Taux réduit
+c09541,954,Articles de papeterie et de dessin (yc toner pour imprimante),3,,TVA Taux réduit
+c09611,960,"Voyages à forfait, week-end, excursions yc voyage scolaire",,,
+c09711,941,"Autres dépenses des loisirs : séjours hors domicile, personnes vivant hors du do",1,,TVA taux plein
+c09712,941,Autres dépenses de loisirs et culture : cadeau offert (à destination d’un autre ,1,,TVA taux plein
+c10111,1010,Enseignement maternel et primaire (scolarité et cours d’alphabétisation),20,,Pas de taxe
+c10121,1020,Enseignement secondaire (scolarité et inscription aux concours de niveau seconda,20,,Pas de taxe
+c10131,1040,Enseignement supérieur et frais d’inscription aux concours des grandes écoles,20,,Pas de taxe
+c10141,1050,"Enseignement ne correspondant à aucun niveau particulier (cours particuliers, en",2,"Passage de 7 à 19,6 en 2013",TVA Taux intermédiaire
+c10151,10151,Autres dépenses d’enseignement : personnes vivant hors du domicile au moins un j,,,
+c10152,10152,Autres dépenses d’enseignement : cadeau offert (à destination d’un autre ménage),2,,TVA Taux intermédiaire
+c11111,11112,Repas pris dans un restaurant,3,,TVA Taux réduit
+c11112,11113,"Repas pris dans un café, bar ou assimilé",3,,TVA Taux réduit
+c11121,1112,Cantines scolaire et professionnelle,3,,TVA Taux réduit
+c11131,11112,"Autres dépenses de restauration : séjours hors domicile, personnes vivant hors d",3,,TVA Taux réduit
+c11132,11112,Autres dépenses de restauration : cadeau offert (à destination d’un autre ménage,3,,TVA Taux réduit
+c11211,1120,"Services d’hébergement (hôtels, gîtes, campings, CROUS, internats)",3,,TVA Taux réduit
+c12111,1211,"Salons de coiffure et esthétique corporelle (yc cures thermales, tatouages, pier",3,,TVA Taux réduit
+c12121,1212,Appareils électriques pour les soins personnels,1,,TVA taux plein
+c12122,1213,"Autres articles et produits pour les soins personnels (savon, produits de toilet",1,,TVA taux plein
+c12311,1231,"Articles de bijouterie, de joaillerie et d’horlogerie (yc leur réparation)",1,,TVA taux plein
+c12321,1232,"Articles de voyage et autres contenants d'effets personnels (maroquinerie, valis",1,,TVA taux plein
+c12322,1232,"Autres effets personnels (briquets, parapluies, lunettes de soleil, articles pou",1,,TVA taux plein
+c12331,1240,Autres biens et services offerts (à des personnes extérieures au ménage),,,
+c12411,12411,"Services de protection sociale (assistante maternelle, crèche, maison de retrait",2,,TVA Taux intermédiaire
+c12511,1251,"Assurances vie, décès",20,15,
+c12521,1252,Assurances liées au logement,20,15,
+c12531,1253,Assurances liées à la santé,20,14,
+c12541,1254,Assurances liées aux transports (yc assurance voyage),20,13,
+c12551,1255,"Autres assurances (pack assurance, scolaire, dépendance, prévoyance, animaux, ob",20,15,
+c12611,1261,Services financiers,,,
+c12711,1270,"Autres services (pompes funèbres, services juridiques, vestiaires, consignes, gr",1,,TVA taux plein
+c12712,9901,Caution pour la location d'un logement,0,,Pas de taxe
+c12811,1270,Autres dépenses occasionnées par une cérémonie,1,,TVA taux plein
+c12911,1291,Dépenses SAI des personnes vivant hors du domicile au moins un jour par semaine,,,
+c13111,9911,Impôts et taxes de la résidence principale,0,,Pas de taxe
+c13121,9912,Impôts et taxes pour une résidence secondaire ou un autre logement,0,,Pas de taxe
+c13141,9913,Impôts sur le revenu,0,,Pas de taxe
+c13151,9914,"Taxes automobiles (cartes grises, contraventions)",,18,Taxe sur les certificats d’immatriculation des véhicules et pour leur gestion
+c13161,9915,"Autres impôts et taxes (taxe foncière pour jardin ou autre, amendes, passeport),",,19,taxe sur les papiers officiels
+c13211,9921,Remboursements de prêts pour la résidence principale (yc garage et dépendance),0,,Pas de taxe
+c13221,9922,Remboursements des autres prêts immobiliers,0,,Pas de taxe
+c13311,9932,Aides et dons (occasionnels ou réguliers) en argent offerts par le ménage et pen,0,,Pas de taxe
+c13411,9903,Gros travaux pour la résidence principale yc matériaux de construction de gros œ,2,,TVA Taux intermédiaire
+c13421,9903,Gros travaux pour une résidence secondaire ou un autre logement yc matériaux de ,3,,TVA Taux réduit
+c13511,1351,"lRemboursements de crédits à a consommation (yc voiture, gros travaux, biens dur",0,,Pas de taxe
+c13611,1361,Prélèvements de l'employeur,0,,Pas de taxe
+c13711,13711,"Achats de logements, garages, parkings, box et terrains",3,,TVA Taux réduit
+c13722,13722,Epargne salariale : achat d’actions de l’entreprise,,,
+c14111,1411,Allocations logement reçu par le ménage,,,

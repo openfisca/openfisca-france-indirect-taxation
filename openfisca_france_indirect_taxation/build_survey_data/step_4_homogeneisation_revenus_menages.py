@@ -366,7 +366,7 @@ if __name__ == '__main__':
     import sys
     import time
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    deb = time.clock()
+    deb = time.process_time()()
     year = 2011
     build_homogeneisation_revenus_menages(year = year)
-    log.info("step_4_homogeneisation_revenus_menages duration is {}".format(time.clock() - deb))
+    log.info("step_4_homogeneisation_revenus_menages duration is {}".format(time.process_time()() - deb))

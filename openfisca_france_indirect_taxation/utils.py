@@ -61,7 +61,8 @@ def get_transfert_data_frames(year = None):
         'Matrice passage {}-COICOP.csv'.format(year),
         )
     if os.path.exists(matrice_passage_csv_file_path):
-        matrice_passage_data_frame = pandas.read_csv(matrice_passage_csv_file_path)
+        matrice_passage_data_frame = pandas.read_csv(matrice_passage_csv_file_path, index_col = False)
+        print(matrice_passage_data_frame)
     else:
         matrice_passage_xls_file_path = os.path.join(
             assets_directory,
@@ -69,13 +70,14 @@ def get_transfert_data_frames(year = None):
             'Matrice passage {}-COICOP.xls'.format(year),
             )
         matrice_passage_data_frame = pandas.read_excel(matrice_passage_xls_file_path)
-        matrice_passage_data_frame.to_csv(matrice_passage_csv_file_path, encoding = 'utf-8')
+        # Do not write row names
+        matrice_passage_data_frame.to_csv(matrice_passage_csv_file_path, encoding = 'utf-8', index = False)
 
     if year == 2005:
         matrice_passage_data_frame = matrice_passage_data_frame.query('poste2005 != 5316')
-    if year == 2011:
-        matrice_passage_data_frame['poste2011'] = \
-            matrice_passage_data_frame['poste2011'].apply(lambda x: int(x.replace('c', '').lstrip('0')))
+    if year >= 2011:
+        matrice_passage_data_frame[f'poste{year}'] = \
+            matrice_passage_data_frame[f'poste{year}'].apply(lambda x: int(x.replace('c', '').lstrip('0')))
 
     selected_parametres_fiscalite_data_frame = get_parametres_fiscalite_data_frame(year = year)
     return matrice_passage_data_frame, selected_parametres_fiscalite_data_frame

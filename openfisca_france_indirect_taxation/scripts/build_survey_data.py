@@ -1,3 +1,6 @@
+"""Build survey data."""
+
+
 import argparse
 import datetime
 import logging
@@ -14,7 +17,8 @@ log = logging.getLogger(app_name)
 
 def main():
     parser = argparse.ArgumentParser()
-    all_years = [2000, 2005, 2011, 2017]
+    # all_years = [2000, 2005, 2011, 2017]
+    all_years = [2017]
     parser.add_argument('-y', '--years', nargs='+', help = "years of survey to build (default = {})'".format(all_years), default = all_years)
     parser.add_argument('-v', '--verbose', action = 'store_true', default = False, help = "increase output verbosity")
     args = parser.parse_args()

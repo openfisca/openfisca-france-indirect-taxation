@@ -50,11 +50,13 @@ setup(
         ),
     include_package_data = True,  # Will read MANIFEST.in
     install_requires = [
-        'OpenFisca-Core >= 35.4.2',
+        'Babel >= 0.9.4',
+        'OpenFisca-Core >= 35.4.2,<36.0',
         'OpenFisca-Survey-Manager >= 0.45,<1.0',
         'python-slugify',
-        "statsmodels >= 0.10.1, <1.0",
         'xlrd >= 1.0.0',
+        "numpy >= 1.11, <= 1.17",
+        "statsmodels >= 0.10.1, <1.0",
         ],
     packages = find_packages(),
     )
