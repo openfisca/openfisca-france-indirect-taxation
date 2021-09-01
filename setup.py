@@ -54,7 +54,6 @@ setup(
         'OpenFisca-Survey-Manager >= 0.45,<1.0',
         'python-slugify',
         'xlrd >= 1.0.0',
-        "numpy >= 1.11, <= 1.17",
         "statsmodels >= 0.10.1, <1.0",
         ],
     packages = find_packages(),
