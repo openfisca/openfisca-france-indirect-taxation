@@ -52,7 +52,7 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
         vehicule.index = vehicule.index.astype(ident_men_dtype)
 
     if year in [2005, 2011, 2017]:
-        vehicule = survey.get_values(table = "automobile")
+        vehicule = survey.get_values(table = "automobile", ignorecase = True)
 
     if year == 2005:
         vehicule = vehicule[
@@ -62,8 +62,7 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
         vehicule["veh_essence"] = vehicule['carbu'] == 1
         vehicule["veh_diesel"] = vehicule['carbu'] == 2
 
-    if year in [2011]:
-        vehicule = survey.get_values(table = "automobile")
+    if year in 2011:
         kept_variables = ['ident_men', 'carbu']
         vehicule = vehicule.rename(
             columns = {'ident_me': 'ident_men'},
@@ -72,7 +71,9 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
         vehicule["veh_essence"] = vehicule['carbu'] == 1
         vehicule["veh_diesel"] = vehicule['carbu'] == 2
 
-    # TOOD RESTART HERE for 2017
+    if year == 2017:
+        NotImplementedError("RESTART HERE for 2017")
+        # TOOD RESTART HERE for 2017
 
     # Compute the number of cars by category and save
     if year != 1995:
