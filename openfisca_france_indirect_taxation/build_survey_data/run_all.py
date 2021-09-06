@@ -45,14 +45,14 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = (
     year_data = find_nearest_inferior(year_data_list, year_calage)
 
     # 4 étape parallèles d'homogénéisation des données sources :
-    # Gestion des dépenses de consommation:
+    # 1. Gestion des dépenses de consommation:
     build_depenses_homogenisees(year = year_data)
     build_imputation_loyers_proprietaires(year = year_data)
 
     depenses = temporary_store["depenses_bdf_{}".format(year_calage)]
     depenses.index = depenses.index.astype(ident_men_dtype)
 
-    # Gestion des véhicules:
+    # 2. Gestion des véhicules:
     build_homogeneisation_vehicules(year = year_data)
     if year_calage != 1995:
         vehicule = temporary_store['automobile_{}'.format(year_data)]
@@ -60,12 +60,12 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = (
     else:
         vehicule = None
 
-    # Gestion des variables socio démographiques:
+    # 3. Gestion des variables socio démographiques:
     build_homogeneisation_caracteristiques_sociales(year = year_data)
     menage = temporary_store['donnes_socio_demog_{}'.format(year_data)]
     menage.index = menage.index.astype(ident_men_dtype)
 
-    # Gestion des variables revenus:
+    # 4. Gestion des variables revenus:
     build_homogeneisation_revenus_menages(year = year_data)
     revenus = temporary_store["revenus_{}".format(year_calage)]
     revenus.index = revenus.index.astype(ident_men_dtype)
@@ -93,15 +93,16 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = (
         sort = True
         )
     if year_data == 2005:
-        for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence']:
-            data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
-        for variable in ['age{}'.format(i) for i in range(3, 14)] + ['agecj', 'agfinetu', 'agfinetu_cj', 'nenfhors']:
-            data_frame.loc[data_frame[variable].isnull(), variable] = 0
+        nullified_variables = (
+            ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence']
+            + ['age{}'.format(i) for i in range(3, 14)] + ['agecj', 'agfinetu', 'agfinetu_cj', 'nenfhors']
+            )
+        data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
 
     if year_data == 2011:
-        for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
-        'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']:
-            data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
+        nullified_variables = ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
+            'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']
+        data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
 
     if year_data == 2005:
         data_frame['ident_men'] = list(range(0, len(data_frame)))
@@ -118,7 +119,7 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = (
         log.info('ignoring reset_index because {}'.format(e))
 
     # On ne garde que les ménages métropolitains
-    if year_data == 2011:
+    if year_data in [2011, 2017]:
         data_frame = data_frame.query('zeat != 0').copy()
 
     if year_data == 2011 and not skip_matching:
@@ -142,6 +143,9 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = (
 
         data_matched['ident_men'] = data_matched['ident_men'].astype(str).copy()
         data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
+
+    if year_data == 2017 and not skip_matching:
+        raise NotImplementedError()
 
     save(data_frame, year_data, year_calage)
 
