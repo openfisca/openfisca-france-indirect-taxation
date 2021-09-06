@@ -95,8 +95,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
             inplace = True,
             )
         del conso['ctot']
-        for col in sorted(conso.columns):
-            print(f"- {col}")
+
 
     # Grouping by coicop
     poids = conso[['ident_men', 'pondmen']].copy()

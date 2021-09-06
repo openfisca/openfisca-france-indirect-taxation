@@ -1,8 +1,7 @@
 #! /usr/bin/env python
-# -*- coding: utf-8 -*-
 
 
-"""France specific indirect taxation model for OpenFisca -- a versatile microsimulation free software"""
+"""France specific indirect taxation model for OpenFisca -- a versatile microsimulation free software."""
 
 
 from setuptools import setup, find_packages
@@ -39,6 +38,7 @@ setup(
             'autopep8 >= 1.4.0, < 1.6.0',
             'flake8 >= 3.9.0, < 4.0.0',
             'flake8-bugbear >= 19.3.0, < 20.0.0',
+            'ipdb',
             'matplotlib',
             'nbconvert >= 5.5.0',
             "pytest",  # < 5.0",

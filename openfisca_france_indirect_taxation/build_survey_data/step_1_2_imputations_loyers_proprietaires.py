@@ -1,5 +1,3 @@
-
-
 import os
 
 
@@ -16,9 +14,8 @@ from openfisca_survey_manager.survey_collections import SurveyCollection
 log = logging.getLogger(__name__)
 
 
-# **************************************************************************************************************************
-# * Etape n° 0-1-2 : imputation de loyers pour les ménages proprietaires
-# **************************************************************************************************************************
+# Etape 0-1-2: Imputation de loyers pour les ménages propriétaires
+
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
     """Impute rent for owner"""

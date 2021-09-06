@@ -62,7 +62,6 @@ def get_transfert_data_frames(year = None):
         )
     if os.path.exists(matrice_passage_csv_file_path):
         matrice_passage_data_frame = pandas.read_csv(matrice_passage_csv_file_path, index_col = False)
-        print(matrice_passage_data_frame)
     else:
         matrice_passage_xls_file_path = os.path.join(
             assets_directory,

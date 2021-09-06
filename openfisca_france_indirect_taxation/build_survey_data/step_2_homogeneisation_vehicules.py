@@ -15,13 +15,9 @@ from openfisca_france_indirect_taxation.build_survey_data.utils \
 log = logging.getLogger(__name__)
 
 
-# **************************************************************************************************************************
-# * Etape n° 0-2 : HOMOGENEISATION DES DONNEES SUR LES VEHICULES
-# **************************************************************************************************************************
-# **************************************************************************************************************************
+# Etape 0-2 : Homogénéïsation des données sur les véhicules
 #
-#
-# DONNEES SUR LES TYPES DE CARBURANTS
+# Données sur les types de carburants
 
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
@@ -54,29 +50,33 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
     if year in [2005, 2011, 2017]:
         vehicule = survey.get_values(table = "automobile", ignorecase = True)
 
-    if year == 2005:
-        vehicule = vehicule[
-            ['ident_men', 'carbu']
-            ].copy()
-        vehicule["veh_tot"] = 1
-        vehicule["veh_essence"] = vehicule['carbu'] == 1
-        vehicule["veh_diesel"] = vehicule['carbu'] == 2
+        if year == 2005:
+            vehicule = vehicule[
+                ['ident_men', 'carbu']
+                ].copy()
+            vehicule["veh_tot"] = 1
+            vehicule["veh_essence"] = vehicule['carbu'] == 1
+            vehicule["veh_diesel"] = vehicule['carbu'] == 2
 
-    if year in 2011:
-        kept_variables = ['ident_men', 'carbu']
-        vehicule = vehicule.rename(
-            columns = {'ident_me': 'ident_men'},
-            )[kept_variables].copy()
-        vehicule["veh_tot"] = 1
-        vehicule["veh_essence"] = vehicule['carbu'] == 1
-        vehicule["veh_diesel"] = vehicule['carbu'] == 2
+        if year == 2011:
+            kept_variables = ['ident_men', 'carbu']
+            vehicule = vehicule.rename(
+                columns = {'ident_me': 'ident_men'},
+                )[kept_variables].copy()
+            vehicule["veh_tot"] = 1
+            vehicule["veh_essence"] = vehicule['carbu'] == 1
+            vehicule["veh_diesel"] = vehicule['carbu'] == 2
 
-    if year == 2017:
-        NotImplementedError("RESTART HERE for 2017")
-        # TOOD RESTART HERE for 2017
+        if year == 2017:
+            vehicule["veh_tot"] = 1
+            vehicule["veh_essence"] = vehicule['carbu1'] == 1
+            vehicule["veh_diesel"] = vehicule['carbu2'] == 1
+            vehicule["veh_gpl"] = vehicule['carbu3'] == 1
+            vehicule["veh_electrique"] = vehicule['carbu4'] == 1
+            vehicule["veh_autre"] = vehicule['carbu5'] == 1
 
-    # Compute the number of cars by category and save
-    if year != 1995:
+        # Compute the number of cars by category and save
+        # Ignore GPL, electric and others than essence and diesel
         vehicule = vehicule.groupby(by = 'ident_men')["veh_tot", "veh_essence", "veh_diesel"].sum()
         vehicule["pourcentage_vehicule_essence"] = 0
         vehicule.loc[vehicule.veh_tot != 0, 'pourcentage_vehicule_essence'] = vehicule.veh_essence / vehicule.veh_tot

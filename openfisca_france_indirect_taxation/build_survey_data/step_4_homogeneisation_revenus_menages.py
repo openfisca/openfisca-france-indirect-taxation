@@ -36,8 +36,24 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         menrev = survey.get_values(
             table = "menrev",
             variables = [
-                'revtot', 'ir', 'irbis', 'imphab', 'impfon', 'revaid', 'revsal', 'revind', 'revsec', 'revret',
-                'revcho', 'revfam', 'revlog', 'revinv', 'revrmi', 'revpat', 'mena', 'ponderr'
+                'impfon',
+                'imphab',
+                'ir',
+                'irbis',
+                'mena',
+                'ponderr',
+                'revaid',
+                'revcho',
+                'revfam',
+                'revind',
+                'revinv',
+                'revlog',
+                'revpat',
+                'revret',
+                'revrmi',
+                'revsal',
+                'revsec',
+                'revtot',
                 ],
             )
         menage = survey.get_values(
@@ -107,9 +123,7 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         rev_disp.somme_obl_recue = rev_disp.somme_obl_recue.fillna(0)
 
         rev_disp['revact'] = rev_disp['revsal'] + rev_disp['revind'] + rev_disp['revsec']
-
         rev_disp['revtot'] = rev_disp['revact'] + rev_disp['revpat'] + rev_disp['revsoc'] + rev_disp['somme_obl_recue']
-
         rev_disp['revact'] = rev_disp['revsal'] + rev_disp['revind'] + rev_disp['revsec']
 
         rev_disp.rename(
@@ -127,12 +141,10 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
         rev_disp['somme_libre_recue'] = '0'
         rev_disp['autres_ress'] = '0'
 
-
-#
-# /* Le revenu disponible se calcule à partir de revtot à laquelle on retrancher la taxe d'habitation
-# et l'impôt sur le revenu, plus éventuellement les CSG et CRDS.
-# La variable revtot est la somme des revenus d'activité, sociaux, du patrimoine et d'aide. */
-#
+        # /* Le revenu disponible se calcule à partir de revtot à laquelle on retrancher la taxe d'habitation
+        # et l'impôt sur le revenu, plus éventuellement les CSG et CRDS.
+        # La variable revtot est la somme des revenus d'activité, sociaux, du patrimoine et d'aide. */
+        #
         rev_disp['rev_disponible'] = rev_disp.revtot - rev_disp.impot_revenu - rev_disp.imphab
         loyers_imputes = temporary_store['depenses_bdf_{}'.format(year)]
         loyers_imputes.rename(
@@ -250,19 +262,17 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
                 ),
             inplace = True
             )
-        # * Ces pondérations (0.65 0.35) viennent de l'enquête BdF 1995 qui distingue taxe d'habitation et impôts
-        #   fonciers. A partir de BdF 1995,
-        # * on a calculé que la taxe d'habitation représente en moyenne 65% des impôts locaux, et que les impôts
-        #   fonciers en représentenr 35%.
-        # * On applique ces taux aux enquêtes 2000 et 2005.
-
+        # Ces pondérations (0.65 0.35) viennent de l'enquête BdF 1995 qui distingue taxe d'habitation et impôts
+        # fonciers. A partir de BdF 1995,
+        # On a calculé que la taxe d'habitation représente en moyenne 65% des impôts locaux, et que les impôts
+        # fonciers en représentenr 35%.
+        # On applique ces taux aux enquêtes 2000 et 2005.
         revenus['imphab'] = 0.65 * (revenus.impot_res_ppal + revenus.impot_autres_res)
         revenus['impfon'] = 0.35 * (revenus.impot_res_ppal + revenus.impot_autres_res)
         del revenus['impot_autres_res']
         del revenus['impot_res_ppal']
 
-        #    * Calculer le revenu disponible avec et sans le loyer imputé
-
+        # Calculer le revenu disponible avec et sans le loyer imputé
         loyers_imputes = temporary_store["depenses_bdf_{}".format(year)]
         variables = ["poste_04_2_1"]
         loyers_imputes = loyers_imputes[variables]
@@ -286,7 +296,7 @@ In loyers_imputes and not in revenus:
 
         temporary_store["revenus_{}".format(year)] = revenus
 
-    elif year == 2011:
+    elif year in [2011, 2017]:
         c05_variables = ['c13111', 'c13121', 'c13141', 'pondmen', 'ident_men']
         c05 = survey.get_values(
             table = "c05",
@@ -326,13 +336,15 @@ In loyers_imputes and not in revenus:
         revenus = pandas.concat([menage, rev_disp], axis = 1)
         menage.index.name = 'ident_men'
         revenus.index.name = 'ident_men'
+
+        # Ces revenus sont déjà intégrés dans revindep et salaires
+        # rev101_d = "autoverses",
+        # rev201_d = "autres_rev",
+
         revenus.rename(
             columns = dict(
                 revindep = "act_indpt",
-                # TODO: trouver ces revenus commentés dans bdf 2011
-                # rev101_d = "autoverses",
                 salaires = "salaires",
-                # rev201_d = "autres_rev",
                 rev700 = "somme_obl_recue",
                 rev701 = "somme_libre_recue",
                 rev999 = "autres_ress",
@@ -360,13 +372,3 @@ In loyers_imputes and not in revenus:
         revenus['rev_disponible'] = revenus['rev_disponible'] * (revenus['rev_disponible'] >= 0)
         revenus['rev_disp_loyerimput'] = revenus.rev_disponible + revenus.loyer_impute
         temporary_store["revenus_{}".format(year)] = revenus
-
-
-if __name__ == '__main__':
-    import sys
-    import time
-    logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    deb = time.process_time()()
-    year = 2011
-    build_homogeneisation_revenus_menages(year = year)
-    log.info("step_4_homogeneisation_revenus_menages duration is {}".format(time.process_time()() - deb))
