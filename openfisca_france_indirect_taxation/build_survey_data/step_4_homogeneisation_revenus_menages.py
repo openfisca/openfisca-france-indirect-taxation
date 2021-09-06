@@ -337,10 +337,9 @@ In loyers_imputes and not in revenus:
         menage.index.name = 'ident_men'
         revenus.index.name = 'ident_men'
 
-        # Ces revenus sont déjà intégrés dans revindep et salaires
+        # Ces revenus sont déjà intégrés dans revindep et salaires
         # rev101_d = "autoverses",
         # rev201_d = "autres_rev",
-
         revenus.rename(
             columns = dict(
                 revindep = "act_indpt",

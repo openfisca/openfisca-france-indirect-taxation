@@ -33,7 +33,6 @@ def main():
     start_time = datetime.datetime.now()
     years_calage = [int(year) for year in args.years]
 
-
     try:
         run(years_calage)
     except Exception as e:
