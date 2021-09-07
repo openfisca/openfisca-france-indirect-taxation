@@ -94,6 +94,8 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
                 },
             inplace = True,
             )
+
+    if 'ctot' in conso.columns:
         del conso['ctot']
 
     # Grouping by coicop
