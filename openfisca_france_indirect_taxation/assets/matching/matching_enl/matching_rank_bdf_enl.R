@@ -21,10 +21,23 @@ fused.nnd.m <- create.fused(
   data.rec = data_bdf, data.don = data_enl,
   mtc.ids = out.nnd$mtc.ids,
   z.vars = c(
-    "froid", "froid_installation", "gchauf_2", "froid_cout", "froid_isolation",
-    "froid_impaye", "gchauf_6", "gchauf_7", "gchaufs_1",
-    "gchaufs_2", "gchaufs_3", "gchaufs_4", "gchaufs_5",
-    "isolation_murs", "isolation_toit", "isolation_fenetres", "majorite_double_vitrage"
+    "froid_cout",
+    "froid_impaye",
+    "froid_installation",
+    "froid_isolation",
+    "froid",
+    "gchauf_2",
+    "gchauf_6",
+    "gchauf_7",
+    "gchaufs_1",
+    "gchaufs_2",
+    "gchaufs_3",
+    "gchaufs_4",
+    "gchaufs_5",
+    "isolation_fenetres",
+    "isolation_murs",
+    "isolation_toit",
+    "majorite_double_vitrage"
     )
   )
 

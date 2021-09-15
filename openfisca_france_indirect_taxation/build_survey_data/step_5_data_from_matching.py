@@ -21,7 +21,8 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_4_1
 
 
 def check_config_ini():
-    """Check that assets option of section openfisca_france_indirect_taxation is set in openfisca-survey-manager config.ini file
+    """
+    Check that assets option of section openfisca_france_indirect_taxation is set in openfisca-survey-manager config.ini file
     since that file is used by R
     """
     config_parser = ConfigParser()
