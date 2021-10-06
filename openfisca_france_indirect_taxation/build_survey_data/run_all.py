@@ -124,7 +124,7 @@ def run_all_steps(temporary_store = None, year_calage = 2011, skip_matching = Fa
     if year_data in [2011, 2017]:
         data_frame = data_frame.query('zeat != 0').copy()
 
-    if year_data == 2011 and not skip_matching:
+    if year_data in [2011, 2017] and not skip_matching:
         # Save file needed by step_5_data_from_matching
         save(data_frame, year_data, year_calage)
         try:
@@ -145,9 +145,6 @@ def run_all_steps(temporary_store = None, year_calage = 2011, skip_matching = Fa
 
         data_matched['ident_men'] = data_matched['ident_men'].astype(str).copy()
         data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
-
-    if year_data == 2017 and not skip_matching:
-        raise NotImplementedError()
 
     save(data_frame, year_data, year_calage)
 
