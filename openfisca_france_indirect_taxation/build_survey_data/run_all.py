@@ -38,6 +38,7 @@ log = logging.getLogger(__name__)
 
 YEAR_DATA_LIST = (1995, 2000, 2005, 2011, 2017)
 
+
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def run_all_steps(temporary_store = None, year_calage = 2011, skip_matching = False):
 
