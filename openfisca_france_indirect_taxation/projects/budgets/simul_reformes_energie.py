@@ -21,7 +21,7 @@ def simulate_reformes_energie(graph = True):
     inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020))
     inflators_by_year[2020] = inflators_by_year[2019]
     year = 2019
-    data_year = 2011
+    data_year = 2017
     elasticities = get_elasticities_aidsills(data_year, True)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
