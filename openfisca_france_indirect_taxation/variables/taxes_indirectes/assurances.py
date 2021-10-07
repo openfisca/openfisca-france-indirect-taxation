@@ -8,6 +8,7 @@ class assurance_sante_taxe(YearlyVariable):
     value_type = float
     entity = Menage
     label = "Montant des taxes sur l'assurance santé"
+    end = "2016-12-31"
 
     def formula(menage, period, parameters):
         depenses_assurance_sante = menage('depenses_assurance_sante', period)
