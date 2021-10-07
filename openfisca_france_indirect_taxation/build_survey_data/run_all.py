@@ -40,7 +40,7 @@ YEAR_DATA_LIST = (1995, 2000, 2005, 2011, 2017)
 
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
-def run_all_steps(temporary_store = None, year_calage = 2011, skip_matching = False):
+def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = False):
 
     assert temporary_store is not None
 
@@ -103,6 +103,11 @@ def run_all_steps(temporary_store = None, year_calage = 2011, skip_matching = Fa
         data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
 
     if year_data == 2011:
+        nullified_variables = ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
+            'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']
+        data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
+    
+    if year_data == 2017:
         nullified_variables = ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
             'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']
         data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)

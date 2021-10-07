@@ -12,7 +12,7 @@ from openfisca_france_indirect_taxation.build_survey_data.utils import find_near
 from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
 
 
-data_years = [2000, 2005, 2011]
+data_years = [2000, 2005, 2011, 2017]
 
 
 def get_bdf_aggregates_energy(data_year = None):
