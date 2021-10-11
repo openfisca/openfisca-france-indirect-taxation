@@ -2,6 +2,10 @@ description: Alcools fermentés (vins, cidre, etc.)
 vins_mousseux_eur_hl:
   description: Vins mousseux (€/hl)
   values:
+    2021-01-01:
+      value: 9.68
+    2020-01-01:
+      value: 9.59
     2019-01-01:
       value: 9.44
     2018-01-01:
@@ -36,6 +40,10 @@ vins_mousseux_eur_hl:
 vins_tranquilles_eur_hl:
   description: Vins tranquilles (€/hl)
   values:
+    2021-01-01:
+      value: 3.91
+    2020-01-01:
+      value: 3.88
     2019-01-01:
       value: 3.82
     2018-01-01:
@@ -68,6 +76,10 @@ vins_tranquilles_eur_hl:
 boissons_fermentees_autres_que_vin_biere_eur_hl:
   description: Boissons fermentées autres que vin et bière (€/hl)
   values:
+    2021-01-01:
+      value: 3.91
+    2020-01-01:
+      value: 3.88
     2019-01-01:
       value: 3.82
     2018-01-01:
@@ -100,6 +112,10 @@ boissons_fermentees_autres_que_vin_biere_eur_hl:
 cidres_poires_hydromels_eur_hl:
   description: Cidres / Poirés / Hydromels (€/hl)
   values:
+    2021-01-01:
+      value: 1.37
+    2020-01-01:
+      value: 1.36
     2019-01-01:
       value: 1.34
     2017-01-01:

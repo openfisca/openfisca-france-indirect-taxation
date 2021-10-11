@@ -20,6 +20,10 @@ cotisation_securite_sociale_eur_par_decilitre:
 cotisation_alcools_taux_plein_eur_hlap:
   description: Cotisation sur les alcools - Taux plein (€/hlap)
   values:
+    2021-01-01:
+      value: 578.8
+    2020-01-01:
+      value: 573.64
     2019-01-01:
       value: 564.61
     2018-01-01:
@@ -42,6 +46,10 @@ cotisation_alcools_taux_plein_eur_hlap:
 cotisation_produits_intermediaires_titrant_plus_18_vol_taux_plein_eur_hl:
   description: Cotisation sur les produits intermédiaires titrant plus de 18% vol. - Taux plein (€/hl)
   values:
+    2021-01-01:
+      value: 48.87
+    2020-01-01:
+      value: 48.43
     2019-01-01:
       value: 47.67
     2018-01-01:

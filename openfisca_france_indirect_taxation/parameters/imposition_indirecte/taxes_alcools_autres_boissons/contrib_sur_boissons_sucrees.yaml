@@ -2,6 +2,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 1_kg_moins_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 1 kg ou moins de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 3.11
+    2020-01-01:
+      value: 3.08
     2019-01-01:
       value: 3.03
     2018-07-01:
@@ -12,6 +16,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 2_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 2 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 3.64
+    2020-01-01:
+      value: 3.6
     2019-01-01:
       value: 3.54
     2018-07-01:
@@ -22,6 +30,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 3_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 3 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 4.14
+    2020-01-01:
+      value: 4.1
     2019-01-01:
       value: 4.04
     2018-07-01:
@@ -32,6 +44,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 4_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 4 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 4.67
+    2020-01-01:
+      value: 4.62
     2019-01-01:
       value: 4.55
     2018-07-01:
@@ -42,6 +58,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 5_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 5 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 5.71
+    2020-01-01:
+      value: 5.65
     2019-01-01:
       value: 5.56
     2018-07-01:
@@ -52,6 +72,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 6_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 6 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 6.75
+    2020-01-01:
+      value: 6.68
     2019-01-01:
       value: 6.57
     2018-07-01:
@@ -62,6 +86,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 7_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 7 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 7.78
+    2020-01-01:
+      value: 7.7
     2019-01-01:
       value: 7.58
     2018-07-01:
@@ -72,6 +100,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 8_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 8 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 9.85
+    2020-01-01:
+      value: 9.75
     2019-01-01:
       value: 9.60
     2018-07-01:
@@ -82,6 +114,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 9_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 9 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 11.93
+    2020-01-01:
+      value: 11.81
     2019-01-01:
       value: 11.62
     2018-07-01:
@@ -92,6 +128,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 10_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 10 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 14
+    2020-01-01:
+      value: 13.86
     2019-01-01:
       value: 13.64
     2018-07-01:
@@ -102,6 +142,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 11_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 11 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 16.07
+    2020-01-01:
+      value: 15.91
     2019-01-01:
       value: 15.66
     2018-07-01:
@@ -112,6 +156,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 12_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 12 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 18.14
+    2020-01-01:
+      value: 17.96
     2019-01-01:
       value: 17.68
     2018-07-01:
@@ -122,6 +170,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 13_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 13 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 20.22
+    2020-01-01:
+      value: 20.02
     2019-01-01:
       value: 19.70
     2018-07-01:
@@ -132,6 +184,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 14_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 14 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 22.29
+    2020-01-01:
+      value: 22.07
     2019-01-01:
       value: 21.72
     2018-07-01:
@@ -142,6 +198,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 15_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: 15 kg de sucres ajoutéspar hl de boisson (€ / hl)
   values:
+    2021-01-01:
+      value: 24.36
+    2020-01-01:
+      value: 24.12
     2019-01-01:
       value: 23.74
     2018-07-01:
@@ -152,6 +212,10 @@ description: Contribution sur les boissons sucrées (à partir de juillet 2018)
 tout_kg_dessus_15_kg_sucres_ajoutes_par_hl_boisson_eur_hl:
   description: Pour tout kg au-dessus de 15 kg de sucres ajoutés par hl de boisson (€/hl)
   values:
+    2021-01-01:
+      value: 2.07
+    2020-01-01:
+      value: 2.05
     2019-01-01:
       value: 2.02
     2018-07-01:
