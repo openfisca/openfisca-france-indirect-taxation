@@ -10,8 +10,8 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step
     merge_indiv_teg_menage
 
 
-def homogenize_variables_definition_bdf_entd():
-    data_entd, data_bdf = merge_indiv_teg_menage()
+def homogenize_variables_definition_bdf_entd(year_data):
+    data_entd, data_bdf = merge_indiv_teg_menage(year_data)
 
     # Aides au logement : séparation propriétaire/locataire dans BdF -> création d'une unique variable
     check = data_bdf.query('aidlog1 != 0')
@@ -50,8 +50,8 @@ def homogenize_variables_definition_bdf_entd():
     return data_entd, data_bdf
 
 
-def create_new_variables():
-    data_entd, data_bdf = homogenize_variables_definition_bdf_entd()
+def create_new_variables(year_data):
+    data_entd, data_bdf = homogenize_variables_definition_bdf_entd(year_data)
 
     def create_new_variables_(data, option = None):
         assert option in ['entd', 'bdf']
@@ -104,8 +104,8 @@ def create_new_variables():
     return create_new_variables_(data_entd, option = 'entd'), create_new_variables_(data_bdf, option = 'bdf')
 
 
-def create_niveau_vie_quantiles():
-    data_entd, data_bdf = create_new_variables()
+def create_niveau_vie_quantiles(year_data):
+    data_entd, data_bdf = create_new_variables(year_data)
 
     def create_niveau_vie_quantiles_(data, option = None):
         assert option in ['entd', 'bdf']

@@ -50,7 +50,7 @@ def check_load_config_ini():
 
 def main(year_data):
     path_to_r_libs_user, path_to_rscript_exe = check_load_config_ini()
-    prepare_bdf_enl_matching_data()
+    prepare_bdf_enl_matching_data(year_data)
     r_script_path = os.path.join(assets_directory, 'matching', 'matching_enl', 'matching_rank_bdf_enl.R')
     os.environ['R_LIBS_USER'] = path_to_r_libs_user
     process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
@@ -64,8 +64,14 @@ def main(year_data):
             'data_matched_rank.csv'
             ), sep =',', decimal = '.'
         )
-    prepare_bdf_entd_matching_data()
+    prepare_bdf_entd_matching_data(year_data)
     r_script_path = os.path.join(assets_directory, 'matching', 'matching_entd', 'matching_rank_bdf_entd.R')
+    process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
+    subprocess.call(process_call)
+    r_script_path = os.path.join(assets_directory, 'matching', 'matching_entd', 'matching_distance_bdf_entd.R')
+    process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
+    subprocess.call(process_call)
+    r_script_path = os.path.join(assets_directory, 'matching', 'matching_entd', 'matching_random_bdf_entd.R')
     process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
     subprocess.call(process_call)
     cale_bdf_entd_matching_data()
@@ -77,7 +83,7 @@ def main(year_data):
             'data_matched_final.csv'
             ), sep =',', decimal = '.'
         )
-    prepare_bdf_erfs_matching_data()
+    prepare_bdf_erfs_matching_data(year_data)
     r_script_path = os.path.join(assets_directory, 'matching', 'matching_erfs', 'matching_rank_bdf_erfs.R')
     process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
     subprocess.call(process_call)

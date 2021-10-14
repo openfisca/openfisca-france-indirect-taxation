@@ -36,8 +36,8 @@ def clean_data():
     return data_enl, data_bdf
 
 
-def create_donation_classes():
-    data_enl, data_bdf = create_niveau_vie_quantiles()
+def create_donation_classes(year_data):
+    data_enl, data_bdf = create_niveau_vie_quantiles(year_data)
 
     def create_donation_classes_(data):
         # Classes based on niveau_vie_decile and aides_logement
@@ -117,8 +117,8 @@ def check_donation_classes_size(data, donation_class):
     return dict_dc_taille
 
 
-def prepare_bdf_enl_matching_data():
-    data_enl, data_bdf = create_donation_classes()
+def prepare_bdf_enl_matching_data(year_data):
+    data_enl, data_bdf = create_donation_classes(year_data)
     # dico = check_donation_classes_size(data_enl, 'donation_class_4')
 
     # Sauvegarde des données dans des fichiers .csv

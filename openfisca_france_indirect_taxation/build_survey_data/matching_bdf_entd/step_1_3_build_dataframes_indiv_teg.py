@@ -36,8 +36,8 @@ def load_data_indiv_teg():
     return indiv_teg_keep
 
 
-def merge_indiv_teg_menage():
-    data_menages_entd, data_bdf = build_df_menages_vehicles()
+def merge_indiv_teg_menage(year_data):
+    data_menages_entd, data_bdf = build_df_menages_vehicles(year_data)
 
     data_teg = load_data_indiv_teg()
 

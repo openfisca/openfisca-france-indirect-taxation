@@ -616,7 +616,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
                 'coeffuc': 'ocde10',
                 'typmen5': 'typmen',
                 'decuc1': 'decuc',
-                'nivie1': 'decuc',
+                'dnivie1': 'decuc',
                 },
             inplace = True,
             )

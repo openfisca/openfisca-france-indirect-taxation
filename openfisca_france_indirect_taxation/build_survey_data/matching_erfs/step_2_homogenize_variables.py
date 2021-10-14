@@ -10,8 +10,8 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_1_b
     load_data_bdf_erfs
 
 
-def homogenize_definitions():
-    data_erfs, data_bdf = load_data_bdf_erfs()
+def homogenize_definitions(year_data):
+    data_erfs, data_bdf = load_data_bdf_erfs(year_data)
 
     data_erfs = data_erfs.query('metrodom == 1')
     del data_erfs['metrodom']
@@ -54,4 +54,4 @@ def homogenize_definitions():
 
 
 if __name__ == "__main__":
-    data_erfs, data_bdf = homogenize_definitions()
+    data_erfs, data_bdf = homogenize_definitions(year_data)

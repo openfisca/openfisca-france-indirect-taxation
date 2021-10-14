@@ -11,14 +11,14 @@ import pandas as pd
 from openfisca_france_indirect_taxation.utils import assets_directory
 
 
-data_matched_random = pd.read_csv(
-    os.path.join(
-        assets_directory,
-        'matching',
-        'matching_entd',
-        'data_matched_random.csv'
-        ), sep =',', decimal = '.'
-    )
+# data_matched_random = pd.read_csv(
+#     os.path.join(
+#         assets_directory,
+#         'matching',
+#         'matching_entd',
+#         'data_matched_random.csv'
+#         ), sep =',', decimal = '.'
+#     )
 
 
 def calage_depenses_from_distance(data_matched):

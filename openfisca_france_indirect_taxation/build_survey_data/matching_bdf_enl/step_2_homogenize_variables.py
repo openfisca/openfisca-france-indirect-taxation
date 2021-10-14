@@ -30,10 +30,10 @@ def inflate_energy_consumption(data_enl, data_bdf):
     return data_enl, data_bdf
 
 
-def homogenize_variables_definition_bdf_enl():
+def homogenize_variables_definition_bdf_enl(year_data):
 
     enl_provisoire = False
-    data_enl, data_bdf = load_data_bdf_enl()
+    data_enl, data_bdf = load_data_bdf_enl(year_data)
     # Vérification que les données ENL ne contiennent pas les DOM
     assert (data_enl['dom'] == 2).any()
     del data_enl['dom']
@@ -238,8 +238,8 @@ def homogenize_variables_definition_bdf_enl():
     return data_enl, data_bdf
 
 
-def create_new_variables():
-    data_enl, data_bdf = homogenize_variables_definition_bdf_enl()
+def create_new_variables(year_data):
+    data_enl, data_bdf = homogenize_variables_definition_bdf_enl(year_data)
 
     def create_new_variables_(data, option = None):
         assert option in ['enl', 'bdf']
@@ -356,8 +356,8 @@ def create_new_variables():
     return create_new_variables_(data_enl, option = 'enl'), create_new_variables_(data_bdf, option = 'bdf')
 
 
-def create_niveau_vie_quantiles():
-    data_enl, data_bdf = create_new_variables()
+def create_niveau_vie_quantiles(year_data):
+    data_enl, data_bdf = create_new_variables(year_data)
 
     def create_niveau_vie_quantiles_(data):
         data['niveau_vie'] = (data['revtot'] / data['ocde10']).copy()

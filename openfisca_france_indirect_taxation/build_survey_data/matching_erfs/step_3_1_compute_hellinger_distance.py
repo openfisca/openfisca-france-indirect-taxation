@@ -10,7 +10,7 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_2_h
 from openfisca_france_indirect_taxation.build_survey_data.utils import \
     hellinger
 
-data_erfs, data_bdf = homogenize_definitions()
+data_erfs, data_bdf = homogenize_definitions(year_data)
 
 
 def hellinger_agepr(data_bdf, data_erfs):

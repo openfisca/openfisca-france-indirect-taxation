@@ -206,8 +206,8 @@ def merge_vehicule_menage():
     return data_entd_final, data_bdf_full
 
 
-def build_df_menages_vehicles():
-    data_menages_entd, data_menages_bdf = load_data_menages_bdf_entd()
+def build_df_menages_vehicles(year_data):
+    data_menages_entd, data_menages_bdf = load_data_menages_bdf_entd(year_data)
 
     data_vehicules = merge_vehicule_menage()
     data_vehicules_entd = data_vehicules[0]

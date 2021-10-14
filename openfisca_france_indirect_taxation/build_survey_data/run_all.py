@@ -72,7 +72,6 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
     build_homogeneisation_revenus_menages(year = year_data)
     revenus = temporary_store["revenus_{}".format(year_calage)]
     revenus.index = revenus.index.astype(ident_men_dtype)
-
     temporary_store.close()
 
     # Concaténation des résultas de ces 4 étapes
@@ -109,7 +108,7 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
     
     if year_data == 2017:
         nullified_variables = ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
-            'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']
+            'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute','aidlog2']
         data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
 
     if year_data == 2005:
@@ -139,7 +138,7 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
                 os.path.join(
                     assets_directory,
                     'matching',
-                    'data_for_run_all.csv'
+                    'data_for_run_all_{}.csv'.format(year_data)
                     ), sep =',', decimal = '.'
                 )
         except FileNotFoundError as e:
@@ -147,11 +146,10 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
             log.debug(e)
             log.debug("Skipping this step")
             from openfisca_france_indirect_taxation.build_survey_data import step_5_data_from_matching
-            data_matched = step_5_data_from_matching.main()
+            data_matched = step_5_data_from_matching.main(year_data)
 
         data_matched['ident_men'] = data_matched['ident_men'].astype(str).copy()
         data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
-
     save(data_frame, year_data, year_calage)
 
 
