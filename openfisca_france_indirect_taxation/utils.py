@@ -38,7 +38,7 @@ def get_input_data_frame(year, use_entd = True):
     input_data_frame = openfisca_survey.get_values(table = "input")
     input_data_frame.reset_index(inplace = True)
 
-    if use_entd and (year == 2011):
+    if use_entd and (year == 2011 or year == 2017):
         log.info("Using variables from ENTD")
 
         input_data_frame.rename(
