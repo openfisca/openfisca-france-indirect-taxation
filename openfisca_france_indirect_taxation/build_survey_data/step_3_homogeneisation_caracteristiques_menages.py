@@ -17,6 +17,7 @@ log = logging.getLogger(__name__)
 def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year = None):
     """Homogénéisation des caractéristiques sociales des ménages."""
     assert temporary_store is not None
+    temporary_store.open()
     assert year is not None
     # Load data
     bdf_survey_collection = SurveyCollection.load(
@@ -740,7 +741,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
     assert menage.index.name == 'ident_men'
     menage['role_menage'] = 0
     temporary_store['donnes_socio_demog_{}'.format(year)] = menage
-
+    temporary_store.close()
 
 if __name__ == '__main__':
     import sys

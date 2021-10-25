@@ -20,6 +20,7 @@ log = logging.getLogger(__name__)
 def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
     """Impute rent for owner"""
     assert temporary_store is not None
+    temporary_store.open()
     assert year is not None
 
     # Load data
@@ -144,6 +145,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
 
     # Save in temporary store
     temporary_store['depenses_bdf_{}'.format(year)] = depenses
+    temporary_store.close()
 
 
 if __name__ == '__main__':

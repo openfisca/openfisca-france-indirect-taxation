@@ -19,6 +19,7 @@ def build_homogeneisation_revenus_menages(temporary_store = None, year = None):
     """Build menage consumption by categorie fiscale dataframe """
 
     assert temporary_store is not None
+    temporary_store.open()
     assert year is not None
     # Load data
     bdf_survey_collection = SurveyCollection.load(
@@ -371,3 +372,4 @@ In loyers_imputes and not in revenus:
         revenus['rev_disponible'] = revenus['rev_disponible'] * (revenus['rev_disponible'] >= 0)
         revenus['rev_disp_loyerimput'] = revenus.rev_disponible + revenus.loyer_impute
         temporary_store["revenus_{}".format(year)] = revenus
+        temporary_store.close()

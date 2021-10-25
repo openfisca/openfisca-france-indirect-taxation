@@ -7,7 +7,7 @@ import os
 import platform
 import pandas
 import subprocess
-
+import sys
 
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 from openfisca_france_indirect_taxation.utils import assets_directory
@@ -54,12 +54,10 @@ def check_load_config_ini():
 
 
 def main(year_data):
-
     path_to_r_libs_user, path_to_rscript_exe = check_load_config_ini()
-
     prepare_bdf_enl_matching_data(year_data)
     r_script_path = os.path.join(assets_directory, 'matching', 'matching_enl', 'matching_rank_bdf_enl.R')
-    if platform.system == 'Windows':
+    if path_to_r_libs_user is not None:
         os.environ['R_LIBS_USER'] = path_to_r_libs_user
     process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
     subprocess.call(process_call)

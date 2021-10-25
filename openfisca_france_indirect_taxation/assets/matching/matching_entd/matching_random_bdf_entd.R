@@ -8,9 +8,9 @@ assets_directory = config$openfisca_france_indirect_taxation$assets
 data_entd <- read.csv(file = file.path(assets_directory, "/matching/matching_entd/data_matching_entd.csv"), header = -1, sep=",")
 data_bdf <- read.csv(file = file.path(assets_directory, "/matching/matching_entd/data_matching_bdf.csv"), header = -1, sep=",")
 
-data_bdf$agepr = round(as.numeric(data_bdf$agepr),digits = 2)
-data_bdf$npers = round(as.numeric(data_bdf$npers),digits = 2)
-data_bdf$nactifs = round(as.numeric(data_bdf$nactifs),digits = 2)
+data_bdf$agepr = round(as.numeric(data_bdf$agepr), digits = 2)
+data_bdf$npers = round(as.numeric(data_bdf$npers), digits = 2)
+data_bdf$nactifs = round(as.numeric(data_bdf$nactifs), digits = 2)
 
 # Compute random matching
 out.nnd <- RANDwNND.hotdeck(

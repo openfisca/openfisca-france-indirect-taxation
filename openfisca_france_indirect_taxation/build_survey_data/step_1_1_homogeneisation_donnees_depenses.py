@@ -15,8 +15,10 @@ log = logging.getLogger(__name__)
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_depenses_homogenisees(temporary_store = None, year = None):
-    """Build menage consumption by categorie fiscale dataframe """
+    """Build menage consumption by categorie fiscale dataframe."""
+    log.debug(f"Entering build_depenses_homogenisees for year={year}")
     assert temporary_store is not None
+    temporary_store.open()
     assert year is not None
     bdf_survey_collection = SurveyCollection.load(
         collection = 'budget_des_familles', config_files_directory = config_files_directory
@@ -118,7 +120,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     coicop_data_frame = conso.rename(columns = formatted_poste_by_poste_bdf)
     depenses = coicop_data_frame.merge(poids, left_index = True, right_index = True)
     temporary_store['depenses_{}'.format(year)] = depenses
-
+    temporary_store.close()
 
 if __name__ == '__main__':
     import sys

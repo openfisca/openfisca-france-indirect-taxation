@@ -24,6 +24,7 @@ log = logging.getLogger(__name__)
 def build_homogeneisation_vehicules(temporary_store = None, year = None):
     """Compute vehicule numbers by type"""
     assert temporary_store is not None
+    temporary_store.open()
     assert year is not None
     # Load data
     bdf_survey_collection = SurveyCollection.load(
@@ -77,13 +78,13 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
 
         # Compute the number of cars by category and save
         # Ignore GPL, electric and others than essence and diesel
-        vehicule = vehicule.groupby(by = 'ident_men')["veh_tot", "veh_essence", "veh_diesel"].sum()
+        vehicule = vehicule.groupby(by = 'ident_men')[["veh_tot", "veh_essence", "veh_diesel"]].sum()
         vehicule["pourcentage_vehicule_essence"] = 0
         vehicule.loc[vehicule.veh_tot != 0, 'pourcentage_vehicule_essence'] = vehicule.veh_essence / vehicule.veh_tot
         # Save in temporary store
         vehicule.index = vehicule.index.astype(ident_men_dtype)
         temporary_store['automobile_{}'.format(year)] = vehicule
-
+        temporary_store.close()
 
 if __name__ == '__main__':
     import sys
