@@ -28,7 +28,7 @@ def create_reforme_calage_depenses_cigarettes(
 
                 def formula(menage, period, parameters):
                     prix_paquet = parameters("{}-12-31".format(year_calage)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
-                    paquets_par_menage = agregat_depenses / 12 / (menage('pondmen', period).sum())
+                    paquets_par_menage = agregat_depenses / 12 / (menage('pondmen', period.this_year).sum())
                     nombre_paquets_imputes = (
                         paquets_par_menage
                         * (menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year) * len(menage('pondmen', period.this_year)))
