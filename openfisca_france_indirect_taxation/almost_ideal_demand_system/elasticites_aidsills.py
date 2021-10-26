@@ -140,7 +140,7 @@ def create_data_elasticities_aidsills():
         ), sep =',')
 
 
-def get_elasticities_aidsills(year, non_positive):
+def get_elasticities_aidsills(data_year, non_positive):
     data_elasticities = pd.read_csv(
         os.path.join(
             assets_directory,
@@ -149,8 +149,9 @@ def get_elasticities_aidsills(year, non_positive):
             ), sep =',')
     liste_elasticities = [column for column in data_elasticities.columns if column[:4] == 'elas']
     dataframe = data_elasticities[liste_elasticities + ['ident_men', 'year']].copy()
+    data_year = data_year
 
-    dataframe = dataframe.query('year == @year').copy()
+    dataframe = dataframe.query('year == @data_year').copy()
 
     if non_positive:
         dataframe.elas_price_1_1 = (

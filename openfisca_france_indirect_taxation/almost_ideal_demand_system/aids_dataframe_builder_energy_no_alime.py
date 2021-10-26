@@ -28,7 +28,7 @@ df_indice_prix_produit.set_index('Unnamed: 0', inplace = True)
 # On commence par cinstruire une dataframe appelée data_conso rassemblant les informations sur les dépenses des ménages.
 data_frame_for_reg = None
 data_frame_all_years = pd.DataFrame()
-for year in [2000, 2005, 2011]:
+for year in [2011,2017]:
     aggregates_data_frame = get_input_data_frame(year)
 
     # Pour estimer QAIDS, on se concentre sur les biens non-durables.
@@ -181,7 +181,7 @@ for year in [2000, 2005, 2011]:
         'nactifs', 'nenfants', 'ocde10', 'pondmen', 'rev_disponible',
         'revtot', 'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
         'veh_essence']
-    if year == 2011:
+    if year == 2011 or year == 2017:
         variables_imputees = ['froid', 'froid_cout', 'froid_installation',
         'froid_impaye', 'froid_isolation']
     else:
@@ -226,8 +226,8 @@ for year in [2000, 2005, 2011]:
     # pour 2011 ce qui est assez important. Cette différence s'explique par la durée des enquêtes (1 semaine en 2011)
     dataframe = dataframe.query('part_carbu < 0.25')
 
-    if year == 2011:
-        dataframe = price_carbu_from_quantities(dataframe, 2011)
+    if year == 2011 or year == 2017:
+        dataframe = price_carbu_from_quantities(dataframe, year)
     else:
         indices_prix_carburants = indices_prix_carbus(year)
         dataframe = pd.merge(dataframe, indices_prix_carburants, on = 'vag')
