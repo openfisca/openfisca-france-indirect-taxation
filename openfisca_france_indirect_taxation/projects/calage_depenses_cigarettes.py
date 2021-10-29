@@ -97,3 +97,66 @@ def create_reforme_calage_depenses_cigarettes(
             self.update_variable(self.depenses_cigarettes)
 
     return calage_depenses_cigarettes
+
+def create_reforme_calage_depenses_tabac(
+        agregat_depenses = None,
+        year_calage = None,
+        ):
+
+    assert agregat_depenses is not None
+    assert year_calage is not None
+
+    class calage_depenses(Reform):
+        key = 'calage_depenses_cigarettes',
+        name = "Réforme qui recale les dépenses de cigarettes pour atteindre un certain niveau agrégé",
+        
+        class depenses_cigarettes(Variable):
+            value_type = float
+            entity = Menage
+            definition_period = MONTH
+            set_input = set_input_divide_by_period
+
+            def formula(menage, period, parameters):
+                agregats_bdf = (
+                    ((menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) +
+                    (menage('poste_02_2_2', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) +
+                    (menage('poste_02_2_3', period, options = [DIVIDE]) * menage('pondmen', period.this_year))).sum()
+                    )
+
+                return menage('poste_02_2_1', period, options = [DIVIDE]) * (agregat_depenses/12/agregats_bdf)
+
+        class depenses_cigares(Variable):
+            value_type = float
+            entity = Menage
+            set_input = set_input_divide_by_period
+
+            def formula(menage, period):
+                agregats_bdf = (
+                    ((menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) +
+                    (menage('poste_02_2_2', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) +
+                    (menage('poste_02_2_3', period, options = [DIVIDE]) * menage('pondmen', period.this_year))).sum()
+                    )
+
+                return menage('poste_02_2_2', period, options = [DIVIDE]) * (agregat_depenses/12/agregats_bdf)
+
+        class depenses_tabac_a_rouler(Variable):
+            value_type = float
+            entity = Menage
+            definition_period = MONTH
+            set_input = set_input_divide_by_period
+
+            def formula(menage, period):
+                agregats_bdf = (
+                    ((menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) +
+                    (menage('poste_02_2_2', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) +
+                    (menage('poste_02_2_3', period, options = [DIVIDE]) * menage('pondmen', period.this_year))).sum()
+                    )
+
+                return menage('poste_02_2_3', period, options = [DIVIDE]) * (agregat_depenses/12/agregats_bdf)
+
+        def apply(self):
+            self.update_variable(self.depenses_cigarettes)
+            self.update_variable(self.depenses_cigares)
+            self.update_variable(self.depenses_tabac_a_rouler)
+
+    return calage_depenses
