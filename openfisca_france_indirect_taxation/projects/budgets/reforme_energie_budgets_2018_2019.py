@@ -8,6 +8,33 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 
 
 def modify_parameters(parameters):
+    # node = ParameterNode(
+    #     'officielle_2019_in_2017',
+    #     data = {
+    #         "description": "officielle_2019_in_2017",
+    #         "diesel_2019_in_2017": {
+    #             "description": "Surcroît de prix du diesel (en euros par hectolitres)",
+    #             "unit": 'currency',
+    #             "values": {'2016-01-01': 1 * 2.6 + 266 * (0.0446 - 0.0305)}  # 266 = valeur du contenu carbone du diesel (source : Ademe)
+    #             },
+    #         "essence_2019_in_2017": {
+    #             "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
+    #             "unit": 'currency',
+    #             "values": {'2016-01-01': 242 * (0.0446 - 0.0305)},
+    #             },
+    #         "combustibles_liquides_2019_in_2017": {
+    #             "description": "Surcroît de prix du fioul domestique (en euros par litre)",
+    #             "unit": 'currency',
+    #             "values": {'2016-01-01': 3.24 * (0.0446 - 0.0305)},
+    #             },
+    #         "gaz_ville_2019_in_2017": {
+    #             "description": "Surcroît de prix du gaz (en euros par kWh)",
+    #             "unit": 'currency',
+    #             "values": {'2016-01-01': 0.241 * (0.0446 - 0.0305)},
+    #             },
+    #         }
+    #     )
+
     node = ParameterNode(
         'officielle_2019_in_2017',
         data = {
@@ -15,17 +42,17 @@ def modify_parameters(parameters):
             "diesel_2019_in_2017": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 "unit": 'currency',
-                "values": {'2016-01-01': 1 * 2.6 + 266 * (0.0446 - 0.0305)}  # 266 = valeur du contenu carbone du diesel (source : Ademe)
+                "values": {'2016-01-01': 6.33}  # 266 = valeur du contenu carbone du diesel (source : Ademe)
                 },
             "essence_2019_in_2017": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "unit": 'currency',
-                "values": {'2016-01-01': 242 * (0.0446 - 0.0305)},
+                "values": {'2016-01-01': 3.22},
                 },
             "combustibles_liquides_2019_in_2017": {
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
                 "unit": 'currency',
-                "values": {'2016-01-01': 3.24 * (0.0446 - 0.0305)},
+                "values": {'2016-01-01': 0.0376},
                 },
             "gaz_ville_2019_in_2017": {
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
@@ -34,6 +61,7 @@ def modify_parameters(parameters):
                 },
             }
         )
+
     parameters.add_child('officielle_2019_in_2017', node)
     parameters.prestations.add_child('cheque_energie_reforme', FranceIndirectTaxationTaxBenefitSystem().parameters.prestations.cheque_energie)
 
@@ -427,15 +455,14 @@ class officielle_2019_in_2017(Reform):
 
         def formula(menage, period):
             total_taxes_energies = menage('total_taxes_energies', period)
-            total_taxes_energies_officielle_2019_in_2017 = \
-                menage('total_taxes_energies_officielle_2019_in_2017', period)
+            total_taxes_energies_officielle_2019_in_2017 = menage('total_taxes_energies_officielle_2019_in_2017', period)
             gains_tva_total_energies = menage('gains_tva_total_energies_officielle_2019_in_2017', period)
-            tarifs_sociaux_electricite = menage('tarifs_sociaux_electricite', period)
-            tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
+            #tarifs_sociaux_electricite = menage('tarifs_sociaux_electricite', period)
+            #tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
 
             revenu_reforme = (
                 total_taxes_energies_officielle_2019_in_2017 - total_taxes_energies
-                + gains_tva_total_energies + tarifs_sociaux_electricite + tarifs_sociaux_gaz
+                + gains_tva_total_energies #+ tarifs_sociaux_electricite + tarifs_sociaux_gaz
                 )
 
             return revenu_reforme
