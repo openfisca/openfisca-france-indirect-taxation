@@ -219,6 +219,7 @@ class officielle_2019_in_2017(Reform):
             depenses_gaz_variables = depenses_gaz_variables + tarifs_sociaux_gaz
 
             depenses_gaz_prix_unitaire = menage('depenses_gaz_prix_unitaire', period)
+            depenses_gaz_prix_unitaire = max_(0.0476,depenses_gaz_prix_unitaire)
             reforme_gaz = \
                 parameters(period.start).officielle_2019_in_2017.gaz_ville_2019_in_2017
             gaz_elasticite_prix = menage('elas_price_2_2', period)
