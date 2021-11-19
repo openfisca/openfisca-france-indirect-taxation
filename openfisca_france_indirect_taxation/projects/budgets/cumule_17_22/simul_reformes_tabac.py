@@ -46,12 +46,12 @@ def simulate_reforme_tabac(year, baseline_year, graph = True,elasticite = None):
 
     # Recalage des dépenses de cigarettes BDF sur consommations agrégées officielles
     reforme_calage = create_reforme_calage_depenses_cigarettes(
-        agregat_depenses = nombre_paquets_cigarettes_by_year[int(baseline_year)], #nombre_paquets_cigarettes_by_year[int(baseline_year)],
+        agregat_depenses = nombre_paquets_cigarettes_by_year[int(baseline_year)],
         niveau_calage = 'decile',
         year_calage = baseline_year,
         )
     reforme_calage = create_reforme_calage_depenses_tabac(
-        agregat_depenses = agregat_depenses[int(baseline_year)], #nombre_paquets_cigarettes_by_year[int(baseline_year)],
+        agregat_depenses = agregat_depenses[int(baseline_year)],
         year_calage = baseline_year,
         )
 
@@ -97,11 +97,10 @@ def simulate_reforme_tabac(year, baseline_year, graph = True,elasticite = None):
     diff.to_csv('{}/donnees_reforme_tabac_17_20_elasticite_{}.csv'.format(path,elasticite))
     
     if graph:
-        #graph_builder_bar(diff['variation_relative_depenses_tabac'], False)
         plt.bar(diff.index,diff['variation_relative_depenses_tabac'])
-        plt.savefig('{}/variation_relative_depenses_tabac_{}_{}_elas_0.5.png'.format(path,baseline_year,year))
+        plt.savefig('{}/variation_relative_depenses_tabac_{}_{}_elas_{}.png'.format(path,baseline_year,year,elasticite))
         plt.close()
-        #graph_builder_bar(diff['depenses_tabac'], False)
+        
         plt.bar(diff.index,diff['depenses_tabac'])
         plt.close()
     cout = survey_scenario.compute_aggregate(variable = 'depenses_tabac', period = year, difference = True) / 1e9
@@ -118,9 +117,8 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
     
     couts = {}
-    for baseline_year in ['2017']:#['2017','2018','2019','2020']:
-        year = 2020#int(baseline_year) + 1
-        #test_plf_2019_reforme_tabac(baseline_year)
-        variation_relative_depenses_tabac, cout = simulate_reforme_tabac(year = year, baseline_year = baseline_year,elasticite = -0.64)
+    for baseline_year in ['2017']:
+        year = 2020
+        variation_relative_depenses_tabac, cout = simulate_reforme_tabac(year = year, baseline_year = baseline_year,elasticite = -0.5)
         couts["{}_{}".format(baseline_year, str(year))] = cout
         

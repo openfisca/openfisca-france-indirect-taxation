@@ -30,12 +30,8 @@ def simulate_reformes_energie(graph = True,replique_gouv = False,elasticite = Fa
         
     data_year = 2017
     ## on veut faire les simulations sur les quantités avant réforme
-    ## idéalement on voudrait l'évolution des quantités pour les années jusque 2022 s'il n'y avati pas eu de réforme
-    ## Une solution possible est de considérer que l'effet de la crise est constant et de recalculer un contrefactuel à partir de l'observer
-    ## mais il y a l'effet de la crise sanitaire qu'on ne veut pas prendre
-    ## étant donné les évolutions de consommation que l'on observe sur plusieurs années on considère que la consommation en volume aurait été stable sans réforme
-    ## Cela ce traduit par des inflateurs futurs égaux à ceux de 2017 (consommation avant réforme)
-    ## mais attention c'est la consommation en volume ou la dépense qui est stable ??
+    ## idéalement on voudrait l'évolution des quantités pour les années jusque 2022 s'il n'y avait pas eu de réforme
+    ## mais en l'absence d'information on considère que la consommation reste constante dans le contrefactuel.
     inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020),data_year = data_year)
     inflators_by_year[2018] = inflators_by_year[2017]
     inflators_by_year[2020] = inflators_by_year[2017]
@@ -44,11 +40,11 @@ def simulate_reformes_energie(graph = True,replique_gouv = False,elasticite = Fa
     year = 2019
     ## elasticités : le programme de T. Douenne n'a pas été bien adapté (pas le temps) et du coup on a pas d'élasticité pour tout le monde
     ## on prend des élasticités agrégées par type de bien
-    ## celles du gouvernement : -0.224 en moyenne pour les garburants et le gaz
-    ident_men['elas_price_1_1'] = -0.224
-    ident_men['elas_price_2_2'] = -0.224
-    ident_men['elas_price_3_3'] = -0.224
-    #elasticities = get_elasticities_aidsills(data_year, True)
+
+    ident_men['elas_price_1_1'] = -0.45
+    ident_men['elas_price_2_2'] = -0.45
+    ident_men['elas_price_3_3'] = -0.2
+
     elasticities = ident_men
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
@@ -91,7 +87,6 @@ def simulate_reformes_energie(graph = True,replique_gouv = False,elasticite = Fa
             df['revenu_reforme_officielle_2019_in_2017']/ df['rev_disponible']
         df['cout_total_reforme'] = (
             - df['cout_reforme_pures_taxes']
-            #+ df['cout_passage_tarifs_sociaux_cheque_energie_majore_et_etendu']
             )
         df['cout_agrege'] = 2/3 * survey_scenario.compute_aggregate('revenu_reforme_officielle_2019_in_2017',period = year)
     else:        
@@ -102,15 +97,15 @@ def simulate_reformes_energie(graph = True,replique_gouv = False,elasticite = Fa
             )
         df['cout_agrege'] = survey_scenario.compute_aggregate('revenu_reforme_officielle_2019_in_2017',period = year)
         
-    df.to_csv('{}/donnees_reforme_energie_19_17_replique_gouv_{}_elasticite_{}.csv'.format(path,replique_gouv,elasticite))
+    df.to_csv('{}/donnees_reforme_energie_19_17_replique_gouv_{}_elasticite_{}_0811.csv'.format(path,replique_gouv,elasticite))
 
     if graph:
         graph_builder_bar(df['cout_total_reforme'], False)
         plt.bar(df.index,df['cout_total_reforme'])
-        plt.savefig('{}/variation_reforme_energie_19_17_replique_gouv_{}_elasticite_{}'.format(path,replique_gouv,elasticite))
+        plt.savefig('{}/variation_reforme_energie_19_17_replique_gouv_{}_elasticite_douenne_{}'.format(path,replique_gouv,elasticite))
         plt.close()
         plt.bar(df.index,df['revenu_reforme_officielle_2019_in_2017'])
-        plt.savefig('{}/revenu_reforme_enerige_19_17_replique_gouv_{}_elasticite_{}'.format(path,replique_gouv,elasticite))
+        plt.savefig('{}/revenu_reforme_enerige_19_17_replique_gouv_{}_elasticite_douenne_{}'.format(path,replique_gouv,elasticite))
         plt.close()
 
     log.info("Coût total de la réforme : {} milliards d'euros".format(
@@ -123,6 +118,4 @@ def simulate_reformes_energie(graph = True,replique_gouv = False,elasticite = Fa
 if __name__ == "__main__":
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    #from openfisca_france_indirect_taxation.tests.budgets.budget_2019 import test_plf_2019_reformes_energie
-    #test_plf_2019_reformes_energie()
-    df = simulate_reformes_energie(replique_gouv = True, elasticite = False)
+    df = simulate_reformes_energie(replique_gouv = True, elasticite = True)
