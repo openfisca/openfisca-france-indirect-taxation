@@ -458,12 +458,10 @@ class officielle_2019_in_2017(Reform):
             total_taxes_energies = menage('total_taxes_energies', period)
             total_taxes_energies_officielle_2019_in_2017 = menage('total_taxes_energies_officielle_2019_in_2017', period)
             gains_tva_total_energies = menage('gains_tva_total_energies_officielle_2019_in_2017', period)
-            #tarifs_sociaux_electricite = menage('tarifs_sociaux_electricite', period)
-            #tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
 
             revenu_reforme = (
                 total_taxes_energies_officielle_2019_in_2017 - total_taxes_energies
-                + gains_tva_total_energies #+ tarifs_sociaux_electricite + tarifs_sociaux_gaz
+                + gains_tva_total_energies
                 )
 
             return revenu_reforme
