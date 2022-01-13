@@ -52,12 +52,12 @@ def modify_parameters(parameters):
             "combustibles_liquides_2019_in_2017": {
                 "description": "Surcroît de prix du fioul domestique (en euros par litre)",
                 "unit": 'currency',
-                "values": {'2016-01-01': 0.0376},
+                "values": {'2016-01-01': 0.0373},
                 },
             "gaz_ville_2019_in_2017": {
                 "description": "Surcroît de prix du gaz (en euros par kWh)",
                 "unit": 'currency',
-                "values": {'2016-01-01': 0.241 * (0.0446 - 0.0305)},
+                "values": {'2016-01-01': 0.00257}, # 0.241 * (0.0446 - 0.0305) 0.00257
                 },
             }
         )
