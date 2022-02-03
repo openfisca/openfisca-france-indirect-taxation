@@ -128,6 +128,22 @@ class officielle_2019_in_2017(Reform):
 
             return montant_combustibles_liquides_ticpe_ajuste
 
+
+    class quantite_combustibles_liquides_officielle_2019_in_2017(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Calcul du montant de TICPE sur le combustibles_liquides domestique après réforme"
+
+        def formula(menage, period, parameters):
+            reforme_combustibles_liquides = \
+                parameters(period.start).officielle_2019_in_2017.combustibles_liquides_2019_in_2017
+            prix_fioul_ttc = \
+                parameters(period.start).tarifs_energie.prix_fioul_domestique.prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre
+            prix_fioul_ttc_ajuste = prix_fioul_ttc + reforme_combustibles_liquides
+            depenses_combustibles_liquides_ajustees = menage('depenses_combustibles_liquides_officielle_2019_in_2017', period)
+            
+            return depenses_combustibles_liquides_ajustees/prix_fioul_ttc_ajuste
+
     class depenses_carburants_corrigees_officielle_2019_in_2017(YearlyVariable):
         value_type = float
         entity = Menage
@@ -274,6 +290,22 @@ class officielle_2019_in_2017(Reform):
 
             return montant_diesel_ticpe_ajuste
 
+
+    class quantite_diesel_officielle_2019_in_2017(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Calcul du montant de TICPE sur le diesel après réforme"
+
+        def formula(menage, period, parameters):
+            reforme_diesel = parameters(period.start).officielle_2019_in_2017.diesel_2019_in_2017
+            prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
+            prix_diesel_ttc_ajuste = prix_diesel_ttc + reforme_diesel
+
+            depenses_diesel_officielle_2019_in_2017 = \
+                menage('depenses_diesel_corrigees_officielle_2019_in_2017', period)
+
+            return depenses_diesel_officielle_2019_in_2017/prix_diesel_ttc_ajuste
+
     class diesel_ticpe_rattrapage_integral(YearlyVariable):
         value_type = float
         entity = Menage
@@ -341,6 +373,33 @@ class officielle_2019_in_2017(Reform):
             super_plombe_ticpe_ajustee = menage('super_plombe_ticpe_officielle_2019_in_2017', period)
             essence_ticpe_ajustee = (sp95_ticpe_ajustee + sp98_ticpe_ajustee + super_plombe_ticpe_ajustee)
             return essence_ticpe_ajustee
+
+
+    class quantite_essence_officielle_2019_in_2017(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
+
+        def formula_2009(menage, period):
+            quantite_sp95_ajustee = menage('quantite_sp95_officielle_2019_in_2017', period)
+            quantite_sp98_ajustee = menage('quantite_sp98_officielle_2019_in_2017', period)
+            quantite_sp_e10_ajustee = menage('quantite_sp_e10_officielle_2019_in_2017', period)
+            quantite_essence_ajustee = (quantite_sp95_ajustee + quantite_sp98_ajustee + quantite_sp_e10_ajustee)
+            return quantite_essence_ajustee
+
+        def formula_2007(menage, period):
+            quantite_sp95_ajustee = menage('quantite_sp95_officielle_2019_in_2017', period)
+            quantite_sp98_ajustee = menage('quantite_sp98_officielle_2019_in_2017', period)
+            quantite_essence_ajustee = (quantite_sp95_ajustee + quantite_sp98_ajustee)
+            return quantite_essence_ajustee
+
+        def formula_1990(menage, period, parameters):
+            quantite_sp95_ajustee = menage('quantite_sp95_officielle_2019_in_2017', period)
+            quantite_sp98_ajustee = menage('quantite_sp98_officielle_2019_in_2017', period)
+            quantite_super_plombe_ajustee = menage('quantite_super_plombe_officielle_2019_in_2017', period)
+            quantite_essence_ajustee = (quantite_sp95_ajustee + quantite_sp98_ajustee + quantite_super_plombe_ajustee)
+            return quantite_essence_ajustee
+
 
     class gains_tva_carburants_officielle_2019_in_2017(YearlyVariable):
         value_type = float
@@ -466,6 +525,7 @@ class officielle_2019_in_2017(Reform):
 
             return revenu_reforme
 
+
     class sp_e10_ticpe_officielle_2019_in_2017(YearlyVariable):
         value_type = float
         entity = Menage
@@ -505,6 +565,24 @@ class officielle_2019_in_2017(Reform):
 
             return montant_sp_e10_ticpe_ajuste
 
+
+    class quantite_sp_e10_officielle_2019_in_2017(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Calcul du montant de la TICPE sur le SP E10 après réforme"
+
+        def formula(menage, period, parameters):
+            reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
+            super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
+            super_95_e10_ttc_ajuste = super_95_e10_ttc + reforme_essence
+            depenses_essence_officielle_2019_in_2017 = \
+                menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
+            part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
+            sp_e10_depenses_ajustees = depenses_essence_officielle_2019_in_2017 * part_sp_e10
+
+            return sp_e10_depenses_ajustees/super_95_e10_ttc_ajuste
+
+
     class sp95_ticpe_officielle_2019_in_2017(YearlyVariable):
         value_type = float
         entity = Menage
@@ -542,6 +620,23 @@ class officielle_2019_in_2017(Reform):
                 )
 
             return montant_sp95_ticpe_ajuste
+
+    class quantite_sp95_officielle_2019_in_2017(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Calcul du montant de TICPE sur le sp_95 après réforme"
+
+        def formula(menage, period, parameters):
+            reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
+            super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
+            super_95_ttc_ajuste = super_95_ttc + reforme_essence
+            depenses_essence_officielle_2019_in_2017 = \
+                menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
+            part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
+            depenses_sp_95_ajustees = depenses_essence_officielle_2019_in_2017 * part_sp95
+
+            return depenses_sp_95_ajustees/super_95_ttc_ajuste
+
 
     class sp98_ticpe_officielle_2019_in_2017(YearlyVariable):
         value_type = float
@@ -581,6 +676,25 @@ class officielle_2019_in_2017(Reform):
 
             return montant_sp98_ticpe_ajuste
 
+
+    class quantite_sp98_officielle_2019_in_2017(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Calcul du montant de TICPE sur le sp_98 après réforme"
+
+        def formula(menage, period, parameters):
+            reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
+            super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
+            super_98_ttc_ajuste = super_98_ttc + reforme_essence
+
+            depenses_essence_officielle_2019_in_2017 = \
+                menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
+            part_sp98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
+            depenses_sp_98_ajustees = depenses_essence_officielle_2019_in_2017 * part_sp98
+
+            return depenses_sp_98_ajustees/super_98_ttc_ajuste
+
+
     class super_plombe_ticpe_officielle_2019_in_2017(YearlyVariable):
         value_type = float
         entity = Menage
@@ -612,6 +726,23 @@ class officielle_2019_in_2017(Reform):
                 tax_from_expense_including_tax(depenses_super_plombe_htva_ajustees, taux_implicite_super_plombe_ajuste)
 
             return montant_super_plombe_ticpe_ajuste
+
+    
+    class quantite_super_plombe_officielle_2019_in_2017(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Calcul du montant de la TICPE sur le super plombé après réforme"
+        def formula(menage, period, parameters):
+            reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
+            super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
+            super_plombe_ttc_ajuste = super_plombe_ttc + reforme_essence
+            depenses_essence_officielle_2019_in_2017 = \
+                menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
+            part_super_plombe = \
+                parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
+            depenses_super_plombe_ajustees = depenses_essence_officielle_2019_in_2017 * part_super_plombe
+            return depenses_super_plombe_ajustees/super_plombe_ttc_ajuste
+
 
     class taxe_gaz_ville_officielle_2019_in_2017(YearlyVariable):
         value_type = float
@@ -658,6 +789,7 @@ class officielle_2019_in_2017(Reform):
     def apply(self):
         self.update_variable(self.cheques_energie)
         self.update_variable(self.combustibles_liquides_ticpe_officielle_2019_in_2017)
+        self.update_variable(self.quantite_combustibles_liquides_officielle_2019_in_2017)
         self.update_variable(self.depenses_carburants_corrigees_officielle_2019_in_2017)
         self.update_variable(self.depenses_combustibles_liquides_officielle_2019_in_2017)
         self.update_variable(self.depenses_diesel_corrigees_officielle_2019_in_2017)
@@ -665,7 +797,9 @@ class officielle_2019_in_2017(Reform):
         self.update_variable(self.depenses_essence_corrigees_officielle_2019_in_2017)
         self.update_variable(self.depenses_gaz_ville_officielle_2019_in_2017)
         self.update_variable(self.diesel_ticpe_officielle_2019_in_2017)
+        self.update_variable(self.quantite_diesel_officielle_2019_in_2017)
         self.update_variable(self.essence_ticpe_officielle_2019_in_2017)
+        self.update_variable(self.quantite_essence_officielle_2019_in_2017)
         self.update_variable(self.gains_tva_carburants_officielle_2019_in_2017)
         self.update_variable(self.gains_tva_combustibles_liquides_officielle_2019_in_2017)
         self.update_variable(self.gains_tva_gaz_ville_officielle_2019_in_2017)
@@ -673,9 +807,13 @@ class officielle_2019_in_2017(Reform):
         self.update_variable(self.quantites_gaz_final_officielle_2019_in_2017)
         self.update_variable(self.revenu_reforme_officielle_2019_in_2017)
         self.update_variable(self.sp_e10_ticpe_officielle_2019_in_2017)
+        self.update_variable(self.quantite_sp_e10_officielle_2019_in_2017)
         self.update_variable(self.sp95_ticpe_officielle_2019_in_2017)
+        self.update_variable(self.quantite_sp95_officielle_2019_in_2017)
         self.update_variable(self.sp98_ticpe_officielle_2019_in_2017)
+        self.update_variable(self.quantite_sp98_officielle_2019_in_2017)
         self.update_variable(self.super_plombe_ticpe_officielle_2019_in_2017)
+        self.update_variable(self.quantite_super_plombe_officielle_2019_in_2017)
         self.update_variable(self.taxe_gaz_ville_officielle_2019_in_2017)
         self.update_variable(self.ticpe_totale_officielle_2019_in_2017)
         self.update_variable(self.total_taxes_energies_officielle_2019_in_2017)

@@ -122,10 +122,10 @@ class duree_moyenne_trajet_aller_retour_teg(YearlyVariable):
     label = "Durée moyenne de l'aller-retour pour le teg"
 
 
-class quantite_diesel(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = "Quantité de diesel consommée (en hecto-litres)"
+# class quantite_diesel(YearlyVariable):
+#     value_type = float
+#     entity = Menage
+#     label = "Quantité de diesel consommée (en hecto-litres)"
 
 
 class quantite_supercarburants(YearlyVariable):
