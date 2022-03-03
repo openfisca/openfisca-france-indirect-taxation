@@ -2,14 +2,24 @@ description: Prix unitaire tarif réglementé GDF (toutes taxes comprises)
 prix_kwh_base_ttc:
   description: Prix kWh Base - TTC
   values:
-    2016-01-01:
-      value: 0.0897
-    2015-01-01:
-      value: 0.0992
-    2014-01-01:
-      value: 0.1021
+    2020-07-01:
+      value: 0.0698
+    2019-07-01:
+      value: 0.0795
+    2018-07-01:
+      value: 0.0959
+    2017-07-01:
+      value: 0.0788
+    2016-07-01:
+      value: 0.0851
+    2015-07-01:
+      value: 0.0972
+    2014-07-01:
+      value: 0.0998
+    2013-07-01:
+      value: 0.1026
     2013-01-01:
-      value: 0.1036
+      value: 0.1027
     2012-01-01:
       value: 0.09970000000000001
     2011-01-01:
@@ -76,14 +86,24 @@ prix_kwh_base_ttc:
 prix_kwh_b0_ttc:
   description: Prix kWh B0 - TTC
   values:
-    2016-01-01:
-      value: 0.0708
-    2015-01-01:
+    2020-07-01:
+      value: 0.0698
+    2019-07-01:
       value: 0.0795
-    2014-01-01:
-      value: 0.0851
+    2018-07-01:
+      value: 0.0819
+    2017-07-01:
+      value: 0.0709
+    2016-07-01:
+      value: 0.0683
+    2015-07-01:
+      value: 0.0762
+    2014-07-01:
+      value: 0.0816
+    2013-07-01:
+      value: 0.0871
     2013-01-01:
-      value: 0.08779999999999999
+      value: 0.087
     2012-01-01:
       value: 0.0852
     2011-01-01:
@@ -150,14 +170,24 @@ prix_kwh_b0_ttc:
 prix_kwh_b1_ttc:
   description: Prix kWh B1 - TTC
   values:
-    2016-01-01:
-      value: 0.0476
-    2015-01-01:
-      value: 0.054
-    2014-01-01:
-      value: 0.0564
+    2020-07-01:
+      value: 0.0451
+    2019-07-01:
+      value: 0.0559
+    2018-07-01:
+      value: 0.0597
+    2017-07-01:
+      value: 0.0489
+    2016-07-01:
+      value: 0.0456
+    2015-07-01:
+      value: 0.0525
+    2014-07-01:
+      value: 0.0543
+    2013-07-01:
+      value: 0.0569
     2013-01-01:
-      value: 0.05889999999999999
+      value: 0.0586
     2012-01-01:
       value: 0.05860000000000001
     2011-01-01:
@@ -222,14 +252,24 @@ prix_kwh_b1_ttc:
 prix_kwh_b2i_ttc:
   description: Prix kWh B2I - TTC
   values:
-    2016-01-01:
-      value: 0.0476
-    2015-01-01:
-      value: 0.054
-    2014-01-01:
-      value: 0.0564
+    2020-07-01:
+      value: 0.0451
+    2019-07-01:
+      value: 0.0559
+    2018-07-01:
+      value: 0.0597
+    2017-07-01:
+      value: 0.0489
+    2016-07-01:
+      value: 0.0456
+    2015-07-01:
+      value: 0.0525
+    2014-07-01:
+      value: 0.0543
+    2013-07-01:
+      value: 0.0589
     2013-01-01:
-      value: 0.05889999999999999
+      value: 0.0611
     2012-01-01:
       value: 0.05860000000000001
     2011-01-01:
@@ -299,4 +339,7 @@ metadata:
   - prix_kwh_b2i_ttc
   description_en: Unitary price regulated tariff GDF (including taxes)
 documentation: |
-  Source : base Pégase, prix pour un ménage, en euros TTC, données annuelles
+  Source : 
+    jusqu'à 2013 base Pégase, prix pour un ménage, en euros TTC, données annuelles
+    depuis 2013, CRE "https://www.cre.fr/Pages-annexes/open-data"
+    Pour les données à partir de 2013 pour les contrats B1 et B2I, les valeurs correspondent à celles en zone 1
