@@ -52,7 +52,7 @@ baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 asof(baseline_tax_benefit_system, "2017-12-31")
 
 survey_scenario = SurveyScenario.create(
-        #elasticities = elasticities,
+    #elasticities = elasticities,
     inflation_kwargs = inflation_kwargs,
     baseline_tax_benefit_system = baseline_tax_benefit_system,
     reform = officielle_2019_in_2017,
@@ -60,15 +60,76 @@ survey_scenario = SurveyScenario.create(
     data_year = data_year
     )
 
+survey_scenario.compute_aggregate('depenses_gaz_ville_officielle_2019_in_2017',period = 2019)/1e9
+survey_scenario.compute_aggregate('quantite_gaz_ville_officielle_2019_in_2017',period = 2019)/1e9
+
+survey_scenario.compute_aggregate('gains_tva_total_energies_officielle_2019_in_2017',period = 2019)
+(survey_scenario.compute_aggregate('combustibles_liquides_ticpe_officielle_2019_in_2017',period = 2019)/1e9 -
+survey_scenario.compute_aggregate('combustibles_liquides_ticpe',period = 2019)/1e9)
 
 ## cout total des réformes
 survey_scenario.compute_aggregate('revenu_reforme_officielle_2019_in_2017',period = 2019)/1e9
+
+## Check 1 : est ce que les quantités sont bien les memes en baseline et en réforme en l'absence de réaction comportementale ?
+## Cela signifie que la variation de dépenses est bien égale à la variation de prix engendrée par la réforme
+survey_scenario.compute_aggregate('depenses_essence',period = 2019)/survey_scenario.tax_benefit_system.parameters('2017-01-01').prix_carburants.super_95_ttc/100
+(survey_scenario.compute_aggregate('depenses_essence_corrigees_officielle_2019_in_2017',period = 2019)
+ /(survey_scenario.tax_benefit_system.parameters('2017-01-01').prix_carburants.super_95_ttc + survey_scenario.tax_benefit_system.parameters('2017-01-01').officielle_2019_in_2017.essence_2019_in_2017))/100
+
+survey_scenario.compute_aggregate('depenses_diesel',period = 2019)/survey_scenario.tax_benefit_system.parameters('2017-01-01').prix_carburants.diesel_ttc/100
+(survey_scenario.compute_aggregate('depenses_diesel_corrigees_officielle_2019_in_2017',period = 2019)
+ /(survey_scenario.tax_benefit_system.parameters('2017-01-01').prix_carburants.diesel_ttc + survey_scenario.tax_benefit_system.parameters('2017-01-01').officielle_2019_in_2017.diesel_2019_in_2017))/100
+
+survey_scenario.compute_aggregate('depenses_combustibles_liquides',period = 2019)/survey_scenario.tax_benefit_system.parameters('2017-01-01').tarifs_energie.prix_fioul_domestique.prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre/100
+(survey_scenario.compute_aggregate('depenses_combustibles_liquides_officielle_2019_in_2017',period = 2019)
+ /(survey_scenario.tax_benefit_system.parameters('2017-01-01').tarifs_energie.prix_fioul_domestique.prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre + survey_scenario.tax_benefit_system.parameters('2017-01-01').officielle_2019_in_2017.combustibles_liquides_2019_in_2017))/100
+
+survey_scenario.compute_aggregate('depenses_gaz_de_ville',period = 2019)/survey_scenario.tax_benefit_system.parameters('2017-01-01').tarifs_energie.prix_fioul_domestique.prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre/100
+(survey_scenario.compute_aggregate('depenses_gaz_de_ville_officielle_2019_in_2017',period = 2019)
+ /(survey_scenario.tax_benefit_system.parameters('2017-01-01').tarifs_energie.prix_fioul_domestique.prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre + survey_scenario.tax_benefit_system.parameters('2017-01-01').officielle_2019_in_2017.combustibles_liquides_2019_in_2017))/100
+
+
+survey_scenario.compute_aggregate('revenu_reforme_officielle_2019_in_2017',period = 2019)/1e9
+survey_scenario.compute_aggregate('revenu_reforme_officielle_2019_in_2017',period = 2019)/1e9
+survey_scenario.compute_aggregate('revenu_reforme_officielle_2019_in_2017',period = 2019)/1e9
+survey_scenario.compute_aggregate('revenu_reforme_officielle_2019_in_2017',period = 2019)/1e9
+
+
+## Check 2: est ce que le ticpe est calculé de la même manière en baseline et en réforme
+(survey_scenario.compute_aggregate('combustibles_liquides_ticpe_officielle_2019_in_2017',period = 2019)/1e9 - 
+#compute_aggregate('combustibles_liquides_ticpe_test',period = 2019)/1e9
+ survey_scenario.compute_aggregate('combustibles_liquides_ticpe',period = 2019)/1e9)
+
+(survey_scenario.compute_aggregate('diesel_ticpe_officielle_2019_in_2017',period = 2019)/1e9 -
+#survey_scenario.compute_aggregate('diesel_ticpe_test',period = 2019)/1e9
+survey_scenario.compute_aggregate('diesel_ticpe',period = 2019)/1e9)
+
+(survey_scenario.compute_aggregate('sp95_ticpe_officielle_2019_in_2017',period = 2019)/1e9 -
+#survey_scenario.compute_aggregate('sp95_ticpe_test',period = 2019)/1e9
+survey_scenario.compute_aggregate('sp95_ticpe',period = 2019)/1e9)
+
+(survey_scenario.compute_aggregate('sp98_ticpe_officielle_2019_in_2017',period = 2019)/1e9 -
+#survey_scenario.compute_aggregate('sp98_ticpe_test',period = 2019)/1e9
+survey_scenario.compute_aggregate('sp98_ticpe',period = 2019)/1e9)
+
+(survey_scenario.compute_aggregate('sp_e10_ticpe_officielle_2019_in_2017',period = 2019)/1e9 -
+#survey_scenario.compute_aggregate('sp_e10_ticpe_test',period = 2019)/1e9
+survey_scenario.compute_aggregate('sp_e10_ticpe',period = 2019)/1e9)
+
+(survey_scenario.compute_aggregate('sp_e10_ticpe_officielle_2019_in_2017',period = 2019)/1e9 -
+#survey_scenario.compute_aggregate('sp_e10_ticpe_test',period = 2019)/1e9
+survey_scenario.compute_aggregate('sp_e10_ticpe',period = 2019)/1e9)
+
+survey_scenario.compute_aggregate('ticpe_total_officielle_2019_in_2017',period = 2019)/1e9
+survey_scenario.compute_aggregate('ticpe_total_test',period = 2019)/1e9
+survey_scenario.compute_aggregate('ticpe_total',period = 2019)/1e9
 
 ## cout de la réforme sur le gaz
 survey_scenario.compute_aggregate('taxe_gaz_ville_officielle_2019_in_2017',period = 2019)/1e9
 
 survey_scenario.compute_aggregate('quantites_gaz_final_officielle_2019_in_2017',period = 2019)/1e9
 survey_scenario.compute_aggregate('quantites_gaz_final',period = 2019)/1e9
+survey_scenario.compute_aggregate('quantites_diesel',period = 2019)/1e9
 
 survey_scenario.compute_aggregate('depenses_gaz_ville_officielle_2019_in_2017',period = 2019)/1e9
 
@@ -78,7 +139,6 @@ survey_scenario.compute_aggregate('depenses_gaz_ville_officielle_2019_in_2017',p
  survey_scenario.compute_aggregate('depenses_gaz_tarif_fixe',period = 2019)
  )/1e9
 
-depenses_gaz_tarif_fixe
 ## gain de tva du fait de la réforme
 survey_scenario.compute_aggregate('gains_tva_total_energies_officielle_2019_in_2017',period = 2019)/1e9
 
@@ -93,3 +153,6 @@ ticpe_baseline
 ## cout de la reforme ticpe 
 
 ticpe_reforme - ticpe_baseline 
+
+test = survey_scenario.create_data_frame_by_entity(['depenses_gaz_ville_officielle_2019_in_2017'],period = 2019,merge = True) 
+test = survey_scenario.create_data_frame_by_entity(['pondmen'],period = 2019,merge = True) 
