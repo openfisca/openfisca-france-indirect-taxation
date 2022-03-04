@@ -113,8 +113,7 @@ class officielle_2019_in_2017(Reform):
             accise_combustibles_liquides_ajustee = accise_combustibles_liquides_ticpe + reforme_combustibles_liquides
             prix_fioul_ttc = \
                 parameters(period.start).tarifs_energie.prix_fioul_domestique.prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre
-            # prix_fioul_ttc_ajuste = prix_fioul_ttc + reforme_combustibles_liquides * (1 + taux_plein_tva)
-            prix_fioul_ttc_ajuste = prix_fioul_ttc + reforme_combustibles_liquides
+            prix_fioul_ttc_ajuste = prix_fioul_ttc + reforme_combustibles_liquides * (1 + taux_plein_tva)
 
             taux_implicite_combustibles_liquides_ajuste = (
                 (accise_combustibles_liquides_ajustee * (1 + taux_plein_tva))
@@ -124,8 +123,6 @@ class officielle_2019_in_2017(Reform):
             depenses_combustibles_liquides_ajustees = menage('depenses_combustibles_liquides_officielle_2019_in_2017', period)
             depenses_combustibles_liquides_htva = \
                 depenses_combustibles_liquides_ajustees - tax_from_expense_including_tax(depenses_combustibles_liquides_ajustees, taux_plein_tva)
-            # montant_combustibles_liquides_ticpe_ajuste = \
-            #     tax_from_expense_including_tax(depenses_combustibles_liquides_ajustees, taux_implicite_combustibles_liquides_ajuste)
             montant_combustibles_liquides_ticpe_ajuste = \
                 tax_from_expense_including_tax(depenses_combustibles_liquides_htva, taux_implicite_combustibles_liquides_ajuste)
 
@@ -169,9 +166,10 @@ class officielle_2019_in_2017(Reform):
         def formula(menage, period, parameters):
             reforme_combustibles_liquides = \
                 parameters(period.start).officielle_2019_in_2017.combustibles_liquides_2019_in_2017
+            taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             prix_fioul_ttc = \
                 parameters(period.start).tarifs_energie.prix_fioul_domestique.prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre
-            prix_fioul_ttc_ajuste = prix_fioul_ttc + reforme_combustibles_liquides
+            prix_fioul_ttc_ajuste = prix_fioul_ttc + reforme_combustibles_liquides * (1 + taux_plein_tva)
             depenses_combustibles_liquides_ajustees = menage('depenses_combustibles_liquides_officielle_2019_in_2017', period)
             
             return depenses_combustibles_liquides_ajustees/prix_fioul_ttc_ajuste
@@ -195,15 +193,16 @@ class officielle_2019_in_2017(Reform):
 
         def formula(menage, period, parameters):
             depenses_combustibles_liquides = menage('depenses_combustibles_liquides', period)
+            taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             prix_fioul_ttc = \
                 parameters(period.start).tarifs_energie.prix_fioul_domestique.prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre
             reforme_combustibles_liquides = \
                 parameters(period.start).officielle_2019_in_2017.combustibles_liquides_2019_in_2017
             combustibles_liquides_elasticite_prix = menage('elas_price_2_2', period)
-            # depenses_combustibles_liquides_officielle_2019_in_2017 = \
-            #     depenses_combustibles_liquides * (1 + (1 + combustibles_liquides_elasticite_prix) * reforme_combustibles_liquides * 1.2 / prix_fioul_ttc)
             depenses_combustibles_liquides_officielle_2019_in_2017 = \
-                depenses_combustibles_liquides * (1 + (1 + combustibles_liquides_elasticite_prix) * reforme_combustibles_liquides / prix_fioul_ttc)
+                depenses_combustibles_liquides * (1 + (1 + combustibles_liquides_elasticite_prix) * reforme_combustibles_liquides * (1 + taux_plein_tva) / prix_fioul_ttc)
+            # depenses_combustibles_liquides_officielle_2019_in_2017 = \
+            #     depenses_combustibles_liquides * (1 + (1 + combustibles_liquides_elasticite_prix) * reforme_combustibles_liquides / prix_fioul_ttc)
 
             return depenses_combustibles_liquides_officielle_2019_in_2017
 
@@ -214,11 +213,12 @@ class officielle_2019_in_2017(Reform):
 
         def formula(menage, period, parameters):
             depenses_diesel = menage('depenses_diesel', period)
+            taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).officielle_2019_in_2017.diesel_2019_in_2017
             carburants_elasticite_prix = menage('elas_price_1_1', period)
             depenses_diesel_officielle_2019_in_2017 = \
-                depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel / diesel_ttc)
+                depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel * (1 + taux_plein_tva) / diesel_ttc)
 
             return depenses_diesel_officielle_2019_in_2017
 
@@ -249,11 +249,12 @@ class officielle_2019_in_2017(Reform):
 
         def formula(menage, period, parameters):
             depenses_essence = menage('depenses_essence', period)
+            taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
             carburants_elasticite_prix = menage('elas_price_1_1', period)
             depenses_essence_officielle_2019_in_2017 = \
-                depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence / super_95_ttc)
+                depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence * (1 + taux_plein_tva) / super_95_ttc)
 
             return depenses_essence_officielle_2019_in_2017
 
@@ -263,18 +264,19 @@ class officielle_2019_in_2017(Reform):
         label = "Dépenses en gaz après réaction à la réforme"
 
         def formula(menage, period, parameters):
-            depenses_gaz_variables = menage('depenses_gaz_variables', period)
+            taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
+            depenses_gaz_variables = menage('depenses_gaz_variables', period) 
             # Avec la réforme ces tarifs disparaissent, de nouvelles consommations entrent dans les dépenses des ménages :
             tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
             depenses_gaz_variables = depenses_gaz_variables + tarifs_sociaux_gaz
 
             depenses_gaz_prix_unitaire = menage('depenses_gaz_prix_unitaire', period)
-            depenses_gaz_prix_unitaire = max_(0.0476,depenses_gaz_prix_unitaire)
+            #depenses_gaz_prix_unitaire = max_(0.0476,depenses_gaz_prix_unitaire)
             reforme_gaz = \
                 parameters(period.start).officielle_2019_in_2017.gaz_ville_2019_in_2017
             gaz_elasticite_prix = menage('elas_price_2_2', period)
             depenses_gaz_variables = \
-                depenses_gaz_variables * (1 + (1 + gaz_elasticite_prix) * reforme_gaz / depenses_gaz_prix_unitaire)
+                depenses_gaz_variables * (1 + (1 + gaz_elasticite_prix) * reforme_gaz * (1 + taux_plein_tva) / depenses_gaz_prix_unitaire)
             depenses_gaz_tarif_fixe = menage('depenses_gaz_tarif_fixe', period)
             depenses_gaz_ajustees = depenses_gaz_variables + depenses_gaz_tarif_fixe
             depenses_gaz_ajustees = numpy.array(depenses_gaz_ajustees, dtype = float)
@@ -306,7 +308,7 @@ class officielle_2019_in_2017(Reform):
             reforme_diesel = parameters(period.start).officielle_2019_in_2017.diesel_2019_in_2017
             accise_diesel_ticpe_ajustee = accise_diesel_ticpe + reforme_diesel
             prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
-            prix_diesel_ttc_ajuste = prix_diesel_ttc + reforme_diesel
+            prix_diesel_ttc_ajuste = prix_diesel_ttc + reforme_diesel * (1 + taux_plein_tva)
             taux_implicite_diesel_ajuste = (
                 (accise_diesel_ticpe_ajustee * (1 + taux_plein_tva))
                 / (prix_diesel_ttc_ajuste - accise_diesel_ticpe_ajustee * (1 + taux_plein_tva))
@@ -371,8 +373,9 @@ class officielle_2019_in_2017(Reform):
 
         def formula(menage, period, parameters):
             reforme_diesel = parameters(period.start).officielle_2019_in_2017.diesel_2019_in_2017
+            taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
-            prix_diesel_ttc_ajuste = prix_diesel_ttc + reforme_diesel
+            prix_diesel_ttc_ajuste = prix_diesel_ttc + reforme_diesel * (1 + taux_plein_tva)
 
             depenses_diesel_officielle_2019_in_2017 = \
                 menage('depenses_diesel_corrigees_officielle_2019_in_2017', period)
@@ -506,17 +509,21 @@ class officielle_2019_in_2017(Reform):
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-            depenses_carburants_corrigees_officielle_2019_in_2017 = \
-                menage('depenses_carburants_corrigees_officielle_2019_in_2017', period)
+            depenses_essence_corrigees_officielle_2019_in_2017 = \
+                menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
+            depenses_diesel_corrigees_officielle_2019_in_2017 = \
+                menage('depenses_diesel_corrigees_officielle_2019_in_2017', period)
             tva_depenses_carburants_corrigees_officielle_2019_in_2017 = (
                 (taux_plein_tva / (1 + taux_plein_tva))
-                * depenses_carburants_corrigees_officielle_2019_in_2017
+                * (depenses_essence_corrigees_officielle_2019_in_2017 + depenses_diesel_corrigees_officielle_2019_in_2017)
                 )
-            depenses_carburants_corrigees = \
-                menage('depenses_carburants', period)
+            depenses_essence = \
+                menage('depenses_essence', period)
+            depenses_diesel = \
+                menage('depenses_diesel', period)
             tva_depenses_carburants_corrigees = (
                 (taux_plein_tva / (1 + taux_plein_tva))
-                * depenses_carburants_corrigees
+                * (depenses_essence + depenses_diesel)
                 )
             gains_tva_carburants = (
                 tva_depenses_carburants_corrigees_officielle_2019_in_2017
@@ -647,7 +654,7 @@ class officielle_2019_in_2017(Reform):
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
             accise_ticpe_super_e10_ajustee = accise_ticpe_super_e10 + reforme_essence
             super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
-            super_95_e10_ttc_ajuste = super_95_e10_ttc + reforme_essence
+            super_95_e10_ttc_ajuste = super_95_e10_ttc + reforme_essence * (1 + taux_plein_tva)
             taux_implicite_sp_e10_ajuste = (
                 (accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
                 / (super_95_e10_ttc_ajuste - accise_ticpe_super_e10_ajustee * (1 + taux_plein_tva))
@@ -709,8 +716,9 @@ class officielle_2019_in_2017(Reform):
 
         def formula(menage, period, parameters):
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
+            taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
-            super_95_e10_ttc_ajuste = super_95_e10_ttc + reforme_essence
+            super_95_e10_ttc_ajuste = super_95_e10_ttc + reforme_essence * (1+ taux_plein_tva)
             depenses_essence_officielle_2019_in_2017 = \
                 menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
             part_sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
@@ -738,7 +746,7 @@ class officielle_2019_in_2017(Reform):
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
             accise_ticpe_super95_ajustee = accise_ticpe_super95 + reforme_essence
             super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
-            super_95_ttc_ajuste = super_95_ttc + reforme_essence
+            super_95_ttc_ajuste = super_95_ttc + reforme_essence * (1 + taux_plein_tva)
             taux_implicite_sp95_ajuste = (
                 (accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
                 / (super_95_ttc_ajuste - accise_ticpe_super95_ajustee * (1 + taux_plein_tva))
@@ -801,8 +809,9 @@ class officielle_2019_in_2017(Reform):
 
         def formula(menage, period, parameters):
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
+            taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
-            super_95_ttc_ajuste = super_95_ttc + reforme_essence
+            super_95_ttc_ajuste = super_95_ttc + reforme_essence * (1 + taux_plein_tva)
             depenses_essence_officielle_2019_in_2017 = \
                 menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
             part_sp95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
@@ -831,7 +840,7 @@ class officielle_2019_in_2017(Reform):
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
             accise_ticpe_super98_ajustee = accise_ticpe_super98 + reforme_essence
             super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
-            super_98_ttc_ajuste = super_98_ttc + reforme_essence
+            super_98_ttc_ajuste = super_98_ttc + reforme_essence * (1 + taux_plein_tva)
             taux_implicite_sp98_ajuste = (
                 (accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
                 / (super_98_ttc_ajuste - accise_ticpe_super98_ajustee * (1 + taux_plein_tva))
@@ -894,8 +903,9 @@ class officielle_2019_in_2017(Reform):
 
         def formula(menage, period, parameters):
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
+            taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
-            super_98_ttc_ajuste = super_98_ttc + reforme_essence
+            super_98_ttc_ajuste = super_98_ttc + reforme_essence * (1 + taux_plein_tva)
 
             depenses_essence_officielle_2019_in_2017 = \
                 menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
@@ -918,7 +928,7 @@ class officielle_2019_in_2017(Reform):
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
             accise_super_plombe_ticpe_ajustee = accise_super_plombe_ticpe + reforme_essence
             super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
-            super_plombe_ttc_ajuste = super_plombe_ttc + reforme_essence
+            super_plombe_ttc_ajuste = super_plombe_ttc + reforme_essence * (1 + taux_plein_tva)
             taux_implicite_super_plombe_ajuste = (
                 (accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva))
                 / (super_plombe_ttc_ajuste - accise_super_plombe_ticpe_ajustee * (1 + taux_plein_tva))
@@ -975,8 +985,9 @@ class officielle_2019_in_2017(Reform):
         label = "Calcul du montant de la TICPE sur le super plombé après réforme"
         def formula(menage, period, parameters):
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
+            taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
-            super_plombe_ttc_ajuste = super_plombe_ttc + reforme_essence
+            super_plombe_ttc_ajuste = super_plombe_ttc + reforme_essence * (1 + taux_plein_tva)
             depenses_essence_officielle_2019_in_2017 = \
                 menage('depenses_essence_corrigees_officielle_2019_in_2017', period)
             part_super_plombe = \
