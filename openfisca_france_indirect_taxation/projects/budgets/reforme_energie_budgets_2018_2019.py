@@ -258,6 +258,26 @@ class officielle_2019_in_2017(Reform):
 
             return depenses_essence_officielle_2019_in_2017
 
+
+    class depenses_gaz_variables_cale(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Dépenses en gaz des ménages, hors coût fixe de l'abonnement"
+        # On a une quantité de gaz trop importante en baseline.
+        # Surement du fait de l'optimisation du contrat choisi
+        # On cale sur les agrégats de consommation de gaz au niveau local, part résidentielle, 2017
+        # https://www.statistiques.developpement-durable.gouv.fr/donnees-locales-de-consommation-denergie#mise-disposition-des-donnes
+        # Attention on surestime surement encore légèrement les quantités car jusqu'en 2017 certaines petites entreprise sont comptabilitéses dans la part résidentielle
+        
+        def formula(menage, period):
+            depenses_gaz_variables = menage('depenses_gaz_variables', period)
+            ponderations = menage('pondmen',period)
+            depenses_gaz_prix_unitaire =  max_(menage('depenses_gaz_prix_unitaire', period), 0.001)
+            depenses_gaz_variables = depenses_gaz_variables * ((157000000000 / sum(ponderations * (depenses_gaz_variables / depenses_gaz_prix_unitaire * (depenses_gaz_prix_unitaire != 0.001)))))
+            
+            return depenses_gaz_variables
+
+
     class depenses_gaz_ville_officielle_2019_in_2017(YearlyVariable):
         value_type = float
         entity = Menage
@@ -265,25 +285,23 @@ class officielle_2019_in_2017(Reform):
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-            depenses_gaz_variables = menage('depenses_gaz_variables', period) 
+            depenses_gaz_variables = menage('depenses_gaz_variables_cale', period) 
             # Avec la réforme ces tarifs disparaissent, de nouvelles consommations entrent dans les dépenses des ménages :
             tarifs_sociaux_gaz = menage('tarifs_sociaux_gaz', period)
             depenses_gaz_variables = depenses_gaz_variables + tarifs_sociaux_gaz
 
-            depenses_gaz_prix_unitaire = menage('depenses_gaz_prix_unitaire', period)
-            #depenses_gaz_prix_unitaire = max_(0.0476,depenses_gaz_prix_unitaire)
+            depenses_gaz_prix_unitaire =  max_(menage('depenses_gaz_prix_unitaire', period), 0.001)
+
             reforme_gaz = \
                 parameters(period.start).officielle_2019_in_2017.gaz_ville_2019_in_2017
             gaz_elasticite_prix = menage('elas_price_2_2', period)
             depenses_gaz_variables = \
                 depenses_gaz_variables * (1 + (1 + gaz_elasticite_prix) * reforme_gaz * (1 + taux_plein_tva) / depenses_gaz_prix_unitaire)
             depenses_gaz_tarif_fixe = menage('depenses_gaz_tarif_fixe', period)
-            depenses_gaz_ajustees = depenses_gaz_variables + depenses_gaz_tarif_fixe
-            depenses_gaz_ajustees = numpy.array(depenses_gaz_ajustees, dtype = float)
-            depenses_gaz_ajustees[numpy.isnan(depenses_gaz_ajustees)] = 0
-            depenses_gaz_ajustees[numpy.isinf(depenses_gaz_ajustees)] = 0
+            depenses_gaz_ajustees = (depenses_gaz_variables + depenses_gaz_tarif_fixe) * (depenses_gaz_prix_unitaire != 0.001)
 
             return depenses_gaz_ajustees
+
 
     class diesel_ticpe_officielle_2019_in_2017(YearlyVariable):
         value_type = float
@@ -561,7 +579,7 @@ class officielle_2019_in_2017(Reform):
         entity = Menage
         label = "Recettes de la réforme en TVA sur le gaz naturel"
 
-        def formula(menage, period, parameters):
+        def formula(menage, period, parameters): 
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             depenses_gaz_tarif_fixe = menage('depenses_gaz_tarif_fixe', period)
             depenses_gaz_ville_officielle_2019_in_2017 = \
@@ -570,11 +588,11 @@ class officielle_2019_in_2017(Reform):
                 (taux_plein_tva / (1 + taux_plein_tva))
                 * (depenses_gaz_ville_officielle_2019_in_2017 - depenses_gaz_tarif_fixe)
                 )
-            depenses_gaz_ville = \
-                menage('depenses_gaz_ville', period)
+            depenses_gaz_variables = \
+                menage('depenses_gaz_variables_cale', period)
             tva_depenses_gaz_ville = (
                 (taux_plein_tva / (1 + taux_plein_tva))
-                * (depenses_gaz_ville - depenses_gaz_tarif_fixe)
+                * (depenses_gaz_variables)
                 )
             gains_tva_gaz_ville = (
                 tva_depenses_gaz_ville_officielle_2019_in_2017
@@ -1089,4 +1107,5 @@ class officielle_2019_in_2017(Reform):
         self.update_variable(self.ticpe_totale_officielle_2019_in_2017)
         self.update_variable(self.ticpe_totale_test)
         self.update_variable(self.total_taxes_energies_officielle_2019_in_2017)
+        self.update_variable(self.depenses_gaz_variables_cale)
         self.modify_parameters(modifier_function = modify_parameters)
