@@ -29,11 +29,18 @@ agregat_depenses = {
     2020 : 20441000000,
     }
 
-def simulate_reforme_tabac(year, baseline_year, graph = True,elasticite = None):
-    if elasticite == 0:
-        path = "U:/fiscalite_indirecte_budget_22/sans_elasticite"
-    else:
-        path = "U:/fiscalite_indirecte_budget_22/avec_elasticite"
+path = "Q:/Evaluation du budget/PLF2022/donnees_relance_note_mars_2022/fiscalite_indirecte"
+is_elasticite = False
+replique_gouv = False
+
+if not(is_elasticite):
+    elasticite_tabac = 0
+elif not(replique_gouv):
+    elasticite_tabac = -0.5
+elif replique_gouv:
+    elasticite_tabac = -0.635
+
+def simulate_reforme_tabac(year, baseline_year, graph = True, elasticite = None):
 
     
     data_year = 2017
@@ -94,7 +101,7 @@ def simulate_reforme_tabac(year, baseline_year, graph = True,elasticite = None):
     diff = pd.concat([diff,df],axis = 1)
     diff = pd.concat([diff,nivvie],axis = 1)
     diff['cout_agrege'] = survey_scenario.compute_aggregate(variable = 'depenses_tabac', period = year, difference = True)
-    diff.to_csv('{}/donnees_reforme_tabac_17_20_elasticite_{}.csv'.format(path,elasticite))
+    diff.to_csv('{}/donnees_reforme_tabac_17_20_elasticite_{}.csv'.format(path,elasticite_tabac))
     
     if graph:
         plt.bar(diff.index,diff['variation_relative_depenses_tabac'])
@@ -119,6 +126,8 @@ if __name__ == '__main__':
     couts = {}
     for baseline_year in ['2017']:
         year = 2020
-        variation_relative_depenses_tabac, cout = simulate_reforme_tabac(year = year, baseline_year = baseline_year,elasticite = -0.5)
+        variation_relative_depenses_tabac, cout = simulate_reforme_tabac(year = year, 
+                                                                         baseline_year = baseline_year,
+                                                                         elasticite = elasticite_tabac)
         couts["{}_{}".format(baseline_year, str(year))] = cout
         
