@@ -21,19 +21,20 @@ log = logging.getLogger(__name__)
 ident_men = pd.DataFrame(pd.HDFStore("C:/Users/c.lallemand/data_taxation_indirecte/data_collections/output/openfisca_indirect_taxation_data_2017.h5")['input']['ident_men'])
 ident_men['ident_men'] = ident_men.ident_men.astype(numpy.int64)
 
-def simulate_reformes_energie(graph = True,replique_gouv = False,elasticite = False):
+path = "Q:/Evaluation du budget/PLF2022/donnees_relance_note_mars_2022/fiscalite_indirecte"
+elasticite = False
+replique_gouv = False
+
+def simulate_reformes_energie(graph = True, replique_gouv = replique_gouv, elasticite = elasticite):
     
-    if elasticite:
-        path = "U:/fiscalite_indirecte_budget_22/avec_elasticite"
-    else:
-        path = "U:/fiscalite_indirecte_budget_22/sans_elasticite"
-        
+       
     data_year = 2017
     ## on veut faire les simulations sur les quantités avant réforme
     ## idéalement on voudrait l'évolution des quantités pour les années jusque 2022 s'il n'y avait pas eu de réforme
     ## mais en l'absence d'information on considère que la consommation reste constante dans le contrefactuel.
     inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020),data_year = data_year)
     inflators_by_year[2018] = inflators_by_year[2017]
+    inflators_by_year[2019] = inflators_by_year[2017]
     inflators_by_year[2020] = inflators_by_year[2017]
     inflators_by_year[2021] = inflators_by_year[2017]
     inflators_by_year[2022] = inflators_by_year[2017]
@@ -96,9 +97,9 @@ def simulate_reformes_energie(graph = True,replique_gouv = False,elasticite = Fa
             - df['cout_reforme_pures_taxes']
             )
         df['cout_agrege'] = survey_scenario.compute_aggregate('revenu_reforme_officielle_2019_in_2017',period = year)
+    
+    df.to_csv('{}/donnees_reforme_energie_19_17_replique_gouv_{}_elasticite_{}.csv'.format(path,replique_gouv,elasticite))
         
-    df.to_csv('{}/donnees_reforme_energie_19_17_replique_gouv_{}_elasticite_{}_0811.csv'.format(path,replique_gouv,elasticite))
-
     if graph:
         graph_builder_bar(df['cout_total_reforme'], False)
         plt.bar(df.index,df['cout_total_reforme'])
@@ -118,4 +119,4 @@ def simulate_reformes_energie(graph = True,replique_gouv = False,elasticite = Fa
 if __name__ == "__main__":
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    df = simulate_reformes_energie(replique_gouv = True, elasticite = True)
+    df = simulate_reformes_energie(replique_gouv = replique_gouv, elasticite = elasticite)
