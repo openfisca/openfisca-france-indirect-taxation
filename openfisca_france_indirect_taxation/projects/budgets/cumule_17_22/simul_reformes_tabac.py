@@ -30,24 +30,19 @@ agregat_depenses = {
     }
 
 path = "Q:/Evaluation du budget/PLF2022/donnees_relance_note_mars_2022/fiscalite_indirecte"
-is_elasticite = False
-replique_gouv = False
+is_elasticite = True
+replique_gouv = True
 
 if not(is_elasticite):
-    elasticite_tabac = 0
+    elas = 0
 elif not(replique_gouv):
-    elasticite_tabac = -0.5
+    elas = -0.5
 elif replique_gouv:
-    elasticite_tabac = -0.635
+    elas = -0.635
 
 def simulate_reforme_tabac(year, baseline_year, graph = True, elasticite = None):
 
-    
     data_year = 2017
-    inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020), data_year = data_year)
-    inflators_by_year[2020] = inflators_by_year[2019]
-    inflators_by_year[2021] = inflators_by_year[2020]
-    inflators_by_year[2022] = inflators_by_year[2020]
 
     baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
@@ -68,7 +63,6 @@ def simulate_reforme_tabac(year, baseline_year, graph = True, elasticite = None)
     reform = create_reforme_tabac(baseline_year = baseline_year, elasticite = elasticite)
 
     survey_scenario = SurveyScenario.create(
-        inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year]),
         baseline_tax_benefit_system = baseline_tax_benefit_system,
         reform = reform,
         year = year,
@@ -101,7 +95,7 @@ def simulate_reforme_tabac(year, baseline_year, graph = True, elasticite = None)
     diff = pd.concat([diff,df],axis = 1)
     diff = pd.concat([diff,nivvie],axis = 1)
     diff['cout_agrege'] = survey_scenario.compute_aggregate(variable = 'depenses_tabac', period = year, difference = True)
-    diff.to_csv('{}/donnees_reforme_tabac_17_20_elasticite_{}.csv'.format(path,elasticite_tabac))
+    diff.to_csv('{}/donnees_reforme_tabac_17_20_elasticite_{}.csv'.format(path,elasticite))
     
     if graph:
         plt.bar(diff.index,diff['variation_relative_depenses_tabac'])
@@ -128,6 +122,6 @@ if __name__ == '__main__':
         year = 2020
         variation_relative_depenses_tabac, cout = simulate_reforme_tabac(year = year, 
                                                                          baseline_year = baseline_year,
-                                                                         elasticite = elasticite_tabac)
+                                                                         elasticite = elas)
         couts["{}_{}".format(baseline_year, str(year))] = cout
         
