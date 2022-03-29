@@ -16,7 +16,7 @@ def test_masses(year):
     data_year = 2017
     inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020), data_year = data_year)
     inflators_by_year[2020] = inflators_by_year[2019]
-    
+
     baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
     # Recalage des dépenses de cigarettes BDF sur consommations agrégées officielles
