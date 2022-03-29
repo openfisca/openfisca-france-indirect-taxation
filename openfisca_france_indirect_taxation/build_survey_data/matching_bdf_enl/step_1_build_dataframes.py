@@ -186,4 +186,4 @@ def load_data_bdf_enl(year_data):
 
 
 if __name__ == "__main__":
-    data_enl, data_bdf = load_data_bdf_enl(year_data)
+    data_enl, data_bdf = load_data_bdf_enl()

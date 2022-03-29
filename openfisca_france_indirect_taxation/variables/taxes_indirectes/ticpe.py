@@ -59,7 +59,7 @@ class quantite_diesel(YearlyVariable):
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         depenses_diesel = menage('depenses_diesel', period)
 
-        return depenses_diesel/prix_diesel_ttc
+        return depenses_diesel / prix_diesel_ttc
 
 
 class diesel_ticpe_ajustee(YearlyVariable):

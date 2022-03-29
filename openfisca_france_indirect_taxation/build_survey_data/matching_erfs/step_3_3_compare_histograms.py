@@ -12,7 +12,7 @@ from openfisca_france_indirect_taxation.build_survey_data.utils import \
     histogrammes
 
 
-data_erfs, data_bdf = homogenize_definitions(year_data)
+data_erfs, data_bdf = homogenize_definitions()
 
 
 def histogram_agepr():

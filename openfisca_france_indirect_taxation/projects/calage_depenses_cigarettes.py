@@ -149,7 +149,7 @@ def create_reforme_calage_depenses_tabac(
             def formula(menage, period):
                 agregats_bdf = (
                     ((menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year))
-                    + (menage('poste_02_2_2', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) 
+                    + (menage('poste_02_2_2', period, options = [DIVIDE]) * menage('pondmen', period.this_year))
                     + (menage('poste_02_2_3', period, options = [DIVIDE]) * menage('pondmen', period.this_year))).sum()
                     )
 

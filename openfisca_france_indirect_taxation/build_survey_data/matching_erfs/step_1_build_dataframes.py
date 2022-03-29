@@ -77,7 +77,7 @@ def load_data_bdf_erfs(year_data):
         'tuu2010',  # taille unité urbaine
         'typmen7',  # type de ménage
         ]
-    if year_bdf == 2017: 
+    if year_bdf == 2017:
         variables_bdf = [
             'ident_men',
             'pondmen',  # pondération ménage

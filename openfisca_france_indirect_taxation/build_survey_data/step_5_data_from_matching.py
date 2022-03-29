@@ -41,7 +41,7 @@ def check_load_config_ini():
             config_parser.set("openfisca_france_indirect_taxation", "assets", assets_directory)
             with open(config_ini, 'w') as configfile:
                 config_parser.write(configfile)
-                        
+
     path_to_r_libs_user = os.path.normpath(config_parser.get("exe", "r_libs_user"))
     path_to_rscript_exe = os.path.normpath(config_parser.get("exe", "Rscript"))
 
@@ -154,4 +154,4 @@ def main(year_data):
 
 if __name__ == '__main__':
     import sys
-    sys.exit(main(year_data))
+    sys.exit(main())

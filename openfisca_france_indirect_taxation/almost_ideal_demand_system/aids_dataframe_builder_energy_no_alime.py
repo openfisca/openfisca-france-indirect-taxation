@@ -28,7 +28,7 @@ df_indice_prix_produit.set_index('Unnamed: 0', inplace = True)
 # On commence par cinstruire une dataframe appelée data_conso rassemblant les informations sur les dépenses des ménages.
 data_frame_for_reg = None
 data_frame_all_years = pd.DataFrame()
-for year in [2011,2017]:
+for year in [2011, 2017]:
     aggregates_data_frame = get_input_data_frame(year)
 
     # Pour estimer QAIDS, on se concentre sur les biens non-durables.

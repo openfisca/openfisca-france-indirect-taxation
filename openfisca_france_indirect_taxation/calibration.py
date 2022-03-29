@@ -8,7 +8,6 @@ import os
 import pandas as pd
 
 
-from openfisca_france_indirect_taxation.build_survey_data.utils import find_nearest_inferior
 from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
 
 
@@ -31,7 +30,7 @@ def get_bdf_aggregates_energy(data_year = None):
                 depenses['depenses_tot'] += depenses[element]
 
     depenses_energie = pd.DataFrame()
-    if depenses['depenses_carburants']is not None: #pas de matching avec ENTD
+    if depenses['depenses_carburants'] is not None:  # pas de matching avec ENTD
         variables_energie = ['poste_04_5_1_1_1_a', 'poste_04_5_1_1_1_b', 'poste_04_5_2_1_1',
             'poste_04_5_3_1_1', 'poste_04_5_4_1_1', 'depenses_carburants',
             'rev_disponible', 'loyer_impute', 'rev_disp_loyerimput', 'depenses_tot']
@@ -199,11 +198,11 @@ def get_inflators_bdf_to_cn_energy(data_year):
         ).to_dict()
 
 
-def get_inflators_cn_to_cn_energy(target_year,data_year):
+def get_inflators_cn_to_cn_energy(target_year, data_year):
     '''
         Calcule l'inflateur de vieillissement à partir des masses de comptabilité nationale.
     '''
-    #data_year = find_nearest_inferior(data_years, target_year)
+    # data_year = find_nearest_inferior(data_years, target_year)
     data_year_cn_aggregates = get_cn_aggregates_energy(data_year)['conso_CN_{}'.format(data_year)].to_dict()
     target_year_cn_aggregates = get_cn_aggregates_energy(target_year)['conso_CN_{}'.format(target_year)].to_dict()
 
@@ -213,7 +212,7 @@ def get_inflators_cn_to_cn_energy(target_year,data_year):
         )
 
 
-def get_inflators_energy(target_year,data_year):
+def get_inflators_energy(target_year, data_year):
     '''
     Fonction qui calcule les ratios de calage (bdf sur cn pour année de données) et de vieillissement
     à partir des masses de comptabilité nationale et des masses de consommation de bdf.
@@ -241,7 +240,7 @@ def get_inflators_by_year_energy(rebuild = False, year_range = None, data_year =
     if rebuild is not False:
         inflators_by_year = dict()
         for target_year in year_range:
-            inflators = get_inflators_energy(target_year = target_year,data_year = data_year)
+            inflators = get_inflators_energy(target_year = target_year, data_year = data_year)
             inflators_by_year[target_year] = inflators
 
         writer_inflators = csv.writer(open(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year_wip.csv'), 'w'))

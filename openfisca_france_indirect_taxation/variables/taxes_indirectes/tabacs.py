@@ -100,6 +100,7 @@ class tabac_a_rouler_droit_d_accise(YearlyVariable):
         return taxe_part_normale_tabac_a_rouler + taux_special_tabac_a_rouler * nombre_paquets * (30 / 1000)
         # TODO : rajouter le minimum de perception
 
+
 class total_tabac_droit_d_accise(YearlyVariable):
     value_type = float
     entity = Menage
