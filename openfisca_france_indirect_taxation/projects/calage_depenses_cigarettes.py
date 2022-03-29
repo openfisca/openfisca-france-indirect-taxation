@@ -98,6 +98,7 @@ def create_reforme_calage_depenses_cigarettes(
 
     return calage_depenses_cigarettes
 
+
 def create_reforme_calage_depenses_tabac(
         agregat_depenses = None,
         year_calage = None,
@@ -109,7 +110,7 @@ def create_reforme_calage_depenses_tabac(
     class calage_depenses(Reform):
         key = 'calage_depenses_cigarettes',
         name = "Réforme qui recale les dépenses de cigarettes pour atteindre un certain niveau agrégé",
-        
+
         class depenses_cigarettes(Variable):
             value_type = float
             entity = Menage
@@ -118,12 +119,12 @@ def create_reforme_calage_depenses_tabac(
 
             def formula(menage, period, parameters):
                 agregats_bdf = (
-                    ((menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) +
-                    (menage('poste_02_2_2', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) +
-                    (menage('poste_02_2_3', period, options = [DIVIDE]) * menage('pondmen', period.this_year))).sum()
+                    ((menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year))
+                    + (menage('poste_02_2_2', period, options = [DIVIDE]) * menage('pondmen', period.this_year))
+                    + (menage('poste_02_2_3', period, options = [DIVIDE]) * menage('pondmen', period.this_year))).sum()
                     )
 
-                return menage('poste_02_2_1', period, options = [DIVIDE]) * (agregat_depenses/12/agregats_bdf)
+                return menage('poste_02_2_1', period, options = [DIVIDE]) * (agregat_depenses / 12 / agregats_bdf)
 
         class depenses_cigares(Variable):
             value_type = float
@@ -132,12 +133,12 @@ def create_reforme_calage_depenses_tabac(
 
             def formula(menage, period):
                 agregats_bdf = (
-                    ((menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) +
-                    (menage('poste_02_2_2', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) +
-                    (menage('poste_02_2_3', period, options = [DIVIDE]) * menage('pondmen', period.this_year))).sum()
+                    ((menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year))
+                    + (menage('poste_02_2_2', period, options = [DIVIDE]) * menage('pondmen', period.this_year))
+                    + (menage('poste_02_2_3', period, options = [DIVIDE]) * menage('pondmen', period.this_year))).sum()
                     )
 
-                return menage('poste_02_2_2', period, options = [DIVIDE]) * (agregat_depenses/12/agregats_bdf)
+                return menage('poste_02_2_2', period, options = [DIVIDE]) * (agregat_depenses / 12 / agregats_bdf)
 
         class depenses_tabac_a_rouler(Variable):
             value_type = float
@@ -147,12 +148,12 @@ def create_reforme_calage_depenses_tabac(
 
             def formula(menage, period):
                 agregats_bdf = (
-                    ((menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) +
-                    (menage('poste_02_2_2', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) +
-                    (menage('poste_02_2_3', period, options = [DIVIDE]) * menage('pondmen', period.this_year))).sum()
+                    ((menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year))
+                    + (menage('poste_02_2_2', period, options = [DIVIDE]) * menage('pondmen', period.this_year)) 
+                    + (menage('poste_02_2_3', period, options = [DIVIDE]) * menage('pondmen', period.this_year))).sum()
                     )
 
-                return menage('poste_02_2_3', period, options = [DIVIDE]) * (agregat_depenses/12/agregats_bdf)
+                return menage('poste_02_2_3', period, options = [DIVIDE]) * (agregat_depenses / 12 / agregats_bdf)
 
         def apply(self):
             self.update_variable(self.depenses_cigarettes)

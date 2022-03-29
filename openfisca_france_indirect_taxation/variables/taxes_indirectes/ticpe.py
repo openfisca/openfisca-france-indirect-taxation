@@ -228,7 +228,7 @@ class quantite_sp_e10(Variable):
         super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
         depenses_sp_e10 = menage('depenses_sp_e10', period)
 
-        return depenses_sp_e10/super_95_e10_ttc
+        return depenses_sp_e10 / super_95_e10_ttc
 
     def formula(menage, period):
         montant_sp_e10_ticpe = (0 * menage('depenses_sp_95', period))
@@ -311,7 +311,7 @@ class quantite_sp95(YearlyVariable):
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
         depenses_sp_95 = menage('depenses_sp_95', period)
 
-        return depenses_sp_95/super_95_ttc
+        return depenses_sp_95 / super_95_ttc
 
 
 class sp95_ticpe_ajustee(YearlyVariable):
@@ -391,7 +391,7 @@ class quantite_sp98(YearlyVariable):
         super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
         depenses_sp_98 = menage('depenses_sp_98', period)
 
-        return depenses_sp_98/super_98_ttc
+        return depenses_sp_98 / super_98_ttc
 
 
 class sp98_ticpe_ajustee(YearlyVariable):
@@ -475,7 +475,7 @@ class quantite_super_plombe(Variable):
 
         depenses_super_plombe = menage('depenses_super_plombe', period)
 
-        return depenses_super_plombe/super_plombe_ttc
+        return depenses_super_plombe / super_plombe_ttc
 
 
 class super_plombe_ticpe_ajustee(Variable):

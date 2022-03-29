@@ -18,10 +18,10 @@ simulated_variables = [
     ]
 
 for year in [2017]:
-    inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020),data_year = year)
+    inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020), data_year = year)
     elasticities = get_elasticities(year)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
-    
+
     tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,

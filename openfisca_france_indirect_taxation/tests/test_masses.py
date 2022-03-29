@@ -4,10 +4,8 @@ import logging
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
-from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, dataframe_by_group
 from openfisca_france_indirect_taxation.projects.base import nombre_paquets_cigarettes_by_year
 from openfisca_france_indirect_taxation.projects.calage_depenses_cigarettes import create_reforme_calage_depenses_cigarettes
-from openfisca_france_indirect_taxation.reforms.reforme_tabac import create_reforme_tabac
 
 
 log = logging.getLogger(__name__)
@@ -18,7 +16,6 @@ def test_masses(year):
     inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020))
     inflators_by_year[2020] = inflators_by_year[2019]
     data_year = 2011
-    
 
     baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
@@ -57,12 +54,11 @@ def test_masses(year):
         year,
         survey_scenario.compute_aggregate(variable = 'total_tabac_droit_d_accise', period = year) / 1e9
         ))
-        
+
+
 if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
-    for year in [2017,2018,2019,2020]:
+    for year in [2017, 2018, 2019, 2020]:
         test_masses(year)
-       
-

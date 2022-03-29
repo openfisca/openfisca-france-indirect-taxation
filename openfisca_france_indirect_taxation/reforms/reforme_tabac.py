@@ -5,7 +5,7 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 from openfisca_france_indirect_taxation.projects.base import elasticite_tabac
 
 
-def create_reforme_tabac(baseline_year = None,elasticite = None):
+def create_reforme_tabac(baseline_year = None, elasticite = None):
 
     assert baseline_year is not None
 
