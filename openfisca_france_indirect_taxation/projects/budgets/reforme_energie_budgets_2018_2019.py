@@ -613,6 +613,18 @@ class officielle_2019_in_2017(Reform):
             somme_gains = gains_carburants + gains_combustibles_liquides + gains_gaz_ville
             return somme_gains
 
+    class quantites_gaz_final_cale(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Quantités de gaz consommées après la réforme"
+
+        def formula(menage, period, parameters):
+            depenses_gaz_variables = menage('depenses_gaz_variables_cale', period)
+            depenses_gaz_prix_unitaire =  max_(menage('depenses_gaz_prix_unitaire', period), 0.001)
+
+            quantites_gaz_cale = (depenses_gaz_variables / depenses_gaz_prix_unitaire) * (1 - (depenses_gaz_prix_unitaire == 0.001))
+
+            return quantites_gaz_cale
     class quantites_gaz_final_officielle_2019_in_2017(YearlyVariable):
         value_type = float
         entity = Menage
@@ -640,9 +652,11 @@ class officielle_2019_in_2017(Reform):
             total_taxes_energies = menage('total_taxes_energies', period)
             total_taxes_energies_officielle_2019_in_2017 = menage('total_taxes_energies_officielle_2019_in_2017', period)
             gains_tva_total_energies = menage('gains_tva_total_energies_officielle_2019_in_2017', period)
+            taxe_gaz_ville = menage('taxe_gaz_ville_officielle_2019_in_2017', period)
 
             revenu_reforme = (
                 total_taxes_energies_officielle_2019_in_2017 - total_taxes_energies
+                + taxe_gaz_ville
                 + gains_tva_total_energies
                 )
 
@@ -1001,6 +1015,7 @@ class officielle_2019_in_2017(Reform):
         value_type = float
         entity = Menage
         label = "Calcul du montant de la TICPE sur le super plombé après réforme"
+
         def formula(menage, period, parameters):
             reforme_essence = parameters(period.start).officielle_2019_in_2017.essence_2019_in_2017
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -1011,7 +1026,7 @@ class officielle_2019_in_2017(Reform):
             part_super_plombe = \
                 parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
             depenses_super_plombe_ajustees = depenses_essence_officielle_2019_in_2017 * part_super_plombe
-            return depenses_super_plombe_ajustees/super_plombe_ttc_ajuste
+            return depenses_super_plombe_ajustees / super_plombe_ttc_ajuste
 
 
     class taxe_gaz_ville_officielle_2019_in_2017(YearlyVariable):
@@ -1026,6 +1041,35 @@ class officielle_2019_in_2017(Reform):
             recettes_gaz = quantites_gaz_ajustees * reforme_gaz
 
             return recettes_gaz
+
+
+    class ticgn(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Recettes de la taxe sur la consommation de gaz - ceteris paribus"
+        # On considère que les contributions sur les taxes précédentes ne sont pas affectées
+
+        def formula(menage, period, parameters):
+            quantites_gaz_cale = menage('quantites_gaz_final_cale', period)
+            taux_ticgn = parameters(period.start).imposition_indirecte.taxes_energie_dans_logement.taxes_electricite_et_gaz.ticgn_prix_par_mwh / 1000
+            recettes_ticgn = quantites_gaz_cale *  taux_ticgn
+
+            return recettes_ticgn
+
+
+    class ticgn_officielle_2019_in_2017(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Recettes de la taxe sur la consommation de gaz - ceteris paribus"
+        # On considère que les contributions sur les taxes précédentes ne sont pas affectées
+
+        def formula(menage, period, parameters):
+            quantites_gaz_ajustees = menage('quantites_gaz_final_officielle_2019_in_2017', period)
+            taux_ticgn = parameters(period.start).imposition_indirecte.taxes_energie_dans_logement.taxes_electricite_et_gaz.ticgn_prix_par_mwh / 1000
+            reforme_gaz = parameters(period.start).officielle_2019_in_2017.gaz_ville_2019_in_2017
+            recettes_ticgn_reforme = quantites_gaz_ajustees * (reforme_gaz + taux_ticgn)
+
+            return recettes_ticgn_reforme
 
     class ticpe_totale_officielle_2019_in_2017(YearlyVariable):
         value_type = float
@@ -1060,10 +1104,9 @@ class officielle_2019_in_2017(Reform):
             taxe_diesel = menage('diesel_ticpe_officielle_2019_in_2017', period)
             taxe_essence = menage('essence_ticpe_officielle_2019_in_2017', period)
             taxe_combustibles_liquides = menage('combustibles_liquides_ticpe_officielle_2019_in_2017', period)
-            taxe_gaz_ville = menage('taxe_gaz_ville_officielle_2019_in_2017', period)
 
             total = (
-                taxe_diesel + taxe_essence + taxe_combustibles_liquides + taxe_gaz_ville
+                taxe_diesel + taxe_essence + taxe_combustibles_liquides
                 )
 
             return total
@@ -1104,8 +1147,11 @@ class officielle_2019_in_2017(Reform):
         self.update_variable(self.super_plombe_ticpe_test)
         self.update_variable(self.quantite_super_plombe_officielle_2019_in_2017)
         self.update_variable(self.taxe_gaz_ville_officielle_2019_in_2017)
+        self.update_variable(self.ticgn_officielle_2019_in_2017)
+        self.update_variable(self.ticgn)
         self.update_variable(self.ticpe_totale_officielle_2019_in_2017)
         self.update_variable(self.ticpe_totale_test)
         self.update_variable(self.total_taxes_energies_officielle_2019_in_2017)
         self.update_variable(self.depenses_gaz_variables_cale)
+        self.update_variable(self.quantites_gaz_final_cale)
         self.modify_parameters(modifier_function = modify_parameters)
