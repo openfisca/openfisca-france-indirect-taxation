@@ -41,8 +41,16 @@ elif replique_gouv:
     elas = -0.635
 
 def simulate_reforme_tabac(year, baseline_year, graph = True, elasticite = None):
+    
+    data_year = 2017    
+    inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020),data_year = data_year)
+    inflators_by_year[2018] = inflators_by_year[2017]
+    inflators_by_year[2019] = inflators_by_year[2017]
+    inflators_by_year[2020] = inflators_by_year[2017]
+    inflators_by_year[2021] = inflators_by_year[2017]
+    inflators_by_year[2022] = inflators_by_year[2017]
+    inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
-    data_year = 2017
 
     baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
 
@@ -66,7 +74,8 @@ def simulate_reforme_tabac(year, baseline_year, graph = True, elasticite = None)
         baseline_tax_benefit_system = baseline_tax_benefit_system,
         reform = reform,
         year = year,
-        data_year = data_year
+        data_year = data_year,
+        inflation_kwargs = inflation_kwargs
         )
 
     nivvie = dataframe_by_group(
@@ -79,30 +88,71 @@ def simulate_reforme_tabac(year, baseline_year, graph = True, elasticite = None)
     df = dataframe_by_group(
         survey_scenario,
         category = 'niveau_vie_decile',
-        variables = ['rev_disponible'],
+        variables = ['rev_disponible','depenses_tabac'],
         use_baseline = True,
         )
+    
+    df = df.rename(columns = {'depenses_tabac':'depenses_tabac_baseline'})
+    
+    df_sum = dataframe_by_group(
+        survey_scenario,
+        category = 'niveau_vie_decile',
+        variables = ['rev_disponible','depenses_tabac'],
+        use_baseline = True,
+        aggfunc = 'sum',
+        )
+    
+    df_sum = df_sum.rename(columns = {'depenses_tabac':'depenses_tabac_baseline'})
+    
+    
+    dfr = dataframe_by_group(
+        survey_scenario,
+        category = 'niveau_vie_decile',
+        variables = ['depenses_tabac'],
+        use_baseline = False,
+        )
+    
+    dfr = dfr.rename(columns = {'depenses_tabac':'depenses_tabac_reforme'})
+    
+    dfr_sum = dataframe_by_group(
+        survey_scenario,
+        category = 'niveau_vie_decile',
+        variables = ['depenses_tabac'],
+        use_baseline = False,
+        aggfunc = 'sum',
+        )
+        
+    dfr_sum = dfr_sum.rename(columns = {'depenses_tabac':'depenses_tabac_reforme'})
+    
     diff = dataframe_by_group(
         survey_scenario,
         category = 'niveau_vie_decile',
         variables = ['depenses_tabac'],
         difference = True
         )
+    diff = diff.rename(columns = {'depenses_tabac':'depenses_tabac_difference'})
+    
     diff['variation_relative_depenses_tabac'] = (
-        diff['depenses_tabac']
+        diff['depenses_tabac_difference']
         / df['rev_disponible']
         )
     diff = pd.concat([diff,df],axis = 1)
+    diff = pd.concat([diff,dfr],axis = 1)
     diff = pd.concat([diff,nivvie],axis = 1)
     diff['cout_agrege'] = survey_scenario.compute_aggregate(variable = 'depenses_tabac', period = year, difference = True)
+    diff['part_niveau_vie_baseline'] = diff['depenses_tabac_baseline']/ diff['rev_disponible']
+    diff['part_niveau_vie_reforme'] = diff['depenses_tabac_reforme']/ diff['rev_disponible']
     diff.to_csv('{}/donnees_reforme_tabac_17_20_elasticite_{}.csv'.format(path,elasticite))
+    
+    df_sum = pd.concat([df_sum,dfr_sum],axis = 1)
+    df_sum.to_csv('{}/totaux_reforme_tabac_17_20_elasticite_{}.csv'.format(path,elasticite))
     
     if graph:
         plt.bar(diff.index,diff['variation_relative_depenses_tabac'])
         plt.savefig('{}/variation_relative_depenses_tabac_{}_{}_elas_{}.png'.format(path,baseline_year,year,elasticite))
         plt.close()
         
-        plt.bar(diff.index,diff['depenses_tabac'])
+        plt.bar(diff.index,diff['depenses_tabac_difference'])
         plt.close()
     cout = survey_scenario.compute_aggregate(variable = 'depenses_tabac', period = year, difference = True) / 1e9
     log.info("Coût total de la réforme (baseline : {}): {} milliards d'euros".format(
