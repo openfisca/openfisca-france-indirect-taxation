@@ -41,7 +41,7 @@ Build survey collections:
     - mkdir -p /root/ci-files/data_collections
     - pip3 install -e .[dev,survey]
   script:
-    - build-collection -c budget_des_familles -d -m
+    - build-collection -c budget_des_familles -d -m -s 2005 2011 2017
     - build-collection -c aliss -m -d
     - build-collection -c enquete_logement -d -m -s 2013
     - build-collection -c enquete_transports -d -m -s 2008
