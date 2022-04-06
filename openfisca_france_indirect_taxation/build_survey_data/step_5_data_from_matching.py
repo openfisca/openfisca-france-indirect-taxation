@@ -4,6 +4,7 @@
 from configparser import ConfigParser
 import datetime
 import os
+import platform
 import pandas
 import subprocess
 
@@ -42,17 +43,24 @@ def check_load_config_ini():
             with open(config_ini, 'w') as configfile:
                 config_parser.write(configfile)
 
-    # path_to_r_libs_user = os.path.normpath(config_parser.get("exe", "r_libs_user"))
-    # path_to_rscript_exe = os.path.normpath(config_parser.get("exe", "Rscript"))
+    if platform.system == 'Windows':
+        path_to_r_libs_user = os.path.normpath(config_parser.get("exe", "r_libs_user"))
+        path_to_rscript_exe = os.path.normpath(config_parser.get("exe", "Rscript"))
+    else: 
+        path_to_rscript_exe = 'Rscript'
+        path_to_r_libs_user = None
 
     return path_to_r_libs_user, path_to_rscript_exe
 
 
 def main(year_data):
+
     path_to_r_libs_user, path_to_rscript_exe = check_load_config_ini()
+
     prepare_bdf_enl_matching_data(year_data)
     r_script_path = os.path.join(assets_directory, 'matching', 'matching_enl', 'matching_rank_bdf_enl.R')
-    os.environ['R_LIBS_USER'] = path_to_r_libs_user
+    if platform.system == 'Windows':
+        os.environ['R_LIBS_USER'] = path_to_r_libs_user
     process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
     subprocess.call(process_call)
 
