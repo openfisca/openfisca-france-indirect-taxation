@@ -38,7 +38,7 @@ def load_data_bdf_erfs(year_data):
         collection = 'budget_des_familles', config_files_directory = config_files_directory
         )
     survey_bdf = bdf_survey_collection.get_survey('budget_des_familles_{}'.format(year_bdf))
-    menages_bdf = survey_bdf.get_values(table = 'MENAGE')
+    menages_bdf = survey_bdf.get_values(table = 'menage', ignorecase = True)
     menages_bdf['ident_men'] = menages_bdf['ident_men'].astype(str)
 
     columns_menages = menages_bdf.columns.difference(input_bdf.columns).tolist()
