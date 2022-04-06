@@ -46,7 +46,7 @@ def check_load_config_ini():
     if platform.system == 'Windows':
         path_to_r_libs_user = os.path.normpath(config_parser.get("exe", "r_libs_user"))
         path_to_rscript_exe = os.path.normpath(config_parser.get("exe", "Rscript"))
-    else: 
+    else:
         path_to_rscript_exe = 'Rscript'
         path_to_r_libs_user = None
 
