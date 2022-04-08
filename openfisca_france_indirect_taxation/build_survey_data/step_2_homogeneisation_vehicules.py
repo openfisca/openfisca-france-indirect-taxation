@@ -86,6 +86,7 @@ def build_homogeneisation_vehicules(temporary_store = None, year = None):
         temporary_store['automobile_{}'.format(year)] = vehicule
         temporary_store.close()
 
+
 if __name__ == '__main__':
     import sys
     import time

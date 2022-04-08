@@ -55,7 +55,7 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
     depenses = temporary_store["depenses_bdf_{}".format(year_calage)]
     depenses.index = depenses.index.astype(ident_men_dtype)
     temporary_store.close()
-    
+
     # 2. Gestion des véhicules:
     build_homogeneisation_vehicules(year = year_data)
 

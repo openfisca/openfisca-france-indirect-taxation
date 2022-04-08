@@ -7,17 +7,14 @@ import os
 import platform
 import pandas
 import subprocess
-import sys
+
 
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
+
 from openfisca_france_indirect_taxation.utils import assets_directory
-
-
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_4_1_clean_data import prepare_bdf_enl_matching_data
-
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_4_1_save_data import prepare_bdf_entd_matching_data
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_6_1_calage_depenses_carburants import cale_bdf_entd_matching_data
-
 from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_4_1_clean_data import prepare_bdf_erfs_matching_data
 
 

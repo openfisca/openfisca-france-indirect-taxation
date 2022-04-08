@@ -122,6 +122,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     temporary_store['depenses_{}'.format(year)] = depenses
     temporary_store.close()
 
+
 if __name__ == '__main__':
     import sys
     import time

@@ -743,6 +743,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
     temporary_store['donnes_socio_demog_{}'.format(year)] = menage
     temporary_store.close()
 
+
 if __name__ == '__main__':
     import sys
     import time
