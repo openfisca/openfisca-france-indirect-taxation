@@ -15,8 +15,10 @@ log = logging.getLogger(__name__)
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_depenses_homogenisees(temporary_store = None, year = None):
-    """Build menage consumption by categorie fiscale dataframe """
+    """Build menage consumption by categorie fiscale dataframe."""
+    log.debug(f"Entering build_depenses_homogenisees for year={year}")
     assert temporary_store is not None
+    temporary_store.open()
     assert year is not None
     bdf_survey_collection = SurveyCollection.load(
         collection = 'budget_des_familles', config_files_directory = config_files_directory
@@ -86,7 +88,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     if year == 2005:
         conso = survey.get_values(table = "c05d")
 
-    if year == 2011:
+    if year == 2011 or year == 2017:
         conso = survey.get_values(table = "c05", ignorecase = True)
         conso.rename(
             columns = {
@@ -94,6 +96,8 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
                 },
             inplace = True,
             )
+
+    if 'ctot' in conso.columns:
         del conso['ctot']
 
     # Grouping by coicop
@@ -116,13 +120,14 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     coicop_data_frame = conso.rename(columns = formatted_poste_by_poste_bdf)
     depenses = coicop_data_frame.merge(poids, left_index = True, right_index = True)
     temporary_store['depenses_{}'.format(year)] = depenses
+    temporary_store.close()
 
 
 if __name__ == '__main__':
     import sys
     import time
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    deb = time.clock()
-    year = 2011
+    deb = time.process_time()()
+    year = 2017
     build_depenses_homogenisees(year = year)
-    log.info("duration is {}".format(time.clock() - deb))
+    log.info("duration is {}".format(time.process_time()() - deb))

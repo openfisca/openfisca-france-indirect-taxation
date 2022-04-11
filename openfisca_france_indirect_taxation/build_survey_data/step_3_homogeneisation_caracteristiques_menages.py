@@ -15,8 +15,9 @@ log = logging.getLogger(__name__)
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year = None):
-    """Homogénéisation des caractéristiques sociales des ménages"""
+    """Homogénéisation des caractéristiques sociales des ménages."""
     assert temporary_store is not None
+    temporary_store.open()
     assert year is not None
     # Load data
     bdf_survey_collection = SurveyCollection.load(
@@ -577,7 +578,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         for variable in variables:
             assert variable in menage.columns, "{} is not a column of menage data frame".format(variable)
 
-    if year == 2011:
+    if year in [2011, 2017]:
         variables = [
             'agecj',
             'agepr',
@@ -585,7 +586,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'coeffuc',
             'cs42pr',
             'cs42cj',
-            'decuc1',
             'ident_men',
             'pondmen',
             'npers',
@@ -604,15 +604,24 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'zeat',
             ]
 
+        if year == 2011:
+            variables.append('decuc1')
+
+        if year == 2017:
+            variables.append('dnivie1')
+
         menage = survey.get_values(table = "menage", variables = variables, ignorecase = True)
+
         menage.rename(
             columns = {
                 'coeffuc': 'ocde10',
                 'typmen5': 'typmen',
                 'decuc1': 'decuc',
+                'dnivie1': 'decuc',
                 },
             inplace = True,
             )
+
         menage['agecj'] = menage.agecj.fillna(0)
         # Pour Aliss
         menage['nadultes'] = menage.npers - menage.nenfants
@@ -688,7 +697,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         del menage['new_stalog']
         assert menage.stalog.isin(list(range(1, 6))).all()
         '''
-        TODO a déplacer ailleurs après avoir compris à quoi cela sert !
+        TODO a déplacer ailleurs après avoir compris à quoi cela sert ! (dans le calcul des élasticités)
         vague = depmen[['vag', 'ident_men']].copy()
         stalog = depmen[['stalog', 'ident_men']].copy()
         sourcp = depmen[['sourcp', 'ident_men']].copy()
@@ -732,14 +741,15 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
     assert menage.index.name == 'ident_men'
     menage['role_menage'] = 0
     temporary_store['donnes_socio_demog_{}'.format(year)] = menage
+    temporary_store.close()
 
 
 if __name__ == '__main__':
     import sys
     import time
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    deb = time.clock()
+    deb = time.process_time()()
     year = 2011
     build_homogeneisation_caracteristiques_sociales(year = year)
 
-    log.info("step_3_homogeneisation_caracteristiques_sociales {}".format(time.clock() - deb))
+    log.info("step_3_homogeneisation_caracteristiques_sociales {}".format(time.process_time()() - deb))

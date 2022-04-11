@@ -2,6 +2,10 @@ description: Bières
 bieres_moins_28_vol_eur_degre_hl:
   description: Bières moins de 2,8% vol. (€/degré/hl)
   values:
+    2021-01-01:
+      value: 3.84
+    2020-01-01:
+      value: 3.81
     2019-01-01:
       value: 3.75
     2018-01-01:
@@ -98,6 +102,10 @@ bieres_non_comprises_dans_mention_precedente:
 petites_brasseries_10_000hl_eur_degre_hl:
   description: Petites brasseries < 10 000hl (€/degré/hl)
   values:
+    2021-01-01:
+      value: 3.84
+    2020-01-01:
+      value: 3.81
     2019-01-01:
       value: 3.75
     2018-01-01:
@@ -126,6 +134,10 @@ petites_brasseries_10_000hl_eur_degre_hl:
 10_000hl_petites_brasseries_50_000hl_eur_degre_hl:
   description: 10 000hl < petites brasseries < 50 000hl (€/degré/hl)
   values:
+    2021-01-01:
+      value: 3.84
+    2020-01-01:
+      value: 3.81
     2019-01-01:
       value: 3.75
     2018-01-01:
@@ -154,6 +166,12 @@ petites_brasseries_10_000hl_eur_degre_hl:
 50_000hl_petites_brasseries_200_000hl_eur_degre_hl:
   description: 50 000hl < petites brasseries < 200 000hl (€/degré/hl)
   values:
+    2021-01-01:
+      value: 3.84
+    2020-01-01:
+      value: 3.81
+    2019-01-01:
+      value: 3.75
     2018-01-01:
       value: 3.71
     2017-01-01:

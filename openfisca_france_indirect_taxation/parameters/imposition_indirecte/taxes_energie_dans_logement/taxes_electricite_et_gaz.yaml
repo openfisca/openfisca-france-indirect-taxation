@@ -50,6 +50,8 @@ cta_gaz:
 ticgn_prix_par_mwh:
   description: TICGN - prix par MWh
   values:
+    2021-01-01:
+      value: 8.43
     2018-01-01:
       value: 8.45
     2017-01-01:
@@ -88,6 +90,8 @@ ctssg_prix_par_mwh:
 plafonds_tcfe_compteurs_36_kva_en_euros_par_mwh:
   description: Plafonds TCFE pour compteurs < ou = à 36 kva - en euros par MWh
   values:
+    2021-01-01:
+      value: 9.9
     2017-01-01:
       value: null
     2015-01-01:

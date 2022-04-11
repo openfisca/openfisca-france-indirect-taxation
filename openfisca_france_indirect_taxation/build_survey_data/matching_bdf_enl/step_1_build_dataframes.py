@@ -9,7 +9,7 @@ from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
 
-def load_data_bdf_enl():
+def load_data_bdf_enl(year_data):
 
     enl_provisoire = False
 
@@ -23,7 +23,7 @@ def load_data_bdf_enl():
     input_enl_indiv = survey_enl.get_values(table = 'indiv_diff')
 
     # Load BdF data :
-    year_bdf = 2011
+    year_bdf = year_data
     openfisca_survey_collection = SurveyCollection.load(collection = 'openfisca_indirect_taxation')
     openfisca_survey = openfisca_survey_collection.get_survey('openfisca_indirect_taxation_data_{}'.format(year_bdf))
     input_bdf = openfisca_survey.get_values(table = 'input')

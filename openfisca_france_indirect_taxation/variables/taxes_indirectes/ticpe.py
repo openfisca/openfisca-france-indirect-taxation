@@ -49,6 +49,19 @@ class diesel_ticpe(YearlyVariable):
         return montant_diesel_ticpe
 
 
+class quantite_diesel(YearlyVariable):
+    value_type = float
+    entity = Menage
+    label = "Calcul du montant de TICPE sur le diesel"
+
+    def formula(menage, period, parameters):
+
+        prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
+        depenses_diesel = menage('depenses_diesel', period)
+
+        return depenses_diesel / prix_diesel_ttc
+
+
 class diesel_ticpe_ajustee(YearlyVariable):
     value_type = float
     entity = Menage
@@ -114,6 +127,33 @@ class essence_ticpe(Variable):
         return essence_ticpe
 
 
+class quantite_essence(Variable):
+    value_type = float
+    entity = Menage
+    label = "Calcul du montant de la TICPE sur toutes les essences cumulées"
+    definition_period = YEAR
+
+    def formula_2009(menage, period):
+        quantite_sp95 = menage('quantite_sp95', period)
+        quantite_sp98 = menage('quantite_sp98', period)
+        quantite_sp_e10 = menage('quantite_sp_e10', period)
+        quantite_essence = (quantite_sp95 + quantite_sp98 + quantite_sp_e10)
+        return quantite_essence
+
+    def formula_2007(menage, period):
+        quantite_sp95 = menage('quantite_sp95', period)
+        quantite_sp98 = menage('quantite_sp98', period)
+        quantite_essence = (quantite_sp95 + quantite_sp98)
+        return quantite_essence
+
+    def formula_1990(menage, period):
+        quantite_sp95 = menage('quantite_sp95', period)
+        quantite_sp98 = menage('quantite_sp98', period)
+        quantite_super_plombe = menage('quantite_super_plombe', period)
+        quantite_essence = (quantite_sp95 + quantite_sp98 + quantite_super_plombe)
+        return quantite_essence
+
+
 class essence_ticpe_ajustee(Variable):
     value_type = float
     entity = Menage
@@ -172,6 +212,23 @@ class sp_e10_ticpe(Variable):
             tax_from_expense_including_tax(depenses_sp_e10_htva, taux_implicite_sp_e10)
 
         return montant_sp_e10_ticpe
+
+    def formula(menage, period):
+        montant_sp_e10_ticpe = (0 * menage('depenses_sp_95', period))
+        return montant_sp_e10_ticpe
+
+
+class quantite_sp_e10(Variable):
+    value_type = float
+    entity = Menage
+    label = "Calcul du montant de la TICPE sur le SP E10"
+    definition_period = YEAR
+
+    def formula_2009(menage, period, parameters):
+        super_95_e10_ttc = parameters(period.start).prix_carburants.super_95_e10_ttc
+        depenses_sp_e10 = menage('depenses_sp_e10', period)
+
+        return depenses_sp_e10 / super_95_e10_ttc
 
     def formula(menage, period):
         montant_sp_e10_ticpe = (0 * menage('depenses_sp_95', period))
@@ -245,6 +302,18 @@ class sp95_ticpe(YearlyVariable):
         return montant_sp95_ticpe
 
 
+class quantite_sp95(YearlyVariable):
+    value_type = float
+    entity = Menage
+    label = "Calcul du montant de TICPE sur le sp_95"
+
+    def formula(menage, period, parameters):
+        super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
+        depenses_sp_95 = menage('depenses_sp_95', period)
+
+        return depenses_sp_95 / super_95_ttc
+
+
 class sp95_ticpe_ajustee(YearlyVariable):
     value_type = float
     entity = Menage
@@ -313,6 +382,18 @@ class sp98_ticpe(YearlyVariable):
         return montant_sp98_ticpe
 
 
+class quantite_sp98(YearlyVariable):
+    value_type = float
+    entity = Menage
+    label = "Calcul du montant de TICPE sur le sp_98"
+
+    def formula(menage, period, parameters):
+        super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
+        depenses_sp_98 = menage('depenses_sp_98', period)
+
+        return depenses_sp_98 / super_98_ttc
+
+
 class sp98_ticpe_ajustee(YearlyVariable):
     value_type = float
     entity = Menage
@@ -377,6 +458,24 @@ class super_plombe_ticpe(Variable):
             tax_from_expense_including_tax(depenses_super_plombe_htva, taux_implicite_super_plombe)
 
         return montant_super_plombe_ticpe
+
+
+class quantite_super_plombe(Variable):
+    value_type = float
+    entity = Menage
+    label = "Calcul du montant de la TICPE sur le super plombé"
+    definition_period = YEAR
+
+    def formula_2007(menage, period):
+        montant_super_plombe_ticpe = (0 * menage('depenses_sp_95', period))
+        return montant_super_plombe_ticpe
+
+    def formula(menage, period, parameters):
+        super_plombe_ttc = parameters(period.start).prix_carburants.super_plombe_ttc
+
+        depenses_super_plombe = menage('depenses_super_plombe', period)
+
+        return depenses_super_plombe / super_plombe_ttc
 
 
 class super_plombe_ticpe_ajustee(Variable):

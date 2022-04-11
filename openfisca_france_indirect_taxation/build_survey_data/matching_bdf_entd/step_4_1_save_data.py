@@ -13,15 +13,15 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step
 from openfisca_france_indirect_taxation.utils import assets_directory
 
 
-def clean_data():
-    data_entd, data_bdf = create_niveau_vie_quantiles()
+def clean_data(year_data):
+    data_entd, data_bdf = create_niveau_vie_quantiles(year_data)
     data_entd = data_entd.fillna(0)
     data_bdf = data_bdf.fillna(0)
     return data_entd, data_bdf
 
 
-def create_donation_classes():
-    data_entd, data_bdf = clean_data()
+def create_donation_classes(year_data):
+    data_entd, data_bdf = clean_data(year_data)
 
     def create_donation_classes_(data):
         # Classes based on niveau_vie_decile and aides_logement
@@ -62,8 +62,8 @@ def check_donation_classes_size(data, donation_class):
     return dict_dc_taille
 
 
-def prepare_bdf_entd_matching_data():
-    data_entd, data_bdf = create_donation_classes()
+def prepare_bdf_entd_matching_data(year_data):
+    data_entd, data_bdf = create_donation_classes(year_data)
     matching_entd_directory = os.path.join(
         assets_directory,
         'matching',

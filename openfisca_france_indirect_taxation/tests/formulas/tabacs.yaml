@@ -1,41 +1,41 @@
 - name: "Cigarettes"
-  period: "2010"
-  absolute_error_margin: .0049
+  period: "2015"
+  absolute_error_margin: .01
   input:
     poste_02_2_1: 100  # Cigarettes
   output:
     depenses_cigares: 0
     depenses_cigarettes:
-      2010-01: 100 / 12
-      2010-02: 100 / 12
-      2010-03: 100 / 12
-      2010-04: 100 / 12
-      2010-05: 100 / 12
-      2010-06: 100 / 12
-      2010-07: 100 / 12
-      2010-08: 100 / 12
-      2010-09: 100 / 12
-      2010-10: 100 / 12
-      2010-11: 100 / 12
-      2010-12: 100 / 12
+      2015-01: 100 / 12
+      2015-02: 100 / 12
+      2015-03: 100 / 12
+      2015-04: 100 / 12
+      2015-05: 100 / 12
+      2015-06: 100 / 12
+      2015-07: 100 / 12
+      2015-08: 100 / 12
+      2015-09: 100 / 12
+      2015-10: 100 / 12
+      2015-11: 100 / 12
+      2015-12: 100 / 12
     depenses_tabac_a_rouler:
-      2010-01: 0
-      2010-02: 0
-      2010-03: 0
-      2010-04: 0
-      2010-05: 0
-      2010-06: 0
-      2010-07: 0
-      2010-08: 0
-      2010-09: 0
-      2010-10: 0
-      2010-11: 0
-      2010-12: 0
+      2015-01: 0
+      2015-02: 0
+      2015-03: 0
+      2015-04: 0
+      2015-05: 0
+      2015-06: 0
+      2015-07: 0
+      2015-08: 0
+      2015-09: 0
+      2015-10: 0
+      2015-11: 0
+      2015-12: 0
     #
     cigares_droit_d_accise: 0
-    cigarette_droit_d_accise: 39.02
+    cigarette_droit_d_accise: 46.93
     tabac_a_rouler_droit_d_accise: 0
-    total_tabac_droit_d_accise: 39.02
+    total_tabac_droit_d_accise: 46.93
     #
     depenses_ht_tva_taux_plein: 0
     depenses_tva_taux_plein: 0
@@ -53,43 +53,43 @@
     poste_agrege_02: 100
 
 - name: "Cigares"
-  period: "2010"
-  absolute_error_margin: .004
+  period: "2015"
+  absolute_error_margin: .01
   input:
     poste_02_2_2: 100  # Cigares
   output:
     depenses_cigares: 100
     depenses_cigarettes:
-      2010-01: 0
-      2010-02: 0
-      2010-03: 0
-      2010-04: 0
-      2010-05: 0
-      2010-06: 0
-      2010-07: 0
-      2010-08: 0
-      2010-09: 0
-      2010-10: 0
-      2010-11: 0
-      2010-12: 0
+      2015-01: 0
+      2015-02: 0
+      2015-03: 0
+      2015-04: 0
+      2015-05: 0
+      2015-06: 0
+      2015-07: 0
+      2015-08: 0
+      2015-09: 0
+      2015-10: 0
+      2015-11: 0
+      2015-12: 0
     depenses_tabac_a_rouler:
-      2010-01: 0
-      2010-02: 0
-      2010-03: 0
-      2010-04: 0
-      2010-05: 0
-      2010-06: 0
-      2010-07: 0
-      2010-08: 0
-      2010-09: 0
-      2010-10: 0
-      2010-11: 0
-      2010-12: 0
+      2015-01: 0
+      2015-02: 0
+      2015-03: 0
+      2015-04: 0
+      2015-05: 0
+      2015-06: 0
+      2015-07: 0
+      2015-08: 0
+      2015-09: 0
+      2015-10: 0
+      2015-11: 0
+      2015-12: 0
     #
-    cigares_droit_d_accise: 21.61
+    cigares_droit_d_accise: 18.91
     cigarette_droit_d_accise: 0
     tabac_a_rouler_droit_d_accise: 0
-    total_tabac_droit_d_accise: 21.61
+    total_tabac_droit_d_accise: 18.91
     #
     depenses_ht_tva_taux_plein: 0
     depenses_tva_taux_plein: 0
@@ -107,43 +107,43 @@
     poste_agrege_02: 100
 
 - name: u"Tabac à rouler"
-  period: "2010"
-  absolute_error_margin: .004
+  period: "2015"
+  absolute_error_margin: .01
   input:
     poste_02_2_3: 100  # tabac a rouler
   output:
     depenses_cigares: 0
     depenses_cigarettes:
-      2010-01: 0
-      2010-02: 0
-      2010-03: 0
-      2010-04: 0
-      2010-05: 0
-      2010-06: 0
-      2010-07: 0
-      2010-08: 0
-      2010-09: 0
-      2010-10: 0
-      2010-11: 0
-      2010-12: 0
+      2015-01: 0
+      2015-02: 0
+      2015-03: 0
+      2015-04: 0
+      2015-05: 0
+      2015-06: 0
+      2015-07: 0
+      2015-08: 0
+      2015-09: 0
+      2015-10: 0
+      2015-11: 0
+      2015-12: 0
     depenses_tabac_a_rouler:
-      2010-01: 100 / 12
-      2010-02: 100 / 12
-      2010-03: 100 / 12
-      2010-04: 100 / 12
-      2010-05: 100 / 12
-      2010-06: 100 / 12
-      2010-07: 100 / 12
-      2010-08: 100 / 12
-      2010-09: 100 / 12
-      2010-10: 100 / 12
-      2010-11: 100 / 12
-      2010-12: 100 / 12
+      2015-01: 100 / 12
+      2015-02: 100 / 12
+      2015-03: 100 / 12
+      2015-04: 100 / 12
+      2015-05: 100 / 12
+      2015-06: 100 / 12
+      2015-07: 100 / 12
+      2015-08: 100 / 12
+      2015-09: 100 / 12
+      2015-10: 100 / 12
+      2015-11: 100 / 12
+      2015-12: 100 / 12
     #
     cigares_droit_d_accise: 0
     cigarette_droit_d_accise: 0
-    tabac_a_rouler_droit_d_accise: 36.94
-    total_tabac_droit_d_accise: 36.94
+    tabac_a_rouler_droit_d_accise: 47.25
+    total_tabac_droit_d_accise: 47.25
     #
     depenses_ht_tva_taux_plein: 0
     depenses_tva_taux_plein: 0

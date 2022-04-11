@@ -263,6 +263,10 @@ class tarifs_sociaux_electricite(YearlyVariable):
     entity = Menage
     label = "Montant perçus en tarifs sociaux sur l'électricité (TPN)"
 
+    def formula_2017(menage, period):
+        depenses_electricite_percentile = menage('depenses_electricite_percentile', period)
+        return 0 * depenses_electricite_percentile
+
     def formula(menage, period):
         depenses_electricite_percentile = menage('depenses_electricite_percentile', period)
         eligible = menage('eligibilite_tarifs_sociaux_energies', period)
@@ -292,6 +296,10 @@ class tarifs_sociaux_gaz(YearlyVariable):
     value_type = str
     entity = Menage
     label = "Montant perçus en tarifs sociaux sur l'électricité (TSS)"
+
+    def formula_2017(menage, period, parameters):
+        depenses_electricite_percentile = menage('depenses_gaz_prix_unitaire', period)
+        return 0 * depenses_electricite_percentile
 
     def formula(menage, period, parameters):
         depenses_gaz_prix_unitaire = menage('depenses_gaz_prix_unitaire', period)

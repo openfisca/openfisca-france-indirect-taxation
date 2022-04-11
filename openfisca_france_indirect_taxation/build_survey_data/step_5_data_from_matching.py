@@ -4,31 +4,30 @@
 from configparser import ConfigParser
 import datetime
 import os
+import platform
 import pandas
 import subprocess
 
 
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
+
 from openfisca_france_indirect_taxation.utils import assets_directory
-
-
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_4_1_clean_data import prepare_bdf_enl_matching_data
-
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_4_1_save_data import prepare_bdf_entd_matching_data
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_6_1_calage_depenses_carburants import cale_bdf_entd_matching_data
-
 from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_4_1_clean_data import prepare_bdf_erfs_matching_data
 
 
-def check_config_ini():
-    """Check that assets option of section openfisca_france_indirect_taxation is set in openfisca-survey-manager config.ini file
+def check_load_config_ini():
+    """
+    Check that assets option of section openfisca_france_indirect_taxation is set in openfisca-survey-manager config.ini file
     since that file is used by R
     """
     config_parser = ConfigParser()
     config_ini = os.path.join(config_files_directory, 'config.ini')
     config_parser.read(config_ini)
     if config_parser.has_section('openfisca_france_indirect_taxation') and config_parser.has_option('openfisca_france_indirect_taxation', 'assets'):
-        return
+        pass
     else:
         modifiedTime = os.path.getmtime(config_ini)
         timestamp = datetime.datetime.fromtimestamp(modifiedTime).strftime("%b-%d-%Y_%H.%M.%S")
@@ -41,12 +40,24 @@ def check_config_ini():
             with open(config_ini, 'w') as configfile:
                 config_parser.write(configfile)
 
+    if platform.system == 'Windows':
+        path_to_r_libs_user = os.path.normpath(config_parser.get("exe", "r_libs_user"))
+        path_to_rscript_exe = os.path.normpath(config_parser.get("exe", "Rscript"))
+    else:
+        path_to_rscript_exe = 'Rscript'
+        path_to_r_libs_user = None
 
-def main():
-    check_config_ini()
-    prepare_bdf_enl_matching_data()
+    return path_to_r_libs_user, path_to_rscript_exe
+
+
+def main(year_data):
+    path_to_r_libs_user, path_to_rscript_exe = check_load_config_ini()
+    prepare_bdf_enl_matching_data(year_data)
     r_script_path = os.path.join(assets_directory, 'matching', 'matching_enl', 'matching_rank_bdf_enl.R')
-    subprocess.call(['Rscript', '--vanilla', r_script_path])
+    if path_to_r_libs_user is not None:
+        os.environ['R_LIBS_USER'] = path_to_r_libs_user
+    process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
+    subprocess.call(process_call)
 
     data_matched_enl = pandas.read_csv(
         os.path.join(
@@ -56,9 +67,16 @@ def main():
             'data_matched_rank.csv'
             ), sep =',', decimal = '.'
         )
-    prepare_bdf_entd_matching_data()
+    prepare_bdf_entd_matching_data(year_data)
     r_script_path = os.path.join(assets_directory, 'matching', 'matching_entd', 'matching_rank_bdf_entd.R')
-    subprocess.call(['Rscript', '--vanilla', r_script_path])
+    process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
+    subprocess.call(process_call)
+    r_script_path = os.path.join(assets_directory, 'matching', 'matching_entd', 'matching_distance_bdf_entd.R')
+    process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
+    subprocess.call(process_call)
+    r_script_path = os.path.join(assets_directory, 'matching', 'matching_entd', 'matching_random_bdf_entd.R')
+    process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
+    subprocess.call(process_call)
     cale_bdf_entd_matching_data()
     data_matched_entd = pandas.read_csv(
         os.path.join(
@@ -68,9 +86,10 @@ def main():
             'data_matched_final.csv'
             ), sep =',', decimal = '.'
         )
-    prepare_bdf_erfs_matching_data()
+    prepare_bdf_erfs_matching_data(year_data)
     r_script_path = os.path.join(assets_directory, 'matching', 'matching_erfs', 'matching_rank_bdf_erfs.R')
-    subprocess.call(['Rscript', '--vanilla', r_script_path])
+    process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
+    subprocess.call(process_call)
 
     data_matched_erfs = pandas.read_csv(
         os.path.join(
@@ -130,7 +149,7 @@ def main():
     data_frame = data_frame.fillna(0)
 
     data_frame.to_csv(
-        os.path.join(assets_directory, 'matching', 'data_for_run_all.csv'),
+        os.path.join(assets_directory, 'matching', 'data_for_run_all_{}.csv'.format(year_data)),
         sep = ','
         )
     return data_frame

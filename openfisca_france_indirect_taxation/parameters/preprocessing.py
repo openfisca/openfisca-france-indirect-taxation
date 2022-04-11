@@ -65,7 +65,7 @@ def preprocess_legislation(parameters):
     for element in autres_carburants:
         assert element in prix_annuel_carburants.columns
         prix_annuel = prix_annuel_carburants[element]
-        years = list(range(1990, 2017))
+        years = list(range(1990, 2022))
         years = sorted(years, key=int, reverse=True)
         values = dict()
         for year in years:

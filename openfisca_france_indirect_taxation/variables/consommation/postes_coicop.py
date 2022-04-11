@@ -69,8 +69,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
                         year_stop = year_stop
                         )
 
-                    dated_function_name = "formula_{year_start}".format(
-                        year_start = year_start, year_stop = year_stop)
+                    dated_function_name = f"formula_{year_start}"
                     log.debug('Creating fiscal category {} ({}-{}) with the following products {}'.format(
                         categorie_fiscale, year_start, year_stop, postes_coicop))
 

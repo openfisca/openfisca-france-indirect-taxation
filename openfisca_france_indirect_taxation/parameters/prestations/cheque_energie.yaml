@@ -58,6 +58,8 @@ menage_avec_1_uc:
       1945-01-01:
         value: 0.0
     threshold:
+      2021-01-01:
+        value: 10801.0
       2018-01-01:
         value: 10701.0
       1945-01-01:
@@ -121,10 +123,12 @@ menage_entre_1_et_2_uc:
       1945-01-01:
         value: 0.0
     threshold:
+      2021-01-01:
+        value: 10801.0
       2018-01-01:
         value: 10701.0
       1945-01-01:
-        value: 0.0
+        value: 0
 menage_avec_2_uc_et_plus:
   description: Cas des ménages avec 2 UC ou plus
   metadata:
@@ -184,6 +188,8 @@ menage_avec_2_uc_et_plus:
       1945-01-01:
         value: 0.0
     threshold:
+      2021-01-01:
+        value: 10801.0
       2018-01-01:
         value: 10701.0
       1945-01-01:

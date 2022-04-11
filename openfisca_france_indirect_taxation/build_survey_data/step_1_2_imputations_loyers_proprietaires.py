@@ -1,5 +1,3 @@
-
-
 import os
 
 
@@ -16,13 +14,13 @@ from openfisca_survey_manager.survey_collections import SurveyCollection
 log = logging.getLogger(__name__)
 
 
-# **************************************************************************************************************************
-# * Etape n° 0-1-2 : imputation de loyers pour les ménages proprietaires
-# **************************************************************************************************************************
+# Etape 0-1-2: Imputation de loyers pour les ménages propriétaires
+
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
     """Impute rent for owner"""
     assert temporary_store is not None
+    temporary_store.open()
     assert year is not None
 
     # Load data
@@ -118,7 +116,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
         loyers_imputes = loyers_imputes[kept_variables]
         loyers_imputes.rename(columns = {'rev801_d': 'poste_04_2_1'}, inplace = True)
 
-    if year == 2011:
+    if year in [2011, 2017]:
         loyers_imputes = survey.get_values(table = "menage", ignorecase = True)
 
         kept_variables = ['ident_men', 'rev801']
@@ -147,13 +145,14 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
 
     # Save in temporary store
     temporary_store['depenses_bdf_{}'.format(year)] = depenses
+    temporary_store.close()
 
 
 if __name__ == '__main__':
     import sys
     import time
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    deb = time.clock()
+    deb = time.process_time()()
     year = 1995
     build_imputation_loyers_proprietaires(year = year)
-    log.info("step 0_1_2_build_imputation_loyers_proprietaires duration is {}".format(time.clock() - deb))
+    log.info("step 0_1_2_build_imputation_loyers_proprietaires duration is {}".format(time.process_time()() - deb))

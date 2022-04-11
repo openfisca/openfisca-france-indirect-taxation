@@ -2,6 +2,10 @@ description: Autres alcools (rhum, bouilleurs de cru, etc.)
 rhum_dom:
   description: Rhum des DOM
   values:
+    2021-01-01:
+      value: 901.84
+    2020-01-01:
+      value: 893.3
     2019-01-01:
       value: 879.72
     2018-01-01:
@@ -44,6 +48,10 @@ rhum_dom:
 autres_alcools:
   description: Autres alcools
   values:
+    2021-01-01:
+      value: 1802.67
+    2020-01-01:
+      value: 1786.59
     2019-01-01:
       value: 1758.45
     2018-01-01:
@@ -84,6 +92,10 @@ autres_alcools:
 bouilleurs_cru_t_q_definis_art_317:
   description: Bouilleurs de cru t.q. définis art 317
   values:
+    2021-01-01:
+      value: 901.33
+    2020-01-01:
+      value: 893.8
     2019-01-01:
       value: 879.24
     2018-01-01:

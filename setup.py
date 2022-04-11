@@ -1,8 +1,7 @@
 #! /usr/bin/env python
-# -*- coding: utf-8 -*-
 
 
-"""France specific indirect taxation model for OpenFisca -- a versatile microsimulation free software"""
+"""France specific indirect taxation model for OpenFisca -- a versatile microsimulation free software."""
 
 
 from setuptools import setup, find_packages
@@ -34,31 +33,27 @@ setup(
     entry_points = {
         'console_scripts': ['build-survey-data=openfisca_france_indirect_taxation.scripts.build_survey_data:main'],
         },
-
     extras_require = dict(
         dev = [
-            "autopep8 ==1.4.4",
-            "flake8 >=3.7.0,<3.8.0",
-            # "flake8-print", Bring back when one has time to clear all prints
-            'matplotlib',
-            'nbconvert >= 5.5.0',
-            "pytest",  # < 5.0",
-            'ruamel.yaml',
-            'seaborn',
-            'tables',
+            'autopep8 >= 1.4.0, < 1.6.0',
+            'flake8 >= 3.9.0, < 4.0.0',
+            'flake8-bugbear >= 19.3.0, < 20.0.0',
+            'ipdb >=0.13.9, < 1.0.0',
+            'matplotlib <= 3.4.3, < 4.0.0',
+            'nbconvert >= 5.5.0, < 6.0.0',
+            "pytest < 6.0",
+            'ruamel.yaml >= 0.17.16, < 1.0.0',
+            'seaborn >= 0.11.2, < 1.0.0',
             ],
         ),
     include_package_data = True,  # Will read MANIFEST.in
     install_requires = [
-        "numpy >= 1.11, <= 1.17",
-        'Babel >= 0.9.4',
-        'OpenFisca-Core >= 0.5.4',
-        'OpenFisca-Survey-Manager >= 0.37.0,<1.0',
-        'python-slugify',
-        'PyYAML >= 3.10',
-        "pandas",  # <= 0.24.2",
-        "statsmodels >= 0.10.1, <1.0",
-        'xlrd >= 1.0.0',
+        'Babel >= 2.9.1, < 3.0.0',
+        'OpenFisca-Core >= 35.8.0, < 36.0',
+        'OpenFisca-Survey-Manager >= 0.46.11, < 1.0',
+        'python-slugify >= 5.0.2, < 6.0.0',
+        'xlrd >= 2.0.1, < 3.0.0',
+        "statsmodels >= 0.10.1, < 1.0",
         ],
     packages = find_packages(),
     )

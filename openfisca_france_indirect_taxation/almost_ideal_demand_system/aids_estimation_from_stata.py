@@ -20,7 +20,7 @@ def create_data_elasticities():
     dataframe = data_quaids[liste_elasticities + ['ident_men', 'year']].copy()
 
     dataframe = dataframe.fillna(0)
-    dataframe_2011 = dataframe.query('year == 2011')
+    dataframe_2011 = dataframe.query('year == 2017')
 
     for j in range(1, 4):
         print((dataframe_2011['elas_price_{0}_{0}'.format(j)].mean()))

@@ -1,4 +1,4 @@
-poste2011,posteCOICOP,label2011,Nomenclature correspondante pour la TVA,Nomenclature correspondante si il y a une autre taxe,Unnamed: 5
+poste2017,posteCOICOP,label2017,Nomenclature correspondante pour la TVA,Nomenclature correspondante si il y a une autre taxe,Unnamed: 5
 c01111,111,Riz sous toutes ses formes et produits à base de riz,3,,TVA Taux réduit
 c01112,111,Pain et autres produits de boulangerie et de viennoiserie yc biscuits et gâteaux,3,,TVA Taux réduit
 c01113,111,Pâtes alimentaires sous toutes leurs formes et plats à base de pâtes,3,,TVA Taux réduit
@@ -73,7 +73,6 @@ c02131,213,bière et boissons à base de bière,1,9,TVA taux plein
 c02211,2201,cigarettes,1,5,TVA taux plein
 c02212,2202,cigares et cigarillos,1,6,TVA taux plein
 c02213,2203,tabac sous d'autres formes et produits connexes,1,7,TVA taux plein
-c02311,230,Stupéfiants ,20,,Pas de taxe
 c02411,2411,"Dépenses de boissons alcoolisées, tabac et stupéfiants : cadeau offert à un autre",,,
 c03111,311,Tissus pour vêtements,1,,TVA taux plein
 c03121,312,Vêtements pour homme,1,,TVA taux plein
@@ -92,7 +91,6 @@ c04121,412,Loyers (hors charges ou avec charges non isolables) des locataires au
 c04311,431,Produits destinés aux travaux courants d’entretien et de réparation du logement ,1,,TVA taux plein
 c04321,432,"Services d'entretien et petites réparation dans le logement (plombier, entretien",3,,TVA Taux réduit
 c04411,442,Redevance d’enlèvement des ordures,1 puis 3 depuis 2000,,
-c04421,44131,Services d’assainissement,2,,TVA Taux intermédiaire
 c04431,441,"Factures d’eau résidence principale, autre logement, dépendance, terrain",3,,TVA Taux réduit
 c04441,444,Charges collectives relatives au logement (payées isolément du loyer ou crédit),,,
 c04500,4511,Facture électricité + gaz (non dissociables),3,,TVA Taux réduit

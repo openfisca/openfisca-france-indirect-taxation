@@ -2,6 +2,10 @@ description: Produits intermédiaires (vins de liqueurs, vins doux naturels, etc
 vins_doux_naturels_vins_liqueurs_aop_mentionnes_aux_articles_417_417_bis_cgi_eur_hl:
   description: Vins doux naturels et vins de liqueurs AOP mentionnés aux articles 417 et 417 bis du CGI (€/hl)
   values:
+    2021-01-01:
+      value: 48.87
+    2020-01-01:
+      value: 48.43
     2019-01-01:
       value: 47.67
     2018-01-01:
@@ -34,6 +38,10 @@ vins_doux_naturels_vins_liqueurs_aop_mentionnes_aux_articles_417_417_bis_cgi_eur
 autres_produits_intermediaires_eur_hl:
   description: Autres produits intermédiaires (€/hl)
   values:
+    2021-01-01:
+      value: 195.47
+    2020-01-01:
+      value: 193.73
     2019-01-01:
       value: 190.68
     2018-01-01:

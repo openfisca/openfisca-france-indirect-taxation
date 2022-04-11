@@ -5,9 +5,12 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 from openfisca_france_indirect_taxation.projects.base import elasticite_tabac
 
 
-def create_reforme_tabac(baseline_year = None):
+def create_reforme_tabac(baseline_year = None, elasticite = None):
 
     assert baseline_year is not None
+
+    if elasticite is None:
+        elasticite = elasticite_tabac
 
     class reforme_tabac(Reform):
         key = 'reforme_tabac_budget',
@@ -29,7 +32,7 @@ def create_reforme_tabac(baseline_year = None):
                     depenses_cigarettes = (
                         baseline_depenses_cigarettes
                         * (
-                            1 + (1 + elasticite_tabac) * (
+                            1 + (1 + elasticite) * (
                                 (prix_paquet_reforme - prix_paquet_baseline) / prix_paquet_baseline
                                 )
                             ))
@@ -52,7 +55,7 @@ def create_reforme_tabac(baseline_year = None):
                     depenses_tabac_a_rouler = (
                         baseline_depenses_tabac_a_rouler
                         * (
-                            1 + (1 + elasticite_tabac) * (
+                            1 + (1 + elasticite) * (
                                 (prix_reforme - prix_baseline) / prix_baseline
                                 )
                             ))

@@ -184,7 +184,8 @@ def collapse(dataframe, groupe, var):
 
 def dataframe_by_group(
         survey_scenario, category, variables,
-        use_baseline = False, difference = False
+        use_baseline = False, difference = False,
+        aggfunc = 'mean',
         ):
     pivot_table = pandas.DataFrame()
     period = survey_scenario.year
@@ -197,7 +198,8 @@ def dataframe_by_group(
                     values = [values_reference],
                     columns = [category],
                     difference = True,
-                    period = period)
+                    period = period,
+                    aggfunc = aggfunc)
                 ])
     else:
         if use_baseline:
@@ -208,7 +210,8 @@ def dataframe_by_group(
                         values = [values_reference],
                         columns = [category],
                         use_baseline = True,
-                        period = period)
+                        period = period,
+                        aggfunc = aggfunc)
                     ])
         else:
             for values_reform in variables:
@@ -217,7 +220,8 @@ def dataframe_by_group(
                     survey_scenario.compute_pivot_table(
                         values = [values_reform],
                         columns = [category],
-                        period = period
+                        period = period,
+                        aggfunc = aggfunc
                         )
                     ])
 

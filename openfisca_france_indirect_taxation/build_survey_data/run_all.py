@@ -36,40 +36,49 @@ from openfisca_france_indirect_taxation.utils import assets_directory
 log = logging.getLogger(__name__)
 
 
+YEAR_DATA_LIST = (2005, 2011, 2017)
+
+
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
-def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011], skip_matching = False):
+def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = False):
 
     assert temporary_store is not None
 
     # Quelle base de données choisir pour le calage ?
-    year_data = find_nearest_inferior(year_data_list, year_calage)
+    year_data = find_nearest_inferior(YEAR_DATA_LIST, year_calage)
 
     # 4 étape parallèles d'homogénéisation des données sources :
-    # Gestion des dépenses de consommation:
+    # 1. Gestion des dépenses de consommation:
     build_depenses_homogenisees(year = year_data)
     build_imputation_loyers_proprietaires(year = year_data)
-
+    temporary_store.open()
     depenses = temporary_store["depenses_bdf_{}".format(year_calage)]
     depenses.index = depenses.index.astype(ident_men_dtype)
+    temporary_store.close()
 
-    # Gestion des véhicules:
+    # 2. Gestion des véhicules:
     build_homogeneisation_vehicules(year = year_data)
+
     if year_calage != 1995:
+        temporary_store.open()
         vehicule = temporary_store['automobile_{}'.format(year_data)]
+        temporary_store.close()
         vehicule.index = vehicule.index.astype(ident_men_dtype)
     else:
         vehicule = None
 
-    # Gestion des variables socio démographiques:
+    # 3. Gestion des variables socio démographiques:
     build_homogeneisation_caracteristiques_sociales(year = year_data)
+    temporary_store.open()
     menage = temporary_store['donnes_socio_demog_{}'.format(year_data)]
     menage.index = menage.index.astype(ident_men_dtype)
+    temporary_store.close()
 
-    # Gestion des variables revenus:
+    # 4. Gestion des variables revenus:
     build_homogeneisation_revenus_menages(year = year_data)
+    temporary_store.open()
     revenus = temporary_store["revenus_{}".format(year_calage)]
     revenus.index = revenus.index.astype(ident_men_dtype)
-
     temporary_store.close()
 
     # Concaténation des résultas de ces 4 étapes
@@ -93,15 +102,21 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
         sort = True
         )
     if year_data == 2005:
-        for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence']:
-            data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
-        for variable in ['age{}'.format(i) for i in range(3, 14)] + ['agecj', 'agfinetu', 'agfinetu_cj', 'nenfhors']:
-            data_frame.loc[data_frame[variable].isnull(), variable] = 0
+        nullified_variables = (
+            ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence']
+            + ['age{}'.format(i) for i in range(3, 14)] + ['agecj', 'agfinetu', 'agfinetu_cj', 'nenfhors']
+            )
+        data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
 
     if year_data == 2011:
-        for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
-        'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']:
-            data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
+        nullified_variables = ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
+            'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']
+        data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
+
+    if year_data == 2017:
+        nullified_variables = ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
+            'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute', 'aidlog2']
+        data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
 
     if year_data == 2005:
         data_frame['ident_men'] = list(range(0, len(data_frame)))
@@ -118,10 +133,10 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
         log.info('ignoring reset_index because {}'.format(e))
 
     # On ne garde que les ménages métropolitains
-    if year_data == 2011:
+    if year_data in [2011, 2017]:
         data_frame = data_frame.query('zeat != 0').copy()
 
-    if year_data == 2011 and not skip_matching:
+    if year_data in [2011, 2017] and not skip_matching:
         # Save file needed by step_5_data_from_matching
         save(data_frame, year_data, year_calage)
         try:
@@ -130,7 +145,7 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
                 os.path.join(
                     assets_directory,
                     'matching',
-                    'data_for_run_all.csv'
+                    'data_for_run_all_{}.csv'.format(year_data)
                     ), sep =',', decimal = '.'
                 )
         except FileNotFoundError as e:
@@ -138,11 +153,10 @@ def run_all_steps(temporary_store = None, year_calage = 2011, year_data_list = [
             log.debug(e)
             log.debug("Skipping this step")
             from openfisca_france_indirect_taxation.build_survey_data import step_5_data_from_matching
-            data_matched = step_5_data_from_matching.main()
+            data_matched = step_5_data_from_matching.main(year_data)
 
         data_matched['ident_men'] = data_matched['ident_men'].astype(str).copy()
         data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
-
     save(data_frame, year_data, year_calage)
 
 
@@ -181,8 +195,9 @@ def run(years_calage, skip_matching = False):
     import time
     for year_calage in years_calage:
         start = time.time()
+        log.info(f"Starting year = {year_calage}")
         run_all_steps(year_calage = year_calage, skip_matching = skip_matching)
-        log.info("Finished {}".format(time.time() - start))
+        log.info(f"Finished in {(time.time() - start)} for year = {year_calage}")
 
 
 if __name__ == '__main__':
