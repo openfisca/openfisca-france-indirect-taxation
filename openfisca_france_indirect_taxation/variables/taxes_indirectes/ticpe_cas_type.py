@@ -5,10 +5,11 @@ from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable
 
 ## ticpe diesel
 
-class diesel_ticpe_cas_type(YearlyVariable):
+class diesel_ticpe_cas_type(Variable):
     value_type = float
     entity = Menage
     label = "Calcul du montant de TICPE sur le diesel"
+    definition_period = YEAR
 
     def formula(menage, period, parameters):
         region = menage('region', period)
@@ -78,10 +79,11 @@ class sp_e10_ticpe_cas_type(Variable):
         return montant_sp_e10_ticpe
 
 
-class sp95_ticpe_cas_type(YearlyVariable):
+class sp95_ticpe_cas_type(Variable):
     value_type = float
     entity = Menage
     label = "Calcul du montant de TICPE sur le sp_95"
+    definition_period = YEAR
 
     def formula(menage, period, parameters):
         region = menage('region', period)
@@ -99,10 +101,11 @@ class sp95_ticpe_cas_type(YearlyVariable):
         montant_sp95_ticpe = nombre_litres_sp_95 * (accise_sp_95_ticpe / 100)
         return montant_sp95_ticpe
 
-class sp98_ticpe_cas_type(YearlyVariable):
+class sp98_ticpe_cas_type(Variable):
     value_type = float
     entity = Menage
     label = "Calcul du montant de TICPE sur le sp_98"
+    definition_period = YEAR
 
     def formula(menage, period, parameters):
         region = menage('region', period)
@@ -138,10 +141,11 @@ class super_plombe_ticpe_cas_type(Variable):
 
 ## ticpe combustibles liquides
 
-class combustibles_liquides_ticpe_cas_type(YearlyVariable):
+class combustibles_liquides_ticpe_cas_type(Variable):
     value_type = float
     entity = Menage
     label = "Calcul du montant de TICPE sur les combustibles liquides"
+    definition_period = YEAR
 
     def formula(menage, period, parameters):
         nombre_litres_combustibles_liquides = menage('nombre_litres_combustibles_liquides', period)
@@ -152,10 +156,11 @@ class combustibles_liquides_ticpe_cas_type(YearlyVariable):
 
 ## total taxs energies (ticpe diesel + ticpe essence + ticpe combustibles liquides)
 
-class total_taxes_energies_cas_type(YearlyVariable):
+class total_taxes_energies_cas_type(Variable):
     value_type = float
     entity = Menage
     label = "Calcul du montant de la TICPE sur tous les carburants cumulés"
+    definition_period = YEAR
 
     def formula(menage, period):
         essence_ticpe = menage('essence_ticpe_cas_type', period)
@@ -167,10 +172,11 @@ class total_taxes_energies_cas_type(YearlyVariable):
 
 ## cout total hors taxe
 
-class cout_total_ht_cas_type(YearlyVariable):
+class cout_total_ht_cas_type(Variable):
     value_type = float
     entity = Menage
     label = "Calcul du cout total du carburant (essence + diesel + combustibles liquides) hors taxes"
+    definition_period = YEAR
 
     def formula(menage, period, parameters):
         nombre_litres_diesel = menage('nombre_litres_diesel', period)
@@ -200,7 +206,7 @@ class cout_total_ht_cas_type(YearlyVariable):
 
 ## tva sur cout ht carburant
 
-class tva_cout_ht_cas_type(YearlyVariable):
+class tva_cout_ht_cas_type(Variable):
     value_type = float
     entity = Menage
     label = "Calcul du montant de la tva sur le cout total ht du carburant"
@@ -216,7 +222,7 @@ class tva_cout_ht_cas_type(YearlyVariable):
 
 ## tva sur ticpe carburant
 
-class tva_ticpe_cas_type(YearlyVariable):
+class tva_ticpe_cas_type(Variable):
     value_type = float
     entity = Menage
     label = "Calcul du montant de la tva sur la TICPE du carburant"
@@ -232,7 +238,7 @@ class tva_ticpe_cas_type(YearlyVariable):
 
 ## cout total ttc
 
-class cout_total_ttc_cas_type(YearlyVariable):
+class cout_total_ttc_cas_type(Variable):
     value_type = float
     entity = Menage
     label = "Calcul du cout total du carburant pour le menage (cout_ht + ticpe + tva sur ticpe + tva sur cout hors tace)"
