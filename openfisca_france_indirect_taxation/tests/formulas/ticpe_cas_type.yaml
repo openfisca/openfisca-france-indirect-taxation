@@ -11,7 +11,7 @@
 
 ## ticpe essence intermediaire
 
-- name: "Test sp_e10_ticpe_cas_type"
+- name: "sp_e10_ticpe_cas_type"
   period: 2022
   absolute_error_margin: .01
   input:
