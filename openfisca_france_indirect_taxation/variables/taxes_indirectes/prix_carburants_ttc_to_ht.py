@@ -26,7 +26,7 @@ class prix_litre_diesel_ht(Variable):
         diesel_ht = ((diesel_ttc_hectolitre /100) / (1 + taux_plein_tva) ) - (majoration_ticpe_diesel_hectolitre / 100)
         return diesel_ht
 
-class prix_litre_super_95_e10_ht(Variable):
+class prix_litre_super_e10_ht(Variable):
     value_type = float
     entity = Menage
     label = "prix de l'essence super e10 ht"
