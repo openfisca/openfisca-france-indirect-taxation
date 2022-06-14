@@ -112,8 +112,8 @@ class essence_sp95_ticpe(Variable):
             dtype=np.float32
         )
         accise_sp_95_ticpe = accise_super95 + majoration_ticpe_super95
-        nombre_litres_sp_95 = menage('nombre_litres_sp95', period)
-        montant_sp95_ticpe = nombre_litres_sp_95 * (accise_sp_95_ticpe / 100)
+        nombre_litres_essence_sp95 = menage('nombre_litres_essence_sp95', period)
+        montant_sp95_ticpe = nombre_litres_essence_sp95 * (accise_sp_95_ticpe / 100)
         return montant_sp95_ticpe
 
 class essence_sp98_ticpe(Variable):
@@ -134,8 +134,8 @@ class essence_sp98_ticpe(Variable):
             dtype=np.float32
         )
         accise_sp_98_ticpe = accise_super98 + majoration_ticpe_super98
-        nombre_litres_sp_98 = menage('nombre_litres_sp98', period)
-        montant_sp98_ticpe = nombre_litres_sp_98 * (accise_sp_98_ticpe / 100)
+        nombre_litres_essence_sp98 = menage('nombre_litres_essence_sp98', period)
+        montant_sp98_ticpe = nombre_litres_essence_sp98 * (accise_sp_98_ticpe / 100)
         return montant_sp98_ticpe
 
 class essence_super_plombe_ticpe(Variable):
@@ -147,11 +147,8 @@ class essence_super_plombe_ticpe(Variable):
 
     def formula(menage, period, parameters):
         accise_super_plombe_ticpe = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_plombe
-
-        nombre_litres_super_plombe = menage('nombre_litres_super_plombe', period)
-
-        montant_super_plombe_ticpe = nombre_litres_super_plombe * (accise_super_plombe_ticpe /100)
-
+        nombre_litres_essence_super_plombe = menage('nombre_litres_essence_super_plombe', period)
+        montant_super_plombe_ticpe = nombre_litres_essence_super_plombe * (accise_super_plombe_ticpe /100)
         return montant_super_plombe_ticpe
 
 class essence_e85_ticpe(Variable):  # Il a été introduit en 20071 sur le marché français.
@@ -162,11 +159,8 @@ class essence_e85_ticpe(Variable):  # Il a été introduit en 20071 sur le march
 
     def formula_2007(menage, period, parameters):
         accise_e85 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e_85_utilise_comme_carburant_hectolitre
-
-        nombre_litres_e85 = menage('nombre_litres_e85', period)
-
-        montant_e85_ticpe = nombre_litres_e85 * (accise_e85 /100)
-
+        nombre_litres_essence_e85 = menage('nombre_litres_essence_e85', period)
+        montant_e85_ticpe = nombre_litres_essence_e85 * (accise_e85 /100)
         return montant_e85_ticpe
 
 ## TICPE essence total:
