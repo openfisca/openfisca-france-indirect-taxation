@@ -32,7 +32,7 @@ class nombre_litres_gazole_b7(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period, parameters):
+    def formula_2017(menage, period, parameters):
         cout_gazole_b10_ttc = menage('cout_gazole_b10_ttc', period)
         prix_gazole_b10_hectolitre_ttc = parameters(period).prix_carburants.diesel_ttc   ### à modifier avec le nouveau CSV + litre?
         nombre_litres_gazole_b10 = cout_gazole_b10_ttc / ( prix_gazole_b10_hectolitre_ttc / 100 )

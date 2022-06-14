@@ -25,7 +25,7 @@ class tva_sur_gazole_b10(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period, parameters):
+    def formula_2017(menage, period, parameters):
         cout_gazole_b10_ttc = menage('cout_gazole_b10_ttc', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
         Cout_gazole_b10_hors_tva = cout_gazole_b10_ttc * (1 / (1 + taux_plein_tva) )
@@ -41,7 +41,7 @@ class tva_sur_essence_sp95_e10(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period, parameters):
+    def formula_2009(menage, period, parameters):
         cout_essence_sp95_e10_ttc = menage('cout_essence_sp95_e10_ttc', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
         Cout_essence_sp95_e10_hors_tva = cout_essence_sp95_e10_ttc * (1 / (1 + taux_plein_tva) )
@@ -97,7 +97,7 @@ class tva_sur_essence_e85(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period, parameters):
+    def formula_2007(menage, period, parameters):
         cout_essence_e85_ttc = menage('cout_essence_e85_ttc', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
         Cout_essence_essence_e85_hors_tva = cout_essence_e85_ttc * (1 / (1 + taux_plein_tva) )

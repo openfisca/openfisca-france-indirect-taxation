@@ -34,7 +34,7 @@ class gazole_b10_ticpe(Variable):
     label = "Calcul du montant de TICPE sur le gazole B10"
     definition_period = YEAR
 
-    def formula(menage, period, parameters):
+    def formula_2017(menage, period, parameters):
         region = menage('region', period)
         accise_gazole_b10 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.Gazol_b_10_hectolitre
         major_ticpe_gazole = parameters(period).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole

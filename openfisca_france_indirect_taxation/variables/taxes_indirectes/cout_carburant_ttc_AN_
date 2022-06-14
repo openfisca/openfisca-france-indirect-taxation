@@ -2,8 +2,7 @@ import numpy as np
 
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
 
-# cout different type de gazole:
-
+# cout different type de gazole ttc:
 class cout_gazole_b7_ttc(Variable):
     value_type = float
     entity = Menage
@@ -24,14 +23,33 @@ class cout_gazole_b10_ttc(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period, parameters):
+    def formula_2017(menage, period, parameters):
         nombre_litres_gazole_b10 = menage('nombre_litres_gazole_b10', period)
         prix_gazole_b10_hectolitre_ttc = parameters(period).prix_carburants.diesel_ttc   ### à modifier avec le nouveau CSV + litre?
         cout_gazole_b10_ttc = nombre_litres_gazole_b10 * ( prix_gazole_b10_hectolitre_ttc / 100)
         return cout_gazole_b10_ttc
 
+# cout gazole total ht:
+class cout_gazole_total_ttc(Variable):
+    value_type = float
+    entity = Menage
+    label = "cout total du gazole ttc"
+    definition_period = YEAR
+    default_value = 0
 
-# cout different type d'essence:
+    def formula_2017(menage, period):
+        cout_gazole_b7_ttc = menage('cout_gazole_b7_ttc', period)
+        cout_gazole_b10_ttc = menage('cout_gazole_b10_ttc', period)
+        cout_gazole_total_ttc = (cout_gazole_b7_ttc + cout_gazole_b10_ttc)
+        return cout_gazole_total_ttc
+
+    def formula(menage, period):
+        cout_gazole_b7_ttc = menage('cout_gazole_b7_ttc', period)
+        cout_gazole_total_ttc = cout_gazole_b7_ttc
+        return cout_gazole_total_ttc
+
+
+# cout ttc different type d'essence:
 
 class cout_essence_sp95_e10_ttc(Variable):
     value_type = float
@@ -40,7 +58,7 @@ class cout_essence_sp95_e10_ttc(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period, parameters):
+    def formula_2009(menage, period, parameters):
         nombre_litres_essence_sp95_e10 = menage('nombre_litres_essence_sp95_e10', period)
         prix_essence_sp95_e10_hectolitre_ttc = parameters(period).prix_carburants.super_95_e10_ttc ### à modifier avec le nouveau CSV + litre?
         cout_essence_sp95_e10_ttc = nombre_litres_essence_sp95_e10 * ( prix_essence_sp95_e10_hectolitre_ttc / 100)
@@ -92,13 +110,13 @@ class cout_essence_e85_ttc(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period, parameters):
+    def formula_2007(menage, period, parameters):
         nombre_litres_essence_e85 = menage('nombre_litres_essence_e85', period)
         prix_essence_e85_hectolitre_ttc = parameters(period).prix_carburants.super_95_ttc ### à modifier avec le nouveau CSV + FAUX CAR SP95
         cout_essence_e85_ttc = nombre_litres_essence_e85 * ( prix_essence_e85_hectolitre_ttc / 100)
         return cout_essence_e85_ttc
 
-# cout gpl carburant:
+# cout ttc gaz de pétrole liquéfié carburant:
 
 class cout_gpl_carburant_ttc(Variable):
     value_type = float
