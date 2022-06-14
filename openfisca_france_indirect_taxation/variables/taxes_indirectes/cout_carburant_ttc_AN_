@@ -49,7 +49,7 @@ class cout_gazole_total_ttc(Variable):
         return cout_gazole_total_ttc
 
 
-# cout ttc different type d'essence:
+# cout different type d'essence ttc:
 
 class cout_essence_sp95_e10_ttc(Variable):
     value_type = float
@@ -116,7 +116,36 @@ class cout_essence_e85_ttc(Variable):
         cout_essence_e85_ttc = nombre_litres_essence_e85 * ( prix_essence_e85_hectolitre_ttc / 100)
         return cout_essence_e85_ttc
 
-# cout ttc gaz de pétrole liquéfié carburant:
+# cout essence total ttc:
+class cout_essence_total_ttc(Variable):
+    value_type = float
+    entity = Menage
+    label = "Calcul du montant des couts sur tous les types d'essences cumulés ttc"
+    definition_period = YEAR
+
+    def formula_2009(menage, period):
+        cout_essence_sp95_ttc = menage('cout_essence_sp95_ttc', period)
+        cout_essence_sp98_ttc = menage('cout_essence_sp98_ttc', period)
+        cout_essence_essence_e85_ttc = menage('cout_essence_essence_e85_ttc', period)
+        cout_essence_sp95_e10_ttc = menage('cout_essence_sp95_e10_ttc', period)
+        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_essence_e85_ttc + cout_essence_sp95_e10_ttc)
+        return cout_essence_total_ttc
+
+    def formula_2007(menage, period):
+        cout_essence_sp95_ttc = menage('cout_essence_sp95_ttc', period)
+        cout_essence_sp98_ttc = menage('cout_essence_sp98_ttc', period)
+        cout_essence_essence_e85_ttc = menage('cout_essence_essence_e85_ttc', period)
+        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_essence_e85_ttc)
+        return cout_essence_total_ttc
+
+    def formula_1990(menage, period):
+        cout_essence_sp95_ttc = menage('cout_essence_sp95_ttc', period)
+        cout_essence_sp98_ttc = menage('cout_essence_sp98_ttc', period)
+        cout_essence_super_plombe_ttc = menage('cout_essence_super_plombe_ttc', period)
+        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_super_plombe_ttc)
+        return cout_essence_total_ttc
+
+# cout gaz de pétrole liquéfié carburant ttc:
 
 class cout_gpl_carburant_ttc(Variable):
     value_type = float
@@ -130,3 +159,17 @@ class cout_gpl_carburant_ttc(Variable):
         prix_gpl_carburant_ttc = parameters(period).prix_carburants.gplc_ttc ### à modifier avec le nouveau CSV + litre?
         cout_gpl_carburant_ttc = nombre_litres_gpl_carburant * ( prix_gpl_carburant_ttc / 100)
         return cout_gpl_carburant_ttc
+
+# cout carburant total ht:
+class cout_carburant_total_ht(Variable):
+    value_type = float
+    entity = Menage
+    label = "Calcul du montant des couts sur tous les carburants cumulés ttc"
+    definition_period = YEAR
+
+    def formula(menage, period):
+        cout_essence_total_ht = menage('cout_essence_total_ht', period)
+        cout_gazole_total_ht = menage('cout_gazole_total_ht', period)
+        cout_gpl_carburant_ht = menage('cout_gpl_carburant_ht', period)
+        cout_carburant_total_ht = cout_gazole_total_ht + cout_essence_total_ht + cout_gpl_carburant_ht
+        return cout_carburant_total_ht

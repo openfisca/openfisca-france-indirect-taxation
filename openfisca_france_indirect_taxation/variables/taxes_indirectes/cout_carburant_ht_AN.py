@@ -70,7 +70,7 @@ class cout_essence_sp95_e10_ht(Variable):
         cout_essence_sp95_e10_ht = Cout_essence_sp95_e10_hors_tva - essence_sp95_e10_ticpe
         return cout_essence_sp95_e10_ht
 
-class cout_essence_SP95_ht(Variable):
+class cout_essence_sp95_ht(Variable):
     value_type = float
     entity = Menage
     label = "cout de l'essence SP95 ht"
@@ -85,7 +85,7 @@ class cout_essence_SP95_ht(Variable):
         cout_essence_sp95_ht = Cout_essence_sp95_hors_tva - essence_sp95_ticpe
         return cout_essence_sp95_ht
 
-class cout_essence_SP98_ht(Variable):
+class cout_essence_sp98_ht(Variable):
     value_type = float
     entity = Menage
     label = "cout de l'essence SP98 ht"
@@ -135,29 +135,29 @@ class cout_essence_essence_e85_ht(Variable):
 class cout_essence_total_ht(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur tous les types d'essences cumulés"
+    label = "Calcul du montant des couts sur tous les types d'essences cumulés ht"
     definition_period = YEAR
 
     def formula_2009(menage, period):
-        cout_essence_SP95_ht = menage('cout_essence_SP95_ht', period)
-        cout_essence_SP98_ht = menage('cout_essence_SP98_ht', period)
+        cout_essence_sp95_ht = menage('cout_essence_sp95_ht', period)
+        cout_essence_sp98_ht = menage('cout_essence_sp98_ht', period)
         cout_essence_essence_e85_ht = menage('cout_essence_essence_e85_ht', period)
         cout_essence_sp95_e10_ht = menage('cout_essence_sp95_e10_ht', period)
-        cout_essence_total_ht = (cout_essence_SP95_ht + cout_essence_SP98_ht + cout_essence_essence_e85_ht + cout_essence_sp95_e10_ht)
+        cout_essence_total_ht = (cout_essence_sp95_ht + cout_essence_sp98_ht + cout_essence_essence_e85_ht + cout_essence_sp95_e10_ht)
         return cout_essence_total_ht
 
     def formula_2007(menage, period):
-        cout_essence_SP95_ht = menage('cout_essence_SP95_ht', period)
-        cout_essence_SP98_ht = menage('cout_essence_SP98_ht', period)
+        cout_essence_sp95_ht = menage('cout_essence_sp95_ht', period)
+        cout_essence_sp98_ht = menage('cout_essence_sp98_ht', period)
         cout_essence_essence_e85_ht = menage('cout_essence_essence_e85_ht', period)
-        cout_essence_total_ht = (cout_essence_SP95_ht + cout_essence_SP98_ht + cout_essence_essence_e85_ht)
+        cout_essence_total_ht = (cout_essence_sp95_ht + cout_essence_sp98_ht + cout_essence_essence_e85_ht)
         return cout_essence_total_ht
 
     def formula_1990(menage, period):
-        cout_essence_SP95_ht = menage('cout_essence_SP95_ht', period)
-        cout_essence_SP98_ht = menage('cout_essence_SP98_ht', period)
+        cout_essence_sp95_ht = menage('cout_essence_sp95_ht', period)
+        cout_essence_sp98_ht = menage('cout_essence_sp98_ht', period)
         cout_essence_super_plombe_ht = menage('cout_essence_super_plombe_ht', period)
-        cout_essence_total_ht = (cout_essence_SP95_ht + cout_essence_SP98_ht + cout_essence_super_plombe_ht)
+        cout_essence_total_ht = (cout_essence_sp95_ht + cout_essence_sp98_ht + cout_essence_super_plombe_ht)
         return cout_essence_total_ht
 
 # cout gaz de pétrole liquéfié carburant ht:
@@ -177,11 +177,11 @@ class cout_gpl_carburant_ht(Variable):
         cout_gpl_carburant_ht = Cout_gpl_carburant_hors_tva - gpl_carburant_ticpe
         return cout_gpl_carburant_ht
 
-# cout carburant total:
+# cout carburant total ht:
 class cout_carburant_total_ht(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur tous les carburants cumulés"
+    label = "Calcul du montant des couts sur tous les carburants cumulés"
     definition_period = YEAR
 
     def formula(menage, period):
