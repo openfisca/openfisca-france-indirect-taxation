@@ -1,0 +1,47 @@
+import numpy as np
+
+from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
+
+# cout different type de gazole:
+
+class cout_gazole_b7_ttc(Variable):
+    value_type = float
+    entity = Menage
+    label = "prix du gazole B7 ht"
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period, parameters):
+        nombre_litres_gazole_b7 = menage('nombre_litres_gazole_b7', period)
+        prix_gazole_b7_hectolitre_ttc = parameters(period).prix_carburants.diesel_ttc   ### à modifier avec le nouveau CSV + litre?
+        cout_gazole_b7_ttc = nombre_litres_gazole_b7 * ( prix_gazole_b7_hectolitre_ttc / 100)
+        return cout_gazole_b7_ttc
+
+class cout_gazole_b10_ttc(Variable):
+    value_type = float
+    entity = Menage
+    label = "prix du gazole B7 ht"
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period, parameters):
+        nombre_litres_gazole_b10 = menage('nombre_litres_gazole_b10', period)
+        prix_gazole_b10_hectolitre_ttc = parameters(period).prix_carburants.diesel_ttc   ### à modifier avec le nouveau CSV + litre?
+        cout_gazole_b10_ttc = nombre_litres_gazole_b10 * ( prix_gazole_b10_hectolitre_ttc / 100)
+        return cout_gazole_b10_ttc
+
+
+# cout different type d'essence:
+
+class cout_essence_sp95_e10_ttc(Variable):
+    value_type = float
+    entity = Menage
+    label = "prix du gazole B7 ht"
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period, parameters):
+        nombre_litres_essence_sp95_e10 = menage('nombre_litres_essence_sp95_e10', period)
+        prix_essence_sp95_e10_hectolitre_ttc = parameters(period).prix_carburants.super_95_e10_ttc ### à modifier avec le nouveau CSV + litre?
+        cout_essence_sp95_e10_ttc = nombre_litres_essence_sp95_e10 * ( prix_essence_sp95_e10_hectolitre_ttc / 100)
+        return cout_essence_sp95_e10_ttc

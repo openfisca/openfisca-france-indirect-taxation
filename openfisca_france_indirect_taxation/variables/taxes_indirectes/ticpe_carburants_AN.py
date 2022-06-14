@@ -28,8 +28,6 @@ class gazole_b7_ticpe(Variable):
         montant_gazole_b7_ticpe = nombre_litres_gazole_b7 * (accise_gazole_b7_total / 100)
         return montant_gazole_b7_ticpe
 
-        Gazol_b_10_hectolitre
-
 class gazole_b10_ticpe(Variable):
     value_type = float
     entity = Menage
@@ -38,7 +36,7 @@ class gazole_b10_ticpe(Variable):
 
     def formula(menage, period, parameters):
         region = menage('region', period)
-        accise_gazole_b10 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.gazole
+        accise_gazole_b10 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.Gazol_b_10_hectolitre
         major_ticpe_gazole = parameters(period).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole
         major_regionale_ticpe_gazole = np.fromiter(
             (
@@ -91,8 +89,8 @@ class essence_sp95_e10_ticpe(Variable):  # paru au Journal Officiel le 31 janvie
             dtype=np.float32
         )
         accise_sp_e10_ticpe = accise_super_e10 + majoration_ticpe_super_e10
-        nombre_litres_sp_e10 = menage('nombre_litres_sp95_e10', period)
-        montant_sp_e10_ticpe = nombre_litres_sp_e10 * (accise_sp_e10_ticpe / 100)
+        nombre_litres_essence_sp95_e10 = menage('nombre_litres_essence_sp95_e10', period)
+        montant_sp_e10_ticpe = nombre_litres_essence_sp95_e10 * (accise_sp_e10_ticpe / 100)
         return montant_sp_e10_ticpe
 
 
