@@ -1,5 +1,4 @@
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
-#from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable
 
 ## caracteristiques menages
 
@@ -10,7 +9,7 @@ class region(Variable):
     definition_period = YEAR
 
 
-## nombre litres diesel
+## nombre de litres par type de gazole
 
 class nombre_litres_gazole_b7(Variable):
     value_type = float
@@ -25,10 +24,10 @@ class nombre_litres_gazole_b7(Variable):
         nombre_litres_gazole_b7 = cout_gazole_b7_ttc / ( prix_gazole_b7_hectolitre_ttc / 100 )
         return nombre_litres_gazole_b7
 
-class nombre_litres_gazole_b7(Variable):
+class nombre_litres_gazole_b10(Variable):
     value_type = float
     entity = Menage
-    label = "nombre de litre de gasoil B7 consommés par le menage"
+    label = "nombre de litre de gasoil B10 consommés par le menage"
     definition_period = YEAR
     default_value = 0
 
@@ -37,6 +36,26 @@ class nombre_litres_gazole_b7(Variable):
         prix_gazole_b10_hectolitre_ttc = parameters(period).prix_carburants.diesel_ttc   ### à modifier avec le nouveau CSV + litre?
         nombre_litres_gazole_b10 = cout_gazole_b10_ttc / ( prix_gazole_b10_hectolitre_ttc / 100 )
         return nombre_litres_gazole_b10
+
+## nombre de litre de gazole total:
+
+class nombre_litres_gazole_total(Variable):
+    value_type = float
+    entity = Menage
+    label = "nombre de litre de gazole total"
+    definition_period = YEAR
+    default_value = 0
+
+    def formula_2017(menage, period):
+        nombre_litres_gazole_b7 = menage('nombre_litres_gazole_b7', period)
+        nombre_litres_gazole_b10 = menage('nombre_litres_gazole_b10', period)
+        nombre_litres_gazole_total = (nombre_litres_gazole_b7 + nombre_litres_gazole_b10)
+        return nombre_litres_gazole_total
+
+    def formula(menage, period):
+        nombre_litres_gazole_b7 = menage('nombre_litres_gazole_b7', period)
+        nombre_litres_gazole_total = nombre_litres_gazole_b7
+        return nombre_litres_gazole_total
 
 ## nombre litres essence
 
@@ -105,7 +124,36 @@ class nombre_litres_essence_e85(Variable):
         nombre_litres_essence_e85 = cout_essence_e85_ttc / ( prix_essence_e85_ttc_hectolitre / 100 )
         return nombre_litres_essence_e85
 
-## nombre litres combustibles liquides
+# montant TVA total sur l'essence
+class nombre_litres_essence_total(Variable):
+    value_type = float
+    entity = Menage
+    label = "nombre de litre d'essence total"
+    definition_period = YEAR
+
+    def formula_2009(menage, period):
+        nombre_litres_essence_sp95 = menage('nombre_litres_essence_sp95', period)
+        nombre_litres_essence_sp98 = menage('nombre_litres_essence_sp98', period)
+        nombre_litres_essence_e85 = menage('nombre_litres_essence_e85', period)
+        nombre_litres_essence_sp95_e10 = menage('nombre_litres_essence_sp95_e10', period)
+        nombre_litres_essence_total = (nombre_litres_essence_sp95 + nombre_litres_essence_sp98 + nombre_litres_essence_e85 + nombre_litres_essence_sp95_e10)
+        return nombre_litres_essence_total
+
+    def formula_2007(menage, period):
+        nombre_litres_essence_sp95 = menage('nombre_litres_essence_sp95', period)
+        nombre_litres_essence_sp98 = menage('nombre_litres_essence_sp98', period)
+        nombre_litres_essence_e85 = menage('nombre_litres_essence_e85', period)
+        nombre_litres_essence_total = (nombre_litres_essence_sp95 + nombre_litres_essence_sp98 + nombre_litres_essence_e85)
+        return nombre_litres_essence_total
+
+    def formula_1990(menage, period):
+        nombre_litres_essence_sp95 = menage('nombre_litres_essence_sp95', period)
+        nombre_litres_essence_sp98 = menage('nombre_litres_essence_sp98', period)
+        nombre_litres_essence_super_plombe = menage('nombre_litres_essence_super_plombe', period)
+        nombre_litres_essence_total = (nombre_litres_essence_sp95 + nombre_litres_essence_sp98 + nombre_litres_essence_super_plombe)
+        return nombre_litres_essence_total
+
+# nombre litres combustibles liquides
 
 class nombre_litres_gpl_carburant(Variable):
     value_type = float
@@ -119,3 +167,17 @@ class nombre_litres_gpl_carburant(Variable):
         prix_cout_gpl_carburant_ttc_hectolitre = parameters(period).prix_carburants.gplc_ttc   ### à modifier avec le nouveau CSV car n'existe pas (pour le moment sp95)
         nombre_litres_gpl_carburant = cout_gpl_carburant_ttc / ( prix_cout_gpl_carburant_ttc_hectolitre / 100 )
         return nombre_litres_gpl_carburant
+
+# nombre de litre total:
+class nombre_litres_total(Variable):
+    value_type = float
+    entity = Menage
+    label = "nombre de litre total"
+    definition_period = YEAR
+
+    def formula(menage, period):
+        nombre_litres_essence_total = menage('nombre_litres_essence_total', period)
+        nombre_litres_gazole_total = menage('nombre_litres_gazole_total', period)
+        nombre_litres_gpl_carburant = menage('nombre_litres_gpl_carburant', period)
+        nombre_litres_total = nombre_litres_gazole_total + nombre_litres_essence_total + nombre_litres_gpl_carburant
+        return nombre_litres_total
