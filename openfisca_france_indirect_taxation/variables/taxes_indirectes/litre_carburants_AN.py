@@ -87,7 +87,7 @@ class nombre_litres_essence_super_plombe(Variable):
     default_value = 0
 
     def formula(menage, period, parameters):
-        cout_essence_super_plombe_ttc = menage('essence_super_plombe_ttc', period)
+        cout_essence_super_plombe_ttc = menage('cout_essence_super_plombe_ttc', period)
         prix_essence_super_plombe_ttc_hectolitre = parameters(period).prix_carburants.super_plombe_ttc   ### à modifier avec le nouveau CSV
         nombre_litres_essence_super_plombe = cout_essence_super_plombe_ttc / ( prix_essence_super_plombe_ttc_hectolitre / 100 )
         return nombre_litres_essence_super_plombe
@@ -110,6 +110,12 @@ class nombre_litres_essence_e85(Variable):
 class nombre_litres_gpl_carburant(Variable):
     value_type = float
     entity = Menage
-    label = "nombre de litre de combustibles liquides consommés par le menage"
+    label = "nombre de litre de gaz de pétrole liquéfié consommés par le menage"
     definition_period = YEAR
     default_value = 0
+
+    def formula(menage, period, parameters):
+        cout_gpl_carburant_ttc = menage('cout_gpl_carburant_ttc', period)
+        prix_cout_gpl_carburant_ttc_hectolitre = parameters(period).prix_carburants.gplc_ttc   ### à modifier avec le nouveau CSV car n'existe pas (pour le moment sp95)
+        nombre_litres_gpl_carburant = cout_gpl_carburant_ttc / ( prix_cout_gpl_carburant_ttc_hectolitre / 100 )
+        return nombre_litres_gpl_carburant
