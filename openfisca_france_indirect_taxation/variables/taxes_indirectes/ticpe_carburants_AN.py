@@ -66,8 +66,8 @@ class gazole_ticpe_total(Variable):
 
     def formula(menage, period):
         gazole_B7_ticpe = menage('gazole_b7_ticpe', period)
-        essence_ticpe = gazole_B7_ticpe
-        return essence_ticpe
+        gazole_ticpe = gazole_B7_ticpe
+        return gazole_ticpe
 
 ## TICPE essence:
 
@@ -151,7 +151,7 @@ class essence_super_plombe_ticpe(Variable):
         montant_super_plombe_ticpe = nombre_litres_essence_super_plombe * (accise_super_plombe_ticpe /100)
         return montant_super_plombe_ticpe
 
-class essence_e85_ticpe(Variable):  # Il a été introduit en 20071 sur le marché français.
+class essence_e85_ticpe(Variable):  # Il a été introduit en 2007 sur le marché français.
     value_type = float
     entity = Menage
     label = "Calcul du montant de la TICPE sur l'essence E85"
@@ -172,25 +172,25 @@ class essence_ticpe_total(Variable):
     definition_period = YEAR
 
     def formula_2009(menage, period):
-        essence_SP95_ticpe = menage('essence_sp95_ticpe', period)
-        essence_SP98_ticpe = menage('essence_sp98_ticpe', period)
-        essence_E85_ticpe = menage('essence_e85_ticpe', period)
-        essence_SP95_E10_ticpe = menage('essence_sp95_e10_ticpe', period)
-        essence_ticpe = (essence_SP95_ticpe + essence_SP98_ticpe + essence_E85_ticpe + essence_SP95_E10_ticpe)
+        essence_sp95_ticpe = menage('essence_sp95_ticpe', period)
+        essence_sp98_ticpe = menage('essence_sp98_ticpe', period)
+        essence_e85_ticpe = menage('essence_e85_ticpe', period)
+        essence_sp95_E10_ticpe = menage('essence_sp95_e10_ticpe', period)
+        essence_ticpe = (essence_sp95_ticpe + essence_sp98_ticpe + essence_e85_ticpe + essence_sp95_E10_ticpe)
         return essence_ticpe
 
     def formula_2007(menage, period):
-        essence_SP95_ticpe = menage('essence_sp95_ticpe', period)
-        essence_SP98_ticpe = menage('essence_sp98_ticpe', period)
-        essence_SP95_E10_ticpe = menage('essence_sp95_e10_ticpe', period)
-        essence_ticpe = (essence_SP95_ticpe + essence_SP98_ticpe + essence_SP95_E10_ticpe)
+        essence_sp95_ticpe = menage('essence_sp95_ticpe', period)
+        essence_sp98_ticpe = menage('essence_sp98_ticpe', period)
+        essence_e85_ticpe = menage('essence_e85_ticpe', period)
+        essence_ticpe = (essence_sp95_ticpe + essence_sp98_ticpe + essence_e85_ticpe)
         return essence_ticpe
 
     def formula_1990(menage, period):
-        essence_SP95_ticpe = menage('essence_sp95_ticpe', period)
-        essence_SP98_ticpe = menage('essence_sp98_ticpe', period)
+        essence_sp95_ticpe = menage('essence_sp95_ticpe', period)
+        essence_sp98_ticpe = menage('essence_sp98_ticpe', period)
         super_plombe_ticpe = menage('essence_super_plombe_ticpe', period)
-        essence_ticpe = (essence_SP95_ticpe + essence_SP98_ticpe + super_plombe_ticpe)
+        essence_ticpe = (essence_sp95_ticpe + essence_sp98_ticpe + super_plombe_ticpe)
         return essence_ticpe
 
 ## TICPE combustibles liquides:
@@ -202,15 +202,15 @@ class gpl_carburant_ticpe(Variable):
     definition_period = YEAR
 
     def formula(menage, period, parameters):
-        nombre_litres_GPL_carburant = menage('nombre_litres_gpl_carburant', period)
+        nombre_litres_gpl_carburant = menage('nombre_litres_gpl_carburant', period)
         accise_combustibles_liquides = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.autres_gaz_petrole_liquefies_utilises_comme_carburants_autres_100kg
-        combustibles_liquides_ticpe = nombre_litres_GPL_carburant * (accise_combustibles_liquides / 100)
+        combustibles_liquides_ticpe = nombre_litres_gpl_carburant * (accise_combustibles_liquides / 100)
 
         return combustibles_liquides_ticpe
 
 ## total taxes energies (ticpe diesel + ticpe essence + ticpe GPL-c)
 
-class ticpe_total_carburant(Variable):
+class ticpe_carburant_total(Variable):
     value_type = float
     entity = Menage
     label = "Calcul du montant de la TICPE sur tous les carburants cumulés"
@@ -219,7 +219,6 @@ class ticpe_total_carburant(Variable):
     def formula(menage, period):
         essence_ticpe_total = menage('essence_ticpe_total', period)
         gazole_ticpe_total = menage('gazole_ticpe_total', period)
-        GPL_carburant_ticpe = menage('gpl_carburant_ticpe', period)
-        TICPE_total_carburant = gazole_ticpe_total + essence_ticpe_total + GPL_carburant_ticpe
-
-        return TICPE_total_carburant
+        gpl_carburant_ticpe = menage('gpl_carburant_ticpe', period)
+        ticpe_total_carburant = gazole_ticpe_total + essence_ticpe_total + gpl_carburant_ticpe
+        return ticpe_total_carburant
