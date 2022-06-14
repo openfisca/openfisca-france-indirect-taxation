@@ -175,7 +175,7 @@ class essence_ticpe_total(Variable):
         essence_SP95_ticpe = menage('essence_sp95_ticpe', period)
         essence_SP98_ticpe = menage('essence_sp98_ticpe', period)
         essence_E85_ticpe = menage('essence_e85_ticpe', period)
-        essence_SP95_E10_ticpe = menage('essence_sp95_Ee0_ticpe', period)
+        essence_SP95_E10_ticpe = menage('essence_sp95_e10_ticpe', period)
         essence_ticpe = (essence_SP95_ticpe + essence_SP98_ticpe + essence_E85_ticpe + essence_SP95_E10_ticpe)
         return essence_ticpe
 
