@@ -50,8 +50,8 @@ setup(
     install_requires = [
         # 'Babel >= 2.9.1, < 3.0.0',
         'OpenFisca-Core >= 35.8.0, < 36.0',
-        'OpenFisca-Survey-Manager >= 0.46.13, < 1.0',
-        # 'python-slugify >= 6.1.2, < 7.0.0',
+        # 'OpenFisca-Survey-Manager >= 0.46.13, < 1.0',
+        'python-slugify >= 6.1.2, < 7.0.0',
         # 'xlrd >= 2.0.1, < 3.0.0',
         # "statsmodels >= 0.13.2, < 1.0",
         ],
