@@ -181,7 +181,7 @@ class cout_gpl_carburant_ht(Variable):
 class cout_carburant_total_ht(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant des couts sur tous les carburants cumulés"
+    label = "Calcul du montant des couts sur tous les carburants cumulés ht"
     definition_period = YEAR
 
     def formula(menage, period):

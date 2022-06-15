@@ -1,6 +1,7 @@
-import numpy as np
-
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
+from openfisca_france_indirect_taxation.variables.prix_carburants_regions_years_AN import get_prix_carburant_par_region_par_carburant_par_an_hectolitre
+
+import numpy as np
 
 # TICPE carburant
 
@@ -16,6 +17,7 @@ class gazole_b7_ticpe(Variable):
         region = menage('region', period)
         accise_gazole_b7 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.gazole
         major_ticpe_gazole = parameters(period).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole
+        print(major_ticpe_gazole)
         major_regionale_ticpe_gazole = np.fromiter(
             (
                 getattr(major_ticpe_gazole, region_cell, 0)
@@ -23,7 +25,9 @@ class gazole_b7_ticpe(Variable):
             ),
             dtype=np.float32
         )
+        print(major_regionale_ticpe_gazole)
         accise_gazole_b7_total = accise_gazole_b7 + major_regionale_ticpe_gazole
+        print(accise_gazole_b7_total)
         nombre_litres_gazole_b7 = menage('nombre_litres_gazole_b7', period)
         montant_gazole_b7_ticpe = nombre_litres_gazole_b7 * (accise_gazole_b7_total / 100)
         return montant_gazole_b7_ticpe

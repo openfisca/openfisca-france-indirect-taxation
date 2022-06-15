@@ -1,6 +1,55 @@
 from openfisca_core.simulation_builder import SimulationBuilder
 from openfisca_france_indirect_taxation import CountryTaxBenefitSystem
 
+
+TEST_CASE = {
+    'individus': {
+        'Arthur': {},
+        'Brittany': {},
+    },
+    'menages': {
+        'menage1': {
+            'personne_de_reference': ["Arthur"],
+            'region': {'2021': 'franche_comte'},
+            'code_region' : {'2021': 27},
+            'nombre_litres_gazole_b7': {'2021': 600},
+            'nombre_litres_gazole_b10': {'2021': 600},
+            'nombre_litres_essence_sp95_e10': {'2021': 600},
+            'nombre_litres_essence_sp95': {'2021': 600},
+            'nombre_litres_essence_sp98': {'2021': 600},
+            'nombre_litres_essence_super_plombe': {'2021': 600},
+            'nombre_litres_essence_e85': {'2021': 600},
+            'nombre_litres_gpl_carburant': {'2021': 600},
+        },
+        'menage2': {
+            'personne_de_reference': ["Brittany"],
+            'region': {'2021': 'corse'},
+            'code_region' : {'2021': 94},
+            'nombre_litres_gazole_b7': {'2021': 600},
+            'nombre_litres_gazole_b10': {'2021': 600},
+            'nombre_litres_essence_sp95_e10': {'2021': 600},
+            'nombre_litres_essence_sp95': {'2021': 600},
+            'nombre_litres_essence_sp98': {'2021': 600},
+            'nombre_litres_essence_super_plombe': {'2021': 600},
+            'nombre_litres_essence_e85': {'2021': 600},
+            'nombre_litres_gpl_carburant': {'2021': 600},
+        },
+    },
+}
+
+tax_benefit_system = CountryTaxBenefitSystem()
+simulation_builder = SimulationBuilder()
+simulation = simulation_builder.build_from_entities(tax_benefit_system, TEST_CASE)
+
+cout_gazole_b7_ttc  = simulation.calculate('cout_gazole_b7_ttc','2021')
+print(cout_gazole_b7_ttc)
+
+# gazole_b7_ticpe  = simulation.calculate('gazole_b7_ticpe','2021')
+# print(gazole_b7_ticpe)
+
+
+
+'''
 # TEST_CASE = {
 #     'individus': {
 #         'Arthur': {},
@@ -92,7 +141,7 @@ tax_benefit_system = CountryTaxBenefitSystem()
 simulation_builder = SimulationBuilder()
 simulation = simulation_builder.build_from_entities(tax_benefit_system, TEST_CASE)
 
-'''
+
 ## test ttc to ht
 
 diesel_ht  = simulation.calculate('prix_litre_diesel_ht','2009')
@@ -112,7 +161,7 @@ print(super_plombe_ht)
 
 gplc_ht = simulation.calculate('prix_litre_gplc_ht','2016')
 print(gplc_ht)
-'''
+
 
 ## ticpe diesel total
 
@@ -122,7 +171,7 @@ print(nombre_litres_diesel)
 diesel_ticpe_cas_type = simulation.calculate('diesel_ticpe_cas_type','2009')
 print(diesel_ticpe_cas_type)
 
-'''
+
 ## ticpe essence intermediaire
 
 sp_e10_ticpe_cas_type = simulation.calculate('sp_e10_ticpe_cas_type','2022')
