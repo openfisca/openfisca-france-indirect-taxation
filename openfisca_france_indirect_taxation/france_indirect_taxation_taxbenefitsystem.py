@@ -5,7 +5,7 @@ import glob
 import os
 
 from openfisca_core.taxbenefitsystems import TaxBenefitSystem
-from openfisca_france_indirect_taxation.parameters import preprocessing
+# from openfisca_france_indirect_taxation.parameters import preprocessing
 
 from openfisca_france_indirect_taxation import entities
 
@@ -18,7 +18,7 @@ EXTENSIONS_DIRECTORIES = glob.glob(os.path.join(EXTENSIONS_PATH, '*/'))
 class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
     """French indirect taxation tax benefit system"""
     CURRENCY = "€"
-    preprocess_legislation = staticmethod(preprocessing.preprocess_legislation)
+    # preprocess_legislation = staticmethod(preprocessing.preprocess_legislation)
 
     def __init__(self):
         TaxBenefitSystem.__init__(self, entities.entities)
@@ -28,7 +28,7 @@ class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
         for extension_dir in EXTENSIONS_DIRECTORIES:
             self.load_extension(extension_dir)
         self.prefill_cache()
-        self.parameters = self.preprocess_legislation(self.parameters)
+        # self.parameters = self.preprocess_legislation(self.parameters)
 
     def prefill_cache(self):
         """Define poste_* and categorie fiscales variables"""
