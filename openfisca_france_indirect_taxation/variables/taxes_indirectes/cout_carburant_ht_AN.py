@@ -1,5 +1,3 @@
-import numpy as np
-
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
 
 # cout different type de gazole ht:

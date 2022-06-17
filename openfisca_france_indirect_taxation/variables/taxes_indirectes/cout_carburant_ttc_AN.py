@@ -127,7 +127,7 @@ class cout_essence_sp98_ttc(Variable):
         cout_essence_sp98_ttc = nombre_litres_essence_sp98 * ( prix_essence_sp98_hectolitre_ttc / 100)
         return cout_essence_sp98_ttc
 
-class cout_essence_super_plombe_ttc(Variable):  #ATTENTION: pas prix par région disponible, on garde les prix ttc général de l'IPP.
+class cout_essence_super_plombe_ttc(Variable):  #ATTENTION: pas prix par région disponible, on garde les prix ttc général de l'IPP. (INSEE)
     value_type = float
     entity = Menage
     label = "cout de l'essence super plombé ttc"
@@ -201,14 +201,14 @@ class cout_gpl_carburant_ttc(Variable):
     def formula(menage, period):
         code_region = menage('code_region', period)
         nombre_litres_gpl_carburant = menage('nombre_litres_gpl_carburant', period)
-        prix_gpl_carburant_ttc = np.fromiter(
+        prix_gpl_carburant_hectolitre_ttc = np.fromiter(
             (
                 get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}',{}).get('GPLc',{}).get(f'{period}',0)
                 for region_cell in code_region
             ),
             dtype=np.float32
         )
-        cout_gpl_carburant_ttc = nombre_litres_gpl_carburant * ( prix_gpl_carburant_ttc / 100)
+        cout_gpl_carburant_ttc = nombre_litres_gpl_carburant * ( prix_gpl_carburant_hectolitre_ttc / 100)
         return cout_gpl_carburant_ttc
 
 # cout carburant total ttc:
