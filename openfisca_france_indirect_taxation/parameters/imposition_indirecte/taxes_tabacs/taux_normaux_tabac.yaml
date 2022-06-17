@@ -221,7 +221,7 @@ taux_normal:
     order:
     - cigarettes
     - cigares
-    - tabac_rouler
+    - tabac_a_rouler
     - autres_tabacs
     - tabacs_priser
     - tabacs_chiquer
