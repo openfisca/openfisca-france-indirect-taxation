@@ -16,7 +16,7 @@ metadata:
   - droit_specifique_boissons_non_alcooliques_eur_hl
   reference:
     2002-03-31: Ordonnance 2000-916 du 19/09/2000
-  date_parution_jo:
+  official_journal_date:
     2002-03-31: 2000-09-22
   description_en: Non alcoholic beverages
 documentation: |
