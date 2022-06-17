@@ -9,7 +9,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import graph_buil
 from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get_accises import \
     get_accise_ticpe_majoree
 
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 # Recherche des paramètres de la législation
 liste = ['ticpe_gazole', 'super_95_98', 'super_plombe_ticpe']

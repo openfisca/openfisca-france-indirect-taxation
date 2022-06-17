@@ -7,13 +7,13 @@ import numpy as np
 class region(Variable):
     value_type = str
     entity = Menage
-    label = "region du menage"
+    label = 'region du menage'
     definition_period = YEAR
 
 class code_region(Variable):
     value_type = str
     entity = Menage
-    label = "code region du menage"
+    label = 'code region du menage'
     definition_period = YEAR
 
 
@@ -22,7 +22,7 @@ class code_region(Variable):
 class nombre_litres_gazole_b7(Variable):
     value_type = float
     entity = Menage
-    label = "nombre de litre de gasoil B7 consommés par le menage"
+    label = 'nombre de litre de gasoil B7 consommés par le menage'
     definition_period = YEAR
     default_value = 0
 
@@ -42,7 +42,7 @@ class nombre_litres_gazole_b7(Variable):
 class nombre_litres_gazole_b10(Variable):   ##ATTENTION: pas de prix disponible pour gazole B10, on utilise prix du gazole B7
     value_type = float
     entity = Menage
-    label = "nombre de litre de gasoil B10 consommés par le menage"
+    label = 'nombre de litre de gasoil B10 consommés par le menage'
     definition_period = YEAR
     default_value = 0
 
@@ -64,7 +64,7 @@ class nombre_litres_gazole_b10(Variable):   ##ATTENTION: pas de prix disponible 
 class nombre_litres_gazole_total(Variable):
     value_type = float
     entity = Menage
-    label = "nombre de litre de gazole total"
+    label = 'nombre de litre de gazole total'
     definition_period = YEAR
     default_value = 0
 
@@ -144,7 +144,7 @@ class nombre_litres_essence_sp98(Variable):
 class nombre_litres_essence_super_plombe(Variable):    #ATTENTION: pas prix par région disponible, on garde les prix ttc général de l'IPP. (INSEE)
     value_type = float
     entity = Menage
-    label = "nombre de litre de super plombé consommés par le menage"
+    label = 'nombre de litre de super plombé consommés par le menage'
     definition_period = YEAR
     default_value = 0
 
@@ -208,7 +208,7 @@ class nombre_litres_essence_total(Variable):
 class nombre_litres_gpl_carburant(Variable):
     value_type = float
     entity = Menage
-    label = "nombre de litre de gaz de pétrole liquéfié consommés par le menage"
+    label = 'nombre de litre de gaz de pétrole liquéfié consommés par le menage'
     definition_period = YEAR
     default_value = 0
 
@@ -229,7 +229,7 @@ class nombre_litres_gpl_carburant(Variable):
 class nombre_litres_total(Variable):
     value_type = float
     entity = Menage
-    label = "nombre de litre total"
+    label = 'nombre de litre total'
     definition_period = YEAR
 
     def formula(menage, period):

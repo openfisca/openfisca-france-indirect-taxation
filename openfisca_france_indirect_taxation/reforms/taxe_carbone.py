@@ -10,57 +10,57 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 
 def modify_parameters(parameters):
     node = ParameterNode(
-        "taxe_carbone",
+        'taxe_carbone',
         data = {
-            "description": "taxe_carbone",
-            "electricite": {
-                "description": "Surcroît de prix de l'électricité (en euros par kWh)",
+            'description': 'taxe_carbone',
+            'electricite': {
+                'description': "Surcroît de prix de l'électricité (en euros par kWh)",
                 # TODO "unit": '?',
-                "unit": 'currency',
-                "values": {'2010-01-01': 0.0045},
+                'unit': 'currency',
+                'values': {'2010-01-01': 0.0045},
                 },
-            "essence": {
-                "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
-                "unit": 'currency',
-                "values": {'2010-01-01': 12.1 - 1.694},
+            'essence': {
+                'description': "Surcroît de prix de l'essence (en euros par hectolitres)",
+                'unit': 'currency',
+                'values': {'2010-01-01': 12.1 - 1.694},
                 },
-            "diesel": {
-                "description": "Surcroît de prix du diesel (en euros par hectolitres)",
+            'diesel': {
+                'description': 'Surcroît de prix du diesel (en euros par hectolitres)',
                 # TODO "unit": '?',
-                "unit": 'currency',
-                "values": {'2010-01-01': 13.3 - 1.862},
+                'unit': 'currency',
+                'values': {'2010-01-01': 13.3 - 1.862},
                 },
-            "combustibles_liquides": {
-                "description": "Surcroît de prix du diesel (en euros par litre)",
+            'combustibles_liquides': {
+                'description': 'Surcroît de prix du diesel (en euros par litre)',
                 # TODO "unit": '?',
-                "unit": 'currency',
-                "values": {'2010-01-01': 0.155 - 0.0217},
+                'unit': 'currency',
+                'values': {'2010-01-01': 0.155 - 0.0217},
                 },
-            "gaz": {
-                "description": "Surcroît de prix du gaz (en euros par kWh)",
+            'gaz': {
+                'description': 'Surcroît de prix du gaz (en euros par kWh)',
                 # TODO "unit": '?',
-                "unit": 'currency',
-                "values": {'2010-01-01': 0.012 - 0.00168},
+                'unit': 'currency',
+                'values': {'2010-01-01': 0.012 - 0.00168},
                 },
-            "abaissement_tva_taux_plein": {
-                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+            'abaissement_tva_taux_plein': {
+                'description': 'Baisse de la TVA à taux plein pour obtenir un budget constant',
                 # TODO "unit": '?',
-                "values": {'2010-01-01': 0.026},
+                'values': {'2010-01-01': 0.026},
                 },
-            "abaissement_tva_taux_plein_bis": {
-                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+            'abaissement_tva_taux_plein_bis': {
+                'description': 'Baisse de la TVA à taux plein pour obtenir un budget constant',
                 # TODO "unit": '?',
-                "values": {'2010-01-01': 0.01},
+                'values': {'2010-01-01': 0.01},
                 },
-            "abaissement_tva_taux_reduit": {
-                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+            'abaissement_tva_taux_reduit': {
+                'description': 'Baisse de la TVA à taux plein pour obtenir un budget constant',
                 # TODO "unit": '?',
-                "values": {'2010-01-01': 0.03},
+                'values': {'2010-01-01': 0.03},
                 },
-            "abaissement_tva_taux_super_reduit": {
-                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+            'abaissement_tva_taux_super_reduit': {
+                'description': 'Baisse de la TVA à taux plein pour obtenir un budget constant',
                 # TODO "unit": '?',
-                "values": {'2010-01-01': 0.01},
+                'values': {'2010-01-01': 0.01},
                 },
             },
         )
@@ -75,7 +75,7 @@ class taxe_carbone(Reform):
     class cheques_energie(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Montant des chèques énergie (indexés par uc) - taxe carbone"
+        label = 'Montant des chèques énergie (indexés par uc) - taxe carbone'
 
         def formula(menage, period):
             contribution = menage('contributions_reforme', period)
@@ -92,7 +92,7 @@ class taxe_carbone(Reform):
     class contributions_reforme(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Changement de contribution aux taxes énergétiques suite à la réforme - taxe carbone"
+        label = 'Changement de contribution aux taxes énergétiques suite à la réforme - taxe carbone'
 
         def formula(menage, period):
             total_taxes_energies = menage('total_taxes_energies', period)
@@ -105,7 +105,7 @@ class taxe_carbone(Reform):
     class depenses_carburants_corrigees_ajustees_taxe_carbone(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses en carburants après réaction à la réforme - taxe carbone"
+        label = 'Dépenses en carburants après réaction à la réforme - taxe carbone'
 
         def formula(menage, period):
             depenses_diesel_ajustees = menage('depenses_diesel_corrigees_ajustees_taxe_carbone', period)
@@ -117,7 +117,7 @@ class taxe_carbone(Reform):
     class depenses_diesel_corrigees_ajustees_taxe_carbone(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses en diesel après réaction à la réforme - taxe carbone"
+        label = 'Dépenses en diesel après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_diesel = menage('depenses_diesel', period)
@@ -132,7 +132,7 @@ class taxe_carbone(Reform):
     class depenses_electricite_ajustees_taxe_carbone(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses en électricité après réaction à la réforme - taxe carbone"
+        label = 'Dépenses en électricité après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_electricite_variables = menage('depenses_electricite_variables', period)
@@ -159,7 +159,7 @@ class taxe_carbone(Reform):
     class depenses_energies_logement_ajustees_taxe_carbone(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses en électricité sans inclure dépenses jointes avec le gaz"
+        label = 'Dépenses en électricité sans inclure dépenses jointes avec le gaz'
 
         def formula(menage, period):
             depenses_electricite_ajustees = menage('depenses_electricite_ajustees_taxe_carbone', period)
@@ -178,7 +178,7 @@ class taxe_carbone(Reform):
     class depenses_essence_corrigees_ajustees_taxe_carbone(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses en essence après réaction à la réforme - taxe carbone"
+        label = 'Dépenses en essence après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_essence = menage('depenses_essence', period)
@@ -193,7 +193,7 @@ class taxe_carbone(Reform):
     class depenses_combustibles_liquides_ajustees_taxe_carbone(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses en fioul domestique après réaction à la réforme - taxe carbone"
+        label = 'Dépenses en fioul domestique après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_combustibles_liquides = menage('depenses_combustibles_liquides', period)
@@ -209,7 +209,7 @@ class taxe_carbone(Reform):
     class depenses_gaz_ville_ajustees_taxe_carbone(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses en gaz après réaction à la réforme - taxe carbone"
+        label = 'Dépenses en gaz après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_gaz_variables = menage('depenses_gaz_variables', period)
@@ -228,7 +228,7 @@ class taxe_carbone(Reform):
     class depenses_tva_taux_plein_ajustees_taxe_carbone(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme - taxe carbone"
+        label = 'Dépenses sur les biens assujetis à la TVA à taux plein après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_tva_taux_plein = menage('depenses_tva_taux_plein', period)
@@ -243,7 +243,7 @@ class taxe_carbone(Reform):
     class depenses_tva_taux_plein_bis_ajustees_taxe_carbone(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses sur les biens assujetis à la TVA à taux plein bis après réaction à la réforme - taxe carbone"
+        label = 'Dépenses sur les biens assujetis à la TVA à taux plein bis après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_tva_taux_plein = menage('depenses_tva_taux_plein', period)
@@ -260,7 +260,7 @@ class taxe_carbone(Reform):
     class depenses_tva_taux_reduit_ajustees_taxe_carbone(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses sur les biens assujetis à la TVA à taux reduit après réaction à la réforme - taxe carbone"
+        label = 'Dépenses sur les biens assujetis à la TVA à taux reduit après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_tva_taux_reduit = menage('depenses_tva_taux_reduit', period)
@@ -275,7 +275,7 @@ class taxe_carbone(Reform):
     class depenses_tva_taux_super_reduit_ajustees_taxe_carbone(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses sur les biens assujetis à la TVA à taux super reduit après réaction à la réforme - taxe carbone"
+        label = 'Dépenses sur les biens assujetis à la TVA à taux super reduit après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_tva_taux_super_reduit = menage('depenses_tva_taux_super_reduit', period)
@@ -288,7 +288,7 @@ class taxe_carbone(Reform):
             return depenses_tva_taux_super_reduit_ajustees
 
     class diesel_ticpe(YearlyVariable):
-        label = "Calcul du montant de TICPE sur le diesel après réforme"
+        label = 'Calcul du montant de TICPE sur le diesel après réforme'
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -327,7 +327,7 @@ class taxe_carbone(Reform):
             return montant_diesel_ticpe_ajuste
 
     class emissions_CO2_carburants(YearlyVariable):
-        label = "Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
+        label = 'Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2'
         # use_baseline =emissions_co2.emissions_CO2_carburants
 
         def formula(menage, period, parameters):
@@ -372,7 +372,7 @@ class taxe_carbone(Reform):
             return emissions_ajustees
 
     class emissions_CO2_combustibles_liquides(YearlyVariable):
-        label = "Emissions de CO2 des ménages via leur consommation de fioul après réforme, en kg de CO2"
+        label = 'Emissions de CO2 des ménages via leur consommation de fioul après réforme, en kg de CO2'
 
         def formula(menage, period, parameters):
             quantites_combustibles_liquides_ajustees = menage('quantites_combustibles_liquides', period)
@@ -383,7 +383,7 @@ class taxe_carbone(Reform):
             return emissions_ajustees
 
     class emissions_CO2_gaz_ville(YearlyVariable):
-        label = "Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2"
+        label = 'Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2'
 
         def formula(menage, period, parameters):
             quantites_gaz_ajustees = menage('quantites_gaz_final_ajustees_taxe_carbone', period)
@@ -394,7 +394,7 @@ class taxe_carbone(Reform):
             return emissions_ajustees
 
     class essence_ticpe(YearlyVariable):
-        label = "Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
+        label = 'Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme'
 
         definition_period = YEAR
 
@@ -419,7 +419,7 @@ class taxe_carbone(Reform):
             return essence_ticpe_ajustee
 
     class combustibles_liquides_ticpe(YearlyVariable):
-        label = "Calcul du montant de TICPE sur le fioul domestique après réforme - taxe carbone"
+        label = 'Calcul du montant de TICPE sur le fioul domestique après réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -447,7 +447,7 @@ class taxe_carbone(Reform):
             return montant_fioul_ticpe_ajuste
 
     class quantites_diesel(YearlyVariable):
-        label = "Quantités de diesel consommées après la réforme - taxe carbone "
+        label = 'Quantités de diesel consommées après la réforme - taxe carbone '
 
         def formula(menage, period, parameters):
             depenses_diesel_ajustees_taxe_carbone = \
@@ -459,7 +459,7 @@ class taxe_carbone(Reform):
             return quantites_diesel_ajustees
 
     class quantites_combustibles_liquides(YearlyVariable):
-        label = "Quantités de fioul domestique consommées après la réforme - taxe carbone "
+        label = 'Quantités de fioul domestique consommées après la réforme - taxe carbone '
 
         def formula(menage, period, parameters):
             depenses_combustibles_liquides_ajustees_taxe_carbone = \
@@ -474,7 +474,7 @@ class taxe_carbone(Reform):
     class quantites_gaz_final_ajustees_taxe_carbone(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Quantités de gaz consommées après la réforme - taxe carbone"
+        label = 'Quantités de gaz consommées après la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_gaz_ajustees_taxe_carbone = menage('depenses_gaz_ville_ajustees_taxe_carbone', period)
@@ -514,7 +514,7 @@ class taxe_carbone(Reform):
             return quantites_electricite_ajustees
 
     class quantites_sp_e10(YearlyVariable):
-        label = "Quantités consommées de sans plomb e10 par les ménages après réforme - taxe carbone"
+        label = 'Quantités consommées de sans plomb e10 par les ménages après réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_essence_ajustees_taxe_carbone = menage('depenses_essence_corrigees_ajustees_taxe_carbone', period)
@@ -527,7 +527,7 @@ class taxe_carbone(Reform):
             return quantite_sp_e10
 
     class quantites_sp95(YearlyVariable):
-        label = "Quantités consommées de sans plomb 95 par les ménages après réforme"
+        label = 'Quantités consommées de sans plomb 95 par les ménages après réforme'
 
         def formula(menage, period, parameters):
             depenses_essence_ajustees_taxe_carbone = menage('depenses_essence_corrigees_ajustees_taxe_carbone', period)
@@ -540,7 +540,7 @@ class taxe_carbone(Reform):
             return quantites_sp95_ajustees
 
     class quantites_sp98(YearlyVariable):
-        label = "Quantités consommées de sans plomb 98 par les ménages"
+        label = 'Quantités consommées de sans plomb 98 par les ménages'
 
         def formula(menage, period, parameters):
             depenses_essence_ajustees_taxe_carbone = menage('depenses_essence_corrigees_ajustees_taxe_carbone', period)
@@ -553,7 +553,7 @@ class taxe_carbone(Reform):
             return quantites_sp98_ajustees
 
     class quantites_super_plombe(YearlyVariable):
-        label = "Quantités consommées de super plombé par les ménages après réforme"
+        label = 'Quantités consommées de super plombé par les ménages après réforme'
 
         def formula(menage, period):
             depenses_essence_ajustees_taxe_carbone = menage('depenses_essence_corrigees_ajustees_taxe_carbone', period)
@@ -595,7 +595,7 @@ class taxe_carbone(Reform):
             return quantites_essence_ajustees
 
     class sp_e10_ticpe(YearlyVariable):
-        label = "Calcul du montant de la TICPE sur le SP E10 après réforme"
+        label = 'Calcul du montant de la TICPE sur le SP E10 après réforme'
 
         def formula(menage, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -631,7 +631,7 @@ class taxe_carbone(Reform):
             return montant_sp_e10_ticpe_ajuste
 
     class sp95_ticpe(YearlyVariable):
-        label = "Calcul du montant de TICPE sur le sp_95 après réforme"
+        label = 'Calcul du montant de TICPE sur le sp_95 après réforme'
 
         def formula(menage, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -666,7 +666,7 @@ class taxe_carbone(Reform):
             return montant_sp95_ticpe_ajuste
 
     class sp98_ticpe(YearlyVariable):
-        label = "Calcul du montant de TICPE sur le sp_98 après réforme"
+        label = 'Calcul du montant de TICPE sur le sp_98 après réforme'
 
         def formula(menage, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -702,7 +702,7 @@ class taxe_carbone(Reform):
             return montant_sp98_ticpe_ajuste
 
     class super_plombe_ticpe(YearlyVariable):
-        label = "Calcul du montant de la TICPE sur le super plombé après réforme"
+        label = 'Calcul du montant de la TICPE sur le super plombé après réforme'
 
         def formula(menage, period):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -747,7 +747,7 @@ class taxe_carbone(Reform):
     class taxe_gaz(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Recettes de la taxe carbone sur la consommation de gaz - ceteris paribus"
+        label = 'Recettes de la taxe carbone sur la consommation de gaz - ceteris paribus'
         # On considère que les contributions sur les taxes précédentes ne sont pas affectées
 
         def formula(menage, period):
@@ -758,7 +758,7 @@ class taxe_carbone(Reform):
             return recettes_gaz
 
     class ticpe_totale(YearlyVariable):
-        label = "Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
+        label = 'Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme'
 
         def formula(menage, period):
             essence_ticpe_ajustee = menage('essence_ticpe', period)
@@ -786,7 +786,7 @@ class taxe_carbone(Reform):
             return total
 
     class tva_taux_plein(YearlyVariable):
-        label = "Contribution sur la TVA à taux plein après réaction à la réforme - taxe carbone"
+        label = 'Contribution sur la TVA à taux plein après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_tva_taux_plein_ajustees = \
@@ -801,7 +801,7 @@ class taxe_carbone(Reform):
     class tva_taux_plein_bis(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Contribution sur la TVA à taux plein après réaction à la réforme - taxe carbone"
+        label = 'Contribution sur la TVA à taux plein après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_tva_taux_plein_ajustees = \
@@ -815,7 +815,7 @@ class taxe_carbone(Reform):
             return tax_from_expense_including_tax(depenses_tva_taux_plein_ajustees, nouveau_taux_plein)
 
     class tva_taux_reduit(YearlyVariable):
-        label = "Contribution sur la TVA à taux reduit après réaction à la réforme - taxe carbone"
+        label = 'Contribution sur la TVA à taux reduit après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_tva_taux_reduit_ajustees = \
@@ -829,7 +829,7 @@ class taxe_carbone(Reform):
             return tax_from_expense_including_tax(depenses_tva_taux_reduit_ajustees, nouveau_taux_reduit)
 
     class tva_taux_super_reduit(YearlyVariable):
-        label = "Contribution sur la TVA à taux super reduit après réaction à la réforme - taxe carbone"
+        label = 'Contribution sur la TVA à taux super reduit après réaction à la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_tva_taux_super_reduit_ajustees = \
@@ -844,7 +844,7 @@ class taxe_carbone(Reform):
                 tax_from_expense_including_tax(depenses_tva_taux_super_reduit_ajustees, nouveau_taux_super_reduit)
 
     class tva_total(YearlyVariable):
-        label = "Différence de contribution sur la TVA après réaction à la réforme - taxes carburants"
+        label = 'Différence de contribution sur la TVA après réaction à la réforme - taxes carburants'
 
         def formula(menage, period):
             taux_plein = menage('tva_taux_plein_bis', period)

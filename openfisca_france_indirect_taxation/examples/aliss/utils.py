@@ -140,7 +140,7 @@ def set_adjustable_reform(dataframe):
 def run_reform(reform_key = None, aggfunc = 'mean'):
     survey_scenario, adjusted_survey_scenario = build_scenarios(reform_key = reform_key)
     alimentation_domicile_hors_alcool = [
-        "depenses_ht_{}".format(key) for key in list(survey_scenario.tax_benefit_system.variables.keys())
+        'depenses_ht_{}'.format(key) for key in list(survey_scenario.tax_benefit_system.variables.keys())
         if key.startswith('poste_01')
         ]
     alimentation_domicile = alimentation_domicile_hors_alcool + [
@@ -149,7 +149,7 @@ def run_reform(reform_key = None, aggfunc = 'mean'):
         'depenses_alcools_forts'
         ]
     depenses_ht_tvas = [
-        "depenses_ht_{}".format(key) for key in list(survey_scenario.tax_benefit_system.variables.keys())
+        'depenses_ht_{}'.format(key) for key in list(survey_scenario.tax_benefit_system.variables.keys())
         if key.startswith('tva_taux_')
         ]
     tvas = [

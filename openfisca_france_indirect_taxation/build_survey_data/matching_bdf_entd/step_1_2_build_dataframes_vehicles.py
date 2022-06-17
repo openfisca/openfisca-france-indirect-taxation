@@ -220,5 +220,5 @@ def build_df_menages_vehicles(year_data):
     return data_entd, data_bdf
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     data_entd, data_bdf = build_df_menages_vehicles()

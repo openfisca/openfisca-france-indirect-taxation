@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-"""
+'''
 Computing the Hellinger distance between two discrete
 probability distributions
-"""
+'''
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_2_homogenize_variables import \
     create_niveau_vie_quantiles

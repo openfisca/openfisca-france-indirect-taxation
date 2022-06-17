@@ -4,7 +4,7 @@ import pytest
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 
-@pytest.mark.parametrize("year", [2011, 2017])
+@pytest.mark.parametrize('year', [2011, 2017])
 def test_survey_simulation(year):
     data_year = year
     survey_scenario = SurveyScenario().create(year = year, data_year = data_year)

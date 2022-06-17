@@ -39,10 +39,10 @@ metadata:
     1997-03-31:
       title: Loi 96-1160 du 27/12/1996 (LFSS pour 1997)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000198309
-  date_parution_jo:
-    2005-01-01: 11/08/2004
-    1999-03-31: 27/12/1998
-    1997-03-31: 29/12/1996
+  official_journal_date:
+    2005-01-01: 2004-08-11
+    1999-03-31: 1998-12-27
+    1997-03-31: 1996-12-29
   description_en: Premix (alcohol plus soda)
 documentation: |
   Notes :

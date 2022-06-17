@@ -7,7 +7,7 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 class quantites_diesel_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Quantités de diesel consommées après la réforme des prix"
+    label = 'Quantités de diesel consommées après la réforme des prix'
 
     def formula(menage, period, parameters):
         depenses_diesel_ajustees = menage('depenses_diesel_ajustees', period)
@@ -21,7 +21,7 @@ class quantites_diesel_ajustees(YearlyVariable):
 class quantites_gaz_ajustees_taxe_carbone(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Quantités de gaz consommées après la réforme - taxe carbone"
+    label = 'Quantités de gaz consommées après la réforme - taxe carbone'
 
     def formula(menage, period, parameters):
         depenses_gaz_ajustees_taxe_carbone = menage('depenses_gaz_ajustees_taxe_carbone', period)
@@ -65,7 +65,7 @@ class quantites_electricite_ajustees_taxe_carbone(YearlyVariable):
 class quantites_sp_e10_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Quantités consommées de sans plomb e10 par les ménages après réforme"
+    label = 'Quantités consommées de sans plomb e10 par les ménages après réforme'
 
     def formula(menage, period, parameters):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
@@ -81,7 +81,7 @@ class quantites_sp_e10_ajustees(YearlyVariable):
 class quantites_sp95_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Quantités consommées de sans plomb 95 par les ménages après réforme"
+    label = 'Quantités consommées de sans plomb 95 par les ménages après réforme'
 
     def formula(menage, period, parameters):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
@@ -97,7 +97,7 @@ class quantites_sp95_ajustees(YearlyVariable):
 class quantites_sp98_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Quantités consommées de sans plomb 98 par les ménages"
+    label = 'Quantités consommées de sans plomb 98 par les ménages'
 
     def formula(menage, period, parameters):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)
@@ -113,7 +113,7 @@ class quantites_sp98_ajustees(YearlyVariable):
 class quantites_super_plombe_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Quantités consommées de super plombé par les ménages après réforme"
+    label = 'Quantités consommées de super plombé par les ménages après réforme'
 
     def formula(menage, period, parameters):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)

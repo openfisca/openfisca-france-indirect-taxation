@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""
+'''
 Created on Tue Jul 04 16:36:58 2017
 
 @author: Thomas
-"""
+'''
 
 import statsmodels.formula.api as smf
 
@@ -26,9 +26,9 @@ data_enl['aides_logement'].loc[data_enl['aba'] == 1] = 1
 
 data_enl['revtot_2'] = data_enl['revtot'] ** 2
 
-"""
+'''
 Predict froid
-"""
+'''
 
 regression = smf.ols(formula = 'froid ~ \
     aides_logement + agepr + bat_av_49 + bat_49_74 + log_indiv + \
@@ -48,9 +48,9 @@ probit = smf.Probit(data_enl['froid'], data_enl[variables]).fit()
 print(probit.summary())
 
 
-"""
+'''
 Predict froid_cout
-"""
+'''
 
 regression = smf.ols(formula = 'froid_cout ~ \
     aides_logement + agepr + bat_av_49 + bat_49_74 + log_indiv + \

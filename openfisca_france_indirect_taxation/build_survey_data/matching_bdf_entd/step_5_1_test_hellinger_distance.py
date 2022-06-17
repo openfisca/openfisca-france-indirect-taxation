@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-"""
+'''
 Computing the Hellinger distance between two discrete
 probability distributions
-"""
+'''
 
 # Dans ce script, on test la qualité de l'appariement.
 

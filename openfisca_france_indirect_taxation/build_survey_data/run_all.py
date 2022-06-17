@@ -52,7 +52,7 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
     build_depenses_homogenisees(year = year_data)
     build_imputation_loyers_proprietaires(year = year_data)
     temporary_store.open()
-    depenses = temporary_store["depenses_bdf_{}".format(year_calage)]
+    depenses = temporary_store['depenses_bdf_{}'.format(year_calage)]
     depenses.index = depenses.index.astype(ident_men_dtype)
     temporary_store.close()
 
@@ -77,7 +77,7 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
     # 4. Gestion des variables revenus:
     build_homogeneisation_revenus_menages(year = year_data)
     temporary_store.open()
-    revenus = temporary_store["revenus_{}".format(year_calage)]
+    revenus = temporary_store['revenus_{}'.format(year_calage)]
     revenus.index = revenus.index.astype(ident_men_dtype)
     temporary_store.close()
 
@@ -93,7 +93,7 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
             'Index is labelled {} instead of ident_men in data frame {} for year {}'.format(
                 preprocessed_data_frame.index.name, name, year_data)
         assert len(preprocessed_data_frame) != 0, 'Empty data frame {}'.format(name)
-        assert preprocessed_data_frame.index.dtype == numpy.dtype('O'), "index for {} is {}".format(
+        assert preprocessed_data_frame.index.dtype == numpy.dtype('O'), 'index for {} is {}'.format(
             name, preprocessed_data_frame.index.dtype)
 
     data_frame = pandas.concat(
@@ -123,7 +123,7 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
         data_frame['ident_men'] = data_frame['ident_men'] + 200500000
         data_frame = data_frame.set_index('ident_men')
 
-    data_frame.index.name = "ident_men"
+    data_frame.index.name = 'ident_men'
 
     # TODO: Homogénéiser: soit faire en sorte que ident_men existe pour toutes les années soit qu'elle soit en index pour toutes
 
@@ -149,9 +149,9 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
                     ), sep =',', decimal = '.'
                 )
         except FileNotFoundError as e:
-            log.debug("Matching data with ENL and ENTD are not present")
+            log.debug('Matching data with ENL and ENTD are not present')
             log.debug(e)
-            log.debug("Skipping this step")
+            log.debug('Skipping this step')
             from openfisca_france_indirect_taxation.build_survey_data import step_5_data_from_matching
             data_matched = step_5_data_from_matching.main(year_data)
 
@@ -179,9 +179,9 @@ def save(data_frame, year_data, year_calage):
             name = 'openfisca_indirect_taxation', config_files_directory = config_files_directory)
 
     output_data_directory = openfisca_survey_collection.config.get('data', 'output_directory')
-    survey_name = "openfisca_indirect_taxation_data_{}".format(year_calage)
-    table = "input"
-    hdf5_file_path = os.path.join(output_data_directory, "{}.h5".format(survey_name))
+    survey_name = 'openfisca_indirect_taxation_data_{}'.format(year_calage)
+    table = 'input'
+    hdf5_file_path = os.path.join(output_data_directory, '{}.h5'.format(survey_name))
     survey = Survey(
         name = survey_name,
         hdf5_file_path = hdf5_file_path,
@@ -195,9 +195,9 @@ def run(years_calage, skip_matching = False):
     import time
     for year_calage in years_calage:
         start = time.time()
-        log.info(f"Starting year = {year_calage}")
+        log.info(f'Starting year = {year_calage}')
         run_all_steps(year_calage = year_calage, skip_matching = skip_matching)
-        log.info(f"Finished in {(time.time() - start)} for year = {year_calage}")
+        log.info(f'Finished in {(time.time() - start)} for year = {year_calage}')
 
 
 if __name__ == '__main__':

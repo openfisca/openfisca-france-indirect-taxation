@@ -34,7 +34,7 @@ def init_single_entity(scenario, autres = None, axes = None, conjoint = None, en
                 menage_nth.setdefault('enfants', []).append(id)
 
         count_so_far += len(group)
-        menages["m{}".format(nth)] = menage_nth
+        menages['m{}'.format(nth)] = menage_nth
 
     dict = {
         'period': period,

@@ -140,5 +140,5 @@ def load_data_bdf_erfs(year_data):
     return menages_erfs, menages_bdf
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     data_erfs, data_bdf = load_data_bdf_erfs()

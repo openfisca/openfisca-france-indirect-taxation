@@ -29,7 +29,7 @@ agregat_depenses = {
     2020: 20441000000,
     }
 
-path = "Q:/Evaluation du budget/PLF2022/donnees_relance_note_mars_2022/fiscalite_indirecte"
+path = 'Q:/Evaluation du budget/PLF2022/donnees_relance_note_mars_2022/fiscalite_indirecte'
 is_elasticite = True
 replique_gouv = True
 
@@ -172,4 +172,4 @@ if __name__ == '__main__':
         variation_relative_depenses_tabac, cout = simulate_reforme_tabac(year = year,
                                                                          baseline_year = baseline_year,
                                                                          elasticite = elas)
-        couts["{}_{}".format(baseline_year, str(year))] = cout
+        couts['{}_{}'.format(baseline_year, str(year))] = cout

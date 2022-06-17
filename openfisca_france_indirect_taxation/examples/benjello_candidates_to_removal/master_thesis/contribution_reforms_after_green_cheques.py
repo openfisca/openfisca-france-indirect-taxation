@@ -50,7 +50,7 @@ for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_20
     for category in ['niveau_vie_decile', 'age_group_pr', 'strate']:
         df_reform = \
             dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =False)
-        df_reference =\
+        df_reference = \
             dataframe_by_group(survey_scenario, category, simulated_variables, use_baseline =True)
 
         df_reform['Cost of the reform after green cheques'] = (

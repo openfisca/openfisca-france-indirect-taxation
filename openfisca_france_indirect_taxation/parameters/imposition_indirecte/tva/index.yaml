@@ -2,5 +2,4 @@ description: TVA
 metadata:
   order:
   - taux_de_tva
-  - tva_par_produit
   description_en: Value added tax (VAT)

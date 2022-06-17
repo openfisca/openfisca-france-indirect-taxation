@@ -8,23 +8,23 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 
 class Deciles(Enum):
     __order__ = 'hors_champs decile_1 decile_2 decile_3 decile_4 decile_5 decile_6 decile_7 decile_8 decile_9 decile_10'  # Needed to keep the order in Python 2
-    hors_champs = "Hors champ"
-    decile_1 = "1er décile"
-    decile_2 = "2nd décile"
-    decile_3 = "3e décile"
-    decile_4 = "4e décile"
-    decile_5 = "5e décile"
-    decile_6 = "6e décile"
-    decile_7 = "7e décile"
-    decile_8 = "8e décile"
-    decile_9 = "9e décile"
-    decile_10 = "10e décile"
+    hors_champs = 'Hors champ'
+    decile_1 = '1er décile'
+    decile_2 = '2nd décile'
+    decile_3 = '3e décile'
+    decile_4 = '4e décile'
+    decile_5 = '5e décile'
+    decile_6 = '6e décile'
+    decile_7 = '7e décile'
+    decile_8 = '8e décile'
+    decile_9 = '9e décile'
+    decile_10 = '10e décile'
 
 
 class decuc(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Décile de niveau de vie (revenu/unité de consommation)"
+    label = 'Décile de niveau de vie (revenu/unité de consommation)'
 
 
 class niveau_de_vie(YearlyVariable):
@@ -43,7 +43,7 @@ class niveau_vie_decile(YearlyVariable):
     default_value = Deciles.hors_champs
     possible_values = Deciles
     entity = Menage
-    label = "Décile de niveau de vie"
+    label = 'Décile de niveau de vie'
 
     def formula(menage, period):
         niveau_de_vie = menage('niveau_de_vie', period)
@@ -60,13 +60,13 @@ class niveau_vie_decile(YearlyVariable):
 class loyer_impute(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Loyer imputé du ménage"
+    label = 'Loyer imputé du ménage'
 
 
 class rev_apres_loyer(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Revenu disponible du ménage auquel on ajoute le loyer imputé"
+    label = 'Revenu disponible du ménage auquel on ajoute le loyer imputé'
 
     def formula(menage, period):
         revenu_disponible = menage('rev_disponible', period)
@@ -80,13 +80,13 @@ class rev_apres_loyer(YearlyVariable):
 class rev_disp_loyerimput(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Revenu disponible du ménage auquel on ajoute le loyer imputé"
+    label = 'Revenu disponible du ménage auquel on ajoute le loyer imputé'
 
 
 class rev_disponible(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Revenu disponible du ménage"
+    label = 'Revenu disponible du ménage'
 
 
 class revdecm(YearlyVariable):
@@ -98,10 +98,10 @@ class revdecm(YearlyVariable):
 class revtot(YearlyVariable):
     value_type = int
     entity = Menage
-    label = "Revenu total du ménage"
+    label = 'Revenu total du ménage'
 
 
 class revtotuc(YearlyVariable):
     value_type = int
     entity = Menage
-    label = "Revenu total par unité de consommation du ménage"
+    label = 'Revenu total par unité de consommation du ménage'

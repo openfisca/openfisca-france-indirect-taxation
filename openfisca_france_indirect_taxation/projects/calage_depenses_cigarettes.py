@@ -17,7 +17,7 @@ def create_reforme_calage_depenses_cigarettes(
 
     class calage_depenses_cigarettes(Reform):
         key = 'calage_depenses_cigarettes',
-        name = "Réforme qui recale les dépenses de cigarettes pour atteindre un certain niveau agrégé",
+        name = 'Réforme qui recale les dépenses de cigarettes pour atteindre un certain niveau agrégé',
 
         if niveau_calage == 'individuel':
             class depenses_cigarettes(Variable):
@@ -27,7 +27,7 @@ def create_reforme_calage_depenses_cigarettes(
                 set_input = set_input_divide_by_period
 
                 def formula(menage, period, parameters):
-                    prix_paquet = parameters("{}-12-31".format(year_calage)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
+                    prix_paquet = parameters('{}-12-31'.format(year_calage)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
                     paquets_par_menage = agregat_depenses / 12 / (menage('pondmen', period.this_year).sum())
                     nombre_paquets_imputes = (
                         paquets_par_menage
@@ -44,7 +44,7 @@ def create_reforme_calage_depenses_cigarettes(
                 set_input = set_input_divide_by_period
 
                 def formula(menage, period, parameters):
-                    prix_paquet = parameters("{}-12-31".format(year_calage)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
+                    prix_paquet = parameters('{}-12-31'.format(year_calage)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
                     paquets_par_menage = agregat_depenses / 12 / (menage('pondmen', period.this_year).sum())
                     decile = menage('niveau_vie_decile', period.this_year)
                     depenses_cigarettes_totales = (menage('poste_02_2_1', period, options = [DIVIDE]) * menage('pondmen', period.this_year)).sum()
@@ -109,7 +109,7 @@ def create_reforme_calage_depenses_tabac(
 
     class calage_depenses(Reform):
         key = 'calage_depenses_cigarettes',
-        name = "Réforme qui recale les dépenses de cigarettes pour atteindre un certain niveau agrégé",
+        name = 'Réforme qui recale les dépenses de cigarettes pour atteindre un certain niveau agrégé',
 
         class depenses_cigarettes(Variable):
             value_type = float

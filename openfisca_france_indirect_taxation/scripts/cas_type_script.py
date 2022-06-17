@@ -9,7 +9,7 @@ TEST_CASE = {
     },
     'menages': {
         'menage1': {
-            'personne_de_reference': ["Arthur"],
+            'personne_de_reference': ['Arthur'],
             'region': {'2021': 'franche_comte'},
             'code_region' : {'2021': 27},
             'nombre_litres_gazole_b7': {'2021': 600},
@@ -22,7 +22,7 @@ TEST_CASE = {
             'nombre_litres_gpl_carburant': {'2021': 600},
         },
         'menage2': {
-            'personne_de_reference': ["Brittany"],
+            'personne_de_reference': ['Brittany'],
             'region': {'2021': 'corse'},
             'code_region' : {'2021': 94},
             'nombre_litres_gazole_b7': {'2021': 600},

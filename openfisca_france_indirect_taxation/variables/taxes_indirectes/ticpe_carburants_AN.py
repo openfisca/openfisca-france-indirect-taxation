@@ -10,7 +10,7 @@ import numpy as np
 class gazole_b7_ticpe(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur le gazole B7"
+    label = 'Calcul du montant de TICPE sur le gazole B7'
     definition_period = YEAR
 
     def formula(menage, period, parameters):
@@ -35,7 +35,7 @@ class gazole_b7_ticpe(Variable):
 class gazole_b10_ticpe(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur le gazole B10"
+    label = 'Calcul du montant de TICPE sur le gazole B10'
     definition_period = YEAR
 
     def formula_2017(menage, period, parameters):
@@ -59,7 +59,7 @@ class gazole_b10_ticpe(Variable):
 class gazole_ticpe_total(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur tous les types de gasoil cumulés"
+    label = 'Calcul du montant de la TICPE sur tous les types de gasoil cumulés'
     definition_period = YEAR
 
     def formula_2017(menage, period):
@@ -147,7 +147,7 @@ class essence_super_plombe_ticpe(Variable):
     entity = Menage
     label = "Calcul du montant de la TICPE sur l'essence super plombé"
     definition_period = YEAR
-    end = "2006-12-31"
+    end = '2006-12-31'
 
     def formula(menage, period, parameters):
         accise_super_plombe_ticpe = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_plombe
@@ -202,7 +202,7 @@ class essence_ticpe_total(Variable):
 class gpl_carburant_ticpe(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur le gaz de pétrole liquéfié carburant"
+    label = 'Calcul du montant de TICPE sur le gaz de pétrole liquéfié carburant'
     definition_period = YEAR
 
     def formula(menage, period, parameters):
@@ -217,7 +217,7 @@ class gpl_carburant_ticpe(Variable):
 class ticpe_carburant_total(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur tous les carburants cumulés"
+    label = 'Calcul du montant de la TICPE sur tous les carburants cumulés'
     definition_period = YEAR
 
     def formula(menage, period):

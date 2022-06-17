@@ -1,19 +1,19 @@
 #! /usr/bin/env python
 
 
-"""France specific indirect taxation model for OpenFisca -- a versatile microsimulation free software."""
+'''France specific indirect taxation model for OpenFisca -- a versatile microsimulation free software.'''
 
 
 from setuptools import setup, find_packages
 
 
-classifiers = """\
+classifiers = ''' \
 Development Status :: 3 - Alpha
 License :: OSI Approved :: GNU Affero General Public License v3
 Operating System :: POSIX
 Programming Language :: Python
 Topic :: Scientific/Engineering :: Information Analysis
-"""
+'''
 
 doc_lines = __doc__.split('\n')
 
@@ -41,19 +41,18 @@ setup(
             'ipdb >=0.13.9, < 1.0.0',
             'matplotlib <= 3.4.3, < 4.0.0',
             'nbconvert >= 5.5.0, < 6.0.0',
+            'OpenFisca-Survey-Manager >= 0.46.13, < 1.0',
             'pytest >= 5.0.0, < 7.0.0',
             'ruamel.yaml >= 0.17.16, < 1.0.0',
             'seaborn >= 0.11.2, < 1.0.0',
-            ],
-        survey = [
-            'OpenFisca-Survey-Manager >= 0.46.13, < 1.0',
+            'statsmodels >= 0.13.2, < 1.0',
             'xlrd >= 2.0.1, < 3.0.0',
-            "statsmodels >= 0.13.2, < 1.0",
             ],
         ),
     include_package_data = True,  # Will read MANIFEST.in
     install_requires = [
         'OpenFisca-Core >= 35.8.0, < 36.0',
+        'pandas >= 0.22',
         'python-slugify >= 6.1.2, < 7.0.0',
         ],
     packages = find_packages(),

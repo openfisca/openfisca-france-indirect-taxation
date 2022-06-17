@@ -15,8 +15,8 @@ log = logging.getLogger(__name__)
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_depenses_homogenisees(temporary_store = None, year = None):
-    """Build menage consumption by categorie fiscale dataframe."""
-    log.debug(f"Entering build_depenses_homogenisees for year={year}")
+    '''Build menage consumption by categorie fiscale dataframe.'''
+    log.debug(f'Entering build_depenses_homogenisees for year={year}')
     assert temporary_store is not None
     temporary_store.open()
     assert year is not None
@@ -27,7 +27,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
 
     # Homogénéisation des bases de données de dépenses
     if year == 1995:
-        socioscm = survey.get_values(table = "socioscm")
+        socioscm = survey.get_values(table = 'socioscm')
         poids = socioscm[['mena', 'ponderrd', 'exdep', 'exrev']]
         # cette étape de ne garder que les données dont on est sûr de la qualité et de la véracité
         # exdep = 1 si les données sont bien remplies pour les dépenses du ménage
@@ -43,9 +43,9 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
             )
         poids.set_index('ident_men', inplace = True)
 
-        conso = survey.get_values(table = "depnom")
-        conso = conso[["valeur", "montant", "mena", "nomen5"]]
-        conso = conso.groupby(["mena", "nomen5"]).sum()
+        conso = survey.get_values(table = 'depnom')
+        conso = conso[['valeur', 'montant', 'mena', 'nomen5']]
+        conso = conso.groupby(['mena', 'nomen5']).sum()
         conso = conso.reset_index()
         conso.rename(
             columns = {
@@ -73,7 +73,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
         conso = conso.reset_index()
 
     if year == 2000:
-        conso = survey.get_values(table = "consomen")
+        conso = survey.get_values(table = 'consomen')
         conso.rename(
             columns = {
                 'ident': 'ident_men',
@@ -81,15 +81,15 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
             inplace = True,
             )
         for variable in ['ctotale', 'c99', 'c99999'] + \
-                        ["c0{}".format(i) for i in range(1, 10)] + \
-                        ["c{}".format(i) for i in range(10, 14)]:
+                        ['c0{}'.format(i) for i in range(1, 10)] + \
+                        ['c{}'.format(i) for i in range(10, 14)]:
             del conso[variable]
 
     if year == 2005:
-        conso = survey.get_values(table = "c05d")
+        conso = survey.get_values(table = 'c05d')
 
     if year == 2011 or year == 2017:
-        conso = survey.get_values(table = "c05", ignorecase = True)
+        conso = survey.get_values(table = 'c05', ignorecase = True)
         conso.rename(
             columns = {
                 'ident_me': 'ident_men',
@@ -130,4 +130,4 @@ if __name__ == '__main__':
     deb = time.process_time()()
     year = 2017
     build_depenses_homogenisees(year = year)
-    log.info("duration is {}".format(time.process_time()() - deb))
+    log.info('duration is {}'.format(time.process_time()() - deb))

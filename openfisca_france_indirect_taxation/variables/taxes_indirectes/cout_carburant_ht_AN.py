@@ -5,7 +5,7 @@ from openfisca_france_indirect_taxation.variables.base import Menage, Variable, 
 class cout_gazole_b7_ht(Variable):
     value_type = float
     entity = Menage
-    label = "cout du gazole B7 ht"
+    label = 'cout du gazole B7 ht'
     definition_period = YEAR
     default_value = 0
 
@@ -20,7 +20,7 @@ class cout_gazole_b7_ht(Variable):
 class cout_gazole_b10_ht(Variable):
     value_type = float
     entity = Menage
-    label = "cout du gazole B10 ht"
+    label = 'cout du gazole B10 ht'
     definition_period = YEAR
     default_value = 0
 
@@ -36,7 +36,7 @@ class cout_gazole_b10_ht(Variable):
 class cout_gazole_total_ht(Variable):
     value_type = float
     entity = Menage
-    label = "cout total du gazole ht"
+    label = 'cout total du gazole ht'
     definition_period = YEAR
     default_value = 0
 
@@ -163,7 +163,7 @@ class cout_essence_total_ht(Variable):
 class cout_gpl_carburant_ht(Variable):
     value_type = float
     entity = Menage
-    label = "cout du gaz de pétrole liquéfié - carburant ht"
+    label = 'cout du gaz de pétrole liquéfié - carburant ht'
     definition_period = YEAR
     default_value = 0
 
@@ -179,7 +179,7 @@ class cout_gpl_carburant_ht(Variable):
 class cout_carburant_total_ht(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant des couts sur tous les carburants cumulés ht"
+    label = 'Calcul du montant des couts sur tous les carburants cumulés ht'
     definition_period = YEAR
 
     def formula(menage, period):

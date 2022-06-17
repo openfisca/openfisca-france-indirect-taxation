@@ -37,7 +37,7 @@ def simulate_reformes_energie(graph = True):
         ]
 
     baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
-    asof(baseline_tax_benefit_system, "2017-12-31")
+    asof(baseline_tax_benefit_system, '2017-12-31')
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
@@ -76,7 +76,7 @@ def simulate_reformes_energie(graph = True):
     return df
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
     from openfisca_france_indirect_taxation.tests.budgets.budget_2019 import test_plf_2019_reformes_energie

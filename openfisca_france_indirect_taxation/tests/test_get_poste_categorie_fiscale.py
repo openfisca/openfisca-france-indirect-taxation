@@ -26,7 +26,7 @@ biere = dict(
     )
 
 
-@pytest.mark.parametrize("categorie", [confiserie, alcools, vin, biere])
+@pytest.mark.parametrize('categorie', [confiserie, alcools, vin, biere])
 def test_categorie_fiscale(categorie):
     postes_coicop = categorie['value']
     categorie_fiscale = categorie['categorie_fiscale']
@@ -40,5 +40,5 @@ def test_categorie_fiscale(categorie):
 def assert_categorie_fiscale(poste_coicop, categorie_fiscale):
     got = get_poste_categorie_fiscale(poste_coicop)
     assert categorie_fiscale == got, \
-        "For poste coicop {} we have wrong categorie fiscale: \n got {} but should be {}".format(
+        'For poste coicop {} we have wrong categorie fiscale: \n got {} but should be {}'.format(
             poste_coicop, got, categorie_fiscale)
