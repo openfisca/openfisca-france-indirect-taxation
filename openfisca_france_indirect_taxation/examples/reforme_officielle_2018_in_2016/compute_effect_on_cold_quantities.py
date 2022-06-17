@@ -203,6 +203,6 @@ def effect_reform_cold():
     return cold
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     cold = effect_reform_cold()
     print(logit.summary())

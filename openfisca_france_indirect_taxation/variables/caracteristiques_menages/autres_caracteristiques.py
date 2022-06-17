@@ -7,19 +7,19 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 class age_carte_grise(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "âge de la carte grise du véhicule principal"
+    label = 'âge de la carte grise du véhicule principal'
 
 
 class age_vehicule(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "âge du véhicule principal"
+    label = 'âge du véhicule principal'
 
 
 class aides_logement(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Le ménage touche des aides au logement"
+    label = 'Le ménage touche des aides au logement'
 
 
 class bat_av_49(YearlyVariable):
@@ -43,19 +43,19 @@ class bat_ap_74(YearlyVariable):
 class cataeu(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "catégorie de la commune de résidence 2011"
+    label = 'catégorie de la commune de résidence 2011'
 
 
 class dip14pr(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Diplôme de la personne de référence"
+    label = 'Diplôme de la personne de référence'
 
 
 class ident_men(YearlyVariable):
     value_type = str
     entity = Menage
-    label = "Identifiant du ménage"
+    label = 'Identifiant du ménage'
 
 
 class isolation_fenetres(YearlyVariable):
@@ -79,25 +79,25 @@ class isolation_toit(YearlyVariable):
 class identifiant_menage(YearlyVariable):
     value_type = str
     entity = Menage
-    label = "Code identifiant le ménage"
+    label = 'Code identifiant le ménage'
 
 
 class log_indiv(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Le ménage vie dans un logement individuel"
+    label = 'Le ménage vie dans un logement individuel'
 
 
 class majorite_double_vitrage(YearlyVariable):
     value_type = int
     entity = Menage
-    label = "Majorité de double vitrage dans le logement"
+    label = 'Majorité de double vitrage dans le logement'
 
 
 class ocde10(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "unités de consommation"
+    label = 'unités de consommation'
 
 
 class ouest_sud(YearlyVariable):
@@ -109,73 +109,73 @@ class ouest_sud(YearlyVariable):
 class paris(YearlyVariable):
     value_type = int
     entity = Menage
-    label = "Le ménage vit en région parisienne"
+    label = 'Le ménage vit en région parisienne'
 
 
 class petite_ville(YearlyVariable):
     value_type = int
     entity = Menage
-    label = "Le ménage vit dans une petite ville"
+    label = 'Le ménage vit dans une petite ville'
 
 
 class pondmen(YearlyVariable):
     value_type = int
     entity = Menage
-    label = "Pondération du ménage"
+    label = 'Pondération du ménage'
 
 
 class rural(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Le ménage vit en milieu rural"
+    label = 'Le ménage vit en milieu rural'
 
 
 class situacj(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Situation du conjoint vis-à-vis du travail"
+    label = 'Situation du conjoint vis-à-vis du travail'
 
 
 class situapr(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Situation de la personne de référence vis-à-vis du travail"
+    label = 'Situation de la personne de référence vis-à-vis du travail'
 
 
 class surfhab_d(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Taille du logement en m2"
+    label = 'Taille du logement en m2'
 
 
 class strate(YearlyVariable):
     value_type = int
     entity = Menage
-    label = "catégorie de la commune de résidence"
+    label = 'catégorie de la commune de résidence'
 
 
 class stalog(YearlyVariable):
     value_type = int
     entity = Menage
-    label = "Statut du logement (1 = propriétaire)"
+    label = 'Statut du logement (1 = propriétaire)'
 
 
 class tchof(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "unité urbaine"
+    label = 'unité urbaine'
 
 
 class tuu(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "unité urbaine"
+    label = 'unité urbaine'
 
 
 class typmen(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "type du ménage"
+    label = 'type du ménage'
 
 
 class vag(YearlyVariable):
@@ -187,26 +187,26 @@ class vag(YearlyVariable):
 class vp_deplacements_pro(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Le ménage utilise son véhicule particulier pour ses déplacements pro"
+    label = 'Le ménage utilise son véhicule particulier pour ses déplacements pro'
 
 
 class vp_domicile_travail(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Le ménage utilise son véhicule particulier pour se rendre à son travail"
+    label = 'Le ménage utilise son véhicule particulier pour se rendre à son travail'
 
 
 class TypesZeat(Enum):
     __order__ = 'dom region_parisienne bassin_parisien nord est ouest sud centre mediterrannee'  # Needed to keep the order in Python 2
-    dom = "dom",
-    region_parisienne = "region_parisienne",
-    bassin_parisien = "bassin_parisien",
-    nord = "nord",
-    est = "est",
-    ouest = "ouest",
-    sud = "sud-ouest",
-    centre = "centre-est",
-    mediterrannee = "mediterrannee"
+    dom = 'dom',
+    region_parisienne = 'region_parisienne',
+    bassin_parisien = 'bassin_parisien',
+    nord = 'nord',
+    est = 'est',
+    ouest = 'ouest',
+    sud = 'sud-ouest',
+    centre = 'centre-est',
+    mediterrannee = 'mediterrannee'
 
 
 class zeat(YearlyVariable):

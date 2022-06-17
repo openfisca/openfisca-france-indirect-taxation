@@ -217,7 +217,7 @@ adjusted_coicop_by_original = {
     '03.2.1.3': '03.2.1.1.3',  # chaussures pour enfants
     '03.2.2.1': '03.2.1.2.3',  # Réparation de chaussures
     '03.3.1.1': '03.3.1',      # Autres dépenses d'habillement : cérémonie, séjours hors domicile, personnes viva
-    '03.3.1.2': '03.3.2',	   # Autres dépenses d'habillement : cadeau offert (à destination d'un autre  ménage)
+    '03.3.1.2': '03.3.2',    # Autres dépenses d'habillement : cadeau offert (à destination d'un autre  ménage)
     '04.1.1.1': '04.1.1.1.1',  # loyer en résidence principale
     '04.1.2.1': '04.1.1.2.1',  # loyer autres résidence
     '04.3.1.1': '04.3.1.1.1',  # Produits destinés aux travaux courants d’entretien et de réparation du logement
@@ -275,7 +275,7 @@ adjusted_coicop_by_original = {
     '06.2.3.1': '06.2.3.1.1',  # Services des laboratoires d’analyse médicale et des cabinets de radiologie
     '06.2.3.2': '06.2.3.1.2',  # Services des auxiliaires médicaux (infirmier, kiné, laboratoire, etc.)
     '06.2.3.3': '06.2.3.1.3',  # Services extra hospitaliers (ambulance, location matériel)
-    '06.3.1.1': '06.3',	  # Services et soins hospitaliers'
+    '06.3.1.1': '06.3',   # Services et soins hospitaliers'
     '06.4.1.1': '06.4.1',      # Autres dépenses de santé : personnes vivant hors du domicile au moins un jour pa
     '06.4.1.2': '06.4.2',      # Autres dépenses de santé : cadeau offert (à destination d’un autre ménage)
     '07.1.1.1': '07.1.1.1.1',  # Achats d'automobiles neuves

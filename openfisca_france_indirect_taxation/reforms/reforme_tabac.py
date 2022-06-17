@@ -27,7 +27,7 @@ def create_reforme_tabac(baseline_year = None, elasticite = None):
 
                 def formula(menage, period, parameters):
                     baseline_depenses_cigarettes = formula_depenses_cigarettes(menage, period, parameters)
-                    prix_paquet_baseline = parameters("{}-12-31".format(baseline_year)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
+                    prix_paquet_baseline = parameters('{}-12-31'.format(baseline_year)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
                     prix_paquet_reforme = parameters(period).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
                     depenses_cigarettes = (
                         baseline_depenses_cigarettes
@@ -50,7 +50,7 @@ def create_reforme_tabac(baseline_year = None, elasticite = None):
 
                 def formula(menage, period, parameters):
                     baseline_depenses_tabac_a_rouler = formula_depenses_tabac_a_rouler(menage, period)
-                    prix_baseline = parameters("{}-12-31".format(baseline_year)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_bague_tabac
+                    prix_baseline = parameters('{}-12-31'.format(baseline_year)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_bague_tabac
                     prix_reforme = parameters(period).imposition_indirecte.taxes_tabacs.prix_tabac.prix_bague_tabac
                     depenses_tabac_a_rouler = (
                         baseline_depenses_tabac_a_rouler

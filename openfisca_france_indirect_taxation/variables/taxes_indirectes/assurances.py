@@ -8,7 +8,7 @@ class assurance_sante_taxe(YearlyVariable):
     value_type = float
     entity = Menage
     label = "Montant des taxes sur l'assurance santé"
-    end = "2016-12-31"
+    end = '2016-12-31'
 
     def formula(menage, period, parameters):
         depenses_assurance_sante = menage('depenses_assurance_sante', period)
@@ -50,7 +50,7 @@ class assurance_transport_taxe(YearlyVariable):
 class autres_assurances_taxe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Montant des taxes sur les autres assurances"
+    label = 'Montant des taxes sur les autres assurances'
 
     def formula(menage, period, parameters):
         depenses_autres_assurances = menage('depenses_autres_assurances', period)
@@ -61,7 +61,7 @@ class autres_assurances_taxe(YearlyVariable):
 class total_assurances_taxe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Montant des taxes sur les assurances"
+    label = 'Montant des taxes sur les assurances'
 
     def formula(menage, period):
         assurance_transport_taxe = menage('assurance_transport_taxe', period)

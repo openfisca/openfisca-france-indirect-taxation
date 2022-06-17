@@ -40,15 +40,15 @@ taxe_by_categorie_fiscale_number = {
 def build_complete_coicop_nomenclature(to_csv = True):
     coicop_nomenclature = build_raw_coicop_nomenclature()
     items = [
-        ("Cigares et cigarillos", "02.2.1"),
-        ("Cigarettes", "02.2.2"),
-        ("Tabac sous d'autres formes et produits connexes", "02.2.3"),
-        ("Stupéfiants ", "02.3"),
+        ('Cigares et cigarillos', '02.2.1'),
+        ('Cigarettes', '02.2.2'),
+        ("Tabac sous d'autres formes et produits connexes", '02.2.3'),
+        ('Stupéfiants ', '02.3'),
         ]
 
     for label_poste, code_coicop in items:
-        label_division = "Boissons alcoolisées et tabac"
-        label_groupe = "Tabac"
+        label_division = 'Boissons alcoolisées et tabac'
+        label_groupe = 'Tabac'
         label_classe = label_sous_classe = label_poste
         data = dict(
             label_division = [label_division],
@@ -62,7 +62,7 @@ def build_complete_coicop_nomenclature(to_csv = True):
             pd.DataFrame.from_dict(data, dtype = 'str'),
             ignore_index = True
             )
-        coicop_nomenclature.sort_values("code_coicop", inplace = True)
+        coicop_nomenclature.sort_values('code_coicop', inplace = True)
 
     if to_csv:
         coicop_nomenclature.to_csv(
@@ -73,6 +73,6 @@ def build_complete_coicop_nomenclature(to_csv = True):
        'label_sous_classe', 'label_poste', 'code_coicop']].copy()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     coicop_nomenclature = build_complete_coicop_nomenclature(False)
     print(coicop_nomenclature.dtypes)

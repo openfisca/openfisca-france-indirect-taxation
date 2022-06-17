@@ -9,7 +9,7 @@ from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
 
 # Import d'une nouvelle palette de couleurs
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 simulated_variables_depenses_tot = [
     'precarite_energetique_depenses_tot',

@@ -45,9 +45,9 @@ def preprocess_legislation(parameters):
         values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
 
     prix_carburants['super_95_e10_ttc'] = {
-        "description": 'super_95_e10_ttc'.replace('_', ' '),
-        "unit": "currency",
-        "values": values
+        'description': 'super_95_e10_ttc'.replace('_', ' '),
+        'unit': 'currency',
+        'values': values
         }
     autres_carburants = [
         'diesel_ht',
@@ -72,11 +72,11 @@ def preprocess_legislation(parameters):
             values['{}-01-01'.format(year)] = prix_annuel[year] * 100
 
         prix_carburants[element] = {
-            "description": element.replace('_', ' '),
-            "unit": "currency",
-            "values": values
+            'description': element.replace('_', ' '),
+            'unit': 'currency',
+            'values': values
             }
-    prix_carburants['description'] = "Prix des carburants"
+    prix_carburants['description'] = 'Prix des carburants'
     node_prix_carburants = ParameterNode(
         'prix_carburants',
         data = prix_carburants,
@@ -94,7 +94,7 @@ def preprocess_legislation(parameters):
 
     parc_annuel_moyen_vp = parc_annuel_moyen_vp.set_index('Unnamed: 0')
     parc_vp = {
-        "description": "taille moyenne du parc automobile en France métropolitaine en milliers de véhicules",
+        'description': 'taille moyenne du parc automobile en France métropolitaine en milliers de véhicules',
         }
     for element in ['diesel', 'essence']:
         taille_parc = parc_annuel_moyen_vp[element]
@@ -105,9 +105,9 @@ def preprocess_legislation(parameters):
             values['{}-01-01'.format(year)] = taille_parc[year]
 
         parc_vp[element] = {
-            "description": "nombre de véhicules particuliers immatriculés en France à motorisation " + element,
-            "unit": "1000",
-            "values": values,
+            'description': 'nombre de véhicules particuliers immatriculés en France à motorisation ' + element,
+            'unit': '1000',
+            'values': values,
             }
 
     node_parc_vp = ParameterNode(
@@ -127,7 +127,7 @@ def preprocess_legislation(parameters):
 
     quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('Unnamed: 0')
     quantite_carbu_vp = {
-        "description": "quantite de carburants consommés en France métropolitaine",
+        'description': 'quantite de carburants consommés en France métropolitaine',
         }
     for element in ['diesel', 'essence']:
         quantite_carburants = quantite_carbu_vp_france[element]
@@ -138,8 +138,8 @@ def preprocess_legislation(parameters):
             values['{}-01-01'.format(year)] = quantite_carburants[year]
 
         quantite_carbu_vp[element] = {
-            "description": "consommation totale de " + element + " en France",
-            "values": values
+            'description': 'consommation totale de ' + element + ' en France',
+            'values': values
             }
 
     node_quantite_carbu_vp = ParameterNode(
@@ -176,10 +176,10 @@ def preprocess_legislation(parameters):
     part_des_types_de_supercarburants['somme'] = 0
     for element in cols:
         part_des_types_de_supercarburants['somme'] += part_des_types_de_supercarburants[element]
-    assert (part_des_types_de_supercarburants['somme'] == 1).any(), "The weighting of the shares did not work"
+    assert (part_des_types_de_supercarburants['somme'] == 1).any(), 'The weighting of the shares did not work'
 
     part_type_supercaburants = {
-        "description": "part de la consommation totale d'essence de chaque type supercarburant",
+        'description': "part de la consommation totale d'essence de chaque type supercarburant",
         }
     for element in ['super_plombe', 'sp_95', 'sp_98', 'sp_e10']:
         part_par_carburant = part_des_types_de_supercarburants[element]
@@ -190,9 +190,9 @@ def preprocess_legislation(parameters):
             values['{}-01-01'.format(year)] = part_par_carburant[year]
 
         part_type_supercaburants[element] = {
-            "description": "part de " + element + " dans la consommation totale d'essences",
-            "unit": "/1",
-            "values": values
+            'description': 'part de ' + element + " dans la consommation totale d'essences",
+            'unit': '/1',
+            'values': values
             }
 
     node_part_type_supercaburants = ParameterNode(
@@ -203,43 +203,43 @@ def preprocess_legislation(parameters):
 
     # Add CO2 emissions from energy (Source : Ademe)
     emissions_CO2 = {
-        "description": "émissions de CO2 des énergies",
+        'description': 'émissions de CO2 des énergies',
         }
     emissions_CO2['carburants'] = {
-        "description": "émissions de CO2 des carburants",
-        "CO2_diesel": {
-            "description": "émissions de CO2 du diesel (en kg par litre)",
+        'description': 'émissions de CO2 des carburants',
+        'CO2_diesel': {
+            'description': 'émissions de CO2 du diesel (en kg par litre)',
             # "unit": "kg/l",
-            "values": {'1990-01-01': 2.66}
+            'values': {'1990-01-01': 2.66}
             },
-        "CO2_essence": {
-            "description": "émissions de CO2 du diesel en kg par litre",
+        'CO2_essence': {
+            'description': 'émissions de CO2 du diesel en kg par litre',
             # "unit": "kg/l",
-            "values": {'1990-01-01': 2.42},
+            'values': {'1990-01-01': 2.42},
             },
         }
 
     emissions_CO2['energie_logement'] = {
-        "description": "émissions de CO2 de l'énergie dans le logement",
-        "CO2_electricite": {
-            "description": "émissions de CO2 de l'électricité (kg par kWh)",
+        'description': "émissions de CO2 de l'énergie dans le logement",
+        'CO2_electricite': {
+            'description': "émissions de CO2 de l'électricité (kg par kWh)",
             # "unit": "kg/kWh",
-            "values": {'1990-01-01': 0.09},
+            'values': {'1990-01-01': 0.09},
             },
-        "CO2_gaz_ville": {
-            "description": "émissions de CO2 du gaz (kg par kWh)",
+        'CO2_gaz_ville': {
+            'description': 'émissions de CO2 du gaz (kg par kWh)',
             # "unit": "kg/kWh",
-            "values": {'1990-01-01': 0.241},
+            'values': {'1990-01-01': 0.241},
             },
-        "CO2_gaz_liquefie": {
-            "description": "émissions de CO2 du gaz (kg par kWh)",
+        'CO2_gaz_liquefie': {
+            'description': 'émissions de CO2 du gaz (kg par kWh)',
             # "unit": "kg/kWh",
-            "values": {'1990-01-01': 0.253},
+            'values': {'1990-01-01': 0.253},
             },
-        "CO2_combustibles_liquides": {
-            "description": "émissions de CO2 des combustibles liquides, (kg par litre)",
+        'CO2_combustibles_liquides': {
+            'description': 'émissions de CO2 des combustibles liquides, (kg par litre)',
             # "unit": "kg/l",
-            "values": {'1990-01-01': 3.24},
+            'values': {'1990-01-01': 3.24},
             },
         }
     node_emissions_CO2 = ParameterNode(
@@ -250,14 +250,14 @@ def preprocess_legislation(parameters):
 
     # Add data from comptabilite national about alcohol
     alcool_conso_et_vin = {
-        "description": "alcools",
+        'description': 'alcools',
         }
     alcool_conso_et_vin['vin'] = {
-        "description": "Pour calculer le taux de taxation implicite sur le vin",
-        "droit_cn_vin": {
-            "description": "Masse droit vin, vin mousseux, cidres et poirés selon comptabilité nationale",
+        'description': 'Pour calculer le taux de taxation implicite sur le vin',
+        'droit_cn_vin': {
+            'description': 'Masse droit vin, vin mousseux, cidres et poirés selon comptabilité nationale',
             # TODO "unit": "currency" ?
-            "values": {
+            'values': {
                 '2013-01-01': 122,
                 '2012-01-01': 120,
                 '2011-01-01': 118,
@@ -279,10 +279,10 @@ def preprocess_legislation(parameters):
                 '1995-01-01': 129,
                 },
             },
-        "masse_conso_cn_vin": {
-            "description": "Masse consommation vin, vin mousseux, cidres et poirés selon comptabilité nationale",
+        'masse_conso_cn_vin': {
+            'description': 'Masse consommation vin, vin mousseux, cidres et poirés selon comptabilité nationale',
             # TODO "unit": "currency" ?
-            "values": {
+            'values': {
                 '2013-01-01': 11515,
                 '2012-01-01': 11407,
                 '2011-01-01': 11387,
@@ -308,11 +308,11 @@ def preprocess_legislation(parameters):
         }
 
     alcool_conso_et_vin['biere'] = {
-        "description": "Pour calculer le taux de taxation implicite sur la bière",
-        "droit_cn_biere": {
-            "description": "Masse droit biere selon comptabilité nationale",
+        'description': 'Pour calculer le taux de taxation implicite sur la bière',
+        'droit_cn_biere': {
+            'description': 'Masse droit biere selon comptabilité nationale',
             # TODO "unit": "float",
-            "values": {
+            'values': {
                 '2013-01-01': 897,
                 '2012-01-01': 783,
                 '2011-01-01': 393,
@@ -334,10 +334,10 @@ def preprocess_legislation(parameters):
                 '1995-01-01': 361,
                 }
             },
-        "masse_conso_cn_biere": {
-            "description": "Masse consommation biere selon comptabilité nationale",
+        'masse_conso_cn_biere': {
+            'description': 'Masse consommation biere selon comptabilité nationale',
             # TODO "unit": "float",
-            "values": {
+            'values': {
                 '2013-01-01': 3321,
                 '2012-01-01': 2868,
                 '2011-01-01': 2769,
@@ -362,11 +362,11 @@ def preprocess_legislation(parameters):
         }
 
     alcool_conso_et_vin['alcools_forts'] = {
-        "description": "Pour calculer le taux de taxation implicite sur alcools forts",
-        "droit_cn_alcools": {
-            "description": "Masse droit alcool selon comptabilité nationale sans droits sur les produits intermediaires et cotisation spéciale alcool fort",
+        'description': 'Pour calculer le taux de taxation implicite sur alcools forts',
+        'droit_cn_alcools': {
+            'description': 'Masse droit alcool selon comptabilité nationale sans droits sur les produits intermediaires et cotisation spéciale alcool fort',
             # TODO "unit": "float",
-            "values": {
+            'values': {
                 '2012-01-01': 2225,
                 '2011-01-01': 2150,
                 '2010-01-01': 2111,
@@ -383,10 +383,10 @@ def preprocess_legislation(parameters):
                 # TODO: Problème pour les alcools forts chiffres différents entre les deux bases excel !
                 },
             },
-        "droit_cn_alcools_total": {
-            "description": "Masse droit alcool selon comptabilité nationale avec les differents droits",
+        'droit_cn_alcools_total': {
+            'description': 'Masse droit alcool selon comptabilité nationale avec les differents droits',
             # TODO "unit": "float",
-            "values": {
+            'values': {
                 '2013-01-01': 3022,
                 '2012-01-01': 2718,
                 '2011-01-01': 3078,
@@ -408,10 +408,10 @@ def preprocess_legislation(parameters):
                 '1995-01-01': 2337,
                 },
             },
-        "masse_conso_cn_alcools": {
-            "description": "Masse consommation alcool selon comptabilité nationale",
+        'masse_conso_cn_alcools': {
+            'description': 'Masse consommation alcool selon comptabilité nationale',
             # TODO "unit": "float",
-            "values": {
+            'values': {
                 '2013-01-01': 7022,
                 '2012-01-01': 6996,
                 '2011-01-01': 6680,

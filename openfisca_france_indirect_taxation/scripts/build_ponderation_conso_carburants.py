@@ -15,7 +15,7 @@ parc_annuel_moyen_vp = parc_annuel_moyen_vp.transpose()
 
 parc_annuel_moyen_vp['check'] = \
     parc_annuel_moyen_vp['dont essence'] + parc_annuel_moyen_vp['dont Diesel'] - parc_annuel_moyen_vp['Total']
-assert (parc_annuel_moyen_vp['check'] == 0).any(), "sum of diesel and super is not equal to total"
+assert (parc_annuel_moyen_vp['check'] == 0).any(), 'sum of diesel and super is not equal to total'
 del parc_annuel_moyen_vp['Total']
 del parc_annuel_moyen_vp['check']
 parc_annuel_moyen_vp.columns = ['essence', 'diesel']

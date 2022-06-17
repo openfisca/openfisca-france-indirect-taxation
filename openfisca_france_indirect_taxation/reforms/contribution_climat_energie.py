@@ -7,7 +7,7 @@ from openfisca_core import reforms
 def build_reform(tax_benefit_system):
     Reform = reforms.make_reform(
         key = 'contribution_climat_energie',
-        name = "Réforme telle que prévue par la loi",
+        name = 'Réforme telle que prévue par la loi',
         use_baseline = tax_benefit_system,
         )
 
@@ -23,13 +23,13 @@ def build_reform(tax_benefit_system):
 
 def modify_parameters(parameters):
     node = ParameterNode(
-        "contribution_climat_energie",
+        'contribution_climat_energie',
         data = {
-            "description": "contribution_climat_energie",
-            "essence": {
-                "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
-                "unit": 'currency',
-                "values": {
+            'description': 'contribution_climat_energie',
+            'essence': {
+                'description': "Surcroît de prix de l'essence (en euros par hectolitres)",
+                'unit': 'currency',
+                'values': {
                     '2014-01-01': 1.694,
                     '2015-01-01': 3.509,
                     '2016-01-01': 5.324,
@@ -38,10 +38,10 @@ def modify_parameters(parameters):
                     '2019-01-01': 11.495,
                     },
                 },
-            "diesel": {
-                "description": "Surcroît de prix du diesel (en euros par hectolitres)",
-                "unit": 'currency',
-                "values": {
+            'diesel': {
+                'description': 'Surcroît de prix du diesel (en euros par hectolitres)',
+                'unit': 'currency',
+                'values': {
                     '2014-01-01': 1.862,
                     '2015-01-01': 3.857,
                     '2016-01-01': 5.852,
@@ -50,10 +50,10 @@ def modify_parameters(parameters):
                     '2019-01-01': 12.635,
                     },
                 },
-            "gaz": {
-                "description": "Surcroît de prix du gaz (en euros par kWh)",
-                "unit": 'currency',
-                "values": {
+            'gaz': {
+                'description': 'Surcroît de prix du gaz (en euros par kWh)',
+                'unit': 'currency',
+                'values': {
                     '2014-01-01': 0.00168,
                     '2015-01-01': 0.00348,
                     '2016-01-01': 0.00528,

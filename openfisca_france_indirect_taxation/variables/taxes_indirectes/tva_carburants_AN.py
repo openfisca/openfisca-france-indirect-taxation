@@ -7,7 +7,7 @@ from openfisca_france_indirect_taxation.variables.base import Menage, Variable, 
 class tva_sur_gazole_b7(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la consommation de gazole B7"
+    label = 'TVA sur la consommation de gazole B7'
     definition_period = YEAR
     default_value = 0
 
@@ -21,7 +21,7 @@ class tva_sur_gazole_b7(Variable):
 class tva_sur_gazole_b10(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la consommation de gazole B10"
+    label = 'TVA sur la consommation de gazole B10'
     definition_period = YEAR
     default_value = 0
 
@@ -37,7 +37,7 @@ class tva_sur_gazole_b10(Variable):
 class tva_sur_gazole_total(Variable):
     value_type = float
     entity = Menage
-    label = "TVA total sur le gazole"
+    label = 'TVA total sur le gazole'
     definition_period = YEAR
     default_value = 0
 
@@ -158,7 +158,7 @@ class tva_sur_essence_total(Variable):
 class tva_sur_gpl_carburant(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la consommation de gaz de pétrole liquéfié carburant"
+    label = 'TVA sur la consommation de gaz de pétrole liquéfié carburant'
     definition_period = YEAR
     default_value = 0
 
@@ -173,7 +173,7 @@ class tva_sur_gpl_carburant(Variable):
 class tva_sur_carburant_total(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TVA sur tous les carburants cumulés"
+    label = 'Calcul du montant de la TVA sur tous les carburants cumulés'
     definition_period = YEAR
 
     def formula(menage, period):

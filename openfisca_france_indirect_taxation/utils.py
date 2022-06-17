@@ -24,7 +24,7 @@ assets_directory = os.path.join(
 
 
 def get_input_data_frame(year, use_entd = True):
-    """Retrieve budget des familles (BDF) survey data from disk with the opportunity to use variables from enquête nationale transports et déplacements (ENTD).
+    '''Retrieve budget des familles (BDF) survey data from disk with the opportunity to use variables from enquête nationale transports et déplacements (ENTD).
 
     :param year: survey year
     :type year: int
@@ -32,14 +32,14 @@ def get_input_data_frame(year, use_entd = True):
     :type use_entd: bool, optional
     :return: survey data
     :rtype: DataFrame
-    """
-    openfisca_survey_collection = SurveyCollection.load(collection = "openfisca_indirect_taxation")
-    openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year))
-    input_data_frame = openfisca_survey.get_values(table = "input")
+    '''
+    openfisca_survey_collection = SurveyCollection.load(collection = 'openfisca_indirect_taxation')
+    openfisca_survey = openfisca_survey_collection.get_survey('openfisca_indirect_taxation_data_{}'.format(year))
+    input_data_frame = openfisca_survey.get_values(table = 'input')
     input_data_frame.reset_index(inplace = True)
 
     if use_entd and (year == 2011 or year == 2017):
-        log.info("Using variables from ENTD")
+        log.info('Using variables from ENTD')
 
         input_data_frame.rename(
             columns = {
@@ -97,7 +97,7 @@ def get_parametres_fiscalite_data_frame(year = None):
             'Parametres fiscalite indirecte.xls',
             )
         parametres_fiscalite_data_frame = pandas.read_excel(parametres_fiscalite_xls_file_path,
-            sheet_name = "categoriefiscale")
+            sheet_name = 'categoriefiscale')
         parametres_fiscalite_data_frame.to_csv(parametres_fiscalite_csv_file_path, encoding = 'utf-8')
 
     if year:

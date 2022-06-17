@@ -11,7 +11,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import graph_buil
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 # Import d'une nouvelle palette de couleurs
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 
 def plot_taux_effort_ticpe():

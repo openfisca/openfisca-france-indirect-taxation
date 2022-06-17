@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
-    """Impute rent for owner"""
+    '''Impute rent for owner'''
     assert temporary_store is not None
     temporary_store.open()
     assert year is not None
@@ -29,7 +29,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
     survey = bdf_survey_collection.get_survey('budget_des_familles_{}'.format(year))
 
     if year == 1995:
-        imput00 = survey.get_values(table = "socioscm")
+        imput00 = survey.get_values(table = 'socioscm')
         # cette étape permet de ne garder que les données dont on est sûr de la qualité et de la véracité
         # exdep = 1 si les données sont bien remplies pour les dépenses du ménage
         # exrev = 1 si les données sont bien remplies pour les revenus du ménage
@@ -82,7 +82,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
             config_ini = os.path.join(config_files_directory, 'config.ini')
             parser.read([config_ini])
             directory_path = os.path.normpath(
-                parser.get("openfisca_france_indirect_taxation", "assets")
+                parser.get('openfisca_france_indirect_taxation', 'assets')
                 )
             hotdeck = pandas.read_stata(os.path.join(directory_path, 'hotdeck_result.dta'))
         except Exception:
@@ -100,7 +100,7 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
     # Pour bdf 2000 et 2005, on utilise les loyers imputes calcules par l'insee
     if year == 2000:
         # Garder les loyers imputés (disponibles dans la table sur les ménages)
-        loyers_imputes = survey.get_values(table = "menage", variables = ['ident', 'rev81'])
+        loyers_imputes = survey.get_values(table = 'menage', variables = ['ident', 'rev81'])
         loyers_imputes.rename(
             columns = {
                 'ident': 'ident_men',
@@ -111,13 +111,13 @@ def build_imputation_loyers_proprietaires(temporary_store = None, year = None):
 
     if year == 2005:
         # Garder les loyers imputés (disponibles dans la table sur les ménages)
-        loyers_imputes = survey.get_values(table = "menage")
+        loyers_imputes = survey.get_values(table = 'menage')
         kept_variables = ['ident_men', 'rev801_d']
         loyers_imputes = loyers_imputes[kept_variables]
         loyers_imputes.rename(columns = {'rev801_d': 'poste_04_2_1'}, inplace = True)
 
     if year in [2011, 2017]:
-        loyers_imputes = survey.get_values(table = "menage", ignorecase = True)
+        loyers_imputes = survey.get_values(table = 'menage', ignorecase = True)
 
         kept_variables = ['ident_men', 'rev801']
         loyers_imputes = loyers_imputes[kept_variables].copy()
@@ -155,4 +155,4 @@ if __name__ == '__main__':
     deb = time.process_time()()
     year = 1995
     build_imputation_loyers_proprietaires(year = year)
-    log.info("step 0_1_2_build_imputation_loyers_proprietaires duration is {}".format(time.process_time()() - deb))
+    log.info('step 0_1_2_build_imputation_loyers_proprietaires duration is {}'.format(time.process_time()() - deb))

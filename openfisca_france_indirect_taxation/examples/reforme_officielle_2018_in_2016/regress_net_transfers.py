@@ -156,7 +156,7 @@ regression_ols = smf.ols(formula = 'Net_transfers_by_cu_after_recycling ~ \
     data = df_reforme).fit()
 print(regression_ols.summary())
 
-"""
+'''
 
 # Compute transfers by income
 params = regression_ols.params
@@ -200,4 +200,4 @@ df_age = df_age.reset_index()
 df_age['transfers'] = average_transfers_by_age + df_age['index'] * param_age + (df_age['index'] ** 2) * param_age_2
 graph_builder_line(df_age['transfers'])
 
-"""
+'''

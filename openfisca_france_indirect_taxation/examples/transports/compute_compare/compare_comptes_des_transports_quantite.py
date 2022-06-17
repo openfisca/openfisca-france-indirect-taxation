@@ -18,7 +18,7 @@ from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 # Import d'une nouvelle palette de couleurs
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 # Import des fichiers csv donnant les montants agrégés des quantités consommées répertoriées dans les enquêtes BdF.
 # Ces montants sont calculés dans compute_quantite_carburants

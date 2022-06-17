@@ -1,19 +1,19 @@
 #! /usr/bin/env python
 
 
-"""France specific indirect taxation model for OpenFisca -- a versatile microsimulation free software."""
+'''France specific indirect taxation model for OpenFisca -- a versatile microsimulation free software.'''
 
 
 from setuptools import setup, find_packages
 
 
-classifiers = """\
+classifiers = ''' \
 Development Status :: 3 - Alpha
 License :: OSI Approved :: GNU Affero General Public License v3
 Operating System :: POSIX
 Programming Language :: Python
 Topic :: Scientific/Engineering :: Information Analysis
-"""
+'''
 
 doc_lines = __doc__.split('\n')
 

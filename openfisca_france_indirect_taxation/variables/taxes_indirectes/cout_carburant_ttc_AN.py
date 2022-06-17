@@ -7,7 +7,7 @@ import numpy as np
 class cout_gazole_b7_ttc(Variable):
     value_type = float
     entity = Menage
-    label = "cout du gazole B7 ttc"
+    label = 'cout du gazole B7 ttc'
     definition_period = YEAR
     default_value = 0
 
@@ -28,7 +28,7 @@ class cout_gazole_b7_ttc(Variable):
 class cout_gazole_b10_ttc(Variable):  ##ATTENTION: pas de prix disponible pour gazole B10, on utilise prix du gazole B7
     value_type = float
     entity = Menage
-    label = "prix du gazole B10 ttc"
+    label = 'prix du gazole B10 ttc'
     definition_period = YEAR
     default_value = 0
 
@@ -49,7 +49,7 @@ class cout_gazole_b10_ttc(Variable):  ##ATTENTION: pas de prix disponible pour g
 class cout_gazole_total_ttc(Variable):
     value_type = float
     entity = Menage
-    label = "cout total du gazole ttc"
+    label = 'cout total du gazole ttc'
     definition_period = YEAR
     default_value = 0
 
@@ -194,7 +194,7 @@ class cout_essence_total_ttc(Variable):
 class cout_gpl_carburant_ttc(Variable):
     value_type = float
     entity = Menage
-    label = "cout du gaz de pétrole liquéfié - carburant ttc"
+    label = 'cout du gaz de pétrole liquéfié - carburant ttc'
     definition_period = YEAR
     default_value = 0
 
@@ -215,7 +215,7 @@ class cout_gpl_carburant_ttc(Variable):
 class cout_carburant_total_ttc(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant des couts sur tous les carburants cumulés ttc"
+    label = 'Calcul du montant des couts sur tous les carburants cumulés ttc'
     definition_period = YEAR
 
     def formula(menage, period):

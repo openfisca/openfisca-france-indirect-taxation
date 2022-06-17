@@ -22,7 +22,7 @@ raw_data_ini = os.path.join(
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('config', default = raw_data_ini, help = "path of configuration file", nargs = '?')
+    parser.add_argument('config', default = raw_data_ini, help = 'path of configuration file', nargs = '?')
     parser.add_argument(
         '-c', '--collection',
         help = "name of collection to build or update ('budget_des_familles', 'aliss' or 'both')",
@@ -30,10 +30,10 @@ def main():
         default = 'both',
         )
     parser.add_argument('-d', '--replace-data', action = 'store_true', default = True,
-        help = "erase existing survey data HDF5 file (instead of failing when HDF5 file already exists)")
+        help = 'erase existing survey data HDF5 file (instead of failing when HDF5 file already exists)')
     parser.add_argument('-m', '--replace-metadata', action = 'store_true', default = True,
-        help = "erase existing collection metadata JSON file (instead of just adding new surveys)")
-    parser.add_argument('-v', '--verbose', action = 'store_true', default = False, help = "increase output verbosity")
+        help = 'erase existing collection metadata JSON file (instead of just adding new surveys)')
+    parser.add_argument('-v', '--verbose', action = 'store_true', default = False, help = 'increase output verbosity')
     args = parser.parse_args()
     logging.basicConfig(level = logging.DEBUG if args.verbose else logging.WARNING, stream = sys.stdout)
 
@@ -61,10 +61,10 @@ def main():
             source_format = 'sas',
             )
 
-    log.info("The program has been executed in {}".format(datetime.datetime.now() - start_time))
+    log.info('The program has been executed in {}'.format(datetime.datetime.now() - start_time))
 
     return 0
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     sys.exit(main())

@@ -96,7 +96,7 @@ def create_new_variables(year_data):
             inplace = True
             )
 
-        if option == "entd":
+        if option == 'entd':
             data['distance'] = data.distance_diesel + data.distance_essence + data.distance_autre_carbu
 
         return data
@@ -135,5 +135,5 @@ def create_niveau_vie_quantiles(year_data):
     return create_niveau_vie_quantiles_(data_entd, option = 'entd'), create_niveau_vie_quantiles_(data_bdf, option = 'bdf')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     data_entd, data_bdf = create_niveau_vie_quantiles()

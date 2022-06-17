@@ -9,7 +9,7 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 class quantites_combustibles_liquides(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Quantité de combustibles solides (en litres) consommée par les ménages"
+    label = 'Quantité de combustibles solides (en litres) consommée par les ménages'
 
     def formula(menage, period, parameters):
         depenses_combustibles_liquides = menage('depenses_combustibles_liquides', period)
@@ -24,7 +24,7 @@ class quantites_combustibles_liquides(YearlyVariable):
 class quantites_diesel(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Quantités de diesel consommées par les ménages"
+    label = 'Quantités de diesel consommées par les ménages'
 
     def formula(menage, period, parameters):
         depenses_diesel = menage('depenses_diesel', period)
@@ -310,7 +310,7 @@ class quantites_gaz_liquefie(YearlyVariable):
 class quantites_sp_e10(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Quantités consommées de sans plomb e10 par les ménages"
+    label = 'Quantités consommées de sans plomb e10 par les ménages'
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence', period)
@@ -325,7 +325,7 @@ class quantites_sp_e10(YearlyVariable):
 class quantites_sp95(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Quantités consommées de sans plomb 95 par les ménages"
+    label = 'Quantités consommées de sans plomb 95 par les ménages'
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence', period)
@@ -340,7 +340,7 @@ class quantites_sp95(YearlyVariable):
 class quantites_sp98(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Quantités consommées de sans plomb 98 par les ménages"
+    label = 'Quantités consommées de sans plomb 98 par les ménages'
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence', period)
@@ -355,7 +355,7 @@ class quantites_sp98(YearlyVariable):
 class quantites_super_plombe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Quantités consommées de super plombé par les ménages"
+    label = 'Quantités consommées de super plombé par les ménages'
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence', period)
