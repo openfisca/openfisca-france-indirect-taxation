@@ -106,7 +106,7 @@ def preprocess_legislation(parameters):
 
         parc_vp[element] = {
             "description": "nombre de véhicules particuliers immatriculés en France à motorisation " + element,
-            "unit": 1000,
+            "unit": "1000",
             "values": values,
             }
 
