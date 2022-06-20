@@ -144,7 +144,7 @@ huiles_legeres_preparation_essence_aviation_hectolitre:
       2002-01-01: currency-EUR
       1993-04-15: currency-FRF
 super_95_98:
-  description: Supercarburants dont SP95 et SP98 (hectolitre)*
+  description: Supercarburants dont SP95 et SP98 (hectolitre)* (indice d'identification 11)
   values:
     2018-01-01:
       value: 68.29
@@ -182,7 +182,7 @@ super_95_98:
       2002-01-01: currency-EUR
       1993-04-15: currency-FRF
 super_plombe:
-  description: Supercarburants contenant un additif (hectolitre)
+  description: Supercarburants contenant un additif (hectolitre) (indice d'identification 11 bis)
   values:
     2018-01-01:
       value: 71.56
@@ -220,7 +220,7 @@ super_plombe:
       2002-01-01: currency-EUR
       1993-04-15: currency-FRF
 super_e10:
-  description: SuperE10 (hectolitre) *
+  description: SuperE10 (hectolitre) * (indice d'identification 11 ter)
   values:
     2018-01-01:
       value: 66.29
@@ -614,7 +614,7 @@ gazole_fioul_domestique_hectolitre:
     ipp_csv_id: ticpe_fioul_domestique
     unit: currency-EUR
 gazole:
-  description: Gazole, autres (hectolitre) *
+  description: Gazole, autres (hectolitre) (indice d'identification 22)
   values:
     2018-01-01:
       value: 59.4
@@ -656,7 +656,7 @@ gazole:
       2002-01-01: currency-EUR
       1993-04-15: currency-FRF
 gazol_b_10_hectolitre:
-  description: Gazol B 10 (hectolitre)
+  description: Gazol B 10 (hectolitre) (indice d'identification 22 bis)
   values:
     2018-01-01:
       value: 59.4
@@ -1059,7 +1059,7 @@ emulsion_eau_dans_gazole_autres_hectolitre:
       2002-01-01: currency-EUR
       2000-01-01: currency-FRF
 super_e_85_utilise_comme_carburant_hectolitre:
-  description: Super E 85 utilisé comme carburant (hectolitre)
+  description: Super E 85 utilisé comme carburant (hectolitre) (indice d'identification 55)
   values:
     2018-01-01:
       value: 11.83

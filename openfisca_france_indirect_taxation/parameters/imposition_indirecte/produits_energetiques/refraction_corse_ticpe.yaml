@@ -1,0 +1,22 @@
+description: Refraction corse TICPE
+refraction_corse_tipce_sp95_sp98:
+  description: Supercarburants dont SP95 et SP98 (hectolitre)* (indice d'identification 11)
+  values:
+    2010-01-01:
+      value: 1.0
+  metadata:
+    unit: currency-EUR
+refraction_corse_tipce_super_plombe:
+  description: Supercarburants contenant un additif (hectolitre) (indice d'identification 11 bis)
+  values:
+    2010-01-01:
+      value: 1.0
+  metadata:
+    unit: currency-EUR
+refraction_corse_tipce_sp95_E10:
+  description: Supercarburants dont SP95 et SP98 (hectolitre)* (indice d'identification 11 ter)
+  values:
+    2019-01-01:
+      value: 1.0
+  metadata:
+    unit: currency-EUR

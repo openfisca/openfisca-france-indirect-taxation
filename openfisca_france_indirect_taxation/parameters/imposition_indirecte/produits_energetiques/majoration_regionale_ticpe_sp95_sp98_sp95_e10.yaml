@@ -1,0 +1,287 @@
+description: Major régionale TICPE SP95 et SP98
+"11":
+  description: Ile de France
+  values:
+    2012-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_idf
+    unit: currency-EUR
+"21":
+  description: Champagne Ardennes
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_ch_ar
+    unit: currency-EUR
+"22":
+  description: Picardie
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_pic
+    unit: currency-EUR
+"23":
+  description: Haute Normandie
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_h_n
+    unit: currency-EUR
+"24":
+  description: Centre (avant 2016) / Centre-Val de Loire (après 2016)
+  values:
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_cen
+    unit: currency-EUR
+"25":
+  description: Basse Normandie
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_b_n
+    unit: currency-EUR
+"26":
+  description: Bourgogne
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_bourg
+    unit: currency-EUR
+"27":
+  description: Bourgogne-Franche-Comté
+  values:
+    2017-01-01:
+      value: 0.73
+"28":
+  description: Normandie
+  values:
+    2017-01-01:
+      value: 0.73
+"31":
+  description: Nord Pas de Calais
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_n_cal
+    unit: currency-EUR
+"32":
+  description: Hauts-de-France
+  values:
+    2017-01-01:
+      value: 0.73
+"41":
+  description: Lorraine
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_lor
+    unit: currency-EUR
+"42":
+  description: Alsace
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_als
+    unit: currency-EUR
+"43":
+  description: Franche Comté
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_f_c
+    unit: currency-EUR
+"44":
+  description: Grand Est
+  values:
+    2017-01-01:
+      value: 0.73
+"52":
+  description: Pays de la Loire
+  values:
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_p_loi
+    unit: currency-EUR
+"53":
+  description: Bretagne
+  values:
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_bre
+    unit: currency-EUR
+"54":
+  description: Poitou Charentes
+  values:
+    2017-01-01:
+      value: null
+    2016-07-01:
+      value: 0.73
+    2007-01-01:
+      value: 0.0
+  metadata:
+    ipp_csv_id: maj_ticpe_super_p_c
+    unit: currency-EUR
+"72":
+  description: Aquitaine
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_aqui
+    unit: currency-EUR
+"73":
+  description: Midi Pyrénées
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_m_p
+    unit: currency-EUR
+"74":
+  description: Limousin
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_lim
+    unit: currency-EUR
+"75":
+  description: Nouvelle-Aquitaine
+  values:
+    2017-01-01:
+      value: 0.73
+"76":
+  description: Occitanie
+  values:
+    2017-01-01:
+      value: 0.73
+"82":
+  description: Rhône Alpes
+  values:
+    2017-01-01:
+      value: null
+    2014-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_r_a
+    unit: currency-EUR
+"83":
+  description: Auvergne
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_auv
+    unit: currency-EUR
+"84":
+  description: Auvergne-Rhône-Alpes
+  values:
+    2019-01-01:
+      value: 0.15
+    2017-01-01:
+      value: 0.73
+"91":
+  description: Languedoc Roussillon
+  values:
+    2017-01-01:
+      value: null
+    2011-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_l_r
+    unit: currency-EUR
+"93":
+  description: PACA
+  values:
+    2012-01-01:
+      value: 0.73
+  metadata:
+    ipp_csv_id: maj_ticpe_super_paca
+    unit: currency-EUR
+"94":
+  description: Corse
+  values:
+    2011-01-01:
+      value: 0.0
+  metadata:
+    ipp_csv_id: maj_ticpe_super_cor
+    unit: currency-EUR
+metadata:
+  order:
+  - Ile de France - 11
+  - Champagne Ardennes - 21
+  - Picardie - 22
+  - Haute Normandie - 23
+  - Centre (avant 2016) / Centre-Val de Loire (après 2016) - 24
+  - Basse Normandie - 25
+  - Bourgogne - 26
+  - Bourgogne-Franche-Comté - 27
+  - Normandie - 28
+  - Nord Pas de Calais - 31
+  - Hauts-de-France - 32
+  - Lorraine - 41
+  - Alsace - 42
+  - Franche Comté - 43
+  - Grand Est - 44
+  - Pays de la Loire - 52
+  - Bretagne - 53
+  - Poitou Charentes - 54
+  - Aquitaine - 72
+  - Midi Pyrénées - 73
+  - Limousin - 74
+  - Nouvelle-Aquitaine - 75
+  - Occitanie - 76
+  - Rhône Alpes - 82
+  - Auvergne - 83
+  - Auvergne-Rhône-Alpes - 84
+  - Languedoc Roussillon - 91
+  - PACA - 93
+  - Corse - 94
+  description_en: Regional surcharge - SP95 and SP98
+documentation: |
+  Notes :
+  La source de ces données est la suivante : http://www.developp  ement-durable.gouv.fr/-La-fiscalite-dans-les-dernieres-.html
+  Pour 2010, la source précédente ne founit pas de table avec les informations. Elles peuvent toutefois être déduites ici : http://www.developpement-durable.gouv.fr/IMG/pdf/15_La_fiscalite_des_produits_petroliers_et_gaziers.pdf
+  A partir de 2017, la région Île-de-France est autorisée a augmenter sa majoration de 1,89€ pour financer le dézonage du Pass Navigo.
+  Au 1er juillet 2016, la majoration plafond est mise en application en Poitou-Charentes du fait de l'harmonisation avec l'Aquitaine et le Limousin avec lesquelles elle a fusionné
+  Pour l'augmentation en Corse en 2017, voir la circulaire du 30/12/2016 fixant les Taux de la Taxe Intérieure de Consommation régionalisés pour les supercarburants et les gazoles applicables au 1er janvier 2017
