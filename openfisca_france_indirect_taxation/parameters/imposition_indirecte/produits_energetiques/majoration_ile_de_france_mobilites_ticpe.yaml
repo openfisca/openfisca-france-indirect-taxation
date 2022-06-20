@@ -3,20 +3,20 @@ major_mobilites_tipce_gazole:
   description: Gazole, autres (hectolitre) (indice d'identification 22)
   values:
     2017-01-01:
-      value: 1.35
+      value: 1.89
   metadata:
     unit: currency-EUR
 major_mobilites_tipce_sp95_sp98:
   description: Supercarburants dont SP95 et SP98 (hectolitre)* (indice d'identification 11)
   values:
     2017-01-01:
-      value: 1.35
+      value: 1.02
   metadata:
     unit: currency-EUR
 major_mobilites_tipce_sp95_e10:
   description: Supercarburants dont SP95 et SP98 (hectolitre)* (indice d'identification 11 ter)
   values:
     2017-01-01:
-      value: 1.35
+      value: 1.02
   metadata:
     unit: currency-EUR
