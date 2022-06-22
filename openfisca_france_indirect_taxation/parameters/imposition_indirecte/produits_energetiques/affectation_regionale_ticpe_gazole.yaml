@@ -1,4 +1,11 @@
-description: affectation régionale TICPE SP95 et SP98
+description: affectation régionale TICPE gazole B7
+maximum_value_affectation:
+  description: valeur maximale pouvant être affecté au region
+  values:
+    2007-01-01:
+      value: 1.15
+  metadata:
+    unit: currency-EUR
 "11":
   description: Ile de France
   values:
@@ -143,6 +150,7 @@ description: affectation régionale TICPE SP95 et SP98
     unit: currency-EUR
 "53":
   description: Bretagne
+  values:
     2008-01-01:
       value: 1.15
     2007-01-01:

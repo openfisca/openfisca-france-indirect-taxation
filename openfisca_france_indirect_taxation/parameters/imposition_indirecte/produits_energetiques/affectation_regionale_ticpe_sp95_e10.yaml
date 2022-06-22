@@ -1,6 +1,14 @@
 description: affectation régionale TICPE SP95 E10
+maximum_value_affectation:
+  description: valeur maximale pouvant être affecté au region
+  values:
+    2010-01-01:
+      value: 1.77
+  metadata:
+    unit: currency-EUR
 "11":
   description: Ile de France
+  values:
     2010-03-01:
       value: 1.77
   metadata:

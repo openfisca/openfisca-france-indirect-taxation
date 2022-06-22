@@ -10,13 +10,6 @@ class region(Variable):
     label = 'region du menage'
     definition_period = YEAR
 
-class code_region(Variable):
-    value_type = str
-    entity = Menage
-    label = 'code region du menage'
-    definition_period = YEAR
-
-
 ## nombre de litres par type de gazole
 
 class nombre_litres_gazole_b7(Variable):

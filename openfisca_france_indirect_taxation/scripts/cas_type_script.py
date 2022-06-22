@@ -6,34 +6,58 @@ TEST_CASE = {
     'individus': {
         'Arthur': {},
         'Brittany': {},
+        'Dwayne': {},
+        'Taylor': {},
     },
     'menages': {
         'menage1': {
             'personne_de_reference': ['Arthur'],
-            'region': {'2021': 'franche_comte'},
-            'code_region' : {'2021': 27},
-            'nombre_litres_gazole_b7': {'2021': 600},
-            'nombre_litres_gazole_b10': {'2021': 600},
-            'nombre_litres_essence_sp95_e10': {'2021': 600},
-            'nombre_litres_essence_sp95': {'2021': 600},
-            'nombre_litres_essence_sp98': {'2021': 600},
-            'nombre_litres_essence_super_plombe': {'2021': 600},
-            'nombre_litres_essence_e85': {'2021': 600},
-            'nombre_litres_gpl_carburant': {'2021': 600},
+            'region': {'2021': '11'}, #ile de france
+            'nombre_litres_gazole_b7': {'2021': 100},
+            'nombre_litres_gazole_b10': {'2021': 100},
+            'nombre_litres_essence_sp95_e10': {'2021': 100},
+            'nombre_litres_essence_sp95': {'2021': 100},
+            'nombre_litres_essence_sp98': {'2021': 100},
+            'nombre_litres_essence_super_plombe': {'2021': 100},
+            'nombre_litres_essence_e85': {'2021': 100},
+            'nombre_litres_gpl_carburant': {'2021': 100},
         },
         'menage2': {
             'personne_de_reference': ['Brittany'],
-            'region': {'2021': 'corse'},
-            'code_region' : {'2021': 94},
-            'nombre_litres_gazole_b7': {'2021': 600},
-            'nombre_litres_gazole_b10': {'2021': 600},
-            'nombre_litres_essence_sp95_e10': {'2021': 600},
-            'nombre_litres_essence_sp95': {'2021': 600},
-            'nombre_litres_essence_sp98': {'2021': 600},
-            'nombre_litres_essence_super_plombe': {'2021': 600},
-            'nombre_litres_essence_e85': {'2021': 600},
-            'nombre_litres_gpl_carburant': {'2021': 600},
+            'region': {'2021': '94'}, #corse
+            'nombre_litres_gazole_b7': {'2021': 100},
+            'nombre_litres_gazole_b10': {'2021': 100},
+            'nombre_litres_essence_sp95_e10': {'2021': 100},
+            'nombre_litres_essence_sp95': {'2021': 100},
+            'nombre_litres_essence_sp98': {'2021': 100},
+            'nombre_litres_essence_super_plombe': {'2021': 100},
+            'nombre_litres_essence_e85': {'2021': 100},
+            'nombre_litres_gpl_carburant': {'2021': 100},
         },
+        'menage3': {
+            'personne_de_reference': ['Dwayne'],
+            'region': {'2021': '84'}, #auvergne
+            'nombre_litres_gazole_b7': {'2021': 100},
+            'nombre_litres_gazole_b10': {'2021': 100},
+            'nombre_litres_essence_sp95_e10': {'2021': 100},
+            'nombre_litres_essence_sp95': {'2021': 100},
+            'nombre_litres_essence_sp98': {'2021': 100},
+            'nombre_litres_essence_super_plombe': {'2021': 100},
+            'nombre_litres_essence_e85': {'2021': 100},
+            'nombre_litres_gpl_carburant': {'2021': 100},
+        },
+        'menage4': {
+            'personne_de_reference': ['Taylor'],
+            'region': {'2021': '21'}, #champagne a
+            'nombre_litres_gazole_b7': {'2021': 100},
+            'nombre_litres_gazole_b10': {'2021': 100},
+            'nombre_litres_essence_sp95_e10': {'2021': 100},
+            'nombre_litres_essence_sp95': {'2021': 100},
+            'nombre_litres_essence_sp98': {'2021': 100},
+            'nombre_litres_essence_super_plombe': {'2021': 100},
+            'nombre_litres_essence_e85': {'2021': 100},
+            'nombre_litres_gpl_carburant': {'2021': 100},
+        }
     },
 }
 
@@ -41,11 +65,29 @@ tax_benefit_system = CountryTaxBenefitSystem()
 simulation_builder = SimulationBuilder()
 simulation = simulation_builder.build_from_entities(tax_benefit_system, TEST_CASE)
 
-cout_gazole_b7_ttc  = simulation.calculate('cout_gazole_b7_ttc','2021')
-print(cout_gazole_b7_ttc)
+gazole_b7_ticpe  = simulation.calculate('gazole_b7_ticpe','2021')
+print('gazole_b7_ticpe',gazole_b7_ticpe)
 
-# gazole_b7_ticpe  = simulation.calculate('gazole_b7_ticpe','2021')
-# print(gazole_b7_ticpe)
+gazole_b10_ticpe  = simulation.calculate('gazole_b10_ticpe','2021')
+print('gazole_b10_ticpe', gazole_b10_ticpe)
+
+essence_sp95_e10_ticpe  = simulation.calculate('essence_sp95_e10_ticpe','2021')
+print('essence_sp95_e10_ticpe',essence_sp95_e10_ticpe)
+
+essence_sp95_ticpe  = simulation.calculate('essence_sp95_ticpe','2021')
+print('essence_sp95_ticpe',essence_sp95_ticpe)
+
+essence_sp98_ticpe  = simulation.calculate('essence_sp98_ticpe','2021')
+print('essence_sp98_ticpe',essence_sp98_ticpe)
+
+essence_super_plombe_ticpe  = simulation.calculate('essence_super_plombe_ticpe','2021')
+print('essence_super_plombe_ticpe',essence_super_plombe_ticpe)
+
+essence_e85_ticpe  = simulation.calculate('essence_e85_ticpe','2021')
+print('essence_e85_ticpe',essence_e85_ticpe)
+
+gpl_carburant_ticpe  = simulation.calculate('gpl_carburant_ticpe','2021')
+print('gpl_carburant_ticpe',gpl_carburant_ticpe)
 
 
 

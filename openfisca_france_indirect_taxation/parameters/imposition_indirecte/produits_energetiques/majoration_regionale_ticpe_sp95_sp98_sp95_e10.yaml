@@ -1,4 +1,4 @@
-description: Major régionale TICPE SP95 et SP98
+description: Major régionale TICPE SP95, SP98 et SP95 E10
 "11":
   description: Ile de France
   values:
@@ -217,7 +217,7 @@ description: Major régionale TICPE SP95 et SP98
   description: Auvergne-Rhône-Alpes
   values:
     2019-01-01:
-      value: 0.15
+      value: 0.58
     2017-01-01:
       value: 0.73
 "91":
