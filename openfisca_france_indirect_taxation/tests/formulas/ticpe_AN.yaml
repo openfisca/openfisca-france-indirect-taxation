@@ -3,7 +3,7 @@
 ## TICPE gazole B7:
 
 - name: "Test gazole_b7_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_gazole_b7: 100
@@ -12,7 +12,7 @@
     gazole_b7_ticpe: 62.64
 
 - name: "Test gazole_b7_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_gazole_b7: 100
@@ -21,7 +21,7 @@
     gazole_b7_ticpe: 60.75
 
 - name: "Test gazole_b7_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_gazole_b7: 100
@@ -32,7 +32,7 @@
 ## TICPE gazole B10:
 
 - name: "Test gazole_b10_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_gazole_b10: 100
@@ -41,7 +41,7 @@
     gazole_b10_ticpe: 59.40
 
 - name: "Test gazole_b10_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_gazole_b10: 100
@@ -50,7 +50,7 @@
     gazole_b10_ticpe: 59.40
 
 - name: "Test gazole_b10_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_gazole_b10: 100
@@ -61,7 +61,7 @@
 ## TICPE gazole total:
 
 - name: "Test gazole_ticpe_total"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     gazole_b7_ticpe: 62.64
@@ -75,7 +75,7 @@
 ## TICPE essence sp95 e10:
 
 - name: "Test essence_sp95_e10_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_sp95_e10: 100
@@ -84,7 +84,7 @@
     essence_sp95_e10_ticpe: 68.04
 
 - name: "Test essence_sp95_e10_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_sp95_e10: 100
@@ -93,7 +93,7 @@
     essence_sp95_e10_ticpe: 67.02
 
 - name: "Test essence_sp95_e10_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_sp95_e10: 100
@@ -104,7 +104,7 @@
 ## TICPE essence sp95:
 
 - name: "Test essence_sp95_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_sp95: 100
@@ -113,7 +113,7 @@
     essence_sp95_ticpe: 70.04
 
 - name: "Test essence_sp95_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_sp95: 100
@@ -122,7 +122,7 @@
     essence_sp95_ticpe: 69.02
 
 - name: "Test essence_sp95_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_sp95: 100
@@ -133,7 +133,7 @@
 ## TICPE essence sp98:
 
 - name: "Test essence_sp98_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_sp98: 100
@@ -142,7 +142,7 @@
     essence_sp98_ticpe: 70.04
 
 - name: "Test essence_sp98_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_sp98: 100
@@ -151,7 +151,7 @@
     essence_sp98_ticpe: 69.02
 
 - name: "Test essence_sp98_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_sp98: 100
@@ -162,7 +162,7 @@
 ## TICPE essence super plombe:
 
 - name: "Test essence_super_plombe_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_super_plombe: 100
@@ -171,7 +171,7 @@
     essence_super_plombe_ticpe: 0.0
 
 - name: "Test essence_super_plombe_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_super_plombe: 100
@@ -180,7 +180,7 @@
     essence_super_plombe_ticpe: 0.0
 
 - name: "Test essence_super_plombe_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_super_plombe: 100
@@ -191,7 +191,7 @@
 ## TICPE essence e85:
 
 - name: "Test essence_e85_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_e85: 100
@@ -200,7 +200,7 @@
     essence_e85_ticpe: 11.83
 
 - name: "Test essence_e85_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_e85: 100
@@ -209,7 +209,7 @@
     essence_e85_ticpe: 11.83
 
 - name: "Test essence_e85_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_essence_e85: 100
@@ -220,7 +220,7 @@
 ## TICPE essence e85:
 
 - name: "Test gpl_carburant_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_gpl_carburant: 100
@@ -229,7 +229,7 @@
     gpl_carburant_ticpe: 20.71
 
 - name: "Test gpl_carburant_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_gpl_carburant: 100
@@ -240,7 +240,7 @@
 ## TICPE essence total
 
 - name: "Test essence_ticpe_total"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     essence_sp95_e10_ticpe: 68.04
@@ -254,10 +254,22 @@
 # TICPE gpl
 
 - name: "Test gpl_carburant_ticpe"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     nombre_litres_gpl_carburant: 100
     region: '94'
   output:
     gpl_carburant_ticpe: 20.71
+
+# TICPE carbirant total
+
+- name: "Test ticpe_carburant_total"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    gazole_ticpe_total: 122.04
+    essence_ticpe_total: 219.95
+    gpl_carburant_ticpe: 20.71
+  output:
+    ticpe_carburant_total: 362.7

@@ -102,6 +102,7 @@ class tva_sur_essence_super_plombe(Variable):
     label = "TVA sur la consommation de l'essence super plombé"
     definition_period = YEAR
     default_value = 0
+    end = "2017-01-01"
 
     def formula(menage, period, parameters):
         cout_essence_super_plombe_ttc = menage('cout_essence_super_plombe_ttc', period)

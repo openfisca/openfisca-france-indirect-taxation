@@ -1,0 +1,120 @@
+# TVA sur gazole:
+
+## TVA sur gazole B7:
+
+- name: "Test tva_sur_gazole_b7"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_gazole_b7_ttc: 120
+  output:
+    tva_sur_gazole_b7: 20
+
+## TVA sur gazole B10:
+
+- name: "Test tva_sur_gazole_b10"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_gazole_b10_ttc: 120
+  output:
+    tva_sur_gazole_b10: 20
+
+## TVA total gazole
+
+- name: "Test tva_sur_gazole_total"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    tva_sur_gazole_b7: 20
+    tva_sur_gazole_b10: 20
+  output:
+    tva_sur_gazole_total: 40
+
+# TVA sur essence
+
+## TVA sur essence SP95 E10
+
+- name: "Test tva_sur_essence_sp95_e10"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_essence_sp95_e10_ttc: 120
+  output:
+    tva_sur_essence_sp95_e10: 20
+
+## TVA sur essence SP95
+
+- name: "Test tva_sur_essence_sp95"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_essence_sp95_ttc: 120
+  output:
+    tva_sur_essence_sp95: 20
+
+## TVA sur essence SP98
+
+- name: "Test tva_sur_essence_sp98"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_essence_sp98_ttc: 120
+  output:
+    tva_sur_essence_sp98: 20
+
+## TVA sur essence super plombé
+
+- name: "Test tva_sur_essence_super_plombe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_essence_super_plombe_ttc: 120
+  output:
+    tva_sur_essence_super_plombe: 0
+
+## TVA sur essence E85
+
+- name: "Test tva_sur_essence_e85"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_essence_e85_ttc: 120
+  output:
+    tva_sur_essence_e85: 20
+
+## TVA total essence
+
+- name: "Test tva_sur_essence_total"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    tva_sur_essence_sp95_e10: 20
+    tva_sur_essence_sp95: 20
+    tva_sur_essence_sp98: 20
+    tva_sur_essence_super_plombe: 20
+    tva_sur_essence_e85: 20
+  output:
+    tva_sur_essence_total: 80
+
+# TVA sur gpl
+
+- name: "Test tva_sur_gpl_carburant"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_gpl_carburant_ttc: 120
+  output:
+    tva_sur_gpl_carburant: 20
+
+# TVA total carburant
+
+- name: "Test tva_sur_carburant_total"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    tva_sur_gazole_total: 20
+    tva_sur_essence_total: 80
+    tva_sur_gpl_carburant: 20
+  output:
+    tva_sur_carburant_total: 120
