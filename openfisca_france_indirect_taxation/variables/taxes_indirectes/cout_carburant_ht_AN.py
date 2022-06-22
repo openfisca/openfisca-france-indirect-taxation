@@ -104,6 +104,7 @@ class cout_essence_super_plombe_ht(Variable):
     label = "cout de l'essence super plombé ht"
     definition_period = YEAR
     default_value = 0
+    end = "2017-01-01"
 
     def formula(menage, period, parameters):
         cout_essence_super_plombe_ttc = menage('cout_essence_super_plombe_ttc', period)

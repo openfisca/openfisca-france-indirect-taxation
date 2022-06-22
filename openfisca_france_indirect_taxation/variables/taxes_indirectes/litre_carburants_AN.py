@@ -4,10 +4,10 @@ from openfisca_france_indirect_taxation.variables.prix_carburants_regions_years_
 import numpy as np
 ## caracteristiques menages
 
-class region(Variable):
+class code_region(Variable):
     value_type = str
     entity = Menage
-    label = 'region du menage'
+    label = 'code region du menage'
     definition_period = YEAR
 
 ## nombre de litres par type de gazole

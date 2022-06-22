@@ -1,0 +1,128 @@
+# cout gazole ht:
+
+## cout gazole ht:
+
+- name: "Test cout_gazole_b7_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_gazole_b7_ttc: 120
+    gazole_b7_ticpe: 10  #valeur fictive
+  output:
+    cout_gazole_b7_ht: 90
+
+## cout gazole ht:
+
+- name: "Test cout_gazole_b10_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_gazole_b10_ttc: 120
+    gazole_b10_ticpe: 10
+  output:
+    cout_gazole_b10_ht: 90
+
+## cout total gazole ht
+
+- name: "Test cout_gazole_total_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_gazole_b7_ht: 90
+    cout_gazole_b10_ht: 90
+  output:
+    cout_gazole_total_ht: 180
+
+# cout essence ht
+
+## cout essence SP95 E10 ht
+
+- name: "Test cout_essence_sp95_e10_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_essence_sp95_e10_ttc: 120
+    essence_sp95_e10_ticpe: 10
+  output:
+    cout_essence_sp95_e10_ht: 90
+
+## cout essence SP95 ht
+
+- name: "Test cout_essence_sp95_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_essence_sp95_ttc: 120
+    essence_sp95_ticpe: 10
+  output:
+    cout_essence_sp95_ht: 90
+
+## cout essence SP98 ht
+
+- name: "Test cout_essence_sp98_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_essence_sp98_ttc: 120
+    essence_sp98_ticpe: 10
+  output:
+    cout_essence_sp98_ht: 90
+
+## cout essence super plombé ht
+
+- name: "Test cout_essence_super_plombe_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_essence_super_plombe_ttc: 120
+    essence_super_plombe_ticpe: 10
+  output:
+    cout_essence_super_plombe_ht: 0
+
+## cout essence E85 ht
+
+- name: "Test cout_essence_essence_e85_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_essence_e85_ttc: 120
+    essence_e85_ticpe: 10
+  output:
+    cout_essence_essence_e85_ht: 90
+
+## cout total essence ht
+
+- name: "Test cout_essence_total_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_essence_sp95_e10_ht: 90
+    cout_essence_sp95_ht: 90
+    cout_essence_sp98_ht: 90
+    cout_essence_super_plombe_ht: 90
+    cout_essence_essence_e85_ht: 90
+  output:
+    cout_essence_total_ht: 360
+
+# cout gpl ht
+
+- name: "Test cout_gpl_carburant_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_gpl_carburant_ttc: 120
+    gpl_carburant_ticpe: 10
+  output:
+    cout_gpl_carburant_ht: 90
+
+ # TVA total carburant
+
+- name: "Test cout_carburant_total_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    cout_gazole_total_ht: 180
+    cout_essence_total_ht: 360
+    cout_gpl_carburant_ht: 90
+  output:
+    cout_carburant_total_ht: 630
