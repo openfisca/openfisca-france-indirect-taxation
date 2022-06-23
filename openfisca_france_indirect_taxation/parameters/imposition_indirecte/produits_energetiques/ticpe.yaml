@@ -36,9 +36,7 @@ goudrons_utilises_comme_combustibles_100kg:
       value: null
   metadata:
     ipp_csv_id: ticpe_goudron_combustible
-    unit:
-      2002-01-01: currency-EUR
-      1993-04-15: currency-FRF
+    unit: currency
 white_spirit_utilise_comme_combustible_hectolitre:
   description: White Spirit utilisé comme combustible (hectolitre)
   values:
@@ -60,9 +58,7 @@ white_spirit_utilise_comme_combustible_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_white_spirit_combustible
-    unit:
-      2002-01-01: currency-EUR
-      2000-01-01: currency-FRF
+    unit: currency
 essences_speciales_utilisees_comme_carburants_combustibles_hectolitre:
   description: Essences spéciales utilisées comme carburants et combustibles (hectolitre)
   values:
@@ -102,9 +98,7 @@ essences_speciales_utilisees_comme_carburants_combustibles_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_essences_speciales
-    unit:
-      2002-01-01: currency-EUR
-      1993-04-15: currency-FRF
+    unit: currency
 huiles_legeres_preparation_essence_aviation_hectolitre:
   description: Huiles légères et préparation, essence d'aviation (hectolitre)
   values:
@@ -140,9 +134,7 @@ huiles_legeres_preparation_essence_aviation_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_huiles_legeres_ess_avion
-    unit:
-      2002-01-01: currency-EUR
-      1993-04-15: currency-FRF
+    unit: currency
 super_95_98:
   description: Supercarburants dont SP95 et SP98 (hectolitre)* (indice d'identification 11)
   values:
@@ -178,9 +170,7 @@ super_95_98:
       value: null
   metadata:
     ipp_csv_id: ticpe_sp95_sp98
-    unit:
-      2002-01-01: currency-EUR
-      1993-04-15: currency-FRF
+    unit: currency
 super_plombe:
   description: Supercarburants contenant un additif (hectolitre) (indice d'identification 11 bis)
   values:
@@ -216,9 +206,7 @@ super_plombe:
       value: null
   metadata:
     ipp_csv_id: ticpe_super_additif
-    unit:
-      2002-01-01: currency-EUR
-      1993-04-15: currency-FRF
+    unit: currency
 super_e10:
   description: SuperE10 (hectolitre) * (indice d'identification 11 ter)
   values:
@@ -289,9 +277,7 @@ carburateurs_type_essence_sous_conditions_hectolitre:
     1993-01-01:
       value: 11.97
   metadata:
-    unit:
-      2002-01-01: currency-EUR
-      1993-01-01: currency-FRF
+    unit: currency
 carburateurs_type_essence_carburants_avion_hectolitre:
   description: Carburateurs type essence, carburants pour avion (hectolitre)
   values:
@@ -330,9 +316,7 @@ carburateurs_type_essence_carburants_avion_hectolitre:
     1993-01-01:
       value: null
   metadata:
-    unit:
-      2002-01-01: currency-EUR
-      1993-04-15: currency-FRF
+    unit: currency
 carburateurs_type_essence_autres_hectolitre:
   description: Carburateurs type essence, autres (hectolitre)
   values:
@@ -388,9 +372,7 @@ autres_huiles_legeres_hectolitre:
     1993-01-01:
       value: null
   metadata:
-    unit:
-      2002-01-01: currency-EUR
-      1993-04-15: currency-FRF
+    unit: currency
 petrole_lampant_utilise_comme_combustible_hectolitre:
   description: Pétrole lampant utilisé comme combustible (hectolitre)
   values:
@@ -411,9 +393,7 @@ petrole_lampant_utilise_comme_combustible_hectolitre:
     1993-01-01:
       value: null
   metadata:
-    unit:
-      2002-01-01: currency-EUR
-      2000-01-01: currency-FRF
+    unit: currency
 petrole_lampant_autre_hectolitre:
   description: Pétrole lampant, autre (hectolitre)
   values:
@@ -440,9 +420,7 @@ petrole_lampant_autre_hectolitre:
     1993-01-01:
       value: null
   metadata:
-    unit:
-      2002-01-01: currency-EUR
-      2000-01-01: currency-FRF
+    unit: currency
 carbureacteurs_type_petrole_lampant_sous_conditions_hectolitre:
   description: Carburéacteurs, type pétrole lampant , sous conditions (hectolitre)
   values:
@@ -472,9 +450,7 @@ carbureacteurs_type_petrole_lampant_sous_conditions_hectolitre:
       value: 11.97
   metadata:
     ipp_csv_id: ticpe_carbu_petrole_lampant_cond
-    unit:
-      2002-01-01: currency-EUR
-      1993-01-01: currency-FRF
+    unit: currency
 carbureacteurs_type_petrole_lampant_carburant_moteurs_avion_hectolitre:
   description: Carburéacteurs, type pétrole lampant, carburant moteurs d'avion (hectolitre)
   values:
@@ -502,9 +478,7 @@ carbureacteurs_type_petrole_lampant_carburant_moteurs_avion_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_carbu_petrole_lampant
-    unit:
-      2002-01-01: currency-EUR
-      2000-01-01: currency-FRF
+    unit: currency
 carbureacteurs_type_petrole_lampant_autres_hectolitre:
   description: Carburéacteurs, type pétrole lampant, autres (hectolitre)
   values:
@@ -550,9 +524,7 @@ autres_huiles_moyennes_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_autres_huiles_moyennes
-    unit:
-      2002-01-01: currency-EUR
-      2000-01-01: currency-FRF
+    unit: currency
 gazole_comme_carburants_sous_conditions_hectolitre:
   description: Gazole comme carburants sous conditions (hectolitre)
   values:
@@ -592,9 +564,7 @@ gazole_comme_carburants_sous_conditions_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_gazole_cond
-    unit:
-      2002-01-01: currency-EUR
-      1993-04-15: currency-FRF
+    unit: currency
 gazole_fioul_domestique_hectolitre:
   description: Gazole, fioul domestique (hectolitre)
   values:
@@ -652,9 +622,7 @@ gazole:
       value: null
   metadata:
     ipp_csv_id: ticpe_diesel
-    unit:
-      2002-01-01: currency-EUR
-      1993-04-15: currency-FRF
+    unit: currency
 gazol_b_10_hectolitre:
   description: Gazol B 10 (hectolitre) (indice d'identification 22 bis)
   values:
@@ -699,9 +667,7 @@ fioul_avec_point_eclair_inferieur_120deg_c_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_fioul_lourd_cond
-    unit:
-      2002-01-01: currency-EUR
-      2000-01-01: currency-FRF
+    unit: currency
 fioul_lourd_hts_100kg:
   description: Fioul lourd HTS (100kg)
   values:
@@ -729,9 +695,7 @@ fioul_lourd_hts_100kg:
       value: null
   metadata:
     ipp_csv_id: ticpe_fioul_lourd_hts
-    unit:
-      2002-01-01: currency-EUR
-      1993-04-15: currency-FRF
+    unit: currency
 fioul_lourd_bts_100kg:
   description: Fioul lourd BTS (100kg)
   values:
@@ -759,9 +723,7 @@ fioul_lourd_bts_100kg:
       value: null
   metadata:
     ipp_csv_id: ticpe_fioul_lourd_bts
-    unit:
-      2002-01-01: currency-EUR
-      1993-04-15: currency-FRF
+    unit: currency
 propane_utilise_comme_carburants_sous_conditions_100kg_nets:
   description: Propane utilisé comme carburants, sous conditions (100kg nets)
   values:
@@ -783,9 +745,7 @@ propane_utilise_comme_carburants_sous_conditions_100kg_nets:
       value: null
   metadata:
     ipp_csv_id: ticpe_propane_cond
-    unit:
-      2002-01-01: currency-EUR
-      2000-01-01: currency-FRF
+    unit: currency
 propane_utilise_comme_carburants_autres_100kg_nets:
   description: Propane utilisé comme carburants, autres (100kg nets)
   values:
@@ -807,9 +767,7 @@ propane_utilise_comme_carburants_autres_100kg_nets:
       value: null
   metadata:
     ipp_csv_id: ticpe_propane_autres
-    unit:
-      2002-01-01: currency-EUR
-      2000-01-01: currency-FRF
+    unit: currency
 propane_utilise_comme_carburants_usages_autres_que_comme_carburant_100kg_nets:
   description: Propane utilisé comme carburants, usages autres que comme carburant (100kg nets)
   values:
@@ -840,9 +798,7 @@ butanes_liquefies_sous_condition_100kg_nets:
       value: null
   metadata:
     ipp_csv_id: ticpe_butane_cond
-    unit:
-      2002-01-01: currency-EUR
-      2000-01-01: currency-FRF
+    unit: currency
 butanes_liquefies_autres_100kg_nets:
   description: Butanes liquéfiés, autres (100kg nets)
   values:
@@ -864,9 +820,7 @@ butanes_liquefies_autres_100kg_nets:
       value: null
   metadata:
     ipp_csv_id: ticpe_butane_autres
-    unit:
-      2002-01-01: currency-EUR
-      2000-01-01: currency-FRF
+    unit: currency
 butanes_liquefies_usages_autres_que_comme_carburant_100kg_nets:
   description: Butanes liquéfiés, usages autres que comme carburant (100kg nets)
   values:
@@ -907,9 +861,7 @@ autres_gaz_petrole_liquefies_utilises_comme_carburants_sous_conditions_100kg:
       value: 53.43
   metadata:
     ipp_csv_id: ticpe_autres_gaz_liq_cond
-    unit:
-      2002-01-01: currency-EUR
-      1993-01-01: currency-FRF
+    unit: currency
 autres_gaz_petrole_liquefies_utilises_comme_carburants_autres_100kg:
   description: Autres gaz de pétrole liquéfiés utilisés comme carburants, autres (100kg)
   values:
@@ -943,9 +895,7 @@ autres_gaz_petrole_liquefies_utilises_comme_carburants_autres_100kg:
       value: 216.0
   metadata:
     ipp_csv_id: ticpe_autres_gaz_liq_autres
-    unit:
-      2002-01-01: currency-EUR
-      1993-01-01: currency-FRF
+    unit: currency
 gaz_naturel_etat_gazeux_utilises_comme_carburants_100m3:
   description: Gaz naturel à l'état gazeux, utilisés comme carburants (100m3)
   values:
@@ -981,9 +931,7 @@ gaz_naturel_etat_gazeux_utilises_comme_carburants_100m3:
       value: null
   metadata:
     ipp_csv_id: ticpe_gaz_naturels_gazeux
-    unit:
-      2002-01-01: currency-EUR
-      1993-04-15: currency-FRF
+    unit: currency
 gaz_naturel_etat_gazeux_utilise_sous_conditions_aux_moteurs_stationnaires_100m3:
   description: Gaz naturel à l'état gazeux, utilisé sous conditions aux moteurs stationnaires (100m3)
   values:
@@ -1025,9 +973,7 @@ emulsion_eau_dans_gazole_sous_conditions_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_emulsion_eau_gazole_cond
-    unit:
-      2002-01-01: currency-EUR
-      2000-01-01: currency-FRF
+    unit: currency
 emulsion_eau_dans_gazole_autres_hectolitre:
   description: Emulsion d'eau dans du gazole …, autres (hectolitre)
   values:
@@ -1055,9 +1001,7 @@ emulsion_eau_dans_gazole_autres_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_emulsion_eau_gazole_autres
-    unit:
-      2002-01-01: currency-EUR
-      2000-01-01: currency-FRF
+    unit: currency
 super_e_85_utilise_comme_carburant_hectolitre:
   description: Super E 85 utilisé comme carburant (hectolitre) (indice d'identification 55)
   values:

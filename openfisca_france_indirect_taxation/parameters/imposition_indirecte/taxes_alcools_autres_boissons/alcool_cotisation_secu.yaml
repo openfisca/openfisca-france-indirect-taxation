@@ -14,9 +14,7 @@ cotisation_securite_sociale_eur_par_decilitre:
       value: 1.0
   metadata:
     ipp_csv_id: cotis_secu_alcool
-    unit:
-      2002-01-01: currency-EUR
-      1983-04-01: currency-FRF
+    unit: currency
 cotisation_alcools_taux_plein_eur_hlap:
   description: Cotisation sur les alcools - Taux plein (€/hlap)
   values:
