@@ -477,9 +477,9 @@ class taxe_carbone(Reform):
         label = 'Quantités de gaz consommées après la réforme - taxe carbone'
 
         def formula(menage, period, parameters):
-            depenses_gaz_ajustees_taxe_carbone = menage('depenses_gaz_ville_ajustees_taxe_carbone', period)
+            depenses_gaz_ville_ajustees_taxe_carbone = menage('depenses_gaz_ville_ajustees_taxe_carbone', period)
             depenses_gaz_tarif_fixe = menage('depenses_gaz_tarif_fixe', period)
-            depenses_gaz_ajustees_variables = depenses_gaz_ajustees_taxe_carbone - depenses_gaz_tarif_fixe
+            depenses_gaz_ajustees_variables = depenses_gaz_ville_ajustees_taxe_carbone - depenses_gaz_tarif_fixe
 
             depenses_gaz_prix_unitaire = menage('depenses_gaz_prix_unitaire', period)
             reforme_gaz = parameters(period.start).taxe_carbone.gaz
