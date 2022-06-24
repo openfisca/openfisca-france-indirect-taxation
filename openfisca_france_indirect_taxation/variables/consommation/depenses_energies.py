@@ -654,8 +654,10 @@ class depenses_super_plombe_ht(YearlyVariable):
         depenses_super_plombe = depenses_essence * part_super_plombe
         depenses_super_plombe_htva = \
             depenses_super_plombe - tax_from_expense_including_tax(depenses_super_plombe, taux_plein_tva)
-        depenses_super_plombe_ht = (depenses_super_plombe_htva
-- tax_from_expense_including_tax(depenses_super_plombe_htva, taux_implicite_super_plombe))
+        depenses_super_plombe_ht = (
+            depenses_super_plombe_htva
+            - tax_from_expense_including_tax(depenses_super_plombe_htva, taux_implicite_super_plombe)
+            )
 
         return depenses_super_plombe_ht
 

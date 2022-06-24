@@ -42,9 +42,7 @@ rhum_dom:
       value: 4150.0
   metadata:
     ipp_csv_id: taxe_rhum_dom
-    unit:
-      2002-03-31: currency-EUR
-      1981-02-01: currency-FRF
+    unit: currency
 autres_alcools:
   description: Autres alcools
   values:
@@ -86,9 +84,7 @@ autres_alcools:
       value: 8220.0
   metadata:
     ipp_csv_id: taxe_autres_alcools
-    unit:
-      2002-03-31: currency-EUR
-      1981-02-01: currency-FRF
+    unit: currency
 bouilleurs_cru_t_q_definis_art_317:
   description: Bouilleurs de cru t.q. définis art 317
   values:

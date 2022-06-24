@@ -34,9 +34,7 @@ bieres_moins_28_vol_eur_degre_hl:
       value: null
   metadata:
     ipp_csv_id: taxe_bieres_inf_28
-    unit:
-      2002-03-31: currency-EUR
-      1993-01-01: currency-FRF
+    unit: currency
 bieres_plus_28_vol_eur_degre_hl:
   description: Bières plus de 2,8% vol. (€/degré/hl)
   values:
@@ -68,9 +66,7 @@ bieres_plus_28_vol_eur_degre_hl:
       value: null
   metadata:
     ipp_csv_id: taxe_biere_sup_28
-    unit:
-      2002-03-31: currency-EUR
-      1993-01-01: currency-FRF
+    unit: currency
 bieres_moins_46_vol_recipient_entre_65cl_1l:
   description: Bières moins de 4,6% vol ou récipient entre 65cL et 1L
   values:
