@@ -171,16 +171,16 @@ class cout_essence_total_ttc(Variable):
     def formula_2009(menage, period):
         cout_essence_sp95_ttc = menage('cout_essence_sp95_ttc', period)
         cout_essence_sp98_ttc = menage('cout_essence_sp98_ttc', period)
-        cout_essence_essence_e85_ttc = menage('cout_essence_e85_ttc', period)
+        cout_essence_e85_ttc = menage('cout_essence_e85_ttc', period)
         cout_essence_sp95_e10_ttc = menage('cout_essence_sp95_e10_ttc', period)
-        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_essence_e85_ttc + cout_essence_sp95_e10_ttc)
+        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc + cout_essence_sp95_e10_ttc)
         return cout_essence_total_ttc
 
     def formula_2007(menage, period):
         cout_essence_sp95_ttc = menage('cout_essence_sp95_ttc', period)
         cout_essence_sp98_ttc = menage('cout_essence_sp98_ttc', period)
-        cout_essence_essence_e85_ttc = menage('cout_essence_essence_e85_ttc', period)
-        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_essence_e85_ttc)
+        cout_essence_e85_ttc = menage('cout_essence_e85_ttc', period)
+        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc)
         return cout_essence_total_ttc
 
     def formula_1990(menage, period):

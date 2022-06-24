@@ -1,15 +1,16 @@
-# cout carburant gazole ttc:
+# nombre litres carburant gazole:
 
-## cout gazole B7 ttc:
+## nombre litres gazole B7:
 
-- name: "Test cout_gazole_b7_ttc"
+- name: "Test nombre_litres_gazole_b7"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_gazole_b7: 100
+    cout_gazole_b7_ttc: 149.88
     code_region: '11'
   output:
-    cout_gazole_b7_ttc: 149.88
+    nombre_litres_gazole_b7: 100
+
 
 - name: "Test cout_gazole_b7_ttc"
   period: 2021
@@ -29,7 +30,7 @@
   output:
     cout_gazole_b7_ttc: 155.04
 
-## cout gazole B10 ttc:
+## nombre litres gazole B10:
 
 - name: "Test cout_gazole_b10_ttc"
   period: 2021
@@ -58,7 +59,7 @@
   output:
     cout_gazole_b10_ttc: 155.04
 
-## cout gazole total ttc:
+## nombre litres gazole total:
 
 - name: "Test cout_gazole_total_ttc"
   period: 2021
@@ -70,9 +71,9 @@
     cout_gazole_total_ttc: 2
 
 
-# cout essence ttc:
+# nombre litres essence:
 
-## cout essence sp95 e10 ttc:
+## nombre litres essence sp95 e10:
 
 - name: "Test cout_essence_sp95_e10_ttc"
   period: 2021
@@ -101,7 +102,7 @@
   output:
     cout_essence_sp95_e10_ttc: 162.08
 
-## cout essence sp95 ttc:
+## nombre litres essence sp95:
 
 - name: "Test cout_essence_sp95_ttc"
   period: 2021
@@ -130,7 +131,7 @@
   output:
     cout_essence_sp95_ttc: 165.67
 
-## cout essence sp98 ttc:
+## nombre litres essence sp98:
 
 - name: "Test cout_essence_sp98_ttc"
   period: 2021
@@ -159,7 +160,7 @@
   output:
     cout_essence_sp98_ttc: 159.33
 
-## cout essence super plombe ttc:
+## nombre litres essence super plombe:
 
 - name: "Test cout_essence_super_plombe_ttc"
   period: 2021
@@ -188,7 +189,7 @@
   output:
     cout_essence_super_plombe_ttc: 0.0
 
-## cout essence e85 ttc:
+## nombre litres essence e85:
 
 - name: "Test cout_essence_e85_ttc"
   period: 2021
@@ -217,7 +218,7 @@
   output:
     cout_essence_e85_ttc: 135.04
 
-## cout essence total ttc
+## nombre litres essence total:
 
 - name: "Test cout_essence_total_ttc"
   period: 2021
@@ -231,7 +232,7 @@
   output:
     cout_essence_total_ttc: 4
 
-# cout gpl ttc:
+# nombre litrescout gpl:
 
 - name: "Test cout_gpl_carburant_ttc"
   period: 2021
@@ -261,7 +262,7 @@
   output:
     cout_gpl_carburant_ttc: 111.49
 
-# cout carburant total
+# nombre litres carburant total:
 
 - name: "Test cout_carburant_total_ttc"
   period: 2021
