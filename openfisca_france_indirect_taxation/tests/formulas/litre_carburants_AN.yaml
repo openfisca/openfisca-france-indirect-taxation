@@ -11,28 +11,28 @@
   output:
     nombre_litres_gazole_b7: 100
 
-
-- name: "Test cout_gazole_b7_ttc"
+- name: "Test nombre_litres_gazole_b7"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_gazole_b7: 100
+    cout_gazole_b7_ttc: 144.18
     code_region: '24'
   output:
-    cout_gazole_b7_ttc: 144.18
+    nombre_litres_gazole_b7: 100
 
-- name: "Test cout_gazole_b7_ttc"
+- name: "Test nombre_litres_gazole_b7"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_gazole_b7: 100
+    cout_gazole_b7_ttc: 155.04
     code_region: '94'
   output:
-    cout_gazole_b7_ttc: 155.04
+    nombre_litres_gazole_b7: 100
+
 
 ## nombre litres gazole B10:
 
-- name: "Test cout_gazole_b10_ttc"
+- name: "Test nombre_litres_gazole_b10"
   period: 2021
   absolute_error_margin: .01
   input:
@@ -41,235 +41,235 @@
   output:
     cout_gazole_b10_ttc: 149.88
 
-- name: "Test cout_gazole_b10_ttc"
+- name: "Test nombre_litres_gazole_b10"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_gazole_b10: 100
+    cout_gazole_b10_ttc: 144.18
     code_region: '24'
   output:
-    cout_gazole_b10_ttc: 144.18
+    nombre_litres_gazole_b10: 100
 
-- name: "Test cout_gazole_b10_ttc"
+- name: "Test nombre_litres_gazole_b10"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_gazole_b10: 100
+    cout_gazole_b10_ttc: 155.04
     code_region: '94'
   output:
-    cout_gazole_b10_ttc: 155.04
+    nombre_litres_gazole_b10: 100
 
 ## nombre litres gazole total:
 
-- name: "Test cout_gazole_total_ttc"
+- name: "Test nombre_litres_gazole_total"
   period: 2021
   absolute_error_margin: .01
   input:
-    cout_gazole_b7_ttc: 1
-    cout_gazole_b10_ttc: 1
+    nombre_litres_gazole_b7: 1
+    nombre_litres_gazole_b10: 1
   output:
-    cout_gazole_total_ttc: 2
+    nombre_litres_gazole_total: 2
 
 
 # nombre litres essence:
 
 ## nombre litres essence sp95 e10:
 
-- name: "Test cout_essence_sp95_e10_ttc"
+- name: "Test nombre_litres_essence_sp95_e10"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_sp95_e10: 100
+    cout_essence_sp95_e10_ttc: 158.44
     code_region: '11'
   output:
-    cout_essence_sp95_e10_ttc: 158.44
+    nombre_litres_essence_sp95_e10: 100
 
-- name: "Test cout_essence_sp95_e10_ttc"
+- name: "Test nombre_litres_essence_sp95_e10"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_sp95_e10: 100
     code_region: '24'
-  output:
     cout_essence_sp95_e10_ttc: 153.82
+  output:
+    nombre_litres_essence_sp95_e10: 100
 
-- name: "Test cout_essence_sp95_e10_ttc"
+- name: "Test nombre_litres_essence_sp95_e10"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_sp95_e10: 100
+    cout_essence_sp95_e10_ttc: 162.08
     code_region: '94'
   output:
-    cout_essence_sp95_e10_ttc: 162.08
+    nombre_litres_essence_sp95_e10: 100
 
 ## nombre litres essence sp95:
 
-- name: "Test cout_essence_sp95_ttc"
+- name: "Test nombre_litres_essence_sp95"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_sp95: 100
+    cout_essence_sp95_ttc: 157.94
     code_region: '11'
   output:
-    cout_essence_sp95_ttc: 157.94
+    nombre_litres_essence_sp95: 100
 
-- name: "Test cout_essence_sp95_ttc"
+- name: "Test nombre_litres_essence_sp95"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_sp95: 100
+    cout_essence_sp95_ttc: 156.32
     code_region: '24'
   output:
-    cout_essence_sp95_ttc: 156.32
+    nombre_litres_essence_sp95: 100
 
-- name: "Test cout_essence_sp95_ttc"
+- name: "Test nombre_litres_essence_sp95"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_sp95: 100
+    cout_essence_sp95_ttc: 165.67
     code_region: '94'
   output:
-    cout_essence_sp95_ttc: 165.67
+    nombre_litres_essence_sp95: 100
 
 ## nombre litres essence sp98:
 
-- name: "Test cout_essence_sp98_ttc"
+- name: "Test nombre_litres_essence_sp98"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_sp98: 100
+    cout_essence_sp98_ttc: 167.48
     code_region: '11'
   output:
-    cout_essence_sp98_ttc: 167.48
+    nombre_litres_essence_sp98: 100
 
-- name: "Test cout_essence_sp98_ttc"
+- name: "Test nombre_litres_essence_sp98"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_sp98: 100
+    cout_essence_sp98_ttc: 162.0
     code_region: '24'
   output:
-    cout_essence_sp98_ttc: 162.0
+    nombre_litres_essence_sp98: 100
 
-- name: "Test cout_essence_sp98_ttc"
+- name: "Test nombre_litres_essence_sp98"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_sp98: 100
+    cout_essence_sp98_ttc: 159.33
     code_region: '94'
   output:
-    cout_essence_sp98_ttc: 159.33
+    nombre_litres_essence_sp98: 100
 
 ## nombre litres essence super plombe:
 
-- name: "Test cout_essence_super_plombe_ttc"
+- name: "Test nombre_litres_essence_super_plombe"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_super_plombe: 100
+    cout_essence_super_plombe_ttc: 100
     code_region: '11'
   output:
-    cout_essence_super_plombe_ttc: 0.0
+    nombre_litres_essence_super_plombe: 0.0
 
-- name: "Test cout_essence_super_plombe_ttc"
+- name: "Test nombre_litres_essence_super_plombe"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_super_plombe: 100
+    cout_essence_super_plombe_ttc: 100
     code_region: '24'
   output:
-    cout_essence_super_plombe_ttc: 0.0
+    nombre_litres_essence_super_plombe: 0.0
 
-- name: "Test cout_essence_super_plombe_ttc"
+- name: "Test nombre_litres_essence_super_plombe"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_super_plombe: 100
+    cout_essence_super_plombe_ttc: 100
     code_region: '94'
   output:
-    cout_essence_super_plombe_ttc: 0.0
+    nombre_litres_essence_super_plombe: 0.0
 
 ## nombre litres essence e85:
 
-- name: "Test cout_essence_e85_ttc"
+- name: "Test nombre_litres_essence_e85"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_e85: 100
+    cout_essence_e85_ttc: 73.07
     code_region: '11'
   output:
-    cout_essence_e85_ttc: 73.07
+    nombre_litres_essence_e85: 100
 
-- name: "Test cout_essence_e85_ttc"
+- name: "Test nombre_litres_essence_e85"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_e85: 100
+    cout_essence_e85_ttc: 67.74
     code_region: '24'
   output:
-    cout_essence_e85_ttc: 67.74
+    nombre_litres_essence_e85: 100
 
-- name: "Test cout_essence_e85_ttc"
+- name: "Test nombre_litres_essence_e85"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_essence_e85: 100
+    cout_essence_e85_ttc: 135.04
     code_region: '94'
   output:
-    cout_essence_e85_ttc: 135.04
+    nombre_litres_essence_e85: 100
 
 ## nombre litres essence total:
 
-- name: "Test cout_essence_total_ttc"
+- name: "Test nombre_litres_essence_total"
   period: 2021
   absolute_error_margin: .01
   input:
-    cout_essence_sp95_e10_ttc: 1
-    cout_essence_sp95_ttc: 1
-    cout_essence_sp98_ttc: 1
-    cout_essence_super_plombe_ttc: 1
-    cout_essence_e85_ttc: 1
+    nombre_litres_essence_sp95_e10: 1
+    nombre_litres_essence_sp95: 1
+    nombre_litres_essence_sp98: 1
+    nombre_litres_essence_super_plombe: 1
+    nombre_litres_essence_e85: 1
   output:
-    cout_essence_total_ttc: 4
+    nombre_litres_essence_total: 4
 
-# nombre litrescout gpl:
+# nombre litres gpl:
 
-- name: "Test cout_gpl_carburant_ttc"
+- name: "Test nombre_litres_gpl_carburant"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_gpl_carburant: 100
+    cout_gpl_carburant_ttc: 87.8
     code_region: '11'
   output:
-    cout_gpl_carburant_ttc: 87.8
+    nombre_litres_gpl_carburant: 100
 
-- name: "Test cout_gpl_carburant_ttc"
+- name: "Test nombre_litres_gpl_carburant"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_gpl_carburant: 100
+    cout_gpl_carburant_ttc: 89.84
     code_region: '24'
   output:
-    cout_gpl_carburant_ttc: 89.84
+    nombre_litres_gpl_carburant: 100
 
 
-- name: "Test cout_gpl_carburant_ttc"
+- name: "Test nombre_litres_gpl_carburant"
   period: 2021
   absolute_error_margin: .01
   input:
-    nombre_litres_gpl_carburant: 100
+    cout_gpl_carburant_ttc: 111.49
     code_region: '94'
   output:
-    cout_gpl_carburant_ttc: 111.49
+    nombre_litres_gpl_carburant: 100
 
 # nombre litres carburant total:
 
-- name: "Test cout_carburant_total_ttc"
+- name: "Test nombre_litres_total"
   period: 2021
   absolute_error_margin: .01
   input:
-    cout_gazole_total_ttc: 1
-    cout_essence_total_ttc: 1
-    cout_gpl_carburant_ttc: 1
+    nombre_litres_gazole_total: 1
+    nombre_litres_essence_total: 1
+    nombre_litres_gpl_carburant: 1
   output:
-    cout_carburant_total_ttc: 3
+    nombre_litres_total: 3
