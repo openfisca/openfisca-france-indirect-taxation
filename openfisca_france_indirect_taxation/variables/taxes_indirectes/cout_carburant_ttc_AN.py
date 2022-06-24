@@ -133,6 +133,7 @@ class cout_essence_super_plombe_ttc(Variable):  #ATTENTION: pas prix par région
     label = "cout de l'essence super plombé ttc"
     definition_period = YEAR
     default_value = 0
+    end = "2007-01-01"
 
     def formula(menage, period, parameters):
         nombre_litres_essence_super_plombe = menage('nombre_litres_essence_super_plombe', period)
@@ -170,7 +171,7 @@ class cout_essence_total_ttc(Variable):
     def formula_2009(menage, period):
         cout_essence_sp95_ttc = menage('cout_essence_sp95_ttc', period)
         cout_essence_sp98_ttc = menage('cout_essence_sp98_ttc', period)
-        cout_essence_essence_e85_ttc = menage('cout_essence_essence_e85_ttc', period)
+        cout_essence_essence_e85_ttc = menage('cout_essence_e85_ttc', period)
         cout_essence_sp95_e10_ttc = menage('cout_essence_sp95_e10_ttc', period)
         cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_essence_e85_ttc + cout_essence_sp95_e10_ttc)
         return cout_essence_total_ttc
@@ -219,8 +220,8 @@ class cout_carburant_total_ttc(Variable):
     definition_period = YEAR
 
     def formula(menage, period):
-        cout_essence_total_ht = menage('cout_essence_total_ht', period)
-        cout_gazole_total_ht = menage('cout_gazole_total_ht', period)
-        cout_gpl_carburant_ht = menage('cout_gpl_carburant_ht', period)
+        cout_essence_total_ht = menage('cout_essence_total_ttc', period)
+        cout_gazole_total_ht = menage('cout_gazole_total_ttc', period)
+        cout_gpl_carburant_ht = menage('cout_gpl_carburant_ttc', period)
         cout_carburant_total_ht = cout_gazole_total_ht + cout_essence_total_ht + cout_gpl_carburant_ht
         return cout_carburant_total_ht
