@@ -4,13 +4,13 @@
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
-class depenses_tva_exonere(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = "Dépenses TTC des biens n'acquittant pas de TVA"
+# class depenses_tva_exonere(YearlyVariable):
+#     value_type = float
+#     entity = Menage
+#     label = "Dépenses TTC des biens n'acquittant pas de TVA"
 
-    def formula(menage, period):
-        return menage('depenses_', period)
+#     def formula(menage, period):
+#         return menage('depenses_', period)
 
 
 class depenses_tva_taux_intermediaire(YearlyVariable):
