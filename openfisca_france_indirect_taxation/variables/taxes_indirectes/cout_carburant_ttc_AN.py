@@ -185,7 +185,7 @@ class cout_carburant_total_ttc(Variable):
         cout_carburant_total_ht = cout_gazole_total_ht + cout_essence_total_ht + cout_gpl_carburant_ht
         return cout_carburant_total_ht
 
-class cout_carburant_total_ttc_cas_type(Variable):
+class cout_carburant_total_ttc_sans_distinction(Variable):
     value_type = float
     entity = Menage
     label = 'Calcul du montant des couts sur tous les carburants cumulés ttc '
@@ -200,7 +200,7 @@ class cout_carburant_total_ttc_cas_type(Variable):
         cout_gazole_b10_ttc = menage('cout_gazole_b10_ttc', period)
         cout_gpl_carburant_ht = menage('cout_gpl_carburant_ttc', period)
         cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc +
-         cout_essence_sp95_e10_ttc)
+         cout_essence_sp95_e10_ttc + cout_gazole_b7_ttc + cout_gazole_b10_ttc + cout_gpl_carburant_ht)
         return cout_essence_total_ttc
 
     def formula_2009(menage, period):
@@ -210,7 +210,8 @@ class cout_carburant_total_ttc_cas_type(Variable):
         cout_essence_sp95_e10_ttc = menage('cout_essence_sp95_e10_ttc', period)
         cout_gazole_b7_ttc = menage('cout_gazole_b7_ttc', period)
         cout_gpl_carburant_ht = menage('cout_gpl_carburant_ttc', period)
-        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc + cout_essence_sp95_e10_ttc)
+        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc +
+         cout_essence_sp95_e10_ttc + cout_gazole_b7_ttc + cout_gpl_carburant_ht)
         return cout_essence_total_ttc
 
     def formula_2007(menage, period):
@@ -219,7 +220,8 @@ class cout_carburant_total_ttc_cas_type(Variable):
         cout_essence_e85_ttc = menage('cout_essence_e85_ttc', period)
         cout_gazole_b7_ttc = menage('cout_gazole_b7_ttc', period)
         cout_gpl_carburant_ht = menage('cout_gpl_carburant_ttc', period)
-        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc)
+        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc +
+         cout_gazole_b7_ttc + cout_gpl_carburant_ht)
         return cout_essence_total_ttc
 
     def formula_1990(menage, period):
@@ -228,5 +230,6 @@ class cout_carburant_total_ttc_cas_type(Variable):
         cout_essence_super_plombe_ttc = menage('cout_essence_super_plombe_ttc', period)
         cout_gazole_b7_ttc = menage('cout_gazole_b7_ttc', period)
         cout_gpl_carburant_ht = menage('cout_gpl_carburant_ttc', period)
-        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_super_plombe_ttc)
+        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_super_plombe_ttc +
+         cout_gazole_b7_ttc + cout_gpl_carburant_ht)
         return cout_essence_total_ttc
