@@ -111,8 +111,8 @@ class cout_essence_e85_ht(Variable):
 
     def formula_2007(menage, period):
         nombre_litres_essence_e85 = menage('nombre_litres_essence_e85', period)
-        prix_essence_essence_e85_ht = menage('prix_essence_essence_e85_ht', period)
-        cout_essence_e85_ht = nombre_litres_essence_e85 * prix_essence_essence_e85_ht
+        prix_essence_e85_ht = menage('prix_essence_e85_ht', period)
+        cout_essence_e85_ht = nombre_litres_essence_e85 * prix_essence_e85_ht
         return cout_essence_e85_ht
 
 # cout essence total ht:
@@ -126,16 +126,16 @@ class cout_essence_total_ht(Variable):
     def formula_2009(menage, period):
         cout_essence_sp95_ht = menage('cout_essence_sp95_ht', period)
         cout_essence_sp98_ht = menage('cout_essence_sp98_ht', period)
-        cout_essence_essence_e85_ht = menage('cout_essence_e85_ht', period)
+        cout_essence_e85_ht = menage('cout_essence_e85_ht', period)
         cout_essence_sp95_e10_ht = menage('cout_essence_sp95_e10_ht', period)
-        cout_essence_total_ht = (cout_essence_sp95_ht + cout_essence_sp98_ht + cout_essence_essence_e85_ht + cout_essence_sp95_e10_ht)
+        cout_essence_total_ht = (cout_essence_sp95_ht + cout_essence_sp98_ht + cout_essence_e85_ht + cout_essence_sp95_e10_ht)
         return cout_essence_total_ht
 
     def formula_2007(menage, period):
         cout_essence_sp95_ht = menage('cout_essence_sp95_ht', period)
         cout_essence_sp98_ht = menage('cout_essence_sp98_ht', period)
-        cout_essence_essence_e85_ht = menage('cout_essence_e85_ht', period)
-        cout_essence_total_ht = (cout_essence_sp95_ht + cout_essence_sp98_ht + cout_essence_essence_e85_ht)
+        cout_essence_e85_ht = menage('cout_essence_e85_ht', period)
+        cout_essence_total_ht = (cout_essence_sp95_ht + cout_essence_sp98_ht + cout_essence_e85_ht)
         return cout_essence_total_ht
 
     def formula_1990(menage, period):
