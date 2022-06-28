@@ -20,16 +20,9 @@ class nombre_litres_gazole_b7(Variable):
     default_value = 0
 
     def formula(menage, period):
-        code_region = menage('code_region', period)
-        cout_gazole_b7_ttc = menage('cout_gazole_b7_ttc', period)
-        prix_gazole_b7_hectolitre_ttc = np.fromiter(
-            (
-                get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}',{}).get('Gazole',{}).get(f'{period}',0)
-                for region_cell in code_region
-            ),
-            dtype=np.float32
-        )
-        nombre_litres_gazole_b7 = cout_gazole_b7_ttc / ( prix_gazole_b7_hectolitre_ttc / 100 )
+        cout_gazole_b7_ttc_entree = menage('cout_gazole_b7_ttc_entree', period)
+        prix_gazole_b7_ttc = menage('prix_gazole_b7_ttc', period)
+        nombre_litres_gazole_b7 = cout_gazole_b7_ttc_entree / prix_gazole_b7_ttc
         return nombre_litres_gazole_b7
 
 class nombre_litres_gazole_b10(Variable):   ##ATTENTION: pas de prix disponible pour gazole B10, on utilise prix du gazole B7
@@ -40,16 +33,9 @@ class nombre_litres_gazole_b10(Variable):   ##ATTENTION: pas de prix disponible 
     default_value = 0
 
     def formula_2017(menage, period):
-        code_region = menage('code_region', period)
-        cout_gazole_b10_ttc = menage('cout_gazole_b10_ttc', period)
-        prix_gazole_b10_hectolitre_ttc = np.fromiter(
-            (
-                get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}',{}).get('Gazole',{}).get(f'{period}',0)
-                for region_cell in code_region
-            ),
-            dtype=np.float32
-        )
-        nombre_litres_gazole_b10 = cout_gazole_b10_ttc / ( prix_gazole_b10_hectolitre_ttc / 100 )
+        cout_gazole_b10_ttc_entree = menage('cout_gazole_b10_ttc_entree', period)
+        prix_gazole_b10_ttc = menage('prix_gazole_b10_ttc', period)
+        nombre_litres_gazole_b10 = cout_gazole_b10_ttc_entree / prix_gazole_b10_ttc
         return nombre_litres_gazole_b10
 
 ## nombre de litre de gazole total:
@@ -82,16 +68,9 @@ class nombre_litres_essence_sp95_e10(Variable):
     default_value = 0
 
     def formula_2009(menage, period):
-        code_region = menage('code_region', period)
-        cout_essence_sp95_e10_ttc = menage('cout_essence_sp95_e10_ttc', period)
-        prix_essence_sp95_e10_hectolitre_ttc = np.fromiter(
-            (
-                get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}',{}).get('E10',{}).get(f'{period}',0)
-                for region_cell in code_region
-            ),
-            dtype=np.float32
-        )
-        nombre_litres_essence_sp95_e10 = cout_essence_sp95_e10_ttc / ( prix_essence_sp95_e10_hectolitre_ttc / 100 )
+        cout_essence_sp95_e10_ttc_entree = menage('cout_essence_sp95_e10_ttc_entree', period)
+        prix_essence_sp95_e10_ttc = menage('prix_essence_sp95_e10_ttc', period)
+        nombre_litres_essence_sp95_e10 = cout_essence_sp95_e10_ttc_entree / prix_essence_sp95_e10_ttc
         return nombre_litres_essence_sp95_e10
 
 class nombre_litres_essence_sp95(Variable):
@@ -101,18 +80,12 @@ class nombre_litres_essence_sp95(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period, parameters):
-        code_region = menage('code_region', period)
-        cout_essence_sp95_ttc = menage('cout_essence_sp95_ttc', period)
-        prix_essence_sp95_hectolitre_ttc = np.fromiter(
-            (
-                get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}',{}).get('SP95',{}).get(f'{period}',0)
-                for region_cell in code_region
-            ),
-            dtype=np.float32
-        )
-        nombre_litres_essence_sp95 = cout_essence_sp95_ttc / ( prix_essence_sp95_hectolitre_ttc / 100 )
+    def formula(menage, period):
+        cout_essence_sp95_ttc_entree = menage('cout_essence_sp95_ttc_entree', period)
+        prix_essence_sp95_ttc = menage('prix_essence_sp95_ttc', period)
+        nombre_litres_essence_sp95 = cout_essence_sp95_ttc_entree / prix_essence_sp95_ttc
         return nombre_litres_essence_sp95
+
 
 class nombre_litres_essence_sp98(Variable):
     value_type = float
@@ -121,17 +94,10 @@ class nombre_litres_essence_sp98(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period, parameters):
-        code_region = menage('code_region', period)
-        cout_essence_sp98_ttc = menage('cout_essence_sp98_ttc', period)
-        prix_essence_sp98_hectolitre_ttc = np.fromiter(
-            (
-                get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}',{}).get('SP98',{}).get(f'{period}',0)
-                for region_cell in code_region
-            ),
-            dtype=np.float32
-        )
-        nombre_litres_essence_sp98 = cout_essence_sp98_ttc / ( prix_essence_sp98_hectolitre_ttc / 100 )
+    def formula(menage, period):
+        cout_essence_sp98_ttc_entree = menage('cout_essence_sp98_ttc_entree', period)
+        prix_essence_sp98_ttc = menage('prix_essence_sp98_ttc', period)
+        nombre_litres_essence_sp98 = cout_essence_sp98_ttc_entree / prix_essence_sp98_ttc
         return nombre_litres_essence_sp98
 
 class nombre_litres_essence_super_plombe(Variable):    #ATTENTION: pas prix par région disponible, on garde les prix ttc général de l'IPP. (INSEE)
@@ -142,10 +108,10 @@ class nombre_litres_essence_super_plombe(Variable):    #ATTENTION: pas prix par 
     default_value = 0
     end = "2017-01-01"
 
-    def formula(menage, period, parameters):
-        cout_essence_super_plombe_ttc = menage('cout_essence_super_plombe_ttc', period)
-        prix_essence_super_plombe_ttc_hectolitre = parameters(period).prix_carburants.super_plombe_ttc
-        nombre_litres_essence_super_plombe = cout_essence_super_plombe_ttc / ( prix_essence_super_plombe_ttc_hectolitre / 100 )
+    def formula(menage, period):
+        cout_essence_super_plombe_ttc_entree = menage('cout_essence_super_plombe_ttc_entree', period)
+        prix_essence_super_plombe_ttc = menage('prix_essence_super_plombe_ttc', period)
+        nombre_litres_essence_super_plombe = cout_essence_super_plombe_ttc_entree / prix_essence_super_plombe_ttc
         return nombre_litres_essence_super_plombe
 
 class nombre_litres_essence_e85(Variable):
@@ -155,17 +121,10 @@ class nombre_litres_essence_e85(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula_2007(menage, period, parameters):
-        code_region = menage('code_region', period)
-        cout_essence_e85_ttc = menage('cout_essence_e85_ttc', period)
-        prix_essence_e85_hectolitre_ttc = np.fromiter(
-            (
-                get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}',{}).get('E85',{}).get(f'{period}',0)
-                for region_cell in code_region
-            ),
-            dtype=np.float32
-        )
-        nombre_litres_essence_e85 = cout_essence_e85_ttc / ( prix_essence_e85_hectolitre_ttc / 100 )
+    def formula_2007(menage, period):
+        cout_essence_e85_ttc_entree = menage('cout_essence_e85_ttc_entree', period)
+        prix_essence_e85_ttc = menage('prix_essence_e85_ttc', period)
+        nombre_litres_essence_e85 = cout_essence_e85_ttc_entree / prix_essence_e85_ttc
         return nombre_litres_essence_e85
 
 # montant TVA total sur l'essence
@@ -206,17 +165,10 @@ class nombre_litres_gpl_carburant(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period, parameters):
-        code_region = menage('code_region', period)
-        cout_gpl_carburant_ttc = menage('cout_gpl_carburant_ttc', period)
-        prix_gpl_carburant_hectolitre_ttc = np.fromiter(
-            (
-                get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}',{}).get('GPLc',{}).get(f'{period}',0)
-                for region_cell in code_region
-            ),
-            dtype=np.float32
-        )
-        nombre_litres_gpl_carburant = cout_gpl_carburant_ttc / ( prix_gpl_carburant_hectolitre_ttc / 100 )
+    def formula(menage, period):
+        cout_gpl_carburant_ttc_entree = menage('cout_gpl_carburant_ttc_entree', period)
+        prix_gpl_carburant_ttc = menage('prix_gpl_carburant_ttc', period)
+        nombre_litres_gpl_carburant = cout_gpl_carburant_ttc_entree / prix_gpl_carburant_ttc
         return nombre_litres_gpl_carburant
 
 # nombre de litre total:
