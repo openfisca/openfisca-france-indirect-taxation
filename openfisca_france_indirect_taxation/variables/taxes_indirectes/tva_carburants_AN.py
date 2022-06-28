@@ -1,5 +1,3 @@
-import numpy as np
-
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
 
 # montant TVA sur different type de gazole:

@@ -1,7 +1,4 @@
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
-from openfisca_france_indirect_taxation.variables.prix_carburants_regions_years_AN import get_prix_carburant_par_region_par_carburant_par_an_hectolitre
-
-import numpy as np
 
 # cout different type de gazole ttc:
 class cout_gazole_b7_ttc_entree(Variable):
