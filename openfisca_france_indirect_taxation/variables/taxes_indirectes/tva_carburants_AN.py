@@ -42,6 +42,7 @@ class tva_sur_gazole_b7(Variable):
         tva_sur_ht_gazole_b7 = menage('tva_sur_ht_gazole_b7', period)
         tva_sur_ticpe_gazole_b7 = menage('tva_sur_ticpe_gazole_b7', period)
         tva = tva_sur_ht_gazole_b7 + tva_sur_ticpe_gazole_b7
+        return tva
 
 ## TVA sur gazole B10
 class tva_sur_ht_gazole_b10(Variable):
@@ -241,8 +242,9 @@ class tva_sur_ht_essence_super_plombe(Variable):
     label = "TVA sur la part ht de l'essence super plombé"
     definition_period = YEAR
     default_value = 0
+    end = '2006-12-31'
 
-    def formula_2009(menage, period, parameters):
+    def formula(menage, period, parameters):
         cout_essence_super_plombe_ht = menage('cout_essence_super_plombe_ht', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
         hors_tva = cout_essence_super_plombe_ht * (1 / (1 + taux_plein_tva) )
@@ -255,8 +257,9 @@ class tva_sur_ticpe_essence_super_plombe(Variable):
     label = "TVA sur la part TICPE de l'essence super plombé"
     definition_period = YEAR
     default_value = 0
+    end = '2006-12-31'
 
-    def formula_2009(menage, period, parameters):
+    def formula(menage, period, parameters):
         essence_super_plombe_ticpe = menage('essence_super_plombe_ticpe', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
         hors_tva = essence_super_plombe_ticpe * (1 / (1 + taux_plein_tva) )
@@ -269,8 +272,9 @@ class tva_sur_essence_super_plombe(Variable):
     label = "TVA sur la consommation de l'essence super plombé"
     definition_period = YEAR
     default_value = 0
+    end = '2006-12-31'
 
-    def formula_2009(menage, period):
+    def formula(menage, period):
         tva_sur_ht_essence_super_plombe = menage('tva_sur_ht_essence_super_plombe', period)
         tva_sur_ticpe_essence_super_plombe = menage('tva_sur_ticpe_essence_super_plombe', period)
         tva = tva_sur_ht_essence_super_plombe + tva_sur_ticpe_essence_super_plombe

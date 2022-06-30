@@ -2,23 +2,57 @@
 
 ## TVA sur gazole B7:
 
-- name: "Test tva_sur_gazole_b7"
+- name: "Test tva_sur_ht_gazole_b7"
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_gazole_b7_ttc: 120
+    cout_gazole_b7_ht: 120
   output:
-    tva_sur_gazole_b7: 20
+    tva_sur_ht_gazole_b7: 20
+
+- name: "Test tva_sur_ticpe_gazole_b7"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    gazole_b7_ticpe: 120
+  output:
+    tva_sur_ticpe_gazole_b7: 20
+
+- name: "tva_sur_gazole_b7"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    tva_sur_ht_gazole_b7: 20
+    tva_sur_ticpe_gazole_b7: 20
+  output:
+    tva_sur_gazole_b7: 40
 
 ## TVA sur gazole B10:
 
-- name: "Test tva_sur_gazole_b10"
+- name: "Test tva_sur_ht_gazole_b10"
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_gazole_b10_ttc: 120
+    cout_gazole_b10_ht: 120
   output:
-    tva_sur_gazole_b10: 20
+    tva_sur_ht_gazole_b10: 20
+
+- name: "Test tva_sur_ticpe_gazole_b10"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    gazole_b10_ticpe: 120
+  output:
+    tva_sur_ticpe_gazole_b10: 20
+
+- name: "tva_sur_gazole_b10"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    tva_sur_ht_gazole_b10: 20
+    tva_sur_ticpe_gazole_b10: 20
+  output:
+    tva_sur_gazole_b10: 40
 
 ## TVA total gazole
 
@@ -35,53 +69,138 @@
 
 ## TVA sur essence SP95 E10
 
-- name: "Test tva_sur_essence_sp95_e10"
+- name: "Test tva_sur_ht_essence_sp95_e10"
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_sp95_e10_ttc: 120
+    cout_essence_sp95_e10_ht: 120
   output:
-    tva_sur_essence_sp95_e10: 20
+    tva_sur_ht_essence_sp95_e10: 20
+
+- name: "Test tva_sur_ticpe_essence_sp95_e10"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    essence_sp95_e10_ticpe: 120
+  output:
+    tva_sur_ticpe_essence_sp95_e10: 20
+
+- name: "tva_sur_essence_sp95_e10"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    tva_sur_ht_essence_sp95_e10: 20
+    tva_sur_ticpe_essence_sp95_e10: 20
+  output:
+    tva_sur_essence_sp95_e10: 40
 
 ## TVA sur essence SP95
 
-- name: "Test tva_sur_essence_sp95"
+- name: "Test tva_sur_ht_essence_sp95"
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_sp95_ttc: 120
+    cout_essence_sp95_ht: 120
   output:
-    tva_sur_essence_sp95: 20
+    tva_sur_ht_essence_sp95: 20
+
+- name: "Test tva_sur_ticpe_essence_sp95"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    essence_sp95_ticpe: 120
+  output:
+    tva_sur_ticpe_essence_sp95: 20
+
+- name: "tva_sur_essence_sp95"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    tva_sur_ht_essence_sp95: 20
+    tva_sur_ticpe_essence_sp95: 20
+  output:
+    tva_sur_essence_sp95: 40
 
 ## TVA sur essence SP98
 
-- name: "Test tva_sur_essence_sp98"
+- name: "Test tva_sur_ht_essence_sp98"
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_sp98_ttc: 120
+    cout_essence_sp98_ht: 120
   output:
-    tva_sur_essence_sp98: 20
+    tva_sur_ht_essence_sp98: 20
+
+- name: "Test tva_sur_ticpe_essence_sp98"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    essence_sp98_ticpe: 120
+  output:
+    tva_sur_ticpe_essence_sp98: 20
+
+- name: "tva_sur_essence_sp98"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    tva_sur_ht_essence_sp98: 20
+    tva_sur_ticpe_essence_sp98: 20
+  output:
+    tva_sur_essence_sp98: 40
 
 ## TVA sur essence super plombé
 
-- name: "Test tva_sur_essence_super_plombe"
+- name: "Test tva_sur_ht_essence_super_plombe"
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_super_plombe_ttc: 120
+    cout_essence_super_plombe_ht: 120
+  output:
+    tva_sur_ht_essence_super_plombe: 0
+
+- name: "Test tva_sur_ticpe_essence_super_plombe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    essence_super_plombe_ticpe: 120
+  output:
+    tva_sur_ticpe_essence_super_plombe: 0
+
+- name: "tva_sur_essence_super_plombe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    tva_sur_ht_essence_super_plombe: 20
+    tva_sur_ticpe_essence_super_plombe: 20
   output:
     tva_sur_essence_super_plombe: 0
 
 ## TVA sur essence E85
 
-- name: "Test tva_sur_essence_e85"
+- name: "Test tva_sur_ht_essence_e85"
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_e85_ttc: 120
+    cout_essence_e85_ht: 120
   output:
-    tva_sur_essence_e85: 20
+    tva_sur_ht_essence_e85: 20
+
+- name: "Test tva_sur_ticpe_essence_e85"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    essence_e85_ticpe: 120
+  output:
+    tva_sur_ticpe_essence_e85: 20
+
+- name: "tva_sur_essence_e85"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    tva_sur_ht_essence_e85: 20
+    tva_sur_ticpe_essence_e85: 20
+  output:
+    tva_sur_essence_e85: 40
 
 ## TVA total essence
 
@@ -99,13 +218,30 @@
 
 # TVA sur gpl
 
-- name: "Test tva_sur_gpl_carburant"
+- name: "Test tva_sur_ht_gpl_carburant"
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_gpl_carburant_ttc: 120
+    cout_gpl_carburant_ht: 120
   output:
-    tva_sur_gpl_carburant: 20
+    tva_sur_ht_gpl_carburant: 20
+
+- name: "Test tva_sur_ticpe_gpl_carburant"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    gpl_carburant_ticpe: 120
+  output:
+    tva_sur_ticpe_gpl_carburant: 20
+
+- name: "tva_sur_gpl_carburant"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    tva_sur_ht_gpl_carburant: 20
+    tva_sur_ticpe_gpl_carburant: 20
+  output:
+    tva_sur_gpl_carburant: 40
 
 # TVA total carburant
 

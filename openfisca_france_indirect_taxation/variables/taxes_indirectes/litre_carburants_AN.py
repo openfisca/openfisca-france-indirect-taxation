@@ -100,7 +100,7 @@ class nombre_litres_essence_sp98(Variable):
         nombre_litres_essence_sp98 = cout_essence_sp98_ttc_entree / prix_essence_sp98_ttc
         return nombre_litres_essence_sp98
 
-class nombre_litres_essence_super_plombe(Variable):    #ATTENTION: pas prix par région disponible, on garde les prix ttc général de l'IPP. (INSEE)
+class nombre_litres_essence_super_plombe(Variable):
     value_type = float
     entity = Menage
     label = 'nombre de litre de super plombé consommés par le menage'

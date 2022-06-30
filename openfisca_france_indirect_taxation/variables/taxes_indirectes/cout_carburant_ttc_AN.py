@@ -94,7 +94,7 @@ class cout_essence_sp98_ttc(Variable):
         cout_essence_sp98_ttc = cout_essence_sp98_ht + essence_sp98_ticpe + tva_sur_essence_sp98
         return cout_essence_sp98_ttc
 
-class cout_essence_super_plombe_ttc(Variable):  #ATTENTION: pas prix par région disponible, on garde les prix ttc général de l'IPP. (INSEE)
+class cout_essence_super_plombe_ttc(Variable):
     value_type = float
     entity = Menage
     label = "cout de l'essence super plombé ttc"
@@ -105,8 +105,8 @@ class cout_essence_super_plombe_ttc(Variable):  #ATTENTION: pas prix par région
     def formula(menage, period):
         cout_essence_super_plombe_ht = menage('cout_essence_super_plombe_ht', period)
         essence_super_plombe_ticpe = menage('essence_super_plombe_ticpe', period)
-        tva_sur_ht_essence_super_plombe = menage('tva_sur_ht_essence_super_plombe', period)
-        cout_essence_super_plombe_ttc = cout_essence_super_plombe_ht + essence_super_plombe_ticpe + tva_sur_ht_essence_super_plombe
+        tva_sur_essence_super_plombe = menage('tva_sur_essence_super_plombe', period)
+        cout_essence_super_plombe_ttc = cout_essence_super_plombe_ht + essence_super_plombe_ticpe + tva_sur_essence_super_plombe
         return cout_essence_super_plombe_ttc
 
 class cout_essence_e85_ttc(Variable):

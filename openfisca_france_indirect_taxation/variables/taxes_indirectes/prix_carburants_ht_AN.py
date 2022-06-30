@@ -209,5 +209,5 @@ class prix_gpl_carburant_ht(Variable):
         accise_combustibles_liquides = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.autres_gaz_petrole_liquefies_utilises_comme_carburants_autres_100kg
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
         prix_gpl_carburant_hors_tva = prix_gpl_carburant_ttc * (1 / (1 + taux_plein_tva) )
-        prix_gpl_carburant_ht = prix_gpl_carburant_hors_tva - accise_combustibles_liquides
+        prix_gpl_carburant_ht = prix_gpl_carburant_hors_tva - (accise_combustibles_liquides / 100)
         return prix_gpl_carburant_ht
