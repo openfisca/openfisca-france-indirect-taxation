@@ -6,6 +6,12 @@ major_mobilites_tipce_gazole:
       value: 1.89
   metadata:
     unit: currency-EUR
+    reference:
+      2017-01-01:
+      - href: https://www.legifrance.gouv.fr/loda/id/LEGIARTI000033760682/2017-01-01#LEGIARTI000033760682
+        title: LOI n° 2016-1917 du 29 décembre 2016 de finances pour 2017 (1) - Article 24
+      - href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000033777714/2017-01-01
+        title: Article 265 A ter du Code des douanes
 major_mobilites_tipce_sp95_sp98:
   description: Supercarburants dont SP95 et SP98 (hectolitre)* (indice d'identification 11)
   values:
@@ -13,6 +19,12 @@ major_mobilites_tipce_sp95_sp98:
       value: 1.02
   metadata:
     unit: currency-EUR
+    reference:
+      2017-01-01:
+      - href: https://www.legifrance.gouv.fr/loda/id/LEGIARTI000033760682/2017-01-01#LEGIARTI000033760682
+        title: LOI n° 2016-1917 du 29 décembre 2016 de finances pour 2017 (1) - Article 24
+      - href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000033777714/2017-01-01
+        title: Article 265 A ter du Code des douanes
 major_mobilites_tipce_sp95_e10:
   description: Supercarburants dont SP95 E10 (hectolitre)* (indice d'identification 11 ter)
   values:
@@ -20,3 +32,9 @@ major_mobilites_tipce_sp95_e10:
       value: 1.02
   metadata:
     unit: currency-EUR
+    reference:
+      2017-01-01:
+      - href: https://www.legifrance.gouv.fr/loda/id/LEGIARTI000033760682/2017-01-01#LEGIARTI000033760682
+        title: LOI n° 2016-1917 du 29 décembre 2016 de finances pour 2017 (1) - Article 24
+      - href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000033777714/2017-01-01
+        title: Article 265 A ter du Code des douanes

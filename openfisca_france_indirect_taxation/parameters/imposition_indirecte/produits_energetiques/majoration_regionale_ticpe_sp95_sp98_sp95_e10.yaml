@@ -277,11 +277,19 @@ metadata:
   - "91"
   - "93"
   - "94"
-  description_en: Regional surcharge - SP95 and SP98
+  description_en: Regional surcharge - SP95 and SP98 et SP95 E10
+  reference:
+    2007-01-01:
+    - href: https://www.legifrance.gouv.fr/loda/id/LEGIARTI000021575915/2010-01-01/
+      title: LOI n° 2009-1673 du 30 décembre 2009 de finances pour 2010 (1) - Article 94
+    - href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000021642529/2010-07-01
+      title: Article 265 A bis du Code des douanes
 documentation: |
   Notes :
-  La source de ces données est la suivante : http://www.developp  ement-durable.gouv.fr/-La-fiscalite-dans-les-dernieres-.html
-  Pour 2010, la source précédente ne founit pas de table avec les informations. Elles peuvent toutefois être déduites ici : http://www.developpement-durable.gouv.fr/IMG/pdf/15_La_fiscalite_des_produits_petroliers_et_gaziers.pdf
-  A partir de 2017, la région Île-de-France est autorisée a augmenter sa majoration de 1,89€ pour financer le dézonage du Pass Navigo.
-  Au 1er juillet 2016, la majoration plafond est mise en application en Poitou-Charentes du fait de l'harmonisation avec l'Aquitaine et le Limousin avec lesquelles elle a fusionné
-  Pour l'augmentation en Corse en 2017, voir la circulaire du 30/12/2016 fixant les Taux de la Taxe Intérieure de Consommation régionalisés pour les supercarburants et les gazoles applicables au 1er janvier 2017
+"Depuis le 1er juillet 2010, les conseils régionaux et l'assemblée de Corse peuvent majorer le tarif de la taxe intérieure de consommation applicable aux carburants vendus aux consommateurs finals sur leur territoire.
+Celle-ci s'ajoute à la TIPCE sur les essences sp95, sp98 et sp95 e10 (identification 11 et 11 ter) de l'article Article 265 du Code des douanes, et revient donc aux régions et à la collectivité territoriale de Corse.
+La valeur maximale de la majoration est de 0,73€.
+Toutes les régions ne prennent votent pas le montant maximum de cette majoration.
+Pour retrouver la majoration votée par chaque région, qui peut être différentes chaques années, il faut se référer aux circulaires publiés aux bulletins officiels des douanes.
+On peux les trouver ici: https://www.douane.gouv.fr/la-douane/informations/bulletins-officiels-des-douanes, en cherchant "Droits et taxes applicables aux produits" de l'année voulue"
+En 2016, il y a eu une Réforme territoriale, qui commence à être pris en compte pour les affectation et majoration de la TICPE qu'à partir de 2017.

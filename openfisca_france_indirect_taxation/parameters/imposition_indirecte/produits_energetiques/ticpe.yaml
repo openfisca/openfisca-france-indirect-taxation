@@ -1094,74 +1094,76 @@ metadata:
   - carburant_constitue_100_estars_methyliques_acides_gras_hectolitre
   reference:
     2018-01-01:
+      -href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000036339197
       title: Loi 2017-1837 du 30/12/2017 (LF pour 2018)
-      href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000036339197
+      -href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000036426683/2018-01-01/
+      title: Article 265 du Code des douanes
     2017-01-01:
-      title: Loi 2016-1918 du 29/12/2016 (LFR pour 2016)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000033734341
+      title: Loi 2016-1918 du 29/12/2016 (LFR pour 2016)
     2016-01-01: Loi 2015-1786 du 29/12/2015 (LFR pour 2015) - art. 14 et 17
     2015-01-01:
-      title: Loi 2014-1654 du 29/12/2014 (LF pour 2015) - art. 36
       href: https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000029994876&cidTexte=JORFTEXT000029988857
+      title: Loi 2014-1654 du 29/12/2014 (LF pour 2015) - art. 36
     2014-04-01:
-      title: Loi 2013-1278 du 29/12/2013 (LF pour 2014) - art. 32
       href: https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000028402549&cidTexte=JORFTEXT000028399511
+      title: Loi 2013-1278 du 29/12/2013 (LF pour 2014) - art. 32
     2012-01-01:
-      title: Loi 2011-1977 du 28/12/2011 (LF pour 2012) - art. 21
       href: https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000025048278&cidTexte=JORFTEXT000025044460
+      title: Loi 2011-1977 du 28/12/2011 (LF pour 2012) - art. 21
     2011-01-01:
-      title: Loi 2010-1657 du 29/12/2010 (LF pour 2011) - art. 138
       href: https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000023347209&cidTexte=JORFTEXT000023314376
+      title: Loi 2010-1657 du 29/12/2010 (LF pour 2011) - art. 138
     2010-03-11: Loi 2010-237 du 09/03/2010 (LFR pour 2010) - art. 4 et 5
     2010-01-01:
-      title: Loi 2009-1674 du 30/12/2009 (LFR pour 2009) - art. 76
       href: https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000021580225&cidTexte=JORFTEXT000021559075
+      title: Loi 2009-1674 du 30/12/2009 (LFR pour 2009) - art. 76
     2009-01-01:
-      title: Loi 2008-1443 du 30/12/2008 (LFR pour 2008)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000020014790
+      title: Loi 2008-1443 du 30/12/2008 (LFR pour 2008)
     2008-12-29: Loi 2008-1425 du 27/12/2008 (LF pour 2009)  - art. 16 et 17
     2008-01-01:
-      title: Loi 2007-1822 du 24/12/2007 (LF pour 2008)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000017853368
+      title: Loi 2007-1822 du 24/12/2007 (LF pour 2008)
     2006-01-01:
-      title: Loi 2004-1484 du 30/12/2004 (LF pour 2005)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000789373
+      title: Loi 2004-1484 du 30/12/2004 (LF pour 2005)
     2004-01-01:
-      title: Loi 2003-1311 du 30/12/2003 (LF pour 2004)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000612133
+      title: Loi 2003-1311 du 30/12/2003 (LF pour 2004)
     2003-01-01:
-      title: Loi 2002-1575 du 30/12/2002 (LF pour 2003)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000234121
+      title: Loi 2002-1575 du 30/12/2002 (LF pour 2003)
     2002-01-01:
-      title: Loi 2001-1275 du 28/12/2001 (LF pour 2002)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000592233
+      title: Loi 2001-1275 du 28/12/2001 (LF pour 2002)
     2000-01-01:
-      title: Loi 99-1172 du 30/12/1999 (LF pour 2000)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000762233
+      title: Loi 99-1172 du 30/12/1999 (LF pour 2000)
     1999-01-01:
-      title: Loi 98-1266 du 30/12/1998 (LF pour 1999)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000209044
+      title: Loi 98-1266 du 30/12/1998 (LF pour 1999)
     1998-01-01:
-      title: Loi 97-1269 du 30/12/1997 (LF pour 1998)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000569621
+      title: Loi 97-1269 du 30/12/1997 (LF pour 1998)
     1997-01-01:
-      title: Loi 96-1181 du 30/12/1996 (LF pour 1997)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000380034
+      title: Loi 96-1181 du 30/12/1996 (LF pour 1997)
     1996-01-01:
-      title: Loi 95-1346 du 30/12/1995 (LF pour 1996)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000191068
+      title: Loi 95-1346 du 30/12/1995 (LF pour 1996)
     1995-01-01:
-      title: Loi 94-1162 du 29/12/1994 (LF pour 1995)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000367398
+      title: Loi 94-1162 du 29/12/1994 (LF pour 1995)
     1994-01-01:
-      title: Loi 93-1352 du 30/12/1993 (LF pour 1994)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000509319
+      title: Loi 93-1352 du 30/12/1993 (LF pour 1994)
     1993-04-15:
-      title: Loi 92-1376 du 30/12/1992 (LF pour 1993)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000178406
+      title: Loi 92-1376 du 30/12/1992 (LF pour 1993)
     1993-01-01:
-      title: Loi 92-1376 du 30/12/1992 (LF pour 1993)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000178406
+      title: Loi 92-1376 du 30/12/1992 (LF pour 1993)
   official_journal_date:
     2018-01-01: 2017-12-31
     2017-01-01: 2016-12-30
