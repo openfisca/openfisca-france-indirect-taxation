@@ -1,8 +1,8 @@
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
-from openfisca_france_indirect_taxation.variables.prix_carburants_regions_years_AN import get_prix_carburant_par_region_par_carburant_par_an_hectolitre
 
-import numpy as np
-## caracteristiques menages
+
+# caracteristiques menages
+
 
 class code_region(Variable):
     value_type = str
@@ -10,7 +10,8 @@ class code_region(Variable):
     label = 'code region du menage'
     definition_period = YEAR
 
-## nombre de litres par type de gazole
+
+# nombre de litres par type de gazole
 
 class nombre_litres_gazole_b7(Variable):
     value_type = float
@@ -25,7 +26,8 @@ class nombre_litres_gazole_b7(Variable):
         nombre_litres_gazole_b7 = cout_gazole_b7_ttc_entree / prix_gazole_b7_ttc
         return nombre_litres_gazole_b7
 
-class nombre_litres_gazole_b10(Variable):   ##ATTENTION: pas de prix disponible pour gazole B10, on utilise prix du gazole B7
+
+class nombre_litres_gazole_b10(Variable):   # ATTENTION: pas de prix disponible pour gazole B10, on utilise prix du gazole B7
     value_type = float
     entity = Menage
     label = 'nombre de litre de gasoil B10 consommés par le menage'
@@ -38,7 +40,8 @@ class nombre_litres_gazole_b10(Variable):   ##ATTENTION: pas de prix disponible 
         nombre_litres_gazole_b10 = cout_gazole_b10_ttc_entree / prix_gazole_b10_ttc
         return nombre_litres_gazole_b10
 
-## nombre de litre de gazole total:
+# nombre de litre de gazole total:
+
 
 class nombre_litres_gazole_total(Variable):
     value_type = float
@@ -58,7 +61,9 @@ class nombre_litres_gazole_total(Variable):
         nombre_litres_gazole_total = nombre_litres_gazole_b7
         return nombre_litres_gazole_total
 
-## nombre litres essence
+
+# nombre litres essence
+
 
 class nombre_litres_essence_sp95_e10(Variable):
     value_type = float
@@ -72,6 +77,7 @@ class nombre_litres_essence_sp95_e10(Variable):
         prix_essence_sp95_e10_ttc = menage('prix_essence_sp95_e10_ttc', period)
         nombre_litres_essence_sp95_e10 = cout_essence_sp95_e10_ttc_entree / prix_essence_sp95_e10_ttc
         return nombre_litres_essence_sp95_e10
+
 
 class nombre_litres_essence_sp95(Variable):
     value_type = float
@@ -100,6 +106,7 @@ class nombre_litres_essence_sp98(Variable):
         nombre_litres_essence_sp98 = cout_essence_sp98_ttc_entree / prix_essence_sp98_ttc
         return nombre_litres_essence_sp98
 
+
 class nombre_litres_essence_super_plombe(Variable):
     value_type = float
     entity = Menage
@@ -114,6 +121,7 @@ class nombre_litres_essence_super_plombe(Variable):
         nombre_litres_essence_super_plombe = cout_essence_super_plombe_ttc_entree / prix_essence_super_plombe_ttc
         return nombre_litres_essence_super_plombe
 
+
 class nombre_litres_essence_e85(Variable):
     value_type = float
     entity = Menage
@@ -127,7 +135,9 @@ class nombre_litres_essence_e85(Variable):
         nombre_litres_essence_e85 = cout_essence_e85_ttc_entree / prix_essence_e85_ttc
         return nombre_litres_essence_e85
 
+
 # montant TVA total sur l'essence
+
 class nombre_litres_essence_total(Variable):
     value_type = float
     entity = Menage
@@ -156,7 +166,9 @@ class nombre_litres_essence_total(Variable):
         nombre_litres_essence_total = (nombre_litres_essence_sp95 + nombre_litres_essence_sp98 + nombre_litres_essence_super_plombe)
         return nombre_litres_essence_total
 
+
 # nombre litres combustibles liquides
+
 
 class nombre_litres_gpl_carburant(Variable):
     value_type = float
@@ -171,7 +183,10 @@ class nombre_litres_gpl_carburant(Variable):
         nombre_litres_gpl_carburant = cout_gpl_carburant_ttc_entree / prix_gpl_carburant_ttc
         return nombre_litres_gpl_carburant
 
+
 # nombre de litre total:
+
+
 class nombre_litres_total(Variable):
     value_type = float
     entity = Menage

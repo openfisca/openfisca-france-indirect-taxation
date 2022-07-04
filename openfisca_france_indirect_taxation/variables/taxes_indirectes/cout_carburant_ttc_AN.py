@@ -1,6 +1,8 @@
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
 
 # cout different type de gazole ttc:
+
+
 class cout_gazole_b7_ttc(Variable):
     value_type = float
     entity = Menage
@@ -30,7 +32,10 @@ class cout_gazole_b10_ttc(Variable):
         cout_gazole_b10_ttc = cout_gazole_b10_ht + gazole_b10_ticpe + tva_sur_gazole_b10
         return cout_gazole_b10_ttc
 
+
 # cout gazole total ht:
+
+
 class cout_gazole_total_ttc(Variable):
     value_type = float
     entity = Menage
@@ -49,8 +54,8 @@ class cout_gazole_total_ttc(Variable):
         cout_gazole_total_ttc = cout_gazole_b7_ttc
         return cout_gazole_total_ttc
 
-
 # cout different type d'essence ttc:
+
 
 class cout_essence_sp95_e10_ttc(Variable):
     value_type = float
@@ -66,6 +71,7 @@ class cout_essence_sp95_e10_ttc(Variable):
         cout_essence_sp95_e10_ttc = cout_essence_sp95_e10_ht + essence_sp95_e10_ticpe + tva_sur_essence_sp95_e10
         return cout_essence_sp95_e10_ttc
 
+
 class cout_essence_sp95_ttc(Variable):
     value_type = float
     entity = Menage
@@ -80,6 +86,7 @@ class cout_essence_sp95_ttc(Variable):
         cout_essence_sp95_ttc = cout_essence_sp95_ht + essence_sp95_ticpe + tva_sur_essence_sp95
         return cout_essence_sp95_ttc
 
+
 class cout_essence_sp98_ttc(Variable):
     value_type = float
     entity = Menage
@@ -93,6 +100,7 @@ class cout_essence_sp98_ttc(Variable):
         tva_sur_essence_sp98 = menage('tva_sur_essence_sp98', period)
         cout_essence_sp98_ttc = cout_essence_sp98_ht + essence_sp98_ticpe + tva_sur_essence_sp98
         return cout_essence_sp98_ttc
+
 
 class cout_essence_super_plombe_ttc(Variable):
     value_type = float
@@ -109,6 +117,7 @@ class cout_essence_super_plombe_ttc(Variable):
         cout_essence_super_plombe_ttc = cout_essence_super_plombe_ht + essence_super_plombe_ticpe + tva_sur_essence_super_plombe
         return cout_essence_super_plombe_ttc
 
+
 class cout_essence_e85_ttc(Variable):
     value_type = float
     entity = Menage
@@ -123,7 +132,9 @@ class cout_essence_e85_ttc(Variable):
         cout_essence_e85_ttc = cout_essence_e85_ht + essence_e85_ticpe + tva_sur_essence_e85
         return cout_essence_e85_ttc
 
+
 # cout essence total ttc:
+
 class cout_essence_total_ttc(Variable):
     value_type = float
     entity = Menage
@@ -154,6 +165,7 @@ class cout_essence_total_ttc(Variable):
 
 # cout gaz de pétrole liquéfié carburant ttc:
 
+
 class cout_gpl_carburant_ttc(Variable):
     value_type = float
     entity = Menage
@@ -168,7 +180,9 @@ class cout_gpl_carburant_ttc(Variable):
         cout_gpl_carburant_ttc = cout_gpl_carburant_ht + gpl_carburant_ticpe + tva_sur_ht_gpl_carburant
         return cout_gpl_carburant_ttc
 
+
 # cout carburant total ttc:
+
 class cout_carburant_total_ttc(Variable):
     value_type = float
     entity = Menage
@@ -181,6 +195,7 @@ class cout_carburant_total_ttc(Variable):
         cout_gpl_carburant_ht = menage('cout_gpl_carburant_ttc', period)
         cout_carburant_total_ht = cout_gazole_total_ht + cout_essence_total_ht + cout_gpl_carburant_ht
         return cout_carburant_total_ht
+
 
 class cout_carburant_total_ttc_sans_distinction(Variable):
     value_type = float
@@ -196,8 +211,8 @@ class cout_carburant_total_ttc_sans_distinction(Variable):
         cout_gazole_b7_ttc = menage('cout_gazole_b7_ttc', period)
         cout_gazole_b10_ttc = menage('cout_gazole_b10_ttc', period)
         cout_gpl_carburant_ht = menage('cout_gpl_carburant_ttc', period)
-        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc +
-         cout_essence_sp95_e10_ttc + cout_gazole_b7_ttc + cout_gazole_b10_ttc + cout_gpl_carburant_ht)
+        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc
+             + cout_essence_sp95_e10_ttc + cout_gazole_b7_ttc + cout_gazole_b10_ttc + cout_gpl_carburant_ht)
         return cout_essence_total_ttc
 
     def formula_2009(menage, period):
@@ -207,8 +222,8 @@ class cout_carburant_total_ttc_sans_distinction(Variable):
         cout_essence_sp95_e10_ttc = menage('cout_essence_sp95_e10_ttc', period)
         cout_gazole_b7_ttc = menage('cout_gazole_b7_ttc', period)
         cout_gpl_carburant_ht = menage('cout_gpl_carburant_ttc', period)
-        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc +
-         cout_essence_sp95_e10_ttc + cout_gazole_b7_ttc + cout_gpl_carburant_ht)
+        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc
+        + cout_essence_sp95_e10_ttc + cout_gazole_b7_ttc + cout_gpl_carburant_ht)
         return cout_essence_total_ttc
 
     def formula_2007(menage, period):
@@ -217,8 +232,8 @@ class cout_carburant_total_ttc_sans_distinction(Variable):
         cout_essence_e85_ttc = menage('cout_essence_e85_ttc', period)
         cout_gazole_b7_ttc = menage('cout_gazole_b7_ttc', period)
         cout_gpl_carburant_ht = menage('cout_gpl_carburant_ttc', period)
-        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc +
-         cout_gazole_b7_ttc + cout_gpl_carburant_ht)
+        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_e85_ttc
+        + cout_gazole_b7_ttc + cout_gpl_carburant_ht)
         return cout_essence_total_ttc
 
     def formula_1990(menage, period):
@@ -227,6 +242,6 @@ class cout_carburant_total_ttc_sans_distinction(Variable):
         cout_essence_super_plombe_ttc = menage('cout_essence_super_plombe_ttc', period)
         cout_gazole_b7_ttc = menage('cout_gazole_b7_ttc', period)
         cout_gpl_carburant_ht = menage('cout_gpl_carburant_ttc', period)
-        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_super_plombe_ttc +
-         cout_gazole_b7_ttc + cout_gpl_carburant_ht)
+        cout_essence_total_ttc = (cout_essence_sp95_ttc + cout_essence_sp98_ttc + cout_essence_super_plombe_ttc
+        + cout_gazole_b7_ttc + cout_gpl_carburant_ht)
         return cout_essence_total_ttc
