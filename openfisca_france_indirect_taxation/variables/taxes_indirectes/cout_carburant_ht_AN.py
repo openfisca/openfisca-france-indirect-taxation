@@ -1,6 +1,8 @@
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
 
+
 # cout different type de gazole ht:
+
 
 class cout_gazole_b7_ht(Variable):
     value_type = float
@@ -15,6 +17,7 @@ class cout_gazole_b7_ht(Variable):
         cout_gazole_b7_ht = nombre_litres_gazole_b7 * prix_gazole_b7_ht
         return cout_gazole_b7_ht
 
+
 class cout_gazole_b10_ht(Variable):
     value_type = float
     entity = Menage
@@ -28,7 +31,9 @@ class cout_gazole_b10_ht(Variable):
         cout_gazole_b10_ht = nombre_litres_gazole_b10 * prix_gazole_b10_ht
         return cout_gazole_b10_ht
 
+
 # cout gazole total ht:
+
 class cout_gazole_total_ht(Variable):
     value_type = float
     entity = Menage
@@ -47,7 +52,9 @@ class cout_gazole_total_ht(Variable):
         cout_gazole_total_ht = cout_gazole_b7_ht
         return cout_gazole_total_ht
 
+
 # cout different type d'essence ht:
+
 
 class cout_essence_sp95_e10_ht(Variable):
     value_type = float
@@ -62,6 +69,7 @@ class cout_essence_sp95_e10_ht(Variable):
         cout_essence_sp95_e10_ht = nombre_litres_essence_sp95_e10 * prix_essence_sp95_e10_ht
         return cout_essence_sp95_e10_ht
 
+
 class cout_essence_sp95_ht(Variable):
     value_type = float
     entity = Menage
@@ -75,6 +83,7 @@ class cout_essence_sp95_ht(Variable):
         cout_essence_sp95_ht = nombre_litres_essence_sp95 * prix_essence_sp95_ht
         return cout_essence_sp95_ht
 
+
 class cout_essence_sp98_ht(Variable):
     value_type = float
     entity = Menage
@@ -87,6 +96,7 @@ class cout_essence_sp98_ht(Variable):
         prix_essence_sp98_ht = menage('prix_essence_sp98_ht', period)
         cout_essence_sp98_ht = nombre_litres_essence_sp98 * prix_essence_sp98_ht
         return cout_essence_sp98_ht
+
 
 class cout_essence_super_plombe_ht(Variable):
     value_type = float
@@ -102,6 +112,7 @@ class cout_essence_super_plombe_ht(Variable):
         cout_essence_super_plombe_ht = nombre_litres_essence_super_plombe * prix_essence_super_plombe_ht
         return cout_essence_super_plombe_ht
 
+
 class cout_essence_e85_ht(Variable):
     value_type = float
     entity = Menage
@@ -114,6 +125,7 @@ class cout_essence_e85_ht(Variable):
         prix_essence_e85_ht = menage('prix_essence_e85_ht', period)
         cout_essence_e85_ht = nombre_litres_essence_e85 * prix_essence_e85_ht
         return cout_essence_e85_ht
+
 
 # cout essence total ht:
 
@@ -145,7 +157,9 @@ class cout_essence_total_ht(Variable):
         cout_essence_total_ht = (cout_essence_sp95_ht + cout_essence_sp98_ht + cout_essence_super_plombe_ht)
         return cout_essence_total_ht
 
+
 # cout gaz de pétrole liquéfié carburant ht:
+
 
 class cout_gpl_carburant_ht(Variable):
     value_type = float
@@ -160,7 +174,10 @@ class cout_gpl_carburant_ht(Variable):
         cout_gpl_carburant_ht = nombre_litres_gpl_carburant * prix_gpl_carburant_ht
         return cout_gpl_carburant_ht
 
+
 # cout carburant total ht:
+
+
 class cout_carburant_total_ht(Variable):
     value_type = float
     entity = Menage
