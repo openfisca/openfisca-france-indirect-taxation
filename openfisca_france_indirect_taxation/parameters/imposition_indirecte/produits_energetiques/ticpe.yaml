@@ -1095,6 +1095,8 @@ metadata:
   reference:
     2018-01-01:
       - href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000036339197
+        title: Code des impositions sur les biens et services Chapitre II - ÉNERGIES (Articles L312-1 à L312-107)
+      - href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000036339197
         title: Loi 2017-1837 du 30/12/2017 (LF pour 2018)
       - href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000036426683/2018-01-01/
         title: Article 265 du Code des douanes
@@ -1231,3 +1233,13 @@ documentation: |
   53 - Emulsion d'eau dans du gazole …, autres
   55 - Super E 85 utilisé comme carburant
   56 - Carburant constitué d'un mélange d'au minimum 90 % d'alcool éthylique d'origine agricole, d'eau et d'additifs
+
+  La TIPCE change de nom et devient "Fraction perçue en métropole sur les produits énergétiques", autres que les gaz naturels et les charbons, suite à l'article 4 de l’ordonnance n° 2021-1843 du 22 décembre 2021 précité.
+  Les dispositions législatives relatives aux accises ne sont plus dans le code des douanes, mais sont DEPUIS le 1er janvier 2022, dans le code des impositions sur les biens et services et sont prévues au titre Ier du livre III du CIBS 2 et
+  celles spécifiques à la fiscalité des énergies sont prévues au chapitre II de ce titre Ier, de l’article L. 312-1 à l’article L. 312-107.
+  NB: J'ai verifié les valeurs des carburants à la pompe (gazole, essence, GPLc), la disposition des articles ayant changé, il serait necessaire de remettre en forme les choses en ordre à partir de 2022 pour le reste.
+
+  **ATTENTION** A partir de 2022, les valeurs sont en euro par Mwh et non plus en euro par hectolitre.
+  L’article L. 312-29 prévoit que des arrêtés conjoints du ministre chargé du budget et du ministre chargé de l’énergie déterminent les coefficients des conversions mentionnées aux articles L. 312 25 et L. 312 26 et constatent les tarifs qui en résultent.
+  Ces arrêtés devraient être publiés au cours de l’année 2022.
+  NB: tant que ces coeficient ne sont pas publié, il n'est pas possible de réécrire les formules.
