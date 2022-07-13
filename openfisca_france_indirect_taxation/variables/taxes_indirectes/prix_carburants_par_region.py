@@ -1,4 +1,6 @@
 import csv
+import pkg_resources
+import os
 
 prix_carburant_par_region_litre = None
 prix_carburant_par_region_hectolitre = None
@@ -17,7 +19,15 @@ def get_prix_carburant_par_region_par_carburant_par_an_litre():
     return prix_carburant_par_region_litre
 
 def preload_prix_carburant_par_region_par_carburant_par_an_hectolitre():
-    with open('openfisca_france_indirect_taxation/assets/prix/prix_annuel_carburants_par_regions_hectolitre.csv', 'r') as csv_file:
+    global prix_carburant_par_region_hectolitre
+    csv_file_path = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'prix',
+        'prix_annuel_carburants_par_regions_hectolitre.csv'
+        )
+    with open(csv_file_path, 'r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         prix_carburant_par_region_hectolitre = {}
         for row in csv_reader:
@@ -26,7 +36,15 @@ def preload_prix_carburant_par_region_par_carburant_par_an_hectolitre():
             annee[row['annee']] = row['prix_moyen_par_hectolitre']
 
 def preload_prix_carburant_par_region_par_carburant_par_an_litre():
-    with open('openfisca_france_indirect_taxation/assets/prix/prix_annuel_carburants_par_regions_litre.csv', 'r') as csv_file:
+    global prix_carburant_par_region_litre
+    csv_file_path = os.path.join(
+        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+        'openfisca_france_indirect_taxation',
+        'assets',
+        'prix',
+        'prix_annuel_carburants_par_regions_litre.csv'
+        )
+    with open(csv_file_path, 'r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         prix_carburant_par_region_litre = {}
         for row in csv_reader:
