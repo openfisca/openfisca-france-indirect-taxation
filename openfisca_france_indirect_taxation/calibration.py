@@ -30,7 +30,7 @@ def get_bdf_aggregates_energy(data_year = None):
                 depenses['depenses_tot'] += depenses[element]
 
     depenses_energie = pd.DataFrame()
-    if depenses['depenses_carburants'] is not None:  # pas de matching avec ENTD
+    if depenses.get('depenses_carburants') is not None:  # pas de matching avec ENTD
         variables_energie = ['poste_04_5_1_1_1_a', 'poste_04_5_1_1_1_b', 'poste_04_5_2_1_1',
             'poste_04_5_3_1_1', 'poste_04_5_4_1_1', 'depenses_carburants',
             'rev_disponible', 'loyer_impute', 'rev_disp_loyerimput', 'depenses_tot']
