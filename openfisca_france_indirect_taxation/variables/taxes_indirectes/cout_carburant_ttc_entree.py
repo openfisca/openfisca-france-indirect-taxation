@@ -37,6 +37,10 @@ class cout_essence_sp95_ttc_entree(Variable):
     definition_period = YEAR
     default_value = 0
 
+    def formula(menage, period):
+        depenses_sp_95 = menage('depenses_sp_95', period)
+        return depenses_sp_95
+
 
 class cout_essence_sp98_ttc_entree(Variable):
     value_type = float
