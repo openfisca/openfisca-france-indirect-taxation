@@ -176,8 +176,8 @@ class cout_gpl_carburant_ttc(Variable):
     def formula(menage, period):
         cout_gpl_carburant_ht = menage('cout_gpl_carburant_ht', period)
         gpl_carburant_ticpe = menage('gpl_carburant_ticpe', period)
-        tva_sur_ht_gpl_carburant = menage('tva_sur_ht_gpl_carburant', period)
-        cout_gpl_carburant_ttc = cout_gpl_carburant_ht + gpl_carburant_ticpe + tva_sur_ht_gpl_carburant
+        tva_sur_gpl_carburant = menage('tva_sur_gpl_carburant', period)
+        cout_gpl_carburant_ttc = cout_gpl_carburant_ht + gpl_carburant_ticpe + tva_sur_gpl_carburant
         return cout_gpl_carburant_ttc
 
 

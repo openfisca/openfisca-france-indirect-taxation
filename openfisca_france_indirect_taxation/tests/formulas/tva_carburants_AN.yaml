@@ -6,7 +6,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_gazole_b7_ht: 120
+    cout_gazole_b7_ht: 100
   output:
     tva_sur_ht_gazole_b7: 20
 
@@ -14,7 +14,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    gazole_b7_ticpe: 120
+    gazole_b7_ticpe: 100
   output:
     tva_sur_ticpe_gazole_b7: 20
 
@@ -33,7 +33,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_gazole_b10_ht: 120
+    cout_gazole_b10_ht: 100
   output:
     tva_sur_ht_gazole_b10: 20
 
@@ -41,7 +41,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    gazole_b10_ticpe: 120
+    gazole_b10_ticpe: 100
   output:
     tva_sur_ticpe_gazole_b10: 20
 
@@ -73,7 +73,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_sp95_e10_ht: 120
+    cout_essence_sp95_e10_ht: 100
   output:
     tva_sur_ht_essence_sp95_e10: 20
 
@@ -81,7 +81,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    essence_sp95_e10_ticpe: 120
+    essence_sp95_e10_ticpe: 100
   output:
     tva_sur_ticpe_essence_sp95_e10: 20
 
@@ -100,7 +100,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_sp95_ht: 120
+    cout_essence_sp95_ht: 100
   output:
     tva_sur_ht_essence_sp95: 20
 
@@ -108,7 +108,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    essence_sp95_ticpe: 120
+    essence_sp95_ticpe: 100
   output:
     tva_sur_ticpe_essence_sp95: 20
 
@@ -127,7 +127,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_sp98_ht: 120
+    cout_essence_sp98_ht: 100
   output:
     tva_sur_ht_essence_sp98: 20
 
@@ -135,7 +135,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    essence_sp98_ticpe: 120
+    essence_sp98_ticpe: 100
   output:
     tva_sur_ticpe_essence_sp98: 20
 
@@ -154,7 +154,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_super_plombe_ht: 120
+    cout_essence_super_plombe_ht: 100
   output:
     tva_sur_ht_essence_super_plombe: 0
 
@@ -162,7 +162,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    essence_super_plombe_ticpe: 120
+    essence_super_plombe_ticpe: 100
   output:
     tva_sur_ticpe_essence_super_plombe: 0
 
@@ -181,7 +181,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_e85_ht: 120
+    cout_essence_e85_ht: 100
   output:
     tva_sur_ht_essence_e85: 20
 
@@ -189,7 +189,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    essence_e85_ticpe: 120
+    essence_e85_ticpe: 100
   output:
     tva_sur_ticpe_essence_e85: 20
 
@@ -222,7 +222,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_gpl_carburant_ht: 120
+    cout_gpl_carburant_ht: 100
   output:
     tva_sur_ht_gpl_carburant: 20
 
@@ -230,7 +230,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    gpl_carburant_ticpe: 120
+    gpl_carburant_ticpe: 100
   output:
     tva_sur_ticpe_gpl_carburant: 20
 

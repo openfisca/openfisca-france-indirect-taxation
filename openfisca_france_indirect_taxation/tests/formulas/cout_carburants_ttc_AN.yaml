@@ -120,7 +120,7 @@
   input:
     cout_gpl_carburant_ht: 80
     gpl_carburant_ticpe: 20
-    tva_sur_ht_gpl_carburant: 20
+    tva_sur_gpl_carburant: 20
   output:
     cout_gpl_carburant_ttc: 120
 
