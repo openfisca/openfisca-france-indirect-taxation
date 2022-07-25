@@ -246,6 +246,13 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
   metadata:
     ipp_csv_id: maj_ticpe_super_cor
     unit: currency-EUR
+"99":
+  description: France (parametre utile pour agréger si pas de poid régional)
+  values:
+    2017-01-01:
+      value: 0.73
+  metadata:
+    unit: currency-EUR
 metadata:
   order:
   - "11"
@@ -277,6 +284,7 @@ metadata:
   - "91"
   - "93"
   - "94"
+  - "99"
   description_en: Regional surcharge - SP95 and SP98 et SP95 E10
   reference:
     2007-01-01:
