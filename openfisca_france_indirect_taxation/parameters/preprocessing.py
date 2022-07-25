@@ -26,7 +26,7 @@ def preprocess_legislation(parameters):
     # For super_95_e10, we need to use the price of super_95 between 2009 and 2012 included,
     # because we don't have the data. We use super_95 because it is very close and won't affect the results too much
     prix_annuel = prix_annuel_carburants['super_95_e10_ttc']
-    years = list(range(2013, 2017))
+    years = list(range(2013, 2022))
     years = sorted(years, key=int, reverse=True)
     values = dict()
     for year in years:
