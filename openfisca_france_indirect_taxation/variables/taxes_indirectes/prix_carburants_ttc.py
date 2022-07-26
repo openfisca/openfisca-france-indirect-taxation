@@ -63,7 +63,7 @@ class prix_essence_sp95_ttc(Variable):
     entity = Menage
     label = "prix de l'escence sp95 ttc par litre"
     definition_period = YEAR
-    default_value = 1
+    default_value = 0
 
     def formula(menage, period, parameters):
         code_region = menage('code_region', period)
