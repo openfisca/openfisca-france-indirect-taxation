@@ -12,6 +12,8 @@ def preprocess_legislation(parameters):
     Preprocess the legislation parameters to add prices and amounts from national accounts
     '''
 
+    prix_carburants = dict()
+
     prix_annuel_carburants = pd.read_csv(
         os.path.join(
             assets_directory,
@@ -21,12 +23,24 @@ def preprocess_legislation(parameters):
         )
     prix_annuel_carburants['Date'] = prix_annuel_carburants['Date'].astype(int)
     prix_annuel_carburants = prix_annuel_carburants.set_index('Date')
-    prix_carburants = dict()
+
+    # This CSV file refers to the prices (incl. VAT) provided by INSEE, the method of data retrieval is provided in the git: https://github.com/kendrickherz/LexImpact-Prix-carburants
+    # For the current year, the annual average is calculated on the less already passed,
+    # it is necessary to turn again the script to update the following months when they are made available by the INSEE.
+    prix_litre_annuel_carburants = pd.read_csv(
+        os.path.join(
+            assets_directory,
+            'prix',
+            'prix_litre_annuel_carburants.csv'
+            ), sep =','
+        )
+    prix_litre_annuel_carburants['Date'] = prix_litre_annuel_carburants['Date'].astype(int)
+    prix_litre_annuel_carburants = prix_litre_annuel_carburants.set_index('Date')
 
     # For super_95_e10, we need to use the price of super_95 between 2009 and 2012 included,
     # because we don't have the data. We use super_95 because it is very close and won't affect the results too much
     prix_annuel = prix_annuel_carburants['super_95_e10_ttc']
-    years = list(range(2013, 2022))
+    years = list(range(2013, 2017))
     years = sorted(years, key=int, reverse=True)
     values = dict()
     for year in years:
@@ -44,6 +58,9 @@ def preprocess_legislation(parameters):
     for year in years:
         values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
 
+    # We use data from prix_annuel_carburants.csv before 2017, the fact that some old prices are no longer available on the INSEE website,
+    # which means that the script that create prix_litre_annuel_carburants.csv does not retrieve them.
+    # So, we keep what is existing to not lose information.
     prix_carburants['super_95_e10_ttc'] = {
         'description': 'super_95_e10_ttc'.replace('_', ' '),
         'unit': 'currency',
@@ -65,7 +82,7 @@ def preprocess_legislation(parameters):
     for element in autres_carburants:
         assert element in prix_annuel_carburants.columns
         prix_annuel = prix_annuel_carburants[element]
-        years = list(range(1990, 2022))
+        years = list(range(1990, 2017))
         years = sorted(years, key=int, reverse=True)
         values = dict()
         for year in years:
@@ -82,6 +99,30 @@ def preprocess_legislation(parameters):
         data = prix_carburants,
         )
     parameters.add_child('prix_carburants', node_prix_carburants)
+
+    # After 2017, we use the data from prix_litre_annuel_carburants.csv
+    carburants = [
+        'diesel_ttc',
+        'super_95_ttc',
+        'super_95_e10_ttc',
+        'super_98_ttc',
+        'super_plombe_ttc',
+        ]
+
+    for element in carburants:
+        prix_annuel = prix_litre_annuel_carburants[element]
+        years = list(range(2017, 2023))
+        years = sorted(years, key=int, reverse=True)
+        values = dict()
+        for year in years:
+            values['{}-01-01'.format(year)] = prix_annuel[year] * 100
+
+        prix_carburants[element] = {
+            'description': element.replace('_', ' '),
+            'unit': 'currency',
+            'values': values
+            }
+    prix_carburants['description'] = 'Prix des carburants'
 
     # Add the number of vehicle in circulation to the tree
     parc_annuel_moyen_vp = pd.read_csv(

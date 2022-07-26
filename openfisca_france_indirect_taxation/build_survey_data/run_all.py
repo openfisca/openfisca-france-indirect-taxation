@@ -17,6 +17,7 @@ from openfisca_france_indirect_taxation.build_survey_data.utils import find_near
 from openfisca_france_indirect_taxation.build_survey_data.step_1_1_homogeneisation_donnees_depenses \
     import build_depenses_homogenisees
 
+
 from openfisca_france_indirect_taxation.build_survey_data.step_1_2_imputations_loyers_proprietaires \
     import build_imputation_loyers_proprietaires
 
