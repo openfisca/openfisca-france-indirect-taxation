@@ -36,5 +36,6 @@ class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
         postes_coicop.preload_postes_coicop_data_frame(self)
         from openfisca_france_indirect_taxation.variables.consommation import categories_fiscales
         categories_fiscales.preload_categories_fiscales_data_frame(self)
-        from .variables.taxes_indirectes import prix_carburants_par_region
-        prix_carburants_par_region.preload_prix_carburant_par_region_par_carburant_par_an_hectolitre()
+        from .parameters import prix_carburants
+        prix_carburants.preload_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre()
+        prix_carburants.preload_prix_carburant_par_annee_par_carburant_en_hectolitre()

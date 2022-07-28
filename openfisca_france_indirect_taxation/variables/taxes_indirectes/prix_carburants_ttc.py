@@ -1,5 +1,6 @@
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
-from openfisca_france_indirect_taxation.variables.taxes_indirectes.prix_carburants_par_region import get_prix_carburant_par_region_par_carburant_par_an_hectolitre
+from openfisca_france_indirect_taxation.parameters.prix_carburants import get_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre
+from openfisca_france_indirect_taxation.parameters.prix_carburants import get_prix_carburant_par_annee_par_carburant_en_hectolitre
 
 import numpy as np
 
@@ -15,7 +16,7 @@ class prix_gazole_b7_ttc(Variable):
         code_region = menage('code_region', period)
         prix_gazole_b7_hectolitre_ttc = np.fromiter(
             (
-                parameters(period.start).prix_carburants.diesel_ttc if region_cell == "99" else get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}', {}).get('Gazole', {}).get(f'{period}', 0)
+                parameters(period.start).prix_carburants.diesel_ttc if region_cell == "99" else get_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre().get(f'{region_cell}', {}).get('Gazole', {}).get(f'{period}', 0)
                 for region_cell in code_region),
             dtype=np.float32)
         prix_gazole_b7_ttc = (prix_gazole_b7_hectolitre_ttc / 100)
@@ -33,7 +34,7 @@ class prix_gazole_b10_ttc(Variable):  # ATTENTION: pas de prix disponible pour g
         code_region = menage('code_region', period)
         prix_gazole_b10_hectolitre_ttc = np.fromiter(
             (
-                parameters(period.start).prix_carburants.diesel_ttc if region_cell == "99" else get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}', {}).get('Gazole', {}).get(f'{period}', 0)
+                parameters(period.start).prix_carburants.diesel_ttc if region_cell == "99" else get_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre().get(f'{region_cell}', {}).get('Gazole', {}).get(f'{period}', 0)
                 for region_cell in code_region),
             dtype=np.float32)
         prix_gazole_b10_ttc = (prix_gazole_b10_hectolitre_ttc / 100)
@@ -51,7 +52,7 @@ class prix_essence_sp95_e10_ttc(Variable):
         code_region = menage('code_region', period)
         prix_essence_sp95_e10_hectolitre_ttc = np.fromiter(
             (
-                parameters(period.start).prix_carburants.super_95_e10_ttc if region_cell == "99" else get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}', {}).get('E10', {}).get(f'{period}', 0)
+                parameters(period.start).prix_carburants.super_95_e10_ttc if region_cell == "99" else get_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre().get(f'{region_cell}', {}).get('E10', {}).get(f'{period}', 0)
                 for region_cell in code_region),
             dtype=np.float32)
         prix_essence_sp95_e10_ttc = (prix_essence_sp95_e10_hectolitre_ttc / 100)
@@ -69,7 +70,7 @@ class prix_essence_sp95_ttc(Variable):
         code_region = menage('code_region', period)
         prix_essence_sp95_hectolitre_ttc = np.fromiter(
             (
-                parameters(period.start).prix_carburants.super_95_ttc if region_cell == "99" else get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}', {}).get('SP95', {}).get(f'{period}', 0)
+                parameters(period.start).prix_carburants.super_95_ttc if region_cell == "99" else get_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre().get(f'{region_cell}', {}).get('SP95', {}).get(f'{period}', 0)
                 for region_cell in code_region),
             dtype=np.float32)
         prix_essence_sp95_ttc = (prix_essence_sp95_hectolitre_ttc / 100)
@@ -87,7 +88,7 @@ class prix_essence_sp98_ttc(Variable):
         code_region = menage('code_region', period)
         prix_essence_sp98_hectolitre_ttc = np.fromiter(
             (
-                parameters(period.start).prix_carburants.super_98_ttc if region_cell == "99" else get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}', {}).get('SP98', {}).get(f'{period}', 0)
+                parameters(period.start).prix_carburants.super_98_ttc if region_cell == "99" else get_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre().get(f'{region_cell}', {}).get('SP98', {}).get(f'{period}', 0)
                 for region_cell in code_region),
             dtype=np.float32)
         prix_essence_sp98_ttc = (prix_essence_sp98_hectolitre_ttc / 100)
@@ -115,11 +116,11 @@ class prix_essence_e85_ttc(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula_2007(menage, period, parameters):
+    def formula_2007(menage, period):
         code_region = menage('code_region', period)
         prix_essence_e85_hectolitre_ttc = np.fromiter(
             (
-                parameters(period.start).prix_carburants.super_98_ttc if region_cell == "99" else get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}', {}).get('E85', {}).get(f'{period}', 0)
+                get_prix_carburant_par_annee_par_carburant_en_hectolitre().get('E85', {}).get(f'{period}', 0) if region_cell == "99" else get_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre().get(f'{region_cell}', {}).get('E85', {}).get(f'{period}', 0)
                 for region_cell in code_region),
             dtype=np.float32)
         prix_essence_e85_ttc = (prix_essence_e85_hectolitre_ttc / 100)
@@ -133,11 +134,11 @@ class prix_gpl_carburant_ttc(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period, parameters):
+    def formula(menage, period):
         code_region = menage('code_region', period)
         prix_gpl_carburant_hectolitre_ttc = np.fromiter(
             (
-                parameters(period.start).prix_carburants.gplc_ttc if region_cell == "99" else get_prix_carburant_par_region_par_carburant_par_an_hectolitre().get(f'{region_cell}', {}).get('GPLc', {}).get(f'{period}', 0)
+                get_prix_carburant_par_annee_par_carburant_en_hectolitre().get('GPLc', {}).get(f'{period}', 0) if region_cell == "99" else get_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre().get(f'{region_cell}', {}).get('GPLc', {}).get(f'{period}', 0)
                 for region_cell in code_region),
             dtype=np.float32)
         prix_gpl_carburant_ttc = (prix_gpl_carburant_hectolitre_ttc / 100)
