@@ -25,7 +25,7 @@ class cout_gazole_b10_ttc(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period):
+    def formula_2017(menage, period):
         cout_gazole_b10_ht = menage('cout_gazole_b10_ht', period)
         gazole_b10_ticpe = menage('gazole_b10_ticpe', period)
         tva_sur_gazole_b10 = menage('tva_sur_gazole_b10', period)
@@ -79,7 +79,7 @@ class cout_essence_sp95_ttc(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula_2009(menage, period):
+    def formula(menage, period):
         cout_essence_sp95_ht = menage('cout_essence_sp95_ht', period)
         essence_sp95_ticpe = menage('essence_sp95_ticpe', period)
         tva_sur_essence_sp95 = menage('tva_sur_essence_sp95', period)
@@ -94,7 +94,7 @@ class cout_essence_sp98_ttc(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula_2009(menage, period):
+    def formula(menage, period):
         cout_essence_sp98_ht = menage('cout_essence_sp98_ht', period)
         essence_sp98_ticpe = menage('essence_sp98_ticpe', period)
         tva_sur_essence_sp98 = menage('tva_sur_essence_sp98', period)
