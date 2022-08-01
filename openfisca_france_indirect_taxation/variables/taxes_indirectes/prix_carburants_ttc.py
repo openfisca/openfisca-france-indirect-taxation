@@ -130,7 +130,7 @@ class prix_essence_e85_ttc(Variable):
 class prix_gpl_carburant_ttc(Variable):
     value_type = float
     entity = Menage
-    label = 'cout du gaz de pétrole liquéfié - carburant ttc'
+    label = 'prix du gaz de pétrole liquéfié - carburant ttc'
     definition_period = YEAR
     default_value = 0
 

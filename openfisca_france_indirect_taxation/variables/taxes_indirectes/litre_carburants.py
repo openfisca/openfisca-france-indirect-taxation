@@ -21,9 +21,9 @@ class nombre_litres_gazole_b7(Variable):
     default_value = 0
 
     def formula(menage, period):
-        cout_gazole_b7_ttc_entree = menage('cout_gazole_b7_ttc_entree', period)
+        depense_gazole_b7_ttc_entree = menage('depense_gazole_b7_ttc_entree', period)
         prix_gazole_b7_ttc = menage('prix_gazole_b7_ttc', period)
-        nombre_litres_gazole_b7 = np.divide(cout_gazole_b7_ttc_entree, prix_gazole_b7_ttc, out=np.zeros_like(cout_gazole_b7_ttc_entree), where= prix_gazole_b7_ttc != 0)
+        nombre_litres_gazole_b7 = np.divide(depense_gazole_b7_ttc_entree, prix_gazole_b7_ttc, out=np.zeros_like(depense_gazole_b7_ttc_entree), where= prix_gazole_b7_ttc != 0)
         return nombre_litres_gazole_b7
 
 
@@ -35,9 +35,9 @@ class nombre_litres_gazole_b10(Variable):   # ATTENTION: pas de prix disponible 
     default_value = 0
 
     def formula_2017(menage, period):
-        cout_gazole_b10_ttc_entree = menage('cout_gazole_b10_ttc_entree', period)
+        depense_gazole_b10_ttc_entree = menage('depense_gazole_b10_ttc_entree', period)
         prix_gazole_b10_ttc = menage('prix_gazole_b10_ttc', period)
-        nombre_litres_gazole_b10 = np.divide(cout_gazole_b10_ttc_entree, prix_gazole_b10_ttc, out=np.zeros_like(cout_gazole_b10_ttc_entree), where= prix_gazole_b10_ttc != 0)
+        nombre_litres_gazole_b10 = np.divide(depense_gazole_b10_ttc_entree, prix_gazole_b10_ttc, out=np.zeros_like(depense_gazole_b10_ttc_entree), where= prix_gazole_b10_ttc != 0)
         return nombre_litres_gazole_b10
 
 # nombre de litre de gazole total:
@@ -73,9 +73,9 @@ class nombre_litres_essence_sp95_e10(Variable):
     default_value = 0
 
     def formula_2009(menage, period):
-        cout_essence_sp95_e10_ttc_entree = menage('cout_essence_sp95_e10_ttc_entree', period)
+        depense_essence_sp95_e10_ttc_entree = menage('depense_essence_sp95_e10_ttc_entree', period)
         prix_essence_sp95_e10_ttc = menage('prix_essence_sp95_e10_ttc', period)
-        nombre_litres_essence_sp95_e10 = np.divide(cout_essence_sp95_e10_ttc_entree, prix_essence_sp95_e10_ttc, out=np.zeros_like(cout_essence_sp95_e10_ttc_entree), where= prix_essence_sp95_e10_ttc != 0)
+        nombre_litres_essence_sp95_e10 = np.divide(depense_essence_sp95_e10_ttc_entree, prix_essence_sp95_e10_ttc, out=np.zeros_like(depense_essence_sp95_e10_ttc_entree), where= prix_essence_sp95_e10_ttc != 0)
         return nombre_litres_essence_sp95_e10
 
 
@@ -87,9 +87,9 @@ class nombre_litres_essence_sp95(Variable):
     default_value = 0
 
     def formula(menage, period):
-        cout_essence_sp95_ttc_entree = menage('cout_essence_sp95_ttc_entree', period)
+        depense_essence_sp95_ttc_entree = menage('depense_essence_sp95_ttc_entree', period)
         prix_essence_sp95_ttc = menage('prix_essence_sp95_ttc', period)
-        nombre_litres_essence_sp95 = np.divide(cout_essence_sp95_ttc_entree, prix_essence_sp95_ttc, out=np.zeros_like(cout_essence_sp95_ttc_entree), where= prix_essence_sp95_ttc != 0)
+        nombre_litres_essence_sp95 = np.divide(depense_essence_sp95_ttc_entree, prix_essence_sp95_ttc, out=np.zeros_like(depense_essence_sp95_ttc_entree), where= prix_essence_sp95_ttc != 0)
         return nombre_litres_essence_sp95
 
 
@@ -101,9 +101,9 @@ class nombre_litres_essence_sp98(Variable):
     default_value = 0
 
     def formula(menage, period):
-        cout_essence_sp98_ttc_entree = menage('cout_essence_sp98_ttc_entree', period)
+        depense_essence_sp98_ttc_entree = menage('depense_essence_sp98_ttc_entree', period)
         prix_essence_sp98_ttc = menage('prix_essence_sp98_ttc', period)
-        nombre_litres_essence_sp98 = np.divide(cout_essence_sp98_ttc_entree, prix_essence_sp98_ttc, out=np.zeros_like(cout_essence_sp98_ttc_entree), where= prix_essence_sp98_ttc != 0)
+        nombre_litres_essence_sp98 = np.divide(depense_essence_sp98_ttc_entree, prix_essence_sp98_ttc, out=np.zeros_like(depense_essence_sp98_ttc_entree), where= prix_essence_sp98_ttc != 0)
         return nombre_litres_essence_sp98
 
 
@@ -116,9 +116,9 @@ class nombre_litres_essence_super_plombe(Variable):
     end = "2017-01-01"
 
     def formula(menage, period):
-        cout_essence_super_plombe_ttc_entree = menage('cout_essence_super_plombe_ttc_entree', period)
+        depense_essence_super_plombe_ttc_entree = menage('depense_essence_super_plombe_ttc_entree', period)
         prix_essence_super_plombe_ttc = menage('prix_essence_super_plombe_ttc', period)
-        nombre_litres_essence_super_plombe = np.divide(cout_essence_super_plombe_ttc_entree, prix_essence_super_plombe_ttc, out=np.zeros_like(cout_essence_super_plombe_ttc_entree), where= prix_essence_super_plombe_ttc != 0)
+        nombre_litres_essence_super_plombe = np.divide(depense_essence_super_plombe_ttc_entree, prix_essence_super_plombe_ttc, out=np.zeros_like(depense_essence_super_plombe_ttc_entree), where= prix_essence_super_plombe_ttc != 0)
         return nombre_litres_essence_super_plombe
 
 
@@ -130,10 +130,10 @@ class nombre_litres_essence_e85(Variable):
     default_value = 0
 
     def formula_2007(menage, period):
-        cout_essence_e85_ttc_entree = menage('cout_essence_e85_ttc_entree', period)
+        depense_essence_e85_ttc_entree = menage('depense_essence_e85_ttc_entree', period)
         prix_essence_e85_ttc = menage('prix_essence_e85_ttc', period)
-        nombre_litres_essence_e85 = cout_essence_e85_ttc_entree / prix_essence_e85_ttc
-        nombre_litres_essence_e85 = np.divide(cout_essence_e85_ttc_entree, prix_essence_e85_ttc, out=np.zeros_like(cout_essence_e85_ttc_entree), where= prix_essence_e85_ttc != 0)
+        nombre_litres_essence_e85 = depense_essence_e85_ttc_entree / prix_essence_e85_ttc
+        nombre_litres_essence_e85 = np.divide(depense_essence_e85_ttc_entree, prix_essence_e85_ttc, out=np.zeros_like(depense_essence_e85_ttc_entree), where= prix_essence_e85_ttc != 0)
         return nombre_litres_essence_e85
 
 
@@ -179,9 +179,9 @@ class nombre_litres_gpl_carburant(Variable):
     default_value = 0
 
     def formula(menage, period):
-        cout_gpl_carburant_ttc_entree = menage('cout_gpl_carburant_ttc_entree', period)
+        depense_gpl_carburant_ttc_entree = menage('depense_gpl_carburant_ttc_entree', period)
         prix_gpl_carburant_ttc = menage('prix_gpl_carburant_ttc', period)
-        nombre_litres_gpl_carburant = np.divide(cout_gpl_carburant_ttc_entree, prix_gpl_carburant_ttc, out=np.zeros_like(cout_gpl_carburant_ttc_entree), where= prix_gpl_carburant_ttc != 0)
+        nombre_litres_gpl_carburant = np.divide(depense_gpl_carburant_ttc_entree, prix_gpl_carburant_ttc, out=np.zeros_like(depense_gpl_carburant_ttc_entree), where= prix_gpl_carburant_ttc != 0)
         return nombre_litres_gpl_carburant
 
 
