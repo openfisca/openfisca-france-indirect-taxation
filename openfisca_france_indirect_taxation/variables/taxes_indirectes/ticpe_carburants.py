@@ -12,7 +12,7 @@ import numpy as np
 class gazole_b7_ticpe(Variable):
     value_type = float
     entity = Menage
-    label = 'Calcul du montant de TICPE sur le gazole B7'
+    label = 'Accise (ex-TICPE) prélevée sur le diesel (gazole B7)'
     definition_period = YEAR
 
     def formula_2017(menage, period, parameters):
@@ -62,7 +62,7 @@ class gazole_b7_ticpe(Variable):
 class gazole_b10_ticpe(Variable):
     value_type = float
     entity = Menage
-    label = 'Calcul du montant de TICPE sur le gazole B10'
+    label = 'Accise (ex-TICPE) prélevée sur le diesel (gazole B10)'
     definition_period = YEAR
 
     def formula_2017(menage, period, parameters):
@@ -78,7 +78,7 @@ class gazole_b10_ticpe(Variable):
 class gazole_ticpe_total(Variable):
     value_type = float
     entity = Menage
-    label = 'Calcul du montant de la TICPE sur tous les types de gasoil cumulés'
+    label = 'Accise (ex-TICPE) prélevée sur les différents diesels'
     definition_period = YEAR
 
     def formula_2017(menage, period):
@@ -99,7 +99,7 @@ class gazole_ticpe_total(Variable):
 class essence_sp95_e10_ticpe(Variable):  # paru au Journal Officiel le 31 janvier 2009, a autorisé sa distribution sur le marché français depuis le 1er avril 2009.
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur l'essence SP95 E10"
+    label = "Accise (ex-TICPE) prélevée sur l'essence sans plomb 95 E10 en station service"
     definition_period = YEAR
 
     def formula_2019(menage, period, parameters):
@@ -172,7 +172,7 @@ class essence_sp95_e10_ticpe(Variable):  # paru au Journal Officiel le 31 janvie
 class essence_sp95_ticpe(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur l'essence SP95"
+    label = "Accise (ex-TICPE) prélevée sur l'essence sans plomb 95 en station service"
     definition_period = YEAR
 
     def formula_2017(menage, period, parameters):
@@ -245,7 +245,7 @@ class essence_sp95_ticpe(Variable):
 class essence_sp98_ticpe(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur l'essence SP98"
+    label = "Accise (ex-TICPE) prélevée sur l'essence sans plomb 98 en station service"
     definition_period = YEAR
 
     def formula_2017(menage, period, parameters):
@@ -318,7 +318,7 @@ class essence_sp98_ticpe(Variable):
 class essence_super_plombe_ticpe(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur l'essence super plombé"
+    label = "Accise (ex-TICPE) prélevée sur l'essence super plombé en station service"
     definition_period = YEAR
     end = '2006-12-31'
 
@@ -340,7 +340,7 @@ class essence_super_plombe_ticpe(Variable):
 class essence_e85_ticpe(Variable):  # Il a été introduit en 2007 sur le marché français.
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur l'essence E85"
+    label = "Accise (ex-TICPE) prélevée sur l'essence super ethanol 85 en station service"
     definition_period = YEAR
 
     def formula_2007(menage, period, parameters):
@@ -356,7 +356,7 @@ class essence_e85_ticpe(Variable):  # Il a été introduit en 2007 sur le march�
 class essence_ticpe_total(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur tous les types d'essences cumulés"
+    label = "Accise (ex-TICPE) prélevée sur les différents essenses"
     definition_period = YEAR
 
     def formula_2009(menage, period):
@@ -388,7 +388,7 @@ class essence_ticpe_total(Variable):
 class gpl_carburant_ticpe(Variable):
     value_type = float
     entity = Menage
-    label = 'Calcul du montant de TICPE sur le gaz de pétrole liquéfié carburant'
+    label = "Accise (ex-TICPE) prélevée sur le GPL carburant en station service"
     definition_period = YEAR
 
     def formula(menage, period, parameters):
@@ -405,7 +405,7 @@ class gpl_carburant_ticpe(Variable):
 class ticpe_carburant_total(Variable):
     value_type = float
     entity = Menage
-    label = 'Calcul du montant de la TICPE sur tous les carburants cumulés'
+    label = 'Accise (ex-TICPE) prélevée sur les carburants en station service'
     definition_period = YEAR
 
     def formula(menage, period):

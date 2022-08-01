@@ -7,7 +7,7 @@ from openfisca_france_indirect_taxation.variables.base import Menage, Variable, 
 class taxes_gazole_b7(Variable):
     value_type = float
     entity = Menage
-    label = 'Taxes prélevées sur le diesel (gazole B7) pris en station service'
+    label = 'Taxes prélevées sur le diesel (gazole B7) en station service'
     definition_period = YEAR
     default_value = 0
 
@@ -21,11 +21,11 @@ class taxes_gazole_b7(Variable):
 class taxes_gazole_b10(Variable):
     value_type = float
     entity = Menage
-    label = 'Taxes prélevées sur le diesel (gazole B10) pris en station service'
+    label = 'Taxes prélevées sur le diesel (gazole B10) en station service'
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period):
+    def formula_2017(menage, period):
         gazole_b10_ticpe = menage('gazole_b10_ticpe', period)
         tva_sur_gazole_b10 = menage('tva_sur_gazole_b10', period)
         taxes_gazole_b10 = gazole_b10_ticpe + tva_sur_gazole_b10
@@ -38,11 +38,11 @@ class taxes_gazole_b10(Variable):
 class taxes_essence_sp95_e10(Variable):
     value_type = float
     entity = Menage
-    label = "Taxes prélevées sur l'essence sans plomb 95 e10 prise en station service"
+    label = "Taxes prélevées sur l'essence sans plomb 95 E10 en station service"
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period):
+    def formula_2009(menage, period):
         essence_sp95_e10_ticpe = menage('essence_sp95_e10_ticpe', period)
         tva_sur_essence_sp95_e10 = menage('tva_sur_essence_sp95_e10', period)
         taxes_essence_sp95_e10 = essence_sp95_e10_ticpe + tva_sur_essence_sp95_e10
@@ -52,7 +52,7 @@ class taxes_essence_sp95_e10(Variable):
 class taxes_essence_sp95(Variable):
     value_type = float
     entity = Menage
-    label = "Taxes prélevées sur l'essence sans plomb 95 prise en station service"
+    label = "Taxes prélevées sur l'essence sans plomb 95 en station service"
     definition_period = YEAR
     default_value = 0
 
@@ -66,7 +66,7 @@ class taxes_essence_sp95(Variable):
 class taxes_essence_sp98(Variable):
     value_type = float
     entity = Menage
-    label = "Taxes prélevées sur l'essence sans plomb 98 prise en station service"
+    label = "Taxes prélevées sur l'essence sans plomb 98 en station service"
     definition_period = YEAR
     default_value = 0
 
@@ -80,7 +80,7 @@ class taxes_essence_sp98(Variable):
 class taxes_essence_super_plombe(Variable):
     value_type = float
     entity = Menage
-    label = "Taxes prélevées sur l'essence supe plombé ethanol 85 prise en station service"
+    label = "Taxes prélevées sur l'essence super plombé en station service"
     definition_period = YEAR
     default_value = 0
     end = '2006-12-31'
@@ -95,7 +95,7 @@ class taxes_essence_super_plombe(Variable):
 class taxes_essence_e85(Variable):
     value_type = float
     entity = Menage
-    label = "Taxes prélevées sur l'essence super ethanol 85 prise en station service"
+    label = "Taxes prélevées sur l'essence super ethanol 85 en station service"
     definition_period = YEAR
     default_value = 0
 
@@ -112,7 +112,7 @@ class taxes_essence_e85(Variable):
 class taxes_gpl_carburant(Variable):
     value_type = float
     entity = Menage
-    label = "Taxes prélevées sur le GPL carburant pris en station service"
+    label = "Taxes prélevées sur le GPL carburant en station service"
     definition_period = YEAR
     default_value = 0
 
@@ -129,7 +129,7 @@ class taxes_gpl_carburant(Variable):
 class taxes_tous_carburants(Variable):
     value_type = float
     entity = Menage
-    label = "Taxes prélevées sur les carburants pris en station service"
+    label = "Taxes prélevées sur les carburants en station service"
     definition_period = YEAR
     default_value = 0
 

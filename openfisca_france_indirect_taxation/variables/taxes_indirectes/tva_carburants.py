@@ -8,7 +8,7 @@ from openfisca_france_indirect_taxation.variables.base import Menage, Variable, 
 class tva_sur_ht_gazole_b7(Variable):
     value_type = float
     entity = Menage
-    label = 'TVA sur la part produit de gazole B7'
+    label = 'TVA sur la part hors taxe du diesel (gazole B7)'
     definition_period = YEAR
     default_value = 0
 
@@ -22,7 +22,7 @@ class tva_sur_ht_gazole_b7(Variable):
 class tva_sur_ticpe_gazole_b7(Variable):
     value_type = float
     entity = Menage
-    label = 'TVA sur la part TICPE de gazole B7'
+    label = "TVA sur la part de l'accise (ex-TICPE) du diesel (gazole B7)"
     definition_period = YEAR
     default_value = 0
 
@@ -36,7 +36,7 @@ class tva_sur_ticpe_gazole_b7(Variable):
 class tva_sur_gazole_b7(Variable):
     value_type = float
     entity = Menage
-    label = 'TVA sur la consommation de gazole B7'
+    label = 'Taxes sur la valeur ajoutée (TVA) sur le diesel (gazole B7)'
     definition_period = YEAR
     default_value = 0
 
@@ -52,7 +52,7 @@ class tva_sur_gazole_b7(Variable):
 class tva_sur_ht_gazole_b10(Variable):
     value_type = float
     entity = Menage
-    label = 'TVA sur la part produit de gazole B10'
+    label = "TVA sur la part de l'accise (ex-TICPE) du diesel (gazole B10)"
     definition_period = YEAR
     default_value = 0
 
@@ -66,7 +66,7 @@ class tva_sur_ht_gazole_b10(Variable):
 class tva_sur_ticpe_gazole_b10(Variable):
     value_type = float
     entity = Menage
-    label = 'TVA sur la part TICPE de gazole B10'
+    label = 'TVA sur la part TICPE de (ex-TICPE) du diesel (gazole B10)'
     definition_period = YEAR
     default_value = 0
 
@@ -80,7 +80,7 @@ class tva_sur_ticpe_gazole_b10(Variable):
 class tva_sur_gazole_b10(Variable):
     value_type = float
     entity = Menage
-    label = 'TVA sur la consommation de gazole B10'
+    label = 'Taxes sur la valeur ajoutée (TVA) sur le diesel (gazole B10)'
     definition_period = YEAR
     default_value = 0
 
@@ -97,7 +97,7 @@ class tva_sur_gazole_b10(Variable):
 class tva_sur_gazole_total(Variable):
     value_type = float
     entity = Menage
-    label = 'TVA total sur le gazole'
+    label = 'Taxes sur la valeur ajoutée (TVA) sur les diesels'
     definition_period = YEAR
     default_value = 0
 
@@ -122,7 +122,7 @@ class tva_sur_gazole_total(Variable):
 class tva_sur_ht_essence_sp95_e10(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la part ht de l'essence sp95 e10"
+    label = "TVA sur la part hors taxe de l'essence sans plomb 95 E10"
     definition_period = YEAR
     default_value = 0
 
@@ -136,7 +136,7 @@ class tva_sur_ht_essence_sp95_e10(Variable):
 class tva_sur_ticpe_essence_sp95_e10(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la part TICPE de l'essence sp95 e10"
+    label = "TVA sur la part de l'accise (ex-TICPE) de l'essence sans plomb 95 E10"
     definition_period = YEAR
     default_value = 0
 
@@ -150,7 +150,7 @@ class tva_sur_ticpe_essence_sp95_e10(Variable):
 class tva_sur_essence_sp95_e10(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la consommation de l'essence sp95 e10"
+    label = "Taxes sur la valeur ajoutée (TVA) sur l'essence sans plomb 95 E10"
     definition_period = YEAR
     default_value = 0
 
@@ -166,7 +166,7 @@ class tva_sur_essence_sp95_e10(Variable):
 class tva_sur_ht_essence_sp95(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la part ht de l'essence sp95"
+    label = "TVA sur la part hors taxe de l'essence sans plomb 95"
     definition_period = YEAR
     default_value = 0
 
@@ -180,7 +180,7 @@ class tva_sur_ht_essence_sp95(Variable):
 class tva_sur_ticpe_essence_sp95(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la part TICPE de l'essence sp95"
+    label = "TVA sur la part de l'accise (ex-TICPE) de l'essence sans plomb 95"
     definition_period = YEAR
     default_value = 0
 
@@ -194,7 +194,7 @@ class tva_sur_ticpe_essence_sp95(Variable):
 class tva_sur_essence_sp95(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la consommation de l'essence sp95"
+    label = "Taxes sur la valeur ajoutée (TVA) sur l'essence sans plomb 95"
     definition_period = YEAR
     default_value = 0
 
@@ -211,7 +211,7 @@ class tva_sur_essence_sp95(Variable):
 class tva_sur_ht_essence_sp98(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la part ht de l'essence sp98"
+    label = "TVA sur la part hors taxe de l'essence sans plomb 98"
     definition_period = YEAR
     default_value = 0
 
@@ -225,7 +225,7 @@ class tva_sur_ht_essence_sp98(Variable):
 class tva_sur_ticpe_essence_sp98(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la part TICPE de l'essence sp98"
+    label = "TVA sur la part de l'accise (ex-TICPE) de l'essence sans plomb 98"
     definition_period = YEAR
     default_value = 0
 
@@ -239,7 +239,7 @@ class tva_sur_ticpe_essence_sp98(Variable):
 class tva_sur_essence_sp98(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la consommation de l'essence sp98"
+    label = "Taxes sur la valeur ajoutée (TVA) sur l'essence sans plomb 98"
     definition_period = YEAR
     default_value = 0
 
@@ -256,7 +256,7 @@ class tva_sur_essence_sp98(Variable):
 class tva_sur_ht_essence_super_plombe(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la part ht de l'essence super plombé"
+    label = "TVA sur la part hors taxe de l'essence super plombé"
     definition_period = YEAR
     default_value = 0
     end = '2006-12-31'
@@ -271,7 +271,7 @@ class tva_sur_ht_essence_super_plombe(Variable):
 class tva_sur_ticpe_essence_super_plombe(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la part TICPE de l'essence super plombé"
+    label = "TVA sur la part de l'accise (ex-TICPE) de l'essence super plombé"
     definition_period = YEAR
     default_value = 0
     end = '2006-12-31'
@@ -286,7 +286,7 @@ class tva_sur_ticpe_essence_super_plombe(Variable):
 class tva_sur_essence_super_plombe(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la consommation de l'essence super plombé"
+    label = "Taxes sur la valeur ajoutée (TVA) sur l'essence super plombé"
     definition_period = YEAR
     default_value = 0
     end = '2006-12-31'
@@ -303,7 +303,7 @@ class tva_sur_essence_super_plombe(Variable):
 class tva_sur_ht_essence_e85(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la part ht de l'essence e85"
+    label = "TVA sur la part hors taxe de l'essence super ethanol 85"
     definition_period = YEAR
     default_value = 0
 
@@ -317,7 +317,7 @@ class tva_sur_ht_essence_e85(Variable):
 class tva_sur_ticpe_essence_e85(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la part TICPE de l'essence e85"
+    label = "TVA sur la part de l'accise (ex-TICPE) de l'essence super ethanol 85"
     definition_period = YEAR
     default_value = 0
 
@@ -331,7 +331,7 @@ class tva_sur_ticpe_essence_e85(Variable):
 class tva_sur_essence_e85(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la consommation de l'essence e85"
+    label = "Taxes sur la valeur ajoutée (TVA) sur l'essence super ethanol 85"
     definition_period = YEAR
     default_value = 0
 
@@ -347,7 +347,7 @@ class tva_sur_essence_e85(Variable):
 class tva_sur_essence_total(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TVA sur tous les types d'essences cumulés"
+    label = "Taxes sur la valeur ajoutée (TVA) sur les essences"
     definition_period = YEAR
 
     def formula_2009(menage, period):
@@ -379,7 +379,7 @@ class tva_sur_essence_total(Variable):
 class tva_sur_ht_gpl_carburant(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la part ht de gaz de pétrole liquéfié carburant"
+    label = "TVA sur la part hors taxe du GPL carburant"
     definition_period = YEAR
     default_value = 0
 
@@ -393,7 +393,7 @@ class tva_sur_ht_gpl_carburant(Variable):
 class tva_sur_ticpe_gpl_carburant(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la part TICPE de gaz de pétrole liquéfié carburant"
+    label = "TVA sur la part de l'accise (ex-TICPE) du GPL carburant"
     definition_period = YEAR
     default_value = 0
 
@@ -407,7 +407,7 @@ class tva_sur_ticpe_gpl_carburant(Variable):
 class tva_sur_gpl_carburant(Variable):
     value_type = float
     entity = Menage
-    label = "TVA sur la consommation de gaz de pétrole liquéfié carburant"
+    label = "Taxes sur la valeur ajoutée (TVA) sur le GPL carburant"
     definition_period = YEAR
     default_value = 0
 
@@ -423,7 +423,7 @@ class tva_sur_gpl_carburant(Variable):
 class tva_sur_carburant_total(Variable):
     value_type = float
     entity = Menage
-    label = 'Calcul du montant de la TVA sur tous les carburants cumulés'
+    label = 'Taxes sur la valeur ajoutée (TVA) sur les carburants'
     definition_period = YEAR
 
     def formula(menage, period):
