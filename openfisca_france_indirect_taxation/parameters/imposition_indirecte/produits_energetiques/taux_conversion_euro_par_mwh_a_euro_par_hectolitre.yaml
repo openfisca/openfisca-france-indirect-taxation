@@ -1,0 +1,26 @@
+description: taux de conversion des fraction perçue en métropole sur les produits énergétiques, autres que les gaz naturels et les charbons (€ / Mwh à € / hectolitre)
+taux_conversion_essences:
+  description: Taux de conversion de l'euro par Mwh à l'euro par hectolitre pour Essences
+  values:
+    2022-01-01:
+      value: 0.889
+taux_conversion_essence_sp95_e10:
+  description: Taux de conversion de l'euro par Mwh à l'euro par hectolitre pour Essence SP95-E10
+  values:
+    2022-01-01:
+      value: 0.889
+taux_conversion_gazoles:
+  description: Taux de conversion de l'euro par Mwh à l'euro par hectolitre pour Gazoles
+  values:
+    2022-01-01:
+      value: 1
+taux_conversion_gpl_carburant:
+  description: Taux de conversion de l'euro par Mwh à l'euro par hectolitre pour Gaz de pétrole liquéfiés carburant
+  values:
+    2022-01-01:
+      value: 1.278
+taux_conversion_superethanol_e85:
+  description: Taux de conversion de l'euro par Mwh à l'euro par hectolitre pour Superéthanol E85
+  values:
+    2022-01-01:
+      value: 0.661

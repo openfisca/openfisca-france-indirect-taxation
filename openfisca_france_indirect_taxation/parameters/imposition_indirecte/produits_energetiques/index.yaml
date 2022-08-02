@@ -1,6 +1,7 @@
 description: Taxation des produits énergétiques
 metadata:
   order:
+  - accise_energie_metropole
   - affectation_regionale_ticpe_gazole
   - affectation_regionale_ticpe_sp95_e10
   - affectation_regionale_ticpe_sp95_sp98
@@ -8,6 +9,7 @@ metadata:
   - majoration_regionale_ticpe_gazole
   - majoration_regionale_ticpe_sp95_sp98_sp95_e10
   - refraction_corse_ticpe
+  - taux_conversion_euro_par_mwh_a_euro_par_hectolitre
   - tgap_carburants
   - ticpe
   description_en: Taxes and excises on energy products
