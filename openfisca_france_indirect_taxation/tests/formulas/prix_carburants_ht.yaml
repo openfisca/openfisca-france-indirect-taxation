@@ -3,7 +3,7 @@
 ## prix gazole B7 ht:
 
 - name: "Test prix_gazole_b7_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '11'
@@ -12,7 +12,7 @@
     prix_gazole_b7_ht: 0.6226
 
 - name: "Test prix_gazole_b7_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '24'
@@ -21,7 +21,7 @@
     prix_gazole_b7_ht: 0.594
 
 - name: "Test prix_gazole_b7_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '94'
@@ -32,7 +32,7 @@
 ## prix gazole B10 ht:
 
 - name: "Test prix_gazole_b10_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '11'
@@ -41,7 +41,7 @@
     prix_gazole_b10_ht: 0.655
 
 - name: "Test prix_gazole_b10_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '24'
@@ -50,7 +50,7 @@
     prix_gazole_b10_ht: 0.6075
 
 - name: "Test prix_gazole_b10_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '94'
@@ -63,7 +63,7 @@
 ## prix essence sp95 e10 ht:
 
 - name: "Test prix_essence_sp95_e10_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '11'
@@ -72,7 +72,7 @@
     prix_essence_sp95_e10_ht: 0.634
 
 - name: "Test prix_essence_sp95_e10_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '24'
@@ -81,7 +81,7 @@
     prix_essence_sp95_e10_ht: 0.6116
 
 - name: "Test prix_essence_sp95_e10_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '94'
@@ -92,7 +92,7 @@
 ## prix essence sp95 ht:
 
 - name: "Test prix_essence_sp95_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '11'
@@ -101,7 +101,7 @@
     prix_essence_sp95_ht: 0.6157
 
 - name: "Test prix_essence_sp95_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '24'
@@ -110,7 +110,7 @@
     prix_essence_sp95_ht: 0.6124
 
 - name: "Test prix_essence_sp95_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '94'
@@ -121,7 +121,7 @@
 ## prix essence sp98 ht:
 
 - name: "Test prix_essence_sp98_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '11'
@@ -130,7 +130,7 @@
     prix_essence_sp98_ht: 0.6952
 
 - name: "Test prix_essence_sp98_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '24'
@@ -139,7 +139,7 @@
     prix_essence_sp98_ht: 0.6598
 
 - name: "Test prix_essence_sp98_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '94'
@@ -150,7 +150,7 @@
 ## prix essence super plombe ht:
 
 - name: "Test prix_essence_super_plombe_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '11'
@@ -159,7 +159,7 @@
     prix_essence_super_plombe_ht: 0.0
 
 - name: "Test prix_essence_super_plombe_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '24'
@@ -168,7 +168,7 @@
     prix_essence_super_plombe_ht: 0.0
 
 - name: "Test prix_essence_super_plombe_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '94'
@@ -179,7 +179,7 @@
 ## prix essence e85 ht:
 
 - name: "Test prix_essence_e85_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '11'
@@ -188,7 +188,7 @@
     prix_essence_e85_ht: 0.4906
 
 - name: "Test prix_essence_e85_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '24'
@@ -197,7 +197,7 @@
     prix_essence_e85_ht: 0.4462
 
 - name: "Test prix_essence_e85_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '94'
@@ -208,7 +208,7 @@
 # prix gpl ht:
 
 - name: "Test prix_gpl_carburant_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '11'
@@ -217,7 +217,7 @@
     prix_gpl_carburant_ht: 0.5245
 
 - name: "Test prix_gpl_carburant_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '24'
@@ -227,7 +227,7 @@
 
 
 - name: "Test prix_gpl_carburant_ht"
-  period: 2021
+  period: 2022
   absolute_error_margin: .01
   input:
     code_region: '94'

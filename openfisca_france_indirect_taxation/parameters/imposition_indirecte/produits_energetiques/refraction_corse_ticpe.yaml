@@ -34,7 +34,7 @@ refraction_corse_tipce_super_plombe:
         title: Ordonnance n° 2000-916 du 19 septembre 2000 portant adaptation de la valeur en euros de certains montants exprimé en francs dans les textes législatifs
       - href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000021642529/2010-07-01
         title: Article 265 A bis du Code des douanes
-refraction_corse_tipce_sp95_E10:
+refraction_corse_tipce_sp95_e10:
   description: Supercarburants SP98 E10* (€/hectolitre avant 2022, €/Kwh après 2022) (indice d'identification 11 ter)
   values:
     2022-01-01:
