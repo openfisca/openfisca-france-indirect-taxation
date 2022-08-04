@@ -6,7 +6,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_gazole_b7_ht: 100
+    depense_gazole_b7_ht: 100
   output:
     tva_sur_ht_gazole_b7: 20
 
@@ -33,7 +33,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_gazole_b10_ht: 100
+    depense_gazole_b10_ht: 100
   output:
     tva_sur_ht_gazole_b10: 20
 
@@ -73,7 +73,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_sp95_e10_ht: 100
+    depense_essence_sp95_e10_ht: 100
   output:
     tva_sur_ht_essence_sp95_e10: 20
 
@@ -100,7 +100,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_sp95_ht: 100
+    depense_essence_sp95_ht: 100
   output:
     tva_sur_ht_essence_sp95: 20
 
@@ -127,7 +127,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_sp98_ht: 100
+    depense_essence_sp98_ht: 100
   output:
     tva_sur_ht_essence_sp98: 20
 
@@ -154,7 +154,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_super_plombe_ht: 100
+    depense_essence_super_plombe_ht: 100
   output:
     tva_sur_ht_essence_super_plombe: 0
 
@@ -181,7 +181,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_essence_e85_ht: 100
+    depense_essence_e85_ht: 100
   output:
     tva_sur_ht_essence_e85: 20
 
@@ -222,7 +222,7 @@
   period: 2022
   absolute_error_margin: .01
   input:
-    cout_gpl_carburant_ht: 100
+    depense_gpl_carburant_ht: 100
   output:
     tva_sur_ht_gpl_carburant: 20
 

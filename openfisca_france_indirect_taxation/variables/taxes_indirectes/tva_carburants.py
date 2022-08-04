@@ -13,9 +13,9 @@ class tva_sur_ht_gazole_b7(Variable):
     default_value = 0
 
     def formula(menage, period, parameters):
-        cout_gazole_b7_ht = menage('cout_gazole_b7_ht', period)
+        depense_gazole_b7_ht = menage('depense_gazole_b7_ht', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        tva = cout_gazole_b7_ht * taux_plein_tva
+        tva = depense_gazole_b7_ht * taux_plein_tva
         return tva
 
 
@@ -57,9 +57,9 @@ class tva_sur_ht_gazole_b10(Variable):
     default_value = 0
 
     def formula(menage, period, parameters):
-        cout_gazole_b10_ht = menage('cout_gazole_b10_ht', period)
+        depense_gazole_b10_ht = menage('depense_gazole_b10_ht', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        tva = cout_gazole_b10_ht * taux_plein_tva
+        tva = depense_gazole_b10_ht * taux_plein_tva
         return tva
 
 
@@ -127,9 +127,9 @@ class tva_sur_ht_essence_sp95_e10(Variable):
     default_value = 0
 
     def formula_2009(menage, period, parameters):
-        cout_essence_sp95_e10_ht = menage('cout_essence_sp95_e10_ht', period)
+        depense_essence_sp95_e10_ht = menage('depense_essence_sp95_e10_ht', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        tva = cout_essence_sp95_e10_ht * taux_plein_tva
+        tva = depense_essence_sp95_e10_ht * taux_plein_tva
         return tva
 
 
@@ -171,9 +171,9 @@ class tva_sur_ht_essence_sp95(Variable):
     default_value = 0
 
     def formula_2009(menage, period, parameters):
-        cout_essence_sp95_ht = menage('cout_essence_sp95_ht', period)
+        depense_essence_sp95_ht = menage('depense_essence_sp95_ht', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        tva = cout_essence_sp95_ht * taux_plein_tva
+        tva = depense_essence_sp95_ht * taux_plein_tva
         return tva
 
 
@@ -216,9 +216,9 @@ class tva_sur_ht_essence_sp98(Variable):
     default_value = 0
 
     def formula_2009(menage, period, parameters):
-        cout_essence_sp98_ht = menage('cout_essence_sp98_ht', period)
+        depense_essence_sp98_ht = menage('depense_essence_sp98_ht', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        tva = cout_essence_sp98_ht * taux_plein_tva
+        tva = depense_essence_sp98_ht * taux_plein_tva
         return tva
 
 
@@ -262,9 +262,9 @@ class tva_sur_ht_essence_super_plombe(Variable):
     end = '2006-12-31'
 
     def formula(menage, period, parameters):
-        cout_essence_super_plombe_ht = menage('cout_essence_super_plombe_ht', period)
+        depense_essence_super_plombe_ht = menage('depense_essence_super_plombe_ht', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        tva = cout_essence_super_plombe_ht * taux_plein_tva
+        tva = depense_essence_super_plombe_ht * taux_plein_tva
         return tva
 
 
@@ -308,9 +308,9 @@ class tva_sur_ht_essence_e85(Variable):
     default_value = 0
 
     def formula_2009(menage, period, parameters):
-        cout_essence_e85_ht = menage('cout_essence_e85_ht', period)
+        depense_essence_e85_ht = menage('depense_essence_e85_ht', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        tva = cout_essence_e85_ht * taux_plein_tva
+        tva = depense_essence_e85_ht * taux_plein_tva
         return tva
 
 
@@ -384,9 +384,9 @@ class tva_sur_ht_gpl_carburant(Variable):
     default_value = 0
 
     def formula_2009(menage, period, parameters):
-        cout_gpl_carburant_ht = menage('cout_gpl_carburant_ht', period)
+        depense_gpl_carburant_ht = menage('depense_gpl_carburant_ht', period)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        tva = cout_gpl_carburant_ht * taux_plein_tva
+        tva = depense_gpl_carburant_ht * taux_plein_tva
         return tva
 
 
