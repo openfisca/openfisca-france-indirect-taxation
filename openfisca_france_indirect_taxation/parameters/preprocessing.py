@@ -141,7 +141,8 @@ def preprocess_legislation(parameters):
         years = list(range(2012, 2023))
         values = dict()
         for year in years:
-            values['{}-01-01'.format(year)] = taille_parc_moyen[year]
+            complet_year = f'{year}-01-01'
+            values[complet_year] = taille_parc_moyen[complet_year]
 
         parc_moyen_vp[element] = {
             'description': 'nombre de' + element + 'en France métropolitaine',
