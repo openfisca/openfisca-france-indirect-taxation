@@ -133,21 +133,18 @@ def preprocess_legislation(parameters):
             ), sep =','
         )
 
-    parc_moyen_vehicule_france = parc_moyen_vehicule_france.set_index('Unnamed: 0')
     parc_moyen_vp = {
         'description': 'taille moyenne du parc automobile en France métropolitaine',
         }
     for element in ['voitures_particulieres_diesel', 'voitures_particulieres_essence', 'voitures_particulieres_gpl', 'voitures_particulieres_electrique']:
         taille_parc_moyen = parc_moyen_vehicule_france[element]
         years = list(range(2012, 2023))
-        years = sorted(years, key=int, reverse=True)
         values = dict()
         for year in years:
             values['{}-01-01'.format(year)] = taille_parc_moyen[year]
 
         parc_moyen_vp[element] = {
             'description': 'nombre de' + element + 'en France métropolitaine',
-            'unit': '1',
             'values': values,
             }
 
@@ -166,14 +163,12 @@ def preprocess_legislation(parameters):
             ), sep =','
         )
 
-    parcours_moyen_vehicule_france = parcours_moyen_vehicule_france.set_index('Unnamed: 0')
     parcours_moyen_vp = {
         'description': 'Parcours moyen des vehicules en circulation en France métropolitaine en km',
         }
     for element in ['voitures_particulieres_diesel', 'voitures_particulieres_essence', 'voitures_particulieres_gpl', 'voitures_particulieres_electrique']:
         parcours_moyen = parcours_moyen_vehicule_france[element]
         years = list(range(2012, 2023))
-        years = sorted(years, key=int, reverse=True)
         values = dict()
         for year in years:
             values['{}-01-01'.format(year)] = parcours_moyen[year]
@@ -199,14 +194,12 @@ def preprocess_legislation(parameters):
             ), sep =','
         )
 
-    consommation_moyenne_carburant_france = consommation_moyenne_carburant_france.set_index('Unnamed: 0')
     conso_moyen_vp = {
         'description': 'taille moyenne du parc automobile en France métropolitaine en milliers de véhicules en l/100km',
         }
     for element in ['voitures_particulieres_diesel', 'voitures_particulieres_essence', 'voitures_particulieres_gpl']:
         conso_vp = consommation_moyenne_carburant_france[element]
         years = list(range(2012, 2023))
-        years = sorted(years, key=int, reverse=True)
         values = dict()
         for year in years:
             values['{}-01-01'.format(year)] = conso_vp[year]
