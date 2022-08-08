@@ -133,12 +133,13 @@ def preprocess_legislation(parameters):
             ), sep =','
         )
 
+    parc_moyen_vehicule_france = parc_moyen_vehicule_france.set_index('annee')
     parc_moyen_vp = {
         'description': 'taille moyenne du parc automobile en France métropolitaine',
         }
     for element in ['voitures_particulieres_diesel', 'voitures_particulieres_essence', 'voitures_particulieres_gpl', 'voitures_particulieres_electrique']:
         taille_parc_moyen = parc_moyen_vehicule_france[element]
-        years = list(range(2012, 2023))
+        years = list(range(2012, 2021))
         values = dict()
         for year in years:
             complet_year = f'{year}-01-01'
