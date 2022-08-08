@@ -124,6 +124,105 @@ def preprocess_legislation(parameters):
             }
     prix_carburants['description'] = 'Prix des carburants'
 
+    # Ajout du nombre de vehicule en circulation en France métropolitaine (INSEE)
+    parc_moyen_vehicule_france = pd.read_csv(
+        os.path.join(
+            assets_directory,
+            'quantites',
+            'parc_annuel_moyen_vp.csv'
+            ), sep =','
+        )
+
+    parc_moyen_vehicule_france = parc_moyen_vehicule_france.set_index('Unnamed: 0')
+    parc_moyen_vp = {
+        'description': 'taille moyenne du parc automobile en France métropolitaine',
+        }
+    for element in ['voitures_particulieres_diesel', 'voitures_particulieres_essence', 'voitures_particulieres_gpl', 'voitures_particulieres_electrique']:
+        taille_parc_moyen = parc_moyen_vehicule_france[element]
+        years = list(range(2012, 2023))
+        years = sorted(years, key=int, reverse=True)
+        values = dict()
+        for year in years:
+            values['{}-01-01'.format(year)] = taille_parc_moyen[year]
+
+        parc_moyen_vp[element] = {
+            'description': 'nombre de' + element + 'en France métropolitaine',
+            'unit': '1',
+            'values': values,
+            }
+
+    node_parc_moyen_vp = ParameterNode(
+        'parc_moyen_vp',
+        data = parc_moyen_vp,
+        )
+    parameters.add_child('parc_moyen_vp', node_parc_moyen_vp)
+
+    # Ajout du parcours moyen des vehicules en circulation en France métropolitaine (INSEE)
+    parcours_moyen_vehicule_france = pd.read_csv(
+        os.path.join(
+            assets_directory,
+            'quantites',
+            'parcours_moyen_vehicule_france.csv'
+            ), sep =','
+        )
+
+    parcours_moyen_vehicule_france = parcours_moyen_vehicule_france.set_index('Unnamed: 0')
+    parcours_moyen_vp = {
+        'description': 'Parcours moyen des vehicules en circulation en France métropolitaine en km',
+        }
+    for element in ['voitures_particulieres_diesel', 'voitures_particulieres_essence', 'voitures_particulieres_gpl', 'voitures_particulieres_electrique']:
+        parcours_moyen = parcours_moyen_vehicule_france[element]
+        years = list(range(2012, 2023))
+        years = sorted(years, key=int, reverse=True)
+        values = dict()
+        for year in years:
+            values['{}-01-01'.format(year)] = parcours_moyen[year]
+
+        parcours_moyen_vp[element] = {
+            'description': 'Parcours moyen' + element + 'en France métropolitaine en km',
+            'unit': '1',
+            'values': values,
+            }
+
+    node_parcours_moyen_vp = ParameterNode(
+        'parcours_moyen_vp',
+        data = parcours_moyen_vp,
+        )
+    parameters.add_child('parcours_moyen_vp', node_parcours_moyen_vp)
+
+    # Ajout de la consommation moyenne des carburants en France en l/100km
+    consommation_moyenne_carburant_france = pd.read_csv(
+        os.path.join(
+            assets_directory,
+            'quantites',
+            'consommation_moyenne_carburant_france.csv'
+            ), sep =','
+        )
+
+    consommation_moyenne_carburant_france = consommation_moyenne_carburant_france.set_index('Unnamed: 0')
+    conso_moyen_vp = {
+        'description': 'taille moyenne du parc automobile en France métropolitaine en milliers de véhicules en l/100km',
+        }
+    for element in ['voitures_particulieres_diesel', 'voitures_particulieres_essence', 'voitures_particulieres_gpl']:
+        conso_vp = consommation_moyenne_carburant_france[element]
+        years = list(range(2012, 2023))
+        years = sorted(years, key=int, reverse=True)
+        values = dict()
+        for year in years:
+            values['{}-01-01'.format(year)] = conso_vp[year]
+
+        conso_moyen_vp[element] = {
+            'description': 'Consommation moyenne des en France en l/100km',
+            'unit': '1',
+            'values': values,
+            }
+
+    node_conso_moyen_vp = ParameterNode(
+        'conso_moyen_vp',
+        data = conso_moyen_vp,
+        )
+    parameters.add_child('conso_moyen_vp', node_conso_moyen_vp)
+
     # Add the number of vehicle in circulation to the tree
     parc_annuel_moyen_vp = pd.read_csv(
         os.path.join(
