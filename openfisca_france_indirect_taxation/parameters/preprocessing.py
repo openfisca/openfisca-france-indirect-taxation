@@ -134,27 +134,26 @@ def preprocess_legislation(parameters):
         )
 
     parc_moyen_vehicule_france = parc_moyen_vehicule_france.set_index('annee')
-    parc_moyen_vp = {
-        'description': 'taille moyenne du parc automobile en France métropolitaine',
-        }
+    node_parc_moyen_vp = ParameterNode(
+        'parc_moyen_vp',
+        data=dict(
+            description='taille moyenne du parc automobile en France métropolitaine',
+            ))
+    parameters.add_child('parc_moyen_vp', node_parc_moyen_vp)
+
     for element in ['voitures_particulieres_diesel', 'voitures_particulieres_essence', 'voitures_particulieres_gpl', 'voitures_particulieres_electrique']:
         taille_parc_moyen = parc_moyen_vehicule_france[element]
-        years = list(range(2012, 2021))
+        years = list(range(2012, 2023))
         values = dict()
         for year in years:
             complet_year = f'{year}-01-01'
-            values[complet_year] = taille_parc_moyen[complet_year]
+            values[complet_year] = float(taille_parc_moyen[complet_year])
 
-        parc_moyen_vp[element] = {
-            'description': 'nombre de' + element + 'en France métropolitaine',
-            'values': values,
-            }
-
-    node_parc_moyen_vp = ParameterNode(
-        'parc_moyen_vp',
-        data = parc_moyen_vp,
-        )
-    parameters.add_child('parc_moyen_vp', node_parc_moyen_vp)
+        node_parc_moyen_vp_element = ParameterNode(data=dict(
+            description= 'nombre de' + element + 'en France métropolitaine',
+            values=values,
+            ))
+        node_parc_moyen_vp.add_child(element, node_parc_moyen_vp_element)
 
     # Ajout du parcours moyen des vehicules en circulation en France métropolitaine (INSEE)
     parcours_moyen_vehicule_france = pd.read_csv(
@@ -165,27 +164,27 @@ def preprocess_legislation(parameters):
             ), sep =','
         )
 
-    parcours_moyen_vp = {
-        'description': 'Parcours moyen des vehicules en circulation en France métropolitaine en km',
-        }
+    parcours_moyen_vehicule_france = parcours_moyen_vehicule_france.set_index('annee')
+    node_parcours_moyen_vp = ParameterNode(
+        'parcours_moyen_vp',
+        data=dict(
+            description='Parcours moyen des vehicules en circulation en France métropolitaine en km',
+            ))
+    parameters.add_child('parcours_moyen_vp', node_parcours_moyen_vp)
+
     for element in ['voitures_particulieres_diesel', 'voitures_particulieres_essence', 'voitures_particulieres_gpl', 'voitures_particulieres_electrique']:
-        parcours_moyen = parcours_moyen_vehicule_france[element]
+        taille_parcours_moyen = parcours_moyen_vehicule_france[element]
         years = list(range(2012, 2023))
         values = dict()
         for year in years:
-            values['{}-01-01'.format(year)] = parcours_moyen[year]
+            complet_year = f'{year}-01-01'
+            values[complet_year] = float(taille_parcours_moyen[complet_year])
 
-        parcours_moyen_vp[element] = {
-            'description': 'Parcours moyen' + element + 'en France métropolitaine en km',
-            'unit': '1',
-            'values': values,
-            }
-
-    node_parcours_moyen_vp = ParameterNode(
-        'parcours_moyen_vp',
-        data = parcours_moyen_vp,
-        )
-    parameters.add_child('parcours_moyen_vp', node_parcours_moyen_vp)
+        node_parcours_moyen_vp_element = ParameterNode(data=dict(
+            description= 'parcours moyen de' + element + 'en France métropolitaine en km',
+            values=values,
+            ))
+        node_parcours_moyen_vp.add_child(element, node_parcours_moyen_vp_element)
 
     # Ajout de la consommation moyenne des carburants en France en l/100km
     consommation_moyenne_carburant_france = pd.read_csv(
@@ -196,92 +195,103 @@ def preprocess_legislation(parameters):
             ), sep =','
         )
 
-    conso_moyen_vp = {
-        'description': 'taille moyenne du parc automobile en France métropolitaine en milliers de véhicules en l/100km',
-        }
+    consommation_moyenne_carburant_france = consommation_moyenne_carburant_france.set_index('annee')
+    node_conso_moyen_vp = ParameterNode(
+        'conso_moyen_vp',
+        data=dict(
+            description='Taille moyenne du parc automobile en France métropolitaine en milliers de véhicules en l/100km',
+            ))
+    parameters.add_child('conso_moyen_vp', node_conso_moyen_vp)
+
     for element in ['voitures_particulieres_diesel', 'voitures_particulieres_essence', 'voitures_particulieres_gpl']:
-        conso_vp = consommation_moyenne_carburant_france[element]
+        conso_vp_moyenne = consommation_moyenne_carburant_france[element]
         years = list(range(2012, 2023))
         values = dict()
         for year in years:
-            values['{}-01-01'.format(year)] = conso_vp[year]
+            complet_year = f'{year}-01-01'
+            values[complet_year] = float(conso_vp_moyenne[complet_year])
 
-        conso_moyen_vp[element] = {
-            'description': 'Consommation moyenne des en France en l/100km',
-            'unit': '1',
-            'values': values,
-            }
-
-    node_conso_moyen_vp = ParameterNode(
-        'conso_moyen_vp',
-        data = conso_moyen_vp,
-        )
-    parameters.add_child('conso_moyen_vp', node_conso_moyen_vp)
+        node_conso_moyen_vp_element = ParameterNode(data=dict(
+            description= 'Consommation moyenne de' + element + 'en France métropolitaine en l/100km',
+            values=values,
+            ))
+        node_conso_moyen_vp.add_child(element, node_conso_moyen_vp_element)
 
     # Add the number of vehicle in circulation to the tree
-    parc_annuel_moyen_vp = pd.read_csv(
+    # parc_annuel_moyen_vp = pd.read_csv(
+    #     os.path.join(
+    #         assets_directory,
+    #         'quantites',
+    #         'parc_annuel_moyen_vp.csv'
+    #         ), sep =','
+    #     )
+
+    # parc_annuel_moyen_vp = parc_annuel_moyen_vp.set_index('Unnamed: 0')
+    # parc_vp = {
+    #     'description': 'taille moyenne du parc automobile en France métropolitaine en milliers de véhicules',
+    #     }
+    # for element in ['diesel', 'essence']:
+    #     taille_parc = parc_annuel_moyen_vp[element]
+    #     years = list(range(1990, 2017))
+    #     years = sorted(years, key=int, reverse=True)
+    #     values = dict()
+    #     for year in years:
+    #         values['{}-01-01'.format(year)] = taille_parc[year]
+
+    #     parc_vp[element] = {
+    #         'description': 'nombre de véhicules particuliers immatriculés en France à motorisation ' + element,
+    #         'unit': '1000',
+    #         'values': values,
+    #         }
+
+    # node_parc_vp = ParameterNode(
+    #     'parc_vp',
+    #     data = parc_vp,
+    #     )
+    # parameters.add_child('parc_vp', node_parc_vp)
+
+    # # Add the total quantity of fuel consumed per year to the tree
+    # quantite_carbu_vp_france = pd.read_csv(
+    #     os.path.join(
+    #         assets_directory,
+    #         'quantites',
+    #         'quantite_carbu_vp_france.csv'
+    #         ), sep =','
+    #     )
+
+    # quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('Unnamed: 0')
+    # quantite_carbu_vp = {
+    #     'description': 'quantite de carburants consommés en France métropolitaine',
+    #     }
+    # for element in ['diesel', 'essence']:
+    #     quantite_carburants = quantite_carbu_vp_france[element]
+    #     years = list(range(1990, 2017))
+    #     years = sorted(years, key=int, reverse=True)
+    #     values = dict()
+    #     for year in years:
+    #         values['{}-01-01'.format(year)] = quantite_carburants[year]
+
+    #     quantite_carbu_vp[element] = {
+    #         'description': 'consommation totale de ' + element + ' en France',
+    #         'values': values
+    #         }
+
+    # node_quantite_carbu_vp = ParameterNode(
+    #     'quantite_carbu_vp',
+    #     data = quantite_carbu_vp,
+    #     )
+    # parameters.add_child('quantite_carbu_vp', node_quantite_carbu_vp)
+
+    part_des_types_de_supercarburants = pd.read_csv(
         os.path.join(
             assets_directory,
-            'quantites',
-            'parc_annuel_moyen_vp.csv'
-            ), sep =','
+            'part_des_types_de_supercarburants.csv'
+            ), sep =';'
         )
 
-    parc_annuel_moyen_vp = parc_annuel_moyen_vp.set_index('Unnamed: 0')
-    parc_vp = {
-        'description': 'taille moyenne du parc automobile en France métropolitaine en milliers de véhicules',
-        }
-    for element in ['diesel', 'essence']:
-        taille_parc = parc_annuel_moyen_vp[element]
-        years = list(range(1990, 2017))
-        years = sorted(years, key=int, reverse=True)
-        values = dict()
-        for year in years:
-            values['{}-01-01'.format(year)] = taille_parc[year]
-
-        parc_vp[element] = {
-            'description': 'nombre de véhicules particuliers immatriculés en France à motorisation ' + element,
-            'unit': '1000',
-            'values': values,
-            }
-
-    node_parc_vp = ParameterNode(
-        'parc_vp',
-        data = parc_vp,
-        )
-    parameters.add_child('parc_vp', node_parc_vp)
-
-    # Add the total quantity of fuel consumed per year to the tree
-    quantite_carbu_vp_france = pd.read_csv(
-        os.path.join(
-            assets_directory,
-            'quantites',
-            'quantite_carbu_vp_france.csv'
-            ), sep =','
-        )
-
-    quantite_carbu_vp_france = quantite_carbu_vp_france.set_index('Unnamed: 0')
-    quantite_carbu_vp = {
-        'description': 'quantite de carburants consommés en France métropolitaine',
-        }
-    for element in ['diesel', 'essence']:
-        quantite_carburants = quantite_carbu_vp_france[element]
-        years = list(range(1990, 2017))
-        years = sorted(years, key=int, reverse=True)
-        values = dict()
-        for year in years:
-            values['{}-01-01'.format(year)] = quantite_carburants[year]
-
-        quantite_carbu_vp[element] = {
-            'description': 'consommation totale de ' + element + ' en France',
-            'values': values
-            }
-
-    node_quantite_carbu_vp = ParameterNode(
-        'quantite_carbu_vp',
-        data = quantite_carbu_vp,
-        )
-    parameters.add_child('quantite_carbu_vp', node_quantite_carbu_vp)
+    del part_des_types_de_supercarburants['Source']
+    part_des_types_de_supercarburants['annee'] = part_des_types_de_supercarburants['annee'].astype(int)
+    part_des_types_de_supercarburants = part_des_types_de_supercarburants.set_index('annee')
 
     # Add the shares of each type of supercabrurant (SP95, SP98, E10, etc.) among supercarburants
     part_des_types_de_supercarburants = pd.read_csv(
@@ -292,33 +302,15 @@ def preprocess_legislation(parameters):
         )
 
     del part_des_types_de_supercarburants['Source']
-    part_des_types_de_supercarburants = \
-        part_des_types_de_supercarburants[part_des_types_de_supercarburants['annee'] > 0].copy()
-    part_des_types_de_supercarburants['annee'] = part_des_types_de_supercarburants['annee'].astype(int)
+    # part_des_types_de_supercarburants['annee'] = part_des_types_de_supercarburants['annee'].astype(int)
     part_des_types_de_supercarburants = part_des_types_de_supercarburants.set_index('annee')
-
-    # delete share of e_85 because we have no data for its price
-    # When the sum of all shares is not one, need to multiply each share by the same coefficient
-    cols = part_des_types_de_supercarburants.columns
-    for element in cols:
-        part_des_types_de_supercarburants[element] = (
-            part_des_types_de_supercarburants[element]
-            / (part_des_types_de_supercarburants['somme'] - part_des_types_de_supercarburants['sp_e85'])
-            )
-    del part_des_types_de_supercarburants['sp_e85']
-    del part_des_types_de_supercarburants['somme']
-    cols = part_des_types_de_supercarburants.columns
-    part_des_types_de_supercarburants['somme'] = 0
-    for element in cols:
-        part_des_types_de_supercarburants['somme'] += part_des_types_de_supercarburants[element]
-    assert (part_des_types_de_supercarburants['somme'] == 1).any(), 'The weighting of the shares did not work'
 
     part_type_supercaburants = {
         'description': "part de la consommation totale d'essence de chaque type supercarburant",
         }
-    for element in ['super_plombe', 'sp_95', 'sp_98', 'sp_e10']:
+    for element in ['super_plombe', 'sp_95', 'sp_98', 'sp_e10', 'sp_e85']:
         part_par_carburant = part_des_types_de_supercarburants[element]
-        years = list(range(2000, 2017))
+        years = list(range(2000, 2023))
         years = sorted(years, key=int, reverse=True)
         values = dict()
         for year in years:
@@ -335,6 +327,45 @@ def preprocess_legislation(parameters):
         data = part_type_supercaburants,
         )
     parameters.children['imposition_indirecte'].add_child('part_type_supercarburants', node_part_type_supercaburants)
+
+    # delete share of e_85 because we have no data for its price
+    # When the sum of all shares is not one, need to multiply each share by the same coefficient
+    # cols = part_des_types_de_supercarburants.columns
+    # for element in cols:
+    #     part_des_types_de_supercarburants[element] = (
+    #         part_des_types_de_supercarburants[element]
+    #         / (part_des_types_de_supercarburants['somme'] - part_des_types_de_supercarburants['sp_e85'])
+    #         )
+    # del part_des_types_de_supercarburants['sp_e85']
+    # del part_des_types_de_supercarburants['somme']
+    # cols = part_des_types_de_supercarburants.columns
+    # part_des_types_de_supercarburants['somme'] = 0
+    # for element in cols:
+    #     part_des_types_de_supercarburants['somme'] += part_des_types_de_supercarburants[element]
+    # assert (part_des_types_de_supercarburants['somme'] == 1).any(), 'The weighting of the shares did not work'
+
+    # part_type_supercaburants = {
+    #     'description': "part de la consommation totale d'essence de chaque type supercarburant",
+    #     }
+    # for element in ['super_plombe', 'sp_95', 'sp_98', 'sp_e10']:
+    #     part_par_carburant = part_des_types_de_supercarburants[element]
+    #     years = list(range(2000, 2017))
+    #     years = sorted(years, key=int, reverse=True)
+    #     values = dict()
+    #     for year in years:
+    #         values['{}-01-01'.format(year)] = part_par_carburant[year]
+
+    #     part_type_supercaburants[element] = {
+    #         'description': 'part de ' + element + " dans la consommation totale d'essences",
+    #         'unit': '/1',
+    #         'values': values
+    #         }
+
+    # node_part_type_supercaburants = ParameterNode(
+    #     'part_type_supercaburants',
+    #     data = part_type_supercaburants,
+    #     )
+    # parameters.children['imposition_indirecte'].add_child('part_type_supercarburants', node_part_type_supercaburants)
 
     # Add CO2 emissions from energy (Source : Ademe)
     emissions_CO2 = {
