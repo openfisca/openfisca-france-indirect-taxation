@@ -22,6 +22,12 @@ class veh_essence(YearlyVariable):
     label = 'Nombre de véhicules essence dans le ménage'
 
 
+class veh_gpl(YearlyVariable):
+    value_type = int
+    entity = Menage
+    label = 'Nombre de véhicules essence dans le ménage'
+
+
 class veh_tot(YearlyVariable):
     value_type = int
     entity = Menage

@@ -10,13 +10,25 @@ class depense_gazole_b7_ttc_entree(Variable):
     definition_period = YEAR
     default_value = 0
 
+    def formula(menage, period):
+        part_depenses_B7 = 1.0
+        depense_gazole_total_ttc_entree = menage('depense_gazole_total_ttc_entree', period)
+        depense_gazole_b7_ttc_entree = depense_gazole_total_ttc_entree * part_depenses_B7
+        return depense_gazole_b7_ttc_entree
 
-class depense_gazole_b10_ttc_entree(Variable):
+
+class depense_gazole_b10_ttc_entree(Variable):  # Il n'y a pour le moment pas assez d'usages de ce carburant (et donc de données)
     value_type = float
     entity = Menage
     label = 'depense du gazole B10 ttc'
     definition_period = YEAR
     default_value = 0
+
+    def formula(menage, period):
+        part_depenses_B10 = 0.0
+        depense_gazole_total_ttc_entree = menage('depense_gazole_total_ttc_entree', period)
+        depense_gazole_b10_ttc_entree = depense_gazole_total_ttc_entree * part_depenses_B10
+        return depense_gazole_b10_ttc_entree
 
 
 # depense different type d'essence ttc:
@@ -29,9 +41,11 @@ class depense_essence_sp95_e10_ttc_entree(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period):
-        depenses_sp_e10 = menage('depenses_sp_e10', period)
-        return depenses_sp_e10
+    def formula(menage, period, parameters):
+        depense_essence_total_ttc_entree = menage('depense_essence_total_ttc_entree', period)
+        sp_e10 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e10
+        depense_essence_sp95_e10_ttc_entree = depense_essence_total_ttc_entree * sp_e10
+        return depense_essence_sp95_e10_ttc_entree
 
 
 class depense_essence_sp95_ttc_entree(Variable):
@@ -41,9 +55,11 @@ class depense_essence_sp95_ttc_entree(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period):
-        depenses_sp_95 = menage('depenses_sp_95', period)
-        return depenses_sp_95
+    def formula(menage, period, parameters):
+        depense_essence_total_ttc_entree = menage('depense_essence_total_ttc_entree', period)
+        sp_95 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_95
+        depense_essence_sp95_ttc_entree = depense_essence_total_ttc_entree * sp_95
+        return depense_essence_sp95_ttc_entree
 
 
 class depense_essence_sp98_ttc_entree(Variable):
@@ -53,9 +69,11 @@ class depense_essence_sp98_ttc_entree(Variable):
     definition_period = YEAR
     default_value = 0
 
-    def formula(menage, period):
-        depenses_sp_98 = menage('depenses_sp_98', period)
-        return depenses_sp_98
+    def formula(menage, period, parameters):
+        depense_essence_total_ttc_entree = menage('depense_essence_total_ttc_entree', period)
+        sp_98 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_98
+        depense_essence_sp98_ttc_entree = depense_essence_total_ttc_entree * sp_98
+        return depense_essence_sp98_ttc_entree
 
 
 class depense_essence_super_plombe_ttc_entree(Variable):
@@ -66,6 +84,12 @@ class depense_essence_super_plombe_ttc_entree(Variable):
     default_value = 0
     end = "2007-01-01"
 
+    def formula(menage, period, parameters):
+        depense_essence_total_ttc_entree = menage('depense_essence_total_ttc_entree', period)
+        super_plombe = parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
+        depense_essence_super_plombe_ttc_entree = depense_essence_total_ttc_entree * super_plombe
+        return depense_essence_super_plombe_ttc_entree
+
 
 class depense_essence_e85_ttc_entree(Variable):
     value_type = float
@@ -74,9 +98,74 @@ class depense_essence_e85_ttc_entree(Variable):
     definition_period = YEAR
     default_value = 0
 
+    def formula(menage, period, parameters):
+        depense_essence_total_ttc_entree = menage('depense_essence_total_ttc_entree', period)
+        sp_e85 = parameters(period.start).imposition_indirecte.part_type_supercarburants.sp_e85
+        depense_essence_e85_ttc_entree = depense_essence_total_ttc_entree * sp_e85
+        return depense_essence_e85_ttc_entree
 
-# depense essence total ttc:
 
+# depense total ttc:
+
+
+class depenses_carburants_entree(Variable):
+    value_type = float
+    entity = Menage
+    label = 'Consommation de carburants'
+    definition_period = YEAR
+    default_value = 0
+
+
+class depense_gazole_total_ttc_entree(Variable):
+    value_type = float
+    entity = Menage
+    label = 'Construction par pondération des dépenses spécifiques au diesel'
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period, parameters):
+        part_depenses_gazole = 0.7151
+        depenses_carburants_entree = menage('depenses_carburants_entree', period)
+        depense_gazole_total_ttc_entree = depenses_carburants_entree * part_depenses_gazole
+        return depense_gazole_total_ttc_entree
+
+
+class depense_essence_total_ttc_entree(Variable):
+    value_type = float
+    entity = Menage
+    label = 'Construction par pondération des dépenses spécifiques au diesel'
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period, parameters):
+        part_depenses_essence = 0.2787
+        depenses_carburants_entree = menage('depenses_carburants_entree', period)
+        depense_essence_total_ttc_entree = depenses_carburants_entree * part_depenses_essence
+        # conso_moyenne_vp_diesel =  parameters(period.start).conso_vp_moyenne.voitures_particulieres_diesel
+        # conso_moyenne_vp_essence = parameters(period.start).conso_vp_moyenne.voitures_particulieres_essence
+        # conso_moyenne_vp_gpl = parameters(period.start).conso_vp_moyenne.voitures_particulieres_gpl
+
+        # parcours_moyenne_vp_diesel_en_km =  parameters(period.start).taille_parcours_moyen.voitures_particulieres_diesel
+        # parcours_moyenne_vp_essense_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_essence
+        # parcours_moyenne_vp_gpl_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_gpl
+
+        # nombre_vehicules_diesel = menage('veh_diesel', period)
+        # nombre_vehicules_essence = menage('veh_essence', period)
+        # nombre_vehicules_gpl = menage('veh_gpl', period)
+        # nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence + nombre_vehicules_gpl
+
+        # # to compute part_conso_diesel we need to avoid dividing by zero for those we do not have any vehicle
+        # # Thus, we choose arbitrarily to divide it by 1, but this choice won't affect the result as long as it is not 0
+        # denominateur = (
+        #     (nombre_vehicules_diesel * conso_moyenne_vp_diesel) + (nombre_vehicules_essence * conso_moyenne_vp_essence) + (nombre_vehicules_essence * nombre_vehicules_gpl)
+        #     ) * (nombre_vehicules_total != 0) + 1 * (nombre_vehicules_total == 0)
+
+        # part_conso_diesel = (nombre_vehicules_diesel * conso_moyenne_vp_diesel) / denominateur
+
+        # depenses_carburants = menage('depenses_carburants', period)
+
+        # depenses_diesel = (nombre_vehicules_total != 0) * depenses_carburants * part_conso_diesel
+        return depense_essence_total_ttc_entree
 
 # depense gaz de pétrole liquéfié carburant ttc:
 
@@ -87,6 +176,12 @@ class depense_gpl_carburant_ttc_entree(Variable):
     label = 'depense du gaz de pétrole liquéfié - carburant ttc'
     definition_period = YEAR
     default_value = 0
+
+    def formula(menage, period, parameters):
+        part_depenses_GPL = 0.0065
+        depenses_carburants_entree = menage('depenses_carburants_entree', period)
+        depense_gpl_carburant_ttc_entree = depenses_carburants_entree * part_depenses_GPL
+        return depense_gpl_carburant_ttc_entree
 
 
 class depense_carburant_total_ttc_sans_distinction_entree(Variable):
