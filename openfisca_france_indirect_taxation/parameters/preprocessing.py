@@ -39,10 +39,16 @@ def preprocess_legislation(parameters):
 
     # For super_95_e10, we need to use the price of super_95 between 2009 and 2012 included,
     # because we don't have the data. We use super_95 because it is very close and won't affect the results too much
+    prix_annuel = prix_litre_annuel_carburants['super_95_e10_ttc']
+    years = list(range(2018, 2023))
+    years = sorted(years, key=int, reverse=True)
+    values = dict()
+    for year in years:
+        values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
+
     prix_annuel = prix_annuel_carburants['super_95_e10_ttc']
     years = list(range(2013, 2017))
     years = sorted(years, key=int, reverse=True)
-    values = dict()
     for year in years:
         values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
 
@@ -67,20 +73,12 @@ def preprocess_legislation(parameters):
         'values': values
         }
     autres_carburants = [
-        'diesel_ht',
         'diesel_ttc',
-        'gplc_ht',
-        'gplc_ttc',
-        'super_95_e10_ht',
-        'super_95_ht',
         'super_95_ttc',
-        'super_98_ht',
         'super_98_ttc',
-        'super_plombe_ht',
         'super_plombe_ttc',
         ]
     for element in autres_carburants:
-        assert element in prix_annuel_carburants.columns
         prix_annuel = prix_annuel_carburants[element]
         years = list(range(1990, 2017))
         years = sorted(years, key=int, reverse=True)
@@ -88,42 +86,9 @@ def preprocess_legislation(parameters):
         for year in years:
             values['{}-01-01'.format(year)] = prix_annuel[year] * 100
 
-        prix_carburants[element] = {
-            'description': element.replace('_', ' '),
-            'unit': 'currency',
-            'values': values
-            }
-    prix_carburants['description'] = 'Prix des carburants'
-    node_prix_carburants = ParameterNode(
-        'prix_carburants',
-        data = prix_carburants,
-        )
-    parameters.add_child('prix_carburants', node_prix_carburants)
-
-    # After 2017, we use the data from prix_litre_annuel_carburants.csv
-
-    prix_litre_annuel_carburants = pd.read_csv(
-        os.path.join(
-            assets_directory,
-            'prix',
-            'prix_litre_annuel_carburants.csv'
-            ), sep =','
-        )
-
-    prix_litre_annuel_carburants['Date'] = prix_litre_annuel_carburants['Date'].astype(int)
-    prix_litre_annuel_carburants = prix_litre_annuel_carburants.set_index('Date')
-
-    carburants = [
-        'diesel_ttc',
-        'super_95_ttc',
-        'super_95_e10_ttc',
-        'super_98_ttc',
-        'super_plombe_ttc',
-        ]
-
-    for element in carburants:
         prix_annuel = prix_litre_annuel_carburants[element]
-        years = list(range(2017, 2023))
+        years = sorted(years, key=int, reverse=True)
+        years = list(range(2018, 2023))
         for year in years:
             values['{}-01-01'.format(year)] = prix_annuel[year] * 100
 
@@ -132,7 +97,15 @@ def preprocess_legislation(parameters):
             'unit': 'currency',
             'values': values
             }
+
+    # After 2017, we use the data from prix_litre_annuel_carburants.cs
+
     prix_carburants['description'] = 'Prix des carburants'
+    node_prix_carburants = ParameterNode(
+        'prix_carburants',
+        data = prix_carburants,
+        )
+    parameters.add_child('prix_carburants', node_prix_carburants)
 
     # Ajout du nombre de vehicule en circulation en France métropolitaine (INSEE)
     parc_moyen_vehicule_france = pd.read_csv(
