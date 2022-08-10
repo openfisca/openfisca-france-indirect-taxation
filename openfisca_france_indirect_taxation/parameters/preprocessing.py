@@ -110,6 +110,9 @@ def preprocess_legislation(parameters):
             ), sep =','
         )
 
+    prix_litre_annuel_carburants['Date'] = prix_litre_annuel_carburants['Date'].astype(int)
+    prix_litre_annuel_carburants = prix_litre_annuel_carburants.set_index('Date')
+
     carburants = [
         'diesel_ttc',
         'super_95_ttc',
@@ -121,8 +124,6 @@ def preprocess_legislation(parameters):
     for element in carburants:
         prix_annuel = prix_litre_annuel_carburants[element]
         years = list(range(2017, 2023))
-        years = sorted(years, key=int, reverse=True)
-        values = dict()
         for year in years:
             values['{}-01-01'.format(year)] = prix_annuel[year] * 100
 
