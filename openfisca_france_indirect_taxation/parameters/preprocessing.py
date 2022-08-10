@@ -101,6 +101,15 @@ def preprocess_legislation(parameters):
     parameters.add_child('prix_carburants', node_prix_carburants)
 
     # After 2017, we use the data from prix_litre_annuel_carburants.csv
+
+    prix_litre_annuel_carburants = pd.read_csv(
+        os.path.join(
+            assets_directory,
+            'prix',
+            'prix_litre_annuel_carburants.csv'
+            ), sep =','
+        )
+
     carburants = [
         'diesel_ttc',
         'super_95_ttc',
