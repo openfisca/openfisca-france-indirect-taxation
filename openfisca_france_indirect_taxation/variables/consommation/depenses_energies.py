@@ -10,13 +10,13 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 log = logging.getLogger(__name__)
 
 
-# class depenses_carburants(YearlyVariable):
-#     value_type = float
-#     entity = Menage
-#     label = 'Consommation de carburants'
+class depenses_carburants(YearlyVariable):
+    value_type = float
+    entity = Menage
+    label = 'Consommation de carburants'
 
-#     def formula(menage, period):
-#         return menage('poste_07_2_2_1_1', period)
+    def formula(menage, period):
+        return menage('poste_07_2_2_1_1', period)
 
 
 class depenses_combustibles_liquides(YearlyVariable):
