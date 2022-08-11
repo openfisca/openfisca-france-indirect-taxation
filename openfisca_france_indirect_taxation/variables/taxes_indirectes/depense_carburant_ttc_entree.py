@@ -124,10 +124,35 @@ class depense_gazole_total_ttc_entree(Variable):
     default_value = 0
 
     def formula(menage, period, parameters):
-        part_depenses_gazole = 0.7151
-        depenses_carburants_entree = menage('depenses_carburants_entree', period)
-        depense_gazole_total_ttc_entree = depenses_carburants_entree * part_depenses_gazole
-        return depense_gazole_total_ttc_entree
+        conso_moyenne_vp_diesel = parameters(period.start).conso_vp_moyenne.voitures_particulieres_diesel
+        conso_moyenne_vp_essence = parameters(period.start).conso_vp_moyenne.voitures_particulieres_essence
+        conso_moyenne_vp_gpl = parameters(period.start).conso_vp_moyenne.voitures_particulieres_gpl
+
+        parcours_moyenne_vp_diesel_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_diesel
+        parcours_moyenne_vp_essense_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_essence
+        parcours_moyenne_vp_gpl_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_gpl
+
+        conso_moyenne_du_parcours_moyen_vp_diesel = parcours_moyenne_vp_diesel_en_km * conso_moyenne_vp_diesel / 100
+        conso_moyenne_du_parcours_moyen_vp_essence = parcours_moyenne_vp_essense_en_km * conso_moyenne_vp_essence / 100
+        conso_moyenne_du_parcours_moyen_vp_gpl = parcours_moyenne_vp_gpl_en_km * conso_moyenne_vp_gpl / 100
+
+        nombre_vehicules_diesel = menage('veh_diesel', period)
+        nombre_vehicules_essence = menage('veh_essence', period)
+        nombre_vehicules_gpl = menage('veh_gpl', period)
+        nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence + nombre_vehicules_gpl
+
+        depenses_carburants = menage('depenses_carburants', period)
+
+        # to compute part_conso_diesel we need to avoid dividing by zero for those we do not have any vehicle
+        # Thus, we choose arbitrarily to divide it by 1, but this choice won't affect the result as long as it is not 0
+        denominateur = (
+            (nombre_vehicules_total != 0) * (nombre_vehicules_diesel * conso_moyenne_du_parcours_moyen_vp_diesel) + (nombre_vehicules_essence * conso_moyenne_du_parcours_moyen_vp_essence) + (nombre_vehicules_gpl * conso_moyenne_du_parcours_moyen_vp_gpl)
+            ) + (nombre_vehicules_total == 0) * 1
+
+        part_conso_gazole = (nombre_vehicules_diesel * conso_moyenne_du_parcours_moyen_vp_diesel) / denominateur
+
+        depenses_gazole = depenses_carburants * part_conso_gazole
+        return depenses_gazole
 
 
 class depense_essence_total_ttc_entree(Variable):
@@ -138,34 +163,35 @@ class depense_essence_total_ttc_entree(Variable):
     default_value = 0
 
     def formula(menage, period, parameters):
-        part_depenses_essence = 0.2787
-        depenses_carburants_entree = menage('depenses_carburants_entree', period)
-        depense_essence_total_ttc_entree = depenses_carburants_entree * part_depenses_essence
-        # conso_moyenne_vp_diesel =  parameters(period.start).conso_vp_moyenne.voitures_particulieres_diesel
-        # conso_moyenne_vp_essence = parameters(period.start).conso_vp_moyenne.voitures_particulieres_essence
-        # conso_moyenne_vp_gpl = parameters(period.start).conso_vp_moyenne.voitures_particulieres_gpl
+        conso_moyenne_vp_diesel = parameters(period.start).conso_vp_moyenne.voitures_particulieres_diesel
+        conso_moyenne_vp_essence = parameters(period.start).conso_vp_moyenne.voitures_particulieres_essence
+        conso_moyenne_vp_gpl = parameters(period.start).conso_vp_moyenne.voitures_particulieres_gpl
 
-        # parcours_moyenne_vp_diesel_en_km =  parameters(period.start).taille_parcours_moyen.voitures_particulieres_diesel
-        # parcours_moyenne_vp_essense_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_essence
-        # parcours_moyenne_vp_gpl_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_gpl
+        parcours_moyenne_vp_diesel_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_diesel
+        parcours_moyenne_vp_essense_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_essence
+        parcours_moyenne_vp_gpl_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_gpl
 
-        # nombre_vehicules_diesel = menage('veh_diesel', period)
-        # nombre_vehicules_essence = menage('veh_essence', period)
-        # nombre_vehicules_gpl = menage('veh_gpl', period)
-        # nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence + nombre_vehicules_gpl
+        conso_moyenne_du_parcours_moyen_vp_diesel = parcours_moyenne_vp_diesel_en_km * conso_moyenne_vp_diesel / 100
+        conso_moyenne_du_parcours_moyen_vp_essence = parcours_moyenne_vp_essense_en_km * conso_moyenne_vp_essence / 100
+        conso_moyenne_du_parcours_moyen_vp_gpl = parcours_moyenne_vp_gpl_en_km * conso_moyenne_vp_gpl / 100
 
-        # # to compute part_conso_diesel we need to avoid dividing by zero for those we do not have any vehicle
-        # # Thus, we choose arbitrarily to divide it by 1, but this choice won't affect the result as long as it is not 0
-        # denominateur = (
-        #     (nombre_vehicules_diesel * conso_moyenne_vp_diesel) + (nombre_vehicules_essence * conso_moyenne_vp_essence) + (nombre_vehicules_essence * nombre_vehicules_gpl)
-        #     ) * (nombre_vehicules_total != 0) + 1 * (nombre_vehicules_total == 0)
+        nombre_vehicules_diesel = menage('veh_diesel', period)
+        nombre_vehicules_essence = menage('veh_essence', period)
+        nombre_vehicules_gpl = menage('veh_gpl', period)
+        nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence + nombre_vehicules_gpl
 
-        # part_conso_diesel = (nombre_vehicules_diesel * conso_moyenne_vp_diesel) / denominateur
+        depenses_carburants = menage('depenses_carburants', period)
 
-        # depenses_carburants = menage('depenses_carburants', period)
+        # to compute part_conso_diesel we need to avoid dividing by zero for those we do not have any vehicle
+        # Thus, we choose arbitrarily to divide it by 1, but this choice won't affect the result as long as it is not 0
+        denominateur = (
+            (nombre_vehicules_total != 0) * (nombre_vehicules_diesel * conso_moyenne_du_parcours_moyen_vp_diesel) + (nombre_vehicules_essence * conso_moyenne_du_parcours_moyen_vp_essence) + (nombre_vehicules_gpl * conso_moyenne_du_parcours_moyen_vp_gpl)
+            ) + (nombre_vehicules_total == 0) * 1
 
-        # depenses_diesel = (nombre_vehicules_total != 0) * depenses_carburants * part_conso_diesel
-        return depense_essence_total_ttc_entree
+        part_conso_essence = (nombre_vehicules_essence * conso_moyenne_du_parcours_moyen_vp_essence) / denominateur
+
+        depenses_essence = depenses_carburants * part_conso_essence
+        return depenses_essence
 
 # depense gaz de pétrole liquéfié carburant ttc:
 
@@ -178,10 +204,35 @@ class depense_gpl_carburant_ttc_entree(Variable):
     default_value = 0
 
     def formula(menage, period, parameters):
-        part_depenses_GPL = 0.0065
-        depenses_carburants_entree = menage('depenses_carburants_entree', period)
-        depense_gpl_carburant_ttc_entree = depenses_carburants_entree * part_depenses_GPL
-        return depense_gpl_carburant_ttc_entree
+        conso_moyenne_vp_diesel = parameters(period.start).conso_vp_moyenne.voitures_particulieres_diesel
+        conso_moyenne_vp_essence = parameters(period.start).conso_vp_moyenne.voitures_particulieres_essence
+        conso_moyenne_vp_gpl = parameters(period.start).conso_vp_moyenne.voitures_particulieres_gpl
+
+        parcours_moyenne_vp_diesel_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_diesel
+        parcours_moyenne_vp_essense_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_essence
+        parcours_moyenne_vp_gpl_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_gpl
+
+        conso_moyenne_du_parcours_moyen_vp_diesel = parcours_moyenne_vp_diesel_en_km * conso_moyenne_vp_diesel / 100
+        conso_moyenne_du_parcours_moyen_vp_essence = parcours_moyenne_vp_essense_en_km * conso_moyenne_vp_essence / 100
+        conso_moyenne_du_parcours_moyen_vp_gpl = parcours_moyenne_vp_gpl_en_km * conso_moyenne_vp_gpl / 100
+
+        nombre_vehicules_diesel = menage('veh_diesel', period)
+        nombre_vehicules_essence = menage('veh_essence', period)
+        nombre_vehicules_gpl = menage('veh_gpl', period)
+        nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence + nombre_vehicules_gpl
+
+        depenses_carburants = menage('depenses_carburants', period)
+
+        # to compute part_conso_diesel we need to avoid dividing by zero for those we do not have any vehicle
+        # Thus, we choose arbitrarily to divide it by 1, but this choice won't affect the result as long as it is not 0
+        denominateur = (
+            (nombre_vehicules_total != 0) * (nombre_vehicules_diesel * conso_moyenne_du_parcours_moyen_vp_diesel) + (nombre_vehicules_essence * conso_moyenne_du_parcours_moyen_vp_essence) + (nombre_vehicules_gpl * conso_moyenne_du_parcours_moyen_vp_gpl)
+            ) + (nombre_vehicules_total == 0) * 1
+
+        part_conso_gpl = (nombre_vehicules_gpl * conso_moyenne_du_parcours_moyen_vp_gpl) / denominateur
+
+        depenses_gpl = depenses_carburants * part_conso_gpl
+        return depenses_gpl
 
 
 class depense_carburant_total_ttc_sans_distinction_entree(Variable):
