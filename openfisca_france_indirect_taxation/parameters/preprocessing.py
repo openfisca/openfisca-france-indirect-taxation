@@ -132,10 +132,12 @@ def preprocess_legislation(parameters):
             complet_year = f'{year}-01-01'
             values[complet_year] = float(taille_parc_moyen[complet_year])
 
-        node_parc_moyen_vp_element = Parameter(data=dict(
-            description= 'nombre de' + element + 'en France métropolitaine',
-            values=values,
-            ))
+        node_parc_moyen_vp_element = Parameter(
+            element,
+            data=dict(
+                description= 'nombre de' + element + 'en France métropolitaine',
+                values=values,
+                ))
         node_parc_moyen_vp.add_child(element, node_parc_moyen_vp_element)
 
     # Ajout du parcours moyen des vehicules en circulation en France métropolitaine (INSEE)
@@ -163,10 +165,12 @@ def preprocess_legislation(parameters):
             complet_year = f'{year}-01-01'
             values[complet_year] = float(taille_parcours_moyen[complet_year])
 
-        node_parcours_moyen_vp_element = Parameter(data=dict(
-            description= 'parcours moyen de' + element + 'en France métropolitaine en km',
-            values=values,
-            ))
+        node_parcours_moyen_vp_element = Parameter(
+            element,
+            data=dict(
+                description= 'parcours moyen de' + element + 'en France métropolitaine en km',
+                values=values,
+                ))
         node_parcours_moyen_vp.add_child(element, node_parcours_moyen_vp_element)
 
     # Ajout de la consommation moyenne des carburants en France en l/100km
@@ -194,10 +198,12 @@ def preprocess_legislation(parameters):
             complet_year = f'{year}-01-01'
             values[complet_year] = float(conso_vp_moyenne[complet_year])
 
-        node_conso_moyen_vp_element = Parameter(data=dict(
-            description= 'Consommation moyenne de' + element + 'en France métropolitaine en l/100km',
-            values=values,
-            ))
+        node_conso_moyen_vp_element = Parameter(
+            element,
+            data=dict(
+                description= 'Consommation moyenne de' + element + 'en France métropolitaine en l/100km',
+                values=values,
+                ))
         node_conso_moyen_vp.add_child(element, node_conso_moyen_vp_element)
 
     # Add the number of vehicle in circulation to the tree
