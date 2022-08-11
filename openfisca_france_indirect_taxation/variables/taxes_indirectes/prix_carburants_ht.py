@@ -11,7 +11,7 @@ class prix_gazole_b7_ht_avant_remise(Variable):
     default_value = 0
 
     def formula_2022(menage, period, parameters):
-        prix_gazole_b7_ttc = menage('prix_gazole_b7_ttc', period)
+        prix_gazole_b7_hors_remise_ttc = menage('prix_gazole_b7_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         taux_conversion_gazoles = parameters(period).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_gazoles
 
@@ -44,12 +44,12 @@ class prix_gazole_b7_ht_avant_remise(Variable):
 
         accise_gazole_b7_total = accise_gazole_b7_hectolitre + majoration_regionale_ticpe_gazole_b7_hectolitre - (maximum_value_affectation - affectation_regionale_ticpe_gazole_b7_hectolitre) + ((code_region == '11') * major_mobilites_tipce_gazole_hectolitre)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_gazole_b7_hors_tva = prix_gazole_b7_ttc * (1 / (1 + taux_plein_tva))
+        prix_gazole_b7_hors_tva = prix_gazole_b7_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_gazole_b7_ht_avant_remise = prix_gazole_b7_hors_tva - (accise_gazole_b7_total / 100)
         return prix_gazole_b7_ht_avant_remise
 
     def formula_2017(menage, period, parameters):
-        prix_gazole_b7_ttc = menage('prix_gazole_b7_ttc', period)
+        prix_gazole_b7_hors_remise_ttc = menage('prix_gazole_b7_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         accise_gazole_b7 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.gazole
         majoration_ticpe_gazole_b7 = parameters(period).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_gazole
@@ -68,12 +68,12 @@ class prix_gazole_b7_ht_avant_remise(Variable):
         major_mobilites_tipce_gazole = parameters(period).imposition_indirecte.produits_energetiques.majoration_ile_de_france_mobilites_ticpe.major_mobilites_tipce_gazole
         accise_gazole_b7_total = accise_gazole_b7 + majoration_regionale_ticpe_gazole_b7 - (maximum_value_affectation - affectation_regionale_ticpe_gazole_b7) + ((code_region == '11') * major_mobilites_tipce_gazole)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_gazole_b7_hors_tva = prix_gazole_b7_ttc * (1 / (1 + taux_plein_tva))
+        prix_gazole_b7_hors_tva = prix_gazole_b7_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_gazole_b7_ht_avant_remise = prix_gazole_b7_hors_tva - (accise_gazole_b7_total / 100)
         return prix_gazole_b7_ht_avant_remise
 
     def formula(menage, period, parameters):
-        prix_gazole_b7_ttc = menage('prix_gazole_b7_ttc', period)
+        prix_gazole_b7_hors_remise_ttc = menage('prix_gazole_b7_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         accise_gazole_b7 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.gazole
         majoration_ticpe_gazole_b7 = parameters(period).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_gazole
@@ -91,7 +91,7 @@ class prix_gazole_b7_ht_avant_remise(Variable):
             dtype=np.float32)
         accise_gazole_b7_total = accise_gazole_b7 + majoration_regionale_ticpe_gazole_b7 - (maximum_value_affectation - affectation_regionale_ticpe_gazole_b7)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_gazole_b7_hors_tva = prix_gazole_b7_ttc * (1 / (1 + taux_plein_tva))
+        prix_gazole_b7_hors_tva = prix_gazole_b7_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_gazole_b7_ht_avant_remise = prix_gazole_b7_hors_tva - (accise_gazole_b7_total / 100)
         return prix_gazole_b7_ht_avant_remise
 
@@ -118,20 +118,20 @@ class prix_gazole_b10_ht_avant_remise(Variable):
     default_value = 0
 
     def formula_2022(menage, period, parameters):
-        prix_gazole_b10_ttc = menage('prix_gazole_b10_ttc', period)
+        prix_gazole_b10_hors_remise_ttc = menage('prix_gazole_b10_hors_remise_ttc', period)
         taux_conversion_gazoles = parameters(period).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_gazoles
         accise_gazole_b10_mwh = parameters(period).imposition_indirecte.produits_energetiques.accise_energie_metropole.gazoles
         accise_gazole_b10_hectolitre = accise_gazole_b10_mwh * taux_conversion_gazoles
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_gazole_b10_hors_tva = prix_gazole_b10_ttc * (1 / (1 + taux_plein_tva))
+        prix_gazole_b10_hors_tva = prix_gazole_b10_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_gazole_b10_ht_avant_remise = prix_gazole_b10_hors_tva - (accise_gazole_b10_hectolitre / 100)
         return prix_gazole_b10_ht_avant_remise
 
     def formula_2017(menage, period, parameters):
-        prix_gazole_b10_ttc = menage('prix_gazole_b10_ttc', period)
+        prix_gazole_b10_hors_remise_ttc = menage('prix_gazole_b10_hors_remise_ttc', period)
         accise_gazole_b10 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.gazol_b_10_hectolitre
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_gazole_b10_hors_tva = prix_gazole_b10_ttc * (1 / (1 + taux_plein_tva))
+        prix_gazole_b10_hors_tva = prix_gazole_b10_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_gazole_b10_ht_avant_remise = prix_gazole_b10_hors_tva - (accise_gazole_b10 / 100)
         return prix_gazole_b10_ht_avant_remise
 
@@ -158,7 +158,7 @@ class prix_essence_sp95_e10_ht_avant_remise(Variable):
     default_value = 0
 
     def formula_2022(menage, period, parameters):
-        prix_essence_sp95_e10_ttc = menage('prix_essence_sp95_e10_ttc', period)
+        prix_essence_sp95_e10_hors_remise_ttc = menage('prix_essence_sp95_e10_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         taux_conversion_essence_sp95_e10 = parameters(period).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_essence_sp95_e10
 
@@ -188,12 +188,12 @@ class prix_essence_sp95_e10_ht_avant_remise(Variable):
 
         accise_sp_e10_ticpe = accise_super_e10_hectolitre + majoration_ticpe_super_hectolitre - (maximum_value_affectation - affectation_regionale_ticpe_sp95_e10_hectolitre) + ((code_region == '11') * major_mobilites_tipce_sp95_e10_hectolitre) - ((code_region == '94') * refraction_corse_tipce_sp95_e10_hectolitre)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp95_e10_hors_tva = prix_essence_sp95_e10_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_sp95_e10_hors_tva = prix_essence_sp95_e10_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_sp95_e10_ht_avant_remise = prix_essence_sp95_e10_hors_tva - (accise_sp_e10_ticpe / 100)
         return prix_essence_sp95_e10_ht_avant_remise
 
     def formula_2019(menage, period, parameters):
-        prix_essence_sp95_e10_ttc = menage('prix_essence_sp95_e10_ttc', period)
+        prix_essence_sp95_e10_hors_remise_ttc = menage('prix_essence_sp95_e10_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         accise_super_e10 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.super_e10
         major_regionale_ticpe_super = parameters(period).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10
@@ -213,12 +213,12 @@ class prix_essence_sp95_e10_ht_avant_remise(Variable):
         refraction_corse_tipce_sp95_E10 = parameters(period).imposition_indirecte.produits_energetiques.refraction_corse_ticpe.refraction_corse_tipce_sp95_e10
         accise_sp_e10_ticpe = accise_super_e10 + majoration_ticpe_super - (maximum_value_affectation - affectation_regionale_ticpe_sp95_e10) + ((code_region == '11') * major_mobilites_tipce_sp95_e10) - ((code_region == '94') * refraction_corse_tipce_sp95_E10)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp95_e10_hors_tva = prix_essence_sp95_e10_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_sp95_e10_hors_tva = prix_essence_sp95_e10_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_sp95_e10_ht_avant_remise = prix_essence_sp95_e10_hors_tva - (accise_sp_e10_ticpe / 100)
         return prix_essence_sp95_e10_ht_avant_remise
 
     def formula_2017(menage, period, parameters):
-        prix_essence_sp95_e10_ttc = menage('prix_essence_sp95_e10_ttc', period)
+        prix_essence_sp95_e10_hors_remise_ttc = menage('prix_essence_sp95_e10_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         accise_super_e10 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.super_e10
         major_regionale_ticpe_super = parameters(period).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10
@@ -237,12 +237,12 @@ class prix_essence_sp95_e10_ht_avant_remise(Variable):
         major_mobilites_tipce_sp95_e10 = parameters(period).imposition_indirecte.produits_energetiques.majoration_ile_de_france_mobilites_ticpe.major_mobilites_tipce_sp95_e10
         accise_sp_e10_ticpe = accise_super_e10 + majoration_ticpe_super - (maximum_value_affectation - affectation_regionale_ticpe_sp95_e10) + ((code_region == '11') * major_mobilites_tipce_sp95_e10)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp95_e10_hors_tva = prix_essence_sp95_e10_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_sp95_e10_hors_tva = prix_essence_sp95_e10_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_sp95_e10_ht_avant_remise = prix_essence_sp95_e10_hors_tva - (accise_sp_e10_ticpe / 100)
         return prix_essence_sp95_e10_ht_avant_remise
 
     def formula_2009(menage, period, parameters):
-        prix_essence_sp95_e10_ttc = menage('prix_essence_sp95_e10_ttc', period)
+        prix_essence_sp95_e10_hors_remise_ttc = menage('prix_essence_sp95_e10_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         accise_super_e10 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.super_e10
         major_regionale_ticpe_super = parameters(period).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10
@@ -260,7 +260,7 @@ class prix_essence_sp95_e10_ht_avant_remise(Variable):
             dtype=np.float32)
         accise_sp_e10_ticpe = accise_super_e10 + majoration_ticpe_super - (maximum_value_affectation - affectation_regionale_ticpe_sp95_e10)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp95_e10_hors_tva = prix_essence_sp95_e10_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_sp95_e10_hors_tva = prix_essence_sp95_e10_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_sp95_e10_ht_avant_remise = prix_essence_sp95_e10_hors_tva - (accise_sp_e10_ticpe / 100)
         return prix_essence_sp95_e10_ht_avant_remise
 
@@ -275,8 +275,8 @@ class prix_essence_sp95_e10_ht(Variable):
     def formula(menage, period, parameters):
         prix_essence_sp95_e10_ht_avant_remise = menage('prix_essence_sp95_e10_ht_avant_remise', period)
         aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
-        prix_essence_sp95_e10_ttc = prix_essence_sp95_e10_ht_avant_remise - (aide_exeptionnelle_gazole_essence_hl / 100)
-        return prix_essence_sp95_e10_ttc
+        prix_essence_sp95_e10_hors_remise_ttc = prix_essence_sp95_e10_ht_avant_remise - (aide_exeptionnelle_gazole_essence_hl / 100)
+        return prix_essence_sp95_e10_hors_remise_ttc
 
 
 class prix_essence_sp95_ht_avant_remise(Variable):
@@ -287,7 +287,7 @@ class prix_essence_sp95_ht_avant_remise(Variable):
     default_value = 0
 
     def formula_2022(menage, period, parameters):
-        prix_essence_sp95_ttc = menage('prix_essence_sp95_ttc', period)
+        prix_essence_sp95_hors_remise_ttc = menage('prix_essence_sp95_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         taux_conversion_essences = parameters(period).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_essences
 
@@ -317,12 +317,12 @@ class prix_essence_sp95_ht_avant_remise(Variable):
 
         accise_sp_95_ticpe = accise_essences_hectolitre + majoration_ticpe_super_hectolitre - (maximum_value_affectation - affectation_regionale_ticpe_sp95_sp98_hectolitre) + ((code_region == '11') * major_mobilites_tipce_sp95_hectolitre) - ((code_region == '94') * refraction_corse_tipce_sp95_hectolitre)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp95_hors_tva = prix_essence_sp95_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_sp95_hors_tva = prix_essence_sp95_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_sp95_ht_avant_remise = prix_essence_sp95_hors_tva - (accise_sp_95_ticpe / 100)
         return prix_essence_sp95_ht_avant_remise
 
     def formula_2017(menage, period, parameters):
-        prix_essence_sp95_ttc = menage('prix_essence_sp95_ttc', period)
+        prix_essence_sp95_hors_remise_ttc = menage('prix_essence_sp95_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         accise_super95 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.super_95_98
         major_regionale_ticpe_super = parameters(period).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10
@@ -342,12 +342,12 @@ class prix_essence_sp95_ht_avant_remise(Variable):
         refraction_corse_tipce_sp95_sp98 = parameters(period).imposition_indirecte.produits_energetiques.refraction_corse_ticpe.refraction_corse_tipce_sp95_sp98
         accise_sp_95_ticpe = accise_super95 + majoration_ticpe_super - (maximum_value_affectation - affectation_regionale_ticpe_sp95_sp98) + ((code_region == '11') * major_mobilites_tipce_sp95_sp98) - ((code_region == '94') * refraction_corse_tipce_sp95_sp98)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp95_hors_tva = prix_essence_sp95_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_sp95_hors_tva = prix_essence_sp95_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_sp95_ht_avant_remise = prix_essence_sp95_hors_tva - (accise_sp_95_ticpe / 100)
         return prix_essence_sp95_ht_avant_remise
 
     def formula_2002(menage, period, parameters):
-        prix_essence_sp95_ttc = menage('prix_essence_sp95_ttc', period)
+        prix_essence_sp95_hors_remise_ttc = menage('prix_essence_sp95_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         accise_super95 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.super_95_98
         major_regionale_ticpe_super = parameters(period).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10
@@ -366,12 +366,12 @@ class prix_essence_sp95_ht_avant_remise(Variable):
         refraction_corse_tipce_sp95_sp98 = parameters(period).imposition_indirecte.produits_energetiques.refraction_corse_ticpe.refraction_corse_tipce_sp95_sp98
         accise_sp_95_ticpe = accise_super95 + majoration_ticpe_super - (maximum_value_affectation - affectation_regionale_ticpe_sp95_sp98) - ((code_region == '94') * refraction_corse_tipce_sp95_sp98)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp95_hors_tva = prix_essence_sp95_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_sp95_hors_tva = prix_essence_sp95_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_sp95_ht_avant_remise = prix_essence_sp95_hors_tva - (accise_sp_95_ticpe / 100)
         return prix_essence_sp95_ht_avant_remise
 
     def formula(menage, period, parameters):
-        prix_essence_sp95_ttc = menage('prix_essence_sp95_ttc', period)
+        prix_essence_sp95_hors_remise_ttc = menage('prix_essence_sp95_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         accise_super95 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.super_95_98
         major_regionale_ticpe_super = parameters(period).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10
@@ -389,7 +389,7 @@ class prix_essence_sp95_ht_avant_remise(Variable):
             dtype=np.float32)
         accise_sp_95_ticpe = accise_super95 + majoration_ticpe_super - (maximum_value_affectation - affectation_regionale_ticpe_sp95_sp98)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp95_hors_tva = prix_essence_sp95_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_sp95_hors_tva = prix_essence_sp95_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_sp95_ht_avant_remise = prix_essence_sp95_hors_tva - (accise_sp_95_ticpe / 100)
         return prix_essence_sp95_ht_avant_remise
 
@@ -404,8 +404,8 @@ class prix_essence_sp95_ht(Variable):
     def formula(menage, period, parameters):
         prix_essence_sp95_ht_avant_remise = menage('prix_essence_sp95_ht_avant_remise', period)
         aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
-        prix_essence_sp95_ttc = prix_essence_sp95_ht_avant_remise - (aide_exeptionnelle_gazole_essence_hl / 100)
-        return prix_essence_sp95_ttc
+        prix_essence_sp95_hors_remise_ttc = prix_essence_sp95_ht_avant_remise - (aide_exeptionnelle_gazole_essence_hl / 100)
+        return prix_essence_sp95_hors_remise_ttc
 
 
 class prix_essence_sp98_ht_avant_remise(Variable):
@@ -416,7 +416,7 @@ class prix_essence_sp98_ht_avant_remise(Variable):
     default_value = 0
 
     def formula_2022(menage, period, parameters):
-        prix_essence_sp98_ttc = menage('prix_essence_sp98_ttc', period)
+        prix_essence_sp98_hors_remise_ttc = menage('prix_essence_sp98_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         taux_conversion_essences = parameters(period).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_essences
 
@@ -446,12 +446,12 @@ class prix_essence_sp98_ht_avant_remise(Variable):
 
         accise_sp_98_ticpe = accise_essences_hectolitre + majoration_ticpe_super_hectolitre - (maximum_value_affectation - affectation_regionale_ticpe_sp95_sp98_hectolitre) + ((code_region == '11') * major_mobilites_tipce_sp98_hectolitre) - ((code_region == '94') * refraction_corse_tipce_sp98_hectolitre)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp98_hors_tva = prix_essence_sp98_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_sp98_hors_tva = prix_essence_sp98_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_sp98_ht_avant_remise = prix_essence_sp98_hors_tva - (accise_sp_98_ticpe / 100)
         return prix_essence_sp98_ht_avant_remise
 
     def formula_2017(menage, period, parameters):
-        prix_essence_sp98_ttc = menage('prix_essence_sp98_ttc', period)
+        prix_essence_sp98_hors_remise_ttc = menage('prix_essence_sp98_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         accise_super98 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.super_95_98
         major_regionale_ticpe_super = parameters(period).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10
@@ -471,12 +471,12 @@ class prix_essence_sp98_ht_avant_remise(Variable):
         refraction_corse_tipce_sp95_sp98 = parameters(period).imposition_indirecte.produits_energetiques.refraction_corse_ticpe.refraction_corse_tipce_sp95_sp98
         accise_sp_98_ticpe = accise_super98 + majoration_ticpe_super - (maximum_value_affectation - affectation_regionale_ticpe_sp95_sp98) + ((code_region == '11') * major_mobilites_tipce_sp95_sp98) - ((code_region == '94') * refraction_corse_tipce_sp95_sp98)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp98_hors_tva = prix_essence_sp98_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_sp98_hors_tva = prix_essence_sp98_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_sp98_ht_avant_remise = prix_essence_sp98_hors_tva - (accise_sp_98_ticpe / 100)
         return prix_essence_sp98_ht_avant_remise
 
     def formula_2002(menage, period, parameters):
-        prix_essence_sp98_ttc = menage('prix_essence_sp98_ttc', period)
+        prix_essence_sp98_hors_remise_ttc = menage('prix_essence_sp98_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         accise_super98 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.super_95_98
         major_regionale_ticpe_super = parameters(period).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10
@@ -495,12 +495,12 @@ class prix_essence_sp98_ht_avant_remise(Variable):
         refraction_corse_tipce_sp95_sp98 = parameters(period).imposition_indirecte.produits_energetiques.refraction_corse_ticpe.refraction_corse_tipce_sp95_sp98
         accise_sp_98_ticpe = accise_super98 + majoration_ticpe_super - (maximum_value_affectation - affectation_regionale_ticpe_sp95_sp98) - ((code_region == '94') * refraction_corse_tipce_sp95_sp98)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp98_hors_tva = prix_essence_sp98_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_sp98_hors_tva = prix_essence_sp98_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_sp98_ht_avant_remise = prix_essence_sp98_hors_tva - (accise_sp_98_ticpe / 100)
         return prix_essence_sp98_ht_avant_remise
 
     def formula(menage, period, parameters):
-        prix_essence_sp98_ttc = menage('prix_essence_sp98_ttc', period)
+        prix_essence_sp98_hors_remise_ttc = menage('prix_essence_sp98_hors_remise_ttc', period)
         code_region = menage('code_region', period)
         accise_super98 = parameters(period).imposition_indirecte.produits_energetiques.ticpe.super_95_98
         major_regionale_ticpe_super = parameters(period).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10
@@ -518,7 +518,7 @@ class prix_essence_sp98_ht_avant_remise(Variable):
             dtype=np.float32)
         accise_sp_98_ticpe = accise_super98 + majoration_ticpe_super - (maximum_value_affectation - affectation_regionale_ticpe_sp95_sp98)
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp98_hors_tva = prix_essence_sp98_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_sp98_hors_tva = prix_essence_sp98_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_sp98_ht_avant_remise = prix_essence_sp98_hors_tva - (accise_sp_98_ticpe / 100)
         return prix_essence_sp98_ht_avant_remise
 
@@ -533,8 +533,8 @@ class prix_essence_sp98_ht(Variable):
     def formula(menage, period, parameters):
         prix_essence_sp98_ht_avant_remise = menage('prix_essence_sp98_ht_avant_remise', period)
         aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
-        prix_essence_sp98_ttc = prix_essence_sp98_ht_avant_remise - (aide_exeptionnelle_gazole_essence_hl / 100)
-        return prix_essence_sp98_ttc
+        prix_essence_sp98_hors_remise_ttc = prix_essence_sp98_ht_avant_remise - (aide_exeptionnelle_gazole_essence_hl / 100)
+        return prix_essence_sp98_hors_remise_ttc
 
 
 class prix_essence_super_plombe_ht(Variable):
@@ -565,21 +565,21 @@ class prix_essence_e85_ht_avant_remise(Variable):
     default_value = 0
 
     def formula_2022(menage, period, parameters):
-        prix_essence_e85_ttc = menage('prix_essence_e85_ttc', period)
+        prix_essence_e85_hors_remise_ttc = menage('prix_essence_e85_hors_remise_ttc', period)
         accise_e85_mwh = parameters(period.start).imposition_indirecte.produits_energetiques.accise_energie_metropole.superethanol_e85
         taux_conversion_superethanol_e85 = parameters(period.start).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_superethanol_e85
         accise_e85_hectolitre = accise_e85_mwh * taux_conversion_superethanol_e85
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_e85_hors_tva = prix_essence_e85_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_e85_hors_tva = prix_essence_e85_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_e85_ht_avant_remise = prix_essence_e85_hors_tva - (accise_e85_hectolitre / 100)
         return prix_essence_e85_ht_avant_remise
 
     def formula_2007(menage, period, parameters):
-        prix_essence_e85_ttc = menage('prix_essence_e85_ttc', period)
+        prix_essence_e85_hors_remise_ttc = menage('prix_essence_e85_hors_remise_ttc', period)
         accise_e85 = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.super_e_85_utilise_comme_carburant_hectolitre
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
 
-        prix_essence_e85_hors_tva = prix_essence_e85_ttc * (1 / (1 + taux_plein_tva))
+        prix_essence_e85_hors_tva = prix_essence_e85_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_essence_e85_ht_avant_remise = prix_essence_e85_hors_tva - (accise_e85 / 100)
         return prix_essence_e85_ht_avant_remise
 
@@ -606,21 +606,23 @@ class prix_gpl_carburant_ht_avant_remise(Variable):
     default_value = 0
 
     def formula_2022(menage, period, parameters):
-        prix_gpl_carburant_ttc = menage('prix_gpl_carburant_ttc', period)
+        prix_gpl_carburant_hors_remise_ttc = menage('prix_gpl_carburant_hors_remise_ttc', period)
         accise_gpl_carburant_mwh = parameters(period.start).imposition_indirecte.produits_energetiques.accise_energie_metropole.gpl_carburant
         taux_conversion_gpl_carburant = parameters(period.start).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_gpl_carburant
         accise_gpl_carburant_hectolitre = accise_gpl_carburant_mwh * taux_conversion_gpl_carburant
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_gpl_carburant_hors_tva = prix_gpl_carburant_ttc * (1 / (1 + taux_plein_tva))
+        prix_gpl_carburant_hors_tva = prix_gpl_carburant_hors_remise_ttc * (1 / (1 + taux_plein_tva))
         prix_gpl_carburant_ht_avant_remise = prix_gpl_carburant_hors_tva - (accise_gpl_carburant_hectolitre / 100)
         return prix_gpl_carburant_ht_avant_remise
 
     def formula(menage, period, parameters):
-        prix_gpl_carburant_ttc = menage('prix_gpl_carburant_ttc', period)
+        prix_gpl_carburant_hors_remise_ttc = menage('prix_gpl_carburant_hors_remise_ttc', period)
         accise_combustibles_liquides = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.autres_gaz_petrole_liquefies_utilises_comme_carburants_autres_100kg
+        coefficient_conversion_kg_vers_litre = (1 / 0.525)
+        accise_combustibles_liquides_euro_par_hectolitre = accise_combustibles_liquides * coefficient_conversion_kg_vers_litre
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_gpl_carburant_hors_tva = prix_gpl_carburant_ttc * (1 / (1 + taux_plein_tva))
-        prix_gpl_carburant_ht_avant_remise = prix_gpl_carburant_hors_tva - (accise_combustibles_liquides / 100)
+        prix_gpl_carburant_hors_tva = prix_gpl_carburant_hors_remise_ttc * (1 / (1 + taux_plein_tva))
+        prix_gpl_carburant_ht_avant_remise = prix_gpl_carburant_hors_tva - (accise_combustibles_liquides_euro_par_hectolitre / 100)
         return prix_gpl_carburant_ht_avant_remise
 
 

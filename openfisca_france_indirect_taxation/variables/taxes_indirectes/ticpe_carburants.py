@@ -554,9 +554,9 @@ class gpl_carburant_ticpe(Variable):
 
     def formula(menage, period, parameters):
         accise_combustibles_liquides = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.autres_gaz_petrole_liquefies_utilises_comme_carburants_autres_100kg
+        coefficient_conversion_kg_vers_litre = (1 / 0.525)
         nombre_litres_gpl_carburant = menage('nombre_litres_gpl_carburant', period)
-        combustibles_liquides_ticpe = nombre_litres_gpl_carburant * (accise_combustibles_liquides / 100)
-
+        combustibles_liquides_ticpe = nombre_litres_gpl_carburant * (accise_combustibles_liquides / 100) * coefficient_conversion_kg_vers_litre
         return combustibles_liquides_ticpe
 
 
