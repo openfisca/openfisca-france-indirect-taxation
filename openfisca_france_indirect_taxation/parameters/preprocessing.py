@@ -3,7 +3,7 @@
 import os
 import pandas as pd
 
-from openfisca_france_indirect_taxation.variables.base import ParameterNode
+from openfisca_france_indirect_taxation.variables.base import Parameter, ParameterNode
 from openfisca_france_indirect_taxation.utils import assets_directory
 
 
@@ -132,7 +132,7 @@ def preprocess_legislation(parameters):
             complet_year = f'{year}-01-01'
             values[complet_year] = float(taille_parc_moyen[complet_year])
 
-        node_parc_moyen_vp_element = ParameterNode(data=dict(
+        node_parc_moyen_vp_element = Parameter(data=dict(
             description= 'nombre de' + element + 'en France métropolitaine',
             values=values,
             ))
@@ -163,7 +163,7 @@ def preprocess_legislation(parameters):
             complet_year = f'{year}-01-01'
             values[complet_year] = float(taille_parcours_moyen[complet_year])
 
-        node_parcours_moyen_vp_element = ParameterNode(data=dict(
+        node_parcours_moyen_vp_element = Parameter(data=dict(
             description= 'parcours moyen de' + element + 'en France métropolitaine en km',
             values=values,
             ))
@@ -194,7 +194,7 @@ def preprocess_legislation(parameters):
             complet_year = f'{year}-01-01'
             values[complet_year] = float(conso_vp_moyenne[complet_year])
 
-        node_conso_moyen_vp_element = ParameterNode(data=dict(
+        node_conso_moyen_vp_element = Parameter(data=dict(
             description= 'Consommation moyenne de' + element + 'en France métropolitaine en l/100km',
             values=values,
             ))
