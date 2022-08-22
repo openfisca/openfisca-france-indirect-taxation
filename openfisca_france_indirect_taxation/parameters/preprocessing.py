@@ -183,12 +183,12 @@ def preprocess_legislation(parameters):
         )
 
     consommation_moyenne_carburant_france = consommation_moyenne_carburant_france.set_index('annee')
-    node_conso_moyen_vp = ParameterNode(
-        'conso_moyen_vp',
+    node_conso_vp_moyenne = ParameterNode(
+        'conso_vp_moyenne',
         data=dict(
             description='Taille moyenne du parc automobile en France métropolitaine en milliers de véhicules en l/100km',
             ))
-    parameters.add_child('conso_moyen_vp', node_conso_moyen_vp)
+    parameters.add_child('conso_vp_moyenne', node_conso_vp_moyenne)
 
     for element in ['voitures_particulieres_diesel', 'voitures_particulieres_essence', 'voitures_particulieres_gpl']:
         conso_vp_moyenne = consommation_moyenne_carburant_france[element]
@@ -198,13 +198,13 @@ def preprocess_legislation(parameters):
             complet_year = f'{year}-01-01'
             values[complet_year] = float(conso_vp_moyenne[complet_year])
 
-        node_conso_moyen_vp_element = Parameter(
+        node_conso_vp_moyenne_element = Parameter(
             element,
             data=dict(
                 description= 'Consommation moyenne de' + element + 'en France métropolitaine en l/100km',
                 values=values,
                 ))
-        node_conso_moyen_vp.add_child(element, node_conso_moyen_vp_element)
+        node_conso_vp_moyenne.add_child(element, node_conso_vp_moyenne_element)
 
     # Add the number of vehicle in circulation to the tree
     # parc_annuel_moyen_vp = pd.read_csv(
