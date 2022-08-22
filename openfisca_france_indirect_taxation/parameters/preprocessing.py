@@ -150,12 +150,12 @@ def preprocess_legislation(parameters):
         )
 
     parcours_moyen_vehicule_france = parcours_moyen_vehicule_france.set_index('annee')
-    node_parcours_moyen_vp = ParameterNode(
-        'parcours_moyen_vp',
+    node_taille_parcours_moyen = ParameterNode(
+        'taille_parcours_moyen',
         data=dict(
             description='Parcours moyen des vehicules en circulation en France métropolitaine en km',
             ))
-    parameters.add_child('parcours_moyen_vp', node_parcours_moyen_vp)
+    parameters.add_child('taille_parcours_moyen', node_taille_parcours_moyen)
 
     for element in ['voitures_particulieres_diesel', 'voitures_particulieres_essence', 'voitures_particulieres_gpl', 'voitures_particulieres_electrique']:
         taille_parcours_moyen = parcours_moyen_vehicule_france[element]
@@ -165,13 +165,13 @@ def preprocess_legislation(parameters):
             complet_year = f'{year}-01-01'
             values[complet_year] = float(taille_parcours_moyen[complet_year])
 
-        node_parcours_moyen_vp_element = Parameter(
+        node_taille_parcours_moyen_element = Parameter(
             element,
             data=dict(
                 description= 'parcours moyen de' + element + 'en France métropolitaine en km',
                 values=values,
                 ))
-        node_parcours_moyen_vp.add_child(element, node_parcours_moyen_vp_element)
+        node_taille_parcours_moyen.add_child(element, node_taille_parcours_moyen_element)
 
     # Ajout de la consommation moyenne des carburants en France en l/100km
     consommation_moyenne_carburant_france = pd.read_csv(
