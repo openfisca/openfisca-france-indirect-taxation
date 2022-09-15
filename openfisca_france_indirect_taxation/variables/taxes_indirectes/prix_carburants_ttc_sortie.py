@@ -6,7 +6,7 @@ import numpy as np
 class prix_gazole_b7_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = 'prix du gazole B7 ttc par litre'
+    label = 'prix du gazole B7 ttc par litre à la pompe'
     definition_period = YEAR
     default_value = 0
 
@@ -99,10 +99,25 @@ class prix_gazole_b7_ttc_sortie(Variable):
         return prix_gazole_b7_ttc
 
 
+class prix_gazole_b7_hors_remise_ttc_sortie(Variable):
+    value_type = float
+    entity = Menage
+    label = "prix du gazole B7 ttc par litre si la remise n'avais pas eu lieu"
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period, parameters):
+        prix_gazole_b7_ttc = menage('prix_gazole_b7_ttc_sortie', period)
+        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
+        taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
+        prix_gazole_b7_hors_remise_ttc = prix_gazole_b7_ttc + (aide_exeptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
+        return prix_gazole_b7_hors_remise_ttc
+
+
 class prix_gazole_b10_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = 'prix du gazole B10 ttc par litre'
+    label = 'prix du gazole B10 ttc par litre à la pompe'
     definition_period = YEAR
     default_value = 0
 
@@ -125,10 +140,25 @@ class prix_gazole_b10_ttc_sortie(Variable):
         return prix_gazole_b10_ttc_sortie
 
 
+class prix_gazole_b10_hors_remise_ttc_sortie(Variable):
+    value_type = float
+    entity = Menage
+    label = "prix du gazole B10 ttc par litre si la remise n'avais pas eu lieu"
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period, parameters):
+        prix_gazole_b10_ttc = menage('prix_gazole_b10_ttc_sortie', period)
+        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
+        taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
+        prix_gazole_b10_hors_remise_ttc = prix_gazole_b10_ttc + (aide_exeptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
+        return prix_gazole_b10_hors_remise_ttc
+
+
 class prix_essence_sp95_e10_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence SP95 E10 ttc par litre"
+    label = "prix de l'essence SP95 E10 ttc par litre à la pompe"
     definition_period = YEAR
     default_value = 0
 
@@ -240,10 +270,25 @@ class prix_essence_sp95_e10_ttc_sortie(Variable):
         return prix_essence_sp95_e10_ttc_sortie
 
 
+class prix_essence_sp95_e10_hors_remise_ttc_sortie(Variable):
+    value_type = float
+    entity = Menage
+    label = "prix de l'escence sp95 e10 ttc par litre si la remise n'avait pas eu lieu"
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period, parameters):
+        prix_essence_sp95_e10_ttc = menage('prix_essence_sp95_e10_ttc_sortie', period)
+        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
+        taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
+        prix_essence_sp95_e10_ttc = prix_essence_sp95_e10_ttc + (aide_exeptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
+        return prix_essence_sp95_e10_ttc
+
+
 class prix_essence_sp95_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence SP95 ttc par litre"
+    label = "prix de l'essence SP95 ttc par litre à la pompe"
     definition_period = YEAR
     default_value = 0
 
@@ -355,10 +400,25 @@ class prix_essence_sp95_ttc_sortie(Variable):
         return prix_essence_sp95_ttc_sortie
 
 
+class prix_essence_sp95_hors_remise_ttc_sortie(Variable):
+    value_type = float
+    entity = Menage
+    label = "prix de l'escence sp95 ttc par litre si la remise n'avait pas eu lieu"
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period, parameters):
+        prix_essence_sp95_ttc = menage('prix_essence_sp95_ttc_sortie', period)
+        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
+        taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
+        prix_essence_sp95_ttc = prix_essence_sp95_ttc + (aide_exeptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
+        return prix_essence_sp95_ttc
+
+
 class prix_essence_sp98_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence SP98 ttc par litre"
+    label = "prix de l'essence SP98 ttc par litre à la pompe"
     definition_period = YEAR
     default_value = 0
 
@@ -470,10 +530,25 @@ class prix_essence_sp98_ttc_sortie(Variable):
         return prix_essence_sp98_ttc_sortie
 
 
+class prix_essence_sp98_hors_remise_ttc_sortie(Variable):
+    value_type = float
+    entity = Menage
+    label = "prix de l'escence sp98 ttc par litre si la remise n'avait pas eu lieu"
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period, parameters):
+        prix_essence_sp98_ttc = menage('prix_essence_sp98_ttc_sortie', period)
+        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
+        taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
+        prix_essence_sp98_ttc = prix_essence_sp98_ttc + (aide_exeptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
+        return prix_essence_sp98_ttc
+
+
 class prix_essence_super_plombe_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence super plombé ttc par litre"
+    label = "prix de l'essence super plombé ttc par litre à la pompe"
     definition_period = YEAR
     default_value = 0
     end = "2017-01-01"
@@ -493,7 +568,7 @@ class prix_essence_super_plombe_ttc_sortie(Variable):
 class prix_essence_e85_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence e85 ttc par litre"
+    label = "prix de l'essence e85 ttc par litre à la pompe"
     definition_period = YEAR
     default_value = 0
 
@@ -517,10 +592,25 @@ class prix_essence_e85_ttc_sortie(Variable):
         return prix_essence_e85_ttc_sortie
 
 
+class prix_essence_e85_hors_remise_ttc_sortie(Variable):
+    value_type = float
+    entity = Menage
+    label = "prix de l'escence e85 ttc par litre si la remise n'avait pas eu lieu"
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period, parameters):
+        prix_essence_e85_ttc = menage('prix_essence_e85_ttc_sortie', period)
+        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
+        taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
+        prix_essence_e85_hors_remise_ttc = prix_essence_e85_ttc + (aide_exeptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
+        return prix_essence_e85_hors_remise_ttc
+
+
 class prix_gpl_carburant_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = 'prix du gaz de pétrole liquéfié - carburant  par litre'
+    label = 'prix du gaz de pétrole liquéfié - carburant  par litre à la pompe'
     definition_period = YEAR
     default_value = 0
 
@@ -541,3 +631,18 @@ class prix_gpl_carburant_ttc_sortie(Variable):
         prix_gpl_carburant_hors_tva = prix_gpl_carburant_ht + (accise_gpl_carburant_hectolitre / 100)
         prix_gpl_carburant_ttc_sortie = prix_gpl_carburant_hors_tva * (1 + taux_plein_tva)
         return prix_gpl_carburant_ttc_sortie
+
+
+class prix_gpl_carburant_hors_remise_ttc_sortie(Variable):
+    value_type = float
+    entity = Menage
+    label = "prix du gpl ttc par litre si la remise n'avait pas eu lieu"
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period, parameters):
+        prix_gpl_carburant_ttc = menage('prix_gpl_carburant_ttc_sortie', period)
+        aide_exeptionnelle_gpl_carburant_100kg = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gpl_carburant_100kg
+        taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
+        prix_gpl_carburant_hors_remise_ttc = prix_gpl_carburant_ttc + (aide_exeptionnelle_gpl_carburant_100kg / 100) * (1 + taux_plein_tva)
+        return prix_gpl_carburant_hors_remise_ttc
