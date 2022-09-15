@@ -141,7 +141,7 @@ class depense_gazole_total_ttc_entree(Variable):
         nombre_vehicules_gpl = menage('veh_gpl', period)
         nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence + nombre_vehicules_gpl
 
-        depenses_carburants = menage('depenses_carburants', period)
+        depenses_carburants = menage('depenses_carburants_entree', period)
 
         # to compute part_conso_diesel we need to avoid dividing by zero for those we do not have any vehicle
         # Thus, we choose arbitrarily to divide it by 1, but this choice won't affect the result as long as it is not 0
@@ -180,7 +180,7 @@ class depense_essence_total_ttc_entree(Variable):
         nombre_vehicules_gpl = menage('veh_gpl', period)
         nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence + nombre_vehicules_gpl
 
-        depenses_carburants = menage('depenses_carburants', period)
+        depenses_carburants = menage('depenses_carburants_entree', period)
 
         # to compute part_conso_diesel we need to avoid dividing by zero for those we do not have any vehicle
         # Thus, we choose arbitrarily to divide it by 1, but this choice won't affect the result as long as it is not 0
@@ -221,7 +221,7 @@ class depense_gpl_carburant_ttc_entree(Variable):
         nombre_vehicules_gpl = menage('veh_gpl', period)
         nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence + nombre_vehicules_gpl
 
-        depenses_carburants = menage('depenses_carburants', period)
+        depenses_carburants = menage('depenses_carburants_entree', period)
 
         # to compute part_conso_diesel we need to avoid dividing by zero for those we do not have any vehicle
         # Thus, we choose arbitrarily to divide it by 1, but this choice won't affect the result as long as it is not 0
