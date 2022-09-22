@@ -105,8 +105,8 @@ class prix_gazole_b7_ht(Variable):
 
     def formula(menage, period, parameters):
         prix_gazole_b7_ht_avant_remise = menage('prix_gazole_b7_ht_avant_remise', period)
-        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
-        prix_gazole_b7_ht = prix_gazole_b7_ht_avant_remise - (aide_exeptionnelle_gazole_essence_hl / 100)
+        aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
+        prix_gazole_b7_ht = prix_gazole_b7_ht_avant_remise - (aide_exceptionnelle_gazole_essence_hl / 100)
         return prix_gazole_b7_ht
 
 
@@ -145,8 +145,8 @@ class prix_gazole_b10_ht(Variable):
 
     def formula(menage, period, parameters):
         prix_gazole_b10_ht_avant_remise = menage('prix_gazole_b10_ht_avant_remise', period)
-        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
-        prix_gazole_b10_ht = prix_gazole_b10_ht_avant_remise - (aide_exeptionnelle_gazole_essence_hl / 100)
+        aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
+        prix_gazole_b10_ht = prix_gazole_b10_ht_avant_remise - (aide_exceptionnelle_gazole_essence_hl / 100)
         return prix_gazole_b10_ht
 
 
@@ -274,8 +274,8 @@ class prix_essence_sp95_e10_ht(Variable):
 
     def formula(menage, period, parameters):
         prix_essence_sp95_e10_ht_avant_remise = menage('prix_essence_sp95_e10_ht_avant_remise', period)
-        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
-        prix_essence_sp95_e10_hors_remise_ttc = prix_essence_sp95_e10_ht_avant_remise - (aide_exeptionnelle_gazole_essence_hl / 100)
+        aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
+        prix_essence_sp95_e10_hors_remise_ttc = prix_essence_sp95_e10_ht_avant_remise - (aide_exceptionnelle_gazole_essence_hl / 100)
         return prix_essence_sp95_e10_hors_remise_ttc
 
 
@@ -403,8 +403,8 @@ class prix_essence_sp95_ht(Variable):
 
     def formula(menage, period, parameters):
         prix_essence_sp95_ht_avant_remise = menage('prix_essence_sp95_ht_avant_remise', period)
-        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
-        prix_essence_sp95_hors_remise_ttc = prix_essence_sp95_ht_avant_remise - (aide_exeptionnelle_gazole_essence_hl / 100)
+        aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
+        prix_essence_sp95_hors_remise_ttc = prix_essence_sp95_ht_avant_remise - (aide_exceptionnelle_gazole_essence_hl / 100)
         return prix_essence_sp95_hors_remise_ttc
 
 
@@ -532,8 +532,8 @@ class prix_essence_sp98_ht(Variable):
 
     def formula(menage, period, parameters):
         prix_essence_sp98_ht_avant_remise = menage('prix_essence_sp98_ht_avant_remise', period)
-        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
-        prix_essence_sp98_hors_remise_ttc = prix_essence_sp98_ht_avant_remise - (aide_exeptionnelle_gazole_essence_hl / 100)
+        aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
+        prix_essence_sp98_hors_remise_ttc = prix_essence_sp98_ht_avant_remise - (aide_exceptionnelle_gazole_essence_hl / 100)
         return prix_essence_sp98_hors_remise_ttc
 
 
@@ -593,8 +593,8 @@ class prix_essence_e85_ht(Variable):
 
     def formula(menage, period, parameters):
         prix_essence_e85_ht_avant_remise = menage('prix_essence_e85_ht_avant_remise', period)
-        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
-        prix_essence_e85_ht = prix_essence_e85_ht_avant_remise - (aide_exeptionnelle_gazole_essence_hl / 100)
+        aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
+        prix_essence_e85_ht = prix_essence_e85_ht_avant_remise - (aide_exceptionnelle_gazole_essence_hl / 100)
         return prix_essence_e85_ht
 
 
@@ -635,6 +635,6 @@ class prix_gpl_carburant_ht(Variable):
 
     def formula(menage, period, parameters):
         prix_gpl_carburant_ht_avant_remise = menage('prix_gpl_carburant_ht_avant_remise', period)
-        aide_exeptionnelle_gpl_carburant_100kg = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gpl_carburant_100kg
-        prix_gpl_carburant_ht = prix_gpl_carburant_ht_avant_remise - (aide_exeptionnelle_gpl_carburant_100kg / 100)
+        aide_exceptionnelle_gpl_carburant_100kg = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gpl_carburant_100kg
+        prix_gpl_carburant_ht = prix_gpl_carburant_ht_avant_remise - (aide_exceptionnelle_gpl_carburant_100kg / 100)
         return prix_gpl_carburant_ht

@@ -32,9 +32,9 @@ class prix_gazole_b7_hors_remise_ttc(Variable):
 
     def formula(menage, period, parameters):
         prix_gazole_b7_ttc = menage('prix_gazole_b7_ttc', period)
-        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
+        aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_gazole_b7_hors_remise_ttc = prix_gazole_b7_ttc + (aide_exeptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
+        prix_gazole_b7_hors_remise_ttc = prix_gazole_b7_ttc + (aide_exceptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
         return prix_gazole_b7_hors_remise_ttc
 
 
@@ -65,9 +65,9 @@ class prix_gazole_b10_hors_remise_ttc(Variable):
 
     def formula(menage, period, parameters):
         prix_gazole_b10_ttc = menage('prix_gazole_b10_ttc', period)
-        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
+        aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_gazole_b10_hors_remise_ttc = prix_gazole_b10_ttc + (aide_exeptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
+        prix_gazole_b10_hors_remise_ttc = prix_gazole_b10_ttc + (aide_exceptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
         return prix_gazole_b10_hors_remise_ttc
 
 
@@ -98,9 +98,9 @@ class prix_essence_sp95_e10_hors_remise_ttc(Variable):
 
     def formula(menage, period, parameters):
         prix_essence_sp95_e10_ttc = menage('prix_essence_sp95_e10_ttc', period)
-        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
+        aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp95_e10_ttc = prix_essence_sp95_e10_ttc + (aide_exeptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
+        prix_essence_sp95_e10_ttc = prix_essence_sp95_e10_ttc + (aide_exceptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
         return prix_essence_sp95_e10_ttc
 
 
@@ -131,9 +131,9 @@ class prix_essence_sp95_hors_remise_ttc(Variable):
 
     def formula(menage, period, parameters):
         prix_essence_sp95_ttc = menage('prix_essence_sp95_ttc', period)
-        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
+        aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp95_ttc = prix_essence_sp95_ttc + (aide_exeptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
+        prix_essence_sp95_ttc = prix_essence_sp95_ttc + (aide_exceptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
         return prix_essence_sp95_ttc
 
 
@@ -164,9 +164,9 @@ class prix_essence_sp98_hors_remise_ttc(Variable):
 
     def formula(menage, period, parameters):
         prix_essence_sp98_ttc = menage('prix_essence_sp98_ttc', period)
-        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
+        aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_sp98_ttc = prix_essence_sp98_ttc + (aide_exeptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
+        prix_essence_sp98_ttc = prix_essence_sp98_ttc + (aide_exceptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
         return prix_essence_sp98_ttc
 
 
@@ -211,9 +211,9 @@ class prix_essence_e85_hors_remise_ttc(Variable):
 
     def formula(menage, period, parameters):
         prix_essence_e85_ttc = menage('prix_essence_e85_ttc', period)
-        aide_exeptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gazole_essence_hl
+        aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_essence_e85_hors_remise_ttc = prix_essence_e85_ttc + (aide_exeptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
+        prix_essence_e85_hors_remise_ttc = prix_essence_e85_ttc + (aide_exceptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
         return prix_essence_e85_hors_remise_ttc
 
 
@@ -244,7 +244,7 @@ class prix_gpl_carburant_hors_remise_ttc(Variable):
 
     def formula(menage, period, parameters):
         prix_gpl_carburant_ttc = menage('prix_gpl_carburant_ttc', period)
-        aide_exeptionnelle_gpl_carburant_100kg = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exeptionnelle_carburant.gpl_carburant_100kg
+        aide_exceptionnelle_gpl_carburant_100kg = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gpl_carburant_100kg
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
-        prix_gpl_carburant_hors_remise_ttc = prix_gpl_carburant_ttc + (aide_exeptionnelle_gpl_carburant_100kg / 100) * (1 + taux_plein_tva)
+        prix_gpl_carburant_hors_remise_ttc = prix_gpl_carburant_ttc + (aide_exceptionnelle_gpl_carburant_100kg / 100) * (1 + taux_plein_tva)
         return prix_gpl_carburant_hors_remise_ttc
