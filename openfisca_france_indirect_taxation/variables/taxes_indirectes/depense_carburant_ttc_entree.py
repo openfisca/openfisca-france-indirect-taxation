@@ -37,7 +37,7 @@ class depense_gazole_b10_ttc_entree(Variable):  # Il n'y a pour le moment pas as
 class depense_essence_sp95_e10_ttc_entree(Variable):
     value_type = float
     entity = Menage
-    label = "depense de l'escence sp95 e10 ttc"
+    label = "Dépense en essence sp95 e10 ttc"
     definition_period = YEAR
     default_value = 0
 
@@ -51,7 +51,7 @@ class depense_essence_sp95_e10_ttc_entree(Variable):
 class depense_essence_sp95_ttc_entree(Variable):
     value_type = float
     entity = Menage
-    label = "depense de l'escence sp95 ttc"
+    label = "Dépense en essence sp95 ttc"
     definition_period = YEAR
     default_value = 0
 
@@ -65,7 +65,7 @@ class depense_essence_sp95_ttc_entree(Variable):
 class depense_essence_sp98_ttc_entree(Variable):
     value_type = float
     entity = Menage
-    label = "depense de l'escence sp98 ttc"
+    label = "Dépense en essence sp98 ttc"
     definition_period = YEAR
     default_value = 0
 
