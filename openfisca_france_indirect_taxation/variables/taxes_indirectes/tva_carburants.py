@@ -116,7 +116,7 @@ class tva_sur_gazole_total(Variable):
 # montant TVA sur different type d'essence:
 
 
-# mantant TVA sur essence sp95 e10
+# montant TVA sur essence SP95 E10
 
 
 class tva_sur_ht_essence_sp95_e10(Variable):
@@ -161,7 +161,7 @@ class tva_sur_essence_sp95_e10(Variable):
         return tva
 
 
-# mantant TVA sur essence sp95
+# montant TVA sur essence SP95
 
 class tva_sur_ht_essence_sp95(Variable):
     value_type = float
@@ -205,7 +205,7 @@ class tva_sur_essence_sp95(Variable):
         return tva
 
 
-# mantant TVA sur essence sp98:
+# montant TVA sur essence SP98:
 
 
 class tva_sur_ht_essence_sp98(Variable):
@@ -250,7 +250,7 @@ class tva_sur_essence_sp98(Variable):
         return tva
 
 
-# mantant TVA sur essence super plombé:
+# montant TVA sur essence super plombé:
 
 
 class tva_sur_ht_essence_super_plombe(Variable):
@@ -298,7 +298,7 @@ class tva_sur_essence_super_plombe(Variable):
         return tva
 
 
-# mantant TVA sur essence e85:
+# montant TVA sur essence E85:
 
 class tva_sur_ht_essence_e85(Variable):
     value_type = float

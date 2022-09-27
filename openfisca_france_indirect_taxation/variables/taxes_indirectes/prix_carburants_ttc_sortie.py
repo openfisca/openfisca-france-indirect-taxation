@@ -6,7 +6,7 @@ import numpy as np
 class prix_gazole_b7_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = 'prix du gazole B7 ttc par litre à la pompe'
+    label = 'prix du gazole B7 TTC par litre à la pompe'
     definition_period = YEAR
     default_value = 0
 
@@ -102,7 +102,7 @@ class prix_gazole_b7_ttc_sortie(Variable):
 class prix_gazole_b7_hors_remise_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix du gazole B7 ttc par litre si la remise n'avais pas eu lieu"
+    label = "prix du gazole B7 TTC par litre si la remise n'avait pas eu lieu"
     definition_period = YEAR
     default_value = 0
 
@@ -117,7 +117,7 @@ class prix_gazole_b7_hors_remise_ttc_sortie(Variable):
 class prix_gazole_b10_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = 'prix du gazole B10 ttc par litre à la pompe'
+    label = 'prix du gazole B10 TTC par litre à la pompe'
     definition_period = YEAR
     default_value = 0
 
@@ -143,7 +143,7 @@ class prix_gazole_b10_ttc_sortie(Variable):
 class prix_gazole_b10_hors_remise_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix du gazole B10 ttc par litre si la remise n'avais pas eu lieu"
+    label = "prix du gazole B10 TTC par litre si la remise n'avait pas eu lieu"
     definition_period = YEAR
     default_value = 0
 
@@ -158,7 +158,7 @@ class prix_gazole_b10_hors_remise_ttc_sortie(Variable):
 class prix_essence_sp95_e10_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence SP95 E10 ttc par litre à la pompe"
+    label = "prix de l'essence SP95 E10 TTC par litre à la pompe"
     definition_period = YEAR
     default_value = 0
 
@@ -273,7 +273,7 @@ class prix_essence_sp95_e10_ttc_sortie(Variable):
 class prix_essence_sp95_e10_hors_remise_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence sp95 e10 ttc par litre si la remise n'avait pas eu lieu"
+    label = "prix de l'essence SP95 E10 TTC par litre si la remise n'avait pas eu lieu"
     definition_period = YEAR
     default_value = 0
 
@@ -288,7 +288,7 @@ class prix_essence_sp95_e10_hors_remise_ttc_sortie(Variable):
 class prix_essence_sp95_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence SP95 ttc par litre à la pompe"
+    label = "prix de l'essence SP95 TTC par litre à la pompe"
     definition_period = YEAR
     default_value = 0
 
@@ -403,7 +403,7 @@ class prix_essence_sp95_ttc_sortie(Variable):
 class prix_essence_sp95_hors_remise_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence sp95 ttc par litre si la remise n'avait pas eu lieu"
+    label = "prix de l'essence SP95 TTC par litre si la remise n'avait pas eu lieu"
     definition_period = YEAR
     default_value = 0
 
@@ -418,7 +418,7 @@ class prix_essence_sp95_hors_remise_ttc_sortie(Variable):
 class prix_essence_sp98_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence SP98 ttc par litre à la pompe"
+    label = "prix de l'essence SP98 TTC par litre à la pompe"
     definition_period = YEAR
     default_value = 0
 
@@ -533,7 +533,7 @@ class prix_essence_sp98_ttc_sortie(Variable):
 class prix_essence_sp98_hors_remise_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence sp98 ttc par litre si la remise n'avait pas eu lieu"
+    label = "prix de l'essence SP98 TTC par litre si la remise n'avait pas eu lieu"
     definition_period = YEAR
     default_value = 0
 
@@ -548,7 +548,7 @@ class prix_essence_sp98_hors_remise_ttc_sortie(Variable):
 class prix_essence_super_plombe_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence super plombé ttc par litre à la pompe"
+    label = "prix de l'essence super plombé TTC par litre à la pompe"
     definition_period = YEAR
     default_value = 0
     end = "2017-01-01"
@@ -568,7 +568,7 @@ class prix_essence_super_plombe_ttc_sortie(Variable):
 class prix_essence_e85_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence e85 ttc par litre à la pompe"
+    label = "prix de l'essence E85 TTC par litre à la pompe"
     definition_period = YEAR
     default_value = 0
 
@@ -595,7 +595,7 @@ class prix_essence_e85_ttc_sortie(Variable):
 class prix_essence_e85_hors_remise_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence e85 ttc par litre si la remise n'avait pas eu lieu"
+    label = "prix de l'essence E85 TTC par litre si la remise n'avait pas eu lieu"
     definition_period = YEAR
     default_value = 0
 
@@ -636,7 +636,7 @@ class prix_gpl_carburant_ttc_sortie(Variable):
 class prix_gpl_carburant_hors_remise_ttc_sortie(Variable):
     value_type = float
     entity = Menage
-    label = "prix du gpl ttc par litre si la remise n'avait pas eu lieu"
+    label = "prix du GPL TTC par litre si la remise n'avait pas eu lieu"
     definition_period = YEAR
     default_value = 0
 

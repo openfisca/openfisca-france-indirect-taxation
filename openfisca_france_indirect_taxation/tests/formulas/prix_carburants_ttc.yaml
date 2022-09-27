@@ -1,6 +1,6 @@
-# prix carburant gazole ttc:
+# prix carburant gazole TTC:
 
-## prix gazole B7 ttc:
+## prix gazole B7 TTC:
 
 - name: "Test prix_gazole_b7_ttc"
   period: 2021
@@ -26,7 +26,7 @@
   output:
     prix_gazole_b7_ttc: 1.5504
 
-## prix gazole B10 ttc:
+## prix gazole B10 TTC:
 
 - name: "Test prix_gazole_b10_ttc"
   period: 2021
@@ -52,9 +52,9 @@
   output:
     prix_gazole_b10_ttc: 1.5504
 
-# prix essence ttc:
+# prix essence TTC:
 
-## prix essence sp95 e10 ttc:
+## prix essence SP95 E10 TTC:
 
 - name: "Test prix_essence_sp95_e10_ttc"
   period: 2021
@@ -80,7 +80,7 @@
   output:
     prix_essence_sp95_e10_ttc: 1.6208
 
-## prix essence sp95 ttc:
+## prix essence SP95 TTC:
 
 - name: "Test prix_essence_sp95_ttc"
   period: 2021
@@ -106,7 +106,7 @@
   output:
     prix_essence_sp95_ttc: 1.6567
 
-## prix essence sp98 ttc:
+## prix essence SP98 TTC:
 
 - name: "Test prix_essence_sp98_ttc"
   period: 2021
@@ -132,7 +132,7 @@
   output:
     prix_essence_sp98_ttc: 1.5933
 
-## prix essence super plombe ttc:
+## prix essence super plombe TTC:
 
 - name: "Test prix_essence_super_plombe_ttc"
   period: 2021
@@ -158,7 +158,7 @@
   output:
     prix_essence_super_plombe_ttc: 0.0
 
-## prix essence e85 ttc:
+## prix essence E85 TTC:
 
 - name: "Test prix_essence_e85_ttc"
   period: 2021
@@ -184,7 +184,7 @@
   output:
     prix_essence_e85_ttc: 1.3504
 
-# prix gpl ttc:
+# prix GPL TTC:
 
 - name: "Test prix_gpl_carburant_ttc"
   period: 2021

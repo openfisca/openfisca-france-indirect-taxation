@@ -14,7 +14,7 @@
   input:
     veh_diesel: 1
     veh_essence: 0
-    poste_07_2_2_1_1: 100  # Gazole et gpl
+    poste_07_2_2_1_1: 100  # Gazole et GPL
   output:
     depenses_ht_tva_taux_plein: 100 / (1.196)
     depenses_sp_e10: 0

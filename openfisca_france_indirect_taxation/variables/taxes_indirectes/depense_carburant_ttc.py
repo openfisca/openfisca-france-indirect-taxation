@@ -1,12 +1,12 @@
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
 
-# depense different type de gazole ttc:
+# dépense differents types de gazole TTC:
 
 
 class depense_gazole_b7_ttc(Variable):
     value_type = float
     entity = Menage
-    label = 'depense du gazole B7 ttc'
+    label = 'dépense en gazole B7 TTC'
     definition_period = YEAR
     default_value = 0
 
@@ -21,7 +21,7 @@ class depense_gazole_b7_ttc(Variable):
 class depense_gazole_b10_ttc(Variable):
     value_type = float
     entity = Menage
-    label = 'depense du gazole B10 ttc'
+    label = 'dépense en gazole B10 TTC'
     definition_period = YEAR
     default_value = 0
 
@@ -33,13 +33,13 @@ class depense_gazole_b10_ttc(Variable):
         return depense_gazole_b10_ttc
 
 
-# depense gazole total ht:
+# dépense gazole total HT:
 
 
 class depense_gazole_total_ttc(Variable):
     value_type = float
     entity = Menage
-    label = 'depense total du gazole ttc'
+    label = 'dépense totale en gazole TTC'
     definition_period = YEAR
     default_value = 0
 
@@ -54,13 +54,13 @@ class depense_gazole_total_ttc(Variable):
         depense_gazole_total_ttc = depense_gazole_b7_ttc
         return depense_gazole_total_ttc
 
-# depense different type d'essence ttc:
+# dépense differents types d'essence TTC:
 
 
 class depense_essence_sp95_e10_ttc(Variable):
     value_type = float
     entity = Menage
-    label = "Dépense en essence sp95 e10 ttc"
+    label = "Dépense en essence SP95 E10 TTC"
     definition_period = YEAR
     default_value = 0
 
@@ -75,7 +75,7 @@ class depense_essence_sp95_e10_ttc(Variable):
 class depense_essence_sp95_ttc(Variable):
     value_type = float
     entity = Menage
-    label = "Dépense en essence sp95 ttc"
+    label = "Dépense en essence SP95 TTC"
     definition_period = YEAR
     default_value = 0
 
@@ -90,7 +90,7 @@ class depense_essence_sp95_ttc(Variable):
 class depense_essence_sp98_ttc(Variable):
     value_type = float
     entity = Menage
-    label = "Dépense en essence sp98 ttc"
+    label = "Dépense en essence SP98 TTC"
     definition_period = YEAR
     default_value = 0
 
@@ -105,7 +105,7 @@ class depense_essence_sp98_ttc(Variable):
 class depense_essence_super_plombe_ttc(Variable):
     value_type = float
     entity = Menage
-    label = "depense de l'essence super plombé ttc"
+    label = "dépense en essence super plombé TTC"
     definition_period = YEAR
     default_value = 0
     end = "2007-01-01"
@@ -121,7 +121,7 @@ class depense_essence_super_plombe_ttc(Variable):
 class depense_essence_e85_ttc(Variable):
     value_type = float
     entity = Menage
-    label = "depense de l'essence e85 ttc"
+    label = "dépense en essence E85 TTC"
     definition_period = YEAR
     default_value = 0
 
@@ -133,12 +133,12 @@ class depense_essence_e85_ttc(Variable):
         return depense_essence_e85_ttc
 
 
-# depense essence total ttc:
+# dépense essence total TTC:
 
 class depense_essence_total_ttc(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant des depenses sur tous les types d'essences cumulés ttc"
+    label = "Calcul du montant des dépenses sur tous les types d'essences cumulés TTC"
     definition_period = YEAR
 
     def formula_2009(menage, period):
@@ -163,13 +163,13 @@ class depense_essence_total_ttc(Variable):
         depense_essence_total_ttc = (depense_essence_sp95_ttc + depense_essence_sp98_ttc + depense_essence_super_plombe_ttc)
         return depense_essence_total_ttc
 
-# depense gaz de pétrole liquéfié carburant ttc:
+# dépense gaz de pétrole liquéfié carburant TTC:
 
 
 class depense_gpl_carburant_ttc(Variable):
     value_type = float
     entity = Menage
-    label = 'depense du gaz de pétrole liquéfié - carburant ttc'
+    label = 'dépense en gaz de pétrole liquéfié - carburant TTC'
     definition_period = YEAR
     default_value = 0
 
@@ -181,12 +181,12 @@ class depense_gpl_carburant_ttc(Variable):
         return depense_gpl_carburant_ttc
 
 
-# depense carburant total ttc:
+# dépense carburant total TTC:
 
 class depense_carburant_total_ttc(Variable):
     value_type = float
     entity = Menage
-    label = 'Calcul du montant des depenses sur tous les carburants cumulés ttc'
+    label = 'Calcul du montant des dépenses sur tous les carburants cumulés TTC'
     definition_period = YEAR
 
     def formula(menage, period):
@@ -200,7 +200,7 @@ class depense_carburant_total_ttc(Variable):
 class depense_carburant_total_ttc_sans_distinction(Variable):
     value_type = float
     entity = Menage
-    label = 'Calcul du montant des depenses sur tous les carburants cumulés ttc '
+    label = 'Calcul du montant des dépenses sur tous les carburants cumulés TTC '
     definition_period = YEAR
 
     def formula_2017(menage, period):

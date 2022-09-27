@@ -514,7 +514,7 @@ class taxe_carbone(Reform):
             return quantites_electricite_ajustees
 
     class quantites_sp_e10(YearlyVariable):
-        label = 'Quantités consommées de sans plomb e10 par les ménages après réforme - taxe carbone'
+        label = 'Quantités consommées de sans plomb E10 par les ménages après réforme - taxe carbone'
 
         def formula(menage, period, parameters):
             depenses_essence_ajustees_taxe_carbone = menage('depenses_essence_corrigees_ajustees_taxe_carbone', period)

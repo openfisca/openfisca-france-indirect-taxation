@@ -6,7 +6,7 @@ import numpy as np
 class prix_gazole_b7_ht_avant_remise(Variable):
     value_type = float
     entity = Menage
-    label = 'prix du gazole B7 ht par litre avant remise'
+    label = 'prix du gazole B7 HT par litre avant remise'
     definition_period = YEAR
     default_value = 0
 
@@ -99,7 +99,7 @@ class prix_gazole_b7_ht_avant_remise(Variable):
 class prix_gazole_b7_ht(Variable):
     value_type = float
     entity = Menage
-    label = "prix du gazole B7 ht par litre si la remise n'avais pas eu lieu"
+    label = "prix du gazole B7 HT par litre si la remise n'avait pas eu lieu"
     definition_period = YEAR
     default_value = 0
 
@@ -113,7 +113,7 @@ class prix_gazole_b7_ht(Variable):
 class prix_gazole_b10_ht_avant_remise(Variable):
     value_type = float
     entity = Menage
-    label = 'prix du gazole B10 ht par litre avant remise'
+    label = 'prix du gazole B10 HT par litre avant remise'
     definition_period = YEAR
     default_value = 0
 
@@ -139,7 +139,7 @@ class prix_gazole_b10_ht_avant_remise(Variable):
 class prix_gazole_b10_ht(Variable):
     value_type = float
     entity = Menage
-    label = "prix du gazole B10 ht par litre si la remise n'avais pas eu lieu"
+    label = "prix du gazole B10 HT par litre si la remise n'avait pas eu lieu"
     definition_period = YEAR
     default_value = 0
 
@@ -153,7 +153,7 @@ class prix_gazole_b10_ht(Variable):
 class prix_essence_sp95_e10_ht_avant_remise(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence SP95 E10 ht par litre avant remise"
+    label = "prix de l'essence SP95 E10 HT par litre avant remise"
     definition_period = YEAR
     default_value = 0
 
@@ -268,7 +268,7 @@ class prix_essence_sp95_e10_ht_avant_remise(Variable):
 class prix_essence_sp95_e10_ht(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence sp95 e10 ht par litre "
+    label = "prix de l'essence SP95 E10 HT par litre "
     definition_period = YEAR
     default_value = 0
 
@@ -282,7 +282,7 @@ class prix_essence_sp95_e10_ht(Variable):
 class prix_essence_sp95_ht_avant_remise(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence SP95 ht par litre avant remise"
+    label = "prix de l'essence SP95 HT par litre avant remise"
     definition_period = YEAR
     default_value = 0
 
@@ -397,7 +397,7 @@ class prix_essence_sp95_ht_avant_remise(Variable):
 class prix_essence_sp95_ht(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence sp95 ttc par litre"
+    label = "prix de l'essence SP95 TTC par litre"
     definition_period = YEAR
     default_value = 0
 
@@ -411,7 +411,7 @@ class prix_essence_sp95_ht(Variable):
 class prix_essence_sp98_ht_avant_remise(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence SP98 ht par litre avant remise"
+    label = "prix de l'essence SP98 HT par litre avant remise"
     definition_period = YEAR
     default_value = 0
 
@@ -526,7 +526,7 @@ class prix_essence_sp98_ht_avant_remise(Variable):
 class prix_essence_sp98_ht(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence sp98 ht par litre "
+    label = "prix de l'essence SP98 HT par litre "
     definition_period = YEAR
     default_value = 0
 
@@ -540,7 +540,7 @@ class prix_essence_sp98_ht(Variable):
 class prix_essence_super_plombe_ht(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence super plombé ht par litre"
+    label = "prix de l'essence super plombé HT par litre"
     definition_period = YEAR
     default_value = 0
     end = "2017-01-01"
@@ -560,7 +560,7 @@ class prix_essence_super_plombe_ht(Variable):
 class prix_essence_e85_ht_avant_remise(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence e85 ht par litre avant remise"
+    label = "prix de l'essence E85 HT par litre avant remise"
     definition_period = YEAR
     default_value = 0
 
@@ -587,7 +587,7 @@ class prix_essence_e85_ht_avant_remise(Variable):
 class prix_essence_e85_ht(Variable):
     value_type = float
     entity = Menage
-    label = "prix de l'essence e85 ht par litre"
+    label = "prix de l'essence E85 HT par litre"
     definition_period = YEAR
     default_value = 0
 
@@ -601,7 +601,7 @@ class prix_essence_e85_ht(Variable):
 class prix_gpl_carburant_ht_avant_remise(Variable):
     value_type = float
     entity = Menage
-    label = 'prix du gaz de pétrole liquéfié - carburant ht par litre avant remise'
+    label = 'prix du gaz de pétrole liquéfié - carburant HT par litre avant remise'
     definition_period = YEAR
     default_value = 0
 
@@ -629,7 +629,7 @@ class prix_gpl_carburant_ht_avant_remise(Variable):
 class prix_gpl_carburant_ht(Variable):
     value_type = float
     entity = Menage
-    label = "prix du gaz de pétrole liquéfié - carburant ht par litre"
+    label = "prix du gaz de pétrole liquéfié - carburant HT par litre"
     definition_period = YEAR
     default_value = 0
 

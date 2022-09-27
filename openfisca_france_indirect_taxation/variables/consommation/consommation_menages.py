@@ -54,7 +54,7 @@ class depenses_ticpe(YearlyVariable):
 class depenses_essence_recalculees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = 'Dépenses en essence recalculées à partir du prix ht'
+    label = 'Dépenses en essence recalculées à partir du prix HT'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal

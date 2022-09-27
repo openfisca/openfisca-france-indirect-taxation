@@ -65,7 +65,7 @@ class quantites_electricite_ajustees_taxe_carbone(YearlyVariable):
 class quantites_sp_e10_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = 'Quantités consommées de sans plomb e10 par les ménages après réforme'
+    label = 'Quantités consommées de sans plomb E10 par les ménages après réforme'
 
     def formula(menage, period, parameters):
         depenses_essence_ajustees = menage('depenses_essence_ajustees', period)

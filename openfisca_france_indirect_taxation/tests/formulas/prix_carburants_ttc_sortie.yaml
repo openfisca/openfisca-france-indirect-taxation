@@ -60,7 +60,7 @@
 
 # prix essence ttc_sortie:
 
-## prix essence sp95 e10 ttc_sortie:
+## prix essence SP95 E10 ttc_sortie:
 
 - name: "Test prix_essence_sp95_e10_ttc_sortie"
   period: 2022
@@ -89,7 +89,7 @@
   output:
     prix_essence_sp95_e10_ttc_sortie: 1.6208
 
-## prix essence sp95 ttc_sortie:
+## prix essence SP95 ttc_sortie:
 
 - name: "Test prix_essence_sp95_ttc_sortie"
   period: 2022
@@ -118,7 +118,7 @@
   output:
     prix_essence_sp95_ttc_sortie: 1.6567
 
-## prix essence sp98 ttc_sortie:
+## prix essence SP98 ttc_sortie:
 
 - name: "Test prix_essence_sp98_ttc_sortie"
   period: 2022
@@ -176,7 +176,7 @@
   output:
     prix_essence_super_plombe_ttc_sortie: 0.0
 
-## prix essence e85 ttc_sortie:
+## prix essence E85 ttc_sortie:
 
 - name: "Test prix_essence_e85_ttc_sortie"
   period: 2022
@@ -205,7 +205,7 @@
   output:
     prix_essence_e85_ttc_sortie: 1.3504
 
-# prix gpl ttc_sortie:
+# prix GPL ttc_sortie:
 
 - name: "Test prix_gpl_carburant_ttc_sortie"
   period: 2022

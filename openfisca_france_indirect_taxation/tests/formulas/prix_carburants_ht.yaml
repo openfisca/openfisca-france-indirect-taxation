@@ -1,6 +1,6 @@
-# prix carburant gazole ht:
+# prix carburant gazole HT:
 
-## prix gazole B7 ht:
+## prix gazole B7 HT:
 
 - name: "Test prix_gazole_b7_ht"
   period: 2022
@@ -29,7 +29,7 @@
   output:
     prix_gazole_b7_ht: 0.698
 
-## prix gazole B10 ht:
+## prix gazole B10 HT:
 
 - name: "Test prix_gazole_b10_ht"
   period: 2022
@@ -58,9 +58,9 @@
   output:
     prix_gazole_b10_ht: 0.698
 
-# prix essence ht:
+# prix essence HT:
 
-## prix essence sp95 e10 ht:
+## prix essence SP95 E10 HT:
 
 - name: "Test prix_essence_sp95_e10_ht"
   period: 2022
@@ -89,7 +89,7 @@
   output:
     prix_essence_sp95_e10_ht: 0.6977
 
-## prix essence sp95 ht:
+## prix essence SP95 HT:
 
 - name: "Test prix_essence_sp95_ht"
   period: 2022
@@ -118,7 +118,7 @@
   output:
     prix_essence_sp95_ht: 0.7076
 
-## prix essence sp98 ht:
+## prix essence SP98 HT:
 
 - name: "Test prix_essence_sp98_ht"
   period: 2022
@@ -147,7 +147,7 @@
   output:
     prix_essence_sp98_ht: 0.6548
 
-## prix essence super plombe ht:
+## prix essence super plombe HT:
 
 - name: "Test prix_essence_super_plombe_ht"
   period: 2022
@@ -176,7 +176,7 @@
   output:
     prix_essence_super_plombe_ht: 0.0
 
-## prix essence e85 ht:
+## prix essence E85 HT:
 
 - name: "Test prix_essence_e85_ht"
   period: 2022
@@ -205,7 +205,7 @@
   output:
     prix_essence_e85_ht: 1.007
 
-# prix gpl ht:
+# prix GPL HT:
 
 - name: "Test prix_gpl_carburant_ht"
   period: 2022

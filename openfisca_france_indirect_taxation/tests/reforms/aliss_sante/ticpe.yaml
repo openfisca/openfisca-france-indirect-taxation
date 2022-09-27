@@ -5,7 +5,7 @@
     - openfisca_france_indirect_taxation.reforms.aliss.aliss_sante
 
   input:
-    poste_07_2_2_1_1: 100  # Gazole et gpl
+    poste_07_2_2_1_1: 100  # Gazole et GPL
     veh_diesel: 1
     veh_essence: 0
   output:

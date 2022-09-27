@@ -16,7 +16,7 @@ class code_region(Variable):
 class nombre_litres_gazole_b7(Variable):
     value_type = float
     entity = Menage
-    label = 'nombre de litre de gasoil B7 consommés par le menage'
+    label = 'nombre de litre de gazole B7 consommés par le ménage'
     definition_period = YEAR
     default_value = 0
 
@@ -30,7 +30,7 @@ class nombre_litres_gazole_b7(Variable):
 class nombre_litres_gazole_b10(Variable):   # ATTENTION: pas de prix disponible pour gazole B10, on utilise prix du gazole B7
     value_type = float
     entity = Menage
-    label = 'nombre de litre de gasoil B10 consommés par le menage'
+    label = 'nombre de litre de gazole B10 consommés par le ménage'
     definition_period = YEAR
     default_value = 0
 
@@ -68,7 +68,7 @@ class nombre_litres_gazole_total(Variable):
 class nombre_litres_essence_sp95_e10(Variable):
     value_type = float
     entity = Menage
-    label = "nombre de litre d'essence super e10 consommés par le menage"
+    label = "nombre de litre d'essence SP95 E10 consommés par le ménage"
     definition_period = YEAR
     default_value = 0
 
@@ -82,7 +82,7 @@ class nombre_litres_essence_sp95_e10(Variable):
 class nombre_litres_essence_sp95(Variable):
     value_type = float
     entity = Menage
-    label = "nombre de litre d'essence sp95 consommés par le menage"
+    label = "nombre de litre d'essence SP95 consommés par le ménage"
     definition_period = YEAR
     default_value = 0
 
@@ -96,7 +96,7 @@ class nombre_litres_essence_sp95(Variable):
 class nombre_litres_essence_sp98(Variable):
     value_type = float
     entity = Menage
-    label = "nombre de litre d'essence sp98 consommés par le menage"
+    label = "nombre de litre d'essence SP98 consommés par le ménage"
     definition_period = YEAR
     default_value = 0
 
@@ -110,7 +110,7 @@ class nombre_litres_essence_sp98(Variable):
 class nombre_litres_essence_super_plombe(Variable):
     value_type = float
     entity = Menage
-    label = 'nombre de litre de super plombé consommés par le menage'
+    label = 'nombre de litre de super plombé consommés par le ménage'
     definition_period = YEAR
     default_value = 0
     end = "2017-01-01"
@@ -125,7 +125,7 @@ class nombre_litres_essence_super_plombe(Variable):
 class nombre_litres_essence_e85(Variable):
     value_type = float
     entity = Menage
-    label = "nombre de litre d'essence e85 par le menage"
+    label = "nombre de litre d'essence E85 par le ménage"
     definition_period = YEAR
     default_value = 0
 
@@ -174,7 +174,7 @@ class nombre_litres_essence_total(Variable):
 class nombre_litres_gpl_carburant(Variable):
     value_type = float
     entity = Menage
-    label = 'nombre de litre de gaz de pétrole liquéfié consommés par le menage'
+    label = 'nombre de litre de gaz de pétrole liquéfié consommés par le ménage'
     definition_period = YEAR
     default_value = 0
 

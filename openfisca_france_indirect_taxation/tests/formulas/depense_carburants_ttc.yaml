@@ -1,6 +1,6 @@
-# depense carburant gazole ttc:
+# dépense carburant gazole TTC:
 
-## depense gazole B7 ttc:
+## dépense gazole B7 TTC:
 
 - name: "Test depense_gazole_b7_ttc"
   period: 2021
@@ -12,7 +12,7 @@
   output:
     depense_gazole_b7_ttc: 120
 
-## depense gazole B10 ttc:
+## dépense gazole B10 TTC:
 
 - name: "Test depense_gazole_b10_ttc"
   period: 2021
@@ -24,7 +24,7 @@
   output:
     depense_gazole_b10_ttc: 120
 
-## depense gazole total ttc:
+## dépense gazole total TTC:
 
 - name: "Test depense_gazole_total_ttc"
   period: 2021
@@ -36,9 +36,9 @@
     depense_gazole_total_ttc: 2
 
 
-# depense essence ttc:
+# dépense essence TTC:
 
-## depense essence sp95 e10 ttc:
+## dépense essence SP95 E10 TTC:
 
 - name: "Test depense_essence_sp95_e10_ttc"
   period: 2021
@@ -50,7 +50,7 @@
   output:
     depense_essence_sp95_e10_ttc: 120
 
-## depense essence sp95 ttc:
+## dépense essence SP95 TTC:
 
 - name: "Test depense_essence_sp95_ttc"
   period: 2021
@@ -62,7 +62,7 @@
   output:
     depense_essence_sp95_ttc: 120
 
-## depense essence sp98 ttc:
+## dépense essence SP98 TTC:
 
 - name: "Test depense_essence_sp98_ttc"
   period: 2021
@@ -74,7 +74,7 @@
   output:
     depense_essence_sp98_ttc: 120
 
-## depense essence super plombe ttc:
+## dépense essence super plombe TTC:
 
 - name: "Test depense_essence_super_plombe_ttc"
   period: 2021
@@ -86,7 +86,7 @@
   output:
     depense_essence_super_plombe_ttc: 0
 
-## depense essence e85 ttc:
+## dépense essence E85 TTC:
 
 - name: "Test depense_essence_e85_ttc"
   period: 2021
@@ -98,7 +98,7 @@
   output:
     depense_essence_e85_ttc: 120
 
-## depense essence total ttc
+## dépense essence total TTC
 
 - name: "Test depense_essence_total_ttc"
   period: 2021
@@ -112,7 +112,7 @@
   output:
     depense_essence_total_ttc: 4
 
-# depense gpl ttc:
+# dépense GPL TTC:
 
 - name: "Test depense_gpl_carburant_ttc"
   period: 2021
@@ -124,7 +124,7 @@
   output:
     depense_gpl_carburant_ttc: 120
 
-# depense carburant total
+# dépense carburant total
 
 - name: "Test depense_carburant_total_ttc"
   period: 2021

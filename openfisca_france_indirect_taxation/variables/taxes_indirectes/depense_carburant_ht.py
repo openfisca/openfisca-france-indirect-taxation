@@ -1,13 +1,13 @@
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
 
 
-# depense different type de gazole ht:
+# dépense differents types de gazole HT:
 
 
 class depense_gazole_b7_ht(Variable):
     value_type = float
     entity = Menage
-    label = 'depense du gazole B7 ht'
+    label = 'dépense en gazole B7 HT'
     definition_period = YEAR
     default_value = 0
 
@@ -21,7 +21,7 @@ class depense_gazole_b7_ht(Variable):
 class depense_gazole_b10_ht(Variable):
     value_type = float
     entity = Menage
-    label = 'depense du gazole B10 ht'
+    label = 'dépense en gazole B10 HT'
     definition_period = YEAR
     default_value = 0
 
@@ -32,12 +32,12 @@ class depense_gazole_b10_ht(Variable):
         return depense_gazole_b10_ht
 
 
-# depense gazole total ht:
+# dépense gazole total HT:
 
 class depense_gazole_total_ht(Variable):
     value_type = float
     entity = Menage
-    label = 'depense total du gazole ht'
+    label = 'dépense totale en gazole HT'
     definition_period = YEAR
     default_value = 0
 
@@ -53,13 +53,13 @@ class depense_gazole_total_ht(Variable):
         return depense_gazole_total_ht
 
 
-# depense different type d'essence ht:
+# dépense differents types d'essence HT:
 
 
 class depense_essence_sp95_e10_ht(Variable):
     value_type = float
     entity = Menage
-    label = "depense de l'essence SP95 E10 ht"
+    label = "dépense en essence SP95 E10 HT"
     definition_period = YEAR
     default_value = 0
 
@@ -73,7 +73,7 @@ class depense_essence_sp95_e10_ht(Variable):
 class depense_essence_sp95_ht(Variable):
     value_type = float
     entity = Menage
-    label = "depense de l'essence SP95 ht"
+    label = "dépense en essence SP95 HT"
     definition_period = YEAR
     default_value = 0
 
@@ -87,7 +87,7 @@ class depense_essence_sp95_ht(Variable):
 class depense_essence_sp98_ht(Variable):
     value_type = float
     entity = Menage
-    label = "depense de l'essence SP98 ht"
+    label = "dépense en essence SP98 HT"
     definition_period = YEAR
     default_value = 0
 
@@ -101,7 +101,7 @@ class depense_essence_sp98_ht(Variable):
 class depense_essence_super_plombe_ht(Variable):
     value_type = float
     entity = Menage
-    label = "depense de l'essence super plombé ht"
+    label = "dépense en essence super plombé HT"
     definition_period = YEAR
     default_value = 0
     end = "2017-01-01"
@@ -116,7 +116,7 @@ class depense_essence_super_plombe_ht(Variable):
 class depense_essence_e85_ht(Variable):
     value_type = float
     entity = Menage
-    label = "depense de l'essence e85 ht"
+    label = "dépense en essence E85 HT"
     definition_period = YEAR
     default_value = 0
 
@@ -127,12 +127,12 @@ class depense_essence_e85_ht(Variable):
         return depense_essence_e85_ht
 
 
-# depense essence total ht:
+# dépense essence total HT:
 
 class depense_essence_total_ht(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant des depenses sur tous les types d'essences cumulés ht"
+    label = "Calcul du montant des dépenses sur tous les types d'essences cumulés HT"
     definition_period = YEAR
 
     def formula_2009(menage, period):
@@ -158,13 +158,13 @@ class depense_essence_total_ht(Variable):
         return depense_essence_total_ht
 
 
-# depense gaz de pétrole liquéfié carburant ht:
+# dépense gaz de pétrole liquéfié carburant HT:
 
 
 class depense_gpl_carburant_ht(Variable):
     value_type = float
     entity = Menage
-    label = 'depense du gaz de pétrole liquéfié - carburant ht'
+    label = 'dépense en gaz de pétrole liquéfié - carburant HT'
     definition_period = YEAR
     default_value = 0
 
@@ -175,13 +175,13 @@ class depense_gpl_carburant_ht(Variable):
         return depense_gpl_carburant_ht
 
 
-# depense carburant total ht:
+# dépense carburant total HT:
 
 
 class depense_carburant_total_ht(Variable):
     value_type = float
     entity = Menage
-    label = 'Calcul du montant des depenses sur tous les carburants cumulés ht'
+    label = 'Calcul du montant des dépenses sur tous les carburants cumulés HT'
     definition_period = YEAR
 
     def formula(menage, period):

@@ -54,7 +54,7 @@
 
 # nombre litres essence:
 
-## nombre litres essence sp95 e10:
+## nombre litres essence SP95 E10:
 
 - name: "Test nombre_litres_essence_sp95_e10"
   period: 2022
@@ -74,7 +74,7 @@
   output:
     nombre_litres_essence_sp95_e10: 0
 
-## nombre litres essence sp95:
+## nombre litres essence SP95:
 
 - name: "Test nombre_litres_essence_sp95"
   period: 2022
@@ -94,7 +94,7 @@
   output:
     nombre_litres_essence_sp95: 0
 
-## nombre litres essence sp98:
+## nombre litres essence SP98:
 
 - name: "Test nombre_litres_essence_sp98"
   period: 2022
@@ -134,7 +134,7 @@
   output:
     nombre_litres_essence_super_plombe: 0
 
-## nombre litres essence e85:
+## nombre litres essence E85:
 
 - name: "Test nombre_litres_essence_e85"
   period: 2022
@@ -168,7 +168,7 @@
   output:
     nombre_litres_essence_total: 4
 
-# nombre litres gpl:
+# nombre litres GPL:
 
 - name: "Test nombre_litres_gpl_carburant"
   period: 2022

@@ -21,7 +21,7 @@ def load_data_indiv_teg():
     variables_indiv_teg = [
         'distrteg',  # Distance routière domicile – lieu de TEG (source Odomatrix Inra-Insee) (en km)
         'ident_men',
-        'noi',  # numero de l'indiv dans le menage
+        'noi',  # numero de l'indiv dans le ménage
         'typlieu',  # numéro du lieu de travail pour l'indiv
         'v1_btravbarf',  # Nb de jours/sem. où X se rend à son lieu de travail étude ou garde (TEG), en gral
         'v1_btravdist',

@@ -1197,7 +1197,7 @@ class reforme_officielle_2018_in_2016(Reform):
     class quantites_sp_e10_officielle_2018_in_2016(YearlyVariable):
         value_type = float
         entity = Menage
-        label = 'Quantités consommées de sans plomb e10 par les ménages après réforme'
+        label = 'Quantités consommées de sans plomb E10 par les ménages après réforme'
 
         def formula(menage, period, parameters):
             depenses_essence_officielle_2018_in_2016 = \

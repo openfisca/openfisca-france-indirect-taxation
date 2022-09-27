@@ -1,7 +1,7 @@
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
 
 
-# taxe sur type de gazole ht:
+# taxe sur type de gazole HT:
 
 
 class taxes_gazole_b7(Variable):

@@ -216,7 +216,7 @@
   output:
     tva_sur_essence_total: 80
 
-# TVA sur gpl
+# TVA sur GPL
 
 - name: "Test tva_sur_ht_gpl_carburant"
   period: 2022

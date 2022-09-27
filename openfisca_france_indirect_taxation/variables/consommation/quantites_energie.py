@@ -310,7 +310,7 @@ class quantites_gaz_liquefie(YearlyVariable):
 class quantites_sp_e10(YearlyVariable):
     value_type = float
     entity = Menage
-    label = 'Quantités consommées de sans plomb e10 par les ménages'
+    label = 'Quantités consommées de sans plomb E10 par les ménages'
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence', period)

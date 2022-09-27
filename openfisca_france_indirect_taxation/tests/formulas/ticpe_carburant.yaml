@@ -72,7 +72,7 @@
 
 # TICPE essence:
 
-## TICPE essence sp95 e10:
+## TICPE essence SP95 E10:
 
 - name: "Test essence_sp95_e10_ticpe"
   period: 2022
@@ -101,7 +101,7 @@
   output:
     essence_sp95_e10_ticpe: 65.29
 
-## TICPE essence sp95:
+## TICPE essence SP95:
 
 - name: "Test essence_sp95_ticpe"
   period: 2022
@@ -130,7 +130,7 @@
   output:
     essence_sp95_ticpe: 67.29
 
-## TICPE essence sp98:
+## TICPE essence SP98:
 
 - name: "Test essence_sp98_ticpe"
   period: 2022
@@ -188,7 +188,7 @@
   output:
     essence_super_plombe_ticpe: 0.0
 
-## TICPE essence e85:
+## TICPE essence E85:
 
 - name: "Test essence_e85_ticpe"
   period: 2022
@@ -231,7 +231,7 @@
   output:
     essence_ticpe_total: 219.95
 
-# TICPE gpl:
+# TICPE GPL:
 
 - name: "Test gpl_carburant_ticpe"
   period: 2022

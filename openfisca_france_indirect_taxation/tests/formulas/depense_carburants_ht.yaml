@@ -1,6 +1,6 @@
-# depense gazole ht:
+# dépense gazole HT:
 
-## depense gazole ht:
+## dépense gazole HT:
 
 - name: "Test depense_gazole_b7_ht"
   period: 2022
@@ -11,7 +11,7 @@
   output:
     depense_gazole_b7_ht: 200
 
-## depense gazole ht:
+## dépense gazole HT:
 
 - name: "Test depense_gazole_b10_ht"
   period: 2022
@@ -22,7 +22,7 @@
   output:
     depense_gazole_b10_ht: 200
 
-## depense total gazole ht
+## dépense total gazole HT
 
 - name: "Test depense_gazole_total_ht"
   period: 2022
@@ -33,9 +33,9 @@
   output:
     depense_gazole_total_ht: 400
 
-# depense essence ht
+# dépense essence HT
 
-## depense essence SP95 E10 ht
+## dépense essence SP95 E10 HT
 
 - name: "Test depense_essence_sp95_e10_ht"
   period: 2022
@@ -46,7 +46,7 @@
   output:
     depense_essence_sp95_e10_ht: 200
 
-## depense essence SP95 ht
+## dépense essence SP95 HT
 
 - name: "Test depense_essence_sp95_ht"
   period: 2022
@@ -57,7 +57,7 @@
   output:
     depense_essence_sp95_ht: 200
 
-## depense essence SP98 ht
+## dépense essence SP98 HT
 
 - name: "Test depense_essence_sp98_ht"
   period: 2022
@@ -68,7 +68,7 @@
   output:
     depense_essence_sp98_ht: 200
 
-## depense essence super plombé ht
+## dépense essence super plombé HT
 
 - name: "Test depense_essence_super_plombe_ht"
   period: 2022
@@ -79,7 +79,7 @@
   output:
     depense_essence_super_plombe_ht: 0
 
-## depense essence E85 ht
+## dépense essence E85 HT
 
 - name: "Test depense_essence_e85_ht"
   period: 2022
@@ -90,7 +90,7 @@
   output:
     depense_essence_e85_ht: 200
 
-## depense total essence ht
+## dépense total essence HT
 
 - name: "Test depense_essence_total_ht"
   period: 2022
@@ -104,7 +104,7 @@
   output:
     depense_essence_total_ht: 800
 
-# depense gpl ht
+# dépense GPL HT
 
 - name: "Test depense_gpl_carburant_ht"
   period: 2022

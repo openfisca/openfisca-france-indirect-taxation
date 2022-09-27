@@ -305,7 +305,7 @@ class reforme_rattrapage_diesel(Reform):
             return quantites_diesel_ajustees
 
     class quantites_sp_e10(YearlyVariable):
-        label = 'Quantites consommees de sans plomb e10 par les menages après reforme - taxe carburants'
+        label = 'Quantites consommees de sans plomb E10 par les menages après reforme - taxe carburants'
         baseline_variable = quantites_energie.quantites_sp_e10
 
         def formula(menage, period, parameters):

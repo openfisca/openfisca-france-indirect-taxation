@@ -460,7 +460,7 @@ class cce_2016_in_2014(Reform):
             return quantites_gaz_ajustees
 
     class quantites_sp_e10(YearlyVariable):
-        label = 'Quantités consommées de sans plomb e10 par les ménages après réforme - hausse cce 2014-2016'
+        label = 'Quantités consommées de sans plomb E10 par les ménages après réforme - hausse cce 2014-2016'
 
         def formula(menage, period, parameters):
             depenses_essence_ajustees_cce_2016_in_2014 = \
