@@ -273,7 +273,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_cor
     unit: currency-EUR
 "99":
-  description: Affectation appliquée pour la France (paramètre par défaut si la région n'est pas précisée)
+  description: Affectation appliquée à la France (paramètre par défaut si la région n'est pas précisée)
   values:
     2017-01-01:
       value: 1.77
