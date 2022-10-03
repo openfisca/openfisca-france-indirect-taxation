@@ -278,7 +278,7 @@ description: Majoration régionale de l'accise du gazole
     ipp_csv_id: maj_ticpe_super_cor
     unit: currency-EUR
 "99":
-  description: France (paramètre par défaut si la région n'est pas précisée)
+  description: Affectation appliquée pour la France (paramètre par défaut si la région n'est pas précisée)
   values:
     2022-01-01:
       value: 1.35

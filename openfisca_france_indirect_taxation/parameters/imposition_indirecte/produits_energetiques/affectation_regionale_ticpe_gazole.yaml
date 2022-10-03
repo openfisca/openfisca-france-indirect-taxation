@@ -1,13 +1,13 @@
 description: affectation régionale TICPE gazole B7
 maximum_value_affectation:
-  description: valeur maximale pouvant être affecté au region
+  description: Valeur maximale pouvant être affectée aux regions
   values:
     2007-01-01:
       value: 1.15
   metadata:
     unit: currency-EUR
 "11":
-  description: Île-de-France
+  description: Affectation votée par l'Île-de-France
   values:
     2007-01-01:
       value: 1.15
@@ -15,7 +15,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_idf
     unit: currency-EUR
 "21":
-  description: Champagne-Ardennes
+  description: Affectation votée par la Champagne-Ardennes
   values:
     2017-01-01:
       value: null
@@ -27,7 +27,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_ch_ar
     unit: currency-EUR
 "22":
-  description: Picardie
+  description: Affectation votée par la Picardie
   values:
     2017-01-01:
       value: null
@@ -37,7 +37,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_pic
     unit: currency-EUR
 "23":
-  description: Haute-Normandie
+  description: Affectation votée par la Haute-Normandie
   values:
     2017-01-01:
       value: null
@@ -47,7 +47,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_h_n
     unit: currency-EUR
 "24":
-  description: Centre-Val de Loire
+  description: Affectation votée par le Centre-Val de Loire
   values:
     2007-01-01:
       value: 1.15
@@ -56,7 +56,7 @@ maximum_value_affectation:
     unit: currency-EUR
     notes: Région Centre (avant 2016) / Centre-Val de Loire (après 2016)
 "25":
-  description: Basse Normandie
+  description: Affectation votée par la Basse Normandie
   values:
     2017-01-01:
       value: null
@@ -68,7 +68,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_b_n
     unit: currency-EUR
 "26":
-  description: Bourgogne
+  description: Affectation votée par la Bourgogne
   values:
     2017-01-01:
       value: null
@@ -80,17 +80,17 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_bourg
     unit: currency-EUR
 "27":
-  description: Bourgogne-Franche-Comté
+  description: Affectation votée par la Bourgogne-Franche-Comté
   values:
     2017-01-01:
       value: 1.15
 "28":
-  description: Normandie
+  description: Affectation votée par la Normandie
   values:
     2017-01-01:
       value: 1.15
 "31":
-  description: Nord-Pas-de-Calais
+  description: Affectation votée par le Nord-Pas-de-Calais
   values:
     2007-01-01:
       value: 1.15
@@ -98,12 +98,12 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_n_cal
     unit: currency-EUR
 "32":
-  description: Hauts-de-France
+  description: Affectation votée par lesHauts-de-France
   values:
     2017-01-01:
       value: 1.15
 "41":
-  description: Lorraine
+  description: Affectation votée par la Lorraine
   values:
     2017-01-01:
       value: null
@@ -113,7 +113,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_lor
     unit: currency-EUR
 "42":
-  description: Alsace
+  description: Affectation votée par l'Alsace
   values:
     2017-01-01:
       value: null
@@ -123,7 +123,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_als
     unit: currency-EUR
 "43":
-  description: Franche-Comté
+  description: Affectation votée par la Franche-Comté
   values:
     2017-01-01:
       value: null
@@ -140,7 +140,7 @@ maximum_value_affectation:
     2017-01-01:
       value: 1.15
 "52":
-  description: Pays de la Loire
+  description: Affectation votée par le Pays de la Loire
   values:
     2008-01-01:
       value: 1.15
@@ -150,7 +150,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_p_loi
     unit: currency-EUR
 "53":
-  description: Bretagne
+  description: Affectation votée par la Bretagne
   values:
     2008-01-01:
       value: 1.15
@@ -160,7 +160,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_bre
     unit: currency-EUR
 "54":
-  description: Poitou-Charentes
+  description: Affectation votée par le Poitou-Charentes
   values:
     2017-01-01:
       value: null
@@ -172,7 +172,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_p_c
     unit: currency-EUR
 "72":
-  description: Aquitaine
+  description: Affectation votée par l'Aquitaine
   values:
     2017-01-01:
       value: null
@@ -184,7 +184,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_aqui
     unit: currency-EUR
 "73":
-  description: Midi-Pyrénées
+  description: Affectation votée par le Midi-Pyrénées
   values:
     2017-01-01:
       value: null
@@ -196,7 +196,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_m_p
     unit: currency-EUR
 "74":
-  description: Limousin
+  description: Affectation votée par le Limousin
   values:
     2017-01-01:
       value: null
@@ -206,17 +206,17 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_lim
     unit: currency-EUR
 "75":
-  description: Nouvelle-Aquitaine
+  description: Affectation votée par la Nouvelle-Aquitaine
   values:
     2017-01-01:
       value: 1.15
 "76":
-  description: Occitanie
+  description: Affectation votée par l'Occitanie
   values:
     2017-01-01:
       value: 1.15
 "82":
-  description: Rhône-Alpes
+  description: Affectation votée par Rhône-Alpes
   values:
     2017-01-01:
       value: null
@@ -228,7 +228,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_r_a
     unit: currency-EUR
 "83":
-  description: Auvergne
+  description: Affectation votée par l'Auvergne
   values:
     2017-01-01:
       value: null
@@ -240,12 +240,12 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_auv
     unit: currency-EUR
 "84":
-  description: Auvergne-Rhône-Alpes
+  description: Affectation votée par l'Auvergne-Rhône-Alpes
   values:
     2017-01-01:
       value: 1.15
 "91":
-  description: Languedoc-Roussillon
+  description: Affectation votée par le Languedoc-Roussillon
   values:
     2017-01-01:
       value: null
@@ -257,7 +257,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_l_r
     unit: currency-EUR
 "93":
-  description: Provence-Alpes-Côte d'Azur
+  description: Affectation votée par Provence-Alpes-Côte d'Azur
   values:
     2008-01-01:
       value: 1.15
@@ -267,7 +267,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_paca
     unit: currency-EUR
 "94":
-  description: Corse
+  description: Affectation votée par la Corse
   values:
     2017-01-01:
       value: 1.15
@@ -281,7 +281,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_cor
     unit: currency-EUR
 "99":
-  description: France (paramètre par défaut si la région n'est pas précisée)
+  description: Affectation appliquée pour la France (paramètre par défaut si la région n'est pas précisée)
   values:
     2017-01-01:
       value: 1.15
