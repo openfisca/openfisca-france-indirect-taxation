@@ -19,7 +19,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_idf
     unit: currency-EUR
 "21":
-  description: Affectation votée par la Champagne Ardennes
+  description: Affectation votée par la Champagne-Ardennes
   values:
     2017-01-01:
       value: null
@@ -39,7 +39,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_pic
     unit: currency-EUR
 "23":
-  description: Affectation votée par la Haute Normandie
+  description: Affectation votée par la Haute-Normandie
   values:
     2017-01-01:
       value: null
@@ -162,7 +162,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_bre
     unit: currency-EUR
 "54":
-  description: Affectation votée en Poitou Charentes
+  description: Affectation votée en Poitou-Charentes
   values:
     2017-01-01:
       value: null
@@ -184,7 +184,7 @@ maximum_value_affectation:
     ipp_csv_id: maj_ticpe_super_aqui
     unit: currency-EUR
 "73":
-  description: Affectation votée par le Midi Pyrénées
+  description: Affectation votée par le Midi-Pyrénées
   values:
     2017-01-01:
       value: null
@@ -245,7 +245,7 @@ maximum_value_affectation:
   metadata:
     unit: currency-EUR
 "91":
-  description: Affectation votée par le Languedoc Roussillon
+  description: Affectation votée par le Languedoc-Roussillon
   values:
     2017-01-01:
       value: null

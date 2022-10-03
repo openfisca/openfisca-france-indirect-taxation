@@ -1,6 +1,6 @@
-description: Major régionale TICPE SP95, SP98 et SP95 E10
+description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
 "11":
-  description: Ile de France
+  description: Île-de-France
   values:
     2022-01-01:
       value: 0.821
@@ -10,7 +10,7 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
     ipp_csv_id: maj_ticpe_super_idf
     unit: currency-EUR
 "21":
-  description: Champagne Ardennes
+  description: Champagne-Ardennes
   values:
     2017-01-01:
       value: null
@@ -30,7 +30,7 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
     ipp_csv_id: maj_ticpe_super_pic
     unit: currency-EUR
 "23":
-  description: Haute Normandie
+  description: Haute-Normandie
   values:
     2017-01-01:
       value: null
@@ -40,7 +40,7 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
     ipp_csv_id: maj_ticpe_super_h_n
     unit: currency-EUR
 "24":
-  description: Centre (avant 2016) / Centre-Val de Loire (après 2016)
+  description: Centre-Val de Loire
   values:
     2022-01-01:
       value: 0.821
@@ -49,6 +49,7 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
   metadata:
     ipp_csv_id: maj_ticpe_super_cen
     unit: currency-EUR
+    notes: Région Centre (avant 2016) / Centre-Val de Loire (après 2016)
 "25":
   description: Basse Normandie
   values:
@@ -84,7 +85,7 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
     2017-01-01:
       value: 0.73
 "31":
-  description: Nord Pas de Calais
+  description: Nord-Pas-de-Calais
   values:
     2017-01-01:
       value: null
@@ -121,7 +122,7 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
     ipp_csv_id: maj_ticpe_super_als
     unit: currency-EUR
 "43":
-  description: Franche Comté
+  description: Franche-Comté
   values:
     2017-01-01:
       value: null
@@ -158,7 +159,7 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
     ipp_csv_id: maj_ticpe_super_bre
     unit: currency-EUR
 "54":
-  description: Poitou Charentes
+  description: Poitou-Charentes
   values:
     2017-01-01:
       value: null
@@ -180,7 +181,7 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
     ipp_csv_id: maj_ticpe_super_aqui
     unit: currency-EUR
 "73":
-  description: Midi Pyrénées
+  description: Midi-Pyrénées
   values:
     2017-01-01:
       value: null
@@ -214,7 +215,7 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
     2017-01-01:
       value: 0.73
 "82":
-  description: Rhône Alpes
+  description: Rhône-Alpes
   values:
     2017-01-01:
       value: null
@@ -243,7 +244,7 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
     2017-01-01:
       value: 0.73
 "91":
-  description: Languedoc Roussillon
+  description: Languedoc-Roussillon
   values:
     2017-01-01:
       value: null
@@ -253,7 +254,7 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
     ipp_csv_id: maj_ticpe_super_l_r
     unit: currency-EUR
 "93":
-  description: PACA
+  description: Provence-Alpes-Côte d'Azur
   values:
     2022-01-01:
       value: 0.821
@@ -273,7 +274,7 @@ description: Major régionale TICPE SP95, SP98 et SP95 E10
     ipp_csv_id: maj_ticpe_super_cor
     unit: currency-EUR
 "99":
-  description: France (parametre utile pour agréger si pas de poid régional)
+  description: France (paramètre par défaut si la région n'est pas précisée)
   values:
     2022-01-01:
       value: 0.821

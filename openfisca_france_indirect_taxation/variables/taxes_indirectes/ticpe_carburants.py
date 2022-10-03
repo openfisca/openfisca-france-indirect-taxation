@@ -42,7 +42,7 @@ class gazole_b7_ticpe(Variable):
                 for region_cell in code_region),
             dtype=np.float32)
 
-        #  On récupère la majoration specifique mobilité de l'ile de france en euro/mwh et on le converti en euro/hectolitre
+        #  On récupère la majoration specifique mobilité de l'Île-de-France en euro/mwh et on le converti en euro/hectolitre
         major_mobilites_tipce_gazole_mwh = parameters(period).imposition_indirecte.produits_energetiques.majoration_ile_de_france_mobilites_ticpe.major_mobilites_tipce_gazole
         major_mobilites_tipce_gazole_hectolitre = major_mobilites_tipce_gazole_mwh * taux_conversion_gazoles
 
