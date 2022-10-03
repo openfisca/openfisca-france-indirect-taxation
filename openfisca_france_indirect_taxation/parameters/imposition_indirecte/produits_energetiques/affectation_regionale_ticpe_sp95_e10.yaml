@@ -82,11 +82,15 @@ maximum_value_affectation:
   values:
     2017-01-01:
       value: 1.77
+  metadata:
+    unit: currency-EUR
 "28":
   description: Affectation votée par la Normandie
   values:
     2017-01-01:
       value: 1.77
+  metadata:
+    unit: currency-EUR
 "31":
   description: Affectation votée par le Nord Pas-de-Calais
   values:
@@ -102,6 +106,8 @@ maximum_value_affectation:
   values:
     2017-01-01:
       value: 1.77
+  metadata:
+    unit: currency-EUR
 "41":
   description: Affectation votée par la Lorraine
   values:
@@ -137,6 +143,8 @@ maximum_value_affectation:
   values:
     2017-01-01:
       value: 1.77
+  metadata:
+    unit: currency-EUR
 "52":
   description: Affectation votée au Pays de la Loire
   values:
@@ -200,11 +208,15 @@ maximum_value_affectation:
   values:
     2017-01-01:
       value: 1.77
+  metadata:
+    unit: currency-EUR
 "76":
   description: Affectation votée par l'Occitanie
   values:
     2017-01-01:
       value: 1.77
+  metadata:
+    unit: currency-EUR
 "82":
   description: Affectation votée par Rhône-Alpes
   values:
@@ -230,6 +242,8 @@ maximum_value_affectation:
   values:
     2017-01-01:
       value: 1.77
+  metadata:
+    unit: currency-EUR
 "91":
   description: Affectation votée par le Languedoc Roussillon
   values:
