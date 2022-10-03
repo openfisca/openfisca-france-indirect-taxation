@@ -79,6 +79,8 @@ description: Majoration régionale de l'accise du gazole
       value: 1.35
     2017-01-01:
       value: 1.35
+  metadata:
+    unit: currency-EUR
 "28":
   description: Majoration déterminée par la Normandie
   values:
@@ -86,6 +88,8 @@ description: Majoration régionale de l'accise du gazole
       value: 1.35
     2017-01-01:
       value: 1.35
+  metadata:
+    unit: currency-EUR
 "31":
   description: Majoration déterminée par le Nord-Pas-de-Calais
   values:
@@ -103,6 +107,8 @@ description: Majoration régionale de l'accise du gazole
       value: 1.35
     2017-01-01:
       value: 1.35
+  metadata:
+    unit: currency-EUR
 "41":
   description: Majoration déterminée par la Lorraine
   values:
@@ -140,6 +146,8 @@ description: Majoration régionale de l'accise du gazole
       value: 1.35
     2017-01-01:
       value: 1.35
+  metadata:
+    unit: currency-EUR
 "52":
   description: Majoration déterminée par le Pays de la Loire
   values:
@@ -209,6 +217,8 @@ description: Majoration régionale de l'accise du gazole
       value: 1.35
     2017-01-01:
       value: 1.35
+  metadata:
+    unit: currency-EUR
 "76":
   description: Majoration déterminée par l'Occitanie
   values:
@@ -216,6 +226,8 @@ description: Majoration régionale de l'accise du gazole
       value: 1.35
     2017-01-01:
       value: 1.35
+  metadata:
+    unit: currency-EUR
 "82":
   description: Majoration déterminée par Rhône-Alpes
   values:
@@ -247,6 +259,8 @@ description: Majoration régionale de l'accise du gazole
       value: 1.08
     2017-01-01:
       value: 1.35
+  metadata:
+    unit: currency-EUR
 "91":
   description: Majoration déterminée par le Languedoc-Roussillon
   values:
