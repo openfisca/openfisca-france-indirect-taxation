@@ -1,4 +1,4 @@
-description: affectation régionale TICPE SP95 et SP98
+description: Affectation régionale accise SP95 et SP98
 maximum_value_affectation:
   description: Valeur maximale pouvant être affectée aux régions
   values:

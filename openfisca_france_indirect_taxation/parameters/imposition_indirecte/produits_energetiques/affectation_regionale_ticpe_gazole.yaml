@@ -1,4 +1,4 @@
-description: affectation régionale TICPE gazole B7
+description: Affectation régionale accise gazole B7
 maximum_value_affectation:
   description: Valeur maximale pouvant être affectée aux regions
   values:
