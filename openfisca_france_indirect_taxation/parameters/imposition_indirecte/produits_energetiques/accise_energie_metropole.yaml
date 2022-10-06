@@ -1,4 +1,4 @@
-description: Fraction perçue en métropole sur les produits énergétiques, autre que les gaz naturels et les charbons
+description: Fraction perçue en métropole sur les produits énergétiques, autres que les gaz naturels et les charbons
 biogaz_combustible_non_injecte_dans_le_reseau:
   description: Tarif particulier du biogaz combustible non injecté dans le réseau, en €/Mwh
   values:

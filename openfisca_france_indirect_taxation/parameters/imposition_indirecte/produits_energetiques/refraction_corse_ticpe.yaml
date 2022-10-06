@@ -1,6 +1,6 @@
-description: Réfraction Corse de l'accise
+description: Réfraction en €/Mwh de l'accise en Corse 
 refraction_corse_tipce_sp95_sp98:
-  description: Minoration appliquée aux supercarburants dont SP95 et SP98  (indice d'identification 11) en Corse
+  description: Minoration des supercarburants dont SP95 et SP98 (indice d'identification 11)
   values:
     2022-01-01:
       value: 1.125
@@ -20,7 +20,7 @@ refraction_corse_tipce_sp95_sp98:
       - href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000021642529/2010-07-01
         title: Article 265 A bis du Code des douanes
 refraction_corse_tipce_super_plombe:
-  description: Minoration appliquée aux supercarburants contenant un additif (hectolitre) (indice d'identification 11 bis) en Corse
+  description: Minoration des supercarburants contenant un additif (indice d'identification 11 bis)
   values:
     2022-01-01:
       value: null
@@ -35,7 +35,7 @@ refraction_corse_tipce_super_plombe:
       - href: https://www.legifrance.gouv.fr/loda/id/LEGIARTI000006716555/2002-01-01#LEGIARTI000006716555
         title: Ordonnance n° 2000-916 du 19 septembre 2000 portant adaptation de la valeur en euros de certains montants exprimé en francs dans les textes législatifs
 refraction_corse_tipce_sp95_e10:
-  description: Minoration appliquée au supercarburant SP95 E10 (indice d'identification 11 ter) en Corse
+  description: Minoration des supercarburants SP95 E10 (indice d'identification 11 ter)
   values:
     2022-01-01:
       value: 1.125

@@ -22,7 +22,7 @@ gaz_naturels_carburant_mwh:
       - href: https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045415165
         title: Article 4 du Décret n° 2022-423 du 25 mars 2022 relatif à l'aide exceptionnelle à l'acquisition de carburants
 gpl_carburant_100kg:
-  description: Supercarburants dont SP95 E10 (avant 2022 en €/hectolitre et après 2022 en €/Mwh) (indice d'identification 11 ter)
+  description: Aide en €/Mwh aux Supercarburants dont SP95 E10 (indice d'identification 11 ter)
   values:
     2022-01-01:
       value: 29.13
@@ -33,4 +33,5 @@ gpl_carburant_100kg:
       - href: https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000045415165
         title: Article 4 du Décret n° 2022-423 du 25 mars 2022 relatif à l'aide exceptionnelle à l'acquisition de carburants
 documentation: |
-  Notes : Date exact de debut 27 mars 2022 jusque août 2022
+  Notes : Date exact de debut 27 mars 2022 jusque août 2022.
+  Pour le gpl_carburant_100kg : avant 2022 en €/hectolitre et après 2022 en €/Mwh
