@@ -13,7 +13,7 @@ taux_conversion_essences:
         - href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000046196817
           title: Articles L312-6 du Code des impositions sur les biens et services
 taux_conversion_essence_sp95_e10:
-  description: Taux de conversion des essence SP95-E10 (€/Mwh vers €/hectolitre)
+  description: Taux de conversion des essences SP95-E10 (€/Mwh vers €/hectolitre)
   values:
     2022-01-01:
       value: 0.889
