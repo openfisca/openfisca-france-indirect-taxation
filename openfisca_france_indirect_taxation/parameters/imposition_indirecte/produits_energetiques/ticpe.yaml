@@ -224,7 +224,7 @@ super_e10:
       value: null
   metadata:
     ipp_csv_id: ticpe_super_e10
-    unit: currency-EUR
+    unit: currency
 essence_normale_hectolitre:
   description: Essence normale (hectolitre)
   values:
@@ -248,7 +248,7 @@ essence_normale_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_essence_normale
-    unit: currency-FRF
+    unit: currency
 carburateurs_type_essence_sous_conditions_hectolitre:
   description: Carburateurs type essence, sous conditions (hectolitre)
   values:
@@ -333,7 +333,7 @@ carburateurs_type_essence_autres_hectolitre:
     1993-01-01:
       value: null
   metadata:
-    unit: currency-EUR
+    unit: currency
 autres_huiles_legeres_hectolitre:
   description: Autres huiles légères (hectolitre)
   values:
@@ -496,7 +496,7 @@ carbureacteurs_type_petrole_lampant_autres_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_carbu_petrole_lampant_autres
-    unit: currency-EUR
+    unit: currency
 autres_huiles_moyennes_hectolitre:
   description: Autres huiles moyennes (hectolitre)
   values:
@@ -582,7 +582,7 @@ gazole_fioul_domestique_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_fioul_domestique
-    unit: currency-EUR
+    unit: currency
 gazole:
   description: Gazole, autres (hectolitre) (indice d'identification 22)
   values:
@@ -633,7 +633,7 @@ gazol_b_10_hectolitre:
     1993-01-01:
       value: null
   metadata:
-    unit: currency-EUR
+    unit: currency
 fioul_lourd_100kg_net:
   description: Fioul lourd (100kg net)
   values:
@@ -653,7 +653,7 @@ fioul_lourd_100kg_net:
       value: null
   metadata:
     ipp_csv_id: ticpe_fioul_lourd
-    unit: currency-EUR
+    unit: currency
 fioul_avec_point_eclair_inferieur_120deg_c_hectolitre:
   description: Fioul avec point d'éclair inférieur à 120° C (hectolitre)
   values:
@@ -776,7 +776,7 @@ propane_utilise_comme_carburants_usages_autres_que_comme_carburant_100kg_nets:
     1993-01-01:
       value: null
   metadata:
-    unit: currency-EUR
+    unit: currency
 butanes_liquefies_sous_condition_100kg_nets:
   description: Butanes liquéfiés, sous condition (100kg nets)
   values:
@@ -829,7 +829,7 @@ butanes_liquefies_usages_autres_que_comme_carburant_100kg_nets:
     1993-01-01:
       value: null
   metadata:
-    unit: currency-EUR
+    unit: currency
 autres_gaz_petrole_liquefies_utilises_comme_carburants_sous_conditions_100kg:
   description: Autres gaz de pétrole liquéfiés utilisés comme carburants, sous conditions (100kg)
   values:
@@ -951,7 +951,7 @@ gaz_naturel_etat_gazeux_utilise_sous_conditions_aux_moteurs_stationnaires_100m3:
       value: null
   metadata:
     ipp_csv_id: ticpe_gaz_naturels_gazeux_cond
-    unit: currency-EUR
+    unit: currency
 emulsion_eau_dans_gazole_sous_conditions_hectolitre:
   description: Emulsion d'eau dans du gazole …, sous conditions (hectolitre)
   values:
@@ -1027,7 +1027,7 @@ super_e_85_utilise_comme_carburant_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_super_e85
-    unit: currency-EUR
+    unit: currency
 carburant_constitue_minimum_90_alcool_ethylique_agricole_hectolitre:
   description: Carburant constitué d'au minimum 90% d'alcool éthylique agricole (hectolitre)
   values:
@@ -1039,7 +1039,7 @@ carburant_constitue_minimum_90_alcool_ethylique_agricole_hectolitre:
       value: null
   metadata:
     ipp_csv_id: ticpe_carburant_ethanol_agricole
-    unit: currency-EUR
+    unit: currency
 carburant_constitue_100_estars_methyliques_acides_gras_hectolitre:
   description: Carburant constitué à 100% d'estars méthyliques d'acides gras (hectolitre)
   values:
@@ -1048,7 +1048,7 @@ carburant_constitue_100_estars_methyliques_acides_gras_hectolitre:
     1993-01-01:
       value: null
   metadata:
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - goudrons_utilises_comme_combustibles_100kg

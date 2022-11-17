@@ -20,7 +20,7 @@ base_0_1000_ht:
       value: 33.0
   metadata:
     ipp_csv_id: tarif_fixe_gdf_base_ht
-    unit: currency-EUR
+    unit: currency
 b0_1000_6000_ht:
   description: B0 (1000-6000) - HT
   values:
@@ -42,7 +42,7 @@ b0_1000_6000_ht:
       value: 45.84
   metadata:
     ipp_csv_id: tarif_fixe_gdf_b0_ht
-    unit: currency-EUR
+    unit: currency
 b1_6_30000_ht:
   description: B1 (6-30000) - HT
   values:
@@ -64,7 +64,7 @@ b1_6_30000_ht:
       value: 146.4
   metadata:
     ipp_csv_id: tarif_fixe_gdf_b1_ht
-    unit: currency-EUR
+    unit: currency
 b2i_30000_ht:
   description: B2I (>30000) - HT
   values:
@@ -86,7 +86,7 @@ b2i_30000_ht:
       value: 146.4
   metadata:
     ipp_csv_id: tarif_fixe_gdf_b2i_ht
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - base_0_1000_ht

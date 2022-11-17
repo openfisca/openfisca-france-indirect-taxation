@@ -38,7 +38,7 @@ prix_kwh_3_kva:
       value: 0.095
   metadata:
     ipp_csv_id: prix_unitaire_3kva_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_6_kva:
   description: Prix du kWh - 6 kVA
   values:
@@ -78,7 +78,7 @@ prix_kwh_6_kva:
       value: 0.0779
   metadata:
     ipp_csv_id: prix_unitaire_6kva_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_9_kva:
   description: Prix du kWh - 9 kVA
   values:
@@ -116,7 +116,7 @@ prix_kwh_9_kva:
       value: 0.0779
   metadata:
     ipp_csv_id: prix_unitaire_9kva_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_12_kva:
   description: Prix du kWh - 12 kVA
   values:
@@ -154,7 +154,7 @@ prix_kwh_12_kva:
       value: 0.0779
   metadata:
     ipp_csv_id: prix_unitaire_12kva_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_15_kva:
   description: Prix du kWh - 15 kVA
   values:
@@ -192,7 +192,7 @@ prix_kwh_15_kva:
       value: 0.0779
   metadata:
     ipp_csv_id: prix_unitaire_15kva_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_18_kva:
   description: Prix du kWh - 18 kVA
   values:
@@ -230,7 +230,7 @@ prix_kwh_18_kva:
       value: 0.0779
   metadata:
     ipp_csv_id: prix_unitaire_18kva_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_24_kva:
   description: Prix du kWh - 24 kVA
   values:
@@ -268,7 +268,7 @@ prix_kwh_24_kva:
       value: 0.0779
   metadata:
     ipp_csv_id: prix_unitaire_24kva_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_30_kva:
   description: Prix du kWh - 30 kVA
   values:
@@ -306,7 +306,7 @@ prix_kwh_30_kva:
       value: 0.0779
   metadata:
     ipp_csv_id: prix_unitaire_30kva_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_36_kva:
   description: Prix du kWh - 36 kVA
   values:
@@ -344,7 +344,7 @@ prix_kwh_36_kva:
       value: 0.0779
   metadata:
     ipp_csv_id: prix_unitaire_36kva_ht
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - prix_kwh_3_kva

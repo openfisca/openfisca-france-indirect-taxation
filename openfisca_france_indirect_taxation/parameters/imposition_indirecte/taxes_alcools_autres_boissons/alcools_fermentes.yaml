@@ -144,7 +144,7 @@ exoneration_ensemble_vins_eur_hl:
       value: 12.7
   metadata:
     ipp_csv_id: exoneration_taxe_vins
-    unit: currency-FRF
+    unit: currency
 exoneration_petillants_voir_conditions_eur_hl:
   description: Exonération des pétillants (voir conditions) (€/hl)
   values:
@@ -154,7 +154,7 @@ exoneration_petillants_voir_conditions_eur_hl:
       value: 5.4
   metadata:
     ipp_csv_id: exoneration_taxe_petillants
-    unit: currency-FRF
+    unit: currency
 metadata:
   order:
   - vins_mousseux_eur_hl

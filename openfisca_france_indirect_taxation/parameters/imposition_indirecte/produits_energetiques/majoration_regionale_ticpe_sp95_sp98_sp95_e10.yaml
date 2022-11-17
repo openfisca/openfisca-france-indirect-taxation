@@ -8,7 +8,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_idf
-    unit: currency-EUR
+    unit: currency
 "21":
   description: Majoration déterminée par la Champagne-Ardennes
   values:
@@ -18,7 +18,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_ch_ar
-    unit: currency-EUR
+    unit: currency
 "22":
   description: Majoration déterminée par la Picardie
   values:
@@ -28,7 +28,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_pic
-    unit: currency-EUR
+    unit: currency
 "23":
   description: Majoration déterminée par la Haute-Normandie
   values:
@@ -38,7 +38,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_h_n
-    unit: currency-EUR
+    unit: currency
 "24":
   description: Majoration déterminée par le Centre-Val de Loire
   values:
@@ -48,7 +48,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_cen
-    unit: currency-EUR
+    unit: currency
     notes: Région Centre (avant 2016) / Centre-Val de Loire (après 2016)
 "25":
   description: Majoration déterminée par la Basse Normandie
@@ -59,7 +59,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_b_n
-    unit: currency-EUR
+    unit: currency
 "26":
   description: Majoration déterminée par la Bourgogne
   values:
@@ -69,7 +69,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_bourg
-    unit: currency-EUR
+    unit: currency
 "27":
   description: Majoration déterminée par la Bourgogne-Franche-Comté
   values:
@@ -78,7 +78,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
     2017-01-01:
       value: 0.73
   metadata:
-    unit: currency-EUR
+    unit: currency
 "28":
   description: Majoration déterminée par la Normandie
   values:
@@ -87,7 +87,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
     2017-01-01:
       value: 0.73
   metadata:
-    unit: currency-EUR
+    unit: currency
 "31":
   description: Majoration déterminée par le Nord-Pas-de-Calais
   values:
@@ -97,7 +97,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_n_cal
-    unit: currency-EUR
+    unit: currency
 "32":
   description: Majoration déterminée par les Hauts-de-France
   values:
@@ -106,7 +106,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
     2017-01-01:
       value: 0.73
   metadata:
-    unit: currency-EUR
+    unit: currency
 "41":
   description: Majoration déterminée par la Lorraine
   values:
@@ -116,7 +116,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_lor
-    unit: currency-EUR
+    unit: currency
 "42":
   description: Majoration déterminée par l'Alsace
   values:
@@ -126,7 +126,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_als
-    unit: currency-EUR
+    unit: currency
 "43":
   description: Majoration déterminée par la Franche-Comté
   values:
@@ -136,7 +136,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_f_c
-    unit: currency-EUR
+    unit: currency
 "44":
   description: Majoration déterminée par le Grand Est
   values:
@@ -145,7 +145,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
     2017-01-01:
       value: 0.73
   metadata:
-    unit: currency-EUR
+    unit: currency
 "52":
   description: Majoration déterminée par le Pays de la Loire
   values:
@@ -155,7 +155,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_p_loi
-    unit: currency-EUR
+    unit: currency
 "53":
   description: Majoration déterminée par la Bretagne
   values:
@@ -165,7 +165,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_bre
-    unit: currency-EUR
+    unit: currency
 "54":
   description: Majoration déterminée par le Poitou-Charentes
   values:
@@ -177,7 +177,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.0
   metadata:
     ipp_csv_id: maj_ticpe_super_p_c
-    unit: currency-EUR
+    unit: currency
 "72":
   description: Majoration déterminée par l'Aquitaine
   values:
@@ -187,7 +187,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_aqui
-    unit: currency-EUR
+    unit: currency
 "73":
   description: Majoration déterminée par le Midi-Pyrénées
   values:
@@ -197,7 +197,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_m_p
-    unit: currency-EUR
+    unit: currency
 "74":
   description: Majoration déterminée par le Limousin
   values:
@@ -207,7 +207,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_lim
-    unit: currency-EUR
+    unit: currency
 "75":
   description: Majoration déterminée par la Nouvelle-Aquitaine
   values:
@@ -216,7 +216,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
     2017-01-01:
       value: 0.73
   metadata:
-    unit: currency-EUR
+    unit: currency
 "76":
   description: Majoration déterminée par l'Occitanie
   values:
@@ -225,7 +225,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
     2017-01-01:
       value: 0.73
   metadata:
-    unit: currency-EUR
+    unit: currency
 "82":
   description: Majoration déterminée par Rhône-Alpes
   values:
@@ -235,7 +235,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_r_a
-    unit: currency-EUR
+    unit: currency
 "83":
   description: Majoration déterminée par l'Auvergne
   values:
@@ -245,7 +245,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_auv
-    unit: currency-EUR
+    unit: currency
 "84":
   description: Majoration déterminée par l'Auvergne-Rhône-Alpes
   values:
@@ -256,7 +256,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
     2017-01-01:
       value: 0.73
   metadata:
-    unit: currency-EUR
+    unit: currency
 "91":
   description: Majoration déterminée par le Languedoc-Roussillon
   values:
@@ -266,7 +266,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_l_r
-    unit: currency-EUR
+    unit: currency
 "93":
   description: Majoration déterminée par la Provence-Alpes-Côte d'Azur
   values:
@@ -276,7 +276,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.73
   metadata:
     ipp_csv_id: maj_ticpe_super_paca
-    unit: currency-EUR
+    unit: currency
 "94":
   description: Majoration déterminée par la Corse
   values:
@@ -286,7 +286,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.0
   metadata:
     ipp_csv_id: maj_ticpe_super_cor
-    unit: currency-EUR
+    unit: currency
 "99":
   description: Majoration appliquée à la France (paramètre par défaut si la région n'est pas précisée)
   values:
@@ -295,7 +295,7 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
     2017-01-01:
       value: 0.73
   metadata:
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - "11"

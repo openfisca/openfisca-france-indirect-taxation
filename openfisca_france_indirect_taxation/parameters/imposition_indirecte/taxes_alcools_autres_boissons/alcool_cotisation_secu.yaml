@@ -40,7 +40,7 @@ cotisation_alcools_taux_plein_eur_hlap:
       value: null
   metadata:
     ipp_csv_id: coti_secu_alcool_tx_plein
-    unit: currency-EUR
+    unit: currency
 cotisation_produits_intermediaires_titrant_plus_18_vol_taux_plein_eur_hl:
   description: Cotisation sur les produits intermédiaires titrant plus de 18% vol. - Taux plein (€/hl)
   values:
@@ -66,7 +66,7 @@ cotisation_produits_intermediaires_titrant_plus_18_vol_taux_plein_eur_hl:
       value: null
   metadata:
     ipp_csv_id: coti_secu_alcool_inter_tx_plein
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - cotisation_securite_sociale_eur_par_decilitre

@@ -80,7 +80,7 @@ bieres_moins_46_vol_recipient_entre_65cl_1l:
       value: 4.5
   metadata:
     ipp_csv_id: taxe_bieres_inf_46
-    unit: currency-FRF
+    unit: currency
 bieres_non_comprises_dans_mention_precedente:
   description: Bières non comprises dans la mention précédente
   values:
@@ -94,7 +94,7 @@ bieres_non_comprises_dans_mention_precedente:
       value: 8.0
   metadata:
     ipp_csv_id: taxe_autres_bieres
-    unit: currency-FRF
+    unit: currency
 petites_brasseries_10_000hl_eur_degre_hl:
   description: Petites brasseries < 10 000hl (€/degré/hl)
   values:
@@ -126,7 +126,7 @@ petites_brasseries_10_000hl_eur_degre_hl:
       value: null
   metadata:
     ipp_csv_id: taxe_brasserie_inf_10
-    unit: currency-EUR
+    unit: currency
 10_000hl_petites_brasseries_50_000hl_eur_degre_hl:
   description: 10 000hl < petites brasseries < 50 000hl (€/degré/hl)
   values:
@@ -158,7 +158,7 @@ petites_brasseries_10_000hl_eur_degre_hl:
       value: null
   metadata:
     ipp_csv_id: taxe_brasserie_10_50
-    unit: currency-EUR
+    unit: currency
 50_000hl_petites_brasseries_200_000hl_eur_degre_hl:
   description: 50 000hl < petites brasseries < 200 000hl (€/degré/hl)
   values:
@@ -190,7 +190,7 @@ petites_brasseries_10_000hl_eur_degre_hl:
       value: null
   metadata:
     ipp_csv_id: taxe_brasserie_50_200
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - bieres_moins_28_vol_eur_degre_hl

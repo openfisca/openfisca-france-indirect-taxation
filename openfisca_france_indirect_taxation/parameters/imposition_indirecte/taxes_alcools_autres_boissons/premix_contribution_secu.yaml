@@ -22,7 +22,7 @@ premix_eur_par_decilitre:
       value: 1.5
   metadata:
     ipp_csv_id: taxe_premix_decil_tot
-    unit: currency-FRF
+    unit: currency
 metadata:
   order:
   - premix_eur_par_decilitre_alcool_pur

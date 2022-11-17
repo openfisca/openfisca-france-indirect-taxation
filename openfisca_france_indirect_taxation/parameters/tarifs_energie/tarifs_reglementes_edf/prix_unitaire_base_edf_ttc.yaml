@@ -74,7 +74,7 @@ prix_kwh_3_kva:
       value: 0.0891
   metadata:
     ipp_csv_id: prix_unitaire_3kva_ttc
-    unit: currency-EUR
+    unit: currency
 prix_kwh_6_kva:
   description: Prix du kWh - 6 kVA
   values:
@@ -150,7 +150,7 @@ prix_kwh_6_kva:
       value: 0.084
   metadata:
     ipp_csv_id: prix_unitaire_6kva_ttc
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - prix_kwh_3_kva

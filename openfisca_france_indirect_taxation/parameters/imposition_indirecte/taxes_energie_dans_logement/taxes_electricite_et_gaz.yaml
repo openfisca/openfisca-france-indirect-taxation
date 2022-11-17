@@ -22,7 +22,7 @@ cspe:
       value: null
   metadata:
     ipp_csv_id: cspe
-    unit: currency-EUR
+    unit: currency
 cta_electricite:
   description: CTA portant sur la distribution d'électricité
   values:
@@ -66,7 +66,7 @@ ticgn_prix_par_mwh:
       value: 1.19
   metadata:
     ipp_csv_id: ticgn
-    unit: currency-EUR
+    unit: currency
 ctssg_prix_par_mwh:
   description: CTSSG - prix par MWh
   values:
@@ -86,7 +86,7 @@ ctssg_prix_par_mwh:
       value: null
   metadata:
     ipp_csv_id: ctssg
-    unit: currency-EUR
+    unit: currency
 plafonds_tcfe_compteurs_36_kva_en_euros_par_mwh:
   description: Plafonds TCFE pour compteurs < ou = à 36 kva - en euros par MWh
   values:
@@ -104,7 +104,7 @@ plafonds_tcfe_compteurs_36_kva_en_euros_par_mwh:
       value: null
   metadata:
     ipp_csv_id: plafond_tcfe
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - cspe
