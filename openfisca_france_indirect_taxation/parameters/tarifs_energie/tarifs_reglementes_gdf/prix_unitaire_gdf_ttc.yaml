@@ -337,7 +337,7 @@ metadata:
   - prix_kwh_b0_ttc
   - prix_kwh_b1_ttc
   - prix_kwh_b2i_ttc
-  description_en: Unitary price regulated tariff GDF (including taxes)
+  label_en: Unitary price regulated tariff GDF (including taxes)
 documentation: |
   Source :
     jusqu'à 2013 base Pégase, prix pour un ménage, en euros TTC, données annuelles

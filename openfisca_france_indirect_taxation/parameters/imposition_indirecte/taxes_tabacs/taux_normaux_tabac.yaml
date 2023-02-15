@@ -310,7 +310,7 @@ metadata:
     1992-04-20: 1991-12-31
     1991-09-30: 1990-12-30
     1991-01-01: 1990-12-30
-  description_en: Tobacco usual rates
+  label_en: Tobacco usual rates
 documentation: |
   Notes :
   Voir aussi article 575 A du code général des impôts.

@@ -291,6 +291,6 @@ metadata:
   - b0_1000_6000
   - b1_6_30000
   - b2i_30000
-  description_en: Fix fee regulated tariff GDF (including taxes)
+  label_en: Fix fee regulated tariff GDF (including taxes)
 documentation: |
   Source : base Pégase, prix pour un ménage, en euros TTC, données annuelles

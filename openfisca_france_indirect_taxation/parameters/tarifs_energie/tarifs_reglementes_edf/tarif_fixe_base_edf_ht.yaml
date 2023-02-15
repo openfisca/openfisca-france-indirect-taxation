@@ -334,7 +334,7 @@ metadata:
   - tarif_fixe_24_kva
   - tarif_fixe_30_kva
   - tarif_fixe_36_kva
-  description_en: Fix fee base tariff EDF (without taxes)
+  label_en: Fix fee base tariff EDF (without taxes)
 documentation: |
   Source : http://www.cre.fr/marches/marche-de-detail/marche-de-l-electricite#section2
   Commission de régulation de l'énergie (CRE)

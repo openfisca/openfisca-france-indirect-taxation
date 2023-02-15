@@ -356,7 +356,7 @@ metadata:
   - prix_kwh_24_kva
   - prix_kwh_30_kva
   - prix_kwh_36_kva
-  description_en: Unitary price base tariff EDF (without taxes)
+  label_en: Unitary price base tariff EDF (without taxes)
 documentation: |
   Source : http://www.cre.fr/marches/marche-de-detail/marche-de-l-electricite#section2
   CRE

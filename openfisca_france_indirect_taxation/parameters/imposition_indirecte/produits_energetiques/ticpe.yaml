@@ -1192,7 +1192,7 @@ metadata:
     1994-01-01: 1993-12-31
     1993-04-15: 1992-12-31
     1993-01-01: 1992-12-31
-  description_en: TICPE - Energy products
+  label_en: TICPE - Energy products
 documentation: |
   Notes :
   NB : données renseignées dans l'article 265 du code des douanes

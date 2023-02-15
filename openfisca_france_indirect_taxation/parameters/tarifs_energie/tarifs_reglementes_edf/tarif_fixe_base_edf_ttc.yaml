@@ -449,7 +449,7 @@ metadata:
   - tarif_fixe_12_kva
   - tarif_fixe_15_kva
   - tarif_fixe_18_kva
-  description_en: Fix fee base tariff EDF (including taxes)
+  label_en: Fix fee base tariff EDF (including taxes)
 documentation: |
   Source : base Pégase, prix pour un ménage, tarif bleu option base, en euros TTC, données annuelles
   Note : A partir de 2018 les tarifs de l'abonnement sont exprimés en euros par mois et non par an. Le prix mensuel est multiplié par 12 dans ce barème

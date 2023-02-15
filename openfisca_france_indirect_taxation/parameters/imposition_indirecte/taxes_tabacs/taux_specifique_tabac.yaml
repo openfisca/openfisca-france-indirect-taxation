@@ -193,7 +193,7 @@ metadata:
     2012-01-01: 2011-12-29
     2011-01-01: 2010-12-30
     2004-01-05: 2003-12-31
-  description_en: Tobacco specific rates
+  label_en: Tobacco specific rates
 documentation: |
   Notes :
   A partir de 2015 la part spécifique est en euro et non plus en pourcentage

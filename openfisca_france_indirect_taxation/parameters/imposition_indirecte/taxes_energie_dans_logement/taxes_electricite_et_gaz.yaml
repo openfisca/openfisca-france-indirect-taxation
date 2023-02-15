@@ -113,7 +113,7 @@ metadata:
   - ticgn_prix_par_mwh
   - ctssg_prix_par_mwh
   - plafonds_tcfe_compteurs_36_kva_en_euros_par_mwh
-  description_en: Taxes on electricity and gas
+  label_en: Taxes on electricity and gas
 documentation: |
   Source :
   http://www.gaznaturel-3frontieres.fr/upload/banque-image/Circulaire%20TICGN%2029%20avril%202014.pdf

@@ -123,7 +123,7 @@ metadata:
   order:
   - prix_annuel_moyen_fioul_domestique_ttc_livraisons_2000_4999_litres_en_euro_par_litre
   - prix_annuel_moyen_fioul_domestique_ht_livraisons_2000_4999_litres_en_euro_par_litre
-  description_en: Domestic fuel price
+  label_en: Domestic fuel price
 documentation: |
   Source : http://www.prix-carburants.developpement-durable.gouv.fr/petrole/se_cons_fr.htm
   Moyenne annuelle

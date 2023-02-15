@@ -2,4 +2,4 @@ description: TVA
 metadata:
   order:
   - taux_de_tva
-  description_en: Value added tax (VAT)
+  label_en: Value added tax (VAT)

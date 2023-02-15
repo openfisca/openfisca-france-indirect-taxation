@@ -196,7 +196,7 @@ metadata:
     1968-12-01: 1968-11-30
     1955-07-01: 1955-05-03
     1954-07-01: 1954-04-11
-  description_en: TVA rates (1968-2016)
+  label_en: TVA rates (1968-2016)
 documentation: |
   Notes :
   "Le montant de TVA est appliqué au prix TTC jusqu'au 1er janvier 1970, puis au prix hors taxe depuis."

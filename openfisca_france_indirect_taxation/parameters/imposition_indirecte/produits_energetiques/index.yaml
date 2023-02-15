@@ -13,4 +13,4 @@ metadata:
   - taux_conversion_euro_par_mwh_a_euro_par_hectolitre
   - tgap_carburants
   - ticpe
-  description_en: Taxes and excises on energy products
+  label_en: Taxes and excises on energy products

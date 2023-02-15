@@ -232,7 +232,7 @@ metadata:
     2011-10-01: 2011-09-20
     2011-01-01: 2010-12-30
     1994-09-02: 2001-12-26
-  description_en: Taxes on insurance contracts
+  label_en: Taxes on insurance contracts
 documentation: |
   Notes :
   Déductions pour les véhicules de plus de 3,5 tonnes
