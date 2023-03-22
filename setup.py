@@ -12,6 +12,9 @@ Development Status :: 3 - Alpha
 License :: OSI Approved :: GNU Affero General Public License v3
 Operating System :: POSIX
 Programming Language :: Python
+Programming Language :: Python :: 3.9
+Programming Language :: Python :: 3.10
+Programming Language :: Python :: 3.11
 Topic :: Scientific/Engineering :: Information Analysis
 '''
 
@@ -35,25 +38,27 @@ setup(
         },
     extras_require = dict(
         dev = [
-            'autopep8 >= 1.4.0, < 1.6.0',
-            'flake8 >= 4.0.0, < 5.0.0',
-            'flake8-bugbear >= 19.3.0, < 20.0.0',
-            'ipdb >=0.13.9, < 1.0.0',
-            'matplotlib <= 3.4.3, < 4.0.0',
-            'nbconvert >= 5.5.0, < 6.0.0',
-            'OpenFisca-Survey-Manager >= 0.46.13, < 1.0',
-            'pytest >= 5.0.0, < 7.0.0',
-            'ruamel.yaml >= 0.17.16, < 1.0.0',
-            'seaborn >= 0.11.2, < 1.0.0',
-            'statsmodels >= 0.13.2, < 1.0',
-            'xlrd >= 2.0.1, < 3.0.0',
+            'autopep8',
+            'flake8',
+            'flake8-bugbear',
+            'ipdb',
+            'matplotlib',
+            'nbconvert',
+            # 'OpenFisca-Survey-Manager',
+            'OpenFisca-Survey-Manager @ git+https://github.com/openfisca/openfisca-survey-manager.git@version_leap',
+            'pytest',
+            'ruamel.yaml',
+            'seaborn',
+            'statsmodels',
+            'xlrd',
             ],
         ),
     include_package_data = True,  # Will read MANIFEST.in
     install_requires = [
-        'OpenFisca-Core >= 38.0.1, < 39.0.0',
-        'pandas >= 0.22',
-        'python-slugify >= 6.1.2, < 7.0.0',
+        # 'OpenFisca-Core >= 38.0.1, < 39.0.0',
+        'OpenFisca-Core @ git+https://github.com/openfisca/openfisca-core.git@version_leap',
+        'pandas',
+        'python-slugify',
         ],
     packages = find_packages(),
     )
