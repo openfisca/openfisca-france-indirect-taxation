@@ -74,7 +74,7 @@ def build_aliss_reform(rebuild = False, ajustable = False):
             labels,
             axis = 1,
             ).groupby(['code_bdf']).filter(
-                lambda x: x[reform].nunique() > 1,
+                lambda x: x[reform].nunique() > 1,  # noqa B023
                 ).sort_values('code_bdf')
 
         mismatch.nomc = mismatch.nomc.str.decode('latin-1').str.encode('utf-8')

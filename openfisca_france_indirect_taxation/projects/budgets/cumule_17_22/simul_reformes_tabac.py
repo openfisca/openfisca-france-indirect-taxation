@@ -33,9 +33,9 @@ path = 'Q:/Evaluation du budget/PLF2022/donnees_relance_note_mars_2022/fiscalite
 is_elasticite = True
 replique_gouv = True
 
-if not(is_elasticite):
+if not (is_elasticite):
     elas = 0
-elif not(replique_gouv):
+elif not (replique_gouv):
     elas = -0.5
 elif replique_gouv:
     elas = -0.635
