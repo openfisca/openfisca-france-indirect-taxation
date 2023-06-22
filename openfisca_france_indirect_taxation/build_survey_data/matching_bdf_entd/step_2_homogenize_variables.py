@@ -120,12 +120,15 @@ def create_niveau_vie_quantiles(year_data):
 
         population_totale = data['sum_pondmen'].max()
         data['niveau_vie_decile'] = 0
+        print(option)
         for j in range(1, 11):
+            print('décile', j)
             data.loc[data.sum_pondmen > population_totale * (float(j) / 10 - 0.1), 'niveau_vie_decile'] = j
 
         data['niveau_vie_quintile'] = 0
         for j in range(1, 6):
-            data.loc[data.sum_pondmen > population_totale * (float(j) / 5 - 0.2), 'niveau_vie_decile'] = j
+            print('quintile', j)
+            data.loc[data.sum_pondmen > population_totale * (float(j) / 5 - 0.2), 'niveau_vie_quintile'] = j
 
         data = data.sort_index()
         del data['sum_pondmen']

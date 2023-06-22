@@ -1,4 +1,4 @@
-name: fiscalite_indirecte
+name: openfiscaenv
 channels:
   - defaults
 dependencies:
@@ -217,4 +217,4 @@ dependencies:
     - weightedcalcs==0.1.2
     - wmctrl==0.4
     - wquantiles==0.6
-prefix: C:\Users\c.lallemand\.conda\envs\fiscalite_indirecte
+prefix: C:\Users\veve1\miniconda3\envs
