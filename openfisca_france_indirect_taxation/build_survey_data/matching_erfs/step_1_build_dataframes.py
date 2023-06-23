@@ -13,15 +13,15 @@ from openfisca_survey_manager import default_config_files_directory as config_fi
 
 def load_data_bdf_erfs(year_data):
     # Load ERFS data
-    year_erfs = 2015 # modifié Hervé 16/06/2023
+    year_erfs = 2017 # modifié Hervé 23/06/2023
 
     erfs_survey_collection = SurveyCollection.load(
         collection = 'erfs_fpr', config_files_directory = config_files_directory
         )
     survey_erfs = erfs_survey_collection.get_survey('erfs_fpr_{}'.format(year_erfs))
 
-    revenus_erfs = survey_erfs.get_values(table = 'fpr_menage_2015') # modifié Hervé 16/06/2023
-    menages_erfs = survey_erfs.get_values(table = 'fpr_mrf15e15t4') # modifié Hervé 16/06/2023
+    revenus_erfs = survey_erfs.get_values(table = 'fpr_menage_2017') # modifié Hervé 23/06/2023
+    menages_erfs = survey_erfs.get_values(table = 'fpr_mrf17e17t4') # modifié Hervé 23/06/2023
 
     menages_erfs = pandas.merge(revenus_erfs, menages_erfs, on = 'ident')
 
