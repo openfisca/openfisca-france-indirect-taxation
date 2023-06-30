@@ -6,8 +6,7 @@ from openfisca_survey_manager.utils import asof
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.examples.utils_example import (
     dataframe_by_group,
-    graph_builder_bar,
-    )
+    graph_builder_bar)
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.projects.budgets.reforme_energie_budgets_2018_2019 import officielle_2019_in_2017
 from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
