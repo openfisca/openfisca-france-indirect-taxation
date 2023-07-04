@@ -20,12 +20,12 @@ ident_men = pd.DataFrame(pd.HDFStore("C:/Users/veve1/OneDrive/Documents/ENSAE 3A
 ident_men['ident_men'] = ident_men.ident_men.astype(numpy.int64)
 
 data_path = "C:/Users/veve1/OneDrive/Documents/ENSAE 3A/Memoire MiE/Data"
-output_path = os.path.join(data_path,'donnees_relance_note_mars_2022/fiscalite_indirecte')
+output_path = os.path.join(data_path,'donnees_simulations')
                            
 df_elasticities = pd.read_csv(os.path.join(data_path,'Elasticities_literature.csv'), sep = ";")
 df_elasticities[['elas_price_1_1','elas_price_2_2','elas_price_3_3']].astype(float)
     
-def simulate_reformes_energie(elasticites):
+def simulate_reformes_energie(elasticites,year,reform):
 
     data_year = 2017
     # on veut faire les simulations sur les quantités avant réforme
@@ -37,7 +37,6 @@ def simulate_reformes_energie(elasticites):
     inflators_by_year[2020] = inflators_by_year[2017]
     inflators_by_year[2021] = inflators_by_year[2017]
     inflators_by_year[2022] = inflators_by_year[2017]
-    year = 2019
 
     # elasticités : le programme de T. Douenne n'a pas été bien adapté (pas le temps) et du coup on a pas d'élasticité pour tout le monde
     # on prend des élasticités agrégées par type de bien
@@ -50,10 +49,8 @@ def simulate_reformes_energie(elasticites):
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
     simulated_variables = [
-        'total_taxes_energies',
-        'total_taxes_energies_officielle_2019_in_2017',
-        'ticgn',
-        'ticgn_officielle_2019_in_2017',
+        'ticpe_totale',
+        'ticpe_totale_'+ reform.key[0],
         'cheques_energie',
         'rev_disp_loyerimput',
         'pondmen',
@@ -67,7 +64,7 @@ def simulate_reformes_energie(elasticites):
         elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
         baseline_tax_benefit_system = baseline_tax_benefit_system,
-        reform = officielle_2019_in_2017,
+        reform = reform,
         year = year,
         data_year = data_year
         )
@@ -77,8 +74,7 @@ def simulate_reformes_energie(elasticites):
     menages_reform= indiv_df_reform['menage']
 
     menages_reform['Net_apres_cheques_energie'] = menages_reform['cheques_energie'] - \
-        (menages_reform['total_taxes_energies_officielle_2019_in_2017'] - menages_reform['total_taxes_energies']) - \
-            (menages_reform['ticgn_officielle_2019_in_2017'] - menages_reform['ticgn'])
+        (menages_reform['ticpe_totale_'+ reform.key[0]] - menages_reform['ticpe_totale']) 
                 
     menages_reform['is_losers'] = menages_reform['Net_apres_cheques_energie'] <0 
     
@@ -100,13 +96,11 @@ def simulate_reformes_energie(elasticites):
     
     return (to_graph,menages_reform)
 
-def run_all_elasticities(data_elasticities = df_elasticities):
+def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, reform = officielle_2019_in_2017):
     to_graph = pd.DataFrame(columns = {'ref_elasticity','niveau_vie_decile','winners','losers'})
     menages_reform = pd.DataFrame(columns = {'ref_elasticity', 
-        'total_taxes_energies',
-        'total_taxes_energies_officielle_2019_in_2017',
-        'ticgn',
-        'ticgn_officielle_2019_in_2017',
+        'ticpe_totale',
+        'ticpe_totale_' + reform.key[0],
         'cheques_energie',
         'rev_disp_loyerimput',
         'pondmen',
@@ -115,7 +109,7 @@ def run_all_elasticities(data_elasticities = df_elasticities):
         })
     for elas in data_elasticities['ref_elasticity']:
         elasticities = data_elasticities[data_elasticities['ref_elasticity'] == elas]
-        to_concat = simulate_reformes_energie(elasticites = elasticities)
+        to_concat = simulate_reformes_energie(elasticites = elasticities, year = year, reform = reform)
         to_graph = pd.concat([to_graph,to_concat[0]])
         menages_reform = pd.concat([menages_reform, to_concat[1]])
     return (to_graph,menages_reform)
@@ -129,6 +123,6 @@ def graph_winners_losers(data):
     plt.xlabel('Revenu decile', fontdict = {'fontsize' : 12})
     plt.ylabel('Share of net losers from the reform', fontdict = {'fontsize' : 12})
     plt.legend()
-    plt.savefig(os.path.join(path,'Winners_losers_reform.png'))    
+    plt.savefig(os.path.join(path,'Winners_losers_reform_{}.png'.format(reform.key[0])))    
     return
 

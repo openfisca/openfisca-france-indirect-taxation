@@ -4,6 +4,8 @@ from openfisca_core.reforms import Reform
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
+DIESEL_KG_CO2_PAR_HL = 317
+ESSENCE_KG_CO2_PAR_HL = 270
 
 def modify_parameters(parameters):
     node = ParameterNode(
@@ -13,12 +15,12 @@ def modify_parameters(parameters):
             "diesel_with_carbon_tax_rv": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 "unit": 'currency',
-                "values": {'2016-01-01': TODO}  
+                "values": {'2017-01-01': (44.6 - 30.5) / 1e3 * ESSENCE_KG_CO2_PAR_HL}  
                 },
             "essence_with_carbon_tax_rv": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "unit": 'currency',
-                "values": {'2016-01-01': TODO},
+                "values": {'2017-01-01': (44.6 - 30.5) / 1e3 * DIESEL_KG_CO2_PAR_HL},
                 }
             }
         )
@@ -317,6 +319,24 @@ class carbon_tax_rv(Reform):
             quantite_essence_ajustee = (quantite_sp95_ajustee + quantite_sp98_ajustee + quantite_super_plombe_ajustee)
             return quantite_essence_ajustee
 
+    class emissions_CO2_carburants(YearlyVariable):
+        label = "Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
+        # use_baseline =emissions_co2.emissions_CO2_carburants
+
+        def formula(menage, period, parameters):
+            quantites_diesel_ajustees = menage('quantite_diesel_carbon_tax_rv', period)
+            quantites_essence_ajustees = menage('quantite_essence_carbon_tax_rv', period)
+            emissions_diesel = \
+                parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
+            emissions_essence = \
+                parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
+            emissions_ajustees = (
+                (quantites_diesel_ajustees * emissions_diesel)
+                + (quantites_essence_ajustees * emissions_essence)
+                )  # Source : Ademe
+
+            return emissions_ajustees
+        
     class gains_tva_carburants_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
@@ -748,22 +768,6 @@ class carbon_tax_rv(Reform):
 
             return ticpe_totale_ajustee
 
-    class total_taxes_energies_carbon_tax_rv(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Différence entre les contributions aux taxes sur l'énergie après la hausse cce 2016-2018"
-
-        def formula(menage, period):
-            taxe_diesel = menage('diesel_ticpe_carbon_tax_rv', period)
-            taxe_essence = menage('essence_ticpe_carbon_tax_rv', period)
-            taxe_combustibles_liquides = menage('combustibles_liquides_ticpe_carbon_tax_rv', period)
-
-            total = (
-                taxe_diesel + taxe_essence + taxe_combustibles_liquides
-                )
-
-            return total
-
     def apply(self):
         self.update_variable(self.cheques_energie)
         self.update_variable(self.depenses_carburants_corrigees_carbon_tax_rv)
@@ -775,6 +779,7 @@ class carbon_tax_rv(Reform):
         self.update_variable(self.essence_ticpe_carbon_tax_rv)
         self.update_variable(self.essence_ticpe_test)
         self.update_variable(self.quantite_essence_carbon_tax_rv)
+        self.update_variable(self.emissions_CO2_carburants)
         self.update_variable(self.gains_tva_carburants_carbon_tax_rv)
         self.update_variable(self.revenu_reforme_carbon_tax_rv)
         self.update_variable(self.sp_e10_ticpe_carbon_tax_rv)
@@ -791,5 +796,4 @@ class carbon_tax_rv(Reform):
         self.update_variable(self.quantite_super_plombe_carbon_tax_rv)
         self.update_variable(self.ticpe_totale_carbon_tax_rv)
         self.update_variable(self.ticpe_totale_test)
-        self.update_variable(self.total_taxes_energies_carbon_tax_rv)
         self.modify_parameters(modifier_function = modify_parameters)
