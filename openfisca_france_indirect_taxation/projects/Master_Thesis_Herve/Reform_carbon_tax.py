@@ -4,8 +4,8 @@ from openfisca_core.reforms import Reform
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
-DIESEL_KG_CO2_PAR_HL = 317
-ESSENCE_KG_CO2_PAR_HL = 270
+DIESEL_KG_CO2_PAR_HL = 264.5
+ESSENCE_KG_CO2_PAR_HL = 228.4
 
 def modify_parameters(parameters):
     node = ParameterNode(
@@ -15,12 +15,12 @@ def modify_parameters(parameters):
             "diesel_with_carbon_tax_rv": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 "unit": 'currency',
-                "values": {'2017-01-01': (44.6 - 30.5) / 1e3 * ESSENCE_KG_CO2_PAR_HL}  
+                "values": {'2018-01-01': (55.0 - 44.63) / 1e3 * ESSENCE_KG_CO2_PAR_HL}  # test
                 },
             "essence_with_carbon_tax_rv": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "unit": 'currency',
-                "values": {'2017-01-01': (44.6 - 30.5) / 1e3 * DIESEL_KG_CO2_PAR_HL},
+                "values": {'2018-01-01': 2.6 + (55.0 - 44.6) / 1e3 * DIESEL_KG_CO2_PAR_HL} # test
                 }
             }
         )
@@ -33,7 +33,7 @@ def modify_parameters(parameters):
 
 class carbon_tax_rv(Reform):
     key = 'carbon_tax_rv',
-    name = "Réforme de la fiscalité des énergies de 2018 par rapport aux taux de 2016",
+    name = "Réforme de la fiscalité des énergies de 2019 par rapport aux taux de 20168",
 
     class cheques_energie(YearlyVariable):
         value_type = float
@@ -148,7 +148,7 @@ class carbon_tax_rv(Reform):
     class diesel_ticpe_test(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul du montant de TICPE sur le diesel après réforme"
+        label = "Calcul du montant de TICPE sur le diesel sans réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -188,7 +188,7 @@ class carbon_tax_rv(Reform):
     class quantite_diesel_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul du montant de TICPE sur le diesel après réforme"
+        label = "Calcul des quantités de diesel après réforme"
 
         def formula(menage, period, parameters):
             reforme_diesel = parameters(period.start).carbon_tax_rv.diesel_with_carbon_tax_rv
@@ -272,7 +272,7 @@ class carbon_tax_rv(Reform):
     class essence_ticpe_test(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
+        label = "Calcul du montant de la TICPE sur toutes les essences cumulées, sans réforme"
 
         def formula_2009(menage, period):
             sp95_ticpe_ajustee = menage('sp95_ticpe_test', period)
@@ -297,7 +297,7 @@ class carbon_tax_rv(Reform):
     class quantite_essence_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
+        label = "Calcul des qauntités de toutes les essences cumulées, après réforme"
 
         def formula_2009(menage, period):
             quantite_sp95_ajustee = menage('quantite_sp95_carbon_tax_rv', period)
@@ -336,6 +336,20 @@ class carbon_tax_rv(Reform):
                 )  # Source : Ademe
 
             return emissions_ajustees
+    
+    class revenu_reforme_carbon_tax_rv(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Revenu généré par la réforme officielle 2018 avant redistribution"
+
+        def formula(menage, period):
+            total_ticpe = menage('ticpe_totale',period)
+            total_ticpe_carbon_tax_rv = menage('ticpe_totale_carbon_tax_rv',period)
+            total_gains_tva_carburants_carbon_tax_rv = menage('gains_tva_carburants_carbon_tax_rv', period)
+
+            revenu_reforme = (total_ticpe_carbon_tax_rv - total_ticpe) + total_gains_tva_carburants_carbon_tax_rv                
+
+            return revenu_reforme
         
     class gains_tva_carburants_carbon_tax_rv(YearlyVariable):
         value_type = float
@@ -366,24 +380,29 @@ class carbon_tax_rv(Reform):
                 )
             return gains_tva_carburants
 
-    class revenu_reforme_carbon_tax_rv(YearlyVariable):
+    class ticpe_totale_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Revenu généré par la réforme officielle 2018 avant redistribution"
+        label = "Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
 
         def formula(menage, period):
-            total_taxes_energies = menage('total_taxes_energies', period)
-            total_taxes_energies_carbon_tax_rv = menage('total_taxes_energies_carbon_tax_rv', period)
-            gains_tva_total_energies = menage('gains_tva_total_energies_carbon_tax_rv', period)
-            taxe_gaz_ville = menage('taxe_gaz_ville_carbon_tax_rv', period)
+            essence_ticpe_ajustee = menage('essence_ticpe_carbon_tax_rv', period)
+            diesel_ticpe_ajustee = menage('diesel_ticpe_carbon_tax_rv', period)
+            ticpe_totale_ajustee = diesel_ticpe_ajustee + essence_ticpe_ajustee
 
-            revenu_reforme = (
-                total_taxes_energies_carbon_tax_rv - total_taxes_energies
-                + taxe_gaz_ville
-                + gains_tva_total_energies
-                )
+            return ticpe_totale_ajustee
 
-            return revenu_reforme
+    class ticpe_totale_test(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
+
+        def formula(menage, period):
+            essence_ticpe_ajustee = menage('essence_ticpe_test', period)
+            diesel_ticpe_ajustee = menage('diesel_ticpe_test', period)
+            ticpe_totale_ajustee = diesel_ticpe_ajustee + essence_ticpe_ajustee
+
+            return ticpe_totale_ajustee
 
     class sp_e10_ticpe_carbon_tax_rv(YearlyVariable):
         value_type = float
@@ -427,7 +446,7 @@ class carbon_tax_rv(Reform):
     class sp_e10_ticpe_test(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul du montant de la TICPE sur le SP E10 après réforme"
+        label = "Calcul du montant de la TICPE sur le SP E10 sans réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -520,7 +539,7 @@ class carbon_tax_rv(Reform):
     class sp95_ticpe_test(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul du montant de TICPE sur le sp_95 après réforme"
+        label = "Calcul du montant de TICPE sur le sp_95 sans réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -612,7 +631,7 @@ class carbon_tax_rv(Reform):
     class sp98_ticpe_test(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul du montant de TICPE sur le sp_98 après réforme"
+        label = "Calcul du montant de TICPE sur le sp_98 sans réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -699,7 +718,7 @@ class carbon_tax_rv(Reform):
     class super_plombe_ticpe_test(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul du montant de la TICPE sur le super plombé après réforme"
+        label = "Calcul du montant de la TICPE sur le super plombé sans réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -743,31 +762,7 @@ class carbon_tax_rv(Reform):
                 parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
             depenses_super_plombe_ajustees = depenses_essence_carbon_tax_rv * part_super_plombe
             return depenses_super_plombe_ajustees / super_plombe_ttc_ajuste
-
-    class ticpe_totale_carbon_tax_rv(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
-
-        def formula(menage, period):
-            essence_ticpe_ajustee = menage('essence_ticpe_carbon_tax_rv', period)
-            diesel_ticpe_ajustee = menage('diesel_ticpe_carbon_tax_rv', period)
-            ticpe_totale_ajustee = diesel_ticpe_ajustee + essence_ticpe_ajustee
-
-            return ticpe_totale_ajustee
-
-    class ticpe_totale_test(YearlyVariable):
-        value_type = float
-        entity = Menage
-        label = "Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
-
-        def formula(menage, period):
-            essence_ticpe_ajustee = menage('essence_ticpe_test', period)
-            diesel_ticpe_ajustee = menage('diesel_ticpe_test', period)
-            ticpe_totale_ajustee = diesel_ticpe_ajustee + essence_ticpe_ajustee
-
-            return ticpe_totale_ajustee
-
+        
     def apply(self):
         self.update_variable(self.cheques_energie)
         self.update_variable(self.depenses_carburants_corrigees_carbon_tax_rv)
@@ -780,8 +775,10 @@ class carbon_tax_rv(Reform):
         self.update_variable(self.essence_ticpe_test)
         self.update_variable(self.quantite_essence_carbon_tax_rv)
         self.update_variable(self.emissions_CO2_carburants)
-        self.update_variable(self.gains_tva_carburants_carbon_tax_rv)
         self.update_variable(self.revenu_reforme_carbon_tax_rv)
+        self.update_variable(self.gains_tva_carburants_carbon_tax_rv)
+        self.update_variable(self.ticpe_totale_carbon_tax_rv)
+        self.update_variable(self.ticpe_totale_test)
         self.update_variable(self.sp_e10_ticpe_carbon_tax_rv)
         self.update_variable(self.sp_e10_ticpe_test)
         self.update_variable(self.quantite_sp_e10_carbon_tax_rv)
@@ -794,6 +791,4 @@ class carbon_tax_rv(Reform):
         self.update_variable(self.super_plombe_ticpe_carbon_tax_rv)
         self.update_variable(self.super_plombe_ticpe_test)
         self.update_variable(self.quantite_super_plombe_carbon_tax_rv)
-        self.update_variable(self.ticpe_totale_carbon_tax_rv)
-        self.update_variable(self.ticpe_totale_test)
         self.modify_parameters(modifier_function = modify_parameters)
