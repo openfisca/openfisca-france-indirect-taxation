@@ -59,7 +59,37 @@ class carbon_tax_rv(Reform):
                     ],
                 default = 0.0
                 )
-            
+    
+    class bonus_cheques_energie(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Montant du bonus de chèques énergie réparti uniformément (indexés par uc) - taxe carbone"
+
+        def formula(menage, period):
+            contribution = menage('contributions_reforme', period)
+            ocde10 = menage('ocde10', period)
+            pondmen = menage('pondmen', period)
+
+            somme_contributions = numpy.sum(contribution * pondmen)
+            contribution_uc = somme_contributions / numpy.sum(ocde10 * pondmen)
+
+            cheque = contribution_uc * ocde10
+
+            return cheque
+
+    class contributions_reforme(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Changement de contribution à la taxe carbone suite à la réforme "
+
+        def formula(menage, period):
+            total_ticpe = menage('ticpe_totale',period)
+            total_ticpe_carbon_tax_rv = menage('ticpe_totale_carbon_tax_rv',period)
+
+            contribution = total_ticpe_carbon_tax_rv - total_ticpe
+
+            return contribution
+                
     class depenses_carburants_corrigees_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
@@ -765,6 +795,8 @@ class carbon_tax_rv(Reform):
         
     def apply(self):
         self.update_variable(self.cheques_energie)
+        self.update_variable(self.bonus_cheques_energie)
+        self.update_variable(self.contributions_reforme)
         self.update_variable(self.depenses_carburants_corrigees_carbon_tax_rv)
         self.update_variable(self.depenses_diesel_corrigees_carbon_tax_rv)
         self.update_variable(self.depenses_essence_corrigees_carbon_tax_rv)

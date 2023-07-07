@@ -1,4 +1,3 @@
-# On essaye de réutiliser le code ~\openfisca_france_indirect_taxation\examples\benjello_candidates_to_removal\master_thesis\loosers_within_income_deciles.py
 import numpy
 import pandas as pd
 import os
@@ -14,7 +13,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
     dataframe_by_group,
     graph_builder_bar)
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.projects.budgets.reforme_energie_budgets_2018_2019 import officielle_2019_in_2017
+from openfisca_france_indirect_taxation.projects.Master_Thesis_Herve.Reform_carbon_tax import carbon_tax_rv
 from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
 
 
@@ -34,11 +33,10 @@ def simulate_reformes_energie(elasticites,year,reform):
     # idéalement on voudrait l'évolution des quantités pour les années jusque 2022 s'il n'y avait pas eu de réforme
     # mais en l'absence d'information on considère que la consommation reste constante dans le contrefactuel.
     inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020), data_year = data_year)
-    inflators_by_year[2018] = inflators_by_year[2017]
-    inflators_by_year[2019] = inflators_by_year[2017]
-    inflators_by_year[2020] = inflators_by_year[2017]
-    inflators_by_year[2021] = inflators_by_year[2017]
-    inflators_by_year[2022] = inflators_by_year[2017]
+    inflators_by_year[2019] = inflators_by_year[2018]
+    inflators_by_year[2020] = inflators_by_year[2018]
+    inflators_by_year[2021] = inflators_by_year[2018]
+    inflators_by_year[2022] = inflators_by_year[2018]
 
     # elasticités : le programme de T. Douenne n'a pas été bien adapté (pas le temps) et du coup on a pas d'élasticité pour tout le monde
     # on prend des élasticités agrégées par type de bien
@@ -51,7 +49,8 @@ def simulate_reformes_energie(elasticites,year,reform):
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
     simulated_variables = [
-        'cheques_energie',       
+        'bonus_cheques_energie',
+        'contributions_reforme',       
         'ticpe_totale',
         'ticpe_totale_'+ reform.key[0],
         'rev_disp_loyerimput',
@@ -74,13 +73,15 @@ def simulate_reformes_energie(elasticites,year,reform):
     indiv_df_reform = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
     menages_reform= indiv_df_reform['menage']
 
-    menages_reform['Net_apres_cheques_energie'] = menages_reform['cheques_energie'] - \
-        (menages_reform['ticpe_totale_'+ reform.key[0]] - menages_reform['ticpe_totale']) 
-    menages_reform['taux_effort'] = (menages_reform['ticpe_totale_carbon_tax_rv'] - menages_reform['ticpe_totale']) / menages_reform['rev_disp_loyerimput'] * 100
-    menages_reform['is_losers'] = menages_reform['Net_apres_cheques_energie'] <0 
+    revenu_disp_loyer_imput_2_perc = menages_reform['rev_disp_loyerimput'].quantile(0.02)
+    menages_reform = menages_reform[menages_reform['rev_disp_loyerimput'] >= revenu_disp_loyer_imput_2_perc] # on retire les ménages avant le 3e percentile
+    
+    menages_reform['Net_transfers_reform'] = menages_reform['bonus_cheques_energie'] - menages_reform['contributions_reforme']  
+    menages_reform['Effort_rate'] = menages_reform['contributions_reforme'] / menages_reform['rev_disp_loyerimput'] * 100
+    menages_reform['Is_losers'] = menages_reform['Net_transfers_reform'] < 0 
     
     to_graph = pd.DataFrame(data = {'niveau_vie_decile' : [1.0 , 2.0 , 3.0 , 4.0, 5.0 , 6.0 , 7.0 , 8.0 , 9.0 , 10.0, 'Total']})
-    for var in ['is_losers','taux_effort','Net_apres_cheques_energie']:
+    for var in ['Is_losers','Effort_rate','Net_transfers_reform']:
         by_decile = pd.DataFrame(data = collapse(menages_reform,'niveau_vie_decile',var)).reset_index().rename(columns = { 0 : var}) 
         total = pd.DataFrame(data = {'niveau_vie_decile' : 'Total', var : wavg(menages_reform, var)}, index = [0]) 
         to_merge = pd.concat([by_decile, total])
@@ -91,10 +92,11 @@ def simulate_reformes_energie(elasticites,year,reform):
     to_graph['ref_elasticity'] = ref_elasticity
     return (to_graph,menages_reform)
 
-def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, reform = officielle_2019_in_2017):
-    to_graph = pd.DataFrame(columns = {'ref_elasticity','niveau_vie_decile','is_losers','taux_effort','Net_apres_cheques_energie'})
+def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, reform = carbon_tax_rv):
+    to_graph = pd.DataFrame(columns = {'ref_elasticity','niveau_vie_decile','Is_losers','Effort_rate','Net_transfers_reform'})
     menages_reform = pd.DataFrame(columns = {'ref_elasticity', 
-        'cheques_energie',       
+        'bonus_cheques_energie',
+        'contributions_reforme',       
         'ticpe_totale',
         'ticpe_totale_'+ reform.key[0],
         'rev_disp_loyerimput',
@@ -109,15 +111,32 @@ def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, refor
         menages_reform = pd.concat([menages_reform, to_concat[1]])
     return (to_graph,menages_reform)
     
-def graph_winners_losers(data,year):
+def graph_winners_losers(data,reform):
+   hue_order = ['Berry (2019)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)']
+   plt.figure(figsize= (10,7.5)) 
+   sns.barplot(x="niveau_vie_decile", y = 'Is_losers', data = data, hue = 'ref_elasticity', hue_order = hue_order , palette = sns.color_palette("Paired"), width = .9)
+   plt.xlabel('Revenue decile', fontdict = {'fontsize' : 12})
+   plt.ylabel('Share of net losers from the reform', fontdict = {'fontsize' : 12})
+   plt.legend()
+   plt.savefig(os.path.join(output_path,'Winners_losers_reform_{}.png').format(reform.key[0]))    
+   return
+
+def graph_net_transfers(data,reform):
+    hue_order = ['Berry (2019)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)']
     plt.figure(figsize= (10,7.5)) 
-    # Si on veut avoir la part de gagnants qui complète la bar jusqu'à 1 
-    #data['total'] = 1
-    #bar1 = sns.barplot(x="niveau_vie_decile", y = 'total', data = data, hue = 'ref_elasticity', palette = sns.color_palette("muted"), saturation = .2, width=.9)
-    bar2 = sns.barplot(x="niveau_vie_decile", y = 'losers', data = data, hue = 'ref_elasticity', palette = sns.color_palette("Paired"), width = .9)
-    plt.xlabel('Revenu decile', fontdict = {'fontsize' : 12})
-    plt.ylabel('Share of net losers from the reform', fontdict = {'fontsize' : 12})
+    sns.barplot(x="niveau_vie_decile", y = 'Net_transfers_reform', data = data, hue = 'ref_elasticity', hue_order = hue_order, palette = sns.color_palette("Paired"), width = .9)
+    plt.xlabel('Revenue decile', fontdict = {'fontsize' : 12})
+    plt.ylabel('Net transfers in euros', fontdict = {'fontsize' : 12})
     plt.legend()
-    plt.savefig(os.path.join(path,'Winners_losers_reform_{}_year{}.png'.format(reform.key[0],year)))    
+    plt.savefig(os.path.join(output_path,'Net_transfers_reform_{}.png').format(reform.key[0]))
     return
 
+def graph_effort_rate(data,reform):
+    hue_order = ['Berry (2019)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)']
+    plt.figure(figsize= (10,7.5)) 
+    sns.barplot(x="niveau_vie_decile", y = 'Effort_rate', data = data, hue = 'ref_elasticity', hue_order = hue_order, palette = sns.color_palette("Paired"), width = .9)
+    plt.xlabel('Revenue decile', fontdict = {'fontsize' : 12})
+    plt.ylabel('Additional taxes over disposable income', fontdict = {'fontsize' : 12})
+    plt.legend()
+    plt.savefig(os.path.join(output_path,'Effort_rate_reform_{}.png').format(reform.key[0]))
+    return
