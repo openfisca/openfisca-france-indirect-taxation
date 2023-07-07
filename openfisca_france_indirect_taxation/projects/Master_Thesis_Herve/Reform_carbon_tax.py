@@ -33,7 +33,7 @@ def modify_parameters(parameters):
 
 class carbon_tax_rv(Reform):
     key = 'carbon_tax_rv',
-    name = "Réforme de la fiscalité des énergies de 2019 par rapport aux taux de 20168",
+    name = "Réforme de la fiscalité des énergies de 2019 par rapport aux taux de 2018",
 
     class cheques_energie(YearlyVariable):
         value_type = float
