@@ -15,12 +15,12 @@ def modify_parameters(parameters):
             "diesel_with_carbon_tax_rv": {
                 "description": "Surcroît de prix du diesel (en euros par hectolitres)",
                 "unit": 'currency',
-                "values": {'2018-01-01': (55.0 - 44.63) / 1e3 * ESSENCE_KG_CO2_PAR_HL}  # test
+                "values": {'2018-01-01': 2.6 + (55.0 - 44.6) / 1e3 * DIESEL_KG_CO2_PAR_HL}
                 },
             "essence_with_carbon_tax_rv": {
                 "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
                 "unit": 'currency',
-                "values": {'2018-01-01': 2.6 + (55.0 - 44.6) / 1e3 * DIESEL_KG_CO2_PAR_HL} # test
+                "values": {'2018-01-01': (55.0 - 44.6) / 1e3 * ESSENCE_KG_CO2_PAR_HL}
                 }
             }
         )
