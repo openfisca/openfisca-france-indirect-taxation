@@ -1,6 +1,7 @@
 import numpy
 import pandas as pd
 import os
+import ast
 import seaborn as sns
 from matplotlib import pyplot as plt
 
@@ -12,40 +13,46 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
     collapse,
     dataframe_by_group,
     graph_builder_bar)
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import add_niveau_vie_decile
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.projects.Master_Thesis_Herve.Reform_carbon_tax import carbon_tax_rv
 from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
 
-
-ident_men = pd.DataFrame(pd.HDFStore("C:/Users/veve1/OneDrive/Documents/ENSAE 3A/Memoire MiE/Data/data_collections/output/openfisca_indirect_taxation_data_2017.h5")['input']['ident_men'])
-ident_men['ident_men'] = ident_men.ident_men.astype(numpy.int64)
-
 data_path = "C:/Users/veve1/OneDrive/Documents/ENSAE 3A/Memoire MiE/Data"
-output_path = os.path.join(data_path,'donnees_simulations')
+output_path = "C:/Users/veve1/OneDrive/Documents/ENSAE 3A/Memoire MiE/Output"
                            
 df_elasticities = pd.read_csv(os.path.join(data_path,'Elasticities_literature.csv'), sep = ";")
 df_elasticities[['elas_price_1_1','elas_price_2_2','elas_price_3_3']].astype(float)
+
+df_elas_vect = pd.read_csv(os.path.join(data_path,'Elasticities_Douenne_20.csv'), index_col = [0])
+df_elas_vect = pd.melt(frame = df_elas_vect , id_vars = ["niveau_vie_decile", 'ref_elasticity'], var_name = 'strate_2', value_name = 'elas_price_1_1')
     
-def simulate_reformes_energie(elasticites,year,reform):
+def simulate_reformes_energie(elas_vect, elasticites, year, reform):
+
+    ident_men = pd.HDFStore("C:/Users/veve1/OneDrive/Documents/ENSAE 3A/Memoire MiE/Data/data_collections/output/openfisca_indirect_taxation_data_2017.h5")['input'][['ident_men','pondmen', 'rev_disponible','ocde10','strate']]
+    ident_men['ident_men'] = ident_men.ident_men.astype(numpy.int64)
+    ident_men = add_niveau_vie_decile(ident_men)
 
     data_year = 2017
-    # on veut faire les simulations sur les quantités avant réforme
-    # idéalement on voudrait l'évolution des quantités pour les années jusque 2022 s'il n'y avait pas eu de réforme
-    # mais en l'absence d'information on considère que la consommation reste constante dans le contrefactuel.
     inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020), data_year = data_year)
-    inflators_by_year[2019] = inflators_by_year[2018]
-    inflators_by_year[2020] = inflators_by_year[2018]
-    inflators_by_year[2021] = inflators_by_year[2018]
-    inflators_by_year[2022] = inflators_by_year[2018]
-
-    # elasticités : le programme de T. Douenne n'a pas été bien adapté (pas le temps) et du coup on a pas d'élasticité pour tout le monde
-    # on prend des élasticités agrégées par type de bien
-    ident_men['elas_price_1_1'] = elasticites['elas_price_1_1'].reset_index()['elas_price_1_1'][0] # transport fuel
-    ident_men['elas_price_2_2'] = elasticites['elas_price_2_2'].reset_index()['elas_price_2_2'][0] # housing fuel
-    ident_men['elas_price_3_3'] = elasticites['elas_price_3_3'].reset_index()['elas_price_3_3'][0] # other non durable goods ??
-
-    elasticities = ident_men
-
+    
+    if elas_vect == True :
+        # elasticités vectorielles : on a une elasctitié-prix du carburant par décile de niveau de vie x type de ville 
+        dict_strate = { 0 : 'Rural' , 1 : 'Small cities' , 2 : 'Medium cities' , 3 : 'Large cities' , 4 : 'Paris'}
+        ident_men['strate_2'] = ident_men['strate'].apply(lambda x : dict_strate.get(x))
+        ident_men = ident_men.merge(right = elasticites , how = 'inner' , on = ['niveau_vie_decile','strate_2'])
+        ident_men['elas_price_1_1'] = ident_men['elas_price_1_1'].apply( lambda x : ast.literal_eval(x)[0])
+        ident_men = ident_men[['ident_men','elas_price_1_1']]
+    
+    else:
+        # elasticités scalaires : on prend des élasticités agrégées par type de bien
+        ident_men['elas_price_1_1'] = elasticites['elas_price_1_1'].reset_index()['elas_price_1_1'][0] # transport fuel
+        ident_men['elas_price_2_2'] = elasticites['elas_price_2_2'].reset_index()['elas_price_2_2'][0] # housing fuel
+        ident_men['elas_price_3_3'] = elasticites['elas_price_3_3'].reset_index()['elas_price_3_3'][0] # other non durable goods ??
+        ident_men = ident_men[['ident_men','elas_price_1_1','elas_price_2_2','elas_price_3_3']]
+        
+    elasticities = ident_men 
+        
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
     simulated_variables = [
@@ -106,37 +113,49 @@ def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, refor
         })
     for elas in data_elasticities['ref_elasticity']:
         elasticities = data_elasticities[data_elasticities['ref_elasticity'] == elas]
-        to_concat = simulate_reformes_energie(elasticites = elasticities, year = year, reform = reform)
+        to_concat = simulate_reformes_energie(elas_vect = False, elasticites = elasticities, year = year, reform = reform)
         to_graph = pd.concat([to_graph,to_concat[0]])
         menages_reform = pd.concat([menages_reform, to_concat[1]])
     return (to_graph,menages_reform)
     
-def graph_winners_losers(data,reform):
+def graph_winners_losers(data,reform,elas_vect):
    hue_order = ['Berry (2019)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)']
-   plt.figure(figsize= (10,7.5)) 
-   sns.barplot(x="niveau_vie_decile", y = 'Is_losers', data = data, hue = 'ref_elasticity', hue_order = hue_order , palette = sns.color_palette("Paired"), width = .9)
+   plt.figure(figsize= (10,7.5))
+   if elas_vect == False :
+       sns.barplot(x="niveau_vie_decile", y = 'Is_losers', data = data, hue = 'ref_elasticity', hue_order = hue_order , palette = sns.color_palette("Paired"), width = .9)
+   else :
+       sns.barplot(x="niveau_vie_decile", y = 'Is_losers', data = data, hue = 'ref_elasticity', hue_order= ['Douenne (2020)', 'Douenne (2020) vector'], palette = sns.color_palette("Paired"), width = .9) 
+   
    plt.xlabel('Revenue decile', fontdict = {'fontsize' : 12})
    plt.ylabel('Share of net losers from the reform', fontdict = {'fontsize' : 12})
    plt.legend()
-   plt.savefig(os.path.join(output_path,'Winners_losers_reform_{}.png').format(reform.key[0]))    
+   plt.savefig(os.path.join(output_path,'Figures/Winners_losers_reform_{}_elas_vect_{}.png').format(reform.key[0],elas_vect))    
    return
 
-def graph_net_transfers(data,reform):
+def graph_net_transfers(data,reform,elas_vect):
     hue_order = ['Berry (2019)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)']
     plt.figure(figsize= (10,7.5)) 
-    sns.barplot(x="niveau_vie_decile", y = 'Net_transfers_reform', data = data, hue = 'ref_elasticity', hue_order = hue_order, palette = sns.color_palette("Paired"), width = .9)
+    if elas_vect == False :
+        sns.barplot(x="niveau_vie_decile", y = 'Net_transfers_reform', data = data, hue = 'ref_elasticity', hue_order = hue_order, palette = sns.color_palette("Paired"), width = .9)
+    else :
+        sns.barplot(x="niveau_vie_decile", y = 'Net_transfers_reform', data = data, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = sns.color_palette("Paired"), width = .9)
+    
     plt.xlabel('Revenue decile', fontdict = {'fontsize' : 12})
     plt.ylabel('Net transfers in euros', fontdict = {'fontsize' : 12})
     plt.legend()
-    plt.savefig(os.path.join(output_path,'Net_transfers_reform_{}.png').format(reform.key[0]))
+    plt.savefig(os.path.join(output_path,'Figures/Net_transfers_reform_{}_elas_vect_{}.png').format(reform.key[0],elas_vect))
     return
 
-def graph_effort_rate(data,reform):
+def graph_effort_rate(data,reform,elas_vect):
     hue_order = ['Berry (2019)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)']
     plt.figure(figsize= (10,7.5)) 
-    sns.barplot(x="niveau_vie_decile", y = 'Effort_rate', data = data, hue = 'ref_elasticity', hue_order = hue_order, palette = sns.color_palette("Paired"), width = .9)
+    if elas_vect == False :
+        sns.barplot(x="niveau_vie_decile", y = 'Effort_rate', data = data, hue = 'ref_elasticity', hue_order = hue_order, palette = sns.color_palette("Paired"), width = .9)
+    else : 
+        sns.barplot(x="niveau_vie_decile", y = 'Effort_rate', data = data, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = sns.color_palette("Paired"), width = .9)
+    
     plt.xlabel('Revenue decile', fontdict = {'fontsize' : 12})
     plt.ylabel('Additional taxes over disposable income', fontdict = {'fontsize' : 12})
     plt.legend()
-    plt.savefig(os.path.join(output_path,'Effort_rate_reform_{}.png').format(reform.key[0]))
+    plt.savefig(os.path.join(output_path,'Figures/Effort_rate_reform_{}_elas_vect_{}.png').format(reform.key[0],elas_vect))
     return
