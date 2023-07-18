@@ -5,6 +5,7 @@ import ast
 import seaborn as sns
 from matplotlib import pyplot as plt
 
+from wquantiles import quantile
 from openfisca_survey_manager.utils import asof
 
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
@@ -12,7 +13,8 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
     wavg,
     collapse,
     dataframe_by_group,
-    graph_builder_bar)
+    graph_builder_bar,
+    df_weighted_average_grouped)
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import add_niveau_vie_decile
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.projects.Master_Thesis_Herve.Reform_carbon_tax import carbon_tax_rv
@@ -80,20 +82,16 @@ def simulate_reformes_energie(elas_vect, elasticites, year, reform, bonus_cheque
         )
 
     indiv_df_reform = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
-    menages_reform= indiv_df_reform['menage']
+    menages_reform = indiv_df_reform['menage']
 
     rev_disponible_2_perc = menages_reform['rev_disponible'].quantile(0.02)
     perc_2 = menages_reform[menages_reform['rev_disponible'] <= rev_disponible_2_perc]
-    average_perc_2 = pd.DataFrame(data = {'niveau_vie_decile' : [1.0]})
-    average_perc_2['pondmen'] = perc_2['pondmen'].sum()
 
     list_var = simulated_variables
     list_var.remove('pondmen')
-    list_var.remove('niveau_vie_decile')
-    for var in list_var:
-        average_col = pd.DataFrame(data = collapse(perc_2,'niveau_vie_decile',var)).reset_index().rename(columns = { 0 : var}) 
-        average_perc_2 = average_perc_2.merge(right = average_col, how = 'inner', on = 'niveau_vie_decile') 
-
+    average_perc_2 = df_weighted_average_grouped(perc_2,'niveau_vie_decile',list_var)
+    average_perc_2['pondmen'] = perc_2['pondmen'].sum()
+    
     menages_reform = menages_reform[menages_reform['rev_disponible'] > rev_disponible_2_perc] # on retire les ménages avant le 2e percentile
     menages_reform = pd.concat([menages_reform,average_perc_2])
 
@@ -105,17 +103,16 @@ def simulate_reformes_energie(elas_vect, elasticites, year, reform, bonus_cheque
     menages_reform['Effort_rate'] = menages_reform['contributions_reforme'] / menages_reform['rev_disponible'] * 100
     menages_reform['Is_losers'] = menages_reform['Net_transfers_reform'] < 0 
     
-    
-    to_graph = pd.DataFrame(data = {'niveau_vie_decile' : [1.0 , 2.0 , 3.0 , 4.0, 5.0 , 6.0 , 7.0 , 8.0 , 9.0 , 10.0, 'Total']})
-    for var in ['Is_losers','Effort_rate','Net_transfers_reform']:
-        by_decile = pd.DataFrame(data = collapse(menages_reform,'niveau_vie_decile',var)).reset_index().rename(columns = { 0 : var}) 
-        total = pd.DataFrame(data = {'niveau_vie_decile' : 'Total', var : wavg(menages_reform, var)}, index = [0]) 
-        to_merge = pd.concat([by_decile, total])
-        to_graph = to_graph.merge(right = to_merge, how = 'inner', on = 'niveau_vie_decile') 
-    
     ref_elasticity = elasticites['ref_elasticity'].reset_index()['ref_elasticity'][0]
     menages_reform['ref_elasticity'] = ref_elasticity
+    var_to_graph = ['Is_losers','Effort_rate','Net_transfers_reform']
+    by_decile = df_weighted_average_grouped(menages_reform,'niveau_vie_decile',var_to_graph).reset_index()
+    total = df_weighted_average_grouped(menages_reform,'ref_elasticity',var_to_graph).reset_index().drop('ref_elasticity',axis = 1)
+    total['niveau_vie_decile'] = 'Total'
+    to_graph['niveau_vie_decile'] = to_graph['niveau_vie_decile'].astype(int)
+    to_graph = pd.concat([by_decile, total])
     to_graph['ref_elasticity'] = ref_elasticity
+    
     return (to_graph,menages_reform)
 
 def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, reform = carbon_tax_rv,bonus_cheques_uc = True):
@@ -187,4 +184,53 @@ def graph_effort_rate(data,reform,elas_vect,bonus_cheques_uc):
     y_max = 0.2
     ax.set_ylim(ymin = 0 , ymax = y_max)
     plt.savefig(os.path.join(output_path,'Figures/Effort_rate_reform_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_vect,bonus_cheques_uc))
+    return
+
+def quantiles_for_boxplot(data,y):
+    out = pd.DataFrame(data = {'niveau_vie_decile' : [] , 'ref_elasticity': [] , y : []})
+    for ref in set(data['ref_elasticity']):
+        data_ref = data[data['ref_elasticity'] == ref]
+        for decile in set(data_ref['niveau_vie_decile']):
+            data_decile = data_ref[data_ref['niveau_vie_decile'] == decile]
+            for q in [0.01, 0.1, 0.25, 0.5, 0.75, 0.9, 0.99]:
+                quantil = quantile(data_decile[y],data_decile['pondmen'],q)
+                out = pd.concat([out,pd.DataFrame(data = {'niveau_vie_decile' : [decile] , 'ref_elasticity' : ref, y : [quantil]}),])
+    return out
+
+def boxplot_net_transfers(data,reform,elas_vect,bonus_cheques_uc):
+    hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
+    fig, ax = plt.subplots(figsize=(10, 7.5))
+    
+    to_plot = quantiles_for_boxplot(data,'Net_transfers_reform') 
+    if elas_vect == False :
+        sns.boxplot(x="niveau_vie_decile", y = 'Net_transfers_reform', data = to_plot, whis = 0, hue = 'ref_elasticity', hue_order = hue_order, palette = sns.color_palette("Paired"), width = .9)
+    else :
+        sns.boxplot(x="niveau_vie_decile", y = 'Net_transfers_reform', data = to_plot, whis = 0, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = sns.color_palette("Paired"), width = .9)
+    
+    plt.xlabel('Revenue decile', fontdict = {'fontsize' : 12})
+    plt.ylabel('Net transfers in euros', fontdict = {'fontsize' : 12})
+    plt.legend()
+
+    y_min, y_max = -250 , 100
+    ax.set_ylim(ymin = y_min , ymax = y_max)
+    plt.savefig(os.path.join(output_path,'Figures/Boxplot_net_transfers_reform_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_vect,bonus_cheques_uc))
+    return
+
+def boxplot_effort_rate(data,reform,elas_vect,bonus_cheques_uc):
+    hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
+    fig, ax = plt.subplots(figsize=(10, 7.5))
+    
+    to_plot = quantiles_for_boxplot(data,'Effort_rate') 
+    if elas_vect == False :
+        sns.boxplot(x="niveau_vie_decile", y = 'Effort_rate', data = to_plot, whis = 0, hue = 'ref_elasticity', hue_order = hue_order, palette = sns.color_palette("Paired"), width = .9)
+    else :
+        sns.boxplot(x="niveau_vie_decile", y = 'Effort_rate', data = to_plot, whis = 0, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = sns.color_palette("Paired"), width = .9)
+    
+    plt.xlabel('Revenue decile', fontdict = {'fontsize' : 12})
+    plt.ylabel('Additional taxes over disposable income', fontdict = {'fontsize' : 12})
+    plt.legend()
+
+    y_min, y_max = 0 , 1
+    ax.set_ylim(ymin = y_min , ymax = y_max)
+    plt.savefig(os.path.join(output_path,'Figures/Boxplot_effort_rate_reform_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_vect,bonus_cheques_uc))
     return
