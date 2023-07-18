@@ -1,6 +1,7 @@
 import pandas as pd
+import os
 
-
+data_path = data_path = "C:/Users/veve1/OneDrive/Documents/ENSAE 3A/Memoire MiE/Data"
 # To create a dataframe with elasticities from Douenne (2020)
 table_data = {
     'niveau_vie_decile': ['Rural', 'Small cities', 'Medium cities', 'Large cities', 'Paris'],
@@ -24,4 +25,4 @@ df_elas.rename(columns = df_elas.iloc[0],inplace = True)
 df_elas.drop(index = 0, axis = 0, inplace = True)
 df_elas['ref_elasticity'] = 'Douenne (2020) vector'
 # Write the DataFrame to a CSV file
-df_elas.to_csv(os.path.join(data_path,'Elasticities_Douenne_20.csv'))
+df_elas.to_csv(os.path.join(data_path,'Reform_parameters/Elasticities_Douenne_20.csv'))
