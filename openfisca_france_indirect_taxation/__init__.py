@@ -1,4 +1,4 @@
-from ipmportlib import metadata
+from importlib import metadata
 
 from openfisca_france_indirect_taxation.france_indirect_taxation_taxbenefitsystem import FranceIndirectTaxationTaxBenefitSystem
 
