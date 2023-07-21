@@ -5,7 +5,7 @@ import logging
 import numpy as np
 import os
 import pandas as pd
-from openfisca_france_indirect_taxation import openfisca_france_indirect_taxation_location
+from openfisca_france_indirect_taxation.utils import openfisca_france_indirect_taxation_location
 
 from openfisca_core.reforms import Reform
 from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable

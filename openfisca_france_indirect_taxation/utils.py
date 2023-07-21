@@ -1,12 +1,9 @@
-# -*- coding: utf-8 -*-
-
-
-import os
-
-
+from importlib import metadata
 import logging
+import os
+from pathlib import Path
 import pandas
-from openfisca_france_indirect_taxation import openfisca_france_indirect_taxation_location
+
 
 try:
     from openfisca_survey_manager.survey_collections import SurveyCollection
@@ -14,6 +11,11 @@ except ImportError:
     SurveyCollection = None
 
 log = logging.getLogger(__name__)
+
+
+openfisca_france_indirect_taxation_location = Path(
+    metadata.distribution('openfisca-france-indirect-taxation').files[0]
+    ).parent
 
 
 assets_directory = os.path.join(

@@ -1,5 +1,5 @@
 import csv
-from openfisca_france_indirect_taxation import openfisca_france_indirect_taxation_location
+from openfisca_france_indirect_taxation.utils import openfisca_france_indirect_taxation_location
 import os
 
 prix_carburant_par_annee_par_carburant_par_region_en_litre = None

@@ -5,7 +5,7 @@ import configparser
 import datetime
 import logging
 import os
-from openfisca_france_indirect_taxation import openfisca_france_indirect_taxation_location
+from openfisca_france_indirect_taxation.utils import openfisca_france_indirect_taxation_location
 import sys
 
 
@@ -15,7 +15,7 @@ app_name = os.path.splitext(os.path.basename(__file__))[0]
 log = logging.getLogger(app_name)
 
 raw_data_ini = os.path.join(
-    pkg_resources.get_distribution('openfisca_survey_manager').location,
+    openfisca_france_indirect_taxation_location,
     'raw_data.ini'
     )
 
