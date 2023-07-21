@@ -147,7 +147,7 @@ def get_cn_aggregates_energy(target_year = None):
     revenus_cn = revenus_cn * 1e9
 
     # default_config_files_directory = os.path.join(
-    #    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    #    openfisca_france_indirect_taxation_location)
     # parametres_fiscalite_file_path = os.path.join(
     #    default_config_files_directory,
     #    'openfisca_france_indirect_taxation',

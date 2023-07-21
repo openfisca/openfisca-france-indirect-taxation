@@ -5,7 +5,7 @@ import configparser
 import datetime
 import logging
 import os
-import pkg_resources
+from openfisca_france_indirect_taxation import openfisca_france_indirect_taxation_location
 import sys
 
 

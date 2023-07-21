@@ -1,5 +1,5 @@
 import csv
-import pkg_resources
+from openfisca_france_indirect_taxation import openfisca_france_indirect_taxation_location
 import os
 
 prix_carburant_par_annee_par_carburant_par_region_en_litre = None
@@ -31,7 +31,7 @@ def get_prix_carburant_par_annee_par_carburant_en_hectolitre():
 def preload_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre():
     global prix_carburant_par_annee_par_carburant_par_region_en_hectolitre
     csv_file_path = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+        openfisca_france_indirect_taxation_location,
         'openfisca_france_indirect_taxation',
         'assets',
         'prix',
@@ -49,7 +49,7 @@ def preload_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre():
 def preload_prix_carburant_par_annee_par_carburant_par_region_en_litre():  # On ne l'utilise par car choix arbitraire d'utiliser les prix par hectolitre
     global prix_carburant_par_annee_par_carburant_par_region_en_litre
     csv_file_path = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+        openfisca_france_indirect_taxation_location,
         'openfisca_france_indirect_taxation',
         'assets',
         'prix',
@@ -67,7 +67,7 @@ def preload_prix_carburant_par_annee_par_carburant_par_region_en_litre():  # On 
 def preload_prix_carburant_par_annee_par_carburant_en_hectolitre():
     global prix_carburant_par_annee_par_carburant_en_hectolitre
     csv_file_path = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+        openfisca_france_indirect_taxation_location,
         'openfisca_france_indirect_taxation',
         'assets',
         'prix',

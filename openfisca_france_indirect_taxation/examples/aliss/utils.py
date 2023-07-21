@@ -3,7 +3,7 @@
 
 import numpy as np
 import os
-import pkg_resources
+from openfisca_france_indirect_taxation import openfisca_france_indirect_taxation_location
 import pandas as pd
 
 
@@ -12,7 +12,7 @@ from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss impo
 
 
 aliss_assets_reform_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+    openfisca_france_indirect_taxation_location,
     'openfisca_france_indirect_taxation',
     'reforms',
     'aliss_assets',

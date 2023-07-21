@@ -5,7 +5,7 @@ import logging
 import numpy as np
 import os
 import pandas as pd
-import pkg_resources
+from openfisca_france_indirect_taxation import openfisca_france_indirect_taxation_location
 
 from openfisca_core.reforms import Reform
 from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable
@@ -26,7 +26,7 @@ log = logging.getLogger(__name__)
 
 
 aliss_assets_reform_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+    openfisca_france_indirect_taxation_location,
     'openfisca_france_indirect_taxation',
     'reforms',
     'aliss_assets',

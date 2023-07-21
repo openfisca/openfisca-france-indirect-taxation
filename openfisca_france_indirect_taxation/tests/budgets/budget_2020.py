@@ -4,7 +4,7 @@
 # import numpy as np
 # import os
 # import pandas as pd
-# import pkg_resources
+# from openfisca_france_indirect_taxation import openfisca_france_indirect_taxation_location
 # import pytest
 
 
@@ -20,7 +20,7 @@
 #     if baseline_year == '2019':
 #         reforme = "2020"
 #     test_assets_directory = os.path.join(
-#         pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+#         openfisca_france_indirect_taxation_location,
 #         'openfisca_france_indirect_taxation',
 #         'assets',
 #         'tests'

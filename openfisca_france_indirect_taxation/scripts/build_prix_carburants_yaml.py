@@ -7,7 +7,7 @@
 
 import os
 import pandas as pd
-import pkg_resources
+from openfisca_france_indirect_taxation import openfisca_france_indirect_taxation_location
 from ruamel import yaml
 
 
@@ -21,7 +21,7 @@ file_path = os.path.join(
     )
 
 output_file_path = os.path.join(
-    pkg_resources.get_distribution('openfisca-france-indirect-taxation').location,
+    openfisca_france_indirect_taxation_location,
     'openfisca_france_indirect_taxation',
     'parameters',
     'imposition_indirecte',

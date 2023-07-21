@@ -6,7 +6,7 @@ import os
 
 import logging
 import pandas
-import pkg_resources
+from openfisca_france_indirect_taxation import openfisca_france_indirect_taxation_location
 
 try:
     from openfisca_survey_manager.survey_collections import SurveyCollection
@@ -17,7 +17,7 @@ log = logging.getLogger(__name__)
 
 
 assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+    openfisca_france_indirect_taxation_location,
     'openfisca_france_indirect_taxation',
     'assets',
     )
