@@ -4,7 +4,7 @@
 '''France specific indirect taxation model for OpenFisca -- a versatile microsimulation free software.'''
 
 
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 
 
 classifiers = ''' \
