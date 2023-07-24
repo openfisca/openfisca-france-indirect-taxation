@@ -234,7 +234,7 @@ class carbon_tax_rv(Reform):
     class quantite_diesel_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul des quantités de diesel après réforme"
+        label = "Calcul des quantités de diesel après réforme (en hL)"
 
         def formula(menage, period, parameters):
             reforme_diesel = parameters(period.start).carbon_tax_rv.diesel_with_carbon_tax_rv
@@ -343,7 +343,7 @@ class carbon_tax_rv(Reform):
     class quantite_essence_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul des qauntités de toutes les essences cumulées, après réforme"
+        label = "Calcul des quantités de toutes les essences cumulées, après réforme (en hL)"
 
         def formula_2009(menage, period):
             quantite_sp95_ajustee = menage('quantite_sp95_carbon_tax_rv', period)
@@ -365,23 +365,45 @@ class carbon_tax_rv(Reform):
             quantite_essence_ajustee = (quantite_sp95_ajustee + quantite_sp98_ajustee + quantite_super_plombe_ajustee)
             return quantite_essence_ajustee
 
-    class emissions_CO2_carburants(YearlyVariable):
+    class emissions_CO2_carburants_carbon_tax_rv(YearlyVariable):
+        value_type = float
+        entity = Menage
         label = "Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
         # use_baseline =emissions_co2.emissions_CO2_carburants
 
         def formula(menage, period, parameters):
             quantites_diesel_ajustees = menage('quantite_diesel_carbon_tax_rv', period)
             quantites_essence_ajustees = menage('quantite_essence_carbon_tax_rv', period)
-            emissions_diesel = \
-                parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
-            emissions_essence = \
-                parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
+            emissions_diesel = DIESEL_KG_CO2_PAR_HL
+                #parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
+            emissions_essence = ESSENCE_KG_CO2_PAR_HL
+                #parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
             emissions_ajustees = (
                 (quantites_diesel_ajustees * emissions_diesel)
                 + (quantites_essence_ajustees * emissions_essence)
                 )  # Source : Ademe
 
             return emissions_ajustees
+        
+    class emissions_CO2_carburants(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Emissions de CO2 des ménages via leur consommation de carburants avant réforme, en kg de CO2"
+        # use_baseline =emissions_co2.emissions_CO2_carburants
+
+        def formula(menage, period, parameters):
+            quantites_diesel = menage('quantite_diesel', period)
+            quantites_essence = menage('quantite_essence', period)
+            emissions_diesel = DIESEL_KG_CO2_PAR_HL
+                #parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
+            emissions_essence = ESSENCE_KG_CO2_PAR_HL
+                #parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
+            emissions_totales = (
+                (quantites_diesel * emissions_diesel)
+                + (quantites_essence * emissions_essence)
+                )  # Source : Ademe
+
+            return emissions_totales
     
     class revenu_reforme_carbon_tax_rv(YearlyVariable):
         value_type = float
@@ -530,7 +552,7 @@ class carbon_tax_rv(Reform):
     class quantite_sp_e10_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul du montant de la TICPE sur le SP E10 après réforme"
+        label = "Calcul des quantités de SP E10, après réforme (en hL)"
 
         def formula(menage, period, parameters):
             reforme_essence = parameters(period.start).carbon_tax_rv.essence_with_carbon_tax_rv
@@ -622,7 +644,7 @@ class carbon_tax_rv(Reform):
     class quantite_sp95_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul du montant de TICPE sur le sp_95 après réforme"
+        label = "Calcul des quantités de sp_95, après réforme (en hL)"
 
         def formula(menage, period, parameters):
             reforme_essence = parameters(period.start).carbon_tax_rv.essence_with_carbon_tax_rv
@@ -714,7 +736,7 @@ class carbon_tax_rv(Reform):
     class quantite_sp98_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul du montant de TICPE sur le sp_98 après réforme"
+        label = "Calcul des quantités de sp_98, après réforme (en hL)"
 
         def formula(menage, period, parameters):
             reforme_essence = parameters(period.start).carbon_tax_rv.essence_with_carbon_tax_rv
@@ -795,7 +817,7 @@ class carbon_tax_rv(Reform):
     class quantite_super_plombe_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Calcul du montant de la TICPE sur le super plombé après réforme"
+        label = "Calcul des quantités de super plombé, après réforme (en hL)"
 
         def formula(menage, period, parameters):
             reforme_essence = parameters(period.start).carbon_tax_rv.essence_with_carbon_tax_rv
@@ -823,6 +845,7 @@ class carbon_tax_rv(Reform):
         self.update_variable(self.essence_ticpe_carbon_tax_rv)
         self.update_variable(self.essence_ticpe_test)
         self.update_variable(self.quantite_essence_carbon_tax_rv)
+        self.update_variable(self.emissions_CO2_carburants_carbon_tax_rv)
         self.update_variable(self.emissions_CO2_carburants)
         self.update_variable(self.revenu_reforme_carbon_tax_rv)
         self.update_variable(self.gains_tva_carburants_carbon_tax_rv)

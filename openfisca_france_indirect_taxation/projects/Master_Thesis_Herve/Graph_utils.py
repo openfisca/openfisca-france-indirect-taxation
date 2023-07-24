@@ -59,6 +59,40 @@ def graph_effort_rate(data,reform,elas_vect,bonus_cheques_uc):
     plt.savefig(os.path.join(output_path,'Figures/Effort_rate_reform_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_vect,bonus_cheques_uc))
     return
 
+def graph_CO2_emissions(data,reform,elas_vect,bonus_cheques_uc):
+    hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
+    fig, ax = plt.subplots(figsize=(10, 7.5)) 
+    if elas_vect == False :
+        sns.barplot(x="niveau_vie_decile", y = 'emissions_CO2_carburants_carbon_tax_rv', data = data, hue = 'ref_elasticity', hue_order = hue_order , palette = sns.color_palette("Paired"), width = .9)
+    else : 
+        sns.barplot(x="niveau_vie_decile", y = 'emissions_CO2_carburants_carbon_tax_rv', data = data, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = sns.color_palette("Paired"), width = .9)
+    
+    plt.xlabel('Revenue decile', fontdict = {'fontsize' : 14})
+    plt.ylabel('Emissions from transport fuel (in tCO2)', fontdict = {'fontsize' : 14})
+    plt.legend()
+    
+    y_max = 3.5
+    ax.set_ylim(ymin = 0 , ymax = y_max)
+    plt.savefig(os.path.join(output_path,'Figures/CO2_emissions_reform_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_vect,bonus_cheques_uc))
+    return
+
+def graph_delta_CO2(data,reform,elas_vect,bonus_cheques_uc):
+    hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
+    fig, ax = plt.subplots(figsize=(10, 7.5)) 
+    if elas_vect == False :
+        sns.barplot(x="niveau_vie_decile", y = 'Reduction_CO2', data = data, hue = 'ref_elasticity', hue_order = hue_order , palette = sns.color_palette("Paired"), width = .9)
+    else : 
+        sns.barplot(x="niveau_vie_decile", y = 'Reduction_CO2', data = data, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = sns.color_palette("Paired"), width = .9)
+    
+    plt.xlabel('Revenue decile', fontdict = {'fontsize' : 14})
+    plt.ylabel('Reduction in CO2 emissions from transport fuel (in %)', fontdict = {'fontsize' : 14})
+    plt.legend()
+    
+    y_min = -9
+    ax.set_ylim(ymin = y_min , ymax = 0)
+    plt.savefig(os.path.join(output_path,'Figures/Delta_CO2_emissions_reform_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_vect,bonus_cheques_uc))
+    return
+
 def quantiles_for_boxplot(data,y):
     hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
     out = pd.DataFrame(data = {'niveau_vie_decile' : [] , 'ref_elasticity': [] , y : []})
@@ -68,14 +102,23 @@ def quantiles_for_boxplot(data,y):
         data_ref = data[data['ref_elasticity'] == ref]
         for decile in set(data_ref['niveau_vie_decile']):
             data_decile = data_ref[data_ref['niveau_vie_decile'] == decile]
-            decile = decile + 0.7 + 0.1*i_ref  - 1
+            plot_decile = decile + 0.7 + 0.1*i_ref  - 1
             for q in [0.01, 0.1, 0.25, 0.5, 0.75, 0.9, 0.99]:
                 quantil = quantile(data_decile[y],data_decile['pondmen'],q)
-                out = pd.concat([out,pd.DataFrame(data = {'niveau_vie_decile' : [decile] , 'ref_elasticity' : ref, y : [quantil], 'quantile' : [q]}),])
+                out = pd.concat([out,pd.DataFrame(data = {'niveau_vie_decile' : [decile] , 'plot_decile' : [plot_decile], 'ref_elasticity' : ref, y : [quantil], 'quantile' : [q]}),])
         i_ref +=1
+    percentile_dict = { 0.01 : 'P1',
+                       0.1 : 'P10 (D1)',
+                       0.25 : 'P25 (Q1)',
+                       0.5 : 'P50 (Median)',
+                       0.75 : 'P75 (Q3)',
+                       0.9 : 'P90 (D9)',
+                       0.99 : 'P99',
+                        }
+    out['Percentile'] = out['quantile'].apply(lambda x : percentile_dict.get(x))
     return out
 
-def subtitle_legend_boxplots(ax, legend_format,markers):
+def subtitle_legend_boxplots(ax, legend_format, markers):
     new_handles = []
     
     handles, labels = ax.get_legend_handles_labels()
@@ -97,7 +140,7 @@ def subtitle_legend_boxplots(ax, legend_format,markers):
                 new_handles.append(handle)
             else:
                 # If level is not a label, create a dummy handle with markers for percentiles
-                percentile_index = legend_format['Percentiles'].index(level)
+                percentile_index = legend_format['Percentile'].index(level)
                 marker = markers[percentile_index]
                 percentile_handle = plt.Line2D([], [], linestyle='None', marker=marker, markersize=6, label=str(level),color = 'black')
                 new_handles.append(percentile_handle)
@@ -115,13 +158,12 @@ def subtitle_legend_boxplots(ax, legend_format,markers):
 
 def boxplot_net_transfers(data,reform,elas_vect,bonus_cheques_uc):
     hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
-    legend_format = {'Elasticity reference' : hue_order,
-                    'Percentiles' : [0.01, 0.10, 0.25, 0.5, 0.75, 0.90, 0.99]}
+    legend_format = {'Percentile' : ['P1', 'P10 (D1)', 'P25 (Q1)', 'P50 (Median)', 'P75 (Q3)', 'P90 (D9)', 'P99']}
     markers = ['v', 'd', 'o', 'o', 'o' , 'd', '^']
     
     fig, ax = plt.subplots(figsize=(10, 8))
     quantiles_to_plot = quantiles_for_boxplot(data,'Net_transfers_reform')
-    sns.scatterplot(data = quantiles_to_plot , x='niveau_vie_decile', y='Net_transfers_reform', hue = 'ref_elasticity',  
+    sns.scatterplot(data = quantiles_to_plot , x='plot_decile', y='Net_transfers_reform', hue = 'ref_elasticity',  
                     style = 'quantile',
                     hue_order = hue_order, 
                     palette = sns.color_palette("Paired"), 
@@ -133,7 +175,7 @@ def boxplot_net_transfers(data,reform,elas_vect,bonus_cheques_uc):
     plt.ylabel('Net transfers in euros', fontdict = {'fontsize' : 14})
     subtitle_legend_boxplots(ax, legend_format,markers)
     legend = ax.get_legend()
-    legend.set_bbox_to_anchor((1, 0.53))
+    legend.set_bbox_to_anchor((0.19, 0.3))
     ax.xaxis.set_ticks(range(1,11))
     y_min, y_max = -200 , 100
     ax.yaxis.set_ticks(range(y_min,y_max,50))
@@ -144,12 +186,12 @@ def boxplot_net_transfers(data,reform,elas_vect,bonus_cheques_uc):
 def boxplot_effort_rate(data,reform,elas_vect,bonus_cheques_uc):
     hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
     legend_format = {'Elasticity reference' : hue_order,
-                    'Percentiles' : [0.01, 0.10, 0.25, 0.5, 0.75, 0.90, 0.99]}
+                    'Percentile' : ['P1', 'P10 (D1)', 'P25 (Q1)', 'P50 (Median)', 'P75 (Q3)', 'P90 (D9)', 'P99']}
     markers = ['v', 'd', 'o', 'o', 'o' , 'd', '^']
     
     fig, ax = plt.subplots(figsize=(10, 8))
     quantiles_to_plot = quantiles_for_boxplot(data,'Effort_rate')
-    sns.scatterplot(data = quantiles_to_plot, x='niveau_vie_decile', y='Effort_rate', hue = 'ref_elasticity',  
+    sns.scatterplot(data = quantiles_to_plot, x='plot_decile', y='Effort_rate', hue = 'ref_elasticity',  
                     style = 'quantile',
                     hue_order = hue_order, 
                     palette = sns.color_palette("Paired"), 
@@ -161,7 +203,8 @@ def boxplot_effort_rate(data,reform,elas_vect,bonus_cheques_uc):
     plt.ylabel('Additional taxes over disposable income', fontdict = {'fontsize' : 14})
     subtitle_legend_boxplots(ax, legend_format,markers)
     legend = ax.get_legend()
-    legend.set_bbox_to_anchor((1, 0.53))
+    ax.xaxis.set_ticks(range(1,11))
+    legend.set_bbox_to_anchor((0.71, 0.46))
     y_min, y_max = 0 , 1
     ax.set_ylim(y_min,y_max)
     

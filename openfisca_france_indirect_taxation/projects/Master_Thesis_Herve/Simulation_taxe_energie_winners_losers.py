@@ -61,7 +61,9 @@ def simulate_reformes_energie(elas_vect, elasticites, year, reform, bonus_cheque
     simulated_variables = [
         'bonus_cheques_energie_uc',
         'bonus_cheques_energie_menage',
-        'contributions_reforme',       
+        'contributions_reforme',
+        'emissions_CO2_carburants',
+        'emissions_CO2_carburants_'+ reform.key[0],
         'ticpe_totale',
         'ticpe_totale_'+ reform.key[0],
         #'rev_disp_loyerimput', plutot rev_disponible pour être cohérent
@@ -82,47 +84,63 @@ def simulate_reformes_energie(elas_vect, elasticites, year, reform, bonus_cheque
         data_year = data_year
         )
 
+    
     indiv_df_reform = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
     menages_reform = indiv_df_reform['menage']
+    df_sum = dataframe_by_group(survey_scenario, category = 'niveau_vie_decile', variables = simulated_variables, aggfunc = 'sum')
 
+    # Certains ménages tout en bas de la distribution des revenus disp ont des revenus nuls ou très proches de 0.
+    # On va remplacer tous les ménages des 2 premiers percentiles par un ménage moyen qui porte tout le poids de ces 2 percentiles:
+    
+    # On calcule le 2e percentile (de la distribution des revenus) et on prend cette tranche du dataframe.
     rev_disponible_2_perc = menages_reform['rev_disponible'].quantile(0.02)
     perc_2 = menages_reform[menages_reform['rev_disponible'] <= rev_disponible_2_perc]
 
+    # On calcule la moyenne pondéré pour les variables de la simuation et on affecte à la variable de pondération, la somme de toutes les pondérations.
     list_var = simulated_variables
     list_var.remove('pondmen')
     average_perc_2 = df_weighted_average_grouped(perc_2,'niveau_vie_decile',list_var)
     average_perc_2['pondmen'] = perc_2['pondmen'].sum()
     
-    menages_reform = menages_reform[menages_reform['rev_disponible'] > rev_disponible_2_perc] # on retire les ménages avant le 2e percentile
+    # On retire ces ménages du dataframe menages_reform et on remplace par le ménage moyen
+    menages_reform = menages_reform[menages_reform['rev_disponible'] > rev_disponible_2_perc] 
     menages_reform = pd.concat([menages_reform,average_perc_2])
 
+    # Les effets qui vont nous intéresser : le taux d'effort, les transferts nets dus à la réforme et les gagnants/perdants de la réforme.
+    menages_reform['Effort_rate'] = menages_reform['contributions_reforme'] / menages_reform['rev_disponible'] * 100
+    
     if bonus_cheques_uc == True :
         menages_reform['Net_transfers_reform'] = menages_reform['bonus_cheques_energie_uc'] - menages_reform['contributions_reforme']
     else :  
         menages_reform['Net_transfers_reform'] = menages_reform['bonus_cheques_energie_menage'] - menages_reform['contributions_reforme']
          
-    menages_reform['Effort_rate'] = menages_reform['contributions_reforme'] / menages_reform['rev_disponible'] * 100
-    menages_reform['Is_losers'] = menages_reform['Net_transfers_reform'] < 0 
+    menages_reform['Is_losers'] = menages_reform['Net_transfers_reform'] < 0
+    menages_reform['Reduction_CO2'] = (menages_reform['emissions_CO2_carburants_carbon_tax_rv'] / menages_reform['emissions_CO2_carburants'] - 1)*100
+    menages_reform['Reduction_CO2'] = menages_reform['Reduction_CO2'].fillna(0) 
     
     ref_elasticity = elasticites['ref_elasticity'].reset_index()['ref_elasticity'][0]
     menages_reform['ref_elasticity'] = ref_elasticity
     menages_reform['niveau_vie_decile'] = menages_reform['niveau_vie_decile'].astype(int)
-    var_to_graph = ['Is_losers','Effort_rate','Net_transfers_reform']
+    var_to_graph = ['Is_losers', 'Effort_rate', 'Net_transfers_reform', 'emissions_CO2_carburants_carbon_tax_rv', 'emissions_CO2_carburants' ]
     by_decile = df_weighted_average_grouped(menages_reform,'niveau_vie_decile',var_to_graph).reset_index()
     total = df_weighted_average_grouped(menages_reform,'ref_elasticity',var_to_graph).reset_index().drop('ref_elasticity',axis = 1)
     total['niveau_vie_decile'] = 'Total'
-    #by_decile['niveau_vie_decile'] = by_decile['niveau_vie_decile'].astype(int)
     to_graph = pd.concat([by_decile, total])
+    to_graph['emissions_CO2_carburants_carbon_tax_rv'] = to_graph['emissions_CO2_carburants_carbon_tax_rv']/1000
+    to_graph['emissions_CO2_carburants'] = to_graph['emissions_CO2_carburants']/1000
+    to_graph['Reduction_CO2'] = (to_graph['emissions_CO2_carburants_carbon_tax_rv']/ to_graph['emissions_CO2_carburants'] - 1)*100
     to_graph['ref_elasticity'] = ref_elasticity
     
-    return (to_graph,menages_reform)
+    return (to_graph, menages_reform, df_sum)
 
 def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, reform = carbon_tax_rv,bonus_cheques_uc = True):
-    to_graph = pd.DataFrame(columns = {'ref_elasticity','niveau_vie_decile','Is_losers','Effort_rate','Net_transfers_reform'})
+    to_graph = pd.DataFrame(columns = {'ref_elasticity','niveau_vie_decile','Is_losers','Effort_rate','Net_transfers_reform','Reduction_CO2'})
     menages_reform = pd.DataFrame(columns = {'ref_elasticity', 
         'bonus_cheques_energie_uc',
         'bonus_cheques_energie_menage',
-        'contributions_reforme',       
+        'contributions_reforme',
+        'emissions_CO2_carburants',
+        'emissions_CO2_carburants_'+ reform.key[0],       
         'ticpe_totale',
         'ticpe_totale_'+ reform.key[0],
         #'rev_disp_loyerimput',
