@@ -4,13 +4,12 @@
 import numpy as np
 import os
 import pandas as pd
-from openfisca_france_indirect_taxation.utils import openfisca_france_indirect_taxation_location
-
 
 from slugify import slugify
 
-
 from openfisca_core.model_api import *  # noqa analysis:ignore
+
+from openfisca_france_indirect_taxation.location import openfisca_france_indirect_taxation_location
 from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable  # noqa analysis:ignore
 from openfisca_france_indirect_taxation.entities import Individu, Menage  # noqa analysis:ignore
 

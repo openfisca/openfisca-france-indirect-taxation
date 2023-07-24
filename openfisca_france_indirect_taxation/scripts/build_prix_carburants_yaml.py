@@ -7,10 +7,9 @@
 
 import os
 import pandas as pd
-from openfisca_france_indirect_taxation.utils import openfisca_france_indirect_taxation_location
 from ruamel import yaml
 
-
+from openfisca_france_indirect_taxation.location import openfisca_france_indirect_taxation_location
 from openfisca_france_indirect_taxation.utils import assets_directory
 
 

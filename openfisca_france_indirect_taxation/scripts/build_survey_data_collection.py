@@ -5,11 +5,11 @@ import configparser
 import datetime
 import logging
 import os
-from openfisca_france_indirect_taxation.utils import openfisca_france_indirect_taxation_location
 import sys
 
-
+from openfisca_france_indirect_taxation.location import openfisca_france_indirect_taxation_location
 from openfisca_survey_manager.scripts.build_collection import build_survey_collection
+
 
 app_name = os.path.splitext(os.path.basename(__file__))[0]
 log = logging.getLogger(app_name)

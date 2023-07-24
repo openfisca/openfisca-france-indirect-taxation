@@ -3,10 +3,9 @@
 
 import numpy as np
 import os
-from openfisca_france_indirect_taxation.utils import openfisca_france_indirect_taxation_location
 import pandas as pd
 
-
+from openfisca_france_indirect_taxation.location import openfisca_france_indirect_taxation_location
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss import get_adjusted_input_data_frame
 

@@ -1,22 +1,16 @@
-from importlib import metadata
 import logging
 import os
-from pathlib import Path
 import pandas
-
 
 try:
     from openfisca_survey_manager.survey_collections import SurveyCollection
 except ImportError:
     SurveyCollection = None
 
+from openfisca_france_indirect_taxation.location import openfisca_france_indirect_taxation_location
+
+
 log = logging.getLogger(__name__)
-
-
-openfisca_france_indirect_taxation_location = Path(
-    metadata.distribution('openfisca-france-indirect-taxation').files[0]
-    ).parent
-
 
 assets_directory = os.path.join(
     openfisca_france_indirect_taxation_location,

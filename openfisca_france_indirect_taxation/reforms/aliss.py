@@ -1,18 +1,13 @@
-# -*- coding: utf-8 -*-
-
-
 import logging
 import numpy as np
 import os
 import pandas as pd
-from openfisca_france_indirect_taxation.utils import openfisca_france_indirect_taxation_location
 
 from openfisca_core.reforms import Reform
+
+from openfisca_france_indirect_taxation.location import openfisca_france_indirect_taxation_location
 from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable
-
-
 from openfisca_france_indirect_taxation.variables.base import get_legislation_data_frames, Menage
-
 from openfisca_france_indirect_taxation.utils import assets_directory
 from openfisca_france_indirect_taxation.variables.consommation.postes_coicop import generate_postes_agreges_variables
 from openfisca_france_indirect_taxation.variables.consommation.categories_fiscales import generate_variables
