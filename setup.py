@@ -58,5 +58,5 @@ setup(
         'pandas >= 1.5.3, < 2.0',
         'python-slugify >= 8.0.1, < 9.0',
         ],
-    packages = find_packages(),
+    packages = find_namespace_packages(),
     )
