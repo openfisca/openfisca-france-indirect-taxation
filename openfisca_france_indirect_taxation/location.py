@@ -1,6 +1,3 @@
-import pathlib
+from importlib import metadata
 
-import openfisca_france_indirect_taxation
-
-
-openfisca_france_indirect_taxation_location = pathlib.Path(openfisca_france_indirect_taxation.__file__).parent
+openfisca_france_indirect_taxation_location = metadata.distribution('openfisca-france-indirect-taxation').files[0].locate().parent
