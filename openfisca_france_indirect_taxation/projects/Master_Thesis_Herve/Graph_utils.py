@@ -141,8 +141,7 @@ def graph_ratio_emissions_reduction(data,reform,elas_vect,bonus_cheques_uc):
     plt.legend()
     plt.savefig(os.path.join(output_path,'Figures/Environmental_effects/Ratio_emissions_reduction_reform_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_vect,bonus_cheques_uc))
 
-def quantiles_for_boxplot(data,y):
-    hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
+def quantiles_for_boxplot(data,y,hue_order):
     out = pd.DataFrame(data = {'niveau_vie_decile' : [] , 'ref_elasticity': [] , y : []})
     i_ref = 0
     data = data[data['ref_elasticity'].isin(hue_order)]
@@ -205,16 +204,23 @@ def subtitle_legend_boxplots(ax, legend_format, markers):
     return legend
 
 def boxplot_net_transfers(data,reform,elas_vect,bonus_cheques_uc):
-    hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
     legend_format = {'Percentile' : ['P1', 'P10 (D1)', 'P25 (Q1)', 'P50 (Median)', 'P75 (Q3)', 'P90 (D9)', 'P99']}
     markers = ['v', 'd', 'o', 'o', 'o' , 'd', '^']
     
     fig, ax = plt.subplots(figsize=(10, 8))
-    quantiles_to_plot = quantiles_for_boxplot(data,'Net_transfers_reform')
+    if elas_vect == False :
+        hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
+        palette = sns.color_palette("Paired") 
+        quantiles_to_plot = quantiles_for_boxplot(data,'Net_transfers_reform',hue_order)
+    else:
+        hue_order = ['Douenne (2020)','Douenne (2020) vector']
+        palette_douenne_vect = sns.color_palette([(0.6980392156862745, 0.8745098039215686, 0.5411764705882353), (1.0, 0.4980392156862745, 0.0)])
+        palette = palette_douenne_vect 
+        quantiles_to_plot = quantiles_for_boxplot(data,'Net_transfers_reform',hue_order)
     sns.scatterplot(data = quantiles_to_plot , x='plot_decile', y='Net_transfers_reform', hue = 'ref_elasticity',  
                     style = 'quantile',
                     hue_order = hue_order, 
-                    palette = sns.color_palette("Paired"), 
+                    palette = palette, 
                     markers = markers,
                     s = 60,
                     legend = True)
@@ -232,17 +238,26 @@ def boxplot_net_transfers(data,reform,elas_vect,bonus_cheques_uc):
     return
 
 def boxplot_effort_rate(data,reform,elas_vect,bonus_cheques_uc):
-    hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
-    legend_format = {'Elasticity reference' : hue_order,
-                    'Percentile' : ['P1', 'P10 (D1)', 'P25 (Q1)', 'P50 (Median)', 'P75 (Q3)', 'P90 (D9)', 'P99']}
     markers = ['v', 'd', 'o', 'o', 'o' , 'd', '^']
     
     fig, ax = plt.subplots(figsize=(10, 8))
-    quantiles_to_plot = quantiles_for_boxplot(data,'Effort_rate')
+    if elas_vect == False : 
+        hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
+        legend_format = {'Elasticity reference' : hue_order,
+                    'Percentile' : ['P1', 'P10 (D1)', 'P25 (Q1)', 'P50 (Median)', 'P75 (Q3)', 'P90 (D9)', 'P99']}
+        palette = sns.color_palette("Paired") 
+        quantiles_to_plot = quantiles_for_boxplot(data,'Effort_rate',hue_order)
+    else:
+        hue_order = ['Douenne (2020)','Douenne (2020) vector']
+        legend_format = {'Elasticity reference' : hue_order,
+                    'Percentile' : ['P1', 'P10 (D1)', 'P25 (Q1)', 'P50 (Median)', 'P75 (Q3)', 'P90 (D9)', 'P99']}
+        palette_douenne_vect = sns.color_palette([(0.6980392156862745, 0.8745098039215686, 0.5411764705882353), (1.0, 0.4980392156862745, 0.0)])
+        palette = palette_douenne_vect 
+        quantiles_to_plot = quantiles_for_boxplot(data,'Effort_rate',hue_order)
     sns.scatterplot(data = quantiles_to_plot, x='plot_decile', y='Effort_rate', hue = 'ref_elasticity',  
                     style = 'quantile',
                     hue_order = hue_order, 
-                    palette = sns.color_palette("Paired"), 
+                    palette = palette, 
                     markers = markers,
                     s = 60,
                     legend = True)
