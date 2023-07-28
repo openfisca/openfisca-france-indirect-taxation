@@ -116,6 +116,7 @@ def simulate_reformes_energie(elas_vect, elasticites, year, reform, bonus_cheque
     else :  
         menages_reform['Net_transfers_reform'] = menages_reform['bonus_cheques_energie_menage'] - menages_reform['contributions_reforme']
          
+    menages_reform['Net_transfers_reform_uc'] = menages_reform['Net_transfers_reform']/menages_reform['ocde10']    
     menages_reform['Is_losers'] = menages_reform['Net_transfers_reform'] < 0
     menages_reform['Reduction_CO2'] = (menages_reform['emissions_CO2_carburants_carbon_tax_rv'] / menages_reform['emissions_CO2_carburants'] - 1)*100
     menages_reform['Reduction_CO2'] = menages_reform['Reduction_CO2'].fillna(0) 
@@ -124,7 +125,7 @@ def simulate_reformes_energie(elas_vect, elasticites, year, reform, bonus_cheque
     menages_reform['ref_elasticity'] = ref_elasticity
     
     menages_reform['niveau_vie_decile'] = menages_reform['niveau_vie_decile'].astype(int)
-    var_to_graph = ['Is_losers', 'Effort_rate', 'Net_transfers_reform', 'emissions_CO2_carburants_carbon_tax_rv', 'emissions_CO2_carburants']
+    var_to_graph = ['Is_losers', 'Effort_rate', 'Net_transfers_reform', 'Net_transfers_reform_uc', 'emissions_CO2_carburants_carbon_tax_rv', 'emissions_CO2_carburants']
     by_decile = df_weighted_average_grouped(menages_reform,'niveau_vie_decile',var_to_graph).reset_index()
     by_decile = by_decile.merge(right = menages_reform.groupby('niveau_vie_decile')['pondmen'].sum().reset_index(), how = 'left', on = 'niveau_vie_decile')
     total = df_weighted_average_grouped(menages_reform,'ref_elasticity',var_to_graph).reset_index().drop('ref_elasticity',axis = 1)
