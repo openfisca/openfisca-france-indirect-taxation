@@ -54,7 +54,7 @@ setup(
         ),
     include_package_data = True,  # Will read MANIFEST.in
     install_requires = [
-	'numexpr = 2.8.4',
+	'numexpr <= 2.8.4',
         'OpenFisca-Core >= 40.1, < 42',
         'pandas >= 1.5.3, < 2.0',
         'python-slugify >= 8.0.1, < 9.0',
