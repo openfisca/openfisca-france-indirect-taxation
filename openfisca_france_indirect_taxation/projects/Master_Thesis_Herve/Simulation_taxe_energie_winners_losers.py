@@ -108,7 +108,7 @@ def simulate_reformes_energie(elas_vect, elasticites, year, reform, bonus_cheque
     menages_reform = menages_reform[menages_reform['rev_disponible'] > rev_disponible_2_perc] 
     menages_reform = pd.concat([menages_reform,average_perc_2])
 
-    # Les effets distirbutifs nous intéressent : le taux d'effort, les transferts nets dus à la réforme et les gagnants/perdants de la réforme.
+    # Les effets distributifs qui nous intéressent : le taux d'effort, les transferts nets dus à la réforme et les gagnants/perdants de la réforme.
     menages_reform['Effort_rate'] = menages_reform['contributions_reforme'] / menages_reform['rev_disponible'] * 100
     
     if bonus_cheques_uc == True :
@@ -118,14 +118,14 @@ def simulate_reformes_energie(elas_vect, elasticites, year, reform, bonus_cheque
          
     menages_reform['Net_transfers_reform_uc'] = menages_reform['Net_transfers_reform']/menages_reform['ocde10']    
     menages_reform['Is_losers'] = menages_reform['Net_transfers_reform'] < 0
-    menages_reform['Reduction_CO2'] = (menages_reform['emissions_CO2_carburants_carbon_tax_rv'] / menages_reform['emissions_CO2_carburants'] - 1)*100
+    menages_reform['Reduction_CO2'] = (menages_reform['emissions_CO2_carburants_'+ reform.key[0]] / menages_reform['emissions_CO2_carburants'] - 1)*100
     menages_reform['Reduction_CO2'] = menages_reform['Reduction_CO2'].fillna(0) 
     
     ref_elasticity = elasticites['ref_elasticity'].reset_index()['ref_elasticity'][0]
     menages_reform['ref_elasticity'] = ref_elasticity
     
     menages_reform['niveau_vie_decile'] = menages_reform['niveau_vie_decile'].astype(int)
-    var_to_graph = ['Is_losers', 'Effort_rate', 'Net_transfers_reform', 'Net_transfers_reform_uc', 'emissions_CO2_carburants_carbon_tax_rv', 'emissions_CO2_carburants']
+    var_to_graph = ['Is_losers', 'Effort_rate', 'Net_transfers_reform', 'Net_transfers_reform_uc', 'emissions_CO2_carburants_'+ reform.key[0], 'emissions_CO2_carburants']
     by_decile = df_weighted_average_grouped(menages_reform,'niveau_vie_decile',var_to_graph).reset_index()
     by_decile = by_decile.merge(right = menages_reform.groupby('niveau_vie_decile')['pondmen'].sum().reset_index(), how = 'left', on = 'niveau_vie_decile')
     total = df_weighted_average_grouped(menages_reform,'ref_elasticity',var_to_graph).reset_index().drop('ref_elasticity',axis = 1)
@@ -135,18 +135,18 @@ def simulate_reformes_energie(elas_vect, elasticites, year, reform, bonus_cheque
     to_graph['ref_elasticity'] = ref_elasticity
     
     # Effets environnementaux 
-    to_graph['emissions_CO2_carburants_carbon_tax_rv'] = to_graph['emissions_CO2_carburants_carbon_tax_rv']/1000
+    to_graph['emissions_CO2_carburants_'+ reform.key[0]] = to_graph['emissions_CO2_carburants_'+ reform.key[0]]/1000
     to_graph['emissions_CO2_carburants'] = to_graph['emissions_CO2_carburants']/1000
-    to_graph['Reduction_CO2'] = (to_graph['emissions_CO2_carburants_carbon_tax_rv']/ to_graph['emissions_CO2_carburants'] - 1)*100
+    to_graph['Reduction_CO2'] = (to_graph['emissions_CO2_carburants_'+ reform.key[0]]/ to_graph['emissions_CO2_carburants'] - 1)*100
     # Effets env totaux
-    df_sum['Share_emissions_CO2'] =  100*df_sum['emissions_CO2_carburants_carbon_tax_rv'] / df_sum['emissions_CO2_carburants_carbon_tax_rv'].sum()
-    df_sum['Reduction_CO2'] = df_sum['emissions_CO2_carburants_carbon_tax_rv'] - df_sum['emissions_CO2_carburants']
+    df_sum['Share_emissions_CO2'] =  100*df_sum['emissions_CO2_carburants_'+ reform.key[0]] / df_sum['emissions_CO2_carburants_'+ reform.key[0]].sum()
+    df_sum['Reduction_CO2'] = df_sum['emissions_CO2_carburants_'+ reform.key[0]] - df_sum['emissions_CO2_carburants']
     df_sum['Share_reduction_CO2'] = 100*df_sum['Reduction_CO2']/df_sum['Reduction_CO2'].sum()
 
     df_sum['ref_elasticity'] = ref_elasticity
     return (to_graph, menages_reform, df_sum)
 
-def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, reform = carbon_tax_rv,bonus_cheques_uc = True):
+def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, reform = carbon_tax_rv ,bonus_cheques_uc = True):
     to_graph = pd.DataFrame(columns = {'ref_elasticity','niveau_vie_decile','Is_losers','Effort_rate','Net_transfers_reform', 'Reduction_CO2'})
     menages_reform = pd.DataFrame(columns = {'ref_elasticity', 
         'bonus_cheques_energie_uc',
@@ -169,4 +169,8 @@ def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, refor
         to_graph = pd.concat([to_graph,to_concat[0]])
         menages_reform = pd.concat([menages_reform, to_concat[1]])
         df_sum = pd.concat([df_sum, to_concat[2]])
+        
+    menages_reform.to_csv(os.path.join(output_path,'Data/menages_reform_{}.csv').format(reform.key[0]))
+    to_graph.to_csv(os.path.join(output_path,'Data/to_graph_reform_{}.csv').format(reform.key[0]))
+    df_sum.to_csv(os.path.join(output_path,'Data/df_sum_reform_{}.csv').format(reform.key[0]))
     return (to_graph, menages_reform, df_sum)
