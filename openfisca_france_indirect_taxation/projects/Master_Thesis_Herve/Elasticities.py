@@ -2,6 +2,9 @@ import pandas as pd
 import os
 
 data_path = data_path = "C:/Users/veve1/OneDrive/Documents/ENSAE 3A/Memoire MiE/Data"
+
+# Vector elasticities
+
 # To create a dataframe with elasticities from Douenne (2020)
 table_data = {
     'niveau_vie_decile': ['Rural', 'Small cities', 'Medium cities', 'Large cities', 'Paris'],
@@ -26,3 +29,21 @@ df_elas.drop(index = 0, axis = 0, inplace = True)
 df_elas['ref_elasticity'] = 'Douenne (2020) vector'
 # Write the DataFrame to a CSV file
 df_elas.to_csv(os.path.join(data_path,'Reform_parameters/Elasticities_Douenne_20.csv'))
+
+# Extensive margin elasticities
+
+def calculate_ecdf(dataframe):
+    dataframe['cum_pondmen'] = dataframe['pondmen'].cumsum()
+    dataframe['ecdf'] = dataframe['cum_pondmen'] / dataframe['cum_pondmen'].max()
+    dataframe['ecdf'] = dataframe['ecdf'].astype(float)
+    return dataframe
+
+def add_ecdf_by_niveau_vie_decile(dataframe, variable):
+    dataframe.sort_values(by = variable, inplace = True)
+    dataframe = dataframe.groupby('niveau_vie_decile').apply(lambda x : calculate_ecdf(x))
+    return dataframe
+
+def add_ext_margin_elasticities(dataframe):
+    dataframe = add_ecdf_by_niveau_vie_decile(dataframe, 'poste_07_2_2_1_1')
+    dataframe['elas_ext'] = 1 - dataframe['ecdf']
+    return dataframe

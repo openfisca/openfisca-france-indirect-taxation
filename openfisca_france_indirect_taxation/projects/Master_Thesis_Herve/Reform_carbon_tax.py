@@ -105,7 +105,31 @@ class carbon_tax_rv(Reform):
             contribution = total_ticpe_carbon_tax_rv - total_ticpe
 
             return contribution
-                
+    
+    class variation_depenses_diesel_no_response(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Variations des dépenses en diesel sans réaction à la réforme"
+        
+        def formula(menage, period,parameters):
+            taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
+            diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
+            reforme_diesel = parameters(period.start).carbon_tax_rv.diesel_with_carbon_tax_rv
+            variation_depenses_diesel = reforme_diesel * (1 + taux_plein_tva) / diesel_ttc
+            return variation_depenses_diesel
+            
+    class variation_depenses_essence_no_response(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Variations des dépenses en essence sans réaction à la réforme"    
+
+        def formula(menage, period, parameters):
+            taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
+            super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
+            reforme_essence = parameters(period.start).carbon_tax_rv.essence_with_carbon_tax_rv
+            variation_depenses_diesel = reforme_essence * (1 + taux_plein_tva) / super_95_ttc
+            return variation_depenses_diesel
+                    
     class depenses_carburants_corrigees_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
@@ -131,8 +155,11 @@ class carbon_tax_rv(Reform):
             carburants_elasticite_prix = menage('elas_price_1_1', period)
             depenses_diesel_carbon_tax_rv = \
                 depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel * (1 + taux_plein_tva) / diesel_ttc)
-
-            return depenses_diesel_carbon_tax_rv
+            # La marge extensive
+            variation_depenses_diesel = menage('variation_depenses_diesel_no_response',period)
+            elasticite_marge_extensive = menage('elas_ext', period)
+            depenses_diesel_corrigees_carbon_tax_rv = (1-elasticite_marge_extensive*variation_depenses_diesel)*depenses_diesel_carbon_tax_rv
+            return depenses_diesel_corrigees_carbon_tax_rv
 
     class depenses_essence_corrigees_carbon_tax_rv(YearlyVariable):
         value_type = float
@@ -147,8 +174,11 @@ class carbon_tax_rv(Reform):
             carburants_elasticite_prix = menage('elas_price_1_1', period)
             depenses_essence_carbon_tax_rv = \
                 depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence * (1 + taux_plein_tva) / super_95_ttc)
-
-            return depenses_essence_carbon_tax_rv
+            # La marge extensive
+            variation_depenses_essence = menage('variation_depenses_essence_no_response',period)
+            elasticite_marge_extensive = menage('elas_ext', period)
+            depenses_essence_corrigees_carbon_tax_rv = (1-elasticite_marge_extensive*variation_depenses_essence)*depenses_essence_carbon_tax_rv
+            return depenses_essence_corrigees_carbon_tax_rv
         
     class diesel_ticpe_carbon_tax_rv(YearlyVariable):
         value_type = float
@@ -836,6 +866,8 @@ class carbon_tax_rv(Reform):
         self.update_variable(self.bonus_cheques_energie_uc)
         self.update_variable(self.bonus_cheques_energie_menage)
         self.update_variable(self.contributions_reforme)
+        self.update_variable(self.variation_depenses_diesel_no_response)
+        self.update_variable(self.variation_depenses_essence_no_response)
         self.update_variable(self.depenses_carburants_corrigees_carbon_tax_rv)
         self.update_variable(self.depenses_diesel_corrigees_carbon_tax_rv)
         self.update_variable(self.depenses_essence_corrigees_carbon_tax_rv)
