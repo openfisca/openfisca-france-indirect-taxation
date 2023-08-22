@@ -30,6 +30,7 @@ df_elasticities[['elas_price_1_1','elas_price_2_2','elas_price_3_3']].astype(flo
 
 df_elas_vect = pd.read_csv(os.path.join(data_path,'Reform_parameters/Elasticities_Douenne_20.csv'), index_col = [0])
 df_elas_vect = pd.melt(frame = df_elas_vect , id_vars = ["niveau_vie_decile", 'ref_elasticity'], var_name = 'strate_2', value_name = 'elas_price_1_1')
+
     
 def simulate_reformes_energie(elas_ext_margin, elas_vect, elasticites, year, reform, bonus_cheques_uc):
 
@@ -62,10 +63,8 @@ def simulate_reformes_energie(elas_ext_margin, elas_vect, elasticites, year, ref
         ident_men['elas_price_2_2'] = elasticites['elas_price_2_2'].reset_index()['elas_price_2_2'][0] # housing fuel
         ident_men['elas_price_3_3'] = elasticites['elas_price_3_3'].reset_index()['elas_price_3_3'][0] # other non durable goods ??
         ident_men = ident_men[['ident_men','elas_price_1_1','elas_price_2_2','elas_price_3_3','elas_ext']]
-
-        
-    elasticities = ident_men 
-        
+   
+    elasticities = ident_men     
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
     simulated_variables = [
@@ -93,7 +92,6 @@ def simulate_reformes_energie(elas_ext_margin, elas_vect, elasticites, year, ref
         year = year,
         data_year = data_year
         )
-
     
     indiv_df_reform = survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)
     menages_reform = indiv_df_reform['menage']
@@ -137,6 +135,7 @@ def simulate_reformes_energie(elas_ext_margin, elas_vect, elasticites, year, ref
     menages_reform['ref_elasticity'] = ref_elasticity
     
     menages_reform['niveau_vie_decile'] = menages_reform['niveau_vie_decile'].astype(int)
+    
     var_to_graph = ['Is_losers', 'Effort_rate', 'Net_transfers_reform', 'Net_transfers_reform_uc', 'emissions_CO2_carburants_'+ reform.key[0], 'emissions_CO2_carburants']
     by_decile = df_weighted_average_grouped(menages_reform,'niveau_vie_decile',var_to_graph).reset_index()
     by_decile = by_decile.merge(right = menages_reform.groupby('niveau_vie_decile')['pondmen'].sum().reset_index(), how = 'left', on = 'niveau_vie_decile')
@@ -174,10 +173,11 @@ def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, refor
         'ocde10',
         'niveau_vie_decile'
         })
+    
     df_sum = pd.DataFrame(columns = menages_reform.columns)
     for elas in data_elasticities['ref_elasticity']:
         elasticities = data_elasticities[data_elasticities['ref_elasticity'] == elas]
-        to_concat = simulate_reformes_energie(elas_vect = False, elasticites = elasticities, year = year, reform = reform, bonus_cheques_uc = bonus_cheques_uc)
+        to_concat = simulate_reformes_energie(elas_ext_margin = False, elas_vect = False, elasticites = elasticities, year = year, reform = reform, bonus_cheques_uc = bonus_cheques_uc)
         to_graph = pd.concat([to_graph,to_concat[0]])
         menages_reform = pd.concat([menages_reform, to_concat[1]])
         df_sum = pd.concat([df_sum, to_concat[2]])
