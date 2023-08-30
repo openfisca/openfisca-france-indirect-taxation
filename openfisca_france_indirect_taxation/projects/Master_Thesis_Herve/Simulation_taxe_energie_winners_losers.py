@@ -34,7 +34,7 @@ df_elas_vect = pd.melt(frame = df_elas_vect , id_vars = ["niveau_vie_decile", 'r
     
 def simulate_reformes_energie(elas_ext_margin, elas_vect, elasticites, year, reform, bonus_cheques_uc):
 
-    ident_men = pd.HDFStore("C:/Users/veve1/OneDrive/Documents/ENSAE 3A/Memoire MiE/Data/data_collections/output/openfisca_indirect_taxation_data_2017.h5")['input'][['ident_men','pondmen', 'rev_disponible','ocde10','strate', 'poste_07_2_2_1_1']]
+    ident_men = pd.HDFStore("C:/Users/veve1/OneDrive/Documents/ENSAE 3A/Memoire MiE/Data/data_collections/output/openfisca_indirect_taxation_data_2017.h5")['input'][['ident_men','pondmen', 'rev_disponible','ocde10','strate', 'depenses_carburants_corrigees_entd']]
     ident_men['ident_men'] = ident_men.ident_men.astype(numpy.int64)
     ident_men = add_niveau_vie_decile(ident_men)
 
@@ -71,6 +71,8 @@ def simulate_reformes_energie(elas_ext_margin, elas_vect, elasticites, year, ref
         'bonus_cheques_energie_uc',
         'bonus_cheques_energie_menage',
         'contributions_reforme',
+        'depenses_carburants',
+        'depenses_carburants_corrigees_'+reform.key[0],
         'emissions_CO2_carburants',
         'emissions_CO2_carburants_'+ reform.key[0],
         'ticpe_totale',
@@ -155,6 +157,7 @@ def simulate_reformes_energie(elas_ext_margin, elas_vect, elasticites, year, ref
     df_sum['Share_reduction_CO2'] = 100*df_sum['Reduction_CO2']/df_sum['Reduction_CO2'].sum()
 
     df_sum['ref_elasticity'] = ref_elasticity
+    df_sum['niveau_vie_decile'] = df_sum['niveau_vie_decile'].astype(int)
     return (to_graph, menages_reform, df_sum)
 
 def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, reform = carbon_tax_rv ,bonus_cheques_uc = True):
@@ -163,6 +166,8 @@ def run_all_elasticities(data_elasticities = df_elasticities, year = 2019, refor
         'bonus_cheques_energie_uc',
         'bonus_cheques_energie_menage',
         'contributions_reforme',
+        'depenses_carburants',
+        'depenses_carburants_corrigees_'+reform.key[0],
         'emissions_CO2_carburants',
         'emissions_CO2_carburants_'+ reform.key[0],       
         'ticpe_totale',

@@ -106,6 +106,30 @@ class carbon_tax_rv(Reform):
 
             return contribution
     
+    class depenses_carburants(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Consommation de carburants"
+
+        def formula(menage, period):
+            return menage('depenses_carburants_corrigees_entd',period)
+        
+    class depenses_diesel(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Consommation de diesel"
+
+        def formula(menage, period):
+            return menage('depenses_diesel_corrigees_entd', period)
+        
+    class depenses_essence(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Consommation d'essence "
+
+        def formula(menage, period):
+            return menage('depenses_essence_corrigees_entd', period)
+        
     class variation_depenses_diesel_no_response(YearlyVariable):
         value_type = float
         entity = Menage
@@ -866,6 +890,9 @@ class carbon_tax_rv(Reform):
         self.update_variable(self.bonus_cheques_energie_uc)
         self.update_variable(self.bonus_cheques_energie_menage)
         self.update_variable(self.contributions_reforme)
+        #self.update_variable(self.depenses_carburants)
+        #self.update_variable(self.depenses_diesel)
+        #self.update_variable(self.depenses_essence)
         self.update_variable(self.variation_depenses_diesel_no_response)
         self.update_variable(self.variation_depenses_essence_no_response)
         self.update_variable(self.depenses_carburants_corrigees_carbon_tax_rv)

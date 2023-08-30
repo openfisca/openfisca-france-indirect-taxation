@@ -44,6 +44,6 @@ def add_ecdf_by_niveau_vie_decile(dataframe, variable):
     return dataframe
 
 def add_ext_margin_elasticities(dataframe):
-    dataframe = add_ecdf_by_niveau_vie_decile(dataframe, 'poste_07_2_2_1_1')
+    dataframe = add_ecdf_by_niveau_vie_decile(dataframe, 'depenses_carburants_corrigees_entd')
     dataframe['elas_ext'] = 1 - dataframe['ecdf']
     return dataframe
