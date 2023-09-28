@@ -44,7 +44,7 @@ setup(
             'ipdb >= 0.13.13, < 0.14.0',
             'matplotlib >= 3.7.1, < 4.0',
             'nbconvert >= 7.2.10, < 8.0',
-            'OpenFisca-Survey-Manager >= 1.1.5, < 2',
+            'OpenFisca-Survey-Manager >= 1.1.7, < 2',
             'pytest >= 7.2.2, < 8.0',
             'ruamel.yaml >= 0.17.21, < 0.18.0',
             'seaborn >= 0.12.2, < 0.13.0',
@@ -54,9 +54,9 @@ setup(
         ),
     include_package_data = True,  # Will read MANIFEST.in
     install_requires = [
-	'numexpr <= 2.8.4',
+        'numexpr <= 2.8.4',
         'OpenFisca-Core >= 40.1, < 42',
-        'pandas >= 1.5.3, < 2.0',
+        'pandas >= 2.0.3, < 3.0',
         'python-slugify >= 8.0.1, < 9.0',
         ],
     packages = find_namespace_packages(),
