@@ -5,7 +5,7 @@ import numpy
 
 
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
-
+from openfisca_france_indirect_taxation.variables.taxes_indirectes import get_accise_diesel_ticpe
 
 log = logging.getLogger(__name__)
 
@@ -46,34 +46,35 @@ class depenses_diesel(YearlyVariable):
     label = 'Construction par pondération des dépenses spécifiques au diesel'
 
     def formula(menage, period, parameters):
-        conso_totale_vp_diesel = parameters(period.start).quantite_carbu_vp.diesel
-        conso_totale_vp_essence = parameters(period.start).quantite_carbu_vp.essence
-        taille_parc_diesel = parameters(period.start).parc_vp.diesel
-        taille_parc_essence = parameters(period.start).parc_vp.essence
+        conso_moyenne_vp_diesel = parameters(period.start).conso_vp_moyenne.voitures_particulieres_diesel
+        conso_moyenne_vp_essence = parameters(period.start).conso_vp_moyenne.voitures_particulieres_essence
+        conso_moyenne_vp_gpl = parameters(period.start).conso_vp_moyenne.voitures_particulieres_gpl
 
-        conso_moyenne_vp_diesel = conso_totale_vp_diesel / taille_parc_diesel
-        conso_moyenne_vp_essence = conso_totale_vp_essence / taille_parc_essence
+        parcours_moyenne_vp_diesel_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_diesel
+        parcours_moyenne_vp_essense_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_essence
+        parcours_moyenne_vp_gpl_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_gpl
+
+        conso_moyenne_du_parcours_moyen_vp_diesel = parcours_moyenne_vp_diesel_en_km * conso_moyenne_vp_diesel / 100
+        conso_moyenne_du_parcours_moyen_vp_essence = parcours_moyenne_vp_essense_en_km * conso_moyenne_vp_essence / 100
+        conso_moyenne_du_parcours_moyen_vp_gpl = parcours_moyenne_vp_gpl_en_km * conso_moyenne_vp_gpl / 100
 
         nombre_vehicules_diesel = menage('veh_diesel', period)
         nombre_vehicules_essence = menage('veh_essence', period)
-        nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence
+        nombre_vehicules_gpl = menage('veh_gpl', period)
+        nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence + nombre_vehicules_gpl
+
+        depenses_carburants = menage('depenses_carburants', period)
 
         # to compute part_conso_diesel we need to avoid dividing by zero for those we do not have any vehicle
         # Thus, we choose arbitrarily to divide it by 1, but this choice won't affect the result as long as it is not 0
         denominateur = (
-            (nombre_vehicules_diesel * conso_moyenne_vp_diesel) + (nombre_vehicules_essence * conso_moyenne_vp_essence)
-            ) * (nombre_vehicules_total != 0) + 1 * (nombre_vehicules_total == 0)
+            (nombre_vehicules_total != 0) * (nombre_vehicules_diesel * conso_moyenne_du_parcours_moyen_vp_diesel) + (nombre_vehicules_essence * conso_moyenne_du_parcours_moyen_vp_essence) + (nombre_vehicules_gpl * conso_moyenne_du_parcours_moyen_vp_gpl)
+            ) + (nombre_vehicules_total == 0) * 1
 
-        part_conso_diesel = (nombre_vehicules_diesel * conso_moyenne_vp_diesel) / denominateur
+        part_conso_gazole = (nombre_vehicules_diesel * conso_moyenne_du_parcours_moyen_vp_diesel) / denominateur
 
-        depenses_carburants = menage('depenses_carburants', period)
-
-        depenses_diesel = depenses_carburants * (
-            (nombre_vehicules_total == 0) * (
-                conso_totale_vp_diesel / (conso_totale_vp_diesel + conso_totale_vp_essence)
-                )
-            + (nombre_vehicules_total != 0) * part_conso_diesel
-            )
+        depenses_gazole = depenses_carburants * part_conso_gazole
+        return depenses_gazole
 
         return depenses_diesel
 
@@ -98,15 +99,8 @@ class depenses_diesel_ht(YearlyVariable):
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-        majoration_ticpe_diesel = \
-            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
-        accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
+        accise_diesel_ticpe = get_accise_diesel_ticpe(parameters, period)
 
-        accise_diesel_ticpe = (
-            accise_diesel + majoration_ticpe_diesel
-            if majoration_ticpe_diesel is not None
-            else accise_diesel
-            )
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         taux_implicite_diesel = (
             (accise_diesel_ticpe * (1 + taux_plein_tva))
@@ -128,15 +122,8 @@ class depenses_diesel_recalculees(YearlyVariable):
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         depenses_diesel_ht = menage('depenses_diesel_ht', period)
-        majoration_ticpe_diesel = \
-            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
-        accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
+        accise_diesel_ticpe = get_accise_diesel_ticpe(parameters, period)
 
-        accise_diesel_ticpe = (
-            accise_diesel + majoration_ticpe_diesel
-            if majoration_ticpe_diesel is not None
-            else accise_diesel
-            )
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         taux_implicite_diesel = (
             (accise_diesel_ticpe * (1 + taux_plein_tva))

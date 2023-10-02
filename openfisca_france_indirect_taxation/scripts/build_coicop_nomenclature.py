@@ -58,8 +58,8 @@ def build_complete_coicop_nomenclature(to_csv = True):
             label_poste = [label_poste],
             code_coicop = [code_coicop],
             )
-        coicop_nomenclature = coicop_nomenclature.append(
-            pd.DataFrame.from_dict(data, dtype = 'str'),
+        coicop_nomenclature = pd.concat(
+            [coicop_nomenclature, pd.DataFrame.from_dict(data, dtype = 'str')],
             ignore_index = True
             )
         coicop_nomenclature.sort_values('code_coicop', inplace = True)

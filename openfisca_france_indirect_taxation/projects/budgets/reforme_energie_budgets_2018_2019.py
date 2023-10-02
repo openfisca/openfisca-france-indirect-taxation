@@ -309,7 +309,7 @@ class officielle_2019_in_2017(Reform):
 
             # If the parameter does not have a defined value, it returns None
             majoration_ticpe_diesel = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
+                parameters(period.start).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_gazole[42]  # alsace
 
             accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
 
@@ -350,7 +350,7 @@ class officielle_2019_in_2017(Reform):
 
             # If the parameter does not have a defined value, it returns None
             majoration_ticpe_diesel = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
+                parameters(period.start).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_gazole[42]  # alsace
 
             accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
 
@@ -406,7 +406,7 @@ class officielle_2019_in_2017(Reform):
 
             # If the parameter does not have a defined value, it returns None
             majoration_ticpe_diesel = \
-                parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
+                parameters(period.start).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_gazole[42]  # alsace
 
             accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
 
