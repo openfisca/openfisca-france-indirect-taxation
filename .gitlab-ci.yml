@@ -41,13 +41,13 @@ Build survey collections:
     - mkdir -p /root/ci-files/data_collections
     - pip3 install -e .[dev]
   script:
-    - build-collection -c budget_des_familles -d -m -s 2017
-    - build-collection -c budget_des_familles -d -s 2011
-    - build-collection -c budget_des_familles -d -s 2005
-    - build-collection -c aliss -m -d
-    - build-collection -c enquete_logement -d -m -s 2013
-    - build-collection -c enquete_transports -d -m -s 2008
-    - build-collection -c erfs_fpr -d -m -s 2013
+    - build-collection -c budget_des_familles -d -m -s 2017 -p ~/.config/openfisca-survey-manager/raw_data.ini
+    - build-collection -c budget_des_familles -d -s 2011 -p ~/.config/openfisca-survey-manager/raw_data.ini
+    - build-collection -c budget_des_familles -d -s 2005 -p ~/.config/openfisca-survey-manager/raw_data.ini
+    # - build-collection -c aliss -m -d
+    - build-collection -c enquete_logement -d -m -s 2013 -p ~/.config/openfisca-survey-manager/raw_data.ini
+    - build-collection -c enquete_transports -d -m -s 2008 -p ~/.config/openfisca-survey-manager/raw_data.ini
+    - build-collection -c erfs_fpr -d -m -s 2013 -p ~/.config/openfisca-survey-manager/raw_data.ini
     - cp ~/.config/openfisca-survey-manager/config.ini  /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config.ini
   when: manual
 
