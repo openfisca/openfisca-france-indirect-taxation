@@ -33,7 +33,7 @@ Build survey collections:
   stage: build_collections
   image: $CI_REGISTRY_IMAGE:latest
   tags:
-    - ipp
+    - data-in
   before_script:
     - mkdir -p ~/.config/openfisca-survey-manager
     - cp ./runner/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
@@ -55,7 +55,7 @@ Build matched data:
   stage: build_matched_data
   image: $CI_REGISTRY_IMAGE:latest
   tags:
-    - ipp
+    - data-in
   before_script:
     - mkdir -p ~/.config/openfisca-survey-manager
     - pip3 install -e .[dev]
@@ -72,7 +72,7 @@ Test:
   stage: test
   image: $CI_REGISTRY_IMAGE:latest
   tags:
-    - ipp
+    - data-in
   before_script:
     - mkdir -p ~/.config/openfisca-survey-manager
     - pip3 install -e .[dev]
