@@ -12,7 +12,6 @@ import os
 import sys
 
 
-from openfisca_survey_manager import default_config_files_directory
 from openfisca_france_indirect_taxation.build_survey_data.run_all import run
 
 
@@ -25,7 +24,6 @@ def main():
     all_years = [2011, 2017]
     parser.add_argument('-y', '--years', nargs='+', help = "years of survey to build (default = {})'".format(all_years), default = all_years)
     parser.add_argument('-v', '--verbose', action = 'store_true', default = False, help = 'increase output verbosity')
-    parser.add_argument('-p', '--path', help = f'path to the config files directory (default = {default_config_files_directory})')
     parser.add_argument('-d', '--debug', action = 'store_true', default = False, help = 'use python debugger')
     parser.add_argument('-s', '--skip-matching', action = 'store_true', default = False, help = 'skip matching step')
 
