@@ -42,7 +42,7 @@ def main():
     try:
         run(years_calage, skip_matching = args.skip_matching)
     except Exception as e:
-        if args.pdb:
+        if args.debug:
             pdb.post_mortem(sys.exc_info()[2])
         raise e
 
