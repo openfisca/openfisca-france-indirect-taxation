@@ -65,7 +65,7 @@ Build matched data:
     - cp /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config.ini ~/.config/openfisca-survey-manager/config.ini
     - mkdir -p /root/ci-files/data_collections
   script:
-    - build-survey-data -v
+    - build-survey-data -v -p ~/.config/openfisca-survey-manager
     - cp ~/.config/openfisca-survey-manager/config.ini /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config_with_matched_data.ini
 
   when: manual
