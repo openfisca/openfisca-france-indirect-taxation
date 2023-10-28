@@ -197,7 +197,7 @@ def run(years_calage, skip_matching = False):
     for year_calage in years_calage:
         start = time.time()
         log.info(f'Starting year = {year_calage}')
-        run_all_steps(year_calage = year_calage, skip_matching = skip_matching)
+        run_all_steps(year_calage = year_calage, skip_matching = skip_matching, config_files_directory)
         log.info(f'Finished in {(time.time() - start)} for year = {year_calage}')
 
 
