@@ -24,7 +24,6 @@ def main():
     all_years = [2011, 2017]
     parser.add_argument('-y', '--years', nargs='+', help = "years of survey to build (default = {})'".format(all_years), default = all_years)
     parser.add_argument('-v', '--verbose', action = 'store_true', default = False, help = 'increase output verbosity')
-    parser.add_argument('-p', '--path', help = 'path to the config files directory')
     parser.add_argument('-d', '--debug', action = 'store_true', default = False, help = 'use python debugger')
     parser.add_argument('-s', '--skip-matching', action = 'store_true', default = False, help = 'skip matching step')
 
@@ -33,11 +32,6 @@ def main():
 
     start_time = datetime.datetime.now()
     years_calage = [int(year) for year in args.years]
-    config_files_directory = args.path
-
-    # Monkey patch config_files_directory path
-    from openfisca_survey_manager import default_config_files_directory
-    default_config_files_directory = config_files_directory
 
     try:
         run(years_calage, skip_matching = args.skip_matching)
