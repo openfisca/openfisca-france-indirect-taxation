@@ -85,12 +85,16 @@ def merge_with_coicop_nomenclature(data_frame):
 
     df2 = coicop_nomenclature.merge(remaining_data_frame, on = 'code_coicop', how = 'outer', sort = True)
 
-    result = df1.append(df2, ignore_index = True)
+    result = pandas.concat([df1, df2], ignore_index = True)
 
     result = result.loc[~(result.poste_coicop.duplicated(keep = False) & result.label.isnull())].copy()
-    result = result.append(
-        coicop_nomenclature.loc[
-            ~coicop_nomenclature.poste_coicop.isin(result.poste_coicop.unique())],
+    result = pandas.concat(
+        [
+            result,
+            coicop_nomenclature.loc[
+                ~coicop_nomenclature.poste_coicop.isin(result.poste_coicop.unique())
+                ],
+            ],
         sort = True,
         )
     result = result[[

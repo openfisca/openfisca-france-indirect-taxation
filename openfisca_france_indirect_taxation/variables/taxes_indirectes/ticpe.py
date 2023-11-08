@@ -2,6 +2,7 @@
 
 
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.variables.taxes_indirectes import get_accise_diesel_ticpe
 
 
 class combustibles_liquides_ticpe(YearlyVariable):
@@ -24,18 +25,7 @@ class diesel_ticpe(YearlyVariable):
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-
-        # If the parameter does not have a defined value, it returns None
-        majoration_ticpe_diesel = \
-            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
-
-        accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
-
-        accise_diesel_ticpe = (
-            accise_diesel + majoration_ticpe_diesel
-            if majoration_ticpe_diesel is not None
-            else accise_diesel
-            )
+        accise_diesel_ticpe = get_accise_diesel_ticpe(parameters, period)
 
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         taux_implicite_diesel = (
@@ -70,15 +60,7 @@ class diesel_ticpe_ajustee(YearlyVariable):
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
-        majoration_ticpe_diesel = \
-            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
-        accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
-
-        accise_diesel_ticpe = (
-            accise_diesel + majoration_ticpe_diesel
-            if majoration_ticpe_diesel is not None
-            else accise_diesel
-            )
+        accise_diesel_ticpe = get_accise_diesel_ticpe(parameters, period)
 
         reforme_diesel = parameters(period.start).rattrapage_diesel.diesel
         accise_diesel_ticpe_ajustee = accise_diesel_ticpe + reforme_diesel

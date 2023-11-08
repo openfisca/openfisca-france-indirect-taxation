@@ -8,10 +8,7 @@ from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 def preprocess_legislation(parameters):
-    '''
-    Preprocess the legislation parameters to add prices and amounts from national accounts
-    '''
-
+    """Preprocess the legislation parameters to add prices and amounts from national accounts."""
     prix_carburants = dict()
 
     prix_annuel_carburants = pd.read_csv(
@@ -37,10 +34,11 @@ def preprocess_legislation(parameters):
     prix_litre_annuel_carburants['Date'] = prix_litre_annuel_carburants['Date'].astype(int)
     prix_litre_annuel_carburants = prix_litre_annuel_carburants.set_index('Date')
 
+    most_recent_year = prix_litre_annuel_carburants.index.max()
     # For super_95_e10, we need to use the price of super_95 between 2009 and 2012 included,
     # because we don't have the data. We use super_95 because it is very close and won't affect the results too much
     prix_annuel = prix_litre_annuel_carburants['super_95_e10_ttc']
-    years = list(range(2018, 2023))
+    years = list(range(2018, most_recent_year))
     years = sorted(years, key=int, reverse=True)
     values = dict()
     for year in years:
@@ -72,6 +70,7 @@ def preprocess_legislation(parameters):
         'unit': 'currency',
         'values': values
         }
+
     autres_carburants = [
         'diesel_ttc',
         'super_95_ttc',
@@ -88,7 +87,7 @@ def preprocess_legislation(parameters):
 
         prix_annuel = prix_litre_annuel_carburants[element]
         years = sorted(years, key=int, reverse=True)
-        years = list(range(2018, 2023))
+        years = list(range(2018, most_recent_year))
         for year in years:
             values['{}-01-01'.format(year)] = prix_annuel[year] * 100
 
