@@ -26,6 +26,14 @@
   output:
     prix_gazole_b7_ttc: 1.5504
 
+- name: "Test prix_gazole_b7_ttc"
+  period: 2023
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+  output:
+    prix_gazole_b7_ttc: 1.9100
+
 ## prix gazole B10 TTC:
 
 - name: "Test prix_gazole_b10_ttc"
