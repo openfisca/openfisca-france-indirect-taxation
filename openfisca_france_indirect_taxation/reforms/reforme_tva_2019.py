@@ -11,16 +11,16 @@ def modify_parameters(parameters):
     node = ParameterNode(
         'reforme_tva_2019',
         data = {
-            "description": "reforme_tva_2019",
-            "nouveau_taux_tva_a_2019": {
-                "description": "Augmentation de la TVA prévue par la LF 2019",
-                "unit": '/1',
-                "values": {'2013-01-01': 0.2}
+            'description': 'reforme_tva_2019',
+            'nouveau_taux_tva_a_2019': {
+                'description': 'Augmentation de la TVA prévue par la LF 2019',
+                'unit': '/1',
+                'values': {'2013-01-01': 0.2}
                 },
-            "nouveau_taux_tva_b_2019": {
-                "description": "Augmentation de la TVA prévue par la LF 2019",
-                "unit": '/1',
-                "values": {'2013-01-01': 0.2}
+            'nouveau_taux_tva_b_2019': {
+                'description': 'Augmentation de la TVA prévue par la LF 2019',
+                'unit': '/1',
+                'values': {'2013-01-01': 0.2}
                 },
             }
         )
@@ -30,12 +30,12 @@ def modify_parameters(parameters):
 
 class reforme_tva_2019(Reform):
     key = 'reforme_tva_2019',
-    name = "Réforme de la TVA prévue par la loi de finance 2019",
+    name = 'Réforme de la TVA prévue par la loi de finance 2019',
 
     class poste_11_1_1_1_1_reforme_tva_2019(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses en restaurant augmentation de la TVA"
+        label = 'Dépenses en restaurant augmentation de la TVA'
 
         def formula(menage, period, parameters):
             poste_11_1_1_1_1 = menage('poste_11_1_1_1_1', period)
@@ -57,7 +57,7 @@ class reforme_tva_2019(Reform):
     class poste_11_1_1_1_2_reforme_tva_2019(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses en café/bars augmentation de la TVA"
+        label = 'Dépenses en café/bars augmentation de la TVA'
 
         def formula(menage, period, parameters):
             poste_11_1_1_1_2 = menage('poste_11_1_1_1_2', period)
@@ -79,7 +79,7 @@ class reforme_tva_2019(Reform):
     class poste_11_1_2_1_1_reforme_tva_2019(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses en cantine augmentation de la TVA"
+        label = 'Dépenses en cantine augmentation de la TVA'
 
         def formula(menage, period, parameters):
             poste_11_1_2_1_1 = menage('poste_11_1_2_1_1', period)
@@ -101,7 +101,7 @@ class reforme_tva_2019(Reform):
     class poste_11_1_3_1_reforme_tva_2019(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Autres dépenses en restauration, augmentation de la TVA"
+        label = 'Autres dépenses en restauration, augmentation de la TVA'
 
         def formula(menage, period, parameters):
             poste_11_1_3_1 = menage('poste_11_1_3_1', period)
@@ -123,7 +123,7 @@ class reforme_tva_2019(Reform):
     class poste_11_1_3_2_reforme_tva_2019(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Autres dépenses en restauration (cadeaux à autres ménages), augmentation de la TVA"
+        label = 'Autres dépenses en restauration (cadeaux à autres ménages), augmentation de la TVA'
 
         def formula(menage, period, parameters):
             poste_11_1_3_2 = menage('poste_11_1_3_2', period)
@@ -145,7 +145,7 @@ class reforme_tva_2019(Reform):
     class poste_11_2_1_1_1_reforme_tva_2019(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Dépenses en hébergements augmentation de la TVA"
+        label = 'Dépenses en hébergements augmentation de la TVA'
 
         def formula(menage, period, parameters):
             poste_11_2_1_1_1 = menage('poste_11_2_1_1_1', period)

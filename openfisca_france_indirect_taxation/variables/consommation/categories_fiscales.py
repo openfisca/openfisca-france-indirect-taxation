@@ -52,7 +52,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
                     year_start = year_start,
                     year_stop = year_stop,
                     )
-                dated_function_name = f"formula_{year_start}"
+                dated_function_name = f'formula_{year_start}'
                 log.debug('Creating fiscal category {} ({}-{}) with the following products {}'.format(
                     categorie_fiscale, year_start, year_stop, previous_postes_coicop))
 
@@ -69,7 +69,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
             definitions_by_name = dict(
                 value_type = float,
                 entity = Menage,
-                label = "Dépenses hors taxes: {0}".format(categorie_fiscale),
+                label = 'Dépenses hors taxes: {0}'.format(categorie_fiscale),
                 )
             definitions_by_name.update(functions_by_name)
             tax_benefit_system.add_variable(
@@ -90,7 +90,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
                 definitions_by_name = dict(
                     value_type = float,
                     entity = Menage,
-                    label = "Dépenses hors taxes: {0}".format(categorie_fiscale),
+                    label = 'Dépenses hors taxes: {0}'.format(categorie_fiscale),
                     )
                 definitions_by_name.update(functions_by_name)
                 # definitions_by_name['formulas'] = formulas

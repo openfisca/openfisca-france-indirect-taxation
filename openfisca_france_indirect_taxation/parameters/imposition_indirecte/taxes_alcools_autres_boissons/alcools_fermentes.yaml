@@ -34,9 +34,7 @@ vins_mousseux_eur_hl:
       value: 54.8
   metadata:
     ipp_csv_id: taxe_vins_mousseux
-    unit:
-      2002-03-31: currency-EUR
-      1982-01-01: currency-FRF
+    unit: currency
 vins_tranquilles_eur_hl:
   description: Vins tranquilles (€/hl)
   values:
@@ -70,9 +68,7 @@ vins_tranquilles_eur_hl:
       value: 22.0
   metadata:
     ipp_csv_id: taxe_vins_tranquilles
-    unit:
-      2002-03-31: currency-EUR
-      1982-01-01: currency-FRF
+    unit: currency
 boissons_fermentees_autres_que_vin_biere_eur_hl:
   description: Boissons fermentées autres que vin et bière (€/hl)
   values:
@@ -106,9 +102,7 @@ boissons_fermentees_autres_que_vin_biere_eur_hl:
       value: 22.0
   metadata:
     ipp_csv_id: taxe_boiss_fermen_sauf_vin_biere
-    unit:
-      2002-03-31: currency-EUR
-      1982-01-01: currency-FRF
+    unit: currency
 cidres_poires_hydromels_eur_hl:
   description: Cidres / Poirés / Hydromels (€/hl)
   values:
@@ -140,9 +134,7 @@ cidres_poires_hydromels_eur_hl:
       value: 7.6
   metadata:
     ipp_csv_id: taxe_cidre_poire_hydromel
-    unit:
-      2002-03-31: currency-EUR
-      1982-01-01: currency-FRF
+    unit: currency
 exoneration_ensemble_vins_eur_hl:
   description: Exonération pour l'ensemble des vins (€/hl)
   values:
@@ -152,7 +144,7 @@ exoneration_ensemble_vins_eur_hl:
       value: 12.7
   metadata:
     ipp_csv_id: exoneration_taxe_vins
-    unit: currency-FRF
+    unit: currency
 exoneration_petillants_voir_conditions_eur_hl:
   description: Exonération des pétillants (voir conditions) (€/hl)
   values:
@@ -162,7 +154,7 @@ exoneration_petillants_voir_conditions_eur_hl:
       value: 5.4
   metadata:
     ipp_csv_id: exoneration_taxe_petillants
-    unit: currency-FRF
+    unit: currency
 metadata:
   order:
   - vins_mousseux_eur_hl
@@ -198,7 +190,7 @@ metadata:
     1982-01-01:
       title: Loi 81-1160 du 30/12/1981 (LF pour 1982)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000515870
-  date_parution_jo:
+  official_journal_date:
     2018-01-01: 2017-12-27
     2017-01-01: 2016-12-31
     2015-06-06: 2015-06-05
@@ -210,7 +202,7 @@ metadata:
     2009-04-10: 2009-04-09
     1993-02-01: 1993-01-04
     1982-01-01: 1981-12-31
-  description_en: Fermented alcohols (wine, cider, etc.)
+  label_en: Fermented alcohols (wine, cider, etc.)
 documentation: |
   Notes :
   Données renseignées dans l'article 438 du code général des impôts

@@ -1,18 +1,13 @@
-# -*- coding: utf-8 -*-
-
-
 import logging
 import numpy as np
 import os
 import pandas as pd
-import pkg_resources
 
 from openfisca_core.reforms import Reform
+
+from openfisca_france_indirect_taxation.location import openfisca_france_indirect_taxation_location
 from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable
-
-
 from openfisca_france_indirect_taxation.variables.base import get_legislation_data_frames, Menage
-
 from openfisca_france_indirect_taxation.utils import assets_directory
 from openfisca_france_indirect_taxation.variables.consommation.postes_coicop import generate_postes_agreges_variables
 from openfisca_france_indirect_taxation.variables.consommation.categories_fiscales import generate_variables
@@ -26,7 +21,7 @@ log = logging.getLogger(__name__)
 
 
 aliss_assets_reform_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+    openfisca_france_indirect_taxation_location,
     'openfisca_france_indirect_taxation',
     'reforms',
     'aliss_assets',
@@ -74,7 +69,7 @@ def build_aliss_reform(rebuild = False, ajustable = False):
             labels,
             axis = 1,
             ).groupby(['code_bdf']).filter(
-                lambda x: x[reform].nunique() > 1,
+                lambda x: x[reform].nunique() > 1,  # noqa B023
                 ).sort_values('code_bdf')
 
         mismatch.nomc = mismatch.nomc.str.decode('latin-1').str.encode('utf-8')
@@ -90,7 +85,7 @@ def build_aliss_reform(rebuild = False, ajustable = False):
 
 
 class aliss_ajustable(Reform):
-    name = "Réforme Aliss- Ajustable"
+    name = 'Réforme Aliss- Ajustable'
     key = 'aliss_ajustable'
 
     def apply(self):
@@ -129,8 +124,8 @@ class aliss_tva_sociale(Reform):
         build_custom_aliss_reform(self, key = key, name = self.name)
 
 
-def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None, missmatch_rates = "weighted"):
-    assert missmatch_rates in ["higher", "weighted"]  # "lower"]
+def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None, missmatch_rates = 'weighted'):
+    assert missmatch_rates in ['higher', 'weighted']  # "lower"]
     assert key is not None
     assert tax_benefit_system is not None
     taux_by_categorie_fiscale = None
@@ -146,11 +141,11 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
         lambda x: x[reform_key].nunique() > 1).copy().sort_values('code_bdf')
 
     if not reform_mismatch.empty:
-        if missmatch_rates == "weighted":
+        if missmatch_rates == 'weighted':
             categories_fiscales_reform, taux_by_categorie_fiscale = build_updated_categorie_fiscale(
                 reform_key, categories_fiscales_reform)
 
-        elif missmatch_rates == "higher":
+        elif missmatch_rates == 'higher':
             categories_fiscales_reform[reform_key] = categories_fiscales_reform[reform_key].astype(
                 'category',
                 categories = ['tva_taux_reduit', 'tva_taux_intermediaire', 'tva_taux_plein'],
@@ -190,7 +185,7 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
         categories_fiscales.loc[
             categories_fiscales.code_bdf.isin(codes_bdf), 'categorie_fiscale'] = categorie_fiscale
 
-    assert not categories_fiscales.code_bdf.duplicated().any(), "there are {} duplicated entries".format(
+    assert not categories_fiscales.code_bdf.duplicated().any(), 'there are {} duplicated entries'.format(
         categories_fiscales.code_bdf.duplicated().sum())
 
     generate_variables(
@@ -225,7 +220,7 @@ def build_budget_shares(rebuild = False):
         ['poste_coicop', 'nomc', 'nomf']).apply(
             lambda df: (df.dt_k).sum()
             ).reset_index()
-    aliss_expenditures.rename(columns = {0: "expenditures"}, inplace = True)
+    aliss_expenditures.rename(columns = {0: 'expenditures'}, inplace = True)
 
     aliss_expenditures['budget_share'] = aliss_expenditures.groupby(
         ['poste_coicop'])['expenditures'].transform(
@@ -273,13 +268,13 @@ def build_updated_categorie_fiscale(reform_key, categories_fiscales_reform):
         taux_by_categorie_fiscale)
 
     def weighted_mean(x):
-        return np.average(x, weights = weighted_categories_fiscales.loc[x.index, "budget_share"])
+        return np.average(x, weights = weighted_categories_fiscales.loc[x.index, 'budget_share'])
 
     reform_rate = weighted_categories_fiscales.groupby(['code_bdf', 'poste_coicop'])['reform_rate'].agg(
         weighted_mean).reset_index()
 
     weighted_categories_fiscales = weighted_categories_fiscales.drop('reform_rate', axis = 1).merge(reform_rate)
-    weighted_categories_fiscales[reform_key] = "tva_taux_" + weighted_categories_fiscales.poste_coicop.str[6:]
+    weighted_categories_fiscales[reform_key] = 'tva_taux_' + weighted_categories_fiscales.poste_coicop.str[6:]
 
     # Updating taux_by_categorie_fiscale
     taux_by_categorie_fiscale_update = weighted_categories_fiscales[
@@ -320,7 +315,7 @@ def depenses_new_tva_function_creator(categorie_fiscale = None, taux = None):
             simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * (1 + taux)
             )
 
-    func.__name__ = "formula"
+    func.__name__ = 'formula'
     return func
 
 
@@ -333,7 +328,7 @@ def new_tva_function_creator(categorie_fiscale = None, taux = None):
             simulation.calculate('depenses_ht_poste_{}'.format(categorie_fiscale[9:]), period) * taux
             )
 
-    func.__name__ = "formula"
+    func.__name__ = 'formula'
     return func
 
 
@@ -343,7 +338,7 @@ def new_tva_total_function_creator(categories_fiscales):
             simulation.calculate(categorie_fiscale, period) for categorie_fiscale in categories_fiscales
             )
 
-    func.__name__ = "formula"
+    func.__name__ = 'formula'
     return func
 
 
@@ -360,7 +355,7 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
             definitions_by_name = dict(
                 value_type = float,
                 entity = Menage,
-                label = "Dépenses taxes comprises: {0}".format(categorie_fiscale),
+                label = 'Dépenses taxes comprises: {0}'.format(categorie_fiscale),
                 formula = depenses_new_tva_func,
                 )
             depenses_variable_class = type(depenses_class_name, (YearlyVariable,), definitions_by_name)
@@ -375,7 +370,7 @@ def generate_additional_tva_variables(tax_benefit_system, reform_key = None, tau
             definitions_by_name = dict(
                 value_type = float,
                 entity = Menage,
-                label = "Montant de la TVA acquitée à {0}".format(categorie_fiscale),
+                label = 'Montant de la TVA acquitée à {0}'.format(categorie_fiscale),
                 formula = new_tva_func,
                 )
             tva_variable_class = type(tva_class_name, (YearlyVariable,), definitions_by_name)

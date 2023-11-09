@@ -48,7 +48,7 @@ class biere_droit_d_accise(YearlyVariable):
 class depenses_biere(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses de bière"
+    label = 'Dépenses de bière'
 
     def formula(menage, period, parameters):
         depenses_ht_biere = menage('depenses_ht_biere', period)
@@ -85,7 +85,7 @@ class vin_droit_d_accise(YearlyVariable):
 class depenses_vin(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses de vin"
+    label = 'Dépenses de vin'
 
     def formula(menage, period, parameters):
         depenses_ht_vin = menage('depenses_ht_vin', period)

@@ -3,16 +3,15 @@
 
 import numpy as np
 import os
-import pkg_resources
 import pandas as pd
 
-
+from openfisca_france_indirect_taxation.location import openfisca_france_indirect_taxation_location
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss import get_adjusted_input_data_frame
 
 
 aliss_assets_reform_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+    openfisca_france_indirect_taxation_location,
     'openfisca_france_indirect_taxation',
     'reforms',
     'aliss_assets',
@@ -140,7 +139,7 @@ def set_adjustable_reform(dataframe):
 def run_reform(reform_key = None, aggfunc = 'mean'):
     survey_scenario, adjusted_survey_scenario = build_scenarios(reform_key = reform_key)
     alimentation_domicile_hors_alcool = [
-        "depenses_ht_{}".format(key) for key in list(survey_scenario.tax_benefit_system.variables.keys())
+        'depenses_ht_{}'.format(key) for key in list(survey_scenario.tax_benefit_system.variables.keys())
         if key.startswith('poste_01')
         ]
     alimentation_domicile = alimentation_domicile_hors_alcool + [
@@ -149,7 +148,7 @@ def run_reform(reform_key = None, aggfunc = 'mean'):
         'depenses_alcools_forts'
         ]
     depenses_ht_tvas = [
-        "depenses_ht_{}".format(key) for key in list(survey_scenario.tax_benefit_system.variables.keys())
+        'depenses_ht_{}'.format(key) for key in list(survey_scenario.tax_benefit_system.variables.keys())
         if key.startswith('tva_taux_')
         ]
     tvas = [

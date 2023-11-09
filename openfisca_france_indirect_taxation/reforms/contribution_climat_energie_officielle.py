@@ -8,7 +8,7 @@ from openfisca_core import reforms
 def build_reform(tax_benefit_system):
     Reform = reforms.make_reform(
         key = 'contribution_climat_energie_officielle',
-        name = "Réforme telle que prévue par la loi",
+        name = 'Réforme telle que prévue par la loi',
         use_baseline =tax_benefit_system,
         )
 
@@ -24,14 +24,14 @@ def build_reform(tax_benefit_system):
 
 def modify_parameters(parameters):
     node = ParameterNode(
-        "contribution_climat_energie_officielle",
+        'contribution_climat_energie_officielle',
         data = {
-            "description": "contribution_climat_energie_officielle",
-            "diesel": {
-                "description": "Surcroît de prix du diesel (en euros par hectolitres)",
+            'description': 'contribution_climat_energie_officielle',
+            'diesel': {
+                'description': 'Surcroît de prix du diesel (en euros par hectolitres)',
                 # TODO "unit": '?',
-                "unit": 'currency',
-                "values": {
+                'unit': 'currency',
+                'values': {
                     '2014-01-01': 1.862,
                     '2015-01-01': 3.857,
                     '2016-01-01': 5.852,
@@ -40,10 +40,10 @@ def modify_parameters(parameters):
                     '2019-01-01': 12.635,
                     },
                 },
-            "essence": {
-                "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
-                "unit": 'currency',
-                "values": {
+            'essence': {
+                'description': "Surcroît de prix de l'essence (en euros par hectolitres)",
+                'unit': 'currency',
+                'values': {
                     '2014-01-01': 1.694,
                     '2015-01-01': 3.509,
                     '2016-01-01': 5.324,
@@ -52,10 +52,10 @@ def modify_parameters(parameters):
                     '2019-01-01': 11.495,
                     },
                 },
-            "fioul_domestique": {
-                "description": "Surcroît de prix du fioul domestique (en euros par litre)",
-                "unit": 'currency',
-                "values": {
+            'fioul_domestique': {
+                'description': 'Surcroît de prix du fioul domestique (en euros par litre)',
+                'unit': 'currency',
+                'values': {
                     '2014-01-01': 0.0217,
                     '2015-01-01': 0.04495,
                     '2016-01-01': 0.0682,
@@ -64,11 +64,11 @@ def modify_parameters(parameters):
                     '2019-01-01': 0.14725,
                     },
                 },
-            "gaz": {
-                "description": "Surcroît de prix du gaz (en euros par kWh)",
+            'gaz': {
+                'description': 'Surcroît de prix du gaz (en euros par kWh)',
                 # TODO "unit": '?',
-                "unit": 'currency',
-                "values": {
+                'unit': 'currency',
+                'values': {
                     '2014-01-01': 0.00168,
                     '2015-01-01': 0.00348,
                     '2016-01-01': 0.00528,

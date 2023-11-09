@@ -10,7 +10,7 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 class emissions_CO2_carburants(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2"
+    label = 'Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2'
 
     def formula(menage, period, parameters):
         quantites_diesel = menage('quantites_diesel', period)
@@ -27,7 +27,7 @@ class emissions_CO2_carburants(YearlyVariable):
 class emissions_CO2_combustibles_liquides(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Emissions de CO2 des ménages via leur consommation de combustibles liquides, en kg de CO2"
+    label = 'Emissions de CO2 des ménages via leur consommation de combustibles liquides, en kg de CO2'
 
     def formula(menage, period, parameters):
         quantite_combustibles_liquides = menage('quantites_combustibles_liquides', period)
@@ -41,7 +41,7 @@ class emissions_CO2_combustibles_liquides(YearlyVariable):
 class emissions_CO2_diesel(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Emissions de CO2 des ménages via leur consommation de diesel, en kg de CO2"
+    label = 'Emissions de CO2 des ménages via leur consommation de diesel, en kg de CO2'
 
     def formula(menage, period, parameters):
         quantites_diesel = menage('quantites_diesel', period)
@@ -97,7 +97,7 @@ class emissions_CO2_energies_totales(YearlyVariable):
 class emissions_CO2_essence(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2"
+    label = 'Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2'
 
     def formula(menage, period, parameters):
         quantites_essence = menage('quantites_essence', period)
@@ -111,7 +111,7 @@ class emissions_CO2_essence(YearlyVariable):
 class emissions_CO2_gaz_liquefie(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2"
+    label = 'Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2'
 
     def formula(menage, period, parameters):
         quantites_gaz = menage('quantites_gaz_liquefie', period)
@@ -125,7 +125,7 @@ class emissions_CO2_gaz_liquefie(YearlyVariable):
 class emissions_CO2_gaz_ville(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2"
+    label = 'Emissions de CO2 des ménages via leur consommation de gaz, en kg de CO2'
 
     def formula(menage, period, parameters):
         quantites_gaz = menage('quantites_gaz_final', period)

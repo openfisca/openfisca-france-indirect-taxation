@@ -18,9 +18,9 @@ from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get
 
 from openfisca_france_indirect_taxation.utils import assets_directory
 
-"""Ici on applique aux quantités de carburants consommées par des véhicules autres que les ménages
+'''Ici on applique aux quantités de carburants consommées par des véhicules autres que les ménages
 la ticpe à taux plein. En réalité, un certain nombre d'exonération s'appliquent pour les professionels.
-On calcul donc simplement une borne supérieure des recettes engendrées"""
+On calcul donc simplement une borne supérieure des recettes engendrées'''
 
 # Import des fichiers csv donnant les montants agrégés des dépenses en TICPE d'après les enquêtes BdF.
 # Ces montants sont calculés dans compute_depenses_ticpe

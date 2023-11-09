@@ -1,0 +1,236 @@
+# prix carburant gazole HT:
+
+## prix gazole B7 HT:
+
+- name: "Test prix_gazole_b7_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+    prix_gazole_b7_ttc: 1.4988
+  output:
+    prix_gazole_b7_ht: 0.6226
+
+- name: "Test prix_gazole_b7_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+    prix_gazole_b7_ttc: 1.4418
+  output:
+    prix_gazole_b7_ht: 0.594
+
+- name: "Test prix_gazole_b7_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+    prix_gazole_b7_ttc: 1.5504
+  output:
+    prix_gazole_b7_ht: 0.698
+
+## prix gazole B10 HT:
+
+- name: "Test prix_gazole_b10_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+    prix_gazole_b10_ttc: 1.4988
+  output:
+    prix_gazole_b10_ht: 0.655
+
+- name: "Test prix_gazole_b10_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+    prix_gazole_b10_ttc: 1.4418
+  output:
+    prix_gazole_b10_ht: 0.6075
+
+- name: "Test prix_gazole_b10_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+    prix_gazole_b10_ttc: 1.5504
+  output:
+    prix_gazole_b10_ht: 0.698
+
+# prix essence HT:
+
+## prix essence SP95 E10 HT:
+
+- name: "Test prix_essence_sp95_e10_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+    prix_essence_sp95_e10_ttc: 1.5844
+  output:
+    prix_essence_sp95_e10_ht: 0.634
+
+- name: "Test prix_essence_sp95_e10_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+    prix_essence_sp95_e10_ttc: 1.5382
+  output:
+    prix_essence_sp95_e10_ht: 0.6116
+
+- name: "Test prix_essence_sp95_e10_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+    prix_essence_sp95_e10_ttc: 1.6208
+  output:
+    prix_essence_sp95_e10_ht: 0.6977
+
+## prix essence SP95 HT:
+
+- name: "Test prix_essence_sp95_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+    prix_essence_sp95_ttc: 1.5794
+  output:
+    prix_essence_sp95_ht: 0.6157
+
+- name: "Test prix_essence_sp95_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+    prix_essence_sp95_ttc: 1.5632
+  output:
+    prix_essence_sp95_ht: 0.6124
+
+- name: "Test prix_essence_sp95_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+    prix_essence_sp95_ttc: 1.6567
+  output:
+    prix_essence_sp95_ht: 0.7076
+
+## prix essence SP98 HT:
+
+- name: "Test prix_essence_sp98_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+    prix_essence_sp98_ttc: 1.6748
+  output:
+    prix_essence_sp98_ht: 0.6952
+
+- name: "Test prix_essence_sp98_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+    prix_essence_sp98_ttc: 1.620
+  output:
+    prix_essence_sp98_ht: 0.6598
+
+- name: "Test prix_essence_sp98_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+    prix_essence_sp98_ttc: 1.5933
+  output:
+    prix_essence_sp98_ht: 0.6548
+
+## prix essence super plombe HT:
+
+- name: "Test prix_essence_super_plombe_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+    prix_essence_super_plombe_ttc: 0.0
+  output:
+    prix_essence_super_plombe_ht: 0.0
+
+- name: "Test prix_essence_super_plombe_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+    prix_essence_super_plombe_ttc: 0.0
+  output:
+    prix_essence_super_plombe_ht: 0.0
+
+- name: "Test prix_essence_super_plombe_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+    prix_essence_super_plombe_ttc: 0.0
+  output:
+    prix_essence_super_plombe_ht: 0.0
+
+## prix essence E85 HT:
+
+- name: "Test prix_essence_e85_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+    prix_essence_e85_ttc: 0.7307
+  output:
+    prix_essence_e85_ht: 0.4906
+
+- name: "Test prix_essence_e85_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+    prix_essence_e85_ttc: 0.6774
+  output:
+    prix_essence_e85_ht: 0.4462
+
+- name: "Test prix_essence_e85_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+    prix_essence_e85_ttc: 1.3504
+  output:
+    prix_essence_e85_ht: 1.007
+
+# prix GPL HT:
+
+- name: "Test prix_gpl_carburant_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+    prix_gpl_carburant_ttc: 0.878
+  output:
+    prix_gpl_carburant_ht: 0.5245
+
+- name: "Test prix_gpl_carburant_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+    prix_gpl_carburant_ttc: 0.8984
+  output:
+    prix_gpl_carburant_ht: 0.5415
+
+
+- name: "Test prix_gpl_carburant_ht"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+    prix_gpl_carburant_ttc: 1.1149
+  output:
+    prix_gpl_carburant_ht: 0.722

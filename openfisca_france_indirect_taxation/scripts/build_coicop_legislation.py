@@ -92,7 +92,7 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
         origin = None, start = 1994, stop = 2014, label = ''):
     assert coicop_nomenclature is not None
     assert categorie_fiscale in list(taxe_by_categorie_fiscale_number.values())
-    assert 1994 <= start < stop <= 2014, "Invalid start={} and/or stop={}".format(start, stop)
+    assert 1994 <= start < stop <= 2014, 'Invalid start={} and/or stop={}'.format(start, stop)
 
     if isinstance(value, int):
         value_str = '0' + str(value) if value < 10 else str(value)
@@ -649,7 +649,7 @@ def test_coicop_legislation():
         return coicop_nomenclature.loc[coicop_nomenclature.categorie_fiscale.isnull()]
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # extract_informations_from_coicop_to_categorie_fiscale()
     coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
     coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = True)

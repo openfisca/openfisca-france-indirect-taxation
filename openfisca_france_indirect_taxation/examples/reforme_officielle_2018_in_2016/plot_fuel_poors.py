@@ -17,7 +17,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
 from openfisca_france_indirect_taxation.reforms.officielle_2018_in_2016 import reforme_officielle_2018_in_2016
 
 
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 
 def plot_effect_reform_fuel_poors():

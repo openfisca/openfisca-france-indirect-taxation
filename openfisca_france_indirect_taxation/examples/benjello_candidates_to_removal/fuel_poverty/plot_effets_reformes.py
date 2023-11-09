@@ -11,7 +11,7 @@ from openfisca_france_indirect_taxation.examples.fuel_poverty.nombre_precaires i
 from openfisca_france_indirect_taxation.examples.fuel_poverty.effets_reformes import effets_reformes_precarite
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar_percent, save_dataframe_to_graph
 
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 
 def plot_precarite(indicateur):

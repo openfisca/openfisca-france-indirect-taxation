@@ -30,9 +30,10 @@ taux_specifique:
         value: 0.05
     metadata:
       ipp_csv_id: tx_spec_cigarettes
-      unit:
-        2015-01-01: currency-EUR
-        1979-01-01: /1
+      notes: >
+        unit:
+          2015-01-01: currency
+          1979-01-01: /1
   cigares:
     description: Cigares
     values:
@@ -54,9 +55,10 @@ taux_specifique:
         value: null
     metadata:
       ipp_csv_id: tx_spec_cigares
-      unit:
-        2015-01-01: currency-EUR
-        2013-01-01: /1
+      notes: >
+        unit:
+          2015-01-01: currency
+          2013-01-01: /1
   tabac_rouler:
     description: Tabac à rouler
     values:
@@ -78,9 +80,10 @@ taux_specifique:
         value: null
     metadata:
       ipp_csv_id: tx_spec_tabac_rouler
-      unit:
-        2015-01-01: currency-EUR
-        2013-01-01: /1
+      notes: >
+        unit:
+          2015-01-01: currency
+          2013-01-01: /1
   autres_tabacs:
     description: Autres tabacs
     values:
@@ -102,9 +105,10 @@ taux_specifique:
         value: null
     metadata:
       ipp_csv_id: tx_spec_autres_tabac
-      unit:
-        2015-01-01: currency-EUR
-        2013-01-01: /1
+      notes: >
+        unit:
+          2015-01-01: currency
+          2013-01-01: /1
   tabacs_priser:
     description: Tabacs à priser
     values:
@@ -114,9 +118,10 @@ taux_specifique:
         value: null
     metadata:
       ipp_csv_id: tx_spec_tabac_priser
-      unit:
-        2015-01-01: currency-EUR
-        2013-01-01: /1
+      notes: >
+        unit:
+          2015-01-01: currency
+          2013-01-01: /1
   tabacs_chiquer:
     description: Tabacs à chiquer
     values:
@@ -126,9 +131,10 @@ taux_specifique:
         value: null
     metadata:
       ipp_csv_id: tx_spec_tabac_chiquer
-      unit:
-        2015-01-01: currency-EUR
-        2013-01-01: /1
+      notes: >
+        unit:
+          2015-01-01: currency
+          2013-01-01: /1
   metadata:
     order:
     - cigarettes
@@ -175,7 +181,7 @@ metadata:
       title: Loi 2003-1311 du 30/12/2003
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000612133
     1979-01-01: Art. 575 CGI
-  date_parution_jo:
+  official_journal_date:
     2020-11-01: 2017-12-31
     2020-03-01: 2017-12-31
     2019-11-01: 2017-12-31
@@ -187,7 +193,7 @@ metadata:
     2012-01-01: 2011-12-29
     2011-01-01: 2010-12-30
     2004-01-05: 2003-12-31
-  description_en: Tobacco specific rates
+  label_en: Tobacco specific rates
 documentation: |
   Notes :
   A partir de 2015 la part spécifique est en euro et non plus en pourcentage

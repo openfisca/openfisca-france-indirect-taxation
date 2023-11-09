@@ -55,8 +55,8 @@ for category in ['niveau_vie_decile']:  # ['niveau_vie_decile', 'age_group_pr', 
         df['poste_11_1_1_1_1'] + df['poste_11_1_1_1_2'] + df['poste_11_1_2_1_1']
         + df['poste_11_1_3_1'] + df['poste_11_1_3_2'] + df['poste_11_2_1_1_1']
         ) - df['poste_agrege_11']
-    assert(df['check_poste_agrege_11'].min() > -1e-06)
-    assert(df['check_poste_agrege_11'].max() < 1e-06)
+    assert df['check_poste_agrege_11'].min() > -1e-06
+    assert df['check_poste_agrege_11'].max() < 1e-06
 
     df['part_poste_agrege_11_rev_disp_loyerimput'] = df['poste_agrege_11'] / df['rev_disp_loyerimput']
     df['part_poste_agrege_11_depenses_tot'] = df['poste_agrege_11'] / df['depenses_tot']

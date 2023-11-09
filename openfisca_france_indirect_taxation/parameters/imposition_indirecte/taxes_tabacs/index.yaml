@@ -3,4 +3,4 @@ metadata:
   order:
   - taux_normaux_tabac
   - taux_specifique_tabac
-  description_en: Excises on tobacco
+  label_en: Excises on tobacco

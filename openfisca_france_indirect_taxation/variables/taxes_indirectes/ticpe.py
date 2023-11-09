@@ -2,12 +2,13 @@
 
 
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.variables.taxes_indirectes import get_accise_diesel_ticpe
 
 
 class combustibles_liquides_ticpe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur les combustibles liquides"
+    label = 'Calcul du montant de TICPE sur les combustibles liquides'
 
     def formula(menage, period, parameters):
         quantites_combustibles_liquides = menage('quantites_combustibles_liquides', period)
@@ -20,22 +21,11 @@ class combustibles_liquides_ticpe(YearlyVariable):
 class diesel_ticpe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur le diesel"
+    label = 'Calcul du montant de TICPE sur le diesel'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-
-        # If the parameter does not have a defined value, it returns None
-        majoration_ticpe_diesel = \
-            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
-
-        accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
-
-        accise_diesel_ticpe = (
-            accise_diesel + majoration_ticpe_diesel
-            if majoration_ticpe_diesel is not None
-            else accise_diesel
-            )
+        accise_diesel_ticpe = get_accise_diesel_ticpe(parameters, period)
 
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         taux_implicite_diesel = (
@@ -52,7 +42,7 @@ class diesel_ticpe(YearlyVariable):
 class quantite_diesel(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur le diesel"
+    label = 'Calcul du montant de TICPE sur le diesel'
 
     def formula(menage, period, parameters):
 
@@ -65,20 +55,12 @@ class quantite_diesel(YearlyVariable):
 class diesel_ticpe_ajustee(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur le diesel après réforme"
+    label = 'Calcul du montant de TICPE sur le diesel après réforme'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
 
-        majoration_ticpe_diesel = \
-            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
-        accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
-
-        accise_diesel_ticpe = (
-            accise_diesel + majoration_ticpe_diesel
-            if majoration_ticpe_diesel is not None
-            else accise_diesel
-            )
+        accise_diesel_ticpe = get_accise_diesel_ticpe(parameters, period)
 
         reforme_diesel = parameters(period.start).rattrapage_diesel.diesel
         accise_diesel_ticpe_ajustee = accise_diesel_ticpe + reforme_diesel
@@ -103,7 +85,7 @@ class diesel_ticpe_ajustee(YearlyVariable):
 class essence_ticpe(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur toutes les essences cumulées"
+    label = 'Calcul du montant de la TICPE sur toutes les essences cumulées'
     definition_period = YEAR
 
     def formula_2009(menage, period):
@@ -130,7 +112,7 @@ class essence_ticpe(Variable):
 class quantite_essence(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur toutes les essences cumulées"
+    label = 'Calcul du montant de la TICPE sur toutes les essences cumulées'
     definition_period = YEAR
 
     def formula_2009(menage, period):
@@ -157,7 +139,7 @@ class quantite_essence(Variable):
 class essence_ticpe_ajustee(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme"
+    label = 'Calcul du montant de la TICPE sur toutes les essences cumulées, après réforme'
     definition_period = YEAR
 
     def formula_2009(menage, period):
@@ -184,7 +166,7 @@ class essence_ticpe_ajustee(Variable):
 class sp_e10_ticpe(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur le SP E10"
+    label = 'Calcul du montant de la TICPE sur le SP E10'
     definition_period = YEAR
 
     def formula_2009(menage, period, parameters):
@@ -221,7 +203,7 @@ class sp_e10_ticpe(Variable):
 class quantite_sp_e10(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur le SP E10"
+    label = 'Calcul du montant de la TICPE sur le SP E10'
     definition_period = YEAR
 
     def formula_2009(menage, period, parameters):
@@ -239,7 +221,7 @@ class quantite_sp_e10(Variable):
 class sp_e10_ticpe_ajustee(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur le SP E10 après réforme"
+    label = 'Calcul du montant de la TICPE sur le SP E10 après réforme'
     definition_period = YEAR
 
     def formula_2009(menage, period, parameters):
@@ -276,7 +258,7 @@ class sp_e10_ticpe_ajustee(Variable):
 class sp95_ticpe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur le sp_95"
+    label = 'Calcul du montant de TICPE sur le sp_95'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -305,7 +287,7 @@ class sp95_ticpe(YearlyVariable):
 class quantite_sp95(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur le sp_95"
+    label = 'Calcul du montant de TICPE sur le sp_95'
 
     def formula(menage, period, parameters):
         super_95_ttc = parameters(period.start).prix_carburants.super_95_ttc
@@ -317,7 +299,7 @@ class quantite_sp95(YearlyVariable):
 class sp95_ticpe_ajustee(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur le sp_95 après réforme"
+    label = 'Calcul du montant de TICPE sur le sp_95 après réforme'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -355,7 +337,7 @@ class sp95_ticpe_ajustee(YearlyVariable):
 class sp98_ticpe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur le sp_98"
+    label = 'Calcul du montant de TICPE sur le sp_98'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -385,7 +367,7 @@ class sp98_ticpe(YearlyVariable):
 class quantite_sp98(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur le sp_98"
+    label = 'Calcul du montant de TICPE sur le sp_98'
 
     def formula(menage, period, parameters):
         super_98_ttc = parameters(period.start).prix_carburants.super_98_ttc
@@ -397,7 +379,7 @@ class quantite_sp98(YearlyVariable):
 class sp98_ticpe_ajustee(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de TICPE sur le sp_98 après réforme"
+    label = 'Calcul du montant de TICPE sur le sp_98 après réforme'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -435,7 +417,7 @@ class sp98_ticpe_ajustee(YearlyVariable):
 class super_plombe_ticpe(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur le super plombé"
+    label = 'Calcul du montant de la TICPE sur le super plombé'
     definition_period = YEAR
 
     def formula_2007(menage, period):
@@ -463,7 +445,7 @@ class super_plombe_ticpe(Variable):
 class quantite_super_plombe(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur le super plombé"
+    label = 'Calcul du montant de la TICPE sur le super plombé'
     definition_period = YEAR
 
     def formula_2007(menage, period):
@@ -481,7 +463,7 @@ class quantite_super_plombe(Variable):
 class super_plombe_ticpe_ajustee(Variable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur le super plombé après réforme"
+    label = 'Calcul du montant de la TICPE sur le super plombé après réforme'
     definition_period = YEAR
 
     def formula_2007(menage, period):
@@ -518,7 +500,7 @@ class super_plombe_ticpe_ajustee(Variable):
 class ticpe_totale(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur tous les carburants cumulés"
+    label = 'Calcul du montant de la TICPE sur tous les carburants cumulés'
 
     def formula(menage, period):
         essence_ticpe = menage('essence_ticpe', period)
@@ -531,7 +513,7 @@ class ticpe_totale(YearlyVariable):
 class ticpe_totale_ajustee(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme"
+    label = 'Calcul du montant de la TICPE sur tous les carburants cumulés, après réforme'
 
     def formula(menage, period):
         essence_ticpe_ajustee = menage('essence_ticpe_ajustee', period)
@@ -544,7 +526,7 @@ class ticpe_totale_ajustee(YearlyVariable):
 class total_taxes_energies(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Calcul du montant de la TICPE sur tous les carburants cumulés"
+    label = 'Calcul du montant de la TICPE sur tous les carburants cumulés'
 
     def formula(menage, period):
         essence_ticpe = menage('essence_ticpe', period)
@@ -558,7 +540,7 @@ class total_taxes_energies(YearlyVariable):
 class difference_ticpe_diesel_reforme(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Différence entre les contributions à la TICPE sur le diesel avant et après la réforme"
+    label = 'Différence entre les contributions à la TICPE sur le diesel avant et après la réforme'
 
     def formula(menage, period):
         diesel_ticpe_ajustee = menage('diesel_ticpe_ajustee', period)
@@ -584,7 +566,7 @@ class difference_ticpe_essence_reforme(YearlyVariable):
 class difference_ticpe_totale_reforme(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Différence entre les contributions à la TICPE avant et après la réforme"
+    label = 'Différence entre les contributions à la TICPE avant et après la réforme'
 
     def formula(menage, period):
         ticpe_totale_ajustee = menage('ticpe_totale_ajustee', period)

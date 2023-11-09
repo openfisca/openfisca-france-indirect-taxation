@@ -164,7 +164,7 @@ def get_elasticities_aidsills(data_year, non_positive):
     return dataframe
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     year = 2011
     create_data_elasticities_aidsills()
     df = get_elasticities_aidsills(year, True)

@@ -14,7 +14,7 @@ from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line
 
 # Import d'une nouvelle palette de couleurs
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 # Sélection des données des Compte des Transports utilisées et organisation de la dataframe
 comparaison_vehicules = g2_1[g2_1['categorie'] == 'Voitures particulières']

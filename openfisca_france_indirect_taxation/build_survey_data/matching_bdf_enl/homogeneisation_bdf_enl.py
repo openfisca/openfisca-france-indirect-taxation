@@ -22,16 +22,16 @@ enl_survey_collection = SurveyCollection.load(
     )
 survey_enl = enl_survey_collection.get_survey('enquete_logement_{}'.format(year_enl))
 
-input_enl = survey_enl.get_values(table = "menlogfm_diff")
+input_enl = survey_enl.get_values(table = 'menlogfm_diff')
 
 
 # Load BdF data :
 
 year_bdf = 2011
 
-openfisca_survey_collection = SurveyCollection.load(collection = "openfisca_indirect_taxation")
-openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year_bdf))
-input_data_frame = openfisca_survey.get_values(table = "input")
+openfisca_survey_collection = SurveyCollection.load(collection = 'openfisca_indirect_taxation')
+openfisca_survey = openfisca_survey_collection.get_survey('openfisca_indirect_taxation_data_{}'.format(year_bdf))
+input_data_frame = openfisca_survey.get_values(table = 'input')
 input_data_frame.reset_index(inplace = True)
 
 

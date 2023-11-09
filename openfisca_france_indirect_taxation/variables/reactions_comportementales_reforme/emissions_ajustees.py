@@ -7,7 +7,7 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 class emissions_CO2_carburants_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2"
+    label = 'Emissions de CO2 des ménages via leur consommation de carburants après réforme, en kg de CO2'
 
     def formula(menage, period, parameters):
         quantites_diesel_ajustees = menage('quantites_diesel_ajustees', period)
@@ -41,7 +41,7 @@ class emissions_CO2_electricite_ajustees(YearlyVariable):
 class emissions_CO2_gaz_ajustees:
     value_type = float
     entity = Menage
-    label = "Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2"
+    label = 'Emissions de CO2 des ménages via leur consommation de gaz après réforme, en kg de CO2'
 
     def formula(menage, period, parameters):
         quantites_gaz_ajustees = menage('quantites_gaz_ajustees_taxe_carbone', period)

@@ -203,6 +203,6 @@ metadata:
     2019-01-01:
       title: Arrêté du 26/12/2018
       href: https://www.legifrance.gouv.fr/affichTexteArticle.do;jsessionid=D843FB5E734F86D5D73948595255E1EA.tplgfr27s_2?cidTexte=JORFTEXT000037864332&idArticle=LEGIARTI000038099971&dateTexte=20181228&categorieLien=cid#LEGIARTI000038099971
-  description_en: Energy voucher
+  label_en: Energy voucher
 documentation: |
   Article R124-3 du Code de l'énergie

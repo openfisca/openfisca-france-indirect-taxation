@@ -8,7 +8,7 @@ from openfisca_france_indirect_taxation.utils import get_input_data_frame
 
 # TODO 2005 is failing see https://github.com/openfisca/openfisca-france-indirect-taxation/issues/177
 # TODO 200 is failing at IPP
-@pytest.mark.parametrize("year", [2011])
+@pytest.mark.parametrize('year', [2011])
 def test_carburants_builder(year):
     aggregates_data_frame = get_input_data_frame(year)
     postes_07 = [column for column in aggregates_data_frame.columns if column.startswith('poste_07')]
@@ -24,9 +24,9 @@ def test_carburants_builder(year):
         ])
 
     assert set(postes_07) == openfisca_postes, \
-        """year {}:
+        '''year {}:
  - {} is not present in tax_benefit_system
- - {} is not present in input data""".format(
+ - {} is not present in input data'''.format(
         year,
         set(postes_07).difference(openfisca_postes),
         set(openfisca_postes).difference(set(postes_07)),
@@ -46,4 +46,4 @@ def test_carburants_builder(year):
     weighted_input_data = ((carburants).sum(axis = 1) * pondmen).sum()
     weighted_computed_aggregate = survey_scenario.compute_aggregate('poste_agrege_07', period = year)
     assert_near(weighted_input_data, weighted_computed_aggregate, relative_error_margin = .001), \
-        "the total of transport differs from the sum of its components"
+        'the total of transport differs from the sum of its components'

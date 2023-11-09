@@ -44,11 +44,11 @@ def build_clean_aliss_data_frame():
             'Qm_f', 'Dm_f', 'pm_f', 'nomCOICOP', 'SomTpoids', 'DT_k', 'D_a'
             ]
         )
-    assert (aliss['DT_k'] == aliss['DT_k'].unique()[0]).all(), "DT_k is not a unique total number"
+    assert (aliss['DT_k'] == aliss['DT_k'].unique()[0]).all(), 'DT_k is not a unique total number'
 
     # Lower case all variables but DT_k which is translated to 'Dt_k'
     aliss.columns = list(map(str.lower, aliss.columns[:-2])) + ['Dt_k', 'd_a']
-    log.info("These columns contains nans {}".format(
+    log.info('These columns contains nans {}'.format(
         aliss.columns[aliss.isnull().any()].tolist()
         ))
     aliss.dropna(inplace = True)
@@ -114,7 +114,7 @@ def complete_input_data_frame(input_data_frame, drop_dom = True):
         input_data_frame = input_data_frame.query('zeat != 0').copy()
 
     input_data_frame.eval(
-        "age = 0 + (agepr > 30) + (agepr > 45) + (agepr > 60)",
+        'age = 0 + (agepr > 30) + (agepr > 45) + (agepr > 60)',
         inplace = True,  # Remove comment for pandas 0.18
         )
 
@@ -187,7 +187,7 @@ def compute_population_shares(drop_dom = True, display_plot = False):
         ['age', 'revenus']).apply(
             lambda df: (df.tpoids).sum()
             ).reset_index()
-    aliss_population_shares.rename(columns = {0: "aliss_population"}, inplace = True)
+    aliss_population_shares.rename(columns = {0: 'aliss_population'}, inplace = True)
     aliss_population_shares['aliss_population_share'] = (
         aliss_population_shares.aliss_population / aliss_population_shares.aliss_population.sum()
         )
@@ -200,7 +200,7 @@ def compute_population_shares(drop_dom = True, display_plot = False):
         ['age', 'revenus']).apply(
             lambda df: (df.pondmen).sum()
             ).reset_index()
-    bdf_population_shares.rename(columns = {0: "bdf_population"}, inplace = True)
+    bdf_population_shares.rename(columns = {0: 'bdf_population'}, inplace = True)
     bdf_population_shares['bdf_population_share'] = (
         bdf_population_shares.bdf_population / bdf_population_shares.bdf_population.sum()
         )
@@ -218,10 +218,10 @@ def compute_expenditures(drop_dom = True, display_plot = False):
         ['age', 'revenus', 'poste_coicop', 'nomc', 'nomk']).apply(
             lambda df: (df.dt_k).sum()
             ).reset_index()
-    aliss_expenditures.rename(columns = {0: "kantar_expenditures"}, inplace = True)
+    aliss_expenditures.rename(columns = {0: 'kantar_expenditures'}, inplace = True)
 
-    log.info("kantar_expenditures_total:", (aliss.dt_k).sum() / 1e9)
-    log.info("bdf_expenditures_total: ", (aliss.dt_c).drop_duplicates().sum() / 1e9)
+    log.info('kantar_expenditures_total:', (aliss.dt_k).sum() / 1e9)
+    log.info('bdf_expenditures_total: ', (aliss.dt_c).drop_duplicates().sum() / 1e9)
 
     aliss_expenditures['kantar_budget_share'] = aliss_expenditures.groupby(
         ['age', 'revenus'])['kantar_expenditures'].transform(
@@ -240,9 +240,9 @@ def compute_expenditures(drop_dom = True, display_plot = False):
         ['age', 'revenus', 'variable']).apply(
             lambda df: (df.pondmen * df.value).sum()
             ).reset_index()
-    input_data_expenditures.rename(columns = {"variable": "poste_coicop", 0: "bdf_expenditures"}, inplace = True)
+    input_data_expenditures.rename(columns = {'variable': 'poste_coicop', 0: 'bdf_expenditures'}, inplace = True)
 
-    log.info("bdf_expenditures_total: ", input_data_expenditures.bdf_expenditures.sum() / 1e9)
+    log.info('bdf_expenditures_total: ', input_data_expenditures.bdf_expenditures.sum() / 1e9)
 
     input_data_expenditures['bdf_budget_share'] = input_data_expenditures.groupby(
         ['age', 'revenus'])['bdf_expenditures'].transform(
@@ -333,7 +333,7 @@ def compute_kantar_elasticities(compute = False):
                     ['age', 'revenus', 'nomk', 'dm_k', 'dm_f']
                 ]
 
-            assert len(extract.dm_f.unique()) == 1, f"Problem when extracting budget share for age = {age} and revenu = {revenus}"
+            assert len(extract.dm_f.unique()) == 1, f'Problem when extracting budget share for age = {age} and revenu = {revenus}'
             extract['budget_share_kf'] = extract.dm_k / extract.dm_f
             extract['nomf'] = nomf_by_dirty_nomf.get(nomf)
 
@@ -403,7 +403,7 @@ def compute_kantar_elasticities(compute = False):
         nomk_cross_price_elasticity = nomk_cross_price_elasticity.combine_first(temp_nomk_cross_price_elasticity)
 
     # Some k-kprime elasticities are not found
-    log.info("{} k-kprime elasticities are not found".format(nomk_cross_price_elasticity.isnull().sum().sum()))
+    log.info('{} k-kprime elasticities are not found'.format(nomk_cross_price_elasticity.isnull().sum().sum()))
     nomk_cross_price_elasticity.fillna(0, inplace = True)
 
     nomk_cross_price_elasticity.to_csv(kantar_cross_price_elasticities_path)
@@ -483,7 +483,7 @@ def compute_expenditures_coefficient(reform_key = None):
         matrix = kantar_elasticities.query('age == @age & revenus == @revenus').drop(['age', 'revenus'], axis =1)
         matrix.fillna(0, inplace = True)
         assert sorted(matrix.index.tolist()) == sorted(correction.nomk), \
-            "Problem at age={} and revenus={}\n {}, {}".format(
+            'Problem at age={} and revenus={}\n {}, {}'.format(
                 age, revenus, len(matrix.index.tolist()), len(correction.nomk))
         assert matrix.shape == (nomk_len, nomk_len)
         expense_factor = (

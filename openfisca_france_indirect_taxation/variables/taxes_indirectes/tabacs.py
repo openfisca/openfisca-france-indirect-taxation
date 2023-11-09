@@ -13,7 +13,7 @@ class cigares_droit_d_accise(YearlyVariable):
         depenses_cigares = menage('depenses_cigares', period)
         taux_normal_cigare = parameters(period.start).imposition_indirecte.taxes_tabacs.taux_normaux_tabac.taux_normal.cigares
         taxe_part_normale_cigare = tax_from_expense_including_tax(depenses_cigares, taux_normal_cigare)
-        prix = parameters("{}-12-31".format(period)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_cigare
+        prix = parameters('{}-12-31'.format(period)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_cigare
         nombre = depenses_cigares / prix
         taux_special_cigare = parameters(period.start).imposition_indirecte.taxes_tabacs.taux_specifique_tabac.taux_specifique.cigares
 
@@ -31,7 +31,7 @@ class cigarette_droit_d_accise(YearlyVariable):
         taux_normal_cigarette = \
             parameters(period.start).imposition_indirecte.taxes_tabacs.taux_normaux_tabac.taux_normal.cigarettes
         taxe_part_normale_cigarette = tax_from_expense_including_tax(depenses_cigarettes, taux_normal_cigarette)
-        prix_paquet = parameters("{}-12-31".format(period)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
+        prix_paquet = parameters('{}-12-31'.format(period)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_paquet_cigarettes
         nombre_paquets = depenses_cigarettes / prix_paquet
         taux_special_cigarette = parameters(period.start).imposition_indirecte.taxes_tabacs.taux_specifique_tabac.taux_specifique.cigarettes
 
@@ -42,7 +42,7 @@ class cigarette_droit_d_accise(YearlyVariable):
 class depenses_cigares(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses de cigares"
+    label = 'Dépenses de cigares'
 
     def formula(menage, period):
         return menage('poste_02_2_2', period)
@@ -51,7 +51,7 @@ class depenses_cigares(YearlyVariable):
 class depenses_cigarettes(Variable):
     value_type = float
     entity = Menage
-    label = "Dépenses de cigarettes"
+    label = 'Dépenses de cigarettes'
     definition_period = MONTH
     set_input = set_input_divide_by_period
 
@@ -62,7 +62,7 @@ class depenses_cigarettes(Variable):
 class depenses_tabac_a_rouler(Variable):
     value_type = float
     entity = Menage
-    label = "Dépenses de tabac à rouler et autres tabacs"
+    label = 'Dépenses de tabac à rouler et autres tabacs'
     definition_period = MONTH
     set_input = set_input_divide_by_period
 
@@ -73,7 +73,7 @@ class depenses_tabac_a_rouler(Variable):
 class depenses_tabac(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses totales de tabac (tous types)"
+    label = 'Dépenses totales de tabac (tous types)'
 
     def formula(menage, period):
         return (
@@ -93,7 +93,7 @@ class tabac_a_rouler_droit_d_accise(YearlyVariable):
         taux_normal_tabac_a_rouler = \
             parameters(period.start).imposition_indirecte.taxes_tabacs.taux_normaux_tabac.taux_normal.tabac_a_rouler
         taxe_part_normale_tabac_a_rouler = tax_from_expense_including_tax(depenses_tabac_a_rouler, taux_normal_tabac_a_rouler)
-        prix_bague = parameters("{}-12-31".format(period)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_bague_tabac
+        prix_bague = parameters('{}-12-31'.format(period)).imposition_indirecte.taxes_tabacs.prix_tabac.prix_bague_tabac
         nombre_paquets = depenses_tabac_a_rouler / prix_bague
         taux_special_tabac_a_rouler = parameters(period.start).imposition_indirecte.taxes_tabacs.taux_specifique_tabac.taux_specifique.tabac_rouler
 

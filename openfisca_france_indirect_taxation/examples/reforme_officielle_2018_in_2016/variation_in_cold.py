@@ -157,7 +157,7 @@ def estimate_froid():
     return regression_ols, regression_logit
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     estimations = estimate_froid()
     regression_ols = estimations[0]
     regression_logit = estimations[1]

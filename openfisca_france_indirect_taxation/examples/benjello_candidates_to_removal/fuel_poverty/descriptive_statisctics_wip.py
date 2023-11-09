@@ -57,16 +57,16 @@ data_matched_random['aise_froid_cout'] = \
 
 print("Parmi les personnes déclarant avoir eu froid à cause du prix de l'énergie, quelle est la part \
     ayant des difficultés dans leur budget ?")
-print(" ")
+print(' ')
 
 for i in range(1, 11):
     print(float(len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('aise_froid_cout == 1')))
 / len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('froid_cout == 1')))
-print(" ")
+print(' ')
 
 print("Parmi les personnes ayant des difficultés dans leur budget, et ayant froid dans leur logement \
     quelle est la part de ceux déclarant avoir eu froid à cause du prix de l'énergie ?")
-print(" ")
+print(' ')
 
 for i in range(1, 11):
     print(float(len(data_matched_random.query('niveau_vie_decile == {}'.format(i)).query('aise_froid_cout == 1')))

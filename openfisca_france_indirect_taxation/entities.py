@@ -4,16 +4,16 @@
 from openfisca_core.entities import build_entity
 
 Individu = build_entity(
-    key = "individu",
-    plural = "individus",
+    key = 'individu',
+    plural = 'individus',
     label = 'Individu',
     is_person = True
     )
 
 
 Menage = build_entity(
-    key = "menage",
-    plural = "menages",
+    key = 'menage',
+    plural = 'menages',
     label = 'Ménage',
     roles = [
         {

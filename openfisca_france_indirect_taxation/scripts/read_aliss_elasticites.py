@@ -25,7 +25,7 @@ tables = [
         revenus = None,
         skiprows = 4,
         sheetname = 'B.3',
-        parse_cols = "C:T",
+        parse_cols = 'C:T',
         name = 'Food Expenditure Elasticities'
         ),
     dict(
@@ -33,7 +33,7 @@ tables = [
         revenus = None,
         skiprows = 6,
         sheetname = 'B.4',
-        parse_cols = "B:Y",
+        parse_cols = 'B:Y',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Full sample'
         ),
     dict(
@@ -41,7 +41,7 @@ tables = [
         revenus = 3,
         skiprows = 5,
         sheetname = 'B5',
-        parse_cols = "B:Y",
+        parse_cols = 'B:Y',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Well off and less than 30 years old'
         ),
     dict(
@@ -49,7 +49,7 @@ tables = [
         revenus = 3,
         skiprows = 4,
         sheetname = 'B6',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Well off and aged between 30 and 45'
         ),
     dict(
@@ -57,7 +57,7 @@ tables = [
         revenus = 3,
         skiprows = 5,
         sheetname = 'B7',
-        parse_cols = "B:Y",
+        parse_cols = 'B:Y',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Well off and aged between 45 and 60'
         ),
     dict(
@@ -65,7 +65,7 @@ tables = [
         revenus = 3,
         skiprows = 4,
         sheetname = 'B8',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Well off and more than 60'
         ),
     dict(
@@ -73,7 +73,7 @@ tables = [
         revenus = 2,
         skiprows = 5,
         sheetname = 'B9',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Upper average and less than 30 years old'
         ),
     dict(
@@ -81,7 +81,7 @@ tables = [
         revenus = 2,
         skiprows = 5,
         sheetname = 'B10',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Upper average and aged between 30 and 45'
         ),
     dict(
@@ -89,7 +89,7 @@ tables = [
         revenus = 2,
         skiprows = 4,
         sheetname = 'B11',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Upper average and aged between 45 and 60'
         ),
     dict(
@@ -97,7 +97,7 @@ tables = [
         revenus = 2,
         skiprows = 4,
         sheetname = 'B12',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Upper average and aged more than 60'
         ),
     dict(
@@ -105,7 +105,7 @@ tables = [
         revenus = 1,
         skiprows = 4,
         sheetname = 'B13',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Lower average and less than 30 years old'
         ),
     dict(
@@ -113,7 +113,7 @@ tables = [
         revenus = 1,
         skiprows = 4,
         sheetname = 'B14',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Lower average and aged between 30 and 45'
         ),
     dict(
@@ -121,7 +121,7 @@ tables = [
         revenus = 1,
         skiprows = 4,
         sheetname = 'B15',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Lower average and aged between 45 and 60'
         ),
     dict(
@@ -129,7 +129,7 @@ tables = [
         revenus = 1,
         skiprows = 4,
         sheetname = 'B16',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Lower average and aged more than 60'
         ),
     dict(
@@ -137,7 +137,7 @@ tables = [
         revenus = 0,
         skiprows = 4,
         sheetname = 'B17',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Modest and less than 30 years old'
         ),
     dict(
@@ -145,7 +145,7 @@ tables = [
         revenus = 0,
         skiprows = 4,
         sheetname = 'B18',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Modest and aged between 30 and 45'
         ),
     dict(
@@ -153,7 +153,7 @@ tables = [
         revenus = 0,
         skiprows = 4,
         sheetname = 'B19',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Modest and aged between 45 and 60'
         ),
     dict(
@@ -161,7 +161,7 @@ tables = [
         revenus = 0,
         skiprows = 4,
         sheetname = 'B20',
-        parse_cols = "C:Z",
+        parse_cols = 'C:Z',
         name = 'Compensated Own-Price and Cross-Price Elasticities -- Modest and aged more than 60'
         ),
     ]

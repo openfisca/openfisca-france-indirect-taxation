@@ -5,4 +5,4 @@ metadata:
   - prix_unitaire_base_edf_ht
   - tarif_fixe_base_edf_ttc
   - prix_unitaire_base_edf_ttc
-  description_en: Regulated tariffs EDF
+  label_en: Regulated tariffs EDF

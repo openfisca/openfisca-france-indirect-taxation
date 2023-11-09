@@ -81,7 +81,7 @@ def test():
         # weights are the share of the household in total consumption
         data_quaids['part_depenses_tot'] = data_quaids['depenses_tot'] / data_quaids['depenses_tot'].sum()
         data_quaids.fillna(0, inplace=True)
-        assert 0.999 < sum(data_quaids['part_depenses_tot']) < 1.001, "the sum of the shares is not equal to 1"
+        assert 0.999 < sum(data_quaids['part_depenses_tot']) < 1.001, 'the sum of the shares is not equal to 1'
 
         for i in range(1, 5):
             data_quaids['el_{}'.format(i)] = \
@@ -112,7 +112,7 @@ def test():
                 sum(data_quaids['el_uncomp_{}'.format(i)])
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     year = 2011
     create_data_elasticities()
     df = get_elasticities(year)

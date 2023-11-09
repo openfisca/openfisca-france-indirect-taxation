@@ -14,7 +14,7 @@ if __name__ == '__main__':
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
 
     postes_agreges = ['poste_agrege_{}'.format(index) for index in
-        ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]
+        ['0{}'.format(i) for i in range(1, 10)] + ['10', '11', '12']
         ]
 
     simulated_variables = [

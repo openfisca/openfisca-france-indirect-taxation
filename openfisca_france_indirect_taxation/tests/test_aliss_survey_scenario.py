@@ -2,7 +2,7 @@ import pytest
 try:
     import seaborn
     # Import d'une nouvelle palette de couleurs
-    seaborn.set_palette(seaborn.color_palette("Set2", 12))
+    seaborn.set_palette(seaborn.color_palette('Set2', 12))
 except ImportError:
     seaborn = None
 
@@ -29,7 +29,7 @@ def build_aliss_scenarios(reform = None):
 
 
 # Do not run on laptop msika
-@pytest.mark.skip(reason = "Need to fix aliss .dta file problem with utf8")
+@pytest.mark.skip(reason = 'Need to fix aliss .dta file problem with utf8')
 def test():
     reform = aliss_tva_sociale
     survey_scenario, adjusted_survey_scenario = build_aliss_scenarios(reform = reform)

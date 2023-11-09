@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn
 
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 _SQRT2 = np.sqrt(2)     # sqrt(2) with default precision np.float64
 

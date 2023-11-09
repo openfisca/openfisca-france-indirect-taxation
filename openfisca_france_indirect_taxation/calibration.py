@@ -22,7 +22,7 @@ def get_bdf_aggregates_energy(data_year = None):
     # Construct depenses_tot for total consumption
     liste_variables = depenses.columns.tolist()
     postes_agreges = ['poste_{}'.format(index) for index in
-        ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]]
+        ['0{}'.format(i) for i in range(1, 10)] + ['10', '11', '12']]
     depenses['depenses_tot'] = 0
     for element in liste_variables:
         for poste in postes_agreges:
@@ -30,7 +30,7 @@ def get_bdf_aggregates_energy(data_year = None):
                 depenses['depenses_tot'] += depenses[element]
 
     depenses_energie = pd.DataFrame()
-    if depenses['depenses_carburants'] is not None:  # pas de matching avec ENTD
+    if depenses.get('depenses_carburants') is not None:  # pas de matching avec ENTD
         variables_energie = ['poste_04_5_1_1_1_a', 'poste_04_5_1_1_1_b', 'poste_04_5_2_1_1',
             'poste_04_5_3_1_1', 'poste_04_5_4_1_1', 'depenses_carburants',
             'rev_disponible', 'loyer_impute', 'rev_disp_loyerimput', 'depenses_tot']
@@ -94,7 +94,7 @@ def get_cn_aggregates_energy(target_year = None):
         'conso-eff-fonction.xls'
         )
 
-    masses_cn_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "M€cour")
+    masses_cn_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheet_name = 'M€cour')
     masses_cn_data_frame.columns = masses_cn_data_frame.iloc[2]
     masses_cn_data_frame = masses_cn_data_frame.loc[:, ['Code', target_year]].copy()
 
@@ -126,7 +126,7 @@ def get_cn_aggregates_energy(target_year = None):
         't_2101.xls'
         )
 
-    revenus_cn = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "2101")
+    revenus_cn = pd.read_excel(parametres_fiscalite_file_path, sheet_name = '2101')
     revenus_cn.iat[1, 1] = 'Code'
     revenus_cn = revenus_cn.drop(revenus_cn.columns[0], axis=1)
     revenus_cn.columns = revenus_cn.iloc[1]
@@ -147,7 +147,7 @@ def get_cn_aggregates_energy(target_year = None):
     revenus_cn = revenus_cn * 1e9
 
     # default_config_files_directory = os.path.join(
-    #    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+    #    openfisca_france_indirect_taxation_location)
     # parametres_fiscalite_file_path = os.path.join(
     #    default_config_files_directory,
     #    'openfisca_france_indirect_taxation',

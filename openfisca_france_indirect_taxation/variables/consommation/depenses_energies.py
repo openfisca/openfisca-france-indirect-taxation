@@ -5,7 +5,7 @@ import numpy
 
 
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
-
+from openfisca_france_indirect_taxation.variables.taxes_indirectes import get_accise_diesel_ticpe
 
 log = logging.getLogger(__name__)
 
@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 class depenses_carburants(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Consommation de carburants"
+    label = 'Consommation de carburants'
 
     def formula(menage, period):
         return menage('poste_07_2_2_1_1', period)
@@ -22,7 +22,7 @@ class depenses_carburants(YearlyVariable):
 class depenses_combustibles_liquides(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en combustibles liquides"
+    label = 'Dépenses en combustibles liquides'
 
     def formula(menage, period):
         depenses_combustibles_liquides = menage('poste_04_5_3_1_1', period)
@@ -33,7 +33,7 @@ class depenses_combustibles_liquides(YearlyVariable):
 class depenses_combustibles_solides(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en combustibles solides"
+    label = 'Dépenses en combustibles solides'
 
     def formula(menage, period):
         depenses_combustibles_solides = menage('poste_04_5_4_1_1', period)
@@ -43,37 +43,38 @@ class depenses_combustibles_solides(YearlyVariable):
 class depenses_diesel(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Construction par pondération des dépenses spécifiques au diesel"
+    label = 'Construction par pondération des dépenses spécifiques au diesel'
 
     def formula(menage, period, parameters):
-        conso_totale_vp_diesel = parameters(period.start).quantite_carbu_vp.diesel
-        conso_totale_vp_essence = parameters(period.start).quantite_carbu_vp.essence
-        taille_parc_diesel = parameters(period.start).parc_vp.diesel
-        taille_parc_essence = parameters(period.start).parc_vp.essence
+        conso_moyenne_vp_diesel = parameters(period.start).conso_vp_moyenne.voitures_particulieres_diesel
+        conso_moyenne_vp_essence = parameters(period.start).conso_vp_moyenne.voitures_particulieres_essence
+        conso_moyenne_vp_gpl = parameters(period.start).conso_vp_moyenne.voitures_particulieres_gpl
 
-        conso_moyenne_vp_diesel = conso_totale_vp_diesel / taille_parc_diesel
-        conso_moyenne_vp_essence = conso_totale_vp_essence / taille_parc_essence
+        parcours_moyenne_vp_diesel_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_diesel
+        parcours_moyenne_vp_essense_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_essence
+        parcours_moyenne_vp_gpl_en_km = parameters(period.start).taille_parcours_moyen.voitures_particulieres_gpl
+
+        conso_moyenne_du_parcours_moyen_vp_diesel = parcours_moyenne_vp_diesel_en_km * conso_moyenne_vp_diesel / 100
+        conso_moyenne_du_parcours_moyen_vp_essence = parcours_moyenne_vp_essense_en_km * conso_moyenne_vp_essence / 100
+        conso_moyenne_du_parcours_moyen_vp_gpl = parcours_moyenne_vp_gpl_en_km * conso_moyenne_vp_gpl / 100
 
         nombre_vehicules_diesel = menage('veh_diesel', period)
         nombre_vehicules_essence = menage('veh_essence', period)
-        nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence
+        nombre_vehicules_gpl = menage('veh_gpl', period)
+        nombre_vehicules_total = nombre_vehicules_diesel + nombre_vehicules_essence + nombre_vehicules_gpl
+
+        depenses_carburants = menage('depenses_carburants', period)
 
         # to compute part_conso_diesel we need to avoid dividing by zero for those we do not have any vehicle
         # Thus, we choose arbitrarily to divide it by 1, but this choice won't affect the result as long as it is not 0
         denominateur = (
-            (nombre_vehicules_diesel * conso_moyenne_vp_diesel) + (nombre_vehicules_essence * conso_moyenne_vp_essence)
-            ) * (nombre_vehicules_total != 0) + 1 * (nombre_vehicules_total == 0)
+            (nombre_vehicules_total != 0) * (nombre_vehicules_diesel * conso_moyenne_du_parcours_moyen_vp_diesel) + (nombre_vehicules_essence * conso_moyenne_du_parcours_moyen_vp_essence) + (nombre_vehicules_gpl * conso_moyenne_du_parcours_moyen_vp_gpl)
+            ) + (nombre_vehicules_total == 0) * 1
 
-        part_conso_diesel = (nombre_vehicules_diesel * conso_moyenne_vp_diesel) / denominateur
+        part_conso_gazole = (nombre_vehicules_diesel * conso_moyenne_du_parcours_moyen_vp_diesel) / denominateur
 
-        depenses_carburants = menage('depenses_carburants', period)
-
-        depenses_diesel = depenses_carburants * (
-            (nombre_vehicules_total == 0) * (
-                conso_totale_vp_diesel / (conso_totale_vp_diesel + conso_totale_vp_essence)
-                )
-            + (nombre_vehicules_total != 0) * part_conso_diesel
-            )
+        depenses_gazole = depenses_carburants * part_conso_gazole
+        return depenses_gazole
 
         return depenses_diesel
 
@@ -81,7 +82,7 @@ class depenses_diesel(YearlyVariable):
 class depenses_diesel_htva(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en diesel htva (mais incluant toujours la TICPE)"
+    label = 'Dépenses en diesel htva (mais incluant toujours la TICPE)'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -94,19 +95,12 @@ class depenses_diesel_htva(YearlyVariable):
 class depenses_diesel_ht(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en diesel ht (prix brut sans TVA ni TICPE)"
+    label = 'Dépenses en diesel HT (prix brut sans TVA ni TICPE)'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
-        majoration_ticpe_diesel = \
-            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
-        accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
+        accise_diesel_ticpe = get_accise_diesel_ticpe(parameters, period)
 
-        accise_diesel_ticpe = (
-            accise_diesel + majoration_ticpe_diesel
-            if majoration_ticpe_diesel is not None
-            else accise_diesel
-            )
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         taux_implicite_diesel = (
             (accise_diesel_ticpe * (1 + taux_plein_tva))
@@ -123,20 +117,13 @@ class depenses_diesel_ht(YearlyVariable):
 class depenses_diesel_recalculees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en diesel recalculées à partir du prix ht"
+    label = 'Dépenses en diesel recalculées à partir du prix HT'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         depenses_diesel_ht = menage('depenses_diesel_ht', period)
-        majoration_ticpe_diesel = \
-            parameters(period.start).imposition_indirecte.produits_energetiques.major_regionale_ticpe_gazole.alsace
-        accise_diesel = parameters(period.start).imposition_indirecte.produits_energetiques.ticpe.gazole
+        accise_diesel_ticpe = get_accise_diesel_ticpe(parameters, period)
 
-        accise_diesel_ticpe = (
-            accise_diesel + majoration_ticpe_diesel
-            if majoration_ticpe_diesel is not None
-            else accise_diesel
-            )
         prix_diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
         taux_implicite_diesel = (
             (accise_diesel_ticpe * (1 + taux_plein_tva))
@@ -151,7 +138,7 @@ class depenses_diesel_recalculees(YearlyVariable):
 class depenses_electricite(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en électricité totale après imputation factures jointes"
+    label = 'Dépenses en électricité totale après imputation factures jointes'
 
     def formula(menage, period):
         depenses_electricite_seule = menage('depenses_electricite_seule', period)
@@ -164,7 +151,7 @@ class depenses_electricite(YearlyVariable):
 class depenses_electricite_factures_jointes(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en électricité estimées des factures jointes électricité et gaz"
+    label = 'Dépenses en électricité estimées des factures jointes électricité et gaz'
 
     def formula(menage, period):
         depenses_factures_jointes = menage('poste_04_5_1_1_1_a', period)
@@ -221,7 +208,7 @@ class depenses_electricite_prix_unitaire(YearlyVariable):
 class depenses_electricite_seule(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en électricité sans inclure dépenses jointes avec le gaz"
+    label = 'Dépenses en électricité sans inclure dépenses jointes avec le gaz'
 
     def formula(menage, period):
         depenses_electricite_seule = menage('poste_04_5_1_1_1_b', period)
@@ -276,7 +263,7 @@ class depenses_electricite_variables(YearlyVariable):
 class depenses_energies_logement(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en électricité sans inclure dépenses jointes avec le gaz"
+    label = 'Dépenses en électricité sans inclure dépenses jointes avec le gaz'
 
     def formula(menage, period):
         depenses_electricite = menage('depenses_electricite', period)
@@ -296,7 +283,7 @@ class depenses_energies_logement(YearlyVariable):
 class depenses_energie_thermique(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en énergie thermique"
+    label = 'Dépenses en énergie thermique'
 
     def formula(menage, period):
         depenses_energie_thermique = menage('poste_04_5_5_1_1', period)
@@ -307,7 +294,7 @@ class depenses_energie_thermique(YearlyVariable):
 class depenses_energies_totales(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en électricité sans inclure dépenses jointes avec le gaz"
+    label = 'Dépenses en électricité sans inclure dépenses jointes avec le gaz'
 
     def formula(menage, period):
         depenses_energies_logement = menage('depenses_energies_logement', period)
@@ -335,7 +322,7 @@ class depenses_essence(YearlyVariable):
 class depenses_essence_ht(Variable):
     value_type = float
     entity = Menage
-    label = "Dépenses en essence hors taxes (HT, i.e. sans TVA ni TICPE)"
+    label = 'Dépenses en essence hors taxes (HT, i.e. sans TVA ni TICPE)'
     definition_period = YEAR
 
     def formula_2009(menage, period):
@@ -362,7 +349,7 @@ class depenses_essence_ht(Variable):
 class depenses_gaz_factures_jointes(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en gaz estimées des factures jointes électricité et gaz"
+    label = 'Dépenses en gaz estimées des factures jointes électricité et gaz'
 
     def formula(menage, period):
         depenses_factures_jointes = menage('poste_04_5_1_1_1_a', period)
@@ -375,7 +362,7 @@ class depenses_gaz_factures_jointes(YearlyVariable):
 class depenses_gaz_liquefie(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en gaz liquéfié"
+    label = 'Dépenses en gaz liquéfié'
 
     def formula(menage, period):
         depenses_gaz_liquefie = menage('poste_04_5_2_2_1', period)
@@ -386,7 +373,7 @@ class depenses_gaz_liquefie(YearlyVariable):
 class depenses_gaz_prix_unitaire(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Prix unitaire du gaz rencontré par les ménages"
+    label = 'Prix unitaire du gaz rencontré par les ménages'
 
     def formula(menage, period, parameters):
         quantite_base = menage('quantites_gaz_contrat_base', period)
@@ -417,7 +404,7 @@ class depenses_gaz_prix_unitaire(YearlyVariable):
 class depenses_gaz_seul(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en gaz de ville"
+    label = 'Dépenses en gaz de ville'
 
     def formula(menage, period):
         depenses_gaz_seul = menage('poste_04_5_2_1_1', period)
@@ -474,7 +461,7 @@ class depenses_gaz_variables(YearlyVariable):
 class depenses_gaz_ville(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en gaz estimées des factures jointes électricité et gaz"
+    label = 'Dépenses en gaz estimées des factures jointes électricité et gaz'
 
     def formula(menage, period):
         depenses_gaz_seul = menage('depenses_gaz_seul', period)
@@ -487,7 +474,7 @@ class depenses_gaz_ville(YearlyVariable):
 class depenses_sp_e10(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Construction par pondération des dépenses spécifiques au sans plomb e10"
+    label = 'Construction par pondération des dépenses spécifiques au sans plomb E10'
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence', period)
@@ -500,7 +487,7 @@ class depenses_sp_e10(YearlyVariable):
 class depenses_sp_e10_ht(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en essence sans plomb e10 hors taxes (HT, i.e. sans TVA ni TICPE)"
+    label = 'Dépenses en essence sans plomb E10 hors taxes (HT, i.e. sans TVA ni TICPE)'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -533,7 +520,7 @@ class depenses_sp_e10_ht(YearlyVariable):
 class depenses_sp_95(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Construction par pondération des dépenses spécifiques au sans plomb 95"
+    label = 'Construction par pondération des dépenses spécifiques au sans plomb 95'
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence', period)
@@ -546,7 +533,7 @@ class depenses_sp_95(YearlyVariable):
 class depenses_sp_95_ht(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en essence sans plomb 95 hors taxes (HT, i.e. sans TVA ni TICPE)"
+    label = 'Dépenses en essence sans plomb 95 hors taxes (HT, i.e. sans TVA ni TICPE)'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -578,7 +565,7 @@ class depenses_sp_95_ht(YearlyVariable):
 class depenses_sp_98(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Construction par pondération des dépenses spécifiques au sans plomb 98"
+    label = 'Construction par pondération des dépenses spécifiques au sans plomb 98'
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence', period)
@@ -591,7 +578,7 @@ class depenses_sp_98(YearlyVariable):
 class depenses_sp_98_ht(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en essence sans plomb 98 hors taxes (HT, i.e. sans TVA ni TICPE)"
+    label = 'Dépenses en essence sans plomb 98 hors taxes (HT, i.e. sans TVA ni TICPE)'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -623,7 +610,7 @@ class depenses_sp_98_ht(YearlyVariable):
 class depenses_super_plombe(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Construction par pondération des dépenses spécifiques au super plombe"
+    label = 'Construction par pondération des dépenses spécifiques au super plombe'
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence', period)
@@ -637,7 +624,7 @@ class depenses_super_plombe(YearlyVariable):
 class depenses_super_plombe_ht(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en essence super plombée hors taxes (HT, i.e. sans TVA ni TICPE)"
+    label = 'Dépenses en essence super plombée hors taxes (HT, i.e. sans TVA ni TICPE)'
 
     def formula(menage, period, parameters):
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -654,8 +641,10 @@ class depenses_super_plombe_ht(YearlyVariable):
         depenses_super_plombe = depenses_essence * part_super_plombe
         depenses_super_plombe_htva = \
             depenses_super_plombe - tax_from_expense_including_tax(depenses_super_plombe, taux_plein_tva)
-        depenses_super_plombe_ht = (depenses_super_plombe_htva
-- tax_from_expense_including_tax(depenses_super_plombe_htva, taux_implicite_super_plombe))
+        depenses_super_plombe_ht = (
+            depenses_super_plombe_htva
+            - tax_from_expense_including_tax(depenses_super_plombe_htva, taux_implicite_super_plombe)
+            )
 
         return depenses_super_plombe_ht
 
@@ -663,7 +652,7 @@ class depenses_super_plombe_ht(YearlyVariable):
 class combustibles_liquides(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "=1 si le menage consomme des combustibles liquides"
+    label = '=1 si le ménage consomme des combustibles liquides'
 
     def formula(menage, period):
         depenses_combustibles_liquides = menage('depenses_combustibles_liquides', period)
@@ -675,7 +664,7 @@ class combustibles_liquides(YearlyVariable):
 class electricite(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "=1 si le menage consomme de l'électricité"
+    label = "=1 si le ménage consomme de l'électricité"
 
     def formula(menage, period):
         depenses_electricite = menage('depenses_electricite', period)
@@ -687,7 +676,7 @@ class electricite(YearlyVariable):
 class gaz_ville(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "=1 si le menage consomme du gaz"
+    label = '=1 si le ménage consomme du gaz'
 
     def formula(menage, period):
         depenses_gaz_ville = menage('depenses_gaz_ville', period)

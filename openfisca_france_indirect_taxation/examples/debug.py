@@ -12,7 +12,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 # Import d'une nouvelle palette de couleurs
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 
 if __name__ == '__main__':

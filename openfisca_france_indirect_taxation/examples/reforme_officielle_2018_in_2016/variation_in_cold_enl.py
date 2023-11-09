@@ -222,7 +222,7 @@ def estimate_froid():
     return regression_logit
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     regression_logit = estimate_froid()
     # print regression_logit.summary()
     print(regression_logit.get_margeff().summary())

@@ -31,7 +31,7 @@ data_frame_for_reg_2011 = pandas.read_csv(
 data_frame_for_reg_2011.set_index('Unnamed: 0', inplace = True)
 
 
-""" Check that the sum of the share for the four categories is 1 """
+''' Check that the sum of the share for the four categories is 1 '''
 
 data_frame_for_reg_2011['sum_shares'] = 0
 for i in range(1, 4):
@@ -40,13 +40,13 @@ assert (data_frame_for_reg_2011['sum_shares'] == 1).any(), 'Shares do not sum to
 del data_frame_for_reg_2011['sum_shares']
 
 
-""" Check that the prices do not take unlikely values """
+''' Check that the prices do not take unlikely values '''
 for i in range(1, 4):
     assert max(data_frame_for_reg_2011['p{}'.format(i)]) < 400, 'Some prices seem too big'
     assert min(data_frame_for_reg_2011['p{}'.format(i)]) > 10, 'Some prices seem too small'
 
 
-""" Check period fixed effects sum to 1 """
+''' Check period fixed effects sum to 1 '''
 
 data_frame_for_reg_2011['sum_vag'] = 0
 for i in range(0, 30):

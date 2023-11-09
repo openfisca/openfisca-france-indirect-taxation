@@ -10,4 +10,4 @@ bdf_survey_collection = SurveyCollection.load(
     collection = 'enquete_transports', config_files_directory = config_files_directory
     )
 survey = bdf_survey_collection.get_survey('enquete_transports_{}'.format(year))
-menage_transports = survey.get_values(table = "q_menage")
+menage_transports = survey.get_values(table = 'q_menage')

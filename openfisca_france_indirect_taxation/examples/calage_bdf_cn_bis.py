@@ -48,7 +48,7 @@ def get_cn_aggregates(target_year = None):
         'legislation',
         'Parametres fiscalite indirecte.xls'
         )
-    masses_cn_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheet_name = "consommation_CN")
+    masses_cn_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheet_name = 'consommation_CN')
     masses_cn_12postes_data_frame = masses_cn_data_frame.loc[:, ['Code', target_year]]
     masses_cn_12postes_data_frame['code_unicode'] = masses_cn_12postes_data_frame.Code.astype(str)
     masses_cn_12postes_data_frame['len_code'] = masses_cn_12postes_data_frame['code_unicode'].apply(lambda x: len(x))

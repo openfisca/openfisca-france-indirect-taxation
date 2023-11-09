@@ -14,9 +14,7 @@ cotisation_securite_sociale_eur_par_decilitre:
       value: 1.0
   metadata:
     ipp_csv_id: cotis_secu_alcool
-    unit:
-      2002-01-01: currency-EUR
-      1983-04-01: currency-FRF
+    unit: currency
 cotisation_alcools_taux_plein_eur_hlap:
   description: Cotisation sur les alcools - Taux plein (€/hlap)
   values:
@@ -42,7 +40,7 @@ cotisation_alcools_taux_plein_eur_hlap:
       value: null
   metadata:
     ipp_csv_id: coti_secu_alcool_tx_plein
-    unit: currency-EUR
+    unit: currency
 cotisation_produits_intermediaires_titrant_plus_18_vol_taux_plein_eur_hl:
   description: Cotisation sur les produits intermédiaires titrant plus de 18% vol. - Taux plein (€/hl)
   values:
@@ -68,7 +66,7 @@ cotisation_produits_intermediaires_titrant_plus_18_vol_taux_plein_eur_hl:
       value: null
   metadata:
     ipp_csv_id: coti_secu_alcool_inter_tx_plein
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - cotisation_securite_sociale_eur_par_decilitre
@@ -94,16 +92,16 @@ metadata:
     1983-04-01:
       title: Loi 83-25 du 19/01/1983 - art. 26
       href: https://www.legifrance.gouv.fr/affichTexteArticle.do?idArticle=LEGIARTI000006274080&cidTexte=JORFTEXT000000504452
-  date_parution_jo:
+  official_journal_date:
     2018-01-01: 2017-12-27
     2017-01-01: 2016-12-31
-    2015-01-01: 26/12/2014
-    2014-01-01: 22/12/2011
-    2013-01-01: 22/12/2011
-    2011-12-23: 22/12/2011
-    2008-12-19: 18/12/2008
-    1983-04-01: 20/01/1983
-  description_en: Alcoholic beverage contribution on Social Security
+    2015-01-01: 2014-12-26
+    2014-01-01: 2011-12-22
+    2013-01-01: 2011-12-22
+    2011-12-23: 2011-12-22
+    2008-12-19: 2008-12-18
+    1983-04-01: 1983-01-20
+  label_en: Alcoholic beverage contribution on Social Security
 documentation: |
   Notes :
   Données renseignées dans l'article L245-9 du code de la sécurité sociale

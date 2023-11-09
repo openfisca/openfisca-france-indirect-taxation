@@ -9,13 +9,13 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 class cmu(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Le ménage touche la couverture maladie universelle complémentaire "
+    label = 'Le ménage touche la couverture maladie universelle complémentaire '
 
 
 class brde_m2_depenses_tot(YearlyVariable):
     value_type = str
     entity = Menage
-    label = "bas revenu (depenses tot )dépenses élevées (énergies logement)"
+    label = 'bas revenu (depenses tot )dépenses élevées (énergies logement)'
 
     def formula(menage, period):
         depenses_tot = menage('depenses_tot', period)
@@ -38,7 +38,7 @@ class brde_m2_depenses_tot(YearlyVariable):
 class brde_m2_rev_disponible(YearlyVariable):
     value_type = int
     entity = Menage
-    label = "bas revenu (revenu disponible) dépenses élevées (énergies logement)"
+    label = 'bas revenu (revenu disponible) dépenses élevées (énergies logement)'
 
     def formula(menage, period):
         revenu = menage('rev_disponible', period)
@@ -61,7 +61,7 @@ class brde_m2_rev_disponible(YearlyVariable):
 class brde_transports_depenses_tot(YearlyVariable):
     value_type = str
     entity = Menage
-    label = "bas revenu (depenses tot) dépenses élevées (en carburants)"
+    label = 'bas revenu (depenses tot) dépenses élevées (en carburants)'
 
     def formula(menage, period):
         depenses_tot = menage('depenses_tot', period)
@@ -83,7 +83,7 @@ class brde_transports_depenses_tot(YearlyVariable):
 class brde_transports_rev_disponible(YearlyVariable):
     value_type = str
     entity = Menage
-    label = "bas revenu (revenu disponible) dépenses élevées (en carburants)"
+    label = 'bas revenu (revenu disponible) dépenses élevées (en carburants)'
 
     def formula(menage, period):
         revenu = menage('rev_disponible', period)
@@ -186,7 +186,7 @@ class froid_4_criteres_3_deciles(YearlyVariable):
 class froid_3_deciles(YearlyVariable):
     value_type = str
     entity = Menage
-    label = "Le ménage a éprouvé un sentiment de froid dans son logement - 3 premiers déciles"
+    label = 'Le ménage a éprouvé un sentiment de froid dans son logement - 3 premiers déciles'
 
     def formula(menage, period):
         froid = menage('froid', period)

@@ -85,7 +85,7 @@ def net_transfers_by_sub_group(df_reforme, group):
     return df_to_plot
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 
     df_to_plot_strate = net_transfers_by_sub_group(df_reforme, 'strate')
     df_to_plot_combustibles_liquides = net_transfers_by_sub_group(df_reforme, 'combustibles_liquides')
