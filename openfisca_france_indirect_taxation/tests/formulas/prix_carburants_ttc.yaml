@@ -88,6 +88,14 @@
   output:
     prix_essence_sp95_e10_ttc: 1.6208
 
+- name: "Test prix_essence_sp95_e10_ttc"
+  period: 2023
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+  output:
+    prix_essence_sp95_e10_ttc: 1.95
+
 ## prix essence SP95 TTC:
 
 - name: "Test prix_essence_sp95_ttc"
