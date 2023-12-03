@@ -20,7 +20,7 @@
 -(avec conda et le fichier environment.yml du git nomics-master):
 
 	- se placer dans le dossier openfisca-france-indirect-taxation
-	- modifier le fichier environment.yml pour indiquer le nom (name: openfiscaenv) et le chemin (prefix: C:\Users\veve1\miniconda3\envs) 
+	- modifier le fichier environment.yml pour indiquer le nom (name: openfiscaenv) et le chemin (ex: prefix : C:\Users\veve1\miniconda3\envs) 
 	- conda env create -f environment.yml
 	- Installer openfisca-france-indirect-taxation :
 		- se placer dans le dossier openfisca-france-indirect-taxation
@@ -35,7 +35,7 @@
    - S'assurer que l'extension des fichiers est bien .ini
    - Dans le fichier `raw_data`, renseigner le chemin des données sources indiquées (BDF, EL, ET, ERFS FPR). 
 Toutes ces données sont présentes dans le dossier (C:\Users\veve1\OneDrive\Documents\ENSAE 3A\Memoire MiE\Data). Supprimer les lignes correspondantes aux données "aliss".
-   - Créer un dossier `data_collections` à l'endroit souhaité ( `C:\Users\veve1\OneDrive\Documents\ENSAE 3A\Memoire MiE\Data\data_collections`) ainsi que deux sous-dossiers à l'intérieur nommés `tmp` et `output`.
+   - Créer un dossier `data_collections` à l'endroit souhaité (ex :  `C:\Users\veve1\OneDrive\Documents\ENSAE 3A\Memoire MiE\Data\data_collections`) ainsi que deux sous-dossiers à l'intérieur nommés `tmp` et `output`.
    - Dans le fichier `config`, renseigner les chemins de ces dossiers aux lignes correspondantes.<br><br>
 
 
