@@ -28,7 +28,7 @@ def graph_winners_losers(data,reform,elas_ext, elas_vect,bonus_cheques_uc):
     y_max = 0.6
     ax.set_ylim(ymin = 0, ymax = y_max)
     plt.subplots_adjust(left=0.09, right=0.98, bottom=0.07, top=0.98)
-    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Winners_losers/Winners_losers_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))    
+    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Winners_losers/Winners_losers_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.pdf').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))    
     return
 
 def graph_net_transfers(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
@@ -53,7 +53,7 @@ def graph_net_transfers(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
     y_min, y_max = -12 , 17
     ax.set_ylim(ymin = y_min , ymax = y_max)
     plt.subplots_adjust(left=0.09, right=0.98, bottom=0.07, top=0.98)
-    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Net_transfers/Net_transfers_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
+    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Net_transfers/Net_transfers_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.pdf').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
     return
 
 def graph_net_transfers_uc(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
@@ -79,7 +79,7 @@ def graph_net_transfers_uc(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
     y_min, y_max = -12 , 17
     ax.set_ylim(ymin = y_min , ymax = y_max)
     plt.subplots_adjust(left=0.09, right=0.98, bottom=0.07, top=0.98)
-    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Net_transfers/Net_transfers_uc_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
+    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Net_transfers/Net_transfers_uc_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.pdf').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
     return
 
 def graph_effort_rate(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
@@ -102,7 +102,7 @@ def graph_effort_rate(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
     y_max = 0.2
     ax.set_ylim(ymin = 0 , ymax = y_max)
     plt.subplots_adjust(left=0.09, right=0.98, bottom=0.07, top=0.98)
-    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Effort_rate/Effort_rate_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
+    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Effort_rate/Effort_rate_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.pdf').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
     return
 
 def graph_CO2_emissions(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
@@ -126,7 +126,7 @@ def graph_CO2_emissions(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
     y_max = 3.5
     ax.set_ylim(ymin = 0 , ymax = y_max)
     plt.subplots_adjust(left=0.09, right=0.98, bottom=0.07, top=0.98)
-    plt.savefig(os.path.join(output_path,'Figures/Environmental_effects/CO2_emissions_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
+    plt.savefig(os.path.join(output_path,'Figures/Environmental_effects/CO2_emissions_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.pdf').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
     return
 
 def graph_delta_CO2(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
@@ -151,7 +151,7 @@ def graph_delta_CO2(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
     y_min = -9
     ax.set_ylim(ymin = y_min , ymax = 0)
     plt.subplots_adjust(left=0.09, right=0.98, bottom=0.07, top=0.98)
-    plt.savefig(os.path.join(output_path,'Figures/Environmental_effects/Delta_CO2_emissions_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
+    plt.savefig(os.path.join(output_path,'Figures/Environmental_effects/Delta_CO2_emissions_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.pdf').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
     return
 
 def graph_share_co2_emissions(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
@@ -172,7 +172,7 @@ def graph_share_co2_emissions(data,reform, elas_ext, elas_vect,bonus_cheques_uc)
     plt.yticks(fontsize = 12)
     plt.legend(fontsize = 12)
     plt.subplots_adjust(left=0.09, right=0.98, bottom=0.07, top=0.98)
-    plt.savefig(os.path.join(output_path,'Figures/Environmental_effects/Share_CO2_emissions_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
+    plt.savefig(os.path.join(output_path,'Figures/Environmental_effects/Share_CO2_emissions_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.pdf').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
     
 def graph_share_emissions_reduction(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
     hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
@@ -192,7 +192,7 @@ def graph_share_emissions_reduction(data,reform, elas_ext, elas_vect,bonus_chequ
     plt.yticks(fontsize = 12)
     plt.legend(fontsize = 12)
     plt.subplots_adjust(left=0.09, right=0.98, bottom=0.07, top=0.98)
-    plt.savefig(os.path.join(output_path,'Figures/Environmental_effects/Share_emissions_reduction_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
+    plt.savefig(os.path.join(output_path,'Figures/Environmental_effects/Share_emissions_reduction_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.pdf').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
 
 def graph_ratio_emissions_reduction(data,reform,elas_ext,elas_vect,bonus_cheques_uc):
     hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
@@ -213,7 +213,7 @@ def graph_ratio_emissions_reduction(data,reform,elas_ext,elas_vect,bonus_cheques
     plt.yticks(fontsize = 12)
     plt.legend(fontsize = 12)
     plt.subplots_adjust(left=0.09, right=0.98, bottom=0.07, top=0.98)
-    plt.savefig(os.path.join(output_path,'Figures/Environmental_effects/Ratio_emissions_reduction_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
+    plt.savefig(os.path.join(output_path,'Figures/Environmental_effects/Ratio_emissions_reduction_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.pdf').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
 
 def quantiles_for_boxplot(data,y,hue_order):
     out = pd.DataFrame(data = {'niveau_vie_decile' : [] , 'ref_elasticity': [] , y : []})
@@ -317,7 +317,7 @@ def boxplot_net_transfers(data,reform,elas_ext,elas_vect,bonus_cheques_uc):
     y_min, y_max = -200 , 150
     ax.yaxis.set_ticks(range(y_min,y_max,50))
     plt.subplots_adjust(left=0.09, right=0.98, bottom=0.07, top=0.98)
-    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Net_transfers/Boxplot_net_transfers_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
+    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Net_transfers/Boxplot_net_transfers_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.pdf').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
     return
 
 def boxplot_net_transfers_uc(data,reform,elas_ext,elas_vect,bonus_cheques_uc):
@@ -362,7 +362,7 @@ def boxplot_net_transfers_uc(data,reform,elas_ext,elas_vect,bonus_cheques_uc):
     y_min, y_max = -200 , 150
     ax.yaxis.set_ticks(range(y_min,y_max,50))
     plt.subplots_adjust(left=0.09, right=0.98, bottom=0.07, top=0.98)
-    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Net_transfers/Boxplot_net_transfers_uc_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
+    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Net_transfers/Boxplot_net_transfers_uc_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.pdf').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
     return
 
 def boxplot_effort_rate(data,reform,elas_ext,elas_vect,bonus_cheques_uc):
@@ -410,5 +410,5 @@ def boxplot_effort_rate(data,reform,elas_ext,elas_vect,bonus_cheques_uc):
     y_min, y_max = 0 , 1
     ax.set_ylim(y_min,y_max)
     plt.subplots_adjust(left=0.09, right=0.98, bottom=0.07, top=0.98)
-    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Effort_rate/Boxplot_effort_rate_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.png').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
+    plt.savefig(os.path.join(output_path,'Figures/Distributive_effects/Effort_rate/Boxplot_effort_rate_reform_{}_elas_ext_{}_elas_vect_{}_bonus_cheques_uc_{}.pdf').format(reform.key[0],elas_ext,elas_vect,bonus_cheques_uc))
     return
