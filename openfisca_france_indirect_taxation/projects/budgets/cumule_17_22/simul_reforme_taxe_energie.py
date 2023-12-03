@@ -16,10 +16,10 @@ from matplotlib import pyplot as plt
 log = logging.getLogger(__name__)
 
 
-ident_men = pd.DataFrame(pd.HDFStore("C:/Users/veve1/OneDrive/Documents/ENSAE 3A/Memoire MiE/Data/data_collections/output/openfisca_indirect_taxation_data_2017.h5")['input']['ident_men'])
+ident_men = pd.DataFrame(pd.HDFStore("C:/Users/c.lallemand/data_taxation_indirecte/data_collections/output/openfisca_indirect_taxation_data_2017.h5")['input']['ident_men'])
 ident_men['ident_men'] = ident_men.ident_men.astype(numpy.int64)
 
-path = "C:/Users/veve1/OneDrive/Documents/ENSAE 3A/Memoire MiE/Data/donnees_relance_note_mars_2022/fiscalite_indirecte"
+path = "Q:/Evaluation du budget/PLF2022/donnees_relance_note_mars_2022/fiscalite_indirecte"
 elasticite = True
 replique_gouv = True
 
