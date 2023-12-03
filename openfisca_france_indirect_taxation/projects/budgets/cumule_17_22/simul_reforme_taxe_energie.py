@@ -6,8 +6,7 @@ from openfisca_survey_manager.utils import asof
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.examples.utils_example import (
     dataframe_by_group,
-    graph_builder_bar,
-    )
+    graph_builder_bar)
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.projects.budgets.reforme_energie_budgets_2018_2019 import officielle_2019_in_2017
 from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
@@ -121,8 +120,8 @@ def simulate_reformes_energie(graph = True, replique_gouv = replique_gouv, elast
     df_sum.to_csv('{}/totaux_reforme_energie_19_17_replique_gouv_{}_elasticite_{}.csv'.format(path, replique_gouv, elasticite))
 
     if graph:
-        graph_builder_bar(df['cout_total_reforme'], False)
-        plt.bar(df.index, df['cout_total_reforme'])
+        graph_builder_bar(df['cout_reforme'], False)
+        plt.bar(df.index, df['cout_reforme'])
         plt.savefig('{}/variation_reforme_energie_19_17_replique_gouv_{}_elasticite_douenne_{}'.format(path, replique_gouv, elasticite))
         plt.close()
         plt.bar(df.index, df['revenu_reforme_officielle_2019_in_2017'])
@@ -139,4 +138,4 @@ def simulate_reformes_energie(graph = True, replique_gouv = replique_gouv, elast
 if __name__ == "__main__":
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    df = simulate_reformes_energie(replique_gouv = replique_gouv, elasticite = elasticite, graph = False)
+    df = simulate_reformes_energie(replique_gouv = replique_gouv, elasticite = elasticite, graph = True)

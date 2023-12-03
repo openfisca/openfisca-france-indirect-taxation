@@ -26,7 +26,7 @@ class SurveyScenario(AbstractSurveyScenario):
             tax_benefit_system = None, year = None):
 
         assert year is not None
-
+        
         if reform is None:
             assert baseline_tax_benefit_system is None, "No need of reference_tax_benefit_system if no reform"
             if tax_benefit_system is None:
@@ -68,7 +68,8 @@ class SurveyScenario(AbstractSurveyScenario):
         data = dict(input_data_frame = input_data_frame)
 
         survey_scenario.init_from_data(data = data)
-
+        survey_scenario.initialize_weights() # déplacé Hervé 20/06
+        
         if calibration_kwargs:
             survey_scenario.calibrate(**calibration_kwargs)
 
@@ -76,10 +77,8 @@ class SurveyScenario(AbstractSurveyScenario):
             log.debug('inflating for year = {} using {}'.format(year, inflation_kwargs))
             survey_scenario.inflate(period = year, **inflation_kwargs)
 
-        survey_scenario.initialize_weights()
         assert survey_scenario.simulation is not None
         assert survey_scenario.tax_benefit_system is not None
-
         return survey_scenario
 
     def initialize_weights(self):

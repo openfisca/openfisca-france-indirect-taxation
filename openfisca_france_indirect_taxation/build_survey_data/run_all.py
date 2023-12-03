@@ -46,7 +46,7 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
 
     # Quelle base de données choisir pour le calage ?
     year_data = find_nearest_inferior(YEAR_DATA_LIST, year_calage)
-
+    
     # 4 étape parallèles d'homogénéisation des données sources :
     # 1. Gestion des dépenses de consommation:
     build_depenses_homogenisees(year = year_data)
@@ -55,7 +55,6 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
     depenses = temporary_store["depenses_bdf_{}".format(year_calage)]
     depenses.index = depenses.index.astype(ident_men_dtype)
     temporary_store.close()
-
     # 2. Gestion des véhicules:
     build_homogeneisation_vehicules(year = year_data)
 
@@ -66,21 +65,18 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
         vehicule.index = vehicule.index.astype(ident_men_dtype)
     else:
         vehicule = None
-
     # 3. Gestion des variables socio démographiques:
     build_homogeneisation_caracteristiques_sociales(year = year_data)
     temporary_store.open()
     menage = temporary_store['donnes_socio_demog_{}'.format(year_data)]
     menage.index = menage.index.astype(ident_men_dtype)
     temporary_store.close()
-
     # 4. Gestion des variables revenus:
     build_homogeneisation_revenus_menages(year = year_data)
     temporary_store.open()
     revenus = temporary_store["revenus_{}".format(year_calage)]
     revenus.index = revenus.index.astype(ident_men_dtype)
     temporary_store.close()
-
     # Concaténation des résultas de ces 4 étapes
     preprocessed_data_frame_by_name = dict(
         revenus = revenus,
@@ -141,6 +137,7 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
         save(data_frame, year_data, year_calage)
         try:
             # On apparie ajoute les données appariées de l'ENL et l'ENTD
+            print('appariement ENL ENTD')
             data_matched = pandas.read_csv(
                 os.path.join(
                     assets_directory,

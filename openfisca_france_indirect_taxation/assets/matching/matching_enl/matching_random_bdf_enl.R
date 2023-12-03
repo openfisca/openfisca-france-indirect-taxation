@@ -1,7 +1,7 @@
 suppressPackageStartupMessages(library("configr"))
 suppressPackageStartupMessages(library("StatMatch"))
 
-config <- read.config(file = "~/.config/openfisca-survey-manager/config.ini")
+config <- read.config(file = "C:/Users/veve1/.config/openfisca-survey-manager/config.ini")
 assets_directory = config$openfisca_france_indirect_taxation$assets
 
 # Import data
@@ -34,4 +34,4 @@ fused.nnd.m <- create.fused(
   )
 
 # Save it as csv
-write.csv(fused.nnd.m, file = file.path(assets_directory, "/matching/matching_enl/data_matched_random.csv")
+write.csv(fused.nnd.m, file = file.path(assets_directory, "/matching/matching_enl/data_matched_random.csv"))

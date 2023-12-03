@@ -2,7 +2,7 @@ metadata:
   order:
   - tva
   - taxes_tabacs
-  - taxation_produits_energetiques
+  - produits_energetiques
   - taxes_alcools_autres_boissons
   - taxes_assurances
   - taxes_energie_dans_logement
