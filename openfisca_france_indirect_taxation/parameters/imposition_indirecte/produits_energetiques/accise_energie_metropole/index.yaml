@@ -1,0 +1,7 @@
+description: Fraction perçue en métropole sur les produits énergétiques, autres que les gaz naturels et les charbons
+documentation: |
+  Notes :
+  **ATTENTION** A partir de 2022, les valeurs sont en euro par Mwh et non plus en euro par hectolitre.
+  L’article L. 312-29 prévoit que des arrêtés conjoints du ministre chargé du budget et du ministre chargé de l’énergie déterminent les coefficients des conversions mentionnées aux articles L. 312 25 et L. 312 26 et constatent les tarifs qui en résultent.
+  Ces arrêtés devraient être publiés au cours de l’année 2022.
+  NB: tant que ces coeficient ne sont pas publié, des coeficients calculés manuelement sont présent dans "taux_conversion_euro_par_mwh_a_euro_par_hectolitre.yaml"
