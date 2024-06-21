@@ -1,8 +1,9 @@
 description: Tarif normal des essences, en €/Mwh
 values:
   2022-01-01:
-    value: 76.826
+    value: 74.576
 metadata:
+  last_value_still_valid_on: "2024-05-21"
   unit: currency
   reference:
     2022-01-01:

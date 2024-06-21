@@ -3,6 +3,7 @@ values:
   2022-01-01:
     value: 16.208
 metadata:
+  last_value_still_valid_on: "2024-05-21"
   unit: currency
   reference:
     2022-01-01:
