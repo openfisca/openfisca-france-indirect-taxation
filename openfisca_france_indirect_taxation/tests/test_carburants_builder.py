@@ -45,5 +45,4 @@ def test_carburants_builder(year):
 
     weighted_input_data = ((carburants).sum(axis = 1) * pondmen).sum()
     weighted_computed_aggregate = survey_scenario.compute_aggregate('poste_agrege_07', period = year)
-    assert_near(weighted_input_data, weighted_computed_aggregate, relative_error_margin = .001), \
-        'the total of transport differs from the sum of its components'
+    assert_near(weighted_input_data, weighted_computed_aggregate, relative_error_margin = .001, message='the total of transport differs from the sum of its components')
