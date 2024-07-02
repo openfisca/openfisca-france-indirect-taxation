@@ -7,6 +7,7 @@ refraction_corse_tipce_sp95_sp98:
     2002-01-01:
       value: 1.0
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
     reference:
       2022-01-01:
@@ -27,6 +28,7 @@ refraction_corse_tipce_super_plombe:
     2002-01-01:
       value: 1.0
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
     reference:
       2002-01-01:
@@ -42,6 +44,7 @@ refraction_corse_tipce_sp95_e10:
     2019-01-01:
       value: 1.0
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
     reference:
       2022-01-01:

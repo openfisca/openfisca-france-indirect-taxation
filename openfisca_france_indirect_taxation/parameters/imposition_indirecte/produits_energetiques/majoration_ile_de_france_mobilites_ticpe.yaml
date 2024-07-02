@@ -7,6 +7,7 @@ major_mobilites_tipce_gazole:
     2017-01-01:
       value: 1.89
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
     reference:
       2022-01-01:
@@ -27,6 +28,7 @@ major_mobilites_tipce_sp95_sp98:
     2017-01-01:
       value: 1.02
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
     reference:
       2022-01-01:
@@ -47,6 +49,7 @@ major_mobilites_tipce_sp95_e10:
     2017-01-01:
       value: 1.02
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
     reference:
       2022-01-01:

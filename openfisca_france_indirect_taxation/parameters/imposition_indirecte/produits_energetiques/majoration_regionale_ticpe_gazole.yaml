@@ -9,6 +9,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 0.0
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_idf
     unit: currency
 "21":
@@ -19,6 +20,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_ch_ar
     unit: currency
 "22":
@@ -29,6 +31,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_pic
     unit: currency
 "23":
@@ -39,6 +42,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_h_n
     unit: currency
 "24":
@@ -49,6 +53,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_cen
     unit: currency
     notes: Région Centre (avant 2016) / Centre-Val de Loire (après 2016)
@@ -60,6 +65,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_b_n
     unit: currency
 "26":
@@ -70,6 +76,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_bourg
     unit: currency
 "27":
@@ -80,6 +87,7 @@ description: Majoration régionale de l'accise du gazole
     2017-01-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "28":
   description: Majoration déterminée par la Normandie
@@ -89,6 +97,7 @@ description: Majoration régionale de l'accise du gazole
     2017-01-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "31":
   description: Majoration déterminée par le Nord-Pas-de-Calais
@@ -98,6 +107,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_n_cal
     unit: currency
 "32":
@@ -108,6 +118,7 @@ description: Majoration régionale de l'accise du gazole
     2017-01-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "41":
   description: Majoration déterminée par la Lorraine
@@ -117,6 +128,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_lor
     unit: currency
 "42":
@@ -127,6 +139,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_als
     unit: currency
 "43":
@@ -137,6 +150,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_f_c
     unit: currency
 "44":
@@ -147,6 +161,7 @@ description: Majoration régionale de l'accise du gazole
     2017-01-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "52":
   description: Majoration déterminée par le Pays de la Loire
@@ -156,6 +171,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_p_loi
     unit: currency
 "53":
@@ -166,6 +182,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_bre
     unit: currency
 "54":
@@ -178,6 +195,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 0.0
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_p_c
     unit: currency
 "72":
@@ -188,6 +206,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_aqui
     unit: currency
 "73":
@@ -198,6 +217,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_m_p
     unit: currency
 "74":
@@ -208,6 +228,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_lim
     unit: currency
 "75":
@@ -218,6 +239,7 @@ description: Majoration régionale de l'accise du gazole
     2017-01-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "76":
   description: Majoration déterminée par l'Occitanie
@@ -227,6 +249,7 @@ description: Majoration régionale de l'accise du gazole
     2017-01-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "82":
   description: Majoration déterminée par Rhône-Alpes
@@ -238,6 +261,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 0.0
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_r_a
     unit: currency
 "83":
@@ -248,6 +272,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_auv
     unit: currency
 "84":
@@ -260,6 +285,7 @@ description: Majoration régionale de l'accise du gazole
     2017-01-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "91":
   description: Majoration déterminée par le Languedoc-Roussillon
@@ -269,6 +295,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_l_r
     unit: currency
 "93":
@@ -279,6 +306,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_paca
     unit: currency
 "94":
@@ -289,6 +317,7 @@ description: Majoration régionale de l'accise du gazole
     2011-07-01:
       value: 0.0
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_cor
     unit: currency
 "99":
@@ -299,6 +328,7 @@ description: Majoration régionale de l'accise du gazole
     2017-01-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 metadata:
   order:
