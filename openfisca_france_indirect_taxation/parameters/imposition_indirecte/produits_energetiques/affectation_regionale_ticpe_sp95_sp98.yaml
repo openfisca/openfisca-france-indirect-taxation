@@ -5,6 +5,7 @@ maximum_value_affectation:
     2010-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
     reference:
       2010-01-01:
@@ -16,6 +17,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_idf
     unit: currency
 "21":
@@ -28,6 +30,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.17
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_ch_ar
     unit: currency
 "22":
@@ -38,6 +41,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_pic
     unit: currency
 "23":
@@ -48,6 +52,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_h_n
     unit: currency
 "24":
@@ -56,6 +61,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_cen
     unit: currency
     notes: Région Centre (avant 2016) / Centre-Val de Loire (après 2016)
@@ -69,6 +75,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.39
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_b_n
     unit: currency
 "26":
@@ -81,6 +88,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 0.86
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_bourg
     unit: currency
 "27":
@@ -89,6 +97,7 @@ maximum_value_affectation:
     2017-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "28":
   description: Affectation votée par la Normandie
@@ -96,6 +105,7 @@ maximum_value_affectation:
     2017-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "31":
   description: Affectation votée par le Nord Pas-de-Calais
@@ -105,6 +115,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_n_cal
     unit: currency
 "32":
@@ -113,6 +124,7 @@ maximum_value_affectation:
     2017-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "41":
   description: Affectation votée par la Lorraine
@@ -122,6 +134,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_lor
     unit: currency
 "42":
@@ -134,6 +147,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.4
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_als
     unit: currency
 "43":
@@ -146,6 +160,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.35
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_f_c
     unit: currency
 "44":
@@ -154,6 +169,7 @@ maximum_value_affectation:
     2017-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "52":
   description: Affectation votée au Pays de la Loire
@@ -163,6 +179,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.01
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_p_loi
     unit: currency
 "53":
@@ -173,6 +190,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.1
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_bre
     unit: currency
 "54":
@@ -185,6 +203,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 0.0
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_p_c
     unit: currency
 "72":
@@ -197,6 +216,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.12
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_aqui
     unit: currency
 "73":
@@ -209,6 +229,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.11
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_m_p
     unit: currency
 "74":
@@ -221,6 +242,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.66
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_lim
     unit: currency
 "75":
@@ -229,6 +251,7 @@ maximum_value_affectation:
     2017-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "76":
   description: Affectation votée par l'Occitanie
@@ -236,6 +259,7 @@ maximum_value_affectation:
     2017-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "82":
   description: Affectation votée par Rhône-Alpes
@@ -247,6 +271,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.17
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_r_a
     unit: currency
 "83":
@@ -259,6 +284,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.22
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_auv
     unit: currency
 "84":
@@ -267,6 +293,7 @@ maximum_value_affectation:
     2017-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 "91":
   description: Affectation votée par le Languedoc-Roussillon
@@ -278,6 +305,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 1.28
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_l_r
     unit: currency
 "93":
@@ -288,6 +316,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 0.98
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_paca
     unit: currency
 "94":
@@ -302,6 +331,7 @@ maximum_value_affectation:
     2007-01-01:
       value: 0.0
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     ipp_csv_id: maj_ticpe_super_cor
     unit: currency
 "99":
@@ -310,6 +340,7 @@ maximum_value_affectation:
     2017-01-01:
       value: 1.77
   metadata:
+    last_value_still_valid_on: "2024-07-01"
     unit: currency
 metadata:
   order:
