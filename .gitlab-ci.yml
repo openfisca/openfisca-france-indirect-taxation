@@ -70,7 +70,7 @@ Build matched data:
 
   when: manual
 
-Test:
+Test_YAML_Carburants:
   stage: test
   image: $CI_REGISTRY_IMAGE:latest
   tags:
@@ -82,7 +82,7 @@ Test:
     - cp /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config_with_matched_data.ini ~/.config/openfisca-survey-manager/config.ini
     - mkdir -p /root/ci-files/data_collections
   script:
-    - openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/test_prix_carburants_accises.py
+    - openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/*carbu*
 
 
 # Test_All:
