@@ -102,12 +102,16 @@ class prix_gazole_b7_ht(Variable):
     label = "prix du gazole B7 HT par litre si la remise n'avait pas eu lieu"
     definition_period = YEAR
     default_value = 0
+    reference = "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000046489832/2022-10-27/"
 
     def formula(menage, period, parameters):
         prix_gazole_b7_ht_avant_remise = menage('prix_gazole_b7_ht_avant_remise', period)
         aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
         prix_gazole_b7_ht = prix_gazole_b7_ht_avant_remise - (aide_exceptionnelle_gazole_essence_hl / 100)
         return prix_gazole_b7_ht
+
+    def formula_2023(menage, period):
+        return menage('prix_gazole_b7_ht_avant_remise', period)
 
 
 class prix_gazole_b10_ht_avant_remise(Variable):
@@ -632,9 +636,13 @@ class prix_gpl_carburant_ht(Variable):
     label = "prix du gaz de pétrole liquéfié - carburant HT par litre"
     definition_period = YEAR
     default_value = 0
+    reference = "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000046489832/2022-10-27/"
 
     def formula(menage, period, parameters):
         prix_gpl_carburant_ht_avant_remise = menage('prix_gpl_carburant_ht_avant_remise', period)
         aide_exceptionnelle_gpl_carburant_100kg = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gpl_carburant_100kg
         prix_gpl_carburant_ht = prix_gpl_carburant_ht_avant_remise - (aide_exceptionnelle_gpl_carburant_100kg / 100)
         return prix_gpl_carburant_ht
+
+    def formula_2023(menage, period):
+        return menage('prix_gpl_carburant_ht_avant_remise', period)
