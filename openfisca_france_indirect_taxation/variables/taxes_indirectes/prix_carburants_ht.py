@@ -153,6 +153,9 @@ class prix_gazole_b10_ht(Variable):
         prix_gazole_b10_ht = prix_gazole_b10_ht_avant_remise - (aide_exceptionnelle_gazole_essence_hl / 100)
         return prix_gazole_b10_ht
 
+    def formula_2023(menage, period):
+        return menage('prix_gazole_b10_ht_avant_remise', period)
+
 
 class prix_essence_sp95_e10_ht_avant_remise(Variable):
     value_type = float
@@ -282,6 +285,9 @@ class prix_essence_sp95_e10_ht(Variable):
         prix_essence_sp95_e10_hors_remise_ttc = prix_essence_sp95_e10_ht_avant_remise - (aide_exceptionnelle_gazole_essence_hl / 100)
         return prix_essence_sp95_e10_hors_remise_ttc
 
+    def formula_2023(menage, period):
+        return menage('prix_essence_sp95_e10_ht_avant_remise', period)
+
 
 class prix_essence_sp95_ht_avant_remise(Variable):
     value_type = float
@@ -410,6 +416,9 @@ class prix_essence_sp95_ht(Variable):
         aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
         prix_essence_sp95_hors_remise_ttc = prix_essence_sp95_ht_avant_remise - (aide_exceptionnelle_gazole_essence_hl / 100)
         return prix_essence_sp95_hors_remise_ttc
+
+    def formula_2023(menage, period):
+        return menage('prix_essence_sp95_ht_avant_remise', period)
 
 
 class prix_essence_sp98_ht_avant_remise(Variable):

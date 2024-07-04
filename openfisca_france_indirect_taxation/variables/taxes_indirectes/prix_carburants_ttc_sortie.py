@@ -112,6 +112,9 @@ class prix_gazole_b7_hors_remise_ttc_sortie(Variable):
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
         prix_gazole_b7_hors_remise_ttc = prix_gazole_b7_ttc + (aide_exceptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
         return prix_gazole_b7_hors_remise_ttc
+    
+    def formula_2023(menage, period):
+        return menage('prix_gazole_b7_ttc_sortie', period)
 
 
 class prix_gazole_b10_ttc_sortie(Variable):
@@ -153,6 +156,9 @@ class prix_gazole_b10_hors_remise_ttc_sortie(Variable):
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
         prix_gazole_b10_hors_remise_ttc = prix_gazole_b10_ttc + (aide_exceptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
         return prix_gazole_b10_hors_remise_ttc
+        
+    def formula_2023(menage, period):
+        return menage('prix_gazole_b10_ttc_sortie', period)
 
 
 class prix_essence_sp95_e10_ttc_sortie(Variable):
@@ -283,6 +289,9 @@ class prix_essence_sp95_e10_hors_remise_ttc_sortie(Variable):
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
         prix_essence_sp95_e10_ttc = prix_essence_sp95_e10_ttc + (aide_exceptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
         return prix_essence_sp95_e10_ttc
+    
+    def formula_2023(menage, period):
+        return menage('prix_essence_sp95_e10_ttc_sortie', period)
 
 
 class prix_essence_sp95_ttc_sortie(Variable):
@@ -413,6 +422,9 @@ class prix_essence_sp95_hors_remise_ttc_sortie(Variable):
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
         prix_essence_sp95_ttc = prix_essence_sp95_ttc + (aide_exceptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
         return prix_essence_sp95_ttc
+        
+    def formula_2023(menage, period):
+        return menage('prix_essence_sp95_ttc_sortie', period)
 
 
 class prix_essence_sp98_ttc_sortie(Variable):
@@ -543,6 +555,9 @@ class prix_essence_sp98_hors_remise_ttc_sortie(Variable):
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
         prix_essence_sp98_ttc = prix_essence_sp98_ttc + (aide_exceptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
         return prix_essence_sp98_ttc
+        
+    def formula_2023(menage, period):
+        return menage('prix_essence_sp98_ttc_sortie', period)
 
 
 class prix_essence_super_plombe_ttc_sortie(Variable):
@@ -605,6 +620,9 @@ class prix_essence_e85_hors_remise_ttc_sortie(Variable):
         taux_plein_tva = parameters(period).imposition_indirecte.tva.taux_de_tva.taux_normal
         prix_essence_e85_hors_remise_ttc = prix_essence_e85_ttc + (aide_exceptionnelle_gazole_essence_hl / 100) * (1 + taux_plein_tva)
         return prix_essence_e85_hors_remise_ttc
+        
+    def formula_2023(menage, period):
+        return menage('prix_essence_e85_ttc_sortie', period)
 
 
 class prix_gpl_carburant_ttc_sortie(Variable):
