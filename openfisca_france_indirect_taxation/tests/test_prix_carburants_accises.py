@@ -1,5 +1,3 @@
-import pytest
-
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 
 
@@ -19,6 +17,7 @@ def test_prix_carburants_2022():
     majoration_ticpe_super_e10 = \
         parameters.imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10.alsace
     assert round(accise_super_e10 + majoration_ticpe_super_e10, 2) == 123.19
+
 
 def test_prix_carburants_2024():
     '''
