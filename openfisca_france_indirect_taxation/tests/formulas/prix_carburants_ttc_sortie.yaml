@@ -58,6 +58,45 @@
   output:
     prix_gazole_b10_ttc_sortie: 1.5504
 
+- name: "Test gazole_b10_ticpe 2019"
+  period: 2019
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b10: 100
+    prix_gazole_b10_ht: 1.0
+    code_region: '84'
+  output:
+    gazole_b10_ticpe: 59.40
+    prix_gazole_b10_ht_avant_remise: 0.625
+    prix_gazole_b10_ttc_sortie: 1.912
+    prix_gazole_b10_ttc: 1.463
+
+- name: "Test gazole_b10_ticpe 2022"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b10: 100
+    prix_gazole_b10_ht: 1.0
+    code_region: '84'
+  output:
+    gazole_b10_ticpe: 59.40
+    prix_gazole_b10_ht_avant_remise: 1.122
+    prix_gazole_b10_ttc_sortie: 1.912
+    prix_gazole_b10_ttc: 1.88
+
+- name: "Test gazole_b10_ticpe 2024"
+  period: 2024
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b10: 100
+    prix_gazole_b10_ht: 5.0
+    code_region: '84'
+  output:
+    gazole_b10_ticpe: 59.40
+    prix_gazole_b10_ht_avant_remise: 1234
+    prix_gazole_b10_ttc_sortie: 1.912
+    prix_gazole_b10_ttc: 1234
+
 # prix essence ttc_sortie:
 
 ## prix essence SP95 E10 ttc_sortie:
@@ -188,6 +227,24 @@
     prix_essence_e85_ttc_sortie: 0.7307
 
 - name: "Test prix_essence_e85_ttc_sortie"
+  period: 2023
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+    prix_essence_e85_ht: 0.4906
+  output:
+    prix_essence_e85_ttc_sortie: 0.7307
+
+- name: "Test prix_essence_e85_ttc_sortie"
+  period: 2024
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+    prix_essence_e85_ht: 0.4906
+  output:
+    prix_essence_e85_ttc_sortie: 0.7307
+
+- name: "Test prix_essence_e85_ttc_sortie"
   period: 2022
   absolute_error_margin: .01
   input:
@@ -198,6 +255,15 @@
 
 - name: "Test prix_essence_e85_ttc_sortie"
   period: 2022
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+    prix_essence_e85_ht: 1.007
+  output:
+    prix_essence_e85_ttc_sortie: 1.3504
+
+- name: "Test prix_essence_e85_ttc_sortie"
+  period: 2024
   absolute_error_margin: .01
   input:
     code_region: '94'

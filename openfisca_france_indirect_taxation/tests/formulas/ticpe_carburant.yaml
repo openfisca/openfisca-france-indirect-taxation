@@ -58,6 +58,24 @@
   output:
     gazole_b10_ticpe: 59.40
 
+- name: "Test gazole_b10_ticpe"
+  period: 2019
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b10: 100
+    code_region: '84'
+  output:
+    gazole_b10_ticpe: 59.40
+
+- name: "Test gazole_b10_ticpe"
+  period: 2024
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b10: 100
+    code_region: '84'
+  output:
+    gazole_b10_ticpe: 59.40
+
 ## TICPE gazole total:
 
 - name: "Test gazole_ticpe_total"
