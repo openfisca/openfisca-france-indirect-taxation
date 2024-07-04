@@ -82,4 +82,19 @@ Test:
     - cp /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config_with_matched_data.ini ~/.config/openfisca-survey-manager/config.ini
     - mkdir -p /root/ci-files/data_collections
   script:
+    - openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/test_prix_carburants_accises.py
+
+
+Test_All:
+  stage: test
+  image: $CI_REGISTRY_IMAGE:latest
+  tags:
+    - data-in
+  before_script:
+    - mkdir -p ~/.config/openfisca-survey-manager
+    - pip3 install -e .[dev]
+    - cp ./runner/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
+    - cp /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config_with_matched_data.ini ~/.config/openfisca-survey-manager/config.ini
+    - mkdir -p /root/ci-files/data_collections
+  script:
     - make test
