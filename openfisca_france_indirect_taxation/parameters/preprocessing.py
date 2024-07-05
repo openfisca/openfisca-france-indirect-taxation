@@ -21,7 +21,7 @@ def preprocess_legislation(parameters):
     prix_annuel_carburants['Date'] = prix_annuel_carburants['Date'].astype(int)
     prix_annuel_carburants = prix_annuel_carburants.set_index('Date')
 
-    # This CSV file refers to the prices (incl. VAT) provided by INSEE, the method of data retrieval is provided in the git: https://github.com/kendrickherz/LexImpact-Prix-carburants
+    # This CSV file refers to the prices (incl. VAT) provided by INSEE, the method of data retrieval is provided in the git: https://git.leximpact.dev/leximpact/simulateur-socio-fiscal/openfisca/prix-carburants
     # For the current year, the annual average is calculated on the less already passed,
     # it is necessary to turn again the script to update the following months when they are made available by the INSEE.
     prix_litre_annuel_carburants = pd.read_csv(

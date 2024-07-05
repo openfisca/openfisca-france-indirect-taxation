@@ -287,7 +287,7 @@ class prix_essence_sp95_e10_ht(Variable):
 
     def formula(menage, period):
         return menage('prix_essence_sp95_e10_ht_avant_remise', period)
-    
+
     def formula_2022(menage, period, parameters):
         prix_essence_sp95_e10_ht_avant_remise = menage('prix_essence_sp95_e10_ht_avant_remise', period)
         aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
@@ -419,10 +419,10 @@ class prix_essence_sp95_ht(Variable):
     label = "prix de l'essence SP95 TTC par litre"
     definition_period = YEAR
     default_value = 0
-    
+
     def formula(menage, period):
         return menage('prix_essence_sp95_ht_avant_remise', period)
-    
+
     def formula_2022(menage, period, parameters):
         prix_essence_sp95_ht_avant_remise = menage('prix_essence_sp95_ht_avant_remise', period)
         aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
@@ -563,7 +563,7 @@ class prix_essence_sp98_ht(Variable):
         aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
         prix_essence_sp98_hors_remise_ttc = prix_essence_sp98_ht_avant_remise - (aide_exceptionnelle_gazole_essence_hl / 100)
         return prix_essence_sp98_hors_remise_ttc
-    
+
     def formula_2023(menage, period):
         return menage('prix_essence_sp98_ht_avant_remise', period)
 
@@ -630,10 +630,10 @@ class prix_essence_e85_ht(Variable):
         aide_exceptionnelle_gazole_essence_hl = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gazole_essence_hl
         prix_essence_e85_ht = prix_essence_e85_ht_avant_remise - (aide_exceptionnelle_gazole_essence_hl / 100)
         return prix_essence_e85_ht
-    
+
     def formula_2023(menage, period):
         return menage('prix_essence_e85_ht_avant_remise', period)
-    
+
 
 class prix_gpl_carburant_ht_avant_remise(Variable):
     value_type = float
@@ -670,10 +670,10 @@ class prix_gpl_carburant_ht(Variable):
     definition_period = YEAR
     default_value = 0
     reference = "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000046489832/2022-10-27/"
-    
+
     def formula(menage, period):
         return menage('prix_gpl_carburant_ht_avant_remise', period)
-    
+
     def formula_2022(menage, period, parameters):
         prix_gpl_carburant_ht_avant_remise = menage('prix_gpl_carburant_ht_avant_remise', period)
         aide_exceptionnelle_gpl_carburant_100kg = parameters(period.start).imposition_indirecte.produits_energetiques.aide_exceptionnelle_carburant.gpl_carburant_100kg

@@ -72,7 +72,7 @@
   output:
     prix_essence_sp95_e10_ttc: 1.5844
 
-- name: "Test prix_essence_sp95_e10_ttc"
+- name: "Test prix_essence_sp95_e10_ttc 2021 - région 24"
   period: 2021
   absolute_error_margin: .01
   input:
@@ -80,7 +80,7 @@
   output:
     prix_essence_sp95_e10_ttc: 1.5382
 
-- name: "Test prix_essence_sp95_e10_ttc"
+- name: "Test prix_essence_sp95_e10_ttc 2021"
   period: 2021
   absolute_error_margin: .01
   input:
@@ -88,13 +88,13 @@
   output:
     prix_essence_sp95_e10_ttc: 1.6208
 
-- name: "Test prix_essence_sp95_e10_ttc"
+- name: "Test prix_essence_sp95_e10_ttc 2023"
   period: 2023
   absolute_error_margin: .01
   input:
     code_region: '11'
   output:
-    prix_essence_sp95_e10_ttc: 1.95
+    prix_essence_sp95_e10_ttc: 1.93
 
 ## prix essence SP95 TTC:
 

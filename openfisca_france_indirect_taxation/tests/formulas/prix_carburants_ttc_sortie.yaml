@@ -63,12 +63,11 @@
   absolute_error_margin: .01
   input:
     nombre_litres_gazole_b10: 100
-    prix_gazole_b10_ht: 1.0
     code_region: '84'
   output:
     gazole_b10_ticpe: 59.40
     prix_gazole_b10_ht_avant_remise: 0.625
-    prix_gazole_b10_ttc_sortie: 1.912
+    prix_gazole_b10_ttc_sortie: 1.463
     prix_gazole_b10_ttc: 1.463
 
 - name: "Test gazole_b10_ticpe 2022"
@@ -76,12 +75,11 @@
   absolute_error_margin: .01
   input:
     nombre_litres_gazole_b10: 100
-    prix_gazole_b10_ht: 1.0
     code_region: '84'
   output:
     gazole_b10_ticpe: 59.40
     prix_gazole_b10_ht_avant_remise: 1.122
-    prix_gazole_b10_ttc_sortie: 1.912
+    prix_gazole_b10_ttc_sortie: 1.88
     prix_gazole_b10_ttc: 1.88
 
 - name: "Test gazole_b10_ticpe 2024"
@@ -89,13 +87,13 @@
   absolute_error_margin: .01
   input:
     nombre_litres_gazole_b10: 100
-    prix_gazole_b10_ht: 5.0
     code_region: '84'
   output:
     gazole_b10_ticpe: 59.40
-    prix_gazole_b10_ht_avant_remise: 1234
-    prix_gazole_b10_ttc_sortie: 1.912
-    prix_gazole_b10_ttc: 1234
+    prix_gazole_b10_ht_avant_remise: 0.880
+    prix_gazole_b10_hors_remise_ttc: 1.77
+    prix_gazole_b10_ttc_sortie: 1.77
+    prix_gazole_b10_ttc: 1.77
 
 # prix essence ttc_sortie:
 
