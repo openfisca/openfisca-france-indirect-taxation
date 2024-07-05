@@ -16,6 +16,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 82,Gazole,2021,
 82,Gazole,2022,
 82,Gazole,2023,
+82,Gazole,2024,
 82,SP95,2007,128.49
 82,SP95,2008,137.69
 82,SP95,2009,122.92
@@ -33,6 +34,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 82,SP95,2021,
 82,SP95,2022,
 82,SP95,2023,
+82,SP95,2024,
 82,GPLc,2007,73.86
 82,GPLc,2008,75.84
 82,GPLc,2009,66.28
@@ -50,6 +52,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 82,GPLc,2021,
 82,GPLc,2022,
 82,GPLc,2023,
+82,GPLc,2024,
 82,E85,2007,83.04
 82,E85,2008,89.34
 82,E85,2009,95.05
@@ -67,6 +70,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 82,E85,2021,
 82,E85,2022,
 82,E85,2023,
+82,E85,2024,
 82,E10,2009,123.75
 82,E10,2010,135.51
 82,E10,2011,150.13
@@ -82,6 +86,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 82,E10,2021,
 82,E10,2022,
 82,E10,2023,
+82,E10,2024,
 82,SP98,2013,158.39
 82,SP98,2014,156.28
 82,SP98,2015,142.78
@@ -93,6 +98,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 82,SP98,2021,
 82,SP98,2022,
 82,SP98,2023,
+82,SP98,2024,
 22,Gazole,2007,109.44
 22,Gazole,2008,127.2
 22,Gazole,2009,100.44
@@ -110,6 +116,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 22,Gazole,2021,
 22,Gazole,2022,
 22,Gazole,2023,
+22,Gazole,2024,
 22,SP95,2007,129.29
 22,SP95,2008,137.12
 22,SP95,2009,120.76
@@ -127,6 +134,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 22,SP95,2021,
 22,SP95,2022,
 22,SP95,2023,
+22,SP95,2024,
 22,E85,2007,81.5
 22,E85,2008,83.09
 22,E85,2009,87.63
@@ -144,6 +152,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 22,E85,2021,
 22,E85,2022,
 22,E85,2023,
+22,E85,2024,
 22,GPLc,2007,72.8
 22,GPLc,2008,76.2
 22,GPLc,2009,65.83
@@ -161,6 +170,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 22,GPLc,2021,
 22,GPLc,2022,
 22,GPLc,2023,
+22,GPLc,2024,
 22,E10,2009,125.84
 22,E10,2010,137.15
 22,E10,2011,152.5
@@ -176,6 +186,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 22,E10,2021,
 22,E10,2022,
 22,E10,2023,
+22,E10,2024,
 22,SP98,2013,158.44
 22,SP98,2014,154.83
 22,SP98,2015,141.78
@@ -187,6 +198,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 22,SP98,2021,
 22,SP98,2022,
 22,SP98,2023,
+22,SP98,2024,
 83,Gazole,2007,111.58
 83,Gazole,2008,129.97
 83,Gazole,2009,102.9
@@ -204,6 +216,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 83,Gazole,2021,
 83,Gazole,2022,
 83,Gazole,2023,
+83,Gazole,2024,
 83,SP95,2007,130.24
 83,SP95,2008,139.43
 83,SP95,2009,124.45
@@ -221,6 +234,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 83,SP95,2021,
 83,SP95,2022,
 83,SP95,2023,
+83,SP95,2024,
 83,GPLc,2007,72.78
 83,GPLc,2008,75.5
 83,GPLc,2009,65.91
@@ -238,6 +252,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 83,GPLc,2021,
 83,GPLc,2022,
 83,GPLc,2023,
+83,GPLc,2024,
 83,E85,2007,84.0
 83,E85,2008,84.91
 83,E85,2009,92.69
@@ -255,6 +270,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 83,E85,2021,
 83,E85,2022,
 83,E85,2023,
+83,E85,2024,
 83,E10,2009,119.75
 83,E10,2010,135.16
 83,E10,2011,150.62
@@ -270,6 +286,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 83,E10,2021,
 83,E10,2022,
 83,E10,2023,
+83,E10,2024,
 83,SP98,2013,159.97
 83,SP98,2014,156.29
 83,SP98,2015,142.57
@@ -281,6 +298,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 83,SP98,2021,
 83,SP98,2022,
 83,SP98,2023,
+83,SP98,2024,
 93,Gazole,2007,110.48
 93,Gazole,2008,129.16
 93,Gazole,2009,101.95
@@ -297,7 +315,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 93,Gazole,2020,129.56
 93,Gazole,2021,145.73
 93,Gazole,2022,188.0
-93,Gazole,2023,186.0
+93,Gazole,2023,183.0
+93,Gazole,2024,177.0
 93,SP95,2007,128.75
 93,SP95,2008,138.1
 93,SP95,2009,123.0
@@ -314,7 +333,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 93,SP95,2020,141.15
 93,SP95,2021,158.05
 93,SP95,2022,184.0
-93,SP95,2023,194.0
+93,SP95,2023,192.0
+93,SP95,2024,190.0
 93,GPLc,2007,73.82
 93,GPLc,2008,76.32
 93,GPLc,2009,66.15
@@ -331,7 +351,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 93,GPLc,2020,86.6
 93,GPLc,2021,86.96
 93,GPLc,2022,86.0
-93,GPLc,2023,100.0
+93,GPLc,2023,101.0
+93,GPLc,2024,100.0
 93,E85,2007,81.43
 93,E85,2008,86.0
 93,E85,2009,93.88
@@ -349,6 +370,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 93,E85,2021,70.8
 93,E85,2022,82.0
 93,E85,2023,110.0
+93,E85,2024,90.0
 93,E10,2009,124.39
 93,E10,2010,135.03
 93,E10,2011,149.37
@@ -363,7 +385,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 93,E10,2020,136.32
 93,E10,2021,154.95
 93,E10,2022,178.0
-93,E10,2023,191.0
+93,E10,2023,188.0
+93,E10,2024,186.0
 93,SP98,2013,159.53
 93,SP98,2014,156.71
 93,SP98,2015,143.34
@@ -374,7 +397,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 93,SP98,2020,145.61
 93,SP98,2021,164.22
 93,SP98,2022,188.0
-93,SP98,2023,199.0
+93,SP98,2023,197.0
+93,SP98,2024,195.0
 73,Gazole,2007,110.9
 73,Gazole,2008,129.03
 73,Gazole,2009,101.88
@@ -392,6 +416,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 73,Gazole,2021,
 73,Gazole,2022,
 73,Gazole,2023,
+73,Gazole,2024,
 73,SP95,2007,129.75
 73,SP95,2008,138.93
 73,SP95,2009,123.93
@@ -409,6 +434,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 73,SP95,2021,
 73,SP95,2022,
 73,SP95,2023,
+73,SP95,2024,
 73,GPLc,2007,72.33
 73,GPLc,2008,74.31
 73,GPLc,2009,65.6
@@ -426,6 +452,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 73,GPLc,2021,
 73,GPLc,2022,
 73,GPLc,2023,
+73,GPLc,2024,
 73,E85,2007,82.61
 73,E85,2008,86.86
 73,E85,2009,91.28
@@ -443,6 +470,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 73,E85,2021,
 73,E85,2022,
 73,E85,2023,
+73,E85,2024,
 73,E10,2009,122.75
 73,E10,2010,134.08
 73,E10,2011,151.84
@@ -458,6 +486,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 73,E10,2021,
 73,E10,2022,
 73,E10,2023,
+73,E10,2024,
 73,SP98,2013,160.15
 73,SP98,2014,156.44
 73,SP98,2015,142.92
@@ -469,6 +498,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 73,SP98,2021,
 73,SP98,2022,
 73,SP98,2023,
+73,SP98,2024,
 21,Gazole,2007,110.23
 21,Gazole,2008,128.17
 21,Gazole,2009,101.24
@@ -486,6 +516,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 21,Gazole,2021,
 21,Gazole,2022,
 21,Gazole,2023,
+21,Gazole,2024,
 21,SP95,2007,129.65
 21,SP95,2008,138.12
 21,SP95,2009,122.68
@@ -503,6 +534,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 21,SP95,2021,
 21,SP95,2022,
 21,SP95,2023,
+21,SP95,2024,
 21,E85,2007,80.52
 21,E85,2008,82.58
 21,E85,2009,90.27
@@ -520,6 +552,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 21,E85,2021,
 21,E85,2022,
 21,E85,2023,
+21,E85,2024,
 21,GPLc,2007,72.75
 21,GPLc,2008,75.24
 21,GPLc,2009,65.28
@@ -537,6 +570,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 21,GPLc,2021,
 21,GPLc,2022,
 21,GPLc,2023,
+21,GPLc,2024,
 21,E10,2009,124.76
 21,E10,2010,136.15
 21,E10,2011,151.71
@@ -552,6 +586,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 21,E10,2021,
 21,E10,2022,
 21,E10,2023,
+21,E10,2024,
 21,SP98,2013,158.93
 21,SP98,2014,155.8
 21,SP98,2015,142.44
@@ -563,6 +598,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 21,SP98,2021,
 21,SP98,2022,
 21,SP98,2023,
+21,SP98,2024,
 91,Gazole,2007,110.17
 91,Gazole,2008,128.51
 91,Gazole,2009,101.12
@@ -580,6 +616,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 91,Gazole,2021,
 91,Gazole,2022,
 91,Gazole,2023,
+91,Gazole,2024,
 91,SP95,2007,129.19
 91,SP95,2008,138.28
 91,SP95,2009,123.07
@@ -597,6 +634,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 91,SP95,2021,
 91,SP95,2022,
 91,SP95,2023,
+91,SP95,2024,
 91,GPLc,2007,72.96
 91,GPLc,2008,74.77
 91,GPLc,2009,65.5
@@ -614,6 +652,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 91,GPLc,2021,
 91,GPLc,2022,
 91,GPLc,2023,
+91,GPLc,2024,
 91,E85,2007,82.88
 91,E85,2008,86.88
 91,E85,2009,94.75
@@ -631,6 +670,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 91,E85,2021,
 91,E85,2022,
 91,E85,2023,
+91,E85,2024,
 91,E10,2009,124.18
 91,E10,2010,134.78
 91,E10,2011,149.3
@@ -646,6 +686,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 91,E10,2021,
 91,E10,2022,
 91,E10,2023,
+91,E10,2024,
 91,SP98,2013,159.18
 91,SP98,2014,155.83
 91,SP98,2015,142.51
@@ -657,6 +698,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 91,SP98,2021,
 91,SP98,2022,
 91,SP98,2023,
+91,SP98,2024,
 24,Gazole,2007,109.65
 24,Gazole,2008,127.12
 24,Gazole,2009,100.47
@@ -673,7 +715,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 24,Gazole,2020,127.29
 24,Gazole,2021,144.18
 24,Gazole,2022,187.0
-24,Gazole,2023,185.0
+24,Gazole,2023,182.0
+24,Gazole,2024,176.0
 24,SP95,2007,129.37
 24,SP95,2008,137.16
 24,SP95,2009,121.66
@@ -690,7 +733,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 24,SP95,2020,137.25
 24,SP95,2021,156.32
 24,SP95,2022,184.0
-24,SP95,2023,192.0
+24,SP95,2023,190.0
+24,SP95,2024,187.0
 24,GPLc,2007,73.52
 24,GPLc,2008,76.58
 24,GPLc,2009,67.39
@@ -708,6 +752,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 24,GPLc,2021,89.84
 24,GPLc,2022,87.0
 24,GPLc,2023,101.0
+24,GPLc,2024,101.0
 24,E85,2007,81.99
 24,E85,2008,84.9
 24,E85,2009,93.13
@@ -725,6 +770,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 24,E85,2021,67.74
 24,E85,2022,83.0
 24,E85,2023,108.0
+24,E85,2024,87.0
 24,E10,2009,124.41
 24,E10,2010,137.92
 24,E10,2011,151.5
@@ -739,7 +785,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 24,E10,2020,134.89
 24,E10,2021,153.82
 24,E10,2022,179.0
-24,E10,2023,190.0
+24,E10,2023,188.0
+24,E10,2024,184.0
 24,SP98,2013,157.74
 24,SP98,2014,154.4
 24,SP98,2015,141.13
@@ -750,7 +797,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 24,SP98,2020,142.22
 24,SP98,2021,162.0
 24,SP98,2022,189.0
-24,SP98,2023,197.0
+24,SP98,2023,195.0
+24,SP98,2024,193.0
 25,Gazole,2007,109.39
 25,Gazole,2008,127.08
 25,Gazole,2009,100.72
@@ -768,6 +816,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 25,Gazole,2021,
 25,Gazole,2022,
 25,Gazole,2023,
+25,Gazole,2024,
 25,SP95,2007,128.87
 25,SP95,2008,136.92
 25,SP95,2009,122.07
@@ -785,6 +834,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 25,SP95,2021,
 25,SP95,2022,
 25,SP95,2023,
+25,SP95,2024,
 25,GPLc,2007,73.34
 25,GPLc,2008,76.07
 25,GPLc,2009,66.61
@@ -802,6 +852,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 25,GPLc,2021,
 25,GPLc,2022,
 25,GPLc,2023,
+25,GPLc,2024,
 25,E85,2007,82.14
 25,E85,2008,82.38
 25,E85,2009,102.06
@@ -819,6 +870,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 25,E85,2021,
 25,E85,2022,
 25,E85,2023,
+25,E85,2024,
 25,E10,2009,122.9
 25,E10,2010,134.35
 25,E10,2011,150.33
@@ -834,6 +886,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 25,E10,2021,
 25,E10,2022,
 25,E10,2023,
+25,E10,2024,
 25,SP98,2013,158.18
 25,SP98,2014,154.93
 25,SP98,2015,142.1
@@ -845,6 +898,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 25,SP98,2021,
 25,SP98,2022,
 25,SP98,2023,
+25,SP98,2024,
 54,Gazole,2007,108.3
 54,Gazole,2008,125.6
 54,Gazole,2009,99.27
@@ -862,6 +916,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 54,Gazole,2021,
 54,Gazole,2022,
 54,Gazole,2023,
+54,Gazole,2024,
 54,SP95,2007,127.78
 54,SP95,2008,135.5
 54,SP95,2009,120.73
@@ -879,6 +934,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 54,SP95,2021,
 54,SP95,2022,
 54,SP95,2023,
+54,SP95,2024,
 54,E85,2007,80.97
 54,E85,2008,84.14
 54,E85,2009,97.22
@@ -896,6 +952,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 54,E85,2021,
 54,E85,2022,
 54,E85,2023,
+54,E85,2024,
 54,GPLc,2007,69.15
 54,GPLc,2008,71.68
 54,GPLc,2009,63.45
@@ -913,6 +970,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 54,GPLc,2021,
 54,GPLc,2022,
 54,GPLc,2023,
+54,GPLc,2024,
 54,E10,2009,125.46
 54,E10,2010,136.14
 54,E10,2011,149.61
@@ -928,6 +986,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 54,E10,2021,
 54,E10,2022,
 54,E10,2023,
+54,E10,2024,
 54,SP98,2013,154.59
 54,SP98,2014,151.16
 54,SP98,2015,138.73
@@ -939,6 +998,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 54,SP98,2021,
 54,SP98,2022,
 54,SP98,2023,
+54,SP98,2024,
 74,Gazole,2007,111.12
 74,Gazole,2008,128.67
 74,Gazole,2009,101.7
@@ -956,6 +1016,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 74,Gazole,2021,
 74,Gazole,2022,
 74,Gazole,2023,
+74,Gazole,2024,
 74,SP95,2007,131.49
 74,SP95,2008,139.15
 74,SP95,2009,123.95
@@ -973,6 +1034,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 74,SP95,2021,
 74,SP95,2022,
 74,SP95,2023,
+74,SP95,2024,
 74,GPLc,2007,73.85
 74,GPLc,2008,77.61
 74,GPLc,2009,66.25
@@ -990,6 +1052,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 74,GPLc,2021,
 74,GPLc,2022,
 74,GPLc,2023,
+74,GPLc,2024,
 74,E85,2007,85.0
 74,E85,2008,86.92
 74,E85,2009,100.73
@@ -1007,6 +1070,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 74,E85,2021,
 74,E85,2022,
 74,E85,2023,
+74,E85,2024,
 74,E10,2009,125.89
 74,E10,2010,138.79
 74,E10,2011,152.84
@@ -1022,6 +1086,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 74,E10,2021,
 74,E10,2022,
 74,E10,2023,
+74,E10,2024,
 74,SP98,2013,160.36
 74,SP98,2014,156.41
 74,SP98,2015,143.45
@@ -1033,6 +1098,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 74,SP98,2021,
 74,SP98,2022,
 74,SP98,2023,
+74,SP98,2024,
 94,Gazole,2007,117.03
 94,Gazole,2008,135.22
 94,Gazole,2009,109.01
@@ -1049,7 +1115,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 94,Gazole,2020,140.28
 94,Gazole,2021,155.04
 94,Gazole,2022,190.0
-94,Gazole,2023,191.0
+94,Gazole,2023,190.0
+94,Gazole,2024,185.0
 94,SP95,2007,133.6
 94,SP95,2008,142.07
 94,SP95,2009,127.62
@@ -1066,7 +1133,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 94,SP95,2020,148.65
 94,SP95,2021,165.67
 94,SP95,2022,186.0
-94,SP95,2023,196.0
+94,SP95,2023,195.0
+94,SP95,2024,195.0
 94,GPLc,2007,80.17
 94,GPLc,2008,84.38
 94,GPLc,2009,78.68
@@ -1084,6 +1152,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 94,GPLc,2021,111.49
 94,GPLc,2022,119.0
 94,GPLc,2023,126.0
+94,GPLc,2024,127.0
 94,E85,2008,100.0
 94,E85,2009,133.22
 94,E85,2010,135.85
@@ -1099,7 +1168,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 94,E85,2020,106.52
 94,E85,2021,135.04
 94,E85,2022,201.0
-94,E85,2023,190.0
+94,E85,2023,189.0
+94,E85,2024,196.0
 94,E10,2011,161.9
 94,E10,2012,144.74
 94,E10,2013,161.84
@@ -1112,7 +1182,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 94,E10,2020,157.57
 94,E10,2021,162.08
 94,E10,2022,189.0
-94,E10,2023,195.0
+94,E10,2023,194.0
+94,E10,2024,194.0
 94,SP98,2014,151.8
 94,SP98,2015,132.86
 94,SP98,2016,
@@ -1123,6 +1194,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 94,SP98,2021,159.33
 94,SP98,2022,150.0
 94,SP98,2023,195.0
+94,SP98,2024,
 26,Gazole,2007,109.98
 26,Gazole,2008,128.21
 26,Gazole,2009,101.39
@@ -1140,6 +1212,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 26,Gazole,2021,
 26,Gazole,2022,
 26,Gazole,2023,
+26,Gazole,2024,
 26,SP95,2007,128.64
 26,SP95,2008,137.96
 26,SP95,2009,123.13
@@ -1157,6 +1230,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 26,SP95,2021,
 26,SP95,2022,
 26,SP95,2023,
+26,SP95,2024,
 26,GPLc,2007,74.8
 26,GPLc,2008,76.52
 26,GPLc,2009,67.57
@@ -1174,6 +1248,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 26,GPLc,2021,
 26,GPLc,2022,
 26,GPLc,2023,
+26,GPLc,2024,
 26,E85,2007,79.9
 26,E85,2008,81.75
 26,E85,2009,95.26
@@ -1191,6 +1266,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 26,E85,2021,
 26,E85,2022,
 26,E85,2023,
+26,E85,2024,
 26,E10,2009,124.11
 26,E10,2010,137.18
 26,E10,2011,153.14
@@ -1206,6 +1282,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 26,E10,2021,
 26,E10,2022,
 26,E10,2023,
+26,E10,2024,
 26,SP98,2013,159.2
 26,SP98,2014,155.95
 26,SP98,2015,142.56
@@ -1217,6 +1294,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 26,SP98,2021,
 26,SP98,2022,
 26,SP98,2023,
+26,SP98,2024,
 53,Gazole,2007,108.94
 53,Gazole,2008,126.49
 53,Gazole,2009,99.9
@@ -1233,7 +1311,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 53,Gazole,2020,125.11
 53,Gazole,2021,142.18
 53,Gazole,2022,185.0
-53,Gazole,2023,182.0
+53,Gazole,2023,179.0
+53,Gazole,2024,173.0
 53,SP95,2007,128.54
 53,SP95,2008,136.98
 53,SP95,2009,122.34
@@ -1250,7 +1329,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 53,SP95,2020,136.46
 53,SP95,2021,154.95
 53,SP95,2022,183.0
-53,SP95,2023,190.0
+53,SP95,2023,188.0
+53,SP95,2024,185.0
 53,GPLc,2007,72.53
 53,GPLc,2008,74.55
 53,GPLc,2009,64.52
@@ -1268,6 +1348,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 53,GPLc,2021,85.25
 53,GPLc,2022,85.0
 53,GPLc,2023,98.0
+53,GPLc,2024,96.0
 53,E85,2007,81.94
 53,E85,2008,83.0
 53,E85,2009,95.93
@@ -1284,7 +1365,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 53,E85,2020,69.65
 53,E85,2021,68.55
 53,E85,2022,81.0
-53,E85,2023,107.0
+53,E85,2023,106.0
+53,E85,2024,87.0
 53,E10,2009,126.02
 53,E10,2010,137.75
 53,E10,2011,153.39
@@ -1299,7 +1381,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 53,E10,2020,132.27
 53,E10,2021,151.51
 53,E10,2022,176.0
-53,E10,2023,186.0
+53,E10,2023,184.0
+53,E10,2024,180.0
 53,SP98,2013,158.12
 53,SP98,2014,154.89
 53,SP98,2015,141.67
@@ -1310,7 +1393,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 53,SP98,2020,140.64
 53,SP98,2021,159.87
 53,SP98,2022,186.0
-53,SP98,2023,194.0
+53,SP98,2023,192.0
+53,SP98,2024,190.0
 72,Gazole,2007,110.3
 72,Gazole,2008,128.05
 72,Gazole,2009,101.45
@@ -1328,6 +1412,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 72,Gazole,2021,
 72,Gazole,2022,
 72,Gazole,2023,
+72,Gazole,2024,
 72,SP95,2007,129.98
 72,SP95,2008,138.44
 72,SP95,2009,123.85
@@ -1345,6 +1430,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 72,SP95,2021,
 72,SP95,2022,
 72,SP95,2023,
+72,SP95,2024,
 72,GPLc,2007,73.26
 72,GPLc,2008,75.13
 72,GPLc,2009,65.94
@@ -1362,6 +1448,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 72,GPLc,2021,
 72,GPLc,2022,
 72,GPLc,2023,
+72,GPLc,2024,
 72,E85,2007,82.81
 72,E85,2008,86.47
 72,E85,2009,98.13
@@ -1379,6 +1466,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 72,E85,2021,
 72,E85,2022,
 72,E85,2023,
+72,E85,2024,
 72,E10,2009,124.02
 72,E10,2010,138.97
 72,E10,2011,153.66
@@ -1394,6 +1482,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 72,E10,2021,
 72,E10,2022,
 72,E10,2023,
+72,E10,2024,
 72,SP98,2013,159.91
 72,SP98,2014,156.34
 72,SP98,2015,142.92
@@ -1405,6 +1494,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 72,SP98,2021,
 72,SP98,2022,
 72,SP98,2023,
+72,SP98,2024,
 43,Gazole,2007,109.36
 43,Gazole,2008,127.25
 43,Gazole,2009,100.56
@@ -1422,6 +1512,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 43,Gazole,2021,
 43,Gazole,2022,
 43,Gazole,2023,
+43,Gazole,2024,
 43,SP95,2007,128.29
 43,SP95,2008,136.89
 43,SP95,2009,122.83
@@ -1439,6 +1530,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 43,SP95,2021,
 43,SP95,2022,
 43,SP95,2023,
+43,SP95,2024,
 43,GPLc,2007,71.68
 43,GPLc,2008,74.68
 43,GPLc,2009,65.96
@@ -1456,6 +1548,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 43,GPLc,2021,
 43,GPLc,2022,
 43,GPLc,2023,
+43,GPLc,2024,
 43,E85,2007,83.06
 43,E85,2008,87.1
 43,E85,2009,95.62
@@ -1473,6 +1566,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 43,E85,2021,
 43,E85,2022,
 43,E85,2023,
+43,E85,2024,
 43,E10,2009,119.57
 43,E10,2010,131.45
 43,E10,2011,150.71
@@ -1488,6 +1582,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 43,E10,2021,
 43,E10,2022,
 43,E10,2023,
+43,E10,2024,
 43,SP98,2013,159.45
 43,SP98,2014,156.43
 43,SP98,2015,142.88
@@ -1499,6 +1594,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 43,SP98,2021,
 43,SP98,2022,
 43,SP98,2023,
+43,SP98,2024,
 23,Gazole,2007,109.36
 23,Gazole,2008,126.99
 23,Gazole,2009,100.2
@@ -1516,6 +1612,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 23,Gazole,2021,
 23,Gazole,2022,
 23,Gazole,2023,
+23,Gazole,2024,
 23,SP95,2007,129.4
 23,SP95,2008,137.01
 23,SP95,2009,121.76
@@ -1533,6 +1630,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 23,SP95,2021,
 23,SP95,2022,
 23,SP95,2023,
+23,SP95,2024,
 23,GPLc,2007,73.91
 23,GPLc,2008,76.3
 23,GPLc,2009,70.02
@@ -1550,6 +1648,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 23,GPLc,2021,
 23,GPLc,2022,
 23,GPLc,2023,
+23,GPLc,2024,
 23,E85,2007,79.89
 23,E85,2008,82.04
 23,E85,2009,88.1
@@ -1567,6 +1666,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 23,E85,2021,
 23,E85,2022,
 23,E85,2023,
+23,E85,2024,
 23,E10,2009,121.85
 23,E10,2010,133.26
 23,E10,2011,147.63
@@ -1582,6 +1682,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 23,E10,2021,
 23,E10,2022,
 23,E10,2023,
+23,E10,2024,
 23,SP98,2013,158.08
 23,SP98,2014,154.77
 23,SP98,2015,141.78
@@ -1593,6 +1694,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 23,SP98,2021,
 23,SP98,2022,
 23,SP98,2023,
+23,SP98,2024,
 52,Gazole,2007,109.28
 52,Gazole,2008,126.78
 52,Gazole,2009,100.62
@@ -1609,7 +1711,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 52,Gazole,2020,126.31
 52,Gazole,2021,143.28
 52,Gazole,2022,185.0
-52,Gazole,2023,183.0
+52,Gazole,2023,180.0
+52,Gazole,2024,174.0
 52,SP95,2007,128.66
 52,SP95,2008,136.86
 52,SP95,2009,122.57
@@ -1626,7 +1729,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 52,SP95,2020,137.61
 52,SP95,2021,156.55
 52,SP95,2022,184.0
-52,SP95,2023,192.0
+52,SP95,2023,190.0
+52,SP95,2024,187.0
 52,GPLc,2007,71.85
 52,GPLc,2008,75.06
 52,GPLc,2009,65.21
@@ -1644,6 +1748,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 52,GPLc,2021,84.91
 52,GPLc,2022,83.0
 52,GPLc,2023,98.0
+52,GPLc,2024,98.0
 52,E85,2007,83.04
 52,E85,2008,83.97
 52,E85,2009,91.41
@@ -1660,7 +1765,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 52,E85,2020,64.82
 52,E85,2021,67.76
 52,E85,2022,82.0
-52,E85,2023,107.0
+52,E85,2023,106.0
+52,E85,2024,86.0
 52,E10,2009,124.86
 52,E10,2010,137.42
 52,E10,2011,152.05
@@ -1675,7 +1781,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 52,E10,2020,133.41
 52,E10,2021,152.58
 52,E10,2022,177.0
-52,E10,2023,187.0
+52,E10,2023,185.0
+52,E10,2024,182.0
 52,SP98,2013,157.63
 52,SP98,2014,154.23
 52,SP98,2015,141.48
@@ -1686,7 +1793,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 52,SP98,2020,141.59
 52,SP98,2021,160.92
 52,SP98,2022,187.0
-52,SP98,2023,196.0
+52,SP98,2023,194.0
+52,SP98,2024,191.0
 31,Gazole,2007,108.98
 31,Gazole,2008,126.28
 31,Gazole,2009,99.78
@@ -1704,6 +1812,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 31,Gazole,2021,
 31,Gazole,2022,
 31,Gazole,2023,
+31,Gazole,2024,
 31,SP95,2007,128.92
 31,SP95,2008,136.66
 31,SP95,2009,120.75
@@ -1721,6 +1830,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 31,SP95,2021,
 31,SP95,2022,
 31,SP95,2023,
+31,SP95,2024,
 31,GPLc,2007,73.65
 31,GPLc,2008,75.34
 31,GPLc,2009,65.76
@@ -1738,6 +1848,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 31,GPLc,2021,
 31,GPLc,2022,
 31,GPLc,2023,
+31,GPLc,2024,
 31,E85,2007,82.06
 31,E85,2008,84.07
 31,E85,2009,91.43
@@ -1755,6 +1866,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 31,E85,2021,
 31,E85,2022,
 31,E85,2023,
+31,E85,2024,
 31,E10,2009,126.46
 31,E10,2010,136.37
 31,E10,2011,151.83
@@ -1770,6 +1882,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 31,E10,2021,
 31,E10,2022,
 31,E10,2023,
+31,E10,2024,
 31,SP98,2013,158.75
 31,SP98,2014,154.96
 31,SP98,2015,141.6
@@ -1781,6 +1894,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 31,SP98,2021,
 31,SP98,2022,
 31,SP98,2023,
+31,SP98,2024,
 41,Gazole,2007,110.31
 41,Gazole,2008,128.21
 41,Gazole,2009,101.65
@@ -1798,6 +1912,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 41,Gazole,2021,
 41,Gazole,2022,
 41,Gazole,2023,
+41,Gazole,2024,
 41,SP95,2007,129.82
 41,SP95,2008,138.01
 41,SP95,2009,122.82
@@ -1815,6 +1930,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 41,SP95,2021,
 41,SP95,2022,
 41,SP95,2023,
+41,SP95,2024,
 41,GPLc,2007,70.43
 41,GPLc,2008,73.3
 41,GPLc,2009,65.13
@@ -1832,6 +1948,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 41,GPLc,2021,
 41,GPLc,2022,
 41,GPLc,2023,
+41,GPLc,2024,
 41,E85,2007,84.46
 41,E85,2008,89.15
 41,E85,2009,87.39
@@ -1849,6 +1966,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 41,E85,2021,
 41,E85,2022,
 41,E85,2023,
+41,E85,2024,
 41,E10,2009,124.0
 41,E10,2010,134.53
 41,E10,2011,150.7
@@ -1864,6 +1982,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 41,E10,2021,
 41,E10,2022,
 41,E10,2023,
+41,E10,2024,
 41,SP98,2013,159.08
 41,SP98,2014,155.8
 41,SP98,2015,142.5
@@ -1875,6 +1994,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 41,SP98,2021,
 41,SP98,2022,
 41,SP98,2023,
+41,SP98,2024,
 42,Gazole,2007,110.34
 42,Gazole,2008,128.54
 42,Gazole,2009,101.56
@@ -1892,6 +2012,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 42,Gazole,2021,
 42,Gazole,2022,
 42,Gazole,2023,
+42,Gazole,2024,
 42,SP95,2007,128.75
 42,SP95,2008,137.51
 42,SP95,2009,122.91
@@ -1909,6 +2030,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 42,SP95,2021,
 42,SP95,2022,
 42,SP95,2023,
+42,SP95,2024,
 42,GPLc,2007,72.03
 42,GPLc,2008,74.5
 42,GPLc,2009,65.73
@@ -1926,6 +2048,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 42,GPLc,2021,
 42,GPLc,2022,
 42,GPLc,2023,
+42,GPLc,2024,
 42,E85,2007,83.24
 42,E85,2008,85.76
 42,E85,2009,91.13
@@ -1943,6 +2066,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 42,E85,2021,
 42,E85,2022,
 42,E85,2023,
+42,E85,2024,
 42,E10,2009,121.92
 42,E10,2010,136.58
 42,E10,2011,153.5
@@ -1958,6 +2082,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 42,E10,2021,
 42,E10,2022,
 42,E10,2023,
+42,E10,2024,
 42,SP98,2013,159.21
 42,SP98,2014,155.66
 42,SP98,2015,142.84
@@ -1969,6 +2094,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 42,SP98,2021,
 42,SP98,2022,
 42,SP98,2023,
+42,SP98,2024,
 02,Gazole,2007,108.88
 02,Gazole,2008,127.06
 02,Gazole,2009,100.37
@@ -1986,6 +2112,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 02,Gazole,2021,
 02,Gazole,2022,
 02,Gazole,2023,
+02,Gazole,2024,
 02,SP95,2007,129.5
 02,SP95,2008,138.44
 02,SP95,2009,120.08
@@ -2003,6 +2130,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 02,SP95,2021,
 02,SP95,2022,
 02,SP95,2023,
+02,SP95,2024,
 02,E10,2009,124.06
 02,E10,2010,136.68
 02,E10,2011,153.24
@@ -2018,6 +2146,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 02,E10,2021,
 02,E10,2022,
 02,E10,2023,
+02,E10,2024,
 02,SP98,2013,166.63
 02,SP98,2014,160.85
 02,SP98,2015,
@@ -2029,6 +2158,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 02,SP98,2021,
 02,SP98,2022,
 02,SP98,2023,
+02,SP98,2024,
 11,Gazole,2007,111.29
 11,Gazole,2008,128.72
 11,Gazole,2009,101.97
@@ -2045,7 +2175,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 11,Gazole,2020,132.67
 11,Gazole,2021,149.88
 11,Gazole,2022,192.0
-11,Gazole,2023,191.0
+11,Gazole,2023,189.0
+11,Gazole,2024,181.0
 11,SP95,2007,130.14
 11,SP95,2008,137.52
 11,SP95,2009,120.85
@@ -2062,7 +2193,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 11,SP95,2020,139.26
 11,SP95,2021,157.94
 11,SP95,2022,187.0
-11,SP95,2023,196.0
+11,SP95,2023,194.0
+11,SP95,2024,190.0
 11,GPLc,2007,74.74
 11,GPLc,2008,76.21
 11,GPLc,2009,66.75
@@ -2080,6 +2212,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 11,GPLc,2021,87.8
 11,GPLc,2022,87.0
 11,GPLc,2023,101.0
+11,GPLc,2024,100.0
 11,E85,2007,81.29
 11,E85,2008,87.18
 11,E85,2009,93.49
@@ -2097,6 +2230,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 11,E85,2021,73.07
 11,E85,2022,82.0
 11,E85,2023,110.0
+11,E85,2024,88.0
 11,E10,2009,125.98
 11,E10,2010,136.77
 11,E10,2011,151.29
@@ -2111,7 +2245,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 11,E10,2020,138.87
 11,E10,2021,158.44
 11,E10,2022,183.0
-11,E10,2023,195.0
+11,E10,2023,193.0
+11,E10,2024,188.0
 11,SP98,2013,159.64
 11,SP98,2014,155.77
 11,SP98,2015,143.0
@@ -2122,7 +2257,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 11,SP98,2020,147.38
 11,SP98,2021,167.48
 11,SP98,2022,194.0
-11,SP98,2023,203.0
+11,SP98,2023,201.0
+11,SP98,2024,197.0
 04,Gazole,2011,145.25
 04,Gazole,2012,151.12
 04,Gazole,2013,148.01
@@ -2136,6 +2272,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 04,Gazole,2021,
 04,Gazole,2022,
 04,Gazole,2023,
+04,Gazole,2024,
 04,SP95,2011,160.38
 04,SP95,2012,166.04
 04,SP95,2013,
@@ -2149,6 +2286,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 04,SP95,2021,
 04,SP95,2022,
 04,SP95,2023,
+04,SP95,2024,
 04,GPLc,2011,89.16
 04,GPLc,2012,95.33
 04,GPLc,2013,95.17
@@ -2162,6 +2300,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 04,GPLc,2021,
 04,GPLc,2022,
 04,GPLc,2023,
+04,GPLc,2024,
 04,E10,2012,167.32
 04,E10,2013,163.98
 04,E10,2014,156.67
@@ -2174,6 +2313,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 04,E10,2021,
 04,E10,2022,
 04,E10,2023,
+04,E10,2024,
 04,SP98,2013,168.11
 04,SP98,2014,167.19
 04,SP98,2015,
@@ -2185,6 +2325,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 04,SP98,2021,
 04,SP98,2022,
 04,SP98,2023,
+04,SP98,2024,
 84,Gazole,2016,113.38
 84,Gazole,2017,125.87
 84,Gazole,2018,146.3
@@ -2192,7 +2333,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 84,Gazole,2020,128.77
 84,Gazole,2021,145.6
 84,Gazole,2022,188.0
-84,Gazole,2023,186.0
+84,Gazole,2023,183.0
+84,Gazole,2024,177.0
 84,SP95,2016,133.31
 84,SP95,2017,140.76
 84,SP95,2018,153.27
@@ -2200,7 +2342,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 84,SP95,2020,139.27
 84,SP95,2021,157.66
 84,SP95,2022,183.0
-84,SP95,2023,193.0
+84,SP95,2023,192.0
+84,SP95,2024,190.0
 84,SP98,2016,137.88
 84,SP98,2017,145.67
 84,SP98,2018,158.52
@@ -2208,7 +2351,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 84,SP98,2020,144.49
 84,SP98,2021,163.32
 84,SP98,2022,188.0
-84,SP98,2023,199.0
+84,SP98,2023,197.0
+84,SP98,2024,195.0
 84,GPLc,2016,72.54
 84,GPLc,2017,77.1
 84,GPLc,2018,85.18
@@ -2217,6 +2361,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 84,GPLc,2021,87.74
 84,GPLc,2022,89.0
 84,GPLc,2023,102.0
+84,GPLc,2024,102.0
 84,E10,2016,130.23
 84,E10,2017,136.99
 84,E10,2018,149.57
@@ -2224,7 +2369,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 84,E10,2020,136.05
 84,E10,2021,154.55
 84,E10,2022,177.0
-84,E10,2023,191.0
+84,E10,2023,188.0
+84,E10,2024,186.0
 84,E85,2016,81.46
 84,E85,2017,74.13
 84,E85,2018,71.64
@@ -2232,7 +2378,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 84,E85,2020,71.0
 84,E85,2021,71.5
 84,E85,2022,84.0
-84,E85,2023,112.0
+84,E85,2023,111.0
+84,E85,2024,89.0
 27,Gazole,2016,112.75
 27,Gazole,2017,125.46
 27,Gazole,2018,146.26
@@ -2240,7 +2387,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 27,Gazole,2020,128.92
 27,Gazole,2021,145.55
 27,Gazole,2022,189.0
-27,Gazole,2023,186.0
+27,Gazole,2023,183.0
+27,Gazole,2024,177.0
 27,SP95,2016,132.76
 27,SP95,2017,140.08
 27,SP95,2018,153.28
@@ -2248,7 +2396,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 27,SP95,2020,139.17
 27,SP95,2021,157.83
 27,SP95,2022,186.0
-27,SP95,2023,194.0
+27,SP95,2023,192.0
+27,SP95,2024,189.0
 27,E10,2016,130.09
 27,E10,2017,136.77
 27,E10,2018,149.88
@@ -2256,7 +2405,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 27,E10,2020,135.9
 27,E10,2021,154.58
 27,E10,2022,178.0
-27,E10,2023,190.0
+27,E10,2023,188.0
+27,E10,2024,185.0
 27,SP98,2016,137.28
 27,SP98,2017,145.15
 27,SP98,2018,158.45
@@ -2264,7 +2414,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 27,SP98,2020,144.58
 27,SP98,2021,163.06
 27,SP98,2022,190.0
-27,SP98,2023,199.0
+27,SP98,2023,197.0
+27,SP98,2024,194.0
 27,GPLc,2016,72.89
 27,GPLc,2017,77.04
 27,GPLc,2018,88.81
@@ -2273,6 +2424,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 27,GPLc,2021,90.13
 27,GPLc,2022,89.0
 27,GPLc,2023,103.0
+27,GPLc,2024,102.0
 27,E85,2016,86.4
 27,E85,2017,71.16
 27,E85,2018,74.5
@@ -2280,7 +2432,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 27,E85,2020,69.63
 27,E85,2021,69.74
 27,E85,2022,83.0
-27,E85,2023,110.0
+27,E85,2023,109.0
+27,E85,2024,88.0
 32,Gazole,2016,111.21
 32,Gazole,2017,123.61
 32,Gazole,2018,144.26
@@ -2288,7 +2441,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 32,Gazole,2020,126.8
 32,Gazole,2021,143.3
 32,Gazole,2022,186.0
-32,Gazole,2023,184.0
+32,Gazole,2023,181.0
+32,Gazole,2024,175.0
 32,SP95,2016,131.43
 32,SP95,2017,138.61
 32,SP95,2018,151.61
@@ -2296,7 +2450,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 32,SP95,2020,136.81
 32,SP95,2021,155.51
 32,SP95,2022,184.0
-32,SP95,2023,192.0
+32,SP95,2023,190.0
+32,SP95,2024,186.0
 32,SP98,2016,136.3
 32,SP98,2017,143.79
 32,SP98,2018,156.72
@@ -2304,7 +2459,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 32,SP98,2020,141.68
 32,SP98,2021,160.94
 32,SP98,2022,188.0
-32,SP98,2023,196.0
+32,SP98,2023,194.0
+32,SP98,2024,192.0
 32,E10,2016,129.57
 32,E10,2017,136.39
 32,E10,2018,149.19
@@ -2312,7 +2468,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 32,E10,2020,134.89
 32,E10,2021,153.36
 32,E10,2022,178.0
-32,E10,2023,189.0
+32,E10,2023,187.0
+32,E10,2024,183.0
 32,E85,2016,73.88
 32,E85,2017,63.51
 32,E85,2018,64.96
@@ -2321,6 +2478,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 32,E85,2021,67.23
 32,E85,2022,82.0
 32,E85,2023,107.0
+32,E85,2024,87.0
 32,GPLc,2016,70.68
 32,GPLc,2017,74.53
 32,GPLc,2018,82.9
@@ -2328,7 +2486,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 32,GPLc,2020,84.14
 32,GPLc,2021,85.44
 32,GPLc,2022,86.0
-32,GPLc,2023,102.0
+32,GPLc,2023,103.0
+32,GPLc,2024,100.0
 44,Gazole,2016,112.36
 44,Gazole,2017,125.03
 44,Gazole,2018,145.76
@@ -2336,7 +2495,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 44,Gazole,2020,128.16
 44,Gazole,2021,144.79
 44,Gazole,2022,189.0
-44,Gazole,2023,185.0
+44,Gazole,2023,183.0
+44,Gazole,2024,176.0
 44,SP95,2016,132.23
 44,SP95,2017,139.64
 44,SP95,2018,152.28
@@ -2344,7 +2504,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 44,SP95,2020,137.81
 44,SP95,2021,157.24
 44,SP95,2022,185.0
-44,SP95,2023,192.0
+44,SP95,2023,190.0
+44,SP95,2024,187.0
 44,E85,2016,75.86
 44,E85,2017,70.2
 44,E85,2018,72.59
@@ -2352,7 +2513,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 44,E85,2020,69.85
 44,E85,2021,70.11
 44,E85,2022,81.0
-44,E85,2023,109.0
+44,E85,2023,108.0
+44,E85,2024,88.0
 44,SP98,2016,136.87
 44,SP98,2017,144.88
 44,SP98,2018,157.69
@@ -2360,7 +2522,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 44,SP98,2020,142.81
 44,SP98,2021,162.08
 44,SP98,2022,189.0
-44,SP98,2023,197.0
+44,SP98,2023,195.0
+44,SP98,2024,192.0
 44,E10,2016,129.31
 44,E10,2017,136.26
 44,E10,2018,149.02
@@ -2368,7 +2531,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 44,E10,2020,134.78
 44,E10,2021,153.7
 44,E10,2022,178.0
-44,E10,2023,189.0
+44,E10,2023,187.0
+44,E10,2024,183.0
 44,GPLc,2016,70.41
 44,GPLc,2017,73.69
 44,GPLc,2018,82.6
@@ -2376,7 +2540,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 44,GPLc,2020,86.16
 44,GPLc,2021,87.12
 44,GPLc,2022,87.0
-44,GPLc,2023,102.0
+44,GPLc,2023,101.0
+44,GPLc,2024,100.0
 76,Gazole,2016,112.8
 76,Gazole,2017,125.18
 76,Gazole,2018,145.53
@@ -2384,7 +2549,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 76,Gazole,2020,127.93
 76,Gazole,2021,144.79
 76,Gazole,2022,187.0
-76,Gazole,2023,185.0
+76,Gazole,2023,182.0
+76,Gazole,2024,176.0
 76,GPLc,2016,72.5
 76,GPLc,2017,75.77
 76,GPLc,2018,84.03
@@ -2393,6 +2559,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 76,GPLc,2021,88.64
 76,GPLc,2022,89.0
 76,GPLc,2023,103.0
+76,GPLc,2024,102.0
 76,E10,2016,129.44
 76,E10,2017,136.44
 76,E10,2018,148.71
@@ -2400,7 +2567,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 76,E10,2020,135.1
 76,E10,2021,153.72
 76,E10,2022,177.0
-76,E10,2023,189.0
+76,E10,2023,187.0
+76,E10,2024,185.0
 76,SP98,2016,137.45
 76,SP98,2017,145.18
 76,SP98,2018,157.6
@@ -2408,7 +2576,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 76,SP98,2020,143.24
 76,SP98,2021,162.09
 76,SP98,2022,187.0
-76,SP98,2023,197.0
+76,SP98,2023,195.0
+76,SP98,2024,194.0
 76,SP95,2016,133.36
 76,SP95,2017,140.78
 76,SP95,2018,153.45
@@ -2416,7 +2585,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 76,SP95,2020,139.65
 76,SP95,2021,157.84
 76,SP95,2022,184.0
-76,SP95,2023,194.0
+76,SP95,2023,192.0
+76,SP95,2024,189.0
 76,E85,2016,77.36
 76,E85,2017,72.63
 76,E85,2018,71.41
@@ -2425,6 +2595,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 76,E85,2021,69.82
 76,E85,2022,83.0
 76,E85,2023,110.0
+76,E85,2024,88.0
 28,Gazole,2016,111.7
 28,Gazole,2017,123.86
 28,Gazole,2018,144.43
@@ -2432,7 +2603,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 28,Gazole,2020,126.89
 28,Gazole,2021,143.65
 28,Gazole,2022,186.0
-28,Gazole,2023,184.0
+28,Gazole,2023,181.0
+28,Gazole,2024,175.0
 28,GPLc,2016,73.27
 28,GPLc,2017,76.0
 28,GPLc,2018,84.05
@@ -2441,6 +2613,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 28,GPLc,2021,87.49
 28,GPLc,2022,86.0
 28,GPLc,2023,99.0
+28,GPLc,2024,100.0
 28,E10,2016,129.2
 28,E10,2017,136.05
 28,E10,2018,149.27
@@ -2448,7 +2621,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 28,E10,2020,134.84
 28,E10,2021,153.36
 28,E10,2022,178.0
-28,E10,2023,189.0
+28,E10,2023,187.0
+28,E10,2024,183.0
 28,SP98,2016,136.7
 28,SP98,2017,144.3
 28,SP98,2018,157.46
@@ -2456,7 +2630,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 28,SP98,2020,142.34
 28,SP98,2021,161.37
 28,SP98,2022,188.0
-28,SP98,2023,196.0
+28,SP98,2023,194.0
+28,SP98,2024,192.0
 28,SP95,2016,131.92
 28,SP95,2017,138.93
 28,SP95,2018,151.95
@@ -2464,7 +2639,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 28,SP95,2020,137.01
 28,SP95,2021,156.16
 28,SP95,2022,185.0
-28,SP95,2023,192.0
+28,SP95,2023,190.0
+28,SP95,2024,186.0
 28,E85,2016,80.39
 28,E85,2017,67.54
 28,E85,2018,67.1
@@ -2472,7 +2648,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 28,E85,2020,64.65
 28,E85,2021,66.67
 28,E85,2022,82.0
-28,E85,2023,108.0
+28,E85,2023,107.0
+28,E85,2024,87.0
 75,Gazole,2016,112.03
 75,Gazole,2017,124.91
 75,Gazole,2018,145.05
@@ -2480,7 +2657,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 75,Gazole,2020,127.67
 75,Gazole,2021,144.09
 75,Gazole,2022,187.0
-75,Gazole,2023,184.0
+75,Gazole,2023,181.0
+75,Gazole,2024,175.0
 75,SP95,2016,133.0
 75,SP95,2017,140.46
 75,SP95,2018,153.04
@@ -2488,7 +2666,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 75,SP95,2020,138.7
 75,SP95,2021,156.85
 75,SP95,2022,184.0
-75,SP95,2023,192.0
+75,SP95,2023,190.0
+75,SP95,2024,187.0
 75,E85,2016,78.29
 75,E85,2017,68.83
 75,E85,2018,68.18
@@ -2497,6 +2676,7 @@ region,carburant,annee,prix_moyen_par_hectolitre
 75,E85,2021,69.14
 75,E85,2022,82.0
 75,E85,2023,107.0
+75,E85,2024,87.0
 75,SP98,2016,136.85
 75,SP98,2017,144.89
 75,SP98,2018,157.69
@@ -2504,7 +2684,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 75,SP98,2020,142.62
 75,SP98,2021,161.74
 75,SP98,2022,189.0
-75,SP98,2023,196.0
+75,SP98,2023,194.0
+75,SP98,2024,192.0
 75,E10,2016,128.87
 75,E10,2017,136.34
 75,E10,2018,148.92
@@ -2512,7 +2693,8 @@ region,carburant,annee,prix_moyen_par_hectolitre
 75,E10,2020,134.62
 75,E10,2021,153.48
 75,E10,2022,179.0
-75,E10,2023,188.0
+75,E10,2023,186.0
+75,E10,2024,183.0
 75,GPLc,2016,70.9
 75,GPLc,2017,75.21
 75,GPLc,2018,83.85
@@ -2521,3 +2703,4 @@ region,carburant,annee,prix_moyen_par_hectolitre
 75,GPLc,2021,87.1
 75,GPLc,2022,86.0
 75,GPLc,2023,100.0
+75,GPLc,2024,100.0
