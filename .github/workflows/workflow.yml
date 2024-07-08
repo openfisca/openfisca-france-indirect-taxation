@@ -62,7 +62,7 @@ jobs:
       - name: check-style
         run: make check-style
 
-  test:
+  test_carbuants:
     runs-on: ubuntu-20.04
     needs: [ build ]
     steps:
@@ -80,4 +80,6 @@ jobs:
           path: ${{ env.pythonLocation }}
           key: build-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ github.sha }}-ubuntu-20.04
       - name: Test carburants
+        run: openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/*carbu*
+      - name: Test TVA
         run: openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/*carbu*
