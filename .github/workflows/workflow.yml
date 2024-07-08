@@ -62,7 +62,7 @@ jobs:
       - name: check-style
         run: make check-style
 
-  test_carbuants:
+  tests:
     runs-on: ubuntu-20.04
     needs: [ build ]
     steps:
