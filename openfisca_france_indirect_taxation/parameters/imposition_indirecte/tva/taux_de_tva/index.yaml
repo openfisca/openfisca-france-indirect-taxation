@@ -1,130 +1,4 @@
-description: Taux de TVA (1968-2016)
-taux_reduit:
-  description: Taux réduit
-  values:
-    1982-07-01:
-      value: 0.055
-    1972-01-01:
-      value: 0.07
-    1970-01-01:
-      value: 0.075
-    1968-12-01:
-      value: 0.07
-    1955-07-01:
-      value: 0.1
-    1954-07-01:
-      value: 0.075
-  metadata:
-    ipp_csv_id: tx_reduit
-    unit: /1
-taux_intermediaire:
-  description: Taux intermédiaire
-  values:
-    2014-01-01:
-      value: 0.1
-    2012-01-01:
-      value: 0.07
-    1991-07-29:
-      value: null
-    1986-07-01:
-      value: 0.13
-    1977-01-01:
-      value: null
-    1970-01-01:
-      value: 0.176
-    1968-12-01:
-      value: 0.15
-    1955-07-01:
-      value: 0.12
-    1954-07-01:
-      value: null
-  metadata:
-    ipp_csv_id: tx_inter
-    unit: /1
-taux_normal:
-  description: Taux normal
-  values:
-    2014-01-01:
-      value: 0.2
-    2000-04-01:
-      value: 0.196
-    1995-08-01:
-      value: 0.206
-    1982-07-01:
-      value: 0.186
-    1977-01-01:
-      value: 0.176
-    1972-01-01:
-      value: 0.2
-    1970-01-01:
-      value: 0.23
-    1968-12-01:
-      value: 0.19
-    1955-07-01:
-      value: 0.195
-    1954-07-01:
-      value: 0.165
-  metadata:
-    ipp_csv_id: tx_normal
-    unit: /1
-taux_majore:
-  description: Taux majoré
-  values:
-    1993-01-01:
-      value: null
-    1990-09-13:
-      value: 0.22
-    1990-01-01:
-      value: 0.25
-    1989-01-01:
-      value: 0.28
-    1970-01-01:
-      value: 0.3333
-    1968-12-01:
-      value: 0.25
-    1954-07-01:
-      value: null
-  metadata:
-    ipp_csv_id: tx_maj
-    unit: /1
-taux_particulier_super_reduit:
-  description: Taux particulier ("super réduit")
-  values:
-    1986-07-01:
-      value: 0.021
-    1954-07-01:
-      value: null
-  metadata:
-    ipp_csv_id: tx_superreduit
-    unit: /1
-taux_reduit_2:
-  description: Taux réduit 2
-  values:
-    1989-01-01:
-      value: null
-    1982-07-01:
-      value: 0.07
-    1954-07-01:
-      value: null
-  metadata:
-    ipp_csv_id: tx_reduit2
-    unit: /1
-taux_normal_majore_temporaire:
-  description: Taux normal ou majoré temporaire
-  values:
-    1990-01-01:
-      value: null
-    1989-09-08:
-      value: 0.28
-    1989-01-01:
-      value: null
-    1987-09-17:
-      value: 0.28
-    1954-07-01:
-      value: null
-  metadata:
-    ipp_csv_id: tx_majtempo
-    unit: /1
+description: TVA
 metadata:
   order:
   - taux_reduit
@@ -134,6 +8,7 @@ metadata:
   - taux_particulier_super_reduit
   - taux_reduit_2
   - taux_normal_majore_temporaire
+  label_en: Value added tax (VAT)
   reference:
     2014-01-01:
       title: Loi 2012-1510 du 29/12/2012
@@ -196,7 +71,6 @@ metadata:
     1968-12-01: 1968-11-30
     1955-07-01: 1955-05-03
     1954-07-01: 1954-04-11
-  label_en: TVA rates (1968-2016)
 documentation: |
   Notes :
   "Le montant de TVA est appliqué au prix TTC jusqu'au 1er janvier 1970, puis au prix hors taxe depuis."
