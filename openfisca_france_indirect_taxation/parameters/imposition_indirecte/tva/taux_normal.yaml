@@ -21,6 +21,7 @@ values:
   1954-07-01:
     value: 0.165
 metadata:
+  last_value_still_valid_on: "2024-07-08"
   ipp_csv_id: tx_normal
   unit: /1
   reference:

@@ -13,6 +13,7 @@ values:
   1954-07-01:
     value: 0.075
 metadata:
+  last_value_still_valid_on: "2024-07-08"
   ipp_csv_id: tx_reduit
   unit: /1
   reference:

@@ -1,11 +1,11 @@
 description: Taux réduit 2
 values:
   1989-01-01:
-    value: null
+    value:
   1982-07-01:
     value: 0.07
   1954-07-01:
-    value: null
+    value:
 metadata:
   ipp_csv_id: tx_reduit2
   unit: /1

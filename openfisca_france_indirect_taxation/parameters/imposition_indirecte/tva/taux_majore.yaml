@@ -15,5 +15,6 @@ values:
   1954-07-01:
     value:
 metadata:
+  last_value_still_valid_on: "2024-07-08"
   ipp_csv_id: tx_maj
   unit: /1
