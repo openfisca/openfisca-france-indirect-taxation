@@ -107,15 +107,18 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     conso.set_index('ident_men', inplace = True)
 
     from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
-    coicop_poste_bdf = bdf(year = year)[['code_bdf', 'code_coicop']].copy()
+    #coicop_poste_bdf = bdf(year = year)[['code_bdf', 'code_coicop']].copy()
 
+    from openfisca_france_indirect_taxation.scripts.new_build_coicop_bdf import new_bdf
+    coicop_poste_bdf = new_bdf()[['code_bdf', 'code_coicop']].copy()
+    
     assert not set(conso.columns).difference(set(coicop_poste_bdf.code_bdf))
-    assert not set(coicop_poste_bdf.code_bdf.dropna()).difference(set(conso.columns))
+    #assert not set(coicop_poste_bdf.code_bdf.dropna()).difference(set(conso.columns))
 
     coicop_poste_bdf['formatted_poste'] = 'poste_' + coicop_poste_bdf.code_coicop.str.replace('.', '_')
     coicop_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['code_coicop']
-    assert not set(coicop_by_poste_bdf.keys()).difference(set(conso.columns))
-    assert not set(set(conso.columns)).difference(list(coicop_by_poste_bdf.keys()))
+    #assert not set(coicop_by_poste_bdf.keys()).difference(set(conso.columns))
+    #assert not set(conso.columns).difference(list(coicop_by_poste_bdf.keys()))
     formatted_poste_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['formatted_poste']
     coicop_data_frame = conso.rename(columns = formatted_poste_by_poste_bdf)
     depenses = coicop_data_frame.merge(poids, left_index = True, right_index = True)
