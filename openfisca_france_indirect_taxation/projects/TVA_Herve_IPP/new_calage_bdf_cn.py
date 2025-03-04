@@ -1,0 +1,169 @@
+import pandas as pd
+import os 
+import csv 
+
+from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
+from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
+from openfisca_survey_manager.survey_collections import SurveyCollection
+from openfisca_survey_manager import default_config_files_directory as config_files_directory
+
+
+def new_get_bdf_aggregates(data_year = None):
+    assert data_year is not None
+    depenses = get_input_data_frame(2017)
+    liste_variables = depenses.columns.tolist()
+    liste_postes = [element for element in liste_variables if element[:6] == 'poste_']
+
+    bdf_aggregates_by_poste = pd.DataFrame()
+    for poste in liste_postes:
+        bdf_aggregates_by_poste.loc[poste, 'bdf_aggregates'] = (depenses[poste] * depenses['pondmen']).sum()
+        
+    return bdf_aggregates_by_poste
+
+def remove_prefixes(lst):
+    lst_sorted = sorted(lst, key = len, reverse = True)
+    filtered = []
+    
+    for item in lst_sorted:
+        if not any(item != other and item in other for other in filtered):
+            filtered.append(item)
+    
+    return filtered
+
+def format_poste(code):
+    if code.startswith("poste_"):
+        num_part = code[6:] 
+        formatted_num = "_".join([num_part[:2]] + list(num_part[2:]))
+        return f"poste_{formatted_num}"
+    return code
+
+ajust_postes_cn = {
+    'CP0942' : 'CP09421', #Location, entretien et réparation de gros biens durables à fonction récréactive (S)
+    'CP0943' : 'CP09422', #Location et réparation de jeux, jouets et articles de loisirs (S)
+    'CP0944' : 'CP09423', #Location et réparaton d'articles de sport, de matériel de camping et activités de plein air (S)
+    'CP0946' : 'CP09424', #Services récréatifs et sportifs (S)
+    'CP0945' : 'CP09631', #Services vétérinaires et autres pour animaux de companies
+    'CP0963' : 'CP09632', #Services photographiques
+}
+
+def new_get_cn_aggregates(target_year) :
+    parametres_fiscalite_file_path = os.path.join(
+            assets_directory,
+            'legislation',
+            'conso_eff_fonction_2023.xls'
+            )
+
+    masses_cn_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "MEURcour", header = 4)
+    masses_cn_data_frame.rename(columns={'Unnamed: 0' : 'Code' , 'Unnamed: 1' : 'Label'}, inplace = True)
+    masses_cn_data_frame = masses_cn_data_frame.loc[:, ['Code', '{}'.format(target_year)]].copy()
+    masses_cn_data_frame.replace(to_replace = ajust_postes_cn, inplace= True)
+    masses_cn_data_frame.loc[:,'Code'] = masses_cn_data_frame.loc[:,'Code'].str.replace(r'^CP','',regex=True)
+    masses_cn_data_frame.loc[:,'Code'] = masses_cn_data_frame.loc[:,'Code'].str.strip()
+
+    masses_cn_data_frame.dropna(inplace = True)
+    masses_cn_data_frame.loc[:,'Code'] = masses_cn_data_frame['Code'].astype(str).apply(lambda x: f"poste_{x}")
+    masses_cn_data_frame.loc[:,'Code'] = masses_cn_data_frame['Code'].astype(str).apply(lambda x: format_poste(x))
+
+    # On garde les agrégats à un niveau supérieur pour correspondre à Bdf
+    masses_cn_data_frame = masses_cn_data_frame[~masses_cn_data_frame['Code'].isin(['poste_05_1_1','poste_05_1_2','poste_05_2_1', 'poste_05_2_2'])]
+    # On regroupe certains postes de consommation sous la même étiquette 
+    new_index = masses_cn_data_frame.index.max() + 1
+    masses_cn_data_frame.loc[new_index] = masses_cn_data_frame[masses_cn_data_frame['Code'].isin(['poste_09_4_2_1', 'poste_09_4_2_2', 'poste_09_4_2_3', 'poste_09_4_2_4'])].sum(numeric_only=True)
+    masses_cn_data_frame.loc[new_index, 'Code'] = 'poste_09_4_2'
+    masses_cn_data_frame = masses_cn_data_frame[~masses_cn_data_frame['Code'].isin(['poste_09_4_2_1', 'poste_09_4_2_2', 'poste_09_4_2_3', 'poste_09_4_2_4'])]
+
+    new_index = masses_cn_data_frame.index.max() + 1
+    masses_cn_data_frame.loc[new_index] = masses_cn_data_frame[masses_cn_data_frame['Code'].isin(['poste_09_6_3_1', 'poste_09_6_3_2'])].sum(numeric_only=True)
+    masses_cn_data_frame.loc[new_index, 'Code'] = 'poste_09_6_3'
+    masses_cn_data_frame = masses_cn_data_frame[~masses_cn_data_frame['Code'].isin(['poste_09_6_3_1', 'poste_09_6_3_2'])]
+
+    liste_postes_cn = remove_prefixes(masses_cn_data_frame['Code'].tolist())
+    liste_postes_cn.remove('poste__Z')
+    liste_12postes = ["poste_0{}".format(i) for i in range(1, 10)] + ["poste_10", "poste_11", "poste_12"]
+    liste_postes_cn = [element for element in liste_postes_cn if element[:8] in liste_12postes]
+
+    masses_cn_postes_data_frame = masses_cn_data_frame.loc[masses_cn_data_frame['Code'].isin(liste_postes_cn)]
+    masses_cn_postes_data_frame.set_index('Code', inplace = True)
+    masses_cn_postes_data_frame.rename(columns= {'{}'.format(target_year): 'conso_CN_{}'.format(target_year)}, inplace= True)
+
+    return masses_cn_postes_data_frame*1e6
+
+def new_get_inflators_bdf_to_cn(data_year):
+    data_cn = new_get_cn_aggregates(data_year)
+    liste_postes_cn = data_cn.index.tolist()
+
+    data_bdf = new_get_bdf_aggregates(data_year)
+    data_bdf_postes_cn = pd.DataFrame()
+    liste_postes_bdf = data_bdf.index.tolist()
+
+    data_bdf_postes_cn = pd.DataFrame(index=[0])
+    for poste in liste_postes_cn:
+        data_bdf_postes_cn[poste] = 0
+        for element in liste_postes_bdf:
+            if poste in element:
+                data_bdf_postes_cn[poste] += float(data_bdf.loc[element])
+    data_bdf_postes_cn = data_bdf_postes_cn.transpose()
+    data_bdf_postes_cn.rename(columns={0 : 'bdf_aggregates'}, inplace = True)
+
+    masses = data_cn.merge(data_bdf_postes_cn, left_index = True, right_index = True)
+    masses.rename(columns = {'bdf_aggregates': 'conso_bdf{}'.format(data_year)}, inplace = True)
+    
+    inflators_bdf_to_cn = (masses['conso_CN_{}'.format(data_year)] / masses['conso_bdf{}'.format(data_year)]).to_dict()
+    return {k : v for k,v in inflators_bdf_to_cn.items() if v!= float('inf')}
+
+def new_get_inflators_cn_to_cn(target_year, data_year):
+    '''Calcule l'inflateur de vieillissement à partir des masses de comptabilité nationale.'''
+    data_year_cn_aggregates = new_get_cn_aggregates(data_year)['conso_CN_{}'.format(data_year)].to_dict()
+    target_year_cn_aggregates = new_get_cn_aggregates(target_year)['conso_CN_{}'.format(target_year)].to_dict()
+
+    return dict(
+        (key, target_year_cn_aggregates[key] / data_year_cn_aggregates[key])
+        for key in list(data_year_cn_aggregates.keys())
+    )
+    
+def new_get_inflators(target_year,data_year):
+    '''
+    Fonction qui calcule les ratios de calage (bdf sur cn pour année de données) et de vieillissement
+    à partir des masses de comptabilité nationale et des masses de consommation de bdf.
+    '''
+    inflators_bdf_to_cn = new_get_inflators_bdf_to_cn(data_year)
+    inflators_cn_to_cn = new_get_inflators_cn_to_cn(target_year,data_year)
+    
+    tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
+    liste_variables = list(tax_benefit_system.variables.keys())
+    ratio_by_variable = dict()
+    for element in liste_variables:
+            for key in list(inflators_cn_to_cn.keys()):
+                if key in list(inflators_bdf_to_cn.keys()):
+                    if key in element:
+                        ratio_by_variable[element] = inflators_bdf_to_cn[key] * inflators_cn_to_cn[key]
+
+    return ratio_by_variable
+
+def new_get_inflators_by_year(rebuild = False, year_range = None, data_year = None):
+    if year_range is None:
+        year_range = range(2000, 2020)
+
+    if rebuild is not False:
+        inflators_by_year = dict()
+        for target_year in year_range:
+            inflators = new_get_inflators(target_year = target_year, data_year = data_year)
+            inflators_by_year[target_year] = inflators
+
+        writer_inflators = csv.writer(open(os.path.join(assets_directory, 'inflateurs', 'new_inflators_by_year.csv'), 'w'))
+        for year in year_range:
+            for key, value in list(inflators_by_year[year].items()):
+                writer_inflators.writerow([key, value, year])
+
+        return inflators_by_year
+    else:
+        re_build_inflators = dict()
+        inflators_from_csv = pd.read_csv(os.path.join(assets_directory, 'inflateurs', 'new_inflators_by_year.csv'),
+            index_col = 0, header = None)
+        for year in year_range:
+            inflators_from_csv_by_year = inflators_from_csv[inflators_from_csv[2] == year]
+            inflators_to_dict = pd.DataFrame.to_dict(inflators_from_csv_by_year)
+            inflators = inflators_to_dict[1]
+            re_build_inflators[year] = inflators
+
+        return re_build_inflators
