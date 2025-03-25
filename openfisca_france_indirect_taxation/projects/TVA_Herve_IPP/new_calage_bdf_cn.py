@@ -10,9 +10,9 @@ from openfisca_survey_manager import default_config_files_directory as config_fi
 
 def new_get_bdf_aggregates(data_year = None):
     assert data_year is not None
-    depenses = get_input_data_frame(2017)
+    depenses = get_input_data_frame(data_year)
     liste_variables = depenses.columns.tolist()
-    liste_postes = [element for element in liste_variables if element[:6] == 'poste_']
+    liste_postes = [element for element in liste_variables if element[:6] == 'poste_'] + ['rev_disponible', 'rev_disp_yc_loyerimpute', 'loyer_impute']
 
     bdf_aggregates_by_poste = pd.DataFrame()
     for poste in liste_postes:
@@ -44,9 +44,23 @@ ajust_postes_cn = {
     'CP0946' : 'CP09424', #Services récréatifs et sportifs (S)
     'CP0945' : 'CP09631', #Services vétérinaires et autres pour animaux de companies
     'CP0963' : 'CP09632', #Services photographiques
+    'CP081'  : 'CP0811' , #Matériel d'information et de communication
+    'CP082'  : 'CP0812' , #Logiciels à l'exclusion des jeux 
+    'CP102'  : 'CP1021' , #Enseignement secondaire
+    'CP103'  : 'CP1022' , #Enseignement post-secondaire non supérieur
 }
 
+def sum_and_remove(data_frame, col, rows_to_sum, new_row) :
+    data = data_frame.copy()
+    new_index = data.index.max() + 1
+    data.loc[new_index] = data[data[col].isin(rows_to_sum)].sum(numeric_only=True)
+    data.loc[new_index, col ] = new_row
+    data = data[~data[col].isin(rows_to_sum)]
+    
+    return data
+
 def new_get_cn_aggregates(target_year) :
+    # Dépenses de conso
     parametres_fiscalite_file_path = os.path.join(
             assets_directory,
             'legislation',
@@ -65,27 +79,63 @@ def new_get_cn_aggregates(target_year) :
     masses_cn_data_frame.loc[:,'Code'] = masses_cn_data_frame['Code'].astype(str).apply(lambda x: format_poste(x))
 
     # On garde les agrégats à un niveau supérieur pour correspondre à Bdf
-    masses_cn_data_frame = masses_cn_data_frame[~masses_cn_data_frame['Code'].isin(['poste_05_1_1','poste_05_1_2','poste_05_2_1', 'poste_05_2_2'])]
+    masses_cn_data_frame = masses_cn_data_frame[~masses_cn_data_frame['Code'].isin(['poste_04_2_1', 'poste_04_2_2','poste_05_1_1','poste_05_1_2','poste_05_2_1', 'poste_05_2_2'])]
+    
     # On regroupe certains postes de consommation sous la même étiquette 
-    new_index = masses_cn_data_frame.index.max() + 1
-    masses_cn_data_frame.loc[new_index] = masses_cn_data_frame[masses_cn_data_frame['Code'].isin(['poste_09_4_2_1', 'poste_09_4_2_2', 'poste_09_4_2_3', 'poste_09_4_2_4'])].sum(numeric_only=True)
-    masses_cn_data_frame.loc[new_index, 'Code'] = 'poste_09_4_2'
-    masses_cn_data_frame = masses_cn_data_frame[~masses_cn_data_frame['Code'].isin(['poste_09_4_2_1', 'poste_09_4_2_2', 'poste_09_4_2_3', 'poste_09_4_2_4'])]
+    masses_cn_data_frame = sum_and_remove(data_frame = masses_cn_data_frame,
+                                          col = 'Code',
+                                          rows_to_sum = ['poste_08_1_1', 'poste_08_1_2'],
+                                          new_row = 'poste_08_1' )
 
-    new_index = masses_cn_data_frame.index.max() + 1
-    masses_cn_data_frame.loc[new_index] = masses_cn_data_frame[masses_cn_data_frame['Code'].isin(['poste_09_6_3_1', 'poste_09_6_3_2'])].sum(numeric_only=True)
-    masses_cn_data_frame.loc[new_index, 'Code'] = 'poste_09_6_3'
-    masses_cn_data_frame = masses_cn_data_frame[~masses_cn_data_frame['Code'].isin(['poste_09_6_3_1', 'poste_09_6_3_2'])]
+    masses_cn_data_frame = sum_and_remove(data_frame = masses_cn_data_frame,
+                                          col = 'Code',
+                                          rows_to_sum = ['poste_09_4_2_1', 'poste_09_4_2_2', 'poste_09_4_2_3', 'poste_09_4_2_4'],
+                                          new_row = 'poste_09_4_2' )
 
+    masses_cn_data_frame = sum_and_remove(data_frame = masses_cn_data_frame,
+                                          col = 'Code',
+                                          rows_to_sum = ['poste_09_6_3_1', 'poste_09_6_3_2'],
+                                          new_row = 'poste_09_6_3' )
+
+    masses_cn_data_frame = sum_and_remove(data_frame = masses_cn_data_frame,
+                                          col = 'Code',
+                                          rows_to_sum = ['poste_10_2_1', 'poste_10_2_2'],
+                                          new_row = 'poste_10_2' )
+    # On ajoute les lignes "Autres dépenses de ..." pour chaque poste agrégé et on les mets à 0
+    liste_postes_nuls = ['poste_01_3_1', 'poste_02_5_1', 'poste_03_3_1', 'poste_04_6_1' , 'poste_05_7_1', 'poste_07_1_4','poste_07_5_1',
+                         'poste_08_4_1', 'poste_09_9_1', 'poste_10_6_1', 'poste_11_1_3', 'poste_12_3_3_1','poste_12_8_1', 'poste_12_9_1']
+    for poste in liste_postes_nuls :
+        masses_cn_data_frame = sum_and_remove(masses_cn_data_frame, 'Code', [], poste)
+    
     liste_postes_cn = remove_prefixes(masses_cn_data_frame['Code'].tolist())
     liste_postes_cn.remove('poste__Z')
-    liste_12postes = ["poste_0{}".format(i) for i in range(1, 10)] + ["poste_10", "poste_11", "poste_12"]
-    liste_postes_cn = [element for element in liste_postes_cn if element[:8] in liste_12postes]
+    liste_13postes = ["poste_0{}".format(i) for i in range(1, 10)] + ["poste_10", "poste_11", "poste_12", "poste_13"]
+    liste_postes_cn = [element for element in liste_postes_cn if element[:8] in liste_13postes]
 
     masses_cn_postes_data_frame = masses_cn_data_frame.loc[masses_cn_data_frame['Code'].isin(liste_postes_cn)]
     masses_cn_postes_data_frame.set_index('Code', inplace = True)
     masses_cn_postes_data_frame.rename(columns= {'{}'.format(target_year): 'conso_CN_{}'.format(target_year)}, inplace= True)
 
+    # Revenus 
+    parametres_fiscalite_file_path = os.path.join(
+        assets_directory,
+        'legislation',
+        'T_2101_2023.xls'
+        )
+    revenus_cn = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "T_2101", header = 4)
+    revenus_cn.rename(columns={'Unnamed: 0' : 'Code' , 'Unnamed: 1' : 'Label'}, inplace = True)
+    revenus_cn = revenus_cn.loc[revenus_cn['Label'] == 'Revenu disponible brut']
+    revenus_cn  = revenus_cn.loc[revenus_cn['2017'] > 1000] # On enlève la ligne "Evolution en (%)"
+    revenus_cn.replace({'B6G' : 'rev_disp_yc_loyerimpute'}, inplace= True)
+    revenus_cn = revenus_cn[['Code','{}'.format(target_year)]]
+    revenus_cn.loc[:,'{}'.format(target_year)] = revenus_cn.loc[:,'{}'.format(target_year)] * 1e3
+    revenus_cn.set_index('Code', inplace = True)
+    revenus_cn.rename(columns= {'{}'.format(target_year): 'conso_CN_{}'.format(target_year)}, inplace= True)
+    
+    masses_cn_postes_data_frame = masses_cn_postes_data_frame.append(revenus_cn)
+    masses_cn_postes_data_frame.rename({'poste_04_2' : 'loyer_impute'}, inplace = True)
+    masses_cn_postes_data_frame.loc['rev_disponible'] = masses_cn_postes_data_frame.loc['rev_disp_yc_loyerimpute'] - masses_cn_postes_data_frame.loc['loyer_impute']
+       
     return masses_cn_postes_data_frame*1e6
 
 def new_get_inflators_bdf_to_cn(data_year):
@@ -116,10 +166,11 @@ def new_get_inflators_cn_to_cn(target_year, data_year):
     data_year_cn_aggregates = new_get_cn_aggregates(data_year)['conso_CN_{}'.format(data_year)].to_dict()
     target_year_cn_aggregates = new_get_cn_aggregates(target_year)['conso_CN_{}'.format(target_year)].to_dict()
 
-    return dict(
-        (key, target_year_cn_aggregates[key] / data_year_cn_aggregates[key])
-        for key in list(data_year_cn_aggregates.keys())
-    )
+    ratios =  { key : (target_year_cn_aggregates[key] / data_year_cn_aggregates[key])
+        if data_year_cn_aggregates[key] != 0 else 0 
+        for key in list(data_year_cn_aggregates.keys())}
+    return ratios
+    
     
 def new_get_inflators(target_year,data_year):
     '''
@@ -128,17 +179,19 @@ def new_get_inflators(target_year,data_year):
     '''
     inflators_bdf_to_cn = new_get_inflators_bdf_to_cn(data_year)
     inflators_cn_to_cn = new_get_inflators_cn_to_cn(target_year,data_year)
-    
+
     tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
     liste_variables = list(tax_benefit_system.variables.keys())
     ratio_by_variable = dict()
     for element in liste_variables:
+        if element[:6] == 'poste_' or element[:8] == 'rev_disp' or element == 'loyer_impute':
             for key in list(inflators_cn_to_cn.keys()):
                 if key in list(inflators_bdf_to_cn.keys()):
                     if key in element:
                         ratio_by_variable[element] = inflators_bdf_to_cn[key] * inflators_cn_to_cn[key]
 
     return ratio_by_variable
+
 
 def new_get_inflators_by_year(rebuild = False, year_range = None, data_year = None):
     if year_range is None:

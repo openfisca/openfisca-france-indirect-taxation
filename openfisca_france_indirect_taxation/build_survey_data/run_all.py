@@ -106,12 +106,12 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
 
     if year_data == 2011:
         nullified_variables = ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
-            'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']
+            'rev_disp_yc_loyerimpute', 'rev_disponible', 'loyer_impute']
         data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
 
     if year_data == 2017:
         nullified_variables = ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
-            'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute', 'aidlog2']
+            'rev_disp_yc_loyerimpute', 'rev_disponible', 'loyer_impute', 'aidlog2']
         data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
 
     if year_data == 2005:

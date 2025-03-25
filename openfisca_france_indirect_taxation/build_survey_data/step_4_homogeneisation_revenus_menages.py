@@ -370,6 +370,6 @@ In loyers_imputes and not in revenus:
         revenus = revenus.merge(loyers_imputes, left_index = True, right_index = True)
         revenus['rev_disponible'] = revenus.revtot - revenus.impot_revenu - revenus.imphab
         revenus['rev_disponible'] = revenus['rev_disponible'] * (revenus['rev_disponible'] >= 0)
-        revenus['rev_disp_loyerimput'] = revenus.rev_disponible + revenus.loyer_impute
+        revenus['rev_disp_yc_loyerimpute'] = revenus.rev_disponible + revenus.loyer_impute
         temporary_store["revenus_{}".format(year)] = revenus
         temporary_store.close()

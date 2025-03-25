@@ -46,9 +46,11 @@ adjust_to_cn_nomenclature = {
     '05.5.1.3' : '05.5.3.1' , #Réparation du gros outillage
     '05.5.2.3' : '05.5.3.2' , #Réparation des petits outillages
     '08.1.1.1' : '07.4.1.1' , #Services postaux
+    '07.3.6.1' : '07.4.9.1' , #Autres services de transports 
     '07.4.1.1' : '07.5.1.1' , #Autres dépenses de transport : cérémonie, séjours hors domicile, personnes vivant hors du domicile au moins un jour par semaine
     '07.4.1.2' : '07.5.1.2' , #Autres dépenses de transport : cadeau offert (à destination d’un autre ménage)
     '08.1.3.1' : '08.3.1.1' , #Services de téléphone, internet, recharges téléphoniques
+    '08.1.4.1' : '08.4.1.1' , #Autres dépenses de communications : cadeau offert (à destination d'un autre ménage)
     '09.1.1.1' : '09.1.2.1' , #Appareils de réception, d’enregistrement et de reproduction du son
     '09.1.1.2' : '09.1.2.2' , #Téléviseurs, home cinéma, lecteur DVD de salon et portables
     '09.1.2.1' : '09.1.1.1' , #Equipement photographique et cinématographique
@@ -101,7 +103,7 @@ adjust_to_cn_nomenclature = {
     '12.7.1.2' : '13.9.1.2' , #Caution pour la location d'un logement
     '13.1.1.1' : '17.1.1.1' , #Impôts et taxes de la résidence principale
     '13.1.2.1' : '17.1.2.1' , #Impôts et taxes pour une résidence secondaire ou un autre logement
-    '13.1.2.1' : '17.1.2.1' , #Impôts sur le revenu
+    '13.1.4.1' : '17.1.3.1' , #Impôts sur le revenu
     '13.1.5.1' : '17.1.5.1' , #Taxes automobiles
     '13.1.6.1' : '17.1.6.1' , #Autres impôts et taxes
     '13.2.1.1' : '17.2.1.1' , #Remboursements de prêts pour la résidence principale
