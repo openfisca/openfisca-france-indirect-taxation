@@ -1,4 +1,4 @@
-name: Validate, integrate & deploy to LexImpact legislation explorer
+name: Deploy to LexImpact legislation explorer
 
 on:
   - push
@@ -19,6 +19,9 @@ jobs:
           node-version: "lts/*"
       - name: Install viewer dependencies
         run: npm install
+        working-directory: legislation-parameters-explorer/packages/viewer
+      - name: Test
+        run: ls ../../../
         working-directory: legislation-parameters-explorer/packages/viewer
       - name: Configure viewer
         run: |
