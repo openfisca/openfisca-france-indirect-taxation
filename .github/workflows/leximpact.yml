@@ -1,18 +1,12 @@
-name: Validate, integrate & deploy to tax-benefit.org
+name: Validate, integrate & deploy to LexImpact legislation explorer
 
 on:
   - push
   - workflow_dispatch
 
 jobs:
-  validate_yaml:
-    uses: tax-benefit/actions/.github/workflows/validate_yaml.yml@v2.1.0
-    with:
-      parameters_path: "openfisca_france_indirect_taxation/parameters"
-    secrets:
-      token: ${{ secrets.CONTROL_CENTER_TOKEN }}
-
   deploy_parameters:
+    if: github.ref == 'refs/heads/cas-type'
     runs-on: ubuntu-latest
 
     steps:
@@ -82,10 +76,3 @@ jobs:
         working-directory: legislation-parameters-explorer/packages/viewer
       - name: Update editor parameters data
         run: ssh legislation@taxation-indirecte.legislation.leximpact.dev "cd openfisca-france-indirect-taxation && git pull"
-
-  deploy_simulator:
-    uses: tax-benefit/actions/.github/workflows/deploy.yml@v2.1.0
-    with:
-      python_package: "openfisca_france_indirect_taxation"
-    secrets:
-      token: ${{ secrets.CONTROL_CENTER_TOKEN }}
