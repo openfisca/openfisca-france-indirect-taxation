@@ -39,7 +39,7 @@ def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     ax.set_title(title)
-    ax.set_yticks(np.arange(0.1,1.1,0.1))
+    #ax.set_yticks(np.arange(0.1,1.1,0.1))
     ax.set_xticks(x)
     ax.set_xticklabels(df.index)
     ax.legend(loc = 'upper center', bbox_to_anchor = (0.5, -0.1), ncol= 3)

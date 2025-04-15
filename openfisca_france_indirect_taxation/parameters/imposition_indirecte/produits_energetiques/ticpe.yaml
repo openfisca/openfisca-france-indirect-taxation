@@ -108,6 +108,8 @@ essences_speciales_utilisees_comme_carburants_combustibles_hectolitre:
 huiles_legeres_preparation_essence_aviation_hectolitre:
   description: Huiles légères et préparation, essence d'aviation (hectolitre)
   values:
+    2021-01-01: 
+      value: 56.39
     2018-01-01:
       value: 45.49
     2017-01-01:

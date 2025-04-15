@@ -82,8 +82,7 @@ class depenses_tot(YearlyVariable):
         depenses_tot = 0
         for poste in postes_agreges:
             depenses_tot += menage('{}'.format(poste), period)
-        loyer_impute = menage('loyer_impute', period)
-        return depenses_tot + loyer_impute
+        return depenses_tot 
 
 
 class depenses_totales(YearlyVariable):

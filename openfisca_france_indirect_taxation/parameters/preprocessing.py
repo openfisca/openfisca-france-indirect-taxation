@@ -5,7 +5,7 @@ import pandas as pd
 
 from openfisca_france_indirect_taxation.variables.base import ParameterNode
 from openfisca_france_indirect_taxation.utils import assets_directory
-
+from openfisca_france_indirect_taxation.parameters.series_rv import alcool_conso_et_vin
 
 def preprocess_legislation(parameters):
     '''
@@ -248,11 +248,11 @@ def preprocess_legislation(parameters):
         )
     parameters.children['imposition_indirecte'].add_child('emissions_CO2', node_emissions_CO2)
 
-    # Add data from comptabilite national about alcohol
-    alcool_conso_et_vin = {
+    # Add data from comptabilite national about alcohol (stored the old one)
+    alcool_conso_et_vin_old = {
         "description": "alcools",
         }
-    alcool_conso_et_vin['vin'] = {
+    alcool_conso_et_vin_old['vin'] = {
         "description": "Pour calculer le taux de taxation implicite sur le vin",
         "droit_cn_vin": {
             "description": "Masse droit vin, vin mousseux, cidres et poirés selon comptabilité nationale",
@@ -307,7 +307,7 @@ def preprocess_legislation(parameters):
             },
         }
 
-    alcool_conso_et_vin['biere'] = {
+    alcool_conso_et_vin_old['biere'] = {
         "description": "Pour calculer le taux de taxation implicite sur la bière",
         "droit_cn_biere": {
             "description": "Masse droit biere selon comptabilité nationale",
@@ -361,7 +361,7 @@ def preprocess_legislation(parameters):
             },
         }
 
-    alcool_conso_et_vin['alcools_forts'] = {
+    alcool_conso_et_vin_old['alcools_forts'] = {
         "description": "Pour calculer le taux de taxation implicite sur alcools forts",
         "droit_cn_alcools": {
             "description": "Masse droit alcool selon comptabilité nationale sans droits sur les produits intermediaires et cotisation spéciale alcool fort",
@@ -435,6 +435,7 @@ def preprocess_legislation(parameters):
             },
         }
 
+        # the new one has been imported from series_rv.py 
     node_alcool_conso_et_vin = ParameterNode(
         'alcool_conso_et_vin',
         data = alcool_conso_et_vin,

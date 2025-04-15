@@ -193,6 +193,32 @@ def new_get_inflators(target_year,data_year):
     return ratio_by_variable
 
 
+def get_inflators_cn_23_to_24():
+        comptes_trimestriels_folder_path = os.path.join(
+                assets_directory,'legislation')
+        # Consommation
+        comptes_trim = pd.read_excel(os.path.join(comptes_trimestriels_folder_path,'t_conso_val.xls'), sheet_name = "Niveaux", header = 4)
+        comptes_trim.columns = comptes_trim.columns.str.strip()
+        comptes_trim = comptes_trim[['Unnamed: 0', 'TOTAL']]
+
+        comptes_trim.rename(columns= {'Unnamed: 0' : 'Trimestre'}, inplace = True)
+        comptes_trim.dropna(axis = 0, inplace = True)
+        total_2024 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2024') ,'TOTAL'].sum()
+        total_2023 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2023') ,'TOTAL'].sum()
+        inflator_conso = total_2024 / total_2023
+        
+        # Revenus
+        comptes_trim = pd.read_excel(os.path.join(comptes_trimestriels_folder_path,'t_men_val.xls'), sheet_name = "Niveaux", header = 4)
+        comptes_trim.columns = comptes_trim.columns.str.strip()
+        comptes_trim = comptes_trim[['Unnamed: 0', 'Revenu disponible brut']]
+        comptes_trim.rename(columns= {'Unnamed: 0' : 'Trimestre'}, inplace = True)
+        comptes_trim.dropna(axis = 0, inplace = True)
+        total_2024 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2024') ,'Revenu disponible brut'].sum()
+        total_2023 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2023') ,'Revenu disponible brut'].sum()
+        inflator_revenu = total_2024 / total_2023
+        
+        return inflator_conso, inflator_revenu
+    
 def new_get_inflators_by_year(rebuild = False, year_range = None, data_year = None):
     if year_range is None:
         year_range = range(2000, 2020)
@@ -200,8 +226,17 @@ def new_get_inflators_by_year(rebuild = False, year_range = None, data_year = No
     if rebuild is not False:
         inflators_by_year = dict()
         for target_year in year_range:
-            inflators = new_get_inflators(target_year = target_year, data_year = data_year)
-            inflators_by_year[target_year] = inflators
+            if target_year <= 2023:
+                inflators = new_get_inflators(target_year = target_year, data_year = data_year)
+                inflators_by_year[target_year] = inflators
+            else:
+                inflators = new_get_inflators(target_year = 2023, data_year = data_year)
+                inflator_conso, inflator_revenu = get_inflators_cn_23_to_24()
+                inflators_2024 = {
+                    key : value * inflator_revenu if key in [''] else value * inflator_conso 
+                    for key, value in inflators.items()
+                    }
+                inflators_by_year[target_year] = inflators_2024
 
         writer_inflators = csv.writer(open(os.path.join(assets_directory, 'inflateurs', 'new_inflators_by_year.csv'), 'w'))
         for year in year_range:

@@ -57,6 +57,20 @@ class niveau_vie_decile(YearlyVariable):
         return niveau_vie_decile
 
 
+class decile_rev_disponible(YearlyVariable):
+    value_type = Enum
+    default_value = Deciles.hors_champs
+    possible_values = Deciles
+    entity = Menage
+    label = "Décile de revenu disponible"
+
+    def formula(menage, period):
+        rev_disponible = menage('rev_disponible', period)
+        pondmen = menage('pondmen', period)
+        labels = numpy.arange(1, 11)
+        decile_rev_disponible, values = weighted_quantiles(rev_disponible, labels, pondmen, return_quantiles = True)
+        return decile_rev_disponible
+    
 class loyer_impute(YearlyVariable):
     value_type = float
     entity = Menage
