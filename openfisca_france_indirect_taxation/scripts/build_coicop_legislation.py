@@ -89,10 +89,10 @@ def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_cod
 
 
 def apply_modification(coicop_nomenclature = None, value = None, categorie_fiscale = None,
-        origin = None, start = 1994, stop = 2014, label = ''):
+        origin = None, start = 1994, stop = 2024, label = ''):
     assert coicop_nomenclature is not None
     assert categorie_fiscale in list(taxe_by_categorie_fiscale_number.values())
-    assert 1994 <= start < stop <= 2014, "Invalid start={} and/or stop={}".format(start, stop)
+    assert 1994 <= start < stop <= 2024, "Invalid start={} and/or stop={}".format(start, stop)
 
     if isinstance(value, int):
         value_str = '0' + str(value) if value < 10 else str(value)
@@ -109,7 +109,7 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
             )
         if not filled_start_stop:
             coicop_nomenclature.loc[selection, 'start'] = 1994
-            coicop_nomenclature.loc[selection, 'stop'] = 2014
+            coicop_nomenclature.loc[selection, 'stop'] = 2024
             coicop_nomenclature.loc[selection, 'categorie_fiscale'] = categorie_fiscale
 
         else:
@@ -267,7 +267,20 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         value = 4,
         categorie_fiscale = 'tva_taux_plein',
         )
-    # sauf distribution d'eau, enlèvement des ordures ménagères, assainissement, autres services liés au logement n.d.a.
+    # Combustible solide de résidence principale (Ref : Code général des impôts article 278 bis 3bis a b c)
+    bois_chauffage_98 = dict(
+        value = '04.5.4.1.1',
+        categorie_fiscale = 'tva_taux_reduit',
+        start = 1998,
+        stop = 2011
+    )
+    
+    bois_chauffage_reforme_2012 = dict(
+        value = '04.5.4.1.1',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+    )
+    # Distribution d'eau, enlèvement des ordures ménagères, assainissement, autres services liés au logement n.d.a.
     # qui sont au taux réduit de 1994 à 2011
     eau_ordures_assainissement = dict(
         value = ['04.4.1.1.1', '04.4.1.2.1', '04.4.1.3.1'],
@@ -365,7 +378,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
     transport_aerien = dict(
         value = '07.3.3',
         categorie_fiscale = 'tva_taux_reduit',
-        stop = 2014,
+        stop = 2024,
         )
     transport_aerien_reforme_2012 = dict(
         value = '07.3.3',
@@ -394,7 +407,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
         )
-    # Carburants et lubrifiants pour véhicules de tourisme 1994 2014
+    # Carburants et lubrifiants pour véhicules de tourisme 1994 2024
     carburants_lubrifiants = dict(
         value = '07.2.2',
         categorie_fiscale = 'ticpe',
@@ -409,7 +422,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         categorie_fiscale = '',
         )
     # 09 Loisirs et cutures
-    loisirs_cuture = dict(
+    loisirs_culture = dict(
         value = 9,
         categorie_fiscale = 'tva_taux_plein',
         )
@@ -422,19 +435,17 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
     livre = dict(
         value = '09.5.1',
         categorie_fiscale = 'tva_taux_reduit',
-        stop = 2012,
+        stop = 2024,
         )
-    livre_reforme_2012 = dict(
-        value = '09.5.1',
-        categorie_fiscale = 'tva_taux_intermediaire',
-        start = 2012,
-        stop = 2013
-        )
-    livre_reforme_2013 = dict(
-        value = '09.5.1',
-        categorie_fiscale = 'tva_taux_reduit',
-        start = 2013
-    )
+    #livre_reforme_2012 = dict(
+        #value = '09.5.1',
+        #categorie_fiscale = 'tva_taux_intermediaire',
+        #start = 2012,
+        #stop = 2013,
+        #)
+    #-> le livre est passé au taux intermediaire (7%) en 2012 avant de repasser au taux réduit à 5,5% en 2013,
+    # comme on ne peut pas le passer au taux intermédiaire seulement pour une année on le laisse au taux réduit    
+
     # Jeux de hasard
     jeux_hasard = dict(
         value = '09.4.3',
@@ -452,13 +463,19 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
     cinema_theatre_concert_reforme_2012 = dict(
         value = '09.4.2.1',
         categorie_fiscale = 'tva_taux_intermediaire',
-        start = 2012
+        start = 2012,
+        stop = 2013
+        )
+    cinema_theatre_concert_reforme_2014 = dict(
+        value = '09.4.2.1',
+        categorie_fiscale = 'tva_taux_reduit',
+        start = 2014
         )
     # Musées et zoo
     musee_zoo = dict(
         value = '09.4.2.2',
         categorie_fiscale = 'tva_taux_reduit',
-        stop = 2014
+        stop = 2011
         )
     # Musée et zoo
     musee_zoo_reforme_2012 = dict(
@@ -466,6 +483,12 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012
         )
+    
+    musee_zoo_reforme_2018 = dict(
+        value = '09.4.2.2',
+        categorie_fiscale = 'tva_taux_reduit',
+        start = 2018
+    )
     # Services de télévision et radiodiffusion
     tv_radio = dict(
         value = '09.4.2.3',
@@ -489,12 +512,12 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
     services_recreatifs_sportifs = dict(
         value = '09.4.1',
         categorie_fiscale = 'tva_taux_reduit',
-        stop = 2011,
+        start = 1994,
         )
-    services_recreatifs_sportifs_reforme_2012 = dict(
+    services_recreatifs_sportifs_reforme_2015 = dict(
         value = '09.4.1',
         categorie_fiscale = 'tva_taux_intermediaire',
-        start = 2012,
+        start = 2015,
         )
     # 10 Education
     education = dict(
@@ -523,7 +546,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         start = 2010,
         stop = 2011,
         )
-    # Restauration sur place 2012 2014
+    # Restauration sur place 2012 2024
     restauration_sur_place_reforme_2012 = dict(
         value = '11.1.1.1.1',
         categorie_fiscale = 'tva_taux_intermediaire',
@@ -542,7 +565,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         start = 1998,
         stop = 2011,
         )
-    # Restauration à emporter 2012 2014
+    # Restauration à emporter 2012 2024
     restauration_a_emporter_reforme_2012 = dict(
         value = '11.1.1.1.2',
         categorie_fiscale = 'tva_taux_intermediaire',
@@ -553,7 +576,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         value = '11.1.2',
         categorie_fiscale = 'tva_taux_reduit',
         )
-    # Services d'hébergement 2012 2014
+    # Services d'hébergement 2012 2024
     service_hebergement = dict(
         value = '11.2.1',
         categorie_fiscale = 'tva_taux_intermediaire',
@@ -576,7 +599,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         value = '12.4',
         categorie_fiscale = 'tva_taux_reduit',
         start = 2000,
-        stop = 2014,
+        stop = 2024,
         )
     # Protection sociale
     protection_sociale_reforme_2012 = dict(
@@ -629,7 +652,8 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
             # 03
             habillement,
             # 04
-            logement, eau_ordures_assainissement, ordures_assainissement_reforme_2012, 
+            logement, bois_chauffage_98 , bois_chauffage_reforme_2012,
+            eau_ordures_assainissement, ordures_assainissement_reforme_2012, 
             eau_post_2012,
             loyers, services_entretien,
             # 05
@@ -648,12 +672,13 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
             # 08
             communications, services_postaux,
             # 09
-            loisirs_cuture, journaux_periodiques, livre, livre_reforme_2013, 
+            loisirs_culture, journaux_periodiques, livre,
             jeux_hasard,
-            cinema_theatre_concert, cinema_theatre_concert_reforme_2012, musee_zoo,
+            cinema_theatre_concert, cinema_theatre_concert_reforme_2012, cinema_theatre_concert_reforme_2014, 
+            musee_zoo, musee_zoo_reforme_2012, musee_zoo_reforme_2018,
             tv_radio, tv_radio_reforme_2012 ,
             autres_services_culturels,
-            services_recreatifs_sportifs, services_recreatifs_sportifs_reforme_2012,
+            services_recreatifs_sportifs, services_recreatifs_sportifs_reforme_2015,
             # 10 Education
             education,
             # 11 Hotellerie restauration

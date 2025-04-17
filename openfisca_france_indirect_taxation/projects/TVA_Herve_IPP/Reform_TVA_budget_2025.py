@@ -12,7 +12,7 @@ def reform_modify_parameters(baseline_parameters_copy):
     data = {
         "description": 'augmentation_tva_2025',
         "delta_taux": {
-            "description": "Augmentation d'un point de taux plein de TVA",
+            "description": "Augmentation d'un point de TVA",
             "unit": '/1',
             "values": {'2024-01-01': 0.01}
             },

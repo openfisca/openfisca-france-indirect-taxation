@@ -7,8 +7,13 @@ from openfisca_france_indirect_taxation.utils import assets_directory, get_input
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
-
+''' Données sources utilisées : 
+    - Consommation des ménages en 2023 (base 2020) : https://www.insee.fr/fr/statistiques/fichier/8068592/T_CONSO_EFF_FONCTION.xlsx 
+    - Revenu disponible des ménages en 2023 (base 2020) :  https://www.insee.fr/fr/statistiques/fichier/8068630/T_2101.xlsx
+    - Comptes trimestriels pour l'année 2024 (base 2020) : https://www.insee.fr/fr/statistiques/fichier/8358378/t_conso_val.xls
+    '''
 def new_get_bdf_aggregates(data_year = None):
+    ''' Calcule les agrégats de Bdf pour l'année des données.'''
     assert data_year is not None
     depenses = get_input_data_frame(data_year)
     liste_variables = depenses.columns.tolist()
@@ -60,6 +65,7 @@ def sum_and_remove(data_frame, col, rows_to_sum, new_row) :
     return data
 
 def new_get_cn_aggregates(target_year) :
+    ''' Calcule les agrégats de compta nat utilisables pour un année cible.'''
     # Dépenses de conso
     parametres_fiscalite_file_path = os.path.join(
             assets_directory,
@@ -139,6 +145,7 @@ def new_get_cn_aggregates(target_year) :
     return masses_cn_postes_data_frame*1e6
 
 def new_get_inflators_bdf_to_cn(data_year):
+    '''Calcule l'inflateur de calage à partir des masses de comptabilité nationale.'''
     data_cn = new_get_cn_aggregates(data_year)
     liste_postes_cn = data_cn.index.tolist()
 
@@ -194,6 +201,7 @@ def new_get_inflators(target_year,data_year):
 
 
 def get_inflators_cn_23_to_24():
+        '''Utilise les comptes trimestriels pour calculer l'inflateur de la conso et des revenus de 2023 à 2024.'''
         comptes_trimestriels_folder_path = os.path.join(
                 assets_directory,'legislation')
         # Consommation
@@ -220,8 +228,9 @@ def get_inflators_cn_23_to_24():
         return inflator_conso, inflator_revenu
     
 def new_get_inflators_by_year(rebuild = False, year_range = None, data_year = None):
+    ''' Récupère les inflateurs pour le veillissement pour toutes les année voulues.'''
     if year_range is None:
-        year_range = range(2000, 2020)
+        year_range = range(2000, 2025)
 
     if rebuild is not False:
         inflators_by_year = dict()
