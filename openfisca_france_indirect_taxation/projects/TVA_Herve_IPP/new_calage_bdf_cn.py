@@ -12,6 +12,7 @@ from openfisca_survey_manager import default_config_files_directory as config_fi
     - Revenu disponible des ménages en 2023 (base 2020) :  https://www.insee.fr/fr/statistiques/fichier/8068630/T_2101.xlsx
     - Comptes trimestriels pour l'année 2024 (base 2020) : https://www.insee.fr/fr/statistiques/fichier/8358378/t_conso_val.xls
     '''
+    
 def new_get_bdf_aggregates(data_year = None):
     ''' Calcule les agrégats de Bdf pour l'année des données.'''
     assert data_year is not None
@@ -228,7 +229,7 @@ def get_inflators_cn_23_to_24():
         return inflator_conso, inflator_revenu
     
 def new_get_inflators_by_year(rebuild = False, year_range = None, data_year = None):
-    ''' Récupère les inflateurs pour le veillissement pour toutes les année voulues.'''
+    ''' Récupère les inflateurs pour le veillissement pour toutes les années voulues.'''
     if year_range is None:
         year_range = range(2000, 2025)
 

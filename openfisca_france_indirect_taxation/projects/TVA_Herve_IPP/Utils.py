@@ -1,8 +1,11 @@
 import matplotlib.pyplot as plt
+import os
 import numpy as np
 import seaborn as sns 
 
-def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées", xlabel="Catégories", ylabel="Valeurs", colors = None):
+output_path = "C:/Users/veve1/OneDrive/Documents/IPP/Budget 2026 TVA/Figures/"
+
+def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées", xlabel="Catégories", ylabel="Valeurs", colors = None, savefig = False, outfile = None):
     """
     Crée un bar plot empilé à partir des variables sélectionnées dans un DataFrame.
 
@@ -21,7 +24,7 @@ def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées
     if colors and len(colors) < len(variables):
         raise ValueError("Le nombre de couleurs doit être supérieur au nombre de variables.")
     # Création de la figure et des axes
-    fig, ax = plt.subplots(figsize=(12, 10))
+    fig, ax =  plt.subplots(figsize=(10, 7.5))
 
     # Indices des catégories (suppose que l'index est utilisé pour l'axe des x)
     x = np.arange(len(df))
@@ -36,13 +39,16 @@ def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées
         bottom +=df[var].values
 
     # Ajout des légendes et titres
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
-    ax.set_title(title)
+    ax.set_xlabel(xlabel, fontdict= {'fontsize' : 15})
+    ax.set_ylabel(ylabel,  fontdict= {'fontsize' : 15})
+    ax.set_title(title, fontdict= {'fontsize' : 17})
+    ax.tick_params(axis='y', labelsize=12)
     #ax.set_yticks(np.arange(0.1,1.1,0.1))
     ax.set_xticks(x)
-    ax.set_xticklabels(df.index)
-    ax.legend(loc = 'upper center', bbox_to_anchor = (0.5, -0.1), ncol= 3)
+    ax.set_xticklabels(df.index, fontsize = 12)
+    ax.legend(loc = 'upper center', bbox_to_anchor = (0.5, -0.1), ncol = 3, fontsize = 12)
     
     plt.xticks()
+    if savefig and outfile:
+            plt.savefig(os.path.join(output_path,outfile), bbox_inches = 'tight')
     plt.show()

@@ -7,7 +7,14 @@ from openfisca_france_indirect_taxation.utils import assets_directory, get_input
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
+''' Données sources utilisées : 
+    - Consommation des ménages en 2023 (base 2020) : https://www.insee.fr/fr/statistiques/fichier/8068592/T_CONSO_EFF_FONCTION.xlsx 
+    - Revenu disponible des ménages en 2023 (base 2020) :  https://www.insee.fr/fr/statistiques/fichier/8068630/T_2101.xlsx
+    - Comptes trimestriels pour l'année 2024 (base 2020) : https://www.insee.fr/fr/statistiques/fichier/8358378/t_conso_val.xls
+    '''
+    
 def get_bdf_aggregates(data_year = None):
+    ''' Calcule les agrégats de Bdf pour l'année des données.'''
     assert data_year is not None
     depenses = get_input_data_frame(2017)
     liste_variables = depenses.columns.tolist()
@@ -27,6 +34,7 @@ def get_bdf_aggregates(data_year = None):
     return bdf_aggregates_by_poste_agrege
 
 def get_cn_aggregates(target_year = None):
+    ''' Calcule les agrégats de compta nat utilisables pour un année cible.'''
     assert target_year is not None
 
     parametres_fiscalite_file_path = os.path.join(
@@ -51,7 +59,8 @@ def get_cn_aggregates(target_year = None):
 
     return masses_cn_13postes_data_frame*1e6
 
-def get_inflators_bdf_to_cn(data_year):    
+def get_inflators_bdf_to_cn(data_year):
+    '''Calcule l'inflateur de calage à partir des masses de comptabilité nationale.'''    
     data_cn = get_cn_aggregates(data_year)
     data_bdf = get_bdf_aggregates(data_year)
     masses = data_cn.merge(data_bdf, left_index = True, right_index = True)
