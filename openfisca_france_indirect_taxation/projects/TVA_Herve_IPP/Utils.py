@@ -11,7 +11,7 @@ from openfisca_survey_manager.statshelpers import mark_weighted_percentiles
 
 output_path = "C:/Users/veve1/OneDrive/Documents/IPP/Budget 2026 TVA/Figures/"
 
-def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées", xlabel="Catégories", ylabel="Valeurs", colors = None, savefig = False, outfile = None):
+def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées", xlabel="Catégories", ylabel="Valeurs", colors = None, note = "Note",savefig = False, outfile = None):
     """
     Crée un bar plot empilé à partir des variables sélectionnées dans un DataFrame.
 
@@ -46,14 +46,14 @@ def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées
         bottom +=df[var].values
 
     # Ajout des légendes et titres
-    ax.set_xlabel(xlabel, fontdict= {'fontsize' : 15})
-    ax.set_ylabel(ylabel,  fontdict= {'fontsize' : 15})
-    ax.set_title(title, fontdict= {'fontsize' : 17})
-    ax.tick_params(axis='y', labelsize=12)
+    ax.set_xlabel(xlabel, fontdict= {'fontsize' : 15}, fontweight ='bold')
+    ax.set_ylabel(ylabel,  fontdict= {'fontsize' : 15}, fontweight ='bold')
+    ax.set_title(title, fontdict= {'fontsize' : 17}, loc = 'left', fontweight ='bold')
+    ax.tick_params(axis='y', labelsize=13)
     #ax.set_yticks(np.arange(0.1,1.1,0.1))
     ax.set_xticks(x)
-    ax.set_xticklabels(df.index, fontsize = 12)
-    ax.legend(loc = 'upper center', bbox_to_anchor = (0.5, -0.1), ncol = 3, fontsize = 12)
+    ax.set_xticklabels(df.index, fontsize = 13)
+    ax.legend(loc = 'upper center', bbox_to_anchor = (0.5, -0.1), ncol = 3, fontsize = 13)
     
     plt.xticks()
     if savefig and outfile:

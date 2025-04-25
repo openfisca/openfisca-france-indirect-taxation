@@ -6,7 +6,6 @@ import os
 import pandas
 import numpy
 
-
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.surveys import Survey
 from openfisca_survey_manager import default_config_files_directory as config_files_directory

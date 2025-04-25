@@ -7,10 +7,9 @@
 import os
 import pandas as pd
 
-# Importation des bases de données appariées et de la base de référence entd
 from openfisca_france_indirect_taxation.utils import assets_directory
 
-
+# Importation des bases de données appariées et de la base de référence entd
 # data_matched_random = pd.read_csv(
 #     os.path.join(
 #         assets_directory,
