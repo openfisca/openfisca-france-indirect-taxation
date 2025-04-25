@@ -1,0 +1,2 @@
+Les différentes enquêtes présentées ci-dessus sont menées séparemment et sur des années différentes. 
+Par ailleurs, les ménages enquêtés ne sont pas les mêmes. Pour rapprocher ces différentes bases on procède à un appariemment statistique qui consite à associer à un ménage de BdF un autre ménage de l'ENTD qui lui est le plus proche selon des caractéristiques communes au deux bases.
