@@ -45,7 +45,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
 
     for categorie_fiscale in reference_categories:
         year_start = 1994
-        year_final_stop = 2014
+        year_final_stop = 2024
         functions_by_name = dict()
         for year in range(year_start, year_final_stop + 1):
             postes_coicop = sorted(

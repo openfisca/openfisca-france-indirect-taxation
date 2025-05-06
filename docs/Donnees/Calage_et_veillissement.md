@@ -14,6 +14,7 @@ Ensuite, cette base peut être mise à jour pour une année cible, on parle de v
 
 
 ## Vieillissement
-    Une fois que les dépenses de consommation sont alignées sur la comptabilité nationale pour l'année des données, il est possible de les vieillir pour représenter n'importe quelle année cible.
+    Une fois que les dépenses de consommation sont alignées sur la comptabilité nationale pour l'année des données, il est possible de les vieillir pour représenter n'importe quelle année cible. On peut vieillir la consommation et les revenus jusqu'en 2023 en utilisant les bases de données de la comptabilité nationale utilisées pour l'étape de calage. 
+    Pour l'année 2024, la méthode consiste à veillir jusqu'à 2023 puis utiliser les comptes trimestriels pour inflater de 2023 à 2024 (consommation : https://www.insee.fr/fr/statistiques/fichier/8358378/t_conso_val.xls ; revenus : https://www.insee.fr/fr/statistiques/fichier/8358386/t_men_val.xls). La consommation est inflatée uniformément.
 
-Ces deux opérations peuvent être réalisés poste agrégé par poste agrégé, via les fonctions du code `new_calage_bdf_cn_by_postes_agreges` ou au niveau le plus fin permis par la comptabilité nationale, via les fonctions du code `new_calage_bdf_cn`.
+Ces deux opérations sont réalisés à l'aide des fonctions du code `new_calage_bdf_cn`.
