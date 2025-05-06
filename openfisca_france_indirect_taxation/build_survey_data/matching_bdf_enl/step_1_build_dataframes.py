@@ -4,7 +4,6 @@
 # Pour chacune des deux enquêtes on importe les variables qui seront
 # susceptibles d'êtres utilisées dans l'appariement des bases de données.
 
-
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
@@ -42,21 +41,21 @@ def load_data_bdf_enl(year_data):
 
     # Set variables :
     variables_menages_bdf = [
-        'agepr',  # âge de la pr
-        'aidlog1',  # aides au logement
+        'agepr',            # âge de la pr
+        'aidlog1',          # aides au logement
         'aidlog2',
-        'aise',  # à l'aise avec le budget
+        'aise',             # à l'aise avec le budget
         'ancons',
-        'cataeu',  # type de commune
+        'cataeu',           # type de commune
         'chaufp',
-        'cs42pr',  # catégorie socio-pro
+        'cs42pr',           # catégorie socio-pro
         'cs42cj',
         'decuc',
         'depenses_tot',
-        'dip14cj',  # diplômes
-        'dip14pr',
+        'dip14cj',          # diplômes conjoint
+        'dip14pr',          # diplômes de la pr
         # 'h_trans1',
-        'htl',  # type de logement
+        'htl',              # type de logement
         'ident_men',
         'identifiant_menage',
         'mall1',
@@ -72,7 +71,7 @@ def load_data_bdf_enl(year_data):
         'nactifs',
         'nenfants',
         'npers',
-        'ocde10',  # nb unités de conso
+        'ocde10',           # nb unités de conso
         'pondmen',
         'poste_04_5_1_1_1_a',
         'poste_04_5_1_1_1_b',
@@ -82,15 +81,15 @@ def load_data_bdf_enl(year_data):
         'poste_04_5_4_1_1',
         'poste_04_5_5_1_1',
         # 'poste_07_2_2_1_1',
-        'revtot',  # revenu total
-        'situapr',  # situation pro
+        'revtot',           # revenu total
+        'situapr',          # situation pro
         'situacj',
         'stalog',
-        'surfhab_d',  # surface habitable
+        'surfhab_d',        # surface habitable
         'tau',
         'tuu',
         'typmen',
-        'zeat',  # zone climatique
+        'zeat',             # zone climatique
         ]
 
     variables_menages_enl = [

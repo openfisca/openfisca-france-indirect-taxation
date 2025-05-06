@@ -14,7 +14,7 @@ Pour que le modèle de microsimulation soit à la fois assez générique pour r�
 
 Comme les postes de consommation présents dans ces sources peuvent être plus ou moins agrégés, il est nécessaire de pouvoir réaliser une correspondance entre les différents postes de consommation issues des différentes sources, quelque soit leur niveaux d'agrégations.
 
-A cette fin, une [table pivot] (https://github.com/openfisca/openfisca-france-indirect-taxation/blob/master/openfisca_france_indirect_taxation/assets/legislation/nomenclature_coicop.csv) est construite à partir de la [nomenclature COICOP] (http://www.insee.fr/fr/methodes/default.asp?page=nomenclatures/coicop1998/coicop1998.htm). Elle est enrichie par des postes supplémentaires en cas de nécessité (finesse insuffisante comme pour le tabac par exemple, postes non présents comme stupéfiants et prostitution).
+A cette fin, une [table pivot] (https://github.com/openfisca/openfisca-france-indirect-taxation/blob/master/openfisca_france_indirect_taxation/assets/legislation/nomenclature_coicop.csv) est construite à partir de la [nomenclature COICOP] (http://www.insee.fr/fr/methodes/default.asp?page=nomenclatures/coicop1998/coicop1998.html). Elle est enrichie par des postes supplémentaires en cas de nécessité (finesse insuffisante comme pour le tabac par exemple, postes non présents comme stupéfiants et prostitution).
 
 Elle est produite à partir de sources brutes par l'exécution du programme `build_coicop_nomenclature`.
 [TODO: à détailler, exemple d'exécution après mise en forme du script]

@@ -62,6 +62,9 @@ Pour la doc :  https://pypi.org/project/OpenFisca-Survey-Manager/0.47.2/
 
 **Construire les données**
 - Lancer le script `openfisca_france_indirect_taxation\scripts\build_survey_data.py`
+
+
+***
 - Légère modification dans l'enquête logement : renommer le fichier MENLOG_DIFF en menlog_diff
 - Quelques modifications des scripts que j'ai du faire:
 	- openfisca-france-indirect-taxation\openfisca_france_indirect_taxation\build_survey_data\step_5_data_from_matching.py : 

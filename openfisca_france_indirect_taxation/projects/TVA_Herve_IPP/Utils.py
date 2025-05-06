@@ -60,6 +60,54 @@ def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées
             plt.savefig(os.path.join(output_path,outfile), bbox_inches = 'tight')
     plt.show()
 
+def double_stacked_bar_plot(df1, df2, variables, labels, 
+                             title1="Graphique 1", title2="Graphique 2", 
+                             xlabel="Catégories", ylabel="Valeurs", 
+                             colors=None, savefig=False, outfile=None):
+    """
+    Trace deux graphiques à barres empilées côte à côte, axes indépendants.
+    """
+
+    if len(variables) != len(labels):
+        raise ValueError("Le nombre de variables et de labels doit être identique.")
+    if colors and len(colors) < len(variables):
+        raise ValueError("Le nombre de couleurs doit être supérieur au nombre de variables.")
+
+    fig, axes = plt.subplots(1, 2, figsize=(18, 7.5), sharey=True)  # <-- DIFFERENCE: sharey=False
+    
+    for ax, df, title in zip(axes, [df1, df2], [title1, title2]):
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+
+        x = np.arange(len(df))
+        bottom = np.zeros(len(df))
+
+        for i, (var, label) in enumerate(zip(variables, labels)):
+            color = colors[i] if colors else None
+            ax.bar(x, df[var], label=label, bottom=bottom, color=color)
+            bottom += df[var].values
+
+        ax.set_xlabel(xlabel, fontdict={'fontsize': 18}, fontweight='bold')
+        ax.set_title(title, fontdict={'fontsize': 20}, loc='left', fontweight='bold')
+        ax.set_xticks(x)
+        ax.set_xticklabels(df.index, fontsize=16)
+        ax.yaxis.set_tick_params(labelleft=True)
+        ax.tick_params(axis='y', labelsize=16)
+
+    # Add y-label to both subplots
+    for ax in axes:
+        ax.set_ylabel(ylabel, fontdict={'fontsize': 18}, fontweight='bold')
+    
+    # Only one legend for the two plots
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, -0.01), ncol=len(variables), fontsize=17)
+
+    plt.tight_layout()
+    if savefig and outfile:
+        plt.savefig(os.path.join(output_path, outfile), bbox_inches='tight')
+    
+    plt.show()
+
 
 def weighted_quantiles(data, labels, weights, return_quantiles = False):
     num_categories = len(labels)
