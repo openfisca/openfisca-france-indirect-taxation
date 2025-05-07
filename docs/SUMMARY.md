@@ -1,8 +1,8 @@
-# Table of Contents
+# Sommaire
 
 * [Présentation](./presentation.md)
 
-## Données 
+## Données et appariemment
 
 ### Données sources 
 * [Enquête Budgdet de famille (BdF)](./Donnees/Budget_de_famille.md)
@@ -19,5 +19,7 @@
 * [Calage et vieillissement](./Simulations/Calage_et_veillissement.md)
 * [Legislation](./Simulations/Legislation.md)
 * [Survey Scenario](./Simulations/Survey_scenario.md)
+* [Exemple d'utilisation](./Simulations/Exemple_utilisation.md)
 
+# Installation
 * [Installation](./Install_openfisca-france-indirect-taxation.md)

@@ -1,4 +1,4 @@
-## Appariemment 
+# Appariemment 
 
 Les différentes enquêtes présentées ci-dessus sont menées séparemment et sur des années différentes. 
 Par ailleurs, les ménages enquêtés ne sont pas les mêmes, il n'est pas possible de réaliser un appariemment exact.
@@ -16,7 +16,6 @@ Les ménages sont classés selon la part des dépenses d'énergie dans leur reve
 L'appariemment est stratifié par une classe définie comme suit : 
 - pour les cinq premiers déciles il s'agit du croisement entre le décile de niveau de vie, le fait de recevoir ou non des aides au logement et le lieu de résidence (rural, petite ville, moyenne ville, grande ville, Paris)
 - pour les déciles suivant il s'agit simplement du croisement entre le décile de niveau de vie et le lieu de résidence.
-
 
 ### Matching BdF-ERFS
 
