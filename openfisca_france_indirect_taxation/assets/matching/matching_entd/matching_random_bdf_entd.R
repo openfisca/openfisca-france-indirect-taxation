@@ -14,7 +14,8 @@ data_bdf$nactifs = round(as.numeric(data_bdf$nactifs), digits = 2)
 
 # Compute random matching
 out.nnd <- RANDwNND.hotdeck(
-  data.rec = data_bdf, data.don = data_entd,
+  data.rec = data_bdf, 
+  data.don = data_entd,
   match.vars = c("nb_diesel", "agepr", "age_vehicule", "rural", "paris", "npers", "nactifs", "veh_tot"),
   don.class = c("niveau_vie_decile"),
   dist.fun = "Gower",
@@ -23,7 +24,8 @@ out.nnd <- RANDwNND.hotdeck(
 
 # Create fused file
 fused.nnd.m <- create.fused(
-  data.rec = data_bdf, data.don = data_entd,
+  data.rec = data_bdf, 
+  data.don = data_entd,
   mtc.ids = out.nnd$mtc.ids,
   z.vars = c("distance", "distance_autre_carbu", "distance_diesel", "distance_essence")
   )

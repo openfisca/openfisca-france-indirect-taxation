@@ -9,7 +9,8 @@ data_bdf <- read.csv(file = file.path(assets_directory, "/matching/matching_entd
 
 # Compute ranked matching
 out.nnd <- rankNND.hotdeck(
-  data.rec = data_bdf, data.don = data_entd,
+  data.rec = data_bdf, 
+  data.don = data_entd,
   var.rec = c("poste_07_2_2_1_1"),
   var.don = c("distance"),
   don.class = c("niveau_vie_decile", "rural"),

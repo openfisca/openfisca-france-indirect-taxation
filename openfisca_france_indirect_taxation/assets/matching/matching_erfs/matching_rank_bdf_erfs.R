@@ -9,7 +9,8 @@ data_bdf <- read.csv(file = file.path(assets_directory, "/matching/matching_erfs
 
 # Compute ranked matching
 out.nnd <- rankNND.hotdeck(
-  data.rec = data_bdf, data.don = data_erfs,
+  data.rec = data_bdf,
+  data.don = data_erfs,
   var.rec = c("rev_disponible"),
   don.class = c("donation_class_1"),
   weight.rec = "pondmen",
@@ -18,7 +19,8 @@ out.nnd <- rankNND.hotdeck(
 
 # Create fused file
 fused.nnd.m <- create.fused(
-  data.rec = data_bdf, data.don = data_erfs,
+  data.rec = data_bdf,
+  data.don = data_erfs,
   mtc.ids = out.nnd$mtc.ids,
   z.vars = c("revdecm")
 )

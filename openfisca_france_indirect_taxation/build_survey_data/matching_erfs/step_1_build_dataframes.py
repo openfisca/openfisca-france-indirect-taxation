@@ -50,86 +50,86 @@ def load_data_bdf_erfs(year_data):
     # Set variables to keep
     variables_erfs = [
         'ident',
-        'wprm',  # pondération ménage
-        'ageprm',  # âge de la PR au moment de l'enquête
-        'catau2010',  # catégorie zone urbaine
-        'cstotprm',  # categ socio pro
-        'm_rsa_actm',  # RSA activité
-        'metrodom',  # métropole ou DOM
-        'nb_uci',  # nombre d'uc
-        'nbactif',  # nombre d'actifs
-        'nbactop',  # nombre d'actifs occupés
-        'nbind',  # nombre personnes dans le logement
-        'nivviem',  # niveau vie ménage (rev_disponible / nb_UCI)
-        'prest_precarite_hand',  # prestation précarité handicap
-        'prest_precarite_rsa',  # prestation précarité RSA hors RSA activité
-        'prest_precarite_vieil',  # prestation précarité vieillesse
-        'retraites',  # retraites et pensions hors CSG-CRDS hors pensions alimentaires
-        'rev_etranger',  # revenus de l'étranger du ménage
-        'rev_valeurs_mobilieres_bruts',  # revenus de valeurs mobilières
-        'revdecm',  # Variable à imputer : revenu déclaré par le ménage
-        'revdispm',  # revenu disponible
-        'salaires',  # salaires et traitements hors CSG-CRDS
-        'sexeprm',  # sexe personne de référence
-        'so',  # statut d'occupation du logement
-        'tau2010',  # taille aire urbaine
-        'th',  # taxe habitation payée en 2013
-        'tuu2010',  # taille unité urbaine
-        'typmen7',  # type de ménage
+        'wprm',                         # pondération ménage
+        'ageprm',                       # âge de la PR au moment de l'enquête
+        'catau2010',                    # catégorie zone urbaine
+        'cstotprm',                     # categ socio pro
+        'm_rsa_actm',                   # RSA activité
+        'metrodom',                     # métropole ou DOM
+        'nb_uci',                       # nombre d'uc
+        'nbactif',                      # nombre d'actifs
+        'nbactop',                      # nombre d'actifs occupés
+        'nbind',                        # nombre personnes dans le logement
+        'nivviem',                      # niveau vie ménage (rev_disponible / nb_UCI)
+        'prest_precarite_hand',         # prestation précarité handicap
+        'prest_precarite_rsa',          # prestation précarité RSA hors RSA activité
+        'prest_precarite_vieil',        # prestation précarité vieillesse
+        'retraites',                    # retraites et pensions hors CSG-CRDS hors pensions alimentaires
+        'rev_etranger',                 # revenus de l'étranger du ménage
+        'rev_valeurs_mobilieres_bruts', # revenus de valeurs mobilières
+        'revdecm',                      # Variable à imputer : revenu déclaré par le ménage
+        'revdispm',                     # revenu disponible
+        'salaires',                     # salaires et traitements hors CSG-CRDS
+        'sexeprm',                      # sexe personne de référence
+        'so',                           # statut d'occupation du logement
+        'tau2010',                      # taille aire urbaine
+        'th',                           # taxe habitation payée en 2013
+        'tuu2010',                      # taille unité urbaine
+        'typmen7',                      # type de ménage
         ]
     if year_bdf == 2017:
         variables_bdf = [
             'ident_men',
-            'pondmen',  # pondération ménage
-            'agepr',  # âge de la PR au moment de l'enquête
-            'cataeu',  # catégorie zone urbaine
-            'chomage',  # chômage et pré-retraite
-            'cs42pr',  # categ socio pro
-            # 'mhab_d', # montant définitif de la taxe d'habitation
-            'nactifs',  # nombre d'actifs
-            'nactoccup',  # nombre d'actifs occupés
-            'npers',  # nombre personnes dans le logement
-            'ocde10',  # nombre d'uc
-            'prest_precarite_hand',  # prestation précarité handicap
-            'prest_precarite_rsa',  # prestation précarité RSA hors RSA activité
-            'prest_precarite_vieil',  # prestation précarité vieillesse
-            'retraites',  # retraites
-            'rev502',  # intérêt valeurs mobilières
-            'rev_etranger',  # revenus de l'étranger du ménage
-            'rev_disponible',  # revenu disponible
-            'ppa',  # RSA activité
-            'salaires',  # salaires et autres rémunérations
-            'stalog',  # statut d'occupation du logement
-            'tau',  # taille aire urbaine
-            'tuu',  # taille unité urbaine
-            'typmen',  # type de ménage
+            'pondmen',                  # pondération ménage
+            'agepr',                    # âge de la PR au moment de l'enquête
+            'cataeu',                   # catégorie zone urbaine
+            'chomage',                  # chômage et pré-retraite
+            'cs42pr',                   # categ socio pro
+            # 'mhab_d',                 # montant définitif de la taxe d'habitation
+            'nactifs',                  # nombre d'actifs
+            'nactoccup',                # nombre d'actifs occupés
+            'npers',                    # nombre personnes dans le logement
+            'ocde10',                   # nombre d'uc
+            'prest_precarite_hand',     # prestation précarité handicap
+            'prest_precarite_rsa',      # prestation précarité RSA hors RSA activité
+            'prest_precarite_vieil',    # prestation précarité vieillesse
+            'retraites',                # retraites
+            'rev502',                   # intérêt valeurs mobilières
+            'rev_etranger',             # revenus de l'étranger du ménage
+            'rev_disponible',           # revenu disponible
+            'ppa',                      # RSA activité
+            'salaires',                 # salaires et autres rémunérations
+            'stalog',                   # statut d'occupation du logement
+            'tau',                      # taille aire urbaine
+            'tuu',                      # taille unité urbaine
+            'typmen',                   # type de ménage
             ]
     else:
         variables_bdf = [
             'ident_men',
-            'pondmen',  # pondération ménage
-            'agepr',  # âge de la PR au moment de l'enquête
-            'cataeu',  # catégorie zone urbaine
-            'chomage',  # chômage et pré-retraite
-            'cs42pr',  # categ socio pro
-            # 'mhab_d', # montant définitif de la taxe d'habitation
-            'nactifs',  # nombre d'actifs
-            'nactoccup',  # nombre d'actifs occupés
-            'npers',  # nombre personnes dans le logement
-            'ocde10',  # nombre d'uc
-            'prest_precarite_hand',  # prestation précarité handicap
-            'prest_precarite_rsa',  # prestation précarité RSA hors RSA activité
-            'prest_precarite_vieil',  # prestation précarité vieillesse
-            'retraites',  # retraites
-            'rev502',  # intérêt valeurs mobilières
-            'rev_etranger',  # revenus de l'étranger du ménage
-            'rev_disponible',  # revenu disponible
-            'rsa_act',  # RSA activité
-            'salaires',  # salaires et autres rémunérations
-            'stalog',  # statut d'occupation du logement
-            'tau',  # taille aire urbaine
-            'tuu',  # taille unité urbaine
-            'typmen',  # type de ménage
+            'pondmen',                  # pondération ménage
+            'agepr',                    # âge de la PR au moment de l'enquête
+            'cataeu',                   # catégorie zone urbaine
+            'chomage',                  # chômage et pré-retraite
+            'cs42pr',                   # categ socio pro
+            # 'mhab_d',                 # montant définitif de la taxe d'habitation
+            'nactifs',                  # nombre d'actifs
+            'nactoccup',                # nombre d'actifs occupés
+            'npers',                    # nombre personnes dans le logement
+            'ocde10',                   # nombre d'uc
+            'prest_precarite_hand',     # prestation précarité handicap
+            'prest_precarite_rsa',      # prestation précarité RSA hors RSA activité
+            'prest_precarite_vieil',    # prestation précarité vieillesse
+            'retraites',                # retraites
+            'rev502',                   # intérêt valeurs mobilières
+            'rev_etranger',             # revenus de l'étranger du ménage
+            'rev_disponible',           # revenu disponible
+            'rsa_act',                  # RSA activité
+            'salaires',                 # salaires et autres rémunérations
+            'stalog',                   # statut d'occupation du logement
+            'tau',                      # taille aire urbaine
+            'tuu',                      # taille unité urbaine
+            'typmen',                   # type de ménage
             ]
 
     menages_erfs = menages_erfs[variables_erfs]
