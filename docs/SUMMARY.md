@@ -2,15 +2,15 @@
 
 * [Présentation](./presentation.md)
 
-## Données et appariemment
+## Données
 
 ### Données sources 
 * [Enquête Budgdet de famille (BdF)](./Donnees/Budget_de_famille.md)
 * [Enquête Nationale Transports et déplacements (ENTD)](./Donnees/Enquete_transport_et_deplacements.md)
 * [Enquête Logement (EnL)](./Donnees/Enquete_logement.md)
-* [Enquête sur les revenus fiscaux et sociaux (ERFS)](./Donnees/Enquête_sur_les_revenus_fiscaux_et_sociaux.md)
+* [Enquête sur les revenus fiscaux et sociaux (ERFS)](./Donnees/Enquête_revenus_fiscaux_et_sociaux.md)
 
-### Appariemment
+### Construction de la base d'entrée du modèle
 * [Construction des données](./Donnees/Construction.md)
 * [Appariemment](./Donnees/Appariemment.md)
 * [Imputations de certaines dépenses](./Donnees/Imputations.md)

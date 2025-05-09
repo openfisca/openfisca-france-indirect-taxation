@@ -54,7 +54,7 @@ Depuis le dossier "openfisca-france-indirect-taxation", lancer les scripts suiva
 
 
 - `build-collection -c erfs_fpr -d -m -s 2015`
-- `build-collection -c erfs_fpr -d -s 2017`#on a retiré les -m pour que le fichiers de métadonnées soit complété et non écrasé
+- `build-collection -c erfs_fpr -d -s 2017` #on a retiré les -m pour que le fichiers de métadonnées soit complété et non écrasé
 
 Lors de l'exécution de ces scripts, éventuellement prendre garde aux problèmes de chemin d'accès aux répertoires de données. 
 !!! Le module gère les espaces mais pas les accents !!!

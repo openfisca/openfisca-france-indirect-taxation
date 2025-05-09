@@ -1,5 +1,8 @@
 # Survey Scenario
 
+Un *Survey Scenario* est un ensemble d'une ou deux simulations. Chacune de ces simulations consiste en la combinaison entre une base de données ordonnées et structurée, munie d'un système socio-fiscal fonctionnant sur ces données. Le *Survey Scenario* permet ainsi d'interfacer données et système socio-fiscal, et de faire des calculs sur une référence (baseline), et des réformes (le cas échéant). 
+La connexion entre données et simulateur nécessite diverses opérations d'ajustement, notamment des ajustements des données afin qu'elle puissent être appliquées au système socio-fiscal (ajustement des ensembles de variables, vieillissement des bases de données, etc.).
+
 ## Créer un survey scenario
 
 La méthode `create` de la classe SurveyScenario prend comme arguments : 
