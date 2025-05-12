@@ -1,7 +1,6 @@
 # Survey Scenario
 
 Un *Survey Scenario* est un ensemble d'une ou deux simulations. Chacune de ces simulations consiste en la combinaison entre une base de données ordonnées et structurée, munie d'un système socio-fiscal fonctionnant sur ces données. Le *Survey Scenario* permet ainsi d'interfacer données et système socio-fiscal, et de faire des calculs sur une référence (baseline), et des réformes (le cas échéant). 
-La connexion entre données et simulateur nécessite diverses opérations d'ajustement, notamment des ajustements des données afin qu'elle puissent être appliquées au système socio-fiscal (ajustement des ensembles de variables, vieillissement des bases de données, etc.).
 
 ## Créer un survey scenario
 
@@ -15,13 +14,3 @@ La méthode `create` de la classe SurveyScenario prend comme arguments :
 - `reform` : fonction qui, appliquée au système de référence, donne le système réformé (optionnel, et appliqué seulement si `tax_benefit_sytem`n'est pas renseigné);
 - `tax_benefit_system` : système socio-fiscal contenant une réforme par rapport au `baseline_tax_benefit_system` (optionnel); 
 - ` year` : année de la simulation.
-
-## Système socio-fiscal 
-
-Le système socio-fiscal de base est celui de la classe `FranceIndirectTaxationTaxBenefitSystem`. 
-Il rassemble tous les paramètres de la législation codés dans le modèle (openfisca_france_indirect_taxation/parameters/), des données de prix et de montants (`preprocessing` et `series_rv`) ainsi que toutes les variables définies dans le modèle (openfisca_france_indirect_taxation/variables). Tous les postes de consommation venant de la nomenclature COICOP ainsi que leur catégorie fiscale associée y sont également présents. 
-
-### Calcul des dépenses hors-taxes
-
-Pour chacun des postes, une variable `depense_ht_poste_` est calculée en retirant la TVA aux dépenses TTC, à l'aide de la fonction `generate_depenses_ht_postes_variables()`.
-Il est important de noter que le SurveyScenario utilise les paramètres définis dans le système socio-fiscal (de base ou réformé) pour effectuer ce calcul. Ainsi, un système dont on a changé les taux de TVA prend en compte ces nouveaux taux pour calculer les dépenses ht, ce qui aboutit à avoir des dépenses ht différentes entre la baseline et le système réformé.

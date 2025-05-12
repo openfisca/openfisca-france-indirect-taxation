@@ -22,3 +22,8 @@ Elle est produite par l'exécution du programme `build_coicop_legislation`.
 ## Les paramètres de la législation 
 
 La plupart des paramètres de la législation nécessaires pour simuler la fiscalité indirecte sont regroupés dans le modèle. Ce sont des séries qui donnent, pour chaque année où il est modifié, la valeur d’un paramètre de la législation (ex: le taux normal de TVA, la TICPE sur le diesel ...). Actuellement, le modèle gère la TVA, les taxes sur le tabac et les alcools, les assurances, et les énergies. Côté prestation, le chèque énergie est également modélisé.
+
+## Système socio-fiscal 
+
+Le système socio-fiscal de base est celui de la classe `FranceIndirectTaxationTaxBenefitSystem`. 
+Il rassemble tous les paramètres de la législation codés dans le modèle (openfisca_france_indirect_taxation/parameters/), des données de prix et de montants (`preprocessing` et `series_rv`) ainsi que toutes les variables définies dans le modèle (openfisca_france_indirect_taxation/variables). Tous les postes de consommation venant de la nomenclature COICOP ainsi que leur catégorie fiscale associée y sont également présents. 
