@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # Dans ce script les variables qui ont des différences de définition sont reconstruites
-# sur le modèle de l'enquête BdF (ou ENL dans certains cas où la nomenclature ENL a plus de sens)
-# de manière à avoir des définitions identiques.
-# Les noms de variables sont aussi alignés.
+# sur le modèle de l'enquête BdF (ou ERFS dans certains cas où la nomenclature ERFS a plus de sens)
+# de manière à avoir des définitions identiques. Les noms de variables sont aussi alignés.
 
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_1_build_dataframes import \
@@ -25,7 +24,6 @@ def homogenize_definitions(year_data):
             'ageprm': 'agepr',
             'catau2010': 'cataeu',
             'cstotprm': 'cs42pr',
-            'm_rsa_actm': 'rsa_act',
             'nb_uci': 'ocde10',
             'nbactif': 'nactifs',
             'nbactop': 'nactoccup',

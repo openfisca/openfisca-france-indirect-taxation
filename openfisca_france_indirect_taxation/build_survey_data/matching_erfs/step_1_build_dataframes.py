@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Dans ce script on importe les données des enquêtes BdF 2011 et ENL 2013.
+# Dans ce script on importe les données des enquêtes BdF et ERFS.
 # Pour chacune des deux enquêtes on importe les variables qui seront
-# susceptibles d'êtres utilisées dans l'appariement des bases de données.
+# susceptibles d'être utilisées dans l'appariement des bases de données.
 
 
 import pandas
@@ -54,7 +54,7 @@ def load_data_bdf_erfs(year_data):
         'ageprm',                       # âge de la PR au moment de l'enquête
         'catau2010',                    # catégorie zone urbaine
         'cstotprm',                     # categ socio pro
-        'm_rsa_actm',                   # RSA activité
+        'ppa',                          # Prime d'activité
         'metrodom',                     # métropole ou DOM
         'nb_uci',                       # nombre d'uc
         'nbactif',                      # nombre d'actifs
@@ -97,7 +97,7 @@ def load_data_bdf_erfs(year_data):
             'rev502',                   # intérêt valeurs mobilières
             'rev_etranger',             # revenus de l'étranger du ménage
             'rev_disponible',           # revenu disponible
-            'ppa',                      # RSA activité
+            'ppa',                      # Prime d'activité
             'salaires',                 # salaires et autres rémunérations
             'stalog',                   # statut d'occupation du logement
             'tau',                      # taille aire urbaine
@@ -134,8 +134,8 @@ def load_data_bdf_erfs(year_data):
 
     menages_erfs = menages_erfs[variables_erfs]
     menages_bdf = menages_bdf[variables_bdf]  # mhab_d
-    if year_bdf == 2017:
-        menages_bdf.rename(columns = {'ppa': 'rsa_act'})
+    if year_bdf != 2017:
+        menages_bdf.rename(columns = {'rsa_act' : 'ppa' })
 
     return menages_erfs, menages_bdf
 

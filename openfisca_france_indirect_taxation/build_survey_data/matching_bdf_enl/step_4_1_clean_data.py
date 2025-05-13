@@ -13,8 +13,8 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_
 from openfisca_france_indirect_taxation.utils import assets_directory
 
 
-def clean_data():
-    data_enl, data_bdf = create_niveau_vie_quantiles()
+def clean_data(year_data):
+    data_enl, data_bdf = create_niveau_vie_quantiles(year_data)
     data_enl.drop(
         columns = [
             'amr', 'cataeu', 'coml11', 'coml12', 'cs42cj', 'cs42pr',
@@ -26,10 +26,9 @@ def clean_data():
     data_bdf.drop(
         columns = [
             'amr', 'cataeu', 'chaufp', 'cs42cj', 'cs42pr', 'decuc', 'dip14cj',
-            'mchof', 'mchof_d', 'mfac_eau1_d', 'mfac_eg1_d',
-            'mloy_d', 'nbh1', 'poste_04_5_1_1_1_a', 'poste_04_5_1_1_1_b',
-            'poste_04_5_2_1_1', 'poste_04_5_5_1_1',
-            'situacj', 'situapr', 'tau', 'tuu', 'typmen'
+            'mchof', 'mchof_d', 'mfac_eau1_d',
+            'mloy_d', 'nbh1', 'situacj', 'situapr', 
+            'tau', 'tuu', 'typmen'
             ],
         inplace = True
         )
@@ -37,7 +36,7 @@ def clean_data():
 
 
 def create_donation_classes(year_data):
-    data_enl, data_bdf = create_niveau_vie_quantiles(year_data)
+    data_enl, data_bdf = clean_data(year_data)
 
     def create_donation_classes_(data):
         # Classes based on niveau_vie_decile and aides_logement

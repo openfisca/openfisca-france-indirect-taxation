@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
-"""Prépapration de deux fichiers .csv homogénéiser pour l'appariement via R de BDF et ERFS
+"""
+Préparation de deux fichiers .csv homogénéiser pour l'appariement via R de BDF et ERFS
 """
 
 
