@@ -5,20 +5,20 @@ Ensuite, cette base peut être mise à jour pour une année cible, on parle de v
     
 ## Calage
 
-Les données de BdF sous-estiment fortement la consommation des ménages. En se basant sur la comptabilité nationale pour l'année des données, on peut caler les dépenses pour que les agrégats correspondent.
+Les données de BdF sous-estiment fortement la consommation des ménages. En se basant sur la comptabilité nationale pour l'année des données, on peut caler les dépenses pour que les agrégats correspondent. 
 
 ### La consommation des ménages
 
-On utilise la base la plus récente dans la comptabilité nationale nous permettant d'obtenir des agrégats de consommation des ménages à un niveau fin (https://www.insee.fr/fr/statistiques/fichier/8068592/T_CONSO_EFF_FONCTION.xlsx). La nomenclature COICOP des données BdF a été ajustée au préalable pour être compatible avec cette source. On se place au niveau le plus fin possible (124 postes de consommation).
+On utilise la base la plus récente dans la comptabilité nationale nous permettant d'obtenir des agrégats de consommation des ménages à un niveau fin : [Consommation finale effective par fonction](https://www.insee.fr/fr/statistiques/fichier/8068592/T_CONSO_EFF_FONCTION.xlsx). La nomenclature COICOP des données BdF a été ajustée au préalable pour être compatible avec cette source. On se place au niveau le plus fin possible (124 postes de consommation). Autrement dit, on veut que sur chacun de ces 124 postes de consommation, la somme pondérée des dépenses dans BdF soit égale aux dépenses totales de ce poste dans la comptabilité nationale pour l'année 2017.
 
 ### Les revenus 
 
-On utilise la base la plus récente dans la comptabilité nationale nous permettant d'obternie les revenus disponibles des ménages ainsi que les loyers imputés (https://www.insee.fr/fr/statistiques/fichier/8068630/T_2101.xlsx). 
+On utilise la base la plus récente dans la comptabilité nationale nous permettant d'obternie les revenus disponibles des ménages ainsi que les loyers imputés : [Revenu disponible brut des ménages et évolution du pouvoir d'achat](https://www.insee.fr/fr/statistiques/fichier/8068630/T_2101.xlsx). 
 
 
 ## Vieillissement
 
 Une fois que les dépenses de consommation sont alignées sur la comptabilité nationale pour l'année des données, il est possible de les vieillir pour représenter n'importe quelle année cible. On peut vieillir la consommation et les revenus jusqu'en 2023 en utilisant les bases de données de la comptabilité nationale utilisées pour l'étape de calage. 
-Pour l'année 2024, la méthode consiste à veillir jusqu'à 2023 puis utiliser les comptes trimestriels pour inflater de 2023 à 2024 (consommation : https://www.insee.fr/fr/statistiques/fichier/8358378/t_conso_val.xls ; revenus : https://www.insee.fr/fr/statistiques/fichier/8358386/t_men_val.xls). La consommation est inflatée uniformément.
+Pour l'année 2024, la méthode consiste à veillir jusqu'à 2023 puis utiliser les comptes trimestriels pour inflater de 2023 à 2024 : [Consommation des ménages par produit](https://www.insee.fr/fr/statistiques/fichier/8358378/t_conso_val.xls) et [Revenu disponible et pouvoir d'achat des ménages](https://www.insee.fr/fr/statistiques/fichier/8358386/t_men_val.xls). La consommation est inflatée uniformément.
 
 Ces deux opérations sont réalisés à l'aide des fonctions du code `new_calage_bdf_cn.py`.
