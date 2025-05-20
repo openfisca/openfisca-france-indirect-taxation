@@ -1,7 +1,7 @@
 suppressPackageStartupMessages(library("configr"))
 suppressPackageStartupMessages(library("StatMatch"))
 
-config <- read.config(file = "~/.config/openfisca-survey-manager/config.ini")
+config <- read.config(file = "C:/Users/veve1/.config/openfisca-survey-manager/config.ini")
 assets_directory = config$openfisca_france_indirect_taxation$assets
 
 data_enl <- read.csv(file = file.path(assets_directory, "matching/matching_enl/data_matching_enl.csv"), header = -1, sep=",")
@@ -9,7 +9,8 @@ data_bdf <- read.csv(file = file.path(assets_directory, "matching/matching_enl/d
 
 # Compute ranked matching
 out.nnd <- rankNND.hotdeck(
-  data.rec = data_bdf, data.don = data_enl,
+  data.rec = data_bdf,
+  data.don = data_enl,
   var.rec = c("part_energies_revtot"),
   don.class = c("donation_class_3"),
   weight.rec = "pondmen",
@@ -18,7 +19,8 @@ out.nnd <- rankNND.hotdeck(
 
 # Create fused file
 fused.nnd.m <- create.fused(
-  data.rec = data_bdf, data.don = data_enl,
+  data.rec = data_bdf,
+  data.don = data_enl,
   mtc.ids = out.nnd$mtc.ids,
   z.vars = c(
     "froid_cout",

@@ -77,13 +77,12 @@ class depenses_tot(YearlyVariable):
 
     def formula(menage, period):
         postes_agreges = ['poste_agrege_{}'.format(index) for index in
-            ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]
+            ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12", "13"]
             ]
         depenses_tot = 0
         for poste in postes_agreges:
             depenses_tot += menage('{}'.format(poste), period)
-
-        return depenses_tot
+        return depenses_tot 
 
 
 class depenses_totales(YearlyVariable):

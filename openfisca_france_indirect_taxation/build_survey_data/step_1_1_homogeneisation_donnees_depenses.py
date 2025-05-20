@@ -107,18 +107,33 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     conso.set_index('ident_men', inplace = True)
 
     from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
-    coicop_poste_bdf = bdf(year = year)[['code_bdf', 'code_coicop']].copy()
+    #coicop_poste_bdf = bdf(year = year)[['code_bdf', 'code_coicop']].copy()
 
+    from openfisca_france_indirect_taxation.scripts.new_build_coicop_bdf import new_bdf
+    coicop_poste_bdf = new_bdf()[['code_bdf', 'code_coicop']].copy()
+    
     assert not set(conso.columns).difference(set(coicop_poste_bdf.code_bdf))
-    assert not set(coicop_poste_bdf.code_bdf.dropna()).difference(set(conso.columns))
+    #assert not set(coicop_poste_bdf.code_bdf.dropna()).difference(set(conso.columns))
 
     coicop_poste_bdf['formatted_poste'] = 'poste_' + coicop_poste_bdf.code_coicop.str.replace('.', '_')
     coicop_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['code_coicop']
-    assert not set(coicop_by_poste_bdf.keys()).difference(set(conso.columns))
-    assert not set(set(conso.columns)).difference(list(coicop_by_poste_bdf.keys()))
+    #assert not set(coicop_by_poste_bdf.keys()).difference(set(conso.columns))
+    #assert not set(conso.columns).difference(list(coicop_by_poste_bdf.keys()))
     formatted_poste_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['formatted_poste']
     coicop_data_frame = conso.rename(columns = formatted_poste_by_poste_bdf)
     depenses = coicop_data_frame.merge(poids, left_index = True, right_index = True)
+    
+    # On ventile les dépenses gaz et elec (factures jointes) dans les postes facture gaz et facture elec
+    depenses['depenses_gaz_et_elec'] = (depenses['poste_04_5_2_1'] * depenses['poste_04_5_1_1']) > 0
+    depenses_elec_seul_bdf = (depenses['poste_04_5_1_1'] * depenses['pondmen'] * depenses['depenses_gaz_et_elec']).sum()
+    depenses_gaz_seul_bdf = (depenses['poste_04_5_2_1'] * depenses['pondmen'] * depenses['depenses_gaz_et_elec']).sum()
+    part_gaz_seul_bdf = depenses_gaz_seul_bdf / (depenses_elec_seul_bdf + depenses_gaz_seul_bdf)
+    part_elec_seul_bdf = 1 - part_gaz_seul_bdf
+    depenses['poste_04_5_1_1'] = depenses['poste_04_5_1_1'] + part_elec_seul_bdf * depenses['poste_04_5_0_0']
+    depenses['poste_04_5_2_1'] = depenses['poste_04_5_2_1'] + part_gaz_seul_bdf * depenses['poste_04_5_0_0']
+    depenses['poste_04_5_0_0'] = 0
+    depenses.drop('depenses_gaz_et_elec', axis = 1, inplace = True)
+    
     temporary_store['depenses_{}'.format(year)] = depenses
     temporary_store.close()
 

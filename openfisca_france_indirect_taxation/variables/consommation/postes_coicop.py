@@ -45,7 +45,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
 
     for categorie_fiscale in reference_categories:
         year_start = 1994
-        year_final_stop = 2014
+        year_final_stop = 2024
         functions_by_name = dict()
         for year in range(year_start, year_final_stop + 1):
             postes_coicop = sorted(
@@ -102,7 +102,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
 def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = None, reform_key = None,
         taux_by_categorie_fiscale = None):
     # codes_bdf = [element for element in codes_coicop_data_frame.code_bdf.unique()]
-    for num_prefix in ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]:
+    for num_prefix in ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12", "13"]:
         codes_coicop = codes_coicop_data_frame.loc[
             codes_coicop_data_frame.code_coicop.str.startswith(num_prefix)
             ]['code_coicop'].drop_duplicates().tolist()

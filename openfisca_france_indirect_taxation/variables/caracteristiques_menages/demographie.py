@@ -53,7 +53,11 @@ class nactifs(YearlyVariable):
     entity = Menage
     label = "Nombre d'actifs dans le ménage"
 
-
+class nactoccup(YearlyVariable):
+    value_type = int
+    entity = Menage
+    label = "Nombre d'actifs occupés dans le ménage"
+    
 class nadultes(YearlyVariable):
     value_type = int
     entity = Menage

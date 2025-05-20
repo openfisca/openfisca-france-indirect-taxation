@@ -7,10 +7,9 @@
 import os
 import pandas as pd
 
-# Importation des bases de données appariées et de la base de référence entd
 from openfisca_france_indirect_taxation.utils import assets_directory
 
-
+# Importation des bases de données appariées et de la base de référence entd
 # data_matched_random = pd.read_csv(
 #     os.path.join(
 #         assets_directory,
@@ -30,7 +29,7 @@ def calage_depenses_from_distance(data_matched):
                 / data_matched_group['pondmen'].sum()
                 )
             avg_depenses = (
-                sum(data_matched_group['poste_07_2_2_1_1'] * data_matched_group['pondmen'])
+                sum(data_matched_group['poste_07_2_2_1'] * data_matched_group['pondmen'])
                 / data_matched_group['pondmen'].sum()
                 )
 

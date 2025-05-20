@@ -57,16 +57,29 @@ class niveau_vie_decile(YearlyVariable):
         return niveau_vie_decile
 
 
+class decile_rev_disponible(YearlyVariable):
+    value_type = Enum
+    default_value = Deciles.hors_champs
+    possible_values = Deciles
+    entity = Menage
+    label = "Décile de revenu disponible"
+
+    def formula(menage, period):
+        rev_disponible = menage('rev_disponible', period)
+        pondmen = menage('pondmen', period)
+        labels = numpy.arange(1, 11)
+        decile_rev_disponible, values = weighted_quantiles(rev_disponible, labels, pondmen, return_quantiles = True)
+        return decile_rev_disponible
+    
 class loyer_impute(YearlyVariable):
     value_type = float
     entity = Menage
     label = "Loyer imputé du ménage"
 
-
 class rev_apres_loyer(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Revenu disponible du ménage auquel on ajoute le loyer imputé"
+    label = "Revenu disponible du ménage auquel on retranche le loyer (pas le loyer imputé)"
 
     def formula(menage, period):
         revenu_disponible = menage('rev_disponible', period)
@@ -77,7 +90,7 @@ class rev_apres_loyer(YearlyVariable):
         return rev_apres_loyer
 
 
-class rev_disp_loyerimput(YearlyVariable):
+class rev_disp_yc_loyerimpute(YearlyVariable):
     value_type = float
     entity = Menage
     label = "Revenu disponible du ménage auquel on ajoute le loyer imputé"

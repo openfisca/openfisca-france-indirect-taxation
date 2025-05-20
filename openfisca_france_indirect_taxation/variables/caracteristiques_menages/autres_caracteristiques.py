@@ -141,6 +141,10 @@ class situapr(YearlyVariable):
     entity = Menage
     label = "Situation de la personne de référence vis-à-vis du travail"
 
+class situaagr(YearlyVariable):
+    value_type = float
+    entity = Menage
+    label = "Situation de l'autre personne du groupe de référence vis-à-vis du travail"
 
 class surfhab_d(YearlyVariable):
     value_type = float

@@ -87,7 +87,7 @@ def load_data_menages_bdf_entd(year_data):
         'npers',
         'ocde10',  # nb unités de conso
         'pondmen',
-        'poste_07_2_2_1_1',
+        'poste_07_2_2_1', # modifié Hervé 25/04 (07_2_2_1_1 -> 07_2_2_1)
         'revtot',  # revenu total
         'situapr',
         'stalog',

@@ -10,7 +10,7 @@ import numpy as np
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_1_build_dataframes import \
     load_data_bdf_enl
 from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
-
+from openfisca_france_indirect_taxation.projects.TVA_Herve_IPP.new_calage_bdf_cn import new_get_inflators
 
 def inflate_energy_consumption(data_enl, data_bdf):
     inflators = get_inflators_by_year_energy()  # Inflate BdF to year of the ENL, 2013
@@ -29,6 +29,24 @@ def inflate_energy_consumption(data_enl, data_bdf):
 
     return data_enl, data_bdf
 
+def new_inflate_energy_consumption(data_enl, data_bdf):
+    inflators = new_get_inflators(2013,2017)  # Inflate BdF to year of the ENL, 2013
+    rename_energy_dict = {'poste_04_5_1_1': 'depenses_electricite',
+        'poste_04_5_2_1': 'depenses_gaz_ville',
+        'poste_04_5_2_2': 'depenses_gaz_liquefie',
+        'poste_04_5_3_1': 'depenses_combustibles_liquides',
+        'poste_04_5_4_1': 'depenses_combustibles_solides',
+        'rev_disponible' : 'revtot'
+        }
+    inflators_bdf = {rename_energy_dict.get(k,k) : v for k,v in inflators.items()}
+    inflators_enl = dict()
+    for energie in ['depenses_electricite', 'depenses_gaz_ville', 'depenses_gaz_liquefie',
+            'depenses_combustibles_liquides', 'depenses_combustibles_solides']:
+        data_bdf[energie] = data_bdf[energie] * inflators_bdf[energie]
+        inflators_enl[energie] = (data_bdf.pondmen * data_bdf[energie]).sum() / (data_enl.pondmen * data_enl[energie]).sum()
+        data_enl[energie] = data_enl[energie] * inflators_enl[energie]
+
+    return data_enl, data_bdf
 
 def homogenize_variables_definition_bdf_enl(year_data):
 
@@ -142,20 +160,20 @@ def homogenize_variables_definition_bdf_enl(year_data):
     # Nbh1
     data_bdf['nbh1'] = data_bdf['nbh1'].fillna(0)
 
-    # Gestion des dépenses d'énergies
-    joint_data_bdf = data_bdf.query('poste_04_5_1_1_1_b > 0').query('poste_04_5_2_1_1 > 0').copy()
-    part_electricite_bdf = (
-        joint_data_bdf.poste_04_5_1_1_1_b.sum() / (
-            joint_data_bdf.poste_04_5_1_1_1_b.sum()
-            + joint_data_bdf.poste_04_5_2_1_1.sum()
-            )
-        )
-    data_bdf['depenses_electricite'] = (
-        data_bdf['poste_04_5_1_1_1_b'] + data_bdf['poste_04_5_1_1_1_a'] * part_electricite_bdf
-        )
-    data_bdf['depenses_gaz_ville'] = (
-        data_bdf['poste_04_5_2_1_1'] + data_bdf['poste_04_5_1_1_1_a'] * (1 - part_electricite_bdf)
-        )
+    # Gestion des dépenses d'énergies ( déjà fait dans build_depenses_homogenisees())
+    # joint_data_bdf = data_bdf.query('poste_04_5_1_1_1_b > 0').query('poste_04_5_2_1_1 > 0').copy()
+    # part_electricite_bdf = (
+    #     joint_data_bdf.poste_04_5_1_1_1_b.sum() / (
+    #         joint_data_bdf.poste_04_5_1_1_1_b.sum()
+    #         + joint_data_bdf.poste_04_5_2_1_1.sum()
+    #         )
+    #     )
+    # data_bdf['depenses_electricite'] = (
+    #     data_bdf['poste_04_5_1_1_1_b'] + data_bdf['poste_04_5_1_1_1_a'] * part_electricite_bdf
+    #     )
+    # data_bdf['depenses_gaz_ville'] = (
+    #     data_bdf['poste_04_5_2_1_1'] + data_bdf['poste_04_5_1_1_1_a'] * (1 - part_electricite_bdf)
+    #     )
 
     joint_data_enl = data_enl.query('coml11 > 0').query('coml12 > 0').copy()
     part_electricite_enl = (
@@ -181,31 +199,31 @@ def homogenize_variables_definition_bdf_enl(year_data):
     # Rename
     renaming = {
         'cataeu2010': 'cataeu',
-        'cceml': 'mfac_eau1_d',
-        'coml': 'depenses_energies',
-        'coml2': 'depenses_combustibles_liquides',
-        'coml3': 'depenses_gaz_liquefie',
-        'enfhod': 'nbh1',
-        'gmur': 'isolation_murs',
-        'gtoit2': 'isolation_toit',
-        'gvit1': 'majorite_double_vitrage',
-        'gvit1b': 'isolation_fenetres',
-        'lchauf': 'mchof_d',
-        'hnph1': 'nbphab',
-        'hsh1': 'surfhab_d',
-        'lmlm': 'mloy_d',
-        'mag': 'agepr',
-        'mcs': 'cs42pr',
-        'mcsc': 'cs42cj',
+        'cceml':    'mfac_eau1_d',
+        'coml':     'depenses_energies',
+        'coml2':    'depenses_combustibles_liquides',
+        'coml3':    'depenses_gaz_liquefie',
+        'enfhod':   'nbh1',
+        'gmur':     'isolation_murs',
+        'gtoit2':   'isolation_toit',
+        'gvit1':    'majorite_double_vitrage',
+        'gvit1b':   'isolation_fenetres',
+        'lchauf':   'mchof_d',
+        'hnph1':    'nbphab',
+        'hsh1':     'surfhab_d',
+        'lmlm':     'mloy_d',
+        'mag':      'agepr',
+        'mcs':      'cs42pr',
+        'mcsc':     'cs42cj',
         # 'mne1': 'nenfants', add back if needed
-        'mpa': 'nactifs',
-        'mrtota3': 'revtot',
-        'muc1': 'ocde10',
-        'ndip14': 'dip14pr',
-        'nhab': 'npers',
-        'qex': 'pondmen',
-        'tau2010': 'tau',
-        'tu2010': 'tuu',
+        'mpa':      'nactifs',
+        'mrtota3':  'revtot',
+        'muc1':     'ocde10',
+        'ndip14':   'dip14pr',
+        'nhab':     'npers',
+        'qex':      'pondmen',
+        'tau2010':  'tau',
+        'tu2010':   'tuu',
         }
 
     assert set(renaming.keys()) < set(data_enl.columns), "Missing {} in data_enl".format(
@@ -218,9 +236,11 @@ def homogenize_variables_definition_bdf_enl(year_data):
 
     data_bdf.rename(
         columns = {
-            'poste_04_5_2_2_1': 'depenses_gaz_liquefie',
-            'poste_04_5_3_1_1': 'depenses_combustibles_liquides',
-            'poste_04_5_4_1_1': 'depenses_combustibles_solides',
+            'poste_04_5_1_1': 'depenses_electricite',
+            'poste_04_5_2_1': 'depenses_gaz_ville',
+            'poste_04_5_2_2': 'depenses_gaz_liquefie',
+            'poste_04_5_3_1': 'depenses_combustibles_liquides',
+            'poste_04_5_4_1': 'depenses_combustibles_solides',
             },
         inplace = True,
         )
@@ -233,7 +253,7 @@ def homogenize_variables_definition_bdf_enl(year_data):
     data_enl = data_enl.sort_index(axis = 1)
     data_bdf = data_bdf.sort_index(axis = 1)
 
-    data_enl, data_bdf = inflate_energy_consumption(data_enl, data_bdf)
+    data_enl, data_bdf = new_inflate_energy_consumption(data_enl, data_bdf)
 
     return data_enl, data_bdf
 

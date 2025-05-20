@@ -7,19 +7,14 @@ probability distributions
 
 # Dans ce script, on test la qualité de l'appariement.
 
-
 import pandas as pd
-
 import os
-
 
 from openfisca_france_indirect_taxation.build_survey_data.utils import \
     hellinger
 from openfisca_france_indirect_taxation.utils import assets_directory
 
-
 # Importation des bases de données appariées et de la base de référence entd
-
 
 data_entd = pd.read_csv(
     os.path.join(
@@ -32,7 +27,6 @@ data_entd = pd.read_csv(
     decimal = '.'
     )
 
-
 data_matched_distance = pd.read_csv(
     os.path.join(
         assets_directory,
@@ -44,7 +38,6 @@ data_matched_distance = pd.read_csv(
     decimal = '.'
     )
 
-
 data_matched_random = pd.read_csv(
     os.path.join(
         assets_directory,
@@ -55,7 +48,6 @@ data_matched_random = pd.read_csv(
     sep =',',
     decimal = '.'
     )
-
 
 data_matched_rank = pd.read_csv(
     os.path.join(

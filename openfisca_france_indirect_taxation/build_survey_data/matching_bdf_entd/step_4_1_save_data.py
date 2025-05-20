@@ -7,7 +7,6 @@
 
 import os
 
-
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
 from openfisca_france_indirect_taxation.utils import assets_directory
@@ -33,6 +32,7 @@ def create_donation_classes(year_data):
             else:
                 data.loc[data['niveau_vie_decile'] == i, 'donation_class_1'] = '{}'.format(i)
 
+        # Classes based on niveau_vie_decile and rural
         data['donation_class_3'] = 0
         for i in range(1, 11):
             for rur in [0, 1]:

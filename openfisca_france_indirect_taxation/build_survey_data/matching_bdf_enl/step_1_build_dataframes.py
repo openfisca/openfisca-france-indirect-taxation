@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Dans ce script on importe les données des enquêtes BdF 2011 et ENL 2013.
+# Dans ce script on importe les données des enquêtes BdF et ENL 2013.
 # Pour chacune des deux enquêtes on importe les variables qui seront
-# susceptibles d'êtres utilisées dans l'appariement des bases de données.
-
+# susceptibles d'être utilisées dans l'appariement des bases de données.
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
@@ -42,21 +41,21 @@ def load_data_bdf_enl(year_data):
 
     # Set variables :
     variables_menages_bdf = [
-        'agepr',  # âge de la pr
-        'aidlog1',  # aides au logement
+        'agepr',            # âge de la pr
+        'aidlog1',          # aides au logement
         'aidlog2',
-        'aise',  # à l'aise avec le budget
+        'aise',             # à l'aise avec le budget
         'ancons',
-        'cataeu',  # type de commune
+        'cataeu',           # type de commune
         'chaufp',
-        'cs42pr',  # catégorie socio-pro
-        'cs42cj',
-        'decuc',
+        'cs42pr',           # catégorie socio-pro de lpr
+        'cs42cj',           # catégorie socio-pro du conjoint
+        'decuc',            
         'depenses_tot',
-        'dip14cj',  # diplômes
-        'dip14pr',
+        'dip14cj',          # diplômes conjoint
+        'dip14pr',          # diplômes de la pr
         # 'h_trans1',
-        'htl',  # type de logement
+        'htl',              # type de logement
         'ident_men',
         'identifiant_menage',
         'mall1',
@@ -72,25 +71,26 @@ def load_data_bdf_enl(year_data):
         'nactifs',
         'nenfants',
         'npers',
-        'ocde10',  # nb unités de conso
+        'ocde10',           # nb unités de conso
         'pondmen',
-        'poste_04_5_1_1_1_a',
-        'poste_04_5_1_1_1_b',
-        'poste_04_5_2_1_1',
-        'poste_04_5_2_2_1',
-        'poste_04_5_3_1_1',
-        'poste_04_5_4_1_1',
-        'poste_04_5_5_1_1',
+        'poste_04_5_0_0',   # Facture électricité + gaz (non dissociables)
+        'poste_04_5_1_1',   # Facture d'électricité
+        'poste_04_5_2_1',   # Facture de gaz
+        'poste_04_5_2_2',   # Achats de butane, propane (gaz liquéfié)
+        'poste_04_5_3_1',   # Combustibles liquides (fuel, mazout, pétrole)
+        'poste_04_5_4_1',   # Combustibles solides (bois, harbon de bois, charbon, coke)
+        'poste_04_5_5_1',   # Chauffage urbain
+        'poste_04_5_5_2',   # Glace
         # 'poste_07_2_2_1_1',
-        'revtot',  # revenu total
-        'situapr',  # situation pro
+        'revtot',           # revenu total
+        'situapr',          # situation pro
         'situacj',
         'stalog',
-        'surfhab_d',  # surface habitable
+        'surfhab_d',        # surface habitable
         'tau',
         'tuu',
         'typmen',
-        'zeat',  # zone climatique
+        'zeat',             # zone climatique
         ]
 
     variables_menages_enl = [
@@ -109,25 +109,25 @@ def load_data_bdf_enl(year_data):
         'dom',
         'enfhod',
         'kusa_5',
-        'gchauf_1',  # raisons du froid dans le logement
+        'gchauf_1',     # raisons du froid dans le logement
         'gchauf_2',
         'gchauf_3',
         'gchauf_4',
         'gchauf_5',
         'gchauf_6',
         'gchauf_7',
-        'gchauf_n',  # nombre de raisons du froid
-        'gchaufs_1',  # solutions contre le froid
+        'gchauf_n',     # nombre de raisons du froid
+        'gchaufs_1',    # solutions contre le froid
         'gchaufs_2',
         'gchaufs_3',
         'gchaufs_4',
         'gchaufs_5',
-        'gmoy1',  # moyen utilisé trajet travail
-        'gmur',  # isolation thermique murs
-        'gtoit2',  # isolation thermique toit
-        'gtt1',  # durée trajet domicile-travail
-        'gvit1',  # majorité double vitrage
-        'gvit1b',  # fenêtres laissent passer l'air
+        'gmoy1',       # moyen utilisé trajet travail
+        'gmur',        # isolation thermique murs
+        'gtoit2',      # isolation thermique toit
+        'gtt1',        # durée trajet domicile-travail
+        'gvit1',       # majorité double vitrage
+        'gvit1b',      # fenêtres laissent passer l'air
         'hnph1',
         'hsh1',
         'htl',
@@ -142,7 +142,7 @@ def load_data_bdf_enl(year_data):
         'msituac',
         'mtypmena',
         'muc1',
-        'nhab',  # nombre d'habitants du logement
+        'nhab',        # nombre d'habitants du logement
         'qex',
         'soc',
         'tau2010',
@@ -152,7 +152,7 @@ def load_data_bdf_enl(year_data):
 
     variables_indiv_enl = [
         'idlog',
-        'igreflog',  # = 1 si l'individu est la personne de référence
+        'igreflog',    # = 1 si l'individu est la personne de référence
         'ndip14',
         'nanais'
         ]
@@ -182,6 +182,7 @@ def load_data_bdf_enl(year_data):
     indiv_enl_keep = indiv_enl_keep.query('igreflog == 1')
     del indiv_enl_keep['igreflog']
     menage_enl_keep = menage_enl_keep.merge(indiv_enl_keep, on = 'idlog')
+    
     return menage_enl_keep, conso_bdf_keep
 
 

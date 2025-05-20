@@ -19,16 +19,16 @@ def load_data_indiv_teg():
     input_indiv_teg = survey_entd.get_values(table = 'q_ind_lieu_teg')
 
     variables_indiv_teg = [
-        'distrteg',  # Distance routière domicile – lieu de TEG (source Odomatrix Inra-Insee) (en km)
+        'distrteg',         # Distance routière domicile – lieu de TEG (source Odomatrix Inra-Insee) (en km)
         'ident_men',
-        'noi',  # numero de l'indiv dans le menage
-        'typlieu',  # numéro du lieu de travail pour l'indiv
-        'v1_btravbarf',  # Nb de jours/sem. où X se rend à son lieu de travail étude ou garde (TEG), en gral
+        'noi',              # numero de l'indiv dans le menage
+        'typlieu',          # numéro du lieu de travail pour l'indiv
+        'v1_btravbarf',     # Nb de jours/sem. où X se rend à son lieu de travail étude ou garde (TEG), en gral
         'v1_btravdist',
         'v1_btravmoyen1s',  # Façon habituelle de se rendre au TEG, moy. 1
-        'v1_btravnbarj',  # Nb d'aller-retour/jour de dplct
-        'v1_btravtempsa',  # Durée habituelle pour faire le trajet aller au TEG (en min)
-        'v1_btravtempsr',  # Durée habituelle pour faire le trajet retour du TEG (en min)
+        'v1_btravnbarj',    # Nb d'aller-retour/jour de dplct
+        'v1_btravtempsa',   # Durée habituelle pour faire le trajet aller au TEG (en min)
+        'v1_btravtempsr',   # Durée habituelle pour faire le trajet retour du TEG (en min)
         ]
 
     indiv_teg_keep = input_indiv_teg[variables_indiv_teg]

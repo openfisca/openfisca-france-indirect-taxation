@@ -1,7 +1,7 @@
 suppressPackageStartupMessages(library("configr"))
 suppressPackageStartupMessages(library("StatMatch"))
 
-config <- read.config(file = "~/.config/openfisca-survey-manager/config.ini")
+config <- read.config(file = "C:/Users/veve1/.config/openfisca-survey-manager/config.ini")
 assets_directory = config$openfisca_france_indirect_taxation$assets
 
 data_entd <- read.csv(file = file.path(assets_directory, "/matching/matching_entd/data_matching_entd.csv"), header = -1, sep=",")
@@ -9,7 +9,8 @@ data_bdf <- read.csv(file = file.path(assets_directory, "/matching/matching_entd
 
 # Compute ranked matching
 out.nnd <- rankNND.hotdeck(
-  data.rec = data_bdf, data.don = data_entd,
+  data.rec = data_bdf, 
+  data.don = data_entd,
   var.rec = c("poste_07_2_2_1_1"),
   var.don = c("distance"),
   don.class = c("niveau_vie_decile", "rural"),

@@ -29,7 +29,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
             continue
 
         year_start = 1994
-        year_final_stop = 2014
+        year_final_stop = 2024
         functions_by_name = dict()
         # formulas = SortedDict()
         for year in range(year_start, year_final_stop + 1):

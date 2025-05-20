@@ -13,6 +13,7 @@ from slugify import slugify
 from openfisca_core.model_api import *  # noqa analysis:ignore
 from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable  # noqa analysis:ignore
 from openfisca_france_indirect_taxation.entities import Individu, Menage  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.scripts.new_build_coicop_bdf import new_bdf
 
 try:
     from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
@@ -24,9 +25,9 @@ tva_by_categorie_primaire = dict(
     biere = 'tva_taux_plein',
     vin = 'tva_taux_plein',
     alcools_forts = 'tva_taux_plein',
-    cigares = 'cigares',
-    cigarettes = 'cigarettes',
-    tabac_a_rouler = 'tabac_a_rouler',
+    cigares = 'tva_taux_plein',
+    cigarettes = 'tva_taux_plein',
+    tabac_a_rouler = 'tva_taux_plein',
     ticpe = 'tva_taux_plein',
     assurance_transport = '',
     assurance_sante = '',
@@ -92,6 +93,13 @@ def get_legislation_data_frames():
     categories_fiscales_data_frame = codes_coicop_data_frame[
         ['code_coicop', 'code_bdf', 'categorie_fiscale', 'start', 'stop', 'label']
         ].copy().fillna('')
+    
+    # Ajout pour modifier la coicop et garder les catégories fiscales associées aux code bdf
+    coicop_table_bdf = new_bdf(2017)
+    categories_fiscales_data_frame.drop('code_coicop', axis= 1 , inplace = True)
+    categories_fiscales_data_frame = categories_fiscales_data_frame.merge( coicop_table_bdf, on = 'code_bdf')
+    codes_coicop_data_frame.drop('code_coicop', axis= 1 , inplace = True)
+    codes_coicop_data_frame = codes_coicop_data_frame.merge( coicop_table_bdf, on = 'code_bdf')
     return categories_fiscales_data_frame, codes_coicop_data_frame
 
 

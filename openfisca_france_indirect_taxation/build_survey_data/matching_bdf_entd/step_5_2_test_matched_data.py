@@ -2,15 +2,12 @@
 
 # Dans ce script, on test la qualité de l'appariement.
 
-
 import pandas as pd
-
 import os
 
-
-# Importation des bases de données appariées et de la base de référence entd
 from openfisca_france_indirect_taxation.utils import assets_directory
 
+# Importation des bases de données appariées et de la base de référence entd
 
 data_entd = pd.read_csv(
     os.path.join(

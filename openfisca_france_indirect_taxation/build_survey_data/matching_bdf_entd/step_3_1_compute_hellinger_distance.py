@@ -7,12 +7,14 @@ probability distributions
 
 # To be completed : add missing variables
 
+# TO-DO : write one flexible function that compute hellinger distance for a given variable instead of one function per variable !
+
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
 from openfisca_france_indirect_taxation.build_survey_data.utils import \
     hellinger
 
-data_entd, data_bdf = create_niveau_vie_quantiles()
+data_entd, data_bdf = create_niveau_vie_quantiles(year_data = 2017 )
 
 
 def hellinger_agepr(data_bdf, data_entd):
