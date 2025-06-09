@@ -204,9 +204,9 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         label = "Saindoux autres graisses d'origine animale",
         origin = 'TAXIPP',
         )
-    # et les confiseries et le chocolat à taux plein http://bofip.impots.gouv.fr/bofip/1438-PGP.html
+    # et les confiseries
     confiserie = dict(
-        value = ['01.1.8.1.3', '01.1.8.2.1', '01.1.8.2.2'],
+        value ='01.1.8.1.3',
         categorie_fiscale = 'tva_taux_plein'
         )
     # 02 Boissons alcoolisées et tabac
@@ -299,6 +299,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         categorie_fiscale = 'tva_taux_reduit' ,
         start = 2012,
     )
+    
     # et pas de taxation des loyers
     loyers = dict(
         value = ['04.1.1.1.1', '04.1.1.2.1'],
@@ -446,6 +447,12 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
     #-> le livre est passé au taux intermediaire (7%) en 2012 avant de repasser au taux réduit à 5,5% en 2013,
     # comme on ne peut pas le passer au taux intermédiaire seulement pour une année on le laisse au taux réduit    
 
+    # Horticulture, floriculture
+    plantes_fleurs = dict(
+        value = '09.3.2.1',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2016,
+    )
     # Jeux de hasard
     jeux_hasard = dict(
         value = '09.4.3',
@@ -453,6 +460,12 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         label = 'Jeux de hasard',
         origin = 'COICOP UN'
         )
+    # equipement sportif
+    equipement_sportif = dict(
+        value = '09.3.1.2',
+        categorie_fiscale = 'tva_taux_plein',
+        start = 1994
+    )
     # Cinemas, théâtres, concerts
     cinema_theatre_concert = dict(
         value = '09.4.2.1',
@@ -519,6 +532,13 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2015,
         )
+    
+    # Voyage à forfait 
+    voyage_forfait = dict(
+        value = '09.6.1.1',
+        categorie_fiscale = '',
+        start = 2019
+    )
     # 10 Education
     education = dict(
         value = 10,
@@ -673,12 +693,13 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
             communications, services_postaux,
             # 09
             loisirs_culture, journaux_periodiques, livre,
-            jeux_hasard,
+            plantes_fleurs , jeux_hasard,  equipement_sportif,
             cinema_theatre_concert, cinema_theatre_concert_reforme_2012, cinema_theatre_concert_reforme_2014, 
             musee_zoo, musee_zoo_reforme_2012, musee_zoo_reforme_2018,
             tv_radio, tv_radio_reforme_2012 ,
             autres_services_culturels,
             services_recreatifs_sportifs, services_recreatifs_sportifs_reforme_2015,
+            voyage_forfait,
             # 10 Education
             education,
             # 11 Hotellerie restauration

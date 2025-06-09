@@ -259,3 +259,66 @@ class augmente_tous_les_taux(Reform):
         self.update_variable(self.depenses_tva_taux_super_reduit)
         self.update_variable(self.tva_taux_super_reduit)        
         self.modify_parameters(modifier_function = reform_modify_parameters)
+
+class pass_through_0_8(Reform):
+    name = u'Application du pass-through de 0.8 sur +1 p.p. de TVA'
+    
+    class depenses_ht_tva_taux_plein(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Dépenses HT des biens acquittant la TVA acquitée à taux plein"
+
+        def formula(menage, period, parameters):
+            pass_through = 0.8
+            depenses_ht_tva_taux_plein = menage('depenses_ht_tva_taux_plein', period)
+            taux_plein = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
+            augmentation = parameters(period.start).imposition_indirecte.tva.taux_de_tva.augmentation_tva_2025.delta_taux
+            
+            return depenses_ht_tva_taux_plein * (1 + taux_plein + pass_through * augmentation) /(1 + taux_plein + augmentation)
+        
+    class depenses_ht_tva_taux_intermediaire(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Dépenses HT des biens acquittant la TVA acquitée à taux intermediaire"
+
+        def formula(menage, period, parameters):
+            pass_through = 0.8
+            depenses_ht_tva_taux_intermediaire = menage('depenses_ht_tva_taux_intermediaire', period)
+            taux_intermediaire = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_intermediaire
+            augmentation = parameters(period.start).imposition_indirecte.tva.taux_de_tva.augmentation_tva_2025.delta_taux
+            
+            return depenses_ht_tva_taux_intermediaire * (1 + taux_intermediaire + pass_through * augmentation) /(1 + taux_intermediaire + augmentation)
+        
+    class depenses_ht_tva_taux_reduit(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Dépenses HT des biens acquittant la TVA acquitée à taux reduit"
+
+        def formula(menage, period, parameters):
+            pass_through = 0.8
+            depenses_ht_tva_taux_reduit = menage('depenses_ht_tva_taux_reduit', period)
+            taux_reduit = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_reduit
+            augmentation = parameters(period.start).imposition_indirecte.tva.taux_de_tva.augmentation_tva_2025.delta_taux
+            
+            return depenses_ht_tva_taux_reduit * (1 + taux_reduit + pass_through * augmentation) /(1 + taux_reduit + augmentation)
+        
+    class depenses_ht_tva_taux_super_reduit(YearlyVariable):
+        value_type = float
+        entity = Menage
+        label = "Dépenses HT des biens acquittant la TVA acquitée à taux super_reduit"
+
+        def formula(menage, period, parameters):
+            pass_through = 0.8
+            depenses_ht_tva_taux_super_reduit = menage('depenses_ht_tva_taux_super_reduit', period)
+            taux_super_reduit = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_super_reduit
+            augmentation = parameters(period.start).imposition_indirecte.tva.taux_de_tva.augmentation_tva_2025.delta_taux
+            
+            return depenses_ht_tva_taux_super_reduit * (1 + taux_super_reduit + pass_through * augmentation) /(1 + taux_super_reduit + augmentation)
+        
+    def apply(self):
+        self.update_variable(self.depenses_ht_tva_taux_plein)
+        self.update_variable(self.depenses_ht_tva_taux_intermediaire)
+        self.update_variable(self.depenses_ht_tva_taux_reduit)     
+        self.update_variable(self.depenses_ht_tva_taux_super_reduit)        
+        self.modify_parameters(modifier_function = reform_modify_parameters)
+    
