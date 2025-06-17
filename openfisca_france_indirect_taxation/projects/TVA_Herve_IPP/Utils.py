@@ -3,15 +3,36 @@ import os
 import numpy as np
 import seaborn as sns 
 import wquantiles
+
+from tqdm import tqdm
 from collections import OrderedDict
 
 from openfisca_france_indirect_taxation.variables.base import * 
 from openfisca_survey_manager.variables import create_quantile
 from openfisca_survey_manager.statshelpers import mark_weighted_percentiles
+from openfisca_france_indirect_taxation.examples.utils_example import wavg
 
 output_path = "C:/Users/veve1/OneDrive/Documents/IPP/Budget 2026 TVA/Figures/"
 
-def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées", xlabel="Catégories", ylabel="Valeurs", colors = None, note = "Note",savefig = False, outfile = None):
+def bootstrap_weighted_mean_by_decile(df, weight_col ='pondmen', decile_col='quantile_indiv_niveau_vie', B=1000):
+    bootstrap_means = {'Decile {}'.format(decile) : [] for decile in sorted(df[decile_col].unique())}
+    seed = 100                              
+    for _ in tqdm(range(B)):                
+        
+        for decile in sorted(df[decile_col].unique()):      
+            
+            group = df.loc[df[decile_col] == decile]        
+            
+            data = group[['depenses_totales_par_uc','niveau_de_vie', weight_col,'npers']] 
+            sample_menage = data.sample(n = len(data), replace = True, random_state = seed) 
+            sample_indiv = sample_menage.loc[sample_menage.index.repeat(sample_menage['npers'])]    
+            mean_depenses = wavg(groupe = sample_indiv, var = 'depenses_totales_par_uc')            
+            mean_niveau_vie = wavg(groupe = sample_indiv, var = 'niveau_de_vie')                    
+            bootstrap_means['Decile {}'.format(decile)].append(mean_depenses/mean_niveau_vie*100)   
+        seed += 1                                                                                   
+    return(bootstrap_means)
+
+def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées", xlabel="Catégories", ylabel="Valeurs", colors = None, note = "Note",savefig = False, outfile = None, errors = None):
     """
     Crée un bar plot empilé à partir des variables sélectionnées dans un DataFrame.
 
@@ -42,9 +63,14 @@ def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées
     # Création des barres empilées
     for i, (var, label) in enumerate(zip(variables, labels)):
         color = colors[i] if colors else None
-        ax.bar(x, df[var], label=label, bottom=bottom, color = color)
+        yerr = df[errors] if errors is not None and i == len(label) else None
+        ax.bar(x, df[var], label=label, bottom=bottom, color = color,yerr=yerr,capsize=4)
         bottom +=df[var].values
 
+    # Add error bars on the total only
+    if errors is not None : 
+        ax.errorbar(x, bottom, yerr = df[errors], fmt='none', ecolor='black', capsize=5, linewidth=1.5)
+    
     # Ajout des légendes et titres
     ax.set_xlabel(xlabel, fontdict= {'fontsize' : 15}, fontweight ='bold')
     ax.set_ylabel(ylabel,  fontdict= {'fontsize' : 15}, fontweight ='bold')
@@ -112,7 +138,7 @@ def double_stacked_bar_plot(df1, df2, variables, labels,
 def weighted_quantiles(data, labels, weights, return_quantiles = False):
     num_categories = len(labels)
     breaks = np.linspace(0, 1, num_categories + 1)
-    quantiles = quantiles = [wquantiles.quantile_1D(data, weights, b) for b in breaks]
+    quantiles = [wquantiles.quantile_1D(data, weights, b) for b in breaks]
     ret = np.zeros(len(data))
     for i in range(len(labels)):
         lower = quantiles[i]
