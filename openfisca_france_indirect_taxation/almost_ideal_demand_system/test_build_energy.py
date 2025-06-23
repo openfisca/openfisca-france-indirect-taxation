@@ -26,11 +26,10 @@ assert (data_frame_for_reg['sum_shares'] == 1).any(), 'Shares do not sum to 1 in
 del data_frame_for_reg['sum_shares']
 
 
-''' Check that the prices do not take unlikely values '''
-# This test is problematic, it does not achieves its goal
+''' Check that the prices fall within the valid range (200 to 500) '''
 for i in range(1, 5):
-    assert (data_frame_for_reg['p{}'.format(i)] > 500).any(), 'Some prices seem too small'
-    assert (data_frame_for_reg['p{}'.format(i)] < 200).any(), 'Some prices seem too big'
+    assert ((data_frame_for_reg['p{}'.format(i)] >= 200) & (data_frame_for_reg['p{}'.format(i)] <= 500)).all(), \
+        'Some prices fall outside the valid range (200 to 500)'
 
 
 ''' Check period fixed effects sum to 1 '''
