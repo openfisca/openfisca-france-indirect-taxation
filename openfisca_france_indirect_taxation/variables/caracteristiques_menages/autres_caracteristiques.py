@@ -21,7 +21,12 @@ class aides_logement(YearlyVariable):
     entity = Menage
     label = "Le ménage touche des aides au logement"
 
-
+class aise(YearlyVariable):
+    value_type = float
+    entity = Menage 
+    label = "Sentiment du ménage par rapport à son budget actuel"
+    
+    
 class bat_av_49(YearlyVariable):
     value_type = float
     entity = Menage
