@@ -347,20 +347,18 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         assert menage.zeat.isin(list(range(1, 9))).all()
 
-        stalog = survey.get_values(table = "depmen", variables = ['ident_men', 'stalog'])
-        stalog['stalog'] = stalog.stalog.astype('int').copy()
-        stalog['new_stalog'] = 0
-        stalog.loc[stalog.stalog == 2, 'new_stalog'] = 1
-        stalog.loc[stalog.stalog == 1, 'new_stalog'] = 2
-        stalog.loc[stalog.stalog == 4, 'new_stalog'] = 3
-        stalog.loc[stalog.stalog == 5, 'new_stalog'] = 4
-        stalog.loc[stalog.stalog.isin([3, 6]), 'new_stalog'] = 5
-        stalog.stalog = stalog.new_stalog.copy()
-        del stalog['new_stalog']
-
-        assert stalog.stalog.isin(list(range(1, 6))).all()
-        stalog.set_index('ident_men', inplace = True)
-        menage = menage.merge(stalog, left_index = True, right_index = True)
+        # Rapprochement de la variable stalog avec celle de l'ENL
+        menage['stalog'] = menage['stalog'].astype(int)
+        mapping = {
+            2: 1,
+            1: 2,
+            4: 3,
+            5: 4,
+            3: 5,
+            6: 5 }
+        menage['stalog'] = menage['stalog'].replace(mapping)
+        assert menage['stalog'].isin(range(1, 6)).all()
+        
         menage['typlog'] = 2
         menage.loc[menage.htl.isin(['1', '5']), 'typlog'] = 1
         assert menage.typlog.isin([1, 2]).all()
@@ -637,16 +635,16 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         # Ajout des variables contenues dans la table depmen :
         variables_depmen = [
-            'aidlog1',
-            'aidlog2',
-            'ancons',
-            'chaufp',
+            'aidlog1',          # Aide au logement - propriétaire
+            'aidlog2',          # Aide au logement - locataire
+            'ancons',           # Année de construction de l'immeuble
+            'chaufp',           
             'htl',
             'ident_men',
-            'mall1',
-            'mall2',
-            'mchof',
-            'mchof_d',
+            'mall1',            # Montant de l'aide au logement - propriétaire
+            'mall2',            # Montant de l'aide au logement - locataire
+            'mchof',            # Montant des dépenses pour le chauffage collectif depuis un an
+            'mchof_d',          # Montant définitif des dépenses pour le chauffage collectif depuis un an
             'mfac_eau1',
             'mfac_eau1_d',
             'mfac_eg1',
@@ -656,7 +654,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'nbh1',
             'nbphab',
             'sourcp',
-            'stalog',
+            'stalog',           # Statut d'occupation du logement
             'surfhab_d',
             'tchof',
             'vag',
@@ -688,21 +686,22 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.loc[menage.vag_ == 6, 'vag'] = 28
         del menage['vag_']
 
-        menage['stalog'] = menage.stalog.astype('int').copy()
-        menage['new_stalog'] = 0
-        menage.loc[menage.stalog == 2, 'new_stalog'] = 1
-        menage.loc[menage.stalog == 1, 'new_stalog'] = 2
-        menage.loc[menage.stalog == 4, 'new_stalog'] = 3
-        menage.loc[menage.stalog == 5, 'new_stalog'] = 4
-        menage.loc[menage.stalog.isin([3, 6]), 'new_stalog'] = 5
-        menage.stalog = menage.new_stalog.copy()
-        del menage['new_stalog']
-        assert menage.stalog.isin(list(range(1, 6))).all()
+        # Rapprochement de la variable stalog avec celle de l'ENL
+        menage['stalog'] = menage['stalog'].astype(int)
+        mapping = {
+            2: 1,
+            1: 2,
+            4: 3,
+            5: 4,
+            3: 5,
+            6: 5
+        }
+        menage['stalog'] = menage['stalog'].replace(mapping)
+        assert menage['stalog'].isin(range(1, 6)).all()
+        
         '''
         TODO a déplacer ailleurs après avoir compris à quoi cela sert ! (dans le calcul des élasticités)
         vague = depmen[['vag', 'ident_men']].copy()
-        stalog = depmen[['stalog', 'ident_men']].copy()
-        sourcp = depmen[['sourcp', 'ident_men']].copy()
 
         menage = menage.merge(vague, left_index = True, right_index = True)
         # On met un numéro à chaque vague pour pouvoir faire un meilleur suivi des évolutions temporelles pour
@@ -715,22 +714,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.vag.loc[menage.vag_ == 5] = 27
         menage.vag.loc[menage.vag_ == 6] = 28
         del menage['vag_']
-
-        # Homogénéisation de la variable statut du logement qui prend des valeurs différentes pour 2011
-        stalog['stalog'] = stalog.stalog.astype('int').copy()
-        stalog['new_stalog'] = 0
-        stalog.loc[stalog.stalog == 2, 'new_stalog'] = 1
-        stalog.loc[stalog.stalog == 1, 'new_stalog'] = 2
-        stalog.loc[stalog.stalog == 4, 'new_stalog'] = 3
-        stalog.loc[stalog.stalog == 5, 'new_stalog'] = 4
-        stalog.loc[stalog.stalog.isin([3, 6]), 'new_stalog'] = 5
-        stalog.stalog = stalog.new_stalog.copy()
-        del stalog['new_stalog']
-        assert stalog.stalog.isin(range(1, 6)).all()
-        stalog.set_index('ident_men', inplace = True)
-        menage = menage.merge(stalog, left_index = True, right_index = True)
-        sourcp.set_index('ident_men', inplace = True)
-        menage = menage.merge(sourcp, left_index = True, right_index = True)
         '''
         # Recodage des catégories zeat
         menage.loc[menage.zeat == 7, 'zeat'] = 6

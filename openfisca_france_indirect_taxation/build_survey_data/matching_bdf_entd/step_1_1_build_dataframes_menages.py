@@ -49,46 +49,46 @@ def load_data_menages_bdf_entd(year_data):
         'cs42pr',
         'dip14pr',
         'nactifs',
-        'nbuc',  # ocde10
+        'nbuc',             # ocde10
         'nenfants',
-        'nivie10',  # déciles de revenu par uc
+        'nivie10',          # déciles de revenu par uc
         'npers',
-        'numcom_au2010',  # cataeu
-        'pondv1',  # poids ménage
-        'revuc',  # revenus simulés par UC
-        'rlog',  # allocations logement
+        'numcom_au2010',    # cataeu
+        'pondv1',           # poids ménage
+        'revuc',            # revenus simulés par UC
+        'rlog',             # allocations logement
         'situapr',
         'tu99',
         'tau99',
         # 'typlog',
-        'typmen5',  # type ménage
+        'typmen5',          # type ménage
         # To be completed
         ]
 
     variables_menage_entd = [
         'ident_men',
-        'v1_logpiec',  # nombre de pièces dans logement
-        'v1_logocc',  # statut d'occupation du logement
-        'v1_logloymens',  # loyer mensuel calculé
+        'v1_logpiec',       # nombre de pièces dans logement
+        'v1_logocc',        # statut d'occupation du logement
+        'v1_logloymens',    # loyer mensuel calculé
         ]
 
     variables_menage_bdf = [
         'ident_men',
         'aidlog1',
         'aidlog2',
-        'agepr',  # âge de la pr
+        'agepr',            # âge de la pr
         'cataeu',
         'cs42pr',
         'dip14pr',
-        'mloy_d',  # loyer mensuel
+        'mloy_d',           # loyer mensuel
         'nactifs',
         'nbphab',
         'nenfants',
         'npers',
-        'ocde10',  # nb unités de conso
+        'ocde10',           # nb unités de conso
         'pondmen',
-        'poste_07_2_2_1', # modifié Hervé 25/04 (07_2_2_1_1 -> 07_2_2_1)
-        'revtot',  # revenu total
+        'poste_07_2_2_1',   # modifié Hervé 25/04 (07_2_2_1_1 -> 07_2_2_1)
+        'revtot',           # revenu total
         'situapr',
         'stalog',
         'tau',

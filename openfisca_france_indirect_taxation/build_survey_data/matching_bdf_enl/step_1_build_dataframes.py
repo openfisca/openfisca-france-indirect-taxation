@@ -85,11 +85,11 @@ def load_data_bdf_enl(year_data):
         'revtot',           # revenu total
         'situapr',          # situation pro
         'situacj',
-        'stalog',
+        'stalog',           # Statut d'occupation du logement
         'surfhab_d',        # surface habitable
         'tau',
         'tuu',
-        'typmen',
+        'typmen',           #Type de ménage au sens du TCM
         'zeat',             # zone climatique
         ]
 
