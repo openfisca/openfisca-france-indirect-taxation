@@ -23,6 +23,7 @@ Un guide d'installation détaillé est disponible [ici](Install_openfisca-france
 - Note IPP n°34 - Juillet 2018 : [Les effets redistributifs de la fiscalité carbone en France](https://www.ipp.eu/actualites/note-ipp-n34-les-effets-redistributifs-de-la-fiscalite-carbone-en-france/)
 - Focus CAE n°30 - Mars 2019 : [Les effets de la fiscalité écologique sur le pouvoir d’achat des ménages  simulation de plusieurs scénarios de redistribution](https://www.cae-eco.fr/Les-effets-de-la-fiscalite-ecologique-sur-le-pouvoir-d-achat-des-menages-463)
 - [Douenne, T. The vertical and horizontal distributive effects of energy taxes: A case study of a french policy. The Energy Journal 41 (2020), 231–254.](https://extranet.parisschoolofeconomics.eu/docs/douenne-thomas/douenne--the-vertical-and-horizontal-distributive-effects-of-energy-taxes.pdf)
+- Rapport IPP Perspectives budgétaires - juin 2025 - chapitre 2 : [Effets budgétaires et redistributifs des mesures socio-fiscales](https://www.ipp.eu/publication/effets-budgetaires-et-redistributifs-des-mesures-socio-fiscales/)
 
 ## Contributeurs
 

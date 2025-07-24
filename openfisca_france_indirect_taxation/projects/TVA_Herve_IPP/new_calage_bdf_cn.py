@@ -66,6 +66,23 @@ def sum_and_remove(data_frame, col, rows_to_sum, new_row) :
     
     return data
 
+def get_reste_a_charge_sante_cn(target_year):
+    '''La compta nat regroupe les dépenses des ménages et des organismes complémentaires. A l'aide du compte de santé, on
+    calcule la part des dépenses de santé des ménages, à isoler dans la compta nat.'''
+    depenses_sante_file_path = os.path.join(
+            assets_directory,
+            'legislation',
+            'CNS2024_Vue_d_ensemble.xlsx'
+            )
+    
+    depenses_sante = pd.read_excel(depenses_sante_file_path, sheet_name = "Graph 7", header = 4, usecols = [ i for i in range(1,16)])
+    depenses_sante = depenses_sante.drop(index = [3,4,5], axis = 0).rename({'Unnamed: 1' : 'Financeur'}, axis = 1)
+
+    menages = float(depenses_sante.loc[depenses_sante['Financeur'] == 'Ménages',target_year])
+    complementaires = float(depenses_sante.loc[depenses_sante['Financeur'] == 'Organismes complémentaires',target_year])
+    part_menages = menages / (menages + complementaires)
+    return(part_menages)
+
 def new_get_cn_aggregates(target_year) :
     ''' Calcule les agrégats de compta nat utilisables pour un année cible.'''
     # Dépenses de conso
@@ -87,9 +104,11 @@ def new_get_cn_aggregates(target_year) :
     masses_cn_data_frame.loc[:,'Code'] = masses_cn_data_frame['Code'].astype(str).apply(lambda x: format_poste(x))
 
     # On garde les agrégats à un niveau supérieur pour correspondre à Bdf
-    masses_cn_data_frame = masses_cn_data_frame[~masses_cn_data_frame['Code'].isin(['poste_04_2_1', 'poste_04_2_2','poste_05_1_1','poste_05_1_2','poste_05_2_1', 'poste_05_2_2'])]
+    masses_cn_data_frame = masses_cn_data_frame[~masses_cn_data_frame['Code'].isin(['poste_04_2_1', 'poste_04_2_2',
+                                                                                    'poste_05_1_1','poste_05_1_2','poste_05_2_1', 'poste_05_2_2',
+                                                                                    'poste_06_1','poste_06_2','poste_06_3','poste_06_4'])]
     
-    # On regroupe certains postes de consommation sous la même étiquette 
+    # On regroupe certains postes de consommation sous la même étiquette
     masses_cn_data_frame = sum_and_remove(data_frame = masses_cn_data_frame,
                                           col = 'Code',
                                           rows_to_sum = ['poste_08_1_1', 'poste_08_1_2'],
@@ -115,6 +134,9 @@ def new_get_cn_aggregates(target_year) :
     for poste in liste_postes_nuls :
         masses_cn_data_frame = sum_and_remove(masses_cn_data_frame, 'Code', [], poste)
     
+    # Correction dépenses de santé 
+    part_menages = get_reste_a_charge_sante_cn(target_year)
+    masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == 'poste_06','{}'.format(target_year)] = part_menages * masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == 'poste_06','{}'.format(target_year)]
     liste_postes_cn = remove_prefixes(masses_cn_data_frame['Code'].tolist())
     liste_postes_cn.remove('poste__Z')
     liste_13postes = ["poste_0{}".format(i) for i in range(1, 10)] + ["poste_10", "poste_11", "poste_12", "poste_13"]
