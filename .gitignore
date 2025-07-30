@@ -6,6 +6,8 @@ openfisca_france_indirect_taxation/assets/quaids/*.csv
 openfisca_france_indirect_taxation/assets/matching/*/*.csv
 openfisca_france_indirect_taxation/assets/matching/*.csv
 openfisca_france_indirect_taxation/assets/legislation/nomenclature_coicop_by*.csv
+openfisca_france_indirect_taxation/assets/legislation/coicop_legislation.csv
+
 !openfisca_france_indirect_taxation/assets/quaids/data_elasticities_no_alime_all.csv
 
 .vscode
