@@ -4,21 +4,18 @@
 import numpy as np
 import os
 import pandas as pd
-import pkg_resources
 
 
-import build_coicop_nomenclature
+from openfisca_france_indirect_taxation.scripts import build_coicop_nomenclature
+from openfisca_france_indirect_taxation.utils import assets_directory
 
-legislation_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
-    'openfisca_france_indirect_taxation',
-    'assets',
-    'legislation',
-    )
 
+legislation_directory = os.path.join(assets_directory, 'legislation')
 
 sub_levels = ['divisions', 'groupes', 'classes', 'sous_classes', 'postes']
-divisions = ['0{}'.format(i) for i in range(1, 10)] + ['11', '12']  # TODO: fix this
+
+divisions = ['0{}'.format(i) for i in range(1, 10)] + ['11', '12']
+
 taxe_by_categorie_fiscale_number = {
     0: '',
     1: 'tva_taux_super_reduit',
@@ -45,16 +42,18 @@ def extract_informations_from_coicop_to_categorie_fiscale():
         grouped = exceptions.groupby(
             by = [exceptions.annee - np.arange(exceptions.shape[0]), 'posteCOICOP', 'categoriefiscale']
             )
-        for k, g in grouped:
-            print g.posteCOICOP.unique()[0], g.description.unique()[0], g.annee.min(), g.annee.max(), \
+        for _, g in grouped:
+            print((
+                g.posteCOICOP.unique()[0], g.description.unique()[0], g.annee.min(), g.annee.max(),
                 taxe_by_categorie_fiscale_number[int(g.categoriefiscale.unique())]
+                ))
 
     def get_dominant_and_exceptions(division):
         assert division in divisions
         parametres_fiscalite_file_path = os.path.join(legislation_directory, 'coicop_to_categorie_fiscale.csv')
         parametres_fiscalite_data_frame = pd.read_csv(
             parametres_fiscalite_file_path,
-            converters = {'posteCOICOP': unicode}
+            converters = {'posteCOICOP': str}
             )
         parametres_fiscalite_data_frame['division'] = parametres_fiscalite_data_frame['posteCOICOP'].str[:2].copy()
         division_dataframe = parametres_fiscalite_data_frame.query('division == @division')
@@ -64,15 +63,15 @@ def extract_informations_from_coicop_to_categorie_fiscale():
 
     for coicop_division in divisions:
         dominant, exceptions = get_dominant_and_exceptions(coicop_division)
-        print u'\nDivision: {}.\nCatégorie fiscale dominante: {}.\nExceptions:'.format(
+        print(('\nDivision: {}.\nCatégorie fiscale dominante: {}.\nExceptions:'.format(
             coicop_division,
             taxe_by_categorie_fiscale_number[dominant]
-            )
+            )))
         format_exceptions(exceptions)
 
 
 def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_code = None, label = None):
-    assert coicop_nomenclature  is not None
+    assert coicop_nomenclature is not None
     assert coicop_code is not None
     assert label is not None
     known_levels = sub_levels[:len(coicop_code.split('.')) - 1]
@@ -82,7 +81,7 @@ def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_cod
         coicop_nomenclature.code_coicop.str[:len(coicop_sub_code)] == coicop_sub_code,
         ['label_{}'.format(level[:-1]) for level in known_levels]
         ].drop_duplicates().dropna().to_dict(orient = 'records')[0]
-    for key, value in labels_by_sub_level.iteritems():
+    for key, value in list(labels_by_sub_level.items()):
         labels_by_sub_level[key] = value
     modified_level = sub_levels[len(coicop_code.split('.')) - 1][:-1]
     labels_by_sub_level['label_{}'.format(modified_level)] = label
@@ -90,10 +89,10 @@ def extract_infra_labels_from_coicop_code(coicop_nomenclature = None, coicop_cod
 
 
 def apply_modification(coicop_nomenclature = None, value = None, categorie_fiscale = None,
-        origin = None, start = 1994, stop = 2014, label = ''):
+        origin = None, start = 1994, stop = 2024, label = ''):
     assert coicop_nomenclature is not None
-    assert categorie_fiscale in taxe_by_categorie_fiscale_number.values()
-    assert 1994 <= start < stop <= 2014, "Invalid start={} and/or stop={}".format(start, stop)
+    assert categorie_fiscale in list(taxe_by_categorie_fiscale_number.values())
+    assert 1994 <= start < stop <= 2024, "Invalid start={} and/or stop={}".format(start, stop)
 
     if isinstance(value, int):
         value_str = '0' + str(value) if value < 10 else str(value)
@@ -105,12 +104,12 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
 
     if selection.any():  # la coicop existe
         filled_start_stop = (
-            (coicop_nomenclature.loc[selection, 'start'].unique() != 0).any() or
-            (coicop_nomenclature.loc[selection, 'stop'].unique() != 0).any()
+            (coicop_nomenclature.loc[selection, 'start'].unique() != 0).any()
+            or (coicop_nomenclature.loc[selection, 'stop'].unique() != 0).any()
             )
         if not filled_start_stop:
             coicop_nomenclature.loc[selection, 'start'] = 1994
-            coicop_nomenclature.loc[selection, 'stop'] = 2014
+            coicop_nomenclature.loc[selection, 'stop'] = 2024
             coicop_nomenclature.loc[selection, 'categorie_fiscale'] = categorie_fiscale
 
         else:
@@ -159,9 +158,9 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
                 coicop_nomenclature.sort_values(by = 'code_coicop', inplace = True)
 
     else:
-        assert origin is not None
-        assert label is not None
-        infra_labels = extract_infra_labels_from_coicop_code(coicop_nomenclature, str(value), label)
+        #assert origin is not None
+        #assert label is not None
+        #infra_labels = extract_infra_labels_from_coicop_code(coicop_nomenclature, str(value), label)
         additional_row = pd.DataFrame(columns = coicop_nomenclature.columns)
         additional_dict = {
             'code_coicop': str(value),
@@ -170,20 +169,18 @@ def apply_modification(coicop_nomenclature = None, value = None, categorie_fisca
             'stop': stop,
             'origin': origin
             }
-        additional_dict.update(infra_labels)
-        for item, val in additional_dict.iteritems():
+        #additional_dict.update(infra_labels)
+        for item, val in list(additional_dict.items()):
             additional_row[item] = [val]
 
         coicop_nomenclature = coicop_nomenclature.append(additional_row)
         coicop_nomenclature.reset_index(inplace = True, drop = True)
         coicop_nomenclature.sort_values(by = 'code_coicop', inplace = True)
 
-    # print coicop_nomenclature.categorie_fiscale.value_counts()
     return coicop_nomenclature
 
 
-def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
-    coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
+def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = False):
     # On  ajoute des colonnes
     # période d'effet de la législation
     coicop_nomenclature['start'] = 0
@@ -207,9 +204,9 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         label = "Saindoux autres graisses d'origine animale",
         origin = 'TAXIPP',
         )
-    # et les confiseries et le chocolat à taux plein http://bofip.impots.gouv.fr/bofip/1438-PGP.html
+    # et les confiseries
     confiserie = dict(
-        value = ['01.1.8.1.3', '01.1.8.2.1', '01.1.8.2.2'],
+        value ='01.1.8.1.3',
         categorie_fiscale = 'tva_taux_plein'
         )
     # 02 Boissons alcoolisées et tabac
@@ -230,13 +227,13 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         )
     # tabac
     cigares = dict(
-        value = '02.2.1',
+        value = '02.2.2',
         categorie_fiscale = 'cigares',
         label = 'Cigares et cigarillos',
         origin = 'TAXIPP',
         )
     cigarettes = dict(
-        value = '02.2.2',
+        value = '02.2.1',
         categorie_fiscale = 'cigarettes',
         label = 'Cigarettes',
         origin = 'TAXIPP',
@@ -253,6 +250,12 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         label = 'Stupefiants',
         origin = 'COICOP UN',
         )
+    alcools_tabac_stupefiants_offerts = dict(
+        value = '02.4',
+        categorie_fiscale = '',
+        label = 'Alcools, tabcs et stupefiants offerts à un autre',
+        origin = 'TAXIPP',
+        )
     # 03 Habillement et chaussures
     habillement = dict(
         value = 3,
@@ -264,7 +267,20 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         value = 4,
         categorie_fiscale = 'tva_taux_plein',
         )
-    # sauf distribution d'eau, enlèvement des ordures ménagères, assainissement, autres services liés au logement n.d.a.
+    # Combustible solide de résidence principale (Ref : Code général des impôts article 278 bis 3bis a b c)
+    bois_chauffage_98 = dict(
+        value = '04.5.4.1.1',
+        categorie_fiscale = 'tva_taux_reduit',
+        start = 1998,
+        stop = 2011
+    )
+
+    bois_chauffage_reforme_2012 = dict(
+        value = '04.5.4.1.1',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+    )
+    # Distribution d'eau, enlèvement des ordures ménagères, assainissement, autres services liés au logement n.d.a.
     # qui sont au taux réduit de 1994 à 2011
     eau_ordures_assainissement = dict(
         value = ['04.4.1.1.1', '04.4.1.2.1', '04.4.1.3.1'],
@@ -272,26 +288,39 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         stop = 2011,
         )
     # avant de passer au taux intermédiaire
-    eau_ordures_assainissement_reforme_2012 = dict(
-        value = ['04.4.1.1.1', '04.4.1.2.1', '04.4.1.3.1'],
+    ordures_assainissement_reforme_2012 = dict(
+        value = ['04.4.1.2.1', '04.4.1.3.1'],
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
         )
+    #sauf l'eau qui reste à taux réduit
+    eau_post_2012 = dict(
+        value = '04.4.1.1.1',
+        categorie_fiscale = 'tva_taux_reduit' ,
+        start = 2012,
+    )
+
     # et pas de taxation des loyers
     loyers = dict(
         value = ['04.1.1.1.1', '04.1.1.2.1'],
         categorie_fiscale = '',
         )
     # TODO ajouter loyers fictifs
+    # Services d'entretien et petites réparation dans le logement
+    services_entretien = dict(
+        value = '04.3.2.2.1',
+        categorie_fiscale = 'tva_taux_intermediaire',
+    )
+
     # 05 Ameublement, équipement ménager et entretien courant de la maison
     ameublement = dict(
         value = 5,
         categorie_fiscale = 'tva_taux_plein',
         )
-    # sauf Services domestiques et autres services pour l'habitation
+    # sauf Services domestiques (ménage, garde enfant, jardinage)
     services_domestiques = dict(
-        value = '05.6.2',
-        categorie_fiscale = 'tva_taux_reduit',
+        value = '05.6.2.1',
+        categorie_fiscale = 'tva_taux_intermediaire',
         )
     # 06 Santé pas taxée
     sante = dict(
@@ -318,6 +347,23 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         value = 7,
         categorie_fiscale = 'tva_taux_plein',
         )
+    # Transport maritime et fluvial de passagers change en 2011  Attention 07.3.4 dans enquête BDF
+    transport_maritime = dict(
+        value = '07.3.6.1.2',
+        categorie_fiscale = 'tva_taux_reduit',
+        stop = 2011,
+        )
+    transport_maritime_reforme_2012 = dict(
+        value = '07.3.6.1.2',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012,
+        )
+
+    # Autres services de transports (yc déménagements)
+    autres_services_transports = dict(
+        value = '07.3.6.1.1',
+        categorie_fiscale = 'tva_taux_plein'
+    )
     # Transport combine de passagers change en 2012 #
     transport_combine_passagers = dict(
         value = '07.3.5',
@@ -329,22 +375,11 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
         )
-    # Transport maritime et fluvial de passagers change en 2011  Attention 07.3.4 dans enquête BDF
-    transport_maritime = dict(
-        value = '07.3.6',
-        categorie_fiscale = 'tva_taux_reduit',
-        stop = 2011,
-        )
-    transport_maritime_reforme_2012 = dict(
-        value = '07.3.6',
-        categorie_fiscale = 'tva_taux_intermediaire',
-        start = 2012,
-        )
     # Transport aérien de passagers change en 2012
     transport_aerien = dict(
         value = '07.3.3',
         categorie_fiscale = 'tva_taux_reduit',
-        stop = 2011,
+        stop = 2024,
         )
     transport_aerien_reforme_2012 = dict(
         value = '07.3.3',
@@ -373,7 +408,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
         )
-    # Carburants et lubrifiants pour véhicules de tourisme 1994 2014
+    # Carburants et lubrifiants pour véhicules de tourisme 1994 2024
     carburants_lubrifiants = dict(
         value = '07.2.2',
         categorie_fiscale = 'ticpe',
@@ -388,7 +423,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         categorie_fiscale = '',
         )
     # 09 Loisirs et cutures
-    loisirs_cuture = dict(
+    loisirs_culture = dict(
         value = 9,
         categorie_fiscale = 'tva_taux_plein',
         )
@@ -401,43 +436,109 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     livre = dict(
         value = '09.5.1',
         categorie_fiscale = 'tva_taux_reduit',
-        stop = 2011,
+        stop = 2024,
         )
-    livre_reforme_2012 = dict(
-        value = '09.5.1',
+    #livre_reforme_2012 = dict(
+        #value = '09.5.1',
+        #categorie_fiscale = 'tva_taux_intermediaire',
+        #start = 2012,
+        #stop = 2013,
+        #)
+    #-> le livre est passé au taux intermediaire (7%) en 2012 avant de repasser au taux réduit à 5,5% en 2013,
+    # comme on ne peut pas le passer au taux intermédiaire seulement pour une année on le laisse au taux réduit
+
+    # Horticulture, floriculture
+    plantes_fleurs = dict(
+        value = '09.3.2.1',
         categorie_fiscale = 'tva_taux_intermediaire',
-        start = 2012,
-        )
+        start = 2016,
+    )
     # Jeux de hasard
     jeux_hasard = dict(
         value = '09.4.3',
         categorie_fiscale = '',
         label = 'Jeux de hasard',
-        origin = 'COICOP UN',
+        origin = 'COICOP UN'
         )
-    # Services culturels
-    services_culturels = dict(
-        value = '09.4.2',
+    # equipement sportif
+    equipement_sportif = dict(
+        value = '09.3.1.2',
+        categorie_fiscale = 'tva_taux_plein',
+        start = 1994
+    )
+    # Cinemas, théâtres, concerts
+    cinema_theatre_concert = dict(
+        value = '09.4.2.1',
         categorie_fiscale = 'tva_taux_reduit',
-        stop = 2011,
+        stop = 2011
         )
-    # Services culturels
-    services_culturels_reforme_2012 = dict(
-        value = '09.4.2',
+    # Cinemas, théâtres, concerts
+    cinema_theatre_concert_reforme_2012 = dict(
+        value = '09.4.2.1',
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
+        stop = 2013
         )
+    cinema_theatre_concert_reforme_2014 = dict(
+        value = '09.4.2.1',
+        categorie_fiscale = 'tva_taux_reduit',
+        start = 2014
+        )
+    # Musées et zoo
+    musee_zoo = dict(
+        value = '09.4.2.2',
+        categorie_fiscale = 'tva_taux_reduit',
+        stop = 2011
+        )
+    # Musée et zoo
+    musee_zoo_reforme_2012 = dict(
+        value = '09.4.2.2',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012
+        )
+
+    musee_zoo_reforme_2018 = dict(
+        value = '09.4.2.2',
+        categorie_fiscale = 'tva_taux_reduit',
+        start = 2018
+    )
+    # Services de télévision et radiodiffusion
+    tv_radio = dict(
+        value = '09.4.2.3',
+        categorie_fiscale = 'tva_taux_reduit',
+        stop = 2011
+        )
+    # Services de télévision et radiodiffusion
+    tv_radio_reforme_2012 = dict(
+        value = '09.4.2.3',
+        categorie_fiscale = 'tva_taux_intermediaire',
+        start = 2012
+        )
+    # Autres services culturels
+    autres_services_culturels = dict(
+        value = '09.4.2.4',
+        categorie_fiscale = 'tva_taux_plein',
+        start = 1994
+        )
+
     # Services récréatifs et sportifs
     services_recreatifs_sportifs = dict(
         value = '09.4.1',
         categorie_fiscale = 'tva_taux_reduit',
-        stop = 2011,
+        start = 1994,
         )
-    services_recreatifs_sportifs_reforme_2012 = dict(
+    services_recreatifs_sportifs_reforme_2015 = dict(
         value = '09.4.1',
         categorie_fiscale = 'tva_taux_intermediaire',
-        start = 2012,
+        start = 2015,
         )
+
+    # Voyage à forfait
+    voyage_forfait = dict(
+        value = '09.6.1.1',
+        categorie_fiscale = '',
+        start = 2019
+    )
     # 10 Education
     education = dict(
         value = 10,
@@ -451,7 +552,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
     # Consommation de boissons alcoolisées
     consommation_boissons_alcoolisees = dict(
         value = ['11.1.1.2.2', '11.1.1.2.3', '11.1.1.2.4'],
-        categorie_fiscale = 'tva_taux_plein', # TODO sauf en corse à 10%
+        categorie_fiscale = 'tva_taux_plein',  # TODO sauf en corse à 10%
         )
     # Restauration sur place 1994 2009
     restauration_sur_place = dict(
@@ -465,7 +566,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         start = 2010,
         stop = 2011,
         )
-    # Restauration sur place 2012 2014
+    # Restauration sur place 2012 2024
     restauration_sur_place_reforme_2012 = dict(
         value = '11.1.1.1.1',
         categorie_fiscale = 'tva_taux_intermediaire',
@@ -484,18 +585,18 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         start = 1998,
         stop = 2011,
         )
-    # Restauration à emporter 2012 2014
+    # Restauration à emporter 2012 2024
     restauration_a_emporter_reforme_2012 = dict(
         value = '11.1.1.1.2',
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
         )
-    # Cantines'] 1994
+    # Cantines
     cantines = dict(
         value = '11.1.2',
-        categorie_fiscale = '',
+        categorie_fiscale = 'tva_taux_reduit',
         )
-    # Services d'hébergement 2012 2014
+    # Services d'hébergement 2012 2024
     service_hebergement = dict(
         value = '11.2.1',
         categorie_fiscale = 'tva_taux_intermediaire',
@@ -518,7 +619,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         value = '12.4',
         categorie_fiscale = 'tva_taux_reduit',
         start = 2000,
-        stop = 2011,
+        stop = 2024,
         )
     # Protection sociale
     protection_sociale_reforme_2012 = dict(
@@ -562,48 +663,58 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
         )
 
     for member in [
-        # 01
-        alimentation,
-        margarine, saindoux, confiserie,
-        # 02
-        alcools, vin, biere,
-        cigares, cigarettes, tabac_a_rouler, stupefiants,
-        # 03
-        habillement,
-        # 04
-        logement, eau_ordures_assainissement, eau_ordures_assainissement_reforme_2012, loyers,
-        # 05
-        ameublement, services_domestiques,
-        # 06
-        sante, pharmacie, parapharmacie, materiel_therapeutique,
-        # 07
-        transports,
-        transport_combine_passagers, transport_combine_passagers_reforme_2012,
-        transport_maritime, transport_maritime_reforme_2012,
-        transport_aerien, transport_aerien_reforme_2012,
-        transport_routier, transport_routier_reforme_2012,
-        transport_ferroviaire, transport_ferroviaire_reforme_2012,
-        carburants_lubrifiants,
-        # 08
-        communications, services_postaux,
-        # 09
-        loisirs_cuture, journaux_periodiques, livre, livre_reforme_2012, jeux_hasard,
-        services_culturels, services_culturels_reforme_2012,
-        services_recreatifs_sportifs, services_recreatifs_sportifs_reforme_2012,
-        # 10 Education
-        education,
-        # 11 Hotellerie restauration
-        hotellerie_restauration, cantines, service_hebergement,
-        consommation_boissons_alcoolisees,
-        restauration_sur_place, restauration_sur_place_reforme_2010, restauration_sur_place_reforme_2012,
-        restauration_a_emporter, restauration_a_emporter_reforme_2010, restauration_a_emporter_reforme_2012,
-        # 12
-        autres_biens_et_services,
-        protection_sociale_reforme_2000, protection_sociale_reforme_2012,
-        prostitution,
-        intermediation_financiere,
-        autres_assurances, assurance_transports, assurance_vie, assurance_maladie, assurance_habitation,
-        ]:
+            # 01
+            alimentation,
+            margarine, saindoux, confiserie,
+            # 02
+            alcools, vin, biere,
+            cigares, cigarettes, tabac_a_rouler, stupefiants, alcools_tabac_stupefiants_offerts,
+            # 03
+            habillement,
+            # 04
+            logement, bois_chauffage_98 , bois_chauffage_reforme_2012,
+            eau_ordures_assainissement, ordures_assainissement_reforme_2012,
+            eau_post_2012,
+            loyers, services_entretien,
+            # 05
+            ameublement, services_domestiques,
+            # 06
+            sante, pharmacie, parapharmacie, materiel_therapeutique,
+            # 07
+            transports,
+            transport_combine_passagers, transport_combine_passagers_reforme_2012,
+            transport_maritime, transport_maritime_reforme_2012,
+            transport_aerien,
+            transport_routier, transport_routier_reforme_2012,
+            transport_ferroviaire, transport_ferroviaire_reforme_2012,
+            autres_services_transports,
+            carburants_lubrifiants,
+            # 08
+            communications, services_postaux,
+            # 09
+            loisirs_culture, journaux_periodiques, livre,
+            plantes_fleurs , jeux_hasard,  equipement_sportif,
+            cinema_theatre_concert, cinema_theatre_concert_reforme_2012, cinema_theatre_concert_reforme_2014,
+            musee_zoo, musee_zoo_reforme_2012, musee_zoo_reforme_2018,
+            tv_radio, tv_radio_reforme_2012 ,
+            autres_services_culturels,
+            services_recreatifs_sportifs, services_recreatifs_sportifs_reforme_2015,
+            voyage_forfait,
+            # 10 Education
+            education,
+            # 11 Hotellerie restauration
+            hotellerie_restauration, cantines, service_hebergement,
+            consommation_boissons_alcoolisees,
+            restauration_sur_place, restauration_sur_place_reforme_2010, restauration_sur_place_reforme_2012,
+            restauration_a_emporter, restauration_a_emporter_reforme_2010, restauration_a_emporter_reforme_2012,
+            # 12
+            autres_biens_et_services,
+            protection_sociale_reforme_2000,
+            prostitution,
+            intermediation_financiere,
+            autres_assurances, assurance_transports, assurance_vie, assurance_maladie, assurance_habitation,
+            ]:
+
         coicop_nomenclature = apply_modification(coicop_nomenclature, **member)
 
     coicop_legislation = coicop_nomenclature.copy()
@@ -617,9 +728,7 @@ def build_coicop_nomenclature_with_fiscal_categories(to_csv = False):
 def get_categorie_fiscale(value, year = None, assertion_error = True):
     coicop_nomenclature = pd.read_csv(
         os.path.join(legislation_directory, 'coicop_legislation.csv'),
-        converters = {'posteCOICOP': unicode}
         )
-    build_coicop_nomenclature_with_fiscal_categories()
     if isinstance(value, int):
         value_str = '0' + str(value) if value < 10 else str(value)
         selection = coicop_nomenclature.code_coicop.str[:2] == value_str
@@ -641,15 +750,20 @@ def get_categorie_fiscale(value, year = None, assertion_error = True):
 
 
 def test_coicop_legislation():
-    coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories(to_csv = True)
+    coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
+    coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = True)
     if coicop_nomenclature.categorie_fiscale.isnull().any():
         return coicop_nomenclature.loc[coicop_nomenclature.categorie_fiscale.isnull()]
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # extract_informations_from_coicop_to_categorie_fiscale()
-    coicop_nomenclature = build_coicop_nomenclature_with_fiscal_categories(to_csv = True)
-    # print test_coicop_legislation(coicop_nomenclature)
-    # TODO créer des sous-catégories pour tabac
+    coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
+    coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = True)
+    test_coicop_legislation()
 
-    # print get_categorie_fiscale('11.1.1.1.1', year = 2010)
+    from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
+    bdf_coicop_nomenclature = bdf(year = 2011)
+    bdf_coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(bdf_coicop_nomenclature, to_csv = True)
+
+    print((get_categorie_fiscale('11.1.1.1.1', year = 2010)))

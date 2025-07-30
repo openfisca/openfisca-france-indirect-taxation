@@ -1,14 +1,19 @@
 - name: "Âge (en années) par défaut"
   period: "2013"
-  output_variables:
+  absolute_error_margin: .5
+  output:
     age: 43
+
 - name: "Âge (en années) par défaut"
   period: "2014"
-  output_variables:
+  absolute_error_margin: .5
+  output:
     age: 44
+
 - name: "Âge d'après la date de naissance"
   period: "2013"
-  input_variables:
+  absolute_error_margin: .5
+  input:
     birth: "1973-01-01"
-  output_variables:
+  output:
     age: 40

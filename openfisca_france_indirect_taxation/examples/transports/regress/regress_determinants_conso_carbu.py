@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Nov 06 14:25:36 2015
-
-@author: thomas.douenne
-"""
 
 # The aim of this module is to understand what determines the fuel consumption of households. We want to know what are
 # the determinant features, such as the effect of income or residence on fuel consumption. We could therefore try to
@@ -17,17 +12,16 @@ Created on Fri Nov 06 14:25:36 2015
 # We must construct a dataframe with for each individual its fuel consumption, and all the determinant variables.
 
 
-from __future__ import division
-
 import statsmodels.formula.api as smf
 import numpy as np
 import pandas as pd
-import pkg_resources
 import os
 
 from openfisca_france_indirect_taxation.examples.utils_example import simulate_df_calee_on_ticpe
 from openfisca_france_indirect_taxation.examples.dataframes_from_legislation.get_accises import \
     get_accise_ticpe_majoree
+from openfisca_france_indirect_taxation.utils import assets_directory
+
 
 if __name__ == '__main__':
     import logging
@@ -62,21 +56,21 @@ if __name__ == '__main__':
         try:
             data_simulation = \
                 simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_with_e10, year = year)
-        except:
+        except Exception:
             data_simulation = \
                 simulate_df_calee_on_ticpe(simulated_variables = simulated_variables_without_e10, year = year)
             data_simulation['sp_e10_ticpe'] = 0
         del simulated_variables_with_e10, simulated_variables_without_e10
 
         liste_carburants_accise = get_accise_ticpe_majoree()
-        value_accise_diesel = liste_carburants_accise['accise majoree diesel'].loc[u'{}'.format(year)] / 100
-        value_accise_sp = liste_carburants_accise['accise majoree sans plomb'].loc[u'{}'.format(year)] / 100
+        value_accise_diesel = liste_carburants_accise['accise majoree diesel'].loc['{}'.format(year)] / 100
+        value_accise_sp = liste_carburants_accise['accise majoree sans plomb'].loc['{}'.format(year)] / 100
         value_accise_super_plombe = \
-            liste_carburants_accise['accise majoree super plombe'].loc[u'{}'.format(year)] / 100
+            liste_carburants_accise['accise majoree super plombe'].loc['{}'.format(year)] / 100
 
         data_simulation['quantite_diesel'] = data_simulation['diesel_ticpe'] / (value_accise_diesel)
-        data_simulation['quantite_sans_plomb'] = (data_simulation['sp95_ticpe'] + data_simulation['sp98_ticpe'] +
-            data_simulation['sp_e10_ticpe']) / (value_accise_sp)
+        data_simulation['quantite_sans_plomb'] = (data_simulation['sp95_ticpe'] + data_simulation['sp98_ticpe']
++ data_simulation['sp_e10_ticpe']) / (value_accise_sp)
         data_simulation['quantite_super_plombe'] = data_simulation['super_plombe_ticpe'] / (value_accise_super_plombe)
         del value_accise_diesel, value_accise_sp, value_accise_super_plombe, liste_carburants_accise
 
@@ -106,27 +100,23 @@ if __name__ == '__main__':
         # For each household we now have the quantity of fuel consumed in litres. This is our dependant variable.
         # We will now construct a dataframe including the explanatory variables. We especially need prices.
 
-        default_config_files_directory = os.path.join(
-            pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
         prix_carbu = pd.read_csv(
             os.path.join(
-                default_config_files_directory,
-                'openfisca_france_indirect_taxation',
-                'assets',
+                assets_directory,
                 'prix',
                 'prix_mensuel_carbu_match_to_vag.csv'
                 ), sep =';', decimal = ','
             )
 
-        prix_carbu = prix_carbu[['diesel_ttc'] + ['super_95_ttc'] + ['vag']].astype(float)
+        prix_carbu = prix_carbu[['diesel_ttc', 'super_95_ttc', 'vag']].astype(float)
 
         data_households = pd.merge(data_simulation, prix_carbu, on = 'vag')
         del data_simulation, prix_carbu
 
-        data_households = data_households[['quantite_carbu'] + ['quantite_diesel'] + ['quantite_essence'] +
-            ['diesel_ttc'] + ['super_95_ttc'] + ['rev_disponible'] + ['rural'] + ['petite_villes'] +
-            ['villes_moyennes'] + ['grandes_villes'] + ['agglo_paris'] + ['nenfants'] + ['nadultes'] + ['ocde10'] +
-            ['situapr'] + ['situacj'] + ['poste_coicop_411'] + ['poste_coicop_412'] + ['poste_coicop_421']
+        data_households = data_households[['quantite_carbu', 'quantite_diesel', 'quantite_essence']
++ ['diesel_ttc', 'super_95_ttc', 'rev_disponible', 'rural', 'petite_villes']
+            + ['villes_moyennes', 'grandes_villes', 'agglo_paris', 'nenfants', 'nadultes', 'ocde10']
+            + ['situapr', 'situacj', 'poste_coicop_411', 'poste_coicop_412', 'poste_coicop_421']
             ].astype(float)
 
         # data_households contains all the variables we need for the regression. We can therefore implement it
@@ -150,19 +140,19 @@ if __name__ == '__main__':
             ln_diesel_ttc + ln_super_95_ttc + ln_rev_disponible + rural + petite_villes + grandes_villes + \
             agglo_paris + nenfants + nadultes + situacj + situapr',
             data = data_log).fit()
-        print reg_conso_carbu_log.summary()
+        print(reg_conso_carbu_log.summary())
 
         # We will now introduce an instrumental variable to correct for the endogeneity of expenditures.
 
         data_log['loyer'] = data_log['poste_coicop_411'] + data_log['poste_coicop_412'] + data_log['poste_coicop_421']
-        data_log.to_csv(os.path.join(default_config_files_directory, 'openfisca_france_indirect_taxation', 'assets',
+        data_log.to_csv(os.path.join(assets_directory,
             'quaids', 'data_regression.csv'), sep = ',')
-        #model = \
+        # model = \
         #    gmm.IV2SLS(data_log['ln_rev_disponible'], data_log['ln_quantite_carbu'], data_log['loyer']).fit()
-        #print model.summary()
+        # print model.summary()
 
         # reg_gmm = statsmodels.sandbox.regression.gmm.IV2SLS('ln_rev_disponible', 'ln_quantite_carbu',
-          #                                                  instrument='loyer')
+        #                                                  instrument='loyer')
 
 # The results are equivalent for the three years concerning the income elasticity, and it is close to 1. It seems to be
 # important, but not absurd. The price elasticities however are probably not well estimated, with positive price

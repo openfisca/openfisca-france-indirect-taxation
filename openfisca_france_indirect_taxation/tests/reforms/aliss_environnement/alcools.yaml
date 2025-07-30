@@ -1,0 +1,142 @@
+- name: "Spiritueux et liqueurs"
+  period: "2010"
+  absolute_error_margin: .01
+  reforms:
+    - openfisca_france_indirect_taxation.reforms.aliss.aliss_environnement
+  input:
+    poste_02_1_1_1_1: 100  # spiritueux et liqueurs
+
+  output:
+    depenses_ht_alcools_forts: 100 / (1 + .196)
+    depenses_ht_vin: 0
+    depenses_ht_biere: 0
+    depenses_alcools_forts: 100
+    depenses_vin: 0
+    depenses_biere: 0
+    #
+    alcools_forts_droit_d_accise: 97.66  # TODO: SEEMS WRONG test with old version
+    vin_droit_d_accise: 0
+    biere_droit_d_accise: 0
+    #
+    depenses_ht_tva_taux_plein: 100 / (1 + .196)
+    depenses_tva_taux_plein: 100
+    tva_taux_plein: 100 / (1 + .196) * .196
+    depenses_ht_tva_taux_intermediaire: 0
+    depenses_tva_taux_intermediaire: 0
+    tva_taux_intermediaire: 0
+    depenses_ht_tva_taux_reduit: 0
+    depenses_tva_taux_reduit: 0
+    tva_taux_reduit: 0
+    depenses_ht_tva_taux_super_reduit: 0
+    depenses_tva_taux_super_reduit: 0
+    tva_taux_super_reduit: 0
+    #
+    poste_agrege_02: 100
+
+
+- name: "Vin et cidres"
+  period: "2010"
+  absolute_error_margin: .01
+  reforms:
+    - openfisca_france_indirect_taxation.reforms.aliss.aliss_environnement
+  input:
+    poste_02_1_2_1_1: 100  # vins et cidres
+  output:
+    depenses_ht_alcools_forts: 0
+    depenses_ht_vin: 100 / (1 + .196)
+    depenses_ht_biere: 0
+    depenses_alcools_forts: 0
+    depenses_vin: 100
+    depenses_biere: 0
+    #
+    alcools_forts_droit_d_accise: 0
+    vin_droit_d_accise: 1.31 # TODO: SEEMS WRONG test with old version
+    biere_droit_d_accise: 0
+    #
+    depenses_ht_tva_taux_plein: 100 / (1 + .196)
+    depenses_tva_taux_plein: 100
+    tva_taux_plein: 100 / (1 + .196) * .196
+    depenses_ht_tva_taux_intermediaire: 0
+    depenses_tva_taux_intermediaire: 0
+    tva_taux_intermediaire: 0
+    depenses_ht_tva_taux_reduit: 0
+    depenses_tva_taux_reduit: 0
+    tva_taux_reduit: 0
+    depenses_ht_tva_taux_super_reduit: 0
+    depenses_tva_taux_super_reduit: 0
+    tva_taux_super_reduit: 0
+    #
+    poste_agrege_02: 100
+
+
+- name: "Vin et autres apéritifs à base de vin, champagne etc"
+  period: "2010"
+  absolute_error_margin: .01
+  reforms:
+    - openfisca_france_indirect_taxation.reforms.aliss.aliss_environnement
+  input:
+    poste_02_1_2_1_1: 50  # vins et cidres
+    poste_02_1_2_2_1: 50  # autres apéritifs à base de vin, champagne et autres mousseux, saké et autres
+
+  output:
+    depenses_ht_alcools_forts: 0
+    depenses_ht_vin: 100 / (1 + .196)
+    depenses_ht_biere: 0
+    depenses_alcools_forts: 0
+    depenses_vin: 100
+    depenses_biere: 0
+    #
+    alcools_forts_droit_d_accise: 0
+    vin_droit_d_accise: 1.31  # TODO: SEEMS WRONG test with old version
+    biere_droit_d_accise: 0
+    #
+    depenses_ht_tva_taux_plein: 100 / (1 + .196)
+    tva_taux_plein: 100 / (1 + .196) * .196
+    depenses_tva_taux_plein: 100
+    depenses_ht_tva_taux_intermediaire: 0
+    depenses_tva_taux_intermediaire: 0
+    tva_taux_intermediaire: 0
+    depenses_ht_tva_taux_reduit: 0
+    depenses_tva_taux_reduit: 0
+    tva_taux_reduit: 0
+    depenses_ht_tva_taux_super_reduit: 0
+    depenses_tva_taux_super_reduit: 0
+    tva_taux_super_reduit: 0
+    #
+    poste_agrege_02: 100
+
+
+- name: u"Bière"
+  period: "2010"
+  absolute_error_margin: .01
+  reforms:
+    - openfisca_france_indirect_taxation.reforms.aliss.aliss_environnement
+  input:
+    poste_02_1_3_1_1: 100  # Bière et boissons à base de bière
+
+  output:
+    depenses_ht_alcools_forts: 0
+    depenses_ht_vin: 0
+    depenses_ht_biere: 100 / (1 + .196)
+    depenses_alcools_forts: 0
+    depenses_vin: 0
+    depenses_biere: 100
+    #
+    alcools_forts_droit_d_accise: 0
+    vin_droit_d_accise: 0
+    biere_droit_d_accise: 22.29  # TODO: SEEMS WRONG test with old version
+    #
+    depenses_ht_tva_taux_plein: 100 / (1 + .196)
+    tva_taux_plein: 100 / (1 + .196) * .196
+    depenses_tva_taux_plein: 100
+    depenses_ht_tva_taux_intermediaire: 0
+    depenses_tva_taux_intermediaire: 0
+    tva_taux_intermediaire: 0
+    depenses_ht_tva_taux_reduit: 0
+    depenses_tva_taux_reduit: 0
+    tva_taux_reduit: 0
+    depenses_ht_tva_taux_super_reduit: 0
+    depenses_tva_taux_super_reduit: 0
+    tva_taux_super_reduit: 0
+    #
+    poste_agrege_02: 100

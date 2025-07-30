@@ -1,0 +1,228 @@
+# prix carburant gazole TTC:
+
+## prix gazole B7 TTC:
+
+- name: "Test prix_gazole_b7_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+  output:
+    prix_gazole_b7_ttc: 1.4988
+
+- name: "Test prix_gazole_b7_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+  output:
+    prix_gazole_b7_ttc: 1.4418
+
+- name: "Test prix_gazole_b7_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+  output:
+    prix_gazole_b7_ttc: 1.5504
+
+- name: "Test prix_gazole_b7_ttc"
+  period: 2023
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+  output:
+    prix_gazole_b7_ttc: 1.9100
+
+## prix gazole B10 TTC:
+
+- name: "Test prix_gazole_b10_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+  output:
+    prix_gazole_b10_ttc: 1.4988
+
+- name: "Test prix_gazole_b10_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+  output:
+    prix_gazole_b10_ttc: 1.4418
+
+- name: "Test prix_gazole_b10_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+  output:
+    prix_gazole_b10_ttc: 1.5504
+
+# prix essence TTC:
+
+## prix essence SP95 E10 TTC:
+
+- name: "Test prix_essence_sp95_e10_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+  output:
+    prix_essence_sp95_e10_ttc: 1.5844
+
+- name: "Test prix_essence_sp95_e10_ttc 2021 - région 24"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+  output:
+    prix_essence_sp95_e10_ttc: 1.5382
+
+- name: "Test prix_essence_sp95_e10_ttc 2021"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+  output:
+    prix_essence_sp95_e10_ttc: 1.6208
+
+- name: "Test prix_essence_sp95_e10_ttc 2023"
+  period: 2023
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+  output:
+    prix_essence_sp95_e10_ttc: 1.93
+
+## prix essence SP95 TTC:
+
+- name: "Test prix_essence_sp95_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+  output:
+    prix_essence_sp95_ttc: 1.5794
+
+- name: "Test prix_essence_sp95_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+  output:
+    prix_essence_sp95_ttc: 1.5632
+
+- name: "Test prix_essence_sp95_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+  output:
+    prix_essence_sp95_ttc: 1.6567
+
+## prix essence SP98 TTC:
+
+- name: "Test prix_essence_sp98_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+  output:
+    prix_essence_sp98_ttc: 1.6748
+
+- name: "Test prix_essence_sp98_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+  output:
+    prix_essence_sp98_ttc: 1.620
+
+- name: "Test prix_essence_sp98_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+  output:
+    prix_essence_sp98_ttc: 1.5933
+
+## prix essence super plombe TTC:
+
+- name: "Test prix_essence_super_plombe_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+  output:
+    prix_essence_super_plombe_ttc: 0.0
+
+- name: "Test prix_essence_super_plombe_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+  output:
+    prix_essence_super_plombe_ttc: 0.0
+
+- name: "Test prix_essence_super_plombe_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+  output:
+    prix_essence_super_plombe_ttc: 0.0
+
+## prix essence E85 TTC:
+
+- name: "Test prix_essence_e85_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+  output:
+    prix_essence_e85_ttc: 0.7307
+
+- name: "Test prix_essence_e85_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+  output:
+    prix_essence_e85_ttc: 0.6774
+
+- name: "Test prix_essence_e85_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+  output:
+    prix_essence_e85_ttc: 1.3504
+
+# prix GPL TTC:
+
+- name: "Test prix_gpl_carburant_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '11'
+  output:
+    prix_gpl_carburant_ttc: 0.878
+
+- name: "Test prix_gpl_carburant_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '24'
+  output:
+    prix_gpl_carburant_ttc: 0.8984
+
+
+- name: "Test prix_gpl_carburant_ttc"
+  period: 2021
+  absolute_error_margin: .01
+  input:
+    code_region: '94'
+  output:
+    prix_gpl_carburant_ttc: 1.1149

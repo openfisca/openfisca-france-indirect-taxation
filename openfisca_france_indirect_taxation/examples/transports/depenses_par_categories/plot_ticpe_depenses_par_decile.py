@@ -1,16 +1,10 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Jan 28 11:09:50 2016
-
-@author: thomas.douenne
-"""
-
 
 # Ce script a pour objectif de décrire pour chaque décile de revenu la consommation annuelle moyenne de carburants,
 # ainsi que les dépenses moyennes pour la TICPE
 
 # Import de modules généraux
-from __future__ import division
+
 
 import pandas
 import seaborn
@@ -21,7 +15,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import graph_buil
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 # Import d'une nouvelle palette de couleurs
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 if __name__ == '__main__':
     import logging

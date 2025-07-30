@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 
 
-from __future__ import division
-
 import logging
 import os
-import pkg_resources
+import csv
 
 import pandas
 from pandas import concat
 
-from openfisca_france_indirect_taxation.examples.utils_example import get_input_data_frame
+from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
 from openfisca_france_indirect_taxation.build_survey_data.utils import find_nearest_inferior
 
 
@@ -45,18 +43,14 @@ def get_bdf_aggregates(data_year = None):
 
 def get_cn_aggregates(target_year = None):
     assert target_year is not None
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
     parametres_fiscalite_file_path = os.path.join(
-        default_config_files_directory,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'legislation',
         'Parametres fiscalite indirecte.xls'
         )
-    masses_cn_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheetname = "consommation_CN")
+    masses_cn_data_frame = pandas.read_excel(parametres_fiscalite_file_path, sheet_name = 'consommation_CN')
     masses_cn_12postes_data_frame = masses_cn_data_frame.loc[:, ['Code', target_year]]
-    masses_cn_12postes_data_frame['code_unicode'] = masses_cn_12postes_data_frame.Code.astype(unicode)
+    masses_cn_12postes_data_frame['code_unicode'] = masses_cn_12postes_data_frame.Code.astype(str)
     masses_cn_12postes_data_frame['len_code'] = masses_cn_12postes_data_frame['code_unicode'].apply(lambda x: len(x))
 
     masses_cn_12postes_data_frame = masses_cn_12postes_data_frame[masses_cn_12postes_data_frame['len_code'] == 6]
@@ -105,7 +99,7 @@ def get_inflators_cn_to_cn(target_year):
 
     return dict(
         (key, target_year_cn_aggregates[key] / data_year_cn_aggregates[key])
-        for key in data_year_cn_aggregates.keys()
+        for key in list(data_year_cn_aggregates.keys())
         )
 
 
@@ -119,18 +113,37 @@ def get_inflators(target_year):
     inflators_cn_to_cn = get_inflators_cn_to_cn(target_year)
 
     ratio_by_variable = dict()
-    for key in inflators_cn_to_cn.keys():
+    for key in list(inflators_cn_to_cn.keys()):
         ratio_by_variable[key] = inflators_bdf_to_cn[key] * inflators_cn_to_cn[key]
 
     return ratio_by_variable
 
 
-def get_inflators_by_year():
-    inflators_by_year = dict()
-    for target_year in range(2000, 2015):
-        inflators = get_inflators(target_year)
-        inflators_by_year[target_year] = inflators
-    return inflators_by_year
+def get_inflators_by_year(rebuild = False):
+    if rebuild is not False:
+        inflators_by_year = dict()
+        for target_year in range(2000, 2015):
+            inflators = get_inflators(target_year)
+            inflators_by_year[target_year] = inflators
+
+        writer_inflators = csv.writer(open(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year_wip.csv'), 'wb'))
+        for year in range(2000, 2015):
+            for key, value in list(inflators_by_year[year].items()):
+                writer_inflators.writerow([key, value, year])
+
+        return inflators_by_year
+
+    else:
+        re_build_inflators = dict()
+        inflators_from_csv = pandas.read_csv(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year_wip.csv'),
+            header = None)
+        for year in range(2000, 2015):
+            inflators_from_csv_by_year = inflators_from_csv[inflators_from_csv[2] == year]
+            inflators_to_dict = pandas.DataFrame.to_dict(inflators_from_csv_by_year)
+            inflators = inflators_to_dict[1]
+            re_build_inflators[year] = inflators
+
+        return re_build_inflators
 
 
 def get_aggregates_by_year():

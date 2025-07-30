@@ -1,16 +1,11 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Sep 18 11:11:34 2015
-
-@author: thomas.douenne
-"""
 
 # L'objectif est de calculer, pour chaque zone de résidence "strate", les dépenses moyennes en carburants.
 # L'analyse peut être affinée afin de comparer les dépenses en diesel et en essence.
 # On constate que pour les deux carburants les ménages ruraux consomment davantage que les urbains.
 
 # Import de modules généraux
-from __future__ import division
+
 
 import pandas
 import seaborn
@@ -20,7 +15,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import graph_buil
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 # Import d'une nouvelle palette de couleurs
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 if __name__ == '__main__':
 

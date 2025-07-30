@@ -1,0 +1,397 @@
+description: Affectation régionale accise SP95 et SP98
+maximum_value_affectation:
+  description: Valeur maximale pouvant être affectée aux régions
+  values:
+    2010-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    unit: currency
+    reference:
+      2010-01-01:
+        - href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044872354/2022-01-01/
+          title: Article L4331-2 du Code général des collectivités territoriales
+"11":
+  description: Affectation votée par l'Île-de-France
+  values:
+    2007-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_idf
+    unit: currency
+"21":
+  description: Affectation votée par la Champagne-Ardennes
+  values:
+    2017-01-01:
+      value: null
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 1.17
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_ch_ar
+    unit: currency
+"22":
+  description: Affectation votée par la Picardie
+  values:
+    2017-01-01:
+      value: null
+    2007-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_pic
+    unit: currency
+"23":
+  description: Affectation votée par la Haute-Normandie
+  values:
+    2017-01-01:
+      value: null
+    2007-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_h_n
+    unit: currency
+"24":
+  description: Affectation votée par le Centre-Val de Loire
+  values:
+    2007-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_cen
+    unit: currency
+    notes: Région Centre (avant 2016) / Centre-Val de Loire (après 2016)
+"25":
+  description: Affectation votée par la Basse Normandie
+  values:
+    2017-01-01:
+      value: null
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 1.39
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_b_n
+    unit: currency
+"26":
+  description: Affectation votée par la Bourgogne
+  values:
+    2017-01-01:
+      value: null
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 0.86
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_bourg
+    unit: currency
+"27":
+  description: Affectation votée par la Bourgogne-Franche-Comté
+  values:
+    2017-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    unit: currency
+"28":
+  description: Affectation votée par la Normandie
+  values:
+    2017-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    unit: currency
+"31":
+  description: Affectation votée par le Nord Pas-de-Calais
+  values:
+    2017-01-01:
+      value: null
+    2007-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_n_cal
+    unit: currency
+"32":
+  description: Affectation votée par les Hauts-de-France
+  values:
+    2017-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    unit: currency
+"41":
+  description: Affectation votée par la Lorraine
+  values:
+    2017-01-01:
+      value: null
+    2007-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_lor
+    unit: currency
+"42":
+  description: Affectation votée par l'Alsace
+  values:
+    2017-01-01:
+      value: null
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 1.4
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_als
+    unit: currency
+"43":
+  description: Affectation votée par la Franche-Comté
+  values:
+    2017-01-01:
+      value: null
+    2009-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 1.35
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_f_c
+    unit: currency
+"44":
+  description: Affectation votée par le Grand Est
+  values:
+    2017-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    unit: currency
+"52":
+  description: Affectation votée au Pays de la Loire
+  values:
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 1.01
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_p_loi
+    unit: currency
+"53":
+  description: Affectation votée par la Bretagne
+  values:
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 1.1
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_bre
+    unit: currency
+"54":
+  description: Affectation votée en Poitou-Charentes
+  values:
+    2017-01-01:
+      value: null
+    2016-07-01:
+      value: 1.77
+    2007-01-01:
+      value: 0.0
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_p_c
+    unit: currency
+"72":
+  description: Affectation votée par l'Aquitaine
+  values:
+    2017-01-01:
+      value: null
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 1.12
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_aqui
+    unit: currency
+"73":
+  description: Affectation votée par le Midi-Pyrénées
+  values:
+    2017-01-01:
+      value: null
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 1.11
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_m_p
+    unit: currency
+"74":
+  description: Affectation votée par le Limousin
+  values:
+    2017-01-01:
+      value: null
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 1.66
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_lim
+    unit: currency
+"75":
+  description: Affectation votée par la Nouvelle-Aquitaine
+  values:
+    2017-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    unit: currency
+"76":
+  description: Affectation votée par l'Occitanie
+  values:
+    2017-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    unit: currency
+"82":
+  description: Affectation votée par Rhône-Alpes
+  values:
+    2017-01-01:
+      value: null
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 1.17
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_r_a
+    unit: currency
+"83":
+  description: Affectation votée par l'Auvergne
+  values:
+    2017-01-01:
+      value: null
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 1.22
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_auv
+    unit: currency
+"84":
+  description: Affectation votée par l'Auvergne-Rhône-Alpes
+  values:
+    2017-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    unit: currency
+"91":
+  description: Affectation votée par le Languedoc-Roussillon
+  values:
+    2017-01-01:
+      value: null
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 1.28
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_l_r
+    unit: currency
+"93":
+  description: Affectation votée par Provence-Alpes-Côte d'Azur
+  values:
+    2008-01-01:
+      value: 1.77
+    2007-01-01:
+      value: 0.98
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_paca
+    unit: currency
+"94":
+  description: Affectation votée par la Corse
+  values:
+    2017-01-01:
+      value: 1.77
+    2010-01-01:
+      value: 0.0
+    2009-01-01:
+      value: 1.01
+    2007-01-01:
+      value: 0.0
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    ipp_csv_id: maj_ticpe_super_cor
+    unit: currency
+"99":
+  description: France (paramètre par défaut si la région n'est pas précisée)
+  values:
+    2017-01-01:
+      value: 1.77
+  metadata:
+    last_value_still_valid_on: "2024-07-01"
+    unit: currency
+metadata:
+  order:
+  - "11"
+  - "21"
+  - "22"
+  - "23"
+  - "24"
+  - "25"
+  - "26"
+  - "27"
+  - "28"
+  - "31"
+  - "32"
+  - "41"
+  - "42"
+  - "43"
+  - "44"
+  - "52"
+  - "53"
+  - "54"
+  - "72"
+  - "73"
+  - "74"
+  - "75"
+  - "76"
+  - "82"
+  - "83"
+  - "84"
+  - "91"
+  - "93"
+  - "94"
+  - "99"
+  label_en: Regional surcharge - SP95 and SP98
+  reference:
+    2022-01-01:
+    - href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044872354/2022-01-01/
+      title: Article L4331-2 du Code général des collectivités territoriales
+    2007-01-01:
+    - href: https://www.legifrance.gouv.fr/loda/id/LEGIARTI000033760682/2017-01-01#LEGIARTI000033760682
+      title: Loi n°2006-1666 du 21 décembre 2006 - art. 23 () JORF 27 décembre 2006 - Article 23
+    - href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006615108/2006-12-31/
+      title: Article 265 du Code des douanes
+documentation: |
+  Notes :
+    "Depuis le 1er janvier 2007, Il est affecté aux régions et à la collectivité territoriale de Corse une fraction de tarif applicable aux carburants vendus aux consommateurs finals sur leur territoire.
+    Une partie de la TIPCE sur l'essence SP95 et SP98 (identification 11) de l'article Article 265 du Code des douanes revient donc aux régions et à la collectivité territoriale de Corse.
+    La valeur maximale pouvant être affectée est de 1,77€.
+    Toutes les régions ne prennent pas l'intégralité de cette affectation, ce qui réduit le montant de la TICPE dans ces dites régions.
+    Pour retrouver l'affectation votée par chaque région, qui peut être différentes chaques années, il faut se référer aux circulaires publiés aux bulletins officiels des douanes.
+    On peux les trouver ici: https://www.douane.gouv.fr/la-douane/informations/bulletins-officiels-des-douanes, en cherchant "Droits et taxes applicables aux produits" de l'année voulue".
+    En 2016, il y a eu une Réforme territoriale, qui commence à être pris en compte pour les affectation et majoration de la TICPE qu'à partir de 2017."
+
+        Depuis 2022, cette affectation est dans l'article L4331-2 du Code général des collectivités territoriales et non plus dans l'Article 265 du Code des douanes. A la difference de tous ce qui touche au accise des taxations indirects, on est toujours en euro par hectolitre.

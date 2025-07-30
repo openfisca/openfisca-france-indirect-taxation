@@ -1,29 +1,18 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Feb 01 09:57:13 2016
-
-@author: thomas.douenne
-"""
-
-from __future__ import division
 
 
 import pandas as pd
 import numpy as np
 import os
-import pkg_resources
 
 
-from openfisca_france_indirect_taxation.examples.utils_example import get_input_data_frame
+from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import \
-    add_area_dummy, add_stalog_dummy, add_vag_dummy, electricite_only, indices_prix_carbus, price_carbu_pond
+    add_area_dummy, add_stalog_dummy, add_vag_dummy, electricite_only, indices_prix_carbus, price_carbu_pond, \
+    price_carbu_from_quantities, price_energy_from_contracts
 
-
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
 
 # On importe la dataframe qui recense les indices de prix. Notre objectif est de construire une nouvelle dataframe avec
 # le reste des informations, i.e. la consommation et autres variables pertinentes concernant les ménages.
@@ -49,7 +38,7 @@ for year in [2000, 2005, 2011]:
     for bien in biens_durables:
         try:
             aggregates_data_frame = aggregates_data_frame.drop(bien, axis = 1)
-        except:
+        except Exception:
             aggregates_data_frame = aggregates_data_frame
 
     produits_alimentaire = ['poste_coicop_111', 'poste_coicop_112', 'poste_coicop_113', 'poste_coicop_114',
@@ -60,17 +49,16 @@ for year in [2000, 2005, 2011]:
         'poste_coicop_453', 'poste_coicop_454', 'poste_coicop_455', 'poste_coicop_4552']
 
     produits = [column for column in aggregates_data_frame.columns if column[:13] == 'poste_coicop_']
-    del column
 
     aggregates_data_frame['depenses_alime'] = sum(aggregates_data_frame[alime] for alime in produits_alimentaire)
 
-    aggregates_data_frame['depenses_carbu'] = aggregates_data_frame['poste_coicop_722']
+    aggregates_data_frame['depenses_carbu'] = aggregates_data_frame['poste_coicop_07_2_2_1_1']
 
     aggregates_data_frame['depenses_logem'] = 0
     for logem in energie_logement:
         try:
             aggregates_data_frame['depenses_logem'] += aggregates_data_frame[logem]
-        except:
+        except Exception:
             pass
 
     aggregates_data_frame['depenses_tot'] = 0
@@ -79,8 +67,8 @@ for year in [2000, 2005, 2011]:
             aggregates_data_frame['depenses_tot'] += aggregates_data_frame[produit]
 
     aggregates_data_frame['depenses_autre'] = (
-        aggregates_data_frame['depenses_tot'] - aggregates_data_frame['depenses_alime'] -
-        aggregates_data_frame['depenses_carbu'] - aggregates_data_frame['depenses_logem'])
+        aggregates_data_frame['depenses_tot'] - aggregates_data_frame['depenses_alime']
+        - aggregates_data_frame['depenses_carbu'] - aggregates_data_frame['depenses_logem'])
 
     data_conso = aggregates_data_frame[
         produits + ['ident_men', 'vag', 'depenses_alime', 'depenses_autre', 'depenses_carbu', 'depenses_logem']
@@ -101,7 +89,7 @@ for year in [2000, 2005, 2011]:
     # df_depenses_prix contient les dépenses de consommation et les prix associés à ces dépenses.
     # Il faut maintenant construire les catégories de biens que l'on souhaite comparer.
     df_depenses_prix['type_bien'] = 'autre'
-    df_depenses_prix.loc[df_depenses_prix['bien'] == 'poste_coicop_722', 'type_bien'] = 'carbu'
+    df_depenses_prix.loc[df_depenses_prix['bien'] == 'poste_coicop_07_2_2_1_1', 'type_bien'] = 'carbu'
     for alime in produits_alimentaire:
         df_depenses_prix.loc[df_depenses_prix['bien'] == alime, 'type_bien'] = 'alime'
     for logem in energie_logement:
@@ -136,6 +124,8 @@ for year in [2000, 2005, 2011]:
 
     # Les parts des biens dans leur catégorie permettent de construire des indices de prix pondérés (Cf. Lewbel)
     df_depenses_prix['indice_prix_pondere'] = 0
+    # On utilise les contrats imputés pour affiner les prix du gaz et de l'électricité
+    df_depenses_prix = price_energy_from_contracts(df_depenses_prix, year)
     df_depenses_prix['indice_prix_pondere'] = df_depenses_prix['part_bien_categorie'] * df_depenses_prix['prix']
 
     # grouped donne l'indice de prix pondéré pour chacune des deux catégories pour chaque individu
@@ -163,8 +153,8 @@ for year in [2000, 2005, 2011]:
     grouped_logem = grouped[grouped['categorie'] == 'logem'].copy()
     grouped_logem['ident_men'] = grouped_logem['id'].str[6:]
 
-    df_prix_to_merge = pd.merge(grouped_carbu[['ident_men', 'prix_carbu']], grouped_alime[['ident_men'] +
-        ['prix_alime']], on = 'ident_men')
+    df_prix_to_merge = pd.merge(grouped_carbu[['ident_men', 'prix_carbu']], grouped_alime[['ident_men']
++ ['prix_alime']], on = 'ident_men')
     df_prix_to_merge = pd.merge(df_prix_to_merge, grouped_autre[['ident_men', 'prix_autre']], on = 'ident_men')
     df_prix_to_merge = pd.merge(df_prix_to_merge, grouped_logem[['ident_men', 'prix_logem']], on = 'ident_men')
     del grouped, grouped_alime, grouped_autre, grouped_carbu, grouped_logem
@@ -178,7 +168,7 @@ for year in [2000, 2005, 2011]:
     # On récupère les informations importantes sur les ménages, dont les variables démographiques
     df_info_menage = aggregates_data_frame[['agepr', 'depenses_alime', 'depenses_autre', 'depenses_carbu',
         'depenses_logem', 'depenses_tot', 'dip14pr', 'elect_only', 'ident_men', 'nenfants', 'nactifs', 'ocde10',
-        'revtot', 'situacj', 'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
+        'revtot', 'situacj', 'situapr', 'sourcp', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel',
         'veh_essence']].copy()
     df_info_menage['ident_men'] = df_info_menage['ident_men'].astype(str)
     df_info_menage['part_alime'] = df_info_menage['depenses_alime'] / df_info_menage['depenses_tot']
@@ -202,25 +192,28 @@ for year in [2000, 2005, 2011]:
 
     dataframe['depenses_par_uc'] = dataframe['depenses_tot'] / dataframe['ocde10']
 
-    dataframe = dataframe[['ident_men', 'part_carbu', 'part_logem', 'part_alime', 'part_autre',
-        'prix_carbu', 'prix_logem', 'prix_alime', 'prix_autre', 'depenses_par_uc', 'depenses_tot',
-        'typmen', 'strate', 'dip14pr', 'agepr', 'situapr', 'situacj', 'stalog', 'nenfants',
-        'nactifs', 'vag', 'veh_diesel', 'veh_essence', 'elect_only']]
+    dataframe = dataframe[['ident_men', 'part_carbu', 'part_logem', 'part_alime', 'part_autre', 'prix_carbu',
+        'prix_logem', 'prix_alime', 'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'elect_only',
+        'nactifs', 'nenfants', 'situacj', 'situapr', 'sourcp', 'stalog', 'strate', 'typmen',
+        'vag', 'veh_diesel', 'veh_essence']]
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la
     # nourriture ce n'est pas qu'ils n'en consomment pas, mais qu'ils n'en ont pas acheté sur la période (réserves, etc)
-    dataframe = dataframe[dataframe['prix_alime'] != 0]
-    dataframe = dataframe[dataframe['prix_logem'] != 0]
+    dataframe = dataframe.query('prix_alime != 0')
+    dataframe = dataframe.query('prix_logem != 0')
 
     # On enlève les outliers, que l'on considère comme les individus dépensant plus de 25% de leur budget en carburants
     # Cela correspond à 16 et 13 personnes pour 2000 et 2005 ce qui est négligeable, mais 153 i.e. 2% des consommateurs
     # pour 2011 ce qui est assez important. Cette différence s'explique par la durée des enquêtes (1 semaine en 2011)
-    dataframe = dataframe[dataframe['part_carbu'] < 0.25]
+    dataframe = dataframe.query('part_carbu < 0.25')
 
-    indices_prix_carburants = indices_prix_carbus(year)
-    dataframe = pd.merge(dataframe, indices_prix_carburants, on = 'vag')
-    dataframe = price_carbu_pond(dataframe)
+    if year == 2011:
+        dataframe = price_carbu_from_quantities(dataframe, 2011)
+    else:
+        indices_prix_carburants = indices_prix_carbus(year)
+        dataframe = pd.merge(dataframe, indices_prix_carburants, on = 'vag')
+        dataframe = price_carbu_pond(dataframe)
     dataframe['year'] = year
 
     dataframe = add_area_dummy(dataframe)
@@ -233,13 +226,12 @@ for year in [2000, 2005, 2011]:
     data_frame_all_years = pd.concat([data_frame_all_years, data_frame_for_reg])
     data_frame_all_years.fillna(0, inplace = True)
 
-    data_frame_for_reg.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quaids', 'data_frame_energy_{}.csv'.format(year)), sep = ',')
+    data_frame_for_reg.to_csv(os.path.join(assets_directory, 'quaids', 'data_frame_energy_{}.csv'.format(year)), sep = ',')
 
-data_frame_all_years.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quaids', 'data_frame_energy_all_years.csv'), sep = ',')
+data_frame_all_years.to_csv(os.path.join(assets_directory, 'quaids', 'data_frame_energy_all_years.csv'), sep = ',')
 
-# Must correct what is useless, improve demographics : dip14
+data_frame_not_elect_only = data_frame_all_years.query('elect_only == 0')
+data_frame_not_elect_only.to_csv(os.path.join(assets_directory, 'quaids', 'data_frame_no_elect_only_all_years.csv'), sep = ',')
+
 # dip14 : use only dip14pr (good proxy for dip14cj anyway), but change the nomenclature to have just 2 or 3 dummies
 # describing whether they attended college or not, etc.
-# Use more functions in utils

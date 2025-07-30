@@ -1,0 +1,292 @@
+# TICPE gazole:
+
+## TICPE gazole B7:
+
+- name: "Test gazole_b7_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b7: 100
+    code_region: '11'
+  output:
+    gazole_b7_ticpe: 62.64
+
+- name: "Test gazole_b7_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b7: 100
+    code_region: '24'
+  output:
+    gazole_b7_ticpe: 60.75
+
+- name: "Test gazole_b7_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b7: 100
+    code_region: '94'
+  output:
+    gazole_b7_ticpe: 59.4
+
+## TICPE gazole B10:
+
+- name: "Test gazole_b10_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b10: 100
+    code_region: '11'
+  output:
+    gazole_b10_ticpe: 59.40
+
+- name: "Test gazole_b10_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b10: 100
+    code_region: '24'
+  output:
+    gazole_b10_ticpe: 59.40
+
+- name: "Test gazole_b10_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b10: 100
+    code_region: '94'
+  output:
+    gazole_b10_ticpe: 59.40
+
+- name: "Test gazole_b10_ticpe"
+  period: 2019
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b10: 100
+    code_region: '84'
+  output:
+    gazole_b10_ticpe: 59.40
+
+- name: "Test gazole_b10_ticpe"
+  period: 2024
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gazole_b10: 100
+    code_region: '84'
+  output:
+    gazole_b10_ticpe: 59.40
+
+## TICPE gazole total:
+
+- name: "Test gazole_ticpe_total"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    gazole_b7_ticpe: 62.64
+    gazole_b10_ticpe: 59.40
+  output:
+    gazole_ticpe_total: 122.04
+
+
+# TICPE essence:
+
+## TICPE essence SP95 E10:
+
+- name: "Test essence_sp95_e10_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_sp95_e10: 100
+    code_region: '11'
+  output:
+    essence_sp95_e10_ticpe: 68.04
+
+- name: "Test essence_sp95_e10_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_sp95_e10: 100
+    code_region: '24'
+  output:
+    essence_sp95_e10_ticpe: 67.02
+
+- name: "Test essence_sp95_e10_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_sp95_e10: 100
+    code_region: '94'
+  output:
+    essence_sp95_e10_ticpe: 65.29
+
+## TICPE essence SP95:
+
+- name: "Test essence_sp95_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_sp95: 100
+    code_region: '11'
+  output:
+    essence_sp95_ticpe: 70.04
+
+- name: "Test essence_sp95_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_sp95: 100
+    code_region: '24'
+  output:
+    essence_sp95_ticpe: 69.02
+
+- name: "Test essence_sp95_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_sp95: 100
+    code_region: '94'
+  output:
+    essence_sp95_ticpe: 67.29
+
+## TICPE essence SP98:
+
+- name: "Test essence_sp98_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_sp98: 100
+    code_region: '11'
+  output:
+    essence_sp98_ticpe: 70.04
+
+- name: "Test essence_sp98_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_sp98: 100
+    code_region: '24'
+  output:
+    essence_sp98_ticpe: 69.02
+
+- name: "Test essence_sp98_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_sp98: 100
+    code_region: '94'
+  output:
+    essence_sp98_ticpe: 67.29
+
+## TICPE essence super plombe:
+
+- name: "Test essence_super_plombe_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_super_plombe: 100
+    code_region: '11'
+  output:
+    essence_super_plombe_ticpe: 0.0
+
+- name: "Test essence_super_plombe_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_super_plombe: 100
+    code_region: '24'
+  output:
+    essence_super_plombe_ticpe: 0.0
+
+- name: "Test essence_super_plombe_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_super_plombe: 100
+    code_region: '94'
+  output:
+    essence_super_plombe_ticpe: 0.0
+
+## TICPE essence E85:
+
+- name: "Test essence_e85_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_e85: 100
+    code_region: '11'
+  output:
+    essence_e85_ticpe: 11.83
+
+- name: "Test essence_e85_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_e85: 100
+    code_region: '24'
+  output:
+    essence_e85_ticpe: 11.83
+
+- name: "Test essence_e85_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_essence_e85: 100
+    code_region: '94'
+  output:
+    essence_e85_ticpe: 11.83
+
+## TICPE essence total
+
+- name: "Test essence_ticpe_total"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    essence_sp95_e10_ticpe: 68.04
+    essence_sp95_ticpe: 70.04
+    essence_sp98_ticpe: 70.04
+    essence_super_plombe_ticpe: 10000.0
+    essence_e85_ticpe: 11.83
+  output:
+    essence_ticpe_total: 219.95
+
+# TICPE GPL:
+
+- name: "Test gpl_carburant_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gpl_carburant: 100
+    code_region: '11'
+  output:
+    gpl_carburant_ticpe: 20.71
+
+- name: "Test gpl_carburant_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gpl_carburant: 100
+    code_region: '24'
+  output:
+    gpl_carburant_ticpe: 20.71
+
+
+- name: "Test gpl_carburant_ticpe"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    nombre_litres_gpl_carburant: 100
+    code_region: '94'
+  output:
+    gpl_carburant_ticpe: 20.71
+
+# TICPE carbirant total
+
+- name: "Test ticpe_carburant_total"
+  period: 2022
+  absolute_error_margin: .01
+  input:
+    gazole_ticpe_total: 122.04
+    essence_ticpe_total: 219.95
+    gpl_carburant_ticpe: 20.71
+  output:
+    ticpe_carburant_total: 362.7

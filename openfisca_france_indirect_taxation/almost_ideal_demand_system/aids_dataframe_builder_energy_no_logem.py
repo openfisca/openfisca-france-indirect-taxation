@@ -1,30 +1,17 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Feb 05 14:44:17 2016
-
-@author: thomas.douenne
-"""
-
-
-from __future__ import division
 
 
 import pandas as pd
 import numpy as np
 import os
-import pkg_resources
 
 
-from openfisca_france_indirect_taxation.examples.utils_example import get_input_data_frame
+from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import \
     add_area_dummy, add_vag_dummy, indices_prix_carbus, price_carbu_pond
 
-
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location
-    )
 
 # On importe la dataframe qui recense les indices de prix. Notre objectif est de construire une nouvelle dataframe avec
 # le reste des informations, i.e. la consommation et autres variables pertinentes concernant les ménages.
@@ -50,7 +37,7 @@ for year in [2000, 2005, 2011]:
     for bien in biens_durables:
         try:
             aggregates_data_frame = aggregates_data_frame.drop(bien, axis = 1)
-        except:
+        except Exception:
             aggregates_data_frame = aggregates_data_frame
 
     produits_alimentaire = ['poste_coicop_111', 'poste_coicop_112', 'poste_coicop_113', 'poste_coicop_114',
@@ -58,11 +45,10 @@ for year in [2000, 2005, 2011]:
         'poste_coicop_1181', 'poste_coicop_119', 'poste_coicop_121', 'poste_coicop_122']
 
     produits = [column for column in aggregates_data_frame.columns if column[:13] == 'poste_coicop_']
-    del column
 
     aggregates_data_frame['depenses_alime'] = sum(aggregates_data_frame[alime] for alime in produits_alimentaire)
 
-    aggregates_data_frame['depenses_carbu'] = aggregates_data_frame['poste_coicop_722']
+    aggregates_data_frame['depenses_carbu'] = aggregates_data_frame['poste_coicop_07_2_2_1_1']
 
     aggregates_data_frame['depenses_tot'] = 0
     for produit in produits:
@@ -70,8 +56,8 @@ for year in [2000, 2005, 2011]:
             aggregates_data_frame['depenses_tot'] += aggregates_data_frame[produit]
 
     aggregates_data_frame['depenses_autre'] = (
-        aggregates_data_frame['depenses_tot'] - aggregates_data_frame['depenses_alime'] -
-        aggregates_data_frame['depenses_carbu'])
+        aggregates_data_frame['depenses_tot'] - aggregates_data_frame['depenses_alime']
+        - aggregates_data_frame['depenses_carbu'])
 
     data_conso = aggregates_data_frame[produits + ['vag', 'ident_men', 'depenses_alime', 'depenses_autre',
         'depenses_carbu']].copy()
@@ -92,7 +78,7 @@ for year in [2000, 2005, 2011]:
     # df_depenses_prix contient les dépenses de consommation et les prix associés à ces dépenses.
     # Il faut maintenant construire les catégories de biens que l'on souhaite comparer.
     df_depenses_prix['type_bien'] = 'autre'
-    df_depenses_prix.loc[df_depenses_prix['bien'] == 'poste_coicop_722', 'type_bien'] = 'carbu'
+    df_depenses_prix.loc[df_depenses_prix['bien'] == 'poste_coicop_07_2_2_1_1', 'type_bien'] = 'carbu'
     for alime in produits_alimentaire:
         df_depenses_prix.loc[df_depenses_prix['bien'] == alime, 'type_bien'] = 'alime'
     del alime, produit
@@ -146,8 +132,8 @@ for year in [2000, 2005, 2011]:
     grouped_carbu = grouped[grouped['categorie'] == 'carbu'].copy()
     grouped_carbu['ident_men'] = grouped_carbu['id'].str[6:]
 
-    df_prix_to_merge = pd.merge(grouped_carbu[['ident_men', 'prix_carbu']], grouped_alime[['ident_men'] +
-        ['prix_alime']], on = 'ident_men')
+    df_prix_to_merge = pd.merge(grouped_carbu[['ident_men', 'prix_carbu']], grouped_alime[['ident_men']
++ ['prix_alime']], on = 'ident_men')
     df_prix_to_merge = pd.merge(df_prix_to_merge, grouped_autre[['ident_men', 'prix_autre']], on = 'ident_men')
     del grouped, grouped_alime, grouped_autre, grouped_carbu
 
@@ -179,20 +165,19 @@ for year in [2000, 2005, 2011]:
 
     dataframe['depenses_par_uc'] = dataframe['depenses_tot'] / dataframe['ocde10']
 
-    dataframe = dataframe[['ident_men', 'part_carbu', 'part_alime', 'part_autre',
-        'prix_carbu', 'prix_alime', 'prix_autre', 'depenses_par_uc', 'depenses_tot',
-        'typmen', 'strate', 'dip14pr', 'agepr', 'situapr', 'situacj', 'stalog', 'nenfants',
-        'nactifs', 'vag', 'veh_diesel', 'veh_essence']]
+    dataframe = dataframe[['ident_men', 'part_carbu', 'part_alime', 'part_autre', 'prix_carbu', 'prix_alime',
+        'prix_autre', 'agepr', 'depenses_par_uc', 'depenses_tot', 'dip14pr', 'nactifs', 'nenfants', 'situacj',
+        'situapr', 'stalog', 'strate', 'typmen', 'vag', 'veh_diesel', 'veh_essence']]
 
     # On supprime de la base de données les individus pour lesquels on ne dispose d'aucune consommation alimentaire.
     # Leur présence est susceptible de biaiser l'analyse puisque de toute évidence s'ils ne dépensent rien pour la
     # nourriture ce n'est pas qu'ils n'en consomment pas, mais qu'ils n'en ont pas acheté sur la période (réserves, etc)
-    dataframe = dataframe[dataframe['prix_alime'] != 0]
+    dataframe = dataframe.query('prix_alime != 0')
 
     # On enlève les outliers, que l'on considère comme les individus dépensant plus de 25% de leur budget en carburants
     # Cela correspond à 16 et 13 personnes pour 2000 et 2005 ce qui est négligeable, mais 153 i.e. 2% des consommateurs
     # pour 2011 ce qui est assez important. Cette différence s'explique par la durée des enquêtes (1 semaine en 2011)
-    dataframe = dataframe[dataframe['part_carbu'] < 0.25]
+    dataframe = dataframe.query('part_carbu < 0.25')
 
     indices_prix_carburants = indices_prix_carbus(year)
     dataframe = pd.merge(dataframe, indices_prix_carburants, on = 'vag')
@@ -207,11 +192,9 @@ for year in [2000, 2005, 2011]:
     data_frame_all_years = pd.concat([data_frame_all_years, data_frame_for_reg])
     data_frame_all_years.fillna(0, inplace = True)
 
-    data_frame_for_reg.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quaids', 'data_frame_carbu_{}.csv'.format(year)), sep = ',')
+    data_frame_for_reg.to_csv(os.path.join(assets_directory, 'quaids', 'data_frame_carbu_{}.csv'.format(year)), sep = ',')
 
-data_frame_all_years.to_csv(os.path.join(assets_directory, 'openfisca_france_indirect_taxation', 'assets',
-    'quaids', 'data_frame_carbu_all_years.csv'), sep = ',')
+data_frame_all_years.to_csv(os.path.join(assets_directory, 'quaids', 'data_frame_carbu_all_years.csv'), sep = ',')
 
 # Must correct what is useless, improve demographics : dip14
 # dip14 : use only dip14pr (good proxy for dip14cj anyway), but change the nomenclature to have just 2 or 3 dummies

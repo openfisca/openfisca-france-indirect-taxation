@@ -1,0 +1,345 @@
+description: Prix unitaire tarif réglementé GDF (toutes taxes comprises)
+prix_kwh_base_ttc:
+  description: Prix kWh Base - TTC
+  values:
+    2020-07-01:
+      value: 0.0698
+    2019-07-01:
+      value: 0.0795
+    2018-07-01:
+      value: 0.0959
+    2017-07-01:
+      value: 0.0788
+    2016-07-01:
+      value: 0.0851
+    2015-07-01:
+      value: 0.0972
+    2014-07-01:
+      value: 0.0998
+    2013-07-01:
+      value: 0.1026
+    2013-01-01:
+      value: 0.1027
+    2012-01-01:
+      value: 0.09970000000000001
+    2011-01-01:
+      value: 0.094
+    2010-01-01:
+      value: 0.08470000000000001
+    2009-01-01:
+      value: 0.0797
+    2008-01-01:
+      value: 0.0819
+    2007-01-01:
+      value: 0.07200000000000001
+    2006-01-01:
+      value: 0.0711
+    2005-01-01:
+      value: 0.0636
+    2004-01-01:
+      value: 0.059
+    2003-01-01:
+      value: 0.0604
+    2002-01-01:
+      value: 0.0593
+    2001-01-01:
+      value: 0.0595
+    2000-01-01:
+      value: 0.0515
+    1999-01-01:
+      value: 0.0496
+    1998-01-01:
+      value: 0.05230000000000001
+    1997-01-01:
+      value: 0.0518
+    1996-01-01:
+      value: 0.0499
+    1995-01-01:
+      value: 0.04969999999999999
+    1994-01-01:
+      value: 0.0504
+    1993-01-01:
+      value: 0.05139999999999999
+    1992-01-01:
+      value: 0.0526
+    1991-01-01:
+      value: 0.0538
+    1990-01-01:
+      value: 0.0528
+    1989-01-01:
+      value: 0.0517
+    1988-01-01:
+      value: 0.0513
+    1987-01-01:
+      value: 0.05110000000000001
+    1986-01-01:
+      value: 0.0601
+    1985-01-01:
+      value: 0.0639
+    1984-01-01:
+      value: 0.0596
+    1983-01-01:
+      value: 0.0537
+  metadata:
+    ipp_csv_id: prix_unitaire_gdf_base_ttc
+    unit: currency
+prix_kwh_b0_ttc:
+  description: Prix kWh B0 - TTC
+  values:
+    2020-07-01:
+      value: 0.0698
+    2019-07-01:
+      value: 0.0795
+    2018-07-01:
+      value: 0.0819
+    2017-07-01:
+      value: 0.0709
+    2016-07-01:
+      value: 0.0683
+    2015-07-01:
+      value: 0.0762
+    2014-07-01:
+      value: 0.0816
+    2013-07-01:
+      value: 0.0871
+    2013-01-01:
+      value: 0.087
+    2012-01-01:
+      value: 0.0852
+    2011-01-01:
+      value: 0.08070000000000001
+    2010-01-01:
+      value: 0.0727
+    2009-01-01:
+      value: 0.0681
+    2008-01-01:
+      value: 0.06860000000000001
+    2007-01-01:
+      value: 0.0599
+    2006-01-01:
+      value: 0.059
+    2005-01-01:
+      value: 0.05139999999999999
+    2004-01-01:
+      value: 0.0479
+    2003-01-01:
+      value: 0.04969999999999999
+    2002-01-01:
+      value: 0.0487
+    2001-01-01:
+      value: 0.0484
+    2000-01-01:
+      value: 0.04099999999999999
+    1999-01-01:
+      value: 0.0394
+    1998-01-01:
+      value: 0.0415
+    1997-01-01:
+      value: 0.04099999999999999
+    1996-01-01:
+      value: 0.0394
+    1995-01-01:
+      value: 0.0393
+    1994-01-01:
+      value: 0.0397
+    1993-01-01:
+      value: 0.0404
+    1992-01-01:
+      value: 0.0414
+    1991-01-01:
+      value: 0.0421
+    1990-01-01:
+      value: 0.04
+    1989-01-01:
+      value: 0.0389
+    1988-01-01:
+      value: 0.0386
+    1987-01-01:
+      value: 0.0384
+    1986-01-01:
+      value: 0.0473
+    1985-01-01:
+      value: 0.0509
+    1984-01-01:
+      value: 0.047
+    1983-01-01:
+      value: 0.0438
+  metadata:
+    ipp_csv_id: prix_unitaire_gdf_b0_ttc
+    unit: currency
+prix_kwh_b1_ttc:
+  description: Prix kWh B1 - TTC
+  values:
+    2020-07-01:
+      value: 0.0451
+    2019-07-01:
+      value: 0.0559
+    2018-07-01:
+      value: 0.0597
+    2017-07-01:
+      value: 0.0489
+    2016-07-01:
+      value: 0.0456
+    2015-07-01:
+      value: 0.0525
+    2014-07-01:
+      value: 0.0543
+    2013-07-01:
+      value: 0.0569
+    2013-01-01:
+      value: 0.0586
+    2012-01-01:
+      value: 0.05860000000000001
+    2011-01-01:
+      value: 0.0558
+    2010-01-01:
+      value: 0.049
+    2009-01-01:
+      value: 0.0461
+    2008-01-01:
+      value: 0.0487
+    2007-01-01:
+      value: 0.0431
+    2006-01-01:
+      value: 0.04219999999999999
+    2005-01-01:
+      value: 0.0346
+    2004-01-01:
+      value: 0.0315
+    2003-01-01:
+      value: 0.0336
+    2002-01-01:
+      value: 0.0329
+    2001-01-01:
+      value: 0.0328
+    2000-01-01:
+      value: 0.0271
+    1999-01-01:
+      value: 0.0259
+    1998-01-01:
+      value: 0.0274
+    1997-01-01:
+      value: 0.0271
+    1996-01-01:
+      value: 0.026
+    1995-01-01:
+      value: 0.0259
+    1994-01-01:
+      value: 0.0261
+    1993-01-01:
+      value: 0.0264
+    1992-01-01:
+      value: 0.0269
+    1991-01-01:
+      value: 0.0271
+    1990-01-01:
+      value: 0.0252
+    1988-01-01:
+      value: 0.0244
+    1987-01-01:
+      value: 0.0245
+    1986-01-01:
+      value: 0.0312
+    1985-01-01:
+      value: 0.0349
+    1984-01-01:
+      value: 0.0333
+    1983-01-01:
+      value: 0.0315
+  metadata:
+    ipp_csv_id: prix_unitaire_gdf_b1_ttc
+    unit: currency
+prix_kwh_b2i_ttc:
+  description: Prix kWh B2I - TTC
+  values:
+    2020-07-01:
+      value: 0.0451
+    2019-07-01:
+      value: 0.0559
+    2018-07-01:
+      value: 0.0597
+    2017-07-01:
+      value: 0.0489
+    2016-07-01:
+      value: 0.0456
+    2015-07-01:
+      value: 0.0525
+    2014-07-01:
+      value: 0.0543
+    2013-07-01:
+      value: 0.0589
+    2013-01-01:
+      value: 0.0611
+    2012-01-01:
+      value: 0.05860000000000001
+    2011-01-01:
+      value: 0.0558
+    2010-01-01:
+      value: 0.049
+    2009-01-01:
+      value: 0.0461
+    2008-01-01:
+      value: 0.0479
+    2007-01-01:
+      value: 0.0414
+    2006-01-01:
+      value: 0.0406
+    2005-01-01:
+      value: 0.0331
+    2004-01-01:
+      value: 0.0294
+    2003-01-01:
+      value: 0.0315
+    2002-01-01:
+      value: 0.031
+    2001-01-01:
+      value: 0.0308
+    2000-01-01:
+      value: 0.0254
+    1999-01-01:
+      value: 0.0244
+    1998-01-01:
+      value: 0.0257
+    1997-01-01:
+      value: 0.0254
+    1996-01-01:
+      value: 0.0244
+    1995-01-01:
+      value: 0.0243
+    1994-01-01:
+      value: 0.0245
+    1993-01-01:
+      value: 0.0248
+    1992-01-01:
+      value: 0.0253
+    1991-01-01:
+      value: 0.0254
+    1990-01-01:
+      value: 0.0235
+    1989-01-01:
+      value: 0.0227
+    1988-01-01:
+      value: 0.0225
+    1987-01-01:
+      value: 0.0226
+    1986-01-01:
+      value: 0.0292
+    1985-01-01:
+      value: 0.0329
+    1983-01-01:
+      value: null
+  metadata:
+    ipp_csv_id: prix_unitaire_gdf_b2i_ttc
+    unit: currency
+metadata:
+  order:
+  - prix_kwh_base_ttc
+  - prix_kwh_b0_ttc
+  - prix_kwh_b1_ttc
+  - prix_kwh_b2i_ttc
+  label_en: Unitary price regulated tariff GDF (including taxes)
+documentation: |
+  Source :
+    jusqu'à 2013 base Pégase, prix pour un ménage, en euros TTC, données annuelles
+    depuis 2013, CRE "https://www.cre.fr/Pages-annexes/open-data"
+    Pour les données à partir de 2013 pour les contrats B1 et B2I, les valeurs correspondent à celles en zone 1

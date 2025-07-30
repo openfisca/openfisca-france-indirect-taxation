@@ -1,0 +1,110 @@
+- name: "Test ticpe diesel"
+  period: "2010"
+  relative_error_margin: .00001
+  reforms:
+    - openfisca_france_indirect_taxation.reforms.aliss.aliss_sante
+
+  input:
+    poste_07_2_2_1_1: 100  # Gazole et GPL
+    veh_diesel: 1
+    veh_essence: 0
+  output:
+    depenses_ht_tva_taux_plein: 100 / (1.196)
+    essence_ticpe: 0
+    diesel_ticpe: >
+      100 / (1.196) *
+      ((0.4284 + 0.0115) * 1.196) / (1.14675 - ((0.4284 + 0.0115) * 1.196))
+      / (1 + ((0.4284 + 0.0115) * 1.196) / (1.14675 - ((0.4284 + 0.0115) * 1.196)))
+    ticpe_totale: >
+      100 / (1.196) *
+      ((0.4284 + 0.0115) * 1.196) / (1.14675 - ((0.4284 + 0.0115) * 1.196))
+      / (1 + ((0.4284 + 0.0115) * 1.196) / (1.14675 - ((0.4284 + 0.0115) * 1.196)))
+    #  depenses_htva = 100 / (1.196)
+    #    taux_implicite_diesel = ((0.4284 + 0.0115) * 1.196) / (1.14675 - ((0.4284 + 0.0115) * 1.196))
+    #    coefficient = taux_implicite_diesel / (1 + taux_implicite_diesel)
+    #
+    tva_taux_plein: 100 / (1.196) * 0.196
+    poste_agrege_07: 100
+
+- name: "Test ticpe essence"
+  period: 2013
+  absolute_error_margin: .01
+  input:
+    poste_07_2_2_1_1: 100  # Super
+    veh_diesel: 0
+    veh_essence: 1
+  output:
+    depenses_ht_tva_taux_plein: 100 / (1.196)
+    essence_ticpe: >
+      100 / (1.196) * (
+        (
+          0.627 / 0.996 *
+          ((0.6069 + 0.025) * 1.196) / (1.5367 - ((0.6069 + 0.025) * 1.196)) / (
+            1 + ((0.6069 + 0.025) * 1.196) / (1.5367 - ((0.6069 + 0.025) * 1.196))
+            )
+          ) +
+        (
+          0.188 / 0.996 *
+          ((0.6069 + 0.025) * 1.196) / (1.5943 - ((0.6069 + 0.025) * 1.196)) / (
+            1 + ((0.6069 + 0.025) * 1.196) / (1.5943 - ((0.6069 + 0.025) * 1.196))
+            )
+          ) +
+        (
+          0.181 / 0.996 * ((0.6069 + 0.025) * 1.196) / (1.51 - ((0.6069 + 0.025) * 1.196)) / (
+          1 + ((0.6069 + 0.025) * 1.196) / (1.51 - ((0.6069 + 0.025) * 1.196))
+            )
+         )
+      )
+    diesel_ticpe: 0
+    ticpe_totale: >
+      100 / (1.196) * (
+        (
+          0.627 / 0.996 *
+          ((0.6069 + 0.025) * 1.196) / (1.5367 - ((0.6069 + 0.025) * 1.196)) / (
+            1 + ((0.6069 + 0.025) * 1.196) / (1.5367 - ((0.6069 + 0.025) * 1.196))
+            )
+          ) +
+        (
+          0.188 / 0.996 *
+          ((0.6069 + 0.025) * 1.196) / (1.5943 - ((0.6069 + 0.025) * 1.196)) / (
+            1 + ((0.6069 + 0.025) * 1.196) / (1.5943 - ((0.6069 + 0.025) * 1.196))
+            )
+          ) +
+        (
+          0.181 / 0.996 * ((0.6069 + 0.025) * 1.196) / (1.51 - ((0.6069 + 0.025) * 1.196)) / (
+          1 + ((0.6069 + 0.025) * 1.196) / (1.51 - ((0.6069 + 0.025) * 1.196))
+            )
+         )
+      )
+     # depenses_htva = 100 / (1.196)
+     # sp95_depenses_htva = depenses_htva * 0.627 / 0.996
+     # sp98_depenses_htva = depenses_htva * 0.188 / 0.996
+     # sp_e10_depenses_hta = depenses_htva * 0.181 / 0.996
+     # taux_implicite_95 = ((0.6069 + 0.025) * 1.196) / (1.5367 - ((0.6069 + 0.025) * 1.196))
+     # taux_implicite_98 = ((0.6069 + 0.025) * 1.196) / (1.5943 - ((0.6069 + 0.025) * 1.196))
+     # taux_implicite_e10 = ((0.6069 + 0.025) * 1.196) / (1.51 - ((0.6069 + 0.025) * 1.196))
+     # coefficient_95 = taux_implicite_95 / (1 + taux_implicite_95)
+     # coefficient_98 = taux_implicite_98 / (1 + taux_implicite_98)
+     # coefficient_e10 = taux_implicite_e10 / (1 + taux_implicite_e10)
+     # assert_near(simulation.calculate('ticpe_totale'), coefficient_95 * sp95_depenses_htva +
+     #     coefficient_98 * sp98_depenses_htva + coefficient_e10 * sp_e10_depenses_hta, .01)
+    #
+    depenses_tva_taux_plein: 100
+    depenses_ht_tva_taux_intermediaire: 0
+    depenses_tva_taux_intermediaire: 0
+    depenses_ht_tva_taux_reduit: 0
+    depenses_tva_taux_reduit: 0
+    depenses_ht_tva_taux_super_reduit: 0
+    depenses_tva_taux_super_reduit: 0
+    tva_taux_plein: 100 / (1.196) * 0.196
+    poste_agrege_07: 100
+
+- name: "Test ventilation essence / diesel"
+  period: 2006
+  absolute_error_margin: .01
+  input:
+    poste_07_2_2_1_1: 100
+    veh_diesel: 2
+    veh_essence: 1
+  output:
+    depenses_diesel: 75.075

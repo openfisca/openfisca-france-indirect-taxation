@@ -2,34 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014, 2015 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
-from __future__ import division
-
-
 import logging
-import numpy
-import pandas
 
 
 from openfisca_survey_manager.temporary import temporary_store_decorator
@@ -37,27 +10,24 @@ from openfisca_survey_manager import default_config_files_directory as config_fi
 from openfisca_survey_manager.survey_collections import SurveyCollection
 
 
-from openfisca_france_indirect_taxation.utils import get_transfert_data_frames
-
-
 log = logging.getLogger(__name__)
 
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_depenses_homogenisees(temporary_store = None, year = None):
-    """Build menage consumption by categorie fiscale dataframe """
+    '''Build menage consumption by categorie fiscale dataframe.'''
+    log.debug(f'Entering build_depenses_homogenisees for year={year}')
     assert temporary_store is not None
+    temporary_store.open()
     assert year is not None
-
     bdf_survey_collection = SurveyCollection.load(
         collection = 'budget_des_familles', config_files_directory = config_files_directory
         )
     survey = bdf_survey_collection.get_survey('budget_des_familles_{}'.format(year))
 
     # Homogénéisation des bases de données de dépenses
-
     if year == 1995:
-        socioscm = survey.get_values(table = "socioscm")
+        socioscm = survey.get_values(table = 'socioscm')
         poids = socioscm[['mena', 'ponderrd', 'exdep', 'exrev']]
         # cette étape de ne garder que les données dont on est sûr de la qualité et de la véracité
         # exdep = 1 si les données sont bien remplies pour les dépenses du ménage
@@ -73,9 +43,9 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
             )
         poids.set_index('ident_men', inplace = True)
 
-        conso = survey.get_values(table = "depnom")
-        conso = conso[["valeur", "montant", "mena", "nomen5"]]
-        conso = conso.groupby(["mena", "nomen5"]).sum()
+        conso = survey.get_values(table = 'depnom')
+        conso = conso[['valeur', 'montant', 'mena', 'nomen5']]
+        conso = conso.groupby(['mena', 'nomen5']).sum()
         conso = conso.reset_index()
         conso.rename(
             columns = {
@@ -90,7 +60,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
         # Passage à l'euro
         conso.depense = conso.depense / 6.55957
         conso.depense_avt_imput = conso.depense_avt_imput / 6.55957
-        conso_small = conso[[u'ident_men', u'poste1995', u'depense']]
+        conso_small = conso[['ident_men', 'poste1995', 'depense']]
 
         conso_unstacked = conso_small.set_index(['ident_men', 'poste1995']).unstack('poste1995')
         conso_unstacked = conso_unstacked.fillna(0)
@@ -103,166 +73,76 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
         conso = conso.reset_index()
 
     if year == 2000:
-        conso = survey.get_values(table = "consomen")
+        conso = survey.get_values(table = 'consomen')
         conso.rename(
             columns = {
                 'ident': 'ident_men',
-                'pondmen': 'pondmen',
                 },
             inplace = True,
             )
         for variable in ['ctotale', 'c99', 'c99999'] + \
-                        ["c0{}".format(i) for i in range(1, 10)] + \
-                        ["c{}".format(i) for i in range(10, 14)]:
+                        ['c0{}'.format(i) for i in range(1, 10)] + \
+                        ['c{}'.format(i) for i in range(10, 14)]:
             del conso[variable]
 
     if year == 2005:
-        conso = survey.get_values(table = "c05d")
+        conso = survey.get_values(table = 'c05d')
 
-    if year == 2011:
-        try:
-            conso = survey.get_values(table = "C05")
-        except:
-            conso = survey.get_values(table = "c05")
+    if year == 2011 or year == 2017:
+        conso = survey.get_values(table = 'c05', ignorecase = True)
         conso.rename(
             columns = {
                 'ident_me': 'ident_men',
                 },
             inplace = True,
             )
+
+    if 'ctot' in conso.columns:
         del conso['ctot']
 
     # Grouping by coicop
-
     poids = conso[['ident_men', 'pondmen']].copy()
     poids.set_index('ident_men', inplace = True)
     conso.drop('pondmen', axis = 1, inplace = True)
     conso.set_index('ident_men', inplace = True)
 
-    matrice_passage_data_frame, selected_parametres_fiscalite_data_frame = get_transfert_data_frames(year)
+    from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
+    #coicop_poste_bdf = bdf(year = year)[['code_bdf', 'code_coicop']].copy()
 
-    coicop_poste_bdf = matrice_passage_data_frame[['poste{}'.format(year), 'posteCOICOP']]
-    coicop_poste_bdf.set_index('poste{}'.format(year), inplace = True)
-    coicop_by_poste_bdf = coicop_poste_bdf.to_dict()['posteCOICOP']
-    del coicop_poste_bdf
+    from openfisca_france_indirect_taxation.scripts.new_build_coicop_bdf import new_bdf
+    coicop_poste_bdf = new_bdf()[['code_bdf', 'code_coicop']].copy()
+    
+    assert not set(conso.columns).difference(set(coicop_poste_bdf.code_bdf))
+    #assert not set(coicop_poste_bdf.code_bdf.dropna()).difference(set(conso.columns))
 
-    def reformat_consumption_column_coicop(coicop):
-        try:
-            return int(coicop.replace('c', '').lstrip('0'))
-        except:
-            return numpy.NaN
-    # cette étape permet d'harmoniser les df pour 1995 qui ne se présentent pas de la même façon
-    # que pour les trois autres années
-    if year == 1995:
-        coicop_labels = [
-            normalize_code_coicop(coicop_by_poste_bdf.get(poste_bdf))
-            for poste_bdf in conso.columns
-            ]
-    else:
-        coicop_labels = [
-            normalize_code_coicop(coicop_by_poste_bdf.get(reformat_consumption_column_coicop(poste_bdf)))
-            for poste_bdf in conso.columns
-            ]
-    tuples = zip(coicop_labels, conso.columns)
-    conso.columns = pandas.MultiIndex.from_tuples(tuples, names=['coicop', 'poste{}'.format(year)])
-    coicop_data_frame = conso.groupby(level = 0, axis = 1).sum()
-
+    coicop_poste_bdf['formatted_poste'] = 'poste_' + coicop_poste_bdf.code_coicop.str.replace('.', '_')
+    coicop_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['code_coicop']
+    #assert not set(coicop_by_poste_bdf.keys()).difference(set(conso.columns))
+    #assert not set(conso.columns).difference(list(coicop_by_poste_bdf.keys()))
+    formatted_poste_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['formatted_poste']
+    coicop_data_frame = conso.rename(columns = formatted_poste_by_poste_bdf)
     depenses = coicop_data_frame.merge(poids, left_index = True, right_index = True)
-
-    # Création de gros postes, les 12 postes sur lesquels le calage se fera
-    def select_gros_postes(coicop):
-        try:
-            coicop = unicode(coicop)
-        except:
-            coicop = coicop
-        normalized_coicop = normalize_code_coicop(coicop)
-        grosposte = normalized_coicop[0:2]
-        return int(grosposte)
-
-    grospostes = [
-        select_gros_postes(coicop)
-        for coicop in coicop_data_frame.columns
-        ]
-    tuples_gros_poste = zip(coicop_data_frame.columns, grospostes)
-    coicop_data_frame.columns = pandas.MultiIndex.from_tuples(tuples_gros_poste, names=['coicop', 'grosposte'])
-
-    depenses_by_grosposte = coicop_data_frame.groupby(level = 1, axis = 1).sum()
-    depenses_by_grosposte = depenses_by_grosposte.merge(poids, left_index = True, right_index = True)
-
-    # TODO : understand why it does not work: depenses.rename(columns = {u'0421': 'poste_coicop_421'}, inplace = True)
-
-    produits = [column for column in depenses.columns if column.isdigit()]
-    for code in produits:
-        if code[-1:] == '0':
-            depenses.rename(columns = {code: code[:-1]}, inplace = True)
-        else:
-            depenses.rename(columns = {code: code}, inplace = True)
-    produits = [column for column in depenses.columns if column.isdigit()]
-    for code in produits:
-        if code[0:1] == '0':
-            depenses.rename(columns = {code: code[1:]}, inplace = True)
-        else:
-            depenses.rename(columns = {code: code}, inplace = True)
-    produits = [column for column in depenses.columns if column.isdigit()]
-    for code in produits:
-        depenses.rename(columns = {code: 'poste_coicop_' + code}, inplace = True)
-
+    
+    # On ventile les dépenses gaz et elec (factures jointes) dans les postes facture gaz et facture elec
+    depenses['depenses_gaz_et_elec'] = (depenses['poste_04_5_2_1'] * depenses['poste_04_5_1_1']) > 0
+    depenses_elec_seul_bdf = (depenses['poste_04_5_1_1'] * depenses['pondmen'] * depenses['depenses_gaz_et_elec']).sum()
+    depenses_gaz_seul_bdf = (depenses['poste_04_5_2_1'] * depenses['pondmen'] * depenses['depenses_gaz_et_elec']).sum()
+    part_gaz_seul_bdf = depenses_gaz_seul_bdf / (depenses_elec_seul_bdf + depenses_gaz_seul_bdf)
+    part_elec_seul_bdf = 1 - part_gaz_seul_bdf
+    depenses['poste_04_5_1_1'] = depenses['poste_04_5_1_1'] + part_elec_seul_bdf * depenses['poste_04_5_0_0']
+    depenses['poste_04_5_2_1'] = depenses['poste_04_5_2_1'] + part_gaz_seul_bdf * depenses['poste_04_5_0_0']
+    depenses['poste_04_5_0_0'] = 0
+    depenses.drop('depenses_gaz_et_elec', axis = 1, inplace = True)
+    
     temporary_store['depenses_{}'.format(year)] = depenses
-
-    depenses_by_grosposte.columns = depenses_by_grosposte.columns.astype(str)
-    liste_grospostes = [column for column in depenses_by_grosposte.columns if column.isdigit()]
-    for grosposte in liste_grospostes:
-        depenses_by_grosposte.rename(columns = {grosposte: 'coicop12_' + grosposte}, inplace = True)
-
-    temporary_store['depenses_by_grosposte_{}'.format(year)] = depenses_by_grosposte
-
-
-def normalize_code_coicop(code):
-    '''Normalize_coicop est function d'harmonisation de la colonne d'entiers posteCOICOP de la table
-matrice_passage_data_frame en la transformant en une chaine de 5 caractères afin de pouvoir par la suite agréger les postes
-COICOP selon les 12 postes agrégés de la nomenclature de la comptabilité nationale. Chaque poste contient 5 caractères,
-les deux premiers (entre 01 et 12) correspondent à ces postes agrégés de la CN.
-
-    '''
-    # TODO: vérifier la formule !!!
-
-    try:
-        code = unicode(code)
-    except:
-        code = code
-    if len(code) == 3:
-        code_coicop = "0" + code + "0"  # "{0}{1}{0}".format(0, code)
-    elif len(code) == 4:
-        if not code.startswith("0") and not code.startswith("1") and not code.startswith("45") and not code.startswith("9"):
-            code_coicop = "0" + code
-            # 022.. = cigarettes et tabacs => on les range avec l'alcool (021.0)
-        elif code.startswith("0"):
-            code_coicop = code + "0"
-        elif code in ["1151", "1181", "4552", "4522", "4511", "9122", "9151", "9211", "9341", "1411"]:
-            # 1151 = Margarines et autres graisses végétales
-            # 1181 = Confiserie
-            # 04522 = Achat de butane, propane
-            # 04511 = Facture EDF GDF non dissociables
-            code_coicop = "0" + code
-        else:
-            # 99 = loyer, impots et taxes, cadeaux...
-            code_coicop = code + "0"
-    elif len(code) == 5:
-        if not code.startswith("13") and not code.startswith("44") and not code.startswith("51"):
-            code_coicop = code
-        else:
-            code_coicop = "99000"
-    else:
-        log.error("Problematic code {}".format(code))
-        raise()
-    return code_coicop
+    temporary_store.close()
 
 
 if __name__ == '__main__':
     import sys
     import time
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    deb = time.clock()
-    year = 2011
+    deb = time.process_time()()
+    year = 2017
     build_depenses_homogenisees(year = year)
-    log.info("duration is {}".format(time.clock() - deb))
+    log.info('duration is {}'.format(time.process_time()() - deb))

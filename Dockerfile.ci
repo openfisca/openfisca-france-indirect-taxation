@@ -1,0 +1,7 @@
+FROM python:3.9-buster
+
+LABEL maintainer="mahdi.benjelloul@ipp.eu"
+
+RUN apt-get update && \
+  apt-get install -y r-base && \
+  R -e 'install.packages(c("configr", "proxy", "StatMatch"), repos = "http://cran.us.r-project.org")'

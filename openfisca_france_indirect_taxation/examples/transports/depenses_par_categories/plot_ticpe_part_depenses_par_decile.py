@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Jan 28 11:59:10 2016
-
-@author: thomas.douenne
-"""
 
 # L'objectif est d'exprimer pour chaque décile de revenu la part que représente les dépenses en TICPE sur l'ensemble
 # du revenu. Ce revenu prend trois définitions : le revenu total, le revenu disponible, ou l'ensemble des dépenses du
@@ -11,7 +6,7 @@ Created on Thu Jan 28 11:59:10 2016
 # spécifiées.
 
 # Import de modules généraux
-from __future__ import division
+
 
 import pandas
 import seaborn
@@ -22,7 +17,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import graph_buil
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 # Import d'une nouvelle palette de couleurs
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 
 if __name__ == '__main__':

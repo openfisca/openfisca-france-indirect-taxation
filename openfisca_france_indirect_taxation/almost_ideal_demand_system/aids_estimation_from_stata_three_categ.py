@@ -1,62 +1,70 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Feb 05 16:11:09 2016
-
-@author: thomas.douenne
-"""
 
 import pandas as pd
-import pkg_resources
 import os
 
+from openfisca_france_indirect_taxation.utils import assets_directory
+
+
 # Import data_quaids to get the results of the estimation run on Stata.
+selection_elasticites = dict()
 resultats_elasticite_depenses = dict()
 resultats_elasticite_uncomp = dict()
-borne_inferieure_el_dep = dict()
-borne_superieure_el_dep = dict()
-for year in ['carbu_all', 'energy_no_alime_all', 'energy_no_alime_2000', 'energy_no_alime_2005', 'energy_no_alime_2011']:
-    default_config_files_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location)
+resultats_elasticite_comp = dict()
+for year in ['energy_no_alime_all']:
     data_quaids = pd.read_csv(
         os.path.join(
-            default_config_files_directory,
-            'openfisca_france_indirect_taxation',
-            'assets',
+            assets_directory,
             'quaids',
             'data_quaids_{}.csv'.format(year)
             ), sep =',')
 
-    # Compute a weighted average of the elasticity of each household
-    # weights are the share of the household in total consumption
-    data_quaids['part_depenses_tot'] = data_quaids['depenses_tot'] / sum(data_quaids['depenses_tot'])
-    data_quaids.fillna(0, inplace=True)
-    assert 0.999 < sum(data_quaids['part_depenses_tot']) < 1.001, "the sum of the shares is not equal to 1"
+    data_quaids = data_quaids.fillna(0)
+    df = data_quaids.query('year == 2011')
 
-    for i in range(1, 4):
-        data_quaids['el_{}'.format(i)] = \
-            data_quaids['mu_{}'.format(i)] * data_quaids['part_depenses_tot']
+    # positive_elas = df.query('elect_only == 0').query('elas_price_2_2 > 0')['pondmen'].sum()
+    # sum_pop = df.query('elect_only == 0')['pondmen'].sum()
+    # ratio_positive_elas = positive_elas / sum_pop
 
-    # Compute the estimation of the income elasticities of consumption
-    for i in range(1, 4):
-        resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] = sum(data_quaids['el_{}'.format(i)])
-
-    # Compute the 95% confidence interval for those elasticities
-    for i in range(1, 4):
-        borne_superieure_el_dep['borne_sup_{0}_{1}'.format(i, year)] = (
-            resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] + 1.96 *
-            (data_quaids['mu_{}'.format(i)].describe()['std'] /
-            len(data_quaids['mu_{}'.format(i)]) ** 0.5)
-            )
-        borne_inferieure_el_dep['borne_inf_{0}_{1}'.format(i, year)] = (
-            resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] - 1.96 *
-            (data_quaids['mu_{}'.format(i)].describe()['std'] /
-            len(data_quaids['mu_{}'.format(i)]) ** 0.5)
+    # Set upper and lower bounds for elasticities : [-2;0]
+    for j in range(1, 4):
+        selection_elasticites['elas_price_{0}_{0} - (0)'.format(j)] = \
+            float(len(df.query('elas_price_{0}_{0} > 0'.format(j)))) / len(df)
+        selection_elasticites['elas_price_{0}_{0} - (-2)'.format(j)] = \
+            float(len(df.query('elas_price_{0}_{0} < -2'.format(j)))) / len(df)
+        df['elas_price_{0}_{0}'.format(j)] = \
+            (df['elas_price_{0}_{0}'.format(j)] < 0) * df['elas_price_{0}_{0}'.format(j)]
+        df['elas_price_{0}_{0}'.format(j)] = (
+            (df['elas_price_{0}_{0}'.format(j)] > -2) * df['elas_price_{0}_{0}'.format(j)]
+            + (df['elas_price_{0}_{0}'.format(j)] < -2) * (-2)
             )
 
     for i in range(1, 4):
-        data_quaids['el_uncomp_{}'.format(i)] = \
-            data_quaids['ce_{}_{}'.format(i, i)] * data_quaids['part_depenses_tot']
+        df['el_uncomp_{}'.format(i)] = (
+            df['elas_price_{}_{}'.format(i, i)]
+            * (df['depenses_tot'] * df['w{}'.format(i)])
+            / (df['depenses_tot'] * df['w{}'.format(i)]).sum()
+            )
 
-    # Compute the estimation of the uncompensated price elasticities of consumption
     for i in range(1, 4):
-        resultats_elasticite_uncomp['el_uncomp_{0}_{1}'.format(i, year)] = sum(data_quaids['el_uncomp_{}'.format(i)])
+        resultats_elasticite_uncomp['el_uncomp_{0}_{1}'.format(i, year)] = sum(df['el_uncomp_{}'.format(i)])
+
+    for i in range(1, 4):
+        df['el_comp_{}'.format(i)] = (
+            df['comp_price_{}_{}'.format(i, i)]
+            * (df['depenses_tot'] * df['w{}'.format(i)])
+            / (df['depenses_tot'] * df['w{}'.format(i)]).sum()
+            )
+
+    for i in range(1, 4):
+        resultats_elasticite_comp['el_comp_{0}_{1}'.format(i, year)] = sum(df['el_comp_{}'.format(i)])
+
+    for i in range(1, 4):
+        df['el_{}'.format(i)] = (
+            df['elas_exp_{}'.format(i)]
+            * (df['depenses_tot'] * df['w{}'.format(i)])
+            / (df['depenses_tot'] * df['w{}'.format(i)]).sum()
+            )
+
+    for i in range(1, 4):
+        resultats_elasticite_depenses['el_{0}_{1}'.format(i, year)] = sum(df['el_{}'.format(i)])

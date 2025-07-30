@@ -1,0 +1,44 @@
+# -*- coding: utf-8 -*-
+
+
+import os
+
+from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_2_homogenize_variables import (
+    homogenize_definitions)
+import matplotlib.pyplot as plt
+from openfisca_france_indirect_taxation.utils import assets_directory
+
+
+def graph_builder_dot(x_var, y_var):
+    plt.plot(x_var, y_var, 'o')
+    return plt.show()
+
+
+data_erfs, data_bdf = homogenize_definitions()
+
+# regression = smf.ols(formula = 'rev_disponible ~ \
+#    ocde10',
+#    data = data_bdf).fit()
+# print regression.summary()
+
+data_erfs['position_rev_disponible'] = data_erfs['rev_disponible'].argsort().argsort()
+data_erfs['position_rev_disponible'] = data_erfs['position_rev_disponible'] / len(data_erfs)
+
+data_erfs['position_revdecm'] = data_erfs['revdecm'].argsort().argsort()
+data_erfs['position_revdecm'] = data_erfs['position_revdecm'] / len(data_erfs)
+
+print(data_erfs[['position_rev_disponible', 'rev_disponible']])
+
+graph_builder_dot(data_erfs['position_revdecm'], data_erfs['position_rev_disponible'])
+graph_builder_dot(data_erfs['revdecm'], data_erfs['rev_disponible'])
+
+data_erfs['difference_position'] = (
+    data_erfs['position_rev_disponible'] - data_erfs['position_revdecm']
+    )
+print((
+    len(data_erfs.query('difference_position > 0.1'))
+    + len(data_erfs.query('difference_position < -0.1'))
+    ) / len(data_erfs))
+
+
+data_erfs.to_csv(os.path.join(assets_directory, 'to_graph', 'data_erfs.csv'), sep = ';')

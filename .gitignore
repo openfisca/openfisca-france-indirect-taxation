@@ -1,11 +1,19 @@
+
+
 openfisca_france_indirect_taxation/examples/notebooks/.ipynb_checkpoints/*.ipynb
 openfisca_france_indirect_taxation/assets/matching/*.csv
 openfisca_france_indirect_taxation/assets/quaids/*.csv
+openfisca_france_indirect_taxation/assets/matching/*/*.csv
+openfisca_france_indirect_taxation/assets/matching/*.csv
 openfisca_france_indirect_taxation/assets/legislation/nomenclature_coicop_by*.csv
 !openfisca_france_indirect_taxation/assets/quaids/data_elasticities_no_alime_all.csv
 
+.vscode
+.idea
 .tags*
 .spyderproject
+.spyproject
+.spyderworkspace
 .DS_store
 
 # Byte-compiled / optimized / DLL files
@@ -16,6 +24,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+
 .Python
 env/
 build/
@@ -30,6 +39,7 @@ sdist/
 var/
 *.egg-info/
 .installed.cfg
+.venv/
 *.egg
 
 # PyInstaller
@@ -62,4 +72,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
 openfisca_france_indirect_taxation/elasticite_depense.csv
+openfisca_france_indirect_taxation/assets/matching/matching_enl/data_matching_bdf.csv

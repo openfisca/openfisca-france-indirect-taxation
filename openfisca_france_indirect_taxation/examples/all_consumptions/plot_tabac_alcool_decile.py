@@ -1,12 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Sun Mar 29 15:43:49 2015
-
-@author: hadrien
-"""
-
-# -*- coding: utf-8 -*-
-
 
 # OpenFisca -- A versatile microsimulation software
 # By: OpenFisca Team <contact@openfisca.fr>
@@ -29,7 +21,6 @@ Created on Sun Mar 29 15:43:49 2015
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import division
 
 from openfisca_france_indirect_taxation.examples.utils_example import simulate, df_weighted_average_grouped, \
     graph_builder_bar
@@ -44,7 +35,7 @@ if __name__ == '__main__':
     # Exemple: graphe par décile de revenu par uc de la ventilation de la consommation
     # selon les postes agrégés de la CN
     # Liste des coicop agrégées en 12 postes
-    list_coicop12 = ['coicop12_2']
+    list_coicop12 = ['poste_agrege_02']
 #    for coicop12_index in range(1, 13):
 #        list_coicop12.append('coicop12_{}'.format(coicop12_index))
     # Liste des variables que l'on veut simuler
@@ -80,8 +71,8 @@ if __name__ == '__main__':
             / Wconcat['rev_disponible']
         list_alcool_tabac.append('part_alcool')
         Wconcat['part_tabac'] = \
-            (Wconcat['depenses_cigarettes'] + Wconcat['depenses_cigares'] +
-            Wconcat['depenses_tabac_a_rouler']) / Wconcat['rev_disponible']
+            (Wconcat['depenses_cigarettes'] + Wconcat['depenses_cigares']
++ Wconcat['depenses_tabac_a_rouler']) / Wconcat['rev_disponible']
         list_alcool_tabac.append('part_tabac')
 
         df_to_graph = Wconcat[list_alcool_tabac].copy()

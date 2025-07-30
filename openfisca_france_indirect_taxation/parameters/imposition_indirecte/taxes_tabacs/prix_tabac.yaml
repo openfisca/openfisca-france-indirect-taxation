@@ -1,0 +1,51 @@
+description: Taux spécifique tabac
+prix_paquet_cigarettes:
+  description: Prix unitaire du paquet de 20 cigarettes (prix moyen pondéré), en euros
+  values:
+    2020-11-01:
+      value: 10.0
+    2020-04-01:
+      value: 9.6
+    2019-11-01:
+      value: 9.1
+    2019-04-01:
+      value: 8.6
+    2018-03-01:
+      value: 8.1
+    2015-01-01:
+      value: 7.1
+prix_bague_tabac:
+  description: Prix unitaire de la bague de tabac à rouler (prix moyen pondéré), en euros
+  values:
+    2020-11-01:
+      value: 14.4
+    2020-04-01:
+      value: 13.5
+    2019-11-01:
+      value: 12.6
+    2019-04-01:
+      value: 11.7
+    2018-03-01:
+      value: 10.8
+    2015-01-01:
+      value: 8.8
+prix_cigare:
+  description: Prix unitaire d'un cigare (prix moyen pondéré), en euros
+  values:
+    2020-11-01:
+      value: 0.7
+    2019-11-01:
+      value: 0.6
+    2018-03-01:
+      value: 0.5
+    2015-01-01:
+      value: 8.8
+metadata:
+  order:
+  - prix_paquet_cigarettes
+  - prix_bague_tabac
+  reference:
+    2020-11-01: PLFSS 2018, Evaluations prealables, p. 150
+    2020-04-01: PLFSS 2018, Evaluations prealables, p. 150
+    2019-11-01: PLFSS 2018, Evaluations prealables, p. 150
+    2019-04-01: PLFSS 2018, Evaluations prealables, p. 150

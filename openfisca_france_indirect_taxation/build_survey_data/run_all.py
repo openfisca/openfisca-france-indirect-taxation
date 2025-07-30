@@ -1,46 +1,21 @@
 # -*- coding: utf-8 -*-
 
 
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014, 2015 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
-from __future__ import division
-
-
 import logging
 import os
 import pandas
 import numpy
 
-
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.surveys import Survey
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.temporary import temporary_store_decorator
 
-from openfisca_france_indirect_taxation.build_survey_data.utils \
-    import find_nearest_inferior
+from openfisca_france_indirect_taxation.build_survey_data.utils import find_nearest_inferior
 
 from openfisca_france_indirect_taxation.build_survey_data.step_1_1_homogeneisation_donnees_depenses \
     import build_depenses_homogenisees
+
 
 from openfisca_france_indirect_taxation.build_survey_data.step_1_2_imputations_loyers_proprietaires \
     import build_imputation_loyers_proprietaires
@@ -53,116 +28,158 @@ from openfisca_france_indirect_taxation.build_survey_data.step_3_homogeneisation
 from openfisca_france_indirect_taxation.build_survey_data.step_4_homogeneisation_revenus_menages \
     import build_homogeneisation_revenus_menages
 
-from openfisca_survey_manager.temporary import TemporaryStore
 
-from openfisca_france_indirect_taxation.build_survey_data.utils \
-    import ident_men_dtype
+from openfisca_france_indirect_taxation.build_survey_data.utils import ident_men_dtype
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 log = logging.getLogger(__name__)
 
 
-def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
+YEAR_DATA_LIST = (2005, 2011, 2017)
 
-    temporary_store = TemporaryStore.create(file_name = "indirect_taxation_tmp")
+
+@temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
+def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = False):
+
+    assert temporary_store is not None
 
     # Quelle base de données choisir pour le calage ?
-    year_data = find_nearest_inferior(year_data_list, year_calage)
+    year_data = find_nearest_inferior(YEAR_DATA_LIST, year_calage)
 
     # 4 étape parallèles d'homogénéisation des données sources :
-    # Gestion des dépenses de consommation:
+    # 1. Gestion des dépenses de consommation:
     build_depenses_homogenisees(year = year_data)
     build_imputation_loyers_proprietaires(year = year_data)
-
-    depenses = temporary_store["depenses_bdf_{}".format(year_calage)]
+    temporary_store.open()
+    depenses = temporary_store['depenses_bdf_{}'.format(year_calage)]
     depenses.index = depenses.index.astype(ident_men_dtype)
-    depenses_by_grosposte = temporary_store["depenses_by_grosposte_{}".format(year_calage)]
-    depenses_by_grosposte.index = depenses_by_grosposte.index.astype(str)
-
-    # Gestion des véhicules:
+    temporary_store.close()
+    # 2. Gestion des véhicules:
     build_homogeneisation_vehicules(year = year_data)
+
     if year_calage != 1995:
+        temporary_store.open()
         vehicule = temporary_store['automobile_{}'.format(year_data)]
+        temporary_store.close()
         vehicule.index = vehicule.index.astype(ident_men_dtype)
     else:
         vehicule = None
-
-    # Gestion des variables socio démographiques:
+    # 3. Gestion des variables socio démographiques:
     build_homogeneisation_caracteristiques_sociales(year = year_data)
+    temporary_store.open()
     menage = temporary_store['donnes_socio_demog_{}'.format(year_data)]
     menage.index = menage.index.astype(ident_men_dtype)
-
-    # Gestion des variables revenus:
-    build_homogeneisation_revenus_menages(year = year_data)
-    revenus = temporary_store["revenus_{}".format(year_calage)]
-    revenus.index = revenus.index.astype(ident_men_dtype)
-
     temporary_store.close()
-
+    # 4. Gestion des variables revenus:
+    build_homogeneisation_revenus_menages(year = year_data)
+    temporary_store.open()
+    revenus = temporary_store['revenus_{}'.format(year_calage)]
+    revenus.index = revenus.index.astype(ident_men_dtype)
+    temporary_store.close()
     # Concaténation des résultas de ces 4 étapes
     preprocessed_data_frame_by_name = dict(
         revenus = revenus,
         vehicule = vehicule,
         menage = menage,
         depenses = depenses,
-        depenses_by_grosposte = depenses_by_grosposte
         )
-
-    for name, preprocessed_data_frame in preprocessed_data_frame_by_name.iteritems():
+    for name, preprocessed_data_frame in list(preprocessed_data_frame_by_name.items()):
         assert preprocessed_data_frame.index.name == 'ident_men', \
             'Index is labelled {} instead of ident_men in data frame {} for year {}'.format(
                 preprocessed_data_frame.index.name, name, year_data)
         assert len(preprocessed_data_frame) != 0, 'Empty data frame {}'.format(name)
-        assert preprocessed_data_frame.index.dtype == numpy.dtype('O'), "index for {} is {}".format(
+        assert preprocessed_data_frame.index.dtype == numpy.dtype('O'), 'index for {} is {}'.format(
             name, preprocessed_data_frame.index.dtype)
 
     data_frame = pandas.concat(
-        preprocessed_data_frame_by_name.values(),
+        list(preprocessed_data_frame_by_name.values()),
         axis = 1,
+        sort = True
         )
+    if year_data == 2005:
+        nullified_variables = (
+            ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence']
+            + ['age{}'.format(i) for i in range(3, 14)] + ['agecj', 'agfinetu', 'agfinetu_cj', 'nenfhors']
+            )
+        data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
+
+    if year_data == 2011:
+        nullified_variables = ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
+            'rev_disp_yc_loyerimpute', 'rev_disponible', 'loyer_impute']
+        data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
+
+    if year_data == 2017:
+        nullified_variables = ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
+            'rev_disp_yc_loyerimpute', 'rev_disponible', 'loyer_impute', 'aidlog2']
+        data_frame[nullified_variables] = data_frame[nullified_variables].fillna(0)
 
     if year_data == 2005:
-        for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence']:
-            data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
-        for variable in ['age{}'.format(i) for i in range(3, 14)] + ['agecj', 'agfinetu', 'agfinetu_cj', 'nenfhors']:
-            data_frame.loc[data_frame[variable].isnull(), variable] = 0
-    if year_data == 2011:
-        for vehicule_variable in ['veh_tot', 'veh_essence', 'veh_diesel', 'pourcentage_vehicule_essence',
-        'rev_disp_loyerimput', 'rev_disponible', 'loyer_impute']:
-            data_frame.loc[data_frame[vehicule_variable].isnull(), vehicule_variable] = 0
-    # 'ratio_loyer_impute',  'ratio_revenus' To be added
+        data_frame['ident_men'] = list(range(0, len(data_frame)))
+        data_frame['ident_men'] = data_frame['ident_men'] + 200500000
+        data_frame = data_frame.set_index('ident_men')
 
-    data_frame.index.name = "ident_men"
-    # TODO: Homogénéiser: soit faire en sorte que ident_men existe pour toutes les années
-    # soit qu'elle soit en index pour toutes
+    data_frame.index.name = 'ident_men'
 
-    # On ne garde que les ménages métropolitaines
-    if year_data == 2011:
-        data_frame = data_frame.query('zeat != 0')
+    # TODO: Homogénéiser: soit faire en sorte que ident_men existe pour toutes les années soit qu'elle soit en index pour toutes
 
     try:
         data_frame.reset_index(inplace = True)
-    except ValueError, e:
+    except ValueError as e:
         log.info('ignoring reset_index because {}'.format(e))
 
+    # On ne garde que les ménages métropolitains
+    if year_data in [2011, 2017]:
+        data_frame = data_frame.query('zeat != 0').copy()
+
+    if year_data in [2011, 2017] and not skip_matching:
+        # Save file needed by step_5_data_from_matching
+        save(data_frame, year_data, year_calage)
+        try:
+            # On apparie ajoute les données appariées de l'ENL et l'ENTD
+            print('appariement ENL ENTD')
+            data_matched = pandas.read_csv(
+                os.path.join(
+                    assets_directory,
+                    'matching',
+                    'data_for_run_all_{}.csv'.format(year_data)
+                    ), sep =',', decimal = '.'
+                )
+        except FileNotFoundError as e:
+            # Sauf si le fichier 'data_for_run_all_year_data.csv' n'existe pas, dans ce cas on fait tourner le matching
+            log.debug("Matching data with ENL and ENTD are not present")
+            log.debug(e)
+            log.debug('Skipping this step')
+            from openfisca_france_indirect_taxation.build_survey_data import step_5_data_from_matching
+            data_matched = step_5_data_from_matching.main(year_data)
+
+        data_matched['ident_men'] = data_matched['ident_men'].astype(str).copy()
+        data_frame = pandas.merge(data_frame, data_matched, on = 'ident_men')
+    save(data_frame, year_data, year_calage)
+
+
+def save(data_frame, year_data, year_calage):
     # Remove duplicated colums causing bug with HDFStore
     # according to https://github.com/pydata/pandas/issues/6240
     # using solution form stackoverflow
     # http://stackoverflow.com/questions/16938441/how-to-remove-duplicate-columns-from-a-dataframe-using-python-pandas
     data_frame = data_frame.T.groupby(level = 0).first().T
+    # Créer un nouvel identifiant pour les ménages
+    data_frame['identifiant_menage'] = list(range(0, len(data_frame)))
+    data_frame['identifiant_menage'] = data_frame['identifiant_menage'] + (year_data * 100000)
 
-    log.info('Saving the openfisca indirect taxation input dataframe')
+    log.debug('Saving the openfisca indirect taxation input dataframe')
     try:
         openfisca_survey_collection = SurveyCollection.load(
             collection = 'openfisca_indirect_taxation', config_files_directory = config_files_directory)
-    except:
+    except Exception:
         openfisca_survey_collection = SurveyCollection(
             name = 'openfisca_indirect_taxation', config_files_directory = config_files_directory)
 
     output_data_directory = openfisca_survey_collection.config.get('data', 'output_directory')
-    survey_name = "openfisca_indirect_taxation_data_{}".format(year_calage)
-    table = "input"
-    hdf5_file_path = os.path.join(output_data_directory, "{}.h5".format(survey_name))
+    survey_name = 'openfisca_indirect_taxation_data_{}'.format(year_calage)
+    table = 'input'
+    hdf5_file_path = os.path.join(output_data_directory, '{}.h5'.format(survey_name))
     survey = Survey(
         name = survey_name,
         hdf5_file_path = hdf5_file_path,
@@ -172,16 +189,17 @@ def run_all(year_calage = 2011, year_data_list = [1995, 2000, 2005, 2011]):
     openfisca_survey_collection.dump()
 
 
-def run(years_calage):
+def run(years_calage, skip_matching = False):
     import time
-    year_data_list = [1995, 2000, 2005, 2011]
     for year_calage in years_calage:
         start = time.time()
-        run_all(year_calage, year_data_list)
-        log.info("Finished {}".format(time.time() - start))
+        log.info(f'Starting year = {year_calage}')
+        run_all_steps(year_calage = year_calage, skip_matching = skip_matching)
+        log.info(f'Finished in {(time.time() - start)} for year = {year_calage}')
+
 
 if __name__ == '__main__':
     import sys
-    logging.basicConfig(level = logging.INFO, stream = sys.stdout)
-    years_calage = [2000, 2005, 2011]
-    run(years_calage)
+    log = logging.getLogger(__name__)
+    logging.basicConfig(level = logging.DEBUG, stream = sys.stdout)
+    run([2011], skip_matching = False)

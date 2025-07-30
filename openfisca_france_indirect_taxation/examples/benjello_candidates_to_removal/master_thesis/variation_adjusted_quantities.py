@@ -1,0 +1,76 @@
+# -*- coding: utf-8 -*-
+
+
+from openfisca_france_indirect_taxation.surveys import SurveyScenario
+from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
+from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
+
+# Simulate contribution to fuel tax reform by categories
+inflators_by_year = get_inflators_by_year_energy(rebuild = False)
+year = 2014
+data_year = 2011
+elasticities = get_elasticities(data_year)
+inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
+
+variations_quantites = dict()
+for reforme in ['rattrapage_diesel', 'taxe_carbone', 'cce_2015_in_2014', 'cce_2016_in_2014']:
+    simulated_variables_reference = [
+        'quantites_diesel',
+        'quantites_essence',
+        'quantites_electricite_selon_compteur',
+        'quantites_combustibles_liquides',
+        'quantites_gaz_final',
+        'pondmen',
+        ]
+
+    simulated_variables_reform = [
+        'quantites_diesel',
+        'quantites_essence',
+        'quantites_electricite_selon_compteur_ajustees_taxe_carbone',
+        'quantites_combustibles_liquides',
+        'quantites_gaz_final_ajustees_{}'.format(reforme),
+        'pondmen',
+        ]
+
+    survey_scenario = SurveyScenario.create(
+        elasticities = elasticities,
+        # inflation_kwargs = inflation_kwargs,
+        reform = reforme,
+        year = year,
+        data_year = data_year
+        )
+
+    indiv_df_reform = survey_scenario.create_data_frame_by_entity(simulated_variables_reform, period = year)
+    indiv_df_reference = survey_scenario.create_data_frame_by_entity(simulated_variables_reference,
+        use_baseline =True, period = year)
+
+    menages_reform = indiv_df_reform['menage']
+    menages_reference = indiv_df_reference['menage']
+
+    variations_quantites['diesel_{}'.format(reforme)] = (
+        (menages_reform['quantites_diesel'] - menages_reference['quantites_diesel'])
+        * menages_reform['pondmen']
+        ).sum() / 1e06
+    variations_quantites['essence_{}'.format(reforme)] = (
+        (menages_reform['quantites_essence'] - menages_reference['quantites_essence'])
+        * menages_reform['pondmen']
+        ).sum() / 1e06
+
+    if reforme != 'rattrapage_diesel':
+        variations_quantites['gaz_{}'.format(reforme)] = (
+            (menages_reform['quantites_gaz_final_ajustees_{}'.format(reforme)]
+- menages_reference['quantites_gaz_final'])
+            * menages_reform['pondmen']
+            ).sum() / 1e06
+        variations_quantites['combustibles_liquides_{}'.format(reforme)] = (
+            (menages_reform['quantites_combustibles_liquides']
+- menages_reference['quantites_combustibles_liquides'])
+            * menages_reform['pondmen']
+            ).sum() / 1e06
+
+    if reforme == 'taxe_carbone':
+        variations_quantites['electricite_{}'.format(reforme)] = (
+            (menages_reform['quantites_electricite_selon_compteur_ajustees_{}'.format(reforme)]
+- menages_reference['quantites_electricite_selon_compteur'])
+            * menages_reform['pondmen']
+            ).sum() / 1e06

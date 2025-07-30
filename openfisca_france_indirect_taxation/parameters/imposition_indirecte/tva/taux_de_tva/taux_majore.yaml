@@ -1,0 +1,20 @@
+description: Taux majoré
+values:
+  1993-01-01:
+    value:
+  1990-09-13:
+    value: 0.22
+  1990-01-01:
+    value: 0.25
+  1989-01-01:
+    value: 0.28
+  1970-01-01:
+    value: 0.3333
+  1968-12-01:
+    value: 0.25
+  1954-07-01:
+    value:
+metadata:
+  last_value_still_valid_on: "2024-07-08"
+  ipp_csv_id: tx_maj
+  unit: /1

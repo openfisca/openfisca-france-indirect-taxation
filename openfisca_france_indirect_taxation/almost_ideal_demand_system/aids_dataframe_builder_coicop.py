@@ -1,20 +1,13 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Jul 08 16:45:12 2015
 
-@author: thomas.douenne
-"""
 
-from __future__ import division
-
-import pandas as pd
 import numpy as np
+import pandas as pd
 from pandas import concat
 
-from openfisca_france_indirect_taxation.examples.utils_example import get_input_data_frame
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
-
+from openfisca_france_indirect_taxation.utils import get_input_data_frame
 
 # Now that we have our price indexes, we construct a dataframe with the rest of the information
 
@@ -34,17 +27,17 @@ for year in [2000, 2005, 2011]:
     df = pd.melt(data, id_vars = ['vag', 'ident_men'], value_vars=produits,
         value_name = 'depense_bien', var_name = 'bien')
 
-    df_indice_prix_produit = df_indice_prix_produit[['indice_prix_produit'] + ['prix'] + ['temps'] + ['mois']]
+    df_indice_prix_produit = df_indice_prix_produit[['indice_prix_produit', 'prix', 'temps', 'mois']]
 
     df['vag'] = df['vag'].astype(str)
     df['indice_prix_produit'] = df['vag'] + '_' + df['bien']
     df['indice_prix_produit'] = df['indice_prix_produit'].str.replace('_0', '')
     df['indice_prix_produit'] = df['indice_prix_produit'].str.replace('_', '')
     df['coicop_12_numero'] = df['bien'].str[:2]
-    df = df[['ident_men'] + ['coicop_12_numero'] + ['indice_prix_produit'] + ['depense_bien'] + ['vag']]
+    df = df[['ident_men', 'coicop_12_numero', 'indice_prix_produit', 'depense_bien', 'vag']]
 
     df = pd.merge(df, df_indice_prix_produit, on = 'indice_prix_produit')
-    df_temps = df[['vag'] + ['temps'] + ['mois']]
+    df_temps = df[['vag', 'temps', 'mois']]
     df_temps['mois'] = df_temps['mois'].astype(float)
     df_temps['mois2'] = df_temps['mois'] ** 2
     df_temps = df_temps.drop_duplicates(cols='vag', take_last=True)
@@ -73,12 +66,12 @@ for year in [2000, 2005, 2011]:
 
     df_depense_coicop = df_depense_coicop.astype(str)
     df_depense_coicop['id'] = df_depense_coicop['numero_coicop'] + '_' + df_depense_coicop['ident_men']
-    df_to_merge = df_depense_coicop[['id'] + ['depense_par_coicop']]
+    df_to_merge = df_depense_coicop[['id', 'depense_par_coicop']]
 
     df = pd.merge(df, df_to_merge, on = 'id')
 
-    df[['prix'] + ['depense_bien'] + ['depense_par_coicop']] = (
-        df[['prix'] + ['depense_bien'] + ['depense_par_coicop']].astype(float)
+    df[['prix', 'depense_bien', 'depense_par_coicop']] = (
+        df[['prix', 'depense_bien', 'depense_par_coicop']].astype(float)
         )
 
     df['part_bien_coicop'] = df['depense_bien'] / df['depense_par_coicop']
@@ -94,11 +87,19 @@ for year in [2000, 2005, 2011]:
     # Import information about households, including niveau_vie_decile
     # (To do: Obviously there are mistakes in its computation, check why).
 
-    df_info_menage = aggregates_data_frame[['ocde10'] + ['depenses_tot'] + ['vag'] + ['typmen'] + ['revtot'] +
-        ['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']]
+    df_info_menage = aggregates_data_frame[[
+        'ocde10',
+        'depenses_tot',
+        'vag',
+        'typmen',
+        'revtot',
+        'poste_coicop_2201',
+        'poste_coicop_2202',
+        'poste_coicop_2203',
+        ]]
     df_info_menage['fumeur'] = 0
-    df_info_menage[['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']] = \
-        df_info_menage[['poste_coicop_2201'] + ['poste_coicop_2202'] + ['poste_coicop_2203']].astype(float)
+    df_info_menage[['poste_coicop_2201', 'poste_coicop_2202', 'poste_coicop_2203']] = \
+        df_info_menage[['poste_coicop_2201', 'poste_coicop_2202', 'poste_coicop_2203']].astype(float)
     df_info_menage['consommation_tabac'] = (
         df_info_menage['poste_coicop_2201'] + df_info_menage['poste_coicop_2202'] + df_info_menage['poste_coicop_2203']
         )
@@ -112,8 +113,8 @@ for year in [2000, 2005, 2011]:
     data_frame = pd.merge(df_depense_coicop, df_info_menage, on = 'ident_men')
 
     data_frame = pd.merge(data_frame, grouped, on = 'id')
-    data_frame[['depenses_tot'] + ['depense_par_coicop']] = (
-        data_frame[['depenses_tot'] + ['depense_par_coicop']].astype(float)
+    data_frame[['depenses_tot', 'depense_par_coicop']] = (
+        data_frame[['depenses_tot', 'depense_par_coicop']].astype(float)
         )
     data_frame['wi'] = data_frame['depense_par_coicop'] / data_frame['depenses_tot']
     data_frame = data_frame.astype(str)
@@ -125,7 +126,7 @@ for year in [2000, 2005, 2011]:
 
     df_indice_prix_produit['prix'] = df_indice_prix_produit['prix'].astype(float)
     df_indice_prix_produit['prix_coicop'] = df_indice_prix_produit['prix']
-    df_indice_prix_produit_to_merge = df_indice_prix_produit[['indice_prix_produit'] + ['prix_coicop']]
+    df_indice_prix_produit_to_merge = df_indice_prix_produit[['indice_prix_produit', 'prix_coicop']]
 
     data_frame = pd.merge(data_frame, df_indice_prix_produit_to_merge, on = 'indice_prix_produit')
 
@@ -136,7 +137,7 @@ for year in [2000, 2005, 2011]:
 
     # Reshape the dataframe to have the price index of each coicop as a variable
 
-    data_frame_prix = data_frame[['numero_coicop'] + ['ident_men'] + ['indice_prix_pondere']]
+    data_frame_prix = data_frame[['numero_coicop', 'ident_men', 'indice_prix_pondere']]
     data_frame_prix.index.name = 'ident_men'
     data_frame_prix = pd.pivot_table(data_frame_prix, index='ident_men', columns='numero_coicop',
         values='indice_prix_pondere')

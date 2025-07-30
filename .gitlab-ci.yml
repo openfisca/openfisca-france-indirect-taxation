@@ -1,0 +1,100 @@
+stages:
+  - build_docker_image
+  - build_collections
+  - build_matched_data
+  - test
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+
+Build Docker image:
+  stage: build_docker_image
+  only:
+    changes:
+      - Dockerfile.ci
+    # refs:
+    #   - ultimate_migration
+    #   - data-2017
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile.ci --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG
+  when: manual
+
+
+
+Build survey collections:
+  stage: build_collections
+  image: $CI_REGISTRY_IMAGE:latest
+  tags:
+    - data-in
+  before_script:
+    - mkdir -p ~/.config/openfisca-survey-manager
+    - cp ./runner/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
+    - cp ./runner/openfisca_survey_manager_config.ini ~/.config/openfisca-survey-manager/config.ini
+    - mkdir -p /root/ci-files/data_collections
+    - pip3 install -e .[dev]
+    - cat ~/.config/openfisca-survey-manager/raw_data.ini
+  script:
+    - cat ~/.config/openfisca-survey-manager/raw_data.ini
+    - build-collection -c budget_des_familles -d -m -s 2017 -p ~/.config/openfisca-survey-manager
+    - build-collection -c budget_des_familles -d -s 2011 -p ~/.config/openfisca-survey-manager
+    - build-collection -c budget_des_familles -d -s 2005 -p ~/.config/openfisca-survey-manager
+    # - build-collection -c aliss -m -d
+    - build-collection -c enquete_logement -d -m -s 2013 -p ~/.config/openfisca-survey-manager
+    - build-collection -c enquete_transports -d -m -s 2008 -p ~/.config/openfisca-survey-manager
+    - build-collection -c erfs_fpr -d -m -s 2013 -p ~/.config/openfisca-survey-manager
+    - cp ~/.config/openfisca-survey-manager/config.ini  /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config.ini
+  when: manual
+
+Build matched data:
+  stage: build_matched_data
+  image: $CI_REGISTRY_IMAGE:latest
+  tags:
+    - data-in
+  before_script:
+    - mkdir -p ~/.config/openfisca-survey-manager
+    - pip3 install -e .[dev]
+    - cp ./runner/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
+    - cp /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config.ini ~/.config/openfisca-survey-manager/config.ini
+    - mkdir -p /root/ci-files/data_collections
+  script:
+    - build-survey-data -v -p ~/.config/openfisca-survey-manager
+    - cp ~/.config/openfisca-survey-manager/config.ini /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config_with_matched_data.ini
+
+  when: manual
+
+Test_YAML_Carburants:
+  stage: test
+  image: $CI_REGISTRY_IMAGE:latest
+  tags:
+    - data-in
+  before_script:
+    - mkdir -p ~/.config/openfisca-survey-manager
+    - pip3 install -e .[dev]
+    - cp ./runner/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
+    - cp /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config_with_matched_data.ini ~/.config/openfisca-survey-manager/config.ini
+    - mkdir -p /root/ci-files/data_collections
+  script:
+    - openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/*carbu*
+
+
+Test_All:
+  stage: test
+  image: $CI_REGISTRY_IMAGE:latest
+  tags:
+    - data-in
+  before_script:
+    - mkdir -p ~/.config/openfisca-survey-manager
+    - pip3 install -e .[dev]
+    - cp ./runner/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
+    - cp /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config_with_matched_data.ini ~/.config/openfisca-survey-manager/config.ini
+    - mkdir -p /root/ci-files/data_collections
+  script:
+    - make test

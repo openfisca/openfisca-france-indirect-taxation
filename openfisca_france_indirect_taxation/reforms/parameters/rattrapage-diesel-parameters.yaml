@@ -1,0 +1,38 @@
+description: u"Rattrapage de la fiscalité du diesel au taux de l'essence"
+diesel:
+  unit: currency
+  description: u"Surcroît de prix du diesel (en euros par hectolitres)"
+  values:
+    '2016-01-01':
+      value: 15.31
+    '2015-01-01':
+      value: 15.59
+    '2010-01-01':
+      value: 15.31  # was 17.85 in removed taxes_carburants
+essence:
+  unit: currency
+  description: u"Surcroit de prix de l'essence (en euros par hectolitres)"
+  values:
+    '2010-01-01':
+      value: 10
+abaissement_tva_taux_plein:
+  description: u"Baisse de la TVA à taux plein pour obtenir un budget constant"
+  values:
+    '2010-01-01':
+      value: 0.01
+
+abaissement_tva_taux_plein_bis:
+  description: u"Baisse de la TVA à taux plein pour obtenir un budget constant"
+  values:
+    '2010-01-01':
+      value: 0.005
+abaissement_tva_taux_reduit:
+  description: u"Baisse de la TVA à taux réduit pour obtenir un budget constant"
+  values:
+    '2010-01-01':
+      value: 0.01
+abaissement_tva_taux_super_reduit:
+  description: u"Baisse de la TVA à taux super réduit pour obtenir un budget constant"
+  values:
+    '2010-01-01':
+      value: 0.01

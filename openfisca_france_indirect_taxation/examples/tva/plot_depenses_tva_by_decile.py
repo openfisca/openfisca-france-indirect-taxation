@@ -1,12 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Feb 04 12:02:58 2016
-
-@author: thomas.douenne
-"""
 
 # Import de modules généraux
-from __future__ import division
+
 
 import pandas
 import seaborn
@@ -16,7 +11,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import graph_buil
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 
 # Import d'une nouvelle palette de couleurs
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 if __name__ == '__main__':
     import logging
@@ -41,17 +36,17 @@ if __name__ == '__main__':
                 ])
         taxes_indirectes = pivot_table.T
 
-        taxes_indirectes[u'Part TVA taux super réduit'] = \
+        taxes_indirectes['Part TVA taux super réduit'] = \
             taxes_indirectes['tva_taux_super_reduit'] / taxes_indirectes['rev_disponible']
-        taxes_indirectes[u'Part TVA taux réduit'] = \
+        taxes_indirectes['Part TVA taux réduit'] = \
             taxes_indirectes['tva_taux_reduit'] / taxes_indirectes['rev_disponible']
-        taxes_indirectes[u'Part TVA taux intermédiaire'] = \
+        taxes_indirectes['Part TVA taux intermédiaire'] = \
             taxes_indirectes['tva_taux_intermediaire'] / taxes_indirectes['rev_disponible']
-        taxes_indirectes[u'Part TVA taux plein'] = \
+        taxes_indirectes['Part TVA taux plein'] = \
             taxes_indirectes['tva_taux_plein'] / taxes_indirectes['rev_disponible']
 
-        df_to_graph = taxes_indirectes[[u'Part TVA taux plein', u'Part TVA taux intermédiaire',
-            u'Part TVA taux super réduit', u'Part TVA taux réduit']]
+        df_to_graph = taxes_indirectes[['Part TVA taux plein', 'Part TVA taux intermédiaire',
+            'Part TVA taux super réduit', 'Part TVA taux réduit']]
 
         # Graphe par décile de revenu par uc de la ventilation des taux de taxation
         graph_builder_bar(df_to_graph)

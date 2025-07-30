@@ -1,42 +1,22 @@
 #! /usr/bin/env python
-# -*- coding: utf-8 -*-
 
 
-# OpenFisca -- A versatile microsimulation software
-# By: OpenFisca Team <contact@openfisca.fr>
-#
-# Copyright (C) 2011, 2012, 2013, 2014 OpenFisca Team
-# https://github.com/openfisca
-#
-# This file is part of OpenFisca.
-#
-# OpenFisca is free software; you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
-#
-# OpenFisca is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+'''France specific indirect taxation model for OpenFisca -- a versatile microsimulation free software.'''
 
 
-"""France specific indirect taxation model for OpenFisca -- a versatile microsimulation free software"""
+from setuptools import setup, find_namespace_packages
 
 
-from setuptools import setup, find_packages
-
-
-classifiers = """\
-Development Status :: 2 - Pre-Alpha
+classifiers = ''' \
+Development Status :: 3 - Alpha
 License :: OSI Approved :: GNU Affero General Public License v3
 Operating System :: POSIX
 Programming Language :: Python
+Programming Language :: Python :: 3.9
+Programming Language :: Python :: 3.10
+Programming Language :: Python :: 3.11
 Topic :: Scientific/Engineering :: Information Analysis
-"""
+'''
 
 doc_lines = __doc__.split('\n')
 
@@ -53,20 +33,30 @@ setup(
     license = 'http://www.fsf.org/licensing/licenses/agpl-3.0.html',
     long_description = '\n'.join(doc_lines[2:]),
     url = 'https://github.com/openfisca/openfisca-france-indirect-taxation',
-
+    entry_points = {
+        'console_scripts': ['build-survey-data=openfisca_france_indirect_taxation.scripts.build_survey_data:main'],
+        },
     extras_require = dict(
-        tests = [
-            'pandas >= 0.17',
+        dev = [
+            'autopep8 >= 2.0.2, < 3.0',
+            'flake8 >= 6.0.0, < 7.0',
+            'flake8-bugbear >= 23.3.12, < 24.0',
+            'ipdb >= 0.13.13, < 0.14.0',
+            'matplotlib >= 3.7.1, < 4.0',
+            'nbconvert >= 7.2.10, < 8.0',
+            'OpenFisca-Survey-Manager',
+            'ruamel.yaml >= 0.17.21, < 0.18.0',
+            'seaborn >= 0.12.2, < 0.13.0',
+            'statsmodels >= 0.13.5, < 0.14.0',
+            'xlrd >= 2.0.1, < 3.0',
             ],
         ),
     include_package_data = True,  # Will read MANIFEST.in
     install_requires = [
-        'Babel >= 0.9.4',
-        'Biryani[datetimeconv] >= 0.10.2dev',
-        'numpy',
-        'OpenFisca-Core >= 0.4dev',
-        'scipy >= 0.12',
+        'numexpr',
+        'OpenFisca-Core >= 43, < 44',
+        'pandas >= 2.0.3, < 3.0',
+        'python-slugify >= 8.0.1, < 9.0',
         ],
-    packages = find_packages(),
-    test_suite = 'nose.collector',
+    packages = find_namespace_packages(),
     )

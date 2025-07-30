@@ -1,0 +1,46 @@
+suppressPackageStartupMessages(library("configr"))
+suppressPackageStartupMessages(library("StatMatch"))
+
+config <- read.config(file = "C:/Users/veve1/.config/openfisca-survey-manager/config.ini")
+assets_directory = config$openfisca_france_indirect_taxation$assets
+
+data_enl <- read.csv(file = file.path(assets_directory, "matching/matching_enl/data_matching_enl.csv"), header = -1, sep=",")
+data_bdf <- read.csv(file = file.path(assets_directory, "matching/matching_enl/data_matching_bdf.csv"), header = -1, sep=",")
+
+# Compute ranked matching
+out.nnd <- rankNND.hotdeck(
+  data.rec = data_bdf,
+  data.don = data_enl,
+  var.rec = c("part_energies_revtot"),
+  don.class = c("donation_class_3"),
+  weight.rec = "pondmen",
+  weight.don = "pondmen"
+  )
+
+# Create fused file
+fused.nnd.m <- create.fused(
+  data.rec = data_bdf,
+  data.don = data_enl,
+  mtc.ids = out.nnd$mtc.ids,
+  z.vars = c(
+    "froid_cout",
+    "froid_impaye",
+    "froid_installation",
+    "froid_isolation",
+    "froid",
+    "gchauf_2",
+    "gchauf_6",
+    "gchauf_7",
+    "gchaufs_1",
+    "gchaufs_2",
+    "gchaufs_3",
+    "gchaufs_4",
+    "gchaufs_5",
+    "isolation_fenetres",
+    "isolation_murs",
+    "isolation_toit",
+    "majorite_double_vitrage"
+    )
+  )
+
+write.csv(fused.nnd.m, file = file.path(assets_directory, "matching/matching_enl/data_matched_rank.csv"))
