@@ -138,15 +138,17 @@ def new_get_cn_aggregates(target_year) :
     part_menages = get_reste_a_charge_sante_cn(target_year)
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == 'poste_06','{}'.format(target_year)] = part_menages * masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == 'poste_06','{}'.format(target_year)]
     liste_postes_cn = remove_prefixes(masses_cn_data_frame['Code'].tolist())
-    liste_postes_cn.remove('poste__Z')
-    liste_13postes = ["poste_0{}".format(i) for i in range(1, 10)] + ["poste_10", "poste_11", "poste_12", "poste_13"]
+    
+    liste_13postes = ["poste_0{}".format(i) for i in range(1, 10)] + ["poste_10", "poste_11", "poste_12", "poste_13",'"poste_16']
     liste_postes_cn = [element for element in liste_postes_cn if element[:8] in liste_13postes]
 
+    # Correction territoriale
+    
     masses_cn_postes_data_frame = masses_cn_data_frame.loc[masses_cn_data_frame['Code'].isin(liste_postes_cn)]
     masses_cn_postes_data_frame.set_index('Code', inplace = True)
     masses_cn_postes_data_frame.rename(columns= {'{}'.format(target_year): 'conso_CN_{}'.format(target_year)}, inplace= True)
 
-    # Revenus 
+    # Revenus (à modifier pour utiliser l'ERFS)
     parametres_fiscalite_file_path = os.path.join(
         assets_directory,
         'legislation',

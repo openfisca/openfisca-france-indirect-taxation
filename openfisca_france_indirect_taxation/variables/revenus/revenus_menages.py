@@ -56,6 +56,21 @@ class niveau_vie_decile(YearlyVariable):
         niveau_vie_decile, values = weighted_quantiles(niveau_de_vie, labels, pondmen, return_quantiles = True)
         return niveau_vie_decile
 
+class decile_indiv_niveau_vie(YearlyVariable):
+    value_type = Enum
+    default_value = Deciles.hors_champs
+    possible_values = Deciles
+    entity = Menage
+    label = "Décile de niveau de vie"
+
+    def formula(menage, period):
+        niveau_de_vie = menage('niveau_de_vie', period)
+        pondmen = menage('pondmen', period)
+        npers = menage('npers',period)
+        pondindiv = npers * pondmen
+        labels = numpy.arange(1, 11)
+        decile_indiv_niveau_vie, values = weighted_quantiles(niveau_de_vie, labels, pondindiv, return_quantiles = True)
+        return decile_indiv_niveau_vie
 
 class decile_rev_disponible(YearlyVariable):
     value_type = Enum
