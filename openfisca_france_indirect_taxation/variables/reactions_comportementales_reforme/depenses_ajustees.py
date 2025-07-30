@@ -9,7 +9,7 @@ import numpy
 class depenses_essence_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en essence après réaction à la réforme des prix"
+    label = 'Dépenses en essence après réaction à la réforme des prix'
 
     def formula(menage, period, parameters):
         depenses_essence = menage('depenses_essence', period)
@@ -25,7 +25,7 @@ class depenses_essence_ajustees(YearlyVariable):
 class depenses_diesel_ajustees(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en diesel après réaction à la réforme des prix"
+    label = 'Dépenses en diesel après réaction à la réforme des prix'
 
     def formula(menage, period, parameters):
         depenses_diesel = menage('depenses_diesel', period)
@@ -41,7 +41,7 @@ class depenses_diesel_ajustees(YearlyVariable):
 class depenses_gaz_ville_ajustees_taxe_carbone(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en gaz après réaction à la réforme - taxe carbone"
+    label = 'Dépenses en gaz après réaction à la réforme - taxe carbone'
 
     def formula(menage, period, parameters):
         depenses_gaz_variables = menage('depenses_gaz_variables', period)
@@ -61,7 +61,7 @@ class depenses_gaz_ville_ajustees_taxe_carbone(YearlyVariable):
 class depenses_electricite_ajustees_taxe_carbone(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses en électricité après réaction à la réforme - taxe carbone"
+    label = 'Dépenses en électricité après réaction à la réforme - taxe carbone'
 
     def formula(menage, period, parameters):
         depenses_electricite_variables = menage('depenses_electricite_variables', period)

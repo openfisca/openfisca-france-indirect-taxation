@@ -32,9 +32,7 @@ vins_doux_naturels_vins_liqueurs_aop_mentionnes_aux_articles_417_417_bis_cgi_eur
       value: 350.0
   metadata:
     ipp_csv_id: taxe_vdn_vdl
-    unit:
-      2002-03-31: currency-EUR
-      1993-07-01: currency-FRF
+    unit: currency
 autres_produits_intermediaires_eur_hl:
   description: Autres produits intermédiaires (€/hl)
   values:
@@ -68,9 +66,7 @@ autres_produits_intermediaires_eur_hl:
       value: 1400.0
   metadata:
     ipp_csv_id: taxe_autres_produits_inter_alcool
-    unit:
-      2002-03-31: currency-EUR
-      1993-07-01: currency-FRF
+    unit: currency
 metadata:
   order:
   - vins_doux_naturels_vins_liqueurs_aop_mentionnes_aux_articles_417_417_bis_cgi_eur_hl
@@ -96,7 +92,7 @@ metadata:
     2009-04-10:
       title: Décret 2009-389 du 07/04/2009
       href: https://www.legifrance.gouv.fr/eli/decret/2009/4/7/2009-389/jo/texte
-  date_parution_jo:
+  official_journal_date:
     2018-01-01: 2017-12-27
     2017-01-01: 2016-12-31
     2015-06-06: 2015-06-05
@@ -106,7 +102,7 @@ metadata:
     2010-11-21: 2010-11-20
     2010-05-01: 2010-04-30
     2009-04-10: 2009-04-09
-  description_en: Intermediary products (liquor wine, etc.)
+  label_en: Intermediary products (liquor wine, etc.)
 documentation: |
   Notes :
   Données renseignées dans l'article 402 bis du code général des impôts

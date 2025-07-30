@@ -13,92 +13,92 @@ from openfisca_core.reforms import Reform
 
 def modify_parameters(parameters):
     node = ParameterNode(
-        "contribution_climat_energie_reforme",
+        'contribution_climat_energie_reforme',
         data = {
-            "description": "contribution_climat_energie_reforme",
-            "diesel_2014_2015": {
-                "description": "Surcroît de prix du diesel (en euros par hectolitres)",
+            'description': 'contribution_climat_energie_reforme',
+            'diesel_2014_2015': {
+                'description': 'Surcroît de prix du diesel (en euros par hectolitres)',
                 # TODO "unit": '?',
-                "unit": 'currency',
-                "values": {'2014-01-01': 3.857 - 1.862}
+                'unit': 'currency',
+                'values': {'2014-01-01': 3.857 - 1.862}
                 },
-            "diesel_2014_2016": {
-                "description": "Surcroît de prix du diesel (en euros par hectolitres)",
+            'diesel_2014_2016': {
+                'description': 'Surcroît de prix du diesel (en euros par hectolitres)',
                 # TODO "unit": '?',
-                "unit": 'currency',
-                "values": {'2014-01-01': 5.852 - 1.862}
+                'unit': 'currency',
+                'values': {'2014-01-01': 5.852 - 1.862}
                 },
-            "essence_2014_2015": {
-                "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
-                "unit": 'currency',
-                "values": {'2014-01-01': 3.509 - 1.694}
+            'essence_2014_2015': {
+                'description': "Surcroît de prix de l'essence (en euros par hectolitres)",
+                'unit': 'currency',
+                'values': {'2014-01-01': 3.509 - 1.694}
                 },
-            "essence_2014_2016": {
-                "description": "Surcroît de prix de l'essence (en euros par hectolitres)",
-                "unit": 'currency',
-                "values": {'2014-01-01': 5.324 - 1.694}
+            'essence_2014_2016': {
+                'description': "Surcroît de prix de l'essence (en euros par hectolitres)",
+                'unit': 'currency',
+                'values': {'2014-01-01': 5.324 - 1.694}
                 },
-            "fioul_domestique_2014_2015": {
-                "description": "Surcroît de prix du fioul domestique (en euros par litre)",
-                "unit": 'currency',
-                "values": {'2014-01-01': 0.04495 - 0.0217}
+            'fioul_domestique_2014_2015': {
+                'description': 'Surcroît de prix du fioul domestique (en euros par litre)',
+                'unit': 'currency',
+                'values': {'2014-01-01': 0.04495 - 0.0217}
                 },
-            "fioul_domestique_2014_2016": {
-                "description": "Surcroît de prix du fioul domestique (en euros par litre)",
-                "unit": 'currency',
-                "values": {'2014-01-01': 0.0682 - 0.0217}
+            'fioul_domestique_2014_2016': {
+                'description': 'Surcroît de prix du fioul domestique (en euros par litre)',
+                'unit': 'currency',
+                'values': {'2014-01-01': 0.0682 - 0.0217}
                 },
-            "gaz_2014_2015": {
-                "description": "Surcroît de prix du gaz (en euros par kWh)",
+            'gaz_2014_2015': {
+                'description': 'Surcroît de prix du gaz (en euros par kWh)',
                 # TODO "unit": '?',
-                "unit": 'currency',
-                "values": {'2014-01-01': 0.00348 - 0.00168}
+                'unit': 'currency',
+                'values': {'2014-01-01': 0.00348 - 0.00168}
                 },
-            "gaz_2014_2016": {
-                "description": "Surcroît de prix du gaz (en euros par kWh)",
+            'gaz_2014_2016': {
+                'description': 'Surcroît de prix du gaz (en euros par kWh)',
                 # TODO "unit": '?',
-                "unit": 'currency',
-                "values": {'2014-01-01': 0.00528 - 0.00168}
+                'unit': 'currency',
+                'values': {'2014-01-01': 0.00528 - 0.00168}
                 },
-            "abaissement_tva_taux_plein_2014_2015": {
-                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+            'abaissement_tva_taux_plein_2014_2015': {
+                'description': 'Baisse de la TVA à taux plein pour obtenir un budget constant',
                 # TODO "unit": '?',
-                "values": {'2010-01-01': 0.004}
+                'values': {'2010-01-01': 0.004}
                 },
-            "abaissement_tva_taux_plein_2014_2016": {
-                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+            'abaissement_tva_taux_plein_2014_2016': {
+                'description': 'Baisse de la TVA à taux plein pour obtenir un budget constant',
                 # TODO "unit": '?',
-                "values": {'2010-01-01': 0.008}
+                'values': {'2010-01-01': 0.008}
                 },
-            "abaissement_tva_taux_plein_bis_2014_2015": {
-                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+            'abaissement_tva_taux_plein_bis_2014_2015': {
+                'description': 'Baisse de la TVA à taux plein pour obtenir un budget constant',
                 # TODO "unit": '?',
-                "values": {'2010-01-01': 0.002}
+                'values': {'2010-01-01': 0.002}
                 },
-            "abaissement_tva_taux_plein_bis_2014_2016": {
-                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+            'abaissement_tva_taux_plein_bis_2014_2016': {
+                'description': 'Baisse de la TVA à taux plein pour obtenir un budget constant',
                 # TODO "unit": '?',
-                "values": {'2010-01-01': 0.005}
+                'values': {'2010-01-01': 0.005}
                 },
-            "abaissement_tva_taux_reduit_2014_2015": {
-                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+            'abaissement_tva_taux_reduit_2014_2015': {
+                'description': 'Baisse de la TVA à taux plein pour obtenir un budget constant',
                 # TODO "unit": '?',
-                "values": {'2010-01-01': 0.004}
+                'values': {'2010-01-01': 0.004}
                 },
-            "abaissement_tva_taux_reduit_2014_2016": {
-                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+            'abaissement_tva_taux_reduit_2014_2016': {
+                'description': 'Baisse de la TVA à taux plein pour obtenir un budget constant',
                 # TODO "unit": '?',
-                "values": {'2010-01-01': 0.006}
+                'values': {'2010-01-01': 0.006}
                 },
-            "abaissement_tva_taux_super_reduit_2014_2015": {
-                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+            'abaissement_tva_taux_super_reduit_2014_2015': {
+                'description': 'Baisse de la TVA à taux plein pour obtenir un budget constant',
                 # TODO "unit": '?',
-                "values": {'2010-01-01': 0.004}
+                'values': {'2010-01-01': 0.004}
                 },
-            "abaissement_tva_taux_super_reduit_2014_2016": {
-                "description": "Baisse de la TVA à taux plein pour obtenir un budget constant",
+            'abaissement_tva_taux_super_reduit_2014_2016': {
+                'description': 'Baisse de la TVA à taux plein pour obtenir un budget constant',
                 # TODO "unit": '?',
-                "values": {'2010-01-01': 0.006}
+                'values': {'2010-01-01': 0.006}
                 },
             },
         )
@@ -108,7 +108,7 @@ def modify_parameters(parameters):
 
 class contribution_climat_energie_reforme(Reform):
     key = 'contribution_climat_energie_reforme',
-    name = "Réforme de la contribution climat energie anticipée simulée sur les données de 2014",
+    name = 'Réforme de la contribution climat energie anticipée simulée sur les données de 2014',
 
     def apply(self):
         self.modify_parameters(modifier_function = modify_parameters)

@@ -28,7 +28,7 @@ class SurveyScenario(AbstractSurveyScenario):
         assert year is not None
         
         if reform is None:
-            assert baseline_tax_benefit_system is None, "No need of reference_tax_benefit_system if no reform"
+            assert baseline_tax_benefit_system is None, 'No need of reference_tax_benefit_system if no reform'
             if tax_benefit_system is None:
                 tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
         else:
@@ -53,7 +53,7 @@ class SurveyScenario(AbstractSurveyScenario):
         if elasticities is not None:
             assert 'ident_men' in elasticities.columns
             input_data_frame['ident_men'] = input_data_frame.ident_men.astype(numpy.int64)
-            input_data_frame = input_data_frame.merge(elasticities, how = "left", on = 'ident_men')
+            input_data_frame = input_data_frame.merge(elasticities, how = 'left', on = 'ident_men')
             for col in elasticities.columns:
                 assert col in input_data_frame.columns
 

@@ -34,7 +34,7 @@ tarif_fixe_3_kva:
       value: 19.68
   metadata:
     ipp_csv_id: tarif_fixe_base_3kva_ht
-    unit: currency-EUR
+    unit: currency
 tarif_fixe_6_kva:
   description: Tarif fixe - 6 kVA
   values:
@@ -70,7 +70,7 @@ tarif_fixe_6_kva:
       value: 49.92
   metadata:
     ipp_csv_id: tarif_fixe_base_6kva_ht
-    unit: currency-EUR
+    unit: currency
 tarif_fixe_9_kva:
   description: Tarif fixe - 9 kVA
   values:
@@ -106,7 +106,7 @@ tarif_fixe_9_kva:
       value: 98.88
   metadata:
     ipp_csv_id: tarif_fixe_base_9kva_ht
-    unit: currency-EUR
+    unit: currency
 tarif_fixe_12_kva:
   description: Tarif fixe - 12 kVA
   values:
@@ -142,7 +142,7 @@ tarif_fixe_12_kva:
       value: 141.96
   metadata:
     ipp_csv_id: tarif_fixe_base_12kva_ht
-    unit: currency-EUR
+    unit: currency
 tarif_fixe_15_kva:
   description: Tarif fixe - 15 kVA
   values:
@@ -178,7 +178,7 @@ tarif_fixe_15_kva:
       value: 185.04
   metadata:
     ipp_csv_id: tarif_fixe_base_15kva_ht
-    unit: currency-EUR
+    unit: currency
 tarif_fixe_18_kva:
   description: Tarif fixe - 18 kVA
   values:
@@ -214,7 +214,7 @@ tarif_fixe_18_kva:
       value: 228.12
   metadata:
     ipp_csv_id: tarif_fixe_base_18kva_ht
-    unit: currency-EUR
+    unit: currency
 tarif_fixe_24_kva:
   description: Tarif fixe - 24 kVA
   values:
@@ -250,7 +250,7 @@ tarif_fixe_24_kva:
       value: 380.52
   metadata:
     ipp_csv_id: tarif_fixe_base_24kva_ht
-    unit: currency-EUR
+    unit: currency
 tarif_fixe_30_kva:
   description: Tarif fixe - 30 kVA
   values:
@@ -286,7 +286,7 @@ tarif_fixe_30_kva:
       value: 532.92
   metadata:
     ipp_csv_id: tarif_fixe_base_30kva_ht
-    unit: currency-EUR
+    unit: currency
 tarif_fixe_36_kva:
   description: Tarif fixe - 36 kVA
   values:
@@ -322,7 +322,7 @@ tarif_fixe_36_kva:
       value: 685.32
   metadata:
     ipp_csv_id: tarif_fixe_base_36kva_ht
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - tarif_fixe_3_kva
@@ -334,7 +334,7 @@ metadata:
   - tarif_fixe_24_kva
   - tarif_fixe_30_kva
   - tarif_fixe_36_kva
-  description_en: Fix fee base tariff EDF (without taxes)
+  label_en: Fix fee base tariff EDF (without taxes)
 documentation: |
   Source : http://www.cre.fr/marches/marche-de-detail/marche-de-l-electricite#section2
   Commission de régulation de l'énergie (CRE)

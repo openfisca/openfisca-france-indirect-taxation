@@ -16,7 +16,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import save_dataf
 from openfisca_france_indirect_taxation.utils import assets_directory
 
 
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 
 # Importation des bases de données appariées et de la base de référence ENL

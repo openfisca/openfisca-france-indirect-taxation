@@ -274,7 +274,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         start = 1998,
         stop = 2011
     )
-    
+
     bois_chauffage_reforme_2012 = dict(
         value = '04.5.4.1.1',
         categorie_fiscale = 'tva_taux_intermediaire',
@@ -299,7 +299,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         categorie_fiscale = 'tva_taux_reduit' ,
         start = 2012,
     )
-    
+
     # et pas de taxation des loyers
     loyers = dict(
         value = ['04.1.1.1.1', '04.1.1.2.1'],
@@ -311,7 +311,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         value = '04.3.2.2.1',
         categorie_fiscale = 'tva_taux_intermediaire',
     )
-    
+
     # 05 Ameublement, équipement ménager et entretien courant de la maison
     ameublement = dict(
         value = 5,
@@ -358,7 +358,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012,
         )
-    
+
     # Autres services de transports (yc déménagements)
     autres_services_transports = dict(
         value = '07.3.6.1.1',
@@ -445,7 +445,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         #stop = 2013,
         #)
     #-> le livre est passé au taux intermediaire (7%) en 2012 avant de repasser au taux réduit à 5,5% en 2013,
-    # comme on ne peut pas le passer au taux intermédiaire seulement pour une année on le laisse au taux réduit    
+    # comme on ne peut pas le passer au taux intermédiaire seulement pour une année on le laisse au taux réduit
 
     # Horticulture, floriculture
     plantes_fleurs = dict(
@@ -496,7 +496,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2012
         )
-    
+
     musee_zoo_reforme_2018 = dict(
         value = '09.4.2.2',
         categorie_fiscale = 'tva_taux_reduit',
@@ -532,8 +532,8 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
         categorie_fiscale = 'tva_taux_intermediaire',
         start = 2015,
         )
-    
-    # Voyage à forfait 
+
+    # Voyage à forfait
     voyage_forfait = dict(
         value = '09.6.1.1',
         categorie_fiscale = '',
@@ -673,7 +673,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
             habillement,
             # 04
             logement, bois_chauffage_98 , bois_chauffage_reforme_2012,
-            eau_ordures_assainissement, ordures_assainissement_reforme_2012, 
+            eau_ordures_assainissement, ordures_assainissement_reforme_2012,
             eau_post_2012,
             loyers, services_entretien,
             # 05
@@ -694,7 +694,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = F
             # 09
             loisirs_culture, journaux_periodiques, livre,
             plantes_fleurs , jeux_hasard,  equipement_sportif,
-            cinema_theatre_concert, cinema_theatre_concert_reforme_2012, cinema_theatre_concert_reforme_2014, 
+            cinema_theatre_concert, cinema_theatre_concert_reforme_2012, cinema_theatre_concert_reforme_2014,
             musee_zoo, musee_zoo_reforme_2012, musee_zoo_reforme_2018,
             tv_radio, tv_radio_reforme_2012 ,
             autres_services_culturels,
@@ -756,7 +756,7 @@ def test_coicop_legislation():
         return coicop_nomenclature.loc[coicop_nomenclature.categorie_fiscale.isnull()]
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # extract_informations_from_coicop_to_categorie_fiscale()
     coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
     coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = True)

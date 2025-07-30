@@ -15,7 +15,7 @@ import seaborn
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_line
 from openfisca_france_indirect_taxation.utils import assets_directory
 # Import d'une nouvelle palette de couleurs
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 # Import des fichiers csv donnant les montants agrégés des dépenses répertoriées dans les enquêtes BdF.
 # Ces montants sont calculés dans compute_depenses_carburants
@@ -44,7 +44,7 @@ parametres_fiscalite_file_path = os.path.join(
     'legislation',
     'Parametres fiscalite indirecte.xls'
     )
-masses_cn_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "consommation_CN")
+masses_cn_data_frame = pd.read_excel(parametres_fiscalite_file_path, sheet_name = 'consommation_CN')
 
 masses_cn_carburants = masses_cn_data_frame[masses_cn_data_frame['Fonction'] == 'Carburants et lubrifiants']
 masses_cn_carburants = masses_cn_carburants.transpose()

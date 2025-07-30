@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 
 @temporary_store_decorator(config_files_directory = config_files_directory, file_name = 'indirect_taxation_tmp')
 def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year = None):
-    """Homogénéisation des caractéristiques sociales des ménages."""
+    '''Homogénéisation des caractéristiques sociales des ménages.'''
     assert temporary_store is not None
     temporary_store.open()
     assert year is not None
@@ -28,7 +28,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         kept_variables = ['exdep', 'exrev', 'mena', 'v', 'ponderrd', 'nbpers', 'nbenf', 'typmen1', 'cohabpr', 'sexepr',
             'agepr', 'agecj', 'matripr', 'occuppr', 'occupcj', 'nbact', 'sitlog', 'stalog', 'mena', 'nm14a', 'typmen1']
         menage = survey.get_values(
-            table = "socioscm",
+            table = 'socioscm',
             variables = kept_variables,
             )
         # cette étape permet de ne garder que les données dont on est sûr de la qualité et de la véracité
@@ -79,7 +79,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         #  2. Reformatage des variables (réattribution des catégories pour quelles soient identiques
         #     pour les différentes années)
 
-        menage["situacj"] = 0
+        menage['situacj'] = 0
         menage.situacj[menage.occupcj == 1] = 1
         menage.situacj[menage.occupcj == 3] = 3
         menage.situacj[menage.occupcj == 2] = 4
@@ -89,7 +89,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.situacj[menage.occupcj == 8] = 7
         menage.situacj[menage.occupcj == 4] = 8
 
-        menage["situapr"] = 0
+        menage['situapr'] = 0
         menage.situapr[menage.occuppr == 1] = 1
         menage.situapr[menage.occuppr == 3] = 3
         menage.situapr[menage.occuppr == 2] = 4
@@ -99,14 +99,14 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.situapr[menage.occuppr == 8] = 7
         menage.situapr[menage.occuppr == 4] = 8
 
-        menage["typlog"] = 0
+        menage['typlog'] = 0
         menage.typlog[menage.sitlog == 1] = 1
         menage.typlog[menage.sitlog != 1] = 2
 
         menage['stalog'] = menage['stalog'].astype(int)
 
         individus = survey.get_values(
-            table = "individu",
+            table = 'individu',
             )
         variables = ['mena', 'v']
         individus.rename(
@@ -117,7 +117,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
     if year == 2000:
         menage = survey.get_values(
-            table = "menage",
+            table = 'menage',
             variables = [
                 'ident', 'pondmen', 'nbact', 'nbenf1', 'nbpers', 'ocde10', 'sitlog', 'stalog', 'strate',
                 'typmen1', 'zeat', 'stalog', 'vag', 'sexepr', 'sexecj', 'agecj', 'napr', 'nacj', 'cs2pr',
@@ -168,13 +168,13 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         del menage['typmen_']
 
         menage.couplepr = menage.couplepr.astype('int')
-        menage["nadultes"] = menage['npers'] - menage['nenfants']
+        menage['nadultes'] = menage['npers'] - menage['nenfants']
 
         menage.typmen = menage.typmen.astype('int')
 
         # occupa : 1 si la personne travaille, 2 sinon. occupb : 1 si elle travaille effectivement, 2 si congé de
         # longue durée (négligé ici). occupc : de 2 à 8 selon le statut si ne travaille pas (étudiant, retraité, etc.)
-        menage["situacj"] = 0
+        menage['situacj'] = 0
         menage.situacj.loc[menage.occupacj == 1] = 1
         menage.situacj.loc[menage.occupccj == 3] = 3
         menage.situacj.loc[menage.occupccj == 2] = 4
@@ -184,7 +184,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.situacj.loc[menage.occupccj == 8] = 7
         menage.situacj.loc[menage.occupccj == 4] = 8
 
-        menage["situapr"] = 0
+        menage['situapr'] = 0
         menage.situapr.loc[menage.occupapr == 1] = 1
         menage.situapr.loc[menage.occupcpr == 3] = 3
         menage.situapr.loc[menage.occupcpr == 2] = 4
@@ -194,8 +194,8 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.situapr.loc[menage.occupcpr == 8] = 7
         menage.situapr.loc[menage.occupcpr == 4] = 8
 
-        menage["natiocj"] = 0
-        menage["natiopr"] = 0
+        menage['natiocj'] = 0
+        menage['natiopr'] = 0
         menage.natiocj.loc[menage.nacj == 1] = 1
         menage.natiocj.loc[menage.nacj == 2] = 1
         menage.natiocj.loc[menage.nacj == 3] = 2
@@ -203,12 +203,12 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.natiopr.loc[menage.napr == 2] = 1
         menage.natiopr.loc[menage.napr == 3] = 2
 
-        menage["typlog"] = 0
+        menage['typlog'] = 0
         menage.typlog.loc[menage.sitlog == 1] = 1
         menage.typlog.loc[menage.sitlog != 1] = 2
 
         # Homogénéisation des diplômes, choix d'équivalence entre les diplômes
-        menage["dip14pr"] = 999999
+        menage['dip14pr'] = 999999
         menage.dip14pr.loc[menage.diegpr == 0] = 71
         menage.dip14pr.loc[menage.diegpr == 2] = 70
         menage.dip14pr.loc[menage.diegpr == 15] = 60
@@ -243,9 +243,9 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         assert menage.zeat.isin(list(range(1, 9))).all()
 
         try:
-            depmen = survey.get_values(table = "DEPMEN", ignorecase = True)
+            depmen = survey.get_values(table = 'DEPMEN', ignorecase = True)
         except Exception:
-            depmen = survey.get_values(table = "depmen")
+            depmen = survey.get_values(table = 'depmen')
 
         depmen.rename(columns = {'ident': 'ident_men'}, inplace = True)
         sourcp = depmen[['sourcp', 'ident_men']].copy()
@@ -255,7 +255,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage = menage.merge(sourcp, left_index = True, right_index = True)
 
         individus = survey.get_values(
-            table = "individus",
+            table = 'individus',
             variables = ['ident', 'matri', 'lien', 'anais']
             )
 
@@ -276,7 +276,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage = menage.merge(individus, left_index = True, right_index = True)
 
     if year == 2005:
-        menage = survey.get_values(table = "menage")
+        menage = survey.get_values(table = 'menage')
         # données socio-démographiques
         socio_demo_variables = [
             'agpr',
@@ -308,9 +308,9 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         menage.rename(
             columns = {
                 # "agpr": "agepr",
-                "agcj": "agecj",
-                "typmen5": "typmen",
-                "cs24pr": "cs_pr"
+                'agcj': 'agecj',
+                'typmen5': 'typmen',
+                'cs24pr': 'cs_pr'
                 },
             inplace = True,
             )
@@ -358,13 +358,13 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             6: 5 }
         menage['stalog'] = menage['stalog'].replace(mapping)
         assert menage['stalog'].isin(range(1, 6)).all()
-        
+
         menage['typlog'] = 2
         menage.loc[menage.htl.isin(['1', '5']), 'typlog'] = 1
         assert menage.typlog.isin([1, 2]).all()
         del menage['htl']
 
-        sourcp = survey.get_values(table = "depmen", variables = ['ident_men', 'sourcp'])
+        sourcp = survey.get_values(table = 'depmen', variables = ['ident_men', 'sourcp'])
         sourcp.set_index('ident_men', inplace = True)
         menage = menage.merge(sourcp, left_index = True, right_index = True)
 
@@ -399,8 +399,8 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             return data_frame
 
         individus = individus.groupby(by = 'ident_men').apply(add_col_numero)
-        pivoted = individus.pivot(index = 'ident_men', columns = "numero", values = 'age')
-        pivoted.columns = ["age{}".format(column) for column in pivoted.columns]
+        pivoted = individus.pivot(index = 'ident_men', columns = 'numero', values = 'age')
+        pivoted.columns = ['age{}'.format(column) for column in pivoted.columns]
         menage = menage.merge(pivoted, left_index = True, right_index = True, how = 'outer')
 
         individus = survey.get_values(
@@ -535,30 +535,30 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
 
         menage['cs24pr'] = 0
         csp42s_by_csp24 = {
-            10: ["11", "12", "13"],
-            21: ["21"],
-            22: ["22"],
-            23: ["23"],
-            31: ["31"],
-            32: ["32", "33", "34", "35"],
-            36: ["37", "38"],
-            41: ["42", "43", "44", "45"],
-            46: ["46"],
-            47: ["47"],
-            48: ["48"],
-            51: ["52", "53"],
-            54: ["54"],
-            55: ["55"],
-            56: ["56"],
-            61: ["62", "63", "64", "65"],
-            66: ["67", "68"],
-            69: ["69"],
-            71: ["71"],
-            72: ["72"],
-            73: ["74", "75"],
-            76: ["77", "78"],
-            81: ["81"],
-            82: ["83", "84", "85", "86", "**", "00"],
+            10: ['11', '12', '13'],
+            21: ['21'],
+            22: ['22'],
+            23: ['23'],
+            31: ['31'],
+            32: ['32', '33', '34', '35'],
+            36: ['37', '38'],
+            41: ['42', '43', '44', '45'],
+            46: ['46'],
+            47: ['47'],
+            48: ['48'],
+            51: ['52', '53'],
+            54: ['54'],
+            55: ['55'],
+            56: ['56'],
+            61: ['62', '63', '64', '65'],
+            66: ['67', '68'],
+            69: ['69'],
+            71: ['71'],
+            72: ['72'],
+            73: ['74', '75'],
+            76: ['77', '78'],
+            81: ['81'],
+            82: ['83', '84', '85', '86', '**', '00'],
             }
         for csp24, csp42s in list(csp42s_by_csp24.items()):
             menage.loc[menage.cs42pr.isin(csp42s), 'cs24pr'] = csp24
@@ -571,10 +571,10 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'pondmen', 'npers', 'nenfants', 'nenfhors', 'nadultes', 'nactifs', 'ocde10', 'typmen',
             'sexepr', 'agepr', 'etamatri', 'couplepr', 'situapr', 'dip14pr', 'cs42pr', 'cs24pr', 'cs8pr', 'natiopr',
             'sexecj', 'agecj', 'situacj', 'dip14cj', 'cs42cj', 'natiocj', 'typlog', 'stalog'
-            ] + ["age{}".format(age) for age in range(3, 14)]
+            ] + ['age{}'.format(age) for age in range(3, 14)]
 
         for variable in variables:
-            assert variable in menage.columns, "{} is not a column of menage data frame".format(variable)
+            assert variable in menage.columns, '{} is not a column of menage data frame'.format(variable)
 
     if year in [2011, 2017]:
         variables = [
@@ -610,7 +610,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         if year == 2017:
             variables.append('dnivie1')
 
-        menage = survey.get_values(table = "menage", variables = variables, ignorecase = True)
+        menage = survey.get_values(table = 'menage', variables = variables, ignorecase = True)
 
         menage.rename(
             columns = {
@@ -638,7 +638,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'aidlog1',          # Aide au logement - propriétaire
             'aidlog2',          # Aide au logement - locataire
             'ancons',           # Année de construction de l'immeuble
-            'chaufp',           
+            'chaufp',
             'htl',
             'ident_men',
             'mall1',            # Montant de l'aide au logement - propriétaire
@@ -660,12 +660,12 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             'vag',
             ]
 
-        depmen = survey.get_values(table = "depmen", variables = variables_depmen, ignorecase = True)
+        depmen = survey.get_values(table = 'depmen', variables = variables_depmen, ignorecase = True)
 
         menage.set_index('ident_men', inplace = True)
         depmen.set_index('ident_men', inplace = True)
         variables_sante = ['ident_men', 'complentr']
-        compl_sante = survey.get_values(table = "compl_sante", variables = variables_sante, ignorecase = True)
+        compl_sante = survey.get_values(table = 'compl_sante', variables = variables_sante, ignorecase = True)
 
         compl_sante.set_index('ident_men', inplace = True)
 
@@ -698,7 +698,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
         }
         menage['stalog'] = menage['stalog'].replace(mapping)
         assert menage['stalog'].isin(range(1, 6)).all()
-        
+
         '''
         TODO a déplacer ailleurs après avoir compris à quoi cela sert ! (dans le calcul des élasticités)
         vague = depmen[['vag', 'ident_men']].copy()
@@ -737,4 +737,4 @@ if __name__ == '__main__':
     year = 2011
     build_homogeneisation_caracteristiques_sociales(year = year)
 
-    log.info("step_3_homogeneisation_caracteristiques_sociales {}".format(time.process_time()() - deb))
+    log.info('step_3_homogeneisation_caracteristiques_sociales {}'.format(time.process_time()() - deb))

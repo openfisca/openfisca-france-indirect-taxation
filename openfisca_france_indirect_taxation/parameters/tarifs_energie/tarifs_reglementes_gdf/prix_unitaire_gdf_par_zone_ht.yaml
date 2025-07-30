@@ -22,7 +22,7 @@ prix_kwh_base_zone_1_ht:
       value: 7.24
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone1_base_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_base_zone_2_ht:
   description: Prix kWh Base - zone 2 - HT
   values:
@@ -46,7 +46,7 @@ prix_kwh_base_zone_2_ht:
       value: 7.24
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone2_base_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_base_zone_3_ht:
   description: Prix kWh Base - zone 3 - HT
   values:
@@ -70,7 +70,7 @@ prix_kwh_base_zone_3_ht:
       value: 7.24
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone3_base_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_base_zone_4_ht_ht:
   description: Prix kWh Base - zone 4 - HT - HT
   values:
@@ -94,7 +94,7 @@ prix_kwh_base_zone_4_ht_ht:
       value: 7.24
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone4_base_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_base_zone_5:
   description: Prix kWh Base - zone 5
   values:
@@ -118,7 +118,7 @@ prix_kwh_base_zone_5:
       value: 7.24
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone5_base_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_base_zone_6_ht:
   description: Prix kWh Base - zone 6 - HT
   values:
@@ -142,7 +142,7 @@ prix_kwh_base_zone_6_ht:
       value: 7.24
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone6_base_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b0_zone_1_ht:
   description: Prix kWh B0 - zone 1 - HT
   values:
@@ -166,7 +166,7 @@ prix_kwh_b0_zone_1_ht:
       value: 6.2
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone1_b0_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b0_zone_2_ht:
   description: Prix kWh B0 - zone 2 - HT
   values:
@@ -190,7 +190,7 @@ prix_kwh_b0_zone_2_ht:
       value: 6.2
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone2_b0_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b0_zone_3_ht:
   description: Prix kWh B0 - zone 3 - HT
   values:
@@ -214,7 +214,7 @@ prix_kwh_b0_zone_3_ht:
       value: 6.2
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone3_b0_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b0_zone_4_ht_ht:
   description: Prix kWh B0 - zone 4 - HT - HT
   values:
@@ -238,7 +238,7 @@ prix_kwh_b0_zone_4_ht_ht:
       value: 6.2
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone4_b0_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b0_zone_5:
   description: Prix kWh B0 - zone 5
   values:
@@ -262,7 +262,7 @@ prix_kwh_b0_zone_5:
       value: 6.2
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone5_b0_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b0_zone_6_ht:
   description: Prix kWh B0 - zone 6 - HT
   values:
@@ -286,7 +286,7 @@ prix_kwh_b0_zone_6_ht:
       value: 6.2
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone6_b0_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b1_zone_1_ht:
   description: Prix kWh B1 - zone 1 - HT
   values:
@@ -310,7 +310,7 @@ prix_kwh_b1_zone_1_ht:
       value: 4.17
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone1_b1_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b1_zone_2_ht:
   description: Prix kWh B1 - zone 2 - HT
   values:
@@ -334,7 +334,7 @@ prix_kwh_b1_zone_2_ht:
       value: 4.23
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone2_b1_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b1_zone_3_ht:
   description: Prix kWh B1 - zone 3 - HT
   values:
@@ -358,7 +358,7 @@ prix_kwh_b1_zone_3_ht:
       value: 4.29
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone3_b1_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b1_zone_4_ht:
   description: Prix kWh B1 - zone 4 - HT
   values:
@@ -382,7 +382,7 @@ prix_kwh_b1_zone_4_ht:
       value: 4.35
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone4_b1_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b1_zone_5:
   description: Prix kWh B1 - zone 5
   values:
@@ -406,7 +406,7 @@ prix_kwh_b1_zone_5:
       value: 4.41
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone5_b1_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b1_zone_6_ht:
   description: Prix kWh B1 - zone 6 - HT
   values:
@@ -430,7 +430,7 @@ prix_kwh_b1_zone_6_ht:
       value: 4.47
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone6_b1_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b2i_zone_1_ht:
   description: Prix kWh B2I - zone 1 - HT
   values:
@@ -454,7 +454,7 @@ prix_kwh_b2i_zone_1_ht:
       value: 4.17
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone1_b2i_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b2i_zone_2_ht:
   description: Prix kWh B2I - zone 2 - HT
   values:
@@ -478,7 +478,7 @@ prix_kwh_b2i_zone_2_ht:
       value: 4.23
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone2_b2i_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b2i_zone_3_ht:
   description: Prix kWh B2I - zone 3 - HT
   values:
@@ -502,7 +502,7 @@ prix_kwh_b2i_zone_3_ht:
       value: 4.29
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone3_b2i_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b2i_zone_4_ht:
   description: Prix kWh B2I - zone 4 - HT
   values:
@@ -526,7 +526,7 @@ prix_kwh_b2i_zone_4_ht:
       value: 4.35
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone4_b2i_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b2i_zone_5:
   description: Prix kWh B2I - zone 5
   values:
@@ -550,7 +550,7 @@ prix_kwh_b2i_zone_5:
       value: 4.41
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone5_b2i_ht
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b2i_zone_6_ht:
   description: Prix kWh B2I - zone 6 - HT
   values:
@@ -574,7 +574,7 @@ prix_kwh_b2i_zone_6_ht:
       value: 4.47
   metadata:
     ipp_csv_id: prix_unitaire_gdf_zone6_b2i_ht
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - prix_kwh_base_zone_1_ht
@@ -606,4 +606,4 @@ metadata:
     2013-07-01: Arrêté du 27/06/2013
     2013-01-01: Arrêté du 27/06/2013
     2012-01-01: Arrêté du 22/12/2011
-  description_en: Unitary price regulated tariff GDF (without taxes)
+  label_en: Unitary price regulated tariff GDF (without taxes)

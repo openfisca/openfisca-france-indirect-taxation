@@ -24,7 +24,7 @@ class depenses_tva_exonere(YearlyVariable):
 class depenses_tva_taux_intermediaire(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses TTC des biens acquittant la TVA à taux intermediaire"
+    label = 'Dépenses TTC des biens acquittant la TVA à taux intermediaire'
 
     def formula_2012(menage, period, parameters):
         depenses_ht_tva_taux_intermediaire = menage('depenses_ht_tva_taux_intermediaire', period)
@@ -35,7 +35,7 @@ class depenses_tva_taux_intermediaire(YearlyVariable):
 class depenses_tva_taux_plein(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses TTC des biens acquittant la TVA acquitée à taux plein"
+    label = 'Dépenses TTC des biens acquittant la TVA acquitée à taux plein'
 
     def formula(menage, period, parameters):
         depenses_ht_tva_taux_plein = menage('depenses_ht_tva_taux_plein', period)
@@ -46,7 +46,7 @@ class depenses_tva_taux_plein(YearlyVariable):
 class depenses_tva_taux_reduit(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses TTC des biens acquittant la TVA acquitée à taux reduit"
+    label = 'Dépenses TTC des biens acquittant la TVA acquitée à taux reduit'
 
     def formula(menage, period, parameters):
         depenses_ht_tva_taux_reduit = menage('depenses_ht_tva_taux_reduit', period)
@@ -57,7 +57,7 @@ class depenses_tva_taux_reduit(YearlyVariable):
 class depenses_tva_taux_super_reduit(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Dépenses TTC des biens acquittant à taux super reduit"
+    label = 'Dépenses TTC des biens acquittant à taux super reduit'
 
     def formula(menage, period, parameters):
         depenses_ht_tva_taux_super_reduit = menage('depenses_ht_tva_taux_super_reduit', period)
@@ -68,7 +68,7 @@ class depenses_tva_taux_super_reduit(YearlyVariable):
 class tva_taux_intermediaire(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Montant de la TVA acquitée à taux intermediaire"
+    label = 'Montant de la TVA acquitée à taux intermediaire'
 
     def formula_2012(menage, period, parameters):
         depenses_ht_tva_taux_intermediaire = menage('depenses_ht_tva_taux_intermediaire', period)
@@ -79,7 +79,7 @@ class tva_taux_intermediaire(YearlyVariable):
 class tva_taux_plein(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Montant de la TVA acquitée à taux plein"
+    label = 'Montant de la TVA acquitée à taux plein'
 
     def formula(menage, period, parameters):
         depenses_ht_tva_taux_plein = menage('depenses_ht_tva_taux_plein', period)
@@ -90,7 +90,7 @@ class tva_taux_plein(YearlyVariable):
 class tva_taux_reduit(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Montant de la TVA acquitée à taux reduit"
+    label = 'Montant de la TVA acquitée à taux reduit'
 
     def formula(menage, period, parameters):
         depenses_ht_tva_taux_reduit = menage('depenses_ht_tva_taux_reduit', period)
@@ -101,7 +101,7 @@ class tva_taux_reduit(YearlyVariable):
 class tva_taux_super_reduit(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Montant de la TVA acquitée à taux super reduit"
+    label = 'Montant de la TVA acquitée à taux super reduit'
 
     def formula(menage, period, parameters):
         depenses_ht_tva_taux_super_reduit = menage('depenses_ht_tva_taux_super_reduit', period)
@@ -112,7 +112,7 @@ class tva_taux_super_reduit(YearlyVariable):
 class tva_total(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Montant de la TVA acquitée"
+    label = 'Montant de la TVA acquitée'
 
     def formula(menage, period):
         tva_taux_super_reduit = menage('tva_taux_super_reduit', period)

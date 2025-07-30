@@ -7,7 +7,7 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_datafram
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_price_index_builder import \
     df_indice_prix_produit
 
-""" Check if depenses_tot is equal to the sum of all expenses """
+''' Check if depenses_tot is equal to the sum of all expenses '''
 
 aggregates_data_frame['dep_tot'] = 0
 for i in range(1, 13):
@@ -17,7 +17,7 @@ assert (aggregates_data_frame['diff'] < 0.0001).any()[(aggregates_data_frame['di
     'Issue in depenses_tot calculation'
 
 
-""" Check that the sum of the share for the four categories is 1 """
+''' Check that the sum of the share for the four categories is 1 '''
 
 data_frame_for_reg['sum_shares'] = 0
 for i in range(1, 5):
@@ -26,14 +26,13 @@ assert (data_frame_for_reg['sum_shares'] == 1).any(), 'Shares do not sum to 1 in
 del data_frame_for_reg['sum_shares']
 
 
-""" Check that the prices do not take unlikely values """
-# This test is problematic, it does not achieves its goal
+''' Check that the prices fall within the valid range (200 to 500) '''
 for i in range(1, 5):
-    assert (data_frame_for_reg['p{}'.format(i)] > 500).any(), 'Some prices seem too small'
-    assert (data_frame_for_reg['p{}'.format(i)] < 200).any(), 'Some prices seem too big'
+    assert ((data_frame_for_reg['p{}'.format(i)] >= 200) & (data_frame_for_reg['p{}'.format(i)] <= 500)).all(), \
+        'Some prices fall outside the valid range (200 to 500)'
 
 
-""" Check period fixed effects sum to 1 """
+''' Check period fixed effects sum to 1 '''
 
 data_frame_for_reg['sum_vag'] = 0
 for i in range(0, 30):
@@ -44,8 +43,8 @@ for i in range(0, 30):
 assert (data_frame_for_reg['sum_vag'] == 1).any(), 'Vag fixed effects do not sum to 1'
 
 
-""" Check if the price index of all goods in aggregate_data_frame is filled in indice_prix_mensuel_98_15
-If this was not the case, we would have issues in the calculation of the price index for some people """
+''' Check if the price index of all goods in aggregate_data_frame is filled in indice_prix_mensuel_98_15
+If this was not the case, we would have issues in the calculation of the price index for some people '''
 
 df_bien = df_indice_prix_produit[['bien']]
 df_bien = df_bien.drop_duplicates(subset = 'bien', take_last = True)
@@ -61,9 +60,9 @@ assert len(df_bien) == len(df_bien_to_merge), \
     'The price indexes is not filled for some goods in df_indice_prix_produit (or before)'
 
 
-""" Check if the goods that drop from the dataframe in the match with prices are meaningful goods or not. If the test
+''' Check if the goods that drop from the dataframe in the match with prices are meaningful goods or not. If the test
 fails, it means that some meaningful goods are not matched with any price. This test achieves the same goal as the
-previous one but in a later stage of the dataframe construction """
+previous one but in a later stage of the dataframe construction '''
 
 check = df.drop_duplicates(subset = ['indice_prix_produit'], keep = 'last')
 check = check['indice_prix_produit']
@@ -79,7 +78,7 @@ for element in common:
 del common, short_name
 
 
-""" Check if the shares of each poste in their broad category sum to 1 """
+''' Check if the shares of each poste in their broad category sum to 1 '''
 
 for i in range(0, 100):
     df_ident_men_0 = df_depenses_prix[df_depenses_prix['ident_men'] == '{}'.format(i)]

@@ -51,5 +51,5 @@ def homogenize_definitions(year_data):
     return data_erfs, data_bdf
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     data_erfs, data_bdf = homogenize_definitions()

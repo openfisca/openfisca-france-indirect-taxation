@@ -6,7 +6,7 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 class cheques_energie(YearlyVariable):
     value_type = float
     entity = Menage
-    label = "Montant des chèques énergie tels que prévus par la loi"
+    label = 'Montant des chèques énergie tels que prévus par la loi'
 
     def formula(menage, period, parameters):
         revenu_fiscal = numpy.maximum(0.0, menage('revdecm', period) / 1.22)

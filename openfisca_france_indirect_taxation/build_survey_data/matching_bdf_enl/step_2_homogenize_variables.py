@@ -226,7 +226,7 @@ def homogenize_variables_definition_bdf_enl(year_data):
         'tu2010':   'tuu',
         }
 
-    assert set(renaming.keys()) < set(data_enl.columns), "Missing {} in data_enl".format(
+    assert set(renaming.keys()) < set(data_enl.columns), 'Missing {} in data_enl'.format(
         set(renaming.keys()).difference(set(data_enl.columns))
         )
     data_enl.rename(
@@ -401,5 +401,5 @@ def create_niveau_vie_quantiles(year_data):
     return create_niveau_vie_quantiles_(data_enl), create_niveau_vie_quantiles_(data_bdf)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     data_enl, data_bdf = create_niveau_vie_quantiles()

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-"""
+'''
 Computing the Hellinger distance between two discrete
 probability distributions
-"""
+'''
 
 # To be completed : add missing variables
 

@@ -19,12 +19,12 @@ def generate_postes_variables(tax_benefit_system):
     codes_bdf = [element for element in codes_coicop_data_frame.code_bdf.unique()]
     for code_bdf in codes_bdf:
         label = codes_coicop_data_frame.query('code_bdf == @code_bdf')['label'].drop_duplicates().tolist()
-        assert len(label) == 1, "Too many labels for {}: {}".format(code_bdf, label)
+        assert len(label) == 1, 'Too many labels for {}: {}'.format(code_bdf, label)
         label = label[0]
         code_coicop = codes_coicop_data_frame.query('code_bdf == @code_bdf')['code_coicop'].drop_duplicates().tolist()
-        assert len(code_coicop) == 1, "Too many code_coicop for {}: {}".format(code_bdf, code_coicop)
+        assert len(code_coicop) == 1, 'Too many code_coicop for {}: {}'.format(code_bdf, code_coicop)
         code_coicop = code_coicop[0]
-        class_name = "poste_{}".format(slugify(code_coicop, separator = '_'))
+        class_name = 'poste_{}'.format(slugify(code_coicop, separator = '_'))
         log.debug('Creating variable {} with label {}'.format(class_name, label))
         # Use type to create a class with a dynamic name
         tax_benefit_system.add_variable(
@@ -69,7 +69,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
                         year_stop = year_stop
                         )
 
-                    dated_function_name = f"formula_{year_start}"
+                    dated_function_name = f'formula_{year_start}'
                     log.debug('Creating fiscal category {} ({}-{}) with the following products {}'.format(
                         categorie_fiscale, year_start, year_stop, postes_coicop))
 
@@ -90,7 +90,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, categories_fiscale
         definitions_by_name = dict(
             value_type = float,
             entity = Menage,
-            label = "Dépenses hors taxe du poste_{0}".format(poste),
+            label = 'Dépenses hors taxe du poste_{0}'.format(poste),
             )
         definitions_by_name.update(functions_by_name)
         tax_benefit_system.add_variable(
@@ -106,8 +106,8 @@ def generate_postes_agreges_variables(tax_benefit_system, categories_fiscales = 
         codes_coicop = codes_coicop_data_frame.loc[
             codes_coicop_data_frame.code_coicop.str.startswith(num_prefix)
             ]['code_coicop'].drop_duplicates().tolist()
-        class_name = "poste_agrege_{}".format(num_prefix)
-        label = "Poste agrégé {}".format(num_prefix)
+        class_name = 'poste_agrege_{}'.format(num_prefix)
+        label = 'Poste agrégé {}'.format(num_prefix)
         log.debug('Creating variable {} with label {} using {}'.format(class_name, label, codes_coicop))
 
         # Trick to create a class with a dynamic name.

@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 
-"""
+'''
     Create yaml files for prix_carburants
-"""
+'''
 
 
 import os
 import pandas as pd
-import pkg_resources
 from ruamel import yaml
 
-
+from openfisca_france_indirect_taxation.location import openfisca_france_indirect_taxation_location
 from openfisca_france_indirect_taxation.utils import assets_directory
 
 
@@ -21,7 +20,7 @@ file_path = os.path.join(
     )
 
 output_file_path = os.path.join(
-    pkg_resources.get_distribution('openfisca-france-indirect-taxation').location,
+    openfisca_france_indirect_taxation_location,
     'openfisca_france_indirect_taxation',
     'parameters',
     'imposition_indirecte',
@@ -29,8 +28,8 @@ output_file_path = os.path.join(
     )
 
 df = pd.read_csv(file_path)
-date = df.Date.str.split("/", n = 1, expand = True)
-date[1] = date[1].where(date[1].str.len() == 2, "0" + date[1])
+date = df.Date.str.split('/', n = 1, expand = True)
+date[1] = date[1].where(date[1].str.len() == 2, '0' + date[1])
 date['date'] = date[0] + '-' + date[1] + '-01'
 df['date'] = date['date']
 df.drop(columns = ['Date'], inplace = True)

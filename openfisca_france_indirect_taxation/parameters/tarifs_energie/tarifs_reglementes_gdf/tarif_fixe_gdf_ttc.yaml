@@ -72,7 +72,7 @@ base_0_1000:
       value: 22.09
   metadata:
     ipp_csv_id: tarif_fixe_gdf_base_ttc
-    unit: currency-EUR
+    unit: currency
 b0_1000_6000:
   description: B0 (1000-6000)
   values:
@@ -138,7 +138,7 @@ b0_1000_6000:
       value: 33.17
   metadata:
     ipp_csv_id: tarif_fixe_gdf_b0_ttc
-    unit: currency-EUR
+    unit: currency
 b1_6_30000:
   description: B1 (6-30000)
   values:
@@ -212,7 +212,7 @@ b1_6_30000:
       value: 223.77
   metadata:
     ipp_csv_id: tarif_fixe_gdf_b1_ttc
-    unit: currency-EUR
+    unit: currency
 b2i_30000:
   description: B2I (>30000)
   values:
@@ -284,13 +284,13 @@ b2i_30000:
       value: null
   metadata:
     ipp_csv_id: tarif_fixe_gdf_b2i_ttc
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - base_0_1000
   - b0_1000_6000
   - b1_6_30000
   - b2i_30000
-  description_en: Fix fee regulated tariff GDF (including taxes)
+  label_en: Fix fee regulated tariff GDF (including taxes)
 documentation: |
   Source : base Pégase, prix pour un ménage, en euros TTC, données annuelles

@@ -143,7 +143,7 @@ def merge_vehicule_menage(year_data):
         carbu_cols = ['carbu1', 'carbu2', 'carbu3', 'carbu4', 'carbu5']
         data_bdf['carbu'] = data_bdf[carbu_cols].idxmax(axis=1).str.extract('(\d)').astype(int)
         data_bdf.drop(carbu_cols, axis = 1, inplace = True)
-    
+
     data_bdf['essence'] = 0
     data_bdf.loc[data_bdf['carbu'] == 1, 'essence'] = 1
     data_bdf['diesel'] = 0
@@ -159,9 +159,18 @@ def merge_vehicule_menage(year_data):
     data_entd['distance_autre_carbu'] = 0
     data_entd.loc[data_entd['autre_carbu'] == 1, 'distance_autre_carbu'] = data_entd['v1_km_annu']
 
-    # Df avec le nombre de véhicule et les distances pour chaque type de carburant (dans ENTD)
-    data_vehicule_entd = data_entd.groupby(by = 'ident_men')['essence',
-        'diesel', 'autre_carbu', 'distance_essence', 'distance_diesel', 'distance_autre_carbu'].sum()
+    # Df avec le nombre de véhicule et les distances pour chaque type de carburant
+    data_vehicule_entd = data_entd[
+        [
+            'essence',
+            'diesel',
+            'autre_carbu',
+            'distance_essence',
+            'distance_diesel',
+            'distance_autre_carbu',
+            'ident_men',
+            ]
+        ].groupby(by = 'ident_men').sum()
     data_vehicule_entd = data_vehicule_entd.reset_index()
 
     # Df avec les infos du véhicule principal (dans ENTD)
@@ -187,10 +196,25 @@ def merge_vehicule_menage(year_data):
     data_bdf['km_autre_carbu'] = 0
     data_bdf.loc[data_bdf['autre_carbu'] == 1, 'km_autre_carbu'] = data_bdf['km_auto']
 
+<<<<<<< HEAD
     # Df avec le nombre de véhicule et les distances pour chaque type de carburant (dans BdF)
     data_vehicule_bdf = data_bdf.groupby(by = 'ident_men')[
         'essence', 'diesel', 'autre_carbu', 'km_essence', 'km_diesel', 'km_autre_carbu'
         ].sum()
+=======
+    # Df avec le nombre de véhicule et les distances pour chaque type de carburant
+    data_vehicule_bdf = data_bdf[
+        [
+            'essence',
+            'diesel',
+            'autre_carbu',
+            'km_essence',
+            'km_diesel',
+            'km_autre_carbu',
+            'ident_men',
+            ]
+        ].groupby(by = 'ident_men').sum()
+>>>>>>> origin/cas-type
     data_vehicule_bdf = data_vehicule_bdf.reset_index()
 
     # Df avec les infos du véhicule principal (dans BdF)
@@ -243,5 +267,5 @@ def build_df_menages_vehicles(year_data):
     return data_entd, data_bdf
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     data_entd, data_bdf = build_df_menages_vehicles()

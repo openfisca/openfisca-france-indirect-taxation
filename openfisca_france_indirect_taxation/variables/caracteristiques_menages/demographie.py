@@ -19,7 +19,7 @@ class age(YearlyVariable):
 class agepr(YearlyVariable):
     value_type = int
     entity = Menage
-    label = "Age personne de référence"
+    label = 'Age personne de référence'
 
 
 class age_group_pr(YearlyVariable):
@@ -45,7 +45,7 @@ class age_group_pr(YearlyVariable):
 class birth(YearlyVariable):
     value_type = date
     entity = Individu
-    label = "Date de naissance"
+    label = 'Date de naissance'
 
 
 class nactifs(YearlyVariable):
@@ -73,10 +73,10 @@ class nenfants(YearlyVariable):
 class npers(YearlyVariable):
     value_type = int
     entity = Menage
-    label = "Nombre de personnes dans le ménage"
+    label = 'Nombre de personnes dans le ménage'
 
 
 class role_menage(YearlyVariable):
     value_type = int
     entity = Individu
-    label = "Rôle dans le ménage"
+    label = 'Rôle dans le ménage'

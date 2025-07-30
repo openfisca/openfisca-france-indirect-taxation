@@ -89,5 +89,5 @@ def merge_indiv_teg_menage(year_data):
     return data_entd, data_bdf
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     data_entd, data_bdf = merge_indiv_teg_menage()

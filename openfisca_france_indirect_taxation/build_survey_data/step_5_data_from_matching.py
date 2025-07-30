@@ -19,10 +19,10 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_4_1
 
 
 def check_load_config_ini():
-    """
+    '''
     Check that assets option of section openfisca_france_indirect_taxation is set in openfisca-survey-manager config.ini file
     since that file is used by R
-    """
+    '''
     config_parser = ConfigParser()
     config_ini = os.path.join(config_files_directory, 'config.ini')
     config_parser.read(config_ini)
@@ -30,19 +30,19 @@ def check_load_config_ini():
         pass
     else:
         modifiedTime = os.path.getmtime(config_ini)
-        timestamp = datetime.datetime.fromtimestamp(modifiedTime).strftime("%b-%d-%Y_%H.%M.%S")
-        os.rename(config_ini, config_ini + "_" + timestamp)
+        timestamp = datetime.datetime.fromtimestamp(modifiedTime).strftime('%b-%d-%Y_%H.%M.%S')
+        os.rename(config_ini, config_ini + '_' + timestamp)
         try:
-            config_parser.add_section("openfisca_france_indirect_taxation")
+            config_parser.add_section('openfisca_france_indirect_taxation')
 
         finally:
-            config_parser.set("openfisca_france_indirect_taxation", "assets", assets_directory)
+            config_parser.set('openfisca_france_indirect_taxation', 'assets', assets_directory)
             with open(config_ini, 'w') as configfile:
                 config_parser.write(configfile)
 
-    if platform.system() == 'Windows':
-        path_to_r_libs_user = os.path.normpath(config_parser.get("exe", "r_libs_user"))
-        path_to_rscript_exe = os.path.normpath(config_parser.get("exe", "Rscript"))
+    if platform.system == 'Windows':
+        path_to_r_libs_user = os.path.normpath(config_parser.get('exe', 'r_libs_user'))
+        path_to_rscript_exe = os.path.normpath(config_parser.get('exe', 'Rscript'))
     else:
         path_to_rscript_exe = 'Rscript'
         path_to_r_libs_user = None

@@ -4,13 +4,12 @@
 import numpy as np
 import os
 import pandas as pd
-import pkg_resources
-
 
 from slugify import slugify
 
-
 from openfisca_core.model_api import *  # noqa analysis:ignore
+
+from openfisca_france_indirect_taxation.location import openfisca_france_indirect_taxation_location
 from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable  # noqa analysis:ignore
 from openfisca_france_indirect_taxation.entities import Individu, Menage  # noqa analysis:ignore
 from openfisca_france_indirect_taxation.scripts.new_build_coicop_bdf import new_bdf
@@ -44,23 +43,23 @@ def get_tva(categorie_fiscale):
 
 
 def droit_d_accise(depense, droit_cn, consommation_cn, taux_plein_tva):
-    """
+    '''
     Calcule le montant de droit d'accise sur un volume de dépense payé pour le poste adéquat.
-    """
+    '''
     return depense * ((1 + taux_plein_tva) * droit_cn) / (consommation_cn - (1 + taux_plein_tva) * droit_cn)
 
 
 def taux_implicite(accise, tva, prix_ttc):
-    """Calcule le taux implicite sur les carburants : pttc = pht * (1+ti) * (1+tva), ici on obtient ti"""
+    '''Calcule le taux implicite sur les carburants : pttc = pht * (1+ti) * (1+tva), ici on obtient ti'''
     return (accise * (1 + tva)) / (prix_ttc - accise * (1 + tva))
 
 
 def tax_from_expense_including_tax(expense = None, tax_rate = None):
-    """Compute the tax amount form the expense including tax
+    '''Compute the tax amount form the expense including tax
 
     if depense_ttc = (1 + t) * depense_ht, it returns t * depense_ht
-    """
-    assert not np.isnan(tax_rate), "The tax rate should not be nan"
+    '''
+    assert not np.isnan(tax_rate), 'The tax rate should not be nan'
     return expense * tax_rate / (1 + tax_rate)
 
 
@@ -77,7 +76,7 @@ def insert_tva(categories_fiscales):
 
 def get_legislation_data_frames():
     legislation_directory = os.path.join(
-        pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+        openfisca_france_indirect_taxation_location,
         'openfisca_france_indirect_taxation',
         'assets',
         'legislation',
@@ -121,7 +120,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                 return sum(entity(
                     'poste_' + slugify(poste, separator = '_'), period_arg) for poste in postes_coicop
                     )
-            func.__name__ = f"formula_{year_start}"
+            func.__name__ = f'formula_{year_start}'
             return func
 
         else:
@@ -160,7 +159,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales 
                     )
                 return poste_agrege
 
-            func.__name__ = "formula"
+            func.__name__ = 'formula'
             return func
 
 
@@ -171,14 +170,14 @@ def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, yea
                 'depenses_ht_poste_' + slugify(poste, separator = '_'), period_arg) for poste in postes_coicop
                 )
 
-        func.__name__ = f"formula_{year_start}"
+        func.__name__ = f'formula_{year_start}'
         return func
 
     else:  # To deal with Reform emptying some fiscal categories
         def func(entity, period_arg):
             return 0
 
-    func.__name__ = f"formula_{year_start}".format(year_start = year_start)
+    func.__name__ = f'formula_{year_start}'.format(year_start = year_start)
     return func
 
 
@@ -199,5 +198,5 @@ def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, 
 
         return entity('poste_' + slugify(poste_coicop, separator = '_'), period_arg) / (1 + taux)
 
-    func.__name__ = f"formula_{year_start}"
+    func.__name__ = f'formula_{year_start}'
     return func

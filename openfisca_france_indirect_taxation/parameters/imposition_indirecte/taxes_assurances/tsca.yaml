@@ -225,14 +225,14 @@ metadata:
     1994-09-02:
       title: Loi 2001-1246 du 21/12/2001 (LFSS pour 2002)
       href: https://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000396224
-  date_parution_jo:
+  official_journal_date:
     2016-01-01: 2014-12-24
     2015-01-01: 2014-12-30
     2014-01-01: 2013-12-24
     2011-10-01: 2011-09-20
     2011-01-01: 2010-12-30
     1994-09-02: 2001-12-26
-  description_en: Taxes on insurance contracts
+  label_en: Taxes on insurance contracts
 documentation: |
   Notes :
   Déductions pour les véhicules de plus de 3,5 tonnes

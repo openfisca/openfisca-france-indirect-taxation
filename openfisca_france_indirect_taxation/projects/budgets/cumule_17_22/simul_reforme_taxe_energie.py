@@ -16,10 +16,10 @@ from matplotlib import pyplot as plt
 log = logging.getLogger(__name__)
 
 
-ident_men = pd.DataFrame(pd.HDFStore("C:/Users/c.lallemand/data_taxation_indirecte/data_collections/output/openfisca_indirect_taxation_data_2017.h5")['input']['ident_men'])
+ident_men = pd.DataFrame(pd.HDFStore('C:/Users/c.lallemand/data_taxation_indirecte/data_collections/output/openfisca_indirect_taxation_data_2017.h5')['input']['ident_men'])
 ident_men['ident_men'] = ident_men.ident_men.astype(numpy.int64)
 
-path = "Q:/Evaluation du budget/PLF2022/donnees_relance_note_mars_2022/fiscalite_indirecte"
+path = 'Q:/Evaluation du budget/PLF2022/donnees_relance_note_mars_2022/fiscalite_indirecte'
 elasticite = True
 replique_gouv = True
 
@@ -66,7 +66,7 @@ def simulate_reformes_energie(graph = True, replique_gouv = replique_gouv, elast
         ]
 
     baseline_tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
-    asof(baseline_tax_benefit_system, "2017-12-31")
+    asof(baseline_tax_benefit_system, '2017-12-31')
     if elasticite:
         survey_scenario = SurveyScenario.create(
             elasticities = elasticities,
@@ -135,7 +135,7 @@ def simulate_reformes_energie(graph = True, replique_gouv = replique_gouv, elast
     return df
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     import sys
     logging.basicConfig(level = logging.INFO, stream = sys.stdout)
     df = simulate_reformes_energie(replique_gouv = replique_gouv, elasticite = elasticite, graph = True)

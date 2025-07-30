@@ -1,0 +1,15 @@
+description: Taux normal ou majoré temporaire
+values:
+  1990-01-01:
+    value:
+  1989-09-08:
+    value: 0.28
+  1989-01-01:
+    value:
+  1987-09-17:
+    value: 0.28
+  1954-07-01:
+    value:
+metadata:
+  ipp_csv_id: tx_majtempo
+  unit: /1

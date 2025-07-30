@@ -82,7 +82,7 @@ prix_kwh_base_ttc:
       value: 0.0537
   metadata:
     ipp_csv_id: prix_unitaire_gdf_base_ttc
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b0_ttc:
   description: Prix kWh B0 - TTC
   values:
@@ -166,7 +166,7 @@ prix_kwh_b0_ttc:
       value: 0.0438
   metadata:
     ipp_csv_id: prix_unitaire_gdf_b0_ttc
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b1_ttc:
   description: Prix kWh B1 - TTC
   values:
@@ -248,7 +248,7 @@ prix_kwh_b1_ttc:
       value: 0.0315
   metadata:
     ipp_csv_id: prix_unitaire_gdf_b1_ttc
-    unit: currency-EUR
+    unit: currency
 prix_kwh_b2i_ttc:
   description: Prix kWh B2I - TTC
   values:
@@ -330,16 +330,16 @@ prix_kwh_b2i_ttc:
       value: null
   metadata:
     ipp_csv_id: prix_unitaire_gdf_b2i_ttc
-    unit: currency-EUR
+    unit: currency
 metadata:
   order:
   - prix_kwh_base_ttc
   - prix_kwh_b0_ttc
   - prix_kwh_b1_ttc
   - prix_kwh_b2i_ttc
-  description_en: Unitary price regulated tariff GDF (including taxes)
+  label_en: Unitary price regulated tariff GDF (including taxes)
 documentation: |
-  Source : 
+  Source :
     jusqu'à 2013 base Pégase, prix pour un ménage, en euros TTC, données annuelles
     depuis 2013, CRE "https://www.cre.fr/Pages-annexes/open-data"
     Pour les données à partir de 2013 pour les contrats B1 et B2I, les valeurs correspondent à celles en zone 1

@@ -15,14 +15,14 @@ from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimati
 
 
 # Import d'une nouvelle palette de couleurs
-seaborn.set_palette(seaborn.color_palette("Set2", 12))
+seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 
 def test(display_plot = False):
     # inflators_by_year = get_inflators_by_year()
     # Liste des coicop agrégées en 12 postes
     postes_agreges = ['poste_agrege_{}'.format(index) for index in
-        ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12"]
+        ['0{}'.format(i) for i in range(1, 10)] + ['10', '11', '12']
         ]
     year = 2011
     elasticities = get_elasticities(year)
