@@ -69,7 +69,7 @@ adjust_to_cn_nomenclature = {
     '09.3.4.1' : '09.3.2.2' , #Aliments autres animaux
     '09.4.1.1' : '09.4.2.2' , #Services sportifs et récréatifs (spectacles sportifs, participation loisirs, location matériel, cours et cotisations de loisirs, abonnement jeu vidéo... )
     '09.4.2.1' : '09.6.1.1' , #Cinémas, théâtres, salles de concert
-    '09.4.2.2' : '09.6.2.1' , #Musées, jardins zoologiques et similaires
+    '09.4.2.2' : '09.6.1.2' , #Musées, jardins zoologiques et similaires
     '09.4.2.3' : '09.6.9.1' , #Services de télévision et de radiodiffusion (location, redevance, abonnement)
     '09.4.2.4' : '09.6.3.1' , #Smartbox et autres services de loisirs (animateurs, photographes, services pour animaux)
     '09.4.3.1' : '09.4.7.1' , #Jeux de hasard (loto, tiercé ...)

@@ -4,6 +4,7 @@ import csv
 
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
+from openfisca_france_indirect_taxation.projects.TVA_Herve_IPP.Correction_territoriale import get_correction_territoriale
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
@@ -139,14 +140,17 @@ def new_get_cn_aggregates(target_year) :
     masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == 'poste_06','{}'.format(target_year)] = part_menages * masses_cn_data_frame.loc[masses_cn_data_frame['Code'] == 'poste_06','{}'.format(target_year)]
     liste_postes_cn = remove_prefixes(masses_cn_data_frame['Code'].tolist())
     
-    liste_13postes = ["poste_0{}".format(i) for i in range(1, 10)] + ["poste_10", "poste_11", "poste_12", "poste_13",'"poste_16']
+    liste_13postes = ["poste_0{}".format(i) for i in range(1, 10)] + ["poste_10", "poste_11", "poste_12", "poste_13"]
     liste_postes_cn = [element for element in liste_postes_cn if element[:8] in liste_13postes]
-
-    # Correction territoriale
-    
     masses_cn_postes_data_frame = masses_cn_data_frame.loc[masses_cn_data_frame['Code'].isin(liste_postes_cn)]
     masses_cn_postes_data_frame.set_index('Code', inplace = True)
-    masses_cn_postes_data_frame.rename(columns= {'{}'.format(target_year): 'conso_CN_{}'.format(target_year)}, inplace= True)
+
+    # Correction territoriale 
+    correction_territoriale = get_correction_territoriale(2022,masses_cn_postes_data_frame, liste_postes_cn)
+    masses_cn_postes_data_frame = masses_cn_postes_data_frame.merge(correction_territoriale.groupby(by = 'Code').sum(), 'left', left_index= True, right_index= True)
+    masses_cn_postes_data_frame['{} corrigé'.format(target_year)] = masses_cn_postes_data_frame['{}'.format(target_year)] + masses_cn_postes_data_frame['Solde territorial'].fillna(0)
+
+    masses_cn_postes_data_frame.rename(columns= {'{} corrigé'.format(target_year): 'conso_CN_{}'.format(target_year)}, inplace= True)
 
     # Revenus (à modifier pour utiliser l'ERFS)
     parametres_fiscalite_file_path = os.path.join(
