@@ -9,10 +9,12 @@ from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
 ''' Données sources utilisées : 
-    - Consommation des ménages en 2023 (base 2020) : https://www.insee.fr/fr/statistiques/fichier/8068592/T_CONSO_EFF_FONCTION.xlsx 
+    - Consommation des ménages en 2023 (base 2020) : https://www.insee.fr/fr/statistiques/fichier/8068592/T_CONSO_EFF_FONCTION.xlsx
+    - Comptes trimestriels pour l'année 2024 (base 2020) : (conso) https://www.insee.fr/fr/statistiques/fichier/8358378/t_conso_val.xls 
+    - Compte de la santé 2024 : https://drees.solidarites-sante.gouv.fr/sites/default/files/2024-12/CNS2024%20-%20Vue%20d%27ensemble.xlsx
+    - Compte satellite du tourisme : https://www.insee.fr/fr/statistiques/fichier/2015846/sect-tour-conso-int.zip 
     - Revenu disponible des ménages en 2023 (base 2020) :  https://www.insee.fr/fr/statistiques/fichier/8068630/T_2101.xlsx
-    - Comptes trimestriels pour l'année 2024 (base 2020) : https://www.insee.fr/fr/statistiques/fichier/8358378/t_conso_val.xls
-        https://www.insee.fr/fr/statistiques/fichier/8358386/t_men_val.xls
+    - Comptes trimestriels pour l'année 2024 (base 2020) : (revenus) https://www.insee.fr/fr/statistiques/fichier/8358386/t_men_val.xls
     '''
     
 def new_get_bdf_aggregates(data_year = None):
@@ -151,27 +153,8 @@ def new_get_cn_aggregates(target_year) :
     masses_cn_postes_data_frame['{} corrigé'.format(target_year)] = masses_cn_postes_data_frame['{}'.format(target_year)] + masses_cn_postes_data_frame['Solde territorial'].fillna(0)
 
     masses_cn_postes_data_frame.rename(columns= {'{} corrigé'.format(target_year): 'conso_CN_{}'.format(target_year)}, inplace= True)
-
-    # Revenus (à modifier pour utiliser l'ERFS)
-    parametres_fiscalite_file_path = os.path.join(
-        assets_directory,
-        'legislation',
-        'T_2101_2023.xls'
-        )
-    revenus_cn = pd.read_excel(parametres_fiscalite_file_path, sheet_name = "T_2101", header = 4)
-    revenus_cn.rename(columns={'Unnamed: 0' : 'Code' , 'Unnamed: 1' : 'Label'}, inplace = True)
-    revenus_cn = revenus_cn.loc[revenus_cn['Label'] == 'Revenu disponible brut']
-    revenus_cn  = revenus_cn.loc[revenus_cn['2017'] > 1000] # On enlève la ligne "Evolution en (%)"
-    revenus_cn.replace({'B6G' : 'rev_disp_yc_loyerimpute'}, inplace= True)
-    revenus_cn = revenus_cn[['Code','{}'.format(target_year)]]
-    revenus_cn.loc[:,'{}'.format(target_year)] = revenus_cn.loc[:,'{}'.format(target_year)] * 1e3
-    revenus_cn.set_index('Code', inplace = True)
-    revenus_cn.rename(columns= {'{}'.format(target_year): 'conso_CN_{}'.format(target_year)}, inplace= True)
-    
-    masses_cn_postes_data_frame = masses_cn_postes_data_frame.append(revenus_cn)
     masses_cn_postes_data_frame.rename({'poste_04_2' : 'loyer_impute'}, inplace = True)
-    masses_cn_postes_data_frame.loc['rev_disponible'] = masses_cn_postes_data_frame.loc['rev_disp_yc_loyerimpute'] - masses_cn_postes_data_frame.loc['loyer_impute']
-       
+    
     return masses_cn_postes_data_frame*1e6
 
 def new_get_inflators_bdf_to_cn(data_year):
@@ -211,7 +194,7 @@ def new_get_inflators_cn_to_cn(target_year, data_year):
     
 def new_get_inflators(target_year,data_year):
     '''
-    Fonction qui calcule les ratios de calage (bdf sur cn pour année de données) et de vieillissement
+    Calcule les ratios de calage (bdf sur cn pour année de données) et de vieillissement
     à partir des masses de comptabilité nationale et des masses de consommation de bdf.
     '''
     inflators_bdf_to_cn = new_get_inflators_bdf_to_cn(data_year)
@@ -221,7 +204,7 @@ def new_get_inflators(target_year,data_year):
     liste_variables = list(tax_benefit_system.variables.keys())
     ratio_by_variable = dict()
     for element in liste_variables:
-        if element[:6] == 'poste_' or element[:8] == 'rev_disp' or element == 'loyer_impute':
+        if element[:6] == 'poste_' or element in ['loyer_impute']:
             for key in list(inflators_cn_to_cn.keys()):
                 if key in list(inflators_bdf_to_cn.keys()):
                     if key in element:
@@ -246,16 +229,16 @@ def get_inflators_cn_23_to_24():
         inflator_conso = total_2024 / total_2023
         
         # Revenus
-        comptes_trim = pd.read_excel(os.path.join(comptes_trimestriels_folder_path,'t_men_val.xls'), sheet_name = "Niveaux", header = 4)
-        comptes_trim.columns = comptes_trim.columns.str.strip()
-        comptes_trim = comptes_trim[['Unnamed: 0', 'Revenu disponible brut']]
-        comptes_trim.rename(columns= {'Unnamed: 0' : 'Trimestre'}, inplace = True)
-        comptes_trim.dropna(axis = 0, inplace = True)
-        total_2024 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2024') ,'Revenu disponible brut'].sum()
-        total_2023 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2023') ,'Revenu disponible brut'].sum()
-        inflator_revenu = total_2024 / total_2023
+        # comptes_trim = pd.read_excel(os.path.join(comptes_trimestriels_folder_path,'t_men_val.xls'), sheet_name = "Niveaux", header = 4)
+        # comptes_trim.columns = comptes_trim.columns.str.strip()
+        # comptes_trim = comptes_trim[['Unnamed: 0', 'Revenu disponible brut']]
+        # comptes_trim.rename(columns= {'Unnamed: 0' : 'Trimestre'}, inplace = True)
+        # comptes_trim.dropna(axis = 0, inplace = True)
+        # total_2024 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2024') ,'Revenu disponible brut'].sum()
+        # total_2023 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2023') ,'Revenu disponible brut'].sum()
+        # inflator_revenu = total_2024 / total_2023
         
-        return inflator_conso, inflator_revenu
+        return inflator_conso
     
 def new_get_inflators_by_year(rebuild = False, year_range = None, data_year = None):
     ''' Récupère les inflateurs pour le veillissement pour toutes les années voulues.'''
@@ -270,9 +253,9 @@ def new_get_inflators_by_year(rebuild = False, year_range = None, data_year = No
                 inflators_by_year[target_year] = inflators
             else:
                 inflators = new_get_inflators(target_year = 2023, data_year = data_year)
-                inflator_conso, inflator_revenu = get_inflators_cn_23_to_24()
+                inflator_conso = get_inflators_cn_23_to_24()
                 inflators_2024 = {
-                    key : value * inflator_revenu if key in [''] else value * inflator_conso 
+                    key : value * inflator_conso 
                     for key, value in inflators.items()
                     }
                 inflators_by_year[target_year] = inflators_2024

@@ -3,6 +3,11 @@ import pandas as pd
 import os
 from openfisca_france_indirect_taxation.utils import assets_directory
 
+''' Données sources utilisées :
+    - Compte satellite du tourisme : https://www.insee.fr/fr/statistiques/fichier/2015846/sect-tour-conso-int.zip 
+    - Le fichier Consommation_touristique_2010_2018.xlsx a été assemblée à partir du tableau 3 de la note (https://www.entreprises.gouv.fr/la-dge/publications/en-france-la-consommation-touristique-interieure-est-stable-en-2016)
+    et du tableaua 4 de la note (https://www.entreprises.gouv.fr/files/files/Publications/2019/4-pages-dge/croissance-de-la-consommation-touristique-4-pages-dec-2019.pdf)
+'''
 def split_aggregated_poste(df, to_split, new_postes):
     ''' Ventile les postes agrégés en sous-postes en utilisant d'autres données sur la consommation touristique.'''
     

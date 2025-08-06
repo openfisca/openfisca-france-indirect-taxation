@@ -10,7 +10,7 @@ import numpy as np
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_1_build_dataframes import \
     load_data_bdf_enl
 from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
-from openfisca_france_indirect_taxation.projects.TVA_Herve_IPP.new_calage_bdf_cn import new_get_inflators
+from openfisca_france_indirect_taxation.projects.TVA_Herve_IPP.Calage_consommation_bdf import new_get_inflators
 
 def inflate_energy_consumption(data_enl, data_bdf):
     inflators = get_inflators_by_year_energy()  # Inflate BdF to year of the ENL, 2013

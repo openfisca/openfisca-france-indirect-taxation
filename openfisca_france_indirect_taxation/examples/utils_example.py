@@ -84,12 +84,12 @@ def simulate_df_calee_on_ticpe(simulated_variables, year):
         )
 
 
-def wavg(groupe, var):
+def wavg(groupe, var, weights):
     '''
     Fonction qui calcule la moyenne pondérée par groupe d'une variable
     '''
     d = groupe[var]
-    w = groupe['pondmen']
+    w = groupe[weights]
     return (d * w).sum() / w.sum()
 
 
@@ -173,12 +173,12 @@ def cheque_vert(data_reference, data_reforme, reforme):
     return data_reforme
 
 
-def collapse(dataframe, groupe, var):
+def collapse(dataframe, groupe, var, weights):
     '''
     Pour une variable, fonction qui calcule la moyenne pondérée au sein de chaque groupe.
     '''
     grouped = dataframe.groupby([groupe])
-    var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x, var = var))
+    var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x, var = var, weights = weights))
     return var_weighted_grouped
 
 
@@ -230,13 +230,13 @@ def dataframe_by_group(
     return df_reform
 
 
-def df_weighted_average_grouped(dataframe, groupe, varlist):
+def df_weighted_average_grouped(dataframe, groupe, varlist, weights):
     '''
     Agrège les résultats de weighted_average_grouped() en une unique dataframe pour la liste de variable 'varlist'.
     '''
     return DataFrame(
         dict([
-            (var, collapse(dataframe, groupe, var)) for var in varlist
+            (var, collapse(dataframe, groupe, var, weights = weights)) for var in varlist
             ])
         )
 
