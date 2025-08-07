@@ -2,6 +2,9 @@
 
 [Présentation](presentation.md)
 
+## Installation
+[Installation](Install_openfisca-france-indirect-taxation.md)
+
 ## Données
 
 ### Données sources 
@@ -22,5 +25,3 @@
 4. [Survey Scenario](Simulations/Survey_scenario.md)
 5. [Exemple d'utilisation](Simulations/Exemple_utilisation.md)
 
-## Installation
-[Installation](Install_openfisca-france-indirect-taxation.md)

@@ -149,7 +149,7 @@ L'argument `reform = augmente_tous_les_taux` définit implicitement le système 
 
 Pour chaque taux de TVA, une variable `depenses_ht_tva_taux_...` est calculée en somme toutes les variables `depense_ht_poste_...` de tous les postes soumis au taux en question.
 Pour chacun des postes, une variable `depense_ht_poste_` est calculée en retirant la TVA aux dépenses TTC, à l'aide de la fonction `generate_depenses_ht_postes_variables()`.<br>
-Il est important de noter que le SurveyScenario utilise les paramètres définis dans le système socio-fiscal (de base ou réformé) pour effectuer ce calcul. Ainsi, **un système dont on a changé les taux de TVA prend en compte ces nouveaux taux pour calculer les dépenses hor-taxes, ce qui abouti à avoir des dépenses hors-taxes différentes entre la baseline et le système réformé.**
+Il est important de noter que le SurveyScenario utilise les paramètres définis dans le système socio-fiscal (de base ou réformé) pour effectuer ce calcul. Ainsi, **un système dont on a changé les taux de TVA prend en compte ces nouveaux taux pour calculer les dépenses hor-taxes, ce qui aboutit à avoir des dépenses hors-taxes différentes entre la baseline et le système réformé.**
 
 ## Mesurer les effets d'une réforme 
 
