@@ -1,7 +1,5 @@
 # Sommaire
 
-[Présentation](presentation.md)
-
 ## Installation
 [Installation](Install_openfisca-france-indirect-taxation.md)
 

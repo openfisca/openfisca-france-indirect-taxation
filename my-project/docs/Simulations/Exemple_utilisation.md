@@ -5,7 +5,8 @@ Ce document donne des exemples d'utilisation, centrés sur la TVA, qui couvrent 
 ```
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.projects.TVA_Herve_IPP.new_calage_bdf_cn import new_get_inflators_by_year
+from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators_by_year
+from openfisca_france_indirect_taxation.Calage_revenus_bdf import calage_bdf_niveau_vie
 
 data_year = 2017
 year = 2024
@@ -14,11 +15,30 @@ inflators_by_year = new_get_inflators_by_year(rebuild = False, year_range = rang
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 ```
 
-La première étape de la simulation consiste à choisir le système socio-fiscal (`tax_benefit_system`) que l'on souhaite utiliser. On récupère celui défini par `FranceIndirectTaxationBenefitSystem()` que l'on a importé au préalable. On crée également le dictionnaire à utiliser pour caler/viellir les données (`inflation_kwargs`). 
+La première étape de la simulation consiste à choisir le système socio-fiscal (`tax_benefit_system`) que l'on souhaite utiliser. On récupère celui défini par `FranceIndirectTaxationBenefitSystem()` que l'on a importé au préalable. On crée également le dictionnaire à utiliser dans la simulation pour caler/viellir les données de consommation (`inflation_kwargs`). Pour caler/veillir les revenus (et niveaux de vie), il y a deux possibilités :
+
+**Option 1: Utiliser une source externe (ici TaxIPP).**
+On utilise une dataframe qui donne les niveaux de vie moyen par dixième dans TaxIPP pour l'année de simulation(ici 2024). La dataframe est indexée par 'decile_indiv_niveau_vie' et contient une colonne 'niveau_de_vie'.
+```
+input_bdf = get_input_data_frame(2017)
+input_bdf = input_bdf.loc[input_bdf['rev_disponible'] > 0]
+input_bdf , df_calage = calage_bdf_niveau_vie(input_bdf, decile_taxipp)
+```
+
+**Option 2: Utiliser l'ERFS.**
+On appelle une fonction qui crée directement la dataframe souhaitée à partir des données de l'ERFS. Le reste est indentique.
+```
+input_bdf = get_input_data_frame(2017)
+input_bdf = input_bdf.loc[input_bdf['rev_disponible'] > 0]
+erfs_path = 'C:/Users/veve1/OneDrive/Documents/ENSAE 3A/Memoire MiE/Data/erfs_fpr/2017/csv' 
+decile_erfs = compute_erfs_decile(2017,erfs_path)
+input_bdf , df_calage = calage_bdf_niveau_vie(input_bdf, decile_erfs)
+```
 
 Une fois défini le `tax_benefit_system`, on peut faire tourner le code suivant, qui crée l'objet que l'on appelle `survey_scenario`:
 ```
 survey_scenario = SurveyScenario.create(
+    input_data_frame = input_bdf,
     inflation_kwargs =  inflation_kwargs,
     baseline_tax_benefit_system = tax_benefit_system,
     year = year,
