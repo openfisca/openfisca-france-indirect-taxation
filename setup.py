@@ -57,6 +57,7 @@ setup(
         'OpenFisca-Core >= 43, < 44',
         'pandas >= 2.0.3, < 3.0',
         'python-slugify >= 8.0.1, < 9.0',
+        'importlib >= 1.0.4, <2.0',
         ],
     packages = find_namespace_packages(),
     )

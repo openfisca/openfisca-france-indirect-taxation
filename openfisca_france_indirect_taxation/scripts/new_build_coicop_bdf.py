@@ -1,11 +1,10 @@
 import pandas as pd
 import os 
-import pkg_resources
+import importlib
 
-assets_directory = os.path.join(
-    pkg_resources.get_distribution('openfisca_france_indirect_taxation').location,
+assets_directory = importlib.resources.path('openfisca_france_indirect_taxation',os.path.join(
     'openfisca_france_indirect_taxation',
-    'assets',
+    'assets')
 )
 
 def new_guess_coicop_from_bdf(year):
