@@ -1,11 +1,8 @@
 import pandas as pd
-import os 
+import os
 import importlib
 
-assets_directory = importlib.resources.path('openfisca_france_indirect_taxation',os.path.join(
-    'openfisca_france_indirect_taxation',
-    'assets')
-)
+from openfisca_france_indirect_taxation.utils import assets_directory
 
 def new_guess_coicop_from_bdf(year):
     file_path = os.path.join(
@@ -15,7 +12,7 @@ def new_guess_coicop_from_bdf(year):
         )
 
     table_bdf = pd.read_excel(file_path, skiprows=3)
-    
+
     table_bdf.drop('Code sur\n2, 3, 4 positions', axis = 1,  inplace = True)
     table_bdf.rename(columns= {"Code sur 5 positions" : 'code_bdf' , 'Rubriques' : 'Label'}, inplace = True)
     table_bdf.dropna(axis = 0, inplace = True)
@@ -45,7 +42,7 @@ adjust_to_cn_nomenclature = {
     '05.5.1.3' : '05.5.3.1' , #Réparation du gros outillage
     '05.5.2.3' : '05.5.3.2' , #Réparation des petits outillages
     '08.1.1.1' : '07.4.1.1' , #Services postaux
-    '07.3.6.1' : '07.4.9.1' , #Autres services de transports 
+    '07.3.6.1' : '07.4.9.1' , #Autres services de transports
     '07.4.1.1' : '07.5.1.1' , #Autres dépenses de transport : cérémonie, séjours hors domicile, personnes vivant hors du domicile au moins un jour par semaine
     '07.4.1.2' : '07.5.1.2' , #Autres dépenses de transport : cadeau offert (à destination d’un autre ménage)
     '08.1.3.1' : '08.3.1.1' , #Services de téléphone, internet, recharges téléphoniques
@@ -122,5 +119,5 @@ def new_bdf(year = 2017):
     bdf_to_cn_dataframe = pd.DataFrame(list(adjust_to_cn_nomenclature.items()), columns = ['formatted_code_bdf' , 'code_coicop'])
     coicop_table_bdf = coicop_table_bdf.merge(bdf_to_cn_dataframe, on = 'formatted_code_bdf', how ='outer')
     coicop_table_bdf['code_coicop'].fillna(coicop_table_bdf['formatted_code_bdf'], inplace = True)
-    
+
     return(coicop_table_bdf)

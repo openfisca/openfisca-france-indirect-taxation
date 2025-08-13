@@ -70,7 +70,7 @@ def get_cn_aggregates(target_year = None):
         masses_cn_12postes_data_frame['poste'] = \
             masses_cn_12postes_data_frame['poste'].replace(element, 'coicop12_{}'.format(element))
     masses_cn_12postes_data_frame.set_index('poste', inplace = True)
-    return masses_cn_12postes_data_frame * 1e6
+    return masses_cn_12postes_data_frame * int(1e6)
 
 
 def get_inflators_bdf_to_cn(data_year):
