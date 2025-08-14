@@ -9,25 +9,7 @@ import numpy as np
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_1_build_dataframes import \
     load_data_bdf_enl
-from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
 from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators
-
-def inflate_energy_consumption(data_enl, data_bdf):
-    inflators = get_inflators_by_year_energy()  # Inflate BdF to year of the ENL, 2013
-    inflators_bdf = inflators[2013]
-    inflators_enl = dict()
-    inflators_bdf['depenses_gaz_liquefie'] = inflators_bdf['depenses_gaz_ville']
-    for energie in ['depenses_electricite', 'depenses_gaz_ville', 'depenses_gaz_liquefie',
-            'depenses_combustibles_liquides', 'depenses_combustibles_solides']:
-        data_bdf[energie] = data_bdf[energie] * inflators_bdf[energie]
-        inflators_enl[energie] = (
-            (data_bdf.pondmen * data_bdf[energie]).sum() / data_bdf.pondmen.sum()
-            ) / (
-            (data_enl.pondmen * data_enl[energie]).sum() / data_bdf.pondmen.sum()
-            )
-        data_enl[energie] = data_enl[energie] * inflators_enl[energie]
-
-    return data_enl, data_bdf
 
 def new_inflate_energy_consumption(data_enl, data_bdf):
     inflators = new_get_inflators(2013,2017)  # Inflate BdF to year of the ENL, 2013

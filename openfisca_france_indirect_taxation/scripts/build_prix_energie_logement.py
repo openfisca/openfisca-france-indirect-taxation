@@ -7,7 +7,7 @@ import numpy
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
+from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators
 from openfisca_france_indirect_taxation.utils import assets_directory
 
 
@@ -18,7 +18,7 @@ simulated_variables = [
     ]
 
 for year in [2017]:
-    inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020), data_year = year)
+    inflators_by_year = new_get_inflators(2011, 2020)
     elasticities = get_elasticities(year)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 
