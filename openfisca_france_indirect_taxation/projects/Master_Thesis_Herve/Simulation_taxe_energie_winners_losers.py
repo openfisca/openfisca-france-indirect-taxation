@@ -18,7 +18,8 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
     df_weighted_average_grouped)
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import add_niveau_vie_decile
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators
+from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators_by_year
+from openfisca_france_indirect_taxation.Calage_revenus_bdf import calage_bdf_niveau_vie
 from openfisca_france_indirect_taxation.projects.Master_Thesis_Herve.Reform_carbon_tax import carbon_tax_rv
 from openfisca_france_indirect_taxation.projects.Master_Thesis_Herve.Elasticities import add_ext_margin_elasticities
 
@@ -39,9 +40,9 @@ def simulate_reformes_energie(elas_ext_margin, elas_vect, elasticites, year, ref
     ident_men = add_niveau_vie_decile(ident_men)
 
     data_year = 2017
-    inflators_by_year = new_get_inflators(2011, 2020)
-
-
+    inflators_by_year = new_get_inflators_by_year(rebuild = True, year_range = range(2011, 2020), data_year = data_year)
+    
+    
     if elas_ext_margin == True:
         # on rajoute une elasticité à la marge extensive
         ident_men = add_ext_margin_elasticities(ident_men)
