@@ -1,5 +1,6 @@
 suppressPackageStartupMessages(library("configr"))
 suppressPackageStartupMessages(library("StatMatch"))
+library(dplyr)
 
 config <- read.config(file = "C:/Users/veve1/.config/openfisca-survey-manager/config.ini")
 assets_directory = config$openfisca_france_indirect_taxation$assets
@@ -8,10 +9,21 @@ assets_directory = config$openfisca_france_indirect_taxation$assets
 data_entd <- read.csv(file = file.path(assets_directory, "/matching/matching_entd/data_matching_entd.csv"), header = -1, sep=",")
 data_bdf <- read.csv(file = file.path(assets_directory, "/matching/matching_entd/data_matching_bdf.csv"), header = -1, sep=",")
 
-data_bdf$agepr = round(as.numeric(data_bdf$agepr), digits = 2)
-data_bdf$npers = round(as.numeric(data_bdf$npers), digits = 2)
-data_bdf$nactifs = round(as.numeric(data_bdf$nactifs), digits = 2)
+vars <- c("nb_diesel", "agepr", "age_vehicule", "rural", "paris", 
+          "npers", "nactifs", "veh_tot")
 
+# Coerce to numeric in both datasets
+num_vars <- c("nb_diesel", "agepr", "age_vehicule", "npers", "nactifs", "veh_tot")
+cat_vars <- c("rural", "paris")
+
+# Recast in both datasets
+data_bdf <- data_bdf %>%
+  mutate(across(all_of(num_vars), as.numeric)) %>%
+  mutate(across(all_of(cat_vars), as.factor))
+
+data_entd <- data_entd %>%
+  mutate(across(all_of(num_vars), as.numeric)) %>%
+  mutate(across(all_of(cat_vars), as.factor))
 
 # Compute random matching
 out.nnd <- NND.hotdeck(
@@ -27,10 +39,7 @@ fused.nnd.m <- create.fused(
   data.rec = data_bdf, 
   data.don = data_entd,
   mtc.ids = out.nnd$mtc.ids,
-  z.vars = c("distance", "distance_autre_carbu", "distance_diesel", "distance_essence",
-             "age_carte_grise", "age_vehicule", "distance_routiere_hebdomadaire_teg",
-             "duree_moyenne_trajet_aller_retour_teg", "mode_principal_deplacement_teg", "vp_deplacements_pro",
-             "vp_domicile_travail")
+  z.vars = c("distance", "distance_autre_carbu", "distance_diesel", "distance_essence", "age_vehicule")
 )
 
 # Save it as csv

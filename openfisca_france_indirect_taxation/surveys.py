@@ -4,7 +4,7 @@
 import logging
 import numpy
 
-from openfisca_survey_manager.scenarios.abstract_scenario import AbstractSurveyScenario
+from openfisca_survey_manager.scenarios import AbstractSurveyScenario
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 

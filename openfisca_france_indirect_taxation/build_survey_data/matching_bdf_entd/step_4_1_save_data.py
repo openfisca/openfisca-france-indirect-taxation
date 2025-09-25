@@ -6,6 +6,7 @@
 
 
 import os
+import pandas as pd
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
@@ -23,14 +24,14 @@ def create_donation_classes(year_data):
     data_entd, data_bdf = clean_data(year_data)
 
     def create_donation_classes_(data):
-        # Classes based on niveau_vie_decile and aides_logement
-        data['donation_class_1'] = 0
-        for i in range(1, 11):
-            if i < 5:
-                for j in [0, 1]:
-                    data.loc[(data['aides_logement'] == j) & (data['niveau_vie_decile'] == i), 'donation_class_1'] = '{}_{}'.format(i, j)
-            else:
-                data.loc[data['niveau_vie_decile'] == i, 'donation_class_1'] = '{}'.format(i)
+        # Classes based on niveau_vie_decile and aides_logement (oas possible avec EMP 2019)
+        # data['donation_class_1'] = 0
+        # for i in range(1, 11):
+        #     if i < 5:
+        #         for j in [0, 1]:
+        #             data.loc[(data['aides_logement'] == j) & (data['niveau_vie_decile'] == i), 'donation_class_1'] = '{}_{}'.format(i, j)
+        #     else:
+        #         data.loc[data['niveau_vie_decile'] == i, 'donation_class_1'] = '{}'.format(i)
 
         # Classes based on niveau_vie_decile and rural
         data['donation_class_3'] = 0
@@ -71,3 +72,4 @@ def prepare_bdf_entd_matching_data(year_data):
         )
     data_entd.to_csv(os.path.join(matching_entd_directory, 'data_matching_entd.csv'), sep = ',')
     data_bdf.to_csv(os.path.join(matching_entd_directory, 'data_matching_bdf.csv'), sep = ',')
+    

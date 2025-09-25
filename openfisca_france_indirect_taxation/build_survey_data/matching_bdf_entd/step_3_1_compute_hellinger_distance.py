@@ -16,7 +16,48 @@ from openfisca_france_indirect_taxation.build_survey_data.utils import \
 
 data_entd, data_bdf = create_niveau_vie_quantiles(year_data = 2017 )
 
+def hellinger_variable(df1, df2, var, weight_col="pondmen"):
+    """
+    Compute Hellinger distance between two weighted distributions of a variable.
+    
+    Parameters
+    ----------
+    df1 : pd.DataFrame
+        First dataset.
+    df2 : pd.DataFrame
+        Second dataset.
+    var : str
+        Variable name to compare (categorical or numeric).
+    weight_col : str
+        Column name for weights (default: 'pondmen').
+    
+    Returns
+    -------
+    float
+        Hellinger distance between distributions of `var` in df1 and df2.
+    """
+    # Ensure numeric if possible, otherwise keep categories
+    df1[var] = pd.to_numeric(df1[var], errors='ignore')
+    df2[var] = pd.to_numeric(df2[var], errors='ignore')
 
+    # Define the universe of categories/values
+    categories = pd.Index(sorted(set(df1[var].dropna().unique())
+                                 | set(df2[var].dropna().unique())))
+
+    # Compute weighted distribution for df1
+    dist1 = (
+        df1.groupby(var)[weight_col].sum() / df1[weight_col].sum()
+    ).reindex(categories, fill_value=0)
+
+    # Compute weighted distribution for df2
+    dist2 = (
+        df2.groupby(var)[weight_col].sum() / df2[weight_col].sum()
+    ).reindex(categories, fill_value=0)
+
+    # Hellinger distance
+    return dist1, dist2, hellinger(dist1.tolist(), dist2.tolist())
+
+# Replace all hellinger_specific variable below by the function above (Warning : the support of the distribution)
 def hellinger_agepr(data_bdf, data_entd):
     data_bdf['agepr'] = data_bdf['agepr'].astype(float)
     data_entd['agepr'] = data_entd['agepr'].astype(float)

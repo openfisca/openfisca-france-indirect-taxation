@@ -31,7 +31,7 @@ def histogram_depenses_annuelle_group(data_matched, group):
     for element in range(min_element, max_element):
         data_matched_group = data_matched.query('{} == {}'.format(group, element))
         poste = (
-            sum(data_matched_group['poste_07_2_2_1_1'] * data_matched_group['pondmen'])
+            sum(data_matched_group['poste_07_2_2_1'] * data_matched_group['pondmen'])
             / data_matched_group['pondmen'].sum()
             )
         list_values_poste.append(poste)
@@ -55,7 +55,7 @@ def histogram_distribution_depenses_annuelle(data_matched):
     list_values_depenses_carburants = []
     list_keys = []
     for i in [.05, .1, .2, .3, .4, .5, .6, .7, .8, .9, .95]:
-        list_values_poste.append(data_matched['poste_07_2_2_1_1'].quantile(i))
+        list_values_poste.append(data_matched['poste_07_2_2_1'].quantile(i))
         list_values_depenses_carburants.append(data_matched['depenses_carburants_corrigees_entd'].quantile(i))
         list_keys.append('{}'.format(i))
 

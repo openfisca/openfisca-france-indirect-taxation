@@ -31,7 +31,7 @@ def load_data_bdf_enl(year_data):
     # Create variable for total spending
     liste_variables = input_bdf.columns.tolist()
     postes_agreges = ['poste_{}'.format(index) for index in
-        ['0{}'.format(i) for i in range(1, 10)] + ['10', '11', '12']
+        ['0{}'.format(i) for i in range(1, 10)] + ['10', '11', '12','13']
         ]
     input_bdf['depenses_tot'] = 0
     for element in liste_variables:

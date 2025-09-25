@@ -14,15 +14,15 @@ from openfisca_survey_manager import default_config_files_directory as config_fi
 
 def load_data_menages_bdf_entd(year_data):
     # Load ENTD data :
-    year_entd = 2008
+    year_entd = 2019
 
     entd_survey_collection = SurveyCollection.load(
         collection = 'enquete_transports', config_files_directory = config_files_directory
         )
     survey_entd = entd_survey_collection.get_survey('enquete_transports_{}'.format(year_entd))
 
-    input_entd_tcm_menage = survey_entd.get_values(table = 'q_tcm_menage')
-    input_entd_menage = survey_entd.get_values(table = 'q_menage')
+    input_entd_tcm_menage = survey_entd.get_values(table = 'tcm_men_public_V2')
+    input_entd_menage = survey_entd.get_values(table = 'q_menage_public_V2')
 
     # Load BdF data :
     year_bdf = year_data
@@ -34,44 +34,70 @@ def load_data_menages_bdf_entd(year_data):
     # Create variable for total spending
     liste_variables = input_bdf.columns.tolist()
     postes_agreges = ['poste_{}'.format(index) for index in
-        ['0{}'.format(i) for i in range(1, 10)] + ['10', '11', '12']
+        ['0{}'.format(i) for i in range(1, 10)] + ['10', '11', '12', '13']
         ]
     input_bdf['depenses_tot'] = 0
     for element in liste_variables:
         for poste in postes_agreges:
             if element[:8] == poste:
                 input_bdf['depenses_tot'] += input_bdf[element]
-
+                    
     # Set variables :
-    variables_tcm_menage_entd = [
-        'ident_men',
-        'agepr',
-        'cs42pr',
-        'dip14pr',
-        'nactifs',
-        'nbuc',             # ocde10
-        'nenfants',
-        'nivie10',          # déciles de revenu par uc
-        'npers',
-        'numcom_au2010',    # cataeu
-        'pondv1',           # poids ménage
-        'revuc',            # revenus simulés par UC
-        'rlog',             # allocations logement
-        'situapr',
-        'tu99',
-        'tau99',
-        # 'typlog',
-        'typmen5',          # type ménage
-        # To be completed
-        ]
+    if year_entd == 2008:
+        variables_tcm_menage_entd = [
+            'ident_men',
+            'agepr',
+            'cs42pr',
+            'dip14pr',
+            'nactifs',
+            'nbuc',             # ocde10
+            'nenfants',
+            'nivie10',          # déciles de revenu par uc
+            'npers',
+            'numcom_au2010',    # cataeu
+            'pondv1',           # poids ménage
+            'revuc',            # revenus simulés par UC
+            'rlog',             # allocations logement
+            'situapr',
+            'tu99',
+            'tau99',
+            # 'typlog',
+            'typmen5',          # type ménage
+            # To be completed
+            ]
 
-    variables_menage_entd = [
-        'ident_men',
-        'v1_logpiec',       # nombre de pièces dans logement
-        'v1_logocc',        # statut d'occupation du logement
-        'v1_logloymens',    # loyer mensuel calculé
-        ]
-
+        variables_menage_entd = [
+            'ident_men',
+            'v1_logpiec',       # nombre de pièces dans logement
+            'v1_logocc',        # statut d'occupation du logement
+            'v1_logloymens',    # loyer mensuel calculé
+            ]
+    if year_entd == 2019:
+        variables_tcm_menage_entd = [
+            'ident_men',
+            'agepr',
+            'cs42pr',
+            'dipdetpr',
+            'nactifs',
+            'coeffuc',              # ocde10
+            'nenfants',
+            'decile_rev_uc',        # déciles de revenu par uc
+            'npers',
+            #'numcom_au2010',       # cataeu
+            'pond_menc',            # poids ménage
+            #'rev_final_uc',        # revenus simulés par UC   (pas dispo dans la table public demander table chercheur)
+            #'rlog',                # allocations logement     (pas dispo dans la table public demander table chercheur)
+            'situapr',
+            'tuu2017_res',       
+            #'tau99',               (pas dispo dans la table public demander table chercheur)
+            # 'typlog',
+            'typmen5',              # type ménage
+            # To be completed
+            ]
+        
+        variables_menage_entd = [
+            'ident_men']
+        
     variables_menage_bdf = [
         'ident_men',
         'aidlog1',
@@ -88,6 +114,7 @@ def load_data_menages_bdf_entd(year_data):
         'ocde10',           # nb unités de conso
         'pondmen',
         'poste_07_2_2_1',   # modifié Hervé 25/04 (07_2_2_1_1 -> 07_2_2_1)
+        'rev_disponible',   # revenu disponible
         'revtot',           # revenu total
         'situapr',
         'stalog',
