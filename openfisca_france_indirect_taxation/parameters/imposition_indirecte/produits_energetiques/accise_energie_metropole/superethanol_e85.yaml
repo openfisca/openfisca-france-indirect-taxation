@@ -1,9 +1,9 @@
-description: Tarif patriculier du superéthanol E85, en €/Mwh
+description: Tarif particulier du superéthanol E85, en €/Mwh
 values:
   2022-01-01:
     value: 17.894
 metadata:
-  last_value_still_valid_on: "2024-05-21"
+  last_value_still_valid_on: "2024-10-14"
   unit: currency
   reference:
     2022-01-01:
