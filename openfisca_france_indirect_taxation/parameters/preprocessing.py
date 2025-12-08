@@ -65,7 +65,7 @@ def preprocess_legislation(parameters):
     # We use data from prix_annuel_carburants.csv before 2017, the fact that some old prices are no longer available on the INSEE website,
     # which means that the script that create prix_litre_annuel_carburants.csv does not retrieve them.
     # So, we keep what is existing to not lose information.
-    last_value_date = f"{most_recent_year}-01-01"
+    last_value_date = f"{most_recent_year}-12-31"
     prix_carburants['super_95_e10_ttc'] = {
         'description': 'super_95_e10_ttc'.replace('_', ' '),
         'unit': 'currency',
@@ -86,28 +86,28 @@ def preprocess_legislation(parameters):
 
     autres_carburants = {
         'diesel_ttc': {
-            "last_value_date": f"{most_recent_year}-01-01",
+            "last_value_date": f"{most_recent_year}-12-31",
             "ref": {
                 'title': 'Prix moyens annuels de vente au détail en métropole - Gazole (1 litre)',
                 'href': 'https://www.insee.fr/fr/statistiques/serie/010533883',
                 }
             },
         'super_95_ttc': {
-            "last_value_date": f"{most_recent_year}-01-01",
+            "last_value_date": f"{most_recent_year}-12-31",
             "ref": {
                 'title': 'Prix moyens annuels de vente au détail en métropole - Supercarburant sans plomb 95 (1 litre)',
                 'href': 'https://www.insee.fr/fr/statistiques/serie/010533882',
                 }
         },
         'super_98_ttc': {
-            "last_value_date": f"{most_recent_year}-01-01",
+            "last_value_date": f"{most_recent_year}-12-31",
             "ref": {
                 'title': 'Prix moyens annuels de vente au détail en métropole - Supercarburant sans plomb 98 (1 litre)',
                 'href': 'https://www.insee.fr/fr/statistiques/serie/010533881',
                 }
         },
         'super_plombe_ttc': {
-            "last_value_date": "2005-01-01",
+            "last_value_date": "2005-12-31",
         },
     }
     for element, detail in autres_carburants.items():
