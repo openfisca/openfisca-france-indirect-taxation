@@ -11,14 +11,14 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
 from openfisca_france_indirect_taxation.projects.budgets.reforme_energie_budgets_2018_2019 import officielle_2019_in_2017
-from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
+from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators
 
 
 log = logging.getLogger(__name__)
 
 
 def simulate_reformes_energie(graph = True):
-    inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020))
+    inflators_by_year = new_get_inflators(2011, 2020)
     inflators_by_year[2020] = inflators_by_year[2019]
     year = 2019
     data_year = 2011

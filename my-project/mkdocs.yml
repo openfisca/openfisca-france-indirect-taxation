@@ -2,6 +2,7 @@ site_name: Openfisca-france-indirect-taxation
 nav:
   - Présentation: README.md
   - Sommaire : SUMMARY.md
+  - Installation : Install_openfisca-france-indirect-taxation.md
   - Donnees:
     - Donnees sources:
       - Enquête Budgdet de famille (BdF) : Donnees/Budget_de_famille.md
@@ -18,4 +19,3 @@ nav:
     - Calage et vieillissement : Simulations/Calage_et_veillissement.md
     - Survey Scenario : Simulations/Survey_scenario.md
     - Exemple d'utilisation : Simulations/Exemple_utilisation.md
-  - Installation : Install_openfisca-france-indirect-taxation.md

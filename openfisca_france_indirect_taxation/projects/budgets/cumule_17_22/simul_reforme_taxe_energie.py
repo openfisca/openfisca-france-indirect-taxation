@@ -9,7 +9,7 @@ from openfisca_france_indirect_taxation.examples.utils_example import (
     graph_builder_bar)
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.projects.budgets.reforme_energie_budgets_2018_2019 import officielle_2019_in_2017
-from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
+from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators
 import pandas as pd
 from matplotlib import pyplot as plt
 
@@ -30,7 +30,7 @@ def simulate_reformes_energie(graph = True, replique_gouv = replique_gouv, elast
     # on veut faire les simulations sur les quantités avant réforme
     # idéalement on voudrait l'évolution des quantités pour les années jusque 2022 s'il n'y avait pas eu de réforme
     # mais en l'absence d'information on considère que la consommation reste constante dans le contrefactuel.
-    inflators_by_year = get_inflators_by_year_energy(rebuild = True, year_range = range(2011, 2020), data_year = data_year)
+    inflators_by_year = new_get_inflators(2011, 2020)
     inflators_by_year[2018] = inflators_by_year[2017]
     inflators_by_year[2019] = inflators_by_year[2017]
     inflators_by_year[2020] = inflators_by_year[2017]

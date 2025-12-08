@@ -23,7 +23,7 @@ doc_lines = __doc__.split('\n')
 
 setup(
     name = 'OpenFisca-France-Indirect-Taxation',
-    version = '0.4.dev0',
+    version = '0.5.0',
 
     author = 'OpenFisca Team',
     author_email = 'contact@openfisca.fr',
@@ -49,6 +49,7 @@ setup(
             'seaborn >= 0.12.2, < 0.13.0',
             'statsmodels >= 0.13.5, < 0.14.0',
             'xlrd >= 2.0.1, < 3.0',
+            'openpyxl',
             ],
         ),
     include_package_data = True,  # Will read MANIFEST.in

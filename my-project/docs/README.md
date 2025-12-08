@@ -10,7 +10,7 @@ OpenFisca est un projet de logiciel libre. Son code source est distribué sous l
 
 ## Documentation
 
-Le [dépôt du code source](https://github.com/Hervedarr31/openfisca-france-indirect-taxation/tree/nomics-master) contient une documentation détaillé. Cette documentation est aussi consultable en ligne sur une page dédiée.
+Le [dépôt du code source](https://github.com/openfisca/openfisca-france-indirect-taxation/tree/tentative_merge) contient une documentation détaillé. Cette documentation est aussi consultable en ligne sur une page dédiée.
 
 ## Installation 
 

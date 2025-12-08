@@ -26,8 +26,8 @@ def bootstrap_weighted_mean_by_decile(df, weight_col ='pondmen', decile_col='qua
             data = group[['depenses_totales_par_uc','niveau_de_vie', weight_col,'npers']] 
             sample_menage = data.sample(n = len(data), replace = True, random_state = seed) 
             sample_indiv = sample_menage.loc[sample_menage.index.repeat(sample_menage['npers'])]    
-            mean_depenses = wavg(groupe = sample_indiv, var = 'depenses_totales_par_uc')            
-            mean_niveau_vie = wavg(groupe = sample_indiv, var = 'niveau_de_vie')                    
+            mean_depenses = wavg(groupe = sample_indiv, var = 'depenses_totales_par_uc', weights = weight_col)  # pondération à changer          
+            mean_niveau_vie = wavg(groupe = sample_indiv, var = 'niveau_de_vie', weights = weight_col )         # pondération à changer          
             bootstrap_means['Decile {}'.format(decile)].append(mean_depenses/mean_niveau_vie*100)   
         seed += 1                                                                                   
     return(bootstrap_means)

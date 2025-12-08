@@ -1,0 +1,310 @@
+,label_division,label_groupe,label_classe,label_sous_classe,label_poste,code_coicop
+0,Boissons alcoolisées et tabac,Tabac,Cigares et cigarillos,Cigares et cigarillos,Cigares et cigarillos,02.2.1
+1,Boissons alcoolisées et tabac,Tabac,Cigarettes,Cigarettes,Cigarettes,02.2.2
+2,Boissons alcoolisées et tabac,Tabac,Tabac sous d'autres formes et produits connexes,Tabac sous d'autres formes et produits connexes,Tabac sous d'autres formes et produits connexes,02.2.3
+308,Boissons alcoolisées et tabac,Tabac,Stupéfiants ,Stupéfiants ,Stupéfiants ,02.3
+3,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Pain,Pain,1.1.1.1.1
+4,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Pâtisserie fraîche et viennoiserie,Pâtisserie fraîche,1.1.1.2.1
+5,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Pâtisserie fraîche et viennoiserie,Viennoiserie,1.1.1.2.2
+6,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,"Gâteaux, pâtisserie de conservation","Biscottes, triscottes, pains durs",1.1.1.3.1
+7,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,"Gâteaux, pâtisserie de conservation",Biscuits et gâteaux,1.1.1.3.2
+8,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,"Gâteaux, pâtisserie de conservation",Pâtisserie de conservation,1.1.1.3.3
+9,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Céréales,"Farines, semoules, céréales",1.1.1.4.1
+10,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Céréales,Pâtes alimentaires,1.1.1.4.2
+11,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Céréales,Riz,1.1.1.4.3
+12,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Pain et céréales,Céréales,Plats cuisinés à base de céréales,1.1.1.4.4
+13,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de bœuf,Bœuf à rôtir,1.1.2.1.1
+14,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de bœuf,Bœuf à braiser et bouillir,1.1.2.1.2
+15,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de bœuf,Bœuf haché,1.1.2.1.3
+16,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de veau,Veau à rôtir,1.1.2.2.1
+17,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de veau,Veau à braiser et bouillir,1.1.2.2.2
+18,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,"Viande de mouton, de cheval",Agneau,1.1.2.3.1
+19,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,"Viande de mouton, de cheval",Cheval,1.1.2.3.2
+20,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,"Porc frais, salé, fumé",1.1.2.4.1
+21,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Jambon,1.1.2.4.2
+22,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Pâté,1.1.2.4.3
+23,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Saucisson,1.1.2.4.4
+24,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Saucisse,1.1.2.4.5
+25,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Viande de porc et charcuteries,Autres charcuteries et conserves de viande,1.1.2.4.6
+26,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Volaille,Poulet,1.1.2.5.1
+27,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Volaille,Dinde,1.1.2.5.2
+28,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Volaille,Autres volailles,1.1.2.5.3
+29,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Autres viandes et plats cuisinés à base de viande,"Lapin, gibier",1.1.2.6.1
+30,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Autres viandes et plats cuisinés à base de viande,Triperie,1.1.2.6.2
+31,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Viande,Autres viandes et plats cuisinés à base de viande,Plats cuisinés à base de viande,1.1.2.6.3
+32,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Poissons et crustacés,Poissons et crustacés frais,Poissons frais,1.1.3.1.1
+33,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Poissons et crustacés,Poissons et crustacés frais,Crustacés et mollusques frais,1.1.3.1.2
+34,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Poissons et crustacés,"Poissons et crustacés préparés, en conserves et surgelés","Poissons en conserves, surgelés, séchés, fumés",1.1.3.2.1
+35,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Poissons et crustacés,"Poissons et crustacés préparés, en conserves et surgelés",Plats cuisinés à base de poisson,1.1.3.2.2
+36,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Lait et crème,Laits,1.1.4.1.1
+37,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Lait et crème,Crèmes fraîches,1.1.4.1.2
+38,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Yaourts et desserts lactés,Yaourts,1.1.4.2.1
+39,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Yaourts et desserts lactés,Desserts lactés frais,1.1.4.2.2
+40,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages frais,1.1.4.3.1
+41,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages à pâte molle et à pâte persillée,1.1.4.3.2
+42,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages à pâte pressée,1.1.4.3.3
+43,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages de chèvre,1.1.4.3.4
+44,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Fromages,Fromages fondus,1.1.4.3.5
+45,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Lait, fromage et œufs",Œufs,Œufs,1.1.4.4.1
+46,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Huiles et graisses,Beurres,Beurres,1.1.5.1.1
+47,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Huiles et graisses,Huiles et margarines,Huiles alimentaires,1.1.5.2.1
+48,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Huiles et graisses,Huiles et margarines,Margarine végétale et autres graisses,1.1.5.2.2
+49,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Fruits,Fruits frais,Fruits frais,1.1.6.1.1
+50,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Fruits,"Fruits surgelés, appertisés ou secs","Fruits surgelés, appertisés ou secs",1.1.6.2.1
+51,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Légumes,Légumes frais,Légumes frais,1.1.7.1.1
+52,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Légumes,"Légumes préparés, surgelés et en conserve","Légumes surgelés, secs et en conserve",1.1.7.2.1
+53,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Légumes,"Légumes préparés, surgelés et en conserve",Pommes de terre préparées,1.1.7.2.2
+54,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,Légumes,"Légumes préparés, surgelés et en conserve",Autres plats cuisinés à base de légumes,1.1.7.2.3
+55,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de sucre,Sucre,1.1.8.1.1
+56,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de sucre,"Confitures, compotes et miel",1.1.8.1.2
+57,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de sucre,Confiseries à base de sucre,1.1.8.1.3
+58,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de chocolat,Chocolat en tablettes,1.1.8.2.1
+59,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés",Produits à base de chocolat,Confiseries à base de chocolat,1.1.8.2.2
+60,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sucre, confitures, chocolat, confiserie et produits glacés","Crèmes glacées, glaces et sorbets","Crèmes glacées, glaces et sorbets",1.1.8.3.1
+61,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Condiments et assaisonnements,"Sels, épices, condiments, vinaigres et sauces",1.1.9.1.1
+62,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Aliments préparés pour enfants et produits diététiques,Aliments préparés pour bébés,1.1.9.2.1
+63,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Aliments préparés pour enfants et produits diététiques,Produits diététiques,1.1.9.2.2
+64,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Autres produits alimentaires n.d.a.,Potages préparés,1.1.9.3.1
+65,Produits alimentaires et boissons non alcoolisées,Produits alimentaires,"Sel, épices, sauces et produits alimentaires n.d.a.",Autres produits alimentaires n.d.a.,Desserts et produits pour pâtisserie,1.1.9.3.2
+66,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,"Café, thé et cacao",Produits chocolatés,Chocolat en poudre,1.2.1.1.1
+67,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,"Café, thé et cacao",Cafés,Cafés en grains ou moulu,1.2.1.2.1
+68,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,"Café, thé et cacao",Cafés,Café soluble et succédanée de café,1.2.1.2.2
+69,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,"Café, thé et cacao",Thés et infusions,Thés et infusions,1.2.1.3.1
+70,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,Autres boissons non alcoolisées,Eaux minérales et de source,Eaux minérales et de source,1.2.2.1.1
+71,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,Autres boissons non alcoolisées,"Boissons gazeuses, jus et sirops",Jus de fruits et de légumes,1.2.2.2.1
+72,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,Autres boissons non alcoolisées,"Boissons gazeuses, jus et sirops","Boissons aux fruits non gazeuses, sodas, limonades",1.2.2.2.2
+73,Produits alimentaires et boissons non alcoolisées,Boissons non alcoolisées,Autres boissons non alcoolisées,"Boissons gazeuses, jus et sirops",Sirops et concentrés,1.2.2.2.3
+74,Éducation,Services d'éducation,Services d'éducation,Services d'éducation,Secondaires à financement  privé,10.1.1.1.1
+75,Éducation,Services d'éducation,Services d'éducation,Services d'éducation,Supérieurs à financement privé,10.1.1.1.2
+76,Éducation,Services d'éducation,Services d'éducation,Services d'éducation,Cours par correspondance,10.1.1.1.3
+77,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Restauration,Repas traditionnel dans un restaurant,11.1.1.1.1
+78,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Restauration,Repas en libre service et restauration rapide,11.1.1.1.2
+79,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Cafés et autres boiss. chaudes cons. dans les cafés,11.1.1.2.1
+80,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Vin consommé dans les cafés,11.1.1.2.2
+81,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Bière et cidre consommés dans les cafés,11.1.1.2.3
+82,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Spiritueux consommés dans les cafés,11.1.1.2.4
+83,"Hôtellerie, cafés, restauration",Restauration et cafés,Restauration et cafés,Consommation dans les cafés,Boissons non alcoolisées cons. dans les cafés,11.1.1.2.5
+84,"Hôtellerie, cafés, restauration",Restauration et cafés,Cantines,Repas dans un restaurant scolaire ou universitaire,Repas dans un restaurant scolaire ou universitaire,11.1.2.1.1
+85,"Hôtellerie, cafés, restauration",Restauration et cafés,Cantines,Repas dans un restaurant d'entreprise ou d'administration,Repas dans un restaurant d'entreprise ou d'admin.,11.1.2.2.1
+86,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Hôtellerie y.c. pension,Locations de chambres d'hôtel,11.2.1.1.1
+87,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Hôtellerie y.c. pension,Pensions et demi-pensions dans les hôtels,11.2.1.1.2
+88,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Internat scolaire et universitaire,"Frais d'internat scol., résidences univers., foyers",11.2.1.2.1
+89,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Hébergements de vacances,Hébergements de vacances ou de loisirs,11.2.1.3.1
+90,"Hôtellerie, cafés, restauration",Services d'hébergement,Services d'hébergement,Hébergements de vacances,Terrains de camping et auberges de jeunesse,11.2.1.3.2
+91,Autres biens et services,Soins personnels,Salons de coiffure et esthétique corporelle,Coiffure,Coiffeurs pour hommes,12.1.1.1.1
+92,Autres biens et services,Soins personnels,Salons de coiffure et esthétique corporelle,Coiffure,Coiffeurs pour femmes,12.1.1.1.2
+93,Autres biens et services,Soins personnels,Salons de coiffure et esthétique corporelle,Autres services d'esthétique,Autres services d'esthétique corporelle,12.1.1.2.1
+94,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Parfumerie et produits de beauté,Parfums et eaux de toilette,12.1.3.1.1
+95,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Parfumerie et produits de beauté,Produits de maquillage et de soin de la peau,12.1.3.1.2
+96,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Produits de l'hygiène corporelle,"Savons, dentifrices et produits de toilette",12.1.3.2.1
+97,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Produits de l'hygiène corporelle,Shampooings et produits capillaires divers,12.1.3.2.2
+98,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Appareils et autres articles de toilette,Autres articles de toilette,12.1.3.3.1
+99,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Appareils et autres articles de toilette,Articles d'hygiène à base de papier,12.1.3.3.2
+100,Autres biens et services,Soins personnels,"Appareils, autres articles et produits pour soins personnels",Appareils et autres articles de toilette,Appareils de toilette électriques,12.1.3.3.3
+101,Autres biens et services,Effets personnels n.d.a.,"Horlogerie, bijouterie, joaillerie","Horlogerie, bijouterie, joaillerie",Horlogerie,12.3.1.1.1
+102,Autres biens et services,Effets personnels n.d.a.,"Horlogerie, bijouterie, joaillerie","Horlogerie, bijouterie, joaillerie","Bijouterie, joaillerie",12.3.1.1.2
+103,Autres biens et services,Effets personnels n.d.a.,Autres effets personnels,Maroquinerie et articles de voyages,Maroquinerie et articles de voyage,12.3.2.1.1
+104,Autres biens et services,Effets personnels n.d.a.,Autres effets personnels,Autres effets personnels y.c. réparation,Articles de puériculture,12.3.2.2.1
+105,Autres biens et services,Effets personnels n.d.a.,Autres effets personnels,Autres effets personnels y.c. réparation,"Articles pour fumeurs, articles divers",12.3.2.2.2
+106,Autres biens et services,Effets personnels n.d.a.,Autres effets personnels,Autres effets personnels y.c. réparation,Réparation horlogerie ou bijoux,12.3.2.2.3
+107,Autres biens et services,Protection sociale,Services de protection sociale,"Crèches, assistantes maternelles","Crèches, assistantes maternelles",12.4.1.1.1
+108,Autres biens et services,Protection sociale,Services de protection sociale,Maisons de retraite et autres services pour personnes âgées,Maisons de retraite et autres services pour personnes âgées,12.4.1.2.1
+109,Autres biens et services,Protection sociale,Services de protection sociale,Établissements pour adultes handicapés,Établissements pour adultes handicapés,12.4.1.3.1
+110,Autres biens et services,Assurances,Assurance habitation,Assurance habitation,Assurance habitation,12.5.2.1.1
+111,Autres biens et services,Assurances,Assurance santé,Assurance santé complémentaire,Assurance santé complémentaire,12.5.3.1.1
+112,Autres biens et services,Assurances,Assurance automobile,Assurance automobile,Assurance automobile,12.5.4.1.1
+113,Autres biens et services,Services financiers,Services financiers n.d.a.,Services financiers,Services financiers,12.6.1.1.1
+114,Autres biens et services,Autres services,Autres services,Services funéraires,Services funéraires,12.7.1.1.1
+115,Autres biens et services,Autres services,Autres services,Prestations administratives et privées diverses,Formalités administratives,12.7.1.2.1
+116,Autres biens et services,Autres services,Autres services,Prestations administratives et privées diverses,Services juridiques,12.7.1.2.2
+117,Autres biens et services,Autres services,Autres services,Prestations administratives et privées diverses,Autres services aux ménages,12.7.1.2.3
+118,Boissons alcoolisées et tabac,Boissons alcoolisées,Alcools,Apéritifs,Apéritifs anisés à base d'alcool,2.1.1.1.1
+119,Boissons alcoolisées et tabac,Boissons alcoolisées,Alcools,Apéritifs,Whisky,2.1.1.1.2
+120,Boissons alcoolisées et tabac,Boissons alcoolisées,Alcools,Eaux de vie et liqueurs,Eaux de vie,2.1.1.2.1
+121,Boissons alcoolisées et tabac,Boissons alcoolisées,Alcools,Eaux de vie et liqueurs,Liqueurs,2.1.1.2.2
+122,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne",Vins,Vins de consommation courante,2.1.2.1.1
+123,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne",Vins,Vins supérieurs,2.1.2.1.2
+124,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne",Vins,Vins doux naturels et apéritifs à base de vin,2.1.2.1.3
+125,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne","Champagne, mousseux et cidres",Champagne et mousseux,2.1.2.2.1
+126,Boissons alcoolisées et tabac,Boissons alcoolisées,"Vins, cidres et champagne","Champagne, mousseux et cidres",Cidres,2.1.2.2.2
+127,Boissons alcoolisées et tabac,Boissons alcoolisées,Bières,Bières,Bières,2.1.3.1.1
+128,Boissons alcoolisées et tabac,Tabac,Tabac,Tabac,Tabac,2.2.1.1.1
+129,Habillement et chaussures,Habillement,Tissus d'habillement,Tissus d'habillement,Tissus d'habillement,3.1.1.1.1
+130,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour hommes,"Manteaux, imper. et vêtements en peau pour hommes",3.1.2.1.1
+131,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour hommes,Costumes pour hommes,3.1.2.1.2
+132,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour hommes,Vestes pour hommes,3.1.2.1.3
+133,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour hommes,Pantalons pour hommes,3.1.2.1.4
+134,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour hommes,Vêtements de travail,3.1.2.1.5
+135,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour femmes,"Manteaux, imper et vêtements en peau pour femmes",3.1.2.2.1
+136,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour femmes,Tailleurs et ensembles pour femmes,3.1.2.2.2
+137,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour femmes,Jupes,3.1.2.2.3
+138,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour femmes,Robes,3.1.2.2.4
+139,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour femmes,Pantalons pour femmes,3.1.2.2.5
+140,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour femmes,Vestes pour femmes,3.1.2.2.6
+141,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour enfants,"Manteaux, imperméables et vestes pour enfants",3.1.2.3.1
+142,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour enfants,Pantalons pour enfants,3.1.2.3.2
+143,Habillement et chaussures,Habillement,Vêtements,Vêtements de dessus pour enfants,"Jupes, robes et ensembles pour enfants",3.1.2.3.3
+144,Habillement et chaussures,Habillement,Vêtements,Vêtements de sport,Vêtements de sport ou de loisirs pour hommes et garçonnets,3.1.2.4.1
+145,Habillement et chaussures,Habillement,Vêtements,Vêtements de sport,Vêtements de sport ou de loisir pour femmes et fillettes,3.1.2.4.2
+146,Habillement et chaussures,Habillement,Vêtements,"Lingerie, bonneterie   pour hommes",Chemises pour hommes,3.1.2.5.1
+147,Habillement et chaussures,Habillement,Vêtements,"Lingerie, bonneterie   pour hommes",Sous-vêtements et vêtements de nuit pour hommes,3.1.2.5.2
+148,Habillement et chaussures,Habillement,Vêtements,"Lingerie, bonneterie   pour hommes",Chaussettes pour hommes,3.1.2.5.3
+149,Habillement et chaussures,Habillement,Vêtements,"Lingerie, bonneterie   pour hommes",Tricots et pull-overs pour hommes,3.1.2.5.4
+150,Habillement et chaussures,Habillement,Vêtements,"Lingerie, bonneterie pour femmes",Chemisiers et tuniques pour femmes,3.1.2.6.1
+151,Habillement et chaussures,Habillement,Vêtements,"Lingerie, bonneterie pour femmes","Lingerie, vêtements de nuit pour femmes",3.1.2.6.2
+152,Habillement et chaussures,Habillement,Vêtements,"Lingerie, bonneterie pour femmes","Collants, bas et chaussettes pour femmes",3.1.2.6.3
+153,Habillement et chaussures,Habillement,Vêtements,"Lingerie, bonneterie pour femmes",Tricots et pull-overs pour femmes,3.1.2.6.4
+154,Habillement et chaussures,Habillement,Vêtements,"Lingerie, bonneterie pour enfants","Chemises, sous- vêtements et vêtements de nuit enfants",3.1.2.7.1
+155,Habillement et chaussures,Habillement,Vêtements,"Lingerie, bonneterie pour enfants",Collants et chaussettes pour enfants,3.1.2.7.2
+156,Habillement et chaussures,Habillement,Vêtements,"Lingerie, bonneterie pour enfants",Tricots et pull-overs pour enfants,3.1.2.7.3
+157,Habillement et chaussures,Habillement,Vêtements,"Lingerie, bonneterie pour enfants",Layette,3.1.2.7.4
+158,Habillement et chaussures,Habillement,Autres articles vestimentaires et accessoires d'habillement,Autres articles vestimentaires et accessoires d'habillement,Accessoires du vêtement et vêtements de travail,3.1.3.1.1
+159,Habillement et chaussures,Habillement,Autres articles vestimentaires et accessoires d'habillement,Autres articles vestimentaires et accessoires d'habillement,Laines et mercerie,3.1.3.1.2
+160,Habillement et chaussures,Habillement,"Nettoyage, réparation et location de vêtements",Nettoyage et réparation de vêtements,Blanchissage et nettoyage de vêtements,3.1.4.1.1
+161,Habillement et chaussures,Habillement,"Nettoyage, réparation et location de vêtements",Nettoyage et réparation de vêtements,Réparations de vêtements,3.1.4.1.2
+162,Habillement et chaussures,Chaussures y.c. réparation,Chaussures y.c. réparation,Chaussures de ville,Chaussures de ville pour hommes,3.2.1.1.1
+163,Habillement et chaussures,Chaussures y.c. réparation,Chaussures y.c. réparation,Chaussures de ville,Chaussures de ville pour femmes,3.2.1.1.2
+164,Habillement et chaussures,Chaussures y.c. réparation,Chaussures y.c. réparation,Chaussures de ville,Chaussures de ville pour enfants,3.2.1.1.3
+165,Habillement et chaussures,Chaussures y.c. réparation,Chaussures y.c. réparation,Autres chaussures y.c. réparation,Chaussures de sport,3.2.1.2.1
+166,Habillement et chaussures,Chaussures y.c. réparation,Chaussures y.c. réparation,Autres chaussures y.c. réparation,Autres articles chaussants,3.2.1.2.2
+167,Habillement et chaussures,Chaussures y.c. réparation,Chaussures y.c. réparation,Autres chaussures y.c. réparation,Réparation de chaussures,3.2.1.2.3
+168,"Logement, eau, gaz, électricité et autres combustibles",Loyers d'habitation effectifs,Loyers effectifs,Loyers des résidences principales,Loyers des résidences principales,4.1.1.1.1
+169,"Logement, eau, gaz, électricité et autres combustibles",Loyers d'habitation effectifs,Loyers effectifs, loyers des résidences de vacances et gîtes ruraux,Loyers des résidences de vacances et gîtes ruraux,4.1.1.2.1
+170,"Logement, eau, gaz, électricité et autres combustibles",Entretien et réparation courante du logement,Produits pour l'entretien et la réparation courante du logement,Produits pour l'entretien et la réparation courante du logement,"Peintures, vernis et papiers peints",4.3.1.1.1
+171,"Logement, eau, gaz, électricité et autres combustibles",Entretien et réparation courante du logement,Produits pour l'entretien et la réparation courante du logement,Produits pour l'entretien et la réparation courante du logement,"Art. de quincaillerie, fournitures pour bricolage",4.3.1.1.2
+172,"Logement, eau, gaz, électricité et autres combustibles",Entretien et réparation courante du logement,Produits pour l'entretien et la réparation courante du logement,Produits pour l'entretien et la réparation courante du logement,Articles en bois,4.3.1.1.3
+173,"Logement, eau, gaz, électricité et autres combustibles",Entretien et réparation courante du logement,Services pour l'entretien et la réparation courante du logement,Pose de revêtements de sols et murs,Pose de revêtement de sols et murs,4.3.2.1.1
+174,"Logement, eau, gaz, électricité et autres combustibles",Entretien et réparation courante du logement,Services pour l'entretien et la réparation courante du logement,Autres services d'entretien du logement,Services d'entretien du logement,4.3.2.2.1
+175,"Logement, eau, gaz, électricité et autres combustibles",Fourniture d'eau et autres services lies au logement,Fourniture d'eau et autres services liés au logement,Distribution d'eau,Distribution d'eau,4.4.1.1.1
+176,"Logement, eau, gaz, électricité et autres combustibles",Fourniture d'eau et autres services lies au logement,Fourniture d'eau et autres services liés au logement,Enlèvement des ordures ménagères,Enlèvement des ordures ménagères,4.4.1.2.1
+177,"Logement, eau, gaz, électricité et autres combustibles",Fourniture d'eau et autres services lies au logement,Fourniture d'eau et autres services liés au logement,Assainissement,Service d'assainissement,4.4.1.3.1
+178,"Logement, eau, gaz, électricité et autres combustibles",Fourniture d'eau et autres services lies au logement,Fourniture d'eau et autres services liés au logement,Autres services liés au logement n.d.a.,"Ramonage, gardiennage et entretien des ascenseurs",4.4.1.4.1
+179,"Logement, eau, gaz, électricité et autres combustibles","Électricité, gaz et autres combustibles",Électricité,Électricité,Électricité,4.5.1.1.1
+180,"Logement, eau, gaz, électricité et autres combustibles","Électricité, gaz et autres combustibles",Gaz,Gaz de ville,Gaz de ville,4.5.2.1.1
+181,"Logement, eau, gaz, électricité et autres combustibles","Électricité, gaz et autres combustibles",Gaz, gaz liquéfiés,Gaz liquéfiés,4.5.2.2.1
+182,"Logement, eau, gaz, électricité et autres combustibles","Électricité, gaz et autres combustibles",Combustibles liquides,Combustibles liquides,Fiouls domestiques,4.5.3.1.1
+183,"Logement, eau, gaz, électricité et autres combustibles","Électricité, gaz et autres combustibles",Combustibles solides,Combustibles solides,Autres combustibles solides,4.5.4.1.1
+184,"Logement, eau, gaz, électricité et autres combustibles","Électricité, gaz et autres combustibles","Eau chaude, vapeur et glace","Eau chaude, vapeur et glace",Chauffage urbain,4.5.5.1.1
+185,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Meubles et articles d'ameublement,Mobilier de chambre,Chambres d'enfants,5.1.1.1.1
+186,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Meubles et articles d'ameublement,Mobilier de chambre,Chambres d'adultes,5.1.1.1.2
+187,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Meubles et articles d'ameublement,Mobilier de chambre,Sommiers,5.1.1.1.3
+188,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Meubles et articles d'ameublement,Mobilier de séjour,Étagères et éléments modulables,5.1.1.2.1
+189,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Meubles et articles d'ameublement,Mobilier de séjour,"Buffets, livings, bahuts, bibliothèques",5.1.1.2.2
+190,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Meubles et articles d'ameublement,Mobilier de séjour,Tables et chaises de salle à manger,5.1.1.2.3
+191,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Meubles et articles d'ameublement,Mobilier de cuisine et salle de bains,Mobilier de cuisine et de salle de bains,5.1.1.3.1
+192,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Meubles et articles d'ameublement,Fauteuils et canapés,Fauteuils et canapés,5.1.1.4.1
+193,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Meubles et articles d'ameublement,"Accessoires du mobilier, meubles de jardin et réparation de meubles",Luminaires,5.1.1.5.1
+194,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Meubles et articles d'ameublement,"Accessoires du mobilier, meubles de jardin et réparation de meubles",Articles de décoration,5.1.1.5.2
+195,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Meubles et articles d'ameublement,"Accessoires du mobilier, meubles de jardin et réparation de meubles",Meubles de jardin,5.1.1.5.3
+196,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Meubles et articles d'ameublement,"Accessoires du mobilier, meubles de jardin et réparation de meubles",Réparation des meubles,5.1.1.5.4
+197,"Ameublement, équipement ménager et entretien courant de la maison","Meubles, articles d'ameublement, tapis et autres revêt. de sol y.c.réparation",Tapis et autres revêtements de sol,Tapis et autres revêtements de sol,Tapis et autres revêtements de sol,5.1.2.1.1
+198,"Ameublement, équipement ménager et entretien courant de la maison",Articles de ménage en textile,Articles de ménage en textile,Articles pour literie,Linge de lit,5.2.1.1.1
+199,"Ameublement, équipement ménager et entretien courant de la maison",Articles de ménage en textile,Articles de ménage en textile,Articles pour literie,Couvertures et accessoires de literie,5.2.1.1.2
+200,"Ameublement, équipement ménager et entretien courant de la maison",Articles de ménage en textile,Articles de ménage en textile,Articles pour literie,Literie,5.2.1.1.3
+201,"Ameublement, équipement ménager et entretien courant de la maison",Articles de ménage en textile,Articles de ménage en textile,Autres articles textiles,"Tissus d'ameublement, voilages",5.2.1.2.1
+202,"Ameublement, équipement ménager et entretien courant de la maison",Articles de ménage en textile,Articles de ménage en textile,Autres articles textiles,"Linge de toilette et de table, torchons",5.2.1.2.2
+203,"Ameublement, équipement ménager et entretien courant de la maison",Appareils ménagers,Gros appareils ménagers électriques ou non,Appareils de lavage,"Lave-linge, sèche-linge",5.3.1.1.1
+204,"Ameublement, équipement ménager et entretien courant de la maison",Appareils ménagers,Gros appareils ménagers électriques ou non,Appareils de lavage,Lave-vaisselle,5.3.1.1.2
+205,"Ameublement, équipement ménager et entretien courant de la maison",Appareils ménagers,Gros appareils ménagers électriques ou non,Appareils de cuisson,Appareils de cuisson,5.3.1.2.1
+206,"Ameublement, équipement ménager et entretien courant de la maison",Appareils ménagers,Gros appareils ménagers électriques ou non,"Réfrigérateurs, congélateurs","Réfrigérateurs, congélateurs",5.3.1.3.1
+207,"Ameublement, équipement ménager et entretien courant de la maison",Appareils ménagers,Gros appareils ménagers électriques ou non,Autres appareils,Aspirateurs et autres gros appareils ménagers,5.3.1.4.1
+208,"Ameublement, équipement ménager et entretien courant de la maison",Appareils ménagers,Gros appareils ménagers électriques ou non,Autres appareils,Appareils de chauffage,5.3.1.4.2
+209,"Ameublement, équipement ménager et entretien courant de la maison",Appareils ménagers,Petits appareils électroménagers,Petits appareils électroménagers, petits appareils électroménagers,5.3.2.1.1
+210,"Ameublement, équipement ménager et entretien courant de la maison",Appareils ménagers,Réparation d'appareils ménagers,Réparation d'appareils ménagers,Réparation d'appareils ménagers,5.3.3.1.1
+211,"Ameublement, équipement ménager et entretien courant de la maison","Verrerie, vaisselle et ustensiles de ménage","Verrerie, vaisselle et ustensiles de ménage","Verrerie, faïence et porcelaine",Faïence et porcelaine,5.4.1.1.1
+212,"Ameublement, équipement ménager et entretien courant de la maison","Verrerie, vaisselle et ustensiles de ménage","Verrerie, vaisselle et ustensiles de ménage","Verrerie, faïence et porcelaine",Verrerie,5.4.1.1.2
+213,"Ameublement, équipement ménager et entretien courant de la maison","Verrerie, vaisselle et ustensiles de ménage","Verrerie, vaisselle et ustensiles de ménage",Ustensiles de ménage en métal,Couverts et autres ustensiles de cuisine en métal,5.4.1.2.1
+214,"Ameublement, équipement ménager et entretien courant de la maison","Verrerie, vaisselle et ustensiles de ménage","Verrerie, vaisselle et ustensiles de ménage",Ustensiles de ménage en métal,Orfèvrerie,5.4.1.2.2
+215,"Ameublement, équipement ménager et entretien courant de la maison","Verrerie, vaisselle et ustensiles de ménage","Verrerie, vaisselle et ustensiles de ménage",Autres articles de ménage,Autres ustensiles de ménage,5.4.1.3.1
+216,"Ameublement, équipement ménager et entretien courant de la maison",Outillage et autres matériels pour la maison et le jardin,Outillage et autres matériels pour la maison et le jardin,Outillage et autres matériels pour la maison et le jardin,Outillage à moteur,5.5.1.1.1
+217,"Ameublement, équipement ménager et entretien courant de la maison",Outillage et autres matériels pour la maison et le jardin,Outillage et autres matériels pour la maison et le jardin,Outillage et autres matériels pour la maison et le jardin,Piles,5.5.1.1.2
+218,"Ameublement, équipement ménager et entretien courant de la maison",Outillage et autres matériels pour la maison et le jardin,Outillage et autres matériels pour la maison et le jardin,Outillage et autres matériels pour la maison et le jardin,Lampes et autres petits matériels électriques,5.5.1.1.3
+219,"Ameublement, équipement ménager et entretien courant de la maison",Outillage et autres matériels pour la maison et le jardin,Outillage et autres matériels pour la maison et le jardin,Outillage et autres matériels pour la maison et le jardin,"Outillage à main, ustensiles de jardin",5.5.1.1.4
+220,"Ameublement, équipement ménager et entretien courant de la maison",Outillage et autres matériels pour la maison et le jardin,Outillage et autres matériels pour la maison et le jardin,Outillage et autres matériels pour la maison et le jardin,Autres petits matériels pour la maison,5.5.1.1.5
+221,"Ameublement, équipement ménager et entretien courant de la maison",Biens et services pour l'entretien courant de l'habitation,Articles de ménage non durables,Petits articles pour l'entretien du logement,Petits articles pour l'entretien du logement,5.6.1.1.1
+222,"Ameublement, équipement ménager et entretien courant de la maison",Biens et services pour l'entretien courant de l'habitation,Articles de ménage non durables,Petits articles pour l'entretien du logement,Petits articles de quincaillerie et de couture,5.6.1.1.2
+223,"Ameublement, équipement ménager et entretien courant de la maison",Biens et services pour l'entretien courant de l'habitation,Articles de ménage non durables,Savons de ménage et produits d'entretien,Savons de ménage et détergents,5.6.1.2.1
+224,"Ameublement, équipement ménager et entretien courant de la maison",Biens et services pour l'entretien courant de l'habitation,Articles de ménage non durables,Savons de ménage et produits d'entretien,Produits d'entretien de la maison,5.6.1.2.2
+225,"Ameublement, équipement ménager et entretien courant de la maison",Biens et services pour l'entretien courant de l'habitation,Services domestiques et autres services pour l'habitation,Services domestiques,Employé de maison,5.6.2.1.1
+226,"Ameublement, équipement ménager et entretien courant de la maison",Biens et services pour l'entretien courant de l'habitation,Services domestiques et autres services pour l'habitation,Autres services pour l'habitation,Locations d'appareils de nettoyage et de bricolage,5.6.2.2.1
+227,"Ameublement, équipement ménager et entretien courant de la maison",Biens et services pour l'entretien courant de l'habitation,Services domestiques et autres services pour l'habitation,Autres services pour l'habitation,Blanchissage et nettoyage d'articles textiles hors vêtements,5.6.2.2.2
+228,Santé,"Médicaments et autres prod. pharmaceutiques, appareils et mat. thérapeutiques",Préparations et produits pharmaceutiques,Produits pharmaceutiques,Produits pharmaceutiques,6.1.1.1.1
+229,Santé,"Médicaments et autres prod. pharmaceutiques, appareils et mat. thérapeutiques",Préparations et produits pharmaceutiques,Parapharmacie,Parapharmacie,6.1.1.2.1
+230,Santé,"Médicaments et autres prod. pharmaceutiques, appareils et mat. thérapeutiques",Préparations et produits pharmaceutiques,Appareils et matériels thérapeutiques,Optique médicale,6.1.1.3.1
+231,Santé,"Médicaments et autres prod. pharmaceutiques, appareils et mat. thérapeutiques",Préparations et produits pharmaceutiques,Appareils et matériels thérapeutiques,Appareils orthopédiques et prothèses,6.1.1.3.2
+232,Santé,Médecine non hospitalière et services paramédicaux (services ambulatoires),Service des médecins,Médecins,Médecins,6.2.1.1.1
+233,Santé,Médecine non hospitalière et services paramédicaux (services ambulatoires),Service des dentistes,Dentistes,Dentistes,6.2.2.1.1
+234,Santé,Médecine non hospitalière et services paramédicaux (services ambulatoires),Services paramédicaux,Services paramédicaux,Analyses de laboratoire,6.2.3.1.1
+235,Santé,Médecine non hospitalière et services paramédicaux (services ambulatoires),Services paramédicaux,Services paramédicaux,Auxiliaires médicaux,6.2.3.1.2
+236,Santé,Médecine non hospitalière et services paramédicaux (services ambulatoires),Services paramédicaux,Services paramédicaux,Transports sanitaires,6.2.3.1.3
+237,Santé,Médecine non hospitalière et services paramédicaux (services ambulatoires),Services paramédicaux,Services paramédicaux,Cures thermales privées,6.2.3.1.4
+238,Transport,Achats de véhicules,Automobiles neuves et d'occasion,Automobiles neuves,Automobiles neuves,7.1.1.1.1
+239,Transport,Achats de véhicules,Automobiles neuves et d'occasion,Automobiles d'occasion,Automobiles d'occasion,7.1.1.2.1
+240,Transport,Achats de véhicules,"Motos, cycles",Motos et cycles,Motocycles,7.1.2.1.1
+241,Transport,Achats de véhicules,"Motos, cycles",Motos et cycles,Cycles,7.1.2.1.2
+242,Transport,Utilisation de véhicules personnels,"Pièces détachées et accessoires, hors montage, pour véhicules personnels",Pneumatiques,Pneumatiques,7.2.1.1.1
+243,Transport,Utilisation de véhicules personnels,"Pièces détachées et accessoires, hors montage, pour véhicules personnels",Pièces de rechange et accessoires,Autres grosses pièces de rechange  pour véhicules,7.2.1.2.1
+244,Transport,Utilisation de véhicules personnels,"Pièces détachées et accessoires, hors montage, pour véhicules personnels",Pièces de rechange et accessoires,Accessoires et petites pièces de rechange pour véhicules,7.2.1.2.2
+245,Transport,Utilisation de véhicules personnels,Carburants et lubrifiants,Carburants,Supercarburants,7.2.2.1.1
+246,Transport,Utilisation de véhicules personnels,Carburants et lubrifiants,Carburants,Gazole et gpl,7.2.2.1.2
+247,Transport,Utilisation de véhicules personnels,Carburants et lubrifiants,Lubrifiants,Lubrifiants,7.2.2.2.1
+248,Transport,Utilisation de véhicules personnels,Entretien et réparation de véhicules personnels,Entretien de véhicules personnels,Entretien de véhicules personnels,7.2.3.1.1
+249,Transport,Utilisation de véhicules personnels,Entretien et réparation de véhicules personnels,Réparation de véhicules personnels,Réparation de véhicules personnels (heure de m.o.),7.2.3.2.1
+250,Transport,Utilisation de véhicules personnels,Entretien et réparation de véhicules personnels,Réparation de véhicules personnels,Réparation de véhicules personnels (forfait pièces et m.o.),7.2.3.2.2
+251,Transport,Utilisation de véhicules personnels,Autres services liés aux véhicules personnels,Péages et parkings,Péages,7.2.4.1.1
+252,Transport,Utilisation de véhicules personnels,Autres services liés aux véhicules personnels,Péages et parkings,Parkings,7.2.4.1.2
+253,Transport,Utilisation de véhicules personnels,Autres services liés aux véhicules personnels,Autres services pour véhicules personnels,Auto-écoles,7.2.4.2.1
+254,Transport,Utilisation de véhicules personnels,Autres services liés aux véhicules personnels,Autres services pour véhicules personnels,Locations de véhicules privés,7.2.4.2.2
+255,Transport,Utilisation de véhicules personnels,Autres services liés aux véhicules personnels,Autres services pour véhicules personnels,Formalités administratives liées au véhicule personnel,7.2.4.2.3
+256,Transport,Services de transport,Transports ferroviaires de voyageurs,Transports ferroviaires de voyageurs,Transports ferroviaires de voyageurs,7.3.1.1.1
+257,Transport,Services de transport,Transports routiers de voyageurs,Transports routiers de voyageurs,Transports routiers interurbains de voyageurs,7.3.2.1.1
+258,Transport,Services de transport,Transports routiers de voyageurs,Transports routiers de voyageurs,Transports routiers urbains et suburbains de voyageurs,7.3.2.1.2
+259,Transport,Services de transport,Transports routiers de voyageurs,Taxis,Taxis,7.3.2.2.1
+260,Transport,Services de transport,Transports aériens de voyageurs,Transports aériens de voyageurs,Transports aériens de voyageurs,7.3.3.1.1
+261,Transport,Services de transport,Transports combinés de voyageurs,Transports combinés de voyageurs,Transports combinés urbains et suburbains de voyageurs,7.3.5.1.1
+262,Transport,Services de transport,Autres achats de services de transport y.c. transports maritimes et fluviaux,Autres achats de services de transport y.c. transports maritimes et fluviaux,Déménagement,7.3.6.1.1
+263,Transport,Services de transport,Autres achats de services de transport y.c. transports maritimes et fluviaux,Autres achats de services de transport y.c. transports maritimes et fluviaux,Transports maritimes et fluviaux,7.3.6.1.2
+264,Communications,Communications,Services postaux,Services postaux,Services postaux,8.1.1.1.1
+265,Communications,Communications,Équipement et services de téléphone et de télécopie,Équipement de téléphone et de télécopie,Poste téléphonique,8.1.2.1.1
+266,Communications,Communications,Équipement et services de téléphone et de télécopie,Service de télécommunications,Services de télécommunications,8.1.2.2.1
+267,Loisirs et culture,"Équipements   audio-visuels, photographiques  et informatiques",Équipements audio-visuels,Équipements audio-visuels,Matériel vidéo,9.1.1.1.1
+268,Loisirs et culture,"Équipements   audio-visuels, photographiques  et informatiques",Équipements audio-visuels,Équipements audio-visuels,Téléviseurs,9.1.1.1.2
+269,Loisirs et culture,"Équipements   audio-visuels, photographiques  et informatiques",Équipements audio-visuels,Équipements audio-visuels,Autres appareils électro-acoustiques,9.1.1.1.3
+270,Loisirs et culture,"Équipements   audio-visuels, photographiques  et informatiques","Équipements photo et cinéma, instruments d'optique",Équipements photo et cinéma,"Appareils de photo, inst. d'optique, d'observation",9.1.2.1.1
+271,Loisirs et culture,"Équipements   audio-visuels, photographiques  et informatiques","Équipements photo et cinéma, instruments d'optique",Équipements photo et cinéma,Caméscope,9.1.2.1.2
+272,Loisirs et culture,"Équipements   audio-visuels, photographiques  et informatiques",Matériels de traitement de l'information y.c. micro-ordinateurs,Matériels de traitement de l'information y.c. micro-ordinateurs,Matériel de traitement de l'info. yc micro-ordinateurs,9.1.3.1.1
+273,Loisirs et culture,"Équipements   audio-visuels, photographiques  et informatiques",Supports d'enregistrements de l'image et du son,Supports d'enregistrements de l'image et du son,Disques et cassettes enregistrés,9.1.4.1.1
+274,Loisirs et culture,"Équipements   audio-visuels, photographiques  et informatiques",Supports d'enregistrements de l'image et du son,Supports d'enregistrements de l'image et du son,Disquettes et cassettes vierges,9.1.4.1.2
+275,Loisirs et culture,"Équipements   audio-visuels, photographiques  et informatiques",Supports d'enregistrements de l'image et du son,Supports d'enregistrements de l'image et du son,Produits photographiques,9.1.4.1.3
+276,Loisirs et culture,"Équipements   audio-visuels, photographiques  et informatiques","Réparation de matériel audiovisuel, photographique et de traitement de l'information","Réparation de matériel audiovisuel, photographique et de traitement de l'information",Réparation d'appareils et d'accessoires récréatifs,9.1.5.1.1
+277,Loisirs et culture,Autres biens durables importants pour les loisirs et la culture y.c. réparation,Autres biens durables importants pour les loisirs et la culture y.c. réparation,Autres biens durables importants pour les loisirs et la culture y.c. réparation,Caravanes,9.2.1.1.1
+278,Loisirs et culture,Autres biens durables importants pour les loisirs et la culture y.c. réparation,Autres biens durables importants pour les loisirs et la culture y.c. réparation,Autres biens durables importants pour les loisirs et la culture y.c. réparation,Bateaux et accessoires,9.2.1.1.2
+279,Loisirs et culture,Autres biens durables importants pour les loisirs et la culture y.c. réparation,Autres biens durables importants pour les loisirs et la culture y.c. réparation,Autres biens durables importants pour les loisirs et la culture y.c. réparation,Instruments de musique et autres articles pour les loisirs,9.2.1.1.3
+280,Loisirs et culture,"Autres articles et équipements de loisirs, fleurs et animaux d'agrément",Jeux et jouets,Jeux et jouets,Jeux et jouets,9.3.1.1.1
+281,Loisirs et culture,"Autres articles et équipements de loisirs, fleurs et animaux d'agrément","Équipement de sport, de camping et de loisirs de plein air","Équipement de sport, de camping et de loisirs de plein air","Articles de sport, armes et munitions",9.3.2.1.1
+282,Loisirs et culture,"Autres articles et équipements de loisirs, fleurs et animaux d'agrément","Équipement de sport, de camping et de loisirs de plein air","Équipement de sport, de camping et de loisirs de plein air",Articles de camping,9.3.2.1.2
+283,Loisirs et culture,"Autres articles et équipements de loisirs, fleurs et animaux d'agrément",Horticulture,Fleurs et plantes,Fleurs et plantes,9.3.3.1.1
+284,Loisirs et culture,"Autres articles et équipements de loisirs, fleurs et animaux d'agrément",Horticulture,Plants et graines,Plants et graines yc engrais,9.3.3.2.1
+285,Loisirs et culture,"Autres articles et équipements de loisirs, fleurs et animaux d'agrément",Horticulture,Plants et graines,Compositions  florales,9.3.3.2.2
+286,Loisirs et culture,"Autres articles et équipements de loisirs, fleurs et animaux d'agrément",Animaux d'agrément y c. services vétérinaires et autres services,Animaux d'agrément y c. services,Aliments et produits d'hygiène pour animaux,9.3.4.1.1
+287,Loisirs et culture,"Autres articles et équipements de loisirs, fleurs et animaux d'agrément",Animaux d'agrément y c. services vétérinaires et autres services,Animaux d'agrément y c. services,Achats d'animaux,9.3.4.1.2
+288,Loisirs et culture,"Autres articles et équipements de loisirs, fleurs et animaux d'agrément",Animaux d'agrément y c. services vétérinaires et autres services,Animaux d'agrément y c. services,Soins pour animaux d'agrément,9.3.4.1.3
+289,Loisirs et culture,Services récréatifs et culturels,Services récréatifs,Services récréatifs,Pratique d'un sport,9.4.1.1.1
+290,Loisirs et culture,Services récréatifs et culturels,Services récréatifs,Services récréatifs,Assistance à des manifestations sportives,9.4.1.1.2
+291,Loisirs et culture,Services récréatifs et culturels,Services récréatifs,Services récréatifs,Enseignement artistique et autres services récréatifs,9.4.1.1.3
+292,Loisirs et culture,Services récréatifs et culturels,Services culturels,Cinémas,Cinémas,9.4.2.1.1
+293,Loisirs et culture,Services récréatifs et culturels,Services culturels,Autres spectacles culturels et musées,"Théâtres, concerts et music-halls",9.4.2.2.1
+294,Loisirs et culture,Services récréatifs et culturels,Services culturels,Autres spectacles culturels et musées,Visite de monument ou musée,9.4.2.2.2
+295,Loisirs et culture,Services récréatifs et culturels,Services culturels,Redevance et abonnements télévision,Redevance et abonnements télévision,9.4.2.3.1
+296,Loisirs et culture,Services récréatifs et culturels,Services culturels,Autres services culturels,Travaux photographiques,9.4.2.4.1
+297,Loisirs et culture,Services récréatifs et culturels,Services culturels,Autres services culturels,Locations d'articles récréatifs,9.4.2.4.2
+298,Loisirs et culture,"Presse, livres et papeterie",Livres,Livres,"Livres scolaires et parascolaires, dict., encyclo.",9.5.1.1.1
+299,Loisirs et culture,"Presse, livres et papeterie",Livres,Livres,Ouvrages de littérature générale,9.5.1.1.2
+300,Loisirs et culture,"Presse, livres et papeterie",Livres,Livres,"Livres pour la jeunesse, livres pratiques et autres",9.5.1.1.3
+301,Loisirs et culture,"Presse, livres et papeterie",Journaux et périodiques,Journaux,Journaux,9.5.2.1.1
+302,Loisirs et culture,"Presse, livres et papeterie",Journaux et périodiques,Magazines,Revues,9.5.2.2.1
+303,Loisirs et culture,"Presse, livres et papeterie","Imprimés divers, articles de papeterie et de dessin",Articles à base de papier,Autres articles imprimés,9.5.3.1.1
+304,Loisirs et culture,"Presse, livres et papeterie","Imprimés divers, articles de papeterie et de dessin",Articles à base de papier,Articles de papeterie,9.5.3.1.2
+305,Loisirs et culture,"Presse, livres et papeterie","Imprimés divers, articles de papeterie et de dessin",Autres articles de bureau,"Stylos, crayons et encres",9.5.3.2.1
+306,Loisirs et culture,"Presse, livres et papeterie","Imprimés divers, articles de papeterie et de dessin",Autres articles de bureau,Autres fournitures scolaires et de bureau,9.5.3.2.2
+307,Loisirs et culture,Voyages touristiques tout compris,Voyages touristiques tout compris,Voyages touristiques tout compris,Voyages organisés,9.6.1.1.1
