@@ -8,7 +8,7 @@ import numpy
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.surveys import Survey
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.paths import default_config_files_directory as config_files_directory
 from openfisca_survey_manager.temporary import temporary_store_decorator
 
 from openfisca_france_indirect_taxation.build_survey_data.utils import find_nearest_inferior

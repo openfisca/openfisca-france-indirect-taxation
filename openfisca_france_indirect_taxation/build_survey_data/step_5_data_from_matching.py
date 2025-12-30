@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from configparser import ConfigParser
 import datetime
 import os
@@ -8,14 +7,14 @@ import platform
 import pandas
 import subprocess
 
-
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.paths import default_config_files_directory as config_files_directory
 
 from openfisca_france_indirect_taxation.utils import assets_directory
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_4_1_clean_data import prepare_bdf_enl_matching_data
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_4_1_save_data import prepare_bdf_entd_matching_data
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_6_1_calage_depenses_carburants import cale_bdf_entd_matching_data
 from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_4_1_clean_data import prepare_bdf_erfs_matching_data
+
 
 def check_load_config_ini():
     """
@@ -75,6 +74,7 @@ def check_load_config_ini():
         rscript_path = "Rscript"
 
     return path_to_r_libs_user, rscript_path
+
 
 def main(year_data):
     path_to_r_libs_user, path_to_rscript_exe = check_load_config_ini()

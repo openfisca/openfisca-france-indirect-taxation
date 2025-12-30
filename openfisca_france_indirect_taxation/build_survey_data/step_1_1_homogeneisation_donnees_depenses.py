@@ -1,14 +1,12 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
 import logging
 
-
 from openfisca_survey_manager.temporary import temporary_store_decorator
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.paths import default_config_files_directory as config_files_directory
 from openfisca_survey_manager.survey_collections import SurveyCollection
-
+from openfisca_france_indirect_taxation.scripts.build_bdf_nomenclature import build_complete_bdf_nomenclature
 
 log = logging.getLogger(__name__)
 
@@ -106,21 +104,15 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     conso.drop('pondmen', axis = 1, inplace = True)
     conso.set_index('ident_men', inplace = True)
 
-    from openfisca_france_indirect_taxation.scripts.build_coicop_bdf import bdf
-    #coicop_poste_bdf = bdf(year = year)[['code_bdf', 'code_coicop']].copy()
+    # Renomme les colonnes (c01111 - > poste_01_1_1_1) et utilie une nomenclautre BDF ajustée sur la comptabilité nationale.
+    bdf_nomenclature = build_complete_bdf_nomenclature(year = 2017, to_csv= False)
+    bdf_nomenclature.loc[:, 'adjusted_bdf'] = bdf_nomenclature.loc[:, 'adjusted_bdf'].apply(lambda x: 'poste_' + x.replace('.', '_'))
+    bdf_nomenclature.loc[:, 'Code_sous_classe'] = bdf_nomenclature.loc[:, 'Code_sous_classe'].apply(lambda x: 'c' + x)
+    bdf_nomenclature.rename({'Code_sous_classe': 'code_bdf'}, axis = 1, inplace = True)
 
-    from openfisca_france_indirect_taxation.scripts.new_build_coicop_bdf import new_bdf
-    coicop_poste_bdf = new_bdf()[['code_bdf', 'code_coicop']].copy()
-    
-    assert not set(conso.columns).difference(set(coicop_poste_bdf.code_bdf))
-    #assert not set(coicop_poste_bdf.code_bdf.dropna()).difference(set(conso.columns))
-
-    coicop_poste_bdf['formatted_poste'] = 'poste_' + coicop_poste_bdf.code_coicop.str.replace('.', '_')
-    coicop_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['code_coicop']
-    #assert not set(coicop_by_poste_bdf.keys()).difference(set(conso.columns))
-    #assert not set(conso.columns).difference(list(coicop_by_poste_bdf.keys()))
-    formatted_poste_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['formatted_poste']
-    coicop_data_frame = conso.rename(columns = formatted_poste_by_poste_bdf)
+    assert not set(conso.columns).difference(set(bdf_nomenclature.code_bdf))
+    dict_codes = bdf_nomenclature.dropna().set_index('code_bdf').to_dict()['adjusted_bdf']
+    coicop_data_frame = conso.rename(columns = dict_codes)
     depenses = coicop_data_frame.merge(poids, left_index = True, right_index = True)
     
     # On ventile les dépenses gaz et elec (factures jointes) dans les postes facture gaz et facture elec

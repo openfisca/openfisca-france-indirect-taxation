@@ -9,7 +9,7 @@
 
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.paths import default_config_files_directory as config_files_directory
 
 
 def load_data_menages_bdf_entd(year_data):
@@ -83,13 +83,13 @@ def load_data_menages_bdf_entd(year_data):
             'nenfants',
             'decile_rev_uc',        # déciles de revenu par uc
             'npers',
-            #'numcom_au2010',       # cataeu
+            # 'numcom_au2010',       # cataeu
             'pond_menc',            # poids ménage
-            #'rev_final_uc',        # revenus simulés par UC   (pas dispo dans la table public demander table chercheur)
-            #'rlog',                # allocations logement     (pas dispo dans la table public demander table chercheur)
+            # 'rev_final_uc',        # revenus simulés par UC   (pas dispo dans la table public demander table chercheur)
+            # 'rlog',                # allocations logement     (pas dispo dans la table public demander table chercheur)
             'situapr',
             'tuu2017_res',       
-            #'tau99',               (pas dispo dans la table public demander table chercheur)
+            # 'tau99',               (pas dispo dans la table public demander table chercheur)
             # 'typlog',
             'typmen5',              # type ménage
             # To be completed

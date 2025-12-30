@@ -2,7 +2,7 @@
 
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.paths import default_config_files_directory as config_files_directory
 
 
 year = 2008
