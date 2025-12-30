@@ -83,5 +83,5 @@ def build_complete_coicop_nomenclature(year = 2016, to_csv=True):
 
 
 if __name__ == '__main__':
-    coicop_nomenclature = build_complete_coicop_nomenclature(False)
+    coicop_nomenclature = build_complete_coicop_nomenclature(year = 2016, to_csv = True)
     print(coicop_nomenclature.dtypes)
