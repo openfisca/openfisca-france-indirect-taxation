@@ -31,27 +31,27 @@ taxe_by_categorie_fiscale_number = {
     }
 
 
-def _handle_overlap_start(df, overlap_selection, equal_start, start, stop, categorie_fiscale):
+def _handle_overlap_start(df, overlap_selection, start, stop, categorie_fiscale):
     """Gère le chevauchement au début de l'intervalle."""
     # Découpe l'intervalle existant
-    df.loc[overlap_selection & equal_start, 'start'] = stop + 1
+    df.loc[overlap_selection, 'start'] = stop + 1
     # Ajoute une nouvelle ligne pour le nouvel intervalle
-    new_row = df.loc[overlap_selection & equal_start].copy()
+    new_row = df.loc[overlap_selection].copy()
     new_row[['categorie_fiscale', 'start', 'stop']] = categorie_fiscale, start, stop
     df = pd.concat([df, new_row], ignore_index=True)
-    df.sort_values(by='code_coicop', inplace=True)
+    df.sort_values(by=['code_coicop', 'start'], inplace=True)
     return df
 
 
-def _handle_overlap_stop(df, overlap_selection, equal_stop, start, stop, categorie_fiscale):
+def _handle_overlap_stop(df, overlap_selection, start, stop, categorie_fiscale):
     """Gère le chevauchement à la fin de l'intervalle."""
     # Découpe l'intervalle existant
-    df.loc[overlap_selection & equal_stop, 'stop'] = start - 1
+    df.loc[overlap_selection, 'stop'] = start - 1
     # Ajoute une nouvelle ligne pour le nouvel intervalle
-    new_row = df.loc[overlap_selection & equal_stop].copy()
+    new_row = df.loc[overlap_selection].copy()
     new_row[['categorie_fiscale', 'start', 'stop']] = categorie_fiscale, start, stop
     df = pd.concat([df, new_row], ignore_index=True)
-    df.sort_values(by='code_coicop', inplace=True)
+    df.sort_values(by=['code_coicop', 'start'], inplace=True)
     return df
 
 
@@ -117,38 +117,41 @@ def new_apply_modification(coicop_nomenclature= None,
             (coicop_nomenclature.loc[selection, 'start'] != 0).any() or
             (coicop_nomenclature.loc[selection, 'stop'] != 0).any()
             )
-
         if not filled_start_stop:
             # Cas 1: Aucune période définie, on initialise
-            coicop_nomenclature.loc[selection, ['start', 'stop', 'categorie_fiscale']] = start, stop, categorie_fiscale
+            coicop_nomenclature.loc[selection, ['start', 'stop', 'categorie_fiscale']] = 1994, 2024, categorie_fiscale
         else:
-            # Cas 2: Gestion des chevauchements
-            overlap_selection = selection & (coicop_nomenclature.start <= stop) & (coicop_nomenclature.stop >= start)
-            equal_start = coicop_nomenclature.start == start
-            equal_stop = coicop_nomenclature.stop == stop
+            #  Vérifie les chevauchements
+            equal_start = (coicop_nomenclature['start'] == start)
+            equal_stop = (coicop_nomenclature['stop'] == stop)
+            
+            overlap_selection = selection & (coicop_nomenclature['start'] <= start) & (coicop_nomenclature['stop'] >= stop)
 
-            if (overlap_selection & equal_start & equal_stop).any():
-                # Même intervalle: met à jour la catégorie fiscale
-                coicop_nomenclature.loc[overlap_selection & equal_start & equal_stop, 'categorie_fiscale'] = categorie_fiscale
-            elif (overlap_selection & equal_start).any():
-                # Chevauchement au début: découpe l'intervalle existant
-                _handle_overlap_start(coicop_nomenclature, overlap_selection, equal_start, start, stop, categorie_fiscale)
-            elif (overlap_selection & equal_stop).any():
-                # Chevauchement à la fin: découpe l'intervalle existant
-                _handle_overlap_stop(coicop_nomenclature, overlap_selection, equal_stop, start, stop, categorie_fiscale)
-            else:
-                # Chevauchement au milieu: découpe en trois parties
-                _handle_overlap_middle(coicop_nomenclature, overlap_selection, start, stop, categorie_fiscale)
+            if overlap_selection.any():
+                if (overlap_selection & equal_start & equal_stop).any():
+                    # Même intervalle: met à jour la catégorie fiscale
+                    coicop_nomenclature.loc[overlap_selection & equal_start & equal_stop, 'categorie_fiscale'] = categorie_fiscale
+                    if origin is not None:
+                        coicop_nomenclature.loc[overlap_selection & equal_start & equal_stop, 'origin'] = origin
+                elif (overlap_selection & equal_start).any():
+                    # Chevauchement au début: découpe l'intervalle existant
+                    coicop_nomenclature = _handle_overlap_start(coicop_nomenclature, overlap_selection, start, stop, categorie_fiscale)
+                elif (overlap_selection & equal_stop).any():
+                    # Chevauchement à la fin: découpe l'intervalle existant
+                    coicop_nomenclature = _handle_overlap_stop(coicop_nomenclature, overlap_selection, start, stop, categorie_fiscale)
+                else:
+                    # Chevauchement au milieu: découpe en trois parties
+                    coicop_nomenclature = _handle_overlap_middle(coicop_nomenclature, overlap_selection, start, stop, categorie_fiscale)
     else:
-        # Cas 3: Ajout d'une nouvelle entrée
-        additional_row = pd.DataFrame([{
-            'code_coicop': str(value),
+        # Pas de lignes existantes, on ajoute simplement une nouvelle entrée
+        new_row = pd.DataFrame([{
+            'code_coicop': value,
             'categorie_fiscale': categorie_fiscale,
             'start': start,
             'stop': stop,
-            'origin': origin,
+            'origin': origin
             }])
-        coicop_nomenclature = pd.concat([coicop_nomenclature, additional_row], ignore_index=True)
+        coicop_nomenclature = pd.concat([coicop_nomenclature, new_row], ignore_index=True)
         coicop_nomenclature.sort_values(by='code_coicop', inplace=True)
 
     return coicop_nomenclature
@@ -296,7 +299,7 @@ def new_add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv
         os.makedirs(os.path.dirname(output_path), exist_ok=True)        # Crée le répertoire s'il n'existe pas
         coicop_nomenclature.to_csv(output_path, index=False)
 
-    return coicop_nomenclature.copy()
+    return coicop_nomenclature
 
 
 def new_get_categorie_fiscale(value, year=None, assertion_error=True):

@@ -159,7 +159,7 @@ def add_fiscal_categories_to_bdf_nomenclature(bdf_nomenclature, to_csv=False):
         os.makedirs(os.path.dirname(output_path), exist_ok=True)        # Crée le répertoire s'il n'existe pas
         bdf_nomenclature.to_csv(output_path, index=False)
 
-    return bdf_nomenclature.copy()
+    return bdf_nomenclature
 
 
 def test_bdf_legislation():
