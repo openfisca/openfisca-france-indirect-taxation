@@ -33,7 +33,7 @@ class FranceIndirectTaxationTaxBenefitSystem(TaxBenefitSystem):
     def prefill_cache(self):
         '''Load data for poste_*, categorie fiscales & prix carburants variables'''
         from openfisca_france_indirect_taxation.variables.consommation import postes_coicop
-        postes_coicop.preload_postes_coicop_data_frame(self)
+        postes_coicop.preload_postes_bdf_data_frame(self)
         from openfisca_france_indirect_taxation.variables.consommation import categories_fiscales
         categories_fiscales.preload_categories_fiscales_data_frame(self)
         from .parameters import prix_carburants

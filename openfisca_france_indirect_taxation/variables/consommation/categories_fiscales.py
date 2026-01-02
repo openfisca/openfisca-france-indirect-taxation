@@ -36,7 +36,7 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
             postes_coicop = sorted(
                 completed_categories_fiscales.query(
                     'start <= @year and stop >= @year and categorie_fiscale == @categorie_fiscale'
-                    )['code_coicop'].astype(str))
+                    )['adjusted_bdf'].astype(str))
 
             if year == year_start:
                 previous_postes_coicop = postes_coicop
@@ -102,9 +102,8 @@ def generate_variables(tax_benefit_system, categories_fiscales = None, reform_ke
 
 
 def preload_categories_fiscales_data_frame(tax_benefit_system):
-    global codes_coicop_data_frame
     global categories_fiscales_data_frame
-    if codes_coicop_data_frame is None or categories_fiscales_data_frame is None:
-        categories_fiscales_data_frame, codes_coicop_data_frame = get_legislation_data_frames()
+    if categories_fiscales_data_frame is None:
+        categories_fiscales_data_frame = get_legislation_data_frames()
 
     generate_variables(tax_benefit_system, categories_fiscales = categories_fiscales_data_frame.copy())
