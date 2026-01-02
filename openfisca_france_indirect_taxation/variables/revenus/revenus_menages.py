@@ -39,9 +39,9 @@ class niveau_de_vie(YearlyVariable):
 
 
 class niveau_vie_decile(YearlyVariable):
-    value_type = Enum
-    default_value = Deciles.hors_champs
-    possible_values = Deciles
+    value_type = float
+    #default_value = Deciles.hors_champs
+    #possible_values = Deciles
     entity = Menage
     label = 'Décile de niveau de vie'
 
@@ -57,9 +57,9 @@ class niveau_vie_decile(YearlyVariable):
         return niveau_vie_decile
 
 class decile_indiv_niveau_vie(YearlyVariable):
-    value_type = Enum
-    default_value = Deciles.hors_champs
-    possible_values = Deciles
+    value_type = float
+    #default_value = Deciles.hors_champs
+    #possible_values = Deciles
     entity = Menage
     label = "Décile de niveau de vie"
 
@@ -73,9 +73,9 @@ class decile_indiv_niveau_vie(YearlyVariable):
         return decile_indiv_niveau_vie
 
 class decile_rev_disponible(YearlyVariable):
-    value_type = Enum
-    default_value = Deciles.hors_champs
-    possible_values = Deciles
+    value_type = float
+    #default_value = Deciles.hors_champs
+    #possible_values = Deciles
     entity = Menage
     label = "Décile de revenu disponible"
 
