@@ -152,7 +152,9 @@ def add_fiscal_categories_to_bdf_nomenclature(bdf_nomenclature, to_csv=False):
         else:
             # Sinon, applique la règle normalement
             bdf_nomenclature = new_apply_modification(bdf_nomenclature, **rule)
-
+            
+    # On renomme code_coicop code_bdf pour une meilleure lisibilité
+    bdf_nomenclature.rename({'code_coicop': 'code_bdf'}, axis = 1, inplace= True)
     # Sauvegarde le résultat dans un fichier CSV si demandé
     if to_csv:
         output_path = os.path.join(legislation_directory, 'bdf_2017_legislation.csv')
