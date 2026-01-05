@@ -72,7 +72,7 @@ def build_complete_coicop_nomenclature(year = 2016, to_csv=True):
     # Optionally save
     if to_csv:
         coicop_nomenclature.to_csv(
-            os.path.join(legislation_directory, "nomenclature_coicop.csv"),
+            os.path.join(legislation_directory, "coicop_nomenclature.csv"),
             index=False
             )
 
