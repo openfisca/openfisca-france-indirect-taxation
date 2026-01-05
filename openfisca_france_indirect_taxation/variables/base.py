@@ -117,18 +117,17 @@ def get_poste_categorie_fiscale(poste_coicop, legislation_dataframe=None, year=N
 
 
 def depenses_postes_agreges_function_creator(postes_coicop, legislation_dataframe= None, reform_key=None,
-        taux_by_categorie_fiscale=None, year_start=None, year_stop=None):
+        taux_by_categorie_fiscale=None, year_start=None):
     """
-    Crée une fonction pour calculer les dépenses agrégées pour une liste de postes COICOP,
+    Crée les fonctions pour calculer les dépenses agrégées pour une liste de postes COICOP,
     en tenant compte des changements de catégories fiscales d'une année à l'autre.
 
     Args:
         postes_coicop (list): Liste des codes COICOP.
-        categories_fiscales (pd.DataFrame, optional): DataFrame contenant les catégories fiscales.
+        legislation_dataframe (pd.DataFrame, optional): DataFrame contenant la législation.
         reform_key (str, optional): Clé de réforme si applicable.
         taux_by_categorie_fiscale (dict, optional): Dictionnaire des taux de TVA par catégorie fiscale.
         year_start (int, optional): Année de début de la période.
-        year_stop (int, optional): Année de fin de la période.
 
     Returns:
         function: Une fonction pour calculer les dépenses agrégées.
@@ -166,7 +165,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, legislation_datafram
             poste_agrege = 0
             for poste in postes_coicop:
                 # Obtenir la catégorie fiscale pour ce poste et cette année
-                categorie_fiscale = get_poste_categorie_fiscale(poste, legislation_dataframe, year, year)
+                categorie_fiscale = get_poste_categorie_fiscale(poste, legislation_dataframe, year)
                 if categorie_fiscale:
                     categorie_fiscale = categorie_fiscale[0]
                 else:
@@ -214,7 +213,7 @@ def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, yea
     return func
 
 
-def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, year_start = None, year_stop = None):
+def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, year_start = None):
     assert categorie_fiscale is not None
 
     def func(entity, period_arg, parameters, categorie_fiscale = categorie_fiscale):

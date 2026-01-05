@@ -15,6 +15,13 @@ bdf_legislation_data_frame = None
 
 
 def generate_postes_variables(tax_benefit_system, legislation_dataframe = None):
+    """
+    Génère et ajoute au tax and benefit system des variables de dépenses TTC pour chaque poste COICOP.
+
+   Args:
+        tax_benefit_system : Un tax and benefit system.
+        legislation_dataframe (pd.DataFrame, optional): DataFrame contenant la législation.
+    """
     if legislation_dataframe is None:
         legislation_dataframe = get_legislation_data_frames()
     adjusted_codes_bdf = [element for element in legislation_dataframe.adjusted_bdf.unique()]
@@ -37,18 +44,21 @@ def generate_postes_variables(tax_benefit_system, legislation_dataframe = None):
 
 def generate_depenses_ht_postes_variables(tax_benefit_system, legislation_dataframe=None, reform_key=None):
     """
-    Génère des variables de dépenses HT pour chaque poste COICOP en fonction des catégories fiscales et des années de validité.
+    Génère et ajoute au tax and benefit system des variables de dépenses HT pour chaque poste COICOP en fonction des catégories fiscales et des années de validité.
+
+   Args:
+        tax_benefit_system : Un tax and benefit system.
+        legislation_dataframe (pd.DataFrame, optional): DataFrame contenant la législation.
+        reform_key (str, optional): Clé de réforme si applicable.
     """
     if legislation_dataframe is None:
         legislation_dataframe = get_legislation_data_frames()
-    postes_coicop_all = set()
     functions_by_name_by_poste = {}
 
     # Obtenir tous les postes COICOP uniques
     postes_coicop = legislation_dataframe['adjusted_bdf'].drop_duplicates().astype(str).tolist()
 
     for poste_coicop in postes_coicop:
-        postes_coicop_all.add(poste_coicop)
 
         # Filtrer les lignes pour ce poste COICOP
         poste_data = legislation_dataframe[legislation_dataframe['adjusted_bdf'] == poste_coicop]
@@ -62,7 +72,6 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, legislation_datafr
         for _, row in poste_data.iterrows():
             current_category = row['categorie_fiscale']
             current_start = row['start']
-            current_stop = row['stop']
 
             if current_category != previous_category or current_start != start_year:
                 # Si la catégorie ou la période a changé, créer une nouvelle fonction
@@ -71,8 +80,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, legislation_datafr
                     dated_func = depenses_ht_postes_function_creator(
                         poste_coicop,
                         categorie_fiscale=previous_category,
-                        year_start=start_year,
-                        year_stop=current_start - 1
+                        year_start=start_year
                         )
 
                     function_name = f'formula_{start_year}'
@@ -90,8 +98,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, legislation_datafr
         dated_func = depenses_ht_postes_function_creator(
             poste_coicop,
             categorie_fiscale=previous_category,
-            year_start=start_year,
-            year_stop=current_stop
+            year_start=start_year
             )
 
         function_name = f'formula_{start_year}'
@@ -119,7 +126,7 @@ def generate_depenses_ht_postes_variables(tax_benefit_system, legislation_datafr
 def generate_postes_agreges_variables(tax_benefit_system, legislation_dataframe=None, reform_key=None,
                                       taux_by_categorie_fiscale=None):
     """
-    Génère des variables de postes agrégés pour chaque préfixe de code COICOP,
+    Génère et ajoute au tax and benefit system des variables de postes agrégés pour chaque préfixe de code COICOP,
     en créant des fonctions datées pour chaque période de validité.
     """
     year_start = 1994
@@ -152,14 +159,12 @@ def generate_postes_agreges_variables(tax_benefit_system, legislation_dataframe=
             # Si les catégories ont changé ou si c'est la dernière année, créer une fonction datée
             if current_categories != previous_categories or year == year_final_stop:
                 if previous_categories is not None:
-                    year_stop = year - 1
                     dated_func = depenses_postes_agreges_function_creator(
                         codes_bdf,
                         legislation_dataframe=legislation_dataframe,
                         reform_key=reform_key,
                         taux_by_categorie_fiscale=taux_by_categorie_fiscale,
-                        year_start=current_year_start,
-                        year_stop=year_stop
+                        year_start=current_year_start
                         )
                     function_name = f'formula_{current_year_start}'
                     functions_by_name[function_name] = dated_func
@@ -174,8 +179,7 @@ def generate_postes_agreges_variables(tax_benefit_system, legislation_dataframe=
             legislation_dataframe=legislation_dataframe,
             reform_key=reform_key,
             taux_by_categorie_fiscale=taux_by_categorie_fiscale,
-            year_start=current_year_start,
-            year_stop=year_final_stop
+            year_start=current_year_start
             )
         function_name = f'formula_{current_year_start}'
         functions_by_name[function_name] = dated_func
