@@ -3,7 +3,7 @@ import os
 
 from openfisca_france_indirect_taxation.utils import assets_directory
 
-from openfisca_france_indirect_taxation.scripts.new_build_coicop_legislation import new_apply_modification
+from openfisca_france_indirect_taxation.scripts.build_coicop_legislation import apply_modification
 from openfisca_france_indirect_taxation.scripts import build_bdf_nomenclature
 
 
@@ -148,10 +148,10 @@ def add_fiscal_categories_to_bdf_nomenclature(bdf_nomenclature, to_csv=False):
             for single_value in value:
                 single_rule = rule.copy()
                 single_rule['value'] = single_value
-                bdf_nomenclature = new_apply_modification(bdf_nomenclature, **single_rule)
+                bdf_nomenclature = apply_modification(bdf_nomenclature, **single_rule)
         else:
             # Sinon, applique la règle normalement
-            bdf_nomenclature = new_apply_modification(bdf_nomenclature, **rule)
+            bdf_nomenclature = apply_modification(bdf_nomenclature, **rule)
             
     # On renomme code_coicop code_bdf pour une meilleure lisibilité
     bdf_nomenclature.rename({'code_coicop': 'code_bdf'}, axis = 1, inplace= True)
