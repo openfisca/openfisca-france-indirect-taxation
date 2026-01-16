@@ -79,25 +79,25 @@ def load_data_menages_bdf_entd(year_data):
             'cs42pr',
             'dipdetpr',
             'nactifs',
-            'coeffuc',              # ocde10
+            'coeffuc',               # ocde10
             'nenfants',
-            'decile_rev_uc',        # déciles de revenu par uc
+            'decile_rev_uc',         # déciles de revenu par uc
             'npers',
             # 'numcom_au2010',       # cataeu
-            'pond_menc',            # poids ménage
+            'pond_menc',             # poids ménage
             # 'rev_final_uc',        # revenus simulés par UC   (pas dispo dans la table public demander table chercheur)
             # 'rlog',                # allocations logement     (pas dispo dans la table public demander table chercheur)
             'situapr',
-            'tuu2017_res',       
-            # 'tau99',               (pas dispo dans la table public demander table chercheur)
+            'tuu2017_res',      
+            # 'tau99',               (pas dispo dans la table public demander table chercheur ??)
             # 'typlog',
             'typmen5',              # type ménage
             # To be completed
             ]
-        
+     
         variables_menage_entd = [
             'ident_men']
-        
+     
     variables_menage_bdf = [
         'ident_men',
         'aidlog1',

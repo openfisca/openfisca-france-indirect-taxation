@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-import pandas
-from pandas import DataFrame
+import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from matplotlib.ticker import FuncFormatter
@@ -58,7 +57,7 @@ def simulate_df_calee_by_grosposte(simulated_variables, year):
     data_year = year
     survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
     simulation = survey_scenario.new_simulation()
-    return DataFrame(
+    return pd.DataFrame(
         dict([
             (name, simulation.calculate(name, period = year)) for name in simulated_variables
 
@@ -76,7 +75,7 @@ def simulate_df_calee_on_ticpe(simulated_variables, year):
     data_year = year
     survey_scenario = SurveyScenario().create(year = year, data_year = data_year)
     simulation = survey_scenario.new_simulation()
-    return DataFrame(
+    return pd.DataFrame(
         dict([
             (name, simulation.calculate(name, period = year)) for name in simulated_variables
 
@@ -178,7 +177,7 @@ def collapse(dataframe, groupe, var, weights):
     Pour une variable, fonction qui calcule la moyenne pondérée au sein de chaque groupe.
     '''
     grouped = dataframe.groupby([groupe])
-    var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x, var = var, weights = weights))
+    var_weighted_grouped = grouped.apply(lambda x: wavg(groupe = x, var = var, weights = weights), include_groups=False)
     return var_weighted_grouped
 
 
@@ -187,12 +186,12 @@ def dataframe_by_group(
         use_baseline = False, difference = False,
         aggfunc = 'mean',
         ):
-    pivot_table = pandas.DataFrame()
+    pivot_table = pd.DataFrame()
     period = survey_scenario.year
 
     if difference:
         for values_reference in variables:
-            pivot_table = pandas.concat([
+            pivot_table = pd.concat([
                 pivot_table,
                 survey_scenario.compute_pivot_table(
                     values = [values_reference],
@@ -204,7 +203,7 @@ def dataframe_by_group(
     else:
         if use_baseline:
             for values_reference in variables:
-                pivot_table = pandas.concat([
+                pivot_table = pd.concat([
                     pivot_table,
                     survey_scenario.compute_pivot_table(
                         values = [values_reference],
@@ -215,7 +214,7 @@ def dataframe_by_group(
                     ])
         else:
             for values_reform in variables:
-                pivot_table = pandas.concat([
+                pivot_table = pd.concat([
                     pivot_table,
                     survey_scenario.compute_pivot_table(
                         values = [values_reform],
@@ -234,10 +233,8 @@ def df_weighted_average_grouped(dataframe, groupe, varlist, weights):
     '''
     Agrège les résultats de weighted_average_grouped() en une unique dataframe pour la liste de variable 'varlist'.
     '''
-    return DataFrame(
-        dict([
-            (var, collapse(dataframe, groupe, var, weights = weights)) for var in varlist
-            ])
+    return pd.DataFrame(
+        {var: collapse(dataframe, groupe, var, weights = weights) for var in varlist}
         )
 
 

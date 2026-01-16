@@ -4,9 +4,8 @@
 # homogènes, qui seront ensuite importées dans R pour l'appariement. On effectue
 # au préalable les corrections nécessaires pour avoir des bases homogènes.
 
-
 import os
-import pandas as pd
+# import pandas as pd
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
@@ -72,4 +71,3 @@ def prepare_bdf_entd_matching_data(year_data):
         )
     data_entd.to_csv(os.path.join(matching_entd_directory, 'data_matching_entd.csv'), sep = ',')
     data_bdf.to_csv(os.path.join(matching_entd_directory, 'data_matching_bdf.csv'), sep = ',')
-    

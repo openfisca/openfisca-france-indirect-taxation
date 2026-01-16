@@ -39,23 +39,23 @@ def load_data_vehicules_bdf_entd(year_data):
         'ident_numveh',     # identifiant du véhicule
         'num_veh',          # numéro du véhicule
         'energie_agrege',   # carburant principal
-        'puis_fisc_fin',    # puissance fiscale 
+        'puis_fisc_fin',    # puissance fiscale
         'age',              # age du véhicule (en mois)
-        #'v1_rang_veh',     # rang du véhicule dans le ménage
-        #'v1_sfvachat',     # état du véhicule à l'achat
+        # 'v1_rang_veh',    # rang du véhicule dans le ménage
+        # 'v1_sfvachat',    # état du véhicule à l'achat
         'kvcons',           # consommation
-        #'v1_sfvdatcg',     # date carte grise
+        # 'v1_sfvdatcg',    # date carte grise
         'annee_1mec',       # Année mise en circulation
         'kvkm1anv'          # nb kilomètres 12 derniers mois, redressés
         ]
 
     variables_menage_entd = [
-        'ident_men', 
-        #'v1_logdist01',     # distance commerces et supermarchés                       (pas dans q_menage regarder ailleurs ?)
-        #'v1_logdist15',     # distance arrêts transports en commun                     (pas dans q_menage regarder ailleurs ?)
-        'jnbveh',            # nb de voitures particulières
-        #'v1_jpasvoit_b',    # utilité du VP : se rendre au travail                     (pas dans q_menage regarder ailleurs ?)
-        #'v1_jpasvoit_c',    # utilité du VP : déplacements dans le cadre du travail    (pas dans q_menage regarder ailleurs ?)
+        'ident_men',
+        # 'v1_logdist01',     # distance commerces et supermarchés                       (pas dans q_menage regarder ailleurs ?)
+        # 'v1_logdist15',     # distance arrêts transports en commun                     (pas dans q_menage regarder ailleurs ?)
+        'jnbveh',             # nb de voitures particulières
+        # 'v1_jpasvoit_b',    # utilité du VP : se rendre au travail                     (pas dans q_menage regarder ailleurs ?)
+        # 'v1_jpasvoit_c',    # utilité du VP : déplacements dans le cadre du travail    (pas dans q_menage regarder ailleurs ?)
         ]
 
     if year_bdf == 2011:
@@ -89,14 +89,15 @@ def load_data_vehicules_bdf_entd(year_data):
             'numvehic',         # numéro du véhicule
             'privoi_d',         # prix à l'achat, redressé
             'recvoi',           # année d'achat
-        ]
+            ]
 
     # Keep relevant variables :
     vehicule_menage_entd_keep = input_entd_vehicule[variables_vehicules_entd]
     menage_entd_keep = input_entd_menage[variables_menage_entd]
     vehicule_bdf_keep = input_bdf[variables_vehicules_bdf]
-    
+
     return vehicule_menage_entd_keep, menage_entd_keep, vehicule_bdf_keep
+
 
 def merge_vehicule_menage(year_data):
     data_entd, data_entd_menage, data_bdf = load_data_vehicules_bdf_entd(year_data)
@@ -107,7 +108,7 @@ def merge_vehicule_menage(year_data):
     data_entd['age_vehicule'] = 0
     data_entd.loc[data_entd['anvoi'] != 0, 'age_vehicule'] = 2019 - data_entd['anvoi']
 
-    data_bdf['anvoi' ] = data_bdf['anvoi'].fillna(0).astype(int)
+    data_bdf['anvoi'] = data_bdf['anvoi'].fillna(0).astype(int)
     data_bdf['age_vehicule'] = 0
     data_bdf.loc[data_bdf['anvoi'] != 0, 'age_vehicule'] = year_data - data_bdf['anvoi']
 
@@ -147,8 +148,7 @@ def merge_vehicule_menage(year_data):
         'distance_essence',
         'distance_diesel',
         'distance_autre_carbu',
-        'ident_men',
-            ]
+        'ident_men']
         ].groupby(by = 'ident_men').sum()
     data_vehicule_entd = data_vehicule_entd.reset_index()
 
@@ -182,9 +182,8 @@ def merge_vehicule_menage(year_data):
         'km_essence',
         'km_diesel',
         'km_autre_carbu',
-        'ident_men',
-        ]
-    ].groupby(by = 'ident_men').sum()
+        'ident_men']
+        ].groupby(by = 'ident_men').sum()
     data_vehicule_bdf = data_vehicule_bdf.reset_index()
 
     # Df avec les infos du véhicule principal (dans BdF)
@@ -202,28 +201,28 @@ def merge_vehicule_menage(year_data):
         )
     data_bdf = data_bdf[
         ['ident_men', 'prix_achat', 'veh_tot', 'etat_veh_achat', 'age_vehicule', 'vp_domicile_travail', 'vp_deplacements_pro']
-    ]
+        ]
 
     # Df infos comportements ménages
     data_entd_menage.rename(
         columns = {
-            #'v1_logdist01': 'distance_commerces',              (pas dans q_menage regarder ailleurs ?)
-            #'v1_logdist15': 'distance_transports_communs',     (pas dans q_menage regarder ailleurs ?)    
+            # 'v1_logdist01': 'distance_commerces',              (pas dans q_menage regarder ailleurs ?)
+            # 'v1_logdist15': 'distance_transports_communs',     (pas dans q_menage regarder ailleurs ?)   
             'jnbveh': 'veh_tot',
-            #'v1_jpasvoit_b': 'vp_domicile_travail',            (pas dans q_menage regarder ailleurs ?)
-            #'v1_jpasvoit_c': 'vp_deplacements_pro'             (pas dans q_menage regarder ailleurs ?)
+            # 'v1_jpasvoit_b': 'vp_domicile_travail',            (pas dans q_menage regarder ailleurs ?)
+            # 'v1_jpasvoit_c': 'vp_deplacements_pro'             (pas dans q_menage regarder ailleurs ?)
             },
         inplace = True,
         )
-
 
     # Merge les différentes df
     data_entd_full = data_vehicule_entd.merge(data_entd, on = 'ident_men', how = 'left')
     data_entd_final = data_entd_menage.merge(data_entd_full, on = 'ident_men', how = 'left')
 
     data_bdf_full = data_vehicule_bdf.merge(data_bdf, on = 'ident_men', how = 'left')
-    
+
     return data_entd_final, data_bdf_full
+
 
 def build_df_menages_vehicles(year_data):
     data_menages_entd, data_menages_bdf = load_data_menages_bdf_entd(year_data)

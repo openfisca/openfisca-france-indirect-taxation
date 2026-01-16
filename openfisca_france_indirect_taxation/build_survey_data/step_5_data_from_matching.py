@@ -150,18 +150,18 @@ def main(year_data):
     data_matched_enl = data_matched_enl[enl_variables].copy()
 
     entd_variables = [
-        'age_carte_grise',
+        # 'age_carte_grise',
         'age_vehicule',
         'depenses_carburants_corrigees_entd',
         'depenses_diesel_corrigees_entd',
         'depenses_essence_corrigees_entd',
         'distance_diesel',
         'distance_essence',
-        'distance_routiere_hebdomadaire_teg',
+        # 'distance_routiere_hebdomadaire_teg',         # not for EMP 2019
         'distance',
-        'duree_moyenne_trajet_aller_retour_teg',
+        # 'duree_moyenne_trajet_aller_retour_teg',      # not for EMP 2019
         'ident_men',
-        'mode_principal_deplacement_teg',
+        # 'mode_principal_deplacement_teg',             # not for EMP 2019
         'vp_deplacements_pro',
         'vp_domicile_travail',
         ]

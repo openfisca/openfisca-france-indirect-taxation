@@ -87,8 +87,8 @@ def get_reste_a_charge_sante_cn(target_year):
     depenses_sante = pd.read_excel(depenses_sante_file_path, sheet_name = "Graph 7", header = 4, usecols = [i for i in range(1, 16)])
     depenses_sante = depenses_sante.drop(index = [3, 4, 5], axis = 0).rename({'Unnamed: 1': 'Financeur'}, axis = 1)
 
-    menages = float(depenses_sante.loc[depenses_sante['Financeur'] == 'Ménages', target_year])
-    complementaires = float(depenses_sante.loc[depenses_sante['Financeur'] == 'Organismes complémentaires', target_year])
+    menages = float(depenses_sante.loc[depenses_sante['Financeur'] == 'Ménages', target_year].iloc[0])
+    complementaires = float(depenses_sante.loc[depenses_sante['Financeur'] == 'Organismes complémentaires', target_year].iloc[0])
     part_menages = menages / (menages + complementaires)
     return part_menages
 
@@ -174,14 +174,12 @@ def new_get_inflators_bdf_to_cn(data_year):
     data_bdf_postes_cn = pd.DataFrame()
     liste_postes_bdf = data_bdf.index.tolist()
 
-    data_bdf_postes_cn = pd.DataFrame(index=[0])
+    bdf_aggregates = {poste: 0 for poste in liste_postes_cn}
     for poste in liste_postes_cn:
-        data_bdf_postes_cn[poste] = 0
         for element in liste_postes_bdf:
             if poste in element:
-                data_bdf_postes_cn[poste] += float(data_bdf.loc[element])
-    data_bdf_postes_cn = data_bdf_postes_cn.transpose()
-    data_bdf_postes_cn.rename(columns={0: 'bdf_aggregates'}, inplace = True)
+                bdf_aggregates[poste] += float(data_bdf.loc[element].iloc[0])
+    data_bdf_postes_cn = pd.DataFrame.from_dict(bdf_aggregates, orient='index', columns=['bdf_aggregates'])
 
     masses = data_cn.merge(data_bdf_postes_cn, left_index = True, right_index = True)
     masses.rename(columns = {'bdf_aggregates': 'conso_bdf{}'.format(data_year)}, inplace = True)

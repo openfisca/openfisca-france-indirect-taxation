@@ -19,6 +19,7 @@ from openfisca_france_indirect_taxation.utils import assets_directory
 #         ), sep =',', decimal = '.'
 #     )
 
+
 def calage_depenses_from_distance(data_matched):
     """
     Adjust fuel expenditures based on distance traveled,
@@ -28,7 +29,6 @@ def calage_depenses_from_distance(data_matched):
     # group by decile and rural flag
     grouped = data_matched.groupby(['niveau_vie_decile', 'rural'])
 
-    results = []
     for (decile, rur), group in grouped:
         # weighted averages
         avg_distance = (group['distance'] * group['pondmen']).sum() / group['pondmen'].sum()

@@ -130,6 +130,7 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
 
     # On ne garde que les ménages métropolitains
     if year_data in [2011, 2017]:
+        data_frame = data_frame.loc[:, ~data_frame.columns.duplicated()]
         data_frame = data_frame.query('zeat != 0').copy()
 
     if year_data in [2011, 2017] and not skip_matching:
