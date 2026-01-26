@@ -41,7 +41,7 @@ def simulate(simulated_variables, year):
     '''
     data_year = year
     survey_scenario = SurveyScenario.create(
-        year = year,
+        period = year,
         data_year = data_year
         )
     return survey_scenario.create_data_frame_by_entity(simulated_variables, period = year)['menage']

@@ -31,7 +31,7 @@ def test(display_plot = False):
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
-        year = year,
+        period = year,
         )
 
     pivot_table = pandas.DataFrame()

@@ -16,7 +16,7 @@ def test_rattrapage_diesel_bis():
         elasticities = elasticities,
         # inflation_kwargs = inflation_kwargs,
         reform = reforme_rattrapage_diesel,
-        year = year,
+        period = year,
         )
 
     simulated_variables = ['depenses_essence_ajustees_rattrapage_diesel', 'depenses_essence', 'elas_price_1_1']
