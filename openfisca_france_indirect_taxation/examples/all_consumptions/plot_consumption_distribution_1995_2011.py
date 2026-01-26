@@ -10,7 +10,7 @@ import seaborn
 # Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.examples.calage_bdf_cn_bis import get_inflators_by_year
+from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators_by_year
 # from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 
 
@@ -20,7 +20,7 @@ seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 if __name__ == '__main__':
 
-    inflators_by_year = get_inflators_by_year(rebuild = False)
+    inflators_by_year = new_get_inflators_by_year(rebuild = False)
     # Liste des coicop agrégées en 12 postes
     suffixes = ['0{}'.format(i) for i in range(1, 10)] + ['10', '11', '12']
     simulated_variables = ['poste_agrege_{}'.format(suffix) for suffix in suffixes]

@@ -3,7 +3,7 @@
 
 from openfisca_core.reforms import Reform
 
-from openfisca_france_indirect_taxation.variables.consommation.categories_fiscales import generate_variables
+from openfisca_france_indirect_taxation.variables.consommation.categories_fiscales import generate_depenses_ht_categories_fiscales_variables
 
 
 class reforme_alimentation(Reform):
@@ -22,8 +22,8 @@ class reforme_alimentation(Reform):
             'categorie_fiscale'
             ] = ''
 
-        generate_variables(
-            categories_fiscales = categories_fiscales,
-            reform_key = self.name,
+        generate_depenses_ht_categories_fiscales_variables(
             tax_benefit_system = self,
+            legislation_dataframe = categories_fiscales,
+            reform_key = self.name,
             )

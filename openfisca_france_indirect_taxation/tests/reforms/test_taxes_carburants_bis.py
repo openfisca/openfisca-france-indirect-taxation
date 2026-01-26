@@ -3,13 +3,13 @@
 
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
-from openfisca_france_indirect_taxation.examples.calage_bdf_cn_bis import get_inflators_by_year
+from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators_by_year
 from openfisca_france_indirect_taxation.reforms.rattrapage_diesel import reforme_rattrapage_diesel
 
 
 def test_rattrapage_diesel_bis():
     year = 2011
-    inflators_by_year = get_inflators_by_year(rebuild = False)
+    inflators_by_year = new_get_inflators_by_year(rebuild = False)
     inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])  # noqa analysis:ignore
     elasticities = get_elasticities(year)
     survey_scenario = SurveyScenario.create(
