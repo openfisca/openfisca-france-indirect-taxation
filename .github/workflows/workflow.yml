@@ -1,4 +1,4 @@
-name: OpenFisca France Indirect Taxation
+name: Build, lint and test
 
 on:
   push:
@@ -81,5 +81,5 @@ jobs:
           key: build-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ github.sha }}-ubuntu-20.04
       - name: Test carburants
         run: openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/*carbu*
-      - name: Test TVA
-        run: openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/*carbu*
+      # - name: Test TVA
+      #   run: openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/tva.yaml
