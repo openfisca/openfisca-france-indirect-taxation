@@ -4,12 +4,12 @@
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.elasticites_aidsills import get_elasticities_aidsills
 
-from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators
+from openfisca_france_indirect_taxation.Calage_consommation_bdf import get_inflators
 
 
 year = 2016
 data_year = 2011
-inflators = new_get_inflators(2013,2017)
+inflators = get_inflators(2013,2017)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 elasticities = get_elasticities_aidsills(data_year, True)
 

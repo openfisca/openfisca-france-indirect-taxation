@@ -6,13 +6,13 @@ Ce document donne des exemples d'utilisation, centrés sur la TVA, qui couvrent 
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.utils import get_input_data_fram
-from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators_by_year
+from openfisca_france_indirect_taxation.Calage_consommation_bdf import get_inflators_by_year
 from openfisca_france_indirect_taxation.Calage_revenus_bdf import calage_bdf_niveau_vie
 
 data_year = 2017
 year = 2024
 tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
-inflators_by_year = new_get_inflators_by_year(rebuild = False, year_range = range(2017, 2025), data_year = data_year)
+inflators_by_year = get_inflators_by_year(rebuild = False, year_range = range(2017, 2025), data_year = data_year)
 inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
 ```
 

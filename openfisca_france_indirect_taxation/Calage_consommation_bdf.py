@@ -18,7 +18,7 @@ from openfisca_france_indirect_taxation.Correction_territoriale import get_corre
     '''
 
 
-def new_get_bdf_aggregates(data_year = None):
+def get_bdf_aggregates(data_year = None):
     ''' Calcule les agrégats de Bdf pour l'année des données.'''
     assert data_year is not None
     depenses = get_input_data_frame(data_year)
@@ -93,7 +93,7 @@ def get_reste_a_charge_sante_cn(target_year):
     return part_menages
 
 
-def new_get_cn_aggregates(target_year):
+def get_cn_aggregates(target_year):
     ''' Calcule les agrégats de compta nat utilisables pour un année cible.'''
     # Dépenses de conso
     conso_effective_file_path = os.path.join(
@@ -165,12 +165,12 @@ def new_get_cn_aggregates(target_year):
     return masses_cn_postes_data_frame * int(1e6)
 
 
-def new_get_inflators_bdf_to_cn(data_year):
+def get_inflators_bdf_to_cn(data_year):
     '''Calcule l'inflateur de calage à partir des masses de comptabilité nationale.'''
-    data_cn = new_get_cn_aggregates(data_year)
+    data_cn = get_cn_aggregates(data_year)
     liste_postes_cn = data_cn.index.tolist()
 
-    data_bdf = new_get_bdf_aggregates(data_year)
+    data_bdf = get_bdf_aggregates(data_year)
     data_bdf_postes_cn = pd.DataFrame()
     liste_postes_bdf = data_bdf.index.tolist()
 
@@ -188,10 +188,10 @@ def new_get_inflators_bdf_to_cn(data_year):
     return {k: v for k, v in inflators_bdf_to_cn.items() if v != float('inf')}
 
 
-def new_get_inflators_cn_to_cn(target_year, data_year):
+def get_inflators_cn_to_cn(target_year, data_year):
     '''Calcule l'inflateur de vieillissement à partir des masses de comptabilité nationale.'''
-    data_year_cn_aggregates = new_get_cn_aggregates(data_year)['conso_CN_{}'.format(data_year)].to_dict()
-    target_year_cn_aggregates = new_get_cn_aggregates(target_year)['conso_CN_{}'.format(target_year)].to_dict()
+    data_year_cn_aggregates = get_cn_aggregates(data_year)['conso_CN_{}'.format(data_year)].to_dict()
+    target_year_cn_aggregates = get_cn_aggregates(target_year)['conso_CN_{}'.format(target_year)].to_dict()
 
     ratios = {key: (target_year_cn_aggregates[key] / data_year_cn_aggregates[key])
         if data_year_cn_aggregates[key] != 0 else 0
@@ -199,13 +199,13 @@ def new_get_inflators_cn_to_cn(target_year, data_year):
     return ratios
 
 
-def new_get_inflators(target_year, data_year):
+def get_inflators(target_year, data_year):
     '''
     Calcule les ratios de calage (bdf sur cn pour année de données) et de vieillissement
     à partir des masses de comptabilité nationale et des masses de consommation de bdf.
     '''
-    inflators_bdf_to_cn = new_get_inflators_bdf_to_cn(data_year)
-    inflators_cn_to_cn = new_get_inflators_cn_to_cn(target_year, data_year)
+    inflators_bdf_to_cn = get_inflators_bdf_to_cn(data_year)
+    inflators_cn_to_cn = get_inflators_cn_to_cn(target_year, data_year)
 
     tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
     liste_variables = list(tax_benefit_system.variables.keys())
@@ -223,7 +223,7 @@ def new_get_inflators(target_year, data_year):
 def get_inflators_cn_23_to_24():
     '''Utilise les comptes trimestriels pour calculer l'inflateur de la conso et des revenus de 2023 à 2024.'''
     comptes_trimestriels_folder_path = os.path.join(
-        assets_directory, 
+        assets_directory,
         'depenses')
     # Consommation
     comptes_trim = pd.read_excel(os.path.join(comptes_trimestriels_folder_path, 't_conso_val.xls'), sheet_name = "Niveaux", header = 4)
@@ -249,7 +249,7 @@ def get_inflators_cn_23_to_24():
     return inflator_conso
 
 
-def new_get_inflators_by_year(rebuild = False, year_range = None, data_year = None):
+def get_inflators_by_year(rebuild = False, year_range = None, data_year = None):
     ''' Récupère les inflateurs pour le veillissement pour toutes les années voulues.'''
     if year_range is None:
         year_range = range(2000, 2025)
@@ -258,10 +258,10 @@ def new_get_inflators_by_year(rebuild = False, year_range = None, data_year = No
         inflators_by_year = dict()
         for target_year in year_range:
             if target_year <= 2023:
-                inflators = new_get_inflators(target_year = target_year, data_year = data_year)
+                inflators = get_inflators(target_year = target_year, data_year = data_year)
                 inflators_by_year[target_year] = inflators
             else:
-                inflators = new_get_inflators(target_year = 2023, data_year = data_year)
+                inflators = get_inflators(target_year = 2023, data_year = data_year)
                 inflator_conso = get_inflators_cn_23_to_24()
                 inflators_2024 = {
                     key: value * inflator_conso
@@ -269,7 +269,7 @@ def new_get_inflators_by_year(rebuild = False, year_range = None, data_year = No
                     }
                 inflators_by_year[target_year] = inflators_2024
 
-        writer_inflators = csv.writer(open(os.path.join(assets_directory, 'inflateurs', 'new_inflators_by_year.csv'), 'w'))
+        writer_inflators = csv.writer(open(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year.csv'), 'w'))
         for year in year_range:
             for key, value in list(inflators_by_year[year].items()):
                 writer_inflators.writerow([key, value, year])
@@ -277,7 +277,7 @@ def new_get_inflators_by_year(rebuild = False, year_range = None, data_year = No
         return inflators_by_year
     else:
         re_build_inflators = dict()
-        inflators_from_csv = pd.read_csv(os.path.join(assets_directory, 'inflateurs', 'new_inflators_by_year.csv'),
+        inflators_from_csv = pd.read_csv(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year.csv'),
             index_col = 0, header = None)
         for year in year_range:
             inflators_from_csv_by_year = inflators_from_csv[inflators_from_csv[2] == year]
