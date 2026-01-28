@@ -1,4 +1,3 @@
-# import numpy as np
 import pandas as pd
 import os
 from openfisca_france_indirect_taxation.utils import assets_directory
