@@ -7,7 +7,7 @@ import pandas
 
 from openfisca_survey_manager.temporary import temporary_store_decorator
 from openfisca_survey_manager.survey_collections import SurveyCollection
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.paths import default_config_files_directory as config_files_directory
 
 
 log = logging.getLogger(__name__)
@@ -355,7 +355,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             4: 3,
             5: 4,
             3: 5,
-            6: 5 }
+            6: 5}
         menage['stalog'] = menage['stalog'].replace(mapping)
         assert menage['stalog'].isin(range(1, 6)).all()
 
@@ -695,7 +695,7 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             5: 4,
             3: 5,
             6: 5
-        }
+            }
         menage['stalog'] = menage['stalog'].replace(mapping)
         assert menage['stalog'].isin(range(1, 6)).all()
 

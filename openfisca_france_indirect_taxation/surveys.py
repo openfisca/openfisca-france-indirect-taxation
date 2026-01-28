@@ -4,14 +4,14 @@
 import logging
 import numpy
 
-from openfisca_survey_manager.scenarios.abstract_scenario import AbstractSurveyScenario
+from openfisca_survey_manager.scenarios.reform_scenario import ReformScenario
 from openfisca_france_indirect_taxation.utils import get_input_data_frame
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 
 log = logging.getLogger(__name__)
 
 
-class SurveyScenario(AbstractSurveyScenario):
+class SurveyScenario(ReformScenario):
     id_variable_by_entity_key = dict(
         menage = 'ident_men',
         )
@@ -23,9 +23,9 @@ class SurveyScenario(AbstractSurveyScenario):
     @classmethod
     def create(cls, calibration_kwargs = None, data_year = None, elasticities = None, inflation_kwargs = None,
             input_data_frame = None, baseline_tax_benefit_system = None, reform = None,
-            tax_benefit_system = None, year = None):
+            tax_benefit_system = None, period = None):
 
-        assert year is not None
+        assert period is not None
         
         if reform is None:
             assert baseline_tax_benefit_system is None, 'No need of reference_tax_benefit_system if no reform'
@@ -47,7 +47,7 @@ class SurveyScenario(AbstractSurveyScenario):
         assert data_year is None or input_data_frame is None
 
         if input_data_frame is None:
-            data_year = data_year or year
+            data_year = data_year or period
             input_data_frame = get_input_data_frame(data_year)
 
         if elasticities is not None:
@@ -58,30 +58,32 @@ class SurveyScenario(AbstractSurveyScenario):
                 assert col in input_data_frame.columns
 
         survey_scenario = cls()
-        survey_scenario.set_tax_benefit_systems(
-            tax_benefit_system = tax_benefit_system,
-            baseline_tax_benefit_system = baseline_tax_benefit_system
-            )
-        survey_scenario.used_as_input_variables = set(input_data_frame.columns).intersection(
-            set(tax_benefit_system.variables.keys()))
-        survey_scenario.year = year
+        if baseline_tax_benefit_system is not None:
+            survey_scenario.set_tax_benefit_systems({'reform': tax_benefit_system,
+                                                 'baseline': baseline_tax_benefit_system})
+        else:
+            survey_scenario.set_tax_benefit_systems({'baseline': tax_benefit_system})
+        survey_scenario.used_as_input_variables = list(set(input_data_frame.columns).intersection(
+            set(tax_benefit_system.variables.keys())))
+        survey_scenario.period = period
         data = dict(input_data_frame = input_data_frame)
 
         survey_scenario.init_from_data(data = data)
-        survey_scenario.initialize_weights() # déplacé Hervé 20/06
-        
+        survey_scenario.initialize_weights()
+
         if calibration_kwargs:
             survey_scenario.calibrate(**calibration_kwargs)
 
         if inflation_kwargs:
-            log.debug('inflating for year = {} using {}'.format(year, inflation_kwargs))
-            survey_scenario.inflate(period = year, **inflation_kwargs)
+            log.debug('inflating for year = {} using {}'.format(period, inflation_kwargs))
+            survey_scenario.inflate(period = period, **inflation_kwargs)
 
-        assert survey_scenario.simulation is not None
-        assert survey_scenario.tax_benefit_system is not None
+        assert survey_scenario.simulations is not None
+        assert survey_scenario.tax_benefit_systems is not None
         return survey_scenario
 
     def initialize_weights(self):
-        self.weight_variable_by_entity = dict()
-        self.weight_variable_by_entity['menage'] = 'pondmen'
-        self.weight_variable_by_entity['individu'] = 'weight_ind'
+        for simulation in self.simulations.values():
+            simulation.weight_variable_by_entity = dict()
+            simulation.weight_variable_by_entity['menage'] = 'pondmen'
+            simulation.weight_variable_by_entity['individu'] = 'weight_ind'

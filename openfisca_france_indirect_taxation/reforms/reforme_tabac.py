@@ -2,7 +2,7 @@
 
 from openfisca_core.reforms import Reform
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
-from openfisca_france_indirect_taxation.projects.base import elasticite_tabac
+from openfisca_france_indirect_taxation.projects.budgets.base import elasticite_tabac
 
 
 def create_reforme_tabac(baseline_year = None, elasticite = None):

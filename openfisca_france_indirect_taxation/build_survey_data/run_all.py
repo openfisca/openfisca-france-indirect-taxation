@@ -8,7 +8,7 @@ import numpy
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.surveys import Survey
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.paths import default_config_files_directory as config_files_directory
 from openfisca_survey_manager.temporary import temporary_store_decorator
 
 from openfisca_france_indirect_taxation.build_survey_data.utils import find_nearest_inferior
@@ -130,6 +130,7 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
 
     # On ne garde que les ménages métropolitains
     if year_data in [2011, 2017]:
+        data_frame = data_frame.loc[:, ~data_frame.columns.duplicated()]
         data_frame = data_frame.query('zeat != 0').copy()
 
     if year_data in [2011, 2017] and not skip_matching:

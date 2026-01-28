@@ -37,42 +37,51 @@ taxe_by_categorie_fiscale_number = {
     }
 
 
-def build_complete_coicop_nomenclature(to_csv = True):
-    coicop_nomenclature = build_raw_coicop_nomenclature()
-    items = [
-        ('Cigares et cigarillos', '02.2.1'),
-        ('Cigarettes', '02.2.2'),
-        ("Tabac sous d'autres formes et produits connexes", '02.2.3'),
-        ('Stupéfiants ', '02.3'),
-        ]
+def build_complete_coicop_nomenclature(year = 2016, to_csv=True):
+    """Build a complete COICOP nomenclature including extra manually defined items. There is nothing to do if COICOP year is 2016.
+    The extra items are only for year 1998."""
 
-    for label_poste, code_coicop in items:
-        label_division = 'Boissons alcoolisées et tabac'
-        label_groupe = 'Tabac'
-        label_classe = label_sous_classe = label_poste
-        data = dict(
-            label_division = [label_division],
-            label_groupe = [label_groupe],
-            label_classe = [label_classe],
-            label_sous_classe = [label_sous_classe],
-            label_poste = [label_poste],
-            code_coicop = [code_coicop],
-            )
-        coicop_nomenclature = pd.concat(
-            [coicop_nomenclature, pd.DataFrame.from_dict(data, dtype = 'str')],
-            ignore_index = True
-            )
-        coicop_nomenclature.sort_values('code_coicop', inplace = True)
+    # Start with the raw nomenclature
+    coicop_nomenclature = build_raw_coicop_nomenclature(year)
+    if year == 1998:
+        # Extra items to add
+        items = [
+            ('Cigares et cigarillos', '02.2.1'),
+            ('Cigarettes', '02.2.2'),
+            ("Tabac sous d'autres formes et produits connexes", '02.2.3'),
+            ('Stupéfiants', '02.3'),
+            ]
 
+        # Build a DataFrame for extra items in one go
+        extra_data = pd.DataFrame(
+            [{
+                "label_division": "Boissons alcoolisées et tabac",
+                "label_groupe": "Tabac",
+                "label_classe": label,
+                "label_sous_classe": label,
+                "label_poste": label,
+                "code_coicop": code
+                } for label, code in items],
+            dtype="str"
+            )
+
+        # Concatenate once and sort
+        coicop_nomenclature = pd.concat([coicop_nomenclature, extra_data], ignore_index=True)
+        coicop_nomenclature = coicop_nomenclature.sort_values("code_coicop").reset_index(drop=True)
+
+    # Optionally save
     if to_csv:
         coicop_nomenclature.to_csv(
-            os.path.join(legislation_directory, 'nomenclature_coicop.csv'),
+            os.path.join(legislation_directory, "coicop_nomenclature.csv"),
+            index=False
             )
 
-    return coicop_nomenclature[['label_division', 'label_groupe', 'label_classe',
-       'label_sous_classe', 'label_poste', 'code_coicop']].copy()
+    return coicop_nomenclature[
+        ["label_division", "label_groupe", "label_classe",
+         "label_sous_classe", "label_poste", "code_coicop"]
+        ].copy()
 
 
 if __name__ == '__main__':
-    coicop_nomenclature = build_complete_coicop_nomenclature(False)
+    coicop_nomenclature = build_complete_coicop_nomenclature(year = 2016, to_csv = True)
     print(coicop_nomenclature.dtypes)

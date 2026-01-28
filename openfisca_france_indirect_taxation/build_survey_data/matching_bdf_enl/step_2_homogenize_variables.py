@@ -9,10 +9,10 @@ import numpy as np
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_1_build_dataframes import \
     load_data_bdf_enl
-from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators
+from openfisca_france_indirect_taxation.Calage_consommation_bdf import get_inflators
 
-def new_inflate_energy_consumption(data_enl, data_bdf):
-    inflators = new_get_inflators(2013,2017)  # Inflate BdF to year of the ENL, 2013
+def inflate_energy_consumption(data_enl, data_bdf):
+    inflators = get_inflators(2013,2017)  # Inflate BdF to year of the ENL, 2013
     rename_energy_dict = {'poste_04_5_1_1': 'depenses_electricite',
         'poste_04_5_2_1': 'depenses_gaz_ville',
         'poste_04_5_2_2': 'depenses_gaz_liquefie',
@@ -235,7 +235,7 @@ def homogenize_variables_definition_bdf_enl(year_data):
     data_enl = data_enl.sort_index(axis = 1)
     data_bdf = data_bdf.sort_index(axis = 1)
 
-    data_enl, data_bdf = new_inflate_energy_consumption(data_enl, data_bdf)
+    data_enl, data_bdf = inflate_energy_consumption(data_enl, data_bdf)
 
     return data_enl, data_bdf
 

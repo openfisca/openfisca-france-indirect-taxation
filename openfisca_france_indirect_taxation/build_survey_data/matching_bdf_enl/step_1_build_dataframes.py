@@ -5,7 +5,7 @@
 # susceptibles d'être utilisées dans l'appariement des bases de données.
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.paths import default_config_files_directory as config_files_directory
 
 
 def load_data_bdf_enl(year_data):
@@ -31,7 +31,7 @@ def load_data_bdf_enl(year_data):
     # Create variable for total spending
     liste_variables = input_bdf.columns.tolist()
     postes_agreges = ['poste_{}'.format(index) for index in
-        ['0{}'.format(i) for i in range(1, 10)] + ['10', '11', '12']
+        ['0{}'.format(i) for i in range(1, 10)] + ['10', '11', '12', '13']
         ]
     input_bdf['depenses_tot'] = 0
     for element in liste_variables:
@@ -89,7 +89,7 @@ def load_data_bdf_enl(year_data):
         'surfhab_d',        # surface habitable
         'tau',
         'tuu',
-        'typmen',           #Type de ménage au sens du TCM
+        'typmen',           # Type de ménage au sens du TCM
         'zeat',             # zone climatique
         ]
 

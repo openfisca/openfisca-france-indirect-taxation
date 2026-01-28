@@ -6,27 +6,24 @@
 
 
 # To do : add information about vehicles
-
+import pandas as pd
 
 from openfisca_survey_manager.survey_collections import SurveyCollection
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.paths import default_config_files_directory as config_files_directory
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_1_1_build_dataframes_menages import \
     load_data_menages_bdf_entd
 
 
 def load_data_vehicules_bdf_entd(year_data):
-    # Load ENTD data :
-    # Ajouter les variables d'appariement ET les variables à apparier
-
-    year_entd = 2008
+    year_entd = 2019
 
     entd_survey_collection = SurveyCollection.load(
         collection = 'enquete_transports', config_files_directory = config_files_directory
         )
     survey_entd = entd_survey_collection.get_survey('enquete_transports_{}'.format(year_entd))
-    input_entd_vehicule = survey_entd.get_values(table = 'qf_voitvul')
-    input_entd_menage = survey_entd.get_values(table = 'q_menage')
+    input_entd_vehicule = survey_entd.get_values(table = 'q_voitvul_public_V2')
+    input_entd_menage = survey_entd.get_values(table = 'q_menage_public_V2')
 
     # Load BdF data :
 
@@ -38,27 +35,27 @@ def load_data_vehicules_bdf_entd(year_data):
     input_bdf.reset_index(inplace = True)
 
     variables_vehicules_entd = [
-        'ident_men',
+        'ident_men',        # identifiant du ménage
         'ident_numveh',     # identifiant du véhicule
-        'mveh',             # numéro du véhicule
-        'v1_ken',           # carburant principal
-        'v1_puiss_corr',    # puissance fiscale corrigée
-        'v1_age_veh',       # age du véhicule
-        'v1_rang_veh',      # rang du véhicule dans le ménage
-        'v1_sfvachat',      # état du véhicule à l'achat
-        'v1_sfvcosorout',   # consommation
-        'v1_sfvdatcg',      # date carte grise
-        'v1_sfvdat1mc',     # date mise en circulation
-        'v1_km_annu'        # nb kilomètres 12 derniers mois, redressés
+        'num_veh',          # numéro du véhicule
+        'energie_agrege',   # carburant principal
+        'puis_fisc_fin',    # puissance fiscale
+        'age',              # age du véhicule (en mois)
+        # 'v1_rang_veh',    # rang du véhicule dans le ménage
+        # 'v1_sfvachat',    # état du véhicule à l'achat
+        'kvcons',           # consommation
+        # 'v1_sfvdatcg',    # date carte grise
+        'annee_1mec',       # Année mise en circulation
+        'kvkm1anv'          # nb kilomètres 12 derniers mois, redressés
         ]
 
     variables_menage_entd = [
         'ident_men',
-        'v1_logdist01',     # distance commerces et supermarchés
-        'v1_logdist15',     # distance arrêts transports en commun
-        'v1_jnbveh',        # nb de voitures particulières
-        'v1_jpasvoit_b',    # utilité du VP : se rendre au travail
-        'v1_jpasvoit_c',    # utilité du VP : déplacements dans le cadre du travail
+        # 'v1_logdist01',     # distance commerces et supermarchés                       (pas dans q_menage regarder ailleurs ?)
+        # 'v1_logdist15',     # distance arrêts transports en commun                     (pas dans q_menage regarder ailleurs ?)
+        'jnbveh',             # nb de voitures particulières
+        # 'v1_jpasvoit_b',    # utilité du VP : se rendre au travail                     (pas dans q_menage regarder ailleurs ?)
+        # 'v1_jpasvoit_c',    # utilité du VP : déplacements dans le cadre du travail    (pas dans q_menage regarder ailleurs ?)
         ]
 
     if year_bdf == 2011:
@@ -92,7 +89,7 @@ def load_data_vehicules_bdf_entd(year_data):
             'numvehic',         # numéro du véhicule
             'privoi_d',         # prix à l'achat, redressé
             'recvoi',           # année d'achat
-        ]
+            ]
 
     # Keep relevant variables :
     vehicule_menage_entd_keep = input_entd_vehicule[variables_vehicules_entd]
@@ -105,39 +102,23 @@ def load_data_vehicules_bdf_entd(year_data):
 def merge_vehicule_menage(year_data):
     data_entd, data_entd_menage, data_bdf = load_data_vehicules_bdf_entd(year_data)
 
-    # Calcul de l'âge du véhicule et de la carte grise
-    data_entd['anvoi'] = 0
-    data_entd['check_annee'] = data_entd['v1_sfvdat1mc'].str[2]
-    data_entd.loc[data_entd['check_annee'] == '/', 'anvoi'] = data_entd['v1_sfvdat1mc'].str[6:].copy()
-    del data_entd['v1_sfvdat1mc'], data_entd['check_annee']
-
-    data_entd['recvoi'] = 0
-    data_entd['check_annee'] = data_entd['v1_sfvdatcg'].str[2]
-    data_entd.loc[data_entd['check_annee'] == '/', 'recvoi'] = data_entd['v1_sfvdatcg'].str[6:].copy()
-    del data_entd['v1_sfvdatcg'], data_entd['check_annee']
-
-    data_entd[['anvoi', 'recvoi']] = data_entd[['anvoi', 'recvoi']].astype(int)
-
-    data_bdf[['anvoi', 'recvoi']] = data_bdf[['anvoi', 'recvoi']].fillna(0)
-    data_bdf[['anvoi', 'recvoi']] = data_bdf[['anvoi', 'recvoi']].astype(int)
+    # Calcul de l'âge du véhicule
+    data_entd['anvoi'] = pd.to_numeric(data_entd['annee_1mec'], errors = 'coerce')
 
     data_entd['age_vehicule'] = 0
-    data_bdf['age_vehicule'] = 0
-    data_entd.loc[data_entd['anvoi'] != 0, 'age_vehicule'] = 2008 - data_entd['anvoi']
-    data_bdf.loc[data_bdf['anvoi'] != 0, 'age_vehicule'] = 2011 - data_bdf['anvoi']
+    data_entd.loc[data_entd['anvoi'] != 0, 'age_vehicule'] = 2019 - data_entd['anvoi']
 
-    data_entd['age_carte_grise'] = 0
-    data_bdf['age_carte_grise'] = 0
-    data_entd.loc[data_entd['recvoi'] != 0, 'age_carte_grise'] = 2008 - data_entd['recvoi']
-    data_bdf.loc[data_bdf['recvoi'] != 0, 'age_carte_grise'] = year_data - data_bdf['recvoi']
+    data_bdf['anvoi'] = data_bdf['anvoi'].fillna(0).astype(int)
+    data_bdf['age_vehicule'] = 0
+    data_bdf.loc[data_bdf['anvoi'] != 0, 'age_vehicule'] = year_data - data_bdf['anvoi']
 
     # Définition des véhicules par carburant
     data_entd['essence'] = 0
-    data_entd.loc[data_entd['v1_ken'] < 4, 'essence'] = 1
+    data_entd.loc[data_entd['energie_agrege'] == 1, 'essence'] = 1
     data_entd['diesel'] = 0
-    data_entd.loc[data_entd['v1_ken'] == 4, 'diesel'] = 1
+    data_entd.loc[data_entd['energie_agrege'] == 2, 'diesel'] = 1
     data_entd['autre_carbu'] = 0
-    data_entd.loc[data_entd['v1_ken'] > 4, 'autre_carbu'] = 1
+    data_entd.loc[data_entd['energie_agrege'] > 2, 'autre_carbu'] = 1
 
     if year_data == 2017:
         carbu_cols = ['carbu1', 'carbu2', 'carbu3', 'carbu4', 'carbu5']
@@ -153,39 +134,36 @@ def merge_vehicule_menage(year_data):
 
     # déf des distances parcourues par carburant
     data_entd['distance_essence'] = 0
-    data_entd.loc[data_entd['essence'] == 1, 'distance_essence'] = data_entd['v1_km_annu']
+    data_entd.loc[data_entd['essence'] == 1, 'distance_essence'] = data_entd['kvkm1anv']
     data_entd['distance_diesel'] = 0
-    data_entd.loc[data_entd['diesel'] == 1, 'distance_diesel'] = data_entd['v1_km_annu']
+    data_entd.loc[data_entd['diesel'] == 1, 'distance_diesel'] = data_entd['kvkm1anv']
     data_entd['distance_autre_carbu'] = 0
-    data_entd.loc[data_entd['autre_carbu'] == 1, 'distance_autre_carbu'] = data_entd['v1_km_annu']
+    data_entd.loc[data_entd['autre_carbu'] == 1, 'distance_autre_carbu'] = data_entd['kvkm1anv']
 
     # Df avec le nombre de véhicule et les distances pour chaque type de carburant
     data_vehicule_entd = data_entd[
-        [
-            'essence',
-            'diesel',
-            'autre_carbu',
-            'distance_essence',
-            'distance_diesel',
-            'distance_autre_carbu',
-            'ident_men',
-            ]
+        ['essence',
+        'diesel',
+        'autre_carbu',
+        'distance_essence',
+        'distance_diesel',
+        'distance_autre_carbu',
+        'ident_men']
         ].groupby(by = 'ident_men').sum()
     data_vehicule_entd = data_vehicule_entd.reset_index()
 
     # Df avec les infos du véhicule principal (dans ENTD)
-    data_entd = data_entd.sort_values(by = ['v1_rang_veh'])
+    data_entd = data_entd.sort_values(by = 'kvkm1anv', ascending= False)
     data_entd = data_entd.drop_duplicates(['ident_men'], keep='first')
     data_entd.rename(
         columns = {
-            'v1_puiss_corr': 'puissance',
-            'v1_sfvachat': 'etat_veh_achat',
-            'v1_sfvcosorout': 'consommation',
+            'puis_fisc_fin': 'puissance',
+            'kvcons': 'consommation',
             },
         inplace = True,
         )
     data_entd = data_entd[
-        ['ident_men', 'puissance', 'etat_veh_achat', 'consommation', 'age_vehicule', 'age_carte_grise']
+        ['ident_men', 'puissance', 'consommation', 'age_vehicule']
         ]
 
     # déf des distances parcourues par carburant
@@ -198,15 +176,13 @@ def merge_vehicule_menage(year_data):
 
     # Df avec le nombre de véhicule et les distances pour chaque type de carburant
     data_vehicule_bdf = data_bdf[
-        [
-            'essence',
-            'diesel',
-            'autre_carbu',
-            'km_essence',
-            'km_diesel',
-            'km_autre_carbu',
-            'ident_men',
-            ]
+        ['essence',
+        'diesel',
+        'autre_carbu',
+        'km_essence',
+        'km_diesel',
+        'km_autre_carbu',
+        'ident_men']
         ].groupby(by = 'ident_men').sum()
     data_vehicule_bdf = data_vehicule_bdf.reset_index()
 
@@ -224,17 +200,17 @@ def merge_vehicule_menage(year_data):
         inplace = True,
         )
     data_bdf = data_bdf[
-        ['ident_men', 'prix_achat', 'veh_tot', 'etat_veh_achat', 'age_vehicule', 'age_carte_grise', 'vp_domicile_travail', 'vp_deplacements_pro']
+        ['ident_men', 'prix_achat', 'veh_tot', 'etat_veh_achat', 'age_vehicule', 'vp_domicile_travail', 'vp_deplacements_pro']
         ]
 
     # Df infos comportements ménages
     data_entd_menage.rename(
         columns = {
-            'v1_logdist01': 'distance_commerces',
-            'v1_logdist15': 'distance_transports_communs',
-            'v1_jnbveh': 'veh_tot',
-            'v1_jpasvoit_b': 'vp_domicile_travail',
-            'v1_jpasvoit_c': 'vp_deplacements_pro'
+            # 'v1_logdist01': 'distance_commerces',              (pas dans q_menage regarder ailleurs ?)
+            # 'v1_logdist15': 'distance_transports_communs',     (pas dans q_menage regarder ailleurs ?)   
+            'jnbveh': 'veh_tot',
+            # 'v1_jpasvoit_b': 'vp_domicile_travail',            (pas dans q_menage regarder ailleurs ?)
+            # 'v1_jpasvoit_c': 'vp_deplacements_pro'             (pas dans q_menage regarder ailleurs ?)
             },
         inplace = True,
         )

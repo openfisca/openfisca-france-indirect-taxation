@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 from configparser import ConfigParser
 import datetime
 import os
@@ -8,8 +7,7 @@ import platform
 import pandas
 import subprocess
 
-
-from openfisca_survey_manager import default_config_files_directory as config_files_directory
+from openfisca_survey_manager.paths import default_config_files_directory as config_files_directory
 
 from openfisca_france_indirect_taxation.utils import assets_directory
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_4_1_clean_data import prepare_bdf_enl_matching_data
@@ -19,35 +17,63 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_4_1
 
 
 def check_load_config_ini():
-    '''
-    Check that assets option of section openfisca_france_indirect_taxation is set in openfisca-survey-manager config.ini file
-    since that file is used by R
-    '''
+    """
+    Ensure that config.ini has:
+      - [openfisca_france_indirect_taxation] section with 'assets' option
+      - [exe] section with paths to Rscript and r_libs_user (on Windows)
+    If missing or invalid, backup the old file and update it.
+    """
     config_parser = ConfigParser()
     config_ini = os.path.join(config_files_directory, 'config.ini')
     config_parser.read(config_ini)
-    if config_parser.has_section('openfisca_france_indirect_taxation') and config_parser.has_option('openfisca_france_indirect_taxation', 'assets'):
-        pass
-    else:
-        modifiedTime = os.path.getmtime(config_ini)
-        timestamp = datetime.datetime.fromtimestamp(modifiedTime).strftime('%b-%d-%Y_%H.%M.%S')
+
+    updated = False
+
+    # ---- Ensure [openfisca_france_indirect_taxation] ----
+    section_tax = 'openfisca_france_indirect_taxation'
+    option_assets = 'assets'
+
+    if not (config_parser.has_section(section_tax) and config_parser.has_option(section_tax, option_assets)):
+        updated = True
+        if not config_parser.has_section(section_tax):
+            config_parser.add_section(section_tax)
+        config_parser.set(section_tax, option_assets, assets_directory)
+
+    # ---- Ensure [exe] ----
+    section_exe = 'exe'
+    if not config_parser.has_section(section_exe):
+        updated = True
+        config_parser.add_section(section_exe)
+
+        if platform.system() == 'Windows':
+            config_parser.set(section_exe, 'r_libs_user', os.path.expanduser("~\\R\\libs"))
+            config_parser.set(section_exe, 'Rscript', "C:\\Program Files\\R\\R-4.0.0\\bin\\Rscript.exe")
+        else:
+            config_parser.set(section_exe, 'Rscript', "Rscript")
+
+    # ---- Backup config if modified ----
+    if updated:
+        modified_time = os.path.getmtime(config_ini)
+        timestamp = datetime.datetime.fromtimestamp(modified_time).strftime('%b-%d-%Y_%H.%M.%S')
         os.rename(config_ini, config_ini + '_' + timestamp)
-        try:
-            config_parser.add_section('openfisca_france_indirect_taxation')
 
-        finally:
-            config_parser.set('openfisca_france_indirect_taxation', 'assets', assets_directory)
-            with open(config_ini, 'w') as configfile:
-                config_parser.write(configfile)
+        with open(config_ini, 'w') as configfile:
+            config_parser.write(configfile)
 
-    if platform.system == 'Windows':
-        path_to_r_libs_user = os.path.normpath(config_parser.get('exe', 'r_libs_user'))
-        path_to_rscript_exe = os.path.normpath(config_parser.get('exe', 'Rscript'))
+    # ---- Extract validated paths ----
+    if platform.system() == 'Windows':
+        path_to_r_libs_user = os.path.normpath(config_parser.get(section_exe, 'r_libs_user'))
+        rscript_path = os.path.normpath(config_parser.get(section_exe, 'Rscript'))
     else:
-        path_to_rscript_exe = 'Rscript'
         path_to_r_libs_user = None
+        rscript_path = config_parser.get(section_exe, 'Rscript')
 
-    return path_to_r_libs_user, path_to_rscript_exe
+    # ---- Validate Rscript path ----
+    if not os.path.isfile(rscript_path):
+        # fallback
+        rscript_path = "Rscript"
+
+    return path_to_r_libs_user, rscript_path
 
 
 def main(year_data):
@@ -124,18 +150,17 @@ def main(year_data):
     data_matched_enl = data_matched_enl[enl_variables].copy()
 
     entd_variables = [
-        'age_carte_grise',
         'age_vehicule',
         'depenses_carburants_corrigees_entd',
         'depenses_diesel_corrigees_entd',
         'depenses_essence_corrigees_entd',
         'distance_diesel',
         'distance_essence',
-        'distance_routiere_hebdomadaire_teg',
+        # 'distance_routiere_hebdomadaire_teg',         # not for EMP 2019
         'distance',
-        'duree_moyenne_trajet_aller_retour_teg',
+        # 'duree_moyenne_trajet_aller_retour_teg',      # not for EMP 2019
         'ident_men',
-        'mode_principal_deplacement_teg',
+        # 'mode_principal_deplacement_teg',             # not for EMP 2019
         'vp_deplacements_pro',
         'vp_domicile_travail',
         ]

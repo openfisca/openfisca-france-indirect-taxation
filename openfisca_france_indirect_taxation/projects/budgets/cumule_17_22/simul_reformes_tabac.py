@@ -3,10 +3,10 @@ import pandas as pd
 
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.Calage_consommation_bdf import new_get_inflators
+from openfisca_france_indirect_taxation.Calage_consommation_bdf import get_inflators
 from openfisca_france_indirect_taxation.examples.utils_example import dataframe_by_group
-from openfisca_france_indirect_taxation.projects.base import nombre_paquets_cigarettes_by_year
-from openfisca_france_indirect_taxation.projects.calage_depenses_cigarettes import create_reforme_calage_depenses_cigarettes, create_reforme_calage_depenses_tabac
+from openfisca_france_indirect_taxation.projects.budgets.base import nombre_paquets_cigarettes_by_year
+from openfisca_france_indirect_taxation.projects.budgets.calage_depenses_cigarettes import create_reforme_calage_depenses_cigarettes, create_reforme_calage_depenses_tabac
 from openfisca_france_indirect_taxation.reforms.reforme_tabac import create_reforme_tabac
 from matplotlib import pyplot as plt
 
@@ -44,7 +44,7 @@ elif replique_gouv:
 def simulate_reforme_tabac(year, baseline_year, graph = True, elasticite = None):
 
     data_year = 2017
-    inflators_by_year = new_get_inflators(2011, 2020)
+    inflators_by_year = get_inflators(2011, 2020)
     inflators_by_year[2018] = inflators_by_year[2017]
     inflators_by_year[2019] = inflators_by_year[2017]
     inflators_by_year[2020] = inflators_by_year[2017]

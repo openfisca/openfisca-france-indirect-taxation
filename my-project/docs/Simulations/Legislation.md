@@ -9,15 +9,21 @@ La partie qui suit détaille les procédures qui permettent d'associer à chaque
 
 La consommation des ménages issue de l'enquête Budget de familles est classifiée selon la [nomenclature COICOP](https://www.insee.fr/fr/information/2408172).
 Comme les postes de consommation issus de différentes sources peuvent être plus ou moins agrégés (comme par exemple dans les fichiers de la conmptabilité nationale utilisés pour le calage et vieillissement), il est nécessaire de pouvoir réaliser une correspondance entre les différents postes de consommation issues des différentes sources, quels que soient leur niveaux d'agrégations.
-A cette fin, une table pivot (disponible ici : openfisca_france_indirect_taxation/assets/legislation/nomenclature_coicop.csv) est construite à partir de la nomenclature COICOP. Elle est enrichie par des postes supplémentaires en cas de nécessité (finesse insuffisante comme pour le tabac par exemple, postes non présents comme stupéfiants et prostitution). 
+A cette fin, une table pivot (disponible ici : openfisca_france_indirect_taxation/assets/legislation/coicop_nomenclature.csv) est construite à partir de la nomenclature COICOP. Elle est enrichie par des postes supplémentaires en cas de nécessité (finesse insuffisante comme pour le tabac par exemple, postes non présents comme stupéfiants et prostitution). 
 
 Elle est produite par l'exécution du programme `build_coicop_nomenclature`.
 
-## Table de correspondance COICOP / legislation 
+### Table de correspondance COICOP / legislation 
 
 Les régimes d'imposition des différentes consommations sont renseignées dans une table de correspondance (disponible ici : openfisca_france_indirect_taxation/assets/legislation/coicop_legislation.csv) construite à partir d'informations législatives sur la période 1994-2024.
 
 Elle est produite par l'exécution du programme `build_coicop_legislation`.
+
+## La nomenclature de l'enquête Budget des familles 2017
+
+Comme indiqué plus haut la consommation des ménages est classifiée selon la nomenclature COICOP. Plus exactement elle est classifiée à partir d'une nomenclature proche de la dernière nomenclature ECOICOP (2016) mais pas exactement celle-ci. Une table de nomenclature qui reprend celle de l'enquête BDF 2016 (donnée dans la documentation qui accompagne les données d'enquête) est construite en éxecutant le code `build_bdf_nomenclature`. Elle est également ajustée pour se rapprocher de la comptabilité nationale afin d'anticiper l'étape de calage / veillissement.
+Une table de législation est ensuite construite en associant chaque poste de consommation à une catégorie fiscale via le code `build_bdf_legislation`. Dans les faits c'est cette table de législation qui est utile puis qu'elle adopte la nomenclature des données. 
+La nomenclature coicop et sa législation associée évoquées plus haut peuvent être vue comme une table de référence mais qui n'a pas vocation à être utilisée.
 
 ## Les paramètres de la législation 
 

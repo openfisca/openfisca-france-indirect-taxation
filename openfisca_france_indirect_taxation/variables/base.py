@@ -9,10 +9,10 @@ from slugify import slugify
 
 from openfisca_core.model_api import *  # noqa analysis:ignore
 
-from openfisca_france_indirect_taxation.location import openfisca_france_indirect_taxation_location
+from openfisca_france_indirect_taxation.utils import assets_directory
+# from openfisca_france_indirect_taxation.location import openfisca_france_indirect_taxation_location
 from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable  # noqa analysis:ignore
 from openfisca_france_indirect_taxation.entities import Individu, Menage  # noqa analysis:ignore
-from openfisca_france_indirect_taxation.scripts.new_build_coicop_bdf import new_bdf
 
 try:
     from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
@@ -76,91 +76,123 @@ def insert_tva(categories_fiscales):
 
 def get_legislation_data_frames():
     legislation_directory = os.path.join(
-        openfisca_france_indirect_taxation_location,
-        'openfisca_france_indirect_taxation',
-        'assets',
+        assets_directory,
         'legislation',
         )
-    codes_coicop_data_frame = pd.read_csv(
-        os.path.join(legislation_directory, 'coicop_legislation.csv'),
-        )
-    codes_coicop_data_frame = codes_coicop_data_frame.query('not (code_bdf != code_bdf)')[  # NaN removal
-        ['code_coicop', 'code_bdf', 'label', 'categorie_fiscale', 'start', 'stop']].copy()
-    codes_coicop_data_frame = codes_coicop_data_frame.loc[
-        codes_coicop_data_frame.code_coicop.str[:2].astype(int) <= 12
-        ].copy()
-    categories_fiscales_data_frame = codes_coicop_data_frame[
-        ['code_coicop', 'code_bdf', 'categorie_fiscale', 'start', 'stop', 'label']
-        ].copy().fillna('')
+
+    bdf_legislation_data_frame = pd.read_csv(os.path.join(legislation_directory, 'bdf_2017_legislation.csv'))
     
-    # Ajout pour modifier la coicop et garder les catégories fiscales associées aux code bdf
-    coicop_table_bdf = new_bdf(2017)
-    categories_fiscales_data_frame.drop('code_coicop', axis= 1 , inplace = True)
-    categories_fiscales_data_frame = categories_fiscales_data_frame.merge( coicop_table_bdf, on = 'code_bdf')
-    codes_coicop_data_frame.drop('code_coicop', axis= 1 , inplace = True)
-    codes_coicop_data_frame = codes_coicop_data_frame.merge( coicop_table_bdf, on = 'code_bdf')
-    return categories_fiscales_data_frame, codes_coicop_data_frame
+    return bdf_legislation_data_frame
 
 
-def get_poste_categorie_fiscale(poste_coicop, categories_fiscales = None, start = 9999, stop = 0):
-    categories_fiscales_data_frame, _ = get_legislation_data_frames()
-    if categories_fiscales is None:
-        categories_fiscales = categories_fiscales_data_frame.copy()
-    return categories_fiscales.query(
-        '(code_coicop == @poste_coicop) and (start <= @start) and (@stop <= stop)')[
-        'categorie_fiscale'
-        ].tolist()
+def get_poste_categorie_fiscale(poste_coicop, legislation_dataframe=None, year=None):
+    """
+    Récupère la catégorie fiscale associée à un poste COICOP spécifique pour une année donnée.
+
+    Args:
+        poste_coicop (str): Code COICOP pour lequel récupérer la catégorie fiscale.
+        legislation_dataframe (pd.DataFrame, optional): DataFrame contenant les catégories fiscales.
+        year (int, optional): Année pour laquelle récupérer la catégorie fiscale.
+
+    Returns:
+        list: Liste des catégories fiscales correspondantes.
+    """
+    if legislation_dataframe is None:
+        legislation_dataframe = get_legislation_data_frames()
+
+    # Vérifier que les colonnes nécessaires existent
+    required_columns = ['adjusted_bdf', 'categorie_fiscale', 'start', 'stop']
+    for column in required_columns:
+        if column not in legislation_dataframe.columns:
+            raise ValueError(f"La colonne {column} est manquante dans le DataFrame des catégories fiscales.")
+
+    if year is None:
+        raise ValueError("L'année doit être spécifiée.")
+
+    # Filtrer les lignes pour ce poste COICOP et cette année
+    result = legislation_dataframe.query(
+        '(adjusted_bdf == @poste_coicop) and (start <= @year) and (stop >= @year)'
+        )['categorie_fiscale'].tolist()
+    return result
 
 
-def depenses_postes_agreges_function_creator(postes_coicop, categories_fiscales = None, reform_key = None,
-        taux_by_categorie_fiscale = None, year_start = None, year_stop = None):
-    if len(postes_coicop) != 0:
-        if reform_key is None:
-            def func(entity, period_arg):
-                return sum(entity(
-                    'poste_' + slugify(poste, separator = '_'), period_arg) for poste in postes_coicop
-                    )
-            func.__name__ = f'formula_{year_start}'
-            return func
+def depenses_postes_agreges_function_creator(postes_coicop, legislation_dataframe= None, reform_key=None,
+        taux_by_categorie_fiscale=None, year_start=None):
+    """
+    Crée les fonctions pour calculer les dépenses agrégées pour une liste de postes COICOP,
+    en tenant compte des changements de catégories fiscales d'une année à l'autre.
 
-        else:
-            assert categories_fiscales is not None
-            taux_by_categorie_fiscale = taux_by_categorie_fiscale if taux_by_categorie_fiscale is not None else dict()
-            categorie_fiscale_by_poste = dict(
-                (poste, get_poste_categorie_fiscale(poste, categories_fiscales)[0])
-                for poste in postes_coicop)
+    Args:
+        postes_coicop (list): Liste des codes COICOP.
+        legislation_dataframe (pd.DataFrame, optional): DataFrame contenant la législation.
+        reform_key (str, optional): Clé de réforme si applicable.
+        taux_by_categorie_fiscale (dict, optional): Dictionnaire des taux de TVA par catégorie fiscale.
+        year_start (int, optional): Année de début de la période.
 
-            def func(entity, period_arg, parameters, categorie_fiscale_by_poste = categorie_fiscale_by_poste,
-                    taux_by_categorie_fiscale = taux_by_categorie_fiscale):
+    Returns:
+        function: Une fonction pour calculer les dépenses agrégées.
+    """ 
+    if len(postes_coicop) == 0:
+        def empty_func(*args, **kwargs):
+            return 0
+        empty_func.__name__ = 'empty_formula'
+        return empty_func
 
-                taux_de_tva = parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva._children
-                taux_by_categorie_fiscale.update({
-                    'tva_taux_super_reduit': taux_de_tva.get('taux_particulier_super_reduit', 0.0),
-                    'tva_taux_reduit': taux_de_tva.get('taux_reduit', 0.0),
-                    'tva_taux_intermediaire': taux_de_tva.get('taux_intermediaire', 0.0),
-                    'tva_taux_plein': taux_de_tva.get('taux_normal', 0.0),
-                    })
+    if reform_key is None:
+        def func(entity, period_arg):
+            return sum(entity('poste_' + slugify(str(poste), separator='_'), period_arg) for poste in postes_coicop)
+        func.__name__ = f'formula_{year_start}'
+        return func
 
-                poste_agrege = sum(entity(
-                    'depenses_ht_poste_' + slugify(poste, separator = '_'), period_arg
-                    ) * (
-                    1 + taux_by_categorie_fiscale.get(
-                        categorie_fiscale_by_poste[poste],
+    else:
+        if legislation_dataframe is None:
+            legislation_dataframe = get_legislation_data_frames()
+
+        def func(entity, period_arg, parameters):
+            year = period_arg.start.year
+            taux_by_categorie_fiscale = {}
+
+            # Mettre à jour les taux de TVA
+            taux_de_tva = parameters(year).imposition_indirecte.tva.taux_de_tva._children
+            taux_by_categorie_fiscale.update({
+                'tva_taux_super_reduit': taux_de_tva.get('taux_particulier_super_reduit', 0.0),
+                'tva_taux_reduit': taux_de_tva.get('taux_reduit', 0.0),
+                'tva_taux_intermediaire': taux_de_tva.get('taux_intermediaire', 0.0),
+                'tva_taux_plein': taux_de_tva.get('taux_normal', 0.0),
+                })
+
+            # Calculer les dépenses agrégées
+            poste_agrege = 0
+            for poste in postes_coicop:
+                # Obtenir la catégorie fiscale pour ce poste et cette année
+                categorie_fiscale = get_poste_categorie_fiscale(poste, legislation_dataframe, year)
+                if categorie_fiscale:
+                    categorie_fiscale = categorie_fiscale[0]
+                else:
+                    log.warning(f"Aucune catégorie fiscale trouvée pour le poste {poste} en {year}")
+                    categorie_fiscale = None
+
+                if categorie_fiscale is not None:
+                    # Récupérer le taux de TVA en utilisant la logique imbriquée
+                    taux = taux_by_categorie_fiscale.get(
+                        categorie_fiscale,
                         taux_by_categorie_fiscale.get(
                             tva_by_categorie_primaire.get(
-                                categorie_fiscale_by_poste[poste],
+                                categorie_fiscale,
                                 ''
                                 ),
-                            0,
+                            0.0
                             )
                         )
-                    )
-                    for poste in postes_coicop
-                    )
-                return poste_agrege
+                else:
+                    taux = 0.0  # ou une valeur par défaut
 
-            func.__name__ = 'formula'
-            return func
+                poste_agrege += entity('depenses_ht_poste_' + slugify(str(poste), separator='_'), period_arg) * (1 + taux)
+
+            return poste_agrege
+
+        func.__name__ = 'formula'
+        return func
 
 
 def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, year_stop = None):
@@ -181,7 +213,7 @@ def depenses_ht_categorie_function_creator(postes_coicop, year_start = None, yea
     return func
 
 
-def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, year_start = None, year_stop = None):
+def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, year_start = None):
     assert categorie_fiscale is not None
 
     def func(entity, period_arg, parameters, categorie_fiscale = categorie_fiscale):

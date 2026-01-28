@@ -21,26 +21,27 @@ from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 def calage_depenses_from_distance(data_matched):
-    for i in range(1, 11):
-        for rur in [0, 1]:
-            data_matched_group = data_matched.query('niveau_vie_decile == {}'.format(i)).query('rural == {}'.format(rur))
-            avg_distance = (
-                sum(data_matched_group['distance'] * data_matched_group['pondmen'])
-                / data_matched_group['pondmen'].sum()
-                )
-            avg_depenses = (
-                sum(data_matched_group['poste_07_2_2_1'] * data_matched_group['pondmen'])
-                / data_matched_group['pondmen'].sum()
-                )
+    """
+    Adjust fuel expenditures based on distance traveled,
+    corrected by decile of living standard and rural/urban status.
+    """
 
-            data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_carburants_corrigees_entd'] = \
-                data_matched['distance'] * avg_depenses / avg_distance
+    # group by decile and rural flag
+    grouped = data_matched.groupby(['niveau_vie_decile', 'rural'])
 
-            data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_diesel_corrigees_entd'] = \
-                data_matched['distance_diesel'] * avg_depenses / avg_distance
+    for (decile, rur), group in grouped:
+        # weighted averages
+        avg_distance = (group['distance'] * group['pondmen']).sum() / group['pondmen'].sum()
+        avg_depenses = (group['poste_07_2_2_1'] * group['pondmen']).sum() / group['pondmen'].sum()
 
-            data_matched.loc[(data_matched['niveau_vie_decile'] == i) & (data_matched['rural'] == rur), 'depenses_essence_corrigees_entd'] = \
-                data_matched['distance_essence'] * avg_depenses / avg_distance
+        # correction factor
+        factor = avg_depenses / avg_distance if avg_distance != 0 else 0
+
+        # assign corrected expenditures
+        idx = (data_matched['niveau_vie_decile'] == decile) & (data_matched['rural'] == rur)
+        data_matched.loc[idx, 'depenses_carburants_corrigees_entd'] = data_matched.loc[idx, 'distance'] * factor
+        data_matched.loc[idx, 'depenses_diesel_corrigees_entd'] = data_matched.loc[idx, 'distance_diesel'] * factor
+        data_matched.loc[idx, 'depenses_essence_corrigees_entd'] = data_matched.loc[idx, 'distance_essence'] * factor
 
     return data_matched
 
