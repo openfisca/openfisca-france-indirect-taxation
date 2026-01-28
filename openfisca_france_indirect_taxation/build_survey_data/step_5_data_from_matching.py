@@ -150,7 +150,6 @@ def main(year_data):
     data_matched_enl = data_matched_enl[enl_variables].copy()
 
     entd_variables = [
-        # 'age_carte_grise',
         'age_vehicule',
         'depenses_carburants_corrigees_entd',
         'depenses_diesel_corrigees_entd',

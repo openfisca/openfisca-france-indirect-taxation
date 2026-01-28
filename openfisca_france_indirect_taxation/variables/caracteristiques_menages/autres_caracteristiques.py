@@ -218,9 +218,3 @@ class TypesZeat(Enum):
     mediterrannee = 'mediterrannee'
 
 
-# class zeat(YearlyVariable):
-#     value_type = Enum
-#     possible_values = TypesZeat
-#     default_value = TypesZeat.dom
-#     entity = Menage
-#     label = "Zone d'étude et d'aménagement du territoire"
