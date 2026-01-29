@@ -12,7 +12,6 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_
 from openfisca_france_indirect_taxation.Calage_consommation_bdf import get_inflators
 
 
-
 def inflate_energy_consumption(data_enl, data_bdf):
     inflators = get_inflators(2013, 2017)  # Inflate BdF to year of the ENL, 2013
     rename_energy_dict = {

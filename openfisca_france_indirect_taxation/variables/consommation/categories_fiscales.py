@@ -46,7 +46,7 @@ def generate_depenses_ht_categories_fiscales_variables(tax_benefit_system, legis
             postes_coicop = completed_categories_fiscales.query(
                 'start <= @year and stop >= @year and categorie_fiscale == @categorie_fiscale'
                 )['adjusted_bdf'].astype(str).tolist()
-   
+
             if year == year_start:
                 previous_postes_coicop = postes_coicop
                 continue

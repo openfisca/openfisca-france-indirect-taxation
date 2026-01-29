@@ -207,7 +207,7 @@ def merge_vehicule_menage(year_data):
     data_entd_menage.rename(
         columns = {
             # 'v1_logdist01': 'distance_commerces',              (pas dans q_menage regarder ailleurs ?)
-            # 'v1_logdist15': 'distance_transports_communs',     (pas dans q_menage regarder ailleurs ?)   
+            # 'v1_logdist15': 'distance_transports_communs',     (pas dans q_menage regarder ailleurs ?)
             'jnbveh': 'veh_tot',
             # 'v1_jpasvoit_b': 'vp_domicile_travail',            (pas dans q_menage regarder ailleurs ?)
             # 'v1_jpasvoit_c': 'vp_deplacements_pro'             (pas dans q_menage regarder ailleurs ?)

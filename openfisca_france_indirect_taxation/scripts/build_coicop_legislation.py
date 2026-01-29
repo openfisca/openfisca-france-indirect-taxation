@@ -76,7 +76,7 @@ def apply_modification(coicop_nomenclature= None,
         origin= None,
         start= 1994,
         stop= 2024):
- 
+
     """
     Modifie ou ajoute une entrée dans le DataFrame coicop_nomenclature pour un code COICOP donné,
     une catégorie fiscale, et un intervalle de temps [start, stop].
@@ -114,8 +114,8 @@ def apply_modification(coicop_nomenclature= None,
     if selection.any():
         # Vérifie si les colonnes 'start' et 'stop' sont déjà remplies
         filled_start_stop = (
-            (coicop_nomenclature.loc[selection, 'start'] != 0).any() or
-            (coicop_nomenclature.loc[selection, 'stop'] != 0).any()
+            (coicop_nomenclature.loc[selection, 'start'] != 0).any()
+            or (coicop_nomenclature.loc[selection, 'stop'] != 0).any()
             )
         if not filled_start_stop:
             # Cas 1: Aucune période définie, on initialise
@@ -124,7 +124,7 @@ def apply_modification(coicop_nomenclature= None,
             #  Vérifie les chevauchements
             equal_start = (coicop_nomenclature['start'] == start)
             equal_stop = (coicop_nomenclature['stop'] == stop)
-            
+
             overlap_selection = selection & (coicop_nomenclature['start'] <= start) & (coicop_nomenclature['stop'] >= stop)
 
             if overlap_selection.any():
@@ -187,7 +187,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv=Fal
         {'value': 2, 'categorie_fiscale': ''},
         {'value': '2.1.1', 'categorie_fiscale': 'alcools_forts'},        # Alcools forts
         {'value': '2.1.2', 'categorie_fiscale': 'vin'},                  # Vin
-        {'value': '2.1.3', 'categorie_fiscale': 'biere'},                # Bière 
+        {'value': '2.1.3', 'categorie_fiscale': 'biere'},                # Bière
         {'value': '2.2.0.1.1', 'categorie_fiscale': 'cigarettes'},       # Cigarettes
         {'value': '2.2.0.2.1', 'categorie_fiscale': 'cigares'},          # Cigares
         {'value': '2.2.0.3.1', 'categorie_fiscale': 'tabac_a_rouler'},   # Tabac à rouler
@@ -199,7 +199,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv=Fal
         {'value': 4, 'categorie_fiscale': 'tva_taux_plein'},
         {'value': ['4.1.', '4.2.'], 'categorie_fiscale': ''},     # Pas de taxation des loyers
         {'value': '4.5.4.1.1', 'categorie_fiscale': 'tva_taux_reduit', 'start': 1998, 'stop': 2011},    # Combustible solide de résidence principale (Ref : Code général des impôts article 278 bis 3bis a b c)
-        {'value': '4.5.4.1.1', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},           
+        {'value': '4.5.4.1.1', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},
         {'value': ['4.4.1.0.1', '4.4.2.0.1', '4.4.3.0.1'], 'categorie_fiscale': 'tva_taux_reduit', 'stop': 2011},  # Distribution d'eau, enlèvement des ordures ménagères, assainissement, autres services liés au logement n.d.a.
         # qui sont au taux réduit de 1994 à 2011
         {'value': ['4.4.2.0.1', '4.4.3.0.1'], 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},    # Puis au taux intermédiaire à partir de 2012
@@ -209,7 +209,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv=Fal
         # 05 Ameublement, équipement ménager et entretien courant de la maison
         {'value': 5, 'categorie_fiscale': 'tva_taux_plein'},
         {'value': '5.6.2.1', 'categorie_fiscale': 'tva_taux_intermediaire'},                # Services domestiques (ménage, garde enfant, jardinage)
-       
+
         # 06 Santé
         {'value': 6, 'categorie_fiscale': ''},
         {'value': '6.1.1.0.1', 'categorie_fiscale': 'tva_taux_super_reduit'},               # Pharmacie
@@ -218,21 +218,21 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv=Fal
 
         # 07 Transports
         {'value': 7, 'categorie_fiscale': 'tva_taux_plein'},
-        {'value': '7.2.2', 'categorie_fiscale': 'ticpe'},                                   # Carburants et lubrifiants pour véhicules de tourisme 
+        {'value': '7.2.2', 'categorie_fiscale': 'ticpe'},                                   # Carburants et lubrifiants pour véhicules de tourisme
         {'value': '7.3.1', 'categorie_fiscale': 'tva_taux_reduit', 'stop': 2011},           # Transport ferroviaire de passagers
         {'value': '7.3.1', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},
         {'value': '7.3.2', 'categorie_fiscale': 'tva_taux_reduit', 'stop': 2011},           # Transport routier de passagers
         {'value': '7.3.2', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},
         {'value': '7.3.3', 'categorie_fiscale': 'tva_taux_reduit', 'stop': 2024},           # Transport aérien de passagers
         {'value': '7.3.4', 'categorie_fiscale': 'tva_taux_reduit', 'stop': 2011},           # Transport maritime et fluvial de passager
-        {'value': '7.3.4', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},  
+        {'value': '7.3.4', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},
         {'value': '7.3.5', 'categorie_fiscale': 'tva_taux_reduit', 'stop': 2011},           # Transport combine de passagers
         {'value': '7.3.5', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},
         {'value': '7.3.6', 'categorie_fiscale': 'tva_taux_plein'},                          # Autres services de transports (yc déménagements)
-          
+
         # 08 Communications
         {'value': 8, 'categorie_fiscale': 'tva_taux_plein'},
-        {'value': '8.1', 'categorie_fiscale': ''},                                          # Services postaux 
+        {'value': '8.1', 'categorie_fiscale': ''},                                          # Services postaux
 
         # 09 Loisirs et culture
         {'value': 9, 'categorie_fiscale': 'tva_taux_plein'},
@@ -250,9 +250,9 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv=Fal
         {'value': '9.4.2.3', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},
         {'value': '9.4.3', 'categorie_fiscale': '', 'origin': 'COICOP UN'},                                                 # Jeux de hasard
         {'value': '9.5.1', 'categorie_fiscale': 'tva_taux_reduit', 'stop': 2024},                                           # Livre
-        # le livre est passé au taux intermediaire (7%) en 2012 avant de repasser au taux réduit à 5,5% en 2013, 
+        # le livre est passé au taux intermediaire (7%) en 2012 avant de repasser au taux réduit à 5,5% en 2013,
         # comme on ne peut pas le passer au taux intermédiaire seulement pour une année on le laisse au taux réduit
-        {'value': '9.5.2', 'categorie_fiscale': 'tva_taux_super_reduit'},                                                   # Journaux et publications périodiques  
+        {'value': '9.5.2', 'categorie_fiscale': 'tva_taux_super_reduit'},                                                   # Journaux et publications périodiques
         {'value': '9.6', 'categorie_fiscale': '', 'start': 2019},                                                           # Voyages à forfait
 
         # 10 Éducation
@@ -261,7 +261,7 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv=Fal
         # 11 Hôtellerie restauration
         {'value': 11, 'categorie_fiscale': 'tva_taux_reduit'},
         {'value': ['11.1.1.1.4', '11.1.1.1.5', '11.1.1.1.6', '11.1.1.1.8'], 'categorie_fiscale': 'tva_taux_plein'},         # Consommation de boissons alcoolisées
-        {'value': '11.1.1.1.', 'categorie_fiscale': 'tva_taux_plein', 'stop': 2009},                                        # Restauration avec service à table (hors boissons alcoolisées) 
+        {'value': '11.1.1.1.', 'categorie_fiscale': 'tva_taux_plein', 'stop': 2009},                                        # Restauration avec service à table (hors boissons alcoolisées)
         {'value': '11.1.1.1.', 'categorie_fiscale': 'tva_taux_reduit', 'start': 2010, 'stop': 2011},
         {'value': '11.1.1.1.', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},
         {'value': '11.1.1.2', 'categorie_fiscale': 'tva_taux_plein', 'stop': 1997},                                         # Restauration sans service à table (rapide et à emporter)
@@ -277,8 +277,8 @@ def add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv=Fal
         {'value': '12.4', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},
         {'value': '12.5.1', 'categorie_fiscale': 'autres_assurances', 'origin': 'COICOP UN'},                                 # Assurance-vie
         {'value': '12.5.2', 'categorie_fiscale': 'autres_assurances'},                                                        # Assurance habitation
-        {'value': '12.5.3', 'categorie_fiscale': 'assurance_sante'},                                                          # Assurance santé                                 
-        {'value': '12.5.4', 'categorie_fiscale': 'assurance_transport'},                                                      # Assurance transport 
+        {'value': '12.5.3', 'categorie_fiscale': 'assurance_sante'},                                                          # Assurance santé
+        {'value': '12.5.4', 'categorie_fiscale': 'assurance_transport'},                                                      # Assurance transport
         {'value': '12.5.5', 'categorie_fiscale': 'autres_assurances', 'origin': 'COICOP UN'},                                 # Autres assurances
         {'value': '12.6', 'categorie_fiscale': ''}, ]                                                                         # Services financiers
 
@@ -357,14 +357,14 @@ def get_categorie_fiscale(value, year=None, assertion_error=True):
     else:
         return categorie_fiscale
 
-   
+
 def test_coicop_legislation():
     coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
     coicop_legislation = add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = False)
     if coicop_legislation.categorie_fiscale.isnull().any():
         return coicop_legislation.loc[coicop_legislation.categorie_fiscale.isnull()]
 
-   
+
 if __name__ == '__main__':
     coicop_nomenclature = build_coicop_nomenclature.build_complete_coicop_nomenclature()
     coicop_nomenclature = add_fiscal_categories_to_coicop_nomenclature(coicop_nomenclature, to_csv = True)

@@ -21,12 +21,13 @@ class elas_exp_3(YearlyVariable):
     entity = Menage
     label = 'Elasticité dépense autres biens non durables'
 
+
 class elas_ext(YearlyVariable):
     value_type = float
     entity = Menage
     label = "Elasticité prix du carburants à la marge extensive"
-    
-    
+
+
 class elas_price_1_1(YearlyVariable):
     value_type = float
     entity = Menage

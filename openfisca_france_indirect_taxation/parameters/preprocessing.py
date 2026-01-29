@@ -7,6 +7,7 @@ from openfisca_france_indirect_taxation.variables.base import Parameter, Paramet
 from openfisca_france_indirect_taxation.utils import assets_directory
 from openfisca_france_indirect_taxation.parameters.series_rv import alcool_conso_et_vin
 
+
 def preprocess_legislation(parameters):
     """Preprocess the legislation parameters to add prices and amounts from national accounts."""
     prix_carburants = dict()
@@ -77,7 +78,7 @@ def preprocess_legislation(parameters):
                     {
                         'title': 'Prix moyens annuels de vente au détail en métropole - Supercarburant sans plomb 95-E10 (1 litre)',
                         'href': 'https://www.insee.fr/fr/statistiques/serie/010596133',
-                        
+
                         }
                     ]
                 }
@@ -98,18 +99,18 @@ def preprocess_legislation(parameters):
                 'title': 'Prix moyens annuels de vente au détail en métropole - Supercarburant sans plomb 95 (1 litre)',
                 'href': 'https://www.insee.fr/fr/statistiques/serie/010533882',
                 }
-        },
+            },
         'super_98_ttc': {
             "last_value_date": f"{most_recent_year}-12-31",
             "ref": {
                 'title': 'Prix moyens annuels de vente au détail en métropole - Supercarburant sans plomb 98 (1 litre)',
                 'href': 'https://www.insee.fr/fr/statistiques/serie/010533881',
                 }
-        },
+            },
         'super_plombe_ttc': {
             "last_value_date": "2005-12-31",
-        },
-    }
+            },
+        }
     for element, detail in autres_carburants.items():
         prix_annuel = prix_annuel_carburants[element]
         years = list(range(1990, 2017))
@@ -132,10 +133,10 @@ def preprocess_legislation(parameters):
                 'last_value_still_valid_on': detail['last_value_date'],
                 'reference': {
                     detail['last_value_date']: detail['ref'] if 'ref' in detail else {
+                        }
                     }
                 }
             }
-        }
     # After 2017, we use the data from prix_litre_annuel_carburants.cs
 
     prix_carburants['description'] = 'Prix des carburants'
@@ -628,7 +629,7 @@ def preprocess_legislation(parameters):
             },
         }
 
-        # the new one has been imported from series_rv.py
+    # the new one has been imported from series_rv.py
     node_alcool_conso_et_vin = ParameterNode(
         'alcool_conso_et_vin',
         data = alcool_conso_et_vin,

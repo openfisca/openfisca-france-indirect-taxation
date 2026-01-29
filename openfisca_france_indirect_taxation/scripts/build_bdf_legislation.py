@@ -36,7 +36,7 @@ def add_fiscal_categories_to_bdf_nomenclature(bdf_nomenclature, to_csv=False):
         # 01 Produits alimentaires et boissons non alcoolisées
         {'value': '01', 'categorie_fiscale': 'tva_taux_reduit'},
         {'value': '01.1.5.2', 'categorie_fiscale': 'tva_taux_plein'},                         # Margarine
-        {'value': '01.1.5.5', 'categorie_fiscale': 'tva_taux_reduit', 'origin': 'TAXIPP'},    # Saindoux autres graisses d'origine animale    
+        {'value': '01.1.5.5', 'categorie_fiscale': 'tva_taux_reduit', 'origin': 'TAXIPP'},    # Saindoux autres graisses d'origine animale
         {'value': '01.1.8.4', 'categorie_fiscale': 'tva_taux_plein'},                         # Confiserie (hors cocolats)
 
         # 02 Boissons alcoolisées et tabac
@@ -59,7 +59,7 @@ def add_fiscal_categories_to_bdf_nomenclature(bdf_nomenclature, to_csv=False):
         {'value': ['04.4.1.1', '04.4.2.1', '04.4.3.1'], 'categorie_fiscale': 'tva_taux_reduit', 'stop': 2011},          # Enlèvement des ordures ménagères, assainissement et distribution d'eau,
         # qui sont au taux réduit de 1994 à 2011
         {'value': ['04.4.1.1', '04.4.2.1'], 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},              # avant de passer au taux intermédiaire
-        {'value': '04.4.3.1', 'categorie_fiscale': 'tva_taux_reduit', 'start': 2012},                                   # sauf l'eau qui reste à taux réduit                             
+        {'value': '04.4.3.1', 'categorie_fiscale': 'tva_taux_reduit', 'start': 2012},                                   # sauf l'eau qui reste à taux réduit
         {'value': ['04.1.1.1', '04.1.2.1'], 'categorie_fiscale': ''},                                                   # Loyers et charges locatives
         {'value': '04.3.2.1', 'categorie_fiscale': 'tva_taux_intermediaire'},                                           # Services d'entretien et réparation de logements
 
@@ -70,13 +70,13 @@ def add_fiscal_categories_to_bdf_nomenclature(bdf_nomenclature, to_csv=False):
         # 06 Santé
         {'value': '06', 'categorie_fiscale': ''},
         {'value': '06.1.1.1', 'categorie_fiscale': 'tva_taux_super_reduit'},                                            # Pharmacie
-        {'value': '06.1.1.2', 'categorie_fiscale': 'tva_taux_plein'},                                                   # Parapharmacie                
+        {'value': '06.1.1.2', 'categorie_fiscale': 'tva_taux_plein'},                                                   # Parapharmacie
         {'value': '06.1.1.3', 'categorie_fiscale': 'tva_taux_reduit'},                                                  # Matériel thérapeutique
 
         # 07 Transports
         {'value': '07', 'categorie_fiscale': 'tva_taux_plein'},
         {'value': '07.2.2', 'categorie_fiscale': 'ticpe'},                                                              # Carburants et lubrifiants pour véhicules de tourisme
-        {'value': '07.3.1', 'categorie_fiscale': 'tva_taux_reduit', 'stop': 2011},                                      # Transport ferroviaire de passagers  
+        {'value': '07.3.1', 'categorie_fiscale': 'tva_taux_reduit', 'stop': 2011},                                      # Transport ferroviaire de passagers
         {'value': '07.3.1', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},
         {'value': '07.3.2', 'categorie_fiscale': 'tva_taux_reduit', 'stop': 2011},                                      # Transport routier de passagers
         {'value': '07.3.2', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},
@@ -121,7 +121,7 @@ def add_fiscal_categories_to_bdf_nomenclature(bdf_nomenclature, to_csv=False):
         {'value': '11.1.1.1', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},
         {'value': '11.1.1.2', 'categorie_fiscale': 'tva_taux_plein'},                                                 # Boissons alcoolisées (cafés, bars et assimilés)
         {'value': '11.1.2', 'categorie_fiscale': 'tva_taux_reduit'},                                                  # Restauration collective
-        {'value': '11.2.1', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},                            # Hébergement touristique   
+        {'value': '11.2.1', 'categorie_fiscale': 'tva_taux_intermediaire', 'start': 2012},                            # Hébergement touristique
 
         # 12 Autres biens et services
         {'value': '12', 'categorie_fiscale': 'tva_taux_plein'},
@@ -133,8 +133,8 @@ def add_fiscal_categories_to_bdf_nomenclature(bdf_nomenclature, to_csv=False):
         {'value': '12.5.3', 'categorie_fiscale': 'assurance_sante'},                                                    # Assurance santé
         {'value': '12.5.4', 'categorie_fiscale': 'assurance_transport'},                                                # Assurance transport
         {'value': '12.5.5', 'categorie_fiscale': 'autres_assurances', 'origin': 'COICOP UN'},                           # Autres assurances
-        {'value': '12.6', 'categorie_fiscale': ''},                                                                     # Services financiers  
-        
+        {'value': '12.6', 'categorie_fiscale': ''},                                                                     # Services financiers
+
         # 13 Impôts et taxes, gros travaux, remboursement pret, cadeaux, prelevement employeur, epargne
         {'value': '13', 'categorie_fiscale': ''},
         # 14 Allocations logement recues par le menage
@@ -152,7 +152,7 @@ def add_fiscal_categories_to_bdf_nomenclature(bdf_nomenclature, to_csv=False):
         else:
             # Sinon, applique la règle normalement
             bdf_nomenclature = apply_modification(bdf_nomenclature, **rule)
-            
+
     # On renomme code_coicop code_bdf pour une meilleure lisibilité
     bdf_nomenclature.rename({'code_coicop': 'code_bdf'}, axis = 1, inplace= True)
     # Sauvegarde le résultat dans un fichier CSV si demandé

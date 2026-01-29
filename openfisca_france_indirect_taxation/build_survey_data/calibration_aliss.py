@@ -19,7 +19,6 @@ from openfisca_france_indirect_taxation.utils import assets_directory, get_input
 log = logging.getLogger(__name__)
 
 
-
 def bdf(year=2017):
     """Load BDF nomenclature with both code_bdf and code_coicop columns.
 

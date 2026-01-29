@@ -52,7 +52,7 @@ def build_raw_bdf_nomenclature(year = 2017):
     table_bdf.loc[:, 'Code_sous_classe'] = table_bdf.loc[:, 'Code sur 5 positions'].astype(int).astype(str).str.zfill(5)
 
     # Extract first two digits for the division, the first three for the group, the first four for the class
-    table_bdf.loc[:, 'Code_division'] = table_bdf.loc[:, 'Code_sous_classe'].str[:2]  
+    table_bdf.loc[:, 'Code_division'] = table_bdf.loc[:, 'Code_sous_classe'].str[:2]
     table_bdf.loc[:, 'Code_groupe'] = table_bdf.loc[:, 'Code_sous_classe'].str[:3]
     table_bdf.loc[:, 'Code_classe'] = table_bdf.loc[:, 'Code_sous_classe'].str[:4]
 
@@ -63,7 +63,7 @@ def build_raw_bdf_nomenclature(year = 2017):
     table_bdf = table_bdf.merge(bdf_groupe, on='Code_groupe', how='left')
     table_bdf = table_bdf.merge(bdf_classe, on='Code_classe', how='left')
 
-    table_bdf.rename(columns={'Rubriques': 'Label_sous_classe'}, inplace=True) 
+    table_bdf.rename(columns={'Rubriques': 'Label_sous_classe'}, inplace=True)
     bdf_nomenclature = table_bdf.loc[:, ['Label_division', 'Label_groupe', 'Label_classe', 'Label_sous_classe', 'Code_sous_classe']]
     bdf_nomenclature.loc[:, 'code_coicop'] = bdf_nomenclature.loc[:, 'Code_sous_classe'].apply(lambda x: ".".join([x[:2], x[2:3], x[3:4], x[4:]]))
 

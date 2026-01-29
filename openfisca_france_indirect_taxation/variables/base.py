@@ -81,7 +81,7 @@ def get_legislation_data_frames():
         )
 
     bdf_legislation_data_frame = pd.read_csv(os.path.join(legislation_directory, 'bdf_2017_legislation.csv'))
-    
+
     return bdf_legislation_data_frame
 
 
@@ -131,7 +131,7 @@ def depenses_postes_agreges_function_creator(postes_coicop, legislation_datafram
 
     Returns:
         function: Une fonction pour calculer les dépenses agrégées.
-    """ 
+    """
     if len(postes_coicop) == 0:
         def empty_func(*args, **kwargs):
             return 0

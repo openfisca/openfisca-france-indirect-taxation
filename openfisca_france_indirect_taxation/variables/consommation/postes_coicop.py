@@ -134,7 +134,7 @@ def generate_postes_agreges_variables(tax_benefit_system, legislation_dataframe=
 
     if legislation_dataframe is None:
         legislation_dataframe = get_legislation_data_frames()
-        
+
     for num_prefix in ["0{}".format(i) for i in range(1, 10)] + ["10", "11", "12", "13"]:
         codes_bdf = legislation_dataframe.loc[legislation_dataframe['adjusted_bdf'].str.startswith(num_prefix)]['adjusted_bdf'].drop_duplicates().tolist()
 
