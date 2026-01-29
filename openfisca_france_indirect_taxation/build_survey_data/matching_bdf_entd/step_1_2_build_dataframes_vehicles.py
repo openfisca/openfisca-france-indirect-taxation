@@ -133,11 +133,11 @@ def merge_vehicule_menage(year_data):
     data_bdf.loc[data_bdf['carbu'] > 2, 'autre_carbu'] = 1
 
     # déf des distances parcourues par carburant
-    data_entd['distance_essence'] = 0
+    data_entd['distance_essence'] = 0.0
     data_entd.loc[data_entd['essence'] == 1, 'distance_essence'] = data_entd['kvkm1anv']
-    data_entd['distance_diesel'] = 0
+    data_entd['distance_diesel'] = 0.0
     data_entd.loc[data_entd['diesel'] == 1, 'distance_diesel'] = data_entd['kvkm1anv']
-    data_entd['distance_autre_carbu'] = 0
+    data_entd['distance_autre_carbu'] = 0.0
     data_entd.loc[data_entd['autre_carbu'] == 1, 'distance_autre_carbu'] = data_entd['kvkm1anv']
 
     # Df avec le nombre de véhicule et les distances pour chaque type de carburant
@@ -167,11 +167,11 @@ def merge_vehicule_menage(year_data):
         ]
 
     # déf des distances parcourues par carburant
-    data_bdf['km_essence'] = 0
+    data_bdf['km_essence'] = 0.0
     data_bdf.loc[data_bdf['essence'] == 1, 'km_essence'] = data_bdf['km_auto']
-    data_bdf['km_diesel'] = 0
+    data_bdf['km_diesel'] = 0.0
     data_bdf.loc[data_bdf['diesel'] == 1, 'km_diesel'] = data_bdf['km_auto']
-    data_bdf['km_autre_carbu'] = 0
+    data_bdf['km_autre_carbu'] = 0.0
     data_bdf.loc[data_bdf['autre_carbu'] == 1, 'km_autre_carbu'] = data_bdf['km_auto']
 
     # Df avec le nombre de véhicule et les distances pour chaque type de carburant

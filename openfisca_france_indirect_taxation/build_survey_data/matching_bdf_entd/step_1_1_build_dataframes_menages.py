@@ -77,21 +77,22 @@ def load_data_menages_bdf_entd(year_data):
             'ident_men',
             'agepr',
             'cs42pr',
-            'dipdetpr',
-            'nactifs',
+            'dipdetpr',              # diplôme le plus élevé de la personne de référence
+            'nactifs',               # nombre d'actifs dans le ménage  
             'coeffuc',               # ocde10
-            'nenfants',
-            'decile_rev_uc',         # déciles de revenu par uc
-            'npers',
+            'nenfants',              # nombre d'enfants dans le ménage
+            'decile_rev',            # décile de revenu consolidé
+            'decile_rev_uc',         # décile de revenu par uc
+            'npers',                 # nombre de personnes dans le ménage
             # 'numcom_au2010',       # cataeu
             'pond_menc',             # poids ménage
             # 'rev_final_uc',        # revenus simulés par UC   (pas dispo dans la table public demander table chercheur)
             # 'rlog',                # allocations logement     (pas dispo dans la table public demander table chercheur)
-            'situapr',
-            'tuu2017_res',
+            'situapr',               # situation professionnelle de la personne de référence 
+            'tuu2017_res',           # tranche d'unité urbaine de la commune de résidence
             # 'tau99',               (pas dispo dans la table public demander table chercheur ??)
             # 'typlog',
-            'typmen5',              # type ménage
+            'typmen5',               # type ménage
             # To be completed
             ]
 

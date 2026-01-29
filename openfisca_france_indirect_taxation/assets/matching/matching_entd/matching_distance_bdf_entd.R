@@ -25,7 +25,9 @@ data_entd <- data_entd %>%
   mutate(across(all_of(num_vars), as.numeric)) %>%
   mutate(across(all_of(cat_vars), as.factor))
 
-# Compute random matching
+# Set a seed for reproducibility (When two or more donor records have the exact same distance to a recipient, the algorithm must randomly select one)
+set.seed(1234)
+# Compute distance matching
 out.nnd <- NND.hotdeck(
   data.rec = data_bdf,
   data.don = data_entd,

@@ -7,6 +7,9 @@ assets_directory = config$openfisca_france_indirect_taxation$assets
 data_entd <- read.csv(file = file.path(assets_directory, "/matching/matching_entd/data_matching_entd.csv"), header = -1, sep=",")
 data_bdf <- read.csv(file = file.path(assets_directory, "/matching/matching_entd/data_matching_bdf.csv"), header = -1, sep=",")
 
+# Set a seed for reproducibility (When two or more donor records have the exact same distance to a recipient, the algorithm must randomly select one)
+set.seed(1234)
+
 # Compute ranked matching
 out.nnd <- rankNND.hotdeck(
   data.rec = data_bdf, 

@@ -26,16 +26,17 @@ def homogenize_variables_definition_bdf_entd(year_data):
     # Rename
     data_entd.rename(
         columns = {
-            'nivie10': 'niveau_vie_decile',  # entd 2008
-            'decile_rev_uc': 'niveau_vie_decile',  # emp 2019
+            'dipdetpr' : 'dip14pr'
+            'nivie10': 'niveau_vie_decile',         # entd 2008
+            'decile_rev_uc': 'niveau_vie_decile',   # emp 2019
             'nbuc': 'ocde10',
             # 'numcom_au2010': 'cataeu',
             'pondv1': 'pondmen',
             'pond_menc': 'pondmen',
             'rlog': 'aba',
             'tau99': 'tau',
-            'tu99': 'tuu',              # entd 2008
-            'tuu2017_res': 'tuu',      # emp 2019
+            'tu99': 'tuu',                          # entd 2008
+            'tuu2017_res': 'tuu',                   # emp 2019
             'typmen5': 'typmen',
             'v1_logloymens': 'mloy_d',
             'v1_logocc': 'stalog',
