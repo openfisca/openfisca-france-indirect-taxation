@@ -24,6 +24,9 @@ data_entd <- data_entd %>%
   mutate(across(all_of(num_vars), as.numeric)) %>%
   mutate(across(all_of(cat_vars), as.factor))
 
+# Set a seed for reproducibility
+set.seed(1234)
+
 # Compute random matching
 out.nnd <- RANDwNND.hotdeck(
   data.rec = data_bdf, 
