@@ -3,7 +3,7 @@ import os
 from openfisca_france_indirect_taxation.utils import assets_directory
 
 ''' Données sources utilisées:
-    - Compte satellite du tourisme: https://www.insee.fr/fr/statistiques/fichier/2015846/sect-tour-conso-int.zip 
+    - Compte satellite du tourisme: https://www.insee.fr/fr/statistiques/fichier/2015846/sect-tour-conso-int.zip
     - Le fichier Consommation_touristique_2010_2018.xlsx a été assemblée à partir du tableau 3 de la note (https://www.entreprises.gouv.fr/la-dge/publications/en-france-la-consommation-touristique-interieure-est-stable-en-2016)
     et du tableaua 4 de la note (https://www.entreprises.gouv.fr/files/files/Publications/2019/4-pages-dge/croissance-de-la-consommation-touristique-4-pages-dec-2019.pdf)
 '''
@@ -16,10 +16,14 @@ def split_aggregated_poste(df, to_split, new_postes):
     other_data_tourisme['Postes de dépenses'] = other_data_tourisme['Postes de dépenses'].str.strip()
     total = other_data_tourisme.loc[other_data_tourisme['Postes de dépenses'].isin(new_postes), [2018]].sum(axis = 0).values[0]
 
-    for poste in new_postes: 
-        share = other_data_tourisme.loc[other_data_tourisme['Postes de dépenses'] == poste, 2018].values[0] / total 
+    for poste in new_postes:
+        share = other_data_tourisme.loc[other_data_tourisme['Postes de dépenses'] == poste, 2018].values[0] / total
         df.loc[df.index.max() + 1, 'Poste de dépenses'] = poste
-        df.loc[df['Poste de dépenses'] == poste, [2019, 2020, 2021, 2022]] = (df.loc[df['Poste de dépenses'] == to_split, [2019, 2020, 2021, 2022]].apply(lambda x: share * x, axis = 0)).values[0]
+        df.loc[df['Poste de dépenses'] == poste, [2019, 2020, 2021, 2022]] = (
+            df.loc[df['Poste de dépenses'] == to_split, [2019, 2020, 2021, 2022]]
+            .apply(lambda x, share=share: share * x, axis = 0)
+            .values[0]
+            )
 
     return df
 
@@ -36,9 +40,9 @@ postes_tourisme = ['Hébergements touristiques marchands',
 'Activités sportives et de loisirs',
 'Location d\'articles de sport et loisirs',
 'Services des voyagistes et agences de voyages',
-'Carburants et péages',	
-'Aliments et boissons',	
-'Biens de consommation durables spécifiques',	
+'Carburants et péages',
+'Aliments et boissons',
+'Biens de consommation durables spécifiques',
 'Autres biens de consommation et autres services',
 'Dépenses touristiques intérieures (C = A + B)']
 
@@ -66,7 +70,7 @@ def get_repartition_depenses_touristique(target_year):
     data_tourisme.columns = data_tourisme.columns.get_level_values(0)
     data_tourisme.reset_index(inplace = True)
     data_tourisme.rename({('Poste de dépenses', 'Unnamed: 0_level_1'): 'Poste de dépenses'}, axis = 1, inplace = True)
-    data_tourisme['Poste de dépenses'] = data_tourisme['Poste de dépenses'].str.strip() 
+    data_tourisme['Poste de dépenses'] = data_tourisme['Poste de dépenses'].str.strip()
     data_tourisme = data_tourisme.loc[data_tourisme['Poste de dépenses'].isin(postes_tourisme),]
 
     # On ventile certains postes agrégés
@@ -87,7 +91,7 @@ dico_postes_tourisme = {
     'poste_02_1_1', 'poste_02_1_2', 'poste_02_1_3', 'poste_02_1_9',
     'poste_02_3', 'poste_02_4', 'poste_02_5_1',],
     'Biens de consommation durables spécifiques': ['poste_03_1_1', 'poste_03_1_2', 'poste_03_2_1'],
-    'Carburants': 'poste_07_2_2', 
+    'Carburants': 'poste_07_2_2',
     'Péages': 'poste_07_2_4',
     'Location de véhicules de tourisme': 'poste_07_2_4',
     'Transports par train': 'poste_07_3_1',
@@ -97,12 +101,12 @@ dico_postes_tourisme = {
     'Location d\'articles de sport et loisirs': 'poste_09_4_2',
     'Remontées mécaniques': 'poste_09_4_2',
     'Activités sportives et de loisirs': 'poste_09_4_2',
-    'Musées, spectacles et autres activités culturelles': 'poste_09_6_1', 
+    'Musées, spectacles et autres activités culturelles': 'poste_09_6_1',
     'Services des voyagistes et agences de voyages': 'poste_09_8',
     'Restaurants et cafés': 'poste_11_1_1',
     'Hébergements touristiques marchands': 'poste_11_2',
     'Autres services (7)': 'poste_13_9',
-    'Taxis et autres services de transports urbains': 'poste_13_9',			
+    'Taxis et autres services de transports urbains': 'poste_13_9',
     'Autres biens de consommation (6)': 'poste_13_2'}
 
 
@@ -116,7 +120,6 @@ def calculate_share_cn(liste_poste, cn_df):
 
 
 def get_correction_territoriale(target_year, masses_cn_postes, liste_postes_cn):
- 
     # On prend le solde territorial dans la compta nat
     parametres_fiscalite_file_path = os.path.join(
         assets_directory,
@@ -129,8 +132,7 @@ def get_correction_territoriale(target_year, masses_cn_postes, liste_postes_cn):
     df_cn = df_cn.loc[:, ['Code', '{}'.format(target_year)]].copy()
     df_cn.loc[df_cn['Code'] == 'CP16']
     solde_territorial = df_cn.loc[df_cn['Code'] == 'CP16', '{}'.format(target_year)]
-  
-    # On récupère la répartition de la consommation touristique des étrangers en France 
+    # On récupère la répartition de la consommation touristique des étrangers en France
     percentage_df = get_repartition_depenses_touristique(target_year)
 
     # On ventile le solde territorial  selon cette répartition
@@ -139,7 +141,7 @@ def get_correction_territoriale(target_year, masses_cn_postes, liste_postes_cn):
     correction_territoriale = correction_territoriale.reset_index().rename({'Poste de dépenses': 'Label'}, axis = 1)
     correction_territoriale['Code'] = correction_territoriale['Label'].map(dico_postes_tourisme)
 
-    correction_territoriale['Code'] = correction_territoriale['Code'].apply(lambda x: x if isinstance(x, list) else [x]) 
+    correction_territoriale['Code'] = correction_territoriale['Code'].apply(lambda x: x if isinstance(x, list) else [x])
     correction_territoriale = correction_territoriale.explode('Code').reset_index(drop = True)
 
     liste_poste_01_02 = [element for element in liste_postes_cn if element[:8] in ['poste_01', 'poste_02']]

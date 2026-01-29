@@ -12,10 +12,10 @@ def graph_winners_losers(data,reform,elas_ext, elas_vect,bonus_cheques_uc):
     hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
     palette_douenne = sns.color_palette([(0.6980392156862745, 0.8745098039215686, 0.5411764705882353), (1.0, 0.4980392156862745, 0.0), (0.9921568627450981, 0.7490196078431373, 0.43529411764705883)])
     fig, ax = plt.subplots(figsize=(10, 7.5)) 
-    if elas_ext == True:
+    if elas_ext:
         sns.barplot(x="niveau_vie_decile", y = 'Is_losers', data = data, hue = 'ref_elasticity', hue_order= ['Douenne (2020)', 'Douenne (2020) vector', 'Douenne (2020) ext margin'], palette = palette_douenne, width = .9) 
     else: 
-        if elas_vect == False :
+        if not elas_vect:
             sns.barplot(x="niveau_vie_decile", y = 'Is_losers', data = data, hue = 'ref_elasticity', hue_order = hue_order , palette = sns.color_palette("Paired"), width = .9)
         else :
             sns.barplot(x="niveau_vie_decile", y = 'Is_losers', data = data, hue = 'ref_elasticity', hue_order= ['Douenne (2020)', 'Douenne (2020) vector'], palette = palette_douenne, width = .9) 
@@ -36,10 +36,10 @@ def graph_net_transfers(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
     palette_douenne = sns.color_palette([(0.6980392156862745, 0.8745098039215686, 0.5411764705882353), (1.0, 0.4980392156862745, 0.0), (0.9921568627450981, 0.7490196078431373, 0.43529411764705883)])
     data = data[data['niveau_vie_decile'] != 'Total']
     fig, ax = plt.subplots(figsize=(10, 7.5))
-    if elas_ext == True:
+    if elas_ext:
         sns.barplot(x="niveau_vie_decile", y = 'Net_transfers_reform', data = data, hue = 'ref_elasticity', hue_order= ['Douenne (2020)', 'Douenne (2020) vector', 'Douenne (2020) ext margin'], palette = palette_douenne, width = .9) 
     else: 
-        if elas_vect == False :
+        if not elas_vect:
             sns.barplot(x="niveau_vie_decile", y = 'Net_transfers_reform', data = data, hue = 'ref_elasticity', hue_order = hue_order, palette = sns.color_palette("Paired"), width = .9)
         else :
             sns.barplot(x="niveau_vie_decile", y = 'Net_transfers_reform', data = data, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = palette_douenne, width = .9)
@@ -61,11 +61,11 @@ def graph_net_transfers_uc(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
     palette_douenne = sns.color_palette([(0.6980392156862745, 0.8745098039215686, 0.5411764705882353), (1.0, 0.4980392156862745, 0.0), (0.9921568627450981, 0.7490196078431373, 0.43529411764705883)])
     data = data[data['niveau_vie_decile'] != 'Total']
     fig, ax = plt.subplots(figsize=(10, 7.5))
-    if elas_ext == True:
+    if elas_ext:
         sns.barplot(x="niveau_vie_decile", y = 'Net_transfers_reform_uc', data = data, hue = 'ref_elasticity', hue_order= ['Douenne (2020)', 'Douenne (2020) vector', 'Douenne (2020) ext margin'], palette = palette_douenne, width = .9) 
     
     else: 
-        if elas_vect == False :
+        if not elas_vect:
             sns.barplot(x="niveau_vie_decile", y = 'Net_transfers_reform_uc', data = data, hue = 'ref_elasticity', hue_order = hue_order, palette = sns.color_palette("Paired"), width = .9)
         else :
             sns.barplot(x="niveau_vie_decile", y = 'Net_transfers_reform_uc', data = data, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = palette_douenne, width = .9)
@@ -86,10 +86,10 @@ def graph_effort_rate(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
     hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
     palette_douenne = sns.color_palette([(0.6980392156862745, 0.8745098039215686, 0.5411764705882353), (1.0, 0.4980392156862745, 0.0), (0.9921568627450981, 0.7490196078431373, 0.43529411764705883)])
     fig, ax = plt.subplots(figsize=(10, 7.5))
-    if elas_ext == True:
+    if elas_ext:
         sns.barplot(x="niveau_vie_decile", y = 'Effort_rate', data = data, hue = 'ref_elasticity', hue_order= ['Douenne (2020)', 'Douenne (2020) vector', 'Douenne (2020) ext margin'], palette = palette_douenne, width = .9) 
     else: 
-        if elas_vect == False :
+        if not elas_vect:
             sns.barplot(x="niveau_vie_decile", y = 'Effort_rate', data = data, hue = 'ref_elasticity', hue_order = hue_order, palette = sns.color_palette("Paired"), width = .9)
         else : 
             sns.barplot(x="niveau_vie_decile", y = 'Effort_rate', data = data, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = palette_douenne, width = .9)
@@ -109,10 +109,10 @@ def graph_CO2_emissions(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
     hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
     palette_douenne = sns.color_palette([(0.6980392156862745, 0.8745098039215686, 0.5411764705882353), (1.0, 0.4980392156862745, 0.0), (0.9921568627450981, 0.7490196078431373, 0.43529411764705883)])
     fig, ax = plt.subplots(figsize=(10, 7.5))
-    if elas_ext == True:
+    if elas_ext:
         sns.barplot(x="niveau_vie_decile", y = 'emissions_CO2_carburants_carbon_tax_rv', data = data, hue = 'ref_elasticity', hue_order= ['Douenne (2020)', 'Douenne (2020) vector', 'Douenne (2020) ext margin'], palette = palette_douenne, width = .9) 
     else: 
-        if elas_vect == False :
+        if not elas_vect:
             sns.barplot(x="niveau_vie_decile", y = 'emissions_CO2_carburants_carbon_tax_rv', data = data, hue = 'ref_elasticity', hue_order = hue_order , palette = sns.color_palette("Paired"), width = .9)
         else : 
             sns.barplot(x="niveau_vie_decile", y = 'emissions_CO2_carburants_carbon_tax_rv', data = data, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = palette_douenne, width = .9)
@@ -133,11 +133,11 @@ def graph_delta_CO2(data,reform, elas_ext, elas_vect,bonus_cheques_uc):
     hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
     palette_douenne = sns.color_palette([(0.6980392156862745, 0.8745098039215686, 0.5411764705882353), (1.0, 0.4980392156862745, 0.0), (0.9921568627450981, 0.7490196078431373, 0.43529411764705883)])
     fig, ax = plt.subplots(figsize=(10, 7.5)) 
-    if elas_ext == True:
+    if elas_ext:
         sns.barplot(x="niveau_vie_decile", y = 'Reduction_CO2', data = data, hue = 'ref_elasticity', hue_order= ['Douenne (2020)', 'Douenne (2020) vector', 'Douenne (2020) ext margin'], palette = palette_douenne, width = .9) 
     
     else:
-        if elas_vect == False :
+        if not elas_vect:
             sns.barplot(x="niveau_vie_decile", y = 'Reduction_CO2', data = data, hue = 'ref_elasticity', hue_order = hue_order , palette = sns.color_palette("Paired"), width = .9)
         else : 
             sns.barplot(x="niveau_vie_decile", y = 'Reduction_CO2', data = data, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = palette_douenne, width = .9)
@@ -158,10 +158,10 @@ def graph_share_co2_emissions(data,reform, elas_ext, elas_vect,bonus_cheques_uc)
     hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
     palette_douenne = sns.color_palette([(0.6980392156862745, 0.8745098039215686, 0.5411764705882353), (1.0, 0.4980392156862745, 0.0), (0.9921568627450981, 0.7490196078431373, 0.43529411764705883)])
     fig, ax = plt.subplots(figsize=(10, 7.5)) 
-    if elas_ext == True:
+    if elas_ext:
         sns.barplot(x="niveau_vie_decile", y = 'Share_emissions_CO2', data = data, hue = 'ref_elasticity', hue_order= ['Douenne (2020)', 'Douenne (2020) vector', 'Douenne (2020) ext margin'], palette = palette_douenne, width = .9) 
     else:
-        if elas_vect == False :
+        if not elas_vect:
             sns.barplot(x="niveau_vie_decile", y = 'Share_emissions_CO2', data = data, hue = 'ref_elasticity', hue_order = hue_order , palette = sns.color_palette("Paired"), width = .9)
         else : 
             sns.barplot(x="niveau_vie_decile", y = 'Share_emissions_CO2', data = data, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = palette_douenne, width = .9)
@@ -178,10 +178,10 @@ def graph_share_emissions_reduction(data,reform, elas_ext, elas_vect,bonus_chequ
     hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
     palette_douenne = sns.color_palette([(0.6980392156862745, 0.8745098039215686, 0.5411764705882353), (1.0, 0.4980392156862745, 0.0), (0.9921568627450981, 0.7490196078431373, 0.43529411764705883)])
     fig, ax = plt.subplots(figsize=(10, 7.5))
-    if elas_ext == True:
+    if elas_ext:
         sns.barplot(x="niveau_vie_decile", y = 'Share_reduction_CO2', data = data, hue = 'ref_elasticity', hue_order= ['Douenne (2020)', 'Douenne (2020) vector', 'Douenne (2020) ext margin'], palette = palette_douenne, width = .9) 
     else:   
-        if elas_vect == False :
+        if not elas_vect:
             sns.barplot(x="niveau_vie_decile", y = 'Share_reduction_CO2', data = data, hue = 'ref_elasticity', hue_order = hue_order , palette = sns.color_palette("Paired"), width = .9)
         else : 
             sns.barplot(x="niveau_vie_decile", y = 'Share_reduction_CO2', data = data, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = palette_douenne, width = .9)
@@ -199,10 +199,10 @@ def graph_ratio_emissions_reduction(data,reform,elas_ext,elas_vect,bonus_cheques
     palette_douenne = sns.color_palette([(0.6980392156862745, 0.8745098039215686, 0.5411764705882353), (1.0, 0.4980392156862745, 0.0), (0.9921568627450981, 0.7490196078431373, 0.43529411764705883)])
     data['ratio_reduction_emissions'] = data['Share_reduction_CO2']/data['Share_emissions_CO2']
     fig, ax = plt.subplots(figsize=(10, 7.5))
-    if elas_ext == True:
+    if elas_ext:
         sns.barplot(x="niveau_vie_decile", y = 'ratio_reduction_emissions', data = data, hue = 'ref_elasticity', hue_order= ['Douenne (2020)', 'Douenne (2020) vector', 'Douenne (2020) ext margin'], palette = palette_douenne, width = .9) 
     else: 
-        if elas_vect == False :
+        if not elas_vect:
             sns.barplot(x="niveau_vie_decile", y = 'ratio_reduction_emissions', data = data, hue = 'ref_elasticity', hue_order = hue_order , palette = sns.color_palette("Paired"), width = .9)
         else : 
             sns.barplot(x="niveau_vie_decile", y = 'ratio_reduction_emissions', data = data, hue = 'ref_elasticity', hue_order = ['Douenne (2020)' , 'Douenne (2020) vector'], palette = palette_douenne, width = .9)
@@ -282,13 +282,13 @@ def boxplot_net_transfers(data,reform,elas_ext,elas_vect,bonus_cheques_uc):
     markers = ['v', 'd', 'o', 'o', 'o' , 'd', '^']
     
     fig, ax = plt.subplots(figsize=(10, 8))
-    if elas_ext == True:
+    if elas_ext:
         hue_order = ['Douenne (2020)','Douenne (2020) vector','Douenne (2020) ext margin']
         palette_douenne = sns.color_palette([(0.6980392156862745, 0.8745098039215686, 0.5411764705882353), (1.0, 0.4980392156862745, 0.0), (0.9921568627450981, 0.7490196078431373, 0.43529411764705883)])
         palette = palette_douenne 
         quantiles_to_plot = quantiles_for_boxplot(data,'Net_transfers_reform',hue_order)
     else: 
-        if elas_vect == False :
+        if not elas_vect:
             hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
             palette = sns.color_palette("Paired") 
             quantiles_to_plot = quantiles_for_boxplot(data,'Net_transfers_reform',hue_order)
@@ -325,7 +325,7 @@ def boxplot_net_transfers_uc(data,reform,elas_ext,elas_vect,bonus_cheques_uc):
     markers = ['v', 'd', 'o', 'o', 'o' , 'd', '^']
     
     fig, ax = plt.subplots(figsize=(10, 8))
-    if elas_ext == True:
+    if elas_ext:
         hue_order = ['Douenne (2020)','Douenne (2020) vector','Douenne (2020) ext margin']
         legend_format = {'Elasticity reference' : hue_order,
                         'Percentile' : ['P1', 'P10 (D1)', 'P25 (Q1)', 'P50 (Median)', 'P75 (Q3)', 'P90 (D9)', 'P99']}
@@ -333,7 +333,7 @@ def boxplot_net_transfers_uc(data,reform,elas_ext,elas_vect,bonus_cheques_uc):
         palette = palette_douenne 
         quantiles_to_plot = quantiles_for_boxplot(data,'Net_transfers_reform_uc',hue_order)
     else:
-        if elas_vect == False :
+        if not elas_vect:
             hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
             palette = sns.color_palette("Paired") 
             quantiles_to_plot = quantiles_for_boxplot(data,'Net_transfers_reform_uc',hue_order)
@@ -369,7 +369,7 @@ def boxplot_effort_rate(data,reform,elas_ext,elas_vect,bonus_cheques_uc):
     markers = ['v', 'd', 'o', 'o', 'o' , 'd', '^']
     
     fig, ax = plt.subplots(figsize=(10, 8))
-    if elas_ext == True:
+    if elas_ext:
         hue_order = ['Douenne (2020)','Douenne (2020) vector','Douenne (2020) ext margin']
         legend_format = {'Elasticity reference' : hue_order,
                         'Percentile' : ['P1', 'P10 (D1)', 'P25 (Q1)', 'P50 (Median)', 'P75 (Q3)', 'P90 (D9)', 'P99']}
@@ -377,7 +377,7 @@ def boxplot_effort_rate(data,reform,elas_ext,elas_vect,bonus_cheques_uc):
         palette = palette_douenne 
         quantiles_to_plot = quantiles_for_boxplot(data,'Effort_rate',hue_order)
     else:
-        if elas_vect == False : 
+        if not elas_vect:
             hue_order = ['Berry (2019)', 'Adam et al (2023)', 'Douenne (2020)', 'Combet et al (2009)', 'Ruiz & Trannoy (2008)','Rivers & Schaufele (2015)']
             legend_format = {'Elasticity reference' : hue_order,
                         'Percentile' : ['P1', 'P10 (D1)', 'P25 (Q1)', 'P50 (Median)', 'P75 (Q3)', 'P90 (D9)', 'P99']}

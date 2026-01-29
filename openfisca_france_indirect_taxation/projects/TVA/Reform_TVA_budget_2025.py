@@ -1,7 +1,4 @@
-import numpy
-
 from openfisca_core.reforms import Reform
-from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 def reform_modify_parameters(baseline_parameters_copy):

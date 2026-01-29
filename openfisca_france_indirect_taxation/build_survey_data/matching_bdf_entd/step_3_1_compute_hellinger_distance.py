@@ -9,6 +9,8 @@ probability distributions
 
 # TO-DO : write one flexible function that compute hellinger distance for a given variable instead of one function per variable !
 
+import pandas as pd
+
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
 from openfisca_france_indirect_taxation.build_survey_data.utils import \

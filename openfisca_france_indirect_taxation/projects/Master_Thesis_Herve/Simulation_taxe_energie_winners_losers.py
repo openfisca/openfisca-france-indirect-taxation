@@ -2,24 +2,15 @@ import numpy
 import pandas as pd
 import os
 import ast
-import seaborn as sns
-import matplotlib
-from matplotlib import pyplot as plt
-
-from wquantiles import quantile
 from openfisca_survey_manager.utils import asof
 
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 from openfisca_france_indirect_taxation.examples.utils_example import (
-    wavg,
-    collapse,
     dataframe_by_group,
-    graph_builder_bar,
     df_weighted_average_grouped)
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.utils import add_niveau_vie_decile
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
 from openfisca_france_indirect_taxation.Calage_consommation_bdf import get_inflators_by_year
-from openfisca_france_indirect_taxation.Calage_revenus_bdf import calage_bdf_niveau_vie
 from openfisca_france_indirect_taxation.projects.Master_Thesis_Herve.Reform_carbon_tax import carbon_tax_rv
 from openfisca_france_indirect_taxation.projects.Master_Thesis_Herve.Elasticities import add_ext_margin_elasticities
 
@@ -43,14 +34,14 @@ def simulate_reformes_energie(elas_ext_margin, elas_vect, elasticites, year, ref
     inflators_by_year = get_inflators_by_year(rebuild = True, year_range = range(2011, 2020), data_year = data_year)
     
     
-    if elas_ext_margin == True:
+    if elas_ext_margin:
         # on rajoute une elasticité à la marge extensive
         ident_men = add_ext_margin_elasticities(ident_men)
 
     else :
         ident_men['elas_ext'] = 0
 
-    if elas_vect == True :
+    if elas_vect:
         # elasticités vectorielles : on a une elasctitié-prix du carburant par décile de niveau de vie x type de ville
         dict_strate = { 0 : 'Rural' , 1 : 'Small cities' , 2 : 'Medium cities' , 3 : 'Large cities' , 4 : 'Paris'}
         ident_men['strate_2'] = ident_men['strate'].apply(lambda x : dict_strate.get(x))
@@ -122,7 +113,7 @@ def simulate_reformes_energie(elas_ext_margin, elas_vect, elasticites, year, ref
     # Les effets distributifs qui nous intéressent : le taux d'effort, les transferts nets dus à la réforme et les gagnants/perdants de la réforme.
     menages_reform['Effort_rate'] = menages_reform['contributions_reforme'] / menages_reform['rev_disponible'] * 100
 
-    if bonus_cheques_uc == True :
+    if bonus_cheques_uc:
         menages_reform['Net_transfers_reform'] = menages_reform['bonus_cheques_energie_uc'] - menages_reform['contributions_reforme']
     else :
         menages_reform['Net_transfers_reform'] = menages_reform['bonus_cheques_energie_menage'] - menages_reform['contributions_reforme']
@@ -133,7 +124,7 @@ def simulate_reformes_energie(elas_ext_margin, elas_vect, elasticites, year, ref
     menages_reform['Reduction_CO2'] = menages_reform['Reduction_CO2'].fillna(0)
 
     ref_elasticity = elasticites['ref_elasticity'].reset_index()['ref_elasticity'][0]
-    if elas_ext_margin == True:
+    if elas_ext_margin:
         ref_elasticity = ref_elasticity+' ext margin'
     menages_reform['ref_elasticity'] = ref_elasticity
 

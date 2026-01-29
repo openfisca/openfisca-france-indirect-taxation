@@ -122,7 +122,7 @@ def merge_vehicule_menage(year_data):
 
     if year_data == 2017:
         carbu_cols = ['carbu1', 'carbu2', 'carbu3', 'carbu4', 'carbu5']
-        data_bdf['carbu'] = data_bdf[carbu_cols].idxmax(axis=1).str.extract('(\d)').astype(int)
+        data_bdf['carbu'] = data_bdf[carbu_cols].idxmax(axis=1).str.extract(r'(\d)').astype(int)
         data_bdf.drop(carbu_cols, axis = 1, inplace = True)
 
     data_bdf['essence'] = 0

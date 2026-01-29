@@ -1,8 +1,5 @@
 
 
-import pandas as pd
-
-from openfisca_france_indirect_taxation.surveys import SurveyScenario
 # from openfisca_france_indirect_taxation.calibration import get_inflators_by_year_energy
 
 # Disable this test as get_inflators_by_year_energy does not exist anymore

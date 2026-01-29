@@ -16,7 +16,7 @@ def compute_bdf_decile(input_bdf):
     input_bdf_copy['niveau_de_vie_bdf'] = input_bdf_copy['rev_disponible'] / input_bdf_copy['ocde10']
     input_bdf_copy['niveau_de_vie_bdf'] = input_bdf_copy['niveau_de_vie_bdf'].astype(float)
 
-    # On calcule des déciles d'individus par niveau de vie 
+    # On calcule des déciles d'individus par niveau de vie
     input_bdf_copy['decile_indiv_niveau_vie'] = weighted_quantiles(input_bdf_copy['niveau_de_vie_bdf'], labels = np.arange(1, 11), weights = input_bdf_copy['pondindiv'], return_quantiles= False)
     input_bdf_copy['decile_indiv_niveau_vie'] = input_bdf_copy['decile_indiv_niveau_vie'].astype(int)
 

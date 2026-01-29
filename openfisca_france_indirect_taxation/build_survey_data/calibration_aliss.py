@@ -14,33 +14,32 @@ try:
     from openfisca_survey_manager.statshelpers import mark_weighted_percentiles, weighted_quantiles
 except ImportError:
     SurveyCollection, config_files_directory, mark_weighted_percentiles, weighted_quantiles = None, None, None, None
-from openfisca_france_indirect_taxation.utils import assets_directory
 from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
 
 log = logging.getLogger(__name__)
 
+
+
 def bdf(year=2017):
     """Load BDF nomenclature with both code_bdf and code_coicop columns.
-    
+
     Args:
         year (int): The year of the nomenclature (currently only 2017 is supported).
-        
     Returns:
-        pd.DataFrame: A DataFrame containing the BDF nomenclature with 'code_bdf' 
+        pd.DataFrame: A DataFrame containing the BDF nomenclature with 'code_bdf'
                       and 'code_coicop' columns.
     """
     nomenclature_path = os.path.join(
         assets_directory,
         'legislation',
-        f'bdf_{year}_nomenclature.csv'
-    )
-    
+        f'bdf_{year}_nomenclature.csv',
+        )
+
     bdf_nomenclature = pandas.read_csv(nomenclature_path)
-    
+
     # Rename Code_sous_classe to code_bdf for consistency
     if 'Code_sous_classe' in bdf_nomenclature.columns:
         bdf_nomenclature = bdf_nomenclature.rename(columns={'Code_sous_classe': 'code_bdf'})
-    
     return bdf_nomenclature
 
 

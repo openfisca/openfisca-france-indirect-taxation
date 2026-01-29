@@ -1,5 +1,4 @@
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
-import pytest
 
 def test_prix_carburants_metadata():
     tbs = FranceIndirectTaxationTaxBenefitSystem()
@@ -54,4 +53,3 @@ def test_prix_carburants_metadata():
             assert max_instant_year == last_valid_year - 1, \
                 f"Expected max value year {last_valid_year - 1} but got {max_instant_year}. " \
                 f"last_value_still_valid_on is {last_valid_date}"
-

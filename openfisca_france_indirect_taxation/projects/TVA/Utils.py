@@ -1,14 +1,10 @@
 import matplotlib.pyplot as plt
 import os
 import numpy as np
-import seaborn as sns 
 import wquantiles
 
 from tqdm import tqdm
-from collections import OrderedDict
-
 from openfisca_france_indirect_taxation.variables.base import * 
-from openfisca_survey_manager.variables import create_quantile
 from openfisca_survey_manager.statshelpers import mark_weighted_percentiles
 from openfisca_france_indirect_taxation.examples.utils_example import wavg
 
@@ -214,7 +210,9 @@ def create_data_frame_by_quantile_indiv(
     difference = False,
     filter_by = None, # Restriction pour les statistiques produites, pas pour la définition des quantiles
     year = None,
-    y_variables = [], x_variable = 'niveau_de_vie', filter_variables = [],
+    y_variables = None,
+    x_variable = 'niveau_de_vie',
+    filter_variables = None,
     nquantiles = 10,
     aggfunc = 'mean',
     export_casd = False,
@@ -229,6 +227,10 @@ def create_data_frame_by_quantile_indiv(
 
     """
     assert year is not None
+    if y_variables is None:
+        y_variables = []
+    if filter_variables is None:
+        filter_variables = []
     assert len(y_variables) > 0
     entity = survey_scenario.tax_benefit_systems["baseline"].variables[x_variable].entity.key
     quantile_indiv = create_quantile_indiv(
@@ -307,11 +309,9 @@ def create_data_frame_by_quantile_indiv(
 
     df_quantile['quantile'] = df_quantile.index
 
-    if export_casd == True:
+    if export_casd:
         df_quantile = df_quantile.query('n > 11')
 
     return df_quantile
-
-
 
 
