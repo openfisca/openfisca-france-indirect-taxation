@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: ["ubuntu-20.04"]
+        os: ["ubuntu-24.04"]
         python-version: ["3.10.6"]
     steps:
       - name: Checkout
@@ -40,7 +40,7 @@ jobs:
           key: release-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ github.sha }}-${{ matrix.os }}
 
   lint-files:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     needs: [ build ]
     steps:
       - uses: actions/checkout@v3
@@ -55,7 +55,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.pythonLocation }}
-          key: build-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ github.sha }}-ubuntu-20.04
+          key: build-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ github.sha }}-ubuntu-24.04
       - name: check-syntax-errors
         run: make check-syntax-errors
       - name: format-style
@@ -64,7 +64,7 @@ jobs:
         run: make check-style
 
   tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     needs: [ build ]
     steps:
       - uses: actions/checkout@v3
@@ -79,7 +79,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.pythonLocation }}
-          key: build-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ github.sha }}-ubuntu-20.04
+          key: build-${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ github.sha }}-ubuntu-24.04
       - name: Test carburants
         run: openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/*carbu*
       # - name: Test TVA
