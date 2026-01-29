@@ -20,7 +20,7 @@ seaborn.set_palette(seaborn.color_palette('Set2', 12))
 
 if __name__ == '__main__':
 
-    inflators_by_year = new_get_inflators_by_year(rebuild = False)
+    inflators_by_year = get_inflators_by_year(rebuild = False)
     # Liste des coicop agrégées en 12 postes
     suffixes = ['0{}'.format(i) for i in range(1, 10)] + ['10', '11', '12']
     simulated_variables = ['poste_agrege_{}'.format(suffix) for suffix in suffixes]
