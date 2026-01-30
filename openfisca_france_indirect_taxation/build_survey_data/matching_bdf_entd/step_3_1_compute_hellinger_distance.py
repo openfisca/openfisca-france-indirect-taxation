@@ -13,7 +13,7 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step
 from openfisca_france_indirect_taxation.build_survey_data.utils import \
     hellinger
 
-data_entd, data_bdf = create_niveau_vie_quantiles(year_data = 2017)
+data_bdf, data_entd = create_niveau_vie_quantiles(year_data = 2017)
 
 
 def hellinger_variable(df1, df2, var, weight_col="pondmen"):
@@ -46,8 +46,8 @@ def hellinger_variable(df1, df2, var, weight_col="pondmen"):
     df2 = df2.dropna(subset=[var, weight_col])
 
     # Conversion en numérique
-    df1[var] = pd.to_numeric(df1[var], errors='coerce')
-    df2[var] = pd.to_numeric(df2[var], errors='coerce')
+    df1.loc[:, var] = pd.to_numeric(df1[var], errors='coerce')
+    df2.loc[:, var] = pd.to_numeric(df2[var], errors='coerce')
 
     # Calcul des distributions
     categories = pd.Index(sorted(set(df1[var].unique()) | set(df2[var].unique())))
@@ -60,116 +60,47 @@ def hellinger_variable(df1, df2, var, weight_col="pondmen"):
     return dist1, dist2, distance
 
 
-# Age de le personne de référence
-dist1, dist2, hellinger_distance = hellinger_variable(data_bdf, data_entd, var = 'agepr', weight_col = 'pondmen')
+# Âge de la personne de référence
+dist_bdf_agepr, dist_entd_agepr, hellinger_agepr = hellinger_variable(data_bdf, data_entd, var='agepr', weight_col='pondmen')
 
-# hellinger_age_carte_grise = hellinger_age_carte_grise(data_bdf, data_entd)
+# Âge du véhicule
+dist_bdf_age_vehicule, dist_entd_age_vehicule, hellinger_age_vehicule = hellinger_variable(data_bdf, data_entd, var='age_vehicule', weight_col='pondmen')
 
-# Age du véhicule
-dist1, dist2, hellinger_distance = hellinger_variable(data_bdf, data_entd, var = 'age_vehicule', weight_col = 'pondmen')
-
-# By construction, the distance should be extremely close to 0 but not really the case here)
-dist1, dist2, hellinger_distance = hellinger_variable(data_bdf, data_entd, var = 'niveau_vie_decile', weight_col = 'pondmen')
+# Niveau de vie (déciles)
+dist_bdf_niveau_vie_decile, dist_entd_niveau_vie_decile, hellinger_niveau_vie_decile = hellinger_variable(data_bdf, data_entd, var='niveau_vie_decile', weight_col='pondmen')
 
 # Diplôme le plus élevé de la personne de référence
-dist1, dist2, hellinger_distance = hellinger_variable(data_bdf, data_entd, var = 'dip14pr', weight_col = 'pondmen')
+dist_bdf_dip14pr, dist_entd_dip14pr, hellinger_dip14pr = hellinger_variable(data_bdf, data_entd, var='dip14pr', weight_col='pondmen')
 
-# Nombre d'attifs dans le ménage
-dist1, dist2, hellinger_distance = hellinger_variable(data_bdf, data_entd, var = 'nactifs', weight_col = 'pondmen')
+# Nombre d'actifs dans le ménage
+dist_bdf_nactifs, dist_entd_nactifs, hellinger_nactifs = hellinger_variable(data_bdf, data_entd, var='nactifs', weight_col='pondmen')
 
-# Nombre de véhicules diesel 
-dist1, dist2, hellinger_distance = hellinger_variable(data_bdf, data_entd, var = 'nb_diesel', weight_col = 'pondmen')
-
-# Nombre de véhicules essence
-dist1, dist2, hellinger_distance = hellinger_variable(data_bdf, data_entd, var = 'nb_essence', weight_col = 'pondmen')
+# Nombre de véhicules diesel
+dist_bdf_nb_diesel, dist_entd_nb_diesel, hellinger_nb_diesel = hellinger_variable(data_bdf, data_entd, var='nb_diesel', weight_col='pondmen')
 
 # Nombre de véhicules essence
-dist_essence, _, hellinger_nb_essence = hellinger_variable(data_bdf, data_entd, var='nb_essence', weight_col='pondmen')
-
-# Nombre de personnes par habitation
-_, _, hellinger_nbphab = hellinger_variable(data_bdf, data_entd, var='nbphab', weight_col='pondmen')
+dist_bdf_nb_essence, dist_entd_nb_essence, hellinger_nb_essence = hellinger_variable(data_bdf, data_entd, var='nb_essence', weight_col='pondmen')
 
 # Nombre d'enfants
-_, _, hellinger_nenfants = hellinger_variable(data_bdf, data_entd, var='nenfants', weight_col='pondmen')
+dist_bdf_nenfants, dist_entd_nenfants, hellinger_nenfants = hellinger_variable(data_bdf, data_entd, var='nenfants', weight_col='pondmen')
 
 # Nombre total de personnes
-_, _, hellinger_npers = hellinger_variable(data_bdf, data_entd, var='npers', weight_col='pondmen')
+dist_bdf_npers, dist_entd_npers, hellinger_npers = hellinger_variable(data_bdf, data_entd, var='npers', weight_col='pondmen')
 
 # OCDE 10
-_, _, hellinger_ocde10 = hellinger_variable(data_bdf, data_entd, var='ocde10', weight_col='pondmen')
+dist_bdf_ocde10, dist_entd_ocde10, hellinger_ocde10 = hellinger_variable(data_bdf, data_entd, var='ocde10', weight_col='pondmen')
 
 # Quintiles
-_, _, hellinger_quintiles = hellinger_variable(data_bdf, data_entd, var='quintiles', weight_col='pondmen')
+dist_bdf_quintiles, dist_entd_quintiles, hellinger_quintiles = hellinger_variable(data_bdf, data_entd, var='niveau_vie_quintile', weight_col='pondmen')
 
 # Situation professionnelle
-_, _, hellinger_situapr = hellinger_variable(data_bdf, data_entd, var='situapr', weight_col='pondmen')
-
-# Statut logique (stalog)
-_, _, hellinger_stalog = hellinger_variable(data_bdf, data_entd, var='stalog', weight_col='pondmen')
-
-# Taux d'activité (tau)
-_, _, hellinger_tau = hellinger_variable(data_bdf, data_entd, var='tau', weight_col='pondmen')
-
-# Test (variable de test)
-_, _, hellinger_test = hellinger_variable(data_bdf, data_entd, var='test', weight_col='pondmen')
+dist_bdf_situapr, dist_entd_situapr, hellinger_situapr = hellinger_variable(data_bdf, data_entd, var='situapr', weight_col='pondmen')
 
 # Taux d'urbanisme (tuu)
-_, _, hellinger_tuu = hellinger_variable(data_bdf, data_entd, var='tuu', weight_col='pondmen')
+dist_bdf_tuu, dist_entd_tuu, hellinger_tuu = hellinger_variable(data_bdf, data_entd, var='tuu', weight_col='pondmen')
 
 # Type de ménage (typmen)
-_, _, hellinger_typmen = hellinger_variable(data_bdf, data_entd, var='typmen', weight_col='pondmen')
+dist_bdf_typmen, dist_entd_typmen, hellinger_typmen = hellinger_variable(data_bdf, data_entd, var='typmen', weight_col='pondmen')
 
 # Nombre total de véhicules
-_, _, hellinger_veh_tot = hellinger_variable(data_bdf, data_entd, var='veh_tot', weight_col='pondmen')
-
-
-def hellinger_mloy_d(data_bdf, data_entd):  # comprendre ce qui ne va pas ici
-    data_bdf['mloy_d'] = data_bdf['mloy_d'].astype(float)
-    data_bdf['mloy_d_racine'] = (data_bdf['mloy_d']) ** (0.5)
-    mloy_d_racine_max_bdf = data_bdf['mloy_d_racine'].max()
-
-    data_entd['mloy_d'] = data_entd['mloy_d'].astype(float)
-    data_entd['mloy_d_racine'] = (data_entd['mloy_d']) ** (0.5)
-    mloy_d_racine_max_entd = data_entd['mloy_d_racine'].max()
-
-    mloy_d_racine_max = max(mloy_d_racine_max_bdf, mloy_d_racine_max_entd)
-    data_bdf['mloy_d_groupe'] = (data_bdf['mloy_d_racine'] / mloy_d_racine_max).round(decimals = 2)
-    data_entd['mloy_d_groupe'] = (data_entd['mloy_d_racine'] / mloy_d_racine_max).round(decimals = 2)
-
-    distribution_bdf = dict()
-    for i in range(0, 101):
-        j = float(i) / 100
-        distribution_bdf['{}'.format(j)] = (data_bdf.query('mloy_d_groupe == {}'.format(j))['pondmen'].sum()
-/ data_bdf['pondmen'].sum())
-
-    distribution_entd = dict()
-    for i in range(0, 101):
-        j = float(i) / 100
-        distribution_entd['{}'.format(j)] = (data_entd.query('mloy_d_groupe == {}'.format(j))['pondmen'].sum()
-/ data_entd['pondmen'].sum())
-
-    hellinger_distance = hellinger(list(distribution_bdf.values()), list(distribution_entd.values()))
-
-    return hellinger_distance
-
-
-hellinger_mloy_d = hellinger_mloy_d(data_bdf, data_entd)
-
-
-# Test if two opposite distributions have hellinger distance = 1
-def hellinger_test(data_bdf, data_entd):
-    distribution_bdf = dict()
-    for i in range(1, 51):
-        distribution_bdf['{}'.format(i)] = 0.02
-    for i in range(51, 101):
-        distribution_bdf['{}'.format(i)] = 0
-
-    distribution_entd = dict()
-    for i in range(1, 51):
-        distribution_entd['{}'.format(i)] = 0
-    for i in range(51, 101):
-        distribution_entd['{}'.format(i)] = 0.02
-
-    hellinger_distance = hellinger(list(distribution_bdf.values()), list(distribution_entd.values()))
-
-    return hellinger_distance
+dist_bdf_veh_tot, dist_entd_veh_tot, hellinger_veh_tot = hellinger_variable(data_bdf, data_entd, var='veh_tot', weight_col='pondmen')

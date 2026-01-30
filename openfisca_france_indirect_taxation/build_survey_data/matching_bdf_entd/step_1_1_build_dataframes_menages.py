@@ -136,8 +136,8 @@ def load_data_menages_bdf_entd(year_data):
 
     del input_entd_tcm_menage, input_entd_menage, input_bdf
 
-    return data_entd, menage_bdf_keep
+    return menage_bdf_keep, data_entd
 
 
 if __name__ == '__main__':
-    data_entd, data_bdf = load_data_menages_bdf_entd()
+    data_bdf, data_entd = load_data_menages_bdf_entd(2017)
