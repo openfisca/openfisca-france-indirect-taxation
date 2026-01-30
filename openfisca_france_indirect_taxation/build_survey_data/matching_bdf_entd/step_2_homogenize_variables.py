@@ -9,7 +9,7 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step
 
 
 def homogenize_variables_definition_bdf_entd(year_data):
-    data_entd, data_bdf = build_df_menages_vehicles(year_data)
+    data_bdf, data_entd = build_df_menages_vehicles(year_data)
     check = data_bdf.query('aidlog1 != 0')
     assert (check['aidlog2'] == 0).any()
 
@@ -26,10 +26,11 @@ def homogenize_variables_definition_bdf_entd(year_data):
     # Rename
     data_entd.rename(
         columns = {
-            'dipdetpr' : 'dip14pr'
+            'dipdetpr': 'dip14pr',
             'nivie10': 'niveau_vie_decile',         # entd 2008
             'decile_rev_uc': 'niveau_vie_decile',   # emp 2019
-            'nbuc': 'ocde10',
+            'nbuc': 'ocde10',                       # entd 2008
+            'coeffuc': 'ocde10',                    # emp 2019
             # 'numcom_au2010': 'cataeu',
             'pondv1': 'pondmen',
             'pond_menc': 'pondmen',
@@ -44,15 +45,14 @@ def homogenize_variables_definition_bdf_entd(year_data):
             },
         inplace = True,
         )
-
     data_entd = data_entd.sort_index(axis = 1)
     data_bdf = data_bdf.sort_index(axis = 1)
 
-    return data_entd, data_bdf
+    return data_bdf, data_entd
 
 
 def create_new_variables(year_data):
-    data_entd, data_bdf = homogenize_variables_definition_bdf_entd(year_data)
+    data_bdf, data_entd = homogenize_variables_definition_bdf_entd(year_data)
 
     def create_new_variables_(data, option = None):
         assert option in ['entd', 'bdf']
@@ -102,11 +102,11 @@ def create_new_variables(year_data):
 
         return data
 
-    return create_new_variables_(data_entd, option = 'entd'), create_new_variables_(data_bdf, option = 'bdf')
+    return create_new_variables_(data_bdf, option = 'bdf'), create_new_variables_(data_entd, option = 'entd')
 
 
 def create_niveau_vie_quantiles(year_data):
-    data_entd, data_bdf = create_new_variables(year_data)
+    data_bdf, data_entd = create_new_variables(year_data)
 
     def create_niveau_vie_quantiles_(data, option = None):
         assert option in ['entd', 'bdf']
@@ -134,8 +134,8 @@ def create_niveau_vie_quantiles(year_data):
 
         return data.copy()
 
-    return create_niveau_vie_quantiles_(data_entd, option = 'entd'), create_niveau_vie_quantiles_(data_bdf, option = 'bdf')
+    return create_niveau_vie_quantiles_(data_bdf, option = 'bdf'), create_niveau_vie_quantiles_(data_entd, option = 'entd')
 
 
 if __name__ == '__main__':
-    data_entd, data_bdf = create_niveau_vie_quantiles()
+    data_bdf, data_entd = create_niveau_vie_quantiles(2017)

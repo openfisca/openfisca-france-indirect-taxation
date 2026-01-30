@@ -12,14 +12,14 @@ from openfisca_france_indirect_taxation.utils import assets_directory
 
 
 def clean_data(year_data):
-    data_entd, data_bdf = create_niveau_vie_quantiles(year_data)
+    data_bdf, data_entd = create_niveau_vie_quantiles(year_data)
     data_entd = data_entd.fillna(0)
     data_bdf = data_bdf.fillna(0)
-    return data_entd, data_bdf
+    return data_bdf, data_entd
 
 
 def create_donation_classes(year_data):
-    data_entd, data_bdf = clean_data(year_data)
+    data_bdf, data_entd = clean_data(year_data)
 
     def create_donation_classes_(data):
         # Classes based on niveau_vie_decile and aides_logement (oas possible avec EMP 2019)
@@ -42,7 +42,7 @@ def create_donation_classes(year_data):
 
         return data.copy()
 
-    return create_donation_classes_(data_entd), create_donation_classes_(data_bdf)
+    return create_donation_classes_(data_bdf), create_donation_classes_(data_entd)
 
 
 def check_donation_classes_size(data, donation_class):
@@ -62,7 +62,7 @@ def check_donation_classes_size(data, donation_class):
 
 
 def prepare_bdf_entd_matching_data(year_data):
-    data_entd, data_bdf = create_donation_classes(year_data)
+    data_bdf, data_entd = create_donation_classes(year_data)
     matching_entd_directory = os.path.join(
         assets_directory,
         'matching',
