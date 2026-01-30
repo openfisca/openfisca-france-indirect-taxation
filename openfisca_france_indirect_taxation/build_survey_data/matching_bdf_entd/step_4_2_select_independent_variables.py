@@ -14,7 +14,7 @@ from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step
     create_niveau_vie_quantiles
 
 
-data_entd = create_niveau_vie_quantiles()[0]
+data_entd = create_niveau_vie_quantiles()[1]
 
 data_entd['niveau_vie_2'] = data_entd['niveau_vie'] ** 2
 data_entd['distance'] = (

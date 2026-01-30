@@ -96,11 +96,11 @@ def load_data_vehicules_bdf_entd(year_data):
     menage_entd_keep = input_entd_menage[variables_menage_entd]
     vehicule_bdf_keep = input_bdf[variables_vehicules_bdf]
 
-    return vehicule_menage_entd_keep, menage_entd_keep, vehicule_bdf_keep
+    return vehicule_bdf_keep, vehicule_menage_entd_keep, menage_entd_keep
 
 
 def merge_vehicule_menage(year_data):
-    data_entd, data_entd_menage, data_bdf = load_data_vehicules_bdf_entd(year_data)
+    data_bdf, data_entd, data_entd_menage = load_data_vehicules_bdf_entd(year_data)
 
     # Calcul de l'âge du véhicule
     data_entd['anvoi'] = pd.to_numeric(data_entd['annee_1mec'], errors = 'coerce')
@@ -221,20 +221,20 @@ def merge_vehicule_menage(year_data):
 
     data_bdf_full = data_vehicule_bdf.merge(data_bdf, on = 'ident_men', how = 'left')
 
-    return data_entd_final, data_bdf_full
+    return data_bdf_full, data_entd_final
 
 
 def build_df_menages_vehicles(year_data):
-    data_menages_entd, data_menages_bdf = load_data_menages_bdf_entd(year_data)
+    data_menages_bdf, data_menages_entd = load_data_menages_bdf_entd(year_data)
 
-    data_vehicules_entd, data_vehicules_bdf = merge_vehicule_menage(year_data)
+    data_vehicules_bdf, data_vehicules_entd = merge_vehicule_menage(year_data)
     data_vehicules_bdf['ident_men'] = data_vehicules_bdf['ident_men'].astype(str)
 
     data_entd = data_menages_entd.merge(data_vehicules_entd, on = 'ident_men')
     data_bdf = data_menages_bdf.merge(data_vehicules_bdf, on = 'ident_men', how = 'left')
 
-    return data_entd, data_bdf
+    return data_bdf, data_entd
 
 
 if __name__ == '__main__':
-    data_entd, data_bdf = build_df_menages_vehicles()
+    data_bdf, data_entd = build_df_menages_vehicles(2017)
