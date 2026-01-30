@@ -72,7 +72,7 @@ def create_new_variables(year_data):
         data.loc[data.tuu == 6, 'moyenne_ville'] = 1
         data.loc[data.tuu == 7, 'grande_ville'] = 1
         data.loc[data.tuu == 8, 'paris'] = 1
- 
+
         # data['aides_logement'] = 0
         # data.loc[data['aba'] == 1, 'aides_logement'] = 1
         # del data['aba']
@@ -117,7 +117,7 @@ def create_niveau_vie_quantiles(year_data):
 
             population_totale = data['sum_pondmen'].max()
             data['niveau_vie_decile'] = 0
-     
+
             for j in range(1, 11):
                 data.loc[data.sum_pondmen > population_totale * (float(j) / 10 - 0.1), 'niveau_vie_decile'] = j
 
@@ -126,7 +126,7 @@ def create_niveau_vie_quantiles(year_data):
                 data.loc[data.sum_pondmen > population_totale * (float(j) / 5 - 0.2), 'niveau_vie_quintile'] = j
 
             del data['sum_pondmen']
-         
+
         if option == 'entd':
             data['niveau_vie_quintile'] = data['niveau_vie_decile'].apply(lambda x: np.ceil(x / 2))
         data = data.sort_index()

@@ -26,7 +26,7 @@ class SurveyScenario(ReformScenario):
             tax_benefit_system = None, period = None):
 
         assert period is not None
-        
+
         if reform is None:
             assert baseline_tax_benefit_system is None, 'No need of reference_tax_benefit_system if no reform'
             if tax_benefit_system is None:

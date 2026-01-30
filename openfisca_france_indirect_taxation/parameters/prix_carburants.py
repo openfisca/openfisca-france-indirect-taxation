@@ -9,21 +9,18 @@ prix_carburant_par_annee_par_carburant_en_hectolitre = None
 
 
 def get_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre():
-    global prix_carburant_par_annee_par_carburant_par_region_en_hectolitre
     if prix_carburant_par_annee_par_carburant_par_region_en_hectolitre is None:
         preload_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre()
     return prix_carburant_par_annee_par_carburant_par_region_en_hectolitre
 
 
 def get_prix_carburant_par_annee_par_carburant_par_region_en_litre():
-    global prix_carburant_par_annee_par_carburant_par_region_en_litre
     if prix_carburant_par_annee_par_carburant_par_region_en_litre is None:
         preload_prix_carburant_par_annee_par_carburant_par_region_en_litre()
     return prix_carburant_par_annee_par_carburant_par_region_en_litre
 
 
 def get_prix_carburant_par_annee_par_carburant_en_hectolitre():
-    global prix_carburant_par_annee_par_carburant_en_hectolitre
     if prix_carburant_par_annee_par_carburant_en_hectolitre is None:
         preload_prix_carburant_par_annee_par_carburant_en_hectolitre()
     return prix_carburant_par_annee_par_carburant_en_hectolitre

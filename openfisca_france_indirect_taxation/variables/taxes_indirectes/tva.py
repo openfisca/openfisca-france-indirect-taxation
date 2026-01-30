@@ -15,11 +15,14 @@ class depenses_tva_exonere(YearlyVariable):
         depenses_tva_taux_intermediaire = menage('depenses_tva_taux_intermediaire', period)
         depenses_tva_taux_reduit = menage('depenses_tva_taux_reduit', period)
         depenses_tva_taux_super_reduit = menage('depenses_tva_taux_super_reduit', period)
-        depenses_tva_exonere = depenses_tot - (depenses_tva_taux_plein
-                                                + depenses_tva_taux_intermediaire
-                                                + depenses_tva_taux_reduit
-                                                + depenses_tva_taux_super_reduit)
+        depenses_tva_exonere = depenses_tot - (
+            depenses_tva_taux_plein
+            + depenses_tva_taux_intermediaire
+            + depenses_tva_taux_reduit
+            + depenses_tva_taux_super_reduit
+            )
         return depenses_tva_exonere
+
 
 class depenses_tva_taux_intermediaire(YearlyVariable):
     value_type = float

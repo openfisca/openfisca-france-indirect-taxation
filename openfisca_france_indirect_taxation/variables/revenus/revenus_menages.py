@@ -54,6 +54,7 @@ class niveau_vie_decile(YearlyVariable):
         niveau_vie_decile, values = weighted_quantiles(niveau_de_vie, labels, pondmen, return_quantiles = True)
         return niveau_vie_decile
 
+
 class decile_indiv_niveau_vie(YearlyVariable):
     value_type = float
     entity = Menage
@@ -62,11 +63,12 @@ class decile_indiv_niveau_vie(YearlyVariable):
     def formula(menage, period):
         niveau_de_vie = menage('niveau_de_vie', period)
         pondmen = menage('pondmen', period)
-        npers = menage('npers',period)
+        npers = menage('npers', period)
         pondindiv = npers * pondmen
         labels = numpy.arange(1, 11)
         decile_indiv_niveau_vie, values = weighted_quantiles(niveau_de_vie, labels, pondindiv, return_quantiles = True)
         return decile_indiv_niveau_vie
+
 
 class decile_rev_disponible(YearlyVariable):
     value_type = float
@@ -80,10 +82,12 @@ class decile_rev_disponible(YearlyVariable):
         decile_rev_disponible, values = weighted_quantiles(rev_disponible, labels, pondmen, return_quantiles = True)
         return decile_rev_disponible
 
+
 class loyer_impute(YearlyVariable):
     value_type = float
     entity = Menage
     label = 'Loyer imputé du ménage'
+
 
 class rev_apres_loyer(YearlyVariable):
     value_type = float

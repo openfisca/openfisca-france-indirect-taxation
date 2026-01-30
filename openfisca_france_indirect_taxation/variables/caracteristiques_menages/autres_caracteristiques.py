@@ -21,12 +21,13 @@ class aides_logement(YearlyVariable):
     entity = Menage
     label = 'Le ménage touche des aides au logement'
 
+
 class aise(YearlyVariable):
     value_type = float
-    entity = Menage 
+    entity = Menage
     label = "Sentiment du ménage par rapport à son budget actuel"
-    
-    
+
+
 class bat_av_49(YearlyVariable):
     value_type = float
     entity = Menage
@@ -146,10 +147,12 @@ class situapr(YearlyVariable):
     entity = Menage
     label = 'Situation de la personne de référence vis-à-vis du travail'
 
+
 class situaagr(YearlyVariable):
     value_type = float
     entity = Menage
     label = "Situation de l'autre personne du groupe de référence vis-à-vis du travail"
+
 
 class surfhab_d(YearlyVariable):
     value_type = float
@@ -216,5 +219,3 @@ class TypesZeat(Enum):
     sud = 'sud-ouest',
     centre = 'centre-est',
     mediterrannee = 'mediterrannee'
-
-

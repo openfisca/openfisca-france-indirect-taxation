@@ -41,7 +41,7 @@ def load_data_menages_bdf_entd(year_data):
         for poste in postes_agreges:
             if element[:8] == poste:
                 input_bdf['depenses_tot'] += input_bdf[element]
-                    
+
     # Set variables :
     if year_entd == 2008:
         variables_tcm_menage_entd = [
@@ -88,16 +88,16 @@ def load_data_menages_bdf_entd(year_data):
             # 'rev_final_uc',        # revenus simulés par UC   (pas dispo dans la table public demander table chercheur)
             # 'rlog',                # allocations logement     (pas dispo dans la table public demander table chercheur)
             'situapr',
-            'tuu2017_res',      
+            'tuu2017_res',
             # 'tau99',               (pas dispo dans la table public demander table chercheur ??)
             # 'typlog',
             'typmen5',              # type ménage
             # To be completed
             ]
-     
+
         variables_menage_entd = [
             'ident_men']
-     
+
     variables_menage_bdf = [
         'ident_men',
         'aidlog1',

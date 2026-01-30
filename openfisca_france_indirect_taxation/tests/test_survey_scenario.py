@@ -10,7 +10,7 @@ import seaborn
 # Import de modules spécifiques à Openfisca
 from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar
 from openfisca_france_indirect_taxation.surveys import SurveyScenario
-from openfisca_france_indirect_taxation.examples.calage_bdf_cn_bis import get_inflators_by_year  # noqa analysis:ignore
+from openfisca_france_indirect_taxation.Calage_consommation_bdf import get_inflators_by_year  # noqa analysis:ignore
 from openfisca_france_indirect_taxation.almost_ideal_demand_system.aids_estimation_from_stata import get_elasticities
 
 
@@ -31,7 +31,7 @@ def test(display_plot = False):
     survey_scenario = SurveyScenario.create(
         elasticities = elasticities,
         inflation_kwargs = inflation_kwargs,
-        year = year,
+        period = year,
         )
 
     pivot_table = pandas.DataFrame()

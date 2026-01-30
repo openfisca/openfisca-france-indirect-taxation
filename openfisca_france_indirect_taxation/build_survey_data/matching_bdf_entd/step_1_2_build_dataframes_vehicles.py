@@ -122,7 +122,7 @@ def merge_vehicule_menage(year_data):
 
     if year_data == 2017:
         carbu_cols = ['carbu1', 'carbu2', 'carbu3', 'carbu4', 'carbu5']
-        data_bdf['carbu'] = data_bdf[carbu_cols].idxmax(axis=1).str.extract('(\d)').astype(int)
+        data_bdf['carbu'] = data_bdf[carbu_cols].idxmax(axis=1).str.extract('(\d)').astype(int)  # noqa: W605
         data_bdf.drop(carbu_cols, axis = 1, inplace = True)
 
     data_bdf['essence'] = 0
@@ -207,7 +207,7 @@ def merge_vehicule_menage(year_data):
     data_entd_menage.rename(
         columns = {
             # 'v1_logdist01': 'distance_commerces',              (pas dans q_menage regarder ailleurs ?)
-            # 'v1_logdist15': 'distance_transports_communs',     (pas dans q_menage regarder ailleurs ?)   
+            # 'v1_logdist15': 'distance_transports_communs',     (pas dans q_menage regarder ailleurs ?)
             'jnbveh': 'veh_tot',
             # 'v1_jpasvoit_b': 'vp_domicile_travail',            (pas dans q_menage regarder ailleurs ?)
             # 'v1_jpasvoit_c': 'vp_deplacements_pro'             (pas dans q_menage regarder ailleurs ?)

@@ -13,15 +13,15 @@ from openfisca_survey_manager.paths import default_config_files_directory as con
 
 def load_data_bdf_erfs(year_data):
     # Load ERFS data
-    year_erfs = 2017 # modifié Hervé 23/06/2023
+    year_erfs = 2017  # modifié Hervé 23/06/2023
 
     erfs_survey_collection = SurveyCollection.load(
         collection = 'erfs_fpr', config_files_directory = config_files_directory
         )
     survey_erfs = erfs_survey_collection.get_survey('erfs_fpr_{}'.format(year_erfs))
 
-    revenus_erfs = survey_erfs.get_values(table = 'fpr_menage_2017') # modifié Hervé 23/06/2023
-    menages_erfs = survey_erfs.get_values(table = 'fpr_mrf17e17t4') # modifié Hervé 23/06/2023
+    revenus_erfs = survey_erfs.get_values(table = 'fpr_menage_2017')  # modifié Hervé 23/06/2023
+    menages_erfs = survey_erfs.get_values(table = 'fpr_mrf17e17t4')  # modifié Hervé 23/06/2023
 
     menages_erfs = pandas.merge(revenus_erfs, menages_erfs, on = 'ident')
 
@@ -66,7 +66,7 @@ def load_data_bdf_erfs(year_data):
         'prest_precarite_vieil',        # prestation précarité vieillesse
         'retraites',                    # retraites et pensions hors CSG-CRDS hors pensions alimentaires
         'rev_etranger',                 # revenus de l'étranger du ménage
-        'rev_valeurs_mobilieres_bruts', # revenus de valeurs mobilières
+        'rev_valeurs_mobilieres_bruts',  # revenus de valeurs mobilières
         'revdecm',                      # Variable à imputer : revenu déclaré par le ménage
         'revdispm',                     # revenu disponible
         'salaires',                     # salaires et traitements hors CSG-CRDS
@@ -135,7 +135,7 @@ def load_data_bdf_erfs(year_data):
     menages_erfs = menages_erfs[variables_erfs]
     menages_bdf = menages_bdf[variables_bdf]  # mhab_d
     if year_bdf != 2017:
-        menages_bdf.rename(columns = {'rsa_act' : 'ppa' })
+        menages_bdf.rename(columns = {'rsa_act': 'ppa'})
 
     return menages_erfs, menages_bdf
 

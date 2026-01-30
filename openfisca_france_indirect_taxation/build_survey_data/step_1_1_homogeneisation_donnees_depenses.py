@@ -114,7 +114,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     dict_codes = bdf_nomenclature.dropna().set_index('code_bdf').to_dict()['adjusted_bdf']
     coicop_data_frame = conso.rename(columns = dict_codes)
     depenses = coicop_data_frame.merge(poids, left_index = True, right_index = True)
-    
+
     # On ventile les dépenses gaz et elec (factures jointes) dans les postes facture gaz et facture elec
     depenses['depenses_gaz_et_elec'] = (depenses['poste_04_5_2_1'] * depenses['poste_04_5_1_1']) > 0
     depenses_elec_seul_bdf = (depenses['poste_04_5_1_1'] * depenses['pondmen'] * depenses['depenses_gaz_et_elec']).sum()
@@ -125,7 +125,7 @@ def build_depenses_homogenisees(temporary_store = None, year = None):
     depenses['poste_04_5_2_1'] = depenses['poste_04_5_2_1'] + part_gaz_seul_bdf * depenses['poste_04_5_0_0']
     depenses['poste_04_5_0_0'] = 0
     depenses.drop('depenses_gaz_et_elec', axis = 1, inplace = True)
-    
+
     temporary_store['depenses_{}'.format(year)] = depenses
     temporary_store.close()
 

@@ -10,7 +10,7 @@ from openfisca_france_indirect_taxation.yearly_variable import YearlyVariable
 from openfisca_france_indirect_taxation.variables.base import get_legislation_data_frames, Menage
 from openfisca_france_indirect_taxation.utils import assets_directory
 from openfisca_france_indirect_taxation.variables.consommation.postes_coicop import generate_postes_agreges_variables
-from openfisca_france_indirect_taxation.variables.consommation.categories_fiscales import generate_variables
+from openfisca_france_indirect_taxation.variables.consommation.categories_fiscales import generate_depenses_ht_categories_fiscales_variables
 from openfisca_france_indirect_taxation.build_survey_data.calibration_aliss import (
     add_poste_coicop,
     build_clean_aliss_data_frame,
@@ -188,9 +188,9 @@ def build_custom_aliss_reform(tax_benefit_system = None, key = None, name = None
     assert not categories_fiscales.code_bdf.duplicated().any(), 'there are {} duplicated entries'.format(
         categories_fiscales.code_bdf.duplicated().sum())
 
-    generate_variables(
+    generate_depenses_ht_categories_fiscales_variables(
         tax_benefit_system,
-        categories_fiscales = categories_fiscales,
+        legislation_dataframe = categories_fiscales,
         reform_key = key,
         )  # Dépenses hors taxes
     generate_postes_agreges_variables(

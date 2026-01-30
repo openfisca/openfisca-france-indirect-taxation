@@ -7,6 +7,7 @@ from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis
 DIESEL_KG_CO2_PAR_HL = 264.5
 ESSENCE_KG_CO2_PAR_HL = 228.4
 
+
 def modify_parameters(parameters):
     node = ParameterNode(
         'carbon_tax_rv',
@@ -59,7 +60,7 @@ class carbon_tax_rv(Reform):
                     ],
                 default = 0.0
                 )
-    
+
     class bonus_cheques_energie_uc(YearlyVariable):
         value_type = float
         entity = Menage
@@ -76,7 +77,7 @@ class carbon_tax_rv(Reform):
             cheque = contribution_uc * ocde10
 
             return cheque
-        
+
     class bonus_cheques_energie_menage(YearlyVariable):
         value_type = float
         entity = Menage
@@ -99,21 +100,21 @@ class carbon_tax_rv(Reform):
         label = "Changement de contribution à la taxe carbone suite à la réforme "
 
         def formula(menage, period):
-            total_ticpe = menage('ticpe_totale',period)
-            total_ticpe_carbon_tax_rv = menage('ticpe_totale_carbon_tax_rv',period)
+            total_ticpe = menage('ticpe_totale', period)
+            total_ticpe_carbon_tax_rv = menage('ticpe_totale_carbon_tax_rv', period)
 
             contribution = total_ticpe_carbon_tax_rv - total_ticpe
 
             return contribution
-    
+
     class depenses_carburants(YearlyVariable):
         value_type = float
         entity = Menage
         label = "Consommation de carburants"
 
         def formula(menage, period):
-            return menage('depenses_carburants_corrigees_entd',period)
-        
+            return menage('depenses_carburants_corrigees_entd', period)
+
     class depenses_diesel(YearlyVariable):
         value_type = float
         entity = Menage
@@ -121,7 +122,7 @@ class carbon_tax_rv(Reform):
 
         def formula(menage, period):
             return menage('depenses_diesel_corrigees_entd', period)
-        
+
     class depenses_essence(YearlyVariable):
         value_type = float
         entity = Menage
@@ -129,23 +130,23 @@ class carbon_tax_rv(Reform):
 
         def formula(menage, period):
             return menage('depenses_essence_corrigees_entd', period)
-        
+
     class variation_depenses_diesel_no_response(YearlyVariable):
         value_type = float
         entity = Menage
         label = "Variations des dépenses en diesel sans réaction à la réforme"
-        
-        def formula(menage, period,parameters):
+
+        def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
             diesel_ttc = parameters(period.start).prix_carburants.diesel_ttc
             reforme_diesel = parameters(period.start).carbon_tax_rv.diesel_with_carbon_tax_rv
             variation_depenses_diesel = reforme_diesel * (1 + taux_plein_tva) / diesel_ttc
             return variation_depenses_diesel
-            
+
     class variation_depenses_essence_no_response(YearlyVariable):
         value_type = float
         entity = Menage
-        label = "Variations des dépenses en essence sans réaction à la réforme"    
+        label = "Variations des dépenses en essence sans réaction à la réforme"
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -153,7 +154,7 @@ class carbon_tax_rv(Reform):
             reforme_essence = parameters(period.start).carbon_tax_rv.essence_with_carbon_tax_rv
             variation_depenses_diesel = reforme_essence * (1 + taux_plein_tva) / super_95_ttc
             return variation_depenses_diesel
-                    
+
     class depenses_carburants_corrigees_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
@@ -180,9 +181,9 @@ class carbon_tax_rv(Reform):
             depenses_diesel_carbon_tax_rv = \
                 depenses_diesel * (1 + (1 + carburants_elasticite_prix) * reforme_diesel * (1 + taux_plein_tva) / diesel_ttc)
             # La marge extensive
-            variation_depenses_diesel = menage('variation_depenses_diesel_no_response',period)
+            variation_depenses_diesel = menage('variation_depenses_diesel_no_response', period)
             elasticite_marge_extensive = menage('elas_ext', period)
-            depenses_diesel_corrigees_carbon_tax_rv = (1-elasticite_marge_extensive*variation_depenses_diesel)*depenses_diesel_carbon_tax_rv
+            depenses_diesel_corrigees_carbon_tax_rv = (1 - elasticite_marge_extensive * variation_depenses_diesel) * depenses_diesel_carbon_tax_rv
             return depenses_diesel_corrigees_carbon_tax_rv
 
     class depenses_essence_corrigees_carbon_tax_rv(YearlyVariable):
@@ -199,11 +200,11 @@ class carbon_tax_rv(Reform):
             depenses_essence_carbon_tax_rv = \
                 depenses_essence * (1 + (1 + carburants_elasticite_prix) * reforme_essence * (1 + taux_plein_tva) / super_95_ttc)
             # La marge extensive
-            variation_depenses_essence = menage('variation_depenses_essence_no_response',period)
+            variation_depenses_essence = menage('variation_depenses_essence_no_response', period)
             elasticite_marge_extensive = menage('elas_ext', period)
-            depenses_essence_corrigees_carbon_tax_rv = (1-elasticite_marge_extensive*variation_depenses_essence)*depenses_essence_carbon_tax_rv
+            depenses_essence_corrigees_carbon_tax_rv = (1 - elasticite_marge_extensive * variation_depenses_essence) * depenses_essence_carbon_tax_rv
             return depenses_essence_corrigees_carbon_tax_rv
-        
+
     class diesel_ticpe_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
@@ -429,16 +430,16 @@ class carbon_tax_rv(Reform):
             quantites_diesel_ajustees = menage('quantite_diesel_carbon_tax_rv', period)
             quantites_essence_ajustees = menage('quantite_essence_carbon_tax_rv', period)
             emissions_diesel = DIESEL_KG_CO2_PAR_HL
-                #parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
+            # parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
             emissions_essence = ESSENCE_KG_CO2_PAR_HL
-                #parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
+            # parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
             emissions_ajustees = (
                 (quantites_diesel_ajustees * emissions_diesel)
                 + (quantites_essence_ajustees * emissions_essence)
                 )  # Source : Ademe
 
             return emissions_ajustees
-        
+
     class emissions_CO2_carburants(YearlyVariable):
         value_type = float
         entity = Menage
@@ -449,30 +450,30 @@ class carbon_tax_rv(Reform):
             quantites_diesel = menage('quantite_diesel', period)
             quantites_essence = menage('quantite_essence', period)
             emissions_diesel = DIESEL_KG_CO2_PAR_HL
-                #parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
+            # parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
             emissions_essence = ESSENCE_KG_CO2_PAR_HL
-                #parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
+            # parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
             emissions_totales = (
                 (quantites_diesel * emissions_diesel)
                 + (quantites_essence * emissions_essence)
                 )  # Source : Ademe
 
             return emissions_totales
-    
+
     class revenu_reforme_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
         label = "Revenu généré par la réforme officielle 2018 avant redistribution"
 
         def formula(menage, period):
-            total_ticpe = menage('ticpe_totale',period)
-            total_ticpe_carbon_tax_rv = menage('ticpe_totale_carbon_tax_rv',period)
+            total_ticpe = menage('ticpe_totale', period)
+            total_ticpe_carbon_tax_rv = menage('ticpe_totale_carbon_tax_rv', period)
             total_gains_tva_carburants_carbon_tax_rv = menage('gains_tva_carburants_carbon_tax_rv', period)
 
-            revenu_reforme = (total_ticpe_carbon_tax_rv - total_ticpe) + total_gains_tva_carburants_carbon_tax_rv                
+            revenu_reforme = (total_ticpe_carbon_tax_rv - total_ticpe) + total_gains_tva_carburants_carbon_tax_rv
 
             return revenu_reforme
-        
+
     class gains_tva_carburants_carbon_tax_rv(YearlyVariable):
         value_type = float
         entity = Menage
@@ -884,15 +885,15 @@ class carbon_tax_rv(Reform):
                 parameters(period.start).imposition_indirecte.part_type_supercarburants.super_plombe
             depenses_super_plombe_ajustees = depenses_essence_carbon_tax_rv * part_super_plombe
             return depenses_super_plombe_ajustees / super_plombe_ttc_ajuste
-        
+
     def apply(self):
         self.update_variable(self.cheques_energie)
         self.update_variable(self.bonus_cheques_energie_uc)
         self.update_variable(self.bonus_cheques_energie_menage)
         self.update_variable(self.contributions_reforme)
-        #self.update_variable(self.depenses_carburants)
-        #self.update_variable(self.depenses_diesel)
-        #self.update_variable(self.depenses_essence)
+        # self.update_variable(self.depenses_carburants)
+        # self.update_variable(self.depenses_diesel)
+        # self.update_variable(self.depenses_essence)
         self.update_variable(self.variation_depenses_diesel_no_response)
         self.update_variable(self.variation_depenses_essence_no_response)
         self.update_variable(self.depenses_carburants_corrigees_carbon_tax_rv)

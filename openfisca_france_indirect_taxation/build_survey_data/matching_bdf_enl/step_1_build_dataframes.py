@@ -50,7 +50,7 @@ def load_data_bdf_enl(year_data):
         'chaufp',
         'cs42pr',           # catégorie socio-pro de lpr
         'cs42cj',           # catégorie socio-pro du conjoint
-        'decuc',            
+        'decuc',
         'depenses_tot',
         'dip14cj',          # diplômes conjoint
         'dip14pr',          # diplômes de la pr
@@ -182,7 +182,7 @@ def load_data_bdf_enl(year_data):
     indiv_enl_keep = indiv_enl_keep.query('igreflog == 1')
     del indiv_enl_keep['igreflog']
     menage_enl_keep = menage_enl_keep.merge(indiv_enl_keep, on = 'idlog')
-    
+
     return menage_enl_keep, conso_bdf_keep
 
 

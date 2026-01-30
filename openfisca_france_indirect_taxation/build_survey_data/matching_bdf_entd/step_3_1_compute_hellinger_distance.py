@@ -9,17 +9,20 @@ probability distributions
 
 # TO-DO : write one flexible function that compute hellinger distance for a given variable instead of one function per variable !
 
+import pandas as pd
+
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
 from openfisca_france_indirect_taxation.build_survey_data.utils import \
     hellinger
 
-data_entd, data_bdf = create_niveau_vie_quantiles(year_data = 2017 )
+data_entd, data_bdf = create_niveau_vie_quantiles(year_data = 2017)
+
 
 def hellinger_variable(df1, df2, var, weight_col="pondmen"):
     """
     Compute Hellinger distance between two weighted distributions of a variable.
-    
+
     Parameters
     ----------
     df1 : pd.DataFrame
@@ -30,7 +33,7 @@ def hellinger_variable(df1, df2, var, weight_col="pondmen"):
         Variable name to compare (categorical or numeric).
     weight_col : str
         Column name for weights (default: 'pondmen').
-    
+
     Returns
     -------
     float
@@ -47,17 +50,19 @@ def hellinger_variable(df1, df2, var, weight_col="pondmen"):
     # Compute weighted distribution for df1
     dist1 = (
         df1.groupby(var)[weight_col].sum() / df1[weight_col].sum()
-    ).reindex(categories, fill_value=0)
+        ).reindex(categories, fill_value=0)
 
     # Compute weighted distribution for df2
     dist2 = (
         df2.groupby(var)[weight_col].sum() / df2[weight_col].sum()
-    ).reindex(categories, fill_value=0)
+        ).reindex(categories, fill_value=0)
 
     # Hellinger distance
     return dist1, dist2, hellinger(dist1.tolist(), dist2.tolist())
 
 # Replace all hellinger_specific variable below by the function above (Warning : the support of the distribution)
+
+
 def hellinger_agepr(data_bdf, data_entd):
     data_bdf['agepr'] = data_bdf['agepr'].astype(float)
     data_entd['agepr'] = data_entd['agepr'].astype(float)

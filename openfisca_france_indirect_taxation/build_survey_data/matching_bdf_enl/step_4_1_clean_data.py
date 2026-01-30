@@ -27,7 +27,7 @@ def clean_data(year_data):
         columns = [
             'amr', 'cataeu', 'chaufp', 'cs42cj', 'cs42pr', 'decuc', 'dip14cj',
             'mchof', 'mchof_d', 'mfac_eau1_d',
-            'mloy_d', 'nbh1', 'situacj', 'situapr', 
+            'mloy_d', 'nbh1', 'situacj', 'situapr',
             'tau', 'tuu', 'typmen'
             ],
         inplace = True

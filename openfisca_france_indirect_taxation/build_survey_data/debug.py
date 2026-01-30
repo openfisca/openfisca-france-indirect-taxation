@@ -9,8 +9,8 @@ from openfisca_france_indirect_taxation.Calage_consommation_bdf import get_infla
 
 year = 2016
 data_year = 2011
-inflators = get_inflators(2013,2017)
-inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
+inflators = get_inflators(2013, 2017)
+inflation_kwargs = dict(inflator_by_variable = inflators)
 elasticities = get_elasticities_aidsills(data_year, True)
 
 reforme = 'officielle_2018_in_2016'
