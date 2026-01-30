@@ -15,32 +15,9 @@ try:
 except ImportError:
     SurveyCollection, config_files_directory, mark_weighted_percentiles, weighted_quantiles = None, None, None, None
 from openfisca_france_indirect_taxation.utils import assets_directory, get_input_data_frame
+from openfisca_france_indirect_taxation.scripts.build_coicop_nomenclature import read_bdf_nomenclature
 
 log = logging.getLogger(__name__)
-
-
-def bdf(year=2017):
-    """Load BDF nomenclature with both code_bdf and code_coicop columns.
-
-    Args:
-        year (int): The year of the nomenclature (currently only 2017 is supported).
-    Returns:
-        pd.DataFrame: A DataFrame containing the BDF nomenclature with 'code_bdf'
-                      and 'code_coicop' columns.
-    """
-    nomenclature_path = os.path.join(
-        assets_directory,
-        'legislation',
-        f'bdf_{year}_nomenclature.csv',
-        )
-
-    bdf_nomenclature = pandas.read_csv(nomenclature_path)
-
-    # Rename Code_sous_classe to code_bdf for consistency
-    if 'Code_sous_classe' in bdf_nomenclature.columns:
-        bdf_nomenclature = bdf_nomenclature.rename(columns={'Code_sous_classe': 'code_bdf'})
-    return bdf_nomenclature
-
 
 assets_path = os.path.join(
     assets_directory,
@@ -118,9 +95,14 @@ def build_clean_aliss_data_frame():
 
 def add_poste_coicop(aliss):
     year = 2011
+    # Load BDF nomenclature
+    bdf_nomenclature = read_bdf_nomenclature(year = year)
+    # Rename Code_sous_classe to code_bdf for consistency
+    if 'Code_sous_classe' in bdf_nomenclature.columns:
+        bdf_nomenclature = bdf_nomenclature.rename(columns={'Code_sous_classe': 'code_bdf'})
     aliss = aliss.copy()
     aliss['poste_bdf'] = 'c0' + aliss.nomc.str[:4]
-    coicop_poste_bdf = bdf(year = year)[['code_bdf', 'code_coicop']].copy()
+    coicop_poste_bdf = bdf_nomenclature[['code_bdf', 'code_coicop']].copy()
     assert not set(aliss.poste_bdf).difference(set(coicop_poste_bdf.code_bdf))
     coicop_poste_bdf['formatted_poste'] = 'poste_' + coicop_poste_bdf.code_coicop.str.replace('.', '_')
     formatted_poste_by_poste_bdf = coicop_poste_bdf.dropna().set_index('code_bdf').to_dict()['formatted_poste']

@@ -190,6 +190,23 @@ def build_complete_bdf_nomenclature(year = 2017, to_csv=True):
     return bdf_nomenclature
 
 
+def read_bdf_nomenclature(year = 2017):
+    """Read the BDF nomenclature from the CSV file.
+
+    Returns:
+        pd.DataFrame: A DataFrame containing the complete BDF nomenclature with
+                      columns for division, group, class, and subclass labels
+                      and codes.
+    """
+    file_path = os.path.join(
+        assets_directory,
+        'legislation',
+        f'bdf_{year}_nomenclature.csv'
+        )
+    bdf_nomenclature = pd.read_csv(file_path, dtype = 'str')
+    return bdf_nomenclature
+
+
 if __name__ == '__main__':
     bdf_nomenclature = build_complete_bdf_nomenclature(year = 2017, to_csv = True)
     print(bdf_nomenclature.dtypes)
