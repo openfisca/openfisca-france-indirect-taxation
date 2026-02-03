@@ -109,6 +109,9 @@ def preprocess_legislation(parameters):
             },
         'super_plombe_ttc': {
             "last_value_date": "2005-12-31",
+            "ref": {
+                'title': 'Prix moyens annuels de vente au détail en métropole'
+            }
             },
         }
     for element, detail in autres_carburants.items():
