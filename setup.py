@@ -15,6 +15,8 @@ Programming Language :: Python
 Programming Language :: Python :: 3.9
 Programming Language :: Python :: 3.10
 Programming Language :: Python :: 3.11
+Programming Language :: Python :: 3.12
+Programming Language :: Python :: 3.13
 Topic :: Scientific/Engineering :: Information Analysis
 '''
 
@@ -47,7 +49,7 @@ setup(
             'OpenFisca-Survey-Manager',
             'ruamel.yaml >= 0.17.21, < 0.18.0',
             'seaborn >= 0.12.2, < 0.13.0',
-            'statsmodels >= 0.13.5, < 0.14.0',
+            'statsmodels >= 0.14.6, < 0.15.0',
             'xlrd >= 2.0.1, < 3.0',
             'openpyxl',
             ],
@@ -55,7 +57,7 @@ setup(
     include_package_data = True,  # Will read MANIFEST.in
     install_requires = [
         'numexpr',
-        'OpenFisca-Core >= 43, < 44',
+        'OpenFisca-Core >= 43, < 45',
         'pandas >= 2.0.3, < 3.0',
         'python-slugify >= 8.0.1, < 9.0',
         ],
