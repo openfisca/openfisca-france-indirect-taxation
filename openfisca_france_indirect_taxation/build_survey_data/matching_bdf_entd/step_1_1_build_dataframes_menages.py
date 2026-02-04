@@ -97,8 +97,10 @@ def load_data_menages_bdf_entd(year_data):
             ]
 
         variables_menage_entd = [
-            'ident_men']
-
+            'ident_men',
+            'jnbveh',             # nb de voitures particulières
+            ]
+    
     variables_menage_bdf = [
         'ident_men',
         'aidlog1',
