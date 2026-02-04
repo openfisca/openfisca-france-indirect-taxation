@@ -2,8 +2,8 @@
 
 # Dans ce script les variables qui ont des différences de définition sont reconstruites
 # sur le modèle de l'enquête BdF (ou entd dans certains cas où la nomenclature entd a plus de sens)
-# de manière à avoir des définitions identiques.
-# Les noms de variables sont aussi alignés.
+# de manière à avoir des définitions identiques. Les noms de variables sont aussi alignés.
+
 import numpy as np
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_1_2_build_dataframes_vehicles import build_df_menages_vehicles
 
@@ -31,6 +31,7 @@ def homogenize_variables_definition_bdf_entd(year_data):
             'decile_rev_uc': 'niveau_vie_decile',   # emp 2019
             'nbuc': 'ocde10',                       # entd 2008
             'coeffuc': 'ocde10',                    # emp 2019
+            'jnbveh': 'veh_tot',                    # emp 2019
             # 'numcom_au2010': 'cataeu',
             'pondv1': 'pondmen',
             'pond_menc': 'pondmen',
@@ -78,25 +79,18 @@ def create_new_variables(year_data):
         # data.loc[data['aba'] == 1, 'aides_logement'] = 1
         # del data['aba']
 
-        # data['mloy_d'] = data['mloy_d'].fillna(0)
         data['veh_tot'] = data['veh_tot'].fillna(0)
-
-        data['part_essence'] = (
-            data.essence / (data.essence + data.diesel + data.autre_carbu)
+        data['essence'] = data['essence'].fillna(0)
+        data['diesel'] = data['diesel'].fillna(0)
+        data['autre_carbu'] = data['autre_carbu'].fillna(0)
+        # Renommer les variables de nombre de véhicules par type de carburant
+        data.rename(columns = {
+            'diesel': 'nb_diesel',
+            'essence': 'nb_essence',
+            'autre_carbu': 'nb_autre_carbu'
+            }, inplace = True
             )
-        data['part_diesel'] = (
-            data.diesel / (data.essence + data.diesel + data.autre_carbu)
-            )
-        data['nb_essence'] = data.veh_tot * data.part_essence
-        data['nb_diesel'] = data.veh_tot * data.part_diesel
-        data[['nb_essence', 'nb_diesel']] = data[['nb_essence', 'nb_diesel']].fillna(0)
-
-        data.drop(
-            ['part_essence', 'part_diesel', 'essence', 'diesel', 'autre_carbu'],
-            axis = 1,
-            inplace = True
-            )
-
+        
         if option == 'entd':
             data['distance'] = data.distance_diesel + data.distance_essence + data.distance_autre_carbu
 

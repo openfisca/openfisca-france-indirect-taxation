@@ -5,6 +5,7 @@
 # au préalable les corrections nécessaires pour avoir des bases homogènes.
 
 import os
+import pandas as pd
 
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
@@ -13,8 +14,8 @@ from openfisca_france_indirect_taxation.utils import assets_directory
 
 def clean_data(year_data):
     data_bdf, data_entd = create_niveau_vie_quantiles(year_data)
-    data_entd = data_entd.fillna(0)
-    data_bdf = data_bdf.fillna(0)
+    data_bdf = data_bdf.apply(pd.to_numeric, errors='coerce').fillna(0)
+    data_entd = data_entd.apply(pd.to_numeric, errors='coerce').fillna(0)
     return data_bdf, data_entd
 
 
@@ -33,13 +34,7 @@ def create_donation_classes(year_data):
 
         # Classes based on niveau_vie_decile and rural
         data['donation_class_3'] = 0
-        for i in range(1, 11):
-            for rur in [0, 1]:
-                data.loc[
-                    (data['niveau_vie_decile'] == i) & (data['rural'] == rur),
-                    'donation_class_3'
-                    ] = '{}_{}'.format(i, rur)
-
+        data['donation_class_3'] = data.apply(lambda row: '{}_{}'.format(int(row['niveau_vie_decile']), int(row['rural'])), axis=1)
         return data.copy()
 
     return create_donation_classes_(data_bdf), create_donation_classes_(data_entd)
