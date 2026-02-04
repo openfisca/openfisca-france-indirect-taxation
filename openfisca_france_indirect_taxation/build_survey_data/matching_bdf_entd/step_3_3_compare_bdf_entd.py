@@ -4,8 +4,7 @@ import os
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
-    create_niveau_vie_quantiles
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import create_niveau_vie_quantiles
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_3_1_compute_hellinger_distance import hellinger_distance
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_3_2_compute_histograms import histogram_cat_variable, boxplot_variable
 
