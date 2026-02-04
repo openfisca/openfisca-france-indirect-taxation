@@ -1,4 +1,3 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -46,7 +45,6 @@ def histogram_cat_variable(data_bdf, data_entd, var, data_name_1='BdF', data_nam
     plt.grid(True, linestyle='--', alpha=0.7)
     if savefig and filename is not None:
         plt.savefig(filename, bbox_inches='tight')
-    plt.show()
     return plt
 
 
@@ -73,16 +71,21 @@ def boxplot_variable(data_bdf, data_entd, var, data_name_1='BdF', data_name_2='E
         Axe contenant le boxplot.
     """
     # Préparation des données
-    df_plot = pd.concat([
-        data_bdf[[var]].copy().assign(dataset=data_name_1),
-        data_entd[[var]].copy().assign(dataset=data_name_2)
-        ])
+    df_bdf = data_bdf[[var]].copy().reset_index(drop=True)
+    df_bdf['dataset'] = data_name_1
+
+    df_entd = data_entd[[var]].copy().reset_index(drop=True)
+    df_entd['dataset'] = data_name_2
 
     # Création du boxplot
     plt.figure(figsize=(10, 6))
-    ax = sns.boxplot(x='dataset', y=var, data=df_plot)
-    plt.title(f'Comparaison des distributions de {var} entre {data_name_1} et {data_name_2}')
+    sns.boxplot(x = 'dataset', y=var, data=df_bdf, legend = False, color = 'b')
+    sns.boxplot(x = 'dataset', y=var, data=df_entd, legend = False)
+    plt.title(f'Comparaison des distributions de {var} entre {data_name_1} et {data_name_2}', fontsize=16)
+    plt.xlabel('Dataset', fontsize=14)
+    plt.ylabel(var, fontsize=14)
+    plt.tick_params(axis='both', which='major', labelsize=14)
     plt.grid(True, linestyle='--', alpha=0.7)
     if savefig and filename is not None:
         plt.savefig(filename, bbox_inches='tight')
-    return ax
+    return plt
