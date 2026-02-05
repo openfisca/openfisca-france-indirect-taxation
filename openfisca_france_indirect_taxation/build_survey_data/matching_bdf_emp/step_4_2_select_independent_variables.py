@@ -10,16 +10,16 @@ the largest predictive power.
 import statsmodels.formula.api as smf
 
 
-from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_emp.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
 
 
-data_entd = create_niveau_vie_quantiles()[1]
+data_emp = create_niveau_vie_quantiles()[1]
 
-data_entd['niveau_vie_2'] = data_entd['niveau_vie'] ** 2
-data_entd['distance'] = (
-    data_entd['distance_diesel'] + data_entd['distance_essence']
-    + data_entd['distance_autre_carbu']
+data_emp['niveau_vie_2'] = data_emp['niveau_vie'] ** 2
+data_emp['distance'] = (
+    data_emp['distance_diesel'] + data_emp['distance_essence']
+    + data_emp['distance_autre_carbu']
     )
 
 stock_variables = ['agepr', 'age_vehicule', 'age_carte_grise', 'aides_logement',
@@ -52,7 +52,7 @@ for dependent_variable in ['distance', 'distance_diesel', 'distance_essence']:
 
             regression = smf.ols(formula = '{} ~ \
                 {}'.format(dependent_variable, regressors),
-                data = data_entd).fit()
+                data = data_emp).fit()
 
             rsquared_adj = regression.rsquared_adj
             max_rsquared_adj = max(max_rsquared_adj, rsquared_adj)

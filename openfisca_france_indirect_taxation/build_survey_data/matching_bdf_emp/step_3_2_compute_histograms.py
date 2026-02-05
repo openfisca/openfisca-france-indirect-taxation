@@ -5,13 +5,13 @@ from openfisca_france_indirect_taxation.build_survey_data.utils import \
     histogrammes
 
 
-def histogram_cat_variable(data_bdf, data_entd, var, data_name_1='BdF', data_name_2='EMP', savefig=False, filename=None):
+def histogram_cat_variable(data_bdf, data_emp, var, data_name_1='BdF', data_name_2='EMP', savefig=False, filename=None):
     """
     Crée un histogramme comparatif pour une variable catégorielle donnée entre deux DataFrames.
 
     Args:
     data_bdf(DataFrame): Premier DataFrame
-    data_entd(DataFrame): Deuxième DataFrame.
+    data_emp(DataFrame): Deuxième DataFrame.
     var(str): Nom de la variable à analyser.
     data_name_1(str): Légende pour le premier DataFrame (par défaut : 'BdF').
     data_name_2(str): Légende pour le deuxième DataFrame (par défaut : 'EMP').
@@ -20,9 +20,9 @@ def histogram_cat_variable(data_bdf, data_entd, var, data_name_1='BdF', data_nam
     matplotlib.pyplot
         Figure contenant l'histogramme.
     """
-    categories = set(data_bdf[var].dropna().unique()).union(set(data_entd[var].dropna().unique()))
+    categories = set(data_bdf[var].dropna().unique()).union(set(data_emp[var].dropna().unique()))
     list_values_bdf = []
-    list_values_entd = []
+    list_values_emp = []
     list_keys = []
 
     # Cas d'une variable catégorielle : utiliser les catégories fournies
@@ -30,12 +30,12 @@ def histogram_cat_variable(data_bdf, data_entd, var, data_name_1='BdF', data_nam
     for cat in categories:
         # Calcul des proportions pondérées pour chaque catégorie
         part_bdf = data_bdf.loc[data_bdf[var] == cat, 'pondmen'].sum() / data_bdf['pondmen'].sum()
-        part_entd = data_entd.loc[data_entd[var] == cat, 'pondmen'].sum() / data_entd['pondmen'].sum()
+        part_emp = data_emp.loc[data_emp[var] == cat, 'pondmen'].sum() / data_emp['pondmen'].sum()
         list_values_bdf.append(part_bdf)
-        list_values_entd.append(part_entd)
+        list_values_emp.append(part_emp)
 
     # Appel de ta fonction histogrammes
-    histogrammes(list_keys, list_values_bdf, list_values_entd, data_name_1, data_name_2)
+    histogrammes(list_keys, list_values_bdf, list_values_emp, data_name_1, data_name_2)
 
     # Ajout des labels et titres
     plt.xlabel(f'Catégories de {var}')
@@ -48,7 +48,7 @@ def histogram_cat_variable(data_bdf, data_entd, var, data_name_1='BdF', data_nam
     return plt
 
 
-def boxplot_variable(data_bdf, data_entd, var, data_name_1='BdF', data_name_2='EMP', savefig=False, filename=None):
+def boxplot_variable(data_bdf, data_emp, var, data_name_1='BdF', data_name_2='EMP', savefig=False, filename=None):
     """
     Crée un boxplot comparatif pour une variable donnée entre deux DataFrames.
 
@@ -56,7 +56,7 @@ def boxplot_variable(data_bdf, data_entd, var, data_name_1='BdF', data_name_2='E
     ----------
     data_bdf : pd.DataFrame
         Premier DataFrame.
-    data_entd : pd.DataFrame
+    data_emp : pd.DataFrame
         Deuxième DataFrame.
     var : str
         Nom de la variable à analyser.
@@ -74,13 +74,13 @@ def boxplot_variable(data_bdf, data_entd, var, data_name_1='BdF', data_name_2='E
     df_bdf = data_bdf[[var]].copy().reset_index(drop=True)
     df_bdf['dataset'] = data_name_1
 
-    df_entd = data_entd[[var]].copy().reset_index(drop=True)
-    df_entd['dataset'] = data_name_2
+    df_emp = data_emp[[var]].copy().reset_index(drop=True)
+    df_emp['dataset'] = data_name_2
 
     # Création du boxplot
     plt.figure(figsize=(10, 6))
     sns.boxplot(x = 'dataset', y=var, data=df_bdf, legend = False, color = 'b')
-    sns.boxplot(x = 'dataset', y=var, data=df_entd, legend = False)
+    sns.boxplot(x = 'dataset', y=var, data=df_emp, legend = False)
     plt.title(f'Comparaison des distributions de {var} entre {data_name_1} et {data_name_2}', fontsize=16)
     plt.xlabel('Dataset', fontsize=14)
     plt.ylabel(var, fontsize=14)

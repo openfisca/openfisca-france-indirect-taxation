@@ -16,7 +16,7 @@ data_matched = pd.read_csv(
     os.path.join(
         assets_directory,
         'matching',
-        'matching_entd',
+        'matching_emp',
         'data_matched_final.csv'
         ), sep =',', decimal = '.'
     )
@@ -42,7 +42,7 @@ def histogram_depenses_annuelle_group(data_matched, group):
 
         data_matched_group = data_matched.query('{} == {}'.format(group, element))
         depenses_carburants = (
-            sum(data_matched_group['depenses_carburants_corrigees_entd'] * data_matched_group['pondmen'])
+            sum(data_matched_group['depenses_carburants_corrigees_emp'] * data_matched_group['pondmen'])
             / data_matched_group['pondmen'].sum()
             )
 
@@ -60,7 +60,7 @@ def histogram_distribution_depenses_annuelle(data_matched):
     list_keys = []
     for i in [.05, .1, .2, .3, .4, .5, .6, .7, .8, .9, .95]:
         list_values_poste.append(data_matched['poste_07_2_2_1'].quantile(i))
-        list_values_depenses_carburants.append(data_matched['depenses_carburants_corrigees_entd'].quantile(i))
+        list_values_depenses_carburants.append(data_matched['depenses_carburants_corrigees_emp'].quantile(i))
         list_keys.append('{}'.format(i))
 
     figure = histogrammes(list_keys, list_values_poste, list_values_depenses_carburants, 'Ex ante', 'Ex post')
@@ -74,7 +74,7 @@ histogram_distribution_depenses_annuelle(data_matched)
 # Depenses carburants density 
 plt.figure(figsize=(10, 6))
 sns.kdeplot(data = data_matched, x = 'poste_07_2_2_1', weights = 'pondmen', bw_adjust=0.7, color = 'b')
-sns.kdeplot(data = data_matched, x = 'depenses_carburants_corrigees_entd', weights = 'pondmen', bw_adjust=0.7, color = sns_set2_orange)
+sns.kdeplot(data = data_matched, x = 'depenses_carburants_corrigees_emp', weights = 'pondmen', bw_adjust=0.7, color = sns_set2_orange)
 plt.xticks(size = 12)
 plt.yticks(size = 12)
 plt.xlabel('Annual fuel expenditures (in €)', size = 14)
@@ -88,7 +88,7 @@ plt.close()
 # Depenses carburants cumulative distribution
 plt.figure(figsize=(10, 6))
 sns.kdeplot(data = data_matched, x = 'poste_07_2_2_1', weights = 'pondmen', cumulative = True, bw_adjust=0.7, color = 'b')
-sns.kdeplot(data = data_matched, x = 'depenses_carburants_corrigees_entd', weights = 'pondmen', cumulative = True, bw_adjust=0.7, color = sns_set2_orange)
+sns.kdeplot(data = data_matched, x = 'depenses_carburants_corrigees_emp', weights = 'pondmen', cumulative = True, bw_adjust=0.7, color = sns_set2_orange)
 plt.xticks(size = 12)
 plt.yticks(size = 12)
 plt.xlabel('Annual fuel expenditures (in €)', size = 14)
@@ -107,7 +107,7 @@ for i, ax in enumerate(axes.flat):
     decile = i + 1
     sns.kdeplot(data=data_matched.loc[data_matched['niveau_vie_decile'] == decile], x='poste_07_2_2_1', weights='pondmen', color = 'b', 
                 bw_adjust=0.7, ax = ax)
-    sns.kdeplot(data=data_matched.loc[data_matched['niveau_vie_decile'] == decile], x='depenses_carburants_corrigees_entd', weights='pondmen', color = sns_set2_orange,  
+    sns.kdeplot(data=data_matched.loc[data_matched['niveau_vie_decile'] == decile], x='depenses_carburants_corrigees_emp', weights='pondmen', color = sns_set2_orange,  
                 bw_adjust=0.7, ax = ax)
 
     ax.set_title(f'Decile {decile}', size = 16)
@@ -130,7 +130,7 @@ for i, ax in enumerate(axes.flat):
     decile = i + 1
     sns.kdeplot(data=data_matched.loc[data_matched['niveau_vie_decile'] == decile], x='poste_07_2_2_1', weights='pondmen', color = 'b', 
                 bw_adjust=0.7, ax = ax, cumulative = True)
-    sns.kdeplot(data=data_matched.loc[data_matched['niveau_vie_decile'] == decile], x='depenses_carburants_corrigees_entd', weights='pondmen', color = sns_set2_orange, 
+    sns.kdeplot(data=data_matched.loc[data_matched['niveau_vie_decile'] == decile], x='depenses_carburants_corrigees_emp', weights='pondmen', color = sns_set2_orange, 
                 bw_adjust=0.7, ax = ax, cumulative = True)
     ax.set_title(f'Decile {decile}', size = 16)
     ax.set_yticks([])
@@ -161,7 +161,7 @@ for i, ax in enumerate(axes.flat):
         cat = urban_cat[i]
         sns.kdeplot(data=data_matched.loc[data_matched[cat] == 1], x='poste_07_2_2_1', weights='pondmen', color = 'b', 
                     bw_adjust=0.7, ax = ax)
-        sns.kdeplot(data=data_matched.loc[data_matched[cat] == 1], x='depenses_carburants_corrigees_entd', weights='pondmen', color = sns_set2_orange,
+        sns.kdeplot(data=data_matched.loc[data_matched[cat] == 1], x='depenses_carburants_corrigees_emp', weights='pondmen', color = sns_set2_orange,
                     bw_adjust=0.7, ax = ax)
 
         ax.set_title(cat_labels[i], size = 16)

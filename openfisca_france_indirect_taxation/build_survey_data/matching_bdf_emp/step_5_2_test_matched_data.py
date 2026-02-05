@@ -11,12 +11,12 @@ sns.set_palette(sns.color_palette("Set2"))
 
 output_path = "C:/Users/veve1/OneDrive/Documents/ENSAE PhD/Carbon tax/Output/Figures"
 
-data_entd = pd.read_csv(
+data_emp = pd.read_csv(
     os.path.join(
         assets_directory,
         'matching',
-        'matching_entd',
-        'data_matching_entd.csv'
+        'matching_emp',
+        'data_matching_emp.csv'
         ), sep =',', decimal = '.'
     )
 
@@ -24,7 +24,7 @@ data_matched_distance = pd.read_csv(
     os.path.join(
         assets_directory,
         'matching',
-        'matching_entd',
+        'matching_emp',
         'data_matched_distance.csv'
         ), sep =',', decimal = '.'
     )
@@ -33,7 +33,7 @@ data_matched_random = pd.read_csv(
     os.path.join(
         assets_directory,
         'matching',
-        'matching_entd',
+        'matching_emp',
         'data_matched_random.csv'
         ), sep =',', decimal = '.'
     )
@@ -42,43 +42,43 @@ data_matched_rank = pd.read_csv(
     os.path.join(
         assets_directory,
         'matching',
-        'matching_entd',
+        'matching_emp',
         'data_matched_rank.csv'
         ), sep =',', decimal = '.'
     )
 
 
-def test_var_niveau_vie_decile(data_entd, data_matched, var):
+def test_var_niveau_vie_decile(data_emp, data_matched, var):
     results_dict = dict()
-    average_entd = sum(data_entd['pondmen'] * (data_entd[var])) / sum(data_entd['pondmen'])
+    average_emp = sum(data_emp['pondmen'] * (data_emp[var])) / sum(data_emp['pondmen'])
     average_matched = sum(data_matched['pondmen'] * (data_matched[var])) / sum(data_matched['pondmen'])
-    results_dict['Average'] = [average_entd, average_matched]
+    results_dict['Average'] = [average_emp, average_matched]
     for i in range(1, 11):
-        data_entd_decile = data_entd.loc[data_entd['niveau_vie_decile'] == i]
+        data_emp_decile = data_emp.loc[data_emp['niveau_vie_decile'] == i]
         data_matched_decile = data_matched.loc[data_matched['niveau_vie_decile'] == i]
-        part_entd = sum(data_entd_decile['pondmen'] * (data_entd_decile[var])) / sum(data_entd_decile['pondmen'])
+        part_emp = sum(data_emp_decile['pondmen'] * (data_emp_decile[var])) / sum(data_emp_decile['pondmen'])
         part_matched = sum(data_matched_decile['pondmen'] * (data_matched_decile[var])) / sum(data_matched_decile['pondmen'])
-        results_dict['{}'.format(i)] = [part_entd, part_matched]
+        results_dict['{}'.format(i)] = [part_emp, part_matched]
 
     return results_dict
 
 
-test_distance_niveau_vie_decile_distance = test_var_niveau_vie_decile(data_entd, data_matched_distance, var = 'distance')
-test_distance_niveau_vie_decile_random = test_var_niveau_vie_decile(data_entd, data_matched_random, var = 'distance')
-test_distance_niveau_vie_decile_rank = test_var_niveau_vie_decile(data_entd, data_matched_rank, var = 'distance')
+test_distance_niveau_vie_decile_distance = test_var_niveau_vie_decile(data_emp, data_matched_distance, var = 'distance')
+test_distance_niveau_vie_decile_random = test_var_niveau_vie_decile(data_emp, data_matched_random, var = 'distance')
+test_distance_niveau_vie_decile_rank = test_var_niveau_vie_decile(data_emp, data_matched_rank, var = 'distance')
 
-test_distance_diesel_niveau_vie_decile_distance = test_var_niveau_vie_decile(data_entd, data_matched_distance, var = 'distance_diesel')
-test_distance_diesel_niveau_vie_decile_random = test_var_niveau_vie_decile(data_entd, data_matched_random, var = 'distance_diesel')
-test_distance_diesel_niveau_vie_decile_rank = test_var_niveau_vie_decile(data_entd, data_matched_rank, var = 'distance_diesel')
+test_distance_diesel_niveau_vie_decile_distance = test_var_niveau_vie_decile(data_emp, data_matched_distance, var = 'distance_diesel')
+test_distance_diesel_niveau_vie_decile_random = test_var_niveau_vie_decile(data_emp, data_matched_random, var = 'distance_diesel')
+test_distance_diesel_niveau_vie_decile_rank = test_var_niveau_vie_decile(data_emp, data_matched_rank, var = 'distance_diesel')
 
-test_distance_essence_niveau_vie_decile_distance_essence = test_var_niveau_vie_decile(data_entd, data_matched_distance, var = 'distance_diesel')
-test_distance_essence_niveau_vie_decile_random = test_var_niveau_vie_decile(data_entd, data_matched_random, var = 'distance_diesel')
-test_distance_essence_niveau_vie_decile_rank = test_var_niveau_vie_decile(data_entd, data_matched_rank, var = 'distance_diesel')
+test_distance_essence_niveau_vie_decile_distance_essence = test_var_niveau_vie_decile(data_emp, data_matched_distance, var = 'distance_diesel')
+test_distance_essence_niveau_vie_decile_random = test_var_niveau_vie_decile(data_emp, data_matched_random, var = 'distance_diesel')
+test_distance_essence_niveau_vie_decile_rank = test_var_niveau_vie_decile(data_emp, data_matched_rank, var = 'distance_diesel')
 
 # Barplot comparaison distance annuelle par décile niveau de vie
 data_matched_distance['source'] = 'Matched'
-data_entd['source'] = 'EMP'
-data_plot = pd.concat([data_matched_distance, data_entd])
+data_emp['source'] = 'EMP'
+data_plot = pd.concat([data_matched_distance, data_emp])
 
 plt.figure(figsize=(10, 6))
 sns.barplot(data_plot, x = 'niveau_vie_decile', y = 'distance', hue = 'source', hue_order=['EMP', 'Matched'], estimator = 'mean', weights = 'pondmen')
@@ -94,7 +94,7 @@ plt.close()
 
 # Density plot distance annuelle 
 plt.figure(figsize=(10, 6))
-sns.kdeplot(data = data_entd, x = 'distance', weights = 'pondmen', bw_adjust=0.7)
+sns.kdeplot(data = data_emp, x = 'distance', weights = 'pondmen', bw_adjust=0.7)
 sns.kdeplot(data = data_matched_distance, x = 'distance', weights = 'pondmen', bw_adjust=0.7)
 plt.xticks(size = 12)
 plt.yticks(size = 12)
@@ -109,7 +109,7 @@ plt.close()
 # Cumulative distribution distance annuelle
 
 plt.figure(figsize=(10, 6))
-sns.kdeplot(data = data_entd, x = 'distance', weights = 'pondmen', cumulative= True, bw_adjust=0.7)
+sns.kdeplot(data = data_emp, x = 'distance', weights = 'pondmen', cumulative= True, bw_adjust=0.7)
 sns.kdeplot(data = data_matched_distance, x = 'distance', weights = 'pondmen', cumulative = True, bw_adjust=0.7)
 plt.xticks(size = 12)
 plt.yticks(size = 12)
@@ -128,7 +128,7 @@ fig.suptitle('Distribution of annual distance traveled', fontsize=18)
 
 for i, ax in enumerate(axes.flat):
     decile = i + 1
-    sns.kdeplot(data=data_entd.loc[data_entd['niveau_vie_decile'] == decile], x='distance', weights='pondmen', 
+    sns.kdeplot(data=data_emp.loc[data_emp['niveau_vie_decile'] == decile], x='distance', weights='pondmen', 
                 bw_adjust=0.7, ax = ax)
     sns.kdeplot(data=data_matched_distance.loc[data_matched_distance['niveau_vie_decile'] == decile], x='distance', weights='pondmen', 
                 bw_adjust=0.7, ax = ax)
@@ -155,7 +155,7 @@ fig.suptitle('Cumulative distribution of annual distance traveled', fontsize=18)
 
 for i, ax in enumerate(axes.flat):
     decile = i + 1
-    sns.kdeplot(data=data_entd.loc[data_entd['niveau_vie_decile'] == decile], x='distance', weights='pondmen', 
+    sns.kdeplot(data=data_emp.loc[data_emp['niveau_vie_decile'] == decile], x='distance', weights='pondmen', 
                 bw_adjust=0.7, ax = ax, cumulative = True)
     sns.kdeplot(data=data_matched_distance.loc[data_matched_distance['niveau_vie_decile'] == decile], x='distance', weights='pondmen', 
                 bw_adjust=0.7, ax = ax, cumulative = True)
@@ -186,7 +186,7 @@ cat_labels = ['Rural', 'Small cities', 'Medium-large cities', 'Large cities', 'P
 for i, ax in enumerate(axes.flat):
     if i < len(urban_cat):
         cat = urban_cat[i]
-        sns.kdeplot(data=data_entd.loc[data_entd[cat] == 1], x='distance', weights='pondmen', 
+        sns.kdeplot(data=data_emp.loc[data_emp[cat] == 1], x='distance', weights='pondmen', 
                     bw_adjust=0.7, ax = ax)
         sns.kdeplot(data=data_matched_distance.loc[data_matched_distance[cat] == 1], x='distance', weights='pondmen', 
                     bw_adjust=0.7, ax = ax)

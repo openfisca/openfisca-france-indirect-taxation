@@ -5,17 +5,17 @@
 import pandas as pd
 import os
 
-from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_3_1_compute_hellinger_distance import hellinger_distance 
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_emp.step_3_1_compute_hellinger_distance import hellinger_distance 
 from openfisca_france_indirect_taxation.utils import assets_directory
 
-# Importation des bases de données appariées et de la base de référence entd
+# Importation des bases de données appariées et de la base de référence emp
 
-data_entd = pd.read_csv(
+data_emp = pd.read_csv(
     os.path.join(
         assets_directory,
         'matching',
-        'matching_entd',
-        'data_matching_entd.csv'
+        'matching_emp',
+        'data_matching_emp.csv'
         ),
     sep =',',
     decimal = '.'
@@ -25,7 +25,7 @@ data_matched_distance = pd.read_csv(
     os.path.join(
         assets_directory,
         'matching',
-        'matching_entd',
+        'matching_emp',
         'data_matched_distance.csv'
         ),
     sep =',',
@@ -36,7 +36,7 @@ data_matched_random = pd.read_csv(
     os.path.join(
         assets_directory,
         'matching',
-        'matching_entd',
+        'matching_emp',
         'data_matched_random.csv'
         ),
     sep =',',
@@ -47,7 +47,7 @@ data_matched_rank = pd.read_csv(
     os.path.join(
         assets_directory,
         'matching',
-        'matching_entd',
+        'matching_emp',
         'data_matched_rank.csv'
         ),
     sep =',',
