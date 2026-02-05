@@ -92,14 +92,14 @@ plt.grid(True, linestyle='--', alpha=0.7)
 plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/bar_plot_distance_matched_decile.pdf'))
 plt.close()
 
-# Density plot distance annuelle 
+# Density plot distance annuelle
 plt.figure(figsize=(10, 6))
 sns.kdeplot(data = data_emp, x = 'distance', weights = 'pondmen', bw_adjust=0.7)
 sns.kdeplot(data = data_matched_distance, x = 'distance', weights = 'pondmen', bw_adjust=0.7)
 plt.xticks(size = 12)
 plt.yticks(size = 12)
 plt.xlabel('Annual distance traveled (in km)', size = 14)
-plt.ylabel('Density', size = 14)  
+plt.ylabel('Density', size = 14)
 plt.title('Distribution of annual distance traveled', size = 16)
 plt.legend(['Matched', 'EMP'], fontsize = 14)
 plt.grid(True, linestyle='--', alpha=0.7)
@@ -114,7 +114,7 @@ sns.kdeplot(data = data_matched_distance, x = 'distance', weights = 'pondmen', c
 plt.xticks(size = 12)
 plt.yticks(size = 12)
 plt.xlabel('Annual distance traveled (in km)', size = 14)
-plt.ylabel('Cumulative proportion', size = 14)  
+plt.ylabel('Cumulative proportion', size = 14)
 plt.title('Cumulative distribution of annual distance traveled', size = 16)
 plt.legend(['Matched', 'EMP'], fontsize = 14)
 plt.grid(True, linestyle='--', alpha=0.7)
@@ -122,15 +122,15 @@ plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/Compare_distance_cumulat
 plt.close()
 
 # By income decile
-# Density 
+# Density
 fig, axes = plt.subplots(2, 5, figsize=(20, 10))
 fig.suptitle('Distribution of annual distance traveled', fontsize=18)
 
 for i, ax in enumerate(axes.flat):
     decile = i + 1
-    sns.kdeplot(data=data_emp.loc[data_emp['niveau_vie_decile'] == decile], x='distance', weights='pondmen', 
+    sns.kdeplot(data=data_emp.loc[data_emp['niveau_vie_decile'] == decile], x='distance', weights='pondmen',
                 bw_adjust=0.7, ax = ax)
-    sns.kdeplot(data=data_matched_distance.loc[data_matched_distance['niveau_vie_decile'] == decile], x='distance', weights='pondmen', 
+    sns.kdeplot(data=data_matched_distance.loc[data_matched_distance['niveau_vie_decile'] == decile], x='distance', weights='pondmen',
                 bw_adjust=0.7, ax = ax)
 
     ax.set_title(f'Decile {decile}', size = 16)
@@ -155,9 +155,9 @@ fig.suptitle('Cumulative distribution of annual distance traveled', fontsize=18)
 
 for i, ax in enumerate(axes.flat):
     decile = i + 1
-    sns.kdeplot(data=data_emp.loc[data_emp['niveau_vie_decile'] == decile], x='distance', weights='pondmen', 
+    sns.kdeplot(data=data_emp.loc[data_emp['niveau_vie_decile'] == decile], x='distance', weights='pondmen',
                 bw_adjust=0.7, ax = ax, cumulative = True)
-    sns.kdeplot(data=data_matched_distance.loc[data_matched_distance['niveau_vie_decile'] == decile], x='distance', weights='pondmen', 
+    sns.kdeplot(data=data_matched_distance.loc[data_matched_distance['niveau_vie_decile'] == decile], x='distance', weights='pondmen',
                 bw_adjust=0.7, ax = ax, cumulative = True)
 
     ax.set_title(f'Decile {decile}', size = 16)
@@ -175,7 +175,7 @@ plt.tight_layout(rect=[0, 0, 1, 0.95])
 plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/Distance_cumulative_distribution_by_decile.pdf'))
 plt.close()
 
-# By urban categories 
+# By urban categories
 # Density
 fig, axes = plt.subplots(2, 3, figsize=(15, 10))
 fig.suptitle('Distribution of annual distance traveled', fontsize=18)
@@ -186,9 +186,9 @@ cat_labels = ['Rural', 'Small cities', 'Medium-large cities', 'Large cities', 'P
 for i, ax in enumerate(axes.flat):
     if i < len(urban_cat):
         cat = urban_cat[i]
-        sns.kdeplot(data=data_emp.loc[data_emp[cat] == 1], x='distance', weights='pondmen', 
+        sns.kdeplot(data=data_emp.loc[data_emp[cat] == 1], x='distance', weights='pondmen',
                     bw_adjust=0.7, ax = ax)
-        sns.kdeplot(data=data_matched_distance.loc[data_matched_distance[cat] == 1], x='distance', weights='pondmen', 
+        sns.kdeplot(data=data_matched_distance.loc[data_matched_distance[cat] == 1], x='distance', weights='pondmen',
                     bw_adjust=0.7, ax = ax)
 
         ax.set_title(cat_labels[i], size = 16)
