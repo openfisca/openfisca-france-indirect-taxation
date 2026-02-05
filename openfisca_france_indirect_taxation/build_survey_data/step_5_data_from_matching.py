@@ -11,8 +11,8 @@ from openfisca_survey_manager.paths import default_config_files_directory as con
 
 from openfisca_france_indirect_taxation.utils import assets_directory
 from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_enl.step_4_1_clean_data import prepare_bdf_enl_matching_data
-from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_4_1_save_data import prepare_bdf_entd_matching_data
-from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_6_1_calage_depenses_carburants import cale_bdf_entd_matching_data
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_emp.step_4_1_save_data import prepare_bdf_emp_matching_data
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_emp.step_6_1_calage_depenses_carburants import cale_bdf_emp_matching_data
 from openfisca_france_indirect_taxation.build_survey_data.matching_erfs.step_4_1_clean_data import prepare_bdf_erfs_matching_data
 
 
@@ -93,22 +93,22 @@ def main(year_data):
             'data_matched_rank.csv'
             ), sep =',', decimal = '.'
         )
-    prepare_bdf_entd_matching_data(year_data)
-    r_script_path = os.path.join(assets_directory, 'matching', 'matching_entd', 'matching_rank_bdf_entd.R')
+    prepare_bdf_emp_matching_data(year_data)
+    r_script_path = os.path.join(assets_directory, 'matching', 'matching_emp', 'matching_rank_bdf_emp.R')
     process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
     subprocess.call(process_call)
-    r_script_path = os.path.join(assets_directory, 'matching', 'matching_entd', 'matching_distance_bdf_entd.R')
+    r_script_path = os.path.join(assets_directory, 'matching', 'matching_emp', 'matching_distance_bdf_emp.R')
     process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
     subprocess.call(process_call)
-    r_script_path = os.path.join(assets_directory, 'matching', 'matching_entd', 'matching_random_bdf_entd.R')
+    r_script_path = os.path.join(assets_directory, 'matching', 'matching_emp', 'matching_random_bdf_emp.R')
     process_call = [path_to_rscript_exe, '--vanilla', r_script_path]
     subprocess.call(process_call)
-    cale_bdf_entd_matching_data()
-    data_matched_entd = pandas.read_csv(
+    cale_bdf_emp_matching_data()
+    data_matched_emp = pandas.read_csv(
         os.path.join(
             assets_directory,
             'matching',
-            'matching_entd',
+            'matching_emp',
             'data_matched_final.csv'
             ), sep =',', decimal = '.'
         )
@@ -149,11 +149,11 @@ def main(year_data):
         ]
     data_matched_enl = data_matched_enl[enl_variables].copy()
 
-    entd_variables = [
+    emp_variables = [
         'age_vehicule',
-        'depenses_carburants_corrigees_entd',
-        'depenses_diesel_corrigees_entd',
-        'depenses_essence_corrigees_entd',
+        'depenses_carburants_corrigees_emp',
+        'depenses_diesel_corrigees_emp',
+        'depenses_essence_corrigees_emp',
         'distance_diesel',
         'distance_essence',
         # 'distance_routiere_hebdomadaire_teg',         # not for EMP 2019
@@ -164,11 +164,11 @@ def main(year_data):
         'vp_deplacements_pro',
         'vp_domicile_travail',
         ]
-    data_matched_entd = data_matched_entd[entd_variables].copy()
+    data_matched_emp = data_matched_emp[emp_variables].copy()
 
     data_matched_erfs = data_matched_erfs[['revdecm', 'ident_men']].copy()
 
-    data_frame = pandas.merge(data_matched_entd, data_matched_enl, on = 'ident_men', how = 'left')
+    data_frame = pandas.merge(data_matched_emp, data_matched_enl, on = 'ident_men', how = 'left')
     data_frame = pandas.merge(data_frame, data_matched_erfs, on = 'ident_men')
     data_frame['ident_men'] = data_frame['ident_men'].astype(str)
     data_frame = data_frame.fillna(0)

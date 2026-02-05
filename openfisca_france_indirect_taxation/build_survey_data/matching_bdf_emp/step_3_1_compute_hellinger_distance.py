@@ -5,13 +5,13 @@ Computing the Hellinger distance between two discrete probability distributions.
 Apply it to compare distributions of variables in BDF and EMP/ENTD datasets.
 '''
 import pandas as pd
-from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_2_homogenize_variables import \
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_emp.step_2_homogenize_variables import \
     create_niveau_vie_quantiles
 from openfisca_france_indirect_taxation.build_survey_data.utils import \
     hellinger
 
 output_path = "C:/Users/veve1/OneDrive/Documents/ENSAE PhD/Carbon tax/Output"
-data_bdf, data_entd = create_niveau_vie_quantiles(year_data = 2017)
+data_bdf, data_emp = create_niveau_vie_quantiles(year_data = 2017)
 
 
 def hellinger_distance(df1, df2, var, weight_col="pondmen"):

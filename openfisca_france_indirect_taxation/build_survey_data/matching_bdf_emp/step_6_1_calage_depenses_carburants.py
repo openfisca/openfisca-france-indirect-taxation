@@ -27,23 +27,23 @@ def calage_depenses_from_distance(data_matched):
 
         # assign corrected expenditures
         idx = (data_matched['niveau_vie_decile'] == decile) & (data_matched['rural'] == rur)
-        data_matched.loc[idx, 'depenses_carburants_corrigees_entd'] = data_matched.loc[idx, 'distance'] * factor
-        data_matched.loc[idx, 'depenses_diesel_corrigees_entd'] = data_matched.loc[idx, 'distance_diesel'] * factor
-        data_matched.loc[idx, 'depenses_essence_corrigees_entd'] = data_matched.loc[idx, 'distance_essence'] * factor
+        data_matched.loc[idx, 'depenses_carburants_corrigees_emp'] = data_matched.loc[idx, 'distance'] * factor
+        data_matched.loc[idx, 'depenses_diesel_corrigees_emp'] = data_matched.loc[idx, 'distance_diesel'] * factor
+        data_matched.loc[idx, 'depenses_essence_corrigees_emp'] = data_matched.loc[idx, 'distance_essence'] * factor
 
     return data_matched
 
 
-def cale_bdf_entd_matching_data():
+def cale_bdf_emp_matching_data():
     data_matched_distance = pd.read_csv(
         os.path.join(
             assets_directory,
             'matching',
-            'matching_entd',
+            'matching_emp',
             'data_matched_distance.csv'
             ), sep =',', decimal = '.'
         )
     data = calage_depenses_from_distance(data_matched_distance)
     data.to_csv(
-        os.path.join(assets_directory, 'matching', 'matching_entd', 'data_matched_final.csv'),
+        os.path.join(assets_directory, 'matching', 'matching_emp', 'data_matched_final.csv'),
         sep = ',', index= False)
