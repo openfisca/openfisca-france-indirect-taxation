@@ -30,5 +30,6 @@ fused.nnd.m <- create.fused(
 
 # Save it as csv
 write.csv(fused.nnd.m,
-  file = file.path(assets_directory, "/matching/matching_entd/data_matched_rank.csv")
+  file = file.path(assets_directory, "/matching/matching_entd/data_matched_rank.csv"),
+  row.names =  FALSE
   )
