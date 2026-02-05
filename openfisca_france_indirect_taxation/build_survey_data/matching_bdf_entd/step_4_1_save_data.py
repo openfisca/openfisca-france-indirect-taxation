@@ -63,5 +63,5 @@ def prepare_bdf_entd_matching_data(year_data):
         'matching',
         'matching_entd'
         )
-    data_entd.to_csv(os.path.join(matching_entd_directory, 'data_matching_entd.csv'), sep = ',')
-    data_bdf.to_csv(os.path.join(matching_entd_directory, 'data_matching_bdf.csv'), sep = ',')
+    data_entd.to_csv(os.path.join(matching_entd_directory, 'data_matching_entd.csv'), sep = ',', index = False)
+    data_bdf.to_csv(os.path.join(matching_entd_directory, 'data_matching_bdf.csv'), sep = ',', index = False)

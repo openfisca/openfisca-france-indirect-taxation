@@ -134,12 +134,15 @@ for i, ax in enumerate(axes.flat):
                 bw_adjust=0.7, ax = ax)
 
     ax.set_title(f'Decile {decile}', size = 16)
+    ax.set_yticks([])
+    xticks_positions = ax.get_xticks()
+    ax.set_xticks(xticks_positions)
     xticks_labels = ax.get_xticklabels()
     ax.set_xticklabels(labels = xticks_labels, rotation = 45)
     ax.set_xlabel('Annual distance traveled (in km)', size = 14)
     ax.set_ylabel('Density', size = 14)
     ax.grid(True, linestyle='--', alpha=0.7)
-
+    ax.legend(['EMP', 'Matched'], fontsize = 14)
 fig.align_labels()
 fig.align_titles()
 plt.tight_layout(rect=[0, 0, 1, 0.95])
@@ -158,12 +161,14 @@ for i, ax in enumerate(axes.flat):
                 bw_adjust=0.7, ax = ax, cumulative = True)
 
     ax.set_title(f'Decile {decile}', size = 16)
+    xticks_positions = ax.get_xticks()
+    ax.set_xticks(xticks_positions)
     xticks_labels = ax.get_xticklabels()
     ax.set_xticklabels(labels = xticks_labels, rotation = 45)
     ax.set_xlabel('Annual distance traveled (in km)', size = 14)
     ax.set_ylabel('Cumulative proportion', size = 14)
     ax.grid(True, linestyle='--', alpha=0.7)
- 
+    ax.legend(['EMP', 'Matched'], fontsize = 14)
 fig.align_labels()
 fig.align_titles()
 plt.tight_layout(rect=[0, 0, 1, 0.95])
@@ -187,11 +192,15 @@ for i, ax in enumerate(axes.flat):
                     bw_adjust=0.7, ax = ax)
 
         ax.set_title(cat_labels[i], size = 16)
+        ax.set_yticks([])
+        xticks_positions = ax.get_xticks()
+        ax.set_xticks(xticks_positions)
         xticks_labels = ax.get_xticklabels()
         ax.set_xticklabels(labels = xticks_labels, rotation = 45)
         ax.set_xlabel('Annual distance traveled (in km)', size = 14)
         ax.set_ylabel('Density', size = 14)
         ax.grid(True, linestyle='--', alpha=0.7)
+        ax.legend(['EMP', 'Matched'], fontsize = 14)
     else:
         ax.axis('off')
 fig.align_labels()
