@@ -137,8 +137,8 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
         # Save file needed by step_5_data_from_matching
         save(data_frame, year_data, year_calage)
         try:
-            # On apparie ajoute les données appariées de l'ENL et l'ENTD
-            print('appariement ENL ENTD')
+            # On apparie ajoute les données appariées de l'ENL et de l'EMP
+            print('appariement ENL EMP')
             data_matched = pandas.read_csv(
                 os.path.join(
                     assets_directory,
@@ -148,7 +148,7 @@ def run_all_steps(temporary_store = None, year_calage = 2017, skip_matching = Fa
                 )
         except FileNotFoundError as e:
             # Sauf si le fichier 'data_for_run_all_year_data.csv' n'existe pas, dans ce cas on fait tourner le matching
-            log.debug("Matching data with ENL and ENTD are not present")
+            log.debug("Matching data with ENL and EMP are not present")
             log.debug(e)
             log.debug('Skipping this step')
             from openfisca_france_indirect_taxation.build_survey_data import step_5_data_from_matching
@@ -203,4 +203,4 @@ if __name__ == '__main__':
     import sys
     log = logging.getLogger(__name__)
     logging.basicConfig(level = logging.DEBUG, stream = sys.stdout)
-    run([2011], skip_matching = False)
+    run([2011, 2017], skip_matching = False)

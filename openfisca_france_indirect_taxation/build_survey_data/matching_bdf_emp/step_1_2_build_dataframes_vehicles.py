@@ -1,28 +1,27 @@
 # -*- coding: utf-8 -*-
 
-# Dans ce script on importe les données des enquêtes BdF 2011 et EMP 2019.
+# Dans ce script on importe les données des enquêtes BdF 2017 et EMP 2019.
 # Pour chacune des deux enquêtes on importe les variables qui seront
 # susceptibles d'êtres utilisées dans l'appariement des bases de données.
-
 
 import pandas as pd
 import numpy as np
 from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.paths import default_config_files_directory as config_files_directory
 
-from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_entd.step_1_1_build_dataframes_menages import \
-    load_data_menages_bdf_entd
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_emp.step_1_1_build_dataframes_menages import \
+    load_data_menages_bdf_emp
 
 
-def load_data_vehicules_bdf_entd(year_data):
-    year_entd = 2019
+def load_data_vehicules_bdf_emp(year_data):
+    year_emp = 2019
 
-    entd_survey_collection = SurveyCollection.load(
+    emp_survey_collection = SurveyCollection.load(
         collection = 'enquete_transports', config_files_directory = config_files_directory
         )
-    survey_entd = entd_survey_collection.get_survey('enquete_transports_{}'.format(year_entd))
-    input_entd_vehicule = survey_entd.get_values(table = 'q_voitvul_public_V2')
-    input_entd_menage = survey_entd.get_values(table = 'q_menage_public_V2')
+    survey_emp = emp_survey_collection.get_survey('enquete_transports_{}'.format(year_emp))
+    input_emp_vehicule = survey_emp.get_values(table = 'q_voitvul_public_V2')
+    input_emp_menage = survey_emp.get_values(table = 'q_menage_public_V2')
 
     # Load BdF data :
 
@@ -33,7 +32,7 @@ def load_data_vehicules_bdf_entd(year_data):
     input_bdf = openfisca_survey.get_values(table = 'AUTOMOBILE')
     input_bdf.reset_index(inplace = True)
 
-    variables_vehicules_entd = [
+    variables_vehicules_emp = [
         'ident_men',        # identifiant du ménage
         'ident_numveh',     # identifiant du véhicule
         'num_veh',          # numéro du véhicule
@@ -48,7 +47,7 @@ def load_data_vehicules_bdf_entd(year_data):
         'kvkm1anv'          # nb kilomètres 12 derniers mois, redressés
         ]
 
-    variables_menage_entd = [
+    variables_menage_emp = [
         'ident_men',
         'pond_menc',           # poids ménage
         # 'v1_logdist01',     # distance commerces et supermarchés                       (pas dans q_menage regarder ailleurs ?)
@@ -92,11 +91,11 @@ def load_data_vehicules_bdf_entd(year_data):
             ]
 
     # Keep relevant variables :
-    vehicule_menage_entd_keep = input_entd_vehicule[variables_vehicules_entd]
-    menage_entd_keep = input_entd_menage[variables_menage_entd]
+    vehicule_menage_emp_keep = input_emp_vehicule[variables_vehicules_emp]
+    menage_emp_keep = input_emp_menage[variables_menage_emp]
     vehicule_bdf_keep = input_bdf[variables_vehicules_bdf]
 
-    return vehicule_bdf_keep, vehicule_menage_entd_keep, menage_entd_keep
+    return vehicule_bdf_keep, vehicule_menage_emp_keep, menage_emp_keep
 
 
 def imputation_carburants(df, var_carbu, var_nb_vehicule, weight_col):
@@ -172,28 +171,28 @@ def imputation_carburants(df, var_carbu, var_nb_vehicule, weight_col):
 
 def merge_vehicule_menage(year_data):
 
-    data_bdf, data_entd, data_entd_menage = load_data_vehicules_bdf_entd(2017)
-    data_entd_full = data_entd_menage.merge(data_entd, on = 'ident_men', how = 'left')
-    data_entd_full = imputation_carburants(data_entd_full, 'energie_agrege', 'jnbveh', 'pond_menc')
+    data_bdf, data_emp, data_emp_menage = load_data_vehicules_bdf_emp(2017)
+    data_emp_full = data_emp_menage.merge(data_emp, on = 'ident_men', how = 'left')
+    data_emp_full = imputation_carburants(data_emp_full, 'energie_agrege', 'jnbveh', 'pond_menc')
     year_data = 2017
 
     # Calcul de l'âge du véhicule
-    data_entd_full['anvoi'] = pd.to_numeric(data_entd_full['annee_1mec'], errors = 'coerce')
+    data_emp_full['anvoi'] = pd.to_numeric(data_emp_full['annee_1mec'], errors = 'coerce')
 
-    data_entd_full['age_vehicule'] = 0
-    data_entd_full.loc[data_entd_full['anvoi'] != 0, 'age_vehicule'] = 2019 - data_entd_full['anvoi']
+    data_emp_full['age_vehicule'] = 0
+    data_emp_full.loc[data_emp_full['anvoi'] != 0, 'age_vehicule'] = 2019 - data_emp_full['anvoi']
 
     data_bdf['anvoi'] = data_bdf['anvoi'].fillna(0).astype(int)
     data_bdf['age_vehicule'] = 0
     data_bdf.loc[data_bdf['anvoi'] != 0, 'age_vehicule'] = year_data - data_bdf['anvoi']
 
     # Définition des véhicules par carburant
-    data_entd_full['essence'] = 0
-    data_entd_full.loc[data_entd_full['energie_agrege'] == 1, 'essence'] = 1
-    data_entd_full['diesel'] = 0
-    data_entd_full.loc[data_entd_full['energie_agrege'] == 2, 'diesel'] = 1
-    data_entd_full['autre_carbu'] = 0
-    data_entd_full.loc[data_entd_full['energie_agrege'] > 2, 'autre_carbu'] = 1
+    data_emp_full['essence'] = 0
+    data_emp_full.loc[data_emp_full['energie_agrege'] == 1, 'essence'] = 1
+    data_emp_full['diesel'] = 0
+    data_emp_full.loc[data_emp_full['energie_agrege'] == 2, 'diesel'] = 1
+    data_emp_full['autre_carbu'] = 0
+    data_emp_full.loc[data_emp_full['energie_agrege'] > 2, 'autre_carbu'] = 1
 
     if year_data == 2017:
         carbu_cols = ['carbu1', 'carbu2', 'carbu3', 'carbu4', 'carbu5']
@@ -208,15 +207,15 @@ def merge_vehicule_menage(year_data):
     data_bdf.loc[data_bdf['carbu'] > 2, 'autre_carbu'] = 1
 
     # déf des distances parcourues par carburant
-    data_entd_full['distance_essence'] = 0.0
-    data_entd_full.loc[data_entd_full['essence'] == 1, 'distance_essence'] = data_entd_full['kvkm1anv']
-    data_entd_full['distance_diesel'] = 0.0
-    data_entd_full.loc[data_entd_full['diesel'] == 1, 'distance_diesel'] = data_entd_full['kvkm1anv']
-    data_entd_full['distance_autre_carbu'] = 0.0
-    data_entd_full.loc[data_entd_full['autre_carbu'] == 1, 'distance_autre_carbu'] = data_entd_full['kvkm1anv']
+    data_emp_full['distance_essence'] = 0.0
+    data_emp_full.loc[data_emp_full['essence'] == 1, 'distance_essence'] = data_emp_full['kvkm1anv']
+    data_emp_full['distance_diesel'] = 0.0
+    data_emp_full.loc[data_emp_full['diesel'] == 1, 'distance_diesel'] = data_emp_full['kvkm1anv']
+    data_emp_full['distance_autre_carbu'] = 0.0
+    data_emp_full.loc[data_emp_full['autre_carbu'] == 1, 'distance_autre_carbu'] = data_emp_full['kvkm1anv']
 
     # Df avec le nombre de véhicule et les distances pour chaque type de carburant
-    data_vehicule_entd = data_entd_full[
+    data_vehicule_emp = data_emp_full[
         ['essence',
         'diesel',
         'autre_carbu',
@@ -225,19 +224,19 @@ def merge_vehicule_menage(year_data):
         'distance_autre_carbu',
         'ident_men']
         ].groupby(by = 'ident_men').sum()
-    data_vehicule_entd = data_vehicule_entd.reset_index()
+    data_vehicule_emp = data_vehicule_emp.reset_index()
 
-    # Df avec les infos du véhicule principal (dans ENTD)
-    data_entd_full = data_entd_full.sort_values(by = 'kvkm1anv', ascending= False)
-    data_entd_full = data_entd_full.drop_duplicates(['ident_men'], keep='first')
-    data_entd_full.rename(
+    # Df avec les infos du véhicule principal (dans emp)
+    data_emp_full = data_emp_full.sort_values(by = 'kvkm1anv', ascending= False)
+    data_emp_full = data_emp_full.drop_duplicates(['ident_men'], keep='first')
+    data_emp_full.rename(
         columns = {
             'puis_fisc_fin': 'puissance',
             'kvcons': 'consommation',
             },
         inplace = True,
         )
-    data_entd = data_entd_full[['ident_men', 'puissance', 'consommation', 'age_vehicule']]
+    data_emp = data_emp_full[['ident_men', 'puissance', 'consommation', 'age_vehicule']]
 
     # déf des distances parcourues par carburant
     data_bdf['km_essence'] = 0.0
@@ -277,23 +276,23 @@ def merge_vehicule_menage(year_data):
         ]
 
     # Merge les différentes df
-    data_entd_final = data_vehicule_entd.merge(data_entd, on = 'ident_men', how = 'left')
+    data_emp_final = data_vehicule_emp.merge(data_emp, on = 'ident_men', how = 'left')
     data_bdf_full = data_vehicule_bdf.merge(data_bdf, on = 'ident_men', how = 'left')
 
-    return data_bdf_full, data_entd_final
+    return data_bdf_full, data_emp_final
 
 
 def build_df_menages_vehicles(year_data):
-    data_menages_bdf, data_menages_entd = load_data_menages_bdf_entd(year_data)
+    data_menages_bdf, data_menages_emp = load_data_menages_bdf_emp(year_data)
 
-    data_vehicules_bdf, data_vehicules_entd = merge_vehicule_menage(year_data)
+    data_vehicules_bdf, data_vehicules_emp = merge_vehicule_menage(year_data)
     data_vehicules_bdf['ident_men'] = data_vehicules_bdf['ident_men'].astype(str)
 
-    data_entd = data_menages_entd.merge(data_vehicules_entd, on = 'ident_men')
+    data_emp = data_menages_emp.merge(data_vehicules_emp, on = 'ident_men')
     data_bdf = data_menages_bdf.merge(data_vehicules_bdf, on = 'ident_men', how = 'left')
 
-    return data_bdf, data_entd
+    return data_bdf, data_emp
 
 
 if __name__ == '__main__':
-    data_bdf, data_entd = build_df_menages_vehicles(2017)
+    data_bdf, data_emp = build_df_menages_vehicles(2017)
