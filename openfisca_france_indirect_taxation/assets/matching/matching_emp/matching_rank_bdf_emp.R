@@ -1,5 +1,6 @@
 suppressPackageStartupMessages(library("configr"))
 suppressPackageStartupMessages(library("StatMatch"))
+library(dplyr)
 
 config <- read.config(file = "C:/Users/veve1/.config/openfisca-survey-manager/config.ini")
 assets_directory = config$openfisca_france_indirect_taxation$assets
