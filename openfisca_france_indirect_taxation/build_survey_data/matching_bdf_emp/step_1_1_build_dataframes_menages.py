@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Dans ce script on importe les données des enquêtes BdF 2011 et ENTD 2008.
+# Dans ce script on importe les données des enquêtes BdF 2017 et EMP 2019.
 # Pour chacune des deux enquêtes on importe les variables qui seront
 # susceptibles d'êtres utilisées dans l'appariement des bases de données.
 
@@ -12,17 +12,17 @@ from openfisca_survey_manager.survey_collections import SurveyCollection
 from openfisca_survey_manager.paths import default_config_files_directory as config_files_directory
 
 
-def load_data_menages_bdf_entd(year_data):
-    # Load ENTD data :
-    year_entd = 2019
+def load_data_menages_bdf_emp(year_data):
+    # Load emp data :
+    year_emp = 2019
 
-    entd_survey_collection = SurveyCollection.load(
+    emp_survey_collection = SurveyCollection.load(
         collection = 'enquete_transports', config_files_directory = config_files_directory
         )
-    survey_entd = entd_survey_collection.get_survey('enquete_transports_{}'.format(year_entd))
+    survey_emp = emp_survey_collection.get_survey('enquete_transports_{}'.format(year_emp))
 
-    input_entd_tcm_menage = survey_entd.get_values(table = 'tcm_men_public_V2')
-    input_entd_menage = survey_entd.get_values(table = 'q_menage_public_V2')
+    input_emp_tcm_menage = survey_emp.get_values(table = 'tcm_men_public_V2')
+    input_emp_menage = survey_emp.get_values(table = 'q_menage_public_V2')
 
     # Load BdF data :
     year_bdf = year_data
@@ -43,8 +43,8 @@ def load_data_menages_bdf_entd(year_data):
                 input_bdf['depenses_tot'] += input_bdf[element]
 
     # Set variables :
-    if year_entd == 2008:
-        variables_tcm_menage_entd = [
+    if year_emp == 2008:                # Enquête ENTD 2008 
+        variables_tcm_menage_emp = [
             'ident_men',
             'agepr',
             'cs42pr',
@@ -66,38 +66,41 @@ def load_data_menages_bdf_entd(year_data):
             # To be completed
             ]
 
-        variables_menage_entd = [
+        variables_menage_emp = [
             'ident_men',
             'v1_logpiec',       # nombre de pièces dans logement
             'v1_logocc',        # statut d'occupation du logement
             'v1_logloymens',    # loyer mensuel calculé
             ]
-    if year_entd == 2019:
-        variables_tcm_menage_entd = [
+    if year_emp == 2019:
+        variables_tcm_menage_emp = [
             'ident_men',
             'agepr',
             'cs42pr',
-            'dipdetpr',
-            'nactifs',
+            'dipdetpr',              # diplôme le plus élevé de la personne de référence
+            'nactifs',               # nombre d'actifs dans le ménage  
             'coeffuc',               # ocde10
-            'nenfants',
-            'decile_rev_uc',         # déciles de revenu par uc
-            'npers',
+            'nenfants',              # nombre d'enfants dans le ménage
+            'decile_rev',            # décile de revenu consolidé
+            'decile_rev_uc',         # décile de revenu par uc
+            'npers',                 # nombre de personnes dans le ménage
             # 'numcom_au2010',       # cataeu
             'pond_menc',             # poids ménage
             # 'rev_final_uc',        # revenus simulés par UC   (pas dispo dans la table public demander table chercheur)
             # 'rlog',                # allocations logement     (pas dispo dans la table public demander table chercheur)
-            'situapr',
-            'tuu2017_res',
+            'situapr',               # situation professionnelle de la personne de référence 
+            'tuu2017_res',           # tranche d'unité urbaine de la commune de résidence
             # 'tau99',               (pas dispo dans la table public demander table chercheur ??)
             # 'typlog',
-            'typmen5',              # type ménage
+            'typmen5',               # type ménage
             # To be completed
             ]
 
-        variables_menage_entd = [
-            'ident_men']
-
+        variables_menage_emp = [
+            'ident_men',
+            'jnbveh',             # nb de voitures particulières
+            ]
+    
     variables_menage_bdf = [
         'ident_men',
         'aidlog1',
@@ -126,17 +129,17 @@ def load_data_menages_bdf_entd(year_data):
         ]
 
     # Keep relevant variables :
-    tcm_menage_entd_keep = input_entd_tcm_menage[variables_tcm_menage_entd]
-    menage_entd_keep = input_entd_menage[variables_menage_entd]
+    tcm_menage_emp_keep = input_emp_tcm_menage[variables_tcm_menage_emp]
+    menage_emp_keep = input_emp_menage[variables_menage_emp]
     menage_bdf_keep = input_bdf[variables_menage_bdf]
 
-    # Merge entd tables into one dataframe
-    data_entd = tcm_menage_entd_keep.merge(menage_entd_keep, on = 'ident_men')
+    # Merge emp tables into one dataframe
+    data_emp = tcm_menage_emp_keep.merge(menage_emp_keep, on = 'ident_men')
 
-    del input_entd_tcm_menage, input_entd_menage, input_bdf
+    del input_emp_tcm_menage, input_emp_menage, input_bdf
 
-    return data_entd, menage_bdf_keep
+    return menage_bdf_keep, data_emp
 
 
 if __name__ == '__main__':
-    data_entd, data_bdf = load_data_menages_bdf_entd()
+    data_bdf, data_emp = load_data_menages_bdf_emp(2017)
