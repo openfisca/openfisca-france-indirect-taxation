@@ -16,7 +16,7 @@ class depenses_carburants(YearlyVariable):
     label = 'Consommation de carburants'
 
     def formula(menage, period):
-        return menage('poste_07_2_2_1_1', period)
+        return menage('poste_07_2_2_1', period)
 
 
 class depenses_combustibles_liquides(YearlyVariable):
@@ -25,7 +25,7 @@ class depenses_combustibles_liquides(YearlyVariable):
     label = 'Dépenses en combustibles liquides'
 
     def formula(menage, period):
-        depenses_combustibles_liquides = menage('poste_04_5_3_1_1', period)
+        depenses_combustibles_liquides = menage('poste_04_5_3_1', period)
 
         return depenses_combustibles_liquides
 
@@ -36,7 +36,7 @@ class depenses_combustibles_solides(YearlyVariable):
     label = 'Dépenses en combustibles solides'
 
     def formula(menage, period):
-        depenses_combustibles_solides = menage('poste_04_5_4_1_1', period)
+        depenses_combustibles_solides = menage('poste_04_5_4_1', period)
         return depenses_combustibles_solides
 
 
@@ -75,8 +75,6 @@ class depenses_diesel(YearlyVariable):
 
         depenses_gazole = depenses_carburants * part_conso_gazole
         return depenses_gazole
-
-        return depenses_diesel
 
 
 class depenses_diesel_htva(YearlyVariable):
@@ -141,32 +139,9 @@ class depenses_electricite(YearlyVariable):
     label = 'Dépenses en électricité totale après imputation factures jointes'
 
     def formula(menage, period):
-        depenses_electricite_seule = menage('depenses_electricite_seule', period)
-        depenses_electricite_factures_jointes = menage('depenses_electricite_factures_jointes', period)
-        depenses_electricite = depenses_electricite_seule + depenses_electricite_factures_jointes
+        depenses_electricite = menage('poste_04_5_1_1', period)
 
         return depenses_electricite
-
-
-class depenses_electricite_factures_jointes(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = 'Dépenses en électricité estimées des factures jointes électricité et gaz'
-
-    def formula(menage, period):
-        depenses_factures_jointes = menage('poste_04_5_1_1_1_a', period)
-
-        depenses_electricite_seule = menage('depenses_electricite_seule', period)
-        depenses_gaz_seul = menage('depenses_gaz_seul', period)
-        depenses_gaz_elec = (depenses_electricite_seule * depenses_gaz_seul) > 0
-
-        moyenne_elec = numpy.mean(depenses_electricite_seule * depenses_gaz_elec)
-        moyenne_gaz = numpy.mean(depenses_gaz_seul * depenses_gaz_elec)
-        part_elec = moyenne_elec / (moyenne_elec + moyenne_gaz)
-
-        depenses_electricite_factures_jointes = depenses_factures_jointes * part_elec
-
-        return depenses_electricite_factures_jointes
 
 
 class depenses_electricite_percentile(YearlyVariable):
@@ -203,17 +178,6 @@ class depenses_electricite_prix_unitaire(YearlyVariable):
             )
 
         return prix_unitaire
-
-
-class depenses_electricite_seule(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = 'Dépenses en électricité sans inclure dépenses jointes avec le gaz'
-
-    def formula(menage, period):
-        depenses_electricite_seule = menage('poste_04_5_1_1_1_b', period)
-
-        return depenses_electricite_seule
 
 
 class depenses_electricite_tarif_fixe(YearlyVariable):
@@ -346,19 +310,6 @@ class depenses_essence_ht(Variable):
         return depenses_essence_ht
 
 
-class depenses_gaz_factures_jointes(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = 'Dépenses en gaz estimées des factures jointes électricité et gaz'
-
-    def formula(menage, period):
-        depenses_factures_jointes = menage('poste_04_5_1_1_1_a', period)
-        depenses_electricite_factures_jointes = menage('depenses_electricite_factures_jointes', period)
-        depenses_gaz_factures_jointes = depenses_factures_jointes - depenses_electricite_factures_jointes
-
-        return depenses_gaz_factures_jointes
-
-
 class depenses_gaz_liquefie(YearlyVariable):
     value_type = float
     entity = Menage
@@ -401,15 +352,15 @@ class depenses_gaz_prix_unitaire(YearlyVariable):
         return prix_unitaire_optimal
 
 
-class depenses_gaz_seul(YearlyVariable):
+class depenses_gaz_ville(YearlyVariable):
     value_type = float
     entity = Menage
     label = 'Dépenses en gaz de ville'
 
     def formula(menage, period):
-        depenses_gaz_seul = menage('poste_04_5_2_1_1', period)
+        depenses_gaz_ville = menage('poste_04_5_2_1', period)
 
-        return depenses_gaz_seul
+        return depenses_gaz_ville
 
 
 class depenses_gaz_tarif_fixe(YearlyVariable):
@@ -456,19 +407,6 @@ class depenses_gaz_variables(YearlyVariable):
         depenses_gaz_variables = numpy.maximum(depenses_gaz_variables, 0)
 
         return depenses_gaz_variables
-
-
-class depenses_gaz_ville(YearlyVariable):
-    value_type = float
-    entity = Menage
-    label = 'Dépenses en gaz estimées des factures jointes électricité et gaz'
-
-    def formula(menage, period):
-        depenses_gaz_seul = menage('depenses_gaz_seul', period)
-        depenses_gaz_factures_jointes = menage('depenses_gaz_factures_jointes', period)
-        depenses_gaz_ville = depenses_gaz_seul + depenses_gaz_factures_jointes
-
-        return depenses_gaz_ville
 
 
 class depenses_sp_e10(YearlyVariable):
