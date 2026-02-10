@@ -15,8 +15,9 @@ class depenses_carburants(YearlyVariable):
     entity = Menage
     label = 'Consommation de carburants'
 
-    def formula(menage, period):
-        return menage('poste_07_2_2_1_1', period)
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     return menage('poste_07_2_2_1_1', period)
 
 
 class depenses_combustibles_liquides(YearlyVariable):
@@ -24,10 +25,11 @@ class depenses_combustibles_liquides(YearlyVariable):
     entity = Menage
     label = 'Dépenses en combustibles liquides'
 
-    def formula(menage, period):
-        depenses_combustibles_liquides = menage('poste_04_5_3_1_1', period)
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     depenses_combustibles_liquides = menage('poste_04_5_3_1_1', period)
 
-        return depenses_combustibles_liquides
+    #     return depenses_combustibles_liquides
 
 
 class depenses_combustibles_solides(YearlyVariable):
@@ -35,9 +37,10 @@ class depenses_combustibles_solides(YearlyVariable):
     entity = Menage
     label = 'Dépenses en combustibles solides'
 
-    def formula(menage, period):
-        depenses_combustibles_solides = menage('poste_04_5_4_1_1', period)
-        return depenses_combustibles_solides
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     depenses_combustibles_solides = menage('poste_04_5_4_1_1', period)
+    #     return depenses_combustibles_solides
 
 
 class depenses_diesel(YearlyVariable):
@@ -153,20 +156,21 @@ class depenses_electricite_factures_jointes(YearlyVariable):
     entity = Menage
     label = 'Dépenses en électricité estimées des factures jointes électricité et gaz'
 
-    def formula(menage, period):
-        depenses_factures_jointes = menage('poste_04_5_1_1_1_a', period)
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     depenses_factures_jointes = menage('poste_04_5_1_1_1_a', period)
 
-        depenses_electricite_seule = menage('depenses_electricite_seule', period)
-        depenses_gaz_seul = menage('depenses_gaz_seul', period)
-        depenses_gaz_elec = (depenses_electricite_seule * depenses_gaz_seul) > 0
+    #     depenses_electricite_seule = menage('depenses_electricite_seule', period)
+    #     depenses_gaz_seul = menage('depenses_gaz_seul', period)
+    #     depenses_gaz_elec = (depenses_electricite_seule * depenses_gaz_seul) > 0
 
-        moyenne_elec = numpy.mean(depenses_electricite_seule * depenses_gaz_elec)
-        moyenne_gaz = numpy.mean(depenses_gaz_seul * depenses_gaz_elec)
-        part_elec = moyenne_elec / (moyenne_elec + moyenne_gaz)
+    #     moyenne_elec = numpy.mean(depenses_electricite_seule * depenses_gaz_elec)
+    #     moyenne_gaz = numpy.mean(depenses_gaz_seul * depenses_gaz_elec)
+    #     part_elec = moyenne_elec / (moyenne_elec + moyenne_gaz)
 
-        depenses_electricite_factures_jointes = depenses_factures_jointes * part_elec
+    #     depenses_electricite_factures_jointes = depenses_factures_jointes * part_elec
 
-        return depenses_electricite_factures_jointes
+    #     return depenses_electricite_factures_jointes
 
 
 class depenses_electricite_percentile(YearlyVariable):
@@ -210,10 +214,11 @@ class depenses_electricite_seule(YearlyVariable):
     entity = Menage
     label = 'Dépenses en électricité sans inclure dépenses jointes avec le gaz'
 
-    def formula(menage, period):
-        depenses_electricite_seule = menage('poste_04_5_1_1_1_b', period)
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     depenses_electricite_seule = menage('poste_04_5_1_1_1_b', period)
 
-        return depenses_electricite_seule
+    #     return depenses_electricite_seule
 
 
 class depenses_electricite_tarif_fixe(YearlyVariable):
@@ -285,10 +290,11 @@ class depenses_energie_thermique(YearlyVariable):
     entity = Menage
     label = 'Dépenses en énergie thermique'
 
-    def formula(menage, period):
-        depenses_energie_thermique = menage('poste_04_5_5_1_1', period)
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     depenses_energie_thermique = menage('poste_04_5_5_1_1', period)
 
-        return depenses_energie_thermique
+    #     return depenses_energie_thermique
 
 
 class depenses_energies_totales(YearlyVariable):
@@ -351,12 +357,13 @@ class depenses_gaz_factures_jointes(YearlyVariable):
     entity = Menage
     label = 'Dépenses en gaz estimées des factures jointes électricité et gaz'
 
-    def formula(menage, period):
-        depenses_factures_jointes = menage('poste_04_5_1_1_1_a', period)
-        depenses_electricite_factures_jointes = menage('depenses_electricite_factures_jointes', period)
-        depenses_gaz_factures_jointes = depenses_factures_jointes - depenses_electricite_factures_jointes
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     depenses_factures_jointes = menage('poste_04_5_1_1_1_a', period)
+    #     depenses_electricite_factures_jointes = menage('depenses_electricite_factures_jointes', period)
+    #     depenses_gaz_factures_jointes = depenses_factures_jointes - depenses_electricite_factures_jointes
 
-        return depenses_gaz_factures_jointes
+    #     return depenses_gaz_factures_jointes
 
 
 class depenses_gaz_liquefie(YearlyVariable):
@@ -364,10 +371,11 @@ class depenses_gaz_liquefie(YearlyVariable):
     entity = Menage
     label = 'Dépenses en gaz liquéfié'
 
-    def formula(menage, period):
-        depenses_gaz_liquefie = menage('poste_04_5_2_2_1', period)
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     depenses_gaz_liquefie = menage('poste_04_5_2_2_1', period)
 
-        return depenses_gaz_liquefie
+    #     return depenses_gaz_liquefie
 
 
 class depenses_gaz_prix_unitaire(YearlyVariable):
@@ -406,10 +414,11 @@ class depenses_gaz_seul(YearlyVariable):
     entity = Menage
     label = 'Dépenses en gaz de ville'
 
-    def formula(menage, period):
-        depenses_gaz_seul = menage('poste_04_5_2_1_1', period)
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     depenses_gaz_seul = menage('poste_04_5_2_1_1', period)
 
-        return depenses_gaz_seul
+    #     return depenses_gaz_seul
 
 
 class depenses_gaz_tarif_fixe(YearlyVariable):

@@ -94,13 +94,14 @@ class rev_apres_loyer(YearlyVariable):
     entity = Menage
     label = "Revenu disponible du ménage auquel on retranche le loyer (pas le loyer imputé)"
 
-    def formula(menage, period):
-        revenu_disponible = menage('rev_disponible', period)
-        loyer = menage('poste_04_1_1_1_1', period)
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     revenu_disponible = menage('rev_disponible', period)
+    #     loyer = menage('poste_04_1_1_1_1', period)
 
-        rev_apres_loyer = revenu_disponible - loyer
+    #     rev_apres_loyer = revenu_disponible - loyer
 
-        return rev_apres_loyer
+    #     return rev_apres_loyer
 
 
 class rev_disp_yc_loyerimpute(YearlyVariable):
