@@ -19,13 +19,13 @@ assets_directory = os.path.join(
     )
 
 
-def get_input_data_frame(year, use_entd = True):
-    '''Retrieve budget des familles (BDF) survey data from disk with the opportunity to use variables from enquête nationale transports et déplacements (ENTD).
+def get_input_data_frame(year, use_emp = True):
+    '''Retrieve budget des familles (BDF) survey data from disk with the opportunity to use variables from enquête mobilité des personnes (EMP).
 
     :param year: survey year
     :type year: int
-    :param use_entd: Use variables from ENTD, defaults to True
-    :type use_entd: bool, optional
+    :param use_emp: Use variables from EMP, defaults to True
+    :type use_emp: bool, optional
     :return: survey data
     :rtype: DataFrame
     '''
@@ -34,14 +34,14 @@ def get_input_data_frame(year, use_entd = True):
     input_data_frame = openfisca_survey.get_values(table = 'input')
     input_data_frame.reset_index(inplace = True)
 
-    if use_entd and (year == 2011 or year == 2017):
-        log.info('Using variables from ENTD')
+    if use_emp and (year == 2011 or year == 2017):
+        log.info('Using variables from EMP')
 
         input_data_frame.rename(
             columns = {
-                'depenses_carburants_corrigees_entd': 'depenses_carburants',
-                'depenses_diesel_corrigees_entd': 'depenses_diesel',
-                'depenses_essence_corrigees_entd': 'depenses_essence',
+                'depenses_carburants_corrigees_emp': 'depenses_carburants',
+                'depenses_diesel_corrigees_emp': 'depenses_diesel',
+                'depenses_essence_corrigees_emp': 'depenses_essence',
                 },
             inplace = True,
             )

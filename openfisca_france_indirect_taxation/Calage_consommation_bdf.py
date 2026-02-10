@@ -25,10 +25,12 @@ def get_bdf_aggregates(data_year = None):
     liste_variables = depenses.columns.tolist()
     liste_postes = [element for element in liste_variables if element[:6] == 'poste_'] + ['rev_disponible', 'rev_disp_yc_loyerimpute', 'loyer_impute']
 
-    bdf_aggregates_by_poste = pd.DataFrame()
-    for poste in liste_postes:
-        bdf_aggregates_by_poste.loc[poste, 'bdf_aggregates'] = (depenses[poste] * depenses['pondmen']).sum()
-
+    bdf_aggregates_by_poste = pd.DataFrame(
+        index=liste_postes,
+        columns=['bdf_aggregates']
+        )
+    bdf_aggregates_by_poste['bdf_aggregates'] = (depenses[liste_postes].mul(depenses['pondmen'], axis=0)).sum(axis=0)
+    
     return bdf_aggregates_by_poste
 
 
@@ -216,12 +218,14 @@ def get_inflators(target_year, data_year):
                 if key in list(inflators_bdf_to_cn.keys()):
                     if key in element:
                         ratio_by_variable[element] = inflators_bdf_to_cn[key] * inflators_cn_to_cn[key]
-
+        elif element in ['depenses_carburants', 'depenses_essence', 'depenses_diesel']:
+            ratio_by_variable[element] = inflators_bdf_to_cn['poste_07_2_2'] * inflators_cn_to_cn['poste_07_2_2']
+            
     return ratio_by_variable
 
 
 def get_inflators_cn_23_to_24():
-    '''Utilise les comptes trimestriels pour calculer l'inflateur de la conso et des revenus de 2023 à 2024.'''
+    '''Utilise les comptes trimestriels pour calculer l'inflateur de la conso de 2023 à 2024.'''
     comptes_trimestriels_folder_path = os.path.join(
         assets_directory,
         'depenses')
@@ -235,16 +239,6 @@ def get_inflators_cn_23_to_24():
     total_2024 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2024'), 'TOTAL'].sum()
     total_2023 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2023'), 'TOTAL'].sum()
     inflator_conso = total_2024 / total_2023
-
-    # Revenus
-    # comptes_trim = pd.read_excel(os.path.join(comptes_trimestriels_folder_path,'t_men_val.xls'), sheet_name = "Niveaux", header = 4)
-    # comptes_trim.columns = comptes_trim.columns.str.strip()
-    # comptes_trim = comptes_trim[['Unnamed: 0', 'Revenu disponible brut']]
-    # comptes_trim.rename(columns= {'Unnamed: 0' : 'Trimestre'}, inplace = True)
-    # comptes_trim.dropna(axis = 0, inplace = True)
-    # total_2024 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2024') ,'Revenu disponible brut'].sum()
-    # total_2023 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2023') ,'Revenu disponible brut'].sum()
-    # inflator_revenu = total_2024 / total_2023
 
     return inflator_conso
 

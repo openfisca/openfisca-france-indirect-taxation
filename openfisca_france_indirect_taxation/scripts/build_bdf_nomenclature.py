@@ -23,7 +23,8 @@ def build_raw_bdf_nomenclature(year = 2017):
     table_bdf = pd.read_excel(file_path, skiprows=3)
 
     # Get divisions
-    table_bdf['Division'] = table_bdf['Code sur\n2, 3, 4 positions'].str.endswith('***')
+    table_bdf.loc[:, 'Division'] = table_bdf.loc[:, 'Code sur\n2, 3, 4 positions'].str.endswith('***')
+    table_bdf.loc[table_bdf['Division'].isna(), 'Division'] = False
     bdf_division = table_bdf.loc[table_bdf['Division'], ['Code sur\n2, 3, 4 positions', 'Rubriques']]
     bdf_division.rename(columns={'Code sur\n2, 3, 4 positions': 'Code_division', 'Rubriques': 'Label_division'}, inplace=True)
     bdf_division['Label_division'] = bdf_division['Label_division'].str.lower()
@@ -31,7 +32,8 @@ def build_raw_bdf_nomenclature(year = 2017):
     table_bdf.drop(table_bdf[table_bdf['Division']].index, inplace=True)
 
     # Get groups
-    table_bdf['Groupe'] = table_bdf['Code sur\n2, 3, 4 positions'].str.endswith('**')
+    table_bdf.loc[:, 'Groupe'] = table_bdf.loc[:, 'Code sur\n2, 3, 4 positions'].str.endswith('**')
+    table_bdf.loc[table_bdf['Groupe'].isna(), 'Groupe'] = False
     bdf_groupe = table_bdf.loc[table_bdf['Groupe'], ['Code sur\n2, 3, 4 positions', 'Rubriques']]
     bdf_groupe.rename(columns={'Code sur\n2, 3, 4 positions': 'Code_groupe', 'Rubriques': 'Label_groupe'}, inplace=True)
     bdf_groupe['Label_groupe'] = bdf_groupe['Label_groupe'].str.lower()
@@ -40,6 +42,7 @@ def build_raw_bdf_nomenclature(year = 2017):
 
     # Get classes
     table_bdf.loc[:, 'Classe'] = table_bdf.loc[:, 'Code sur\n2, 3, 4 positions'].str.endswith('*')
+    table_bdf.loc[table_bdf['Classe'].isna(), 'Classe'] = False
     bdf_classe = table_bdf.loc[table_bdf['Classe'], ['Code sur\n2, 3, 4 positions', 'Rubriques']]
     bdf_classe.rename(columns={'Code sur\n2, 3, 4 positions': 'Code_classe', 'Rubriques': 'Label_classe'}, inplace=True)
     bdf_classe.loc[:, 'Label_classe'] = bdf_classe.loc[:, 'Label_classe'].str.lower()
