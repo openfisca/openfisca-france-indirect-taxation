@@ -57,7 +57,7 @@ def taux_implicite(accise, tva, prix_ttc):
 def tax_from_expense_including_tax(expense = None, tax_rate = None):
     '''Compute the tax amount form the expense including tax
 
-    if depense_ttc = (1 + t) * depense_ht, it returns t * depense_ht
+    if depense_ttc = (1 + t) * depense_ht, it returns t * depense_ht = t * depenses_ttc / (1 + t)
     '''
     assert not np.isnan(tax_rate), 'The tax rate should not be nan'
     return expense * tax_rate / (1 + tax_rate)
