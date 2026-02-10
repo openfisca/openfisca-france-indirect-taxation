@@ -52,6 +52,14 @@ class cataeu(YearlyVariable):
     label = 'catégorie de la commune de résidence 2011'
 
 
+class code_region(Variable):
+    value_type = str
+    entity = Menage
+    label = 'code region du menage'
+    definition_period = YEAR
+    default_value = "99"
+
+
 class dip14pr(YearlyVariable):
     value_type = float
     entity = Menage
