@@ -1,17 +1,8 @@
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
 import numpy as np
 
-# caracteristiques menages
-
-
-class code_region(Variable):
-    value_type = str
-    entity = Menage
-    label = 'code region du menage'
-    definition_period = YEAR
-
-
 # nombre de litres par type de gazole
+
 
 class nombre_litres_gazole_b7(Variable):
     value_type = float
@@ -136,8 +127,6 @@ class nombre_litres_essence_e85(Variable):
         nombre_litres_essence_e85 = np.divide(depense_essence_e85_ttc_entree, prix_essence_e85_ttc, out=np.zeros_like(depense_essence_e85_ttc_entree), where= prix_essence_e85_ttc != 0)
         return nombre_litres_essence_e85
 
-
-# montant TVA total sur l'essence
 
 class nombre_litres_essence_total(Variable):
     value_type = float
