@@ -9,9 +9,10 @@ class depenses_assurance_sante(YearlyVariable):
     entity = Menage
     label = 'Dépenses en assurances liées aux transports'
 
-    def formula(menage, period):
-        depenses_assurance_sante = menage('poste_12_5_3_1_1', period)
-        return depenses_assurance_sante
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     depenses_assurance_sante = menage('poste_12_5_3_1_1', period)
+    #     return depenses_assurance_sante
 
 
 class depenses_assurance_transport(YearlyVariable):
@@ -19,9 +20,10 @@ class depenses_assurance_transport(YearlyVariable):
     entity = Menage
     label = 'Dépenses en assurances liées aux transports'
 
-    def formula(menage, period):
-        depenses_assurance_transport = menage('poste_12_5_4_1_1', period)
-        return depenses_assurance_transport
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     depenses_assurance_transport = menage('poste_12_5_4_1_1', period)
+    #     return depenses_assurance_transport
 
 
 class depenses_autres_assurances(YearlyVariable):
@@ -29,15 +31,16 @@ class depenses_autres_assurances(YearlyVariable):
     entity = Menage
     label = 'Dépenses en assurances liées aux transports'
 
-    def formula(menage, period):
-        depenses_assurance_vie_deces = menage('poste_12_5_1_1_1', period)
-        depenses_assurance_logement = menage('poste_12_5_2_1_1', period)
-        depenses_assurance_reste = menage('poste_12_5_5_1_1', period)
+# Commente old coicoop nomenclature
+    # def formula(menage, period):
+    #     depenses_assurance_vie_deces = menage('poste_12_5_1_1_1', period)
+    #     depenses_assurance_logement = menage('poste_12_5_2_1_1', period)
+    #     depenses_assurance_reste = menage('poste_12_5_5_1_1', period)
 
-        depenses_assurance_autres = \
-            depenses_assurance_vie_deces + depenses_assurance_logement + depenses_assurance_reste
+    #     depenses_assurance_autres = \
+    #         depenses_assurance_vie_deces + depenses_assurance_logement + depenses_assurance_reste
 
-        return depenses_assurance_autres
+    #     return depenses_assurance_autres
 
 
 class depenses_ticpe(YearlyVariable):
