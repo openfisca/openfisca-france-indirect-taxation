@@ -1,7 +1,7 @@
 from openfisca_france_indirect_taxation.variables.base import Menage, Variable, YEAR
 
 
-# taxe sur type de gazole HT:
+# Taxe sur les différents types de gazole:
 
 
 class taxes_gazole_b7(Variable):
@@ -31,8 +31,23 @@ class taxes_gazole_b10(Variable):
         taxes_gazole_b10 = gazole_b10_ticpe + tva_sur_gazole_b10
         return taxes_gazole_b10
 
+# Total des taxes (TICPE + TVA)
 
-# taxe sur different type d'essence:
+
+class taxes_gazole_total(Variable):
+    value_type = float
+    entity = Menage
+    label = 'Taxes prélevées sur le diesel (gazole B7 et B10) en station service'
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period):
+        ticpe_gazole_total = menage('gazole_ticpe_total', period)
+        tva_gazole_total = menage('tva_sur_gazole_total', period)
+        taxes_gazole_total = ticpe_gazole_total + tva_gazole_total
+        return taxes_gazole_total
+
+# Taxe sur les differents types d'essence (SP95-E10, SP95, SP98, Super plombe, E85):
 
 
 class taxes_essence_sp95_e10(Variable):
@@ -106,7 +121,21 @@ class taxes_essence_e85(Variable):
         return taxes_essence_e85
 
 
-# taxe sur GPL carburant:
+class taxes_essence_total(Variable):
+    value_type = float
+    entity = Menage
+    label = "Taxes prélevées sur l'essence en station service"
+    definition_period = YEAR
+    default_value = 0
+
+    def formula(menage, period):
+        ticpe_essence_total = menage('essence_ticpe_total', period)
+        tva_essence_total = menage('tva_sur_essence_total', period)
+        taxes_essence_total = ticpe_essence_total + tva_essence_total
+        return taxes_essence_total
+
+
+# Taxe sur GPL carburant:
 
 
 class taxes_gpl_carburant(Variable):
@@ -123,52 +152,19 @@ class taxes_gpl_carburant(Variable):
         return taxes_gpl_carburant
 
 
-# taxe total
+# Total taxes (TICPE + TVA) sur tous les carburants
 
 
-class taxes_tous_carburants(Variable):
+class taxes_carburant_total(Variable):
     value_type = float
     entity = Menage
     label = "Taxes prélevées sur les carburants en station service"
     definition_period = YEAR
     default_value = 0
 
-    def formula_2017(menage, period):
-        taxes_gazole_b7 = menage('taxes_gazole_b7', period)
-        taxes_gazole_b10 = menage('taxes_gazole_b10', period)
-        taxes_essence_sp95_e10 = menage('taxes_essence_sp95_e10', period)
-        taxes_essence_sp95 = menage('taxes_essence_sp95', period)
-        taxes_essence_sp98 = menage('taxes_essence_sp98', period)
-        taxes_essence_e85 = menage('taxes_essence_e85', period)
+    def formula(menage, period):
+        taxes_gazole_total = menage('taxes_gazole_total', period)
+        taxes_essence_total = menage('taxes_essence_total', period)
         taxes_gpl_carburant = menage('taxes_gpl_carburant', period)
-        taxes_tous_carburants = taxes_gazole_b7 + taxes_gazole_b10 + taxes_essence_sp95_e10 + taxes_essence_sp95 + taxes_essence_sp98 + taxes_essence_e85 + taxes_gpl_carburant
-        return taxes_tous_carburants
-
-    def formula_2009(menage, period):
-        taxes_gazole_b7 = menage('taxes_gazole_b7', period)
-        taxes_essence_sp95_e10 = menage('taxes_essence_sp95_e10', period)
-        taxes_essence_sp95 = menage('taxes_essence_sp95', period)
-        taxes_essence_sp98 = menage('taxes_essence_sp98', period)
-        taxes_essence_e85 = menage('taxes_essence_e85', period)
-        taxes_gpl_carburant = menage('taxes_gpl_carburant', period)
-        taxes_tous_carburants = taxes_gazole_b7 + taxes_essence_sp95_e10 + taxes_essence_sp95 + taxes_essence_sp98 + taxes_essence_e85 + taxes_gpl_carburant
-        return taxes_tous_carburants
-
-    def formula_2007(menage, period):
-        taxes_gazole_b7 = menage('taxes_gazole_b7', period)
-        taxes_essence_sp95 = menage('taxes_essence_sp95', period)
-        taxes_essence_sp98 = menage('taxes_essence_sp98', period)
-        taxes_essence_e85 = menage('taxes_essence_e85', period)
-        taxes_gpl_carburant = menage('taxes_gpl_carburant', period)
-        taxes_tous_carburants = taxes_gazole_b7 + taxes_essence_sp95 + taxes_essence_sp98 + taxes_essence_e85 + taxes_gpl_carburant
-        return taxes_tous_carburants
-
-    def formula_1990(menage, period):
-        taxes_gazole_b7 = menage('taxes_gazole_b7', period)
-        taxes_essence_sp95 = menage('taxes_essence_sp95', period)
-        taxes_essence_sp98 = menage('taxes_essence_sp98', period)
-        taxes_essence_super_plombe = menage('taxes_essence_super_plombe', period)
-        taxes_essence_e85 = menage('taxes_essence_e85', period)
-        taxes_gpl_carburant = menage('taxes_gpl_carburant', period)
-        taxes_tous_carburants = taxes_gazole_b7 + taxes_essence_sp95 + taxes_essence_sp98 + taxes_essence_e85 + taxes_essence_super_plombe + taxes_gpl_carburant
+        taxes_tous_carburants = taxes_gazole_total + taxes_essence_total + taxes_gpl_carburant
         return taxes_tous_carburants
