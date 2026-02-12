@@ -312,6 +312,8 @@ maximum_value_affectation:
   values:
     2017-01-01:
       value: 1.15
+    2007-01-01:
+      value: 1.15
   metadata:
     last_value_still_valid_on: "2024-07-01"
     unit: currency

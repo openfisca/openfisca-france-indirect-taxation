@@ -323,6 +323,8 @@ description: Majoration régionale de l'accise du SP95, SP98 et SP95 E10
       value: 0.821
     2017-01-01:
       value: 0.73
+    2011-01-01:
+      value: 0.73
   metadata:
     last_value_still_valid_on: "2024-07-01"
     unit: currency
