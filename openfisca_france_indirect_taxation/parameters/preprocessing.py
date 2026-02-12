@@ -8,19 +8,13 @@ from openfisca_france_indirect_taxation.utils import assets_directory
 from openfisca_france_indirect_taxation.parameters.series_rv import alcool_conso_et_vin
 
 
+def calculate_ht_price(ttc_price, tva_rate, ticpe, majoration_regionale_ticpe, affectation_regionale_ticpe):
+    return (ttc_price / (1 + tva_rate)) - (ticpe + majoration_regionale_ticpe + affectation_regionale_ticpe)
+
+
 def preprocess_legislation(parameters):
     """Preprocess the legislation parameters to add prices and amounts from national accounts."""
     prix_carburants = dict()
-
-    prix_annuel_carburants = pd.read_csv(
-        os.path.join(
-            assets_directory,
-            'prix',
-            'prix_annuel_carburants.csv'
-            ), sep =','
-        )
-    prix_annuel_carburants['Date'] = prix_annuel_carburants['Date'].astype(int)
-    prix_annuel_carburants = prix_annuel_carburants.set_index('Date')
 
     # This CSV file refers to the prices (incl. VAT) provided by INSEE, the method of data retrieval is provided in the git: https://git.leximpact.dev/leximpact/simulateur-socio-fiscal/openfisca/prix-carburants
     # For the current year, the annual average is calculated on the less already passed,
@@ -34,58 +28,9 @@ def preprocess_legislation(parameters):
         )
     prix_litre_annuel_carburants['Date'] = prix_litre_annuel_carburants['Date'].astype(int)
     prix_litre_annuel_carburants = prix_litre_annuel_carburants.set_index('Date')
-
     most_recent_year = prix_litre_annuel_carburants.index.max()
-    # For super_95_e10, we need to use the price of super_95 between 2009 and 2012 included,
-    # because we don't have the data. We use super_95 because it is very close and won't affect the results too much
-    prix_annuel = prix_litre_annuel_carburants['super_95_e10_ttc']
-    years = list(range(2018, most_recent_year))
-    years = sorted(years, key=int, reverse=True)
-    values = dict()
-    for year in years:
-        values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
 
-    prix_annuel = prix_annuel_carburants['super_95_e10_ttc']
-    years = list(range(2013, 2017))
-    years = sorted(years, key=int, reverse=True)
-    for year in years:
-        values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
-
-    prix_annuel = prix_annuel_carburants['super_95_ttc']
-    years = list(range(2009, 2013))
-    years = sorted(years, key=int, reverse=True)
-    for year in years:
-        values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
-
-    prix_annuel = prix_annuel_carburants['super_95_e10_ttc']
-    years = list(range(1990, 2009))
-    years = sorted(years, key=int, reverse=True)
-    for year in years:
-        values['{}-01-01'.format(year)] = dict(value = prix_annuel[year] * 100)
-
-    # We use data from prix_annuel_carburants.csv before 2017, the fact that some old prices are no longer available on the INSEE website,
-    # which means that the script that create prix_litre_annuel_carburants.csv does not retrieve them.
-    # So, we keep what is existing to not lose information.
-    last_value_date = f"{most_recent_year}-12-31"
-    prix_carburants['super_95_e10_ttc'] = {
-        'description': 'super_95_e10_ttc'.replace('_', ' '),
-        'unit': 'currency',
-        'values': values,
-        'metadata': {
-            'last_value_still_valid_on': last_value_date,
-            'reference': {
-                last_value_date: [
-                    {
-                        'title': 'Prix moyens annuels de vente au détail en métropole - Supercarburant sans plomb 95-E10 (1 litre)',
-                        'href': 'https://www.insee.fr/fr/statistiques/serie/010596133',
-
-                        }
-                    ]
-                }
-            }
-        }
-
-    autres_carburants = {
+    carburants = {
         'diesel_ttc': {
             "last_value_date": f"{most_recent_year}-12-31",
             "ref": {
@@ -111,20 +56,14 @@ def preprocess_legislation(parameters):
             "last_value_date": "2005-12-31",
             },
         }
-    for element, detail in autres_carburants.items():
-        prix_annuel = prix_annuel_carburants[element]
-        years = list(range(1990, 2017))
-        years = sorted(years, key=int, reverse=True)
-        values = dict()
-        for year in years:
-            values['{}-01-01'.format(year)] = prix_annuel[year] * 100
-
+    for element, detail in carburants.items():
         prix_annuel = prix_litre_annuel_carburants[element]
+        values = dict()
+        years = list(range(1992, most_recent_year))
         years = sorted(years, key=int, reverse=True)
-        years = list(range(2018, most_recent_year))
         for year in years:
             values['{}-01-01'.format(year)] = prix_annuel[year] * 100
-
+        
         prix_carburants[element] = {
             'description': element.replace('_', ' '),
             'unit': 'currency',
@@ -137,6 +76,100 @@ def preprocess_legislation(parameters):
                     }
                 }
             }
+    # For sp95-E10 and super E85 we use another dataset (it's not the same source but it allows for consistency within fuel type)
+    prix_carburant_annee_hectolitre = pd.read_csv(
+        os.path.join(
+            assets_directory,
+            'prix',
+            'prix_par_carburant_annee_hectolitre.csv'
+            ), sep =','
+        )
+
+    prix_carburant_annee_hectolitre['Date'] = prix_carburant_annee_hectolitre['annee'].astype(int)
+    most_recent_year = prix_carburant_annee_hectolitre.Date.max()
+    prix_carburant_annee_hectolitre.set_index('Date', inplace= True)
+    autres_carburants = {'super_95_e10_ttc': 'E10',
+                        'super_e85_ttc': 'E85'}
+
+    for element in autres_carburants:
+        prix_annuel = prix_carburant_annee_hectolitre.loc[
+            prix_carburant_annee_hectolitre['carburant'] == autres_carburants.get(element), 'prix_moyen_par_hectolitre']
+        values = dict()
+        years = list(range(2009, most_recent_year + 1))
+        years = sorted(years, key=int, reverse=True)
+        for year in years:
+            values['{}-01-01'.format(year)] = prix_annuel[year] 
+
+        prix_carburants[element] = {
+            'description': element.replace('_', ' '),
+            'unit': 'currency',
+            'values': values,
+            }
+
+    sp95_e10_ht_prices = dict()
+    sp95_ht_prices = dict()
+    sp98_ht_prices = dict()
+    super_e85_ht_prices = dict()
+    diesel_ht_prices = dict()
+
+    for year in sorted(list(range(2011, most_recent_year + 1)), key=int, reverse=True):
+        # Super 95 E10
+        ttc_price = prix_carburants.get('super_95_e10_ttc').get('values').get('{}-01-01'.format(year))
+        tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
+        ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.super_e10)
+        majoration_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10["99"])
+        affectation_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_sp95_e10["99"])
+        ht_price = calculate_ht_price(ttc_price, tva_rate, ticpe, majoration_regionale_ticpe, affectation_regionale_ticpe)
+        sp95_e10_ht_prices['{}-01-01'.format(year)] = ht_price
+
+        # Super 95
+        ttc_price = prix_carburants.get('super_95_ttc').get('values').get('{}-01-01'.format(year))
+        tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
+        ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.super_95_98)
+        majoration_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10["99"])
+        affectation_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_sp95_sp98["99"])
+        ht_price = calculate_ht_price(ttc_price, tva_rate, ticpe, majoration_regionale_ticpe, affectation_regionale_ticpe)
+        sp95_ht_prices['{}-01-01'.format(year)] = ht_price
+
+        # Super 98
+        ttc_price = prix_carburants.get('super_98_ttc').get('values').get('{}-01-01'.format(year))
+        tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
+        ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.super_95_98)
+        majoration_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10["99"])
+        affectation_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_sp95_sp98["99"])
+        ht_price = calculate_ht_price(ttc_price, tva_rate, ticpe, majoration_regionale_ticpe, affectation_regionale_ticpe)
+        sp98_ht_prices['{}-01-01'.format(year)] = ht_price
+
+        # Super E85
+        ttc_price = prix_carburants.get('super_e85_ttc').get('values').get('{}-01-01'.format(year))
+        tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
+        ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.super_e_85_utilise_comme_carburant_hectolitre)
+        majoration_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10["99"])
+        affectation_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_sp95_sp98["99"])
+        ht_price = calculate_ht_price(ttc_price, tva_rate, ticpe, majoration_regionale_ticpe, affectation_regionale_ticpe)
+        super_e85_ht_prices['{}-01-01'.format(year)] = ht_price
+        
+        # Diesel
+        ttc_price = prix_carburants.get('diesel_ttc').get('values').get('{}-01-01'.format(year))
+        tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
+        ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.gazole)
+        majoration_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_gazole["99"])
+        affectation_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_gazole["99"])
+        ht_price = calculate_ht_price(ttc_price, tva_rate, ticpe, majoration_regionale_ticpe, affectation_regionale_ticpe)
+        diesel_ht_prices['{}-01-01'.format(year)] = ht_price
+
+        prix_carburants_ht = {'diesel_ht': diesel_ht_prices,
+                    'super_98_ht': sp98_ht_prices,
+                    'super_95_ht': sp95_ht_prices,
+                    'super_95_e10_ht': sp95_e10_ht_prices,
+                    'super_e85_ht': super_e85_ht_prices}
+
+        for element, values in prix_carburants_ht.items():
+            prix_carburants[element] = {
+                'description': element.replace('_', ' '),
+                'unit': 'currency',
+                'values': values,
+                }
     # After 2017, we use the data from prix_litre_annuel_carburants.cs
 
     prix_carburants['description'] = 'Prix des carburants'

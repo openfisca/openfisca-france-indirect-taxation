@@ -327,6 +327,8 @@ description: Majoration régionale de l'accise du gazole
       value: 1.35
     2017-01-01:
       value: 1.35
+    2011-01-01:
+      value: 1.35
   metadata:
     last_value_still_valid_on: "2024-07-01"
     unit: currency
