@@ -63,7 +63,7 @@ def preprocess_legislation(parameters):
         years = sorted(years, key=int, reverse=True)
         for year in years:
             values['{}-01-01'.format(year)] = prix_annuel[year] * 100
-        
+
         prix_carburants[element] = {
             'description': element.replace('_', ' '),
             'unit': 'currency',
@@ -76,7 +76,7 @@ def preprocess_legislation(parameters):
                     }
                 }
             }
-    # For sp95-E10 and super E85 we use another dataset (it's not the same source but it allows for consistency within fuel type)
+    # For sp95-E10, super E85 and GPL we use another dataset (it's not the same source but it allows for consistency within fuel type)
     prix_carburant_annee_hectolitre = pd.read_csv(
         os.path.join(
             assets_directory,
@@ -89,7 +89,8 @@ def preprocess_legislation(parameters):
     most_recent_year = prix_carburant_annee_hectolitre.Date.max()
     prix_carburant_annee_hectolitre.set_index('Date', inplace= True)
     autres_carburants = {'super_95_e10_ttc': 'E10',
-                        'super_e85_ttc': 'E85'}
+                        'super_e85_ttc': 'E85',
+                        'gplc_ttc': 'GPLc'}
 
     for element in autres_carburants:
         prix_annuel = prix_carburant_annee_hectolitre.loc[
@@ -98,7 +99,7 @@ def preprocess_legislation(parameters):
         years = list(range(2009, most_recent_year + 1))
         years = sorted(years, key=int, reverse=True)
         for year in years:
-            values['{}-01-01'.format(year)] = prix_annuel[year] 
+            values['{}-01-01'.format(year)] = prix_annuel[year]
 
         prix_carburants[element] = {
             'description': element.replace('_', ' '),
@@ -111,6 +112,7 @@ def preprocess_legislation(parameters):
     sp98_ht_prices = dict()
     super_e85_ht_prices = dict()
     diesel_ht_prices = dict()
+    gplc_ht_prices = dict()
 
     for year in sorted(list(range(2011, most_recent_year + 1)), key=int, reverse=True):
         # Super 95 E10
@@ -148,7 +150,7 @@ def preprocess_legislation(parameters):
         affectation_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_sp95_sp98["99"])
         ht_price = calculate_ht_price(ttc_price, tva_rate, ticpe, majoration_regionale_ticpe, affectation_regionale_ticpe)
         super_e85_ht_prices['{}-01-01'.format(year)] = ht_price
-        
+
         # Diesel
         ttc_price = prix_carburants.get('diesel_ttc').get('values').get('{}-01-01'.format(year))
         tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
@@ -158,11 +160,21 @@ def preprocess_legislation(parameters):
         ht_price = calculate_ht_price(ttc_price, tva_rate, ticpe, majoration_regionale_ticpe, affectation_regionale_ticpe)
         diesel_ht_prices['{}-01-01'.format(year)] = ht_price
 
+        # GPLc
+        ttc_price = prix_carburants.get('gplc_ttc').get('values').get('{}-01-01'.format(year))
+        tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
+        accise_combustibles_liquides = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.autres_gaz_petrole_liquefies_utilises_comme_carburants_autres_100kg)
+        coefficient_conversion_kg_vers_litre = (1 / 0.525)
+        ticpe = accise_combustibles_liquides * coefficient_conversion_kg_vers_litre
+        ht_price = calculate_ht_price(ttc_price, tva_rate, ticpe, 0, 0)
+        gplc_ht_prices['{}-01-01'.format(year)] = ht_price
+
         prix_carburants_ht = {'diesel_ht': diesel_ht_prices,
                     'super_98_ht': sp98_ht_prices,
                     'super_95_ht': sp95_ht_prices,
                     'super_95_e10_ht': sp95_e10_ht_prices,
-                    'super_e85_ht': super_e85_ht_prices}
+                    'super_e85_ht': super_e85_ht_prices,
+                    'gplc_ht': gplc_ht_prices}
 
         for element, values in prix_carburants_ht.items():
             prix_carburants[element] = {
