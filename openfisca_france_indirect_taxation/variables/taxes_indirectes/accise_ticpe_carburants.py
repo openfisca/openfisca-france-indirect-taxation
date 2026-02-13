@@ -450,4 +450,3 @@ class accise_gpl_carburant(Variable):
         coefficient_conversion_kg_vers_litre = (1 / 0.525)
         accise_combustibles_liquides_hectolitre = accise_combustibles_liquides * coefficient_conversion_kg_vers_litre
         return accise_combustibles_liquides_hectolitre
-
