@@ -165,7 +165,7 @@ class prix_essence_sp98_ht(Variable):
         prix_essence_sp98_ht_hectolitre = parameters(period.start).prix_carburants.super_98_ht
         prix_essence_sp98_ht = prix_essence_sp98_ht_hectolitre / 100
         return prix_essence_sp98_ht
-    
+
 
 class prix_essence_super_plombe_ht(Variable):
     value_type = float

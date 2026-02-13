@@ -224,7 +224,7 @@ class prix_essence_e85_ttc(Variable):
         code_region = menage('code_region', period)
         prix_essence_e85_hectolitre_ttc = np.fromiter(
             (
-                parameters(period.start).prix_carburants.super_e85_ttc if region_cell == "99" else get_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre().get(f'{region_cell}', {}).get('E85', {}).get(f'{period}', 0) 
+                parameters(period.start).prix_carburants.super_e85_ttc if region_cell == "99" else get_prix_carburant_par_annee_par_carburant_par_region_en_hectolitre().get(f'{region_cell}', {}).get('E85', {}).get(f'{period}', 0)
                 for region_cell in code_region),
             dtype=np.float32)
         prix_essence_e85_ttc = (prix_essence_e85_hectolitre_ttc / 100)
