@@ -7,14 +7,15 @@ seaborn.set_palette(seaborn.color_palette('Set2', 12))
 _SQRT2 = np.sqrt(2)     # sqrt(2) with default precision np.float64
 
 
-def collapsesum(data_frame, by = None, var = None):
+def collapsesum(data_frame, by = None, var = None, weights = None):
     '''
-    Pour une variable, fonction qui calcule la moyenne pondérée au sein de chaque groupe.
+    Pour une variable, fonction qui calcule la somme pondérée au sein de chaque groupe.
     '''
     assert by is not None
     assert var is not None
+    assert weights is not None
     grouped = data_frame.groupby([by])
-    return grouped.apply(lambda x: weighted_sum(groupe = x, var =var))
+    return grouped.apply(lambda x: weighted_sum(groupe = x, var = var, weight_var= weights), include_groups=False)
 
 
 def find_nearest_inferior(years, year):
@@ -83,10 +84,10 @@ def plots_by_group(function, data_name_1, data_name_2, distance, group):
     return ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8, ax9, ax10
 
 
-def weighted_sum(groupe, var):
+def weighted_sum(groupe, var, weight_var):
     '''
-    Fonction qui calcule la moyenne pondérée par groupe d'une variable
+    Fonction qui calcule la somme pondérée par groupe d'une variable
     '''
     data = groupe[var]
-    weights = groupe['pondmen']
+    weights = groupe[weight_var]
     return (data * weights).sum()
