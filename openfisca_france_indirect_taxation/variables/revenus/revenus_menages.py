@@ -39,7 +39,7 @@ class niveau_de_vie(YearlyVariable):
 
 
 class niveau_vie_decile(YearlyVariable):
-    value_type = float
+    value_type = int
     entity = Menage
     label = 'Décile de niveau de vie'
 
@@ -56,7 +56,7 @@ class niveau_vie_decile(YearlyVariable):
 
 
 class decile_indiv_niveau_vie(YearlyVariable):
-    value_type = float
+    value_type = int
     entity = Menage
     label = "Décile de niveau de vie"
 
