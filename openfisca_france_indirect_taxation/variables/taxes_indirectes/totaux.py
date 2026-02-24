@@ -1,7 +1,18 @@
 # -*- coding: utf-8 -*-
 
-
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
+
+
+class ticpe_totale(YearlyVariable):
+    value_type = float
+    entity = Menage
+    label = 'Montant total de TICPE payé'
+
+    def formula(menage, period):
+        ticpe_carburant_total = menage('ticpe_carburant_total', period)
+        ticpe_combustibles_liquides = menage('combustibles_liquides_ticpe', period)
+        ticpe_totale = ticpe_carburant_total + ticpe_combustibles_liquides
+        return ticpe_totale
 
 
 class taxes_indirectes_total(YearlyVariable):
