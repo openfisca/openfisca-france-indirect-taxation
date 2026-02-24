@@ -8,11 +8,11 @@ from openfisca_core.reforms import Reform
 
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 from openfisca_france_indirect_taxation.variables.taxes_indirectes import (
-    ticpe,
+    ticpe_combustibles_liquides,
     tva,
     )
 from openfisca_france_indirect_taxation.variables.consommation import (
-    emissions_co2, quantites_energie)
+    emissions_co2, quantites_energies_logement)
 
 
 parameters_path = os.path.join(os.path.dirname(__file__), 'parameters')
@@ -210,7 +210,7 @@ class reforme_rattrapage_diesel(Reform):
             return depenses_tva_taux_super_reduit_ajustees
 
     class diesel_ticpe(YearlyVariable):
-        baseline_variable = ticpe.diesel_ticpe  # TODO réintégrer ou effacer car update
+        baseline_variable = ticpe_combustibles_liquides.diesel_ticpe  # TODO réintégrer ou effacer car update
         label = 'Calcul du montant de TICPE sur le diesel après reforme'
 
         def formula(menage, period, parameters):
@@ -269,7 +269,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class essence_ticpe(YearlyVariable):
         label = 'Calcul du montant de la TICPE sur toutes les essences cumulees, après reforme'
-        baseline_variable = ticpe.essence_ticpe
+        baseline_variable = ticpe_combustibles_liquides.essence_ticpe
 
         def formula_2009(menage, period):
             sp95_ticpe_ajustee = menage('sp95_ticpe', period)
@@ -293,7 +293,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class quantites_diesel(YearlyVariable):
         label = 'Quantites de diesel consommees après la reforme - taxe carburants'
-        baseline_variable = quantites_energie.quantites_diesel
+        baseline_variable = quantites_energies_logement.quantites_diesel
 
         def formula(menage, period, parameters):
             depenses_diesel_ajustees_rattrapage_diesel = \
@@ -306,7 +306,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class quantites_sp_e10(YearlyVariable):
         label = 'Quantites consommees de sans plomb E10 par les menages après reforme - taxe carburants'
-        baseline_variable = quantites_energie.quantites_sp_e10
+        baseline_variable = quantites_energies_logement.quantites_sp_e10
 
         def formula(menage, period, parameters):
             depenses_essence_ajustees_rattrapage_diesel = \
@@ -321,7 +321,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class quantites_sp95(YearlyVariable):
         label = 'Quantites consommees de sans plomb 95 par les menages après reforme'
-        baseline_variable = quantites_energie.quantites_sp95
+        baseline_variable = quantites_energies_logement.quantites_sp95
 
         def formula(menage, period, parameters):
             depenses_essence_ajustees_rattrapage_diesel = menage('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
@@ -335,7 +335,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class quantites_sp98(YearlyVariable):
         label = 'Quantites consommees de sans plomb 98 par les menages'
-        baseline_variable = quantites_energie.quantites_sp98
+        baseline_variable = quantites_energies_logement.quantites_sp98
 
         def formula(menage, period, parameters):
             depenses_essence_ajustees_rattrapage_diesel = menage('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
@@ -349,7 +349,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class quantites_super_plombe(YearlyVariable):
         label = 'Quantites consommees de super plombe par les menages après reforme'
-        baseline_variable = quantites_energie.quantites_super_plombe
+        baseline_variable = quantites_energies_logement.quantites_super_plombe
 
         def formula(menage, period, parameters):
             depenses_essence_ajustees_rattrapage_diesel = menage('depenses_essence_corrigees_ajustees_rattrapage_diesel', period)
@@ -364,7 +364,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class quantites_essence(YearlyVariable):
         label = "Quantites d'essence consommees par les menages après reforme"
-        baseline_variable = quantites_energie.quantites_essence
+        baseline_variable = quantites_energies_logement.quantites_essence
         definition_period = YEAR
 
         def formula_2009(menage, period):
@@ -392,7 +392,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class sp_e10_ticpe(YearlyVariable):
         label = 'Calcul du montant de la TICPE sur le SP E10 après reforme'
-        baseline_variable = ticpe.sp_e10_ticpe
+        baseline_variable = ticpe_combustibles_liquides.sp_e10_ticpe
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -429,7 +429,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class sp95_ticpe(YearlyVariable):
         label = 'Calcul du montant de TICPE sur le sp_95 après reforme'
-        baseline_variable = ticpe.sp95_ticpe
+        baseline_variable = ticpe_combustibles_liquides.sp95_ticpe
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -465,7 +465,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class sp98_ticpe(YearlyVariable):
         label = 'Calcul du montant de TICPE sur le sp_98 après reforme'
-        baseline_variable = ticpe.sp98_ticpe
+        baseline_variable = ticpe_combustibles_liquides.sp98_ticpe
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -502,7 +502,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class super_plombe_ticpe(YearlyVariable):
         label = 'Calcul du montant de la TICPE sur le super plombe après reforme'
-        baseline_variable = ticpe.super_plombe_ticpe
+        baseline_variable = ticpe_combustibles_liquides.super_plombe_ticpe
 
         def formula(menage, period, parameters):
             taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
@@ -533,7 +533,7 @@ class reforme_rattrapage_diesel(Reform):
 
     class ticpe_totale(YearlyVariable):
         label = 'Calcul du montant de la TICPE sur tous les carburants cumules, après reforme'
-        baseline_variable = ticpe.ticpe_totale
+        baseline_variable = ticpe_combustibles_liquides.ticpe_totale
 
         def formula(menage, period):
             essence_ticpe = menage('essence_ticpe', period)
