@@ -19,7 +19,9 @@ class nombre_litres_gazole_b7(Variable):
         prix_gazole_b7_ttc_sortie = menage('prix_gazole_b7_ttc_sortie', period)
         delta_prix = prix_gazole_b7_ttc_sortie - prix_gazole_b7_ttc
         elasticite_prix = menage('elas_exp_1', period)
-        nombre_litres_gazole_b7_ajuste = nombre_litres_gazole_b7 * (1 + delta_prix / prix_gazole_b7_ttc * elasticite_prix)
+        nombre_litres_gazole_b7_ajuste = nombre_litres_gazole_b7 * (1 + elasticite_prix
+                                                                    * np.divide(delta_prix, prix_gazole_b7_ttc, out=np.zeros_like(delta_prix),
+                                                                              where= prix_gazole_b7_ttc != 0))
         return nombre_litres_gazole_b7_ajuste
 
 
@@ -38,7 +40,9 @@ class nombre_litres_gazole_b10(Variable):   # ATTENTION: pas de prix disponible 
         prix_gazole_b10_ttc_sortie = menage('prix_gazole_b10_ttc_sortie', period)
         delta_prix = prix_gazole_b10_ttc_sortie - prix_gazole_b10_ttc
         elasticite_prix = menage('elas_exp_1', period)
-        nombre_litres_gazole_b10_ajuste = nombre_litres_gazole_b10 * (1 + delta_prix / prix_gazole_b10_ttc * elasticite_prix)
+        nombre_litres_gazole_b10_ajuste = nombre_litres_gazole_b10 * (1 + elasticite_prix
+                                                                      * np.divide(delta_prix, prix_gazole_b10_ttc, out=np.zeros_like(delta_prix),
+                                                                                where= prix_gazole_b10_ttc != 0))
         return nombre_litres_gazole_b10_ajuste
 
 
@@ -79,7 +83,9 @@ class nombre_litres_essence_sp95_e10(Variable):
         prix_essence_sp95_e10_ttc_sortie = menage('prix_essence_sp95_e10_ttc_sortie', period)
         delta_prix = prix_essence_sp95_e10_ttc_sortie - prix_essence_sp95_e10_ttc
         elasticite_prix = menage('elas_exp_1', period)
-        nombre_litres_essence_sp95_e10_ajuste = nombre_litres_essence_sp95_e10 * (1 + delta_prix / prix_essence_sp95_e10_ttc * elasticite_prix)
+        nombre_litres_essence_sp95_e10_ajuste = nombre_litres_essence_sp95_e10 * (1 + elasticite_prix
+                                                                                  * np.divide(delta_prix, prix_essence_sp95_e10_ttc, out=np.zeros_like(delta_prix),
+                                                                                            where= prix_essence_sp95_e10_ttc != 0))
         return nombre_litres_essence_sp95_e10_ajuste
 
 
@@ -98,7 +104,9 @@ class nombre_litres_essence_sp95(Variable):
         prix_essence_sp95_ttc_sortie = menage('prix_essence_sp95_ttc_sortie', period)
         delta_prix = prix_essence_sp95_ttc_sortie - prix_essence_sp95_ttc
         elasticite_prix = menage('elas_exp_1', period)
-        nombre_litres_essence_sp95_ajuste = nombre_litres_essence_sp95 * (1 + delta_prix / prix_essence_sp95_ttc * elasticite_prix)
+        nombre_litres_essence_sp95_ajuste = nombre_litres_essence_sp95 * (1 + elasticite_prix
+                                                                        * np.divide(delta_prix, prix_essence_sp95_ttc, out=np.zeros_like(delta_prix),
+                                                                                where= prix_essence_sp95_ttc != 0))
         return nombre_litres_essence_sp95_ajuste
 
 
@@ -117,7 +125,9 @@ class nombre_litres_essence_sp98(Variable):
         prix_essence_sp98_ttc_sortie = menage('prix_essence_sp98_ttc_sortie', period)
         delta_prix = prix_essence_sp98_ttc_sortie - prix_essence_sp98_ttc
         elasticite_prix = menage('elas_exp_1', period)
-        nombre_litres_essence_sp98_ajuste = nombre_litres_essence_sp98 * (1 + delta_prix / prix_essence_sp98_ttc * elasticite_prix)
+        nombre_litres_essence_sp98_ajuste = nombre_litres_essence_sp98 * (1 + elasticite_prix
+                                                                          * np.divide(delta_prix, prix_essence_sp98_ttc, out=np.zeros_like(delta_prix),
+                                                                                    where= prix_essence_sp98_ttc != 0))
         return nombre_litres_essence_sp98_ajuste
 
 
@@ -137,7 +147,9 @@ class nombre_litres_essence_super_plombe(Variable):
         prix_essence_super_plombe_ttc_sortie = menage('prix_essence_super_plombe_ttc_sortie', period)
         delta_prix = prix_essence_super_plombe_ttc_sortie - prix_essence_super_plombe_ttc
         elasticite_prix = menage('elas_exp_1', period)
-        nombre_litres_essence_super_plombe_ajuste = nombre_litres_essence_super_plombe * (1 + delta_prix / prix_essence_super_plombe_ttc * elasticite_prix)
+        nombre_litres_essence_super_plombe_ajuste = nombre_litres_essence_super_plombe * (1 + elasticite_prix
+                                                                                          * np.divide(delta_prix, prix_essence_super_plombe_ttc, out=np.zeros_like(delta_prix),
+                                                                                                    where= prix_essence_super_plombe_ttc != 0))
         return nombre_litres_essence_super_plombe_ajuste
 
 
@@ -157,7 +169,9 @@ class nombre_litres_essence_e85(Variable):
         prix_essence_e85_ttc_sortie = menage('prix_essence_e85_ttc_sortie', period)
         delta_prix = prix_essence_e85_ttc_sortie - prix_essence_e85_ttc
         elasticite_prix = menage('elas_exp_1', period)
-        nombre_litres_essence_e85_ajuste = nombre_litres_essence_e85 * (1 + delta_prix / prix_essence_e85_ttc * elasticite_prix)
+        nombre_litres_essence_e85_ajuste = nombre_litres_essence_e85 * (1 + elasticite_prix
+                                                                        * np.divide(delta_prix, prix_essence_e85_ttc, out=np.zeros_like(delta_prix),
+                                                                                  where= prix_essence_e85_ttc != 0))
         return nombre_litres_essence_e85_ajuste
 
 
@@ -208,7 +222,9 @@ class nombre_litres_gpl_carburant(Variable):
         prix_gpl_carburant_ttc_sortie = menage('prix_gpl_carburant_ttc_sortie', period)
         delta_prix = prix_gpl_carburant_ttc_sortie - prix_gpl_carburant_ttc
         elasticite_prix = menage('elas_exp_1', period)
-        nombre_litres_gpl_carburant_ajuste = nombre_litres_gpl_carburant * (1 + delta_prix / prix_gpl_carburant_ttc * elasticite_prix)
+        nombre_litres_gpl_carburant_ajuste = nombre_litres_gpl_carburant * (1 + elasticite_prix
+                                                                            * np.divide(delta_prix, prix_gpl_carburant_ttc, out=np.zeros_like(delta_prix),
+                                                                                      where= prix_gpl_carburant_ttc != 0))
         return nombre_litres_gpl_carburant_ajuste
 
 
