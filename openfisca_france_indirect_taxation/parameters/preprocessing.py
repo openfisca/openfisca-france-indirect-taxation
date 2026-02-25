@@ -118,7 +118,12 @@ def preprocess_legislation(parameters):
         # Super 95 E10
         ttc_price = prix_carburants.get('super_95_e10_ttc').get('values').get('{}-01-01'.format(year))
         tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
-        ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.super_e10)
+        if year >= 2022:
+            taux_conversion = parameters(year).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_essence_sp95_e10
+            ticpe_mwh = parameters(year).imposition_indirecte.produits_energetiques.accise_energie_metropole.essence_sp95_e10
+            ticpe = ticpe_mwh * taux_conversion
+        else:
+            ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.super_e10)
         maximum_value_affectation = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_gazole.maximum_value_affectation)
         majoration_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10["99"])
         affectation_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_sp95_e10["99"])
@@ -128,7 +133,12 @@ def preprocess_legislation(parameters):
         # Super 95
         ttc_price = prix_carburants.get('super_95_ttc').get('values').get('{}-01-01'.format(year))
         tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
-        ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.super_95_98)
+        if year >= 2022:
+            taux_conversion = parameters(year).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_essences
+            ticpe_mwh = parameters(year).imposition_indirecte.produits_energetiques.accise_energie_metropole.essences
+            ticpe = ticpe_mwh * taux_conversion
+        else:
+            ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.super_95_98)
         maximum_value_affectation = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_sp95_sp98.maximum_value_affectation)
         majoration_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10["99"])
         affectation_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_sp95_sp98["99"])
@@ -138,7 +148,12 @@ def preprocess_legislation(parameters):
         # Super 98
         ttc_price = prix_carburants.get('super_98_ttc').get('values').get('{}-01-01'.format(year))
         tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
-        ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.super_95_98)
+        if year >= 2022:
+            taux_conversion = parameters(year).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_essences
+            ticpe_mwh = parameters(year).imposition_indirecte.produits_energetiques.accise_energie_metropole.essences
+            ticpe = ticpe_mwh * taux_conversion
+        else:
+            ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.super_95_98)
         maximum_value_affectation = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_sp95_sp98.maximum_value_affectation)
         majoration_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_sp95_sp98_sp95_e10["99"])
         affectation_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_sp95_sp98["99"])
@@ -148,14 +163,24 @@ def preprocess_legislation(parameters):
         # Super E85
         ttc_price = prix_carburants.get('super_e85_ttc').get('values').get('{}-01-01'.format(year))
         tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
-        ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.super_e_85_utilise_comme_carburant_hectolitre)
+        if year >= 2022:
+            taux_conversion = parameters(year).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_superethanol_e85
+            ticpe_mwh = parameters(year).imposition_indirecte.produits_energetiques.accise_energie_metropole.superethanol_e85
+            ticpe = ticpe_mwh * taux_conversion
+        else:
+            ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.super_e_85_utilise_comme_carburant_hectolitre)
         ht_price = calculate_ht_price(ttc_price, tva_rate, ticpe, 0, 0, 0)
         super_e85_ht_prices['{}-01-01'.format(year)] = ht_price
 
         # Diesel
         ttc_price = prix_carburants.get('diesel_ttc').get('values').get('{}-01-01'.format(year))
         tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
-        ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.gazole)
+        if year >= 2022:
+            taux_conversion = parameters(year).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_gazoles
+            ticpe_mwh = parameters(year).imposition_indirecte.produits_energetiques.accise_energie_metropole.gazoles
+            ticpe = ticpe_mwh * taux_conversion
+        else:
+            ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.gazole)
         maximum_value_affectation = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_gazole.maximum_value_affectation)
         majoration_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.majoration_regionale_ticpe_gazole["99"])
         affectation_regionale_ticpe = float(parameters(year).imposition_indirecte.produits_energetiques.affectation_regionale_ticpe_gazole["99"])
@@ -165,9 +190,14 @@ def preprocess_legislation(parameters):
         # GPLc
         ttc_price = prix_carburants.get('gplc_ttc').get('values').get('{}-01-01'.format(year))
         tva_rate = float(parameters(year).imposition_indirecte.tva.taux_de_tva.taux_normal)
-        accise_combustibles_liquides = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.autres_gaz_petrole_liquefies_utilises_comme_carburants_autres_100kg)
-        coefficient_conversion_kg_vers_litre = (1 / 0.525)
-        ticpe = accise_combustibles_liquides * coefficient_conversion_kg_vers_litre
+        if year >= 2022:
+            ticpe_mwh = parameters(year).imposition_indirecte.produits_energetiques.accise_energie_metropole.gpl_carburant
+            taux_conversion = parameters(year).imposition_indirecte.produits_energetiques.taux_conversion_euro_par_mwh_a_euro_par_hectolitre.taux_conversion_gpl_carburant
+            ticpe = ticpe_mwh * taux_conversion
+        else:
+            ticpe_kg = float(parameters(year).imposition_indirecte.produits_energetiques.ticpe.autres_gaz_petrole_liquefies_utilises_comme_carburants_autres_100kg)
+            coefficient_conversion_kg_vers_litre = (1 / 0.525)
+            ticpe = ticpe_kg * coefficient_conversion_kg_vers_litre
         ht_price = calculate_ht_price(ttc_price, tva_rate, ticpe, 0, 0, 0)
         gplc_ht_prices['{}-01-01'.format(year)] = ht_price
 
