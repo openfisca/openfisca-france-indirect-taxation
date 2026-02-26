@@ -1,0 +1,40 @@
+description: Taux réduit de TICGN pour activité de travaux agricoles et forestiers
+values:
+  2013-01-01:
+    value: 0.119
+  2014-01-01:
+    value: 0.119
+  2020-01-01:
+    value: 0.54
+  2022-01-01:
+    value: null
+metadata:
+  short_label: Taux réduit (travaux agricoles)
+  last_value_still_valid_on: "2025-02-21"
+  ipp_csv_id: ticgn_taux_reduit_agricole
+  unit: currency_per_mwh
+  reference:
+    2013-01-01:
+      title: LOI n° 2013-1278 du 29 décembre 2013 de finances pour 2014, article 32 II B
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000028399511
+    2014-01-01:
+      title: LOI n° 2013-1278 du 29 décembre 2013 de finances pour 2014, article 32 II B
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000028399511
+    2020-01-01:
+      title: LOI n° 2019-1479 du 28 décembre 2019 de finances pour 2020, article 67 V
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000039683923
+    2022-01-01:
+      title: Ordonnance n° 2021-1843 du 22 décembre 2021 portant partie législative du code des impositions sur les biens et services et transposant diverses normes du droit de l'Union européenne
+      href: https://www.legifrance.gouv.fr/eli/ordonnance/2021/12/22/ECOE2120672R/jo/texte
+  official_journal_date:
+    2013-01-01: "2013-12-30"
+    2014-01-01: "2013-12-30"
+    2020-01-01: "2019-12-29"
+    2022-01-01: "2021-12-29"
+  notes:
+    2013-01-01:
+    - title: En 2013, le taux réduit de taxe existe sous la forme d'un remboursement au taux explicité dans la loi (1,071 €/MWh). Par souci de concision, cohérence et lisibilité, on reporte ici le taux *calculé* du reste à charge après remboursement.
+    2014-01-01:
+    - title: De 2014 à 2022, le taux réduit pour les activités de travaux agricoles et forestiers existe sous la forme d'un remboursement. Le taux de ce remboursement varie et est égal à la différence entre le taux normal de TICGN et une valeur cible (0,119 à partir de 2014, 0,54 à partir de 2020). Des instructions ministérielles (SG/SASFL/SDABC/2015-542, SG/SASFL/SDABC/2016-433, SG/SAFSL/SDABC/2017-416, SG/SAFSL/SDABC/2018-434, SG/SAFSL/SDABC/2019-455, SG/SAFSL/SDABC/2020-326, SG/SAFSL/SDABC/2021-560, SG/SAFSL/SDABC/2022-260, SG/SAFSL/SDABC/2023-76) précisent le montant des remboursements. Ceux ci s'élèvent, pour le gaz naturel, à 1,151 pour 2014, 2,521 en 2015, 4,221 pour 2016, 5,761 pour 2017, 8,331 pour 2018 et 2019, 7,91 en 2020 (4,69 quand il est utilisé comme carburant), 7,89 en 2021  (4,69 quand il est utilisé comme carburant), 7,87 en 2022  (4,69 quand il est utilisé comme carburant), 7,83 en 2023  (4,69 quand il est utilisé comme carburant). Par souci de concision, cohérence et lisibilité, on retient la valeur cible comme étant le taux réduit ; c'est la valeur du "reste à charge" de taxe pour l'exploitant.
+    2022-01-01:
+    - title: La TICGN disparaît au profit de l'accise sur les énergies (CIBS).

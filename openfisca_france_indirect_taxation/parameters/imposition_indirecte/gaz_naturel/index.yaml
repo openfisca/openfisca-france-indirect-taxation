@@ -1,0 +1,11 @@
+description: Taxes sur la consommation de gaz naturel
+metadata:
+  label_en: Taxes on natural gas consumption
+  reference:
+    title: Code de l'imposition des biens et services
+  order:
+  - accise
+  - ticgn
+  - ctssg
+  - cspg
+  - cta

@@ -1,0 +1,13 @@
+description: Taxes locales sur la consommation finale d'électricité
+metadata:
+  label_en: Local government electricity taxes
+  order:
+  - tarif_non_professionnel
+  - tarif_professionnel_36kVA_et_moins
+  - tarif_professionnel_36_a_250kVA
+  - tdcfe
+  - tccfe
+documentation: |-
+  Les taxes locales (communale et départementale) sur la consommation finale d'électricité sont calculées en appliquant un coefficient voté par chaque collectivité territoriale, et encadré par la loi (un minimum et un maximum), à trois tarifs communs (un tarif non-professionnel, et deux tarifs professionnels). 
+  Ces taxes disparaissent en 2022 et 2023 où elles sont intégrées à la fraction de l'accise sur les énergies prélevées sur l'électricité.
+  Les textes de références sont les articles L2333-2 et L2333-3 (TCCFE), et L3333-2 et L3333-3 (TDCFE) du Code des collectivités territoriales.

@@ -1,0 +1,15 @@
+description: Taux réduits de la taxe intérieure sur la consommation finale d'électricité
+metadata:
+  label_en: Reduced rates for national electricity tax
+  order:
+  - electrointensives
+  - secteur_risque_fuite
+  - transport
+  - aerodromes
+  - data_center
+  - manutention_portuaire
+documentation: |-
+  La TICFE est créée en 2011. 
+  En 2016, CSPE et TICFE fusionnent sous une appellation hybride. 
+  En 2022/2023, les TCFE disparaissent et sont intégrées à la TICFE, qui accepte alors des taux normaux différenciés selon les types de consommateurs (professionnels, petits professionnels et non-professionnels). 
+  En 2022, la TICFE est également renommée et réorganisée sous le nom de fraction de l'accise sur l'énergie, et re-codifiée au sein du nouvellement créé Code des impositions des biens et services.

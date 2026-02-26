@@ -1,0 +1,27 @@
+description: Taxe intérieure sur la consommation finale d'électricité pour les personnes exerçant une activité de transport de personnes et de marchandises par train, métro, tramway, câble et trolleybus
+values:
+  2016-01-01:
+    value: 0.5
+  2022-01-01:
+    value: null
+metadata:
+  short_label: TICFE transports
+  last_value_still_valid_on: "2025-02-24"
+  label_en: Domestic tax on final electricity consumption (TICFE) for transport sector
+  ipp_csv_id: ticfe_transport
+  unit: currency_per_mwh
+  reference:
+    2016-01-01:
+      title: article 14 de la loi n° 2015-1786 du 29 décembre 2015 de finances rectificative pour 2015
+      href: https://www.legifrance.gouv.fr/eli/loi/2015/12/29/FCPX1525022L/jo/texte
+    2022-01-01:
+    - title: article L312-48 du Code des impositions des biens et services
+      href: https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044875774
+    - title: Ordonnance n° 2021-1843 du 22 décembre 2021 portant partie législative du code des impositions sur les biens et services et transposant diverses normes du droit de l'Union européenne
+      href: https://www.legifrance.gouv.fr/eli/ordonnance/2021/12/22/ECOE2120672R/jo/texte
+  official_journal_date:
+    2016-01-01: "2015-12-30"
+    2022-01-01: "2021-12-29"
+documentation: |-
+  Au 1er janvier 2017, le bénéfice de ce taux réduit est étendu aux autobus hybrides rechargeables ou électriques (article 27 de la loi n° 2016-1917 du 29 décembre 2016 de finances pour 2017). 
+  Au 1er janvier 2022, la réglementation ne change pas, mais est déplacée dans le Code des impositions des biens et services. On signale ce changement majeur.

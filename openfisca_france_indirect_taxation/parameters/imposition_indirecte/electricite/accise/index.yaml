@@ -1,0 +1,8 @@
+description: Fraction de l'accise sur les énergies perçue sur l'électricité
+metadata:
+  label_en: Fraction of energy excise duty levied on electricity
+  order:
+  - tarifs_normaux
+  - tarifs_reduits
+  - renouvelable_autoconsommee
+  - bouclier_tarifaire

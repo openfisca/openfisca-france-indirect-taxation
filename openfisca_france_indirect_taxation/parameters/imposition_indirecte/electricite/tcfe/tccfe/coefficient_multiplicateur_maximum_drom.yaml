@@ -1,0 +1,35 @@
+description: Taxe communale sur la consommation finale d'électricité pour les syndicats intercommunaux situés hors du territoire métropolitain
+values:
+  2011-01-01:
+    value: 12
+  2016-01-01:
+    value: 12
+  2021-01-01:
+    value: 12
+  2023-01-01:
+    value: null
+metadata:
+  short_label: Coefficient maximal TCCFE pour syndicats intercommunaux hors métropole
+  last_value_still_valid_on: "2025-02-21"
+  label_en: Maximal coefficient for communal tax on final electricity consumption (TCCFE), for intercommunal unions outside metropolitan France
+  ipp_csv_id: tccfe_coef_max
+  unit: /1
+  reference:
+    2011-01-01:
+      title: article 23, III de la lOI n° 2010-1488 du 7 décembre 2010 portant nouvelle organisation du marché de l'électricité
+      href: https://www.legifrance.gouv.fr/eli/loi/2010/12/7/EFIX1007918L/jo/article_23
+    2016-01-01:
+      title: article 37 de la LOI n° 2014-1655 du 29 décembre 2014 de finances rectificative pour 2014
+      href: https://www.legifrance.gouv.fr/eli/loi/2014/12/29/FCPX1425969L/jo/texte
+    2021-01-01:
+      title: article 54 de la loi n°2020-1721 du 29 décembre 2020 de finances pour 2021
+      href: https://www.legifrance.gouv.fr/eli/loi/2020/12/29/ECOX2023814L/jo/texte
+    2023-01-01:
+      title: article 54, III de la loi n°2020-1721 du 29 décembre 2020 de finances pour 2021
+      href: https://www.legifrance.gouv.fr/eli/loi/2020/12/29/ECOX2023814L/jo/texte
+  official_journal_date:
+    2011-01-01: "2010-12-08"
+    2016-01-01: "2014-12-30"
+    2021-01-01: "2020-12-30"
+    2023-01-01: "2020-12-30"
+documentation: Les syndicats intercommunaux situés hors du territoire métropolitain peuvent depuis 2011 fixer le coefficient multiplicateur jusqu'à 12 (et non le seuil applicable en métropole), et affectent alors le surplus à des opérations de maîtrise de la demande d'énergie concernant les consommateurs domestiques.

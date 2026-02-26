@@ -1,0 +1,6 @@
+description: Fraction de l'accise sur les énergies perçue sur les gaz naturels utilisés comme combustibles
+metadata:
+  label_en: Fraction of energy excise duty levied on natural gases used as heating fuels
+  order:
+  - tarif_normal
+  - tarifs_reduits

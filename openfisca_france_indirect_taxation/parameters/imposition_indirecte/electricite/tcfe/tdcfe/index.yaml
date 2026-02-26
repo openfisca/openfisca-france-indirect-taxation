@@ -1,0 +1,11 @@
+description: Coefficients multiplicateurs pour la taxe départementale sur la consommation finale d'électricité
+metadata:
+  label_en: Departmental electricity taxes' coefficients
+  order:
+  - coefficient_multiplicateur_minimum
+  - coefficient_multiplicateur_maximum
+documentation: |-
+  La TDCFE est calculée en appliquant un coefficient, choisi par le conseil départemental, à un tarif de référence (identique à celui de la TCCFE). 
+  A la création du dispositif en 2011, le conseil départemental choisi un coefficient librement entre 2 et 4, qui en l'absence de vote explicite, est actualisé chaque année au rythme de l'inflation des prix hors tabac. 
+  A partir de 2016, il choisit entre 3 valeurs possibles (2, 4, 4.25) et c'est le tarif auquel est appliqué ce coefficient qui est désormais actualisé chaque année au rythme de l'inflation des prix hors tabac. 
+  En 2021, un coefficient unique de 4.25 est appliquée à tous les départements. En 2022, la TDCFE disparaît et est incorporée à l'accise sur l'électricité.

@@ -1,0 +1,14 @@
+description: Bouclier tarifaire s'appliquant à la taxation de l'électricité au cours des années 2022/2025.
+metadata:
+  order:
+  - menages
+  - entreprises
+  - majoration_tccfe_maximum
+  - majoration_tccfe_minimum
+documentation: |-
+  Le premier bouclier tarifaire mis en place suite à l'invasion russe en Ukraine est voté dans la loi de finances pour 2022 pour la période de février 2022 à janvier 2023.
+  Il s'applique à une TICFE qui au moment de son instauration n'a pas encore intégré la TCCFE (qui disparaît au premier janvier 2023).
+  Pour calculer la taxation totale s'appliquant aux consommations d'électricité sur la période du 1er février au 31 décembre 2022, il s'agit donc de prendre en compte la TICFE "avec bouclier" à 1 euro/MWh, et de lui ajouter la TCCFE encore en vigueur.
+  En revanche, du 1er janvier au 31 janvier 2023, la TICFE "avec bouclier" est majorée du fait de l'intégration de la TCCFE, par un taux correspondant au taux de TCCFE en vigueur l'année précédente (2022).
+  A noter que la "Notice N°52362#04 pour remplir la N° 2040-TIC-SD" mentionne les 6 taux possibles correspondant aux six valeurs historiques possibles du coefficient multiplicateur pour la TCCFE ; mais que s'appliquent en 2022 des restrictions sur les valeurs prises par la TCCFE qui contraignent les coefficients à être choisis parmi les trois valeurs les plus élevées seulement (6, 8, 8.5), dans un objectif de convergence intercommunale avant l'intégration de la TCCFE dans la TICFE.
+  Au 1er février 2023, le renouvellement du bouclier tarifaire s'applique à la TICFE en vigueur à cette date, c'est-à-dire une TICFE ayant déjà incorporé la majoration TCCFE. La somme des taxes sur l'électricité est donc abaissée à 1 euro/MWh à cette date, et jusqu'au 31 janvier 2024.

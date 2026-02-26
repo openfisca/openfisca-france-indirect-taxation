@@ -1,0 +1,12 @@
+description: Contribution tarifaire d'acheminement (pour le gaz naturel)
+metadata:
+  label_en: Taxes on natural gas transport and distribution
+  order:
+  - transport
+  - distribution
+documentation: |-
+  La contribution tarifaire d'acheminement du gaz (et de l'électricité) est instituée par l'article 18 de la loi n° 2004-803 du 9 août 2004 relative au service public de l'électricité et du gaz et aux entreprises électriques et gazières (https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000787077). 
+  Elle finance le régime de retraites des fournisseurs d'énergies (https://www.cnieg.fr/accueil/entreprise/cta/informations-cta.html). 
+  Un arrêté de 2005 confirme les valeurs pour les prestations de transport (le taux pour les prestations de distribution est modifié). 
+  cf. arrêté du 29 décembre 2005 relatif aux taux de la contribution tarifaire sur les prestations de transport et de distribution d'électricité et de gaz naturel.
+  Un arrêté de 2021 confirme les valeurs pour le gaz de 2013 (les taux concernant l'électricité sont modifiés); cf. arrêté du 20 juillet 2021 relatif aux taux de la contribution tarifaire sur les prestations de transport et de distribution d'électricité et de gaz naturel.

@@ -1,0 +1,15 @@
+description: Coefficients multiplicateurs pour la taxe communale sur la consommation finale d'électricité
+metadata:
+  label_en: Municipal electricity taxes' coefficients
+  order:
+  - coefficient_multiplicateur_minimum
+  - coefficient_multiplicateur_maximum
+  - coefficient_multiplicateur_minimum_drom
+  - coefficient_multiplicateur_maximum_drom
+documentation: |-
+  La TCCFE est calculée en appliquant un coefficient, choisi par le conseil municipal, à un tarif de référence (identique à celui de la TDCFE). 
+  A la création du dispositif en 2011, le conseil municipal (ou syndicat intercommunal lorsqu'existant et compétent pour organiser la distribution publique d'électricité) choisi un coefficient librement entre 0 et 8 (0 et 12 pour les syndicats intercommunaux hors du territoire métropolitain), qui en l'absence de vote explicite, est actualisé chaque année au rythme de l'inflation des prix hors tabac.
+  A partir de 2016, il choisit entre 6 valeurs possibles (0, 2, 4, 6, 8, 8.5), ou 8 valeurs possibles (0, 2, 4, 6, 8, 8.5, 10, 12) pour les syndicats intercommunaux hors du territoire métropolitain.
+  A partir de la même date, c'est le tarif auquel est appliqué ce coefficient qui est désormais actualisé chaque année au rythme de l'inflation des prix hors tabac. 
+  A partir de 2021, les coefficients municipaux sont progressivement homogénéisés à la hausse (minimum à 4, puis 6). 
+  En 2023, la TCCFE disparaît et est incorporée à l'accise sur l'électricité, avec implicitement une valeur du coefficient unique homogène de 8.5.

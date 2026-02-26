@@ -1,0 +1,12 @@
+description: Taxe intérieure sur la consommation finale d'électricité applicable aux installations industrielles électro-intensives et relevant de certains secteurs d'activité exposés à la concurrence internationale
+metadata:
+  label_en: Taxes on electricity for energy-intensive industrial operations
+  order:
+  - risque_fuite_1_5_kwh_euro_et_moins
+  - risque_fuite_1_5_a_3kwh_euro
+  - risque_fuite_3kwh_euro_et_plus
+documentation: |-
+  Une installation industrielle est (ici) considérée électro-intensive si au niveau de l'entreprise ou de ses sites, le montant de la taxe qui aurait été due en application du B, sans application des exonérations et exemptions, est au moins égal à 0,5 % de la valeur ajoutée. 
+  Est considérée comme exposée à un risque important de fuite de carbone en raison des coûts des émissions indirectes une installation dont l'activité relève de l'un des secteurs ou sous-secteurs mentionnés à l'annexe II de la communication 2012/ C 158/04 de la Commission relative aux lignes directrices concernant certaines aides d'Etat dans le contexte du système d'échange de quotas d'émission de gaz à effet de serre après 2012.
+  Avant le 1er janvier 2022, les seuils de remise de taxe étaient en euros qui auraient été dépensés en TICFE au taux normal par euro de valeur ajoutée.
+  Au 1er janvier 2022, les seuils restent identiques, mais leur unité devient directement le pourcentage de la valeur ajoutée que représenterait la taxe au taux normal. Cette taxe étant restée constante sur la période, les seuils effectifs restent inchangés.

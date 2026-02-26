@@ -1,0 +1,6 @@
+description: Taxes sur les charbons (houilles, lignites, cokes)
+metadata:
+  label_en: Taxes on coal
+  order:
+  - accise
+  - ticc

@@ -1,0 +1,17 @@
+description: Tarif réduit de l'accise sur l'électricité, applicable à l'électricité consommée par les entreprises pour les besoins de la manutention portuaire
+values:
+  2023-01-01:
+    value: 0.5
+metadata:
+  short_label: Accise électricité pour manutention portuaire
+  last_value_still_valid_on: "2025-02-15"
+  label_en: Excise duty on electricity for port handling
+  ipp_csv_id: accise_electricite_ports
+  unit: currency_per_mwh
+  reference:
+    2023-01-01:
+      title: Article 37 de l'ordonnance n° 2021-1843 du 22 décembre 2021 portant partie législative du code des impositions sur les biens et services et transposant diverses normes du droit de l'Union européenne
+      href: https://www.legifrance.gouv.fr/eli/ordonnance/2021/12/22/ECOE2120672R/jo/texte
+  official_journal_date:
+    2023-01-01: "2021-12-29"
+documentation: Taxe applicable applicable à l'électricité consommée par les entreprises pour les besoins de la manutention portuaire dans l'enceinte des ports mentionnés au 2° du II de l'article 265 octies C, lorsque cette consommation est supérieure à 222 wattheures par euro de valeur ajoutée.

@@ -1,0 +1,15 @@
+description: Accise sur l'électricité, tarifs réduits
+metadata:
+  label_en: Taxes on electricity
+  order:
+  - aerodromes
+  - alimentation_engins_flottants
+  - data_center
+  - doubles_usages
+  - fabrication_mineraux
+  - manutention_portuaire
+  - production_biens_intensive
+  - production_navires
+  - transport_collectif_routier_personnes
+  - transport_personnes_marchandises
+  - electrointensives

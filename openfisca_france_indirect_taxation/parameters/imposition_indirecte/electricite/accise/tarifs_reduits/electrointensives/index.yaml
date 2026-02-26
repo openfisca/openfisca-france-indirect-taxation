@@ -1,0 +1,18 @@
+description: Tarifs réduits de l'accise sur l'électricité, applicables à certaines installations industrielles électro-intensives
+metadata:
+  label_en: Taxes on electricity for energy-intensive industrial operations
+  order:
+  - industrie_0_5
+  - industrie_3_375
+  - industrie_6_75
+  - industrie_concurrence_0_5
+  - industrie_concurrence_3_375
+  - industrie_concurrence_6_75
+  - industrie_concurrence_13_5
+documentation: |-
+  Une installation industrielle est (ici) considérée électro-intensive si au niveau de l'entreprise ou de ses sites, le montant de la taxe qui aurait été due hors minoration, sans application des exonérations et exemptions, est au moins égal à 0,5 % de la valeur ajoutée.
+  Avant le 1er janvier 2022, les seuils de remise de taxe étaient en euros qui auraient été dépensés en TICFE au taux normal par euro de valeur ajoutée.
+  Au 1er janvier 2022, les seuils restent identiques, mais leur unité devient directement le pourcentage de la valeur ajoutée que représenterait la taxe au taux normal. Cette taxe étant restée constante sur la période, les seuils effectifs restent inchangés.
+
+  Pour les entreprises au niveau d'électro-intensivité supérieur à 13.5% et relevant de certains secteurs d'activité exposés à la concurrence internationale, l'application de la taxe réduite est subordonnée à la réalisation d'au moins une activité exposée à un risque important de fuite de carbone et dont l'intensité des échanges avec les pays tiers et au moins égale à 25%.
+  Pour les autres entreprises électro-intensives, en plus du niveau d'électro-intensivité, l'application de la taxe pour les industries inclut des conditions de secteur d'activité précisées aux article L312-71 et L312-72 du Code d'imposition sur les biens et services.

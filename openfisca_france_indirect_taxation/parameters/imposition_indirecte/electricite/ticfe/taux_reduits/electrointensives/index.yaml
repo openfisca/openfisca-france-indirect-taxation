@@ -1,0 +1,12 @@
+description: Taxe intérieure sur la consommation finale d'électricité applicable aux installations industrielles électro-intensives
+metadata:
+  label_en: Taxes on electricity for energy-intensive industrial operations
+  order:
+  - electrointensive_1_5_kwh_euro_et_moins
+  - electrointensive_1_5_a_3kwh_euro
+  - electrointensive_3kwh_euro_et_plus
+  - hyperelectrointensive
+documentation: |-
+  Une installation industrielle est (ici) considérée électro-intensive si au niveau de l'entreprise ou de ses sites, le montant de la taxe qui aurait été due hors minoration, sans application des exonérations et exemptions, est au moins égal à 0,5 % de la valeur ajoutée.
+  Avant le 1er janvier 2022, les seuils de remise de taxe étaient en euros qui auraient été dépensés en TICFE au taux normal par euro de valeur ajoutée.
+  Au 1er janvier 2022, les seuils restent identiques, mais leur unité devient directement le pourcentage de la valeur ajoutée que représenterait la taxe au taux normal. Cette taxe étant restée constante sur la période, les seuils effectifs restent inchangés.

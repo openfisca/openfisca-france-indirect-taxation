@@ -1,0 +1,14 @@
+description: Taxes sur la consommation finale d'électricité
+metadata:
+  label_en: Taxes on electricity consumption
+  order:
+  - accise
+  - cta
+  - ticfe
+  - tcfe
+  - cspe
+documentation: |-
+  Aux différents dispositifs décrits dans cette section il faut, pour obtenir une image complète de la taxation de l'électricité, ajouter l'observation suivante :
+  La TVA s'appliquant à la consommation d'électricité n'est pas homogène. 
+  L'abonnement (le tarif de base) est soumis au taux réduit de 5,5% alors que la consommation variable est elle soumise au taux normal de 20%.
+  Au 1er janvier 2022, la TICFE est transférée et re-codifiée dans le Code des impositions des biens et services, sous le nom de fraction de l'accise sur les énergies prélevée sur l'électricité.

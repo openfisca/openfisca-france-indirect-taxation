@@ -1,0 +1,6 @@
+description: Fraction de l'accise sur les énergies perçue sur les charbons
+metadata:
+  label_en: Fraction of energy excise duty levied on coal
+  order:
+  - tarif_normal
+  - tarifs_reduits

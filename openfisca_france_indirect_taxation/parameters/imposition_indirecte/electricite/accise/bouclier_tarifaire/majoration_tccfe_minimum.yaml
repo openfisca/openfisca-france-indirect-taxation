@@ -1,0 +1,25 @@
+description: Bouclier tarifaire - tarification exceptionnelle de la TICFE - Majoration TCCFE minimum
+values:
+  2023-01-01:
+    value: 1.56
+  2023-02-01:
+    value: null
+metadata:
+  short_label: Bouclier tarifaire majoration exceptionnelle TCCFE min
+  last_value_still_valid_on: "2025-02-15"
+  label_en: "Tax shield: exceptional exceptional increase of minimal TCCFE"
+  ipp_csv_id: ticfe_bouclier_maj_tccfe_min
+  unit: currency_per_mwh
+  reference:
+    2023-01-01:
+      title: Décret n° 2022-84 du 28 janvier 2022 relatif à la minoration des tarifs de l'accise sur l'électricité prévue à l'article 29 de la loi n° 2021-1900 du 30 décembre 2021 de finances pour 2022
+      href: https://www.legifrance.gouv.fr/eli/decret/2022/1/28/ECOE2138271D/jo/texte
+    2023-02-01:
+      title: article 64 de la loi n°2022-1726 du 30 décembre 2022 de finances pour 2023
+      href: https://www.legifrance.gouv.fr/eli/loi/2022/12/30/ECOX2225087L/jo/article_64
+  official_journal_date:
+    2023-01-01: "2022-01-30"
+    2023-02-01: "2022-12-31"
+  notes:
+    2023-01-01:
+    - title: Ce montant est égal au plus petit des tarifs de la taxe locale sur la consommation finale d'électricité multiplié par le coefficient minimal applicable au niveau communal, soit 0,26*6

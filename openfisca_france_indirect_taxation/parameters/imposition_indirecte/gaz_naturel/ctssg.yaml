@@ -1,0 +1,55 @@
+description: Contribution au tarif spécial de solidarité gaz (CTSSG)
+values:
+  2008-01-01:
+    value: 0.026
+  2009-01-01:
+    value: 0.089
+  2010-01-01:
+    value: 0.045
+  2013-01-01:
+    value: 0.1
+  2014-01-01:
+    value: 0.2
+  2016-01-01:
+    value: null
+metadata:
+  short_label: CTSSG
+  last_value_still_valid_on: "2025-02-21"
+  label_en: Contribution to the Special Solidarity Gas Tariff (CTSSG)
+  ipp_csv_id: ctssg
+  unit: currency_per_mwh
+  reference:
+    2008-01-01:
+      title: Arrêté du 17 décembre 2008 fixant les montants des charges imputables à l'obligation de service public de fourniture de gaz naturel au tarif spécial de solidarité et les taux de la contribution unitaire pour les années 2008 et 2009
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000020008918
+    2009-01-01:
+      title: Arrêté du 17 décembre 2008 fixant les montants des charges imputables à l'obligation de service public de fourniture de gaz naturel au tarif spécial de solidarité et les taux de la contribution unitaire pour les années 2008 et 2009
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000020008918
+    2010-01-01:
+      title: Arrêté du 28 octobre 2009 fixant les montants des charges imputables à l'obligation de service public de fourniture de gaz naturel au tarif spécial de solidarité et les taux de la contribution unitaire pour l'année 2010
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000021254032
+    2013-01-01:
+      title: Arrêté du 12 décembre 2012 fixant le montant des charges imputables à l'obligation de service public de fourniture de gaz naturel au tarif spécial de solidarité et le taux de la contribution unitaire pour l'année 2013
+      href: https://www.legifrance.gouv.fr/loda/id/JORFTEXT000026856074
+    2014-01-01:
+      title: Arrêté du 10 décembre 2013 fixant le montant des charges imputables à l'obligation de service public de fourniture de gaz naturel au tarif spécial de solidarité et le taux de la contribution unitaire pour l'année 2014
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000028339475
+    2016-01-01:
+      title: Décret n° 2016-158 du 18 février 2016 relatif à la compensation des charges de service public de l'énergie, article 5
+      href: https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000032074515
+  official_journal_date:
+    2008-01-01: "2008-12-30"
+    2009-01-01: "2008-12-30"
+    2010-01-01: "2009-11-11"
+    2013-01-01: "2012-12-29"
+    2014-01-01: "2013-12-19"
+    2016-01-01: "2016-02-19"
+  notes:
+    2008-01-01:
+    - title: Le montant de la contribution est fixé en c€/kWh jusqu'en 2013, où il est fixé en €/MWh ; par souci de concision et de lisibilité, on convertit ici en €/MWh.
+    2010-01-01:
+    - title: Des arrêtés sont pris pour la fixation des charges totales, sans mention des tarifs par kWh, pour 2011 (Arrêté du 23 mars 2011 fixant le montant des charges imputables à l'obligation de service public de fourniture de gaz naturel au tarif spécial de solidarité pour l'année 2011) et 2012 (Arrêté du 25 janvier 2012 fixant le montant des charges imputables à l'obligation de service public de fourniture de gaz naturel au tarif spécial de solidarité pour l'année 2012).
+    2014-01-01:
+    - title: Un arrêté reconduit la valeur de 2014 en 2015 (Arrêté du 12 décembre 2014 fixant le montant des charges imputables à l'obligation de service public de fourniture de gaz naturel au tarif spécial de solidarité et le taux de la contribution unitaire pour l'année 2015).
+    2016-01-01:
+    - title: La CTSSG (comme la CSPG) est intégrée à la TICGN à compter de 2016.

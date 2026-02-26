@@ -1,0 +1,11 @@
+description: Taxe intérieure de consommation sur le gaz naturel (TICGN)
+metadata:
+  label_en: Taxes on natural gas consumption
+  order:
+  - taux_normal
+  - taux_reduits
+  - abattement
+  - seuil_exoneration
+documentation: |-
+  Au 1er janvier 2022, la taxe intérieure de consommation sur le gaz naturel (TICGN) devient la fraction prélevée sur le gaz naturel de l'accise sur l'énergie. 
+  Le Code de l'imposition des biens et services est créé, et absorbe les articles du code des douanes pertinents.

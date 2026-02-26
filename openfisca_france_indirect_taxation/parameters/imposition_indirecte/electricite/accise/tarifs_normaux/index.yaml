@@ -1,0 +1,7 @@
+description: Tarifs normaux de la fraction de l'accise sur les énergies perçue sur l'électricité
+metadata:
+  label_en: Taxes on coal
+  order:
+  - menages_et_assimiles
+  - pme_activites_economiques
+  - haute_puissance

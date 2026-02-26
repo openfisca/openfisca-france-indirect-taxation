@@ -1,0 +1,13 @@
+description: Tarifs réduits de l'accise sur les gaz naturels utilisés comme combustibles
+metadata:
+  order:
+  - aeronautique_naval
+  - deshydratation
+  - doubles_usages
+  - fabrication_mineraux
+  - intensive_energie_indirect_SEQE
+  - intensive_energie_SEQE
+  - navigation_aerienne
+  - navigation_interieure
+  - navigation_maritime
+  - travaux_agricoles_forestiers
