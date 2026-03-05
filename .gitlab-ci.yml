@@ -39,17 +39,18 @@ Build survey collections:
     - cp ./runner/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
     - cp ./runner/openfisca_survey_manager_config.ini ~/.config/openfisca-survey-manager/config.ini
     - mkdir -p /root/ci-files/data_collections
-    - pip3 install -e .[dev]
+    - pip3 install uv
+    - uv sync --all-extras
     - cat ~/.config/openfisca-survey-manager/raw_data.ini
   script:
     - cat ~/.config/openfisca-survey-manager/raw_data.ini
-    - build-collection -c budget_des_familles -d -m -s 2017 -p ~/.config/openfisca-survey-manager
-    - build-collection -c budget_des_familles -d -s 2011 -p ~/.config/openfisca-survey-manager
-    - build-collection -c budget_des_familles -d -s 2005 -p ~/.config/openfisca-survey-manager
-    # - build-collection -c aliss -m -d
-    - build-collection -c enquete_logement -d -m -s 2013 -p ~/.config/openfisca-survey-manager
-    - build-collection -c enquete_transports -d -m -s 2008 -p ~/.config/openfisca-survey-manager
-    - build-collection -c erfs_fpr -d -m -s 2013 -p ~/.config/openfisca-survey-manager
+    - uv run build-collection -c budget_des_familles -d -m -s 2017 -p ~/.config/openfisca-survey-manager
+    - uv run build-collection -c budget_des_familles -d -s 2011 -p ~/.config/openfisca-survey-manager
+    - uv run build-collection -c budget_des_familles -d -s 2005 -p ~/.config/openfisca-survey-manager
+    # - uv run build-collection -c aliss -m -d
+    - uv run build-collection -c enquete_logement -d -m -s 2013 -p ~/.config/openfisca-survey-manager
+    - uv run build-collection -c enquete_transports -d -m -s 2008 -p ~/.config/openfisca-survey-manager
+    - uv run build-collection -c erfs_fpr -d -m -s 2013 -p ~/.config/openfisca-survey-manager
     - cp ~/.config/openfisca-survey-manager/config.ini  /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config.ini
   when: manual
 
@@ -60,12 +61,13 @@ Build matched data:
     - data-in
   before_script:
     - mkdir -p ~/.config/openfisca-survey-manager
-    - pip3 install -e .[dev]
+    - pip3 install uv
+    - uv sync --all-extras
     - cp ./runner/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
     - cp /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config.ini ~/.config/openfisca-survey-manager/config.ini
     - mkdir -p /root/ci-files/data_collections
   script:
-    - build-survey-data -v -p ~/.config/openfisca-survey-manager
+    - uv run build-survey-data -v -p ~/.config/openfisca-survey-manager
     - cp ~/.config/openfisca-survey-manager/config.ini /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config_with_matched_data.ini
 
   when: manual
@@ -77,12 +79,13 @@ Test_YAML_Carburants:
     - data-in
   before_script:
     - mkdir -p ~/.config/openfisca-survey-manager
-    - pip3 install -e .[dev]
+    - pip3 install uv
+    - uv sync --all-extras
     - cp ./runner/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
     - cp /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config_with_matched_data.ini ~/.config/openfisca-survey-manager/config.ini
     - mkdir -p /root/ci-files/data_collections
   script:
-    - openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/*carbu*
+    - uv run openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/*carbu*
 
 
 Test_All:
@@ -92,7 +95,8 @@ Test_All:
     - data-in
   before_script:
     - mkdir -p ~/.config/openfisca-survey-manager
-    - pip3 install -e .[dev]
+    - pip3 install uv
+    - uv sync --all-extras
     - cp ./runner/openfisca_survey_manager_raw_data.ini ~/.config/openfisca-survey-manager/raw_data.ini
     - cp /mnt/data-out/openfisca-france-indirect-taxation/openfisca_survey_manager_config_with_matched_data.ini ~/.config/openfisca-survey-manager/config.ini
     - mkdir -p /root/ci-files/data_collections
