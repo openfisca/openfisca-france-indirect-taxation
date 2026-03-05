@@ -93,8 +93,8 @@ jobs:
       - name: Cleaning
         run: make clean
       - name: Test carburants YAML
-        run: openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/*carbu*
+        run: uv run openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/*carbu*
       - name: Test carburants Python
-        run: make clean && pytest openfisca_france_indirect_taxation/tests/test_preprocessing_metadata.py
+        run: make clean && uv run pytest openfisca_france_indirect_taxation/tests/test_preprocessing_metadata.py
         # - name: Test TVA
-      #   run: openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/tva.yaml
+      #   run: uv run openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/tva.yaml
