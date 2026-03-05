@@ -39,7 +39,6 @@ dependencies:
   - diff-match-patch=20200713=pyhd3eb1b0_0
   - docutils=0.17.1=py39haa95532_1
   - entrypoints=0.3=py39haa95532_0
-  - flake8=3.9.0=pyhd3eb1b0_0
   - fonttools=4.25.0=pyhd3eb1b0_0
   - freetype=2.10.4=hd328e21_0
   - future=0.18.2=py39haa95532_1

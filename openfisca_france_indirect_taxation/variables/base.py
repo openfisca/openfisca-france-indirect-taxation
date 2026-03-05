@@ -224,7 +224,10 @@ def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, 
                 tva_str = 'taux_particulier_super_reduit'
             elif tva_str == 'taux_plein':
                 tva_str = 'taux_normal'
-            taux = parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[tva_str]
+            try:
+                taux = parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[tva_str]
+            except Exception:
+                taux = 0.0
         else:
             taux = 0
 

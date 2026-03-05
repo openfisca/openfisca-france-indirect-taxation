@@ -22,9 +22,9 @@ def test_reforme_alimentation():
             birth = datetime.date(year - 40, 1, 1),
             ),
         menage = dict(
-            poste_06_1_1_1_1 = 100,  # tva_taux_super_reduit mais non imposé dans réforme
-            poste_09_5_2_1_1 = 100,  # tva_taux_super_reduit
-            poste_02_1_2_1_1 = 100,  # vin mais non imposé dans réforme (catégorie fiscale inexistante)
+            poste_06_1_1_1 = 100,  # tva_taux_super_reduit mais non imposé dans réforme
+            poste_09_5_2_1 = 100,  # tva_taux_super_reduit
+            poste_02_1_2_1 = 100,  # vin mais non imposé dans réforme (catégorie fiscale inexistante)
             ),
         )
     reform_simulation = scenario.new_simulation(debug = True)

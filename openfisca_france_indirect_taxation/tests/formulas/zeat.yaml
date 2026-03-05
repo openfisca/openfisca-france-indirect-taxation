@@ -1,5 +1,5 @@
 - name: "DOM"
-  period: "2011"
+  period: "2011-01"
   absolute_error_margin: .1
   input:
     zeat: dom
@@ -7,7 +7,7 @@
     zeat: dom
 
 - name: "Paris"
-  period: "2005"
+  period: "2005-01"
   absolute_error_margin: .1
   input:
     zeat: region_parisienne

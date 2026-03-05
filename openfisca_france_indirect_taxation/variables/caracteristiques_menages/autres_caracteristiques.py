@@ -4,6 +4,7 @@
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
+
 class age_carte_grise(YearlyVariable):
     value_type = float
     entity = Menage
@@ -219,3 +220,13 @@ class TypesZeat(Enum):
     sud = 'sud-ouest',
     centre = 'centre-est',
     mediterrannee = 'mediterrannee'
+
+
+class zeat(Variable):
+    value_type = Enum
+    possible_values = TypesZeat
+    default_value = TypesZeat.bassin_parisien
+    entity = Menage
+    label = "Zone d'études et d'aménagement du territoire"
+    set_input = set_input_dispatch_by_period
+    definition_period = MONTH

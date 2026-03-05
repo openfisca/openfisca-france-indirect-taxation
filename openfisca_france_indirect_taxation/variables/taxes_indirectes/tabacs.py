@@ -44,9 +44,8 @@ class depenses_cigares(YearlyVariable):
     entity = Menage
     label = 'Dépenses de cigares'
 
-# Commente old coicoop nomenclature
-    # def formula(menage, period):
-    #     return menage('poste_02_2_2', period)
+    def formula(menage, period):
+        return menage('poste_02_3_1_2', period)
 
 
 class depenses_cigarettes(Variable):
@@ -56,9 +55,8 @@ class depenses_cigarettes(Variable):
     definition_period = MONTH
     set_input = set_input_divide_by_period
 
-# Commente old coicoop nomenclature
-    # def formula(menage, period):
-    #     return menage('poste_02_2_1', period, options = [DIVIDE])
+    def formula(menage, period):
+        return menage('poste_02_3_1_1', period, options = [DIVIDE])
 
 
 class depenses_tabac_a_rouler(Variable):
@@ -68,9 +66,8 @@ class depenses_tabac_a_rouler(Variable):
     definition_period = MONTH
     set_input = set_input_divide_by_period
 
-# Commente old coicoop nomenclature
-    # def formula(menage, period):
-    #     return menage('poste_02_2_3', period, options = [DIVIDE])
+    def formula(menage, period):
+        return menage('poste_02_3_1_3', period, options = [DIVIDE])
 
 
 class depenses_tabac(YearlyVariable):

@@ -34,7 +34,7 @@ def generate_depenses_ht_categories_fiscales_variables(tax_benefit_system, legis
         reference_categories = set(reference_categories).union(set(legislation_dataframe.categorie_fiscale.unique()))
 
     for categorie_fiscale in reference_categories:
-        if categorie_fiscale == '':
+        if str(categorie_fiscale) in ('', 'nan', 'None'):
             continue
 
         year_start = 1994
