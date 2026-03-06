@@ -202,7 +202,6 @@ dependencies:
   - zlib=1.2.11=h62dcd97_4
   - zstd=1.4.9=h19a0ad4_0
   - pip:
-    - autopep8==1.5.7
     - dpath==1.5.0
     - fancycompleter==0.9.1
     - ipdb==0.13.9

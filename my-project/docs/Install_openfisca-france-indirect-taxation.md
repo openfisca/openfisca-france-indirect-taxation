@@ -21,7 +21,7 @@
 ## Installer openfisca-france-indirect-taxation
 
 - se placer dans le dossier openfisca-france-indirect-taxation
-- `pip install -e .`
+- `uv sync`
 
 ## Configurer le chemin des données sources
 

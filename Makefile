@@ -12,7 +12,6 @@ install:
 build: clean install
 		@# Install OpenFisca-France-Indirect-Taxation for deployment and publishing.
 		uv build
-		find dist -name "*.whl" -exec uv pip install --upgrade {} \;
 
 check-syntax-errors:
 		uv run python -m compileall -q .
