@@ -5,22 +5,9 @@
 
 - git clone -b 'nomics-master' 'https://github.com/Hervedarr31/openfisca-france-indirect-taxation.git'
 
-## Créer et configurer un nouvel environnement virtuel
-
-### Option 1 : avec pyenv et pip
-
-- `py -3.9 -m venv openfiscaenv`
-- `myenv\Scripts\activate` <br>
-
-### Option 2 : avec conda et le fichier environment.yml
+## Créer. configurer et installer l'environnement virtuel avec uv
 
 - Se placer dans le dossier openfisca-france-indirect-taxation
-- modifier le fichier `environment.yml` pour indiquer le nom (name: openfiscaenv) et le chemin (ex: prefix : C:\Users\user1\miniconda3\envs)
-- `conda env create -f environment.yml`
-
-## Installer openfisca-france-indirect-taxation
-
-- se placer dans le dossier openfisca-france-indirect-taxation
 - `uv sync`
 
 ## Configurer le chemin des données sources
@@ -39,23 +26,23 @@ Toutes ces données sont présentes dans le dossier (`C:\Users\user1\OneDrive\Do
 
 Depuis le dossier "openfisca-france-indirect-taxation", lancer les scripts suivants :
 
-- `build-collection -c budget_des_familles -d -m -s 2011`
-- `build-collection -c budget_des_familles -d  -s 2017` #on a retiré le -m pour que le fichiers de métadonnées soit complété et non écrasé
+- `uv run build-collection -c budget_des_familles -d -m -s 2011`
+- `uv run build-collection -c budget_des_familles -d  -s 2017` #on a retiré le -m pour que le fichiers de métadonnées soit complété et non écrasé
 
-- `build-collection -c enquete_logement -d -m -s 2006`
-- `build-collection -c enquete_logement -d  -s 2013` #on a retiré le -m pour que le fichiers de métadonnées soit complété et non écrasé
-
-
-- `build-collection -c enquete_transports -d -m -s 2008`
-- `build-collection -c enquete_transports -d  -s 2019` #on a retiré les -m pour que le fichiers de métadonnées soit complété et non écrasé
+- `uv run build-collection -c enquete_logement -d -m -s 2006`
+- `uv run build-collection -c enquete_logement -d  -s 2013` #on a retiré le -m pour que le fichiers de métadonnées soit complété et non écrasé
 
 
-- `build-collection -c erfs_fpr -d -m -s 2015`
-- `build-collection -c erfs_fpr -d -s 2017` #on a retiré les -m pour que le fichiers de métadonnées soit complété et non écrasé
+- `uv run build-collection -c enquete_transports -d -m -s 2008`
+- `uv run build-collection -c enquete_transports -d  -s 2019` #on a retiré les -m pour que le fichiers de métadonnées soit complété et non écrasé
+
+
+- `uv run build-collection -c erfs_fpr -d -m -s 2015`
+- `uv run build-collection -c erfs_fpr -d -s 2017` #on a retiré les -m pour que le fichiers de métadonnées soit complété et non écrasé
 
 Lors de l'exécution de ces scripts, éventuellement prendre garde aux problèmes de chemin d'accès aux répertoires de données.
 !!! Le module gère les espaces mais pas les accents !!! <br>
 Pour la doc :  https://pypi.org/project/OpenFisca-Survey-Manager/0.47.2/
 
 ## Construire les données
-- Lancer le script `openfisca_france_indirect_taxation\scripts\build_survey_data.py`
+- Lancer le script avec la commande : `uv run openfisca_france_indirect_taxation/scripts/build_survey_data.py`
