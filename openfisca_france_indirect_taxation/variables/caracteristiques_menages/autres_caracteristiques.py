@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
+from zmq import Enum
+
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
@@ -51,13 +53,6 @@ class cataeu(YearlyVariable):
     value_type = float
     entity = Menage
     label = 'catégorie de la commune de résidence 2011'
-
-
-class code_region(YearlyVariable):
-    value_type = str
-    entity = Menage
-    label = 'code region du menage'
-    default_value = "99"
 
 
 class dip14pr(YearlyVariable):
