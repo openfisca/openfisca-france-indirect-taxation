@@ -42,11 +42,11 @@ def get_tva(categorie_fiscale):
         return None
 
 
-def droit_d_accise(depense, droit_cn, consommation_cn, taux_plein_tva):
+def droit_d_accise(depense, droit_cn, consommation_cn):
     '''
-    Calcule le montant de droit d'accise sur un volume de dépense payé pour le poste adéquat.
+    Calcule le montant de droit d'accise sur un volume de dépense (TTC) payé pour le poste adéquat.
     '''
-    return depense * ((1 + taux_plein_tva) * droit_cn) / (consommation_cn - (1 + taux_plein_tva) * droit_cn)
+    return depense * (droit_cn / consommation_cn)
 
 
 def taux_implicite(accise, tva, prix_ttc):
