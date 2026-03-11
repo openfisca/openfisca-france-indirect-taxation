@@ -12,7 +12,7 @@
      depenses_vin: 0
      depenses_biere: 0
      #
-     alcools_forts_droit_d_accise: 198.63878
+     alcools_forts_droit_d_accise: 42.94142
      vin_droit_d_accise: 0
      biere_droit_d_accise: 0
      #
@@ -47,7 +47,7 @@
      depenses_biere: 0
      #
      alcools_forts_droit_d_accise: 0
-     vin_droit_d_accise: 1.3634298
+     vin_droit_d_accise: 1.12466
      biere_droit_d_accise: 0
      #
      depenses_ht_tva_taux_plein: 100 / (1 + .196)
@@ -82,7 +82,7 @@
      depenses_biere: 0
      #
      alcools_forts_droit_d_accise: 0
-     vin_droit_d_accise: 1.3634298
+     vin_droit_d_accise: 1.12466
      biere_droit_d_accise: 0
      #
      depenses_ht_tva_taux_plein: 100 / (1 + .196)
@@ -117,7 +117,7 @@
      #
      alcools_forts_droit_d_accise: 0
      vin_droit_d_accise: 0
-     biere_droit_d_accise: 20.923725
+     biere_droit_d_accise: 14.46759
      #
      depenses_ht_tva_taux_plein: 100 / (1 + .196)
      tva_taux_plein: 100 / (1 + .196) * .196

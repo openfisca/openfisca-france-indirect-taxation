@@ -16,7 +16,7 @@ class alcools_forts_droit_d_accise(YearlyVariable):
         alcool_conso_et_vin = parameters(period.start).imposition_indirecte.alcool_conso_et_vin
         droit_cn = alcool_conso_et_vin.alcools_forts.droit_cn_alcools_total
         consommation_cn = alcool_conso_et_vin.alcools_forts.masse_conso_cn_alcools
-        return droit_d_accise(depenses_alcools_forts, droit_cn, consommation_cn, taux_plein_tva)
+        return droit_d_accise(depenses_alcools_forts, droit_cn, consommation_cn)
 
 
 class depenses_alcools_forts(YearlyVariable):
@@ -42,7 +42,7 @@ class biere_droit_d_accise(YearlyVariable):
         alcool_conso_et_vin = parameters(period.start).imposition_indirecte.alcool_conso_et_vin
         droit_cn = alcool_conso_et_vin.biere.droit_cn_biere
         consommation_cn = alcool_conso_et_vin.biere.masse_conso_cn_biere
-        return droit_d_accise(depenses_biere, droit_cn, consommation_cn, taux_plein_tva)
+        return droit_d_accise(depenses_biere, droit_cn, consommation_cn)
 
 
 class depenses_biere(YearlyVariable):
@@ -75,11 +75,10 @@ class vin_droit_d_accise(YearlyVariable):
 
     def formula(menage, period, parameters):
         depenses_vin = menage('depenses_vin', period)
-        taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         alcool_conso_et_vin = parameters(period.start).imposition_indirecte.alcool_conso_et_vin
         droit_cn = alcool_conso_et_vin.vin.droit_cn_vin
         consommation_cn = alcool_conso_et_vin.vin.masse_conso_cn_vin
-        return droit_d_accise(depenses_vin, droit_cn, consommation_cn, taux_plein_tva)
+        return droit_d_accise(depenses_vin, droit_cn, consommation_cn)
 
 
 class depenses_vin(YearlyVariable):
