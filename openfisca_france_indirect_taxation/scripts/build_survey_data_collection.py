@@ -25,9 +25,9 @@ def main():
     parser.add_argument('config', default = raw_data_ini, help = 'path of configuration file', nargs = '?')
     parser.add_argument(
         '-c', '--collection',
-        help = "name of collection to build or update ('budget_des_familles', 'aliss' or 'both')",
-        choices = ['aliss', 'both', 'budget_des_familles'],
-        default = 'both',
+        help = "name of collection to build or update ('budget_des_familles')",
+        choices = ['budget_des_familles'],
+        default = 'budget_des_familles',
         )
     parser.add_argument('-d', '--replace-data', action = 'store_true', default = True,
         help = 'erase existing survey data HDF5 file (instead of failing when HDF5 file already exists)')
@@ -40,10 +40,9 @@ def main():
     config_parser = configparser.SafeConfigParser()
     config_parser.read(args.config)
 
-    if args.collection == 'both':
-        assert config_parser.has_section(args.collection), 'aliss'
+    if args.collection == 'budget_des_familles':
         assert config_parser.has_section(args.collection), 'budget_des_familles'
-        collections = ['aliss', 'budget_des_familles']
+        collections = ['budget_des_familles']
     else:
         assert config_parser.has_section(args.collection), 'Unkwnown collection'
         collections = [args.collection]

@@ -10,8 +10,8 @@ class reforme_alimentation(Reform):
     name = 'reforme_alimentation'
 
     def apply(self):
-        from openfisca_france_indirect_taxation.variables.consommation.categories_fiscales import categories_fiscales_data_frame
-        categories_fiscales = categories_fiscales_data_frame.copy()
+        from openfisca_france_indirect_taxation.variables.base import get_legislation_data_frames
+        categories_fiscales = get_legislation_data_frames().copy()
         categories_fiscales.loc[
             (categories_fiscales.categorie_fiscale == 'tva_taux_super_reduit') & (
                 categories_fiscales.code_bdf.str.startswith('c06111')),

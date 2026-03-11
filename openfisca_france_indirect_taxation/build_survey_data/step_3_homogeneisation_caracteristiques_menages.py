@@ -623,9 +623,6 @@ def build_homogeneisation_caracteristiques_sociales(temporary_store = None, year
             )
 
         menage['agecj'] = menage.agecj.fillna(0)
-        # Pour Aliss
-        menage['nadultes'] = menage.npers - menage.nenfants
-        menage['ocde10_old'] = 1 + 0.7 * numpy.maximum(0, menage['nadultes'] - 1) + 0.5 * menage['nenfants']
 
         menage['strate'] = 0
         menage.loc[menage.tuu.isin([1, 2, 3]), 'strate'] = 1

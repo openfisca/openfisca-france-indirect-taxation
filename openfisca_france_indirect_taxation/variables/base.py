@@ -42,11 +42,11 @@ def get_tva(categorie_fiscale):
         return None
 
 
-def droit_d_accise(depense, droit_cn, consommation_cn, taux_plein_tva):
+def droit_d_accise(depense, droit_cn, consommation_cn):
     '''
-    Calcule le montant de droit d'accise sur un volume de dépense payé pour le poste adéquat.
+    Calcule le montant de droit d'accise sur un volume de dépense (TTC) payé pour le poste adéquat.
     '''
-    return depense * ((1 + taux_plein_tva) * droit_cn) / (consommation_cn - (1 + taux_plein_tva) * droit_cn)
+    return depense * (droit_cn / consommation_cn)
 
 
 def taux_implicite(accise, tva, prix_ttc):
@@ -224,7 +224,10 @@ def depenses_ht_postes_function_creator(poste_coicop, categorie_fiscale = None, 
                 tva_str = 'taux_particulier_super_reduit'
             elif tva_str == 'taux_plein':
                 tva_str = 'taux_normal'
-            taux = parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[tva_str]
+            try:
+                taux = parameters(period_arg.start).imposition_indirecte.tva.taux_de_tva[tva_str]
+            except Exception:
+                taux = 0.0
         else:
             taux = 0
 

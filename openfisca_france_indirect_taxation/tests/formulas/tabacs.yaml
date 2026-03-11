@@ -2,7 +2,7 @@
   period: "2015"
   absolute_error_margin: .01
   input:
-    poste_02_2_1: 100  # Cigarettes
+    poste_02_3_1_1: 100  # Cigarettes
   output:
     depenses_cigares: 0
     depenses_cigarettes:
@@ -37,9 +37,9 @@
     tabac_a_rouler_droit_d_accise: 0
     total_tabac_droit_d_accise: 46.93
     #
-    depenses_ht_tva_taux_plein: 0
-    depenses_tva_taux_plein: 0
-    tva_taux_plein: 0
+    depenses_ht_tva_taux_plein: 100 / 1.2
+    depenses_tva_taux_plein: 100
+    tva_taux_plein: 100 - (100 / 1.2)
     depenses_ht_tva_taux_intermediaire: 0
     depenses_tva_taux_intermediaire: 0
     tva_taux_intermediaire: 0
@@ -56,7 +56,7 @@
   period: "2015"
   absolute_error_margin: .01
   input:
-    poste_02_2_2: 100  # Cigares
+    poste_02_3_1_2: 100  # Cigares
   output:
     depenses_cigares: 100
     depenses_cigarettes:
@@ -91,9 +91,9 @@
     tabac_a_rouler_droit_d_accise: 0
     total_tabac_droit_d_accise: 18.91
     #
-    depenses_ht_tva_taux_plein: 0
-    depenses_tva_taux_plein: 0
-    tva_taux_plein: 0
+    depenses_ht_tva_taux_plein: 100 / 1.2
+    depenses_tva_taux_plein: 100
+    tva_taux_plein: 100 - (100 / 1.2)
     depenses_ht_tva_taux_intermediaire: 0
     depenses_tva_taux_intermediaire: 0
     tva_taux_intermediaire: 0
@@ -110,7 +110,7 @@
   period: "2015"
   absolute_error_margin: .01
   input:
-    poste_02_2_3: 100  # tabac a rouler
+    poste_02_3_1_3: 100  # tabac a rouler
   output:
     depenses_cigares: 0
     depenses_cigarettes:
@@ -145,9 +145,9 @@
     tabac_a_rouler_droit_d_accise: 47.25
     total_tabac_droit_d_accise: 47.25
     #
-    depenses_ht_tva_taux_plein: 0
-    depenses_tva_taux_plein: 0
-    tva_taux_plein: 0
+    depenses_ht_tva_taux_plein: 100 / 1.2
+    depenses_tva_taux_plein: 100
+    tva_taux_plein: 100 - (100 / 1.2)
     depenses_ht_tva_taux_intermediaire: 0
     depenses_tva_taux_intermediaire: 0
     tva_taux_intermediaire: 0
