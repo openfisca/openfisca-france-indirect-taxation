@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
+from zmq import Enum
+
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
@@ -50,13 +52,6 @@ class cataeu(YearlyVariable):
     value_type = float
     entity = Menage
     label = 'catégorie de la commune de résidence 2011'
-
-
-class code_region(YearlyVariable):
-    value_type = str
-    entity = Menage
-    label = 'code region du menage'
-    default_value = "99"
 
 
 class dip14pr(YearlyVariable):
@@ -216,13 +211,12 @@ class vp_domicile_travail(YearlyVariable):
 
 
 class TypesZeat(Enum):
-    __order__ = 'dom region_parisienne bassin_parisien nord est ouest sud centre mediterrannee'  # Needed to keep the order in Python 2
-    dom = 'dom',
-    region_parisienne = 'region_parisienne',
-    bassin_parisien = 'bassin_parisien',
-    nord = 'nord',
-    est = 'est',
-    ouest = 'ouest',
-    sud = 'sud-ouest',
-    centre = 'centre-est',
-    mediterrannee = 'mediterrannee'
+    dom = 0
+    region_parisienne = 1
+    bassin_parisien = 2
+    nord = 3
+    est = 4
+    ouest = 5
+    sud_ouest = 6
+    centre_est = 7
+    mediterrannee = 8
