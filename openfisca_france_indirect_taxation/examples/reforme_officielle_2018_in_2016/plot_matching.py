@@ -1,5 +1,3 @@
-
-
 # Dans ce script on utilise des histogrammes pour comparer la distribution des variables dans les deux enquêtes.
 # On peut ainsi juger si certaines d'entre elles doivent être ajustées de manière
 # à les harmoniser entre les deux enquêtes.
@@ -10,80 +8,51 @@ import pandas as pd
 import seaborn
 
 
-from openfisca_france_indirect_taxation.examples.utils_example import (
-    graph_builder_bar, save_dataframe_to_graph)
+from openfisca_france_indirect_taxation.examples.utils_example import graph_builder_bar, save_dataframe_to_graph
 
 
 from openfisca_france_indirect_taxation.utils import assets_directory
 
 
-seaborn.set_palette(seaborn.color_palette('Set2', 12))
+seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
 
 # Importation des bases de données appariées et de la base de référence entd
-data_enl = pd.read_csv(
-    os.path.join(
-        assets_directory,
-        'matching',
-        'data_matching_enl.csv'
-        ), sep =',', decimal = '.'
-    )
+data_enl = pd.read_csv(os.path.join(assets_directory, "matching", "data_matching_enl.csv"), sep=",", decimal=".")
 
 data_matched_enl = pd.read_csv(
-    os.path.join(
-        assets_directory,
-        'matching',
-        'data_matched_rank.csv'
-        ), sep =',', decimal = '.'
-    )
+    os.path.join(assets_directory, "matching", "data_matched_rank.csv"), sep=",", decimal="."
+)
 
 
 data_entd = pd.read_csv(
-    os.path.join(
-        assets_directory,
-        'matching',
-        'matching_entd',
-        'data_matching_entd.csv'
-        ), sep =',', decimal = '.'
-    )
+    os.path.join(assets_directory, "matching", "matching_entd", "data_matching_entd.csv"), sep=",", decimal="."
+)
 
 
 data_matched_entd = pd.read_csv(
-    os.path.join(
-        assets_directory,
-        'matching',
-        'matching_entd',
-        'data_matched_distance.csv'
-        ), sep =',', decimal = '.'
-    )
+    os.path.join(assets_directory, "matching", "matching_entd", "data_matched_distance.csv"), sep=",", decimal="."
+)
 
 data_matched_final_entd = pd.read_csv(
-    os.path.join(
-        assets_directory,
-        'matching',
-        'matching_entd',
-        'data_matched_final.csv'
-        ), sep =',', decimal = '.'
-    )
+    os.path.join(assets_directory, "matching", "matching_entd", "data_matched_final.csv"), sep=",", decimal="."
+)
 
 
 def strate_from_tuu(data):
-    data['strate'] = 0
-    data.loc[data['tuu'].isin([1, 2, 3]), 'strate'] = 1
-    data.loc[data['tuu'].isin([4, 5, 6]), 'strate'] = 2
-    data.loc[data['tuu'] == 7, 'strate'] = 3
-    data.loc[data['tuu'] == 8, 'strate'] = 4
+    data["strate"] = 0
+    data.loc[data["tuu"].isin([1, 2, 3]), "strate"] = 1
+    data.loc[data["tuu"].isin([4, 5, 6]), "strate"] = 2
+    data.loc[data["tuu"] == 7, "strate"] = 3
+    data.loc[data["tuu"] == 8, "strate"] = 4
 
     return data
 
 
 def froid_4_criteres(data):
-    data['froid_4_criteres'] = 1 * ((
-        data['froid_cout']
-        + data['froid_impaye']
-        + data['froid_installation']
-        + data['froid_isolation']
-        ) > 0)
+    data["froid_4_criteres"] = 1 * (
+        (data["froid_cout"] + data["froid_impaye"] + data["froid_installation"] + data["froid_isolation"]) > 0
+    )
 
     return data
 
@@ -100,24 +69,23 @@ data_matched_enl = froid_4_criteres(data_matched_enl)
 def histogram_froid_group(data_matched, data_enl, froid, group):
     min_group = data_enl[group].min()
     max_group = data_enl[group].max()
-    database = ['Matched', 'ENL', ]
+    database = [
+        "Matched",
+        "ENL",
+    ]
     elements = list(range(min_group, max_group + 1))
-    df_to_plot = pd.DataFrame(index = elements, columns = database)
+    df_to_plot = pd.DataFrame(index=elements, columns=database)
     for i in range(min_group, max_group + 1):
-        data_enl_decile = data_enl.query('{0} == {1}'.format(group, i))
-        data_matched_decile = data_matched.query('{0} == {1}'.format(group, i))
+        data_enl_decile = data_enl.query("{0} == {1}".format(group, i))
+        data_matched_decile = data_matched.query("{0} == {1}".format(group, i))
 
-        part_enl = (
-            sum(data_enl_decile['pondmen'] * (data_enl_decile[froid] == 1))
-            / sum(data_enl_decile['pondmen'])
-            )
-        part_matched = (
-            sum(data_matched_decile['pondmen'] * (data_matched_decile[froid] == 1))
-            / sum(data_matched_decile['pondmen'])
-            )
+        part_enl = sum(data_enl_decile["pondmen"] * (data_enl_decile[froid] == 1)) / sum(data_enl_decile["pondmen"])
+        part_matched = sum(data_matched_decile["pondmen"] * (data_matched_decile[froid] == 1)) / sum(
+            data_matched_decile["pondmen"]
+        )
 
-        df_to_plot['Matched'][i] = part_matched
-        df_to_plot['ENL'][i] = part_enl
+        df_to_plot["Matched"][i] = part_matched
+        df_to_plot["ENL"][i] = part_enl
 
     return df_to_plot
 
@@ -125,34 +93,36 @@ def histogram_froid_group(data_matched, data_enl, froid, group):
 def histogram_distance_group(data_matched, data_entd, distance, group):
     min_group = data_entd[group].min()
     max_group = data_entd[group].max()
-    database = ['Matched', 'ENTD', ]
+    database = [
+        "Matched",
+        "ENTD",
+    ]
     elements = list(range(min_group, max_group + 1))
-    df_to_plot = pd.DataFrame(index = elements, columns = database)
+    df_to_plot = pd.DataFrame(index=elements, columns=database)
     for i in range(min_group, max_group + 1):
-        data_matched_group = data_matched.query('{} == {}'.format(group, i))
+        data_matched_group = data_matched.query("{} == {}".format(group, i))
         distance_matched = (
-            sum(data_matched_group[distance] * data_matched_group['pondmen'])
-            / data_matched_group['pondmen'].sum()
-            )
-        data_entd_group = data_entd.query('{} == {}'.format(group, i))
-        distance_entd = (
-            sum(data_entd_group[distance] * data_entd_group['pondmen'])
-            / data_entd_group['pondmen'].sum()
-            )
+            sum(data_matched_group[distance] * data_matched_group["pondmen"]) / data_matched_group["pondmen"].sum()
+        )
+        data_entd_group = data_entd.query("{} == {}".format(group, i))
+        distance_entd = sum(data_entd_group[distance] * data_entd_group["pondmen"]) / data_entd_group["pondmen"].sum()
 
-        df_to_plot['Matched'][i] = distance_matched
-        df_to_plot['ENTD'][i] = distance_entd
+        df_to_plot["Matched"][i] = distance_matched
+        df_to_plot["ENTD"][i] = distance_entd
 
     return df_to_plot
 
 
 def histogram_distribution_depenses_annuelle(data_matched):
-    variables = ['Ex ante', 'Ex post', ]
-    quantiles = [.05, .1, .2, .3, .4, .5, .6, .7, .8, .9, .95]
-    df_to_plot = pd.DataFrame(index = quantiles, columns = variables)
+    variables = [
+        "Ex ante",
+        "Ex post",
+    ]
+    quantiles = [0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95]
+    df_to_plot = pd.DataFrame(index=quantiles, columns=variables)
     for i in quantiles:
-        df_to_plot['Ex ante'][i] = data_matched['poste_07_2_2_1_1'].quantile(i)
-        df_to_plot['Ex post'][i] = data_matched['depenses_carburants_corrigees_entd'].quantile(i)
+        df_to_plot["Ex ante"][i] = data_matched["poste_07_2_2_1_1"].quantile(i)
+        df_to_plot["Ex post"][i] = data_matched["depenses_carburants_corrigees_entd"].quantile(i)
 
     return df_to_plot
 
@@ -171,4 +141,4 @@ def histogram_distribution_depenses_annuelle(data_matched):
 
 df_to_plot = histogram_distribution_depenses_annuelle(data_matched_final_entd)
 graph_builder_bar(df_to_plot, False)
-save_dataframe_to_graph(df_to_plot, 'Matching/entd_distance_before_after_matching.csv')
+save_dataframe_to_graph(df_to_plot, "Matching/entd_distance_before_after_matching.csv")

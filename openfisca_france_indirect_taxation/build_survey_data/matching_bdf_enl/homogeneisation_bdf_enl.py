@@ -18,27 +18,27 @@ from openfisca_survey_manager.paths import default_config_files_directory as con
 year_enl = 2013
 
 enl_survey_collection = SurveyCollection.load(
-    collection = 'enquete_logement', config_files_directory = config_files_directory
-    )
-survey_enl = enl_survey_collection.get_survey('enquete_logement_{}'.format(year_enl))
+    collection="enquete_logement", config_files_directory=config_files_directory
+)
+survey_enl = enl_survey_collection.get_survey("enquete_logement_{}".format(year_enl))
 
-input_enl = survey_enl.get_values(table = 'menlogfm_diff')
+input_enl = survey_enl.get_values(table="menlogfm_diff")
 
 
 # Load BdF data :
 
 year_bdf = 2011
 
-openfisca_survey_collection = SurveyCollection.load(collection = 'openfisca_indirect_taxation')
-openfisca_survey = openfisca_survey_collection.get_survey('openfisca_indirect_taxation_data_{}'.format(year_bdf))
-input_data_frame = openfisca_survey.get_values(table = 'input')
-input_data_frame.reset_index(inplace = True)
+openfisca_survey_collection = SurveyCollection.load(collection="openfisca_indirect_taxation")
+openfisca_survey = openfisca_survey_collection.get_survey("openfisca_indirect_taxation_data_{}".format(year_bdf))
+input_data_frame = openfisca_survey.get_values(table="input")
+input_data_frame.reset_index(inplace=True)
 
 
 # Set variables :
 
 variables_bdf = [
-    'agepr',
+    "agepr",
     # 'aidlog1',
     # 'aidlog2',
     # 'ancons',
@@ -61,35 +61,25 @@ variables_bdf = [
     # 'mode_trans1',
     # 'nbh1',
     # 'nbphab',
-    'nactifs',
-    'nenfants',
-    'ocde10',
-    'poste_coicop_451',
-    'poste_coicop_452',
-    'poste_coicop_453',
-    'revtot',
-    'situapr',
-    'situacj',
+    "nactifs",
+    "nenfants",
+    "ocde10",
+    "poste_coicop_451",
+    "poste_coicop_452",
+    "poste_coicop_453",
+    "revtot",
+    "situapr",
+    "situacj",
     # 'surfhab',
     # 'tau',
     # 'tchof',
     # 'tuu',
-    'typmen',
-    'zeat',
-    ]
+    "typmen",
+    "zeat",
+]
 
 
-variables_enl = [
-    'cataeu2010',
-    'coml11',
-    'coml12',
-    'coml2',
-    'coml3',
-    'hsh1',
-    'mne1',
-    'msitua',
-    'msituac'
-    ]
+variables_enl = ["cataeu2010", "coml11", "coml12", "coml2", "coml3", "hsh1", "mne1", "msitua", "msituac"]
 
 
 # Keep relevant variables :
@@ -100,21 +90,21 @@ conso_bdf_keep = input_data_frame[variables_bdf]
 
 # Compare surveys :
 
-menage_enl_keep['depenses_gaz'] = menage_enl_keep['coml12'] + menage_enl_keep['coml3']
-print(menage_enl_keep['depenses_gaz'].mean())
-print(conso_bdf_keep['poste_coicop_452'].mean())
+menage_enl_keep["depenses_gaz"] = menage_enl_keep["coml12"] + menage_enl_keep["coml3"]
+print(menage_enl_keep["depenses_gaz"].mean())
+print(conso_bdf_keep["poste_coicop_452"].mean())
 
-print(menage_enl_keep['msituac'].hist())
-print(conso_bdf_keep['situacj'].hist())
+print(menage_enl_keep["msituac"].hist())
+print(conso_bdf_keep["situacj"].hist())
 
-print(menage_enl_keep['mne1'].hist())
-print(conso_bdf_keep['nenfants'].hist())
+print(menage_enl_keep["mne1"].hist())
+print(conso_bdf_keep["nenfants"].hist())
 
-menage_enl_keep['mne1'].plot.density()
-conso_bdf_keep['nenfants'].plot.density()
+menage_enl_keep["mne1"].plot.density()
+conso_bdf_keep["nenfants"].plot.density()
 
-menage_enl_keep['coml11'].plot.density()
-conso_bdf_keep['poste_coicop_451'].plot.density()
+menage_enl_keep["coml11"].plot.density()
+conso_bdf_keep["poste_coicop_451"].plot.density()
 
-menage_enl_keep['coml11'].quantile([.1, .2, .3, .4, .5, .6, .7, .8, .9])
-conso_bdf_keep['poste_coicop_451'].quantile([.1, .2, .3, .4, .5, .6, .7, .8, .9])
+menage_enl_keep["coml11"].quantile([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
+conso_bdf_keep["poste_coicop_451"].quantile([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])

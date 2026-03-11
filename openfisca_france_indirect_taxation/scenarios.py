@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
-
-
-def init_single_entity(scenario, autres = None, axes = None, conjoint = None, enfants = None,
-        menage = None, period = None, personne_de_reference =None):
+def init_single_entity(
+    scenario, autres=None, axes=None, conjoint=None, enfants=None, menage=None, period=None, personne_de_reference=None
+):
     if enfants is None:
         enfants = []
     if autres is None:
@@ -20,28 +18,24 @@ def init_single_entity(scenario, autres = None, axes = None, conjoint = None, en
         for index, individu in enumerate(group):
             if individu is None:
                 continue
-            id = individu.get('id')
+            id = individu.get("id")
             if id is None:
                 individu = individu.copy()
-                id = 'ind{}'.format(index + count_so_far)
+                id = "ind{}".format(index + count_so_far)
             individus[id] = individu
             if index <= 1:
                 if index == 0:
-                    menage_nth['personne_de_reference'] = id
+                    menage_nth["personne_de_reference"] = id
                 else:
-                    menage_nth['conjoint'] = id
+                    menage_nth["conjoint"] = id
             else:
-                menage_nth.setdefault('enfants', []).append(id)
+                menage_nth.setdefault("enfants", []).append(id)
 
         count_so_far += len(group)
-        menages['m{}'.format(nth)] = menage_nth
+        menages["m{}".format(nth)] = menage_nth
 
-    dict = {
-        'period': period,
-        'menages': menages,
-        'individus': individus
-        }
+    dict = {"period": period, "menages": menages, "individus": individus}
     if axes:
-        dict['axes'] = axes
+        dict["axes"] = axes
     scenario.init_from_dict(dict)
     return scenario

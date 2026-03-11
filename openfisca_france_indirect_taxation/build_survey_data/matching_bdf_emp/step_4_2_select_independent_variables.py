@@ -1,35 +1,51 @@
-# -*- coding: utf-8 -*-
-
-
-'''
+"""
 In this script we run a stepwise regression for the prediction of the variables
 we want to match. The objective is to select the independent variables with
 the largest predictive power.
-'''
+"""
 
 import statsmodels.formula.api as smf
 
 
-from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_emp.step_2_homogenize_variables import \
-    create_niveau_vie_quantiles
+from openfisca_france_indirect_taxation.build_survey_data.matching_bdf_emp.step_2_homogenize_variables import (
+    create_niveau_vie_quantiles,
+)
 
 
 data_emp = create_niveau_vie_quantiles()[1]
 
-data_emp['niveau_vie_2'] = data_emp['niveau_vie'] ** 2
-data_emp['distance'] = (
-    data_emp['distance_diesel'] + data_emp['distance_essence']
-    + data_emp['distance_autre_carbu']
-    )
+data_emp["niveau_vie_2"] = data_emp["niveau_vie"] ** 2
+data_emp["distance"] = data_emp["distance_diesel"] + data_emp["distance_essence"] + data_emp["distance_autre_carbu"]
 
-stock_variables = ['agepr', 'age_vehicule', 'age_carte_grise', 'aides_logement',
-    'cataeu', 'cs42pr', 'dip14pr', 'moyenne_ville', 'nactifs', 'nb_diesel',
-    'nb_essence', 'nbphab', 'nenfants', 'niveau_vie', 'niveau_vie_2', 'npers',
-    'ocde10', 'paris', 'petite_ville', 'rural', 'situapr', 'typmen', 'veh_tot',
-    'vp_deplacements_pro', 'vp_domicile_travail'
-                   ]
+stock_variables = [
+    "agepr",
+    "age_vehicule",
+    "age_carte_grise",
+    "aides_logement",
+    "cataeu",
+    "cs42pr",
+    "dip14pr",
+    "moyenne_ville",
+    "nactifs",
+    "nb_diesel",
+    "nb_essence",
+    "nbphab",
+    "nenfants",
+    "niveau_vie",
+    "niveau_vie_2",
+    "npers",
+    "ocde10",
+    "paris",
+    "petite_ville",
+    "rural",
+    "situapr",
+    "typmen",
+    "veh_tot",
+    "vp_deplacements_pro",
+    "vp_domicile_travail",
+]
 
-for dependent_variable in ['distance', 'distance_diesel', 'distance_essence']:
+for dependent_variable in ["distance", "distance_diesel", "distance_essence"]:
     new_stock_variables = list(stock_variables)
     max_rsquared_adj = 0.000001
     current_max_rsquared_adj = 0
@@ -43,16 +59,18 @@ for dependent_variable in ['distance', 'distance_diesel', 'distance_essence']:
         for variable in new_stock_variables:
             variables = variables_kept + [variable]
 
-            regressors = ' '
+            regressors = " "
             for element in variables:
-                if regressors == ' ':
+                if regressors == " ":
                     regressors = element
                 else:
-                    regressors = regressors + ' + {}'.format(element)
+                    regressors = regressors + " + {}".format(element)
 
-            regression = smf.ols(formula = '{} ~ \
-                {}'.format(dependent_variable, regressors),
-                data = data_emp).fit()
+            regression = smf.ols(
+                formula="{} ~ \
+                {}".format(dependent_variable, regressors),
+                data=data_emp,
+            ).fit()
 
             rsquared_adj = regression.rsquared_adj
             max_rsquared_adj = max(max_rsquared_adj, rsquared_adj)
@@ -62,9 +80,9 @@ for dependent_variable in ['distance', 'distance_diesel', 'distance_essence']:
                 continue
 
     else:
-        if dependent_variable == 'distance':
+        if dependent_variable == "distance":
             regression_distance = regression.summary()
-        if dependent_variable == 'distance_diesel':
+        if dependent_variable == "distance_diesel":
             regression_distance_diesel = regression.summary()
         else:
             regression_distance_essence = regression.summary()

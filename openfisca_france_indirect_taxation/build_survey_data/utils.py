@@ -2,29 +2,27 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn
 
-seaborn.set_palette(seaborn.color_palette('Set2', 12))
+seaborn.set_palette(seaborn.color_palette("Set2", 12))
 
-_SQRT2 = np.sqrt(2)     # sqrt(2) with default precision np.float64
+_SQRT2 = np.sqrt(2)  # sqrt(2) with default precision np.float64
 
 
-def collapsesum(data_frame, by = None, var = None):
-    '''
+def collapsesum(data_frame, by=None, var=None):
+    """
     Pour une variable, fonction qui calcule la moyenne pondérée au sein de chaque groupe.
-    '''
+    """
     assert by is not None
     assert var is not None
     grouped = data_frame.groupby([by])
-    return grouped.apply(lambda x: weighted_sum(groupe = x, var =var))
+    return grouped.apply(lambda x: weighted_sum(groupe=x, var=var))
 
 
 def find_nearest_inferior(years, year):
-    anterior_years = [
-        available_year for available_year in years if available_year <= year
-        ]
+    anterior_years = [available_year for available_year in years if available_year <= year]
     return max(anterior_years)
 
 
-ident_men_dtype = 'str'
+ident_men_dtype = "str"
 
 
 def hellinger(p, q):
@@ -33,8 +31,8 @@ def hellinger(p, q):
 
 def histogrammes(list_keys, list_values_bdf, list_values_entd, data_name_1, data_name_2):
     size_hist = np.arange(len(list_keys))
-    plot_bdf = plt.bar(size_hist - 0.125, list_values_bdf, color = 'b', align='center', width=0.25)
-    plot_entd = plt.bar(size_hist + 0.125, list_values_entd, align='center', width=0.25)
+    plot_bdf = plt.bar(size_hist - 0.125, list_values_bdf, color="b", align="center", width=0.25)
+    plot_entd = plt.bar(size_hist + 0.125, list_values_entd, align="center", width=0.25)
     plt.xticks(size_hist, list_keys)
     plt.legend((plot_bdf[0], plot_entd[0]), (data_name_1, data_name_2))
 
@@ -44,7 +42,7 @@ def histogrammes(list_keys, list_values_bdf, list_values_entd, data_name_1, data
 def plots_by_group(function, data_name_1, data_name_2, distance, group):
     fig = plt.figure()
 
-    if group == 'tuu':
+    if group == "tuu":
         corr = -1
     else:
         corr = 0
@@ -76,7 +74,7 @@ def plots_by_group(function, data_name_1, data_name_2, distance, group):
     ax9 = fig.add_subplot(529)
     ax9 = function(data_name_1, data_name_2, distance, group, 9 + corr)
 
-    if group == 'niveau_vie_decile':
+    if group == "niveau_vie_decile":
         ax10 = fig.add_subplot(5, 2, 10)
         ax10 = function(data_name_1, data_name_2, distance, group, 10 + corr)
 
@@ -84,9 +82,9 @@ def plots_by_group(function, data_name_1, data_name_2, distance, group):
 
 
 def weighted_sum(groupe, var):
-    '''
+    """
     Fonction qui calcule la moyenne pondérée par groupe d'une variable
-    '''
+    """
     data = groupe[var]
-    weights = groupe['pondmen']
+    weights = groupe["pondmen"]
     return (data * weights).sum()

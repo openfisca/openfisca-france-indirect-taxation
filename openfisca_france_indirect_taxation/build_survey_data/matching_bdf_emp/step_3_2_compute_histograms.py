@@ -1,11 +1,10 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from openfisca_france_indirect_taxation.build_survey_data.utils import \
-    histogrammes
+from openfisca_france_indirect_taxation.build_survey_data.utils import histogrammes
 
 
-def histogram_cat_variable(data_bdf, data_emp, var, data_name_1='BdF', data_name_2='EMP', savefig=False, filename=None):
+def histogram_cat_variable(data_bdf, data_emp, var, data_name_1="BdF", data_name_2="EMP", savefig=False, filename=None):
     """
     Crée un histogramme comparatif pour une variable catégorielle donnée entre deux DataFrames.
 
@@ -29,8 +28,8 @@ def histogram_cat_variable(data_bdf, data_emp, var, data_name_1='BdF', data_name
     list_keys = [str(cat) for cat in categories]
     for cat in categories:
         # Calcul des proportions pondérées pour chaque catégorie
-        part_bdf = data_bdf.loc[data_bdf[var] == cat, 'pondmen'].sum() / data_bdf['pondmen'].sum()
-        part_emp = data_emp.loc[data_emp[var] == cat, 'pondmen'].sum() / data_emp['pondmen'].sum()
+        part_bdf = data_bdf.loc[data_bdf[var] == cat, "pondmen"].sum() / data_bdf["pondmen"].sum()
+        part_emp = data_emp.loc[data_emp[var] == cat, "pondmen"].sum() / data_emp["pondmen"].sum()
         list_values_bdf.append(part_bdf)
         list_values_emp.append(part_emp)
 
@@ -38,17 +37,17 @@ def histogram_cat_variable(data_bdf, data_emp, var, data_name_1='BdF', data_name
     histogrammes(list_keys, list_values_bdf, list_values_emp, data_name_1, data_name_2)
 
     # Ajout des labels et titres
-    plt.xlabel(f'Catégories de {var}')
-    plt.ylabel('Proportion pondérée')
-    plt.title(f'Comparaison des catégories de {var} entre {data_name_1} et {data_name_2}')
+    plt.xlabel(f"Catégories de {var}")
+    plt.ylabel("Proportion pondérée")
+    plt.title(f"Comparaison des catégories de {var} entre {data_name_1} et {data_name_2}")
 
-    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.grid(True, linestyle="--", alpha=0.7)
     if savefig and filename is not None:
-        plt.savefig(filename, bbox_inches='tight')
+        plt.savefig(filename, bbox_inches="tight")
     return plt
 
 
-def boxplot_variable(data_bdf, data_emp, var, data_name_1='BdF', data_name_2='EMP', savefig=False, filename=None):
+def boxplot_variable(data_bdf, data_emp, var, data_name_1="BdF", data_name_2="EMP", savefig=False, filename=None):
     """
     Crée un boxplot comparatif pour une variable donnée entre deux DataFrames.
 
@@ -72,20 +71,20 @@ def boxplot_variable(data_bdf, data_emp, var, data_name_1='BdF', data_name_2='EM
     """
     # Préparation des données
     df_bdf = data_bdf[[var]].copy().reset_index(drop=True)
-    df_bdf['dataset'] = data_name_1
+    df_bdf["dataset"] = data_name_1
 
     df_emp = data_emp[[var]].copy().reset_index(drop=True)
-    df_emp['dataset'] = data_name_2
+    df_emp["dataset"] = data_name_2
 
     # Création du boxplot
     plt.figure(figsize=(10, 6))
-    sns.boxplot(x = 'dataset', y=var, data=df_bdf, legend = False, color = 'b')
-    sns.boxplot(x = 'dataset', y=var, data=df_emp, legend = False)
-    plt.title(f'Comparaison des distributions de {var} entre {data_name_1} et {data_name_2}', fontsize=16)
-    plt.xlabel('Dataset', fontsize=14)
+    sns.boxplot(x="dataset", y=var, data=df_bdf, legend=False, color="b")
+    sns.boxplot(x="dataset", y=var, data=df_emp, legend=False)
+    plt.title(f"Comparaison des distributions de {var} entre {data_name_1} et {data_name_2}", fontsize=16)
+    plt.xlabel("Dataset", fontsize=14)
     plt.ylabel(var, fontsize=14)
-    plt.tick_params(axis='both', which='major', labelsize=14)
-    plt.grid(True, linestyle='--', alpha=0.7)
+    plt.tick_params(axis="both", which="major", labelsize=14)
+    plt.grid(True, linestyle="--", alpha=0.7)
     if savefig and filename is not None:
-        plt.savefig(filename, bbox_inches='tight')
+        plt.savefig(filename, bbox_inches="tight")
     return plt

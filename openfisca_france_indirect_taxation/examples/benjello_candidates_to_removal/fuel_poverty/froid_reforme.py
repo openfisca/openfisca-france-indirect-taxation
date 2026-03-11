@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
 import statsmodels.formula.api as smf
 
 
@@ -11,55 +8,53 @@ from openfisca_france_indirect_taxation.calibration import get_inflators_by_year
 
 stock_variables = [
     # 'agepr',
-    'aides_logement',
+    "aides_logement",
     # 'brde_m2_depenses_tot',
-    'combustibles_liquides',
-    'depenses_combustibles_liquides',
-    'depenses_electricite',
-    'depenses_energies_logement',
-    'depenses_gaz_ville',
-    'depenses_tot',
-    'dip14pr',
-    'electricite',
-    'gaz_ville',
-    'nactifs',
+    "combustibles_liquides",
+    "depenses_combustibles_liquides",
+    "depenses_electricite",
+    "depenses_energies_logement",
+    "depenses_gaz_ville",
+    "depenses_tot",
+    "dip14pr",
+    "electricite",
+    "gaz_ville",
+    "nactifs",
     # 'nenfants',
-    'ocde10',
-    'ouest_sud',
-    'paris',
-    'petite_ville',
-    'pondmen',
-    'rev_disp_loyerimput',
-    'rural',
-    'surfhab_d',
+    "ocde10",
+    "ouest_sud",
+    "paris",
+    "petite_ville",
+    "pondmen",
+    "rev_disp_loyerimput",
+    "rural",
+    "surfhab_d",
     # 'tee_10_3_deciles_depenses_tot',
-    ]
+]
 
-simulated_variables = stock_variables + ['niveau_vie_decile',
-   'froid_4_criteres_3_deciles', 'precarite_energetique_depenses_tot',
-   'total_taxes_energies']
+simulated_variables = stock_variables + [
+    "niveau_vie_decile",
+    "froid_4_criteres_3_deciles",
+    "precarite_energetique_depenses_tot",
+    "total_taxes_energies",
+]
 
-inflators_by_year = get_inflators_by_year_energy(rebuild = False)
+inflators_by_year = get_inflators_by_year_energy(rebuild=False)
 year = 2014
 data_year = 2011
 elasticities = get_elasticities(data_year)
-inflation_kwargs = dict(inflator_by_variable = inflators_by_year[year])
+inflation_kwargs = dict(inflator_by_variable=inflators_by_year[year])
 
 
 survey_scenario = SurveyScenario.create(
-    elasticities = elasticities,
-    inflation_kwargs = inflation_kwargs,
-    year = year,
-    data_year = data_year
-    )
+    elasticities=elasticities, inflation_kwargs=inflation_kwargs, year=year, data_year=data_year
+)
 
-indiv_df_reference = survey_scenario.create_data_frame_by_entity(simulated_variables,
-    use_baseline =True, period = year)
+indiv_df_reference = survey_scenario.create_data_frame_by_entity(simulated_variables, use_baseline=True, period=year)
 
-menages_reference = indiv_df_reference['menage']
+menages_reference = indiv_df_reference["menage"]
 # menages_reference =menages_reference.query('niveau_vie_decile < 4')
-menages_reference['froid_4_criteres_3_deciles'] = \
-    menages_reference['froid_4_criteres_3_deciles'].astype(int)
+menages_reference["froid_4_criteres_3_deciles"] = menages_reference["froid_4_criteres_3_deciles"].astype(int)
 
 new_stock_variables = list(stock_variables)
 max_rsquared_adj = 0.000001
@@ -74,15 +69,14 @@ while max_rsquared_adj > current_max_rsquared_adj:
     for variable in new_stock_variables:
         variables = variables_kept + [variable]
 
-        regressors = ' '
+        regressors = " "
         for element in variables:
-            if regressors == ' ':
+            if regressors == " ":
                 regressors = element
             else:
-                regressors = regressors + ' + {}'.format(element)
+                regressors = regressors + " + {}".format(element)
 
-        regression = smf.ols(formula = 'froid_4_criteres_3_deciles ~ {}'.format(regressors),
-            data = menages_reference).fit()
+        regression = smf.ols(formula="froid_4_criteres_3_deciles ~ {}".format(regressors), data=menages_reference).fit()
         rsquared_adj = regression.rsquared_adj
         max_rsquared_adj = max(max_rsquared_adj, rsquared_adj)
         if rsquared_adj == max_rsquared_adj:

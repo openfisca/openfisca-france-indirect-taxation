@@ -1,8 +1,12 @@
 import pandas as pd
 
-results = pd.DataFrame(columns = ['revenu_reforme_officielle_2019_in_2017', ])
+results = pd.DataFrame(
+    columns=[
+        "revenu_reforme_officielle_2019_in_2017",
+    ]
+)
 
-results['revenu_reforme_officielle_2019_in_2017'] = [
+results["revenu_reforme_officielle_2019_in_2017"] = [
     177.8786111189104,
     124.0368540474721,
     102.96654540613808,
@@ -13,9 +17,9 @@ results['revenu_reforme_officielle_2019_in_2017'] = [
     136.58329030191015,
     147.88585060158798,
     173.68750897282365,
-    ]
+]
 
-results['cheques_energie'] = [
+results["cheques_energie"] = [
     165.1208649984687,
     82.43152192369013,
     26.972320532973487,
@@ -26,9 +30,9 @@ results['cheques_energie'] = [
     2.3846946782823446,
     0.8543932861507411,
     0.1014845968530853,
-    ]
+]
 
-results['tarifs_sociaux_electricite'] = [
+results["tarifs_sociaux_electricite"] = [
     65.5388,
     21.46009870218798,
     7.539849422277608,
@@ -39,9 +43,9 @@ results['tarifs_sociaux_electricite'] = [
     0.8739232632701135,
     0.29072541885025116,
     0.0,
-    ]
+]
 
-results['tarifs_sociaux_gaz'] = [
+results["tarifs_sociaux_gaz"] = [
     30.355182501663556,
     11.20197537685839,
     2.8531176169425887,
@@ -52,6 +56,6 @@ results['tarifs_sociaux_gaz'] = [
     0.38152450917427727,
     0.11296018243967688,
     0.0,
-    ]
+]
 
 results.index += 1

@@ -3,11 +3,11 @@ import pytest
 from openfisca_france_indirect_taxation import FranceIndirectTaxationTaxBenefitSystem
 
 
-@pytest.mark.skip(reason = "Wrong price setting")
+@pytest.mark.skip(reason="Wrong price setting")
 def test_prix_carburants():
-    '''
+    """
     This test is made to preprocessing of prix_carburants works as some indirect taxes on fuel
-    '''
+    """
 
     year = 2011
     parameters = FranceIndirectTaxationTaxBenefitSystem().parameters(year)
@@ -17,6 +17,7 @@ def test_prix_carburants():
     majoration_ticpe_super95 = parameters.imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
     assert round(accise_super95 + majoration_ticpe_super95, 2) == 63.19
     accise_super_e10 = parameters.imposition_indirecte.produits_energetiques.ticpe.super_e10
-    majoration_ticpe_super_e10 = \
+    majoration_ticpe_super_e10 = (
         parameters.imposition_indirecte.produits_energetiques.major_regionale_ticpe_super.alsace
+    )
     assert round(accise_super_e10 + majoration_ticpe_super_e10, 2) == 63.19
