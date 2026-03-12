@@ -13,8 +13,8 @@ class emissions_CO2_carburants(YearlyVariable):
     label = 'Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2'
 
     def formula(menage, period, parameters):
-        quantites_diesel = menage('quantites_diesel', period)
-        quantites_essence = menage('quantites_essence', period)
+        quantites_diesel = menage('nombre_litres_gazole_total', period)
+        quantites_essence = menage('nombre_litres_essence_total', period)
         emissions_diesel = \
             parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
         emissions_essence = \
@@ -44,7 +44,7 @@ class emissions_CO2_diesel(YearlyVariable):
     label = 'Emissions de CO2 des ménages via leur consommation de diesel, en kg de CO2'
 
     def formula(menage, period, parameters):
-        quantites_diesel = menage('quantites_diesel', period)
+        quantites_diesel = menage('nombre_litres_gazole_total', period)
         emissions_diesel = \
             parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_diesel
         emissions_co2 = quantites_diesel * emissions_diesel
@@ -100,7 +100,7 @@ class emissions_CO2_essence(YearlyVariable):
     label = 'Emissions de CO2 des ménages via leur consommation de carburants, en kg de CO2'
 
     def formula(menage, period, parameters):
-        quantites_essence = menage('quantites_essence', period)
+        quantites_essence = menage('nombre_litres_essence_total', period)
         emissions_essence = \
             parameters(period.start).imposition_indirecte.emissions_CO2.carburants.CO2_essence
         emissions_co2 = quantites_essence * emissions_essence
