@@ -14,4 +14,4 @@ nombre_paquets_cigarettes_by_year = {
     2018: 2.01e9,
     2019: 1.86e9,
     2020: 1.78e9,
-    }
+}

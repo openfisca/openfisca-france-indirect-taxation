@@ -1,5 +1,7 @@
 all: test
 
+UV ?= UV_CACHE_DIR=$(CURDIR)/.uv-cache uv
+
 clean:
 		rm -rf build dist
 		find . -name '*.pyc' -exec rm \{\} \;
@@ -7,30 +9,29 @@ clean:
 
 install:
 		@# Install OpenFisca-France-Indirect-Taxation for development.
-		uv sync --all-extras
+		$(UV) sync --all-extras
 
 build: clean install
 		@# Install OpenFisca-France-Indirect-Taxation for deployment and publishing.
-		uv build
-		find dist -name "*.whl" -exec uv pip install --upgrade {} \;
+		$(UV) build
 
 check-syntax-errors:
-		uv run python -m compileall -q .
+		$(UV) run python -m compileall -q .
 
 format-style:
 		@# Do not analyse .gitignored files.
 		@# `make` needs `$$` to output `$`. Ref: http://stackoverflow.com/questions/2382764.
-		uv run ruff format `git ls-files | grep "\.py$$"`
+		$(UV) run ruff format `git ls-files | grep "\.py$$"`
 
 check-style:
 		@# Do not analyse .gitignored files.
 		@# `make` needs `$$` to output `$`. Ref: http://stackoverflow.com/questions/2382764.
-		uv run ruff check `git ls-files | grep "\.py$$" | grep -v benjello_candidates_to_removal`
+		$(UV) run ruff check `git ls-files | grep "\.py$$" | grep -v benjello_candidates_to_removal`
 
 test: clean check-syntax-errors check-style
 		@# Launch tests from openfisca_france_indirect_taxation/tests directory (and not .) because TaxBenefitSystem must be initialized
 		@# before parsing source files containing formulas.
-		uv run openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests
+		$(UV) run openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests
 
 
 # IGNORE_OPT=--ignore-files='(tests_aids_categ.py|test_carburants_builder.py|test_categorie_fiscale.py|test_depenses_caburants_ht.py|test_get_poste_categorie_fiscale.py|test_legislations.py|test_simulation.py|test_survey_scenario.py)'

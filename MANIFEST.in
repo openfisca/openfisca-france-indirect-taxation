@@ -1,17 +1,8 @@
+include README.md
+include COPYING
 
-recursive-include openfisca_france_indirect_taxation/assets/legislation *
-recursive-include openfisca_france_indirect_taxation/assets/prix *
-recursive-include openfisca_france_indirect_taxation/assets/quantites *
-recursive-include openfisca_france_indirect_taxation/assets *
+recursive-include openfisca_france_indirect_taxation *.py
+recursive-include openfisca_france_indirect_taxation *.yaml
 
-
-recursive-include openfisca_france_indirect_taxation/parameters *
-
-
-recursive-include openfisca_france_indirect_taxation/scripts *
-recursive-include openfisca_france_indirect_taxation/tests/formulas *
-include openfisca_france_indirect_taxation/tests/__init__.py
-include openfisca_france_indirect_taxation/tests/base.py
-
-prune openfisca_france_indirect_taxation/assets/quaids/*.csv
-prune openfisca_france_indirect_taxation/assets/legislation/nomenclature_coicop_by*.csv
+prune openfisca_france_indirect_taxation/assets
+prune openfisca_france_indirect_taxation/examples/notebooks

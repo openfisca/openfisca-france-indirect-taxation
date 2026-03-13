@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
@@ -10,7 +7,7 @@ class alcools_forts_droit_d_accise(YearlyVariable):
     label = "Montant des droits d'accises sur les alcools forts"
 
     def formula(menage, period, parameters):
-        depenses_ht_alcools_forts = menage('depenses_ht_alcools_forts', period)
+        depenses_ht_alcools_forts = menage("depenses_ht_alcools_forts", period)
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         depenses_alcools_forts = depenses_ht_alcools_forts * (1 + taux_plein_tva)
         alcool_conso_et_vin = parameters(period.start).imposition_indirecte.alcool_conso_et_vin
@@ -25,7 +22,7 @@ class depenses_alcools_forts(YearlyVariable):
     label = "Dépenses d'alcools forts'"
 
     def formula(menage, period, parameters):
-        depenses_ht_alcools_forts = menage('depenses_ht_alcools_forts', period)
+        depenses_ht_alcools_forts = menage("depenses_ht_alcools_forts", period)
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         return depenses_ht_alcools_forts * (1 + taux_plein_tva)
 
@@ -36,7 +33,7 @@ class biere_droit_d_accise(YearlyVariable):
     label = "Montant des droits d'accises sur la bière"
 
     def formula(menage, period, parameters):
-        depenses_ht_biere = menage('depenses_ht_biere', period)
+        depenses_ht_biere = menage("depenses_ht_biere", period)
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         depenses_biere = depenses_ht_biere * (1 + taux_plein_tva)
         alcool_conso_et_vin = parameters(period.start).imposition_indirecte.alcool_conso_et_vin
@@ -48,10 +45,10 @@ class biere_droit_d_accise(YearlyVariable):
 class depenses_biere(YearlyVariable):
     value_type = float
     entity = Menage
-    label = 'Dépenses de bière'
+    label = "Dépenses de bière"
 
     def formula(menage, period, parameters):
-        depenses_ht_biere = menage('depenses_ht_biere', period)
+        depenses_ht_biere = menage("depenses_ht_biere", period)
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         return depenses_ht_biere * (1 + taux_plein_tva)
 
@@ -62,9 +59,9 @@ class total_alcool_droit_d_accise(YearlyVariable):
     label = "Montant des droits d'accises sur l'alcool"
 
     def formula(menage, period):
-        vin_droit_d_accise = menage('vin_droit_d_accise', period)
-        biere_droit_d_accise = menage('biere_droit_d_accise', period)
-        alcools_forts_droit_d_accise = menage('alcools_forts_droit_d_accise', period)
+        vin_droit_d_accise = menage("vin_droit_d_accise", period)
+        biere_droit_d_accise = menage("biere_droit_d_accise", period)
+        alcools_forts_droit_d_accise = menage("alcools_forts_droit_d_accise", period)
         return vin_droit_d_accise + biere_droit_d_accise + alcools_forts_droit_d_accise
 
 
@@ -84,9 +81,9 @@ class vin_droit_d_accise(YearlyVariable):
 class depenses_vin(YearlyVariable):
     value_type = float
     entity = Menage
-    label = 'Dépenses de vin'
+    label = "Dépenses de vin"
 
     def formula(menage, period, parameters):
-        depenses_ht_vin = menage('depenses_ht_vin', period)
+        depenses_ht_vin = menage("depenses_ht_vin", period)
         taux_plein_tva = parameters(period.start).imposition_indirecte.tva.taux_de_tva.taux_normal
         return depenses_ht_vin * (1 + taux_plein_tva)
