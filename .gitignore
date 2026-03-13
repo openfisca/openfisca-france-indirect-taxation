@@ -46,6 +46,7 @@ var/
 *.egg-info/
 .installed.cfg
 .venv/
+.uv-cache/
 *.egg
 
 # PyInstaller
@@ -81,3 +82,4 @@ target/
 
 openfisca_france_indirect_taxation/elasticite_depense.csv
 openfisca_france_indirect_taxation/assets/matching/matching_enl/data_matching_bdf.csv
+openfisca_france_indirect_taxation/assets.zip

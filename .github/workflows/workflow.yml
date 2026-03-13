@@ -98,3 +98,52 @@ jobs:
         run: make clean && uv run pytest openfisca_france_indirect_taxation/tests/test_preprocessing_metadata.py
         # - name: Test TVA
       #   run: uv run openfisca test --country-package openfisca_france_indirect_taxation openfisca_france_indirect_taxation/tests/formulas/tva.yaml
+
+  deploy:
+    runs-on: ubuntu-24.04
+    needs: [ lint-files, tests ]
+    if: github.ref == 'refs/heads/master'
+    permissions:
+      contents: write
+    env:
+      PYPI_USERNAME: __token__
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.10.6
+      - name: Cache release
+        id: restore-release
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: release-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}-${{ github.sha }}-ubuntu-24.04
+      - name: Check whether this version still needs a release
+        id: release-state
+        run: |
+          current_version=$(python3 -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
+          if git rev-parse --verify --quiet "$current_version" >/dev/null; then
+            echo "needs_release=false" >> "$GITHUB_OUTPUT"
+            echo "Version $current_version is already tagged. Skipping PyPI upload."
+          else
+            echo "needs_release=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Set up uv
+        if: steps.release-state.outputs.needs_release == 'true' && steps.restore-release.outputs.cache-hit != 'true'
+        uses: astral-sh/setup-uv@v5
+      - name: Build package if dist cache is missing
+        if: steps.release-state.outputs.needs_release == 'true' && steps.restore-release.outputs.cache-hit != 'true'
+        run: make build
+      - name: Install twine
+        if: steps.release-state.outputs.needs_release == 'true'
+        run: python3 -m pip install --upgrade twine
+      - name: Upload Python package to PyPI
+        if: steps.release-state.outputs.needs_release == 'true'
+        run: twine upload dist/* --username "$PYPI_USERNAME" --password "$PYPI_TOKEN"
+      - name: Publish git tag
+        if: steps.release-state.outputs.needs_release == 'true'
+        run: "${GITHUB_WORKSPACE}/.github/publish-git-tag.sh"
