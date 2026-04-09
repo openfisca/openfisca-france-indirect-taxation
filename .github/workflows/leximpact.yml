@@ -46,6 +46,8 @@ jobs:
           PARAMETERS_PROJECT="openfisca-france-indirect-taxation"
           PARAMETERS_PROJECT_DIR="openfisca_france_indirect_taxation/parameters"
 
+          PUBLIC_LANGUAGES="fr"
+
           SHOW_LAST_BREADCRUMB_ITEM = false
 
           TABLE_OF_CONTENTS_DIR="../../../openfisca_france_indirect_taxation/tables/"
