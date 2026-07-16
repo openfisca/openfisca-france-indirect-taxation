@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-from zmq import Enum
+# from zmq import Enum
 
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
@@ -54,6 +54,11 @@ class cataeu(YearlyVariable):
     entity = Menage
     label = 'catégorie de la commune de résidence 2011'
 
+class code_region(YearlyVariable):
+    value_type = str
+    entity = Menage
+    label = 'Code de la région de résidence du ménage'
+    default_value = '99'
 
 class dip14pr(YearlyVariable):
     value_type = float
@@ -211,13 +216,13 @@ class vp_domicile_travail(YearlyVariable):
     label = 'Le ménage utilise son véhicule particulier pour se rendre à son travail'
 
 
-class TypesZeat(Enum):
-    dom = 0
-    region_parisienne = 1
-    bassin_parisien = 2
-    nord = 3
-    est = 4
-    ouest = 5
-    sud_ouest = 6
-    centre_est = 7
-    mediterrannee = 8
+# class TypesZeat(Enum):
+#     dom = 0
+#     region_parisienne = 1
+#     bassin_parisien = 2
+#     nord = 3
+#     est = 4
+#     ouest = 5
+#     sud_ouest = 6
+#     centre_est = 7
+#     mediterrannee = 8
