@@ -209,24 +209,24 @@ class vp_domicile_travail(YearlyVariable):
     label = 'Le ménage utilise son véhicule particulier pour se rendre à son travail'
 
 
-class TypesZeat(Enum):
-    __order__ = 'dom region_parisienne bassin_parisien nord est ouest sud centre mediterrannee'  # Needed to keep the order in Python 2
-    dom = 'dom',
-    region_parisienne = 'region_parisienne',
-    bassin_parisien = 'bassin_parisien',
-    nord = 'nord',
-    est = 'est',
-    ouest = 'ouest',
-    sud = 'sud-ouest',
-    centre = 'centre-est',
-    mediterrannee = 'mediterrannee'
+# class TypesZeat(Enum):
+#     __order__ = 'dom region_parisienne bassin_parisien nord est ouest sud centre mediterrannee'  # Needed to keep the order in Python 2
+#     dom = 'dom',
+#     region_parisienne = 'region_parisienne',
+#     bassin_parisien = 'bassin_parisien',
+#     nord = 'nord',
+#     est = 'est',
+#     ouest = 'ouest',
+#     sud = 'sud-ouest',
+#     centre = 'centre-est',
+#     mediterrannee = 'mediterrannee'
 
 
-class zeat(Variable):
-    value_type = Enum
-    possible_values = TypesZeat
-    default_value = TypesZeat.bassin_parisien
-    entity = Menage
-    label = "Zone d'études et d'aménagement du territoire"
-    set_input = set_input_dispatch_by_period
-    definition_period = MONTH
+# class zeat(Variable):
+#     value_type = Enum
+#     possible_values = TypesZeat
+#     default_value = TypesZeat.bassin_parisien
+#     entity = Menage
+#     label = "Zone d'études et d'aménagement du territoire"
+#     set_input = set_input_dispatch_by_period
+#     definition_period = MONTH
