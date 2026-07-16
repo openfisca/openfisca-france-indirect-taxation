@@ -2,7 +2,7 @@
 
 
 import numpy as np
-
+from openfisca_france_indirect_taxation.projects.TVA.Utils import weighted_quantiles
 from openfisca_france_indirect_taxation.variables.base import *  # noqa analysis:ignore
 
 
@@ -256,6 +256,20 @@ class precarite_transports_rev_disponible(YearlyVariable):
         precarite_transports = 1 * (somme_3_indicateurs != 0)
 
         return precarite_transports
+
+
+class quartile_depenses_carburants(YearlyVariable):
+    value_type = int 
+    entity = Menage
+    label = "Quartile des dépenses en carburants du ménage"  
+    
+    def formula(menage, period):
+        depenses_carburants = menage('depenses_carburants_entree', period)
+        pondmen = menage('pondmen', period)
+        labels = np.arange(1, 5)
+        quartile = weighted_quantiles(depenses_carburants, labels, pondmen, return_quantiles = False)
+        
+        return quartile
 
 
 class tarifs_sociaux_electricite(YearlyVariable):
