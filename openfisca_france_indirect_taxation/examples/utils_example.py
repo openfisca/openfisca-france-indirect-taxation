@@ -187,7 +187,7 @@ def dataframe_by_group(
         aggfunc = 'mean',
         ):
     pivot_table = pd.DataFrame()
-    period = survey_scenario.year
+    period = survey_scenario.period
 
     if difference:
         for values_reference in variables:
