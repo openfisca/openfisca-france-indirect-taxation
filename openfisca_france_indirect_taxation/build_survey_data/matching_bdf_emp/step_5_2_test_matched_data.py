@@ -89,90 +89,92 @@ plt.ylabel('Average annual distance (in km)', size = 14)
 plt.title('Comparison between EMP and matched dataset', size = 16)
 plt.legend()
 plt.grid(True, linestyle='--', alpha=0.7)
-plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/bar_plot_distance_matched_decile.pdf'))
+plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/bar_plot_distance_matched_decile.pdf'), bbox_inches = 'tight')
 plt.close()
 
 # Density plot distance annuelle
 plt.figure(figsize=(10, 6))
-sns.kdeplot(data = data_emp, x = 'distance', weights = 'pondmen', bw_adjust=0.7)
-sns.kdeplot(data = data_matched_distance, x = 'distance', weights = 'pondmen', bw_adjust=0.7)
-plt.xticks(size = 12)
-plt.yticks(size = 12)
-plt.xlabel('Annual distance traveled (in km)', size = 14)
-plt.ylabel('Density', size = 14)
-plt.title('Distribution of annual distance traveled', size = 16)
-plt.legend(['Matched', 'EMP'], fontsize = 14)
+sns.kdeplot(data = data_emp, x = 'distance', weights = 'pondmen', bw_adjust=0.7, linewidth = 2.5)
+sns.kdeplot(data = data_matched_distance, x = 'distance', weights = 'pondmen', bw_adjust=0.7, linewidth = 2.5)
+plt.xticks(size = 18, rotation = 45)
+plt.yticks(size = 18)
+plt.xlabel('Annual distance traveled (in km)', size = 18)
+plt.ylabel('Density', size = 18)
+# plt.title('Distribution of annual distance traveled', size = 18)
+plt.legend(['Matched', 'EMP'], fontsize = 16)
 plt.grid(True, linestyle='--', alpha=0.7)
-plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/Compare_distance_density_distribution.pdf'))
+plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/Compare_distance_density_distribution.pdf'), bbox_inches = 'tight')
 plt.close()
 
 # Cumulative distribution distance annuelle
-
 plt.figure(figsize=(10, 6))
-sns.kdeplot(data = data_emp, x = 'distance', weights = 'pondmen', cumulative= True, bw_adjust=0.7)
-sns.kdeplot(data = data_matched_distance, x = 'distance', weights = 'pondmen', cumulative = True, bw_adjust=0.7)
-plt.xticks(size = 12)
-plt.yticks(size = 12)
-plt.xlabel('Annual distance traveled (in km)', size = 14)
-plt.ylabel('Cumulative proportion', size = 14)
-plt.title('Cumulative distribution of annual distance traveled', size = 16)
-plt.legend(['Matched', 'EMP'], fontsize = 14)
+sns.kdeplot(data = data_emp, x = 'distance', weights = 'pondmen', cumulative= True, bw_adjust=0.7, linewidth = 2.5)
+sns.kdeplot(data = data_matched_distance, x = 'distance', weights = 'pondmen', cumulative = True, bw_adjust=0.7, linewidth = 2.5)
+plt.xticks(size = 18, rotation = 45)
+plt.yticks(size = 18)
+plt.xlabel('Annual distance traveled (in km)', size = 18)
+plt.ylabel('Cumulative proportion', size = 18)
+# plt.title('Cumulative distribution of annual distance traveled', size = 18)
+plt.legend(['Matched', 'EMP'], fontsize = 16)
 plt.grid(True, linestyle='--', alpha=0.7)
-plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/Compare_distance_cumulative_distribution.pdf'))
+plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/Compare_distance_cumulative_distribution.pdf'), bbox_inches = 'tight')
 plt.close()
 
 # By income decile
 # Density
-fig, axes = plt.subplots(2, 5, figsize=(20, 10))
-fig.suptitle('Distribution of annual distance traveled', fontsize=18)
+fig, axes = plt.subplots(5, 2, figsize=(15, 20))
+plt.subplots_adjust(hspace = 0.7)
+# fig.suptitle('Distribution of annual distance traveled', fontsize=18)
 
 for i, ax in enumerate(axes.flat):
     decile = i + 1
     sns.kdeplot(data=data_emp.loc[data_emp['niveau_vie_decile'] == decile], x='distance', weights='pondmen',
-                bw_adjust=0.7, ax = ax)
+                bw_adjust=0.7, ax = ax, linewidth = 2.5)
     sns.kdeplot(data=data_matched_distance.loc[data_matched_distance['niveau_vie_decile'] == decile], x='distance', weights='pondmen',
-                bw_adjust=0.7, ax = ax)
+                bw_adjust=0.7, ax = ax, linewidth = 2.5)
 
     ax.set_title(f'Decile {decile}', size = 16)
+    yticks_positions = ax.get_yticks()
     ax.set_yticks([])
     xticks_positions = ax.get_xticks()
     ax.set_xticks(xticks_positions)
     xticks_labels = ax.get_xticklabels()
     ax.set_xticklabels(labels = xticks_labels, rotation = 45)
+    
     ax.set_xlabel('Annual distance traveled (in km)', size = 14)
     ax.set_ylabel('Density', size = 14)
     ax.grid(True, linestyle='--', alpha=0.7)
     ax.legend(['EMP', 'Matched'], fontsize = 14)
 fig.align_labels()
 fig.align_titles()
-plt.tight_layout(rect=[0, 0, 1, 0.95])
-plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/Distance_density_distribution_by_decile.pdf'))
+
+plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/Distance_density_distribution_by_decile.pdf'), bbox_inches = 'tight')
 plt.close()
 
 # Cumulative distribution
-fig, axes = plt.subplots(2, 5, figsize=(20, 10))
-fig.suptitle('Cumulative distribution of annual distance traveled', fontsize=18)
+fig, axes = plt.subplots(5, 2, figsize=(15, 20))
+# fig.suptitle('Cumulative distribution of annual distance traveled', fontsize=18)
+plt.subplots_adjust(hspace = 0.95)
 
 for i, ax in enumerate(axes.flat):
     decile = i + 1
     sns.kdeplot(data=data_emp.loc[data_emp['niveau_vie_decile'] == decile], x='distance', weights='pondmen',
-                bw_adjust=0.7, ax = ax, cumulative = True)
+                bw_adjust=0.7, ax = ax, cumulative = True, linewidth = 2.5)
     sns.kdeplot(data=data_matched_distance.loc[data_matched_distance['niveau_vie_decile'] == decile], x='distance', weights='pondmen',
-                bw_adjust=0.7, ax = ax, cumulative = True)
+                bw_adjust=0.7, ax = ax, cumulative = True, linewidth = 2.5)
 
-    ax.set_title(f'Decile {decile}', size = 16)
+    ax.set_title(f'Decile {decile}', size = 18)
     xticks_positions = ax.get_xticks()
     ax.set_xticks(xticks_positions)
     xticks_labels = ax.get_xticklabels()
-    ax.set_xticklabels(labels = xticks_labels, rotation = 45)
-    ax.set_xlabel('Annual distance traveled (in km)', size = 14)
-    ax.set_ylabel('Cumulative proportion', size = 14)
+    ax.set_xticklabels(labels = xticks_labels, size = 18, rotation = 45)
+    ax.set_xlabel('Annual distance traveled (in km)', size = 18)
+    ax.set_ylabel('Cumulative proportion', size = 16)
     ax.grid(True, linestyle='--', alpha=0.7)
-    ax.legend(['EMP', 'Matched'], fontsize = 14)
+    ax.legend(['EMP', 'Matched'], fontsize = 16, loc = 'lower right')
 fig.align_labels()
 fig.align_titles()
-plt.tight_layout(rect=[0, 0, 1, 0.95])
-plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/Distance_cumulative_distribution_by_decile.pdf'))
+plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/Distance_cumulative_distribution_by_decile.pdf'), bbox_inches = 'tight')
 plt.close()
 
 # By urban categories
@@ -206,5 +208,5 @@ for i, ax in enumerate(axes.flat):
 fig.align_labels()
 fig.align_titles()
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/Distance_density_distribution_by_urban_cat.pdf'))
+plt.savefig(os.path.join(output_path, 'Matching_bdf_emp/Distance_density_distribution_by_urban_cat.pdf'), bbox_inches = 'tight')
 plt.close()
