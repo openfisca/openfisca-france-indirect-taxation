@@ -9,6 +9,7 @@ from openfisca_france_indirect_taxation.Correction_territoriale import get_corre
 # from openfisca_survey_manager import default_config_files_directory as config_files_directory
 
 ''' Données sources utilisées :
+    - Consommation des ménages en 2025 (base 2020): https://www.insee.fr/fr/statistiques/fichier/8988813/T_CONSO_EFF_FONCTION_fr.xlsx
     - Consommation des ménages en 2023 (base 2020) : https://www.insee.fr/fr/statistiques/fichier/8068592/T_CONSO_EFF_FONCTION.xlsx
     - Comptes trimestriels pour l'année 2024 (base 2020) : (conso) https://www.insee.fr/fr/statistiques/fichier/8358378/t_conso_val.xls
     - Compte de la santé 2024 : https://drees.solidarites-sante.gouv.fr/sites/default/files/2024-12/CNS2024%20-%20Vue%20d%27ensemble.xlsx
@@ -88,9 +89,9 @@ def get_reste_a_charge_sante_cn(target_year):
 
     depenses_sante = pd.read_excel(depenses_sante_file_path, sheet_name = "Graph 7", header = 4, usecols = [i for i in range(1, 16)])
     depenses_sante = depenses_sante.drop(index = [3, 4, 5], axis = 0).rename({'Unnamed: 1': 'Financeur'}, axis = 1)
-
-    menages = float(depenses_sante.loc[depenses_sante['Financeur'] == 'Ménages', target_year].iloc[0])
-    complementaires = float(depenses_sante.loc[depenses_sante['Financeur'] == 'Organismes complémentaires', target_year].iloc[0])
+    year = min(target_year, 2023)
+    menages = float(depenses_sante.loc[depenses_sante['Financeur'] == 'Ménages', year].iloc[0])
+    complementaires = float(depenses_sante.loc[depenses_sante['Financeur'] == 'Organismes complémentaires', year].iloc[0])
     part_menages = menages / (menages + complementaires)
     return part_menages
 
@@ -101,11 +102,13 @@ def get_cn_aggregates(target_year):
     conso_effective_file_path = os.path.join(
         assets_directory,
         'depenses',
-        'conso_eff_fonction_2023.xls'
+        'conso_eff_fonction_2025.xls'
         )
 
-    masses_cn_data_frame = pd.read_excel(conso_effective_file_path, sheet_name = "MEURcour", header = 4)
-    masses_cn_data_frame.rename(columns={'Unnamed: 0': 'Code', 'Unnamed: 1': 'Label'}, inplace = True)
+    masses_cn_data_frame = pd.read_excel(conso_effective_file_path, sheet_name = "MEURcour", header = 3)
+    masses_cn_data_frame.dropna(how = 'all', inplace = True)
+    masses_cn_data_frame.drop(columns = ['Unnamed: 0'], inplace = True)
+    masses_cn_data_frame.rename(columns={'Unnamed: 1': 'Code', 'Unnamed: 2': 'Label'}, inplace = True)
     masses_cn_data_frame = masses_cn_data_frame.loc[:, ['Code', '{}'.format(target_year)]].copy()
     masses_cn_data_frame.replace(to_replace = ajust_postes_cn, inplace= True)
     masses_cn_data_frame.loc[:, 'Code'] = masses_cn_data_frame.loc[:, 'Code'].str.replace(r'^CP', '', regex=True)
