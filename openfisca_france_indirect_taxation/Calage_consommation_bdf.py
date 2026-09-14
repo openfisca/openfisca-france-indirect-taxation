@@ -118,12 +118,13 @@ def get_cn_aggregates(target_year):
     masses_cn_data_frame.loc[:, 'Code'] = masses_cn_data_frame['Code'].astype(str).apply(lambda x: f"poste_{x}")
     masses_cn_data_frame.loc[:, 'Code'] = masses_cn_data_frame['Code'].astype(str).apply(lambda x: format_poste(x))
 
-    # On garde les agrégats à un niveau supérieur pour correspondre à Bdf
-    masses_cn_data_frame = masses_cn_data_frame[~masses_cn_data_frame['Code'].isin(['poste_04_2_1', 'poste_04_2_2',
+    # On garde les agrégats à un niveau supérieur pour correspondre à Bdf 
+    masses_cn_data_frame = masses_cn_data_frame[~masses_cn_data_frame['Code'].isin(['poste_04_2_1', 'poste_04_2_2', 'poste_04_3_1', 'poste_04_3_2',
                                                                                     'poste_05_1_1', 'poste_05_1_2', 'poste_05_2_1', 'poste_05_2_2',
                                                                                     'poste_06_1', 'poste_06_2', 'poste_06_3', 'poste_06_4'])]
 
     # On regroupe certains postes de consommation sous la même étiquette
+    
     masses_cn_data_frame = sum_and_remove(data_frame = masses_cn_data_frame,
                                           col = 'Code',
                                           rows_to_sum = ['poste_08_1_1', 'poste_08_1_2'],
@@ -227,23 +228,23 @@ def get_inflators(target_year, data_year):
     return ratio_by_variable
 
 
-def get_inflators_cn_23_to_24():
-    '''Utilise les comptes trimestriels pour calculer l'inflateur de la conso de 2023 à 2024.'''
-    comptes_trimestriels_folder_path = os.path.join(
-        assets_directory,
-        'depenses')
-    # Consommation
-    comptes_trim = pd.read_excel(os.path.join(comptes_trimestriels_folder_path, 't_conso_val.xls'), sheet_name = "Niveaux", header = 4)
-    comptes_trim.columns = comptes_trim.columns.str.strip()
-    comptes_trim = comptes_trim[['Unnamed: 0', 'TOTAL']]
+# def get_inflators_cn_23_to_24():
+#     '''Utilise les comptes trimestriels pour calculer l'inflateur de la conso de 2023 à 2024.'''
+#     comptes_trimestriels_folder_path = os.path.join(
+#         assets_directory,
+#         'depenses')
+#     # Consommation
+#     comptes_trim = pd.read_excel(os.path.join(comptes_trimestriels_folder_path, 't_conso_val.xls'), sheet_name = "Niveaux", header = 4)
+#     comptes_trim.columns = comptes_trim.columns.str.strip()
+#     comptes_trim = comptes_trim[['Unnamed: 0', 'TOTAL']]
 
-    comptes_trim.rename(columns= {'Unnamed: 0': 'Trimestre'}, inplace = True)
-    comptes_trim.dropna(axis = 0, inplace = True)
-    total_2024 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2024'), 'TOTAL'].sum()
-    total_2023 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2023'), 'TOTAL'].sum()
-    inflator_conso = total_2024 / total_2023
+#     comptes_trim.rename(columns= {'Unnamed: 0': 'Trimestre'}, inplace = True)
+#     comptes_trim.dropna(axis = 0, inplace = True)
+#     total_2024 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2024'), 'TOTAL'].sum()
+#     total_2023 = comptes_trim.loc[comptes_trim['Trimestre'].str.startswith('2023'), 'TOTAL'].sum()
+#     inflator_conso = total_2024 / total_2023
 
-    return inflator_conso
+#     return inflator_conso
 
 
 def get_inflators_by_year(rebuild = False, year_range = None, data_year = None):
@@ -254,17 +255,17 @@ def get_inflators_by_year(rebuild = False, year_range = None, data_year = None):
     if rebuild is not False:
         inflators_by_year = dict()
         for target_year in year_range:
-            if target_year <= 2023:
+            if target_year <= 2025:
                 inflators = get_inflators(target_year = target_year, data_year = data_year)
                 inflators_by_year[target_year] = inflators
-            else:
-                inflators = get_inflators(target_year = 2023, data_year = data_year)
-                inflator_conso = get_inflators_cn_23_to_24()
-                inflators_2024 = {
-                    key: value * inflator_conso
-                    for key, value in inflators.items()
-                    }
-                inflators_by_year[target_year] = inflators_2024
+            # else:
+            #     inflators = get_inflators(target_year = 2023, data_year = data_year)
+            #     inflator_conso = get_inflators_cn_23_to_24()
+            #     inflators_2024 = {
+            #         key: value * inflator_conso
+            #         for key, value in inflators.items()
+            #         }
+            #     inflators_by_year[target_year] = inflators_2024
 
         writer_inflators = csv.writer(open(os.path.join(assets_directory, 'inflateurs', 'inflators_by_year.csv'), 'w'))
         for year in year_range:
