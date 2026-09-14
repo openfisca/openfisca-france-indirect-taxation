@@ -30,7 +30,7 @@ def bootstrap_weighted_mean_by_decile(df, weight_col ='pondmen', decile_col='qua
     return (bootstrap_means)
 
 
-def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées", xlabel="Catégories", ylabel="Valeurs", colors = None, note = "Note", savefig = False, outfile = None, errors = None):
+def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées", xlabel="Catégories", ylabel="Valeurs", colors = None, note = "Note", savefig = False, outfile = None, errors = None, ylim = None, output_path = None):
     """
     Crée un bar plot empilé à partir des variables sélectionnées dans un DataFrame.
 
@@ -40,6 +40,8 @@ def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées
     :param title: Titre du graphique
     :param xlabel: Nom de l'axe des abscisses
     :param ylabel: Nom de l'axe des ordonnées
+    :param ylim: Bornes de l'axe des ordonnées, sous la forme (minimum, maximum)
+    :param output_path: Dossier de sortie ou chemin complet si outfile est absolu
     """
 
     # Vérification que les listes sont cohérentes
@@ -74,10 +76,14 @@ def stacked_bar_plot(df, variables, labels, title="Graphique à barres empilées
     ax.set_ylabel(ylabel, fontdict= {'fontsize': 15}, fontweight ='bold')
     ax.set_title(title, fontdict= {'fontsize': 17}, loc = 'left', fontweight ='bold')
     ax.tick_params(axis='y', labelsize=13)
-    # ax.set_yticks(np.arange(0.1,1.1,0.1))
     ax.set_xticks(x)
     ax.set_xticklabels(df.index, fontsize = 13)
     ax.legend(loc = 'upper center', bbox_to_anchor = (0.5, -0.1), ncol = 3, fontsize = 13)
+
+    if ylim is not None:
+        if len(ylim) != 2:
+            raise ValueError("ylim doit contenir exactement deux bornes : (minimum, maximum).")
+        ax.set_ylim(ylim)
 
     plt.xticks()
     if savefig and outfile:

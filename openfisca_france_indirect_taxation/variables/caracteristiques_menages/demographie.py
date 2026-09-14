@@ -72,6 +72,12 @@ class nenfants(YearlyVariable):
     label = "Nombre d'enfants dans le ménage"
 
 
+class nenfact(YearlyVariable):
+    value_type = int
+    entity = Menage
+    label = "Nombre d'enfants actifs dans le ménage"
+
+
 class npers(YearlyVariable):
     value_type = int
     entity = Menage
