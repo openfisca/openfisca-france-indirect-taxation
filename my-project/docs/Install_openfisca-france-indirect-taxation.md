@@ -1,9 +1,9 @@
 # Guide d'installation
 <br>
 
-## Cloner le repo indirect-taxation (plus précisément la branche nomics-master qui nous intéresse)
+## Cloner le repo indirect-taxation
 
-- git clone -b 'nomics-master' 'https://github.com/Hervedarr31/openfisca-france-indirect-taxation.git'
+- git clone 'https://github.com/openfisca/openfisca-france-indirect-taxation.git'
 
 ## Créer et configurer un nouvel environnement virtuel
 
