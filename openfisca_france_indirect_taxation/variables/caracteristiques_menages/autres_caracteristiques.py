@@ -131,6 +131,12 @@ class pondmen(YearlyVariable):
     label = 'Pondération du ménage'
 
 
+class weight_ind(YearlyVariable):
+    value_type = int
+    entity = Individu
+    label = 'Pondération individuelle'
+
+
 class rural(YearlyVariable):
     value_type = float
     entity = Menage
