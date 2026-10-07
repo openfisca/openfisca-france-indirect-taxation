@@ -8,7 +8,7 @@ from openfisca_france_indirect_taxation.variables.base import *
 from openfisca_survey_manager.statshelpers import mark_weighted_percentiles
 from openfisca_france_indirect_taxation.examples.utils_example import wavg
 
-output_path = "C:/Users/veve1/OneDrive/Documents/IPP/Budget 2026 TVA/Figures/"
+output_path = "C:/Users/veve1/OneDrive/Documents/IPP/Budget 2025 TVA/Figures/"
 
 
 def bootstrap_weighted_mean_by_decile(df, weight_col ='pondmen', decile_col='quantile_indiv_niveau_vie', B=1000):
