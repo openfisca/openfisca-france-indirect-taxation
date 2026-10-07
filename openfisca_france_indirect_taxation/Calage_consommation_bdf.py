@@ -19,10 +19,13 @@ from openfisca_france_indirect_taxation.Correction_territoriale import get_corre
     '''
 
 
-def get_bdf_aggregates(data_year = None):
+def get_bdf_aggregates(data_year = None, input_data_frame = None):
     ''' Calcule les agrégats de Bdf pour l'année des données.'''
     assert data_year is not None
-    depenses = get_input_data_frame(data_year)
+    if input_data_frame is not None:
+        depenses = input_data_frame.copy()
+    else:
+        depenses = get_input_data_frame(data_year)
     liste_variables = depenses.columns.tolist()
     liste_postes = [element for element in liste_variables if element[:6] == 'poste_'] + ['rev_disponible', 'rev_disp_yc_loyerimpute', 'loyer_impute']
 
@@ -171,12 +174,15 @@ def get_cn_aggregates(target_year):
     return masses_cn_postes_data_frame * int(1e6)
 
 
-def get_inflators_bdf_to_cn(data_year):
+def get_inflators_bdf_to_cn(data_year, input_data_frame = None):
     '''Calcule l'inflateur de calage à partir des masses de comptabilité nationale.'''
     data_cn = get_cn_aggregates(data_year)
     liste_postes_cn = data_cn.index.tolist()
 
-    data_bdf = get_bdf_aggregates(data_year)
+    if input_data_frame is not None:
+        data_bdf = get_bdf_aggregates(data_year = data_year, input_data_frame = input_data_frame)
+    else:
+        data_bdf = get_bdf_aggregates(data_year)
     data_bdf_postes_cn = pd.DataFrame()
     liste_postes_bdf = data_bdf.index.tolist()
 
@@ -205,12 +211,15 @@ def get_inflators_cn_to_cn(target_year, data_year):
     return ratios
 
 
-def get_inflators(target_year, data_year):
+def get_inflators(target_year, data_year, input_data_frame = None):
     '''
     Calcule les ratios de calage (bdf sur cn pour année de données) et de vieillissement
     à partir des masses de comptabilité nationale et des masses de consommation de bdf.
     '''
-    inflators_bdf_to_cn = get_inflators_bdf_to_cn(data_year)
+    if input_data_frame is not None:
+        inflators_bdf_to_cn = get_inflators_bdf_to_cn(data_year = data_year, input_data_frame = input_data_frame)
+    else:
+        inflators_bdf_to_cn = get_inflators_bdf_to_cn(data_year)
     inflators_cn_to_cn = get_inflators_cn_to_cn(target_year, data_year)
 
     tax_benefit_system = FranceIndirectTaxationTaxBenefitSystem()
@@ -247,7 +256,7 @@ def get_inflators(target_year, data_year):
 #     return inflator_conso
 
 
-def get_inflators_by_year(rebuild = False, year_range = None, data_year = None):
+def get_inflators_by_year(rebuild = False, year_range = None, data_year = None, input_data_frame = None):
     ''' Récupère les inflateurs pour le veillissement pour toutes les années voulues.'''
     if year_range is None:
         year_range = range(2000, 2025)
@@ -256,6 +265,8 @@ def get_inflators_by_year(rebuild = False, year_range = None, data_year = None):
         inflators_by_year = dict()
         for target_year in year_range:
             if target_year <= 2025:
+                if input_data_frame is not None:
+                    inflators = get_inflators(target_year = target_year, data_year = data_year, input_data_frame = input_data_frame)
                 inflators = get_inflators(target_year = target_year, data_year = data_year)
                 inflators_by_year[target_year] = inflators
             # else:
