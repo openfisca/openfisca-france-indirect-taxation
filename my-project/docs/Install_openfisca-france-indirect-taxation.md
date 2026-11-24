@@ -9,7 +9,7 @@
 
 ### Option 1 : avec pyenv et pip
 
-- `py -3.9 -m venv openfiscaenv`
+- `py -3.13 -m venv openfiscaenv`
 - `myenv\Scripts\activate` <br>
 
 ### Option 2 : avec conda et le fichier environment.yml

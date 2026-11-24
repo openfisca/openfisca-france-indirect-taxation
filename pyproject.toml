@@ -17,8 +17,6 @@ classifiers = [
     "License :: OSI Approved :: GNU Affero General Public License v3",
     "Operating System :: POSIX",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
@@ -30,7 +28,7 @@ dependencies = [
     "pandas >= 2.0.3, < 3.0",
     "python-slugify >= 8.0.1, < 9.0",
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 
 [project.urls]
 Homepage = "https://github.com/openfisca/openfisca-france-indirect-taxation"
